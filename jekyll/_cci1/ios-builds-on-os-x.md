@@ -9,8 +9,7 @@ sitemap: false
 ---
 
 CircleCI offers support for building and testing iOS and macOS projects.
-You can select a macOS project you would like to build on the [Add
-Projects page](https://circleci.com/add-projects){:rel="nofollow"}.
+You can select a macOS project you would like to build on the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard.
 
 If you're unable to find your project in the "OS X" tab, it may be listed as a
 "Linux" project. After adding your project as a "Linux" build, you can change
@@ -398,7 +397,7 @@ Please try using any of the versions of simulator that are present on the machin
 
 ### Can't Add Project as macOS Build
 
-If you are trying to add an macOS project from the ["add-project"](https://circleci.com/add-projects){:rel="nofollow"} page, but you don't see your project under the "OS X" tab, you can first add your project as a "Linux" build — and then switch it to an "OS X" build by going to the "Project Settings" page, then on the "Build Environment" page you will see the "Build OS X project" option.
+If you are trying to add a macOS project from the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard, but don't see your project under the "OS X" tab, you can first add your project as a "Linux" build — and then switch it to an "OS X" build by going to the "Project Settings" page. Then, on the "Build Environment" page, you will see the "Build OS X project" option.
 
 ### Ruby Segfaults
 

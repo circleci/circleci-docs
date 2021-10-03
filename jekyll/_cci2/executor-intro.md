@@ -8,6 +8,7 @@ order: 1
 version:
 - Cloud
 - Server v2.x
+- Server v3.x
 ---
 
 CircleCI offers several build environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
@@ -125,4 +126,4 @@ Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/e
 
 ## Learn More
 {: #learn-more }
-Take the [build environments course](https://academy.circleci.com/build-environments-1) with CircleCI Academy to learn more about choosing and using an executor.
+Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.

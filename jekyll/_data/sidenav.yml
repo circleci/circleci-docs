@@ -35,8 +35,6 @@ en:
           link: 2.0/migrating-from-teamcity/
         - name: Migrating from Travis CI
           link: 2.0/migrating-from-travis/
-        - name: Jenkins Converter
-          link: 2.0/jenkins-converter/
 
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
@@ -151,6 +149,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Sample Configuration
+          link: 2.0/sample-config/
         - name: Reusing Configuration
           link: 2.0/reusing-config/
         - name: Dynamic Configuration
@@ -327,12 +327,14 @@ en:
     - name: Server v3.x Install
       link: 2.0/server-3-install-prerequisites
       children:
-        - name: Prerequisites
+        - name: Phase 1 - Prerequisites
           link: 2.0/server-3-install-prerequisites
-        - name: Your First Cluster
-          link: 2.0/server-3-install-creating-your-first-cluster
-        - name: Installation
+        - name: Phase 2 - Install Core Services
           link: 2.0/server-3-install
+        - name: Phase 3 - Install Build Services
+          link: 2.0/server-3-install-build-services
+        - name: Phase 4 - Post Installation
+          link: 2.0/server-3-install-post
         - name: Migration
           link: 2.0/server-3-install-migration
         - name: Hardening Your Cluster
@@ -344,6 +346,8 @@ en:
           link: 2.0/server-3-operator-overview
         - name: Metrics and Monitoring
           link: 2.0/server-3-operator-metrics-and-monitoring
+        - name: Configuring a Proxy
+          link: 2.0/server-3-operator-proxy
         - name: User Accounts
           link: 2.0/server-3-operator-user-accounts
         - name: Orbs
@@ -352,6 +356,8 @@ en:
           link: 2.0/server-3-operator-vm-service
         - name: Externalizing Services
           link: 2.0/server-3-operator-externalizing-services
+        - name: Expanding Internal Database Volumes
+          link: 2.0/server-3-operator-extending-internal-volumes
         - name: Load Balancers
           link: 2.0/server-3-operator-load-balancers
         - name: Authentication
@@ -551,8 +557,6 @@ ja:
         - name: Migrating from Travis CI
           link: ja/2.0/migrating-from-travis/
           i18n_name: TravisCIからの移行
-        - name: Jenkins Converter
-          link: ja/2.0/jenkins-converter/
 
 - name: Pipelines
   i18n_name: パイプライン

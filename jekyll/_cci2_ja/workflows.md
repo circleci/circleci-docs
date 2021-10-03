@@ -231,7 +231,6 @@ workflows:
 {:.tab.switcher.Server}
 ![組織の切り替えメニュー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-
 保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
 
 承認後、設定ファイルでの指示に従って残りのワークフローが実行されます。
@@ -284,6 +283,7 @@ workflows:
 {:.no_toc}
 
 有効な `schedule` には、`cron` キーと `filters` キーが必要です。
+
 
 `cron` キーの値は、 [有効な crontab エントリ](https://crontab.guru/)でなければなりません。
 

@@ -40,38 +40,10 @@ $(function() {
 
 });
 
-/*
-* The following functions are coming directly from the site.min.js
-*/
-
-function getSessionId() {
-  var existingSessionId = Number(Cookies.get("amplitude-session-id"));
-
-  // Number.isNaN polyfill:
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN
-  var isNaN =
-      Number.isNaN ||
-      function (value) {
-          return value !== value;
-      };
-
-  var isSessionIdValid = function (sessionId) {
-      return !isNaN(sessionId);
-  };
-
-  return isSessionIdValid(existingSessionId) ? existingSessionId : Date.now();
-};
-
-function getIntegrationOptions(sessionId) {
-  return {
-      integrations: { Amplitude: { session_id: sessionId } },
-  };
-};
-
 function setAmplitudeId() {
   const DAYS_PER_MINUTE = 1 / 24 / 60;
-  const sessionId = getSessionId();
+  const sessionId = window.AnalyticsClient.getSessionId();
 
   Cookies.set("amplitude-session-id", sessionId, { expires: 30 * DAYS_PER_MINUTE });
-  analytics.identify(userData.analytics_id, null, getIntegrationOptions(sessionId));
+  window.AnalyticsClient.trackUser(userData.analytics_id);
 }

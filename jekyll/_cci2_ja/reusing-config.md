@@ -955,9 +955,9 @@ jobs:
     machine: true
     steps:
       - say:
-          # コマンド "say" の "saywhat" パラメーターには 
+          # コマンド "say" の "saywhat" パラメーターには
           # デフォルト値が定義されていないため
-          # 手動で渡す必要があります。
+          # 手動で渡す必要があります
           saywhat: << parameters.saywhat >>
 commands:
   say:
@@ -971,7 +971,6 @@ workflows:
     jobs:
       - sayhello:
           saywhat: Everyone
-
 ```
 
 ### 同じジョブの複数回の呼び出し
