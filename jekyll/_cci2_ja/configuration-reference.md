@@ -1846,6 +1846,7 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 ### ロジック ステートメントの例
 {: #logic-statement-examples }
 
+{% raw %}
 ```yaml
 workflows:
   my-workflow:
@@ -1854,7 +1855,9 @@ workflows:
           - equal: [ master, << pipeline.git.branch >> ]
           - equal: [ staging, << pipeline.git.branch >> ]
 ```
+{% endraw %}
 
+{% raw %}
 ```yaml
 workflows:
   my-workflow:
@@ -1868,7 +1871,9 @@ workflows:
             - equal: [ canary, << pipeline.git.tag >> ]
             - << pipeline.parameters.deploy-canary >>
 ```
+{% endraw %}
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -2002,6 +2007,7 @@ workflows:
             branches:
               only: master
 ```
+{% endraw %}
 
 ## 完全版設定ファイル サンプル
 {: #example-full-configuration }
