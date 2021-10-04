@@ -19,9 +19,11 @@ docs@circleci.com
 
 include::server-3-install-prerequisites.adoc[]
 
-include::server-3-install-creating-your-first-cluster.adoc[]
-
 include::server-3-install.adoc[]
+
+include::server-3-install-build-services.adoc[]
+
+include::server-3-install-post.adoc[]
 
 include::server-3-install-migration.adoc[]
 
