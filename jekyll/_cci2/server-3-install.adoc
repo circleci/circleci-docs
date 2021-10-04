@@ -167,7 +167,7 @@ Create a DNS entry for your Traefik load balancer, i.e. circleci.your.domain.com
 You will need the IP address of the Traefik load balancer. You can find it with the following terminal command:
 
 ----
-kubectl get service circleci-server-traefik --namespace=nfish-circleci-server
+kubectl get service circleci-server-traefik --namespace=circleci-server
 ----
 
 For more information on adding a new DNS record, see the following documentation:
