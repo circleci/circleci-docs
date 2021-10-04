@@ -14,11 +14,14 @@ toc::[]
 
 == はじめに
 
-CircleCI Server v{serverversion} は、GCP または AWS の Kubernetes クラスタにインストールできる継続的インテグレーション & 継続的デリバリー (CI/CD) プラットフォームです。
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud or data center. 
 
-CircleCI Server アプリケーションのコアは、Kubernetes 内で実行されます。
+Server offers the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
 
-アプリケーションは、ロード バランサーを使用して 4 つのサービスを公開します。 このうち 3 つは、Nomad クラスタおよび VM に接続するための VPC 内部ロード バランサーです。 必要に応じ、フロントエンド ロード バランサーを非公開にして、外部インターネットからのアクセスを遮断してもかまいません。 For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
+.CircleCI Server v3.x Architecture
+image::server-3-architecture-diagram.png[Services Architecture]
+
+The CircleCI server application exposes four services using load balancers. Three of these load balancers are VPC-internal for connecting to the Nomad cluster and virtual machines. If required, the frontend load balancer can be made private, separating it from the public internet. For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -49,91 +52,133 @@ CircleCI Server アプリケーションのコアは、Kubernetes 内で実行�
 | 仮想マシンをプロビジョニングします。
 |===
 
-CircleCI Server では、https://www.nomadproject.io/[Nomad スケジューラ]を使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+The application exposes a number of external ports. These ports are used for various functions as defined in the table below. 
 
-ジョブのアーティファクトと出力ファイルは、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
-オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Port number
+| Protocol
+| Direction
+| Source / Destination
+| Use
+| Notes
 
-CircleCI Server 3.x の構成とデプロイには https://kots.io/[KOTS] を使用します。
+| 80
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
 
-== アーキテクチャ
-CircleCI Server 3.x のアーキテクチャを次図に示します。 The available services
-are described in greater detail in the <<サービス>> section.
+| 443
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
 
-.CircleCI Server v3.x のアーキテクチャ
-image::server-3-architecture-diagram.png[サービスs Architecture]
-<<<
+| 8800
+| TCP
+| Inbound
+| Administrators
+| Admin console
+|
+
+| 22
+| TCP
+| Inbound
+| Administrators
+| SSH
+| Only required for the bastion host
+
+| 64535-65535
+| TCP
+| Inbound
+|
+| SSH into builds
+| Only required for the nomad clients.
+|===
+
+CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
+Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
+server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
+
+Job artifacts and output are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
+Nomad clients need access to object storage.
 
 == Services
 
-CircleCI Server 3.0 は、次に示すサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
+CircleCI server 3.0 consists of the following services. Find their descriptions and failure implications below:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
 | Service
-| コンポーネント
-| 説明
-| 障害発生時の影響
-| 備考
+| Component
+| Description
+| What happens if it fails?
+| Notes
 
 | api-service
-| アプリ コア
-| GraphQL API を提供します。 この API は、多くのWeb フロントエンドのレンダリング データを提供します。
-| 多くの UI 要素 (例: コンテキスト) が完全に機能しなくなります。
+| App Core
+| Provides a GraphQL API that provides much of the data to render the web frontend.
+| Many parts of the UI (e.g. Contexts) will fail completely.
 |
 
 | audit-log-service
-| アプリ コア
-| 監査ログ イベントを blob ストレージに長期保存します。
-| 一部のイベントが記録されなくなります。
+| App Core
+| Persists audit log events to blob storage for long term storage.
+| Some events may not be recorded.
 |
 
 | builds-service
-| アプリ コア
-| www-api から取り込みを行い、plans-service、workflows-conductor、orbs-service に送信します。
+| App Core
+| Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service
 |
 |
 
 | circle-legacy-dispatcher
-| 実行
-| コンピューティング管理の一部です。 usage キュー (mongo) と VCS への送受信を行います。
+| Execution
+| Part of Compute Management. Sends to usage Q (mongo) and back to VCS.
 |
 |
 
 | circleci-mongodb
-| 実行
-| プライマリ データストア
+| Execution
+| Primary datastore
 |
 |
 
 | circleci-postgres
-| マイクロサービス用データ ストレージ
+| Data storage for microservices
 |
 |
 |
 
 | circleci-rabbitmq
-| パイプラインと実行
-| ワークフロー メッセージ、テスト結果、使用状況、cron、出力、通知、スケジューラーのキューイング
+| Pipelines and Execution
+| Queuing for workflow messaging, test-results, usage, crons, output, notifications, and scheduler
 |
 |
 
 | circleci-redis
-| 実行
-| リクエストのキャッシュおよびレート制限の計算のために、一時的なデータ (ビルド ログなど) をキャッシュします。
-| キャッシュを適切に行えない場合、VCS の呼び出しが多くなり VCS からレート制限を適用されることがあります。
+| Execution
+| Cache data that will not be stored permanently (i.e. build logs), for request caching, and for rate limit calculations.
+| A failed cache can end up resulting in rate limiting from the VCS if too many calls are made to it.
 |
 
 | circleci-telegraf
 |
-| Telegraf は StatsD メトリクスを収集します。 CircleCI サービスのホワイトボックス メトリクスはすべて、StatsD メトリクスを発行します。これらは Telegraf に送信されますが、他の場所  ( Datadog や Prometheusなど) にエクスポートされるように構成することもできます。
+| Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
+but can also be configured to be exported to other places (i.e. Datadog or Prometheus)
 |
 |
 
 | circleci-vault
 |
-| シークレット用にサービスとしての暗号化と復号化を実行する HashiCorp Vault
+| HashiCorp Vault to run encryption and decryption as a service for secrets
 |
 |
 
@@ -144,177 +189,217 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 |
 
 | contexts-service
-| アプリ コア
-| 暗号化されたコンテキストを保存、提供します。
-| コンテキストを使用するすべてのビルドに失敗するようになります。
+| App Core
+| Stores and provides encrypted contexts.
+| All builds using Contexts will fail.
 |
 
 | cron-service
-| パイプライン
-| スケジュールされたワークフローをトリガーします。
-| スケジュールされたワークフローが実行されなくなります。
+| Pipelines
+| Triggers scheduled workflows.
+| Scheduled workflows will not run.
 |
 
 | dispatcher
-| 実行
-| ジョブをタスクに分割し、実行用にスケジューラーに送信します。
-| Nomad にジョブが送信されなくなります。 run キューのサイズが増加しますが、著しいデータ損失が起きることはありません。
+| Execution
+| Split jobs into tasks and send them to scheduler to run.
+| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
 |
 
 | domain-service
-| アプリ コア
-| CircleCI ドメイン モデルに関する情報を保存、提供します。 アクセス許可および API と連携しています。
-| ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 	LDAP 認証を使用している場合、すべてのログインに失敗するようになります。
+| App Core
+| Stores and provides information about our domain model. Works with permissions and API
+| Workflows will fail to start and some REST API calls may fail causing 500 errors in the CircleCI UI. 	If LDAP authentication is in use, all logins will fail.
 |
 
 | exim
 |
-| 一般公開時には削除されます。ただしユーザーは削除後も既存の MTA にメール送信用の認証情報を提供することができます。
-| メール通知が送信されなくなります。
+| Will be removed in GA, but users can provide mail submission credentials to an existing MTA
+| No email notifications will be sent.
 |
 
 | federations-service
-| アプリ コア
-| ユーザー ID を保存します (LDAP)。 API と permissions-service
-| LDAP 認証を使用している場合、すべてのログインに失敗するようになります。 また、一部の REST API 呼び出しに失敗する可能性があります。
-| LDAP 統合は使用できません。
+| App Core
+| Stores user identities (LDAP). API and permissions-service
+| If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
+| LDAP integration not available
 
 | frontend
-| フロントエンド
-| CircleCI Web アプリと www-api プロキシ
-| UI と REST API が利用できなくなります。 GitHub/GitHub Enterprise からジョブがトリガーされなくなります。 ビルドの実行はできますが、情報は更新されません。
-| 1 秒あたりのリクエスト レート上限は 150、ユーザー 1 人あたりの瞬間リクエスト レート上限は 300 です。 
+| Frontend
+| CircleCI web app and www-api proxy.
+| The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK but no updates will be seen.
+| Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests. 
 
 | inject-bottoken
 |
-| "ボット トークン" を MongoDB に挿入する Kubernetes ジョブ。 ボット トークンは、サービス間通信用の認証トークンです。		主に www-api で使用されます。
+| A Kubernetes job that inserts a "bot token" into MongoDB. Bot tokens are authorization interservice communication.		Mainly for www-api
 |
 |
 
 | kotsadm-kots
-| ライセンス
-| メインの KOTS アプリケーション。 CircleCI Server のアップグレードと構成を行うための KOTS 管理者コンソールを実行します。管理者コンソールは使用できません。
-| CircleCI Server のアップグレードと構成が行えなくなります。
+| Licensing
+| The main Kots application. Runs the Kots admin console where upgrades and configuration of server take place	No admin console available.
+| No upgrades or configuration possible for server
 |
 
 | kotsadm-migrations
-| ライセンス
-| Kotsadm の更新に合わせてデータベースの移行を行います。
+| Licensing
+| Performs database migrations to handle updates of Kotsadm
 |
 |
 
 | kotsadm-minio
-| ライセンス
-| KOTS ライセンス用のオブジェクト ストレージ
+| Licensing
+| Object storage for Kots licensing
 |
 |
 
 | kotsadm-operator
-| ライセンス
-| Kotsadm のデプロイと制御を行います。
+| Licensing
+| Deploys and controls Kotsadm
 |
 |
 
 | kotsadm-postgres
-| ライセンス
-| KOTS ライセンス用のデータベース
+| Licensing
+| Database for Kots licensing
 |
 |
 
 | legacy-notifier
-| アプリ コア
-| 外部サービス (Slack、メールなど) への通知を処理します。
+| App Core
+| Handles notifications to external services (Slack, email, etc.)
 |
 |
 
 | prometheus
-| サーバー
-| メトリクスに使用します。
+| Server
+| Used for metrics
 |
 |
 
 | orb-service
-| パイプライン
-| Orb レジストリと設定ファイルの間の通信を処理します。
+| Pipelines
+| Handles communication between orb registry and config.
 |
 |
 
 | output-processor
-| 実行
-| ジョブの出力とステータスの更新を受け取り、MongoDB に書き込みます。 また、キャッシュとワークスペースにアクセスし、キャッシュ、ワークスペース、アーティファクト、テスト結果を保存するための API を実行中のジョブに提供します。
+| Execution
+| Receives job output & status updates and writes them to MongoDB. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
 |
 |
 
 | permissions-service
-| アプリ コア
-| CircleCI のアクセス権インターフェイスを提供します。
-| ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。
+| App Core
+| Provides the CircleCI permissions interface.
+| Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
 |
 
 | scheduler
-| 実行
-| 受信したタスクを実行します。 Nomad サーバーと連携しています。
-| Nomad にジョブが送信されなくなります。 run キューのサイズが増加しますが、著しいデータ損失が起こることはありません。
+| Execution
+| Runs tasks sent to it. Works with Nomad server.
+| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
 |
 
 | server-troubleshooter
-| データ
-| Pod 内でコマンドを実行し、出力をサポート バンドルに追加します。
+| Data
+| Runs commands inside pods and appends output to support bundles.
 |
-| 一般公開時は利用できなくなる可能性があります。
+| May not be available in GA.
 
 | slanger
-| サーバー
-| CircleCI アプリにリアルタイム イベントを提供します。
-| UI のリアルタイム更新が停止しますが、ハード リフレッシュは引き続き機能します。
+| server
+| Provides real-time events to the CircleCI app.
+| Live UI updates will stop but hard refreshes will still work.
 |
 
 | test-results
-| 実行
-| テスト結果ファイルを解析してデータを保存します。
-| ジョブについてテストの失敗やタイミングのデータが生成されなくなります。 サービスが再起動するとバックフィルが行われます。
+| Execution
+| Parses test result files and stores data.
+| There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
 |
 
 | vm-gc
-| コンピューティング管理
-| 古いマシンやリモート Docker インスタンスを定期的に確認し、vm-service にそれらの削除をリクエストします。
-| このサービスを再起動するまで、古い vm-service インスタンスが破棄されなくなる可能性があります。
+| Compute Management
+| Periodically check for stale machine and remote Docker instances and request that vm-service remove them.
+| Old vm-service instances might not be destroyed until this service is restarted.
 |
 
 | vm-scaler
-| マシン
-| マシンとリモート Docker ジョブの実行用にプロビジョニングするインスタンス数を増やすように、vm-service に定期的にリクエストします。
-| マシンとリモート Docker 用の VM インスタンスがプロビジョニングされなくなり、容量不足でジョブとそれらの Executor を実行できなくなる可能性があります。
-| EKS と GKE ではオーバーレイが異なります。
+| Machine
+| Periodically requests that vm-service provision more instances for running machine and remote Docker jobs.
+| VM instances for machine and Remote Docker might not be provisioned causing you to run out of capacity to run jobs with these executors.
+| Different overlay for EKS vs. GKE.
 
 | vm-service
-| マシン
-| 利用可能な vm-service インスタンスのインベントリ管理と、新しいインスタンスのプロビジョニングを行います。
-| マシンまたはリモート Docker を使用するジョブが失敗するようになります。
+| Machine
+| Inventory of available vm-service instances, and provisioning of new instances.
+| Jobs that use machine or remote Docker will fail.
 |
 
 | workflows-conductor-event-consumer
-| パイプライン
-| パイプラインを実行するために VCS から情報を取得します。
-| VCS に変更があっても、新しいパイプラインが実行されなくなります。
+| Pipelines
+| Takes in information from VCS to kick off pipelines.
+| New Pipelines will not be kicked off when there are changes in the VCS.
 |
 
 | workflows-conductor-grpc-handler
-| パイプライン
-| gRPC 経由での情報の変換を支援します。
+| Pipelines
+| Helps translate the information through gRPC.
 |
 |
 
 | web-ui-*
-| フロントエンド
-| フロントエンド Web アプリケーションの GUI のレンダリングに使用するマイクロ フロントエンド (MFE) サービスです。
-| 各サービス ページを読み込むことができなくなります。 たとえば、web-ui-server-admin で障害が発生した場合、CircleCI Server の管理者ページを読み込めなくなります。
-| MFE は、app.<my domain here> での Web アプリケーションのレンダリングに使用されます。
+| Frontend
+| Micro Front End (MFE) services used to render the frontend web application GUI.
+| The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
+| The MFE's are used to render the web application located at app.<my domain here>
 
 |===
+
+== Platforms 
+CircleCI server is designed to deploy within a Kubernetes cluster. Virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images. 
+
+If installing outside of EKS or GKE, additional work is required to get access to some of the same machine build features. Setting up CircleCI runners will give you access to the same feature set as VM service across a much wider range of OSs and machine types (MacOS and much more). 
+
+We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions whenever possible. However, we do not test all platforms and options. For that reason we provide a list of tested environments, which we will continue to expand over time. We will be adding OpenShift to our list of regularly tested and supported platforms. 
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Environment
+| Status
+| Notes
+
+| EKS 
+| Tested
+|
+
+| GKE 
+| Tested
+|
+
+| Azure
+| Untested
+| Should work with Minio Azure gateway and Runner
+
+| Digital Ocean
+| Untested 
+| Should work with Minio Digital Ocean gateway and Runner
+
+| OpenShift*
+| Untested
+| Known to not work. 
+
+| Rancher
+| Untested 
+| Should work with Minio and Runner
+|===
+
 
 == 次に読む
 
 * https://circleci.com/docs/2.0/server-3-whats-new[CircleCI Server 3.x の新機能]
-* https://circleci.com/docs/2.0/server-3-install[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation Prerequisites]
 * https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
