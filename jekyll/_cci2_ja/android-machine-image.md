@@ -15,11 +15,12 @@ Android マシン イメージには、CircleCI で Linux マシン イメージ
 ## Android マシン イメージの使用
 {: #using-the-android-machine-image }
 
-設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
+設定ファイルに Android イメージを使用するには、[Orb]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
 
 ## プリインストールされたソフトウェア
-
 Android マシン イメージには以下がプリインストールされています。
+
+この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 
 ### Android SDK
 {: #android-sdk }
