@@ -17,7 +17,6 @@ Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 で�
 
 ## サポートされている言語
 {: #supported-languages }
-
 - Clojure (v1.2.0 以降)
 - Elixir (v1.2 以降)
 - Go (v1.7 以降)

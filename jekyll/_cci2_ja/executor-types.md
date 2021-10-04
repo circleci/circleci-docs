@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Executor タイプの選び方"
 short-title: "Executor タイプの選び方"
-description: "docker や machine などの Executor についての概要"
+description: "Docker や Machine などの Executor についての概要"
 categories:
   - コンテナ化
 order: 10
@@ -32,7 +32,7 @@ version:
 
 [".circleci/config.yml"]({{ site.baseurl }}/2.0/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。  *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば以下のように、ジョブごとに Executor タイプとイメージを指定できます。
 
-- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはオペレーティング システムの全体ではないので、通常はソフトウェアのビルドの効率化が図れます。
+- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[CircleCI イメージ]({{ site.baseurl }}/2.0/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはオペレーティング システムの全体ではないので、通常はソフトウェアのビルドの効率化が図れます。
 - Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、Ubuntu バージョン (16.04 など) を使用します。
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (10.0.0 など) を使用します。
 
@@ -93,7 +93,7 @@ jobs:
 ```
 Docker イメージは、Docker Hub でイメージ名とバージョン タグを使用するか、レジストリ内のイメージへの URL を使用して、以下の 3 つの方法で指定できます。
 
-#### Docker Hub 上のパブリック コンビニエンス イメージ
+#### Docker Hub 上のパブリック CircleCI イメージ
 {: #public-convenience-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
@@ -171,7 +171,7 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 | [リソースのカスタマイズ (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○               | ○         |
 {: class="table table-striped"}
 
-<sup>(1)</sup> \[Docker イメージの使用\]\[custom-images\]についての記事を参照してください。
+<sup>(1)</sup> \[Docker イメージの使用\]\[custom-images\] についての記事を参照してください。
 
 <sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
 
@@ -210,7 +210,7 @@ jobs:
     #  ...  他の構成
 ```
 
-## machine を使用する
+## Machine の使用
 {: #using-machine }
 
 `machine` オプションは、以下のような仕様を持つ専用のエフェメラル VM でジョブを実行します。

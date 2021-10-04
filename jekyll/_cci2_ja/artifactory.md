@@ -23,7 +23,6 @@ Ensure that you have created your repository before starting this example, other
 
 ## Artifactory プラグイン
 {: #artifactory-plugins }
-
 Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
 
 - [Maven でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
@@ -31,7 +30,6 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
 
 ## JFrog CLI
 {: #jfrog-cli }
-
 If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
 
 ```

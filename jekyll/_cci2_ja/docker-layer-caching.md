@@ -111,7 +111,7 @@ machine:
 ## 例
 {: #examples }
 
-以下の Dockerfile を例に、Docker レイヤー キャッシュがどのように機能するかを説明します。 この Dockerfile サンプルは、[Elixir コンビニエンス イメージ](https://hub.docker.com/r/circleci/elixir/~/dockerfile)から引用して改変したものです。
+以下の Dockerfile を例に、Docker レイヤー キャッシュがどのように機能するかを説明します。 この Dockerfile サンプルは、[Elixir 用 Circle CI イメージ](https://hub.docker.com/r/circleci/elixir/~/dockerfile)から引用して改変したものです。
 
 ### Dockerfile
 {: #dockerfile }
@@ -242,3 +242,7 @@ Dockerfile の一部を変更し、それによってイメージの一部が変
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+## Learn More
+{: #learn-more }
+Take the [DLC course](https://academy.circleci.com/docker-layer-caching) with CircleCI Academy to learn more.

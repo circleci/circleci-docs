@@ -22,7 +22,7 @@ Android マシン イメージには、CircleCI で Linux マシン イメージ
 Android マシン イメージには以下がプリインストールされています。
 
 ### Android SDK
-この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
+{: #android-sdk }
 - sdkmanager
 - Android プラットフォーム 23、24、25、26、27、28、29、30、S
 - ビルド ツール 30.0.3
