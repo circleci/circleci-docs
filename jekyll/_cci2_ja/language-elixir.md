@@ -27,15 +27,9 @@ jobs:  # 1 回の実行の基本作業単位
     parallelism: 1  # このジョブのインスタンスを 1 つだけ並列実行します
     docker:  # Docker でステップを実行します
       - image: circleci/elixir:1.7.3  # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:  # プライマリ コンテナの環境変数
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine  # データベース イメージ
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:  # データベースの環境変数
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
@@ -44,6 +38,7 @@ jobs:  # 1 回の実行の基本作業単位
     working_directory: ~/app  # ステップが実行されるディレクトリ
 
     steps:  # `build` ジョブを構成するコマンド
+
       - checkout  # ソース コードを作業ディレクトリにチェックアウトします
 
       - run: mix local.hex --force  # Hex をローカルにインストールします (プロンプトなし)
@@ -112,15 +107,9 @@ jobs:
     parallelism: 1
     docker:
       - image: circleci/elixir:1.7.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
@@ -130,7 +119,7 @@ jobs:
 ```
 
 
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
 [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソース コードがチェックアウトされます。
 
@@ -143,15 +132,15 @@ jobs:
       - run: mix local.rebar --force
 ```
 
-実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 [`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
-[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
 {% raw %}
 ```yaml
-      - restore_cache:
+      <br />      - restore_cache:
           keys:
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -165,7 +154,16 @@ jobs:
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
       - save_cache:
+          key: v1-mix-cache-{{ .Branch }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache
+          paths: "deps"
+      - save_cache:
           key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
+      - save_cache:
+          key: v1-build-cache
           paths: "_build"
 ```
 {% endraw %}
@@ -181,7 +179,7 @@ jobs:
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME
 ```
 
-## Parallelism
+## 関連項目
 {: #parallelism }
 
 **Splitting by Timings**
@@ -199,8 +197,7 @@ By default, JUnitFormatter saves the output to the `_build/test/lib/<application
 
 However, JUnitFormatter also allows you to configure the directory where the results are saved via the `report_dir` setting, in which case, the `path` value in your CircleCI config should match the relative path of wherever you're storing the output.
 
-## 関連項目
+## See also
 {: #see-also }
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
-[データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)
+[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/) [データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)
