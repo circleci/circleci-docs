@@ -23,9 +23,9 @@ version:
 このドキュメントは、[プロジェクトの AWS 権限](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws)に、S3 バケットの読み取りと書き込みが許可される有効な AWS キーが構成されていることを前提としています。 このドキュメントの例では、指定された S3 バケットにビルド パッケージがアップロードされます。
 
 ## Scala サンプル プロジェクトのソース コード
-{: #sample-scala-project-source-code }
-
 このサンプル アプリケーションのソース コードは、[samplescala の GitHub パブリック リポジトリ](https://github.com/ariv3ra/samplescala)にあります。
+
+The source code for this sample application is in the [Public samplescala GitHub repo](https://github.com/ariv3ra/samplescala).
 
 ## 前提条件
 {: #prerequisites }
@@ -51,9 +51,6 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
     steps:
@@ -92,7 +89,7 @@ jobs:
 ```
 
 ## スキーマの詳細説明
-{: #schema-walkthrough }
+この echo コマンドは、$ARTIFACT_BUILD 環境変数を定義し、これをビルド ファイル名に設定します。
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -109,16 +106,13 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
 ```
 
 docker/image キーは、ビルドに使用する Docker イメージを表します。 この例では、[Docker Hub](https://hub.docker.com/_/openjdk/) にある公式の `openjdk:8` イメージを使用します。 これには、この Scala プロジェクトに必要なネイティブ Java コンパイラが含まれます。
 
-environment/SBT_VERSION は、以降のコマンドでダウンロードする sbt のバージョンを指定する環境変数です。これは Scala アプリケーションのコンパイルに必要です。
+上記の例について以下に説明します。
 
 ```yaml
 version: 2
@@ -127,9 +121,6 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
     steps:
@@ -153,7 +144,7 @@ steps/run キーは、実行するアクションのタイプを指定します�
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
 ```
 
-この echo コマンドは、$ARTIFACT_BUILD 環境変数を定義し、これをビルド ファイル名に設定します。
+この deploy コマンドも複数行実行コマンドです。
 
 次の run コマンドは、openjdk コンテナ内の複数のコマンドを実行します。 複数のコマンドを実行するため、複数行で run コマンドを定義します。 以下のようにパイプ `|` 文字で指定されます。 複数行オプションを使用する場合は、1 つの行が 1 つのコマンドを表します。
 
@@ -201,15 +192,15 @@ steps/run キーは、実行するアクションのタイプを指定します�
             - "~/.m2"
 ```
 
-上記の例について以下に説明します。
+Below is an explanation of the preceding example:
 - [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout): 基本的に、git は GitHub から取得したプロジェクト リポジトリをコンテナにクローンします。
 - [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) キー: 復元するキャッシュ ファイルの名前を指定します。 キー名は、このスキーマの後方にある save_cache キーで指定されます。 指定されたキーが見つからない場合は、何も復元されず、処理が続行されます。
 - [`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#run) コマンドの `cat /dev/null | sbt clean update dist`: パッケージの .zip ファイルを生成する sbt コンパイル コマンドを実行します。
 
 **Note:** `cat /dev/null` is normally used to prevent a command from hanging if it prompts for interactive input and does not detect whether it is running with an interactive TTY. `sbt` will prompt on failures by default.
 
-- [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
-- [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
+- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
+- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 2.0 スキーマの最後の部分は deploy コマンド キーです。 これは、コンパイルされた samplescala.zip を $CIRCLE_ARTIFACTS/ ディレクトリに移動し、その名前を変更します。  その後、指定された AWS S3 バケットにファイルがアップロードされます。
 
@@ -221,12 +212,12 @@ steps:
         aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 ```
 
-この deploy コマンドも複数行実行コマンドです。
+The deploy command is another multi-line execution.
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
-- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。
