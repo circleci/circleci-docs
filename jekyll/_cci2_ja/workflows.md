@@ -7,6 +7,19 @@ order: 30
 version:
   - Cloud
   - Server v2.x
+suggested:
+  - 
+    title: Manual job approval and scheduled workflow runs
+    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
+  - 
+    title: Filter workflows by branch
+    link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - 
+    title: How to trigger a workflow
+    link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - 
+    title: Conditional workflows
+    link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
 ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 ここでは、以下のセクションに沿って、ワークフロー機能について説明し、構成例を紹介します。
@@ -43,7 +56,7 @@ version:
 | FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                         |
 | SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                         |
 | ON HOLD     | ワークフロー内のジョブが承認待ちになっている                                                                                          |
-| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
+| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
 
@@ -54,7 +67,7 @@ version:
 * CircleCI API を使用してワークフローをトリガーできるのは、パイプラインが有効化されているプロジェクトのみです。
 * 設定ファイルにワークフローを含めない場合は、`build` という名前のジョブを含める必要があります。
 
-`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)」セクション_を参照してください。
+その他の詳細と制限事項については、「よくあるご質問」の[ワークフロー]({{ site.baseurl }}/2.0/faq/#workflows) セクションを参照してください。
 
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
@@ -102,7 +115,7 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前よりも先に実行することをお勧めします。
 - ワークフローの_先頭_に setup ジョブを実行すると、事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備にも役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/2.0/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/2.0/adv-config)」を参照してください。
 
 ### 順次ジョブ実行の例
 {: #sequential-job-execution-example }
@@ -212,7 +225,7 @@ workflows:
             - hold
 ```
 
-上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 15 日間です。
+上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 A job can be approved for up to 90 days after being issued. However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
 
 ワークフローで手動承認を使用する場合は、以下の点に注意する必要があります。
 
@@ -228,8 +241,9 @@ workflows:
 {:.tab.switcher.Cloud}
 ![保留中のワークフローの承認ジョブ]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server-v2}
 ![組織の切り替えメニュー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+
 
 保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
 
@@ -283,7 +297,6 @@ workflows:
 {:.no_toc}
 
 有効な `schedule` には、`cron` キーと `filters` キーが必要です。
-
 
 `cron` キーの値は、 [有効な crontab エントリ](https://crontab.guru/)でなければなりません。
 
