@@ -18,16 +18,16 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 
 
 # 前提条件
-{: #prerequisites }
-
 作業を行う前に、以下を準備しておく必要があります。
+
+To follow along with this document you will need:
 
 * CircleCI の[アカウント](https://circleci.com/ja/signup/)。
 * Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
 * クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
 
 # Windows Executor の概要
-{: #overview-of-the-windows-executor }
+メモ: Windows Executor は [Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching)をサポートしません。
 
 Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) アプリケーション、.NET 実行可能ファイル、(.NET フレームワークなどの) Windows 固有プロジェクトといった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
 
@@ -43,62 +43,51 @@ Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) ア�
 - Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
 
 ## Windows Executor イメージ
-{: #windows-executor-images }
+Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
 
 現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに何が含まれているのか、詳しい情報についてはシステム管理者にお問い合わせください。
 
-Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
-
 {:.tab.windowsblock.Cloud}
+
+{:.tab.windowsblock.Server}
 ```yaml
-version: 2.1
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
-  build:
-    executor:
-      name: win/default
-      shell: powershell.exe
+  build: # ジョブの名前
+    executor: win/default # Executor タイプ
+
     steps:
+      # Windows 仮想マシン環境で実行するコマンド
       - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
+      - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblockone.Server}
+ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
 ```yaml
 version: 2
 
 jobs:
-  build: # name of your job
+  build: # ジョブの名前
     machine:
-      image: windows-default # Windows machine image
+      image: windows-default # Windows マシン イメージ
     resource_class: windows.medium
     steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
+      # Windows 仮想マシン環境で実行するコマンド
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 ```
 
 
 ## 既知の問題
-{: #known-issues }
+Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
 
-Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
+These are the issues with the Windows executor that we are aware of and will address as soon as we can:
 
-* SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
+* PowerShell (Windows Orb のデフォルト)
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
 # サンプルの設定ファイル
@@ -106,7 +95,7 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 
 以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
 
-{:.tab.windowsblocktwo.Cloud}
+設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 ```yaml
 version: 2.1 # Use version 2.1 to enable orb usage.
 
@@ -140,14 +129,14 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
+From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
 # Windows Executor でのシェルの指定
 {: #specifying-a-shell-with-the-windows-executor }
 
-Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
+最初のステップでは、[`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
 
-* PowerShell (Windows Orbのデフォルト)
+* PowerShell 5
 * Bash
 * コマンド
 
@@ -178,7 +167,7 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server}
+最後のステップでは、ビルド実行可能ファイルをアーティファクトとして保存し、CircleCI Web アプリケーションまたは API からアクセスできるようにします。
 ```YAML
 version: 2.0
 
@@ -221,7 +210,7 @@ jobs:
 
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblockfour.Server}
 ```YAML
 version: 2.0
 
@@ -237,11 +226,11 @@ jobs:
 ```
 
 # サンプル アプリケーション
-{: #example-application }
+ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を参照してください。
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。**Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
-設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
+You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml).
 
 ```yaml
 version: 2.1
@@ -271,7 +260,7 @@ jobs:
       - checkout
 ```
 
-最初のステップでは、[`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
+In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
 
 ```yaml
       - restore_cache:
@@ -302,7 +291,7 @@ jobs:
           path: .\bin\Release\netcoreapp2.1\win10-x64\publish\circleci-demo-windows.exe
 ```
 
-最後のステップでは、ビルド実行可能ファイルをアーティファクトとして保存し、CircleCI Web アプリケーションまたは API からアクセスできるようにします。
+In our last step, we store the build executable as an artifact, making it accessible with the CircleCI web application or API.
 
 # ビルドへの SSH 接続
 {: #ssh-into-your-build }
@@ -316,11 +305,11 @@ Windows ビルド コンテナに SSH 接続することができます。 こ�
 
 2. SSH 接続を有効にしてジョブを起動するには、[Rerun Workflow (ワークフローを再実行する)] ドロップダウン メニューから [Rerun job with SSH (SSH でジョブを再実行する)] オプションを選択します。
 
-3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。ここで、接続に必要な SSH コマンドを確認できます。![SSH 接続の詳細情報]({{ site.baseurl }}/assets/img/docs/ssh-windows-obf.png)
+3. SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう![SSH 接続の詳細情報]({{ site.baseurl }}/assets/img/docs/ssh-windows-obf.png)
 
 SSH 接続するときには、実行するシェルの名前を渡してください。 上のビルドで `cmd.exe` を実行するには、`ssh -p <remote_ip> -- cmd.exe` を実行します。
 
-以下のオプションが利用できます。
+The available options are:
 
 - powershell.exe
 - bash.exe
@@ -333,7 +322,7 @@ You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh
 
 CircleCI の機能については、以下のドキュメントを確認してください。
 
-* 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/ja/2.0/concepts/)」を参照してください。
+* Windows Server 2019 Core Datacenter エディション
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
 * すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)」を参照してください。
 
@@ -342,8 +331,8 @@ CircleCI の機能については、以下のドキュメントを確認して�
 
 **Windows Server 2019 with Visual Studio 2019**
 
-* Windows Server 2019 Core Datacenter Edition
 * Visual Studio 2019 Community エディション
+* Visual Studio 2019 Community Edition
     * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
