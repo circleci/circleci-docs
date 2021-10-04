@@ -467,8 +467,12 @@ a.nav-skip-button {
 
 .dd-global-nav--component {
   .dd-global-nav--links {
+
     display: flex;
 
+    @media (max-width: $screen-md) {
+      display: none;
+    }
     .link {
       background-color: inherit;
       border-bottom-color: transparent;
@@ -495,7 +499,6 @@ a.nav-skip-button {
       border-bottom: 4px solid $black;
     }
   }
-
 
   .global-nav--row {
     &-mobile {

@@ -9,7 +9,11 @@ $(() => {
       windowWidth: window.innerWidth ?? 0,
     }
   }).then(variation => {
-    if (variation === "treatment") {
+    if (variation === "treatment" && window.innerWidth >= 992) {
+      // we are already telling optimizely to disqualify users on mobile but
+      // to keep it consistent we also include window.innerWidth as part of the if
+      // in the case someone is forced in "treatment"
+
       $(".global-nav--component").addClass("dd-global-nav--component")
 
       $(".dd-global-nav--links").show();
