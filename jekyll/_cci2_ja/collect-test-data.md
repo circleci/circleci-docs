@@ -29,7 +29,7 @@ The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-refe
     path: test-results
 ```
 
-ここで、`path` キーは、JUnit XML または Cucumber JSON テスト メタデータ ファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パスです。 この `path` 値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
+Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. この `path` 値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
 
 **If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
@@ -64,7 +64,6 @@ gem 'minitest-ci'
 {: #metadata-collection-in-custom-test-steps }
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
-
 ```
 - store_test_results:
     path: /tmp/test-results
@@ -111,7 +110,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
           path: ~/cucumber
 ```
 
-`path:` は、ファイルが格納されるディレクトリをプロジェクトのルート ディレクトリからの相対ディレクトリで指定します。 CircleCI は、アーティファクトを収集して S3 にアップロードし、アプリケーション内の**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示します。
+The `path:` is a directory or file relative to the project’s root directory where the files are stored. CircleCI は、アーティファクトを収集して S3 にアップロードし、アプリケーション内の**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示します。
 
 または、Cucumber の JSON フォーマッタを使用する場合は、出力ファイルに `.cucumber` で終わる名前を付け、それを `/cucumber` ディレクトリに書き出します。 たとえば、以下のようになります。
 
@@ -175,7 +174,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
-`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
+Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 
 ```yaml
     steps:
@@ -302,6 +301,8 @@ jobs:
 {: #lessa-nameavagreaterlessagreaterava-for-nodejs }
 {:.no_toc}
 
+To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
+
 [Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
 
 ```
@@ -426,12 +427,16 @@ And modify your test command to this:
           command: bundle exec rake test
           when: always
       - store_test_results:
-         
+
+
+See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
+```
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
-#### Clojure テスト用の test2junit
-{: #test2junit-for-clojure-tests }
+#### test2junit for Clojure Tests
+{: #video-troubleshooting-test-runners }
+{:.no_toc}
 {:.no_toc}
 
 #### Clojure テスト用の test2junit
