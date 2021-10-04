@@ -208,8 +208,16 @@ $padding-large-vertical: 11px;
 
   --link-color: #{$gray-dark};
   --link-color-hover: #{$blue-darker};
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.19px;
   color: $gray-dark;
   font-size: 14px;
+  font-weight: $font-weight-bold;
+  @media (max-width: $screen-sm-max) {
+    color: $black;
+  }
 
   &:hover {
     color: $blue-darker;
@@ -217,6 +225,8 @@ $padding-large-vertical: 11px;
   .external-icon {
     margin-left: 4px;
     width: 16px;
+    margin-top: 6px;
+    margin-right: 4px;
   }
 
 
@@ -401,13 +411,6 @@ body.global-nav-open .global-nav--search-button {
   }
 }
 
-.global-nav--external-link {
-  font-weight: $font-weight-bold;
-  @media (max-width: $screen-sm-max) {
-    color: $black;
-  }
-}
-
 @media (max-width: $screen-sm-max) {
   .global-nav--list,
   .global-nav--footer {
@@ -483,8 +486,6 @@ a.nav-skip-button {
       margin-right: 40px;
       padding-bottom: 10px;
       padding-top: 4px;
-      // padding: 3px 0px 19px 0;
-      // padding-top: 0px;
 
       // match dynamic widths from devhub
       @media(min-width: 992px)  { margin-right: 48px; }
@@ -508,17 +509,6 @@ a.nav-skip-button {
         padding: 10px 0 16px 0;
       }
     }
-  }
-
-  .global-nav--external-link {
-    display: flex;
-    align-items: center;
-  }
-
-  .external-icon {
-    margin-left: 4px;
-    width: 16px;
-    display: flex;
   }
 
   .global-nav--lockup-title {
