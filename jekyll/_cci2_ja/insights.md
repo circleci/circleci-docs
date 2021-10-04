@@ -6,6 +6,7 @@ description: "リポジトリのステータスおよびテスト パフォー�
 order: 41
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -17,8 +18,8 @@ CircleCI Insights ダッシュボードでは、リポジトリのビルド プ�
 
 ここでは、クラウド版 CircleCI と CircleCI Server それぞれでの Insights ダッシュボードへのアクセス方法と使用方法について説明します。
 
-## 使用法 (クラウド版 CircleCI)
-{: #usage-circleci-cloud }
+## Usage
+{: #usage }
 
 CircleCI Web アプリケーションのサイドバーから、組織全体のインサイトにアクセスできます。
 
@@ -61,12 +62,12 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 
 ---
 
-## CircleCI Server のインサイト
-{: #circleci-server-insights }
+## CircleCI Server v2.19.x Insights
+{: #circleci-server-v219x-insights }
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ 注意</span></p>
-  <span> 以下のセクションは、CircleCI <i>Server</i> 製品の [Insights (インサイト)] ページの使用法に関するものです。 </span>
+  <span> The following section refers to using the Insights page on installations of CircleCI Server v2.19.x. </span>
 </div>
 
 ### 概要
