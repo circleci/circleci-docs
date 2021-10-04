@@ -39,9 +39,6 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -75,7 +72,7 @@ jobs:
 {% endraw %}
 
 ## 設定ファイルの詳細
-{: #config-walkthrough }
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -87,33 +84,31 @@ version: 2.1
 
 実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
 
-ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
+最初のステップで `checkout` を実行してリポジトリのコードをプルし、この環境に準備します。
 
 この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。
 
-ジョブのすべてのコマンドがこのコンテナで実行されます。
+`stack` 呼び出しのすべてで `--no-terminal` を指定して、表示できない文字で CircleCI ログが汚れてしまう「厄介な」出力機能 (`\b` 文字で実装) を回避します。
 
 ```yaml
 jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 これで、この環境で Haskell ビルド ツール `stack` を実行するように設定できました。 `config.yml` ファイルの残りの部分はすべて `steps` キーのブロックです。
 
-最初のステップで `checkout` を実行してリポジトリのコードをプルし、この環境に準備します。
+Our first step is to run `checkout` to pull our repository's code down and set it up in our environment.
 
 次に、ビルド時間を短縮するために復元可能な依存関係があるかどうかを確認します。 続いて `stack setup` を実行し、`stack.yaml` 設定ファイルで指定した Haskell コンパイラーをプルします。
 
-`stack` 呼び出しのすべてで `--no-terminal` を指定して、表示できない文字で CircleCI ログが汚れてしまう「厄介な」出力機能 (`\b` 文字で実装) を回避します。
+For all `stack` invocations, `--no-terminal` is used to avoid the "sticky output" feature (implemented using `\b` characters) to pollute the CircleCI log with undisplayable characters.
 
 {% raw %}
 ```yaml
     steps:
+
       - checkout
       - restore_cache:
           name: キャッシュされた依存関係の復元
@@ -145,7 +140,7 @@ jobs:
           command: stack --no-terminal install
 ```
 
-最後に、ビルドされた実行可能ファイルを取得し、アーティファクトとして保存します。
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 ```yaml
       - store_artifacts:
@@ -171,7 +166,7 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
-このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。通常、実際のプロジェクトはこれよりも複雑です。場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 自由に構成して試してみてください。
+このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。 Real-world projects will be more complex and you may find you need to customize and tweak settings from those illustrated here (such as the docker image or [configuration](https://docs.haskellstack.org/en/v1.0.2/docker_integration/) you use, or which Haskell build tools you use). Have fun!
 
