@@ -28,7 +28,7 @@ For more information, and steps to complete these tasks see the https://circleci
 
 === Email Notifications 
 
-Build notifications are sent via email. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+Build notifications are sent via email. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
 
 * *Email Submission server hostname (required)* - Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
 

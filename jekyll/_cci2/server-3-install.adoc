@@ -12,6 +12,8 @@ version:
 
 Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+
 toc::[]
 
 == Phase 2: Core services installation
@@ -42,7 +44,7 @@ You will be prompted for a:
 
 When complete, you should be provided with a URL to access the KOTS admin console, usually, `\http://localhost:8800`.
 
-NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <namespace kots was installed in>`
+NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
@@ -86,20 +88,12 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 * *Private Load Balancer (optional)* - Load balancer doesn't generate external IP addresses. 
 
-==== Postgres Settings
+==== Postgres, MongoDB, Vault settings
 
-You can skip this section unless you plan on using an existing Postgres instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
-
-==== MongoDB Settings
-
-You can skip this section unless you plan on using an existing MongoDB instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own MongoDB instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
-
-==== Vault Settings
-
-You can skip this section unless you plan on using an existing Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Vault  instance within the cluster. The default will be included in the CircleCI backup and restore process. 
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
 
 ==== Artifact and Encryption Signing Settings
-Encryption and artifact signing keys were created during prerequisites. You can enter them here now. 
+Encryption and artifact signing keys were created during prerequisites phase. You can enter them here now. 
 
 Complete the following fields: 
 
@@ -108,10 +102,10 @@ Complete the following fields:
 * *Encryption Signing Key (required)*
 
 ==== Github Settings
-You created your Github OAuth application in the prerequisite steps, use the data to complete the following:
+You created your Github OAuth application in the prerequisite phase, use the data to complete the following:
 
 * *Github Type (required)* - 
-Select Cloud or Enterprise (on premises)
+Select Cloud or Enterprise (on premises).
 
 * *OAuth Client ID (required)* - 
 The OAuth Client ID provided by Github. 
