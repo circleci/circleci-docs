@@ -32,17 +32,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 5. 以下の内容を `config.yml` ファイルに追加します。
 
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
 {% endhighlight %}
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -71,25 +61,14 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 
 
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - checkout
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+
       - run:
           name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
 {% endhighlight %}
-
 
 ### 学習ポイント
 {: #learnings }
@@ -109,24 +88,14 @@ Although we’ve only made two small changes to the config, these represent sign
 
 
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  build:
-    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
-    docker:
-      - image: circleci/node:14-browsers
-    steps:
-      - checkout
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: # pre-built images: https://circleci.com/docs/2.0/circleci-images/ docker: - image: circleci/node:14-browsers steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+
       - run:
           name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
+    
       - run:
           name: Running in a Unique Container
           command: |
@@ -155,62 +124,28 @@ We also added a small `run` block that demonstrates we are running in a node con
 
 
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Hello World
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-  I-Have-Code:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - checkout
-      - run:
-          name: Code Has Arrived
-          command: |
-            ls -al
-            echo '^^^That should look familiar^^^'
-  Run-With-Node:
-    docker:
-      - image: circleci/node:14-browsers
-    steps:
-      - run:
-          name: Running In A Container With Node
-          command: |
-            node -v
-  Now-Complete:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Approval Complete
-          command: |
-            echo 'Do work once the approval has completed'
+version: 2.1 jobs: Hello-World: docker: - image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline' I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:14-browsers steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
 
-workflows:
- version: 2
- Example_Workflow:
-   jobs:
+workflows: version: 2 Example_Workflow: jobs:
+
      - Hello-World
      - I-Have-Code:
          requires:
+    
            - Hello-World
      - Run-With-Node:
          requires:
+    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
+    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
+    
            - Hold-For-Approval
 
 {% endhighlight %}
@@ -235,4 +170,4 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-[Configuring CircleCI]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
