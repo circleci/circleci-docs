@@ -22,7 +22,7 @@ To restart the Admin Console, run:
 
 [source,bash]
 ----
-kubectl kots admin-console --namespace <namespace>
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
 Open your browser and access http://localhost:8800 to see the Admin console.

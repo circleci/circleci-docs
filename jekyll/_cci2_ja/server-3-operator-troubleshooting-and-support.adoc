@@ -20,7 +20,7 @@ toc::[]
 
 [source,bash]
 ----
-kubectl kots admin-console --namespace <namespace>
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 
 ----
 
