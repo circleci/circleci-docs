@@ -81,9 +81,33 @@ The new Traefik pos will then start ot schedule correctly.
 
 === New features
 
+* Customers who require a fully private installation can now access a setting in the KOTS admin console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a work-around will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
+* Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS admin console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
+* We have expanded the machine build environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
+* The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
+* We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server. 
+* You can now supply a custom Linux AMI for VM service.
+* SSL termination can now be disabled - If you have put server login behind a firewall, this will enable SSL termination at the firewall.
+* You can now control the size of persistent volumes. For larger customers, the initial persistent volume size was too small, by default. You can now set this at install time, providing an easier migration for those customers that require it. For further information see the https://circleci.com/docs/2.0/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
+* We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]. 
+* You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/2.0/server-3-operator-build-artifacts/[Build Artifacts doc].
+
 === Fixes
 
+* The default windows executor was not as documented, we have increased the size to align with documentation and cloud. 
+
 === Known issues
+
+* KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after nomad clients have been deployed.
+* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
+identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
+application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
+CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
+and get details of the possible cause of the issue.
+* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+* Runner cannot be used when server is installed behind a proxy.
 
 == Release 3.1.0
 
