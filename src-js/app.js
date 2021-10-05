@@ -1,14 +1,11 @@
 import * as Cookie from 'js-cookie';
 import * as highlightjsBadge from 'highlightjs-badge';
 // site files
-import OptimizelyClient from './optimizely.js';
-import AnalyticsClient from "./analytics.js";
-import * as search from './instantsearch.js';
-import * as lang from './lang.js'
-import './user.js';
-import './sidebar.js';
-import './nav.js';
-import './main.js';
+import OptimizelyClient from './services/optimizely.js';
+import AnalyticsClient from "./services/analytics.js";
+import * as search from './services/instantsearch.js';
+import * as lang from './services/lang.js'
+import * as Site from './site';
 
 
 // imports all experiments
