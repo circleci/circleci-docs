@@ -167,12 +167,6 @@ Provided in the output from `terraform apply`
 * *Nomad Server Certificate Authority (CA) Certificate (required)* - 
 Provided in the output from `terraform apply`
 
-* *Output Processor Load Balancer (required)*
-+
-```bash 
-kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
-```
-
 Click the *Save config* button to update your installation and re-deploy server.
 
 ==== Nomad Clients Validation
