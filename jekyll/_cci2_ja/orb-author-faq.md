@@ -28,7 +28,7 @@ version:
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-詳細については、[Orb CLI の権限の一覧表]({{site.baseurl}}/ja/2.0/orb-author-intro/#permissions-matrix)を参照してください。
+詳細については、[Orb CLI の権限の一覧表]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix)を参照してください。
 
 ## Orb の削除
 {: #deleting-orbs }
@@ -40,8 +40,13 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI から見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば、現在はメンテナンスを行っていない Orb などに適しています。
 
 ```
-circleci orb unlist myOrb/myNamespace
+circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
+
+**Use caution when unlisting Private Orbs.**
+<br/>
+Currently the `orb source` and `orb info` CircleCI CLI commands do not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
+{: class="alert alert-warning"}
 
 ## API トークンの保護
 {: #secure-api-tokens }
@@ -50,9 +55,9 @@ circleci orb unlist myOrb/myNamespace
 
 * 回答: API キーのパラメーターとして `env_var_name` パラメーター型を使用してください。 このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
 
-詳細はこちら:
-* [環境変数名]({{site.baseurl}}/ja/2.0/reusing-config/#environment-variable-name)
-* [ベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices/)
+Read more:
+* [環境変数名]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
 ## 環境変数
 {: #environment-variables }
@@ -61,20 +66,20 @@ circleci orb unlist myOrb/myNamespace
 
 * 回答: 環境変数名のパラメーターを作成してください。 _変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
 
-必須の環境変数はバリデーションすることをお勧めします。 詳細については、[Orb のオーサリングのベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices/#commands)」を参照してください。
+Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
 
-詳細はこちら:
-* [環境変数名パラメーター型]({{site.baseurl}}/ja/2.0/reusing-config/#environment-variable-name)
-* [ベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices/)
+Read more:
+* [環境変数名パラメーター型]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
 ## サポートされているプログラミング言語
 {: #supported-programming-languages }
 
 * 質問: Orb の記述にはどの言語を使用できますか。
 
-* 回答: Orb は [CircleCI YAML 設定ファイル]({{site.baseurl}}/ja/2.0/configuration-reference/)をパッケージ化したものです。
+* 回答: Orb は [CircleCI YAML 設定ファイル]({{site.baseurl}}/2.0/configuration-reference/)をパッケージ化したものです。
 
-CircleCI Orbs では、再利用可能な CircleCI 設定ファイル</a>をパッケージ化しています。例えば、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)は特定の [Executor]({{site.baseurl}}/ja/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタムジョブで_コマンド_を使用する場合はユーザー、[再利用可能なジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#%E3%82%B8%E3%83%A7%E3%83%96)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
+CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [executor]({{site.baseurl}}/2.0/executor-intro/) defined by either, the user if using a _command_ within a custom job, or by the orb author if using a [reusable job]({{site.baseurl}}/2.0/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
 
 * 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
 
@@ -82,11 +87,11 @@ CircleCI Orbs では、再利用可能な CircleCI 設定ファイル</a>をパ�
 
 **Bash**
 
-Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash は、ネイティブの [run]({{site.baseurl}}/ja/2.0/configuration-reference/#run) コマンドを使用して直接、簡単に記述できます。 MacOS と Linux のデフォルトのシェルは Bash になります。
+Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
 
-**対話型インタープリター (Python など)**
+**Interactive Interpreter (or example, Python)**
 
-ユースケースによっては、Orb が特定の環境にしか存在しないことがあります。 たとえば、Orb が一般的な Python ユーティリティとして使用される場合は、Python を Orb の依存関係として要求した方が合理的です。 [run]({{site.baseurl}}/ja/2.0/configuration-reference/#run) コマンドの shell パラメーターを、次のように変更して使用してください。
+For some use-cases an orb might only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. Consider utilizing the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
 
 ```yaml
 steps:
@@ -97,9 +102,9 @@ steps:
       print("Hello " + place + "!")
 ```
 
-**バイナリ**
+**Binary**
 
-このオプションは、可能な限り使用しないことを強くお勧めします。 時に、CLI ツールなどのリモート バイナリ ファイルをフェッチしなければならない場合があります。 これらのバイナリは、パッケージ マネージャーからフェッチするか、可能な場合は GitHub リリースなどの VCS でホスティングする必要があります。 Homebrew を [AWS Serverless Orb](https://circleci.com/developer/ja/orbs/orb/circleci/aws-serverless#commands-install) の一部としてインストールする例を以下に示します。
+This option is strongly discouraged wherever possible. Sometimes it may be necessary to fetch a remote binary file such as a CLI tool. These binaries should be fetched from a package manager or hosted by a VCS such as GitHub releases wherever possible. For example, installing Homebrew as a part of the [AWS Serverless orb](https://circleci.com/developer/orbs/orb/circleci/aws-serverless#commands-install)
 
 ```yaml
 steps:
@@ -118,20 +123,20 @@ steps:
 
 * 回答: どちらでもかまいませんが、実行したいタスクによリます。
 
-Orb の[コマンド]({{site.baseurl}}/ja/2.0/orb-concepts/#commands)は、ユーザーか Orb 開発者がジョブ内で何らかのアクションを実行するために使用します。 コマンド自体は、自身が含まれているジョブを認識しませんが、ユーザーは自由自在にコマンドを使用できます。 コマンドは、CLI アプリケーションを自動的にインストールしたり、インストールと認証を実行したりする場合などに便利です。
+An orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
 
-[ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#%E3%82%B8%E3%83%A7%E3%83%96)は、特定の実行環境内のステップやジョブの集まりを定義したものです。 ジョブでは通常、実行環境と実行対象のステップを指定するので、自由度はあまりありません。 ジョブは、デプロイなどのタスクを自動化する場合に便利です。 デプロイ ジョブでは、_Python_ などの一般的な実行プラットフォームを選択するだけで、ユーザー コードのチェックアウト、CLI のインストール、デプロイ コマンドの実行を自動的に完了できます。ユーザーが追加の構成を行う必要はほとんど、あるいは一切ありません。
+A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
 
-詳細はこちら:
-* [CircleCI 設定ファイル言語の概要]({{site.baseurl}}/ja/2.0/config-intro/)
-* [再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/)
+Read more:
+* [CircleCI 設定ファイル言語の概要]({{site.baseurl}}/2.0/config-intro/)
+* [再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/)
 
 
 ## 関連項目
 {: #see-also }
-- [Orb のベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices): 安定版 Orb の作成に関する推奨事項
-- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
-- [Orb のパブリッシュ プロセス]({{site.baseurl}}/ja/2.0/creating-orbs/): ワークフローやジョブで使用する Orb に関する情報
-- [Orb リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
-- [Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/): 自分で作成した Orb をテストする方法
-- [CircleCI 構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/): CircleCI Orb のレシピを構成に使用する詳しい方法
+- [Orb のベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices): 安定版 Orb の作成に関する推奨事項
+- [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
+- [Orb のパブリッシュ プロセス]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブで使用する Orb に関する情報
+- [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
+- [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 自分で作成した Orb をテストする方法
+- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orb のレシピを構成に使用する詳しい方法
