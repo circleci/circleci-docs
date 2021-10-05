@@ -158,10 +158,10 @@ NOTE: In this first stage we skipped a lot of fields in the config. Not to worry
 ==== Create DNS Entry 
 Create a DNS entry for your Traefik load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record. 
 
-You will need the IP address of the Traefik load balancer. You can find it with the following terminal command:
+You will need the IP address or, if using AWS, the DNS name of the Traefik load balancer. You can find this with the following command:
 
 ----
-kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_INSTALLATION_NAMESPACE>
+kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 For more information on adding a new DNS record, see the following documentation:
@@ -175,7 +175,7 @@ For more information on adding a new DNS record, see the following documentation
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now let’s move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to be status of running and ready should show 1/1): 
 
 ----
-kubectl get pods -n <YOUR_CIRCLECI_INSTALLATION_NAMESPACE>
+kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
 ## What to read next
