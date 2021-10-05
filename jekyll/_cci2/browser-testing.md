@@ -106,7 +106,7 @@ If you are using JavaScript to test your web application, you can still take adv
 ```yaml
 version: 2.1
 orbs:
-  saucectl: saucelabs/saucectl-run@1.1.0
+  saucectl: saucelabs/saucectl-run@2.0.0
 
 jobs:
   test-cypress:
