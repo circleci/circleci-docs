@@ -78,7 +78,7 @@ To run a set of concurrent jobs, add a new `workflows:` section to the end of yo
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -87,7 +87,7 @@ jobs:
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
