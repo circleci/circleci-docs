@@ -41,7 +41,7 @@ kubectl kots install circleci-server
 
 [source,bash]
 ----
-kubectl kots admin-console -n <namespace kots was installed in>
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
 ## ステップ 2 - CircleCI Server の構成 (パート 1)
@@ -714,7 +714,7 @@ sub-domain, i.e, `app.{your_domain}.com`.
 ## ステップ 6 - サーバーの構成 (パート 2) とデプロイ
 管理者コンソールの *[Config (構成)]* タブに戻ります。
 
-TIP: Run `kubectl kots admin-console -n <namespace kots was installed in>` if you need to get back to the admin console.
+TIP: Run `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` if you need to get back to the admin console.
 
 ### [Global Settings (グローバル設定)]
 Enter the values obtained from <<Step 3 - Obtain Load Balancer IPs>> into VM Service Load Balancer Hostname, Output Processor

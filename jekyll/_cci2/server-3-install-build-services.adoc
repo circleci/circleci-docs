@@ -12,6 +12,8 @@ version:
 
 Before you begin with the CircleCI server v3.x build services installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
 
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+
 toc::[]
 
 == Phase 3: Build services installation
@@ -20,7 +22,7 @@ toc::[]
 ==== Overview 
 Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand. 
 
-Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>`
+Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 Locate and enter the following in Settings: 
 
@@ -28,7 +30,7 @@ Locate and enter the following in Settings:
 The following command will provide the IP address of the service 
 +
 ```bash
-kubectl get service output-processor --namespace=circleci-server
+kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
 . *Save your configuration*. You will deploy and validate your setup after you complete Nomad client setup.  
@@ -43,7 +45,7 @@ Once completed you will be able to update your CircleCI server configuration so 
 
 ==== Cluster Creation with Terraform
 
-CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://circleci.com/docs/2.0/server-3-overview[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
+CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
 
 ===== AWS
 You will need some information about your cluster and server installation to complete the required fields for the terraform configuration file (`main.tf`). A full example as well as a full list of variables can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here]. 
@@ -51,14 +53,14 @@ You will need some information about your cluster and server installation to com
 * *Server_endpoint* - You will need to know the Nomad Server endpoint, which is the external IP address of the nomad-server-external Loadbalancer. You can get this information with the following command: 
 +
 ```bash
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE> 
 ```
 
 * *Subnet ID (subnet)*, *VPC ID (vpcId)*, and *DNS server (dns_server)* of your cluster. 
 Run the following command to get the cluster VPC ID (vpcId), CIDR block (serviceIpv4Cidr), and subnets (subnetIds): 
 +
 ```bash
-aws eks describe-cluster --name=<name of your cluster>
+aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 ```
 +
 This will return something similar to the following: 
@@ -88,7 +90,7 @@ This will return something similar to the following:
 Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`serviceIpv4Cidr`), for example your CIDR block might be `10.100.0.0/16` so the third IP would be `10.100.0.2`.
 +
 ```bash
-aws ec2 describe-vpcs --filters Name=vpc-id,Values=<your-VPCID>
+aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 ```
 +
 This will return something like the following: 
@@ -120,7 +122,7 @@ After Terraform is done spinning up the Nomad client(s), it will output the cert
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by issuing the following command: 
 
 ----
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 You will also need the following information: 
@@ -146,14 +148,14 @@ terraform apply
 After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe.
 
 ==== Configure and Deploy
-Now that you have successfully deployed your Nomad clients, you can configure CircleCI Server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` 
+Now that you have successfully deployed your Nomad clients, you can configure CircleCI Server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` 
 
 Enter the following in Settings: 
 
 * *Nomad Load Balancer (required)*
 +
 ```bash 
-kubectl get service nomad-server-external --namespace=circleci-server
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
 * *Nomad Server Certificate (required)* - 
@@ -164,12 +166,6 @@ Provided in the output from `terraform apply`
 
 * *Nomad Server Certificate Authority (CA) Certificate (required)* - 
 Provided in the output from `terraform apply`
-
-* *Output Processor Load Balancer (required)*
-+
-```bash 
-kubectl get service output-processor --namespace=circleci-server
-```
 
 Click the *Save config* button to update your installation and re-deploy server.
 
@@ -187,7 +183,7 @@ git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 ===== Github Enterprise
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
-git remote set-url origin <your-ghe-repo-url>
+git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
@@ -201,10 +197,10 @@ Once you have successfully cloned the repository you can follow it from within y
 |Value
 
 |CIRCLE_HOSTNAME
-|<your circleci installation URL>
+|<YOUR_CIRCLECI_INSTALLATION_URL>
 
 |CIRCLE_TOKEN
-|<your circleci api token>
+|<YOUR_CIRCLECI_API_TOKEN>
 |===
 
 .Contexts
@@ -246,7 +242,7 @@ aws eks describe-cluster --name=<your-cluster-name>
 Run the following commands to create a security group for VM service. 
 +
 ```bash
-aws ec2 create-security-group --vpc-id "<your-vpcId>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
+aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
 ```
 +
 This will output a GroupID to be used in the next steps: 
@@ -261,11 +257,11 @@ This will output a GroupID to be used in the next steps:
 Use the security group you just created and CIDR block values to apply the security group to the following: 
 +
 ```bash
-aws ec2 authorize-security-group-ingress --group-id "<GroupId>" --protocol tcp --port 22 --cidr "<serviceIpv4Cidr>"
+aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 22 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
 ```bash
-aws ec2 authorize-security-group-ingress --group-id "<GroupId>" --protocol tcp --port 2376 --cidr "<serviceIpv4Cidr>"
+aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 2376 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
 NOTE: If you created your Nomad Clients in a different subnet from CircleCI server, you will need to rerun the above two commands with each subnet CIDR. 
@@ -275,7 +271,7 @@ NOTE: If you created your Nomad Clients in a different subnet from CircleCI serv
 Run the following command to apply the security group rules so users can SSH into their jobs:
 +
 ```bash
-aws ec2 authorize-security-group-ingress --group-id "<GroupId>" --protocol tcp --port 54782
+aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 54782
 ```
 
 . *Create user*
@@ -307,7 +303,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<clusterSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<YOUR_clusterSecurityGroupID>"
       ]
     },
     {
@@ -394,7 +390,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<arn>"
+          "ec2:Vpc": "<YOUR_arn>"
         }
       }
     }
@@ -496,13 +492,13 @@ gcloud iam service-accounts list --filter="displayName:circleci-server-vm servic
 Apply the Compute Instance Admin (Beta) role to the service account. 
 +
 ```bash
-gcloud projects add-iam-policy-binding <PROJECT_ID> --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
+gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
 ```
 +
 And 
 +
 ```bash
-gcloud projects add-iam-policy-binding <PROJECT_ID> --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
+gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ```
 
 . *Get JSON Key File*
@@ -510,7 +506,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> --member serviceAccount:<SER
 After running the following, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation. 
 +
 ```bash
-gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <SERVICE_ACCOUNT_EMAIL>
+gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ```
 
 . *Configure Server*
@@ -521,7 +517,7 @@ Configure VM service through the KOTS admin console:
 This can be found using the following command:
 +
 ```bash
-kubectl get service vm-service --namespace=circleci-server
+kubectl get service vm-service --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 ** *GCP project ID (required)* - 
 Name of the GCP project the cluster resides.
