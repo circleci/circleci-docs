@@ -30,7 +30,7 @@ Locate and enter the following in Settings:
 The following command will provide the IP address of the service 
 +
 ```bash
-kubectl get service output-processor --namespace=circleci-server
+kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
 . *Save your configuration*. You will deploy and validate your setup after you complete Nomad client setup.  
@@ -53,7 +53,7 @@ You will need some information about your cluster and server installation to com
 * *Server_endpoint* - You will need to know the Nomad Server endpoint, which is the external IP address of the nomad-server-external Loadbalancer. You can get this information with the following command: 
 +
 ```bash
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE> 
 ```
 
 * *Subnet ID (subnet)*, *VPC ID (vpcId)*, and *DNS server (dns_server)* of your cluster. 
@@ -122,7 +122,7 @@ After Terraform is done spinning up the Nomad client(s), it will output the cert
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by issuing the following command: 
 
 ----
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 You will also need the following information: 
@@ -155,7 +155,7 @@ Enter the following in Settings:
 * *Nomad Load Balancer (required)*
 +
 ```bash 
-kubectl get service nomad-server-external --namespace=circleci-server
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
 * *Nomad Server Certificate (required)* - 
@@ -170,7 +170,7 @@ Provided in the output from `terraform apply`
 * *Output Processor Load Balancer (required)*
 +
 ```bash 
-kubectl get service output-processor --namespace=circleci-server
+kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
 Click the *Save config* button to update your installation and re-deploy server.
@@ -523,7 +523,7 @@ Configure VM service through the KOTS admin console:
 This can be found using the following command:
 +
 ```bash
-kubectl get service vm-service --namespace=circleci-server
+kubectl get service vm-service --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 ** *GCP project ID (required)* - 
 Name of the GCP project the cluster resides.
