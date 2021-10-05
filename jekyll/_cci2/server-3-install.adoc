@@ -147,7 +147,7 @@ A JSON format key of the Service Account to use for bucket access.
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
 
 ==== Nomad
-Set nTKLS to disabled. This should be disabled by default but there is a known issue currently preventing this. Disabling allows you to ignore Nomad settings until phase 3 of the installation process where we will install build services.
+Set mTLS to `disabled`. This should be disabled by default but there is a known issue currently preventing this. Disabling allows you to ignore Nomad settings until phase 3 of the installation process where we will install build services.
 
 ==== Postgres, MongoDB, Vault settings
 
