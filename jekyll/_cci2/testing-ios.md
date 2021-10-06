@@ -414,24 +414,35 @@ application to make sure that the simulator is booted in time.
 Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
-To pre-start the simulator, add the following to your
-`config.yml` file, assuming that you are running your tests on an iPhone 11 Pro
-simulator with iOS 13.2:
+To pre-start the simulator, add the macOS Orb (version `1.3.0` or higher) to your config:
 
 ```yaml
-# ...
-steps:
-  - run:
-      name: pre-start simulator
-      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+orbs:
+  macos: circleci/macos@1.3.0
 ```
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7
-simulator, as the phone + watch simulator is also present in the build
-image:
+Then call the `preboot-simulator` command, as shown in the example below:
 
-* `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
-* `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
+```yaml
+- macos/preboot-simulator:
+    version: "15.0"
+    platform: "iOS"
+    device: "iPhone 13 Pro Max"
+```
+
+It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
+
+If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS Orb:
+
+```yaml
+- macos/preboot-paired-simulator:
+    iphone-device: "iPhone 13"
+    iphone-version: "15.0"
+    watch-device: "Apple Watch Series 7 - 45mm"
+    watch-version: "8.0"
+```
+
+**Note:** It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
 
 ### Collecting iOS simulator crash reports
 {: #collecting-ios-simulator-crash-reports }
