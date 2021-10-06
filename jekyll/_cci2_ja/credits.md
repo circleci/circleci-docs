@@ -54,7 +54,7 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 ## Performance プラン
 {: #performance-plan }
 
-Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
+Upgrading to a Performance plan offers several improvements over the Free plan:
 
 - すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
 - Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
@@ -66,19 +66,19 @@ Performance プランにアップグレードすると、Free プランの内容
 ## オープンソース プロジェクトでのクレジット使用
 {: #open-source-credit-usage }
 
-Free プランの組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソース プロジェクトのビルドに利用できます。 この特典を受け取るには、Free プランを利用し、リポジトリをパブリックにする必要があります。
+Organizations on our Free plan get 400,000 free credits per month for Linux open source builds. Using our Free plan and keeping your repository public will enable this for you.
 
-CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
+If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. ご希望の方は、billing@circleci.com までお問い合わせください。
 
 ## Docker layer caching
 {: #docker-layer-caching }
 
-Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC は Performance プランでのみ提供されます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)をご覧ください。
+Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC is only available on the Performance plan. DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)をご覧ください。
 
 ## トラブルシューティング
 {: #troubleshooting }
 
-### Am i charged if my build is "queued" or "preparing"?
+### Am I charged if my build is "queued" or "preparing"?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
