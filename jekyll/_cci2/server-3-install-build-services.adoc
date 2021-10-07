@@ -557,8 +557,10 @@ CircleCI runner does not require any additional server configuration. Server shi
 
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation you will need to set up a runner namespace for each organization within your server installation. 
 
+ifndef::pdf[]
 ## What to read next
 
 * https://circleci.com/docs/2.0/server-3-install-post[Server 3.x Phase 4 - Post installation]
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+endif::pdf[]
