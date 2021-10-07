@@ -15,10 +15,28 @@ version:
 This document describes how you can connect Insights data with third party
 providers.
 
+### Datadog integration
+{: #datadog-integration }
+
+Use webhooks to send data to [Datadog](https://www.datadoghq.com/) through the CircleCI integration.
+
+1. In the [CircleCI App](https://app.circleci.com/), click on the ellipsis menu for each project, and then click **Project Settings** > **Webhooks**.
+  - **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is your [Datadog API key](https://app.datadoghq.com/account/login).
+  - **Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
+  - **Events**: Select `Workflow Completed` and `Job Completed`.
+  - **Certificate verifications**: Enable this check.
+
+1. Click **Add Webhook** to save the new webhook.
+
+#### Visualize pipeline data in Datadog
+Sign in to [Datadog](https://app.datadoghq.com/account/login) and visit the Pipelines and Pipeline Executions pages to see data populate after workflows finish.
+
+**Note**: The Pipelines page will only show data for the default branch of each repository.
+
 ### Sumo Logic integration
 {: #sumo-logic-integration }
 
-The CircleCI app for Sumo Logic provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
+The CircleCI app for [Sumo Logic](https://www.sumologic.com/) provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
 
 
 #### The CircleCI dashboard for Sumo Logic
