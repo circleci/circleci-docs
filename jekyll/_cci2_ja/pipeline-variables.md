@@ -4,34 +4,39 @@ title: "パイプライン変数"
 short-title: "パイプライン変数"
 description: "パイプラインの変数、パラメーター、値についての詳細情報"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
+version:
+  - Cloud
 ---
 
 パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
 
 パイプライン変数には、次の 2 つの種類があります。
 
-* **パイプライン値**: 設定ファイル全体で使用できるメタデータです。
-* **パイプライン パラメーター**: 型指定された変数です。設定ファイルのトップ レベルに `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
+* **パイプライン値**: 設定ファイル全体で使用できるメタデータ。
+* **パイプライン パラメーター**: 型指定された変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
 
 ## パイプライン値
+{: #pipeline-values }
 
-パイプライン値は、あらゆるパイプライン構成で使用可能であり、事前に宣言することなく使用できます。
+パイプライン値はすべてのパイプライン構成で使用でき、事前に宣言することなく使用できます。
 
-| 値                          | 説明                                           |
-| -------------------------- | -------------------------------------------- |
-| pipeline.id                | パイプラインを表す、グローバルに一意の ID                       |
-| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID                   |
-| pipeline.project.git_url   | 例: https://github.com/circleci/circleci-docs |
-| pipeline.project.type      | 例: "github"                                  |
-| pipeline.git.tag           | パイプラインをトリガーするタグ                              |
-| pipeline.git.branch        | パイプラインをトリガーするブランチ                            |
-| pipeline.git.revision      | 現在の git リビジョン                                |
-| pipeline.git.base_revision | 以前の git リビジョン                                |
+| 値                          | 説明                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------- |
+| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。 |
+| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                           |
+| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： https://github.com/circleci/circleci-docs              |
+| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                              |
+| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                    |
+| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                    |
+| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                             |
+| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字）                                                  |
 {: class="table table-striped"}
 
-例
+注: 多くの場合、`pipeline.git.base_revision` は、現在実行しているパイプラインより前のパイプラインを実行する SHA ですが、いくつか注意事項があります。 ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
+
+以下に例を示します。
 
 ```yaml
 version: 2.1
@@ -48,36 +53,33 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-## 設定ファイルにおけるパイプライン パラメーター
+注: `environment`キーで上記の方法で変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
-パイプライン パラメーターは、`.circleci/config.yml` のトップ レベルで `parameters` キーを使って宣言します。
+## 設定ファイルにおけるパイプライン パラメーター
+{: #pipeline-parameters-in-configuration }
+
+パイプライン パラメーターは、`.circleci/config.yml` ファイルの一番上にある`parameters` キーを使って宣言します。
 
 パイプライン パラメーターは次のデータ型をサポートしています。
 * 文字列
 * ブール値
 * 整数
-* 列挙
+* 列挙型
 
-詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#パラメーターの構文)」を参照してください。
+詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。
 
-パイプライン パラメーターは値として参照され、スコープ `pipeline.parameters` の下で設定ファイル内の変数として使用できます。
+パイプライン パラメーターは値で参照され、`pipeline.parameters`のスコープの下で設定ファイル内の変数として使用できます。
 
 以下の例では、2 つのパイプライン パラメーター (`image-tag`、`workingdir`) が設定ファイルの上部で定義され、後続の `build` ジョブで参照されています。
 
 ```yaml
-version: 2.1
-parameters:
-  image-tag:
-    type: string
-    default: "latest"
-  workingdir:
-    type: string
-    default: "~/main"
-
 jobs:
   build:
     docker:
       - image: circleci/node:<< pipeline.parameters.image-tag >>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照 :
     environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>
@@ -87,10 +89,13 @@ jobs:
 ```
 
 ### API からパイプラインをトリガーするときにパラメーターを渡す
+{: #passing-parameters-when-triggering-pipelines-via-the-api }
 
 [パイプラインをトリガーする](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (メモ: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+**注: **この`POST`で`parameters`キーを渡すリクエストは、**シークレットではありません**のでご注意ください。
+
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーする際にパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -102,13 +107,15 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ```
 
 ## パイプライン パラメーターのスコープ
+{: #the-scope-of-pipeline-parameters }
 
-パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、パイプラインのスコープを Orb 内に認めるとカプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が台無しになり、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
-
+パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ解決することができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、Orb 内でパイプラインのスコープへのアクセスを認めると、カプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が危険にさらされ、脆弱性が表面化する可能性があるためです。
 
 ## 構成プロセスの段階とパラメーターのスコープ
+{: #config-processing-stages-and-parameter-scopes }
 
 ### プロセスの段階
+{: #processing-stages }
 
 構成プロセスは次の段階を経て進みます。
 
@@ -116,9 +123,10 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 - パイプライン パラメーターが Orb ステートメントに置き換えられる
 - Orb がインポートされる
 
-残りの構成プロセスで、要素パラメーターが解決され、型チェックされ、置換されます。
+残りの構成プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
 
 ## 要素パラメーターのスコープ
+{: #element-parameter-scope }
 
 要素パラメーターは字句スコープをとるため、ジョブ、コマンド、Executor などで定義されている要素の範囲内に収まります。 下の例のように、パラメーターを持つ要素がパラメーターを持つ別の要素を呼び出す場合、内側の要素は呼び出し元の要素のスコープを継承しません。
 
@@ -153,32 +161,32 @@ workflows:
 cat-file ジョブから `print` コマンドを呼び出しても、file パラメーターのスコープは print コマンド内には及びません。 これにより、すべてのパラメーターが常に有効な値にバインドされ、使用可能なパラメーターが常に認識されます。
 
 ## パイプライン値のスコープ
+{: #pipeline-value-scope }
 
 パイプライン値、つまり CircleCI が提供するパイプライン内で使用できる値 (例: `<< pipeline.number >>`) は、常にスコープ内で有効です。
 
 ### パイプライン パラメーターのスコープ
+{: #pipeline-parameter-scope }
 
 設定ファイル内で定義されているパイプライン パラメーターは常にスコープ内で有効ですが、2 つの例外があります。
 
 - パイプライン パラメーターは、他のパイプライン パラメーターの定義の範囲内では有効でないため、相互に依存させることはできません。
-- データ漏えいを防ぐために、パイプライン パラメーターは Orbs 本体、Orbs のインラインの範囲内では有効ではありません。
+- データ漏えいを防ぐために、パイプライン パラメーターは Orb 本体、Orb のインラインの範囲内では有効ではありません。
 
 ## 条件付きワークフロー
+{: #conditional-workflows }
 
-2019 年 6 月の新機能で、ワークフロー宣言の下で `when` 句を使用して、ブール値によってそのワークフローを実行するかどうかを判断できるようになりました (逆の `unless` 句もサポート)。
+ワークフロー宣言の下で `when` 句（または逆の`unless` 句）を使用すると、真偽値を使ってそのワークフローを実行するかどうかを判断できます。 真偽値は、ブール値、数値、および文字列です。 偽値は、false、0、空の文字列、null、および NaN のいづれかです。 それ以外はすべて真値です。
 
 この構成の最も一般的な活用方法は、値としてパイプライン パラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 
-以下は、2 つのパイプライン パラメーターを使用した設定ファイルの例です。1 つは特定のワークフローを実行するかどうかを決定し、もう 1 つは特定のステップを実行するかどうかを決定しています。
+以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
 ```yaml
 version: 2.1
 
 parameters:
   run_integration_tests:
-    type: boolean
-    default: false
-  deploy:
     type: boolean
     default: false
 
@@ -193,13 +201,10 @@ jobs:
   mytestjob:
     steps:
       - checkout
-      - when:
-          condition: << pipeline.parameters.deploy >>
-          steps:
-            - run: echo "deploying"
+      - ... # job steps
 ```
 
-この例では、下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
+上記の例では、以下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
 
 ```json
 {
@@ -209,4 +214,4 @@ jobs:
 }
 ```
 
-`when` キーは、パイプライン パラメーターだけでなくブール値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句と似た逆の意味の `unless` 句もあり、条件の真偽を逆に指定できます。
+`when` キーは、パイプライン パラメーターだけでなくすべての真偽値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句と似た逆の意味の `unless` 句もあり、条件の真偽を逆に指定できます。

@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Hello World On MacOS"
+title: "Hello World On macOS"
 short-title: "Hello World On MacOS"
 description: "First macOS project on CircleCI 2.0"
 categories: [getting-started]

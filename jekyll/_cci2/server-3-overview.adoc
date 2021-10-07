@@ -14,11 +14,14 @@ toc::[]
 
 == Introduction
 
-CircleCI Server v{serverversion} is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud or data center. 
 
-The core of the CircleCI Server application runs inside Kubernetes.
+Server offers the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
 
-The application exposes five services using load balancers, three of these load balancers are VPC-internal.
+.CircleCI Server v3.x Architecture
+image::server-3-architecture-diagram.png[Services Architecture]
+
+The CircleCI server application exposes four services using load balancers. Three of these load balancers are VPC-internal for connecting to the Nomad cluster and virtual machines. If required, the frontend load balancer can be made private, separating it from the public internet. For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -28,12 +31,7 @@ The application exposes five services using load balancers, three of these load 
 | Ports
 | Description
 
-| Front-end GUI Proxy
-| External
-| 80 and 443
-| Exposes the web application.
-
-| Front-end API
+| Frontend GUI Proxy & API
 | External
 | 80 and 443
 | Exposes the web application.
@@ -54,27 +52,65 @@ The application exposes five services using load balancers, three of these load 
 | Provisions virtual machines.
 |===
 
-CircleCI Server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
+The application exposes a number of external ports. These ports are used for various functions as defined in the table below. 
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Port number
+| Protocol
+| Direction
+| Source / Destination
+| Use
+| Notes
+
+| 80
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 443
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 8800
+| TCP
+| Inbound
+| Administrators
+| Admin console
+|
+
+| 22
+| TCP
+| Inbound
+| Administrators
+| SSH
+| Only required for the bastion host
+
+| 64535-65535
+| TCP
+| Inbound
+|
+| SSH into builds
+| Only required for the nomad clients.
+|===
+
+CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
 Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
-Server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
+server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
 Job artifacts and output are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
 Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
 Nomad clients need access to object storage.
 
-https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
-
-== Architecture
-Below is a diagram describing the architecture of Server 3.x. The available services
-are described in greater detail in the <<Services>> section.
-
-.CircleCI Server v3.x Architecture
-image::server-3-architecture-diagram.png[Services Architecture]
-<<<
-
 == Services
 
-CircleCI Server 3.0 consists of the following services. Find their descriptions and failure implications below:
+CircleCI server 3.0 consists of the following services. Find their descriptions and failure implications below:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -136,7 +172,7 @@ CircleCI Server 3.0 consists of the following services. Find their descriptions 
 | circleci-telegraf
 |
 | Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
-but can also be configured to be exported to other places (i.e. Datadog or local-observability-stack-prometheus)
+but can also be configured to be exported to other places (i.e. Datadog or Prometheus)
 |
 |
 
@@ -203,7 +239,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | kotsadm-kots
 | Licensing
 | The main Kots application. Runs the Kots admin console where upgrades and configuration of server take place	No admin console available.
-| No upgrades or configuration possible for Server
+| No upgrades or configuration possible for server
 |
 
 | kotsadm-migrations
@@ -236,7 +272,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 |
 |
 
-| local-observability-stack-prometheus
+| prometheus
 | Server
 | Used for metrics
 |
@@ -273,7 +309,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | May not be available in GA.
 
 | slanger
-| Server
+| server
 | Provides real-time events to the CircleCI app.
 | Live UI updates will stop but hard refreshes will still work.
 |
@@ -317,13 +353,53 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | web-ui-*
 | Frontend
 | Micro Front End (MFE) services used to render the frontend web application GUI.
-| The respective services page will fail to load. Example: A web-ui-server-admin failure means the Server Admin page will fail to load.
+| The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
 | The MFE's are used to render the web application located at app.<my domain here>
 
 |===
 
+== Platforms 
+CircleCI server is designed to deploy within a Kubernetes cluster. Virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images. 
+
+If installing outside of EKS or GKE, additional work is required to get access to some of the same machine build features. Setting up CircleCI runners will give you access to the same feature set as VM service across a much wider range of OSs and machine types (MacOS and much more). 
+
+We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions whenever possible. However, we do not test all platforms and options. For that reason we provide a list of tested environments, which we will continue to expand over time. We will be adding OpenShift to our list of regularly tested and supported platforms. 
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Environment
+| Status
+| Notes
+
+| EKS 
+| Tested
+|
+
+| GKE 
+| Tested
+|
+
+| Azure
+| Untested
+| Should work with Minio Azure gateway and Runner
+
+| Digital Ocean
+| Untested 
+| Should work with Minio Digital Ocean gateway and Runner
+
+| OpenShift*
+| Untested
+| Known to not work. 
+
+| Rancher
+| Untested 
+| Should work with Minio and Runner
+|===
+
+
 == What to read next
 
 * https://circleci.com/docs/2.0/server-3-whats-new[What's new in 3.x]
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation Prerequisites]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]

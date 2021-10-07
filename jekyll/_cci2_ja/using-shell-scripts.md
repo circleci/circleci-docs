@@ -6,25 +6,55 @@ description: "CircleCI 設定ファイルでのシェル スクリプト使用�
 categories:
   - getting-started
 order: 10
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-[CircleCI 設定ファイル]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェル スクリプトを使用するうえでのベスト プラクティスについて、以下のセクションに沿って説明します。
+This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
-+ 目次
+* TOC
 {:toc}
 
 ## 概要
-
-CircleCI を構成するときに、シェル スクリプトの記述が必要になることは少なくありません。 シェル スクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベスト プラクティスを参照すれば、これらのエラーの多くを回避することができます。
-
-## シェル スクリプトのベスト プラクティス
-
-### ShellCheck の使用
+{: #overview }
 {:.no_toc}
 
-[ShellCheck](https://github.com/koalaman/shellcheck) は、シェル スクリプトの静的解析ツールです。bash/sh シェル スクリプトに対して警告と提案を行います。
+Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
 
-CircleCI で ShellCheck を最も効果的に使用するには、このツールを `.circleci/config.yml` ファイルに個別のジョブとして追加します。 こうすると、以下のようにワークフロー内で `shellcheck` ジョブを他のジョブと並列に実行できます。 `version: 2.1` の構成を使用している場合は、[Shellcheck Orb](https://circleci.com/developer/ja/orbs/orb/circleci/shellcheck#usage-shellcheck-workflow) を使用して、設定ファイルを簡素化することを検討してください。
+## Shell script best practices
+{: #shell-script-best-practices }
+
+### ShellCheck の使用
+{: #use-shellcheck }
+
+[ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
+
+Use the [Shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for the simplest way to add shellcheck to your `version: 2.1` configuration (remember to replace `x.y.z` with a valid version):
+
+```yaml
+version: 2.1
+
+orbs:
+  shellcheck: circleci/shellcheck@x.y.z
+
+workflows:
+  check-build:
+    jobs:
+      - shellcheck/check # job defined within the orb so no further config necessary
+      - build-job:
+          requires:
+            - shellcheck/check # only run build-job once shellcheck has run
+          filters:
+            branches:
+              only: master # only run build-job on master branch
+
+jobs:
+  build-job:
+    ...
+```
+
+Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
 
 ```yaml
 version: 2
@@ -32,10 +62,13 @@ jobs:
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: スクリプトのチェック
+          name: Check Scripts
           command: |
             find . -type f -name '*.sh' | wc -l
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
@@ -44,57 +77,58 @@ jobs:
 
 workflows:
   version: 2
-  workflow:
+  check-build:
     jobs:
-
       - shellcheck
       - build-job:
           requires:
-            - shellcheck
+            - shellcheck # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master
+              only: master # only run build-job on master branch
 ```
 
-**メモ:** ShellCheck と共に `set -o xtrace` / `set -x` を使用するときには注意が必要です。 シェルがシークレットな環境変数を展開すると、機密性の高くない方法で公開されてしまいます。 以下の例では、`tmp.sh` スクリプト ファイルによって、公開すべきでない部分まで公開されています。
+**Note:** Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way. In the example below, observe how the `tmp.sh` script file reveals too much.
 
-    > cat tmp.sh
-    #!/bin/sh
-    
-    set -o nounset
-    set -o errexit
-    set -o xtrace
-    
-    if [ -z "${SECRET_ENV_VAR:-}" ]; then
-      echo "You must set SECRET_ENV_VAR!"
-    fi
-    > sh tmp.sh
-    
-    + '[' -z '' ']'
-    + echo 'You must set SECRET_ENV_VAR!'
-    You must set SECRET_ENV_VAR!
-    > SECRET_ENV_VAR='s3cr3t!' sh tmp.sh
-    + '[' -z 's3cr3t!' ']'
-    
+```bash
+> cat tmp.sh
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+set -o xtrace
+
+if [ -z "${SECRET_ENV_VAR:-}" ]; then
+  echo "You must set SECRET_ENV_VAR!" fi
+> sh tmp.sh
++ '[' -z '' ']'
++ echo 'You must set SECRET_ENV_VAR!'
+You must set SECRET_ENV_VAR!
+> SECRET_ENV_VAR='s3cr3t!' sh tmp.sh
++ '[' -z 's3cr3t!' ']'
+```
+
 
 ### エラー フラグの設定
-{:.no_toc}
+{: #set-error-flags }
 
-いくつかのエラー フラグを設定することで、好ましくない状況が発生した場合にスクリプトを自動的に終了できます。 厄介なエラーを回避するために、各スクリプトの先頭に以下のフラグを追加することをお勧めします。
+There are several error flags you can set to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
 
 ```bash
 #!/usr/bin/env bash
 
-# 初期化されていない変数が使用された場合にスクリプトを終了します
+# Exit script if you try to use an uninitialized variable.
 set -o nounset
 
-# ステートメントが true 以外の戻り値を返した場合にスクリプトを終了します
+# Exit script if a statement returns a non-true return value.
 set -o errexit
 
-# パイプライン内の最後の項目ではなく、最初の障害のエラー ステータスを使用します
+# Use the error status of the first failure, rather than that of the last item in a pipeline.
 set -o pipefail
 ```
 
-## 関連項目
+## See also
+{: #see-also }
+{:.no_toc}
 
-堅牢なシェル スクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
+For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.

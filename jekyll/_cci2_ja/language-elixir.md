@@ -6,6 +6,9 @@ description: "Elixir プロジェクトの概要と構成例"
 categories:
   - language-guides
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 これは、単純な Phoenix Web アプリケーション用の注釈付き `config.yml` で、<https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix> から入手できます。
@@ -13,6 +16,7 @@ order: 2
 お急ぎの場合は、以下の構成をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) にコピーしてください。 お急ぎでなければ、全体に目を通し、十分に理解を深めることをお勧めします。
 
 ## 設定ファイルの例
+{: #sample-configuration }
 
 {% raw %}
 
@@ -23,9 +27,15 @@ jobs:  # 1 回の実行の基本作業単位
     parallelism: 1  # このジョブのインスタンスを 1 つだけ並列実行します
     docker:  # Docker でステップを実行します
       - image: circleci/elixir:1.7.3  # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:  # プライマリ コンテナの環境変数
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine  # データベース イメージ
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:  # データベースの環境変数
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
@@ -34,7 +44,6 @@ jobs:  # 1 回の実行の基本作業単位
     working_directory: ~/app  # ステップが実行されるディレクトリ
 
     steps:  # `build` ジョブを構成するコマンド
-
       - checkout  # ソース コードを作業ディレクトリにチェックアウトします
 
       - run: mix local.hex --force  # Hex をローカルにインストールします (プロンプトなし)
@@ -81,6 +90,7 @@ jobs:  # 1 回の実行の基本作業単位
 {% endraw %}
 
 ## 設定ファイルの詳細
+{: #config-walkthrough }
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -92,7 +102,7 @@ version: 2
 
 [`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 [CircleCI 提供の Elixir Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#elixir)を使用します。
 
@@ -102,16 +112,23 @@ jobs:
     parallelism: 1
     docker:
       - image: circleci/elixir:1.7.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
           POSTGRES_PASSWORD:
 
-    working_directory: ~/app 
+    working_directory: ~/app
 ```
+
 
 ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
@@ -133,9 +150,8 @@ jobs:
 [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
-
 ```yaml
-<br />      - restore_cache:
+      - restore_cache:
           keys:
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -149,19 +165,9 @@ jobs:
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
       - save_cache:
-          key: v1-mix-cache-{{ .Branch }}
-          paths: "deps"
-      - save_cache:
-          key: v1-mix-cache
-          paths: "deps"
-      - save_cache:
           key: v1-build-cache-{{ .Branch }}
           paths: "_build"
-      - save_cache:
-          key: v1-build-cache
-          paths: "_build"
 ```
-
 {% endraw %}
 
 最後に、データベースがオンラインになるまで待ち、テスト スイートを実行します。 テストの実行後、CircleCI Web アプリで使用できるようにテスト結果をアップロードします。
@@ -175,6 +181,26 @@ jobs:
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME
 ```
 
-## 関連項目
+## Parallelism
+{: #parallelism }
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/) [データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)
+**Splitting by Timings**
+
+As of version 2.0, CircleCI requires users to upload their own JUnit XML [test output](https://circleci.com/docs/2.0/collect-test-data/#enabling-formatters). Currently the main/only Elixir library that produces that output is [JUnitFormatter](https://github.com/victorolinasc/junit-formatter).
+
+In order to allow CircleCI's parallelization to use the `--split-by=timings` strategy with the XML output, you need to configure JUnitFormatter with the `include_filename?: true` option which will add the filename to the XML.
+
+By default, JUnitFormatter saves the output to the `_build/test/lib/<application name>` directory, so in your `.circleci/config.yml` you will want to configure the `store_test_results` step to point to that same directory:
+
+```
+  - store_test_results:
+      path: _build/test/lib/<application name>
+```
+
+However, JUnitFormatter also allows you to configure the directory where the results are saved via the `report_dir` setting, in which case, the `path` value in your CircleCI config should match the relative path of wherever you're storing the output.
+
+## 関連項目
+{: #see-also }
+
+[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
+[データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)

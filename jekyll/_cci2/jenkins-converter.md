@@ -5,6 +5,7 @@ short-title: "Jenkins Converter Introduction"
 description: "Starting point for how to use the Jenkins Converter"
 categories: [getting-started]
 order: 1
+noindex: true
 ---
 
 The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter) is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you to get started building on CircleCI quickly and easily.
@@ -41,7 +42,7 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 ### Executors
 {: #executors }
 
-A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor](https://circleci.com/docs/reference-2-1/#executors) regardless of the one defined within the Jenkinsfile input.
+A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
 
 Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
 

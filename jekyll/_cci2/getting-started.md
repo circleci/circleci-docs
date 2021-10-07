@@ -274,7 +274,7 @@ comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 {:.tab.switcher.Cloud}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server-v2}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
@@ -290,6 +290,7 @@ ls -al               # list what files and directories are in the current direct
 cd <directory_name>  # change directory to the <directory_name> directory
 cat <file_name>      # show me the contents of the file <file_name>
 ```
+**Note** To enable `rerun job with ssh`, you will need to follow the steps to [add ssh keys to your job](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job).
 
 ## Collaborating with teammates
 {: #collaborating-with-teammates }

@@ -6,14 +6,18 @@ description: "CircleCI 2.0 での Haskell を使用したビルドとテスト"
 categories:
   - language-guides
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-このガイドでは、CircleCI 2.0 で基本的な Haskell アプリケーションをビルドする方法について説明します。お急ぎの場合は、以下の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+このガイドでは、CircleCI 2.0 で基本的な Haskell アプリケーションをビルドする方法について説明します。 お急ぎの場合は、以下の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
-- 目次
+* 目次
 {:toc}
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
 CircleCI でビルドを行う Haskell プロジェクトのサンプルは、以下のリンクから確認できます。
@@ -23,7 +27,9 @@ target="_blank">GitHub 上の Haskell デモ プロジェクト</a>
 
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
+
 ## 設定ファイルの例
+{: #sample-configuration }
 
 {% raw %}
 
@@ -33,6 +39,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -66,6 +75,7 @@ jobs:
 {% endraw %}
 
 ## 設定ファイルの詳細
+{: #config-walkthrough }
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -88,6 +98,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 これで、この環境で Haskell ビルド ツール `stack` を実行するように設定できました。 `config.yml` ファイルの残りの部分はすべて `steps` キーのブロックです。
@@ -101,7 +114,6 @@ jobs:
 {% raw %}
 ```yaml
     steps:
-
       - checkout
       - restore_cache:
           name: キャッシュされた依存関係の復元
@@ -145,6 +157,7 @@ jobs:
 完了です。 これで Haskell アプリケーション用に CircleCI を構成できました。
 
 ## 一般的なトラブルシューティング
+{: #common-troubleshooting }
 
 `stack test` コマンドは、メモリ不足エラーで失敗する場合があります。 以下に示すように、`stack test` コマンドに `-j1` フラグを追加することを検討してみてください (メモ: これにより、テストを実行するコア数を 1 に減らして、メモリ使用量を抑えられますが、テストの実行時間が長くなる可能性があります)。
 
@@ -155,8 +168,10 @@ jobs:
 ```
 
 ## 関連項目
+{: #see-also }
 {:.no_toc}
 
 デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。通常、実際のプロジェクトはこれよりも複雑です。場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 自由に構成して試してみてください。
+

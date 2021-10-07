@@ -151,13 +151,15 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
+{% raw %}
+
 ```yaml
 version: 2
 jobs:
   build:
     docker:
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.8-jessie
+      - image: circleci/golang:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -170,8 +172,6 @@ jobs:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
 
-    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
-
     environment:
       TEST_RESULTS: /tmp/test-results
 
@@ -181,44 +181,45 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-pkg-cache
+            - go-mod-v1-{{ checksum "go.sum" }}
 
-      # Normally, this step would be in a custom primary image;
-      # we've added it here for the sake of explanation.
-      - run: go get github.com/lib/pq
-      - run: go get github.com/mattes/migrate
-      - run: go get github.com/jstemmer/go-junit-report
+      - run:
+          name: Get dependencies
+          command: |
+            go get -v
 
+      - run:
+          name: Get go-junit-report for setting up test timings on CircleCI
+          command: |
+            go get github.com/jstemmer/go-junit-report
+            # Remove go-junit-report from go.mod
+            go mod tidy
+
+      #  Wait for Postgres to be ready before proceeding
       - run:
           name: Waiting for Postgres to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z localhost 5432 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for Postgres && exit 1
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
       - run:
           name: Run unit tests
-          environment:
+          environment: # environment variables for the database url and path to migration files
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
+            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: |
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
       - run: make
 
       - save_cache:
-          key: v1-pkg-cache
+          key: go-mod-v1-{{ checksum "go.sum" }}
           paths:
-            - "/go/pkg"
+            - "/go/pkg/mod"
 
       - run:
           name: Start service
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
+            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: ./workdir/contacts
           background: true
 
@@ -234,6 +235,8 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
+
+{% endraw %}
 
 ## Example mysql project.
 {: #example-mysql-project }

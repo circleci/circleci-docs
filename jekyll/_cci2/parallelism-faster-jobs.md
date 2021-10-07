@@ -205,7 +205,7 @@ Using this example, here is a quick example of how you can accomplish test split
       cat circleci_test_files.txt
       TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
       # massage filepaths into format manage.py test accepts
-      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
       echo $TESTFILES
       pipenv run python manage.py test --verbosity=2 $TESTFILES  
 ```

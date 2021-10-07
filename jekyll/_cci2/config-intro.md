@@ -114,7 +114,7 @@ jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:14-browsers
     steps:
       - checkout
       - run:
@@ -179,7 +179,7 @@ jobs:
             echo '^^^That should look familiar^^^'
   Run-With-Node:
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:14-browsers
     steps:
       - run:
           name: Running In A Container With Node

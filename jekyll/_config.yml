@@ -9,17 +9,18 @@ url: "http://localhost:4040" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 devhub_base_url: "https://circleci.com/developer"
+noindex: false
 
 exclude:
   - .jekyll-cache
 
 plugins:
   - jekyll-include-cache
-  - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
+  - jekyll/minibundle
 
 algolia:
   application_id: U0RXNGRK45
@@ -64,11 +65,11 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.0.2
-      terraformversion: 0.13.0
+      serverversion: 3.2.0
+      terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
-      kotsversion: 1.44.1
+      kotsversion: 1.47.3
 
 asciidoctor:
   base_dir: _cci2/
@@ -77,11 +78,11 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.0.2
-    terraformversion: 0.13.0
+    serverversion: 3.2.0
+    terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
-    kotsversion: 1.44.1
+    kotsversion: 1.47.3
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -162,6 +163,12 @@ defaults:
     values:
       toc: true
 
+  # Disable suggested by default
+  - scope:
+      path: ""
+    values:
+      suggested: false
+
 t:
     translation_in_progress:
         ja: "このページはただいま翻訳中です"
@@ -172,5 +179,8 @@ analytics:
   events:
     go_button_clicked: go-button-clicked
 rollbar_env: development
+
+# Optimizely SDK key for dev env
+optimizely: "GfYszBpMkefBSwiiEkH3b3"
 
 # server_version: "2.18.4"

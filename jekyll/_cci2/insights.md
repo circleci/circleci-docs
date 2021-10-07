@@ -6,6 +6,7 @@ description: "Viewing the status of repos and test performance"
 order: 41
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -20,8 +21,8 @@ success rates, pipeline duration, and other pertinent information.
 
 This document describes how to access and use the Insights dashboard on CircleCI Cloud and Server.
 
-## Usage (CircleCI Cloud)
-{: #usage-circleci-cloud }
+## Usage
+{: #usage }
 
 Insights across your organization can be accessed from the sidebar of the
 CircleCI web application.
@@ -72,12 +73,12 @@ found in your organization's Plan Overview.</i>
 
 ---
 
-## CircleCI Server Insights
-{: #circleci-server-insights }
+## CircleCI Server v2.19.x Insights
+{: #circleci-server-v219x-insights }
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> The following section refers to using the Insights page on the CircleCI <i>Server</i> product. </span>
+  <span> The following section refers to using the Insights page on installations of CircleCI Server v2.19.x. </span>
 </div>
 
 ### Overview
@@ -113,3 +114,7 @@ The per-project insights page gives you access to the build status and build per
 {: #see-also }
 
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
+
+## Learn More
+{: #learn-more }
+Take the [insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.
