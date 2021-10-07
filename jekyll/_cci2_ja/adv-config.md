@@ -11,7 +11,7 @@ order: 2
 CircleCI は、高度な構成のためのオプションと機能を数多くサポートしています。 何ができるかについては、以下のスニペットを参照してください。 高度な構成を最適化するヒントも紹介します。
 
 ## スクリプトのチェック
-設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
+{: #check-your-scripts }
 
 Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
 
@@ -56,13 +56,40 @@ Use Selenium to manage in-browser tesing:
 
 ```yaml
 version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:buster-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
+For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/2.0/browser-testing/) guide.
+
+## データベースのテスト
+{: #database-testing }
+
+Use a service container to run database testing:
+
+``` yaml
+version: 2
 jobs:
   build:
 
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
-
+    # Primary container image where all commands run
     docker:
-
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
           username: mydockerhub-user
@@ -70,15 +97,13 @@ jobs:
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # サービス コンテナ イメージ
-
+    # Service container image
       - image: circleci/postgres:9.6.5-alpine-ram
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
-
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-9.6
@@ -97,34 +122,6 @@ jobs:
           -c "SELECT * from test"
 ```
 
-For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/2.0/browser-testing/) guide.
-
-## データベースのテスト
-{: #database-testing }
-
-Use a service container to run database testing:
-
-``` yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node-jessie-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: mkdir test-reports
-      - run:
-          name: Selenium のダウンロード
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Selenium の起動
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
-```
-
 For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/2.0/databases/) guide.
 
 ## Docker コマンドによる Docker イメージのビルド
@@ -133,12 +130,22 @@ For more information on configuring databases, see the [Configuring Databases]({
 Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
 
 ``` yaml
-Run Docker commands to build Docker images.
+version: 2
 
-      - setup_remote_docker
+jobs:
+  build:
+    docker:
+      - image: <primary-container-image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker # sets up remote docker container in which all docker commands will be run
 
       - run:
-          name: コンテナの起動と動作の検証
+          name: Start container and verify it's working
           command: |
             set -x
             docker-compose up -d
@@ -152,7 +159,7 @@ For more information on building Docker images, see the [Building Docker Images]
 ## 高度な構成のヒント
 {: #tips-for-advanced-configuration }
 
-Here are a few tips for optimization and maintaining a clear configuration file.
+設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
 
 - 長いインライン bash スクリプトを使用するのはやめましょう。 特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、クリアで読みやすい設定ファイルにします。
 - フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
@@ -163,4 +170,4 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 ## 関連項目
 {: #see-also }
 
-{{ site.baseurl }}/ja/2.0/optimizations/
+[Optimizations]({{ site.baseurl }}/ja/2.0/optimizations/) [Configuration Cookbook]({{ site.baseurl }}/ja/2.0/configuration-cookbook/)

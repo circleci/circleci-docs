@@ -12,15 +12,15 @@ version:
 CircleCI の API を使用したり、ビルドの詳細を確認したりするには、適切な権限を持つ API トークンが必要です。 ここでは、API トークンの種類と、トークンを作成および削除する方法について説明します。
 
 ## 概要
-CircleCI では 2 種類の API トークンを作成できます。
+{: #overview }
 
-There are two types of API tokens you can create within CircleCI.
+CircleCI では 2 種類の API トークンを作成できます。
 
   1. **パーソナル:** このトークンは CircleCI API とのやり取りに使用され、完全な読み取りアクセス権と書き込みアクセス権を付与します。
   2. **プロジェクト**: このトークンは、特定のプロジェクトに関する情報を提供し、読み取りアクセス権のみを付与します。 プロジェクト トークンには、*Status*、*Build Artifacts*、*All* の 3 つのスコープ オプションがあります。
     - *Status* トークン: プロジェクトのビルド ステータスへの読み取りアクセス権を付与します。 [ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)際に便利です。
-    - *All* トークン: プロジェクトのビルド ステータスおよびビルド アーティファクトへの読み取りアクセス権を付与します。
-    - *Build Artifacts* トークン: プロジェクトのビルド アーティファクトへの読み取りアクセス権を付与します。
+    - _Read Only_ tokens grant read only access to the project's API.
+    - _Admin_ tokens grant read and write access for the project's API.
 
 **メモ:** API トークンは、一度作成すると修正できません。 既存のトークンを変更するには、いったん削除してから再作成する必要があります。
 
@@ -34,7 +34,7 @@ There are two types of API tokens you can create within CircleCI.
   5. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
   6. トークンが表示されたら、別の場所にコピー & ペーストします。 トークンを再度表示することはできません。
 
-To delete a personal API token, click the X in the **Remove** column and confirm your deletion in the dialog window.
+パーソナル API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。
 
 ### プロジェクト API トークンの作成
 {: #creating-a-project-api-token }
@@ -46,7 +46,7 @@ To delete a personal API token, click the X in the **Remove** column and confirm
   5. **[Token Label (トークン ラベル)]** フィールドに、覚えやすいラベルを入力します。
   6. **[Add Token (トークンを追加する)]** ボタンをクリックします。
 
-To delete a project API token, Click the **X** in the **Remove** column for the token you wish to replace. When the confirmation window appears, enter the text DELETE in the form and click the Delete API Token button.
+プロジェクト API トークンを削除するには、**[[Remove (削除する)]** 列の [X] をクリックします。 確認ウィンドウが表示されたら、**[Remove (削除する)]** ボタンをクリックします。
 
 
 ### Rotating Personal and Project API Tokens
@@ -65,7 +65,7 @@ Because API Tokens can be shared, passed around between employees and teams, and
 1. Click the Create New Token button.
 1. In the Token name field, type a new name for the old token you are rotating. It can be the same name given to the old token.
 1. Click the Add API Token button.
-1. After the token appears, copy and paste it to another location. You will not be able to view the token again.
+1. トークンが表示されたら、別の場所にコピー & ペーストします。 トークンを再度表示することはできません。
 
 #### Rotating a Project API Token
 {: #rotating-a-project-api-token }
@@ -81,9 +81,9 @@ Because API Tokens can be shared, passed around between employees and teams, and
 ## 次のステップ
 {: #next-steps }
 
-Some possible usecases for an API token might be:
+API トークンは何らかの作業に活用されて初めて、その効力を発揮します。 たとえば以下のような用途が考えられます。
 
   - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)
-  - {{ site.baseurl }}/ja/2.0/api-job-trigger/
-  - {{ site.baseurl }}/ja/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード
+  - [ジョブを条件付きでトリガーする]({{ site.baseurl }}/ja/2.0/api-job-trigger/)
+  - [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/ja/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード)
   - ビルドに[環境変数を挿入する]({{ site.baseurl }}/ja/2.0/env-vars/#api-を使用した環境変数の挿入)

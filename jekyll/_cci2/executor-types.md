@@ -96,7 +96,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
 {: #public-convenience-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
-    - `circleci/node:7.10-jessie-browsers`
+    - `circleci/node:14.17-buster-browsers`
   - `name@digest`
     - `redis@sha256:34057dd7e135ca41...`
 
@@ -188,7 +188,7 @@ job. In Docker, the following resources classes are available:
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
 small                 | 1     | 2GB
-medium (default)      | 2     | 4GB
+medium                | 2     | 4GB
 medium+               | 3     | 6GB
 large                 | 4     | 8GB
 xlarge                | 8     | 16GB

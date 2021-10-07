@@ -27,13 +27,13 @@ CircleCI では、スコープや認証レベルに幅を持たせるために�
 Use Contexts to [further restrict access to environment variables](#setting-an-environment-variable-in-a-context). CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 For more information about controlling access to env vars with Contexts, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
 
 ## シークレットのマスキング
-以下の場合、環境変数の値はビルドの出力でマスキングされません。
+{: #secrets-masking }
 
 _シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
 
 シークレットのマスキングは、[Project Settings (プロジェクト設定)] または [Contexts (コンテキスト)] で設定されている環境変数に適用されます。 環境変数は、プロジェクトのシークレットやキーを保持します。 シークレットやキーはアプリケーションにとってきわめて重要なものです。 シークレットのマスキングは、`echo` や `print` が使用される際にジョブ出力における環境変数を不明瞭にすることで、CircleCI のセキュリティを強化します。
 
-**注:** この手順を実行しないと、**環境変数**や**コンテキスト**など、組織またはリポジトリの設定にアクセスできなくなる可能性があります。
+以下の場合、環境変数の値はビルドの出力でマスキングされません。
 
 * 環境変数の値が 4 文字未満
 * 環境変数の値が `true`、`True`、`false`、`False` のいずれか
@@ -43,17 +43,17 @@ _シークレットのマスキングは、オンプレミス版である Circle
 ## 組織とリポジトリの名前変更
 {: #renaming-orgs-and-repositories }
 
-環境変数は、以下に示す優先順位に従って使用されます。
+過去に CircleCI に接続した組織やリポジトリの名前を変更する場合は、以下の手順を参考にしてください。
 
 1. VCS で組織またはリポジトリの名前を変更します。
 2. 新しい組織またはリポジトリの名前を使用して CircleCI アプリケーションにアクセスします (例: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`)。
 3. プラン、プロジェクト、設定が正常に転送されたことを確認します。
 4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
 
-**注:** シェルによっては、`~/.tcshrc` や `~/.zshrc` などのシェル スタートアップ ファイルに新しい変数を付加しなければならない場合があります。
+**注:** この手順を実行しないと、**環境変数**や**コンテキスト**など、組織またはリポジトリの設定にアクセスできなくなる可能性があります。
 
 ## 環境変数の使用オプション
-環境変数の挿入例
+{: #environment-variable-usage-options }
 
 CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従った環境変数が使用されます。 有効な文字は、アルファベット (大文字と小文字)、数字、およびアンダースコアです。 環境変数の最初の文字はアルファベットにする必要があります。
 
@@ -61,7 +61,7 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 {: #order-of-precedence }
 {:.no_toc}
 
-以下のような `config.yml` を例に考えてみましょう。
+環境変数は、以下に示す優先順位に従って使用されます。
 
 1. `FOO=bar make install` など、`run` ステップの[シェル コマンド](#%E3%82%B7%E3%82%A7%E3%83%AB-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)で宣言された環境変数
 2. [`run` ステップ](#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)で `environment` キーを使用して宣言された環境変数
@@ -83,10 +83,10 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 安全なスクリプトのベスト プラクティスについては、「[シェル スクリプトの使用]({{ site.baseurl }}/ja/2.0/using-shell-scripts/#%E3%82%B7%E3%82%A7%E3%83%AB-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88-%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9)」を参照してください。
 
 ### 環境変数の構成例
-以下の例では、`$ORGNAME` と `$REPONAME` に挿入は行われません。
+{: #example-configuration-of-environment-variables }
 {:.no_toc}
 
-設定ファイルに値を挿入する方法として、以下のように、`run` ステップを使用して環境変数を `BASH_ENV` にエクスポートすることもできます。
+以下のような `config.yml` を例に考えてみましょう。
 
 ```yaml
 version: 2.1
@@ -140,19 +140,19 @@ workflows: # a single workflow with a single job called build
 
 この設定ファイルを実行すると、下図のように出力されます。 プロジェクトに格納されている環境変数がマスキングされ、`****` と表示されていることに注目してください。
 
-![Env Vars Interpolation Example]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
+![環境変数の挿入例]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
 
 上の設定ファイルと出力には、「今いるブランチを表示」という 2 つの類似するステップが含まれています。 これらのステップは、環境変数を読み取るための 2 つの方法を示しています。 なお、`${VAR}` 構文と `$VAR` 構文のどちらもサポートされています。 シェル パラメーターの展開については、[Bash のドキュメント](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion)を参照してください。
 
 ### パラメーターと Bash 環境の使用
-以下の 2 つのパラメーターをジョブに追加するだけで、`bash` で環境変数を使用できます。
+{: #using-parameters-and-bash-environment }
 {:.no_toc}
 
 原則として、CircleCI はビルド構成への環境変数の挿入をサポートしていません。 使用する値はリテラルとして扱われます。 そのため、`working_directory` を定義するときや、`PATH` を変更するとき、複数の `run` ステップで変数を共有するときに、問題が発生する可能性があります。
 
-1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
+ただし、[プライベート イメージ]({{ site.baseurl }}/2.0/private-images/)をサポートするため、Docker イメージ セクションは例外となっています。
 
-In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
+以下の例では、`$ORGNAME` と `$REPONAME` に挿入は行われません。
 
 ```yaml
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
@@ -197,7 +197,7 @@ workflows:
 
 詳細については、「[parameters 宣言の使用]({{ site.baseurl }}/ja/2.0/reusing-config/#parameters-%E5%AE%A3%E8%A8%80%E3%81%AE%E4%BD%BF%E7%94%A8)」を参照してください。
 
-Another possible method to interpolate values into your config is to use a `run` step to export environment variables to `BASH_ENV`, as shown below.
+設定ファイルに値を挿入する方法として、以下のように、`run` ステップを使用して環境変数を `BASH_ENV` にエクスポートすることもできます。
 
 ```yaml
 steps:
@@ -216,9 +216,9 @@ steps:
 {: #alpine-linux }
 {:.no_toc}
 
-複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
-結果の値を CircleCI 環境変数に格納します。
+1 つのジョブで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#job_name)を使用します。
 
 ```yaml
 version: 2.1
@@ -232,7 +232,6 @@ jobs:
 ```
 
 ## シェル コマンドでの環境変数の設定
-その変数を使用するコマンド内で変数をデコードします。
 
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%A8-bash-%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%BF%E7%94%A8)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
@@ -256,14 +255,14 @@ jobs:
             source $BASH_ENV
 ```
 
-CircleCI API v2 を使用すると、パイプライン パラメーターから変数を渡すことができます。
+**注:** シェルによっては、`~/.tcshrc` や `~/.zshrc` などのシェル スタートアップ ファイルに新しい変数を付加しなければならない場合があります。
 
 詳細については、シェルのドキュメントで環境変数の設定方法を参照してください。
 
 ## ステップでの環境変数の設定
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+{: #setting-an-environment-variable-in-a-step }
 
-1 つのジョブで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#job_name)を使用します。
+1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
 
 ```yaml
 version: 2.1
@@ -289,9 +288,9 @@ jobs:
 **注:** 各 `run` ステップは新しいシェルなので、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、[`BASH_ENV` を使用](#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%A8-bash-%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%BF%E7%94%A8)して値をエクスポートします。
 
 ## ジョブでの環境変数の設定
-ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
+{: #setting-an-environment-variable-in-a-job }
 
-詳細については、「[パイプライン変数]({{site.baseurl}}/2.0/pipeline-variables/)」を参照してください。
+[Contexts]({{ site.baseurl }}/ja/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
 
 ```yaml
 version: 2.1
@@ -311,7 +310,7 @@ jobs:
 **注: 7 桁以上の整数は指数表記に変換されます。 これを回避するには、整数を文字列として格納してください (例: "1234567")。**
 
 ## コンテキストでの環境変数の設定
-たとえば、以下のパラメーターを渡すとします。
+{: #setting-an-environment-variable-in-a-context }
 
 1. CircleCI アプリケーションで、左のナビゲーションにあるリンクをクリックして、[Organization Settings (組織設定)] に移動します。
 
@@ -388,7 +387,7 @@ jobs:
 作成された環境変数は、アプリケーションに表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
 
 ## コンテナでの環境変数の設定
-たとえば、以下のように `curl` を使用します。
+{: #setting-an-environment-variable-in-a-container }
 
 環境変数は Docker コンテナにも設定することができます。 設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#docker)を使用します。
 
@@ -437,40 +436,40 @@ jobs:
 ```
 
 ### 複数行にわたる環境変数のエンコード
-以下の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイに使用できます。
+{: #encoding-multi-line-environment-variables }
 {:.no_toc}
 
-If you are having difficulty adding a multiline environment variable, use `base64` to encode it.
+複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
 
 ```bash
 $ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 
-**注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{ site.baseurl }}/ja/2.0/pipeline-variables/#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E5%80%A4)」を参照してください。
+その変数を使用するコマンド内で変数をデコードします。
 
 ```bash
 $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
-Decode the variable in any commands that use the variable.
+その変数を使用するコマンド内で変数をデコードします。
 
 ```bash
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```
 
-[コンテキスト]({{ site.baseurl }}/2.0/contexts/) [シークレットのマスキングによって環境変数を非公開に保つ (英語)](https://circleci.com/ja/blog/keep-environment-variables-private-with-secret-masking/)
+**注:** すべてのコマンド ライン プログラムが `docker` と同じ方法で認証情報を受け取るわけではありません。
 
 ## API v2 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v2 }
 
-Pipeline parameters can be used to pass variables using the CircleCI API v2.
+CircleCI API v2 を使用すると、パイプライン パラメーターから変数を渡すことができます。
 
 [パイプラインをトリガーする]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById) API v2`` エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```sh
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -481,14 +480,14 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-**重要:** パイプライン パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/2.0/ja/lossary/#context)で確認できます。
+**重要:** パイプライン パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/2.0/glossary/#context)で確認できます。
 
-Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
+詳細については、「[パイプライン変数]({{site.baseurl}}/2.0/pipeline-variables/)」を参照してください。
 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }
 
-このビルドは、以下の環境変数を受け取ります。
+ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
 
 - 使用できるのは ASCII 文字、数字、アンダースコア文字のみです
 - 先頭に数字を使用することはできません
@@ -496,9 +495,9 @@ Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) 
 
 環境変数の通常の制限以外には、値自体への制限はなく、単純な文字列として扱われます。 ビルド パラメーターがロードされる順序は**保証されない**ため、ビルド パラメーターに値を挿入して別のビルド パラメーターに渡すことは避けてください。 ベスト プラクティスとして、独立した環境変数から成る順不同のリストとしてビルド パラメーターを設定することをお勧めします。
 
-**重要:** ビルド パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/2.0/ja/lossary/#context)で確認できます。
+**重要:** ビルド パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/2.0/glossary/#context)で確認できます。
 
-For example, when you pass the parameters:
+たとえば、以下のパラメーターを渡すとします。
 
 ```sh
 {
@@ -544,9 +543,9 @@ curl \
   https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
 ```
 
-In the above example, `$CIRCLE_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
+このビルドは、以下の環境変数を受け取ります。
 
-環境変数の優先順位
+このビルドは、以下の環境変数を受け取ります。
 
 ```sh
 export param1="value1"
@@ -558,11 +557,11 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 ## 定義済み環境変数
 {: #built-in-environment-variables }
 
-The following environment variables are exported in each build and can be used for more complex testing or deployment.
+以下の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイに使用できます。
 
 **注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。
 
-詳細については、「[シェル コマンドでの環境変数の設定](#%E3%82%B7%E3%82%A7%E3%83%AB-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)」を参照してください。
+詳細については、シェルのドキュメントで環境変数の設定方法を参照してください。
 
 | 変数                          | タイプ  | 値                                                                                                                                                                                                                                                                                         |
 | --------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -573,7 +572,7 @@ The following environment variables are exported in each build and can be used f
 | `CIRCLE_BUILD_URL`          | 文字列  | CircleCI での現在のジョブの URL                                                                                                                                                                                                                                                                    |
 | `CIRCLE_JOB`                | 文字列  | 現在のジョブの名前                                                                                                                                                                                                                                                                                 |
 | `CIRCLE_NODE_INDEX`         | 整数   | (並列処理を有効化してジョブを実行する場合) 現在の並列実行の総数であり、 設定ファイルの `parallelism` の値と等しくなります。 0 から "`CIRCLE_NODE_TOTAL` - 1" までの値を取ります。                                                                                                                                                                         |
-| `CIRCLE_NODE_TOTAL`         | 整数   | (並列処理を有効化してジョブを実行する場合) 現在の並列実行の総数であり、 設定ファイルの `parallelism` の値と等しくなります。                                                                                                                                                                                                                   |
+| `CIRCLE_NODE_TOTAL`         | 整数   | For jobs that run with parallelism enabled, this is the number of parallel runs. This is equivielnt to the value of `parallelism` in your config file.                                                                                                                                    |
 | `CIRCLE_PR_NUMBER`          | 整数   | 関連付けられた GitHub または Bitbucket プル リクエストの番号。 フォークされた PR でのみ使用できます。                                                                                                                                                                                                                           |
 | `CIRCLE_PR_REPONAME`        | 文字列  | プル リクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークされた PR でのみ使用できます。                                                                                                                                                                                                                       |
 | `CIRCLE_PR_USERNAME`        | 文字列  | プル リクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークされた PR でのみ使用できます。                                                                                                                                                                                                                      |
@@ -592,13 +591,12 @@ The following environment variables are exported in each build and can be used f
 | `CIRCLE_COMPARE_URL`        | 文字列  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{ site.baseurl }}/2.0/pipeline-variables/)" が導入されています。                                                                                                                         |
 | `CI_PULL_REQUEST`           | 文字列  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUEST` の使用が推奨されます。                                                                                                                                                                                                           |
 | `CI_PULL_REQUESTS`          | リスト  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUESTS` の使用が推奨されます。                                                                                                                                                                                                          |
-
 {:class="table table-striped"}
 
-**Note:** For a list of pipeline values and parameters, refer to the [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) page.
+**注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{ site.baseurl }}/ja/2.0/pipeline-variables/#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E5%80%A4)」を参照してください。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-[Contexts]({{ site.baseurl }}/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
+[コンテキスト]({{ site.baseurl }}/2.0/contexts/) [シークレットのマスキングによって環境変数を非公開に保つ (英語)](https://circleci.com/ja/blog/keep-environment-variables-private-with-secret-masking/)

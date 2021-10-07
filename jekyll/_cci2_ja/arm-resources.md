@@ -22,7 +22,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 * `ubuntu-2004:202101-01` - 最新版であり、すべてのユーザーに推奨
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
+いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。 この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
 ## 料金と提供プラン
 {: #pricing-and-availability }
@@ -37,7 +37,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
-現時点では、Arm リソース クラスはクラウド版 CircleCI でしか利用できません。 現在 CircleCI Server を利用しており、Arm リソースの使用を希望される場合は、クラウド版 CircleCI アカウントを作成することを検討してください。または、カスタマー サクセス マネージャーに CircleCI Server 用の Arm についてお問い合わせください。
+現時点では、Arm リソース クラスはクラウド版 CircleCI でしか利用できません。 現在 CircleCI Server を利用しており、Arm リソースの使用を希望される場合は、クラウド版 CircleCI アカウントを作成することを検討してください。 または、カスタマー サクセス マネージャーに CircleCI Server 用の Arm についてお問い合わせください。
 
 ## Arm リソースの使用方法
 {: #using-arm-resources }
@@ -81,3 +81,7 @@ workflows:
 * 現時点では、32 ビット版の Arm アーキテクチャはサポートされていません。 サポート対象は 64 ビット版の `arm64` アーキテクチャのみです。
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるに連れ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
+
+## Learn More
+{: #learn-more }
+Take the [Arm course](https://academy.circleci.com/arm-course) with CircleCI Academy to learn more about using Arm resources and associated use cases.

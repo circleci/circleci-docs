@@ -43,18 +43,16 @@ To read about our customer support policy regarding beta images, please check ou
 ### Apple silicon support
 {: #apple-silicon-support }
 
-**Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
+It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
-
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner](https://circleci.com/docs/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
- `13.0.0` | Xcode 13.0 Beta 2 (13A5155e) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5801/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-2-released/40583)
+ `13.0.0` | Xcode 13.0 (13A233) | 11.5.2 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-rc-released/41256)
  `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)
  `12.4.0` | Xcode 12.4 (12D4e) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)
  `12.3.0` | Xcode 12.3 (12C33) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)
@@ -70,18 +68,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `11.1.0` | Xcode 11.1 (11A1027)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)
  `11.0.0` | Xcode 11.0 (11A420a)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)
  `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
- `10.2.1` | * Xcode 10.2.1 (10E1001)    | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)
- `10.1.0` | * Xcode 10.1 (10B61)        | 10.13.6 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)
- `10.0.0` | * Xcode 10.0 (10A255)       | 10.13.6 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)
- `9.4.1`  | * Xcode 9.4.1 (9F2000)      | 10.13.3 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
 {: class="table table-striped"}
-
-**Note:** The following images are deprecated and scheduled for removal on 14 September 2021. Please migrate away from these images as soon as possible. For more information, please see the [announcement thread on our forum](https://discuss.circleci.com/t/xcode-deprecation-notice-9-4-1-10-0-0-10-1-0-and-10-2-1/40515).
-
-* Xcode 9.4.1
-* Xcode 10.0.0
-* Xcode 10.1.0
-* Xcode 10.2.1
 
 ## Getting started
 {: #getting-started }
@@ -251,13 +238,24 @@ As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible 
 
 Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
-To switch to another Ruby version, see [our chruby documentation](#images-using-xcode-112-and-later). To revert back to the system Ruby, add the following to the beginning of your job:
+To switch to another Ruby version, add the following to the beginning of your job.
 
 ```yaml
 # ...
 run:
   name: Set Ruby Version
-  command: echo 'chruby system' >> ~/.bash_profile
+  command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+```
+
+Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+
+To revert back to the system Ruby, add the following to the beginning of your job:
+
+```yaml
+# ...
+run:
+  name: Set Ruby Version
+  command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
@@ -333,6 +331,53 @@ You can then ensure you are using those, by prefixing commands with `bundle exec
 steps:
   - run: bundle exec pod install
 ```
+
+## Using NodeJS
+{: #using-nodejs }
+
+The Xcode images are supplied with at least one version of NodeJS ready to use.
+
+### Images using Xcode 13 and later
+{: #images-using-xcode-13-and-later }
+
+These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)], or by running `nvm ls` during a job.
+
+To set the `current` version as the default:
+
+```yaml
+# ...
+steps:
+  - run: nvm alias default node
+```
+
+To revert to the `lts` release:
+
+```yaml
+# ...
+steps:
+  - run: nvm alias default --lts
+```
+
+To install a specific version of NodeJS and use it:
+
+```yaml
+# ...
+steps:
+  - run: nvm install 12.22.3 && nvm alias default 12.22.3
+```
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+
+### Images using Xcode 12.5 and earlier
+{: #images-using-xcode-125-and-earlier }
+
+These images come with at least one version of NodeJS installed directly using `brew`.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
 
 ## Using Homebrew
 {: #using-homebrew }

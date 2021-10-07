@@ -32,6 +32,8 @@ The orb development kit refers to a suite of tools that work together to simplif
 ### Getting started
 {: #getting-started }
 
+**Note:** While the outlined process below only mentions GitHub, the development kit also works with Bitbucket repositories.
+
 To begin creating your new orb with the orb development kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
 Ensure the organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
@@ -39,15 +41,16 @@ Ensure the organization on GitHub is the owner for the [namespace]({{site.baseur
 1. **Create a new [GitHub repository](https://github.com/new).**<br/>
 The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Write down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+
+    **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
+    {: class="alert alert-warning"}
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
-
 To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-
 To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb --private
@@ -60,6 +63,8 @@ The `circleci orb init` command is called, followed by a path that will be creat
   ▸ Yes, walk me through the process.
     No, I'll handle everything myself.
 ```
+When choosing the manual option, see [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
+
 When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. <br/><br/>
 For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
 Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.

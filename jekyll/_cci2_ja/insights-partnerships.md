@@ -40,7 +40,7 @@ CircleCI ダッシュボードは、ダッシュボードのホームページ�
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
-ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。この Orb は、追跡するプロジェクトに含まれている必要があります。
+ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。 この Orb は、追跡するプロジェクトに含まれている必要があります。
 
 #### Sumo Logic Orb
 {: #the-sumo-logic-orb }
@@ -70,6 +70,20 @@ workflows:
   build-test-and-deploy:
     jobs:
       - sumologic/workflow-collector # このジョブを追加してワークフローを追跡します
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
       - build
       - test:
           requires:

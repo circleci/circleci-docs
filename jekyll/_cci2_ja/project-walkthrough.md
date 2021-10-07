@@ -24,7 +24,7 @@ The source for the demo application is available on GitHub: <https://github.com/
 {: #basic-setup }
 {:.no_toc}
 
-The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file may be comprised of several [`Jobs`]({{ site.baseurl }}/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
+The [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) file may be comprised of several [`Jobs`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/ja/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
 
 Following is a minimal example for our demo project with all configuration nested in the `build` job:
 
@@ -81,7 +81,7 @@ The environment variables for the *primary container* set some config specific t
 
 The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `root` with an empty password, and a database called `circle_test`.
 
-## Installing dependencies
+## 依存関係のインストール
 {: #installing-dependencies }
 
 Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
@@ -131,6 +131,7 @@ An environment variable defined in a `run:` key will override image-level variab
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -154,7 +155,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -162,26 +163,29 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
 ```
+{% endraw %}
 
 The following describes the detail of the added key values:
 
-- `restore_cache:` ステップでは、キー テンプレートに一致するキーを持つキャッシュを検索します。 キー テンプレートは `deps1-` で始まり、`{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}` を使用して現在のブランチ名が埋め込まれています。 `requirements.txt` ファイルのチェックサムも、`{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}` を使用してキー テンプレートに埋め込まれています。 CircleCI は、テンプレートに一致する最新のキャッシュを復元します。 このとき、キャッシュが保存されたブランチ、およびキャッシュされた virtualenv の作成に使用された `requirements/dev.txt` ファイルのチェックサムが一致する必要があります。
+- `restore_cache:` ステップでは、キー テンプレートに一致するキーを持つキャッシュを検索します。 キー テンプレートは `deps1-` で始まり、`{% raw %}{{ .Branch }}{% endraw %}` を使用して現在のブランチ名が埋め込まれています。 `requirements.txt` ファイルのチェックサムも、`{% raw %}{{ checksum "requirements/dev.txt" }}{% endraw %}` を使用してキー テンプレートに埋め込まれています。 CircleCI は、テンプレートに一致する最新のキャッシュを復元します。 このとき、キャッシュが保存されたブランチ、およびキャッシュされた virtualenv の作成に使用された `requirements/dev.txt` ファイルのチェックサムが一致する必要があります。
 
 - `Python deps を venv にインストール`という名前の `run:` ステップは、前述のとおり、Python の依存関係をインストールする仮想環境を作成してアクティブ化します。
 
 - `save_cache:` ステップは、指定されたパス (この例では `venv`) からキャッシュを作成します。 キャッシュキーは、`key:` で指定したテンプレートから作成されます。 このとき、CircleCI で保存されたキャッシュが `restore_cache:` ステップで検出できるように、必ず `restore_cache:` ステップと同じテンプレートを使用してください。 キャッシュを保存する前に、CircleCI はテンプレートからキャッシュ キーを生成します。 生成されたキーに一致するキャッシュが既に存在する場合、CircleCI は新しいキャッシュを保存しません。 テンプレートにはブランチ名と `requirements/dev.txt` のチェックサムが含まれるため、ジョブが別のブランチで実行されるか、`requirements/dev.txt` のチェックサムが変化すると、CircleCI は新しいキャッシュを作成します。
 
-You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
+You can read more about caching [here]({{ site.baseurl }}/ja/2.0/caching).
 
 ## Installing and running Selenium to automate browser testing
 {: #installing-and-running-selenium-to-automate-browser-testing }
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 
+
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -215,12 +219,14 @@ jobs:
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
+{% endraw %}
 
 ## Running tests
 {: #running-tests }
 
 In the demo application, a virtual Python environment is set up, and the tests are run using unittest. This project uses `unittest-xml-reporting` for its ability to save test results as XML files. In this example, reports and results are stored in the `store_artifacts` and `store_test_results` steps.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -254,7 +260,7 @@ jobs:
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -262,7 +268,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
       - run:
@@ -275,6 +281,7 @@ jobs:
       - store_test_results:
           path: test-reports/
 ```
+{% endraw %}
 
 Notes on the added keys:
 
@@ -288,7 +295,7 @@ Notes on the added keys:
 
 ![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 
-Read more about [artifact storage]({{ site.baseurl }}/2.0/artifacts) and [test results]({{ site.baseurl }}/2.0/collect-test-data/).
+Read more about [artifact storage]({{ site.baseurl }}/ja/2.0/artifacts) and [test results]({{ site.baseurl }}/ja/2.0/collect-test-data/).
 
 ## Heroku へのデプロイ
 {: #deploying-to-heroku }
@@ -303,6 +310,8 @@ If you have not completed any or all of these steps, follow the [instructions]({
 
 **Note:** If you fork this demo project, rename the Heroku project, so you can deploy to Heroku without clashing with the namespace used in this tutorial.
 
+
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -326,7 +335,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -334,7 +343,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
       - run:
@@ -354,6 +363,7 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
+{% endraw %}
 
 Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
@@ -387,6 +397,7 @@ heroku restart
 
 To deploy `master` to Heroku automatically after a successful `master` build, add a `workflows` section that links the `build` job and the `deploy` job.
 
+{% raw %}
 ```yaml
 workflows:
   version: 2
@@ -422,7 +433,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -430,7 +441,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
       - run:
@@ -450,9 +461,9 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
-
+{% endraw %}
 ## See also
 {: #see-also }
 {:.no_toc}
 
-For more information about Workflows, see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
+To deploy `master` to Heroku automatically after a successful `master` build, add a `workflows` section that links the `build` job and the `deploy` job.

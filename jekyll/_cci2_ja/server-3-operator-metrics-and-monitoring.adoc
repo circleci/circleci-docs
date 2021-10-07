@@ -1,52 +1,58 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Metrics and Monitoring
+= CircleCI Server v3.x のメトリクスと監視
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Metrics such as CPU or memory usage and internal metrics are useful in:
+CPU やメモリの使用率などのメトリクス、および内部メトリクスを活用すると、以下のことに役立ちます。
 
-* Quickly detecting incidents and abnormal behavior
-* Dynamically scaling compute resources
-* Retroactively understanding infrastructure-wide issues
+* インシデントや異常な動作をすばやく検出する
+* コンピューティング リソースを動的にスケールする
+* インフラ全体の問題をさかのぼって把握する
 
 toc::[]
 
-== Metrics Collection
+== メトリクスの収集
 
-=== Scope
-Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring
-the health of your system and debug issues with your installation.
+=== スコープ
+CircleCI Server では、システムのヘルス状態の監視や、システムの問題のデバッグに役立つ各種メトリクスとログをデフォルトで収集します。
 
+NOTE: データは最大 15 日間保持されます。
 
-NOTE: Data is retained for a maximum of 15 days.
-
-NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI server install. It will scrape metrics
-from your entire cluster by default. You may disable Prometheus from within the kots admin console config if needed.
-
+NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみに限定されていません。 デフォルトでは、クラスタ全体からメトリクスを収集します。 必要に応じて、KOTS 管理者コンソールの [Config (構成)] から Prometheus を無効にできます。
 
 === Prometheus
-https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
-implementation of monitoring common performance metrics. 
+https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラート システムです。 CircleCI Server 3.x には、一般的なパフォーマンス メトリクスの監視が実装されています。 
 
-=== Kots Admin - Metrics Graphs
-By default, an instance of Prometheus is deployed with your CircleCI server install. Once deployed, you may provide the 
+=== KOTS 管理者 - メトリクス グラフ
+デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 Once deployed, you may provide the 
 address for your Prometheus instance to the kots admin dashboard. Kots will use this address to generate graph data for 
 the cpu and memory usage of containers in your cluster.
 
-The default Prometheus address is `http://prometheus-server`
+デフォルトの Prometheus アドレスは、`http://prometheus-server` です。
 
-From the kots dashboard, select "configure graphs". Then enter `http://prometheus-server` and kots will generate resource
-usage graphs.
+KOTS ダッシュボードの [Configure graphs (グラフの構成)] を選択し、 `http://prometheus-server` と入力すると、KOTS でリソース使用率グラフが生成されます。
 
 === Telegraf
-Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
-The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
-by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a
-metrics endpoint for Prometheus to scrape.
+CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
+この構成は完全にカスタマイズ可能で、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
+
+=== Telegraf から Datadog へのメトリクスの転送
+以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
+
+管理コンソール ダッシュボードを開いて、メニュー バーの *[Config (構成)]* を選択します。 *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム構成)]* を見付けます。 編集可能なテキスト ウィンドウがあり、CircleCI Server の Telegraf メトリクスの転送するためのプラグインを構成できます。 Datadog に転送する場合は、以下のコードを追加します。 ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
+
+```
+[[outputs.datadog]]
+  ## "my-secret-key" を Datadog API キーに置き換える
+  apikey = "my-secret-key"
+```
+
+詳細については、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント]を参照してください。
+

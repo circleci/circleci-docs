@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This chapter is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI. 使用状況統計データを活用すれば、CircleCI Server の可視性が向上するだけでなく、サポートが強化され、CircleCI 1.0 から CircleCI 2.0 への移行がスムーズに行えます。
+This chapter is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI. Usage statistics data enhances visibility into CircleCI installations and is used to better support you and ensure a smooth transition from CircleCI 1.0 to CircleCI 2.0.
 
 toc::[]
 
@@ -19,158 +19,158 @@ To opt-in to this feature, navigate to your Management Console settings (e.g. ci
 .Usage Statistics Settings
 image::usage-statistics-setting.png[Send Usage Statistics]
 
-== 使用状況統計の詳細
+== Detailed Usage Statistics
 
-以下のセクションでは、この設定を有効にした場合に CircleCI が収集する使用状況統計に関する情報を提供します。
+The following sections provide information about the usage statistics CircleCI will gather when this setting is enabled.
 
-=== 週単位のアカウント使用状況
+=== Weekly Account Usage
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| **名前**
-| **タイプ**
-| **目的**
+| **Name**
+| **Type**
+| **Purpose**
 
 | account_id
 | UUID
-| _各 vcs アカウントを一意に識別します。_
+| _Uniquely identifies each vcs account_
 
 | usage_current_macos
-| 分
-| _各アカウントについて、1 週間で実行されたビルドを分単位で記録します。_
+| minutes
+| _For each account, track weekly builds performed in minutes._
 
 | usage_legacy_macos
-| 分
+| minutes
 |
 
 | usage_current_linux
-| 分
+| minutes
 |
 
 | usage_legacy_linux
-| 分
+| minutes
 |
 |===
 
-=== 週単位のジョブ アクティビティ
+=== Weekly Job Activity
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 [cols="4,2,2"]
 |===
-| **名前**
-| **タイプ**
-| **目的**
+| **Name**
+| **Type**
+| **Purpose**
 
 | utc_week
-| 日付
-|	_以下のデータが適用される週を識別します。_
+| date
+|	_Identifies which week the data below applies to_
 
 | usage_oss_macos_legacy
-| 分
-| _1 週間で実行されたビルドを記録します。_
+| minutes
+| _Track builds performed by week_
 
 | usage_oss_macos_current
-| 分
+| minutes
 |
 
 | usage_oss_linux_legacy
-| 分
+| minutes
 |
 
 | usage_oss_linux_current
-|	分
+|	minutes
 |
 
 | usage_private_macos_legacy
-| 分
+| minutes
 |
 
 | usage_private_macos_current
-| 分
+| minutes
 |
 
 | usage_private_linux_legacy
-| 分
+| minutes
 |
 
 | usage_private_linux_current
-| 分
+| minutes
 |
 
 | new_projects_oss_macos_legacy
-| 合計
+| sum
 | _Captures new Builds performed on 1.0. Observe if users are starting new projects on 1.0._
 
 | new_projects_oss_macos_current
-| 合計
+| sum
 |
 
 | new_projects_oss_linux_legacy
-| 合計
+| sum
 |
 
 | new_projects_oss_linux_current
-| 合計
+| sum
 |
 
 | new_projects_private_macos_legacy
-| 合計
+| sum
 |
 
 | new_projects_private_macos_current
-| 合計
+| sum
 |
 
 | new_projects_private_linux_legacy
-| 合計
+| sum
 |
 
 | new_projects_private_linux_current
-| 合計
+| sum
 |
 
 | projects_oss_macos_legacy
-| 合計
+| sum
 | _Captures Builds performed on 1.0 and 2.0. Observe if users are moving towards 2.0 or staying with 1.0._
 
 | projects_oss_macos_current
-| 合計
+| sum
 |
 
 | projects_oss_linux_legacy
-| 合計
+| sum
 |
 
 | projects_oss_linux_current
-| 合計
+| sum
 |
 
 | projects_private_macos_legacy
-| 合計
+| sum
 |
 
 | projects_private_macos_current
-| 合計
+| sum
 |
 
 | projects_private_linux_legacy
-| 合計
+| sum
 |
 
 | projects_private_linux_current
-| 合計
+| sum
 |
 |===
 
-== 使用状況データへのアクセス
-このデータにプログラムでアクセスして、組織内の使用状況をさらに詳しく把握したいときには、Services VM からこのコマンドを実行します。
+== Accessing Usage Data
+If you would like programatic access to this data in order to better understand your users you may run this command from the Services VM.
 
 ```shell
 docker exec usage-stats /src/builds/extract
 ```
 
-=== セキュリティとプライバシー
+=== Security and Privacy
 
-セキュリティとプライバシーに関する CircleCI の開示情報は、契約条件の別紙 C および CircleCI のhttps://circleci.com/legal/enterprise-license-agreement/[標準ライセンス契約]にてご覧いただけます。
+Please reference exhibit C within your terms of contract and our https://circleci.com/legal/enterprise-license-agreement/[standard license agreement] for our complete security and privacy disclosures.

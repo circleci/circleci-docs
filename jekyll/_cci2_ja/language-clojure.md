@@ -20,14 +20,14 @@ version:
 {: #overview }
 {:.no_toc}
 
-他のテスト ツールを使用する場合は、別の `lein` タスクを実行するようにそのステップを調整するだけです。
+お急ぎでなければ、[設定ファイルの詳細](#config-walkthrough)に目を通すことをお勧めします。
 
 ここでは、以下を前提としています。
 
 * Leiningen の組み込み `test` タスクを含む `clojure.test` を使用している
 * アプリケーションをオールインワン uberjar として配布できる
 
-If you use another testing tool, you can just adjust that step to run a different `lein` task.
+他のテスト ツールを使用する場合は、別の `lein` タスクを実行するようにそのステップを調整するだけです。
 
 ## 設定ファイルの例
 {: #sample-configuration }
@@ -41,6 +41,9 @@ jobs: # 1 回の実行の基本作業単位
     working_directory: ~/cci-demo-clojure # ステップが実行されるディレクトリ
     docker: # Docker でステップを実行します
       - image: circleci/clojure:lein-2.9.1 # ...このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment: # プライマリ コンテナの環境変数
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # メモリ不足エラーを回避するために最大ヒープ サイズを制限します
@@ -63,18 +66,18 @@ jobs: # 1 回の実行の基本作業単位
 {% endraw %}
 
 ## コードの取得
-常にバージョンの指定から始めます。
+{: #get-the-code }
 
-上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
+上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
 
-ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
+ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Projects dashboard (プロジェクトの追加)](https://app.circleci.com/projects/){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
-他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
+これで `config.yml` を最初からビルドする準備ができました。
 
 ## 設定ファイルの詳細
-`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
+{: #config-walkthrough }
 
-`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
+常にバージョンの指定から始めます。
 
 ```yaml
 version: 2
@@ -91,18 +94,21 @@ jobs:
     working_directory: ~/cci-demo-clojure
 ```
 
-この `build` ジョブ内にいくつかの `steps` を追加します。
+他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
 
-コードベースで作業できるように、最初に `checkout` を置きます。
+`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
 
 ```yaml
 version: 2
 ...
     docker:
       - image: circleci/clojure:lein-2.9.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
+`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
 
 ここでは、メモリ不足エラーが発生しないように、`JVM_OPTS` を設定して最大ヒープ サイズを制限します。 標準のコンテナの制限は 4 GB ですが、JVM がヒープ外に確保する分と Leiningen 自体のために、いくらかの容量を残しておきます (場合によっては、`lein trampoline ...` を使用して Leiningen のオーバーヘッドを回避できます)。 (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) たとえば、データベースまたはキューのためのバックグラウンド コンテナがある場合は、メインの JVM ヒープにメモリを割り当てる際にそれらのコンテナを考慮してください。
 
@@ -114,9 +120,9 @@ We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circl
       LEIN_ROOT: nbd
 ```
 
-Now we’ll add several `steps` within the `build` job.
+この `build` ジョブ内にいくつかの `steps` を追加します。
 
-We start with `checkout` so we can operate on the codebase.
+コードベースで作業できるように、最初に `checkout` を置きます。
 
 次に、キャッシュをプル ダウンします (存在する場合)。 初回実行時、または `project.clj` を変更した場合、これは実行されません。 さらに `lein deps` を実行して、プロジェクトの依存関係をプル ダウンします。 通常、このタスクは必要時に自動的に実行されるため、これを直接呼び出すことはありません。 ただし、このタスクを直接呼び出すことで、`save_cache` ステップを挿入して依存関係を保存し、次回の処理を高速化することができます。
 
@@ -128,7 +134,6 @@ We start with `checkout` so we can operate on the codebase.
 ```yaml
 ...
     steps:
-
       - checkout
       - restore_cache:
           key: cci-demo-clojure-{{ checksum "project.clj" }}
@@ -150,7 +155,7 @@ We start with `checkout` so we can operate on the codebase.
 {: #see-also }
 {:.no_toc}
 
-デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 ### 詳細な例
 {: #detailed-examples }

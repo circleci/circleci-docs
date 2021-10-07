@@ -38,9 +38,11 @@ CircleCI でダイナミック コンフィグの使用を開始するには、�
 
 これで、プロジェクトで設定ファイルの動的な生成と更新ができるようになりました。
 
-ダイナミック コンフィグを使用する場合には、`セットアップ` ワークフローの終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。詳しくは、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照)。
+Note: While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will not be used until you add the key `setup` with a value of `true` to that `config.yml`.
 
-`セットアップ` ワークフローを使用してダイナミック コンフィグを利用する方法の基本的な例は、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 クックブックには、他にも詳しい例が掲載されています。クックブックの内容は、この機能の開発に合わせて更新される予定です。
+ダイナミック コンフィグを使用する場合には、`セットアップ` ワークフローの終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。 詳しくは、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照)。
+
+`セットアップ` ワークフローを使用してダイナミック コンフィグを利用する方法の基本的な例は、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 クックブックにはより詳細な例が掲載されており、この機能の成熟に合わせて更新される予定です。
 
 CircleCI のダイナミック コンフィグを使用する際のパイプライン作成/続行プロセスのバックグラウンド処理に関する詳細は、[GitHub の公開リポジトリ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts)を参照してください。
 
@@ -68,3 +70,7 @@ CircleCI のダイナミック コンフィグを使用する際のパイプラ�
   - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
+
+## Learn More
+{: #learn-more }
+Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config) with CircleCI Academy to learn more.

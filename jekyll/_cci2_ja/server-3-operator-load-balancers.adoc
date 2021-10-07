@@ -1,0 +1,37 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= CircleCI Server v3.x ロード バランサー
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI Server では、ロード バランサーを使用して Kubernetes サービス クラスタで送受信されるネットワーク トラフィックを管理しています。 Nomad クラスタへのトラフィックを管理するロード バランサーは 3 つあり、すべて VPC の内部ロード バランサーです。 これらは、さまざまなコンピューティング リソースへのジョブの分散を管理しています。 
+
+フロントエンド ロード バランサーは、API、CLI、および CircleCI アプリなどを通じた、開発者や VCS からのトラフィックを管理しています。 フロントエンド ロード バランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
+
+toc::[]
+
+== フロントエンド ロード バランサーを非公開にする
+
+[WARNING]
+==== 
+*Web フック:* フロントエンド ロード バランサーを非公開にする場合、Web フックを機能させるために、以下に示す VCS に応じた条件を満たす必要があります。 
+
+* *GitHub Enterprise* – CircleCI Server が GHE と同じ内部ネットワークにあること。 
+* *github.com* – 受信 Web フックのプロキシをセットアップし、Web フック ホスト URL のオーバーライドとして設定すること。 この設定は、CircleCI アプリの *[Admin Settings (管理者設定)]* > *[System Settings (システム設定)]* > *[Override webhook host URL (Web フック ホスト URLのオーバーライド)]* にあります。
+====
+
+NOTE: プライベート ロード バランサー オプションは、GKE または EKS 上の CircleCI Server でのみ使用できます。
+
+. 管理コンソールで、メニュー バーの *[Config (構成)]* を選択し、*[General Settings (全般設定)]* の下にある *[Private load balancers (プライベート ロード バランサー)]* オプションに移動します。
+
+. *[Private load balancers (プライベート ロード バランサー)]* の横にあるチェック ボックスをオンにします。
++
+NOTE: Let's Encrypt の TLS 証明書を使用している場合、このチェック ボックスは表示されません。 Let's Encrypt のチェック ボックスをオフにすると、プライベート ロード バランサーのオプションが表示されます。
+
+CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロード バランサーに送信されるよう古いパブリック ロード バランサーの削除が必要な場合があります。

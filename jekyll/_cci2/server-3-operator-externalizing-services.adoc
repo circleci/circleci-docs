@@ -10,18 +10,34 @@ version:
 :toc: macro
 :toc-title:
 
+This document describes how to configure the following external services for use with a CircleCI server 3.x installation. The settings described in this guide can be found in the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+
+* PostgreSQL
+* MongoDB
+* Vault
+
 toc::[]
-
-== External Database and Vault Setup for CircleCI Installations
-This document describes how to configure the following external services for use with a CircleCI server 3.0 Installation:
-
-* PostgreSQL v12.6
 
 == PostgreSQL
 
+NOTE: If using your own PostgresSQL instance it needs to be version 12.1 or greater. 
+
+.External PostgreSQL
+image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
+
+If you choose to use an external PostgreSQL instance, complete the following fields: 
+
+* *PostgreSQL Service Domain (required)* - The domain or IP address of your PostgreSQL instance. 
+
+* *PostgreSQL Service Port (required)* - The port of your PostgreSQL instance. 
+
+* *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance. 
+
+* *PostgreSQL Service Password (required)* - The password of the user used to access your PostgreSQL instance. 
+
 === Best Practices for your PostgreSQL
 
-Consider running at least two or more PostgreSQL replicas to enable recovery from primary failure and for backups. Following are the recommended specifications of the PostgreSQL machines:
+Consider running at least two or more PostgreSQL replicas to enable recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -69,53 +85,60 @@ Consider running at least two or more PostgreSQL replicas to enable recovery fro
 |10 Gbps
 |===
 
-=== Preparing the Database
-If you are configuring an externalized PostgreSQL instance as part of a new CircleCI server 3.x install, it is recommended that you log in to your PostgreSQL instance and run the following commands. If you plan on using a different method, you must ensure that the databases and extensions outlined below are configured prior to running CircleCI server 3.x for the first time.
-
-```sql
-    CREATE DATABASE circle;
-    \connect circle
-    CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE contexts;
-    \connect contexts
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE conductor_production;
-    \connect conductor_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE contexts_service_production;
-    \connect contexts_service_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE cron_service_production;
-    \connect cron_service_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE domain;
-    CREATE DATABASE permissions;
-    \connect permissions
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE vms;
-    \connect vms
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE orbs;
-    \connect orbs
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE orb_analytics;
-    \connect orb_analytics
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE builds_service;
-    \connect builds_service
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE distributor;
-    \connect distributor
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-```
-
 === Backing Up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install which can be found https://www.postgresql.org/docs/12/backup.html[here].
+PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
 
 We strongly recommend the following:
 
 * Taking daily backups
 * Keeping at least 30 days of backup
 * Using encrypted storage for backups as databases might contain sensitive information
-* Performing a backup before each upgrade of CircleCI Server.
+* Performing a backup before each upgrade of CircleCI server.
+
+== MongoDB
+
+NOTE: If using your own MongoDB instance it needs to be version 3.6 or greater. 
+
+.External MongoDB
+image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
+
+If you choose to use an external MongoDB instance, complete the following fields: 
+
+* *MongoDB connection host(s) or IP(s) (required)* - 
+The hostname or IP of your MongoDB instance. Specifying a port using a colon and multiple hosts for sharded instances are both supported.
+
+* *Use SSL for connection to MongoDB (required)* - 
+Whether to use SSL when connecting to your external MongoDB instance
+
+* *Allow insecure TLS connections (required)* - 
+If you use a self-signed certificate or one signed by a custom CA, you will need to enable this setting. However, this is an insecure setting and you should use a TLS certificate signed by a valid CA if you can.
+
+* *MongoDB user (required)* - 
+The username for the account to use. This account should have the dbAdmin role.
+
+* *MongoDB password (required)* - 
+The password for the account to use.
+
+* *MongoDB authentication source database (required)* - 
+The database that holds the account information, usually admin.
+
+* *MongoDB authentication mechanism (required)* - 
+The authentication mechanism to use, usually SCRAM-SHA-1.
+
+* *Additional connection options (optional)* - 
+Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&``, special characters need to be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+
+== Vault
+
+.External Vault
+image::server-3-external-vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
+
+If you choose to use an external Vault instance, complete the following fields:  
+
+* *URL* - The URL to your Vault service.
+
+* *Transit Path* - Your Vault secrets transit path.
+
+* *Token* - The access token for vault.
+
+

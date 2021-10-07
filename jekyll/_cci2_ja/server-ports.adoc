@@ -1,23 +1,23 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理
 ---
-= System Requirements
+= システム要件
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-ここでは、CircleCI v2. をインストールするためのシステム要件を説明します。
+ここでは、CircleCI Server v2.x をインストールするためのシステム要件およびポート アクセス要件について説明します。
 
 toc::[]
 
 == Services マシン
-Services マシンは、ユーザー対面 Web サイト、API エンジン、データストア、Nomad ジョブスケジューラなどの Server プロダクトのコアコンポーネントをホスティングします。 独立のマシンを使用することをお勧めします。
+Services マシンには、ユーザー向けの Web サイト、API エンジン、データストア、Nomad ジョブ スケジューラなどの CircleCI Server 製品のコア コンポーネントがホスティングされます。 ベスト プラクティスとして、独立のマシンを使用することをお勧めします。
 
-NOTE: Currently, CircleCI Server only supports x86_64 architecture.
+NOTE: 現在、CircleCI Server は、x86_64 アーキテクチャのみに対応しています。
 
 下表に、Services マシンの CPU、RAM、およびディスク容量の要件を示します。
 
@@ -27,35 +27,35 @@ NOTE: Currently, CircleCI Server only supports x86_64 architecture.
 | 1 日の CircleCI アクティブ ユーザー数
 | CPU
 | RAM
-| Disk space
+| ディスク容量
 | NIC 速度
 
-| <50
-| 8 cores
-| 32 GB
+| 50 名未満
+| 8 コア
+| 32GB
 | 100GB
 | 1Gbps
 
-| 50-250
-| 12 cores
+| 50 ～ 250 名
+| 12 コア
 | 64GB
 | 200GB
 | 1Gbps
 
-| 251-1000
-| 16 cores
+| 251 ～ 1000 名
+| 16 コア
 | 128GB
 | 500GB
 | 10Gbps
 
-| 1001-5000
-| 20 cores
+| 1001 ～ 5000 名
+| 20 コア
 | 256GB
 | 1TB
 | 10Gbps
 
-| 5000+
-| 24 cores
+| 5000 名超
+| 24 コア
 | 512GB
 | 2TB
 | 10Gbps
@@ -63,59 +63,59 @@ NOTE: Currently, CircleCI Server only supports x86_64 architecture.
 
 == Nomad クライアント
 
-Nomad クライアントマシンは、Services マシンによってスケジュールされた CircleCI ジョブを実行します。 The Minimum CPU, RAM, and disk space requirements per client are as follows:
+CircleCI のジョブは、Nomad クライアント マシンで実行され、Nomad サーバーでスケジュールが管理されます。 各クライアントの CPU、RAM、ディスク容量の最小要件は、以下のとおりです。
 
-- CPU: 4 cores
+- CPU: 4 コア
 - RAM: 32GB
-- Disk space: 100GB
-- NIC speed: 1Gbps
+- ディスク容量: 100GB
+- NIC 速度: 1Gbps
 
-For an AWS install of CircleCI Server, the recommended instance type for Nomad clients is `m5.2xlarge` (8 vCPUs @ 2.4GHz, 32GB RAM). 
+AWS 上の CircleCI Server の場合、Nomad クライアント向けの推奨インスタンス タイプは `m5.2xlarge` (8 vCPU @ 2.4GHz、32GB RAM) です。 
 
-NOTE: Currently, Nomad Clients only support x86_64 architecture. 
+NOTE: 現在、Nomad クライアントは、x86_64 アーキテクチャのみに対応しています。 
 
-You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m5.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will researve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run. 
+各クライアントでより多くのジョブに対応できるよう、大きいインスタンス タイプを選択することもできます。 選択の目安として、Nomad ではクライアントがジョブに適しているかどうかを判断する際に 1024MHz の CPU と`コア数` * `クロック速度`の式で得られるディスク容量にジョブが割り当てられることを参考にするとよいでしょう。 この計算式に基づくと、`m5.2xlarge` では最大容量が `19200MHz` になります。つまり、このクライアントでは 9.6 個のジョブを実行できることになります (制限要因がない場合)。 実際には、Nomad 自身のために CPU リソースがいくらか予約されます。また、CPU と RAM の比率から使用できる RAM が限られ、これも実行可能なジョブ数の制限要因になります。 
 
-=== Recommendations for Heavy Usage
+=== 負荷が大きい場合の推奨事項
 
-EBS will throttle IOPS after certain IO operations, therefore heavy-load usage with the default Server configuration (m5.2xlarge with 200-GiB gp2 root volume) can see performance-related issues, such as slow jobs, slow spin-up, and job timeouts in worst cases.
+EBS は特定の IO 操作の後に IOPS を抑制します。そのため、デフォルトのサーバー構成 (m5.2xlarge、200GiB gp2 ルート ボリューム) で負荷の大きい処理を行うと、ジョブ実行速度の低下、スピンアップ速度の低下、最悪の場合にはジョブ タイムアウトなど、パフォーマンス関連の問題が発生する可能性があります。
 
-To give an idea of what is meant by heavy usage:
+負荷が大きい状況とは以下のようなものです。
 
-* If `BurstBalance` metrics for storage attached to Nomad clients are decreasing sharply, this is a sign that the workload is heavy enough to be affected. See the https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html#ebs-volume-metrics[AWS EBS metrics document] for further details.
-* We have had a report from a customer that continuous disk I/O at 500 MB/s used up the burst credits for our default storage configuration within 37.5 minutes.
+* Nomad クライアントにアタッチされたストレージの `BurstBalance` メトリクスが急激に減少している場合、環境に影響が及ぶほどワークロードの負荷が大きいことを示しています。 詳細については、https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html#ebs-volume-metrics[AWS EBS メトリクスのドキュメント]を参照してください。
+* 継続的なディスク I/O が 500 MB/秒の場合、デフォルト ストレージ構成のバースト クレジットを 37.5 分で使い果たしてしまったという報告がお客様から寄せられています。
 
-Suggested workarounds for this issue are as follows:
+この問題に対する推奨回避策は以下のとおりです。
 
-* Use EBS volumes larger than 1 TiB. Large EBS volumes never consume IO credits.
-* Use the *5d instance type and use an attached instance store for Docker-related files (i.e. /var/lib/docker).
+* 1TiB 以上の EBS ボリュームを使用する。 EBS ボリュームを大きくすれば、IO クレジットは消費されません。
+* *5d インスタンス タイプを使用し、アタッチされたインスタンス ストアを Docker 関連ファイル (/var/lib/docker) に使用する。
 
-== Choosing Nomad Client Quantity
+== Nomad クライアント数の選択
 
-下表には、使用可能にする Nomad クライアント数のベスト プラクティスを示します。 システムの需要に合わせて増減させてください。
+Nomad クライアント数のベスト プラクティスを以下の表にまとめました。 実際のシステムでの需要に合わせて、Nomad クライアント数を増減させてください。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
 | 1 日の CircleCI アクティブ ユーザー数
-| Number of Nomad client machines
+| Nomad クライアント マシン数
 
-| <50
-| 1-5
+| 50 名未満
+| 1 ～ 5
 
-| 50-250
-| 5-10
+| 50 ～ 250 名
+| 5 ～ 10
 
-| 250-1000
-| 10-15
+| 250 ～ 1000 名
+| 10 ～ 15
 
-| 5000+
-| 15+
+| 5000 名超
+| 15 以上
 |===
 
-== サーバーポート
+== サーバー ポート
 
-Below all ports required by a CircleCI 2.0 installation are listed for each machine type.
+CircleCI Server 2.0 のインストールで必要となるすべてのポートを、マシン タイプごとに以下の表に示します。
 
 === Services マシン
 
@@ -125,36 +125,36 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 80
 | TCP
-| Inbound
-| End users
-| HTTP web app traffic
+| インバウンド
+| エンドユーザー
+| HTTP Web アプリ トラフィック
 |
 
 | 443
 | TCP
-| Inbound
-| End users
-| HTTPS web app traffic
+| インバウンド
+| エンドユーザー
+| HTTPS Web アプリ トラフィック
 |
 
 | 7171
 | TCP
-| Inbound
-| End users
-| Artifacts access
+| インバウンド
+| エンドユーザー
+| アーティファクト アクセス
 |
 
 | 8081
 | TCP
-| Inbound
-| End users
-| Artifacts アクセス
+| インバウンド
+| エンドユーザー
+| アーティファクト アクセス
 |
 
 | 22
@@ -183,12 +183,12 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | インバウンド
 | Nomad サーバー
 | メトリクス
-| Only if using externalized Nomad Servers
+| 外部処理用 Nomad サーバーを使用する場合のみ
 
 | 8125
 | UDP
 | インバウンド
-| すべてのデータベースサーバー
+| すべてのデータベース サーバー
 | メトリクス
 | 外部処理用データベースを使用する場合のみ
 
@@ -223,15 +223,15 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | 80
 | TCP
 | 双方向
-| GitHub Enterprise / GitHub.com (該当する方)
-| Web フック / API アクセス
+| GitHub Enterprise/GitHub.com (該当するもの)
+| Web フック/API アクセス
 |
 
 | 443
 | TCP
 | 双方向
-| GitHub Enterprise / GitHub.com (該当する方)
-| Web フック / API アクセス
+| GitHub Enterprise/GitHub.com (該当するもの)
+| Web フック/API アクセス
 |
 
 | 80
@@ -260,28 +260,28 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | アウトバウンド
 | MongoDB サーバー
 | MongoDB データベース接続
-| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
 
 | 5672
 | TCP
 | アウトバウンド
 | RabbitMQ サーバー
 | RabbitMQ 接続
-| Only if using externalized RabbitMQ
+| 外部処理用 RabbitMQ を使用する場合のみ
 
 | 6379
 | TCP
 | アウトバウンド
 | Redis サーバー
 | Redis 接続
-| Only if using externalized Redis
+| 外部処理用 Redis を使用する場合のみ
 
 | 4647
 | TCP
 | アウトバウンド
 | Nomad サーバー
 | Nomad サーバー接続
-| Only if using externalized Nomad Servers
+| 外部処理用 Nomad サーバーを使用する場合のみ
 
 | 443
 | TCP
@@ -299,15 +299,15 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
-| 64535-65535
+| 64535 ～ 65535
 | TCP
 | インバウンド
 | エンドユーザー
-| ビルド機能への SSH 接続
+| ビルドへの SSH 接続機能
 |
 
 | 80
@@ -334,7 +334,7 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | 22
 | TCP
 | アウトバウンド
-| GitHub Enterprise / GitHub.com (該当する方)
+| GitHub Enterprise/GitHub.com (該当するもの)
 | GitHub からのコードのダウンロード
 |
 
@@ -369,19 +369,19 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | 443
 | TCP
 | アウトバウンド
-| クラウドストレージプロバイダー
-| アーティファクトストレージ
-| 外部アーティファクトストレージを使用する場合のみ
+| クラウド ストレージ プロバイダー
+| アーティファクト ストレージ
+| 外部アーティファクト ストレージを使用する場合のみ
 
 | 53
 | UDP
 | アウトバウンド
 | 内部 DNS サーバー
 | DNS 解決
-| 正しい操作に必要なすべての DNS 名をジョブが解決できることを保証する.
+| 処理を適切に行ううえで必要なすべての DNS 名をジョブが解決できることを保証する。
 |===
 <<<
-=== GitHub Enterprise / GitHub.com
+=== GitHub Enterprise/GitHub.com
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -389,9 +389,9 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 22
 | TCP
@@ -425,7 +425,7 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | TCP
 | 双方向
 | Services マシン
-| Web フック / API アクセス
+| Web フック/API アクセス
 |
 
 | 443
@@ -443,16 +443,16 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 5432
 | TCP
 | 双方向
 | PostgreSQL サーバー
 | PostgreSQL 複製
-| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
 |===
 
 === MongoDB サーバー
@@ -463,16 +463,16 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 27017
 | TCP
 | 双方向
 | MongoDB サーバー
 | MongoDB 複製
-| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
 |===
 <<<
 === RabbitMQ サーバー
@@ -483,23 +483,23 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 5672
 | TCP
 | インバウンド
 | Services マシン
 | RabbitMQ 接続
-| Only if using externalized RabbitMQ
+| 外部処理用 RabbitMQ を使用する場合のみ
 
 | 5672
 | TCP
 | 双方向
 | RabbitMQ サーバー
 | RabbitMQ ミラーリング
-| Only if using externalized RabbitMQ
+| 外部処理用 RabbitMQ を使用する場合のみ
 |===
 
 === Redis サーバー
@@ -510,23 +510,23 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 6379
 | TCP
 | インバウンド
 | Services マシン
 | Redis 接続
-| Only if using externalized Redis
+| 外部処理用 Redis を使用する場合のみ
 
 | 6379
 | TCP
 | 双方向
 | Redis サーバー
 | Redis 複製
-| Only if using externalized Redis, and using Redis replication (optional)
+| 外部処理用 Redis を使用し、Redis 複製 (オプション) を使用する場合のみ
 |===
 
 === Nomad サーバー
@@ -537,28 +537,28 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | **ポート番号**
 | **プロトコル**
 | **方向**
-| **送信元・送信先**
+| **送信元/送信先**
 | **用途**
-| **メモ**
+| **備考**
 
 | 4646
 | TCP
 | インバウンド
 | Services マシン
 | Nomad サーバー接続
-| Only if using externalized Nomad Servers
+| 外部処理用 Nomad サーバーを使用する場合のみ
 
 | 4647
 | TCP
 | インバウンド
 | Services Machine
 | Nomad サーバー接続
-| Only if using externalized Nomad Servers
+| 外部処理用 Nomad サーバーを使用する場合のみ
 
 | 4648
 | TCP
 | Bi-directional
 | Nomad サーバー
 | Nomad サーバー内部通信
-| Only if using externalized Nomad Servers
+| 外部処理用 Nomad サーバーを使用する場合のみ
 |===
