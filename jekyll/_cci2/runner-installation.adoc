@@ -31,6 +31,13 @@ The installation process assumes you have installed the following utilities on y
 * rpmbuild (RHEL 8 only)
 * permissions to create a user, and create directories under /opt.
 
+Running jobs requires you have the following tools available on your machine:
+
+* tar
+* gzip
+* coreutils (Linux only)
+* git (recommended, but not required)
+
 == Authentication
 
 NOTE: These commands can only be run by an owner/admin of your organization.
@@ -59,15 +66,6 @@ For example, `circleci runner resource-class create my-namespace/my-resource-cla
 NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
 +
 CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
-
-== Job running requirements
-
-Running jobs requires you have the following tools available on your machine:
-
-* tar
-* gzip
-* coreutils (Linux only)
-* git (recommended, but not required)
 
 == Installation
 
@@ -176,7 +174,7 @@ These will be used when executing the task agent. These commands must be run as 
 ==== Ubuntu/Debian
 
 ```bash
-id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
+id -u circleci &>/dev/null || sudo adduser --uid 1500 --disabled-password --gecos GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
@@ -185,7 +183,7 @@ chown -R circleci /opt/circleci/workdir
 ==== CentOS/RHEL
 
 ```bash
-id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
+id -u circleci &>/dev/null || sudo adduser --uid 1500 -c GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
