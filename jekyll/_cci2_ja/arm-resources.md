@@ -41,7 +41,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 ## Arm リソースの使用方法
 {: #using-arm-resources }
 
-Update your `.circleci/config.yml` file to use Arm resources. Consider the example config:
+Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定例を参考にしてください。
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -56,6 +56,7 @@ jobs:
     steps:
       - run: uname -a
       - run: echo "Hello, Arm!"
+
 
   build-large:
     machine:
@@ -100,7 +101,7 @@ workflows:
       - build-large
 ```
 
-Please note that it is indeed possible to mix various resources in the same configuration (and even the same workflow).
+1 つの設定ファイル内、および 1 つのワークフロー内でも、複数のリソースを混在させることができます。
 
 ## 制限事項
 {: #limitations }
@@ -109,9 +110,9 @@ Please note that it is indeed possible to mix various resources in the same conf
 * 現時点では、32 ビット版の Arm アーキテクチャはサポートされていません。 サポート対象は 64 ビット版の `arm64` アーキテクチャのみです。
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるに連れ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
-* In server 3.x, Arm resources are only available when using the EC2 provider for VM service. This is because there are no Arm instances available in GCP.
+* Server 3.xでは、VMサービスにEC2プロバイダ を使用している場合のみ、Armリソースを利用できます。 これは、GCP には Arm インスタンスが用意されていないためです。
 
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
-Take the [Arm course](https://academy.circleci.com/arm-course?access_code=public-2021) with CircleCI Academy to learn more about using Arm resources and associated use cases.
+CircleCI Academyで[Armコース](https://academy.circleci.com/arm-course?access_code=public-2021) Armリソースの使用方法や関連するユースケースについて詳しく学ぶことができます。
