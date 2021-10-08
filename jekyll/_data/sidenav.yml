@@ -130,6 +130,8 @@ en:
           link: 2.0/runner-overview/
         - name: Runner Installation
           link: 2.0/runner-installation/
+        - name: Runner Installation on Linux
+          link: 2.0/runner-installation-linux/
         - name: Runner on Kubernetes
           link: 2.0/runner-on-kubernetes/
         - name: Upgrading Runner on Server
