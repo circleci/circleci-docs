@@ -115,4 +115,4 @@ workflows:
 
 ## さらに詳しく
 {: #learn-more }
-CircleCI Academyで[Armコース](https://academy.circleci.com/arm-course?access_code=public-2021) Armリソースの使用方法や関連するユースケースについて詳しく学ぶことができます。
+CircleCI Academy の [Armコース](https://academy.circleci.com/arm-course?access_code=public-2021)を受講すると、Armリソースの使用方法や関連するユースケースについてさらに詳しく学ぶことができます。
