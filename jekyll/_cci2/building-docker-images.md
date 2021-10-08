@@ -6,6 +6,7 @@ description: "How to build Docker images and access remote services"
 order: 55
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -37,7 +38,7 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 {: #specifications }
 {:.no_toc}
 
-The Remote Docker Environment has the following technical specifications (for CircleCI Server installations, contact the systems administrator for specifications):
+The Remote Docker Environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
 
 CPUs | Processor                 | RAM | HD
 -----|---------------------------|-----|------
@@ -141,7 +142,7 @@ CircleCI supports multiple versions of Docker. The following are the available v
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**Note:** The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## Separation of environments
 {: #separation-of-environments }

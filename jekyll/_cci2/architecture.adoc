@@ -1,5 +1,6 @@
 ---
 version:
+- Admin
 - Server v2.x
 ---
 = CircleCI Server Container Architecture
@@ -9,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
+This document outlines the containerized services that run on the Services machine within a CircleCI server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
 toc::[]
 

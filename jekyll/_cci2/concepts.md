@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -72,7 +73,7 @@ projects. Users may not view project data that is stored in environment variable
 ## Pipelines
 {: #pipelines }
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not available on CircleCI server v2.x.
 
 Pipelines represent methods for interacting with your configuration:
 
@@ -97,7 +98,7 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 ## Executors and images
 {: #executors-and-images }
 
-Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
+Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not available on self-hosted installations of CircleCI server v2.x.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -139,7 +140,7 @@ jobs:
 # ...
 ```
 
-{:.tab.executors.Server}
+{:.tab.executors.Server2.x}
 ```yaml
 version: 2.0
 
