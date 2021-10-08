@@ -19,9 +19,9 @@ toc::[]
 
 This page describes how to install CircleCI runner on Linux. 
 
-*Note:* Please review the Installing the CircleCI Runner page to verify prerequisites and authentication.
+*Note:* Please review the https://circleci.com/docs/2.0/runner-installation/[Installing the CircleCI Runner] page to verify prerequisites and authentication.
 
-=== Create the CircleCI runner configuration
+== Create the CircleCI runner configuration
 
 The recommended CircleCI runner configuration for Linux is:
 
@@ -40,7 +40,7 @@ runner:
 
 Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
 
-=== Install the CircleCI runner configuration
+== Install the CircleCI runner configuration
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`.
 
@@ -49,11 +49,11 @@ sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-=== Create the circleci user & working directory
+== Create the circleci user & working directory
 
 These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
-==== Ubuntu/Debian
+=== Ubuntu/Debian
 
 ```bash
 id -u circleci &>/dev/null || sudo adduser --uid 1500 --disabled-password --gecos GECOS circleci
@@ -62,7 +62,7 @@ mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
 ```
 
-==== CentOS/RHEL
+=== CentOS/RHEL
 
 ```bash
 id -u circleci &>/dev/null || sudo adduser --uid 1500 -c GECOS circleci
@@ -71,7 +71,7 @@ mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
 ```
 
-=== Configure SELinux policy (RHEL 8)
+== Configure SELinux policy (RHEL 8)
 
 An SELinux policy is required for runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this runner install.
 
@@ -95,7 +95,7 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
-=== Enable the `systemd` unit
+== Enable the `systemd` unit
 
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
@@ -123,7 +123,7 @@ You can now enable the service:
 systemctl enable /opt/circleci/circleci.service
 ```
 
-=== Start the service
+== Start the service
 
 When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
@@ -131,7 +131,7 @@ When the CircleCI runner service starts, it will immediately attempt to start ru
 systemctl start circleci.service
 ```
 
-=== Verify the service is running
+== Verify the service is running
 
 The system reports a very basic health status through the `Status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
 
