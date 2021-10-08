@@ -132,14 +132,11 @@ grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$fi
 
 Please refer to the platform-specific installation instructions:
 
-* <<CircleCI Runner Installation (Linux), Linux>>
-* <<CircleCI Runner Installation (macOS), macOS>>
-* <<Docker Installation, Docker>>
-* <<Windows Installation, Windows>>
-
-== Kubernetes Installation
-
-See: xref:runner-on-kubernetes.adoc[Runner on Kubernetes]
+* https://circleci.com/docs/2.0/runner-installation-linux[Linux]
+* https://circleci.com/docs/2.0/runner-installation-macos[macOS]
+* https://circleci.com/docs/2.0/runner-installation-windows[Windows]
+* https://circleci.com/docs/2.0/runner-installation-docker[Docker]
+* https://circleci.com/docs/2.0/runner-on-kubernetes/[Kubernetes]
 
 == Configuration reference
 
@@ -264,8 +261,7 @@ depending on your version of server:
 | 1.0.11147-881b608
 |===
 
-
-=== Additional Resources
+== Additional Resources
 
 - https://github.com/CircleCI-Public/runner-preview-docs/[CircleCI Runner Image on Docker Hub]
 - https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
