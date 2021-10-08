@@ -109,7 +109,7 @@ CircleCI lets you increase the parallelism in any project’s settings so that e
 
 ## Jenkinsfile converter
 {: #jenkinsfile-converter }
-CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed on [CircleCI's developer hub](https://circleci.com/developer/tools/jenkins-converter).
+CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. Access [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter).
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 

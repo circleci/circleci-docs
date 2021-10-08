@@ -115,8 +115,7 @@ coverage report
 coverage html  # ブラウザーで htmlcov/index.html を開きます
 ```
 
-The generated files will be found under `htmlcov/`, which can be uploaded in a
-`store_artifacts` step in your config:
+The generated files will be found under `htmlcov/`, which can be uploaded in a `store_artifacts` step in your config:
 
 ```yaml
 version: 2
@@ -275,8 +274,7 @@ jobs:
 
 PHPUnit is a popular testing framework for PHP. To generate code-coverage reports you may need to install [PHP Xdebug](https://xdebug.org/) if you are using an earlier version than PHP 5.6. Versions of PHP after 5.6 have access to a tool called phpdbg; you can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`
 
-In the following basic `.circleci/config.yml` we upload the coverage reports in
-the `store_artifacts` step at the end of the config.
+In the following basic `.circleci/config.yml` we upload the coverage reports in the `store_artifacts` step at the end of the config.
 
 
 ```yaml

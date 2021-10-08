@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 class AnalyticsClient {
   static getSessionId() {
     var existingSessionId = Number(Cookies.get("amplitude-session-id"));

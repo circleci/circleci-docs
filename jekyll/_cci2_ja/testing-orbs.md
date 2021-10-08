@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Orb のテスト手法"
 short-title: "テスト手法"
-description: "CircleCI Orbs のテストに関する入門ガイド"
+description: "CircleCI Orb のテストに関する入門ガイド"
 categories:
   - getting-started
 order: 1

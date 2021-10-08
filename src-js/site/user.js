@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 function setUserData(userData) {
   window.userData = userData;
   // emit an event to let the system know that userData is ready/has changed

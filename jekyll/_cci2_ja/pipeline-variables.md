@@ -26,7 +26,7 @@ version:
 | -------------------------- | ------------------------------------------------------------------------------------- |
 | pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。 |
 | pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                           |
-| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： https://github.com/circleci/circleci-docs                 |
+| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： https://github.com/circleci/circleci-docs              |
 | pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                              |
 | pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                    |
 | pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                    |

@@ -11,6 +11,7 @@ order: 2
 CircleCI は、高度な構成のためのオプションと機能を数多くサポートしています。 何ができるかについては、以下のスニペットを参照してください。 高度な構成を最適化するヒントも紹介します。
 
 ## スクリプトのチェック
+{: #check-your-scripts }
 
 Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
 
@@ -169,5 +170,4 @@ For more information on building Docker images, see the [Building Docker Images]
 ## 関連項目
 {: #see-also }
 
-[Optimizations]({{ site.baseurl }}/ja/2.0/optimizations/)
-[Configuration Cookbook]({{ site.baseurl }}/ja/2.0/configuration-cookbook/)
+[Optimizations]({{ site.baseurl }}/ja/2.0/optimizations/) [Configuration Cookbook]({{ site.baseurl }}/ja/2.0/configuration-cookbook/)

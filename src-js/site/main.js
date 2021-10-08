@@ -1,3 +1,7 @@
+import { createPopper } from '@popperjs/core';
+
+hljs.initHighlightingOnLoad();
+
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
 window.analyticsTrackProps = function (el) {
@@ -94,7 +98,7 @@ function renderVersionBlockPopover() {
     let popperInstance = null;
 
     function create() {
-      popperInstance = Popper.createPopper(badge, tooltip, {
+      popperInstance = createPopper(badge, tooltip, {
         modifiers: [
           {name: 'offset',
            options: {
@@ -281,7 +285,7 @@ $( document ).ready(function() {
       tooltip.setAttribute('data-show', '');
       // change tooltip text based on current button popover.
       tooltip.innerHTML = "Copy link<div id='arrow' data-popper-arrow></div>"
-      icon.instance = Popper.createPopper(icon, tooltip, {
+      icon.instance = createPopper(icon, tooltip, {
         modifiers: [{
           name: 'offset',
           options: {
@@ -303,7 +307,7 @@ $( document ).ready(function() {
           tooltip.setAttribute('data-show', '');
           // change tooltip text based on current button popover.
           tooltip.innerHTML = "Copied!<div id='arrow' data-popper-arrow></div>";
-          icon.instance = Popper.createPopper(icon, tooltip, {
+          icon.instance = createPopper(icon, tooltip, {
             modifiers: [{
               name: 'offset',
               options: {

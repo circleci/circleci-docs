@@ -56,6 +56,7 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 * macOS 11.2 以降 (Apple M1)
 * Docker (x86_64)
 * Kubernetes (x86_64)
+* Windows Server 2019, 2016 (x86_64)
 
 === Preview
 
@@ -73,7 +74,6 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 * 上記以外の Linux ディストリビューション - RHEL、SUSE、Debian など (x86_64 または ARM64)
 * Docker (ARM64)
 * Kubernetes (ARM64)
-* Windows
 
 NOTE: プレビューの CircleCI ランナーは現在鋭意開発中です。環境に対するサポートやユースケースに関するご質問がある場合はhttps://circleci.com/ja/contact/[お問い合わせ]ください。 また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーのディスカッション ページ]への投稿もぜひお寄せください。開発の参考にさせていただきます。
 
@@ -96,6 +96,12 @@ CircleCI ランナーのインストール後、ランナーは `circleci.com` �
 
 この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるよう構成できます。 ジョブの実行を許可したすべてのユーザーには、task-agent と同等の権限が付与されます。 以降で説明するデプロイメントの推奨事項は、このアプローチに基づいています (ローンチ エージェントは root ユーザー、タスク エージェントは circleci ユーザーとして実行されます)。
 
+== SSH での再実行 (英語)
+
+CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+
+NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
+
 == パブリック リポジトリ
 
 CircleCI ランナーは、[Build Forked Pull Requests (フォークされたプル リクエストをビルド)] 設定が有効になっているパブリック プロジェクトでの使用は推奨されません。 このようなパブリック プロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプル リクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 CircleCI ランナーで未信頼のジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティ リスクが生じます。 このようなリスクには、次のものがあります。
@@ -107,7 +113,7 @@ CircleCI ランナーは、[Build Forked Pull Requests (フォークされたプ
 
 == ジョブでランナーを参照する
 
-ランナーのセットアップが完了したら、ジョブでランナーを参照する必要があります。これを行うには、`.circleci/config.yml` ファイル内の特定のフィールドにそのための値を指定します。 ランナーを使って実行するジョブについて、以下のフィールドを指定します。
+ランナーのセットアップが完了したら、ジョブでランナーを参照する必要があります。 これを行うには、`.circleci/config.yml` ファイル内の特定のフィールドにそのための値を指定します。 ランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
 * `machine: true`
 * `resource_class: your-namespace/your-resource`
@@ -135,6 +141,11 @@ NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する�
 
 標準的な CircleCI 機能のほとんどすべてをランナー ジョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 ランナー ジョブを使用するうえでそれらの機能が重要な場合は、以下の canny ページのうち該当するものからお知らせください。
 
-- https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[SSH での再実行 (英語)]
 - https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割 (英語)]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys (英語)`]
+
+== Learn more
+
+Take the https://academy.circleci.com/runner-course[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
+
+

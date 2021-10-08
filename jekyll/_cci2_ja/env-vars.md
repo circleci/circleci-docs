@@ -290,7 +290,7 @@ jobs:
 ## ジョブでの環境変数の設定
 {: #setting-an-environment-variable-in-a-job }
 
-[コンテキスト]({{ site.baseurl }}/2.0/contexts/) [シークレットのマスキングによって環境変数を非公開に保つ (英語)](https://circleci.com/ja/blog/keep-environment-variables-private-with-secret-masking/)
+[Contexts]({{ site.baseurl }}/ja/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
 
 ```yaml
 version: 2.1
@@ -446,7 +446,7 @@ $ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 
-結果の値を CircleCI 環境変数に格納します。
+その変数を使用するコマンド内で変数をデコードします。
 
 ```bash
 $ echo $MYVAR
@@ -532,7 +532,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 }
 ```
 
-たとえば、以下のように `curl` を使用します。
+上の例の `$CIRCLE_TOKEN` は[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB-api-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)です。
 
 ```sh
 curl \
@@ -543,7 +543,7 @@ curl \
   https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
 ```
 
-上の例の `$CIRCLE_TOKEN` は[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#%E3%83%91%E3%83%BC%E3%82%BD%E3%83%8A%E3%83%AB-api-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)です。
+このビルドは、以下の環境変数を受け取ります。
 
 このビルドは、以下の環境変数を受け取ります。
 
@@ -591,7 +591,6 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 | `CIRCLE_COMPARE_URL`        | 文字列  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{ site.baseurl }}/2.0/pipeline-variables/)" が導入されています。                                                                                                                         |
 | `CI_PULL_REQUEST`           | 文字列  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUEST` の使用が推奨されます。                                                                                                                                                                                                           |
 | `CI_PULL_REQUESTS`          | リスト  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUESTS` の使用が推奨されます。                                                                                                                                                                                                          |
-
 {:class="table table-striped"}
 
 **注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{ site.baseurl }}/ja/2.0/pipeline-variables/#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E5%80%A4)」を参照してください。
@@ -600,4 +599,4 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 {: #see-also }
 {:.no_toc}
 
-[Contexts]({{ site.baseurl }}/ja/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
+[コンテキスト]({{ site.baseurl }}/2.0/contexts/) [シークレットのマスキングによって環境変数を非公開に保つ (英語)](https://circleci.com/ja/blog/keep-environment-variables-private-with-secret-masking/)

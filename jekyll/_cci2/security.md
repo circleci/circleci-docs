@@ -89,6 +89,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - project.settings.update
 - project.ssh_key.create
 - project.ssh_key.delete
+- project.api_token.create
 - schedule.create
 - schedule.update
 - schedule.delete
