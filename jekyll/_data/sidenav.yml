@@ -132,6 +132,8 @@ en:
           link: 2.0/runner-installation/
         - name: Runner Installation on Linux
           link: 2.0/runner-installation-linux/
+        - name: Runner Installation on macOS
+          link: 2.0/runner-installation-mac/
         - name: Runner on Kubernetes
           link: 2.0/runner-on-kubernetes/
         - name: Upgrading Runner on Server
