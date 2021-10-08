@@ -1,9 +1,9 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x build artifacts
+= CircleCI Server v3.x ビルド アーティファクト
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -14,8 +14,8 @@ version:
 
 toc::[]
 
-== Safe and unsafe content types
-By default, only pre-defined artifact types are allowed to be rendered. これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
+== 安全なコンテンツのタイプと安全ではないコンテンツのタイプ
+デフォルトでレンダリングが許可されているのは、あらかじめ決められたタイプのアーティファクトのみです。 これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -76,7 +76,7 @@ By default, only pre-defined artifact types are allowed to be rendered. これ�
 [cols=2*, options="header", stripes=even]
 |===
 | カテゴリ
-| Unsafe Type
+| 安全でないタイプ
 
 | テキスト
 | html
@@ -100,8 +100,8 @@ By default, only pre-defined artifact types are allowed to be rendered. これ�
 | xml
 |===
 
-=== Allow unsafe types
-You can choose to allow unsafe types to be rendered, if required, by checking the Server Unsafe Artifacts checkbox within the Frontend settings in the KOTS admin console.
+=== 安全でないタイプの許可
+KOTS管理コンソールのフロントエンド設定にある [Server Unsafe Artifacts]チェックボックスをチェックすることで、必要に応じて安全でないタイプのレンダリングを許可するように選択することができます。
 
-.CircleCI Server v3.x Artifacts
+.CircleCI Server v3.x のアーティファクト
 image::server-3-unsafe-artifacts.png[Screenshot highlighting the option to server unsafe build artifacts]
