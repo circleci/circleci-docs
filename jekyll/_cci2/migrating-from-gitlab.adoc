@@ -4,7 +4,6 @@
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
 
 This document provides an overview of how to migrate from GitLab to CircleCI. 
 
@@ -55,23 +54,25 @@ The GitLab and CircleCI configurations will be different. It may be helpful to h
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
-Some differences that are worth calling out:
+== Configuration Comparison
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+
+[.table.table-striped.table-migrating-page]
+[cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
 | GitLab | CircleCI
 
-2+h| Define a job that executes a single build step. 
-
+2+| Defining a job that executes a single build step
 a|
+[source, yaml]
 ----
 job1:
   script: "execute-script-for-job1"
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -80,26 +81,28 @@ jobs:
       - run: "execute-script-for-job1"
 ----
 
-2+h| Specify a docker image to use for a job.
+2+| Specify a Docker image to use for a job.
 
 a|
+[source, yaml]
 ----
 job1:
   image: node:10
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
     docker:
       - image: node:10
-
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
+[source, yaml]
 ----
 job1:
   stage: build
@@ -124,6 +127,7 @@ stages:
 ----
 
 a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -155,9 +159,12 @@ workflows:
           - job3
 ----
 
-2+h| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
+
+
+2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/2.0/executor-types/#section=configuration[Executors documentation] for more information.
 
 a|
+[source, yaml]
 ----
 ubuntu job:
   tags:
@@ -173,25 +180,28 @@ osx job:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
-  ubuntuJob:
+  ubuntu-job:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run: echo "Hello, $USER!"
-  osxJob:
+  osx-job:
     macos:
-      xcode: "10.1.0"
+      xcode: 11.3.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
 ----
 
-2+h| Cache dependencies.
+
+2+| Cache Dependencies.
 
 a|
+[source, yaml]
 ----
 image: node:latest
 
@@ -206,26 +216,26 @@ before_script:
 
 test_async:
   script:
-    - node ./specs/start.js ./specs/async.spec.js
+    - node ./specs/start.js
 ----
 
 a|
+[source, yaml]
 ----
+{% raw %}
 jobs:
-  job1:
+  test_async:
     steps:
       - restore_cache:
-          key: source-v1-< .Revision >
-
+          key: source-v1-{{ checksum "package.json" }}
       - checkout
-
       - run: npm install
-
       - save_cache:
-          key: source-v1-< .Revision >
+          key: source-v1-{{ checksum "package.json" }}
           paths:
-            - "node_modules"
-
+            - node_modules
+      - run: node ./specs/start.js
+{% endraw %}
 ----
 |===
 
@@ -235,12 +245,10 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/2.0/configuration-reference/#checkout[Checkout code]
 . https://circleci.com/docs/2.0/env-vars/[Environment variables] and https://circleci.com/docs/2.0/contexts/[Contexts]
 . Install dependencies, also see https://circleci.com/docs/2.0/caching/[Cache dependencies]
-. https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macosexecutor[Service containers]
+. https://circleci.com/docs/2.0/configuration-reference/#docker[Service containers]
 . Run testing commands
 . https://circleci.com/docs/2.0/custom-images/[Custom convenience images]
 . https://circleci.com/docs/2.0/configuration-reference/#resource_class[Resource classes]
 . https://circleci.com/docs/2.0/workflows/[Workflows]
 . https://circleci.com/docs/2.0/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/2.0/parallelism-faster-jobs/[parallelism]
 . https://circleci.com/docs/2.0/artifacts/[Artifacts]
-
-

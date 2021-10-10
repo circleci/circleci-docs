@@ -1,0 +1,7 @@
+markdownlint:
+  exclude:
+    - 'README.md'
+    - 'docs/local-development.md'
+    - 'jekyll/_cci2_ja/**/*'
+    - 'jekyll/_cci1/**/*'
+    - 'jekyll/_ccie/**/*'

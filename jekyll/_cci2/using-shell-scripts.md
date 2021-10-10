@@ -5,33 +5,55 @@ short-title: "Using Shell Scripts"
 description: "Best practices for using shell scripts for use in CircleCI configuration"
 categories: [getting-started]
 order: 10
+version:
+- Cloud
+- Server v2.x
 ---
 
-This document describes best practices
-for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
+This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
+{: #overview }
+{:.no_toc}
 
-Configuring CircleCI often requires
-writing shell scripts.
-While shell scripting can grant finer control over your build,
-it is a subtle art
-that can produce equally subtle errors.
-You can avoid many of these errors
-by reviewing the best practices
-explained below.
+Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
 
-## Shell Script Best Practices
+## Shell script best practices
+{: #shell-script-best-practices }
 
 ### Use ShellCheck
-{:.no_toc}
+{: #use-shellcheck }
 
 [ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
 
-ShellCheck works best with CircleCI when you add it as a separate job in your `.circleci/config.yml` file. This allows you to run the `shellcheck` job in parallel with other jobs in a workflow, as shown below. If you are using configuration `version: 2.1`, consider using the [Shellcheck orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck#usage-shellcheck-workflow) to simplify your config file.
+Use the [Shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for the simplest way to add shellcheck to your `version: 2.1` configuration (remember to replace `x.y.z` with a valid version):
+
+```yaml
+version: 2.1
+
+orbs:
+  shellcheck: circleci/shellcheck@x.y.z
+
+workflows:
+  check-build:
+    jobs:
+      - shellcheck/check # job defined within the orb so no further config necessary
+      - build-job:
+          requires:
+            - shellcheck/check # only run build-job once shellcheck has run
+          filters:
+            branches:
+              only: master # only run build-job on master branch
+
+jobs:
+  build-job:
+    ...
+```
+
+Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
 
 ```yaml
 version: 2
@@ -39,6 +61,9 @@ jobs:
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -51,25 +76,22 @@ jobs:
 
 workflows:
   version: 2
-  workflow:
+  check-build:
     jobs:
       - shellcheck
       - build-job:
           requires:
-            - shellcheck
+            - shellcheck # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master
+              only: master # only run build-job on master branch
 ```
 
 **Note:**
-Be careful when using `set -o xtrace` / `set -x` with ShellCheck.
-When the shell expands secret environment variables,
-they will be exposed in a not-so-secret way.
-In the example below,
-observe how the `tmp.sh` script file reveals too much.
+Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way.
+In the example below, observe how the `tmp.sh` script file reveals too much.
 
-```
+```bash
 > cat tmp.sh
 #!/bin/sh
 
@@ -90,15 +112,10 @@ You must set SECRET_ENV_VAR!
 
 
 ### Set Error Flags
-{:.no_toc}
+{: #set-error-flags }
 
-There are several error flags
-you can set
-to automatically exit scripts
-when unfavorable conditions occur.
-As a best practice,
-add the following flags at the beginning of each script
-to protect yourself from tricky errors.
+There are several error flags you can set to automatically exit scripts when unfavorable conditions occur.
+As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
 
 ```bash
 #!/usr/bin/env bash
@@ -113,7 +130,9 @@ set -o errexit
 set -o pipefail
 ```
 
-## See Also
+## See also
+{: #see-also }
+{:.no_toc}
 
 For more detailed explanations and additional techniques,
 see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts)

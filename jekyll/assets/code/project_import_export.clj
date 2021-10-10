@@ -85,7 +85,6 @@
               :only [:vcs_url :features :github-id :aws :encrypted-ssh-keys
                      :encrypted-checkout-ssh-keys :tokens
                      :encrypted-env-vars-map :setup :dependencies :test :extra
-                     :encrypted-hipchat-settings :encrypted-campfire-settings
                      :encrypted-flowdock-settings :encrypted-slack-settings
                      :encrypted-irc-settings :parallel])
        (->> (map #(do

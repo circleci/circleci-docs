@@ -3,41 +3,68 @@ layout: classic-docs
 title: "Orbs FAQ"
 short-title: "Orbs FAQ"
 description: "FAQs for Orbs"
-categories: [configuring-jobs]
 order: 20
+version:
+- Cloud
 ---
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.
 
-* TOC
-{:toc}
+## Private orbs
+{: #private-orbs }
 
-## Downloading, Integrating, and Testing Orbs
-{:.no_toc}
+* **Question:** Can orbs be made private?
 
-* Question: How do I download, integrate and test orbs?
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are available on any of our paid [plans](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for more information.
 
-* Answer: You can import orbs using the `orbs` stanza in version 2.1 or higher of a CircleCI configuration. For example, if you want to publish an orb called  `hello-build` in the namespace `circleci` and have a published version `0.0.1`, import an orb like the example shown below:
+## Difference between commands and jobs
+{: #difference-between-commands-and-jobs }
 
-```
-orbs:
-     hello: circleci/hello-build@0.0.1
-```
+* **Question:** What is the difference between commands and jobs?
 
-You may then invoke elements of the orb in your configuration by referencing elements under the key `hello`. For example, if an orb has a job called `hello-build`, you can invoke that job in a workflow like the example shown below.
+* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
 
-```
-workflows:
-  info:
-    jobs:
-      - hello/hello-build
-```
+## Using orbs on CircleCI server
+{: #using-orbs-on-circleci-server }
 
-CircleCI publishes a web-based registry viewer so orbs documentation can be auto-generated. You can always pull the source of orbs directly as well. For example, you can run `circleci orb source circleci/hello-build@0.01`
+* **Question:** Can orbs be used on a private installation of CircleCI server?
 
-## Build Error When Testing Locally
+* **Answer:** Orbs can be used with installations of CircleCI server v3. For information on importing and using orbs for server, see the [CircleCI Server v3.x Orbs guide]({{site.baseurl}}/2.0/server-3-operator-orbs/).
+ 
+  Orbs are not available on installations of server v2.19.x, however, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
 
-* Question: Why do I get the following error when testing locally:
+## Report an issue with an orb
+{: #report-an-issue-with-an-orb }
+
+* **Question:** How can I report a bug or issue with an orb?
+
+* **Answer:** All orbs are open source projects. Issues, bug reports, or even pull requests can be made against the orb's git repository. Orb authors may opt to include a link to the git repo on the Orb Registry.
+
+  If the git repo link is unavailable, contact support and we will attempt to contact the author. Alternatively, consider forking the orb and publishing your own version.
+
+## Using uncertified orbs
+{: #using-uncertified-orbs }
+
+* **Question:** Why do I receive an error message when trying to use an uncertified orb?
+
+* **Answer:** To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
+
+**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, and not certified._
+
+## How to use the latest version of an orb
+{: #how-to-use-the-latest-version-of-an-orb }
+
+* **Question:** How do import an orb always at the latest version?
+
+* **Answer:** Orbs utilize [semantic versioning](), meaning if you set the _major_ version (example: `3`), you will receive all _minor_ and _patch_ updates, where if you statically set the version (example: `3.0.0`), no updates will apply, this is the most deterministic and recommended method.
+
+_**Note:** NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. This is not recommended as breaking changes are expected._
+{: class="alert alert-danger"}
+
+## Build error when testing locally
+{: #build-error-when-testing-locally }
+
+* **Question:** Why do I get the following error when testing locally:
 
 ```
 circleci build -c .circleci/jobs.yml --job test
@@ -48,125 +75,11 @@ Error:
 You attempted to run a local build with version 2.1 of configuration.
 ```
 
-* Answer: To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
+* **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
 
-## Rerun Error
-
-* Question: Why do I get the following error when re-running the same workflow:
-
-```
-only certified orbs are permitted in this project.
-```
-
-* Answer: Try making a whitespace change or similar. Your configuration will not recompile until you have made a change. Configuration processing occurs before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
-
-## Environment Variables Not Being Passed at Runtime
-
-Occasionally, when you try to convert a configuration to a 2.0 compatible format, environment variables may not be passed at runtime. For example, if you create a simple configuration in your GitHub repository (for example `https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml`) and then call the config using:
-
-```
-export AUTO_FILE=/Users/yourusername/Desktop/apkpure_app_887.apk
-export AUTO_DIR=.
-circleci build -c .circleci/echo.yml --job test
-```
-
-The config shows:
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    docker:
-    - image: circleci/openjdk:8-jdk
-    steps:
-    - checkout
-  test:
-    docker:
-    - image: circleci/openjdk:8-jdk
-    environment:
-    - TERM: dumb
-    steps:
-    - checkout
-    - run:
-        command: "echo file ${AUTO_FILE} dir ${AUTO_DIR}"
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-    - test
-```
-
-Upon execution, you may see the following response:
-
-```
-#!bin/bash -eo pipefail
-echo file $(AUTO_FILE) dir $(AUTO_DIR)
-file directlySuccess!
-```
-
-## Logging Outputs
-
-* Question: Is there a standard way to log output? For example, Jenkins plugins provide console links to show the log output and provide hooks to log those messages. It is possible to log `stdout`, but is there a better way to log those log messages?
-
-* Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
-
-## Failing Builds
-
-* Question: How can I intentionally fail a job that invokes an orb from within an orb?
-
-* Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
-
-## Private Installation of CircleCI When Using Orbs
-
-* Question: May I use a private installation of CircleCI Server when using working with orbs?
-
-* Answer: No. CircleCI Server does not currently support the use of orbs.
-
-## Using Orb Elements For Other Orbs
-
-* Question: May I use elements from a different orb when creating my own orb?
-
-* Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
-
-  ```yaml
-  version: 2.1
-  orbs:
-    some-orb: some-ns/some-orb@volatile
-  executors:
-    my-executor: some-orb/their-executor
-  commands:
-    my-command: some-orb/their-command
-  jobs:
-    my-job: some-orb/their-job
-    another-job:
-      executor: my-executor
-      steps:
-        - my-command:
-            param1: "hello"
-  ```
-
-## Using 3rd Party Orbs
-
-* Question: Why do I receive an error message when trying to use a 3rd party orb?
-
-* Answer: When using a 3rd party orb, you must first opt-in to using 3rd party orbs. If you use a 3rd party orb before opting in, you will receive the following error message:
-
-```
-"Orb {orb@version} not loaded. To use this orb, an organization admin must opt-in to using third party orbs in Organization Security settings."
-```
-
-Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
-
-To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" and enable this setting.
-
-![Enable 3rd Party Orbs]( {{ site.baseurl }}/assets/img/docs/third-party-orbs.png)
-
-**Note:** CircleCI does not require this for certified orbs (orbs that have been reviewed and approved by CircleCI prior to publishing). At this time, the certification program for orbs authored by third parties is not yet available, though will be available in the near future.
-
-## See Also
+## See also
+{: #see-also }
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
 - Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) for information on how to test orbs you have created.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.

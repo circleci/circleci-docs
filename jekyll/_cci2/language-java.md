@@ -5,27 +5,32 @@ short-title: "Java"
 description: "Building and Testing with Java on CircleCI 2.0"
 categories: [language-guides]
 order: 4
+version:
+- Cloud
+- Server v2.x
 ---
 
-This guide will help you get started with a Java application building with Gradle on CircleCI. 
+This guide will help you get started with a Java application building with Gradle on CircleCI.
 
 * TOC
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-We're going to make a few assumptions here:
+We are going to make a few assumptions here:
 
 * You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java-maven/).
-* You are using Java 11. 
-* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/). 
+* You are using Java 11.
+* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/).
 * Your application can be distributed as an all-in-one uberjar.
 
 
-## Sample Configuration
+## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 ```yaml
@@ -40,7 +45,13 @@ jobs: # a collection of steps
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker: # run the steps with Docker
       - image: circleci/openjdk:11.0.3-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
@@ -95,19 +106,21 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build 
+    - build
 ```
 {% endraw %}
 
-## Get the Code
+## Get the code
+{: #get-the-code }
 
 The configuration above is from a demo Java app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-java-spring](https://github.com/CircleCI-Public/circleci-demo-java-spring).
 
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
+If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in CircleCI and click the **Follow Project** button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
-Now we’re ready to build a `config.yml` from scratch.
+Now we are ready to build a `config.yml` from scratch.
 
-## Config Walkthrough
+## Config walkthrough
+{: #config-walkthrough }
 
 We always start with the version.
 
@@ -131,14 +144,20 @@ jobs:
 
 An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/) to speed up the job.
 
-We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/).
+We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/). We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
 
 ```yaml
 version: 2
 ...
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
@@ -146,7 +165,7 @@ version: 2
 
 We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `11.0.3-jdk-stretch`.
 
-Now we’ll add several `steps` within the `build` job.
+Now we will add several `steps` within the `build` job.
 
 We start with `checkout` so we can operate on the codebase.
 
@@ -258,7 +277,8 @@ workflows:
 
 Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 
-## See Also
+## See also
+{: #see-also }
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

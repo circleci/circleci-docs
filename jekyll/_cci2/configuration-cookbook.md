@@ -5,30 +5,35 @@ short-title: "Configuration Cookbook"
 description: "Starting point for Configuration Cookbook"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
-The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and its associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
+The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
 
 * TOC
 {:toc}
 
 ## Introduction
+{: #introduction }
 
-This page, and its associated "recipes," describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. Whenever possible, CircleCI orbs will be used in these recipes since this will simplify the steps required to perform these tasks.
+This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. Each recipe in this cookbook relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs.
 
-### What Are CircleCI Orbs?
+### What are CircleCI orbs?
+{: #what-are-circleci-orbs }
+{:.no_toc}
 
-CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
+CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a reference for configuration best practices.
 
-Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
+Refer to the [CircleCI Orbs Registry](https://circleci.com/developer/orbs) for the complete list of available orbs.
 
-To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
+To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/developer/orbs/orb/circleci/hello-build) in the `circleci` namespace.
 
 ```yaml
 version: 2.1
 
 orbs:
-  hello: circleci/hello-build@0.0.5
+  hello: circleci/hello-build@x.y.z
 
 workflows:
   "Hello Workflow":
@@ -36,120 +41,87 @@ workflows:
       - hello/hello-build
 ```
 
-For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
+For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-#### Configuring Your Environment for the CircleCI Platform and Orbs
+## Configure your environment for CircleCi pipelines and orbs
+{: #configure-your-environment-for-circleci-pipelines-and-orbs }
+{:.no_toc}
 
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
-`version: 2.1`
+* In order to use pipelines features and orbs you must use `version 2.1` config.
+* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
+* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
+* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
+* Any items that appear within `< >` should be replaced with your own parameters.
 
-**Note:** If you do not already have pipelines enabled, go to **Settings > Project**, select settings for the project you are currently working on by clicking its cog icon, select **Advanced Settings** and scroll down to use the radio button to enable pipelines.
+## Deploy changes to Amazon ECS
+{: #deploy-changes-to-amazon-ecs }
 
-![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
+The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. This recipe shows you how to quickly deploy software changes to Amazon ECS using CircleCI orbs, but if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
 
-2) Add the orbs stanza below your version, which in turn imports the orb:
+### Setting environment variables
+{: #setting-environment-variables }
+The following environment variables need to be set in CircleCI either directly or through a context:
 
-```yaml
-aws-ecs: circleci/aws-ecs@0.0.10
-```
+* `AWS_ECR_ACCOUNT_URL`
+* `MY_APP_PREFIX`
+* `AWS_REGION`
+* `AWS_ACCESS_KEY_ID`
 
-3) Invoke the orbs element (e.g. `aws-ecs elements`) in your existing workflows and jobs.
+If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
 
-### Configuration Recipes
+**Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
-The table below lists the different build configuration "recipes" you can perform using CircleCI orbs.
+### Build, push and deploy a service update
+{: #build-push-and-deploy-a-service-update }
 
-Configuration Recipe | Description
-------------|-----------
-[Deploying Software Changes to Amazon Elastic Container Service (ECS)](#header1) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
-[Deploying Software Changes to Google Kubernetes Engine (GKE)](#header2) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
-[Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#header3) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
-[Deploying Applications to Heroku](#header4) | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
-[Enabling Custom Slack Notifications in CircleCI Jobs](#header5) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
+To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible: the `aws-ecr` orb to build and push an updated image to ECR, and the `aws-ecs` orb to deploy you service update.
 
-## Deploying Software Changes to Amazon ECS {#header1}
+The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
 
-The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
+```yml
+version: 2.1 # 2.1 config required to use orbs
 
-### Prerequisites
-
-Before deploying any software changes to Amazon ECS on the CircleCI platform, you must first perform a series of configuration steps to ensure you have properly set up and configured your environment for the CircleCI platform. Also, because CircleCI has created an "orb" to simplify these steps, you will also need to ensure your CircleCI project has been configured to use CircleCI orbs.
-
-### Updating the Amazon ECS Service
-
-Now that your environment is configured to work with orbs, update the Amazon ECS service to ensure you have the latest version of ECS. There are two different ways you can update the Amazon ECS Service, depending on whether you also want to update the existing Amazon Web Services CLI. Both of these approaches are described below.
-
-#### Updating the Amazon ECS Sevice Without Updating AWS CLI
-
-To update the Amazon ECS Service without updating the AWS CLI using CircleCI orbs, review the the example shown below, which shows you how to update the ECS service.
-
-```yaml
-version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@0.0.4
-  aws-ecs: circleci/aws-ecs@0.0.3
+  aws-ecr: circleci/aws-ecr@x.y.z # invoke the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@x.y.z # invoke the AWS ECS orb
+
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
-          account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
+      - aws-ecr/build-and-push-image: # orb built-in job
           repo: '${MY_APP_PREFIX}'
-          region: '${AWS_REGION}'
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update:
+      - aws-ecs/deploy-service-update: # orb built-in job
           requires:
-            - aws-ecr/build_and_push_image
+            - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
           cluster-name: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-Notice in this example that you need to instantiate two different AWS ECS orbs: `aws-ecs 0.0.3` and `aws-ecs 0.0.4` to update the ECS service. Once you have instantiated these two orbs, the orb enables the configuration, and then pushes the image, before finally deploying the service update to ECS.
+For a full list of usage options and orb elements see the [AWS-ECS orb page](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) in the CircleCI Orbs Registry.
 
-#### Updating the Amazon Web Services CLI and Amazon ECS
+### Verify the AWS ECS service update
+{: #verify-the-aws-ecs-service-update }
 
-To update both the AWS CLI and ECS Service simultaneously, use the orb shown below to simplify the process of updating these services.
-
-```yaml
-version: 2.1
-orbs:
-  aws-cli: circleci/aws-cli@0.1.4
-  aws-ecs: circleci/aws-ecs@0.0.3
-jobs:
-  update-tag:
-    docker:
-      - image: 'circleci/python:3.7.1'
-    steps:
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
-      - aws-ecs/update-service:
-          family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
-          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=stable'
-workflows:
-  deploy:
-    jobs:
-      - update-tag
-```
-
-Notice in this above example that you instantiate two different orbs, `aws-cli: circleci/aws-cli@0.1.4` and `aws-ecs: circleci/aws-ecs@0.0.3` to perform a number of sequential steps to ensure that the Amazon CLI is installed and configured before updating the Amazon ECS service.
-
-#### Verifying the Amazon ECS Service Update
-
-Once you have updated the Amazon ECS service, verify the update was properly applied using the CircleCI Amazon ECR/ECS orb. This orb example is shown below.
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
 
 ```yaml
 version: 2.1
+
 orbs:
-  aws-cli: circleci/aws-cli@0.1.4
-  aws-ecs: circleci/aws-ecs@0.0.3
+  aws-cli: circleci/aws-cli@x.y.z
+  aws-ecs: circleci/aws-ecs@x.y.z
+
 jobs:
   verify-deployment:
     docker:
-      - image: 'circleci/python:3.7.1'
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - aws-cli/install
       - aws-cli/configure:
@@ -174,19 +146,17 @@ workflows:
       - verify-deployment
 ```
 
-This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
+This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the [task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
 
-For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
+Find more detailed information in the CircleCI Orb Registry for the CircleCI [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) and [AWS ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) orbs.
 
-## Deploying Software Changes to Google Kubernetes Engine (GKE) {#header2}
+## Interact with Google Kubernetes Engine (GKE)
+{: #interact-with-google-kubernetes-engine-gke }
 
-The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using the GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
+The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
-### Prerequisites
-
-The sections below list the prerequisites that must be met before deploying any software changes to the Google Kubernetes Engine (GKE).
-
-#### Setting Environment Variables
+### Set environment variables
+{: #set-environment-variables }
 The following environment variables need to be set in CircleCI either directly or through a context:
 
 - `GCLOUD_SERVICE_KEY` (required)
@@ -195,369 +165,83 @@ The following environment variables need to be set in CircleCI either directly o
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
 
-### Managing GKE Actions
-
-The CircleCI GKE orb enables you to perform several different actions within the orb while working with a GKE cluster, including:
-
-- installing `gcloud` and `kubectl` if it is not already installed
-- initialize the `gcloud` CLI
-- update an existing deployment's docker image
-
-The code example below shows how you can perform these actions while also rolling out the docker image to the GKE cluster.
-
-```yaml
-version: 2.1
-commands:
-  install:
-    description: "Install `gcloud` and `kubectl` if not already installed."
-    steps:
-      - gcloud/install
-      - k8s/install
-  init:
-    description: "Initialize the `gcloud` CLI."
-    steps:
-      - gcloud/initialize
-  rollout-image:
-    description: "Update a deployment's Docker image."
-    parameters:
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      image:
-        description: A name for your docker image
-        type: string
-    steps:
-      - run: |
-          gcloud container clusters get-credentials <<parameters.deployment>>
-          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
-```
-
-### Publishing and Rolling Out The Image to the GKE Cluster
-
-Now that you have installed (if necessary) and initialized `gcloud` and updated the docker image, you may then publish and roll out this updated image to the GKE cluster for later use.
-
-```yaml
-version: 2.1
-jobs:
-  publish-and-rollout-image:
-    description: "Update cluster with new Docker image."
-    machine: true
-    parameters:
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      gcloud-service-key:
-        description: The gcloud service key
-        type: env_var_name
-        default: GCLOUD_SERVICE_KEY
-      google-project-id:
-        description: The Google project ID to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_PROJECT_ID
-      google-compute-zone:
-        description: The Google compute zone to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_COMPUTE_ZONE
-      registry-url:
-        description: The GCR registry URL from ['', us, eu, asia].gcr.io
-        type: string
-        default: gcr.io
-      image:
-        description: A name for your docker image
-        type: string
-      tag:
-        description: A docker image tag
-        type: string
-        default: "latest"
-      path-to-dockerfile:
-        description: The relative path to the Dockerfile to use when building image
-        type: string
-        default: "."
-    steps:
-      - checkout
-      - gcr/gcr-auth:
-          google-project-id: <<parameters.google-project-id>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-      - install
-      - gcr/build-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: << parameters.tag >>
-          path-to-dockerfile: <<parameters.path-to-dockerfile>>
-      - gcr/push-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: <<parameters.tag>>
-      - rollout-image:
-          deployment: "<<parameters.deployment>>"
-          container: "<<parameters.container>>"
-          image: "<<parameters.image>>"
-```
-
-### Example GKE Orb
-
-The example below shows how you can use the CircleCI GKE orb to log into the Google Cloud Platform (GCP), build and publish a docker image, and then roll the image out to the GKE cluster.
+### Creating and deleting clusters
+{: #creating-and-deleting-clusters }
+Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
 ```yaml
 version: 2.1
 
-# Orb Dependencies
 orbs:
-  gcloud: circleci/gcp-cli@1.0.6
-  gcr: circleci/gcp-gcr@0.0.2
-  k8s: circleci/kubernetes@0.1.0
+  gke: circleci/gcp-gke@x.y.z
 
-commands:
-  install:
-    description: "Install `gcloud` and `kubectl` if not already installed."
-    steps:
-      - gcloud/install
-      - k8s/install
-  init:
-    description: "Initialize the `gcloud` CLI."
-    steps:
-      - gcloud/initialize
-  rollout-image:
-    description: "Update a deployment's Docker image."
-    parameters:
-      cluster:
-        description: "The Kubernetes cluster name."
-        type: string
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      image:
-        description: A name for your docker image
-        type: string
-    steps:
-      - run: |
-          gcloud container clusters get-credentials <<parameters.cluster>>
-          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
-
-jobs:
-  publish-and-rollout-image:
-    description: "Update cluster with new Docker image."
-    machine: true
-    parameters:
-      cluster:
-        description: "The Kubernetes cluster name."
-        type: string
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      gcloud-service-key:
-        description: The gcloud service key
-        type: env_var_name
-        default: GCLOUD_SERVICE_KEY
-      google-project-id:
-        description: The Google project ID to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_PROJECT_ID
-      google-compute-zone:
-        description: The Google compute zone to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_COMPUTE_ZONE
-      registry-url:
-        description: The GCR registry URL from ['', us, eu, asia].gcr.io
-        type: string
-        default: gcr.io
-      image:
-        description: A name for your docker image
-        type: string
-      tag:
-        description: A docker image tag
-        type: string
-        default: "latest"
-      path-to-dockerfile:
-        description: The relative path to the Dockerfile to use when building image
-        type: string
-        default: "."
-    steps:
-      - checkout
-      - gcr/gcr-auth:
-          google-project-id: <<parameters.google-project-id>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-      - install
-      - gcr/build-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: << parameters.tag >>
-          path-to-dockerfile: <<parameters.path-to-dockerfile>>
-      - gcr/push-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: <<parameters.tag>>
-      - rollout-image:
-          cluster: "<<parameters.cluster>>"
-          deployment: "<<parameters.deployment>>"
-          container: "<<parameters.container>>"
-          image: "<<parameters.image>>"
-
-example:
-  publish-and-rollout-image:
-    description: |
-      "The simplest example of using this Orb. Logs into GCP, builds and 
-      publishes a Docker image, and then rolls the image out to a GKE cluster."
-    usage:
-      version: 2.1
-      orbs:
-        gke: felicianotech/test-gke@dev:testing-3
-      workflows:
-        main:
-          jobs:
-            - build
-            - gke/publish-and-rollout-image:
-                context: gcp-testing
-                deployment: orb-badge-server
-                image: orb-badge-server
-                tag: "2"
+workflows:
+  main:
+    jobs:
+      - gke/create-cluster:
+          cluster: gcp-testing
 ```
 
-## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS) {#header3}
+To delete a cluster, all you need is:
 
-CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Container Service (ECS) to perform the following tasks:
+```yaml
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+
+workflows:
+  main:
+    jobs:
+      - gke/delete-cluster:
+          cluster: gcp-testing
+```
+
+### Publishing and rolling out the image to the GKE cluster
+{: #publishing-and-rolling-out-the-image-to-the-gke-cluster }
+
+Using the CircleCI GKE orb makes publishing and rolling out a docker image to your GKE cluster very simple, as shown in the example below. All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/developer/orbs/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
+
+```yaml
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+
+workflows:
+  my-workflow:
+    jobs:
+      - gke/publish-and-rollout-image:
+          cluster: <my-cluster-name>
+          container: <my-kubernetes-container-name>
+          deployment: <my-kubernetes-deployment-name>
+          image: <my-docker-image-name>
+```
+
+## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
+{: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
+
+CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Kubernetes Service (EKS) to perform the following tasks:
 
 * Create an EKS cluster
 * Create a Kubernetes deployment
 * Install Helm charts
 * Update a container image
 
-Before working with the CircleCI AWS-EKS orb, you may wish to review the specifics of the [AWS-EKS](https://circleci.com/orbs/registry/orb/circleci/aws-eks#quick-start) orb in the CircleCI Orb Registry page.
-
-### Prerequisites
-
-Before using the Amazon EKS service, make sure you meet the following requirements:
-
-* Your environment is configured to use the CircleCI platform and Orbs.
-* You have installed the `eksctl` tool.
-* You have installed `AWS-CLI` and `AWS-IAM Authenticator for Kubernetes`.
-
-#### Configuring Your Environment to Use the CircleCI Platform and Orbs
-
-To configure your environment to use CircleCI and orbs, perform the following steps:
-
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
-
-`version: 2.1`
-
-2) If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and turn enable pipelines.
-
-Add the orbs stanza below your version, invoking the orb:
-
-`orbs:
-  aws-eks: circleci/aws-eks@0.2.1`
-
-3) Use `aws-eks` elements in your existing workflows and jobs.
-
-#### Installing the Amazon `eksctl` tool
-
-If the Amazon `eksctl` tool is not already installed, install `eksctl` so you can use these tools to manage a cluster on EKS - Amazon's managed Kubernetes service for EC2.
-
-The code sample shown below illustrates how you can install the 'eksctl' tool in your environment using the CircleCI orb.
-
-```yaml
-version: 2.1
-description:
-Requirements: curl, amd64 architecture
-steps:
-  - run:
-      command: >
-        if which eksctl > /dev/null; then
-          echo "eksctl is already installed"
-          exit 0
-        fi
-
-        mkdir -p eksctl_download
-
-        curl --silent --location --retry 5
-        "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname
-        -s)_amd64.tar.gz" \
-          | tar xz -C eksctl_download
-        chmod +x eksctl_download/eksctl
-
-        SUDO=""
-
-        if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
-          SUDO="sudo"
-        fi
-
-        $SUDO mv eksctl_download/eksctl /usr/local/bin/
-
-        rmdir eksctl_download
-      name: Install the eksctl tool
-```
-
-#### Install AWS-CLI and AWS-IAM for Kubernetes
-
-CircleCI enables you to use the `AWS-CLI` and `AWS-IAM` authentication tool to run command-line tools in an AWS cluster. Where `AWS-CLI` allows you to run these command-line tools, `AWS-IAM` provides you with the capability to authenticate an existing Kubernetes cluster. By using the AWS IAM Authenticator for Kubernetes, you will not have to manage a separate credential for the Kubernetes access. If you would like more detailed information about how to install and use these tools, refer to the [AWS-IAM GitHub](https://github.com/kubernetes-sigs/aws-iam-authenticator) page.
-
-To install the AWS IAM Authenticator for Kubernetes, see the code sample shown below.
-
-```yaml
-version: 2.1
-Requirements: curl, amd64 architecture
-parameters:
-  release-tag:
-    default: ''
-    description: >
-      Use this to specify a tag to select which published release of the AWS IAM Authenticator, as listed on 
-      https://github.com/kubernetes-sigs/aws-iam-authenticator/releases, to install. If no value is specified, the latest
-      release will be installed.
-
-      Note: Release versions earlier than v0.3.0 cannot be specified. Also, pre or alpha releases cannot be specified.
-    type: string
-steps:
-  - run:
-      command: >
-        if which aws-iam-authenticator > /dev/null; then
-          echo "AWS IAM Authenticator for Kubernetes is already installed"
-          exit 0
-        fi
-        PLATFORM="linux"
-        if [ -n "$(uname | grep "Darwin")" ]; then
-          PLATFORM="darwin"
-        fi
-        RELEASE_TAG="<< parameters.release-tag >>
-        RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/latest"
-        if [ -n "${RELEASE_TAG}" ]; then
-          RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/tags/${RELEASE_TAG}"
-        fi
-        DOWNLOAD_URL=$(curl -s --retry 5 "${RELEASE_URL}" \
-            | grep "${PLATFORM}" | awk '/browser_download_url/ {print $2}' | sed 's/"//g')
-        curl -L -o aws-iam-authenticator "$DOWNLOAD_URL"
-        chmod +x ./aws-iam-authenticator
-        SUDO=""
-        if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
-          SUDO="sudo"
-        fi
-        $SUDO mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
-      name: Install the AWS IAM Authenticator for Kubernetes
-```
-
-**Note:** Make sure curl in enabled, and you are using the amd64 architecture.
+Before working with the CircleCI AWS-EKS orb, you may wish to review the specifics of the [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) orb in the CircleCI Orb Registry page.
 
 ### Create an EKS Cluster
+{: #create-an-eks-cluster }
 
-Once you meet the requirements for using the CircleCI AWS-EKS orb, you may create an EKS cluster using the code sample shown below.
+Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
 
 ```yaml
 version: 2.1
+
+orbs:
+  aws-eks: circleci/aws-eks@x.y.z
+  kubernetes: circleci/kubernetes@x.y.z
+
 jobs:
   test-cluster:
     executor: aws-eks/python3
@@ -574,12 +258,10 @@ jobs:
           command: |
             kubectl get services
           name: Test cluster
-orbs:
-aws-eks: circleci/aws-eks@0.1.0
-kubernetes: circleci/kubernetes@0.3.0
-version: 2.1
+
+
 workflows:
-deployment:
+  deployment:
     jobs:
       - aws-eks/create-cluster:
           cluster-name: my-eks-demo
@@ -593,11 +275,12 @@ deployment:
             - test-cluster
 ```
 
-In this example, when you use the CircleCI AWS-EKS orb, you can install Kubernetes, update the Kubernetes configuration with the authenticator, and then retrieve Kubernetes services in one single job.
+In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
 
-### Create a Kubernetes Deployment
+### Create a Kubernetes deployment
+{: #create-a-kubernetes-deployment }
 
-After creating a Kubernetes cluster, you may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
+You may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
 
 * update resources within the cluster
 * update the Kubernetes configuration with the authenticator
@@ -607,6 +290,11 @@ The code example below illustrates how you can create the Kubernetes deployment.
 
 ```yaml
 version: 2.1
+
+orbs:
+  aws-eks: circleci/aws-eks@x.y.z
+  kubernetes: circleci/kubernetes@x.y.z
+
 jobs:
   create-deployment:
     executor: aws-eks/python3
@@ -624,10 +312,7 @@ jobs:
           get-rollout-status: true
           resource-file-path: tests/nginx-deployment/deployment.yaml
           resource-name: deployment/nginx-deployment
-orbs:
-  aws-eks: circleci/aws-eks@0.1.0
-  kubernetes: circleci/kubernetes@0.3.0
-version: 2.1
+
 workflows:
   deployment:
     jobs:
@@ -655,408 +340,62 @@ workflows:
             - aws-eks/update-container-image
 ```
 
-### Install Helm On Your Cluster
+### Install a Helm chart in your cluster
+{: #install-a-helm-chart-in-your-cluster }
 
-To simplify the Helm installation on your cluster,
+Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
 
-```yaml
-version: 2.1
-description: |
-  Installs helm onto the EKS cluster.
-  Note: Parameters like tiller-tls need to be set to
-  apply security configurations to the tiller configuration.
-executor: << parameters.executor >>
-parameters:
-  aws-profile:
-    default: ''
-    description: |
-      The AWS profile to be used. If not specified, the configured default
-      profile for your AWS CLI installation will be used.
-    type: string
-  aws-region:
-    default: ''
-    description: |
-      AWS region that the EKS cluster is in.
-    type: string
-  cluster-name:
-    description: |
-      The name of the EKS cluster.
-    type: string
-  enable-cluster-wide-admin-access:
-    default: false
-    description: |
-      Allow tiller to have admin access to the entire EKS cluster
-      by creating a role binding with a cluster-admin role
-      and a service account with name as specified by the service-account
-      parameter or defaulting to "tiller".
-      Note: This is a convenience option but is typically not advisable
-      in a production cluster for security reasons.
-    type: boolean
-  executor:
-    default: python3
-    description: |
-      Executor to use for this job.
-    type: executor
-  service-account:
-    default: ''
-    description: |
-      Name of service account to Tiller to use.
-      Note: A role binding which specifies a role
-      and a service account with the specified name, must
-      be created in advance, unless
-      enable-cluster-wide-admin-access is set to true.
-    type: string
-  tiller-ca-cert:
-    default: ''
-    description: |
-      The path to CA root certificate
-    type: string
-  tiller-namespace:
-    default: ''
-    description: |
-      Specify the namespace of Tiller
-    type: string
-  tiller-tls:
-    default: false
-    description: |
-      Install Tiller with TLS enabled
-    type: boolean
-  tiller-tls-cert:
-    default: ''
-    description: |
-      The path to TLS certificate file to install with Tiller
-    type: string
-  tiller-tls-hostname:
-    default: ''
-    description: |
-      The server name used to verify the hostname on the returned
-      certificates from Tiller
-    type: string
-  tiller-tls-key:
-    default: ''
-    description: |
-      The path to TLS key file to install with Tiller
-    type: string
-  tiller-tls-verify:
-    default: false
-    description: |
-      Install Tiller with TLS enabled and to verify remote certificates
-    type: boolean
-  wait:
-    default: true
-    description: |
-      Block until Tiller is running and ready to receive requests
-    type: boolean
-steps:
-  - update-kubeconfig-with-authenticator:
-      aws-profile: << parameters.aws-profile >>
-      aws-region: << parameters.aws-region >>
-      cluster-name: << parameters.cluster-name >>
-      install-kubectl: true
-  - helm/install-helm-on-cluster:
-      enable-cluster-wide-admin-access: << parameters.enable-cluster-wide-admin-access >>
-      service-account: << parameters.service-account >>
-      tiller-ca-cert: << parameters.tiller-ca-cert >>
-      tiller-namespace: << parameters.tiller-namespace >>
-      tiller-tls: << parameters.tiller-tls >>
-      tiller-tls-cert: << parameters.tiller-tls-cert >>
-      tiller-tls-hostname: << parameters.tiller-tls-hostname >>
-      tiller-tls-key: << parameters.tiller-tls-key >>
-      tiller-tls-verify: << parameters.tiller-tls-verify >>
-      wait: << parameters.wait >>
-```
-
-#### Install a Helm Chart in Your Cluster
-
-Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
-
-Once Helm is installed in your Kubernetes cluster, you can then install Helm charts using the code example shown below.
+Using the `aws-eks` orb you can install Helm on your Kubernetes cluster, then install a Helm chart just using the orb's built-in jobs. Below is a code example for this, which also cleans up by deleting the release and cluster at the end of the process:
 
 ```yaml
 version: 2.1
-description: |
-  Installs a helm chart into the EKS cluster.
-  Requirements: helm should be installed on the cluster.
-executor: << parameters.executor >>
-parameters:
-  aws-profile:
-    default: ''
-    description: |
-      The AWS profile to be used. If not specified, the configured default
-      profile for your AWS CLI installation will be used.
-    type: string
-  aws-region:
-    default: ''
-    description: |
-      AWS region that the EKS cluster is in.
-    type: string
-  chart:
-    description: |
-      Specify for installation a chart reference (e.g. stable/mariadb),
-      or a path to a packaged chart (e.g. ./nginx-1.2.3.tgz),
-      or a path to an unpacked chart directory (e.g. ./nginx)
-      or an absolute URL (e.g. https://example.com/charts/nginx-1.2.3.tgz)
-    type: string
-  cluster-name:
-    description: |
-      The name of the EKS cluster.
-    type: string
-  executor:
-    default: python3
-    description: |
-      Executor to use for this job.
-    type: executor
-  namespace:
-    default: ''
-    description: |
-      The kubernetes namespace that should be used.
-    type: string
-  release-name:
-    default: ''
-    description: |
-      Specify a name for the release.
-    type: string
-  tiller-namespace:
-    default: ''
-    description: |
-      Specify the namespace of Tiller
-    type: string
-  tls:
-    default: false
-    description: |
-      Enable TLS for the request
-    type: boolean
-  tls-ca-cert:
-    default: ''
-    description: |
-      Path to TLS CA certificate file
-    type: string
-  tls-cert:
-    default: ''
-    description: |
-      Path to TLS certificate file
-    type: string
-  tls-hostname:
-    default: ''
-    description: |
-      The server name used to verify the hostname on the returned
-      certificates from the server
-    type: string
-  tls-key:
-    default: ''
-    description: |
-      Path to TLS key file
-    type: string
-  tls-verify:
-    default: false
-    description: |
-      Enable TLS for request and verify remote
-    type: boolean
-  values-to-override:
-    default: ''
-    description: |
-      Override values in a chart using the --set flag of the helm install
-      command. Format: key1=val1,key2=val2
-    type: string
-  wait:
-    default: true
-    description: |
-      Whether to wait for the installation to be complete
-    type: boolean
-steps:
-  - update-kubeconfig-with-authenticator:
-      aws-profile: << parameters.aws-profile >>
-      aws-region: << parameters.aws-region >>
-      cluster-name: << parameters.cluster-name >>
-      install-kubectl: true
-  - helm/install-helm-chart:
-      chart: << parameters.chart >>
-      namespace: << parameters.namespace >>
-      release-name: << parameters.release-name >>
-      tiller-namespace: << parameters.tiller-namespace >>
-      tls: << parameters.tls >>
-      tls-ca-cert: << parameters.tls-ca-cert >>
-      tls-cert: << parameters.tls-cert >>
-      tls-hostname: << parameters.tls-hostname >>
-      tls-key: << parameters.tls-key >>
-      tls-verify: << parameters.tls-verify >>
-      values-to-override: << parameters.values-to-override >>
-      wait: << parameters.wait >>
-```
 
-### Update a Container Image
-
-Occasionally, you may find it necessary to update the container image of a resource in your Kubernetes cluster. The CircleCI AWS-EKS orb enables you to update this image quickly and easily by first updating the Kubernetes configuration with the IAM authenticator, and then updating the specific image in the Kubernetes configuration.
-
-The code example below illustrates how this orb updates an existing container image in the Kubernetes cluster.
-
-```yaml
-version: 2.1
-description: |
-  Updates the container image(s) of a resource on EKS.
-executor: << parameters.executor >>
-parameters:
-  aws-profile:
-    default: ''
-    description: |
-      The AWS profile to be used. If not specified, the configured default
-      profile for your AWS CLI installation will be used.
-    type: string
-  aws-region:
-    default: ''
-    description: |
-      AWS region that the EKS cluster is in.
-    type: string
-  cluster-name:
-    description: |
-      The name of the EKS cluster.
-    type: string
-  container-image-updates:
-    description: |
-      Specify a list of container image updates
-      (space-delimited name value pairs in the form
-      CONTAINER_NAME_1=CONTAINER_IMAGE_1 ... CONTAINER_NAME_N=CONTAINER_IMAGE_N)
-      to be applied to the resource via `kubectl set image`.
-      e.g. "busybox=busybox nginx=nginx:1.9.1"
-    type: string
-  executor:
-    default: python3
-    description: |
-      Executor to use for this job.
-    type: executor
-  get-rollout-status:
-    default: false
-    description: |
-      Get the status of the rollout.
-      This can only be used for resource types that are valid
-      for usage with `kubectl rollout` subcommands.
-    type: boolean
-  namespace:
-    default: ''
-    description: |
-      The kubernetes namespace that should be used.
-    type: string
-  pinned-revision-to-watch:
-    default: ''
-    description: |
-      Pin a specific revision to be watched and abort watching if it is rolled
-      over by another revision.
-      Only effective if get-rollout-status is set to true.
-    type: string
-  record:
-    default: false
-    description: |
-      Whether to record the update
-    type: boolean
-  resource-name:
-    default: ''
-    description: |
-      Resource name in the format TYPE/NAME e.g. deployment/nginx-deployment
-      Either resource-file-path or resource-name need to be specified.
-      This is required if get-rollout-status is set to true.
-    type: string
-  show-kubectl-command:
-    default: false
-    description: |
-      Whether to show the kubectl command used.
-    type: boolean
-  watch-rollout-status:
-    default: true
-    description: |
-      Whether to watch the status of the latest rollout until it's done.
-      Only effective if get-rollout-status is set to true.
-    type: boolean
-  watch-timeout:
-    default: ''
-    description: >
-      The length of time to wait before ending the watch, zero means never.
-      Any other values should contain a corresponding time unit (e.g. 1s, 2m,
-      3h).
-      Only effective if get-rollout-status is set to true.
-    type: string
-steps:
-  - update-kubeconfig-with-authenticator:
-      aws-profile: << parameters.aws-profile >>
-      aws-region: << parameters.aws-region >>
-      cluster-name: << parameters.cluster-name >>
-      install-kubectl: true
-  - kubernetes/update-container-image:
-      container-image-updates: << parameters.container-image-updates >>
-      get-rollout-status: << parameters.get-rollout-status >>
-      namespace: << parameters.namespace >>
-      pinned-revision-to-watch: << parameters.pinned-revision-to-watch >>
-      record: << parameters.record >>
-      resource-name: << parameters.resource-name >>
-      show-kubectl-command: << parameters.show-kubectl-command >>
-      watch-rollout-status: << parameters.watch-rollout-status >>
-      watch-timeout: << parameters.watch-timeout >>
-```
-
-## Deploying Applications to Heroku {#header4}
-
-The Heroku platform is a cloud-based, fully-scalable platform that enables you to quickly and easily deliver and deploy applications. Using CircleCI builds and orbs, you can simplify the deployment process in a few simple steps by following the steps described in the sections below.
-
-### Prerequisites
-
-Before you can deploy an applications to the Heroku platform, make sure the following requirements are met:
-
-* Your environment is configured to use the CircleCI platform and CircleCI orbs.
-* You have installed the Heroku CLI.
-
-#### Installing the Heroku CLI
-
-If the Heroku CLI is not already installed, install the Heroku CLI so you can deploy your application to the Heroku platform. To install the Heroku CLI, run the following installation step:
-
-```yaml
-version: 2.1
-commands:
-  install:
-    steps:
-      - run:
-          name: "Install Heroku CLI, if necessary"
-          command: |
-            if [[ $(command -v heroku) == "" ]]; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
-```
-
-### Deploying Application to Heroku Platform Using Git
-
-Now that you have configured your environment to work with the CircleCI platform and orbs, and installed the Heroku CLI (if necessary), deploy your application to the Heroku platform using git. By using git, you can simplify the deployment process, ensuring that you can quickly and easily deploy applications to the Heroku platform by only performing a single step.
-
-```yaml
-version: 2.1
 orbs:
-  heroku: circleci/heroku@0.0.10
+  aws-eks: circleci/aws-eks@x.y.z
+
 workflows:
-  heroku_deploy:
+  deployment:
     jobs:
-      - heroku/deploy-via-git
+      - aws-eks/create-cluster:
+          cluster-name: my-eks-helm-demo
+      - aws-eks/install-helm-on-cluster:
+          cluster-name: my-eks-helm-demo
+          enable-cluster-wide-admin-access: true
+          requires:
+            - aws-eks/create-cluster
+      - aws-eks/install-helm-chart:
+          chart: stable/grafana
+          cluster-name: my-eks-helm-demo
+          release-name: grafana-release
+          requires:
+            - aws-eks/install-helm-on-cluster
+      - aws-eks/delete-helm-release:
+          cluster-name: my-eks-helm-demo
+          release-name: grafana-release
+          requires:
+            - aws-eks/install-helm-chart
+      - aws-eks/delete-cluster:
+          cluster-name: my-eks-helm-demo
+          requires:
+            - aws-eks/delete-helm-release
 ```
 
-Notice in the above example, when the CircleCI Heroku orb (`circleci/heroku@0.0.10`) is invoked, the `heroku-deploy` workflow is initiated, enabling the `deploy-via-git` job to run.
-
-For more detailed information about the CircleCI Heroku orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/heroku).
-
-## Enabling Custom Slack Notifications in CircleCI Jobs {#header5}
+## Enabling custom Slack notifications in CircleCI jobs
+{: #enabling-custom-slack-notifications-in-circleci-jobs }
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
 
-### Prerequisites
+### Notifying a Slack channel of pending approval
+{: #notifying-a-slack-channel-of-pending-approval }
 
-Before enabling custom notifications in Slack while using the CircleCI platform, ensure your environment is properly configured and setup to leverage the CircleCI platform and orbs.
-
-### Notifying a Slack Channel of Pending Approval
-
-The CircleCI Slack orb enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
+The [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
 
 ```yaml
 version: 2.1
+
 orbs:
-  slack: circleci/slack@1.0.0
-version: 2.1
+  slack: circleci/slack@x.y.z
+
 workflows:
   your-workflow:
     jobs:
@@ -1064,11 +403,12 @@ workflows:
           message: Pending approval
           webhook: webhook
 ```
-In the above example, note that you first need to invoke the `circleci/slack@1.0.0` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
+In the above example, note that you first need to invoke the `circleci/slack@x.y.z` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
 
-For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
+There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
 
-### Notifying a Slack Channel With Custom Messages
+### Notifying a Slack channel with custom messages
+{: #notifying-a-slack-channel-with-custom-messages }
 
 Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project.
 
@@ -1076,35 +416,39 @@ The example shown below details how you can create a custom message that will be
 
 ```yaml
 version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
 jobs:
   build:
     docker:
-      - image: <docker image>
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - slack/notify:
           color: '#42e2f4'
           mentions: 'USERID1,USERID2,'
           message: This is a custom message notification
           webhook: webhook
-orbs:
-  slack: circleci/slack@1.0.0
-version: 2.1
+
 workflows:
   your-workflow:
     jobs:
       - build
 ```
 
-After building a Docker image, perform the following steps to create your custom notification:
+In this example, the Slack orb command `notify` is used, along with the following parameters to create a custom notification:
 
 1. Specify the `color` of the text in the message.
 2. Identify the recipients (`mentions`) of the message.
 3. Provide the text in the `message` you want delivered.
 4. Specify the `webhook` for the message – see this [guide](https://api.slack.com/incoming-webhooks) for more on creating Slack webhooks.
 
-Once you have performed these steps, invoke the CircleCI Slack orb (`circleci/slack@1.0.0`) to initiate the workflow to deliver your notification.
-
-### Sending a Status Alert at the End of a Job Based on Success or Failure
+### Sending a status alert at the end of a job based on success or failure
+{: #sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure }
 
 You may also send a status alert at the end of a job to your recipients. Note that this status alert must be the last step in a job.
 
@@ -1112,21 +456,380 @@ The example below shows how you can send a status alert at the end of a job.
 
 ```yaml
 version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
 jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: exit 0
       - slack/status:
           fail_only: 'true'
           mentions: 'USERID1,USERID2'
-          only_for_branch: only_for_branch
+          only_for_branch: your-branch-name
           webhook: webhook
-orbs:
-  slack: circleci/slack@1.0.0
-version: 2.1
 ```
+
 Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
 
-For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
+For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
+
+## Selecting a workflow to run using pipeline parameters
+{: #selecting-a-workflow-to-run-using-pipeline-parameters }
+
+You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run.
+
+The following example defaults to running the `build` workflow, but allows control of which other workflow to run using the API:
+
+```yaml
+version: 2.1
+
+parameters:
+  action:
+    type: enum
+    enum: [build, report]
+    default: build
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: ./run-tests.sh
+
+  report:
+    machine: true
+    steps:
+      - checkout
+      - run: ./create-report.sh
+
+workflows:
+  build:
+    when:
+      equal: [ build, << pipeline.parameters.action >> ]
+    jobs:
+      - build
+
+  report:
+    when:
+      equal: [ report, << pipeline.parameters.action >> ]
+    jobs:
+      - report
+```
+
+The `action` parameter will default to `build` on pushes to the project. Below is an example of supplying a different value to `action` using the API v2 [Trigger a New Pipeline]({{ site.baseurl }}/api/v2/#operation/triggerPipeline) endpoint to select a different workflow to run, in this example, the workflow named `report` would run. Remember to substitute [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) with your values.
+
+```sh
+curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Circle-Token: API_KEY' \
+  -d '{ "parameters": { "action": report } }'
+```
+
+For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
+
+## Branch-filtering for job steps
+{: #branch-filtering-for-job-steps }
+
+Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
+
+The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
+
+```yaml
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ master, << pipeline.git.branch >> ]
+          steps:
+            - run: echo "I am on master"
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+```
+
+## Dynamic Configuration
+{: #dynamic-configuration }
+
+This section assumes you have already read the [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config) section and
+have followed the steps outlined in the [Getting started]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci) guide.
+
+The following examples of dynamic configuration usage are provided below:
+
+- [A basic example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+
+### A basic example
+{: #a-basic-example }
+
+The following is a basic example using CircleCI's dynamic configuration feature. In this example, we assume that a
+`generate-config` script already exists. The script outputs a new configuration YAML based on some type
+of work it performs. It could potentially inspect `git` history, pipeline values that get passed to it, or anything
+else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+
+```yaml
+version: 2.1
+
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the continuation orb is required in order to use dynamic configuration
+orbs:
+  continuation: circleci/continuation@0.1.2
+
+# our defined job, and its steps
+jobs:
+  setup:
+    executor: continuation/default
+    steps:
+      - checkout # checkout code
+      - run: # run a command
+          name: Generate config
+          command: |
+            ./generate-config > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml # use newly generated config to continue
+
+# our single workflow, that triggers the setup job defined above
+workflows:
+  setup:
+    jobs:
+      - setup
+```
+
+In the above configuration, we:
+
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
+- Invoke the `continuation` orb so we can use it.
+- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/2.0/executor-intro/). This job:
+    - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
+    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+    - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
+- Lastly, we call the `setup` job defined above as a part of our `workflow`
+
+**Note:** You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
+You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
+
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the
+[CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the
+[Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
+
+### Execute specific `workflows` or `steps` based on which files are modified
+{: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
+
+You may find that you would like to conditionally run a `workflow` or `step` based upon changes made to a specific fileset.
+This would be beneficial in the case of your code/microservices being stored in a monorepo, or a single repository.
+
+To achieve this, CircleCI has provided the [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering)
+orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
+
+For example, consider a monorepo structure like the example shown below:
+
+```shell
+.
+├── .circleci
+│   ├── config.yml
+│   └── continue_config.yml
+├── service1
+│   ├── Service1.java
+├── service2
+│   ├── Service2.java
+├── tests
+│   ├── IntegrationTests.java
+```
+
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
+
+#### config.yml
+{: #configyml }
+
+```yaml
+version: 2.1
+
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the path-filtering orb is required to continue a pipeline based on
+# the path of an updated fileset
+orbs:
+  path-filtering: circleci/path-filtering@0.0.2
+
+workflows:
+  # the always-run workflow is always triggered, regardless of the pipeline parameters.
+  always-run:
+    jobs:
+      # the path-filtering/filter job determines which pipeline
+      # parameters to update.
+      - path-filtering/filter:
+          name: check-updated-files
+          # 3-column, whitespace-delimited mapping. One mapping per
+          # line:
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+          mapping: |
+            service1/.* run-build-service-1-job true
+            service2/.* run-build-service-2-job true
+          base-revision: master
+          # this is the path of the configuration we should trigger once
+          # path filtering and pipeline parameter value updates are
+          # complete. In this case, we are using the parent dynamic
+          # configuration itself.
+          config-path: .circleci/continue_config.yml
+```
+
+#### continue_config.yml
+{: #continueconfigyml }
+
+```yaml
+version: 2.1
+
+orbs:
+  maven: circleci/maven@1.2.0
+
+# the default pipeline parameters, which will be updated according to
+# the results of the path-filtering orb
+parameters:
+  run-build-service-1-job:
+    type: boolean
+    default: false
+  run-build-service-2-job:
+    type: boolean
+    default: false
+
+# here we specify our workflows, most of which are conditionally
+# executed based upon pipeline parameter values. Each workflow calls a
+# specific job defined above, in the jobs section.
+workflows:
+  # when pipeline parameter, run-build-service-1-job is true, the
+  # build-service-1 job is triggered.
+  service-1:
+    when: << pipeline.parameters.run-build-service-1-job >>
+    jobs:
+      - maven/test:
+          name: build-service-1
+          command: 'install -DskipTests'
+          app_src_directory: 'service1'
+  # when pipeline parameter, run-build-service-2-job is true, the
+  # build-service-2 job is triggered.
+  service-2:
+    when: << pipeline.parameters.run-build-service-2-job >>
+    jobs:
+      - maven/test:
+          name: build-service-2
+          command: 'install -DskipTests'
+          app_src_directory: 'service2'
+  # when pipeline parameter, run-build-service-1-job OR
+  # run-build-service-2-job is true, run-integration-tests job is
+  # triggered. see:
+  # https://circleci.com/docs/2.0/configuration-reference/#logic-statements
+  # for more information.
+  run-integration-tests:
+    when:
+      or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
+    jobs:
+      - maven/test:
+          name: run-integration-tests
+          command: '-X verify'
+          app_src_directory: 'tests'
+```
+
+In the above configuration, we:
+
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
+- Invoke the `path-filtering` and `maven` orbs so we can use them.
+- Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
+- Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
+  - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
+    the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
+  - The `build-service-1` job uses the `maven` orb to compile/install the service1 code, but skips any tests
+  - The `build-service-2` job uses the `maven` orb to compile/install the service2 code, but skips any tests
+  - The `run-integration-tests` job uses the `maven` orb to run any integration tests
+- Define four workflows, three of which are conditionally executed:
+  - The `service-1` workflow triggers the `build-service-1` job when the pipeline parameter value mapped to run-build-service-1-job is set to `true`
+  - The `service-2` workflow triggers the `build-service-2` job when the pipeline parameter value mapped to run-build-service-2-job is set to `true`
+  - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
+  - The `check-updated-files` workflow will always run any time this pipeline is triggered
+
+See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more
+information on available elements and required parameters.
+
+## Use matrix jobs to run multiple OS tests
+{: #use-matrix-jobs-to-run-multiple-os-tests }
+
+Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
+
+In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
+
+```yaml
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+executors:
+  docker: # Docker using the Base Convenience Image
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
+    macos:
+      xcode: 12.5
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
+```
+
+The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
+
+```
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
+```
+
+For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).

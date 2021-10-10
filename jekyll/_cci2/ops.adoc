@@ -1,11 +1,14 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = Maintenance
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
-{% include snippets/server-only.adoc %}
 
 This chapter describes system checks and the basics of user management.
 
@@ -180,7 +183,7 @@ Configuration secrets are stored in plain-text on the host.
 === What significant metrics will be generated?
 
 **Answer:**
-Refer to the <<monitoring#system-monitoring,Monitoring>> section for details about monitoring and metrics.
+Refer to the <<monitoring#system-monitoring-metrics,Monitoring>> section for details about monitoring and metrics.
 
 === How do I find out how many builds per day are running?
 
@@ -366,7 +369,7 @@ https://www.replicated.com/docs/kb/supporting-your-customers/resetting-console-p
 
 . SSH into the services box
 . Use the following command: `replicated auth reset` to remove the password
-. Visit `https://<server>:8800/create-password` to create a new password or connect LDAP.
+. Visit `<server>:8800/create-password` to create a new password or connect LDAP.
 
 === How do I resolve the case of VM spin-up / spin-down issues?
 

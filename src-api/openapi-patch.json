@@ -1,0 +1,30 @@
+{
+  "paths":{
+    "/context":{
+      "get":{
+        "x-codeSamples": [
+          {
+            "lang": "Node + Request",
+            "source": "const request = require('request');\n\nconst options = {\n  method: 'GET',\n  url: 'https://circleci.com/api/v2/context',\n  qs: {\n    'owner-id': 'c65b68ef-e73b-4bf2-be9a-7a322a9df150',\n    'page-token': 'next_page_token'\n  },\n  headers: {authorization: 'Basic REPLACE_BASIC_AUTH'}\n};\n\nrequest(options, function (error, response, body) {\n  if (error) throw new Error(error);\n\n  console.log(body);\n});\n"
+          },
+          {
+            "lang": "Python + Python3",
+            "source": "import http.client\n\nconn = http.client.HTTPSConnection(\"circleci.com\")\n\nheaders = { 'authorization': \"Basic REPLACE_BASIC_AUTH\" }\n\nconn.request(\"GET\", \"/api/v2/context?owner-id=c65b68ef-e73b-4bf2-be9a-7a322a9df150&page-token=next_page_token\", headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "Go + Native",
+            "source": "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://circleci.com/api/v2/context?owner-id=c65b68ef-e73b-4bf2-be9a-7a322a9df150&page-token=next_page_token\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          },
+          {
+            "lang": "Shell + Curl",
+            "source": "curl --request GET \\\n  --url 'https://circleci.com/api/v2/context?owner-id=c65b68ef-e73b-4bf2-be9a-7a322a9df150&page-token=next_page_token' \\\n  --header 'authorization: Basic REPLACE_BASIC_AUTH'"
+          },
+          {
+            "lang": "Ruby + Native",
+            "source": "require 'uri'\nrequire 'net/http'\nrequire 'openssl'\n\nurl = URI(\"https://circleci.com/api/v2/context?owner-id=c65b68ef-e73b-4bf2-be9a-7a322a9df150&page-token=next_page_token\")\n\nhttp = Net::HTTP.new(url.host, url.port)\nhttp.use_ssl = true\nhttp.verify_mode = OpenSSL::SSL::VERIFY_NONE\n\nrequest = Net::HTTP::Get.new(url)\nrequest[\"authorization\"] = 'Basic REPLACE_BASIC_AUTH'\n\nresponse = http.request(request)\nputs response.read_body"
+          }
+        ]
+      }
+    }
+  }
+}

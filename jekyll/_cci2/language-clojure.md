@@ -5,6 +5,9 @@ short-title: "Clojure"
 description: "Building and Testing with Clojure on CircleCI 2.0"
 categories: [language-guides]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -13,6 +16,7 @@ This guide will help you get started with a Clojure application on CircleCI 2.0.
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
@@ -24,7 +28,8 @@ We're going to make a few assumptions here:
 
 If you use another testing tool, you can just adjust that step to run a different `lein` task.
 
-## Sample Configuration
+## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -35,6 +40,9 @@ jobs: # basic units of work in a run
     working_directory: ~/cci-demo-clojure # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment: # environment variables for primary container
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
@@ -48,23 +56,25 @@ jobs: # basic units of work in a run
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 
 {% endraw %}
 
-## Get the Code
+## Get the code
+{: #get-the-code }
 
 The configuration above is from a demo Clojure app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-clojure-luminus](https://github.com/CircleCI-Public/circleci-demo-clojure-luminus).
 
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
+If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
-Now we’re ready to build a `config.yml` from scratch.
+Now we are ready to build a `config.yml` from scratch.
 
-## Config Walkthrough
+## Config walkthrough
+{: #config-walkthrough }
 
 We always start with the version.
 
@@ -92,13 +102,16 @@ version: 2
 ...
     docker:
       - image: circleci/clojure:lein-2.9.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
 
 We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database or queue, for example, consider those containers when you allocate memory for the main JVM heap.
 
-Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case. 
+Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case.
 
 ```yaml
     environment:
@@ -137,12 +150,14 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 
 Nice! You just set up CircleCI for a Clojure app.
 
-## See Also
+## See also
+{: #see-also }
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
-### Detailed Examples
+### Detailed examples
+{: #detailed-examples }
 {:.no_toc}
 
 The app described in this guide illustrates the simplest possible setup for a Clojure web app. Real-world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:

@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "Configuration"
 description: "Landing page for CircleCI 2.0 Config"
+version:
+- Cloud
+- Server v2.x
 ---
 
 The core of the CircleCI experience is creating a *deterministic build* with the `config.yml` file. A deterministic build is one that can be run live at commit time, tomorrow, or even next month and will end with the exact same results.
@@ -22,11 +25,12 @@ A primer for [YAML syntax basics]({{ site.baseurl }}/2.0/writing-yaml/).  &nbsp;
 
 Debug Config Locally |
 ------------------------|------------------
-Use a shell script to [debug your config locally]({{ site.baseurl }}/2.0/examples/).  &nbsp;&nbsp;&nbsp;&nbsp;|  
+Use a shell script to [debug your config locally]({{ site.baseurl }}/2.0/examples/).  &nbsp;&nbsp;&nbsp;&nbsp;|
 
 <hr>
 
 ## Video: Introduction to `.circleci/config.yml`
+{: #video-introduction-to-circleciconfigyml }
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xOSHKNUIkjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>

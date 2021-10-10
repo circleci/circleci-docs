@@ -1,0 +1,146 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
+= CircleCI Server v2.19.x What's New
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This document provides a summary of features and product notes for the release of CircleCI Server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
+
+## Requirements for Upgrading
+
+WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a non-root path, you will need to unset the `OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` environment variable in your output processor customization script. See the https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Customizations Guide] in our documentation for more information on using customization scripts.
+
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
+
+WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your organization name, there is a <<updating-server#org-rename-script,script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
+
+## Notes and Best Practices
+
+* We now require a minimum 32GB of RAM for the Services Machine. 
+* We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
+* We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to v2.19.
+
+## Known Issues
+
+* On static (non-AWS) installations with `NONE` selected under storage driver settings, tests can be split only by file name or file size. If a user attempts to split tests by timing data, static instances will split them by file name instead.
+
+* **If you are using an HTTP proxy for your installation, upgrade to v2.19.02 or above**. We had a known issue around job step logging and docker commands customization that made pre-2.19.2 releases incompatible with an HTTP proxy setup of CircleCI Server.
+
+* The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
+
+* If any changes have been made to your networking configuration from the default, you may need to run the following steps to ensure you can use SSH to inspect your builds:
+** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
+** This file should contain the public (if applicable) or private IP of the nomad client
++
+TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
+
+* Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
+## What's New in v2.19.12
+
+* Removed support for 1.0 builder graceful shutdown on auto-scaling events.
+  ** This alleviates Python 2 security vulnerabilities.
+
+## What's New in v2.19.11
+
+* Fixed a bug that didn't allow more than 50 aliases in a configuration.
+
+## What's New in v2.19.10
+
+* Fixed a bug that caused 'git checkout' to fail in go-git.
+* Fixed a bug in the YAML parser in picard dispatcher to support `config-str` to have more than 50 YAML aliases.
+* Fixed a bug where s3 retention policy deleted test results from an older job.
+* Reduced the likelihood of 'out-of-sequence' commit statuses.
+* General security updates.
+
+## What's New in v2.19.09
+
+* Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the https://circleci.com/docs/2.0/private-images/#docker-executor[Docker ID password field under the `auth` key].
+* General security updates.
+
+## What's New in v2.19.08
+
+* Fixed a bug that was causing parallelism to fail for static installations with `NONE` selected under storage driver settings.
+
+## What's New in v2.19.07
+
+* Fixed a bug that was preventing authentication to China region ECR images in the docker executor.
+
+* Removed the recursive `chown` from startup of the `fileserverd` service. In instances of heavy usage this was causing the startup process to take a long time, or in some cases, startup was blocked.
+
+## What's New in v2.19.06
+
+* Fixed a bug that was causing workflow statuses to be displayed on GitHub in the wrong order.
+
+* Introduced performance improvements to `workflows-conductor` that dramatically reduce CPU usage and latency.
+
+* Fixed a bug that was preventing use of an S3 storage region other than `us-east-1` via an IAM user.
+
+* Fixed formatting type of SMTP passwords to ensure they are masked during setup.
+
+## What's New in v2.19.05
+
+* Fixed a bug that could lead to the VM database ending up in an incorrect state in the event of a Services Machine crash or manual termination of VM Service instances.
+
+## What's New in v2.19.04
+
+* Fixed a bug that was leading to support bundle creation timing out before the Services machine logs had been created, leaving only Replicated logs.
+
+* S3 connection pool metrics under `circle.s3.connection_pool.*` have been added to the test results service, making it easier to debug issues with this service.
+
+* Added in missing environment variables for the workflows service. The absence of these environment variables was causing excessive stack tracing whenever workflows were run. This in turn lead to excessive log rotation.
+
+* Fixed a bug that was causing failure to update GitHub statuses. Some customers experienced this bug when a project had a follower with a broken auth token.
+
+## What's New in v2.19.03
+
+* Removed the use of the depecated GitHub.com API endpoint `GET applications/%s/tokens/%s`.
+
+* Distributed tracing is now enabled by default for Server installations. Traces are used in CircleCI support bundles to improve our ability to troubleshoot Server issues. Options for the tracing sampling rate are displayed in the Replicated Management Console, but should only be changed from the default if requested by CircleCI Support.
+
+* Fixed an issue that was preventing `restore_cache` from working with the storage driver set to "none" - i.e not S3.
+
+* Fixed an issue that was preventing the `output_processor` service from using AWS AssumeRole when the role was located in a subfolder. This issue affected customers with security policies forcing the use of a subfolder in this case, and the symptoms included the inability to store artifacts or use timings-based test splitting.
+
+* JVM heap size can now be changed using the `JVM_HEAP_SIZE` environment variable for the following services: `vm-service`, `domain-service`, `permissions-service` and `federations-service`.
+
+## What's New in v2.19.02
+
+* In the LDAP login flow we now use an anonymous form to `POST` LDAP auth state, rather than sending it as a `GET` parameter. Previously, when a user authenticated using LDAP, their username and password were sent in plaintext as part of a query parameter in a `GET` request. As requests are over HTTPS, this left usernames and passwords in request logs, etc. This issue is now fixed. 
+
+* Optimizely and Zendesk are now removed from Server release images.
+
+* Fixed an issue in which setting `CIRCLE_ADMIN_SERVER_HTTP_THREADS` or `CIRCLE_PUBLIC_FACING_SERVER_HTTP_THREADS` too high would prevent the frontend container from starting.
+
+* Due to changes in the GitHub API we have removed the use of `?client_id=x&client_secret=y` for GitHub, and GHE versions 2.17 and later.
+
+* Fixed an issue that was causing intermittent failures to spin up VMs with DLC in use.
+
+* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
+
+* Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
+
+* Removed legacy TLS versions 1.0 and 1.1, in addition, enabled 1.2 and 1.3 TLS, and specified the following ciphersuites
+**  ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384
+
+* Fixed a `statsd` configuration issue that meant some services were not emitting Telegraf metrics.
+
+## What's New in v2.19.01
+
+* Fixed a bug that was preventing some customers from upgrading due to a schema change in one of our library dependencies.
+
+* Fixed a bug that was preventing some customers from inspecting builds via SSH due to a logic change in our build agent.
+
+## What's New in v2.19
+
+* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in Server v2.19].
+
+* CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
+
+* The image used to run the RabbitMQ server has been updated to fix vulnerabilities.

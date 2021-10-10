@@ -8,21 +8,25 @@ description: "CircleCI security features."
 
 This document outlines security features built into CircleCI and related integrations.
 
-* TOC 
+* TOC
 {:toc}
 
 ## Overview
+{: #overview }
 Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 
 ## Encryption
+{: #encryption }
 CircleCI uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems.
 
 The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build agent pulls code via git over SSH. Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/). Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
 
 ## Sandboxing
+{: #sandboxing }
 With CircleCI you control the resources allocated to run the builds of your code. This will be done through instances of our builder boxes that set up the containers in which your builds will run. By their nature, build containers will pull down source code and run whatever test and deployment scripts are part of the code base or your configuration. The containers are sandboxed, each created and destroyed for one build only (or one slice of a parallel build), and they are not available from outside themselves. The CircleCI service provides the ability to SSH directly to a particular build container. When doing this a user will have complete access to any files or processes being run inside that build container, so provide access to CircleCI only to those also trusted with your source code.
 
 ## Integrations
+{: #integrations }
 A few different external services and technology integration points touch CircleCI. The following list enumerates those integration points.
 
 - **Web Sockets** We use [Pusher](https://pusher.com/) client libraries for WebSocket communication between the server and the browser, though for installs we use an internal server called slanger, so Pusher servers have no access to your instance of CircleCI nor your source control system. This is how we, for instance, update the builds list dynamically or show the output of a build line-by-line as it occurs. We send build status and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL is done using the same certs over SSL), so it is encrypted in transit.
@@ -33,11 +37,11 @@ A few different external services and technology integration points touch Circle
 
 - **Dependency and Source Caches** Most CircleCI customers use S3 or equivalent cloud-based storage inside their private cloud infrastructure (Amazon VPC, etc) to store their dependency and source caches. These storage servers are subject to the normal security parameters of anything stored on such services, meaning in most cases our customers prevent any outside access.
 
-- **Artifacts** It is common to use S3 or similar hosted storage for artifacts. Assuming these resources are secured per your normal policies they are as safe from any outside intrusion as any other data you store there.
+- **Artifacts** To help prevent other builds from accessing your browser local storage when viewing artifacts, HTML and XHTML pages are hosted on their own project-specific subdomain of `*.circle-artifacts.com`. Non-HTML artifacts will usually be (`302 FOUND`) redirected to an S3 URL to allow for the highest download speed. Because these artifact types are hosted on a single S3 domain, artifacts may access your browser local storage on HTML and XHTML pages, and so you should avoid entering sensitive data into your browser for these URLs.
 
 - **iOS Builds** If you are paying to run iOS builds on CircleCI hardware your source code will be downloaded to a build box on our macOS fleet where it will be compiled and any tests will be run. Similar to our primary build containers that you control, the iOS builds we run are sandboxed such that they cannot be accessed.
 
-- **Docker** If you are using Docker images, refer to the public Docker [seccomp (security computing mode) profile](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json) for the Docker engine. CircleCI appends the following to the Docker default `seccomp` profile: 
+- **Docker** If you are using Docker images, refer to the public Docker [seccomp (security computing mode) profile](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json) for the Docker engine. CircleCI appends the following to the Docker default `seccomp` profile:
 
 {% raw %}
 ```
@@ -58,16 +62,19 @@ A few different external services and technology integration points touch Circle
 ```
 {% endraw %}
 
-## Audit Logs
-The Audit Log feature is only available for CircleCI installed on your servers or private cloud. 
+## Audit logs
+{: #audit-logs }
+CircleCI Server customers can access the audit log feature from the UI.
+Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
 
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separarate from system logs that track performance and network metrics. 
+CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separarate from system logs that track performance and network metrics.
 
 Complete Audit logs may be downloaded from the Audit Log page within the Admin section of the application as a CSV file.  Audit log fields with nested data contain JSON blobs.
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-### Audit Log Events
+### Audit log events
+{: #audit-log-events }
 {:.no_toc}
 
 <!-- TODO: automate this from event-cataloger -->
@@ -80,6 +87,12 @@ Following are the system events that are logged. See `action` in the Field secti
 - project.env_var.create
 - project.env_var.delete
 - project.settings.update
+- project.ssh_key.create
+- project.ssh_key.delete
+- project.api_token.create
+- schedule.create
+- schedule.update
+- schedule.delete
 - user.create
 - user.logged_in
 - user.logged_out
@@ -89,7 +102,8 @@ Following are the system events that are logged. See `action` in the Field secti
 - workflow.job.start
 
 
-### Audit Log Fields
+### Audit log fields
+{: #audit-log-fields }
 {:.no_toc}
 
 - **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
@@ -102,29 +116,10 @@ Following are the system events that are logged. See `action` in the Field secti
 - **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
 - **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
 - **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
+- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
-## Checklist To Using CircleCI Securely as a Customer
-
-If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as _users_ of CircleCI:
-
-- Minimise the number of secrets (private keys / environment variables) your
-  build needs and rotate secrets regularly.
-  - It is important to rotate secrets regularly in your organization, especially as team members come and go. 
-  - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
-  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or Github's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature. 
-- Sometimes user misuse of certain tools might accidentally print secrets to stdout which will land in your logs. Please be aware of:
-  - running `env` or `printenv` which will print all your environment variables to stdout.
-  - literally printing secrets in your codebase or in your shell with `echo`.
-  - programs or debugging tools that print secrets on error.
-- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). 
-- Use Restricted Contexts with teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
-- Ensure you audit who has access to SSH keys in your organization.
-- Ensure that your team is using Two-Factor Authentication (2FA) with your VCS ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa), [Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html)). If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
-- If your project is open source and public, please make note of whether or not you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our [Open Source Projects document]({{site.baseurl}}/2.0/oss/#security).
-
-
-## See Also
+## See also
+{: #see-also }
 {:.no_toc}
 
 [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)

@@ -1,4 +1,4 @@
-# API Overview
+# CircleCI V1 API Overview 
 
 The CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. RESTful APIs enable you to call individual API endpoints to perform the following actions:
 
@@ -14,6 +14,16 @@ Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not curr
 <aside class="notice">
 Access to billing functions is only available from the CircleCI application.
 </aside>
+
+## Rate Limiting
+
+The CircleCI API is protected by a number of rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+
+As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure.
+There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
+
+For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
+In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
 ## API Syntax
 
@@ -38,7 +48,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 ## Add an API Token
 
 ```sh
-$ curl https://circleci.com/api/v1.1/me?circle-token=:token
+$ curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 ```
 
 
@@ -66,21 +76,29 @@ All API calls are made in the same way, by making standard HTTP calls, using JSO
 
 ## Get Authenticated
 
-```sh
-curl "https://circleci.com/api/v1.1/me?circle-token=:token"
+
+```sh 
+curl -H "Circle-Token: <circle-token>" "https://circleci.com/api/..."
 ```
 
 ```sh 
 curl -u <circle-token>: "https://circleci.com/api/..."
 ```
 
-To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the `circle-token` query param:
+```sh
+curl "https://circleci.com/api/v1.1/me?circle-token=<circle-token>"
+```
+You can add the API token using your [account dashboard](https://circleci.com/account/api).
 
-Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
+To be authenticated by the API server, use this as the value of the Circle-Token header:
+
+Or you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
 
 <aside class="notice">
 the colon ":" tells curl that there's no password.
 </aside>
+
+DEPRECATED (this option will be removed in the future): The API token can be added to the `circle-token` query param:
 
 ## Version Control Systems (:vcs-type)
 
@@ -112,10 +130,10 @@ In both cases, builds are returned in the order that they were created. For all 
 ## Accept Header
 
 ```sh
-curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: application/json"
+curl https://circleci.com/api/v1.1/me -H "Accept: application/json" -H "Circle-Token: <circle-token>"
 ```
 
-If no accept header is specified, CircleCI will return human-readable JSON with comments. If you prefer to receive compact JSON with no whitespace or comments, add the `application/json` Accept header.
+If no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To receive the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.
 
 ## Getting Started
 
@@ -152,7 +170,7 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 /project/:vcs-type/:username/:project/:build\_num/retry | Retries the build, returns a summary of the new build.
 /project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the build, returns a summary of the build.
 /project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the build's SSH permissions.
-/project/:vcs-type/:username/:project/tree/:branch | Triggers a new build, returns a summary of the build. Optional 1.0 [build parameters](https://circleci.com/docs/2.0/parallelism-faster-jobs/) can be set as well and Optional 2.0 [build parameters](https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api).
+/project/:vcs-type/:username/:project/tree/:branch | Triggers a new build, returns a summary of the build. Optional 1.0 [build parameters](https://circleci.com/docs/2.0/parallelism-faster-jobs/) can be set as well and Optional 2.0 [build parameters](https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-api-v1).
 /project/:vcs-type/:username/:project/ssh-key | Creates an ssh key used to access external systems that require SSH key-based authentication.
 /project/:vcs-type/:username/:project/checkout-key | Creates a new checkout key.
 
@@ -161,6 +179,4 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 **API** | **Description**
 ------- | -------------
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.
-/project/:vcs-type/:username/:project/build-cache | Clears the cache for a project.
 /project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.
-

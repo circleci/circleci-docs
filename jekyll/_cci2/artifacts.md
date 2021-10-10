@@ -3,41 +3,42 @@ layout: classic-docs
 title: "Storing Build Artifacts"
 short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
-categories: [configuring-jobs]
 order: 70
+version:
+- Cloud
+- Server v2.x
 ---
 
-This document describes how to work with Artifacts in the following sections:
+This document describes how to work with Artifacts on CircleCI.
 
 * TOC
 {:toc}
 
-## Artifacts Overview
+## Artifacts overview
+{: #artifacts-overview }
 
 Artifacts persist data after a job is completed
-and may be used for longer-term storage of the outputs of your build process.
+and may be used for storage of the outputs of your build process.
 
 For example, when a Java build/test process finishes,
 the output of the process is saved as a `.jar` file.
 CircleCI can store this file as an artifact,
-keeping it available long after the process has finished.
+keeping it available after the process has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
+Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
 
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
-![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+![artifacts tab screenshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the **Job page**.
+Find links to the artifacts under the "Artifacts" tab on the **Job page**.
 Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
 There is a 3GB `curl` file size limit.
-Artifacts are designed
-to be useful around the time of the build.
-It is best practice
-not to rely on artifacts as a software distribution mechanism with long term future guarantees.
+
+**Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
 
 **Note:**
 Uploaded artifact filenames are encoded
@@ -46,7 +47,8 @@ Keep this in mind
 if you are expecting
 to find artifacts at a given path within the application.
 
-## Uploading Artifacts
+## Uploading artifacts
+{: #uploading-artifacts }
 
 To upload artifacts created during builds, use the following example:
 
@@ -56,6 +58,9 @@ jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
@@ -74,8 +79,8 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.  
-There is no limit on the number of `store_artifacts` steps a job can run.  
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.
+There is no limit on the number of `store_artifacts` steps a job can run.
 
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
@@ -83,7 +88,8 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
   - `path` is a path to the file or directory to be uploaded as artifacts.
   - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
 
-## Uploading Core Files
+## Uploading core files
+{: #uploading-core-files }
 
 This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
 
@@ -98,7 +104,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
      ```C
      #include <stdlib.h>
-     
+
      int main(int argc, char **argv) {
          abort();
      }
@@ -114,12 +120,15 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout
       - run: make
       - run: |
-          # tell the operating system to remove the file size limit on core dump files 
+          # tell the operating system to remove the file size limit on core dump files
           ulimit -c unlimited
           ./dump
       - run:
@@ -140,7 +149,8 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 When CircleCI runs a job,
 a link to the core dump file appears in the Artifacts tab of the **Job page**.
 
-## Downloading All Artifacts for a Build on CircleCI
+## Downloading all artifacts for a build on CircleCI
+{: #downloading-all-artifacts-for-a-build-on-circleci }
 
 To download your artifacts with `curl`,
 follow the steps below.
@@ -159,21 +169,25 @@ to substitute actual values
 for all variables that start with `:`.
 
 ```bash
+# Set an environment variable for your API token.
 export CIRCLE_TOKEN=':your_token'
 
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
+# `curl` gets all artifact details for a build 
+# then, the result is piped into `grep` to extract the URLs.
+# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
+
+curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
    | grep -o 'https://[^"]*' \
-   | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
-   | wget -v -i -
+   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
 Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
 
 ```bash
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
+curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts
 ```
 
-You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/#artifacts).
+You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/v1/#artifacts).
 
 Placeholder   | Meaning                                                                       |
 --------------|-------------------------------------------------------------------------------|
@@ -181,20 +195,11 @@ Placeholder   | Meaning                                                         
 `:vcs-type`   | The version control system (VCS) you are using. Either `github` or `bitbucket`.
 `:username`   | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application.
 `:project`    | The name of the target VCS repository.
-`:build_num`  | The number for the build for which you want to download artifacts.
+`:build_num`  | The number of the job (aka. build) for which you want to download artifacts. 
 {: class="table table-striped"}
 
-### Description of Commands
-{:.no_toc}
-
-First, the CIRCLE_TOKEN environment variable is created. Then, the `curl`
-command fetches all artifact details for a build and pipes them to `grep` to
-extract the URLs. Using `sed` your circle token is appended to the file to
-create a unique file name. Finally, `wget` is used to download the artifacts to
-the current directory in your terminal.
-
-
-## See Also
+## See also
+{: #see-also }
 {:.no_toc}
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

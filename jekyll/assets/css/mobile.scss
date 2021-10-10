@@ -34,20 +34,6 @@
 		left: 240px;
 	}
 
-nav.sidebar{
-	position: fixed;
-	top: 70px;
-	bottom: 0;
-	left: -240px;
-	width: 240px;
-	color: #000000;
-	overflow-y: auto;
-	transition: left 0.3s ease-in-out;
-	z-index: 10;
-}
-	nav.sidebar.open{
-		left: 0;
-	}
 
 // Article
 div.article-container{

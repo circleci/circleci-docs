@@ -50,7 +50,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
     or call the API using `curl`:
 
     ```
-$ curl https://circleci.com/api/v1.1/me?circle-token=:token
+$ curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 ```
 
 3.  You should see a response like the following:
@@ -74,11 +74,12 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 ## Authentication
 
-To authenticate, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the
-`circle-token` query param, like so:
+To authenticate, add an API token using your [account dashboard](https://circleci.com/account/api).
+
+To be authenticated by the API server, use this as the value of the Circle-Token header:
 
 ```
-curl https://circleci.com/api/v1.1/me?circle-token=:token
+curl -H "Circle-Token: <circle-token>" "https://circleci.com/api/..."
 ```
 Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command, like so:
 
@@ -87,6 +88,11 @@ curl -u <circle-token>: https://circleci.com/api/...
 ```
 
 (Note the colon `:`, which tells `curl` that there's no password.)
+
+DEPRECATED (this option will be removed in the future): The API token can be added to the `circle-token` query param:
+```
+curl https://circleci.com/api/v1.1/me
+```
 
 ## Version Control System (:vcs-type)
 
@@ -124,7 +130,7 @@ If you prefer to receive compact JSON with no whitespace or comments, add the `"
 Using `curl`:
 
 ```
-curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: application/json"
+curl -H "Accept: application/json" -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 ```
 
 ## User
@@ -171,13 +177,16 @@ The branch name should be url-encoded.
 
 <h2 id="download-artifact">Download an artifact file</h2>
 
-You can download an individual artifact file via the API by appending a query string to its URL:
+You can download an individual artifact file via the API with an API-token authenticated HTTP request.
 
-```
-https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
+```sh
+curl -L -H "Circle-Token: <circle-token>" https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt
 ```
 
-':token' is an API token with 'view-builds' scope.
+**Notes:**
+- Make sure your HTTP client is configured to follow follow redirects as the artifact URLs can respond with
+an HTTP `3xx` status code (the `-L` switch in `curl` will achieve this).
+- `:token` is an API token with 'view-builds' scope.
 
 <h2 id="build-artifacts-latest">Artifacts of the latest Build</h2>
 
@@ -209,7 +218,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more about build parameters, read about [using 1.0 parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for "failed" should be a boolean `true` or `null`.
+<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [using 1.0 parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
 
 {{ site.data.api.project_branch | api_endpoint }}
 

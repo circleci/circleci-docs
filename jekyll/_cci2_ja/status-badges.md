@@ -1,21 +1,22 @@
 ---
 layout: classic-docs
-title: "CircleCIのバッジを追加する"
-description: "CircleCIの状態をウェブサイトやドキュメントに埋め込む方法"
+title: ステータス バッジの追加
+description: CircleCI のステータス バッジを Web ページや Web ドキュメントに埋め込む方法
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-このページでは、あなたのプロジェクトのビルド状態( passed, または failed )をリポジトリの README や他のドキュメントに CircleCI の状態を表すバッジを作成する方法について説明しています。
+プロジェクトのビルド ステータス (成功または失敗) を表示するバッジを README または他のドキュメントに作成する方法について説明します。
 
 ## 概要
+{: #overview }
 
-CircleCI のバッジは通常、プロジェクトの README に埋め込まれています。
-しかし、他のウェブドキュメントにバッジを追加することも可能です。
-CircleCI はバッジを埋め込む為のコードを作成するツールを提供しています。
-デフォルト設定では、バッジは埋め込まれているプロジェクトのデフォルトブランチの状態を表示します。これは他のブランチを参照するように設定することができます。
+Status badges are commonly embedded in project READMEs, although they can be placed in any web document. CircleCI provides a tool to generate embed code for status badges. By default, a badge displays the status of a project's default branch, though you can also display the status of specific branches.
 
-バッジを埋め込むコードは下記フォーマットにて作成できます。
+You can generate code for the following formats:
 
-- Image URL
+- 画像 URL
 - Markdown
 - Textile
 - Rdoc
@@ -23,23 +24,126 @@ CircleCI はバッジを埋め込む為のコードを作成するツールを�
 - reStructuredText
 - pod
 
-## 手順
+## Generating a status badge
+{: #generating-a-status-badge }
 
-1. あなたのプロジェクト設定の _Notifications_ を開き、 _Status Badges_ をクリックします。
-2. デフォルト設定では、バッジはあなたのプロジェクトのデフォルトブランチの状態を表示しています。
-   他のブランチの状態を表示したい場合は、_Branch_ のドロップダウンメニューから、表示したいブランチを選択してください。
-3. (任意)
-   もし、あなたのプロジェクトが private である場合、[project API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-project-api-token)の生成が必要となります。
-4. (任意)
-   もし、前の手順で token を生成していたら、_API Token_ のドロップダウンメニューから使用する token を選択してください。
-5. _Embed Code_ のドロップダウンメニューから使用したいフォーマットを選択してください。
-6. 生成されたコードをコピーして、バッジを表示したいドキュメントに貼り付けて下さい。
+To generate your own status badge, you will need to know and substitute the following variables in the code snippets below:
 
-## バッジのカスタマイズ
+- `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`.
+- `<ORG_NAME>` - The organization or user name the project in question belongs to.
+- `<VCS>` - your VCS provider (`gh` for "github" and `bb` for BitBucket).
+- `<LINK>` - The link you want the status badge to go to when clicked (example: the pipeline overview page).
+- optional: an API token (to create badges for private projects).
 
-もし、デフォルトのバッジが物足りないと感じたら、[shield style](https://shields.io/) を使用することができます。
-shield style を使用するには、生成されたコードの `style=svg` の部分を `style=shield` に変更してください。
+The following examples demonstrate how to generate a status badge for various template languages. Each sample also provides an example of status badge code for a specific branch.
 
-## 参照
 
-[Status]({{ site.baseurl }}/2.0/status/)
+{:.tab.status.Markdown}
+```text
+# Template:
+[![<ORG_NAME>](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg)](<LINK>)
+
+# Example:
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+
+# Example for specific branch:
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5)
+```
+
+{:.tab.status.Textile}
+```text
+# Template:
+!https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg!:<LINK>
+
+# Example:
+!https://circleci.com/gh/circleci/circleci-docs.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs
+
+# Example for specific branch:
+!https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
+```
+
+{:.tab.status.Rdoc}
+```text
+# Template:
+{<img src="https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg" alt="<ORG_NAME>" />}[https://circleci.com/gh/<ORG_NAME>/<PROJECT_NAME>]
+
+# Example:
+{<img src="https://circleci.com/gh/circleci/circleci-docs.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs]
+
+# Example for specific branch:
+{<img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5]
+```
+
+
+{:.tab.status.Asciidoc}
+```text
+# Template:
+image:https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg["<ORG_NAME>", link="https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>"]
+
+# Example:
+image:https://circleci.com/gh/circleci/circleci-docs.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs"]
+
+# Example for specific branch:
+image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"]
+```
+
+
+{:.tab.status.reStructuredText}
+```text
+# Template:
+.. image:: https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg
+    :target: https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>
+
+# Example:
+.. image:: https://circleci.com/gh/circleci/circleci-docs.svg?style=svg
+    :target: https://circleci.com/gh/circleci/circleci-docs
+
+# Example for specific branch:
+.. image:: https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg
+    :target: https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
+```
+
+{:.tab.status.pod}
+```text
+# Template:
+=for HTML <a href="https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>"><img src="https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg"></a>
+
+# Example:
+=for HTML <a href="https://circleci.com/gh/circleci/circleci-docs"><img src="https://circleci.com/gh/circleci/circleci-docs.svg?style=svg"></a>
+
+# Example for specific branch:
+=for HTML <a href="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"><img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg"></a>
+
+```
+
+## Creating badges for private repositories
+{: #creating-badges-for-private-repositories }
+
+
+**NOTE:** To create a status badge for a private project you will need to create an **api token** _specifically scoped to "status"_ and include that token in the url string of your badge. Consider the following markdown image badge snippet against the original markdown example above; it has a url parameter for a token added.
+
+```markdown
+[![CircleCI](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg&circle-token=<YOUR_STATUS_API_TOKEN>)](<LINK>)
+```
+
+To create a status api token, go to your **Project's Settings** (present on the top right corner) > **API Permissions** and create a token scoped to `Status`.
+
+
+## Different styles
+{: #different-styles }
+
+If you find the default status badge too minimal, you can use the [shield style](https://shields.io/). To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
+
+![svg</code>@@ version" />]({{ site.baseurl }}/assets/img/docs/svg-passed.png)
+
+![svg</code>@@ version" />]({{ site.baseurl }}/assets/img/docs/svg-failed.png)
+
+![Passing shield version]({{ site.baseurl }}/assets/img/docs/shield-passing.png)
+
+![Failing shield version]({{ site.baseurl }}/assets/img/docs/shield-failing.png)
+
+
+## See also
+{: #see-also }
+
+[Status]({{ site.baseurl }}/ja/2.0/status/)

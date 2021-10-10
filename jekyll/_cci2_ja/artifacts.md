@@ -1,50 +1,60 @@
 ---
 layout: classic-docs
-title: "ビルドアーティファクトの保存"
-short-title: "ビルドアーティファクトの保存"
+title: "ビルド アーティファクトの保存"
+short-title: "ビルド アーティファクトの保存"
 description: "ビルド中に作成されるアーティファクトのアップロード例"
-categories:
-  - configuring-jobs
 order: 70
+version:
+  - Cloud
+  - Server v2.x
 ---
-このドキュメントでは、以下のセクションに沿って、アーティファクトの操作方法を説明します。
+
+以下のセクションに沿って、アーティファクトの操作方法を説明します。
 
 * 目次
 {:toc}
 
 ## アーティファクトの概要
+{: #artifacts-overview }
 
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルドプロセス出力の長期ストレージとして使用できます。
+アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
 
-たとえば、Java ビルド・テストのプロセスが 1つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も長期間使用可能な状態に維持できます。
+たとえば、Java のビルドおよびテストのプロセスが 1 つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
-![アーティファクトのデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータ フロー]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。これもアーティファクトの例です。
+Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
 
-ジョブによってスクリーンショット、カバレッジレポート、コアファイル、デプロイターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
+ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
-![[Artifacts (アーティファクト)] タブのスクリーンショット]({{ site.baseurl }}/assets/img/docs/artifacts.png)
+![[Artifacts (アーティファクト)] タブのスクリーンショット]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-**[Job (ジョブ)] ページ**の上部にアーティファクトへのリンクがあります。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。 アーティファクトはビルドの前後で役立つように設計されています。 長期的な将来の保証を備えたソフトウェアディストリビューションのメカニズムとしてアーティファクトに依存することはお勧めできません。
+アーティファクトへのリンクは、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示されます。 アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
-**メモ：**アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
+**アーティファクトへは作成から30日間アクセスできます。 **  ドキュメントや永続的なコンテンツのソースとして依存している場合、S3や静的Webサイト用のGitHub Pages、Netlifyのような専用領域にデプロイすることを推奨します。
+
+**メモ:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
 ## アーティファクトのアップロード
+{: #uploading-artifacts }
 
-ビルド中に作成されるアーティファクトをアップロードするには、以下の例を使用します。
+ビルド時に作成したアーティファクトをアップロードするには、以下の例を参考にしてください。
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      - image: python:3.6.0-jessie
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
+
       - run:
-          name: ダミーアーティファクトの作成
+          name: ダミー アーティファクトの作成
           command: |
             echo "my artifact file" > /tmp/artifact-1;
             mkdir /tmp/artifacts;
@@ -58,34 +68,39 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2つのビルドアーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 1つのジョブで実行できる `store_artifacts` ステップの数に制限はありません。
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。       
+単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
 
-現在、`store_artifacts` には `path` と `destination` の 2つのキーがあります。
+現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
-* `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
-* `destination` **(オプション)** は、アーティファクト API でアーティファクトパスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
+  - `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
+  - `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
 
-## コアファイルのアップロード
+## コア ファイルのアップロード
+{: #uploading-core-files }
 
-このセクションでは、[コアダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
+このセクションでは、[コア ダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
 
 1. 以下の行を含む `Makefile` を作成します。
-  ```
-        all:
-           gcc -o dump main.c
-  ```
+
+     ```
+     all:
+       gcc -o dump main.c
+     ```
 
 2. 以下の行を含む `main.c` ファイルを作成します。
 
-    ```C
-    #include <stdlib.h>
+     ```C
+     # <stdlib.h> を含めます
 
-    int main(int argc, char **argv) { abort(); }
-    ```
+     int main(int argc, char **argv) {
+         abort();
+     }
+     ```
 
-3. 生成されたプログラムで `make` および `./dump` を実行し、`Aborted (core dumped)`! を印刷します。
+3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)` を印刷します。
 
-このサンプル C abort プログラムをコンパイルし、コアダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
+このサンプル C abort プログラムをコンパイルし、コア ダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
 
 ```yaml
 version: 2
@@ -93,12 +108,15 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout
       - run: make
       - run: |
-          # コアダンプファイルのファイルサイズ制限をなくすようにオペレーティング システムに指示します
+          # コア ダンプ ファイルのファイル サイズ制限をなくすようにオペレーティング システムに指示します
           ulimit -c unlimited
           ./dump
       - run:
@@ -110,51 +128,57 @@ jobs:
           path: /tmp/core_dumps
 ```
 
-`ulimit -c unlimited` は、コアダンプファイルのファイルサイズ制限をなくします。 この制限をなくすと、プログラムがクラッシュするたびに、カレント作業ディレクトリにコアダンプファイルが作成されます。 コアダンプファイルには、`core.%p.%E` という名前が付きます。`%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
-
-最後に、`store_artifacts` によってアーティファクトサービスの `/tmp/core_dumps` ディレクトリにコアダンプファイルが格納されます。
-
-![アーティファクトページに表示されたコアダンプファイル]({{ site.baseurl }}/assets/img/docs/core_dumps.png)
-
-CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブにコアダンプファイルへのリンクが表示されます。
-
-## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
+`ulimit -c unlimited` は、コア ダンプ ファイルのファイル サイズ制限をなくします。 この制限をなくすと、プログラムがクラッシュするたびに、作業中のカレント ディレクトリにコア ダンプ ファイルが作成されます。 コア ダンプ ファイルには、`core.%p.%E` という名前が付きます。 `%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
 
 `curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
+![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
+
+CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンス ガイド](https://circleci.com/docs/api/#artifacts) を参照してください。
+
+## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
+{: #downloading-all-artifacts-for-a-build-on-circleci }
+
+`curl` を使ってアーティファクトをダウンロードするには、以下の手順で行います。
+
 1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
 
-2. ターミナルウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
+2. ターミナル ウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 
 3. 以下のコマンドを実行します。 `:` で始まる変数は、コマンドの下に掲載した表を参照して、実際の値に置き換えてください。
 
 ```bash
+# Set an environment variable for your API token.
 export CIRCLE_TOKEN=':your_token'
 
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
+# `curl` gets all artifact details for a build 
+# then, the result is piped into `grep` to extract the URLs.
+# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
+
+curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
    | grep -o 'https://[^"]*' \
-   | tr -d \" \
-   | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
-   | wget -v -i -
+   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
-プレースホルダ | 意味 |
---------------|-------------------------------------------------------------------------------|
-`:your_token` | 上記で作成したパーソナル API トークン。
-`:vcs-type` | 使用しているバージョン管理システム (VCS)。`github` または `bitbucket` のいずれかとなります。
-`:username` | ターゲットプロジェクトの VCS プロジェクトアカウントのユーザー名または組織名。 CircleCI アプリケーションの画面左上に表示されています。
-`:project` | ターゲット VCS リポジトリの名前。
-`:build_num` | アーティファクトをダウンロードする対象のビルドの番号。
+Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
+
+```bash
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
+```
+
+You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/v1/#artifacts).
+
+| プレースホルダー      | 意味                                                                           |
+| ------------- | ---------------------------------------------------------------------------- |
+| `:your_token` | 上記で作成した個人用の API トークン。                                                        |
+| `:vcs-type`   | 使用しているバージョン管理システム (VCS)。 `github` または `bitbucket` のいずれかとなります。                |
+| `:username`   | ターゲット プロジェクトの VCS プロジェクト アカウントのユーザー名または組織名。 CircleCI アプリケーションの画面左上に表示されています。 |
+| `:project`    | ターゲット VCS リポジトリの名前。                                                          |
+| `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
 {: class="table table-striped"}
 
-### コマンドの説明
-{:.no_toc}
-
-まず、CIRCLE_TOKEN 環境変数を作成します。 次に、`curl` コマンドでビルドのすべてのアーティファクト詳細をフェッチし、それを `grep` にパイプして URL を抽出します。 これらの URL が `artifacts.txt` ファイルに保存されます。 最後に、`xargs` がテキストファイルを読み取り、`wget` を使用してアーティファクトをダウンロードします。 すべてのアーティファクトがカレントディレクトリにダウンロードされます。
-
-**メモ：**上記の例の `xargs` は 4つのプロセスを実行してアーティファクトを並列にダウンロードします。 必要に応じて、`-P` フラグに指定する数を調整してください。
-
 ## 関連項目
+{: #see-also }
 {:.no_toc}
 
 [依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)

@@ -3,6 +3,9 @@ layout: classic-docs
 title: Publishing Packages to packagecloud
 categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
+version:
+- Cloud
+- Server v2.x
 ---
 
 [Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.
@@ -10,9 +13,11 @@ description: How to publish packages to packagecloud using CircleCI
 * TOC
 {:toc}
 
-## Configure Environment Variables
+## Configure environment variables
+{: #configure-environment-variables }
 
 ### Set the `$PACKAGECLOUD_TOKEN`
+{: #set-the-dollarpackagecloudtoken }
 
 Under project settings in CircleCI, create an environment variable with the name `PACKAGECLOUD_TOKEN`, containing the value of a packagecloud API token. This environment variable will be used to authenticate with the packagecloud API directly, or using the packagecloud CLI.
 
@@ -23,12 +28,14 @@ Alternatively, if you prefer to keep your sensitive environment variables checke
 {:.no_toc}
 
 ### Set the `$PACKAGECLOUD_URL` for packagecloud:enterprise
+{: #set-the-dollarpackagecloudurl-for-packagecloudenterprise }
 
 _**Only set the `$PACKAGECLOUD_URL` if you're a packagecloud:enterprise customer**_
 
 This setting is only for packagecloud:enterprise customers. Under project settings in CircleCI, set the `$PACKAGECLOUD_URL` environment variable to the URL of the packagecloud:enterprise installation.
 
 ## Install the packagecloud CLI
+{: #install-the-packagecloud-cli }
 
 To use the packagecloud CLI from CircleCI, install it using RubyGems by adding the following `run` step to your `.circleci/config.yml` under the job that is configured to deploy the package:
 
@@ -40,11 +47,13 @@ To use the packagecloud CLI from CircleCI, install it using RubyGems by adding t
 
 The CLI will automatically use the `$PACKAGECLOUD_TOKEN` environment variable to authenticate against the packagecloud service.
 
-### Using Dependency Caching
+### Using dependency caching
+{: #using-dependency-caching }
 
 If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for [Caching Dependencies]({{ site.baseurl }}/2.0/caching/).
 
-## Pushing Packages with the packagecloud CLI
+## Pushing packages with the packagecloud CLI
+{: #pushing-packages-with-the-packagecloud-cli }
 
 The build processes for package types will vary, but pushing them into a packagecloud repository is quite simple. To add packages to a repository from your CircleCI builds, add a step in your `deploy` configuration that uses the packagecloud CLI.
 
@@ -55,7 +64,10 @@ version: 2
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/ruby:2.3-jessie
+    - image: circleci/ruby:2.7
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   build:
     <<: *defaults
@@ -88,13 +100,15 @@ workflows:
             - build
 ```
 
-## Deploy `npm` Packages
+## Deploy `npm` packages
+{: #deploy-npm-packages }
 
 CircleCI users can deploy packages directly to npm registries hosted on packagecloud.
 
-### Configure the Test Job
+### Configure the test job
+{: #configure-the-test-job }
 
-This job will retrieve the project code, install it's dependencies and run any tests in the NodeJS project:
+This job will retrieve the project code, install its dependencies and run any tests in the NodeJS project:
 
 ```yaml
 jobs:
@@ -124,7 +138,8 @@ jobs:
           paths: .
 ```
 
-### Configure the Deploy Job
+### Configure the deploy job
+{: #configure-the-deploy-job }
 
 The next job configured is the deploy job. This job will authenticate and publish to the packagecloud npm registry:
 
@@ -164,7 +179,10 @@ version: 2
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:8.9.1
+    - image: circleci/node:14.17.3
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   test:
     <<: *defaults
@@ -219,11 +237,13 @@ The workflows section will tie together both the `test` and `deploy` jobs into s
 You can read more about publishing npm packages to packagecloud on the CircleCI blog post: [Publishing npm Packages Using CircleCI 2.0](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
 
 ## Using the packagecloud API
+{: #using-the-packagecloud-api }
 
 Packagecloud also provides a robust API to manage package repositories. You can read more about the [packagecloud API](https://packagecloud.io/docs/api) and how to upload, delete, and promote packages across repositories.
 
 {:.no_toc}
 
-## See Also
+## See also
+{: #see-also }
 
 [Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)

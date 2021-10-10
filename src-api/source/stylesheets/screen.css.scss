@@ -73,10 +73,10 @@ html, body {
 
   // This is the logo at the top of the ToC
   .logo {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: $logo-margin;
+    align-self: center;
+    max-width: 80%;
+    text-align: center;
+    display: flex;
   }
 
   &>.search {
@@ -86,13 +86,14 @@ html, body {
       background: $nav-bg;
       border-width: 0 0 1px 0;
       border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      padding: 6px 0 6px 24px;
       box-sizing: border-box;
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - ($nav-padding*2);
       outline: none;
       color: $nav-text;
       border-radius: 0; /* ios has a default border radius */
+      font-size: 16px;
     }
 
     &:before {
@@ -100,6 +101,7 @@ html, body {
       top: 17px;
       left: $nav-padding;
       color: $nav-text;
+      font-size: 16px;
       @extend %icon-search;
     }
   }
@@ -113,10 +115,12 @@ html, body {
     transition-property: height, margin;
     transition-duration: 180ms;
     transition-timing-function: ease-in-out;
-    background: $nav-subitem-bg;
+    background: darken($nav-subitem-bg, 2%);
     &.visible {
-      height: 30%;
+      height: 20%;
       margin-bottom: 1em;
+      border-bottom: 1px solid darken($nav-subitem-bg, 8%);
+      border-top: 1px solid darken($nav-subitem-bg, 8%);
     }
 
     li {
@@ -154,8 +158,9 @@ html, body {
 
   // This is the currently selected ToC entry
   .toc-link.active {
-    background-color: $nav-active-bg;
+    // background-color: $nav-active-bg;
     color: $nav-active-text;
+    border-left: 3px solid #19639A;
   }
 
   // this is parent links of the currently selected ToC entry
@@ -164,15 +169,36 @@ html, body {
     color: $nav-active-parent-text;
   }
 
+  .toc-list-h1 {
+    margin-top: 32px;
+  }
+
   .toc-list-h2 {
+    padding: 8px 0;
     display: none;
-    background-color: $nav-subitem-bg;
+    // background-color: $nav-subitem-bg;
     font-weight: 500;
   }
 
-  .toc-h2 {
-    padding-left: $nav-padding + $nav-indent;
-    font-size: 12px;
+  .toc-h1 {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+
+  .toc-h2, .related-h2 {
+    font-size: $toc-h2-size;
+    padding: 2px 0;
+    padding-left: (($nav-padding + $nav-indent) / 2);
+    margin-left: ($nav-padding + $nav-indent);
   }
 
   .toc-footer {
@@ -195,6 +221,11 @@ html, body {
       text-decoration: none;
     }
   }
+}
+
+.toc-link {
+  margin-left: 8px;
+  border-left: 3px solid $nav-bg;
 }
 
 .toc-link, .toc-footer li {
@@ -327,6 +358,34 @@ html, body {
     clear: both;
   }
 
+
+
+  .header-links,  {
+    margin-right: 50%;
+    padding: 24px 28px;
+    box-sizing: border-box;
+    display: flex;
+
+  }
+  .content-link {
+    color: #7F7F7F;
+    display: flex;
+    text-decoration: none;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 14px;
+    &:first-child {
+      padding-right: 32px;
+    }
+  }
+
+  .new-window {
+    color: grey;
+    width: 12px;
+    padding-left: 8px;
+  }
+
+
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
     margin-right: $examples-width;
     padding: 0 $main-padding;
@@ -352,8 +411,8 @@ html, body {
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
     background-color: #fdfdfd;
   }
 
@@ -367,7 +426,7 @@ html, body {
     font-size: 19px;
     margin-top: 4em;
     margin-bottom: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #efefef;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
     background-image: linear-gradient(to bottom, rgba(#fff, 0.2), rgba(#fff, 0));

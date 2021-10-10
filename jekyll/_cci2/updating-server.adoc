@@ -1,3 +1,9 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
+[#upgrade]
 = Upgrading a Server Installation
 :page-layout: classic-docs
 :page-liquid:
@@ -5,14 +11,17 @@
 :toc: macro
 :toc-title:
 
-This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v{{site.server_version}}. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v{{site.server_version}}, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
+This document describes the process for upgrading your CircleCI Server installation to v2.19.
 
 toc::[]
 
+== Nomad Launch Configuration
+
+WARNING: *Before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
+
 == Org Rename Script
 
-WARNING: Before upgrading please read and follow the steps below if you have **ever had issues with renaming an organization within CircleCI**
-or you suspect that an **organization rename might have happened at any point**.
+WARNING: If upgrading directly from v2.17 (or below) and you have **ever had issues with renaming an organization within CircleCI** or you suspect that an **organization rename might have happened at any point** follow the steps below. If you are running Server v2.18.x already you can skip this section.
 
 . SSH into your Services machine
 . REPL into `workflows-conductor` by running the following: `sudo docker exec -it workflows-conductor lein repl :connect 6005`
@@ -21,13 +30,11 @@ or you suspect that an **organization rename might have happened at any point**.
 
 == Upgrade Steps Overview
 
-Following is an overview of the CircleCI Server upgrade steps. Each stage is described in detail below.
-
-* Take a <<1-snapshot-for-rollback,snapshot>> of your installation so you can rollback later if necessary (optional but recommended)
-* Update <<2-updating-replicated,Replicated>> and check you are running Docker v17.12.1, update if necessary
-* <<3-upgrade-circleci-server,Install the latest version of CircleCI Server>>
+Follow these steps to upgrade your CircleCI Server version.
 
 === 1. Snapshot for Rollback
+
+NOTE: This step is optional but recommended
 
 To take a snapshot of your installation:
 
@@ -53,14 +60,14 @@ If you do need to rollback at any point, see our https://circleci.com/docs/2.0/b
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * Your installation is **not** airgapped and you can access the internet from it.
-* We will be updating to Replicated v2.38, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
+* We will be updating to Replicated v2.38.6, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
 ```
 +
 If you are running a version of Replicated pre v2.10.3 please reach out to support@circleci.com.
-If you are already on v2.38 you can skip the next step and move to <<3-upgrade-circleci-server,upgrade the CircleCI application>>
+If you are already on v2.38.6 or above you can skip the next step and move to <<3-upgrade-circleci-server,upgrade the CircleCI application>>
 
 ==== b. Preparations
 
@@ -117,13 +124,13 @@ sudo apt-mark hold docker-ce
 . Perform the Replicated update by executing the update script as follows:
 +
 ```shell
-curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.0" | sudo bash
+curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.6" | sudo bash
 ```
 +
 Double-check your replicated and docker versions:
 +
 ```shell
-replicatedctl version    # 2.38.0
+replicatedctl version    # 2.38.6
 docker -v                # 17.12.1
 ```
 

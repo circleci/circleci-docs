@@ -3,26 +3,26 @@ layout: classic-docs
 title: ビルドのスキップとキャンセル
 short-title: ビルドのスキップとキャンセル
 description: CircleCI の自動ビルドを止める方法
-categories:
-  - configuring-jobs
 order: 100
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-ここでは、以下のセクションに沿って、ビルドをスキップまたはキャンセルする方法について説明します。
+以下のセクションに沿って、ビルドをスキップまたはキャンセルする方法について説明します。
 
-- 目次
+* TOC
 {:toc}
 
-## ビルドのスキップ
+## Skipping a build
+{: #skipping-a-build }
 
-CircleCI のデフォルトでは、ユーザーが変更をバージョン管理システム (VCS) にプッシュするたびに、自動的にプロジェクトがビルドされます。 この動作は、`[ci skip]` または `[skip ci]` タグをコミットのタイトルまたは説明の任意の場所に追加することで、オーバーライドできます。 これにより、マークされたコミットだけでなく、そのプッシュに含まれる**他のすべてのコミット**もスキップされます。
+By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
 
-スキップしたコミットを後でビルドする場合は、ビルドを再実行することでスキップタグをオーバーライドできます。 ワークフローを使用している場合は、CircleCI アプリケーションの [Workflows] ページに移動し、ワークフロー全体を再実行するか、失敗したジョブからワークフローを再実行します。 または、CircleCI アプリケーションの**ジョブページ**で、リビルドオプションの中からいずれかを選んでクリックします。
+**Note:** This feature is not supported for fork PRs. Scheduled workflows will not be cancelled even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
-**メモ：**この機能は、フォークされた PR ではサポートされていません。
-
-### コミットのタイトルの例
-
+### Example commit title
+{: #example-commit-title }
 {:.no_toc}
 
 ```bash
@@ -35,10 +35,10 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
     fix misspelling [ci skip]
 ```
 
-このコミットはタイトルに `[ci skip]` が含まれているため、VCS にプッシュされても CircleCI でビルドされません。
+When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit title.
 
-### コミットの説明の例
-
+### Example commit description
+{: #example-commit-description }
 {:.no_toc}
 
 ```bash
@@ -51,51 +51,50 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
 
     A large feature with squashed commits
 
-    Fix bug in feature
+    [skip ci] Fix bug in feature
     Refactor feature code
-    First attempt at feature [ci skip]
+    First attempt at feature
 ```
 
-このコミットは説明に `[ci skip]` が含まれているため、VCS にプッシュされても CircleCI でビルドされません。
+When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci]` in the commit description.
 
-**メモ：**一度に複数のコミットをプッシュした場合、1つの `[ci skip]` または `[skip ci]` で**すべてのコミット**のビルドがスキップされます。
+**Note:** If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
 
-## 冗長ビルドの自動キャンセル
+## Auto cancelling a redundant build
+{: #auto-cancelling-a-redundant-build }
 
-変更を頻繁にブランチにプッシュすると、ビルドキューイングが発生する可能性が高まります。 したがって、古いバージョンのブランチでビルドが終了するまで、最新バージョンでビルドを実行できないことがあります。
+If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to finish building before the most recent version starts.
 
-時間を節約するために、新しいビルドがトリガーされたときに、その同じブランチ上のキューイングされたビルドまたは実行中のビルドを自動的にキャンセルするように CircleCI を設定することができます。
+To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
 
-**メモ：**プロジェクトのデフォルトブランチでは、ビルドの自動キャンセルは行われません。 この機能が適用されるのは、ワークフロー以外のビルド、GitHub へのプッシュによってトリガーされたビルド、および新しい[ビルド処理]({{ site.baseurl }}/ja/2.0/build-processing/)機能を使用しているワークフロービルドだけです。
+**Note:** Your project's default branch (usually `master`) will never auto-cancel builds.
 
-### GitHub へのプッシュによってトリガーされたワークフロー以外の新しいビルドの自動キャンセルを有効にする手順
-
+### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
+{: #steps-to-enable-auto-cancel-for-pipelines-triggered-by-pushes-to-github-or-the-api }
 {:.no_toc}
 
-1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
-2. **[Build Settings (ビルド設定)]** セクションで、**[Advanced Settings (詳細設定)]** をクリックします。
+1. In the CircleCI application, go to your Project Settings.
 
-3. **[Enabling Build Processing (preview) (ビルド処理を有効にする (プレビュー))]** セクションで **[On (オン)]** ボタンをクリックします。
+2. Click on **Advanced Settings**.
 
-### GitHub または API へのプッシュによってトリガーされたワークフローの自動キャンセルを有効にする手順
+3. In the **Auto-cancel redundant builds** section, enable the feature by switching the toggle switch to the **On** position.
 
-{:.no_toc}
-
-[Advanced Settings (詳細設定)] で自動キャンセルが有効になっているプロジェクトでは、非デフォルトのブランチで新しいビルドがトリガーされると、同じブランチ上のワークフローがキャンセルされます。
-
-**メモ：**非デフォルトのブランチで自動デプロイジョブを設定している場合などには、自動キャンセル機能を有効にすることの影響を慎重に検討する必要があります。 ワークフローを自動キャンセルする場合は、[ビルド処理]({{ site.baseurl }}/ja/2.0/build-processing/)のプレビュー機能を有効にする必要があります。
-
-1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
-
-2. **[Build Settings (ビルド設定)]** セクションで、**[Advanced Settings (詳細設定)]** をクリックします。
-
-3. **[Enabling Build Processing (preview) (ビルド処理を有効にする (プレビュー))]** セクションで **[On (オン)]** ボタンをクリックします。
-
-4. 変更をコミットしてビルドをトリガーし、新しいパイプラインを使用して正常に実行されることを確認します。
-
-5. **[Auto-cancel redundant builds (冗長ビルドを自動キャンセルする)]** セクションで **[On (オン)]** ボタンをクリックします。
-
-[Advanced Settings (詳細設定)] で自動キャンセルが有効になっているプロジェクトでは、非デフォルトのブランチで新しいビルドがトリガーされると、同じブランチ上のワークフローがキャンセルされます。ただし、以下の例外があります。
-
+Projects for which auto-cancel is enabled in the Advanced Settings will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 - スケジュールされたワークフローおよび再実行されたワークフローはキャンセルされません。
+
+## Auto cancel for CircleCI server installations
+{: #auto-cancel-for-circleci-server-installations }
+
+CircleCI Server does not currently use the pipelines feature, and as a result the Auto Cancel Builds feature only works for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
+
+### Steps to enable auto-cancel for CircleCI server installations
+{: #steps-to-enable-auto-cancel-for-circleci-server-installations }
+{:.no_toc}
+
+1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
+
+2. In the **Build Settings** section, click on **Advanced Settings**.
+
+3. In the **Auto-cancel redundant builds** section, click the **On** button.

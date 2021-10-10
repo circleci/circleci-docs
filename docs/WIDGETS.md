@@ -1,6 +1,6 @@
-# CircleCI Docs: Widgets
+# CircleCI Docs: Widgets & Plugins
 
-Some documentation pages will have widgets. These are page elements that provide advanced functionality within Markdown.
+This page details some of the augmentations either in the documentation presentation, built process etc.
 
 ## Tabbed HTML Elements
 
@@ -51,3 +51,7 @@ For example, if we had software that was only compatible with Ubuntu 14.04 “Tr
 ```
 {% include os-matrix.html trusty=site.data.trusty.versions.summary.docker %}
 ```
+
+## Unused Image cleanup
+
+This is a Jekyll plugin that can detect what images aren't being used in our docs anymore and moves them to `assets/img/docs/_unused/`. You can find the source code for the script in `jekyll/_plugins/find_unused_images.rb`. The plugin hooks into Jekyll's build process and is turned off by default. 

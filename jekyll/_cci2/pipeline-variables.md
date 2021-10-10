@@ -5,30 +5,35 @@ short-title: "Pipeline Variables"
 description: "Detailed information about Pipeline variables, parameters and values"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
-Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher. 
+Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher.
 
-There are two types of pipeline variables: 
+There are two types of pipeline variables:
 
 * **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
-* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API. 
+* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API.
 
-## Pipeline Values
+## Pipeline values
+{: #pipeline-values }
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
 Value                       | Description
 ----------------------------|--------------------------------------------------------
-pipeline.id                 | A globally unique id representing for the pipeline
+pipeline.id                 | A [globally unique id](https://en.wikipedia.org/wiki/Universally_unique_identifier) representing for the pipeline
 pipeline.number             | A project unique integer id for the pipeline
-pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
-pipeline.project.type       | E.g. "github"
-pipeline.git.tag            | The tag triggering the pipeline
-pipeline.git.branch         | The branch triggering the pipeline
-pipeline.git.revision       | The current git revision
-pipeline.git.base_revision  | The previous git revision
+pipeline.project.git_url    | The URL where the current project is hosted. E.g. https://github.com/circleci/circleci-docs
+pipeline.project.type       | The lower-case name of the VCS provider, E.g. “github”, “bitbucket”.
+pipeline.git.tag            | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+pipeline.git.branch         | The name of the git branch that was pushed to trigger the pipeline.
+pipeline.git.revision       | The long (40-character) git SHA that is being built.
+pipeline.git.base_revision  | The long (40-character) git SHA of the build prior to the one being built.
 {: class="table table-striped"}
+
+Note: While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
 
 For example:
 
@@ -39,6 +44,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
@@ -47,9 +55,12 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-## Pipeline Parameters in Configuration
+Note: When using the above method to set the variables in the `environment` key if the pipeline variable is empty it will set the variable to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. 
+## Pipeline parameters in configuration
+{: #pipeline-parameters-in-configuration }
+
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file.
 
 Pipeline parameters support the following types:
 * string
@@ -57,9 +68,9 @@ Pipeline parameters support the following types:
 * integer
 * enum
 
-See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details. 
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details.
 
-Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`. 
+Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
 
@@ -77,6 +88,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:<< pipeline.parameters.image-tag >>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>
@@ -85,7 +99,8 @@ jobs:
       - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
 ```
 
-### Passing Parameters When Triggering Pipelines via the API
+### Passing parameters when triggering pipelines via the API
+{: #passing-parameters-when-triggering-pipelines-via-the-api }
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
@@ -102,14 +117,17 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-## The Scope of Pipeline Parameters
+## The scope of pipeline parameters
+{: #the-scope-of-pipeline-parameters }
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability. 
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability.
 
 
-## Config Processing Stages and Parameter Scopes
+## Config processing stages and parameter scopes
+{: #config-processing-stages-and-parameter-scopes }
 
-### Processing Stages
+### Processing stages
+{: #processing-stages }
 
 Configuration processing happens in the following stages:
 
@@ -117,9 +135,10 @@ Configuration processing happens in the following stages:
 - Pipeline parameters are replaced in the orb statement
 - Orbs are imported
 
-The remaining configuration is processed, element parameters are resolved, type-checked, and substituted,
+The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
-## Element Parameter Scope
+## Element parameter scope
+{: #element-parameter-scope }
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
@@ -153,33 +172,33 @@ workflows:
 
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
 
-## Pipeline Value Scope
+## Pipeline value scope
+{: #pipeline-value-scope }
 
 Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
-### Pipeline Parameter Scope
+### Pipeline parameter scope
+{: #pipeline-parameter-scope }
 
 Pipeline parameters which are defined in configuration are always in scope, with two exceptions:
 
 - Pipeline parameters are not in scope for the definition of other pipeline parameters, so they cannot depend on one another.
 - Pipeline parameters are not in scope in the body of orbs, even inline orbs, to prevent data leaks.
 
-## Conditional Workflows
+## Conditional workflows
+{: #conditional-workflows }
 
-New as of June 2019, you can use a `when` clause (we also support the inverse clause `unless`) under a workflow declaration with a boolean value to decide whether or not to run that workflow.
+Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy values can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
-Below is an example configuration using two different pipeline parameters, one used to drive whether a particular workflow will run and another to determine if a particular step will run.
+Below is an example configuration using the pipeline parameter `run_integration_tests` to drive whether the workflow `integration_tests` will run.
 
 ```yaml
 version: 2.1
 
 parameters:
   run_integration_tests:
-    type: boolean
-    default: false
-  deploy:
     type: boolean
     default: false
 
@@ -194,10 +213,7 @@ jobs:
   mytestjob:
     steps:
       - checkout
-      - when:
-          condition: << pipeline.parameters.deploy >>
-          steps:
-            - run: echo "deploying"
+      - ... # job steps
 ```
 
 The example shown above prevents the workflow `integration_tests` from being triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
@@ -210,4 +226,4 @@ The example shown above prevents the workflow `integration_tests` from being tri
 }
 ```
 
-The `when` key actually accepts any boolean, not just pipeline parameters, though pipeline parameters will be the primary use of this feature until more are implemented. `when` also has an inverse clause called `unless`, which inverts truthiness of the condition.
+The `when` key accepts any truthy or falsy value, not just pipeline parameters, though pipeline parameters will be the primary use of this feature until more are implemented. `when` also has an inverse clause `unless`, which inverts truthiness of the condition.

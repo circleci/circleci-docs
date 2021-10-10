@@ -29,8 +29,9 @@ under the License.
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <title><%= current_page.data.title || "API Documentation" %></title>
-    <%= favicon_tag 'favicon.ico.png' %>
+    <%= favicon_tag 'favicon.ico' %>
 
     <style>
       <%= Rouge::Themes::MonokaiSublime.render(:scope => '.highlight') %>
@@ -45,6 +46,11 @@ under the License.
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
+
+    <!-- Analytics Snippet: -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9HDVK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W9HDVK');</script>
+
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -52,8 +58,8 @@ under the License.
       </span>
     </a>
     <div class="toc-wrapper">
-      <a href="https://circleci.com/docs/">
-        <%= image_tag "logo.png", class: 'logo' %>
+      <a href="#">
+        <%= image_tag "logo.png", width: '90%',  class: 'logo' %>
       </a>
       <% if language_tabs.any? %>
         <div class="lang-selector">
@@ -99,6 +105,16 @@ under the License.
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
+        <div class="header-links">
+          <a class="content-link" target="_blank" href="https://circleci.com/docs/2.0">
+            Documentation
+            <%= image_tag "new-window.svg", width: '90%',  class: 'new-window' %>
+          </a>
+          <a class="content-link" target="_blank" href="https://circleci.com">
+            circleci.com
+            <%= image_tag "new-window.svg", width: '90%',  class: 'new-window' %>
+          </a>
+        </div>
         <%= page_content %>
       </div>
       <div class="dark-box">

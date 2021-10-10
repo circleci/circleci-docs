@@ -143,7 +143,7 @@ starting up-to-date ones.
 We've seen how we can use CircleCI to deploy an app, in this examples, a Rails
 app, to Google Container Engine while using Google Container Registry to store
 the images. An example of a green (passing) build for the example project can
-be found [here](https://circleci.com/gh/circleci/docker-hello-google/43){:rel="nofollow"}.
+be found [here](https://app.circleci.com/pipelines/github/circleci/docker-hello-google/jobs/43){:rel="nofollow"}.
 
 ### The Example Project Doesn't Run on GKE
 If you were following along with the

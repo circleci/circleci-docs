@@ -5,6 +5,9 @@ short-title: "Project Tutorial"
 description: "Tutorial and sample config for a Flask project in CircleCI 2.0"
 categories: [migration]
 order: 3
+version:
+- Cloud
+- Server v2.x
 ---
 
 The demo application in this tutorial uses Python and Flask for the backend.
@@ -18,7 +21,8 @@ The following sections walk through how Jobs and Steps are configured for this a
 The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
 The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
-## Basic Setup 
+## Basic setup
+{: #basic-setup }
 {:.no_toc}
 
 The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/)
@@ -32,6 +36,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: pip install -r requirements/dev.txt
@@ -41,10 +48,11 @@ jobs:
 `.circleci/config.yml`, you must have a job named `build` that includes the following:
 
 - Executor of the underlying technology, defined as `docker` in this example.
-- Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing. 
+- Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing.
 - Steps starting with a required `checkout` Step and followed by `run:` keys that execute commands sequentially on the primary container.
 
-## Service Containers
+## Service containers
+{: #service-containers }
 
 If the job requires services such as databases they can be run as additional containers by listing more `image:`s in the `docker:` stanza.
 
@@ -56,10 +64,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
@@ -70,7 +84,8 @@ The environment variables for the *primary container* set some config specific t
 
 The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `root` with an empty password, and a database called `circle_test`.
 
-## Installing Dependencies
+## Installing dependencies
+{: #installing-dependencies }
 
 Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
 
@@ -80,10 +95,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -107,21 +128,29 @@ An environment variable defined in a `run:` key will override image-level variab
             FLASK_CONFIG: staging
 ```
 
-### Caching Dependencies
+### Caching dependencies
+{: #caching-dependencies }
 {:.no_toc}
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -129,7 +158,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -137,10 +166,11 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
 ```
+{% endraw %}
 
 The following describes the detail of the added key values:
 
@@ -152,7 +182,8 @@ The following describes the detail of the added key values:
 
 You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
 
-## Installing and Running Selenium to Automate Browser Testing
+## Installing and running Selenium to automate browser testing
+{: #installing-and-running-selenium-to-automate-browser-testing }
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 
@@ -162,10 +193,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -184,7 +221,8 @@ jobs:
           background: true
 ```
 
-## Running Tests
+## Running tests
+{: #running-tests }
 
 In the demo application,
 a virtual Python environment is set up,
@@ -200,10 +238,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -245,7 +289,7 @@ jobs:
 
 Notes on the added keys:
 
-- Each command runs in a new shell, so the virtual environment that was activated in the dependencies installation step is activated again in this final `run:` key with `. venv/bin/activate`. 
+- Each command runs in a new shell, so the virtual environment that was activated in the dependencies installation step is activated again in this final `run:` key with `. venv/bin/activate`.
 - The `store_artifacts` step is a special step. The `path:` is a directory relative to the project’s `root` directory where the files are stored. The `destination:` specifies a prefix chosen to be unique in the event that another step in the job produces artifacts in a directory with the same name. CircleCI collects and uploads the artifacts to S3 for storage.
 - When a job completes, artifacts appear in the CircleCI Artifacts tab:
 
@@ -258,6 +302,7 @@ Notes on the added keys:
 Read more about [artifact storage]({{ site.baseurl }}/2.0/artifacts) and [test results]({{ site.baseurl }}/2.0/collect-test-data/).
 
 ## Deploying to Heroku
+{: #deploying-to-heroku }
 
 The demo `.circleci/config.yml` includes a `deploy` job
 to deploy the `master` branch to Heroku.
@@ -270,7 +315,7 @@ The `command` assumes that you have:
 - set the `HEROKU_APP_NAME` and `HEROKU_API_KEY` environment variables.
 
 If you have not completed any or all of these steps,
-follow the [instructions]({{ site.baseurl }}/2.0/deployment-integrations/#heroku)
+follow the [instructions]({{ site.baseurl }}/2.0/deployment-examples/#heroku)
 in the Heroku section of the Deployment document.
 
 **Note:**
@@ -285,10 +330,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -327,7 +378,8 @@ jobs:
 
 Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
-### Additional Heroku Configuration
+### Additional Heroku configuration
+{: #additional-heroku-configuration }
 {:.no_toc}
 
 The demo application is configured to run on Heroku with settings provided in `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
@@ -351,7 +403,8 @@ heroku run python manage.py deploy
 heroku restart
 ```
 
-## Using Workflows to Automatically Deploy
+## Using workflows to automatically deploy
+{: #using-workflows-to-automatically-deploy }
 
 To deploy `master` to Heroku automatically after a successful `master` build,
 add a `workflows` section
@@ -375,10 +428,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -415,7 +474,8 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-## See Also
+## See also
+{: #see-also }
 {:.no_toc}
 
 For more information about Workflows,

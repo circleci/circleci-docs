@@ -5,6 +5,9 @@ short-title: "Python"
 description: "Continuous integration with Python on CircleCI"
 categories: [language-guides]
 order: 7
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes
@@ -15,6 +18,7 @@ using a sample application written in Python.
 {:toc}
 
 ## Overview
+{: #overview }
 
 This guide uses a sample Django application
 to describe configuration best practices
@@ -26,13 +30,15 @@ Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
 and rewriting [the configuration file](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml)
 as you follow this guide.
 
-## Configuration Walkthrough
+## Configuration walkthrough
+{: #configuration-walkthrough }
 
 Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
 Follow the steps below
 to create a complete `config.yml` file.
 
-### Specify a Version
+### Specify a version
+{: #specify-a-version }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used
@@ -42,7 +48,8 @@ to issue warnings about breaking changes.
 version: 2
 ```
 
-### Create a Build Job
+### Create a build job
+{: #create-a-build-job }
 
 A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
 Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
@@ -61,7 +68,8 @@ jobs:
     working_directory: ~/circleci-demo-python-django
 ```
 
-### Choose an Executor Type
+### Choose an executor type
+{: #choose-an-executor-type }
 
 The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
 
@@ -78,6 +86,9 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4  # primary container for the build job
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 **Note:**
@@ -85,7 +96,8 @@ jobs:
 These images are extensions of official Docker images
 and include tools useful for CI/CD environments.
 
-### Add Other Services and Set Environment Variables
+### Add other services and set environment variables
+{: #add-other-services-and-set-environment-variables }
 
 Specify additional containers for services like databases.
 Use the [`environment`]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container) key
@@ -98,16 +110,23 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4 # every job must define an image for the docker executor and subsequent jobs may define a different image.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.2 # an example of how to specify a service container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
 ```
 
-### Install Dependencies
+### Install dependencies
+{: #install-dependencies }
 
 After choosing containers for a job,
 create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
@@ -137,7 +156,8 @@ jobs:
             pipenv install
 ```
 
-### Cache Dependencies
+### Cache dependencies
+{: #cache-dependencies }
 
 To save time between runs,
 consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
@@ -181,7 +201,8 @@ jobs:
 Use the `chown` command
 to grant CircleCI access to dependency locations.
 
-### Run Tests
+### Run tests
+{: #run-tests }
 
 Use the `run` step
 to run your test suite.
@@ -198,7 +219,8 @@ jobs:
           pipenv run python manage.py test
 ```
 
-### Upload And Store Test Results
+### Upload and store test results
+{: #upload-and-store-test-results }
 
 Use the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step
 to upload test results to CircleCI.
@@ -221,29 +243,37 @@ jobs:
           destination: tr1
 ```
 
-### Deploy Application
+### Deploy application
+{: #deploy-application }
 
 This Django application is not deployed anywhere.
 See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) or the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for deploy examples.
 
-## Full Configuration File
+## Full configuration file
+{: #full-configuration-file }
 
 {% raw %}
 
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point 
+  build: # runs not using Workflows must have a `build` job as entry point
     # directory where steps are run
     working_directory: ~/circleci-demo-python-django
     docker: # run the steps with Docker
       # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
       - image: circleci/python:3.6.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # environment variables for primary container
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # environment variables for the Postgres container.
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
@@ -261,9 +291,7 @@ jobs: # A basic unit of work in a run
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
+            - "venv"
       - run:
           command: |
             pipenv run python manage.py test
@@ -276,6 +304,7 @@ jobs: # A basic unit of work in a run
 
 {% endraw %}
 
-## See Also
+## See also
+{: #see-also }
 
 - See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.

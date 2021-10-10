@@ -9,11 +9,12 @@ order: 1
 
 This document provides a summary of features and product notes for the release of CircleCI Server v2.16.
 
-## What's New in Release 2.16
+## What's new in release 2.16
+{: #whats-new-in-release-216 }
 
 - We are excited to announce that you can now distribute your data and workload external to the Services Machine. The following services can be externalized; MongoDB, Redis, Nomad Server, RabbitMQ, Postgres and Vault. Contact your CSM for the latest documentation.
 
-- Custom Metrics can now be accomplished via a Telegraf Output Configuration File. See the Monitoring chapter of the Operations Guide. 
+- Custom Metrics can now be accomplished via a Telegraf Output Configuration File. See the Monitoring chapter of the Operations Guide.
 
 - Users can now receive email notifications about Workflows.
 
@@ -23,7 +24,8 @@ This document provides a summary of features and product notes for the release o
    - *CircleCI v2.16 Installation Guide*
    - *CircleCI v2.16 Operations Guide*
 
-## Fixed in Release 2.16
+## Fixed in release 2.16
+{: #fixed-in-release-216 }
 
 - Fix for an issue with Contexts that would break after 32 days.
 
@@ -42,7 +44,8 @@ This document provides a summary of features and product notes for the release o
 - Forked PRs can no longer write the caches of parent projects by default for security reasons. It is possible to still write parent project caches from the fork if the "Pass secrets to builds from forked pull requests" (in Advanced settings) is enabled.
 
 
-## Updated in Release 2.16
+## Updated in release 2.16
+{: #updated-in-release-216 }
 
 - Removed EOL banner on build emails.
 
@@ -55,7 +58,8 @@ This document provides a summary of features and product notes for the release o
 
 - Replicated was updated to version 2.29.0 in this release which requires Docker 17.12.1. Follow the instructions below before upgrading to CircleCI v2.16.
 
-### Prequisites for Updating Replicated
+### Prequisites for updating Replicated
+{: #prequisites-for-updating-replicated }
 
 - Your installation is Ubuntu 14.04-based
 - You are running replicated version 2.10.3 on your services machine
@@ -64,6 +68,7 @@ This document provides a summary of features and product notes for the release o
 - All steps are completed on the Services machine
 
 ### Preparations
+{: #preparations }
 
 Before performing a replicated version update, backup your data using the Backup section of the *CircleCI v2.16 Operations Guide*.
 
@@ -108,6 +113,7 @@ Example Output:
 ```
 
 ### Update
+{: #update }
 
 Perform the Replicated update by executing the update script as follows:
 

@@ -4,7 +4,6 @@
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
 
 This document provides an overview of how to migrate from Github Actions to CircleCI.
 
@@ -12,7 +11,7 @@ This document provides an overview of how to migrate from Github Actions to Circ
 
 CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
 
-1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to http://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
+1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
 2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into a build environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
 3. **Resource Classes** - you can use various different https://circleci.com/docs/2.0/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
 4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
@@ -27,7 +26,7 @@ Both Github Actions and CircleCI share similar concepts around "jobs" and "workf
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
@@ -80,7 +79,7 @@ workflows:
 
 CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
-Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/orbs/registry/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
+Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
 === Runners vs. Executors
 In GitHub, you can specify your builds to run in Linux, macOS, and Windows environments via a `runs-on` key in the YAML, and if you want to run anything in a container, you specify an additional `container` key.
@@ -93,14 +92,14 @@ See the table in the next section to compare configuration.
 
 == Configuration Comparison
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
 | Github Config | CircleCI Config
 
 2+| Specifying execution environment. While container execution is specified separately in Github, +
-`docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor[own class of executor] in CircleCI.
+`docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
 
 a|
 [source, yaml]
@@ -119,13 +118,16 @@ a|
 # Docker (container) Executor
 docker:
   - image: circleci/openjdk:11.0-jdk
+    auth:
+      username: mydockerhub-user
+      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 # Linux Ubuntu Executor
 machine: true
 
 # macOS Executor
 macos:
-  xcode: "11.0.0"
+  xcode: 11.3.0
 
 # Windows Executor
 # NOTE: Orb declaration needed. See docs
@@ -163,9 +165,15 @@ jobs:
     docker:
       # Primary Executor
       - image: circleci/openjdk:11.0-jdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       # Dependency Service(s)
       - image: postgres:10.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -200,7 +208,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]
@@ -284,5 +292,5 @@ Since the configuration between Github Actions and CircleCI is similar, it shoul
 
 . https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
 . https://circleci.com/docs/2.0/workflows/[More Advanced Workflow and Job Dependency Configuration]
-. https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Actions to Orbs]. Our registry can be found https://circleci.com/orbs/registry/?filterBy=all[here].
+. https://circleci.com/docs/2.0/orb-intro/[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
 . https://circleci.com/docs/2.0/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]

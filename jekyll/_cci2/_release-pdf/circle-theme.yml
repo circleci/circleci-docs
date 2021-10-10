@@ -69,12 +69,12 @@ link:
   font_color: 428bca
 # literal is currently used for inline monospaced in prose and table cells
 literal:
-  #background_color: f5f5f5
-  #border_color: fffff
-  #border-width: 1
-  #border_style: solid
+  background_color: f5f5f5
+  border_color: f5f5f5
+  border-width: 1
+  border_style: solid
   #border_offset: 2
-  font_color: a03a66
+  font_color: 3f3f3f
   font_family: RobotoMono
   font_size: 0.8em
 menu_caret_content: " <font size=\"1.15em\"><color rgb=\"b12146\">\u203a</color></font> "
@@ -336,3 +336,7 @@ footer:
       content: $footer_recto_right_content
     #center:
     #  content: '{page-number}'
+
+role:
+  serveronly:
+    font-color: #4e9eb3
