@@ -249,6 +249,8 @@ Then, call the `switch-ruby` command with the version number required. For examp
     version: "2.6"
 ```
 
+Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
 ```yaml
@@ -261,10 +263,6 @@ To switch back to the system default Ruby (the Ruby shipped by Apple with macOS)
 ### Images using Xcode 11.7 and later
 {: #images-using-xcode-117-and-later }
 {:.no_toc}
-
-As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later images default to Ruby 2.7 via `chruby`.
-
-Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
 To switch to another Ruby version, add the following to the beginning of your job.
 
@@ -290,7 +288,7 @@ run:
 {: #images-using-xcode-112-and-later }
 {:.no_toc}
 
-The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
+To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
 ```yaml
 # ...
@@ -305,11 +303,7 @@ Replace `2.6` with the version of Ruby required - you do not need to specify the
 {: #images-using-xcode-111-and-earlier }
 {:.no_toc}
 
-Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
-
-To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
-
-If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+To specify a version of Ruby to use, you can [create a file named `.ruby-version`, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
 
 ```yaml
 # ...
@@ -322,6 +316,8 @@ Replace `2.4` with the version of Ruby required - you do not need to specify the
 
 ### Installing additional Ruby versions
 {: #installing-additional-ruby-versions }
+
+**Note:** Installing additional Ruby versions consumes a lot of job time. We only recommend doing this if you must use a specific version that is not installed in the image by default.
 
 To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
