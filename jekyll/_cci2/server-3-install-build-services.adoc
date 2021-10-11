@@ -549,9 +549,9 @@ NOTE: that preallocated instances are always running and could potentially incre
 
 Once you have configured and deployed CircleCI server you should validate that VM Service is operational. You can re-run the reality checker project within your CircleCI installation and you should see the VM Service Jobs complete with green. At this point all tests should pass with green. 
 
-== Runner 
+=== Runner 
 
-=== Overview 
+==== Overview 
 
 CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you do need to create a runner and configure the runner agent to be aware your server installation. For complete instructions for setting up runner see the link:https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[runner documentation]. 
 
