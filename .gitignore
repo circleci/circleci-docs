@@ -27,3 +27,4 @@ src-api/build/
 vendor
 jekyll/_config_override.yml
 markdownlint-results.json
+.tool-versions

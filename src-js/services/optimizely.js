@@ -1,5 +1,6 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
+import  Cookies from 'js-cookie';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';

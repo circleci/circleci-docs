@@ -87,7 +87,7 @@ This will return something similar to the following:
 ...
 }
 +
-Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`serviceIpv4Cidr`), for example your CIDR block might be `10.100.0.0/16` so the third IP would be `10.100.0.2`.
+Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16` so the third IP would be `10.100.0.2`.
 +
 ```bash
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
