@@ -139,7 +139,43 @@ jobs:
 # ...
 ```
 
-{:.tab.executors.Server}
+{:.tab.executors.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+ build1: # job name
+   docker: # Specifies the primary container image,
+     - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+     - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # for the secondary or service container run in a common
+      # network where ports exposed on the primary container are
+      # available on localhost.
+       environment: # Specifies the POSTGRES_USER authentication
+        # environment variable, see circleci.com/docs/2.0/env-vars/
+        # for instructions about using environment variables.
+         POSTGRES_USER: root
+#...
+ build2:
+   machine: # Specifies a machine image that uses
+   # an Ubuntu version 20.04 image with Docker 19.03.13
+   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
+   # for new image releases.
+     image: ubuntu-2004:202010-01
+#...
+ build3:
+   macos: # Specifies a macOS virtual machine with Xcode version 11.3
+     xcode: "11.3.0"
+# ...
+```
+
+{:.tab.executors.Server_2}
 ```yaml
 version: 2.0
 
@@ -255,7 +291,10 @@ Workflows define a list of jobs and their run order. It is possible to run jobs 
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
-{:.tab.workflows.Server}
+{:.tab.workflows.Server_3}
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server_2}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
@@ -331,7 +370,78 @@ workflows:
 ```
 {% endraw %}
 
-{:.tab.workflows-example.Server}
+{:.tab.workflows-example.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Running tests
+          command: make test
+  build3:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Precompile assets
+          command: bundle exec rake assets:precompile
+#...
+workflows:
+  build_and_test: # name of your workflow
+    jobs:
+      - build1
+      - build2:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # see circleci.com/docs/2.0/workflows/ for more examples.
+      - build3:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # run build2 and build3 concurrently to save time.
+```
+{% endraw %}
+
+{:.tab.workflows-example.Server_2}
 {% raw %}
 ```yaml
 version: 2
