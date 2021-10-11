@@ -231,8 +231,36 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 
 **Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
 
+### Switching Rubies with the macOS Orb (Recommended)
+
+Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
+
+To get started, include the orb at the top of your config:
+
+```yaml
+orbs:
+  macos: circleci/macos@2
+```
+
+Then, call the `switch-ruby` command with the version number required. For example, to switch to Ruby 2.6:
+
+```yaml
+- macos/switch-ruby:
+    version: "2.6"
+```
+
+To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
+
+```yaml
+- macos/switch-ruby:
+    version: "system"
+```
+
+**Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Xcode 11.6 images and earlier default to the System Ruby.
+
 ### Images using Xcode 11.7 and later
 {: #images-using-xcode-117-and-later }
+{:.no_toc}
 
 As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later images default to Ruby 2.7 via `chruby`.
 
@@ -260,6 +288,7 @@ run:
 
 ### Images using Xcode 11.2 and later
 {: #images-using-xcode-112-and-later }
+{:.no_toc}
 
 The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
@@ -274,6 +303,7 @@ Replace `2.6` with the version of Ruby required - you do not need to specify the
 
 ### Images using Xcode 11.1 and earlier
 {: #images-using-xcode-111-and-earlier }
+{:.no_toc}
 
 Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
 
@@ -407,18 +437,17 @@ After the app has been tested and signed, you are ready to configure deployment 
 
 ### Pre-starting the simulator
 {: #pre-starting-the-simulator }
-{:.no_toc}
 
 Pre-start the iOS simulator before building your
 application to make sure that the simulator is booted in time.
 Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
-To pre-start the simulator, add the macOS Orb (version `1.3.0` or higher) to your config:
+To pre-start the simulator, add the macOS Orb (version `2.0.0` or higher) to your config:
 
 ```yaml
 orbs:
-  macos: circleci/macos@1.3.0
+  macos: circleci/macos@2
 ```
 
 Then call the `preboot-simulator` command, as shown in the example below:
