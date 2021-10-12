@@ -22,6 +22,11 @@ This document describes the available executor types (`docker`, `machine`, `wind
 {: #overview }
 {:.no_toc}
 
+<div class="alert alert-warning" role="alert">
+<strong>Please note, as of Dec 31, 2021,</strong> legacy convenience images (images with the prefix "circleci/") <strong>will be deprecated.</strong>
+Please refer to the image <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/">deprecation timeline</a> and <a href="https://go.circleci.com/NDg1LVpNSC02MjYAAAF_Zcex0HQfrZCv0OhdfTakXTKCcJxPfXFu_akCRSXlgyUvpe6FZQ33feCwEVs_PFKSePH-d_A=">migration guide</a> for more information on how to upgrade your projects to <a href="https://go.circleci.com/NDg1LVpNSC02MjYAAAF_Zcex0EECjblu3OW1b6pnRM3rHhhRo5PjTDLMv1AeMB_8_qMNpajuj8DzmJVe0kkY8fZq2wE=">next-generation convenience images</a>.
+</div>
+
 An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of four environments:
 
 - Within Docker images (`docker`)
