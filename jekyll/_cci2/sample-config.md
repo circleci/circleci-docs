@@ -72,7 +72,40 @@ workflows:
       - test
 ```
 
-{:.tab.basic-concurrent.Server}
+{:.tab.basic-concurrent.Server_3}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+
+{:.tab.basic-concurrent.Server_2}
 ```yaml
 version: 2
 
@@ -149,7 +182,42 @@ workflows:
             - build
 ```
 
-{:.tab.basic-sequential.Server}
+{:.tab.basic-sequential.Server_3}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.basic-sequential.Server_2}
 ```yaml
 version: 2
 # Define the jobs we want to run for this project
@@ -245,7 +313,59 @@ workflows:
             - hold
 ```
 
-{:.tab.approval.Server}
+{:.tab.approval.Server_3}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
+
+{:.tab.approval.Server_2}
 ```yaml
 version: 2
 
@@ -304,7 +424,7 @@ workflows:
 Following is a sample `.circleci/config.yml` file using the following configuration features:
 
 * A sequential workflow
-* An orb (`version: 2.1`/Cloud config only) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server example
+* An orb (`version: 2.1` config only, and server 3 users will need to ensure the orb has been imported) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server v2 example
 * A secondary services container
 * Workspaces
 * Storing artifacts
@@ -384,7 +504,82 @@ workflows:
             - build
 ```
 
-{:.tab.complex-sequential.Server}
+{:.tab.complex-sequential.Server_3}
+```yaml
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      - checkout
+      # Install the latest npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      - node/install-packages:
+          app-dir: ~/mern-starter
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    docker:
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      - image: cimg/node:current
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:4.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Demonstrate that Mongo DB is available as localhost
+          command: |
+            curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt update
+            sudo apt install mongodb-org
+            mongo localhost --eval 'db.serverStatus()'
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.complex-sequential.Server_2}
 {% raw %}
 ```yaml
 version: 2
@@ -468,7 +663,7 @@ For the Cloud/`2.1` example, see the following workflow graph:
 
 ![Fan-in-out]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
 
-{:.tab.fan-in-our.Cloud}
+{:.tab.fan-in-out.Cloud}
 {% raw %}
 ```yaml
 version: 2.1
@@ -612,7 +807,151 @@ workflows:
 ```
 {% endraw %}
 
-{:.tab.fan-in-our.Server}
+{:.tab.fan-in-out.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+    docker: circleci/docker@1.0.1
+
+jobs:
+    prepare-dependencies:
+        docker:
+            - image: node:current-alpine
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        steps:
+            - checkout
+            - run:
+                  name: Compute version number
+                  command: echo "0.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}" | tee version.txt
+            - restore_cache:
+                  keys:
+                      - yarn-deps-{{ checksum "yarn.lock" }}
+                      - yarn-deps
+            - run:
+                  name: yarn install
+                  command: yarn install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: yarn-deps-{{ checksum "yarn.lock" }}-{{ epoch }}
+            - store_artifacts:
+                  path: yarn.lock
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-production:
+        docker:
+            - image: node:current-alpine
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Production build
+                  command: |
+                      export __BUILD_VERSION="$(cat version.txt)"
+                      yarn build
+            - store_artifacts:
+                  path: dist/server.js
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-docker-image:
+        machine:
+            image: ubuntu-1604:202004-01
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/build:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+
+    test:
+        docker:
+            - image: node:current-alpine
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        parallelism: 2
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Run tests
+                  command: |
+                      circleci tests glob '**/*.test.ts' | circleci tests split --split-by timings | xargs yarn test:ci
+            - store_artifacts:
+                  path: test-results
+            - store_test_results:
+                  path: test-results
+
+    deploy-docker-image:
+        machine:
+            image: ubuntu-1604:202004-01
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/pull:
+                  images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
+            - run:
+                  name: Tag the image as latest
+                  command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: latest
+                  registry: $DOCKER_REGISTRY
+
+workflows:
+    version: 2
+    build-test-deploy:
+        jobs:
+            - prepare-dependencies
+            - build-production:
+                  requires:
+                      - prepare-dependencies
+            - build-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-production
+            - test:
+                  requires:
+                      - prepare-dependencies
+            - deploy-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-docker-image
+                      - test
+```
+{% endraw %}
+
+{:.tab.fan-in-out.Server_2}
 {% raw %}
 ```yaml
 version: 2.0
