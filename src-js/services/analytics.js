@@ -61,7 +61,16 @@ export default AnalyticsClient;
 // legacy tracking code:
 // This is still used in the src-shared/*.js.
 // analytics.track wrapper
-var trackEvent = function (name, properties, options, callback) {
+
+const setCookieMinutes = (name, value, path, expiration) => {
+  // expiration is set in minutes
+  const date = new Date();
+  date.setMinutes(date.getMinutes() + expiration);
+  date = date.toUTCString();
+  document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
+};
+
+const trackEvent = (name, properties, options, callback) => {
   if (!window.analytics) {
     return;
   }

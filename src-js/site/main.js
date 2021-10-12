@@ -35,14 +35,6 @@ var getSessionId = function () {
   return amplitude.getSessionId();
 };
 
-var setCookieMinutes = function (name, value, path, expiration) {
-  // expiration is set in minutes
-  var date = new Date();
-  date.setMinutes(date.getMinutes() + expiration);
-  date = date.toUTCString();
-
-  document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
-};
 
 
 // analytics tracking for CTA button clicks
