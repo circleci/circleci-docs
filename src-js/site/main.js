@@ -44,19 +44,6 @@ var setCookieMinutes = function (name, value, path, expiration) {
   document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
 };
 
-// analytics.track wrapper
-var trackEvent = function (name, properties, options, callback) {
-  if (!window.analytics) {
-    return;
-  }
-
-  analytics.track(name, properties, options, function () {
-    setCookieMinutes("amplitude-session-id", getSessionId(), '/', 30);
-    if (callback) {
-      callback();
-    }
-  });
-};
 
 // analytics tracking for CTA button clicks
 window.addEventListener('load', function () {

@@ -56,3 +56,22 @@ class AnalyticsClient {
 const isDataDogSynthetics = () => window._DATADOG_SYNTHETICS_BROWSER === true;
 
 export default AnalyticsClient;
+
+
+// legacy tracking code:
+// This is still used in the src-shared/*.js.
+// analytics.track wrapper
+var trackEvent = function (name, properties, options, callback) {
+  if (!window.analytics) {
+    return;
+  }
+
+  analytics.track(name, properties, options, function () {
+    setCookieMinutes("amplitude-session-id", getSessionId(), '/', 30);
+    if (callback) {
+      callback();
+    }
+  });
+};
+
+window.trackEvent = trackEvent // enable use in src-shared files.
