@@ -40,7 +40,7 @@ the cpu and memory usage of containers in your cluster.
 
 The default Prometheus address is `\http://prometheus-server`
 
-From the kots dashboard, select "configure graphs". Then enter `\http://prometheus-server` and kots will generate resource
+From the KOTS dashboard, select "configure graphs". Then enter `\http://prometheus-server` and KOTS will generate resource
 usage graphs.
 
 === Telegraf
