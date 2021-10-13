@@ -537,3 +537,13 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 	}
 } 
 
+/*
+*  Experiment Key: dd_surfacing_full_example_config_experiment_test
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20742690126/variations
+*/
+#full-config-example {
+	visibility: hidden
+}
+// #full-config-example {
+// 	display: none
+// }
