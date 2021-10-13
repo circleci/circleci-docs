@@ -196,6 +196,8 @@ div.article-container{
 		h4,
 		h5,
 		h6{
+			scroll-margin-top: 5rem;
+
 			a{
 				padding-left: 5px;
 				color: #27A0B6;
@@ -205,15 +207,6 @@ div.article-container{
 			i.fa-link{
 				display: none;
 				font-size: smaller;
-			}
-
-			// prevent anchor links from being under the global nav
-			&[id]:before{
-				display: block;
-				content: " ";
-				margin-top: -135px;
-				height: 135px;
-				visibility: hidden;
 			}
 		}
 
