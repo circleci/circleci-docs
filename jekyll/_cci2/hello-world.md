@@ -106,7 +106,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblock.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```yaml
 version: 2
 
@@ -142,7 +157,10 @@ In the top left, you will find the Org switcher.
 {:.tab.switcher.Cloud}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-{:.tab.switcher.Server-v2}
+{:.tab.switcher.Server_3}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.

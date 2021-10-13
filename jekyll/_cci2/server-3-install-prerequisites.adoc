@@ -329,7 +329,7 @@ resource.name.startsWith("projects/_/buckets/<YOUR_BUCKET_NAME>")
 ```
 
 ===== Step 1: Create a GCP bucket 
-If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
 ```sh
 gsutil mb gs://circleci-server-bucket
@@ -376,5 +376,7 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
 ```
 
+ifndef::pdf[]
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
+endif::[]

@@ -51,21 +51,14 @@ For example, if your GitHub URL is `https://github.com/circleci`, then use: `cir
 . Create a resource class for your runner for your namespace using the following command:
 + 
 ```
-circleci runner resource-class create <resource-class> <description>
+circleci runner resource-class create <resource-class> <description> --generate-token
 ``` 
 +
-For example, `circleci runner resource-class create my-namespace/my-resource-class my-description`.
+For example, `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
-. Create a token for authenticating the above resource-class using the following command: 
 +
-```
-circleci runner token create <resource-class> <nickname>
-``` 
-+
-For example, `circleci runner token create my-namespace/my-resource-class my-token`. This will print a generated runner configuration including the authentication token.
-
-CAUTION: The token cannot be retrieved again, so be sure to store it safely.
+CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
 
 == Job running requirements
 
