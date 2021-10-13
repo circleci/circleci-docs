@@ -58,8 +58,8 @@ These will be used when executing the task agent. These commands must be run as 
 ```bash
 id -u circleci &>/dev/null || sudo adduser --uid 1500 --disabled-password --gecos GECOS circleci
 
-mkdir -p /opt/circleci/workdir
-chown -R circleci /opt/circleci/workdir
+sudo mkdir -p /opt/circleci/workdir
+sudo chown -R circleci /opt/circleci/workdir
 ```
 
 === CentOS/RHEL
@@ -67,8 +67,8 @@ chown -R circleci /opt/circleci/workdir
 ```bash
 id -u circleci &>/dev/null || sudo adduser --uid 1500 -c GECOS circleci
 
-mkdir -p /opt/circleci/workdir
-chown -R circleci /opt/circleci/workdir
+sudo mkdir -p /opt/circleci/workdir
+sudo chown -R circleci /opt/circleci/workdir
 ```
 
 == Configure SELinux policy (RHEL 8)
