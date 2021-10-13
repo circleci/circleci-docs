@@ -239,7 +239,10 @@ The following screenshot demonstrates a workflow on hold.
 {:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server-v2}
+{:.tab.switcher.Server_3}
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+
+{:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 

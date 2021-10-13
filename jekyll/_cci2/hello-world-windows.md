@@ -71,7 +71,27 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblockone.Server}
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_2}
 ```yaml
 version: 2
 
@@ -124,7 +144,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblocktwo.Server}
+{:.tab.windowsblocktwo.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblocktwo.Server_2}
 ```yaml
 version: 2
 
@@ -177,9 +212,31 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblockthree.Server_3}
 ```YAML
-version: 2.0
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -220,9 +277,24 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server}
+{:.tab.windowsblockfour.Server_3}
 ```YAML
-version: 2.0
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
