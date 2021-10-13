@@ -12,16 +12,16 @@ version:
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
 
 ## 概要
-CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
+{: #overview }
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
+CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-それ以外の場合は、お使いのCircleCIのバージョン（クラウド／サーバー）に応じた以下の手順で、プロジェクトにSSHキーを追加してください。
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
-Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
+それ以外の場合は、お使いのCircleCIのバージョン(クラウド/サーバー)に応じた以下の手順で、プロジェクトにSSHキーを追加してください。
 
 複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
@@ -71,7 +71,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH 鍵に自動的に署名します。 ただし、コンテナに実際に鍵を登録するには、`add_ssh_keys` キーを使用する**必要があります**。
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/) in your configuration file.
+SSH キーをコンテナに追加するには、 [特別なステップ]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
 
 ```yaml
 version: 2
@@ -93,4 +93,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
