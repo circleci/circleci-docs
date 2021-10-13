@@ -102,7 +102,7 @@ a|
 [source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 version: "2019.2"
 
@@ -137,16 +137,16 @@ workflows:
       - hello-job
 
 jobs:
-  # Define job
+  # ジョブを定義します。
   hello-job:
-    # Define environment
+    # 環境を定義します。
     docker:
       - image: cimg/base:stable
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照
 
-    # Define steps for job 
+    # ジョブのステップを定義します。
     steps:
       - checkout
       - run: echo "Hello World!"
@@ -221,7 +221,7 @@ project {
     parallel {
         build(Test1)
         build(Test2)
-    } 
+    }
     build(Package)
     build(Publish)
   }
