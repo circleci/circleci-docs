@@ -54,7 +54,7 @@ CircleCI API v2 では、API トークンを HTTP リクエストのユーザー
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**Note**, the `:` is included to indicate there is no password. **メモ:** パスワードがないことを示すために `:` が記述されています。 **Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
+**メモ:** パスワードがないことを示すために `:` が記述されています。 **Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
