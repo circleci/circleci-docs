@@ -17,7 +17,7 @@ Orbs、ジョブ、ステップ、ワークフローの概要を説明します�
 {: #orbs-overview }
 _Orbs are not currently available on self-hosted installations of CircleCI Server._
 
-Orb は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。 プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
+Orb は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。 プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
 
 ## ジョブの概要
 {: #jobs-overview }
