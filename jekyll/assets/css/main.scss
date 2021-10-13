@@ -535,5 +535,13 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 	td p {
 		margin: 0px;
 	}
-} 
+}
 
+/*
+*  Experiment Key: dd_add_copy_code_button_to_docs
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20580130094/variations
+*/
+
+.video-wrapper + .video-wrapper {
+  margin-top: 20px;
+}
