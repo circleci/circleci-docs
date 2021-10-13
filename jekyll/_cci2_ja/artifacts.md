@@ -182,4 +182,4 @@ You can read more about using CircleCI's API to interact with artifacts in our [
 {: #see-also }
 {:.no_toc}
 
-[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
