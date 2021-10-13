@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Example Public Repos"
 short-title: "Example Public Repos"
-description: "Starting point for CircleCI 2.0 docs"
+description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
 categories: [getting-started]
 order: 1
 ---

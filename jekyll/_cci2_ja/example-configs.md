@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "パブリック リポジトリの例"
 short-title: "パブリック リポジトリの例"
-description: "CircleCI 2.0 入門ガイド"
+description: "こちらのページでは、CircleCI（サークルCI）のファイルととリポジトリのサンプルの説明と機能別のオープンソース プロジェクト、言語別のオープンソース プロジェクトサンプルの提供と内容を詳しく説明しています。"
 categories:
   - getting-started
 order: 1
