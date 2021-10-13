@@ -30,7 +30,6 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
         <li><a href="{{ site.baseurl }}/2.0/postgres-config/">Database Config Examples</a></li>
         <li><a href="{{ site.baseurl }}/2.0/sample-config/">Sample config.yml Files</a></li>
         <li><a href="{{ site.baseurl }}/2.0/tutorials/">Tutorials and Sample Apps</a></li>
-      <li><a id="orb-content-swap" href="{{ site.baseurl }}/2.0/using-orbs/">Using Orbs</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
@@ -74,7 +73,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
     <p>Automate common tasks with reusable, shareable config packages.</p>
     <ul>
       <li id="orb-intro"><a href="{{ site.baseurl }}/2.0/orb-intro/">Get started with orbs</a></li>
-      <li id="using-orbs"><a href="{{ site.baseurl }}/2.0/using-orbs/">How orbs work</a></li>
+      <li id="orb-concepts"><a href="{{ site.baseurl }}/2.0/orb-concepts/">Learn about orb concepts</a></li>
       <li id="orb-author-intro"><a href="{{ site.baseurl }}/2.0/orb-author-intro/">Create a reusable config package</a>
       </li>
       <li id="orb-registry"><a
