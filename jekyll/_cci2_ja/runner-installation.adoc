@@ -470,7 +470,7 @@ NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Ser
 . 以下を PowerShell で実行します。
 +
 ```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
 ./Install-CircleCIRunner.ps1
 ```
 +
