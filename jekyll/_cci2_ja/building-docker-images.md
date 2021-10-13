@@ -263,10 +263,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#job-space)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
