@@ -8,7 +8,7 @@ $(() => {
     if (variation === 'treatment') {
       $("#full-config-example").css('visibility', 'visible');
       $("#full-config-example").click(function () {
-        window.AnalyticsClient.trackAction('full-config-example-link', { link: this.id });
+        window.AnalyticsClient.trackAction('docs-full-config-example-link', { link: this.id });
       });
     }
   })
