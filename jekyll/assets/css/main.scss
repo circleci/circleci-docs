@@ -511,8 +511,12 @@ h6{
 	display: none
 }
 
+/*
+*  Experiment Key: dd_add_orb_section_to_docs_landing_page_test
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20598037463/variations
+*/
 #orb-section {
-	display: none
+	visibility: hidden
 }
 
 /*
@@ -544,6 +548,3 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 #full-config-example {
 	visibility: hidden
 }
-// #full-config-example {
-// 	display: none
-// }
