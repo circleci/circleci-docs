@@ -307,11 +307,11 @@ version: 2.1
 jobs:
   build1:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -324,11 +324,11 @@ jobs:
 
   build2:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -340,11 +340,11 @@ jobs:
           command: make test
   build3:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -378,11 +378,11 @@ version: 2.1
 jobs:
   build1:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -395,11 +395,11 @@ jobs:
 
   build2:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -411,11 +411,11 @@ jobs:
           command: make test
   build3:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -449,11 +449,11 @@ version: 2
 jobs:
   build1:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -466,11 +466,11 @@ jobs:
 
   build2:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -482,11 +482,11 @@ jobs:
           command: make test
   build3:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -533,11 +533,11 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -552,11 +552,11 @@ jobs:
 
   build2:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -577,11 +577,11 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -596,11 +596,11 @@ jobs:
 
   build2:
     docker:
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -621,11 +621,11 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      - image: cimg/ruby:2.4-node
+      - image: circleci/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -644,7 +644,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.4.12-alpine
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

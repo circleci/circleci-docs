@@ -570,7 +570,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: cimg/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.5.1-node-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -604,7 +604,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: cimg/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.5.1-node-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -628,7 +628,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: cimg/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.5.1-node-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

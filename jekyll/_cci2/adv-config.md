@@ -60,7 +60,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/node:buster-browsers
+      - image: circleci/node:buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -90,7 +90,7 @@ jobs:
 
     # Primary container image where all commands run
     docker:
-      - image: cimg/python:3.6.2-stretch-browsers
+      - image: circleci/python:3.6.2-stretch-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -98,7 +98,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5-alpine-ram
+      - image: circleci/postgres:9.6.5-alpine-ram
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

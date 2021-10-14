@@ -54,7 +54,7 @@ The `config-translation` endpoint can help you quickly get started with converti
      Replace with the following lines:
      ```
          docker:
-           - image: cimg/ruby:2.7
+           - image: circleci/ruby:2.7
              auth:
                username: mydockerhub-user
                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
