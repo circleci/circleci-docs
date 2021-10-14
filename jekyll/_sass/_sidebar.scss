@@ -180,8 +180,8 @@ $sidebar-spacing-base: 5px;
   }
 }
 
-.table-of-contents {
-  position: sticky;
+aside.full-height {
+  position: fixed;
   right: 0;
   padding: 32px 32px 112px 12px;
   background: #ffffff;
@@ -191,6 +191,7 @@ $sidebar-spacing-base: 5px;
   top: 64px;
   font-size: 16px;
   transition: all 0.5s ease-in-out;
+  max-height: 100vh;
 
   @media(max-width: $toc-breakpoint) {
     display: none;
