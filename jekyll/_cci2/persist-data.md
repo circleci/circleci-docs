@@ -165,7 +165,7 @@ Which will only change if the list of requested dependencies has changed. If you
 
 If you notice your workspace usage is high and would like to reduce it, try:
 
-* Searching for the persist_to_workspace command in your config.yml file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+* Searching for the `persist_to_workspace` command in your config.yml file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
 
 #### Reducing excess use of network egress
 {: #reducing-excess-use-of-network-egress }
