@@ -204,3 +204,12 @@ The following is an example workflow to contribute to a document (from Github, n
 If your branch ends with `-preview` and passed all tests, docs pages are automatically deployed to our preview site. The link to the preview site will appear at the end `deploy-preview` job in CircleCI.
 
 Note that preview deploys will be automatically cleaned up after certain time so that you don't have to do it manually.
+
+## Updating `browserlist-stats.json`
+
+We use `browserslist-ga-export` to generate the a Browserslist custom usage data file based on Google Analytics data. In order to do this, you must provide a CSV export of a Google Analytics custom report:
+
+- In Google Analytics, create a custom report as explained [here](https://github.com/browserslist/browserslist-ga-export#2-create-custom-report). Make sure you choose one year as the desired date range.
+- Export the custom report as a CSV like explained [here](https://github.com/browserslist/browserslist-ga-export#3-export-custom-report-csv-files).
+- Run `browserslist-ga-export --reportPath YOUR_CSV_LOCATION.csv` at the root of the project.
+- run `npx browserslist` to confirm the new `browserlist-stats.json` is still valid.
