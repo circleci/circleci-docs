@@ -16,18 +16,18 @@ CircleCI Server 3.x では、CircleCI Orbs、ワークフローのスケジュ�
 
 toc::[]
 
-== Release 3.2.0
+== リリース 3.2.0
 
-=== Upgrade notes
+=== アップグレードに関する注意事項
 
-From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+次に、KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
-When upgrading from server 3.1.x to 3.2 there will be some downtime due to a change to the PostgreSQL pod. There are two issues you could run into with this update, which are covered in the following sections.
+サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートでは、2つの問題が発生する可能性があり、ここではその問題について説明します。
 
-==== PostgreSQL pod stuck in `pending`
-If you find that the PostgreSQL pod is stuck in a `pending` state after upgrading, scale down the pods to 0 and then scale up again by following the steps below.
+==== PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`のまま
+アップグレード後に PostgreSQL ポッドが `{startsb}Pending(保留){endsb}` 状態のままである場合、ポッドを以下の手順で 0 にスケールダウンしてから、再度スケールアップしてください。
 
-To check if your postgreSQL pod is stuck in `pending`:
+以下により、PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`状態かどうかを確認できます。
 
 ```bash
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
@@ -35,13 +35,13 @@ NAME           READY   STATUS    RESTARTS   AGE
 postgresql-0   1/1     Pending   0          3m
 ```
 
-The following command will scale down pods to 0 and terminate the application pods without any data loss:
+以下のコマンドにより、データを損失することなくポッドを 0 にスケールダウンし、アプリケーションポッドを終了することができます。
 
 ```bash
 kubectl scale deployment -l layer=application --replicas 0
 ```
 
-Once all the application-layer pods have finished terminating do *one* of the following 
+すべてのアプリケーション層のポッドが終了したら、以下の*いずれか*を実行します。 
 
 * *either* redeploy the update from the KOTS admin console 
 * *or* run the following two commands to redeploy the pods and return server to a functional state:
