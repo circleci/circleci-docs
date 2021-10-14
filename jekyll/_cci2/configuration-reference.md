@@ -6,6 +6,7 @@ description: "Reference for .circleci/config.yml"
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: 6 config optimization tips

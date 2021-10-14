@@ -30,7 +30,7 @@ CircleCI runs nearly one million jobs per day in support of 30,000 organizations
 
 As a developer using [circleci.com](https://circleci.com), you can [SSH into any job]({{site.baseurl}}/2.0/ssh-access-jobs/) to debug your build issues, set up [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) file to run jobs faster, and configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
 
-As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/server-3-overview.pdf) for complete documentation.
+As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/server-3-overview/) for complete documentation.
 
 ## Summary
 {: #summary }
