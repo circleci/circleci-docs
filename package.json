@@ -13,6 +13,9 @@
     "url": "git://github.com/circleci/circleci-docs.git"
   },
   "license": "MIT",
+  "browserslist": [
+    "> 0.5% in my stats"
+  ],
   "dependencies": {
     "@optimizely/optimizely-sdk": "4.6.2",
     "@popperjs/core": "^2.10.1",
