@@ -1,11 +1,13 @@
 // Modal search on mobile
-$(document).ready(function () {
-  $('.global-nav--search-button').on('click', function (e) {
-    e.preventDefault();
-    $('body').addClass('search-open');
-    $('.global-nav--search-bar .instantsearch-search').focus();
-  });
-}());
+$(document).ready(
+  (function () {
+    $('.global-nav--search-button').on('click', function (e) {
+      e.preventDefault();
+      $('body').addClass('search-open');
+      $('.global-nav--search-bar .instantsearch-search').focus();
+    });
+  })(),
+);
 
 // Show/hide search button on menu collapse
 $(document).ready(function () {
@@ -20,7 +22,9 @@ $(document).ready(function () {
 // Collapsing submenus on mobile nav
 (function () {
   // grabbing all expandable submenus
-  var expandableSubMenus = Array.from(document.querySelectorAll('nav li.arrow'));
+  var expandableSubMenus = Array.from(
+    document.querySelectorAll('nav li.arrow'),
+  );
 
   expandableSubMenus.forEach(function (submenu) {
     submenu.addEventListener('click', function () {
@@ -46,4 +50,4 @@ $(document).ready(function () {
       });
     });
   });
-}());
+})();

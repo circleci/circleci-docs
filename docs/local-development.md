@@ -13,7 +13,10 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
    127.0.0.1 ui.circleci.com
    ```
 5. Run `yarn install` to fetch dependencies
+<<<<<<< HEAD
 _(Learn how to install yarn on your machine [here](https://classic.yarnpkg.com/lang/en/docs/install/).)_
+=======
+>>>>>>> 8d62a53a2 (Feat: migrate to yarn)
 6. Run `yarn start` to create needed js assets & build the static site in Docker
 _(Warning: This may take up to 10 minutes to build)_
 8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
