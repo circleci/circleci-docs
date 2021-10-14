@@ -1,52 +1,53 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Configuring a Proxy
+= CircleCI Server v3.x プロキシの設定
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader internet.
+セキュリティ要件に応じて、CircleCI サーバーをプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、設置場所とインターネット全体のアクセスを監視・制御することができます。
 
 toc::[]
 
-== Installation and configuration
-There are two stages to installing CircleCI server behind a proxy. First, at the point of installation, the proxy addresses need to be specified, along with any addresses that should not be behind the proxy.
+== インストールと設定
+プロキシ経由で CircleCI サーバーをインストールするには、2つのステップがあります。 まずインストールをする際に、プロキシアドレスとプロキシの後ろにあってはいけないアドレスを指定する必要があります。
 
-=== Installing behind a proxy
-The installation process is described in detail in the https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x Installation guide]. Both proxy and non-proxy addresses should be supplied using the arguments described https://kots.io/kotsadm/installing/online-install/#proxies[here]. The installation command should be in the form:
+=== プロキシ経由でのインストール
+設定方法の詳細は、https://circleci.com/docs/2.0/server-3-install/[[CircleCI Server v3.x インストールガイド]]を参照してください。 プロキシアドレスと非プロキシアドレスのどちらも、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら]で説明されている引数を使用する必要があります インストールコマンドは、次のような形式で指定します。
 
 [source,bash]
 ----
 kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-proxy <my-https-proxy> --no-proxy <my-no-proxy-list>
+
 ----
 
-=== Configuring your proxy 
-Once you have installed server and gained access to the management console, there are some fields that need to be completed in the configuration section, as shown in the screenshot below. These fields will not be automatically populated and so the same proxy and no-proxy addresses you supplied during installation will need to be supplied here. If your proxy requires authentication in the form of a username and password check the "HTTP Proxy authenticated" option to add the credentials at this point.
+=== プロキシの設定 
+サーバーをインストールし、管理コンソールにアクセスできるようになったら、以下のスクリーンショットで示すように、設定セクションで入力しなければならない項目があります。 これらのフィールドは自動的には入力されないので、インストール時に入力したプロキシアドレスと非プロキシアドレスをご自身で入力する必要があります。 プロキシがユーザー名とパスワードによる認証を必要とする場合は、「HTTP Proxy authenticated」オプションにチェックを入れ、この時点で認証情報を追加します。
 
-.CircleCI Server v3.x Configuring a Proxy
+.CircleCI Server v3.x プロキシの設定
 image::proxy-settings.png[Screenshot showing settings available to configure a proxy]
 
-== Known limitations
+== 既知の制限
 
-* Installing behind a proxy will prevent the use of https://circleci.com/docs/2.0/runner-overview/[CircleCI runner].
-* Some additional configuration will be required to import orbs when installed behiind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
-* The JVM only accepts proxies that run over HTTP not HTTPS and therefore proxy URIs must be of the form `http://user:password@host:port` rather than `https://user:password@host:port`.
-* If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub enterprise), you must ensure that SSH traffic from our application (inside the Kubernetes cluster) and from our Nomad node can reach your instance without additional configuration. Our SSH agents do not respect proxy settings because it uses a different network protocol. If a proxy is the only way that any traffic can reach outside the proxied environment this means it will block SSH traffic and our application will fail.
-* The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
-* The KOTS admin console cannot be upgraded if proxy setting were set. The proxy settings will be deleted and cause the KOTS admin console to break.
-* Often, a custom image is needed for VM service that has proxy configured! (Check with Makoto Mizukami   about this and how customers have set this up before)
-* If object storage is outside the proxy no job features that use object storage will work. This includes:
-** Artifacts
-** Test-results
-** Cache save and restore
-** Workspaces
+* プロキシ経由でインストールすると、 https://circleci.com/docs/2.0/runner-overview/[CircleCI ランナー]が使えなくなります。
+* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要になります。 詳しくは、 https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[サーバーの Orb] ドキュメントをご覧ください。
+* JVM は、HTTPS ではなく、HTTP で実行されるプロキシのみを受け入れます。そのため、プロキシの URI は、 `https://user:password@host:port`ではなく、 `http://user:password@host:port`という形式でなければなりません。
+* GitHub インスタンスがプロキシ環境（GitHub.com または GitHub Enteriprise）の外で動作している場合は、追加の設定をしなくても CircleCI アプリケーション（Kubernetes クラスタ内）と Nomad ノードからの SSH トラフィックがインスタンスにアクセスできるようにしなければなりません。 CircleCI の SSH エージェントは、異なるネットワークプロトコルを使用しているため、プロキシの設定に従いません。 プロキシがプロキシ環境の外にアクセスする唯一の手段である場合は、SSHトラフィックがブロックされ、アプリケーションが失敗します。
+* ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
+* プロキシ設定がされていると、KOTS 管理者コンソールのアップグレードができません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
+* プロキシを設定した VM サービスでは、カスタムイメージが必要になることがよくあります。 (詳細および過去の設定例については、別途お問合せください。)
+* オブジェクトストレージがプロキシの外にある場合、オブジェクトストレージを使用するジョブ機能は動作しません。 それには以下が含まれます。
+** アーティファクト
+** テスト結果
+** キャッシュの保存と復元
+** ワークスペース
 +
-Users can get around this by setting environment variables on their jobs like so:
+以下のようにジョブに環境変数を設定することで、この問題を回避することができます。
 +
 ```yml
 jobname:
@@ -58,4 +59,4 @@ jobname:
       NO_PROXY: whatever.internal,10.0.1.2
 ```
 +
-WARNING: It is extremely important that these environment variables are set in this particular location because its the only location that propagates them to the correct service.
+WARNING: 適切なサービスに伝播できるのはこの場所からのみであるため、環境変数の設定をこの場所で行うことが大変重要です。
