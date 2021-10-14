@@ -1,3 +1,7 @@
+import { createPopper } from '@popperjs/core';
+
+hljs.initHighlightingOnLoad();
+
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
 window.analyticsTrackProps = function (el) {
@@ -31,28 +35,7 @@ var getSessionId = function () {
   return amplitude.getSessionId();
 };
 
-var setCookieMinutes = function (name, value, path, expiration) {
-  // expiration is set in minutes
-  var date = new Date();
-  date.setMinutes(date.getMinutes() + expiration);
-  date = date.toUTCString();
 
-  document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
-};
-
-// analytics.track wrapper
-var trackEvent = function (name, properties, options, callback) {
-  if (!window.analytics) {
-    return;
-  }
-
-  analytics.track(name, properties, options, function () {
-    setCookieMinutes("amplitude-session-id", getSessionId(), '/', 30);
-    if (callback) {
-      callback();
-    }
-  });
-};
 
 // analytics tracking for CTA button clicks
 window.addEventListener('load', function () {
@@ -94,7 +77,7 @@ function renderVersionBlockPopover() {
     let popperInstance = null;
 
     function create() {
-      popperInstance = Popper.createPopper(badge, tooltip, {
+      popperInstance = createPopper(badge, tooltip, {
         modifiers: [
           {name: 'offset',
            options: {
@@ -281,7 +264,7 @@ $( document ).ready(function() {
       tooltip.setAttribute('data-show', '');
       // change tooltip text based on current button popover.
       tooltip.innerHTML = "Copy link<div id='arrow' data-popper-arrow></div>"
-      icon.instance = Popper.createPopper(icon, tooltip, {
+      icon.instance = createPopper(icon, tooltip, {
         modifiers: [{
           name: 'offset',
           options: {
@@ -303,7 +286,7 @@ $( document ).ready(function() {
           tooltip.setAttribute('data-show', '');
           // change tooltip text based on current button popover.
           tooltip.innerHTML = "Copied!<div id='arrow' data-popper-arrow></div>";
-          icon.instance = Popper.createPopper(icon, tooltip, {
+          icon.instance = createPopper(icon, tooltip, {
             modifiers: [{
               name: 'offset',
               options: {
