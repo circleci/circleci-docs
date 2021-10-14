@@ -33,7 +33,6 @@
     "@babel/preset-env": "7.15.6",
     "babel-loader": "8.0.2",
     "babel-plugin-wildcard": "^7.0.0",
-    "browserslist-ga-export": "^4.0.1",
     "markdownlint-cli2": "0.0.15",
     "markdownlint-cli2-formatter-json": "0.0.4",
     "markdownlint-rule-header-id": "0.0.3",

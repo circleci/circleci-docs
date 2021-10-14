@@ -211,5 +211,6 @@ We use `browserslist-ga-export` to generate the a Browserslist custom usage data
 
 - In Google Analytics, create a custom report as explained [here](https://github.com/browserslist/browserslist-ga-export#2-create-custom-report). Make sure you choose one year as the desired date range.
 - Export the custom report as a CSV like explained [here](https://github.com/browserslist/browserslist-ga-export#3-export-custom-report-csv-files).
+- Locally, install [`browserlist-ga-export`](https://github.com/browserslist/browserslist-ga-export#browserslist-ga-export)
 - Run `browserslist-ga-export --reportPath YOUR_CSV_LOCATION.csv` at the root of the project.
 - run `npx browserslist` to confirm the new `browserlist-stats.json` is still valid.
