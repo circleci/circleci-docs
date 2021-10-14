@@ -238,6 +238,7 @@ Using the official macOS Orb (version `2.0.0` and above) is the easiest way to s
 To get started, include the orb at the top of your config:
 
 ```yaml
+# ...
 orbs:
   macos: circleci/macos@2
 ```
@@ -245,6 +246,7 @@ orbs:
 Then, call the `switch-ruby` command with the version number required. For example, to switch to Ruby 2.6:
 
 ```yaml
+# ...
 - macos/switch-ruby:
     version: "2.6"
 ```
@@ -254,6 +256,7 @@ Replace `2.6` with the version you require from the Software Manifest file. You 
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
 ```yaml
+# ...
 - macos/switch-ruby:
     version: "system"
 ```
