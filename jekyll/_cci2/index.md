@@ -44,6 +44,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       <li><a href="{{ site.baseurl }}/2.0/writing-yaml/">Writing YAML</a></li>
       <li><a href="{{ site.baseurl }}/2.0/env-vars/">Using Environment Variables</a></li>
       <li><a href="{{ site.baseurl }}/2.0/ssh-access-jobs/">Debugging with SSH</a></li>
+      <li id="full-config-example"><a href="{{ site.baseurl }}/2.0/configuration-reference/#example-full-configuration">Full Config Example</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
