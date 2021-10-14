@@ -68,13 +68,13 @@ All data persistence operations within a job will accrue network and storage usa
 
 To determine which jobs utilize the above actions, you can search for the following commands in your project's config.yml file:
 
-* save_cache
-* restore_cache
-* persist_to_workspace
-* store_artifacts
-* store_test_results
+* `save_cache`
+* `restore_cache`
+* `persist_to_workspace`
+* `store_artifacts`
+* `store_test_results`
 
-All network egress will accrue network usage, the relevant actions are:
+All network egress will accrue network usage; the relevant actions are:
 
 * Restoring caches and workspaces to self-hosted runners
 * Downloading artifacts
@@ -128,7 +128,7 @@ Depending on what language and package management system you are using, you may 
 
 If you notice your cache usage is high and would like to reduce it, try:
 
-* Searching for the save_cache and restore_cache commands in your config.yml file to find all jobs utilizing caching and determine if their cache(s) need pruning.
+* Searching for the `save_cache` and `restore_cache` commands in your config.yml file to find all jobs utilizing caching and determine if their cache(s) need pruning.
 * Narrowing the scope of a cache from a large directory to a smaller subset of specific files.
 * Ensuring that your cache “key” is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
