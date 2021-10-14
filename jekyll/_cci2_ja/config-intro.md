@@ -170,4 +170,4 @@ workflows: version: 2 Example_Workflow: jobs:
 {: #see-also }
 {:.no_toc}
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[Configuring CircleCI]({{ site.baseurl }}/ja/2.0/configuration-reference/)
