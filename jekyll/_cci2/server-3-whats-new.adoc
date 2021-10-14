@@ -181,10 +181,12 @@ and get details of the possible cause of the issue.
 - Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
 - Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
 
+ifndef::pdf[]
 == What to read next
 To learn more about Server v3.x, see the following:
 
-* https://circleci.com/docs/2.0/server-3-overviewServer 3.x Overview]
+* https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview]
 * https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
 * https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
+endif::pdf[]

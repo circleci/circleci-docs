@@ -72,7 +72,7 @@ Looking at the `deploy-via-git` command source in the https://circleci.com/devel
 version: 2.1
 
 orbs:
-  heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
+  heroku: circleci/heroku@0.0.10 # Invoke the Heroku orb
 
 workflows:
   heroku_deploy:
