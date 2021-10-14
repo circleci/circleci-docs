@@ -4,12 +4,12 @@ title: "Using the CircleCI In-app Configuration Editor"
 description: "Docs page on In-app configuration editor use and features"
 version:
 - Cloud
-- Server v2.x
+- Server v3.x
 ---
 
-A UI environment, the CircleCI config editor, is provided for users who wish to modify their configurations without the use of the
+The CircleCI config editor is provided so you can modify your configuration files without the use of the
 [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer
-experience by giving users the ability to modify their CI/CD processes in a more unified fashion.
+experience by giving you the ability to modify your CI/CD processes in a more unified fashion.
 
 ![Config Editor]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
 

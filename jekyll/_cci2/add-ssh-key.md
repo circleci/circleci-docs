@@ -32,7 +32,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using to a
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
 ### CircleCI cloud or server 3.x
-{: #circleci-cloud }
+{: #circleci-cloud-or-server-3-x }
 
 1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
@@ -51,7 +51,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using to a
 8. Click the **Add SSH Key** button.
 
 ### CircleCI server 2.19.x
-{: #circleci-server }
+{: #circleci-server-2-19-x }
 
 1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
 

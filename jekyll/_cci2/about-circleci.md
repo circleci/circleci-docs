@@ -5,6 +5,10 @@ short-title: "Overview"
 description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments.
