@@ -16,7 +16,7 @@ version:
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
 
-この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 Then, it runs a simple `echo` command. まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
@@ -47,7 +47,7 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ
 サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/2.0/language-javascript/)を参照してください。
 
 ## Android での Hello World
-詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
+{: #hello-world-for-android }
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
@@ -58,14 +58,14 @@ jobs:
       - image: circleci/android:api-25-alpha
 ```
 
-詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
+詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
 
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
-Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
+Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
 ```
 jobs:
@@ -74,7 +74,7 @@ jobs:
       xcode: 11.3.0
 ```
 
-Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
+詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
 
 ## Windows での Hello World
 {: #hello-world-for-windows }
@@ -130,7 +130,7 @@ Orb は、構成を簡略化したりプロジェクト間で再利用したり�
 ## 組織の切り替え
 {: #org-switching }
 
-In the top left, you will find the Org switcher.
+CirlceCI の画面左上に、組織を切り替えるメニューがあります。
 
 
 {:.tab.switcher.Cloud}
