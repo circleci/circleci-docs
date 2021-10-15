@@ -109,15 +109,15 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
 
-* [Choosing an executor type]({{ site.baseurl }}/2.0/executor-types/)
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
-* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
-* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
+* [Choosing an executor type]({{ site.baseurl }}/ja/2.0/executor-types/)
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/ja/2.0/circleci-images/)
+* [Building on MacOS]({{site.baseurl}}/ja/2.0/hello-world-macos)
+* [Building on Windows]({{site.baseurl}}/ja/2.0/hello-world-windows)
 
 ## Learn More
 {: #learn-more }
