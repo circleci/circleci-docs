@@ -182,7 +182,7 @@ jobs:
         type: string
         default: my_repo
     docker:
-      - image: circleci/go:1.15.0
+      - image: cimg/go:1.15
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
