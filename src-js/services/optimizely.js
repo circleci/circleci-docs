@@ -1,10 +1,13 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
+import { isProduction } from '../utils';
 import  Cookies from 'js-cookie';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
 const FORCE_STORAGE_KEY = 'growth-experiments-force-all';
+const optimizelyLogLevel = !isProduction() ? 'error' : 'info';
+optimizelySDK.setLogLevel(optimizelyLogLevel);
 
 class OptimizelyClient {
   constructor() {
