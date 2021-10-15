@@ -123,7 +123,7 @@ executors では、ジョブのステップを実行する環境を定義しま�
 | キー                | 必須               | 型   | 説明                                                                                                                                 |
 | ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                |
-| resource_class    | N                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A Performance plan is required to access this feature.                                  |
+| resource_class    | N                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランが必要です。                                                          |
 | machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                              |
 | macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                  |
 | windows           | ○ <sup>(1)</sup> | マップ | 現在、[Windows Executor](#windows) は Orb に対応しています。 [こちらの Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を参照してください。 |
@@ -179,7 +179,7 @@ jobs:
 | parallelism       | N                | 整数  | このジョブを実行する並列インスタンスの数 (デフォルトは 1)。                                                                                                                                                                                                                                                                                                                                                                                                         |
 | environment       | N                | マップ | 環境変数の名前と値のマップ。                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | branches          | N                | マップ | ワークフローまたはバージョン 2.1 の設定ファイル**以外**の構成に含まれる 1 つのジョブに対し、特定のブランチでの実行を許可またはブロックするルールを定義するマップ (デフォルトではすべてのブランチでの実行が許可されます)。 ワークフロー内またはバージョン 2.1 の設定ファイル内のジョブに対するブランチ実行の設定については、[workflows](#workflows) セクションを参照してください。                                                                                                                                                                                                                          |
-| resource_class    | N                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A Performance plan is required to access this feature.                                                                                                                                                                                                                                                                                                                                        |
+| resource_class    | N                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランが必要です。                                                                                                                                                                                                                                                                                                                                                                |
 {: class="table table-striped"}
 
 <sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 2 つ以上指定するとエラーが発生します。
@@ -790,7 +790,7 @@ jobs:
 ###### _デフォルトのシェル オプション_
 {: #default-shell-options }
 
-**Linux** で実行するジョブの場合、`shell` オプションのデフォルト値は、`/bin/bash<code> がビルド コンテナに存在すれば`/bin/bash -eo pipefail</code>、 存在しなければ `/bin/sh -eo pipefail` になります。 Otherwise it is `/bin/sh -eo pipefail`. デフォルトのシェルはログイン シェルではありません (`--login` や `-l` は指定されません)。 そのため、このシェルは `~/.bash_profile`、`~/.bash_login`、`~/.profile` といったファイルを**読み込みません**。
+**Linux** で実行するジョブの場合、`shell` オプションのデフォルト値は、`/bin/bash`がビルド コンテナに存在すれば`/bin/bash -eo pipefail`です。 存在しなければ `/bin/sh -eo pipefail` になります。 デフォルトのシェルはログイン シェルではありません (`--login` や `-l` は指定されません)。 そのため、このシェルは `~/.bash_profile`、`~/.bash_login`、`~/.profile` といったファイルを**読み込みません**。
 
 **macOS** で実行するジョブの場合、デフォルトのシェルは `/bin/bash --login -eo pipefail` になります。 このシェルは、非対話型のログイン シェルです。 シェルは、`/etc/profile/` を読み込み、続いて `~/.bash_profile` を読み込んでから、各ステップを実行します。
 
@@ -936,10 +936,10 @@ steps:
 
 条件付きステップは、`when` キーまたは `unless` キーを含むステップで構成されます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの目的は、コマンドやジョブ構成が、ワークフローの実行前にチェックされるカスタム条件 (設定ファイルのコンパイル時に決定) に基づいて実行されるようにカスタマイズすることです。 詳細については、「[条件付きステップの定義]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)」を参照してください。
 
-| キー        | 必須 | 型     | 説明                                                                                      |
-| --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | Y  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | Y  | シーケンス | 条件が true のときに実行するステップのリスト。                                                              |
+| キー        | 必須 | 型     | 説明                                                                                         |
+| --------- | -- | ----- | ------------------------------------------------------------------------------------------ |
+| condition | Y  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements) |
+| steps     | Y  | シーケンス | 条件が true のときに実行するステップのリスト。                                                                 |
 {: class="table table-striped"}
 
 ###### *例*
@@ -1161,8 +1161,8 @@ steps:
 
 `deploy` ステップを使用するときには、ワークフローを使用してジョブのオーケストレーションやトリガーを実行する方法を理解しておくことをお勧めします。 ワークフローの使用方法については、以下を参照してください。
 
-- [ワークフロー](https://circleci.com/docs/2.0/workflows/)
-- [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
+- [ワークフロー](https://circleci.com/docs/ja/2.0/workflows/)
+- [`workflows`](https://circleci.com/docs/ja/2.0/configuration-reference/#section=configuration)
 
 ###### 例
 {: #example }
@@ -2171,4 +2171,4 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
+[Config Introduction]({{site.baseurl}}/ja/2.0/config-intro/)
