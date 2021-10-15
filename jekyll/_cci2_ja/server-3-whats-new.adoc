@@ -12,7 +12,7 @@ version:
 
 CircleCI Server 3.x の一般公開が開始されました。 この最新バージョンの CircleCI Server では、ワークロードの増大に合わせてお客様専用の Kubernetes クラスタと社内ネットワーク内でスケーリングを行えるようになりました。 クラウド版 CircleCI のすべての機能はそのままご利用いただけます。
 
-CircleCI Server 3.x では、CircleCI Orbs、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 既存の CircleCI Server 2.19 から 3.x への移行をご希望のお客様は、担当のカスタマー サクセス マネージャーにお問い合わせください。 CircleCI Server 3.x では、月次パッチ リリースと四半期ごとの機能リリースを予定しています。
+CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 既存の CircleCI Server 2.19 から 3.x への移行をご希望のお客様は、担当のカスタマー サクセス マネージャーにお問い合わせください。 CircleCI Server 3.x では、月次パッチ リリースと四半期ごとの機能リリースを予定しています。
 
 toc::[]
 
@@ -20,14 +20,14 @@ toc::[]
 
 === アップグレードに関する注意事項
 
-次に、KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
+KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
-サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートでは、2つの問題が発生する可能性があり、ここではその問題について説明します。
+サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
 
 ==== PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`のまま
 アップグレード後に PostgreSQL ポッドが `{startsb}Pending(保留){endsb}` 状態のままである場合、ポッドを以下の手順で 0 にスケールダウンしてから、再度スケールアップしてください。
 
-以下により、PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`状態かどうかを確認できます。
+以下により、PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`状態かどうかを確認することができます。
 
 ```bash
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
@@ -43,104 +43,99 @@ kubectl scale deployment -l layer=application --replicas 0
 
 すべてのアプリケーション層のポッドが終了したら、以下の*いずれか*を実行します。 
 
-* *either* redeploy the update from the KOTS admin console 
-* *or* run the following two commands to redeploy the pods and return server to a functional state:
+* KOTS 管理者コンソールからアップデートを再デプロイする*か*、 
+* *または*、以下の 2 つのコマンドを実行して、ポッドを再デプロイし、サーバーを機能的な状態に戻します。
 +
 ```bash
 kubectl scale deployment -l layer=application --replicas 1
 ```
 +
-Then scale `output-processor` up with the following command: 
+その後、次のコマンドで `output-processor` をスケールアップします。 
 +
 ```bash
 kubectl scale deployment output-processor --replicas 2
 ```
 
-==== Traefik pod fails to schedule
-If you find that there are two Traefik pods after upgrading, you will need to locate the older pod and remove it to allow the new pod to schedule correctly.
+==== Traefikのポッドが指定通りに実行されない
+アップグレード後に Traefik ポッドが 2 つあることに気付いた場合、新しいポッドが指定通りに実行されるように、古いポッドを見つけて削除する必要があります。
 
-To see the status of your Traefik pod:
+以下により、Traefik ポッドの状態を確認することができます。
 
 ```bash
-$ kubectl get pod -l app=traefik 
+$ kubectl get pod -l app=traefik
 NAME                                      READY   STATUS    RESTARTS   AGE
 circleci-server-traefik-9d6b86fd8-f7n2x   1/1     Running   0          24d
 circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
 ```
 
-Remove the older Traefik pod with the following command:
+以下のコマンドで古い Traefik ポッドを削除します。
 
 ```bash
 kubectl delete pod circleci-server-traefik-<older pod hash>
 ```
 
-The new Traefik pos will then start ot schedule correctly.
+これにより、新しい Traefik ポッドが指定通りに実行されるようになります。
 
-=== New features
+=== 新機能
 
-=== Fixes
+=== 修正点
 
-=== Known issues
+=== 既知の問題
 
-== Release 3.1.0
+== リリース 3.1.0
 
-=== Upgrade notes
+=== アップグレードに関する注意事項
 
-IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles
-all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing
-to the `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember,
-you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik`
-in a terminal that has access to the cluster.
+IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。
+ 今後、受信トラフィックはすべて、`traefik` ロード バランサーにより処理されます。 過去の 3.x バージョンからアップデートする場合、`frontend-external` ロード バランサーを参照する DNS レコードを、`circleci-server-traefik` ロード バランサーを参照するように更新する必要があります。
+ Traefik ロードバランサーの外部 IP アドレスやDNS 名は、クラスタへのアクセスが可能な端末から `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
 
-To update your DNS record and upgrade your server installation follow these steps:
+DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。
 
 . Retrieve the external IP or DNS name for the traefik load balancer as described or by looking the DNS A record for `app.<your domain name>`` - this should already point to your traefik load balancer.
-. Locate the DNS A record that points to the domain name of your server installation (not the one pointing to the `app.` subdomain)
-. Edit the A record so that it points to the traefik load balancer, just like the record for the `app. subdomain does. Your changes might need a couple of minutes to take effect, depending on you DNS service.
+. 既存の CircleCI Server のドメイン名を参照している DNS A レコードを見つけます (`アプリ` のサブドメインを参照しているものではありません)。
+. アプリのサブドメインのレコードと同じ様に Traefik ロード バランサーを参照するように A レコードを変更します。
+ DNSサービスによっては、変更が反映されるまでに数分かかる場合があります。
 
-Next, from the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.1.0.
+次に、KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.1.0 の *[Deploy (デプロイ)]* をクリックします。
 
-=== New features
+=== 新機能
 
-* Telegraf plugins can now be added to server and customized to use third party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
-* The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] guide.
-* Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/2.0/server-3-install/[Installation guide] for further information.
-* Dynamic config via setup workflows is now available on server installations. For more information see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/2.0/dynamic-config/[Dynamic Configuration docs page].
-* Runner is now available on server. For further information, including installation steps, see the https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[Runner docs]. Runner allows the use of the macOS executor in server installations and VM service functionality for customers with server installed in a private data centre.
-* The frontend load balancer from v3.0 has been removed and replaced with an Ingress resource and the Traefik Ingress controller. This is a breaking change requiring you to reconfigure your DNS. See the https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0[What's New in server docs] for further information and guidance.
-* The following services can now be externalized. For setup information, see the https://circleci.com/docs/2.0/server-3-install/[server v3.x installation guide]:
+* Telegraf プラグインを CircleCI Server に追加できるようになりました。 このプラグインは、サードパーティの監視ソリューション (Datadog など) を使用するようにカスタマイズできます。 詳細については、https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[ [Metrics and Monitoring (メトリクスと監視)]]に関するページを参照してください。
+* 完全にプライベートな環境にインストールしたいお客様のために、プライベートロードバランサーのみを使用するオプションが導入されました。 詳細については、https://circleci.com/docs/2.0/server-3-operator-load-balancers/[[Load Balancers (ロード バランサー)]]ガイドを参照してください。
+* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage をサポートしています。 詳細については、https://circleci.com/docs/2.0/server-3-install/[[Installation guide (インストール ガイド)]]を参照してください。
+* CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[[blog post (ブログ記事)]]およびhttps://circleci.com/docs/2.0/dynamic-config/[[Dynamic Congiguration (ダイナミック コンフィグ)]]を参照してください。
+* CircleCI Server でランナーを利用できるようになりました。 インストール手順を含む詳細については、https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[[Runner docs (ランナーに関するページ)]]を参照してください。 ランナーを使うことで、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用することができるようになります。
+* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再設定が必要になります。 詳細と手順については、<a data-type="default" href="https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0">[What's New (新機能に関するページ)]を参照してください。
+* 次のサービスを外部化できるようになりました。 設定方法については、<a data-type="default" href="https://circleci.com/docs/2.0/server-3-install/">[Server v3.x installation guide (CircleCI Server v3.x のインストールガイド])を参照してください。
 ** Postgres
 ** MongoDB
 ** Vault
-* Backup and restore functionality is now available. For more information see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[Backup and Restore] guide.
-* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS admin UI. For further information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
-* Server now supports the 2XL resource class. The Nomad cluster needs to be made large enough to account for larger resource classes.
-* The lifecycle of build artifacts and test results can now be configured from the KOTS admin console under Storage Object Expiry, including the option to disable the expiration and retain artifacts and test results indefinitely.
+* バックアップと復元機能が利用できるようになりました。 詳細については、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[[Backup and Restore (バックアップと復元)]]ガイドを参照してください。
+* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と構成は KOTS 管理 UI で行えます。 詳細については、https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[[Metrics and Monitoring (メトリクスと監視)]]に関するページを参照してください。
+* 2 X-large リソース クラスがサポートされるようになりました。 大きいリソース クラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
+* ビルドしたアーティファクトとテスト結果のライフサイクルをKOTS 管理者コンソールの「Storage Object Expiry」で設定できるようになりました。 また、期限を無効にしてアーティファクトとテスト結果を無期限で保持するオプションも追加されました。
 
-=== Fixes
+=== 修正点
 
-* Resolved a collection of bugs that were causing sensitive information to be leaked into CircleCI support bundles:
-  * Instances of faulty and partial redactions of secrets were detected, in part due to 3rd party bugs.
-  * PostgresDB leaking sensitive information to STDOUT.
-  * Several CircleCI services were logging secrets.
-* Tightened network security in the Nomad terraform module.
-* Terraform v0.15.0 and up are now supported.
-* Updated installation scripts to use functions supported by most recent versions of Terraform.
-* Resolved a bug that was leading to machine large builds being run on the wrong machine type. Machine large builds now correctly use 4 vCPUs and 16GB of RAM.
-* Resolved a bug that caused contexts-service to fail on expiration of Vault client tokens.
-* Resolved a bug that was causing `legacy-notifier` to report readiness prematurely.
-* The JVM heap size parameter has been removed for all services. The heap size is set to be half of the memory limit.
-* Changes to networking config and certs are now picked up automatically by Traefik. Previously, a restart would have been required.
-* Minimum requirements for CPU and memory have changed. For the new values, see the https://circleci.com/docs/2.0/server-3-install-prerequisites/[Installation Prerequisites] doc.
+* CircleCI サポート バンドルにシークレットが含まれる原因となる、一連のバグを修正しました。
+  * サードパーティのバグなどが原因で、シークレットの一部が誤って改変されていました。
+  * PostgresDB から STDOUT に秘密情報が出力されていました。
+  * 一部の CircleCI サービスでシークレットが記録されていました。
+* Nomad Terraform モジュールのネットワーク セキュリティが強化されました。
+* Terraform v0.15.0 以上がサポートされるようになりました。
+* 最新バージョンのTerraformでサポートされている機能を使用するようにインストールスクリプトを更新しました。
+* 大規模なビルドが誤ったマシンタイプで実行される原因となっていたバグを修正しました。 大規模なビルドでは、4 つの vCPUと16 GB の RAM が正しく使用されるようになりました。
+* Vaultクライアントトークンの有効期限が切れると、コンテクストサービスが失敗するというバグを修正しました。
+* 準備完了前に `legacy-notifier` から準備完了と報告されるバグを修正しました。
+* すべてのサービスで、JVM ヒープ サイズに関するパラメーターが削除されました。 ヒープ サイズはメモリ上限の半分に設定されます。
+* ネットワーク設定と証明書に対する変更が、Traefik で自動的に検出されるようになりました。 これまでは、変更後に再起動が必要でした。
+* CPU とメモリの最小要件が変更されました。 新しい値については、https://circleci.com/docs/2.0/server-3-install-prerequisites/[[Installation Prerequisites (インストールの前提条件)]]のページをご参照ください。
 
-=== Known issues
+=== 既知の問題
 
-* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
-identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
+* 現在、同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能な状態です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* CircleCI 1.0 のビルドはサポートされていません。 1.0ビルドを実行しようとした場合、問題の原因を示すようなアプリケーションからのフィードバックはありません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[[CircleCI CLI] ]を使用してプロジェクトの設定を検証し、問題の原因を調査することをおすすめします。
 
 == リリース 3.0.2
 
@@ -157,7 +152,7 @@ and get details of the possible cause of the issue.
 == 次に読む
 CircleCl Server v3.x の詳しい情報については、以下をご覧ください。
 
-* https://circleci.com/docs/2.0/server-3-overviewServer 3.x Overview]
+* https://circleci.com/docs/2.0/server-3-overviewServer 3.x の概要]
 * https://circleci.com/docs/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
 * https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
 * https://circleci.com/docs/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
