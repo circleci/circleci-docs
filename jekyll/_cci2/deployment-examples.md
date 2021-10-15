@@ -4,6 +4,7 @@ title: "Deployment Examples"
 short-title: "Deployment Examples"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -18,7 +19,7 @@ This document presents example config for a variety of popular deployment target
 
 * In order to use orbs you must use `version 2.1` config.
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the jobs are built.
+* If you wish to remain using `version 2.0` config, or are using an installation of CircleCI server v2.x, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the jobs are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items in these examples that appear within `< >` should be replaced with your own parameters.
 

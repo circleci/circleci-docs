@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 4
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -39,7 +40,7 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 **Notes:**
 
 - The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
-- Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
+- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
 
 ## Windows executor images
 {: #windows-executor-images }
@@ -310,7 +311,7 @@ jobs:
 # Example application
 {: #example-application }
 
-Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
+Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
 
 You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml).
 

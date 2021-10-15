@@ -6,6 +6,7 @@ description: "Secured, cross-project resources"
 order: 41
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -171,7 +172,7 @@ You can combine several contexts for a single job by just adding them to the con
 ## Restricting a context
 {: #restricting-a-context }
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's GitHub teams. If you are using CircleCI server v2.xwith LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's GitHub teams. If you are using CircleCI server v2.x with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
