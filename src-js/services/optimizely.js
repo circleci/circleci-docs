@@ -6,7 +6,7 @@ import  Cookies from 'js-cookie';
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
 const FORCE_STORAGE_KEY = 'growth-experiments-force-all';
-const optimizelyLogLevel = !isProduction() ? 'error' : 'info';
+const optimizelyLogLevel = isProduction() ? 'error' : 'info';
 optimizelySDK.setLogLevel(optimizelyLogLevel);
 
 class OptimizelyClient {
