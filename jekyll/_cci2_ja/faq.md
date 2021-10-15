@@ -25,7 +25,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 詳しくは CircleCI の[セキュリティ ポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
 
 ## 移行
-Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
+{: #migration }
 
 ### CircleCI 1.0 から 2.0 へ移行するメリットを教えてください。
 {: #why-migrate-from-circleci-10-to-20 }
@@ -48,23 +48,23 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
             echo "通常は Jenkins の Execute Shell の内容をコピー ＆ ペーストすればよいだけです"
 ```
 
-Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ### inference コマンドは CircleCI 2.0 でも実行できますか?
 {: #does-circleci-20-run-inference-commands }
 {:.no_toc}
-「Enterprise」は、もともとファイアウォールの内側で利用できる CircleCI のオプションを指していましたが、 この名称によってお客様や CircleCI の従業員に混乱が生じていました。
+CircleCI 2.0 は、プロジェクトの内容から推測して変換するようなことはしません。構成ビルダー インターフェイスによって `config.yml` のすべてのジョブを構成できる、スマート デフォルト型モデルの採用を進めています。
 
 ### 基本イメージを作成していなくても、CircleCI 2.0 を使用できますか?
-そこで「CircleCI」という総称を使用することで、クラウド サービス経由で使用したり、ファイアウォールの内側にインストールしたり、あるいはその両方を組み合わせたハイブリッド環境で活用したりと、1 つの製品で多様なニーズに対応できることを明確にしました。
+{: #can-i-use-circleci-20-without-creating-base-images }
 {:.no_toc}
-Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
+はい、CircleCIが提供しているものをお使いください。 ただし、お使いになる基本イメージのサポートが将来のリリースによって終了する場合もありますのでご注意ください。
 
 たとえば `circleci/build-image:ubuntu-14.04-XL-922-9410082` というイメージは、CircleCI の Web アプリケーションで使用している Ubuntu 14.04 (Trusty Tahr) のイメージと同等の内容になっています。 容量はかなり大きく (非圧縮時で 17.5 GB 程度)、ローカル環境でのテストにはあまり適していません。
 
 このイメージは、デフォルトで `ubuntu` ユーザーとしてアクションを実行し、Docker Compose で提供されるネットワーク サービスと連携するよう設計されています。
 
-Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
+このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/ja/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
 
 ## ホスティング
 {: #hosting }
@@ -72,7 +72,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 ### CircleCI 2.0 はオンプレミスでも利用できますか?
 {: #is-circleci-20-available-to-enterprise-clients }
 {:.no_toc}
-CircleCI のインストール手順などについては「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
+はい、お客様のオンプレミス環境でもご利用いただけます。詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
@@ -84,9 +84,9 @@ CircleCI のインストール手順などについては「[管理者向けの�
 ### CircleCI Enterprise という名称を使わなくなったのはなぜですか?
 {: #why-did-you-change-the-name-from-circleci-enterprise }
 {:.no_toc}
-The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
+Enterpriseという名称は、ファイアウォールの内側を指すために使われていました。 しかし、この名称によってお客様や CircleCI の従業員に混乱が生じていました。
 
-CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
+そこで「CircleCI」という総称を使用することで、クラウド サービス経由で使用したり、ファイアウォールの内側にインストールしたり、あるいはその両方を組み合わせたハイブリッド環境で活用したりと、1 つの製品で多様なニーズに対応できることを明確にしました。
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -98,7 +98,7 @@ CircleCI アプリケーションの Workflows タブで、エラー メッセ�
 
 詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
 
-After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+`config.yml` のフォーマットエラーを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
 
 ### 「usage キュー」と「run キュー」の違いは何ですか?
 {: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
@@ -107,10 +107,10 @@ After checking your `config.yml` for formatting errors, search for your issue in
 
 **run キュー**は CircleCI に高い負荷がかかっているときに発生します。 この場合、ユーザーのビルドはいったん run キューに入り、マシンが利用できる状態になったら処理されます。
 
-In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
+つまり、**usage キュー**が発生したときは[コンテナを追加購入する](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing)ことで処理時間を短縮できますが、**run キュー**による待機時間は避けようがありません (とはいえ、CircleCI では少しでも待機時間を解消できるように努めています)。
 
 ### Why are my builds queuing even though I'm on the Performance plan?
-現在のプランではコンテナ数が不足していないのに「build didn’t run because it needs more containers than your plan allows」というエラー メッセージが表示されるのは なぜですか?
+{: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 ビルドの待機時間が発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
