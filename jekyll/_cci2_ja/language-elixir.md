@@ -61,15 +61,6 @@ jobs:  # 1 回の実行の基本作業単位
       - save_cache:  # 特定性の低い別のキャッシュを作成します
           key: v1-mix-cache-{{ .Branch }}
           paths: "deps"
-      - save_cache:  # もう 1 つキャッシュを保存しておきます (念のため)
-          key: v1-mix-cache
-          paths: "deps"
-      - save_cache: # *ビルド* キャッシュも忘れずに保存します
-          key: v1-build-cache-{{ .Branch }}
-          paths: "_build"
-      - save_cache: # ビルド キャッシュを 1 つ余分に保存します
-          key: v1-build-cache
-          paths: "_build"
 
       - run:  # データベースが準備できるまでメインの処理を停止する特別なユーティリティ
           name: DB を待機
@@ -97,7 +88,7 @@ version: 2
 
 [`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
 この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 [CircleCI 提供の Elixir Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#elixir)を使用します。
 
@@ -107,9 +98,15 @@ jobs:
     parallelism: 1
     docker:
       - image: circleci/elixir:1.7.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
@@ -119,7 +116,7 @@ jobs:
 ```
 
 
-ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を作成します。
 
 [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソース コードがチェックアウトされます。
 
@@ -132,15 +129,15 @@ jobs:
       - run: mix local.rebar --force
 ```
 
-[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/2.0/caching/)を検討してください。
 
 [`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
-実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
+[`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
 ```yaml
-      <br />      - restore_cache:
+      - restore_cache:
           keys:
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -154,16 +151,7 @@ jobs:
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
       - save_cache:
-          key: v1-mix-cache-{{ .Branch }}
-          paths: "deps"
-      - save_cache:
-          key: v1-mix-cache
-          paths: "deps"
-      - save_cache:
           key: v1-build-cache-{{ .Branch }}
-          paths: "_build"
-      - save_cache:
-          key: v1-build-cache
           paths: "_build"
 ```
 {% endraw %}
@@ -179,7 +167,7 @@ jobs:
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME
 ```
 
-## 関連項目
+## 並列処理
 {: #parallelism }
 
 **Splitting by Timings**
@@ -197,7 +185,7 @@ By default, JUnitFormatter saves the output to the `_build/test/lib/<application
 
 However, JUnitFormatter also allows you to configure the directory where the results are saved via the `report_dir` setting, in which case, the `path` value in your CircleCI config should match the relative path of wherever you're storing the output.
 
-## See also
+## 関連項目
 {: #see-also }
 
 [依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/) [データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)
