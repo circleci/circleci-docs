@@ -20,14 +20,14 @@ version:
 {: #overview }
 {:.no_toc}
 
-他のテスト ツールを使用する場合は、別の `lein` タスクを実行するようにそのステップを調整するだけです。
+お急ぎでなければ、[設定ファイルの詳細](#config-walkthrough)に目を通すことをお勧めします。
 
 ここでは、以下を前提としています。
 
 * Leiningen の組み込み `test` タスクを含む `clojure.test` を使用している
 * アプリケーションをオールインワン uberjar として配布できる
 
-If you use another testing tool, you can just adjust that step to run a different `lein` task.
+他のテスト ツールを使用する場合は、別の `lein` タスクを実行するようにそのステップを調整するだけです。
 
 ## 設定ファイルの例
 {: #sample-configuration }
