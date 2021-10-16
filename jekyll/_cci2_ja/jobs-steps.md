@@ -8,7 +8,7 @@ categories:
 order: 2
 ---
 
-ジョブ、ステップ、ワークフローに加え、Orb に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) キーについて概説します。
+このドキュメントでは、Orb、ジョブ、ステップ、ワークフローの概要を説明しています。
 
 * 目次
 {:toc}
@@ -27,7 +27,7 @@ Orb は、名前に基づいてインポートするかインラインで構成�
 下図はジョブ間のデータ フローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
 * キャッシュは、異なるワークフロー ビルドにある同じジョブ間でデータを維持します。
-* Artifacts persist data after a workflow has finished.
+* アーティファクトは、ワークフローの終了後にデータを維持します。
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
@@ -73,7 +73,7 @@ workflows:
 ```
 
 ## 並列ジョブを使用した設定ファイルの例
-{{ site.baseurl }}/ja/2.0/configuration-reference/#jobs
+{: #sample-configuration-with-concurrent-jobs }
 
 2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
@@ -109,5 +109,5 @@ version: 2
 ## 関連項目
 {: #see-also }
 
-- [構成リファレンス: jobs キー]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-- [構成リファレンス: steps キー]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+- [構成リファレンス: jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
+- [構成リファレンス: steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)
