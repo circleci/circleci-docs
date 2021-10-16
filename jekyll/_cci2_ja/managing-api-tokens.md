@@ -12,9 +12,9 @@ version:
 CircleCI の API を使用したり、ビルドの詳細を確認したりするには、適切な権限を持つ API トークンが必要です。 ここでは、API トークンの種類と、トークンを作成および削除する方法について説明します。
 
 ## 概要
-CircleCI では 2 種類の API トークンを作成できます。
+{: #overview }
 
-There are two types of API tokens you can create within CircleCI.
+CircleCI では 2 種類の API トークンを作成できます。
 
   1. **パーソナル:** このトークンは CircleCI API とのやり取りに使用され、完全な読み取りアクセス権と書き込みアクセス権を付与します。
   2. **プロジェクト**: このトークンは、特定のプロジェクトに関する情報を提供し、読み取りアクセス権のみを付与します。 プロジェクト トークンには、*Status*、*Build Artifacts*、*All* の 3 つのスコープ オプションがあります。
