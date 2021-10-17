@@ -52,7 +52,7 @@ jobs:
 ```
 
 ### Executor タイプの選択
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
+{: #choose-an-executor-type }
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
@@ -65,6 +65,9 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4  # ビルド ジョブのプライマリ コンテナ
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 **メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[ CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
@@ -99,7 +102,7 @@ jobs:
 ### 依存関係のインストール
 {: #install-dependencies }
 
-[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソース コードがチェックアウトされます。
 
@@ -121,11 +124,11 @@ jobs:
 ### 依存関係のキャッシュ
 {: #cache-dependencies }
 
-[`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) ステップを使用して、テスト結果をアーティファクトとして保存します。
+実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
 [`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
-実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
+[`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
 
@@ -178,7 +181,7 @@ jobs:
 
 [`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップを使用して、テスト結果を CircleCI にアップロードします。 この結果は、CircleCI アプリケーションの**テスト サマリー**セクションに表示されます。
 
-Use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step to save test results as artifacts.
+[`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) ステップを使用して、テスト結果をアーティファクトとして保存します。
 
 ```yaml
 version: 2
@@ -205,62 +208,51 @@ jobs:
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
-jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
-    # directory where steps are run
+version: 2 # CircleCI 2.0 を使用します
+jobs: # 1 回の実行の基本作業単位
+  build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
+    # ステップが実行されるディレクトリ
     working_directory: ~/circleci-demo-python-django
-    docker: # run the steps with Docker
-      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
+    docker: # Docker でステップを実行します
+      # CircleCI Python イメージは https://hub.docker.com/r/circleci/python/ で入手できます
       - image: circleci/python:3.6.4
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # environment variables for primary container
+        environment: # プライマリ コンテナの環境変数
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI PostgreSQL イメージは https://hub.docker.com/r/circleci/postgres/ で入手できます
       - image: circleci/postgres:9.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # environment variables for the Postgres container.
-          version: 2
-jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: circleci/python:3.6.4 # 各ジョブで Docker Executor のイメージを定義する必要があり、後続のジョブでは別のイメージを定義できます
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2 # サービス コンテナの指定方法を示す例
-        environment:
+        environment: # Postgres コンテナのための環境変数
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
-        POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
+    steps: # `build` ジョブを構成するステップ
+      - checkout # ソース コードを作業ディレクトリにチェック アウトします
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
-      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
+      - save_cache: # Pipfile のチェックサムをキャッシュ キーとして使用して、Python の依存関係をキャッシュします
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
-            - "venv"
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
       - run:
           command: |
             pipenv run python manage.py test
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results: # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するテスト結果をアップロードします
           path: test-results
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト サマリーをアップロードします
           path: test-results
           destination: tr1
 ```
