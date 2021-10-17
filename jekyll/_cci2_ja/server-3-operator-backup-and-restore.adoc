@@ -28,7 +28,7 @@ NOTE: CircleCI サービスのバックアップと復元には、Velero が必�
 == セットアップ
 
 CircleCI Server のバックアップは、https://kots.io/[KOTS] を通じて非常に簡単に作成できます。
-However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
+ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして構成する必要があります。
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
 === 前提条件
