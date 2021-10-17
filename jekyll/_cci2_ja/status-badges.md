@@ -12,9 +12,9 @@ version:
 ## 概要
 {: #overview }
 
-Status badges are commonly embedded in project READMEs, although they can be placed in any web document. CircleCI provides a tool to generate embed code for status badges. By default, a badge displays the status of a project's default branch, though you can also display the status of specific branches.
+ステータス バッジは、一般にプロジェクトの README に埋め込まれていますが、どの Web ドキュメントにも配置できます。 CircleCI では、ステータス バッジの埋め込みコードを生成するツールが提供されています。 By default, a badge displays the status of a project's default branch, though you can also display the status of specific branches.
 
-You can generate code for the following formats:
+以下の形式のコードを生成できます。
 
 - 画像 URL
 - Markdown
