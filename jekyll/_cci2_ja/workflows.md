@@ -67,12 +67,12 @@ suggested:
 * CircleCI API を使用してワークフローをトリガーできるのは、パイプラインが有効化されているプロジェクトのみです。
 * 設定ファイルにワークフローを含めない場合は、`build` という名前のジョブを含める必要があります。
 
-その他の詳細と制限事項については、「よくあるご質問」の[ワークフロー]({{ site.baseurl }}/2.0/faq/#workflows) セクションを参照してください。
+その他の詳細と制限事項については、「よくあるご質問」の[ワークフロー]({{ site.baseurl }}/ja/2.0/faq/#workflows) セクションを参照してください。
 
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
 
-__ `workflows` _キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの [ワークフロー]({{ site.baseurl }}/2.0/configuration-reference/#workflows) セクションを参照してください。_
+__ `workflows` _キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションを参照してください。_
 
 **注:** ワークフローを使用してプロジェクトを構成する場合、 Docker イメージ、環境変数、`run` ステップなどの構文を複数のジョブで共有することがよくあります。 `.circleci/config.yml` のコードをコンパクトにするエイリアスの使い方や構文の再利用方法については [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) でご確認ください。 また、ブログページの [CircleCI の設定における YAML ファイルの再利用](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)も参考にしてください。
 
@@ -115,7 +115,7 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前よりも先に実行することをお勧めします。
 - ワークフローの_先頭_に setup ジョブを実行すると、事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備にも役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/2.0/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/2.0/adv-config)」を参照してください。
 
 ### 順次ジョブ実行の例
 {: #sequential-job-execution-example }
@@ -225,7 +225,7 @@ workflows:
             - hold
 ```
 
-上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 A job can be approved for up to 90 days after being issued. However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
+上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。 However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
 
 ワークフローで手動承認を使用する場合は、以下の点に注意する必要があります。
 
@@ -321,7 +321,7 @@ workflows:
 
 `filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
 
-詳細については、[CircleCI の設定]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)の`branches `セクションを参照してください。
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)の`branches `セクションを参照してください。
 
 設定例の全文については、 [スケジュール設定されたワークフローのサンプル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)を参照してください。
 
@@ -334,7 +334,7 @@ workflows:
 {: #using-job-contexts-to-share-environment-variables }
 {:.no_toc}
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つの順次ジョブを含む ワークフローの例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つの順次ジョブを含む ワークフローの例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)で確認できます。
 
 下記で示した `config.yml` のスニペットは、`org-global` コンテキストで定義したリソースを使う設定を施した、順次ジョブのワークフローの例です。
 
@@ -649,7 +649,7 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #see-also }
 {:.no_toc}
 
-- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時にワークフローを設定に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)の[ワークフローの設定手順]({{ site.baseurl }}/2.0/migrating-from-1-2/)を参照してください。
+- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時にワークフローを設定に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)の[ワークフローの設定手順]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)を参照してください。
 
 - ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq)」の「ワークフロー」セクションを参照してください。
 
