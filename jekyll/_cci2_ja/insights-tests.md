@@ -5,6 +5,7 @@ short-title: "テスト インサイトの使用"
 description: "テスト インサイトの使用"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## 概要

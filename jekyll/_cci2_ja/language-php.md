@@ -17,9 +17,9 @@ version:
 {:toc}
 
 ## クイックスタート: デモ用の PHP Laravel リファレンス プロジェクト
-{: #quickstart-demo-php-laravel-reference-project }
-
 CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
+
+We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">GitHub 上の PHP Laravel デモ プロジェクト</a>
 - [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
@@ -27,7 +27,7 @@ CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リ�
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、PHP プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
 
 ## CircleCI のビルド済み Docker イメージ
-{: #pre-built-circleci-docker-images }
+セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
 
 CircleCI のビルド済みイメージを使用することをお勧めします。 このイメージには、CI 環境で役立つツールがプリインストールされています。 [Docker Hub](https://hub.docker.com/r/circleci/php/) から必要な PHP バージョンを選択できます。 デモ プロジェクトでは、公式 CircleCI イメージを使用しています。
 
@@ -39,7 +39,7 @@ CircleCI のビルド済みイメージを使用することをお勧めしま�
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
 1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
-2. CircleCI で [[Projects dashboard (プロジェクトの追加)](https://app.circleci.com/projects/)){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
+2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 ---
@@ -115,10 +115,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-node-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/php:7.1-node-browsers 
     working_directory: ~/laravel
 ```
 
@@ -176,7 +173,7 @@ jobs:
 
 ---
 
-完了です。 これで PHP アプリケーション用に CircleCI 2.0 をセットアップできました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel)を参照してください。
+完了です。 これで PHP アプリケーション用に CircleCI 2.0 をセットアップできました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}を参照してください。
 
 ## 関連項目
 {: #see-also }

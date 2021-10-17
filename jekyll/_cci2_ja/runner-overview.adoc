@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/ja/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
 
 toc::[]
 
@@ -146,6 +146,6 @@ NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する�
 
 == Learn more
 
-Take the https://academy.circleci.com/runner-course[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
+Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
 
 

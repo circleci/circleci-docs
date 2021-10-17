@@ -23,7 +23,7 @@ Caches are global within a project. A cache saved on one branch will be used by 
 
 **Caches created via the save_cache step are stored for up to 15 days.**
 
-For more information see the [Caching Dependencies]({{site.baseurl}}/ja/2.0/caching/) guide.
+For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) guide.
 
 ## Using workspaces
 {: #using-workspaces }
@@ -36,7 +36,7 @@ Workspaces are not shared between pipeline runs. The only time a workspace can b
 
 **Workspaces are stored for up to 15 days.**
 
-For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
+For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
 ## Using artifacts
 {: #using-artifacts }
@@ -49,7 +49,7 @@ If your project needs to be packaged, say an Android app where the `.apk` file i
 
 **Artifacts are stored for up to 30 days.**
 
-For more information on using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/ja/2.0/artifacts/) guide.
+For more information on using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.
 
 ## Managing network and storage use
 {: #managing-network-and-storage-use }

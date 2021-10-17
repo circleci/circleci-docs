@@ -31,9 +31,7 @@ NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみ�
 https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラート システムです。 CircleCI Server 3.x には、一般的なパフォーマンス メトリクスの監視が実装されています。 
 
 === KOTS 管理者 - メトリクス グラフ
-デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 Once deployed, you may provide the 
-address for your Prometheus instance to the kots admin dashboard. Kots will use this address to generate graph data for 
-the cpu and memory usage of containers in your cluster.
+デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 デプロイ後、Prometheus インスタンスのアドレスを KOTS 管理者ダッシュボードに追加できます。 KOTS ではこのアドレスを使用して、クラスタに含まれるコンテナの CPU とメモリ使用率のグラフ データを生成します。
 
 デフォルトの Prometheus アドレスは、`http://prometheus-server` です。
 

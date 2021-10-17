@@ -470,7 +470,7 @@ NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Ser
 . 以下を PowerShell で実行します。
 +
 ```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
 ./Install-CircleCIRunner.ps1
 ```
 +
@@ -497,52 +497,69 @@ runner:
   name: RUNNER_NAME
 ```
 
-==== runner.name
+=== runner.name
 
 `RUNNER_NAME` には、このローンチ エージェントに割り当てる一意の名前を設定します。 CircleCI UI でのステータスやジョブ結果の確認時にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
 
-==== api.auth_token
+=== api.auth_token
 
 ここには、CircleCI でのローンチ エージェントの認証に使用するトークンを設定します。このトークンは、CircleCI CLI から生成できます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
 
-==== runner.command_prefix
+=== runner.command_prefix
 
 このプレフィックスを設定することで、タスク エージェント プロセスの起動方法をカスタマイズできます。 ここでカスタム スクリプトを使用すると、タスク ランナーの前後で任意のコマンドを実行できます。 指定した引数が実行され、完了時にスクリプトから正しい終了コードが返されるよう特に注意してください。
 
-==== runner.working_directory
+=== runner.working_directory
 
 ここでディレクトリを設定することで、ジョブごとに使用するデフォルトの作業ディレクトリを指定できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行えるよう権限が設定されている必要があります。 設定したディレクトリが存在しない場合は、タスク エージェントにそのディレクトリの作成権限を付与する必要があります。 設定値に `%s` を含めた場合、この変数はジョブごとに異なる値で置き換えられます。 設定した作業ディレクトリは自動的には削除されないことに注意してください。
 
-==== runner.cleanup_working_directory
+=== runner.cleanup_working_directory
 
 この値を設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。 デフォルト値は `false` です。
 
-==== runner.max_run_time
+=== runner.mode
 
-この値を設定することで、タスク エージェントの各ジョブについてデフォルトの最大実行時間を上書きできます。 値は、単位識別子付きの文字列で指定します。識別子は、時間単位の場合は `h`、分単位の場合は `m`、秒単位の場合は `s` を使用します。
+This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (single-task) or to continuously poll for new available jobs.
 
-以下に有効な例を示します。
+The possible values are:
 
-* `72h` - 3 日間
-* `1h30m` - 1 時間 30 分
-* `30s` - 30 秒
-* `50m` - 50 分
-* `1h30m20s` - 非常に厳密ですが、こうした時間指定も可能です
+* continuous
+* single-task
 
-NOTE: デフォルト値は 5 時間です。
+NOTE: The default value is continuous.
 
-===== ジョブ タイムアウトとドレイン タイムアウトをカスタマイズする
+=== runner.max_run_time
 
-ジョブ タイムアウト設定をカスタマイズする場合、ローンチ エージェントに終了 (TERM) シグナルを送信して、ジョブを "ドレイン" できます。このシグナルは、ローンチ エージェントに対し、安全なシャットダウンを試みるよう指示するものです。 ローンチ エージェントは、TERM シグナルを受け取ると "ドレイン" モードに入ります。このモードでは、ローンチ エージェントが新しいジョブを受け付けなくなりますが、現在アクティブなジョブは完了するまで引き続き実行できます。 "ドレイン" の終了時、ローンチ エージェントはタスク エージェントに対して、アクティブなジョブをすべてキャンセルするようにシグナルを出します (TERM シグナルを送信します)。
+This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
 
-NOTE: TERM シグナルの送信後、しばらく経ってもタスク エージェントが終了しない場合、ローンチ エージェントはタスク エージェントに KILL シグナルを送信して強制終了します。
+Here are a few valid examples:
 
-ドレインは、次の 2 つのうちいずれかの条件で終了します。
+* `72h` - 3 days
+* `1h30m` - 1 hour 30 minutes
+* `30s` - 30 seconds
+* `50m` - 50 minutes
+* `1h30m20s` - An overly specific (yet still valid) duration.
 
-* タスクがドレイン状態になった後、`max_run_time` の設定値以上の時間が経過する。
-* "ドレイン" 中に、ローンチ エージェントが追加の TERM シグナルを受け取る。
+NOTE: The default value is 5 hours.
 
-==== runner.ssh.advertise_addr
+==== Customizing job timeouts and drain timeouts
+
+If you would like to customize the job timeout setting, you can "drain" the job by sending the Launch Agent a termination (TERM) signal, which then causes the Launch Agent to attempt to gracefully shutdown. When this TERM signal is received, the launch agent enters 'draining' mode, preventing the Launch Agent from accepting any new jobs, but still allowing any current active job to be completed. At the end of "draining," the Launch Agent then signals the Task Agent to cancel any active job (by sending it a TERM signal).
+
+NOTE: If the Task Agent does not exit a brief period after the TERM, the Launch Agent will manually kill it by sending it a KILL signal.
+
+Draining can end in one of two ways:
+
+* The task has been in the draining state for longer than the configured `max_run_time`.
+* An additional TERM signal is received by the Launch Agent during "draining".
+
+=== runner.idle_timeout
+
+This timeout will enable a launch agent to terminate if no task has been claimed within the given time period. The value is a string with the following unit identifiers: `h`, `m` or `s` for hours, minutes and seconds, respectively (e.g., `5m` is 5 minutes).
+
+NOTE: The default behaviour is to never time out due to inactivity.
+
+=== runner.ssh.advertise_addr
 
 This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
 
@@ -550,7 +567,7 @@ The address is of the form `*host:port*` and is displayed in the 'Enable SSH' an
 
 NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the 'Rerun job with SSH' feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
 
-===== Considerations before enabling SSH debugging
+==== Considerations before enabling SSH debugging
 
 Task agent runs an embedded SSH server and agent on a dedicated port when the 'Rerun job with SSH' option is activated. This feature will not affect any other SSH servers or agents on the system that the runner is installed on.
 

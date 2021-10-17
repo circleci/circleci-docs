@@ -12,12 +12,18 @@ version:
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
 
 ## 概要
+{: #overview }
+
 CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-それ以外の場合は、お使いのCircleCIのバージョン（クラウド／サーバー）に応じた以下の手順で、プロジェクトにSSHキーを追加してください。
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
+
+それ以外の場合は、お使いのCircleCIのバージョン(クラウド/サーバー)に応じた以下の手順で、プロジェクトにSSHキーを追加してください。
+
+複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
 ## 手順
 {: #steps }
@@ -50,22 +56,22 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 2. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
-3. **Permissions** セクションで、**SSH Permissions** をクリックします。
+2. **Permissions** セクションで、**SSH Permissions** をクリックします。
 
-4. **Add SSH Key** ボタンをクリックします。
+3. **Add SSH Key** ボタンをクリックします。
 
-5. **Hostname** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
+4. **Hostname** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
 
-6. **Private Key** フィールドに登録する SSH 鍵を貼り付けます。
+5. **Private Key** フィールドに登録する SSH 鍵を貼り付けます。
 
-7. **Add SSH Key** ボタンをクリックします。
+6. **Add SSH Key** ボタンをクリックします。
 
 ## ジョブに SSH 鍵を登録する
 {: #adding-ssh-keys-to-a-job }
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH 鍵に自動的に署名します。 ただし、コンテナに実際に鍵を登録するには、`add_ssh_keys` キーを使用する**必要があります**。
 
-複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
+SSH キーをコンテナに追加するには、 [特別なステップ]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
 
 ```yaml
 version: 2

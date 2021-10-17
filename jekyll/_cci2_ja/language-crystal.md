@@ -44,12 +44,12 @@ jobs: # a collection of jobs
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps: # a collection of executable steps
-      - checkout
-      - restore_cache:
+      - checkout # checks out source code to working directory
+      - restore_cache: # Restore dependency cache
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
-          name: 依存関係のインストール
+          name: Install dependencies.
           command: shards install
       - save_cache: # Step to save dependency cache
           key: dependency-cache-{{ checksum "shard.lock" }}
