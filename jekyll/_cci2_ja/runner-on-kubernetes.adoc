@@ -14,7 +14,7 @@ toc::[]
 
 == はじめに
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
 
 ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
 
