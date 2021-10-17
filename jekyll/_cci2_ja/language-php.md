@@ -17,9 +17,9 @@ version:
 {:toc}
 
 ## クイックスタート: デモ用の PHP Laravel リファレンス プロジェクト
-CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
+{: #quickstart-demo-php-laravel-reference-project }
 
-We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
+CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">GitHub 上の PHP Laravel デモ プロジェクト</a>
 - [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
@@ -27,7 +27,7 @@ We maintain a reference PHP Laravel project to show how to build PHP on CircleCI
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、PHP プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
 
 ## CircleCI のビルド済み Docker イメージ
-セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
+{: #pre-built-circleci-docker-images }
 
 CircleCI のビルド済みイメージを使用することをお勧めします。 このイメージには、CI 環境で役立つツールがプリインストールされています。 [Docker Hub](https://hub.docker.com/r/circleci/php/) から必要な PHP バージョンを選択できます。 デモ プロジェクトでは、公式 CircleCI イメージを使用しています。
 
@@ -47,7 +47,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 ## 設定ファイルの例
 {: #sample-configuration }
 
-Following is the commented `.circleci/config.yml` file in the demo project.
+以下に、デモ プロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
 {% raw %}
 ```yaml
@@ -56,7 +56,6 @@ version: 2 # CircleCI 2.0 を使用します
 jobs: # 一連のステップ
   build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
     docker: # Docker でステップを実行します
-
       - image: circleci/php:7.1-node-browsers # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
     working_directory: ~/laravel # ステップが実行されるディレクトリ
     steps: # 実行可能コマンドの集合
@@ -115,7 +114,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-node-browsers 
+      - image: circleci/php:7.1-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/laravel
 ```
 
@@ -124,7 +126,6 @@ jobs:
 {% raw %}
 ```yaml
     steps:
-
       - checkout
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
@@ -141,12 +142,12 @@ jobs:
 
 {% raw %}
 ```yaml
-      <br />      - restore_cache: 
+      - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
             - composer-v1-
       - run: composer install -n --prefer-dist
-      - save_cache: 
+      - save_cache:
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
@@ -155,7 +156,7 @@ jobs:
             - node-v1-{{ checksum "package-lock.json" }}
             - node-v1-
       - run: yarn install
-      - save_cache: 
+      - save_cache:
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
@@ -165,7 +166,7 @@ jobs:
 最後に、Sqlite テスト データベースを準備し、移行を実行し、テストを実行します。
 
 ```yaml
-      - run: touch storage/testing.sqlite 
+      - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
