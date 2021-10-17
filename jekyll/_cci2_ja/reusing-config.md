@@ -19,7 +19,7 @@ version:
 {: #notes-on-reusable-configuration }
 {:.no_toc}
 
-* (任意) `circleci config process` コマンドにアクセスできるように、CircleCI CLI をインストールします 。 このコマンドを使用すると、再利用可能なキーを含む展開後の設定ファイルを確認できます。 インストール方法と詳しい使い方については、ドキュメント「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」を参照してください。
+* (任意) `circleci config process` コマンドにアクセスできるように、CircleCI CLI をインストールします 。 このコマンドを使用すると、再利用可能なキーを含む展開後の設定ファイルを確認できます。 インストール方法と詳しい使い方については、ドキュメント「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/)」を参照してください。
 
 * CircleCI 設定ファイルの要素を再利用するには、**`version: 2.1`** の `.circleci/config.yml` ファイルを使用する必要があります。
 
@@ -790,7 +790,6 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     environment:
      ENV: ci       # Executor で設定された値
- 
      steps:
       - run: echo "Node will not be installed."
 ```
@@ -1092,10 +1091,10 @@ workflows:
 
 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                                      |
-| --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                              |
+| キー        | 必須 | 種類    | 説明                                                                                         |
+| --------- | -- | ----- | ------------------------------------------------------------------------------------------ |
+| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                                 |
 {: class="table table-striped"}
 
 ### **`unless` ステップ**
@@ -1103,10 +1102,10 @@ workflows:
 
 `unless` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が false 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                                      |
-| --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                             |
+| キー        | 必須 | 種類    | 説明                                                                                         |
+| --------- | -- | ----- | ------------------------------------------------------------------------------------------ |
+| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                                |
 {: class="table table-striped"}
 
 ## インライン Orb の作成
@@ -1146,6 +1145,6 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-- CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
-- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
-- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。
+- CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/ja/2.0/sample-config/)」でご覧いただけます。
+- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)」で紹介しています。
+- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの設定例]({{site.baseurl}}/ja/2.0/postgres-config/)」を参照してください。
