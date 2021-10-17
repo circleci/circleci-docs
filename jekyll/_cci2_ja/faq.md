@@ -37,7 +37,6 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 ### Jenkins から CircleCI 2.0 へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci-20 }
 {:.no_toc}
-このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
 
 ```yaml
     steps:
@@ -64,7 +63,7 @@ CircleCI 2.0 は、プロジェクトの内容から推測して変換するよ�
 
 このイメージは、デフォルトで `ubuntu` ユーザーとしてアクションを実行し、Docker Compose で提供されるネットワーク サービスと連携するよう設計されています。
 
-このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/ja/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
+このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
 
 ## ホスティング
 {: #hosting }
