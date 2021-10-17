@@ -44,7 +44,7 @@ To read about our customer support policy regarding beta images, please check ou
 ### Apple silicon support
 {: #apple-silicon-support }
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
+It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
 Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner](https://circleci.com/docs/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
@@ -53,8 +53,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  | Config   | Xcode Version              | macOS Version | macOS UI Testing Supported | Software Manifest                                                                                | Release Notes                                                                                       |
  | -------- | -------------------------- | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
- | `12.1.0` | Xcode 13.0 (13A233)        | 11.5.2        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-rc-released/41256)                          |
- | `12.5.1` | Xcode 10.2.1 (10E1001)     | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
+ | `13.0.0` | Xcode 13.0 (13A233)        | 11.5.2        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-rc-released/41256)                          |
+ | `12.5.1` | Xcode 12.5.1 (12E507)      | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
  | `12.4.0` | Xcode 12.4 (12D4e)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
  | `12.3.0` | Xcode 12.3 (12C33)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
  | `12.2.0` | Xcode 12.2 (12B45b)        | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
