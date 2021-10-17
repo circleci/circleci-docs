@@ -52,7 +52,7 @@ There are many techniques to help mitigate the risks discussed above. Here, we w
 #### General precautions
 {: #general-precautions }
 
-running `env` or `printenv` which will print all your environment variables to `stdout`.
+Avoid running `env` or `printenv`, which will print the values of all environment variables, including secrets.
 
 Avoid writing secrets into your shell history with these two techniques. However, note that turning off history will not prevent commands from being exposed through audit logs and `ps`:
   - Running `set +o history` before the sensitive commands will prevent them from being written to the history file. `set -o history` will turn history logging back on.
@@ -128,4 +128,4 @@ EOF
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
