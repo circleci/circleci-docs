@@ -1,9 +1,9 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Installation Phase 1
+= CircleCI Server v3.x インストール ステップ 1
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -385,4 +385,4 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
 ```
 
 ## What to read next
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
+* https://circleci.com/docs/ja/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
