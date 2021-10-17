@@ -24,9 +24,9 @@ version:
 
 ここでは、以下を前提としています。
 
-* You are using [Gradle](https://gradle.org/). [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
+* [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
 * Java 11 を使用している
-* You are using the Spring Framework. Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
+* Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
 * アプリケーションをオールインワン uberjar として配布できる
 
 
@@ -103,43 +103,11 @@ workflows:
   workflow:
     jobs:
     - build
-      - store_artifacts:
-          path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-      - store_artifacts:
-          path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-      - store_artifacts:
-          path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-      - store_artifacts:
-          path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
 ```
 {% endraw %}
 
 ## コードの取得
-常にバージョンの指定から始めます。
+{: #get-the-code }
 
 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-java-spring> からアクセスできます。
 
@@ -150,7 +118,7 @@ workflows:
 ## 設定ファイルの詳細
 {: #config-walkthrough }
 
-この `build` ジョブ内にいくつかの `steps` を追加します。
+必ずバージョンの指定から始めます。
 
 ```yaml
 version: 2
@@ -172,22 +140,28 @@ jobs:
 
 テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
-We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/). We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
+また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 Gradleプロセスが終了した後に終了させるため、Gradleデーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
 ```yaml
 version: 2
 ...
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
 ```
 
-We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `11.0.3-jdk-stretch`.
+バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK コンビニエンス イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
 
-最後に、ワークフロー内の唯一のジョブとして `build` ジョブによって実行される `workflow` というワークフローを定義します。
+この `build` ジョブ内にいくつかの `steps` を追加します。
 
 コードベースで作業できるように、最初に `checkout` を置きます。
 
@@ -201,7 +175,6 @@ We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circle
 ```yaml
 ...
     steps:
-
       - checkout
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
@@ -216,7 +189,6 @@ We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circle
 ```yaml
 ...
     steps:
-
       - run:
           name: Run tests in parallel # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
           # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します
@@ -286,7 +258,7 @@ We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circle
 ```
 {% endraw %}
 
-Lastly, we define a workflow named `workflow` which the `build` job will execute as the only job in the workflow.
+最後に、ワークフロー内の唯一のジョブとして `build` ジョブによって実行される `workflow` というワークフローを定義します。
 
 {% raw %}
 ```yaml
@@ -295,7 +267,6 @@ workflows:
   version: 2
   workflow:
     jobs:
-
     - build
 ```
 {% endraw %}
