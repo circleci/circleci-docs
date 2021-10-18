@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
 
 toc::[]
 
@@ -54,7 +54,7 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 * RHEL8-x86_64
 * Mac OS X 10.15 以降 (Intel)
 * macOS 11.2 以降 (Apple M1)
-* Docker (x86_64)
+* Docker (x86_64 or ARM64)
 * Kubernetes (x86_64)
 * Windows Server 2019, 2016 (x86_64)
 
@@ -72,7 +72,6 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 *プレビュー*の CircleCI ランナーは、次のプラットフォームで利用できます。
 
 * 上記以外の Linux ディストリビューション - RHEL、SUSE、Debian など (x86_64 または ARM64)
-* Docker (ARM64)
 * Kubernetes (ARM64)
 
 NOTE: プレビューの CircleCI ランナーは現在鋭意開発中です。環境に対するサポートやユースケースに関するご質問がある場合はhttps://circleci.com/ja/contact/[お問い合わせ]ください。 また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーのディスカッション ページ]への投稿もぜひお寄せください。開発の参考にさせていただきます。
