@@ -135,7 +135,43 @@ jobs:
 # ...
 ```
 
-{:.tab.executors.Server}
+{:.tab.executors.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+ build1: # job name
+   docker: # Specifies the primary container image,
+     - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+     - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # for the secondary or service container run in a common
+      # network where ports exposed on the primary container are
+      # available on localhost.
+       environment: # Specifies the POSTGRES_USER authentication
+        # environment variable, see circleci.com/docs/2.0/env-vars/
+        # for instructions about using environment variables.
+         POSTGRES_USER: root
+#...
+ build2:
+   machine: # Specifies a machine image that uses
+   # an Ubuntu version 20.04 image with Docker 19.03.13
+   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
+   # for new image releases.
+     image: ubuntu-2004:202010-01
+#...
+ build3:
+   macos: # Specifies a macOS virtual machine with Xcode version 11.3
+     xcode: "11.3.0"
+# ...
+```
+
+{:.tab.executors.Server_2}
 ```yaml
 version: 2.0
 
@@ -168,8 +204,8 @@ jobs:
      image: ubuntu-1604:201903-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 11.3
-     xcode: "11.3.0"
+     macos: # macOS 仮想マシンと Xcode バージョン 11.3 を指定します。
+       xcode: "11.3.0"
 # ...
 ```
 
@@ -205,7 +241,7 @@ jobs:
 ## イメージ
 {: #image }
 
-イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリ コンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージとして定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
+イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリ コンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージとして定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. 比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
 
  ```yaml
  version: 2
@@ -252,7 +288,10 @@ jobs:
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
-{:.tab.workflows.Server}
+{:.tab.workflows.Server_3}
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server_2}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
@@ -328,7 +367,78 @@ workflows:
 ```
 {% endraw %}
 
-{:.tab.workflows-example.Server}
+{:.tab.workflows-example.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Running tests
+          command: make test
+  build3:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Precompile assets
+          command: bundle exec rake assets:precompile
+#...
+workflows:
+  build_and_test: # name of your workflow
+    jobs:
+      - build1
+      - build2:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # see circleci.com/docs/2.0/workflows/ for more examples.
+      - build3:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # run build2 and build3 concurrently to save time.
+```
+{% endraw %}
+
+{:.tab.workflows-example.Server_2}
 {% raw %}
 ```yaml
 version: 2
@@ -471,7 +581,51 @@ jobs:
 ```
 {% endraw %}
 
-{:.tab.cache.Server}
+{:.tab.cache.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+    docker: # Each job requires specifying an executor
+    # (either docker, macos, or machine), see
+    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # and more examples.
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+      # template for an environment variable,
+      # see circleci.com/docs/2.0/caching/
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+```
+{% endraw %}
+
+{:.tab.cache.Server_2}
 {% raw %}
 ```yaml
 version: 2
@@ -482,42 +636,35 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      version: 2
-jobs:
-  build1:
-    docker:
-
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - save_cache: # キャッシュ キーで依存関係をキャッシュします。
+      - save_cache: # Caches dependencies with a cache key
+      # template for an environment variable,
+      # see circleci.com/docs/2.0/caching/
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      paths:
+          paths:
             - ~/circleci-demo-workflows
 
   build2:
     docker:
-
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - restore_cache: # キャッシュされた依存関係を復元します。
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: テストの実行
-          command: make test
-  build3:
-    docker:
-      - image: circleci/ruby:2.4-node
-      - image: circleci/postgres:9.4.12-alpine
-    steps:
-      - restore_cache: # キャッシュされた依存関係を復元します。
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: アセットのプリコンパイル
-          command: bundle exec rake assets:precompile
-#...
+      - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 {% endraw %}
@@ -561,39 +708,69 @@ jobs:
 ```
 {% endraw %}
 
-{:.tab.workspace.Server}
+{:.tab.workspace.Server_3}
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build1:
 #...
-    steps:    
-
-      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス 
-      # (workspace/echo-output) をワークスペースに維持します。 このパスは、絶対パスまたは
-      # working_directory からの相対パスでなければなりません。 This is a directory on the container which is
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
       # taken to be the root directory of the workspace.
-          これは、ワークスペースの
-      # ルート ディレクトリとなる、コンテナ上のディレクトリです。
           root: workspace
-            # ルートからの相対パスでなければなりません。
+            # Must be relative path from root
           paths:
             - echo-output
 
   build2:
 #...
     steps:
+
       - attach_workspace:
-        # Must be absolute path or relative path from working_directory
+        # 絶対パスまたは working_directory からの相対パスでなければなりません。
           at: /tmp/workspace
   build3:
 #...
     steps:
-      - store_artifacts: # 詳細については、circleci.com/ja/docs/2.0/artifacts/ を参照してください。
+      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
           path: /tmp/artifact-1
           destination: artifact-file
 #...
+```
+{% endraw %}
+
+{:.tab.workspace.Server_2}
+{% raw %}
+```yaml
+version: 2
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+
+      - attach_workspace:
+        # 絶対パスまたは working_directory からの相対パスでなければなりません。
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
           path: /tmp/artifact-1
           destination: artifact-file
 #...
@@ -609,7 +786,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 | キャッシュ    | 数か月                  | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。         | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
 {: class="table table-striped"}
 
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ## See also
 {: #see-also }
