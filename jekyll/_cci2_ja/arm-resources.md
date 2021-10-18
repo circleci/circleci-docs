@@ -72,7 +72,8 @@ workflows:
       - build-medium
       - build-large
 ```
-{:.tab.armblock.Server}
+
+{:.tab.armblock.Server_3}
 ```yaml
 # .circleci/config.yml
 version: 2.1
