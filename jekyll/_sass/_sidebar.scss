@@ -188,7 +188,8 @@ aside.full-height {
   min-height: 90vh;
   width: $rightbar-width;
   overflow-y: auto;
-  top: 111px;
+  // due to the Docs-Devhub merge experiment having a new header nav in treatment, the top property will vary depending on the variation the user is in, the logic is being implemented in the DevHubDocsNav script. The top property will be set here after the conclusion of the experiment depending on which variation we keep.
+  top: 65px; 
   font-size: 16px;
   transition: all 0.5s ease-in-out;
   max-height: 100vh;
