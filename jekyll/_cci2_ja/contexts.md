@@ -182,6 +182,7 @@ CircleCI Server の場合、管理者は **[Refresh Permissions (パーミッシ
 
 [承認ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#type) をワークフローに追加することで、制限付きコンテキストの使用を手動で承認するようワークフローを構成することができます。 承認ジョブより下流のジョブの実行を承認ユーザーを基に制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
 
+{:.tab.approvingcontexts.Cloud}
 ```yaml
 version: 2.1
 
@@ -197,6 +198,58 @@ workflows:
             - build
       - hold:
           type: approval # UI 上に手動承認ボタンを表示させる
+          requires:
+            - build
+      - deploy:
+          context: deploy-key-restricted-context
+          requires:
+            - build
+            - hold
+            - test
+```
+
+{:.tab.approvingcontexts.Server_3}
+```yaml
+version: 2.1
+
+# build, test, deploy の各ジョブの定義は省略
+
+workflows:
+  jobs:
+    build-test-deploy:
+      - build
+      - test:
+          context: my-restricted-context
+          requires:
+            - build
+      - hold:
+          type: approval # UI 上に手動承認ボタンを表示させる
+          requires:
+            - build
+      - deploy:
+          context: deploy-key-restricted-context
+          requires:
+            - build
+            - hold
+            - test
+```
+
+{:.tab.approvingcontexts.Server_2}
+```yaml
+version: 2
+
+# Jobs declaration for build, test and deploy not displayed
+
+workflows:
+  jobs:
+    build-test-deploy:
+      - build
+      - test:
+          context: my-restricted-context
+          requires:
+            - build
+      - hold:
+          type: approval # presents manual approval button in the UI
           requires:
             - build
       - deploy:
