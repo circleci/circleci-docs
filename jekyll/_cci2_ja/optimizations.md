@@ -72,7 +72,7 @@ version: 2.1
 jobs: # here we define two jobs: "build" and "test"
   build:
     docker: # the docker executor is used
-      - image: circleci/<language>:<version TAG> # An example docker image
+      - image: cimg/<language>:<version TAG> # An example docker image
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -81,7 +81,7 @@ jobs: # here we define two jobs: "build" and "test"
       - run: <command> # An example command
   test:
     docker: # same as previous docker key.
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -122,7 +122,7 @@ If your project has a large test suite, you can configure your build to use [`pa
 version: 2
 jobs:
   docker:
-    - image: circleci/<language>:<version TAG>
+    - image: cimg/<language>:<version TAG>
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
