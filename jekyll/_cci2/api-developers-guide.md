@@ -479,7 +479,7 @@ The following section details the steps you need to follow to download artifacts
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
     | grep -o 'https://[^"]*' \
-    | wget -v -i -
+    | wget --header="Circle-Token: $CIRCLECI_TOKEN" -v -i -
     ```
 
     **Note:** `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.

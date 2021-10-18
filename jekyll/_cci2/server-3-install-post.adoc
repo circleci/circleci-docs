@@ -28,7 +28,7 @@ For more information, and steps to complete these tasks see the https://circleci
 
 === Email Notifications 
 
-Build notifications are sent via email. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+Build notifications are sent via email. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
 
 * *Email Submission server hostname (required)* - Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
 
@@ -47,7 +47,9 @@ NOTE: StartTLS is used to encrypt mail by default, and you should only disable t
 
 Click the *Save config* button to update your installation and re-deploy server.
 
+ifndef::pdf[]
 ## What to read next
 
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+endif::[]
