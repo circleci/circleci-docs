@@ -50,7 +50,7 @@ Google Cloud SDK のツールを使用する前に、`gcloud` を承認する必
 
 GCR へのコンテナ イメージのプッシュに問題が発生している場合は、デフォルトの `service account` によって提供されるものよりもきめ細かい権限が必要とされている可能性があります。 権限の変更は、Cloud Storage の [IAM コンソール](https://console.cloud.google.com/iam-admin/iam/project)で許可することができます。
 
-Identity and Access Management (IAM) の権限については、Cloud Storage の[権限に関するドキュメント](https://cloud.google.com/storage/docs/access-control/iam-permissions)を参照してください。
+Refer to the Cloud Storage [permission documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions) to learn more about Identity and Access Management (IAM) permissions.
 
 ### Google Container Registry への認証
 {: #authenticating-to-google-container-registry }
@@ -58,14 +58,11 @@ Identity and Access Management (IAM) の権限については、Cloud Storage �
 Google のパブリック イメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
 
 ```yaml
-version: 2.1
+version: 2
 jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 カスタム イメージを使用している場合は、GCR に対して認証が必要です。 [`auth` キー](https://circleci.com/ja/docs/2.0/configuration-reference/#docker)を使用して、認証情報を指定します。
@@ -81,17 +78,25 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # 作成した JSON サービス アカウント、base64 にエンコードしない
 ```
 
-**Note:** base64エンコーディングが必要な場合は、以下のコマンドを使用してください。
+**Note:** If base64 encoding is required for your particular workflow, use the following command:
 
 ```bash
-cat <file> | base64 -w 0
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
 ### 承認
 {: #authorization }
 
 Use `gcloud` to authorize the Google Cloud SDK and set several default settings. Before executing this command, make sure to write the key to a file before running this command, otherwise, the key file will be interpreted as a .p12 file.
-
 
 ```yaml
 version: 2.1

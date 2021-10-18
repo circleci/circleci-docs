@@ -32,21 +32,21 @@ CircleCI では 2 種類の API トークンを作成できます。
   3. **[Create New Token (新しいトークンを作成する)]** ボタンをクリックします。
   4. **[Token name (トークン名)]** フィールドに、覚えやすいトークン名を入力します。
   5. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
-  6. トークンが表示されたら、別の場所にコピー & ペーストします。 トークンを再度表示することはできません。
+  6. After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
-パーソナル API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。
+To delete a personal API token, click the X in the **Remove** column and confirm your deletion in the dialog window.
 
 ### プロジェクト API トークンの作成
 {: #creating-a-project-api-token }
 
   1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
-  2. **[Permissions (権限)]** セクションで、**[API Permissions (API の権限)]** をクリックします。
-  3. **[Create Token (トークンを作成する)]** ボタンをクリックします。
+  2. In the **Permissions** section, click on **API Permissions**.
+  3. Click the **Create Token** button.
   4. ドロップダウン メニューからスコープを選択します。
   5. **[Token Label (トークン ラベル)]** フィールドに、覚えやすいラベルを入力します。
-  6. **[Add Token (トークンを追加する)]** ボタンをクリックします。
+  6. Click the **Add Token** button.
 
-プロジェクト API トークンを削除するには、**[[Remove (削除する)]** 列の [X] をクリックします。 確認ウィンドウが表示されたら、**[Remove (削除する)]** ボタンをクリックします。
+To delete a project API token, Click the **X** in the **Remove** column for the token you wish to replace. When the confirmation window appears, enter the text DELETE in the form and click the Delete API Token button.
 
 
 ### Rotating Personal and Project API Tokens
@@ -81,9 +81,9 @@ Because API Tokens can be shared, passed around between employees and teams, and
 ## 次のステップ
 {: #next-steps }
 
-API トークンは何らかの作業に活用されて初めて、その効力を発揮します。 たとえば以下のような用途が考えられます。
+Some possible usecases for an API token might be:
 
   - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)
-  - [ジョブを条件付きでトリガーする]({{ site.baseurl }}/ja/2.0/api-job-trigger/)
-  - [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/ja/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード)
+  - [Trigger Conditional Jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
+  - [Download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
   - ビルドに[環境変数を挿入する]({{ site.baseurl }}/ja/2.0/env-vars/#api-を使用した環境変数の挿入)

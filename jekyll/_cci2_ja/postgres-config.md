@@ -118,6 +118,8 @@ jobs:
           RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
+      いずれかのイメージを使用できます。
+      いずれかのイメージを使用できます。
       - image: postgres:9.6-jessie
         auth:
           username: mydockerhub-user
@@ -154,7 +156,7 @@ jobs:
   build:
     docker:
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.12
+      - image: circleci/golang:1.8-jessie
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -167,6 +169,8 @@ jobs:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
 
+    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
+
     environment:
       TEST_RESULTS: /tmp/test-results
 
@@ -176,50 +180,47 @@ jobs:
 
       - restore_cache:
           keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
+            - v1-pkg-cache
+
+      # Normally, this step would be in a custom primary image;
+      # we've added it here for the sake of explanation. run: go get github.com/lib/pq
+      - run: go get github.com/mattes/migrate
+      - run: go get github.com/jstemmer/go-junit-report
 
       - run:
-          name: Get dependencies
+          name: Postgres が準備できるまで待機
           command: |
-            go get -v
-
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n . sleep 1
+            done
+            echo Failed waiting for Postgres && exit 1
       - run:
-          name: Get go-junit-report for setting up test timings on CircleCI
-          command: |
-            go get github.com/jstemmer/go-junit-report
-            # Remove go-junit-report from go.mod
-            go mod tidy
-
-      #  Wait for Postgres to be ready before proceeding
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
+          name: 単体テストの実行
+          environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
+            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
           command: |
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
       - run: make
 
       - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
+          key: v1-pkg-cache
           paths:
-            - "/go/pkg/mod"
+            - "/go/pkg"
 
       - run:
-          name: Start service
+          name: サービスの開始
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
+            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
           command: ./workdir/contacts
           background: true
 
       - run:
-          name: Validate service is working
+          name: サービスが稼働していることのバリデーション
           command: |
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
@@ -313,4 +314,4 @@ VALUES (
 {: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/ja/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

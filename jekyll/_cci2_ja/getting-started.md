@@ -23,7 +23,7 @@ CircleCI ではじめてビルドを成功（グリーンビルド）させる�
 * ターミナルまたは `bash` に関する基本知識と、コマンド ラインの使用経験があると役立ちます。
 
 ## リポジトリを作成する
-{: #creating-a-repository }
+CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
 最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしても問題ありません。
 
@@ -35,7 +35,7 @@ CircleCI ではじめてビルドを成功（グリーンビルド）させる�
 ## CircleCI をセットアップする
 {: #setting-up-circleci }
 
-CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
+CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub で登録]** をクリックしてアカウントを作成します。
 
 1. CircleCI の[プロジェクト ページ](https://app.circleci.com/projects/)に移動します。
 1. 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
@@ -54,7 +54,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
 ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するのを確認できます。 実行結果を確認します。 パイプラインの緑色の **[Success (成功)]** ボタンをクリックして、実行について以下の部分を確認しましょう。
 
-![最初のパイプライン実行の成功]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
+![はじめてのパイプライン実行の成功]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
 1. **実行されたワークフローを確認する**: **[Success (成功)]** をクリックすると、実行されたジョブの一覧ページに移動します。 初めてのビルドであれば、(**1 つのワークフロー**内で自動的に実行される) **1 つのジョブ** だけが実行されています。  この例では、`welcome/run` という名前のジョブだけが実行されました。 [`welcome/run`] をクリックして、ジョブのステップを調査してみましょう。
 
@@ -203,13 +203,13 @@ workflows:
             - one
 ```
 
-ワークスペースの詳細については、[こちら](https://circleci.com/ja/docs/2.0/workflows/#%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B8%E3%83%A7%E3%83%96%E9%96%93%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%85%B1%E6%9C%89)を参照してください。
+Workspace に関する詳細は[こちら](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。
 
-### {% comment %} todo: job {% endcomment %}ビルドに SSH 接続する
+### SSH での{% comment %}TODO: Job {% endcomment %}ビルドへの接続
 {: #ssh-into-your-percent-comment-percent-todo-job-percent-endcomment-percentbuild }
 {:.no_toc}
 
-ターミナルの操作に慣れている場合は、CircleCI に直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
+ターミナルの操作に慣れている場合は、CircleCI のジョブに直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
 
 *SSH 鍵を GitHub アカウントに登録する必要があることにご注意ください。詳細はこちら: <https://help.github.com/articles/connecting-to-github-with-ssh/></p>
 
@@ -242,7 +242,7 @@ cat <file_name>      # ファイル <file_name> の内容を表示します。
 {: #see-also }
 {:.no_toc}
 
-Git フックを使用してコミットごとに CircleCI `config.yml` をバリデーションする方法については、[こちらのブログ記事](https://circleci.com/ja/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)を参照してください。
+Git フックを使用してコミットごとに CircleCI `config.yml` を検証する方法については、[こちらのブログ記事](https://circleci.com/ja/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)を参照してください。
 
 ### CircleCI
 {: #circleci }

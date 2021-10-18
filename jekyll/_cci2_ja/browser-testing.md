@@ -15,12 +15,14 @@ version:
 {:toc}
 
 ## 前提条件
-{: #prerequisites } {:.no_toc}
+{: #prerequisites }
+{:.no_toc}
 
 「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
 
 ## 概要
-{: #overview } {:.no_toc}
+{: #overview }
+{:.no_toc}
 
 コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザー ベースのテストは、変更が行われるたび、各デプロイの前、または特定のブランチで実行されるように構成できます。
 

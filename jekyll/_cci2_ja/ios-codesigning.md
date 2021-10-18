@@ -18,25 +18,25 @@ CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコ
 ## iOS プロジェクトの基本構成
 {: #basic-configuration-of-ios-projects }
 
-このドキュメントは、iOS プロジェクトまたは Mac プロジェクトが CircleCI 2.0 上に正しく構築されていること、また Bundle と fastlane を使用しており、`Gemfile`、`Appfile` および `Fastfile` がリポジトリにチェックインされていることを前提としています。
+このドキュメントは、iOS プロジェクトまたは Mac プロジェクトが CircleCI 2.0 上に正しく構築されていることを前提としています。 また Bundle と fastlane を使用しており、`Gemfile`、`Appfile` および `Fastfile` がリポジトリにチェックインされていることを前提としています。
 
-CircleCI 2.0 上で iOS プロジェクトまたは Mac プロジェクトをまだ構成していない場合、[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/2.0/testing-ios/)で構成手順を確認できます。
+CircleCI で iOS プロジェクトまたは Mac プロジェクトをまだ構成していない場合、[iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios/)で構成手順を確認できます。
 
 **Note:** CircleCI only officially supports Fastlane Match for codesigning. Other methods may be used, but are not guaranteed to work and are unsupported.
 
 ## fastlane match のセットアップ
 {: #setting-up-fastlane-match }
 
-コード署名は、ユーザーのアプリおよび App Store ビルドのアドホック ディストリビューションを生成するように構成する必要があります。
+コード署名は、ユーザーのアプリおよび App Store ビルドのアドホックディストリビューションを生成するように設定されている必要があります。
 
 [fastlane match](https://codesigning.guide/) は [fastlane ツール](https://fastlane.tools/)の 1 つであり、開発環境と CircleCI の両方でコード署名をシームレスに構成できます。 fastlane match は、ユーザーのすべてのコード署名キーとプロビジョニング プロファイルを GitHub リポジトリに格納し、必要なキーとプロファイルを 1 つのコマンドでダウンロードしてインストールします。
 
-In this example configuration, we will set up and use a git repository for storage.
+この構成例では、ストレージとしてgitリポジトリを設定して使用します。
 
 To set up Fastlane Match:
 
-* On your local machine, open Terminal and navigate to the root directory of your repository
-* Run `bundle exec fastlane match init`
+* **[Build Settings (ビルド設定)] -> [Code Signing Style (コード署名スタイル)]** を *[Manual (手動)]* に設定
+* **[Build Settings (ビルド設定)] -> [Development Team (開発チーム)]** を開発チーム ID に設定
 * Follow the instructions to configure the Match repository
 * After the above is complete, run `bundle exec fastlane match development` to generate and install the Development certificates and profiles
 * 次に `bundle exec fastlane match adhoc` を実行して、アドホック ディストリビューションのキーとプロファイルを生成してインストールします。
@@ -45,7 +45,7 @@ To set up Fastlane Match:
 {: #preparing-your-xcode-project-for-use-with-fastlane-match }
 {:.no_toc}
 
-match をセットアップする前に、ユーザーの Xcode プロジェクトのコード署名を以下のように構成していることを確認する必要があります。
+match を設定する前に、ユーザーの Xcode プロジェクトのコード署名が以下のように設定されていることを確認する必要があります。
 
 * **Signing & Capabilities -> Signing** uncheck *Automatically manage signing* for both Debug and Release
 * **Signing & Capabilities -> Provisioning Profile** choose the appropriate profile created by Fastlane Match (e.g., `match adhoc com.circleci.helloworld`)
@@ -54,7 +54,7 @@ match をセットアップする前に、ユーザーの Xcode プロジェク�
 {: #adding-match-to-the-fastlane-lane }
 {:.no_toc}
 
-CircleCI では、ユーザー アプリのアドホック ビルドを生成するたびに fastlane match を実行する必要があります。 The easiest way to do this is to add the `match` action to the lane which builds your app.
+CircleCI では、ユーザー アプリのアドホック ビルドを生成するたびに fastlane match を実行する必要があります。 これを行う最も簡単な方法は、アプリをビルドするレーンに `match` アクションを追加することです。
 
 **メモ:** `fastlane match` を正しく動作させるには、`Fastfile` の `before_all` ブロックに `setup_circle_ci` を追加する*必要があります*。 This ensures that a temporary Fastlane keychain with full permissions is used. Without using this you may see build failures or inconsistent results.
 
@@ -85,7 +85,7 @@ end
 {: #adding-a-user-key-to-the-circleci-project }
 {:.no_toc}
 
-GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。 
+GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクトリポジトリと証明書リポジトリまたはキーリポジトリの両方にアクセス権を持つユーザーキーを CircleCI プロジェクトに追加する必要があります。
 
 To add a user key:
 
@@ -103,9 +103,9 @@ app_identifier("tools.fastlane.app")
 username("user@fastlane.tools")
 ```
 
-ジェクト リポジトリおよびキー リポジトリにのみアクセス権を持つマシン ユーザーを作成し、そのマシン ユーザーを使用してユーザー キーを作成して、CircleCI プロジェクトに付与される GitHub アクセス権のレベルを下げることをお勧めします。
+プロジェクトリポジトリおよびキーリポジトリにのみアクセス権を持つマシンユーザーを作成し、そのマシンユーザーを使用してユーザーキーを作成して、CircleCI プロジェクトに付与される GitHub アクセス権のレベルを下げることをお勧めします。
 
-ユーザー キーを追加すると、CircleCI 上でプロジェクト リポジトリとコード署名証明書リポジトリ (またはキー リポジトリ) の両方が GitHub からチェック アウトできるようになります。
+ユーザーキーを追加すると、CircleCIはGitHubから プロジェクトのリポジトリとFastlane Matchのリポジトリの両方をチェックアウトできるようになります。
 
 ### 暗号化された環境変数に match パスフレーズを追加する
 {: #adding-the-match-passphrase-to-the-project }
@@ -113,9 +113,9 @@ username("user@fastlane.tools")
 
 GitHub リポジトリに格納してあるキーとプロファイルを fastlane match で復号化できるようにするには、match のセットアップ手順で設定した暗号化パスフレーズを CircleCI プロジェクトの暗号化された環境変数に追加する必要があります。
 
-CircleCI のプロジェクト設定で **[Build Settings (ビルド設定)] -> [Environment Variables (環境変数)]** に移動して `MATCH_PASSWORD` 変数を追加し、その値に暗号化パスフレーズを設定します。 Set its value to your encryption passphrase. 設定したパスフレーズは、暗号化されたまま格納されます。
+CircleCI のプロジェクト設定で **Environment Variables (環境変数)]** に移動して `MATCH_PASSWORD` 変数を追加します。 その値には、暗号化パスフレーズを設定してください。 設定したパスフレーズは、暗号化されたまま格納されます。
 
-### CircleCI 上で fastlane テスト レーンを起動する
+### CircleCIでのアプリのビルドとコード署名
 {: #invoking-the-fastlane-test-lane-on-circleci }
 {:.no_toc}
 
@@ -155,7 +155,7 @@ workflows:
 ## サンプルの設定ファイル
 {: #sample-configuration-files }
 
-The best practice configuration for setting up code signing for iOS projects is as follows:
+iOS プロジェクトおよび Mac プロジェクトに対してコード署名をセットアップする設定ファイルのベスト プラクティスは以下のとおりです。
 
 ```
 # fastlane/Fastfile
@@ -181,14 +181,16 @@ end
 
 ```yaml
 # .circleci/config.yml
-version: 2.1
+version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: "9.0"
+    working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
+    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -202,11 +204,14 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 11.3.0
+      xcode: "9.0"
+    working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
+    shell: /bin/bash --login -o pipefail
     steps:
+
       - checkout
       - run: bundle install
       - run:
@@ -216,8 +221,10 @@ jobs:
           path: output
 
 workflows:
+  version: 2
   build-test-adhoc:
     jobs:
+
       - build-and-test
       - adhoc:
           filters:
@@ -227,7 +234,7 @@ workflows:
             - build-and-test
 ```
 
-By setting the `FL_OUTPUT_DIR:` env, that will tell Fastlane to output the XCode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
+`FL_OUTPUT_DIR:` 環境変数を設定すると、fastlane はそのディレクトリに Xcode および fastlane ログを出力するようになり、対象のログがアーティファクトとしてアップロードされるため、トラブルシューティングが容易になります。
 
 ## GitHub 上のサンプル アプリケーション
 {: #example-application-on-github }

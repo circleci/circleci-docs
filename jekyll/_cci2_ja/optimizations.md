@@ -54,16 +54,16 @@ jobs:
 
 {% endraw %}
 
-Make note of the use of a `checksum` in the cache `key`; this is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. In the above example, the [`restore_cache`]({{site.baseurl}}/ja/2.0/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
+Make note of the use of a `checksum` in the cache `key`; this is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. In the above example, the [`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
 We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
-Consult the [caching document]({{site.baseurl}}/ja/2.0/caching) to learn more.
+Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 ## ワークフロー
 {: #workflows }
 
-Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/ja/2.0/workflows/).
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows/).
 
 **Note**: Workflows are available to all plans, but running jobs concurrently assumes that your plan provides multiple machines to execute on.
 
@@ -96,6 +96,7 @@ workflows: # Here we can orchestrate our jobs into a workflow
       - test
 ```
 
+
 You can view more examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
 
 ## ワークスペース
@@ -105,16 +106,16 @@ You can view more examples of workflows in the  [CircleCI demo workflows repo](h
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
-To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/ja/2.0/configuration-reference#attach_workspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/ja/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/2.0/configuration-reference#attach_workspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
-Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
+Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ## 並列処理
 {: #parallelism }
 
 **Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
 
-If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/ja/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -129,14 +130,14 @@ jobs:
     parallelism: 4
 ```
 
-Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs).
+Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).
 
 ## Resource class
 {: #resource-class }
 
-**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference#resource_class) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
+**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class) for a list of available classes, and for self hosted installations contact your system administrator for a list. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class) for a list of available classes, and for self hosted installations contact your system administrator for a list.
 
 Below is an example use case of the `resource_class` feature.
 
@@ -160,7 +161,7 @@ jobs:
 ## Docker layer caching
 {: #docker-layer-caching }
 
-**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrate to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
+**Note**: [The Performance plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
 DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
@@ -171,7 +172,15 @@ version: 2
 jobs:
  build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers # ここでは DLC は動作しません。キャッシュの状況は、イメージ レイヤーがどれだけ共有されているかによって決まります。
+      - image: circleci/node:9.8.0-stretch-browsers # ここでは DLC は動作しません。
+        キャッシュの状況は、イメージ レイヤーがどれだけ共有されているかによって決まります。
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -182,12 +191,12 @@ jobs:
       - run: docker build .
 ```
 
-Learn more about [Docker Layer Caching]({{site.baseurl}}/ja/2.0/docker-layer-caching)
+Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
 ## See also
 {: #see-also }
 {:.no_toc}
 
-- ビルドで構成可能な機能の一覧については、「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」を参照してください。
+- ビルドで構成可能な機能の一覧については、「[CircleCI を設定する]({{ site.baseurl}}/2.0/configuration-reference/)」を参照してください。
 - Coinbase から、「[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161) (Coinbase での継続的インテグレーション: CircleCI を最適化して処理速度を向上させ、ビルド時間を 75% 短縮)」というタイトルの記事が公開されています。
-- Yarn とキャッシュを使用してビルドを高速化する方法については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/yarn)を参照してください。
+- Yarn とキャッシュを使用してビルドを高速化する方法については、[こちらのドキュメント]({{site.baseurl}}/2.0/yarn)を参照してください。

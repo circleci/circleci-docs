@@ -24,9 +24,9 @@ version:
 
 ここでは、以下を前提としています。
 
-* You are using [Gradle](https://gradle.org/). [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
+* [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
 * Java 11 を使用している
-* You are using the Spring Framework. Spring Framework を使用している (このプロジェクトは [Spring Initializer](https://start.spring.io/) を使用して生成されています)
+* Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
 * アプリケーションをオールインワン uberjar として配布できる
 
 
@@ -45,14 +45,9 @@ jobs: # 一連のステップ
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker: # Docker でステップを実行します
+
       - image: circleci/openjdk:11.0.3-jdk-stretch # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
@@ -116,16 +111,14 @@ workflows:
 
 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-java-spring> からアクセスできます。
 
-ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Projects dashboard (プロジェクトの追加)](https://app.circleci.com/projects/){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
+ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in CircleCI and click the **Follow Project** button next to your project. 最後に `.circleci/config.yml` の内容をすべて削除します。
 
 また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。
-
-これで `config.yml` を最初からビルドする準備ができました。
 
 ## 設定ファイルの詳細
 {: #config-walkthrough }
 
-常にバージョンの指定から始めます。
+必ずバージョンの指定から始めます。
 
 ```yaml
 version: 2
@@ -147,7 +140,7 @@ jobs:
 
 テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
-また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
+また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 Gradleプロセスが終了した後に終了させるため、Gradleデーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
 ```yaml
 version: 2
@@ -182,7 +175,6 @@ version: 2
 ```yaml
 ...
     steps:
-
       - checkout
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
@@ -197,7 +189,6 @@ version: 2
 ```yaml
 ...
     steps:
-
       - run:
           name: Run tests in parallel # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
           # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します

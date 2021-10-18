@@ -23,10 +23,10 @@ version:
 jobs:
   build:
     steps:
-      # ... steps for building/testing app ...
+      # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:
-        version: 19.03.13
+          version: 19.03.13
 ```
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
@@ -37,7 +37,7 @@ jobs:
 {: #specifications }
 {:.no_toc}
 
-リモート Docker 環境の技術仕様は以下のとおりです (CircleCI Server をお使いの場合は、システム管理者にお問い合わせください)。
+リモート Docker 環境の技術仕様は以下のとおりです (CircleCI サーバーをお使いの場合は、システム管理者にお問い合わせください)。
 
 | CPU 数 | プロセッサー                    | RAM  | HD    |
 | ----- | ------------------------- | ---- | ----- |
@@ -48,7 +48,7 @@ jobs:
 {: #example }
 {:.no_toc}
 
-以下の例では、`machine`を使って、デフォルトのイメージでDockerイメージを構築する方法を示しています - この場合、リモートDockerを使用する必要はありません。
+以下の例では、`machine`を使って、デフォルトのイメージで Docker イメージを構築する方法を示しています - この場合、リモートDocker を使用する必要はありません。
 
 ```yaml
 version: 2
@@ -63,14 +63,14 @@ jobs:
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
          docker run -d --name db company/proprietary-db:1.2.3
 
-     # アプリケーション イメージをビルドします
+     # アプリケーション イメージをビルドします。
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
-     # イメージをデプロイします
+     # イメージをデプロイします。
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-以下の例では、Docker executorを使用して、リモートDockerで、[demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker)のDockerイメージを構築してデプロイしています。
+以下の例では、Docker Executorを使用して、リモートDockerで、[Docker のデモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージを構築してデプロイしています。
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
@@ -81,16 +81,15 @@ jobs:
       - image: circleci/golang:1.15
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      # ... steps for building/testing app ...
-
+      # ... アプリのビルド・テストに関する記述 ...
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
-
-      # build and push Docker image
+    
+      # Docker イメージをビルドしプッシュします。
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -141,7 +140,7 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**メモ:** `version` キーは、現在 CircleCI Server 環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ## 環境の分離
 {: #separation-of-environments }
@@ -163,7 +162,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 #...
 ```
 
-同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
+同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります。
 
 ```
 #...
@@ -192,17 +191,13 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
 
 ```
-- run: |
-    # start container with the application
-    # make sure you're not using `--rm` option otherwise the container will be killed after finish
-    docker run --name app app-image:1.2.3
-
-- run: |
-    # after application container finishes, copy artifacts directly from it
-    docker cp app:/output /path/in/your/job/space
+run: |
+  # アプリケーションとコンテナを開始します。
+  # <code>--rm</code> オプションは使用しません (使用すると、終了時にコンテナが強制終了されます)。
+  docker run --name app app-image:1.2.3
 ```
 
-It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
+また、https://github.com/outstand/docker-dockup やバックアップおよびリストア用の同様のイメージを使って、以下の例のようにコンテナをスピンアップさせることも可能です。 `circle-dockup.yml` の設定例:
 
 ```
 version: '2'
@@ -280,6 +275,6 @@ ssh remote-docker
 
 [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
 
-[primary-container]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
 
 [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
