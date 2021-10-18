@@ -458,10 +458,11 @@ orbs:
 Then call the `preboot-simulator` command, as shown in the example below:
 
 ```yaml
-- macos/preboot-simulator:
-    version: "15.0"
-    platform: "iOS"
-    device: "iPhone 13 Pro Max"
+steps:
+  - macos/preboot-simulator:
+      version: "15.0"
+      platform: "iOS"
+      device: "iPhone 13 Pro Max"
 ```
 
 It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
@@ -469,11 +470,12 @@ It is advisable to place this command early in your job to allow maximum time fo
 If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS Orb:
 
 ```yaml
-- macos/preboot-paired-simulator:
-    iphone-device: "iPhone 13"
-    iphone-version: "15.0"
-    watch-device: "Apple Watch Series 7 - 45mm"
-    watch-version: "8.0"
+steps:
+  - macos/preboot-paired-simulator:
+      iphone-device: "iPhone 13"
+      iphone-version: "15.0"
+      watch-device: "Apple Watch Series 7 - 45mm"
+      watch-version: "8.0"
 ```
 
 **Note:** It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
@@ -486,9 +488,9 @@ Often if your `scan` step fails, for example due to a test runner timeout, it is
 
 ```yaml
 steps:
-# ...
-- store_artifacts:
-  path: ~/Library/Logs/DiagnosticReports
+  # ...
+  - store_artifacts:
+    path: ~/Library/Logs/DiagnosticReports
 ```
 
 ### Optimizing Fastlane
