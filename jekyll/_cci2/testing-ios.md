@@ -246,9 +246,10 @@ orbs:
 Then, call the `switch-ruby` command with the version number required. For example, to switch to Ruby 2.6:
 
 ```yaml
-# ...
-- macos/switch-ruby:
-    version: "2.6"
+steps:
+  # ...
+  - macos/switch-ruby:
+      version: "2.6"
 ```
 
 Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
@@ -256,9 +257,10 @@ Replace `2.6` with the version you require from the Software Manifest file. You 
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
 ```yaml
-# ...
-- macos/switch-ruby:
-    version: "system"
+steps:
+  # ...
+  - macos/switch-ruby:
+      version: "system"
 ```
 
 **Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Xcode 11.6 images and earlier default to the System Ruby.
@@ -270,10 +272,11 @@ To switch back to the system default Ruby (the Ruby shipped by Apple with macOS)
 To switch to another Ruby version, add the following to the beginning of your job.
 
 ```yaml
-# ...
-- run:
-    name: Set Ruby Version
-    command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
 ```
 
 Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
@@ -281,10 +284,11 @@ Replace `3.0` with the version of Ruby required - you do not need to specify the
 To revert back to the system Ruby, add the following to the beginning of your job:
 
 ```yaml
-# ...
-- run:
-    name: Set Ruby Version
-    command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
@@ -294,10 +298,11 @@ To revert back to the system Ruby, add the following to the beginning of your jo
 To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
 ```yaml
-# ...
-- run:
-    name: Set Ruby Version
-    command: echo 'chruby ruby-2.6' >> ~/.bash_profile
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command: echo 'chruby ruby-2.6' >> ~/.bash_profile
 ```
 
 Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
@@ -309,10 +314,11 @@ Replace `2.6` with the version of Ruby required - you do not need to specify the
 To specify a version of Ruby to use, you can [create a file named `.ruby-version`, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
 
 ```yaml
-# ...
-- run:
-    name: Set Ruby Version
-    command:  echo "ruby-2.4" > ~/.ruby-version
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command:  echo "ruby-2.4" > ~/.ruby-version
 ```
 
 Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
