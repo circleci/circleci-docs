@@ -5,9 +5,9 @@
 # See GitHub docs for more:
 # https://help.github.com/articles/about-codeowners/
 
-*.md @circleci/docs
-*.adoc @circleci/docs
-*.pdf @circleci/docs
+*.md @circleci/docs @circleci/translations
+*.adoc @circleci/docs @circleci/translations
+*.pdf @circleci/docs @circleci/translations
 
 /src-js/** @circleci/docs-disco
 ./package*.json @circleci/docs-disco
