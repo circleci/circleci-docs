@@ -51,21 +51,14 @@ circleci namespace create <name> <vcs-type> <org-name>
 . 次のコマンドを実行して、名前空間内にランナー用のリソース クラスを作成します。
 + 
 ```
-circleci runner resource-class create <resource-class> <description>
+circleci runner resource-class create <resource-class> <description> --generate-token
 ``` 
 +
-例: `circleci runner resource-class create my-namespace/my-resource-class my-description`。
+For example, `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 NOTE: リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。
-. 次のコマンドを実行して、上記リソース クラスのための認証用トークンを作成します。 
 +
-```
-circleci runner token create <resource-class> <nickname>
-``` 
-+
-例: `circleci runner token create my-namespace/my-resource-class my-token`。 このコマンドを実行すると、認証トークンを含むランナー設定ファイルが生成され、表示されます。
-
-CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
+CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
 
 == ジョブ実行の要件
 
@@ -476,7 +469,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 PowerShell インターフェイスにインストール結果が出力されます。
 
-. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 Please fill the file out with the requested information (see <<Configuration file reference, 設定ファイルのリファレンス>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 Please fill the file out with the requested information (see <<Configuration file reference, Configuration file reference>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
 
 セットアップが完了すると、ローンチ エージェントが自動的に起動し、処理対象のジョブの検索を開始します。
 
@@ -484,7 +477,7 @@ PowerShell インターフェイスにインストール結果が出力されま
 
 「xref:runner-on-kubernetes.adoc[Kubernetes での CircleCI ランナーの使用]」を参照してください。
 
-== Configuration file reference
+== Configuration reference
 
 ローンチ エージェント本体、およびサーバーとエージェントの通信方法やタスク エージェントの起動方法の設定は、YAML ファイルを使用して行います。
 
@@ -497,27 +490,35 @@ runner:
   name: RUNNER_NAME
 ```
 
+NOTE: The launch agent can also be configured via environment variables. These will be prioritized over the YAML file, if set.
+
 === runner.name
+`$LAUNCH_AGENT_RUNNER_NAME`
 
 `RUNNER_NAME` には、このローンチ エージェントに割り当てる一意の名前を設定します。 CircleCI UI でのステータスやジョブ結果の確認時にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
 
 === api.auth_token
+`$LAUNCH_AGENT_API_AUTH_TOKEN`
 
 ここには、CircleCI でのローンチ エージェントの認証に使用するトークンを設定します。このトークンは、CircleCI CLI から生成できます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
 
 === runner.command_prefix
+`$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
 このプレフィックスを設定することで、タスク エージェント プロセスの起動方法をカスタマイズできます。 ここでカスタム スクリプトを使用すると、タスク ランナーの前後で任意のコマンドを実行できます。 指定した引数が実行され、完了時にスクリプトから正しい終了コードが返されるよう特に注意してください。
 
 === runner.working_directory
+`$LAUNCH_AGENT_RUNNER_WORK_DIR`
 
 ここでディレクトリを設定することで、ジョブごとに使用するデフォルトの作業ディレクトリを指定できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行えるよう権限が設定されている必要があります。 設定したディレクトリが存在しない場合は、タスク エージェントにそのディレクトリの作成権限を付与する必要があります。 設定値に `%s` を含めた場合、この変数はジョブごとに異なる値で置き換えられます。 設定した作業ディレクトリは自動的には削除されないことに注意してください。
 
 === runner.cleanup_working_directory
+`$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 この値を設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。 デフォルト値は `false` です。
 
 === runner.mode
+`$LAUNCH_AGENT_RUNNER_MODE`
 
 This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (single-task) or to continuously poll for new available jobs.
 
@@ -529,6 +530,7 @@ The possible values are:
 NOTE: The default value is continuous.
 
 === runner.max_run_time
+`$LAUNCH_AGENT_RUNNER_MAX_RUN_TIME`
 
 この値を設定することで、タスク エージェントの各ジョブについてデフォルトの最大実行時間を上書きできます。 値は、単位識別子付きの文字列で指定します。識別子は、時間単位の場合は `h`、分単位の場合は `m`、秒単位の場合は `s` を使用します。
 
@@ -554,12 +556,14 @@ NOTE: TERM シグナルの送信後、しばらく経ってもタスク エー�
 * "ドレイン" 中に、ローンチ エージェントが追加の TERM シグナルを受け取る。
 
 === runner.idle_timeout
+`$LAUNCH_AGENT_RUNNER_IDLE_TIMEOUT`
 
 This timeout will enable a launch agent to terminate if no task has been claimed within the given time period. The value is a string with the following unit identifiers: `h`, `m` or `s` for hours, minutes and seconds, respectively (e.g., `5m` is 5 minutes).
 
 NOTE: The default behaviour is to never time out due to inactivity.
 
 === runner.ssh.advertise_addr
+`$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
 
 This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
 
