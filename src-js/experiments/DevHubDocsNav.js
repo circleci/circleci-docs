@@ -23,8 +23,6 @@ $(() => {
 
       // aside.full-height used to adjust the top property for the sidenav while Docs-Devhub merge experiment is running
       $("aside.full-height").css('top', '111px');
-    } else {
-      $("aside.full-height").css('top', '65px');
     }
   })
 });
