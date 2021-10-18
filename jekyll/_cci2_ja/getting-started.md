@@ -23,7 +23,7 @@ CircleCI ではじめてビルドを成功（グリーンビルド）させる�
 * ターミナルまたは `bash` に関する基本知識と、コマンド ラインの使用経験があると役立ちます。
 
 ## リポジトリを作成する
-CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
+{: #creating-a-repository }
 
 最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしても問題ありません。
 
@@ -217,7 +217,10 @@ Workspace に関する詳細は[こちら](https://circleci.com/docs/2.0/workflo
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server-v2}
+{:.tab.switcher.Server_3}
+![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server_2}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
