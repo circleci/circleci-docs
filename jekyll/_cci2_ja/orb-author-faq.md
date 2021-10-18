@@ -56,8 +56,8 @@ Currently the `orb source` and `orb info` CircleCI CLI commands do not work for 
 * 回答: API キーのパラメーターとして `env_var_name` パラメーター型を使用してください。 このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
 
 Read more:
-* [環境変数名]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
+* [環境変数名]({{site.baseurl}}/ja/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices/)
 
 ## 環境変数
 {: #environment-variables }
@@ -69,8 +69,8 @@ Read more:
 Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
 
 Read more:
-* [環境変数名パラメーター型]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
+* [環境変数名パラメーター型]({{site.baseurl}}/ja/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices/)
 
 ## サポートされているプログラミング言語
 {: #supported-programming-languages }
@@ -128,8 +128,8 @@ An orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by
 A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
 
 Read more:
-* [CircleCI 設定ファイル言語の概要]({{site.baseurl}}/2.0/config-intro/)
-* [再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/)
+* [CircleCI 設定ファイル言語の概要]({{site.baseurl}}/ja/2.0/config-intro/)
+* [再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/)
 
 
 ## 関連項目
