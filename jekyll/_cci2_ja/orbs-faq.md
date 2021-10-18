@@ -10,7 +10,7 @@ version:
 
 よく寄せられるご質問や技術的な問題など、Orb の使用時に役立つ情報をまとめました。
 
-## Private orbs
+## プライベート Orb
 {: #private-orbs }
 
 * **Question:** Can orbs be made private?
