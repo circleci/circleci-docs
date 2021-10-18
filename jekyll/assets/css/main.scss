@@ -171,6 +171,23 @@ div.article-container{
       padding: 0 16px 0 16px;
       width: 100%;
   }
+
+  .tag-wrapper{
+	  display: inline-block;
+  }
+
+  .external-link-icon {
+	align-self: center;
+	margin: 0 0 0 5px;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+  }
+
+  .external-link-anchor {
+	display: flex;
+  }
+
   padding: 0 48px;
   width: calc(100% - #{$rightbar-width});
   max-width: 60em; // increase readability on large screens.
