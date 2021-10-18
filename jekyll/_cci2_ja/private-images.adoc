@@ -194,6 +194,8 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
+ifndef::pdf[]
 ## See also
 
 * https://circleci.com/docs/2.0/configuration-reference[設定ファイル リファレンス]
+endif::[]
