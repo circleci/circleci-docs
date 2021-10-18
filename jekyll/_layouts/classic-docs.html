@@ -53,13 +53,13 @@
 
         {% if page.toc != false %}
         <aside class="full-height">
-          <h5 class="toc-heading">On this page</h5>
+          <h6 class="toc-heading">On this page</h6>
           <div class="toc-indent">
             {{ content | toc_only }}
           </div>
           {% if page.suggested != false %}
           <div id="related-resources">
-            <h5 class="related-heading">Helpful resources</h5>
+            <h6 class="related-heading">Helpful resources</h6>
             <div class="related-indent">
               <ul class="section-nav">
                 {% for item in page.suggested %}
