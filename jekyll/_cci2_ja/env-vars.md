@@ -212,10 +212,10 @@ workflows:
 ```yaml
 steps:
   - run:
-      name: 環境変数のセットアップ
+      name: Setup Environment Variables
       command: |
-        echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
-        echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
+        echo 'export PATH=$GOPATH/bin:$PATH' >> $BASH_ENV
+        echo 'export GIT_SHA1=$CIRCLE_SHA1' >> $BASH_ENV
 ```
 
 各ステップで、CircleCI は `bash` を使用して `BASH_ENV` を取得します。 つまり、`BASH_ENV` が自動的にロードおよび実行されることで、挿入を使用して複数の `run` ステップで環境変数を共有できるようになります。
