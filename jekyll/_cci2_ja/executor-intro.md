@@ -40,12 +40,24 @@ steps:
         # Linux 仮想マシン環境で実行するコマンド
 ```
 
-{:.tab.machine.Server}
+{:.tab.machine.Server_3}
 ```
 jobs:
-  build:
-    machine:
+  build: # name of your job
+    machine: # executor type
       image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+
+    steps:
+      # Commands run in a Linux virtual machine environment
+```
+
+{:.tab.machine.Server_2}
+```
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+
     steps:
       # Commands run in a Linux virtual machine environment
 ```
@@ -95,7 +107,23 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+
+{:.tab.windowsblock.Server_3}
+```
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```
 jobs:
   build: # ジョブの名前
