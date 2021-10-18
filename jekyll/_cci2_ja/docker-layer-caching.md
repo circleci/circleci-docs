@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-Docker レイヤー キャッシュ (DLC) を利用すると、CircleCI で Docker イメージのビルド時間を短縮できます。 DLC は [Performance と Custom](https://circleci.com/ja/pricing/) の従量課金制プラン、または [CircleCI Server](https://circleci.com/ja/enterprise/) の環境でご利用になれます (ジョブ実行 1 回ごとに 200 クレジットが必要です)。 このドキュメントでは、以下のセクションに沿って、DLC について概説します。
+Docker レイヤー キャッシュ (DLC) を利用すると、CircleCI で Docker イメージのビルド時間を短縮できます。 DLC is available on the [Performance and Scale](https://circleci.com/pricing/) usage plans (credits are charged per run job) and on installations of [CircleCI server](https://circleci.com/enterprise/). このドキュメントでは、以下のセクションに沿って、DLC について概説します。
 
 * 目次
 {:toc}
