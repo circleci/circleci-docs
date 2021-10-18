@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
+パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
 
 パイプライン変数には、次の 2 つの種類があります。
 
@@ -22,16 +22,17 @@ version:
 
 パイプライン値はすべてのパイプライン構成で使用でき、事前に宣言することなく使用できます。
 
-| 値                          | 説明                                                                                    |
-| -------------------------- | ------------------------------------------------------------------------------------- |
-| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。 |
-| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                           |
-| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： https://github.com/circleci/circleci-docs              |
-| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                              |
-| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                    |
-| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                    |
-| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                             |
-| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字）                                                  |
+| 値                          | 説明                                                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。                                |
+| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                                                          |
+| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： https://github.com/circleci/circleci-docs                                             |
+| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                                                             |
+| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                                                   |
+| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                                                   |
+| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                                                            |
+| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字）                                                                                 |
+| pipeline.in_setup          | True if the pipeline is in the setup phase, i.e. running a [setup workflow]({{ site.baseurl }}/2.0/dynamic-config/). |
 {: class="table table-striped"}
 
 注: 多くの場合、`pipeline.git.base_revision` は、現在実行しているパイプラインより前のパイプラインを実行する SHA ですが、いくつか注意事項があります。 ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
@@ -45,6 +46,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
@@ -53,7 +57,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-注: `environment`キーで上記の方法で変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+注: `environment`キーで上記の方法で変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 ## 設定ファイルにおけるパイプライン パラメーター
 {: #pipeline-parameters-in-configuration }
@@ -66,7 +70,7 @@ jobs:
 * 整数
 * 列挙型
 
-詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax)」を参照してください。
+詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。
 
 パイプライン パラメーターは値で参照され、`pipeline.parameters`のスコープの下で設定ファイル内の変数として使用できます。
 
@@ -80,6 +84,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照 :
+    environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>
     steps:
@@ -198,7 +203,10 @@ workflows:
       - mytestjob
 
 jobs:
-...
+  mytestjob:
+    steps:
+      - checkout
+      - ... # job steps
 ```
 
 上記の例では、以下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
