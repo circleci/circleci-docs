@@ -22,12 +22,12 @@ verison:
 ## Orb の設定要素
 {: #orb-configuration-elements }
 
-CircleCI の[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config/)機能により、パラメーター化できる設定要素の定義や、その要素をプロジェクトの設定ファイル全体で再利用することが可能です。 [設定リファレンス]({{site.baseurl}}/2.0/configuration-reference/)機能をすべて理解してから、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)に移ることをお勧めします。
+CircleCI の[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config/)機能により、パラメーター化できる設定要素の定義や、その要素をプロジェクトの設定ファイル全体で再利用することが可能です。 [設定リファレンス]({{site.baseurl}}/ja/2.0/configuration-reference/)機能をすべて理解してから、 [再利用可能な設定リファレンス]({{site.baseurl}}/ja/2.0/reusing-config/)に移ることをお勧めします。
 
 ### コマンド
 {: #commands }
 
-コマンドには、 [パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする](https://circleci.com/docs/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
+コマンドには、 [パラメーター]({{site.baseurl}}/ja/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする](https://circleci.com/docs/ja/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
 
 例えば、AWS S3 Orb には、ファイルやオブジェクトを新しい場所にコピーする _コマンド_: `aws-s3/copy`があります。 AWS認証の詳細が環境変数として保存されている場合、このコマンドを設定で使用するための構文は単純です。
 
@@ -61,7 +61,7 @@ jobs:
 ### Executor
 {: #executors }
 
-Executor は、 [ジョブ]({{site.baseurl}}/2.0/orb-concepts/#jobs) を実行することができるパラメータ化された実行環境です。 CircleCIでは複数の [Executor オプション]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor)を提供しています。
+Executor は、 [ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#jobs) を実行することができるパラメータ化された実行環境です。 CircleCIでは複数の [Executor オプション]({{site.baseurl}}/ja/2.0/configuration-reference/#docker--machine--macos--windows-executor)を提供しています。
 
 - Docker
 - macOS
