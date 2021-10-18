@@ -136,10 +136,11 @@ jobs:
       - checkout # get the code from GitHub
       - install-shared-assets
       - node/install-packages:
+          pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
       - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
-          command: npm run webpack-prod
+          command: yarn webpack-prod
       - run:
           name: "Persist JS assets" # Move our JS into our workspace.
           command: |
@@ -184,7 +185,7 @@ jobs:
           key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
       - run:
           name: Install Node dependencies
-          command: cd src-api; npm install
+          command: cd src-api; yarn install
       - save_cache:
           key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
           paths:
@@ -227,6 +228,7 @@ jobs:
             sudo apt-get install cmake pkg-config
       - ruby-deps
       - node/install-packages:
+          pkg-manager: yarn
           cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
       - run:
           name: Run markdownlint with pronto
