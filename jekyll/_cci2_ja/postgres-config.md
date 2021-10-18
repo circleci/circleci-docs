@@ -17,7 +17,7 @@ PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.
 ## Example CircleCI configuration for a rails app with structure.sql
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
-If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access.
+`structure.sql` ファイルを使用して構成した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、circleci/ruby:2.4.1-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
 
 {% raw %}
 
@@ -88,18 +88,18 @@ jobs:
 
 {% endraw %}
 
-**Note:** An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
+**メモ:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker Hub などのレジストリにプッシュしてください。
 
 ### Example environment setup
 {: #example-environment-setup }
 {:.no_toc}
 
-In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+CircleCI 2.0 では、複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベース構成は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
 
 1.  DATABASE_URL 環境変数 (設定されている場合)
 2.  `config.yml` ファイル内の該当する環境の test セクションの構成 (通常、テスト スイートでは `test`)。
 
-The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
+この順序の具体例を以下に示します。ここでは、イメージの `environment` 設定を組み合わせると共に、シェル コマンドに `environment` 設定を追加してデータベース接続を有効にしています。
 
 ```yaml
 version: 2
@@ -118,8 +118,6 @@ jobs:
           RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
-      いずれかのイメージを使用できます。
-      いずれかのイメージを使用できます。
       - image: postgres:9.6-jessie
         auth:
           username: mydockerhub-user
@@ -146,7 +144,7 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 ## Example go app with postgresql
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+以下の構成例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)を参照してください。
 
 {% raw %}
 
@@ -237,7 +235,7 @@ jobs:
 ## Example mysql project.
 {: #example-mysql-project }
 
-The following example sets up MYSQL as a secondary container alongside a PHP container.
+以下の例では、PHP コンテナと共に、MYSQL をセカンダリ コンテナとしてセットアップしています。
 
 ```yaml
 version: 2
@@ -284,9 +282,9 @@ workflows:
       - build
 ```
 
-While it is possible to make MySQL as your primary and only container, this example does not. As a more practical use case, the example uses a PHP docker image as its primary container, and will wait until MySQL is up and running before performing any `run` commands involving the DB.
+MySQL をプライマリかつ唯一のコンテナにすることもできますが、この例ではそのようにしていません。 より実践的なユース ケースとして、この例では PHP Docker イメージをプライマリ コンテナとして使用し、MySQL が起動してから、データベースに関連する `run` コマンドを実行しています。
 
-Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at, `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
+データベースが起動したら、`mysql` クライアントをプライマリ コンテナにインストールします。これで、プロジェクトのルートにあるとしたダミー データ `sql-data/dummy.sql` に接続してインポートするコマンドを実行できます。 このダミー データには、例として一連の SQL コマンドが格納されています。
 
 ```sql
 DROP TABLE IF EXISTS `Persons`;
@@ -310,8 +308,8 @@ VALUES (
 ```
 
 
-## See also
+## 関連項目
 {: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を「[データベースを設定する]({{ site.baseurl }}/ja/2.0/databases/)」ページで紹介しています。
