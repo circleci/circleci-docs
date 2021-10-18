@@ -183,16 +183,15 @@ $sidebar-spacing-base: 5px;
 aside.full-height {
   position: sticky;
   right: 0;
-  padding: 50px 32px 112px 12px;
+  padding: 32px 32px 112px 12px;
   background: #ffffff;
   min-height: 90vh;
   width: $rightbar-width;
   overflow-y: auto;
-  top: 64px;
+  top: 111px;
   font-size: 16px;
   transition: all 0.5s ease-in-out;
   max-height: 100vh;
-  margin-top: 22px;
 
   @media(max-width: $toc-breakpoint) {
     display: none;
