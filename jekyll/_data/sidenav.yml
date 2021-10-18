@@ -130,15 +130,15 @@ en:
           link: 2.0/runner-overview/
         - name: Runner Installation
           link: 2.0/runner-installation/
-        - name: Runner Installation on Linux
+        - name: Linux Runner Installation
           link: 2.0/runner-installation-linux/
-        - name: Runner Installation on macOS
-          link: 2.0/runner-installation-mac/
-        - name: Runner Installation with Docker
-          link: 2.0/runner-installation-docker/
-        - name: Runner Installation on Windows
+        - name: Windows Runner Installation
           link: 2.0/runner-installation-windows/
-        - name: Runner Installation on Kubernetes
+        - name: macOS Runner Installation
+          link: 2.0/runner-installation-mac/
+        - name: Docker Runner Installation
+          link: 2.0/runner-installation-docker/
+        - name: Kubernetes Runner Installation
           link: 2.0/runner-on-kubernetes/
         - name: Upgrading Runner on Server
           link: 2.0/runner-upgrading-on-server/
