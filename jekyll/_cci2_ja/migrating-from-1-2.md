@@ -34,7 +34,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 `config-translation` エンドポイントを使用すると、1.0 の設定ファイルから 2.0 の設定ファイルへの変換をすぐに始めることができます。 詳細については、「[1.0 から 2.0 への config-translation エンドポイントを使用する]({{ site.baseurl }}/ja/2.0/config-translation)」を参照してください。
 
 ## 必須キーを構成する手順
-次のように `run` ステップに置き換えます。
+{: #steps-to-configure-required-keys }
 
 1. 既存の `circle.yml` ファイルをコピーして、プロジェクト リポジトリのルートにある新しい `.circleci` ディレクトリに置きます。
 
@@ -101,7 +101,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 8. <http://codebeautify.org/yaml-validator> で YAML をバリデーションして、変更をチェックします。
 
 ## 環境変数
-次のように置き換えます。
+{: #environment-variables }
 
 CircleCI 2.0 では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
@@ -199,7 +199,7 @@ dependencies:
     - <インストール済み依存関係>
 ```
 
-Is replaced with:
+次のように置き換えます。
 
 ```yaml
       - run:
@@ -214,7 +214,7 @@ Is replaced with:
     - "vendor/bundle"
 ```
 
-With the following, nested under `steps:` and customizing for your application as appropriate:
+次のように置き換えて `steps:` の下にネストし、実際のアプリケーションに合わせて適切にカスタマイズします。
 
 ```yaml
      - save_cache:
