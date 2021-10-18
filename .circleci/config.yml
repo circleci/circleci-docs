@@ -138,6 +138,9 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run: 
+          name: "Lint JS assets"
+          command: yarn lint
       - run:
           name: "Run tests"
           command: yarn test:ci
@@ -154,8 +157,6 @@ jobs:
           root: *workspace_root
           paths:
             - js
-
-
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
@@ -185,12 +186,12 @@ jobs:
       - ruby-deps:
           dir: src-api
       - restore_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "yarn.lock"}}
       - run:
           name: Install Node dependencies
           command: cd src-api; yarn install
       - save_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "yarn.lock"}}
           paths:
             - src-api/node_modules
       - run:
@@ -225,7 +226,7 @@ jobs:
           name: "Test Markdown Files"
           command: md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
       - run:
-          name: Install dependecies for pronto gem
+          name: Install dependencies for pronto gem
           command: |
             sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
