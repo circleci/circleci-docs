@@ -21,7 +21,6 @@ The Helm chart will spin up one or more pods of *the same runner resource class*
 If you want to have different runners specialized for different workloads, it is recommended to create different runner resource classes and rerun these instructions/have separate charts for each runner class you create.
 
 === Prerequisites
-* Be on Scale plan or trialing Scale plan. See above.
 * Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
 * Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
 
