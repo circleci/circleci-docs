@@ -30,7 +30,7 @@ commands:
      steps:
        - run:
            name: update submodules
-           command: git submodule update --init src-shared
+      command: git submodule update --init src-shared
   ruby-deps:
     description: "Runs specialized Ruby cache steps."
     parameters:
