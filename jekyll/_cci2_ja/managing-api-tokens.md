@@ -19,8 +19,8 @@ CircleCI では 2 種類の API トークンを作成できます。
   1. **パーソナル:** このトークンは CircleCI API とのやり取りに使用され、完全な読み取りアクセス権と書き込みアクセス権を付与します。
   2. **プロジェクト**: このトークンは、特定のプロジェクトに関する情報を提供し、読み取りアクセス権のみを付与します。 プロジェクト トークンには、*Status*、*Build Artifacts*、*All* の 3 つのスコープ オプションがあります。
     - *Status* トークン: プロジェクトのビルド ステータスへの読み取りアクセス権を付与します。 [ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)際に便利です。
-    - _Read Only_ tokens grant read only access to the project's API.
-    - _Admin_ tokens grant read and write access for the project's API.
+    - _Read Only_ トークンは、プロジェクトのAPIへの読み取り専用のアクセスを許可するものです。
+    - _Admin_ トークンは、プロジェクトのAPIに対する読み書きのアクセスを許可します。
 
 **メモ:** API トークンは、一度作成すると修正できません。 既存のトークンを変更するには、いったん削除してから再作成する必要があります。
 
@@ -32,7 +32,7 @@ CircleCI では 2 種類の API トークンを作成できます。
   3. **[Create New Token (新しいトークンを作成する)]** ボタンをクリックします。
   4. **[Token name (トークン名)]** フィールドに、覚えやすいトークン名を入力します。
   5. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
-  6. After the token appears, copy and paste it to another location. You will not be able to view the token again.
+  6. トークンが表示されたら、別の場所にコピー & ペーストします。 You will not be able to view the token again.
 
 To delete a personal API token, click the X in the **Remove** column and confirm your deletion in the dialog window.
 
@@ -40,11 +40,11 @@ To delete a personal API token, click the X in the **Remove** column and confirm
 {: #creating-a-project-api-token }
 
   1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
-  2. In the **Permissions** section, click on **API Permissions**.
-  3. Click the **Create Token** button.
+  2. **[Permissions (権限)]** セクションで、**[API Permissions (API の権限)]** をクリックします。
+  3. **[Create Token (トークンを作成する)]** ボタンをクリックします。
   4. ドロップダウン メニューからスコープを選択します。
   5. **[Token Label (トークン ラベル)]** フィールドに、覚えやすいラベルを入力します。
-  6. Click the **Add Token** button.
+  6. **[Add Token (トークンを追加する)]** ボタンをクリックします。
 
 To delete a project API token, Click the **X** in the **Remove** column for the token you wish to replace. When the confirmation window appears, enter the text DELETE in the form and click the Delete API Token button.
 
