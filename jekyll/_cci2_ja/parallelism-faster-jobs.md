@@ -29,10 +29,10 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 4
 ```
 
@@ -81,10 +81,10 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 4
     steps:
       - run:
@@ -204,7 +204,7 @@ CircleCI でテスト分割を活用するには、実行するテストの一�
       # manage.py テストに合わせた形式にファイルパスを変更
       TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
       echo $TESTFILES
-      pipenv run python manage.py test --verbosity=2 $TESTFILES  
+      pipenv run python manage.py test --verbosity=2 $TESTFILES
 ```
 
 ## その他のテスト分割方法
