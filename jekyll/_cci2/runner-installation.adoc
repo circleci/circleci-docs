@@ -10,13 +10,6 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale
-plan] and with https://circleci.com/pricing/server/[server]. Please reach out
-to your sales representative (or https://circleci.com/contact-us/?cloud[contact
-us]) for information on how to sign up for the Scale plan or server.
-
-// This page describes how to install CircleCI runner on Linux, macOS, Docker, and Windows platforms. For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
-
 toc::[]
 
 == Prerequisites
@@ -137,6 +130,8 @@ Please refer to the platform-specific installation instructions:
 * https://circleci.com/docs/2.0/runner-installation-windows[Windows]
 * https://circleci.com/docs/2.0/runner-installation-docker[Docker]
 * https://circleci.com/docs/2.0/runner-on-kubernetes/[Kubernetes]
+
+For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
 
 == Configuration reference
 
