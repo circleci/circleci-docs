@@ -96,20 +96,6 @@ collections:
     permalink: /1.0/:path/
     prefix: "/1.0"
     selectorName: "1.0"
-  archive:
-    name: "Archive"
-    site_section: true
-    output: true
-    permalink: /archive/:path/
-    prefix: "/archive"
-    selectorName: "archive"
-  ccie:
-    name: "Enterprise Docs"
-    site_section: true
-    output: true
-    permalink: /enterprise/:path/
-    prefix: "/enterprise"
-    selectorName: "Enterprise"
   cci2:
     name: "2.0 Docs"
     site_section: true
