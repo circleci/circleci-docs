@@ -1,16 +1,16 @@
+/* eslint-disable no-unused-vars */
+
 import * as Cookie from 'js-cookie';
 import * as highlightjsBadge from 'highlightjs-badge';
 // site files
 import OptimizelyClient from './services/optimizely.js';
 import AnalyticsClient from './services/analytics.js';
 import * as search from './services/instantsearch.js';
-import * as lang from './services/lang.js'
+import * as lang from './services/lang.js';
 import * as Site from './site';
-
 
 // imports all experiments
 import * as Experiments from './experiments';
-
 
 search.init();
 lang.init();
