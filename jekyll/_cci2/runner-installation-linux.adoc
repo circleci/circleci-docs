@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation for Linux
+= CircleCI Runner Installation on Linux
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

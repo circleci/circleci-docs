@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner on Kubernetes
+= CircleCI Runner Installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

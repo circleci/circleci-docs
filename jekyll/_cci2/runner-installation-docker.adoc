@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Installing the CircleCI Runner with Docker
+= CircleCI Runner Installation with Docker
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
