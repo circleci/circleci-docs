@@ -15,7 +15,7 @@ version:
 toc::[]
 
 ## Orb の管理
-Orb には、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 また、https://circleci.com/docs/ja/2.0/managing-api-tokens/が必要です。 `--host` オプションを使用してローカル リポジトリの場所を指定することで、パブリック クラウドの Orb ではなくローカル サーバーの Orb にアクセスできます。 For
+Orb には、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal api token]. `--host` オプションを使用してローカル リポジトリの場所を指定することで、パブリック クラウドの Orb ではなくローカル サーバーの Orb にアクセスできます。 For
 example, if your server installation is located at `\http://circleci.somehostname.com`, then you can run orb commands
 local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
 
