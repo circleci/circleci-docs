@@ -3,21 +3,37 @@ version:
 - Server v3.x
 - サーバー管理
 ---
-= CircleCI Server v3.x 外部サービスの構成
+= CircleCI Server v3.x 外部サービスの設定
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
+このドキュメントでは、CircleCI Server 3.x のインストール で使用する以下の外部サービスの設定方法について説明します。 このガイドで説明している設定は、KOTS の管理者コンソールで確認できます。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>`
+
+* PostgreSQL
+* MongoDB
+* Vault
+
 toc::[]
 
-== CircleCI Server の外部データベースと Vault のセットアップ
-このドキュメントでは、CircleCI Server 3.0 で使用する以下の外部サービスの構成方法について説明します。
-
-* PostgreSQL v12.6
-
 == PostgreSQL
+
+NOTE: ご自身の PostgresSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。 
+
+.外部 PostgreSQL
+image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
+
+外部 PostgreSQL インスタンスの使用を選択した場合は、以下のフィールドに入力してください。 
+
+* *PostgreSQL Service Domain（必須）*: PostgreSQL インスタンスのドメインまたは IP アドレス 
+
+* *PostgreSQL Service Port (必須)*: PostgreSQL インスタンスのポート 
+
+* *PostgreSQL Service Username (必須)*: PostgreSQL インスタンスへのアクセス権を持つユーザー 
+
+* *PostgreSQL Service Password (必須)*: PostgreSQL インスタンスへのアクセスに使用されるユーザーパスワード 
 
 === PostgreSQL のベスト プラクティス
 
@@ -38,7 +54,7 @@ toc::[]
 |8 コア
 |16 GB 
 |100 GB 
-| 1 Gbps
+| 1Gbps
 
 |50 ～ 250 名               
 |2                         
@@ -61,7 +77,7 @@ toc::[]
 |1 TB   
 |10 Gbps
 
-|5000 名超                  
+|5000名以上                  
 |3                         
 |8 コア
 |32 GB 
@@ -69,49 +85,8 @@ toc::[]
 |10 Gbps
 |===
 
-=== データベースの準備
-外部化済みの PostgreSQL インスタンスを新しい CircleCI Server 3.x システムの一部として構成する場合、PostgreSQL インスタンスにログインして以下のコマンドを実行することをお勧めします。 別の方法を使用する場合は、CircleCI Server 3.x の初回実行前に、データベースと拡張機能を必ず以下のように構成してください。
-
-```sql
-    CREATE DATABASE circle;
-    \connect circle
-    CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE contexts;
-    \connect contexts
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE conductor_production;
-    \connect conductor_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE contexts_service_production;
-    \connect contexts_service_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE cron_service_production;
-    \connect cron_service_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE domain;
-    CREATE DATABASE permissions;
-    \connect permissions
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE vms;
-    \connect vms
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE orbs;
-    \connect orbs
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE orb_analytics;
-    \connect orb_analytics
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE builds_service;
-    \connect builds_service
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE distributor;
-    \connect distributor
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-```
-
 === PostgreSQL のバックアップ
-PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメントがhttps://www.postgresql.org/docs/12/backup.html[こちら]で提供されています。
+PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント（https://www.postgresql.org/docs/12/backup.html[こちら]) が提供されています。
 
 CircleCI では、以下を行うことを強くお勧めしています。
 
@@ -119,3 +94,43 @@ CircleCI では、以下を行うことを強くお勧めしています。
 * バックアップを少なくとも 30 日間保持する
 * データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
 * CircleCI Server のアップグレードを行う前には毎回バックアップを行う
+
+== MongoDB
+
+NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。 
+
+.外部 MongoDB
+image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
+
+外部 MongoDB インスタンスの使用を選択した場合は、以下のフィールドに入力してください。 
+
+* *[MongoDB connection host(s) or Ip(s)(必須)]*: MongoDB インスタンスのホスト名または IP。  コロンによるポートの指定と、シャード インスタンスに対する複数のホストの両方がサポートされています。
+
+* *[Use SSL for connection to MongoDB (必須)]*: 外部 MongoDB インスタンスへの接続に SSL を使用するかどうかを指定します。
+
+* *[Allow insecure TLS connections (必須)]*: 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 ただし、この設定はセキュアではありません。可能な限り有効な CA によって署名された TLS 証明書を使用することをお勧めします。
+
+* *MongoDB  user  (必須)*: 使用するアカウントのユーザー名。 このアカウントには dbAdmin ロールが指定されている必要があります。
+
+* *MongoDB  password (必須)*: 使用するアカウントのパスワード。
+
+* *MongoDB authentication source database (必須)*: アカウント情報を保持するデータベース。通常は管理。
+
+* *MongoDB authentication mechanism (必須)*: 使用する認証メカニズム。通常は SCRAM-SHA-1。
+
+* *[Additional connection options (オプション)]*: 使用する他の接続オプション。 This needs to be formatted as a query string (`key=value` pairs, separated by `&``, special characters need to be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+
+== Vault
+
+.外部 Vault
+image::server-3-external-vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
+
+外部 Vault インスタンスの使用を選択した場合は、以下のフィールドに入力してください。  
+
+* *URL*: VaultサービスのURL
+
+* *Transit Path*: Vault シークレットの Transit パス
+
+* *Token*: Vault のアクセストークン
+
+

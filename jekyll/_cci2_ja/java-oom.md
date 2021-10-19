@@ -37,7 +37,7 @@ You can see how much memory your container is allocated, and how much it has use
 ## 手動でのメモリ制限
 {: #manual-memory-limits }
 
-Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#java-環境変数を使用したメモリ制限の設定)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#java-oom-エラーのデバッグ)を確認します。
+Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
 
 ## Java 環境変数を使用したメモリ制限の設定
 {: #using-java-environment-variables-to-set-memory-limits }
@@ -58,7 +58,7 @@ Even with cgroup support, the JVM can still use too much memory, e.g. if it exec
 | CLI 引数                                    | 1    | no     | no    | no     | no   |
 {:class="table table-striped"}
 
-T上記の各環境変数が優先される条件について説明します。
+上記の各環境変数が優先される条件について説明します。
 
 ### `_JAVA_OPTIONS`
 {: #javaoptions }
@@ -108,7 +108,7 @@ See the Maven documentation for [memory settings](http://maven.apache.org/config
 
 Java OOM エラーのデバッグを行っても、たいていの場合 `exit code 137` のエラーしか見つかりません。
 
-`-XX:MaxRAMPercentage=NN` または `-Xmxn` がアプリケーションのビルドを完了できる程度に十分に大きく、かつ他のプロセスが CircleCI ビルド コンテナの残りのメモリを使用できる程度に小さくなるように設定してください。
+Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
 
 Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the [cgroup visibility change](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
 
@@ -117,5 +117,4 @@ Even if the JVM's maximum heap size is larger than the job's limit, the garbage 
 ## 関連項目
 {: #see-also }
 
-[言語ガイド: Java]({{ site.baseurl }}/ja/2.0/language-java/
-[言語ガイド: Android]({{ site.baseurl }}/ja/2.0/language-android/)
+[Java Language Guide]({{ site.baseurl }}/ja/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/ja/2.0/language-android/)

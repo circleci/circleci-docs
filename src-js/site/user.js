@@ -2,6 +2,13 @@ import Cookies from 'js-cookie';
 
 function setUserData(userData) {
   window.userData = userData;
+  const {name, jekyllProperties} = window.currentPage;
+  if (window.userData.created_at) {
+    AnalyticsClient.trackPage(name, {...jekyllProperties, user_account_created_at: userData.created_at})
+  } else {
+    AnalyticsClient.trackPage(name, jekyllProperties)
+  }
+
   // emit an event to let the system know that userData is ready/has changed
   const userDataReady = new CustomEvent("userDataReady");
   window.dispatchEvent(userDataReady);

@@ -6,6 +6,7 @@ description: "リポジトリのステータスおよびテスト パフォー�
 order: 41
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -13,12 +14,12 @@ version:
 {: #overview }
 
 
-CircleCI Insights ダッシュボードでは、リポジトリのビルド プロセスについて状態と使用状況の概要を確認でき、開発方針の検討に役立てられます。 _Insights ダッシュボード_には、クレジット使用量、成功率、パイプラインの実行時間、その他の関連情報に関する時系列データの概要が示されます。
+CircleCI Insights ダッシュボードでは、リポジトリのビルド プロセスの状態と使用状況の概要を確認することができ、開発方針の検討に役立てられます。 _Insights ダッシュボード_には、クレジット使用量、成功率、パイプラインの実行時間、その他の関連情報に関する時系列データの概要が示されます。
 
-ここでは、クラウド版 CircleCI と CircleCI Server それぞれでの Insights ダッシュボードへのアクセス方法と使用方法について説明します。
+ここでは、クラウド版 CircleCI と CircleCI Server それぞれの Insights ダッシュボードへのアクセス方法と使用方法について説明します。
 
-## 使用法 (クラウド版 CircleCI)
-{: #usage-circleci-cloud }
+## 使用方法
+{: #usage }
 
 CircleCI Web アプリケーションのサイドバーから、組織全体のインサイトにアクセスできます。
 
@@ -61,12 +62,12 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 
 ---
 
-## CircleCI Server のインサイト
-{: #circleci-server-insights }
+## CircleCI Server v2.19.x のインサイト
+{: #circleci-server-v219x-insights }
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ 注意</span></p>
-  <span> 以下のセクションは、CircleCI <i>Server</i> 製品の [Insights (インサイト)] ページの使用法に関するものです。 </span>
+  <span> 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。 </span>
 </div>
 
 ### 概要
@@ -74,7 +75,7 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 
 CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態を示すダッシュボードが表示されます。 ここでは、デフォルト ブランチのビルド時間の中央値、キュー時間の中央値、最終ビルド時刻、成功率、並列処理数を確認できます。 **注:** ワークフローを構成している場合、デフォルト ブランチに対して実行されるすべてのジョブがグラフに表示されます。
 
-![header]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
 
 この画面では、ビルドに関する以下のデータを確認できます。
 
@@ -91,7 +92,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 プロジェクト別のインサイトのページでは、選択したブランチにおけるビルド ステータスおよびビルド パフォーマンスのグラフを確認できます。
 
-![header]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
 
 - **[Build Status (ビルド ステータス)]:** デフォルト ブランチの直近 50 件のビルドが表示されます。 右上隅でブランチを選択すると、そのブランチに関する 100 件を超えるビルド・ジョブのステータスを確認できます。
 
@@ -103,6 +104,6 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 失敗が多いテストのインサイトを得る方法については、「[テスト メタデータの収集]({{ site.baseurl }}/2.0/collect-test-data/)」を参照してください。
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
-Take the [insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.
+Circle CI Academy の[インサイトコース](https://academy.circleci.com/insights-course?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。

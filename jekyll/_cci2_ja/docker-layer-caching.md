@@ -38,7 +38,7 @@ Docker レイヤー キャッシュは、[`machine` Executor]({{ site.baseurl }}
 
 **注:** DLC は、ビルド コンテナとして使用する Docker イメージには影響を**及ぼしません**。 そのため、ジョブの_実行_に使用するコンテナは、[`docker` Executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) を使用している場合、`image` キーで指定したものが [Jobs (ジョブ)] ページの [Spin up Environment (環境のスピンアップ)] ステップに表示されます。
 
-DLC は、docker build、docker compose などの Docker コマンドを使用して独自の Docker イメージを作成する場合にのみ有効です。 すべてのビルドが初期環境をスピンアップするのにかかる実測時間は短縮されません。
+DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
 ``` YAML
 version: 2
@@ -245,4 +245,4 @@ Dockerfile の一部を変更し、それによってイメージの一部が変
 
 ## Learn More
 {: #learn-more }
-Take the [DLC course](https://academy.circleci.com/docker-layer-caching) with CircleCI Academy to learn more.
+Take the [DLC course](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) with CircleCI Academy to learn more.

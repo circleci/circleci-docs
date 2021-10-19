@@ -7,10 +7,10 @@ description: "CircleCI 2.0 のビルド環境の構成"
 
 お使いの環境に固有の作業手順については、以下のドキュメントを参照してください。
 
-| ドキュメント                                                                                                   | 説明                                                                  |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/executor-types/">Executor タイプの選び方</a>                                                                                | `docker`、`windows`、`machine`、`macos` の各 Executor の違い、メリットとデメリット、使用例 |
-| <a href="{{ site.baseurl }}/ja/2.0/caching/">依存関係のキャッシュ</a>                                                                                | 高コストなフェッチ操作が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法           |
+| ドキュメント                                                                                                      | 説明                                                                  |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/executor-types/">Executor タイプの選び方</a>                                                                                   | `docker`、`windows`、`machine`、`macos` の各 Executor の違い、メリットとデメリット、使用例 |
+| <a href="{{ site.baseurl }}/ja/2.0/caching/">依存関係のキャッシュ</a>                                                                                   | 高コストなフェッチ操作が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法           |
 | [CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-jobs/)                                             | ローカル環境でジョブを実行する手順                                                   |
 | [CircleCI での Yarn の使用]({{ site.baseurl }}/ja/2.0/yarn/)                                                     | Yarn のインストール方法と Yarn パッケージのキャッシュ方法                                  |
 | [CircleCI 上で Snapcraft を使用した Snap パッケージのビルドとパブリッシュ]({{ site.baseurl }}/ja/2.0/build-publish-snap-packages/) | Snapcraft のセットアップと、Snap パッケージのビルドからパブリッシュまでを解説した完全ガイド               |
@@ -48,6 +48,6 @@ description: "CircleCI 2.0 のビルド環境の構成"
 | <a href="{{ site.baseurl }}/ja/2.0/hello-world-windows/">macOS での Hello World</a> | macOS Executor と CircleCI を利用する方法 |
 {: class="table table-striped"}
 
-このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。
+We’re thrilled to have you here. Happy building!
 
 _CircleCI チーム_

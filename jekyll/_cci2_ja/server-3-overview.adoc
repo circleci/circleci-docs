@@ -14,11 +14,14 @@ toc::[]
 
 == はじめに
 
-CircleCI Server v{serverversion} は、GCP または AWS の Kubernetes クラスタにインストールできる継続的インテグレーション & 継続的デリバリー (CI/CD) プラットフォームです。
+CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 
 
-CircleCI Server アプリケーションのコアは、Kubernetes 内で実行されます。
+CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提供しますが、お客様のKubernetes クラスタ内で動作します。 
 
-アプリケーションは、ロード バランサーを使用して 4 つのサービスを公開します。 このうち 3 つは、Nomad クラスタおよび VM に接続するための VPC 内部ロード バランサーです。 必要に応じ、フロントエンド ロード バランサーを非公開にして、外部インターネットからのアクセスを遮断してもかまいません。 For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
+.CircleCI Server v3.x のアーキテクチャ
+image::server-3-architecture-diagram.png[サービス Architecture]
+
+CircleCI Server アプリケーションは、ロードバランサーを使って4つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -31,42 +34,80 @@ CircleCI Server アプリケーションのコアは、Kubernetes 内で実行�
 | フロントエンド GUI プロキシおよび API
 | 外部
 | 80、443
-| Web アプリケーションを公開します。
+| Web アプリケーションを公開する
 
 | Nomad コントロール プレーン
 | 内部
 | 4647
-| Nomad ランナーの RPC プロトコルを公開します。
+| Nomad ランナーの RPC プロトコルを公開する
 
 | 出力プロセッサ
 | 内部
 | 8585
-| Nomad ランナーの出力を取り込みます。
+| Nomad ランナーの出力を取り込む
 
 | VM サービス
 | 内部
 | 3000
-| 仮想マシンをプロビジョニングします。
+| 仮想マシンをプロビジョニングする
 |===
 
-CircleCI Server では、https://www.nomadproject.io/[Nomad スケジューラ]を使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+このアプリケーションでは、いくつかの外部ポートが公開されています。 これらのポートは、以下の表に記載されている様々な機能に使用されます。 
 
-ジョブのアーティファクトと出力ファイルは、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| ポート番号
+| プロトコル
+| 方向
+| 送信元/送信先
+| 使用
+| 備考
+
+| 80
+| TCP
+| インバウンド
+| エンド ユーザー
+| HTTP Web アプリ トラフィック
+|
+
+| 443
+| TCP
+| インバウンド
+| エンド ユーザー
+| HTTP Web アプリ トラフィック
+|
+
+| 8800
+| TCP
+| インバウンド
+| 管理者
+| 管理者コンソール
+|
+
+| 22
+| TCP
+| インバウンド
+| 管理者
+| SSH
+| 踏み台ホストでのみ必要
+
+| 64535 ～ 65535
+| TCP
+| インバウンド
+|
+| ビルドへの SSH 接続
+| Nomad クライアントでのみ必要
+|===
+
+CircleCI Server では、https://www.nomadproject.io/[Nomad]スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+
+ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
 オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
 
-CircleCI Server 3.x の構成とデプロイには https://kots.io/[KOTS] を使用します。
+== サービスs
 
-== アーキテクチャ
-CircleCI Server 3.x のアーキテクチャを次図に示します。 The available services
-are described in greater detail in the <<サービス>> section.
-
-.CircleCI Server v3.x のアーキテクチャ
-image::server-3-architecture-diagram.png[サービスs Architecture]
-<<<
-
-== Services
-
-CircleCI Server 3.0 は、次に示すサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
+CircleCI Server 3.0 は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -79,7 +120,7 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 
 | api-service
 | アプリ コア
-| GraphQL API を提供します。 この API は、多くのWeb フロントエンドのレンダリング データを提供します。
+| GraphQL API を提供します。 この API は、Web フロントエンドのレンダリング データを多く提供します。
 | 多くの UI 要素 (例: コンテキスト) が完全に機能しなくなります。
 |
 
@@ -122,7 +163,7 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 | circleci-redis
 | 実行
 | リクエストのキャッシュおよびレート制限の計算のために、一時的なデータ (ビルド ログなど) をキャッシュします。
-| キャッシュを適切に行えない場合、VCS の呼び出しが多くなり VCS からレート制限を適用されることがあります。
+| キャッシュを適切に行えない場合、VCS の呼び出しが多くなり VCS からレート制限が適用されることがあります。
 |
 
 | circleci-telegraf
@@ -146,7 +187,7 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 | contexts-service
 | アプリ コア
 | 暗号化されたコンテキストを保存、提供します。
-| コンテキストを使用するすべてのビルドに失敗するようになります。
+| コンテキストを使用するすべてのビルドが失敗するようになります。
 |
 
 | cron-service
@@ -158,13 +199,13 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 | dispatcher
 | 実行
 | ジョブをタスクに分割し、実行用にスケジューラーに送信します。
-| Nomad にジョブが送信されなくなります。 run キューのサイズが増加しますが、著しいデータ損失が起きることはありません。
+| Nomad にジョブが送信されなくなります。 run キューのサイズは増加しますが、著しいデータ損失が起こることはありません。
 |
 
 | domain-service
 | アプリ コア
 | CircleCI ドメイン モデルに関する情報を保存、提供します。 アクセス許可および API と連携しています。
-| ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 	LDAP 認証を使用している場合、すべてのログインに失敗するようになります。
+| ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 	LDAP 認証を使用している場合、すべてのログインが失敗するようになります。
 |
 
 | exim
@@ -176,13 +217,13 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 | federations-service
 | アプリ コア
 | ユーザー ID を保存します (LDAP)。 API と permissions-service
-| LDAP 認証を使用している場合、すべてのログインに失敗するようになります。 また、一部の REST API 呼び出しに失敗する可能性があります。
-| LDAP 統合は使用できません。
+| LDAP 認証を使用している場合、すべてのログインが失敗するようになります。 また、一部の REST API 呼び出しが失敗する可能性があります。
+| LDAP 統合はできません。
 
 | frontend
 | フロントエンド
 | CircleCI Web アプリと www-api プロキシ
-| UI と REST API が利用できなくなります。 GitHub/GitHub Enterprise からジョブがトリガーされなくなります。 ビルドの実行はできますが、情報は更新されません。
+| UI と REST API が利用できなくなります。 GitHub/GitHub Enterprise からジョブがトリガーされなくなります。 ビルドの実行はできますが、更新はされません。
 | 1 秒あたりのリクエスト レート上限は 150、ユーザー 1 人あたりの瞬間リクエスト レート上限は 300 です。 
 
 | inject-bottoken
@@ -193,8 +234,8 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 
 | kotsadm-kots
 | ライセンス
-| メインの KOTS アプリケーション。 CircleCI Server のアップグレードと構成を行うための KOTS 管理者コンソールを実行します。管理者コンソールは使用できません。
-| CircleCI Server のアップグレードと構成が行えなくなります。
+| メインの KOTS アプリケーションです。 CircleCI Server のアップグレードと設定を行う KOTS 管理者コンソールを実行します。管理者コンソールは使用できません。
+| CircleCI Server のアップグレードと設定が行えなくなります。
 |
 
 | kotsadm-migrations
@@ -248,13 +289,13 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 | permissions-service
 | アプリ コア
 | CircleCI のアクセス権インターフェイスを提供します。
-| ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。
+| ワークフローを開始できなくなります。 一部の REST API 呼び出しが失敗し、CircleCI UI で 500 エラーが発生する可能性があります。
 |
 
 | scheduler
 | 実行
 | 受信したタスクを実行します。 Nomad サーバーと連携しています。
-| Nomad にジョブが送信されなくなります。 run キューのサイズが増加しますが、著しいデータ損失が起こることはありません。
+| Nomad にジョブが送信されなくなります。 run キューのサイズは増加しますが、著しいデータ損失が起こることはありません。
 |
 
 | server-troubleshooter
@@ -272,7 +313,7 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 | test-results
 | 実行
 | テスト結果ファイルを解析してデータを保存します。
-| ジョブについてテストの失敗やタイミングのデータが生成されなくなります。 サービスが再起動するとバックフィルが行われます。
+| ジョブについてテスト失敗やタイミングのデータが生成されなくなります。 サービスが再起動するとバックフィルが行われます。
 |
 
 | vm-gc
@@ -313,8 +354,48 @@ CircleCI Server 3.0 は、次に示すサービスで構成されています。
 
 |===
 
+== プラットフォーム 
+CircleCI Server は、Kubernetesクラスタ内でのデプロイを想定しています。 仮想マシンサービス（VMサービス）により、独自のEKSやGKEを活用してVMイメージを動的に作成することができます。 
+
+EKS または GKE 以外でインストールする場合は、一部のマシンビルドと同じ機能を利用するために追加作業が必要です。 CircleCI ランナーを設定することで、VMサービスと同じ機能を、より幅広い OS およびマシンタイプ（MacOSなど）で利用できるようになります。 
+
+CircleCI では、インストールするプラットフォームを幅広くサポートできるよう最善を尽くしています。 可能な限り環境に依存しないソリューションを使用しています。 ただし、すべてのプラットフォームやオプションをテストしているわけではありません。 そのため、テスト済み環境のリストを提供しており、時間をかけて拡大していく予定です。 定期的にテストし、サポートするプラットフォームのリストに OpenShift を追加する予定です。 
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| 環境
+| 状態
+| 備考
+
+| EKS 
+| テスト済み
+|
+
+| GKE 
+| テスト済み
+|
+
+| Azure
+| テスト未実施
+| Minio の Azure ゲートウェイとランナーで動作する必要があります。
+
+| Digital Ocean
+| テスト未実施 
+| Minio Digital Ocean ゲートウェイとランナーで動作する必要があります。
+
+| OpenShift*
+| テスト未実施
+| 動作しないことが分かっています。 
+
+| Rancher
+| テスト未実施 
+| Minio とランナーで動作する必要があります。
+|===
+
+
 == 次に読む
 
 * https://circleci.com/docs/2.0/server-3-whats-new[CircleCI Server 3.x の新機能]
-* https://circleci.com/docs/2.0/server-3-install[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x インストールの前提条件]
 * https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]

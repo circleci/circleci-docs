@@ -15,11 +15,14 @@ $(() => {
       // in the case someone is forced in "treatment"
 
       $(".global-nav--component").addClass("dd-global-nav--component")
-
       $(".dd-global-nav--links").show();
-      $(".dd-global-nav--links a").click(function(_) {
-        window.AnalyticsClient.trackAction('docs-devhub-nav-merge-link-clicked', {link: this.href})
-      })
+
+      $(".dd-global-nav--links a").click(function (_) {
+        window.AnalyticsClient.trackAction('docs-devhub-nav-merge-link-clicked', { link: this.href })
+      });
+
+      // aside.full-height used to adjust the top property for the sidenav while Docs-Devhub merge experiment is running
+      $("aside.full-height").css('top', '111px');
     }
   })
 });

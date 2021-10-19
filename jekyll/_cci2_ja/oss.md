@@ -42,7 +42,7 @@ The following features and settings are especially useful for open source projec
 
 Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
 
-For more information, see the [Environment Variables]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
+For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
 ### Only build pull requests
 {: #only-build-pull-requests }
@@ -78,9 +78,9 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 - {{ site.baseurl }}/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー
 
-- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/ja/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
+- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
 
-- [AWS permissions]({{ site.baseurl }}/ja/2.0/deployment-examples/#aws) and configuration files.
+- [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
 
 **Note:** Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
@@ -92,7 +92,7 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
 - PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master). For example, PRs from the master repo share a cache with the master repo branches (in particular the `master` branch).
 - それぞれ異なるフォーク リポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。 That means that a PR from a fork will not share a cache with the master repo `master` branch.
-- enabling the sharing of [environment variables]({{site.baseurl}}/ja/2.0/env-vars) will enable cache sharing between the original repo and all forked builds.
+- enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars) will enable cache sharing between the original repo and all forked builds.
 
 Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
 
@@ -119,4 +119,4 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Examples]({{ site.baseurl }}/ja/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
+Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.

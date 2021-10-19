@@ -1,10 +1,13 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
+import { isProduction } from '../utils';
 import  Cookies from 'js-cookie';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
 const FORCE_STORAGE_KEY = 'growth-experiments-force-all';
+const optimizelyLogLevel = isProduction() ? 'error' : 'info';
+optimizelySDK.setLogLevel(optimizelyLogLevel);
 
 class OptimizelyClient {
   constructor() {
@@ -143,7 +146,7 @@ const isExperimentAlreadyViewed = (orgId, experimentKey) => {
   try {
     const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
     return (experiments && experiments.hasOwnProperty(orgId) && experiments[orgId] && experiments[orgId].hasOwnProperty(experimentKey));
-  } catch {
+  } catch (_) { // Uglify /w browserlist force us to do catch (_)
     return false
   }
 }
@@ -159,7 +162,7 @@ const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
   let experiments;
   try {
     experiments = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
-  } catch {
+  } catch (_) { // Uglify /w browserlist force us to do catch (_)
     experiments = {};
   }
 
@@ -177,7 +180,7 @@ const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
   try {
     // setItem will sometimes fail with a "Quota Exceeded" exception if users have custom configurations
     localStorage.setItem(STORAGE_KEY, JSON.stringify(experiments));
-  } catch {
+  } catch (_) { // Uglify /w browserlist force us to do catch (_)
     // We're deliberately ignoring it so that it doesn't break the app. It'll mean a few extra
     // events are emitted, but I think that's the lesser issue.
   }
