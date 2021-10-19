@@ -788,7 +788,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
