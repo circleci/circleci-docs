@@ -7,7 +7,7 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 
 1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
-3. Start Docker Desktop 
+3. Start Docker Desktop
 4. Add the following line to your `/etc/hosts` file:
    ```bash
    127.0.0.1 ui.circleci.com
@@ -17,6 +17,7 @@ _(Learn how to install yarn on your machine [here](https://classic.yarnpkg.com/l
 6. Run `yarn start` to create needed js assets & build the static site in Docker
 _(Warning: This may take up to 10 minutes to build)_
 8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
+9. To gracefully stop the running commands you can CTRL-C and run `yarn stop`.
 
 **Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
 
@@ -38,8 +39,8 @@ Our js assets are compiled by webpack and put into a place where the jekyll buil
 Anytime you are working on js be sure to run:
 
 ```bash
-$ npm install
-$ npm run webpack-watch
+$ yarn install
+$ yarn start
 ```
 
 ## First Run
@@ -61,13 +62,13 @@ For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/
 
 Prerequisites:
 
-- Installed npm packages at the root of the repository `npm install`
+- Installed npm packages at the root of the repository `yarn install`
 - Installed gems at the root of the repository `bundle install`
 
 You can lint the markdown using the [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
 
 ```bash
-.PATH=$(npm bin):$PATH markdownlint-cli2 jekyll/_cci2/*.md
+.PATH=$(yarn bin):$PATH markdownlint-cli2 jekyll/_cci2/*.md
 ```
 
 You can also autofix the issues by adding `fix: true` to the configuration file `.markdownlint-cli2.jsonc`.
