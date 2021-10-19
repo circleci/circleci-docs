@@ -11,8 +11,7 @@ version:
 ---
 
 <div class="alert alert-warning" role="alert">
-<strong>As of Dec 31, 2021,</strong> legacy convenience images (images with the prefix "circleci/") <strong>will be deprecated.</strong>
-Please refer to the image <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecation timeline</a> and <a href="https://circleci.com/docs/2.0/next-gen-migration-guide/">migration guide</a> for more information on how to upgrade your projects to <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
 This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
