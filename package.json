@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "git submodule update --init",
     "dev": "yarn webpack-dev && docker-compose up",
-    "start": "docker-compose up -d && yarn webpack-watch",
+    "start": "./scripts/start.sh",
+    "stop": "docker-compose down",
     "prod": "yarn webpack-prod && docker-compose up",
     "webpack-dev": "webpack -p --mode=development",
     "webpack-prod": "NODE_ENV=production webpack -p --mode=production",
