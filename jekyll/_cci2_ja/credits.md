@@ -26,12 +26,12 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 
 For example, your team might use a `large` `resource_class` (4 vCPUs and 8gb of memory) and make use of more credits/minute to speed up a build for a bigger project, while only using the `small` `resource_class` (1 vCPU, 2gb Memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
 
-ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
+CircleCI の各プランで提供される内容や、マシン タイプ別の消費クレジットについては、CircleCI の[料金プラン](https://circleci.com/ja/pricing/)のページをご確認ください。
 
 ## クレジットベース プランの設定
 {: #configuring-your-credit-plan }
 
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
+ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
 
 ## Free プラン
 {: #free-plan }
@@ -75,11 +75,11 @@ You are able to use credits per run job for Docker Layer Caching (DLC). DLCはPe
 ### Am I charged if my build is "queued" or "preparing"?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+いいえ. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
 If you find that jobs are "preparing" for quite some time, you may be able to reduce it if your jobs use the docker executor; try using more recent docker images to decrease preparation time.
 
 ## Questions and comments
 {: #questions-and-comments }
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/ja/2.0/faq/#料金支払い)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
+ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/ja/2.0/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
