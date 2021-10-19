@@ -128,7 +128,7 @@ grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$fi
 Please refer to the platform-specific installation instructions:
 
 * xref:runner-installation-linux.adoc[Linux]
-* xref:runner-installation-macos.adoc[macOS]
+* xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
 * xref:runner-installation-docker.adoc[Docker]
 * xref:runner-on-kubernetes.adoc[Kubernetes]
