@@ -12,7 +12,7 @@ version:
 
 This page describes how to install CircleCI runner on Windows. 
 
-NOTE: Please review the https://circleci.com/docs/2.0/runner-installation/[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
 
 toc::[]
 
