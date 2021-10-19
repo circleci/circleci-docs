@@ -50,11 +50,13 @@ circleci namespace create <name> <vcs-type> <org-name>
 For example, if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 . Create a resource class for your runner for your namespace using the following command:
 + 
+NOTE: Your newly created namespace is required in the command to create your resource class.
++
 ```
-circleci runner resource-class create <resource-class> <description> --generate-token
+circleci runner resource-class create <name>/<resource-class> <description> --generate-token
 ``` 
 +
-For example, `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
+Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
 +
