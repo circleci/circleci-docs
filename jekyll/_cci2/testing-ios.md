@@ -232,6 +232,7 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 **Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
 
 ### Switching Rubies with the macOS Orb (Recommended)
+{: #switching-rubies-with-the-macos-orb-recommended }
 
 Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
 
