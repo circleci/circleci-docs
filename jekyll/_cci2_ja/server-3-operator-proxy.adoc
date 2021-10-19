@@ -36,11 +36,11 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 
 * プロキシ経由でインストールすると、 https://circleci.com/docs/2.0/runner-overview/[CircleCI ランナー]が使えなくなります。
 * プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要になります。 詳しくは、 https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[サーバーの Orb] ドキュメントをご覧ください。
-* JVM は、HTTPS ではなく、HTTP で実行されるプロキシのみを受け入れます。そのため、プロキシの URI は、 `https://user:password@host:port`ではなく、 `http://user:password@host:port`という形式でなければなりません。
+* The JVM only accepts proxies that run over HTTP not HTTPS and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * GitHub インスタンスがプロキシ環境（GitHub.com または GitHub Enteriprise）の外で動作している場合は、追加の設定をしなくても CircleCI アプリケーション（Kubernetes クラスタ内）と Nomad ノードからの SSH トラフィックがインスタンスにアクセスできるようにしなければなりません。 CircleCI の SSH エージェントは、異なるネットワークプロトコルを使用しているため、プロキシの設定に従いません。 プロキシがプロキシ環境の外にアクセスする唯一の手段である場合は、SSHトラフィックがブロックされ、アプリケーションが失敗します。
 * ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 * プロキシ設定がされていると、KOTS 管理者コンソールのアップグレードができません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
-* プロキシを設定した VM サービスでは、カスタムイメージが必要になることがよくあります。 (詳細および過去の設定例については、別途お問合せください。)
+* If you install server behind a proxy, you may need to provide a custom image for VM service. Visit the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder repo] for further information.
 * オブジェクトストレージがプロキシの外にある場合、オブジェクトストレージを使用するジョブ機能は動作しません。 それには以下が含まれます。
 ** アーティファクト
 ** テスト結果
