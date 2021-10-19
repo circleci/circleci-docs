@@ -35,8 +35,6 @@ var getSessionId = function () {
   return amplitude.getSessionId();
 };
 
-
-
 // analytics tracking for CTA button clicks
 window.addEventListener('load', function () {
   var buttons = Array.from(document.querySelectorAll('[data-analytics-action]'));
@@ -352,12 +350,11 @@ $( document ).ready(function() {
   // });
 });
 
-$( document ).ready(function() {
+$(document).ready(function() {
   $("#main a").not('.license-notice *').each(function () {
-    $(this).wrap("<div class='tag-wrapper'></div>")
-    var inlineSVG = '<svg class="external-link-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="css-bleycz"><path viewBox="0 0 24 24" fill-rule="evenodd" d="M17,19 L5,19 L5,7 L10,7 L10,5.00083798 L4.44085883,5.00083798 C4.05495161,4.9876138 3.68075435,5.13139282 3.4077085,5.39780868 C3.13466265,5.66422454 2.98730555,6.02933568 3.00085883,6.40587245 L3.00085883,19.5941275 C2.98730555,19.9706643 3.13466265,20.3357755 3.4077085,20.6021913 C3.68075435,20.8686072 4.05495161,21.0123862 4.44085883,20.999162 L17.56,20.999162 C18.35529,20.999162 19,20.3701067 19,19.5941275 L19,14 L17,14 L17,19 Z M17.5857864,5 L14,5 C13.4477153,5 13,4.55228475 13,4 C13,3.44771525 13.4477153,3 14,3 L20,3 C20.5522847,3 21,3.44771525 21,4 L21,10 C21,10.5522847 20.5522847,11 20,11 C19.4477153,11 19,10.5522847 19,10 L19,6.41421356 L14.8786797,10.5355339 C14.4881554,10.9260582 13.8549904,10.9260582 13.4644661,10.5355339 C13.0739418,10.1450096 13.0739418,9.51184464 13.4644661,9.12132034 L17.5857864,5 Z"></path></svg>'
+    $(this).wrap("<div class='external-link-tag-wrapper'></div>")
+    var inlineSVG = '<span class="external-link-icon"><svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.33318 10.6667H1.33318V2.66667H4.66651V1.33333H0.959845C0.699845 1.32667 0.453179 1.42 0.273179 1.6C0.086512 1.77333 -0.00682137 2.02 -0.000154701 2.27333V11.0667C-0.00682137 11.32 0.086512 11.56 0.273179 11.74C0.453179 11.92 0.706512 12.0133 0.959845 12.0067H9.70651C10.2398 12.0067 10.6665 11.5867 10.6665 11.0667V7.33333H9.33318V10.6667ZM9.72651 1.33333H7.33318C6.96651 1.33333 6.66651 1.03333 6.66651 0.666667C6.66651 0.3 6.96651 0 7.33318 0H11.3332C11.6998 0 11.9998 0.3 11.9998 0.666667V4.66667C11.9998 5.03333 11.6998 5.33333 11.3332 5.33333C10.9665 5.33333 10.6665 5.03333 10.6665 4.66667V2.27333L7.91985 5.02C7.65985 5.28 7.23985 5.28 6.97985 5.02C6.71985 4.76 6.71985 4.34 6.97985 4.08L9.72651 1.33333Z" fill="currentColor"></path></svg></span>'
     if(!this.origin.includes(window.location.origin)) {
-      $(this).removeClass().addClass("external-link-anchor")
       $(inlineSVG).appendTo(this);
       $(this).attr('target', '_blank')
       $(this).attr('rel', 'noopener noreferrer')
