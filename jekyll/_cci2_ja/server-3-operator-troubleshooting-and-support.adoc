@@ -20,8 +20,7 @@ toc::[]
 
 [source,bash]
 ----
-kubectl kots admin-console --namespace <namespace>
-
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
 ブラウザーを開いて、http://localhost:8800 にアクセスし、管理者コンソールを表示します。
