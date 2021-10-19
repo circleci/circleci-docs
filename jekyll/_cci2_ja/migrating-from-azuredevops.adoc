@@ -27,20 +27,20 @@ Following are the steps required for using the git command line tool to import y
 . Create an empty repository on your GitHub Enterprise instance.
 . Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
 +
-----
+```
 git clone https://external-host.com/extuser/repo.git --bare
-----
+```
 . Add your GitHub Enterprise repository as a remote reference in your local clone.
 +
-----
+```
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-----
+```
 . Push all local references (refs/*) up to your remote GitHub Enterprise repository.
 +
-----
+```
 git push enterprise --mirror
-----
+```
 
 If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
@@ -59,17 +59,18 @@ The Azure DevOps Pipelines and CircleCI configurations will be different. It may
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
-Some differences that are worth calling out:
+== Configuration Comparison
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table.table-striped.table-migrating-page]
+[cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
 | Azure DevOps | CircleCI
 
-2+h| Define a job that executes a single build step. 
+2+| Define a job that executes a single build step. 
 
 a|
+[source, ini]
 ----
 jobs:
   - job: job1
@@ -79,6 +80,7 @@ jobs:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -87,9 +89,10 @@ jobs:
       - run: "execute-script-for-job1"
 ----
 
-2+h| Specify a docker image to use for a job.
+2+| Specify a docker image to use for a job.
 
 a|
+[source, ini]
 ----
 jobs:
   - job: job1
@@ -98,6 +101,7 @@ jobs:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -108,9 +112,10 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
+[source, ini]
 ----
 stages:
   - stage: build
@@ -134,6 +139,7 @@ stages:
 ----
 
 a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -165,9 +171,10 @@ workflows:
           - job3
 ----
 
-2+h| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
+2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
 
 a|
+[source, ini]
 ----
 jobs:
   - job: ubuntuJob
@@ -185,6 +192,7 @@ jobs:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   ubuntuJob:

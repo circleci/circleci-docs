@@ -52,7 +52,7 @@ jobs:
 ```
 
 ### Executor タイプの選択
-{: #choose-an-executor-type }
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
@@ -65,9 +65,6 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4  # ビルド ジョブのプライマリ コンテナ
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 **メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[ CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
@@ -101,8 +98,6 @@ jobs:
 
 ### 依存関係のインストール
 {: #install-dependencies }
-
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
@@ -275,4 +270,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)」を参照してください。
+- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)」を参照してください。

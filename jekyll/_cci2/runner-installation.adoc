@@ -489,7 +489,7 @@ runner:
   name: RUNNER_NAME
 ```
 
-NOTE: The launch agent can also be configured via environment variables by supplying the `--env` flag to the launch agent command.
+NOTE: The launch agent can also be configured via environment variables. These will be prioritized over the YAML file, if set.
 
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`

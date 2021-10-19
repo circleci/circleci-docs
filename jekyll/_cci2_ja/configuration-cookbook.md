@@ -107,7 +107,7 @@ For a full list of usage options and orb elements see the [AWS-ECS orb page](htt
 ### Verify the AWS ECS service update
 {: #verify-the-aws-ecs-service-update }
 
-Once you have updated the Amazon ECS service, you can verify the update was correctly applied. Amazon ECS サービスの更新を検証する To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
 
 ```yaml
 version: 2.1
@@ -222,14 +222,14 @@ workflows:
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 {: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
 
-CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。このorbでは以下の作業を行うことができます。
+CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。このorbdでは以下のタスクを行うことができます。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-CircleCI AWS-EKS orbを使用する場合は、事前にCircleCI Orb Registryページで[AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start)orbの仕様を確認しておくとよいでしょう。
+CircleCI AWS-EKSのorbを使用する前に、CircleCI Orb Registryページの [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) orbの仕様を確認しておくとよいでしょう。
 
 ### EKS クラスタを作成する
 {: #create-an-eks-cluster }
@@ -574,8 +574,8 @@ workflows:
 
 上記の例では、以下のような要素が実装されています:
 
-- [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 
 ### 基本的な例
 {: #a-basic-example }
@@ -624,7 +624,7 @@ workflows:
 
 **注意:** 1 個の `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 に制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-`continuation` Orb の内容の詳細については、当該 Orb のソース コードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミック コンフィグの FAQ]({{ site.baseurl }}/ja/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the [Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
 
 ### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
@@ -704,8 +704,6 @@ workflows:
 ```yaml
 version: 2.1
 
-# the path-filtering orb is required to continue a pipeline based on
-# the path of an updated fileset
 orbs:
   maven: circleci/maven@1.2.0
 
@@ -793,26 +791,27 @@ workflows:
 
 Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
 
-In the following example the `test` job is run across Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
+In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
 
 ```yaml
 version: 2.1
 
 orbs:
-  node: circleci/node@4.0.0
-  win: circleci/windows@2.2.0
+  node: circleci/node@4.7
 
 executors:
-  linux: # linux executor using the node base image
+  docker: # Docker using the Base Convenience Image
     docker:
-      - image: cimg/node
+      - image: cimg/base:stable
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  windows: win/default # windows executor - uses the default executor from the windows orb
-  macos: # macos executor using xcode 11.6
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
     macos:
-      xcode: 11.6
+      xcode: 12.5
 
 jobs:
   test:
@@ -827,7 +826,6 @@ jobs:
       - node/install:
           node-version: << parameters.node-version >>
           install-yarn: true
-      - run: yarn test
 
 workflows:
   all-tests:
@@ -835,13 +833,19 @@ workflows:
       - test:
           matrix:
             parameters:
-              os: [linux, windows, macos]
-    
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
+```
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
 ```
-    test-13.13.0-macos
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
 ```
 
 For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/ja/2.0/configuration-reference/#matrix-requires-version-21).

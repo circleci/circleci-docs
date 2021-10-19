@@ -165,4 +165,5 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 ## 既知の制限
 {: #knownlimiations}
 
-現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。
+- When downloading or uploading files larger than ~10 MB during execution of jobs with IP ranges enabled, intermittently, the job may receive TCP reset (RST) packets and drop the connection. This could cause the job to fail if there is no retry logic in place while downloading/uploading the file.  CircleCI recommends including robust retry mechanisms in your config when attempting to download/upload large files during execution of jobs with IP ranges enabled.  For example, if your job uses [curl](http://www.ipgp.fr/~arnaudl/NanoCD/software/win32/curl/docs/curl.html) to download/upload a large file, include the `--retry <num>` flag and set `<num>` to a large number such as 1,000.

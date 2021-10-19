@@ -7,6 +7,19 @@ order: 30
 version:
   - Cloud
   - Server v2.x
+suggested:
+  - 
+    title: Manual job approval and scheduled workflow runs
+    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
+  - 
+    title: Filter workflows by branch
+    link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - 
+    title: How to trigger a workflow
+    link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - 
+    title: Conditional workflows
+    link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
 ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 ここでは、以下のセクションに沿って、ワークフロー機能について説明し、構成例を紹介します。
@@ -43,7 +56,7 @@ version:
 | FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                         |
 | SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                         |
 | ON HOLD     | ワークフロー内のジョブが承認待ちになっている                                                                                          |
-| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
+| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
 
@@ -54,12 +67,12 @@ version:
 * CircleCI API を使用してワークフローをトリガーできるのは、パイプラインが有効化されているプロジェクトのみです。
 * 設定ファイルにワークフローを含めない場合は、`build` という名前のジョブを含める必要があります。
 
-`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)」セクション_を参照してください。
+その他の詳細と制限事項については、「よくあるご質問」の[ワークフロー]({{ site.baseurl }}/ja/2.0/faq/#workflows) セクションを参照してください。
 
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
 
-__ `workflows` _キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの [ワークフロー]({{ site.baseurl }}/2.0/configuration-reference/#workflows) セクションを参照してください。_
+__ `workflows` _キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションを参照してください。_
 
 **注:** ワークフローを使用してプロジェクトを構成する場合、 Docker イメージ、環境変数、`run` ステップなどの構文を複数のジョブで共有することがよくあります。 `.circleci/config.yml` のコードをコンパクトにするエイリアスの使い方や構文の再利用方法については [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) でご確認ください。 また、ブログページの [CircleCI の設定における YAML ファイルの再利用](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)も参考にしてください。
 
@@ -212,7 +225,7 @@ workflows:
             - hold
 ```
 
-上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 15 日間です。
+上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。 However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
 
 ワークフローで手動承認を使用する場合は、以下の点に注意する必要があります。
 
@@ -228,8 +241,9 @@ workflows:
 {:.tab.switcher.Cloud}
 ![保留中のワークフローの承認ジョブ]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server-v2}
 ![組織の切り替えメニュー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+
 
 保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
 
@@ -284,7 +298,6 @@ workflows:
 
 有効な `schedule` には、`cron` キーと `filters` キーが必要です。
 
-
 `cron` キーの値は、 [有効な crontab エントリ](https://crontab.guru/)でなければなりません。
 
 **注:** cron のステップ構文 (`*/1` や `*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内では、範囲エレメントは**サポートされません**。 曜日の範囲エレメント (例: `Tue-Sat`) も**サポートされません**。 代わりに、カンマ区切りの数字を使用してください。
@@ -308,7 +321,7 @@ workflows:
 
 `filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
 
-詳細については、[CircleCI の設定]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)の`branches `セクションを参照してください。
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)の`branches `セクションを参照してください。
 
 設定例の全文については、 [スケジュール設定されたワークフローのサンプル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)を参照してください。
 
@@ -321,7 +334,7 @@ workflows:
 {: #using-job-contexts-to-share-environment-variables }
 {:.no_toc}
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つの順次ジョブを含む ワークフローの例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つの順次ジョブを含む ワークフローの例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)で確認できます。
 
 下記で示した `config.yml` のスニペットは、`org-global` コンテキストで定義したリソースを使う設定を施した、順次ジョブのワークフローの例です。
 
@@ -636,7 +649,7 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #see-also }
 {:.no_toc}
 
-- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時にワークフローを設定に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)の[ワークフローの設定手順]({{ site.baseurl }}/2.0/migrating-from-1-2/)を参照してください。
+- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時にワークフローを設定に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)の[ワークフローの設定手順]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)を参照してください。
 
 - ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq)」の「ワークフロー」セクションを参照してください。
 

@@ -128,38 +128,38 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: ~/circleci-demo-workflows
-    steps:
+    working_directory:~/circleci-demo-workflows
+   steps:
       - checkout
-      # Bundle install dependencies
+      # インストールの依存関係をバンドル
       - run: bundle install --path vendor/bundle
 
-      # Database setup
+      # データベースのセットアップ
       - run: bundle exec rake db:create db:schema:load
 
       - run:
-          name: Run tests
+          name:Run tests
           command: rake
 
   deploy:
     machine:
         enabled: true
-    working_directory: ~/circleci-demo-workflows
+    working_directory:~/circleci-demo-workflows
     environment:
       HEROKU_APP: "sleepy-refuge-55486" # define env var $HEROKU_APP
     steps:
       - checkout
       - run:
           name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
+          command: bash .circleci/setup-heroku.sh # Herokuをセットアップするスクリプトを実行
 
       - run:
-          command: |
+          command:|
             git push heroku sequential-branch-filter:master
             heroku run rake db:migrate
-            sleep 5 # sleep for 5 seconds to wait for dynos
+            sleep 5 # ５秒間スリープしてDynoを待つ
             heroku restart
-            
+
 workflows:
   version: 2
   build-and-deploy:

@@ -341,7 +341,7 @@ gsutil mb gs://circleci-server-bucket
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
 ```
 
-You will need the email for the service account in the next step, fun the following to find it:
+You will need the email for the service account in the next step, run the following to find it:
 
 ```sh 
 gcloud iam service-accounts list \

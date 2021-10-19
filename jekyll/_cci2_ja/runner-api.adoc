@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Please reach out to your sales representative for information on how to sign up for the Scale plan.
 
 CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
 

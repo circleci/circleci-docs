@@ -33,7 +33,7 @@ version:
 次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 
 ```
-- setup_remote_docker
+setup_remote_docker
 ```
 
 以下のステップにより、`docker-compose` コマンドをビルド イメージに追加できます。

@@ -39,7 +39,7 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 * If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub enterprise), you must ensure that SSH traffic from our application (inside the Kubernetes cluster) and from our Nomad node can reach your instance without additional configuration. Our SSH agents do not respect proxy settings because it uses a different network protocol. If a proxy is the only way that any traffic can reach outside the proxied environment this means it will block SSH traffic and our application will fail.
 * The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
 * The KOTS admin console cannot be upgraded if proxy setting were set. The proxy settings will be deleted and cause the KOTS admin console to break.
-* Often, a custom image is needed for VM service that has proxy configured! (Check with Makoto Mizukami   about this and how customers have set this up before)
+* If you install server behind a proxy, you may need to provide a custom image for VM service. Visit the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder repo] for further information.
 * If object storage is outside the proxy no job features that use object storage will work. This includes:
 ** Artifacts
 ** Test-results

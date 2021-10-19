@@ -21,7 +21,7 @@ version:
 
 CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the [software manifest](#supported-xcode-versions) for each Xcode image.
 
-There is documentation for [an iOS example project]({{ site.baseurl}}/ja/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/ja/2.0/hello-world-macos/).
+There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
 
 ## Using the macOS executor
 {: #using-the-macos-executor }
@@ -44,17 +44,17 @@ To read about our customer support policy regarding beta images, please check ou
 ### Apple silicon support
 {: #apple-silicon-support }
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
+It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner]({{ site.baseurl }}/ja/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner](https://circleci.com/docs/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
  | Config   | Xcode Version              | macOS Version | macOS UI Testing Supported | Software Manifest                                                                                | Release Notes                                                                                       |
  | -------- | -------------------------- | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
- | `12.1.0` | Xcode 12.1 (12A7403)       | 11.5.2        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5947/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-5-released/40988)                      |
- | `12.5.1` | Xcode 10.2.1 (10E1001)     | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
+ | `13.0.0` | Xcode 13.0 (13A233)        | 11.5.2        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-rc-released/41256)                          |
+ | `12.5.1` | Xcode 12.5.1 (12E507)      | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
  | `12.4.0` | Xcode 12.4 (12D4e)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
  | `12.3.0` | Xcode 12.3 (12C33)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
  | `12.2.0` | Xcode 12.2 (12B45b)        | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
@@ -69,18 +69,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  | `11.1.0` | Xcode 11.1 (11A1027)       | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)                  |
  | `11.0.0` | Xcode 11.0 (11A420a)       | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)                |
  | `10.3.0` | Xcode 10.3 (10G8)          | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
- | `10.2.1` | Xcode 10.2.1 (10E1001)     | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)                   |
- | `10.1.0` | Xcode 10.1 (10B61)         | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)                     |
- | `10.0.0` | Xcode 9.4.1 (9F2000)       | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)                  |
- | `9.4.1`  | * Xcode 9.4.1 (9F2000)     | 10.13.3       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html) |                                                                                                     |
 {: class="table table-striped"}
-
-**Note:** The following images are deprecated and scheduled for removal on 14 September 2021. Please migrate away from these images as soon as possible. For more information, please see the [announcement thread on our forum](https://discuss.circleci.com/t/xcode-deprecation-notice-9-4-1-10-0-0-10-1-0-and-10-2-1/40515).
-
-* Xcode 9.4.1
-* Xcode 10.0.0
-* Xcode 10.1.0
-* Xcode 10.2.1
 
 ## Getting started
 {: #getting-started }
@@ -98,7 +87,7 @@ After setting up the project on CircleCI, you will need to ensure that the schem
 2. Select the "Shared" option for the scheme to share, and click Close
 3. Ensure the `myproject.xcodeproj/xcshareddata/xcschemes` directory is checked into your Git repository and push the changes
 
-Simple projects should run with minimal configuration. You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/ja/2.0/ios-tutorial/).
+Simple projects should run with minimal configuration. You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
 ## Using Fastlane
 {: #using-fastlane }
@@ -228,7 +217,7 @@ The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLan
 
 We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
 
-For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/ja/2.0/ios-codesigning/).
+For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/).
 
 ## Using Ruby
 {: #using-ruby }
@@ -246,13 +235,24 @@ As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible 
 
 Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
-To switch to another Ruby version, see [our chruby documentation](#images-using-xcode-112-and-later). To revert back to the system Ruby, add the following to the beginning of your job:
+To switch to another Ruby version, add the following to the beginning of your job.
 
 ```yaml
 # ...
 run:
   name: Set Ruby Version
-  command: echo 'chruby system' >> ~/.bash_profile
+  command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+```
+
+Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+
+To revert back to the system Ruby, add the following to the beginning of your job:
+
+```yaml
+# ...
+run:
+  name: Set Ruby Version
+  command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
@@ -360,19 +360,19 @@ To install a specific version of NodeJS and use it:
 ```yaml
 # ...
 steps:
-  - run:
-      name: pre-start simulator
-      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+  - run: nvm install 12.22.3 && nvm alias default 12.22.3
 ```
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
 
 ### Images using Xcode 12.5 and earlier
 {: #images-using-xcode-125-and-earlier }
 
 These images come with at least one version of NodeJS installed directly using `brew`.
 
-Version information for the installed NodeJS versions can be found in [the software manifests for the image]((#supported-xcode-versions)).
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
 
-These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
 
 ## Using Homebrew
 {: #using-homebrew }
@@ -395,7 +395,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 ## Configuring deployment
 {: #configuring-deployment }
 
-After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/ja/2.0/deploying-ios/)
+After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/2.0/deploying-ios/)
 
 ## Reducing job time and best practises
 {: #reducing-job-time-and-best-practises }
@@ -412,11 +412,8 @@ To pre-start the simulator, add the following to your `config.yml` file, assumin
 # ...
 steps:
   - run:
-      name: Install cowsay
-      command: brew install cowsay
-  - run:
-      name: cowsay hi
-      command: cowsay Hi!
+      name: pre-start simulator
+      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
@@ -520,7 +517,7 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 {: #creating-a-configyml-file }
 {:.no_toc}
 
-The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as utilise built-in features such as workspaces and caching. See the [Configuring CircleCI]({{ site.baseurl }}/ja/2.0/configuration-reference/) documentation for a detailed description of the structure of the `config.yml` file.
+The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as utilise built-in features such as workspaces and caching. See the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `config.yml` file.
 
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
@@ -596,5 +593,5 @@ If you are facing build failures while executing your jobs, check out our [suppo
 {:.no_toc}
 
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS project using Fastlane on CircleCI.
-- See the [iOS Project Tutorial]({{ site.baseurl }}/ja/2.0/ios-tutorial/) for a config walkthrough.
-- See the [iOS code signing documentation]({{ site.baseurl}}/ja/2.0/ios-codesigning/) to learn how to configure Fastlane Match for your project.
+- See the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for a config walkthrough.
+- See the [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/) to learn how to configure Fastlane Match for your project.
