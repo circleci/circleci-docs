@@ -29,7 +29,7 @@ CircleCI Server システムには、固有のローカル Orb レジストリ�
 
 === メール通知 
 
-ビルドの通知はメールで送信されます。 KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+ビルドの通知はメールで送信されます。 KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
 
 * *[Email Submission server hostname (メール送信サーバーのホスト名)] (必須)*: 送信サーバーのホスト名を指定します (例えば SendGrid の場合は smtp.sendgrid.net を使用)。
 
@@ -46,9 +46,11 @@ Enable StartTLS を有効にすると、メール送信が暗号化されます�
 
 NOTE: デフォルトでは StartTLS がメールの暗号化に使用されますが、これを無効にするのは、他にトラフィックの機密性を保証できる場合のみにしてください。
 
-*Save config (構成の保存)* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
+*Save config (設定の保存)* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
+ifndef::pdf[]
 ## 次に読む
 
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
 * https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+endif::[]
