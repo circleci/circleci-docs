@@ -397,7 +397,7 @@ Contexts hold potentially sensitive secrets that are not intended to be exposed.
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ## 関連項目
 {: #see-also }
