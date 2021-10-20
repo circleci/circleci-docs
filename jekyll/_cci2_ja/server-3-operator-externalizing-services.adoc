@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-このドキュメントでは、CircleCI Server 3.x のインストール で使用する以下の外部サービスの設定方法について説明します。 このガイドで説明している設定は、KOTS の管理者コンソールで確認できます。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>`
+このドキュメントでは、CircleCI Server 3.x のインストール で使用する以下の外部サービスの設定方法について説明します。 このガイドで説明している設定は、KOTS の管理者コンソールで確認できます。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 * PostgreSQL
 * MongoDB
