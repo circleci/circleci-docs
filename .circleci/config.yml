@@ -139,6 +139,9 @@ jobs:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
       - run:
+          name: "Run tests"
+          command: yarn test:ci
+      - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: yarn webpack-prod
       - run:
