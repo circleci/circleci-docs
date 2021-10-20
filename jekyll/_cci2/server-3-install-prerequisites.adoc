@@ -97,6 +97,8 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --name circleci-server
 ```
 
+NOTE: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html[Managed Node Groups] in EKS are not supported, use https://docs.aws.amazon.com/eks/latest/userguide/worker.html[Self-Managed Nodes].
+
 NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary in order to use `eksctl`. See the AWS documentation regarding https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions]. 
 
 ==== GKE
