@@ -12,6 +12,8 @@ version:
 
 Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+
 toc::[]
 
 == Phase 2: Core services installation
@@ -41,7 +43,7 @@ You will be prompted for a:
 
 When complete, you should be provided with a URL to access the KOTS admin console, usually, `\http://localhost:8800`.
 
-NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <namespace kots was installed in>`
+NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
@@ -50,7 +52,7 @@ NOTE: Once you have created your namespace we recommend setting your `kubectl` c
 If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
 
 ```bash
-kubectl kots install circleci-server --http-proxy <http-proxy-uri> --https-proxy <https-proxy> --no-proxy <no proxy list>
+kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
 ```
 
 The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them. 
@@ -85,20 +87,8 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 * *Private Load Balancer (optional)* - Load balancer doesn't generate external IP addresses. 
 
-==== Postgres Settings
-
-You can skip this section unless you plan on using an existing Postgres instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
-
-==== MongoDB Settings
-
-You can skip this section unless you plan on using an existing MongoDB instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own MongoDB instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
-
-==== Vault Settings
-
-You can skip this section unless you plan on using an existing Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Vault  instance within the cluster. The default will be included in the CircleCI backup and restore process. 
-
 ==== Artifact and Encryption Signing Settings
-Encryption and artifact signing keys were created during prerequisites. You can enter them here now. 
+Encryption and artifact signing keys were created during prerequisites phase. You can enter them here now. 
 
 Complete the following fields: 
 
@@ -107,10 +97,10 @@ Complete the following fields:
 * *Encryption Signing Key (required)*
 
 ==== Github Settings
-You created your Github OAuth application in the prerequisite steps, use the data to complete the following:
+You created your Github OAuth application in the prerequisite phase, use the data to complete the following:
 
 * *Github Type (required)* - 
-Select Cloud or Enterprise (on premises)
+Select Cloud or Enterprise (on premises).
 
 * *OAuth Client ID (required)* - 
 The OAuth Client ID provided by Github. 
@@ -155,18 +145,25 @@ A JSON format key of the Service Account to use for bucket access.
 * *Storage Object Expiry (optional)* - 
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
 
+==== Nomad
+Set mTLS to `disabled`. This should be disabled by default but there is a known issue currently preventing this. Disabling allows you to ignore Nomad settings until phase 3 of the installation process where we will install build services.
+
+==== Postgres, MongoDB, Vault settings
+
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
+
 ==== Save and Deploy
 Once you have completed the fields detailed above it is time to deploy. The deployment will install the core services and provide you an IP address for the Traefik load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation. 
 
 NOTE: In this first stage we skipped a lot of fields in the config. Not to worry. We will revisit those in the next stages of installation.
 
 ==== Create DNS Entry 
-Create a DNS entry for your Traefik load balancer, i.e. circleci.your.domain.com and app.circleci.your.domain.com. The DNS entry should align with the DNS names used when creating your TLS certificate and Github OAuth app during the prerequisites steps. All traffic will be routed through this DNS record. 
+Create a DNS entry for your Traefik load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record. 
 
-You will need the IP address of the Traefik load balancer. You can find it with the following terminal command:
+You will need the IP address or, if using AWS, the DNS name of the Traefik load balancer. You can find this with the following command:
 
 ----
-kubectl get service circleci-server-traefik --namespace=nfish-circleci-server
+kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 For more information on adding a new DNS record, see the following documentation:
@@ -180,10 +177,11 @@ For more information on adding a new DNS record, see the following documentation
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now let’s move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to be status of running and ready should show 1/1): 
 
 ----
-kubectl get pods -n <<circleci installation namespace>>
+kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
+ifndef::pdf[]
 ## What to read next
 
 * https://circleci.com/docs/ja/2.0/server-3-install-build-services/[Server 3.x Phase 3: Build services installation]
-
+endif::[]
