@@ -230,9 +230,6 @@ jobs:
             sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
       - ruby-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
       - run:
           name: Run markdownlint with pronto
           command: bundle exec pronto run -f github_pr -c origin/master
