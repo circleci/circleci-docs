@@ -4,7 +4,7 @@ version: 2.1 # Set the CI version.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
   ruby: circleci/ruby@1.1.4
-  node: cimg/node@14.18.1
+  node: circleci/node@4.7.0
   md-proofer: hubci/md-proofer@0.1
 
 
@@ -130,7 +130,7 @@ jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
       name: node/default
-      tag: '14.1'
+      tag: '14.18.1'
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
