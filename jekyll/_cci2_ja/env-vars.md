@@ -45,7 +45,7 @@ _シークレットのマスキングは、オンプレミス版である Circle
 
 以下の場合、環境変数の値はビルドの出力でマスキングされません。
 
-* 環境変数の値が 4 文字未満
+* the value of the environment variable is less than 4 characters
 * 環境変数の値が `true`、`True`、`false`、`False` のいずれか
 
 **注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
