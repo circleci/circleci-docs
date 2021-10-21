@@ -16,8 +16,7 @@ toc::[]
 == 概要
 _バックアップと復元は、CircleCI Server v3.1.0 以上で利用できます。_
 
-While operating and administering CircleCI server, you will undoubtedly ponder how to maintain backups 
-and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+CircleCI Server の運用と管理を担当される方であれば、間違いなく、別のクラスタへの移行や重大なイベントからの復元が必要になった事態を想定し、バックアップを維持しシステムを復元する方法を考えていることでしょう。
 このドキュメントでは、CircleCI Server インスタンスのデータと状態をバックアップして復元する方法に関する推奨事項を説明します。
 
 CircleCI Server は、https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用します。
@@ -29,7 +28,7 @@ NOTE: CircleCI サービスのバックアップと復元には、Velero が必�
 == セットアップ
 
 CircleCI Server のバックアップは、https://kots.io/[KOTS] を通じて非常に簡単に作成できます。
-ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero] をインストールして構成する必要があります。
+However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
 === 前提条件

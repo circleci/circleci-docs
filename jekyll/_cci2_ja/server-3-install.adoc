@@ -1,750 +1,188 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x のインストール
+= CircleCI Server v3.x Installation Phase 2
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI Server v3.x のインストール プロセスを開始する前に、xref:server-3-install-prerequisites.adoc[前提条件]をすべて満たしていることをご確認ください。
+Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
-## ステップ 1 - KOTS のインストール
+== Phase 2: Core services installation
+CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] to manage and
+distribute server v3.x. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
+To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
-CircleCI Server v3.x は、https://www.replicated.com/[[Replicated]] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
-To install the latest version, you can run `curl  https://kots.io/install | bash`.
+Ensure you are running the minimum KOTS version ({kotsversion}) by running: 
 
-`kubectl kots version` を実行して、最小のバージョン {kotsversion} の KOTS を実行していることを確認してください。
+```
+kubectl kots version
+```
 
-NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホスト マシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
+NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not
+available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
+https://github.com/microsoft/WSL/issues/4199.
 
-次に、以下のコマンドを実行します。
+From the terminal run (if you are installing behind a proxy see <<Installing behind HTTP Proxy>>):
 
-[source,bash]
-----
+```sh
 kubectl kots install circleci-server
-----
+```
 
-すると、以下を入力するよう求められます。
+You will be prompted for a:
 
-* デプロイ先の名前空間
-* KOTS 管理者コンソールのパスワード
+* namespace for the deployment
+* password for the KOTS admin console
 
-入力後、管理者コンソールにアクセスするための URL   (通常は http://localhost:8800) が提供されます。
+When complete, you should be provided with a URL to access the KOTS admin console, usually, `\http://localhost:8800`.
 
-その後再び管理者コンソールにアクセスするには、以下のコマンドを実行します。
+NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
-[source,bash]
-----
-kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
-----
+NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-## ステップ 2 - CircleCI Server の構成 (パート 1)
+=== Installing behind HTTP Proxy
 
-管理者コンソールの URL にアクセスしてライセンス ファイルをアップロードすると、以下のような画面が表示されます。 ここで CircleCI Server を構成します。
+If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
 
-.CircleCI Server v{serverversion} の構成
-image::server-config.png[Server v{serverversion} Configuration]
+```bash
+kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
+```
 
-### [Global Settings (グローバル設定)]
-グローバル設定はすべてのコンポーネントに共通の設定であり、アプリケーション全体の機能に影響します。 コンポーネントごとの設定は、下部の *[Component Settings (コンポーネント設定)]* セクションにあります。
+The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them. 
 
-. *[Domain Name (ドメイン名)]* (必須): CircleCI Server のドメイン名を指定します  (例: circleci.yourcompany.com)。 ドメインは、以降のステップで CircleCI Server Traefik ロード バランサーを構成した後、このロード バランサーを参照するように設定してください。
-. *[Frontend TLS Private Key (フロントエンド TLS プライベート キー)]*: PEM 形式で暗号化された、Web アプリケーションの TLS プライベート キーです。 デフォルトの自己署名 TLS キーが提供されます。
-. *[Frontend TLS Certificate (フロントエンド TLS 証明書)]*: PEM 形式で暗号化された、Web アプリケーションの TLS 証明書です。 デフォルトの自己署名 TLS 証明書が提供されます。
+For further information see the https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[Configuring a Proxy] guide.
 
-TIP: CircleCI Server 用の TLS 証明書を未取得な場合は、任意のツールを使用して生成できます。 See the <<オプション: TLS 証明書の生成>> section.
+=== Frontend Settings 
+Frontend settings control the web application specific aspects of the CircleCI system. 
 
-[start=4]
+.Frontend Settings
+image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
-. *[Private Load Balancers (プライベート ロード バランサー)]*: フロントエンド ロード バランサーには、デフォルトではパブリック IP アドレスが割り当てられます。 このボックスをオンにすると、フロントエンド ロード バランサーがプライベートになり、パブリック IP アドレスは割り当てられません。 初回デプロイ後にこの設定を変更する場合、変更を反映するには、Traefik サービスの再デプロイが必要になる可能性があります。 
+Complete the fields described below. You can either supply a private key and certificate or check the box to allow Let's Encrypt to automatically request and manage certificates for you. You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
+
+NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
+
+* *Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate. 
+
+* *Frontend Replicas (optional)* - Used to increase the amount of traffic that can be handled by the frontend. 
+
+* *Frontend TLS Private Key (required)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: `
 +
-NOTE: これは、GKE 環境および EKS 環境でのみ有効です。
-
-. *[Manually Set Service Ports (手動でサービス ポートを設定)]*: Nomad、出力プロセッサ、VM サービス用に構成されたデフォルトのポートを編集する場合はこちらを選択します。 このボックスをオンにすると、各サービス用のポート フィールドが表示されます。
-
-. *[VM Service Load Balancer Hostname (VM サービスのロード バランサーのホスト名)]* (必須): VM サービスのロード バランサーのホスト名または IP を指定します。 If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
-. *[Output Processor Load Balancer Hostname (出力プロセッサのロード バランサーのホスト名)]* (必須): 出力プロセッサのロード バランサーのホスト名または IP を指定します。 If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
-. *[Nomad Load Balancer Hostname (Nomad のロード バランサーのホスト名)]* (必須): Nomad のロード バランサーのホスト名または IP を指定します。 If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
-
-
-#### Optional: Generate a TLS Certificate
-
-デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 例えば、https://letsencrypt.org/[LetsEncrypt] 認証局では、https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。
-
-例として、Google Cloud で DNS をホストしている場合は、次のコマンドを使用して CircleCI Server 用の証明書をプロビジョニングします。
-
-[source,bash]
-----
-DOMAIN=example.com  # ご使用の CircleCI Server のドメインに置換
-GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json  # GCP 証明書へのパス
-sudo certbot certonly --dns-google \
-  --dns-google-credentials ${GOOGLE_APPLICATION_CREDENTIALS} \
-  -d "${DOMAIN}" \
-  -d "app.${DOMAIN}"
-----
-
-DNS に AWS Route53 を使用している場合は、以下のコマンドを実行します。
-
-[source,bash]
-----
-DOMAIN=example.com # ご使用の CircleCI Server のドメインに置換
-sudo certbot certonly --dns-route53 \
-  -d "${DOMAIN}" \
-  -d "app.${DOMAIN}"
-----
-
-This will create a private key and certificate (including intermediate certificates) in `/etc/letsencrypt/live/${DOMAIN}/`.
-
-NOTE: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が`server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
-
-### PostgreSQL
-*[Internal (内部)]*: CircleCI 名前空間の内部で実行される構成済み PostgreSQL 12 インスタンスをデプロイします。 
-
-*[External (外部)]* : このオプションを選択すると、クラスタ外部で実行される PostgreSQL システムに接続できます。  CircleCI は PostgreSQL 12.6 で動作することをテスト済みです。  CircleCI アプリケーションをデプロイする前に外部 PostgreSQL インスタンスを構成することを強くお勧めします。  構成に関する詳細は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services[こちら]を参照してください。 インスタンスの構成が完了したら、以下のセクションに入力します。
-
-* [PostgreSQL Service Domain (PostgreSQL サービスのドメイン)]
-  ** PostgreSQL インスタンスのドメインまたは IP アドレス
-* [PostgreSQL Service Port (PostgreSQL サービスのポート)]
-  ** PostgreSQL インスタンスのポート
-* [PostgreSQL Service User (PostgreSQL サービスのユーザー)]
-  ** PostgreSQL インスタンスにアクセスするための権限を持っているユーザー
-* [PostgreSQL Service Password (PostgreSQL サービスのパスワード)]
-  ** PostgreSQL インスタンスにアクセスするためにユーザーが使用するパスワード
-
-### MongoDB
-*Internal*: deploys a completely configured MongoDB instance along with your server installation.
-*[Internal (内部)]*: 完全に構成済みの MongoDB インスタンスを CircleCI Server と共にデプロイします。
-*[External (外部)]*: このオプションを選択すると、独自の MongoDB インスタンスを使用できます。 CircleCI Server は MongoDB 3.6 で動作することをテスト済みです。 以下の設定により、外部 MongoDB インスタンスのセットアップをカスタマイズできます。
-
-. [MongoDB connection host(s) or Ip(s) (MongoDB 接続ホストまたは IP)]: MongoDB インスタンスのホスト名または IP を指定します。 コロンによるポートの指定と、シャード インスタンスに対する複数のホストの両方がサポートされています。
-. [Use SSL for connection to MongoDB (MongoDB への接続に SSL を使用)]: 外部 MongoDB インスタンスへの接続に SSL を使用するかどうかを指定します。
-. [Allow insecure TLS connections (セキュアでない TLS 接続を許可)]: 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 ただし、この設定はセキュアではありません。 可能な限り、有効な CA によって署名された TLS 証明書を使用することをお勧めします。
-. [MongoDB user (MongoDB ユーザー)]: 使用するアカウントのユーザー名を指定します。 このアカウントには dbAdmin ロールが指定されている必要があります。
-. [MongoDB password (MongoDB パスワード)]: 使用するアカウントのパスワードを指定します。
-. [MongoDB authentication source database (MongoDB 認証ソース データベース)]: アカウント情報を保持しているデータベースを指定します (通常は `admin`)。
-. [MongoDB authentication mechanism (MongoDB 認証メカニズム)]: 使用する認証メカニズムを指定します (通常は `SCRAM-SHA-1`)。
-. [Additional connection options (追加の接続オプション)]: 使用する他の接続オプションを指定します。 これはクエリ文字列の形式で指定する必要があります (キーと値を "=" でつないだペア。 複数指定する場合は & で区切り、特殊文字は URL エンコードが必要)。 利用可能なオプションについては、https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB のドキュメント]を参照してください。
-
-### [Encryption (暗号化)]
-CircleCI で生成されるアーティファクトの暗号化と署名には、以下のキーセットを使用します。
-
-. *[Artifact Signing Key (アーティファクト署名キー)]* (必須): 生成するには、以下を実行します。 +
-[source,bash]
-----
-docker run circleci/server-keysets:latest generate signing -a stdout
-----
-出力全体を [Artifact Signing Key (アーティファクト署名キー)] フィールドにコピー & ペーストします。
-
-[start=2]
-. *[Encryption Signing Key (暗号化署名キー)]* (必須): 生成するには、以下を実行します。
-[source,bash]
-----
-docker run circleci/server-keysets:latest generate signing -a stdout
-----
-出力全体を [Encryption Signing Key (暗号化署名キー)] フィールドにコピー & ペーストします。
-
-WARNING: これらのキーを紛失するとジョブ履歴やアーティファクトを復元できなくなるため、安全な場所に控えておくことをお勧めします。
-
-### [GitHub]
-次の設定により、GitHub OAuth を使用したサーバーへの認証を制御します。 これらを設定することで、ビルド ステータス情報を使用して GitHub を更新できるようになります。
-
-NOTE: このインスタンスを 2.19 からの移行に備えてセットアップする場合、2.19 で使用していたものではなく、新しい OAuth アプリケーションを使用することをお勧めします。
-
-. *[GitHub Type (GitHub の種類)]*: [Cloud] または [Enterprise] を選択します。
-. *[OAuth Client ID (OAuth クライアント ID)]* (必須): GitHub で *[Settings (設定)]* > *[Developer settings (開発者向け設定)]* > *[OAuth Apps (OAuth アプリケーション)]* にアクセスして、*[Register a new application (新しいアプリケーションの登録)]* ボタンをクリックします。
-
-.新しい OAuth アプリケーションの登録
-image::github-oauth.png[GitHub OAuth ]
-
-[Homepage URL (ホームページ URL)] には CircleCI Server 用に選択したドメイン、[Authorization callback URL (認証コールバック URL)] には *<your-circle-ci-domain>/auth/github* を指定します。
-
-[start=3]
-. *[OAuth Client Secret (OAuth クライアント シークレット)]* (必須): このシークレットは、GitHub の登録済み OAuth アプリケーションのページで、*[Generate a new client secret (新しいクライアント シークレットの生成)]* ボタンを選択することで作成できます。
-
-NOTE: GitHub Enterprise を使用する場合は、パーソナル アクセス トークンと GitHub Enterprise インスタンスのドメイン名も必要になります。 また、GitHub Enterprise の管理コンソールで、[Enable API Rate Limiting (API レート制限の有効化)] をオンにする必要があります。
-
-### MongoDB
-*[Internal (内部)]* を選択すると、完全に構成済みの MongoDB インスタンスが CircleCI Server と共にデプロイされます。
-*[External (外部)]*を選択すると、独自の MongoDB インスタンスを使用できます。 CircleCI Server は MongoDB 3.6 で動作することをテスト済みです。 以下の設定を使用して、外部 MongoDB インスタンスのセットアップをカスタマイズできます。
-
-. [MongoDB connection host(s) or Ip(s) (MongoDB 接続ホストまたは IP)]: MongoDB インスタンスのホスト名または IP を指定します。 コロンによるポートの指定と、シャード インスタンスに対する複数のホストの両方がサポートされています。
-. [Use SSL for connection to MongoDB (MongoDB への接続に SSL を使用)]: 外部 MongoDB インスタンスへの接続に SSL を使用するかどうかを指定します。
-. [Allow insecure TLS connections (セキュアでない TLS 接続を許可)]: 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 ただし、この設定はセキュアではありません。 可能な限り、有効な CA によって署名された TLS 証明書を使用することをお勧めします。
-. [MongoDB user (MongoDB ユーザー)]: 使用するアカウントのユーザー名を指定します。 このアカウントには dbAdmin ロールが指定されている必要があります。
-. [MongoDB password (MongoDB パスワード)]: 使用するアカウントのパスワードを指定します。
-. [MongoDB authentication source database (MongoDB 認証ソース データベース)]: アカウント情報を保持しているデータベースを指定します (通常は `admin`)。
-. [MongoDB authentication mechanism (MongoDB 認証メカニズム)]: 使用する認証メカニズムを指定します (通常は `SCRAM-SHA-1`)。
-. [Additional connection options (追加の接続オプション)]: 使用する他の接続オプションを指定します。 これはクエリ文字列の形式で指定する必要があります (キーと値を "=" でつないだペア。 複数指定する場合は & で区切り、特殊文字は URL エンコードが必要)。 利用可能なオプションについては、https://docs.mongodb.com/v3.6/reference/connection-string/[[MongoDB のドキュメント]]を参照してください。
-
-### Vault
-*[Internal (内部)]* を選択すると、デフォルトの Vault インスタンスが CircleCI K8s 名前空間内にデプロイされます。  アプリケーションは自動的に構成されます。
-*[External (外部)]* を選択した場合、CircleCI アプリケーションではデフォルトの Vault インスタンスはインストールされません。  このオプションは、既存の Vault インスタンスがある場合に選択します。  以下の設定を構成する必要があります。
-
-. [URL]:  `http://vault:8200` など
-. [Transit Path (Transit パス)]: Transit Secrets Engine のパスを指定します。  デフォルト値は `transit` です。 詳細については、https://www.vaultproject.io/docs/secrets/transit#setup[[Vault のドキュメント]]を参照してください。
-. [Token (トークン)]: CircleCI で使用する Vault のトークンを指定します。  以下に、推奨されるポリシーに基づいてトークンを作成する方法の例を示します。
-
-ポリシーを作成する:
-[source,sh]
-----
-vault policy write circleci -<<EOF
-path "mytransit/keys" {
-  capabilities = ["list"]
-}
-path "mytransit/keys/*" {
-  capabilities = ["read", "create", "update", "delete"]
-  denied_parameters = {
-    "exportable" = [true]
-  }
-}
-path "mytransit/export/*" {
-  capabilities = ["deny"]
-}
-path "mytransit/encrypt/*" {
-  capabilities = ["create", "update"]
-}
-path "mytransit/decrypt/*" {
-  capabilities = ["update"]
-}
-path "mytransit/rewrap/*" {
-  capabilities = ["update"]
-}
-path "/auth/token/lookup-self" {
-    capabilities = ["read", "list"]
-}
-
-EOF
-
-vault token create -policy=circleci
-----
-
-作成したポリシーでトークンを作成する:
-[source,sh]
-----
-vault token create -policy=circleci -period=30m
-----
-
-### [Object Storage (オブジェクト ストレージ)]
-
-CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 CircleCI Server 3.x では、以下をサポートしています。
-
-. https://aws.amazon.com/s3/[AWS S3]
-. https://min.io[Minio]
-. https://cloud.google.com/storage/[Google Cloud Storage]
-
-S3 互換のオブジェクト ストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは https://aws.amazon.com/s3/[AWS S3] および https://min.io[Minio] のみです。 https://docs.aws.amazon.com/AmazonS3/latest/API/Type_API_Reference.html[S3 API] がサポートされていないオブジェクト ストレージ プロバイダー (https://docs.microsoft.com/en-ca/azure/storage/blobs/[Azure Blob Storage] など) を利用する場合は、https://docs.min.io/minio/baremetal/reference/minio-server/minio-gateway.html[[Minio Gateway]] を使用することをお勧めします。
-
-ニーズに最適なストレージを選んでください。  *[Storage Bucket Name (ストレージ バケット名)]* は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 先に進む前に、入力したバケット名が選択したオブジェクト ストレージ プロバイダーに存在することを確認してください。
-
-#### S3 互換オブジェクト ストレージ
-
-S3 互換オブジェクト ストレージを構成するには、構成ページの [Object Storage (オブジェクト ストレージ)] セクションで以下の詳細を設定します。
-
-. *[Storage Bucket Name (ストレージ バケット名)]* (必須): CircleCI Server に使用するバケットを指定します。
-. *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
-. *[AWS S3 Region (AWS S3 リージョン)]* (オプション): プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 このオプションを設定すると、[S3 Endpoint (S3 エンドポイント)] は無視されます。
-. *[S3 Endpoint (S3 エンドポイント)]* (オプション): S3 ストレージ プロバイダーの API エンドポイントを指定します。 プロバイダーが AWS ではない場合は必須です。 このオプションを設定すると、[AWS S3 Region (AWS S3 リージョン)] は無視されます。
-. *[Access Key ID (アクセス キー ID)]* (必須): S3 バケットへのアクセス用のアクセス キー ID を指定します。
-. *[Secret Key (シークレット キー)]* (必須): S3 バケットへのアクセス用のシークレット キーを指定します。
-
-CircleCI Server 用に、プログラムでのアクセスが可能な新規ユーザーを作成することをお勧めします。 If your provider support IAM policies,
-you should fill in `<BUCKET_NAME>` and attach the following policy to the user:
-
-[source,json]
-----
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:*"
-      ],
-      "Resource": [
-        "arn:aws:s3:::<BUCKET_NAME>",
-        "arn:aws:s3:::<BUCKET_NAME>/*"
-      ]
-    }
-  ]
-}
-
-----
-
-#### Google Cloud Storage
-
-Google Cloud Storage (GCS) を構成するには、構成ページの [Object Storage (オブジェクト ストレージ)] セクションで以下の詳細を設定します。
-
-. *[Storage Bucket Name (ストレージ バケット名)]* (必須): CircleCI Server に使用するバケットを指定します。
-. *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
-. *[Service Account JSON (サービス アカウントの JSON)]* (必須): バケットへのアクセスに使用する JSON 形式のサービス アカウント キーを指定します。
-
-専用のサービス アカウントをお勧めします。  アカウントを`ストレージ オブジェクト管理者`ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。  たとえば、Google の IAM コンソールの条件エディターに以下を入力します。
-
-[source,text]
-----
-resource.name.startsWith("projects/_/buckets/<bucket-name>")
-----
-
-NOTE: `startsWith` を使用し、バケット名に `projects/_/buckets/` というプレフィックスを付けます。
-
-### [Email Notifications (メール通知)]
-ビルドの通知はメールで送信されます。
-
-. *[Email Submission server hostname (メール送信サーバーのホスト名)]*: 送信サーバーのホスト名を指定します (例えば SendGrid の場合は smtp.sendgrid.net を使用)。
-. *[Username (ユーザー名)]*: 送信サーバーの認証に使用するユーザー名を指定します。 一般的には、ユーザーのメール アドレスと同一になります。
-. *[Password (パスワード)]*: 送信サーバーの認証に使用するパスワードを指定します。
-. *[Port (ポート)]*: 送信サーバーのポートを指定します。 通常は 25 か 587 です。 メール送信にはポート 465 もよく使われますが、このポートは StartTLS ではなく暗黙的 TLS に使用することがほとんどです。 CircleCI Server では、送信の暗号化には StartTLS のみをサポートしています。 +
-
-WARNING: ポート 25 のアウトバウンド接続は、ほとんどのクラウド プロバイダーでブロックされます。 このポートを選択する場合は、通知の送信に失敗する可能性があることに留意してください。
-
-[start=5]
-. *[Enable StartTLS (StartTLS の有効化)]*: 有効化すると、メール送信が暗号化されます。 +
-
-WARNING: トラフィックの機密性を保証できない場合は、このオプションを無効化しないでください。
-
-### VM サービスの設定
-ここでは、VM とリモート Docker ジョブを設定します。 スケーリング ルールなど、さまざまなオプションを構成することができます。
-
-NOTE: CircleCI Server の構成と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。
-
-#### 認証とアクセス権限
-##### AWS EC2
-AWS EC2 を使う場合は、以下のフィールドを設定して VM サービスを構成する必要があります。 VM サービスで使用するアクセス キーとシークレット キーは、前述のオブジェクト ストレージ用のポリシーとは異なることに注意してください。 VM サービスとオブジェクト ストレージは別々に保たれているため、同じ環境内で異なるクラウド プロバイダーとオンプレミス プロバイダーを利用できます。 
-
-. *[AWS Region (AWS リージョン)]* (必須): アプリケーションのリージョンを指定します。
-. *[AWS Windows AMI ID]* (オプション): Windows ビルダーが必要な場合、その AMI ID をここに指定できます。
-. *[Subnet ID (サブネット ID)]* (必須): VM のデプロイ先になるサブネット (パブリックまたはプライベート) を選択します。
-. *[Security Group ID (セキュリティ グループ ID)]* (必須): VM にアタッチするセキュリティ グループを指定します。 セキュリティ グループは手動で作成する必要があります。
-
-推奨されるセキュリティ グループ構成については、xref:server-3-install-hardening-your-cluster.adoc#external-vms[外部 VM] セクションを参照してください。 また、以下のコマンドを実行して AWS または GCP に必要なセキュリティ グループを作成できます。
-
-AWS
 ```bash
-$ aws ec2 create-security-group \
-    --description "CircleCI の VM サービスのセキュリティ グループ" \
-    --group-name "circleci-vm-service-sg"
-$ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
-    --protocol tcp \
-    --port 22 \
-    --cidr "<<Nomad クライアントの CIDR>>"
-$ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
-    --protocol tcp \
-    --port 22 \
-    --cidr "<<Kubernetes ノードの CIDR>>"
-$ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
-    --protocol tcp \
-    --port 2376 \
-    --cidr "<<Nomad クライアントの CIDR>>"
-$ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
-    --protocol tcp \
-    --port 2376 \
-    --cidr "<<Kubernetes ノードの CIDR>>"
-$ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
-    --protocol tcp \
-    --port 54782
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
-GCP
+* *Frontend TLS Certificate (required)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: 
++
 ```bash
-$ gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" \
-    --network "<<CircleCI のネットワーク。 デフォルトでは省略可能>>" \
-    --action allow \
-    --source-ranges "<<Nomad クライアントの CIDR>>" \
-    --rules "TCP:22,TCP:2376"
-$ gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" \
-    --network "<<CircleCI のネットワーク。 デフォルトでは省略可能>>" \
-    --action allow \
-    --source-ranges "<<Kubernetes ノードの CIDR>>" \
-    --rules "TCP:22,TCP:2376"
-$ gcloud compute firewall-rules create "circleci-vm-service-external-fw" \
-    --network "<<CircleCI のネットワーク。
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-[start=5]
-. *[AWS IAM Access Key ID (AWS IAM アクセス キー ID)]* (必須): EC2 へのアクセス用のhttps://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
-. *[AWS IAM Secret Key (AWS IAM シークレット キー)]* (必須): EC2 へのアクセス用のhttps://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM シークレット キー]を指定します。
+* *Private Load Balancer (optional)* - Load balancer doesn't generate external IP addresses. 
 
-CircleCI Server 用に、プログラムでのアクセスが可能な新規ユーザーを作成することをお勧めします。 You should fill in <<Security Group ID>> and <<VPC ARN>> and attach the following IAM policy to the user:
+==== Artifact and Encryption Signing Settings
+Encryption and artifact signing keys were created during prerequisites phase. You can enter them here now. 
 
-[source,json]
+Complete the following fields: 
+
+* *Artifact Signing Key (required)*
+
+* *Encryption Signing Key (required)*
+
+==== Github Settings
+You created your Github OAuth application in the prerequisite phase, use the data to complete the following:
+
+* *Github Type (required)* - 
+Select Cloud or Enterprise (on premises).
+
+* *OAuth Client ID (required)* - 
+The OAuth Client ID provided by Github. 
+
+* *OAuth Client Secret (required)* - 
+The OAuth Client Secret provided by Github. 
+
+==== Object Storage Settings
+
+You created your Object Storage Bucket and Keys in the prerequisite steps, use the data to complete the following:
+
+===== S3 Compatible
+You should have created your S3 Compatible bucket and optional IAM account during the prerequisite steps. 
+
+* *Storage Bucket Name (required)* -
+The bucket used for server.
+
+* *Access Key ID (required)* -
+Access Key ID for S3 bucket access.
+
+* *Secret Key (required)* -
+Secret Key for S3 bucket access.
+
+* *AWS S3 Region (optional)* -
+AWS region of bucket if your provider is AWS. S3 Endpoint is ignored if this option is set.
+
+* *S3 Endpoint (optional)* -
+API endpoint of S3 storage provider. Required if your provider is not AWS. AWS S3 Region is ignored if this option is set.
+
+* *Storage Object Expiry (optional)* -
+Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
+
+===== Google Cloud Storage 
+You should have created your Google Cloud Storage bucket and service account during the prerequisite steps. 
+
+* *Storage Bucket Name (required)* - 
+The bucket used for server.
+
+* *Service Account JSON (required)* - 
+A JSON format key of the Service Account to use for bucket access.
+
+* *Storage Object Expiry (optional)* - 
+Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
+
+==== Nomad
+Set mTLS to `disabled`. This should be disabled by default but there is a known issue currently preventing this. Disabling allows you to ignore Nomad settings until phase 3 of the installation process where we will install build services.
+
+==== Postgres, MongoDB, Vault settings
+
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
+
+==== Save and Deploy
+Once you have completed the fields detailed above it is time to deploy. The deployment will install the core services and provide you an IP address for the Traefik load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation. 
+
+NOTE: In this first stage we skipped a lot of fields in the config. Not to worry. We will revisit those in the next stages of installation.
+
+==== Create DNS Entry 
+Create a DNS entry for your Traefik load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record. 
+
+You will need the IP address or, if using AWS, the DNS name of the Traefik load balancer. You can find this with the following command:
+
 ----
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "ec2:RunInstances",
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:ec2:*::image/*",
-        "arn:aws:ec2:*::snapshot/*",
-        "arn:aws:ec2:*:*:key-pair/*",
-        "arn:aws:ec2:*:*:launch-template/*",
-        "arn:aws:ec2:*:*:network-interface/*",
-        "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:volume/*",
-        "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<<セキュリティ グループ ID>>"
-      ]
-    },
-    {
-      "Action": "ec2:RunInstances",
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:instance/*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:CreateVolume"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:ec2:*:*:volume/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateTags"
-      ],
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:CreateAction" : "CreateVolume"
-        }
-      }
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateTags"
-      ],
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:CreateAction" : "RunInstances"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:CreateTags",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances",
-        "ec2:AttachVolume",
-        "ec2:DetachVolume",
-        "ec2:DeleteVolume"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:RunInstances",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:subnet/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:Vpc": "<<VPC ARN>>"
-        }
-      }
-    }
-  ]
-}
+kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
-##### Google Cloud Platform
-Google Cloud Platform (GCP) を使う場合は、以下のフィールドを設定して VM サービスを構成する必要があります。
+For more information on adding a new DNS record, see the following documentation:
 
-. *[GCP project ID (GCP プロジェクト ID)]* (必須): クラスタが存在する GCP プロジェクトの名前を指定します。
-. *[GCP Zone (GCP ゾーン)]* (必須): IEの `us-east1-b`に仮想マシン インスタンスを作成する GCP ゾーンを指定します。
-. *[GCP Windows Image (GCP Windows イメージ)]* (オプション): Windows ビルドに使用するイメージの名前を指定します。 Windows ビルドが不要な場合は、このフィールドを空欄にします。
-. *[GCP VPC Network (GCP VPC ネットワーク)]* (必須): VPC ネットワークの名前を指定します。
-. *[GCP VPC Subnet (GCP VPC サブネット)]* (オプション): VPC サブネットの名前を指定します。 自動サブネット化を使用する場合は、このフィールドは空欄にします。
-. *[GCP Service Account JSON file (GCP サービス アカウントの JSON ファイル)]* (必須): https://cloud.google.com/iam/docs/service-accounts[サービス アカウントの JSON ファイル]の内容をコピー & ペーストします。
+* link:https://cloud.google.com/dns/docs/records#adding_a_record[Managing Records] (GCP)
 
-WARNING: VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント]を参照してください。
+* link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
 
-#### [VM Service (VM サービス)]
+==== Validation
 
-. *[Number of <VM type> VMs to keep prescaled (事前スケーリングする <VM タイプ> の VM 数)]*: デフォルトでは、このフィールドは 0 に設定されています。この値の場合、該当するリソース タイプのインスタンスがオンデマンドで作成、プロビジョニングされます。 リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 ただし、事前割り当てされたインスタンスは常に実行されるため、コストが増加する可能性があります。 また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
-. *[VM Service Custom Configuration (VM サービスのカスタム構成)]*: カスタム構成では、VM サービスのさまざまな点を微調整することができます。 これは高度なオプションですので、詳細については担当のアカウント マネージャーに問い合わせることをお勧めします。
+You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now let’s move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to be status of running and ready should show 1/1): 
 
-### Nomad
-You will configure aspects of your Nomad control plane in <<Step 3 - Obtain Load Balancer IPs, Step 3>> after completing the Nomad setup in <<Step 2 - Configure Server (Part 1), Step 2>>.
-This section can be left with its default values until <<Step 3 - Obtain Load Balancer IPs, Step 3>>, with the exception of mTLS, which should be only be enabled after completing <<Step 4 - Install Nomad Clients, Step 4>>.
-
-#### 相互 TLS (mTLS) の有効化
-mTLS は、Nomad コントロール プレーンと Nomad クライアント間のトラフィックを暗号化および認証します。 You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
-
-#### Preflight Checks
-必要な情報をすべて入力し *[Continue (続行)]* ボタンをクリックすると、CircleCI Server に対して一連の事前チェックが実施されてクラスタが最小要件を満たしているかどうか検証され、デプロイが試みられます。 検証に合格すると、以下のような画面が表示され、次のステップに進むことができます。
-
-* Kubernetes Version is 1.16.0 or greater
-* The cluster has 30Gi of total memory or greater
-* Total vCPUs in the cluster is 8 or greater
-* The cluster has a default storage class
-
-When completed successfully, you should see something like the following and you can continue to the next step:
-
-.CircleCI Sever v{serverversion} の事前チェック
-image::preflight-checks.png[Preflight Checks]
-
-However, should any of these checks fail the issue will be highlighted, giving you an opportunity to address these issues before deployment.
-
-## Step 3 - Obtain Load Balancer IPs
-`kubectl get services` を実行し、以下のロード バランサーのアドレスを控えておきます。 これらは CircleCI Server の構成を完了するために必要になります。 If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
-
-* CircleCI Server の Traefik ロード バランサーのプロキシ
-* VM サービス ロード バランサーの URI
-* 出力プロセッサ ロード バランサーの URI
-* Nomad サーバー ロード バランサーの URI
-
-お使いのクラウド環境と構成によっては、ロード バランサーの外部 IP アドレスかホスト名が出力に含まれることもありますが、 どちらも使用できます。 Either will work.
-
-The values for VM Service, Output Processor and Nomad server should be added into the config as described in
-<<Step 2 - Configure Server (Part 1)>>. The value from Circleci server Traefik should be used in <<Step 5 - Create DNS Entries for the Frontend>>
-to create the DNS entry for your applications domain name and sub-domain.
-
-前のステップで Nomad `server_endpoint` の値をデフォルトのままにしていた場合は、Terraform リポジトリに戻り、`terraform.tfvars` に適切な値を入力して再度 `terraform apply` を実行します。
-
-NOTE: ここで、各ロード バランサーの DNS エントリを作成することもできます。 これは必須ではなく任意のオプションです。 例えば、VM サービスに `vmservice.circleci.yourdomain.com` という名前を付けます。
-
-## Step 4 - Install Nomad Clients
-https://circleci.com/docs/ja/2.0/server-3-overview[概要のページ]で述べているとおり、Nomad は、CircleCI が CircleCI ジョブのスケジュール設定と実行に使用するワークロード オーケストレーション ツールです。 ジョブのスケジュール設定には Nomad サーバー、実行には Nomad クライアントを使用します。
-
-Nomad クライアント マシンはクラスタ外にプロビジョニングされるので、Nomad コントロール プレーン、出力プロセッサ、VM サービスへのアクセスが必要です。
-
-CircleCI では、任意のクラウド プロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 これらのモジュールは、CircleCI のhttps://github.com/CircleCI-Public/server-terraform[[パブリック リポジトリ]]にあります。
-
-NOTE: CircleCI では、`blocked_cidrs`を使ってジョブ内から特定のCIDRへのネットワークアクセスをブロックしています。 これは、 Nomad クライアントがアクセスを避けるべきサービスを使って任意のコードで通信すること(VMサービスを使ってVMをスピンアップするなど) を防ぐためのセキュリティー機能です。 Normad クライアントへの送受信アクセスをブロックしないでください。ブロックすると `setup_remote_docker` に失敗します。
-
-NOTE: We use `blocked_cidrs` to block network access to the specified CIDRs from within jobs. This is a security feature to prevent Nomad Clients
-from communicating with services that should not be accessed by arbitrary code (such as spinning up VMs using the vm-service). Do
-not block access to/from Nomad clients or `setup_remote_docker` will fail.
-
-### AWS
-AWS に Nomad クライアントをインストールする場合は、`main.tf` というファイルを以下の内容で作成してください。
-
-[source,text]
 ----
-# main.tf
-terraform {
-  required_version = ">= 0.15.4"
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = ">=3.0.0"
-    }
-  }
-}
-provider "aws" {
-# 任意のリージョン
-region = "us-west-1"
-}
-
-module "nomad_clients" {
-source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.1.0"
-
-  # 実行する Nomad クライアントの数
-  nodes = 4
-  subnet = "<< Nomad クライアントを実行するサブネットの ID  >>"
-  vpc_id = "<< Nomad クライアントを実行する VPC の ID >>"
-
-  server_endpoint = "<< Nomad サーバーのホスト名:ポート >>"
-
-  dns_server = "<< VPC DNS サーバーの IP アドレス >>"
-  blocked_cidrs = [
-    "<< アクセスをブロックする CIDR ブロック (例: 10.0.1.0/24) >>"
-  ]
-}
-
-output "nomad_server_cert" {
-value = module.nomad_clients.nomad_server_cert
-}
-
-output "nomad_server_key" {
-value = module.nomad_clients.nomad_server_key
-}
-
-output "nomad_ca" {
-value = module.nomad_clients.nomad_tls_ca
-}
+kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-Nomad クライアントをデプロイするには、以下のコマンドを実行します。
+ifndef::pdf[]
+## What to read next
 
-[source,bash]
-----
-terraform init
-terraform plan
-terraform apply
-----
-
-Terraform は、Nomad クライアントのスピンアップを完了した後、xref:server-3-install.adoc#enable-mutual-tls-mtls[Nomad の構成セクション]で言及した、Nomad の mTLS 暗号化に必要な証明書とキーを出力します。 この情報は、安全な場所にコピーしてください。
-
-`terraform apply` コマンドの処理が完了したら、管理者コンソールの *[Application (アプリケーション)]* タブをクリックし、デプロイのステータスが [Ready (準備完了)] になるまで待機して次のステップに進みます。
-
-### Google Cloud Platform
-
-Google Cloud Platform に Nomad クライアントをインストールする場合は、`main.tf` というファイルを作成してください。 以下に、一般的な設定を指定したサンプルを示します。 For documentation on all available variables please see https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[the
-module README].
-
-[source,text]
-----
-# main.tf
-provider "google-beta" {
-  # 実際の認証情報
-  project = "your-project"
-  region  = "us-west1"
-  zone    = "us-west1-a"
-}
-
-module "nomad_clients" {
-  # 特定のリリース バージョンに固定するには ref=<<tag>> を使用
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.1.0"
-
-  zone    = "us-west1-a"
-  region  = "us-west1"
-  network = "my-network"
-  # VPC でカスタム サブネットワークを使用する場合のみサブネットを指定する。 使用しない場合は次の行を削除。
-  subnet  = "my-nomad-subnet"
-
-  # Nomad ロード バランサーのホスト名とポートを ":" で区切って指定する。
-  不明な場合、ポートは 4647 のままにする
-  server_endpoint = "nomad.example.com:4647"
-
-  # 実行する Nomad クライアントの数
-  min_replicas     = 3
-  max_replicas     = 10
-
-  # 自動スケーリング ポリシーの例: CPU 使用率が 70% に到達したらスケールアップ
-  autoscaling_mode = "ONLY_UP"
-  target_cpu_utilization = 0.70
-
-  # ネットワーク ポリシーの例: ジョブから 1.1.1.1 へのアクセスをブロックし
-  # 2.2.2.2 からの SSH 接続を使用した再試行のみを許可
-  blocked_cidrs = [
-    "1.1.1.1/32"
-  ]
-  retry_with_ssh_allowed_cidr_blocks = [
-    "2.2.2.2/32"
-  ]
-}
-
-output "nomad_server_cert" {
-  value = module.nomad_clients.nomad_server_cert
-}
-
-output "nomad_server_key" {
-  value = module.nomad_clients.nomad_server_key
-}
-
-output "nomad_ca" {
-  value = module.nomad_clients.nomad_tls_ca
-}
-----
-
-Nomad クライアントをデプロイするには、以下のコマンドを実行します。
-
-[source,bash]
-----
-terraform init
-terraform plan
-terraform apply
-----
-
-Terraform は、Nomad クライアントのスピンアップを完了した後、xref:server-3-install.adoc#enable-mutual-tls-mtls[Nomad の構成セクション]で言及した、Nomad の mTLS 暗号化に必要な証明書とキーを出力します。 この情報は、安全な場所にコピーしてください。
-
-`terraform apply `コマンドの処理が完了したら、管理者コンソールの *[Application (アプリケーション)]* タブをクリックし、デプロイのステータスが [Ready (準備完了)] になるまで待機して次のステップに進みます。
-
-### オプション: Nomad クライアント以外でのジョブの実行
-CircleCI Server は Nomad クライアント上で Docker ジョブを実行しますが、専用の VM でジョブを実行することもできます。 これらの VM ジョブは Nomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、リモート Docker ジョブ用にポート 2376 で VM にアクセスできる必要があります。
-
-TIP: GCP では現在、VM ジョブ用のマシンのアドレスは外部 IP を介して指定されます。 許可するソースとして [[Nomad]] クライアントと Kubernetes ノードの IP アドレスを指定した適切な受信ルールを、TCP ポート 2376 に対して作成する必要があります。
-
-## Step 5 - Create DNS Entries for the Frontend
-次に、Traefik ロード バランサー の DNS エントリを作成します (`circleci.your.domain.com` と `app.circleci.your.domain.com`) 。
-
-You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how to create TLS certs for your server install.
-TLS はオプションですが、使用する場合は、例で示しているように、TLS 証明書にサーバーのドメインとサブドメインの両方が含まれていなければなりません。 Once the user is logged in, all client requests are routed through your Traefik
-sub-domain, i.e, `app.{your_domain}.com`.
-
-新しい DNS レコードを追加する方法について詳しくは、以下のドキュメントを参照してください。
-
-- https://cloud.google.com/dns/docs/records#adding_a_record[レコードの管理] (GCP)
-- https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成] (AWS)
-
-## ステップ 6 - サーバーの構成 (パート 2) とデプロイ
-管理者コンソールの *[Config (構成)]* タブに戻ります。
-
-TIP: Run `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` if you need to get back to the admin console.
-
-### [Global Settings (グローバル設定)]
-Enter the values obtained from <<Step 3 - Obtain Load Balancer IPs>> into VM Service Load Balancer Hostname, Output Processor
-Load Balancer Hostname, and Nomad Load Balancer Hostname under Global Settings.
-
-### Nomad
-
-mTLS は、Nomad コントロール プレーンと Nomad クライアント間のトラフィックを暗号化および認証します。 If you have already deployed the Nomad clients via terraform in <<Step 4 - Install Nomad Clients>> you can and should enable mutual TLS (mTLS).
-
-WARNING: クラスタに含まれるノードの信頼性、およびノードとコントロール プレーン間のトラフィックの機密性を他の方法で保証することができない場合、この機能は無効化しないでください。
-
-. *Nomad Server Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. 
-. *Nomad Server Private Key* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. 
-. *Nomad Server Certificate Authority (CA) Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>.
-
-
-### デプロイ
-*[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
-
-## ステップ 7 - インストール結果の検証
-
-. お使いのブラウザーで CircleCI Server を起動します (例: https://hostname.com)。 
-  * . 自己署名 TLS 証明書を使用している場合は、この段階でセキュリティ警告が表示されます。 これを回避するには、適切な TLS 証明書を使用する必要があります。
-. CircleCI Server に登録またはログインします。 最初にログインしたユーザーが、現時点での管理者になります。
-. https://circleci.com/docs/2.0/getting-started/#section=getting-started[入門ガイド]を参照し、プロジェクトを追加します。
-. https://github.com/circleci/realitycheck[CircleCI realitycheck] リポジトリを使用し、https://github.com/circleci/realitycheck/blob/master/README.md[README] に従って CircleCI の基本機能を確認します。
-
-最初のビルドの実行に失敗する場合は、まず https://circleci.com/docs/ja/2.0/troubleshooting[トラブルシューティング ガイド]で一般的なトラブルシューティングのトピックを参照してください。 CircleCI Server 内の Nomad クライアントの状態を確認する方法については、「https://circleci.com/docs/ja/2.0/nomad[Nomad クラスタの操作ガイド]」を参照してください。
-
-## 次に読む
-
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
-* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x Phase 3: Build services installation]
+endif::[]

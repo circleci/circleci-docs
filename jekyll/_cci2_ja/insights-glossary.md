@@ -4,6 +4,7 @@ title: "Insights のメトリクスの用語集"
 short-title: "CircleCI Insights のメトリクスの定義"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## 概要

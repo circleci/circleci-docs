@@ -17,11 +17,11 @@ version:
 {:toc}
 
 ## 概要
-{:.no_toc}
+{: #overview }
 
-This is an example application showcasing how to run a Java app on CircleCI 2.1. This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). Spring Framework を使用している  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています) This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
+This is an example application showcasing how to run a Java app on CircleCI 2.1. This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
 
-## 設定ファイルの例
+## 設定ファイルの例: バージョン2.1
 {: #sample-configuration-version-21 }
 
 ### A basic build with an orb:
@@ -39,9 +39,10 @@ workflows:
       - maven/test # checkout, build, test, and upload test results
 ```
 
+
 This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
 
-## For 2.0 Configuration (recommended for CircleCI Server only):
+## バージョン2.0の場合（CircleCI Serverのみ推奨）
 {: #for-20-configuration-recommended-for-circleci-server-only }
 
 ```yaml
@@ -190,6 +191,7 @@ This `persist_to_workspace` step allows you to persist files or directories to b
 {% raw %}
 ```yaml
 version: 2.0
+
 jobs:
   test:
     parallelism: 2 # parallel containers to split the tests among
@@ -348,9 +350,9 @@ workflows:
 ```
 {% endraw %}
 
-このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Projects dashboard (プロジェクトの追加)](https://app.circleci.com/projects/){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 Nice! これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を構成できました。
+このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 Nice! これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を構成できました。
 
-## 関連項目
+## 設定ファイルの詳細
 {: #see-also }
 
 - [Maven](https://maven.apache.org/) を使用している  ([Gradle](https://gradle.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java/))

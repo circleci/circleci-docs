@@ -25,7 +25,6 @@ https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] �
 
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
 Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
-Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
 
 NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが*必要*なものだけにアクセスできるようにしたりするのにとても便利です。
 
@@ -126,8 +125,7 @@ jobs:
 現在 CircleCI では、Amazon の ECR サービスからのプライベート イメージのプルをサポートしています。
 
 TIP: 任意のリージョンの ECR リポジトリから、プライベート イメージをプルできます。 ただし、最高のエクスペリエンスを得るために、`us-east-1` リージョンにイメージのコピーを作成し、その `us-east-1` のイメージを Docker Executor に指定することを強くお勧めします。
-CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあります。
-そのため、`us-east-1` のイメージを使用すると、環境のスピンアップ プロセスにかかる時間が短縮されます。
+CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあります。そのため、`us-east-1` のイメージを使用すると、環境のスピンアップ プロセスにかかる時間が短縮されます。
 
 以下の 2 つの方法のいずれかで、ECR のプライベート イメージを使用できるようになります。
 

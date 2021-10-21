@@ -20,17 +20,17 @@ description: "Jira と CircleCI の接続"
 
 ---
 
-# Jiraでビルドとデプロイのステータスを確認する
+# Jiraでビルドとデプロイのステータスを表示
 {: #viewing-build-and-deploy-statuses-in-jira }
 
 CircleCI Orb を使用すると、Jira でビルドとデプロイのステータスを確認できるようになります。 そのプロセスは以下のとおりです。
 
 1. 前述の手順に従って Jira と CircleCI を接続します。
 1. `.circleci/config.yml` ファイルの上部で、バージョン `2.1` が使用されていることを確認します。
-1. {% include snippets/enable-pipelines.md %}
-1. To get an API token for build information retrieval, go to [User Settings > Tokens](https://app.circleci.com/settings/user/tokens) and create a token. Copy the token. (*Note*: older versions of the JIRA orb may require you to retrieve a _Project API Token_, which is accessible from **Project Settings > API Permissions**)
-1. To give the integration access to the key, go to **Project Settings -> Environment Variables** and add a variable named _CIRCLE_TOKEN_ with the value being the token you just made.
-1. Add the Jira orb to your configuration and invoke it (see example below).
+1. パイプラインを有効化していない場合は、**[Project Settings (プロジェクト設定)] -> [Build Settings (ビルド設定)] -> [Advanced Settings (詳細設定)]** の順に選択して有効化します。
+1. ビルド情報を取得する API トークンを入手するために、**[Project Settings (プロジェクト設定)] -> [Permissions (権限)] -> [API Permissions (API 権限)]** の順に移動します。 そのトークンをコピーします。 (*Note*: older versions of the JIRA orb may require you to retrieve a _Project API Token_, which is accessible from **Project Settings > API Permissions**)
+1. インテグレーションを許可してキーを使用するには、**[Project Settings (プロジェクト設定)] -> [Build Settings (ビルド設定)] -> [Environment Variables (環境変数)]** の順に選択して、*CIRCLE_TOKEN* という変数と作成したトークンの値を追加します。
+1. Orb スタンザを追加し、Jira Orb を呼び出します。
 
 Jira Orb を使用したシンプルな `config.yml` の例を以下に示します。
 

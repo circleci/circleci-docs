@@ -19,20 +19,20 @@ version:
 ## クイックスタート: デモ用の JavaScript Node.js リファレンス プロジェクト
 {: #quickstart-demo-javascript-nodejs-reference-project }
 
-We maintain a reference JavaScript project to show how to build a React.js app on CircleCI with `version: 2.1` configuration:
+CircleCI 2.1 で React.js アプリケーションをビルドする方法を示すために、JavaScriptリファレンス プロジェクトが用意されています。
 
 - [GitHub 上の JavaScript Node デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app)
 - [CircleCI でビルドされた JavaScript Node デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
 このプロジェクトには、CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、Node プロジェクトで CircleCI 2.1 を使用するためのベスト プラクティスを示しています。
 
-## CircleCI のビルド済み Docker イメージ
+## JavaScript Node のデモ プロジェクトのビルド
 {: #build-the-demo-javascript-node-project-yourself }
 
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
 1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
-2. CircleCI で [[Projects dashboard (プロジェクトの追加)](https://app.circleci.com/projects/){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
+2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 
@@ -62,16 +62,16 @@ workflows:
 {% endraw %}
 
 
-## 設定ファイルの詳細
+## 設定ファイルの例
 {: #config-walkthrough }
 
 Using the [2.1 Node orb](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test) sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
 
-The Node Orb `test` command will test your code with a one-line command, with optional parameters.
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
 Matrix jobs are a simple way to test your Node app on various node environments. For a more in depth example of how the Node orb utilizes matrix jobs, see our blog on [matrix jobs](https://circleci.com/blog/circleci-matrix-jobs/). See [documentation on pipeline parameters](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to learn how to set a node version via Pipeline parameters.
 
-Success! You just set up a Node.js app to build on CircleCI with version: 2.1 configuration. Check out [our project’s pipeline page](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-javascript-react-app) to see how this looks when building on CircleCI.
+完了です。 これで Node.js アプリケーション用に CircleCI 2.1 をセットアップできました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}を参照してください。
 
 ## 関連項目
 {: #see-also }

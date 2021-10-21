@@ -90,7 +90,6 @@ jobs:
             echo '^^^That should look familiar^^^'
 {% endhighlight %}
 
-
 ### 学習ポイント
 {: #learnings }
 {:.no_toc}

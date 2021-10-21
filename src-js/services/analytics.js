@@ -47,7 +47,7 @@ class AnalyticsClient {
     if (isDataDogSynthetics()) return;
 
     properties = properties ?? null;
-    window.analytics && window.analytics.page(name, properties, {
+    window.analytics && window.analytics.page("docs", name, properties, {
       integrations: { Amplitude: { session_id: AnalyticsClient.getSessionId() } },
     });
   }
