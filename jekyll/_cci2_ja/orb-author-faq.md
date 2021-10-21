@@ -64,7 +64,7 @@ Read more:
 
 * 質問: ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
 
-* 回答: 環境変数名のパラメーターを作成してください。 _変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
+* 回答: 環境変数名のパラメーターを作成してください。 _変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 In the parameter description let the user know if this value should not be changed. また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
 
 Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
 
