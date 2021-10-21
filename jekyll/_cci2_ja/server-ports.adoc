@@ -14,7 +14,7 @@ version:
 
 toc::[]
 
-== Services マシン
+== Services Machine
 Services マシンには、ユーザー向けの Web サイト、API エンジン、データストア、Nomad ジョブ スケジューラなどの CircleCI Server 製品のコア コンポーネントがホスティングされます。 ベスト プラクティスとして、独立のマシンを使用することをお勧めします。
 
 NOTE: 現在、CircleCI Server は、x86_64 アーキテクチャのみに対応しています。
@@ -74,11 +74,11 @@ AWS 上の CircleCI Server の場合、Nomad クライアント向けの推奨�
 
 NOTE: 現在、Nomad クライアントは、x86_64 アーキテクチャのみに対応しています。 
 
-各クライアントでより多くのジョブに対応できるよう、大きいインスタンス タイプを選択することもできます。 選択の目安として、Nomad ではクライアントがジョブに適しているかどうかを判断する際に 1024MHz の CPU と`コア数` * `クロック速度`の式で得られるディスク容量にジョブが割り当てられることを参考にするとよいでしょう。 この計算式に基づくと、`m5.2xlarge` では最大容量が `19200MHz` になります。つまり、このクライアントでは 9.6 個のジョブを実行できることになります (制限要因がない場合)。 実際には、Nomad 自身のために CPU リソースがいくらか予約されます。また、CPU と RAM の比率から使用できる RAM が限られ、これも実行可能なジョブ数の制限要因になります。 
+各クライアントでより多くのジョブに対応できるよう、大きいインスタンス タイプを選択することもできます。 選択の目安として、Nomad ではクライアントがジョブに適しているかどうかを判断する際に 1024MHz の CPU と`コア数` * <code>クロック速度`の式で得られるディスク容量にジョブが割り当てられることを参考にするとよいでしょう。 この計算式に基づくと、`m5.2xlarge</code> では最大容量が `19200MHz` になります。 つまり、このクライアントでは 9.6 個のジョブを実行できることになります (制限要因がない場合)。 実際には、Nomad 自身のために CPU リソースがいくらか予約されます。 また、CPU と RAM の比率から使用できる RAM が限られ、これも実行可能なジョブ数の制限要因になります。 
 
 === 負荷が大きい場合の推奨事項
 
-EBS は特定の IO 操作の後に IOPS を抑制します。そのため、デフォルトのサーバー構成 (m5.2xlarge、200GiB gp2 ルート ボリューム) で負荷の大きい処理を行うと、ジョブ実行速度の低下、スピンアップ速度の低下、最悪の場合にはジョブ タイムアウトなど、パフォーマンス関連の問題が発生する可能性があります。
+EBS は特定の IO 操作の後に IOPS を抑制します。 そのため、デフォルトのサーバー構成 (m5.2xlarge、200GiB gp2 ルート ボリューム) で負荷の大きい処理を行うと、ジョブ実行速度の低下、スピンアップ速度の低下、最悪の場合にはジョブ タイムアウトなど、パフォーマンス関連の問題が発生する可能性があります。
 
 負荷が大きい状況とは以下のようなものです。
 
@@ -117,7 +117,7 @@ Nomad クライアント数のベスト プラクティスを以下の表にま�
 
 CircleCI Server 2.0 のインストールで必要となるすべてのポートを、マシン タイプごとに以下の表に示します。
 
-=== Services マシン
+=== Services Machine
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -194,42 +194,42 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 4647
 | TCP
-| 双方向
+| Bi-directional
 | Nomad クライアント
 | 内部通信
 |
 
 | 8585
 | TCP
-| 双方向
+| Bi-directional
 | Nomad クライアント
 | 内部通信
 |
 
 | 7171
 | TCP
-| 双方向
+| Bi-directional
 | Nomad クライアント
 | 内部通信
 |
 
 | 3001
 | TCP
-| 双方向
+| Bi-directional
 | Nomad クライアント
 | 内部通信
 |
 
 | 80
 | TCP
-| 双方向
+| Bi-directional
 | GitHub Enterprise/GitHub.com (該当するもの)
 | Web フック/API アクセス
 |
 
 | 443
 | TCP
-| 双方向
+| Bi-directional
 | GitHub Enterprise/GitHub.com (該当するもの)
 | Web フック/API アクセス
 |
@@ -340,29 +340,29 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 4647
 | TCP
-| 双方向
-| Services マシン
+| Bi-directional
+| Services Machine
 | 内部通信
 |
 
 | 8585
 | TCP
-| 双方向
-| Services マシン
+| Bi-directional
+| Services Machine
 | 内部通信
 |
 
 | 7171
 | TCP
-| 双方向
-| Services マシン
+| Bi-directional
+| Services Machine
 | 内部通信
 |
 
 | 3001
 | TCP
-| 双方向
-| Services マシン
+| Bi-directional
+| Services Machine
 | 内部通信
 |
 
@@ -396,7 +396,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 22
 | TCP
 | インバウンド
-| Services マシン
+| Services Machine
 | Git アクセス
 |
 
@@ -423,15 +423,15 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 80
 | TCP
-| 双方向
-| Services マシン
+| Bi-directional
+| Services Machine
 | Web フック/API アクセス
 |
 
 | 443
 | TCP
-| 双方向
-| Services マシン
+| Bi-directional
+| Services Machine
 | Webhooks / API access
 |===
 
@@ -449,7 +449,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 5432
 | TCP
-| 双方向
+| Bi-directional
 | PostgreSQL サーバー
 | PostgreSQL 複製
 | 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
@@ -469,7 +469,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 27017
 | TCP
-| 双方向
+| Bi-directional
 | MongoDB サーバー
 | MongoDB 複製
 | 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
@@ -490,13 +490,13 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 5672
 | TCP
 | インバウンド
-| Services マシン
+| Services Machine
 | RabbitMQ 接続
 | 外部処理用 RabbitMQ を使用する場合のみ
 
 | 5672
 | TCP
-| 双方向
+| Bi-directional
 | RabbitMQ サーバー
 | RabbitMQ ミラーリング
 | 外部処理用 RabbitMQ を使用する場合のみ
@@ -517,13 +517,13 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 6379
 | TCP
 | インバウンド
-| Services マシン
+| Services Machine
 | Redis 接続
 | 外部処理用 Redis を使用する場合のみ
 
 | 6379
 | TCP
-| 双方向
+| Bi-directional
 | Redis サーバー
 | Redis 複製
 | 外部処理用 Redis を使用し、Redis 複製 (オプション) を使用する場合のみ
@@ -544,7 +544,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 4646
 | TCP
 | インバウンド
-| Services マシン
+| Services Machine
 | Nomad サーバー接続
 | 外部処理用 Nomad サーバーを使用する場合のみ
 
