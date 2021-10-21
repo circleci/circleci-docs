@@ -52,13 +52,13 @@ Check-in the config and see it run.  You can see the output of the job in the Ci
 {: #learnings }
 {:.no_toc}
 
-The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in details
+The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in detail:
 
 - Line 1: This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
 - Line 2-3: The `jobs` level contains a collection of arbitrarily named children.  `build` is the first named child in the `jobs` collection.  In this case `build` is also the only job.
 - Line 6-7: The `steps` collection is an ordered list of `run` directives.  Each `run` directive is executed in the order in which it was declared.
 - Line 8: The `name` attribute provides useful organizational information when returning warnings, errors, and output.  The `name` should be meaningful to you as an action within your build process
-- Line 9-11: This is the magic.  The `command` attribute is a list of shell commands that represent the work you want done.  The initial pipe, `|`, indicates that there will be more than one line of shell commands.  Here line 10 will print out `Hello World!` in your build shell and line 11 will print out `This is the delivery pipeline`
+- Line 9-11: This is the magic.  The `command` attribute is a list of shell commands that represent the work you want done.  The initial pipe, `|`, indicates that there will be more than one line of shell commands.  Here, line 10 will print out `Hello World!` in your build shell, and line 11 will print out `This is the delivery pipeline`.
 
 ## Part two: Info and preparing to build
 {: #part-two-info-and-preparing-to-build }
@@ -142,7 +142,7 @@ We also added a small `run` block that demonstrates we are running in a node con
 The above two changes to the config significantly affect how you get work done.  By associating a docker container to a job and then dynamically running the job in the container, you don’t need to perform special magic or operational gymnastics to upgrade, experiment or tune the environment you run in.  With a small change you can dramatically upgrade a mongo environment, grow or shrink the base image, or even change languages.
 
 - Line 4: Here we see a comment in-line in yml.  Like any other unit of code, comments are a useful tool as config gets complicated.
-- Line 5-6: These lines indicate that docker image to use for the job.  Because you can have more than one job in your config (as we will see next) you can also run different parts of your config in different environments.  For example, you could perform a build job in a thin java container and then perform a test job using a container with browsers pre-installed. In this case, it uses  a [pre-built container from CircleCI]({{ site.baseurl }}/2.0/circleci-images/) that already has a browser and other useful tools built in.
+- Line 5-6: These lines indicate that docker image to use for the job.  Because you can have more than one job in your config (as we will see next) you can also run different parts of your config in different environments.  For example, you could perform a build job in a thin java container and then perform a test job using a container with browsers pre-installed. In this case, it uses a [pre-built container from CircleCI]({{ site.baseurl }}/2.0/circleci-images/) that already has a browser and other useful tools built in.
 - Line 19-22: These lines add a run step that returns the version of node available in the container. Try experimenting with different containers from CircleCI’s pre-built convenience images or even public containers from Docker hub.
 
 ## Part four: Approved to start
