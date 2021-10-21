@@ -125,7 +125,7 @@ jobs:
 ```
 {% endraw %}
 
-### LambdaTest ブラウザー テスト Orb の例
+### Sauce Labs browser testing orb example
 {: #sauce-labs-browser-testing-orb-example }
 
 LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。 これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 この Orb を使った並列テストの例は以下のとおりです。
@@ -317,4 +317,4 @@ xclock がデスクトップに表示された後は、`Ctrl+c` で強制終了�
 ## 関連項目
 {: #see-also }
 
-[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)
+[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)
