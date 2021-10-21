@@ -15,6 +15,6 @@ function trap_ctrlc ()
 # when signal 2 (SIGINT) is received
 trap "trap_ctrlc" 2
 
-docker-compose up &
+docker-compose up --build &
 yarn webpack-watch
 fg # bring back the docker job so we can see the output
