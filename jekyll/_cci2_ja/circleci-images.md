@@ -11,6 +11,10 @@ version:
   - Server v2.x
 ---
 
+<div class="alert alert-warning" role="alert">
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+</div>
+
 CircleCI が提供しているビルド済みイメージの概要と、言語別、サービス タイプ別、タグ別のイメージについて、以下のセクションに沿って説明します。
 
 * 目次
@@ -28,7 +32,7 @@ CircleCI では、すぐに使える Docker イメージを多数提供してい
 - GitHub の `circleci-images` リポジトリには、[従来の CiecleCI イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。
 - すべての ビルド済み CircleCI イメージは、[Docker ハブ](https://hub.docker.com/search?q=circleci&type=image) から入手できます。
 
-_**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
+__**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
 
 ### 例
 {: #examples }
@@ -39,7 +43,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 ## 次世代の CircleCI イメージ
 {: #next-generation-convenience-images }
 
-このセクションで紹介する次世代の CircleCI イメージは、継続的インテグレーション(CI)、効率性、確定的動作を念頭に置いてゼロから設計されました。 次世代版では以下の点が改善されています。
+The next-generation convenience images in this section were built from the ground up with CI, efficiency, and determinism in mind. Here are some of the highlights:
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代版では概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
@@ -53,7 +57,6 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
   myjob:
     docker:
       - image: cimg/base:2021.04
-
 ```
 
 これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 次世代版の CircleCI イメージは、すべてこのイメージがベースとなります。
@@ -64,7 +67,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 **関連資料**
 
-このイメージの設定ファイルのサンプルは [デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base) を、ソースコードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) を参照してください。　
+このイメージの設定ファイルのサンプルは [デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base) を、ソースコードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) を参照してください。
 
 以下の例では、上記の `ベースのイメージ`をベースにした、次世代のGoイメージを使用する方法を示しています。
 
@@ -72,7 +75,6 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
   myjob:
     docker:
       - image:  cimg/go:1.16
-
 ```
 
 これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker ハブ の名前空間が `cimg` であることにご注意ください。 他の言語の次世代イメージは、[以下](#next-gen-language-images)をご覧ください。
@@ -81,7 +83,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 ## ベストプラクティス
 {: #best-practices }
 
-以降のセクションで扱う次世代版 CircleCI イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。そのため、可能な限り細かく指定したイメージを使用することをお勧めします。 そうすることで、いずれかのアップストリーム イメージによって意図しない変更がイメージに組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
+The next-gen convenience images in the following sections are based on the most recent Ubuntu LTS Docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. そうすることで、いずれかのアップストリーム イメージによって意図しない変更がイメージに組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
 
 つまり、アップストリームからの想定外の変更を防止するには、タグを変更するまではアップストリーム版の変更に伴ってそのイメージが変更されてしまわないよう、`cimg/ruby:2.4-node` と記述するのではなく、そのコンテナのさらに細かいバージョンを指定します。
 
@@ -145,7 +147,7 @@ CircleCI イメージは、**言語**イメージと**サービス** イメー�
 {: #next-gen-language-images }
 {:.no_toc}
 
-次世代の言語イメージは、従来のものと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `Docker` キー配下の最初の行に挿入します。 そうすることで、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。
+Like the legacy images, the next-gen language images are convenience images for common programming languages. These images include both the same relevant language and [commonly-used tools](#pre-installed-tools). 言語イメージを指定するときは、設定ファイル内の `Docker` キー配下の最初の行に挿入します。 そうすることで、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。
 
 CircleCI は、以下の言語に対応する次世代のイメージを開発しています。
 
@@ -158,7 +160,7 @@ CircleCI は、以下の言語に対応する次世代のイメージを開発�
 - [Ruby](https://circleci.com/developer/images/image/cimg/ruby)
 - [Rust](https://circleci.com/developer/images/image/cimg/rust)
 
-上記以外の言語のイメージが必要な場合は、CircleCI の[アイデア ボード](https://ideas.circleci.com/)でリクエストしてください。 まず、リクエストの前にアイデア ボード内を検索し、 同じアイデアがすでに投稿されている場合は、そのアイデアに投票してください。 まだ投稿されていなければ、カテゴリを 「イメージ」に設定してアイデアを投稿してください。 その後、そのアイデアを友人や同僚、フォーラム、その他のコミュニティに紹介して、票を集めることをお勧めします。
+上記以外の言語のイメージが必要な場合は、CircleCI の[アイデア ボード](https://ideas.circleci.com/)でリクエストしてください。 First, check to see if that "idea" is already on CircleCI Ideas. If it is, up-vote it. If not, create it and set the category as "images". Finally, go and market your "idea" to friends, co-workers, forums, and other communities in order to help it build traction.
 
 CircleCI では、獲得票数の多いアイデアから優先的に正式開発を検討しています。
 
@@ -277,8 +279,10 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 **従来の** CircleCI イメージについて、最新のものを言語別に紹介します。
 
 <div class="alert alert-warning" role="alert">
-可能な限り次世代イメージを使用することをお勧めします。
-最新の次世代版 CircleCI イメージの一覧と各イメージの内容の詳細については、<a href="https://circleci.com/developer/ja/">デベロッパー ハブ</a>を参照してください。
+It is recommended to use next-generation images when possible.
+For a list of the latest next-gen convenience images and
+details about the content of each image, visit
+the <a href="https://circleci.com/developer/">Developer Hub.</a>
 </div>
 
 **注:** CircleCI は、[言語イメージのバリアント](#language-image-variants)および[サービス イメージのバリアント](#service-image-variant)以外の**従来のイメージ**に対して使用されるタグについては**管理していません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じ内容のイメージとは限らないことにご注意ください。
