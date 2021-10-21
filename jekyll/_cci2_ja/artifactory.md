@@ -21,7 +21,7 @@ Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifact
 
 ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
 
-このサンプルを実行する前に、リポジトリが作成されていることを確認してください。リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
+このサンプルを実行する前に、リポジトリが作成されていることを確認してください。 リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
 
 ## Artifactory プラグイン
 {: #artifactory-plugins }
@@ -95,5 +95,5 @@ jobs:
 
 {:.no_toc}
 
-[アーティファクトの保存とアクセス]({{ site.baseurl }}/ja/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)
 
