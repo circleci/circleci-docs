@@ -95,5 +95,5 @@ jobs:
 
 {:.no_toc}
 
-[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/ja/2.0/artifacts/)
 
