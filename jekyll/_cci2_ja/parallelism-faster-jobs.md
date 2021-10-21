@@ -194,17 +194,7 @@ CircleCI でテスト分割を活用するには、実行するテストの一�
 
 以下に、この例を使用してテスト分割を行う簡単な例を示します。
 ```
-- run:
-    command: |
-      # __init__ ファイルを除外してテストファイルを取得
-      TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
-      echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
-      cat circleci_test_files.txt
-      TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
-      # manage.py テストに合わせた形式にファイルパスを変更
-      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
-      echo $TESTFILES
-      pipenv run python manage.py test --verbosity=2 $TESTFILES  
+go test -v $(go list ./...| circleci tests split)
 ```
 
 ## その他のテスト分割方法
@@ -289,7 +279,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-[コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)
+[コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
@@ -302,5 +292,5 @@ workflows:
 - **[go list](https://golang.org/cmd/go/#hdr-List_packages_or_modules)**: Golang パッケージをグロブするには、組み込みの Go コマンド `go list ./...` を使用します。 これにより、パッケージテストを複数のコンテナに分割できます。
 
   ```
-  go test -v $(go list ./...| circleci tests split)
+  go test -v $(go list ./... | circleci tests split)
   ```
