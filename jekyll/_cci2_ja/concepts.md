@@ -281,17 +281,17 @@ jobs:
  ```
 
 ## ワークフローの図
-{:.tab.workflows.Server}
+{: #workflows }
 
 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
 
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
-{:.tab.workflows-example.Server}
+{:.tab.workflows.Server_3}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
-{:.tab.cache.Server}
+{:.tab.workflows.Server_2}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
@@ -467,23 +467,6 @@ jobs:
     steps:
       - restore_cache: # キャッシュされた依存関係を復元します。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Running tests
-          command: make test
-  build3:
-    docker:
-      - image: circleci/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Running tests
           command: make test
@@ -517,14 +500,6 @@ workflows:
           requires:
            - build1 # build1 ジョブが正常に完了するのを待ってから、
            # 時間を節約するために build2 と build 3 の並列実行を開始します。
-      - build3:
-          requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 concurrently to save time.
-      - build3:
-          requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 concurrently to save time.
 ```
 {% endraw %}
 
@@ -533,7 +508,7 @@ workflows:
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-A cache stores a file or directory of files such as dependencies or source code in object storage. Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
+キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 ビルドを高速化するために、以前のジョブに含まれる依存関係をキャッシュする特別なステップを各ジョブに追加できます。
 
 If there comes a time when you need to [clear your cache](https://circleci.com/docs/2.0/caching/#clearing-cache), refer to the [Caching Dependencies](https://circleci.com/docs/2.0/caching/) page for more information on caching.
 
