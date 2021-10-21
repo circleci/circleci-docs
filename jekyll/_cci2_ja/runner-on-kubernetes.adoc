@@ -33,7 +33,7 @@ When installing the Helm chart for use with a CircleCI server installation the `
 
 ==== Upgrading Runner Deployment for Server
 
-. Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<チャートの値>> section of this document for more details about the `+values.yaml+` file.
+. Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<Chart 値s>> section of this document for more details about the `+values.yaml+` file.
 . Deploy the changes to the cluster 
 +
 ....
@@ -46,7 +46,7 @@ $ helm upgrade -f values.yaml "circleci-runner" ./ \
 
 Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
 
-== 使用方法
+== Getting Started
 
 . https://github.com/CircleCI-Public/circleci-runner-k8s にあるリポジトリをクローンします。
 . Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
@@ -79,7 +79,7 @@ time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-
 time="2021-03-25T20:55:40Z" level=info msg="no task found"
 ....
 
-== Chart 値s
+== Chart Values
 
 Customizable parameters are left inside the `+values.yaml+` file. 各値の詳細を以下の表に示します。
 
