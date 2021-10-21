@@ -19,6 +19,10 @@ CircleCI offers several build environments. We call these **executors**. **Execu
 ## Docker
 {: #docker }
 
+<div class="alert alert-warning" role="alert">
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+</div>
+
 ```
 jobs:
   build: # ジョブの名前
@@ -51,12 +55,6 @@ jobs:
 ```
 
 `machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
-
-## macOS
-{: #macos }
-
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
-
 ```
 jobs:
   build: # ジョブの名前
@@ -69,6 +67,26 @@ jobs:
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+
+## macOS
+{: #macos }
+
+_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+
+```
+jobs:
+  build: # ジョブの名前
+    machine:
+      image: windows-default # Windows マシン イメージ
+    resource_class: windows.medium
+    steps:
+      # Windows 仮想マシン環境で実行するコマンド
+
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
 
 ## Windows
 {: #windows }
@@ -95,16 +113,33 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
+
 {:.tab.windowsblock.Server}
 ```
+version: 2.1
+
 jobs:
-  build: # ジョブの名前
+  build: # name of your job
     machine:
-      image: windows-default # Windows マシン イメージ
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
-      # Windows 仮想マシン環境で実行するコマンド
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
 
+{:.tab.windowsblock.Server_2}
+```
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
@@ -114,10 +149,10 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-* [Choosing an executor type]({{ site.baseurl }}/ja/2.0/executor-types/)
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/ja/2.0/circleci-images/)
-* [Building on MacOS]({{site.baseurl}}/ja/2.0/hello-world-macos)
-* [Building on Windows]({{site.baseurl}}/ja/2.0/hello-world-windows)
+* [Choosing an executor type]({{ site.baseurl }}/2.0/executor-types/)
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
+* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
+* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
 
 ## Learn More
 {: #learn-more }
