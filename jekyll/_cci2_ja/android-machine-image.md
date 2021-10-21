@@ -108,28 +108,12 @@ jobs:
       # "post-emulator-launch-assemble-command" コマンドを指定して
       # gradle コマンドの実行をオーバーライドするか、"wait-for-emulator" を false に設定して
       # エミュレーターの待機を完全に無効にします
-      - android/start-emulator:
+       - android/start-emulator:
           avd-name: myavd
           no-window: true
           restore-gradle-cache-prefix: v1a
       # デフォルトで "./gradlew connectedDebugAndroidTest" を実行します
       # "test-command" パラメーターを指定してコマンド実行をカスタマイズします
-      - android/run-tests
-      - android/save-gradle-cache:
-          cache-prefix: v1a
-workflows:
-  test:
-    jobs:
-      - test
-      # Specify the "post-emulator-launch-assemble-command" command to override
-      # the gradle command run, or set "wait-for-emulator" to false to disable
-      # waiting for the emulator altogether.
-      - android/start-emulator:
-          avd-name: myavd
-          no-window: true
-          restore-gradle-cache-prefix: v1a
-      # Runs "./gradlew connectedDebugAndroidTest" by default.
-      # Specify the "test-command" parameter to customize the command run.
       - android/run-tests
       - android/save-gradle-cache:
           cache-prefix: v1a
