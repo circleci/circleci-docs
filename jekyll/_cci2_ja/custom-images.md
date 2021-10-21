@@ -19,7 +19,7 @@ version:
 ## 概要
 {: #overview }
 
-CircleCI では Docker がサポートされています。 Docker を使用すると、プロジェクトの依存関係を簡単に指定できます。 [CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)がニーズを満たさない場合は、ジョブのカスタム Docker イメージを作成することを検討してください。 カスタム Docker イメージには、主に以下の 2 つのメリットがあります。
+CircleCI では Docker がサポートされています。 Docker を使用すると、プロジェクトの依存関係を簡単に指定できます。 [CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)がニーズを満たさない場合は、ジョブのカスタム Docker イメージを作成することを検討してください。 There are two major benefits of doing this:
 
 - **ジョブを迅速に実行可能 --** 必要なツールが 1 つのカスタム イメージにパッケージ化されるため、ジョブごとにツールをインストールする必要がなくなります。
 
@@ -80,7 +80,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 CircleCI でカスタム Docker イメージをプライマリ コンテナとして使用するには、以下のツールをインストールする必要があります。
 
-- Bash（ほとんどの場合、すでにインストールされているか、パッケージマネージャ経由で入手可能です。)
+- Bash（ほとんどの場合、すでにインストールされているか、パッケージマネージャ経由で入手可能です。 )
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [SSH](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
 - [Tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
@@ -126,7 +126,7 @@ ENTRYPOINT contacts
 $ docker build <path-to-dockerfile>
 ```
 
-`Dockerfile` で指定したすべてのコマンドがどのように実行されるか表示されます。 エラーが発生した場合は、画面に表示されます。 これらは作業を続行する前に修正する必要があります。 ビルドが正常に終了したら、最後に以下のようなメッセージが表示されます。
+`Dockerfile` で指定したすべてのコマンドがどのように実行されるか表示されます。 エラーが発生した場合は、画面に表示されます。 これらは作業を続行する前に修正する必要があります。 If the build is successful you'll have something like this at the very end:
 
 ```
 ...
@@ -157,14 +157,13 @@ CircleCI でカスタム イメージを使用できるようにするには、�
 
 ``` Shell
 $ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
-
 ```
 
 この`t`キーは、新しいイメージの名前とタグを指定するキーです。
 
 - `circleci` - Docker ハブでのアカウント
 - `cci-demo-docker-primary` - リポジトリ名
-- `0.0.1` - イメージのタグ (バージョン)。 `Dockerfile` の内容を変更した場合は、必ずタグを更新してください。更新しないと予想外の結果を招く可能性があります。
+- `0.0.1` - イメージのタグ (バージョン)。 `Dockerfile` の内容を変更した場合は、必ずタグを更新してください。 更新しないと予想外の結果を招く可能性があります。
 
 ### レジストリへのイメージのプッシュ
 {: #pushing-the-image-to-the-registry }
@@ -196,7 +195,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照
 ```
 
-ご不明な点がありましたら、[コミュニティ フォーラム](https://discuss.circleci.com/)にアクセスしてください。CircleCI または他のユーザーからのサポートを受けることができます。
+If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
 ## Ruby 用のカスタム Dockerfile の例
 {: #detailed-custom-dockerfile-example-for-ruby }
