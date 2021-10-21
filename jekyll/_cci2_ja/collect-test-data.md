@@ -76,18 +76,18 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 `.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
 * [Cucumber]({{ site.baseurl }}/2.0/collect-test-data/#cucumber)
-* [Maven Surefire]({{ site.baseurl }}/ja/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
-* [Gradle]({{ site.baseurl }}/ja/2.0/collect-test-data/#gradle-junit-results)
-* [Mocha]({{ site.baseurl }}/ja/2.0/collect-test-data/#mochajs)
-* [AVA]({{ site.baseurl }}/ja/2.0/collect-test-data/#ava)
-* [ESLint]({{ site.baseurl }}/ja/2.0/collect-test-data/#eslint)
-* [PHPUnit]({{ site.baseurl }}/ja/2.0/collect-test-data/#phpunit)
-* [pytest]({{ site.baseurl }}/ja/2.0/collect-test-data/#pytest)
-* [RSpec]({{ site.baseurl }}/ja/2.0/collect-test-data/#rspec)
-* [test2junit]({{ site.baseurl }}/ja/2.0/collect-test-data/#test2junit-for-clojure-tests)
-* [trx2junit]({{ site.baseurl }}/ja/2.0/collect-test-data/#trx2junit-for-visual-studio--net-core-tests)
-* [Karma]({{ site.baseurl }}/ja/2.0/collect-test-data/#karma)
-* [Jest]({{ site.baseurl }}/ja/2.0/collect-test-data/#jest)
+* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
+* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-results)
+* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#mochajs)
+* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#ava)
+* [ESLint]({{ site.baseurl }}/2.0/collect-test-data/#eslint)
+* [PHPUnit]({{ site.baseurl }}/2.0/collect-test-data/#phpunit)
+* [pytest]({{ site.baseurl }}/2.0/collect-test-data/#pytest)
+* [RSpec]({{ site.baseurl }}/2.0/collect-test-data/#rspec)
+* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
+* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-visual-studio--net-core-tests)
+* [Karma]({{ site.baseurl }}/2.0/collect-test-data/#karma)
+* [Jest]({{ site.baseurl }}/2.0/collect-test-data/#jest)
 
 
 #### Cucumber
@@ -435,17 +435,10 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
 #### test2junit for Clojure Tests
-{: #video-troubleshooting-test-runners }
-{:.no_toc}
-{:.no_toc}
-
-#### Clojure テスト用の test2junit
 {: #test2junit-for-clojure-tests }
 {:.no_toc}
- Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、\[サンプル プロジェクト\](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。 #### Visual Studio/.NET Core テスト用の trx2junit
-{: #trx2junit-for-visual-studio-net-core-tests }
-{:.no_toc}
-Use \[trx2junit\](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
+
+Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、\[サンプル プロジェクト\](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
 
 #### trx2junit for Visual Studio / .NET Core Tests
 {: #trx2junit-for-visual-studio-net-core-tests }
@@ -555,7 +548,7 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 {: #see-also }
 {:.no_toc}
 
-[インサイトの使用]({{ site.baseurl }}/ja/2.0/insights/)
+[インサイトの使用]({{ site.baseurl }}/2.0/insights/)
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
