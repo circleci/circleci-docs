@@ -42,7 +42,12 @@ commands:
                 default: World
         steps:
             - run: echo "Hello, << parameters.to >>"
-
+        parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, << parameters.to >>"
 ```
 
 1. CLI を使用して、Orb コードをバリデーションします。
@@ -58,7 +63,6 @@ circleci orb publish /tmp/orb.yml <my-namespace>/<my-orb-name>@dev:first
 1. Orb を安定版にプッシュする準備が整ったら、`circleci orb publish` を使用して手動でパブリッシュするか、開発版から直接プロモートすることができます。 以下のコマンドを使用すると、開発版のバージョン番号を `0.0.1` にインクリメントできます。
 ```sh
 circleci orb publish promote <my-namespace>/<my-orb-name>@dev:first patch
-
 ```
 
 1. 安定版の Orb が変更不可形式でパブリッシュされ、CircleCI プロジェクトで安全に使用できるようになりました。 以下のコマンドを使用して、Orb のソースをプルします。
@@ -76,7 +80,6 @@ circleci orb list <my-namespace>
 **[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace> --private
-
 ```
 
 **プライベート</a>** Orb を一覧表示する場合:
