@@ -63,7 +63,7 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 
 ### 構成レシピ
 {: #setting-environment-variables }
-The following environment variables need to be set in CircleCI either directly or through a context:
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
