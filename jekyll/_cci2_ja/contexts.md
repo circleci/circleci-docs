@@ -182,6 +182,7 @@ CircleCI Server の場合、管理者は **[Refresh Permissions (パーミッシ
 
 [承認ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#type) をワークフローに追加することで、制限付きコンテキストの使用を手動で承認するようワークフローを構成することができます。 承認ジョブより下流のジョブの実行を承認ユーザーを基に制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
 
+{:.tab.approvingcontexts.Cloud}
 ```yaml
 version: 2.1
 
@@ -197,6 +198,58 @@ workflows:
             - build
       - hold:
           type: approval # UI 上に手動承認ボタンを表示させる
+          requires:
+            - build
+      - deploy:
+          context: deploy-key-restricted-context
+          requires:
+            - build
+            - hold
+            - test
+```
+
+{:.tab.approvingcontexts.Server_3}
+```yaml
+version: 2.1
+
+# Jobs declaration for build, test and deploy not displayed
+
+workflows:
+  jobs:
+    build-test-deploy:
+      - build
+      - test:
+          context: my-restricted-context
+          requires:
+            - build
+      - hold:
+          type: approval # presents manual approval button in the UI
+          requires:
+            - build
+      - deploy:
+          context: deploy-key-restricted-context
+          requires:
+            - build
+            - hold
+            - test
+```
+
+{:.tab.approvingcontexts.Server_2}
+```yaml
+version: 2
+
+# Jobs declaration for build, test and deploy not displayed
+
+workflows:
+  jobs:
+    build-test-deploy:
+      - build
+      - test:
+          context: my-restricted-context
+          requires:
+            - build
+      - hold:
+          type: approval # presents manual approval button in the UI
           requires:
             - build
       - deploy:
@@ -238,7 +291,7 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 ## 環境変数の使用方法
 {: #environment-variable-usage }
 
-環境変数は、以下に示す優先順位に従って使用されます。
+このセクションでは、 CircleCI CLI および API を使用してコンテキストに設定された環境変数を操作する方法について説明します。
 
 1. `FOO=bar make install` のような例を含め、`run` ステップの[シェル コマンド内]({{ site.baseurl }}/ja/2.0/env-vars/#シェル-コマンドでの環境変数の設定)で宣言された環境変数
 2. [`run` ステップで]({{ site.baseurl }}/ja/2.0/env-vars/#ステップでの環境変数の設定) `environment` キーを使用して宣言された環境変数
@@ -253,7 +306,7 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 ### 安全な環境変数の作成、削除、ローテーション
 {: #secure-environment-variable-creation-deletion-and-rotation }
 
-このセクションでは、 CircleCI CLI および API を使用してコンテキストに設定された環境変数を操作する方法について説明します。
+コンテキストに設定された環境変数のローテーションは、 CircleCI の CLI や API の直接呼び出しにより実施することが可能です。
 
 #### 環境変数の作成
 {: #creating-environment-variables }
@@ -296,18 +349,18 @@ CircleCI CLI を使用して環境変数を削除するには、下記ステッ�
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を削除する場合は、 [Delete Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを呼び出します。
+ローテーションとは、環境変数を削除したり変数名を変更したりせずに、 シークレットである環境変数の値を更新することを指します。
 
 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と削除しようとする環境変数の名前に置き換えます。
 
 #### 環境変数のローテーション
 {: #rotating-environment-variables }
 
-ローテーションとは、環境変数を削除したり変数名を変更したりせずに、 シークレットである環境変数の値を更新することを指します。
+Rotation refers to the process of updating a secret's value without deleting it or changing its name.
 
 Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is always good practice to periodically rotate secrets. Many organizations automate this process, running a script when an employee leaves the company or when a secret may have been compromised.
 
-コンテキストに設定された環境変数のローテーションは、 CircleCI の CLI や API の直接呼び出しにより実施することが可能です。
+CircleCI CLI を使用して環境変数のローテーションを実行するには、下記ステップを実行します:
 
 
 ##### CircleCI CLI 経由
@@ -316,7 +369,7 @@ Because environment variables can be shared, passed around between employees and
 
 _CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI の構成](https://circleci.com/docs/ja/2.0/local-cli/?section=configuration#cli-%E3%81%AE%E6%A7%8B%E6%88%90) を参照して CircleCI CLI を構成してください。_
 
-CircleCI CLI を使用して環境変数のローテーションを実行するには、下記ステップを実行します:
+To rotate an environment variable using the CLI, perform the following steps:
 
 1. If you have not already done so, find the context name that contains the variable you would like to rotate. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 
@@ -344,11 +397,11 @@ Contexts hold potentially sensitive secrets that are not intended to be exposed.
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/ja/2.0/env-vars/)
-* [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/)
+* [Workflows]({{ site.baseurl }}/2.0/workflows/)
