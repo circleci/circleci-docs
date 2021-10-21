@@ -118,7 +118,7 @@ jobs:
 
 docker/image キーは、ビルドに使用する Docker イメージを表します。 この例では、[Docker Hub](https://hub.docker.com/_/openjdk/) にある公式の `openjdk:8` イメージを使用します。 これには、この Scala プロジェクトに必要なネイティブ Java コンパイラが含まれます。
 
-environment/SBT_VERSION は、以降のコマンドでダウンロードする sbt のバージョンを指定する環境変数です。これは Scala アプリケーションのコンパイルに必要です。
+environment/SBT_VERSION は、以降のコマンドでダウンロードする sbt のバージョンを指定する環境変数です。 これは Scala アプリケーションのコンパイルに必要です。
 
 ```yaml
 version: 2
