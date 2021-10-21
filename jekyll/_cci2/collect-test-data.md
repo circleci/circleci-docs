@@ -209,7 +209,7 @@ jobs:
             CC_TEST_REPORTER_ID: code_climate_id_here
             NODE_ENV: development
         docker:
-            - image: cimg/node:14
+            - image: cimg/node:17.0
               auth:
                 username: mydockerhub-user
                 password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

@@ -159,7 +159,7 @@ jobs:
   build:
     docker:
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: cimg/go:1.12
+      - image: circleci/go:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
