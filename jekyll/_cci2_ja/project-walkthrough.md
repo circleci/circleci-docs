@@ -223,7 +223,6 @@ jobs:
 
 In the demo application, a virtual Python environment is set up, and the tests are run using unittest. This project uses `unittest-xml-reporting` for its ability to save test results as XML files. In this example, reports and results are stored in the `store_artifacts` and `store_test_results` steps.
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -278,7 +277,6 @@ jobs:
       - store_test_results:
           path: test-reports/
 ```
-{% endraw %}
 
 Notes on the added keys:
 
@@ -307,7 +305,6 @@ If you have not completed any or all of these steps, follow the [instructions]({
 
 **Note:** If you fork this demo project, rename the Heroku project, so you can deploy to Heroku without clashing with the namespace used in this tutorial.
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -359,7 +356,6 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
-{% endraw %}
 
 Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
@@ -393,7 +389,6 @@ heroku restart
 
 To deploy `master` to Heroku automatically after a successful `master` build, add a `workflows` section that links the `build` job and the `deploy` job.
 
-{% raw %}
 ```yaml
 workflows:
   version: 2
@@ -457,7 +452,6 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
-{% endraw %}
 
 ## See also
 {: #see-also }
