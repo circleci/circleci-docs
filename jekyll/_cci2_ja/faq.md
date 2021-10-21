@@ -37,6 +37,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 ### Jenkins から CircleCI 2.0 へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci-20 }
 {:.no_toc}
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ```yaml
     steps:
@@ -47,23 +48,23 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
             echo "通常は Jenkins の Execute Shell の内容をコピー ＆ ペーストすればよいだけです"
 ```
 
-Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
+Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
 ### inference コマンドは CircleCI 2.0 でも実行できますか?
 {: #does-circleci-20-run-inference-commands }
 {:.no_toc}
-CircleCI 2.0 は、プロジェクトの内容から推測して変換するようなことはしません。構成ビルダー インターフェイスによって `config.yml` のすべてのジョブを構成できる、スマート デフォルト型モデルの採用を進めています。
+CircleCI 2.0 は、プロジェクトの内容から推測して変換するようなことはしません。 構成ビルダー インターフェイスによって `config.yml` のすべてのジョブを構成できる、スマート デフォルト型モデルの採用を進めています。
 
 ### 基本イメージを作成していなくても、CircleCI 2.0 を使用できますか?
 {: #can-i-use-circleci-20-without-creating-base-images }
 {:.no_toc}
-はい、CircleCIが提供しているものをお使いください。 ただし、お使いになる基本イメージのサポートが将来のリリースによって終了する場合もありますのでご注意ください。
+Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
 たとえば `circleci/build-image:ubuntu-14.04-XL-922-9410082` というイメージは、CircleCI の Web アプリケーションで使用している Ubuntu 14.04 (Trusty Tahr) のイメージと同等の内容になっています。 容量はかなり大きく (非圧縮時で 17.5 GB 程度)、ローカル環境でのテストにはあまり適していません。
 
-このイメージは、デフォルトで `ubuntu` ユーザーとしてアクションを実行し、Docker Compose で提供されるネットワーク サービスと連携するよう設計されています。
-
 このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
+
+Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
 
 ## ホスティング
 {: #hosting }
@@ -71,7 +72,7 @@ CircleCI 2.0 は、プロジェクトの内容から推測して変換するよ�
 ### CircleCI 2.0 はオンプレミスでも利用できますか?
 {: #is-circleci-20-available-to-enterprise-clients }
 {:.no_toc}
-はい、お客様のオンプレミス環境でもご利用いただけます。詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
+Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
@@ -95,9 +96,9 @@ Enterpriseという名称は、ファイアウォールの内側を指すため�
 {:.no_toc}
 CircleCI アプリケーションの Workflows タブで、エラー メッセージが出力されていないかどうかを確認してください。 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
-
 `config.yml` のフォーマットエラーを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
+
+After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
 ### 「usage キュー」と「run キュー」の違いは何ですか?
 {: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
@@ -123,7 +124,7 @@ If you are not seeing a project you would like to build, and it is not currently
 {:.no_toc}
 CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストすると、ビルドが失敗します。 並列処理数の上限を引き上げたい場合は、[サポート センターまたはカスタマー サクセス マネージャー](https://support.circleci.com/hc/ja)にお問い合わせください。
 
-### Docker イメージの名前の付け方は？ 規則について教えてください。
+### Docker イメージの名前の付け方は？ Where do they come from?
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
 CircleCI 2.0 では、現在のところ [Docker Hub](https://hub.docker.com) からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ](https://hub.docker.com/explore/)に対して行えるのは、以下のように名称やタグを指定したプルのみです。
@@ -149,7 +150,7 @@ my-user/couchdb:1.6.1
 {:.no_toc}
 Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 たとえば、以下のように `.circleci/config.yml` を編集します。
 
-環境変数 `TZ` を定義する `.circleci/config.yml` の設定例は下記のとおりです。
+この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
 ```yaml
 version: 2
@@ -165,9 +166,9 @@ jobs:
       TZ: "America/Los_Angeles"
 ```
 
-この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
-
 設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
+
+A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 ## ワークフロー
 {: #workflows }
@@ -185,7 +186,7 @@ Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/
 ### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 {: #can-i-use-storetestresults-with-workflows }
 {:.no_toc}
-はい、ご利用いただけます。`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
+`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。 また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
 
 ### CircleCI 1.0 で Workflows を使うことはできますか？
 {: #can-i-use-workflows-with-circleci-10 }
@@ -210,17 +211,17 @@ Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/
 ### `config.yml` ファイルの内容を複数ファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
-<br/>`config.yml` の内容を複数のファイルに分割する機能は今のところ提供していません。
+`config.yml` の内容を複数のファイルに分割する機能は今のところ提供していません。
 
 ### 変更のあった単一のジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-いいえ、できません。
+はい。
 
 ### Workflows でフォークするプルリクエストをビルドすることは可能ですか？
 {: #can-i-build-fork-prs-using-workflows }
 {:.no_toc}
-はい。
+Yes!
 
 ### ワークフローの実行スケジュールを指定することは可能ですか?
 {: #can-workflows-be-scheduled-to-run-at-a-specific-time-of-day }
@@ -240,7 +241,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### 複数のワークフローの実行スケジュールを指定することは可能ですか?
 {: #can-i-schedule-multiple-workflows }
 {:.no_toc}
-はい、可能です。`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
+`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
 
 ### スケジュールを設定したワークフローは、指定した時間どおりに正確に実行されますか?
 {: #are-scheduled-workflows-guaranteed-to-run-at-precisely-the-time-scheduled }
