@@ -22,6 +22,8 @@ CircleCI のダイナミック コンフィグ機能では、`セットアップ
 
 ダイナミック コンフィグ機能を使用するには、(`.circleci/` ディレクトリにある) 親設定ファイルの最上部に `setup` キーを追加し、値として `true` を設定します。 これで `config.yaml` が`セットアップ ワークフロー`構成として指定され、ダイナミック コンフィグを利用できるようになります。
 
+**Note**: *At this time, Dynamic Configuration does not work with Scheduled Workflows. We are working on Scheduled Pipelines, which will alleviate this. This feature is expected to launch in the near future. A possible work around can be found on our [Discuss page](https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344).
+
 詳細については、この後の[使用開始に関するセクション](#getting-started-with-dynamic-config-in-circleci)を参照してください。
 
 ## CircleCI のダイナミック コンフィグの使用を開始する
