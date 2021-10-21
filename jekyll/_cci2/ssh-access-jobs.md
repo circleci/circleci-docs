@@ -144,7 +144,7 @@ If it was not offered, you can specify it via the `-i` command-line
 argument to SSH. For example:
 
 ```
-$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
+$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 
 ## See also

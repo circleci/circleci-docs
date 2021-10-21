@@ -92,73 +92,39 @@ jobs:
 ## Sauce Labs
 {: #sauce-labs }
 
-Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To allow the browsers access
-the web application you want to test, run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
+Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI, which can be used to execute tests directly from a variety of JavaScript frameworks.
 
-Sauce Connect allows you to run a test server within the CircleCI build container and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you run your browser tests after deploying to a publicly accessible staging environment, you can use Sauce Labs in the usual way without worrying about Sauce Connect.
+### saucectl
+{: #saucectl }
 
-This example `config.yml` file shows how to run browser tests through Sauce Labs against a test server running within a CircleCI build container.
+If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
 
-{% raw %}
-```yaml
-version: 2
-
-jobs:
-  build:
-    docker:
-      - image: circleci/python:jessie-node-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: Install Sauce Labs and Set Up Tunnel
-          background: true
-          command: |
-            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
-            tar -xzf saucelabs.tar.gz
-            cd sc-*
-            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
-            wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
-      - run: # base image is python, so we run `nosetests`, an extension of `unittest`
-          command: nosetests
-      - run:
-          name: Shut Down Sauce Connect Tunnel
-          command: |
-            kill -9 `cat /tmp/sc_client.pid`
-```
-{% endraw %}
-
-### Sauce Labs browser testing orb example
-{: #sauce-labs-browser-testing-orb-example }
-
-Sauce Labs provide a browser testing orb for use with CircleCI that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
+1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables]({{site.baseurl}}/2.0/env-vars/) in your Circle CI project.
+2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
 
 {% raw %}
 ```yaml
 version: 2.1
-
 orbs:
-  sauce-connect: saucelabs/sauce-connect@1.0.1
+  saucectl: saucelabs/saucectl-run@2.0.0
+
+jobs:
+  test-cypress:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.2
+      - saucectl/saucectl-run
 
 workflows:
-  browser_tests:
+  version: 2
+  default_workflow:
     jobs:
-      - sauce-connect/with_proxy:
-          name: Chrome Tests
-          steps:
-            - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
-          tunnel_identifier: chrome
-      - sauce-connect/with_proxy:
-          name: Safari Tests
-          steps:
-            - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
-          tunnel_identifier: safari
+      - test-cypress
 ```
 {% endraw %}
-
-For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## BrowserStack and Appium
 {: #browserstack-and-appium }
