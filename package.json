@@ -9,9 +9,9 @@
     "start": "./scripts/start.sh",
     "stop": "docker-compose down",
     "prod": "yarn webpack-prod && docker-compose up",
-    "webpack-dev": "webpack -p --mode=development",
-    "webpack-prod": "NODE_ENV=production webpack -p --mode=production",
-    "webpack-watch": "webpack -p --watch --mode=development"
+    "webpack-dev": "webpack --mode=development",
+    "webpack-prod": "NODE_ENV=production webpack --mode=production",
+    "webpack-watch": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "markdownlint-cli2-formatter-json": "0.0.4",
     "markdownlint-rule-header-id": "0.0.3",
     "uglifyjs-webpack-plugin": "1.1.2",
-    "webpack": "4.19.1",
-    "webpack-cli": "3.1.0"
+    "webpack": "5.59.0",
+    "webpack-cli": "4.9.1"
   }
 }
