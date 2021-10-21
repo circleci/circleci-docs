@@ -186,12 +186,12 @@ jobs:
       - ruby-deps:
           dir: src-api
       - restore_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "yarn.lock"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
       - run:
           name: Install Node dependencies
           command: cd src-api; yarn install
       - save_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "yarn.lock"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
           paths:
             - src-api/node_modules
       - run:
