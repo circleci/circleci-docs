@@ -36,8 +36,8 @@ CircleCI では、ランナーのユース ケースとして主に 2 つのシ�
 
 CircleCI ランナーは、複数のプラットフォームに対応しています。 サポート レベルは、次の 2 つのカテゴリに分かれます。
 
-* <<サポート対象>>
-* <<プレビュー>>
+* <<Supported>>
+* <<Preview>>
 
 === Supported
 
@@ -72,12 +72,12 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 *プレビュー*の CircleCI ランナーは、次のプラットフォームで利用できます。
 
 * 上記以外の Linux ディストリビューション - RHEL、SUSE、Debian など (x86_64 または ARM64)
-* Docker (ARM64)
 * Kubernetes (ARM64)
 
-NOTE: プレビューの CircleCI ランナーは現在鋭意開発中です。環境に対するサポートやユースケースに関するご質問がある場合はhttps://circleci.com/ja/contact/[お問い合わせ]ください。 また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーのディスカッション ページ]への投稿もぜひお寄せください。開発の参考にさせていただきます。
+NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
+have questions around support for your environment and use-case(s). また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーのディスカッション ページ]への投稿もぜひお寄せください。
 
-== 使用方法
+== Getting Started
 
 CircleCI ランナーの利用を開始するには、次の手順を実行します。
 
