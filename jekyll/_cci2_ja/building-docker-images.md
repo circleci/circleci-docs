@@ -90,7 +90,7 @@ version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: 
 {% endhighlight %}
 <!-- markdownlint-enable MD046 -->
 
-**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ](https://circleci.com/docs/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
 
 ```
       # Alpine ベースのイメージに APK でインストールします。
@@ -132,7 +132,7 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ## 環境の分離
 {: #separation-of-environments }
@@ -261,10 +261,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#job-space)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
