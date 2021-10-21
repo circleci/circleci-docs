@@ -307,7 +307,7 @@ version: 2.1
 jobs:
   build1:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -324,7 +324,7 @@ jobs:
 
   build2:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -340,7 +340,7 @@ jobs:
           command: make test
   build3:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -378,7 +378,7 @@ version: 2.1
 jobs:
   build1:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -395,7 +395,7 @@ jobs:
 
   build2:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -411,7 +411,7 @@ jobs:
           command: make test
   build3:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -449,7 +449,7 @@ version: 2
 jobs:
   build1:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -466,7 +466,7 @@ jobs:
 
   build2:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -482,7 +482,7 @@ jobs:
           command: make test
   build3:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -533,7 +533,7 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -552,7 +552,7 @@ jobs:
 
   build2:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -577,7 +577,7 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -596,7 +596,7 @@ jobs:
 
   build2:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -621,7 +621,7 @@ jobs:
     # (either docker, macos, or machine), see
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -640,7 +640,7 @@ jobs:
 
   build2:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

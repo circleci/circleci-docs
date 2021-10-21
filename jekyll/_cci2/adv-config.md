@@ -60,7 +60,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:buster-browsers
+      - image: cimg/node:buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -90,7 +90,7 @@ jobs:
 
     # Primary container image where all commands run
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
