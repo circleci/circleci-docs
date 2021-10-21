@@ -17,7 +17,7 @@ _(Learn how to install yarn on your machine [here](https://classic.yarnpkg.com/l
 6. Run `yarn start` to create needed js assets & build the static site in Docker
 _(Warning: This may take up to 10 minutes to build)_
 8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
-9. To gracefully stop the running commands you can CTRL-C and run `yarn stop`.
+9. To gracefully stop the running commands you can CTRL-C.
 
 **Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
 
