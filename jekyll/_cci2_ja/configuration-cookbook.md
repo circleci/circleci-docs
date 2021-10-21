@@ -70,7 +70,7 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
+これらの環境変数の設定方法の詳細については、[環境変数に関するドキュメント](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
 
 **Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
@@ -574,8 +574,8 @@ workflows:
 
 上記の例では、以下のような要素が実装されています:
 
-- [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 
 ### 基本的な例
 {: #a-basic-example }
