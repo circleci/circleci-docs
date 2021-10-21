@@ -44,7 +44,7 @@ Orb プロジェクトの設定ファイルの中身について詳しくは、�
 ### YAML 構文チェック
 {: #yaml-lint }
 
-上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。詳しくは、[Orb レジストリのページ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
+上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。 詳しくは、[Orb レジストリのページ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
 
 ### コンフィグの検証
 {: #config-validation }
@@ -77,21 +77,21 @@ Orb を初期化すると、[greet.sh](https://github.com/CircleCI-Public/Orb-Pr
 
 ```yaml
 
-# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml
+# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
-description: >
-  This command echos "Hello World" using file inclusion.
-parameters:
-  to:
-    type: string
-    default: "World"
-    description: "Hello to whom?"
-steps:
-  - run:
-      environment:
-        PARAM_TO: <<parameters.to>>
-      name: Hello Greeting
-      command: <<include(scripts/greet.sh)>>
+# 各テストの前に実行
+setup() {
+    # Load our script file.
+source ./src/scripts/greet.sh
+}
+
+@test '1: Greet the world' {
+    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
+    export PARAM_TO="World"
+    # "Greet" 関数の出力を取得する
+    result=$(Greet)
+    [ "$result" == "Hello World" ]
+}
 
 ```
 
@@ -115,18 +115,18 @@ fi
 
 {:.tab.unitTest.greet-bats}
 ```bash
-# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
-# 各テストの前に実行
+# Runs prior to every test
 setup() {
     # Load our script file.
     source ./src/scripts/greet.sh
 }
 
 @test '1: Greet the world' {
-    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
+    # Mock environment variables or functions by exporting them (after the script has been sourced)
     export PARAM_TO="World"
-    # "Greet" 関数の出力を取得する
+    # Capture the output of our "Greet" function
     result=$(Greet)
     [ "$result" == "Hello World" ]
 }
@@ -195,12 +195,12 @@ teardown() {
 
 開発版の Orb がパブリッシュされると、[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローが自動的にトリガーされ、Orb をテストします。
 
-`integration-test_deploy` ワークフローでは、一連の最終結合テストを実行します。これらすべてのテストに合格した場合、メインのデプロイメント ブランチに移動し、Orb をデプロイすることができます。
+`integration-test_deploy` ワークフローでは、一連の最終結合テストを実行します。 これらすべてのテストに合格した場合、メインのデプロイメント ブランチに移動し、Orb をデプロイすることができます。
 
 ### Testing orb commands
 {: #testing-orb-commands }
 
-[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの最初のジョブは [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) ジョブです。これは、`orb-init` コマンドで生成される `hello-world` Orb に含まれるサンプルの結合テストです。
+[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの最初のジョブは [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) ジョブです。 これは、`orb-init` コマンドで生成される `hello-world` Orb に含まれるサンプルの結合テストです。
 
 [`integration-test-1` ジョブ](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) の定義は、上部の `jobs` キーで確認できます。
 
