@@ -12,7 +12,7 @@ version:
 ---
 
 
-ビルドのトリガーとスケジュールについて、役立つヒントをご紹介します。以下のスニペットを参照してください。
+There are a few great tricks for triggering and scheduling builds in the following snippets!
 
 ## Skip builds
 {: #skip-builds }
@@ -74,6 +74,11 @@ workflows:
       - deploy:
           requires:
             - hold
+          requires:
+           - test2
+      - deploy:
+          requires:
+            - hold
 ```
 
 ## Trigger Docker builds in Dockerhub
@@ -81,6 +86,11 @@ workflows:
 
 ```yaml
 version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14.17-browsers # < an arbitrarily chosen docker image.
+        version: 2
 jobs:
   build:
     docker:
@@ -99,4 +109,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)
+[ワークフロー]({{ site.baseurl }}/2.0/workflows/)
