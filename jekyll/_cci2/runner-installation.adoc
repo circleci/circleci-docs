@@ -47,7 +47,7 @@ Use the following command:
 circleci namespace create <name> <vcs-type> <org-name>
 ```
 +
-For example, if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
+For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 . Create a resource class for your runner for your namespace using the following command:
 + 
 NOTE: Your newly created namespace is required in the command to create your resource class.
