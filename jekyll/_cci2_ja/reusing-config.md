@@ -84,7 +84,7 @@ Orb では以下のパラメーター型がサポートされます。
 * `整数型`
 * `列挙型`
 * `Executor 型`
-* `steps`
+* `ステップ型`
 * 環境変数名型
 
 パイプライン パラメーターでは以下のパラメーター型がサポートされます。
@@ -464,7 +464,7 @@ jobs:
 ### 特別なキー
 {: #special-keys }
 
-CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 Examples of these keys are:
+CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
 
   * `checkout`
   * `setup_remote_docker`
@@ -752,27 +752,6 @@ jobs:
 
 ```yaml
 version: 2.1
-jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    environment:
-     ENV: ci       # Executor で設定された値
-
-     steps:
-      - run: echo "Node will not be installed." Any env vars will be added.
-    executor: node
-    steps:
-      - run: echo "Node will not be installed."
-```
-
-上記の設定は以下のとおり解決されます。
-
-```yaml
-version: 2.1
 
 executors:
   node:
@@ -780,7 +759,7 @@ executors:
       - image: cimg/node:lts
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
      ENV: ci
 
@@ -790,10 +769,26 @@ jobs:
       - image: cimg/base:stable
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    # 以下のテスト Executor は、より明示的な "docker" Executor があれば上書きされます。
-    任意の環境変数が追加されます。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # The test executor below will be overwritten by the more explicit "docker" executor. Any env vars will be added.
     executor: node
+    steps:
+      - run: echo "Node will not be installed."
+```
+
+上記の設定は以下のとおり解決されます。
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+     ENV: ci       # From executor.
     steps:
       - run: echo "Node will not be installed."
 ```
