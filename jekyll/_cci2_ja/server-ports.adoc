@@ -14,7 +14,7 @@ version:
 
 toc::[]
 
-== Services Machine
+== Services マシン
 Services マシンには、ユーザー向けの Web サイト、API エンジン、データストア、Nomad ジョブ スケジューラなどの CircleCI Server 製品のコア コンポーネントがホスティングされます。 ベスト プラクティスとして、独立のマシンを使用することをお勧めします。
 
 NOTE: 現在、CircleCI Server は、x86_64 アーキテクチャのみに対応しています。
@@ -117,7 +117,7 @@ Nomad クライアント数のベスト プラクティスを以下の表にま�
 
 CircleCI Server 2.0 のインストールで必要となるすべてのポートを、マシン タイプごとに以下の表に示します。
 
-=== Services Machine
+=== Services マシン
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -194,42 +194,42 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 4647
 | TCP
-| Bi-directional
+| 双方向
 | Nomad クライアント
 | 内部通信
 |
 
 | 8585
 | TCP
-| Bi-directional
+| 双方向
 | Nomad クライアント
 | 内部通信
 |
 
 | 7171
 | TCP
-| Bi-directional
+| 双方向
 | Nomad クライアント
 | 内部通信
 |
 
 | 3001
 | TCP
-| Bi-directional
+| 双方向
 | Nomad クライアント
 | 内部通信
 |
 
 | 80
 | TCP
-| Bi-directional
+| 双方向
 | GitHub Enterprise/GitHub.com (該当するもの)
 | Web フック/API アクセス
 |
 
 | 443
 | TCP
-| Bi-directional
+| 双方向
 | GitHub Enterprise/GitHub.com (該当するもの)
 | Web フック/API アクセス
 |
@@ -340,28 +340,28 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 4647
 | TCP
-| Bi-directional
+| 双方向
 | Services Machine
 | 内部通信
 |
 
 | 8585
 | TCP
-| Bi-directional
+| 双方向
 | Services Machine
 | 内部通信
 |
 
 | 7171
 | TCP
-| Bi-directional
+| 双方向
 | Services Machine
 | 内部通信
 |
 
 | 3001
 | TCP
-| Bi-directional
+| 双方向
 | Services Machine
 | 内部通信
 |
@@ -423,14 +423,14 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 80
 | TCP
-| Bi-directional
+| 双方向
 | Services Machine
 | Web フック/API アクセス
 |
 
 | 443
 | TCP
-| Bi-directional
+| 双方向
 | Services Machine
 | Webhooks / API access
 |===
@@ -449,7 +449,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 5432
 | TCP
-| Bi-directional
+| 双方向
 | PostgreSQL サーバー
 | PostgreSQL 複製
 | 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
@@ -469,7 +469,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 27017
 | TCP
-| Bi-directional
+| 双方向
 | MongoDB サーバー
 | MongoDB 複製
 | 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
@@ -496,7 +496,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 5672
 | TCP
-| Bi-directional
+| 双方向
 | RabbitMQ サーバー
 | RabbitMQ ミラーリング
 | 外部処理用 RabbitMQ を使用する場合のみ
@@ -523,7 +523,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 
 | 6379
 | TCP
-| Bi-directional
+| 双方向
 | Redis サーバー
 | Redis 複製
 | 外部処理用 Redis を使用し、Redis 複製 (オプション) を使用する場合のみ
