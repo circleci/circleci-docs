@@ -74,6 +74,21 @@ jobs:
 
 {:.tab.windowsblockone.Server}
 ```yaml
+version: 2.0
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblocktwo.Server}
+```yaml
 version: 2
 
 jobs:
@@ -125,7 +140,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblocktwo.Server}
+ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblockthree.Server}
 ```yaml
 version: 2
 
@@ -140,12 +170,12 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
+Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
 
 # Windows Executor でのシェルの指定
 {: #specifying-a-shell-with-the-windows-executor }
 
-Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
+There are three shells that you can use to run job steps on Windows:
 
 * PowerShell 5
 * Bash
@@ -178,9 +208,31 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblockthree.Server_3}
 ```YAML
 version: 2.0
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockfour.Server}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -221,9 +273,24 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server}
+設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 ```YAML
-version: 2.0
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -241,7 +308,7 @@ jobs:
 
 Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
-設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
+最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
 
 ```yaml
 version: 2.1
@@ -271,7 +338,7 @@ jobs:
       - checkout
 ```
 
-最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
+In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
 
 ```yaml
       - restore_cache:

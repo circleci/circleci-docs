@@ -12,12 +12,16 @@ version:
   - Server v3.x
 ---
 
-CircleCI offers several build environments. We call these **executors**. **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCIでは、複数のビルド環境を用意しています。 CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
 ## Docker
 {: #docker }
+
+<div class="alert alert-warning" role="alert">
+  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+</div>
 
 ```
 jobs:
@@ -51,12 +55,6 @@ jobs:
 ```
 
 `machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
-
-## macOS
-{: #macos }
-
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
-
 ```
 jobs:
   build: # ジョブの名前
@@ -66,6 +64,26 @@ jobs:
     steps:
       # Xcode 11.3 がインストールされた
       # macOS 仮想マシン環境で実行するコマンド
+```
+
+`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+
+## macOS
+{: #macos }
+
+_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
+
+```
+jobs:
+  build: # ジョブの名前
+    machine:
+      image: windows-default # Windows マシン イメージ
+    resource_class: windows.medium
+    steps:
+      # Windows 仮想マシン環境で実行するコマンド
+
+      - checkout
+      - run: Write-Host 'Hello, Windows'
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
@@ -80,10 +98,10 @@ Windows Executor を使用するための設定ファイルの構文は、以下
 
 {:.tab.windowsblock.Cloud}
 ```
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -95,16 +113,33 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+
+{:.tab.windowsblock.Server_3}
 ```
+version: 2.1
+
 jobs:
-  build: # ジョブの名前
+  build: # name of your job
     machine:
-      image: windows-default # Windows マシン イメージ
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
-      # Windows 仮想マシン環境で実行するコマンド
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
 
+{:.tab.windowsblock.Server_2}
+```
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
@@ -114,11 +149,11 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-* [Choosing an executor type]({{ site.baseurl }}/ja/2.0/executor-types/)
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/ja/2.0/circleci-images/)
-* [Building on MacOS]({{site.baseurl}}/ja/2.0/hello-world-macos)
-* [Building on Windows]({{site.baseurl}}/ja/2.0/hello-world-windows)
+* [Executor タイプの選択]({{ site.baseurl }}/ja/2.0/executor-types/)
+* [ビルド済み CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)
+* [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
+* [Windows でビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
 
 ## Learn More
 {: #learn-more }
-Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.
+CircleCI Academy の [ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021) を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。

@@ -11,6 +11,10 @@ version:
   - Server v2.x
 ---
 
+<div class="alert alert-warning" role="alert">
+  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+</div>
+
 CircleCI が提供しているビルド済みイメージの概要と、言語別、サービス タイプ別、タグ別のイメージについて、以下のセクションに沿って説明します。
 
 * 目次
@@ -28,7 +32,7 @@ CircleCI では、すぐに使える Docker イメージを多数提供してい
 - GitHub の `circleci-images` リポジトリには、[従来の CiecleCI イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。
 - すべての ビルド済み CircleCI イメージは、[Docker ハブ](https://hub.docker.com/search?q=circleci&type=image) から入手できます。
 
-_**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
+__**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
 
 ### 例
 {: #examples }
@@ -53,7 +57,6 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
   myjob:
     docker:
       - image: cimg/base:2021.04
-
 ```
 
 これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 次世代版の CircleCI イメージは、すべてこのイメージがベースとなります。
@@ -64,7 +67,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 **関連資料**
 
-このイメージの設定ファイルのサンプルは [デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base) を、ソースコードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) を参照してください。　
+このイメージの設定ファイルのサンプルは [デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base) を、ソースコードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) を参照してください。
 
 以下の例では、上記の `ベースのイメージ`をベースにした、次世代のGoイメージを使用する方法を示しています。
 
@@ -72,7 +75,6 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
   myjob:
     docker:
       - image:  cimg/go:1.16
-
 ```
 
 これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker ハブ の名前空間が `cimg` であることにご注意ください。 他の言語の次世代イメージは、[以下](#next-gen-language-images)をご覧ください。

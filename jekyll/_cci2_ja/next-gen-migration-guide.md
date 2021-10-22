@@ -16,7 +16,7 @@ version:
 ## 概要
 {: #overview }
 
-2020 年より、CircleCI では CircleCI イメージの次世代版の展開を開始しました。 これらのイメージは、[CircleCI 2.0 ](https://circleci.com/ja/blog/say-hello-to-circleci-2-0/)の発表時にリリースされた従来の CircleCI イメージに代わるものです。 次世代版は CI/CD 環境に合わせてゼロから設計されており、 従来よりもスピードと効率、そしてなによりも信頼性が大きく向上しています。 次世代 CircleCI イメージの特徴について詳しくは、[こちらのブログ記事](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)をご覧ください。 従来イメージが今後廃止されることに伴い、ここでは新しいイメージへの移行プロセスについて説明します。
+2020 年より、CircleCI では CircleCI イメージの次世代版の展開を開始しました。 これらのイメージは、[CircleCI 2.0 ](https://circleci.com/ja/blog/say-hello-to-circleci-2-0/)の発表時にリリースされた従来の CircleCI イメージに代わるものです。 The next-gen CircleCI convenience images are designed from the ground up for a CI/CD environment. They are designed to be faster, more efficient, and most importantly, more reliable. You can learn more about all of the features [on our blog post](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/). As we begin to deprecate the legacy images, this document provides information on the migration process.
 
 従来のイメージから次世代版に移行するには、名前空間を変更する必要があります。 イメージの Docker 名前空間について、従来のものはすべて `circleci` でしたが、次世代イメージでは `cimg` に変わります。 たとえば、従来の Ruby および Python のイメージを次世代版に移行するには、それぞれ次のように変更します。
 
@@ -70,7 +70,7 @@ circleci/ruby:2.3.0 -> cimg/ruby:2.3.0 circleci/python:3.8.4 -> cimg/python:3.8.
 
 ベース OS の Ubuntu への統一
 
-従来のイメージでは、バリアント タグによってベース オペレーティング システム (OS) が異なっていました。 たとえば、Debian と Ubuntu のバージョンのイメージがある一方、別のイメージでは異なるベース OS が提供されていました。 こうした状態を解消するため、 次世代の CircleCI イメージはすべて、Ubuntu の最新 LTS リリースがベース OS となります。
+従来のイメージでは、バリアント タグによってベース オペレーティング システム (OS) が異なっていました。 たとえば、Debian と Ubuntu のバージョンのイメージがある一方、別のイメージでは異なるベース OS が提供されていました。 This is no longer the case. こうした状態を解消するため、 次世代の CircleCI イメージはすべて、Ubuntu の最新 LTS リリースがベース OS となります。
 
 ベース イメージでは、少なくとも 2 つ以上の LTS リリースと、EOL 前の標準リリースがサポートされます。
 

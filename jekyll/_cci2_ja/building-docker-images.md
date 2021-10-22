@@ -74,22 +74,14 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    steps:
-      - checkout
-      # ... アプリのビルド・テストに関する記述 ...
+version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照 steps: - checkout # ... アプリのビルド・テストに関する記述 ...
+
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
     
       # Docker イメージをビルドしプッシュします。
+    
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -211,7 +203,6 @@ services:
      COMPRESS: 'false'
    volumes:
      - bundler-data:/source/bundler-data
-
 ```
 
 次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
@@ -251,7 +242,6 @@ services:
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
       - ~/bundler-cache
-
 ```
 {% endraw %}
 
