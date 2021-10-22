@@ -545,14 +545,85 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 *  https://app.optimizely.com/v2/projects/16812830475/experiments/20742690126/variations
 */
 #full-config-example {
-	visibility: hidden
+	visibility: hidden;
 }
 
 /*
-*  Experiment Key: dd_add_copy_code_button_to_docs
-*  https://app.optimizely.com/v2/projects/16812830475/experiments/20580130094/variations
+*  Experiment Key: dd_add_video_tab_to_docs_test
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20790151733/variations
 */
 
-.video-wrapper + .video-wrapper {
-  margin-top: 20px;
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media screen and (min-width: $screen-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 48px;
+}
+
+.video-grid .video-card {
+  border-bottom: 1px solid #EBEBEB;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding-bottom: 24px;
+}
+
+.video-grid .video-card .video-thumbnail {
+  flex-basis: 55%;
+  position: relative;
+  cursor: pointer;
+}
+
+.video-grid .video-card .video-thumbnail a {
+  height: 100%;
+  display: block;
+}
+
+.video-grid .video-card a:hover {
+  opacity: 0.9;
+}
+
+.video-grid .video-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 0px;
+}
+
+.video-grid .video-card .video-title {
+ color: #27A0B6;
+ font-size: 16px;
+ max-width: 45%;
+ min-width: 45%;
+}
+
+/* this is the play "icon" (white circle) */
+.video-grid .video-card .play-button {
+  width: 46px;
+  height: 46px;
+  background-color: white;
+  position: absolute;
+  border-radius: 100%;
+  top: calc(50% - 23px);
+  left: calc(50% - 23px);
+}
+
+/* this is the play "icon" (black triangle) */
+.video-grid .video-card .play-button::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-left: 14px solid black;
+  border-bottom: 11px solid transparent;
+  position: relative;
+  top: calc(50% - 11px);
+  left: 18px;
 }

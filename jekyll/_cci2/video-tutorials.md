@@ -1,86 +1,78 @@
 ---
 layout: classic-docs
-title: "CircleCI Intro"
+title: "Video Tutorials"
 short-title: "CircleCI video tutorials"
-description: "Use the tutorials, samples, how-to, and reference documentation to learn CircleCI."
+description: "Learn CircleCI using these popular video tutorials, demos, webinars, and courses."
 #categories: [optimization]
 #order: 70
 #version:
 # - Cloud
 # - Server v2.x
+overviewYT:
+  - youtubeId: Js3hMUsSZ2c
+    title: How to get started with CircleCI
+  - youtubeId: J1l-icYGyd0
+    title: CircleCI Demo
+  - youtubeId: lMKDkS8uATc
+    title: How to get your first green build on CircleCI
+    maxresdefault: false
+  - youtubeId: vycFH-g13Mg
+    title: Introduction to Orbs
+buildYT:
+  - youtubeId: FCiMD6Gq34M
+    title: How to schedule builds on CircleCI
+  - youtubeId: A4_s65CYfvI
+    title: How to Implement Dynamic Configuration in CircleCI
+  - youtubeId: IU0rqUGIBCE
+    title: How to get started with webhooks
+  - youtubeId: NutRbW7jmm0
+    title: Making CI/CD Builds Faster with CircleCI
+  - youtubeId: P7-bmPkU_zU
+    title: Continuous integration overview
+# deployYT:
+#   - youtubeId: eZxKs1mrxTM
+#     title: Introduction to Deployments on CircleCI
+optimizeYT:
+  - youtubeId: L9cAyZZn_XY
+    title: Optimizing configurations with CircleCI Pipelines
+  - youtubeId: yrWWmKVIg-c
+    title: "CircleCI Private Orbs: Share Configuration Across Your Organization"
+    maxresdefault: false
+  - youtubeId: AL7aBN7Olng
+    title: How to use Docker Layer Caching to speed up your builds on CircleCI
+  - youtubeId: GHe0OIOLjmM
+    title: Optimizing CircleCI workflows
 ---
 
 Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
 
-[CircleCI Academy](https://academy.circleci.com/)
-
-[CircleCI YouTube](https://www.youtube.com/channel/UC9_Pmtv-cUccKkusuapItMQ)
-
-[CircleCI Twitch](https://www.twitch.tv/circleci)
-
 * TOC
 {:toc}
 
-## CircleCI Overview
-{: #overview }
+## Get started with CircleCI
+{: #get-started }
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum augue eu lectus aliquet mollis. Aliquam id dui sit amet odio pellentesque scelerisque vel id eros. Etiam accumsan ipsum at massa viverra, eu semper tortor interdum. Vestibulum eu mauris nisi.
+These foundational tutorials can help you set up your first project and learn the key concepts of CircleCI.
 
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Js3hMUsSZ2c" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+{% include youtube-grid.html videos=page.overviewYT %}
 
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/J1l-icYGyd0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-## Build and test code
+## Build and test your code
 {: #build-test-code }
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum augue eu lectus aliquet mollis. Aliquam id dui sit amet odio pellentesque scelerisque vel id eros. Etiam accumsan ipsum at massa viverra, eu semper tortor interdum. Vestibulum eu mauris nisi.
+Watch these step-by-step guides to learn how to build, test, and debug pipelines for your individual use cases.
 
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/lMKDkS8uATc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/A4_s65CYfvI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/NutRbW7jmm0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL9GgS3TcDh8x5drv5yiUx4vHDw1qrm5U1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-## Deploy your code
-{: #deploy-code }
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum augue eu lectus aliquet mollis. Aliquam id dui sit amet odio pellentesque scelerisque vel id eros. Etiam accumsan ipsum at massa viverra, eu semper tortor interdum. Vestibulum eu mauris nisi.
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/eZxKs1mrxTM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+{% include youtube-grid.html videos=page.buildYT %}
 
 ## Optimize your config
 {: #optimize-config }
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum augue eu lectus aliquet mollis. Aliquam id dui sit amet odio pellentesque scelerisque vel id eros. Etiam accumsan ipsum at massa viverra, eu semper tortor interdum. Vestibulum eu mauris nisi.
+Follow these best practices to optimize your configuration so you can build faster and more efficiently.
 
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/L9cAyZZn_XY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+{% include youtube-grid.html videos=page.optimizeYT %}
 
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL9GgS3TcDh8xwSoIoaF7OgaE2Owv6PYzE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+## Want more videos?
+{: #more }
+
+Sign up for free [CircleCI Academy](https://academy.circleci.com/) courses
+
+Follow us on [YouTube](https://www.youtube.com/channel/UC9_Pmtv-cUccKkusuapItMQ) and [Twitch](https://www.twitch.tv/circleci)

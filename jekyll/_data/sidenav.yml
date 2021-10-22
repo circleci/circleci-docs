@@ -1,4 +1,13 @@
 en:
+- name: Video Tutorials
+  icon: icons/sidebar/youtube_tutorials.svg
+  children:
+    - name: Get started with CircleCI
+      link: 2.0/video-tutorials/#get-started
+    - name: Build and test your code
+      link: 2.0/video-tutorials/#build-test-code
+    - name: Optimize your config
+      link: 2.0/video-tutorials/#optimize-config
 - name: Getting Started
   icon: icons/sidebar/getting_started.svg
   children:
