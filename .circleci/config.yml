@@ -130,7 +130,7 @@ jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
       name: node/default
-      tag: '14.18.1'
+      tag: '14.17.3'
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
