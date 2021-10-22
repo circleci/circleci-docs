@@ -173,7 +173,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.7.2-browsers'
+      tag: '2.6.8-browsers'
     steps:
       - checkout
       - install-shared-assets
@@ -210,7 +210,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.7.2-browsers'
+      tag: '2.6.8-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -231,6 +231,8 @@ jobs:
             sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
       - ruby-deps
+      - node/install-packages:
+          cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
       - run:
           name: Run markdownlint with pronto
           command: bundle exec pronto run -f github_pr -c origin/master
@@ -290,7 +292,7 @@ jobs:
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.7.2-browsers'
+      tag: '2.6.8-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
