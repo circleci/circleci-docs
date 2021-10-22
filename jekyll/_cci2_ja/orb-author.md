@@ -26,14 +26,14 @@ Orb を初めて作成する方も、本番レベルで準備する方も、[Orb
 キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットは、次の要素で構成されています。
 
 * [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)
-* [Orb Pack]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
+* [Orb パッケージ]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)
 * [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
 ### はじめよう
 {: #getting-started }
 
-**Note:** While the outlined process below only mentions GitHub, the development kit also works with Bitbucket repositories.
+**注:** 以下の手順は GitHub についてのみ記載されていますが、Orb 開発キットは Bitbucket レポジトリでもご使用いただけます。
 
 Orb 開発キットで新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
@@ -41,16 +41,16 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[名前空間]
 
 1. **新しい [GitHub リポジトリ](https://github.com/new)を作成します。 **<br/> リポジトリの名前は、特に重要な役割はありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 Write down the git URL, you will need it in step 4. URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
     **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
     {: class="alert alert-warning"}
 
-1. **[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
+1. **ターミナルを開き、`orb init` CLI コマンドを使用**して、**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)**Orb を初期化します。
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
@@ -58,8 +58,8 @@ circleci orb init /path/to/myProject-orb --private
 
 1. **Orb の完全自動セットアップ オプションを選択します。**
 ```
-? Would you like to perform an automated setup of this orb?:
-  ▸ Yes, walk me through the process.
+? Would you like to perform an automated setup of this orb?:（ Orb の自動セットアップを実行しますか？）
+  ▸ Yes, walk me through the process. （はい、手順を教えてください。)
     )
     )
     No, I'll handle everything myself.（いいえ、すべて手動で行います。
@@ -68,20 +68,20 @@ When choosing the manual option, see [Manual Orb Authoring Process](https://circ
 
 完全自動オプションを選択すると、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含まれます。 <br/><br/> 含まれる CI/CD パイプラインの詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。 または、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)を便利な方法でダウンロードするだけに留める場合は、「No, I'll handle everything myself (すべて手動で行う)」を選択します。
 
-1. **<br/> バックグラウンドでは、回答に基づいて`orb init` コマンドが [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をコピーし、カスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 でメモしておいたリモート Git リポジトリの URL も、ここで入力を求められます。 <br/><br/> [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。 <br/><br/> セットアップ プロセスでは、[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/2.0/contexts/)に保存するかどうかを尋ねられます。 Saving this token is necessary for publishing development and production versions of your orb.
+1. **質問に答えて Orb の構成とセットアップを進めます。 **<br/> バックグラウンドでは、回答に基づいて`orb init` コマンドが [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をコピーし、カスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 でメモしておいたリモート Git リポジトリの URL も、ここで入力を求められます。 <br/><br/> [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。 <br/><br/> セットアップ プロセスでは、[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/2.0/contexts/)に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。
 
     **注: コンテキストの制限**
     <br/>
     _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。 <br/><br/> Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。 詳細については、「[コンテキストの使用]({{site.baseurl}}/2.0/contexts/#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E5%88%B6%E9%99%90)」を参照してください。
     {: class="alert alert-warning"}
 
-1. **<br/> セットアップ プロセス中に、`orb init` コマンドによって、自動化された Orb 開発パイプラインの準備が進められます。 CLI が処理を続行し、circleci.com でプロジェクトを自動的にフォローするには、その前に、CLI によって生成された修正済みのテンプレート コードがリポジトリにプッシュされている必要があります。 これを実行するよう要求されたら、別のターミナルから以下のコマンドを、「default-branch」を実際のデフォルト ブランチの名前に置き換えて実行します。
+1. **変更を GitHub にプッシュします。 **<br/> セットアップ プロセス中に、`orb init` コマンドによって、自動化された Orb 開発パイプラインの準備が進められます。 CLI が処理を続行し、circleci.com でプロジェクトを自動的にフォローするには、その前に、CLI によって生成された修正済みのテンプレート コードがリポジトリにプッシュされている必要があります。 これを実行するよう要求されたら、別のターミナルから以下のコマンドを、「default-branch」を実際のデフォルト ブランチの名前に置き換えて実行します。
 ```bash
 git push origin <default-branch>
 ```
 完了したら、元のターミナルに戻って、変更がプッシュされたことを確認します。
 
-1. **<br/> 新しい Orb プロジェクトが CircleCI で自動的にフォローされ、テスト用に最初の開発バージョン `<namespace>/<orb>@dev:alpha` (hello-world サンプル) が生成されて、CLI が終了します。 <br/><br/> CircleCI 上にビルドされたプロジェクトへのリンクが提供されます。 また、CLI によって自動的に `alpha` という新しい開発ブランチに移行したことも確認できます。 <br/><br/> この新しいブランチから、変更を加えたりプッシュしたりすることができます。 これで、コミットするたびに、Orb がパッケージ化、バリデーション、テスト (任意) され、パブリッシュできるようになりました。 <br/><br/> Orb の最初のメジャー バージョンをデプロイする準備が整ったら、[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)で、セマンティック バージョニング (semver) を使った変更のデプロイに関する情報を確認してください。
+1. **Orb の記述を完了します。 **<br/> 新しい Orb プロジェクトが CircleCI で自動的にフォローされ、テスト用に最初の開発バージョン `<namespace>/<orb>@dev:alpha` (hello-world サンプル) が生成されて、CLI が終了します。 <br/><br/> CircleCI 上にビルドされたプロジェクトへのリンクが提供されます。 そこで、バリデーション、パッケージ化、テスト、パブリッシュのプロセスを確認できます。 また、CLI によって自動的に `alpha` という新しい開発ブランチに移行したことも確認できます。 <br/><br/> この新しいブランチから、変更を加えたりプッシュしたりすることができます。 これで、コミットするたびに、Orb がパッケージ化、バリデーション、テスト (任意) され、パブリッシュできるようになりました。 <br/><br/> Orb の最初のメジャー バージョンをデプロイする準備が整ったら、[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)で、セマンティック バージョニング (semver) を使った変更のデプロイに関する情報を確認してください。
 
 ### Orb の記述
 {: #writing-your-orb }
@@ -159,15 +159,9 @@ display:
 
 ```yaml
 description: >
-  # What will this command do?
-  # Descriptions should be short, simple, and clear.
-description: >
   # ここには、このコマンドの目的を記述します。
   # 短くわかりやすい説明を心がけます。
-description: >
-  # ここには、このコマンドの目的を記述します。
-  # 短くわかりやすい説明を心がけます。
-Hello Worldparameters:
+parameters:
   greeting:
     type: string
     default: "Hello"
@@ -211,10 +205,6 @@ steps:
 以下は、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs)に含まれているサンプル ジョブの _[hello.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/jobs/hello.yml)_ です。
 
 ```yaml
-description: >
-  # What will this job do?
-  # Descriptions should be short, simple, and clear.
-
 description: >
   # ここには、このジョブの目的を記述します。
   # 短くわかりやすい説明を心がけます。
@@ -296,7 +286,7 @@ echo Hello "${PARAM_TO}"
 ### 更新履歴の記録
 {: #keeping-a-changelog }
 
-Orb のバージョン間の違いは、ときに判別しにくいものです。 Along with semantic versioning, we recommend leveraging a changelog to more clearly describe changes between versions. Orb プロジェクト テンプレートに `CHANGELOG.md` ファイルが含まれています。 Orb のバージョン更新のたびに、このファイルも更新してください。 ファイルは、[更新履歴の記録](https://keepachangelog.com/ja/1.0.0/) の形式を基にしています。
+Orb のバージョン間の違いは、ときに判別しにくいものです。 そのため、セマンティック バージョニングと合わせて、バージョン間の変更内容をわかりやすく示した更新履歴の活用もお勧めします。 Orb プロジェクト テンプレートに `CHANGELOG.md` ファイルが含まれています。 Orb のバージョン更新のたびに、このファイルも更新してください。 ファイルは、[更新履歴の記録](https://keepachangelog.com/ja/1.0.0/) の形式を基にしています。
 
 ### Orb のパブリッシュ
 {: #publishing-your-orb }
