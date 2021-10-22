@@ -95,7 +95,7 @@ CircleCI ビルドに SSH 接続するには、ビルドするプロジェクト
 {: #ensure-the-correct-key-is-offered-to-circleci }
 {:.no_toc}
 
-正しいユーザーで認証を行っていることが確認できた後も、CircleCI で "Permission denied (権限がありません)" メッセージが表示される場合は、CircleCI に誤った認証情報を提供している可能性があります  (SSH の設定内容によっては他にも理由が考えられます)。 (This can happen for several reasons, depending on your SSH configuration.)
+正しいユーザーで認証を行っていることが確認できた後も、CircleCI で "Permission denied (権限がありません)" メッセージが表示される場合は、CircleCI に誤った認証情報を提供している可能性があります  (SSH の設定内容によっては他にも理由が考えられます)。  (SSH の設定内容によっては他にも理由が考えられます)
 
 認証を行う GitHub にどのキーを提供しているかを調べるには、以下を実行します。
 
@@ -135,4 +135,4 @@ $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket とのインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket とのインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
