@@ -28,7 +28,7 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 **柔軟性**:: CircleCIはベンダーやツールを選びません。 CircleCI の設定では、API を持つあらゆるプラットフォームやクラウドプロバイダーとの統合が可能です。 既存のパートナーシップについては、 https://circleci.com/integrations/[インテグレーションのページ] をご覧ください。 依存関係やライブラリは、ジョブの中でアドホックにインストールすることができ、その後のビルドを高速化するために、 https://circleci.com/docs/2.0/caching/[依存関係のキャッシュ] を提供しています。
 **共有・再利用可能な設定**:: ステップ、実行環境、ジョブは、 https://circleci.com/docs/2.0/orb-intro/#section=configuration[CircleCI Orb] を使って、異なるプロジェクトやチーム間でテンプレート化、パラメータ化、共有、再利用することができます。 すでに作成されている https://circleci.com/developer/orbs[数々のインテグレーションや Orb ] をぜひ活用してください。
 
-We have various other features that set our solution apart. https://circleci.com/signup/[今すぐ無料アカウントを作成し、]お試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただき]、トライアルを設定してください。
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]お試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただき]、トライアルを設定してください。
 
 == コンセプト
 
