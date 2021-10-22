@@ -194,7 +194,17 @@ CircleCI でテスト分割を活用するには、実行するテストの一�
 
 以下に、この例を使用してテスト分割を行う簡単な例を示します。
 ```
-go test -v $(go list ./...| circleci tests split)
+- run:
+    command: |
+      # get test files while ignoring __init__ files
+      TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
+      echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+      cat circleci_test_files.txt
+      TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+      # massage filepaths into format manage.py test accepts
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
+      echo $TESTFILES
+      pipenv run python manage.py test --verbosity=2 $TESTFILES
 ```
 
 ## その他のテスト分割方法
@@ -279,7 +289,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-[コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
+[コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
