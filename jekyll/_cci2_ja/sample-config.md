@@ -78,7 +78,7 @@ workflows:
       - test
 ```
 
-{:.tab.basic-concurrent.Server}
+{:.tab.basic-concurrent.Server_3}
 ```yaml
 version: 2
 
@@ -112,39 +112,38 @@ workflows:
       - test
 ```
 
-{:.tab.basic-sequential.Server}
+{:.tab.basic-concurrent.Server_2}
 ```yaml
-version: 2.1
+version: 2
 
-# このプロジェクトで実行するジョブの定義
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "this is the test job"
 
-# ジョブの実行順の指定
+# Orchestrate our job run sequence
 workflows:
+  version: 2
   build_and_test:
     jobs:
       - build
       - test
-          requires:
-            - build
 ```
 
 ### 順次実行ワークフロー
@@ -189,41 +188,32 @@ workflows:
             - build
 ```
 
-{:.tab.complex-sequential.Server}
+{:.tab.basic-sequential.Server_3}
 ```yaml
 version: 2.1
 
-# このプロジェクトで実行するジョブの定義
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: my-build-commands
+      - run: echo "this is the build job"
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: my-test-commands
-  deploy:
-    docker:
-      - image: circleci/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    steps:
-      - checkout
-      - run: my-deploy-commands
+      - run: echo "this is the test job"
 
-# ジョブの実行順の指定
+# Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
@@ -231,51 +221,33 @@ workflows:
       - test:
           requires:
             - build
-      - hold:
-          type: approval
-          requires:
-            - build
-            - test
-      - deploy:
-          requires:
-            - hold
 ```
 
-{:.tab.approval.Server}
+{:.tab.basic-sequential.Server_2}
 ```yaml
 version: 2
-
-# このプロジェクトで実行するジョブの定義
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: my-build-commands
+      - run: echo "this is the build job"
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: my-test-commands
-  deploy:
-    docker:
-      - image: circleci/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    steps:
-      - checkout
-      - run: my-deploy-commands
+      - run: echo "this is the test job"
 
-# ジョブの実行順の指定
+# Orchestrate our job run sequence
 workflows:
   version: 2
   build_and_test:
@@ -284,14 +256,6 @@ workflows:
       - test:
           requires:
             - build
-      - hold:
-          type: approval
-          requires:
-            - build
-            - test
-      - deploy:
-          requires:
-            - hold
 ```
 
 ### 承認ジョブ
@@ -307,190 +271,104 @@ workflows:
 ```yaml
 version: 2.1
 
+# Define the jobs we want to run for this project
 jobs:
-  build-and-test:
-    macos:
-      xcode: 11.3.0
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run:
-          name: CocoaPods のインストール
-          command: pod install --verbose
-      - run:
-          name: テストのビルドと実行
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: WebTests
-      - store_test_results:
-          path: test_output/report.xml
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
-
-  swiftlint:
+      - run: my-build-commands
+  test:
     docker:
-      - image: dantoml/swiftlint:latest
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: swiftlint lint --reporter junit | tee result.xml
-      - store_artifacts:
-          path: result.xml
-      - store_test_results:
-          path: result.xml
-
-  danger:
-    docker:
-      - image: dantoml/danger:latest
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    steps:
-      - checkout
-      - run: danger
-
-workflows:
-  build-test-lint:
-    jobs:
-      - swiftlint
-      - danger
-      - build-and-test
-```
-
-以下に、次の CircleCI 設定機能を使用した `.circleci/config.yml` ファイル サンプルを示します。
-```yaml
-version: 2.0
-
-jobs:
-  checkout_code:
-    docker:
-      - image: circleci/ruby:2.4-node-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-      - image: circleci/postgres:9.4.12-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    working_directory: ~/circleci-demo-workflows
-    steps:
-      - checkout
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
-
-  bundle_dependencies:
-    docker:
-      - image: circleci/ruby:2.4-node-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-      - image: circleci/postgres:9.4.12-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    working_directory: ~/circleci-demo-workflows
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --path vendor/bundle
-      - save_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ~/circleci-demo-workflows/vendor/bundle
-
-  rake_test:
-    docker:
-      - image: circleci/ruby:2.4-node-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-      - image: circleci/postgres:9.4.12-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    working_directory: ~/circleci-demo-workflows
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle --path vendor/bundle
-      - run: bundle exec rake db:create db:schema:load
-      - run:
-          name: テストの実行
-          command: bundle exec rake
-
-  precompile_assets:
-    docker:
-      - image: circleci/ruby:2.4-node-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-      - image: circleci/postgres:9.4.12-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    working_directory: ~/circleci-demo-workflows
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle --path vendor/bundle
-      - run:
-          name: アセットのプリコンパイル
-          command: bundle exec rake assets:precompile
-      - save_cache:
-          key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows/public/assets
-
+      - run: my-test-commands
   deploy:
-    machine:
-        enabled: true
-    working_directory: ~/circleci-demo-workflows
-    environment:
-      HEROKU_APP: still-shelf-38337
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - restore_cache:
-          key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: マスターから Heroku へのデプロイ
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+      - checkout
+      - run: my-deploy-commands
 
+# Orchestrate our job run sequence
 workflows:
-  version: 2
-  build-and-deploy:
+  build_and_test:
     jobs:
-      - checkout_code
-      - bundle_dependencies:
+      - build
+      - test:
           requires:
-            - checkout_code
-      - rake_test:
+            - build
+      - hold:
+          type: approval
           requires:
-            - bundle_dependencies
-      - precompile_assets:
-          requires:
-            - bundle_dependencies
+            - build
+            - test
       - deploy:
           requires:
-            - rake_test
-            - precompile_assets
+            - hold
+```
+
+{:.tab.approval.Server_3}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
 ```
 
 {:.tab.approval.Server_2}
@@ -549,7 +427,7 @@ workflows:
 ## 順次実行ワークフローの設定例
 {: #sample-configuration-with-sequential-workflow }
 
-Following is a sample `.circleci/config.yml` file using the following configuration features:
+以下に、次の CircleCI 設定機能を使用した `.circleci/config.yml` ファイル サンプルを示します。
 
 * 順次実行ワークフロー
 * Orb (Cloud の `version: 2.1` 設定ファイルのみ): node Orb でキャッシュを自動処理しています。 キャッシュの保存と復元の方法については Server の `version: 2.0` サンプルを参照してください。
@@ -567,18 +445,18 @@ orbs:
 jobs:
   build:
     working_directory: ~/mern-starter
-    # node Orb で指定されている Docker コンテナ設定を再利用
+    # Reuse Docker container specification given by the node Orb
     executor: node/default
     steps:
       - checkout
-      # 最新の npm のインストール - node Orb が自動処理
+      # Install the latest npm - the node Orb takes care of it
       - node/install-npm
-      # 依存関係のインストール - インストールと依存関係のキャッシュは node Orb が自動処理
+      # Install dependencies - the node Orb take care of installation and dependency caching
       - node/install-packages:
           app-dir: ~/mern-starter
           cache-path: node_modules
           override-ci-command: npm i
-      # 後続のジョブ (test) 用にワークスペースを保存
+      # Save workspace for subsequent jobs (i.e. test)
       - persist_to_workspace:
           root: .
           paths:
@@ -586,7 +464,7 @@ jobs:
 
   test:
     docker:
-      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 The job's commands run in this container.
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -601,7 +479,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: MongoDB がローカルホストとして利用可能であることを示すデモ
+          name: Demonstrate that Mongo DB is available as localhost
           command: |
             curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
@@ -609,12 +487,12 @@ jobs:
             sudo apt install mongodb-org
             mongo localhost --eval 'db.serverStatus()'
       - run:
-          name: テスト
+          name: Test
           command: npm test
       - run:
-          name: コード カバレッジの生成
+          name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      # アーティファクトとして保存する対象には 1 つのファイルまたはディレクトリを指定できます
+      # You can specify either a single file or a directory to store as artifacts
       - store_artifacts:
           path: test-results.xml
           destination: deliverable.xml
@@ -715,7 +593,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 The job's commands run in this container.
+    # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
       - image: circleci/node:14.17.3-buster
         auth:
@@ -834,7 +712,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
             - attach_workspace:
                   at: .
@@ -857,7 +735,7 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
                       echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
             - docker/check:
@@ -876,7 +754,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
@@ -949,18 +827,18 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
             - checkout
             - run:
-                  name: コンピューティングのバージョン番号
+                  name: Compute version number
                   command: echo "0.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}" | tee version.txt
             - restore_cache:
                   keys:
                       - yarn-deps-{{ checksum "yarn.lock" }}
                       - yarn-deps
             - run:
-                  name: yarn のインストール
+                  name: yarn install
                   command: yarn install
             - save_cache:
                   paths:
@@ -983,7 +861,7 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: 本番環境でのビルド
+                  name: Production build
                   command: |
                       export __BUILD_VERSION="$(cat version.txt)"
                       yarn build
@@ -1026,7 +904,7 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: テストの実行
+                  name: Run tests
                   command: |
                       circleci tests glob '**/*.test.ts' | circleci tests split --split-by timings | xargs yarn test:ci
             - store_artifacts:
@@ -1041,7 +919,7 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
                       echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
             - docker/check:
@@ -1049,7 +927,7 @@ jobs:
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: イメージへの latest タグの付加
+                  name: Tag the image as latest
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
@@ -1079,7 +957,7 @@ workflows:
 ```
 {% endraw %}
 
-`Example-2` では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker でビルドしています。
+{:.tab.fan-in-out.Server_2}
 {% raw %}
 ```yaml
 version: 2.0
@@ -1220,7 +1098,7 @@ workflows:
 
 `Example-1` では、Linux、Windows、macOS のそれぞれでプロジェクトのビルドおよびテストを行っています。
 
-In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+`Example-2` では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker でビルドしています。
 
 {:.tab.multiple-executors.Example-1}
 ```yaml
@@ -1246,20 +1124,20 @@ jobs:
       - image: archlinux/base
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       label:
         type: string
         default: iperf3-linux
     steps:
       - run:
-          name: 依存関係のインストール
+          name: Install dependencies
           command: pacman -Syu --noconfirm openssl git gcc make awk tar
       - run:
-          name: iperf3 のクローン
+          name: Clone iperf3
           command: git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
       - run:
-          name: iperf3 のビルド
+          name: Build iperf3
           working_directory: iperf
           command: |
             CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
@@ -1269,7 +1147,7 @@ jobs:
             mkdir -p $IPERF3_MAKE_PREFIX
             make install
       - run:
-          name: tarball の作成
+          name: Create a tarball
           command: tar -cJf << parameters.label >>.tar.xz << parameters.label >>
       - persist_to_workspace:
           root: .
@@ -1289,15 +1167,15 @@ jobs:
         default: iperf3-cygwin64
     steps:
       - run:
-          name: Cygwin インストーラーのダウンロード
+          name: Download Cygwin installer
           shell: bash.exe
           command: |
             curl -sSJOL https://cygwin.com/setup-x86_64.exe
       - run:
-          name: Cygwin と必須パッケージのインストール
+          name: Install Cygwin and required packages
           command: .\setup-x86_64.exe -q -s https://mirrors.kernel.org/sourceware/cygwin/ -P libssl-devel,git,gcc-core,make
       - run:
-          name: Cygwin を使用した iperf3 のビルド
+          name: Build iperf3 with Cygwin
           shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
           command: |
             CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
@@ -1311,7 +1189,7 @@ jobs:
             make install
             cp /usr/bin/cygwin1.dll /usr/bin/cygcrypto-1.1.dll /usr/bin/cygz.dll -t $IPERF3_MAKE_PREFIX/bin
       - run:
-          name: zip ファイルの作成
+          name: Create a Zip file
           command: |
             $ProgressPreference = "SilentlyContinue"
             Compress-Archive .\\<< parameters.label >> .\\<< parameters.label >>.zip
@@ -1331,10 +1209,10 @@ jobs:
         default: iperf3-macos
     steps:
       - run:
-          name: iperf3 のクローン
+          name: Clone iperf3
           command: git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
       - run:
-          name: iperf3 のビルド
+          name: Build iperf3
           working_directory: iperf
           command: |
             CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
@@ -1343,10 +1221,10 @@ jobs:
             make
             mkdir -p $IPERF3_MAKE_PREFIX
             make install
-            # 事後実行
+            # Postruns
             cd $IPERF3_MAKE_PREFIX/bin
-            # リンクされている OpenSSL ライブラリを現在のディレクトリにコピーし
-            # リンカーにそれらを参照するように指示
+            # Copy linked OpenSSL libraris to the current directory
+            # and tell the linker to refer to them
             otool -L iperf3 | grep openssl | awk '{ print $1 }' | while read dylib
             do
               name=$(basename $dylib)
@@ -1354,13 +1232,13 @@ jobs:
               chmod u+w $name
               install_name_tool -change $dylib @executable_path/$name iperf3
             done
-            # 同様に libssl も変更
+            # Modify libssl as well
             otool -L libssl.1.1.dylib | grep openssl | awk '{ print $1 }' | while read dylib
             do
               install_name_tool -change $dylib @executable_path/$(basename $dylib) libssl.1.1.dylib
             done
       - run:
-          name: zip ファイルの作成
+          name: Create a Zip file
           command: zip -r << parameters.label >>.zip << parameters.label >>
       - persist_to_workspace:
           root: .
@@ -1374,7 +1252,7 @@ jobs:
       - image: cimg/base:stable
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       label:
         type: string
@@ -1383,17 +1261,17 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
-          name: << parameters.label >>.tar.xz の展開
+          name: Extract << parameters.label >>.tar.xz
           command: tar -xf << parameters.label >>.tar.xz
       - run:
-          name: 実行可能ファイルのテスト
+          name: Test executable
           command: << parameters.label >>/bin/iperf3 -v
       - run:
-          name: サーバーとして実行
+          name: Run as a server
           command: << parameters.label >>/bin/iperf3 -s
           background: true
       - run:
-          name: クライアントとして実行
+          name: Run as a client
           command: << parameters.label >>/bin/iperf3 -c localhost -R
 
   test-windows:
