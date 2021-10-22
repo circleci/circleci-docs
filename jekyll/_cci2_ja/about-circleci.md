@@ -77,5 +77,5 @@ Linux、Android、macOS 上で動作するすべてのアプリがサポート�
 
 ## Learn More
 {: #learn-more }
-Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics) with CircleCI academy to learn more.
+Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021) with CircleCI academy to learn more.
 

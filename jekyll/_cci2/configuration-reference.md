@@ -486,11 +486,11 @@ jobs:
   build:
     branches:
       only:
-        - master
+        - main
         - /rc-.*/
 ```
 
-In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
+In this case, only "main" branch and branches matching regex "rc-.*" will be executed.
 
 ``` YAML
 jobs:
@@ -1951,7 +1951,7 @@ workflows:
 
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -2019,7 +2019,7 @@ jobs:
       - run: |
           set -xu
           mkdir -p /tmp/artifacts
-          create_jars.sh ${CIRCLE_BUILD_NUM}
+          create_jars.sh << pipeline.number >>
           cp *.jar /tmp/artifacts
 
       - save_cache:

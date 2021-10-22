@@ -10,9 +10,8 @@ version:
   - Cloud
   - Server v2.x
 ---
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
-[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
-[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+
+[custom-images]: {{ site.baseurl }}/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/2.0/gpu/
 
 以下のセクションに沿って、利用可能な Executor タイプ (`docker`、`machine`、`macos`、`windows`) について説明します。
 
@@ -348,4 +347,4 @@ CircleCI Server では、VM サービスを構成することで GPU 対応の m
 ## 関連項目
 {: #see-also }
 
-[設定ファイル リファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+[設定ファイル リファレンス]({{ site.baseurl }}/2.0/configuration-reference/)

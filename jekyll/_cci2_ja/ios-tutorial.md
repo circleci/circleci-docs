@@ -15,13 +15,13 @@ version:
 * 目次
 {:toc}
 
-**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
+**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
 
 ## 概要
 {: #overview }
 {:.no_toc}
 
-アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニング プロファイルをセットアップする方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
+アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニングプロファイルを設定する方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
 
 ## 前提条件
 {: #prerequisites }
@@ -38,13 +38,13 @@ version:
 ## テストの実行
 {: #running-tests }
 
-iOSプロジェクトでは、以下のようにFastlane Scanでテストを実行することができます。
+iOS プロジェクトでは、fastlane Scan を使用して以下のようにテストを実行できます。
 
 ```
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: "9.3.0"
     steps:
       ...
       - run:
@@ -56,14 +56,14 @@ jobs:
 
 ```
 
-サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションで確認してください。
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
 
 詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/ja/2.0/ios-codesigning/)」を参照してください。
 
-カスタム ツールの使用や独自スクリプトの実行を目的としてビルド プロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については、[2.0 config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)を参照してください。
+To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) document for customizations.
 
 ## 依存関係のインストール
 {: #installing-dependencies }
@@ -89,6 +89,7 @@ jobs:
 
 ```
     steps:
+
       - run: fastlane scan
 ```
 
@@ -113,11 +114,10 @@ jobs:
     steps:
       - checkout
       - deploy:
-          name: デプロイ
+          name: Deploy
           command: fastlane release_appstore
 
 workflows:
-  version: 2
   test_release:
     jobs:
       - test
@@ -132,11 +132,9 @@ workflows:
 ## 高度な構成
 {: #advanced-configuration }
 
-iOS プロジェクトの高度な構成の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/ja/docs/2.0/testing-ios/)を参照してください。
+iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/docs/ja/2.0/testing-ios/)を参照してください。
 
 ## GitHub 上のサンプル アプリケーション
 {: #example-application-on-github }
 
-See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
-for an example of how to build, test and sign an iOS project using
-Fastlane on CircleCI 2.0.
+CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、および署名する例については、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。

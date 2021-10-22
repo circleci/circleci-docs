@@ -49,7 +49,9 @@ version:
 
     たとえば、`alpha` ブランチから Orb のメジャー バージョン リリースを初めて公開する場合は、プル リクエストのタイトルを `[semver:major] 初回 Orb リリース` のように設定します。 ![Orb の初回メジャー リリース - プル リクエスト]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
-1. [スカッシュ](https://docs.github.com/ja/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) マージを行うと、デフォルト ブランチへのマージ時にブランチが 1 つのコミットにまとめられるだけでなく、プル リクエストのタイトルがコミット メッセージとして維持されます。 ![プル リクエストをスカッシュ マージして semver タイトルを保持する]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
+1. [スカッシュ](https://docs.github.com/ja/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) マージを行うと、デフォルト ブランチへのマージ時にブランチが 1 つのコミットにまとめられるだけでなく、プル リクエストのタイトルがコミット メッセージとして維持されます。
+
+    Confirm the `[semver:<increment>]` is in the subject/first line of the commit message before merging (as shown below). Bitbucket may preserve the Pull Request title in the body of the commit message instead of the subject/first line. ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
 1. [CircleCI アプリケーション](https://app.circleci.com/)にアクセスすると、Orb のパブリッシュ パイプラインの進捗状況を確認できます。 このパイプラインが完了したら、[Orb レジストリ](https://circleci.com/developer/ja/orbs) に Orb が公開されます。
 

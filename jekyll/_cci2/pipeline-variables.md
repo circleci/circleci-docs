@@ -31,6 +31,7 @@ pipeline.git.tag            | The name of the git tag that was pushed to trigger
 pipeline.git.branch         | The name of the git branch that was pushed to trigger the pipeline.
 pipeline.git.revision       | The long (40-character) git SHA that is being built.
 pipeline.git.base_revision  | The long (40-character) git SHA of the build prior to the one being built.
+pipeline.in_setup           | True if the pipeline is in the setup phase, i.e. running a [setup workflow]({{ site.baseurl }}/2.0/dynamic-config/).
 {: class="table table-striped"}
 
 Note: While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.

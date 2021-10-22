@@ -15,21 +15,23 @@ version:
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale plan](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for information on how to sign up for the Scale plan.
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
 
 * **Question:** What is the difference between commands and jobs?
 
-* **Answer:** Both [commands]({{site.baseurl}}/ja/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}ja//2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/ja/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/ja/2.0/workflows/#workflows-configuration-examples)_.
+* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
 
 ## Using orbs on CircleCI server
 {: #using-orbs-on-circleci-server }
 
 * **Question:** Can orbs be used on a private installation of CircleCI server?
 
-* **Answer:** CircleCI Server does not yet support orbs natively. However, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
+* **Answer:** Orbs can be used with installations of CircleCI server v3. For information on importing and using orbs for server, see the [CircleCI Server v3.x Orbs guide]({{site.baseurl}}/2.0/server-3-operator-orbs/).
+
+  Orbs are not available on installations of server v2.19.x, however, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
 
 ## Report an issue with an orb
 {: #report-an-issue-with-an-orb }
@@ -74,7 +76,6 @@ You attempted to run a local build with version 2.1 of configuration.
 ```
 
 * **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
-
 
 ## See also
 {: #see-also }

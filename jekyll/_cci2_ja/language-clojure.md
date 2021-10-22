@@ -41,9 +41,6 @@ jobs: # 1 回の実行の基本作業単位
     working_directory: ~/cci-demo-clojure # ステップが実行されるディレクトリ
     docker: # Docker でステップを実行します
       - image: circleci/clojure:lein-2.9.1 # ...このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment: # プライマリ コンテナの環境変数
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # メモリ不足エラーを回避するために最大ヒープ サイズを制限します
@@ -68,16 +65,16 @@ jobs: # 1 回の実行の基本作業単位
 ## コードの取得
 {: #get-the-code }
 
-上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
+上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
 
-ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Projects dashboard (プロジェクトの追加)](https://app.circleci.com/projects/){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
+ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to your project. 最後に `.circleci/config.yml` の内容をすべて削除します。
 
-これで `config.yml` を最初からビルドする準備ができました。
+これで `config.yml`を最初から作る準備ができました。
 
 ## 設定ファイルの詳細
 {: #config-walkthrough }
 
-常にバージョンの指定から始めます。
+必ずバージョンの指定から始めます。
 
 ```yaml
 version: 2
@@ -94,7 +91,7 @@ jobs:
     working_directory: ~/cci-demo-clojure
 ```
 
-他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
+他のディレクトリが指定されない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとして使用されます。
 
 `working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
 
@@ -110,7 +107,7 @@ version: 2
 
 `lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
 
-ここでは、メモリ不足エラーが発生しないように、`JVM_OPTS` を設定して最大ヒープ サイズを制限します。 標準のコンテナの制限は 4 GB ですが、JVM がヒープ外に確保する分と Leiningen 自体のために、いくらかの容量を残しておきます (場合によっては、`lein trampoline ...` を使用して Leiningen のオーバーヘッドを回避できます)。 (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) たとえば、データベースまたはキューのためのバックグラウンド コンテナがある場合は、メインの JVM ヒープにメモリを割り当てる際にそれらのコンテナを考慮してください。
+ここでは、メモリ不足エラーが発生しないように、`JVM_OPTS` を設定して最大ヒープ サイズを制限します。 標準のコンテナの制限は 4 GB ですが、JVM がヒープ外に確保する分と Leiningen 自体のために、いくらかの容量を残しておきます。 (場合によっては、`lein trampoline ...` を使用して Leiningen のオーバーヘッドを回避できます)。 たとえば、データベースまたはキューのためのバックグラウンド コンテナがある場合は、メインの JVM ヒープにメモリを割り当てる際にそれらのコンテナを考慮してください。
 
 通常、Leiningen は非 root ユーザーとして実行されることを前提とし、root として実行しているユーザーは例外的と見なします。 この例では、それが意図的であることを示すために `LEIN_ROOT` 環境変数を設定します。
 
@@ -120,9 +117,9 @@ version: 2
       LEIN_ROOT: nbd
 ```
 
-この `build` ジョブ内にいくつかの `steps` を追加します。
+次に、`build` ジョブ内にいくつかの `steps` を追加します。
 
-コードベースで作業できるように、最初に `checkout` を置きます。
+コードベースで作業できるように、最初に `checkout` を記述します。
 
 次に、キャッシュをプル ダウンします (存在する場合)。 初回実行時、または `project.clj` を変更した場合、これは実行されません。 さらに `lein deps` を実行して、プロジェクトの依存関係をプル ダウンします。 通常、このタスクは必要時に自動的に実行されるため、これを直接呼び出すことはありません。 ただし、このタスクを直接呼び出すことで、`save_cache` ステップを挿入して依存関係を保存し、次回の処理を高速化することができます。
 
@@ -134,6 +131,7 @@ version: 2
 ```yaml
 ...
     steps:
+
       - checkout
       - restore_cache:
           key: cci-demo-clojure-{{ checksum "project.clj" }}
@@ -155,7 +153,7 @@ version: 2
 {: #see-also }
 {:.no_toc}
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 ### 詳細な例
 {: #detailed-examples }

@@ -16,7 +16,7 @@ version:
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
 
-この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
@@ -49,16 +49,13 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ
 ## Android での Hello World
 {: #hello-world-for-android }
 
-前述の Linux の例と基本的な考え方は同じです。ビルド済みの Android イメージを同じ `config.yml` ファイルで使用して、`docker` executor を使用するジョブを追加します。
+Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
 ```
 jobs:
   build-android:
     docker:
       - image: circleci/android:api-25-alpha
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
@@ -128,12 +125,12 @@ Orb は、構成を簡略化したりプロジェクト間で再利用したり�
 ## プロジェクトのフォロー
 {: #following-unfollowing-projects }
 
-プッシュする新しいプロジェクトを自動的に*フォロー*することで、メール通知が届き、プロジェクトがダッシュボードに追加されます。 また、手動でプロジェクトのフォローを開始または停止できます。それには、CircleCI アプリケーションの [Projects (プロジェクト)] ページで組織を選択し、[Add Projects (プロジェクトの追加)] ボタンをクリックし、フォローを開始または停止するプロジェクトの横にあるボタンをクリックします。
+プッシュする新しいプロジェクトを自動的に*フォロー*することで、メール通知が届き、プロジェクトがダッシュボードに追加されます。 それには、CircleCI アプリケーションの [Projects (プロジェクト)] ページで組織を選択し、[Add Projects (プロジェクトの追加)] ボタンをクリックし、フォローを開始または停止するプロジェクトの横にあるボタンをクリックします。
 
 ## 組織の切り替え
 {: #org-switching }
 
-CircleCI アプリケーションの左上で組織を切り替えられます。
+CirlceCI の画面左上に、組織を切り替えるメニューがあります。
 
 
 {:.tab.switcher.Cloud}

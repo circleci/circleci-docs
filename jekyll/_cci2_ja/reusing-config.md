@@ -57,6 +57,7 @@ workflows:
     jobs:
       - my-job
 
+
 ```
 
 ### パラメーターの構文
@@ -788,8 +789,9 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     environment:
-     ENV: ci       # executors で設定された値
-    steps:
+     ENV: ci       # Executor で設定された値
+ 
+     steps:
       - run: echo "Node will not be installed."
 ```
 
@@ -805,11 +807,11 @@ jobs:
 version: 2.1
 
 jobs:
-  sayhello: # パラメーター化されたジョブを定義します
-    description: パラメーター化されたジョブを例示する以外はほとんど何もしないジョブ
+  sayhello: # パラメーター化されたジョブを定義します。
+    description: A job that does very little other than demonstrate what a parameterized job looks like
     parameters:
       saywhat:
-        description: "だれにあいさつするか"
+        description: "To whom shall we say hello?"
         default: "World"
         type: string
     machine: true
@@ -849,7 +851,6 @@ Orb 内で宣言されているジョブは、その Orb 内のコマンドま�
 
 ```yaml
 version: 2.1
-# hello-orb の yml (一部)
 jobs:
   sayhello:
     parameters:
@@ -949,15 +950,15 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "だれにあいさつするか"
+        description: "To whom shall we say hello?"
         default: "World"
         type: string
     machine: true
     steps:
       - say:
-          # コマンド "say" の "saywhat" パラメーターには
+          # コマンド "say" の "saywhat" パラメーターには 
           # デフォルト値が定義されていないため
-          # 手動で渡す必要があります
+          # 手動で渡す必要があります。
           saywhat: << parameters.saywhat >>
 commands:
   say:
@@ -971,6 +972,7 @@ workflows:
     jobs:
       - sayhello:
           saywhat: Everyone
+
 ```
 
 ### 同じジョブの複数回の呼び出し
@@ -1144,6 +1146,6 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-- CircleCI で使用できる構成例は、「[2.0 config.yml のサンプル ファイル]({{site.baseurl}}/ja/2.0/sample-config/)」でご覧いただけます。
-- 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)」で紹介しています。
-- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの構成例]({{site.baseurl}}/ja/2.0/postgres-config/)」を参照してください。
+- CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
+- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
+- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。

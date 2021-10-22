@@ -10,6 +10,19 @@ version:
   - Cloud
   - Server v2.x
   - Server v3.x
+suggested:
+  - 
+    title: CircleCI CLI tutorial
+    link: https://circleci.com/blog/local-pipeline-development/
+  - 
+    title: Validate your config using local CLI
+    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
+  - 
+    title: Check your CircleCI installation
+    link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
+  - 
+    title: Troubleshoot CLI errors
+    link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
 
 ## 概要

@@ -26,7 +26,7 @@ Both Github Actions and CircleCI share similar concepts around "jobs" and "workf
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
@@ -92,7 +92,7 @@ See the table in the next section to compare configuration.
 
 == Configuration Comparison
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
@@ -206,7 +206,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]

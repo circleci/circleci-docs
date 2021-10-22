@@ -89,9 +89,9 @@ version: 2.1
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。
 
-ジョブのすべてのコマンドがこのコンテナで実行されます。
+`stack` 呼び出しのすべてで `--no-terminal` を指定して、表示できない文字で CircleCI ログが汚れてしまう「厄介な」出力機能 (`\b` 文字で実装) を回避します。
 
 ```yaml
 jobs:
@@ -171,7 +171,7 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。通常、実際のプロジェクトはこれよりも複雑です。場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 自由に構成して試してみてください。
+このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。 通常、実際のプロジェクトはこれよりも複雑です。 場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 ぜひお試しください。
 
