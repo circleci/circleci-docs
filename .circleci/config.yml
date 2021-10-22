@@ -130,7 +130,7 @@ jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
       name: node/default
-      tag: '14.1'
+      tag: '14.18.1'
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
@@ -138,6 +138,12 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run: 
+          name: "Lint JS assets"
+          command: yarn lint
+      - run:
+          name: "Run tests"
+          command: yarn test:ci
       - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: yarn webpack-prod
@@ -151,8 +157,6 @@ jobs:
           root: *workspace_root
           paths:
             - js
-
-
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
@@ -182,12 +186,12 @@ jobs:
       - ruby-deps:
           dir: src-api
       - restore_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
       - run:
           name: Install Node dependencies
           command: cd src-api; yarn install
       - save_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
           paths:
             - src-api/node_modules
       - run:
@@ -222,14 +226,11 @@ jobs:
           name: "Test Markdown Files"
           command: md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
       - run:
-          name: Install dependecies for pronto gem
+          name: Install dependencies for pronto gem
           command: |
             sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
       - ruby-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
       - run:
           name: Run markdownlint with pronto
           command: bundle exec pronto run -f github_pr -c origin/master

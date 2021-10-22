@@ -172,20 +172,11 @@ div.article-container{
       width: 100%;
   }
 
-  .tag-wrapper{
-	  display: inline-block;
-  }
-
-  .external-link-icon {
-	align-self: center;
-	margin: 0 0 0 5px;
-	background-size: 16px 16px;
-	height: 16px;
-	width: 16px;
-  }
-
-  .external-link-anchor {
-	display: flex;
+  .external-link-tag-wrapper{
+	display: inline-block;
+	.external-link-icon {
+	  margin: 0 0 0 3px;
+	}
   }
 
   padding: 0 48px;

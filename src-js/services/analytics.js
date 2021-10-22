@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 class AnalyticsClient {
   static getSessionId() {
-    var existingSessionId = Number(Cookies.get("amplitude-session-id"));
+    var existingSessionId = Number(Cookies.get('amplitude-session-id'));
 
     // Number.isNaN polyfill:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN
@@ -19,9 +19,12 @@ class AnalyticsClient {
     if (isDataDogSynthetics()) return;
 
     properties = properties ?? null;
-    window.analytics && window.analytics.track(name, properties, {
-      integrations: { Amplitude: { session_id: AnalyticsClient.getSessionId() } },
-    });
+    window.analytics &&
+      window.analytics.track(name, properties, {
+        integrations: {
+          Amplitude: { session_id: AnalyticsClient.getSessionId() },
+        },
+      });
   }
 
   /**
@@ -33,9 +36,12 @@ class AnalyticsClient {
     if (isDataDogSynthetics()) return;
 
     traits = traits ?? null;
-    window.analytics && window.analytics.identify(id, traits, {
-      integrations: { Amplitude: { session_id: AnalyticsClient.getSessionId() } },
-    });
+    window.analytics &&
+      window.analytics.identify(id, traits, {
+        integrations: {
+          Amplitude: { session_id: AnalyticsClient.getSessionId() },
+        },
+      });
   }
 
   /**
@@ -47,9 +53,12 @@ class AnalyticsClient {
     if (isDataDogSynthetics()) return;
 
     properties = properties ?? null;
-    window.analytics && window.analytics.page(name, properties, {
-      integrations: { Amplitude: { session_id: AnalyticsClient.getSessionId() } },
-    });
+    window.analytics &&
+      window.analytics.page('docs', name, properties, {
+        integrations: {
+          Amplitude: { session_id: AnalyticsClient.getSessionId() },
+        },
+      });
   }
 }
 
@@ -57,17 +66,16 @@ const isDataDogSynthetics = () => window._DATADOG_SYNTHETICS_BROWSER === true;
 
 export default AnalyticsClient;
 
-
 // legacy tracking code:
 // This is still used in the src-shared/*.js.
 // analytics.track wrapper
 
 const setCookieMinutes = (name, value, path, expiration) => {
   // expiration is set in minutes
-  const date = new Date();
+  let date = new Date();
   date.setMinutes(date.getMinutes() + expiration);
   date = date.toUTCString();
-  document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
+  document.cookie = name + '=' + value + '; path=' + path + '; expires=' + date;
 };
 
 const trackEvent = (name, properties, options, callback) => {
@@ -76,11 +84,11 @@ const trackEvent = (name, properties, options, callback) => {
   }
 
   analytics.track(name, properties, options, function () {
-    setCookieMinutes("amplitude-session-id", getSessionId(), '/', 30);
+    setCookieMinutes('amplitude-session-id', getSessionId(), '/', 30);
     if (callback) {
       callback();
     }
   });
 };
 
-window.trackEvent = trackEvent // enable use in src-shared files.
+window.trackEvent = trackEvent; // enable use in src-shared files.
