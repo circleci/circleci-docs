@@ -64,7 +64,7 @@ All data persistence operations within a job will accrue network and storage usa
 * Uploading artifacts
 * Uploading test results
 
-Details about your storage and network transfer usage can be viewed on your Plan Settings.
+To determine which jobs utilize the above actions, you can search for the following commands in your project's config.yml file:
 
 * `save_cache`
 * `restore_cache`
