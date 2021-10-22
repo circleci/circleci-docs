@@ -286,12 +286,12 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 
 2. 削除するコンテキストの [Delete Context (コンテキストを削除)] ボタンをクリックします。 確認ダイアログ ボックスが表示されます。
 
-3. Type Delete and click Confirm. "Delete" と入力し、[Confirm (確認)] をクリックすると、 コンテキストと、そのコンテキストに関連付けられたすべての環境変数が削除されます。 **注意:** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
+3. 「Delete」と入力し、[Confirm (確認)] をクリックすると、 コンテキストと、そのコンテキストに関連付けられたすべての環境変数が削除されます。 **注意:** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
 
 ## 環境変数の使用方法
 {: #environment-variable-usage }
 
-このセクションでは、 CircleCI CLI および API を使用してコンテキストに設定された環境変数を操作する方法について説明します。
+環境変数は、以下に示す優先順位に従って使用されます。
 
 1. `FOO=bar make install` のような例を含め、`run` ステップの[シェル コマンド内]({{ site.baseurl }}/ja/2.0/env-vars/#シェル-コマンドでの環境変数の設定)で宣言された環境変数
 2. [`run` ステップで]({{ site.baseurl }}/ja/2.0/env-vars/#ステップでの環境変数の設定) `environment` キーを使用して宣言された環境変数
@@ -306,7 +306,7 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 ### 安全な環境変数の作成、削除、ローテーション
 {: #secure-environment-variable-creation-deletion-and-rotation }
 
-コンテキストに設定された環境変数のローテーションは、 CircleCI の CLI や API の直接呼び出しにより実施することが可能です。
+このセクションでは、 CircleCI CLI および API を使用してコンテキストに設定された環境変数を操作する方法について説明します。
 
 #### 環境変数の作成
 {: #creating-environment-variables }
@@ -319,7 +319,7 @@ _CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI �
 
 CircleCI CLI を使用して環境変数を作成するには、下記ステップを実行します:
 
-1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
+1. If you have not already done so, find the right context name that will contain the new environment variable. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 2. 新しい環境変数を対象コンテキスト配下に保存します。 下記コマンドを実行します: `circleci context store-secret <vcs タイプ> <org 名> <コンテキスト名> <環境変数名>`
 
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
@@ -349,18 +349,18 @@ CircleCI CLI を使用して環境変数を削除するには、下記ステッ�
 {: #using-circlecis-api }
 {:.no_toc}
 
-ローテーションとは、環境変数を削除したり変数名を変更したりせずに、 シークレットである環境変数の値を更新することを指します。
+API を使用して環境変数を削除する場合は、 [Delete Environment Variable](https://circleci.com/ja/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを呼び出します。
 
 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と削除しようとする環境変数の名前に置き換えます。
 
 #### 環境変数のローテーション
 {: #rotating-environment-variables }
 
-Rotation refers to the process of updating a secret's value without deleting it or changing its name.
+ローテーションとは、環境変数を削除したり変数名を変更したりせずに、 シークレットである環境変数の値を更新することを指します。
 
 Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is always good practice to periodically rotate secrets. Many organizations automate this process, running a script when an employee leaves the company or when a secret may have been compromised.
 
-CircleCI CLI を使用して環境変数のローテーションを実行するには、下記ステップを実行します:
+コンテキストに設定された環境変数のローテーションは、 CircleCI の CLI や API の直接呼び出しにより実施することが可能です。
 
 
 ##### CircleCI CLI 経由
@@ -369,7 +369,7 @@ CircleCI CLI を使用して環境変数のローテーションを実行する�
 
 _CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI の構成](https://circleci.com/docs/ja/2.0/local-cli/?section=configuration#cli-%E3%81%AE%E6%A7%8B%E6%88%90) を参照して CircleCI CLI を構成してください。_
 
-To rotate an environment variable using the CLI, perform the following steps:
+CircleCI CLI を使用して環境変数のローテーションを実行するには、下記ステップを実行します:
 
 1. If you have not already done so, find the context name that contains the variable you would like to rotate. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 
@@ -403,5 +403,5 @@ Contexts hold potentially sensitive secrets that are not intended to be exposed.
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/)
-* [Workflows]({{ site.baseurl }}/2.0/workflows/)
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/ja/2.0/env-vars/)
+* [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)
