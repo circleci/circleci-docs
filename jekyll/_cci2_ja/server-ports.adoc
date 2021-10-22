@@ -341,28 +341,28 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 4647
 | TCP
 | 双方向
-| Services Machine
+| Services マシン
 | 内部通信
 |
 
 | 8585
 | TCP
 | 双方向
-| Services Machine
+| Services マシン
 | 内部通信
 |
 
 | 7171
 | TCP
 | 双方向
-| Services Machine
+| Services マシン
 | 内部通信
 |
 
 | 3001
 | TCP
 | 双方向
-| Services Machine
+| Services マシン
 | 内部通信
 |
 
@@ -396,7 +396,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 22
 | TCP
 | インバウンド
-| Services Machine
+| Services マシン
 | Git アクセス
 |
 
@@ -424,14 +424,14 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 80
 | TCP
 | 双方向
-| Services Machine
+| Services マシン
 | Web フック/API アクセス
 |
 
 | 443
 | TCP
 | 双方向
-| Services Machine
+| Services マシン
 | Webhooks / API access
 |===
 
@@ -490,7 +490,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 5672
 | TCP
 | インバウンド
-| Services Machine
+| Services マシン
 | RabbitMQ 接続
 | 外部処理用 RabbitMQ を使用する場合のみ
 
@@ -517,7 +517,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 6379
 | TCP
 | インバウンド
-| Services Machine
+| Services マシン
 | Redis 接続
 | 外部処理用 Redis を使用する場合のみ
 
@@ -544,7 +544,7 @@ CircleCI Server 2.0 のインストールで必要となるすべてのポート
 | 4646
 | TCP
 | インバウンド
-| Services Machine
+| Services マシン
 | Nomad サーバー接続
 | 外部処理用 Nomad サーバーを使用する場合のみ
 
