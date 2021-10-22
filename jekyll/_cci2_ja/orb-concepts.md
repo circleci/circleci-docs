@@ -53,11 +53,6 @@ jobs:
           to: 's3://my-s3-bucket-name'
 
   #...ワークフロー、その他のジョブなど
-      - aws-s3/copy:
-          from: bucket/build_asset.txt
-          to: 's3://my-s3-bucket-name'
-
-  #... workflows , other jobs etc.
 ```
 
 詳細は、レジストリの[AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands)をご覧ください。
@@ -99,7 +94,7 @@ parameters:
 {% raw %}
 ```yaml
 description: >
-  使用する Ruby のバージョンを選択。 Uses CircleCI's highly cached convenience
+  使用する Ruby のバージョンを選択。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
   images built for CI.
 
   CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
@@ -163,14 +158,6 @@ usage:
     use-my-orb:
       jobs:
         - <orb-name>/<job-name>
-usage:
-  version: 2.1
-  orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
-  workflows:
-    use-my-orb:
-      jobs:
-        - <orb-name>/<job-name>
 
 ```
 
@@ -206,12 +193,12 @@ Orb は [セマンティック バージョニング](https://semver.org/) の�
 
 Orb をインポートすると、その Orb を特定のセマンティック バージョニングのコンポーネントに固定することができます。
 
-| インポートバージョン | 説明                                                                                             |
-| ---------- | ---------------------------------------------------------------------------------------------- |
-| 1.2.3      | フルバージョンと一致。 変更は取り込まれません。                                                                       |
-| 1.2        | メジャーバージョン `1`、マイナーバージョン `2`にロックされており、すべてのパッチアップデートを受け取ります。                                     |
-| 1          | Locked to major version `1`. Will receive all minor and patch updates. メジャーバージョンは自動的には変更されません。 |
-| 揮発性        | **推奨しません。 ** 最後にパブリッシュされたバージョンの Orb をプルするためテスト時には便利です。 Not a part of semver versioning.        |
+| インポートバージョン | 説明                                                                               |
+| ---------- | -------------------------------------------------------------------------------- |
+| 1.2.3      | フルバージョンと一致。 変更は取り込まれません。                                                         |
+| 1.2        | メジャーバージョン `1`、マイナーバージョン `2`にロックされており、すべてのパッチアップデートを受け取ります。                       |
+| 1          | メジャーバージョン`1`にロックされています。 すべてのマイナーアップデートとパッチアップデートを受け取ります。 メジャーバージョンは自動的には変更されません。 |
+| volatile   | **推奨しません。 ** 最後にパブリッシュされたバージョンの Orb をプルするためテスト時には便利です。 セマンティック バージョニングは適用されません。  |
 {: class="table table-striped"}
 
 ユーザーの CI プロセスに悪影響を与えないように、Orb オーサーはセマンティック バージョン管理を厳密に行い、 `マイナー` または `パッチ` レベルの更新時に大きな変更が取り込まれないようにする必要があります。
@@ -304,7 +291,6 @@ Orb 開発キットをお使いの場合、このステップは自動的に処�
 
 {:.tab.fileInclude.Command-yaml}
 ```yaml
-description: A simple command that imports from a file when packed.
 description: パッケージ化時にファイルからインポートする簡単なコマンド
 steps:
   - run:
@@ -321,7 +307,6 @@ echo "Hello World"
 
 {:.tab.fileInclude.Packed_Command-yaml}
 ```yaml
-description: A simple command that imports from a file when packed.
 description: パッケージ化時にファイルからインポートする簡単なコマンド
 steps:
   - run:
