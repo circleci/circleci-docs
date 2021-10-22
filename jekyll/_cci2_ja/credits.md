@@ -31,29 +31,29 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 ## クレジットベース プランの設定
 {: #configuring-your-credit-plan }
 
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
+ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
 
 ## Free プラン
 {: #free-plan }
 
 従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
 
-- 1 つ以上のクレジット ブロック (25,000 クレジット)
-- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
-- Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
-- macOS のマシン タイプ
+- Orb の使用
+- ワークスペース
+- 依存関係のキャッシュ
+- Windows/Linux でのビルド
 
-従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。 With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
+従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。 With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
 
 ## Performance プラン
 {: #performance-plan }
 
 Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
-- Orb の使用
-- ワークスペース
-- 依存関係のキャッシュ
-- Windows/Linux でのビルド
+- すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
+- Medium サイズの macOS マシンへのアクセス
+- 無制限のユーザーシート数
+- Docker レイヤー キャッシュへのアクセス
 - キューイングなし
 - サポート
 
