@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     app: './src-js/app.js',
     vendor: './src-js/vendor.js',
-    styles: './src-js/styles/main.scss',
+    // styles: './src-js/styles/main.scss',
   },
   output: {
     path: path.join(__dirname, 'jekyll/assets/js'),
