@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Server 3.x is now generally available. この最新バージョンの CircleCI Server では、ワークロードの増大に合わせてお客様専用の Kubernetes クラスタと社内ネットワーク内でスケーリングを行えるようになりました。 クラウド版 CircleCI のすべての機能はそのままご利用いただけます。
+CircleCI Server 3.x の一般公開が開始されました。 この最新バージョンの CircleCI Server では、ワークロードの増大に合わせてお客様専用の Kubernetes クラスタと社内ネットワーク内でスケーリングを行えるようになりました。 クラウド版 CircleCI のすべての機能はそのままご利用いただけます。
 
 CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 既存の CircleCI Server 2.19 から 3.x への移行をご希望のお客様は、担当のカスタマー サクセス マネージャーにお問い合わせください。 CircleCI Server 3.x では、月次パッチ リリースと四半期ごとの機能リリースを予定しています。
 
@@ -78,46 +78,42 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 === 新機能
 
-* Customers who require a fully private installation can now access a setting in the KOTS admin console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a work-around will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
-* Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS admin console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
-* We have expanded the machine build environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
-* The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
-* We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server. 
-* You can now supply a custom Linux AMI for VM service.
-* SSL termination can now be disabled - If you have put server login behind a firewall, this will enable SSL termination at the firewall.
-* You can now control the size of persistent volumes. For larger customers, the initial persistent volume size was too small, by default. You can now set this at install time, providing an easier migration for those customers that require it. For further information see the https://circleci.com/docs/2.0/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
-* We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]. 
-* You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/2.0/server-3-operator-build-artifacts/[Build Artifacts doc].
+* 完全なプライベートネットワーク環境でのインストールを必要とするお客様は、KOTS管理コンソールの設定画面からパブリックIPがVMに割り当てられないようにすることができます。 なお、非パブリックIPの設定を有効にした場合、実行中のジョブにSSHアクセスが必要なときは、VPCにVPNを設定するなどの回避策が必要となりますのでご注意ください。
+* プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[サーバー 3.xのプロキシ設定]を参照してください。
+* マシンビルド環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。 
+* https://circleci.com/docs/ja/2.0/insights/[インサイトAPI]が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
+* 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。 
+* VMサービスにカスタムLinux AMIが利用できるようになりました。
+* SSLターミネーションを無効にできるようになりました - サーバーをファイアウォールの内側に置いている場合、これによりファイアウォールでのSSLターミネーションが利用できます。
+* 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張]のドキュメントを参照してください。
+* https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]にNomadのオートスケーリングの例を追加しました。 
+* 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-build-artifacts/[CircleCI Server v3.x ビルド アーティファクト]を参照してください。
 
 === 修正点
 
-* The default windows executor was not as documented, we have increased the size to align with documentation and cloud. 
+* デフォルトのWindows Executorのサイズをクラウド版に合わせて大きくしました。 
 
 === 既知の問題
 
 * KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after nomad clients have been deployed.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
+* machine executorを使用するジョブのSSHによる再試行では、プライベートIPアドレスが表示されます。 このため、machine executorを使用するジョブのSSHでの再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPCにVPNを使用するなどして、表示されたプライベートIPにアクセスできるようにする必要があります。
 * 現在、同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能な状態です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
 * CircleCI 1.0 のビルドはサポートされていません。 1.0ビルドを実行しようとした場合、問題の原因を示すようなアプリケーションからのフィードバックはありません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[[CircleCI CLI] ]を使用してプロジェクトの設定を検証し、問題の原因を調査することをおすすめします。
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
-* Runner cannot be used when server is installed behind a proxy.
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
+* サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 
 == リリース 3.1.0
 
 === アップグレードに関する注意事項
 
-IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。
- 今後、受信トラフィックはすべて、`traefik` ロード バランサーにより処理されます。 The `traefik` load balancer now handles
-all incoming traffic. 過去の 3.x バージョンからアップデートする場合、`frontend-external` ロード バランサーを参照する DNS レコードを、`circleci-server-traefik` ロード バランサーを参照するように更新する必要があります。
- Traefik ロードバランサーの外部 IP アドレスやDNS 名は、クラスタへのアクセスが可能な端末から `kubectl get svc/circleci-server-traefik` を実行することで取得できます。 Remember,
-you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik`
-in a terminal that has access to the cluster.
+IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロード バランサーにより処理されます。 過去の 3.x バージョンからアップデートする場合、`frontend-external` ロード バランサーを参照する DNS レコードを、`circleci-server-traefik` ロード バランサーを参照するように更新する必要があります。 Traefik ロードバランサーの外部 IP アドレスやDNS 名は、クラスタへのアクセスが可能な端末から `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
 
 DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。
 
 . Retrieve the external IP or DNS name for the traefik load balancer as described or by looking the DNS A record for `app.<your domain name>`` - this should already point to your traefik load balancer.
 . 既存の CircleCI Server のドメイン名を参照している DNS A レコードを見つけます (`アプリ` のサブドメインを参照しているものではありません)。
-. Edit the A record so that it points to the traefik load balancer, just like the record for the `app. subdomain does. Your changes might need a couple of minutes to take effect, depending on you DNS service.
+. アプリのサブドメインのレコードと同じ様に Traefik ロード バランサーを参照するように A レコードを変更します。
+ DNSサービスによっては、変更が反映されるまでに数分かかる場合があります。
 
 次に、KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.1.0 の *[Deploy (デプロイ)]* をクリックします。
 
@@ -156,12 +152,8 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 
 === 既知の問題
 
-* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
-identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
+* 現在、同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能な状態です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* CircleCI 1.0 のビルドはサポートされていません。 1.0ビルドを実行しようとした場合、問題の原因を示すようなアプリケーションからのフィードバックはありません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[[CircleCI CLI] ]を使用してプロジェクトの設定を検証し、問題の原因を調査することをおすすめします。
 
 == リリース 3.0.2
 
@@ -179,8 +171,8 @@ ifndef::pdf[]
 == 次に読む
 CircleCl Server v3.x の詳しい情報については、以下をご覧ください。
 
-* https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview]
-* https://circleci.com/docs/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
-* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
-* https://circleci.com/docs/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
+* https://circleci.com/docs/c2.0/server-3-overview[CircleCI Server 3.x の概要]
+* https://circleci.com/docs/ja/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/ja/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/ja/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
 endif::pdf[]
