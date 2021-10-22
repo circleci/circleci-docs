@@ -59,7 +59,7 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*最終更新*: 2021 年 8 月 2 日
+*最終更新*: 2021 年 8 月 23 日
 
 IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
@@ -131,7 +131,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 ## 使用料金
 {: #pricing }
 
-Pricing will be calculated based on network data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。
+IP アドレスの範囲機能を有効にしたジョブのネットワーク転送量に応じて、クレジットの消費が発生します。ただし、対象となるのは機能を有効にしたジョブのトラフィックのみです。 ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。
 
 具体的な料金や詳細については、機能の一般公開時にお知らせします。
 
