@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
 
 toc::[]
 
@@ -36,8 +36,8 @@ CircleCI では、ランナーのユース ケースとして主に 2 つのシ�
 
 CircleCI ランナーは、複数のプラットフォームに対応しています。 サポート レベルは、次の 2 つのカテゴリに分かれます。
 
-* <<Supported>>
-* <<Preview>>
+* <<サポート対象>>
+* <<プレビュー>>
 
 === Supported
 
@@ -74,10 +74,9 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 * 上記以外の Linux ディストリビューション - RHEL、SUSE、Debian など (x86_64 または ARM64)
 * Kubernetes (ARM64)
 
-NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
-have questions around support for your environment and use-case(s). また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーのディスカッション ページ]への投稿もぜひお寄せください。
+NOTE: プレビューの CircleCI ランナーは現在鋭意開発中です。環境に対するサポートやユースケースに関するご質問がある場合はhttps://circleci.com/ja/contact/[お問い合わせ]ください。 また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーのディスカッション ページ]への投稿もぜひお寄せください。
 
-== Getting Started
+== 使用方法
 
 CircleCI ランナーの利用を開始するには、次の手順を実行します。
 
