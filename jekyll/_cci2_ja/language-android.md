@@ -37,9 +37,6 @@ Android マシン イメージを使用した設定ファイルのサンプル�
 
 ```yaml
 # .circleci/config.yaml
-version: 2.1 # to enable orb usage, you must be using circleci 2.1
-# Declare the orbs you wish to use.
-# .circleci/config.yaml
 version: 2.1 # Orb を使用するには、CircleCI 2.1 を使用する必要があります
 # 使用したい Orb を宣言します
 # Android Orb のドキュメントは、こちらから参照できます: https://circleci.com/developer/ja/orbs/orb/circleci/android
@@ -55,7 +52,7 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
-以下の例は、Android マシン イメージではなく Android Docker イメージを使用する例を示しています。
+上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
 
 
 ## 単体テストの設定ファイルの例
@@ -98,23 +95,6 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/ja/2.0/artifacts/
-          path: app/build/reports
-          destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/ja/2.0/collect-test-data/
-          path: app/build/test-results
-      # See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
           destination: reports
@@ -143,7 +123,7 @@ CircleCI で Firebase Test Lab を使用するには、最初に以下の手順�
 
     **メモ:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#android)の使用を検討してください。
 
-3. **必要な API を有効にする:** 作成したサービス アカウントを使用して Google にログインし、[Google Developers Console の API ライブラリ ページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **[有効にする]** をクリックします。 Enable the **Google Cloud Testing API** and the **Cloud Tool Results API** by typing their names into the search box at the top of the console and clicking **Enable API**.
+3. **必要な API を有効にする:** 作成したサービス アカウントを使用して Google にログインし、[Google Developers Console の API ライブラリ ページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **[有効にする]** をクリックします。
 
 `.circleci/config.yml` ファイルに、以下の `run` ステップを追加します。
 
