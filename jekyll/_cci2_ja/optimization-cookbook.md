@@ -118,7 +118,7 @@ Installing dependencies in the primary container on CircleCI, rather than relyin
 {: #test-execution-optimization }
 {:.no_toc}
 
-Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/ja/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
+Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
 
 The figure below illustrates how overall these changes can reduce the total workflow time.
 
@@ -184,7 +184,7 @@ jobs:
 
 To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run across the CircleCI application project actually decreased the test time **from 26:11 down to 3:55**.
 
-Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/).
+Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
 
 ## Workflows increase deployment frequency
 {: #workflows-increase-deployment-frequency }
@@ -223,6 +223,7 @@ workflows:
               only: master
 ```
 
+
 The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
 
 For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
@@ -249,5 +250,5 @@ The time difference includes the lag described above plus the duration of the pi
 {: #see-also }
 {:.no_toc}
 
-- Refer to [Optimizations]({{site.baseurl}}/ja/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
-- Refer to [Caching]({{site.baseurl}}/ja/2.0/caching/#introduction) for high-level information about caching.
+- Refer to [Optimizations]({{site.baseurl}}/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
+- Refer to [Caching]({{site.baseurl}}/2.0/caching/#introduction) for high-level information about caching.

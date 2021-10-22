@@ -14,7 +14,7 @@ toc::[]
 
 == はじめに
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/ja/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
 
 ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
 
@@ -96,7 +96,7 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 | 必須
 | You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
 
-| `+replicaCount+`  | 1         | 必須         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<制限事項今後解決予定の問題,Pending Work>>.
+| `+replicaCount+`  | 1         | 必須         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<limitationspending-work,Pending Work>>.
 
 | `+resourceClass+` | -         | 必須         | ランナー用に作成したリソース クラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
@@ -109,6 +109,7 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 |===
 
 == 制限事項/今後解決予定の問題
-* 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
+* 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。 そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
 * The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
 * 現時点の CircleCI 製 Helm チャートでは、ランナーのリソース クラス タイプとトークンを 1 つのみ使用することを想定しています。 クラスタに複数のランナー リソース クラスを構成する必要がある場合は、リソース クラスごとに個別のチャートを作成してください。
+

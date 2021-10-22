@@ -17,7 +17,7 @@ verison:
 {: #quick-start }
 {:.no_toc}
 
-[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/ja/2.0/reusing-config/).
+[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
 
 ## Orb の設定要素
 {: #orb-configuration-elements }
@@ -77,9 +77,7 @@ Orb 内 で定義された Executor は、お客様のプロジェクト設定�
 {:.tab.executor.Node-Docker}
 ```yaml
 description: >
-  Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
-  images built for CI.
-docker:
+  使用する Node.js のバージョンを選択。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
   - image: 'cimg/node:<<parameters.tag>>'
     auth:
       username: mydockerhub-user
@@ -125,7 +123,7 @@ parameters:
 
 ジョブがある Orb をインポートする際に、ワークフローから直接ジョブを参照することができます。
 
-```yaml
+```
 version: 2.1
 
 orbs:
@@ -157,6 +155,7 @@ usage:
     use-my-orb:
       jobs:
         - <orb-name>/<job-name>
+
 ```
 
 ## 名前空間
@@ -301,6 +300,7 @@ steps:
 ```bash
 # これは bash ファイルですが、テキストベースのファイルであれば何でも構いません
 echo "Hello World"
+
 ```
 
 {:.tab.fileInclude.Packed_Command-yaml}

@@ -308,9 +308,6 @@ en:
         link: 2.0/glossary/
       - name: Help and Support
         link: 2.0/help-and-support/
-      - name: Archive of 1.0 Docs
-        link: 2.0/archive/
-
 
 - name: Server Administration
   icon: icons/sidebar/admin.svg
@@ -940,9 +937,6 @@ ja:
       - name: Help and Support
         link: ja/2.0/help-and-support/
         i18n_name: ヘルプとサポート
-      - name: Archive of 1.0 Docs
-        link: ja/2.0/archive/
-        i18n_name: アーカイブ
 
 - name: Server Administration
   i18n_name: Server管理

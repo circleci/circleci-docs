@@ -171,6 +171,14 @@ div.article-container{
       padding: 0 16px 0 16px;
       width: 100%;
   }
+
+  .external-link-tag-wrapper{
+	display: inline-block;
+	.external-link-icon {
+	  margin: 0 0 0 3px;
+	}
+  }
+
   padding: 0 48px;
   width: calc(100% - #{$rightbar-width});
   max-width: 60em; // increase readability on large screens.
@@ -189,95 +197,85 @@ div.article-container{
     }
 }
 
+article{
+	h2,
+	h3,
+	h4,
+	h5,
+	h6{
+		scroll-margin-top: 5rem;
 
-	article{
-		h2,
-		h3,
-		h4,
-		h5,
-		h6{
-			a{
-				padding-left: 5px;
-				color: #27A0B6;
-				text-decoration: none!important;
-			}
-
-			i.fa-link{
-				display: none;
-				font-size: smaller;
-			}
-
-			// prevent anchor links from being under the global nav
-			&[id]:before{
-				display: block;
-				content: " ";
-				margin-top: -135px;
-				height: 135px;
-				visibility: hidden;
-			}
+		a{
+			padding-left: 5px;
+			color: #27A0B6;
+			text-decoration: none!important;
 		}
 
-		h1{
-			font-size: 2.25rem;
-		}
-
-		h2{
-			font-size: 1.7rem;
-		}
-
-		h3{
-			margin-top: 10px;
-			font-size: 1.4rem;
-		}
-
-		h4{
-			font-size: 1.2rem;
-		}
-
-		img{
-			margin: 15px 0;
-			max-width: 100%;
-		}
-
-		span.align-center{
-			display: block;
-			text-align: center;
-
-			img{
-				max-width: 90%;
-			}
-		}
-
-		.video-wrapper {
-			position: relative;
-			padding-bottom: 56.25%; /* 16:9 */
-			padding-top: 25px;
-			height: 0;
-
-			iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-		}
-
-		.license-notice{
-			margin: 0 auto;
-			padding-bottom: 20px;
-			width: 70%;
-			text-align: center;
+		i.fa-link{
+			display: none;
 			font-size: smaller;
 		}
 	}
 
-div.align-center{
-}
-	div.align-center img{
-		max-width: 90%;
-		text-align: center;
+	h1{
+		font-size: 2.25rem;
 	}
+
+	h2{
+		font-size: 1.7rem;
+	}
+
+	h3{
+		margin-top: 10px;
+		font-size: 1.4rem;
+	}
+
+	h4{
+		font-size: 1.2rem;
+	}
+
+	img{
+		margin: 15px 0;
+		max-width: 100%;
+	}
+
+	span.align-center{
+		display: block;
+		text-align: center;
+
+		img{
+			max-width: 90%;
+		}
+	}
+
+	.video-wrapper {
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		padding-top: 25px;
+		height: 0;
+
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.license-notice{
+		margin: 0 auto;
+		padding-bottom: 20px;
+		width: 70%;
+		text-align: center;
+		font-size: smaller;
+	}
+}
+
+div.align-center img{
+	max-width: 90%;
+	text-align: center;
+}
 
 // Homepage
 body.homepage{
@@ -456,6 +454,7 @@ pre {
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 13px;
+    z-index: 1;
 }
 
 .server-version-wrapper {
@@ -511,8 +510,12 @@ h6{
 	display: none
 }
 
+/*
+*  Experiment Key: dd_add_orb_section_to_docs_landing_page_test
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20598037463/variations
+*/
 #orb-section {
-	display: none
+	visibility: hidden
 }
 
 /*
@@ -537,3 +540,10 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 	}
 } 
 
+/*
+*  Experiment Key: dd_surfacing_full_example_config_experiment_test
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20742690126/variations
+*/
+#full-config-example {
+	visibility: hidden
+}

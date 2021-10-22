@@ -12,7 +12,7 @@ This document describes how you might use webhooks with a third party applicatio
 **Prerequisites**
 
 - An account with CircleCI, with webhooks enabled (webhooks are currently in preview and may not yet be available.)
-- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/ja/2.0/webhooks).
+- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks).
 - An Airtable account, if you wish to follow along.
 
 

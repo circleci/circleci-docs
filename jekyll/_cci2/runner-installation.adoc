@@ -237,6 +237,8 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
+NOTE: Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[Please visit the `systemd` documentation for more information].
+
 You can now enable the service:
 
 ```bash
@@ -489,7 +491,7 @@ runner:
   name: RUNNER_NAME
 ```
 
-NOTE: The launch agent can also be configured via environment variables by supplying the `--env` flag to the launch agent command.
+NOTE: The launch agent can also be configured via environment variables. These will be prioritized over the YAML file, if set.
 
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`

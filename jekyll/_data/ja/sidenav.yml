@@ -53,9 +53,6 @@ en:
           - 
             name: Migrating from Travis CI
             link: 2.0/migrating-from-travis/
-          - 
-            name: Jenkins Converter
-            link: 2.0/jenkins-converter/
   - 
     name: Pipelines
     icon: icons/sidebar/pipelines.svg
@@ -217,6 +214,9 @@ en:
           - 
             name: Configuration Reference
             link: 2.0/configuration-reference/
+          - 
+            name: Sample Configuration
+            link: 2.0/sample-config/
           - 
             name: Reusing Configuration
             link: 2.0/reusing-config/
@@ -436,9 +436,6 @@ en:
           - 
             name: Help and Support
             link: 2.0/help-and-support/
-          - 
-            name: Archive of 1.0 Docs
-            link: 2.0/archive/
   - 
     name: Server Administration
     icon: icons/sidebar/admin.svg
@@ -461,14 +458,17 @@ en:
         link: 2.0/server-3-install-prerequisites
         children:
           - 
-            name: Prerequisites
+            name: Phase 1 - Prerequisites
             link: 2.0/server-3-install-prerequisites
           - 
-            name: Your First Cluster
-            link: 2.0/server-3-install-creating-your-first-cluster
-          - 
-            name: Installation
+            name: Phase 2 - Install Core Services
             link: 2.0/server-3-install
+          - 
+            name: Phase 3 - Install Build Services
+            link: 2.0/server-3-install-build-services
+          - 
+            name: Phase 4 - Post Installation
+            link: 2.0/server-3-install-post
           - 
             name: Migration
             link: 2.0/server-3-install-migration
@@ -486,6 +486,9 @@ en:
             name: Metrics and Monitoring
             link: 2.0/server-3-operator-metrics-and-monitoring
           - 
+            name: Configuring a Proxy
+            link: 2.0/server-3-operator-proxy
+          - 
             name: User Accounts
             link: 2.0/server-3-operator-user-accounts
           - 
@@ -497,6 +500,9 @@ en:
           - 
             name: Externalizing Services
             link: 2.0/server-3-operator-externalizing-services
+          - 
+            name: Expanding Internal Database Volumes
+            link: 2.0/server-3-operator-extending-internal-volumes
           - 
             name: Load Balancers
             link: 2.0/server-3-operator-load-balancers
@@ -777,9 +783,6 @@ ja:
             name: Migrating from Travis CI
             link: ja/2.0/migrating-from-travis/
             i18n_name: TravisCIからの移行
-          - 
-            name: Jenkins Converter
-            link: ja/2.0/jenkins-converter/
   - 
     name: Pipelines
     i18n_name: パイプライン
@@ -903,10 +906,6 @@ ja:
             name: Android Machine Image
             i18n_name: Androidマシンイメージ
             link: 2.0/android-machine-image
-          - 
-            name: Arm Resources
-            i18n_name: Arm リソース
-            link: ja/2.0/arm-resources/
       - 
         name: Mac
         children:
@@ -997,8 +996,8 @@ ja:
             i18n_name: ダイナミック コンフィグ
           - 
             name: Using the CircleCI CLI
-            link: ja/2.0/local-cli/
             i18n_name: CircleCI CLIの使用
+            link: ja/2.0/local-cli/
           - 
             name: Using the CircleCI Configuration Editor
             link: ja/2.0/config-editor/
@@ -1113,8 +1112,6 @@ ja:
             name: Managing API tokens
             link: ja/2.0/managing-api-tokens/
             i18n_name: APIトークン
-          - name: Webhooks
-            link: ja/2.0/webhooks/
           - 
             name: Webhooks
             link: ja/2.0/webhooks/
@@ -1125,7 +1122,6 @@ ja:
       - 
         name: security
         link: ja/2.0/security/
-        i18n_name: セキュリティ
         children:
           - 
             name: Security Features
@@ -1270,10 +1266,6 @@ ja:
             name: Help and Support
             link: ja/2.0/help-and-support/
             i18n_name: ヘルプとサポート
-          - 
-            name: Archive of 1.0 Docs
-            link: ja/2.0/archive/
-            i18n_name: アーカイブ
   - 
     name: Server Administration
     i18n_name: Server管理

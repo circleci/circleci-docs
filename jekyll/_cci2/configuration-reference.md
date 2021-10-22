@@ -1952,7 +1952,7 @@ workflows:
 
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -2020,7 +2020,7 @@ jobs:
       - run: |
           set -xu
           mkdir -p /tmp/artifacts
-          create_jars.sh ${CIRCLE_BUILD_NUM}
+          create_jars.sh << pipeline.number >>
           cp *.jar /tmp/artifacts
 
       - save_cache:

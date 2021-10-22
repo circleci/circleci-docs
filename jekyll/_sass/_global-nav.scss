@@ -466,6 +466,16 @@ a.nav-skip-button {
 
 
 .dd-global-nav--component {
+  article{
+    h2,
+    h3,
+    h4,
+    h5,
+    h6{
+      scroll-margin-top: 7.5rem;
+    }
+  }
+
   .dd-global-nav--links {
 
     display: flex;

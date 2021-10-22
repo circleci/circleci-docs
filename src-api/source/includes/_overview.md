@@ -135,6 +135,11 @@ curl https://circleci.com/api/v1.1/me -H "Accept: application/json" -H "Circle-T
 
 If no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To receive the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.
 
+## Cache-Control Header
+{: #cache-control-header }
+
+Some CircleCI APIs may emit a `Cache-Control` header to indicate that the response may be cached for a period of time. This feature can be used to avoid unnecessary re-fetching of data that will not change. If you plan to make a large volume of API requests you are strongly encouraged to make use of this header in order to improve your performance and lower your risk of being rate limited.
+
 ## Getting Started
 
 CircleCI 1.0 and 2.0 are supported by API version 1.1 as documented in the following sections:

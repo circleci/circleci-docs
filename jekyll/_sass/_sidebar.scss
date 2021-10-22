@@ -180,7 +180,7 @@ $sidebar-spacing-base: 5px;
   }
 }
 
-.table-of-contents {
+aside.full-height {
   position: sticky;
   right: 0;
   padding: 32px 32px 112px 12px;
@@ -188,9 +188,11 @@ $sidebar-spacing-base: 5px;
   min-height: 90vh;
   width: $rightbar-width;
   overflow-y: auto;
-  top: 64px;
+  // due to the Docs-Devhub merge experiment having a new header nav in treatment, the top property will vary depending on the variation the user is in, the logic is being implemented in the DevHubDocsNav script. The top property will be set here after the conclusion of the experiment depending on which variation we keep.
+  top: 65px; 
   font-size: 16px;
   transition: all 0.5s ease-in-out;
+  max-height: 100vh;
 
   @media(max-width: $toc-breakpoint) {
     display: none;

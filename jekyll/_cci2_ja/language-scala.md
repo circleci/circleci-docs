@@ -208,8 +208,8 @@ steps/run キーは、実行するアクションのタイプを指定します�
 
 **Note:** `cat /dev/null` is normally used to prevent a command from hanging if it prompts for interactive input and does not detect whether it is running with an interactive TTY. `sbt` will prompt on failures by default.
 
-- [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
-- [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
+- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
+- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 2.0 スキーマの最後の部分は deploy コマンド キーです。 これは、コンパイルされた samplescala.zip を $CIRCLE_ARTIFACTS/ ディレクトリに移動し、その名前を変更します。  その後、指定された AWS S3 バケットにファイルがアップロードされます。
 
