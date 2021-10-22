@@ -21,12 +21,18 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -35,16 +41,6 @@ workflows:
   build_and_test: # < ワークフローに関して Slack 通知とメール通知が送信されます
     jobs:
     # IRC インテグレーションによってジョブごとの通知が送信されます
-      - build
-      - test
-      - build
-      - test
-      - build
-      - test
-      - build
-      - test
-      - build
-      - test
       - build
       - test
 ```
