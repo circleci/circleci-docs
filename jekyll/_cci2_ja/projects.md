@@ -21,7 +21,7 @@ On the "Add Projects" page, you can either _Set Up_ any project that you are the
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-{:.tab.addprojectpage.Server}
+{:.tab.addprojectpage.Server_3}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
 {:.tab.addprojectpage.Server_2}
