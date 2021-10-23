@@ -12,8 +12,8 @@ $(() => {
         window.AnalyticsClient.trackAction('docs-video-tutorials-menu-clicked');
       });
 
-      // track clicks on YT video
       if (location.pathname === '/docs/2.0/video-tutorials/') {
+        // track clicks on YT video
         $('.video-card a').click(function () {
           window.AnalyticsClient.trackAction(
             'docs-video-tutorials-video-clicked',
@@ -21,6 +21,17 @@ $(() => {
               link: $(this).attr('href'),
             },
           );
+        });
+
+        // track if user scrolled in the page
+        var userDidScroll = false;
+        $(document).scroll(function () {
+          if (!userDidScroll) {
+            window.AnalyticsClient.trackAction(
+              'docs-video-tutorials-video-page-scrolled',
+            );
+          }
+          userDidScroll = true;
         });
       }
     }
