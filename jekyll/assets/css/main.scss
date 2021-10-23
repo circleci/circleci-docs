@@ -553,6 +553,10 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 *  https://app.optimizely.com/v2/projects/16812830475/experiments/20790151733/variations
 */
 
+.main-nav-item[data-section=video-tutorials] {
+  display: none;
+}
+
 .video-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

@@ -5,15 +5,24 @@ $(() => {
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
   }).then((variation) => {
     if (variation === 'treatment') {
-      // $('#related-resources').show();
-      // // track clicks on each items
-      // $('#related-resources li a').click(function () {
-      //   window.AnalyticsClient.trackAction('docs-related-resources-clicked', {
-      //     page: location.pathname,
-      //     link: $(this).attr('href'),
-      //     name: $(this).text(),
-      //   });
-      // });
+      $('.main-nav-item[data-section=video-tutorials]').show();
+
+      // track clicks on sidebar
+      $('.main-nav-item[data-section=video-tutorials]').click(function () {
+        window.AnalyticsClient.trackAction('docs-video-tutorials-menu-clicked');
+      });
+
+      // track clicks on YT video
+      if (location.pathname === '/docs/2.0/video-tutorials/') {
+        $('.video-card a').click(function () {
+          window.AnalyticsClient.trackAction(
+            'docs-video-tutorials-video-clicked',
+            {
+              link: $(this).attr('href'),
+            },
+          );
+        });
+      }
     }
   });
 });
