@@ -86,7 +86,7 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
 
 CircleCI アプリケーションの** [Add Projects (プロジェクトの追加)] **ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。 macOS ビルドが可能なプランであることを確認する必要があります。またはプロジェクトがオープンソースの場合は、毎月無料ビルドクレジットがつく[ 特別プラン](https://circleci.com/open-source/)を申し込むことができます。 </p> 
 
-CircleCI でのアプリケーションのビルドと署名には [Fastlane](https://fastlane.tools) を使用することを強くお勧めします。 Fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
+CircleCI でのアプリケーションのビルドと署名には [fastlane](https://fastlane.tools) を使用することを強くお勧めします。 fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
 
 
 
@@ -94,7 +94,7 @@ CircleCI でのアプリケーションのビルドと署名には [Fastlane](ht
 
 {: #setting-up-your-xcode-project }
 
-CircleCI でプロジェクトを設定した後、 FastLane でビルドするスキームが Xcode プロジェクトで「共有」としてマークされていることを確認する必要があります。 Xcode で作成されるほとんどの新規プロジェクトでは、デフォルトのスキームはすでに「共有」としてマークされています。 これを確認する、または既存のスキームを共有するには、次の手順を実行します。
+CircleCI でプロジェクトを設定した後、 fastlane でビルドするスキームが Xcode プロジェクトで「共有」としてマークされていることを確認する必要があります。 Xcode で作成されるほとんどの新規プロジェクトでは、デフォルトのスキームはすでに「共有」としてマークされています。 これを確認する、または既存のスキームを共有するには、次の手順を実行します。
 
 1. Xcode で、[Product (プロダクト)]> [Scheme (スキーム)] > [Manage Schemes (スキーム管理)] の順に選択します。
 2. 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
@@ -108,7 +108,7 @@ CircleCI でプロジェクトを設定した後、 FastLane でビルドする�
 
 {: #using-fastlane }
 
-[fastlane](https://fastlane.tools/) は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ご使用をお勧めします。 fastlane を使用すると、ビルドをローカルでも CircleCI 上でも同等に実行することができます。
+[fastlane](https://fastlane.tools/) は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 CicleCI上で fastlane を使用すると、ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ぜひご使用ください。 また、fastlane の使用によりビルドをローカルでも CircleCI 上でも同等に実行することができます。
 
 
 
@@ -163,13 +163,13 @@ end
 
 * fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
 
-* fastlane match を `readonly` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
+* fastlane match を `ランダム` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
 
 * ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
 
 
-### CircleCI で fastlane を使用する場合の構成例
+### CircleCI で fastlane を使用する場合の設定例
 
 {: #example-configuration-for-using-fastlane-on-circleci }
 
@@ -204,7 +204,7 @@ end
 ```
 
 
-上記の設定は、以下の CircleCI のコンフィグファイルと組み合わせて使用できます。
+上記の設定は、以下の CircleCI の設定ファイルと組み合わせて使用できます。
 
 
 
@@ -277,9 +277,9 @@ fastlane match の使用に関する詳細は、[ iOS コード署名に関す�
 
 CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#サポートされている-xcode-のバージョン)に記載されています。
 
-マニフェストで「available to chruby (chruby で使用可)」と記載されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用して手順を実行できます。
+マニフェストで「available to chruby (chruby で使用可)」と記載されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
-**注:** システムディレクトリに適用されるアクセス許可が制限されるため、Ruby を使って Gems をインストールすることはお勧めしていません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
+**注:** システムディレクトリに適用されるアクセス許可が制限されるため、Ruby を使って Gems をインストールすることは推奨しません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
 
 
 
@@ -312,7 +312,7 @@ steps:
 ```
 
 
-`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
 デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
@@ -351,7 +351,7 @@ steps:
 ```
 
 
-`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
 元の Ruby に戻すには、ジョブの最初に以下を追加します。
 
@@ -390,7 +390,7 @@ steps:
 ```
 
 
-`2.6` を必要な Ruby バージョンに変更します。`2.6.5` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいバージョンの新しいイメージに切り替えることができます。
+`2.6` を必要な Ruby バージョンに変更します。`2.6.5` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいバージョンの新しいイメージに切り替えることができます。
 
 
 
@@ -544,15 +544,15 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 
 インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
+`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。 
 
 
 
-## Using Homebrew
+## Homebrew の使用
 
 {: #using-homebrew }
 
-[Homebrew](http://brew.sh/) is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency you require to complete your build. For example:
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 以下に例を示します。
 
 
 
@@ -568,31 +568,31 @@ steps:
 ```
 
 
-It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
+必要な場合は、`sudo` コマンドを使用して、Homebrew 以外のカスタマイズも実行できます。
 
 
 
-## Configuring deployment
+## デプロイの設定
 
 {: #configuring-deployment }
 
-After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/2.0/deploying-ios/)
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{ site.baseurl }}/2.0/deploying-ios/)をご覧ください。
 
 
 
-## Reducing job time and best practises
+## ジョブ時間の短縮とベストプラクティス
 
 {: #reducing-job-time-and-best-practises }
 
 
 
-### Pre-starting the simulator
+### シミュレーターの事前起動
 
 {: #pre-starting-the-simulator }
 
-Pre-start the iOS simulator before building your application to make sure that the simulator is booted in time. Doing so generally reduces the number of simulator timeouts observed in builds.
+アプリケーションをビルドする前に iOS シミュレーターを起動して、シミュレーターの稼働が遅れないようにします。 こうすることで、通常はビルド中にシミュレーターのタイムアウトが発生する回数を減らすことができます。
 
-To pre-start the simulator, add the macOS Orb (version `2.0.0` or higher) to your config:
+シミュレーターを事前に起動するには、macOS Orb (バージョン`2.0.0`以降) を設定に追加します。
 
 
 
@@ -602,7 +602,7 @@ orbs:
 ```
 
 
-Then call the `preboot-simulator` command, as shown in the example below:
+次に、`preboot-simulator` コマンドを以下の例のように定義します。
 
 
 
@@ -615,9 +615,9 @@ steps:
 ```
 
 
-It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
+シミュレータがバックグラウンドで起動するまでの最大時間を確保するために、このコマンドをジョブの初期段階に配置することをお勧めします。
 
-If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS Orb:
+Apple Watch シミュレータとペアリングされた iPhone シミュレータが必要な場合は、 macOS Orb で `preboot-paired-simulator` コマンドを使用します。
 
 
 
@@ -631,11 +631,11 @@ steps:
 ```
 
 
-**Note:** It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
+**注: **シミュレーターを起動するには数分、ペアのシミュレーターを起動するにはそれ以上かかる場合があります。 この間、 `xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。
 
 
 
-### Collecting iOS simulator crash reports
+### iOS シミュレーターのクラッシュレポートの収集
 
 {: #collecting-ios-simulator-crash-reports }
 
@@ -643,7 +643,7 @@ steps:
 
 {:.no_toc}
 
-Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
+テストランナーのタイムアウトなどの理由で `scan` ステップが失敗する場合、多くの場合テストの実行中にアプリケーションがクラッシュした可能性があります。 このような場合、クラッシュレポートを収集することでクラッシュの正確な原因を診断することができます。 クラッシュレポートをアーティファクトとしてアップロードする方法は以下の通りです。
 
 
 
@@ -652,12 +652,13 @@ steps:
   # ...
   - store_artifacts:
     path: ~/Library/Logs/DiagnosticReports
+
 ```
 
 
 
 
-### Fastlane の最適化
+### fastlane の最適化
 
 {: #optimizing-fastlane }
 
@@ -665,7 +666,7 @@ steps:
 
 {:.no_toc}
 
-デフォルトでは、Fastlane Scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[Fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_types` を変更して、これらの形式を無効化することができます。
+デフォルトでは、fastlane scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_types` を変更して、これらの形式を無効化することができます。
 
 
 
@@ -880,8 +881,8 @@ workflows:
 
 {:.no_toc}
 
-- CircleCI  で Fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
+- CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
 
 - 設定ファイルの詳しい説明については、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)を参照してください。
 
-- Fastlane Match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/2.0/ios-codesigning/)を参照してください。
+- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/2.0/ios-codesigning/)を参照してください。
