@@ -275,21 +275,21 @@ fastlane match の使用に関する詳細は、[ iOS コード署名に関す�
 
 {: #using-ruby }
 
-CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The versions of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
+CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#サポートされている-xcode-のバージョン)に記載されています。
 
-If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
+マニフェストで「available to chruby (chruby で使用可)」と記載されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用して手順を実行できます。
 
-**Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
+**注:** システムディレクトリに適用されるアクセス許可が制限されるため、Ruby を使って Gems をインストールすることはお勧めしていません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
 
 
 
-### Switching Rubies with the macOS Orb (Recommended)
+### Ruby から macOS Orb への切り替え (推奨) 
 
 {: #switching-rubies-with-the-macos-orb-recommended }
 
-Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
+公式の macOS Orb (バージョン `2.0.0` 以降)  を使用すると、ジョブ内で Ruby から簡単に切り替えることができます。 どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
 
-To get started, include the orb at the top of your config:
+まずは、Orb を設定の一番最初に含めます。
 
 
 
@@ -300,7 +300,7 @@ orbs:
 ```
 
 
-Then, call the `switch-ruby` command with the version number required. For example, to switch to Ruby 2.6:
+次に、必要なバージョン番号と共に `switch-ruby` コマンドを定義します。 たとえば、Ruby 2.6 に切り替える場合は、
 
 
 
@@ -312,7 +312,7 @@ steps:
 ```
 
 
-Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変えてください。 `3.0.2` のようにRuby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
 
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
