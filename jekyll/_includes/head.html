@@ -7,15 +7,10 @@
 	<meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 	{% if page.redirect %}<meta http-equiv="refresh" content="0; url={{ page.redirect }}">{% endif %}
 	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-
 	<link href="{{ "/assets/img/icons/favicon.png" | prepend: site.baseurl }}" rel="icon" type="image/png" />
-	<!-- <link href="{{ "/assets/js/styles.css" | prepend: site.baseurl }}"/> -->
-	<!-- <link href="{{site.baseurl}}/assets/js/app.css"> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
-
 	<link rel="stylesheet" href="{{ site.baseurl }}/{% ministamp assets/js/app.css assets/app.css %}" />
-
 	<script type="text/javascript" src="{{ site.baseurl }}/{% ministamp assets/js/app.bundle.js assets/app.bundle.js %}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
