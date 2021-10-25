@@ -100,7 +100,7 @@ repository-id of the originator of the fork PR to identify the cache.
   main repo share a cache with the main repo branches (in particular the
   `main` branch).
 - Two PRs in different fork repos will have different caches. That means
-  that a PR from a fork will not share a cache with the main repo `main` branch. 
+  that a PR from a fork will not share a cache with the main repo `main` branch.
 - enabling the [passing of secrets to build from forked pull requests](#pass-secrets-to-builds-from-forked-pull-requests) 
   will enable cache sharing between the original repo and all forked builds.
 
