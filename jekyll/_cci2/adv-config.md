@@ -98,7 +98,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
