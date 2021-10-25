@@ -108,7 +108,7 @@ CircleCI でプロジェクトを設定した後、 FastLane でビルドする�
 
 {: #using-fastlane }
 
-[fastlane](https://fastlane.tools/) は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ご使用をお勧めします。 Additionally, it allows parity between local and CircleCI builds.
+[fastlane](https://fastlane.tools/) は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ご使用をお勧めします。 fastlane を使用すると、ビルドをローカルでも CircleCI 上でも同等に実行することができます。
 
 
 
@@ -257,25 +257,25 @@ workflows:
 ```
 
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
+環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 
 
 
-### Code Signing with Fastlane Match
+### fastlane match によるコード署名
 
 {: #code-signing-with-fastlane-match }
 
-We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
+ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化することができるため、iOS アプリケーションの署名には fastlane match のご使用をお勧めします。
 
-For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/).
+fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/2.0/ios-codesigning/) をご覧ください。
 
 
 
-## Using Ruby
+## Ruby の使用
 
 {: #using-ruby }
 
-Our macOS images contain multiple versions of Ruby. The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The versions of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
+CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The versions of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
