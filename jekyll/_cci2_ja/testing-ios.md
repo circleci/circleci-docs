@@ -108,11 +108,11 @@ CircleCI でプロジェクトを設定した後、 FastLane でビルドする�
 
 {: #using-fastlane }
 
-[fastlane](https://fastlane.tools/) は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 We encourage the use of Fastlane on CircleCI as it simplifies the setup and automation of the build, test and deploy process. Additionally, it allows parity between local and CircleCI builds.
+[fastlane](https://fastlane.tools/) は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ご使用をお勧めします。 Additionally, it allows parity between local and CircleCI builds.
 
 
 
-### Adding a Gemfile
+### Gemfile の追加
 
 {: #adding-a-gemfile }
 
@@ -120,7 +120,7 @@ CircleCI でプロジェクトを設定した後、 FastLane でビルドする�
 
 {:.no_toc}
 
-It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI and that all dependencies are installed. Below is a sample of a simple `Gemfile`:
+ローカルでも依存関係がすべてインストールされた CircleCI 上でも同じバージョンの fastlane が使用できるよう、`Gemfile` をリポジトリに追加することをお勧めします。 以下に `Gemfile` の簡単な例を示します。
 
 
 
@@ -131,7 +131,7 @@ gem 'fastlane'
 ```
 
 
-After you have created a `Gemfile` locally, you will need to run `bundle install` and check both `Gemfile` and `Gemfile.lock` into your project repository.
+`Gemfile` をローカルで作成したら、`bundle install` を実行し、`Gemfile` と `Gemfile.lock` の両方をリポジトリにチェックインする必要があります。
 
 
 
@@ -143,30 +143,29 @@ After you have created a `Gemfile` locally, you will need to run `bundle install
 
 {:.no_toc}
 
-When using Fastlane in your CircleCI project, we recommend adding the following to beginning of your `Fastfile`:
+fastlane を CircleCI プロジェクトで使用する場合は、以下の行を `fastfile` の始めに追加することをお勧めします。
 
 
 
 ```ruby
 # fastlane/Fastfile
-
-...
 platform :ios do
   before_all do
     setup_circle_ci
   end
   ...
+
 end
 ```
 
 
-The `setup_circle_ci` Fastlane action must be in the `before_all` block to perform the following actions:
+以下のアクションを実行するには、`setup_circle_ci` fastlane アクションを `before_all` ブロック内に置く必要があります。
 
-* Create a new temporary keychain for use with Fastlane Match (see the code signing section for more details).
+* fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
 
-* Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
+* fastlane match を `readonly` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
 
-* Set up log and test result paths to be easily collectible.
+* ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
 
 
