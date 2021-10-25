@@ -312,9 +312,9 @@ steps:
 ```
 
 
-`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変えてください。 `3.0.2` のようにRuby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンを伴う新しいイメージに切り替えることができます。
 
-To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
+デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
 
 
@@ -326,11 +326,11 @@ steps:
 ```
 
 
-**Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Xcode 11.6 images and earlier default to the System Ruby.
+**注:** Xcode 11.7 以降のイメージでは、デフォルトで chruby を使用した Ruby 2.7 に設定されています。 Xcode 11.6 以前のイメージでは、デフォルトで Ruby に設定されています。
 
 
 
-### Images using Xcode 11.7 and later
+### Xcode 11.7 以降を使用したイメージ
 
 {: #images-using-xcode-117-and-later }
 
@@ -338,7 +338,7 @@ steps:
 
 {:.no_toc}
 
-To switch to another Ruby version, add the following to the beginning of your job.
+Ruby の別のバージョンに切り替えるには、ジョブの最初に以下を追加します。
 
 
 
@@ -346,14 +346,14 @@ To switch to another Ruby version, add the following to the beginning of your jo
 steps:
   # ...
   - run:
-      name: Set Ruby Version
+      name: Ruby バージョンの設定
       command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
 ```
 
 
-Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンを伴う新しいイメージに切り替えることができます。
 
-To revert back to the system Ruby, add the following to the beginning of your job:
+元の Ruby に戻すには、ジョブの最初に以下を追加します。
 
 
 
@@ -361,8 +361,9 @@ To revert back to the system Ruby, add the following to the beginning of your jo
 steps:
   # ...
   - run:
-      name: Set Ruby Version
+      name: Ruby バージョンの設定
       command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+
 ```
 
 
