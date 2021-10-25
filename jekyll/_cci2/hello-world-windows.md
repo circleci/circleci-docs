@@ -428,7 +428,7 @@ Also, consider reading documentation on some of CircleCI’s features:
     * Powershell 5
     * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
-* .NET Framework 4.8
+* .NET Framework 5
 * .NET Core
     * SDK 5.0.402
     * SDK 5.0.401
@@ -460,7 +460,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Yarn 1.22.17
 * Ruby 2.6.3
 * Go 1.17
-* Python 3.7.3
+* Python 3.9
 * Java 12.0.2
 * Miniconda 3
 * WinAppDriver 1.1.1809.18001
