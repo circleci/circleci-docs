@@ -312,7 +312,7 @@ steps:
 ```
 
 
-`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンを伴う新しいイメージに切り替えることができます。
+`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
 デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
@@ -351,7 +351,7 @@ steps:
 ```
 
 
-`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンを伴う新しいイメージに切り替えることができます。
+`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
 元の Ruby に戻すには、ジョブの最初に以下を追加します。
 
@@ -369,7 +369,7 @@ steps:
 
 
 
-### Images using Xcode 11.2 and later
+### Xcode 11.2 以降を使用したイメージ
 
 {: #images-using-xcode-112-and-later }
 
@@ -377,7 +377,7 @@ steps:
 
 {:.no_toc}
 
-If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+使用する Ruby のバージョンを指定するには、次のように `~/.bash_profile` に`chruby` 機能を追加します。
 
 
 
@@ -385,16 +385,16 @@ If you do not want to commit a `.ruby-version` file to source control, then you 
 steps:
   # ...
   - run:
-      name: Set Ruby Version
+      name: Ruby バージョンの設定
       command: echo 'chruby ruby-2.6' >> ~/.bash_profile
 ```
 
 
-Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
+`2.6` を必要な Ruby バージョンに変更します。`2.6.5` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいバージョンの新しいイメージに切り替えることができます。
 
 
 
-### Images using Xcode 11.1 and earlier
+### Xcode 11.1 以前を使用したイメージ
 
 {: #images-using-xcode-111-and-earlier }
 
@@ -402,34 +402,35 @@ Replace `2.6` with the version of Ruby required - you do not need to specify the
 
 {:.no_toc}
 
-To specify a version of Ruby to use, you can [create a file named `.ruby-version`, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
+使用する Ruby のバージョンを指定するには、`chruby` に記載されているように [`.ruby-version`という名前のファイルを作成します。](https://github.com/postmodern/chruby#auto-switching) これは以下のようにジョブステップで実行できます。
 
 
 
 ```yaml
 steps:
   # ...
+
   - run:
-      name: Set Ruby Version
+      name: Ruby バージョンの設定
       command:  echo "ruby-2.4" > ~/.ruby-version
 ```
 
 
-Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
+`2.4` を必要な Ruby バージョンに変更します。`2.4.9` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 これにより、設定を壊すことなく Ruby の新しいバージョンの新しいイメージに切り替えることができます。
 
 
 
-### Installing additional Ruby versions
+### Ruby バージョンの追加インストール
 
 {: #installing-additional-ruby-versions }
 
-**Note:** Installing additional Ruby versions consumes a lot of job time. We only recommend doing this if you must use a specific version that is not installed in the image by default.
+**注:** Ruby バージョンを追加インストールするにはかなりの時間を要します。 デフォルトでイメージにインストールされていな特定のバージョンを使用する必要がある場合のみ行うことを推奨します。
 
-To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
+プリインストールされていない Ruby のバージョンでジョブを実行するには、そのバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
 
 
 
-### Using Custom Versions of CocoaPods and Other Ruby Gems
+### カスタム バージョンの CocoaPods と他の Ruby gem の使用
 
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 
@@ -437,7 +438,7 @@ To run a job with a version of Ruby that is not pre-installed, you must install 
 
 {:.no_toc}
 
-To make sure the version of CocoaPods that you use locally is also used in your CircleCI builds, we suggest creating a Gemfile in your iOS project and adding the CocoaPods version to it:
+ローカルで使用しているバージョンの CocoaPods を CircleCI のビルドでも使用するには、iOS プロジェクトで Gemfile を作成し、そこに CocoaPods バージョンを追加することをお勧めします。
 
 
 
@@ -448,7 +449,7 @@ gem 'cocoapods', '= 1.3.0'
 ```
 
 
-Then you can install these using bundler:
+次に、Bundler を使用してインストールします。
 
 {% raw %}
 
@@ -467,7 +468,7 @@ steps:
 
 {% endraw %}
 
-You can then ensure you are using those, by prefixing commands with `bundle exec`:
+次に、コマンドの前に `bundle exec` を記述して、確実に使用できるようにします。
 
 
 
@@ -475,28 +476,29 @@ You can then ensure you are using those, by prefixing commands with `bundle exec
 # ...
 steps:
   - run: bundle exec pod install
+
 ```
 
 
 
 
-## Using NodeJS
+## NodeJS の使用
 
 {: #using-nodejs }
 
-The Xcode images are supplied with at least one version of NodeJS ready to use.
+Xcode イメージには少なくとも一つのバージョンの NodeJS が使用可能な状態で提供されます。
 
 
 
-### Images using Xcode 13 and later
+### Xcode 13 以降を使用したイメージ
 
 {: #images-using-xcode-13-and-later }
 
-These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
+Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。 また、`lts`はデフォルトの NodeJS バージョンとして設定されています。
 
-Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)], or by running `nvm ls` during a job.
+インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧になるか、またはジョブの中で `nvm ls` を実行してください。 
 
-To set the `current` version as the default:
+以下のコマンドで `current` バージョンをデフォルトに設定します。
 
 
 
@@ -507,7 +509,7 @@ steps:
 ```
 
 
-To revert to the `lts` release:
+`lts`リリースに戻すには、以下を実行します。
 
 
 
@@ -518,7 +520,7 @@ steps:
 ```
 
 
-To install a specific version of NodeJS and use it:
+特定の NodeJS をインストールし使用しするには、以下を実行します。
 
 
 
@@ -526,20 +528,21 @@ To install a specific version of NodeJS and use it:
 # ...
 steps:
   - run: nvm install 12.22.3 && nvm alias default 12.22.3
+
 ```
 
 
-These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の CircleCI Node Orb とも互換性があります。 
 
 
 
-### Images using Xcode 12.5 and earlier
+### Xcode 12.5 以前を使用したイメージ
 
 {: #images-using-xcode-125-and-earlier }
 
-These images come with at least one version of NodeJS installed directly using `brew`.
+Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
-Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
+インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
 These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
 
