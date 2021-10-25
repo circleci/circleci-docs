@@ -24,7 +24,7 @@ _(Warning: This may take up to 10 minutes to build)_
 
 ## 2. Local Development with Ruby and Bundler (alternative to Docker)
 
-If you already have a stable Ruby environment (currently Ruby 2.6.8) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
+If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
 
 Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
 
