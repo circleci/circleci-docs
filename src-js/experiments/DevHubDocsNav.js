@@ -23,8 +23,8 @@ $(() => {
         );
       });
 
-      // aside.full-height used to adjust the top property for the sidenav while Docs-Devhub merge experiment is running
-      $('aside.full-height').css('top', '111px');
+      // div.full-height-sticky used to adjust the top property for the sidenav while Docs-Devhub merge experiment is running
+      $('div.full-height-sticky').css('top', '130px');
     }
   });
 });
