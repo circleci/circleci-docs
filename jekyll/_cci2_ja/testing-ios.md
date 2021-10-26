@@ -143,7 +143,7 @@ gem 'fastlane'
 
 {:.no_toc}
 
-fastlane を CircleCI プロジェクトで使用する場合は、以下の行を `fastfile` の始めに追加することをお勧めします。
+fastlane を CircleCI プロジェクトで使用する場合は、以下の行を `Fastfile` の始めに追加することをお勧めします。
 
 
 
@@ -154,7 +154,6 @@ platform :ios do
     setup_circle_ci
   end
   ...
-
 end
 ```
 
@@ -267,7 +266,7 @@ workflows:
 
 ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化することができるため、iOS アプリケーションの署名には fastlane match のご使用をお勧めします。
 
-fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/2.0/ios-codesigning/) をご覧ください。
+fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/2.0/ios-codesigning/) をご覧ください
 
 
 
@@ -275,11 +274,11 @@ fastlane match の使用に関する詳細は、[ iOS コード署名に関す�
 
 {: #using-ruby }
 
-CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#サポートされている-xcode-のバージョン)に記載されています。
+CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#supported-xcode-versions)に記載されています。
 
 マニフェストで「available to chruby (chruby で使用可)」と記載されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
-**注:** システムディレクトリに適用されるアクセス許可が制限されるため、Ruby を使って Gems をインストールすることは推奨しません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
+**注:** システムディレクトリに適用されるアクセス許可が制限されるため、システムのRuby を使って Gems をインストールすることは推奨しません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
 
 
 
@@ -409,7 +408,6 @@ steps:
 ```yaml
 steps:
   # ...
-
   - run:
       name: Ruby バージョンの設定
       command:  echo "ruby-2.4" > ~/.ruby-version
@@ -532,7 +530,7 @@ steps:
 ```
 
 
-これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の CircleCI Node Orb とも互換性があります。 
+これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性があります。 
 
 
 
@@ -576,11 +574,11 @@ steps:
 
 {: #configuring-deployment }
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{ site.baseurl }}/2.0/deploying-ios/)をご覧ください。
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{ site.baseurl }}/ja/2.0/deploying-ios/)をご覧ください。
 
 
 
-## ジョブ時間の短縮とベストプラクティス
+## ジョブ実行時間を削減するベストプラクティス
 
 {: #reducing-job-time-and-best-practises }
 
@@ -885,4 +883,4 @@ workflows:
 
 - 設定ファイルの詳しい説明については、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)を参照してください。
 
-- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/2.0/ios-codesigning/)を参照してください。
+- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/2.0/ios-codesigning/)を参照してください。
