@@ -80,7 +80,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 CircleCI でカスタム Docker イメージをプライマリ コンテナとして使用するには、以下のツールをインストールする必要があります。
 
-- Bash（ほとんどの場合、すでにインストールされているか、パッケージマネージャ経由で入手可能です。)
+- Bash（ほとんどの場合、すでにインストールされているか、パッケージマネージャ経由で入手可能です。 )
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [SSH](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
 - [Tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
@@ -157,14 +157,13 @@ CircleCI でカスタム イメージを使用できるようにするには、�
 
 ``` Shell
 $ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
-
 ```
 
 この`t`キーは、新しいイメージの名前とタグを指定するキーです。
 
 - `circleci` - Docker ハブでのアカウント
 - `cci-demo-docker-primary` - リポジトリ名
-- `0.0.1` - イメージのタグ (バージョン)。 `Dockerfile` の内容を変更した場合は、必ずタグを更新してください。更新しないと予想外の結果を招く可能性があります。
+- `0.0.1` - イメージのタグ (バージョン)。 `Dockerfile` の内容を変更した場合は、必ずタグを更新してください。 更新しないと予想外の結果を招く可能性があります。
 
 ### レジストリへのイメージのプッシュ
 {: #pushing-the-image-to-the-registry }

@@ -18,16 +18,19 @@ _バックアップと復元は、CircleCI Server v3.1.0 以上で利用でき�
 
 CircleCI Server の運用と管理を担当される方であれば、間違いなく、別のクラスタへの移行や重大なイベントからの復元が必要になった事態を想定し、バックアップを維持しシステムを復元する方法を考えていることでしょう。
 このドキュメントでは、CircleCI Server インスタンスのデータと状態をバックアップして復元する方法に関する推奨事項を説明します。
+This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 
-CircleCI Server は、https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用します。
-このアプローチのメリットは、アプリケーションのデータを復元するだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
-こうすれば、管理者コンソールの構成や、クラスタに加えたカスタマイズ内容も復元できます。 
+CircleCI server is administered via https://kots.io/[Kots], which uses https://velero.io/[Velero] for backup and restore.
+The benefit of this approach is that it not only restores your application's data,
+but it also restores the state of the Kubernetes cluster and its resources at the time of the backup.
+In this way, we can also restore admin-console configurations and customizations you made to your cluster. 
 
 NOTE: CircleCI サービスのバックアップと復元には、Velero が必須です。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
 
 == セットアップ
 
 CircleCI Server のバックアップは、https://kots.io/[KOTS] を通じて非常に簡単に作成できます。
+However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
 However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
@@ -75,7 +78,7 @@ aws s3api create-bucket \
 ----
 NOTE: `us-east-1` では、https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの構成は省略してください。
 
-=== 手順 2 - Velero の権限の設定
+=== Step 2 - Setup permissions for Velero
 
 * IAM ユーザーを作成します。
 
@@ -172,8 +175,8 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 
 === 手順 3 - Velero のインストールと起動
 
-* 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
-Make sure that you pass the correct file name containing the AWS credentials that you have created in <<手順 2 - Velero の権限の設定, Step 2>>.
+* 以下の `velero` `install` コマンドを実行します。 This will create a namespace called `velero` and install all the necessary resources to run Velero.
+Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
 NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
@@ -350,7 +353,7 @@ velero install \
 
 システムをカスタマイズする他のオプションについては、https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero のドキュメント]を参照してください。
 
-* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です 。
+* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You should have a Velero deployment and a restic daemonset. eg:
 
 [source,bash]
 ----
@@ -374,6 +377,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 以下の手順では、S3 互換オブジェクト ストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
+It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
 
 これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[こちら]の Velero ドキュメントを元にしています。
 
@@ -388,7 +392,7 @@ export ALIAS=my-provider
 mc alias set $ALIAS <YOUR_MINIO_ENDPOINT> <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
 ----
 
-クライアントが適切に構成されたかどうかは、`mc ls my-provider` を実行して確認できます。出力に、指定したプロバイダーのバケットが列挙されて表示されます。
+クライアントが適切に構成されたかどうかは、`mc ls my-provider` を実行して確認できます。
 
 === 手順 2 - バケットの作成
 
@@ -495,7 +499,7 @@ kubectl kots backup --namespace <your namespace>
 
 === オプション 2 - KOTS 管理者コンソールを使用したバックアップ作成
 
-ナビゲーション バーの *[Snapshots (スナップショット)]* を選択します。 デフォルトでは *[Full Snapshots (フル スナップショット)]* が選択されています。これが推奨オプションです。
+ナビゲーション バーの *[Snapshots (スナップショット)]* を選択します。 デフォルトでは *[Full Snapshots (フル スナップショット)]* が選択されています。 これが推奨オプションです。
 
 image::kots-admin-full-snapshot.png[Kots Navbar]
 
@@ -531,6 +535,7 @@ kubectl kots restore --from-backup <backup-instance-id>
 
 バックアップ時と同様に、KOTS 管理者コンソールの *[Snapshots (スナップショット)]* に移動します。 今回は、復元アイコン付きのバックアップがすべて表示されます。
 使用するバックアップを選択し、復元アイコンを選択します。
+Choose the backup you wish to use and select restore.
 
 image::kots-admin-restore.png[Kots Create Snapshot]
 
@@ -575,8 +580,8 @@ $ kubectl logs deployment/velero --namespace velero
 
 === バックアップ プロセスまたは復元プロセスでエラーが発生した
 
-バックアップまたは復元プロセスでエラーが発生した場合は、まず Velero ログを確認してください。
-上記のコマンドの結果 4XX エラーが見つかった場合、ストレージ バケットへのアクセスの問題が原因の可能性があります。
+If you experience an error during backup or restore processes, the first place to look would be the Velero logs.
+Using the command above, you may find 4XX errors, which would likely be caused by issues with your storage bucket access.
 
 * バケットが存在していることと、想定するリージョンにあることを確認します。
 * Velero に指定した認証情報でバケットにアクセスできることを確認します。
@@ -594,4 +599,4 @@ restic-mknws              1/1     Running   0          10m
 velero-68788b675c-dm2s7   1/1     Running   0          10m
 ```
 
-上記の例では、restic Pod のいくつかが保留状態です。これは、利用可能な CPU リソースまたはメモリ リソースがノードに割り当てられるまで待機していることを意味します。 この場合、restic に合わせたノードのスケーリングが必要な可能性があります。
+これは、利用可能な CPU リソースまたはメモリ リソースがノードに割り当てられるまで待機していることを意味します。 この場合、restic に合わせたノードのスケーリングが必要な可能性があります。

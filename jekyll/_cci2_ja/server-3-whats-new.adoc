@@ -24,10 +24,10 @@ KOTS 管理者コンソール ダッシュボードのメニューバーで  [Ve
 
 サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
 
-==== PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`のまま
+==== PostgreSQL ポッドが `[Pending(保留)]`のまま
 アップグレード後に PostgreSQL ポッドが `{startsb}Pending(保留){endsb}` 状態のままである場合、ポッドを以下の手順で 0 にスケールダウンしてから、再度スケールアップしてください。
 
-以下により、PostgreSQL ポッドが `{startsb}Pending(保留){endsb}`状態かどうかを確認することができます。
+以下により、PostgreSQL ポッドが `[Pending(保留)]`状態かどうかを確認することができます。
 
 ```bash
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
@@ -62,7 +62,7 @@ kubectl scale deployment output-processor --replicas 2
 以下により、Traefik ポッドの状態を確認することができます。
 
 ```bash
-$ kubectl get pod -l app=traefik
+$ kubectl get pod -l app=traefik 
 NAME                                      READY   STATUS    RESTARTS   AGE
 circleci-server-traefik-9d6b86fd8-f7n2x   1/1     Running   0          24d
 circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
@@ -78,17 +78,35 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 === 新機能
 
+* 完全なプライベートネットワーク環境でのインストールを必要とするお客様は、KOTS管理コンソールの設定画面からパブリックIPがVMに割り当てられないようにすることができます。 なお、非パブリックIPの設定を有効にした場合、実行中のジョブにSSHアクセスが必要なときは、VPCにVPNを設定するなどの回避策が必要となりますのでご注意ください。
+* プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[サーバー 3.xのプロキシ設定]を参照してください。
+* マシンビルド環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。 
+* https://circleci.com/docs/ja/2.0/insights/[インサイトAPI]が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
+* 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。 
+* VMサービスにカスタムLinux AMIが利用できるようになりました。
+* SSLターミネーションを無効にできるようになりました - サーバーをファイアウォールの内側に置いている場合、これによりファイアウォールでのSSLターミネーションが利用できます。
+* 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張]のドキュメントを参照してください。
+* https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]にNomadのオートスケーリングの例を追加しました。 
+* 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-build-artifacts/[CircleCI Server v3.x ビルド アーティファクト]を参照してください。
+
 === 修正点
 
+* デフォルトのWindows Executorのサイズをクラウド版に合わせて大きくしました。 
+
 === 既知の問題
+
+* KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after nomad clients have been deployed.
+* machine executorを使用するジョブのSSHによる再試行では、プライベートIPアドレスが表示されます。 このため、machine executorを使用するジョブのSSHでの再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPCにVPNを使用するなどして、表示されたプライベートIPにアクセスできるようにする必要があります。
+* 現在、同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能な状態です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* CircleCI 1.0 のビルドはサポートされていません。 1.0ビルドを実行しようとした場合、問題の原因を示すようなアプリケーションからのフィードバックはありません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[[CircleCI CLI] ]を使用してプロジェクトの設定を検証し、問題の原因を調査することをおすすめします。
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
+* サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 
 == リリース 3.1.0
 
 === アップグレードに関する注意事項
 
-IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。
- 今後、受信トラフィックはすべて、`traefik` ロード バランサーにより処理されます。 過去の 3.x バージョンからアップデートする場合、`frontend-external` ロード バランサーを参照する DNS レコードを、`circleci-server-traefik` ロード バランサーを参照するように更新する必要があります。
- Traefik ロードバランサーの外部 IP アドレスやDNS 名は、クラスタへのアクセスが可能な端末から `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
+IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロード バランサーにより処理されます。 過去の 3.x バージョンからアップデートする場合、`frontend-external` ロード バランサーを参照する DNS レコードを、`circleci-server-traefik` ロード バランサーを参照するように更新する必要があります。 Traefik ロードバランサーの外部 IP アドレスやDNS 名は、クラスタへのアクセスが可能な端末から `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
 
 DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。
 
@@ -106,15 +124,15 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 * CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage をサポートしています。 詳細については、https://circleci.com/docs/2.0/server-3-install/[[Installation guide (インストール ガイド)]]を参照してください。
 * CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[[blog post (ブログ記事)]]およびhttps://circleci.com/docs/2.0/dynamic-config/[[Dynamic Congiguration (ダイナミック コンフィグ)]]を参照してください。
 * CircleCI Server でランナーを利用できるようになりました。 インストール手順を含む詳細については、https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[[Runner docs (ランナーに関するページ)]]を参照してください。 ランナーを使うことで、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用することができるようになります。
-* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再設定が必要になります。 詳細と手順については、<a data-type="default" href="https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0">[What's New (新機能に関するページ)]を参照してください。
-* 次のサービスを外部化できるようになりました。 設定方法については、<a data-type="default" href="https://circleci.com/docs/2.0/server-3-install/">[Server v3.x installation guide (CircleCI Server v3.x のインストールガイド])を参照してください。
+* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再設定が必要になります。 詳細と手順については、<a data-type="default" href="https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0[What's New (新機能に関するページ)]を参照してください。
+* 次のサービスを外部化できるようになりました。 設定方法については、<a data-type="default" href="https://circleci.com/docs/2.0/server-3-install/[Server v3.x installation guide (CircleCI Server v3.x のインストールガイド])を参照してください。
 ** Postgres
 ** MongoDB
 ** Vault
 * バックアップと復元機能が利用できるようになりました。 詳細については、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[[Backup and Restore (バックアップと復元)]]ガイドを参照してください。
 * クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と構成は KOTS 管理 UI で行えます。 詳細については、https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[[Metrics and Monitoring (メトリクスと監視)]]に関するページを参照してください。
 * 2 X-large リソース クラスがサポートされるようになりました。 大きいリソース クラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
-* ビルドしたアーティファクトとテスト結果のライフサイクルをKOTS 管理者コンソールの「Storage Object Expiry」で設定できるようになりました。 また、期限を無効にしてアーティファクトとテスト結果を無期限で保持するオプションも追加されました。
+* ビルドしたアーティファクトとテスト結果のライフサイクルをKOTS 管理者コンソールの「Storage Object Expiry」で設定できるようになりました。
 
 === 修正点
 
@@ -149,10 +167,12 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 - GitHub でのチェックが重複する問題を受け、`output-processor` の環境変数が変更されました。
 - Flyway で管理される順不同のデータベース移行に対応するため、`vm-service` のデプロイ構成が変更されました。
 
+ifndef::pdf[]
 == 次に読む
 CircleCl Server v3.x の詳しい情報については、以下をご覧ください。
 
-* https://circleci.com/docs/2.0/server-3-overviewServer 3.x の概要]
-* https://circleci.com/docs/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
-* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
-* https://circleci.com/docs/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
+* https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server 3.x の概要]
+* https://circleci.com/docs/ja/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/ja/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/ja/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
+endif::pdf[]

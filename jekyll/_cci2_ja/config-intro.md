@@ -106,7 +106,6 @@ Although we’ve only made two small changes to the config, these represent sign
 
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
-
 {% highlight yaml linenos %}
 version: 2.1
 jobs:
@@ -131,6 +130,7 @@ jobs:
           command: |
             node -v
 {% endhighlight %}
+
 
 We also added a small `run` block that demonstrates we are running in a node container.
 

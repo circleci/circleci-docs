@@ -33,13 +33,15 @@ https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およ�
 === KOTS 管理者 - メトリクス グラフ
 デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 デプロイ後、Prometheus インスタンスのアドレスを KOTS 管理者ダッシュボードに追加できます。 KOTS ではこのアドレスを使用して、クラスタに含まれるコンテナの CPU とメモリ使用率のグラフ データを生成します。
 
-デフォルトの Prometheus アドレスは、`http://prometheus-server` です。
+The default Prometheus address is `\http://prometheus-server`
 
-KOTS ダッシュボードの [Configure graphs (グラフの構成)] を選択し、 `http://prometheus-server` と入力すると、KOTS でリソース使用率グラフが生成されます。
+From the KOTS dashboard, select "configure graphs". Then enter `\http://prometheus-server` and KOTS will generate resource
+usage graphs.
 
 === Telegraf
-CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
-この構成は完全にカスタマイズ可能で、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
+Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
+The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
+by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
 
 === Telegraf から Datadog へのメトリクスの転送
 以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
