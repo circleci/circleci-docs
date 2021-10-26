@@ -6,12 +6,17 @@
 # https://help.github.com/articles/about-codeowners/
 
 *.md @circleci/docs
-*.adoc @circleci/docs @circleci/translations
-*.pdf @circleci/docs @circleci/translations
+*.adoc @circleci/docs
+*.pdf @circleci/docs
 
-/jekyll/*.md @circleci/translations
+/jekyll/_cci2_ja/ @circleci/translations
+/jekyll/_data/ja/ @circleci/translations
+/jekyll/_includes/ja/ @circleci/translations
+/jekyll/ja/ @circleci/translations
+*_ja* @circleci/translations
 
 /src-js/** @circleci/docs-disco
-./package*.json @circleci/docs-disco
-./*.lock @circleci/docs-disco
-./Gemfile* @circleci/docs-disco
+*package*.json @circleci/docs-disco
+*.lock @circleci/docs-disco
+Gemfile* @circleci/docs-disco
+.*rc* @circleci/docs-disco
