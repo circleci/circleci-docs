@@ -48,7 +48,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
             echo "通常は Jenkins の Execute Shell の内容をコピー ＆ ペーストすればよいだけです"
 ```
 
-Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ### inference コマンドは CircleCI 2.0 でも実行できますか?
 {: #does-circleci-20-run-inference-commands }
@@ -58,13 +58,13 @@ CircleCI 2.0 は、プロジェクトの内容から推測して変換するよ�
 ### 基本イメージを作成していなくても、CircleCI 2.0 を使用できますか?
 {: #can-i-use-circleci-20-without-creating-base-images }
 {:.no_toc}
-Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
+はい、CircleCIが提供しているものをお使いください。 ただし、お使いになる基本イメージのサポートが将来のリリースによって終了する場合もありますのでご注意ください。
 
 たとえば `circleci/build-image:ubuntu-14.04-XL-922-9410082` というイメージは、CircleCI の Web アプリケーションで使用している Ubuntu 14.04 (Trusty Tahr) のイメージと同等の内容になっています。 容量はかなり大きく (非圧縮時で 17.5 GB 程度)、ローカル環境でのテストにはあまり適していません。
 
-このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
+このイメージは、デフォルトで `ubuntu` ユーザーとしてアクションを実行し、Docker Compose で提供されるネットワーク サービスと連携するよう設計されています。
 
-Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
+このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
 
 ## ホスティング
 {: #hosting }
@@ -72,7 +72,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 ### CircleCI 2.0 はオンプレミスでも利用できますか?
 {: #is-circleci-20-available-to-enterprise-clients }
 {:.no_toc}
-Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
+はい、お客様のオンプレミス環境でもご利用いただけます。詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
@@ -96,9 +96,9 @@ Enterpriseという名称は、ファイアウォールの内側を指すため�
 {:.no_toc}
 CircleCI アプリケーションの Workflows タブで、エラー メッセージが出力されていないかどうかを確認してください。 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-`config.yml` のフォーマットエラーを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
+詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
 
-After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+`config.yml` のフォーマットエラーを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
 
 ### 「usage キュー」と「run キュー」の違いは何ですか?
 {: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
@@ -124,7 +124,7 @@ If you are not seeing a project you would like to build, and it is not currently
 {:.no_toc}
 CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストすると、ビルドが失敗します。 並列処理数の上限を引き上げたい場合は、[サポート センターまたはカスタマー サクセス マネージャー](https://support.circleci.com/hc/ja)にお問い合わせください。
 
-### Docker イメージの名前の付け方は？ Where do they come from?
+### Docker イメージの名前の付け方は？ 規則について教えてください。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
 CircleCI 2.0 では、現在のところ [Docker Hub](https://hub.docker.com) からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ](https://hub.docker.com/explore/)に対して行えるのは、以下のように名称やタグを指定したプルのみです。
@@ -166,9 +166,9 @@ jobs:
       TZ: "America/Los_Angeles"
 ```
 
-設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
+この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
-A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
 
 ## ワークフロー
 {: #workflows }
@@ -181,7 +181,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 ### Workflows でビルドの「自動キャンセル」はできますか？
 {: #can-i-use-the-auto-cancel-feature-with-workflows }
 {:.no_toc}
-Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
+<br/>可能です。「[ビルドのスキップ・キャンセル]({{ site.baseurl }}/ja/2.0/skip-build/)」で設定手順をご確認ください。
 
 ### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 {: #can-i-use-storetestresults-with-workflows }
@@ -216,12 +216,12 @@ Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/
 ### 変更のあった単一のジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-はい。
+いいえ、できません。
 
 ### Workflows でフォークするプルリクエストをビルドすることは可能ですか？
 {: #can-i-build-fork-prs-using-workflows }
 {:.no_toc}
-Yes!
+はい。
 
 ### ワークフローの実行スケジュールを指定することは可能ですか?
 {: #can-workflows-be-scheduled-to-run-at-a-specific-time-of-day }
@@ -241,7 +241,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### 複数のワークフローの実行スケジュールを指定することは可能ですか?
 {: #can-i-schedule-multiple-workflows }
 {:.no_toc}
-`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
+はい、可能です。`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
 
 ### スケジュールを設定したワークフローは、指定した時間どおりに正確に実行されますか?
 {: #are-scheduled-workflows-guaranteed-to-run-at-precisely-the-time-scheduled }
@@ -254,7 +254,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-You will need a [Performance plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+[Performance plan](https://circleci.com/pricing/usage/) と、 [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) が必要となります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
 
 ### 使用している Windows のバージョンを教えてください。
 {: #what-exact-version-of-windows-are-you-using }
@@ -278,7 +278,7 @@ Windows Server 2019 Datacenter エディションの Server Core オプション
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+残念ながら、現時点ではサーバー インストール版の CircleCI で Windows をご利用いただくことはできません。
 
 ## 料金・支払い
 {: #billing }

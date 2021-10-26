@@ -72,9 +72,9 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblockone.Server}
+{:.tab.windowsblockone.Server_3}
 ```yaml
-version: 2.0
+version: 2.1
 
 jobs:
   build: # name of your job
@@ -83,11 +83,16 @@ jobs:
     resource_class: windows.medium
     steps:
       - checkout
-      - run: dotnet tool install --global PowerShell
-      - run: pwsh ./<my-script>.ps1
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblocktwo.Server}
+{:.tab.windowsblockone.Server_2}
 ```yaml
 version: 2
 
@@ -123,10 +128,10 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 
 {:.tab.windowsblocktwo.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -140,7 +145,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
+{:.tab.windowsblocktwo.Server_3}
 ```yaml
 version: 2.1
 
@@ -155,7 +160,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblocktwo.Server_2}
 ```yaml
 version: 2
 
@@ -170,14 +175,14 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
+ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
 
 # Windows Executor でのシェルの指定
 {: #specifying-a-shell-with-the-windows-executor }
 
-There are three shells that you can use to run job steps on Windows:
+Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
 
-* PowerShell 5
+* PowerShell (Windows Orb のデフォルト)
 * Bash
 * コマンド
 
@@ -230,7 +235,7 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockfour.Server}
+{:.tab.windowsblockthree.Server_2}
 ```YAML
 version: 2
 
@@ -273,7 +278,7 @@ jobs:
 
 ```
 
-設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
+{:.tab.windowsblockfour.Server_3}
 ```YAML
 version: 2.1
 
@@ -308,7 +313,7 @@ jobs:
 
 Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
-最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
+設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
 ```yaml
 version: 2.1

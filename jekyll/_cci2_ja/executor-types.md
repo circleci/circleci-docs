@@ -25,7 +25,7 @@ version:
 {:.no_toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 *Executor タイプ*は、ジョブを実行する基盤テクノロジーまたは環境を定義します。 CircleCI では、以下の 4 つの環境でジョブを実行できます。
@@ -83,17 +83,17 @@ Docker Executor の詳細については、「[CircleCI を設定する]({{ site
 jobs:
   build:
     docker:
-    # Primary container image where all steps run.
+    # すべてのステップが実行されるプライマリ コンテナ イメージ
      - image: buildpack-deps:trusty
-    # Secondary container image on common network.
+    # 共通ネットワーク上のセカンダリ コンテナ イメージ
      - image: mongo:2.6.8-jessie
        command: [mongod, --smallfiles]
 
     working_directory: ~/
 
     steps:
-      # command will execute in trusty container
-      # and can access mongo on localhost
+      # コマンドは、信頼できるコンテナ内で実行され、
+      # ローカルホスト上で mongo にアクセスできます
       - run: sleep 5 && nc -vz localhost 27017
 ```
 Docker イメージは、Docker Hub でイメージ名とバージョン タグを使用するか、レジストリ内のイメージへの URL を使用して、以下の 3 つの方法で指定できます。
@@ -160,20 +160,20 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
-| 機能                                                                                      | `docker`        | `machine` |
-| --------------------------------------------------------------------------------------- | --------------- | --------- |
-| 起動時間                                                                                    | 即時              | 30 ～ 60 秒 |
-| クリーン環境                                                                                  | ○               | ○         |
-| カスタム イメージ                                                                               | ○<sup>(1)</sup> | ×         |
-| Docker イメージのビルド                                                                         | ○<sup>(2)</sup> | ○         |
-| ジョブ環境の完全な制御                                                                             | ×               | ○         |
-| 完全なルート アクセス                                                                             | ×               | ○         |
-| 複数データベースの実行                                                                             | ○<sup>(3)</sup> | ○         |
-| 同じソフトウェアの複数バージョンの実行                                                                     | ×               | ○         |
-| [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                       | ○               | ○         |
-| 特権コンテナの実行                                                                               | ×               | ○         |
-| Docker Compose とボリュームの使用                                                                | ×               | ○         |
-| [リソースのカスタマイズ (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○               | ○         |
+| 機能                                                                                         | `docker`        | `machine` |
+| ------------------------------------------------------------------------------------------ | --------------- | --------- |
+| 起動時間                                                                                       | 即時              | 30 ～ 60 秒 |
+| クリーン環境                                                                                     | ○               | ○         |
+| カスタム イメージ                                                                                  | ○<sup>(1)</sup> | ×         |
+| Docker イメージのビルド                                                                            | ○<sup>(2)</sup> | ○         |
+| ジョブ環境の完全な制御                                                                                | ×               | ○         |
+| 完全なルート アクセス                                                                                | ×               | ○         |
+| 複数データベースの実行                                                                                | ○<sup>(3)</sup> | ○         |
+| 同じソフトウェアの複数バージョンの実行                                                                        | ×               | ○         |
+| [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)                       | ○               | ○         |
+| 特権コンテナの実行                                                                                  | ×               | ○         |
+| Docker Compose とボリュームの使用                                                                   | ×               | ○         |
+| [リソースのカスタマイズ (CPU/RAM)]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class) | ○               | ○         |
 {: class="table table-striped"}
 
 <sup>(1)</sup> \[Docker イメージの使用\]\[custom-images\] についての記事を参照してください。
@@ -209,18 +209,10 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 jobs:
   build:
     docker:
-    # すべてのステップが実行されるプライマリ コンテナ イメージ
-     - image: buildpack-deps:trusty
-    # 共通ネットワーク上のセカンダリ コンテナ イメージ
-     - image: mongo:2.6.8-jessie
-       command: [mongod, --smallfiles]
-
-    working_directory: ~/
-
+      - image: buildpack-deps:trusty
+    resource_class: xlarge
     steps:
-      # コマンドは、信頼できるコンテナ内で実行され、
-      # ローカルホスト上で mongo にアクセスできます
-      - run: sleep 5 && nc -vz localhost 27017
+    #  ...  other config
 ```
 
 ## Machine の使用
@@ -249,7 +241,7 @@ jobs:
 
 使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images)で確認できます。
 
-以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **メモ:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
+以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **メモ:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
 {:.tab.machineblock.Server}
 ```yaml
@@ -260,16 +252,16 @@ jobs:
       docker_layer_caching: true    # デフォルトは false
 ```
 
-**注:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/2.0/vm-service)を参照してください。
+**注:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。
 
-The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on machine executor. This range should not be used in your jobs.
+IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での内部使用のために CircleCI が予約しています。 この範囲はジョブ内でご使用にならないでください。
 
 ## macOS を使用する
 {: #using-macos }
 
-_クラウド版 CircleCI で利用可能です。_
+_クラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。_
 
-`macos` Executor を使用すると、VM 上の macOS 環境でジョブを実行できます。 また、使用する Xcode のバージョンも指定できます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)」セクションを参照してください。
+`macos` Executor を使用すると、VM 上の macOS 環境でジョブを実行できます。 また、使用する Xcode のバージョンも指定できます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションを参照してください。
 
 ```yaml
 jobs:
@@ -292,8 +284,6 @@ jobs:
 
 {:.tab.windowsblock.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable Orb usage.
-
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
@@ -305,15 +295,6 @@ jobs:
 
     steps:
       # Windows 仮想マシン環境で実行するコマンド
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-
-jobs:
-  build: # name of your job
-    executor: win/default # executor type
-
-    steps:
-      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
@@ -374,4 +355,4 @@ CircleCI Server では、VM サービスを構成することで GPU 対応の m
 ## 関連項目
 {: #see-also }
 
-[設定ファイル リファレンス]({{ site.baseurl }}/2.0/configuration-reference/)
+[設定ファイル リファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/)
