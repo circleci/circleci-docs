@@ -63,7 +63,7 @@ jobs:
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
@@ -100,7 +100,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblock.Server_3}
 ```yaml
 version: 2.1
 
@@ -115,7 +115,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.switcher.Server-v2}
+{:.tab.windowsblock.Server_2}
 ```yaml
 version: 2
 
@@ -145,7 +145,7 @@ Orb は、構成を簡略化したりプロジェクト間で再利用したり�
 ## 組織の切り替え
 {: #org-switching }
 
-In the top left, you will find the Org switcher.
+CirlceCI の画面左上に、組織を切り替えるメニューがあります。
 
 
 {:.tab.switcher.Cloud}

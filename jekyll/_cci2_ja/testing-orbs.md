@@ -77,21 +77,21 @@ Orb を初期化すると、[greet.sh](https://github.com/CircleCI-Public/Orb-Pr
 
 ```yaml
 
-# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml
 
-# 各テストの前に実行
-setup() {
-    # Load our script file.
-source ./src/scripts/greet.sh
-}
-
-@test '1: Greet the world' {
-    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
-    export PARAM_TO="World"
-    # "Greet" 関数の出力を取得する
-    result=$(Greet)
-    [ "$result" == "Hello World" ]
-}
+description: >
+  This command echos "Hello World" using file inclusion.
+parameters:
+  to:
+    type: string
+    default: "World"
+    description: "Hello to whom?"
+steps:
+  - run:
+      environment:
+        PARAM_TO: <<parameters.to>>
+      name: Hello Greeting
+      command: <<include(scripts/greet.sh)>>
 
 ```
 

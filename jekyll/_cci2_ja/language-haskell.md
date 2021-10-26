@@ -173,5 +173,5 @@ jobs:
 
 デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。 通常、実際のプロジェクトはこれよりも複雑です。 場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 Have fun!
+このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。 通常、実際のプロジェクトはこれよりも複雑です。 場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 ぜひお試しください。
 
