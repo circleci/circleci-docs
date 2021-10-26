@@ -981,7 +981,7 @@ ja:
           link: ja/2.0/server-3-install-build-services
           i18n_name: フェーズ3 - ビルドサービスのインストール
         - name: Phase 4 - Post Installation
-          link: v2.0/server-3-install-post
+          link: ja/2.0/server-3-install-post
           i18n_name: フェーズ4 - インストールの後処理
         - name: Migration
           link: ja/2.0/server-3-install-migration
