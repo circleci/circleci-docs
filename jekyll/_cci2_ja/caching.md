@@ -139,7 +139,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 commands:
   create_concatenated_package_lock:
     description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
-        parameters:
+    parameters:
       filename:
         type: string
     steps:
@@ -384,8 +384,7 @@ steps:
 {: #bundler-ruby }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？**
-はい。ただし、注意点があります。
+**部分キャッシュ リストアを使用しても安全でしょうか？** はい。ただし、注意点があります。
 
 Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
 
@@ -496,8 +495,8 @@ steps:
 {: #pip-python }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ ** 
-はい。 ただし、Pipenv を使用する必要があります。
+**部分キャッシュ リストアを使用しても安全でしょうか？**
+はい。ただし、Pipenv を使用する必要があります。
 
 Pip では、`requirements.txt` で明示的に指定されていないファイルを使用できます。 [Pipenv](https://docs.pipenv.org/) を使用するには、ロック ファイルでバージョンを明示的に指定する必要があります。
 

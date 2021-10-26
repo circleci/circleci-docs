@@ -21,7 +21,7 @@ CircleCI をはじめ、継続的デリバリー プロバイダーは、こう�
 
 CircleCI では、認証情報やシークレットを複数の[コンテキスト]({{site.baseurl}}/2.0/contexts)に分割して、個々に使用したり、ビルド ステップで結合したりすることが可能です。 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 こうすれば、あるビルド ステップでセキュリティ エラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を "[最小権限の原則](https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%E3%81%AE%E5%8E%9F%E5%89%87)" といいます。 例えば、依存関係をダウンロードしてビルド スクリプトを実行するステップには、デプロイ キーへのアクセスを付与しないようにします。 このステップではデプロイ キーがまったく必要ないためです。
 
-また、ソフトウェアのデプロイと署名に使用する機密コンテキストを、GitHub グループの管理下にある[制限付きコンテキスト]({{site.baseurl}}/2.0/contexts/#restricting-a-context)に配置すれば、  シークレットへのアクセスを承認済みのユーザーのみに限定できます。 マージ前のレビューを義務付ける GitHub のブランチ保護機能と、この手法を組み合わせることで、認証情報が悪意のあるコードに公開される可能性を軽減できます。
+また、ソフトウェアのデプロイと署名に使用する機密コンテキストを、GitHub グループの管理下にある[制限付きコンテキスト]({{site.baseurl}}/2.0/contexts/#restricting-a-context)に配置すれば、  シークレットへのアクセスを承認済みのユーザーのみに限定できます。 These secrets are only then accessible to authorized users. マージ前のレビューを義務付ける GitHub のブランチ保護機能と、この手法を組み合わせることで、認証情報が悪意のあるコードに公開される可能性を軽減できます。
 
 ### 開発者としてリスクを最小化するには
 {: #minimizing-risk-as-a-developer }
@@ -56,7 +56,7 @@ $ yarn install  --frozen-lockfile
 
 依存関係ファイルをスキャンするツールは多数あり、その多くは特定の言語やツール チェーンの開発元によって提供されています。 CircleCI には、[依存関係のスキャン](https://circleci.com/developer/ja/orbs?query=&category=Security)を行う Orb があります。 また、アプリケーションのスキャンの頻度をプッシュの頻度よりも高める定期的なスキャンを行うための cron ジョブも提供しています。
 
-このようなハッシュによる依存関係の固定を使用すれば、既知の正常なバージョンが不正なバイナリやパッケージにひそかに置き換えられてしまう事態を防げます。 これにより、アップストリーム リポジトリに不正アクセスする狭い範囲の攻撃を防御し、 ワークステーションや CI ビルドを保護することができます。
+Using dependency pinning with hashes like this prevents malicious binaries or packages from silently replacing known good versions. It protects against a narrow range of attacks where the upstream repository is compromised. This can protect your workstation and CI builds.
 
 ## まとめ
 {: #conclusion }

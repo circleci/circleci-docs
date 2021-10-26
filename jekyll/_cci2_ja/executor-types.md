@@ -11,7 +11,9 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
+[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
+[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 以下のセクションに沿って、利用可能な Executor タイプ (`docker`、`machine`、`macos`、`windows`) について説明します。
 
@@ -21,6 +23,10 @@ version:
 ## 概要
 {: #overview }
 {:.no_toc}
+
+<div class="alert alert-warning" role="alert">
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+</div>
 
 *Executor タイプ*は、ジョブを実行する基盤テクノロジーまたは環境を定義します。 CircleCI では、以下の 4 つの環境でジョブを実行できます。
 
@@ -38,7 +44,7 @@ version:
 ## Docker を使用する
 {: #using-docker }
 
-`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリ コンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。 設定ファイルで最初にリストされているイメージがプライマリ コンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
 Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 Docker イメージは、すべてのステップが実行されるプライマリ コンテナを生成する [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで指定します。
 
@@ -71,23 +77,23 @@ Docker Executor の詳細については、「[CircleCI を設定する]({{ site
 
 ### 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
-ジョブには、複数のイメージを指定できます。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合には、複数イメージの指定が役に立ちます。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 すべてのコンテナは共通ネットワーク内で動作します。また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
+ジョブには、複数のイメージを指定できます。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合には、複数イメージの指定が役に立ちます。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 すべてのコンテナは共通ネットワーク内で動作します。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
 
 ```yaml
 jobs:
   build:
     docker:
-    # すべてのステップが実行されるプライマリ コンテナ イメージ
+    # Primary container image where all steps run.
      - image: buildpack-deps:trusty
-    # 共通ネットワーク上のセカンダリ コンテナ イメージ
+    # Secondary container image on common network.
      - image: mongo:2.6.8-jessie
        command: [mongod, --smallfiles]
 
     working_directory: ~/
 
     steps:
-      # コマンドは、信頼できるコンテナ内で実行され、
-      # ローカルホスト上で mongo にアクセスできます
+      # command will execute in trusty container
+      # and can access mongo on localhost
       - run: sleep 5 && nc -vz localhost 27017
 ```
 Docker イメージは、Docker Hub でイメージ名とバージョン タグを使用するか、レジストリ内のイメージへの URL を使用して、以下の 3 つの方法で指定できます。
@@ -203,10 +209,18 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
-    resource_class: xlarge
+    # すべてのステップが実行されるプライマリ コンテナ イメージ
+     - image: buildpack-deps:trusty
+    # 共通ネットワーク上のセカンダリ コンテナ イメージ
+     - image: mongo:2.6.8-jessie
+       command: [mongod, --smallfiles]
+
+    working_directory: ~/
+
     steps:
-    #  ...  他の構成
+      # コマンドは、信頼できるコンテナ内で実行され、
+      # ローカルホスト上で mongo にアクセスできます
+      - run: sleep 5 && nc -vz localhost 27017
 ```
 
 ## Machine の使用
@@ -235,7 +249,7 @@ jobs:
 
 使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images)で確認できます。
 
-以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効化しています。DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **メモ:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
+以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **メモ:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
 {:.tab.machineblock.Server}
 ```yaml
@@ -248,10 +262,12 @@ jobs:
 
 **注:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/2.0/vm-service)を参照してください。
 
+The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on machine executor. This range should not be used in your jobs.
+
 ## macOS を使用する
 {: #using-macos }
 
-_クラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。_
+_クラウド版 CircleCI で利用可能です。_
 
 `macos` Executor を使用すると、VM 上の macOS 環境でジョブを実行できます。 また、使用する Xcode のバージョンも指定できます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)」セクションを参照してください。
 
@@ -272,10 +288,12 @@ jobs:
 
 `windows` Executor を使用すると、Windows 環境でジョブを実行できます。 シンプルな Windows ジョブを実行する構成例を以下に示します。 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 * クラウド版 CircleCI のバージョン 2.1 の設定ファイル
-* オンプレミス版 CircleCI Server のバージョン 2.0 の設定ファイル。これは、_CircleCI Server v2.18.3 からサポートされた_ Windows イメージと `machine` Executor を使用するシナリオが考えられます。
+* オンプレミス版 CircleCI Server のバージョン 2.0 の設定ファイル。 これは、_CircleCI Server v2.18.3 からサポートされた_ Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
 ```yaml
+version: 2.1 # Use version 2.1 to enable Orb usage.
+
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
@@ -287,6 +305,15 @@ jobs:
 
     steps:
       # Windows 仮想マシン環境で実行するコマンド
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+jobs:
+  build: # name of your job
+    executor: win/default # executor type
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```

@@ -57,7 +57,6 @@ jobs:
       - run: uname -a
       - run: echo "Hello, Arm!"
 
-
   build-large:
     machine:
       image: ubuntu-2004:202101-01
@@ -72,6 +71,7 @@ workflows:
       - build-medium
       - build-large
 ```
+
 {:.tab.armblock.Server}
 ```yaml
 # .circleci/config.yml

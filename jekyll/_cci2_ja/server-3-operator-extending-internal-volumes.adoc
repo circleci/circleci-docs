@@ -11,7 +11,6 @@ version:
 :toc: macro
 :toc-title:
 
-
 toc::[]
 
 == 概要
@@ -90,7 +89,6 @@ storageclass.storage.k8s.io/gp2 patched
 circleci-user ~ $ kubectl get sc
 NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   true                  1d
-
 ----
 
 ここからは、ボリュームを増やしていきましょう。
@@ -161,13 +159,13 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 NOTE: これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動することができます。
 
-Postgres の場合: 
+Postgres の場合:
 [source,bash]
 ----
 circleci-user ~ $ kubectl rollout restart sts postgresql
 ----
 
-Mongodbの場合: 
+Mongodbの場合:
 [source,bash]
 ----
 circleci-user ~ $ kubectl rollout restart sts mongodb

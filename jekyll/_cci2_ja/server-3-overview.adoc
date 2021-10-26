@@ -103,9 +103,10 @@ CircleCI Server アプリケーションは、ロードバランサーを使っ�
 CircleCI Server では、https://www.nomadproject.io/[Nomad]スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
-オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
+オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。
+そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
 
-== サービスs
+== Services
 
 CircleCI Server 3.0 は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
 
@@ -168,7 +169,7 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | circleci-telegraf
 |
-| Telegraf は StatsD メトリクスを収集します。 CircleCI サービスのホワイトボックス メトリクスはすべて、StatsD メトリクスを発行します。これらは Telegraf に送信されますが、他の場所  ( Datadog や Prometheusなど) にエクスポートされるように構成することもできます。
+| Telegraf は StatsD メトリクスを収集します。 CircleCI サービスのホワイトボックス メトリクスはすべて、StatsD メトリクスを発行します。 これらは Telegraf に送信されますが、他の場所  ( Datadog や Prometheusなど) にエクスポートされるように構成することもできます。
 |
 |
 
@@ -205,12 +206,12 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 | domain-service
 | アプリ コア
 | CircleCI ドメイン モデルに関する情報を保存、提供します。 アクセス許可および API と連携しています。
-| ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 	LDAP 認証を使用している場合、すべてのログインが失敗するようになります。
+| ワークフローを開始できなくなります。 一部の REST API 呼び出しが失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 	LDAP 認証を使用している場合、すべてのログインが失敗するようになります。
 |
 
 | exim
 |
-| 一般公開時には削除されます。ただしユーザーは削除後も既存の MTA にメール送信用の認証情報を提供することができます。
+| ただしユーザーは削除後も既存の MTA にメール送信用の認証情報を提供することができます。
 | メール通知が送信されなくなります。
 |
 
@@ -234,7 +235,7 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | kotsadm-kots
 | ライセンス
-| メインの KOTS アプリケーションです。 CircleCI Server のアップグレードと設定を行う KOTS 管理者コンソールを実行します。管理者コンソールは使用できません。
+| メインの KOTS アプリケーションです。 CircleCI Server のアップグレードと設定を行う KOTS 管理者コンソールを実行します。 管理者コンソールは使用できません。
 | CircleCI Server のアップグレードと設定が行えなくなります。
 |
 
@@ -289,7 +290,7 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 | permissions-service
 | アプリ コア
 | CircleCI のアクセス権インターフェイスを提供します。
-| ワークフローを開始できなくなります。 一部の REST API 呼び出しが失敗し、CircleCI UI で 500 エラーが発生する可能性があります。
+| Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
 |
 
 | scheduler
@@ -386,16 +387,17 @@ CircleCI では、インストールするプラットフォームを幅広く�
 
 | OpenShift*
 | テスト未実施
-| 動作しないことが分かっています。 
+| 動作しないことが分かっています。
 
 | Rancher
 | テスト未実施 
 | Minio とランナーで動作する必要があります。
 |===
 
-
+ifndef::pdf[]
 == 次に読む
 
 * https://circleci.com/docs/2.0/server-3-whats-new[CircleCI Server 3.x の新機能]
 * https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x インストールの前提条件]
 * https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+endif::pdf[]

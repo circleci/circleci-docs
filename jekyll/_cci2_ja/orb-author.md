@@ -26,14 +26,14 @@ Orb を初めて作成する方も、本番レベルで準備する方も、[Orb
 キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットは、次の要素で構成されています。
 
 * [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)
-* [Orb Pack]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
+* [Orb パッケージ]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)
 * [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
 ### はじめよう
 {: #getting-started }
 
-**Note:** While the outlined process below only mentions GitHub, the development kit also works with Bitbucket repositories.
+**注:** 以下の手順は GitHub についてのみ記載されていますが、Orb 開発キットは Bitbucket レポジトリでもご使用いただけます。
 
 Orb 開発キットで新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
@@ -41,16 +41,16 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[名前空間]
 
 1. **新しい [GitHub リポジトリ](https://github.com/new)を作成します。 **<br/> リポジトリの名前は、特に重要な役割はありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 Write down the git URL, you will need it in step 4. URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
     **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
     {: class="alert alert-warning"}
 
-1. **[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
+1. **ターミナルを開き、`orb init` CLI コマンドを使用**して、**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)**Orb を初期化します。
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
@@ -60,6 +60,7 @@ circleci orb init /path/to/myProject-orb --private
 ```
 ? Would you like to perform an automated setup of this orb?:（ Orb の自動セットアップを実行しますか？）
   ▸ Yes, walk me through the process. （はい、手順を教えてください。)
+    )
     )
     No, I'll handle everything myself.（いいえ、すべて手動で行います。
 ```
@@ -160,10 +161,7 @@ display:
 description: >
   # ここには、このコマンドの目的を記述します。
   # 短くわかりやすい説明を心がけます。
-description: >
-  # ここには、このコマンドの目的を記述します。
-  # 短くわかりやすい説明を心がけます。
-Hello Worldparameters:
+parameters:
   greeting:
     type: string
     default: "Hello"
