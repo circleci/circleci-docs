@@ -128,10 +128,10 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 
 {:.tab.windowsblocktwo.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -145,7 +145,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
+{:.tab.windowsblocktwo.Server_3}
 ```yaml
 version: 2.1
 
