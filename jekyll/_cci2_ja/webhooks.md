@@ -21,7 +21,7 @@ CircleCI 上で Webhook を設定することにより、CircleCI から情報 (
 ## Webhookのユースケース
 {: #use-cases}
 
-Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
+Webhook は多くの目的にご活用いただけます。 Some possible use cases for webhooks might include:
 
 - カスタム ダッシュボードを作成して、ワークフローやジョブのイベントの可視化または分析を行う。
 - インシデント管理ツール（例：Pagerduty）にデータを送信する。
@@ -45,13 +45,16 @@ CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コ
 
 Webhook には、以下のような多くの HTTP ヘッダーが設定されています。
 
-| ヘッダー名               | 値                                                                             |
-| ------------------- | ----------------------------------------------------------------------------- |
-| 型                   | `application/json
-`                                                           |
-| User-Agent          | 送信者が CircleCI であることを示す文字列（`CircleCI-Webhook/1.0`）。 この値はプレビュー期間中に変更される場合があります。 |
-| Circleci-Event-Type | イベントのタイプ （`workflow-completed`、`job-completed`など）                             |
-| Circleci-Signature  | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。              |
+| ヘッダー名              | 値                                                                                                                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 型                  | `` `application/json ``                                                                                                                                                                                                                                 |
+| User-Agent         | `|
+| User-Agent          | 送信者が CircleCI であることを示す文字列（`CircleCI-Webhook/1.0`）。 この値はプレビュー期間中に変更される場合があります。</td>
+</tr>
+<tr>
+  <td>Circleci-Event-Type</td>
+  <td>The type of event, (<code>workflow-completed`, `job-completed`, etc) |
+| Circleci-Signature | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.                                                                                                                                       |
 {: class="table table-striped"}
 
 ## Webhookのセットアップ
@@ -88,7 +91,6 @@ Webhook はプロジェクトごとにセットアップされます。 方法�
 POST /uri HTTP/1.1
 Host: your-webhook-host
 circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
-
 ```
 
 現在、最新の（そして唯一の）署名バージョンは v1 です。 ダウングレード攻撃を防ぐために、最新の署名タイプを*必ず*確認する必要があります。
@@ -140,7 +142,6 @@ verify_signature(
     },
     'foo',
 )
-
 ```
 
 ## Webhookのイベント仕様
@@ -151,7 +152,7 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 | イベントタイプ            | 説明                  | 状態の例                                                     | 含まれるサブエンティティ                |
 | ------------------ | ------------------- | -------------------------------------------------------- | --------------------------- |
 | workflow-completed | ワークフローが終了状態になっています。 | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン     |
-| job-completed      | ジョブが終了状態になっています。    | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
+| job-completed      | ジョブが終了状態になっています。    | "success", "failed", "canceled", "unauthorized"          | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
 {: class="table table-striped"}
 
 ## Webhookの共通のトップ レベル キー
@@ -207,14 +208,14 @@ Webhook イベントに関連する組織に関するデータ
 Webhook イベントに関連するジョブに関するデータ
 
 
-| フィールド         | 常に表示 | 説明                                                               |
-| ------------- | ---- | ---------------------------------------------------------------- |
-| id            | ○    | ジョブの一意の ID                                                       |
-| number        | ○    | ジョブの自動インクリメント番号。CircleCI の API でプロジェクト内のジョブを識別するために使用される場合があります。 |
-| name          | ○    | .circleci/config.yml で定義されているジョブ名                                |
-| status        | ○    | ジョブの現在の状態                                                        |
-| started\_at | ○    | ジョブの実行が開始された時間                                                   |
-| stopped\_at | ×    | ワークフローが終了状態になった時間（該当する場合）                                        |
+| フィールド         | 常に表示 | 説明                                                                |
+| ------------- | ---- | ----------------------------------------------------------------- |
+| id            | ○    | ジョブの一意の ID                                                        |
+| number        | ○    | ジョブの自動インクリメント番号。 CircleCI の API でプロジェクト内のジョブを識別するために使用される場合があります。 |
+| name          | ○    | .circleci/config.yml で定義されているジョブ名                                 |
+| status        | ○    | ジョブの現在の状態                                                         |
+| started\_at | ○    | ジョブの実行が開始された時間                                                    |
+| stopped\_at | ×    | ワークフローが終了状態になった時間（該当する場合）                                         |
 {: class="table table-striped"}
 
 
@@ -268,21 +269,21 @@ Webhook イベントに関連するトリガーに関するデータ
 
 注：将来、パイプラインが Git コミットと関連していない場合など情報が当てはまらない場合、VCS マップまたはそのコンテンツが提供されないことがあります。
 
-| フィールド                   | 常に表示 | 説明                                                      |
-| ----------------------- | ---- | ------------------------------------------------------- |
-| target_repository_url | ×    | コミットをビルドするレポジトリへの URL                                   |
-| origin_repository_url | ×    | コミットが作成されたレポジトリへの URL （フォークされたプルリクエストの場合のみ異なります）        |
-| revision                | ×    | ビルドする Git コミット                                          |
-| commit.subject          | ×    | コミットのサブジェクト（コミットメッセージの先頭行） 長いコミットサブジェクトは切り捨てられる場合があります。 |
-| commit.body             | ×    | コミットの本文（コミットメッセージの後続の行） 長いコミット本文は切り捨てられる場合があります。        |
-| commit.author.name      | ×    | コミットのオーサー名                                              |
-| commit.author.email     | ×    | コミットのオーサーのメールアドレス                                       |
-| commit.authored\_at   | ×    | コミットがオーサリングされた時のタイムスタンプ                                 |
-| commit.committer.name   | ×    | コミットのコミッター名                                             |
-| commit.committer.email  | ×    | コミットのコミッターのメールアドレス                                      |
-| commit.committed_at     | ×    | コミットがコミットされた時のタイムスタンプ                                   |
-| branch                  | ×    | ビルドされたブランチ                                              |
-| tag                     | ×    | ビルドされたタグ（「ブランチ」と相互排他的）                                  |
+| フィールド                   | 常に表示 | 説明                                                                                                   |
+| ----------------------- | ---- | ---------------------------------------------------------------------------------------------------- |
+| target_repository_url | ×    | コミットをビルドするレポジトリへの URL                                                                                |
+| origin_repository_url | ×    | コミットが作成されたレポジトリへの URL （フォークされたプルリクエストの場合のみ異なります）                                                     |
+| revision                | ×    | ビルドする Git コミット                                                                                       |
+| commit.subject          | ×    | Commit subject (first line of the commit message). Note that long commit subjects may be truncated.  |
+| commit.body             | ×    | Commit body (subsequent lines of the commit message). Note that long commit bodies may be truncated. |
+| commit.author.name      | ×    | コミットのオーサー名                                                                                           |
+| commit.author.email     | ×    | コミットのオーサーのメールアドレス                                                                                    |
+| commit.authored\_at   | ×    | コミットがオーサリングされた時のタイムスタンプ                                                                              |
+| commit.committer.name   | ×    | コミットのコミッター名                                                                                          |
+| commit.committer.email  | ×    | コミットのコミッターのメールアドレス                                                                                   |
+| commit.committed_at     | ×    | コミットがコミットされた時のタイムスタンプ                                                                                |
+| branch                  | ×    | ビルドされたブランチ                                                                                           |
+| tag                     | ×    | ビルドされたタグ（「ブランチ」と相互排他的）                                                                               |
 {: class="table table-striped"}
 
 

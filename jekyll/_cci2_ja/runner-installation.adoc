@@ -57,14 +57,7 @@ circleci runner resource-class create <resource-class> <description>
 例: `circleci runner resource-class create my-namespace/my-resource-class my-description`。
 +
 NOTE: リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。
-. 次のコマンドを実行して、上記リソース クラスのための認証用トークンを作成します。 
 +
-```
-circleci runner token create <resource-class> <nickname>
-``` 
-+
-例: `circleci runner token create my-namespace/my-resource-class my-token`。 このコマンドを実行すると、認証トークンを含むランナー設定ファイルが生成され、表示されます。
-
 CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
 
 == ジョブ実行の要件
@@ -74,7 +67,7 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 * tar
 * gzip
 * coreutils (Linux のみ)
-* git (推奨。ただし任意)
+* git (推奨。 ただし任意)
 
 == インストール
 
@@ -228,7 +221,7 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 `TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
-CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとジョブを開始しようとすることに注意が必要です。つまり、ジョブの実行に必要な他のサービスがローンチ エージェントより先に起動するよう構成する必要があります。 ローンチ エージェントはサービスとして設定可能であり、次のスクリプトで systemd により管理できます。
+CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとジョブを開始しようとすることに注意が必要です。 ローンチ エージェントはサービスとして設定可能であり、次のスクリプトで systemd により管理できます。
 
 ```
 [Unit]
@@ -457,7 +450,7 @@ NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Ser
 
 この手順では、CircleCI ローンチ エージェントとその依存関係 (Chocolatey、Git、Gzip) を Windows Server にインストールします。
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
 
 * また、このセットアップをドメイン環境で行う際には、Windows Server はドメイン メンバーである必要があります。 ランナー インスタンスは、ドメイン コントローラーとして動作している Windows Server では実行できません。
 
@@ -470,13 +463,13 @@ NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Ser
 . 以下を PowerShell で実行します。
 +
 ```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
 ./Install-CircleCIRunner.ps1
 ```
 +
 PowerShell インターフェイスにインストール結果が出力されます。
 
-. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 Please fill the file out with the requested information (see <<Configuration file reference, 設定ファイルのリファレンス>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 Please fill the file out with the requested information (see <<_configuration_file_reference, 設定ファイルのリファレンス>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
 
 セットアップが完了すると、ローンチ エージェントが自動的に起動し、処理対象のジョブの検索を開始します。
 
@@ -497,27 +490,35 @@ runner:
   name: RUNNER_NAME
 ```
 
+NOTE: The launch agent can also be configured via environment variables. These will be prioritized over the YAML file, if set.
+
 === runner.name
+`$LAUNCH_AGENT_RUNNER_NAME`
 
 `RUNNER_NAME` には、このローンチ エージェントに割り当てる一意の名前を設定します。 CircleCI UI でのステータスやジョブ結果の確認時にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
 
 === api.auth_token
+`$LAUNCH_AGENT_API_AUTH_TOKEN`
 
 ここには、CircleCI でのローンチ エージェントの認証に使用するトークンを設定します。このトークンは、CircleCI CLI から生成できます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
 
 === runner.command_prefix
+`$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
 このプレフィックスを設定することで、タスク エージェント プロセスの起動方法をカスタマイズできます。 ここでカスタム スクリプトを使用すると、タスク ランナーの前後で任意のコマンドを実行できます。 指定した引数が実行され、完了時にスクリプトから正しい終了コードが返されるよう特に注意してください。
 
 === runner.working_directory
+`$LAUNCH_AGENT_RUNNER_WORK_DIR`
 
 ここでディレクトリを設定することで、ジョブごとに使用するデフォルトの作業ディレクトリを指定できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行えるよう権限が設定されている必要があります。 設定したディレクトリが存在しない場合は、タスク エージェントにそのディレクトリの作成権限を付与する必要があります。 設定値に `%s` を含めた場合、この変数はジョブごとに異なる値で置き換えられます。 設定した作業ディレクトリは自動的には削除されないことに注意してください。
 
 === runner.cleanup_working_directory
+`$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 この値を設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。 デフォルト値は `false` です。
 
 === runner.mode
+`$LAUNCH_AGENT_RUNNER_MODE`
 
 This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (single-task) or to continuously poll for new available jobs.
 
@@ -529,6 +530,7 @@ The possible values are:
 NOTE: The default value is continuous.
 
 === runner.max_run_time
+`$LAUNCH_AGENT_RUNNER_MAX_RUN_TIME`
 
 This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
 
@@ -554,12 +556,14 @@ Draining can end in one of two ways:
 * An additional TERM signal is received by the Launch Agent during "draining".
 
 === runner.idle_timeout
+`$LAUNCH_AGENT_RUNNER_IDLE_TIMEOUT`
 
 This timeout will enable a launch agent to terminate if no task has been claimed within the given time period. The value is a string with the following unit identifiers: `h`, `m` or `s` for hours, minutes and seconds, respectively (e.g., `5m` is 5 minutes).
 
 NOTE: The default behaviour is to never time out due to inactivity.
 
 === runner.ssh.advertise_addr
+`$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
 
 This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
 

@@ -63,7 +63,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
 1. **環境をスピンアップする:** このプロジェクトのデフォルト設定には、[Orb](https://circleci.com/ja/orbs) が利用されています。 Orb を使用すると、よく使用する設定にすばやくアクセスすることができます。 この例では、ユーザーに簡単なあいさつをする "ビルド済み" ジョブを実行する `circleci/welcome-orb@0.4.1` を使用しています。
 
-1. **ステップの結果を表示する:** どのジョブも、一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) など、一部のステップは、CircleCI で予約されている特別なコマンドです。 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 `welcome` Orb を使用しているので、カスタム ステップは表示されません。カスタム ステップは Orb 内に設定されています。 しかし、問題ありません。 [Orb のソース](https://circleci.com/ja/developer/orbs/orb/circleci/welcome-orb)はオンラインで確認できます。
+1. **ステップの結果を表示する:** どのジョブも、一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) など、一部のステップは、CircleCI で予約されている特別なコマンドです。 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 `welcome` Orb を使用しているので、カスタム ステップは表示されません。 しかし、問題ありません。 [Orb のソース](https://circleci.com/ja/developer/orbs/orb/circleci/welcome-orb)はオンラインで確認できます。
 
 リポジトリに実際のソース コードがなく、`config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[CircleCI の設定リファレンス](https://circleci.com/docs/2.0/configuration-reference)を参照してください。
 
@@ -92,7 +92,6 @@ jobs:
           steps:
             - run: npm install
       - run: npm run test
-
 ```
 
 
@@ -110,6 +109,9 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
 
    ```yaml
    version: 2
+   jobs: # we now have TWO jobs, so that a workflow can coordinate them!
+     one: # This is our first job.
+       version: 2
    jobs: # 今回は 2 つのジョブを用意し、ワークフロー機能でジョブの調整を行います。
      one: # 1 つ目のジョブ
        docker: # Docker Executor を使用します。
@@ -137,6 +139,27 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
      version: 2
      one_and_two: # ワークフローの名前
        jobs: # 実行するジョブをここにリストします
+         - one
+         - two
+       steps:
+         - checkout # this pulls code down from GitHub
+         - run: echo "A first hello" # This prints "A first hello" to stdout.
+         - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
+     two: # This is our second job.
+       docker: # it runs inside a docker image, the same as above.
+         - image: circleci/ruby:2.4.1
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+       steps:
+         - checkout
+         - run: echo "A more familiar hi" # We run a similar echo command to above.
+         - run: sleep 15 # and then sleep for 15 seconds.
+   # Under the workflows: map, we can coordinate our two jobs, defined above.
+   workflows:
+     version: 2
+     one_and_two: # this is the name of our workflow
+       jobs: # and here we list the jobs we are going to run.
          - one
          - two
    ```
@@ -211,14 +234,17 @@ Workspace に関する詳細は[こちら](https://circleci.com/docs/2.0/workflo
 
 ターミナルの操作に慣れている場合は、CircleCI のジョブに直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
 
-*SSH 鍵を GitHub アカウントに登録する必要があることにご注意ください。詳細はこちら: <https://help.github.com/articles/connecting-to-github-with-ssh/></p>
+**注:** `rerun job with ssh`を実行するには、 [ジョブにSSHキーを追加する](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job)という手順が必要です。
 
 
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
 {:.tab.switcher.Server-v2}
-![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server_2}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
 ビルドの SSH 有効化セクションから `ssh` の接続先をコピーします。 ターミナルを開き、`ssh` の接続先を貼り付けます。
@@ -231,7 +257,7 @@ ls -al               # 現在のディレクトリに含まれるファイルと
 cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します。
 cat <file_name>      # ファイル <file_name> の内容を表示します。
 ```
-**注:** `rerun job with ssh`を実行するには、 [ジョブにSSHキーを追加する](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job)という手順が必要です。
+*SSH 鍵を GitHub アカウントに登録する必要があることにご注意ください。 詳細はこちら: <https://help.github.com/articles/connecting-to-github-with-ssh/>
 
 ## チームメイトと協力する
 {: #collaborating-with-teammates }
@@ -248,7 +274,7 @@ Git フックを使用してコミットごとに CircleCI `config.yml` を検�
 {: #circleci }
 {:.no_toc}
 
-* [CircleCI CIのブログ](https://circleci.com/blog/)
+* https://circleci.com/blog/
 * [継続的インテグレーションとは](https://circleci.com/blog/what-is-continuous-integration/)
 * CircleCI のアカウント: [GitHub](https://github.com/circleci) (英語)、[Twitter](https://twitter.com/circleci) (英語)、[Facebook](https://www.facebook.com/circleci) (英語)
 

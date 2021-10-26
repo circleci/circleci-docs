@@ -12,6 +12,8 @@ version:
 
 Before you begin with the CircleCI server v3.x build services installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
 
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+
 toc::[]
 
 == Phase 3: Build services installation
@@ -20,7 +22,7 @@ toc::[]
 ==== Overview 
 Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand. 
 
-Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>`
+Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 Locate and enter the following in Settings: 
 
@@ -43,7 +45,7 @@ Once completed you will be able to update your CircleCI server configuration so 
 
 ==== Cluster Creation with Terraform
 
-CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://circleci.com/docs/2.0/server-3-overview[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
+CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
 
 ===== AWS
 You will need some information about your cluster and server installation to complete the required fields for the terraform configuration file (`main.tf`). A full example as well as a full list of variables can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here]. 
@@ -120,7 +122,7 @@ After Terraform is done spinning up the Nomad client(s), it will output the cert
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by issuing the following command: 
 
 ----
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=circleci-server
 ----
 
 You will also need the following information: 
@@ -146,7 +148,7 @@ terraform apply
 After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe.
 
 ==== Configure and Deploy
-Now that you have successfully deployed your Nomad clients, you can configure CircleCI Server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` 
+Now that you have successfully deployed your Nomad clients, you can configure CircleCI Server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` 
 
 Enter the following in Settings: 
 
@@ -164,12 +166,6 @@ Provided in the output from `terraform apply`
 
 * *Nomad Server Certificate Authority (CA) Certificate (required)* - 
 Provided in the output from `terraform apply`
-
-* *Output Processor Load Balancer (required)*
-+
-```bash 
-kubectl get service output-processor --namespace=circleci-server
-```
 
 Click the *Save config* button to update your installation and re-deploy server.
 
@@ -553,16 +549,18 @@ NOTE: that preallocated instances are always running and could potentially incre
 
 Once you have configured and deployed CircleCI server you should validate that VM Service is operational. You can re-run the reality checker project within your CircleCI installation and you should see the VM Service Jobs complete with green. At this point all tests should pass with green. 
 
-== Runner 
+=== Runner 
 
-=== Overview 
+==== Overview 
 
 CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you do need to create a runner and configure the runner agent to be aware your server installation. For complete instructions for setting up runner see the link:https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[runner documentation]. 
 
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation you will need to set up a runner namespace for each organization within your server installation. 
 
+ifndef::pdf[]
 ## What to read next
 
 * https://circleci.com/docs/2.0/server-3-install-post[Server 3.x Phase 4 - Post installation]
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+endif::pdf[]

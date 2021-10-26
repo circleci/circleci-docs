@@ -228,18 +228,51 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 
 **Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
 
-### Images using Xcode 11.7 and later
-{: #images-using-xcode-117-and-later }
+### Switching Rubies with the macOS Orb (Recommended)
+{: #switching-rubies-with-the-macos-orb-recommended }
+
+Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
+
+To get started, include the orb at the top of your config:
+
+```yaml
+# ...
+run:
+  name: Set Ruby Version
+  command:  echo "ruby-2.4" > ~/.ruby-version
+```
+
+Then, call the `switch-ruby` command with the version number required. For example, to switch to Ruby 2.6:
+
+```yaml
+steps:
+# ...
+  - store_artifacts:
+  path: ~/Library/Logs/DiagnosticReports
+```
+
+Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
 
 As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later images default to Ruby 2.7 via `chruby`.
 
-Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
+```yaml
+# ...
+  run:
+  name: Set Ruby Version
+  command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+```
+
+**Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
+
+### Images using Xcode 11.7 and later
+{: #images-using-xcode-117-and-later }
+{:.no_toc}
 
 To switch to another Ruby version, add the following to the beginning of your job.
 
 ```yaml
 # ...
-run:
+  run:
   name: Set Ruby Version
   command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
 ```
@@ -250,45 +283,47 @@ To revert back to the system Ruby, add the following to the beginning of your jo
 
 ```yaml
 # ...
-run:
+  run:
   name: Set Ruby Version
-  command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+  command: echo 'chruby ruby-2.6' >> ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
 {: #images-using-xcode-112-and-later }
+{:.no_toc}
 
-The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
+If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
 ```yaml
-# ...
-run:
-  name: Set Ruby Version
-  command: echo 'chruby ruby-2.6' >> ~/.bash_profile
+steps:
+  # ...
+  To select a version of Ruby to use, add the <code>chruby</code> function to <code>~/.bash_profile</code>:
 ```
+ function to ~/.bash_profile:
+</code>
 
 Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Images using Xcode 11.1 and earlier
 {: #images-using-xcode-111-and-earlier }
+{:.no_toc}
 
-Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
-
-To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
-
-If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
 
 ```yaml
 # ...
-run:
-  name: Set Ruby Version
-  command:  echo "ruby-2.4" > ~/.ruby-version
+  steps:
+  - run:
+      name: pre-start simulator
+      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Installing additional Ruby versions
 {: #installing-additional-ruby-versions }
+
+**Note:** Installing additional Ruby versions consumes a lot of job time. We only recommend doing this if you must use a specific version that is not installed in the image by default.
 
 To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
@@ -402,24 +437,38 @@ After the app has been tested and signed, you are ready to configure deployment 
 
 ### Pre-starting the simulator
 {: #pre-starting-the-simulator }
-{:.no_toc}
 
 Pre-start the iOS simulator before building your application to make sure that the simulator is booted in time. Doing so generally reduces the number of simulator timeouts observed in builds.
 
 To pre-start the simulator, add the following to your `config.yml` file, assuming that you are running your tests on an iPhone 11 Pro simulator with iOS 13.2:
 
 ```yaml
-# ...
-steps:
-  - run:
-      name: pre-start simulator
-      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+orbs:
+  macos: circleci/macos@2
 ```
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+Then call the `preboot-simulator` command, as shown in the example below:
 
-* `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
-* `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
+```yaml
+<code>iPhone 11 Pro (13.3) [<uuid>]</code> for the iPhone simulator.
+```
+ for the iPhone simulator.
+</code>
+
+It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
+
+If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS Orb:
+
+```yaml
+steps:
+  - macos/preboot-paired-simulator:
+      iphone-device: "iPhone 13"
+      iphone-version: "15.0"
+      watch-device: "Apple Watch Series 7 - 45mm"
+      watch-version: "8.0"
+```
+
+**Note:** It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
 
 ### Collecting iOS simulator crash reports
 {: #collecting-ios-simulator-crash-reports }
@@ -429,54 +478,54 @@ Often if your `scan` step fails, for example due to a test runner timeout, it is
 
 ```yaml
 steps:
-# ...
-- store_artifacts:
-  path: ~/Library/Logs/DiagnosticReports
+  # ...
+  - store_artifacts:
+    path: ~/Library/Logs/DiagnosticReports
 ```
 
-### Optimizing Fastlane
+### Fastlane の最適化
 {: #optimizing-fastlane }
 {:.no_toc}
 
-By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the [fastlane docs](https://docs.fastlane.tools/actions/run_tests/#parameters).
+デフォルトでは、Fastlane Scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[Fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_types` を変更して、これらの形式を無効化することができます。
 
-### Optimizing Cocoapods
+### CocoaPods の最適化
 {: #optimizing-cocoapods }
 {:.no_toc}
 
-In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
+基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN の利用が可能な CocoaPods 1.8 以降を使用することをお勧めします。 これにより、ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降では `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前を使用している場合はアップグレードを検討してください。
 
-To enable this, ensure the first line in your Podfile is as follows:
+実行するには　Podfile ファイルの先頭行を次のように記述します。
 
 ```
 source 'https://cdn.cocoapods.org/'
 ```
 
-If upgrading from Cocoapods 1.7 or older, additionally ensure the following line is removed from your Podfile, along with removing the "Fetch CocoaPods Specs" step in your CircleCI Configuration:
+1.7 以前からアップグレードする場合はさらに、Podfile から以下の行を削除すると共に、CircleCI 設定ファイルの "Fetch CocoaPods Specs" ステップを削除します。
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
 ```
 
-To update Cocoapods to the latest stable version, simply update the Ruby gem with the following command:
+CocoaPods を最新の安定版に更新するには、以下のコマンドで Ruby gem を更新します。
 
 ```
 sudo gem install cocoapods
 ```
 
-We also recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
+[Pods ディレクトリをソース管理に](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)チェックインすることをお勧めします。 そうすることで、決定論的で再現可能なビルドを実現できます。
 
-**Note:** The previous S3 mirror we provided for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, we highly recommend switching to the CDN method described above.
+**注:** CocoaPods 1.8 のリリース以降、CocoaPods Spec レポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することを強くお勧めします。
 
-### Optimizing Homebrew
+### Homebrew の最適化
 {: #optimizing-homebrew }
 {:.no_toc}
 
-Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that any step which calls `brew` can take some extra time to complete.
+デフォルトでは Homebrew はすべての操作の開始時に更新の有無を確認します。 Homebrew のリリースサイクルはかなり頻繁なため、 `brew` を呼び出すステップはどれも完了するまでに時間がかかります。
 
-If build speed, or bugs introduced by new Homebrew updates are a concern, this automatic update feature can be disabled. On average, this can save up to 2-5 minutes per job.
+ビルドのスピード、または Homebrewの新たな更新によるバグが問題であれば、自動更新を無効にすることができます。 それにより、一つのジョブにつき最大で平均 2 〜 5 分短縮することができます。
 
-To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
+自動更新を無効にするには、ジョブ内で `HOMEBREW_NO_AUTO_UPDATE` 環境変数を定義します。
 
 ```yaml
 version: 2.1
@@ -491,38 +540,38 @@ jobs:
       - run: brew install wget
 ```
 
-## Supported build and test tools
+## サポートされているビルドおよびテストのツール
 {: #supported-build-and-test-tools }
 
-With the macOS executor on CircleCI, it is possible to customize your build as needed to satisfy almost any iOS build and test strategy.
+CircleCI  では、macOS Executorを使って iOS のビルドやテストに関するほぼすべてのストラテジーに合わせてビルドをカスタマイズできます。
 
-### Common test tools
+### 一般的なテストツール
 {: #common-test-tools }
 {:.no_toc}
 
-The following common test tools are known to work well on CircleCI:
+以下のテストツールは、CircleCI で有効に機能することが確認されています。
 
 * [XCTest](https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/01-introduction.html)
 * [Kiwi](https://github.com/kiwi-bdd/Kiwi)
 * [KIF](https://github.com/kif-framework/KIF)
 * [Appium](http://appium.io/)
 
-### React Native projects
+### React Native プロジェクト
 {: #react-native-projects }
 {:.no_toc}
 
-React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, please see [our demo React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native)
+React Native プロジェクトは、CircleCI  上で `macos` および `docker` Executor タイプを使用してビルドできます。 React Native プロジェクトの設定例は、[React Native のデモアプリケーション](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
-### Creating a `config.yml` File
+### `config.yml` ファイルの作成
 {: #creating-a-configyml-file }
 {:.no_toc}
 
-The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as utilise built-in features such as workspaces and caching. See the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `config.yml` file.
+プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)ドキュメントを参照してください。
 
-## Using Multiple Executor Types (macOS + Docker)
+## 複数の Executor タイプ (macOS + Docker) の使用
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+同じワークフロー内で、複数の [Executor タイプ](https://circleci.com/ja/docs/2.0/executor-types/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 ```yaml
 version: 2.1
@@ -536,11 +585,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install CocoaPods
+          name: CocoaPod のインストール
           command: pod install --verbose
 
       - run:
-          name: Build and run tests
+          name: ビルドとテストの実行
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -556,7 +605,7 @@ jobs:
       - image: bytesguy/swiftlint:latest
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
     steps:
       - checkout
       - run: swiftlint lint --reporter junit | tee result.xml
@@ -570,7 +619,7 @@ jobs:
       - image: bytesguy/danger:latest
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
     steps:
       - checkout
       - run: danger
@@ -581,17 +630,18 @@ workflows:
       - swiftlint
       - danger
       - build-and-test
+
 ```
 
-## Troubleshooting
+## トラブルシューティング
 {: #troubleshooting }
 
-If you are facing build failures while executing your jobs, check out our [support center knowledge base](https://support.circleci.com/hc/en-us/categories/115001914008-Mobile) for answers to common issues.
+ジョブの実行中にビルドが失敗した場合は、 [サポートセンターのナレッジベース](https://support.circleci.com/hc/en-us/categories/115001914008-Mobile)で一般的な問題の解決方法を確認してください。
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
-- See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS project using Fastlane on CircleCI.
-- See the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for a config walkthrough.
-- See the [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/) to learn how to configure Fastlane Match for your project.
+- CircleCI  で Fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
+- 設定ファイルの詳しい説明については、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)を参照してください。
+- Fastlane Match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/2.0/ios-codesigning/)を参照してください。

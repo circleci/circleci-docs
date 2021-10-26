@@ -22,22 +22,16 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 - 複数のマシン タイプへのアクセスの要否
 - Docker レイヤー キャッシュ、ビルドの同時処理、ビルド履歴といった機能の要否
 
-例として、Performance プランでクレジットを使用する場合を考えてみましょう。 Performance プランでは以下を利用できます。
+例として、Performance プランでクレジットを使用する場合を考えてみましょう。 Performance プランでは以下を利用できます。 この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。 大規模なプロジェクトもあれば、CI の構成で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。
 
-- 1 つ以上のクレジット ブロック (25,000 クレジット)
-- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
-- Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
-- macOS のマシン タイプ
-- Docker レイヤーキャッシュ
-
-この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。 大規模なプロジェクトもあれば、CI の構成で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。 たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU 4 基、RAM 8 GB、20 クレジット/分) を使用できます。 一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU 1 基、RAM 2 GB、5 クレジット/分) を使用できます。
+たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU 4 基、RAM 8 GB、20 クレジット/分) を使用できます。 一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU 1 基、RAM 2 GB、5 クレジット/分) を使用できます。
 
 ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
 
 ## クレジットベース プランの設定
 {: #configuring-your-credit-plan }
 
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
+ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
 
 ## Free プラン
 {: #free-plan }
@@ -49,7 +43,7 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 - 依存関係のキャッシュ
 - Windows/Linux でのビルド
 
-従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。 With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats.
+従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。 With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
 
 ## Performance プラン
 {: #performance-plan }
@@ -57,8 +51,8 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
 - すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
-- Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
-- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
+- Medium サイズの macOS マシンへのアクセス
+- 無制限のユーザーシート数
 - Docker レイヤー キャッシュへのアクセス
 - キューイングなし
 - サポート
