@@ -85,7 +85,7 @@ Or to also verify if a service is running for example:
 ## Example project
 {: #example-project }
 
-See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker) on GitHub for a demonstration and use the [full configuration file](https://github.com/CircleCI-Public/circleci-demo-docker/blob/master/.circleci/config.yml) as a template for your own projects.
+See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects.
 
 **Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, run a container in the service's network.
 
