@@ -146,7 +146,7 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 
 ## Submitting Pull Requests
 
-If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and follow the steps in Local Development with Docker above. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
+If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and follow the steps in [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) above. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
 
 ## Docker Tag List for CircleCI Convenience Images
 
