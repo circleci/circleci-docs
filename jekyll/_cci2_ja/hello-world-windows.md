@@ -419,37 +419,51 @@ CircleCI の機能については、以下のドキュメントを確認して�
     * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
-* シェル
+* AWS
+    * AWS CLI 1.16.209
+    * Python 3.6.0
+    * Botocore 1.12.199
+* Shells:
     * Powershell 5
     * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
-* .NET Framework 4.8
+* .NET Framework 5
 * .NET Core
+    * SDK 5.0.402
+    * SDK 5.0.401
     * SDK 3.1.406 (x64)
     * SDK 3.0.100-preview7-012821
     * Runtime 3.0.0-preview6-27804-01
     * SDK 2.2.401
     * Runtime 2.2.6
     * SDK 2.1.801
-* Git 2.22.0
+* Nunit 3.10.0
+* Git 2.33.1
 * Git LFS 2.7.2
+* Gzip 1.3.12
+* 7zip 19.00
+* PsExec64 2.34
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
-* Docker Engine - Enterprise バージョン 18.09.7
+* Docker Engine - Enterprise version 18.09.7
 * NuGet CLI 5.2.0.6090
-* Chocolatey v0.10.15
+* Chocolatey v0.11.2
 * Azure Service Fabric
     * SDK 3.3.617.9590
     * Runtime 6.4.617.9590
+* Azure CLI 2.0.70
 * OpenJDK 12.0.2
-* Node.js v12.8.0
-* NVM (Node Version Manager)
+* Node.js 14.17.5
+* NVM (Node Version Manager) 1.1.7
+* Yarn 1.22.17
 * Ruby 2.6.3
-* Go 1.12.7
-* Python 3.7.3
+* Go 1.17
+* Python 3.9
+* Java 12.0.2
 * Miniconda 3
-* テキスト エディター
-    * nano 2.5.3
-    * vim 8.0.604
+* WinAppDriver 1.1.1809.18001
+* Text editors
+    * nano 2.5
+    * vim 8.2
 * jq 1.5
