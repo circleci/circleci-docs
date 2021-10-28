@@ -88,82 +88,51 @@ jobs:
 ## Sauce Labs
 {: #sauce-labs }
 
-Sauce Labs は、CircleCI ビルド コンテナから独立したネットワーク上にあるブラウザーを操作します。 ブラウザーからテスト対象の Web アプリケーションにアクセスするには、Sauce Labs のセキュア トンネル [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy) を使用して、CircleCI 上の Sauce Labs で Selenium WebDriver テストを実行します。
+Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI, which can be used to execute tests directly from a variety of JavaScript frameworks.
 
-Sauce Connect を使用すると、CircleCI ビルド コンテナ内でテスト サーバーを実行でき、(`localhost:8080` などの URL を使用して) それを Sauce Labs のブラウザーに公開することができます。 パブリックにアクセス可能なステージング環境にデプロイした後にブラウザー テストを実行する場合は、Sauce Connect には関係なく通常の方法で Sauce Labs を使用できます。
+### saucectl
+{: #saucectl }
 
-この例の `config.yml` ファイルは、CircleCI ビルド コンテナ内で実行されているテスト サーバーに対して、Sauce Labs を通してブラウザー テストを実行する方法を示しています。
+If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
 
-{% raw %}
-```yaml
-version: 2
-
-jobs:
-  build:
-    docker:
-      - image: circleci/python:jessie-node-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: Install Sauce Labs and Set Up Tunnel
-          background: true
-          command: |
-            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
-            tar -xzf saucelabs.tar.gz
-            cd sc-*
-            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
-            wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
-      - run: # base image is python, so we run `nosetests`, an extension of `unittest`
-          command: nosetests
-      - run:
-          name: Shut Down Sauce Connect Tunnel
-          command: |
-            kill -9 `cat /tmp/sc_client.pid`
-```
-{% endraw %}
-
-### Sauce Labs browser testing orb example
-{: #sauce-labs-browser-testing-orb-example }
-
-LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。 これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 この Orb を使った並列テストの例は以下のとおりです。
+1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables]({{site.baseurl}}/2.0/env-vars/) in your Circle CI project.
+2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
 
 {% raw %}
 ```yaml
 version: 2.1
 orbs:
-  sauce-connect: saucelabs/sauce-connect@1.0.1
+  saucectl: saucelabs/saucectl-run@2.0.0
+
+jobs:
+  test-cypress:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.2
+      - saucectl/saucectl-run
+
 workflows:
-  browser_tests:
+  version: 2
+  default_workflow:
     jobs:
-      - sauce-connect/with_proxy:
-          name: Chrome テスト
-          steps:
-            - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
-          tunnel_identifier: chrome
-      - sauce-connect/with_proxy:
-          name: Safari テスト
-          steps:
-            - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
-          tunnel_identifier: safari
+      - test-cypress
 ```
 {% endraw %}
-
-Sauce Labs Orb の詳細と、この Orb をワークフローに使用する方法については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にある [Sauce Labs Orb のページ](https://circleci.com/developer/ja/orbs/orb/saucelabs/sauce-connect)を参照してください。
 
 ## BrowserStack と Appium
 {: #browserstack-and-appium }
 
-上の Sauce Labs の例の Sauce Labs のインストールを、BrowserStack などの別のクロスブラウザー テスト プラットフォームのインストールに置き換えることができます。 次に、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)を自分の BrowserStack アカウントに関連付けられた値に設定します。
+As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
 
-モバイル アプリケーションの場合は、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用できます。 それには、ジョブに Appium をインストールし、USERNAME と ACCESS_KEY に CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)を使用します。
+For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
 
 ## Cypress
 {: #cypress }
 
-JavaScript エンドツーエンド テストに使用できるブラウザー テスト ソリューションとして、他にも [Cypress](https://www.cypress.io/) があります。 Selenium アーキテクチャを利用するブラウザー テスト ソリューションとは異なり、Cypress を使用する場合は、アプリケーションと同じ実行ループでテストを実行できます。 このプロセスを簡素化するために、CircleCI 承認済み Orb を使用して、結果を Cypress ダッシュボードにポストせずにすべての Cypress テストを実行するなどのさまざまなテストを実行することができます。 以下に例示する CircleCI 承認済み Orb では、結果がダッシュボードにパブリッシュされずに、すべての Cypress テストが実行されます。
+Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
 
 {% raw %}
 ```yaml
@@ -179,20 +148,20 @@ workflows:
 ```
 {% endraw %}
 
-設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)を参照してください。
+There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/developer/orbs/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## ブラウザー テストのデバッグ
 {: #debugging-browser-tests }
 
-インテグレーション テストのデバッグは一筋縄では行きません。 特に、リモート マシンで実行されている場合はなおさらです。 このセクションでは、CircleCI 上でブラウザー テストをデバッグする方法の例をいくつか示します。
+Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
 
 ### スクリーンショットとアーティファクトの使用
 {: #using-screenshots-and-artifacts }
 {:.no_toc}
 
-[ビルド アーティファクト]({{ site.baseurl }}/ja/2.0/artifacts/)を収集してビルドから使用できるように CircleCI を構成できます。 たとえば、アーティファクトを使用し、ジョブの一部としてスクリーンショットを保存して、ジョブの終了時に表示することができます。 `store_artifacts` ステップでそれらのファイルを明示的に収集し、`path` と `destination` を指定する必要があります。 例については、「CircleCI を設定する」の [store_artifacts]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) セクションを参照してください。
+CircleCI may be configured to collect [build artifacts]({{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
 
-この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
+Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and is supported by most test suites:
 
 *   [直接 Selenium を使用して手動で保存する](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver)
 *   [Cucumber を使用して障害時に自動的に保存する](https://github.com/mattheworiordan/capybara-screenshot)
@@ -202,86 +171,87 @@ workflows:
 {: #using-a-local-browser-to-access-http-server-on-circleci }
 {:.no_toc}
 
-CircleCI 上で HTTP サーバーを実行するテストを行う場合、ローカル マシンで動作するブラウザーを使用して障害テストのデバッグを行うと便利な場合があります。 これは、SSH を有効にした実行によって簡単にセットアップできます。
+If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
 
-1. CircleCI アプリの**[Job (ジョブ)] ページ**の [Rerun Job with SSH (SSH でジョブを再実行)] ボタンを使用して SSH ビルドを実行します。 次のように、SSH からコンテナにログインするコマンドが表示されます。
+1. Run an SSH build using the Rerun Job with SSH button on the **Job page** of the CircleCI app. The command to log into the container over SSH is as follows:
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-2. コマンドにポート転送を追加するには、`-L` フラグを使用します。 次の例では、ブラウザーでの `http://localhost:3000` へのリクエストを CircleCI コンテナ上のポート `8080` に転送します。 これは、ジョブで Ruby on Rails デバッグ アプリを実行し、それがポート 8080 をリスンする場合などに使用できます。 これを実行した後、ブラウザーに移動して http://localhost:3000 をリクエストすると、コンテナのポート 8080 の処理の内容が表示されます。
+2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` on your local browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
 
 **Note:** Update `8080` to be the port you are running on the CircleCI container.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
-3. 次に、ローカル マシンでブラウザーを開き、`http://localhost:8080` に移動すると、CircleCI コンテナ上のポート `3000` で実行されているサーバーに直接リクエストが送信されます。 CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
+3. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
 
-この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
+This is a very easy way to debug things when setting up Selenium tests, for example.
 
 ### VNC からのブラウザー操作
 {: #interacting-with-the-browser-over-vnc }
 {:.no_toc}
 
-VNC を使用して、テストを実行しているブラウザーを表示し、操作することができます。 これは、実ブラウザーを実行するドライバーを使用している場合にのみ機能します。 Selenium が制御するブラウザーを操作できますが、PhantomJS はヘッドレスなので、操作する対象がありません。
+VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
 
-1. VNC ビューアをインストールします。 macOS を使用している場合は、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討してください。 [RealVNC](http://www.realvnc.com/download/viewer/) もほとんどのプラットフォームで使用できます。
+1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/). [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
-2. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
+2. Open a Terminal window, [start an SSH run]({{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
 
 ```bash
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
-3. `vnc4server` パッケージと `metacity` パッケージをインストールします。 `metacity` を使用して、ブラウザーを操作し、ターミナル ウィンドウに戻ります。
+3. Install the `vnc4server` and `metacity` packages. You can use `metacity` to move the browser around and return to your Terminal window.
 
 ```bash
 sudo apt install vnc4server metacity
 ```
-4. CircleCI コンテナに接続したら、VNC サーバーを起動します。
+4. After connecting to the CircleCI container, start the VNC server.
 
 ```bash
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
-5. SSH の接続はセキュリティ保護されているため、強力なパスワードは必要ありません。 しかし、パスワードが *1* つ必要なので、プロンプトに `password` を入力します。
+5. Since your connection is secured with SSH, there is no need for a strong password. However, you still need _a_ password, so enter `password` at the prompt.
 
-6. VNC ビューアを起動し、`localhost:5902` に接続します。 プロンプトに `password` を入力します。
+6. Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
 
-7. ターミナル ウィンドウが含まれるディスプレイが表示されます。 SSH トンネルを通して接続はセキュリティ保護されているため、安全ではない接続または暗号化されていない接続に関する警告は無視してください。
+7. You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
 
-8. VNC サーバーでウィンドウを開くために、`DISPLAY` 変数を設定します。 このコマンドを実行しないと、ウィンドウはデフォルトの (ヘッドレス) X サーバーで開きます。
+8. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
 
 ```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
-9. `metacity` をバックグラウンドで起動します。
+9. Start `metacity` in the background.
 
 ```bash
 ubuntu@box159:~$ metacity &
 ```
-10. `firefox` をバックグラウンドで起動します。
+10. Start `firefox` in the background.
 
 ```bash
 ubuntu@box159:~$ firefox &
 ```
 
-これで、コマンド ラインからインテグレーション テストを実行し、ブラウザーで予期しない動作がないかどうかを監視できます。 ローカル マシンでテストを実行しているかのように、ブラウザーを操作することができます。
+Now, you can run integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ### CircleCI の X サーバーの共有
 {: #sharing-circlecis-x-server }
 {:.no_toc}
 
-VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
+If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
 
-1. [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) をダウンロードして、テストの前に起動します。
+1. Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it before your tests:
 
 ```
-run:
-  name: X のダウンロードと起動
-  command: |
-    sudo apt-get install -y x11vnc
-    x11vnc -forever -nopw
-  background: true
+steps:
+  - run:
+      name: Download and start X
+      command: |
+        sudo apt-get install -y x11vnc
+        x11vnc -forever -nopw
+      background: true
 ```
-2. これで、[SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
+2. Now when you [start an SSH build]({{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 ```
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
@@ -289,32 +259,32 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ## over SSH によるX11 転送
 {: #x11-forwarding-over-ssh }
 
-CircleCI は、over SSH による X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
+CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、\[XQuartz\] (http://xquartz.macosforge.org/landing/) の使用を検討してください。
+1. Install an X Window System on your computer. If you're using macOS, consider \[XQuartz\] (http://xquartz.macosforge.org/landing/).
 
-2. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)します。 `-X` フラグを使用して転送をセットアップします。
+2. With X set up on your system, [start an SSH build]({{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 
 ```
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
-これで SSH セッションが開始し、X11 転送が有効化されます。
+This will start an SSH session with X11 forwarding enabled.
 
-3. お使いのマシンに VM のディスプレイを接続するには、ディスプレイ環境変数を `localhost:10.0` に設定します。
+3. To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
 
 ```
 ubuntu@box10$ export DISPLAY=localhost:10.0
 ```
-4. xclock を起動して、すべて正しく動作していることを確認します。
+4. Check that everything is working by starting xclock.
 
 ```
 ubuntu@box10$ xclock
 ```
-xclock がデスクトップに表示された後は、`Ctrl+c` で強制終了することができます。
+You can kill xclock with `Ctrl+c` after it appears on your desktop.
 
-これで、コマンド ラインからインテグレーション テストを実行し、ブラウザーで予期しない動作がないかどうかを監視できます。 ローカル マシンでテストを実行しているかのように、ブラウザーを操作することができます。
+Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ## 関連項目
 {: #see-also }
 
-[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)
+[Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
