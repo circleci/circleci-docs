@@ -22,9 +22,9 @@ Orb のオーサリングを始める前に、まず [CircleCI の設定ファ�
 
 Orb は、以下の 3 つの要素で構成されます。
 
-* [コマンド]({{site.baseurl}}/2.0/orb-concepts/#commands)
-* [ジョブ]({{site.baseurl}}/2.0/orb-concepts/#executors)
-* [Executor]({{site.baseurl}}/2.0/orb-concepts/#jobs)
+* [コマンド]({{site.baseurl}}/ja/2.0/orb-concepts/#commands)
+* [ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#executors)
+* [Executor]({{site.baseurl}}/ja/2.0/orb-concepts/#jobs)
 
 [インライン Orb]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
 
@@ -75,6 +75,6 @@ Orb の作成について解説した [Orb オーサリング プロセス]({{si
 {: #see-also }
 {:.no_toc}
 
-- [Orb のオーサリング]({{site.baseurl}}/2.0/orb-author/)
-- [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)
-- [Orb オーサリングに関するよくあるご質問]({{site.baseurl}}/2.0/orb-author-faq/)
+- [Orb のオーサリング]({{site.baseurl}}/ja/2.0/orb-author/)
+- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)
+- [Orb オーサリングに関するよくあるご質問]({{site.baseurl}}/ja/2.0/orb-author-faq/)
