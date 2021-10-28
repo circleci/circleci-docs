@@ -292,18 +292,17 @@ Unfortunately, Windows is not available on server installed versions of CircleCI
 
 ### Credit Usage Plans
 {: #credit-usage-plans }
-
-#### How do the new pricing plans affect me as a customer?
-{: #how-do-the-new-pricing-plans-affect-me-as-a-customer }
 {:.no_toc}
-For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
+Vising our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
 
 #### What are credits?
 {: #what-are-credits }
 {:.no_toc}
 Credits are used to pay for users and usage based on machine type, size, and features such as Docker Layer Caching.
 
-For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+For example, the 25,000 credit package would provide 2,500 build minutes when using a Docker or Linux "medium" compute at 10 credits per minute. CircleCI provides multiple compute sizes so you can optimize builds between performance (improved developer productivity) and value.
+
+When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
