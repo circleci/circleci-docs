@@ -17,7 +17,7 @@ version:
 
 ![キャッシュのデータ フロー]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
-キャッシュにより、異なるワークフロー内のビルドにおける同じジョブのデータが保持され、高コストなフェッチ操作のデータを前回のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
+キャッシュにより、異なるワークフロー内のビルドにおける同じジョブのデータが保持され、高コストなフェッチ操作のデータを以前のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
 キャッシュは、プロジェクト内でグローバルに配置されます。 1 つのブランチに保存されたキャッシュが他のブランチで実行されるジョブでも使用されるため、キャッシュはブランチ間での共有に適したデータに対してのみ使用してください。
 
@@ -32,11 +32,11 @@ version:
 
 ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 ダウンストリーム ジョブで必要に応じてこのワークスペースを使用したり、レイヤーをさらに追加することができます。
 
-ワークスペースはそれぞれのパイプラインの実行において共有されません The only time a workspace can be accessed after the pipeline has run is when a workflow is rerun within the 15 day limit.
+ワークスペースは異なるパイプラインの実行において共有されません パイプラインの実行後にワークスペースにアクセスできるのは、ワークフローが 15 日以内に再実行された場合のみです。
 
-**ワークスペースは最長で 15 日間保存されます。**
+**ワークスペースは最長で15日間保存されます。**
 
-ワークスペースを使用してワークフロー全体のデータを保持する方法の詳細については、[ワークフローガイド]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。 [CircleCI のワークスペースの詳細](https://circleci.com/blog/deep-diving-into-circleci-workspaces/)のブログ記事もご覧ください。
+ワークスペースを使用してワークフロー全体のデータを保持する方法の詳細については、[ワークフローガイド]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。 [CircleCI のワークスペースの詳細](https://circleci.com/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
 
 ## アーティファクトの使用
 {: #using-artifacts }
@@ -104,7 +104,7 @@ version:
 #### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
 
-実際に必要なファイルがわずかでも、store_artifacts ステップが大きなディレクトリで用いられているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
+実際に必要なファイルがわずかでも、store_artifacts ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
 ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで CIRCLE_NODE_INDEX 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
@@ -124,11 +124,11 @@ version:
 #### キャッシュ使用率の最適化
 {: #optimizing-cache-usage }
 
-キャッシュの使用率が高く、キャッシュの使用率を下げたい場合は、以下をお試しください。
+キャッシュの使用率が高く使用率を下げたい場合は以下をお試しください。
 
 * config.yml ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
 * キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
-* Ensuring that your cache “key” is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
+* キャッシュの「キー」が[ベストプラクティス]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
 {% raw %}
 ```sh
@@ -140,7 +140,7 @@ version:
 ```
 {% endraw %}
 
-Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build; causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache key like the following:
+上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` はビルドごとに変更され、値が変更されていない場合でも毎回アップロードされます。 この方法では結局コストもかかり、時間も短縮できません。 代わりに、次のようなキャッシュキーを選択します。
 
 {% raw %}
 ```sh
@@ -152,23 +152,23 @@ Notice in the above example that best practices are not being followed. `brew-{{
 ```
 {% endraw %}
 
-Which will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
+この場合、要求された依存関係のリストが変更された場合にのみ変更されます。 これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
 
-* Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
+* キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
 
-* Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
+* アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
-#### Optimizing workspace usage
+#### ワークスペースの使用率の最適化
 {: #optimizing-workspace-usage }
 
-If you notice your workspace usage is high and would like to reduce it, try:
+ワークスペースの使用率が高く使用率を下げたい場合、以下をお試しください。
 
-* Searching for the `persist_to_workspace` command in your config.yml file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+* config.yml ファイルで`persist_to_workspace `コマンドを検索し、ワークスペースを使用するすべてのジョブを検索し、パス内のすべてのアイテムが必要かどうかを判断します。
 
-#### Reducing excess use of network egress
+#### ネットワーク転送の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
 
-If you would like to reduce the amount of network usage that network egress is contributing to, try:
+ネットワーク転送が原因となっているネットワークの使用量を減らすには、以下をお試しください。
 
-* For runner, deploy any cloud-based runners in AWS US-East-1.
-* Download artifacts once and store them on your site for additional processing.
+* Runner の場合は、 AWS US-East-1 にクラウドベースのランナーをデプロイします。
+* アーティファクトを 1 度ダウンロードし、ご自身のサイトに保存して処理を追加します。
