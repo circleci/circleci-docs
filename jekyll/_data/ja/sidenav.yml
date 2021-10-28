@@ -189,14 +189,29 @@ en:
             name: Runner Installation
             link: 2.0/runner-installation/
           - 
-            name: Runner on Kubernetes
+            name: Linux Runner Installation
+            link: 2.0/runner-installation-linux/
+          - 
+            name: Windows Runner Installation
+            link: 2.0/runner-installation-windows/
+          - 
+            name: macOS Runner Installation
+            link: 2.0/runner-installation-mac/
+          - 
+            name: Docker Runner Installation
+            link: 2.0/runner-installation-docker/
+          - 
+            name: Kubernetes Runner Installation
             link: 2.0/runner-on-kubernetes/
+          - 
+            name: Runner Configuration Reference
+            link: 2.0/runner-config-reference/
+          - 
+            name: Upgrading Runner on Server
+            link: 2.0/runner-upgrading-on-server/
           - 
             name: Runner API
             link: 2.0/runner-api/
-          - 
-            name: Runner FAQs
-            link: 2.0/runner-faqs/
           - 
             name: Runner FAQs
             link: 2.0/runner-faqs/
@@ -917,8 +932,12 @@ ja:
             hash: pre-installed-software
           - 
             name: Android Machine Image
-            i18n_name: Androidマシンイメージ
-            link: 2.0/android-machine-image
+            i18n_name: Android マシン イメージ
+            link: ja/2.0/android-machine-image
+          - 
+            name: Arm Resources
+            i18n_name: Arm リソース
+            link: ja/2.0/arm-resources/
       - 
         name: Mac
         children:
@@ -999,6 +1018,10 @@ ja:
             name: Configuration Reference
             link: ja/2.0/configuration-reference/
             i18n_name: リファレンス
+          - 
+            name: Sample Configuration
+            link: ja/2.0/sample-config/
+            i18n_name: 設定ファイルサンプル
           - 
             name: Reusing Configuration
             link: ja/2.0/reusing-config/
@@ -1307,17 +1330,21 @@ ja:
         i18n_name: Server 3.xのインストール
         children:
           - 
-            name: Prerequisites
+            name: Phase 1 - Prerequisites
             link: ja/2.0/server-3-install-prerequisites
-            i18n_name: 必須要件
+            i18n_name: フェーズ1 - 必須要件
           - 
-            name: Your First Cluster
-            i18n_name: クラスター作成
-            link: ja/2.0/server-3-install-creating-your-first-cluster
-          - 
-            name: Installation
+            name: Phase 2 - Install Core Services
             link: ja/2.0/server-3-install
-            i18n_name: インストール
+            i18n_name: フェーズ2 - コアサービスのインストール
+          - 
+            name: Phase 3 - Install Build Services
+            link: ja/2.0/server-3-install-build-services
+            i18n_name: フェーズ3 - ビルドサービスのインストール
+          - 
+            name: Phase 4 - Post Installation
+            link: ja/2.0/server-3-install-post
+            i18n_name: フェーズ4 - インストールの後処理
           - 
             name: Migration
             link: ja/2.0/server-3-install-migration
@@ -1325,6 +1352,7 @@ ja:
           - 
             name: Hardening Your Cluster
             link: ja/2.0/server-3-install-hardening-your-cluster
+            i18n_name: クラスタのハードニング
       - 
         name: Server v3.x Operations
         i18n_name: v3.x 管理者ガイド
@@ -1338,6 +1366,10 @@ ja:
             name: Metrics and Monitoring
             i18n_name: メトリクスとモニタリング
             link: ja/2.0/server-3-operator-metrics-and-monitoring
+          - 
+            name: Configuring a Proxy
+            i18n_name: プロキシの設定
+            link: ja/2.0/server-3-operator-proxy
           - 
             name: User Accounts
             i18n_name: ユーザー管理
@@ -1354,6 +1386,10 @@ ja:
             name: Externalizing Services
             i18n_name: サービスの外部化
             link: ja/2.0/server-3-operator-externalizing-services
+          - 
+            name: Expanding Internal Database Volumes
+            i18n_name: 内部データベースボリュームの拡張
+            link: ja/2.0/server-3-operator-extending-internal-volumes
           - 
             name: Load Balancers
             i18n_name: ロードバランサー
