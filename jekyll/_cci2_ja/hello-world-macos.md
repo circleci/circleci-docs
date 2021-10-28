@@ -131,9 +131,9 @@ While universal binaries are only supported under Xcode 12.2+, you can still cro
 
 macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの構成が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
-- [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios)
-- [iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial)
-- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/2.0/ios-codesigning)
+- [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/c2.0/testing-ios)
+- [iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)
+- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ja/2.0/ios-codesigning)
 
 また、CircleCI の機能については、以下のドキュメントを確認してください。
 
