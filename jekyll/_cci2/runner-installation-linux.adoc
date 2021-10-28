@@ -90,7 +90,9 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
-== Enable the `systemd` unit
+== Optional Steps
+
+=== Enable the `systemd` unit
 
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
@@ -118,7 +120,7 @@ You can now enable the service:
 systemctl enable /opt/circleci/circleci.service
 ```
 
-== Start the service
+=== Start the service
 
 When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
@@ -126,7 +128,7 @@ When the CircleCI runner service starts, it will immediately attempt to start ru
 systemctl start circleci.service
 ```
 
-== Verify the service is running
+=== Verify the service is running
 
 The system reports a very basic health status through the `Status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
 
