@@ -15,7 +15,7 @@ version:
 ## キャッシュの活用方法
 {: #caching-strategies }
 
-![caching data flow]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
+![キャッシュのデータ フロー]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
 キャッシュにより、異なるワークフロー内のビルドにおける同じジョブのデータが保持され、高コストなフェッチ操作のデータを前回のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
@@ -28,7 +28,7 @@ version:
 ## ワークスペースの使用
 {: #using-workspaces }
 
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークスペースのデータ フロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 ダウンストリーム ジョブで必要に応じてこのワークスペースを使用したり、レイヤーをさらに追加することができます。
 
@@ -41,7 +41,7 @@ version:
 ## アーティファクトの使用
 {: #using-artifacts }
 
-![artifacts data flow]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータ フロー]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
 アーティファクトは、パイプラインの出力を長期保存するために使用されます。 たとえば Java プロジェクトを使用している場合、ビルドにより多くの場合、コードの` .jar `ファイルが生成されます。 このコードはテストによって検証されます。 ビルドやテストプロセスがすべて成功した場合は、プロセスの出力（` .jar `）をアーティファクトとして保存できます。 この `jar `ファイルは、ファイルを作成したワークフローの終了後も長期間アーティファクトシステムからダウンロードできます。
 
@@ -94,9 +94,9 @@ version:
 ### ストレージとネットワーク転送の使用の管理方法
 {: #how-to-manage-your-storage-and-network-transfer-use }
 
-ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法が複数あります。
+ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
 
-データ使用量の削減を試みる前に、まずそのデータの使用を維持する価値が十分にあかるどうかを検討してください。 キャッシュとワークスペースの場合、比較が非常に簡単です。キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？ ストレージとネットワークの最適化例については、以下を参照してください。
+データ使用量の削減を試みる前に、まずそのデータの使用を維持する価値が十分にあるかどうかを検討してください。 キャッシュとワークスペースの場合、比較が非常に簡単です。キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？ ストレージとネットワークの最適化例については、以下をご覧ください。
 
 ### アーティファクトやキャッシュ/ワークスペースのトラフィックを減らす方法
 {: #opportunities-to-reduce-artifact-and-cacheworkspace-traffic }
@@ -104,35 +104,35 @@ version:
 #### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
 
-Often we see that the store_artifacts step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
+実際に必要なファイルがわずかでも、store_artifacts ステップが大きなディレクトリで用いられているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. 実行ステップで CIRCLE_NODE_INDEX 環境変数を使用することにより並列タスクの実行に応じてスクリプトの動作を変更できます
+ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで CIRCLE_NODE_INDEX 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
-#### Uploading large artifacts
+#### 大きなアーティファクトのアップロード
 {: #uploading-large-artifacts }
 
-* Artifacts that are text can be compressed at very little cost.
-* If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
-* If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
-* If you must upload a large artifact you can upload them to your own bucket at no cost.
+* テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。
+* UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
+* パイプラインがバイナリの Uber JAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
+* 大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
 
-#### Caching unused or superfluous dependencies
+#### 未使用または余分な依存関係のキャッシュ
 {: #caching-unused-or-superfluous-dependencies }
 
-Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies. For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from node_modules.
+ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。 たとえば、 node-prune パッケージは、 node_modules から不要なファイル (マークダウン、TypeScript ファイルなど) を削除します。
 
-#### Optimizing cache usage
+#### キャッシュ使用率の最適化
 {: #optimizing-cache-usage }
 
-If you notice your cache usage is high and would like to reduce it, try:
+キャッシュの使用率が高く、キャッシュの使用率を下げたい場合は、以下をお試しください。
 
-* Searching for the `save_cache` and `restore_cache` commands in your config.yml file to find all jobs utilizing caching and determine if their cache(s) need pruning.
-* Narrowing the scope of a cache from a large directory to a smaller subset of specific files.
+* config.yml ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
+* キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
 * Ensuring that your cache “key” is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
 {% raw %}
 ```sh
-     - save_cache:
+       - save_cache:
          key: brew-{{epoch}}
          paths:
            - /Users/distiller/Library/Caches/Homebrew
