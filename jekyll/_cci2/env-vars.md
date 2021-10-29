@@ -581,7 +581,7 @@ Variable                               | Type    | Value
 `CIRCLE_BUILD_URL`{:.env_var}          | String  | The URL for the current job on CircleCI.
 `CIRCLE_JOB`{:.env_var}                | String  | The name of the current job.
 `CIRCLE_NODE_INDEX`{:.env_var}         | Integer | For jobs that run with parallelism enabled, this is the index of the current parallel run. The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1)
-`CIRCLE_NODE_TOTAL`{:.env_var}         | Integer | For jobs that run with parallelism enabled, this is the number of parallel runs. This is equivielnt to the value of `parallelism` in your config file.
+`CIRCLE_NODE_TOTAL`{:.env_var}         | Integer | For jobs that run with parallelism enabled, this is the number of parallel runs. This is equivalent to the value of `parallelism` in your config file.
 `CIRCLE_PR_NUMBER`{:.env_var}          | Integer | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
 `CIRCLE_PR_REPONAME`{:.env_var}        | String  | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
 `CIRCLE_PR_USERNAME`{:.env_var}        | String  | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
