@@ -10,7 +10,6 @@ version:
 :toc: macro
 :toc-title:version:
 
-
 サークルCIでのデプロイは、他のジョブ設定と同じように、ジョブを作成し、ほぼすべてのターゲットにデプロイするように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
 
 toc::[]
@@ -49,7 +48,7 @@ orbs:
 workflows:
   deploy_application:
     jobs:
-      - aws-code-deploy/deploy 
+      - aws-code-deploy/deploy
           application-name: myApplication
           deployment-group: myDeploymentGroup
           service-role-arn: myDeploymentGroupRoleARN
@@ -67,7 +66,7 @@ Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定�
 
 以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
 
- https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
+https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
 
 ```yaml
 version: 2.1
@@ -80,7 +79,7 @@ workflows:
     jobs:
       - build
       - heroku/deploy-via-git:# 事前に設定されたジョブ deploy-via-git を使う
-          requires:         
+          requires:
             - build
           filters:
             branches:

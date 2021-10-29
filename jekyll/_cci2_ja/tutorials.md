@@ -9,12 +9,12 @@ version:
 
 お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
 
-| プラットフォーム ガイド                                                             | 説明                                                                      |
-| ------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                                | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                                | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
-| <a href="{{ site.baseurl }}/ja/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                                | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
-| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
+| プラットフォーム ガイド                                                          | 説明                                                                      |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                             | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
+| <a href="{{ site.baseurl }}/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
+| <a href="{{ site.baseurl }}/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
+| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
 {: class="table table-striped"}
 
 ## Sample projects with companion guides
@@ -53,6 +53,6 @@ Hello World ドキュメントと`config.yml` ファイルの例を参照して�
 
 | ドキュメント                    | 説明                                                                                                                                                               |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。                                                                                        |
-| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のリンク</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
+| <a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。                                                                                        |
+| <a href="{{ site.baseurl }}/2.0/sample-config/">config.yml のリンク</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
 {: class="table table-striped"}

@@ -13,6 +13,8 @@ version:
 == Phase 1: Prerequisites
 Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. This installation guide assumes you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+
 .Installation Experience Flow Chart
 image::server-install-flow-chart.png[Flow chart showing the installation flow for server 3.x]
 
@@ -102,8 +104,6 @@ You can learn more about creating a GKE cluster https://cloud.google.com/kuberne
 
 CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
-NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
-
 . https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. When you create your project make sure you also enabled API access. If you do not enable API access, the command we will run next, to create your cluster, will fail. 
 . Create your cluster by entering running the following: 
 +
@@ -155,8 +155,6 @@ By default, CircleCI server will create self-signed certificates to get you star
 
 ==== Google Cloud DNS
 
-NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
-
 . If you host your DNS on Google Cloud you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command: 
 +
 ```bash
@@ -170,8 +168,6 @@ certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d 
 ```
 
 ==== AWS Route53
-
-NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
 
 . If you are using AWS Route53 for DNS you will need the *certbot-route53* plugin installed. You can install the plugin with the following command: 
 +
@@ -247,8 +243,6 @@ You will need the following details when you configure CircleCI server.
 * *AWS S3 Region* - AWS region of bucket if your provider is AWS. You will either have an AWS region or S3 Endpoint depending on your specific setup.
 
 * *S3 Endpoint* - API endpoint of S3 storage provider, when your storage provider is not Amazon S3. 
-
-NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
 
 ===== Step 1: Create AWS S3 Bucket
 
@@ -334,8 +328,6 @@ NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
 resource.name.startsWith("projects/_/buckets/<bucket-name>")
 ```
 
-NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
-
 ===== Step 1: Create a GCP bucket 
 If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
 
@@ -384,5 +376,7 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
 ```
 
+ifndef::pdf[]
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
+endif::[]

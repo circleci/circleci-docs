@@ -110,4 +110,4 @@ Notes on the above example:
 ## 関連項目
 {: #see-also }
 
-[トリガー]({{ site.baseurl }}/ja/2.0/triggers/)
+[トリガー]({{ site.baseurl }}/2.0/triggers/)

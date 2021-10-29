@@ -19,16 +19,16 @@ version:
 `docker-compose` ユーティリティは、Machine Executor と [CircleCI イメージ]にプリインストールされています。 別のイメージを使用している場合は、以下のコードを [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに追加することでアクティブ化されるリモート Docker 環境を使用して、ジョブ実行時に\[プライマリ コンテナ\]\[primary-container\]にインストールできます。
 
 ```
-      run:
-  name: Docker Compose のインストール
-  command: |
-    curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-<code>uname -s</code>-<code>uname -m</code> &#062; ~/docker-compose
-    chmod +x ~/docker-compose
-    sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
+          name: Docker Compose のインストール
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
 
-上記のコード例では、Executor で `curl` も 使用可能であることを想定しています。 独自の Docker イメージを構築する場合は、 [カスタム Docker イメージ]({{site.baseurl}}/2.0/custom-images/)に関するドキュメントをお読みください。
-[pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ
+上記のコード例では、Executor で `curl` も 使用可能であることを想定しています。 独自の Docker イメージを構築する場合は、 [カスタム Docker イメージ]({{site.baseurl}}/ja/2.0/custom-images/)に関するドキュメントをお読みください。
+[pre-installed]: {{ site.baseurl }}/ja/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/ja.2.0/glossary/#プライマリ-コンテナ
 
 次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 
@@ -80,7 +80,7 @@ Docker Compose を使用して docker-compose ファイルを含むマルチコ�
 
 デプロイ用の Docker イメージをビルドする場合は、この組み合わせが必要です。
 
-## 関連項目
+## 制限事項
 {: #limitations }
 
 `docker-compose` と `macos` Executor との使用はサポートしていません。詳細は[サポートに関する記事](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-)をご覧ください。
@@ -89,4 +89,4 @@ Docker Compose を使用して docker-compose ファイルを含むマルチコ�
 {: #see-also }
 {:.no_toc}
 
-例と詳細については、「Docker コマンドの実行手順」の「[フォルダーのマウント]({{ site.baseurl }}/2.0/building-docker-images/#フォルダーのマウント)」セクションを参照してください。
+例と詳細については、「Docker コマンドの実行手順」の「[フォルダーのマウント]({{ site.baseurl }}/ja/2.0/building-docker-images/#フォルダーのマウント)」セクションを参照してください。
