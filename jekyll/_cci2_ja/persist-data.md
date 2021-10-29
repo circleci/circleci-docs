@@ -23,7 +23,7 @@ version:
 
 **save_cache ステップで作成されたキャッシュは、最長 15 日間保存されます。**
 
-詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/2.0/caching/)を参照してください。
+詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/ja/2.0/caching/)を参照してください。
 
 ## ワークスペースの使用
 {: #using-workspaces }
@@ -36,7 +36,7 @@ version:
 
 **ワークスペースは最長で15日間保存されます。**
 
-ワークスペースを使用してワークフロー全体のデータを保持する方法の詳細については、[ワークフローガイド]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。 [CircleCI のワークスペースの詳細](https://circleci.com/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
+ワークスペースを使用してワークフロー全体のデータを保持する方法の詳細については、[ワークフローガイド]({{site.baseurl}}/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。 [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
 
 ## アーティファクトの使用
 {: #using-artifacts }
@@ -49,7 +49,7 @@ version:
 
 **アーティファクトは最長で 30 日間保存されます。**
 
-アーティファクトを使用してジョブの完了後にデータを保持する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/2.0/artifacts/)を参照してください。
+アーティファクトを使用してジョブの完了後にデータを保持する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/ja/2.0/artifacts/)を参照してください。
 
 ## ネットワークとストレージ使用の管理
 {: #managing-network-and-storage-use }
@@ -128,7 +128,7 @@ version:
 
 * config.yml ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
 * キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
-* キャッシュの「キー」が[ベストプラクティス]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
+* キャッシュの「キー」が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
 {% raw %}
 ```sh
