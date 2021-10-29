@@ -1165,7 +1165,7 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 ``` YAML
 - deploy:
     command: |
-      if [ "${CIRCLE_BRANCH}" == "master" ]; then
+      if [ "${CIRCLE_BRANCH}" == "main" ]; then
         ansible-playbook site.yml
       fi
 ```
@@ -1460,7 +1460,7 @@ workflows:
            filters:
              branches:
                only:
-                 - master
+                 - main
                  - beta
      jobs:
        - test
@@ -1487,7 +1487,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 {: #branches }
 {:.no_toc}
 
-The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
+The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
 
@@ -1889,7 +1889,7 @@ workflows:
   my-workflow:
       when:
         or:
-          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ main, << pipeline.git.branch >> ]
           - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
@@ -1900,7 +1900,7 @@ workflows:
       and:
         - not:
             matches:
-              pattern: "^master$"
+              pattern: "^main$"
               value: << pipeline.git.branch >>
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
@@ -2057,7 +2057,7 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - run:
-          name: Deploy if tests pass and branch is Master
+          name: Deploy if tests pass and branch is Main
           command: ansible-playbook site.yml -i production
 
 workflows:
@@ -2081,7 +2081,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 {% endraw %}
 

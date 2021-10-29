@@ -77,7 +77,7 @@ For example;
       },
       "workflow":{  
          "id":"c022ca3c-5f6f-41ba-a6ca-05977f6a336a",
-         "vcs_branch":"master"
+         "vcs_branch":"main"
       }
    },
    "target":{  

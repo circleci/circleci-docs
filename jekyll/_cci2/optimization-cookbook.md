@@ -192,19 +192,19 @@ Providing value to your customers is the top goal for any organization, and one 
 
 While many organizations deploy value to customer once per quarter or once per month, the basics of raising this frequency to once per week or once per day is represented by the same type of orchestration added to an organization's value *pipeline*.
 
-To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
+To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of main, without being on the main branch. This is possible with the use of workflow orchestration in your continuous integration suite.
 
 {%comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
 endcomment %}
 
-When you provide developers with a workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
+When you provide developers with a workflow that runs all of their tests in the main environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
 
 {%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
 endcomment %}
 
-A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
+A workflow that runs all tests *as if they were on main* gives developers the confidence they need to merge to main knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
 
-A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed.
+A simple example would configure deployment to run *only* if a change is merged to main and the test jobs have already passed.
 
 For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
 
@@ -219,11 +219,11 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 
 
-The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
+The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to main. If changes happen *on main* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
 
 For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
 
@@ -235,7 +235,7 @@ workflows:
           cron: '0 8 ***'
           filters:
             branches:
-              only: master
+              only: main
     jobs:
       - build
       - test
