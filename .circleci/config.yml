@@ -132,26 +132,6 @@ workflows:
           requires:
             - build
 
-
-
-curl --location --request POST 'https://circleci.com/api/v2/project/github/circleci/circleci-docs/schedule' \
---header 'circle-token: <your-cci-token>' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "name": "nightly-build",
-    "description": "Nightly build for running build/maintenance tasks such as pulling in docker image tags or automating our api documentation",
-    "attribution-actor": "system",
-    "parameters": {
-      "branch": "master",
-      "run-schedule": true
-    },
-    "timetable": {
-        "per-hour": 1,
-        "hours-of-day": [8],
-        "days-of-week": [“MON", “TUE", “WED", “THU", “FRI", "SAT", “SUN"]
-    }
-}'
-
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
