@@ -62,9 +62,9 @@ suggested:
 
 | キー        | 必須 | 型   | 説明                                                                                                                                                                                 |
 | --------- | -- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| orbs      | N  | マップ | ユーザー指定の名前によるマップ。 Orb の参照名 (文字列) または Orb の定義名 (マップ) を指定します。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/2.0/creating-orbs/)を参照してください。 |
-| executors | N  | マップ | Executor を定義する文字列のマップ。 このページの [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-version-21-が必須) セクションを参照してください。                                                |
-| commands  | N  | マップ | コマンドを定義するコマンド名のマップ。 このページの [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-version-21-が必須) セクションを参照してください。                                                     |
+| orbs      | ×  | マップ | ユーザー指定の名前によるマップ。 Orb の参照名 (文字列) または Orb の定義名 (マップ) を指定します。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/2.0/creating-orbs/)を参照してください。 |
+| executors | ×  | マップ | Executor を定義する文字列のマップ。 このページの [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-version-21-が必須) セクションを参照してください。                                                |
+| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 このページの [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-version-21-が必須) セクションを参照してください。                                                     |
 {: class="table table-striped"}
 
 以下の例では、承認済みの `circleci` 名前空間に格納された `hello-build` という名前の Orb を呼び出します。
@@ -87,9 +87,9 @@ workflows:
 
 | キー          | 必須 | 型     | 説明                                                                                                                                                              |
 | ----------- | -- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| steps       | Y  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                                                                    |
-| parameters  | N  | マップ   | パラメーター キーのマップ。 詳細については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/2.0/reusing-config/)の「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。 |
-| description | N  | 文字列   | コマンドの目的を記述する文字列。                                                                                                                                                |
+| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                                                                    |
+| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/2.0/reusing-config/)の「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。 |
+| description | ×  | 文字列   | コマンドの目的を記述する文字列。                                                                                                                                                |
 {: class="table table-striped"}
 
 例
@@ -112,7 +112,7 @@ commands:
 
 | キー         | 必須 | 型   | 説明                                                                                                                         |
 | ---------- | -- | --- | -------------------------------------------------------------------------------------------------------------------------- |
-| parameters | N  | マップ | パラメーター キーのマップ。 `文字列`、`ブール値`、`整数`、`列挙型`がサポートされています。 [パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)を参照してください。 |
+| parameters | ×  | マップ | パラメーター キーのマップ。 `文字列`、`ブール値`、`整数`、`列挙型`がサポートされています。 [パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)を参照してください。 |
 {: class="table table-striped"}
 
 ## **`executors`** (version: 2.1 が必須)
@@ -123,13 +123,13 @@ executors では、ジョブのステップを実行する環境を定義しま�
 | キー                | 必須               | 型   | 説明                                                                                                                                 |
 | ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                |
-| resource_class    | N                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランが必要です。                                                          |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランが必要です。                                                          |
 | machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                              |
 | macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                  |
 | windows           | ○ <sup>(1)</sup> | マップ | 現在、[Windows Executor](#windows) は Orb に対応しています。 [こちらの Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を参照してください。 |
-| shell             | N                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                 |
-| working_directory | N                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。                                                                                                    |
-| environment       | N                | マップ | 環境変数の名前と値のマップ。                                                                                                                     |
+| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                 |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。                                                                                                    |
+| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                     |
 {: class="table table-striped"}
 
 <sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 2 つ以上指定するとエラーが発生します。
@@ -172,14 +172,14 @@ jobs:
 | docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                      |
 | machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                    |
 | macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                        |
-| shell             | N                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                                                                                                                                                                                                                                                                                                                       |
-| parameters        | N                | マップ | `ワークフロー`において `job` を明示的に構成可能にする[パラメーター](#parameters)。                                                                                                                                                                                                                                                                                                                                                                                    |
-| steps             | Y                | リスト | 実行する[ステップ](#steps)のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| working_directory | N                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。 デフォルトは `~/project` となります (この `project` は特定のプロジェクトの名前ではなく、リテラル文字列)。 ジョブ内で実行するプロセスでは、`$CIRCLE_WORKING_DIRECTORY` 環境変数を介してこのディレクトリを参照できます。 **メモ:** YAML 設定ファイルに記述したパスは展開_されません_。 `store_test_results.path` を `$CIRCLE_WORKING_DIRECTORY/tests` と設定しても、CircleCI は文字どおり "`$CIRCLE_WORKING_DIRECTORY`" という、`$` 記号を含む名前のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 `working_directory` で指定したディレクトリが存在しないときは自動で作成されます。 |
-| parallelism       | N                | 整数  | このジョブを実行する並列インスタンスの数 (デフォルトは 1)。                                                                                                                                                                                                                                                                                                                                                                                                         |
-| environment       | N                | マップ | 環境変数の名前と値のマップ。                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| branches          | N                | マップ | ワークフローまたはバージョン 2.1 の設定ファイル**以外**の構成に含まれる 1 つのジョブに対し、特定のブランチでの実行を許可またはブロックするルールを定義するマップ (デフォルトではすべてのブランチでの実行が許可されます)。 ワークフロー内またはバージョン 2.1 の設定ファイル内のジョブに対するブランチ実行の設定については、[workflows](#workflows) セクションを参照してください。                                                                                                                                                                                                                          |
-| resource_class    | N                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランが必要です。                                                                                                                                                                                                                                                                                                                                                                |
+| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                                                                                                                                                                                                                                                                                                                       |
+| parameters        | ×                | マップ | `ワークフロー`において `job` を明示的に構成可能にする[パラメーター](#parameters)。                                                                                                                                                                                                                                                                                                                                                                                    |
+| steps             | ○                | リスト | 実行する[ステップ](#steps)のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。 デフォルトは `~/project` となります (この `project` は特定のプロジェクトの名前ではなく、リテラル文字列)。 ジョブ内で実行するプロセスでは、`$CIRCLE_WORKING_DIRECTORY` 環境変数を介してこのディレクトリを参照できます。 **メモ:** YAML 設定ファイルに記述したパスは展開_されません_。 `store_test_results.path` を `$CIRCLE_WORKING_DIRECTORY/tests` と設定しても、CircleCI は文字どおり "`$CIRCLE_WORKING_DIRECTORY`" という、`$` 記号を含む名前のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 `working_directory` で指定したディレクトリが存在しないときは自動で作成されます。 |
+| parallelism       | ×                | 整数  | このジョブを実行する並列インスタンスの数 (デフォルトは 1)。                                                                                                                                                                                                                                                                                                                                                                                                         |
+| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| branches          | ×                | マップ | ワークフローまたはバージョン 2.1 の設定ファイル**以外**の構成に含まれる 1 つのジョブに対し、特定のブランチでの実行を許可またはブロックするルールを定義するマップ (デフォルトではすべてのブランチでの実行が許可されます)。 ワークフロー内またはバージョン 2.1 の設定ファイル内のジョブに対するブランチ実行の設定については、[workflows](#workflows) セクションを参照してください。                                                                                                                                                                                                                          |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランが必要です。                                                                                                                                                                                                                                                                                                                                                                |
 {: class="table table-striped"}
 
 <sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 2 つ以上指定するとエラーが発生します。
@@ -264,16 +264,16 @@ Executor とは、簡単に言うと "ステップの実行環境" です。 Cir
 
 `docker` キーは、以下のマップのリストで構成します。
 
-| キー          | 必須 | 型         | 説明                                                              |
-| ----------- | -- | --------- | --------------------------------------------------------------- |
-| image       | Y  | 文字列       | 使用するカスタム Docker イメージの名前。                                        |
-| name        | N  | 文字列       | 他から参照するためのコンテナの名前。  デフォルトでは、`localhost` を通してコンテナ サービスにアクセスできます。 |
-| entrypoint  | N  | 文字列またはリスト | コンテナのローンチ時に実行するコマンド。                                            |
-| command     | N  | 文字列またはリスト | コンテナのローンチ時にルート プロセスとなる PID 1 として使用するコマンド (または entrypoint の引数)。  |
-| user        | N  | 文字列       | Docker コンテナ内でコマンドを実行するユーザー。                                     |
-| environment | N  | マップ       | 環境変数の名前と値のマップ。                                                  |
-| auth        | N  | マップ       | 標準の `docker login` 認証情報を用いたレジストリの認証情報。                          |
-| aws_auth    | N  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                     |
+| キー           | 必須 | 型         | 説明                                                              |
+| ------------ | -- | --------- | --------------------------------------------------------------- |
+| image        | ○  | 文字列       | 使用するカスタム Docker イメージの名前。                                        |
+| name         | ×  | 文字列       | 他から参照するためのコンテナの名前。  デフォルトでは、`localhost` を通してコンテナ サービスにアクセスできます。 |
+| entrypoint   | ×  | 文字列またはリスト | コンテナのローンチ時に実行するコマンド。                                            |
+| command      | ×  | 文字列またはリスト | コンテナのローンチ時にルート プロセスとなる PID 1 として使用するコマンド (または entrypoint の引数)。  |
+| user         | ×  | 文字列       | Docker コンテナ内でコマンドを実行するユーザー。                                     |
+| environment: | ×  | マップ       | 環境変数の名前と値のマップ。                                                  |
+| auth         | ×  | マップ       | 標準の `docker login` 認証情報を用いたレジストリの認証情報。                          |
+| aws_auth     | ×  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                     |
 {: class="table table-striped"}
 
 ファイル内で最初に記述する `image` が、すべてのステップを実行するプライマリ コンテナ イメージとなります。
@@ -364,8 +364,8 @@ jobs:
 
 | キー                     | 必須 | 型    | 説明                                                                                                                                                                                                                                                                          |
 | ---------------------- | -- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| image                  | Y  | 文字列  | 使用する VM イメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **メモ:** このキーは、オンプレミス環境では**サポートされません**。 For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service). |
-| docker_layer_caching | N  | ブール値 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。 **メモ:** お使いのアカウントでこの有料の機能を有効化するには、サポート チケットをオープンしてください。 CircleCI 営業担当者から連絡を差し上げます。                                                                                                  |
+| image                  | ○  | 文字列  | 使用する VM イメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **メモ:** このキーは、オンプレミス環境では**サポートされません**。 For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service). |
+| docker_layer_caching | ×  | ブール値 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。 **メモ:** お使いのアカウントでこの有料の機能を有効化するには、サポート チケットをオープンしてください。 CircleCI 営業担当者から連絡を差し上げます。                                                                                                  |
 {: class="table table-striped"}
 
 
@@ -446,7 +446,7 @@ CircleCI は [macOS](https://developer.apple.com/jp/macos/) 上でのジョブ�
 
 | キー    | 必須 | 型   | 説明                                                                                                                                                |
 | ----- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xcode | Y  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。 iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
+| xcode | ○  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。 iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
 {: class="table table-striped"}
 
 **例:** macOS 仮想マシンを Xcode バージョン 11.3 で使用する場合
@@ -501,11 +501,11 @@ jobs:
   build:
     branches:
       only:
-        - master
+        - main
         - /rc-.*/
 ```
 
-この場合は、"master" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
+この場合は、"main" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
 
 ``` YAML
 jobs:
@@ -760,7 +760,7 @@ jobs:
 
 | キー                   | 必須 | 型         | 説明                              |
 | -------------------- | -- | --------- | ------------------------------- |
-| &lt;step_type> | Y  | マップまたは文字列 | ステップの構成マップ、またはステップによって規定された文字列。 |
+| &lt;step_type> | ○  | マップまたは文字列 | ステップの構成マップ、またはステップによって規定された文字列。 |
 {: class="table table-striped"}
 
 定義済みステップについて、以下に詳しく説明します。
@@ -1843,17 +1843,7 @@ Workflows の詳細な例と概念については「[ジョブの実行を Workf
 
 一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
-|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
-| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
-| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
-| [Pipeline Value]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
-| [Pipeline Parameter]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
-| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
-| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
-| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
-| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
-| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 以下のような論理値が偽値とみなされます。

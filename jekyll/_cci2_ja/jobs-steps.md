@@ -109,5 +109,5 @@ version: 2
 ## 関連項目
 {: #see-also }
 
-- [構成リファレンス: jobs キー]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-- [構成リファレンス: steps キー]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+- [構成リファレンス: jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
+- [構成リファレンス: steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)

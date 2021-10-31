@@ -1,0 +1,74 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= CircleCI Runner Installation with Docker
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This page describes how to install CircleCI runner with Docker. 
+
+NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+
+toc::[]
+
+== Additional prerequisites
+
+The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
+
+The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
+
+== Create a Dockerfile that extends the CircleCI Runner image
+
+In this example, python3 is installed on top of the base image.
+
+`Dockerfile.runner.extended`
+
+```
+FROM circleci/runner:launch-agent
+RUN apt-get update; \
+    apt-get install --no-install-recommends -y \
+        python3
+```
+
+== Build the Docker image
+
+```bash
+docker build --file ./Dockerfile.runner.extended .
+```
+
+== Start the Docker container
+
+NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
+
+```bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
+When the container starts, it will immediately attempt to start running jobs.
+
+=== Start the Docker container on server
+
+When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+
+``` bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
+== Stopping the Docker container
+
+``` bash
+docker stop <container-name>
+```
+
+== Remove the Docker container
+
+In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+
+``` bash
+docker stop <container-name>; docker rm <container-name>;
+```
