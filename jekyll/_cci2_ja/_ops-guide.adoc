@@ -1,4 +1,4 @@
-= OPERATIONS GUIDE: A guide for administrators of CircleCI server installations on AWS and private infrastructure.
+= OPERATIONS GUIDE: A guide for administrators of CircleCI Server installations on AWS and private infrastructure.
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]

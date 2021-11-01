@@ -6,7 +6,6 @@ description: "CircleCI に SSH 鍵を追加する方法"
 order: 20
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
