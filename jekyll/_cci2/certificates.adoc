@@ -185,7 +185,7 @@ Once you have a valid certificate and key file in `.pem` format, you must upload
 
 . To do so, navigate to `hostname:8800/console/settings`
 
-. Under "Privacy" section, check the box for "SSL only (Recommened)"
+. Under "Privacy" section, check the box for "SSL only (Recommended)"
 
 . Upload your newly generated certificate and key
 
