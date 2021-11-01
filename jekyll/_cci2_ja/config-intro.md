@@ -126,6 +126,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
+    
       - run:
           name: Running in a Unique Container
           command: |
@@ -191,7 +192,6 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-
 workflows:
  version: 2
  Example_Workflow:

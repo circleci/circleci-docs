@@ -16,10 +16,10 @@ toc::[]
 
 == Define Variables for Terraform
 
-. Clone the https://github.com/circleci/enterprise-setup[Setup] repository. If you already have it cloned, make sure it is up-to-date and you are on the `master` branch by running:
+. Clone the https://github.com/circleci/enterprise-setup[Setup] repository. If you already have it cloned, make sure it is up-to-date and you are on the `main` branch by running:
 +
 ```shell
-git checkout master && git pull
+git checkout main && git pull
 ```
 . Go to the top directory of the `enterprise-setup` repo on your local machine.
 

@@ -525,7 +525,7 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 ### Which CPU architectures does CircleCI support?
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-`amd64` is the only supported CPU architecture.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
 
 
 [docker-hub]: https://hub.docker.com

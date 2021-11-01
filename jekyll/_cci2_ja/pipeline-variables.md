@@ -22,16 +22,17 @@ version:
 
 パイプライン値はすべてのパイプライン構成で使用でき、事前に宣言することなく使用できます。
 
-| 値                          | 説明                                                                                    |
-| -------------------------- | ------------------------------------------------------------------------------------- |
-| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。 |
-| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                           |
-| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： https://github.com/circleci/circleci-docs              |
-| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                              |
-| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                    |
-| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                    |
-| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                             |
-| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字）                                                  |
+| 値                          | 説明                                                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。                                |
+| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                                                          |
+| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 E.g. 例： 例： https://github.com/circleci/circleci-docs                                        |
+| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                                                             |
+| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                                                   |
+| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                                                   |
+| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                                                            |
+| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字）                                                                                 |
+| pipeline.in_setup          | True if the pipeline is in the setup phase, i.e. running a [setup workflow]({{ site.baseurl }}/2.0/dynamic-config/). |
 {: class="table table-striped"}
 
 注: 多くの場合、`pipeline.git.base_revision` は、現在実行しているパイプラインより前のパイプラインを実行する SHA ですが、いくつか注意事項があります。 ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。

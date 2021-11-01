@@ -34,7 +34,7 @@ SSH を使用してログインすると、対話型のログイン シェルが
 
      **メモ:** `[Rerun job with SSH (SSH でジョブを再実行する)]` はデバッグのための機能ですので、ジョブを再実行してもパイプラインに反映されません。 SSH でジョブの再実行を行うと、新しいパイプラインはトリガーされず、ジョブだけが再実行されます。 必要に応じて、[legacy jobs view (レガシー ジョブ ビュー)] から実行中のジョブにアクセスできます。
 
-3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。ここで、接続に必要な SSH コマンドを確認できます。
+3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。
 
      詳細情報は、ジョブ出力の末尾にある [Wait for SSH (SSH を待機する)] セクションにも再度表示されます。
 
@@ -95,7 +95,7 @@ CircleCI ビルドに SSH 接続するには、ビルドするプロジェクト
 {: #ensure-the-correct-key-is-offered-to-circleci }
 {:.no_toc}
 
-正しいユーザーで認証を行っていることが確認できた後も、CircleCI で "Permission denied (権限がありません)" メッセージが表示される場合は、CircleCI に誤った認証情報を提供している可能性があります  (SSH の設定内容によっては他にも理由が考えられます)。
+正しいユーザーで認証を行っていることが確認できた後も、CircleCI で "Permission denied (権限がありません)" メッセージが表示される場合は、CircleCI に誤った認証情報を提供している可能性があります  (SSH の設定内容によっては他にも理由が考えられます)。  (SSH の設定内容によっては他にも理由が考えられます)
 
 認証を行う GitHub にどのキーを提供しているかを調べるには、以下を実行します。
 
@@ -128,11 +128,11 @@ GitHub が受け付けたキー (この例では /Users/me/.ssh/id_rsa_github) �
 提供されていない場合は、SSH の `-i` コマンドライン引数を使用してキーを指定します。 たとえば下記のようにします。
 
 ```
-$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
+$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket とのインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket とのインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)

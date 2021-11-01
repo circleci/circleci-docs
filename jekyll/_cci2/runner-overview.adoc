@@ -10,8 +10,6 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
-
 toc::[]
 
 == Introduction
@@ -84,7 +82,6 @@ prioritize development efforts from our team!
 
 To get started with CircleCI runner:
 
-* https://circleci.com/contact/[Contact us] to sign up for a free trial of the Scale plan, if you are not already enrolled
 * Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runner platforms>> section)
 * xref:runner-installation.adoc[Install] CircleCI runner!
 
