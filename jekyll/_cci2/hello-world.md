@@ -7,10 +7,11 @@ categories: [getting-started]
 order: 4
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
-This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
+This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
 
 ## Echo hello world on Linux
 {: #echo-hello-world-on-linux }
@@ -19,7 +20,7 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration):
+1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
    jobs:
@@ -69,7 +70,7 @@ See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for det
 ## Hello world for macOS
 {: #hello-world-for-macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_The macOS executor is not currently available on installations of CircleCI Server v2.x_
 
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 

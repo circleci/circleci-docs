@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 ---
 = CircleCI Runner API
 :page-layout: classic-docs

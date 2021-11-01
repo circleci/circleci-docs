@@ -4,6 +4,7 @@ title: "Deployment"
 short-title: "Deployment"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

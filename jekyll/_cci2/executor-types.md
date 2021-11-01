@@ -7,6 +7,7 @@ categories: [containerization]
 order: 10
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 [custom-images]: {{ site.baseurl }}/2.0/custom-images/
@@ -288,7 +289,7 @@ jobs:
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using:
 * CircleCI Cloud – config version 2.1.
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -324,7 +325,7 @@ jobs:
 
 Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/developer/orbs/orb/circleci/windows) for more details.
 
-CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
+CircleCI server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
 ## Using GPUs
 {: #using-gpus }

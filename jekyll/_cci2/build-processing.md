@@ -7,9 +7,10 @@ categories: [settings]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
-This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows. Pipelines are not currently available on self hosted installations of CircleCI Server.
+This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows. Pipelines are available on CircleCI cloud and self hosted installations of CircleCI server v3.x.
 
 * TOC
 {:toc}

@@ -135,7 +135,7 @@ Please refer to the platform-specific installation instructions:
 
 For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
 
-== Runner for Server Compatibility
+== Runner for server compatibility
 _CircleCI Runner is available from server v3.1.0_
 
 Each minor version of server is compatible with a specific version of

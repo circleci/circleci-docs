@@ -6,6 +6,7 @@ description: "Using Workflows to Schedule Jobs"
 order: 30
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: Manual job approval and scheduled workflow runs

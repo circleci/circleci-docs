@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-The following sections summarize the key files and variables that impact CircleCI Server behavior, and configuration options for your Server installation.
+The following sections summarize the key files and variables that impact CircleCI server behavior, and configuration options for your server installation.
 
 toc::[]
 
@@ -85,7 +85,7 @@ NOTE: Every property should be in the format `export ENV_VAR="value"`
 <<<
 
 == Service Configuration Overrides
-This section describes the configuration interface for overriding services in CircleCI Server.
+This section describes the configuration interface for overriding services in CircleCI server.
 
 WARNING: Customizing your configuration can have potentially damaging consequences, so we recommend contacting support@circleci.com for guidance before making any changes.
 
@@ -97,7 +97,7 @@ Consider the file “customizations” created at the following path /etc/circle
 export FOO="bar"
 ```
 
-The value of FOO will take precedence over the default values set in the default container mapping in the CircleCI Server configuration.
+The value of FOO will take precedence over the default values set in the default container mapping in the CircleCI server configuration.
 
 === Available Overrides
 
@@ -127,7 +127,7 @@ The value of FOO will take precedence over the default values set in the default
 ```
 
 === Resource Classes
-_Introduced in CircleCI Server v2.19_
+_Introduced in CircleCI server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
@@ -156,7 +156,7 @@ NOTE: This file replaces the full resource class definition for your installatio
 ```shell
 echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
 ```
-. Restart the CircleCI Server application. The application can be stopped and started again from the Management Console Dashboard (for example, `<circleci-hostname>.com:8800`).
+. Restart the CircleCI server application. The application can be stopped and started again from the Management Console Dashboard (for example, `<circleci-hostname>.com:8800`).
 
 Below is an example resource class configuration:
 
@@ -196,7 +196,7 @@ CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to al
 
 ////
 ==== Enable the Large Resource Class for Machine Executor
-_Introduced in CircleCI Server v2.19_
+_Introduced in CircleCI server v2.19_
 
 To use second machine type (`large` in the example above), a further step is required to enable this for your organization. Following are the required steps:
 

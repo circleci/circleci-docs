@@ -5,7 +5,11 @@ description: Using GitHub or Bitbucket
 categories: [migration]
 Order: 60
 version:
-  - Cloud
+- Cloud
+- Server v3.x
+- Server v2.x
+
+
 ---
 
 This document provides an overview of using GitHub, GitHub Enterprise, or
@@ -434,7 +438,7 @@ requires, and then associate its user key with your project on CircleCI.
 ## Establishing the authenticity of an SSH host
 {: #establishing-the-authenticity-of-an-ssh-host }
 
-When using SSH keys to checkout repositories, it may be neccesary to add the
+When using SSH keys to checkout repositories, it may be necessary to add the
 fingerprints for GitHub or BitBucket to a "known hosts" file
 (`~/.ssh/known_hosts`) so that the executor can verify that the host it's
 connecting to is authentic. The `checkout`job step does this automatically, so

@@ -6,6 +6,7 @@ description: "A list of supported environment variables in CircleCI 2.0"
 order: 40
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: Keep environment variables private
@@ -36,7 +37,7 @@ Use Contexts to [further restrict access to environment variables](#setting-an-e
 ## Secrets masking
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
+_Secrets masking is not currently available on self-hosted installations of CircleCI server_
 
 Secrets Masking is applied to environment variables set within Project Settings or under Contexts. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
 

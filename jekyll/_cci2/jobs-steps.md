@@ -5,6 +5,10 @@ short-title: "Orbs, Jobs, Steps, and Workflows"
 description: "Description of Jobs and Steps"
 categories: [migration]
 order: 2
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 The document provides an overview of orbs, jobs, steps and workflows.
@@ -14,7 +18,6 @@ The document provides an overview of orbs, jobs, steps and workflows.
 
 ## Orbs overview
 {: #orbs-overview }
-_Orbs are not currently available on self-hosted installations of CircleCI Server._
 
 Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
 

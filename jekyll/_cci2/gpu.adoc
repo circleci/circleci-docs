@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
+This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
 
 toc::[]
 

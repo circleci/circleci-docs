@@ -6,6 +6,7 @@ description: "Example of Configuring PostgreSQL"
 order: 35
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

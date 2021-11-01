@@ -24,11 +24,11 @@ If you want to have different runners specialized for different workloads, it is
 * Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
 * Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
 
-=== CircleCI Server Installation
+=== CircleCI server installation
 
 When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
 
-==== Upgrading Runner Deployment for Server
+==== Upgrading runner deployment for server
 
 . Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
 . Deploy the changes to the cluster 

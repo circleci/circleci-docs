@@ -7,6 +7,7 @@ categories: [troubleshooting]
 order: 21
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
