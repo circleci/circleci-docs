@@ -34,6 +34,13 @@ module.exports = {
     ],
   },
   // Ignore warnings about default exports because some of our legacy
-  // code are not modules: src-js/site/main.js & src-js/site/user.js
-  ignoreWarnings: [/export 'default'/],
+  // code inported in app.js are not modules:
+  // - src-js/site/main.js
+  // - src-js/site/user.js
+  ignoreWarnings: [
+    {
+      module: /src-js\/app\.js/,
+      message: /export 'default'/,
+    },
+  ],
 };
