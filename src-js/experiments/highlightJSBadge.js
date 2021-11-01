@@ -34,6 +34,7 @@ window.onload = () => {
         onBeforeCodeCopied: function (text) {
           window.AnalyticsClient.trackAction('docs-copy-code-clicked', {
             page: location.pathname,
+            code: text,
           });
           return text;
         },
