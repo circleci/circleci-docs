@@ -106,6 +106,7 @@ Although we’ve only made two small changes to the config, these represent sign
 
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
+
 {% highlight yaml linenos %}
 version: 2.1
 jobs:
@@ -125,12 +126,12 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
+    
       - run:
           name: Running in a Unique Container
           command: |
             node -v
 {% endhighlight %}
-
 
 We also added a small `run` block that demonstrates we are running in a node container.
 
@@ -191,7 +192,6 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-
 workflows:
  version: 2
  Example_Workflow:
