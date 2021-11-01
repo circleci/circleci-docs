@@ -293,6 +293,7 @@ $(document).ready(function () {
         });
       },
       copy(event) {
+        let url = event.target.href;
         event.preventDefault();
         navigator?.clipboard
           .writeText(event.target.href)
@@ -316,7 +317,7 @@ $(document).ready(function () {
             window.AnalyticsClient.trackAction('docs-share-button-click', {
               page: location.pathname,
               success: true,
-              section: event.target.href,
+              section: url.substring(url.indexOf('#')),
             });
           })
           .catch((error) =>
