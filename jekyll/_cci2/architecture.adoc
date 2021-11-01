@@ -1,4 +1,5 @@
 ---
+description: "This document describes the various services that make up a CircleCI Server v2 installation."
 version:
 - Admin
 - Server v2.x
