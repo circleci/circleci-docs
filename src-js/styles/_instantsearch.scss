@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .base-input-style {
   border-radius: 0;
   padding: 1.25em 1em 1em 2.8em;
@@ -85,8 +87,8 @@
 }
 
 .result-item-wrap {
-  $result-vertical-spacing: $spacing-medium-vertical / 4;
-  $half-gutter-width: $grid-gutter-width / 2;
+  $result-vertical-spacing: math.div($spacing-medium-vertical, 4);
+  $half-gutter-width: math.div($grid-gutter-width, 2);
 
   padding: $result-vertical-spacing $half-gutter-width;
   margin-left:  -$half-gutter-width;
