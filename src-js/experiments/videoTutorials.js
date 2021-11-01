@@ -2,7 +2,7 @@ $(() => {
   // https://app.optimizely.com/v2/projects/16812830475/experiments/20790151733/variations
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_add_video_tab_to_docs_test',
-    groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
+    groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
   }).then((variation) => {
     if (variation === 'treatment') {
       $('.main-nav-item[data-section=video-tutorials]').show();
