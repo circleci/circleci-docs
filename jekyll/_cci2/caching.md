@@ -68,7 +68,7 @@ If your project is open source/available to be forked and receive PRs from
 contributors, please make note of the following:
 
 - PRs from the same fork repo will share a cache (this includes, as previously
-  stated, that PRs in the master repo share a cache with master).
+  stated, that PRs in the main repo share a cache with main).
 - Two PRs in different Fork Repos will have different caches.
 - enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
   will enable cache sharing between the original repo and all forked builds.
@@ -88,7 +88,7 @@ Tools that are not explicitly required for your project are best stored on the D
 
 Jobs in one workflow can share caches. Note that this makes it possible to create race conditions in caching across different jobs in workflows.
 
-Cache is immutable on write: once a cache is written for a particular key like `node-cache-master`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
+Cache is immutable on write: once a cache is written for a particular key like `node-cache-main`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
 
 In a run of the workflow, Job3 may use the cache written by Job1 or Job2.  Since caches are immutable, this would be whichever job saved its cache first.  This is usually undesireable because the results aren't deterministic--part of the result depends on chance.  You could make this workflow deterministic by changing the job dependencies: make Job1 and Job2 write to different caches and Job3 loads from only one, or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
 

@@ -12,6 +12,7 @@
     "postinstall": "git config blame.ignoreRevsFile .git-blame-ignore-revs && git submodule update --init",
     "dev": "yarn webpack-dev && docker-compose up",
     "start": "./scripts/start.sh",
+    "clean": "docker exec -it circleci-docs_jekyll_1 bundle exec jekyll clean",
     "stop": "docker-compose down",
     "prod": "yarn webpack-prod && docker-compose up",
     "webpack-dev": "webpack --mode=development",

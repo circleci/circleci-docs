@@ -42,6 +42,16 @@ This is the URL used by runner to communicate with CircleCI. This variable is on
 
 `RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
 
+=== logging.file
+This controls the file where the launch-agent and task-agent logs will go. See xref:runner-overview.adoc#circleci-runner-operation[CircleCI runner operation] for more information on the launch-agent and the task-agent.
+
+Example:
+
+```sh
+logging:
+  file: /Library/Logs/com.circleci.runner.log
+```
+
 === runner.command_prefix
 `$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 

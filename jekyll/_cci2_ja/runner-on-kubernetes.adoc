@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Kubernetes での CircleCI ランナーの使用
+= CircleCI Runner Installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -14,17 +14,14 @@ toc::[]
 
 == はじめに
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
+This installation guide is to help set up CircleCI runner on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 
-ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
+The Helm chart will spin up one or more pods of *the same runner resource class*. This is useful for when you want all of these runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
-この Helm チャートでは、*同じランナー リソース クラス*の Pod を 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
+If you want to have different runners specialized for different workloads, it is recommended to create different runner resource classes and rerun these instructions/have separate charts for each runner class you create.
 
-ワークロードごとに専用のランナーが必要な場合は、ランナー リソース クラスを複数作成して下記手順を繰り返し実行するか、作成したい各ランナー クラス用に個別の Helm チャートを作成することをお勧めします。
-
-=== 前提条件
-* Scale プランを利用しているか、試用している。 上記を参照してください。
-* ランナーのデプロイ先で Kubernetes クラスタを稼動させている。
+=== Prerequisites
+* Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
 * Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
 
 === CircleCI Server Installation
