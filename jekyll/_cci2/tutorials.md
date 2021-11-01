@@ -4,6 +4,7 @@ title: "Tutorials"
 description: "Tutorials and 2.0 Sample Apps with Guides"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

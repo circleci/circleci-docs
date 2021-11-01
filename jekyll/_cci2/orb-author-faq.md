@@ -6,6 +6,7 @@ description: "Frequently asked questions from orb authors."
 order: 20
 version:
 - Cloud
+- Server v3.x
 ---
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.

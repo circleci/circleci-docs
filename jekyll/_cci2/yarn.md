@@ -6,6 +6,7 @@ categories: [how-to]
 description: "How to use the Yarn package manager on CircleCI."
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

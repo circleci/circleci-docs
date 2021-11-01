@@ -7,6 +7,7 @@ categories: [migration]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: Using dynamic config

@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 10
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

@@ -6,6 +6,7 @@ description: "ビルド以外のジョブを定義およびトリガーする方
 order: 80
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 

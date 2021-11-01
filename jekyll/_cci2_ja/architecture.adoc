@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-本ドキュメントでは、CircleCI ServerのインストールされるServicesマシン上で実行されるコンテナ化されたサービスの概要を説明します。
+本ドキュメントでは、CircleCI serverのインストールされるServicesマシン上で実行されるコンテナ化されたサービスの概要を説明します。
  このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
 toc::[]
@@ -123,7 +123,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 | `postgres`, `frontend`
 
 | `fileserved`
-| File storage service used as a replacement for S3 when CircleCI Server is run outside of AWS. Not used if Server is configured to use S3. Stores step output logs, artifacts, test results, caches and workspaces.
+| File storage service used as a replacement for S3 when CircleCI server is run outside of AWS. Not used if server is configured to use S3. Stores step output logs, artifacts, test results, caches and workspaces.
 | If not using S3, builds will produce no outputand some REST API calls might fail.
 | icon:fire-extinguisher[] if **not** using S3
 | None
@@ -141,7 +141,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 | `mongodb-upgrader`
 
 | `nomad-metrics`
-| Queries the nomad server for stats and sends them to statsd.
+| Queries the Nomad Server for stats and sends them to statsd.
 | Nomad metrics will be lost, but everything else should run as normal.
 | icon:check-circle[]
 | None

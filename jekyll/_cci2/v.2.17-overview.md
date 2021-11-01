@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.17. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog).
+This document provides a summary of features and product notes for the release of CircleCI server v2.17. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog).
 
 ## What's new in release 2.17
 {: #whats-new-in-release-217 }

@@ -1,1 +1,1 @@
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI server._
