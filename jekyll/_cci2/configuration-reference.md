@@ -1528,7 +1528,7 @@ requires | N | List | A list of jobs that must succeed for the job to start. Not
 
 ###### **`name`**
 {: #name }
-The `name` key can be used to invoke reusable executors across any number of workflows. Using the name key ensures numbers are not appened to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name. 
+The `name` key can be used to invoke reusable executors across any number of workflows. Using the name key ensures numbers are not appened to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
