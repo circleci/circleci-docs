@@ -75,7 +75,7 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 ## macOS
 {: #macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
 ```
 jobs:
@@ -96,7 +96,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 The syntax for using the Windows executor in your config differs depending on whether you are using:
 
 * The cloud version of CircleCI, using config version 2.1 and the Windows orb.
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```

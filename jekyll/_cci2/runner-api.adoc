@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 ---
 = CircleCI Runner API
 :page-layout: classic-docs
@@ -8,8 +9,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative for information on how to sign up for the Scale plan.
 
 This document contains all the external facing endpoints for the CircleCI runner API.
 

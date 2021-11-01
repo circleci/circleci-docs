@@ -194,33 +194,27 @@ workflows:
 
 ```yaml
 # ...
-# << build、test1、test2、deploy の各ジョブの設定 >>
+# << your config for the build, test1, test2, and deploy jobs >>
 # ...
 
 workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - build  # 設定ファイルに含まれるカスタム ジョブ。
-            コードをビルドします。
-      - test1: # カスタム ジョブ。
-          test suite 1 を実行します。
+      - build  # 設定ファイルに含まれるカスタム ジョブ。コードをビルドします。
+      - test1: # カスタム ジョブ。test suite 1 を実行します。
           requires: # "build" ジョブが完了するまで test1 は実行されません。
-      
-               - build
-      - test2: # 別のカスタム ジョブ。test suite 2 を実行します。
+            - build
+      - test2: # 別のカスタム ジョブ。
           requires: # test 2 の実行は、"test1" ジョブが成功するかどうかに依存します。
             - test1
       - hold: # <<< CircleCI Web アプリケーションでの手動承認を必要とするジョブ。
-    
-             type: approval # <<< このキーと値のペアにより、ワークフローのステータスが "On Hold" に設定されます。
+          type: approval # <<< このキーと値のペアにより、ワークフローのステータスが "On Hold" に設定されます。
           requires: # test 2 が成功した場合にのみ "hold" ジョブを実行します。
            - test2
       # "hold" ジョブが承認されると、"hold" ジョブを必要とする後続のジョブが実行されます。
-   
-        # この例では、ユーザーが手動でデプロイ ジョブをトリガーしています。
- 
-       deploy:
+       # この例では、ユーザーが手動でデプロイ ジョブをトリガーしています。
+      - deploy:
           requires:
             - hold
 ```
@@ -241,11 +235,14 @@ workflows:
 {:.tab.switcher.Cloud}
 ![保留中のワークフローの承認ジョブ]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server-v2}
+{:.tab.switcher.Server_3}
+![保留中のワークフローの承認待ちジョブ]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+
+{:.tab.switcher.Server_2}
 ![組織の切り替えメニュー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
-保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
+保留中のジョブの名前 (上記のスクリーンショットでは `build`) をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログ ボックスが表示されます。
 
 承認後、設定ファイルでの指示に従って残りのワークフローが実行されます。
 
@@ -298,7 +295,7 @@ workflows:
 
 有効な `schedule` には、`cron` キーと `filters` キーが必要です。
 
-`cron` キーの値は、 [有効な crontab エントリ](https://crontab.guru/)でなければなりません。
+`cron` キーの値は [valid crontab entry](https://crontab.guru/) にある通りに指定しなければなりません。
 
 **注:** cron のステップ構文 (`*/1` や `*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内では、範囲エレメントは**サポートされません**。 曜日の範囲エレメント (例: `Tue-Sat`) も**サポートされません**。 代わりに、カンマ区切りの数字を使用してください。
 
@@ -328,7 +325,7 @@ workflows:
 ## ワークフローにおけるコンテキストとフィルターの使用
 {: #using-contexts-and-filtering-in-your-workflows }
 
-このセクションではジョブの実行を管理するコンテキストとフィルターの使い方について解説しています。
+次のセクションではジョブの実行を管理するコンテキストとフィルターの使い方を解説しています。
 
 ### ジョブ コンテキストを使用して環境変数を共有する
 {: #using-job-contexts-to-share-environment-variables }
@@ -533,7 +530,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 ## ワークスペースによるジョブ間のデータ共有
 {: #using-workspaces-to-share-data-among-jobs }
 
-どのワークフローにも必ず、ワークフローの進捗に伴ってダウンストリームジョブにファイルを転送するために使用される Workspace というものが割り当てられます。 Workspace ではデータの追加保存のみが可能で、  ジョブは Workspace に永続的にデータを保管しておけます。 この設定を行うとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 ダウンストリーム ジョブは、そのコンテナのファイル システムにワークスペースをアタッチできます。 Workspace をアタッチすると ワークフローグラフ内のアップストリーム ジョブの順序に基づいて、各レイヤーがダウンロードされアンパッケージ化されます。
+どのワークフローにも必ず、ワークフローの進捗に伴ってダウンストリームジョブにファイルを転送するために使用される Workspace というものが割り当てられます。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を行うとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 ダウンストリーム ジョブは、そのコンテナのファイル システムにワークスペースをアタッチできます。 Workspace をアタッチすると ワークフローグラフ内のアップストリーム ジョブの順序に基づいて、各レイヤーがダウンロードされアンパッケージ化されます。
 
 ![Workspaceのデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -552,7 +549,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 # これにより、ジョブ間で再利用される Docker イメージを定義できます。
 # 詳細は、https://circleci.com/ja/docs/2.0/reusing-config/# 再利用可能な Executor のオーサリング を参照してください。
 
-version: 2.
+version: 2.1
 
 executors:
   my-executor:
@@ -572,7 +569,9 @@ jobs:
 
       # ダウンストリーム ジョブ用に、指定したパス (workspace/echo-output) を Workspace に維持します。
       - persist_to_workspace:
-#  絶対パス、または working_directory からの相対パスで指定する必要があります。 これは、コンテナ上のディレクトリで、
+          #  絶対パス、または working_directory からの相対パスで指定する必要があります。 これは、コンテナ上のディレクトリで、
+           # ワークスペースのルート ディレクトリと見なされます。
+          これは、コンテナ上のディレクトリで、
            # ワークスペースのルート ディレクトリと見なされます。
                     root: workspace
           # ルートからの相対パスを指定する必要があります。
@@ -602,7 +601,6 @@ workflows:
       - downstream:
           requires:
             - flow
-
 ```
 
 ワークスペースを使用してビルド ジョブとデプロイ ジョブの間でデータを受け渡す実際の例については、CircleCI ドキュメントをビルドするように設定された [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) を参照してください。

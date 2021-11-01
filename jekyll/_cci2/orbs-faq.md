@@ -6,6 +6,7 @@ description: "FAQs for Orbs"
 order: 20
 version:
 - Cloud
+- Server v3.x
 ---
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.

@@ -53,24 +53,26 @@
 
         {% if page.toc != false %}
         <aside class="full-height">
-          <h5 class="toc-heading">On this page</h5>
-          <div class="toc-indent">
-            {{ content | toc_only }}
-          </div>
-          {% if page.suggested != false %}
-          <div id="related-resources">
-            <h5 class="related-heading">Helpful resources</h5>
-            <div class="related-indent">
-              <ul class="section-nav">
-                {% for item in page.suggested %}
-                <li class="related-entry related-h2">
-                  <a href="{{item.link}}" target="_blank">{{item.title}}</a>
-                </li>
-                {% endfor %}
-              </ul>
+          <div class='full-height-sticky'>
+            <h5 class="toc-heading">On this page</h5>
+            <div class="toc-indent">
+              {{ content | toc_only }}
             </div>
+            {% if page.suggested != false %}
+            <div id="related-resources">
+              <h5 class="related-heading">Helpful resources</h5>
+              <div class="related-indent">
+                <ul class="section-nav">
+                  {% for item in page.suggested %}
+                  <li class="related-entry related-h2">
+                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endif %}
           </div>
-          {% endif %}
         </aside>
         {% endif %}
       </div> <!-- .article-toc -->

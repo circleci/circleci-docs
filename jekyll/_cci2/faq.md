@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "FAQ"
 short-title: "FAQ"
-description: "Frequently asked questions about CircleCI 2.0"
+description: "Frequently asked questions about CircleCI"
 categories: [migration]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -281,11 +282,11 @@ Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
 
 The Windows machines have 4 vCPUs and 15GB RAM.
 
-### Is Windows available on installed versions of CircleCI?
+### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+The Windows executor is available on CircleCI server v3.x and v2.x
 
 ## Billing
 {: #billing }
@@ -524,7 +525,7 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 ### Which CPU architectures does CircleCI support?
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-`amd64` is the only supported CPU architecture.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
 
 
 [docker-hub]: https://hub.docker.com

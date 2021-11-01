@@ -6,6 +6,7 @@ categories: [how-to]
 description: "Yarn is an open-source package manager for JavaScript. Learn how to use Yarn in CircleCI config and with caching to speed up builds."
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

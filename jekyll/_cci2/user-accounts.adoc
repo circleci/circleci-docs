@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This section provides information to help system administrators of self-hosted CircleCI Server installations manage accounts for their users. For an overview of user accounts, view the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin. This overview provides the active user count and the total number of licensed users.
+This section provides information to help system administrators of self-hosted CircleCI server installations manage accounts for their users. For an overview of user accounts, view the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin. This overview provides the active user count and the total number of licensed users.
 
 toc::[]
 
@@ -54,7 +54,7 @@ image::suspend-new-users.png[Suspend New Users]
 
 === Activating a Suspended New User Account
 
-To activate an **new** account that was automatically suspended, and allow the associated user access to your installation of CircleCI Server:
+To activate an **new** account that was automatically suspended, and allow the associated user access to your installation of CircleCI server:
 
 1. Navigate to your CircleCI Admin Settings
 2. Select Users from the Admin Settings menu
@@ -80,7 +80,7 @@ NOTE: Any form of organization membership is within the scope of this approval f
 
 === Full User List
 
-To view a full list of users for your CircleCI Server installation, first SSH into your Services machine, and then run:
+To view a full list of users for your CircleCI server installation, first SSH into your Services machine, and then run:
 
 ```
 circleci dev-console
@@ -91,7 +91,7 @@ circleci dev-console
 
 NOTE: If you have at any point changed your GitHub/Enterprise hostname associated with CircleCI, contact your account team before attempting to remove a user.
 
-If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's GitHub username:
+If you need to remove a user from your installation of CircleCI server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's GitHub username:
 
 ```shell
 circleci dev-console

@@ -4,6 +4,7 @@ title: "Configuration"
 description: "The core of the CircleCI experience is creating a deterministic build with the config.yml file. Watch a video introduction to circleci/config.yml."
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

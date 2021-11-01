@@ -72,7 +72,27 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblockone.Server}
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_2}
 ```yaml
 version: 2
 
@@ -108,10 +128,10 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 
 {:.tab.windowsblocktwo.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -125,7 +145,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblocktwo.Server}
+{:.tab.windowsblocktwo.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblocktwo.Server_2}
 ```yaml
 version: 2
 
@@ -147,7 +182,7 @@ jobs:
 
 Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
 
-* PowerShell 5
+* PowerShell (Windows Orb のデフォルト)
 * Bash
 * コマンド
 
@@ -178,9 +213,31 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblockthree.Server_3}
 ```YAML
 version: 2.0
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -221,9 +278,24 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server}
+{:.tab.windowsblockfour.Server_3}
 ```YAML
-version: 2.0
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -271,7 +343,7 @@ jobs:
       - checkout
 ```
 
-最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
+In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
 
 ```yaml
       - restore_cache:
@@ -347,37 +419,51 @@ CircleCI の機能については、以下のドキュメントを確認して�
     * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
-* シェル
+* AWS
+    * AWS CLI 1.16.209
+    * Python 3.6.0
+    * Botocore 1.12.199
+* Shells:
     * Powershell 5
     * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
-* .NET Framework 4.8
+* .NET Framework 5
 * .NET Core
+    * SDK 5.0.402
+    * SDK 5.0.401
     * SDK 3.1.406 (x64)
     * SDK 3.0.100-preview7-012821
     * Runtime 3.0.0-preview6-27804-01
     * SDK 2.2.401
     * Runtime 2.2.6
     * SDK 2.1.801
-* Git 2.22.0
+* Nunit 3.10.0
+* Git 2.33.1
 * Git LFS 2.7.2
+* Gzip 1.3.12
+* 7zip 19.00
+* PsExec64 2.34
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
-* Docker Engine - Enterprise バージョン 18.09.7
+* Docker Engine - Enterprise version 18.09.7
 * NuGet CLI 5.2.0.6090
-* Chocolatey v0.10.15
+* Chocolatey v0.11.2
 * Azure Service Fabric
     * SDK 3.3.617.9590
     * Runtime 6.4.617.9590
+* Azure CLI 2.0.70
 * OpenJDK 12.0.2
-* Node.js v12.8.0
-* NVM (Node Version Manager)
+* Node.js 14.17.5
+* NVM (Node Version Manager) 1.1.7
+* Yarn 1.22.17
 * Ruby 2.6.3
-* Go 1.12.7
-* Python 3.7.3
+* Go 1.17
+* Python 3.9
+* Java 12.0.2
 * Miniconda 3
-* テキスト エディター
-    * nano 2.5.3
-    * vim 8.0.604
+* WinAppDriver 1.1.1809.18001
+* Text editors
+    * nano 2.5
+    * vim 8.2
 * jq 1.5

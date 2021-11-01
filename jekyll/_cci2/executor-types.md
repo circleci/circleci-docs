@@ -7,6 +7,7 @@ categories: [containerization]
 order: 10
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 [custom-images]: {{ site.baseurl }}/2.0/custom-images/
@@ -94,25 +95,30 @@ jobs:
       # and can access mongo on localhost
       - run: sleep 5 && nc -vz localhost 27017
 ```
-Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
+Docker images may be specified in a few ways:
 
-#### Public convenience images on Docker Hub
+1. by the image name and version tag on Docker Hub, or
+2. by using the URL to an image in a registry
+
+The following examples show how you can use public images from various sources:
+
+#### CircleCI's public convenience images on Docker Hub
 {: #public-convenience-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
-    - `circleci/node:14.17-buster-browsers`
+    - `cimg/node:14.17-browsers`
   - `name@digest`
-    - `redis@sha256:34057dd7e135ca41...`
+    - `cimg/node@sha256:aa6d08a04d13dd8a...`
 
 #### Public images on Docker Hub
 {: #public-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
-    - `alpine:3.4`
+    - `alpine:3.13`
   - `name@digest`
-    - `redis@sha256:54057dd7e125ca41...`
+    - `alpine@sha256:e15947432b813e8f...`
 
-#### Public Docker registries
+#### Public images on Docker registries
 {: #public-docker-registries }
 {:.no_toc}
   - `image_full_url:tag`
@@ -120,7 +126,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
+Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
 
 ### RAM disks
 {: #ram-disks }
@@ -283,7 +289,7 @@ jobs:
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using:
 * CircleCI Cloud – config version 2.1.
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -319,7 +325,7 @@ jobs:
 
 Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/developer/orbs/orb/circleci/windows) for more details.
 
-CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
+CircleCI server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
 ## Using GPUs
 {: #using-gpus }
