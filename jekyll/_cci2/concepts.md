@@ -140,9 +140,6 @@ jobs:
 # ...
 ```
 
-<<<<<<< HEAD
-{:.tab.executors.Server2.x}
-=======
 {:.tab.executors.Server_3}
 ```yaml
 version: 2.1
@@ -180,7 +177,6 @@ jobs:
 ```
 
 {:.tab.executors.Server_2}
->>>>>>> 67b8bdcb5f7e45b9e81d4a4e481283cb8a09634c
 ```yaml
 version: 2.0
 
