@@ -108,7 +108,7 @@ Although we’ve only made two small changes to the config, these represent sign
 
 
 {% highlight yaml linenos %}
-vversion: 2.1
+version: 2.1
 jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
