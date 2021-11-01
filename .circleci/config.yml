@@ -7,6 +7,15 @@ orbs:
   node: circleci/node@4.7.0
   md-proofer: hubci/md-proofer@0.1
 
+# This is using the new Scheduled Pipeline feature.
+# Right now (10/2021) there is no UI to configure it, so if you need to
+# change it's behavior, you'll have to do it manualy:
+# https://circleci.atlassian.net/wiki/spaces/CD/pages/6301483319/Schedule+Pipelines+Migration#Other-methods
+# See the "GET", "DELETE" or "PATCH" section.
+parameters:
+  run-schedule:
+    type: boolean
+    default: false
 
 # Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
 # In this case, we are commonly using the "workspaces" feature to share
@@ -75,6 +84,8 @@ commands:
 workflows:
 
   build-deploy:
+    when: 
+      not: << pipeline.parameters.run-schedule >>
     jobs:
       - js_build
       - build_server_pdfs:
@@ -107,13 +118,9 @@ workflows:
               only: master
   # We run a nightly build for running build/maintenance tasks
   # such as pulling in docker image tags or automating our api documentation
+  # Triggered every day at 08:00 AM on master branch
   nightly-build:
-    triggers:
-      - schedule:
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only: master
+    when: << pipeline.parameters.run-schedule >>
     jobs:
       - js_build
       - build_api_docs
@@ -124,7 +131,6 @@ workflows:
       - deploy:
           requires:
             - build
-
 
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
