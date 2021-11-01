@@ -3,11 +3,10 @@ layout: classic-docs
 title: "Video Tutorials"
 short-title: "CircleCI video tutorials"
 description: "Learn CircleCI using these popular video tutorials, demos, webinars, and courses."
-#categories: [optimization]
-#order: 70
-#version:
-# - Cloud
-# - Server v2.x
+version:
+- Cloud
+- Server v2.x
+- Server v3.x
 overviewYT:
   - youtubeId: Js3hMUsSZ2c
     title: How to get started with CircleCI
@@ -29,9 +28,6 @@ buildYT:
     title: Making CI/CD Builds Faster with CircleCI
   - youtubeId: P7-bmPkU_zU
     title: Continuous integration overview
-# deployYT:
-#   - youtubeId: eZxKs1mrxTM
-#     title: Introduction to Deployments on CircleCI
 optimizeYT:
   - youtubeId: L9cAyZZn_XY
     title: Optimizing configurations with CircleCI Pipelines
