@@ -10,17 +10,17 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes the various ways users of your CircleCI Server installation can get access and authenticate their accounts. CircleCI currently supports OAuth and LDAP as authentication methods.
+This document describes the various ways users of your CircleCI server v2.x installation can get access and authenticate their accounts. CircleCI server v2.x supports OAuth and LDAP as authentication methods.
 
 toc::[]
 
 == OAuth with GitHub/GitHub Enterprise
 
-The default method for user account authentication in CircleCI Server is through GitHub.com/GitHub Enterprise OAuth.
+The default method for user account authentication in CircleCI server is through GitHub.com/GitHub Enterprise OAuth.
 
 After your installation is up and running, provide users with a link to access the application - for example `<your-circleci-hostname>.com` – and it will prompt them to set up an account by running through the GitHub/GitHub Enterprise OAuth flow. The application will then redirect them to the CircleCI login screen.
 
-.CircleCI Server Login Screen
+.CircleCI Server v2.x Login Screen
 image::server_login.png[Server Login]
 
 == LDAP
@@ -32,7 +32,7 @@ CAUTION: Enabling LDAP will **disable** other authentication methods. CircleCI *
 
 * Install and configure your OpenLDAP server or Active Directory.
 * Configure GitHub Enterprise or GitHub.com to be the source of organizations and projects to which users have access.
-* Install a new instance of CircleCI Server with no existing users.
+* Install a new instance of CircleCI server v2.x with no existing users.
 
 === Configure LDAP Authentication
 
@@ -41,7 +41,7 @@ This section provides information to configure LDAP. Below is an example configu
 .LDAP Config Example
 image::LDAP_example.png[LDAP Example]
 
-These are the steps to configure LDAP in the CircleCI Server Management Console:
+These are the steps to configure LDAP in the CircleCI server v2.x management console:
 
 . Verify access over the LDAP/AD ports to your LDAP/AD servers.
 . Log in as administrator to the Management Console for your newly installed CircleCI instance.
