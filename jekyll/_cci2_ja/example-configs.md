@@ -6,10 +6,6 @@ description: "CircleCI 2.0 入門ガイド"
 categories:
   - getting-started
 order: 1
-version:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
 ---
 
 CircleCI 2.0 で実行されるパブリック プロジェクトおよびオープンソース プロジェクトのサンプル全体は、以下の各ドキュメントとリンク先の `.circleci/config.yml` ファイルでご確認いただけます。
