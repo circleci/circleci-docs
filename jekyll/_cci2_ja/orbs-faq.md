@@ -6,6 +6,7 @@ description: "Orb に関するよくあるご質問"
 order: 20
 version:
   - Cloud
+  - Server v3.x
 ---
 
 よく寄せられるご質問や技術的な問題など、Orb の使用時に役立つ情報をまとめました。
