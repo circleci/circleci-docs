@@ -4,7 +4,6 @@ title: "デプロイ"
 short-title: "デプロイ"
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
