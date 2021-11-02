@@ -297,7 +297,7 @@ $(document).ready(function () {
         // to account for if section copied and shared is the page title
         let section =
           url.charAt(url.length - 1) === '#'
-            ? url
+            ? 'Page Title'
             : url.substring(url.indexOf('#'));
         event.preventDefault();
         navigator?.clipboard
