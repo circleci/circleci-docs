@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI Server v2.17 の機能強化や不具合修正についてまとめます。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
+This document provides a summary of features and product notes for the release of CircleCI server v2.17. パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
 
 ## What's new in release 2.17
 {: #whats-new-in-release-217 }
