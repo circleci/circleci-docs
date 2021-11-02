@@ -71,7 +71,7 @@ jobs:
 ## macOS
 {: #macos }
 
-_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
+_The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
 ```
 jobs:
@@ -94,7 +94,7 @@ jobs:
 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
 * クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
-* オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。 これは、*CircleCI Server v2.18.3* からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```
