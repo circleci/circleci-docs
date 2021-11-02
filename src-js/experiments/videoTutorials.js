@@ -19,6 +19,13 @@ $(() => {
             'docs-video-tutorials-video-clicked',
             {
               link: $(this).attr('href'),
+              title: $(this)
+                .attr('id')
+                .replace(/^(thumbnail|title)-/i, ''),
+              element:
+                $(this).attr('id').indexOf('title') === 0
+                  ? 'title'
+                  : 'thumbnail',
             },
           );
         });
