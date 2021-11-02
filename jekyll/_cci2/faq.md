@@ -293,7 +293,7 @@ Unfortunately, Windows is not available on server installed versions of CircleCI
 ### Credit Usage Plans
 {: #credit-usage-plans }
 {:.no_toc}
-Vising our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
+Visit our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
 
 #### What are credits?
 {: #what-are-credits }
