@@ -4,6 +4,7 @@ title: "テスト"
 description: "CircleCI 2.0 テストの自動化セットアップ"
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
