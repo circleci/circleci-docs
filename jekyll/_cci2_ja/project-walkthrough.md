@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "2.0 プロジェクトのチュートリアル"
 short-title: "プロジェクトのチュートリアル"
-description: "CircleCI 2.0 での Flask プロジェクトのチュートリアルと構成例"
+description: "Tutorial and sample config for a Flask project in CircleCI"
 categories:
   - migration
 order: 3
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
