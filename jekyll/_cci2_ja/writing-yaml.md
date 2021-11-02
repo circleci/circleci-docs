@@ -6,6 +6,7 @@ description: "CircleCI の YAML を記述する方法"
 order: 20
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
