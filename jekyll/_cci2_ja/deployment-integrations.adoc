@@ -3,14 +3,14 @@ version:
 - Cloud
 - Server v2.x
 ---
-= デプロイの設定
+= Configuring Deploys
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-:toc-title:version:
+:toc-title:
 
-サークルCIでのデプロイは、他のジョブ設定と同じように、ジョブを作成し、ほぼすべてのターゲットにデプロイするように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
+Deployment at CircleCI is just the same as any other job configuration; you create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
@@ -127,38 +127,38 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory:~/circleci-demo-workflows
-   steps:
+    working_directory: ~/circleci-demo-workflows
+    steps:
       - checkout
-      # インストールの依存関係をバンドル
+      # Bundle install dependencies
       - run: bundle install --path vendor/bundle
 
-      # データベースのセットアップ
+      # Database setup
       - run: bundle exec rake db:create db:schema:load
 
       - run:
-          name:Run tests
+          name: Run tests
           command: rake
 
   deploy:
     machine:
         enabled: true
-    working_directory:~/circleci-demo-workflows
+    working_directory: ~/circleci-demo-workflows
     environment:
       HEROKU_APP: "sleepy-refuge-55486" # define env var $HEROKU_APP
     steps:
       - checkout
       - run:
           name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh # Herokuをセットアップするスクリプトを実行
+          command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
 
       - run:
-          command:|
+          command: |
             git push heroku sequential-branch-filter:master
             heroku run rake db:migrate
-            sleep 5 # ５秒間スリープしてDynoを待つ
+            sleep 5 # sleep for 5 seconds to wait for dynos
             heroku restart
-
+            
 workflows:
   version: 2
   build-and-deploy:
