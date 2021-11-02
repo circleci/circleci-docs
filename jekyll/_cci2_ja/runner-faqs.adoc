@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= CircleCI ランナーに関するよくあるご質問
+= CircleCI Runner FAQs
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
