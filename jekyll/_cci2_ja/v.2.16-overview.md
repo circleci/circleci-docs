@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.16.
+This document provides a summary of features and product notes for the release of CircleCI Server v2.16.
 
 ## What's new in release 2.16
 {: #whats-new-in-release-216 }
