@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to the GitHub app. **The GitHub checks integration feature is not currently available on CircleCI server**.
+This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to the GitHub app. **The GitHub checks integration feature is not currently available on CircleCI Server**.
 
 ## 概要
 GitHub Checks は、GitHub の [Checks] ページにワークフロー ステータスに関するメッセージを表示し、GitHub の [Checks] ページからワークフローを再実行できるようにします。
