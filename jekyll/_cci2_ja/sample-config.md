@@ -8,6 +8,7 @@ categories:
 order: 2
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 suggested:
   - 
@@ -653,11 +654,11 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 {% endraw %}
 
-以下に、同時実行ワークフローの設定ファイル サンプルを示します。 ここでは、`build` ジョブと `test` ジョブを一度に実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+This example shows a sequential workflow with the `test` job configured to run only on the main branch. ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 ## ファンイン・ファンアウト ワークフローの設定例
 {: #sample-configuration-with-fan-infan-out-workflow }
@@ -1064,9 +1065,9 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Deploy Master to Heroku
+          name: Deploy Main to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git main
 
 workflows:
   version: 2
@@ -1367,7 +1368,7 @@ workflows:
           context: github
           filters:
             branches:
-              only: master
+              only: main
 ```
 
 {:.tab.multiple-executors.Example-2}
