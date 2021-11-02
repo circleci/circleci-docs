@@ -8,7 +8,6 @@ categories:
 order: 4
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
@@ -41,7 +40,7 @@ Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) ア�
 **備考:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
-- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
+- Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
 
 ## Windows Executor イメージ
 {: #windows-executor-images }
@@ -312,7 +311,7 @@ jobs:
 # サンプル アプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
