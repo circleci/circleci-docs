@@ -135,7 +135,7 @@ grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$fi
 
 他のプラットフォームに関する詳細は、「xref:runner-overview.adoc#available-circleci-runner-platforms[利用可能な CircleCI ランナー プラットフォーム]」を参照してください。
 
-== CircleCI Server とランナーの互換性
+== Runner for Server Compatibility
 _CircleCI ランナーは CircleCI Server v3.1.0 以上で使用できます。_
 
 CircleCI Server のマイナー バージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。 以下の表に、CircleCI Server バージョンごとに、ランナーのインストール時に使用できる `circleci-launch-agent` のバージョンを示します。
