@@ -7,6 +7,7 @@ categories:
 description: "CircleCI での Yarn パッケージ マネージャーの使用方法"
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
