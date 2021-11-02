@@ -4,6 +4,7 @@ title: "設定ファイル"
 description: "CircleCI 2.0 設定ファイルのランディング ページ"
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
