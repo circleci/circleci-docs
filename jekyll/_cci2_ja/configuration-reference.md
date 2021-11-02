@@ -6,7 +6,6 @@ description: ".circleci/config.yml に関するリファレンス"
 order: 20
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 suggested:
   - 
@@ -161,7 +160,7 @@ jobs:
 
 ワークフローは 1 つ以上の一意の名前付きジョブで構成し、 それらのジョブは `jobs` マップで指定します。 [2.0 config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)で `jobs` マップの例を紹介しています。 ジョブの名前がマップのキーとなり、ジョブを記述するマップが値となります。
 
-**Note:** Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider upgrading your pricing plan or running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+**Note:** Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 {: #lessjobnamegreater }
@@ -888,7 +887,7 @@ CircleCI のデフォルトでは、ジョブ ステップが `config.yml` に�
 
 `on_fail` は、それまでのステップの 1 つが失敗した (0 以外の終了コードを返した) 場合にのみ、そのステップが実行されることを意味します。 失敗したテストのデバッグに役立てるために何らかの診断データを保存したり、失敗に関するカスタム通知 (メールの送信やチャットルームへのアラートのトリガーなど) を実行したりする場合に、よく使用されます。
 
-**メモ:** `store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or has reached the runtime timeout limit.
+**メモ:** `store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or reaching the global 5 hour timeout.
 
 ``` YAML
 - run:
@@ -1178,7 +1177,7 @@ steps:
 ``` YAML
 - deploy:
     command: |
-      if [ "${CIRCLE_BRANCH}" == "main" ]; then
+      if [ "${CIRCLE_BRANCH}" == "master" ]; then
         ansible-playbook site.yml
       fi
 ```
@@ -1469,7 +1468,7 @@ workflows:
            filters:
              branches:
                only:
-                 - main
+                 - master
                  - beta
      jobs:
        - test
@@ -1496,7 +1495,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 {: #branches }
 {:.no_toc}
 
-`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
+`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
 
 branches では、`only` キーと `ignore` キーを使用でき、どちらにもブランチ名を指す 1 つの文字列をマップさせます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致させる必要があります。
 
@@ -1872,7 +1871,7 @@ workflows:
   my-workflow:
       when:
         or:
-          - equal: [ main, << pipeline.git.branch >> ]
+          - equal: [ master, << pipeline.git.branch >> ]
           - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
@@ -1883,7 +1882,7 @@ workflows:
       and:
         - not:
             matches:
-              pattern: "^main$"
+              pattern: "^master$"
               value: << pipeline.git.branch >>
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
@@ -2040,7 +2039,7 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - run:
-          name: Deploy if tests pass and branch is Main
+          name: Deploy if tests pass and branch is Master
           command: ansible-playbook site.yml -i production
 
 workflows:
@@ -2064,7 +2063,7 @@ workflows:
             - build
           filters:
             branches:
-              only: main
+              only: master
 ```
 {% endraw %}
 
