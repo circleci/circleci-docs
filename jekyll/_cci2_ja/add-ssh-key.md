@@ -6,7 +6,6 @@ description: "CircleCI に SSH 鍵を追加する方法"
 order: 20
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
@@ -22,7 +21,7 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
-Otherwise, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
+Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
 複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
@@ -31,8 +30,8 @@ Otherwise, follow the steps below for the version of CircleCI you are using to a
 
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
-### CircleCI cloud or server 3.x
-{: #circleci-cloud-or-server-3-x }
+### CircleCI Cloud
+{: #circleci-cloud }
 
 1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
@@ -50,8 +49,8 @@ Otherwise, follow the steps below for the version of CircleCI you are using to a
 
 8. **Add SSH Key** ボタンをクリックします。
 
-### CircleCI server 2.19.x
-{: #circleci-server-2-19-x }
+### CircleCI Server
+{: #circleci-server }
 
 1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
