@@ -6,6 +6,7 @@ description: "PostgreSQL の構成例"
 order: 35
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
