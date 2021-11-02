@@ -1506,7 +1506,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 
 #### **`jobs`**
 {: #jobs-in-workflow }
-A job can have the keys `requires`, `context`, `type`, and `filters`.
+A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1525,7 +1525,15 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 Key | Required | Type | Description
 ----|-----------|------|------------
 requires | N | List | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
-name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
+{: class="table table-striped"}
+
+###### **`name`**
+{: #name }
+The `name` key can be used to invoke reusable executors across any number of workflows. Using the name key ensures numbers are not appened to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
 {: class="table table-striped"}
 
 ###### **`context`**
