@@ -8,6 +8,7 @@ categories:
 order: 10
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -47,7 +48,7 @@ workflows:
             - shellcheck/check # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master # only run build-job on master branch
+              only: main # only run build-job on main branch
 
 jobs:
   build-job:
@@ -85,7 +86,7 @@ workflows:
             - shellcheck # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master # only run build-job on master branch
+              only: main # only run build-job on main branch
 ```
 
 **Note:** Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way. In the example below, observe how the `tmp.sh` script file reveals too much.
