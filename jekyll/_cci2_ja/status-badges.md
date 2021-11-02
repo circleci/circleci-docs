@@ -4,6 +4,7 @@ title: ステータス バッジの追加
 description: CircleCI のステータス バッジを Web ページや Web ドキュメントに埋め込む方法
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
