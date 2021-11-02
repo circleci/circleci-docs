@@ -6,7 +6,6 @@ description: "従来のイメージから次世代イメージへの移行ガイ
 order: 30
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
