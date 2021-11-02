@@ -6,6 +6,7 @@ description: "CircleCI の API を使用するためにスコープ付きトー�
 order: 20
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
