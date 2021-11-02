@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -24,6 +25,7 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
@@ -59,4 +61,7 @@ module.exports = {
       message: /export 'default'/,
     },
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
 };
