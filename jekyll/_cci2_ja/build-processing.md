@@ -8,9 +8,10 @@ categories:
 order: 1
 version:
   - Cloud
+  - Server v3.x
 ---
 
-CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 パイプラインは、現在オンプレミス版の CircleCI Server ではサポートされていません。
+CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 Pipelines are available on CircleCI cloud and self hosted installations of CircleCI server v3.x.
 
 * 目次
 {:toc}
