@@ -6,6 +6,10 @@ description: "高度な構成のオプションと機能の概要"
 categories:
   - migration
 order: 2
+version:
+  - Cloud
+  - Server v3.x
+  - Server v2.x
 ---
 
 CircleCI は、高度な構成のためのオプションと機能を数多くサポートしています。 何ができるかについては、以下のスニペットを参照してください。 高度な構成を最適化するヒントも紹介します。
