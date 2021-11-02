@@ -74,17 +74,7 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      # ... steps for building/testing app ...
+version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照 steps: - checkout # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:
           version: 19.03.13
