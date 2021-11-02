@@ -294,6 +294,11 @@ $(document).ready(function () {
       },
       copy(event) {
         let url = event.target.href;
+        // to account for if section copied and shared is the page title
+        let section =
+          url.charAt(url.length - 1) === '#'
+            ? url
+            : url.substring(url.indexOf('#'));
         event.preventDefault();
         navigator?.clipboard
           .writeText(event.target.href)
@@ -317,7 +322,7 @@ $(document).ready(function () {
             window.AnalyticsClient.trackAction('docs-share-button-click', {
               page: location.pathname,
               success: true,
-              section: url.substring(url.indexOf('#')),
+              section: section,
             });
           })
           .catch((error) =>
