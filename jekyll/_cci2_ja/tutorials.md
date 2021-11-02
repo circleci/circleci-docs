@@ -4,6 +4,7 @@ title: "チュートリアル"
 description: "チュートリアルおよびガイド付き 2.0 サンプル アプリケーション"
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
