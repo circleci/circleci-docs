@@ -36,7 +36,7 @@ CircleCI CLI は、CircleCI の高度で便利なツールの多くを、使い�
 - Orbs の作成、公開、表示、管理
 - コンテキストの管理
 
-このドキュメントでは、CLI ツールのインストールと使用方法について説明します。 **Note:** this CLI is not available on CircleCI server v2.x installations but the legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
+このドキュメントでは、CLI ツールのインストールと使用方法について説明します。 **Note:** the new CLI is currently not available on server installations of CircleCI. The legacy CLI does work in Server and can be installed.
 
 * 目次
 {:toc}
@@ -372,10 +372,10 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 
 CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための[テストの分割](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)にも使用できます。
 
-## Using the CLI on CircleCI server v2.x
-{: #using-the-cli-on-circleci-server-v2-x }
+## Using the CLI on CircleCI server
+{: #using-the-cli-on-circleci-server }
 
-Currently, only the legacy CircleCI CLI is available to run on server v2.x. installations of CircleCI. macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
+Currently, only the legacy CircleCI CLI is available to run on server installations of CircleCI. macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
 
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
 2. 以下のコマンドを実行して、CLI をインストールします。
