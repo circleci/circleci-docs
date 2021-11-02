@@ -80,7 +80,9 @@ The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) comman
 The workflow runs as follows:
 
 * パーソナル アクセス トークンへの特別なアクセス権が不要なテストが実行されます。 このステージは、オープン ソースのプル リクエストから実行可能です。
-* The [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
+* The workflow is placed [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval). ![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png) The workflow will wait for a button click, via an alert prompt in the CircleCI app, before continuing.
+* Once the manual approval is authorized, subsequent jobs will be automatically authorized and may access the Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
+* After the workflow has been approved, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
 
     | Published Development Tag                              | Description                                                                      |
     | ------------------------------------------------------ | -------------------------------------------------------------------------------- |
