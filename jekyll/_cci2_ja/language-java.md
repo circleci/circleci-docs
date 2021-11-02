@@ -8,6 +8,7 @@ categories:
 order: 4
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
