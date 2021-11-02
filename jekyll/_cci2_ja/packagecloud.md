@@ -6,6 +6,7 @@ categories:
 description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
