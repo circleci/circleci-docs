@@ -4,7 +4,6 @@ title: "データの永続化"
 description: "CircleCI でデータを永続化する方法"
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
