@@ -80,14 +80,12 @@ The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) comman
 The workflow runs as follows:
 
 * パーソナル アクセス トークンへの特別なアクセス権が不要なテストが実行されます。 このステージは、オープン ソースのプル リクエストから実行可能です。
-* ワークフローが[保留](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54)状態になり、[手動での承認]({{site.baseurl}}/2.0/workflows/#%E6%89%8B%E5%8B%95%E6%89%BF%E8%AA%8D%E5%BE%8C%E3%81%AB%E5%87%A6%E7%90%86%E3%82%92%E7%B6%9A%E8%A1%8C%E3%81%99%E3%82%8B%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC)を求められます。 ![開発版 Orb のパブリッシュを手動で承認する]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png) CircleCI アプリケーションにアラート プロンプトが表示され、ボタンをクリックするまでワークフローは保留状態になります。
-* 手動承認によって認証が行われると、以降のジョブも自動的に認証され、制限付きコンテキストへのアクセス権が付与されます。 このようにすることで、オープンソースのプル リクエストによる Orb に対するビルドを可能にしながら、悪意のあるコードを防止しています。
-* ワークフローが承認されると、[orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) ジョブにより、開発版の Orb が次のように 2 回パブリッシュされます。
+* The [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
 
-    | パブリッシュされる開発タグ                                          | 説明                                         |
-    | ------------------------------------------------------ | ------------------------------------------ |
-    | `<namespace>/<orb>@dev:<branch>`     | ブランチ名にリンクされる開発タグです。 設定ファイルのテストを行う場合に使用します。 |
-    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | この SHA に固有の開発タグです。 次のワークフローで使用します。         |
+    | Published Development Tag                              | Description                                                                      |
+    | ------------------------------------------------------ | -------------------------------------------------------------------------------- |
+    | `<namespace>/<orb>@dev:<branch>`     | A development tag linked to the branch name. Useful for testing in your configs. |
+    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | A development tag specific to this SHA. Used in the following workflow.          |
     {: class="table table-striped"}
 
 このパイプラインの第 2 ステージでは[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E7%B5%90%E5%90%88%E3%83%86%E3%82%B9%E3%83%88)を実行し、開発版に追加およびパブリッシュされた新しい Orb の動作を確認します。
