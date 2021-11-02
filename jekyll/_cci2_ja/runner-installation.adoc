@@ -12,43 +12,43 @@ version:
 
 toc::[]
 
-== Prerequisites
+== 前提条件
 
-The installation process assumes you have installed the following utilities on your system:
+インストール プロセスでは、システムに以下のユーティリティをインストール済みであることを前提としています。
 
 * <<local-cli#installation,CircleCI CLI>>
-* curl (installed by default on macOS)
-* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
-* systemd version 235+ (Linux only)
-* sepolicy (RHEL 8 only)
-* rpmbuild (RHEL 8 only)
-* permissions to create a user, and create directories under /opt.
+* curl (macOS ではデフォルトでインストール済み)
+* sha256sum (Linux では apt または yum により coreutils の一部としてインストール、macOS では brew によりインストール)
+* バージョン 235 以降の systemd (Linux のみ)
+* sepolicy (RHEL 8 のみ)
+* rpmbuild (RHEL 8 のみ)
+* ユーザーの作成権限および /opt 以下のディレクトリの作成権限
 
-Running jobs requires you have the following tools available on your machine:
+ジョブを実行するには、マシンに次のツールを用意する必要があります。
 
 * tar
 * gzip
-* coreutils (Linux only)
-* git (recommended, but not required)
+* coreutils (Linux のみ)
+* git (推奨。ただし任意)
 
-== Authentication
+== 認証
 
-NOTE: These commands can only be run by an owner/admin of your organization.
+NOTE: 以下のコマンドを実行できるのは、組織のオーナーまたは管理者だけです。
 
-In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
+認証のために、下記手順を実行して名前空間と認証トークンを作成する必要があります。
 
-. Create a namespace for your organization's runner resources.
+. 組織のランナー リソース用の名前空間を作成します。
 +
-NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. 
+NOTE: 作成できる名前空間は、組織ごとに 1 つだけです。 Orb を既に使用中の場合、この名前空間は Orb で使用しているのと同じものになります。 
 + 
-Use the following command: 
+次のコマンドを実行します。 
 +
 ```
 circleci namespace create <name> <vcs-type> <org-name>
 ```
 +
 For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
-. Create a resource class for your runner for your namespace using the following command:
+. 次のコマンドを実行して、名前空間内にランナー用のリソース クラスを作成します。
 + 
 NOTE: Your newly created namespace is required in the command to create your resource class.
 +
@@ -58,40 +58,40 @@ circleci runner resource-class create <name>/<resource-class> <description> --ge
 +
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
-NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
+NOTE: リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。
 +
-CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
+CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
 
-== Installation
+== インストール
 
-=== Download the launch agent binary and verify the checksum
+=== ローンチ エージェント バイナリのダウンロードとチェックサムの検証
 [[download]]
-The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
+ローンチ エージェントは次のスクリプトでインストールできます。このスクリプトでは、ベースのインストール場所に `opt/circleci` を指定しています。
 
-First, set one of these variables as appropriate for for your installation target.
+まず、インストール対象のプラットフォームに応じて、次のいずれかの変数を設定します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Installation Target
-| Variable
+| インストール対象
+| 変数
 
-| For Linux x86_64
+| Linux x86_64
 | `platform=linux/amd64`
 
-| For Linux ARM64
+| Linux ARM64
 | `platform=linux/arm64`
 
-| For macOS x86_64
+| macOS x86_64
 | `platform=darwin/amd64`
 
-| For macOS M1
+| macOS M1
 | `platform=darwin/arm64`
 |===
 
-Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
+次に、`circleci-launch-agent` バージョンを設定します。 クラウド版 CircleCI のランナーは、サポートされている最新バージョンに自動的に更新されます。 CircleCI Server の場合、特定のランナー バージョンの相互運用性は検証されていますが、ランナーは自動更新されません。 A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
 
-For cloud, you can run the following:
+クラウド版 CircleCI の場合、以下を実行します。
 ```bash
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 export agent_version=$(curl "${base_url}/release.txt")
@@ -102,13 +102,13 @@ For server v3.1.0 and up, run the following, substituting `<launch-agent-version
 export agent_version="<launch-agent-version>"
 ```
 
-Finally, run the following script to download, verify and install the binary.
+最後に、次のスクリプトを実行して、バイナリをダウンロードして検証し、インストールします。
 ```bash
-# Set up runner directory
+# ランナー ディレクトリのセットアップ
 prefix=/opt/circleci
 sudo mkdir -p "$prefix/workdir"
 
-# Downloading launch agent
+# ローンチ エージェントのダウンロード
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
@@ -118,14 +118,14 @@ mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 
-# Verifying download
+# ダウンロードの検証
 echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
-=== Platform-specific instructions
+=== プラットフォームごとのインストール方法
 
-Please refer to the platform-specific installation instructions:
+次のセクションでは、プラットフォーム別のインストール方法を説明します。
 
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
@@ -133,23 +133,21 @@ Please refer to the platform-specific installation instructions:
 * xref:runner-installation-docker.adoc[Docker]
 * xref:runner-on-kubernetes.adoc[Kubernetes]
 
-For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
+他のプラットフォームに関する詳細は、「xref:runner-overview.adoc#available-circleci-runner-platforms[利用可能な CircleCI ランナー プラットフォーム]」を参照してください。
 
-== Runner for Server Compatibility
-_CircleCI Runner is available from server v3.1.0_
+== CircleCI Server とランナーの互換性
+_CircleCI ランナーは CircleCI Server v3.1.0 以上で使用できます。_
 
-Each minor version of server is compatible with a specific version of
-`circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,
-depending on your version of server:
+CircleCI Server のマイナー バージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。 以下の表に、CircleCI Server バージョンごとに、ランナーのインストール時に使用できる `circleci-launch-agent` のバージョンを示します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Server version  
-| Launch Agent Version
+| CircleCI Server のバージョン  
+| ローンチ エージェントのバージョン
 
 | 3.0             
-| Runner not supported
+| ランナーはサポートされていません
 
 | 3.1            
 | 1.0.11147-881b608
@@ -158,9 +156,9 @@ depending on your version of server:
 | 1.0.19813-e9e1cd9
 |===
 
-== Additional Resources
+== 関連リソース
 
-- https://github.com/CircleCI-Public/runner-preview-docs/[CircleCI Runner Image on Docker Hub]
-- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
-- https://circleci.com/docs/[CircleCI Docs - The official CircleCI Documentation website]
-- https://docs.docker.com/[Docker Docs]
+- https://github.com/CircleCI-Public/runner-preview-docs/[Docker Hub 上の CircleCI ランナー イメージ (英語)]
+- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナー イメージ (英語)]
+- https://circleci.com/docs/ja/[CircleCI ドキュメント (CircleCI 公式ドキュメントをまとめた Web サイト)]
+- https://docs.docker.com/[Docker ドキュメント (英語)]
