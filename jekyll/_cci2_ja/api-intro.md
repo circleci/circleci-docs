@@ -8,8 +8,6 @@ categories:
 order: 1
 version:
   - Cloud
-  - Server v3.x
-  - Server v2.x
 ---
 
 CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー、パイプラインに関する詳細情報を取得する API を呼び出すことができます。 現在、以下の 2 つのバージョンの API がサポートされています。
@@ -117,7 +115,7 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 ## オンプレミス版をご利用のお客様
 {: #api-v2-and-server-customers }
 
-API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
+API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x.
 
 ## Data insights
 {: #data-insights }
