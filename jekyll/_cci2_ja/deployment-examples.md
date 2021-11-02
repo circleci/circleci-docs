@@ -4,7 +4,6 @@ title: "Deployment Examples"
 short-title: "Deployment Examples"
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
@@ -19,7 +18,7 @@ This document presents example config for a variety of popular deployment target
 
 * In order to use orbs you must use `version 2.1` config.
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using an installation of CircleCI server v2.x, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the jobs are built.
+* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the jobs are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items in these examples that appear within `< >` should be replaced with your own parameters.
 
@@ -47,7 +46,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
 
-3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
+3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `master`.
 
     {% raw %}
     ```yaml
@@ -66,7 +65,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
                 - build # Only run deploy job once the build job has completed
               filters:
                 branches:
-                  only: main # Only deploy when the commit is on the Main branch
+                  only: master # Only deploy when the commit is on the Master branch
 
     jobs: # Define the build and deploy jobs
       build:
@@ -106,7 +105,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 4. Install `awscli` in your primary container by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
-5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `main`.
+5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `master`.
 
     {% raw %}
     ```yaml
@@ -122,7 +121,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
                 - build
               filters:
                 branches:
-                  only: main # Only deploys when the commit is on the Main branch
+                  only: master # Only deploys when the commit is on the Master branch
 
     jobs:
       build:
@@ -250,7 +249,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
 1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`. {% include snippets/env-var-or-context.md %}
 
-2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
+2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `master`.
 
     {% raw %}
 
@@ -271,7 +270,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
               repo: <URI-to-your-login-server-name>
               filters:
                 branches:
-                  only: main # Only deploys when the commit is on the Main branch
+                  only: master # Only deploys when the commit is on the Master branch
     ```
 
     {% endraw %}
@@ -298,7 +297,7 @@ workflows:
             - build-job # Only run deploy job once build job has completed
           filters:
             branches:
-              only: main # Only run deploy job when commit is on the main branch
+              only: master # Only run deploy job when commit is on the master branch
 
 jobs:
   #  build and test jobs go here - not included for brevity
@@ -315,7 +314,7 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
       - run:
-          name: Deploy if tests pass and branch is Main
+          name: Deploy if tests pass and branch is Master
           command: bundle exec cap production deploy
 ```
 
@@ -450,20 +449,20 @@ workflows:
             - test
           filters:
             branches:
-              only: main
+              only: master
       - hold:
           type: approval
           requires:
             - dark-deploy
           filters:
             branches:
-              only: main
+              only: master
       - live-deploy:
           requires:
             - hold # manual approval required via the CircleCI UI to run the live-deploy job
           filters:
             branches:
-              only: main
+              only: master
 ```
 
 {% endraw %}
@@ -485,7 +484,7 @@ firebase login:ci
 
 Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/env-var-or-context.md %}
 
-The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the main branch.
+The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the master branch.
 
 {% raw %}
 
@@ -500,7 +499,7 @@ The following example shows how you can add a deploy to Firebase job to your pro
     working_directory: /tmp/my-project
     steps:
       - run:
-          name: Deploy Main to Firebase
+          name: Deploy Master to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
 workflows:
@@ -513,7 +512,7 @@ workflows:
             - build-job
           filters:
             branches:
-              only: main
+              only: master
 
 ```
 
@@ -565,7 +564,7 @@ workflows:
 {: #deployment-to-gke-with-20-config }
 {:.no_toc}
 
-In the following example, if the `build-job` passes and the current branch is `main`, CircleCI runs the deployment job.
+In the following example, if the `build-job` passes and the current branch is `master`, CircleCI runs the deployment job.
 
 {% raw %}
 
@@ -583,7 +582,7 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - run:
-          name: Deploy Main to GKE
+          name: Deploy Master to GKE
           command: |
           # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
           sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
@@ -603,7 +602,7 @@ workflows:
             - build-job # Only deploy once the build job has completed
           filters:
             branches:
-              only: main # Only deploy on the main branch
+              only: master # Only deploy on the master branch
 
 ```
 {% endraw %}
@@ -641,7 +640,7 @@ For another example, see our [CircleCI Google Cloud deployment example project](
                 - build # only run deploy-via-git job if the build job has completed
               filters:
                 branches:
-                  only: main # only run deploy-via-git job on main branch
+                  only: master # only run deploy-via-git job on master branch
     ```
 
     {% endraw %}
@@ -658,7 +657,7 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
 3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-types/).
 
-4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the main branch and deploy using a `git push` command.
+4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
 
     {% raw %}
 
@@ -677,9 +676,9 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
         steps:
           - checkout
           - run:
-              name: Deploy Main to Heroku
+              name: Deploy Master to Heroku
               command: |
-                git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
+                git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
     workflows:
       version: 2
@@ -691,7 +690,7 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
                 - build # only run deploy-via-git job if the build job has completed
               filters:
                 branches:
-                  only: main # only run deploy-via-git job on main branch
+                  only: master # only run deploy-via-git job on master branch
     ```
 
     {% endraw %}
@@ -771,7 +770,7 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
 
 2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 
-3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
+3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the master branch.
 
     {% raw %}
 
@@ -800,7 +799,7 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
                 - build # only deploy once build job has completed
               filters:
                 branches:
-                  only: main # only deploy on the main branch
+                  only: master # only deploy on the master branch
     ```
 
     {% endraw %}
