@@ -8,10 +8,11 @@ categories:
 order: 4
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
-[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
+This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
@@ -20,7 +21,7 @@ version:
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-1. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します。
+1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
      jobs:
@@ -63,7 +64,7 @@ jobs:
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
-_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
+_The macOS executor is not currently available on installations of CircleCI Server v2.x_
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
