@@ -8,7 +8,6 @@ categories:
 order: 1
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
@@ -69,7 +68,7 @@ It is worth taking a minute to define the various user types that relate to Circ
 ## パイプライン
 {: #pipelines }
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not available on CircleCI server v2.x.
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
 
 Pipelines represent methods for interacting with your configuration:
 
@@ -94,7 +93,7 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 ## Executors and images
 {: #executors-and-images }
 
-Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not available on installations of CircleCI server v2.x.
+Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
