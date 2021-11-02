@@ -6,6 +6,7 @@ description: "Orb オーサリングに関してよく寄せられるご質問�
 order: 20
 version:
   - Cloud
+  - Server v3.x
 ---
 
 よく寄せられるご質問や技術的な問題など、Orb のオーサリングに役立つ情報をまとめました。
@@ -45,7 +46,7 @@ circleci orb unlist <namespace>/<orb> <true|false> [flags]
 
 **Use caution when unlisting Private Orbs.**
 <br/>
-Currently the `orb source` and `orb info` CircleCI CLI commands do not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
+Currently the `orb source` CircleCI CLI command does not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
 {: class="alert alert-warning"}
 
 ## API トークンの保護
