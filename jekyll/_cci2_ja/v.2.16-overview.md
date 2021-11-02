@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI Server v2.16 の機能強化や不具合修正についてまとめます。
+This document provides a summary of features and product notes for the release of CircleCI server v2.16.
 
 ## What's new in release 2.16
 {: #whats-new-in-release-216 }
