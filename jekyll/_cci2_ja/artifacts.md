@@ -6,6 +6,7 @@ description: "ビルド中に作成されるアーティファクトのアップ
 order: 70
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
