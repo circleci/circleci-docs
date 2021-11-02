@@ -6,10 +6,6 @@ description: "CircleCI 2.0 入門ガイド"
 categories:
   - getting-started
 order: 1
-version:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
 ---
 
 継続的インテグレーションの概要と、CircleCI を使用してエンジニアリング チームが自動化を行うしくみについて説明します。 CircleCI は、ソフトウェアのビルド、テスト、デプロイを自動化します。
@@ -32,7 +28,7 @@ CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジ
 
 開発者は [circleci.com](https://circleci.com/ja/) を使用して、[任意のジョブに SSH 接続]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)してビルドの問題をデバッグしたり、[.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルで[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)をセットアップしてジョブの実行を高速化したり、わずか 2 つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を構成して[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)で以前のジョブのデータを再利用したりすることができます。
 
-As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/server-3-overview/) for complete documentation.
+As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad Cluster for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/circleci-ops-guide-v2-17.pdf) for complete documentation.
 
 ## 概要
 {: #summary }
@@ -65,6 +61,7 @@ CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Googl
 CircleCI は以下の無料トライアル オプションをご用意しています。
 
 - **クラウド**: 「[CircleCI を始める]({{site.baseurl}}/ja/2.0/first-steps/)」を参照しながら、CircleCI がホスティングするアプリケーションの使用を開始してください。
+- **Server**: Refer to [CircleCI Trial Installation]({{site.baseurl}}/2.0/single-box/) for the Enterprise Trial instructions.
 
 ### オープンソース
 {: #open-source }
