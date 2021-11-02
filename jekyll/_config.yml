@@ -52,8 +52,6 @@ toc:
   min_level: 1
   max_level: 4
 
-sass:
-  sass_dir: _sass
 
 markdown: kramdown
 kramdown:

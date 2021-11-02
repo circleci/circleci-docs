@@ -8,6 +8,7 @@ import AnalyticsClient from './services/analytics.js';
 import * as search from './services/instantsearch.js';
 import * as lang from './services/lang.js';
 import * as Site from './site';
+import './styles/main.scss';
 
 // imports all experiments
 import * as Experiments from './experiments';
