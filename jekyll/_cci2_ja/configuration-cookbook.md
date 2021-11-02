@@ -8,8 +8,6 @@ categories:
 order: 1
 version:
   - Cloud
-  - Server v3.x
-  - Server v2.x
 ---
 
 *CircleCI config クックブック*は、 Orb のような CircleCI のリソースを使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
@@ -54,7 +52,7 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 
 * In order to use pipelines features and orbs you must use `version 2.1` config.
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using CircleCI server v2.x, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
+* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items that appear within `< >` should be replaced with your own parameters.
 
@@ -543,7 +541,7 @@ For more information on using API v2 endpoints, see the [API Reference Documenta
 
 Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
 
-The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
+The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
 
 ```yaml
 version: 2.1
@@ -559,9 +557,9 @@ jobs:
       - checkout
       - when:
           condition:
-            equal: [ main, << pipeline.git.branch >> ]
+            equal: [ master, << pipeline.git.branch >> ]
           steps:
-            - run: echo "I am on main"
+            - run: echo "I am on master"
 
 workflows:
   my-workflow:
@@ -692,7 +690,7 @@ workflows:
           mapping: |
             service1/.* run-build-service-1-job true
             service2/.* run-build-service-2-job true
-          base-revision: main
+          base-revision: master
           # this is the path of the configuration we should trigger once
           # path filtering and pipeline parameter value updates are
           # complete. In this case, we are using the parent dynamic
