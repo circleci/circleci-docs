@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.18. パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。 For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
+This document provides a summary of features and product notes for the release of CircleCI Server v2.18. パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。 For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
 ## Requirements for upgrading
 {: #requirements-for-upgrading }
