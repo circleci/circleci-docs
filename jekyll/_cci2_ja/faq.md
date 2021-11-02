@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "よくあるご質問"
 short-title: "よくあるご質問"
-description: "CircleCI 2.0 に関してよく寄せられるご質問"
+description: "Frequently asked questions about CircleCI"
 categories:
   - migration
 order: 1
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -274,11 +275,11 @@ Windows Server 2019 Datacenter エディションの Server Core オプション
 
 4 基の vCPU と 15 GB の RAM を備えた Windows マシンです。
 
-### インストール版の CircleCI で Windows は利用できますか?
+### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-残念ながら、現時点ではサーバー インストール版の CircleCI で Windows をご利用いただくことはできません。
+The Windows executor is available on CircleCI server v3.x and v2.x
 
 ## 料金・支払い
 {: #billing }
@@ -498,4 +499,4 @@ Docker に IPv6 アドレスを割り当てる方法は複数あり、上記の�
 ### CircleCI ではどの CPU アーキテクチャをサポートしていますか?
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-サポートしている CPU アーキテクチャは、`amd64` のみとなります。
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
