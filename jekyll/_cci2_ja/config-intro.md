@@ -4,7 +4,6 @@ title: "設定ファイルの概要"
 description: "CircleCI 2.0 設定ファイルのランディング ページ"
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
@@ -28,7 +27,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 
 1. まだ登録がお済みでない場合は、CircleCI にアクセスして登録し、GitHub または Bitbucket を選択してください。 GitHub Marketplace からの登録も可能です。
 2. 管理するプロジェクトが追加されていることを確認します。
-3. Add a `.circleci` folder at the top of your project’s main branch.  必要に応じて master 以外のブランチで試してみることも可能です。  フォルダー名は、必ずピリオドで始めてください。  これは .circleci 形式の特別なフォルダーです。
+3. Add a `.circleci` folder at the top of your project’s master branch.  必要に応じて master 以外のブランチで試してみることも可能です。  フォルダー名は、必ずピリオドで始めてください。  これは .circleci 形式の特別なフォルダーです。
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
