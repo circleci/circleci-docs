@@ -4,7 +4,6 @@ title: AWS ECR/ECS へのデプロイ
 description: CircleCI を使用した AWS ECR から ECS へのデプロイ方法
 version:
   - Cloud
-  - Server v3.x
   - Server v2.x
 ---
 
