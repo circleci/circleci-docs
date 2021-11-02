@@ -6,6 +6,7 @@ description: "ワークフローを使用したジョブのスケジュール"
 order: 30
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 suggested:
   - 
@@ -263,7 +264,7 @@ workflows:
 
 デフォルトでは、`git push` ごとにワークフローがトリガーされます。 スケジュールに沿ってワークフローをトリガーするには、ワークフローに `triggers` キーを追加し、`schedule` を指定します。
 
-下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格の `crontab` の構文で表記します。 `cron` の書き方については [Crontabのマニュアル](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 以下の例では、ワークフローは `master` と `beta` のブランチにおいてのみ実行されます。
+下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格の `crontab` の構文で表記します。 `cron` の書き方については [Crontabのマニュアル](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 The workflow will be run on the `main` and `beta` branches.
 
 **注:** ワークフローのスケジュール実行は、最大 15 分遅れることがあります。 これは、午前 0 時 (UTC) などの混雑時の信頼性を維持するために実施されます。 スケジュールが設定されたワークフローが分単位の正確性で開始されることを想定しないようにご注意ください。
 
@@ -281,7 +282,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - beta
     jobs:
       - coverage
