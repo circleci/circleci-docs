@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= CircleCI ランナー API
+= CircleCI Runner API
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
