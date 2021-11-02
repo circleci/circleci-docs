@@ -19,6 +19,8 @@ en:
           link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
+        - name: FAQ
+          link: 2.0/faq/
     - name: Migration
       link: 2.0/migration-intro/
       children:
