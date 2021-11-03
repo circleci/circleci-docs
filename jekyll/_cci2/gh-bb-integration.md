@@ -271,6 +271,7 @@ application restrictions for a GitHub organization. Go to
 and in the "Organization access" you will have the option to request accesss if you are not an admin, or grant access if you are an admin.
 
 #### Member workflow
+{: #member-workflow }
 {:.no_toc}
 
 - If you are a Member of a GitHub org (not an admin), click the “Request” button and a message will be sent to an Admin of your organization. An admin will have to approve the request.
@@ -279,6 +280,7 @@ and in the "Organization access" you will have the option to request accesss if 
 - If CircleCI has been approved by your organization, you’ll see a checkmark next to your organization’s name.
 
 #### Owner workflow
+{: #owner-workflow }
 {:.no_toc}
 
 - If you are an Owner of your organization, you may grant access to CircleCI by clicking on the “Grant” button.
