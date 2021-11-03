@@ -251,7 +251,7 @@ auth | N | Map | Authentication for registries using standard `docker login` cre
 aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
-The first `image` listed in the file defines the primary container image where all steps will run.
+The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
 `entrypoint` overrides the image's `ENTRYPOINT`.
 
