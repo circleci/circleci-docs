@@ -915,6 +915,30 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@datadog/browser-core@3.6.13":
+  version "3.6.13"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-3.6.13.tgz#e9d7f43b50e7d52a3615619695210cf809a6bb04"
+  integrity sha512-bIvfSFYNanxY0NFePxv46oYsqxy3ygJhPWKV59XQqWYqmtq/29zVj3RmxMW4uxV/mdqGhshNrIvAYO17fc15vw==
+  dependencies:
+    tslib "^1.10.0"
+
+"@datadog/browser-rum-core@3.6.13":
+  version "3.6.13"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-core/-/browser-rum-core-3.6.13.tgz#100fa64580251d200318a87356ce50bb99321b7f"
+  integrity sha512-AT5ktBT1T3HbwK86+E6adKTkn0makv2d5LBU7tshnQk/4ZfjhctBCCRQnHuiXmwwvt0isn8H5q/VVs7xIhaGSA==
+  dependencies:
+    "@datadog/browser-core" "3.6.13"
+    tslib "^1.10.0"
+
+"@datadog/browser-rum@^3.6.13":
+  version "3.6.13"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-3.6.13.tgz#bd000fed617e2258da0b501813e68052e152ef82"
+  integrity sha512-mzJeiBtgP0+OBwx9e4qZbNFWAN5duI2w/hU3Zf4RqI0wMWXRxSXBr4E1XNZcppvdhRaHHSlR0dPLGJfH8Q8jXA==
+  dependencies:
+    "@datadog/browser-core" "3.6.13"
+    "@datadog/browser-rum-core" "3.6.13"
+    tslib "^1.10.0"
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.5.tgz#9283c9ce5b289a3c4f61c12757469e59377f81f3"
@@ -4758,7 +4782,7 @@ tr46@^2.1.0:
   dependencies:
     punycode "^2.1.1"
 
-tslib@^1.8.1:
+tslib@^1.10.0, tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==

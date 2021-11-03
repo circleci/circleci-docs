@@ -30,6 +30,7 @@
     "> 0.5% in my stats"
   ],
   "dependencies": {
+    "@datadog/browser-rum": "^3.6.13",
     "@optimizely/optimizely-sdk": "4.6.2",
     "@popperjs/core": "^2.10.1",
     "highlightjs-badge": "0.1.9",
@@ -54,8 +55,8 @@
     "markdownlint-cli2": "0.0.15",
     "markdownlint-cli2-formatter-json": "0.0.4",
     "markdownlint-rule-header-id": "0.0.3",
-    "uglifyjs-webpack-plugin": "1.1.2",
     "prettier": "^2.4.1",
+    "uglifyjs-webpack-plugin": "1.1.2",
     "webpack": "5.59.0",
     "webpack-cli": "4.9.1"
   }
