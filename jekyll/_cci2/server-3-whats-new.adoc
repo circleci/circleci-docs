@@ -28,12 +28,12 @@ From the KOTS admin console dashboard, select Version History from the menu bar 
 See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
 === New features
-* Add support for private VMs on GCP
+* Private VMs are now supported for installations on GCP.
 
 === Fixes
-* mTLS is disabled by default
-* Increase SSH timeout for VMs to 10 minutes
-* Private VMs now request private IPs
+* mTLS is now disabled by default.
+* SSH timeout for VMs has been increased to 10 minutes.
+* Private VMs now request private IPs.
 
 == Release 3.2.0
 
