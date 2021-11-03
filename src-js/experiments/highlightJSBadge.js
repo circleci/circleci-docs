@@ -31,9 +31,11 @@ window.onload = () => {
         // function called before code is placed on clipboard that allows you inspect and modify
         // the text that goes onto the clipboard. Passes text and code root element (hljs).
         // Example:  function(text, codeElement) { return text + " $$$"; }
-        onBeforeCodeCopied: function (text) {
+        onBeforeCodeCopied: function (text, codeElement) {
+          const codeSnippets = [...document.getElementsByClassName('hljs')];
           window.AnalyticsClient.trackAction('docs-copy-code-clicked', {
             page: location.pathname,
+            codeSnippetPosition: codeSnippets.indexOf(codeElement) + 1,
           });
           return text;
         },
