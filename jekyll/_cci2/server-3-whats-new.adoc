@@ -19,6 +19,22 @@ patch releases and quarterly feature releases.
 
 toc::[]
 
+== Release 3.2.1
+
+=== Upgrade notes
+
+From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+
+See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
+
+=== New features
+* Add support for private VMs on GCP
+
+=== Fixes
+* mTLS is disabled by default
+* Increase SSH timeout for VMs to 10 minutes
+* Private VMs now request private IPs
+
 == Release 3.2.0
 
 === Upgrade notes
@@ -98,7 +114,6 @@ The new Traefik pos will then start ot schedule correctly.
 
 === Known issues
 
-* KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after nomad clients have been deployed.
 * Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
 * It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
 identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
