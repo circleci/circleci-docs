@@ -322,7 +322,7 @@ $(document).ready(function () {
             window.AnalyticsClient.trackAction('docs-share-button-click', {
               page: location.pathname,
               success: true,
-              section: section,
+              section,
             });
           })
           .catch((error) =>
