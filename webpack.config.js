@@ -5,13 +5,13 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src-js/app.js',
-    vendor: './src-js/vendor.js',
+    app: './src/js/app.js',
+    vendor: './src/js/vendor.js',
   },
   output: {
-    path: path.join(__dirname, 'jekyll/assets/js'),
+    path: path.join(__dirname, 'jekyll/assets/'),
     publicPath: '',
-    filename: '[name].bundle.js',
+    filename: 'js/[name].bundle.js',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -22,7 +22,7 @@ module.exports = {
       jQuery: 'jquery',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: 'css/[name].bundle.css',
       chunkFilename: '[id].css',
     }),
     new MiniCssExtractPlugin(),
@@ -41,10 +41,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // fallback to style-loader in development
-          process.env.NODE_ENV !== 'production'
-            ? 'style-loader'
-            : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
@@ -53,11 +50,11 @@ module.exports = {
   },
   // Ignore warnings about default exports because some of our legacy
   // code inported in app.js are not modules:
-  // - src-js/site/main.js
-  // - src-js/site/user.js
+  // - src/js/site/main.js
+  // - src/js/site/user.js
   ignoreWarnings: [
     {
-      module: /src-js\/app\.js/,
+      module: /src\/js\/app\.js/,
       message: /export 'default'/,
     },
   ],

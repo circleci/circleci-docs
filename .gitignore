@@ -9,6 +9,7 @@ _site/
 jekyll/.jekyll-cache/
 jekyll/environments/
 jekyll/_includes/app.html
+jekyll/assets/css/*.bundle.css
 jekyll/assets/js/*.bundle.js
 run-results/
 node_modules/
