@@ -160,11 +160,12 @@ jobs:
             mkdir -p /tmp/workspace/js
             mkdir -p /tmp/workspace/css
             mv jekyll/assets/js/* /tmp/workspace/js/
-            mv jekyll/assets/css/* /tmp/workspace/css
+            mv jekyll/assets/css/* /tmp/workspace/css/
       - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
             - js
+            - css
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
