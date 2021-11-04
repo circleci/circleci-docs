@@ -11,15 +11,15 @@ version:
   - Server v2.x
 ---
 
-ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
+ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成する方法の詳細を説明します。
 
 * 目次
 {:toc}
 
 ## クイックスタート: デモ用の JavaScript Node.js リファレンス プロジェクト
-{: #quickstart-demo-javascript-nodejs-reference-project }
+{: #quickstart-demo-javascript-nodejs-reference-project }{: #quickstart-demo-javascript-nodejs-reference-project }
 
-CircleCI 2.1 で React.js アプリケーションをビルドする方法を示すために、JavaScriptリファレンス プロジェクトが用意されています。
+CircleCI 2.1 で React.js アプリケーションをビルドする方法の説明のための、JavaScript のリファレンスプロジェクトを用意しています。
 
 - [GitHub 上の JavaScript Node デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app)
 - [CircleCI でビルドされた JavaScript Node デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
@@ -32,7 +32,7 @@ CircleCI 2.1 で React.js アプリケーションをビルドする方法を示
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
 1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
-2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
+2. CircleCI で [Add Projects (プロジェクトの追加)] ページにアクセスし、フォークしたプロジェクトの横にある [Set up Project (プロジェクトの設定)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 
@@ -44,10 +44,10 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 {% raw %}
 
 ```yaml
-orbs: # declare what orbs we are going to use
+orbs: # 使用する Orb を宣言します。
   node: circleci/node@2.0.2 # the node orb provides common node-related configuration
 
-version: 2.1 # using 2.1 provides access to orbs and other features
+version: 2.1 # 2.1を使用すると、Orb や他の機能にアクセスすることができます。 
 
 workflows:
   matrix-tests:
@@ -62,10 +62,10 @@ workflows:
 {% endraw %}
 
 
-## 設定ファイルの例
+## 設定の詳細
 {: #config-walkthrough }
 
-Using the [2.1 Node orb](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test) sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
+[2.1 Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test)を使用すると、 CI 用にビルドされ高度にキャッシュされた CircleCI イメージから Executor を設定し、使用する NodeJS のバージョンを設定できます。 [Docker イメージのリスト](https://hub.docker.com/r/cimg/node/tags) の中の利用可能なタグはすべて使用できます。
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
