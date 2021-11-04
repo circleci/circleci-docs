@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Go"
 short-title: "Go"
-description: "Building and Testing with Go (Golang) on CircleCI 2.0"
+description: "Building and Testing with Go (Golang) on CircleCI"
 categories: [language-guides]
 order: 3
 version:
@@ -20,12 +20,12 @@ installed in a Docker image. If you’re in a rush, just copy the sample configu
 ## Quickstart: Demo Go reference project
 {: #quickstart-demo-go-reference-project }
 
-We maintain a reference Go project to show how to build on CircleCI 2.0:
+We maintain a reference Go project to show how to build on CircleCI:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a>
 - [Demo Go Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Go projects.
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI with Go projects.
 
 
 ## Sample configuration
@@ -34,7 +34,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
@@ -295,7 +295,7 @@ workflows:
       - build
 ```
 
-Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
 {: #see-also }

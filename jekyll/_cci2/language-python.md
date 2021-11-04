@@ -256,7 +256,7 @@ See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2 
 jobs: # A basic unit of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     # directory where steps are run

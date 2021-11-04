@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Debugging with SSH"
 short-title: "Debugging with SSH"
-description: "How to access a build container using SSH on CircleCI 2.0"
+description: "How to access a build container using SSH on CircleCI"
 categories: [troubleshooting]
 order: 20
 version:
@@ -11,14 +11,14 @@ version:
 - Server v3.x
 ---
 
-This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
+This document describes how to access a build container using SSH on CircleCI in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
 {: #overview }
-Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
+Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
 When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, **or** you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run (you may wish to execute `pwd` or `ls` to ensure that you are in the correct directory).
 

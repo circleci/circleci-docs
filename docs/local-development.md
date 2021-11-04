@@ -86,7 +86,7 @@ If you want to work on the way search works on docs, follow the below instructio
 
 The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
-All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`. These correspond to CircleCI Classic and CircleCI 2.0, respectively.
+All docs live in folders named after the version of CircleCI. The only one you need to worry about is `jekyll/_cci2` or `jekyll/_cci2_ja` if you want to work on our translated content. .
 
 1. Create a branch and switch to it:
 

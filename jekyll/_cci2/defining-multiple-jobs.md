@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0"
+title: "CircleCI workflows"
 redirect: /docs/2.0/workflows/
 ---
 

@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Examples"
 short-title: "Examples"
-description: "CircleCI 2.0 Examples Introduction"
+description: "CircleCI Examples Introduction"
 categories: [migration]
 order: 1
 version:

@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0.
+This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
 
 * TOC
 {:toc}

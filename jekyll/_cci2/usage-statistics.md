@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Enabling Usage Statistics"
 category: [administration]
 order: 1
-description: "Using CircleCI 2.0 static installation scripts."
+description: "Using CircleCI static installation scripts."
 hide: true
 ---
 
