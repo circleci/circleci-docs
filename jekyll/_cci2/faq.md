@@ -65,7 +65,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 ### Is CircleCI available to enterprise clients?
 {: #is-circleci-20-available-to-enterprise-clients }
 {:.no_toc}
-Yes, CircleCI is available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/server-3- overview) for details and links to installation instructions and [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
+Yes, CircleCI is available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions and [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
 
 ### What are the differences between CircleCI’s hosting options?
 {: #what-are-the-differences-between-circlecis-hosting-options }
