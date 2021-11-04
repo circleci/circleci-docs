@@ -20,49 +20,49 @@ version:
 {: #overview }
 {:.no_toc}
 
-このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
+お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
-このアプリケーションでは、最新の安定した Rails バージョン 5.1 (`rspec-rails`)、[RspecJunitFormatter](https://github.com/sj26/rspec_junit_formatter)、および PostgreSQL データベースを使用しています。
+CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) 上での Ruby on Railsのサンプルプロジェクトを提供しており、[CircleCI ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)上でのビルドを参照することができます。
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{ site.baseurl}}/ja/2.0/circleci-images/)の 1 つを使用しています。
+このアプリケーションでは、最新の安定した Rails バージョン 6.1 (`rspec-rails`)、[RspecJunitFormatter][rspec-junit-formatter]および PostgreSQL をデータベースとして使用しています。
 
 
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/2.0/circleci-images/)の 1 つを使用しています。
+
+CircleCI のビルド済みイメージの使用を検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
+
 セカンダリ「サービス」コンテナとして使用するデータベース イメージも Docker Hub の `circleci` ディレクトリで提供されています。
-
-CircleCI のビルド済みイメージを使用することを検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
-
-`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
 
 ---
 
 ## 設定ファイルの例
 {: #sample-configuration }
 
-The following code block is commented to describe each part of the configuration for the sample application.
+以下のコードブロックには、サンプルアプリケーションの設定 の各部分を説明するコメントがついています。
 
 {% raw %}
 
 ```yaml
-version: 2.1 # Use 2.1 to enable using orbs and other features.
+version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
-# Declare the orbs that we'll use in our config.
-# read more about orbs: https://circleci.com/docs/2.0/using-orbs/
+# 設定で使用する Orb を宣言します。
+# Orb に関する詳細は、https://circleci.com/docs/2.0/using-orbs/をご覧ください。
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
 
 jobs:
-  build: # our first job, named "build"
+  build: #  "build"という名前の最初のジョブです。
     docker:
-      - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
+      - image: cimg/ruby:2.7-node # カスタマイズされた CircleCI Docker イメージを使用します。
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
-      - checkout # pull down our git code.
+      - checkout # Git コードをプルダウンします。
       - ruby/install-deps # use the ruby orb to install dependencies
       # use the node orb to install our packages
       # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
@@ -171,3 +171,5 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml): オープンソースのディスカッション プラットフォーム
 * [CircleCI でビルドされた Ruby on Rails デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"}
+
+[rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
