@@ -63,18 +63,21 @@ executors | N | Map | A map of strings to executor definitions. See the [Executo
 commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
+The following example calls an Orb named `node` that exists in the certified `circleci` namespace.
 
 ```
 version: 2.1
+
 orbs:
-    hello: circleci/hello-build@0.0.5
+  node: circleci/node@4.7.0
+
 workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+  test_my_app:
+    jobs:
+      - node/test:
+          version: <node-version>
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/)
+In the above example, `node` is considered the orbs reference; whereas `circleci/node@4.7.0` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/).
 
 ## **`commands`** (requires version: 2.1)
 {: #commands-requires-version-21 }
