@@ -23,9 +23,7 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].bundle.css',
-      chunkFilename: '[id].css',
     }),
-    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
