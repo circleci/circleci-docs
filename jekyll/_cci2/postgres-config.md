@@ -100,7 +100,7 @@ registry of your choosing.
 {: #example-environment-setup }
 {:.no_toc}
 
-In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
 1.	DATABASE_URL environment variable, if set
 2.	The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).

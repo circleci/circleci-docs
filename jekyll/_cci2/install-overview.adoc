@@ -20,7 +20,7 @@ toc::[]
 
 == Support Packages
 
-CircleCI 2.0 may be installed without a support package, on AWS, using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below:
+CircleCI server may be installed without a support package, on AWS, using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below:
 
 === Non-AWS Platform Support
 

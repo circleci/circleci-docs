@@ -268,11 +268,24 @@ consider contacting your VCS provider to communicate your concerns.
 This section describes how to re-enable CircleCI after enabling third-party
 application restrictions for a GitHub organization. Go to
 [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb)
-and in the "Organization access" section either:
+and in the "Organization access" you will have the option to request accesss if you are not an admin, or grant access if you are an admin.
 
-- "Request access" if you are not an admin for the organization in question (an
-  admin will have to approve the request) or
-- "Grant access" if you are an admin
+#### Non-admin member workflow
+{: #non-admin-member-workflow }
+{:.no_toc}
+
+- If you are member of a GitHub org (not an admin), click the “Request” button and a message will be sent to an admin of your organization. An admin will have to approve the request.
+- Click “Request approval from owners” to send an email to your organization’s owners.
+- While waiting for approval, you will see “Access request pending” next to your company organization’s name.
+- If CircleCI has been approved by your organization, you will see a checkmark next to your organization’s name.
+
+#### Admin owner workflow
+{: #admin-owner-workflow }
+{:.no_toc}
+
+- If you are an owner of your organization (an admin), you may grant access to CircleCI by clicking on the “Grant” button.
+- You may be asked to confirm your password in order to authorize our app.
+- Once you’ve approved CircleCI, you will see a checkmark next to your organization’s name.
 
 After access is granted, CircleCI should behave normally again.
 

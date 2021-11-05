@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Executors and Images"
 short-title: "Executors and Images"
-description: "CircleCI 2.0 executors and images"
+description: "CircleCI executors and images"
 categories: [configuration]
 order: 1
 version:

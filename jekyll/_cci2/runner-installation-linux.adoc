@@ -51,7 +51,7 @@ These will be used when executing the task agent. These commands must be run as 
 === Ubuntu/Debian
 
 ```bash
-id -u circleci &>/dev/null || sudo adduser --uid 1500 --disabled-password --gecos GECOS circleci
+id -u circleci &>/dev/null || sudo adduser --disabled-password --gecos GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
@@ -60,7 +60,7 @@ sudo chown -R circleci /opt/circleci/workdir
 === CentOS/RHEL
 
 ```bash
-id -u circleci &>/dev/null || sudo adduser --uid 1500 -c GECOS circleci
+id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir

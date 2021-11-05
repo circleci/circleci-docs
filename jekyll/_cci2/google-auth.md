@@ -21,7 +21,7 @@ The Google Cloud SDK is a powerful set of tools that can be used to access Googl
 {: #prerequisites }
 {:.no_toc}
 
-- A CircleCI 2.0 project.
+- A CircleCI project.
 - A GCP project.
 
 ### Installing the Google Cloud SDK
