@@ -20,6 +20,7 @@ while read l1 ;do
    elif [[ $l1 =~ "failed" ]] && [[ $l1 =~ "passed," ]]; then 
       exit 1
    elif [[ $l1 =~ "Missing" ]] && [[ $l1 =~ "in your environment." ]]; then
-      exit 1
+      echo "WARNING: Missing Datadog API key or Datadog App Key. Skipping Datadog Synthetics…"
+      exit 0
    fi
 done < <(yarn datadog-synthetics-ci)
