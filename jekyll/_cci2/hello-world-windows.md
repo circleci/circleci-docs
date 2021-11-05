@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World On Windows"
 short-title: "Hello World On Windows"
-description: "First Windows project on CircleCI 2.0"
+description: "First Windows project on CircleCI"
 categories: [getting-started]
 order: 4
 version:

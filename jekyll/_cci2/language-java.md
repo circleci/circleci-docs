@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Java"
 short-title: "Java"
-description: "Building and Testing with Java on CircleCI 2.0"
+description: "Building and Testing with Java on CircleCI"
 categories: [language-guides]
 order: 4
 version:
@@ -35,7 +35,7 @@ We are going to make a few assumptions here:
 
 {% raw %}
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # a collection of steps
   build:
     # Remove if parallelism is not desired

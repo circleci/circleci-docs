@@ -46,7 +46,7 @@ _The above screenshot applies to CircleCI server v2.x only._
 ## Enabling formatters
 {: #enabling-formatters }
 
-Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
+Test metadata is not automatically collected in CircleCI until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
 - RSpec requires the following be added to your gemfile:
 
@@ -532,7 +532,7 @@ steps:
       path: ./reports/junit
 ```
 
-For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
 **Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 

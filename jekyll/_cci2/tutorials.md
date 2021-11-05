@@ -12,10 +12,10 @@ Use the tutorial associated with your platform to learn about the customization 
 
 Platform Guide | Description
 ----|----------
-<a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux Project Tutorial</a> | Complete walkthrough of setting up a Python project with Flask to build with CircleCI 2.0.
-<a href="{{ site.baseurl }}/2.0/ios-tutorial/">iOS Project Tutorial</a> | Full example of setting up an iOS project in CircleCI 2.0.
-<a href="{{ site.baseurl }}/2.0/language-android/">Android Project Tutorial</a> | Full example of setting up an Android project in CircleCI 2.0.
-[Windows Project Tutorial]({{ site.baseurl }}/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI 2.0.
+<a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux Project Tutorial</a> | Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
+<a href="{{ site.baseurl }}/2.0/ios-tutorial/">iOS Project Tutorial</a> | Full example of setting up an iOS project in CircleCI.
+<a href="{{ site.baseurl }}/2.0/language-android/">Android Project Tutorial</a> | Full example of setting up an Android project in CircleCI.
+[Windows Project Tutorial]({{ site.baseurl }}/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI.
 {: class="table table-striped"}
 
 ## Sample projects with companion guides

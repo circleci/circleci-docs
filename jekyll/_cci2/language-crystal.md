@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Crystal"
 short-title: "Crystal"
-description: "Building and Testing with Crystal on CircleCI 2.0"
+description: "Building and Testing with Crystal on CircleCI"
 categories: [language-guides]
 order: 9
 version:
@@ -36,7 +36,7 @@ breaking changes.
 
 {% raw %}
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # a collection of jobs
   build:
     working_directory: ~/demo_app
@@ -136,7 +136,7 @@ Finally, we run `crystal spec` to run the project's test suite.
           command: crystal spec
 ```
 
-Great! You've set up CircleCI 2.0 for a basic Crystal application.
+Great! You've set up CircleCI for a basic Crystal application.
 
 ## Deploy
 {: #deploy }

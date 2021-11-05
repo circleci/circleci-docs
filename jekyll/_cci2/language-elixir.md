@@ -21,7 +21,7 @@ If you're in a rush, just copy the configuration below into [`.circleci/config.y
 {% raw %}
 
 ```yaml
-version: 2  # use CircleCI 2.0 instead of CircleCI Classic
+version: 2 
 jobs:  # basic units of work in a run
   build:  # runs not using Workflows must have a `build` job as entry point
     parallelism: 1  # run only one instance of this job
