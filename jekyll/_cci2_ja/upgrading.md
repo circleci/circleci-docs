@@ -15,8 +15,8 @@ Upgrading your private CircleCI Server installation to 2.0 gives you the ability
 ## Migrating config to 2.0
 {: #migrating-config-to-20 }
 
-Following are links to various documents we provide to assist in the 1.0 to 2.0 migration process:
+1.0 から 2.0 への移行プロセスに関して各種のドキュメントをご用意しています。
 
-* [2.0 への移行のヒント](https://circleci.com/ja/docs/2.0/migration/)
-* [Linux プロジェクトの移行](https://circleci.com/ja/docs/2.0/migrating-from-1-2/)
-* [Using the config-translator](https://circleci.com/docs/2.0/config-translation/)
+* [2.0 への移行のヒント](https://circleci.com/docs/ja/2.0/migration/)
+* [Linux プロジェクトの移行](https://circleci.com/docs/ja/2.0/migrating-from-1-2/)
+* [設定ファイル変換ツールの使用](https://circleci.com/docs/ja/2.0/config-translation/)

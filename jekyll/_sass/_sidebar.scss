@@ -180,28 +180,29 @@ $sidebar-spacing-base: 5px;
   }
 }
 
-.table-of-contents {
-  position: sticky;
-  right: 0;
-  padding: 32px 32px 112px 12px;
-  background: #ffffff;
-  height: 90vh;
-  width: $rightbar-width;
-  overflow-y: auto;
-  top: 64px;
-  font-size: 16px;
-  transition: all 0.5s ease-in-out;
+aside.full-height {
+  .full-height-sticky {
+    position: sticky; 
+    max-height: calc(100vh - 140px); 
+    overflow: auto; 
+    padding-left: 5px;
+    top: 83px;
+  }
 
   @media(max-width: $toc-breakpoint) {
     display: none;
   }
 
+  #related-resources {
+    /* hidden by default since it is still an experiment */
+    display: none;
+  }
 
-  .toc-heading {
+  .toc-heading, .related-heading {
     margin-left: -2px;
   }
 
-  .toc-indent {
+  .toc-indent, .related-indent {
     border-left: 2px solid #EEEEEE;
 
     a {
@@ -210,6 +211,11 @@ $sidebar-spacing-base: 5px;
         color: $link-text-color;
       }
     }
+  }
+
+  /* if both sections are one after another */
+  .toc-indent + #related-resources {
+    margin-top: 40px;
   }
 
   ul, li {

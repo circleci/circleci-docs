@@ -7,6 +7,7 @@ categories: [containerization]
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -107,11 +108,11 @@ In typical CircleCI fashion, we can go fully automated (as in the above example)
 ## Workflows
 {: #workflows }
 
-We can utilize multiple jobs to better organize our snap build. A job to build/compile the actual project, a job to build the snap itself, and a job that published the snap (and other packages) only on `master` would all be useful.
+We can utilize multiple jobs to better organize our snap build. A job to build/compile the actual project, a job to build the snap itself, and a job that published the snap (and other packages) only on `main` would all be useful.
 
 [Workflows](https://circleci.com/docs/2.0/workflows/) can help with building snaps in two ways:
 
-1. **Snap Store Channels** - As we mentioned in the previous section, when we upload to the Store we could optionally release at the same time. This allows us to designate specific jobs on CircleCI to deploy to specific Snap Channels. For example, the `master` branch could be used to deploy to the `edge` channel` while tagged releases could be used to deploy to the `stable` channel.
+1. **Snap Store Channels** - As we mentioned in the previous section, when we upload to the Store we could optionally release at the same time. This allows us to designate specific jobs on CircleCI to deploy to specific Snap Channels. For example, the `main` branch could be used to deploy to the `edge` channel` while tagged releases could be used to deploy to the `stable` channel.
 1. **Concurrent Packing** - If your software is being packaged as a snap as well as something else, say a flatpak, .deb, .apk, etc, each package type could be placed in its own job and run concurrently. This allows your build to complete must fast than if the .deb package could start to build until the snap completed, and so on.
 
 Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
@@ -180,5 +181,5 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```

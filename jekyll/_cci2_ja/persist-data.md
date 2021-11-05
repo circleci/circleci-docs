@@ -1,103 +1,138 @@
 ---
 layout: classic-docs
-title: "Persisting Data"
-description: "A guide to the various ways to persist data in CircleCI"
+title: "データの永続化"
+description: "CircleCI でデータを永続化する方法"
 version:
   - Cloud
   - Server v2.x
 ---
 
-This guide gives an overview of the various ways to persist data within and beyond your CircleCI builds. There are a number of ways to move data into, out of and between jobs, and persist data for future use. Using the right feature for the right task will help speed up your builds and improve repeatability and efficiency.
+ここでは、 CircleCI ビルド内外でデータを永続化する様々な方法を概説します。 ジョブ間およびジョブの内外にデータを移動したり、データを保持して後で使用するには複数の方法があります。 適切なタスクに適切な機能を使用することで、ビルドが高速化し、再現性と効率が向上します。
 
-* TOC
+* 目次
 {:toc}
 
-## Caching strategies
+## キャッシュの活用方法
 {: #caching-strategies }
 
-![caching data flow]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
+![キャッシュのデータ フロー]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
-Caching persists data between the same job in different Workflow builds, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future instances will run faster as they will not need to redo the work (provided your cache has not been invalidated). A prime example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like yarn install will only need to download new dependencies, if any, and not redownload everything on every build.
+キャッシュにより、異なるワークフロー内のビルドにおける同じジョブのデータが保持され、高コストなフェッチ操作のデータを以前のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
-Caches are global within a project. A cache saved on one branch will be used by jobs run on other branches so they should only be used for data that is suitable to share across branches.
+キャッシュは、プロジェクト内でグローバルに配置されます。 1 つのブランチに保存されたキャッシュが他のブランチで実行されるジョブでも使用されるため、キャッシュはブランチ間での共有に適したデータに対してのみ使用してください。
 
-**Caches created via the save_cache step are stored for up to 15 days.**
+**save_cache ステップで作成されたキャッシュは、最長 15 日間保存されます。**
 
-For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) guide.
+詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/ja/2.0/caching/)を参照してください。
 
-## Using workspaces
+## ワークスペースの使用
 {: #using-workspaces }
 
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークスペースのデータ フロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-When a workspace is declared in a job, files and directories can be added to it. Each addition creates a new layer in the workspace filesystem. Downstream jobs can then use this workspace for their own needs or add more layers on top.
+ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 ダウンストリーム ジョブで必要に応じてこのワークスペースを使用したり、レイヤーをさらに追加することができます。
 
-Workspaces are not shared between pipeline runs. The only time a workspace can be accessed after the pipeline has run is when a workflow is rerun within the 15 day limit.
+ワークスペースは異なるパイプラインの実行において共有されません パイプラインの実行後にワークスペースにアクセスできるのは、ワークフローが 15 日以内に再実行された場合のみです。
 
-**Workspaces are stored for up to 15 days.**
+**ワークスペースは最長で15日間保存されます。**
 
-For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
+ワークスペースを使用してワークフロー全体のデータを保持する方法の詳細については、[ワークフローガイド]({{site.baseurl}}/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。 [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
 
-## Using artifacts
+## アーティファクトの使用
 {: #using-artifacts }
 
-![artifacts data flow]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータ フロー]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Artifacts are used for longer-term storage of the outputs of your pipelines. For example if you have a Java project, your build will most likely produce a `.jar` file of your code. This code will be validated by your tests. If the whole build/test process passes, then the output of the process (the `.jar`) can be stored as an artifact. The `.jar` file is available to download from our artifacts system long after the workflow that created it has finished.
+アーティファクトは、パイプラインの出力を長期保存するために使用されます。 たとえば Java プロジェクトを使用している場合、ビルドにより多くの場合、コードの` .jar `ファイルが生成されます。 このコードはテストによって検証されます。 ビルドやテストプロセスがすべて成功した場合は、プロセスの出力（` .jar `）をアーティファクトとして保存できます。 この `jar `ファイルは、ファイルを作成したワークフローの終了後も長期間アーティファクトシステムからダウンロードできます。
 
-If your project needs to be packaged, say an Android app where the `.apk` file is uploaded to Google Play, you would likely wish to store it as an artifact. Many users take their artifacts and upload them to a company-wide storage location such as Amazon S3 or Artifactory.
+プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーがアーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
 
-**Artifacts are stored for up to 30 days.**
+**アーティファクトは最長で 30 日間保存されます。**
 
-For more information on using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.
+アーティファクトを使用してジョブの完了後にデータを保持する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/ja/2.0/artifacts/)を参照してください。
 
-## Managing network and storage use
+## ネットワークとストレージ使用の管理
 {: #managing-network-and-storage-use }
 
-### Overview of storage and network transfer
+### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
 
-All data persistence operations within a job will accrue network and storage usage, the relevant actions are:
+ジョブ内でデータを保持するための操作には、ネットワークとストレージの使用が発生します。関連するアクションは次のとおりです。
 
-* Uploading and downloading caches
-* Uploading and downloading workspaces
-* Uploading artifacts
-* Uploading test results
+* キャッシュのアップロードとダウンロード
+* ワークスペースのアップロードとダウンロード
+* アーティファクトのアップロード
+* テスト結果のアップロード
 
-Details about your storage and network transfer usage can be viewed on your Plan Settings.
+上記のアクションを行うジョブを決定するには、プロジェクトの config.yml ファイルで次のコマンドを検索します。
 
-### How to manage your storage and network transfer use
+* `save_cache`
+* `restore_cache`
+* `persist_to_workspace`
+* `store_artifacts`
+* `store_test_results`
+
+すべてのネットワーク転送にはネットワークの使用が発生します。関連するアクションは次のとおりです。
+
+* キャッシュとワークスペースのセルフホストランナーへの復元
+* アーティファクトのダウンロード
+* CircleCI 外のジョブからのデータプッシュ
+
+ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。
+
+* ネットワークとストレージの総使用量は、画面上部の表に表示されます。
+* 個々のプロジェクトのネットワークとストレージの使用状況は、 [Project (プロジェクト)] タブに表示されます。
+* ストレージデータアクティビティは、 [Object (オブジェクト)] タブに表示されます。
+* 総ストレージ量のデータは[Strage (ストレージ)]タブに表示されます。
+
+![plan-usage-screen]( {{ site.baseurl }}/assets/img/docs/screen-plan-usage.png)
+
+個々のステップのストレージおよびネットワーク転送の使用方法の詳細については、以下のジョブページのステップ出力を参照してください。
+
+![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
+
+### ストレージとネットワーク転送の使用の管理方法
 {: #how-to-manage-your-storage-and-network-transfer-use }
 
-There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage.
+ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
 
-Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
+データ使用量の削減を試みる前に、まずそのデータの使用を維持する価値が十分にあるかどうかを検討してください。 キャッシュとワークスペースの場合、比較が非常に簡単です。キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？ ストレージとネットワークの最適化例については、以下をご覧ください。
 
-### Opportunities to reduce artifact and cache/workspace traffic
+### アーティファクトやキャッシュ/ワークスペースのトラフィックを減らす方法
 {: #opportunities-to-reduce-artifact-and-cacheworkspace-traffic }
 
-#### Check which artifacts are being uploaded
+#### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
 
-Often we see that the store_artifacts step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
+実際に必要なファイルがわずかでも、store_artifacts ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the CIRCLE_NODE_INDEX environment variable in a run step to change the behaviour of scripts depending on the parallel task run.
+ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで CIRCLE_NODE_INDEX 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
-#### Caching unused or superfluous dependencies
+#### 大きなアーティファクトのアップロード
+{: #uploading-large-artifacts }
+
+* テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。
+* UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
+* パイプラインがバイナリの Uber JAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
+* 大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
+
+#### 未使用または余分な依存関係のキャッシュ
 {: #caching-unused-or-superfluous-dependencies }
 
-Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies. For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from node_modules.
+ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。 たとえば、 node-prune パッケージは、 node_modules から不要なファイル (マークダウン、TypeScript ファイルなど) を削除します。
 
-#### Optimizing cache usage
+#### キャッシュ使用率の最適化
 {: #optimizing-cache-usage }
 
-If you notice your cache usage is high and would like to reduce it, try:
+キャッシュの使用率が高く使用率を下げたい場合は以下をお試しください。
 
-* Ensuring that your cache “key” is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
+* config.yml ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
+* キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
+* キャッシュの「キー」が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
 {% raw %}
 ```sh
-     - save_cache:
+       - save_cache:
          key: brew-{{epoch}}
          paths:
            - /Users/distiller/Library/Caches/Homebrew
@@ -105,7 +140,7 @@ If you notice your cache usage is high and would like to reduce it, try:
 ```
 {% endraw %}
 
-Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build; causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache key like the following:
+上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` はビルドごとに変更され、値が変更されていない場合でも毎回アップロードされます。 この方法では結局コストもかかり、時間も短縮できません。 代わりに、次のようなキャッシュキーを選択します。
 
 {% raw %}
 ```sh
@@ -117,16 +152,23 @@ Notice in the above example that best practices are not being followed. `brew-{{
 ```
 {% endraw %}
 
-Which will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
+この場合、要求された依存関係のリストが変更された場合にのみ変更されます。 これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
 
-* Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
+* キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
 
-* Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
+* アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
-#### Uploading large artifacts
-{: #uploading-large-artifacts }
+#### ワークスペースの使用率の最適化
+{: #optimizing-workspace-usage }
 
-* Artifacts that are text can be compressed at very little cost.
-* If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
-* If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
-* If you must upload a large artifact you can upload them to your own bucket at no cost.
+ワークスペースの使用率が高く使用率を下げたい場合、以下をお試しください。
+
+* config.yml ファイルで`persist_to_workspace `コマンドを検索し、ワークスペースを使用するすべてのジョブを検索し、パス内のすべてのアイテムが必要かどうかを判断します。
+
+#### ネットワーク転送の過剰な使用を減らす
+{: #reducing-excess-use-of-network-egress }
+
+ネットワーク転送が原因となっているネットワークの使用量を減らすには、以下をお試しください。
+
+* Runner の場合は、 AWS US-East-1 にクラウドベースのランナーをデプロイします。
+* アーティファクトを 1 度ダウンロードし、ご自身のサイトに保存して処理を追加します。

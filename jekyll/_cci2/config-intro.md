@@ -4,6 +4,7 @@ title: "Configuration Introduction"
 description: "Landing page for CircleCI 2.0 Config"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -28,7 +29,7 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 
 1. If you haven’t already, go ahead and sign-up with CircleCI and select either GitHub or Bitbucket. If you prefer, you can also sign up through the GitHub marketplace.
 2. Make sure the project you want to manage has been added.
-3. Add a `.circleci` folder at the top of your project’s master branch.  If you want to experiment on a different branch, you can do that too.  Make sure the folder starts with a period.  This folder is special and hence the .circleci format.
+3. Add a `.circleci` folder at the top of your project’s main branch.  If you want to experiment on a different branch, you can do that too.  Make sure the folder starts with a period.  This folder is special and hence the .circleci format.
 4. Add a `config.yml` file inside the .circleci folder.
 5. Add the following contents to your `config.yml` file.
 
@@ -114,7 +115,7 @@ jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:14-browsers
     steps:
       - checkout
       - run:
@@ -179,7 +180,7 @@ jobs:
             echo '^^^That should look familiar^^^'
   Run-With-Node:
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:14-browsers
     steps:
       - run:
           name: Running In A Container With Node

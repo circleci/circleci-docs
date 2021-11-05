@@ -9,6 +9,15 @@ version:
 - Cloud
 - Server v2.x
 - Server v3.x
+suggested:
+  - title: CircleCI CLI tutorial
+    link: https://circleci.com/blog/local-pipeline-development/
+  - title: Validate your config using local CLI
+    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
+  - title: Check your CircleCI installation
+    link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
+  - title: Troubleshoot CLI errors
+    link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
 
 ## Overview
@@ -25,8 +34,8 @@ things you can do with the CircleCI CLI include:
 - Managing contexts
 
 This document will cover the installation and usage of the CLI tool. **Note:**
-the new CLI is currently not available on server installations of CircleCI. The
-legacy CLI does work in Server and can be installed.
+this CLI is not available on CircleCI server v2.x installations but the
+legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 
 * TOC
 {:toc}
@@ -367,10 +376,10 @@ For security reasons, encrypted environment variables configured in the UI will 
 
 The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
-## Using the CLI on CircleCI server
-{: #using-the-cli-on-circleci-server }
+## Using the CLI on CircleCI server v2.x
+{: #using-the-cli-on-circleci-server-v2-x }
 
-Currently, only the legacy CircleCI CLI is available to run on server
+Currently, only the legacy CircleCI CLI is available to run on server v2.x.
 installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).

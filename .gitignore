@@ -12,8 +12,7 @@ jekyll/_includes/app.html
 jekyll/assets/js/*.bundle.js
 run-results/
 node_modules/
-release/tmp/CircleCI-Server-AWS-Installation-Guide.pdf
-release/tmp/CircleCI-Server-Operations-Guide.pdf
+release/
 
 # Vim open files
 *.swp
@@ -28,3 +27,4 @@ src-api/build/
 vendor
 jekyll/_config_override.yml
 markdownlint-results.json
+.tool-versions

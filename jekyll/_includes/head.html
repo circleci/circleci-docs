@@ -1,6 +1,6 @@
 <head>
-	<script src="https://cdn.optimizely.com/js/8188917468.js"></script>
 	{% if page.url contains '/archive/' %}<meta name="robots" content="noindex, nofollow" />{% endif %}
+	{% if page.noindex %}<meta name="robots" content="noindex, follow"/>{% endif %}
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -22,10 +22,7 @@
 	<link rel="stylesheet" href="{{ "/assets/css/footer.css" | prepend: site.baseurl }}" type="text/css" media="screen" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
 	<link rel="stylesheet" href="{{ "/assets/css/asciidoc.css" | prepend: site.baseurl }}">
-	<!--link rel="stylesheet" href="{{ "/assets/css/asciidoc-pygments.css" | prepend: site.baseurl }}"-->
-	<!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script-->
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
 	{% include_cached segment.html site=site page=page %}
 
@@ -33,5 +30,5 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.0.0/dist/algoliasearch-lite.umd.js" integrity="sha256-MfeKq2Aw9VAkaE9Caes2NOxQf6vUa8Av0JqcUXUGkd0=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.0.0/dist/instantsearch.production.min.js" integrity="sha256-6S7q0JJs/Kx4kb/fv0oMjS855QTz5Rc2hh9AkIUjUsk=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.0/src/js.cookie.min.js"></script>
+  	<script src="https://cdn.optimizely.com/datafiles/{{site.optimizely}}.json/tag.js"></script>
 </head>

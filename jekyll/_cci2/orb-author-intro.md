@@ -55,7 +55,9 @@ Orb CLI commands are scoped to different user permission levels, set by your VCS
 ### Register a namespace
 {: #register-a-namespace }
 
-Every organization registered on CircleCI is able to claim **one** unique [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces). This includes your personal organization and any organization you are a member of. As each organization is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+Every organization registered on CircleCI is able to claim **one** unique [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces). This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+
+_note: Within CircleCI, we sometimes refer to individual users as "organizations" or "personal organizations", since from our perspective there aren't notable differences. Hence some commands refer to an `org-name`. This can simply be your GitHub username._
 
 Enter the following command to claim your namespace, if you have not yet claimed one:
 ```sh

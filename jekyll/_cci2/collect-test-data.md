@@ -6,6 +6,7 @@ description: "Collecting test metadata"
 order: 34
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -32,15 +33,15 @@ The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-refe
     path: test-results
 ```
 
-Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
+Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
 
-**If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
+**If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
-_The above screenshot applies to CircleCI Server only._
+_The above screenshot applies to CircleCI server v2.x only._
 
-**If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling formatters
 {: #enabling-formatters }
@@ -113,7 +114,7 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
           path: ~/cucumber
 ```
 
-The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
+The `path:` is a directory or file relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
 
 Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `/cucumber` directory. For example:
 
@@ -209,7 +210,7 @@ jobs:
             CC_TEST_REPORTER_ID: code_climate_id_here
             NODE_ENV: development
         docker:
-            - image: circleci/node:8
+            - image: circleci/node:14
               auth:
                 username: mydockerhub-user
                 password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

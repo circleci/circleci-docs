@@ -1,23 +1,23 @@
 ---
 layout: classic-docs
-title: "Orbs、ジョブ、ステップ、ワークフロー"
-short-title: "Orbs、ジョブ、ステップ、ワークフロー"
+title: "Orb、ジョブ、ステップ、ワークフロー"
+short-title: "Orb、ジョブ、ステップ、ワークフロー"
 description: "ジョブとステップの説明"
 categories:
   - migration
 order: 2
 ---
 
-ジョブ、ステップ、ワークフローに加え、Orbs に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) キーについて概説します。
+このドキュメントでは、Orb、ジョブ、ステップ、ワークフローの概要を説明しています。
 
 * 目次
 {:toc}
 
-## Orbs の概要
+## Orb の概要
 {: #orbs-overview }
 _Orbs are not currently available on self-hosted installations of CircleCI Server._
 
-Orbs は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。 プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orbs を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
+Orb は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。 プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
 
 ## ジョブの概要
 {: #jobs-overview }
@@ -27,7 +27,7 @@ Orbs は、名前に基づいてインポートするかインラインで構成
 下図はジョブ間のデータ フローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
 * キャッシュは、異なるワークフロー ビルドにある同じジョブ間でデータを維持します。
-* Artifacts persist data after a workflow has finished.
+* アーティファクトは、ワークフローの終了後にデータを維持します。
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
@@ -60,7 +60,8 @@ workflows:
       - deploy2s3: # ワークフローで定義するサンプル ジョブ
           steps:
             - aws-s3/sync: # s3 Orb で宣言されている sync コマンドを呼び出します
-                from: . to: "s3://mybucket_uri"
+                from: .
+          to: "s3://mybucket_uri"
                 overwrite: true
           to: "s3://mybucket_uri"
           overwrite: true
@@ -72,7 +73,7 @@ workflows:
 ```
 
 ## 並列ジョブを使用した設定ファイルの例
-{{ site.baseurl }}/ja/2.0/configuration-reference/#jobs
+{: #sample-configuration-with-concurrent-jobs }
 
 2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
@@ -108,5 +109,5 @@ version: 2
 ## 関連項目
 {: #see-also }
 
-- [構成リファレンス: jobs キー]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-- [構成リファレンス: steps キー]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+- [構成リファレンス: jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
+- [構成リファレンス: steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)

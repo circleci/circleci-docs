@@ -7,6 +7,7 @@ categories: [language-guides]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -69,9 +70,9 @@ jobs: # basic units of work in a run
 
 The configuration above is from a demo Clojure app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-clojure-luminus](https://github.com/CircleCI-Public/circleci-demo-clojure-luminus).
 
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
+If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
-Now we’re ready to build a `config.yml` from scratch.
+Now we are ready to build a `config.yml` from scratch.
 
 ## Config walkthrough
 {: #config-walkthrough }

@@ -7,6 +7,7 @@ categories: [configuration]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
@@ -507,7 +508,7 @@ orbs:
 jobs:
   deploy2s3:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

@@ -27,7 +27,10 @@ CircleCI provides Project and Org settings with encrypted storage in the CircleC
 {:.tab.settingsscreenshot.Cloud}
 ![settings]( {{ site.baseurl }}/assets/img/docs/project-settings-cloud.png)
 
-{:.tab.settingsscreenshot.Server}
+{:.tab.settingsscreenshot.Server_3}
+![settings]( {{ site.baseurl }}/assets/img/docs/project-settings-cloud.png)
+
+{:.tab.settingsscreenshot.Server_2}
 ![settings]( {{ site.baseurl }}/assets/img/docs/settings.png)
 
 ## Organization settings page
@@ -36,6 +39,9 @@ CircleCI provides Project and Org settings with encrypted storage in the CircleC
 {:.tab.orgsettingsscreenshot.Cloud}
 ![settings]( {{ site.baseurl }}/assets/img/docs/org-settings-cloud.png)
 
-{:.tab.orgsettingsscreenshot.Server}
+{:.tab.orgsettingsscreenshot.Server_3}
+![settings]( {{ site.baseurl }}/assets/img/docs/org-settings-cloud.png)
+
+{:.tab.orgsettingsscreenshot.Server_2}
 ![settings]( {{ site.baseurl }}/assets/img/docs/plan-settings.png)
 

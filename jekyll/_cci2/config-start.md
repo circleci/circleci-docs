@@ -4,6 +4,7 @@ title: "Configuration"
 description: "Landing page for CircleCI 2.0 Config"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

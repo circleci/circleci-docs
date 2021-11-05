@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -72,7 +73,7 @@ projects. Users may not view project data that is stored in environment variable
 ## Pipelines
 {: #pipelines }
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not available on CircleCI server v2.x.
 
 Pipelines represent methods for interacting with your configuration:
 
@@ -97,7 +98,7 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 ## Executors and images
 {: #executors-and-images }
 
-Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
+Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not available on installations of CircleCI server v2.x.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -139,7 +140,43 @@ jobs:
 # ...
 ```
 
-{:.tab.executors.Server}
+{:.tab.executors.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+ build1: # job name
+   docker: # Specifies the primary container image,
+     - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+     - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # for the secondary or service container run in a common
+      # network where ports exposed on the primary container are
+      # available on localhost.
+       environment: # Specifies the POSTGRES_USER authentication
+        # environment variable, see circleci.com/docs/2.0/env-vars/
+        # for instructions about using environment variables.
+         POSTGRES_USER: root
+#...
+ build2:
+   machine: # Specifies a machine image that uses
+   # an Ubuntu version 20.04 image with Docker 19.03.13
+   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
+   # for new image releases.
+     image: ubuntu-2004:202010-01
+#...
+ build3:
+   macos: # Specifies a macOS virtual machine with Xcode version 11.3
+     xcode: "11.3.0"
+# ...
+```
+
+{:.tab.executors.Server_2}
 ```yaml
 version: 2.0
 
@@ -255,7 +292,10 @@ Workflows define a list of jobs and their run order. It is possible to run jobs 
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
-{:.tab.workflows.Server}
+{:.tab.workflows.Server_3}
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server_2}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
@@ -331,7 +371,78 @@ workflows:
 ```
 {% endraw %}
 
-{:.tab.workflows-example.Server}
+{:.tab.workflows-example.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Running tests
+          command: make test
+  build3:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Precompile assets
+          command: bundle exec rake assets:precompile
+#...
+workflows:
+  build_and_test: # name of your workflow
+    jobs:
+      - build1
+      - build2:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # see circleci.com/docs/2.0/workflows/ for more examples.
+      - build3:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # run build2 and build3 concurrently to save time.
+```
+{% endraw %}
+
+{:.tab.workflows-example.Server_2}
 {% raw %}
 ```yaml
 version: 2
@@ -456,7 +567,51 @@ jobs:
 ```
 {% endraw %}
 
-{:.tab.cache.Server}
+{:.tab.cache.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+    docker: # Each job requires specifying an executor
+    # (either docker, macos, or machine), see
+    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # and more examples.
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+      # template for an environment variable,
+      # see circleci.com/docs/2.0/caching/
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+```
+{% endraw %}
+
+{:.tab.cache.Server_2}
 {% raw %}
 ```yaml
 version: 2
@@ -538,7 +693,41 @@ jobs:
 ```
 {% endraw %}
 
-{:.tab.workspace.Server}
+{:.tab.workspace.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+{:.tab.workspace.Server_2}
 {% raw %}
 ```yaml
 version: 2
@@ -548,7 +737,7 @@ jobs:
 #...
     steps:
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace  for use in downstream job. Must be an absolute path,
+      # into the workspace for use in downstream job. Must be an absolute path,
       # or relative path from working_directory. This is a directory on the container which is
       # taken to be the root directory of the workspace.
           root: workspace
@@ -581,7 +770,7 @@ Workspaces | Duration of workflow | Attach the workspace in a downstream contain
 Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
 {: class="table table-striped"}
 
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ## See also
 {: #see-also }

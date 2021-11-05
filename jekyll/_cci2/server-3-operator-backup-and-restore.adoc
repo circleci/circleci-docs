@@ -30,7 +30,7 @@ NOTE: Backup and restore of the CircleCI services is dependent on Velero. If you
 == The setup
 
 Backups of CircleCI server can be created quite easily through https://kots.io/[Kots].
-Howeber, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
+However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
 The following sections outline the steps needed to install Velero on your cluster.
 
 === Prerequisites

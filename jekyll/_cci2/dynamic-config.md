@@ -33,6 +33,9 @@ To use our dynamic configuration feature, you can add the key `setup` with a val
 parent configuration file (in the `.circleci/` directory). This will designate that `config.yaml` as a `setup workflow` 
 configuration, enabling you and your team to get up and running with dynamic configuration.
 
+**Note**: *At this time, Dynamic Configuration does not work with Scheduled Workflows. We are working on
+Scheduled Pipelines, which will alleviate this. This feature is expected to launch in the near future. A possible work around can be found on our [Discuss page](https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344).
+
 See the [Getting started](#getting-started-with-dynamic-config-in-circleci) section below for more 
 information.
 
@@ -49,6 +52,8 @@ To get started with Dynamic Config in CircleCI:
 ![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 Now, your project has the ability to dynamically generate and update configuration.
+
+Note: While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will not be used until you add the key `setup` with a value of `true` to that `config.yml`.
 
 When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation)
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute
@@ -88,3 +93,7 @@ documentation for more information.
   - [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - The [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 - The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
+
+## Learn More
+{: #learn-more }
+Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.

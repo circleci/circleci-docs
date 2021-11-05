@@ -216,6 +216,8 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 ### Egress
 You will only need the egress rules for internet access and SSH for your VCS.
 
+ifndef::pdf[]
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
 * https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
+endif::[]

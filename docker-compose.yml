@@ -1,11 +1,16 @@
 version: "3"
 services:
   jekyll:
-    command: bash -c "apt-get update -y && apt-get install -y cmake pkg-config && bundle install && bundle exec jekyll serve -s jekyll --incremental --livereload --host=0.0.0.0"
     working_dir: /root
-    image: ruby:2.7.2
+    build: .
     volumes:
       - ".:/root"
     ports:
       - 127.0.0.1:4000:4000
       - 127.0.0.1:35729:35729
+  https:
+    image: "caddy:2"
+    ports:
+      - '127.0.0.1:443:443'
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"

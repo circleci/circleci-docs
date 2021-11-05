@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 ---
 = CircleCI Runner FAQs
 :page-layout: classic-docs
@@ -9,19 +10,17 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
-
 This page answers frequently asked questions for the CircleCI runner product.
 
 toc::[]
 
-=== What is the security model for the CircleCI runner?
+== What is the security model for the CircleCI runner?
 
 When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
 
 NOTE: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
 
-=== How do I install dependencies needed for my jobs?
+== How do I install dependencies needed for my jobs?
 
 There are two main approaches available for installing dependencies:
 
@@ -33,7 +32,7 @@ This approach is the most flexible, but will require providing the jobs sufficie
 
 This approach is the most secure; however, this means that if the job’s dependencies change, the runner machine must be reconfigured.
 
-=== What connectivity is required?
+== What connectivity is required?
 
 In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
 
@@ -41,13 +40,13 @@ NOTE: No inbound connectivity is required by runner. Any other required connecti
 
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
-=== How do caching and workspaces and artifacts work with CircleCI runner?
+== How do caching and workspaces and artifacts work with CircleCI runner?
 
 Caches and workspaces and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. Although CircleCI is not currently charging for runner usage, you may be charged for data transfer and storage in the future.
 
 If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and uploading the artifacts directly to your chosen storage backend.
 
-=== What are the best practices for managing state between jobs?
+== What are the best practices for managing state between jobs?
 
 The runner itself is unopinionated about this. Runner can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of it's working directory.
 
@@ -55,6 +54,6 @@ In general CircleCI recommends jobs rely on as little state as possible to impro
 
 It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time.
 
-=== Can I run multiple agents on a single host?
+== Can I run multiple agents on a single host?
 
 Yes, by running multiple replicas of the `launch-agent` with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.

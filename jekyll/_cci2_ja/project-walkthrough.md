@@ -18,15 +18,15 @@ version:
 
 以下の各セクションでは、デモ アプリケーション用にジョブとステップを構成する方法、CircleCI 環境で Selenium と Chrome を使用して単体テストおよびインテグレーション テストを実行する方法、デモ アプリケーションを Heroku にデプロイする方法について詳しく説明します。
 
-The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>. The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
+デモ アプリケーションのソースは、GitHub の <https://github.com/CircleCI-Public/circleci-demo-python-flask> で入手できます。 また、このサンプル アプリケーションは、<https://circleci-demo-python-flask.herokuapp.com/> で入手できます。
 
 ## Basic setup
 {: #basic-setup }
 {:.no_toc}
 
-The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file may be comprised of several [`Jobs`]({{ site.baseurl }}/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
+通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
 
-Following is a minimal example for our demo project with all configuration nested in the `build` job:
+以下は、CircleCI デモ プロジェクトの最もシンプルな例です。すべての構成が `build` ジョブの下にネストされています。
 
 ```yaml
 version: 2
@@ -42,7 +42,7 @@ jobs:
       - run: pip install -r requirements/dev.txt
 ```
 
-**Note:** If you are **not** using  [workflows]({{ site.baseurl }}/2.0/workflows) in your `.circleci/config.yml`, you must have a job named `build` that includes the following:
+**メモ:** `.circleci/config.yml` 内で[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)を**使用しない**場合、以下を含む `build` という名前のジョブを記述している必要があります。
 
 - 上記の例では `docker` として定義されています。
 - イメージは Docker イメージです。 上記の例では、CircleCI によって提供される Debian Stretch 上の Python 3.6.2 を含み、テストをサポートするためにブラウザーがインストールされています。
@@ -51,9 +51,9 @@ jobs:
 ## Service containers
 {: #service-containers }
 
-If the job requires services such as databases they can be run as additional containers by listing more `image:`s in the `docker:` stanza.
+ジョブでデータベースなどのサービスが必要な場合は、`docker:` スタンザに `image:` をリストすることで、追加コンテナとしてサービスを実行できます。
 
-Docker images are typically configured using environment variables, if these are necessary a set of environment variables to be passed to the container can be supplied:
+Docker イメージは通常、環境変数を使用して構成されています。必要であれば、コンテナに渡す環境変数のセットも利用できます。
 
 ```yaml
 version: 2
@@ -77,14 +77,14 @@ jobs:
           POSTGRES_PASSWORD: ""
 ```
 
-The environment variables for the *primary container* set some config specific to the Flask framework and set a database URL that references a database run in the `circleci/postgres:9.6.5-alpine-ram` service container. Note that the PostgreSQL database is available at `localhost`.
+*プライマリ コンテナ*の環境変数は、Flask フレームワークに固有の設定ファイルを設定し、`circleci/postgres:9.6.5-alpine-ram` サービス コンテナで実行されるデータベースを参照するデータベース URL も設定します。 `localhost` では PostgreSQL データベースが使用可能です。
 
-The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `root` with an empty password, and a database called `circle_test`.
+`circleci/postgres:9.6.5-alpine-ram` サービス コンテナが、パスワードが空の `root` という名前のユーザー、および `circle_test` という名前のデータベースで構成されています。
 
-## Installing dependencies
+## 依存関係のインストール
 {: #installing-dependencies }
 
-Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
+次に、ジョブは `pip install` を実行することにより、Python の依存関係を*プライマリ コンテナ*にインストールします。 依存関係は、以下のシェル コマンドを実行する通常の steps を実行することにより、*プライマリ コンテナ*にインストールされます。
 
 ```yaml
 version: 2
@@ -116,7 +116,7 @@ jobs:
             pip install -r requirements/dev.txt
 ```
 
-An environment variable defined in a `run:` key will override image-level variables, e.g.:
+たとえば以下のように、`run:` キーで定義した環境変数は、イメージレベルの変数よりも優先されます。
 
 ```yaml
       - run:
@@ -129,8 +129,9 @@ An environment variable defined in a `run:` key will override image-level variab
 {: #caching-dependencies }
 {:.no_toc}
 
-To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
+ジョブを高速化するために、デモの構成では、Python virtualenv を CircleCI キャッシュに置き、`pip install` を実行する前にそのキャッシュを復元します。 先に virtualenv をキャッシュに置いておけば、依存関係が既に存在するため、`pip install` コマンドは依存関係を virtualenv にダウンロードする必要がありません。 virtualenv をキャッシュに保存するには、`pip install` コマンドの後に実行される `save_cache` ステップを使用して実行します。
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -154,7 +155,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -162,25 +163,26 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
 ```
+{% endraw %}
 
-The following describes the detail of the added key values:
+以下で、追加のキー変数について詳しく説明します。
 
-- `restore_cache:` ステップでは、キー テンプレートに一致するキーを持つキャッシュを検索します。 キー テンプレートは `deps1-` で始まり、`{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}` を使用して現在のブランチ名が埋め込まれています。 `requirements.txt` ファイルのチェックサムも、`{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}` を使用してキー テンプレートに埋め込まれています。 CircleCI は、テンプレートに一致する最新のキャッシュを復元します。 このとき、キャッシュが保存されたブランチ、およびキャッシュされた virtualenv の作成に使用された `requirements/dev.txt` ファイルのチェックサムが一致する必要があります。
+- `restore_cache:` ステップでは、キー テンプレートに一致するキーを持つキャッシュを検索します。 キー テンプレートは `deps1-` で始まり、`{% raw %}{{ .Branch }}{% endraw %}` を使用して現在のブランチ名が埋め込まれています。 `requirements.txt` ファイルのチェックサムも、`{% raw %}{{ checksum "requirements/dev.txt" }}{% endraw %}` を使用してキー テンプレートに埋め込まれています。 CircleCI は、テンプレートに一致する最新のキャッシュを復元します。 このとき、キャッシュが保存されたブランチ、およびキャッシュされた virtualenv の作成に使用された `requirements/dev.txt` ファイルのチェックサムが一致する必要があります。
 
 - `Python deps を venv にインストール`という名前の `run:` ステップは、前述のとおり、Python の依存関係をインストールする仮想環境を作成してアクティブ化します。
 
 - `save_cache:` ステップは、指定されたパス (この例では `venv`) からキャッシュを作成します。 キャッシュキーは、`key:` で指定したテンプレートから作成されます。 このとき、CircleCI で保存されたキャッシュが `restore_cache:` ステップで検出できるように、必ず `restore_cache:` ステップと同じテンプレートを使用してください。 キャッシュを保存する前に、CircleCI はテンプレートからキャッシュ キーを生成します。 生成されたキーに一致するキャッシュが既に存在する場合、CircleCI は新しいキャッシュを保存しません。 テンプレートにはブランチ名と `requirements/dev.txt` のチェックサムが含まれるため、ジョブが別のブランチで実行されるか、`requirements/dev.txt` のチェックサムが変化すると、CircleCI は新しいキャッシュを作成します。
 
-You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
+キャッシュの詳細については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/caching)をご覧ください。
 
 ## Installing and running Selenium to automate browser testing
 {: #installing-and-running-selenium-to-automate-browser-testing }
 
-The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
+デモ アプリケーションには、Chrome、Selenium、および WebDriver を使用して Web ブラウザー内でアプリケーションのテストを自動化する `tests/test_selenium.py` ファイルが含まれています。 プライマリ イメージには、動作が安定した最新バージョンの Chrome がプリインストールされています (`-browsers` サフィックスで指定されています)。 Selenium はプライマリ イメージに含まれていないため、インストールして実行する必要があります。
 
 ```yaml
 version: 2
@@ -219,7 +221,7 @@ jobs:
 ## Running tests
 {: #running-tests }
 
-In the demo application, a virtual Python environment is set up, and the tests are run using unittest. This project uses `unittest-xml-reporting` for its ability to save test results as XML files. In this example, reports and results are stored in the `store_artifacts` and `store_test_results` steps.
+このデモ アプリケーションでは、仮想の Python 環境が準備されており、unittest を使用してテストが実行されます。 テスト結果を XML ファイルとして保存するために、`unittest-xml-reporting` を使用します。 レポートと結果は `store_artifacts` ステップと `store_test_results` ステップで保存されます。
 
 ```yaml
 version: 2
@@ -276,7 +278,7 @@ jobs:
           path: test-reports/
 ```
 
-Notes on the added keys:
+追加されたキーに関するメモ
 
 - 各コマンドは新しいシェルで実行されます。 したがって、依存関係のインストール ステップでアクティブ化された仮想環境は、この最終 `run:` キーの `. venv/bin/activate` で再度アクティブ化されます。
 - `store_artifacts` ステップは特別なステップです。 `path:` は、ファイルが格納されるディレクトリをプロジェクトの `root` ディレクトリからの相対ディレクトリで指定します。 `destination:` は、ジョブ内の別のステップで同じ名前のディレクトリにアーティファクトが生成される場合に、一意性を確保するために選択されるプレフィックスを指定します。 CircleCI は、アーティファクトを収集し、S3 にアップロードして格納します。
@@ -288,12 +290,12 @@ Notes on the added keys:
 
 ![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 
-Read more about [artifact storage]({{ site.baseurl }}/2.0/artifacts) and [test results]({{ site.baseurl }}/2.0/collect-test-data/).
+詳しくは、「[ビルド アーティファクトの保存]({{ site.baseurl}}/ja/2.0/artifacts/)および「[テスト メタデータの収集]({{ site.baseurl}}/ja/2.0/collect-test-data/)」を参照してください。
 
 ## Heroku へのデプロイ
 {: #deploying-to-heroku }
 
-The demo `.circleci/config.yml` includes a `deploy` job to deploy the `master` branch to Heroku. The `deploy` job consists of a `checkout` step and a single `command`. The `command` assumes that you have:
+このデモの `.circleci/config.yml`には、`master` ブランチを Heroku にデプロイする `deploy` ジョブが含まれています。 `deploy` ジョブは、1 つの `checkout` ステップと 1 つの `command` で構成されています。 `command` は、以下が準備されていることを前提としています。
 
 - Heroku アカウントが作成されている
 - Heroku アプリケーションが作成されている
@@ -301,7 +303,7 @@ The demo `.circleci/config.yml` includes a `deploy` job to deploy the `master` b
 
 If you have not completed any or all of these steps, follow the [instructions]({{ site.baseurl }}/2.0/deployment-examples/#heroku) in the Heroku section of the Deployment document.
 
-**Note:** If you fork this demo project, rename the Heroku project, so you can deploy to Heroku without clashing with the namespace used in this tutorial.
+**メモ:** このデモ プロジェクトをフォークする場合は、Heroku プロジェクトの名前を変更すると、このチュートリアルで使用する名前空間と干渉しないように Heroku をデプロイできます。
 
 ```yaml
 version: 2
@@ -350,28 +352,28 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Heroku への Master のデプロイ
+          name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
+<[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}> でデモ アプリケーションをビルドしてデプロイするまでのプロセスを確認できます。
 
 ### Additional Heroku configuration
 {: #additional-heroku-configuration }
 {:.no_toc}
 
-The demo application is configured to run on Heroku with settings provided in `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
+デモ アプリケーションは、`config.py` と `manage.py` の設定内容に基づき、Heroku 上で実行されるように構成されています。 この 2 つのファイルはアプリケーションに対して、本番設定を使用し、PostgreSQL データベースを移行し、Heroku 上で SSL を使用するように指示します。
 
-Other files required by Heroku are:
+Heroku ではその他に以下のファイルが必要です。
 
 - `Procfile`: Heroku にデモ アプリケーションの実行方法を指示します。
 - `runtime.txt`: Heroku に、デフォルト (Python 2.7.13) の代わりに Python 3.6.0 を使用するように指示します。
 - `requirements.txt`: このファイルが存在する場合、Heroku は Python の依存関係を自動的にインストールします。
 
-**Consult the [Heroku documentation](https://devcenter.heroku.com/start) to configure your own app for their environment.**
+**Heroku の環境用にアプリケーションを構成するには、[Heroku のドキュメント](https://devcenter.heroku.com/start)を参照してください。**
 
-The following commands would be used to manually build the app on Heroku for this demo before actual deployment.
+実際にデプロイする前に、以下のコマンドを使用して Heroku 上にこのデモ アプリケーションを手動でビルドできます。
 
 ```
 heroku create circleci-demo-python-flask # これを一意の名前に置き換えます
@@ -385,7 +387,7 @@ heroku restart
 ## Using workflows to automatically deploy
 {: #using-workflows-to-automatically-deploy }
 
-To deploy `master` to Heroku automatically after a successful `master` build, add a `workflows` section that links the `build` job and the `deploy` job.
+`master` のビルドが成功した後、Heroku に自動的に `master` をデプロイするには、`workflows` セクションを追加して `build` ジョブと `deploy` ジョブをリンクさせます。
 
 ```yaml
 workflows:
@@ -446,13 +448,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Heroku への Master のデプロイ
+          name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
-For more information about Workflows, see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
+ワークフローの詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。

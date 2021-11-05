@@ -19,18 +19,18 @@ order: 100
 Google Cloud SDK は、Google Cloud Platform (GCP) サービスへのアクセスに使用できる強力なツールセットであり、Google Compute Engine や Google Kubernetes Engine などが含まれます。 CircleCI では、GCP プロダクトにアプリケーションをデプロイする場合、Google Cloud SDK が推奨されます。
 
 ## 前提条件
-それ以外の場合は、基本イメージのオペレーティング システムに対応する [Google Cloud SDK インストール手順](https://cloud.google.com/sdk/)に従ってください。
+{: #prerequisites }
 {:.no_toc}
 
 - CircleCI 2.0 プロジェクト
 - GCP プロジェクト
 
 ### Google Cloud SDK のインストール
-Identity and Access Management (IAM) の権限については、Cloud Storage の[権限に関するドキュメント](https://cloud.google.com/storage/docs/access-control/iam-permissions)を参照してください。
+{: #installing-the-google-cloud-sdk }
 
 プライマリ コンテナでオペレーティング システムとして Debian を受け入れ可能な場合は、Google の基本 Docker イメージの使用を検討してください。 このイメージは、Docker Hub で [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) として提供されています。
 
-Google のパブリック イメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
+それ以外の場合は、基本イメージのオペレーティング システムに対応する [Google Cloud SDK インストール手順](https://cloud.google.com/sdk/)に従ってください。
 
 ### サービス アカウントの作成と格納
 {: #creating-and-storing-a-service-account }
@@ -46,7 +46,7 @@ Google Cloud SDK のツールを使用する前に、`gcloud` を承認する必
     - `GOOGLE_COMPUTE_ZONE`: デフォルトの [Compute Engine のゾーン](https://cloud.google.com/compute/docs/regions-zones/)
 
 #### きめ細かい権限の追加
-**メモ:** カスタムの基本イメージを使用している場合は、確実に最新のコンポーネントが使用されるように、SDK を承認する前に以下のコマンドを追加してください。
+{: #adding-granular-permissions }
 
 GCR へのコンテナ イメージのプッシュに問題が発生している場合は、デフォルトの `service account` によって提供されるものよりもきめ細かい権限が必要とされている可能性があります。 権限の変更は、Cloud Storage の [IAM コンソール](https://console.cloud.google.com/iam-admin/iam/project)で許可することができます。
 
@@ -55,7 +55,7 @@ Refer to the Cloud Storage [permission documentation](https://cloud.google.com/s
 ### Google Container Registry への認証
 {: #authenticating-to-google-container-registry }
 
-`gcloud` を使用して Google Cloud SDK を承認し、いくつかのデフォルト設定を設定します。
+Google のパブリック イメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
 
 ```yaml
 version: 2
@@ -99,7 +99,19 @@ jobs:
 Use `gcloud` to authorize the Google Cloud SDK and set several default settings. Before executing this command, make sure to write the key to a file before running this command, otherwise, the key file will be interpreted as a .p12 file.
 
 ```yaml
-<a href="#google-cloud-sdk-のインストール">選択する基本 Docker イメージ</a>によっては、Google Container Registry への認証が必要になる場合があります。
+version: 2.1
+jobs:
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
 **Note:** If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.

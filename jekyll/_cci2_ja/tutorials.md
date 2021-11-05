@@ -9,50 +9,50 @@ version:
 
 お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
 
-| プラットフォーム ガイド                                                          | 説明                                                                      |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                             | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
-| <a href="{{ site.baseurl }}/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
-| <a href="{{ site.baseurl }}/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
-| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
+| プラットフォーム ガイド                                                             | 説明                                                                      |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                                | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
+| <a href="{{ site.baseurl }}/ja/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                                | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
+| <a href="{{ site.baseurl }}/ja/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                                | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
+| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
 {: class="table table-striped"}
 
 ## Sample projects with companion guides
 {: #sample-projects-with-companion-guides }
 
-Refer to the Sample Projects to get help with building the language and framework in which your application is written.
+サンプル プロジェクトを参照すると、アプリケーションの記述に使用する言語やフレームワークの構築に役立ちます。
 
 {% include snippets/language-guides.md %}
 
-## Sample workflows
+## サンプル ワークフロー
 {: #sample-workflows }
 
-| Workflow Example     | GitHub Repo                                                                                                                               |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Parallel             | [parallel-jobs](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)                       |
-| Sequential           | [sequential-branch-filter](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) |
-| Fan-in / Fan-out     | [fan-in-fan-out](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)                     |
-| Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)         |
+| ワークフローの例       | GitHub リポジトリ                                                                                                                              |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 並列             | [parallel-jobs](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)                       |
+| 順次             | [sequential-branch-filter](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) |
+| ファンイン / ファンアウト | [fan-in-fan-out](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)                     |
+| ワークスペース転送      | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)         |
 {: class="table table-striped"}
 
 ## CircleCI public repos
 {: #circleci-public-repos }
 
-| GitHub Repo            | 説明                                                               | config.yml link                                                                                      |
-| ---------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| circleci-docs          | A static website generated by Jekyll for CircleCI documentation. | [.circleci/config.yml](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)   |
-| circleci frontend      | Mirror of the code that is running CircleCI's frontend.          | [.circleci/config.yml](https://github.com/circleci/frontend/blob/master/.circleci/config.yml)        |
-| circleci-images        | Contains the official set of images that CircleCI maintains.     | [.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml) |
-| circleci image-builder | Uses Docker for building container images.                       | [.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)   |
+| GitHub リポジトリ           | 説明                                           | config.yml のリンク                                                                                      |
+| ---------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| circleci-docs          | Jekyll によって生成された CircleCI ドキュメントの静的な Web サイト | [.circleci/config.yml](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)   |
+| circleci frontend      | CircleCI のフロントエンドを実行しているコードのミラーです。           | [.circleci/config.yml](https://github.com/circleci/frontend/blob/master/.circleci/config.yml)        |
+| circleci-images        | CircleCI が提供している公式のイメージ セットです。               | [.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml) |
+| circleci image-builder | Docker を使用するコンテナ イメージのビルド                    | [.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)   |
 {: class="table table-striped"}
 
-## See also
+## 関連項目
 {: #see-also }
 
-Use the Hello World document and sample `config.yml` files to start configuring your build.
+Hello World ドキュメントと`config.yml` ファイルの例を参照して、最初のビルドを構成できます。
 
-| Document                  | Description                                                                                                                                                      |
+| ドキュメント                    | 説明                                                                                                                                                               |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.                                                                |
-| <a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
+| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。                                                                                        |
+| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のリンク</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
 {: class="table table-striped"}

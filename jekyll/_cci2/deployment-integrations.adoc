@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 = Configuring Deploys
@@ -10,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is just the same as any other job configuration; you create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+Deployment at CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
@@ -72,7 +73,7 @@ Looking at the `deploy-via-git` command source in the https://circleci.com/devel
 version: 2.1
 
 orbs:
-  heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
+  heroku: circleci/heroku@0.0.10 # Invoke the Heroku orb
 
 workflows:
   heroku_deploy:
@@ -154,7 +155,7 @@ jobs:
 
       - run:
           command: |
-            git push heroku sequential-branch-filter:master
+            git push heroku sequential-branch-filter:main
             heroku run rake db:migrate
             sleep 5 # sleep for 5 seconds to wait for dynos
             heroku restart

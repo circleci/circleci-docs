@@ -3,13 +3,15 @@
     <nav class="mobile-sidebar">
       {% assign lang = page.lang %}
       {% assign sidenav = site.data.sidenav[lang] %}
+      {% assign url_slug = current_url | slugify %}
 
       {% for main-item in sidenav %}
         <ul>
-          <li class="main-nav-item closed" data-section="{{ main-item.name | slugify }}">
+          {% assign section_slug = main-item.name | slugify %}
+          <li class="main-nav-item closed" data-section="{{ section_slug }}">
             <div class="list-wrap">
               {% if main-item.icon %}
-                {% asset '{{ main-item.icon }}' class=icon %}
+                <img class="icon" src="{{ site.baseurl }}/{% ministamp { source_path: 'assets/img/{{ main-item.icon }}', destination_path: 'assets/{{ main-item.icon }}' } %}">
               {% endif %}
 
               {% if main-item.i18n_name %}
@@ -19,15 +21,17 @@
               {% endif %}
 
               {% if main-item.link %}
-                <a class="{% if page.url == main-item.link %} active {% endif %}"
-                  href="{{ site.baseurl }}/{{ main-item.link }}?section={{ main-item.name | slugify }}{% if sub-item.hash %}#{{sub-item.hash}}{% endif %}"
+                {% assign link_slug = main-item.link | slugify %}
+                <a class="{% if url_slug == link_slug %} active {% endif %}"
+                  href="{{ site.baseurl }}/{{ main-item.link }}{% if sub-item.hash %}#{{sub-item.hash}}{% endif %}"
+                  data-section="{{ section_slug }}"
                   data-proofer-ignore>{{ display_name}}</a>
               {% else %}
                 <span class="nav-span">{{ display_name}}</span>
               {% endif %}
 
               {% if main-item.children %}
-              {% asset docs/arrow-right.svg class=arrow %}
+                <img class="arrow" crossorigin="anonymous" src="{{ site.baseurl }}/{% ministamp assets/img/docs/arrow-right.svg assets/docs/arrow-right.svg %}">
               {% endif %}
             </div>
 
@@ -44,8 +48,10 @@
                 {% if item.name %}
                   <li class="nav-item">
                     {% if item.link %}
-                      <a class="{% if page.url == item.link %} active {% endif %}"
-                        href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                      {% assign link_slug = item.link | slugify %}
+                      <a class="{% if url_slug == link_slug %} active {% endif %}"
+                        href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                        data-section="{{ section_slug }}"
                         data-proofer-ignore>{{ display_name }}
                       </a>
                     {% else %}
@@ -62,8 +68,10 @@
                   {% assign display_name = sub-item.name %}
                 {% endif %}
                 <li class="subnav-item">
-                  <a class="{% if page.url == sub-item.link %} active {% endif %}"
-                    href="{{ site.baseurl }}/{{ sub-item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                  {% assign link_slug = sub-item.link | slugify %}
+                  <a class="{% if url_slug == link_slug %} active {% endif %}"
+                    href="{{ site.baseurl }}/{{ sub-item.link }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                    data-section="{{ section_slug }}"
                     data-proofer-ignore>{{ display_name }}</a>
                 </li>
                 {% endfor %}
@@ -77,8 +85,10 @@
                 {% assign display_name = item.name %}
               {% endif %}
               <li class="subnav-item">
-                <a class="{% if current_url == item.link %} active {% endif %}"
-                  href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}">
+                {% assign link_slug = item.link | slugify %}
+                <a class="{% if url_slug == link_slug %} active {% endif %}"
+                  href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                  data-section="{{ section_slug }}">
                   {{display_name}}
                 </a>
               </li>

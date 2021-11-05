@@ -5,6 +5,10 @@ short-title: "Overview"
 description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments.
@@ -26,7 +30,7 @@ CircleCI runs nearly one million jobs per day in support of 30,000 organizations
 
 As a developer using [circleci.com](https://circleci.com), you can [SSH into any job]({{site.baseurl}}/2.0/ssh-access-jobs/) to debug your build issues, set up [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) file to run jobs faster, and configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
 
-As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad Cluster for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/circleci-ops-guide-v2-17.pdf) for complete documentation.
+As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/server-3-overview/) for complete documentation.
 
 ## Summary
 {: #summary }
@@ -61,7 +65,6 @@ Release higher quality, more stable products.
 CircleCI provides a free trial with the following options:
 
 - **Cloud**: See [Signup and Try CircleCI]({{site.baseurl}}/2.0/first-steps/) to get started with the hosted application.
-- **Server**: Refer to [CircleCI Trial Installation]({{site.baseurl}}/2.0/single-box/) for the Enterprise Trial instructions.
 
 ### Open source
 {: #open-source }
@@ -74,4 +77,8 @@ See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information a
 Any app that runs on Linux, Android, or macOS is supported. Refer to the
 - [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
 - [Core Features]({{site.baseurl}}/2.0/features/) for detailed descriptions and links to procedural documentation.
+
+## Learn More
+{: #learn-more }
+Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021) with CircleCI academy to learn more.
 

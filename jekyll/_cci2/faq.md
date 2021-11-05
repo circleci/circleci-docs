@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "FAQ"
 short-title: "FAQ"
-description: "Frequently asked questions about CircleCI 2.0"
+description: "Frequently asked questions about CircleCI"
 categories: [migration]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -108,15 +109,15 @@ A **run queue** forms when CircleCI experiences high demand. Customer builds are
 
 In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
 
-### Why are my builds queuing even though I'm on Performance Plan?
+### Why are my builds queuing even though I'm on the Performance plan?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
 In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your builds, it's possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
 
-### Why can't I find my project on the Add Project page?
-{: #why-cant-i-find-my-project-on-the-add-project-page }
+### Why can't I find my project on the Projects dashboard?
+{: #why-cant-i-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
+If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
@@ -260,7 +261,7 @@ CircleCI provides no guarantees about precision. A scheduled workflow will be ru
 ### What do I need to get started building on Windows?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-You will need a [Performance Plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows jobs are charged at 40 credits/minute.
+You will need a [Performance plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows jobs are charged at 40 credits/minute.
 
 ### What exact version of Windows are you using?
 {: #what-exact-version-of-windows-are-you-using }
@@ -281,29 +282,28 @@ Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
 
 The Windows machines have 4 vCPUs and 15GB RAM.
 
-### Is Windows available on installed versions of CircleCI?
+### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+The Windows executor is available on CircleCI server v3.x and v2.x
 
 ## Billing
 {: #billing }
 
 ### Credit Usage Plans
 {: #credit-usage-plans }
-
-#### How do the new pricing plans affect me as a customer?
-{: #how-do-the-new-pricing-plans-affect-me-as-a-customer }
 {:.no_toc}
-For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
+Visit our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
 
 #### What are credits?
 {: #what-are-credits }
 {:.no_toc}
 Credits are used to pay for users and usage based on machine type, size, and features such as Docker Layer Caching.
 
-For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+For example, the 25,000 credit package would provide 2,500 build minutes when using a Docker or Linux "medium" compute at 10 credits per minute. CircleCI provides multiple compute sizes so you can optimize builds between performance (improved developer productivity) and value.
+
+When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
@@ -368,12 +368,12 @@ On the **Performance plan**, when you reach 2% of your remaining credits, you wi
 
 If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
 
-On the **free plan**, jobs will fail to run once you have run out of credits.
+On the **Free plan**, jobs will fail to run once you have run out of credits.
 
 #### Do credits expire?
 {: #do-credits-expire }
 {:.no_toc}
-**Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+**Performance plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
 
 #### How do I pay?
 {: #how-do-i-pay }
@@ -384,7 +384,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 {: #when-do-i-pay }
 {:.no_toc}
 
-On the **Performance Plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+On the **Performance plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
 
 #### Am I charged if my build is "Queued" or "Preparing"?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
@@ -409,9 +409,9 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations **on our free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs.
+Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs.
 
-If you build on macOS, we also offer organizations on our free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
+If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
 
 #### I currently get free credits for open source projects on my container plan. How do I get discounts for open source on the Performance plan?
 {: #i-currently-get-free-credits-for-open-source-projects-on-my-container-plan-how-do-i-get-discounts-for-open-source-on-the-performance-plan }
@@ -524,7 +524,7 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 ### Which CPU architectures does CircleCI support?
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-`amd64` is the only supported CPU architecture.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
 
 
 [docker-hub]: https://hub.docker.com

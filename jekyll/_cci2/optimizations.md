@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -75,7 +76,7 @@ version: 2.1
 jobs: # here we define two jobs: "build" and "test"
   build:
     docker: # the docker executor is used
-      - image: circleci/<language>:<version TAG> # An example docker image
+      - image: cimg/<language>:<version TAG> # An example docker image
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -84,7 +85,7 @@ jobs: # here we define two jobs: "build" and "test"
       - run: <command> # An example command
   test:
     docker: # same as previous docker key.
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -128,7 +129,7 @@ customize how tests are allocated.
 version: 2
 jobs:
   docker:
-    - image: circleci/<language>:<version TAG>
+    - image: cimg/<language>:<version TAG>
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -143,7 +144,7 @@ Read more in-depth about splitting tests in our [document on parallelism]({{site
 
 **Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resourceclass) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
 
 Below is an example use case of the `resource_class` feature.
 
@@ -167,7 +168,7 @@ jobs:
 ## Docker layer caching
 {: #docker-layer-caching }
 
-**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
+**Note**: [The Performance plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
 DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
@@ -178,7 +179,7 @@ version: 2
 jobs:
  build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

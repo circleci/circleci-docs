@@ -8,14 +8,19 @@ order: 1
 version:
 - Cloud
 - Server v2.x
+- Server v3.x
 ---
 
-An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
+CircleCI offers several build environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
 
 ![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
 ## Docker
 {: #docker }
+
+<div class="alert alert-warning" role="alert">
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+</div>
 
 ```
 jobs:
@@ -43,12 +48,24 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ```
 
-{:.tab.machine.Server}
+{:.tab.machine.Server_3}
 ```
 jobs:
-  build:
-    machine:
+  build: # name of your job
+    machine: # executor type
       image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+      
+    steps:
+      # Commands run in a Linux virtual machine environment
+```
+
+{:.tab.machine.Server_2}
+```
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+
     steps:
       # Commands run in a Linux virtual machine environment
 ```
@@ -58,7 +75,7 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 ## macOS
 {: #macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
 ```
 jobs:
@@ -79,7 +96,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 The syntax for using the Windows executor in your config differs depending on whether you are using:
 
 * The cloud version of CircleCI, using config version 2.1 and the Windows orb.
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```
@@ -98,7 +115,23 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+
+{:.tab.windowsblock.Server_3}
+```
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```
 version: 2
 
@@ -118,6 +151,11 @@ Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/e
 ## See also
 {: #see-also }
 
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
-* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos).
-* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows).
+* [Choosing an executor type]({{ site.baseurl }}/2.0/executor-types/)
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
+* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
+* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
+
+## Learn More
+{: #learn-more }
+Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.

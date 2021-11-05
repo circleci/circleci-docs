@@ -5,6 +5,10 @@ short-title: "Example Public Repos"
 description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI.

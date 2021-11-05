@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -35,7 +36,7 @@ Use either the CircleCI CLI to split test files or use environment variables to 
 ### Resource class
 {: #resource-class }
 
-It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file.  If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
+It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file. 
 
 ### Cache
 {: #cache }
