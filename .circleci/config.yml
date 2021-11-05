@@ -177,7 +177,6 @@ jobs:
             mkdir -p /tmp/workspace/css
             mv jekyll/assets/js/* /tmp/workspace/js/
             mv jekyll/assets/css/* /tmp/workspace/css/
-            mv jekyll/assets/js/*.bundle.js /tmp/workspace/js/
       - run:
           name: "Persist package.json" # Move our package.json into our workspace for datadog synthetic tests.
           command:
