@@ -72,7 +72,7 @@ suggested:
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
 
-__ `workflows` _キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションを参照してください。_
+`workflows` _キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションを参照してください。_
 
 **注:** ワークフローを使用してプロジェクトを構成する場合、 Docker イメージ、環境変数、`run` ステップなどの構文を複数のジョブで共有することがよくあります。 `.circleci/config.yml` のコードをコンパクトにするエイリアスの使い方や構文の再利用方法については [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) でご確認ください。 また、ブログページの [CircleCI の設定における YAML ファイルの再利用](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)も参考にしてください。
 
@@ -219,7 +219,7 @@ workflows:
             - hold
 ```
 
-上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。 However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
+上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。ただし、ワークスペースの保持期間は 15 日間ですので、もし承認後のジョブがワークスペースを利用している場合、有効な承認期限は 15 日間ということになります。
 
 ワークフローで手動承認を使用する場合は、以下の点に注意する必要があります。
 
@@ -547,7 +547,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 ```yaml
 # 以下のスタンザは、CircleCI 2.1 を使用して再利用可能な Executor を使用していることに注意してください
 # これにより、ジョブ間で再利用される Docker イメージを定義できます。
-# 詳細は、https://circleci.com/ja/docs/2.0/reusing-config/# 再利用可能な Executor のオーサリング を参照してください。
+# 詳細は、https://circleci.com/docs/ja/2.0/reusing-config/#authoring-reusable-executors を参照してください。
 
 version: 2.1
 
@@ -569,11 +569,9 @@ jobs:
 
       # ダウンストリーム ジョブ用に、指定したパス (workspace/echo-output) を Workspace に維持します。
       - persist_to_workspace:
-          #  絶対パス、または working_directory からの相対パスで指定する必要があります。 これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-          これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-                    root: workspace
+          # 絶対パス、または working_directory からの相対パスで指定する必要があります。 これは、コンテナ上のディレクトリで、
+          # ワークスペースのルート ディレクトリと見なされます。
+          root: workspace
           # ルートからの相対パスを指定する必要があります。
           paths:
             - echo-output
@@ -655,8 +653,12 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 
 ## ビデオ: ワークフローに複数のジョブを設定する
 {: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
