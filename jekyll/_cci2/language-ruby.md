@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Ruby"
 short-title: "Ruby"
-description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
+description: "Building and Testing with Ruby and Rails on CircleCI"
 categories: [language-guides]
 order: 8
 version:

@@ -8,7 +8,7 @@ order: 1
 ---
 
 There is no formal process or toolset to migrate between CircleCI Cloud (SaaS) to an installed CircleCI Server setup.
-The process is to perform a fresh install of CircleCI 2.0, using AWS and Terraform—see [Installation]({{ site.baseurl }}/2.0/aws) for instructions.
+The process is to perform a fresh install of CircleCI server, using AWS and Terraform—see [Installation]({{ site.baseurl }}/2.0/aws) for instructions.
 
 Next, you will need to manually copy over all of your project settings including Contexts, environment variables, and API tokens.
 
