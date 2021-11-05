@@ -12,21 +12,21 @@ version:
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
 
 ## 概要
-CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
+{: #overview }
 
-There are two reasons to add SSH keys to CircleCI:
+CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-**メモ:** SSH 鍵を作成する際は必ず空のパスワードを設定してください。 CircleCI ではパスワードを使った SSH 鍵の復号はできません。
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
-Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
+それ以外の場合は、お使いのCircleCIのバージョン(クラウド/サーバー)に応じた以下の手順で、プロジェクトにSSHキーを追加してください。
 
 複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
 ## 手順
-**メモ:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録された鍵と一致している必要があります。
+{: #steps }
 
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
@@ -71,7 +71,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH 鍵に自動的に署名します。 ただし、コンテナに実際に鍵を登録するには、`add_ssh_keys` キーを使用する**必要があります**。
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。 2 つ目が目的のときは、以下の手順でプロジェクトに SSH 鍵を登録します。
+SSH キーをコンテナに追加するには、 [特別なステップ]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
 
 ```yaml
 version: 2
@@ -83,7 +83,7 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-**Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application.
+**メモ:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録された鍵と一致している必要があります。
 
 ## ホスト名を指定せずに複数の鍵を登録する
 {: #adding-multiple-keys-with-blank-hostnames }
@@ -93,4 +93,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)

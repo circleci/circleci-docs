@@ -26,7 +26,7 @@ the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[c
 place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
 
 NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
-Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
+Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
 NOTE: Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
 
@@ -195,6 +195,8 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
+ifndef::pdf[]
 ## See also
 
 * https://circleci.com/docs/2.0/configuration-reference[Configuration Reference]
+endif::[]

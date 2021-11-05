@@ -11,7 +11,7 @@ description: "Jira と CircleCI の接続"
 **メモ:** CircleCI Jira プラグインは Jira 管理者のみがインストールできます。
 
 # インストール手順
-インテグレーションを追加し、ジョブの詳細ページに移動すると、Jira アイコンが有効化されています。
+{: #installation-steps }
 
 1. Navigate to project settings and select `JIRA integration` ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
 2. Atlassian Marketplace にアクセスし、[CircleCI Jira プラグイン](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)を入手します。 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
@@ -20,8 +20,8 @@ description: "Jira と CircleCI の接続"
 
 ---
 
-# ジョブ ページで Jira チケットを作成する
-Jira でビルドとデプロイのステータスを表示する
+# Jiraでビルドとデプロイのステータスを表示
+{: #viewing-build-and-deploy-statuses-in-jira }
 
 CircleCI Orb を使用すると、Jira でビルドとデプロイのステータスを確認できるようになります。 そのプロセスは以下のとおりです。
 
@@ -36,21 +36,15 @@ Jira Orb を使用したシンプルな `config.yml` の例を以下に示しま
 
 
 ```yaml
-jobs:
-  build:
-    docker:
-      - image: 'circleci/node:10'
-    steps:
-      - run: echo "hello"
-orbs:
-  jira: circleci/jira@1.0.5
 version: 2.1
+orbs: # adds orbs to your configuration
+  jira: circleci/jira@1.0.5 # invokes the Jira orb, making its commands accessible
 workflows:
   build:
     jobs:
       - build:
           post-steps:
-            - jira/notify
+            - jira/notify # Runs the Jira's "notify" commands after a build has finished its steps.
 jobs:
   build:
     docker:

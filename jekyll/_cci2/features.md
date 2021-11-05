@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Core Features"
 short-title: "Core Features"
-description: "Starting point for learning core features of CircleCI 2.0"
+description: "Starting point for learning core features of CircleCI"
 categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -20,7 +21,7 @@ Following are the most popular features CircleCI offers that Developers are inte
 ### SSH into builds
 {: #ssh-into-builds }
 
-Often the best way to troubleshoot problems is to [SSH into a job]({{ site.baseurl }}/2.0/ssh-access-jobs/) and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
+Often the best way to troubleshoot problems is to [SSH into a job]({{ site.baseurl }}/2.0/ssh-access-jobs/) and inspect things like log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH.
 
 Note: When CircleCI runs your pipeline, the [`run` ](https://circleci.com/docs/2.0/configuration-reference/#run) command executes shell commands in a _non-interactive_ shell. When SSH-ing into a build, you are using an _interactive_ shell (see the section on [Invocation](https://linux.die.net/man/1/bash) in the bash manual for more information). An interactive bash shell loads a series of startup files (such as `~/.bash_profile`), which may or may not change the outcome of SSH debugging process.
 
@@ -35,7 +36,7 @@ Use either the CircleCI CLI to split test files or use environment variables to 
 ### Resource class
 {: #resource-class }
 
-It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file.  If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
+It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file. 
 
 ### Cache
 {: #cache }
@@ -61,7 +62,7 @@ System Administrators are able to gather [metrics for monitoring]({{ site.baseur
 ### Nomad cluster
 {: #nomad-cluster }
 
-CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/nomad/) for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
+CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/nomad/) for understanding how to operate the Nomad Cluster in your CircleCI server installation.
 
 ### APIs
 {: #apis }

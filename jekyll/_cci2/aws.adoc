@@ -10,16 +10,16 @@ version:
 :toc: macro
 :toc-title:
 
-Following is a step by step guide to installing CircleCI Server v2.x with Terraform.
+Following is a step by step guide to installing CircleCI server v2.x with Terraform.
 
 toc::[]
 
 == Define Variables for Terraform
 
-. Clone the https://github.com/circleci/enterprise-setup[Setup] repository. If you already have it cloned, make sure it is up-to-date and you are on the `master` branch by running:
+. Clone the https://github.com/circleci/enterprise-setup[Setup] repository. If you already have it cloned, make sure it is up-to-date and you are on the `main` branch by running:
 +
 ```shell
-git checkout master && git pull
+git checkout main && git pull
 ```
 . Go to the top directory of the `enterprise-setup` repo on your local machine.
 
@@ -252,7 +252,7 @@ image::metrics_setup.png[]
 
 . **Distributed Tracing** is used in our support bundles, and settings should remain set to default unless a change is requested by CircleCI Support.
 
-. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types read our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
+. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI server v2.x only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types read our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
 
 . After agreeing to the License Agreement and saving your settings, select Restart Now from the popup. You will then be redirected to start CircleCI and view the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers.
 

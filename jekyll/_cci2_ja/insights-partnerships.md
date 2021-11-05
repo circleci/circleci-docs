@@ -4,6 +4,7 @@ title: "Insights データの連携"
 short-title: "Insights データの連携"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## 概要
@@ -11,107 +12,104 @@ version:
 
 {:toc}
 
-Insights ダッシュボードのデータを、サードパーティ プロバイダー製品と連携する方法について説明します。
+This document describes how you can connect Insights data with third party providers. Currently we support integrations with [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
 
-### Sumo Logic とのインテグレーション
+## Datadog integration
+{: #datadog-integration }
+
+You can send data to Datadog through the use of webhooks with CircleCI.
+
+1. In the [CircleCI App](https://app.circleci.com/), click on the ellipsis menu for each project, and then click **Project Settings** > **Webhooks**.
+  - **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is your [Datadog API key](https://app.datadoghq.com/account/login).
+  - **Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
+  - **Events**: Select `Workflow Completed` and `Job Completed`.
+  - **Certificate verifications**: Enable this check.
+
+1. Click **Add Webhook** to save the new webhook.
+
+### Visualize pipeline data in Datadog
+{: #visualize-pipeline-data-in-datadog }
+
+Sign in to [Datadog](https://app.datadoghq.com/account/login) and visit the Pipelines and Pipeline Executions pages to see data populate after workflows finish.
+
+**Note**: The Pipelines page will only show data for the default branch of each repository.
+
+## Sumo Logic integration
 {: #sumo-logic-integration }
 
-Sumo Logic を使用すると、CircleCI 上のすべてのジョブを追跡し、その分析データを可視化できます。 そのためには、Sumo Logic パートナー インテグレーション サイトから、Sumo Logic Orb と Sumo Logic アプリケーション インテグレーションを使用します。
+The CircleCI app for Sumo Logic provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
 
 
-#### Sumo Logic の CircleCI ダッシュボード
+### The CircleCI dashboard for Sumo Logic
 {: #the-circleci-dashboard-for-sumo-logic }
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
+Use this dashboard to:
+  - Monitor real-time CI performance, activity, and health, or track over time.
+  - Identify opportunities for optimization.
 
-以下の情報が表示されます。
+![header]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
 
-- 合計ジョブ数
-- 合計成功ジョブ数
-- 合計失敗ジョブ数
-- ジョブの結果
-- ジョブ別の平均実行時間 (秒単位)
-- プロジェクト別のジョブ数
-- 最新のジョブ (直近 10 個)
-- 時間のかかった失敗ジョブ上位 10 個 (秒単位)
-- 時間のかかった成功ジョブ上位 10 個 (秒単位)
+Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
 
-CircleCI ダッシュボードは、ダッシュボードのホームページからアプリケーション カタログを使用してインストールできます。
+  - Total Jobs Ran
+  - Job Health (% success)
+  - Summary
+  - Jobs Ran Per Project
+  - Daily Performance
+  - Jobs Per Day
+  - 5 Most Recent Failed Jobs
+  - 5 Most Recent Failed Workflows
+  - Top 10 Longest Workflows (Averaged)
+  - Top 10 Longest Running Jobs
+  - Average Job Runtime Per Day
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
-ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。この Orb は、追跡するプロジェクトに含まれている必要があります。
+![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
-#### Sumo Logic Orb
-{: #the-sumo-logic-orb }
+This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
-Sumo Logic Orb の最新版は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/sumologic)で提供されています。
+### Set up Sumo Logic metrics using CircleCI webhooks
+{: #set-up-sumo-logic-metrics-using-circleci-webhooks }
 
-##### 1. Sumo Logic Orb をインポートする
-{: #1-import-the-sumo-logic-orb }
-{:.no_toc}
+To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
+#### Configure Webhooks
+{: #configure-webhooks }
+##### **Step 1. Configure Hosted Collector**
+{: #step-1-configure-hosted-collector }
 
-Sumo Logic Orb をプロジェクトに追加するには、以下のようにトップ レベルの `orbs` キーを記述し、`circleci/sumologic@x.y.z` をインポートします (`x.y.z` は上記リンクの最新バージョンの番号で置き換えてください)。
+Follow the Sumo Logic documentation for [Configuring a Hosted Collector](https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector).
 
-```yaml
-orbs:
-  sumologic: circleci/sumologic@x.y.z
-```
+##### **Step 2. Add an HTTP Source**
+{: #step-2-add-an-http-source }
 
-##### 2. ワークフローに _workflow-collector_ を追加する
-{: #2-add-workflow-collector-to-workflow }
-{:.no_toc}
+To get the URL where the CircleCI Webhooks will be sent, and then recorded to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
 
-`workflow-collector` ジョブはワークフローと同時に並列で実行され、ワークフロー内のすべてのジョブが完了するまで Sumo Logic に分析データを送信します。
+When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the CircleCI Webhooks UI in the next step.
 
-```yaml
-version: 2.1
-workflows:
-  build-test-and-deploy:
-    jobs:
-      - sumologic/workflow-collector # このジョブを追加してワークフローを追跡します
-      - build
-      - test:
-          requires:
-            - build
-      - deploy:
-          requires:
-            - test
-```
+##### **Step 3. Configure Project Webhooks**
+{: #step-3-configure-project-webhooks }
 
-##### 3. ソース コレクターを 2 つ作成する
-{: #3-create-two-source-collectors }
-{:.no_toc}
-Sumo Logic で、HTTPS URL を返す 2 つの*ソース コレクター*を作成する必要があります。 この HTTPS URL にジョブ データが送信されます。
+For each project on CircleCI you wish to track, configure a webhook directed at the HTTP Source Address. Follow the [CircleCI docs for configuring webhooks]({{ site.baseurl }}/2.0/webhooks/#setting-up-a-hook).
 
-作成する必要があるのは、`circleci/job-collector` と `circleci/workflow-collector` という名前のコレクターです。
+When configuring the webooks, ensure to include both the “workflow-completed”, and “job-completed” events.
 
-以下の手順で 2 つのソース コレクターを作成します。
-1. ダッシュボードで **[Setup Wizard (セットアップ ウィザード)]** を選択します。
-2. **[Set Up Streaming Data (ストリーミング データのセットアップ)]** を選択します。
-3. 一番下までスクロールし、**[All Other Sources (他のすべてのソース)]** を選択します。
-4. **[HTTPS Source (HTTPS ソース)]** を選択します。
-5. `[Source Category (ソース カテゴリ)]` に、前述した 2 つの名前のいずれかを入力します。
-6. 出力された URL を保存します。
+### Install the CircleCI App for Sumo Logic
+{: #install-the-circleci-app-for-sumo-logic }
 
-##### 4. 環境変数を追加する
-{: #4-add-environment-variables }
-{:.no_toc}
+Now that you have set up collection, install the Sumo Logic App for CircleCI to use the preconfigured searches and Dashboards that provide insight into your CI Pipeline.
 
-ステップ 3 で生成された各 URL に対して、対応する環境変数を作成します。
+#### To install the CircleCI app for Sumo Logic:
+{: #to-install-the-circleci-app-for-sumo-logic }
 
-対応する環境変数は以下の 2 つです。
-- `JOB_HTTP_SOURCE`
-- `WORKFLOW_HTTP_SOURCE`
+1. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
+2. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
+3. To install the app, complete the following fields.
+  - **App Name**. You can retain the existing name, or enter a name of your choice for the app.
+  - **Data Source**. Select either of these options for the data source:
+    - Choose **Source Category**, and select a source category from the list.
+    - Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
+  - **Advanced**. Select the Location in Library (the default is the Personal folder in the Library), or click **New Folder** to add a new folder.
+4. Click **Add to Library**.
 
-**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
-
-これにより、Orb が Sumo Logic ダッシュボードにリンクされます。
-
-各ジョブが CircleCI で実行されると、Sumo Logic ダッシュボードはデータの入力を開始します。
-
-
-## 関連項目
-{: #see-also }
-
-Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
+Once an app is installed, it will appear in your Personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically. It is important to note that each panel slowly fills with data matching the time range query and received since the panel was created. Results won't immediately be available, but with a bit of time, you will see full graphs and maps.

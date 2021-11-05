@@ -57,7 +57,7 @@ Notice in the above example that you can use a `checksum` in the cache key. This
 
 Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be used to optimize your config:
 
-- [Caching](https://circleci.com/docs/2.0/caching/)
+- [Caching](https://circleci.com/docs/ja/2.0/caching/)
 
 ## Improving test performance
 {: #improving-test-performance }

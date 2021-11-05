@@ -110,7 +110,7 @@ CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, a
 
 === Nomad Client Proxy Setup
 
-* If you are installing CircleCI Server on AWS using Terraform, you should add the below to your Nomad client launch configuration – these instructions should be added to `/etc/environment`.
+* If you are installing CircleCI server on AWS using Terraform, you should add the below to your Nomad client launch configuration – these instructions should be added to `/etc/environment`.
 * If you are using Docker refer to the https://docs.docker.com/engine/admin/systemd/#/http-proxy[Docker HTTP Proxy Instructions] documentation.
 * If you are running a static installation, add the following to the server before installation:
 +

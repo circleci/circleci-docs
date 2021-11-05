@@ -5,21 +5,22 @@ description: > # this means to ignore newlines until "baseurl:"
   The documentation site for CircleCI, the fastest testing platform on the
   Internet.
 
-url: "http://localhost:4040" # the base hostname & protocol for your site
+url: "https://ui.circleci.com" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 devhub_base_url: "https://circleci.com/developer"
+noindex: false
 
 exclude:
   - .jekyll-cache
 
 plugins:
   - jekyll-include-cache
-  - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
+  - jekyll/minibundle
 
 algolia:
   application_id: U0RXNGRK45
@@ -49,10 +50,8 @@ algolia:
 
 toc:
   min_level: 1
-  max_level: 4
+  max_level: 6
 
-sass:
-  sass_dir: _sass
 
 markdown: kramdown
 kramdown:
@@ -64,11 +63,11 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.1.0
+      serverversion: 3.2.1
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
-      kotsversion: 1.44.1
+      kotsversion: 1.47.3
 
 asciidoctor:
   base_dir: _cci2/
@@ -77,11 +76,11 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.1.0
+    serverversion: 3.2.1
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
-    kotsversion: 1.44.1
+    kotsversion: 1.47.3
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -95,20 +94,6 @@ collections:
     permalink: /1.0/:path/
     prefix: "/1.0"
     selectorName: "1.0"
-  archive:
-    name: "Archive"
-    site_section: true
-    output: true
-    permalink: /archive/:path/
-    prefix: "/archive"
-    selectorName: "archive"
-  ccie:
-    name: "Enterprise Docs"
-    site_section: true
-    output: true
-    permalink: /enterprise/:path/
-    prefix: "/enterprise"
-    selectorName: "Enterprise"
   cci2:
     name: "2.0 Docs"
     site_section: true
@@ -162,6 +147,12 @@ defaults:
     values:
       toc: true
 
+  # Disable suggested by default
+  - scope:
+      path: ""
+    values:
+      suggested: false
+
 t:
     translation_in_progress:
         ja: "このページはただいま翻訳中です"
@@ -172,5 +163,8 @@ analytics:
   events:
     go_button_clicked: go-button-clicked
 rollbar_env: development
+
+# Optimizely SDK key for dev env
+optimizely: "GfYszBpMkefBSwiiEkH3b3"
 
 # server_version: "2.18.4"

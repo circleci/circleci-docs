@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang }}">
+<html lang="{{ page.lang }}">
 {% include_cached head.html site=site page=page %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
@@ -27,12 +27,12 @@
             <div>
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
+            <div id="tooltip" role="tooltip" class="tooltip-popover">
+              This document is applicable to the following:
+              <div id="arrow" data-popper-arrow></div>
+            </div>
             {% if page.version %}
             <div class="server-version-wrapper">
-              <div id="tooltip" role="tooltip" class="server-version-popover">
-                This document is applicable to the following:
-                <div id="arrow" data-popper-arrow></div>
-              </div>
               {% for version in page.version %}
               <span class="badge badge-primary">
                 <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
@@ -52,10 +52,26 @@
         </div><!-- .article-container -->
 
         {% if page.toc != false %}
-        <aside class="table-of-contents">
-          <h5 class="toc-heading">On this page </h5>
-          <div class="toc-indent">
-            {{ content | toc_only }}
+        <aside class="full-height">
+          <div class='full-height-sticky'>
+            <h5 class="toc-heading">On this page</h5>
+            <div class="toc-indent">
+              {{ content | toc_only }}
+            </div>
+            {% if page.suggested != false %}
+            <div id="related-resources">
+              <h5 class="related-heading">Helpful resources</h5>
+              <div class="related-indent">
+                <ul class="section-nav">
+                  {% for item in page.suggested %}
+                  <li class="related-entry related-h2">
+                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endif %}
           </div>
         </aside>
         {% endif %}

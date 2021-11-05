@@ -21,7 +21,7 @@ CircleCI API を使用してジョブをトリガーする方法について説�
 {:toc}
 
 ## 概要
-**メモ:** 現在のところ、API から 2.1 設定ファイルを使用するジョブをトリガーすることはできません。
+{: #overview }
 
 [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)をトリガーします。
 
@@ -33,30 +33,30 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-この例には以下の変数が使用されています。
-- `CIRCLE_API_USER_TOKEN`: [パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成).
-- `<vcs-type>`: 選択された VCS (`github` または `bitbucket`) を示すプレースホルダー変数
+Alternative syntaxes for the above example:
+- Replace single quotes with double quotes (`-d "build_parameters[CIRCLE_JOB]=deploy_docker"`)
+- Escape the square brackets (`-d build_parameters\[CIRCLE_JOB\]=deploy_docker`)
 
-API の関連情報については、[CircleCI API ドキュメント](https://circleci.com/docs/api/#section=reference)にまとめられています。
-- API によってトリガーされるジョブに `workflows` セクションが含まれてもかまいません。
-- ワークフローが、API によってトリガーされるジョブを参照する必要は**ありません**。
-- API によってトリガーされたジョブは、特定の [CircleCI コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)用に作成された環境変数にアクセス**できません**。
-- 環境変数を使用する場合は、それらの環境変数が[プロジェクトレベル]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)で定義されている必要があります。
-- 現在のところ、CircleCI 2.1 とワークフローを使用する場合には、単一のジョブをトリガーすることができません。
+Some notes on the variables used in this example:
+- `CIRCLE_API_USER_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
+- `<vcs-type>` is a placeholder variable and refers to your chosen VCS (either `github` or `bitbucket`).
+- `<org>` is a placeholder variable and refers to the name of your CircleCI organization.
+- `<repo>` is a placeholder variable and refers to the name of your repository.
+- `<branch>` is a placeholder variable and refers to the name of your branch.
 
 For a complete reference of the API, see the [CircleCI API Documentation](https://circleci.com/docs/api/v2/#section=reference).
 
 **Important Considerations When Triggering A Job Via The API**
 
-- API を通してジョブをトリガーする場合の重要な検討事項
-- API 呼び出しを `build_parameters[CIRCLE_JOB]=deploy_docker` で使用し、`deploy_docker` ジョブのみが実行されるようにします。
-- [プロジェクトのビルドをトリガーする](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview)エンドポイントを使用して、CircleCI API で[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)をトリガーできます。
-- If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
-- It is currently not possible to trigger a single job if you are using CircleCI 2.1 and Workflows
+- API によってトリガーされるジョブに `workflows` セクションが含まれてもかまいません。
+- ワークフローが、API によってトリガーされるジョブを参照する必要は**ありません**。
+- API によってトリガーされたジョブは、特定の [CircleCI コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)用に作成された環境変数にアクセス**できません**。
+- 環境変数を使用する場合は、それらの環境変数が[プロジェクトレベル]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)で定義されている必要があります。
+- 現在のところ、CircleCI 2.1 とワークフローを使用する場合には、単一のジョブをトリガーすることができません。
 - It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API: a [singular workflow can be re-run](https://circleci.com/docs/api/v2/#rerun-a-workflow), or you may [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) which will run its subsequent workflows.
 
 ## API を使用したジョブの条件付き実行
-この例では以下の点にご留意ください。
+{: #conditionally-running-jobs-with-the-api }
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 

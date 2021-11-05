@@ -1,28 +1,25 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- Sサーバー管理
 ---
-= CircleCI Server v3.x Application Lifecycle
+= CircleCI Server v3.x アプリケーション ライフサイクル
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI is committed to supporting four minor versions of the software. This means a minor version will receive patches
-for up to 12 months. In order to help identify releases and their impact to your installation, we use semantic versioning.
+CircleCI では、CircleCI ソフトウェアについてマイナー バージョン 4 つまでをサポート対象としています。 各マイナー バージョンには、最大 12 か月にわたってパッチが提供されます。 各リリースの識別と、お使いの環境にインストール済みの CircleCI Server への影響の特定が容易になるよう、CircleCI ではセマンティック バージョニングを使用しています。
 
-## Semantic Versioning
-Given a version number, MAJOR.MINOR.PATCH increment, the:
+## セマンティック バージョニング
+バージョンナンバーは、メジャー.マイナー.パッチ とし、バージョンを上げるには、
 
-. MAJOR version when you make incompatible API changes,
-. MINOR version when you add functionality in a backwards compatible manner, and
-. PATCH version when you make backwards compatible bug fixes.
+. APIの変更に互換性がない場合はメジャーバージョンを、
+. 後方互換性があり機能性を追加した場合はマイナーバージョンを、
+. 後方互換性を伴うバグ修正をした場合はパッチバージョンを上げます。
 
-Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+プレリリースやビルドナンバーなどのラベルに関しては、メジャー.マイナー.パッチ の形式を拡張する形で利用することができます。
 
-## Release Schedule
-We release monthly patch fixes for bugs and security concerns. We will have quarterly new feature releases. All releases
-will be posted to the change log. To stay up to date with the most recent releases, please subscribe to the
-https://circleci.com/server/changelog/[change log].
+## リリース スケジュール
+CircleCI では、毎月、バグとセキュリティ上の懸念事項に対処するパッチ修正をリリースしています。 新機能のリリースは四半期ごとです。 すべてのリリースは更新履歴に掲載されます。 最新リリースに関する最新情報を得るには、https://circleci.com/ja/server/changelog/[更新履歴]を購読してください。

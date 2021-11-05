@@ -7,8 +7,13 @@ categories: [containerization]
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
+
+<div class="alert alert-warning" role="alert">
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+</div>
 
 This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
 
@@ -26,8 +31,8 @@ useful for CI/CD. This document will provide an overview of best practices when 
 If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
 
 - Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
+- Find all CircleCI pre-built images available on [Docker Hub](https://hub.docker.com/u/cimg).
 - Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
-- All CircleCI pre-built images are available for browsing on [Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
 otherwise improve functionality, and these changes can sometimes affect
@@ -163,7 +168,6 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 CircleCI's convenience images fall into two categories: **language** images and
 **service** images. All images add a `circleci` user as a system user. The sections below will walk through the available next-generation and legacy images.
 
-
 ### Next-gen language images
 {: #next-gen-language-images }
 {:.no_toc}
@@ -201,7 +205,6 @@ next-gen images be sure to check each image listing for information on each
 variant. The `-browsers` variant for next-gen images is still in progress. See
 each image listing on the [Developer Hub](https://circleci.com/developer/images/)
 for details on which variants it supports.
-
 
 ### Legacy language images
 {: #legacy-language-images }
@@ -305,8 +308,6 @@ directory for the Linux distribution/version installed in that variant's base
 image. The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
 or [Stretch](https://packages.debian.org/stretch/)-based images,
 however the next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
-For details on individual variants of legacy CircleCI images, see the
-[circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
 For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
 
 The following packages are installed via `curl` or other means.
@@ -333,14 +334,10 @@ The following packages are installed via `curl` or other means.
    language, we suggest installing it via [an orb](https://circleci.com/orbs/)
    or a custom Docker image instead.
 
-
 ## Latest image tags by language
 {: #latest-image-tags-by-language }
 
 Below is a list of the latest **legacy** convenience images, sorted by language.
-For details about the contents of each image,
-refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
-
 
 <div class="alert alert-warning" role="alert">
 It is recommended to use next-generation images when possible.
@@ -348,7 +345,6 @@ For a list of the latest next-gen convenience images and
 details about the content of each image, visit
 the <a href="https://circleci.com/developer/">Developer Hub.</a>
 </div>
-
 
 **Note:** Excluding [language image variants](#language-image-variants) and [the
 service image variant](#service-image-variant), **for legacy images** CircleCI
@@ -365,32 +361,15 @@ images!
 
 **Resources:**
 
-- [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
-- [Dockerfiles](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/{{ image[0] }}/images) - the Dockerfiles this image was built from.
+- [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
 
 **Usage:** Add the following under `docker:` in your config.yml:
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
+**Recent Tags:**
 
-<ul class="list-3cols">
-{% assign tags = image[1].tags | sort | reverse %}
-{% assign tagCounter = 1 %}
-{% for tag in tags %}
-	{% if tagCounter > 99 %}
-		{% break %}
-	{% endif %}
-	{% unless tag contains "-browsers" or tag contains "-node" or tag contains "-ram" %}
-	<li>{{ tag }}</li>
-	{% assign tagCounter = tagCounter | plus:1 %}
-	{% endunless %}
-{% endfor %}
-</ul>
-
-
-<br/>
-Note: Any variants available for this image can be used by appending the variant tag to the tags above. View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"}.
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }})/tags?ordering=last_updated).
 
 ---
 

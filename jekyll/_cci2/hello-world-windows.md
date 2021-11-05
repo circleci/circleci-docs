@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Hello World On Windows"
 short-title: "Hello World On Windows"
-description: "First Windows project on CircleCI 2.0"
+description: "First Windows project on CircleCI"
 categories: [getting-started]
 order: 4
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -39,7 +40,7 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 **Notes:**
 
 - The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
-- Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
+- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
 
 ## Windows executor images
 {: #windows-executor-images }
@@ -71,7 +72,27 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblockone.Server}
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_2}
 ```yaml
 version: 2
 
@@ -124,7 +145,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblocktwo.Server}
+{:.tab.windowsblocktwo.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblocktwo.Server_2}
 ```yaml
 version: 2
 
@@ -177,9 +213,31 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblockthree.Server_3}
 ```YAML
-version: 2.0
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -220,9 +278,24 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Cloud}
+{:.tab.windowsblockfour.Server_3}
 ```YAML
-version: 2.0
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -238,7 +311,7 @@ jobs:
 # Example application
 {: #example-application }
 
-Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
+Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
 
 You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml).
 
@@ -348,37 +421,51 @@ Also, consider reading documentation on some of CircleCI’s features:
     * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/license-terms/mlt031819/) before using this Visual Studio version in your Windows jobs.
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
+* AWS
+    * AWS CLI 1.16.209
+    * Python 3.6.0
+    * Botocore 1.12.199
 * Shells:
     * Powershell 5
     * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
-* .NET Framework 4.8
+* .NET Framework 5
 * .NET Core
+    * SDK 5.0.402
+    * SDK 5.0.401
     * SDK 3.1.406 (x64)
     * SDK 3.0.100-preview7-012821
     * Runtime 3.0.0-preview6-27804-01
     * SDK 2.2.401
     * Runtime 2.2.6
     * SDK 2.1.801
-* Git 2.22.0
+* Nunit 3.10.0
+* Git 2.33.1
 * Git LFS 2.7.2
+* Gzip 1.3.12
+* 7zip 19.00
+* PsExec64 2.34
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
 * Docker Engine - Enterprise version 18.09.7
 * NuGet CLI 5.2.0.6090
-* Chocolatey v0.10.15
+* Chocolatey v0.11.2
 * Azure Service Fabric
     * SDK 3.3.617.9590
     * Runtime 6.4.617.9590
+* Azure CLI 2.0.70
 * OpenJDK 12.0.2
-* Node.js v12.8.0
-* NVM (Node Version Manager)
+* Node.js 14.17.5
+* NVM (Node Version Manager) 1.1.7
+* Yarn 1.22.17
 * Ruby 2.6.3
-* Go 1.12.7
-* Python 3.7.3
+* Go 1.17
+* Python 3.9
+* Java 12.0.2
 * Miniconda 3
+* WinAppDriver 1.1.1809.18001
 * Text editors
-    * nano 2.5.3
-    * vim 8.0.604
+    * nano 2.5
+    * vim 8.2
 * jq 1.5

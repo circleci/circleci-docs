@@ -2,15 +2,16 @@
 layout: classic-docs
 title: "Language Guide: Clojure"
 short-title: "Clojure"
-description: "Building and Testing with Clojure on CircleCI 2.0"
+description: "Building and Testing with Clojure on CircleCI"
 categories: [language-guides]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
-This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+This guide will help you get started with a Clojure application on CircleCI. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 * TOC
 {:toc}
@@ -34,7 +35,7 @@ If you use another testing tool, you can just adjust that step to run a differen
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/cci-demo-clojure # directory where steps will run
@@ -69,9 +70,9 @@ jobs: # basic units of work in a run
 
 The configuration above is from a demo Clojure app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-clojure-luminus](https://github.com/CircleCI-Public/circleci-demo-clojure-luminus).
 
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
+If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
-Now we’re ready to build a `config.yml` from scratch.
+Now we are ready to build a `config.yml` from scratch.
 
 ## Config walkthrough
 {: #config-walkthrough }

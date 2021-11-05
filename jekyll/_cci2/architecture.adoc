@@ -1,15 +1,16 @@
 ---
 version:
+- Admin
 - Server v2.x
 ---
-= CircleCI Server Container Architecture
+= CircleCI server container architecture
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
+This document outlines the containerized services that run on the Services machine within a CircleCI server v2.x installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
 toc::[]
 
@@ -122,7 +123,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 | `postgres`, `frontend`
 
 | `fileserved`
-| File storage service used as a replacement for S3 when CircleCI Server is run outside of AWS. Not used if Server is configured to use S3. Stores step output logs, artifacts, test results, caches and workspaces.
+| File storage service used as a replacement for S3 when CircleCI server v2.x is run outside of AWS. Not used if server is configured to use S3. Stores step output logs, artifacts, test results, caches and workspaces.
 | If not using S3, builds will produce no outputand some REST API calls might fail.
 | icon:fire-extinguisher[] if **not** using S3
 | None

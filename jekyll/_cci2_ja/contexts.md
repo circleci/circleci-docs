@@ -44,7 +44,7 @@ version:
 CircleCI と連携済みの Organization やリポジトリの名称を変更する必要が生じた場合、下記のステップに従うことが推奨されます:
 
 1. VCS 上で Organization 及びリポジトリの名称を変更します。
-2. 必要に応じて、環境変数のローテーションを実行しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
+2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
 3. CircleCI のプラン、プロジェクト一覧、各種設定が正しく引き継がれていることを確認します。
 4. 必要な場合、上記 3 の確認後、古い Org 名/リポジトリ名を再利用し新しい Org/リポジトリを作成します。
 
@@ -182,6 +182,7 @@ CircleCI Server の場合、管理者は **[Refresh Permissions (パーミッシ
 
 [承認ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#type) をワークフローに追加することで、制限付きコンテキストの使用を手動で承認するようワークフローを構成することができます。 承認ジョブより下流のジョブの実行を承認ユーザーを基に制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
 
+{:.tab.approvingcontexts.Cloud}
 ```yaml
 version: 2.1
 
@@ -197,6 +198,58 @@ workflows:
             - build
       - hold:
           type: approval # UI 上に手動承認ボタンを表示させる
+          requires:
+            - build
+      - deploy:
+          context: deploy-key-restricted-context
+          requires:
+            - build
+            - hold
+            - test
+```
+
+{:.tab.approvingcontexts.Server_3}
+```yaml
+version: 2.1
+
+# Jobs declaration for build, test and deploy not displayed
+
+workflows:
+  jobs:
+    build-test-deploy:
+      - build
+      - test:
+          context: my-restricted-context
+          requires:
+            - build
+      - hold:
+          type: approval # presents manual approval button in the UI
+          requires:
+            - build
+      - deploy:
+          context: deploy-key-restricted-context
+          requires:
+            - build
+            - hold
+            - test
+```
+
+{:.tab.approvingcontexts.Server_2}
+```yaml
+version: 2
+
+# Jobs declaration for build, test and deploy not displayed
+
+workflows:
+  jobs:
+    build-test-deploy:
+      - build
+      - test:
+          context: my-restricted-context
+          requires:
+            - build
+      - hold:
+          type: approval # presents manual approval button in the UI
           requires:
             - build
       - deploy:
@@ -233,7 +286,7 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 
 2. 削除するコンテキストの [Delete Context (コンテキストを削除)] ボタンをクリックします。 確認ダイアログ ボックスが表示されます。
 
-3. Type Delete and click Confirm. "Delete" と入力し、[Confirm (確認)] をクリックすると、 コンテキストと、そのコンテキストに関連付けられたすべての環境変数が削除されます。 **注意:** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
+3. 「Delete」と入力し、[Confirm (確認)] をクリックすると、 コンテキストと、そのコンテキストに関連付けられたすべての環境変数が削除されます。 **注意:** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
 
 ## 環境変数の使用方法
 {: #environment-variable-usage }
@@ -266,7 +319,7 @@ _CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI �
 
 CircleCI CLI を使用して環境変数を作成するには、下記ステップを実行します:
 
-1. 必要に応じて、新しい環境変数を設定するコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
+1. If you have not already done so, find the right context name that will contain the new environment variable. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 2. 新しい環境変数を対象コンテキスト配下に保存します。 下記コマンドを実行します: `circleci context store-secret <vcs タイプ> <org 名> <コンテキスト名> <環境変数名>`
 
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
@@ -275,7 +328,7 @@ Note that the CLI will prompt you to input the secret value, rather than accepti
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を作成する場合は、 [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンド ポイントを適切なリクエスト ボディとともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と新しい環境変数の名前に置き換えます。 リクエスト ボディには、シークレットである環境変数の値をプレーンテキストの文字列としてセットした `value` キーを含める必要があります。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plaintext secret as a string.
+API を使用して環境変数を作成する場合は、 [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンド ポイントを適切なリクエスト ボディとともに呼び出します。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plaintext secret as a string.
 
 #### 環境変数の削除
 {: #deleting-environment-variables }
@@ -286,7 +339,7 @@ API を使用して環境変数を作成する場合は、 [Add Environment Vari
 
 CircleCI CLI を使用して環境変数を削除するには、下記ステップを実行します:
 
-1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
+1. 必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 2. 当該コンテキスト内のローテーションの対象である環境変数を確認します。 下記コマンドを実行します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
 
@@ -296,7 +349,7 @@ CircleCI CLI を使用して環境変数を削除するには、下記ステッ�
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を削除する場合は、 [Delete Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを呼び出します。
+API を使用して環境変数を削除する場合は、 [Delete Environment Variable](https://circleci.com/ja/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを呼び出します。
 
 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と削除しようとする環境変数の名前に置き換えます。
 
@@ -320,9 +373,9 @@ CircleCI CLI を使用して環境変数のローテーションを実行する�
 
 1. If you have not already done so, find the context name that contains the variable you would like to rotate. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 
-2. Find the environment variable to rotate within that context. 当該コンテキスト内に削除しようとする環境変数が存在することを確認します。 下記コマンドを実行し、当該コンテキストに設定されている環境変数の一覧を確認します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
+2. 必要に応じて、環境変数のローテーションを実行しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
-3. Update the existing environment variable under that context. 当該コンテキスト内に実在する環境変数の値を実際に更新します。 `環境変数名` を上記ステップ 2 で確認した環境変数名に置き換えたうえで、 下記コマンドを実行します: `circleci context store-secret <vcs タイプ> <org 名> <コンテキスト名> <環境変数名>`
+3. 必要に応じて、新しい環境変数を設定するコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 
@@ -330,7 +383,7 @@ Note that the CLI will prompt you to input the secret value, rather than accepti
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数のローテーションを実行する場合は、 [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを適切なリクエスト ボディとともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と値を更新する環境変数の名前に置き換えます。 リクエスト ボディには、シークレットである環境変数の値をプレーンテキストの文字列としてセットした `value` キーを含める必要があります。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
+API を使用して環境変数のローテーションを実行する場合は、 [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを適切なリクエスト ボディとともに呼び出します。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
 
 
 ## シークレットのマスキング
@@ -344,11 +397,11 @@ Contexts hold potentially sensitive secrets that are not intended to be exposed.
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-* [必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`]({{ site.baseurl }}/2.0/env-vars/)
-* [Workflows]({{ site.baseurl }}/2.0/workflows/)
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/ja/2.0/env-vars/)
+* [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)

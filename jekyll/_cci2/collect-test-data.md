@@ -6,6 +6,7 @@ description: "Collecting test metadata"
 order: 34
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -32,20 +33,20 @@ The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-refe
     path: test-results
 ```
 
-Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
+Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
 
-**If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
+**If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
-_The above screenshot applies to CircleCI Server only._
+_The above screenshot applies to CircleCI server v2.x only._
 
-**If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling formatters
 {: #enabling-formatters }
 
-Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
+Test metadata is not automatically collected in CircleCI until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
 - RSpec requires the following be added to your gemfile:
 
@@ -113,7 +114,7 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
           path: ~/cucumber
 ```
 
-The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
+The `path:` is a directory or file relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
 
 Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `/cucumber` directory. For example:
 
@@ -531,7 +532,7 @@ steps:
       path: ./reports/junit
 ```
 
-For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
 **Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 

@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
+This document provides a summary of features and product notes for the release of CircleCI server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
 
 ## Requirements for Upgrading
 
@@ -139,7 +139,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19
 
-* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in Server v2.19].
+* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in server v2.19].
 
 * CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
 

@@ -10,6 +10,19 @@ version:
   - Cloud
   - Server v2.x
   - Server v3.x
+suggested:
+  - 
+    title: CircleCI CLI tutorial
+    link: https://circleci.com/blog/local-pipeline-development/
+  - 
+    title: Validate your config using local CLI
+    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
+  - 
+    title: Check your CircleCI installation
+    link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
+  - 
+    title: Troubleshoot CLI errors
+    link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
 
 ## 概要
@@ -66,7 +79,7 @@ brew install circleci
 {: #install-with-chocolatey-windows }
 {:.no_toc}
 
-Windows ユーザー向けに [Chocolatey](https://chocolatey.org/) パッケージを提供しています。以下のコマンドを実行してください。
+Windows ユーザー向けに [Chocolatey](https://chocolatey.org/) パッケージを提供しています。
 
 ```sh
 choco install circleci-cli -y
@@ -145,7 +158,7 @@ circleci orb validate /tmp/my_orb.yml
 ## Orb 開発キット
 {: #orb-development-kit }
 
-[Orb 開発キット]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit)は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットには、[`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) および [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html) という 2 つの CLI コマンドが含まれています。 Orb のパッケージ化の詳細については、[Orb のコンセプトに関するページ]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)を参照してください。
+[Orb 開発キット]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit)は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットには、[`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) および [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html) という 2 つの CLI コマンドが含まれています。 Orb のパッケージ化の詳細については、[Orb のコンセプトに関するページ]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)を参照してください。
 
 ## 設定ファイルのパッケージ化
 {: #packing-a-config }
@@ -188,7 +201,7 @@ jobs:
 {: #other-config-packing-capabilities }
 {:.no_toc}
 
-`@` で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
+で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
 
 たとえば、以下のようなファイルがあるとします。
 
@@ -211,7 +224,7 @@ bar:
 {: #an-example-packed-configyml }
 {:.no_toc}
 
-複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orbs トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードのパブリッシュの準備時に、プロジェクトの CI/CD ワークフローの一部として実行します。
+複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orb トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードのパブリッシュの準備時に、プロジェクトの CI/CD ワークフローの一部として実行します。
 
 ## 設定ファイルの処理
 {: #processing-a-config }

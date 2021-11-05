@@ -16,7 +16,7 @@ This document provides the basic concepts that a longtime Jenkins user needs to 
 
 CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD, but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. To get started quickly, try one of these options:
 
-1. **Getting Started:** Run your first green build on CircleCI 2.0 using the [getting started video and steps]({{ site.baseurl }}/2.0/).
+1. **Getting Started:** Run your first green build on CircleCI using the [getting started video and steps]({{ site.baseurl }}/2.0/).
 
 2. **Copy-paste your commands from Execute Shell:** To simply duplicate your project exactly as it is in Jenkins, add a file called `config.yml` to a `.circleci/` directory of your project with the following content:
 
@@ -109,7 +109,7 @@ CircleCI lets you increase the parallelism in any project’s settings so that e
 
 ## Jenkinsfile converter
 {: #jenkinsfile-converter }
-CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed on [CircleCI's developer hub](https://circleci.com/developer/tools/jenkins-converter).
+CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. Access [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter).
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 

@@ -6,6 +6,7 @@ description: "How to build Docker images and access remote services"
 order: 55
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -26,7 +27,7 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
-        version: 19.03.13
+          version: 19.03.13
 ```
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
@@ -37,7 +38,7 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 {: #specifications }
 {:.no_toc}
 
-The Remote Docker Environment has the following technical specifications (for CircleCI Server installations, contact the systems administrator for specifications):
+The Remote Docker Environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
 
 CPUs | Processor                 | RAM | HD
 -----|---------------------------|-----|------
@@ -112,7 +113,7 @@ Let’s break down what’s happening during this build’s execution:
 
 1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container). (line 5)
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI Server installations). (line 11)
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI server installations). (line 11)
 4. We use project environment variables to store credentials for Docker Hub. (line 17)
 
 ## Docker version
@@ -127,6 +128,7 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
+- `20.10.7`
 - `20.10.6`
 - `20.10.2`
 - `19.03.14`
@@ -140,7 +142,7 @@ CircleCI supports multiple versions of Docker. The following are the available v
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**Note:** The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## Separation of environments
 {: #separation-of-environments }

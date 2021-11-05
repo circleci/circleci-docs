@@ -1,21 +1,21 @@
 ---
 layout: classic-docs
-title: "Orbs に関するよくあるご質問"
-short-title: "Orbs に関するよくあるご質問"
-description: "Orbs に関するよくあるご質問"
+title: "Orb に関するよくあるご質問"
+short-title: "Orb に関するよくあるご質問"
+description: "Orb に関するよくあるご質問"
 order: 20
 version:
   - Cloud
 ---
 
-よく寄せられるご質問や技術的な問題など、Orbs の使用時に役立つ情報をまとめました。
+よく寄せられるご質問や技術的な問題など、Orb の使用時に役立つ情報をまとめました。
 
 ## Private orbs
 {: #private-orbs }
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
@@ -29,7 +29,9 @@ version:
 
 * **Question:** Can orbs be used on a private installation of CircleCI server?
 
-* **Answer:** CircleCI Server does not yet support orbs natively. However, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
+* **Answer:** Orbs can be used with installations of CircleCI server v3. For information on importing and using orbs for server, see the [CircleCI Server v3.x Orbs guide]({{site.baseurl}}/2.0/server-3-operator-orbs/).
+
+  Orbs are not available on installations of server v2.19.x, however, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
 
 ## Report an issue with an orb
 {: #report-an-issue-with-an-orb }
@@ -47,7 +49,7 @@ version:
 
 * **Answer:** To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
 
-**Note:** _Uncertified orbs are not tested or verified by CircleCI._
+**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, and not certified._
 
 ## How to use the latest version of an orb
 {: #how-to-use-the-latest-version-of-an-orb }
@@ -74,7 +76,6 @@ You attempted to run a local build with version 2.1 of configuration.
 ```
 
 * **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
-
 
 ## See also
 {: #see-also }

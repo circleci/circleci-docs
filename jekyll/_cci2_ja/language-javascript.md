@@ -17,17 +17,17 @@ version:
 {:toc}
 
 ## クイックスタート: デモ用の JavaScript Node.js リファレンス プロジェクト
-CircleCI 2.1 で Express.js アプリケーションをビルドする方法を示すために、JavaScript Node.js リファレンス プロジェクトが用意されています。
+{: #quickstart-demo-javascript-nodejs-reference-project }
 
-We maintain a reference JavaScript project to show how to build a React.js app on CircleCI with `version: 2.1` configuration:
+CircleCI 2.1 で React.js アプリケーションをビルドする方法を示すために、JavaScriptリファレンス プロジェクトが用意されています。
 
 - [GitHub 上の JavaScript Node デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app)
 - [CircleCI でビルドされた JavaScript Node デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
 このプロジェクトには、CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、Node プロジェクトで CircleCI 2.1 を使用するためのベスト プラクティスを示しています。
 
-## CircleCI のビルド済み Docker イメージ
-セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
+## JavaScript Node のデモ プロジェクトのビルド
+{: #build-the-demo-javascript-node-project-yourself }
 
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
@@ -36,53 +36,28 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 
-## JavaScript Node のデモ プロジェクトのビルド
-以下に、デモ プロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
+## 設定ファイルの例
+{: #sample-configuration }
 
-Below is the `.circleci/config.yml` file in the demo project.
+以下に、デモ プロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
 {% raw %}
 
 ```yaml
-version: 2.1 # CircleCI 2.1 を使用します
-jobs: # 一連のステップ
-  build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
-    working_directory: ~/mern-starter # ステップが実行されるディレクトリ
-    docker: # Docker でステップを実行します
+orbs: # declare what orbs we are going to use
+  node: circleci/node@2.0.2 # the node orb provides common node-related configuration
 
-      - image: circleci/node:10.16.3 # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-      - image: mongo:4.2.0 # このイメージをセカンダリ サービス コンテナとして使用します
-    steps: # 実行可能コマンドの集合
-      - checkout # ソース コードを作業ディレクトリにチェックアウトする特別なステップ
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache: # 依存関係キャッシュを復元する特別なステップ
-          # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: install-npm-wee
-          command: npm install
-      - save_cache: # 依存関係キャッシュを保存する特別なステップ
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
-      - run: # テストを実行します
-          name: test
-          command: npm test
-      - run: # カバレッジ レポートを実行します
-          name: code-coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts: # テスト結果をアーティファクトとして保存する特別なステップ
-          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト サマリーをアップロードします 
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するため
-          path: coverage
-          prefix: coverage
-      - store_test_results: # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するため
-          path: test-results.xml
-      # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+version: 2.1 # using 2.1 provides access to orbs and other features
+
+workflows:
+  matrix-tests:
+    jobs:
+      - node/test:
+          version: 13.11.0
+      - node/test:
+          version: 12.16.0
+      - node/test:
+          version: 10.19.0
 ```
 {% endraw %}
 
@@ -98,7 +73,7 @@ Matrix jobs are a simple way to test your Node app on various node environments.
 
 完了です。 これで Node.js アプリケーション用に CircleCI 2.1 をセットアップできました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}を参照してください。
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 

@@ -15,17 +15,17 @@ version:
 {:toc}
 
 ## アーティファクトの概要
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
+{: #artifacts-overview }
 
-Artifacts persist data after a job is completed and may be used for storage of the outputs of your build process.
+アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
 
 たとえば、Java のビルドおよびテストのプロセスが 1 つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
 ![アーティファクトのデータ フロー]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
+Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。
 
-If a job produces persistent artifacts such as screenshots, coverage reports, core files, or deployment tarballs, CircleCI can automatically save and link them for you.
+ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
 ![[Artifacts (アーティファクト)] タブのスクリーンショット]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
@@ -38,7 +38,7 @@ If a job produces persistent artifacts such as screenshots, coverage reports, co
 ## アーティファクトのアップロード
 {: #uploading-artifacts }
 
-現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
+ビルド時に作成したアーティファクトをアップロードするには、以下の例を参考にしてください。
 
 ```yaml
 version: 2
@@ -68,11 +68,11 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。   
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。        
 単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
 
 
-このサンプル C abort プログラムをコンパイルし、コア ダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
+現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
   - `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
   - `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
@@ -99,9 +99,9 @@ jobs:
      }
      ```
 
-3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)`! を印刷します。
+3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)` を印刷します。
 
-Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
+このサンプル C abort プログラムをコンパイルし、コア ダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
 
 ```yaml
 version: 2
@@ -140,7 +140,7 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 ## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
 
-To download your artifacts with `curl`, follow the steps below.
+`curl` を使ってアーティファクトをダウンロードするには、以下の手順で行います。
 
 1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
 
@@ -150,26 +150,18 @@ To download your artifacts with `curl`, follow the steps below.
 
 ```bash
 # Set an environment variable for your API token.
-次に、<code>curl</code> コマンドでビルドのすべてのアーティファクト詳細をフェッチし、それを <code>grep</code> にパイプして URL を抽出します。
-最後に、<code>wget</code> を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
-
 export CIRCLE_TOKEN=':your_token'
+
+# `curl` gets all artifact details for a build 
+# then, the result is piped into `grep` to extract the URLs.
+# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
 
 curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
    | grep -o 'https://[^"]*' \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
- コマンドでビルドのすべてのアーティファクト詳細をフェッチし、それを grep にパイプして URL を抽出します。
-最後に、wget を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
 
-export CIRCLE_TOKEN=':your_token'
-
-curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
-   | grep -o 'https://[^"]*' \
-   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
-</code>
-
-同様に、ビルドの*最新*のアーティファクトをダウンロードする場合は、curl の呼び出しを以下のように URL で置き換えます。
+Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
 
 ```bash
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
@@ -190,4 +182,4 @@ You can read more about using CircleCI's API to interact with artifacts in our [
 {: #see-also }
 {:.no_toc}
 
-[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
