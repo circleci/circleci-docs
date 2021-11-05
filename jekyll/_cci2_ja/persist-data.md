@@ -85,8 +85,6 @@ version:
 * ストレージデータアクティビティは、 [Object (オブジェクト)] タブに表示されます。
 * 総ストレージ量のデータは[Strage (ストレージ)]タブに表示されます。
 
-![plan-usage-screen]( {{ site.baseurl }}/assets/img/docs/screen-plan-usage.png)
-
 個々のステップのストレージおよびネットワーク転送の使用方法の詳細については、以下のジョブページのステップ出力を参照してください。
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
