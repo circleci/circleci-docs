@@ -79,7 +79,7 @@ the CircleCI API v2. This uses [Slate](https://github.com/slatedocs/slate) and
 with a spec (that follows the Open API Spec) generated from the CircleCI code
 base.
 
-### `/src` - Javascript + SCSS files
+### `/src-js` - Javascript Files
 
 Some JavaScript files that make use of Webpack  and bundles a Javascript
 file that eventually gets loaded into Jekyll. Our JavaScript files are
