@@ -21,11 +21,9 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
 
-This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
+This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
 
 You can see a complete `config.yml` in our [full example](#example-full-configuration).
-
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
 ---
 
@@ -231,7 +229,7 @@ See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+An "executor" is roughly "a place where steps occur". CircleCI can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {: #docker }
@@ -251,7 +249,7 @@ auth | N | Map | Authentication for registries using standard `docker login` cre
 aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
-The first `image` listed in the file defines the primary container image where all steps will run.
+The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
 `entrypoint` overrides the image's `ENTRYPOINT`.
 
@@ -395,6 +393,7 @@ The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/dock
 
 When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
 
+* `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
 * `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
 * `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1, Docker v19.03.13, nvidia-container-toolkit v1.4.0-1
 * `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
@@ -696,7 +695,7 @@ jobs:
 
 <sup>(3)</sup> _This resource is available only for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans._
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
 
 **Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.

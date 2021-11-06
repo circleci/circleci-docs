@@ -27,15 +27,8 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 ## Migration
 {: #migration }
 
-### Why migrate from CircleCI 1.0 to 2.0?
-{: #why-migrate-from-circleci-10-to-20 }
-{:.no_toc}
-- CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle.
-- In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want.
-- 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
-
-### How do I migrate from Jenkins to CircleCI 2.0?
-{: #how-do-i-migrate-from-jenkins-to-circleci-20 }
+### How do I migrate from Jenkins to CircleCI?
+{: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
 Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
@@ -50,12 +43,12 @@ Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add 
 
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
-### Does CircleCI 2.0 run inference commands?
-{: #does-circleci-20-run-inference-commands }
+### Does CircleCI run inference commands?
+{: #does-circleci-run-inference-commands }
 {:.no_toc}
-CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
+CircleCI does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
 
-### Can I use CircleCI 2.0 without creating base images?
+### Can I use CircleCI without creating base images?
 {: #can-i-use-circleci-20-without-creating-base-images }
 {:.no_toc}
 Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
@@ -69,10 +62,10 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 ## Hosting
 {: #hosting }
 
-### Is CircleCI 2.0 available to enterprise clients?
+### Is CircleCI available to enterprise clients?
 {: #is-circleci-20-available-to-enterprise-clients }
 {:.no_toc}
-Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
+Yes, CircleCI is available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions and [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
 
 ### What are the differences between CircleCI’s hosting options?
 {: #what-are-the-differences-between-circlecis-hosting-options }
@@ -127,7 +120,7 @@ There is a default setting within CircleCI to initially limit project parallelis
 ### How do Docker image names work? Where do they come from?
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
+CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
 
 ```
 golang:1.7.1-jessie
@@ -193,11 +186,6 @@ Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/
 {: #can-i-use-storetestresults-with-workflows }
 {:.no_toc}
 You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timing-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
-
-### Can I use Workflows with CircleCI 1.0?
-{: #can-i-use-workflows-with-circleci-10 }
- {:.no_toc}
-This feature only exists on CircleCI 2.0. In order to use Workflows, you must first be building on CircleCI 2.0.
 
 ### Can I use Workflows with the Installable CircleCI?
 {: #can-i-use-workflows-with-the-installable-circleci }
@@ -510,7 +498,7 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
 
 
-### What operating systems does CircleCI 2.0 support?
+### What operating systems does CircleCI support?
 {: #what-operating-systems-does-circleci-20-support }
 {:.no_toc}
 - **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!

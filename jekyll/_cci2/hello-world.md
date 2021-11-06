@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "First project on CircleCI 2.0"
+description: "First project on CircleCI"
 categories: [getting-started]
 order: 4
 version:
