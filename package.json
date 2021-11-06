@@ -33,6 +33,7 @@
     "> 0.5% in my stats"
   ],
   "dependencies": {
+    "@datadog/browser-rum": "^3.6.13",
     "@optimizely/optimizely-sdk": "4.6.2",
     "@popperjs/core": "^2.10.1",
     "highlightjs-badge": "0.1.9",
@@ -64,7 +65,6 @@
     "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.1",
-    "uglifyjs-webpack-plugin": "1.1.2",
     "prettier": "^2.4.1",
     "serve": "^13.0.2",
     "uglifyjs-webpack-plugin": "1.1.2",
