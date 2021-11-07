@@ -5,20 +5,17 @@ short-title: "ワークフローを使用したジョブのスケジュール"
 description: "ワークフローを使用したジョブのスケジュール"
 order: 30
 version:
-  - Cloud
-  - Server v2.x
+- Cloud
+- Server v3.x
+- Server v2.x
 suggested:
-  - 
-    title: Manual job approval and scheduled workflow runs
+  - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
-  - 
-    title: Filter workflows by branch
+  - title: Filter workflows by branch
     link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  - 
-    title: How to trigger a workflow
+  - title: How to trigger a workflow
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  - 
-    title: Conditional workflows
+  - title: Conditional workflows
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
