@@ -301,7 +301,7 @@ to be accessible in more than one step, export the value [using `BASH_ENV`](#usi
 ## Setting an environment variable in a job
 {: #setting-an-environment-variable-in-a-job }
 
-To set an environment variable in a job, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
+To set an environment variable in a job, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#lessjobnamegreater).
 
 ```yaml
 version: 2.1
@@ -326,7 +326,7 @@ jobs:
 
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
-2. Select the Context you want to associate your envorinment variable with, or create a new one by clicking the Create Context button.
+2. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
 3. Click Add Environment Variable and enter a name and value.
 4. Use your new environment variable in your `.circleci/config.yml` once the context is added under the workflows key, as follows:
 
@@ -596,7 +596,7 @@ Variable                                   | Type    | Value
 `CIRCLE_TAG`{:.env_var}                    | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag).
 `CIRCLE_USERNAME`{:.env_var}               | String  | The GitHub or Bitbucket username of the user who triggered the pipeline.
 `CIRCLE_WORKFLOW_ID`{:.env_var}            | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
-`CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var}  | String  | An identifier for the [workspace](https://circleci.com/docs/2.0/glossary/#workspace) of the current job. This identifier is the same for every job in a given workspace.
+`CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var}  | String  | An identifier for the [workspace]({{ site.baseurl }}/2.0/glossary/#workspace) of the current job. This identifier is the same for every job in a given workspace.
 `CIRCLE_WORKING_DIRECTORY`{:.env_var}      | String  | The value of the `working_directory` key of the current job.
 `CIRCLE_INTERNAL_TASK_DATA`{:.env_var}     | String  | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
 `CIRCLE_COMPARE_URL`{:.env_var}            | String  | **Deprecated**. The GitHub or Bitbucket URL to compare commits of a build. Available in config v2 and below. For v2.1 we will introduce ["pipeline values"]({{ site.baseurl }}/2.0/pipeline-variables/) as an alternative.
