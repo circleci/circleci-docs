@@ -1,15 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src-js/app.js',
-    vendor: './src-js/vendor.js',
+    app: './src/js/app.js',
+    vendor: './src/js/vendor.js',
   },
   output: {
-    path: path.join(__dirname, 'jekyll/assets/js'),
+    path: path.join(__dirname, 'jekyll/assets/'),
     publicPath: '',
-    filename: '[name].bundle.js',
+    filename: 'js/[name].bundle.js',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -18,6 +20,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].bundle.css',
     }),
   ],
   module: {
@@ -31,16 +36,27 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
     ],
   },
   // Ignore warnings about default exports because some of our legacy
   // code inported in app.js are not modules:
-  // - src-js/site/main.js
-  // - src-js/site/user.js
+  // - src/js/site/main.js
+  // - src/js/site/user.js
   ignoreWarnings: [
     {
-      module: /src-js\/app\.js/,
+      module: /src\/js\/app\.js/,
       message: /export 'default'/,
     },
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
 };

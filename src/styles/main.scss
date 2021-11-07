@@ -1,5 +1,4 @@
----
----
+@import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
 @import 'footer';
@@ -7,9 +6,15 @@
 @import 'subnav';
 @import 'instantsearch';
 @import 'tooltip';
+@import 'asciidoc';
+@import 'fonts';
+@import 'buttons';
+@import 'mobile';
+@import 'spacing';
+@import 'syntax';
 
 // General
-body{
+body {
 	color: $body-text-color;
 	display: block;
 	width: 100%;
