@@ -20,7 +20,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+お急ぎの場合は、下記の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) 上での Ruby on Railsのサンプルプロジェクトを提供しており、[CircleCI ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)上でのビルドを参照することができます。
 
