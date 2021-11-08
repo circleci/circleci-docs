@@ -88,11 +88,41 @@ Details about your storage and network transfer usage can be viewed on your Plan
 * Storage data activity can be found on the Objects tab.
 * Total storage volume data can be found on the Storage tab.
 
-![plan-usage-screen]( {{ site.baseurl }}/assets/img/docs/screen-plan-usage.png)
-
 Details about individual step storage and network transfer usage can be found in the step output on the Jobs page as seen below.
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
+
+### How to calculate an approximation of your monthly costs
+{: #how-to-calculate-an-approximation-of-your-monthly-costs}
+
+Currently, there is no charge for network usage when using our cloud infrastructure. Charges apply when an organization has network egress using CircleCI runner, beyond the plan's included GB-Monthly allotment. 
+
+Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days. 
+
+#### Storage
+{: #storage }
+{:.no_toc}
+
+To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs.
+
+![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
+
+#### Network
+{: #network }
+{:.no_toc}
+
+To calculate monthly netowrk costs from your daily usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs. 
+
+The GB-monthly allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+
+![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
+
+### How to manage your storage and network transfer use
+{: #how-to-manage-your-storage-and-network-transfer-use }
+
+There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage.
+
+Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
 
 ### How to manage your storage and network transfer use
 {: #how-to-manage-your-storage-and-network-transfer-use }
