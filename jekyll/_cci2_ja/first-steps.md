@@ -4,7 +4,7 @@ title: "CircleCI のユーザー登録"
 short-title: "CircleCI のユーザー登録"
 description: "CircleCI 導入の第一歩"
 categories:
-  - getting-started
+  - はじめよう
 order: 2
 version:
   - Cloud
@@ -14,7 +14,7 @@ version:
 
 1. [ユーザー登録](https://circleci.com/ja/signup/)ページを開きます。
 
-2. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. CircleCI による GitHub のプライベート リポジトリへのアクセスを制限するには、ユーザー登録時および以降のログイン時に [GitHub でログイン] メニューから [公開リポジトリと連携] を選択します。 To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
+2. **GitHub アカウントで登録** または **Bitbucket アカウントで登録** のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。 **注意:** GitHubを使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 [Sign Up (登録)]ボタンの横にあるドロップダウンメニューを使ってリストから[Public Repos Only (パブリックレポジトリのみ)]を選択します。
 
 3. GitHub または Bitbucket のユーザー名とパスワードを入力し、2 要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインします。
 
