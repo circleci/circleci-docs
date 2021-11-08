@@ -135,7 +135,7 @@ en:
       children:
         - name: Runner Overview
           link: 2.0/runner-overview/
-        - name: Runner Installation
+        - name: Getting Started with Runner Installation
           link: 2.0/runner-installation/
         - name: Linux Runner Installation
           link: 2.0/runner-installation-linux/

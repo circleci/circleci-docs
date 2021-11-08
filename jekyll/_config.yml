@@ -50,10 +50,8 @@ algolia:
 
 toc:
   min_level: 1
-  max_level: 4
+  max_level: 6
 
-sass:
-  sass_dir: _sass
 
 markdown: kramdown
 kramdown:

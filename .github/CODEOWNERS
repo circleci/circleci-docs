@@ -15,7 +15,7 @@
 /jekyll/ja/ @circleci/translations
 *_ja* @circleci/translations
 
-/src-js/** @circleci/docs-disco
+/src/** @circleci/docs-disco
 *package*.json @circleci/docs-disco
 *.lock @circleci/docs-disco
 Gemfile* @circleci/docs-disco
