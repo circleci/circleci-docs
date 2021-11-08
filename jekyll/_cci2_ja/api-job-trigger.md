@@ -13,8 +13,8 @@ version:
 CircleCI API を使用してジョブをトリガーする方法について説明します。
 
 <div class="alert alert-warning" role="alert">
-  <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> This document refers to using the legacy CircleCI API 1.0, a service that will be eventually be deprecated in favor of the <a href="https://circleci.com/docs/api/v2/">V2 API</a>. Consider using the <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">Pipelines</a> endpoints to trigger pipelines.</span>
+  <p><span style="font-size: 115%; font-weight: bold;">⚠️ 注意</span></p>
+  <span> このドキュメントでは、従来の CircleCI API 1.0 を使用していますが、このサービスは、 <a href="https://circleci.com/docs/api/v2/">V2 API</a>により、いずれ廃止される予定です。 <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">パイプライン</a> のエンドポイントをパイプラインのトリガーとして使用することをご検討ください。</span>
 </div>
 
 * 目次
@@ -33,8 +33,8 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-Alternative syntaxes for the above example:
-- Replace single quotes with double quotes (`-d "build_parameters[CIRCLE_JOB]=deploy_docker"`)
+上記の例の代替構文です。
+- 一重引用符を二重引用符に置き換える (`-d "build_parameters[CIRCLE_JOB]=deploy_docker"`)。
 - Escape the square brackets (`-d build_parameters\[CIRCLE_JOB\]=deploy_docker`)
 
 Some notes on the variables used in this example:
