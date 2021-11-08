@@ -41,7 +41,7 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 ## 設定ファイルの例
 {: #sample-configuration }
 
-以下のコードブロックには、サンプルアプリケーションの設定の各部分を説明するコメントがついています。
+以下のコードブロックは、コメントをつけてサンプルアプリケーションの設定の各部分を説明しています。
 
 {% raw %}
 
@@ -71,7 +71,7 @@ jobs:
           pkg-manager: yarn
           cache-key: "yarn.lock"
 
-  test:  # "test"という名前の次のジョブです。
+  test:  # "test"という名前の２つ目のジョブです。
     # テストを高速化するために「並列ジョブコンテナ」を実行します。
     # これによりテストが複数のコンテナに分割されます。
     parallelism: 3
@@ -106,27 +106,28 @@ jobs:
           cache-key: "yarn.lock"
       # ここでは、データベース上で実行する前に
       # セカンダリコンテナが起動することを確認します。
-      # データベースをセットアップします
-
+      
   - run:
       name: DB の待機
       command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
   - run:
       name: データベースのセットアップ
-      command: bin/rails db:schema:load --trace
+      command: bundle exec rails db:schema:load --trace
+      # RSpec を並列実行します。
+      - ruby/rspec-test
+
+# ワークフローを使って上記で宣言したジョブをオーケストレーションします。
+
 workflows:
   version: 2
-  build_and_test:     # The name of our workflow is "build_and_test"
-    jobs:             # The list of jobs we run as part of this workflow.
-workflows:
-  version: 2
-  build_and_test:     # The name of our workflow is "build_and_test"
-    jobs:             # The list of jobs we run as part of this workflow.
-      - build         # Run build first.
-      - test:         # Then run test,
-          requires:   # Test requires that build passes for it to run.
-            - build   # Finally, run the build job.
+  build_and_test:     # ワークフローの名前は "build_and_test" です。
+    jobs:             # このワークフローの一部として実行するジョブのリストです。
+      - build         # まず、ビルドを実行します。
+
+      - test:         # 次に、テストを実行します。
+          requires:   # テストを実行するにはビルドを渡す必要があります。
+            - build   # 最後に、ビルドしたジョブを実行します。
 ```
 
 {% endraw %}
@@ -135,21 +136,21 @@ workflows:
 ## Ruby on Rails のデモ プロジェクトのビルド
 他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
 
-CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
+CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ご自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
 1. お使いのアカウントに、GitHub 上の[プロジェクトをフォーク](https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork)します。
-2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
+2. CircleCI アプリケーションの[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、フォークしたプロジェクトの隣にある**[Follow Project (プロジェクトをフォローする)]**ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-## 設定ファイルの詳細
-この例では、以下の 2 つの [CircleCI コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#イメージのタイプ)が使用されています。
+## 関連項目
+{: #see-also }
 {:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+デプロイターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
 
-このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな構成例であり、実際のプロジェクトはこれよりも複雑です。 このため、独自のプロジェクトを構成する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
+このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな設定例です。 実際のプロジェクトはこれよりも複雑なため、ご自身のプロジェクトを設定する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml): オープンソースのディスカッション プラットフォーム
-* [CircleCI でビルドされた Ruby on Rails デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"}
+* [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra): [Web アプリケーションを迅速に作成できる簡単な DSL](http://www.sinatrarb.com/) のデモ アプリケーション
 
 [rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
