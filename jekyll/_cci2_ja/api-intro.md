@@ -4,7 +4,7 @@ title: "API リファレンス"
 short-title: "API リファレンス"
 description: "CircleCI API の概要"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
   - Cloud
@@ -32,9 +32,9 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 - ユーザー
 - プロジェクト (プレビュー)
 - ジョブ
-- Insights
+- インサイト
 
-**メモ:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
+**注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
 
 ## API v2 の利用開始
 {: #getting-started-with-the-api-v2 }
@@ -54,7 +54,7 @@ CircleCI API v2 では、API トークンを HTTP リクエストのユーザー
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**メモ:** パスワードがないことを示すために `:` が記述されています。 **Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
+**注意:** パスワードがないことを示すために `:` が記述されています。 **注意:** [プロジェクトトークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
@@ -79,9 +79,9 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
 
-For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+API v2 のすべてのエンドポイントは、[API v2 リファレンス ガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用する場合のコード例が掲載されています。
 
-### New endpoints
+### 新しいエンドポイント
 {: #new-endpoints }
 
 API v2 は現在、CircleCI Server のセルフホスティング環境ではサポートされていません。
@@ -106,11 +106,12 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 
 最新の API v2 リリースでサポートされなくなったエンドポイントは以下の表のとおりです。
 
-| エンドポイント                                            | 説明                        |
-| -------------------------------------------------- | ------------------------- |
-| `POST /project/:vcs-type/:username/:project`       | 新規ビルドをトリガーします。            |
-| `POST /project/:vcs-type/:username/:project/build` | 指定したプロジェクトで新規ビルドをトリガーします。 |
-| `GET /recent-builds`                               | 最近のビルドのサマリーを配列で取得します。     |
+| エンドポイント                                             | 説明                        |
+| --------------------------------------------------- | ------------------------- |
+| `POST /project/:vcs-type/:username/:project`        | 新規ビルドをトリガーします。            |
+| `POST /project/:vcs-type/:username/:project/build
+` | 指定したプロジェクトで新規ビルドをトリガーします。 |
+| `GET /recent-builds`                                | 最近のビルドのサマリーを配列で取得します。     |
 
 ## オンプレミス版をご利用のお客様
 {: #api-v2-and-server-customers }
