@@ -22,9 +22,9 @@ version:
 
 お急ぎの場合は、下記の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
-CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) 上での Ruby on Railsのサンプルプロジェクトを提供しており、[CircleCI ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)上でのビルドを参照することができます。
+CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) 上で Ruby on Rails のサンプルプロジェクトを提供しており、[CircleCI ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)上でのビルドを参照することができます。
 
-このアプリケーションでは、最新の安定した Rails バージョン 6.1 (`rspec-rails`)、[RspecJunitFormatter][rspec-junit-formatter]および PostgreSQL をデータベースとして使用しています。
+このアプリケーションでは、最新の安定した Rails バージョン 6.1 (`rspec-rails`)、[RspecJunitFormatter][rspec-junit-formatter] および PostgreSQL をデータベースとして使用しています。
 
 
 ## CircleCI のビルド済み Docker イメージ
@@ -34,14 +34,14 @@ CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby
 
 CircleCI のビルド済みイメージの使用を検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
-セカンダリ「サービス」コンテナとして使用するデータベース イメージも Docker Hub の `circleci` ディレクトリで提供されています。
+セカンダリ「サービス」コンテナとして使用するデータベース イメージも Docker ハブ の `circleci` ディレクトリで提供しています。
 
 ---
 
 ## 設定ファイルの例
 {: #sample-configuration }
 
-以下のコードブロックには、サンプルアプリケーションの設定 の各部分を説明するコメントがついています。
+以下のコードブロックには、サンプルアプリケーションの設定の各部分を説明するコメントがついています。
 
 {% raw %}
 
@@ -63,53 +63,33 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
       - checkout # Git コードをプルダウンします。
-      - ruby/install-deps # use the ruby orb to install dependencies
-      # use the node orb to install our packages
-      # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
-      # learn more: https://circleci.com/docs/2.0/caching/
+      - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
+      # Node Orb を使ってパッケージをインストールします。
+      # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
+      # 詳細は、 https://circleci.com/docs/2.0/caching/　を参照してください。
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
 
-  test:  # our next job, called "test"
-    # we run "parallel job containers" to enable speeding up our tests;
-    # this splits our tests across multiple containers.
+  test:  # "test"という名前の次のジョブです。
+    # テストを高速化するために「並列ジョブコンテナ」を実行します。
+    # これによりテストが複数のコンテナに分割されます。
     parallelism: 3
-    # here we set TWO docker images.
+    # ここでは、2 つの Docker イメージを設定します。
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node  # 言語イメージ
-        environment:
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
-          PGUSER: circleci-demo-ruby
-          RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine  # サービス イメージ
-        environment:
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog
-          POSTGRES_PASSWORD: ""
+      - image: cimg/ruby:2.7-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: circleci/postgres:9.5-alpine
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # add POSTGRES environment variables.
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.5-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # add POSTGRES environment variables.
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
+        environment: # POSTGRES 環境変数を追加します。
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog_test
           POSTGRES_PASSWORD: ""
-    # environment variables specific to Ruby/Rails, applied to the primary container.
+    # Ruby/Rails 固有の環境変数をプライマリコンテナに適用します。
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
@@ -117,15 +97,15 @@ jobs:
       PGUSER: circleci-demo-ruby
       PGPASSWORD: ""
       RAILS_ENV: test
-    # A series of steps to run, some are similar to those in "build".
+    # 実行する一連のステップです。「ビルド」のステップと似たステップもあります。
     steps:
       - checkout
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-      # Here we make sure that the secondary container boots
-      # up before we run operations on the database.
+      # ここでは、データベース上で実行する前に
+      # セカンダリコンテナが起動することを確認します。
       # データベースをセットアップします
 
   - run:
