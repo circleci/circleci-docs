@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Title"
-description: "Description"
+title: "Title in sentence case"
+description: "Description. This is used as the page metadata so should be a unique accurate summary of the page in 100-180 chars."
 ---
 
 A short description of the feature or topic.
