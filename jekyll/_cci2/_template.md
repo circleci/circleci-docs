@@ -7,7 +7,7 @@ description: "Description. This is used as the page metadata so should be a uniq
 A short description of the feature or topic.
 
 * A few
-* Bullet points 
+* Bullet points
 * Highlighting key use cases for a feature
 
 ## Overview

@@ -115,7 +115,7 @@ collections:
     permalink: /ja/2.0/:path/
     prefix: "/ja/2.0"
     selectorName: "2.0"
-    
+
 twitter_username: circleci
 github_username: circleci
 
