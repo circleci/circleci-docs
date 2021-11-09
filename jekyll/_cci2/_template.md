@@ -40,4 +40,4 @@ image in `jekyll/assets/img/docs` and then use the following syntax:
 {: #whats-next }
 
 * Add links to docs, blog posts, 3rd party docs and articles to support the readers understanding
-* Also link to CircleCI academy courses that might help, remember to include the access code in the URL too: [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) 
+* Also link to CircleCI academy courses that might help, remember to include the access code in the URL too: [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021)
