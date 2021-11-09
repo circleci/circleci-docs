@@ -26,7 +26,7 @@ Building a snap on CircleCI is mostly the same as on your local machine, wrapped
 To build a snap in any environment (local, company servers CI, etc) there needs to be a Snapcraft config file. Typically this will be located at `snap/snapcraft.yml`. This doc assumes you already have this file and can build snaps successfully on your local machine. If not, you can read through the [Build Your First Snap](https://docs.snapcraft.io/build-snaps/your-first-snap) doc by Snapcraft to get your snap building on your local machine.
 
 
-### Execution environment
+## Execution environment
 {: #build-environment }
 
 ```yaml
