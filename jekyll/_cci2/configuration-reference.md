@@ -61,7 +61,7 @@ executors | N | Map | A map of strings to executor definitions. See the [Executo
 commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
+The following example calls an orb named `hello-build` that exists in the certified `circleci` namespace.
 
 ```
 version: 2.1
