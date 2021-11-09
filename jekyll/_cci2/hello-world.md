@@ -20,7 +20,7 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server v2.x, use `version: 2.0` configuration):
+2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
    jobs:
@@ -70,7 +70,7 @@ See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for det
 ## Hello world for macOS
 {: #hello-world-for-macos }
 
-_The macOS executor is not currently available on installations of CircleCI Server v2.x_
+_The macOS executor is not currently available on installations of CircleCI server v2.x_
 
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
