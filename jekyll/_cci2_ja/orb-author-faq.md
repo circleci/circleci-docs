@@ -5,80 +5,85 @@ short-title: "Orb オーサリングに関するよくあるご質問"
 description: "Orb オーサリングに関してよく寄せられるご質問。"
 order: 20
 version:
-  - クラウド
+  - Cloud
 ---
 
-よく寄せられるご質問や技術的な問題など、Orbs のオーサリングに役立つ情報をまとめました。
+よく寄せられるご質問や技術的な問題など、Orb のオーサリングに役立つ情報をまとめました。
 
 * 目次
 {:toc}
 
-## Errors claiming namespace or publishing orbs
+## 名前空間を要求または Orb をパブリッシュする際にエラー
 {: #errors-claiming-namespace-or-publishing-orbs }
 
 * 質問: 名前空間を要求または安定版 Orb をパブリッシュしようとするとエラーが発生します。
 
-* 回答: 組織オーナーまたは管理者でない可能性があります。
+* 回答: お客様は組織オーナーまたは管理者でない可能性があります。
 
-Organizations can only claim a single namespace. In order to claim a namespace for an organization the authenticating user must have owner/admin privileges within the organization.
+組織が要求できる名前空間は 1 つだけです。 組織の名前空間を要求するには、認証中のユーザーがその組織内でオーナーまたは管理者の権限を持っている必要があります。
 
-If you do not have the required permission level you might see an error similar to below:
+必要な権限レベルがない場合、下記のようなエラーが表示されることがあります。
 
 ```
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
+詳細については、[Orb CLI の権限の一覧表]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix)を参照してください。
 
-## Deleting Orbs
+## Orb の削除
 {: #deleting-orbs }
 
-* Question: Is it possible to delete an orb I've created?
+* 作成した Orb を削除できますか？
 
-* Answer: No. Orbs are public by default and immutable, once a version of an orb is published it can not be changed. This is done so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
+* 回答: 削除できません。 Orb はデフォルトで公開されており、１つのバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において当然同じ動作をすると想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
 
-Orbs can however be "Unlisted" from the [Orb Registry](https://circleci.com/developer/orbs). Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
+ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI から見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば、現在はメンテナンスを行っていない Orb などに適しています。
 
 ```
-circleci orb unlist myOrb/myNamespace
+circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
 
-## Secure API tokens
+**Use caution when unlisting Private Orbs.**
+<br/>
+Currently the `orb source` and `orb info` CircleCI CLI commands do not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
+{: class="alert alert-warning"}
+
+## API トークンの保護
 {: #secure-api-tokens }
 
-* Question: How do I protect a user's API tokens and other sensitive information?
+* 質問: ユーザーの API トークンなどの機密情報を保護するにはどうしたらよいですか。
 
-* Answer: Use the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX environment variable name strings as input. In the parameter description, it is best practice to mention to the user to add this environment variable.
+* 回答: API キーのパラメーターとして `env_var_name` パラメーター型を使用してください。 このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
 
 Read more:
-* [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
+* [環境変数名]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## Environment variables
+## 環境変数
 {: #environment-variables }
 
-* Question: How can I require a user to add an environment variable?
+* 質問: ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
 
-* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user on how they can obtain their API key.
+* 回答: 環境変数名のパラメーターを作成してください。 _変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
 
 Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
 
 Read more:
-* [Environment Variable Name parameter type]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
+* [環境変数名パラメーター型]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## Supported programming languages
+## サポートされているプログラミング言語
 {: #supported-programming-languages }
 
-* Question: What language do I use to write an orb?
+* 質問: Orb の記述にはどの言語を使用できますか。
 
-* Answer: Orbs are packages of [CircleCI YAML configuration]({{site.baseurl}}/2.0/configuration-reference/).
+* 回答: Orb は [CircleCI YAML 設定ファイル]({{site.baseurl}}/2.0/configuration-reference/)をパッケージ化したものです。
 
 CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [executor]({{site.baseurl}}/2.0/executor-intro/) defined by either, the user if using a _command_ within a custom job, or by the orb author if using a [reusable job]({{site.baseurl}}/2.0/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
 
-* Question: What programming languages can I write my Command logic in?
+* 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
 
-* Answer: POSIX compliant bash is the most portable and universal language. This is the recommended option when you intend to share your orb. Orbs do, however, come with the flexibility and freedom to run other programming languages or tools.
+* 回答: 移植性と汎用性に最も優れているのは、POSIX 準拠の bash です。 Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールも自由に実行できます。
 
 **Bash**
 
@@ -108,30 +113,30 @@ steps:
       curl -fsSL
       "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
       /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
-    name: Install Homebrew (for Linux)
+    name: Homebrew のインストール (Linux 向け)
 ```
 
-## Command vs Job
+## コマンド/ジョブ
 {: #command-vs-job }
 
-* Question: Should I create a command or a job?
+* 質問: コマンドとジョブのどちらを作成するべきですか。
 
-* Answer: The answer might be both, but it will heavily depend on the task you want to accomplish.
+* 回答: どちらでもかまいませんが、実行したいタスクによリます。
 
 An orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
 
 A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
 
 Read more:
-* [Introduction To CircleCI Config Language]({{site.baseurl}}/2.0/config-intro/)
-* [Reusable Config Reference]({{site.baseurl}}/2.0/reusing-config/)
+* [CircleCI 設定ファイル言語の概要]({{site.baseurl}}/2.0/config-intro/)
+* [再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/)
 
 
-## See also
+## 関連項目
 {: #see-also }
-- Refer to [Orbs Best Practices]({{site.baseurl}}/2.0/orbs-best-practices) for suggestions on creating a production-ready orb.
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
-- Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) for information on how to test orbs you have created.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- [Orb のベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices): 安定版 Orb の作成に関する推奨事項
+- [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
+- [Orb のパブリッシュ プロセス]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブで使用する Orb に関する情報
+- [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
+- [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 自分で作成した Orb をテストする方法
+- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orb のレシピを構成に使用する詳しい方法

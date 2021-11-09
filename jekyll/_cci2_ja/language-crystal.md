@@ -16,16 +16,16 @@ version:
 このガイドでは、CircleCI で最小限の Crystal アプリケーションをビルドする方法について説明します。
 
 ## 概要
+{: #overview }
+
 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある `.circleci/config.yml` に貼り付け、ビルドを開始してください。
 
 Crystal プロジェクトのサンプルは以下のリンクで確認できます。
 
-このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
-
 - <a href="https://github.com/CircleCI-Public/circleci-demo-crystal"
 target="_blank">GitHub 上の Crystal デモ プロジェクト</a>
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
 このアプリケーションでは Crystal 0.27 と Kemal 0.25 を使用しています。 Crystal と Kemal は速いペースで開発が進められています。 Docker イメージを `:latest` バージョンに変更すると、互換性を損なう変更が発生する可能性があります。
 
@@ -34,29 +34,12 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 {% raw %}
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
-jobs: # 一連のジョブ
-  build: 
+version: 2 # use CircleCI 2.0
+jobs: # a collection of jobs
+  build:
     working_directory: ~/demo_app
-    docker: # Docker でビルド ステップを実行します
-
-      - image: crystallang/crystal:0.27.0 # すべての `steps` が実行されるプライマリ Docker コンテナ
-    steps: # 一連の実行可能ステップ
-      - checkout # ソース コードを作業ディレクトリにチェックアウトします
-      - restore_cache: # 依存関係キャッシュを復元します
-      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-          key: dependency-cache-{{ checksum "shard.lock" }}
-      - run:
-          name: 依存関係のインストール
-          command: shards install
-      - save_cache: # 依存関係キャッシュを保存するステップ
-          key: dependency-cache-{{ checksum "shard.lock" }}
-          paths:
-            - ./lib
-      - run:
-          name: テスト
-          command: crystal spec
-# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+    docker: # run build steps with docker
+      - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -68,14 +51,14 @@ jobs: # 一連のジョブ
       - run:
           name: Install dependencies.
           command: shards install
-      - save_cache: # 依存関係キャッシュを保存するステップ
+      - save_cache: # Step to save dependency cache
           key: dependency-cache-{{ checksum "shard.lock" }}
           paths:
             - ./lib
       - run:
-          name: テスト
+          name: test
           command: crystal spec
-# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+# See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 {% endraw %}
 
@@ -115,17 +98,11 @@ jobs:
 {% raw %}
 ```yaml
     steps: #
-
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
-          name: 依存関係のインストール
-          command: shards install
-      - save_cache:
-          key: dependency-cache-{{ checksum "shard.lock" }}
-          paths:
-            - ./lib
+          name: Install dependencies.
           command: shards install
       - save_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}

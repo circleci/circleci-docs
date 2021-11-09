@@ -14,7 +14,7 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 
 [Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 メモリ制限が設定されていない場合、JVM はシステムで使用可能な合計メモリの一部を事前に割り当てます。 CircleCI は大量のメモリを搭載した大規模なマシンでコンテナ ベースのビルドを実行しており、 各コンテナには、マシンで使用可能な総量よりも少ない量のメモリ制限が設定されています。 こうしたことから、JVM がマシン上の大量のメモリを使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。
 
-コンテナで使用可能なメモリ量を確認するには、`/sys/fs/cgroup/memory/memory.max_usage_in_bytes` ファイルを参照します。
+By default, Java's is configured so that it will use:
 - More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
 - Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
 
@@ -37,10 +37,10 @@ You can see how much memory your container is allocated, and how much it has use
 ## 手動でのメモリ制限
 {: #manual-memory-limits }
 
-Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#java-環境変数を使用したメモリ制限の設定)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#java-oom-エラーのデバッグ)を確認します。
+Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
 
 ## Java 環境変数を使用したメモリ制限の設定
-上記の各環境変数が優先される条件について説明します。
+{: #using-java-environment-variables-to-set-memory-limits }
 
 複数の Java 環境変数を使用して、JVM のメモリ使用量を管理できます。 これらの変数は名前が似ており、互いに複雑に影響し合っています。
 
@@ -58,7 +58,7 @@ Even with cgroup support, the JVM can still use too much memory, e.g. if it exec
 | CLI 引数                                    | 1    | no     | no    | no     | no   |
 {:class="table table-striped"}
 
-The above environment variables are listed below, along with details on why to choose one over another.
+上記の各環境変数が優先される条件について説明します。
 
 ### `_JAVA_OPTIONS`
 {: #javaoptions }
@@ -73,12 +73,12 @@ The above environment variables are listed below, along with details on why to c
 Java メモリ制限の設定には、この環境変数を使用するのが[無難な選択](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions)と言えます。 `JAVA_TOOL_OPTIONS` はあらゆる Java 仮想マシンで読み取ることができ、より限定的な環境変数やコマンドライン引数で簡単に上書きすることもできます。
 
 ### `JAVA_OPTS`
-最大サイズ `-Xmxn` がアプリケーションのビルドを完了できる程度に大きく、かつ他のプロセスが CircleCI ビルド コンテナの残りのメモリを使用できる程度に小さくなるように設定してください。
+{: #javaopts }
 
 JVM はこの環境変数を読み取りません。 代わりに Java ベースのツールや言語がこの変数を使用して JVM にメモリ制限を渡します。
 
 ### `JVM_OPTS`
-[Java 言語ガイド]({{ site.baseurl }}/ja/2.0/language-java/) [Android チュートリアル]({{ site.baseurl }}/ja/2.0/language-android/)
+{: #jvmopts }
 
 この環境変数は Clojure 専用です。 `lein` は `JVM_OPTS` を使用して JVM にメモリ制限を渡します。
 
@@ -104,10 +104,9 @@ See the Maven documentation for [memory settings](http://maven.apache.org/config
 この環境変数は Apache Maven プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
 
 ## Java OOM エラーのデバッグ
-Java OOM エラーのデバッグを行っても、たいていの場合 `exit code 137` のエラーしか見つかりません。
+{: #debugging-java-oom-errors }
 
-Unfortunately, debugging Java OOM errors often comes down to finding an `exit
-code 137` in your error output.
+Java OOM エラーのデバッグを行っても、たいていの場合 `exit code 137` のエラーしか見つかりません。
 
 Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
 
@@ -118,4 +117,4 @@ Even if the JVM's maximum heap size is larger than the job's limit, the garbage 
 ## 関連項目
 {: #see-also }
 
-[Java Language Guide]({{ site.baseurl }}/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
+[Java Language Guide]({{ site.baseurl }}/ja/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/ja/2.0/language-android/)

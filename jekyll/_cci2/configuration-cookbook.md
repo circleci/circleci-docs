@@ -7,6 +7,8 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
@@ -51,7 +53,7 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 
 * In order to use pipelines features and orbs you must use `version 2.1` config.
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
+* If you wish to remain using `version 2.0` config, or are using CircleCI server v2.x, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items that appear within `< >` should be replaced with your own parameters.
 
@@ -540,7 +542,7 @@ For more information on using API v2 endpoints, see the [API Reference Documenta
 
 Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
 
-The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
+The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
 
 ```yaml
 version: 2.1
@@ -556,9 +558,9 @@ jobs:
       - checkout
       - when:
           condition:
-            equal: [ master, << pipeline.git.branch >> ]
+            equal: [ main, << pipeline.git.branch >> ]
           steps:
-            - run: echo "I am on master"
+            - run: echo "I am on main"
 
 workflows:
   my-workflow:
@@ -625,7 +627,8 @@ In the above configuration, we:
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
-Note: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
+**Note:** You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
+You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
 
 For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the
 [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the
@@ -645,7 +648,8 @@ For example, consider a monorepo structure like the example shown below:
 ```shell
 .
 ├── .circleci
-│   └── config.yml
+│   ├── config.yml
+│   └── continue_config.yml
 ├── service1
 │   ├── Service1.java
 ├── service2
@@ -654,7 +658,10 @@ For example, consider a monorepo structure like the example shown below:
 │   ├── IntegrationTests.java
 ```
 
-An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
+
+#### config.yml
+{: #configyml }
 
 ```yaml
 version: 2.1
@@ -663,10 +670,39 @@ version: 2.1
 setup: true
 
 # the path-filtering orb is required to continue a pipeline based on
-# the path of an updated fileset the maven orb is also used, as an
-# example on using dynamic configuration to build a Java project.
+# the path of an updated fileset
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
+
+workflows:
+  # the always-run workflow is always triggered, regardless of the pipeline parameters.
+  always-run:
+    jobs:
+      # the path-filtering/filter job determines which pipeline
+      # parameters to update.
+      - path-filtering/filter:
+          name: check-updated-files
+          # 3-column, whitespace-delimited mapping. One mapping per
+          # line:
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+          mapping: |
+            service1/.* run-build-service-1-job true
+            service2/.* run-build-service-2-job true
+          base-revision: main
+          # this is the path of the configuration we should trigger once
+          # path filtering and pipeline parameter value updates are
+          # complete. In this case, we are using the parent dynamic
+          # configuration itself.
+          config-path: .circleci/continue_config.yml
+```
+
+#### continue_config.yml
+{: #continueconfigyml }
+
+```yaml
+version: 2.1
+
+orbs:
   maven: circleci/maven@1.2.0
 
 # the default pipeline parameters, which will be updated according to
@@ -679,29 +715,6 @@ parameters:
     type: boolean
     default: false
 
-# our defined jobs
-jobs:
-  # the build-service-1 job uses the maven orb to build and install
-  # service1 artifacts into the maven repository (it does not run
-  # tests).
-  build-service-1:
-    - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service1'
-  # the build-service-2 job uses the maven orb to build and install
-  # service2 artifacts into the maven repository (it does not run
-  # tests).
-  build-service-2:
-    - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service2'
-  # the run-integration-tests job will run any tests defined in the
-  # tests directory.
-  run-integration-tests:
-    - maven/test:
-        command: '-X verify'
-        app_src_directory: 'tests'
-
 # here we specify our workflows, most of which are conditionally
 # executed based upon pipeline parameter values. Each workflow calls a
 # specific job defined above, in the jobs section.
@@ -711,13 +724,19 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-service-1-job >>
     jobs:
-      - build-service-1
+      - maven/test:
+          name: build-service-1
+          command: 'install -DskipTests'
+          app_src_directory: 'service1'
   # when pipeline parameter, run-build-service-2-job is true, the
   # build-service-2 job is triggered.
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
-      - build-service-2
+      - maven/test:
+          name: build-service-2
+          command: 'install -DskipTests'
+          app_src_directory: 'service2'
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
@@ -727,26 +746,10 @@ workflows:
     when:
       or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
     jobs:
-      - run-integration-tests
-  # the check-updated-files job is always triggered, regardless of
-  # pipeline parameters.
-  always-run:
-    jobs:
-      # the path-filtering/filter job determines which pipeline
-      # parameters to update.
-      - path-filtering/filter:
-          # 3-column, whitespace-delimited mapping. One mapping per
-          # line:
-          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
-          mapping: |
-            service1/.* run-build-service-1-job true
-            service2/.* run-build-service-2-job true
-          base-revision: master
-          # this is the path of the configuration we should trigger once
-          # path filtering and pipeline parameter value updates are
-          # complete. In this case, we are using the parent dynamic
-          # configuration itself.
-          config-path: .circleci/config.yml
+      - maven/test:
+          name: run-integration-tests
+          command: '-X verify'
+          app_src_directory: 'tests'
 ```
 
 In the above configuration, we:
@@ -774,26 +777,27 @@ information on available elements and required parameters.
 
 Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
 
-In the following example the `test` job is run across Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
+In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
 
 ```yaml
 version: 2.1
 
 orbs:
-  node: circleci/node@4.0.0
-  win: circleci/windows@2.2.0
+  node: circleci/node@4.7
 
 executors:
-  linux: # linux executor using the node base image
+  docker: # Docker using the Base Convenience Image
     docker:
-      - image: cimg/node
+      - image: cimg/base:stable
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  windows: win/default # windows executor - uses the default executor from the windows orb
-  macos: # macos executor using xcode 11.6
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
     macos:
-      xcode: 11.6
+      xcode: 12.5
 
 jobs:
   test:
@@ -808,7 +812,6 @@ jobs:
       - node/install:
           node-version: << parameters.node-version >>
           install-yarn: true
-      - run: yarn test
 
 workflows:
   all-tests:
@@ -816,19 +819,19 @@ workflows:
       - test:
           matrix:
             parameters:
-              os: [linux, windows, macos]
-              node-version: ["13.13.0", "14.0.0"]
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
 ```
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
 ```
-    - test-13.13.0-linux
-    - test-14.0.0-linux
-    - test-13.13.0-windows
-    - test-14.0.0-windows
-    - test-13.13.0-macos
-    - test-14.0.0-macos
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
 ```
 
 For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).

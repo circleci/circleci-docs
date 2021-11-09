@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
 title: "Configuration"
-description: "Landing page for CircleCI 2.0 Config"
+description: "Landing page for CircleCI Config"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

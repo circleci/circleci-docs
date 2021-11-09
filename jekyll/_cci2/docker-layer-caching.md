@@ -6,12 +6,13 @@ description: "How to reuse unchanged cache layers in images you build to reduce 
 categories: [optimization]
 order: 70
 version:
- - Cloud
- - Server v2.x
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
-the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 credits per job run) and on installations of [CircleCI Server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
+the [Performance and Scale](https://circleci.com/pricing/) usage plans (credits are charged per run job) and on installations of [CircleCI server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 * TOC
 {:toc}
@@ -38,7 +39,7 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment.
+DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
 ``` YAML
 version: 2
@@ -46,7 +47,7 @@ jobs:
   build:
     docker:
       # DLC does nothing here, its caching depends on commonality of the image layers.
-      - image: circleci/node:9.8.0-stretch-browsers
+      - image: circleci/node:14.17.3-buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -219,7 +220,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers
+      - image: circleci/node:14.17.3-buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -240,3 +241,7 @@ So, if you change something in the Dockerfile, all of those later steps are inva
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+## Learn More
+{: #learn-more }
+Take the [DLC course](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) with CircleCI Academy to learn more.

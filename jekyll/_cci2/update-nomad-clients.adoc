@@ -12,18 +12,18 @@ version:
 
 ## IMPORTANT
 
-WARNING: This update must be run before upgrading to Server v2.19
+WARNING: This update must be run before upgrading to server v2.19
 
 * **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.  
-* This change is only compatible with CircleCI Server versions greater than or equal to 2.19.0 
-* If you are using the Static version of CircleCI Server, you will need to recreate your builders manually. Refer to the guide linked https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[here] for the updated scripts and further instruction.
+* This change is only compatible with CircleCI server versions greater than or equal to 2.19.0 
+* If you are using the Static version of CircleCI server, you will need to recreate your builders manually. Refer to the guide linked https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[here] for the updated scripts and further instruction.
 
 
 
 ### Sign in to AWS
 
 . Login to the AWS
-. Select the region that your CircleCI Server (Server) resides in
+. Select the region that your CircleCI server (Server) resides in
 . Select the `Services` tab and select `EC2`
 
 
@@ -31,7 +31,7 @@ WARNING: This update must be run before upgrading to Server v2.19
 ### Find the Launch Configuration and Service Box IP address
 
 . Select `Auto Scaling Groups` located near the bottom of the left navigation pane
-. Select the auto scaling group configuration associated with your Server installation. Typically resembles `*-ghe_nomad_clients_asg`
+. Select the auto scaling group configuration associated with your server installation. Typically resembles `*-ghe_nomad_clients_asg`
 . Make note of the name of `Launch Configuration` under the `Details` tab. Typically resembles `terraform-20200114212820082700000001`
 . In the left navigation pane, select `Launch Configurations`
 . Locate the launch configuration that matches the one found in step 3.

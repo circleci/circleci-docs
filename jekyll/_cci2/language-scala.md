@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Language Guide: Scala"
 short-title: "Language Guide: Scala"
-description: "CircleCI 2.0 Language Guide: Scala"
+description: "CircleCI Language Guide: Scala"
 categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -29,7 +30,7 @@ The source code for this sample application is in the [Public samplescala GitHub
 ## Prerequisites
 {: #prerequisites }
 
-CircleCI 2.0 requires you to create a new directory in the repo's root and a YAML file within this new directory. The new assets must follow these naming schema's directory: `.circleci/` file: `config.yml`.
+CircleCI requires you to create a new directory in the repo's root and a YAML file within this new directory. The new assets must follow these naming schema's directory: `.circleci/` file: `config.yml`.
 
 ```
 mkdir .circleci/
@@ -41,7 +42,7 @@ These commands create a directory named `.circleci` & the next command creates a
 ### Scala config.yml file
 {: #scala-configyml-file }
 
-To get started, open the newly created `config.yml` in your favorite text editor and paste the following CircleCI 2.0 schema into the file. Below is the complete 2.0 configuration:
+To get started, open the newly created `config.yml` in your favorite text editor and paste the following CircleCI schema into the file. Below is the complete 2.0 configuration:
 
 ```yaml
 version: 2
@@ -205,6 +206,9 @@ Below is an explanation of the preceding example:
 - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container
 - [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
 - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
+
+**Note:** `cat /dev/null` is normally used to prevent a command from hanging if it prompts for interactive input and does not detect whether it is running with an interactive TTY. `sbt` will prompt on failures by default.
+
 - [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
 - [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
 
@@ -224,6 +228,6 @@ The deploy command is another multi-line execution.
 {: #see-also }
 {:.no_toc}
 
-- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
 - How to [parallelize tests in SBT on CircleCI](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)

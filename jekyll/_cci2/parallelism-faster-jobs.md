@@ -7,6 +7,7 @@ categories: [optimization]
 order: 60
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -29,7 +30,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -82,7 +83,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -205,9 +206,9 @@ Using this example, here is a quick example of how you can accomplish test split
       cat circleci_test_files.txt
       TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
       # massage filepaths into format manage.py test accepts
-      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
       echo $TESTFILES
-      pipenv run python manage.py test --verbosity=2 $TESTFILES  
+      pipenv run python manage.py test --verbosity=2 $TESTFILES
 ```
 
 ## Using test splitting with pytest
@@ -244,7 +245,7 @@ The `.circleci/resources/pytest_build_config.ini` path may need to be replaced t
 
 Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
 
-Search for "families" to see the relevant information. 
+Search for "families" to see the relevant information.
 
 ### Example project that correctly splits by timings
 {: #example-project-that-correctly-splits-by-timing }

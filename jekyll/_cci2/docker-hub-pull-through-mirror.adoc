@@ -32,7 +32,7 @@ This section covers setting up a pull through cache registry, which works as a m
 
 Before setting up a pull through cache registry, you need to *set up a Docker Hub account*. The account will be used by the pull through cache registry to authenticate itself with Docker Hub.
 
-WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI Server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI Server installation.
+WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI server installation.
 
 NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimitted allowance of image pulls. See also: https://www.docker.com/pricing.
 
@@ -40,7 +40,7 @@ NOTE: While a free account can be used, setting up a paid account would be a goo
 
 . *Set up an independent Linux server* that has Docker installed.
 +
-We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
+We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI server services.
 +
 Assuming that the IP address for this server is `192.0.2.1`, the URL for the registry to set up is `http://192.0.2.1`. This URL will be needed later to arm Nomad clients and the VM Service.
 
@@ -71,9 +71,9 @@ Under certain circumstances (especially when you are enabling https://docs.docke
 
 . *Set up an independent Linux server* that has Docker installed.
 +
-We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
+We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI server services.
 +
-NOTE: *The server needs to be accessible by its hostname*. Namely, you must configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. In this guide we assume that the URL for the registry we are setting up is `https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). The URL will be needed later to arm Nomad clients and the VM Service.
+NOTE: *The server needs to be accessible by its hostname*. Namely, you must configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. In this guide we assume that the URL for the registry we are setting up is `\https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). The URL will be needed later to arm Nomad clients and the VM Service.
 
 . *Obtain a TLS certificate for `your-mirror.example.com`* and *put the certificate and the private key into `/root/tls`* of the server.
 +
@@ -122,7 +122,7 @@ Technically, this can be automated. For example, if you are using Let's Encrypt 
 
 . Run the command below to *configure the `registry-mirrors` option for the Docker daemon*.
 +
-NOTE: Replace `http://192.0.2.1.or.https.your-mirror.example.com` with the URL of your pull through cache registry accordingly.
+NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` with the URL of your pull through cache registry accordingly.
 +
 [source,bash]
 ----
@@ -143,7 +143,7 @@ Follow the steps below on your services machine.
 
 . *Populate a customization script* to be loaded by vm-service. *Add the script below to `/etc/circleconfig/vm-service/customizations`*.
 +
-NOTE: Replace `http://192.0.2.1.or.https.your-mirror.example.com` in `DOCKER_MIRROR_HOSTNAME` variable with the URL of your pull through cache registry accordingly.
+NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` in `DOCKER_MIRROR_HOSTNAME` variable with the URL of your pull through cache registry accordingly.
 +
 WARNING: This customization is only available in 2.19.0 version and later.
 

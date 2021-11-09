@@ -24,22 +24,26 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
-    ジョブのコマンドは、このコンテナ内で実行されます。
+    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
-    # セカンダリ コンテナは、2 番目にリストしたイメージのインスタンスです。
-      プライマリ コンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: npm の更新
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: npm wee のインストール
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -50,11 +54,11 @@ jobs:
 {% endraw %}
 
 ## Linux と Machine
-デフォルトのマシン イメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
+{: #linux-with-machine }
 
 **メモ:** 今後の料金改定により、Machine の使用に追加料金が必要になる可能性があります。
 
-To use the machine executor with the default machine image, set the machine key to true in `.circleci/config.yml`:
+デフォルトのマシン イメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
 
 ```yaml
 version: 2
@@ -64,7 +68,7 @@ jobs:
 ```
 
 ## Android
-上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
+{: #android }
 
 {% raw %}
 
@@ -75,6 +79,9 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -87,17 +94,13 @@ jobs:
       - run:
           name: 依存関係のダウンロード
           command: ./gradlew androidDependencies
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: 依存関係のダウンロード
-          command: ./gradlew androidDependencies
 ```
 
 {% endraw %}
 
-## iOS
+## macOS
 {: #macos }
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
 
 ```
 jobs:
@@ -115,15 +118,15 @@ jobs:
 
 ```
 
-## 関連項目
+## Windows
 {: #windows }
 
 {:.tab.windowsblock.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -137,7 +140,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblock.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```yaml
 version: 2
 
@@ -152,7 +170,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 
-Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
+上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。

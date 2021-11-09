@@ -77,7 +77,7 @@ For example;
       },
       "workflow":{  
          "id":"c022ca3c-5f6f-41ba-a6ca-05977f6a336a",
-         "vcs_branch":"master"
+         "vcs_branch":"main"
       }
    },
    "target":{  
@@ -348,7 +348,7 @@ circleci dev-console
 === How do I create a new admin?
 
 **Answer:**
-By default, the first user to access the CircleCI Server installation after it is started becomes the admin.
+By default, the first user to access the CircleCI server installation after it is started becomes the admin.
 
 Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
 

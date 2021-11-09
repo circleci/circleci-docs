@@ -29,37 +29,37 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 - 認証
 - パイプライン
 - ワークフロー
-- ユーザー (プレビュー)
+- ユーザー
 - プロジェクト (プレビュー)
-- ジョブ (プレビュー)
+- ジョブ
 - Insights
 
 **メモ:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
 
 ## API v2 の利用開始
-API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクト スラッグは次のような形式をとります。
+{: #getting-started-with-the-api-v2 }
 
 CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。 これは、プロジェクトのタイプ、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 この短縮形は API v2 でサポートされるようになりました。 組織は、お使いのバージョン管理システムにおけるユーザー名または組織名です。
 
-With API v2, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
+API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクト スラッグは次のような形式をとります。
 
 `<プロジェクト タイプ>/<組織名>/<リポジトリ名>`
 
 `project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 `project_slug` が、プロジェクトについての情報を得る手段となります。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
 
 ### 認証
-**メモ:** パスワードがないことを示すために `:` が記述されています。
+{: #authentication }
 
 CircleCI API v2 では、API トークンを HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**Note**, the `:` is included to indicate there is no password. **Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
+**メモ:** パスワードがないことを示すために `:` が記述されています。 **Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
 
 #### パラメーターを使用したパイプラインのトリガーの例
-以下は、パラメーターを使用したパイプラインを `curl` でトリガーする例です。
+{: #triggering-a-pipeline-with-parameters-example }
 
-Here is a simple example using `curl` to trigger a pipeline with parameters:
+以下は、パラメーターを使用したパイプラインを `curl` でトリガーする例です。
 
 ```
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -75,16 +75,16 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 **重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定](https://circleci.com/ja/docs/2.0/settings/)や[コンテキスト](https://circleci.com/docs/2.0/glossary/#context)の説明を参照してください。
 
 ## エンドポイントの変更
-最新の v2 バージョンの CircleCI API に追加された新しいエンドポイントは以下の表のとおりです。
+{: #changes-in-endpoints }
 
 CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
 
-最新の API v2 リリースでサポートされなくなったエンドポイントは以下の表のとおりです。
+For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
-### パイプライン
+### New endpoints
+{: #new-endpoints }
+
 API v2 は現在、CircleCI Server のセルフホスティング環境ではサポートされていません。
-
-The table below describes the new endpoints that have been added to the CircleCI API for this updated v2 version.
 
 | エンドポイント                                                               | 説明                                                                                          |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
@@ -100,11 +100,11 @@ The table below describes the new endpoints that have been added to the CircleCI
 | `GET /insights/:project-slug/workflows/:workflow-name/jobs`           | This endpoint enables you to retrieve summary metrics for a project workflow's jobs.        |
 | `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | This endpoint enables you to retrieve recent runs of a job within a workflow.               |
 
-### 新しいエンドポイント
+### 非推奨のエンドポイント
 {: #deprecated-endpoints }
 {:.no_toc}
 
-For this updated API v2 release, several endpoints have been deprecated, which are listed in the table below.
+最新の API v2 リリースでサポートされなくなったエンドポイントは以下の表のとおりです。
 
 | エンドポイント                                            | 説明                        |
 | -------------------------------------------------- | ------------------------- |

@@ -52,7 +52,10 @@ The tag template looks like this: `[semver:<increment>]`, where `<increment>` is
     For example, to release the first major public version of your orb from the `alpha` branch, your pull request may be titled `[semver:major] first orb release.` ![First major release of an orb - Pull Request]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
 1. **"Squash" Merge.** <br/>
-Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message. ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
+Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message.
+
+    Confirm the `[semver:<increment>]` is in the subject/first line of the commit message before merging (as shown below). Bitbucket may preserve the Pull Request title in the body of the commit message instead of the subject/first line.
+![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
 1. **Complete!** <br/>
 If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/developer/orbs).
@@ -82,10 +85,7 @@ A development version of the orb is created in the [orb-tools/publish-dev](https
 The workflow runs as follows:
 
 * Tests that do not require special access to the Personal Access Token are run, this stage can run from open source pull requests.
-* The workflow is placed [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval). ![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png)
-    The workflow will wait for a button click, via an alert prompt in the CircleCI app, before continuing.
-* Once the manual approval is authorized, subsequent jobs will be automatically authorized and may access the Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
-* After the workflow has been approved, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
+* The [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
 
     | Published Development Tag | Description|
     | ----------| -----------|

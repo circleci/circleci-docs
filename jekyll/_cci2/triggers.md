@@ -7,6 +7,7 @@ categories: [builds]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -83,7 +84,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0-browsers # < an arbitrarily chosen docker image.
+      - image: circleci/node:14.17-browsers # < an arbitrarily chosen docker image.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

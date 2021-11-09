@@ -4,6 +4,7 @@ title: "Persisting Data"
 description: "A guide to the various ways to persist data in CircleCI"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -66,7 +67,32 @@ All data persistence operations within a job will accrue network and storage usa
 * Uploading artifacts
 * Uploading test results
 
-Details about your storage and network transfer usage can be viewed on your Plan Settings.
+To determine which jobs utilize the above actions, you can search for the following commands in your project's config.yml file:
+
+* `save_cache`
+* `restore_cache`
+* `persist_to_workspace`
+* `store_artifacts`
+* `store_test_results`
+
+All network egress will accrue network usage; the relevant actions are:
+
+* Restoring caches and workspaces to self-hosted runners
+* Downloading artifacts
+* Pushing data from jobs outside of CircleCI
+
+Details about your storage and network transfer usage can be viewed on your Plan > Plan Usage screen.
+
+* Total network and storage usage can be found in the table at the top of the screen.
+* Network and storage usage for individual projects can be found on the Projects tab.
+* Storage data activity can be found on the Objects tab.
+* Total storage volume data can be found on the Storage tab.
+
+![plan-usage-screen]( {{ site.baseurl }}/assets/img/docs/screen-plan-usage.png)
+
+Details about individual step storage and network transfer usage can be found in the step output on the Jobs page as seen below.
+
+![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
 
 ### How to manage your storage and network transfer use
 {: #how-to-manage-your-storage-and-network-transfer-use }
@@ -85,6 +111,14 @@ Often we see that the store_artifacts step is being used on a large directory wh
 
 If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the CIRCLE_NODE_INDEX environment variable in a run step to change the behaviour of scripts depending on the parallel task run.
 
+#### Uploading large artifacts
+{: #uploading-large-artifacts }
+
+* Artifacts that are text can be compressed at very little cost.
+* If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
+* If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
+* If you must upload a large artifact you can upload them to your own bucket at no cost.
+
 #### Caching unused or superfluous dependencies
 {: #caching-unused-or-superfluous-dependencies }
 
@@ -95,6 +129,8 @@ Depending on what language and package management system you are using, you may 
 
 If you notice your cache usage is high and would like to reduce it, try:
 
+* Searching for the `save_cache` and `restore_cache` commands in your config.yml file to find all jobs utilizing caching and determine if their cache(s) need pruning.
+* Narrowing the scope of a cache from a large directory to a smaller subset of specific files.
 * Ensuring that your cache “key” is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
 {% raw %}
@@ -125,10 +161,17 @@ Which will only change if the list of requested dependencies has changed. If you
 
 * Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
 
-#### Uploading large artifacts
-{: #uploading-large-artifacts }
+#### Optimizing workspace usage
+{: #optimizing-workspace-usage }
 
-* Artifacts that are text can be compressed at very little cost.
-* If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
-* If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
-* If you must upload a large artifact you can upload them to your own bucket at no cost.
+If you notice your workspace usage is high and would like to reduce it, try:
+
+* Searching for the `persist_to_workspace` command in your config.yml file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+
+#### Reducing excess use of network egress
+{: #reducing-excess-use-of-network-egress }
+
+If you would like to reduce the amount of network usage that network egress is contributing to, try:
+
+* For runner, deploy any cloud-based runners in AWS US-East-1.
+* Download artifacts once and store them on your site for additional processing.

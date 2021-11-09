@@ -5,6 +5,10 @@ short-title: "Advanced Config"
 description: "Summary of advanced config options and features"
 categories: [migration]
 order: 2
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 CircleCI supports many advanced configuration options and features, check out the snippets below to get an idea of what is possible, and get tips for optimizing your advanced configurations.
@@ -60,7 +64,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node-jessie-browsers
+      - image: circleci/node:buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

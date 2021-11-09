@@ -17,7 +17,7 @@ version:
 ## Skip builds
 {: #skip-builds }
 
-By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a [ci skip] or [skip ci] tag anywhere in a commit’s title or description.
+CircleCI のデフォルトでは、ユーザーが変更をバージョン管理システム (VCS) にプッシュするたびに、自動的にプロジェクトがビルドされます。 この動作は、[ci skip] または [skip ci] タグをコミットのタイトルまたは説明の任意の場所に追加することで、オーバーライドできます。
 
 
 ## Trigger a job using curl and your API token
@@ -74,11 +74,6 @@ workflows:
       - deploy:
           requires:
             - hold
-          requires:
-           - test2
-      - deploy:
-          requires:
-            - hold
 ```
 
 ## Trigger Docker builds in Dockerhub
@@ -89,12 +84,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0-browsers # < 選択された任意の Docker イメージ
-        version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10.0-browsers # < 選択された任意の Docker イメージ
+      - image: circleci/node:14.17-browsers # < 選択された任意の Docker イメージ
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -106,7 +96,7 @@ jobs:
           command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 
-[Workflows]({{ site.baseurl }}/2.0/workflows/)
+[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)

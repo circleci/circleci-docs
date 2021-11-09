@@ -49,12 +49,12 @@ The `config-translation` endpoint can help you quickly get started with converti
 5. Add the language and version you want to run the primary container to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true` or by using `macos`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
      ```
        ruby:
-         version: 2.3
+         version: 2.7
      ```
      Replace with the following lines:
      ```
          docker:
-           - image: circleci/ruby:2.3-jessie
+           - image: circleci/ruby:2.7
              auth:
                username: mydockerhub-user
                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -104,12 +104,12 @@ The `config-translation` endpoint can help you quickly get started with converti
 ## Environment variables
 {: #environment-variables }
 
-In CircleCI 2.0, all defined environment variables are treated literally.
+In CircleCI, all defined environment variables are treated literally.
 It is possible to interpolate variables within a command
 by setting it for the current shell.
 
 For more information,
-refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to configure workflows
 {: #steps-to-configure-workflows }

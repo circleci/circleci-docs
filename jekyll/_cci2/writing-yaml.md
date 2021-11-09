@@ -6,6 +6,7 @@ description: "How to Write YAML on CircleCI"
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

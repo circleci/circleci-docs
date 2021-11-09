@@ -1,16 +1,19 @@
 ---
 layout: classic-docs
-title: "Installing and Using docker-compose"
-short-title: "Installing and Using docker-compose"
-description: "How to enable docker-compose in your primary container"
+title: "Installing and Using Docker Compose"
+short-title: "Installing and Using Docker Compose"
+description: "How to enable Docker Compose in your primary container"
 categories: [containerization]
 order: 40
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
-This document describes how to install and use `docker-compose`.
+This document describes how to install and use Docker Compose, and assumes the reader has some experience using the `docker-compose` utility.
+
+If you are new to Docker Compose, do consider reviewing the [official Docker Compose overview](https://docs.docker.com/compose/), or checking out the [Getting Started guide](https://docs.docker.com/compose/gettingstarted/).
 
 * TOC
 {:toc}
@@ -21,11 +24,13 @@ can install it into your [primary container][primary-container] during the job
 execution with the Remote Docker Environment activated by adding the following
 to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
-```
+```yml
       - run:
           name: Install Docker Compose
+          environment:
+            COMPOSE_VERSION: '1.29.2'
           command: |
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
@@ -39,32 +44,43 @@ executor. If you are constructing your own docker images, consider reading the
 
 Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
 
-```
-- setup_remote_docker
+```yml
+      - setup_remote_docker
 ```
 
-This step enables you to add `docker-compose` commands to build images:
+This step enables you to run `docker-compose` commands to build images:
 
-```
-docker-compose build
+```yml
+      - run:
+          name: Build images of services declared in docker-compose.yml
+          command: docker-compose build
 ```
 
 Or to run the whole system:
 
-```
-docker-compose up -d
-```
-
-In the following example, the whole system starts, then verifies it is running and responding to requests:
-
-``` YAML
+```yml
       - run:
-          name: Start container and verify it is working
+          name: Start all services declared in docker-compose.yml
+          command: docker-compose up -d
+```
+
+Or to also verify if a service is running for example:
+
+```yml
+      - run:
+          name: Start docker-compose and verify service(s)
           command: |
-            set -x
-            docker-compose up -d
-            docker run --network container:contacts \
-              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+            # Setting the Docker Compose project name to "circleci-demo-docker" means
+            # the names of our services' containers would be prefixed with "circleci-demo-docker".
+            docker-compose --project circleci-demo-docker up -d
+
+            # In this example, we have a "contacts" service, and
+            # we are trying to check, via `dockerize`, if the service is ready. 
+            docker container run --network container:circleci-demo-docker_contacts_1 \
+              docker.io/jwilder/dockerize \
+              -wait http://localhost:8080/healthcheck \
+              -wait-retry-interval 2s \
+              -timeout 20s
 ```
 
 ## Example project
@@ -72,15 +88,15 @@ In the following example, the whole system starts, then verifies it is running a
 
 See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects.
 
-**Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network.
+**Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, run a container in the service's network.
 
-## Using docker compose with machine executor
+## Using Docker Compose with machine executor
 {: #using-docker-compose-with-machine-executor }
 
-If you want to use docker compose to manage a multi-container setup with a docker-compose file, use the `machine` key in your `config.yml` file and use docker-compose as you would normally (see machine executor documentation [here](https://circleci.com/docs/2.0/executor-types/#using-machine) for more details). That is, if you have a docker-compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details. **Note: There is an overhead for provisioning a machine executor as a result of spinning up a private Docker server. Use of the `machine` key may require additional fees in a future pricing update.**
+If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `config.yml` file and use `docker-compose` as you would normally (see machine executor documentation [here](https://circleci.com/docs/2.0/executor-types/#using-machine) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details. **Note: There is an overhead for provisioning a machine executor as a result of spinning up a private Docker server. Use of the `machine` key may require additional fees in a future pricing update.**
 
 
-## Using docker compose with docker executor
+## Using Docker Compose with docker executor
 {: #using-docker-compose-with-docker-executor }
 
 Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
@@ -90,10 +106,11 @@ This combination is required if you want to build docker images for deployment.
 ## Limitations
 {: #limitations }
 
-Using `docker-compose` with the `macos` executor is not supported, see [the support article for more information](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-).
+Using `docker-compose` with the `macos` executor is not supported.
+See [our support article for more information](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-).
 
 ## See also
 {: #see-also }
 {:.no_toc}
 
-See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
+See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.

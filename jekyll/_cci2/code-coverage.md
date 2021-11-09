@@ -8,6 +8,7 @@ order: 50
 sitemap: false
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -282,7 +283,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0-browsers
+      - image: circleci/node:14.17-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -345,7 +346,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.11
+      - image: circleci/golang:1.16
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

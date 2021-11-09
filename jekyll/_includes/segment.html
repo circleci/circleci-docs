@@ -14,7 +14,10 @@
     "description": {{ page["description"] | jsonify }},
     "collection": {{ page["collection"] | jsonify }}
   };
+  window.currentPage = {
+    name: pageName,
+    jekyllProperties: properties
+  }
 
-  analytics.page(pageCategory, pageName, properties);
   }}();
 </script>
