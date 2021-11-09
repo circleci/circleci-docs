@@ -95,9 +95,9 @@ Details about individual step storage and network transfer usage can be found in
 ### How to calculate an approximation of your monthly costs
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
-Currently, there is no charge for network usage when using our cloud infrastructure. Charges apply when an organization has network egress using CircleCI runner, beyond the plan's included GB-Monthly allotment. 
+Currently, there is no charge for network usage when using our cloud infrastructure. Charges apply when an organization has network egress using CircleCI runner, beyond the plan's included GB-Monthly allotment.
 
-Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days. 
+Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
 
 #### Storage
 {: #storage }
@@ -111,7 +111,7 @@ To calculate monthly storage costs from your daily usage, click on the Storage t
 {: #network }
 {:.no_toc}
 
-To calculate monthly netowrk costs from your daily usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs. 
+To calculate monthly netowrk costs from your daily usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs.
 
 The GB-monthly allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
 
