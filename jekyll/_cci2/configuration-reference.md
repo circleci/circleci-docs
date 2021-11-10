@@ -1072,7 +1072,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% endraw %}
 
 **Notes:** 
-- Wildcards are not currently supported in `save_cache` paths. Please visit the [Ideas board](https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths) and vote for this feature if it would be useful for you or your organization. 
+- Wildcards are not currently supported in `save_cache` paths. Please visit the [Ideas board](https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths) and vote for this feature if it would be useful for you or your organization.
 
 - In some instances, a workaround for this is to save a particular workspace to cache:
 
