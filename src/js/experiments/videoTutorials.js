@@ -3,6 +3,7 @@ $(() => {
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_add_video_tab_to_docs_test',
     groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
+    experimentContainer: '.main-nav-item[data-section=video-tutorials]',
   }).then((variation) => {
     if (variation === 'treatment') {
       $('.main-nav-item[data-section=video-tutorials]').show();

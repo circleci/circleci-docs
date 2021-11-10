@@ -4,6 +4,7 @@ window.onload = () => {
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_add_copy_code_button_to_docs',
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
+    experimentContainer: '.hljs',
   }).then(function (variation) {
     if (variation === 'treatment') {
       var options = {
