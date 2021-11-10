@@ -103,14 +103,13 @@
   });
 })();
 
-// highlightTocOnScroll sets up IntersectionObservers
-// to watch for when a headline comes into view when scrolling a page
-// when a headlines enters the view, we check to see if it is
-// in the right table of contents - if it is -> highlight it.
-// We also need to do some "prefix/suffix checking" to identify
-// previous and successive items in the sidebar to avoid highlighting
-// multiple items of the same name (for example, the configuration reference)
-// has several headlines called "example usage".
+/**
+ * highlightTocOnScroll sets up IntersectionObservers to watch for when a
+ * headline comes into view when scrolling a page. When a headlines enters the
+ * view, we check to see if it is in the right table of contents - if it is ->
+ * highlight it.
+ *
+ * */
 function highlightTocOnScroll() {
   const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
   const sidebarItemsText = sidebarItems.map((i) => i.innerText);
@@ -118,22 +117,18 @@ function highlightTocOnScroll() {
     document.querySelectorAll('h1, h2, h3, h4, h5, h6'),
   ).filter((item) => ![...item.classList].includes('no_toc'));
 
-  // TODO: handle case where the sidebar items are duplicate ("ie: Example Usage" in the config reference)
   var observer = new IntersectionObserver(
     function (entry) {
+      // check that 1) the item is visible/intersecting
+      // and 2) that the sidebar items text actually has that headline before we make any changes.
       if (
         entry[0].isIntersecting === true &&
         sidebarItemsText.includes(entry[0].target.innerText)
       ) {
-        sidebarItems.forEach(function (el) {
-          let itemText = el.innerText;
-
-          if (entry[0].target.innerText === itemText) {
-            el.classList.add('active');
-          } else {
-            el.classList.remove('active');
-          }
-        });
+        let intersectingEntry = entry[0].target;
+        let indexOfCurrentHeadline = all_headlines.indexOf(intersectingEntry);
+        sidebarItems.forEach((el) => el.classList.remove('active'));
+        sidebarItems[indexOfCurrentHeadline - 1].classList.add('active');
       }
     },
     { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
