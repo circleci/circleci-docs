@@ -102,3 +102,46 @@
     enableAccordion(mobileNavItems);
   });
 })();
+
+// highlightTocOnScroll sets up IntersectionObservers
+// to watch for when a headline comes into view when scrolling a page
+// when a headlines enters the view, we check to see if it is
+// in the right table of contents - if it is -> highlight it.
+// We also need to do some "prefix/suffix checking" to identify
+// previous and successive items in the sidebar to avoid highlighting
+// multiple items of the same name (for example, the configuration reference)
+// has several headlines called "example usage".
+function highlightTocOnScroll() {
+  const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
+  const sidebarItemsText = sidebarItems.map((i) => i.innerText);
+  let all_headlines = Array.from(
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6'),
+  ).filter((item) => ![...item.classList].includes('no_toc'));
+
+  // TODO: handle case where the sidebar items are duplicate ("ie: Example Usage" in the config reference)
+  var observer = new IntersectionObserver(
+    function (entry) {
+      if (
+        entry[0].isIntersecting === true &&
+        sidebarItemsText.includes(entry[0].target.innerText)
+      ) {
+        sidebarItems.forEach(function (el) {
+          let itemText = el.innerText;
+
+          if (entry[0].target.innerText === itemText) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        });
+      }
+    },
+    { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
+  );
+
+  all_headlines.forEach((headline) => {
+    observer.observe(headline);
+  });
+}
+
+highlightTocOnScroll();
