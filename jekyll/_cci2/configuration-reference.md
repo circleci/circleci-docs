@@ -1030,7 +1030,7 @@ when | N | String | [Specify when to enable or disable the step](#the-when-attri
 
 The cache for a specific `key` is immutable and cannot be changed once written.
 
-**Note:** If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step.
+**Note:** If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
