@@ -1030,7 +1030,7 @@ when | N | String | [Specify when to enable or disable the step](#the-when-attri
 
 The cache for a specific `key` is immutable and cannot be changed once written.
 
-**Note** If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step.
+**Note:** If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
@@ -1068,6 +1068,21 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
       - /home/ubuntu/.m2
+```
+{% endraw %}
+
+**Notes:**
+- Wildcards are not currently supported in `save_cache` paths. Please visit the [Ideas board](https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths) and vote for this feature if it would be useful for you or your organization.
+
+- In some instances, a workaround for this is to save a particular workspace to cache:
+
+{% raw %}
+``` YAML
+- save_cache:
+    key: v1-{{ checksum yark.lock }}
+    paths:
+      - node_modules/workspace-a
+      - node_modules/workspace-c
 ```
 {% endraw %}
 
