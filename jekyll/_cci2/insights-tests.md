@@ -12,7 +12,7 @@ version:
 
 Using CircleCI test insights, you are able to analyze your test performance within the most recent executions and identify opportunities for test optimization. To access test insights, select the **Tests** tab on the **Workflow Insights** page.
 
-The next setions go over what test insights are available.
+The next sections go over what test insights are available.
 
 ### Performance Summary
 {: #performance-summary }
