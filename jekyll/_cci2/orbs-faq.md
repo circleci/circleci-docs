@@ -16,7 +16,7 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are available on any of our [current plans](https://circleci.com/pricing). 
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are available on any of our [current plans](https://circleci.com/pricing).
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
