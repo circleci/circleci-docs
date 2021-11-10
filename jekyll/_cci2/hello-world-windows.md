@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide]({{ site.baseurl}}/2.0/getting-started/).
+This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide]({{ site.baseurl}}/2.0/getting-started/).
 
 * TOC
 {:toc}
@@ -29,7 +29,7 @@ To follow along with this document you will need:
 # Overview of the Windows executor
 {: #overview-of-the-windows-executor }
 
-The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
+The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - Is VM-based to guarantee full job isolation.
 - Uses the Server Core version of Windows Server 2019 Datacenter Edition.

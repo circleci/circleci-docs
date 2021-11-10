@@ -46,9 +46,9 @@ Almost all configuration of CircleCI builds is stored in a file called `.circlec
 
 It’s often up to an Ops person or team to manage Jenkins servers. These people generally get involved with various CI maintenance tasks like installing dependencies and troubleshooting issues.
 
-It’s never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the build environment can be done easily and securely by any developer using CircleCI’s [SSH feature]( {{ site.baseurl }}/2.0/ssh-access-jobs/).
+It’s never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]( {{ site.baseurl }}/2.0/ssh-access-jobs/).
 
-If you install CircleCI on your own hardware, the divide between the host OS (at the “metal”/VM level) and the containerized build environments can be extremely useful for security and ops (see Your Builds in Containers below). Ops team members can do what they need to on the host OS without affecting builds, and they never need to give developers access. Developers, on the other hand, can use CircleCI’s SSH feature to debug builds at the container level as much as they like without affecting ops.
+If you install CircleCI on your own hardware, the divide between the host OS (at the “metal”/VM level) and the containerized execution environments can be extremely useful for security and ops (see Your Builds in Containers below). Ops team members can do what they need to on the host OS without affecting builds, and they never need to give developers access. Developers, on the other hand, can use CircleCI’s SSH feature to debug builds at the container level as much as they like without affecting ops.
 
 ## Web UI
 {: #web-ui }
@@ -83,7 +83,7 @@ Talking about containerization in build systems can be complicated because arbit
 {:.no_toc}
 
 
-If you use a tool like Docker in your workflow, you will likely also want to run it on CI. Jenkins doesn’t provide any built-in support for this, and it is up to you to make sure it is installed and available within your build environment.
+If you use a tool like Docker in your workflow, you will likely also want to run it on CI. Jenkins doesn’t provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
 
 Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in you `config.yml` file. See the [Choosing an Executor Type]( {{ site.baseurl }}/2.0/executor-types/) and [Docker]( {{ site.baseurl }}/2.0/build/#docker) documents for more info.
 
