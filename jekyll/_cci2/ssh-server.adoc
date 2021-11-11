@@ -1,4 +1,5 @@
 ---
+description: "This section describes how SSH reruns work within installations of CircleCI Server. This guide is also here to help with debugging in the event of a problem with SSH reruns in an installation."
 version:
 - Server v2.x
 - Server Admin

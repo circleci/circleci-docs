@@ -1,4 +1,6 @@
 ---
+description: "Review Nomad client launch configuration update steps and the updated script. This update must be run before upgrading to Server v2.19
+"
 version:
 - Server v2.x
 - Server Admin

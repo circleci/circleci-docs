@@ -1,4 +1,5 @@
 ---
+description: "Server 3.x is now generally available. Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more."
 version:
 - Server v3.x
 - Server Admin
