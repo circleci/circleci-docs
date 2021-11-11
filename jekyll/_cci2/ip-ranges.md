@@ -19,7 +19,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 ## Overview
 {: #overview }
 
-IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges.
+IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
 The feature is currently available in preview to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing will be calculated based on network data usage of jobs that have opted in to using the IP ranges feature. There is no charge while the feature is in preview and pricing details will be shared once the feature is generally available.  
 
@@ -37,6 +37,8 @@ Some example use cases where IP-based restricted access might be desired include
 - Granting access to a production network
 
 Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner](https://circleci.com/docs/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
+
+IP ranges only routes traffic through one of the defined IP address ranges _during job execution_.  Any step that occurs before the job has started to execute will not have its traffic routed thorugh one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
 
 ## Example configuration file using IP ranges
 {: #exampleconfiguration }
@@ -131,7 +133,7 @@ Notifications of a change to this list will be sent out by email to all customer
 ## Pricing
 {: #pricing }
 
-Pricing will be calculated based on network data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.
+Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.
 
 Specific rates and details are being finalized and will be published when the feature is generally available.
 
@@ -166,4 +168,4 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 {: #knownlimiations}
 
 - IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
-- When downloading or uploading files larger than ~10 MB during execution of jobs with IP ranges enabled, intermittently, the job may receive TCP reset (RST) packets and drop the connection. This could cause the job to fail if there is no retry logic in place while downloading/uploading the file.  CircleCI recommends including robust retry mechanisms in your config when attempting to download/upload large files during execution of jobs with IP ranges enabled.  For example, if your job uses [curl](http://www.ipgp.fr/~arnaudl/NanoCD/software/win32/curl/docs/curl.html) to download/upload a large file, include the ```--retry <num>``` flag and set ```<num>``` to a large number such as 1,000.
+- If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses](https://circleci.com/docs/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.

@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Java (with Maven)"
 short-title: "Java with Maven"
-description: "Building and Testing with Java and Maven on CircleCI 2.0"
+description: "Building and Testing with Java and Maven on CircleCI"
 categories: [language-guides]
 order: 4
 version:

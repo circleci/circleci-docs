@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Optimizations"
 short-title: "Optimizations"
-description: "CircleCI 2.0 build optimizations"
+description: "CircleCI build optimizations"
 categories: [getting-started]
 order: 1
 version:

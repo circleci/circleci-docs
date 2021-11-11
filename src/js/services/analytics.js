@@ -84,7 +84,12 @@ const trackEvent = (name, properties, options, callback) => {
   }
 
   analytics.track(name, properties, options, function () {
-    setCookieMinutes('amplitude-session-id', getSessionId(), '/', 30);
+    setCookieMinutes(
+      'amplitude-session-id',
+      AnalyticsClient.getSessionId(),
+      '/',
+      30,
+    );
     if (callback) {
       callback();
     }

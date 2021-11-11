@@ -367,25 +367,9 @@ images!
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
+**Recent Tags:**
 
-<ul class="list-3cols">
-{% assign tags = image[1].tags | sort | reverse %}
-{% assign tagCounter = 1 %}
-{% for tag in tags %}
-	{% if tagCounter > 99 %}
-		{% break %}
-	{% endif %}
-	{% unless tag contains "-browsers" or tag contains "-node" or tag contains "-ram" %}
-	<li>{{ tag }}</li>
-	{% assign tagCounter = tagCounter | plus:1 %}
-	{% endunless %}
-{% endfor %}
-</ul>
-
-
-<br/>
-Note: Any variants available for this image can be used by appending the variant tag to the tags above. View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"}.
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }})/tags?ordering=last_updated).
 
 ---
 

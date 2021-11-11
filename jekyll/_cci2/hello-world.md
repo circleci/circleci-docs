@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "First project on CircleCI 2.0"
+description: "First project on CircleCI"
 categories: [getting-started]
 order: 4
 version:
@@ -20,7 +20,7 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
+2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
    jobs:
@@ -37,10 +37,10 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 2. Commit and push the changes.
 
-3. Go to the Projects page in the CircleCI app, click the **Add Projects** button, then click
+3. Go to the Projects page in the CircleCI app, then click
 the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated Org. See the Org Switching section below for tips.
 
-1. Click the **Start Building** button to trigger your first build.
+4. Follow the steps to configure your `config.yml` file for the project and trigger your first build.
 
 The Workflows page appears with your `build` job and prints `Hello World` to the console.
 
@@ -70,7 +70,7 @@ See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for det
 ## Hello world for macOS
 {: #hello-world-for-macos }
 
-_The macOS executor is not currently available on installations of CircleCI Server v2.x_
+_The macOS executor is not currently available on installations of CircleCI server v2.x_
 
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 

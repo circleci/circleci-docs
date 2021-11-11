@@ -1,5 +1,4 @@
----
----
+@import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
 @import 'footer';
@@ -7,9 +6,15 @@
 @import 'subnav';
 @import 'instantsearch';
 @import 'tooltip';
+@import 'asciidoc';
+@import 'fonts';
+@import 'buttons';
+@import 'mobile';
+@import 'spacing';
+@import 'syntax';
 
 // General
-body{
+body {
 	color: $body-text-color;
 	display: block;
 	width: 100%;
@@ -511,14 +516,6 @@ h6{
 }
 
 /*
-*  Experiment Key: dd_add_orb_section_to_docs_landing_page_test
-*  https://app.optimizely.com/v2/projects/16812830475/experiments/20598037463/variations
-*/
-#orb-section {
-	visibility: hidden
-}
-
-/*
 Fixing styling for the code example tables in the "Migrating From..." pages
 */
 .table-no-background > tbody > tr:first-child {
@@ -605,6 +602,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
  font-size: 16px;
  max-width: 45%;
  min-width: 45%;
+ text-decoration: none;
 }
 
 /* this is the play "icon" (white circle) */

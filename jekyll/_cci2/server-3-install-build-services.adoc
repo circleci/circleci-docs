@@ -520,7 +520,7 @@ This can be found using the following command:
 kubectl get service vm-service --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 ** *GCP project ID (required)* - 
-Name of the GCP project the cluster resides.
+Name of the GCP project the cluster resides. Below this you can uncheck the box if you want to use private VMs, which request private IP addresses.
 
 ** *GCP Zone (required)* - 
 GCP zone the virtual machines instances should be created in for example “us-east1-b”.

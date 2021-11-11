@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Concepts"
 short-title: "Concepts"
-description: "CircleCI 2.0 concepts"
+description: "CircleCI concepts"
 categories: [getting-started]
 order: 1
 version:
@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.
+This guide introduces some basic concepts to help you understand how CircleCI manages your CI/CD pipelines.
 
 * TOC
 {:toc}

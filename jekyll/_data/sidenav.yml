@@ -19,6 +19,8 @@ en:
           link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
+        - name: FAQ
+          link: 2.0/faq/
     - name: Migration
       link: 2.0/migration-intro/
       children:
@@ -133,7 +135,7 @@ en:
       children:
         - name: Runner Overview
           link: 2.0/runner-overview/
-        - name: Runner Installation
+        - name: Getting Started with Runner Installation
           link: 2.0/runner-installation/
         - name: Linux Runner Installation
           link: 2.0/runner-installation-linux/

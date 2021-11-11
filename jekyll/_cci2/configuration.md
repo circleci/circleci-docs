@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0"
+title: "CircleCI configuration"
 redirect: /docs/2.0/configuration-reference/
 ---
 

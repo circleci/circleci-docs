@@ -23,9 +23,9 @@ image::arch_server.png[Services Architecture]
 <<<
 == Build Environments
 
-CircleCI 2.0 uses Nomad as the primary job scheduler. Refer to our <<nomad#introduction-to-nomad-cluster-operation,Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI uses Nomad as the primary job scheduler. Refer to our <<nomad#introduction-to-nomad-cluster-operation,Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
 
-By default, CircleCI 2.0 Nomad clients automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file.
+By default, CircleCI Nomad clients automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file.
 
 == Architecture
 
