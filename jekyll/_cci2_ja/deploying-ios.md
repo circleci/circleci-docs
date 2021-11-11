@@ -1,21 +1,21 @@
 ---
 layout: classic-docs
-title: Deploying iOS Applications
-short-title: Deploying iOS Applications
+title: iOS アプリケーションのデプロイ
+short-title: iOS アプリケーションのデプロイ
 categories:
-  - platforms
-description: Deploying iOS Applications
+  - プラットフォーム
+description: iOS アプリケーションのデプロイ
 order: 1
 version:
   - Cloud
 ---
 
-This document describes how to configure Fastlane to automatically deploy iOS apps from CircleCI to a distribution service.
+ここでは、CircleCI 上で iOS アプリケーションを配信サービスに自動的にデプロイするための fastlane の設定方法について説明します。
 
-* TOC
+* 目次
 {:toc}
 
-## Overview
+## 概要
 {: #overview }
 {:.no_toc}
 
