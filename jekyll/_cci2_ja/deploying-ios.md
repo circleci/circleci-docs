@@ -177,19 +177,19 @@ Firebaseは、Google が提供する配信サービスです。 Firebase への�
 ### CLI トークンの生成
 {: #generating-a-cli-token }
 
-Firebase requires a token to used during authentication. To generate the token, we need to use the Firebase CLI and a browser - as CircleCI is a headless environment, we will need to generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
+Firebase では、認証時にトークンを使用する必要があります。 トークンを生成するには、Firebase CLI とブラウザを使用する必要があります。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
 
-1. Download and install the Firebase CLI locally with the command `curl -sL https://firebase.tools | bash`
-2. Trigger a login by using the command `firebase login:ci`
-3. Complete the sign in via the browser window, then copy the token provided in the Terminal output
-4. Go to your project settings in CircleCI and create a new environment variable named `FIREBASE_TOKEN` with the value of the token.
+1. コマンド `curl -sL https://firebase.tools | bash`で、Firebase CLI をダウンロードしてローカルにインストールします。
+2. `firebase login:ci`というコマンドでログインをトリガーします。
+3. ブラウザウィンドウでサインインを完了し、ターミナルの出力で提供されたトークンをコピーします。
+4. CircleCI のプロジェクト設定で、 `FIREBASE_TOKEN` という名前の新しい環境変数を作成し、トークンの値を入力します。
 
-### Fastlane configuration
+### Fastlane の設定
 {: #fastlane-configuration }
 
-The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to `Settings -> General`. Under "Your apps", you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
+Firebase プラグインは、最小限の設定で iOS のバイナリを Firebase にアップロードすることができます。 主なパラメータは `app` で、Firebase が設定した App ID が必要になります。 これを確認するには、 [Firebase のコンソール](https://console.firebase.google.com)でプロジェクトにアクセスし、 `Settings -> General` を選択します。 [Your apps (お客様のアプリ)]の下に、プロジェクト内のアプリのリストと、App ID (通常、`1:123456789012:ios:abcd1234abcd1234567890` の形式) などの情報が表示されます。
 
-For more configuration options, see the [Firebase Fastlane plugin documentation](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app).
+その他の設定オプションについては、 [Firebase Fastlane プラグインのドキュメント](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app)を参照してください。
 
 ```ruby
 # Fastlane/fastfile
@@ -210,12 +210,13 @@ platform :ios do
     firebase_app_distribution(
       app: "1:123456789012:ios:abcd1234abcd1234567890",
       release_notes: "This is a test release!"
+
     )
   end
 end
 ```
 
-To use the Firebase Fastlane plugin, the Firebase CLI must be installed as part of the job via the `curl -sL https://firebase.tools | bash` command:
+Firebase Fastlane のプラグインを使用するには、 `curl -sL https://firebase.tools | bash` コマンドにより Firebase CLI をジョブの一部としてインストールする必要があります。
 
 ```yaml
 version: 2.1
@@ -238,41 +239,41 @@ workflows:
       - adhoc
 ```
 
-**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{ site.baseurl }}/2.0/testing-ios/#using-ruby)
+**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{ site.baseurl }}/2.0/testing-ios/#using-ruby)ことをお勧めします。
 
-## Deploying to Visual Studio App Center
+## Visual Studio App Center へのデプロイ
 {: #deploying-to-visual-studio-app-center }
 
-Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
+Visual Studio App Center (正式名称: HockeyApp) は、マイクロソフトの配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
 
-### Fastlane Plugin Setup
+### Fastlane プラグインのセットアップ
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin appcenter`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
+プロジェクトにプラグインをセットアップするには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin appcenter` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
-### App Center Setup
+### App Center のセットアップ
 {: #app-center-setup }
 
-First, the app needs to be created in VS App Center.
+まず、VS App Center でアプリを作成する必要があります。
 
-1. Log in, or sign up, to [Visual Studio App Center](https://appcenter.ms/)
-2. At the top-right of the page, click on "Add New", then select "Add New App"
-3. Fill out the required information in the form as required
+1. [Visual Studio App Center](https://appcenter.ms/)にログイン、またはサインアップします。
+2. ページの右上にある [Add New (追加)] "をクリックし、[Add New App (新しいアプリを追加する)] を選択します。
+3. 必要に応じて、必要な情報を入力します。
 
-Once this is complete you will need to generate an API token to allow Fastlane to upload to App Center.
+完了したら、Fastlane が App Center にアップロードできるようにするための API トークンを生成する必要があります。
 
-1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
-2. Click on "New API Token"
-3. Enter a description for the token, then set the access to "Full Access"
-4. When the token is generated, make sure to copy it somewhere safe.
-5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
+1. 設定の [API トークン](https://appcenter.ms/settings/apitokens) に移動します。
+2. [New API Token (新しい API トークン)] "をクリックします。
+3. トークンの説明を入力し、アクセスを [Full Access (フルアクセス)] に設定します。
+4. トークンが生成されたら、必ず安全な場所にコピーしてください。
+5. CircleCI のプロジェクト設定で、`VS_API_TOKEN` という名前の新しい環境変数を作成し、トークンの値を入力します。
 
-### Fastlane configuration
+### fastlane の設定
 {: #fastlane-configuration }
 
-Below is an example of a lane that distributes beta app builds to Visual Studio App Center. Both the username of your App Center account and an API Token with "Full Access" is required to upload the binary to App Center.
+下記は、ベータ版アプリのビルドを Visual Studio App Center に配信するレーンの例です。 App Center にバイナリをアップロードするには、App Center アカウントのユーザー名と「フルアクセス」 の API トークンの両方が必要です。
 
 ```ruby
 # Fastlane/fastfile
@@ -285,16 +286,16 @@ platform :ios do
 
 desc "Upload to VS App Center"
   lane :upload_appcenter do
-    # Here we are using the CircleCI job number
-    # for the build number
+    #  ここでは ビルド番号に
+    # CircleCI ジョブ番号を使います。
     increment_build_number(
       build_number: "$CIRCLE_BUILD_NUM"
     )
-    # Set up Adhoc code signing and build  the app
+    # Adhoc コード署名をセットアップし、アプリをビルドします。
     match(type: "adhoc")
     gym(scheme: "HelloWorld")
-    # Set up the required information to upload the
-    # app binary to VS App Center
+    # 必要な情報をセットアップし、
+    # アプリのバイナリを VS App Center にアップロードします。
     appcenter_upload(
       api_token: ENV[VS_API_TOKEN],
       owner_name: "YOUR_VS_APPCENTER_USERNAME",
@@ -303,23 +304,24 @@ desc "Upload to VS App Center"
     )
   end
 end
+
 ```
 
-## Uploading to TestFairy
+## TestFairy へのアップロード
 {: #uploading-to-testfairy }
 
-[TestFairy](https://www.testfairy.com) is another popular Enterprise App distribution and testing service. Fastlane has built in support for TestFairy making it quick and easy to upload new builds to the service.
+[TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
 ![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
 
-1. On the TestFairy dashboard, navigate to the Preferences page.
-2. On the Preferences page, go to the API Key section and copy your API Key.
-3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
+1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
+2. そのページの API キーのセクションで API キーをコピーします。
+3. CircleCI のプロジェクト設定で、`TESTFAIRY_API_KEY` という名前の新しい環境変数を作成し、API キーの値を入力します。
 
-### Fastlane configuration
+### fastlane の設定
 {: #fastlane-configuration }
 
-To configure uploading to TestFairy within Fastlane, see the following example:
+fastlane 内で TestFairy へのアップロードを設定するには、次の例を参照してください。
 
 ```ruby
 # Fastlane/fastfile
@@ -332,16 +334,16 @@ platform :ios do
 
 desc "Upload to TestFairy"
   lane :upload_testfairy do
-    # Here we are using the CircleCI job number
-    # for the build number
+    # ここではビルド番号に
+    # CircleCI ジョブ番号を使います。
     increment_build_number(
       build_number: "$CIRCLE_BUILD_NUM"
     )
-    # Set up Adhoc code signing and build  the app
+    # Adhoc コード署名を設定し、アプリをビルドします。
     match(type: "adhoc")
     gym(scheme: "HelloWorld")
-    # Set up the required information to upload the
-    # app binary to VS App Center
+    # 必要な情報を設定し、
+    # アプリのバイナリを VS App Center にアップロードします。
     testfairy(
       api_key: ENV[TESTFAIRY_API_KEY],
       ipa: 'path/to/ipafile.ipa',
