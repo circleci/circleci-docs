@@ -31,14 +31,14 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 ### Git ブランチの使用
 {: #using-git-branches }
 
-It is advisable to only run your release lane on a specific branch of your git repository, for example a dedicated release/beta branch. This will allow releases on only successful merges into the specified branch, prevent a release every time a push is committed during your development phase. In turn this will also reduce job completion time as uploading to an external service may take some time depending on the size our the iOS app binary. For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) documentation.
+リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローのセットアップ方法については、[ブランチレベルでのジョブの実行]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution)をご覧ください。
 
-### Setting the build number
+### ビルド番号の設定
 {: #setting-the-build-number }
 
-When uploading to a deployment service, it is important to consider the build number of the iOS app binary. Commonly this is set in the `.xcproject` and has to be updated manually to ensure it is unique. If the build number is not updated before each run of the deployment lane, you may find the receiving service rejects the binary due to a build number conflict.
+デプロイサービスにアップロードする際には、iOS アプリのバイナリのビルド番号を考慮することが重要です。 一般的には、 `.xcproject` で設定されていますが、一意になるように手動で更新する必要があります。 各デプロイレーンの実行前にビルド番号が更新されていない場合、受信サービスがビルド番号の競合によりバイナリを拒否することがあります。
 
-Fastlane provides an `increment_build_number` [action](https://docs.fastlane.tools/actions/increment_build_number/) which allows the build number to be modified during the lane execution. As an example, if you want to tie the build number to a particular CircleCI job, consider using the `$CIRCLE_BUILD_NUM` environment variable:
+fastlane は、レーン実行中にビルド番号を変更できる `increment_build_number` [アクション](https://docs.fastlane.tools/actions/increment_build_number/) を提供しています。 たとえば、特定の CircleCI ジョブにビルド番号を関連付けたい場合は、 環境変数 `$CIRCLE_BUILD_NUM` の使用を検討してください。
 
 ```ruby
 increment_build_number(
@@ -46,29 +46,29 @@ increment_build_number(
 )
 ```
 
-## App store connect
+## App Store Connect
 {: #app-store-connect }
 
-### Setting up
+### 設定
 {: #setting-up }
 
-To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account.
+fastlane が iOS バイナリを App Store Connect や TestFlight に自動的にアップロードするように設定するには、fastlane が App Store Connect アカウントにアクセスできるよういくつかのステップを実施する必要があります。
 
-The recommended way to set this up is to generate and use an App Store Connect API key. This prevents issues occurring with 2FA, which is now mandatory for Apple IDs, and is the most reliable way of interacting with the service.
+この設定には、App Store Connect APIキーを生成して使用することをお勧めします。 それにより、Apple ID で必須となっている 2FA で問題が発生することを防ぎ、最も確実な方法でサービスを利用することができます。
 
-To create an API Key, follow the steps outlined in the [Apple Developer Documentation](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api). Once you have the resulting `.p8` file, make a note of the *Issuer ID* and *Key ID* which can be found on the [App Store Connect API Keys page](https://appstoreconnect.apple.com/access/api).
+API キーを作成するには、 [Apple 開発者向けドキュメント](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api)で説明されている手順に従ってください。 その結果 `.p8` を取得したら、[App Store Connect API キーのページ](https://appstoreconnect.apple.com/access/api)に表示される*発行者 ID* と*キー ID* をメモします。
 
-**Note:** Ensure you download the `.p8` file and store it somewhere safe. The file cannot be downloaded again once you navigate away from the App Store Connect portal.
+**注意:** `.p8` ファイルをダウンロードし、安全な場所に保存したことを確認してください。 App Store Connect のポータルから離れてしまうと、ファイルを再度ダウンロードすることはできません。
 
-Next, a few environment variables need to be set. In the project settings on CircleCI, navigate to **Build Settings -> Environment Variables** and add the `FASTLANE_PASSWORD` variable, and set its value to the password for the App Store Connect account.
+次に、いくつかの環境変数を設定する必要があります。 CircleCI プロジェクトで、 **ビルド設定 > 環境変数** に移動し、以下を設定します。
 
-* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID. Example: `6053b7fe-68a8-4acb-89be-165aa6465141`
-* `APP_STORE_CONNECT_API_KEY_KEY_ID` to your Key ID. Example: `D383SF739`
-* `APP_STORE_CONNECT_API_KEY_KEY` to the contents of your `.p8` file. Example: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`
+* 発行者 ID に、`APP_STORE_CONNECT_API_KEY_ISSUER_ID`  (例：`6053b7fe-68a8-4acb-89be-165aa6465141`)
+* キー ID に、`APP_STORE_CONNECT_API_KEY_KEY_ID`    (例: `D383SF739`)
+* `.p8` ファイルの内容に、`APP_STORE_CONNECT_API_KEY_KEY`   (例: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMGByqGSM49AgCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`)
 
-**Note:** To find the contents of the `.p8` file, open it in a text editor. You will need to replace each new line with `\n` so that it forms one long string.
+**注意:** `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
 
-Finally, Fastlane requires some information from us in order to know which Apple ID to use and which app identifier we are targeting. These can be set in the `fastlane/Appfile` as follows:
+最後に、fastlane ではどの Apple ID を使用するか、またどのアプリの識別子をターゲットにするかを知るために、いくつかの情報が要求されます。 これらの情報は、 `fastlane/Appfile` で以下のように設定できます。
 
 ```ruby
 # fastlane/Appfile
@@ -76,14 +76,14 @@ apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
 
-Once this is configured, you just need to call `app_store_connect_api_key` in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
+この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で `app_store_connect_api_key` を呼び出すだけでよくなります。
 
-### Deploying to the App Store
+### App Store へのデプロイ
 {: #deploying-to-the-app-store }
 
-The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The `deliver` action provided by Fastlane is a powerful tool that automates the App Store submission process.
+下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する `deliver` アクションは、App Store への申請プロセスを自動化する強力なツールです。
 
-Deliver also allows various options such as automatic uploading of metadata and screenshots (which can be generated with the [screenshot](https://docs.fastlane.tools/actions/snapshot/) and [frameit](https://docs.fastlane.tools/actions/frameit/) actions). For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
+また、メタデータやスクリーンショット ([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
 
 ```ruby
 # fastlane/Fastfile
