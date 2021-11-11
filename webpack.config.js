@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -57,6 +58,9 @@ module.exports = {
     },
   ],
   optimization: {
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [
+      new TerserPlugin({ extractComments: false }),
+      new CssMinimizerPlugin()
+    ],
   },
 };
