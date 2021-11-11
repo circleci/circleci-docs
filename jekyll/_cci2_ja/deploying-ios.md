@@ -19,7 +19,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配布するために必要な手動のステップが不要になります。
+fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信するために必要な手動のステップが不要になります。
 
 デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリは自動的にデプロイされます。
 
@@ -97,7 +97,7 @@ platform :ios do
   desc "Upload Release to App Store"
   lane :upload_release do
     # プロジェクトからバージョン番号を取得します。
-    # App Store Connect に既に使用可能な最新のビルドと照合します。
+    # App Store Connect で既に使用可能な最新のビルドと照合します。
     # ビルド番号を１増やします。 使用可能なビルドがない場合は、
     # 1 から始めます。
     increment_build_number(
@@ -107,7 +107,7 @@ platform :ios do
         live: false
       ) + 1,
     )
-    # 配布コード署名を設定し、アプリをビルドします。
+    # 配信コード署名を設定し、アプリをビルドします。
     match(type: "appstore")
     gym(scheme: "HelloCircle")
     #App Store Connect にバイナリをアップロードします。
@@ -119,12 +119,12 @@ platform :ios do
 end
 ```
 
-### Deploying to TestFlight
+### TestFlight へのデプロイ
 {: #deploying-to-testflight }
 
-TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the `pilot` action to make managing TestFlight distribution simple.
+TestFlight は、App Store Connect と連動した Apple のベータ版配信サービスです。 fastlane は、TestFlight の配信管理が簡単に行える`pilot` アクションを提供しています。
 
-The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary. Pilot has lots of customisation options to help deliver apps to TestFlight, so it is highly recommended to check out the [pilot documentation](https://docs.fastlane.tools/actions/pilot/) for further information.
+下記の例では、 iOS バイナリを自動的にビルド、署名、アップロードするように fastlane を設定する方法を紹介しています。 Pilot には TestFlight にアプリを配信するためのカスタムオプションがたくさんあります。その詳細を [Pilot のドキュメント](https://docs.fastlane.tools/actions/pilot/)で詳細をぜひご確認ください。
 
 ```ruby
 # fastlane/Fastfile
@@ -137,21 +137,21 @@ platform :ios do
 
   desc "Upload to Testflight"
   lane :upload_testflight do
-    # Get the version number from the project and check against
-    # the latest build already available on TestFlight, then
-    # increase the build number by 1. If no build is available
-    # for that version, then start at 1
+    # プロジェクトからバージョン番号を取得します。
+    # TestFlight で既に利用可能な最新のビルドと照合します。
+    # ビルド番号を 1 増やします。 使用可能なビルドがない場合は、
+    # 1 から始めます。
     increment_build_number(
       build_number: latest_testflight_build_number(
         initial_build_number: 1,
         version: get_version_number(xcodeproj: "HelloWorld.xcodeproj")
       ) + 1,
     )
-    # Set up Distribution code signing and build the app
+    # 配信コード署名を設定し、アプリをビルドします。
     match(type: "appstore")
     gym(scheme: "HelloWorld")
-    # Upload the binary to TestFlight and automatically publish
-    # to the configured beta testing group
+    # TestFlight にバイナリをアップロードし、
+    # 設定したベータ版のテストグループに自動的にパブリッシュします。
     pilot(
       distribute_external: true,
       notify_external_testers: true,
@@ -162,19 +162,19 @@ platform :ios do
 end
 ```
 
-## Deploying to Firebase
+## Firebase へのデプロイ
 {: #deploying-to-firebase }
 
-Firebase is a distribution service from Google. Deploying to Firebase is simplified by installing the [Firebase app distribution plugin](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution).
+Firebaseは、Google が提供する配信サービスです。 Firebase へのデプロイは、 [Firebase アプリ配信プラグイン](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution)をインストールすることで簡単に行うことができます。
 
-### Fastlane Plugin Setup
+### Fastlane プラグインのセットアップ
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
+プロジェクトにプラグインをセットアップするには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin firebase_app_distribution` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
-### Generating a CLI Token
+### CLI トークンの生成
 {: #generating-a-cli-token }
 
 Firebase requires a token to used during authentication. To generate the token, we need to use the Firebase CLI and a browser - as CircleCI is a headless environment, we will need to generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
