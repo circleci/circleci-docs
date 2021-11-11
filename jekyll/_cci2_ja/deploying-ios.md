@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-ここでは、CircleCI 上で iOS アプリケーションを配信サービスに自動的にデプロイするための fastlane の設定方法について説明します。
+ここでは、CircleCI 上で iOS アプリを配信サービスに自動的にデプロイするための fastlane の設定方法について説明します。
 
 * 目次
 {:toc}
@@ -19,16 +19,16 @@ version:
 {: #overview }
 {:.no_toc}
 
-Utilising Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta, or release, version of an iOS app to the intended audience.
+fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配布するために必要な手動のステップが不要になります。
 
-These deployment lanes can be combined with testing lanes so that the app is automatically deployed upon a successful build and test.
+デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリは自動的にデプロイされます。
 
-**Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/).
+**注意:** 以下のデプロイ例を使用するには、コード署名がプロジェクト用に設定されている必要があります。 コード署名のセットアップ方法については、 [コード署名に関するドキュメント]({{ site.baseurl }}/2.0/ios-codesigning/)をご覧ください。
 
-## Best practices
+## ベストプラクティス
 {: #best-practices }
 
-### Using Git branches
+### Git ブランチの使用
 {: #using-git-branches }
 
 It is advisable to only run your release lane on a specific branch of your git repository, for example a dedicated release/beta branch. This will allow releases on only successful merges into the specified branch, prevent a release every time a push is committed during your development phase. In turn this will also reduce job completion time as uploading to an external service may take some time depending on the size our the iOS app binary. For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) documentation.
