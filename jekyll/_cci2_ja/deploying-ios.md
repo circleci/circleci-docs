@@ -19,11 +19,11 @@ version:
 {: #overview }
 {:.no_toc}
 
-fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信するために必要な手動のステップが不要になります。
+fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版の対象ユーザーへの配信に必要な手動ステップが不要になります。
 
-デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリは自動的にデプロイされます。
+デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**注意:** 以下のデプロイ例を使用するには、コード署名がプロジェクト用に設定されている必要があります。 コード署名のセットアップ方法については、 [コード署名に関するドキュメント]({{ site.baseurl }}/2.0/ios-codesigning/)をご覧ください。
+**注意:** 以下のデプロイ例を使用するには、コード署名がプロジェクト用に設定されている必要があります。 コード署名の設定方法については、 [コード署名に関するドキュメント]({{ site.baseurl }}/2.0/ios-codesigning/)をご覧ください。
 
 ## ベストプラクティス
 {: #best-practices }
@@ -31,7 +31,7 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 ### Git ブランチの使用
 {: #using-git-branches }
 
-リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローのセットアップ方法については、[ブランチレベルでのジョブの実行]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution)をご覧ください。
+リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローの設定方法については、[ブランチレベルでのジョブの実行]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution)をご覧ください。
 
 ### ビルド番号の設定
 {: #setting-the-build-number }
@@ -167,10 +167,10 @@ end
 
 Firebaseは、Google が提供する配信サービスです。 Firebase へのデプロイは、 [Firebase アプリ配信プラグイン](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution)をインストールすることで簡単に行うことができます。
 
-### Fastlane プラグインのセットアップ
+### Fastlane プラグインの設定
 {: #fastlane-plugin-setup }
 
-プロジェクトにプラグインをセットアップするには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin firebase_app_distribution` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
+プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin firebase_app_distribution` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
 **注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
@@ -246,14 +246,14 @@ workflows:
 
 Visual Studio App Center (正式名称: HockeyApp) は、マイクロソフトの配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
 
-### Fastlane プラグインのセットアップ
+### Fastlane プラグインの設定
 {: #fastlane-plugin-setup }
 
-プロジェクトにプラグインをセットアップするには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin appcenter` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
+プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin firebase_app_distribution` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
 **注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
-### App Center のセットアップ
+### App Center の設定
 {: #app-center-setup }
 
 まず、VS App Center でアプリを作成する必要があります。
@@ -291,10 +291,10 @@ desc "Upload to VS App Center"
     increment_build_number(
       build_number: "$CIRCLE_BUILD_NUM"
     )
-    # Adhoc コード署名をセットアップし、アプリをビルドします。
+    # Adhoc コード署名を設定し、アプリをビルドします。
     match(type: "adhoc")
     gym(scheme: "HelloWorld")
-    # 必要な情報をセットアップし、
+    # 必要な情報を設定し、
     # アプリのバイナリを VS App Center にアップロードします。
     appcenter_upload(
       api_token: ENV[VS_API_TOKEN],
@@ -312,7 +312,7 @@ end
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の任意のイメージ](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
 2. そのページの API キーのセクションで API キーをコピーします。
