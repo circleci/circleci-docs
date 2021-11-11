@@ -88,8 +88,6 @@ Details about your storage and network transfer usage can be viewed on your Plan
 * Storage data activity can be found on the Objects tab.
 * Total storage volume data can be found on the Storage tab.
 
-![plan-usage-screen]( {{ site.baseurl }}/assets/img/docs/screen-plan-usage.png)
-
 Details about individual step storage and network transfer usage can be found in the step output on the Jobs page as seen below.
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
