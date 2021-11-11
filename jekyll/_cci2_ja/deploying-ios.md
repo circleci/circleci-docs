@@ -83,7 +83,7 @@ app_identifier "com.example.HelloWorld"
 
 下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する `deliver` アクションは、App Store への申請プロセスを自動化する強力なツールです。
 
-また、メタデータやスクリーンショット ([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
+また、メタデータやスクリーンショット ([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の [配信に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
 
 ```ruby
 # fastlane/Fastfile
@@ -96,10 +96,10 @@ platform :ios do
 
   desc "Upload Release to App Store"
   lane :upload_release do
-    # Get the version number from the project and check against
-    # the latest build already available on App Store Connect, then
-    # increase the build number by 1. If no build is available
-    # for that version, then start at 1
+    # プロジェクトからバージョン番号を取得します。
+    # App Store Connect に既に使用可能な最新のビルドと照合します。
+    # ビルド番号を１増やします。 使用可能なビルドがない場合は、
+    # 1 から始めます。
     increment_build_number(
       build_number: app_store_build_number(
         initial_build_number: 1,
@@ -107,10 +107,10 @@ platform :ios do
         live: false
       ) + 1,
     )
-    # Set up Distribution code signing and build the app
+    # 配布コード署名を設定し、アプリをビルドします。
     match(type: "appstore")
     gym(scheme: "HelloCircle")
-    # Upload the binary to App Store Connect
+    #App Store Connect にバイナリをアップロードします。
     deliver(
       submit_for_review: false,
       force: true
