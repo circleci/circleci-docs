@@ -49,7 +49,12 @@ class OptimizelyClient {
       }
 
       // First we check that the required options are provided
-      if (!options || !options.experimentKey || !options.groupExperimentName) {
+      if (
+        !options ||
+        !options.experimentKey ||
+        !options.groupExperimentName ||
+        !options.experimentContainer
+      ) {
         return reject({ error: 'Missing required options' });
       }
 
@@ -117,6 +122,7 @@ class OptimizelyClient {
               trackExperimentViewed(
                 orgId,
                 options.experimentKey,
+                options.experimentContainer,
                 experimentId,
                 variationName,
                 variationId,
@@ -146,10 +152,16 @@ const trackExperimentViewed = (
   orgId,
   experimentKey,
   experimentId,
+  experimentContainer,
   variationName,
   variationId,
   userId,
 ) => {
+  // don't track user if the experiment is not present in the current page
+  if (!$(experimentContainer).length) {
+    return;
+  }
+
   if (!isExperimentAlreadyViewed(orgId, experimentKey)) {
     const properties = {
       id: uuidv4(),
