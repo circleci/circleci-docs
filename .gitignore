@@ -2,6 +2,7 @@
 .bundle/
 .metals
 .vscode
+.idea
 .byebug_history
 .jekyll-metadata
 .jekyll-cache/
