@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [getting started guide]({{ site.baseurl}}/2.0/getting-started/).
+This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/2.0/getting-started/).
 
 * TOC
 {:toc}
