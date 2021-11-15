@@ -14,7 +14,7 @@ version:
 
 コード カバレッジは、アプリケーションがどの程度テストされたかを示します。
 
-CircleCI は、組み込みの CircleCI 機能をオープンソース ライブラリと組み合わせて、またはパートナーのサービスを使用して、コード カバレッジ レポートのさまざまなオプションを提供しています。
+CircleCI は、組み込まれている CircleCI 機能をオープンソース ライブラリと組み合わせて、またはパートナーのサービスを使用して、コード カバレッジ レポートのさまざまなオプションを提供しています。
 
 * 目次
 {:toc}
@@ -23,16 +23,17 @@ CircleCI は、組み込みの CircleCI 機能をオープンソース ライブ
 # CircleCI でのカバレッジの表示
 {: #viewing-coverage-on-circleci }
 
-You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's [artifacts directory]({{ site.baseurl }}/2.0/artifacts/). Code coverage reports will then be stored as build artifacts, from where they can be viewed or downloaded. See our [build artifacts]({{ site.baseurl }}/2.0/artifacts/) guide for more on accessing coverage reports.
+コード カバレッジ レポートを直接 CircleCI にアップロードできます。 最初に、プロジェクトにカバレッジ ライブラリを追加し、CircleCI の[アーティファクト ディレクトリ]({{ site.baseurl }}/2.0/artifacts/)にカバレッジ レポートを書き込むようにビルドを設定します。 コード カバレッジ レポートはビルド アーティファクトとして、参照またはダウンロード可能な場所に保存されます。 カバレッジ レポートへのアクセス方法の詳細については、[ビルド アーティファクトに関するドキュメント]({{ site.baseurl }}/ja/2.0/artifacts/)を参照してください。
 
-![[Artifacts (アーティファクト)] タブのスクリーンショット]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+![[Artifacts (アーティファクト)] タブのスクリーンショット]( {{ site.baseurl }}/assets/img/docs/artifacts.png
+)
 
 言語別にカバレッジ ライブラリを構成する例をいくつか示します。
 
 ## Ruby
 {: #ruby }
 
-[Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code coverage library. To get started, add the `simplecov` gem to your `Gemfile`
+[SimpleCov](https://github.com/colszowka/simplecov) は、よく使用される Ruby コードカバレッジライブラリです。 まず、`simplecov` gem を `Gemfile` に追加します。
 
 ```
 gem 'simplecov', require: false, group: :test
