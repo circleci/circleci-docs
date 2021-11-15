@@ -22,7 +22,7 @@ toc::[]
 
 === 前提条件
 * ランナーのデプロイ先で Kubernetes クラスタが稼働している。
-* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
+* Go through the steps to <<runner-installation#authentication, create and authenticate a CircleCI runner resource class>>.
 
 === CircleCI Server のインストール
 
@@ -47,8 +47,8 @@ $ helm upgrade -f values.yaml "circleci-runner" ./ \
 == 使用方法
 
 . https://github.com/CircleCI-Public/circleci-runner-k8sにあるリポジトリをクローンします。
-. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
-. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
+. Modify the chart's values in `+values.yaml+` per your needs. 「<<chart-values, チャートの値>>」を参照してください。
+. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication, authentication step>>:
 +
 ....
 $ helm install "circleci-runner" ./ \
@@ -92,9 +92,9 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 | `+circleci/runner+`
 `+launch-agent+`
 | ○
-| You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
+| You can <<runner-installation#docker-installation, extend a custom Docker image>> from the CircleCI default runner and use that instead.
 
-| `+replicaCount+`  | 1         | ○         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<limitationspending-work,Pending Work>>.
+| `+replicaCount+`  | 1         | ○         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 「<<limitationspending-work, 制限事項/今後解決予定の問題>>」を参照してください。
 
 | `+resourceClass+` | -         | ○         | ランナー用に作成したリソース クラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
