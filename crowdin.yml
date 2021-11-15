@@ -1,4 +1,5 @@
 commit_message: "New Japanese Translations"
+append_commit_message: false
 
 files:
   - source: /jekyll/_cci2/*.md
