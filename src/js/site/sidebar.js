@@ -1,3 +1,5 @@
+import { isElementInViewport } from '../utils';
+
 // making sidebar stick when touching footer
 // this improves the visual experience while interacting with the docs site
 (function () {
@@ -113,9 +115,24 @@
 function highlightTocOnScroll() {
   const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
   const sidebarItemsText = sidebarItems.map((i) => i.innerText);
+  let headlinesToIgnore = ['no_toc', 'toc-heading', 'help-improve-header'];
   let all_headlines = Array.from(
-    document.querySelectorAll('h1, h2, h3, h4, h5, h6'),
-  ).filter((item) => ![...item.classList].includes('no_toc'));
+    document.querySelectorAll('h2, h3, h4, h5, h6'),
+  ).filter((item) => {
+    return ![...item.classList].some((className) =>
+      headlinesToIgnore.includes(className),
+    );
+  });
+
+  // on click - add active class to clicked sidebar item.
+  sidebarItems.forEach((clickedEntry) => {
+    clickedEntry.addEventListener('click', () => {
+      sidebarItems.forEach((el) => {
+        el.classList.remove('active');
+      });
+      clickedEntry.classList.add('active');
+    });
+  });
 
   var observer = new IntersectionObserver(
     function (entry) {
@@ -128,7 +145,7 @@ function highlightTocOnScroll() {
         let intersectingEntry = entry[0].target;
         let indexOfCurrentHeadline = all_headlines.indexOf(intersectingEntry);
         sidebarItems.forEach((el) => el.classList.remove('active'));
-        sidebarItems[indexOfCurrentHeadline - 1].classList.add('active');
+        sidebarItems[indexOfCurrentHeadline].classList.add('active');
       }
     },
     { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
@@ -137,6 +154,19 @@ function highlightTocOnScroll() {
   all_headlines.forEach((headline) => {
     observer.observe(headline);
   });
+
+  //
+  // on page load, find the highest item in the article view port that is also
+  // in the sidebar and then add active class to it.
+  const firstHeadlineInViewport = all_headlines.find(isElementInViewport);
+  if (firstHeadlineInViewport) {
+    sidebarItems.forEach((item) => {
+      if (item.textContent === firstHeadlineInViewport.textContent) {
+        item.classList.add('active');
+      }
+    });
+  }
+
 }
 
 highlightTocOnScroll();
