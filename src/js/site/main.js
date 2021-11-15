@@ -346,6 +346,7 @@ $(document).ready(function () {
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_share_section_icon_test',
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
+    experimentContainer: '.article-container',
   }).then((variation) => {
     if (variation === 'treatment') {
       document.querySelectorAll('.fa-link').forEach((icon) => {
