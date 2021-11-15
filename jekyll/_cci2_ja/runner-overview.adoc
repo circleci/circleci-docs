@@ -95,7 +95,7 @@ CircleCI ランナーのインストール後、ランナーは `circleci.com` �
 
 == SSH を使用したデバッグ
 
-CircleCI ランナーでは、デバッグのために SSHでジョブの再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+CircleCI ランナーでは、デバッグのために SSHでジョブの再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#, Debugging with SSH>>.
 
 NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-installation.adoc#runner-ssh-advertise_addr[CircleCI ランナーのインストール]をご覧くださいい。
 
