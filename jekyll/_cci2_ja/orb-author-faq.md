@@ -20,7 +20,7 @@ version:
 
 * 回答: お客様は組織オーナーまたは管理者でない可能性があります。
 
-組織が要求できる名前空間は 1 つだけです。 組織の名前空間を要求するには、認証中のユーザーがその組織内でオーナーまたは管理者の権限を持っている必要があります。
+組織が要求できる名前空間は 1 つだけです。 組織の名前空間を要求するには、認証を行うユーザーがその組織内でオーナーまたは管理者の権限を持っている必要があります。
 
 必要な権限レベルがない場合、下記のようなエラーが表示されることがあります。
 
@@ -28,24 +28,24 @@ version:
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-詳細については、[Orb CLI の権限の一覧表]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix)を参照してください。
+詳細については、[Orb CLI の権限リスト]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix)を参照してください。
 
 ## Orb の削除
 {: #deleting-orbs }
 
 * 作成した Orb を削除できますか？
 
-* 回答: 削除できません。 Orb はデフォルトで公開されており、１つのバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において当然同じ動作をすると想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
+* 回答: 削除できません。 Orb はデフォルトで公開されており、１つのバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において同じ動作をすると想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
 
-ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI から見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば、現在はメンテナンスを行っていない Orb などに適しています。
+ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI からは見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば現在はメンテナンスを行っていない Orb などに適しています。
 
 ```
 circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
 
-**Use caution when unlisting Private Orbs.**
+**プライベート Orb をリストから除外する際はご注意ください。**
 <br/>
-Currently the `orb source` and `orb info` CircleCI CLI commands do not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
+CircleCI CLI コマンドの `orb source` および `orb info` は、リストにあってもなくても、 現在すべてのプライベート Orb において動作しません。 So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
 {: class="alert alert-warning"}
 
 ## API トークンの保護
