@@ -1,4 +1,5 @@
 ---
+description: "Get answers to questions like: Does Server 3.0 have a data retention policy? What control is granted over Nomad certificates? and What do the Application Status options in KOTS mean?"
 version:
 - Server v3.x
 - Server Admin
