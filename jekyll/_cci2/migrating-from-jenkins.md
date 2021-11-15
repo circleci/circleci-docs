@@ -83,7 +83,7 @@ Talking about containerization in build systems can be complicated because arbit
 {:.no_toc}
 
 
-If you use a tool like Docker in your workflow, you will likely also want to run it on CI. Jenkins doesn’t provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
+If you use a tool like Docker in your workflow, you will likely also want to run it on CI. Jenkins does not provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
 
 Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in you `config.yml` file. See the [Choosing an Executor Type]( {{ site.baseurl }}/2.0/executor-types/) and [Docker]( {{ site.baseurl }}/2.0/build/#docker) documents for more info.
 
