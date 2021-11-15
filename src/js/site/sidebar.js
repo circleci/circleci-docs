@@ -118,11 +118,12 @@ function highlightTocOnScroll() {
   let headlinesToIgnore = ['no_toc', 'toc-heading', 'help-improve-header'];
   let all_headlines = Array.from(
     document.querySelectorAll('h2, h3, h4, h5, h6'),
-  ).filter((item) => {
-    return ![...item.classList].some((className) =>
-      headlinesToIgnore.includes(className),
-    );
-  });
+  ).filter(
+    (item) =>
+      ![...item.classList].some((className) =>
+        headlinesToIgnore.includes(className),
+      ),
+  );
 
   // on click - add active class to clicked sidebar item.
   sidebarItems.forEach((clickedEntry) => {
@@ -166,7 +167,6 @@ function highlightTocOnScroll() {
       }
     });
   }
-
 }
 
 highlightTocOnScroll();
