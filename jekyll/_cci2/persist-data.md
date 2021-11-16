@@ -20,7 +20,7 @@ This guide gives an overview of the various ways to persist data within and beyo
 
 **Caches created via the save_cache step are stored for up to 15 days.**
 
-Caching persists data between the same job in different Workflow builds, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future instances will run faster as they will not need to redo the work (provided your cache has not been invalidated). 
+Caching persists data between the same job in different Workflow builds, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future instances will run faster as they will not need to redo the work (provided your cache has not been invalidated).
 
 A prime example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like yarn install will only need to download new dependencies, if any, and not redownload everything on every build.
 
@@ -153,7 +153,7 @@ If you must upload a large artifact you can upload them to your own bucket at no
 #### Caching unused or superfluous dependencies
 {: #caching-unused-or-superfluous-dependencies }
 
-Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies. 
+Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies.
 
 For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from `node_modules`.
 
