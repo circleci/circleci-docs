@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
-description: "Example of Configuring PostgreSQL"
+description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 order: 35
 version:
 - Cloud

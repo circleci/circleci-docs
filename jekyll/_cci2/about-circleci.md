@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "About CircleCI"
 short-title: "Overview"
-description: "Starting point for CircleCI docs"
+description: "This document is a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments."
 categories: [getting-started]
 order: 1
 version:

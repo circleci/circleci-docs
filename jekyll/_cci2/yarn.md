@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Using Yarn (an NPM alternative) on CircleCI"
 short-title: "Yarn Package Manager"
 categories: [how-to]
-description: "How to use the Yarn package manager on CircleCI."
+description: "Yarn is an open-source package manager for JavaScript. Learn how to use Yarn in CircleCI config and with caching to speed up builds."
 version:
 - Cloud
 - Server v3.x
@@ -12,7 +12,7 @@ version:
 
 [Yarn](https://yarnpkg.com/) is an open-source package manager for JavaScript.
 The packages it installs can be cached.
-This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
+This can potentially speed up builds, but, more importantly, can reduce errors related to network connectivity.
 
 ## Using Yarn in CircleCI
 {: #using-yarn-in-circleci }
