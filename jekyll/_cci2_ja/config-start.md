@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "設定ファイル"
-description: "このガイドでは、CircleCI で作業の中心 config.yml ファイルを使用して決定論的ビルドの関して説明しています。 決定論的ビルド(deterministic)とは、コミット時にも、翌日にも、あるいは翌月であっても実行することができ、かつ、まったく同じ結果を生成して終了するビルドを示しています。"
+description: "CircleCI 2.0 設定ファイルのランディング ページ"
 version:
   - Cloud
   - Server v2.x

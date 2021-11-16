@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "概要"
 short-title: "概要"
-description: "このページでは、CircleCIを活用してソフトウェアやアプリのビルド、テスト、デプロイをする方法や導入メリットや継続的インテグレーション（Continuous Integration）に関する情報と概要を詳しく説明しています。"
+description: "CircleCI 2.0 入門ガイド"
 categories:
   - getting-started
 order: 1
