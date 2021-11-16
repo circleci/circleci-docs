@@ -10,7 +10,7 @@ version:
 ---
 
 This document describes how to get started with continuous integration on
-**macOS build environments** on CircleCI. If you still need to get acquainted
+**macOS execution environments** on CircleCI. If you still need to get acquainted
 with CircleCI, it is recommended to checkout the [getting started
 guide]({{site.baseurl }}/2.0/getting-started). You may also wish to visit the
 documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an
@@ -28,7 +28,7 @@ To follow along with this document you will need:
 ## Overview of the macOS executor
 {: #overview-of-the-macos-executor }
 
-The macOS build environment (or `executor`) is used for iOS and macOS
+The macOS execution environment (or `executor`) is used for iOS and macOS
 development, allowing you to test, build, and deploy macOS and iOS applications on
 CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
 
@@ -40,9 +40,9 @@ Before we get to setting up the macOS executor, we will need to setup our exampl
 The example application is a simple mac app - it runs a 5 minute
 timer and contains a single unit test (real-world applications
 will be far more complex; this app simply serves as an introduction to the macOS
-build environment).
+execution environment).
 
-As a user getting to know the macOS build environment, our ideal scenario is for CircleCI to help with the following:
+As a user getting to know the macOS execution environment, our ideal scenario is for CircleCI to help with the following:
 
 - Run tests using XCode on the macOS VM whenever we push code.
 - Create and upload the compiled application as an artifact after tests have run successfully.
