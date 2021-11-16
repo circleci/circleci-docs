@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
-const FORCE_STORAGE_KEY = 'growth-experiments-force-all'; // eslint-disable-line no-unused-vars
 const optimizelyLogLevel = isProduction() ? 'error' : 'info';
 optimizelySDK.setLogLevel(optimizelyLogLevel);
 
@@ -151,8 +150,8 @@ class OptimizelyClient {
 const trackExperimentViewed = (
   orgId,
   experimentKey,
-  experimentId,
   experimentContainer,
+  experimentId,
   variationName,
   variationId,
   userId,

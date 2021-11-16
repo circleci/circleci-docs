@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Example Public Repos"
 short-title: "Example Public Repos"
-description: "Starting point for CircleCI docs"
+description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
 categories: [getting-started]
 order: 1
 version:
@@ -62,7 +62,7 @@ Example Description | Project | config.yml link
 Bazel build and testing with `xvfb` | **Angular** is a development platform for building mobile and desktop web applications using Typescript/JavaScript and other languages. | [angular/.circleci/config.yml](https://github.com/angular/angular/blob/master/.circleci/config.yml)
 Salesforce DX | This repository shows one way you can successfully set up **Salesforce DX** with CircleCI. | [sfdx-circleci/.circleci/config.yml](https://github.com/forcedotcom/sfdx-circleci/blob/master/.circleci/config.yml)
 Golang build with `junit` and Kubernetes tests for prod and master job workflow | The **Azure Container Service Engine** (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. | [acs-engine/.circleci/config.yml](https://github.com/Azure/acs-engine/blob/master/.circleci/config.yml)
-Go and Node build, package, and deploy run | **Ignition** is a landing page for developers to self-service their way onto your Pivotal Cloud Foundry (PCF) deployment(s). | [ignition/.circleci/config.yml](https://github.com/pivotalservices/ignition/blob/master/.circleci/config.yml)
+Go and Node build, package, and deploy run | **Ignition** is a landing page for developers to self-service their way onto your Pivotal Cloud Foundry (PCF) deployment(s). | [ignition/.circleci/config.yml](https://github.com/ktpv/ignition/blob/master/.circleci/config.yml)
 Java build and publish with `sbt` | **Scio** is a Scala API for Apache Beam and Google Cloud Dataflow inspired by Apache Spark and Scalding. | [scio/.circleci/config.yml](https://github.com/spotify/scio/blob/master/.circleci/config.yml)
 Javascript Node frontend build with `junit` and end-to-end Webdriver screeshot tests | This is the frontend code for **cBioPortal** using React, MobX and TypeScript. | [cbioportal-frontend/.circleci/config.yml](https://github.com/cBioPortal/cbioportal-frontend/blob/master/.circleci/config.yml)
 Node and Yarn with manual deploy gate | **Docusaurus** is a project for easily building, deploying, and maintaining open source project websites. | [Docusaurus/.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml)

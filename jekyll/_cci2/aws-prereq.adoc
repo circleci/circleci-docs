@@ -1,4 +1,5 @@
 ---
+description: "This article describes the prerequisite steps for installing CircleCI server v2 on AWS using Terraform."
 version:
 - Server v2.x
 ---
