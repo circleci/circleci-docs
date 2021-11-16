@@ -20,7 +20,7 @@ We work where you work: Linux, macOS, Android, and Windows - on the cloud or on 
 **Continuous integration** is a practice that encourages developers to integrate their code into a `main` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
 Continuous integration is a key step to digital transformation.
- 
+
 Every developer commits daily to a shared mainline. Every commit triggers an automated build and test. If build and test fails, it is repaired quickly - within minutes.
 
 **Why?** Continuous integration improves team productivity, efficiency, confidence, and happiness. Find problems and solve them quickly. Release higher quality, more stable products.
@@ -69,7 +69,7 @@ See the [CircleCI Operations Guide]({{site.baseurl}}/2.0/server-3-overview/) for
 ## Pricing and trial options
 {: #pricing-and-trial-options }
 
-Visit CircleCI's [Pricing page](https://circleci.com/pricing/) to view free and paid options. 
+Visit CircleCI's [Pricing page](https://circleci.com/pricing/) to view free and paid options.
 
 To get started with a free trial, visit the [Sign Up and Try CircleCI]({{site.baseurl}}/2.0/first-steps/) page and get set up with the hosted cloud application.
 
