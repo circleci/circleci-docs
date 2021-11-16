@@ -23,7 +23,7 @@ or using partners.
 
 
 ## Viewing Coverage on CircleCI
-{: ##viewing-coverage-on-circleci }
+{: #viewing-coverage-on-circleci }
 
 You can upload your code coverage reports directly to CircleCI. First, add a
 coverage library to your project and configure your build to write the coverage
