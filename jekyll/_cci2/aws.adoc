@@ -1,4 +1,5 @@
 ---
+description: "This is document provides a step by step guide to installing CircleCI Server v2.x with Terraform"
 version:
 - Server v2.x
 ---

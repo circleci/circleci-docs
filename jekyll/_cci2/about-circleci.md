@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "About CircleCI"
-description: "Starting point for CircleCI docs"
+description: "This document is a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments."
 categories: [getting-started]
 order: 1
 version:
@@ -10,9 +10,9 @@ version:
 - Server v2.x
 ---
 
-Our mission is to empower technology-driven organizations to do their best work. We want to make engineering teams more productive with software builds, tests, and deployments through intelligent automation.
+Our mission is to empower technology-driven organizations to do their best work -- and make engineering teams more productive. Build, test, and deploy using intelligent automation.
 
-We work where you work: Linux, macOS, Android, and Windows - on the cloud or on your server. CircleCI provides enterprise-class support and services, with the flexibility of a startup.
+We work where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers. CircleCI provides enterprise-class support and services, with the flexibility of a startup.
 
 ## What is continuous integration?
 {: #what-is-continuous-integration }
@@ -21,7 +21,7 @@ We work where you work: Linux, macOS, Android, and Windows - on the cloud or on 
 
 Continuous integration is a key step to digital transformation.
 
-Every developer commits daily to a shared mainline. Every commit triggers an automated build and test. If build and test fails, it is repaired quickly - within minutes.
+Every developer commits daily to a shared mainline. Every commit triggers automated tests and builds. If these fail, they can be repaired quickly - within minutes.
 
 **Why?** Continuous integration improves team productivity, efficiency, confidence, and happiness. Find problems and solve them quickly. Release higher quality, more stable products.
 
@@ -41,7 +41,8 @@ CircleCI may be configured to deploy code to various environments, including:
 - Microsoft Azure
 - Heroku
 
-Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
+//FIX THIS SENTENCE -- ADD SOMETHING ABOUT ORBS?
+Other cloud service deployments can be scripted using SSH or by installing the API client of the service with your job configuration.
 
 ## Benefits of CircleCI
 {: #benefits-of-circleci }
@@ -64,7 +65,7 @@ As a developer using CircleCI you can:
 
 As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses [Nomad](https://www.nomadproject.io/) for scheduling.
 
-See the [CircleCI Operations Guide]({{site.baseurl}}/2.0/server-3-overview/) for complete server documentation.
+See the [CircleCI Operations and Installation Guides]({{site.baseurl}}/2.0/server-3-overview/) for complete server documentation.
 
 ## Pricing and trial options
 {: #pricing-and-trial-options }
@@ -75,18 +76,18 @@ To get started with a free trial, visit the [Sign Up and Try CircleCI]({{site.ba
 
 Organizations on the free plan are given free credits to use on open source projects. Visit [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for more information about free containers for public open source projects.
 
-## Additional information
-{: #additional-information }
-
-Any app that runs on Linux, Android, or macOS is supported. Further references:
-- [Supported Languages Guide]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides
-- [Core Features]({{site.baseurl}}/2.0/features/) for detailed descriptions and links to procedural documentation
-
 ## Learn More
 {: #learn-more }
-Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021) with CircleCI academy to learn more.
 
-Read more on our blog:
+### In the Docs:
+- [Concepts]({{site.baseurl}}/2.0/concepts/) for basic concepts of CI/CD pipeline management
+- [Tutorials]({{site.baseurl}}/2.0/tutorials/ ) for platform specific tutorials
+
+### On CircleCI Academy:
+- [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021)
+- [General Developer Training](https://academy.circleci.com/general-developer-training?access_code=public-2021)
+
+### On our blog:
 - [Config best practices: dependency caching](https://circleci.com/blog/config-best-practices-dependency-caching/)
 - [Automate and scale your CI/CD with CircleCI orbs](https://circleci.com/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/)
 - [How to secure your CI pipeline](https://circleci.com/blog/secure-ci-pipeline/)

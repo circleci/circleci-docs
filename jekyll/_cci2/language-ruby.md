@@ -60,7 +60,7 @@ for the sample application.
 version: 2.1 # Use 2.1 to enable using orbs and other features.
 
 # Declare the orbs that we'll use in our config.
-# read more about orbs: https://circleci.com/docs/2.0/using-orbs/
+# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2

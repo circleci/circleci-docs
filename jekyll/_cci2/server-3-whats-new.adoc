@@ -1,4 +1,5 @@
 ---
+description: "Server 3.x is now generally available. Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more."
 version:
 - Server v3.x
 - Server Admin
@@ -112,7 +113,7 @@ The new Traefik pos will then start ot schedule correctly.
 
 * Customers who require a fully private installation can now access a setting in the KOTS admin console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a work-around will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
 * Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS admin console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
-* We have expanded the machine build environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
+* We have expanded the machine execution environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
 * The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
 * We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server. 
 * You can now supply a custom Linux AMI for VM service.
