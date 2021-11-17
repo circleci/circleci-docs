@@ -146,7 +146,7 @@ Artifacts that are text can be compressed at very little cost.
 
 If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
 
-If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
+If your pipelines build a binary, uberjar, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
 
 If you must upload a large artifact you can upload them to your own bucket at no cost.
 
