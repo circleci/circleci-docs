@@ -53,7 +53,7 @@ CircleCI does not infer from your project and is moving toward a model of smart 
 {:.no_toc}
 Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
-The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same content as the Ubuntu Trusty 14.04 image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it’s less ideal for local testing.
+See the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) section for the latest image to use. These images have the same content as the image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it is less than ideal for local testing.
 
 The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
 
