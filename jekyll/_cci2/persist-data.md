@@ -130,7 +130,7 @@ For example, when looking for opportunities to reduce data usage, consider wheth
 
 In the cases of caches and workspaces this can be quite easy to compare - does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
 
-Please see below for examples of storage and network optimization opportunities through reducing artifact, cache, and workspace traffic.
+See below for examples of storage and network optimization opportunities through reducing artifact, cache, and workspace traffic.
 
 #### Check which artifacts are being uploaded
 {: #check-which-artifacts-are-being-uploaded }
