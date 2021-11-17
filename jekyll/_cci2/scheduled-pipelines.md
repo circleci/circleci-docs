@@ -27,15 +27,13 @@ Schedule pipelines allow users to trigger pipelines periodically based on a sche
 
 Since the scheduled run is based on pipelines, scheduled pipelines have all the features that come with using pipelines:
 
-- Can control the actor that's associated with the pipeline, which can enable the use of restricted contexts
-- Can use dynamic config via setup workflows
-- Can modify the schedule without having to change the config.yml
-- Can interact with auto-cancelling of pipelines
-- Can specify pipeline parameters associated with a schedule
+- Control the actor associated with the pipeline, which can enable the use of restricted contexts
+- Use dynamic config via setup workflows
+- Modify the schedule without having to edit config.yml
+- Interact with auto-cancelling of pipelines
+- Specify pipeline parameters associated with a schedule
 
-CircleCI has APIs that allows users to create, view, edit, and delete scheduled pipelines.
-
-**Note**: *At this time, the UI for scheduled pipelines is not available. It will become available soon.
+CircleCI has APIs that allows users to create, view, edit, and delete scheduled pipelines. At this time, a UI for scheduled pipelines is not yet available.
 
 ## Getting started with scheduled pipelines in CircleCI
 {: #getting-started }
@@ -43,10 +41,10 @@ CircleCI has APIs that allows users to create, view, edit, and delete scheduled 
 ### Start from scratch
 {: #start-from-scratch }
 
-If your project has no scheduled workflows and would like to try out scheduled pipelines:
+If your project has no scheduled workflows and you would like to try out scheduled pipelines:
 
-- Have your CCI token ready or create a new one following [these steps](https://circleci.com/docs/2.0/managing-api-tokens/)
-- Create a new schedule using the new pipelines schedule API, for example:
+1. Have your CCI token ready, or create a new token by following [these steps](https://circleci.com/docs/2.0/managing-api-tokens/).
+2. Create a new schedule using the API, for example:
 
 ```sh
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
@@ -68,53 +66,56 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-- Check out the `schedule` section under the [open-api docs](https://circleci.com/docs/api/v2/) for additional information
+For additional information, refer to the `schedule` section under the [open-api docs](https://circleci.com/docs/api/v2/).
 
 ### Migrating from scheduled workflows to scheduled pipelines
 {: #migrate-from-scheduled-workflows }
 
-Currently, using scheduled workflows has numerous shortcomings. Some of them are listed below:
+Currently, using scheduled workflows has some limitations:
 
 - Cannot control the actor, so scheduled workflows can't use restricted contexts
 - Cannot control the interaction with auto-cancelling of pipelines
-- Cannot use scheduled workflow together with dynamic config without hakcy workarounds
+- Cannot use scheduled workflow together with dynamic config without complex workarounds
 - Cannot change or cancel scheduled workflows on a branch without triggering a pipeline
 - Cannot kick off test runs for scheduled workflows without changing the schedule
 - Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks
 
-To migrate from scheduled workflows to scheduled pipelines, one can follow the steps below:
+To migrate from scheduled workflows to scheduled pipelines, follow the steps below:
 
-- Find the scheduled trigger in your project's .circleci/config.yml
-    - For example, it might look like this one:
+1. Find the scheduled trigger in your project's `.circleci/config.yml`
+    For example, it might look like:
 
-```yaml
-daily-run-workflow:
-  triggers:
-    - schedule:
-        # Every day, 0421Z.
-        cron: "21 4 * * *"
-        filters:
-          branches:
-            only:
-              - main
-  jobs:
-    - test
-    - build
-```
+    ```yaml
+    daily-run-workflow:
+      triggers:
+        - schedule:
+            # Every day, 0421Z.
+            cron: "21 4 * * *"
+            filters:
+              branches:
+                only:
+                  - main
+      jobs:
+        - test
+        - build
+    ```
+2. Interpret the frequency your trigger needs to run from the cron expression.
+3. Use the same step from the [Start from scratch](#start-from-scratch) section above to create the schedule via the API.
+4. In the config file, remove the `triggers` section, so that it resembles a standard workflow.
+    ```yaml
+    daily-run-workflow:
+      jobs:
+        - test
+        - build
+    ```
 
-- Interpret the frequency your trigger needs to run from the cron expression
-- Use the same step from `Starting from scratch` section above to create the schedule via the API
-- In the circleci config file, remove the `triggers` section so that it looks like a normal workflow
+#### Add workflows filtering
+{: #workflows-filtering }
+{:.no_toc}
 
-```yaml
-daily-run-workflow:
-  jobs:
-    - test
-    - build
-```
+As a scheduled pipeline is essentially a triggered pipeline, it will run every workflow in the config.
 
-- Add workflows filtering. As a scheduled pipeline is essentially a triggered pipeline, it will run every workflow in the config.
-    - One way to implement workflows filtering is by using the pipeline values, for example:
+One way to implement workflows filtering is by using the pipeline values, for example:
 
 ```yaml
 daily-run-workflow:
@@ -127,10 +128,9 @@ daily-run-workflow:
     - build
 ```
 
-- Please note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
+Note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
 
-
-- Add workflows filtering for workflows that should NOT run when a schedule triggers:
+You may also add filtering for workflows that should NOT run when a schedule triggers:
 
 {% raw %}
 ```yaml
@@ -153,12 +153,12 @@ other-workflow:
 ```
 {% endraw %}
 
-## Scheduled pipelines FAQs
+## FAQs
 {: #faq }
 
 **Q:** How do I find the schedules that I've created?
 
-**A:** As scheduled pipelines are stored directly in CircleCI, we now have a UUID associated with each schedule. Or you could list all the schedules under a single project
+**A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can also list all the schedules under a single project:
 
 ```sh
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
@@ -167,7 +167,7 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 
 **Q:** Why is my scheduled pipeline not running?
 
-**A:** There can be many reasons for this. For example:
+**A:** There could be a few possible reasons:
 - Is the actor who is set for the scheduled pipelines still part of the organization?
 - Is the branch set for the schedule deleted?
-- Is your github organization using SAML protection? SAML tokens expire often, which can cause requests to github to fail.
+- Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to github to fail.
