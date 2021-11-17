@@ -59,7 +59,7 @@ guide.
 ## Managing network and storage use
 {: #managing-network-and-storage-use }
 
-The below information will explain how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
+The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
 ### Overview of storage and network transfer
 {: #overview-of-storage-and-network-transfer }
