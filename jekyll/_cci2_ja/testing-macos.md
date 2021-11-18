@@ -19,36 +19,36 @@ order:
 
 CircleCI supports testing macOS apps on the macOS executor and by utilising Fastlane, and the macOS permissions orb, this can be set up quickly and easily.
 
-macOSアプリの自動テストを設定することで、異なるバージョンの macOS に対してアプリを簡単にテストすることができ、お客様の開発パイプラインに自動化を導入することができます。
+macOSアプリの自動テストを設定することで、異なるバージョンの macOS に対してアプリを簡単にテストすることができ、開発パイプラインに自動化を導入することができます。
 
 ## 概念
 {: #concepts }
 
-macOS アプリをテストするためには、Xcode Runner がユーザーの操作であるかのように動作するためにテスト対象のアプリを制御する機能が必要となります。 Apple は長い間 macOS のセキュリティ強化を重ね、現在では macOS アプリの UI テストをトリガーすると、制御を許可するかどうかを尋ねる許可ダイアログがポップアップ表示されます。 On a local development machine this is not an issue, however, in a headless CI environment, it is not possible to interact with the UI.
+macOS アプリをテストするためには、Xcode Runner がユーザーによる操作であるかのように動作するようテスト対象のアプリを制御する機能が必要です。 Apple は長い間 macOS のセキュリティ強化を重ね、現在では macOS アプリの UI テストをトリガーすると、制御を許可するかどうかを尋ねる許可ダイアログがポップアップ表示されます。 これはローカルの開発マシンでは問題ありませんが、ヘッドレスの CI 環境では、UIを操作することはできません。
 
-Apple does not provide an alternative command line based tool for granting permissions, but there is a workaround. By manually modifying the permissions database, we can insert new permissions which will allow Xcode Helper to interact with apps. This file, called `TCC.db`, is responsible for holding information about the permissions that have been requested and granted, or denied, for each app.
+Apple は、権限を付与するためのコマンドラインベースの代替ツールを提供していませんが、回避策があります。 権限データベースを手動で変更することで、Xcode Helper がアプリを操作できる新しい権限を挿入することができます。 この `TCC.db` と呼ばれるファイルは、各アプリに対するアクセス許可の要求、付与、または拒否に関する情報の保持を担っています。
 
-There are two unique `TCC.db` files in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime.
+一意の `TCC.db` ファイルが 2 つ使用されています。 1つ目のコピーは、ホームディレクトリの `~/Library/Application Support/com.apple.TCC/TCC.db` に、2つ目のコピーは、 `/Library/Application Support/com.apple.TCC/TCC.db` にあります。 アクセス許可を追加または変更する場合は、実行時にアクセス許可が確実に有効となるようこの２つのファイル両方を編集する必要があります。
 
-While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
+System Integrity Protection が有効な状態だと、ホームディレクトリに配置されているコピーへの書き込みは可能ですが、`/Library/Application Support/com.apple.TCC/TCC.db` への書き込みはできません (macOS Mojave以降)。 CircleCI では、Xcode 11.7以降のすべてのイメージの System Integrity Protection が無効になっています。 System Integrity Protection が有効なイメージ上で `TCC.db` への書き込みを行うと、ジョブが失敗します。
 
-While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
+アクセス許可の追加は、CircleCI の設定で `sqlite3` コマンドを使って手動で書くこともできますが、 [CircleCIでは、これを簡略化するための Orb](https://circleci.com/developer/orbs/orb/circleci/macos) を提供しています。
 
-## Supported Xcode and macOS Versions
+## サポートされている Xcode および macOS のバージョン
 {: #supported-xcode-and-macos-versions }
 
-Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
+macOS アプリのテストは、System Integrity Protection (SIP）を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
+詳細については、 [サポートされている Xcode バージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) のリストを参照してください。
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/hello-world-macos/?section=executors-and-images#xcode-cross-compilation).
+Xcode Cross Compilation にご興味がある方は、[こちら]({{site.baseurl}}/2.0/hello-world-macos/?section=executors-and-images#xcode-cross-compilation)をご覧ください。
 
-## Setting up a macOS UI Test Project
+## macOS UI テストプロジェクトの設定
 {: #setting-up-a-macos-ui-test-project }
 
-Configuring CircleCI to run UI tests on a macOS app happens in two parts. Firstly, the CircleCI config needs to add the correct permissions and set up the environment to run the tests. Secondly, Fastlane needs to be configured to execute the tests.
+macOS アプリで UI テストを実行するための CircleCI の設定は、2つのパートに分かれています。 まず、CircleCI の設定で正しいアクセス許可を追加し、テストの実行環境を整える必要があります。 次に、テストを実行するために fastlane を設定する必要があります。
 
-### Configuring CircleCI
+### CircleCI の設定
 {: #configuring-circleci }
 
 In the CircleCI `config.yml` we need to include the `circleci/macos` [orb](https://circleci.com/developer/orbs/orb/circleci/macos) and call the `macos/add-mac-uitest-permissions` step. This step ensures that the correct permissions are added to run Xcode UI tests on a macOS app.
