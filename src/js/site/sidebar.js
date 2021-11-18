@@ -112,11 +112,11 @@ import { isElementInViewport } from '../utils';
  * highlight it.
  *
  * */
-function highlightTocOnScroll() {
+export function highlightTocOnScroll() {
   const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
   const sidebarItemsText = sidebarItems.map((i) => i.innerText);
   const headlinesToIgnore = ['no_toc', 'toc-heading', 'help-improve-header'];
-  const all_headlines = Array.from(
+  const allHeadlines = Array.from(
     document.querySelectorAll('h2, h3, h4, h5, h6'),
   ).filter(
     (item) =>
@@ -144,7 +144,7 @@ function highlightTocOnScroll() {
         sidebarItemsText.includes(entry[0].target.innerText)
       ) {
         let intersectingEntry = entry[0].target;
-        let indexOfCurrentHeadline = all_headlines.indexOf(intersectingEntry);
+        let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
         sidebarItems.forEach((el) => el.classList.remove('active'));
         sidebarItems[indexOfCurrentHeadline].classList.add('active');
       }
@@ -152,14 +152,14 @@ function highlightTocOnScroll() {
     { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
   );
 
-  all_headlines.forEach((headline) => {
+  allHeadlines.forEach((headline) => {
     observer.observe(headline);
   });
 
   //
   // on page load, find the highest item in the article view port that is also
   // in the sidebar and then add active class to it.
-  const firstHeadlineInViewport = all_headlines.find(isElementInViewport);
+  const firstHeadlineInViewport = allHeadlines.find(isElementInViewport);
   if (firstHeadlineInViewport) {
     sidebarItems.forEach((item) => {
       if (item.textContent === firstHeadlineInViewport.textContent) {
