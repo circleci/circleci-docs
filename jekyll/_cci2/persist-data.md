@@ -61,6 +61,8 @@ guide.
 
 The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
+**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+
 ### Overview of storage and network transfer
 {: #overview-of-storage-and-network-transfer }
 
@@ -146,7 +148,7 @@ Artifacts that are text can be compressed at very little cost.
 
 If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
 
-If your pipelines build a binary, uberjar, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
+If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
 
 If you must upload a large artifact you can upload them to your own bucket at no cost.
 
