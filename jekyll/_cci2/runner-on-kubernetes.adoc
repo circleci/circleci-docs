@@ -57,7 +57,7 @@ $ helm install "circleci-runner" ./ \
 ....
 +
 
-Further information about configing the helm chart see the https://github.com/CircleCI-Public/circleci-runner-k8s#setup[readme] 
+For further information about configuring the helm chart see the https://github.com/CircleCI-Public/circleci-runner-k8s#setup[readme] 
 
 . Verify your pods are up and running by checking their status and following the logs. You should see output like the following:
 +
