@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
-const FORCE_STORAGE_KEY = 'growth-experiments-force-all'; // eslint-disable-line no-unused-vars
 const optimizelyLogLevel = isProduction() ? 'error' : 'info';
 optimizelySDK.setLogLevel(optimizelyLogLevel);
 
@@ -49,7 +48,12 @@ class OptimizelyClient {
       }
 
       // First we check that the required options are provided
-      if (!options || !options.experimentKey || !options.groupExperimentName) {
+      if (
+        !options ||
+        !options.experimentKey ||
+        !options.groupExperimentName ||
+        !options.experimentContainer
+      ) {
         return reject({ error: 'Missing required options' });
       }
 
@@ -117,6 +121,7 @@ class OptimizelyClient {
               trackExperimentViewed(
                 orgId,
                 options.experimentKey,
+                options.experimentContainer,
                 experimentId,
                 variationName,
                 variationId,
@@ -145,11 +150,17 @@ class OptimizelyClient {
 const trackExperimentViewed = (
   orgId,
   experimentKey,
+  experimentContainer,
   experimentId,
   variationName,
   variationId,
   userId,
 ) => {
+  // don't track user if the experiment is not present in the current page
+  if (!$(experimentContainer).length) {
+    return;
+  }
+
   if (!isExperimentAlreadyViewed(orgId, experimentKey)) {
     const properties = {
       id: uuidv4(),

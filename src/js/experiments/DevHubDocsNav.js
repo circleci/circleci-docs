@@ -3,6 +3,7 @@ $(() => {
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_merge_devhub_docs_experiment_test',
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
+    experimentContainer: '.dd-global-nav--links',
     attributes: {
       // https://app.optimizely.com/v2/projects/16812830475/audiences/20678820396/#modal
       windowWidth: window.innerWidth ?? 0,

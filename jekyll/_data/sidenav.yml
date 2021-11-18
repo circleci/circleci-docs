@@ -240,6 +240,8 @@ en:
           link: 2.0/webhooks/
         - name: Using Credits
           link: 2.0/credits/
+        - name: Persisting Data
+          link: 2.0/persist-data
     - name: security
       link: 2.0/security/
       children:

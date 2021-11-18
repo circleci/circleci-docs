@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Build Environments"
-description: "CircleCI Build Environment Configuration"
+title: "Execution Environments"
+description: "CircleCI execution environment configuration"
 ---
 
 

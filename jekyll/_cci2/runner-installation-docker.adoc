@@ -30,8 +30,8 @@ In this example, Python 3 is installed on top of the base image.
 
 ```
 FROM circleci/runner:launch-agent
-RUN apt-get update; \
-    apt-get install --no-install-recommends -y \
+RUN sudo apt-get update; \
+    sudo apt-get install --no-install-recommends -y \
         python3
 ```
 

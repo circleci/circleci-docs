@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Configuration Introduction"
-description: "Landing page for CircleCI Config"
+description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
 version:
 - Cloud
 - Server v3.x

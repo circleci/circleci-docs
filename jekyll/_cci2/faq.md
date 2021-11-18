@@ -53,7 +53,7 @@ CircleCI does not infer from your project and is moving toward a model of smart 
 {:.no_toc}
 Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
-The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same content as the Ubuntu Trusty 14.04 image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it’s less ideal for local testing.
+See the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) section for the latest image to use. These images have the same content as the image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it is less than ideal for local testing.
 
 The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
 
@@ -324,6 +324,30 @@ You can choose to pay for premium features per active user, compute, and optiona
   - Credits rollover each month and expire after one year.
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
+
+#### How do I calculate my monthly costs?
+{: #how-do-I-calculate-my-monthly-costs }
+{:.no_toc}
+
+Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+
+##### Storage
+{: #storage }
+{:.no_toc}
+
+To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs.
+
+![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
+
+##### Network
+{: #network }
+{:.no_toc}
+
+To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be mutliplied by 420 credits to estimate the total montly costs.
+
+The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+
+![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
 
 
 #### Why does CircleCI have per-active-user pricing?
