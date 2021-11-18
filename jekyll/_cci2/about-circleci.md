@@ -79,14 +79,20 @@ Organizations on the free plan are given free credits to use on open source proj
 {: #learn-more }
 
 ### In the Docs:
+{: #in-the-docs }
+{:.no_toc}
 - [Concepts]({{site.baseurl}}/2.0/concepts/) for basic concepts of CI/CD pipeline management
 - [Tutorials]({{site.baseurl}}/2.0/tutorials/ ) for platform specific tutorials
 
 ### On CircleCI Academy:
+{: #on-circleci-academy }
+{:.no_toc}
 - [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021)
 - [General Developer Training](https://academy.circleci.com/general-developer-training?access_code=public-2021)
 
 ### On our blog:
+{: #on-our-blog }
+{:.no_toc}
 - [Config best practices: dependency caching](https://circleci.com/blog/config-best-practices-dependency-caching/)
 - [Automate and scale your CI/CD with CircleCI orbs](https://circleci.com/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/)
 - [How to secure your CI pipeline](https://circleci.com/blog/secure-ci-pipeline/)
