@@ -1,30 +1,30 @@
 ---
 layout: classic-docs
-title: Testing macOS Applications
-short-title: Testing macOS Applications
+title: macOS アプリケーションのテスト
+short-title: macOS アプリケーションのテスト
 categories:
-  - platforms
-description: Testing macOS Applications
+  - プラットフォーム
+description: macOS アプリケーションのテスト
 order:
 ---
 
-This document describes how to configure CircleCI for macOS app UI testing.
+このドキュメントでは、CircleCI を macOS アプリの UI テスト用に設定する方法を説明します。
 
-* TOC
+* 目次
 {:toc}
 
-## Overview
+## 概要
 {: #overview }
 {:.no_toc}
 
 CircleCI supports testing macOS apps on the macOS executor and by utilising Fastlane, and the macOS permissions orb, this can be set up quickly and easily.
 
-By setting up automated macOS app testing on CircleCI, you can easily test your app against different versions of macOS and add automation to your development pipeline.
+macOSアプリの自動テストを設定することで、異なるバージョンの macOS に対してアプリを簡単にテストすることができ、お客様の開発パイプラインに自動化を導入することができます。
 
-## Concepts
+## 概念
 {: #concepts }
 
-To test a macOS app, the Xcode Runner requires the ability to take control of the app under test to allow it to spoof user interactions. Over time, Apple has increased security in macOS and now triggering a macOS app UI test will cause a popup permissions dialog to ask whether you wish to allow control. On a local development machine this is not an issue, however, in a headless CI environment, it is not possible to interact with the UI.
+macOS アプリをテストするためには、Xcode Runner がユーザーの操作であるかのように動作するためにテスト対象のアプリをコントロールする機能が必要となります。 Over time, Apple has increased security in macOS and now triggering a macOS app UI test will cause a popup permissions dialog to ask whether you wish to allow control. On a local development machine this is not an issue, however, in a headless CI environment, it is not possible to interact with the UI.
 
 Apple does not provide an alternative command line based tool for granting permissions, but there is a workaround. By manually modifying the permissions database, we can insert new permissions which will allow Xcode Helper to interact with apps. This file, called `TCC.db`, is responsible for holding information about the permissions that have been requested and granted, or denied, for each app.
 
