@@ -14,11 +14,14 @@ export function isUnsupportedBrowser() {
  * shamelessly borrowed from https://stackoverflow.com/a/7557433
  * */
 export function isElementInViewport(el) {
+  if (!(el instanceof HTMLElement)) {
+    return false;
+  }
+
   // Special bonus for those using jQuery
   if (typeof jQuery === 'function' && el instanceof jQuery) {
     el = el[0];
   }
-
   var rect = el.getBoundingClientRect();
 
   return (
