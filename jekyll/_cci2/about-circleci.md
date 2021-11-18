@@ -41,7 +41,9 @@ CircleCI may be configured to deploy code to various environments, including:
 - Microsoft Azure
 - Heroku
 
-Other cloud service deployments can be scripted using SSH or by installing the API client of the service with your job configuration.
+The [orbs registry](https://circleci.com/developer/orbs) contains packages of reusable configuration that can be used for common deployment targets. Orbs simplify and streamline your configuration.
+
+Other cloud service deployments can be scripted using SSH, or by installing the API client of the service with your job configuration.
 
 ## Benefits of CircleCI
 {: #benefits-of-circleci }
@@ -58,7 +60,7 @@ As a developer using CircleCI you can:
 - Access [Arm resources]({{site.baseurl}}/2.0/arm-resources/) for the machine executor.
 - Use [orbs]({{site.baseurl}}/2.0/using-orbs/), reusable packages of configuration, to integrate with third parties.
 - Use pre-built Docker [images]({{site.baseurl}}/2.0/circleci-images/) in a variety of languages.
-- Use the [API](https://circleci.com/docs/api/v2/) to retreive information about jobs and workflows.
+- Use the [API](https://circleci.com/docs/api/v2/) to retrieve information about jobs and workflows.
 - Use the [CLI]({{site.baseurl}}/2.0/local-cli/) to access advanced tools locally.
 - Get flaky test detection with [test insights]({{site.baseurl}}/2.0/insights-tests/).
 
