@@ -3,7 +3,7 @@ layout: classic-docs
 title: macOS 上の iOS アプリケーションのテスト
 short-title: macOS 上の iOS アプリケーションのテスト
 categories:
-  - platforms
+  - プラットフォーム
 description: macOS 上の iOS アプリケーションのテスト
 order: 30
 version:
