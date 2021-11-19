@@ -1,4 +1,4 @@
-import global from '../../../jest/global';
+import '../../../jest/global';
 import * as sidebar from './sidebar';
 
 describe('Sidebar', () => {
@@ -10,21 +10,20 @@ describe('Sidebar', () => {
     let h2, tocItem;
 
     beforeEach(() => {
-
       jest.resetAllMocks();
       h2 = document.createElement('h2');
       tocItem = document.createElement('a');
+      let queriedTocItems = document.createDocumentFragment();
+      let queriedHeadings = document.createDocumentFragment();
 
       jest
         .spyOn(document, 'querySelectorAll')
         .mockImplementation((selector) => {
           switch (selector) {
             case '.toc-entry a':
-              let queriedTocItems = document.createDocumentFragment();
               queriedTocItems.appendChild(tocItem);
               return queriedTocItems.childNodes;
             case 'h2, h3, h4, h5, h6':
-              let queriedHeadings = document.createDocumentFragment();
               queriedHeadings.appendChild(h2);
               return queriedHeadings.childNodes;
           }
@@ -42,6 +41,8 @@ describe('Sidebar', () => {
     it('Does not call observe if there are no titles.', () => {
       const spy = jest.spyOn(IntersectionObserver.prototype, 'observe');
       let tocItem = document.createElement('a');
+      let queriedTocItems = document.createDocumentFragment();
+      let queriedHeadings = document.createDocumentFragment();
 
       // we override the jest query selector here because
       // we need to mock the case where there are not titles.
@@ -50,11 +51,9 @@ describe('Sidebar', () => {
         .mockImplementation((selector) => {
           switch (selector) {
             case '.toc-entry a':
-              let queriedTocItems = document.createDocumentFragment();
               queriedTocItems.appendChild(tocItem);
               return queriedTocItems.childNodes;
             case 'h2, h3, h4, h5, h6':
-              let queriedHeadings = document.createDocumentFragment();
               return queriedHeadings.childNodes;
           }
         });
@@ -73,17 +72,17 @@ describe('Sidebar', () => {
     it('Does not add an active class to TOC item when a ignored headline is encountered', () => {
       let h2 = document.createElement('h2');
       h2.classList.add('help-improve-header');
+      let queriedTocItems = document.createDocumentFragment();
+      let queriedHeadings = document.createDocumentFragment();
 
       jest
         .spyOn(document, 'querySelectorAll')
         .mockImplementation((selector) => {
           switch (selector) {
             case '.toc-entry a':
-              let queriedTocItems = document.createDocumentFragment();
               queriedTocItems.appendChild(tocItem);
               return queriedTocItems.childNodes;
             case 'h2, h3, h4, h5, h6':
-              let queriedHeadings = document.createDocumentFragment();
               queriedHeadings.appendChild(h2);
               return queriedHeadings.childNodes;
           }
