@@ -155,7 +155,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) and/or [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 {: #lessjobnamegreater }
