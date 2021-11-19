@@ -17,13 +17,14 @@ for building your open source project on CircleCI in the following sections:
 {: #overview }
 {:.no_toc}
 
-To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
+To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources. 
 
 **Note:**
 If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
 **Note:**
-There is a concurrency limit of 4 containers for Docker and Machine executors whereas macOS executors are limited to 1 container. Additional containers will be queued.
+Open-source credit availability and limits will not be visible in the UI. 
+
 
 ## Security
 {: #security }
