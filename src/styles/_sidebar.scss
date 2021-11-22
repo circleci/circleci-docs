@@ -187,6 +187,7 @@ aside.full-height {
     overflow: auto; 
     padding-left: 5px;
     top: 83px;
+    max-width: 400px;
   }
 
   @media(max-width: $toc-breakpoint) {
