@@ -1,57 +1,57 @@
 ---
 version:
 - Server v2.x
-- Admin
+- 管理者
 ---
-= Frequently Asked Questions
+= よくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+[.serveronly]_このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。_
 
-This chapter answers frequently asked questions and provides installation troubleshooting tips.
+ここでは、よくあるご質問への回答とインストール時のトラブルシューティングのヒントを紹介します。
 
 toc::[]
 
 [discrete]
-=== Can I move or change my GitHub Enterprise URL without downtime?
+=== GitHub Enterprise の URL をダウンタイムなく移動または変更できますか？
 
-No, because of the nature of CircleCI integration with GitHub authentication, you should not change the domain of your GHE instance after CircleCI is in production. Redeploying GitHub without will result in a corrupted CircleCI instance. Contact support if you plan to move your GitHub instance.
+それはできません。CircleCI の GitHub 認証との統合における性質上、本番環境での稼動後に GHE インスタンスのドメインを変更するべきではありません。 ダウンタイムなく GitHub を再デプロイすると、CircleCI のインスタンスが破損します。 GitHub のインスタンスを移動する場合は、サポートにご連絡ください。
 
 [discrete]
-=== Can I monitor available build containers?
+=== ビルドコンテナの現在の状況を監視することはできますか？
 
 Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 [discrete]
-=== How do I provision admin users?
+=== 管理者ユーザーの追加方法を教えてください。
 
-The first user who logs in to the CircleCI application will automatically be designated an admin user. Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
-
-[discrete]
-=== How can I gracefully shutdown Nomad Clients?
-
-Refer to the Introduction to Nomad Cluster Operation chapter for details.
+CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の ユーザーページ (`https://[domain-to-your-installation]/admin/users`) で行えます。
 
 [discrete]
-=== Why is Test GitHub Authentication failing?
+=== Nomad クライアントを安全にシャットダウンさせるには？
 
-This means that the GitHub Enterprise server is not returning the intermediate SSL certificates. Check your GitHub Enterprise instance with https://www.ssllabs.com/ssltest/analyze.html – it may report some missing intermediate certs. You can use commands like `openssl` to get the full certificate chain for your server.
-
-In some cases authentication fails when returning to the configuration page after it was successfully set up once. This is because the secret is encrypted, so when returning checking it will fail.
+「Nomad クラスタの運用方法」を参照してください。
 
 [discrete]
-=== How can I use HTTPS to access CircleCI?
+=== GitHub の認証テストに失敗してしまいます。
 
-While CircleCI creates a self-signed cert when starting up, that certificate only applies to the management console and not the CircleCI product itself. If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
+GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因の可能性があります。 https://www.ssllabs.com/ssltest/analyze.html で、GitHub Enterprise のインスタンスを確認してください。取得不可能な中間証明書の情報などが調べられます。 `openssl` のようなコマンドを使って、サーバーの完全な証明書チェーンを取得することができます。
+
+一度設定に成功した後に設定画面に戻ると、認証に失敗する場合があります。 秘密が暗号化されたため、戻ると失敗するのです。
+
+[discrete]
+=== CircleCI を HTTPS で運用できますか？
+
+CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 CircleCI を HTTPS で運用したい場合は、管理コンソールの設定にある `Privacy` セクションで証明書を指定してください。
 
 [discrete]
 === Why doesn't terraform destroy every resource?
 
-CircleCI sets the services box to have termination protection in AWS and also writes to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the `circleci.tf` file. You'll also need to empty the s3 bucket that was created as part of the terraform install.
+CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 Terraform がリソースごとに廃棄するようにしたい場合は、手動でそのインスタンスを削除するか、`circleci.tf `ファイル内でインスタンス削除保護 (termination protection) をオフに設定してください。 さらに、Terraform のインストールによって生成された AWS S3 バケット を空にする必要があります。
 
 [discrete]
 === Do the Nomad Clients store any state?
