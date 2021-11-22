@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "高度な構成"
+title: "高度な設定"
 short-title: "高度な構成"
 description: "高度な構成のオプションと機能の概要"
 categories:
