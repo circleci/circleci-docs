@@ -49,19 +49,19 @@ GitHub Enterprise サーバーが SSL の中間証明書を返さないことが
 CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 CircleCI を HTTPS で運用したい場合は、管理コンソールの設定にある `Privacy` セクションで証明書を指定してください。
 
 [discrete]
-=== Why doesn't terraform destroy every resource?
+=== Terraform がすべてのリソースを破棄しないのはなぜですか？
 
-CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 Terraform がリソースごとに廃棄するようにしたい場合は、手動でそのインスタンスを削除するか、`circleci.tf `ファイル内でインスタンス削除保護 (termination protection) をオフに設定してください。 さらに、Terraform のインストールによって生成された AWS S3 バケット を空にする必要があります。
-
-[discrete]
-=== Do the Nomad Clients store any state?
-
-They can be torn down without worry as they don't persist any data.
+CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 Terraform がすべてのリソースを破棄するようにしたい場合は、手動でそのインスタンスを削除するか、`circleci.tf `ファイル内でインスタンス削除保護 (termination protection) をオフに設定してください。 さらに、Terraform のインストールによって生成された AWS S3 バケット を空にする必要があります。
 
 [discrete]
-=== How do I verify TLS settings are failing?
+=== Nomad クライアントは何らかのデータを保持しますか？
 
-Make sure that your keys are in unencrypted PEM format, and that the certificate includes the entire chain of trust as follows:
+どんなデータも残らないよう破棄されますのでご安心ください。
+
+[discrete]
+=== TLS の設定に失敗しているようですが、どこを確認すればよいですか。
+
+鍵が非暗号化 PEM 形式であることと、その証明書のチェーン全体が間違いなく下記のようになっていることを確認してください。
 
 ```
 -----BEGIN CERTIFICATE-----
@@ -77,23 +77,23 @@ intermediate 2
 ```
 
 [discrete]
-=== How do I debug the Management Console (Replicated)?
+=== Replicated 使用時の管理コンソールでの問題をデバッグする方法が知りたい。
 
-The CircleCI management console is powered by Replicated. If you are experiencing any issues with the Management Console, here are a few ways to debug it:
+CircleCI の管理コンソールは、Replicated をベースとしています。 管理コンソールで問題があるときに、問題をデバッグする方法をいくつか紹介します。
 
 [discrete]
-==== 1. Check you have Replicated installed
+==== 1. Replicated がインストールされているかを確認する
 
-First, make sure you have the CLI tool for Replicated installed by running the following:
+まずは Replicated 用の CLI ツールが間違いなくインストールされていることを以下のコマンドで確認してください。
 
 ```shell
 replicated -version
 ```
 
 [discrete]
-==== 2. Restart Replicated and the CircleCI app
+==== 2. Replicated と CircleCI を再起動する
 
-Try restarting Replicated services. You can do this by running the following commands on the service box, for Ubuntu 14.04:
+Replicated サービスの再起動します。 Ubuntu 14.04 の場合、サービスボックスで下記のコマンドを実行すると再起動できます。
 
 ```shell
 sudo service replicated-ui restart
@@ -101,7 +101,7 @@ sudo service replicated restart
 sudo service replicated-operator restart
 ```
 
-For Ubuntu 16.04, run the following commands:
+Ubuntu 16.04 の場合は、以下のコマンドを実行します。
 
 ```shell
 sudo systemctl restart replicated-ui
@@ -114,33 +114,32 @@ Then try restarting the CircleCi app: go to your services box admin (for example
 // add screenshot showing StopNow and StartNow -->
 
 [discrete]
-==== 3. Try to log into Replicated
+==== 3. Replicated へのログインを試す
 
-Try logging in to Replicated. You can do this by running the following command
-on the service box. You will be asked to enter your password - the same one used
+Replicated にログインできるか確認してください。 ログインするにはサービスボックスで下記のコマンドを実行します。 You will be asked to enter your password - the same one used
 to unlock the Management Console (i.e.  `<your-circleci-hostname>.com:8800` ).
 
 ```shell
 replicated login
 ```
 
-If you could login, then run the following command and send the output to us at support@circleci.com so we can help diagnose what is causing the problem you are experiencing.
+ログインに成功したら、以下のコマンドを実行し、その出力を support@circleci.com までお送りください。何が原因で問題が発生しているのかを診断いたします。
 
 ```shell
 sudo replicated apps
 ```
 
-If you were seeing the following error: `request returned Unauthorized for API route` this could be because you are not logged into Replicated, so please check if you are still getting the error after a successful login.
+「`request returned Unauthorized for API route` 」というエラーが表示される場合、Replicated にログインしていないことが原因である可能性がありますので、ログイン成功後も同じエラーが発生するかどうかを確認してください。
 
 [discrete]
-==== 4. Check Replicated logs
+==== 4.  Replicated のログをチェックする
 
-You can find Replicated logs on the Services machine under `/var/log/replicated`.
+Services マシンの Replicated ログデータは `/var/log/replicated` 配下にあります。
 
 [discrete]
-==== 5. Check what Docker containers are currently running
+==== 5. 現在実行している Docker コンテナを確認する
 
-Replicated starts many Docker containers to run CircleCI Server, so it can be useful to check what containers are running.
+Replicated は、CircleCI Server を動作させるために多数の Docker コンテナを起動するので、どのコンテナが実行されているのを確認するのに便利です。
 
 To check what containers are currently running, run `sudo docker ps` and you should see something similar to this output:
 
