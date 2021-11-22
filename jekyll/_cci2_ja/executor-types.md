@@ -94,9 +94,9 @@ jobs:
       # ローカルホスト上で mongo にアクセスできます
       - run: sleep 5 && nc -vz localhost 27017
 ```
-Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
+Docker イメージの指定方法は 3 つあります。Docker Hub 上のイメージ名を指定する方法、バージョンタグを指定する方法、レジストリにあるイメージの URL を使用する方法です。
 
-#### Public convenience images on Docker Hub
+#### Docker Hub 上のパブリック CircleCI イメージ
 {: #public-convenience-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
@@ -112,7 +112,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `name@digest`
     - `redis@sha256:54057dd7e125ca41...`
 
-#### Public Docker registries
+#### パブリック Docker レジストリ
 {: #public-docker-registries }
 {:.no_toc}
   - `image_full_url:tag`
@@ -120,14 +120,14 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
+`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリック イメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
 
 ### RAM ディスク
 {: #ram-disks }
 
-A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
+RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイルの格納パラダイム](https://ja.wikipedia.org/wiki/Tmpfs)を利用できます。 使用する `resource_class` でプロジェクトのコンテンツすべて (Git からチェックアウトされたすべてのファイル、依存関係、生成されたアセットなど) をまかなえるだけのメモリを確保できている場合、RAM ディスクを使用することでビルドを高速化できます。
 
-The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
+RAM ディスクの最もシンプルな使用方法は、ジョブの `working_directory` を `/mnt/ramdisk` に設定することです。
 
 ```yaml
 jobs:
@@ -147,38 +147,38 @@ jobs:
 
 ### Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
-Docker also has built-in image caching and enables you to build, run, and publish Docker images via \[Remote Docker\]\[building-docker-images\]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
+Docker にはイメージ キャッシュ機能が組み込まれており、\[リモート Docker\]\[building-docker-images\] を介して Docker イメージをビルド、実行、およびパブリッシュできます。 開発しているアプリケーションの要件も併せて考慮してください。 以下の事項に当てはまるアプリケーションには、Docker が最適です。
 
 - アプリケーションが自己完結型である
 - アプリケーションの追加サービスをテストする必要がある
 - Docker イメージとして開発しているアプリケーションである (\[リモート Docker\]\[building-docker-images\] の使用が必要)
 - `docker-compose` を使用する (\[リモート Docker\]\[building-docker-images\] の使用が必要)
 
-Choosing Docker limits your runs to what is possible from within a Docker container (including our \[Remote Docker\]\[building-docker-images\] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
+Docker を使う場合、実行できるのは Docker コンテナ内から利用可能な機能 (\[リモート Docker\]\[building-docker-images\] の機能を含む) に制限されます。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
-There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
+コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
-| Capability                                                                                         | `docker`           | `machine` |
-| -------------------------------------------------------------------------------------------------- | ------------------ | --------- |
-| Start time                                                                                         | Instant            | 30-60 sec |
-| Clean environment                                                                                  | Yes                | Yes       |
-| Custom images                                                                                      | Yes <sup>(1)</sup> | No        |
-| Build Docker images                                                                                | Yes <sup>(2)</sup> | Yes       |
-| Full control over job environment                                                                  | No                 | Yes       |
-| Full root access                                                                                   | No                 | Yes       |
-| Run multiple databases                                                                             | Yes <sup>(3)</sup> | Yes       |
-| Run multiple versions of the same software                                                         | No                 | Yes       |
-| [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)                               | Yes                | Yes       |
-| Run privileged containers                                                                          | No                 | Yes       |
-| Use docker compose with volumes                                                                    | No                 | Yes       |
-| [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes                | Yes       |
+| 機能                                                                                    | `docker`        | `machine` |
+| ------------------------------------------------------------------------------------- | --------------- | --------- |
+| 起動時間                                                                                  | 即時              | 30 ～ 60 秒 |
+| クリーン環境                                                                                | ○               | ○         |
+| カスタム イメージ                                                                             | ○<sup>(1)</sup> | ×         |
+| Docker イメージのビルド                                                                       | ○<sup>(2)</sup> | ○         |
+| ジョブ環境の完全な制御                                                                           | ×               | ○         |
+| 完全なルート アクセス                                                                           | ×               | ○         |
+| 複数データベースの実行                                                                           | ○<sup>(3)</sup> | ○         |
+| 同じソフトウェアの複数バージョンの実行                                                                   | ×               | ○         |
+| [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                     | ○               | ○         |
+| 特権コンテナの実行                                                                             | ×               | ○         |
+| Docker Compose とボリュームの使用                                                              | ×               | ○         |
+| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○               | ○         |
 {: class="table table-striped"}
 
-<sup>(1)</sup> See \[Using Custom Docker Images\]\[custom-images\].
+<sup>(1)</sup> \[カスタム Docker イメージの使用\]\[custom-images\] を参照してください。
 
-<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
+<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
 
-<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
+<sup>(3)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 Performance in this regard will be dictated by the compute capacities of your container plan.
 
 For more information on `machine`, see the next section below.
 
