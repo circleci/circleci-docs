@@ -55,7 +55,7 @@ jobs:
 
 この例で、すべてのステップは、`build` ジョブの下に最初にリストされているイメージによって作成されるコンテナで実行されます。 スムーズに移行できるように、CircleCI は一般的な言語用のコンビニエンス イメージを Docker Hub で提供しています。 名前とタグの一覧については、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。 Docker がインストールされ Git が含まれている Docker イメージが必要な場合は、公式の [Docker イメージ](https://hub.docker.com/_/docker/)である `docker:stable-git` の使用をお勧めします。
 
-### Docker イメージのベスト プラクティス
+### Docker イメージのベストプラクティス
 {: #docker-image-best-practices }
 {:.no_toc}
 
@@ -75,7 +75,7 @@ Docker Executor の詳細については、「[CircleCI を設定する]({{ site
 
 ### 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
-ジョブには、複数のイメージを指定できます。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合には、複数イメージの指定が役に立ちます。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 すべてのコンテナは共通ネットワーク内で動作します。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
+ジョブには、複数のイメージを指定できます。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合には、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 すべてのコンテナは共通ネットワーク内で動作します。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
 
 ```yaml
 jobs:
@@ -171,7 +171,7 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 | [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                     | ○               | ○         |
 | 特権コンテナの実行                                                                             | ×               | ○         |
 | Docker Compose とボリュームの使用                                                              | ×               | ○         |
-| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○               | ○         |
+| [設定可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○               | ○         |
 {: class="table table-striped"}
 
 <sup>(1)</sup> \[カスタム Docker イメージの使用\]\[custom-images\] を参照してください。
@@ -278,7 +278,7 @@ jobs:
 
 `windows` Executor を使用すると、Windows 環境でジョブを実行できます。 シンプルな Windows ジョブを実行する設定例を以下に示します。 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 * クラウド版 CircleCI のバージョン 2.1 の設定ファイル
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* オンプレミス版 CircleCI Server のバージョン 2.0 の設定ファイル: これは、_CircleCI Server v2.18.3 からサポートされた_ Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -319,7 +319,7 @@ CircleCI Server を使用している場合、Windows ジョブに使用して�
 ## GPU を使用する
 {: #using-gpus }
 
-クラウド版 CircleCI には、特別なワークロード用に Nvidia GPU を備えた実行環境が用意されています。 The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
+クラウド版 CircleCI には、特別なワークロード用に Nvidia GPU を備えた実行環境が用意されています。 ハードウェアは Nvidia Tesla T4 Tensor Core GPU であり、Linux VM と Windows VM の Executor で使用できます。
 
 {:.tab.gpublock.Linux}
 ```yaml
@@ -348,9 +348,9 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See \[Running GPU Executors in Server\]\[server-gpu\].
+CircleCI Server では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\] を参照してください。
 
 ## 関連項目
 {: #see-also }
 
-[Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)
+[設定ファイル リファレンス]({{ site.baseurl }}/2.0/configuration-reference/)
