@@ -186,22 +186,22 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 ### 使用可能な Docker リソース クラス
 {: #available-docker-resource-classes }
 
-The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each job. In Docker, the following resources classes are available:
+[`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
-| Class                  | vCPUs | RAM  |
-| ---------------------- | ----- | ---- |
-| small                  | 1     | 2GB  |
-| medium                 | 2     | 4GB  |
-| medium+                | 3     | 6GB  |
-| large                  | 4     | 8GB  |
-| xlarge                 | 8     | 16GB |
-| 2xlarge<sup>(2)</sup>  | 16    | 32GB |
-| 2xlarge+<sup>(2)</sup> | 20    | 40GB |
+| クラス                    | vCPU | RAM   |
+| ---------------------- | ---- | ----- |
+| small                  | 1    | 2 GB  |
+| medium                 | 2    | 4 GB  |
+| medium+                | 3    | 6 GB  |
+| large                  | 4    | 8 GB  |
+| xlarge                 | 8    | 16 GB |
+| 2xlarge<sup>(2)</sup>  | 16   | 32 GB |
+| 2xlarge+<sup>(2)</sup> | 20   | 40 GB |
 {: class="table table-striped"}
 
-<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
+<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\]を使用する必要があります。
 
-Where example usage looks like the following:
+たとえば次のように設定します。
 
 ```yaml
 jobs:
@@ -210,23 +210,23 @@ jobs:
       - image: buildpack-deps:trusty
     resource_class: xlarge
     steps:
-    #  ...  other config
+    #  ...  他の設定
 ```
 
-## Machine の使用
+## マシンの使用
 {: #using-machine }
 
-The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
+`machine` オプションでは、以下のような仕様の専用仮想マシンを一時的に使用してジョブを実行します。
 
 {% include snippets/machine-resource-table.md %}
 
-Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands. To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
+`machine` Executor を使用すると、アプリケーションが OS のリソースにフルアクセスすることができ、ジョブ環境を完全に制御できます。 この制御は、(ネットワーク インターフェイスのリッスンなどの目的で) ネットワーク スタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/2.0/docker-to-machine)」を参照してください。
 
-Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
+`machine` Executor を使用すると、Docker プロセスにもフルアクセスできます。 これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
 
-**Note**: Using `machine` may require additional fees in a future pricing update.
+**注:** 将来の料金改定で `machine` の使用に追加料金が必要になる可能性があります。
 
-To use the machine executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
+Machine Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/2.0/configuration-reference/#machine)を設定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -237,9 +237,9 @@ jobs:
       image: ubuntu-1604:202007-01
 ```
 
-You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
+使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images)で確認できます。
 
-The following example uses an image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** Check our [pricing page](https://circleci.com/pricing/) to see which plans include the use of Docker Layer Caching.
+以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **注意:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
 {:.tab.machineblock.Server}
 ```yaml
@@ -247,19 +247,19 @@ version: 2.1
 jobs:
   build:
     machine:
-      docker_layer_caching: true    # デフォルトは false
+      docker_layer_caching: true    # デフォルトは falseです。
 ```
 
-**Note:** The `image` key is not supported on private installations of CircleCI. See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
+**注意:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。
 
-The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on machine executor. This range should not be used in your jobs.
+IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内使用のために CircleCI が予約しています。 この範囲はジョブ内でご使用にならないでください。
 
 ## macOS を使用する
 {: #using-macos }
 
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
+_クラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。_
 
-Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
+`macos` Executor を使用すると、VM 上の macOS 環境でジョブを実行できます。 また、使用する Xcode のバージョンも指定できます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)を参照してください。
 
 ```yaml
 jobs:
@@ -276,7 +276,7 @@ jobs:
 ## Windows Executor を使用する
 {: #using-the-windows-executor }
 
-Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using:
+`windows` Executor を使用すると、Windows 環境でジョブを実行できます。 シンプルな Windows ジョブを実行する設定例を以下に示します。 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 * クラウド版 CircleCI のバージョン 2.1 の設定ファイル
 * Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
@@ -312,14 +312,14 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/developer/orbs/orb/circleci/windows) for more details.
+クラウド版の例では、Windows Executor のセットアップに Windows Orb を使用することで、設定を簡素化しています。 詳細については、[Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)を参照してください。
 
-CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
+CircleCI Server を使用している場合、Windows ジョブに使用しているイメージに関する詳細情報については、システム管理者にお問い合わせください。 Windows イメージはシステム管理者によって設定され、CircleCI の設定ファイルでは常に `windows-default` というイメージ名で利用できます。
 
 ## GPU を使用する
 {: #using-gpus }
 
-CircleCI Cloud has execution environments with Nvidia GPUs for specialized workloads. The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
+クラウド版 CircleCI には、特別なワークロード用に Nvidia GPU を備えた実行環境が用意されています。 The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
 
 {:.tab.gpublock.Linux}
 ```yaml
