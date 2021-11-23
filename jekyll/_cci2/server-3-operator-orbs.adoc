@@ -10,10 +10,13 @@ version:
 :toc: macro
 :toc-title:
 
-This section describes orbs and how to manage them. Server installations include their own local orb registry. This registry
-is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You
+This section describes how to manage orbs for an installation of server v3.x. Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You
 are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have
 been copied prior, and registering your companies private orbs if they exist.
+
+For information on orbs and related use cases see the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs].
+
+If you are looking for information on creating an orb, see the https://circleci.com/docs/2.0/orb-author-intro/[Introduction to Authoring Orbs].
 
 toc::[]
 
@@ -64,4 +67,4 @@ export HTTP_PROXY=http://proxy.example.com:3128
 circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
 ```
 
-For more orb information on using and authoring orbs, refer to the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs] for the cloud product.
+
