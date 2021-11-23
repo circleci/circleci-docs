@@ -162,7 +162,7 @@ The branch name should be url-encoded.
 
 <h2 id="build">Single Job</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/2.0/configuration-reference/#notify), in which case this object is the value to a key named 'payload'. 
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/2.0/configuration-reference/#notify), in which case this object is the value to a key named 'payload'.
 
 {{ site.data.api.build | api_endpoint }}
 
