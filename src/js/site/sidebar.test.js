@@ -1,5 +1,5 @@
 import '../../../jest/global';
-import * as sidebar from './sidebar';
+import { highlightTocOnScroll } from './sidebar';
 
 describe('Sidebar', () => {
   beforeEach(() => {
@@ -35,7 +35,7 @@ describe('Sidebar', () => {
       // because InteractionObserver is a class on the window we need to actually
       // spy on the prototype of the method.
       const spy = jest.spyOn(IntersectionObserver.prototype, 'observe');
-      sidebar.highlightTocOnScroll();
+      highlightTocOnScroll();
       expect(spy).toHaveBeenCalled();
     });
 
@@ -57,12 +57,12 @@ describe('Sidebar', () => {
           return items.childNodes;
         });
 
-      sidebar.highlightTocOnScroll();
+      highlightTocOnScroll();
       expect(spy).not.toHaveBeenCalled();
     });
 
     it("A document with one h2 is in the TOC and is 'active'", () => {
-      sidebar.highlightTocOnScroll();
+      highlightTocOnScroll();
       expect([...tocItem.classList]).toEqual(
         expect.arrayContaining(['active']),
       );
@@ -87,7 +87,7 @@ describe('Sidebar', () => {
           return items.childNodes;
         });
 
-      sidebar.highlightTocOnScroll();
+      highlightTocOnScroll();
 
       expect([...tocItem.classList]).toEqual(
         expect.not.arrayContaining(['active']),
