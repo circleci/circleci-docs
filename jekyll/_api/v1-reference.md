@@ -162,7 +162,7 @@ The branch name should be url-encoded.
 
 <h2 id="build">Single Job</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'. 
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/2.0/configuration-reference/#notify), in which case this object is the value to a key named 'payload'. 
 
 {{ site.data.api.build | api_endpoint }}
 
@@ -218,7 +218,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [using 1.0 parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
+<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [using running tests in parrallel]( {{ site.baseurl }}/2.0/parallelism-faster-jobs/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
 
 {{ site.data.api.project_branch | api_endpoint }}
 
@@ -269,7 +269,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.test_metadata | api_endpoint }}
 
-<span class='label label-info'>Note:</span> [Learn how to set up your 1.0 builds to collect test metadata]( {{ site.baseurl }}/1.0/test-metadata/) and [set up your 2.0 builds to collect test metadata]( {{ site.baseurl }}/2.0/collect-test-data/)
+<span class='label label-info'>Note:</span> [Learn how to set up your 2.0 builds to collect test metadata]( {{ site.baseurl }}/2.0/collect-test-data/)
 
 ## SSH Keys
 
