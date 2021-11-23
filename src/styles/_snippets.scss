@@ -1,0 +1,32 @@
+.was-this-helpful {
+  text-align: right;
+  margin-bottom: 16px;
+  position: relative;
+
+  .text-btn {
+    background: none;
+    color: $link-text-color;
+    border: none;
+  }
+
+  .form {
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #EDEDED;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding: 8px 12px;
+    position: absolute;
+    right: 0px ;
+    top: 32px;
+    width: 304px;
+    z-index: 100;
+
+    textarea {
+      outline: $link-text-color solid 1px;
+      height: 100px;
+      padding: 12px;
+      margin: 16px 0 0 0;
+    }
+  }
+}
