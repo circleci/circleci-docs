@@ -9,22 +9,25 @@ version:
 - Cloud
 ---
 
-This document provides a summary of the Pipelines page in the CircleCI app and
-documents some of the changes to the CircleCI user interface.
+This document provides conceptual information on CircleCI pipelines, as well as introducing some pipelines features.
 
 ## Overview
 {: #overview }
 
-You may have noticed some changes to CircleCI's web interface lately. We have
-some exciting changes that are rolling out regarding how your builds are being
-grouped and the user interface that presents that information. Let's begin by
-stating what a **Pipeline** is.
-
-**Pipelines** represent the entire configuration that is run when you trigger
-work on your projects that use CircleCI. The entirety of a
+**Pipelines** represent the entire configuration that is run when you build your CircleCI projects. The entirety of a
 `.circleci/config.yml` file is executed by a pipeline.
 
-When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
+When visiting your CircleCI dashboard you are presented with the recent pipelines that have run in your organization/account.
+
+## Run a pipeline
+Pipelines can be run in several ways. Each method is described below.
+
+### 
+Every time a commit is pushed to your code repository on a branch that has a `.circleci/config.yml` file included the pipeline will run.
+
+### From the CircleCI app 
+
+### Using the API
 
 ## Jobs, tests, artifacts
 {: #jobs-tests-artifacts }

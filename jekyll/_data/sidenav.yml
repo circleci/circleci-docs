@@ -46,6 +46,12 @@ en:
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
   children:
+    - name: Overview
+      children:
+        - name: Pipelines overview
+          link: 2.0/pipelines/
+        - name: Skip or cancel a build
+          link: 2.0/skip-build/
     - name: Features
       children:
         - name: Workflows
@@ -75,7 +81,7 @@ en:
         - name: Optimizations cookbook
           link: 2.0/optimization-cookbook/
 
-- name: Executors and Images
+- name: Execution environments
   icon: icons/sidebar/executors.svg
   children:
     - name: Overview
