@@ -269,7 +269,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.test_metadata | api_endpoint }}
 
-<span class='label label-info'>Note:</span> [Learn how to set up your 2.0 builds to collect test metadata]( {{ site.baseurl }}/2.0/collect-test-data/)
+<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]( {{ site.baseurl }}/2.0/collect-test-data/)
 
 ## SSH Keys
 
