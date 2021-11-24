@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
 This document provides conceptual information on CircleCI pipelines, as well as introducing some pipelines features.
@@ -17,25 +18,33 @@ This document provides conceptual information on CircleCI pipelines, as well as 
 **Pipelines** represent the entire configuration that is run when you build your CircleCI projects. The entirety of a
 `.circleci/config.yml` file is executed by a pipeline.
 
-When visiting your CircleCI dashboard you are presented with the recent pipelines that have run in your organization/account.
+When visiting your CircleCI dashboard you are presented with recent pipelines that have run in your organization/account.
 
-## Run a pipeline
+## Running a pipeline
 Pipelines can be run in several ways. Each method is described below.
 
-### 
-Every time a commit is pushed to your code repository on a branch that has a `.circleci/config.yml` file included the pipeline will run.
+### Run a pipeline on commit to your code repository
+Every time a commit is pushed to one of your projects on a branch that has a `.circleci/config.yml` file included, a pipeline is triggeres.
 
-### From the CircleCI app 
+### Run a pipeline from the CircleCI app 
+From the CircleCI app, with a specific branch selected, the **Run Pipeline** button becomes enabled. Click **Run Pipeline**, choose if you want to specify any pipeline parameters, and click **Run Pipeline** again.
 
-### Using the API
+### Run a pipeline using the API
+You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{side.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
 
-## Jobs, tests, artifacts
-{: #jobs-tests-artifacts }
+### Run a pipeline using webhooks
+TBC
+
+### Scheduling a pipeline
+TBC
+
+## Pipeline architecture
+{: #pipeline-architecture }
 
 A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
+Further, the output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
