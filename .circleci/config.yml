@@ -275,7 +275,7 @@ jobs:
           version: "0.3.0"
       - run:
           name: "Test Markdown Files"
-          command: md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
+          command: md-proofer lint jekyll/_cci2/ jekyll/_api/
       - run:
           name: Install dependencies for pronto gem
           command: |
