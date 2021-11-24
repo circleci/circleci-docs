@@ -448,9 +448,6 @@ Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / 
 A working `.circleci/config.yml` section might look like this:
 
 ```yaml
-    A working `.circleci/config.yml` section might look like this:
-
-```yaml
     steps:
       - checkout
       - run: dotnet build

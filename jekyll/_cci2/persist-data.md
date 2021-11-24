@@ -18,11 +18,13 @@ This guide gives an overview of the various ways to persist data within and beyo
 
 ![caching data flow]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
-Caching persists data between the same job in different Workflow builds, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future instances will run faster as they will not need to redo the work (provided your cache has not been invalidated). A prime example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like yarn install will only need to download new dependencies, if any, and not redownload everything on every build.
+**Caches created via the save_cache step are stored for up to 15 days.**
+
+Caching persists data between the same job in different builds, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future instances will run faster as they will not need to redo the work (provided your cache has not been invalidated).
+
+A prime example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like yarn install will only need to download new dependencies, if any, and not redownload everything on every build.
 
 Caches are global within a project. A cache saved on one branch will be used by jobs run on other branches so they should only be used for data that is suitable to share across branches.
-
-**Caches created via the save_cache step are stored for up to 15 days.**
 
 For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) guide.
 
@@ -31,12 +33,12 @@ For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching
 
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
+**Workspaces are stored for up to 15 days.**
+
 When a workspace is declared in a job, files and directories can be added to it. Each addition creates a new layer in the workspace filesystem. Downstream jobs can then use this workspace for their own needs or add more layers on top.
 
 Workspaces are not shared between pipeline runs. The only time a workspace can be accessed after the pipeline has run is when a workflow is rerun within the 15
 day limit.
-
-**Workspaces are stored for up to 15 days.**
 
 For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
@@ -45,17 +47,21 @@ For more information on using workspaces to persist data throughout a workflow, 
 
 ![artifacts data flow]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
+**Artifacts are stored for up to 30 days.**
+
 Artifacts are used for longer-term storage of the outputs of your pipelines. For example if you have a Java project, your build will most likely produce a `.jar` file of your code. This code will be validated by your tests. If the whole build/test process passes, then the output of the process (the `.jar`) can be stored as an artifact. The `.jar` file is available to download from our artifacts system long after the workflow that created it has finished.
 
 If your project needs to be packaged, say an Android app where the `.apk` file is uploaded to Google Play, you would likely wish to store it as an artifact. Many users take their artifacts and upload them to a company-wide storage location such as Amazon S3 or Artifactory.
-
-**Artifacts are stored for up to 30 days.**
 
 For more information on using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/)
 guide.
 
 ## Managing network and storage use
 {: #managing-network-and-storage-use }
+
+The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
+
+**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
 
 ### Overview of storage and network transfer
 {: #overview-of-storage-and-network-transfer }
@@ -67,7 +73,7 @@ All data persistence operations within a job will accrue network and storage usa
 * Uploading artifacts
 * Uploading test results
 
-To determine which jobs utilize the above actions, you can search for the following commands in your project's config.yml file:
+To determine which jobs utilize the above actions, you can search for the following commands in your project's `config.yml` file:
 
 * `save_cache`
 * `restore_cache`
@@ -81,12 +87,12 @@ All network egress will accrue network usage; the relevant actions are:
 * Downloading artifacts
 * Pushing data from jobs outside of CircleCI
 
-Details about your storage and network transfer usage can be viewed on your Plan > Plan Usage screen.
+Details about your storage and network transfer usage can be viewed on your Plan > Plan Usage screen. On this screen you can find:
 
-* Total network and storage usage can be found in the table at the top of the screen.
-* Network and storage usage for individual projects can be found on the Projects tab.
-* Storage data activity can be found on the Objects tab.
-* Total storage volume data can be found on the Storage tab.
+* Total network and storage usage (table at the top of the screen)
+* Network and storage usage for individual projects (Projects tab)
+* Storage data activity (Objects tab)
+* Total storage volume data (Storage tab)
 
 Details about individual step storage and network transfer usage can be found in the step output on the Jobs page as seen below.
 
@@ -95,7 +101,7 @@ Details about individual step storage and network transfer usage can be found in
 ### How to calculate an approximation of your monthly costs
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
-Charges apply when an organization has network egress beyond the included GB allotment for Storage and Network usage.
+Charges apply when an organization has network egress beyond the included GB allotment for storage and network usage.
 
 #### Storage
 {: #storage }
@@ -103,7 +109,7 @@ Charges apply when an organization has network egress beyond the included GB all
 
 Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
 
-To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs.
+To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be multiplied by 420 credits to estimate the total monthly costs.
 
 ![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
 
@@ -111,57 +117,56 @@ To calculate monthly storage costs from your daily usage, click on the Storage t
 {: #network }
 {:.no_toc}
 
-To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be mutliplied by 420 credits to estimate the total montly costs.
+To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be multiplied by 420 credits to estimate the total monthly costs.
 
 The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
 
 ![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
 
-### How to manage your storage and network transfer use
-{: #how-to-manage-your-storage-and-network-transfer-use }
+### How to optimize your storage and network transfer use
+{: #how-to-optimize-your-storage-and-network-transfer-use }
 
 There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage.
 
-Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
+For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept.
 
-### How to manage your storage and network transfer use
-{: #how-to-manage-your-storage-and-network-transfer-use }
+In the cases of caches and workspaces this can be quite easy to compare - does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
 
-There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage.
-
-Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
-
-### Opportunities to reduce artifact and cache/workspace traffic
-{: #opportunities-to-reduce-artifact-and-cacheworkspace-traffic }
+See below for examples of storage and network optimization opportunities through reducing artifact, cache, and workspace traffic.
 
 #### Check which artifacts are being uploaded
 {: #check-which-artifacts-are-being-uploaded }
 
-Often we see that the store_artifacts step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
+Often we see that the `store_artifacts` step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
 
-If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the CIRCLE_NODE_INDEX environment variable in a run step to change the behaviour of scripts depending on the parallel task run.
+If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the `CIRCLE_NODE_INDEX` environment variable in a run step to change the behavior of scripts depending on the parallel task run.
 
 #### Uploading large artifacts
 {: #uploading-large-artifacts }
 
-* Artifacts that are text can be compressed at very little cost.
-* If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
-* If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
-* If you must upload a large artifact you can upload them to your own bucket at no cost.
+Artifacts that are text can be compressed at very little cost.
+
+If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
+
+If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
+
+If you must upload a large artifact you can upload them to your own bucket at no cost.
 
 #### Caching unused or superfluous dependencies
 {: #caching-unused-or-superfluous-dependencies }
 
-Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies. For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from node_modules.
+Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies.
+
+For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from `node_modules`.
 
 #### Optimizing cache usage
 {: #optimizing-cache-usage }
 
-If you notice your cache usage is high and would like to reduce it, try:
+If you notice your cache usage is high and would like to reduce it:
 
-* Searching for the `save_cache` and `restore_cache` commands in your config.yml file to find all jobs utilizing caching and determine if their cache(s) need pruning.
-* Narrowing the scope of a cache from a large directory to a smaller subset of specific files.
-* Ensuring that your cache “key” is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
+* Search for the `save_cache` and `restore_cache` commands in your `config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
+* Narrow the scope of a cache from a large directory to a smaller subset of specific files.
+* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
 {% raw %}
 ```sh
@@ -173,7 +178,7 @@ If you notice your cache usage is high and would like to reduce it, try:
 ```
 {% endraw %}
 
-Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build; causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache key like the following:
+Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
 
 {% raw %}
 ```sh
@@ -185,23 +190,21 @@ Notice in the above example that best practices are not being followed. `brew-{{
 ```
 {% endraw %}
 
-Which will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
+This will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
 
-* Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
+Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
 
-* Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
+Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
 
 #### Optimizing workspace usage
 {: #optimizing-workspace-usage }
 
-If you notice your workspace usage is high and would like to reduce it, try:
-
-* Searching for the `persist_to_workspace` command in your config.yml file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
 
 #### Reducing excess use of network egress
 {: #reducing-excess-use-of-network-egress }
 
-If you would like to reduce the amount of network usage that network egress is contributing to, try:
+If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
 
 * For runner, deploy any cloud-based runners in AWS US-East-1.
 * Download artifacts once and store them on your site for additional processing.

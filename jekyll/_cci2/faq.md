@@ -53,7 +53,7 @@ CircleCI does not infer from your project and is moving toward a model of smart 
 {:.no_toc}
 Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
-The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same content as the Ubuntu Trusty 14.04 image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it’s less ideal for local testing.
+See the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) section for the latest image to use. These images have the same content as the image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it is less than ideal for local testing.
 
 The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
 
@@ -421,7 +421,7 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs.
+Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
 
 If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
 

@@ -155,7 +155,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider upgrading your pricing plan or running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 {: #lessjobnamegreater }
@@ -370,6 +370,7 @@ jobs:
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
@@ -1219,7 +1220,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites.
 
-It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1543,7 +1544,7 @@ requires | N | List | A list of jobs that must succeed for the job to start. Not
 
 ###### **`name`**
 {: #name }
-The `name` key can be used to invoke reusable executors across any number of workflows. Using the name key ensures numbers are not appened to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
+The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
