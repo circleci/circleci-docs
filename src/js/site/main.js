@@ -395,3 +395,26 @@ $(document).ready(function () {
       }
     });
 });
+
+// This function will highlight a dom element with the ID found in the URL fragment
+// Added to draw attention to specific entries in only the insights table
+// Highlight can be generalized to rest of documentation later see main.scss
+$(document).ready(function () {
+  const searchParams = new URLSearchParams(window.location.search);
+  const isHighlighted = searchParams.has('highlight');
+  let hash = window.location.hash;
+  if (isHighlighted && hash) {
+    $(hash).attr('class', 'highlight');
+
+    window.addEventListener(
+      'hashchange',
+      () => {
+        let hashNew = window.location.hash;
+        $(hash).attr('class', '');
+        $(hashNew).attr('class', 'highlight');
+        hash = hashNew;
+      },
+      false,
+    );
+  }
+});

@@ -287,12 +287,17 @@ div.align-center img{
 	text-align: center;
 }
 
-// insights page
+// Insights page column highlights
 #insights-table{
-	div {
-	  scroll-margin-top: 5rem;
+	.highlight {
+		color: #1B639A;
+		background: #F4F7FA;
+		font-weight: bold;
 	}
-  }
+	div {
+		scroll-margin-top: 5rem;
+	}
+}
 
 // Homepage
 body.homepage{
