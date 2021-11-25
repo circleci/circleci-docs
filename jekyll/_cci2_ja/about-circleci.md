@@ -4,7 +4,7 @@ title: "概要"
 short-title: "概要"
 description: "CircleCI 2.0 入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 ---
 
@@ -24,11 +24,11 @@ Linux、macOS、Android、Windows、さらに SaaS やファイアウォール�
 ## CircleCI のメリット
 {: #benefits-of-circleci }
 
-CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI は、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)、および[従量課金制プラン](https://circleci.com/ja/pricing/)によって、きわめて複雑なパイプラインを効率的に実行するように構成できます。
+CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI は、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)、および[従量課金制プラン](https://circleci.com/ja/pricing/)によって、きわめて複雑なパイプラインを効率的に実行するように設定することができます。
 
-開発者は [circleci.com](https://circleci.com/ja/) を使用して、[任意のジョブに SSH 接続]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)してビルドの問題をデバッグしたり、[.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルで[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)をセットアップしてジョブの実行を高速化したり、わずか 2 つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を構成して[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)で以前のジョブのデータを再利用したりすることができます。
+開発者は [circleci.com](https://circleci.com/ja/) を使用して、[任意のジョブに SSH 接続]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)してビルドの問題をデバッグしたり、[.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルで[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)をセットアップしてジョブの実行を高速化したり、わずか 2 つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を設定して[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)で以前のジョブのデータを再利用したりすることができます。
 
-As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad Cluster for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/circleci-ops-guide-v2-17.pdf) for complete documentation.
+サーバーにインストールした CircleCI のオペレーターや管理者は、CircleCI を使用して、ビルドをモニタリングしてインサイトを得たり、スケジューリングに Nomad クラスターを使用したりすることができます。 詳細については、[CircleCI 運用ガイド]({{site.baseurl}}/2.0/circleci-ops-guide-v2-17.pdf) を参照してください。
 
 ## 概要
 {: #summary }
@@ -61,12 +61,12 @@ CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Googl
 CircleCI は以下の無料トライアル オプションをご用意しています。
 
 - **クラウド**: 「[CircleCI を始める]({{site.baseurl}}/ja/2.0/first-steps/)」を参照しながら、CircleCI がホスティングするアプリケーションの使用を開始してください。
-- **Server**: Refer to [CircleCI Trial Installation]({{site.baseurl}}/2.0/single-box/) for the Enterprise Trial instructions.
+- **サーバー**: 「[CircleCI トライアルのインストール]({{site.baseurl}}/2.0/single-box/)」に記載されている Enterprise トライアルの手順をご覧ください。
 
 ### オープンソース
 {: #open-source }
 
-パブリック オープンソース プロジェクト用無料コンテナの詳細については、「[オープンソース プロジェクトの構築]({{site.baseurl}}/ja/2.0/oss/)」を参照してください。
+パブリック オープンソース プロジェクト用無料コンテナの詳細については、「[オープンソース プロジェクトのビルド]({{site.baseurl}}/ja/2.0/oss/)」を参照してください。
 
 ## 関連項目
 {: #see-also }
@@ -75,7 +75,7 @@ Linux、Android、macOS 上で動作するすべてのアプリがサポート�
 - [サポートされている言語]({{site.baseurl}}/ja/2.0/demo-apps/): サンプルとガイド
 - [コア機能]({{site.baseurl}}/ja/2.0/features/): 詳細な説明と手順書へのリンク
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
-Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021) with CircleCI academy to learn more.
+Circle CI Academy の[CI/CD 101 ワークショップ](https://academy.circleci.com/cicd-basics?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
 
