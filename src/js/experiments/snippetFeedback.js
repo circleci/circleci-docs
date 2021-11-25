@@ -62,6 +62,7 @@ class SnippetFeedback {
       onClick: (el) => {
         if (this.currentState === 'hasCopiedCode') {
           this.currentState = 'clickedYes';
+          this.trackYesOrNoButton('yes');
           this.constructFeedbackForm();
         }
       },
@@ -78,6 +79,7 @@ class SnippetFeedback {
       onClick: (el) => {
         if (this.currentState === 'hasCopiedCode') {
           this.currentState = 'clickedNo';
+          this.trackYesOrNoButton('no');
           this.constructFeedbackForm();
         }
       },
@@ -85,11 +87,32 @@ class SnippetFeedback {
     return noBtn;
   }
 
+  trackYesOrNoButton(yesOrNoString) {
+    // actions we track are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
+    window.AnalyticsClient.trackAction(
+      `docs-snippet-helpful-${yesOrNoString}`,
+      {
+        originatingSnippet: this.snippetElement.textContent,
+        wasHelpful: yesOrNoString,
+        timeOfButtonClick: Date.now(),
+      },
+    );
+  }
+
+  trackFormSubmission(formContent) {
+    window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
+      originatingSnippet: this.snippetElement.textContent,
+      feedback: formContent,
+      // for diffing this against the time that the trackYesOrNoButton was clicked
+      // as well as possible the time the copy code button was clicked (TODO add that)
+      timeOfFormSubmission: Date.now(),
+    });
+  }
+
   // We create somedom elements that constitut a feedbackform each element here
   // needs to have a uuid so that we can pull the value out of the dom once the
   // user has submitted the feedback.
   constructFeedbackForm() {
-    console.log('this current state is ', this.currentState);
     if (
       this.currentState === 'clickedNo' ||
       this.currentState === 'clickedYes'
@@ -108,9 +131,10 @@ class SnippetFeedback {
         kind: 'button',
         className: 'text-btn',
         text: 'Send',
-        onClick: (e) => {
-          console.log(textForm.value);
-          this.wasThisHelpfulContainer.innerHTML = "<div>Thank you for your feedback!</div>"
+        onClick: () => {
+          this.trackFormSubmission(textForm.value);
+          this.wasThisHelpfulContainer.innerHTML =
+            '<div>Thank you for your feedback!</div>';
         },
       });
 
@@ -122,34 +146,34 @@ class SnippetFeedback {
       this.currentState = 'hasOpenedFeedbackForm';
     }
   }
-
-  /**
-   * submitFeedbackForm pulls user feedback out of the dom and sends the content
-   * to amplitude
-   *
-   * */
-  submitFeedbackForm() {}
 }
 
-// flow
-//
-// 1. every code snippet copy button gets a click listener
-// 1a. on click, we greate a new SnippetFeedback
-// 1b. we store the associated snippt in the class,
-
+/**
+ * init queries the dom for all snipppets
+ * TODO: when that snippet's COPY CODE button is clicked...
+ *
+ * */
 function init() {
   // add event listeners to all code snippets on page
 
-  const snippets = document.querySelectorAll('code.hljs');
-  [...snippets].forEach((snippetBlock) => {
-    snippetBlock.addEventListener(
-      'click',
-      (pointerEvent) => {
-        let snippetElement = pointerEvent.target;
-        const snippetFeedback = new SnippetFeedback(snippetElement);
-      },
-      { once: true },
-    );
+  window.OptimizelyClient.getVariationName({
+    experimentKey: 'dd_docs_snippet_feedback_experiment_test',
+    groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
+    experimentContainer: '.hljs',
+  }).then((variation) => {
+    if (variation === 'treatment') {
+      const snippets = document.querySelectorAll('code.hljs');
+      [...snippets].forEach((snippetBlock) => {
+        snippetBlock.addEventListener(
+          'click',
+          (pointerEvent) => {
+            let snippetElement = pointerEvent.target;
+            new SnippetFeedback(snippetElement);
+          },
+          { once: true },
+        );
+      });
+    }
   });
 }
 
