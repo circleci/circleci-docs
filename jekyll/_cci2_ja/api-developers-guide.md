@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: "CircleCI API Developer's Guide"
-short-title: "Developer's Guide"
-description: "API cookbook for internal and external CircleCI developers"
+title: "CircleCI API 開発者向けガイド"
+short-title: "開発者向けガイド"
+description: "社内外の CircleCI 開発者向け API クックブック"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
   - Cloud
