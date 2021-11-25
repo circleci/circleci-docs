@@ -57,7 +57,7 @@ See the [available machine images](https://circleci.com/docs/2.0/configuration-r
 
 The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
 
-Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
+Here’s a [list of languages and tools]({{site.baseurl}}/2.0/executor-intro/) included in the image.
 
 ## Hosting
 {: #hosting }

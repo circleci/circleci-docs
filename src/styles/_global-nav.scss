@@ -479,39 +479,6 @@ a.nav-skip-button {
     }
   }
 
-  .dd-global-nav--links {
-
-    display: flex;
-
-    @media (max-width: $screen-md) {
-      display: none;
-    }
-    .link {
-      background-color: inherit;
-      border-bottom-color: transparent;
-      border-bottom: solid 5px;
-      border: none;
-      color: $black;
-      cursor: pointer;
-      display: inline;
-      font-family: 'Roboto','Helvetica Neue',Helvetica,Arial,sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 19px;
-      margin-right: 40px;
-      padding-bottom: 10px;
-      padding-top: 4px;
-
-      // match dynamic widths from devhub
-      @media(min-width: 992px)  { margin-right: 48px; }
-      @media(min-width: 1200px) { margin-right: 60px; }
-    }
-
-    .home {
-      border-bottom: 4px solid $black;
-    }
-  }
 
   .global-nav--row {
     &-mobile {

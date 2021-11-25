@@ -2,23 +2,19 @@
 
 import * as Cookie from 'js-cookie';
 import * as highlightjsBadge from 'highlightjs-badge';
-// site files
-import OptimizelyClient from './services/optimizely.js';
-import AnalyticsClient from './services/analytics.js';
-import * as rum from './services/rum.js';
-import * as search from './services/instantsearch.js';
-import * as lang from './services/lang.js';
-import * as Site from './site';
+
+import services from './services';
+import site from './site';
 import '../styles/main.scss';
 
 // imports all experiments
-import * as Experiments from './experiments';
+import experiments from './experiments';
 
-search.init();
-lang.init();
-rum.init();
+services.instantsearch.init();
+services.lang.init();
+services.rum.init();
 
 // adding "Clients" to the window object so they can be accessed by other js inside Jekyll
 window.Cookie = Cookie;
-window.AnalyticsClient = AnalyticsClient; // because it only has static methods, AnalyticsClient is not instantiated
-window.OptimizelyClient = new OptimizelyClient();
+window.AnalyticsClient = services.AnalyticsClient; // because it only has static methods, AnalyticsClient is not instantiated
+window.OptimizelyClient = new services.OptimizelyClient();
