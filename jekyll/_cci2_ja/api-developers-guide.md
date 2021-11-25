@@ -10,29 +10,29 @@ version:
   - Cloud
 ---
 
-This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed [here]({{site.baseurl}}/api/v2).
+この*API 開発者向けガイド*は、開発者が 迅速かつ簡単に CircleCI サービスに API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すためのガイドです。 API v2 の仕様書は、[こちら]({{site.baseurl}}/api/v2)をご覧ください。
 
-* TOC
+* 目次
 {:toc}
 
-## API categories
+## API のカテゴリー
 {: #api-categories }
 
-The current categories of API v2 endpoints are:
+現在の API v2 の各エンドポイントは、以下のカテゴリに分けられます。
 
-* Authentication
-* Pipeline
-* Workflows
-* User (Preview)
-* Project (Preview)
-* Job (Preview)
+* 認証
+* パイプライン
+* ワークフロー
+* ユーザー (プレビュー)
+* プロジェクト (プレビュー)
+* ユーザー (プレビュー)
 
-**Note:** Portions of the CircleCI API v2 remain under “Preview”. Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the API v2 breaking changes log.
+**注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 あらかじめ API v2 プレビューのエンドポイントに対する重大な変更が計画されており、これは API v2 の重大な更新履歴で通知いたします。
 
-## Authentication and authorization
+## 認証と認可
 {: #authentication-and-authorization }
 
-The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
+CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかを検証するために、トークンベースの認証を利用しています。 Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
 
 **Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
 
