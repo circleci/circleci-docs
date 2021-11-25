@@ -10,7 +10,7 @@ version:
 - Server v3.x
 ---
 
-This document provides conceptual information on CircleCI pipelines, as well as introducing some pipelines features.
+This page provides information on CircleCI pipelines, how they are run, and what they include.
 
 ## Overview
 {: #overview }
@@ -31,12 +31,10 @@ From the CircleCI app, with a specific branch selected, the **Run Pipeline** but
 
 ### Run a pipeline using the API
 You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{side.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
-
-### Run a pipeline using webhooks
-TBC
-
+<!---
 ### Scheduling a pipeline
 TBC
+--->
 
 ## Pipeline architecture
 {: #pipeline-architecture }
