@@ -91,40 +91,40 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 
 CircleCI API は、リポジトリ名でプロジェクトを識別する点が以前のバージョンの API と同じです。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ (VCS プロバイダ)、組織名 (またはユーザー名)、リポジトリ名から成り、「トリプレット」と呼ばれます。
 
-プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 The `organization` is your username or organization name in your version control system.
+プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
-With this API, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
+API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
 
 ```
 {project_type}/{org_name}/{repo_name}
 ```
 
-The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
+`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 `project_slug` が、プロジェクトについての情報を得る手段となります。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-## Rate limits
+## レート制限
 {: #rate-limits }
 
-The CircleCI API is protected by rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 弊社は、すべてのユーザーに公平なサービスを提供するために、個々のユーザーによるリクエストや個々のリソースに対するリクエストを制限する権利を有しています。
 
-As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure. There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
+CircleCI と API の統合のオーサーとして、統合が抑制されることを想定し、失敗に対して安全に対応できる必要があります。 API の各部分に異なる保護と制限が設定されています。 CircleCI では特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
 
-For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff. In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
+HTTP API の場合、リクエストが抑制されると [HTTP ステータスコード 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) が表示されます。 統合により抑制されたリクエストの完了が要求される場合は、指数関数的バックオフを使用して、遅延後にこれらのリクエストを再試行する必要があります。 多くの場合、HTTP 429レスポンスコードには、 [Retry-After HTTPヘッダー](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)が付加されています。 このヘッダーが付与されている場合は、リクエストを再試行する前にヘッダー値が指定する期間統合を待つ必要があります。
 
-## Example end-to-end API request
+## エンドツーエンドの API リクエストの例
 {: #example-end-to-end-api-request }
 
-The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a "demo repository" called "hello-world", however, you can use a pre-existing repository to follow along if you choose.
+このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world "という "デモ用リポジトリ "を作成しますが、既存のリポジトリを利用しても構いません。
 
-**NOTE:** Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
+**注意:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを利用しています。
 
-### Prerequisites
+### 前提条件
 {: #prerequisites }
 
 {:.no_toc}
 
-* A GitHub or BitBucket account with a repository to setup with CircleCI.
+* GitHub または BitBucket のアカウント及び CircleCI で設定するレポジトリが必要です。
 * Completion of the CircleCI onboarding.
 
 ### Steps
