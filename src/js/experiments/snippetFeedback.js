@@ -1,12 +1,21 @@
+/**
+ * The SnippetFeedback class is responsible for dynamically adding a user
+ * feedback form whenever a user clicks on the "copy code" button.
+ *
+ * This class is instantiated for each snippet in a page.
+ * Most of the methods are for dynamically adding dom elements for
+ * capturing user feedback.
+ *
+ * */
 class SnippetFeedback {
   constructor(snippetElement) {
     this.snippetElement = snippetElement;
     this.feedbackFormData = {};
     this.codeSnippetContainer = null;
     this.wasThisHelpfulContainer = null;
-    // mini state machine indicator
-    this.currentState = 'empty'; // empty | hasCopiedCode | clickedYes | clickedNo | hasOpenedFeedbackForm | submittedFeedback
-
+    // mini state machine indicator - this is used to prevent more than one form being spawned per code block
+    // or to prevent a user from clicking "yes" and already clicking "yes" (or no).
+    this.currentState = 'empty'; // empty | hasCopiedCode | clickedYesOrNo | hasOpenedFeedbackForm | submittedFeedback
     this.showWasThisHelpfulPrompt();
   }
 
@@ -16,35 +25,34 @@ class SnippetFeedback {
    * off amplitude data as well. */
   showWasThisHelpfulPrompt() {
     this.codeSnippetContainer = this.snippetElement.closest('div.highlight');
-    // make sure we can only create the 'was this helpful' text once.
     if (this.currentState === 'empty') {
-      this.codeSnippetContainer.appendChild(this.createWasThisHelpfulPrompt());
+      // Create some dom elements:
+      const container = this.makeElement({
+        kind: 'div',
+        className: 'was-this-helpful',
+      });
+      const textPrompt = this.makeElement({
+        kind: 'span',
+        text: 'Was this helpful?',
+      });
+      const slash = this.makeElement({ kind: 'span', text: ' / ' });
+      const yesButton = this.constructYesNoButton({ text: 'yes' });
+      const noButton = this.constructYesNoButton({ text: 'no' });
+      // append dom nodes.
+      container.appendChild(textPrompt);
+      container.appendChild(yesButton);
+      container.appendChild(slash);
+      container.appendChild(noButton);
+      this.wasThisHelpfulContainer = container;
+      this.codeSnippetContainer.appendChild(container);
+      // after creating dom elements, move the currentState forward
       this.currentState = 'hasCopiedCode';
     }
   }
 
-  createWasThisHelpfulPrompt() {
-    // make elements
-    const container = this.makeElement({
-      kind: 'div',
-      className: 'was-this-helpful',
-    });
-
-    const textPrompt = this.makeElement({
-      kind: 'span',
-      text: 'Was this helpful?',
-    });
-
-    const slash = this.makeElement({ kind: 'span', text: ' / ' });
-    // put it all together:
-    container.appendChild(textPrompt);
-    container.appendChild(this.constructNoButton());
-    container.appendChild(slash);
-    container.appendChild(this.constructYesButton());
-    this.wasThisHelpfulContainer = container;
-    return container;
-  }
-
+  /**
+   * Construct a dom element, setting classes, text content, class, onclick etc.
+   * */
   makeElement({ kind, text, className, onClick }) {
     let el = document.createElement(kind);
     if (text) el.textContent = text;
@@ -54,15 +62,15 @@ class SnippetFeedback {
     return el;
   }
 
-  constructYesButton() {
+  constructYesNoButton({ text }) {
     let yesBtn = this.makeElement({
       kind: 'button',
-      text: 'Yes',
+      text,
       className: 'text-btn',
-      onClick: (el) => {
+      onClick: () => {
         if (this.currentState === 'hasCopiedCode') {
-          this.currentState = 'clickedYes';
-          this.trackYesOrNoButton('yes');
+          this.currentState = 'clickedYesOrNo';
+          this.trackYesOrNoButton('text');
           this.constructFeedbackForm();
         }
       },
@@ -71,24 +79,11 @@ class SnippetFeedback {
     return yesBtn;
   }
 
-  constructNoButton() {
-    let noBtn = this.makeElement({
-      kind: 'button',
-      text: 'No',
-      className: 'text-btn',
-      onClick: (el) => {
-        if (this.currentState === 'hasCopiedCode') {
-          this.currentState = 'clickedNo';
-          this.trackYesOrNoButton('no');
-          this.constructFeedbackForm();
-        }
-      },
-    });
-    return noBtn;
-  }
-
+  /**
+   * trackYesOrNoButton sends a trackAction to aplitude.
+   * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
+   * */
   trackYesOrNoButton(yesOrNoString) {
-    // actions we track are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
     window.AnalyticsClient.trackAction(
       `docs-snippet-helpful-${yesOrNoString}`,
       {
@@ -99,6 +94,10 @@ class SnippetFeedback {
     );
   }
 
+  /**
+   * `trackFormSubmission` invokes trackAction with a payload of the original
+   * snippet, the feedback of the user, and the timeOfFormSubmission.
+   * */
   trackFormSubmission(formContent) {
     window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
       originatingSnippet: this.snippetElement.textContent,
@@ -109,14 +108,11 @@ class SnippetFeedback {
     });
   }
 
-  // We create somedom elements that constitut a feedbackform each element here
-  // needs to have a uuid so that we can pull the value out of the dom once the
-  // user has submitted the feedback.
+  // We create some dom elements that constitute a feedback form each element
+  // here needs to have a uuid so that we can pull the value out of the dom once
+  // the user has submitted the feedback.
   constructFeedbackForm() {
-    if (
-      this.currentState === 'clickedNo' ||
-      this.currentState === 'clickedYes'
-    ) {
+    if (this.currentState === 'clickedYesOrNo') {
       const container = this.makeElement({ kind: 'div', className: 'form' });
       const prompt = this.makeElement({
         kind: 'div',
@@ -155,7 +151,6 @@ class SnippetFeedback {
  * */
 function init() {
   // add event listeners to all code snippets on page
-
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_docs_snippet_feedback_experiment_test',
     groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
