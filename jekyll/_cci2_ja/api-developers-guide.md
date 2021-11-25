@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-この*API 開発者向けガイド*は、開発者が迅速かつ簡単に CircleCI サービスに API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すためのガイドです。 API v2 の仕様は、[こちら]({{site.baseurl}}/api/v2)をご覧ください。
+この*API 開発者向けガイド*は、開発者の方々が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すためのガイドです。 API v2 の仕様は、[こちら]({{site.baseurl}}/api/v2)をご覧ください。
 
 * 目次
 {:toc}
@@ -280,30 +280,30 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 * CircleCI のオンボーディングとプロジェクトの設定が完了している
 * パーソナル API トークンがあり、サーバーへの呼び出しを行う認証を受けている
 
-This section provides detailed information on how you can perform the following tasks and operations:
+このセクションでは、以下のタスクや操作を行うための詳細情報を説明します。
 
-* [Get project details](#get-project-details)
-* [Get job details](#get-job-details)
-* [Download artifacts](#download-artifacts)
-* [Gather Insights](#gather-insights)
+* [プロジェクトの詳細を得る](#get-project-details)
+* [仕事の詳細を得る](#get-job-details)
+* [アーティファクトのダウンロード](#download-artifacts)
+* [インサイトの収集](#gather-insights)
 
-### Get project details
+### プロジェクトの詳細を得る
 {: #get-project-details }
 {:.no_toc}
 
-You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
+プロジェクトが帰属する組織の名前や、プロジェクトをホストするバージョンコントロールシステム（vcs）など、特定のプロジェクトに関する情報を取得できればと思うことがあるでしょう。 CircleCI API では、 `project/{project-slug}` エンドポイントに `project-slug` パラメータを渡して GET リクエストを一度行うことにより、 このような情報やその他の情報を返すことができます。
 
-You may notice a new concept called a `project-slug` when making this API call. A `project-slug` is a "triplet" that takes the following form:
+この API 呼び出しを行う際に、 `project-slug` という新しい概念があることに気づかれるかもしれません。 `project-slug` は、次のような形式の「トリプレット」です。
 
 ```
 {project_type}/{org_name}/{repo_name}
 ```
 
-The `project_slug` is included in the payload when you pull information about a project, which enables you to retrieve detailed information about a specific project.
+`project_slug` は、プロジェクトの情報をプルする際のペイロードに含まれ、特定のプロジェクトの詳細な情報を取得することができます。
 
-**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects](https://circleci.com/docs/2.0/projects/) page.
+**注意:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト](https://circleci.com/docs/2.0/projects/) のページを参照してください。
 
-#### Steps
+#### 手順
 {: #steps }
 {:.no_toc}
 
