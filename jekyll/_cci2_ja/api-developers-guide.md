@@ -32,7 +32,7 @@ version:
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかの検証には、トークンベースの認証を使用しています。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストが認証されていることを確認する必要があります。 API トークンを追加して、API サーバーが認証する流れを以下のセクションで説明します。
+CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかの検証には、トークンベースの認証を使用しています。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストが認証されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下のセクションで説明します。
 
 **注意**:  `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。
 
@@ -89,7 +89,7 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 ## API の利用開始
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点が以前のバージョンの API と同じです。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ (VCS プロバイダ)、組織名 (またはユーザー名)、リポジトリ名から成り、「トリプレット」と呼ばれます。
+CircleCI API は、リポジトリ名でプロジェクトを識別する点が以前のバージョンの API と同じです。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ (VCS プロバイダ)、組織名 (またはユーザー名)、リポジトリ名から成り、「トリプレット」と呼ばれます。
 
 プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
@@ -99,7 +99,7 @@ API では、`project_slug` というトリプレットの文字列表現が導�
 {project_type}/{org_name}/{repo_name}
 ```
 
-`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 `project_slug` が、プロジェクトについての情報を得る手段となります。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
+`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更される可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式で用いられるはずです。
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
@@ -108,16 +108,16 @@ API では、`project_slug` というトリプレットの文字列表現が導�
 
 CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 弊社は、すべてのユーザーに公平なサービスを提供するために、個々のユーザーによるリクエストや個々のリソースに対するリクエストを制限する権利を有しています。
 
-CircleCI と API の統合のオーサーとして、統合が抑制されることを想定し、失敗に対して安全に対応できる必要があります。 API の各部分に異なる保護と制限が設定されています。 CircleCI では特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
+CircleCI と API の統合のオーサーとして、統合が抑制されることを想定し、失敗に対して安全な対応をする必要があります。 API の各部分に異なる保護と制限が設定されています。 CircleCI では特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
 
-HTTP API の場合、リクエストが抑制されると [HTTP ステータスコード 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) が表示されます。 統合により抑制されたリクエストの完了が要求される場合は、指数関数的バックオフを使用して、遅延後にこれらのリクエストを再試行する必要があります。 多くの場合、HTTP 429レスポンスコードには、 [Retry-After HTTPヘッダー](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)が付加されています。 このヘッダーが付与されている場合は、リクエストを再試行する前にヘッダー値が指定する期間統合を待つ必要があります。
+HTTP API の場合、リクエストが抑制されると [HTTP ステータスコード 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) が表示されます。 統合により抑制されたリクエストの完了が要求される場合は、指数関数的バックオフを使用して、遅延後にこれらのリクエストを再試行する必要があります。 多くの場合、HTTP 429 レスポンスコードには、 [Retry-After HTTPヘッダー](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)が付与されています。 このヘッダーが付与されている場合は、リクエストを再試行する前にヘッダー値が指定する期間統合を待つ必要があります。
 
-## エンドツーエンドの API リクエストの例
+## エンドツーエンドの API リクエスト例
 {: #example-end-to-end-api-request }
 
 このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world "という "デモ用リポジトリ "を作成しますが、既存のリポジトリを使用しても構いません。
 
-**注意:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを利用しています。
+**注意:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを使用しています。
 
 ### 前提条件
 {: #prerequisites }
@@ -131,32 +131,32 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 {: #steps }
 {:.no_toc}
 
-1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` となります。
+1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 オンボーディングにアクセスするには、アプリケーションのサイドバーにある[Add Projects (プロジェクトの追加)]をクリックするか、リンク： https://onboarding.circleci.com/project-dashboard/{VCS}/{org_name}を開きます。ここでは、 `VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` は組織名または個人のVCSのユーザー名を指定します。 オンボーディングリストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 オンボーディングが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれています。
+2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 オンボーディングにアクセスするには、アプリケーションのサイドバーにある [Add Projects (プロジェクトの追加)] をクリックするか、リンク： https://onboarding.circleci.com/project-dashboard/{VCS}/{org_name}を開きます。ここでは、 `VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` には、組織名または個人の VCS ユーザー名を指定します。 オンボーディングリストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 オンボーディングが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれます。
 
     ```yaml
-    # 最新のCircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 See: https://circleci.com/docs/2.0/configuration-reference
+    # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 See: https://circleci.com/docs/2.0/configuration-reference
     version: 2.1
     # Orb という設定パッケージを使用します。
     orbs:
       # welcome-orb で依存関係を宣言します。
       welcome: circleci/welcome-orb@0.4.1
-      # Orchestrate or schedule a set of jobs一連のジョブのオーケストレーションまたはスケジューリングをします。
+      # 一連のジョブのオーケストレーションまたはスケジューリングをします。
       workflows:
-      # ワークフローを "welcome"にします。
+      # ワークフロー名を "welcome"にします。
       welcome:
       # コンテナで  welcome/run ジョブを実行します。 
         jobs:
         - welcome/run
     ```
 
-3. [パーソナル API トークン](https://circleci.com/account/api)のページで API トークンを追加します APIトークンを生成した後は、必ず書き留めて安全な場所に保管してください。
+3. [パーソナル API トークン](https://circleci.com/account/api)のページで API トークンを追加します。 APIトークンを生成した後は、必ず書き留めて安全な場所に保管してください。
 
 4. `curl` を使って API トークンをテストし、動作に問題がないことを確認しましょう。 次のコードスニペットは、プロジェクトのすべてのパイプラインを照会する例です。 以下の例では、中括弧内の値（`{}`）を、ユーザー名／組織名に応じた値に置き換える必要があります。
 
     ```sh
-    # まず、First: set your CircleCI トークンを環境変数として設定します。
+    # まず、CircleCI トークンを環境変数として設定します。
      export CIRCLECI_TOKEN={your_api_token}
 
     curl --header "Circle-Token: $CIRCLECI_TOKEN" \
@@ -201,7 +201,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
     いいですね！ ここまですべて順調でありますように。 ここからはより便利な機能の実行に移りましょう。
 
-5. CircleCI API v2 の利点の一つは、パラメータを使ってパイプラインをリモートでトリガーできることです。 次のコードスニペットは、 `curl` を介して本文のパラメーターがなくてもパイプラインを単純にトリガーします。
+5. CircleCI API v2 の利点の一つは、パラメータを使ってパイプラインをリモートでトリガーできることです。 次のコードスニペットでは、 本文のパラメーターなしで `curl` を使ってパイプラインを簡単にトリガーします。
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -228,7 +228,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     -d '{ "branch": "bar" }'
     ```
 
-6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
+6. 次に、より複雑な例を見てみましょう。パイプラインをトリガーして、設定に動的に置換できるパラメータを渡します。 この例では、docker-executor キーに docker image タグを渡します。 まず、 `.circleci/config.yml` を、オンボーディングにより提供される標準の「Hello World」サンプルよりも少し複雑なものに変更する必要があります。
 
     ```yaml
     version: 2.1
@@ -238,7 +238,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
           - image: "circleci/node:<< pipeline.parameters.image-tag >>"
             auth:
               username: mydockerhub-user
-              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+              password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           IMAGETAG: "<< pipeline.parameters.image-tag >>"
         steps:
@@ -247,11 +247,12 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
       image-tag:
         default: latest
         type: string
+
     ```
 
-    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+    API から受け取るパラメーターを宣言する必要があります。 ここでは、`parameters` キーの配下に、 _新しいパイプラインのトリガー_ のエンドポイントへの POST リクエストの JSON ペイロードで想定される「イメージタグ」を定義しています。
 
-7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
+7. これで、以下のように POST リクエストで変数を渡す `curl` リクエストを実行できるようになりました。
 
     ```sh
     curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -261,23 +262,23 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     }' https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
-This concludes the end-to-end example of using the v2 API. For more detailed information about other endpoints you may wish to call, please refer to the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2) for an overview of all endpoints currently available.
+v2 API を使用したエンドツーエンドの例は以上です。 他のエンドポイントに関する詳細な情報は、現在利用可能なすべての エンドポイントの概要が書かれた [CircleCI API v2 のドキュメント]({{site.baseurl}}/api/v2) を参照してください。
 
-## Additional API use cases
+## その他の API 使用例
 {: #additional-api-use-cases }
 
-Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Whether you wish to return information about a job or project, or retrieve more detailed information about a project by reviewing its artifacts, the examples shown below should assist you in gaining a better understanding of how to make some API requests to the server so you can perform a deep dive into the specifics of your work.
+エンドツーエンドの API リクエスト例とその説明を通じて CircleCI API v2 サービスがどのように機能するかを大まかに理解したところで、API を使用する際に定期的に行う可能性のあるいくつかの一般的なタスクや操作を見てみましょう。 ジョブやプロジェクトに関する情報を返したい場合やプロジェクトのアーティファクトを確認してより詳細な情報を取得したい場合など、以下の例を参考にすることで、サーバーに API リクエストを行う方法や作業の詳細をより深く理解することができます。
 
-### Prerequisites
+### 前提条件
 {: #prerequisites }
 {:.no_toc}
 
 
-Before trying any of the API calls in this section, make sure you have met the following prerequisites:
+このセクションの API 呼び出し行う前に、以下の前提条件を満たしていることを確認してください。
 
-* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
-* You have completed CircleCI onboarding and you have a project setup.
-* You have a personal API token and have been authenticated to make calls to the server.
+* GitHub または BitBucket のアカウントの設定が完了し、CircleCI で使用するレポジトリがある
+* CircleCI のオンボーディングとプロジェクトの設定が完了している
+* パーソナル API トークンがあり、サーバーへの呼び出しを行う認証を受けている
 
 This section provides detailed information on how you can perform the following tasks and operations:
 
