@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-この*API 開発者向けガイド*は、開発者が 迅速かつ簡単に CircleCI サービスに API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すためのガイドです。 API v2 の仕様書は、[こちら]({{site.baseurl}}/api/v2)をご覧ください。
+この*API 開発者向けガイド*は、開発者が迅速かつ簡単に CircleCI サービスに API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すためのガイドです。 API v2 の仕様は、[こちら]({{site.baseurl}}/api/v2)をご覧ください。
 
 * 目次
 {:toc}
@@ -27,12 +27,12 @@ version:
 * プロジェクト (プレビュー)
 * ユーザー (プレビュー)
 
-**注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 あらかじめ API v2 プレビューのエンドポイントに対する重大な変更が計画されており、これは API v2 の重大な更新履歴で通知いたします。
+**注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 あらかじめ API v2 プレビューのエンドポイントに対する重大な変更が計画されており、これは API v2 の重大な更新履歴で通知します。
 
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかを検証するために、トークンベースの認証を利用しています。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストが認証されていることを確認する必要があります。 API トークンを追加して、API サーバーが認証する流れを以下のセクションで説明します。
+CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかの検証には、トークンベースの認証を使用しています。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストが認証されていることを確認する必要があります。 API トークンを追加して、API サーバーが認証する流れを以下のセクションで説明します。
 
 **注意**:  `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。
 
@@ -115,7 +115,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ## エンドツーエンドの API リクエストの例
 {: #example-end-to-end-api-request }
 
-このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world "という "デモ用リポジトリ "を作成しますが、既存のリポジトリを利用しても構いません。
+このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world "という "デモ用リポジトリ "を作成しますが、既存のリポジトリを使用しても構いません。
 
 **注意:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを利用しています。
 
@@ -125,39 +125,39 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 {:.no_toc}
 
 * GitHub または BitBucket のアカウント及び CircleCI で設定するレポジトリが必要です。
-* Completion of the CircleCI onboarding.
+* CircleCI のオンボーディングが完了している必要があります。
 
-### Steps
+### 手順
 {: #steps }
 {:.no_toc}
 
-1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
+1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` となります。
 
-2. Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{org_name} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the onboarding list and click Setup Project. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
+2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 オンボーディングにアクセスするには、アプリケーションのサイドバーにある[Add Projects (プロジェクトの追加)]をクリックするか、リンク： https://onboarding.circleci.com/project-dashboard/{VCS}/{org_name}を開きます。ここでは、 `VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` は組織名または個人のVCSのユーザー名を指定します。 オンボーディングリストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 オンボーディングが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれています。
 
     ```yaml
-    # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+    # 最新のCircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 See: https://circleci.com/docs/2.0/configuration-reference
     version: 2.1
-    # Use a package of configuration called an orb.
+    # Orb という設定パッケージを使用します。
     orbs:
-      # Declare a dependency on the welcome-orb
+      # welcome-orb で依存関係を宣言します。
       welcome: circleci/welcome-orb@0.4.1
-      # Orchestrate or schedule a set of jobs
+      # Orchestrate or schedule a set of jobs一連のジョブのオーケストレーションまたはスケジューリングをします。
       workflows:
-      # Name the workflow "welcome"
+      # ワークフローを "welcome"にします。
       welcome:
-      # Run the welcome/run job in its own container
+      # コンテナで  welcome/run ジョブを実行します。 
         jobs:
         - welcome/run
     ```
 
-3. Add an API token from the [Personal API Tokens page](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
+3. [パーソナル API トークン](https://circleci.com/account/api)のページで API トークンを追加します APIトークンを生成した後は、必ず書き留めて安全な場所に保管してください。
 
-4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
+4. `curl` を使って API トークンをテストし、動作に問題がないことを確認しましょう。 次のコードスニペットは、プロジェクトのすべてのパイプラインを照会する例です。 以下の例では、中括弧内の値（`{}`）を、ユーザー名／組織名に応じた値に置き換える必要があります。
 
     ```sh
-    # First: set your CircleCI token as an environment variable
-    export CIRCLECI_TOKEN={your_api_token}
+    # まず、First: set your CircleCI トークンを環境変数として設定します。
+     export CIRCLECI_TOKEN={your_api_token}
 
     curl --header "Circle-Token: $CIRCLECI_TOKEN" \
       --header 'Accept: application/json'    \
@@ -165,7 +165,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
       https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
-    You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
+    フォーマットされていない JSON の長い文字列を受け取ります。 フォーマット後は以下のようになります。
 
     ```json
     {
@@ -199,9 +199,9 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
       }
     ```
 
-    That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
+    いいですね！ ここまですべて順調でありますように。 ここからはより便利な機能の実行に移りましょう。
 
-5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
+5. CircleCI API v2 の利点の一つは、パラメータを使ってパイプラインをリモートでトリガーできることです。 次のコードスニペットは、 `curl` を介して本文のパラメーターがなくてもパイプラインを単純にトリガーします。
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -209,7 +209,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
 
-    # Which returns:
+    # 以下を返します。
     {
       "number": 2,
       "state": "pending",
@@ -218,7 +218,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     }
     ```
 
-    While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
+    これだけでも便利ですが、この POST リクエストを送信する際にパイプラインのパラメーターをカスタマイズできるようにしたいと思います。 本文のパラメーターを`curl`リクエストに含めることにより ( `-d` を使用)、パイプラインの実行時にパイプラインの特定の属性（パイプラインパラメータ、ブランチ、 git タグ）をカスタマイズできます。 以下の例では、"my-branch " に対してトリガーするようパイプラインに指示しています。
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
