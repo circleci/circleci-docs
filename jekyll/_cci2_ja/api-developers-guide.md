@@ -32,26 +32,26 @@ version:
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかを検証するために、トークンベースの認証を利用しています。 Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
+CircleCI API は、API サーバーへのアクセスを管理し、ユーザーが API リクエストを行うためのアクセス許可を持っているかどうかを検証するために、トークンベースの認証を利用しています。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストが認証されていることを確認する必要があります。 API トークンを追加して、API サーバーが認証する流れを以下のセクションで説明します。
 
-**Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
+**注意**:  `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。
 
-### Add an API token
+### API トークンの追加
 {: #add-an-api-token }
 {:.no_toc}
 
-To add an API token, perform the steps listed below.
+API トークンの追加は、以下の手順で行います。
 
-1. Log in to the CircleCI web application.
-1. Visit the [Personal API Tokens page](https://app.circleci.com/settings/user/tokens) and follow the steps to add an API token.
-2.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
+1. CircleCI の Web アプリケーションにログインします。
+1. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)に行き、API トークンの追加手順に従います。
+2.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
 
     ```sh
     export CIRCLE_TOKEN={your_api_token}
     curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
-3.  You should see a JSON response similar to the example shown below.
+3.  以下のような JSON レスポンスが表示されます。
 
     ```json
     {
@@ -59,17 +59,18 @@ To add an API token, perform the steps listed below.
       "login": "string",
       "name": "string"
     }
+
     ```
 
 
-**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
+**注意:** すべての API 呼び出しは、同じように JSON コンテントタイプの API トークンを使用して標準的な HTTP 呼び出しにより行われます。 このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドに応じて、この例に記載されていない追加のフィールドがある可能性があることをご了承ください。
 
-### Accept Header
+### 承認ヘッダー
 {: #accept-header }
 
-It is recommended that you specify an accept header in your API requests. The majority of API endpoints will return JSON by default, but some endpoints (primarily API v1) return EDN if no accept header is specified.
+API リクエスト時は、承認ヘッダーを指定することをお勧めします。 ほとんどの API がデフォルトで JSON を返しますが、一部のエンドポイント (主に API v1) は、承認ヘッダーが指定されていない場合は EDN を返します。
 
-To return formatted JSON, include a `text/plain` header like the example shown below:
+フォーマットされた JSON を返すには、以下の例のように、 `text/plain` ヘッダーを記述します。
 
 ```sh
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
@@ -77,7 +78,7 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
 ```
 
-To return compressed JSON:
+圧縮した JSON を返す場合は、
 
 ```sh
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
@@ -85,12 +86,12 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
 ```
 
-## Getting started with the API
+## API の利用開始
 {: #getting-started-with-the-api }
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository.
+CircleCI API は、リポジトリ名でプロジェクトを識別する点が以前のバージョンの API と同じです。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ (VCS プロバイダ)、組織名 (またはユーザー名)、リポジトリ名から成り、「トリプレット」と呼ばれます。
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
+プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 The `organization` is your username or organization name in your version control system.
 
 With this API, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
