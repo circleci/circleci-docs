@@ -15,7 +15,7 @@ This page provides information on CircleCI pipelines, how they are run, and what
 ## Overview
 {: #overview }
 
-{{% include_relative _glossary/Pipelines.md %}}
+{% include_relative _glossary/Pipelines.md %}
 
 When visiting your CircleCI dashboard you are presented with recent pipelines that have run in your organization/account.
 
