@@ -15,8 +15,7 @@ This page provides information on CircleCI pipelines, how they are run, and what
 ## Overview
 {: #overview }
 
-**Pipelines** represent the entire configuration that is run when you build your CircleCI projects. The entirety of a
-`.circleci/config.yml` file is executed by a pipeline.
+{{% include_relative _glossary/Pipelines.md %}}
 
 When visiting your CircleCI dashboard you are presented with recent pipelines that have run in your organization/account.
 
