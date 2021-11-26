@@ -189,7 +189,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 ```
 
 
-=== GET /api/v2/runner/tasks
+=== GET /api/v2/tasks
 
 指定したリソース クラスで未処理のタスクの数を取得します。
 
@@ -221,7 +221,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 ==== サンプル
 
 ```sh
-curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
