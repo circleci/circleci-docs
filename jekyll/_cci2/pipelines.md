@@ -42,6 +42,7 @@ In the CircleCI app, when you have a specific branch selected, the **Run Pipelin
 You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{side.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
 <!---
 ### Scheduling a pipeline
+{: #scheduling-a-pipeline }
 TBC
 --->
 
