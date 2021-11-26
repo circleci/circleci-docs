@@ -7,10 +7,9 @@
  * capturing user feedback.
  *
  * */
-class SnippetFeedback {
+export class SnippetFeedback {
   constructor(snippetElement) {
     this.snippetElement = snippetElement;
-    this.feedbackFormData = {};
     this.codeSnippetContainer = null;
     this.wasThisHelpfulContainer = null;
     // mini state machine indicator - this is used to prevent more than one form being spawned per code block
@@ -146,7 +145,7 @@ class SnippetFeedback {
 
 /**
  * init queries the dom for all snipppets
- * TODO: when that snippet's COPY CODE button is clicked...
+ * TODO(blocked): when that snippet's COPY CODE button is clicked... (waiting for graduation of copy code buttons)
  *
  * */
 function init() {
