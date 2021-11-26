@@ -17,12 +17,13 @@ This document describes how to skip or cancel pipelines. There are a couple of w
 ## Skipping a pipeline
 {: #skipping-a-build }
 
-By default, CircleCI automatically runs a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push. 
+By default, CircleCI automatically runs a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
 
 **CircleCI server v2.x**
 If you are using server v2.x you are not using the pipelines feature but the method of skipping builds described here can still be used.
 
 ### Scope
+{: #scope }
 
 A few points to note regarding the scope of the `ci skip` feature:
 
@@ -75,6 +76,7 @@ If you are frequently pushing changes to a branch, you increase the chances of q
 To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
 
 ### Scope
+{: #scope }
 
 A few points to note regarding the use of the auto-cancel feature:
 
