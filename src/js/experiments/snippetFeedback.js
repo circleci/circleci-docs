@@ -9,68 +9,61 @@
  * */
 export class SnippetFeedback {
   constructor(snippetElement) {
+    // Dom elements
     this.snippetElement = snippetElement;
     this.codeSnippetContainer = null;
     this.wasThisHelpfulContainer = null;
-    // mini state machine indicator - this is used to prevent more than one form being spawned per code block
-    // or to prevent a user from clicking "yes" and already clicking "yes" (or no).
-    this.currentState = 'empty'; // empty | hasCopiedCode | clickedYesOrNo | hasOpenedFeedbackForm | submittedFeedback
-    this.showWasThisHelpfulPrompt();
+    this.feedbackForm = null;
+    // For tracking user's response to be included in the final feedback form.
+    this.wasThisHelpful = null;
+    this.renderWasThisHelpfulPrompt();
   }
+
+  // -- Render functions
+  // These are responsible for constructing and attaching new dom elements
+  // based on the user's flow in the feedback process.
+  //
 
   /**
    * Construct a "Was this helpful" line, and inject it below the code snippet.
-   * Add on click handlers to the yes/no that will update class state, and send
-   * off amplitude data as well. */
-  showWasThisHelpfulPrompt() {
+   */
+  renderWasThisHelpfulPrompt() {
     this.codeSnippetContainer = this.snippetElement.closest('div.highlight');
-    if (this.currentState === 'empty') {
-      // Create some dom elements:
-      const container = this.makeElement({
-        kind: 'div',
-        className: 'was-this-helpful',
-      });
-      const textPrompt = this.makeElement({
-        kind: 'span',
-        text: 'Was this helpful?',
-      });
-      const slash = this.makeElement({ kind: 'span', text: ' / ' });
-      const yesButton = this.constructYesNoButton({ text: 'yes' });
-      const noButton = this.constructYesNoButton({ text: 'no' });
-      // append dom nodes.
-      container.appendChild(textPrompt);
-      container.appendChild(yesButton);
-      container.appendChild(slash);
-      container.appendChild(noButton);
-      this.wasThisHelpfulContainer = container;
-      this.codeSnippetContainer.appendChild(container);
-      // after creating dom elements, move the currentState forward
-      this.currentState = 'hasCopiedCode';
-    }
+    // Create some dom elements:
+    const container = this.makeElement({
+      kind: 'div',
+      className: 'was-this-helpful',
+    });
+    const textPrompt = this.makeElement({
+      kind: 'span',
+      text: 'Was this helpful?',
+    });
+    const slash = this.makeElement({ kind: 'span', text: ' / ' });
+    const yesButton = this.renderYesNoButton({ text: 'yes' });
+    const noButton = this.renderYesNoButton({ text: 'no' });
+    // append dom nodes.
+    container.appendChild(textPrompt);
+    container.appendChild(yesButton);
+    container.appendChild(slash);
+    container.appendChild(noButton);
+    this.wasThisHelpfulContainer = container;
+    this.codeSnippetContainer.appendChild(container);
   }
 
   /**
-   * Construct a dom element, setting classes, text content, class, onclick etc.
+   * Creates the dom element for the yes/no button in the prompt.
    * */
-  makeElement({ kind, text, className, onClick }) {
-    let el = document.createElement(kind);
-    if (text) el.textContent = text;
-    if (className) el.classList.add(className);
-    if (onClick) el.addEventListener('click', onClick, { once: true });
-
-    return el;
-  }
-
-  constructYesNoButton({ text }) {
+  renderYesNoButton({ text }) {
     let yesBtn = this.makeElement({
       kind: 'button',
       text,
       className: 'text-btn',
       onClick: () => {
-        if (this.currentState === 'hasCopiedCode') {
-          this.currentState = 'clickedYesOrNo';
-          this.trackYesOrNoButton('text');
-          this.constructFeedbackForm();
+        this.wasThisHelpful = text;
+        this.trackYesOrNoButton(text);
+        // only pop up the form if it has not yet been created.
+        if (this.feedbackForm == null) {
+          this.renderFeedbackForm();
         }
       },
     });
@@ -79,39 +72,11 @@ export class SnippetFeedback {
   }
 
   /**
-   * trackYesOrNoButton sends a trackAction to aplitude.
-   * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
+   * Renders a feedback form to the user, provided they have clicked
+   * on a "yes" or "no" button in the 'was this helpful' prompt.
    * */
-  trackYesOrNoButton(yesOrNoString) {
-    window.AnalyticsClient.trackAction(
-      `docs-snippet-helpful-${yesOrNoString}`,
-      {
-        originatingSnippet: this.snippetElement.textContent,
-        wasHelpful: yesOrNoString,
-        timeOfButtonClick: Date.now(),
-      },
-    );
-  }
-
-  /**
-   * `trackFormSubmission` invokes trackAction with a payload of the original
-   * snippet, the feedback of the user, and the timeOfFormSubmission.
-   * */
-  trackFormSubmission(formContent) {
-    window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
-      originatingSnippet: this.snippetElement.textContent,
-      feedback: formContent,
-      // for diffing this against the time that the trackYesOrNoButton was clicked
-      // as well as possible the time the copy code button was clicked (TODO add that)
-      timeOfFormSubmission: Date.now(),
-    });
-  }
-
-  // We create some dom elements that constitute a feedback form each element
-  // here needs to have a uuid so that we can pull the value out of the dom once
-  // the user has submitted the feedback.
-  constructFeedbackForm() {
-    if (this.currentState === 'clickedYesOrNo') {
+  renderFeedbackForm() {
+    if (!this.feedbackForm) {
       const container = this.makeElement({ kind: 'div', className: 'form' });
       const prompt = this.makeElement({
         kind: 'div',
@@ -138,8 +103,55 @@ export class SnippetFeedback {
       container.appendChild(sendButton);
 
       this.wasThisHelpfulContainer.appendChild(container);
-      this.currentState = 'hasOpenedFeedbackForm';
     }
+  }
+
+  // -- Trackers --
+  // These are responsible for sending data based on user input
+  // to amplitude.
+
+  /**
+   * trackYesOrNoButton sends a trackAction to aplitude.
+   * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
+   * */
+  trackYesOrNoButton(yesOrNoString) {
+    window.AnalyticsClient.trackAction(
+      `docs-snippet-helpful-${yesOrNoString}`,
+      {
+        originatingSnippet: this.snippetElement.textContent,
+        wasHelpful: yesOrNoString,
+        timeOfButtonClick: Date.now(),
+      },
+    );
+  }
+
+  /**
+   * `trackFormSubmission` invokes trackAction with a payload of the original
+   * snippet, the feedback of the user, and the timeOfFormSubmission.
+   * */
+  trackFormSubmission(formContent) {
+    window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
+      originatingSnippet: this.snippetElement.textContent,
+      feedback: formContent,
+      wasThisHelpful: this.wasThisHelpful,
+      // for diffing this against the time that the trackYesOrNoButton was clicked
+      // as well as possible the time the copy code button was clicked (TODO add that)
+      timeOfFormSubmission: Date.now(),
+    });
+  }
+
+  // -- Helpers --
+
+  /**
+   * Construct a dom element, setting classes, text content, class, onclick etc.
+   * */
+  makeElement({ kind, text, className, onClick }) {
+    let el = document.createElement(kind);
+    if (text) el.textContent = text;
+    if (className) el.classList.add(className);
+    if (onClick) el.addEventListener('click', onClick, { once: true });
+
+    return el;
   }
 }
 
