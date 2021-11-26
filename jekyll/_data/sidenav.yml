@@ -50,7 +50,9 @@ en:
       children:
         - name: Pipelines overview
           link: 2.0/pipelines/
-        - name: Skip or cancel a build
+        - name: Pipeline processing
+          link: 2.0/build-processing
+        - name: Skip or cancel a pipeline
           link: 2.0/skip-build/
     - name: Features
       children:

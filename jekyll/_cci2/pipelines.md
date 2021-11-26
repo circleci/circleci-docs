@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Viewing Pipelines"
 short-title: "Viewing Pipelines"
-description: "Introduction to Pipelines"
+description: "This document introduces the concept of pipelines and shows how pipelines can be run and wat they include."
 categories: [getting-started]
 order: 1
 version:
@@ -10,7 +10,7 @@ version:
 - Server v3.x
 ---
 
-This page provides information on CircleCI pipelines, how they are run, and what they include.
+This page provides information on CircleCI pipelines, how they are run, and what they include. For further information on pipeline processing and the features available within your pipelines see the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
 
 ## Overview
 {: #overview }
@@ -20,6 +20,8 @@ CircleCI pipelines are the highest-level unit of work, encompassing a project's 
 Pipelines are not available on installations of CircleCI server v2.x.
 
 When visiting your CircleCI dashboard you are presented with recent pipelines that have run in your organization/account.
+
+![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
 ## Running a pipeline
 {: #running-a-pipeline }
@@ -39,11 +41,12 @@ In the CircleCI app, when you have a specific branch selected, the **Run Pipelin
 ### Run a pipeline using the API
 {: #run-a-pipeline-using-the-api }
 
-You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{side.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
+You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{site.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
+
 <!---
 ### Scheduling a pipeline
 {: #scheduling-a-pipeline }
-{: #scheduling-a-pipeline }
+
 TBC
 --->
 
