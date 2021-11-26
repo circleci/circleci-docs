@@ -43,6 +43,7 @@ You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{si
 <!---
 ### Scheduling a pipeline
 {: #scheduling-a-pipeline }
+{: #scheduling-a-pipeline }
 TBC
 --->
 
