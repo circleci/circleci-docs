@@ -1,7 +1,6 @@
 ---
 layout: classic-docs
-title: "Viewing Pipelines"
-short-title: "Viewing Pipelines"
+title: "Pipelines Introduction"
 description: "This document introduces the concept of pipelines and shows how pipelines can be run and wat they include."
 categories: [getting-started]
 order: 1
