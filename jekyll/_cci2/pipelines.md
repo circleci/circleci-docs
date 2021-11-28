@@ -19,7 +19,7 @@ CircleCI pipelines are the highest-level unit of work, encompassing a project's 
 
 Pipelines are not available on installations of CircleCI server v2.x.
 
-When visiting your CircleCI dashboard you are presented with recent pipelines that have run in your organization/account.
+When visiting your CircleCI dashboard, you are shown a list of recent pipelines that have run in your organization/account.
 
 ![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
