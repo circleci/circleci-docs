@@ -80,7 +80,7 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* When using the auto-cancel feature, pipelines will still be created but the included workflows (and therefore jobs) will not run.
+* When using the auto-cancel feature, pipelines will still be created, but the included workflows (and therefore jobs) will not run.
 * Your project's default branch (usually `main`) will never auto-cancel builds.
 
 ### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
