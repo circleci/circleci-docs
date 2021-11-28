@@ -1,7 +1,13 @@
 ---
 layout: classic-docs
+<<<<<<< HEAD
 title: "Pipelines Introduction"
 description: "This document introduces the concept of pipelines and shows how pipelines can be run and wat they include."
+=======
+title: "Viewing Pipelines"
+short-title: "Viewing Pipelines"
+description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
+>>>>>>> ead84d4961d8757261a3ddaa2796e2aa549b4e2a
 categories: [getting-started]
 order: 1
 version:
@@ -9,7 +15,7 @@ version:
 - Server v3.x
 ---
 
-This page provides information on CircleCI pipelines, how they are run, and what they include. For further information on pipeline processing and the features available within your pipelines see the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
+This page provides information on CircleCI pipelines, how they are run, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
 
 ## Overview
 {: #overview }
@@ -18,7 +24,7 @@ CircleCI pipelines are the highest-level unit of work, encompassing a project's 
 
 Pipelines are not available on installations of CircleCI server v2.x.
 
-When visiting your CircleCI dashboard you are presented with recent pipelines that have run in your organization/account.
+When visiting your CircleCI dashboard, you are shown a list of recent pipelines that have run in your organization/account.
 
 ![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
