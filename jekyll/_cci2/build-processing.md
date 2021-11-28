@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Pipeline Processing"
-description: "This document contains informaiton on CircleCI pipelines, what they encompass, and descriptions of some features available to use in your pipelines"
+description: "This document describes CircleCI pipelines, what they encompass, and some features available to use in your pipelines"
 categories: [settings]
 order: 1
 version:
