@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Viewing Pipelines"
 short-title: "Viewing Pipelines"
-description: "This document introduces the concept of pipelines and shows how pipelines can be run and wat they include."
+description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
 categories: [getting-started]
 order: 1
 version:
