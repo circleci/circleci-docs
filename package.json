@@ -15,7 +15,7 @@
     "datadog-synthetics-prod": "yarn datadog-ci synthetics run-tests -f ./.datadog/production.synthetics.json",
     "dev": "yarn webpack-dev && docker-compose up",
     "start": "./scripts/start.sh",
-    "clean": "docker exec -it jekyll bundle exec jekyll clean",
+    "clean": "docker exec -it circleci-docs_jekyll_1 bundle exec jekyll clean",
     "stop": "docker-compose down",
     "prod": "yarn webpack-prod && docker-compose up",
     "webpack-dev": "webpack --mode=development",
