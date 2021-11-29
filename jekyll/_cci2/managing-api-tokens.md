@@ -89,7 +89,7 @@ employee leaves the company or when a token has been considered leaked.
 1. In the CircleCI application, go to your project's settings. There are various ways to get there. One way is to select **Projects** in the sidebar, then the ellipsis (`...`) next to your project and select **Project Settings**.
 1. Select **API Permissions**.
 1. Click the **X** in the **Remove** column for the token you wish to replace.
-   When the confirmation window appears, enter the text DELETE in the form and click the **Delete API Token** button.
+   When the confirmation window appears, enter the text `DELETE` in the form and click the **Delete API Token** button.
 1. Click the **Create API Token** button.
 1. Choose the same scope used for the old token from the dropdown menu.
 1. In the **Label** field, type a label for the token. It can be the same name given to the old token.
