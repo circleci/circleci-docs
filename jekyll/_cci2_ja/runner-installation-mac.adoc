@@ -106,6 +106,7 @@ sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/lau
 
 2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
 
+
 ```bash
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```

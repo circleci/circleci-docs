@@ -7,6 +7,8 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
@@ -115,7 +117,7 @@ Endpoint       | Description
 ## API v2 and server customers
 {: #api-v2-and-server-customers }
 
-API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x.
+API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
 
 ## Data insights
 {: #data-insights }

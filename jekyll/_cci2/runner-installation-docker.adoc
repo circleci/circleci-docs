@@ -22,16 +22,16 @@ The host needs to have Docker installed. Once the `runner` container is started,
 
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
-== Create a Dockerfile that extends the CircleCI Runner image
+== Create a Dockerfile that extends the CircleCI runner image
 
-In this example, python3 is installed on top of the base image.
+In this example, Python 3 is installed on top of the base image.
 
 `Dockerfile.runner.extended`
 
 ```
 FROM circleci/runner:launch-agent
-RUN apt-get update; \
-    apt-get install --no-install-recommends -y \
+RUN sudo apt-get update; \
+    sudo apt-get install --no-install-recommends -y \
         python3
 ```
 

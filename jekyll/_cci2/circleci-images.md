@@ -7,6 +7,7 @@ categories: [containerization]
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -30,8 +31,8 @@ useful for CI/CD. This document will provide an overview of best practices when 
 If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
 
 - Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
+- Find all CircleCI pre-built images available on [Docker Hub](https://hub.docker.com/u/cimg).
 - Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
-- All CircleCI pre-built images are available for browsing on [Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
 otherwise improve functionality, and these changes can sometimes affect
@@ -360,31 +361,15 @@ images!
 
 **Resources:**
 
-- [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
+- [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
 
 **Usage:** Add the following under `docker:` in your config.yml:
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
+**Recent Tags:**
 
-<ul class="list-3cols">
-{% assign tags = image[1].tags | sort | reverse %}
-{% assign tagCounter = 1 %}
-{% for tag in tags %}
-	{% if tagCounter > 99 %}
-		{% break %}
-	{% endif %}
-	{% unless tag contains "-browsers" or tag contains "-node" or tag contains "-ram" %}
-	<li>{{ tag }}</li>
-	{% assign tagCounter = tagCounter | plus:1 %}
-	{% endunless %}
-{% endfor %}
-</ul>
-
-
-<br/>
-Note: Any variants available for this image can be used by appending the variant tag to the tags above. View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"}.
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }})/tags?ordering=last_updated).
 
 ---
 

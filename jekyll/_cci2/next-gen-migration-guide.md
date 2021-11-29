@@ -6,6 +6,7 @@ description: "A guide for migrating from using legacy images to next-gen images.
 order: 30
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

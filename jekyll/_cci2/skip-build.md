@@ -6,6 +6,7 @@ description: How to Prevent CircleCI From Automatically Building
 order: 100
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

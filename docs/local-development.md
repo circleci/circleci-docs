@@ -19,8 +19,7 @@ _(Warning: This may take up to 10 minutes to build)_
 8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
 9. To gracefully stop the running commands you can CTRL-C.
 
-**Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
-
+**Note:** In the event you find yourself needing to cleanup docker/jekyll cache, you can use the `yarn clean` command.
 
 ## 2. Local Development with Ruby and Bundler (alternative to Docker)
 
@@ -87,7 +86,7 @@ If you want to work on the way search works on docs, follow the below instructio
 
 The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
-All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`. These correspond to CircleCI Classic and CircleCI 2.0, respectively.
+All docs live in folders named after the version of CircleCI. The only one you need to worry about is `jekyll/_cci2` or `jekyll/_cci2_ja` if you want to work on our translated content. .
 
 1. Create a branch and switch to it:
 
@@ -147,7 +146,7 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 
 ## Submitting Pull Requests
 
-After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
+If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and follow the steps in [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) above. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
 
 ## Docker Tag List for CircleCI Convenience Images
 

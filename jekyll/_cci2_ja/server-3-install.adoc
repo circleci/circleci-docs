@@ -17,6 +17,7 @@ NOTE: In the following steps replace any items or credentials displayed between 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
+
 CircleCI Server v3.x では、https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` の https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[プラグイン]です。
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 

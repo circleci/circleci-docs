@@ -34,8 +34,8 @@ things you can do with the CircleCI CLI include:
 - Managing contexts
 
 This document will cover the installation and usage of the CLI tool. **Note:**
-the new CLI is currently not available on server installations of CircleCI. The
-legacy CLI does work in Server and can be installed.
+this CLI is not available on CircleCI server v2.x installations but the
+legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 
 * TOC
 {:toc}
@@ -234,18 +234,19 @@ See the [CircleCI Orbs GitHub topic tag](https://github.com/search?q=topic%3Acir
 Running `circleci config process` validates your config, but will also display
 expanded source configuration alongside your original config (useful if you are using orbs).
 
-Consider the example configuration that uses the `hello-build` orb:
+Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
 ```
 version: 2.1
 
 orbs:
-    hello: circleci/hello-build@0.0.5
+  node: circleci/node@4.7.0
 
 workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+  version: 2
+  example-workflow:
+      jobs:
+        - node/test
 ```
 
 Running `circleci config process .circleci/config.yml` will output the following
@@ -253,49 +254,81 @@ Running `circleci config process .circleci/config.yml` will output the following
 
 {% raw %}
 ```sh
-# Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
+# Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
-  hello/hello-build:
+  node/test:
     docker:
-    - image: circleci/buildpack-deps:curl-browsers
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    - image: cimg/node:13.11.0
     steps:
+    - checkout
     - run:
-        command: echo "Hello ${CIRCLE_USERNAME}"
+        command: |
+          if [ ! -f "package.json" ]; then
+            echo
+            echo "---"
+            echo "Unable to find your package.json file. Did you forget to set the app-dir parameter?"
+            echo "---"
+            echo
+            echo "Current directory: $(pwd)"
+            echo
+            echo
+            echo "List directory: "
+            echo
+            ls
+            exit 1
+          fi
+        name: Checking for package.json
+        working_directory: ~/project
     - run:
-        command: |-
-          echo "TRIGGERER: ${CIRCLE_USERNAME}"
-          echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
-          echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
-          echo "BRANCH: ${CIRCLE_BRANCH}"
-          echo "RUNNING JOB: ${CIRCLE_JOB}"
-          echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
-          echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
-        name: Show some of the CircleCI runtime env vars
+        command: |
+          if [ -f "package-lock.json" ]; then
+            echo "Found package-lock.json file, assuming lockfile"
+            ln package-lock.json /tmp/node-project-lockfile
+          elif [ -f "npm-shrinkwrap.json" ]; then
+            echo "Found npm-shrinkwrap.json file, assuming lockfile"
+            ln npm-shrinkwrap.json /tmp/node-project-lockfile
+          elif [ -f "yarn.lock" ]; then
+            echo "Found yarn.lock file, assuming lockfile"
+            ln yarn.lock /tmp/node-project-lockfile
+          fi
+          ln package.json /tmp/node-project-package.json
+        name: Determine lockfile
+        working_directory: ~/project
+    - restore_cache:
+        keys:
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-
     - run:
-        command: |-
-          echo "uname:" $(uname -a)
-          echo "arch: " $(arch)
-        name: Show system information
+        command: "if [[ ! -z \"\" ]]; then\n  echo \"Running override package installation command:\"\n  \nelse\n  npm ci\nfi\n"
+        name: Installing NPM packages
+        working_directory: ~/project
+    - save_cache:
+        key: node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        paths:
+        - ~/.npm
+    - run:
+        command: npm run test
+        name: Run NPM Tests
+        working_directory: ~/project
 workflows:
-  Hello Workflow:
-    jobs:
-    - hello/hello-build
   version: 2
+  example-workflow:
+    jobs:
+    - node/test
 
 # Original config.yml file:
 # version: 2.1
-#
+# 
 # orbs:
-#     hello: circleci/hello-build@0.0.5
-#
+#   node: circleci/node@4.7.0
+# 
 # workflows:
-#     \"Hello Workflow\":
-#         jobs:
-#           - hello/hello-build
+#   version: 2
+#   example-workflow:
+#       jobs:
+#         - node/test
 
 ```
 {% endraw %}
@@ -376,10 +409,10 @@ For security reasons, encrypted environment variables configured in the UI will 
 
 The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
-## Using the CLI on CircleCI server
-{: #using-the-cli-on-circleci-server }
+## Using the CLI on CircleCI server v2.x
+{: #using-the-cli-on-circleci-server-v2-x }
 
-Currently, only the legacy CircleCI CLI is available to run on server
+Currently, only the legacy CircleCI CLI is available to run on server v2.x.
 installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).

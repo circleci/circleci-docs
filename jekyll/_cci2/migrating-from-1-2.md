@@ -104,12 +104,12 @@ The `config-translation` endpoint can help you quickly get started with converti
 ## Environment variables
 {: #environment-variables }
 
-In CircleCI 2.0, all defined environment variables are treated literally.
+In CircleCI, all defined environment variables are treated literally.
 It is possible to interpolate variables within a command
 by setting it for the current shell.
 
 For more information,
-refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to configure workflows
 {: #steps-to-configure-workflows }

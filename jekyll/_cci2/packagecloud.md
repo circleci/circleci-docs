@@ -5,6 +5,7 @@ categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -234,7 +235,7 @@ workflows:
 
 The workflows section will tie together both the `test` and `deploy` jobs into sequential steps in the build process.
 
-You can read more about publishing npm packages to packagecloud on the CircleCI blog post: [Publishing npm Packages Using CircleCI 2.0](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
+You can read more about publishing npm packages to packagecloud on the CircleCI blog post: [Publishing npm Packages Using CircleCI](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
 
 ## Using the packagecloud API
 {: #using-the-packagecloud-api }

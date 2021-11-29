@@ -17,13 +17,12 @@ for building your open source project on CircleCI in the following sections:
 {: #overview }
 {:.no_toc}
 
-To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
+To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
 
-**Note:**
-If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
+**Notes:**
+* If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
+* Open-source credit availability and limits will not be visible in the UI.
 
-**Note:**
-There is a concurrency limit of 4 containers for Docker and Machine executors whereas macOS executors are limited to 1 container. Additional containers will be queued.
 
 ## Security
 {: #security }
@@ -97,11 +96,11 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub
 repository-id of the originator of the fork PR to identify the cache.
 - PRs from the same fork repo will share a cache. For example, PRs from the
-  master repo share a cache with the master repo branches (in particular the
-  `master` branch).
+  main repo share a cache with the main repo branches (in particular the
+  `main` branch).
 - Two PRs in different fork repos will have different caches. That means
-  that a PR from a fork will not share a cache with the master repo `master` branch. 
-- enabling the [passing of secrets to build from forked pull requests](#pass-secrets-to-builds-from-forked-pull-requests) 
+  that a PR from a fork will not share a cache with the main repo `main` branch.
+- enabling the [passing of secrets to build from forked pull requests](#pass-secrets-to-builds-from-forked-pull-requests)
   will enable cache sharing between the original repo and all forked builds.
 
 Currently there is no pre-population of caches because this optimization hasn't

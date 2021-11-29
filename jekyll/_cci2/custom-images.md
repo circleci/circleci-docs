@@ -7,6 +7,7 @@ categories: [containerization]
 order: 30
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -251,7 +252,7 @@ If you have any questions, head over to our [community forum](https://discuss.ci
 ## Detailed custom Dockerfile example for Ruby
 {: #detailed-custom-dockerfile-example-for-ruby }
 
-This section demonstrates how to build a Ruby container to use on CircleCI 2.0. **Note:** This section assumes you have already used docker login locally.
+This section demonstrates how to build a Ruby container to use on CircleCI. **Note:** This section assumes you have already used docker login locally.
 
 The example starts with the [Ruby 2.1](https://hub.docker.com/_/ruby/) image. However, instead of using FROM ruby:2.1 as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the [2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10).
 Notice the environment variables that are used to pull in the proper versions.

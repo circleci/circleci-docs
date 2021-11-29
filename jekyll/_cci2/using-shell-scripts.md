@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 10
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -46,7 +47,7 @@ workflows:
             - shellcheck/check # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master # only run build-job on master branch
+              only: main # only run build-job on main branch
 
 jobs:
   build-job:
@@ -84,7 +85,7 @@ workflows:
             - shellcheck # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master # only run build-job on master branch
+              only: main # only run build-job on main branch
 ```
 
 **Note:**

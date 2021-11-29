@@ -70,6 +70,7 @@ docker stop <container-name>
 
 同じ名前のコンテナを再作成する場合など、停止したランナーコンテナをシステムから完全に削除する必要がある場合があります。
 
+
 ``` bash
 docker stop <container-name>; docker rm <container-name>;
 ```

@@ -54,10 +54,6 @@
         {% if page.toc != false %}
         <aside class="full-height">
           <div class='full-height-sticky'>
-            <h5 class="toc-heading">On this page</h5>
-            <div class="toc-indent">
-              {{ content | toc_only }}
-            </div>
             {% if page.suggested != false %}
             <div id="related-resources">
               <h5 class="related-heading">Helpful resources</h5>
@@ -72,6 +68,10 @@
               </div>
             </div>
             {% endif %}
+            <h5 class="toc-heading">On this page</h5>
+            <div class="toc-indent">
+              {{ content | toc_only }}
+            </div>
           </div>
         </aside>
         {% endif %}

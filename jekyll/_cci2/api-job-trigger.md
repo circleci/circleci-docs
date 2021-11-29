@@ -6,6 +6,7 @@ description: "How to define and trigger non-build jobs"
 order: 80
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

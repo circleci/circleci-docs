@@ -12,9 +12,9 @@ version:
 
 toc::[]
 
-== 前提条件
+== Prerequisites
 
-インストール プロセスでは、システムに以下のユーティリティをインストール済みであることを前提としています。
+The installation process assumes you have installed the following utilities on your system:
 
 * <<local-cli#installation, CircleCI CLI>>
 * curl (macOS ではデフォルトでインストール済み)
@@ -33,15 +33,15 @@ toc::[]
 
 == 認証
 
-NOTE: 以下のコマンドを実行できるのは、組織のオーナーまたは管理者だけです。
+NOTE: These commands can only be run by an owner/admin of your organization.
 
-認証のために、下記手順を実行して名前空間と認証トークンを作成する必要があります。
+In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
-. 組織のランナー リソース用の名前空間を作成します。
+. Create a namespace for your organization's runner resources.
 +
-NOTE: 作成できる名前空間は、組織ごとに 1 つだけです。 Orb を既に使用中の場合、この名前空間は Orb で使用しているのと同じものになります。 
+NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. 
 + 
-次のコマンドを実行します。 
+Use the following command: 
 +
 ```
 circleci namespace create <name> <vcs-type> <org-name>
@@ -58,9 +58,9 @@ circleci runner resource-class create <name>/<resource-class> <description> --ge
 +
 例: `circleci runner resource-class create my-namespace/my-resource-class my-description`
 +
-NOTE: リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。
+NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
 +
-CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
+CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
 
 == インストール
 
@@ -68,30 +68,30 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 [[download]]
 ローンチ エージェントは次のスクリプトでインストールできます。このスクリプトでは、ベースのインストール場所に `opt/circleci` を指定しています。
 
-まず、インストール対象のプラットフォームに応じて、次のいずれかの変数を設定します。
+First, set one of these variables as appropriate for for your installation target.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| インストール対象
-| 変数
+| Installation Target
+| Variable
 
-| Linux x86_64
+| For Linux x86_64
 | `platform=linux/amd64`
 
-| Linux ARM64
+| For Linux ARM64
 | `platform=linux/arm64`
 
-| macOS x86_64
+| For macOS x86_64
 | `platform=darwin/amd64`
 
-| macOS M1
+| For macOS M1
 | `platform=darwin/arm64`
 |===
 
 次に、`circleci-launch-agent` バージョンを設定します。 クラウド版 CircleCI のランナーは、サポートされている最新バージョンに自動的に更新されます。 CircleCI Server の場合、特定のランナー バージョンの相互運用性は検証されていますが、ランナーは自動更新されません。 CircleCI Server 用の `circleci-launch-agent` バージョンについては、<<runner-for-server-compatibility, こちらの表>>を参照してください。
 
-クラウド版 CircleCI の場合、以下を実行します。
+For cloud, you can run the following:
 ```bash
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 export agent_version=$(curl "${base_url}/release.txt")
@@ -102,13 +102,13 @@ For server v3.1.0 and up, run the following, substituting `<launch-agent-version
 export agent_version="<launch-agent-version>"
 ```
 
-最後に、次のスクリプトを実行して、バイナリをダウンロードして検証し、インストールします。
+Finally, run the following script to download, verify and install the binary.
 ```bash
-# ランナー ディレクトリのセットアップ
+# Set up runner directory
 prefix=/opt/circleci
 sudo mkdir -p "$prefix/workdir"
 
-# ローンチ エージェントのダウンロード
+# Downloading launch agent
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
@@ -118,7 +118,7 @@ mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 
-# ダウンロードの検証
+# Verifying download
 echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
@@ -143,11 +143,11 @@ CircleCI Server のマイナー バージョンはそれぞれ、特定バージ
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| CircleCI Server のバージョン  
-| ローンチ エージェントのバージョン
+| Server version  
+| Launch Agent Version
 
 | 3.0             
-| ランナーはサポートされていません
+| Runner not supported
 
 | 3.1            
 | 1.0.11147-881b608

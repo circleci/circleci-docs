@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Installing the CircleCI Runner
+= Get Started: Installing the CircleCI Runner
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -135,8 +135,8 @@ Please refer to the platform-specific installation instructions:
 
 For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
 
-== Runner for Server Compatibility
-_CircleCI Runner is available from server v3.1.0_
+== Runner for server compatibility
+_CircleCI runner is available from server v3.1.0_
 
 Each minor version of server is compatible with a specific version of
 `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,
@@ -160,7 +160,7 @@ depending on your version of server:
 
 == Additional Resources
 
-- https://github.com/CircleCI-Public/runner-preview-docs/[CircleCI Runner Image on Docker Hub]
+- https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
 - https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
 - https://circleci.com/docs/[CircleCI Docs - The official CircleCI Documentation website]
 - https://docs.docker.com/[Docker Docs]
