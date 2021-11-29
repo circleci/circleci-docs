@@ -16,7 +16,7 @@ toc::[]
 
 インストール プロセスでは、システムに以下のユーティリティをインストール済みであることを前提としています。
 
-* <<local-cli#installation,CircleCI CLI>>
+* <<local-cli#installation, CircleCI CLI>>
 * curl (macOS ではデフォルトでインストール済み)
 * sha256sum (Linux では apt または yum により coreutils の一部としてインストール、macOS では brew によりインストール)
 * バージョン 235 以降の systemd (Linux のみ)
@@ -50,13 +50,13 @@ circleci namespace create <name> <vcs-type> <org-name>
 For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 . 次のコマンドを実行して、名前空間内にランナー用のリソース クラスを作成します。
 + 
-NOTE: Your newly created namespace is required in the command to create your resource class.
+NOTE: リソース クラスを作成するコマンドには、新しく作成した名前空間が必要です。
 +
 ```
 circleci runner resource-class create <name>/<resource-class> <description> --generate-token
 ``` 
 +
-Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
+例: `circleci runner resource-class create my-namespace/my-resource-class my-description`
 +
 NOTE: リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。
 +
@@ -89,7 +89,7 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 | `platform=darwin/arm64`
 |===
 
-次に、`circleci-launch-agent` バージョンを設定します。 クラウド版 CircleCI のランナーは、サポートされている最新バージョンに自動的に更新されます。 CircleCI Server の場合、特定のランナー バージョンの相互運用性は検証されていますが、ランナーは自動更新されません。 A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
+次に、`circleci-launch-agent` バージョンを設定します。 クラウド版 CircleCI のランナーは、サポートされている最新バージョンに自動的に更新されます。 CircleCI Server の場合、特定のランナー バージョンの相互運用性は検証されていますが、ランナーは自動更新されません。 CircleCI Server 用の `circleci-launch-agent` バージョンについては、<<runner-for-server-compatibility, こちらの表>>を参照してください。
 
 クラウド版 CircleCI の場合、以下を実行します。
 ```bash

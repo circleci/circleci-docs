@@ -95,9 +95,9 @@ CircleCI ランナーのインストール後、ランナーは `circleci.com` �
 
 == SSH を使用したデバッグ
 
-CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+CircleCI ランナーでは、デバッグのために SSHでジョブの再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#, Debugging with SSH>>.
 
-NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
+NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-installation.adoc#runner-ssh-advertise_addr[CircleCI ランナーのインストール]をご覧くださいい。
 
 == パブリック リポジトリ
 
@@ -141,8 +141,8 @@ NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する�
 - https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
 
-== Learn more
+== さらに詳しく
 
-Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
+CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、インフラ上でのジョブの実行についてさらに詳しく学ぶことができます。
 
 

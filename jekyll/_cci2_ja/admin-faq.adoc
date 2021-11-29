@@ -1,67 +1,67 @@
 ---
 version:
 - Server v2.x
-- Admin
+- 管理者
 ---
-= Frequently Asked Questions
+= よくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+[.serveronly]_このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。_
 
-This chapter answers frequently asked questions and provides installation troubleshooting tips.
+ここでは、よくあるご質問への回答とトラブルシューティングのヒントを紹介します。
 
 toc::[]
 
 [discrete]
-=== Can I move or change my GitHub Enterprise URL without downtime?
+=== GitHub Enterprise の URL をダウンタイムなく移動または変更できますか？
 
-No, because of the nature of CircleCI integration with GitHub authentication, you should not change the domain of your GHE instance after CircleCI is in production. Redeploying GitHub without will result in a corrupted CircleCI instance. Contact support if you plan to move your GitHub instance.
-
-[discrete]
-=== Can I monitor available build containers?
-
-Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+それはできません。CircleCI と GitHub 認証との統合における性質上、本番環境での稼動後に GHE インスタンスのドメインを変更するべきではありません。 ダウンタイムなく GitHub を再デプロイすると、CircleCI のインスタンスが破損します。 GitHub のインスタンスを移動する場合は、サポートにご連絡ください。
 
 [discrete]
-=== How do I provision admin users?
+=== ビルドコンテナの現在の状況を監視することはできますか？
 
-The first user who logs in to the CircleCI application will automatically be designated an admin user. Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
-
-[discrete]
-=== How can I gracefully shutdown Nomad Clients?
-
-Refer to the Introduction to Nomad Cluster Operation chapter for details.
+Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 [discrete]
-=== Why is Test GitHub Authentication failing?
+=== 管理者ユーザーの追加方法を教えてください。
 
-This means that the GitHub Enterprise server is not returning the intermediate SSL certificates. Check your GitHub Enterprise instance with https://www.ssllabs.com/ssltest/analyze.html – it may report some missing intermediate certs. You can use commands like `openssl` to get the full certificate chain for your server.
-
-In some cases authentication fails when returning to the configuration page after it was successfully set up once. This is because the secret is encrypted, so when returning checking it will fail.
+CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の ユーザーページ (`https://[domain-to-your-installation]/admin/users`) で行えます。
 
 [discrete]
-=== How can I use HTTPS to access CircleCI?
+=== Nomad クライアントを安全にシャットダウンさせるには？
 
-While CircleCI creates a self-signed cert when starting up, that certificate only applies to the management console and not the CircleCI product itself. If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
-
-[discrete]
-=== Why doesn't terraform destroy every resource?
-
-CircleCI sets the services box to have termination protection in AWS and also writes to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the `circleci.tf` file. You'll also need to empty the s3 bucket that was created as part of the terraform install.
+「Nomad クラスタの運用方法」を参照してください。
 
 [discrete]
-=== Do the Nomad Clients store any state?
+=== GitHub の認証テストに失敗してしまいます。
 
-They can be torn down without worry as they don't persist any data.
+GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因です。 https://www.ssllabs.com/ssltest/analyze.html で、GitHub Enterprise のインスタンスを確認してください。取得不可能な中間証明書の情報などが調べられます。 `openssl` のようなコマンドを使うと、サーバーの完全な証明書チェーンを取得することができます。
+
+一度設定に成功した後に設定画面に戻ると、認証に失敗する場合があります。 秘密が暗号化されたため、戻ると失敗します。
 
 [discrete]
-=== How do I verify TLS settings are failing?
+=== CircleCI を HTTPS で運用できますか？
 
-Make sure that your keys are in unencrypted PEM format, and that the certificate includes the entire chain of trust as follows:
+CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 CircleCI を HTTPS で運用したい場合は、管理コンソールの設定にある `Privacy` セクションで証明書を指定してください。
+
+[discrete]
+=== Terraform がすべてのリソースを破棄しないのはなぜですか？
+
+CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 Terraform がすべてのリソースを破棄するようにしたい場合は、手動でそのインスタンスを削除するか、`circleci.tf `ファイル内でインスタンス削除保護 (termination protection) をオフにしてください。 また、Terraform のインストールによって生成された AWS S3 バケット を空にする必要があります。
+
+[discrete]
+=== Nomad クライアントは何らかのデータを保持しますか？
+
+どんなデータも残らないよう破棄されますのでご安心ください。
+
+[discrete]
+=== TLS の設定に失敗しているようですが、どこを確認すればよいですか。
+
+鍵が非暗号化 PEM 形式であることと、その証明書のチェーン全体が間違いなく下記のようになっていることを確認してください。
 
 ```
 -----BEGIN CERTIFICATE-----
@@ -77,23 +77,23 @@ intermediate 2
 ```
 
 [discrete]
-=== How do I debug the Management Console (Replicated)?
+=== Replicated 使用時の管理コンソールをデバッグする方法が知りたい。
 
-The CircleCI management console is powered by Replicated. If you are experiencing any issues with the Management Console, here are a few ways to debug it:
+CircleCI の管理コンソールは、Replicated をベースとしています。 管理コンソールで問題があるときにデバッグする方法をいくつか紹介します。
 
 [discrete]
-==== 1. Check you have Replicated installed
+==== 1. Replicated がインストールされているかを確認する
 
-First, make sure you have the CLI tool for Replicated installed by running the following:
+まずは Replicated 用の CLI ツールが間違いなくインストールされていることを以下のコマンドで確認してください。
 
 ```shell
 replicated -version
 ```
 
 [discrete]
-==== 2. Restart Replicated and the CircleCI app
+==== 2. Replicated と CircleCI を再起動する
 
-Try restarting Replicated services. You can do this by running the following commands on the service box, for Ubuntu 14.04:
+Replicated サービスの再起動します。 Ubuntu 14.04 の場合、サービスボックスで下記のコマンドを実行すると再起動できます。
 
 ```shell
 sudo service replicated-ui restart
@@ -101,7 +101,7 @@ sudo service replicated restart
 sudo service replicated-operator restart
 ```
 
-For Ubuntu 16.04, run the following commands:
+Ubuntu 16.04 の場合は、以下のコマンドを実行します。
 
 ```shell
 sudo systemctl restart replicated-ui
@@ -114,35 +114,34 @@ Then try restarting the CircleCi app: go to your services box admin (for example
 // add screenshot showing StopNow and StartNow -->
 
 [discrete]
-==== 3. Try to log into Replicated
+==== 3. Replicated へのログインを試す
 
-Try logging in to Replicated. You can do this by running the following command
-on the service box. You will be asked to enter your password - the same one used
+Replicated にログインできるか確認してください。 ログインするにはサービスボックスで下記のコマンドを実行します。 You will be asked to enter your password - the same one used
 to unlock the Management Console (i.e.  `<your-circleci-hostname>.com:8800` ).
 
 ```shell
 replicated login
 ```
 
-If you could login, then run the following command and send the output to us at support@circleci.com so we can help diagnose what is causing the problem you are experiencing.
+ログインに成功したら、以下のコマンドを実行し、その出力を support@circleci.com までお送りください。何が原因で問題が発生しているのかを診断いたします。
 
 ```shell
 sudo replicated apps
 ```
 
-If you were seeing the following error: `request returned Unauthorized for API route` this could be because you are not logged into Replicated, so please check if you are still getting the error after a successful login.
+「`request returned Unauthorized for API route` 」というエラーが表示される場合、Replicated にログインしていないことが原因である可能性がありますので、ログイン成功後も同じエラーが発生するかどうかを確認してください。
 
 [discrete]
-==== 4. Check Replicated logs
+==== 4.  Replicated のログをチェックする
 
-You can find Replicated logs on the Services machine under `/var/log/replicated`.
+Services マシンの Replicated ログデータは `/var/log/replicated` 配下にあります。
 
 [discrete]
-==== 5. Check what Docker containers are currently running
+==== 5. 現在実行している Docker コンテナを確認する
 
-Replicated starts many Docker containers to run CircleCI Server, so it can be useful to check what containers are running.
+Replicated は、CircleCI Server を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
 
-To check what containers are currently running, run `sudo docker ps` and you should see something similar to this output:
+実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
 
 ```shell
 $ sudo docker ps
@@ -240,4 +239,4 @@ ago         Up 26 hours         80/tcp, 443/tcp, 2080/tcp, 0.0.0.0:9880->2443/tc
 
 ```
 
-Providing support@circleci.com with the output of `sudo docker ps` from the Services machine will help us diagnose the cause of your problem.
+Services マシンからの`sudo docker ps`の出力を support@circleci.com にお送りください。問題の原因を診断いたします。

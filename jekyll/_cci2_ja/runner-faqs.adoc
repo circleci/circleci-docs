@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= CircleCI ランナーに関するよくあるご質問
+= CircleCI ランナーに関してよく寄せられるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
