@@ -236,6 +236,8 @@ en:
           link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
+        - name: Status Badges
+          link: 2.0/status-badges/
         - name: Webhooks
           link: 2.0/webhooks/
         - name: Using Credits
