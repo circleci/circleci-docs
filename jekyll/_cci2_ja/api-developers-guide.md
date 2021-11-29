@@ -307,13 +307,13 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 {: #steps }
 {:.no_toc}
 
-Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `/project/{project-slug}` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
+CircleCI API v2 では、プロジェクト関連の API エンドポイントがいくつか用意されていますが、 `/project/{project-slug}` エンドポイントへの GET リクエストでは、 `project_slug` パラメーターをリクエストと共に渡すことで、特定のプロジェクトに関する詳細情報を返すことができます。
 
-**Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+**注意:** 中括弧 `{}`がある場合は、リクエスト内で手動で入力しなければならない変数を表しています。
 
-To return project details, perform the following steps:
+プロジェクトの詳細を返すには、以下の手順で行います。
 
-1. For this GET API call, under the `parameters` key, define the `project_slug` (<project_type>/<org_name>/<repo_name>) parameter you want returned in the JSON payload in your `curl` request as follows:
+1. この GET API コールでは、  `parameters` キーの下に `project_slug` が定義されています(<project_type>/<org_name>/<repo_name>) パラメータを、 `curl` リクエストの JSON ペイロードで返したい場合は、以下のようにします。
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
@@ -322,7 +322,7 @@ To return project details, perform the following steps:
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
-2. After passing the `project-slug` parameter and making the API request, you will receive unformatted JSON text similar to the example shown below.
+2. `project-slug` パラメーターを渡して API リクエストを行うと、以下の例のようなフォーマットされていないJSONテキストを受け取ります。
 
     ```json
     {
@@ -335,28 +335,29 @@ To return project details, perform the following steps:
         "default_branch": "master"
       }
     }
+
     ```
 
-Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, please refer to the [Get Project Details](https://circleci.com/docs/api/v2/#get-a-project) section of the *CircleCI API v2 Reference Guide*.
+上記の例では、プロジェクト名、プロジェクトが属する組織の名前、プロジェクトをホストする VCS の情報など、プロジェクトに関する非常に具体的な情報を受け取ることができます。 このリクエストで返される各値の詳細については、*CircleCI API v2 リファレンスガイド*の[プロジェクトの詳細の取得](https://circleci.com/docs/api/v2/#get-a-project)をご覧ください。
 
-### Get job details
+### ジョブの詳細の取得
 {: #get-job-details }
 
-Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}`endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+前述のプロジェクトの詳細を取得するための API リクエストと同様に、ジョブの詳細を取得するための API リクエストでは、1 回の API リクエストで CircleCI API から特定のジョブ情報を取得することができます。 ジョブの実行状況、使用されたリソース（パイプラインや Executor タイプ など）、ジョブが終了するまでにかかった時間に関する情報を知りたい場合、ジョブ情報の取得は非常に便利です。
 
-Please remember, jobs are collections of steps. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a default image if not specified, for `docker` you must specify an image to use for the primary container, for `macos` you must specify an Xcode version, and for `windows` you must use the Windows orb.
+ジョブはステップの集合体であることを忘れないでください。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `machine` には、指定されない場合はデフォルトのイメージが含まれ、`docker`にはプライマリコンテナに使用するイメージを指定し、`macos`には、Xcode のバージョンを指定し、`windows` には、Windows Orb を使用します。.
 
-#### Steps
+#### ステップ
 {: #steps }
 {:.no_toc}
 
-Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Much like the Get Project Details API request described in the previous example, the Get Job Details API request enables you to return specific job information from the CircleCI API by making a single API request. This API call to the `GET /project/{project_slug}/job/{job-number}`endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+CircleCI API v2 で利用できるジョブ関連の API エンドポイントのうち、ジョブの詳細情報を受け取るために呼び出す特定のエンドポイントがあります。  `GET /project/{project_slug}/job/{job-number}`エンドポイントへの API 呼び出しでは、 `project-slug` パラメーターと `job-number` パラメーターを渡すことで、特定のジョブに関する詳細な情報を返すことができます。
 
-**Note** In this example, please note that whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+**注意:** 中括弧 `{}`がある場合は、リクエスト内で手動で入力しなければならない変数を表しています。
 
-To return job details, perform the following steps:
+ジョブの詳細を返すには、以下の手順で行います。
 
-1. For this GET API call, under the `parameters` key, define the `project_slug` and `job_number` parameters you want returned in the JSON payload in your `curl` request as follows:
+1. この GET API 呼び出しでは、 `parameters` キーの下に、`curl`リクエストの JSON ペイロードに返したい `project_slug` パラメーターと `job_number` パラメーターを以下のように定義します。
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
@@ -365,7 +366,7 @@ To return job details, perform the following steps:
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
-2. After passing the parameters and making the API request, you will receive unformatted JSON text similar to the example shown below.
+2. これらのパラメーターを渡して API リクエストを行うと、以下の例のようなフォーマットされていない JSON テキストを受け取ります。
 
     ```json
       {
@@ -411,13 +412,14 @@ To return job details, perform the following steps:
       "queued_at": "2020-01-13T18:51:40Z",
       "stopped_at": "2020-01-13T18:51:40Z"
     }
+
     ```
 
-Notice in the example above that you will receive very specific information about your job, including specific project and workflow details for the job, the date and time the job started and then finished, and job-specific information such as the executor type used, current status of the job, and the duration of the job.
+上記の例では、ジョブの特定のプロジェクトやワークフローの詳細、ジョブの開始および完了日時、使用される Executor タイプやジョブの現在の状態や実行時間などジョブに関する具体的な情報を受け取ることができます。
 
-For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the *CircleCI API v2 Reference Guide*.
+このリクエストで返される各値の詳細については、*CircleCI API v2 リファレンスガイド*の[ジョブの詳細の取得](https://circleci.com/docs/api/v2/#get-job-details)をご覧ください。
 
-### Download artifacts
+### アーティファクトのダウンロード
 {: #download-artifacts }
 
 The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
