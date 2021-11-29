@@ -53,7 +53,7 @@ your deletion in the dialog window.
   1. In the CircleCI application, go to your project's settings. There are various ways to get there. One way is to select **Projects** in the sidebar, then the ellipsis (`...`) next to your project and select **Project Settings**.
   2. Select **API Permissions**.
   3. Click the **Add API Token** button.
-  4. Choose a scope from the dropdown menu. These are described in the [Overview](#overview) above.
+  4. Choose a scope from the dropdown menu. These are described in the [Overview](#overview) section above.
   5. In the **Label** field, type a memorable label for the token.
   6. Click the **Add API Token** button.
 
