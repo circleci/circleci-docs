@@ -1341,24 +1341,24 @@ When attaching a workspace the "layer" from each upstream job is applied in the 
 **Note:** In order for the `attach_to_workspace` step to successfully download assets from a previous job, the `requires` step in the workflow must be set to the name of the previous job that you want assets to persist from. For example:
 
 ``` YAML
-      - job1:
-          context: my-context
-          filters:
-            branches:
-              only: my-dev-branch
-      - approve-job1:
-          filters:
-            branches:
-              only: my-dev-branch
-          type: approval
-      - job2:
-          context: my-context
-          filters:
-            branches:
-              only: my-dev-branch
-          requires:
-            - job1
-            - approve-job1
+- job1:
+    context: my-context
+    filters:
+      branches:
+        only: my-dev-branch
+- approve-job1:
+    filters:
+      branches:
+        only: my-dev-branch
+    type: approval
+- job2:
+    context: my-context
+    filters:
+      branches:
+        only: my-dev-branch
+    requires:
+      - job1
+      - approve-job1
  ```
 
 
