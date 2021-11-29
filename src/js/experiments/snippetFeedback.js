@@ -101,7 +101,7 @@ export class SnippetFeedback {
       container.appendChild(prompt);
       container.appendChild(textForm);
       container.appendChild(sendButton);
-
+      this.feedbackForm = container;
       this.wasThisHelpfulContainer.appendChild(container);
     }
   }
