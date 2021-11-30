@@ -404,7 +404,7 @@ $(document).ready(function () {
   const isHighlighted = searchParams.has('highlight');
   let hash = window.location.hash;
   if (isHighlighted && hash) {
-    $(hash).attr('class', 'highlight');
+    $(hash).addClass('highlight');
 
     window.addEventListener(
       'hashchange',
