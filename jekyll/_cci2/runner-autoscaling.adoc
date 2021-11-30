@@ -23,7 +23,8 @@ There are several API endpoints to provide autoscaling data:
 * https://circleci.com/docs/2.0/runner-api/#get-apiv2runnertasks[Unclaimed Tasks]
 * https://circleci.com/docs/2.0/runner-api/#get-apiv2runnertasksrunning[Running Tasks]
 * https://circleci.com/docs/2.0/runner-api/#get-apiv2runner[List Resource Classes]
-* Concurrency Limit - How do they know this?
+
+You will also need the plan concurrency limit to avoid starting compute which cannot be used. This can be found on the CirleCI plans page. Scale & Custom plan customers will need to contact support to get this information 
 
 == Autoscaling
 
