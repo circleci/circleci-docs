@@ -287,7 +287,9 @@ jobs:
           cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
       - run:
           name: Run markdownlint with pronto
-          command: bundle exec pronto run -f github_pr -c origin/master
+          command: |
+            [[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow
+            bundle exec pronto run -f github github_status github_pr -c origin/master
       - run:
           name: Create results directory
           command: mkdir -p $JOB_RESULTS_PATH
