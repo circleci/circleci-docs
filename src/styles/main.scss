@@ -204,6 +204,7 @@ div.article-container{
     @media (max-width: $screen-sm) {
       width: 100%;
     }
+    min-height: calc(100vh - 68px); // make sure content always fill available space (68px is header size)
 }
 
 article{
