@@ -87,13 +87,6 @@ collections:
   # before the collections that render the actual pages.
   # jekyll is processing in alpha order...
   _glossary:
-  cci1:
-    name: "1.0 Docs"
-    site_section: true
-    output: true
-    permalink: /1.0/:path/
-    prefix: "/1.0"
-    selectorName: "1.0"
   cci2:
     name: "2.0 Docs"
     site_section: true
