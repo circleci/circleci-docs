@@ -33,7 +33,7 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 - Interact with auto-cancelling of pipelines.
 - Specify pipeline parameters associated with a schedule.
 
-CircleCI has APIs that allow users to create, view, edit, and delete scheduled pipelines. At this time, a UI for scheduled pipelines is not yet available.
+Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application. 
 
 ## Get started with scheduled pipelines in CircleCI
 {: #get-started }
@@ -42,6 +42,10 @@ You have the option of setting up scheduled pipelines from scratch, or you can m
 
 ### Start from scratch
 {: #start-from-scratch }
+
+#### Use the API
+{: #api }
+{:.no_toc}
 
 If your project has no scheduled workflows and you would like to try out scheduled pipelines:
 
@@ -69,6 +73,15 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 ```
 
 For additional information, refer to the **Schedule** section under the [open-api docs](https://circleci.com/docs/api/v2/).
+
+#### Use project settings
+{: #project-settings }
+{:.no_toc}
+
+1. In the CircleCI application, select the project, and navigate to **Project Settings**.
+2. Navigate to **Triggers**.
+3. To create a new schedule, click **Add Scheduled Trigger**.
+4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor, then save the trigger.
 
 ### Migrate scheduled workflows to scheduled pipelines
 {: #migrate-scheduled-workflows }
@@ -102,7 +115,7 @@ To migrate from scheduled workflows to scheduled pipelines, follow the steps bel
         - build
     ```
 2. Interpret the frequency your trigger needs to run from the cron expression.
-3. Use the same step from the [Start from scratch](#start-from-scratch) section above to create the schedule via the API.
+3. Use the same step from the [Start from scratch](#start-from-scratch) section above to create the schedule via the API or project settings.
 4. In the config file, remove the `triggers` section, so that it resembles a standard workflow.
     ```yaml
     daily-run-workflow:
@@ -160,7 +173,7 @@ other-workflow:
 
 **Q:** How do I find the schedules that I have created?
 
-**A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can also list all the schedules under a single project:
+**A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
 
 ```sh
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
