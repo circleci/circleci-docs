@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { updateCookieExpiration } from '../utils';
 
 function setUserData(userData) {
   window.userData = userData;
@@ -19,19 +20,22 @@ function setUserData(userData) {
 
 function setLoggedIn(userData) {
   $(document.body).addClass('loggedin');
-  Cookies.set('cci-customer', 'true', { expires: 365 });
+  Cookies.set('cci-customer', 'true', { expires: 365 * 2 });
 
   setUserData(userData);
 }
 
 function setLoggedOut() {
   $(document.body).removeClass('loggedin');
-  Cookies.set('cci-customer', 'false', { expires: 365 });
+  Cookies.set('cci-customer', 'false', { expires: 365 * 2 });
 
   setUserData({});
 }
 
 $(function () {
+  // Update cookie expiry (migrating from 10 years to 2 years)
+  updateCookieExpiration('cci-customer', 365 * 2);
+
   if (Cookies.get('cci-customer') === 'true') {
     $(document.body).addClass('loggedin');
   }
