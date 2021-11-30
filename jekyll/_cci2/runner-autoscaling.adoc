@@ -1,0 +1,40 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= Runner Autoscaling
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== Introduction
+
+Maintaing a fixed compute fleet for CircleCI runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
+
+== Autoscaling Data
+
+There are several API endpoints to provide autoscaling data:
+
+* https://circleci.com/docs/2.0/runner-api/#get-apiv2runnertasks[Unclaimed Tasks]
+* https://circleci.com/docs/2.0/runner-api/#get-apiv2runnertasksrunning[Running Tasks]
+* https://circleci.com/docs/2.0/runner-api/#get-apiv2runner[List Resource Classes]
+* Concurrency Limit - How do they know this?
+
+== Autoscaling
+
+An autoscaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class so it's important to query every available resource class to get the total number of running tasks. The autoscaler is then free to decide which resource class to add new claiming agents for. The distribution of tasks across resource classes is dependent on the incoming workload and internal dispatching decisions made by CircleCI
+
+== Agent Configuration
+
+There are some `launch-agent` configuration settings which can be used by an autoscaler, particularly to assist resource cleanup when the demand drops:
+
+* https://circleci.com/docs/2.0/runner-config-reference/#runner-mode[Runner Mode]
+** Choosing `single-task` mode will cause the `launch-agent` to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon `launch-agent` exit
+** Choosing `continuous` mode will cause the `launch-agent` to poll for new tasks after completing a task. The autoscaler will need to monitor the task workload and actively shutdown unused `launch-agents`
+* https://circleci.com/docs/2.0/runner-config-reference/#runner-idle_timeout[Runner Idle Timeout]
+** Setting a reasonable timeout can be used for automatic resource recycling during periods of lower demand
