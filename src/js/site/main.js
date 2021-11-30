@@ -409,7 +409,7 @@ $(document).ready(function () {
     window.addEventListener(
       'hashchange',
       () => {
-        let hashNew = window.location.hash;
+        const hashNew = window.location.hash;
         $('.highlight').removeClass('highlight');
         $(hashNew).attr('class', 'highlight');
         hash = hashNew;
