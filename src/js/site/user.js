@@ -19,14 +19,14 @@ function setUserData(userData) {
 
 function setLoggedIn(userData) {
   $(document.body).addClass('loggedin');
-  Cookies.set('cci-customer', 'true', { expires: 3650 });
+  Cookies.set('cci-customer', 'true', { expires: 365 });
 
   setUserData(userData);
 }
 
 function setLoggedOut() {
   $(document.body).removeClass('loggedin');
-  Cookies.set('cci-customer', 'false', { expires: 3650 });
+  Cookies.set('cci-customer', 'false', { expires: 365 });
 
   setUserData({});
 }
