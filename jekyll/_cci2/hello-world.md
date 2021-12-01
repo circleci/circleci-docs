@@ -59,7 +59,7 @@ Using the basic ideas from the Linux example above, you can add a job that uses 
 jobs:
   build-android:
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: cimg/android:api-25-alpha
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
