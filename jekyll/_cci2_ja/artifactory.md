@@ -6,6 +6,7 @@ categories:
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -32,7 +33,7 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
 
 ## JFrog CLI
 {: #jfrog-cli }
-If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
+.circleci/config.yml ファイル全体は、以下のようになります。
 
 ```
 - run:
