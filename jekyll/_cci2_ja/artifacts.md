@@ -6,6 +6,7 @@ description: "ビルド中に作成されるアーティファクトのアップ
 order: 70
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -161,7 +162,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
-Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
+コマンドでビルドのすべてのアーティファクト詳細をフェッチし、それを grep にパイプして URL を抽出します。 最後に、wget を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
 
 ```bash
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
