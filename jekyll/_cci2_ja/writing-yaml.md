@@ -1,11 +1,12 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "YAML の記述"
 short-title: "YAML の記述"
 description: "CircleCI の YAML を記述する方法"
 order: 20
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -158,7 +159,7 @@ YAML には他にも機能がありますが、YAML の基礎について理解�
 CircleCI は「Orb」も開発しています。 Orb は、事前設定とテストを終えた状態の設定エレメントをまとめたパッケージで、お客様が設定したワークフローで使用することができます。 Orb を使えば、DRY (Don't Repeat Yourself: 繰り返しを避ける) の原則により、設定エレメント (ジョブ、Executor、コマンド) をワークフローにすばやく簡単に組み込むことができます。 Orb の詳細については、以下のドキュメントを参照してください。
 
 - [Orb の概要]({{site.baseurl}}/2.0/orb-intro/): Orb の詳細な概要
-- [Orb の使用]({{site.baseurl}}/2.0/using-orbs/): 既存の Orb の使用方法
+- Refer to [Orb Intro]({{site.baseurl}}/2.0/orb-intro/), for more about how to use existing orbs.
 - [Orb の作成]({{site.baseurl}}/2.0/creating-orbs/): ご自身で Orb を作成する手順
 - [設定ファイルの再利用]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の詳細
 - [「Learn X in Y Minutes」の YAML ページ](https://learnxinyminutes.com/docs/yaml/): YAML について詳しく取り上げた徹底ガイド
