@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "シェル スクリプトの使用"
 short-title: "シェル スクリプトの使用"
 description: "CircleCI 設定ファイルでのシェル スクリプト使用に関するベスト プラクティス"
 categories:
-  - getting-started
+  - はじめよう
 order: 10
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -47,7 +48,7 @@ workflows:
             - shellcheck/check # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master # only run build-job on master branch
+              only: main # only run build-job on main branch
 
 jobs:
   build-job:
@@ -85,7 +86,7 @@ workflows:
             - shellcheck # only run build-job once shellcheck has run
           filters:
             branches:
-              only: master # only run build-job on master branch
+              only: main # only run build-job on main branch
 ```
 
 **Note:** Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way. In the example below, observe how the `tmp.sh` script file reveals too much.
@@ -127,7 +128,7 @@ set -o errexit
 set -o pipefail
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
