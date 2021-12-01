@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "パイプライン変数"
 short-title: "パイプライン変数"
 description: "パイプラインの変数、パラメーター、値についての詳細情報"
@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
 パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
@@ -26,7 +26,7 @@ version:
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。                                |
 | pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                                                          |
-| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 E.g. 例： 例： https://github.com/circleci/circleci-docs                                        |
+| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： 例： https://github.com/circleci/circleci-docs                                          |
 | pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                                                             |
 | pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                                                   |
 | pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                                                   |
@@ -177,7 +177,7 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ## 条件付きワークフロー
 {: #conditional-workflows }
 
-ワークフロー宣言の下で `when` 句（または逆の`unless` 句）を使用すると、真偽値を使ってそのワークフローを実行するかどうかを判断できます。 真偽値は、ブール値、数値、および文字列です。 偽値は、false、0、空の文字列、null、および NaN のいづれかです。 それ以外はすべて真値です。
+Use the [`when` clause](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 この構成の最も一般的な活用方法は、値としてパイプライン パラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 
