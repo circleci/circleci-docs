@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "コンテナ ID をホスト ID にマップできないエラーのデバッグ"
 short-title: "コンテナ ID をホスト ID にマップできないエラーのデバッグ"
 description: "コンテナの起動時に「コンテナ ID XXX をホスト ID にマップできません」というエラーが発生した場合のデバッグ"
 categories:
-  - troubleshooting
+  - トラブルシューティング
 order: 21
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
