@@ -1,8 +1,8 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Security recommendations"
 category:
-  - administration
+  - 管理
 order: 5
 description: "CircleCI security recommendations."
 ---
@@ -124,8 +124,8 @@ curl --data @- <<EOF
 EOF
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub および Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
