@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "言語ガイド: Java (Maven を使用)"
 short-title: "Maven を使用した Java プロジェクト"
-description: "CircleCI 2.0 での Java と Maven を使用したビルドとテスト"
+description: "Building and Testing with Java and Maven on CircleCI"
 categories:
   - language-guides
 order: 4
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -19,7 +20,7 @@ version:
 ## 概要
 {: #overview }
 
-This is an example application showcasing how to run a Java app on CircleCI 2.1. This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
+This is an example application showcasing how to run a Java app on CircleCI 2.1. Spring Framework を使用している  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています) This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
 
 ## 設定ファイルの例: バージョン2.1
 {: #sample-configuration-version-21 }
@@ -42,8 +43,8 @@ workflows:
 
 This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
 
-## For 2.0 Configuration (recommended for CircleCI Server only):
-{: #for-20-configuration-recommended-for-circleci-server-only }
+## For 2.0 Configuration (recommended for CircleCI server v2.x users only):
+{: #for-20-configuration-recommended-for-circleci-server-v2-x-users-only }
 
 ```yaml
 version: 2.0
