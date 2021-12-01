@@ -1,8 +1,8 @@
 ---
-layout: classic-docs
-title: "Settings"
-short-title: "Settings"
-description: "Summary of project and org settings"
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+title: "設定"
+short-title: "設定"
+description: "プロジェクト設定および組織設定の概要"
 categories:
   - settings
 order: 2
