@@ -1,14 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "CircleCI Server v2.16 の新機能"
 short-title: "CircleCI Server v2.16 の新機能"
 description: "CircleCI Server v2.16 の入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.16.
+This document provides a summary of features and product notes for the release of CircleCI server v2.16.
 
 ## What's new in release 2.16
 {: #whats-new-in-release-216 }
@@ -65,7 +65,7 @@ This document provides a summary of features and product notes for the release o
 - Ubuntu 14.04 ベースの環境を使用していること
 - Services マシンで Replicated バージョン 2.10.3 を実行していること
   - `replicated --version`
-- Your installation is **not** airgapped and you can access the internet from it
+- お使いの環境が孤立して**おらず**、インターネットにアクセスできること
 - Services マシン上ですべての手順が完了していること
 
 ### 準備
