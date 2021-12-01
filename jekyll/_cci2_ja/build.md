@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "ビルド環境"
-description: "CircleCI 2.0 のビルド環境の構成"
+title: "Execution Environments"
+description: "CircleCI execution environment configuration"
 ---
 
 
@@ -32,11 +32,11 @@ description: "CircleCI 2.0 のビルド環境の構成"
 ## iOS と Mac
 {: #ios-and-mac }
 
-| ドキュメント                     | 説明                                                            |
-| -------------------------- | ------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/hello-world-macos/">Windows 上での Hello World</a>  | Windows Executor と CircleCI を利用する方法                           |
-| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>  | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a> | CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドライン |
+| ドキュメント                     | 説明                                                                                            |
+| -------------------------- | --------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/hello-world-macos/">Windows 上での Hello World</a>  | Windows Executor と CircleCI を利用する方法                                                           |
+| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>  | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法                                               |
+| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI. |
 {: class="table table-striped"}
 
 
