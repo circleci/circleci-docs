@@ -1,9 +1,11 @@
 ---
+description: "This document is intended for system administrators of self-hosted installations of CircleCI Server. 
+This guide, as well as the rest of our docs, are open-source and available on GitHub."
 version:
 - Server v2.x
-- 管理者
+- Admin
 ---
-= よくあるご質問
+= Frequently Asked Questions
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -24,7 +26,7 @@ toc::[]
 [discrete]
 === ビルドコンテナの現在の状況を監視することはできますか？
 
-Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+Yes, refer to the <<nomad#basic-terminology-and-architecture, Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 [discrete]
 === 管理者ユーザーの追加方法を教えてください。
@@ -139,7 +141,7 @@ Services マシンの Replicated ログデータは `/var/log/replicated` 配下
 [discrete]
 ==== 5. 現在実行している Docker コンテナを確認する
 
-Replicated は、CircleCI Server を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
+Replicated starts many Docker containers to run CircleCI server v2.x, so it can be useful to check what containers are running.
 
 実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
 
