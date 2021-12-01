@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Scheduled Pipelines"
 short-title: "Scheduled Pipelines"
-description: "Learn how to use scheduled pipelines"
+description: "Learn how to schedule pipelines for your CircleCI projects."
 order: 20
 version:
 - Cloud
