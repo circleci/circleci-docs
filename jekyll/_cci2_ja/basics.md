@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "基本事項"
 description: "基本事項"
 ---
@@ -7,16 +7,16 @@ description: "基本事項"
 
 CircleCI で使用される基本的な概念については、以下の各リンクを参照してください。
 
-| ドキュメント                                                                        | 説明                                                                                                       |
-| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [概要]({{ site.baseurl }}/ja/2.0/about-circleci/)                               | CI (継続的インテグレーション) の概要と、CircleCI ケース スタディーへのリンク                                                           |
-| [YAML を記述する]({{ site.baseurl }}/ja/2.0/writing-yaml/)                         | YAML の紹介                                                                                                 |
-| [コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)                            | コンテナの概要と、コンテナを使用してビルド時間を短縮し、キューイングを防止する方法                                                                |
-| [GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/) | CircleCI で GitHub と Bitbucket を使用する方法                                                                    |
-| [コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)                                  | CircleCI 2.0 のステップ、イメージ、ジョブ、ワークフローのコンセプトと構成階層に関する概要                                                      |
-| [Orb、ジョブ、ステップ、ワークフロー]({{ site.baseurl }}/ja/2.0/jobs-steps/)                  | CircleCI 2.0 の構成にジョブとステップを使用する方法                                                                         |
-| [Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)                | 各ジョブには、異なるExecutorやイメージを使用することができます。 実際のジョブに `docker`、`machine`、`windows`、`macos` の各 Executor を使用した場合の比較 |
-| [オープンソース プロジェクトの構築]({{ site.baseurl }}/ja/2.0/oss/)                           | オープンソース プロジェクトの構築に関するベスト プラクティス                                                                          |
+| ドキュメント                                                                        | 説明                                                                                                            |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [概要]({{ site.baseurl }}/ja/2.0/about-circleci/)                               | CI (継続的インテグレーション) の概要と、CircleCI ケース スタディーへのリンク                                                                |
+| [YAML を記述する]({{ site.baseurl }}/ja/2.0/writing-yaml/)                         | YAML の紹介                                                                                                      |
+| [コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)                            | コンテナの概要と、コンテナを使用してビルド時間を短縮し、キューイングを防止する方法                                                                     |
+| [GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/) | CircleCI で GitHub と Bitbucket を使用する方法                                                                         |
+| [コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)                                  | A high-level overview of CircleCI Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy. |
+| [Orb、ジョブ、ステップ、ワークフロー]({{ site.baseurl }}/ja/2.0/jobs-steps/)                  | How Jobs and Steps are used in a CircleCI configuration.                                                      |
+| [Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)                | 各ジョブには、異なるExecutorやイメージを使用することができます。 実際のジョブに `docker`、`machine`、`windows`、`macos` の各 Executor を使用した場合の比較      |
+| [オープンソース プロジェクトの構築]({{ site.baseurl }}/ja/2.0/oss/)                           | オープンソース プロジェクトの構築に関するベスト プラクティス                                                                               |
 {: class="table table-striped"}
 
 ## 機能
