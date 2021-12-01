@@ -1,10 +1,10 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "オープンソース プロジェクトの構築"
 short-title: "オープンソースプロジェクトの構築"
 description: "オープンソース プロジェクトの構築に関するベスト プラクティス"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 ---
 
@@ -17,18 +17,19 @@ order: 1
 {: #overview }
 {:.no_toc}
 
-To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
+To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux resources.
 
-**Note:** If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
+**備考:**
+* If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
+* Open-source credit availability and limits will not be visible in the UI.
 
-**Note:** There is a concurrency limit of 4 containers for Docker and Machine executors whereas macOS executors are limited to 1 container. Additional containers will be queued.
 
 ## セキュリティ
 {: #security }
 
 While open source can be a liberating practice, take care not to liberate sensitive information.
 
-- If your repository is public, your CircleCI project and its build logs are also public. 表示対象として選択する情報に注意してください。
+- If your repository is public, your CircleCI project and its build logs are also public. Pay attention to the information you choose to print.
 - Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests) unless explicitly enabled.
 
 ## Features and settings for open source projects
@@ -62,7 +63,7 @@ Many open source projects accept PRs from forked repositories. Building these PR
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Project Settings>Advanced** of your project and set the **Build forked pull requests** option to _On_.
 
-**Note**This feature is not currently supported for BitBucket users.
+**Note:** This feature is not currently supported for BitBucket users.
 
 **Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
@@ -74,11 +75,11 @@ Running an unrestricted build in a parent repository can be dangerous. Projects 
 
 By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
 
-- アプリケーションを通して設定される[環境変数](#プライベート環境変数)
+- [Environment variables](#private-environment-variables) set through the application.
 
-- {{ site.baseurl }}/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー
+- [Deployment keys and user keys]({{ site.baseurl }}/2.0/gh-bb-integration/#deployment-keys-and-user-keys).
 
-- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
+- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key) to access arbitrary hosts during a build.
 
 - [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
 
@@ -90,9 +91,9 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 {: #caching }
 
 Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
-- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master). For example, PRs from the master repo share a cache with the master repo branches (in particular the `master` branch).
-- それぞれ異なるフォーク リポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。 That means that a PR from a fork will not share a cache with the master repo `master` branch.
-- enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars) will enable cache sharing between the original repo and all forked builds.
+- PRs from the same fork repo will share a cache. For example, PRs from the main repo share a cache with the main repo branches (in particular the `main` branch).
+- Two PRs in different fork repos will have different caches. That means that a PR from a fork will not share a cache with the main repo `main` branch.
+- enabling the [passing of secrets to build from forked pull requests](#pass-secrets-to-builds-from-forked-pull-requests) will enable cache sharing between the original repo and all forked builds.
 
 Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
 
@@ -115,7 +116,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
 - **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
-## See also
+## 設定ファイルの詳細
 {: #see-also }
 {:.no_toc}
 
