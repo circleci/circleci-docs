@@ -1,10 +1,10 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Orb のパブリッシュ"
 short-title: "Orb のパブリッシュ"
 description: "Orb レジストリへの Orb のパブリッシュ"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
   - クラウド
@@ -33,7 +33,7 @@ version:
 以下では、Orb の新しいセマンティック リリースを公開する方法について説明します。 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 このブランチは、リポジトリの非デフォルトのブランチに新機能やバグ修正、パッチなどを作成するためのものであり、名前に深い意味はありません。 コードの追加や更新を行いリリースを公開する準備が整ったら、以下の手順を行います。
 
 1. **デフォルト ブランチに対して新しいプル リクエストを作成します。 **   
-   新しいリリースは、デフォルト ブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)と[単体テスト]({{site.baseurl}}/2.0/testing-orbs/#unit-testing)が有効になっています。 It is highly recommended that you add integration tests at a minimum to ensure the functionality of your orb. Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
+   新しいリリースは、デフォルト ブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)と[単体テスト]({{site.baseurl}}/2.0/testing-orbs/#unit-testing)が有効になっています。 Orb が正常に機能するかを確認するため、少なくとも結合テストは有効にしておくことを強くお勧めします。 Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
 
 1. テスト結果は、GitHub 上においてプル リクエスト内で直接確認できます。 また、CircleCI.com ではパイプライン全体に対する詳細な結果を確認できます。 ![プル リクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
@@ -60,7 +60,7 @@ version:
 
 ここでは、Orb 開発キットについて掘り下げ、Orb のパブリッシュに関係するコンポーネントについて説明します。
 
-The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
+この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
 
 この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
 
@@ -80,9 +80,7 @@ The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) comman
 The workflow runs as follows:
 
 * パーソナル アクセス トークンへの特別なアクセス権が不要なテストが実行されます。 このステージは、オープン ソースのプル リクエストから実行可能です。
-* The workflow is placed [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval). ![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png) The workflow will wait for a button click, via an alert prompt in the CircleCI app, before continuing.
-* Once the manual approval is authorized, subsequent jobs will be automatically authorized and may access the Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
-* After the workflow has been approved, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
+* The [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
 
     | Published Development Tag                              | Description                                                                      |
     | ------------------------------------------------------ | -------------------------------------------------------------------------------- |
