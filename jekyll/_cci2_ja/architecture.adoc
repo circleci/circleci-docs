@@ -1,20 +1,22 @@
 ---
+description: "This document describes the various services that make up a CircleCI Server v2 installation."
 version:
+- Admin
 - Server v2.x
 ---
-= CircleCI Server Container Architecture
+= CircleCI server container architecture
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
+This document outlines the containerized services that run on the Services machine within a CircleCI server v2.x installation. このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 以下の表に、補足と凡例を合わせて示しています。
 
 toc::[]
 
 [discrete]
-=== Notes
+=== 備考
 
 * ここに記載したデータベース移行サービスは、起動時のみに実行されるため、障害時の重大度は低くなっています。
 +
@@ -75,7 +77,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `contexts-service-migrator`
 | `contexts-service`のためにpostgresqlのマイグレーションを実行します。
-| Only runs at startup.
+| 起動時にのみ実行されます。
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -87,7 +89,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `cron-service-migrator`
 | cron-serviceのためにpostgresqlのマイグレーションを実行します。
-| Only runs at startup.
+| 起動時にのみ実行されます。
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -99,7 +101,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `domain-service-migrator`
 | `domain-service`のためにpostgresqlのマイグレーションを実行します。
-| Only runs at startup.
+| 起動時にのみ実行されます。
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -122,7 +124,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 | `postgres`, `frontend`
 
 | `fileserved`
-| File storage service used as a replacement for S3 when CircleCI Server is run outside of AWS. Not used if Server is configured to use S3. Stores step output logs, artifacts, test results, caches and workspaces.
+| File storage service used as a replacement for S3 when CircleCI server v2.x is run outside of AWS. Not used if server is configured to use S3. Stores step output logs, artifacts, test results, caches and workspaces.
 | If not using S3, builds will produce no outputand some REST API calls might fail.
 | icon:fire-extinguisher[] if **not** using S3
 | None
