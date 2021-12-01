@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Runner Autoscaling
+= Runner Scaling
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,9 +16,9 @@ toc::[]
 
 Maintaing a fixed compute fleet for CircleCI runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
 
-== Autoscaling Data
+== Scaling Data
 
-There are several API endpoints to provide autoscaling data:
+There are several API endpoints to provide Scaling data:
 
 * https://circleci.com/docs/2.0/runner-api/#get-apiv2runnertasks[Unclaimed Tasks]
 * https://circleci.com/docs/2.0/runner-api/#get-apiv2runnertasksrunning[Running Tasks]
@@ -26,9 +26,9 @@ There are several API endpoints to provide autoscaling data:
 
 You will also need the plan concurrency limit to avoid starting compute which cannot be used. This can be found on the CirleCI plans page. Scale & Custom plan customers will need to contact support to get this information 
 
-== Autoscaling
+== Scaling
 
-An autoscaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class so it's important to query every available resource class to get the total number of running tasks. The autoscaler is then free to decide which resource class to add new claiming agents for. The distribution of tasks across resource classes is dependent on the incoming workload and internal dispatching decisions made by CircleCI
+An Scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class so it's important to query every available resource class to get the total number of running tasks. The autoscaler is then free to decide which resource class to add new claiming agents for. The distribution of tasks across resource classes is dependent on the incoming workload and internal dispatching decisions made by CircleCI
 
 == Agent Configuration
 
