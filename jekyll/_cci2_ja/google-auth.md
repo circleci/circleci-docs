@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: Google Cloud SDK の承認
 description: Google Cloud SDK を承認する方法
 categories:
@@ -22,7 +22,7 @@ Google Cloud SDK は、Google Cloud Platform (GCP) サービスへのアクセ�
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI 2.0 プロジェクト
+- A CircleCI project.
 - GCP プロジェクト
 
 ### Google Cloud SDK のインストール
