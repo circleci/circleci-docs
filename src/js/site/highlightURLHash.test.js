@@ -4,7 +4,7 @@ window.$ = require('src-api/source/javascripts/lib/_jquery.js');
 
 document.body.innerHTML = '<div id="overallSuccesRate-definition"></div>';
 
-describe('InsightsTableScroll', () => {
+describe('highlightURLHash', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -12,7 +12,7 @@ describe('InsightsTableScroll', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  describe('insightsTableScroll', () => {
+  describe('highlightURLHash', () => {
     beforeEach(() => {
       jest.spyOn(window, 'addEventListener').mockImplementationOnce(() => {
         const hashNew = window.location.hash;

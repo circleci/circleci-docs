@@ -1,5 +1,5 @@
 import { createPopper } from '@popperjs/core';
-import { insightsTableScroll } from './insightsTableScroll';
+import { highlightURLHash } from './highlightURLHash';
 
 hljs.initHighlightingOnLoad();
 
