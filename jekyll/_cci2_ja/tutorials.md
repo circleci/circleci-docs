@@ -1,20 +1,21 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "チュートリアル"
 description: "チュートリアルおよびガイド付き 2.0 サンプル アプリケーション"
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
 お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
 
-| プラットフォーム ガイド                                                             | 説明                                                                      |
-| ------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                                | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                                | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
-| <a href="{{ site.baseurl }}/ja/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                                | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
-| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
+| プラットフォーム ガイド                                                             | 説明                                                                                     |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                                | Complete walkthrough of setting up a Python project with Flask to build with CircleCI. |
+| <a href="{{ site.baseurl }}/ja/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                                | Full example of setting up an iOS project in CircleCI.                                 |
+| <a href="{{ site.baseurl }}/ja/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                                | Full example of setting up an Android project in CircleCI.                             |
+| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI.                                 |
 {: class="table table-striped"}
 
 ## Sample projects with companion guides
