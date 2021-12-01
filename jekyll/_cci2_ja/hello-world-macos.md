@@ -1,16 +1,16 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "macOS での Hello World"
 short-title: "macOS での Hello World"
-description: "CircleCI 2.0 での最初の macOS プロジェクト"
+description: "First macOS project on CircleCI"
 categories:
-  - getting-started
+  - はじめよう
 order: 4
 version:
-  - Cloud
+  - クラウド
 ---
 
-CircleCI の **macOS ビルド環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)を参照することをお勧めします。 You may also wish to visit the documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
+This document describes how to get started with continuous integration on **macOS execution environments** on CircleCI. CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)を参照することをお勧めします。 You may also wish to visit the documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
 
 ## 前提条件
 {: #prerequisites }
@@ -24,16 +24,16 @@ CircleCI の **macOS ビルド環境**で継続的インテグレーションを
 ## macOS Executor の概要
 {: #overview-of-the-macos-executor }
 
-macOS ビルド環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行うことができます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
+The macOS execution environment (or `executor`) is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
 macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
 
 ## サンプル アプリケーション
 {: #example-application }
 
-サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
+The example application is a simple mac app - it runs a 5 minute timer and contains a single unit test (real-world applications will be far more complex; this app simply serves as an introduction to the macOS execution environment).
 
-macOS ビルド環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
+As a user getting to know the macOS execution environment, our ideal scenario is for CircleCI to help with the following:
 
 - コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
 - テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
@@ -101,14 +101,14 @@ macOS でのビルドの基礎について説明しているため、上記の�
 {: #xcode-cross-compilation }
 
 ### Universal Binaries
-{: #universal-binaries } Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
+{: #universal-binaries } Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables.
 
 ### Extracting Unwanted Architectures
 {: #extracting-unwanted-architectures }
 
-Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both `x86_64` and `ARM64` based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
+Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
 
-Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command:
+Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
 
 ```sh
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
@@ -124,8 +124,7 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ### Cross Compiled Binaries
 {: #cross-compiled-binaries }
 
-While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64
-ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to `x86_64`.
+While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the x86_64 architecture simply change `ARCHS` to `x86_64`.
 
 ## 次のステップ
 {: #next-steps }
