@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "サポートされている言語ごとのガイド"
 short-title: "サポートされている言語"
 description: "人気の言語で構築された CircleCI サンプル アプリケーションの一覧"
@@ -7,11 +7,12 @@ categories:
   - language-guides
 order: 0
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
-Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 でビルドされます。 CircleCI では、さまざまな言語で複数のデモ アプリケーションを用意しているため、お使いの言語で記述されているアプリケーションの例を参考にしながら学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリック リポジトリを公開しています。 それぞれをフォークし、内容をご確認ください。
+Code that builds on Linux or iOS will generally build on CircleCI. CircleCI では、さまざまな言語で複数のデモ アプリケーションを用意しているため、お使いの言語で記述されているアプリケーションの例を参考にしながら学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリック リポジトリを公開しています。 それぞれをフォークし、内容をご確認ください。
 
 {% include snippets/language-guides.md %}
 
