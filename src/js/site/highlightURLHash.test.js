@@ -1,8 +1,8 @@
-import { insightsTableScroll } from './insightsTableScroll';
+import { highlightURLHash } from './highlightURLHash';
 
 window.$ = require('src-api/source/javascripts/lib/_jquery.js');
 
-document.body.innerHTML = '<div id="overallSuccesRate-definition">' + '</div>';
+document.body.innerHTML = '<div id="overallSuccesRate-definition"></div>';
 
 describe('InsightsTableScroll', () => {
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('InsightsTableScroll', () => {
       });
     });
 
-    it('ishighlighted false add class', () => {
+    it('When window.location search is `highlight` then class highlight not added to hash id element', () => {
       const location = {
         ...window.location,
         search: '',
@@ -32,11 +32,12 @@ describe('InsightsTableScroll', () => {
         value: location,
       });
 
-      insightsTableScroll();
-      expect($(window.location.hash)[0].classList[0]).not.toEqual('highlight');
+      highlightURLHash();
+      var element = document.querySelector(window.location.hash)
+      expect(element.classList[0]).not.toEqual('highlight');
     });
 
-    it('ishighlighted true no added class', () => {
+    it('When window.location search is `highlight` then class highlight added to hash id element', () => {
       let location = {
         ...window.location,
         search: '?highlight',
@@ -46,12 +47,12 @@ describe('InsightsTableScroll', () => {
         writable: true,
         value: location,
       });
-      let oldHash = window.location.hash;
-      insightsTableScroll();
-      expect($(oldHash)[0].classList[0]).toEqual('highlight');
+      highlightURLHash();
+      var element = document.querySelector(window.location.hash)
+      expect(element.classList[0]).toEqual('highlight');
     });
 
-    it('addevent listener called', () => {
+    it('When hash changes `addEventListener` is called', () => {
       let location = {
         ...window.location,
         search: '?highlight',
@@ -62,7 +63,7 @@ describe('InsightsTableScroll', () => {
         value: location,
       });
 
-      insightsTableScroll();
+      highlightURLHash();
 
       window.location.hash = '#apple-definition';
       expect(window.addEventListener).toBeCalledWith(

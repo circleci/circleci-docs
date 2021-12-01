@@ -1,7 +1,7 @@
 // This function will highlight a dom element with the ID found in the URL fragment
 // Added to draw attention to specific entries in only the insights table
 // Highlight can be generalized to rest of documentation later see main.scss
-export function insightsTableScroll() {
+export function highlightURLHash() {
   const searchParams = new URLSearchParams(window.location.search);
   const isHighlighted = searchParams.has('highlight');
   let hash = window.location.hash;

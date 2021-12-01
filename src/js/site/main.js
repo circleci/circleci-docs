@@ -397,7 +397,5 @@ $(document).ready(function () {
     });
 });
 
-// This function will highlight a dom element with the ID found in the URL fragment
-// Added to draw attention to specific entries in only the insights table
-// Highlight can be generalized to rest of documentation later see main.scss
-$(document).ready(insightsTableScroll());
+// Currently this function is only used for the insights table
+$(document).ready(highlightURLHash());
