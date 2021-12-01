@@ -147,8 +147,8 @@ en:
           link: 2.0/runner-installation-docker/
         - name: Kubernetes Runner Installation
           link: 2.0/runner-on-kubernetes/
-        - name: Runner Autoscaling
-          link: 2.0/runner-autoscaling/
+        - name: Runner Scaling
+          link: 2.0/runner-scaling/
         - name: Runner Configuration Reference
           link: 2.0/runner-config-reference/
         - name: Upgrading Runner on Server
