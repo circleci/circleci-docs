@@ -1,81 +1,101 @@
 ---
 layout: classic-docs
 title: "概要"
-short-title: "概要"
-description: "CircleCI 2.0 入門ガイド"
+description: "This document is a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments."
 categories:
-  - はじめよう
+  - getting-started
 order: 1
+version:
+  - クラウド
+  - Server v3.x
+  - Server v2.x
 ---
 
-継続的インテグレーションの概要と、CircleCI を使用してエンジニアリング チームが自動化を行うしくみについて説明します。 CircleCI は、ソフトウェアのビルド、テスト、デプロイを自動化します。
+Our mission is to empower technology-driven organizations to do their best work -- and make engineering teams more productive. Build, test, and deploy using intelligent automation.
 
-## CircleCI の概要
-{: #circleci-overview }
+We work where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers. CircleCI provides enterprise-class support and services, with the flexibility of a startup.
 
-**CircleCI**- CircleCI のミッションは、テクノロジー主導型の組織が最高の成果を上げられるようにサポートすることです。        
-インテリジェントな自動化を通して、エンジニアリング チームの生産性を向上させます。
-
-CircleCI は、エンタープライズ クラスのサポートとサービスを提供すると共に、高い柔軟性によってスタートアップにも対応しています。        
-Linux、macOS、Android、Windows、さらに SaaS やファイアウォールの内側など、必要な場所で動作します。
-
-![CircleCI のコンセプト イメージ]( {{ site.baseurl }}/assets/img/docs/arch.png)
-
-## CircleCI のメリット
-{: #benefits-of-circleci }
-
-CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI は、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)、および[従量課金制プラン](https://circleci.com/ja/pricing/)によって、きわめて複雑なパイプラインを効率的に実行するように設定することができます。
-
-開発者は [circleci.com](https://circleci.com/ja/) を使用して、[任意のジョブに SSH 接続]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)してビルドの問題をデバッグしたり、[.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルで[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)をセットアップしてジョブの実行を高速化したり、わずか 2 つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を設定して[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)で以前のジョブのデータを再利用したりすることができます。
-
-サーバーにインストールした CircleCI のオペレーターや管理者は、CircleCI を使用して、ビルドをモニタリングしてインサイトを得たり、スケジューリングに Nomad クラスターを使用したりすることができます。 詳細については、[CircleCI 運用ガイド]({{site.baseurl}}/2.0/circleci-ops-guide-v2-17.pdf) を参照してください。
-
-## 概要
-{: #summary }
-
-GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、プロジェクトとして [circleci.com](https://circleci.com/ja/) に追加された後は、コードを変更するたびに、クリーン コンテナまたは VM で自動化されたテストがトリガーされます。 CircleCI は、各[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/ja/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
-
-その後 CircleCI は、テストが完了すると、成功または失敗のメール通知を送信します。 CircleCI には Slack 通知と IRC 通知も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから提供されます。
-
-CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Kubernetes Engine (GKE)、Microsoft Azure、Heroku などのさまざまな環境にコードをデプロイするように構成できます。 他のクラウド サービスへのデプロイには、SSH を使用するか、ジョブの構成でサービスの API クライアントをインストールすることで、簡単にスクリプト化できます。
-
-## 継続的インテグレーションとは
+## What is continuous integration?
 {: #what-is-continuous-integration }
 
-**継続的インテグレーション**は、コードを共有リポジトリの `master` ブランチに常時頻繁に統合することを奨励する開発手法です。 それぞれの機能を個別にビルドして、開発サイクルの最後に統合するのではなく、各開発者のコードが 1 日に何度も共有リポジトリに統合されます。
+**Continuous integration** is a practice that encourages developers to integrate their code into a `main` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
-**継続的インテグレーション**はディジタルトランスフォーメーションの重要なステップです。
+Continuous integration is a key step to digital transformation.
 
-**概要**  
-すべての開発者が共有メインラインに毎日コミットします。        
-コミットされるたびに、自動化されたビルドとテストがトリガーされます。        
-ビルドやテストが失敗しても、数分以内にすばやく修復できます。
+Every developer commits daily to a shared mainline. Every commit triggers automated tests and builds. If these fail, they can be repaired quickly - within minutes.
 
-**メリット**  
-チームの生産性、効率、満足度を向上させます。 問題をすばやく検出して解決できます。 より高品質で安定したプロダクトをリリースできます。
+**Why?** Continuous integration improves team productivity, efficiency, confidence, and happiness. Find problems and solve them quickly. Release higher quality, more stable products.
 
+![CircleCI about image]( {{ site.baseurl }}/assets/img/docs/arch.png)
 
-## 無料トライアル
-{: #free-trial-options }
+## CircleCI in your workflow
+{: #circleci-in-your-workflow}
 
-CircleCI は以下の無料トライアル オプションをご用意しています。
+A software repository on a supported version control system needs to be authorized and added as a project on [circleci.com](https://circleci.com). Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or [virtual machine](https://circleci.com/developer/images?imageType=machine).
 
-- **クラウド**: 「[CircleCI を始める]({{site.baseurl}}/ja/2.0/first-steps/)」を参照しながら、CircleCI がホスティングするアプリケーションの使用を開始してください。
-- **サーバー**: 「[CircleCI トライアルのインストール]({{site.baseurl}}/2.0/single-box/)」に記載されている Enterprise トライアルの手順をご覧ください。
+CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated [Slack and IRC notifications]({{site.baseurl}}/2.0/notifications). Code test coverage results are available from the details page for any project for which a reporting library is added.
 
-### オープンソース
-{: #open-source }
+CircleCI may be configured to deploy code to various environments, including:
+- AWS CodeDeploy
+- AWS EC2 Container Service (ECS)
+- AWS S3, Google Kubernetes Engine (GKE)
+- Microsoft Azure
+- Heroku
 
-パブリック オープンソース プロジェクト用無料コンテナの詳細については、「[オープンソース プロジェクトのビルド]({{site.baseurl}}/ja/2.0/oss/)」を参照してください。
+The [orbs registry](https://circleci.com/developer/orbs) contains packages of reusable configuration that can be used for common deployment targets. Orbs simplify and streamline your configuration.
 
-## 関連項目
-{: #see-also }
+Other cloud service deployments can be scripted using SSH, or by installing the API client of the service with your job configuration.
 
-Linux、Android、macOS 上で動作するすべてのアプリがサポートされます。 以下のドキュメントを参照してください。
-- [サポートされている言語]({{site.baseurl}}/ja/2.0/demo-apps/): サンプルとガイド
-- [コア機能]({{site.baseurl}}/ja/2.0/features/): 詳細な説明と手順書へのリンク
+## Benefits of CircleCI
+{: #benefits-of-circleci }
+
+CircleCI runs nearly one million jobs per day in support of 30,000 organizations. Organizations choose CircleCI because jobs run fast and builds can be optimized for speed.
+
+CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching,]({{site.baseurl}}/2.0/caching/) [docker layer caching,]({{site.baseurl}}/2.0/docker-layer-caching/) and [resource classes]({{site.baseurl}}/2.0/optimizations/#resource-class) for running on faster machines.
+
+As a developer using CircleCI you can:
+- [SSH into any job]({{site.baseurl}}/2.0/ssh-access-jobs/) to debug your build issues.
+- Set up [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) file to run jobs faster.
+- Configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
+- Configure self-hosted [runners]({{site.baseurl}}/2.0/runner-overview/) for unique platform support.
+- Access [Arm resources]({{site.baseurl}}/2.0/arm-resources/) for the machine executor.
+- Use [orbs]({{site.baseurl}}/2.0/using-orbs/), reusable packages of configuration, to integrate with third parties.
+- Use pre-built Docker [images]({{site.baseurl}}/2.0/circleci-images/) in a variety of languages.
+- Use the [API](https://circleci.com/docs/api/v2/) to retrieve information about jobs and workflows.
+- Use the [CLI]({{site.baseurl}}/2.0/local-cli/) to access advanced tools locally.
+- Get flaky test detection with [test insights]({{site.baseurl}}/2.0/insights-tests/).
+
+As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses [Nomad](https://www.nomadproject.io/) for scheduling.
+
+See the [CircleCI Operations and Installation Guides]({{site.baseurl}}/2.0/server-3-overview/) for complete server documentation.
+
+## Pricing options
+{: #pricing-options }
+
+Visit CircleCI's [Pricing page](https://circleci.com/pricing/) to view free and paid options.
+
+You can [sign up](https://circleci.com/signup/) for free to get access to unlimited projects on CircleCI's fully-hosted cloud platform.
+
+Organizations on the free plan are given free credits to use on open source projects. Visit [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for more information about free containers for public open source projects.
 
 ## さらに詳しく
 {: #learn-more }
-Circle CI Academy の[CI/CD 101 ワークショップ](https://academy.circleci.com/cicd-basics?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
 
+### In the Docs:
+{: #in-the-docs }
+{:.no_toc}
+- [Concepts]({{site.baseurl}}/2.0/concepts/) for basic concepts of CI/CD pipeline management
+- [Tutorials]({{site.baseurl}}/2.0/tutorials/) for platform specific tutorials
+
+### On CircleCI Academy:
+{: #on-circleci-academy }
+{:.no_toc}
+- [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021)
+- [General Developer Training](https://academy.circleci.com/general-developer-training?access_code=public-2021)
+
+### On our blog:
+{: #on-our-blog }
+{:.no_toc}
+- [Config best practices: dependency caching](https://circleci.com/blog/config-best-practices-dependency-caching/)
+- [Automate and scale your CI/CD with CircleCI orbs](https://circleci.com/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/)
+- [How to secure your CI pipeline](https://circleci.com/blog/secure-ci-pipeline/)
