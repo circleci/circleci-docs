@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "コア機能"
 short-title: "コア機能"
-description: "CircleCI 2.0 コア機能の入門ガイド"
+description: "Starting point for learning core features of CircleCI"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -21,7 +22,7 @@ CircleCI が提供する機能のうち、開発者の方に関係する人気�
 ### ビルドへの SSH 接続
 {: #ssh-into-builds }
 
-多くの場合、問題を解決するには、[ジョブへの SSH 接続]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べることが最善の方法です。 CircleCI 2.0 では、すべてのジョブに SSH を介してアクセスするオプションが用意されています。
+多くの場合、問題を解決するには、[ジョブへの SSH 接続]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べることが最善の方法です。 CircleCI gives you the option to access all jobs via SSH.
 
 Note: When CircleCI runs your pipeline, the [`run` ](https://circleci.com/docs/2.0/configuration-reference/#run) command executes shell commands in a _non-interactive_ shell. When SSH-ing into a build, you are using an _interactive_ shell (see the section on [Invocation](https://linux.die.net/man/1/bash) in the bash manual for more information). An interactive bash shell loads a series of startup files (such as `~/.bash_profile`), which may or may not change the outcome of SSH debugging process.
 
@@ -62,7 +63,7 @@ CircleCI が提供する機能のうち、オペレーターの皆様に関係�
 ### Nomad クラスタ
 {: #nomad-cluster }
 
-CircleCI は、CircleCI 2.0 のプライマリ ジョブ スケジューラとして Nomad を使用します。 お使いの CircleCI 2.0 で Nomad クラスタを操作する方法については、[Nomad の基本的な概要の説明]({{ site.baseurl }}/ja/2.0/nomad/)を参照してください。
+CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/nomad/) for understanding how to operate the Nomad Cluster in your CircleCI server installation.
 
 ### API
 {: #apis }
