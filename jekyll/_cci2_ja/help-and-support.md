@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "ヘルプとサポート"
 short-title: "ヘルプとサポート"
 description: "利用可能なサポート オプションの一覧"
@@ -8,7 +8,7 @@ categories:
 order: 3
 ---
 
-If you're here, it's because you couldn't find what you were looking for in the docs. Our apologies!
+ドキュメントの内容に不備・不足があり、 誠に申し訳ありません。
 
 CircleCI のドキュメント サイトでは、以下の 2 つの方法で、新規ドキュメントの作成依頼や編集内容のご提案を受け付けています。
 
