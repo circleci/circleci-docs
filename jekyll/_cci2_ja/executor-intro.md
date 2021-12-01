@@ -1,18 +1,18 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Executor とイメージ"
 short-title: "Executor とイメージ"
-description: "CircleCI 2.0 の Executor とイメージ"
+description: "CircleCI executors and images"
 categories:
-  - configuration
+  - 設定
 order: 1
 version:
-  - Cloud
+  - クラウド
   - Server v2.x
   - Server v3.x
 ---
 
-CircleCIでは、複数のビルド環境を用意しています。 CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCI offers several execution environments. CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -71,7 +71,7 @@ jobs:
 ## macOS
 {: #macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
 ```
 jobs:
@@ -94,7 +94,7 @@ jobs:
 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
 * クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```
@@ -154,6 +154,6 @@ jobs:
 * [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
 * [Windows でビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
 CircleCI Academy の [ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021) を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。
