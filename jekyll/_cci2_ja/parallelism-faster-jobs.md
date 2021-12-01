@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "テストの並列実行"
 short-title: "テストの並列実行"
 description: "テストを並列に実行する方法"
@@ -7,7 +7,8 @@ categories:
   - 最適化
 order: 60
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
