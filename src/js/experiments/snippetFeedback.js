@@ -39,8 +39,8 @@ export class SnippetFeedback {
       text: 'Was this helpful?',
     });
     const slash = this.makeElement({ kind: 'span', text: ' / ' });
-    const yesButton = this.renderYesNoButton({ text: 'yes' });
-    const noButton = this.renderYesNoButton({ text: 'no' });
+    const yesButton = this.renderYesNoButton({ text: 'Yes' });
+    const noButton = this.renderYesNoButton({ text: 'No' });
     // append dom nodes.
     container.appendChild(textPrompt);
     container.appendChild(yesButton);
