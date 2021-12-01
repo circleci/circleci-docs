@@ -1,17 +1,18 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Windows での Hello World"
 short-title: "Windows での Hello World"
-description: "CircleCI 2.0 での最初の Windows プロジェクト"
+description: "First Windows project on CircleCI"
 categories:
-  - getting-started
+  - はじめよう
 order: 4
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
-CircleCI の **Windows ビルド環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)をご覧になることをお勧めします。
+This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/2.0/getting-started/).
 
 * 目次
 {:toc}
@@ -26,10 +27,10 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 * Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
 * クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
 
-## Windows Executor の概要
+## Overview of the Windows executor
 {: #overview-of-the-windows-executor }
 
-Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) アプリケーション、.NET 実行可能ファイル、(.NET フレームワークなどの) Windows 固有プロジェクトといった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
+The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. Windows Executor の仕様と機能は以下のとおりです。
 
 - VM ベースでジョブの完全分離を保証
 - Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
@@ -40,9 +41,9 @@ Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) ア�
 **備考:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
-- Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
+- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
 
-### Windows Executor イメージ
+## Windows executor images
 {: #windows-executor-images }
 
 現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに何が含まれているのか、詳しい情報についてはシステム管理者にお問い合わせください。
@@ -113,7 +114,7 @@ jobs:
 ```
 
 
-### 既知の問題
+## Known issues
 {: #known-issues }
 
 Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
@@ -121,7 +122,7 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 * SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
-## サンプルの設定ファイル
+## Example configuration file
 {: #example-configuration-file }
 
 以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
@@ -177,7 +178,7 @@ jobs:
 
 ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
 
-## Windows Executor でのシェルの指定
+## Specifying a Shell with the Windows Executor
 {: #specifying-a-shell-with-the-windows-executor }
 
 Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
@@ -308,10 +309,10 @@ jobs:
       - run: pwsh ./<my-script>.ps1
 ```
 
-## サンプル アプリケーション
+## Example application
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
@@ -376,12 +377,12 @@ In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-r
 
 最後のステップでは、ビルド実行可能ファイルをアーティファクトとして保存し、CircleCI Web アプリケーションまたは API からアクセスできるようにします。
 
-## ビルドへの SSH 接続
+## SSH into your build
 {: #ssh-into-your-build }
 
 Windows ビルド コンテナに SSH 接続することができます。 これは、パイプラインに関する問題のトラブルシューティングに便利です。 Windows コンテナに SSH 接続するには、以下の手順を実行します。
 
-### 手順
+### Steps
 {: #steps }
 
 1. SSH キーを [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) アカウントまたは [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) アカウントに追加していることを確認します。
@@ -400,7 +401,7 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 
 ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を参照してください。
 
-## 次のステップ
+## Next steps
 {: #next-steps }
 
 CircleCI の機能については、以下のドキュメントを確認してください。
@@ -409,7 +410,7 @@ CircleCI の機能については、以下のドキュメントを確認して�
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
 * すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)」を参照してください。
 
-## Windows イメージにプリインストールされているソフトウェア
+## Software pre-installed in the Windows image
 {: #software-pre-installed-in-the-windows-image }
 
 **Windows Server 2019 with Visual Studio 2019**
