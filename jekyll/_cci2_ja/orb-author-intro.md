@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Orb オーサリングの概要"
 short-title: "Orb オーサリングの概要"
 description: "Orb のオーサリング方法に関する入門ガイド"
@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -56,19 +56,21 @@ Orb CLI のコマンドは、VCS (バージョン管理システム) によっ�
 ### 名前空間の登録
 {: #register-a-namespace }
 
-CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織につき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_である必要があります。
+CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
 
-まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
+_note: Within CircleCI, we sometimes refer to individual users as "organizations" or "personal organizations", since from our perspective there aren't notable differences. Hence some commands refer to an `org-name`. This can simply be your GitHub username._
+
+Enter the following command to claim your namespace, if you have not yet claimed one:
 ```sh
 circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
 
-`name` は要求する名前空間、`vcs-type` はお使いのバージョン管理システムの種類 (`github` または `bitbucket`)、`org-name` は自分の組織名を入力してください。
+where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organization.
 
 ### 次のステップ
 {: #next-steps }
 
-Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
+Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
 
 
 ## 関連項目
