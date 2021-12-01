@@ -32,8 +32,9 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 - Modify the schedule without having to edit `config.yml`.
 - Interact with auto-cancelling of pipelines.
 - Specify pipeline parameters associated with a schedule.
+- Consolidate the management of common schedules.
 
-Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application. 
+Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
 
 ## Get started with scheduled pipelines in CircleCI
 {: #get-started }
