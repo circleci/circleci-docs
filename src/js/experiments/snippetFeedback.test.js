@@ -1,4 +1,4 @@
-import * as glob from '../../../jest/global';
+import '../../../jest/global';
 import { SnippetFeedback } from './snippetFeedback';
 
 describe('Snippet Feedback class', () => {
