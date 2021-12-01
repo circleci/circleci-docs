@@ -99,13 +99,13 @@ In this step we will delete the stateful set, which controls our database pod. T
 For postgres:
 [source,bash]
 ----
-circleci-user ~ $ kubectl delete sts postgresql --cascade=false
+kubectl delete sts postgresql --cascade=false
 ----
 
 For mongodb:
 [source,bash]
 ----
-circleci-user ~ $ kubectl delete sts mongodb --cascade=false
+kubectl delete sts mongodb --cascade=false
 ----
 
 === Step 3 - Update the size of the database's PVC
@@ -114,13 +114,13 @@ Now that the stateful set has been removed, we can increase the size of our pers
 For postgres:
 [source,bash]
 ----
-circleci-user ~ $ kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
+kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
 For mongodb:
 [source,bash]
 ----
-circleci-user ~ $ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
+kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
 === Step 4 - Update KOTS admin with the new PVC size
@@ -162,11 +162,44 @@ NOTE: If you find that after following these steps, the disk size allocated to y
 For postgres
 [source,bash]
 ----
-circleci-user ~ $ kubectl rollout restart sts postgresql
+kubectl rollout restart sts postgresql
 ----
 
 For mongodb
 [source,bash]
 ----
-circleci-user ~ $ kubectl rollout restart sts mongodb
+kubectl rollout restart sts mongodb
 ----
+
+== Troubleshooting
+
+If you find that the new pods do show the resized volumes as expected, it is still worth running the following commands to check. In some instances the resize will fail, but the only error source is an event in the output from the following commands.
+
+For postgres
+[source,bash]
+----
+kubectl describe pvc data-postgresql-0
+----
+
+For mongodb
+[source,bash]
+----
+kubectl describe pvc datadir-mongodb-0
+----
+
+success looks like:
+```
+Events:
+Type    Reason                      Age   From     Message
+
+   ------                      ----  ----     -------
+Normal  FileSystemResizeSuccessful  19m   kubelet  MountVolume.NodeExpandVolume succeeded for volume "pvc-b3382dd7-3ecc-45b0-aeff-45edc31f48aa"
+```
+
+Failure might look like:
+```
+Warning  VolumeResizeFailed  58m   volume_expand  error expanding volume "circleci-server/datadir-mongodb-0" of plugin "kubernetes.io/aws-ebs": AWS modifyVolume failed for vol-08d0861715c313887 with VolumeModificationRateExceeded: You've reached the maximum modification rate per volume limit. Wait at least 6 hours between modifications per EBS volume.
+status code: 400, request id: 3bd43d1e-0420-4807-9c33-df26a4ca3f23
+Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolume.NodeExpandVolume succeeded for volume "pvc-29456ce2-c7ff-492b-add4-fcf11872589f"
+```
+
