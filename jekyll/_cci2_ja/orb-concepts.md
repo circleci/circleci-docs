@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Orb のコンセプト"
 short-title: "Orb のコンセプト"
 description: "Orb のコンセプトの概要"
@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 verison:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -321,7 +321,7 @@ steps:
 Bash スクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/2.0/orb-author/#scripts) ガイドをご覧ください。
 
 ## Orb 内での Orb の使用と登録時の解決
-{: #using-orbs-within-your-orb-and-register-time-resolution }
+{: #-within-your-orb-and-register-time-resolution }
 
 Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、すべての Orb 依存関係は、ビルドの実行時ではなく Orb の登録時にすべて解決されます。
 
