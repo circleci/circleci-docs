@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Arm リソース"
 short-title: "CircleCI の Arm リソースの使用"
 description: "CircleCI の Arm リソースの使用"
@@ -8,11 +8,10 @@ version:
   - Server v3.x
 ---
 
-## 概要
-{: #overview }
+ここでは、CircleCI の Arm リソースを使ううえで必要なセットアップ手順について説明します。 Arm resources are available on cloud and server 3.x.
 
-ここでは、CircleCI の Arm リソースを使う上で必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
-
+## はじめに
+[CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)をトリガーします。
 CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部であり、次の 2 種類があります。
 
 * `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
@@ -25,7 +24,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。 この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
-## 料金と提供プラン
+## Pricing and availability
 {: #pricing-and-availability }
 
 以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
@@ -38,7 +37,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
-## Arm リソースの使用方法
+## Using Arm resources
 {: #using-arm-resources }
 
 Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定例を参考にしてください。
@@ -103,7 +102,7 @@ workflows:
 
 1 つの設定ファイル内、および 1 つのワークフロー内でも、複数のリソースを混在させることができます。
 
-## 制限事項
+## 関連項目
 {: #limitations }
 
 * 現在、実行可能ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
