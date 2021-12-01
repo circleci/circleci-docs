@@ -1,10 +1,10 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Orb のテスト手法"
 short-title: "テスト手法"
 description: "CircleCI Orb のテストに関する入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
   - クラウド
