@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "最適化"
 short-title: "最適化"
-description: "CircleCI 2.0 ビルドの最適化"
+description: "CircleCI build optimizations"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -193,7 +194,7 @@ jobs:
 
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
-## See also
+## 言語別の最新イメージ タグ
 {: #see-also }
 {:.no_toc}
 
