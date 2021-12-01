@@ -72,7 +72,7 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-For additional information, refer to the **Schedule** section under the [open-api docs](https://circleci.com/docs/api/v2/).
+For additional information, refer to the **Schedule** section under the [API v2 docs](https://circleci.com/docs/api/v2/).
 
 #### Use project settings
 {: #project-settings }
