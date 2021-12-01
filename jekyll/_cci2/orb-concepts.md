@@ -319,7 +319,7 @@ File inclusion is especially useful for separating your configuration's bash log
 View more about including bash scripts in the [Orb Author]({{site.baseurl}}/2.0/orb-author/#scripts) guide.
 
 ## Using orbs within your orb and register-time resolution
-{: #using-orbs-within-your-orb-and-register-time-resolution }
+{: #-within-your-orb-and-register-time-resolution }
 
 An orbs stanza can be used inside an orb. Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
 

@@ -66,7 +66,7 @@ Following the same process as in the xref:runner-installation.adoc#download-the-
 export agent_version="<launch-agent-version>"
 ```
 
-Then, following the xref:runner-installation.adoc#platform-specific-instructions[platform specific installation instructions] replace the old binary with the newly updated version that was just downloaded.
+Then, following the xref:runner-installation.adoc#platform-specific-instructions[platform specific installation instructions], replace the old binary with the newly updated version that was just downloaded.
 
 ==== 2. Stop the currently running launch agent
 

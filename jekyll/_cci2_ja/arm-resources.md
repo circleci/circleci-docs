@@ -8,7 +8,7 @@ version:
   - Server v3.x
 ---
 
-# 概要
+## 概要
 {: #overview }
 
 ここでは、CircleCI の Arm リソースを使う上で必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
@@ -57,7 +57,6 @@ jobs:
       - run: uname -a
       - run: echo "Hello, Arm!"
 
-
   build-large:
     machine:
       image: ubuntu-2004:202101-01
@@ -72,6 +71,7 @@ workflows:
       - build-medium
       - build-large
 ```
+
 {:.tab.armblock.Server}
 ```yaml
 # .circleci/config.yml

@@ -1,4 +1,5 @@
 ---
+description: "This section defines the system and port access requirements for installing CircleCI v2.x."
 version:
 - Server v2.x
 - Server Admin
@@ -115,7 +116,7 @@ The following table defines the number of Nomad clients to make available as a b
 
 == Server Ports
 
-Below all ports required by a CircleCI 2.0 installation are listed for each machine type.
+Below all ports required by a CircleCI installation are listed for each machine type.
 
 === Services Machine
 

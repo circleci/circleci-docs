@@ -92,7 +92,6 @@ jobs:
           steps:
             - run: npm install
       - run: npm run test
-
 ```
 
 
@@ -131,7 +130,7 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
        steps:
          - checkout
          - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します。
-         - run: sleep 15 # 15 秒間スリープします
+           - run: sleep 15 # 15 秒間スリープします
    # このワークフローでは、マッピングを行い、上記で定義した 2 つのジョブを調整することができます。
    workflows:
      version: 2
@@ -217,8 +216,11 @@ Workspace に関する詳細は[こちら](https://circleci.com/docs/2.0/workflo
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server-v2}
-![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+{:.tab.switcher.Server_3}
+![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server_2}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
 ビルドの SSH 有効化セクションから `ssh` の接続先をコピーします。 ターミナルを開き、`ssh` の接続先を貼り付けます。
@@ -231,7 +233,7 @@ ls -al               # 現在のディレクトリに含まれるファイルと
 cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します。
 cat <file_name>      # ファイル <file_name> の内容を表示します。
 ```
-**注:** `rerun job with ssh`を実行するには、 [ジョブにSSHキーを追加する](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job)という手順が必要です。
+*SSH 鍵を GitHub アカウントに登録する必要があることにご注意ください。 詳細はこちら: <https://help.github.com/articles/connecting-to-github-with-ssh/>
 
 ## チームメイトと協力する
 {: #collaborating-with-teammates }

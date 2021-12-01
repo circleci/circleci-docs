@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 ---
 = CircleCI Runner API
 :page-layout: classic-docs
@@ -8,8 +9,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative for information on how to sign up for the Scale plan.
 
 This document contains all the external facing endpoints for the CircleCI runner API.
 
@@ -66,7 +65,7 @@ Lists the available runners based on the specified parameters. It is mandatory t
 
 * Circle-Token (personal authentication)
 * Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
 * Launch Token
 
 ===== Request
@@ -93,7 +92,7 @@ Lists the available runners based on the specified parameters. It is mandatory t
 | filters the list of runners by namespace.
 |===
 
-== Examples
+==== Examples
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
@@ -105,7 +104,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
 
-=== Response
+==== Response
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -119,7 +118,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |JSON
 |===
 
-=== Response Schema
+==== Response Schema
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -170,7 +169,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |version of the launch-agent running
 |===
 
-== Example
+==== Example
 
 ```sh
 {
@@ -197,10 +196,10 @@ Get the number of unclaimed tasks for a given resource class.
 
 * Circle-Token (personal authentication)
 * Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
 * Launch Token
 
-===== Request
+==== Request
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -218,14 +217,14 @@ Get the number of unclaimed tasks for a given resource class.
 | filters tasks by specific resource class.
 |===
 
-== Examples
+==== Examples
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
-=== Response
+==== Response
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -239,7 +238,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 |JSON
 |===
 
-=== Response Schema
+==== Response Schema
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -255,11 +254,84 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 |number of unclaimed tasks
 |===
 
-== Example
+==== Example
 
 ```json
 {
     "unclaimed_task_count": 42
+}
+```
+
+=== GET /api/v2/runner/tasks/running
+
+Get the number of running tasks for a given resource class.
+
+==== Authentication Methods
+
+* Circle-Token (personal authentication)
+* Browser Session Authentication
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+
+==== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| resource-class
+| string
+| query
+| true
+| filters tasks by specific resource class.
+|===
+
+==== Examples
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-class=test-namespace/test-resource \
+    -H 'Circle-Token: secret-token'
+```
+
+==== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|200
+|Number of running tasks
+|JSON
+|===
+
+==== Response Schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|running_runner_tasks
+|int
+|true
+|number of running tasks
+|===
+
+==== Example
+
+```json
+{
+    "unclairunning_runner_tasksmed_task_count": 42
 }
 ```
 

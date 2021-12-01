@@ -24,9 +24,9 @@ version:
 
 ここでは、以下を前提としています。
 
-* [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
+* [Gradle](https://gradle.org/) を使用している。 [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
 * Java 11 を使用している
-* Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
+* Spring Framework を使用している。  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
 * アプリケーションをオールインワン uberjar として配布できる
 
 
@@ -97,7 +97,7 @@ jobs: # 一連のステップ
       # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
       - store_artifacts:
           path: build/libs
-      # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 workflows:
   version: 2
   workflow:

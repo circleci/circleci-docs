@@ -146,9 +146,6 @@ A JSON format key of the Service Account to use for bucket access.
 * *Storage Object Expiry (optional)* - 
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
 
-==== Nomad
-Set mTLS to `disabled`. This should be disabled by default but there is a known issue currently preventing this. Disabling allows you to ignore Nomad settings until phase 3 of the installation process where we will install build services.
-
 ==== Postgres, MongoDB, Vault settings
 
 You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process. 

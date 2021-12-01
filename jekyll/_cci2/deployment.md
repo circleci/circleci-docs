@@ -2,8 +2,10 @@
 layout: classic-docs
 title: "Deployment"
 short-title: "Deployment"
+description: "Use this doc to learn how CircleCI can be configured to deploy to virtually any service."
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

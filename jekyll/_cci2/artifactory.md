@@ -5,6 +5,7 @@ categories: [how-to]
 description: How to upload Artifacts to Artifactory in CircleCI
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

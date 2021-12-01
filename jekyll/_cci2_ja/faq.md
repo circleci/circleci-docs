@@ -37,6 +37,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 ### Jenkins から CircleCI 2.0 へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci-20 }
 {:.no_toc}
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ```yaml
     steps:
@@ -52,7 +53,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 ### inference コマンドは CircleCI 2.0 でも実行できますか?
 {: #does-circleci-20-run-inference-commands }
 {:.no_toc}
-CircleCI 2.0 は、プロジェクトの内容から推測して変換するようなことはしません。構成ビルダー インターフェイスによって `config.yml` のすべてのジョブを構成できる、スマート デフォルト型モデルの採用を進めています。
+CircleCI 2.0 は、プロジェクトの内容から推測して変換するようなことはしません。 構成ビルダー インターフェイスによって `config.yml` のすべてのジョブを構成できる、スマート デフォルト型モデルの採用を進めています。
 
 ### 基本イメージを作成していなくても、CircleCI 2.0 を使用できますか?
 {: #can-i-use-circleci-20-without-creating-base-images }
@@ -63,7 +64,7 @@ CircleCI 2.0 は、プロジェクトの内容から推測して変換するよ�
 
 このイメージは、デフォルトで `ubuntu` ユーザーとしてアクションを実行し、Docker Compose で提供されるネットワーク サービスと連携するよう設計されています。
 
-このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
+このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/2.0/executor-intro/)でご確認いただけます。
 
 ## ホスティング
 {: #hosting }
@@ -149,7 +150,7 @@ my-user/couchdb:1.6.1
 {:.no_toc}
 Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 たとえば、以下のように `.circleci/config.yml` を編集します。
 
-環境変数 `TZ` を定義する `.circleci/config.yml` の設定例は下記のとおりです。
+この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
 ```yaml
 version: 2
@@ -180,12 +181,12 @@ jobs:
 ### Workflows でビルドの「自動キャンセル」はできますか？
 {: #can-i-use-the-auto-cancel-feature-with-workflows }
 {:.no_toc}
-Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
+<br/>可能です。「[ビルドのスキップ・キャンセル]({{ site.baseurl }}/ja/2.0/skip-build/)」で設定手順をご確認ください。
 
 ### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 {: #can-i-use-storetestresults-with-workflows }
 {:.no_toc}
-はい、ご利用いただけます。`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
+`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。 また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
 
 ### CircleCI 1.0 で Workflows を使うことはできますか？
 {: #can-i-use-workflows-with-circleci-10 }
@@ -210,7 +211,7 @@ Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/
 ### `config.yml` ファイルの内容を複数ファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
-<br/>`config.yml` の内容を複数のファイルに分割する機能は今のところ提供していません。
+`config.yml` の内容を複数のファイルに分割する機能は今のところ提供していません。
 
 ### 変更のあった単一のジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
@@ -253,7 +254,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-You will need a [Performance plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+[Performance plan](https://circleci.com/pricing/usage/) と、 [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) が必要となります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
 
 ### 使用している Windows のバージョンを教えてください。
 {: #what-exact-version-of-windows-are-you-using }
@@ -277,7 +278,7 @@ Windows Server 2019 Datacenter エディションの Server Core オプション
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+残念ながら、現時点ではサーバー インストール版の CircleCI で Windows をご利用いただくことはできません。
 
 ## 料金・支払い
 {: #billing }

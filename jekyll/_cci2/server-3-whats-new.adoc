@@ -1,4 +1,5 @@
 ---
+description: "Server 3.x is now generally available. Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more."
 version:
 - Server v3.x
 - Server Admin
@@ -18,6 +19,35 @@ customers interested in migrating from 2.19 to 3.x, contact your customer succes
 patch releases and quarterly feature releases.
 
 toc::[]
+
+== Release 3.2.1
+
+=== Upgrade notes
+
+From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+
+See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
+
+=== New features
+* Private VMs are now supported for installations on GCP.
+
+=== Fixes
+* mTLS is now disabled by default.
+* SSH timeout for VMs has been increased to 10 minutes.
+* Private VMs now request private IPs.
+
+=== Known issues
+
+* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
+identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
+application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
+CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
+and get details of the possible cause of the issue.
+* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+* Runner cannot be used when server is installed behind a proxy.
+
 
 == Release 3.2.0
 
@@ -83,7 +113,7 @@ The new Traefik pos will then start ot schedule correctly.
 
 * Customers who require a fully private installation can now access a setting in the KOTS admin console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a work-around will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
 * Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS admin console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
-* We have expanded the machine build environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
+* We have expanded the machine execution environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
 * The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
 * We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server. 
 * You can now supply a custom Linux AMI for VM service.
