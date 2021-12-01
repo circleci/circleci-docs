@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Docker レイヤー キャッシュの有効化"
 short-title: "Docker レイヤー キャッシュの有効化"
 description: "未変更のキャッシュ レイヤーを再利用してイメージをビルドすることにより、全体の実行時間を短縮する方法"
 categories:
-  - optimization
+  - 最適化
 order: 70
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -206,7 +207,7 @@ RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linu
 
 次にコミットすると、基本イメージとして `elixir:1.6.5` のイメージがプルされ、Dockerfile の最初のいくつかのステップ (`# apt を非対話化`のステップ、`RUN apt-get update` で始まるステップ、`# タイムゾーンを UTC に設定`のステップ、`# Unicode を使用`のステップ) では、キャッシュされていたイメージ レイヤーが引き続き確実に取得されます。
 
-しかし、`# jq をインストール`のステップは新しいステップです。 Dockerfile が変更されるとイメージ レイヤー キャッシュの残りの部分は無効化されるため、このステップ以降のステップはすべて最初から実行されます。 Overall, though, with DLC enabled, our image will still build more quickly, due to the unchanged layers/steps towards the beginning of the Dockerfile.
+しかし、`# jq をインストール`のステップは新しいステップです。 Dockerfile が変更されるとイメージ レイヤー キャッシュの残りの部分は無効化されるため、このステップ以降のステップはすべて最初から実行されます。 それでも DLC が有効であれば、Dockerfile の先頭部分にある未変更のレイヤーとステップのおかげで、全体的なビルド時間は短縮されます。
 
 サンプルの Dockerfile の最初のステップを変更する場合は、別の Elixir 基本イメージからプルする方がよいでしょう。 この場合、Dockerfile の他の部分がすべて同じままであっても、このイメージのキャッシュ全体が無効化されます。
 
@@ -243,6 +244,6 @@ Dockerfile の一部を変更し、それによってイメージの一部が変
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
 Take the [DLC course](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) with CircleCI Academy to learn more.
