@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "ダイナミック コンフィグ"
 description: "セットアップ ワークフローによるダイナミック コンフィグの使用方法に関する開発者向けページ"
 version:
@@ -73,6 +73,6 @@ CircleCI のダイナミック コンフィグを使用する際のパイプラ�
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
 Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.
