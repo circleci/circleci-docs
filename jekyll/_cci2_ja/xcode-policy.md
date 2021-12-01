@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
 short-title: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
 categories:
@@ -7,7 +7,7 @@ categories:
 description: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
 order: 31
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
