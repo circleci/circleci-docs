@@ -9,6 +9,7 @@ order: 50
 sitemap: false
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -20,7 +21,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 {:toc}
 
 
-# CircleCI でのカバレッジの表示
+## Viewing Coverage on CircleCI
 {: #viewing-coverage-on-circleci }
 
 コードカバレッジ レポートを直接 CircleCI にアップロードできます。 最初に、プロジェクトにカバレッジ ライブラリを追加し、CircleCI の[アーティファクト ディレクトリ]({{ site.baseurl }}/2.0/artifacts/)にカバレッジ レポートを書き込むようにビルドを設定します。 コードカバレッジ レポートはビルドアーティファクトとして、参照またはダウンロード可能な場所に保存されます。 カバレッジ レポートへのアクセス方法の詳細については、[ビルドアーティファクトに関するドキュメント]({{ site.baseurl }}/ja/2.0/artifacts/)を参照してください。
@@ -344,7 +345,7 @@ jobs:
 ```
 
 
-# コードカバレッジ サービスの使用
+# Using a code coverage service
 {: #using-a-code-coverage-service }
 
 ## Codecov
@@ -368,7 +369,7 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 ## Coveralls
 {: #coveralls }
 
-Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
+If you're a Coveralls customer, follow [their guide to set up your coverage stats.](https://docs.coveralls.io/) You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/).
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
 
