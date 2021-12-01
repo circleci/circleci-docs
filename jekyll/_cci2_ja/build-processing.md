@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "パイプラインの有効化"
 short-title: "パイプラインの有効化"
 description: "パイプラインを有効にする方法"
@@ -7,10 +7,11 @@ categories:
   - settings
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
 ---
 
-CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 Pipelines are not currently available on self hosted installations of CircleCI Server.
+CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 Pipelines are available on CircleCI cloud and self hosted installations of CircleCI server v3.x.
 
 * 目次
 {:toc}
@@ -27,12 +28,12 @@ Pipelines offer the following benefits:
 
 {% include snippets/pipelines-benefits.adoc %}
 
-## Implications of pipelines
+## トラブルシューティング
 {: #implications-of-pipelines }
 
 When using pipelines, please note the following:
 
-- If no builds or workflows are defined, you will receive an error.
+- アンカーは、アプリケーションの設定ファイルに表示されることなく、処理されて解決されます。
 
 ## トラブルシューティング
 {: #transitioning-to-pipelines }
@@ -45,16 +46,16 @@ The following sections outline the process of transitioning to pipelines.
 
 2.0 構成でパイプラインを使用する場合、CircleCI では `CIRCLE_COMPARE_URL` 環境変数がすべてのジョブに挿入され、下位互換性が確保されます。 この環境変数は、従来のジョブで使用可能な環境変数とは異なる方法で生成され、いつでも使用できるわけではありません。 たとえば、空のリポジトリへのコミットを初めてプッシュした場合や、追加のコミットなしに新しいブランチが作成/プッシュされた場合など、以前のリビジョンが存在しない場合は挿入されません。
 
-## Giving feedback
+## パイプラインへの移行
 {: #giving-feedback }
 {:.no_toc}
 
 If you have feedback, suggestions, or comments:
 
-- Tweet @circleci with thoughts
-- Vote or add to our [Ideas board](https://ideas.circleci.com/)
+- CircleCI の Twitter アカウント (@CircleCIJapan) 宛てにツイートする
+- [アイデア ボード](https://ideas.circleci.com/)で既存の投稿に投票する、または投稿を追加する
 
-## See also
+## ブランチでのパイプラインのオプトイン
 {: #see-also }
 {:.no_toc}
 
