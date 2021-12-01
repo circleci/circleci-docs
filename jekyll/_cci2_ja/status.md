@@ -1,13 +1,14 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "ステータス"
 short-title: "ステータス"
 description: "ステータス ダッシュボード"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
