@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "カスタム ビルドの Docker イメージの使用"
 short-title: "カスタム ビルドの Docker イメージの使用"
 description: "カスタム Docker イメージを作成する理由とその方法"
@@ -7,7 +7,8 @@ categories:
   - コンテナ化
 order: 30
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -200,7 +201,7 @@ jobs:
 ## Ruby 用のカスタム Dockerfile の例
 {: #detailed-custom-dockerfile-example-for-ruby }
 
-このセクションでは、Ruby コンテナをビルドして CircleCI 2.0 で使用する方法について説明します。 **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
+This section demonstrates how to build a Ruby container to use on CircleCI. **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
 
 以下の例では、最初に [Ruby 2.1](https://hub.docker.com/_/ruby/) イメージを使用しています。 ただし、ここでは FROM ruby:2.1 を基本イメージとして使用する方法ではなく、コンテナのビルド方法について説明します。 Ruby Docker ハブのページから、[2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10) に移動してください。 また、正しいバージョンをプルするために使用されている環境変数に注目してください。
 
