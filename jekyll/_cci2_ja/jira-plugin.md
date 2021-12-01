@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "Jira と CircleCI の接続"
 categories:
   - how-to
@@ -10,7 +10,7 @@ description: "Jira と CircleCI の接続"
 
 **メモ:** CircleCI Jira プラグインは Jira 管理者のみがインストールできます。
 
-## インストール手順
+## Installation steps
 {: #installation-steps }
 
 1. Navigate to project settings and select `JIRA integration` ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
@@ -20,7 +20,7 @@ description: "Jira と CircleCI の接続"
 
 ---
 
-## Jiraでビルドとデプロイのステータスを表示
+## Viewing build and deploy statuses in Jira
 {: #viewing-build-and-deploy-statuses-in-jira }
 
 CircleCI Orb を使用すると、Jira でビルドとデプロイのステータスを確認できるようになります。 そのプロセスは以下のとおりです。
