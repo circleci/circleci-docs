@@ -1,9 +1,10 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "設定ファイル"
-description: "CircleCI 2.0 設定ファイルのランディング ページ"
+description: "The core of the CircleCI experience is creating a deterministic build with the config.yml file. Watch a video introduction to circleci/config.yml."
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
