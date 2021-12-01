@@ -1,13 +1,13 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "CircleCI アプリ内の設定ファイル エディターの使用"
 description: "アプリ内設定ファイル エディターの使用方法と機能に関する開発者向けページ"
 version:
   - Cloud
-  - Server v2.x
+  - Server v3.x
 ---
 
-A UI environment, the CircleCI config editor, is provided for users who wish to modify their configurations without the use of the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer experience by giving users the ability to modify their CI/CD processes in a more unified fashion.
+The CircleCI config editor is provided so you can modify your configuration files without the use of the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer experience by giving you the ability to modify your CI/CD processes in a more unified fashion.
 
 ![設定ファイル エディター]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
 
