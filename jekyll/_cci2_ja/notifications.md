@@ -1,11 +1,11 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "通知の使用"
 short-title: "通知の使用"
 order: 100
 published: true
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -50,7 +50,7 @@ workflows:
 ## チャット通知の有効化
 {: #set-or-change-email-notifications }
 
-Use the [Notifications](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
+CircleCI アプリケーションの [[Notifications (通知)](https://app.circleci.com/settings/user/notifications){:rel="nofollow"}] ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
 
 Slack 通知の例を以下に示します。
 
