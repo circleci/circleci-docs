@@ -111,11 +111,14 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 
 {% highlight yaml linenos %}
 version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
 jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
-      - image: circleci/node:14-browsers
+      - image: cimg/node:17.2-browsers
     steps:
       - checkout
       - run:
@@ -180,7 +183,7 @@ jobs:
             echo '^^^That should look familiar^^^'
   Run-With-Node:
     docker:
-      - image: circleci/node:14-browsers
+      - image: cimg/node:17.2
     steps:
       - run:
           name: Running In A Container With Node
