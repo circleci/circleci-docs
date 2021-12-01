@@ -59,7 +59,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -86,7 +86,7 @@ version: 2.0
 jobs:
   test:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -96,7 +96,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -127,7 +127,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -165,7 +165,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -179,7 +179,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -216,7 +216,7 @@ jobs:
   test:
     parallelism: 2 # parallel containers to split the tests among
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -235,7 +235,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -283,7 +283,7 @@ version: 2.0
 jobs:
   test:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -320,7 +320,7 @@ jobs:
   test:
     parallelism: 2
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -347,7 +347,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:stretch
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
