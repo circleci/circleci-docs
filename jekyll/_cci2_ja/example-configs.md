@@ -1,11 +1,15 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "パブリック リポジトリの例"
 short-title: "パブリック リポジトリの例"
-description: "CircleCI 2.0 入門ガイド"
+description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
 categories:
-  - getting-started
+  - はじめよう
 order: 1
+version:
+  - クラウド
+  - Server v3.x
+  - Server v2.x
 ---
 
 CircleCI 2.0 で実行されるパブリック プロジェクトおよびオープンソース プロジェクトのサンプル全体は、以下の各ドキュメントとリンク先の `.circleci/config.yml` ファイルでご確認いただけます。
@@ -16,19 +20,19 @@ CircleCI 2.0 で実行されるパブリック プロジェクトおよびオー
 ## CircleCI ファイルとパブリック リポジトリのサンプル
 {: #example-circleci-files-and-public-repos }
 
-| サンプル名                   | 説明                                                                           | リンク                                                                                                                                                            |
-| ----------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config.yml` のサンプル ファイル | `config.yml` のサンプル ファイル                                                      | <a href="{{ site.baseurl }}/2.0/sample-config/">config.yml のリンク</a>                                                                                                                                      |
-| データベースの構成例              | PostgreSQL/Rails、Go/PostgreSQL、Ruby/MySQL を使用する 3 種類の `config.yml` サンプル ファイル | [データベースの構成例]({{ site.baseurl }}/2.0/postgres-config/)                                                                                                          |
-| 並列                      | ジョブを順次実行するワークフロー構成                                                           | [parallel-jobs/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)                       |
-| 順次                      | ジョブを並列実行するワークフロー構成                                                           | [sequential-branch-filter/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) |
-| ファンイン/ファンアウト            | 順序付きジョブの後に並列ジョブがあり、最後に順序付きジョブにチェーンされるワークフロー構成                                | [fan-in-fan-out/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)                     |
-| ワークスペース転送               | ワークスペースを使用してデータを共有するように構成されたジョブ                                              | [workspace-forwarding/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)         |
-| circleci-docs           | Jekyll によって生成された CircleCI ドキュメントの静的な Web サイト                                 | [circleci-docs/.circleci/config.yml](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)                                               |
-| circleci frontend       | CircleCI のフロントエンド Clojure アプリを実行しているコードのミラー                                  | [frontend/.circleci/config.yml](https://github.com/circleci/frontend/blob/master/.circleci/config.yml)                                                         |
-| circleci-images         | CircleCI が提供している公式のコンテナ イメージ セット                                             | [circleci-images/.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml)                                           |
-| circleci image-builder  | Docker を使用するコンテナ イメージのビルド                                                    | [image-builder/.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)                                               |
-| circleci-demo-docker    | CircleCI 2.0 で Docker イメージをビルドするサンプル アプリケーション                                | [.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-docker/blob/master/.circleci/config.yml)                                               |
+| サンプル名                   | 説明                                                                                | リンク                                                                                                                                                            |
+| ----------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config.yml` のサンプル ファイル | `config.yml` のサンプル ファイル                                                           | <a href="{{ site.baseurl }}/2.0/sample-config/">config.yml のリンク</a>                                                                                                                                      |
+| データベースの構成例              | PostgreSQL/Rails、Go/PostgreSQL、Ruby/MySQL を使用する 3 種類の `config.yml` サンプル ファイル      | [データベースの構成例]({{ site.baseurl }}/2.0/postgres-config/)                                                                                                          |
+| 並列                      | ジョブを順次実行するワークフロー構成                                                                | [parallel-jobs/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)                       |
+| 順次                      | ジョブを並列実行するワークフロー構成                                                                | [sequential-branch-filter/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) |
+| ファンイン/ファンアウト            | 順序付きジョブの後に並列ジョブがあり、最後に順序付きジョブにチェーンされるワークフロー構成                                     | [fan-in-fan-out/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)                     |
+| ワークスペース転送               | ワークスペースを使用してデータを共有するように構成されたジョブ                                                   | [workspace-forwarding/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)         |
+| circleci-docs           | Jekyll によって生成された CircleCI ドキュメントの静的な Web サイト                                      | [circleci-docs/.circleci/config.yml](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)                                               |
+| circleci frontend       | CircleCI のフロントエンド Clojure アプリを実行しているコードのミラー                                       | [frontend/.circleci/config.yml](https://github.com/circleci/frontend/blob/master/.circleci/config.yml)                                                         |
+| circleci-images         | CircleCI が提供している公式のコンテナ イメージ セット                                                  | [circleci-images/.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml)                                           |
+| circleci image-builder  | Docker を使用するコンテナ イメージのビルド                                                         | [image-builder/.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)                                               |
+| circleci-demo-docker    | This is an example application showcasing how to build Docker images in CircleCI. | [.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-docker/blob/master/.circleci/config.yml)                                               |
 {: class="table table-striped"}
 
 ## 機能別のオープンソース プロジェクト
@@ -59,7 +63,7 @@ CircleCI 2.0 で実行されるパブリック プロジェクトおよびオー
 | `xvfb` を使用した Bazel によるビルドとテスト                                                   | **Angular** は、TypeScript や JavaScript などの言語でモバイルおよびデスクトップ Web アプリケーションをビルドするための開発プラットフォームです。                                                                                                 | [angular/.circleci/config.yml](https://github.com/angular/angular/blob/master/.circleci/config.yml)                            |
 | Salesforce DX                                                                   | CircleCI で **Salesforce DX** をセットアップする方法を示したリポジトリです。                                                                                                                                         | [sfdx-circleci/.circleci/config.yml](https://github.com/forcedotcom/sfdx-circleci/blob/master/.circleci/config.yml)            |
 | `junit` を使用した Golang ビルド、および本番の master ジョブ ワークフローの Kubernetes テスト               | **Azure Container Service Engine** (acs-engine) では、DC/OS、Kubernetes、Swarm Mode、または Swarm オーケストレーターを自由に選んで使用し、Microsoft Azure 上で Docker 対応クラスタ向けの ARM (Azure Resource Manager) テンプレートを生成できます。 | [acs-engine/.circleci/config.yml](https://github.com/Azure/acs-engine/blob/master/.circleci/config.yml)                        |
-| Go および Node のビルド、パッケージ、デプロイ実行                                                   | **Ignition** は、Pivotal Cloud Foundry (PCF) へのデプロイを目的とした開発者向けのセルフサービス ランディング ページです。                                                                                                           | [ignition/.circleci/config.yml](https://github.com/pivotalservices/ignition/blob/master/.circleci/config.yml)                  |
+| Go および Node のビルド、パッケージ、デプロイ実行                                                   | **Ignition** は、Pivotal Cloud Foundry (PCF) へのデプロイを目的とした開発者向けのセルフサービス ランディング ページです。                                                                                                           | [ignition/.circleci/config.yml](https://github.com/ktpv/ignition/blob/master/.circleci/config.yml)                             |
 | `sbt` を使用した Java のビルドとパブリッシュ                                                    | **Scio** は、Apache Spark や Scalding を基にした Apache Beam および Google Cloud Dataflow 向けの Scala API です。                                                                                             | [scio/.circleci/config.yml](https://github.com/spotify/scio/blob/master/.circleci/config.yml)                                  |
 | `junit` でビルドされた Javascript Node フロントエンド、および WebDriver によるエンドツーエンドのスクリーンショット テスト | React、MobX、TypeScript を使用した **cBioPortal** 向けのフロントエンド コードです。                                                                                                                                 | [cbioportal-frontend/.circleci/config.yml](https://github.com/cBioPortal/cbioportal-frontend/blob/master/.circleci/config.yml) |
 | 手動デプロイ ゲートを使用した Node と Yarn                                                     | **Docusaurus** は、オープンソース プロジェクト Web サイトの簡単なビルド、デプロイ、メンテナンスを目的としたプロジェクトです。                                                                                                                    | [Docusaurus/.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml)                |
