@@ -14,13 +14,11 @@ describe('InsightsTableScroll', () => {
   });
   describe('insightsTableScroll', () => {
     beforeEach(() => {
-      jest
-        .spyOn(window, 'addEventListener')
-        .mockImplementationOnce(() => {
-          const hashNew = window.location.hash;
-          $('.highlight').removeClass('highlight');
-          $(hashNew).attr('class', 'highlight');
-        });
+      jest.spyOn(window, 'addEventListener').mockImplementationOnce(() => {
+        const hashNew = window.location.hash;
+        $('.highlight').removeClass('highlight');
+        $(hashNew).attr('class', 'highlight');
+      });
     });
 
     it('ishighlighted false add class', () => {

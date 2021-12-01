@@ -12,7 +12,7 @@ export function insightsTableScroll() {
     window.addEventListener(
       'hashchange',
       () => {
-        console.log('event listener');
+        const hashNew = window.location.hash;
         $('.highlight').removeClass('highlight');
         $(hashNew).attr('class', 'highlight');
         hash = hashNew;
