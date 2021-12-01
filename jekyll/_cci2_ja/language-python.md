@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
 title: "CircleCI での Python アプリケーションの構成"
 short-title: "Python"
 description: "CircleCI 上での Python による継続的インテグレーション"
@@ -7,7 +7,8 @@ categories:
   - language-guides
 order: 7
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -127,7 +128,7 @@ jobs:
 
 実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
-{% raw %}
+**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
 ```yaml
 version: 2
@@ -152,7 +153,7 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
 ```
 
-{% endraw %}
+`run` ステップを使用して、テスト スイートを実行します。
 
 **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
@@ -205,7 +206,7 @@ jobs:
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2 
 jobs: # A basic unit of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     # directory where steps are run
