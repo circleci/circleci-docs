@@ -1,4 +1,5 @@
 ---
+description: Build artifacts persist data after a job is completed and can be used for longer-term storage of your build process outputs.
 version:
 - Server v2.x
 - Admin

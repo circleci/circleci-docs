@@ -1,4 +1,5 @@
 ---
+description: This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing (ELB) certificate.
 version:
 - Server v2.x
 - Admin

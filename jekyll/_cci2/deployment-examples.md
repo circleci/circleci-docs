@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: "Deployment Examples"
+description: This document presents example configs for a variety of popular deployment targets.
 short-title: "Deployment Examples"
 version:
 - Cloud

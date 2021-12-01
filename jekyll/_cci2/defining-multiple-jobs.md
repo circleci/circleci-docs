@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: "CircleCI workflows"
+description: Use this document to learn how workflows support complex job orchestration using a simple set of configuration keys.
 redirect: /docs/2.0/workflows/
 ---
 

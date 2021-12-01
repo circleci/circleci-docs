@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
 title: "Insights metrics glossary"
-short-title: "Insights metrics glossary"
-short-title: "Metric definitions for CircleCI insights"
+description: "Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API."
 version:
 - Cloud
 - Server v3.x
