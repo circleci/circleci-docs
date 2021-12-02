@@ -287,6 +287,18 @@ div.align-center img{
 	text-align: center;
 }
 
+// Insights page column highlights
+#insights-table{
+	.highlight {
+		color: #1A649A;
+		background-color: rgba(25, 99, 154, 0.05);
+		font-weight: bold;
+	}
+	div {
+		scroll-margin-top: 5rem;
+	}
+}
+
 // Homepage
 body.homepage{
   .article-container{
