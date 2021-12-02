@@ -4,7 +4,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Runner Scaling
+= Scaling Runner
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
