@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 export function isProduction() {
   return window.location.origin === 'https://circleci.com';
 }
@@ -31,4 +33,24 @@ export function isElementInViewport(el) {
       (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
+}
+
+// Refreshes a given cookie (if set) with a new expiration date. If cookie is
+// not already set, no action will be taken.
+export function updateCookieExpiration(cookieName, newExpiration) {
+  // Ensure cookie name is a non-empty string. If no cookie name is given,
+  // js-cookie will return ALL cookies on the subsequent `get()` call.
+  if (typeof cookieName !== 'string' || cookieName.length < 1) {
+    return;
+  }
+
+  var existingValue = Cookies.get(cookieName);
+
+  // Return early if cookie is not set
+  if (existingValue === undefined) {
+    return;
+  }
+
+  // Re-set cookie with same values and new expiration date
+  Cookies.set(cookieName, existingValue, { expires: newExpiration });
 }

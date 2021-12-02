@@ -1,38 +1,61 @@
 ---
 layout: classic-docs
-title: "Viewing Pipelines"
-short-title: "Viewing Pipelines"
-description: "Introduction to Pipelines"
+title: "Pipelines Introduction"
+description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
 categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
-This document provides a summary of the Pipelines page in the CircleCI app and
-documents some of the changes to the CircleCI user interface.
+This page provides information on CircleCI pipelines, how they are run, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
 
 ## Overview
 {: #overview }
 
-You may have noticed some changes to CircleCI's web interface lately. We have
-some exciting changes that are rolling out regarding how your builds are being
-grouped and the user interface that presents that information. Let's begin by
-stating what a **Pipeline** is.
+CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
 
-**Pipelines** represent the entire configuration that is run when you trigger
-work on your projects that use CircleCI. The entirety of a
-`.circleci/config.yml` file is executed by a pipeline.
+Pipelines are not available on installations of CircleCI server v2.x.
 
-When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
+When visiting your CircleCI dashboard, you are shown a list of recently triggered pipelines for your organization/account.
 
-## Jobs, tests, artifacts
-{: #jobs-tests-artifacts }
+![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
+
+## Triggering a pipeline
+{: #running-a-pipeline }
+
+Pipelines can be triggered in several ways. Each method is described below.
+
+### Trigger a pipeline on push to your code repository
+{: #run-a-pipeline-on-commit-to-your-code-repository }
+
+Each time a commit is pushed to one of your projects, on a branch that has a `.circleci/config.yml` file included, a pipeline is triggered.
+
+### Trigger a pipeline from the CircleCI app
+{: #run-a-pipeline-from-the-circleci-app }
+
+In the CircleCI app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled. Click **Trigger Pipeline**, choose if you want to specify any pipeline parameters, and click **Trigger Pipeline** again.
+
+### Trigger a pipeline using the API
+{: #run-a-pipeline-using-the-api }
+
+You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{site.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
+
+<!---
+### Scheduling a pipeline
+{: #scheduling-a-pipeline }
+
+TBC
+--->
+
+## Pipeline architecture
+{: #pipeline-architecture }
 
 A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
+Further, the output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)

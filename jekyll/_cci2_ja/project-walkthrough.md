@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "2.0 プロジェクトのチュートリアル"
 short-title: "プロジェクトのチュートリアル"
-description: "CircleCI 2.0 での Flask プロジェクトのチュートリアルと構成例"
+description: "Tutorial and sample config for a Flask project in CircleCI 2.0"
 categories:
   - migration
 order: 3

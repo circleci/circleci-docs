@@ -108,11 +108,11 @@ base64 snapcraft.login | xsel --clipboard
 ## ワークフロー
 {: #workflows }
 
-複数のジョブを使用して、Snap ビルドをさらにうまく構成することができます。 実際のプロジェクトをビルド・コンパイルするジョブ、Snap 自体をビルドするジョブ、および Snap (および他のパッケージ) を `master` 上にのみパブリッシュするジョブはどれも有用です。
+複数のジョブを使用して、Snap ビルドをさらにうまく構成することができます。 A job to build/compile the actual project, a job to build the snap itself, and a job that published the snap (and other packages) only on `master` would all be useful.
 
 [Workflows](https://circleci.com/docs/2.0/workflows/) can help with building snaps in two ways:
 
-1. **Snap Store チャンネル** - 前のセクションで説明したように、ストアにアップロードするときに、オプションで同時にリリースすることが可能です。 これにより、CircleCI 上の特定のジョブで特定の Snap チャンネルにデプロイするように指定できます。 たとえば、`master` ブランチを使用して `edge` チャンネルにデプロイし、タグ付きリリースを使用して `stable` チャンネルにデプロイできます。
+1. **Snap Store チャンネル** - 前のセクションで説明したように、ストアにアップロードするときに、オプションで同時にリリースすることが可能です。 これにより、CircleCI 上の特定のジョブで特定の Snap チャンネルにデプロイするように指定できます。 For example, the `master` branch could be used to deploy to the `edge` channel`while tagged releases could be used to deploy to the`stable` channel.
 1. **並列パッケージ化** - Snap 以外に flatpak、.deb、.apk などとしてもパッケージ化されるソフトウェアの場合は、各パッケージ タイプをそれぞれのジョブに置き、すべてを並列に実行することができます。 これにより、Snap が完了するまで .deb パッケージを開始できないなどのケースに比べ、はるかに高速にビルドを完了できます。
 
 生成された Snap ファイルをジョブ間で利用するには、必要に応じて CircleCI の `workspaces` を使用します。 次は、「送信元」ジョブのスニペットと「送信先」ジョブのスニペットを示します。
@@ -159,7 +159,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "ストアへのパブリッシュ"
+          name: "Publish to Store"
           command: |
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
@@ -170,7 +170,6 @@ workflows:
   version: 2
   main:
     jobs:
-
       - build
       - publish:
           requires:

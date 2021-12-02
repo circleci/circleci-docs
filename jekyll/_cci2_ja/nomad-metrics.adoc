@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture,Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
+Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture, Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
 
 == Nomad メトリクスサーバー
 
@@ -20,7 +20,7 @@ The Nomad Metrics container is run on the services host using the server flag an
 
 The Nomad Metrics client is installed and run on all Nomad client instances. Nomad メトリクスクライアントをインストールおよび設定するには、AWS の起動設定を更新する必要があります。  Additionally, you will need to modify the AWS security group to ensure that UDP port 8125 is open on the Services machine. Steps for both configuration changes are explained below.
 
-NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. 必ず、CircleCI Server の実行に使用する領域にログインしてください。
+NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. Make sure that you logged into the region you use to run CircleCI Server.
 
 === Updating the Services machine Security Group
 
