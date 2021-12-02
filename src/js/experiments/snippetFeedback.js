@@ -126,11 +126,37 @@ export class SnippetFeedback {
       container.appendChild(bottomRow);
       this.feedbackForm = container;
       this.wasThisHelpfulContainer.appendChild(container);
+
+
+      // Here we setup the document event listeners that handle hiding the form
+      // when the user clicks outside of it.
+      //
+      // Why do we use a setTimeout with a timer of 0?
+      // -> Because there is a race condition with the adding of the click
+      // listeners to the document that immediately close the form when it opens
+      //
+      // Setting it to 0 causes the inner callback to be run asynchronously, adding it to the eventqueue
+      // so that it executes after the form being opened.
+      setTimeout(() => {
+        const outsideClickListener = (event) => {
+          if (!this.feedbackForm.contains(event.target)) {
+            this.wasThisHelpfulContainer.removeChild(this.feedbackForm);
+            this.feedbackForm = null;
+            removeClickListener();
+          }
+        };
+
+        const removeClickListener = () => {
+          document.removeEventListener('click', outsideClickListener);
+        };
+
+        document.addEventListener('click', outsideClickListener);
+      }, 0);
     }
   }
 
   /**
-   * This is a dynamic value we have to update on type.
+   * Render the char count and set it's result on the respective element.
    * */
   renderCharCount(charCount) {
     const el = `<div class='charCountRow'>
@@ -182,7 +208,7 @@ export class SnippetFeedback {
     let el = document.createElement(kind);
     if (text) el.textContent = text;
     if (className) el.classList.add(className);
-    if (onClick) el.addEventListener('click', onClick, { once: true });
+    if (onClick) el.addEventListener('click', onClick);
 
     return el;
   }
