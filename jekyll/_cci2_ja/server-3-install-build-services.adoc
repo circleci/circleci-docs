@@ -315,7 +315,7 @@ aws iam create-user --user-name circleci-server-vm-service
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -329,7 +329,7 @@ aws iam create-user --user-name circleci-server-vm-service
       ],
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -378,7 +378,7 @@ aws iam create-user --user-name circleci-server-vm-service
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-server-vm-service"
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -406,16 +406,15 @@ aws iam create-user --user-name circleci-server-vm-service
 policy.json ファイルを作成したら、IAM ポリティーと作成したユーザーにアタッチします。 
 +
 ```bash
-aws iam put-user-policy --user-name circleci-server-vm-service --policy-name circleci-server-vm-service --policy-document file://policy.json
-
+aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
 ```
 
 . *ユーザー用のアクセスキーとシークレットを作成する*
 +
-作成していない場合は、`circleci-server-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行して作成することができます。
+作成していない場合は、`circleci-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行して作成することができます。
 +
 ```bash
-aws iam create-access-key --user-name circleci-server-vm-service
+aws iam create-access-key --user-name circleci-vm-service
 ```
 
 . *サーバーの設定*
