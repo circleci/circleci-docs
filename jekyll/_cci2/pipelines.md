@@ -37,7 +37,7 @@ Each time a commit is pushed to one of your projects, on a branch that has a `.c
 
 In the CircleCI app, when you have a specific branch selected, the **Run Pipeline** button becomes enabled. Click **Run Pipeline**, choose if you want to specify any pipeline parameters, and click **Run Pipeline** again.
 
-### Run a pipeline using the API
+### Trigger a pipeline using the API
 {: #run-a-pipeline-using-the-api }
 
 You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{site.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
