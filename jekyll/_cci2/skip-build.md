@@ -24,6 +24,7 @@ If you are using CircleCI server v2.x, you can still use the method for skipping
 
 ### Scope
 {: #scope }
+{:.no_toc}
 
 A few points to note regarding the scope of the `ci skip` feature:
 
@@ -77,6 +78,7 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 ### Scope
 {: #scope }
+{:.no_toc}
 
 A few points to note regarding the use of the auto-cancel feature:
 

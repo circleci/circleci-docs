@@ -52,7 +52,7 @@ en:
           link: 2.0/pipelines/
         - name: Pipeline processing
           link: 2.0/build-processing
-        - name: Skip or cancel a pipeline
+        - name: Skip or cancel pipelines
           link: 2.0/skip-build/
     - name: Features
       children:
