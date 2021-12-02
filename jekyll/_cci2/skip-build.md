@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Skip or cancel jobs and workflows
-description: This document describes how to prevent automatically building your project.
+description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
 order: 100
 version:
 - Cloud
