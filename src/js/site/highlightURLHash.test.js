@@ -1,7 +1,5 @@
 import { highlightURLHash, addHighlightClassIfInUrl } from './highlightURLHash';
 
-window.$ = require('src-api/source/javascripts/lib/_jquery.js');
-
 document.body.innerHTML = '<div id="overallSuccesRate-definition"></div>';
 
 describe('highlightURLHash', () => {
@@ -15,8 +13,9 @@ describe('highlightURLHash', () => {
   describe('highlightURLHash', () => {
     beforeEach(() => {
       jest.spyOn(window, 'addEventListener').mockImplementationOnce(() => {
-        $('.highlight').removeClass('highlight');
-        addHighlightClassIfInUrl()
+        const highlightElem = document.querySelector('.highlight');
+        if (highlightElem) highlightElem.classList.remove('highlight');
+        addHighlightClassIfInUrl();
       });
     });
 
