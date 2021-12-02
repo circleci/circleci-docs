@@ -21,9 +21,6 @@ CircleCI pipelines are the highest-level unit of work, encompassing a project's 
 
 Pipelines are not available on installations of CircleCI server v2.x.
 
-## Benefits of using pipelines
-{: #benefits-of-using-pipelines }
-
 The following features are available for use in your pipelines:
 
 {% include snippets/pipelines-benefits.adoc %}
