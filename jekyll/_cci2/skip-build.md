@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Skip or Cancel Pipelines
+title: Skip or cancel jobs and workflows
 description: This document describes how to prevent automatically building your project.
 order: 100
 version:
