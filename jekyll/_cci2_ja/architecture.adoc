@@ -1,17 +1,17 @@
 ---
-description: "This document describes the various services that make up a CircleCI Server v2 installation."
+description: このドキュメントでは CircleCI Server v2 を構成する様々を紹介します。
 version:
-- Admin
+- 管理者
 - Server v2.x
 ---
-= CircleCI server container architecture
+= CircleCI Server コンテナのアーキテクチャ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document outlines the containerized services that run on the Services machine within a CircleCI server v2.x installation. このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 以下の表に、補足と凡例を合わせて示しています。
+本ドキュメントでは、CircleCI Server がインストールされた Servicesマシン上で実行されるコンテナ化されたサービスの概要を説明します。 このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 以下の表に、補足と凡例を合わせて示しています。
 
 toc::[]
 
@@ -76,7 +76,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 | `postgres`, `frontend`, `contexts-service-migrator`, `vault-cci`
 
 | `contexts-service-migrator`
-| `contexts-service`のためにpostgresqlのマイグレーションを実行します。
+| `contexts-service`のために postgresql のマイグレーションを実行します。
 | 起動時にのみ実行されます。
 | icon:check-circle[]
 | `postgres`, `frontend`
@@ -88,34 +88,34 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 | `postgres`, `frontend`, `cron-service-migrator`
 
 | `cron-service-migrator`
-| cron-serviceのためにpostgresqlのマイグレーションを実行します。
+| cron-service のために postgresql のマイグレーションを実行します。
 | 起動時にのみ実行されます。
 | icon:check-circle[]
 | `postgres`, `frontend`
 
 | `domain-service`
-| CircleCIのドメイン モデルに関する情報を保存、提供します。
+| CircleCI のドメイン モデルに関する情報を保存、提供します。
 | ワークフローを開始できなくなります。 一部の REST API 呼び出しが失敗し、CircleCI UI で `500` エラーが発生する可能性があります。 LDAP 認証を使用している場合、すべてのログインが失敗するようになります。
 | icon:fire-extinguisher[]
 | `postgres`, `frontend`, `domain-service-migrator`
 
 | `domain-service-migrator`
-| `domain-service`のためにpostgresqlのマイグレーションを実行します。
+| `domain-service`のために postgresql のマイグレーションを実行します。
 | 起動時にのみ実行されます。
 | icon:check-circle[]
 | `postgres`, `frontend`
 
 | `exim`
-| Mail Transfer Agent (MTA) used to send all outbound SMTP.
-| No email notifications will be sent.
+| すべての SMTP アウトバウンド メールの送信に使用されるメール転送エージェント (MTA)です。
+| メール通知が送付されません。
 | icon:check-circle[]
-| None
+| なし
 
 | `federation-service`
-| Stores user identities (LDAP).
-| If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
+| ユーザー ID を保存します (LDAP)。 
+| LDAP 認証を使用している場合、すべてのログインに失敗し、REST API 呼び出しも失敗する場合があります。
 | icon:fire-extinguisher[] only if LDAP in use
-| `postgres`, `frontend`, `federations-service-migrator`
+| `postgres`、`frontend`、`federations-service-migrator`
 
 | `federation-service-migrator`
 | Runs postgresql migrations for the `federations-service`.
