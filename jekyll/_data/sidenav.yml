@@ -48,6 +48,8 @@ en:
   children:
     - name: Features
       children:
+        - name: Scheduled Pipelines
+          link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
         - name: Environment variables

@@ -97,7 +97,7 @@ CircleCI を使用するときには、CircleCI の_ユーザー_として、セ
   - `echo` を使用し、コード ベースまたはシェル内のシークレットを出力する場合
   - プログラムやデバッグ ツールがエラー時にシークレットを出力する場合
 - Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of Least Privilege].
-- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 Read through the <<contexts#restricting-a-context,contexts>> document to learn more.
+- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 Read through the <<contexts#restricting-a-context, contexts>> document to learn more.
 - SSH キーへのアクセス権を持つ人間は、必ず組織による監査の対象とします。
 - VCS で 2 要素認証 (2FA) を必ず使用します (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]、https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket])。 If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
-- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. これは、デフォルトでは*有効になっていません*。 You can read more about these settings and open source security in our <<oss#security,Open Source Projects document>>.
+- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. これは、デフォルトでは*有効になっていません*。 You can read more about these settings and open source security in our <<oss#security, Open Source Projects document>>.

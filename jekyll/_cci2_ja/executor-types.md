@@ -57,7 +57,7 @@ jobs:
 
 この例で、すべてのステップは、`build` ジョブの下に最初にリストされているイメージによって作成されるコンテナで実行されます。 スムーズに移行できるように、CircleCI は一般的な言語用のコンビニエンス イメージを Docker Hub で提供しています。 名前とタグの一覧については、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。 Docker がインストールされ Git が含まれている Docker イメージが必要な場合は、公式の [Docker イメージ](https://hub.docker.com/_/docker/)である `docker:stable-git` の使用をお勧めします。
 
-### Docker イメージのベスト プラクティス
+### Docker イメージのベストプラクティス
 {: #docker-image-best-practices }
 {:.no_toc}
 
@@ -77,7 +77,7 @@ Docker Executor の詳細については、「[CircleCI を設定する]({{ site
 
 ### 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
-ジョブには、複数のイメージを指定できます。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合には、複数イメージの指定が役に立ちます。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 すべてのコンテナは共通ネットワーク内で動作します。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
+ジョブには、複数のイメージを指定できます。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合には、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 すべてのコンテナは共通ネットワーク内で動作します。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
 
 ```yaml
 jobs:
@@ -96,7 +96,7 @@ jobs:
       # ローカルホスト上で mongo にアクセスできます
       - run: sleep 5 && nc -vz localhost 27017
 ```
-Docker イメージは、Docker Hub でイメージ名とバージョン タグを使用するか、レジストリ内のイメージへの URL を使用して、以下の 3 つの方法で指定できます。
+Docker イメージの指定方法は 3 つあります。Docker Hub 上のイメージ名を指定する方法、バージョンタグを指定する方法、レジストリにあるイメージの URL を使用する方法です。
 
 #### Docker Hub 上のパブリック CircleCI イメージ
 {: #public-convenience-images-on-docker-hub }
@@ -122,7 +122,7 @@ Docker イメージは、Docker Hub でイメージ名とバージョン タグ�
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリック イメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
+`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリック イメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
 
 ### RAM ディスク
 {: #ram-disks }
@@ -156,27 +156,27 @@ Docker にはイメージ キャッシュ機能が組み込まれており、\[�
 - Docker イメージとして開発しているアプリケーションである (\[リモート Docker\]\[building-docker-images\] の使用が必要)
 - `docker-compose` を使用する (\[リモート Docker\]\[building-docker-images\] の使用が必要)
 
-Docker を使う場合、実行できるのは Docker コンテナ内から利用可能な機能 (\[リモート Docker\]\[building-docker-images\] の機能を含む) に制限されます。 ネットワークへの低レベル アクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
+Docker を使う場合、実行できるのは Docker コンテナ内から利用可能な機能 (\[リモート Docker\]\[building-docker-images\] の機能を含む) に制限されます。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
-| 機能                                                                                         | `docker`        | `machine` |
-| ------------------------------------------------------------------------------------------ | --------------- | --------- |
-| 起動時間                                                                                       | 即時              | 30 ～ 60 秒 |
-| クリーン環境                                                                                     | ○               | ○         |
-| カスタム イメージ                                                                                  | ○<sup>(1)</sup> | ×         |
-| Docker イメージのビルド                                                                            | ○<sup>(2)</sup> | ○         |
-| ジョブ環境の完全な制御                                                                                | ×               | ○         |
-| 完全なルート アクセス                                                                                | ×               | ○         |
-| 複数データベースの実行                                                                                | ○<sup>(3)</sup> | ○         |
-| 同じソフトウェアの複数バージョンの実行                                                                        | ×               | ○         |
-| [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)                       | ○               | ○         |
-| 特権コンテナの実行                                                                                  | ×               | ○         |
-| Docker Compose とボリュームの使用                                                                   | ×               | ○         |
-| [リソースのカスタマイズ (CPU/RAM)]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class) | ○               | ○         |
+| 機能                                                                                    | `docker`        | `machine` |
+| ------------------------------------------------------------------------------------- | --------------- | --------- |
+| 起動時間                                                                                  | 即時              | 30 ～ 60 秒 |
+| クリーン環境                                                                                | ○               | ○         |
+| カスタム イメージ                                                                             | ○<sup>(1)</sup> | ×         |
+| Docker イメージのビルド                                                                       | ○<sup>(2)</sup> | ○         |
+| ジョブ環境の完全な制御                                                                           | ×               | ○         |
+| 完全なルート アクセス                                                                           | ×               | ○         |
+| 複数データベースの実行                                                                           | ○<sup>(3)</sup> | ○         |
+| 同じソフトウェアの複数バージョンの実行                                                                   | ×               | ○         |
+| [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                     | ○               | ○         |
+| 特権コンテナの実行                                                                             | ×               | ○         |
+| Docker Compose とボリュームの使用                                                              | ×               | ○         |
+| [設定可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○               | ○         |
 {: class="table table-striped"}
 
-<sup>(1)</sup> \[Docker イメージの使用\]\[custom-images\] についての記事を参照してください。
+<sup>(1)</sup> \[カスタム Docker イメージの使用\]\[custom-images\] を参照してください。
 
 <sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
 
@@ -188,20 +188,20 @@ Docker を使う場合、実行できるのは Docker コンテナ内から利�
 ### 使用可能な Docker リソース クラス
 {: #available-docker-resource-classes }
 
-[`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を構成できます。 Docker では、次のリソース クラスを使用できます。
+[`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
-| クラス                    | vCPU | RAM  |
-| ---------------------- | ---- | ---- |
-| small                  | 1    | 2GB  |
-| medium (デフォルト)         | 2    | 4GB  |
-| medium+                | 3    | 6GB  |
-| large                  | 4    | 8GB  |
-| xlarge                 | 8    | 16GB |
-| 2xlarge<sup>(2)</sup>  | 16   | 32GB |
-| 2xlarge+<sup>(2)</sup> | 20   | 40GB |
+| クラス                    | vCPU | RAM   |
+| ---------------------- | ---- | ----- |
+| small                  | 1    | 2 GB  |
+| medium                 | 2    | 4 GB  |
+| medium+                | 3    | 6 GB  |
+| large                  | 4    | 8 GB  |
+| xlarge                 | 8    | 16 GB |
+| 2xlarge<sup>(2)</sup>  | 16   | 32 GB |
+| 2xlarge+<sup>(2)</sup> | 20   | 40 GB |
 {: class="table table-striped"}
 
-<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
+<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\]を使用する必要があります。
 
 たとえば次のように設定します。
 
@@ -212,23 +212,23 @@ jobs:
       - image: buildpack-deps:trusty
     resource_class: xlarge
     steps:
-    #  ...  other config
+    #  ...  他の設定
 ```
 
-## Machine の使用
+## マシンの使用
 {: #using-machine }
 
-`machine` オプションは、以下のような仕様を持つ専用のエフェメラル VM でジョブを実行します。
+`machine` オプションでは、以下のような仕様の専用仮想マシンを一時的に使用してジョブを実行します。
 
 {% include snippets/machine-resource-table.md %}
 
-`machine` Executor を使用すると、アプリケーションは OS のリソースにフル アクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、(ネットワーク インターフェイスのリッスンなどの目的で) ネットワーク スタックへのフル アクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、「[Docker Executor から machine Executor への移行]({{ site.baseurl }}/2.0/docker-to-machine)」を参照してください。
+`machine` Executor を使用すると、アプリケーションが OS のリソースにフルアクセスすることができ、ジョブ環境を完全に制御できます。 この制御は、(ネットワーク インターフェイスのリッスンなどの目的で) ネットワーク スタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/2.0/docker-to-machine)」を参照してください。
 
-`machine` Executor を使用すると、Docker プロセスにもフル アクセスできます。 これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
+`machine` Executor を使用すると、Docker プロセスにもフルアクセスできます。 これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
 
 **注:** 将来の料金改定で `machine` の使用に追加料金が必要になる可能性があります。
 
-machine Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/2.0/configuration-reference/#machine)を設定します。
+Machine Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/2.0/configuration-reference/#machine)を設定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -241,7 +241,7 @@ jobs:
 
 使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images)で確認できます。
 
-以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **メモ:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
+以下の例では、イメージを使用して [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。 **注意:** Docker レイヤー キャッシュを使用できるプランについては、CircleCI の[料金プラン ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
 {:.tab.machineblock.Server}
 ```yaml
@@ -249,19 +249,19 @@ version: 2.1
 jobs:
   build:
     machine:
-      docker_layer_caching: true    # デフォルトは false
+      docker_layer_caching: true    # デフォルトは falseです。
 ```
 
-**注:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。
+**注意:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。
 
-IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での内部使用のために CircleCI が予約しています。 この範囲はジョブ内でご使用にならないでください。
+IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内使用のために CircleCI が予約しています。 この範囲はジョブ内でご使用にならないでください。
 
 ## macOS を使用する
 {: #using-macos }
 
 _クラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。_
 
-`macos` Executor を使用すると、VM 上の macOS 環境でジョブを実行できます。 また、使用する Xcode のバージョンも指定できます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションを参照してください。
+`macos` Executor を使用すると、VM 上の macOS 環境でジョブを実行できます。 また、使用する Xcode のバージョンも指定できます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)を参照してください。
 
 ```yaml
 jobs:
@@ -278,9 +278,9 @@ jobs:
 ## Windows Executor を使用する
 {: #using-the-windows-executor }
 
-`windows` Executor を使用すると、Windows 環境でジョブを実行できます。 シンプルな Windows ジョブを実行する構成例を以下に示します。 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
+`windows` Executor を使用すると、Windows 環境でジョブを実行できます。 シンプルな Windows ジョブを実行する設定例を以下に示します。 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 * クラウド版 CircleCI のバージョン 2.1 の設定ファイル
-* オンプレミス版 CircleCI Server のバージョン 2.0 の設定ファイル。 これは、_CircleCI Server v2.18.3 からサポートされた_ Windows イメージと `machine` Executor を使用するシナリオが考えられます。
+* オンプレミス版 CircleCI Server のバージョン 2.0 の設定ファイル: これは、_CircleCI Server v2.18.3 からサポートされた_ Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -314,9 +314,9 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-クラウド版の例では、Windows Executor のセットアップに Windows Orb を使用することで、構成を簡素化しています。 詳細については、[Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)を参照してください。
+クラウド版の例では、Windows Executor のセットアップに Windows Orb を使用することで、設定を簡素化しています。 詳細については、[Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)を参照してください。
 
-CircleCI Server を使用している場合、Windows ジョブに使用しているイメージに関する詳細情報については、システム管理者にお問い合わせください。 Windows イメージはシステム管理者によって構成され、CircleCI の設定ファイルでは常に `windows-default` というイメージ名で利用できます。
+CircleCI Server を使用している場合、Windows ジョブに使用しているイメージに関する詳細情報については、システム管理者にお問い合わせください。 Windows イメージはシステム管理者によって設定され、CircleCI の設定ファイルでは常に `windows-default` というイメージ名で利用できます。
 
 ## GPU を使用する
 {: #using-gpus }
@@ -350,9 +350,9 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-CircleCI Server では、VM サービスを構成することで GPU 対応の machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
+CircleCI Server では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\] を参照してください。
 
 ## 関連項目
 {: #see-also }
 
-[設定ファイル リファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+[設定ファイル リファレンス]({{ site.baseurl }}/2.0/configuration-reference/)
