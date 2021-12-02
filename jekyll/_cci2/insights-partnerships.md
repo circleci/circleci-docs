@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Insights Partnerships"
+title: Insights Partnerships
 description: This document describes how users may track and visualize analytical data across all of their jobs on CircleCI with third party integrations.
 version:
 - Cloud

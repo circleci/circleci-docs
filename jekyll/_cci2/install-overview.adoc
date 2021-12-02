@@ -1,5 +1,5 @@
 ---
-description: "This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform."
+description: This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform.
 version:
 - Server v2.x
 - Server Admin

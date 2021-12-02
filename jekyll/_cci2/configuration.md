@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "CircleCI configuration"
-description: Please see Configuration Reference page for configuration of .circleci/config.yml
+title: CircleCI configuration
+description: Reference for .circleci/config.yml
 redirect: /docs/2.0/configuration-reference/
 ---
 

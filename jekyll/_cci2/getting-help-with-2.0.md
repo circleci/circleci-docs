@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
-title: "Getting Help with 2.0"
+title: Getting Help with 2.0
+description: A list of possible support options
 redirect: /docs/2.0/help-and-support/
 ---
 

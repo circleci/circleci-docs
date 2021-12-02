@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuring CircleCI"
-short-title: "Configuring CircleCI"
-description: "Reference for .circleci/config.yml"
+title: Configuring CircleCI
+short-title: Configuring CircleCI
+description: Reference for .circleci/config.yml
 order: 20
 version:
 - Cloud
