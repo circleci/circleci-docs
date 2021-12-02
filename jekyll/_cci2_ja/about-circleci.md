@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
 title: "概要"
-description: "This document is a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments."
+description: "このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明します。 CircleCI は、ソフトウェアのビルド、テスト、デプロイを自動化します。"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - クラウド
+  - Cloud
   - Server v3.x
   - Server v2.x
 ---
