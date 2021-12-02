@@ -127,7 +127,6 @@ export class SnippetFeedback {
       this.feedbackForm = container;
       this.wasThisHelpfulContainer.appendChild(container);
 
-
       // Here we setup the document event listeners that handle hiding the form
       // when the user clicks outside of it.
       //
