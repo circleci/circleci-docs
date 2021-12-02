@@ -20,12 +20,12 @@ toc::[]
 
 * ここに記載されているデータベース移行サービスは、起動時にのみ実行されるため、障害時の重大度は低くなっています。
 +
-WARNING: 移行サービスが起動時にダウンしている場合、接続先のサービスが動作しません。
+WARNING: 移行サービスが起動時に停止している場合、接続先のサービスが動作しません。
 
 * Platinum サポートを利用している場合は、一部のサービスを外部化することができ (ここでは * を付けて示しています)、要件に合わせて管理できます。 外部化することで、データの安全性が高まり、システムに冗長性を持たせることができます。
 
 [discrete]
-=== 要点
+=== キー
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -45,7 +45,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 <<<
 
-== コンテナ、ロール、故障モード、スタートアップ時の依存関係
+== コンテナ、役割、障害モード、起動時の依存関係
 
 [.table.table-striped]
 [cols=5*,^,*, options="header", stripes=even]
@@ -281,13 +281,13 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `workflows-conductor`
 | ワークフローに関する情報を調整、提供します。
-| No new workflows will start, currently running workflows might end up in an inconsistent state, and some REST and GraphQL API requests will fail.
+| 新しいワークフローが開始されなくなります。 現在実行されているワークフローの一貫性が失われる可能性があります。 また、一部の REST API および GraphQL API のリクエストに失敗するようになります。
 | icon:fire-extinguisher[]
-| `postgres`, `frontend`, `workflows-conductor-migrator`
+| `postgres`、`frontend`、`workflows-conductor-migrator`
 
 | `workflows-conductor-migrator`
-| Runs postgreSQL migrations for the `workflows-conductor`.
-| Only runs on startup.
+| `workflows-conductor`用に PostgreSQL の移行を実行します。
+| 起動時にのみ実行されます。
 | icon:check-circle[]
-| `postgres`, `frontend`
+| `postgres`、`frontend`
 |===
