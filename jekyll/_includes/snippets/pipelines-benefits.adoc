@@ -1,4 +1,4 @@
-* Run a pipeline via the API with the [trigger a pipeline](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint.
+* Trigger a pipeline via the API with the [trigger a pipeline](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint.
 * Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/2.0/pipeline-variables/#conditional-workflows).
 * Use `version 2.1` config, which provides access to:
     * [Reusable config]({{ site.baseurl }}/2.0/reusing-config/) elements, including executors, commands and jobs.
