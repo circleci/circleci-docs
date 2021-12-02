@@ -1,9 +1,9 @@
 ---
-description: "This article describes the prerequisite steps for installing CircleCI server v2 on AWS using Terraform."
+description: 本書では、Terraform  を使って AWS に CircleCI Server v2 をインストールするための前提条件を説明します。
 version:
 - Server v2.x
 ---
-= Installation Prerequisites
+= インストールの前提条件
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: rouge
@@ -12,22 +12,22 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI uses Terraform to automate parts of the infrastructure for your CircleCI server v2.x install, so you will need to install this first:
+CircleCI は、Terraform を使って CircleCI Server v2.x をインストールするためのインフラの一部を自動化しているため、まず Terraform をインストールする必要があります。
 
-* Visit https://www.terraform.io/downloads.html[Download Terraform] and choose the correct package for your architecture.
+* https://www.terraform.io/downloads.html[Terraformのダウンロード]で、お使いのアーキテクチャ用のパッケージを選択してください。
 
-Ensure you have the following information available before beginning the installation procedure:
+インストール手順を開始する前に、以下の情報をご準備ください。
 
-* A CircleCI License file (`.rli`). Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] for a license and request a cluster-enabled license to run jobs on dedicated instances for best performance.
-* Your AWS Access Key ID and Secret Access Key.
-* Name of your https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[AWS EC2 key pair].
-* https://docs.aws.amazon.com/general/latest/gr/rande.html[AWS Region], for example `us-west-2`.
-* AWS Virtual Private Cloud (VPC) ID and AWS Subnet ID. If your account is configured to use a default VPC, your default VPC ID is listed under Account Attributes, which you will find from the AWS management console on the EC2 dashboard page.
-* Set your VPC (`enableDnsSupport`) setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating[Using DNS with Your VPC] Amazon Web Services documentation for additional details.
+* CircleCI ライセンス ファイル (`.rli`): ライセンスについては https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート]にお問い合わせください。また、最高のパフォーマンスを得るために、専用インスタンスでジョブを実行するためのクラスタ対応ライセンスをリクエストしてください。
+* AWS アクセス キー ID とシークレット アクセスキー
+* https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[AWS EC2 SSH キーペア]の名前
+* https://docs.aws.amazon.com/general/latest/gr/rande.html[AWS リージョン]、例えば `us-west-2`
+* AWS Virtual Private Cloud (VPC) ID および AWS サブネット ID:  アカウントがデフォルトのVPC を使用するように設定されている場合、デフォルトの VPC ID は「Account Attributes」に記載されており、AWS マネジメントコンソールからEC2 ダッシュボードページで確認できます。
+* VPC の [`enableDnsSupport`] を`true`に設定し、Amazon が提供する IP アドレス169.254.169.253のDNSサーバー、または VPC IPv4 ネットワーク範囲のベース+2の予約 IP アドレスへのクエリが成功するようにします。 詳しい情報については、Amazon Web サービスのドキュメントにあるhttps://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating[VPC での DNS の使用]を参照してください。
 
-== Private Subnet Requirements
+== プライベート サブネットの要件
 
-The following additional settings are required to support using private subnets on AWS with CircleCI:
+AWS 上の非公開サブネットを CircleCI で使用するには、次の追加設定が必要です。
 
 - The private subnet for builder boxes must be configured with a https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html[NAT gateway] or an https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html[internet gateway] configured for the outbound traffic to the internet via attached route tables.
 +
