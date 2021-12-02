@@ -11,38 +11,38 @@ version:
   - Server v2.x
 ---
 
-Our mission is to empower technology-driven organizations to do their best work -- and make engineering teams more productive. Build, test, and deploy using intelligent automation.
+CircleCI の使命は、テクノロジー主導の組織が最高の仕事をするためのサポートをし、エンジニアリングチームの生産性を高めることです。 インテリジェントな自動化により、構築、テスト、デプロイを行うことができます。
 
-We work where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers. CircleCI provides enterprise-class support and services, with the flexibility of a startup.
+クラウドでもサーバー上でも、Linux、macOS、Android、そして Windows でも、お客様の環境に応じてご利用いただけます。 CircleCI は、エンタープライズクラスのサポートとサービスを、スタートアップ企業ならではの高い柔軟性をもって提供しています。
 
-## What is continuous integration?
+## 継続的インテグレーションとは
 {: #what-is-continuous-integration }
 
-**Continuous integration** is a practice that encourages developers to integrate their code into a `main` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
+**継続的インテグレーション**は、開発者がコードを共有リポジトリの `main` ブランチに素早く頻繁に統合するための手法です。 それぞれの機能を個別にビルドして、開発サイクルの最後に統合するのではなく、各開発者のコードが 1 日に何度も共有リポジトリに統合されます。
 
-Continuous integration is a key step to digital transformation.
+継続的インテグレーションは、デジタルトランスフォーメーションに向けた大切な第一歩です。
 
-Every developer commits daily to a shared mainline. Every commit triggers automated tests and builds. If these fail, they can be repaired quickly - within minutes.
+それぞれの開発者が、共有されたメインラインに毎日コミットします。 各コミットにより自動テストとビルドがトリガーされます。 失敗しても、数分以内に素早く修復することができます。
 
-**Why?** Continuous integration improves team productivity, efficiency, confidence, and happiness. Find problems and solve them quickly. Release higher quality, more stable products.
+** 利用する理由:** 継続的インテグレーションにより、チームの生産性や効率性だけでなく、信頼性や幸福度も向上します。 問題をすばやく検出して解決することができ、 より高品質で安定したプロダクトをリリースすることができます。
 
 ![CircleCI about image]( {{ site.baseurl }}/assets/img/docs/arch.png)
 
-## CircleCI in your workflow
+## CircleCI のワークフロー
 {: #circleci-in-your-workflow}
 
-A software repository on a supported version control system needs to be authorized and added as a project on [circleci.com](https://circleci.com). Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or [virtual machine](https://circleci.com/developer/images?imageType=machine).
+サポートされているバージョンコントロールシステム上のソフトウェアリポジトリは、 [circleci.com](https://circleci.com) のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI は、 各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)を個別の[コンテナ]({{site.baseurl}}/2.0/glossary/#container) または[仮想マシン](https://circleci.com/developer/images?imageType=machine)で実行します。
 
-CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated [Slack and IRC notifications]({{site.baseurl}}/2.0/notifications). Code test coverage results are available from the details page for any project for which a reporting library is added.
+テスト完了後にはメールで成功・失敗の通知が届くほか、 CircleCI には [Slack 通知と IRC 通知]({{site.baseurl}}/2.0/notifications)も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから確認できます。
 
-CircleCI may be configured to deploy code to various environments, including:
+CircleCI は、以下のような様々な環境にコードをデプロイするように設定することができます。
 - AWS CodeDeploy
-- AWS EC2 Container Service (ECS)
-- AWS S3, Google Kubernetes Engine (GKE)
+- AWS EC2 Container Service（ECS）
+- AWS S3、Google Kubernetes Engine (GKE)
 - Microsoft Azure
 - Heroku
 
-The [orbs registry](https://circleci.com/developer/orbs) contains packages of reusable configuration that can be used for common deployment targets. Orbs simplify and streamline your configuration.
+[Orb レジストリ](https://circleci.com/developer/orbs) には、一般的なデプロイターゲットに使用できる、再利用可能な設定のパッケージが含まれています。 Orb を使うと、設定を簡略化し効率化することができます。
 
 Other cloud service deployments can be scripted using SSH, or by installing the API client of the service with your job configuration.
 
