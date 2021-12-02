@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document contains all the external facing endpoints for the CircleCI runner API.
+CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
 
 toc::[]
 
@@ -17,7 +17,7 @@ toc::[]
 
 The CircleCI runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
 
-=== Circle-Token (personal authentication)
+=== Circle-Token (個人認証)
 
 This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
 
@@ -62,33 +62,33 @@ Lists the available runners based on the specified parameters. It is mandatory t
 
 ==== Authentication Methods
 
-* Circle-Token (personal authentication)
-* Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Circle-Token (個人認証)
+* ブラウザー セッション認証
++ この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできます。
+* ローンチ トークン
 
 ===== Request
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Input
-| Required
-| Description
+| 名前
+| 型
+| 入力
+| 必須
+| 説明
 
 | resource-class
 | string
-| query
-| false
-| filters the list of runners by specific resource class.
+| クエリ
+| 省略可
+| 指定したリソース クラスでランナーの一覧を絞り込みます。
 
 | namespace
 | string
-| query
-| false
-| filters the list of runners by namespace.
+| クエリ
+| 省略可
+| 指定した名前空間でランナーの一覧を絞り込みます。
 |===
 
 == Examples
@@ -113,7 +113,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | Format
 
 |200
-|List of agents
+|エージェントの一覧
 |JSON
 |===
 
@@ -122,10 +122,10 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Required
-| Description
+| 名前
+| 型
+| 必須
+| 説明
 
 |items
 |[object]
@@ -134,18 +134,18 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 |resource_class
 |string
-|true
-|runner resource class
+|必須
+|ランナーのリソース クラス
 
 |hostname
 |string
-|true
-|runner hostname
+|必須
+|ランナーのホスト名
 
 |name
 |string
-|true
-|runner name
+|必須
+|ランナー名
 
 |first_connected
 |string (date-time)
@@ -164,8 +164,8 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 |version
 |string
-|true
-|version of the launch-agent running
+|必須
+|実行中のローンチ エージェントのバージョン
 |===
 
 == Example
@@ -193,27 +193,27 @@ Get the number of unclaimed tasks for a given resource class.
 
 ==== Authentication Methods
 
-* Circle-Token (personal authentication)
-* Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Circle-Token (個人認証)
+* ブラウザー セッション認証
++ この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできます。
+* ローンチ トークン
 
 ===== Request
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Input
-| Required
-| Description
+| 名前
+| 型
+| 入力
+| 必須
+| 説明
 
 | resource-class
 | string
-| query
-| true
-| filters tasks by specific resource class.
+| クエリ
+| 必須
+| 指定したリソース クラスでタスクを絞り込みます。
 |===
 
 == Examples
@@ -242,10 +242,10 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Required
-| Description
+| 名前
+| 型
+| 必須
+| 説明
 
 |unclaimed_task_count
 |int

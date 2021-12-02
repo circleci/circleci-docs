@@ -2,14 +2,14 @@
 version:
 - Cloud
 ---
-= CircleCI ランナーに関するよくあるご質問
+= CircleCI ランナーに関してよく寄せられるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page answers frequently asked questions for the CircleCI runner product.
+このページでは、CircleCI ランナーに関してよく寄せられるご質問への回答を解説します。
 
 toc::[]
 
@@ -47,7 +47,7 @@ If you would prefer to take complete control of artifact storage, CircleCI recom
 
 == What are the best practices for managing state between jobs?
 
-The runner itself is unopinionated about this. Runner can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of it's working directory.
+ランナー自体には、この点に関する厳格な決まりはありません。 ジョブごとに専用の作業ディレクトリを作成し、後で削除するようランナーを構成できますが、必須ではありません。 デフォルトでは、作業ディレクトリの外にファイルを配置することは制限されていません。
 
 In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
 

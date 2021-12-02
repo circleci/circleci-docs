@@ -40,7 +40,7 @@ NOTE: 有料アカウントを使用すると、回数制限をさらに緩め�
 
 . *独立した Linux サーバーを用意* し、Docker をインストールします。
 +
-このレジストリを独立したサーバー (CircleCI 環境外のサーバー) として設定し、このキャッシュ サーバーの負荷が他の CircleCI Server のサービスに影響を与えないようにします。
+We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
 +
 例として、このサーバーの IP アドレスを `192.0.2.1` とします。 This URL will be needed later to arm Nomad clients and the VM Service.
 

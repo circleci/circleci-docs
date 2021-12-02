@@ -296,7 +296,7 @@ GitHub がサポートするキーの種類は、デプロイ キーとユーザ
 ## SSH ホストの信頼性の確立
 {: #establishing-the-authenticity-of-an-ssh-host }
 
-SSH キーを使用してレポジトリをチェックアウトするとき、 `~/.ssh/known_hosts` に GitHub または Bitbucket のフィンガープリントを追加する必要があります。 そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブ ステップによって自動的に処理されます。 カスタムのチェックアウト コマンドを使用したい場合には、以下のコマンドを使用する必要があります。
+When using SSH keys to checkout repositories, it may be neccesary to add the fingerprints for GitHub or BitBucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it's connecting to is authentic. これは `checkout` ジョブ ステップによって自動的に処理されます。 カスタムのチェックアウト コマンドを使用したい場合には、以下のコマンドを使用する必要があります。
 
 ```
 mkdir -p ~/.ssh
