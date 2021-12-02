@@ -32,7 +32,7 @@ Pipelines can be triggered in several ways. Each method is described below.
 
 Each time a commit is pushed to one of your projects, on a branch that has a `.circleci/config.yml` file included, a pipeline is triggered.
 
-### Trigger a pipeline from the CircleCI app 
+### Trigger a pipeline from the CircleCI app
 {: #run-a-pipeline-from-the-circleci-app }
 
 In the CircleCI app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled. Click **Trigger Pipeline**, choose if you want to specify any pipeline parameters, and click **Trigger Pipeline** again.

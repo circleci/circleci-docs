@@ -9,7 +9,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to skip or cancel pipelines. There are a couple of ways to do this. A pipeline can be skipped on commit, or by using the auto-cancel feature. Both methods are described below.
+This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
 
 * TOC
 {:toc}
@@ -27,7 +27,7 @@ If you are using CircleCI server v2.x, you can still use the method for skipping
 
 A few points to note regarding the scope of the `ci skip` feature:
 
-* The pipeline and workflows will still exist for these commits but all jobs will **not** be run.
+* The pipeline and workflows will still exist for these commits but no jobs will be run.
 * If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
@@ -80,7 +80,6 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* When using the auto-cancel feature, pipelines will still be created, but the included workflows (and therefore jobs) will not run.
 * Your project's default branch (usually `main`) will never auto-cancel builds.
 
 ### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
