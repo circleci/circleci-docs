@@ -1,4 +1,4 @@
-import { highlightURLHash } from './highlightURLHash';
+import { highlightURLHash, addHighlightClassIfInUrl } from './highlightURLHash';
 
 window.$ = require('src-api/source/javascripts/lib/_jquery.js');
 
@@ -15,9 +15,8 @@ describe('highlightURLHash', () => {
   describe('highlightURLHash', () => {
     beforeEach(() => {
       jest.spyOn(window, 'addEventListener').mockImplementationOnce(() => {
-        const hashNew = window.location.hash;
         $('.highlight').removeClass('highlight');
-        $(hashNew).attr('class', 'highlight');
+        addHighlightClassIfInUrl()
       });
     });
 
