@@ -1,7 +1,5 @@
 import { highlightURLHash, addHighlightClassIfInUrl } from './highlightURLHash';
 
-document.body.innerHTML = '<div id="overallSuccesRate-definition"></div>';
-
 describe('highlightURLHash', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -10,13 +8,19 @@ describe('highlightURLHash', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+
   describe('highlightURLHash', () => {
     beforeEach(() => {
+      document.body.innerHTML = '<div id="overallSuccesRate-definition"></div>';
       jest.spyOn(window, 'addEventListener').mockImplementationOnce(() => {
         const highlightElem = document.querySelector('.highlight');
         if (highlightElem) highlightElem.classList.remove('highlight');
         addHighlightClassIfInUrl();
       });
+    });
+
+    afterEach(() => {
+      document.body.innerHTML = '';
     });
 
     it('When window.location search is `highlight` then class highlight not added to hash id element', () => {
