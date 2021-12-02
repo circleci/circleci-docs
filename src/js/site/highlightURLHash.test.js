@@ -33,7 +33,7 @@ describe('highlightURLHash', () => {
       });
 
       highlightURLHash();
-      var element = document.querySelector(window.location.hash)
+      var element = document.querySelector(window.location.hash);
       expect(element.classList[0]).not.toEqual('highlight');
     });
 
@@ -48,7 +48,7 @@ describe('highlightURLHash', () => {
         value: location,
       });
       highlightURLHash();
-      var element = document.querySelector(window.location.hash)
+      var element = document.querySelector(window.location.hash);
       expect(element.classList[0]).toEqual('highlight');
     });
 
