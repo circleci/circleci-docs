@@ -142,145 +142,145 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 | `mongodb-upgrader`
 
 | `nomad-metrics`
-| Queries the nomad server for stats and sends them to statsd.
-| Nomad metrics will be lost, but everything else should run as normal.
+| Nomad サーバーに統計情報を問い合わせ、StatsD に送信します。
+| Nomad のメトリクスは失われますが、それ意外はすべて通常通りに動作します。
 | icon:check-circle[]
-| None
+| なし
 
 | `output-processor` / `output-processing`
-| Receives job output & status updates and writes them to MongoDB. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
-| All running builds will either fail or be left in an unfixable, inconsistent state. There will also be data loss in terms of step output, test results and artifacts.
+| ジョブの出力とステータスの更新を受け取り、MongoDB に書き込みます。 また、キャッシュとワークスペースにアクセスし、キャッシュ、ワークスペース、アーティファクト、テスト結果を保存するための API を実行中のジョブに提供します。
+| 実行中のビルドがすべて失敗するか、安定せず一貫性のない状態になります。 ステップの出力、テスト結果、アーティファクトに関するデータ損失も発生します。
 | icon:fire-extinguisher[]
-| None
+| なし
 
 | `permissions-service`
-| Provides the CircleCI permissions interface.
-| Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
+| CircleCI のアクセス権インターフェイスを提供します。
+| ワークフローを開始できなくなります。 一部の REST API 呼び出しが失敗し、CircleCI UI で 500 エラーが発生する可能性があります。
 | icon:exclamation-triangle[]
-| `postgres`, `frontend`, `permissions-service-migrator`
+| `postgres`、`frontend`、`permissions-service-migrator`
 
 | `permissions-service-migrator`
-| Runs postgresql migrations for the `permissions-service`
-| Only runs at startup.
+| `permissions-service` 用に PostgreSQL の移行を実行します。
+| 起動時にのみ実行されます。
 | icon:check-circle[]
-| `postgres`, `frontend`
+| `postgres`、`frontend`
 
 | `picard-dispatcher`
-| Splits a job into tasks and sends them to `schedulerer` to be run.
-| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
+| ジョブをタスクに分割し、実行用に `scheduler` に送信します。
+| Nomad にジョブが送信されなくなります。 run キューのサイズは増加しますが、著しいデータ損失が起こることはありません。
 | icon:exclamation-triangle[]
-| None
+| なし
 
 | `postgres` / `postgres-script-enhance` *
-| Basic `postgresql` with enhancements for creating required databases when containers are launched.
-| Potential total data loss. All running builds will fail and the UI will not work.
+| 基本的な `PostgreSQL` に、コンテナ起動時に必要なデータベースを作成する機能を追加したサービスです。
+| データ全体を損失するおそれがあります。 実行中のビルドがすべて失敗し、UI が機能しなくなります。
 | icon:fire-extinguisher[]
-| None
+| なし
 
 | `rabbitmq` / `rabbitmq-delayed` *
-| Runs the RabbitMQ server. Most of our services use RabbitMQ for queueing.
-| Potential total data loss. All running builds will fail and the UI will not work.
+| RabbitMQ サーバーを実行します。 CircleCI サービスのほとんどは、キューイングに RabbitMQ を使用しています。
+| データ全体を損失するおそれがあります。 実行中のビルドがすべて失敗し、UI が機能しなくなります。
 | icon:fire-extinguisher[]
-| None
+| なし
 
 | `outputRunningRedis` / `redis` *
-| The Redis key/value store.
-| Lose output from currently-running job steps. API calls out to GitHub may also fail.
+| Redis キー/バリューストア
+| 現在実行中のジョブ ステップの出力が失われます。 GitHub に対する API 呼び出しも失敗する可能性があります。
 | icon:exclamation-triangle[]
-| None
+| なし
 
 | `schedulerer`
-| Sends tasks to `server-nomad` to run. \
-| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
+| タスクを実行するために `server-nomad` に送信します。 \
+| Nomad にジョブが送信されなくなります。 run キューのサイズは増加しますが、著しいデータ損失が起こることはありません。
 | icon:exclamation-triangle[]
-| None
+| なし
 
 | `mongodb-upgrader` / `server-mongo-upgrader`
-| Used to run any mongo conversion/upgrade scripts during mongo version upgrade.
-| Not required to run all the time. \
+| Mongo のバージョンアップ時に、任意の Mongo 変換/アップグレードスクリプトを実行するために使用します。
+| 常時実行する必要はありません。 \
 | icon:check-circle[]
-| None
+| なし
 
-| `nomad_server` / `server-nomad` *
-| Nomad primary service.
-| No 2.0 build jobs will run.
+| 　`nomad_server` / `server-nomad` *　　　　　　
+| Nomad プライマリ サービス
+| 2.0 のビルドジョブは実行されません。
 | icon:fire-extinguisher[]
-| None
+| なし
 
 | `ready-agent` / `server-ready-agent`
-| Called by Replicated to check whether other containers are ready.
-| Only required on startup. If unavailable on startup the whole system will fail.
+| 他のコンテナが準備できているかどうかを確認するために Replicated から呼び出されます。
+| 起動時のみ必要です。 起動時に利用できない場合、システムに障害が発生します。
 | icon:check-circle[]
-| None
+| なし
 
 | `server-usage-stats`
-| Sends the user count to the internal CircleCI “phone home” endpoint.
-| CircleCI will not receive usage stats for your install but no affect on operation.
+| CircleCI 内の「Phone Home」エンドポイントにユーザー数を送信します。
+| サーバー使用状況の統計を受け取らなくなりますが、動作には影響ありません。
 | icon:check-circle[]
-| None
+| なし
 
 | `shutdown-hook-poller`
-| Checks the `frontend` container for 1.0 Builder shutdown requests. If a request is found, the 1.0 Builder is shut down.
-| 1.0 Builder lifecycles will not be properly managed, but jobs will continue to run.
+| `frontend` コンテナが 1.0 Builder のシャットダウンリクエストに対応しているかどうかをチェックします。 リクエストがある場合、1.0ビルダーはシャットダウンされます。
+| 1.0 Builder のライフサイクルは適切に管理されませんが、ジョブの実行は継続されます。
 | icon:check-circle[]
-| None
+| なし
 
 | `slanger`
-| Provides real-time events to the CircleCI app.
-| Live UI updates will stop but hard refreshes will still work.
+| CircleCI アプリにリアルタイム イベントを提供します。
+| UI のリアルタイム更新が停止しますが、ハード リフレッシュは引き続き機能します。
 | icon:check-circle[]
-| None
+| なし
 
 | `telegraf`
-| This is the statsd forwarding agent that our local services write to and can be configured to forward to an external metrics service.
-| Metics will stop working but jobs will continue to run.
+| CircleCI ローカル サービスの書き込み先となる statsD 転送エージェントであり、外部メトリクス サービスに転送するように設定できます。
+| メトリクスが動作しなくなりますが、ジョブの実行は継続されます。
 | icon:check-circle[]
-| None
+| なし
 
 | `tutum/logrotate`
-| Used to manage log rotations for all containers on the services machine.
-| If this stays down for a long period the Services machine disk will eventually run out of space and other services will fail.
+| Service マシン上のすべてのコンテナのログのローテーションを管理します。
+| 障害が長期間続くと、Services マシンのディスク容量が足りなくなり、他のサービスが停止します。
 | icon:exclamation-triangle[]
-| None
+| なし
 
 | `test-results`
-| Parses test result files and stores data.
-| There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
+| テスト結果ファイルを解析してデータを保存します。
+| ジョブのテストの失敗や時間に関するデータが生成されなくなります。 サービスが再起動するとバックフィルが行われます。
 | icon:check-circle[]
-| None
+| なし
 
 | `contexts-vault` / `vault-cci` *
-| Instance of Hashicorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. Used to handle the encryption and key store for the `contexts-service`.
-| `contexts-service` will stop working, and all jobs that use `contexts-service` will fail.
+| HashiCorp 社の Vault (キー管理、セキュアなストレージ、その他の暗号化関連サービスを提供する暗号化サービス) のインスタンスです。 `contexts-service` の暗号化とキー保存に使用されます。
+| `contexts-service` が動作しなくなります。 また、`contexts-service` を使用するすべてのジョブが失敗するようになります。
 | icon:exclamation-triangle[]
-| None
+| なし
 
 | `vm-gc`
-| Periodically check for stale `machine` and remote Docker instances and request that `vm-service` remove them.
-| Old vm-service instances might not be destroyed until this service is restarted.
+| 古い `machine` やリモート Docker インスタンスを定期的に確認し、`vm-service` にそれらの削除をリクエストします。
+| このサービスを再起動するまで、古い vm-service インスタンスが破棄されなくなる可能性があります。
 | icon:check-circle[]
 | `vm-service-db-migrator`
 
 | `vm-scaler`
-| Periodically requests that `vm-service` provision more instances for running `machine` and remote Docker jobs.
-| VM instances for `machine` and Remote Docker might not be provisioned causing you to run out of capacity to run jobs with these executors.
+| `マシン`とリモート Docker ジョブの実行用にプロビジョニングするインスタンス数を増やすように、`vm-service` に定期的にリクエストします。
+| マシンとリモート Docker 用の VM インスタンスがプロビジョニングされなくなり、容量不足でジョブとそれらの Executor を実行できなくなる可能性があります。
 | icon:exclamation-triangle[]
 | `vm-service-db-migrator`
 
 | `vm-service`
-| Inventory of available `vm-service` instances, and provisioning of new instances.
-| Jobs that use `machine` or remote Docker will fail.
+| 利用可能な `vm-service` インスタンスのインベントリ管理と、新しいインスタンスのプロビジョニングを行います。
+| `machine` またはリモート Docker を使用するジョブが失敗するようになります。
 | icon:exclamation-triangle[]
 | `vm-service-db-migrator`
 
 | `vm-service-db-migrator`
-| Used to run database migrations for `vm-service`.
-| Only runs at startup.
+| `vm-service`のデータベース移行の実行に使用されます。
+| 起動時にのみ実行されます。
 | icon:check-circle[]
-| None
+| なし
 
 | `workflows-conductor`
-| Coordinates and provides information about workflows.
+| ワークフローに関する情報を調整、提供します。
 | No new workflows will start, currently running workflows might end up in an inconsistent state, and some REST and GraphQL API requests will fail.
 | icon:fire-extinguisher[]
 | `postgres`, `frontend`, `workflows-conductor-migrator`
