@@ -18,24 +18,24 @@ CircleCI pipelines are the highest-level unit of work, encompassing a project's 
 
 Pipelines are not available on installations of CircleCI server v2.x.
 
-When visiting your CircleCI dashboard, you are shown a list of recent pipelines that have run in your organization/account.
+When visiting your CircleCI dashboard, you are shown a list of recently triggered pipelines for your organization/account.
 
 ![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
-## Running a pipeline
+## Triggering a pipeline
 {: #running-a-pipeline }
 
-Pipelines can be run in several ways. Each method is described below.
+Pipelines can be triggered in several ways. Each method is described below.
 
-### Run a pipeline on commit to your code repository
+### Trigger a pipeline on push to your code repository
 {: #run-a-pipeline-on-commit-to-your-code-repository }
 
 Each time a commit is pushed to one of your projects, on a branch that has a `.circleci/config.yml` file included, a pipeline is triggered.
 
-### Run a pipeline from the CircleCI app 
+### Trigger a pipeline from the CircleCI app 
 {: #run-a-pipeline-from-the-circleci-app }
 
-In the CircleCI app, when you have a specific branch selected, the **Run Pipeline** button becomes enabled. Click **Run Pipeline**, choose if you want to specify any pipeline parameters, and click **Run Pipeline** again.
+In the CircleCI app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled. Click **Trigger Pipeline**, choose if you want to specify any pipeline parameters, and click **Trigger Pipeline** again.
 
 ### Trigger a pipeline using the API
 {: #run-a-pipeline-using-the-api }

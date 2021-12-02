@@ -14,10 +14,10 @@ This document describes how to skip or cancel pipelines. There are a couple of w
 * TOC
 {:toc}
 
-## Skipping a pipeline
+## Skipping jobs in a pipeline
 {: #skipping-a-build }
 
-By default, CircleCI automatically runs a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
+By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. This not only skips the marked commit, but also **all other commits** in the push.
 
 **CircleCI server v2.x**
 If you are using CircleCI server v2.x, you can still use the method for skipping workflows described here, even though you are not using the pipelines feature.
@@ -29,7 +29,7 @@ A few points to note regarding the scope of the `ci skip` feature:
 
 * The pipeline and workflows will still exist for these commits but all jobs will **not** be run.
 * If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
-* This feature is not supported for fork PRs. Scheduled workflows will not be cancelled even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
+* This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
 ### Example commit title
 {: #example-commit-title }
@@ -73,7 +73,7 @@ When pushed to a VCS, this commit will not be built on CircleCI because of the `
 
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to complete before the most recent version starts.
 
-To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
+To save time, you can configure CircleCI to automatically cancel any non-terminated workflows when a newer pipeline is triggered on that same branch.
 
 ### Scope
 {: #scope }
