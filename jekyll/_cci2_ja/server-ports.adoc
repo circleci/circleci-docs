@@ -1,9 +1,10 @@
 ---
+description: "This section defines the system and port access requirements for installing CircleCI v2.x."
 version:
 - Server v2.x
-- サーバー管理
+- Server Admin
 ---
-= システム要件
+= System Requirements
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -115,7 +116,7 @@ Nomad クライアント数のベスト プラクティスを以下の表にま�
 
 == サーバー ポート
 
-CircleCI Server 2.0 のインストールで必要となるすべてのポートを、マシン タイプごとに以下の表に示します。
+Below all ports required by a CircleCI installation are listed for each machine type.
 
 === Services マシン
 
