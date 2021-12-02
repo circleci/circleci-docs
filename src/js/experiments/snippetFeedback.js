@@ -14,6 +14,10 @@ export class SnippetFeedback {
     this.codeSnippetContainer = null;
     this.wasThisHelpfulContainer = null;
     this.feedbackForm = null;
+    this.maxCharCount = 240;
+    this.currCharCount = 0;
+    this.currCharCountElement = this.makeElement({ kind: 'div' });
+    this.renderCharCount(0);
     // For tracking user's response to be included in the final feedback form.
     this.wasThisHelpful = null;
     this.renderWasThisHelpfulPrompt();
@@ -77,6 +81,7 @@ export class SnippetFeedback {
    * */
   renderFeedbackForm() {
     if (!this.feedbackForm) {
+      // start by constructing our dom elements
       const container = this.makeElement({ kind: 'div', className: 'form' });
       const prompt = this.makeElement({
         kind: 'div',
@@ -85,6 +90,21 @@ export class SnippetFeedback {
 
       const textForm = this.makeElement({
         kind: 'textarea',
+      });
+
+      const bottomRow = this.makeElement({
+        kind: 'div',
+        className: 'bottom-row',
+      });
+
+      textForm.addEventListener('input', () => {
+        this.currCharCount = textForm.value.length;
+        if (this.currCharCount >= this.maxCharCount - 1) {
+          textForm.value = textForm.value.substring(0, this.maxCharCount - 1);
+        }
+
+        // every time the user types we need to re-render the dom content manually.
+        this.renderCharCount(this.currCharCount);
       });
 
       const sendButton = this.makeElement({
@@ -98,12 +118,25 @@ export class SnippetFeedback {
         },
       });
 
+      // build the dom nodes.
       container.appendChild(prompt);
       container.appendChild(textForm);
-      container.appendChild(sendButton);
+      bottomRow.appendChild(this.currCharCountElement);
+      bottomRow.appendChild(sendButton);
+      container.appendChild(bottomRow);
       this.feedbackForm = container;
       this.wasThisHelpfulContainer.appendChild(container);
     }
+  }
+
+  /**
+   * This is a dynamic value we have to update on type.
+   * */
+  renderCharCount(charCount) {
+    const el = `<div class='charCountRow'>
+          <span>${charCount} / ${this.maxCharCount}</span>
+        </div>`;
+    this.currCharCountElement.innerHTML = el;
   }
 
   // -- Trackers --
