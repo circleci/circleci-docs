@@ -9,7 +9,7 @@ version:
 - Server v3.x
 ---
 
-This page provides information on CircleCI pipelines, how they are run, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
+This page provides information on CircleCI pipelines, how they are triggered, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
 
 ## Overview
 {: #overview }
