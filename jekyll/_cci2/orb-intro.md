@@ -180,6 +180,15 @@ jobs:
       - node/install-packages # Utilize commands in steps
 ```
 
+## Orbs view
+{: #orbs-view}
+
+The orbs view gives users visibility into the orbs their organization has created. Users can review the orb type, orb usage, latest version, and descriptions directly from the list view.
+
+Full orb details, including orb source, are accessible by clicking on the orb name.
+
+Note: Private orb details pages may only be viewed by logged-in members of your organization.
+
 
 ## See also
 {: #see-also }
