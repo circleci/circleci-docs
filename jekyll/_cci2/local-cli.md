@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
-title: "Using the CircleCI Local CLI"
-short-title: "Using the CircleCI Local CLI"
-description: "How to run local jobs with the CLI"
+title: Using the CircleCI Local CLI
+description: How to run local jobs with the CLI.
 categories: [troubleshooting]
 order: 10
 version:

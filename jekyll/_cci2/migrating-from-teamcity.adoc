@@ -1,4 +1,9 @@
-= Migrating from TeamCity 
+---
+title: Migrating from TeamCity
+description: An overview of how to migrate from TeamCity to CircleCI.
+---
+
+= Migrating from TeamCity
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: pygments.rb
