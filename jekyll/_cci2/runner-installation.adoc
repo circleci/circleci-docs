@@ -6,6 +6,7 @@ version:
 = Get Started: Installing the CircleCI Runner
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find resources to install CircleCI runner on Linux, macOS, Docker, and Windows platforms.
 :icons: font
 :toc: macro
 :toc-title:
