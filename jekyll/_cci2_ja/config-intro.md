@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "設定ファイルの概要"
 description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
 version:
