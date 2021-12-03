@@ -32,7 +32,7 @@ export function setLoggedOut() {
   setUserData({});
 }
 
-$(function () {
+export function fetchUserData() {
   // Update cookie expiry (migrating from 10 years to 2 years)
   updateCookieExpiration('cci-customer', 365 * 2);
 
@@ -55,7 +55,9 @@ $(function () {
     .fail(function () {
       setLoggedOut();
     });
-});
+}
+
+$(fetchUserData());
 
 export function setAmplitudeId() {
   const DAYS_PER_MINUTE = 1 / 24 / 60;

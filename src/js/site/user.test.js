@@ -1,14 +1,25 @@
 import global from '../../../jest/global';
 import AnalyticsClient from '../services/analytics.js';
-import { setUserData, setLoggedIn, setLoggedOut, setAmplitudeId } from './user';
+import {
+  setUserData,
+  setLoggedIn,
+  setLoggedOut,
+  fetchUserData,
+  setAmplitudeId,
+} from './user';
+import { updateCookieExpiration } from '../utils';
 import { default as CookieOrginal } from 'js-cookie';
+import { describe } from 'jest-circus';
 
 jest.mock('js-cookie');
 const Cookie = CookieOrginal;
+jest.mock('../utils', () => ({ updateCookieExpiration: jest.fn() }));
 
 const jekyllProperties = { test: 'test' };
 
 describe('User', () => {
+  const userDataReady = new CustomEvent('userDataReady');
+
   beforeEach(() => {
     global.AnalyticsClient = AnalyticsClient;
     jest.clearAllMocks();
@@ -22,7 +33,6 @@ describe('User', () => {
 
   describe('setUserData', () => {
     const created_at = 'long ago';
-    const userDataReady = new CustomEvent('userDataReady');
 
     it('Calls AnalyticsClient.trackPage with created_at', () => {
       const spy = jest.spyOn(AnalyticsClient, 'trackPage');
@@ -71,6 +81,96 @@ describe('User', () => {
       expect(spy).toHaveBeenCalledWith('cci-customer', 'false', {
         expires: 365 * 2,
       });
+    });
+  });
+
+  describe('fetchUserData', () => {
+    it('calls utils.updateCookieExpiration', () => {
+      fetchUserData();
+      expect(updateCookieExpiration).toHaveBeenCalledWith(
+        'cci-customer',
+        365 * 2,
+      );
+    });
+
+    it('does not set `loggedin` class to document.body if Cookie is not true', () => {
+      expect(document.body.className).toEqual('');
+      fetchUserData();
+      expect(document.body.className).toEqual('');
+    });
+
+    it('does set `loggedin` class to document.body if Cookie is true', () => {
+      const original = Cookie.get;
+      Cookie.get = jest.fn(() => 'true');
+      expect(document.body.className).toEqual('');
+      fetchUserData();
+      expect(document.body.className).toEqual('loggedin');
+      setLoggedOut();
+      Cookie.get = original;
+    });
+
+    it('calls ajax', () => {
+      const ajaxSpy = jest.spyOn($, 'ajax');
+      fetchUserData();
+      expect(ajaxSpy).toHaveBeenCalledWith({
+        url: 'https://circleci.com/api/v1/me',
+        xhrFields: {
+          withCredentials: true,
+        },
+        dataType: 'json',
+        timeout: 10000, // 10 seconds
+      });
+    });
+
+    it('logs in if mocked ajax fetch succeeds', () => {
+      const originalAjax = global.$.ajax;
+      const originalDone = global.$.done;
+      const originalFail = global.$.fail;
+      const userData = { success: true };
+      const trackPageSpy = jest.spyOn(AnalyticsClient, 'trackPage');
+      const dispatchEventSpy = jest.spyOn(window, 'dispatchEvent');
+
+      global.$.ajax = function () {
+        return global.$;
+      };
+      global.$.done = jest.fn(function (fn) {
+        if (fn) fn(userData);
+        return global.$;
+      });
+      global.$.fail = function () {
+        return global.$;
+      };
+      fetchUserData();
+      expect(global.$.done).toHaveBeenCalledWith(expect.any(Function));
+      expect(trackPageSpy).toHaveBeenCalledWith('Home Page', jekyllProperties);
+      expect(dispatchEventSpy).toHaveBeenCalledWith(userDataReady);
+      expect(document.body.className).toEqual('loggedin');
+      global.$.ajax = originalAjax;
+      global.$.done = originalDone;
+      global.$.fail = originalFail;
+    });
+
+    it('logs out if mocked ajax fetch fails', () => {
+      const originalAjax = global.$.ajax;
+      const originalDone = global.$.done;
+      const originalFail = global.$.fail;
+
+      global.$.ajax = function () {
+        return global.$;
+      };
+      global.$.done = function () {
+        return global.$;
+      };
+      global.$.fail = jest.fn(function (fn) {
+        if (fn) fn();
+        return global.$;
+      });
+      fetchUserData();
+      expect(global.$.fail).toHaveBeenCalledWith(expect.any(Function));
+      expect(document.body.className).toEqual('');
+      global.$.ajax = originalAjax;
+      global.$.done = originalDone;
+      global.$.fail = originalFail;
     });
   });
 
