@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: Differences from Jenkins
+categories: [migration]
 description: Differences between CircleCI and Jenkins.
 ---
 
