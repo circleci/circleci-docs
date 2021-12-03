@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "Arm リソース"
 short-title: "CircleCI の Arm リソースの使用"
 description: "CircleCI の Arm リソースの使用"
@@ -8,7 +8,7 @@ version:
   - Server v3.x
 ---
 
-ここでは、CircleCI の Arm リソースを使ううえで必要なセットアップ手順について説明します。 Arm resources are available on cloud and server 3.x.
+ここでは、CircleCI の Arm リソースを使ううえで必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
 
 ## はじめに
 [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)をトリガーします。
@@ -24,7 +24,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。 この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
-## Pricing and availability
+## 料金と提供プラン
 {: #pricing-and-availability }
 
 以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
@@ -37,7 +37,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
-## Using Arm resources
+## Arm リソースの使用方法
 {: #using-arm-resources }
 
 Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定例を参考にしてください。
