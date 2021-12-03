@@ -158,8 +158,11 @@ export class SnippetFeedback {
    * Render the char count and set it's result on the respective element.
    * */
   renderCharCount(charCount) {
-    const el = `<div class='charCountRow'>
-          <span>${charCount} / ${this.maxCharCount}</span>
+    let charCountLimited =
+      charCount > this.maxCharCount ? this.maxCharCount : charCount;
+    const el = `
+        <div class="charCountRow">
+          <span>${charCountLimited} / ${this.maxCharCount}</span>
         </div>`;
     this.currCharCountElement.innerHTML = el;
   }

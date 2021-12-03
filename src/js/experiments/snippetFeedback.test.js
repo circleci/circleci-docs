@@ -73,4 +73,24 @@ describe('Snippet Feedback class', () => {
     noBtn.click();
     expect(sf.wasThisHelpfulContainer.children.length).toBe(5);
   });
+
+  test('renderCharCount contains the proper innerHTML', () => {
+    let sf = new SnippetFeedback(snippetElement);
+    sf.renderCharCount(10);
+    // correct whitespace is required here, sadly:
+    expect(sf.currCharCountElement.innerHTML).toBe(`
+        <div class="charCountRow">
+          <span>10 / 240</span>
+        </div>`);
+  });
+
+  test('renderCharCount limits charCount if it exceed set limit.', () => {
+    let sf = new SnippetFeedback(snippetElement);
+    sf.renderCharCount(1000);
+    // correct whitespace is required here, sadly:
+    expect(sf.currCharCountElement.innerHTML).toBe(`
+        <div class="charCountRow">
+          <span>240 / 240</span>
+        </div>`);
+  });
 });
