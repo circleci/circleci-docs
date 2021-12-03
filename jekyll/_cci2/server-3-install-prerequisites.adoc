@@ -79,8 +79,8 @@ Supported Kubernetes versions:
 | CircleCI Version
 | Kubernetes Version
 
-| 3.0.0 - 3.2.x
-| < 1.22
+| 3.0.0 - 3.2.1
+| < 1.21
 
 | 3.3.x+
 | >= 1.16

@@ -312,7 +312,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -326,7 +326,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       ],
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -375,7 +375,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-server-vm-service"
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -403,15 +403,15 @@ Create a `policy.json` file with the following content. You should fill in Clust
 Once you have created the policy.json file attach it to an IAM policy and created user. 
 +
 ```bash
-aws iam put-user-policy --user-name circleci-server-vm-service --policy-name circleci-server-vm-service --policy-document file://policy.json
+aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
 ```
 
 . *Create an access key and secret for the user*
 +
-If you have not already, you will need an access key and secret for the `circleci-server-vm-service` user. You can create that by running the following command:
+If you have not already, you will need an access key and secret for the `circleci-vm-service` user. You can create that by running the following command:
 +
 ```bash
-aws iam create-access-key --user-name circleci-server-vm-service
+aws iam create-access-key --user-name circleci-vm-service
 ```
 
 . *Configure Server*

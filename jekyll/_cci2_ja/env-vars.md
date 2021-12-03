@@ -39,7 +39,7 @@ Use Contexts to [further restrict access to environment variables](#setting-an-e
 ## シークレットのマスキング
 {: #secrets-masking }
 
-_シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
+_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 シークレットのマスキングは、[Project Settings (プロジェクト設定)] または [Contexts (コンテキスト)] で設定されている環境変数に適用されます。 環境変数は、プロジェクトのシークレットやキーを保持します。 シークレットやキーはアプリケーションにとってきわめて重要なものです。 シークレットのマスキングは、`echo` や `print` が使用される際にジョブ出力における環境変数を不明瞭にすることで、CircleCI のセキュリティを強化します。
 
@@ -597,11 +597,11 @@ The following environment variables are exported in each build and can be used f
 | `CIRCLE_TAG`{:.env_var}                | 文字列  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「[Git タグに対応するワークフローを実行する]({{ site.baseurl }}/ja/2.0/workflows/#git-%E3%82%BF%E3%82%B0%E3%81%AB%E5%AF%BE%E5%BF%9C%E3%81%99%E3%82%8B%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B)」を参照してください。 |
 | `CIRCLE_USERNAME`{:.env_var}           | 文字列  | パイプラインをトリガーしたユーザーの GitHub または Bitbucket ユーザー名                                                                                                                                                                                                                                             |
 | `CIRCLE_WORKFLOW_ID`{:.env_var}        | 文字列  | 現在のジョブのワークフロー インスタンスの一意の識別子。 この識別子は、特定のワークフロー インスタンス内のすべてのジョブで同じです。                                                                                                                                                                                                                       |
-| `CIRCLE_WORKING_DIRECTORY`{:.env_var}  | 文字列  | 現在のジョブの `working_directory` キーの値                                                                                                                                                                                                                                                          |
-| `CIRCLE_INTERNAL_TASK_DATA`{:.env_var} | 文字列  | **内部用**。 ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。                                                                                                                                                                                                       |
-| `CIRCLE_COMPARE_URL`{:.env_var}        | 文字列  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{ site.baseurl }}/2.0/pipeline-variables/)" が導入されています。                                                                                                                         |
-| `CI_PULL_REQUEST`{:.env_var}           | 文字列  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUEST` の使用が推奨されます。                                                                                                                                                                                                           |
-| `CI_PULL_REQUESTS`{:.env_var}          | リスト  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUESTS` の使用が推奨されます。                                                                                                                                                                                                          |
+| `CIRCLE_WORKING_DIRECTORY`{:.env_var}  | 文字列  | The value of the `working_directory` key of the current job.                                                                                                                                                                                                                              |
+| `CIRCLE_INTERNAL_TASK_DATA`{:.env_var} | 文字列  | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.                                                                                                                      |
+| `CIRCLE_COMPARE_URL`{:.env_var}        | 文字列  | **Deprecated**. The GitHub or Bitbucket URL to compare commits of a build. Available in config v2 and below. For v2.1 we will introduce ["pipeline values"]({{ site.baseurl }}/2.0/pipeline-variables/) as an alternative.                                                                |
+| `CI_PULL_REQUEST`{:.env_var}           | 文字列  | **非推奨**。 Kept for backward compatibility with CircleCI 1.0. Use `CIRCLE_PULL_REQUEST` instead.                                                                                                                                                                                            |
+| `CI_PULL_REQUESTS`{:.env_var}          | List | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 Use `CIRCLE_PULL_REQUESTS` instead.                                                                                                                                                                                                         |
 {:class="table table-striped"}
 
 **注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{ site.baseurl }}/ja/2.0/pipeline-variables/#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E5%80%A4)」を参照してください。

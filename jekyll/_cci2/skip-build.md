@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
-title: Skip and Cancel Builds
-short-title: Skip and Cancel Builds
-description: How to Prevent CircleCI From Automatically Building
+title: Skip or cancel jobs and workflows
+description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
 order: 100
 version:
 - Cloud
@@ -10,18 +9,28 @@ version:
 - Server v2.x
 ---
 
-This document describes how to skip or cancel builds in the following sections.
+This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
 
 * TOC
 {:toc}
 
-## Skipping a build
+## Skipping jobs in a pipeline
 {: #skipping-a-build }
 
-By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
+By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. This not only skips the marked commit, but also **all other commits** in the push.
 
-**Note:**
-This feature is not supported for fork PRs. Scheduled workflows will not be cancelled even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
+**CircleCI server v2.x**
+If you are using CircleCI server v2.x, you can still use the method for skipping workflows described here, even though you are not using the pipelines feature.
+
+### Scope
+{: #scope }
+{:.no_toc}
+
+A few points to note regarding the scope of the `ci skip` feature:
+
+* The pipeline and workflows will still exist for these commits but no jobs will be run.
+* If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
+* This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
 ### Example commit title
 {: #example-commit-title }
@@ -60,17 +69,20 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
 
 When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci]` in the commit description.
 
-**Note:**
-If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
+## Auto cancelling
+{: #auto-cancelling}
 
-## Auto cancelling a redundant build
-{: #auto-cancelling-a-redundant-build }
+If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to complete before the most recent version starts.
 
-If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to finish building before the most recent version starts.
+To save time, you can configure CircleCI to automatically cancel any non-terminated workflows when a newer pipeline is triggered on that same branch.
 
-To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
+### Scope
+{: #scope }
+{:.no_toc}
 
-**Note:** Your project's default branch (usually `master`) will never auto-cancel builds.
+A few points to note regarding the use of the auto-cancel feature:
+
+* Your project's default branch (usually `main`) will never auto-cancel builds.
 
 ### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
 {: #steps-to-enable-auto-cancel-for-pipelines-triggered-by-pushes-to-github-or-the-api }

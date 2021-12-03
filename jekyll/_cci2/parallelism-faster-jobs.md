@@ -118,6 +118,12 @@ The CLI expects both filenames and classnames to be present in the timing data p
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
+For partially found test results, we automatically assign a random small value to any test we did not find timing data for. You can override this assigned value to a specific value with the `--time-default` flag.
+
+```
+circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
+```
+
 If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
 
 Note: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.

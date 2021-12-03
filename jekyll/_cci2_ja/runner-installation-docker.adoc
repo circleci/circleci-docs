@@ -3,28 +3,28 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation with Docker
+= Docker への CircleCI ランナーインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI runner with Docker. 
+このページでは、CircleCI ランナーを Docker にインストールする方法を説明します。 
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
 
 toc::[]
 
-== Additional prerequisites
+== 追加の必須要件
 
-The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
+ホストには、Docker をインストールしておく必要があります。 `runner` コンテナは、起動するとすぐにジョブの実行を試みます。 コンテナは停止されるまで、他のジョブの実行用に再利用され続けます。
 
-The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
+ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
-== Create a Dockerfile that extends the CircleCI Runner image
+== CircleCI ランナーのイメージを拡張した Dockerfile を作成する
 
-In this example, python3 is installed on top of the base image.
+次の例では、ベース イメージ上に python3 をインストールします。
 
 `Dockerfile.runner.extended`
 
@@ -35,39 +35,41 @@ RUN apt-get update; \
         python3
 ```
 
-== Build the Docker image
+== Docker イメージをビルドする
 
 ```bash
 docker build --file ./Dockerfile.runner.extended .
 ```
 
-== Start the Docker container
+== Docker コンテナを起動する
 
-NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
+NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
 ```bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 
-When the container starts, it will immediately attempt to start running jobs.
+コンテナは、起動するとすぐにジョブの実行を試みます。
 
-=== Start the Docker container on server
+=== サーバー上で Docker コンテナを起動する
 
-When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+サーバー上で Docker コンテナを起動する場合、  `--env` フラグを使って `agent_version` の環境変数を渡す必要があります。
 
 ``` bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+
 ```
 
-== Stopping the Docker container
+== Docker コンテナを停止する
 
 ``` bash
 docker stop <container-name>
 ```
 
-== Remove the Docker container
+== Docke コンテナを削除する
 
-In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+同じ名前のコンテナを再作成する場合など、停止したランナーコンテナをシステムから完全に削除する必要がある場合があります。
+
 
 ``` bash
 docker stop <container-name>; docker rm <container-name>;
