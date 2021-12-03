@@ -156,24 +156,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 As we can see, the size of our directories has been increased.
 
-
-NOTE: If you find that after following these steps, the disk size allocated to your data directories have not increased, then you may need to restart your database pods. This, however, will cause some downtime of 1-5mins as the databases restart. You can use the commands below to restart your databases.
-
-For postgres
-[source,bash]
-----
-kubectl rollout restart sts postgresql
-----
-
-For mongodb
-[source,bash]
-----
-kubectl rollout restart sts mongodb
-----
-
-== Troubleshooting
-
-If you find that the new pods do show the resized volumes as expected, it is still worth running the following commands to check. In some instances the resize will fail, but the only error source is an event in the output from the following commands.
+When running through these steps, if you find that the new pods **do** show the resized volumes as expected, it is still worth running the `kubectl describe` commands shown below to check. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
 
 For postgres
 [source,bash]
@@ -202,4 +185,22 @@ Warning  VolumeResizeFailed  58m   volume_expand  error expanding volume "circle
 status code: 400, request id: 3bd43d1e-0420-4807-9c33-df26a4ca3f23
 Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolume.NodeExpandVolume succeeded for volume "pvc-29456ce2-c7ff-492b-add4-fcf11872589f"
 ```
+
+== Troubleshooting
+
+If you find that after following these steps, the disk size allocated to your data directories have not increased, then you may need to restart your database pods. This, however, will cause some downtime of 1-5mins as the databases restart. You can use the commands below to restart your databases.
+
+For postgres
+[source,bash]
+----
+kubectl rollout restart sts postgresql
+----
+
+For mongodb
+[source,bash]
+----
+kubectl rollout restart sts mongodb
+----
+
+
 
