@@ -21,6 +21,8 @@ image::server-install-flow-chart.png[Flow chart showing the installation flow fo
 === Install required software
 Download and install the following software before continuing:
 
+**Note about KOTS installation**: Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac users will need to grant a security exception.
+
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -40,8 +42,8 @@ Download and install the following software before continuing:
 | {helmversion} or greater
 | Kubernetes Package Management
 
-| https://kots.io/[Kots]
-| {kotsversion} or greater
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux]. 
+| {kotsversion}
 | Replicated Kubernetes Application Management
 |===
 
