@@ -27,5 +27,22 @@ if (
   currentPage.host === PREVIEW_DOMAIN &&
   new RegExp(`[?&]${FORCE_QUERY_KEY}`).test(currentPage.href ?? '')
 ) {
-  localStorage.setItem(FORCE_STORAGE_KEY, getJekyllBaseName());
+  const jekyllBaseName = getJekyllBaseName();
+  localStorage.setItem(FORCE_STORAGE_KEY, jekyllBaseName);
+
+  $(() => {
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      `
+      <style>
+        .compass-copy {
+          background-image: url('http://${jekyllBaseName}assets/img/compass/copy.svg');
+        }
+
+        .compass-check-circle {
+          background-image: url('http://${jekyllBaseName}assets/img/compass/check.svg');
+        }
+      </style>`,
+    );
+  });
 }
