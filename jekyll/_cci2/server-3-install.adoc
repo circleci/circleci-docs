@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Installation Phase 2
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find the steps and prerequisites for the server v3.x installation.
 :icons: font
 :toc: macro
 :toc-title:

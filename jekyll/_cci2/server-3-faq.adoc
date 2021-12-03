@@ -1,5 +1,4 @@
 ---
-description: "Get answers to questions like: Does Server 3.0 have a data retention policy? What control is granted over Nomad certificates? and What do the Application Status options in KOTS mean?"
 version:
 - Server v3.x
 - Server Admin
@@ -7,6 +6,7 @@ version:
 = CircleCI Server v3.x FAQ
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find answers about Server 3.0's data retention policy, what control is granted over Nomad certificates, and application Status options in KOTS.
 :icons: font
 :toc: macro
 :toc-title:
