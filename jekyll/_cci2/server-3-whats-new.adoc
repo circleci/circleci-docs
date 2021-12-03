@@ -47,7 +47,7 @@ CircleCI application, users should be directed to use the https://circleci.com/d
 and get details of the possible cause of the issue.
 * The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
 * Runner cannot be used when server is installed behind a proxy.
-
+* Let's Encrypt certificate generation does not work. You will need to provide your own certificates or use the default certificates provided.
 
 == Release 3.2.0
 
@@ -138,6 +138,7 @@ CircleCI application, users should be directed to use the https://circleci.com/d
 and get details of the possible cause of the issue.
 * The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
 * Runner cannot be used when server is installed behind a proxy.
+* Let's Encrypt certificate generation does not work. You will need to provide your own certificates or use the default certificates provided.
 
 == Release 3.1.0
 
