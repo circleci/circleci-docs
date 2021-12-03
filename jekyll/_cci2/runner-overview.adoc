@@ -6,6 +6,7 @@ version:
 = CircleCI Runner Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how CircleCI runner enables you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
 :toc-title:
