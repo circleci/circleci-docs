@@ -180,6 +180,7 @@ export class SnippetFeedback {
       `docs-snippet-helpful-${yesOrNoString}`,
       {
         originatingSnippet: this.snippetElement.textContent,
+        location: window.location.pathname,
         timeOfButtonClick: Date.now(),
       },
     );
@@ -193,6 +194,7 @@ export class SnippetFeedback {
     window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
       originatingSnippet: this.snippetElement.textContent,
       feedback: formContent,
+      location: window.location.pathname,
       wasThisHelpful: this.wasThisHelpful,
       // for diffing this against the time that the trackYesOrNoButton was clicked
       // as well as possible the time the copy code button was clicked (TODO add that)
