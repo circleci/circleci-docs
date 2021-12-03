@@ -180,7 +180,6 @@ export class SnippetFeedback {
       `docs-snippet-helpful-${yesOrNoString}`,
       {
         originatingSnippet: this.snippetElement.textContent,
-        wasHelpful: yesOrNoString,
         timeOfButtonClick: Date.now(),
       },
     );
