@@ -156,7 +156,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 As we can see, the size of our directories has been increased.
 
-When running through these steps, if you find that the new pods **do** show the resized volumes as expected, it is still worth running the `kubectl describe` commands shown below to check. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
+When running through these steps, if you find, as expected, that the new pods **do** show the resized volumes, it is still worth running the `kubectl describe` commands shown below to check. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
 
 For postgres
 [source,bash]
