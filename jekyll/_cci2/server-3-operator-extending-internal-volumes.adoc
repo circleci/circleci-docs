@@ -188,7 +188,7 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 
 == Troubleshooting
 
-If you find that after following these steps, the disk size allocated to your data directories have not increased, then you may need to restart your database pods. This, however, will cause some downtime of 1-5mins as the databases restart. You can use the commands below to restart your databases.
+If you find that after following these steps, the disk size allocated to your data directories have not increased, then you may need to restart your database pods. This will cause downtime of 1-5 mins as the databases restart. You can use the commands below to restart your databases.
 
 For postgres
 [source,bash]
