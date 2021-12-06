@@ -15,11 +15,11 @@ export class SnippetFeedback {
     this.wasThisHelpfulContainer = null;
     this.feedbackForm = null;
     this.currCharCount = 0;
-    this.currCharCountElement = this.makeElement({ kind: 'div' });
-    this.renderCharCount(0);
+    this.currCharCountElement = this._makeElement({ kind: 'div' });
+    this._renderCharCount();
     // For tracking user's response to be included in the final feedback form.
     this.wasThisHelpful = null;
-    this.renderWasThisHelpfulPrompt();
+    this._renderWasThisHelpfulPrompt();
   }
 
   static get MAX_CHAR_COUNT() {
@@ -34,20 +34,20 @@ export class SnippetFeedback {
   /**
    * Construct a "Was this helpful" line, and inject it below the code snippet.
    */
-  renderWasThisHelpfulPrompt() {
+  _renderWasThisHelpfulPrompt() {
     this.codeSnippetContainer = this.snippetElement.closest('div.highlight');
     // Create some dom elements:
-    const container = this.makeElement({
+    const container = this._makeElement({
       kind: 'div',
       className: 'was-this-helpful',
     });
-    const textPrompt = this.makeElement({
+    const textPrompt = this._makeElement({
       kind: 'span',
       text: 'Was this helpful?',
     });
-    const slash = this.makeElement({ kind: 'span', text: ' / ' });
-    const yesButton = this.renderYesNoButton({ text: 'Yes' });
-    const noButton = this.renderYesNoButton({ text: 'No' });
+    const slash = this._makeElement({ kind: 'span', text: ' / ' });
+    const yesButton = this._renderYesNoButton({ text: 'Yes' });
+    const noButton = this._renderYesNoButton({ text: 'No' });
     // append dom nodes.
     container.appendChild(textPrompt);
     container.appendChild(yesButton);
@@ -60,17 +60,17 @@ export class SnippetFeedback {
   /**
    * Creates the dom element for the yes/no button in the prompt.
    * */
-  renderYesNoButton({ text }) {
-    let yesBtn = this.makeElement({
+  _renderYesNoButton({ text }) {
+    let yesBtn = this._makeElement({
       kind: 'button',
       text,
       className: 'text-btn',
       onClick: () => {
         this.wasThisHelpful = text;
-        this.trackYesOrNoButton(text);
+        this._trackYesOrNoButton(text);
         // only pop up the form if it has not yet been created.
         if (this.feedbackForm == null) {
-          this.renderFeedbackForm();
+          this._renderFeedbackForm();
         }
       },
     });
@@ -82,20 +82,22 @@ export class SnippetFeedback {
    * Renders a feedback form to the user, provided they have clicked
    * on a "yes" or "no" button in the 'was this helpful' prompt.
    * */
-  renderFeedbackForm() {
+  _renderFeedbackForm() {
+    this.currCharCount = 0;
+    this._renderCharCount();
     if (!this.feedbackForm) {
       // start by constructing our dom elements
-      const container = this.makeElement({ kind: 'div', className: 'form' });
-      const prompt = this.makeElement({
+      const container = this._makeElement({ kind: 'div', className: 'form' });
+      const prompt = this._makeElement({
         kind: 'div',
         text: 'Any way we can improve?',
       });
 
-      const textForm = this.makeElement({
+      const textForm = this._makeElement({
         kind: 'textarea',
       });
 
-      const bottomRow = this.makeElement({
+      const bottomRow = this._makeElement({
         kind: 'div',
         className: 'bottom-row',
       });
@@ -110,15 +112,15 @@ export class SnippetFeedback {
         }
 
         // every time the user types we need to re-render the dom content manually.
-        this.renderCharCount(this.currCharCount);
+        this._renderCharCount();
       });
 
-      const sendButton = this.makeElement({
+      const sendButton = this._makeElement({
         kind: 'button',
         className: 'text-btn',
         text: 'Send',
         onClick: () => {
-          this.trackFormSubmission(textForm.value);
+          this._trackFormSubmission(textForm.value);
           this.wasThisHelpfulContainer.innerHTML =
             '<div>Thank you for your feedback!</div>';
         },
@@ -163,7 +165,8 @@ export class SnippetFeedback {
   /**
    * Render the char count and set it's result on the respective element.
    * */
-  renderCharCount(charCount) {
+  _renderCharCount() {
+    let charCount = this.currCharCount;
     let charCountLimited =
       charCount > SnippetFeedback.MAX_CHAR_COUNT
         ? SnippetFeedback.MAX_CHAR_COUNT
@@ -180,10 +183,10 @@ export class SnippetFeedback {
   // to amplitude.
 
   /**
-   * trackYesOrNoButton sends a trackAction to aplitude.
+   * _trackYesOrNoButton sends a trackAction to aplitude.
    * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
    * */
-  trackYesOrNoButton(yesOrNoString) {
+  _trackYesOrNoButton(yesOrNoString) {
     const date = new Date();
     window.AnalyticsClient.trackAction(
       `docs-snippet-helpful-${yesOrNoString}`,
@@ -196,17 +199,17 @@ export class SnippetFeedback {
   }
 
   /**
-   * `trackFormSubmission` invokes trackAction with a payload of the original
+   * `_trackFormSubmission` invokes trackAction with a payload of the original
    * snippet, the feedback of the user, and the timeOfFormSubmission.
    * */
-  trackFormSubmission(formContent) {
+  _trackFormSubmission(formContent) {
     const date = new Date();
     window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
       originatingSnippet: this.snippetElement.textContent,
       feedback: formContent,
       location: window.location.pathname,
       wasThisHelpful: this.wasThisHelpful,
-      // for diffing this against the time that the trackYesOrNoButton was clicked
+      // for diffing this against the time that the _trackYesOrNoButton was clicked
       // as well as possible the time the copy code button was clicked (TODO add that)
       timeOfFormSubmission: date.toISOString(),
     });
@@ -217,7 +220,7 @@ export class SnippetFeedback {
   /**
    * Construct a dom element, setting classes, text content, class, onclick etc.
    * */
-  makeElement({ kind, text, className, onClick }) {
+  _makeElement({ kind, text, className, onClick }) {
     let el = document.createElement(kind);
     if (text) el.textContent = text;
     if (className) el.classList.add(className);
@@ -240,7 +243,7 @@ function init() {
     experimentContainer: '.hljs',
   }).then((variation) => {
     if (variation === 'treatment') {
-      const snippets = document.querySelectorAll('code.hljs');
+      const snippets = document.querySelectorAll('.code-badge-copy-icon');
       [...snippets].forEach((snippetBlock) => {
         snippetBlock.addEventListener(
           'click',
