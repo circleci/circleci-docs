@@ -1,5 +1,5 @@
 ---
-description: オンプレミス版 CircleCI Server のシステム管理者対象のドキュメントです。 
+description: このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。 
 本書は他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。
 version:
 - Server v2.x
