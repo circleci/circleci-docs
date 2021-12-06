@@ -26,7 +26,6 @@ export class SnippetFeedback {
     return 240;
   }
 
-
   // -- Render functions
   // These are responsible for constructing and attaching new dom elements
   // based on the user's flow in the feedback process.
@@ -104,7 +103,10 @@ export class SnippetFeedback {
       textForm.addEventListener('input', () => {
         this.currCharCount = textForm.value.length;
         if (this.currCharCount >= SnippetFeedback.MAX_CHAR_COUNT - 1) {
-          textForm.value = textForm.value.substring(0, SnippetFeedback.MAX_CHAR_COUNT - 1);
+          textForm.value = textForm.value.substring(
+            0,
+            SnippetFeedback.MAX_CHAR_COUNT - 1,
+          );
         }
 
         // every time the user types we need to re-render the dom content manually.
@@ -163,7 +165,9 @@ export class SnippetFeedback {
    * */
   renderCharCount(charCount) {
     let charCountLimited =
-      charCount > SnippetFeedback.MAX_CHAR_COUNT ? SnippetFeedback.MAX_CHAR_COUNT : charCount;
+      charCount > SnippetFeedback.MAX_CHAR_COUNT
+        ? SnippetFeedback.MAX_CHAR_COUNT
+        : charCount;
     const el = `
         <div class="charCountRow">
           <span>${charCountLimited} / ${SnippetFeedback.MAX_CHAR_COUNT}</span>
