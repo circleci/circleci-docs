@@ -223,7 +223,7 @@ export class SnippetFeedback {
  *
  * */
 function init() {
-  // add event listeners to all code snippets on page
+  // https://app.optimizely.com/v2/projects/16812830475/experiments/20931242909/variations
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_docs_snippet_feedback_experiment_test',
     groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
