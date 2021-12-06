@@ -33,8 +33,8 @@ pipeline.git.revision       | The long (40-character) git SHA that is being buil
 pipeline.git.base_revision  | The long (40-character) git SHA of the build prior to the one being built.
 pipeline.in_setup           | True if the pipeline is in the setup phase, i.e. running a [setup workflow]({{ site.baseurl }}/2.0/dynamic-config/).
 pipeline.trigger_source     | The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`
-pipeline.schedule.name      | The name of the schedule if it's a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources
-pipeline.schedule.id        | The unique id of the schedule if it's a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources
+pipeline.schedule.name      | The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources
+pipeline.schedule.id        | The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources
 {: class="table table-striped"}
 
 Note: While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
