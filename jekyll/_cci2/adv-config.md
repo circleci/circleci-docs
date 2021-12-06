@@ -60,7 +60,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/node:buster-browsers
+      - image: cimg/node-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
