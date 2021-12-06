@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-このドキュメントでは、お客様の CirccleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を説明します。 CircleCI server v2.x supports OAuth and LDAP as authentication methods.
+このドキュメントでは、お客様の CirccleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を説明します。 CircleCI Server v2.xでは、認証方法として OAuth と LDAP が使用可能です。
 
 toc::[]
 
@@ -19,33 +19,33 @@ toc::[]
 
 CircleCI Server におけるデフォルトのユーザー アカウント認証方法は、GitHub.com/GitHub Enterprise 経由の OAuth 認証です。
 
-After your installation is up and running, provide users with a link to access the application - for example `<your-circleci-hostname>.com` – and it will prompt them to set up an account by running through the GitHub/GitHub Enterprise OAuth flow. The application will then redirect them to the CircleCI login screen.
+After your installation is up and running, provide users with a link to access the application - for example `<your-circleci-hostname>.com` – and it will prompt them to set up an account by running through the GitHub/GitHub Enterprise OAuth flow. その後、CircleCI のログイン画面に再び移動するように求められます。
 
-.CircleCI Server v2.x Login Screen
+.CircleCI Server v2.x のログイン画面
 image::server_login.png[Server Login]
 
 == LDAP
-As an alternative to the OAuth/GitHub option, you can choose LDAP authentication. Many organizations use a LDAP server to centralize all their identity information in a single place. This section describes how to enable, configure, and test CircleCI to authenticate users with OpenLDAP or Active Directory credentials.
+OAuth や GitHub の代わりに、LDAP 認証を選択することも可能です。 多くの組織では、LDAP サーバーを使用してすべての ID 情報を一箇所に集めています。 ここでは、OpenLDAP または Active Directory の認証情報を使ってユーザーを認証するために CircleCI を有効化、設定およびテストする方法について説明します。
 
-CAUTION: Enabling LDAP will **disable** other authentication methods. CircleCI **does not recommmend to turn on LDAP Authentication for existing installations that previously had users authenticating with GitHub**. Consider contacting your account team if you need to switch to LDAP for an existing installation.
+CAUTION: LDAP を有効にすると、その他の認証方法が*無効*になります。 CircleCI では、以前は認証に GItHub を使用していたユーザーを持つ既存のサーバーにおいて LDAP 認証を有効にすることは推奨していません。 既存のサーバー上で LDAP に切り替える必要がある場合は、お客様のアカウントチームにご連絡ください。
 
-=== Prerequisites
+=== 前提条件
 
-* Install and configure your OpenLDAP server or Active Directory.
-* Configure GitHub Enterprise or GitHub.com to be the source of organizations and projects to which users have access.
-* Install a new instance of CircleCI server v2.x with no existing users.
+* OpenLDAP サーバーまたは Active Directory のインストールと設定を行います。
+* GitHub Enterprise または GitHub.com をユーザーがアクセスできる組織やプロジェクトのソースとして設定します。
+* 既存のユーザーがいない状態で、CircleCI Server v2.x の新しいインスタンスをインストールします。
 
-=== Configure LDAP Authentication
+=== LDAP 認証の設定
 
-This section provides information to configure LDAP. Below is an example configuration to give an idea of the information types required. The example shows OpenLDAP in use but the settings for Active Directory are comparable:
+ここでは、LDAP を設定する方法を説明します。 以下の構成例により、必要な情報の種類を示します。 この例では OpenLDAP を使用していますが、Active Directory の設定も同様です。
 
-.LDAP Config Example
+.LDAP の設定例
 image::LDAP_example.png[LDAP Example]
 
-These are the steps to configure LDAP in the CircleCI server v2.x management console:
+CircleCI Server v2.x の管理コンソールで LDAP を設定する手順は以下のとおりです。
 
-. Verify access over the LDAP/AD ports to your LDAP/AD servers.
-. Log in as administrator to the Management Console for your newly installed CircleCI instance.
+. LDAP/AD ポートによる LDAP/AD サーバーへのアクセスを確認してください。
+. 新しくインストールした CircleCI インスタンスの 管理コンソールに管理者としてログインします。
 . Navigate to the Settings page (for example `<your-circleci-hostname>.com:8800`) and scroll down to check the Enable LDAP-only Authentication button. Select either OpenLDAP or Active Directory.
 . Fill in your LDAP instance Hostname and port number.
 . Select the encryption type (plain text is insecure and thus not recommended).
