@@ -14,7 +14,6 @@ export class SnippetFeedback {
     this.codeSnippetContainer = null;
     this.wasThisHelpfulContainer = null;
     this.feedbackForm = null;
-    this.maxCharCount = 240;
     this.currCharCount = 0;
     this.currCharCountElement = this.makeElement({ kind: 'div' });
     this.renderCharCount(0);
@@ -22,6 +21,11 @@ export class SnippetFeedback {
     this.wasThisHelpful = null;
     this.renderWasThisHelpfulPrompt();
   }
+
+  static get MAX_CHAR_COUNT() {
+    return 240;
+  }
+
 
   // -- Render functions
   // These are responsible for constructing and attaching new dom elements
@@ -99,8 +103,8 @@ export class SnippetFeedback {
 
       textForm.addEventListener('input', () => {
         this.currCharCount = textForm.value.length;
-        if (this.currCharCount >= this.maxCharCount - 1) {
-          textForm.value = textForm.value.substring(0, this.maxCharCount - 1);
+        if (this.currCharCount >= SnippetFeedback.MAX_CHAR_COUNT - 1) {
+          textForm.value = textForm.value.substring(0, SnippetFeedback.MAX_CHAR_COUNT - 1);
         }
 
         // every time the user types we need to re-render the dom content manually.
@@ -159,10 +163,10 @@ export class SnippetFeedback {
    * */
   renderCharCount(charCount) {
     let charCountLimited =
-      charCount > this.maxCharCount ? this.maxCharCount : charCount;
+      charCount > SnippetFeedback.MAX_CHAR_COUNT ? SnippetFeedback.MAX_CHAR_COUNT : charCount;
     const el = `
         <div class="charCountRow">
-          <span>${charCountLimited} / ${this.maxCharCount}</span>
+          <span>${charCountLimited} / ${SnippetFeedback.MAX_CHAR_COUNT}</span>
         </div>`;
     this.currCharCountElement.innerHTML = el;
   }
@@ -176,12 +180,13 @@ export class SnippetFeedback {
    * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
    * */
   trackYesOrNoButton(yesOrNoString) {
+    const date = new Date();
     window.AnalyticsClient.trackAction(
       `docs-snippet-helpful-${yesOrNoString}`,
       {
         originatingSnippet: this.snippetElement.textContent,
         location: window.location.pathname,
-        timeOfButtonClick: Date.now(),
+        timeOfButtonClick: date.toISOString(),
       },
     );
   }
@@ -191,6 +196,7 @@ export class SnippetFeedback {
    * snippet, the feedback of the user, and the timeOfFormSubmission.
    * */
   trackFormSubmission(formContent) {
+    const date = new Date();
     window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
       originatingSnippet: this.snippetElement.textContent,
       feedback: formContent,
@@ -198,7 +204,7 @@ export class SnippetFeedback {
       wasThisHelpful: this.wasThisHelpful,
       // for diffing this against the time that the trackYesOrNoButton was clicked
       // as well as possible the time the copy code button was clicked (TODO add that)
-      timeOfFormSubmission: Date.now(),
+      timeOfFormSubmission: date.toISOString(),
     });
   }
 
