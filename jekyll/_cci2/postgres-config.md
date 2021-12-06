@@ -45,7 +45,7 @@ jobs:
 
     # Service container image available at `host: localhost`
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -122,7 +122,7 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
+      # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6-jessie
         auth:
