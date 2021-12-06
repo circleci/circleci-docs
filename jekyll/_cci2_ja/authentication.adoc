@@ -1,5 +1,5 @@
 ---
-description: このドキュメントでは、CircleCI Server v2 のユーザーがアカウント認証にアクセスするための様々な方法を紹介します。
+description: このドキュメントでは、お客様の CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。
 version:
 - Server v2.x
 - サーバー管理
@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-このドキュメントでは、お客様の CirccleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を説明します。 CircleCI Server v2.xでは、認証方法として OAuth と LDAP が使用可能です。
+このドキュメントでは、お客様の CirccleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。 CircleCI Server v2.xでは、認証方法として OAuth と LDAP が使用可能です。
 
 toc::[]
 
@@ -25,7 +25,7 @@ After your installation is up and running, provide users with a link to access t
 image::server_login.png[Server Login]
 
 == LDAP
-OAuth や GitHub の代わりに、LDAP 認証を選択することも可能です。 多くの組織では、LDAP サーバーを使用してすべての ID 情報を一箇所に集めています。 ここでは、OpenLDAP または Active Directory の認証情報を使ってユーザーを認証するために CircleCI を有効化、設定およびテストする方法について説明します。
+OAuth や GitHub の代わりに、LDAP 認証を選択することも可能です。 多くの組織では、LDAP サーバーを使用してすべての ID 情報を一箇所に集約しています。 ここでは、OpenLDAP または Active Directory の認証情報を使ってユーザーを認証するために CircleCI を有効化、設定およびテストする方法について説明します。
 
 CAUTION: LDAP を有効にすると、その他の認証方法が*無効*になります。 CircleCI では、以前は認証に GItHub を使用していたユーザーを持つ既存のサーバーにおいて LDAP 認証を有効にすることは推奨していません。 既存のサーバー上で LDAP に切り替える必要がある場合は、お客様のアカウントチームにご連絡ください。
 
