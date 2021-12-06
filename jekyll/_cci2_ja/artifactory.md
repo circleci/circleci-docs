@@ -48,13 +48,13 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
 - run: ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 ```
 
-If you would like to upload JAR files use the following example:
+JAR ファイルをアップロードする場合には、以下の例を使用します。
 
 ```
 - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
-If you would like to upload WAR files use the following example:
+WAR ファイルをアップロードする場合には、以下の例を使用します。
 
 ```
 - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
