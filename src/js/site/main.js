@@ -1,4 +1,5 @@
 import { createPopper } from '@popperjs/core';
+import { highlightURLHash } from './highlightURLHash';
 
 hljs.initHighlightingOnLoad();
 
@@ -395,3 +396,6 @@ $(document).ready(function () {
       }
     });
 });
+
+// Currently this function is only used for the insights table
+$(document).ready(highlightURLHash());
