@@ -1,17 +1,17 @@
 ---
-description: "This document describes the various ways users of your CircleCI server v2 installation can get access to and authenticate their accounts."
+description: このドキュメントでは、CircleCI Server v2 のユーザーがアカウント認証にアクセスするための様々な方法を紹介します。
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理
 ---
-= Authentication
+= 認証
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document describes the various ways users of your CircleCI server v2.x installation can get access and authenticate their accounts. CircleCI server v2.x supports OAuth and LDAP as authentication methods.
+このドキュメントでは、お客様の CirccleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を説明します。 CircleCI server v2.x supports OAuth and LDAP as authentication methods.
 
 toc::[]
 
