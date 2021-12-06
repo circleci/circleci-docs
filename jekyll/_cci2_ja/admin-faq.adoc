@@ -1,11 +1,11 @@
 ---
-description: "This document is intended for system administrators of self-hosted installations of CircleCI Server. 
-This guide, as well as the rest of our docs, are open-source and available on GitHub."
+description: オンプレミス版 CircleCI Server のシステム管理者対象のドキュメントです。 
+本書は他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。
 version:
 - Server v2.x
-- Admin
+- 管理者
 ---
-= Frequently Asked Questions
+= よくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -34,7 +34,7 @@ Yes, refer to the <<nomad#basic-terminology-and-architecture, Introduction to No
 CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の ユーザーページ (`https://[domain-to-your-installation]/admin/users`) で行えます。
 
 [discrete]
-=== Nomad クライアントを安全にシャットダウンさせるには？
+=== Nomad クライアントを安全にシャットダウンするには？
 
 「Nomad クラスタの運用方法」を参照してください。
 
@@ -141,7 +141,7 @@ Services マシンの Replicated ログデータは `/var/log/replicated` 配下
 [discrete]
 ==== 5. 現在実行している Docker コンテナを確認する
 
-Replicated starts many Docker containers to run CircleCI server v2.x, so it can be useful to check what containers are running.
+Replicated は、CircleCI Server v".x を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
 
 実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
 
