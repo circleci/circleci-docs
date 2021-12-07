@@ -33,7 +33,7 @@ things you can do with the CircleCI CLI include:
 - Create, publish, view and manage orbs
 - Managing contexts
 
-This document covers the installation and usage of the CircleCI CLI tool. 
+This document covers the installation and usage of the CircleCI CLI tool.
 
 **Note:**
 this CLI is not available on CircleCI server v2.x installations but the
