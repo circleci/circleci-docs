@@ -1,8 +1,15 @@
 // import { optimize } from 'webpack';
-// import OptimizelyClient from './optimizely';
+import OptimizelyClient from './optimizely';
+// import AnalyticsClient from '../services/analytics.js';
+// import * as optimizelySDK from '@optimizely/optimizely-sdk';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
 // import { default as CookieOrginal } from 'js-cookie';
-// import glob from '../../../jest/global';
+import glob from '../../../jest/global';
+// import {
+//   setUserData,
+// } from '../site/user';
+
+// const jekyllProperties = { test: 'test' };
 
 /*Todo: MOCK FILES
 Setup mock file for promise async
@@ -15,24 +22,60 @@ jest.mock('js-cookie');
 
 describe('Optimizely Service', () => {
   beforeEach(() => {
+    // might need to mock this each time
+    // might not need all tests but specific
+    // this.client = optimizelySDK.createInstance({
+    //   datafile: window.optimizelyDatafile,
+    // });
     jest.resetAllMocks();
-  });
-  it('true is true', () => {
-    expect(true).toBe(true);
   });
 
   describe('getUserId()', () => {
-    //***Need to create a mock file for async promise
-
-    it('test if userData already exists', () => {
-      expect(true).toBe(true);
+    it('test if userData exists but analytics_id undefined', () => {
+      glob.userData = {};
+      const client = new OptimizelyClient();
+      return client.getUserId().then((data) => {
+        expect(data).toBe(null);
+      });
     });
 
-    it('test waiting for userData to populate', () => {
-      expect(true).toBe(true);
+    it('test if userData exists and analytics_id not null', async () => {
+      glob.userData = {
+        analytics_id: 'peanut butter',
+      };
+      const client = new OptimizelyClient();
+      await expect(client.getUserId()).resolves.toBe('peanut butter');
     });
 
-    //Should we add a no userData test?
+    it('test waiting for userData to populate null', async () => {
+      const client = new OptimizelyClient();
+      glob.userData = null;
+
+      setTimeout(() => {
+        glob.userData = {
+          analytics_id: undefined,
+        };
+        const userDataReady = new CustomEvent('userDataReady');
+        window.dispatchEvent(userDataReady);
+      }, 100);
+
+      await expect(client.getUserId()).resolves.toBe(null);
+    });
+
+    it('test if userData does not exist initially and defined later as peanut butter', async () => {
+      const client = new OptimizelyClient();
+      glob.userData = null;
+
+      setTimeout(() => {
+        glob.userData = {
+          analytics_id: 'peanut butter',
+        };
+        const userDataReady = new CustomEvent('userDataReady');
+        window.dispatchEvent(userDataReady);
+      }, 100);
+
+      await expect(client.getUserId()).resolves.toBe('peanut butter');
+    });
   });
 
   //Function used in TrackExperimentViewed
