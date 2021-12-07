@@ -72,7 +72,7 @@ jobs: # a basic unit of work in a run
 
   build: 
     macos:
-      xcode: 11.3.0 # indicate our selected version of Xcode
+      xcode: 12.5.1 # indicate our selected version of Xcode
     steps: 
       - checkout
       - run:
