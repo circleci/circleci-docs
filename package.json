@@ -22,7 +22,8 @@
     "webpack-prod": "NODE_ENV=production webpack --mode=production",
     "webpack-watch": "webpack --watch --mode=development",
     "test": "jest --runInBand",
-    "test:ci": "yarn test --coverage"
+    "test:ci": "yarn test --coverage",
+    "optimize-img": "./scripts/process_images.sh _site/assets/img"
   },
   "repository": {
     "type": "git",
@@ -57,6 +58,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^25.2.2",
     "eslint-plugin-prettier": "^4.0.0",
+    "imagemin-cli": "^7.0.0",
     "jest": "^27.3.1",
     "markdownlint-cli2": "0.0.15",
     "markdownlint-cli2-formatter-json": "0.0.4",
