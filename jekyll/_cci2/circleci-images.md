@@ -15,7 +15,7 @@ version:
   <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>. For information on migrating to next-gen images, see the <a href="https://circleci.com/docs/2.0/next-gen-migration-guide/">Migrating to Next-Gen Convenience Images guide</a>.
 </div>
 
-This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
+This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
 
 * TOC
 {:toc}
@@ -25,8 +25,10 @@ This document provides information about pre-built CircleCI images and a listing
 {:.no_toc}
 
 For convenience, CircleCI maintains several Docker images. These images are
-typically extensions of official Docker images and include tools especially
-useful for CI/CD. This document will provide an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** images convenience images rather than **legacy images** (as explained below).
+typically extensions of official Docker images, and include tools especially
+useful for CI/CD. 
+
+This document provides an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** images (these start `cimg/`) convenience images rather than **legacy images**, as explained below.
 
 If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
 
@@ -127,7 +129,8 @@ in your `.circleci/config.yml`. Consider the example below, which installs a
 specific version of Node.js alongside the Ruby image.
 
 ```yaml
-version: 2.0
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -334,8 +337,8 @@ The following packages are installed via `curl` or other means.
    language, we suggest installing it via [an orb](https://circleci.com/orbs/)
    or a custom Docker image instead.
 
-## Latest image tags by language
-{: #latest-image-tags-by-language }
+## Legacy image tags by language
+{: #legacy-image-tags-by-language }
 
 Below is a list of the latest **legacy** convenience images, sorted by language.
 
