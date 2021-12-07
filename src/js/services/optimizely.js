@@ -2,8 +2,10 @@ import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { isProduction } from '../utils';
 import Cookies from 'js-cookie';
+// testing not working unless add this
+import { forceAll } from '../experiments/forceAll';
 
-const COOKIE_KEY = 'cci-org-analytics-id';
+export const COOKIE_KEY = 'cci-org-analytics-id';
 export const STORAGE_KEY = 'growth-experiments-participated';
 const optimizelyLogLevel = isProduction() ? 'error' : 'info';
 optimizelySDK.setLogLevel(optimizelyLogLevel);
@@ -64,6 +66,7 @@ class OptimizelyClient {
       // it means the current user is not ready to see an experiment and so
       // getVariationName() will resolve to "null"
       const orgId = Cookies.get(COOKIE_KEY) ?? null;
+
       if (!orgId) {
         return resolve(null);
       }

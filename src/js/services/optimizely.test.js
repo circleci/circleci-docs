@@ -1,34 +1,27 @@
-// import { optimize } from 'webpack';
-// import 'jest-localstorage-mock';
 import OptimizelyClient from './optimizely';
 import {
   storeExperimentParticipation,
   isExperimentAlreadyViewed,
   trackExperimentViewed,
   STORAGE_KEY,
+  COOKIE_KEY,
 } from './optimizely';
 import AnalyticsClient from '../services/analytics.js';
-// import * as optimizelySDK from '@optimizely/optimizely-sdk';
-// import * as optimizelySDK from '@optimizely/optimizely-sdk';
-// import { default as CookieOrginal } from 'js-cookie';
 import glob from '../../../jest/global';
-// import {
-//   setUserData,
-// } from '../site/user';
+// import * as optimizelySDK from '@optimizely/optimizely-sdk';
 
-// const jekyllProperties = { test: 'test' };
-
-/*Todo: MOCK FILES
-Setup mock file for promise async
-Figure out localstorage syntax (maybe glob)
-validate parameters
-*/
-
+import { default as CookieOrginal } from 'js-cookie';
 jest.mock('js-cookie');
-// const Cookie = CookieOrginal;
+const Cookie = CookieOrginal;
+
+import { forceAll } from '../experiments/forceAll'; // This will actually be the mock
+jest.mock('../experiments/forceAll', () => ({ forceAll: jest.fn() }));
 
 describe('Optimizely Service', () => {
   const client = new OptimizelyClient();
+  // const clientSDK = optimizelySDK.createInstance({
+  //   datafile: window.optimizelyDatafile,
+  // });
   const userDataReady = new CustomEvent('userDataReady');
 
   const orgId = 'circle';
@@ -156,6 +149,62 @@ describe('Optimizely Service', () => {
     });
   });
 
+  describe('getVariationName()', () => {
+    const options = {
+      experimentKey: 'experiment key',
+      groupExperimentName: 'experiment name',
+      experimentContainer: 'experiment container',
+    };
+
+    afterEach(() => {
+      jest.clearAllMocks();
+      jest.resetAllMocks();
+    });
+
+    it('test forceAll is true return treatment', async () => {
+      forceAll.mockImplementation(() => true);
+      await expect(client.getVariationName(options)).resolves.toBe('treatment');
+      expect(forceAll.mock.calls.length).toBe(1);
+    });
+
+    it('test forceAll is false options null', async () => {
+      const errorObject = { error: 'Missing required options' };
+      forceAll.mockImplementation(() => false);
+      await expect(client.getVariationName(null)).rejects.toEqual(errorObject);
+    });
+
+    it('test forceAll is false valid options no cookie', async () => {
+      forceAll.mockImplementation(() => false);
+      await expect(client.getVariationName(options)).resolves.toBe(null);
+      expect(forceAll.mock.calls.length).toBe(1);
+    });
+
+    it('test forceAll false get cookie has no userId', async () => {
+      forceAll.mockImplementation(() => false);
+      const spy = jest.spyOn(Cookie, 'get').mockImplementation(() => 123);
+      await expect(client.getVariationName(options)).resolves.toBe(null);
+      expect(spy).toHaveBeenCalledWith(COOKIE_KEY);
+    });
+
+    it('test forceAll false get cookie has userId', async () => {
+      glob.userData = null;
+      setTimeout(() => {
+        glob.userData = {
+          analytics_id: 'peanut butter',
+        };
+        window.dispatchEvent(userDataReady);
+      }, 100);
+
+      forceAll.mockImplementation(() => false);
+
+      const spy = jest
+        .spyOn(Cookie, 'get')
+        .mockImplementation(() => ({ userId: 123 }));
+      await expect(client.getVariationName(options)).resolves.toBe(null);
+      expect(spy).toHaveBeenCalledWith(COOKIE_KEY);
+    });
+  });
+
   //Function used in TrackExperimentViewed
   describe('storeExperimentParticipation()', () => {
     beforeEach(() => {
@@ -188,26 +237,6 @@ describe('Optimizely Service', () => {
 
       expect(window.localStorage.setItem).toHaveBeenCalled();
       expect(localStorage.getItem).toBeCalledWith(STORAGE_KEY);
-    });
-  });
-
-  describe('getVariationName()', () => {
-    //***Need to create a mock file for async promise
-
-    it('test parameters are sent', () => {
-      expect(true).toBe(true);
-    });
-
-    it('test orgId from cookie', () => {
-      expect(true).toBe(true);
-    });
-
-    it('test isInGrowthExperimentGroup', () => {
-      expect(true).toBe(true);
-    });
-
-    it('test tackExperimentViewed data', () => {
-      expect(true).toBe(true);
     });
   });
 });
