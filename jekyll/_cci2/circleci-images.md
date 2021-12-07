@@ -26,7 +26,7 @@ This document provides information about pre-built CircleCI images (convenience 
 
 For convenience, CircleCI maintains several Docker images. These images are
 typically extensions of official Docker images, and include tools especially
-useful for CI/CD. 
+useful for CI/CD.
 
 This document provides an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** images (these start `cimg/`) convenience images rather than **legacy images**, as explained below.
 
