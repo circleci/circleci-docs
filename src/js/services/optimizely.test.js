@@ -1,7 +1,12 @@
 // import { optimize } from 'webpack';
 // import 'jest-localstorage-mock';
 import OptimizelyClient from './optimizely';
-import { storeExperimentParticipation, isExperimentAlreadyViewed, trackExperimentViewed, STORAGE_KEY } from './optimizely';
+import {
+  storeExperimentParticipation,
+  isExperimentAlreadyViewed,
+  trackExperimentViewed,
+  STORAGE_KEY,
+} from './optimizely';
 // import AnalyticsClient from '../services/analytics.js';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
@@ -26,6 +31,10 @@ describe('Optimizely Service', () => {
   const client = new OptimizelyClient();
   const userDataReady = new CustomEvent('userDataReady');
 
+  const orgId = 'circle';
+  const experiemntKey = '123';
+  const variationName = 'peanut';
+
   beforeEach(() => {
     // might need to mock this each time
     // might not need all tests but specific
@@ -43,7 +52,7 @@ describe('Optimizely Service', () => {
     beforeEach(() => {
       // Ensure glob is cleaned up after each test
       glob.userData = null;
-    })
+    });
 
     it('test if userData exists but analytics_id undefined', () => {
       glob.userData = {};
@@ -87,20 +96,22 @@ describe('Optimizely Service', () => {
 
   //Function used in TrackExperimentViewed
   describe('isExperimentAlreadyViewed()', () => {
-    it('should be called with options object', () => {
-      //jest.spyOn(localStorage, "getItem");
-      //localStorage.getItem = jest.fn();
-      //expect(localStorage.getItem).toHaveBeenCalled();
-      isExperimentAlreadyViewed();
-      expect(true).toBe(true);
+    beforeEach(() => {
+      // ensure local storage clear
+      window.localStorage.clear();
+    });
+    it('experiment has not been viewed before', () => {
+      storeExperimentParticipation(orgId, experiemntKey + '456', variationName);
+      expect(isExperimentAlreadyViewed(orgId, experiemntKey)).toBe(false);
+    });
+    it('experiment has been viewed before', () => {
+      storeExperimentParticipation(orgId, experiemntKey, variationName);
+      expect(isExperimentAlreadyViewed(orgId, experiemntKey)).toBe(true);
     });
   });
 
   //Function used in TrackExperimentViewed
   describe('storeExperimentParticipation()', () => {
-    const orgId = 'circle'
-    const experiemntKey = '123'
-    const variationName = 'peanut'
     beforeEach(() => {
       // ensure local storage clear
       window.localStorage.clear();
@@ -112,32 +123,32 @@ describe('Optimizely Service', () => {
 
     it('test function returns if data missing and storage null', () => {
       expect(storeExperimentParticipation('', '', '')).toBe();
-      expect(window.localStorage.getItem(STORAGE_KEY)).toBe(null)
-    })
+      expect(window.localStorage.getItem(STORAGE_KEY)).toBe(null);
+    });
 
     it('test localStorage overriten and not null', () => {
-      storeExperimentParticipation('circle', '123', 'peanut');
-      expect(window.localStorage.getItem(STORAGE_KEY)).not.toBe(null)
+      storeExperimentParticipation(orgId, experiemntKey, 'peanut');
+      expect(window.localStorage.getItem(STORAGE_KEY)).not.toBe(null);
     });
-    
+
     it('test localStorage called', () => {
-      jest.spyOn(window.localStorage.__proto__, 'setItem')
-      window.localStorage.__proto__.setItem = jest.fn()
+      jest.spyOn(window.localStorage.__proto__, 'setItem');
+      window.localStorage.__proto__.setItem = jest.fn();
 
       jest.spyOn(window.localStorage.__proto__, 'getItem');
       window.localStorage.__proto__.getItem = jest.fn();
-      
+
       storeExperimentParticipation(orgId, experiemntKey, variationName);
 
       expect(window.localStorage.setItem).toHaveBeenCalled();
-      expect(localStorage.getItem).toBeCalledWith(STORAGE_KEY)
+      expect(localStorage.getItem).toBeCalledWith(STORAGE_KEY);
     });
   });
 
   //Function used in getVariationName
   describe('trackExperimentViewed()', () => {
     it('check experimentContainer', () => {
-      trackExperimentViewed()
+      trackExperimentViewed();
       expect(true).toBe(true);
     });
 
