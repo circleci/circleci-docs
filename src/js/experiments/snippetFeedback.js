@@ -232,8 +232,6 @@ export class SnippetFeedback {
 
 /**
  * init queries the dom for all snipppets
- * TODO(blocked): when that snippet's COPY CODE button is clicked... (waiting for graduation of copy code buttons)
- *
  * */
 function init() {
   // https://app.optimizely.com/v2/projects/16812830475/experiments/20931242909/variations

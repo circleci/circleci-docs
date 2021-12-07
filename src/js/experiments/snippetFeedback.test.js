@@ -74,9 +74,10 @@ describe('Snippet Feedback class', () => {
     expect(sf.wasThisHelpfulContainer.children.length).toBe(5);
   });
 
-  test('renderCharCount contains the proper innerHTML', () => {
+  test('_renderCharCount contains the proper innerHTML', () => {
     let sf = new SnippetFeedback(snippetElement);
-    sf.renderCharCount(10);
+    sf.currCharCount = 10;
+    sf._renderCharCount();
     // correct whitespace is required here, sadly:
     expect(sf.currCharCountElement.innerHTML).toBe(`
         <div class="charCountRow">
@@ -84,9 +85,10 @@ describe('Snippet Feedback class', () => {
         </div>`);
   });
 
-  test('renderCharCount limits charCount if it exceed set limit.', () => {
+  test('_renderCharCount limits charCount if it exceed set limit.', () => {
     let sf = new SnippetFeedback(snippetElement);
-    sf.renderCharCount(1000);
+    sf.currCharCount = 1000;
+    sf._renderCharCount();
     // correct whitespace is required here, sadly:
     expect(sf.currCharCountElement.innerHTML).toBe(`
         <div class="charCountRow">
