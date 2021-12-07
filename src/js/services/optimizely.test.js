@@ -1,5 +1,7 @@
 // import { optimize } from 'webpack';
+// import 'jest-localstorage-mock';
 import OptimizelyClient from './optimizely';
+import { storeExperimentParticipation, isExperimentAlreadyViewed, trackExperimentViewed, STORAGE_KEY } from './optimizely';
 // import AnalyticsClient from '../services/analytics.js';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
@@ -21,6 +23,9 @@ jest.mock('js-cookie');
 // const Cookie = CookieOrginal;
 
 describe('Optimizely Service', () => {
+  const client = new OptimizelyClient();
+  const userDataReady = new CustomEvent('userDataReady');
+
   beforeEach(() => {
     // might need to mock this each time
     // might not need all tests but specific
@@ -30,10 +35,18 @@ describe('Optimizely Service', () => {
     jest.resetAllMocks();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('getUserId()', () => {
+    beforeEach(() => {
+      // Ensure glob is cleaned up after each test
+      glob.userData = null;
+    })
+
     it('test if userData exists but analytics_id undefined', () => {
       glob.userData = {};
-      const client = new OptimizelyClient();
       return client.getUserId().then((data) => {
         expect(data).toBe(null);
       });
@@ -43,19 +56,16 @@ describe('Optimizely Service', () => {
       glob.userData = {
         analytics_id: 'peanut butter',
       };
-      const client = new OptimizelyClient();
       await expect(client.getUserId()).resolves.toBe('peanut butter');
     });
 
     it('test waiting for userData to populate null', async () => {
-      const client = new OptimizelyClient();
       glob.userData = null;
 
       setTimeout(() => {
         glob.userData = {
           analytics_id: undefined,
         };
-        const userDataReady = new CustomEvent('userDataReady');
         window.dispatchEvent(userDataReady);
       }, 100);
 
@@ -63,14 +73,11 @@ describe('Optimizely Service', () => {
     });
 
     it('test if userData does not exist initially and defined later as peanut butter', async () => {
-      const client = new OptimizelyClient();
       glob.userData = null;
-
       setTimeout(() => {
         glob.userData = {
           analytics_id: 'peanut butter',
         };
-        const userDataReady = new CustomEvent('userDataReady');
         window.dispatchEvent(userDataReady);
       }, 100);
 
@@ -84,31 +91,53 @@ describe('Optimizely Service', () => {
       //jest.spyOn(localStorage, "getItem");
       //localStorage.getItem = jest.fn();
       //expect(localStorage.getItem).toHaveBeenCalled();
+      isExperimentAlreadyViewed();
       expect(true).toBe(true);
     });
   });
 
   //Function used in TrackExperimentViewed
   describe('storeExperimentParticipation()', () => {
-    it('test localStorage key', () => {
-      //jest.spyOn(localStorage, "getItem");
-      //localStorage.getItem = jest.fn();
-      //expect(localStorage.getItem).toHaveBeenCalled();
-      expect(true).toBe(true);
+    const orgId = 'circle'
+    const experiemntKey = '123'
+    const variationName = 'peanut'
+    beforeEach(() => {
+      // ensure local storage clear
+      window.localStorage.clear();
     });
 
-    it('test experiments value', () => {
-      expect(true).toBe(true);
+    afterEach(() => {
+      jest.resetAllMocks();
     });
 
-    it('test set localStorage key', () => {
-      expect(true).toBe(true);
+    it('test function returns if data missing and storage null', () => {
+      expect(storeExperimentParticipation('', '', '')).toBe();
+      expect(window.localStorage.getItem(STORAGE_KEY)).toBe(null)
+    })
+
+    it('test localStorage overriten and not null', () => {
+      storeExperimentParticipation('circle', '123', 'peanut');
+      expect(window.localStorage.getItem(STORAGE_KEY)).not.toBe(null)
+    });
+    
+    it('test localStorage called', () => {
+      jest.spyOn(window.localStorage.__proto__, 'setItem')
+      window.localStorage.__proto__.setItem = jest.fn()
+
+      jest.spyOn(window.localStorage.__proto__, 'getItem');
+      window.localStorage.__proto__.getItem = jest.fn();
+      
+      storeExperimentParticipation(orgId, experiemntKey, variationName);
+
+      expect(window.localStorage.setItem).toHaveBeenCalled();
+      expect(localStorage.getItem).toBeCalledWith(STORAGE_KEY)
     });
   });
 
   //Function used in getVariationName
   describe('trackExperimentViewed()', () => {
     it('check experimentContainer', () => {
+      trackExperimentViewed()
       expect(true).toBe(true);
     });
 
