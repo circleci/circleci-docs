@@ -19,7 +19,7 @@ CircleCI offers several execution environments. We call these **executors**. An 
 {: #docker }
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>. For information on migrating to next-gen images, see the <a href="https://circleci.com/docs/2.0/next-gen-migration-guide/">Migrating to Next-Gen Convenience Images guide</a>.
 </div>
 
 ```
