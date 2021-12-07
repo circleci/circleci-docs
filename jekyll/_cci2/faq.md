@@ -27,45 +27,31 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 ## Migration
 {: #migration }
 
+Visit the [Migration Introduction]({{ site.baseurl }}//2.0/migration-intro/) doc which links out to migration guides for various platforms.
+
 ### How do I migrate from Jenkins to CircleCI?
 {: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
-Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
-
-```yaml
-    steps:
-      - run: echo "Add any bash command you want here"
-      - run:
-          command: |
-            echo "Arbitrary multi-line bash"
-            echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
-```
 
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
-### Does CircleCI run inference commands?
-{: #does-circleci-run-inference-commands }
-{:.no_toc}
-CircleCI does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
-
 ### Can I use CircleCI without creating base images?
-{: #can-i-use-circleci-20-without-creating-base-images }
+{: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
-See the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) section for the latest image to use. These images have the same content as the image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it is less than ideal for local testing.
+Yes, CircleCI provide a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
-The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
+For the `machine` executor, see the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) list.
 
-Here’s a [list of languages and tools]({{site.baseurl}}/2.0/executor-intro/) included in the image.
+For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
 
 ## Hosting
 {: #hosting }
 
-### Is CircleCI available to enterprise clients?
-{: #is-circleci-20-available-to-enterprise-clients }
+### Is CircleCI available to enterprise customers?
+{: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-Yes, CircleCI is available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions and [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
+Yes, CircleCI server is available for installation on AWS or GCP. See the [CircleCI Server v3.x Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions, and you can [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
 
 ### What are the differences between CircleCI’s hosting options?
 {: #what-are-the-differences-between-circlecis-hosting-options }
