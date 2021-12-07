@@ -99,7 +99,7 @@ en:
           hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
-        - name: Migrating to Nex-Gen Images
+        - name: Migrating to Next-Gen Images
           link: 2.0/next-gen-migration-guide/
         - name: Docker compose
           link: 2.0/docker-compose/

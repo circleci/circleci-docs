@@ -12,7 +12,7 @@ version:
 ---
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>. For information on migrating to next-gen images, see the <a href="https://circleci.com/docs/2.0/next-gen-migration-guide/">Migrating to Next-Gen Convenience Images guide</a>.
+  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
 This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
@@ -28,7 +28,7 @@ For convenience, CircleCI maintains several Docker images. These images are
 typically extensions of official Docker images, and include tools especially
 useful for CI/CD.
 
-This document provides an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** images (these start `cimg/`) convenience images rather than **legacy images**, as explained below.
+This document provides an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** convenience images (these start `cimg/`) rather than **legacy images**, as explained below.
 
 If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
 
