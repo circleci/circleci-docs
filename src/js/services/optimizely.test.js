@@ -7,7 +7,7 @@ import {
   trackExperimentViewed,
   STORAGE_KEY,
 } from './optimizely';
-// import AnalyticsClient from '../services/analytics.js';
+import AnalyticsClient from '../services/analytics.js';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
 // import * as optimizelySDK from '@optimizely/optimizely-sdk';
 // import { default as CookieOrginal } from 'js-cookie';
@@ -41,11 +41,12 @@ describe('Optimizely Service', () => {
     // this.client = optimizelySDK.createInstance({
     //   datafile: window.optimizelyDatafile,
     // });
-    jest.resetAllMocks();
+    window.localStorage.clear();
   });
 
   afterEach(() => {
     jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
   describe('getUserId()', () => {
@@ -94,7 +95,7 @@ describe('Optimizely Service', () => {
     });
   });
 
-  //Function used in TrackExperimentViewed
+  // Function used in TrackExperimentViewed
   describe('isExperimentAlreadyViewed()', () => {
     beforeEach(() => {
       // ensure local storage clear
@@ -107,6 +108,51 @@ describe('Optimizely Service', () => {
     it('experiment has been viewed before', () => {
       storeExperimentParticipation(orgId, experiemntKey, variationName);
       expect(isExperimentAlreadyViewed(orgId, experiemntKey)).toBe(true);
+    });
+  });
+
+  //Function used in getVariationName
+  describe('trackExperimentViewed()', () => {
+    beforeEach(() => {
+      global.AnalyticsClient = AnalyticsClient;
+      window.localStorage.clear();
+      jest.clearAllMocks();
+    });
+
+    afterEach(() => {
+      delete global.AnalyticsClient;
+      jest.resetAllMocks();
+    });
+
+    it('expect trackExperimentViewed to have bene viewed', () => {
+      storeExperimentParticipation(orgId, experiemntKey, variationName);
+      expect(isExperimentAlreadyViewed(orgId, experiemntKey)).toBe(true);
+
+      const spy = jest.spyOn(window.AnalyticsClient, 'trackAction');
+      trackExperimentViewed(
+        orgId,
+        experiemntKey,
+        ['container item'],
+        '5',
+        variationName,
+        '5',
+        '5',
+      );
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('expect trackExperimentViewed to have not been viewed', () => {
+      const spy = jest.spyOn(window.AnalyticsClient, 'trackAction');
+      trackExperimentViewed(
+        orgId,
+        experiemntKey,
+        ['container item'],
+        '5',
+        variationName,
+        '5',
+        '5',
+      );
+      expect(spy).toHaveBeenCalled();
     });
   });
 
@@ -142,26 +188,6 @@ describe('Optimizely Service', () => {
 
       expect(window.localStorage.setItem).toHaveBeenCalled();
       expect(localStorage.getItem).toBeCalledWith(STORAGE_KEY);
-    });
-  });
-
-  //Function used in getVariationName
-  describe('trackExperimentViewed()', () => {
-    it('check experimentContainer', () => {
-      trackExperimentViewed();
-      expect(true).toBe(true);
-    });
-
-    it('check isExperimentAlreadyViewed on experimentKey', () => {
-      expect(true).toBe(true);
-    });
-
-    it('set trackAction Experiment Viewed properties', () => {
-      expect(true).toBe(true);
-    });
-
-    it('store ExperimentParticipation using function', () => {
-      expect(true).toBe(true);
     });
   });
 
