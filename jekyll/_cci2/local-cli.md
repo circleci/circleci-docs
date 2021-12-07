@@ -28,12 +28,14 @@ advanced and powerful tools from the comfort of your terminal. Some of the
 things you can do with the CircleCI CLI include:
 
 - Debug and validate your CI config
-- Run jobs locally
+- Run jobs locally (currently unsupported on Windows)
 - Query CircleCI's API
-- Create, publish, view and manage Orbs
+- Create, publish, view and manage orbs
 - Managing contexts
 
-This document will cover the installation and usage of the CLI tool. **Note:**
+This document covers the installation and usage of the CircleCI CLI tool. 
+
+**Note:**
 this CLI is not available on CircleCI server v2.x installations but the
 legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 
@@ -43,7 +45,7 @@ legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 ## Installation
 {: #installation }
 
-There are multiple installation options for the CLI.
+There are multiple installation options for the CircleCI CLI.
 
 **Note**: If you have already installed the CLI prior to October 2018 you may need to do an extra one-time step to switch to the new CLI. See [upgrading instructions below](#updating-the-legacy-cli).
 
