@@ -29,7 +29,7 @@ describe('Optimizely Service', () => {
     experimentKey: 'experiment_key',
     groupExperimentName: 'experiment_group_test',
     experimentContainer: 'experiment_container',
-  }
+  };
 
   beforeEach(() => {
     window.localStorage.clear();
@@ -57,7 +57,9 @@ describe('Optimizely Service', () => {
       glob.userData = {
         analytics_id: '00000000-0000-0000-0000-000000000000',
       };
-      await expect(client.getUserId()).resolves.toBe('00000000-0000-0000-0000-000000000000');
+      await expect(client.getUserId()).resolves.toBe(
+        '00000000-0000-0000-0000-000000000000',
+      );
     });
 
     it('test waiting for userData to populate null', async () => {
@@ -82,7 +84,9 @@ describe('Optimizely Service', () => {
         window.dispatchEvent(userDataReady);
       }, 100);
 
-      await expect(client.getUserId()).resolves.toBe('00000000-0000-0000-0000-000000000000');
+      await expect(client.getUserId()).resolves.toBe(
+        '00000000-0000-0000-0000-000000000000',
+      );
     });
   });
 
@@ -184,37 +188,42 @@ describe('Optimizely Service', () => {
           analytics_id: '11111111-1111-1111-1111-111111111111',
         };
         forceAll.mockImplementation(() => false);
-        jest
-        .spyOn(Cookie, 'get')
-        .mockImplementation(() => ({ userId: '11111111-1111-1111-1111-111111111111' }));
+        jest.spyOn(Cookie, 'get').mockImplementation(() => ({
+          userId: '11111111-1111-1111-1111-111111111111',
+        }));
       });
 
       it('GrowthExperiment is control', () => {
         jest
-        .spyOn(client.client, 'getVariation').mockImplementationOnce(() => { return 'control' });
-        return client.getVariationName(options).then(data => {
-          expect(data).toBe(null)
-        })
+          .spyOn(client.client, 'getVariation')
+          .mockImplementationOnce(() => 'control');
+        return client.getVariationName(options).then((data) => {
+          expect(data).toBe(null);
+        });
       });
 
       it('GrowthExperiment is treatment and variationName is control', () => {
         jest
-        .spyOn(client.client, 'getVariation').mockImplementationOnce(() => { return 'treatment' });
+          .spyOn(client.client, 'getVariation')
+          .mockImplementationOnce(() => 'treatment');
         jest
-        .spyOn(client.client, 'getVariation').mockImplementationOnce(() => { return 'control' });
-        return client.getVariationName(options).then(data => {
-          expect(data).toBe('control')
-        })
+          .spyOn(client.client, 'getVariation')
+          .mockImplementationOnce(() => 'control');
+        return client.getVariationName(options).then((data) => {
+          expect(data).toBe('control');
+        });
       });
 
       it('GrowthExperiment is treatment and variationName is treatment', () => {
         jest
-        .spyOn(client.client, 'getVariation').mockImplementationOnce(() => { return 'treatment' });
+          .spyOn(client.client, 'getVariation')
+          .mockImplementationOnce(() => 'treatment');
         jest
-        .spyOn(client.client, 'getVariation').mockImplementationOnce(() => { return 'treatment' });
-        return client.getVariationName(options).then(data => {
-          expect(data).toBe('treatment')
-        })
+          .spyOn(client.client, 'getVariation')
+          .mockImplementationOnce(() => 'treatment');
+        return client.getVariationName(options).then((data) => {
+          expect(data).toBe('treatment');
+        });
       });
     });
   });
