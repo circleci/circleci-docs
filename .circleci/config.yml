@@ -98,10 +98,7 @@ workflows:
             - js_build
             - build_server_pdfs
             - build_api_docs
-      - optimize-images: 
-          - run: 
-              name: Compress images with imagemin 
-              command: yarn optimize-img
+      - optimize-images              
           # filters: 
           #   branches:
           #     only: master 
@@ -448,3 +445,16 @@ jobs:
       - run:
           name: Call Datadog CLI
           command: yarn datadog-synthetics-prod
+  optimize-images:
+    executor:
+      name: node/default
+      tag: '14.17.3'
+    description: Compressing images with imagemin for prod
+    working_directory: *workspace_root
+    steps:
+      - *attach_workspace
+      - run:
+          name: optimize images
+          command: yarn optimize-img
+
+    
