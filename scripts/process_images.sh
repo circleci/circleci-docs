@@ -17,9 +17,9 @@ process_images_recurse() {
 # $# refers to length of all the arguments 
 # -ne 1 checks if the arguments will be one 
 # [[ $# -ne 1 ]] will evaluate into either true or false 
-if [ ! -d "$1" ]; then
-    echo "cant find directory"
-fi
+# if [ ! -d "$1" ]; then
+#     echo "cant find directory"
+# fi
 
 if [[ $# -ne 1 ]]; then 
     echo "Usage: $0 <input folder>" # sh version of console log 
