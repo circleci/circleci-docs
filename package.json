@@ -59,6 +59,7 @@
     "eslint-plugin-jest": "^25.2.2",
     "eslint-plugin-prettier": "^4.0.0",
     "imagemin-cli": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
     "jest": "^27.3.1",
     "markdownlint-cli2": "0.0.15",
     "markdownlint-cli2-formatter-json": "0.0.4",
