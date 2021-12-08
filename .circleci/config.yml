@@ -98,7 +98,9 @@ workflows:
             - js_build
             - build_server_pdfs
             - build_api_docs
-      - optimize-images              
+      - optimize-images:
+          requires:
+            - build              
           # filters: 
           #   branches:
           #     only: master 
