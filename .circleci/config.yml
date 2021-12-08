@@ -455,6 +455,12 @@ jobs:
     working_directory: *workspace_root
     steps:
       - *attach_workspace
+      - run: 
+          name: move to correct workspace 
+          command: cd /tmp/workspace 
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
       - run:
           name: optimize images
           command: yarn optimize-img
