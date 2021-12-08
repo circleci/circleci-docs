@@ -183,10 +183,10 @@ export class SnippetFeedback {
    * */
   _renderCharCount() {
     let charCount = this.currCharCount;
-    let charCountLimited = Math.min(SnippetFeedback.MAX_CHAR_COUNT, charCount)
-      charCount > SnippetFeedback.MAX_CHAR_COUNT
-        ? SnippetFeedback.MAX_CHAR_COUNT
-        : charCount;
+    let charCountLimited = Math.min(SnippetFeedback.MAX_CHAR_COUNT, charCount);
+    charCount > SnippetFeedback.MAX_CHAR_COUNT
+      ? SnippetFeedback.MAX_CHAR_COUNT
+      : charCount;
     const el = `
         <div class="charCountRow">
           <span>${charCountLimited} / ${SnippetFeedback.MAX_CHAR_COUNT}</span>
