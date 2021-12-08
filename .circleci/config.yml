@@ -98,6 +98,13 @@ workflows:
             - js_build
             - build_server_pdfs
             - build_api_docs
+      - optimize-images: 
+          - run: 
+              name: Compress images with imagemin 
+              command: yarn optimize-img
+          # filters: 
+          #   branches:
+          #     only: master 
       - datadog-synthetics-ci:
           context:
             - web-ui-datadog
