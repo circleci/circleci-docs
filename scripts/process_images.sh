@@ -1,29 +1,30 @@
-
 #!/bin/bash 
 process_images_recurse() {
-    for i in "$1"/*;do # gives first level of dir
-        if [ -d "$i" ];then # for loop, -d is special flag that corresponds to dir
+    for i in "$1"/*;do # get first level of dir
+        if [ -d "$i" ];then # for loop, -d is flag that corresponds to dir
             process_images_recurse "$i"
-        elif [ -f "$i" ]; then # else statement, -f corresponds to file 
+        elif [ -f "$i" ]; then # -f corresponds to file 
             echo "processing: $i"
             mv $i $i.__tmp__
-            imagemin --plugin.pngquant.quality={0.7,0.85} $i.__tmp__ > $i # > means take .__tmp image and replace with the new compressed image 
+            # replace .__tmp__ image with compressed original image 
+            # pngquant quality range .7 - .85
+            imagemin --plugin.pngquant.quality={0.7,0.85} $i.__tmp__ > $i 
             rm $i.__tmp__
         fi
     done
 }
 
-# conditional statement in shell
+# check for if directory exists
+if [ ! -d "$1" ]; then
+    echo "cant find directory"
+fi
+
 # $# refers to length of all the arguments 
 # -ne 1 checks if the arguments will be one 
-# [[ $# -ne 1 ]] will evaluate into either true or false 
-# if [ ! -d "$1" ]; then
-#     echo "cant find directory"
-# fi
-
+# [[ $# -ne 1 ]] will evaluate to boolean
 if [[ $# -ne 1 ]]; then 
-    echo "Usage: $0 <input folder>" # sh version of console log 
-    exit 2 # exit code: refers to an error for misuse of shell syntax 
+    echo "Usage: $0 <input folder>" 
+    exit 2 
 fi 
 
 # invoking here with one argument (first argument you pass)
