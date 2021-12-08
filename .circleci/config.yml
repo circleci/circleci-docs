@@ -205,6 +205,7 @@ jobs:
             mv scripts/datadog-synthetics-preview.js /tmp/workspace/scripts/datadog-synthetics-preview.js
             mv scripts/datadog-synthetics-ci.sh /tmp/workspace/scripts/datadog-synthetics-ci.sh
             mv scripts/postinstall.sh /tmp/workspace/scripts/postinstall.sh
+            mv scripts/process_images.sh /tmp/workspace/scripts/process_images.sh
       - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
