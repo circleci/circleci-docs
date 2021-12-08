@@ -96,6 +96,12 @@ The runner consists of two components: the launch agent and the task agent.
 
 The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
 
+== Runner concurrency
+
+You can break your single build process into different steps and run them concurrently (at the same time).
+
+While there are limits to the number of registered runners you can have, the limit applies to the total number of runner jobs across resource classes. With this flexibility you can use multiple resource classes to deploy work to runners to get a better throughput.
+
 == Debugging with SSH
 
 CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
