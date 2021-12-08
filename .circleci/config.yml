@@ -118,6 +118,7 @@ workflows:
       - deploy-preview:
           requires:
             - datadog-synthetics-ci
+            - optimize-images
           filters:
             branches:
               only: /.*-preview/
