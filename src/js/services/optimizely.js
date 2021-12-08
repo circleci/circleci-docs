@@ -2,8 +2,6 @@ import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { isProduction } from '../utils';
 import Cookies from 'js-cookie';
-// testing not working unless add this
-import { forceAll } from '../experiments/forceAll';
 
 export const COOKIE_KEY = 'cci-org-analytics-id';
 export const STORAGE_KEY = 'growth-experiments-participated';

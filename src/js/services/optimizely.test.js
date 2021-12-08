@@ -12,9 +12,6 @@ import { default as CookieOrginal } from 'js-cookie';
 jest.mock('js-cookie');
 const Cookie = CookieOrginal;
 
-import { forceAll } from '../experiments/forceAll'; // This will actually be the mock
-jest.mock('../experiments/forceAll', () => ({ forceAll: jest.fn() }));
-
 describe('Optimizely Service', () => {
   const client = new OptimizelyClient();
   const userDataReady = new CustomEvent('userDataReady');
@@ -161,26 +158,24 @@ describe('Optimizely Service', () => {
     });
 
     it('test forceAll is true return treatment', async () => {
-      forceAll.mockImplementation(() => true);
+      glob.forceAll = () => true;
       await expect(client.getVariationName(options)).resolves.toBe('treatment');
-      expect(forceAll.mock.calls.length).toBe(1);
     });
 
     it('test forceAll is false but options null', async () => {
       const errorObject = { error: 'Missing required options' };
-      forceAll.mockImplementation(() => false);
+      glob.forceAll = () => false;
       await expect(client.getVariationName(null)).rejects.toEqual(errorObject);
     });
 
     it('test forceAll is false, with valid options but no cookie', async () => {
-      forceAll.mockImplementation(() => false);
+      glob.forceAll = () => false;
       await expect(client.getVariationName(options)).resolves.toBe(null);
-      expect(forceAll.mock.calls.length).toBe(1);
     });
 
     it('test forceAll false, with valid options, get cookie but has no userId', async () => {
       const spy = jest.spyOn(Cookie, 'get').mockImplementation(() => 123);
-      forceAll.mockImplementation(() => false);
+      glob.forceAll = () => false;
       await expect(client.getVariationName(options)).resolves.toBe(null);
       expect(spy).toHaveBeenCalledWith(COOKIE_KEY);
     });
@@ -190,7 +185,7 @@ describe('Optimizely Service', () => {
         glob.userData = {
           analytics_id: '11111111-1111-1111-1111-111111111111',
         };
-        forceAll.mockImplementation(() => false);
+        glob.forceAll = () => false;
         jest.spyOn(Cookie, 'get').mockImplementation(() => ({
           userId: '11111111-1111-1111-1111-111111111111',
         }));
