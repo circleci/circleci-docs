@@ -374,9 +374,8 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 以下の手順では、S3 互換オブジェクト ストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
-また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 
-これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[[こちら]] の Velero ドキュメントを元にしています。
+これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[こちら] の Velero ドキュメントを元にしています。
 
 === 手順 1 - `mc` クライアントの設定
 
