@@ -7,7 +7,7 @@ process_images_recurse() {
         elif [ -f "$i" ]; then # else statement, -f corresponds to file 
             echo "processing: $i"
             mv $i $i.__tmp__
-            imagemin $i.__tmp__ > $i # > means take .__tmp image and replace with the new compressed image 
+            imagemin --plugin.pngquant.quality={0.7,0.85} $i.__tmp__ > $i # > means take .__tmp image and replace with the new compressed image 
             rm $i.__tmp__
         fi
     done
@@ -24,7 +24,7 @@ fi
 if [[ $# -ne 1 ]]; then 
     echo "Usage: $0 <input folder>" # sh version of console log 
     exit 2 # exit code: refers to an error for misuse of shell syntax 
-fi # end block of an if statement 
+fi 
 
 # invoking here with one argument (first argument you pass)
 process_images_recurse $1
