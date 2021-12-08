@@ -448,6 +448,7 @@ jobs:
       - run:
           name: Call Datadog CLI
           command: yarn datadog-synthetics-prod
+          
   optimize-images:
     executor:
       name: node/default
@@ -463,7 +464,11 @@ jobs:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
       - run:
-          name: optimize images
+          name: Optimize Images
           command: yarn optimize-img
+      - persist_to_workspace:
+          root: ~/circleci-docs/jekyll/
+          paths:
+            - _site/*
 
     
