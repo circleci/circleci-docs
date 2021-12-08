@@ -97,7 +97,6 @@ describe('Optimizely Service', () => {
       window.localStorage.clear();
     });
     it('experiment has not been viewed before', () => {
-      storeExperimentParticipation(orgId, experimentKey + '456', variationName);
       expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(false);
     });
     it('experiment has been viewed before', () => {
