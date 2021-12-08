@@ -8,14 +8,16 @@
  *
  * */
 export class SnippetFeedback {
-  constructor(snippetElement) {
+  constructor(snippetElement, snippetIndex) {
     // Dom elements
     this.snippetElement = snippetElement;
+    this.snippetIndex = snippetIndex + 1; // let's offset 0 based indexes for data analysis.
     this.codeSnippetContainer = null;
     this.wasThisHelpfulContainer = null;
     this.feedbackForm = null;
     this.currCharCount = 0;
     this.currCharCountElement = this._makeElement({ kind: 'div' });
+    this.formIsValid = false;
     this._renderCharCount();
     // For tracking user's response to be included in the final feedback form.
     this.wasThisHelpful = null;
@@ -43,6 +45,7 @@ export class SnippetFeedback {
     });
     const textPrompt = this._makeElement({
       kind: 'span',
+      className: 'prompt',
       text: 'Was this helpful?',
     });
     const slash = this._makeElement({ kind: 'span', text: ' / ' });
@@ -90,6 +93,7 @@ export class SnippetFeedback {
       const container = this._makeElement({ kind: 'div', className: 'form' });
       const prompt = this._makeElement({
         kind: 'div',
+        className: 'can-we-improve',
         text: 'Any way we can improve?',
       });
 
@@ -102,8 +106,31 @@ export class SnippetFeedback {
         className: 'bottom-row',
       });
 
+      const sendButton = this._makeElement({
+        kind: 'button',
+        className: 'send-btn invalid', // send btn starts invalid as there is no user feedback yet.
+        text: 'Send',
+        onClick: () => {
+          if (this.formIsValid) {
+            this._trackFormSubmission(textForm.value);
+            this.wasThisHelpfulContainer.innerHTML =
+              '<div>Thank you for your feedback!</div>';
+          }
+        },
+      });
+
       textForm.addEventListener('input', () => {
         this.currCharCount = textForm.value.length;
+        this.formIsValid = this.currCharCount > 0 ? true : false;
+
+        if (this.formIsValid) {
+          sendButton.classList.add('valid');
+          sendButton.classList.remove('invalid');
+        } else {
+          sendButton.classList.remove('valid');
+          sendButton.classList.add('invalid');
+        }
+
         if (this.currCharCount >= SnippetFeedback.MAX_CHAR_COUNT - 1) {
           textForm.value = textForm.value.substring(
             0,
@@ -113,17 +140,6 @@ export class SnippetFeedback {
 
         // every time the user types we need to re-render the dom content manually.
         this._renderCharCount();
-      });
-
-      const sendButton = this._makeElement({
-        kind: 'button',
-        className: 'text-btn',
-        text: 'Send',
-        onClick: () => {
-          this._trackFormSubmission(textForm.value);
-          this.wasThisHelpfulContainer.innerHTML =
-            '<div>Thank you for your feedback!</div>';
-        },
       });
 
       // build the dom nodes.
@@ -167,7 +183,7 @@ export class SnippetFeedback {
    * */
   _renderCharCount() {
     let charCount = this.currCharCount;
-    let charCountLimited =
+    let charCountLimited = Math.min(SnippetFeedback.MAX_CHAR_COUNT, charCount)
       charCount > SnippetFeedback.MAX_CHAR_COUNT
         ? SnippetFeedback.MAX_CHAR_COUNT
         : charCount;
@@ -183,17 +199,15 @@ export class SnippetFeedback {
   // to amplitude.
 
   /**
-   * _trackYesOrNoButton sends a trackAction to aplitude.
+   * _trackYesOrNoButton sends a trackAction to amplitude.
    * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
    * */
   _trackYesOrNoButton(yesOrNoString) {
-    const date = new Date();
     window.AnalyticsClient.trackAction(
       `docs-snippet-helpful-${yesOrNoString}`,
       {
-        originatingSnippet: this.snippetElement.textContent,
+        originatingSnippetIndex: this.snippetIndex,
         location: window.location.pathname,
-        timeOfButtonClick: date.toISOString(),
       },
     );
   }
@@ -203,15 +217,11 @@ export class SnippetFeedback {
    * snippet, the feedback of the user, and the timeOfFormSubmission.
    * */
   _trackFormSubmission(formContent) {
-    const date = new Date();
     window.AnalyticsClient.trackAction(`docs-snippet-helpful-form-submission`, {
-      originatingSnippet: this.snippetElement.textContent,
+      originatingSnippetIndex: this.snippetIndex,
       feedback: formContent,
       location: window.location.pathname,
       wasThisHelpful: this.wasThisHelpful,
-      // for diffing this against the time that the _trackYesOrNoButton was clicked
-      // as well as possible the time the copy code button was clicked (TODO add that)
-      timeOfFormSubmission: date.toISOString(),
     });
   }
 
@@ -223,7 +233,7 @@ export class SnippetFeedback {
   _makeElement({ kind, text, className, onClick }) {
     let el = document.createElement(kind);
     if (text) el.textContent = text;
-    if (className) el.classList.add(className);
+    if (className) el.className = className;
     if (onClick) el.addEventListener('click', onClick);
 
     return el;
@@ -242,16 +252,16 @@ function init() {
   }).then((variation) => {
     if (variation === 'treatment') {
       const snippets = document.querySelectorAll('.code-badge-copy-icon');
-      [...snippets].forEach((snippetBlock) => {
-        snippetBlock.addEventListener(
+      for (let i = 0; i < snippets.length; i++) {
+        snippets[i].addEventListener(
           'click',
           (pointerEvent) => {
             let snippetElement = pointerEvent.target;
-            new SnippetFeedback(snippetElement);
+            new SnippetFeedback(snippetElement, i);
           },
           { once: true },
         );
-      });
+      }
     }
   });
 }

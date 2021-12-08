@@ -3,10 +3,44 @@
   margin-bottom: 16px;
   position: relative;
 
+  .prompt {
+    text-align: right;
+  }
+
   .text-btn {
     background: none;
     color: $link-text-color;
     border: none;
+    width: 32px; // prevent pixel jumpyness when hover changes text to bold.
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  .can-we-improve {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .send-btn {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    background: none;
+    color: $link-text-color;
+    border: none;
+
+    &.invalid {
+      color: #DADADA;
+      cursor: not-allowed;
+    }
   }
 
   .form {
@@ -23,10 +57,22 @@
     z-index: 100;
 
     textarea {
-      outline: $link-text-color solid 1px;
+      background: #FBFBFB;
+      border: 1px solid #D4D4D4;
+      box-sizing: border-box;
+      border-radius: 4px;
       height: 100px;
       padding: 12px;
       margin: 16px 0 0 0;
+      &:hover {
+        border: 1px solid #333;
+        background: #FFFFFF;
+
+      }
+      &:focus {
+        border: 1px solid #0078CA;
+        background: #FFFFFF;
+      }
     }
   }
 
