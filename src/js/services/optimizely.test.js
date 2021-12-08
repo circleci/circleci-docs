@@ -119,7 +119,7 @@ describe('Optimizely Service', () => {
       jest.resetAllMocks();
     });
 
-    it('expect trackExperimentViewed to have bene viewed', () => {
+    it('expect trackExperimentViewed to call trackAction', () => {
       storeExperimentParticipation(orgId, experimentKey, variationName);
       expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(true);
 
