@@ -101,9 +101,9 @@ workflows:
       - minimize-images:
           requires:
             - build              
-          # filters: 
-          #   branches:
-          #     only: master 
+          filters: 
+            branches:
+              only: master 
       - datadog-synthetics-ci:
           context:
             - web-ui-datadog
