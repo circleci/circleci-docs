@@ -16,7 +16,7 @@ toc::[]
 
 The installation process assumes you have installed the following utilities on your system:
 
-* <<local-cli#installation,CircleCI CLI>>
+* <<local-cli#installation,CircleCI CLI>>. If you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token.
 * curl (installed by default on macOS)
 * sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
 * systemd version 235+ (Linux only)
@@ -33,9 +33,9 @@ Running jobs requires you have the following tools available on your machine:
 
 == Authentication
 
-NOTE: These commands can only be run by an owner/admin of your organization.
+NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token.
 
-In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
+In order to install runner you will need to create a namespace and authentication token by performing the steps listed below – these commands can only be run by an owner/admin of your organization:
 
 . Create a namespace for your organization's runner resources.
 +
