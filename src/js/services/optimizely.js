@@ -148,7 +148,7 @@ class OptimizelyClient {
 // trackExperimentViewed checks if we alredy have sent the Experiment Viewed
 // event to segment/amplitude by looking into the localstorage.
 // If not, it builds the properties needed and call trackAction with it
-export function trackExperimentViewed(
+export const trackExperimentViewed = (
   orgId,
   experimentKey,
   experimentContainer,
@@ -156,7 +156,7 @@ export function trackExperimentViewed(
   variationName,
   variationId,
   userId,
-) {
+) => {
   // don't track user if the experiment is not present in the current page
   if (!$(experimentContainer).length) {
     return;
@@ -182,11 +182,11 @@ export function trackExperimentViewed(
     // store experiment participation in localstorage
     storeExperimentParticipation(orgId, experimentKey, variationName);
   }
-}
+};
 
 // isExperimentAlreadyViewed checks in the localstorage if we already
 // marked the experiment as viewed
-export function isExperimentAlreadyViewed(orgId, experimentKey) {
+export const isExperimentAlreadyViewed = (orgId, experimentKey) => {
   try {
     const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
     return (
@@ -199,15 +199,15 @@ export function isExperimentAlreadyViewed(orgId, experimentKey) {
     // Uglify /w browserlist force us to do catch (_)
     return false;
   }
-}
+};
 
 // storeExperimentParticipation stores the experiment variationName in the
 // localstorage
-export function storeExperimentParticipation(
+export const storeExperimentParticipation = (
   orgId,
   experimentKey,
   variationName,
-) {
+) => {
   if (!orgId || !experimentKey || !variationName) {
     return;
   }
@@ -243,6 +243,6 @@ export function storeExperimentParticipation(
     // We're deliberately ignoring it so that it doesn't break the app. It'll mean a few extra
     // events are emitted, but I think that's the lesser issue.
   }
-}
+};
 
 export default OptimizelyClient;
