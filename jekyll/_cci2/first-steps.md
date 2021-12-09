@@ -13,7 +13,6 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 
 ## Sign up with GitHub or BitBucket
 {: #vcs-signup }
-{:.no_toc}
 
 1. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
 
@@ -25,7 +24,6 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 
 ## Sign up with email
 {: #email-signup }
-{:.no_toc}
 
 1. Click **Sign Up with Email**.
 
@@ -42,4 +40,5 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 ## Next steps
 {: #next-steps }
 
-Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) to learn about the basics of Projects, switching Orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your execution environment and automates your tests.
+- Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) page to learn the basics of setting up projects, switching orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your execution environment and automates your tests.
+- Read the [Concepts]({{ site.baseurl }}/2.0/concepts/) page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.
