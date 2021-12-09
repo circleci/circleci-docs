@@ -100,6 +100,7 @@ export class SnippetFeedback {
       const textForm = this._makeElement({
         kind: 'textarea',
       });
+      textForm.placeholder = 'Your feedback...';
 
       const bottomRow = this._makeElement({
         kind: 'div',
