@@ -55,7 +55,6 @@ describe('Snippet Feedback class', () => {
     let yesBtn = sf.wasThisHelpfulContainer.children[1];
     yesBtn.click();
     expect(sf.feedbackForm).not.toBe(null);
-    // expect(window.AnalyticsClient.trackAction).toHaveBeenCalledTimes(2);
   });
 
   test('Clicking `yes` appends the form to the container', () => {

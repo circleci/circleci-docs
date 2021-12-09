@@ -205,13 +205,11 @@ export class SnippetFeedback {
    * actions are: "docs-snippet-helpful-no"  and "docs-snippet-helpful-yes"
    * */
   _trackYesOrNoButton(yesOrNoString) {
-    window.AnalyticsClient.trackAction(
-      `docs-snippet-helpful-${yesOrNoString}`,
-      {
-        originatingSnippetIndex: this.snippetIndex,
-        location: window.location.pathname,
-      },
-    );
+    window.AnalyticsClient.trackAction('docs-snippet-helpful', {
+      originatingSnippetIndex: this.snippetIndex,
+      helpful: yesOrNoString,
+      location: window.location.pathname,
+    });
   }
 
   /**
