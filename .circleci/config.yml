@@ -130,6 +130,7 @@ workflows:
       - deploy:
           requires:
             - datadog-synthetics-ci
+            - optimize-images
           filters:
             branches:
               only: master
@@ -467,5 +468,9 @@ jobs:
       - run:
           name: Optimize Images
           command: yarn optimize-img
+      - persist_to_workspace:
+          root: ./generated-site
+          paths: _site/docs/assets/img
+
    
     
