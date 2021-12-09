@@ -13,7 +13,11 @@
     border: none;
     width: 32px; // prevent pixel jumpyness when hover changes text to bold.
     &:hover {
-      font-weight: bold;
+      font-weight: 500;
+    }
+
+    &.active {
+      font-weight: 500;
     }
   }
 

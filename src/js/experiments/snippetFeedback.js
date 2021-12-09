@@ -21,6 +21,9 @@ export class SnippetFeedback {
     this._renderCharCount();
     // For tracking user's response to be included in the final feedback form.
     this.wasThisHelpful = null;
+    this.yesBtnEl = null;
+    this.noBtnEl = null;
+    this.wasThisHelpfulSelectedEl = null;
     this._renderWasThisHelpfulPrompt();
   }
 
@@ -49,13 +52,13 @@ export class SnippetFeedback {
       text: 'Was this helpful?',
     });
     const slash = this._makeElement({ kind: 'span', text: ' / ' });
-    const yesButton = this._renderYesNoButton({ text: 'Yes' });
-    const noButton = this._renderYesNoButton({ text: 'No' });
+    this.yesBtnEl = this._renderYesNoButton({ text: 'Yes' });
+    this.noBtnEl = this._renderYesNoButton({ text: 'No' });
     // append dom nodes.
     container.appendChild(textPrompt);
-    container.appendChild(yesButton);
+    container.appendChild(this.yesBtnEl);
     container.appendChild(slash);
-    container.appendChild(noButton);
+    container.appendChild(this.noBtnEl);
     this.wasThisHelpfulContainer = container;
     this.codeSnippetContainer.appendChild(container);
   }
@@ -64,21 +67,24 @@ export class SnippetFeedback {
    * Creates the dom element for the yes/no button in the prompt.
    * */
   _renderYesNoButton({ text }) {
-    let yesBtn = this._makeElement({
+    let yesNoBtn = this._makeElement({
       kind: 'button',
       text,
       className: 'text-btn',
-      onClick: () => {
-        this.wasThisHelpful = text;
-        this._trackYesOrNoButton(text);
-        // only pop up the form if it has not yet been created.
-        if (this.feedbackForm == null) {
-          this._renderFeedbackForm();
-        }
-      },
     });
 
-    return yesBtn;
+    yesNoBtn.onclick = () => {
+      this.wasThisHelpful = text;
+      this.wasThisHelpfulSelectedEl = yesNoBtn;
+      this.wasThisHelpfulSelectedEl.classList.add('active');
+      this._trackYesOrNoButton(text);
+      // only pop up the form if it has not yet been created.
+      if (this.feedbackForm == null) {
+        this._renderFeedbackForm();
+      }
+    };
+
+    return yesNoBtn;
   }
 
   /**
@@ -164,9 +170,20 @@ export class SnippetFeedback {
       // form is opened.
       setTimeout(() => {
         const outsideClickListener = (event) => {
-          if (!this.feedbackForm.contains(event.target)) {
+          // if user clicks outside of the form, but on Yes | No...
+          if (event.target === this.noBtnEl) {
+            this.yesBtnEl.classList.remove('active');
+            this.noBtnEl.classList.add('active');
+          } else if (event.target === this.yesBtnEl) {
+            this.yesBtnEl.classList.add('active');
+            this.noBtnEl.classList.remove('active');
+            // if the user clicks _anywhere_ else outside of the form
+          } else if (!this.feedbackForm.contains(event.target)) {
             this.wasThisHelpfulContainer.removeChild(this.feedbackForm);
             this.feedbackForm = null;
+            this.wasThisHelpful = null;
+            this.yesBtnEl.classList.remove('active');
+            this.noBtnEl.classList.remove('active');
             removeClickListener();
           }
         };
