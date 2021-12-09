@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "CircleCI を設定する"
-short-title: "CircleCI を設定する"
+title: "CircleCI の設定"
+short-title: "CircleCI の設定"
 description: ".circleci/config.yml に関するリファレンス"
 order: 20
 version:
