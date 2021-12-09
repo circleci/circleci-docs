@@ -469,8 +469,11 @@ jobs:
           name: Optimize Images
           command: yarn optimize-img
       - persist_to_workspace:
-          root: ./generated-site
-          paths: _site/docs/assets/img
+          root: *workspace_root
+          paths: _site/docs/assets/*
+
+   
+    
 
    
     
