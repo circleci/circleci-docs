@@ -169,7 +169,14 @@ export class SnippetFeedback {
       // delay- adding it to the event queue so that it executes only after the
       // form is opened.
       setTimeout(() => {
+        // if the form no longer exists (ie, after hitting submit), remove the click listener
+        if (this.feedbackForm === null) {
+          removeClickListener();
+        }
+
         const outsideClickListener = (event) => {
+          // if the feedback form no longer exists, remove the click listener:
+
           // if user clicks outside of the form, but on Yes | No...
           if (event.target === this.noBtnEl) {
             this.yesBtnEl.classList.remove('active');
@@ -178,7 +185,10 @@ export class SnippetFeedback {
             this.yesBtnEl.classList.add('active');
             this.noBtnEl.classList.remove('active');
             // if the user clicks _anywhere_ else outside of the form
-          } else if (!this.feedbackForm.contains(event.target)) {
+          } else if (
+            this.feedbackForm &&
+            !this.feedbackForm.contains(event.target)
+          ) {
             this.wasThisHelpfulContainer.removeChild(this.feedbackForm);
             this.feedbackForm = null;
             this.wasThisHelpful = null;
@@ -240,6 +250,8 @@ export class SnippetFeedback {
       location: window.location.pathname,
       wasThisHelpful: this.wasThisHelpful,
     });
+
+    this.feedbackForm = null;
   }
 
   // -- Helpers --
