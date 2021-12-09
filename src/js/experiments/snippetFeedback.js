@@ -114,7 +114,7 @@ export class SnippetFeedback {
           if (this.formIsValid) {
             this._trackFormSubmission(textForm.value);
             this.wasThisHelpfulContainer.innerHTML =
-              '<div>Thank you for your feedback!</div>';
+              '<div style="padding-bottom: 2px;">Thank you for your feedback!</div>';
           }
         },
       });
@@ -154,12 +154,13 @@ export class SnippetFeedback {
       // Here we setup the document event listeners that handle hiding the form
       // when the user clicks outside of it.
       //
-      // Why do we use a setTimeout with a timer of 0?
-      // -> Because there is a race condition with the adding of the click
-      // listeners to the document that immediately close the form when it opens
+      // Why use a setTimeout with a timer of 0? -> There is a race condition
+      // with the adding of the click listeners to the document that immediately
+      // close the form when it opens
       //
-      // Setting it to 0 causes the inner callback to be run asynchronously, adding it to the eventqueue
-      // so that it executes after the form being opened.
+      // Setting it to 0 runs the inner callback asynchronously but with not
+      // delay- adding it to the event queue so that it executes only after the
+      // form is opened.
       setTimeout(() => {
         const outsideClickListener = (event) => {
           if (!this.feedbackForm.contains(event.target)) {
@@ -179,7 +180,7 @@ export class SnippetFeedback {
   }
 
   /**
-   * Render the char count and set it's result on the respective element.
+   * Render the char count and set its result on the respective element.
    * */
   _renderCharCount() {
     let charCount = this.currCharCount;
