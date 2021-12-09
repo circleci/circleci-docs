@@ -23,7 +23,7 @@
     "webpack-watch": "webpack --watch --mode=development",
     "test": "jest --runInBand",
     "test:ci": "yarn test --coverage",
-    "optimize-img": "./scripts/process-images.sh _site/docs/assets/img"
+    "minimize-img": "./scripts/process-images.sh _site/docs/assets/img"
   },
   "repository": {
     "type": "git",
