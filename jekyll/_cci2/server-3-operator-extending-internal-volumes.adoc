@@ -175,7 +175,6 @@ success looks like:
 Events:
 Type    Reason                      Age   From     Message
 
-   ------                      ----  ----     -------
 Normal  FileSystemResizeSuccessful  19m   kubelet  MountVolume.NodeExpandVolume succeeded for volume "pvc-b3382dd7-3ecc-45b0-aeff-45edc31f48aa"
 ```
 
