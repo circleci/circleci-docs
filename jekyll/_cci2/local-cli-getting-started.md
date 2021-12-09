@@ -107,12 +107,43 @@ The above commands create a `.circleci` folder where we will store our config fi
 
 Open the newly created `config.yml` file and paste the following contents into it.
 
+{:.tab.switcher.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "Hello World"
+```
+
+{:.tab.switcher.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "Hello World"
+```
+
+{:.tab.switcher.Server_2}
 ```yaml
 version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: cimg/ruby:3.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
