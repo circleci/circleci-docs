@@ -90,7 +90,7 @@ CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-co
 
 Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
 
-**Interactive Interpreter (or example, Python)**
+**Interactive Interpreter (for example, Python)**
 
 For some use-cases an orb might only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. Consider utilizing the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
 

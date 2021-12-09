@@ -86,7 +86,7 @@ additional dependencies. Note, it is recommended this is done with a
 customer Docker image rather than a CircleCI convenience image, which
 are built under the assumption they will be used with the Docker
 executor and may be tricky to work around. Since each machine executor
-enviornment is a dedicated virtual machine, commands to run background
+environment is a dedicated virtual machine, commands to run background
 containers can be used is normal.
 
 **Note:** if you have Docker Layer Caching (DLC) enabled for your
@@ -97,7 +97,7 @@ for subsequent runs.
 {: #why-use-docker-executors-at-all }
 
 While machine executors do offer twice the memory and a more isolated
-enviornment, there is some additional overhead regarding spin up time,
+environment, there is some additional overhead regarding spin up time,
 and, depending on the approach taken for running the application, more
 time is taken to install the required dependencies or pull your Docker
 image. The Docker executor will also cache as many layers as possible
