@@ -99,6 +99,8 @@ en:
           hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
+        - name: Migrating to Next-Gen Images
+          link: 2.0/next-gen-migration-guide/
         - name: Docker compose
           link: 2.0/docker-compose/
         - name: Docker layer caching
@@ -361,7 +363,7 @@ en:
           link: 2.0/server-3-install-prerequisites
         - name: Phase 2 - Install Core Services
           link: 2.0/server-3-install
-        - name: Phase 3 - Install Build Services
+        - name: Phase 3 - Install Execution Environment
           link: 2.0/server-3-install-build-services
         - name: Phase 4 - Post Installation
           link: 2.0/server-3-install-post

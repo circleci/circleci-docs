@@ -45,7 +45,27 @@ Download and install the following software before continuing:
 | KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux]. 
 | {kotsversion}
 | Replicated Kubernetes Application Management
+
+| https://github.com/vmware-tanzu/velero/releases[Velero CLI] 
+| Latest
+| Backup and restore capability
 |===
+
+==== AWS required software
+
+- https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] is installed.
+
+==== GCP required software
+
+- `gcloud` and `gsutil` are installed. You can set them up by installing Google Cloud SDK, which includes both, by referring to the https://cloud.google.com/sdk/docs/[documentation].
+
+For more information, see Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation.
+
+Below, you will find instructions for creating a server 3.x backup on AWS and GCP.
+
+==== S3 compatible storage required software
+
+- https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] is installed and configured for your storage provider.
 
 === Create a Kubernetes cluster
 CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
