@@ -180,14 +180,14 @@ jobs:
       - node/install-packages # Utilize commands in steps
 ```
 
-## Orbs view
+## Orbs page in the CircleCI app
 {: #orbs-view}
 
-The orbs view gives users visibility into the orbs their organization has created. Users can review the orb type, orb usage, latest version, and descriptions directly from the list view.
+The Orbs page gives users visibility into the orbs their organization has created. Users can review the orb type (public or private), orb usage (how many times the orb is used across all configurations), latest version, and description directly from the list view on the page.
 
-Full orb details, including orb source, are accessible by clicking on the orb name.
+To access the Orbs page, navigate to Organization Settings in the app.
 
-Note: Private orb details pages may only be viewed by logged-in members of your organization.
+Full orb details, including orb source, are accessible by clicking on the orb name. Note: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
 
 
 ## See also
