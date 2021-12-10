@@ -40,7 +40,7 @@ export class SnippetFeedback {
    * Construct a "Was this helpful" line, and inject it below the code snippet.
    */
   _renderWasThisHelpfulPrompt() {
-    const parentPreTag = this.snippetElement.closest("pre"); // get parent pre tag of code block
+    const parentPreTag = this.snippetElement.closest('pre'); // get parent pre tag of code block
     this.codeSnippetContainer = parentPreTag.closest('div'); // get div wrapping the pre tag.
     // Create some dom elements:
     const container = this._makeElement({
