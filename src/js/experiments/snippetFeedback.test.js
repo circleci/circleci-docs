@@ -14,7 +14,7 @@ describe('Snippet Feedback class', () => {
     // simulate a code block container in the docs with the "highlight" class.
     codeSnippetContainer = document.createElement('div');
     codeSnippetContainer.classList.add('highlight');
-    snippetElement = document.createElement('code');
+    snippetElement = document.createElement('pre');
     // attach the "code block to the div."
     codeSnippetContainer.appendChild(snippetElement);
   });
