@@ -40,7 +40,8 @@ export class SnippetFeedback {
    * Construct a "Was this helpful" line, and inject it below the code snippet.
    */
   _renderWasThisHelpfulPrompt() {
-    this.codeSnippetContainer = this.snippetElement.closest('div.highlight');
+    const parentPreTag = this.snippetElement.closest("pre"); // get parent pre tag of code block
+    this.codeSnippetContainer = parentPreTag.closest('div'); // get div wrapping the pre tag.
     // Create some dom elements:
     const container = this._makeElement({
       kind: 'div',
@@ -137,13 +138,6 @@ export class SnippetFeedback {
         } else {
           sendButton.classList.remove('valid');
           sendButton.classList.add('invalid');
-        }
-
-        if (this.currCharCount >= SnippetFeedback.MAX_CHAR_COUNT - 1) {
-          textForm.value = textForm.value.substring(
-            0,
-            SnippetFeedback.MAX_CHAR_COUNT - 1,
-          );
         }
 
         // every time the user types we need to re-render the dom content manually.
