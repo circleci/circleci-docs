@@ -51,21 +51,14 @@ For an introduction to execution environments and images, see the [Executors and
 ### Is CircleCI available to enterprise customers?
 {: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-Yes, CircleCI server is available for installation on AWS or GCP. See the [CircleCI Server v3.x Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions, and you can [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
+Yes, CircleCI server is available for installation on AWS or GCP. See the [CircleCI Server v3.x Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions. [Contact us](https://circleci.com/pricing/server/) to discuss your requirements.
 
 ### What are the differences between CircleCI’s hosting options?
 {: #what-are-the-differences-between-circlecis-hosting-options }
 {:.no_toc}
 - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
 
-- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
-
-### Why did you change the name from CircleCI Enterprise?
-{: #why-did-you-change-the-name-from-circleci-enterprise }
-{:.no_toc}
-The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
-
-CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
+- **Server** - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
 
 ## Troubleshooting
 {: #troubleshooting }
@@ -73,25 +66,23 @@ CircleCI is one product that can be accessed through our cloud service, installe
 ### Why aren't my jobs running when I push commits?
 {: #why-arent-my-jobs-running-when-i-push-commits }
 {:.no_toc}
-In the CircleCI application, check the Workflows tab for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
+In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
 
 See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
 
 After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
-### What is the difference between a usage queue and a run queue?
-{: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
+### Why is my job queued?
+{: #why-is-my-job-queued }
 {:.no_toc}
-A **usage queue** forms when an organization lacks the containers to run a build. The number of available containers is determined by the plan chosen when setting up a project on CircleCI. If your builds are queuing often, you can add more containers by changing your plan.
+A job might end up being **queued** because of a concurrency limit being imposed due to the plan you or your organisation are on. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
 
-A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
-
-In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
+**run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.  Time spent in a **run queue** is unavoidable (though CircleCI 
 
 ### Why are my builds queuing even though I'm on the Performance plan?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your builds, it's possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your jobs, it's possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
 
 ### Why can't I find my project on the Projects dashboard?
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
