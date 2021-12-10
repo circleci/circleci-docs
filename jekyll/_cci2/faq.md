@@ -77,7 +77,6 @@ After checking your `config.yml` for formatting errors, search for your issue in
 {:.no_toc}
 A job might end up being **queued** because of a concurrency limit being imposed due to the plan you or your organisation are on. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
 
-**run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.  Time spent in a **run queue** is unavoidable (though CircleCI 
 
 ### Why are my builds queuing even though I'm on the Performance plan?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
