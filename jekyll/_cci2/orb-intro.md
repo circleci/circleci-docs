@@ -187,7 +187,7 @@ The Orbs page gives users visibility into the orbs their organization has create
 
 To access the Orbs page, navigate to Organization Settings in the app.
 
-Full orb details, including orb source, are accessible by clicking on the orb name. Note: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
+Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI Orb Registry in that the details page provides the orb's contents, commands, and usage examples. Note: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
 
 
 ## See also
