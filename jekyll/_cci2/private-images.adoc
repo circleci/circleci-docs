@@ -51,6 +51,17 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project environment variable reference
 ----
 
+If you have https://docs.docker.com/docker-hub/2fa/[two-factor authentication set up on Docker Hub], you can simply use https://docs.docker.com/docker-hub/access-tokens/[your personal access token] for the `password` key instead.
+For example:
+
+[source,yaml]
+----
+- image: acme-private/private-image:321
+  auth:
+    username: mydockerhub-user
+    password: $DOCKERHUB_ACCESS_TOKEN
+----
+
 You can also use images from a private repository like https://cloud.google.com/container-registry[gcr.io] or
 https://quay.io[quay.io]. Make sure to supply the full registry/image URL for the `image` key, and use the appropriate
 username/password for the `auth` key. For example:

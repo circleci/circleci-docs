@@ -28,12 +28,14 @@ advanced and powerful tools from the comfort of your terminal. Some of the
 things you can do with the CircleCI CLI include:
 
 - Debug and validate your CI config
-- Run jobs locally
+- Run jobs locally (currently unsupported on Windows)
 - Query CircleCI's API
-- Create, publish, view and manage Orbs
+- Create, publish, view and manage orbs
 - Managing contexts
 
-This document will cover the installation and usage of the CLI tool. **Note:**
+This document covers the installation and usage of the CircleCI CLI tool.
+
+**Note:**
 this CLI is not available on CircleCI server v2.x installations but the
 legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 
@@ -43,7 +45,7 @@ legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 ## Installation
 {: #installation }
 
-There are multiple installation options for the CLI.
+There are multiple installation options for the CircleCI CLI.
 
 **Note**: If you have already installed the CLI prior to October 2018 you may need to do an extra one-time step to switch to the new CLI. See [upgrading instructions below](#updating-the-legacy-cli).
 
@@ -51,7 +53,6 @@ For the majority of installations, we recommend one of the following package man
 
 ### Install with Snap (Linux)
 {: #install-with-snap-linux }
-{:.no_toc}
 
 The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
 
@@ -64,7 +65,6 @@ sudo snap connect circleci:docker docker
 
 ### Install with Homebrew (macOS)
 {: #install-with-homebrew-macos }
-{:.no_toc}
 
 If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
 
@@ -76,7 +76,6 @@ brew install circleci
 
 ### Install with Chocolatey (Windows)
 {: #install-with-chocolatey-windows }
-{:.no_toc}
 
 For Windows users, we provide a [Chocolatey](https://chocolatey.org/) package:
 
@@ -86,7 +85,6 @@ choco install circleci-cli -y
 
 ### Alternative installation method
 {: #alternative-installation-method }
-{:.no_toc}
 
 **Mac and Linux:**
 
@@ -100,7 +98,7 @@ By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` dire
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
 
-### Manual download
+### Manual install
 {: #manual-download }
 
 You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.

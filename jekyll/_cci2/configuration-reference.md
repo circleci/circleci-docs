@@ -437,6 +437,7 @@ xcode | Y | String | The version of Xcode that is installed on the virtual machi
 
 **Example:** Use a macOS virtual machine with Xcode version 11.3:
 
+
 ```yaml
 jobs:
   build:
@@ -517,7 +518,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on Free and Performance plans. Available resources classes are restricted for customers on the Free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the Free plan.
+**Note:** This feature is automatically enabled on Free and Performance plans. See the [comparison table](https://circleci.com/pricing/#comparison-table) for which resource classes are available to Free and Performance plan customers.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -537,6 +538,7 @@ xlarge                | 8     | 16GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
 
 ```yaml
 jobs:
@@ -569,6 +571,8 @@ jobs:
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 jobs:
   build:
@@ -601,6 +605,8 @@ large<sup>(3)</sup>| 8     | 16GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 jobs:
   build:
@@ -624,6 +630,8 @@ xlarge            | 16    | 60GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 
@@ -654,6 +662,8 @@ gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 
@@ -679,6 +689,8 @@ windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 |
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 orbs:
@@ -901,6 +913,7 @@ run: |
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ```yaml
 steps:
@@ -938,6 +951,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 
 ###### *Example*
 {: #example }
+{:.no_toc}
 
 ```
 version: 2.1
@@ -1062,6 +1076,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 {% raw %}
 ``` YAML
@@ -1135,6 +1150,7 @@ A path is not required here because the cache will be restored to the location f
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 {% raw %}
 ``` YAML
@@ -1177,6 +1193,7 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - deploy:
@@ -1205,6 +1222,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - run:
@@ -1229,6 +1247,7 @@ path | Y | String | Path (absolute, or relative to your `working_directory`) to 
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 Directory structure:
 
@@ -1327,6 +1346,7 @@ at | Y | String | Directory to attach the workspace to.
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - attach_workspace:
@@ -1413,6 +1433,7 @@ Enables jobs to go through a set of well-defined IP address ranges. See [IP rang
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 ```yaml
 version: 2.1

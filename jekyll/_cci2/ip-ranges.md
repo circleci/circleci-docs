@@ -118,15 +118,21 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 
 The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
-**Machine-consumable lists can be found below:**
+**Machine-consumable lists can be found by querying the DNS A records below:**
 
-- IP address ranges *for jobs*: [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
+- IP address ranges *for jobs*: `jobs.knownips.circleci.com`.
 
-- IP address ranges *for core services*: [DNS A record](https://dnsjson.com/core.knownips.circleci.com/A.json).
+- IP address ranges *for core services*: `core.knownips.circleci.com`.
 
-- *All IP address ranges*:  [DNS A record](https://dnsjson.com/all.knownips.circleci.com/A.json).
+- *All IP address ranges*:  `all.knownips.circleci.com`.
 
 During the preview phase, this list may change. You should check regularly for updates, at least once a week.
+
+To query these, you can use any DNS resolver. Here's an example using `dig` with the default resolver:
+
+```
+dig all.knownips.circleci.com A +short
+```
 
 Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
 

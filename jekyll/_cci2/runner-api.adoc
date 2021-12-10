@@ -331,7 +331,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-cla
 
 ```json
 {
-    "unclairunning_runner_tasksmed_task_count": 42
+    "running_runner_tasks": 42
 }
 ```
 
