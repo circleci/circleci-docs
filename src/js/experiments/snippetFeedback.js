@@ -107,6 +107,7 @@ export class SnippetFeedback {
         kind: 'textarea',
       });
       textForm.placeholder = 'Your feedback...';
+      textForm.maxLength = SnippetFeedback.MAX_CHAR_COUNT;
 
       const bottomRow = this._makeElement({
         kind: 'div',
