@@ -280,6 +280,9 @@ function init() {
     experimentContainer: '.hljs',
   }).then((variation) => {
     if (variation === 'treatment') {
+      // NOTE: we are only adding the feedback form only when a user clicks the
+      // copy-code button ( we don't add a form until the user copies code. )
+      // The textarea forms are removed on submit.
       const snippets = document.querySelectorAll('.code-badge-copy-icon');
       for (let i = 0; i < snippets.length; i++) {
         snippets[i].addEventListener(
