@@ -244,6 +244,7 @@ jobs:
   build:
     machine:
       image: ubuntu-1604:202007-01
+    resource_class: large
 ```
 
 You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
