@@ -205,7 +205,7 @@ Once you have successfully cloned the repository you can follow it from within y
 
 .Contexts
 [.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=3*, options="header", stripes=even]
 |===
 |Name
 |Environmental Variable Key
