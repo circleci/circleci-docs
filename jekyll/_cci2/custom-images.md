@@ -515,3 +515,6 @@ docker push username/ruby-node:0.1
 
 To use the custom image, reference ruby-node/bar:0.1 in your `.circleci/config.yml` image key and your primary container will run it.
 It is worth it to commit your Dockerfile using a gist and link to it from Docker Hub to avoid losing your configuration.
+
+## Caching Docker images
+For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/2.0/executor-types/#caching-docker-images).
