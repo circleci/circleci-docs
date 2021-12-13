@@ -479,20 +479,22 @@ Hosts running with machine executor are configured with IPv6 addresses for `eth0
 You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup.  You can enable it globally by configuring docker daemon like the following:
 
 ```yaml
-   ipv6_tests:
-     machine: true
-     steps:
-     - checkout
-     - run:
-         name: enable ipv6
-         command: |
-           cat <<'EOF' | sudo tee /etc/docker/daemon.json
-           {
-             "ipv6": true,
-             "fixed-cidr-v6": "2001:db8:1::/64"
-           }
-           EOF
-           sudo service docker restart
+jobs:
+  ipv6_tests:
+  machine:
+    image: ubuntu-1604:202007-01
+  steps:
+    - checkout
+    - run:
+        name: enable ipv6
+        command: |
+          cat <<'EOF' | sudo tee /etc/docker/daemon.json
+          {
+            "ipv6": true,
+            "fixed-cidr-v6": "2001:db8:1::/64"
+          }
+          EOF
+          sudo service docker restart
 ```
 
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
