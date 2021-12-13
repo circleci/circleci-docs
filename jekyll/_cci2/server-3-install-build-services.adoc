@@ -10,13 +10,13 @@ version:
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI server v3.x build services installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
+Before you begin with the CircleCI server v3.x execution installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
 
 NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
-== Phase 3: Build services installation
+== Phase 3: Execution environment installation
 
 === Output Processor 
 ==== Overview 
