@@ -49,7 +49,7 @@ CircleCI Server v2.x の管理コンソールで LDAP を設定する手順は�
 . Navigate to the Settings page (for example `<your-circleci-hostname>.com:8800`) and scroll down to check the Enable LDAP-only Authentication button. [OpenLDAP] または [Active Directory] を選択します。
 . LDAP インスタンスのホスト名とポート番号を入力します。
 . 暗号化タイプを選択します (プレーンテキストは安全でないため推奨しません)。
-. [Search user (ユーザーの検索)]フィールドに、LDAP データベース上で検索クエリーを実行することを許可するユーザーの完全な識別名を入力します。 Example: `cn=<admin>,dc=<example>,dc=<org>`.
+. [Search user (ユーザーの検索)]フィールドに、LDAP データベース上で検索クエリーを実行することを許可するユーザーの完全識別名を入力します。 Example: `cn=<admin>,dc=<example>,dc=<org>`.
 . [Search password (パスワードの検索)]フィールドに、前の手順で設定したユーザーの LDAP パスワードを入力します。
 . [Base DN] フィールドに、ディレクトリ内のユーザーやグループを検索する起点となる識別名を入力します。 例: `ou=company、dc=example、dc=org`
 . [User search DN] フィールドに、ユーザーを検索するディレクトリ内の起点となる相対識別名を入力します。 必ず先に述べた [Base DN]の相対値を入力します。
