@@ -39,7 +39,7 @@ Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
 
-Yes, CircleCI provide a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
+Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
 For the `machine` executor, see the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) list.
 
