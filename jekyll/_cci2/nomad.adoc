@@ -7,6 +7,7 @@ version:
 = Introduction to Nomad Cluster Operation
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 :icons: font
 :toc: macro
 :toc-title:

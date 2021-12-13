@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Orbs
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Use this document to learn about orbs and how to manage them within CircleCI server v3.x.
 :icons: font
 :toc: macro
 :toc-title:

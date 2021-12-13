@@ -6,6 +6,7 @@ version:
 = CircleCI Runner Installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Use this installation guide to set up CircleCI runner on your Kubernetes cluster.
 :icons: font
 :toc: macro
 :toc-title:

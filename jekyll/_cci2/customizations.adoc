@@ -6,6 +6,7 @@ version:
 = Customization and Configuration
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This documentation summarizes the key files and variables that impact CircleCI server behavior, and configuration options for your server installation.
 :icons: font
 :toc: macro
 :toc-title:

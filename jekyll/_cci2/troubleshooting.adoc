@@ -7,6 +7,7 @@ version:
 = Troubleshooting Server Installations
 :page-layout: classic-docs
 :page-liquid:
+:page-description: View an initial set of troubleshooting steps to take for problems with the CircleCI installation on private servers.
 :icons: font
 :toc: macro
 :toc-title:
