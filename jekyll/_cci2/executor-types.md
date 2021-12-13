@@ -189,7 +189,7 @@ Capability | `docker` | `machine`
 For more information on `machine`, see the next section below.
 
 ### Caching Docker images
-{: caching-docker-images}
+{: caching-docker-images }
 
 This section discusses caching in the Docker Executor relating to the "Spin Up Environment" step for the main container in the job. It does not apply to [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature of the Remote Docker environment.
 
