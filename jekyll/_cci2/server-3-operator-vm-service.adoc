@@ -29,20 +29,24 @@ kubectl get svc/vm-service
 ----
 . Enter the address listed under **External IP** in the **VM Service Load Balancer Hostname** field.
 
-
+There is also an option to change the port used for VM service. The default is `3000` and this should only be changed if you are guided to do so by a CircleCI support engineer.
 
 == VM provider
 The following configuration options are for the VM provider. There are separate instructions for AWS and GCP.
 
 === AWS EC2
-You will need to complete the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
+You will need to complete the following fields to configure your VM Service to work with AWS EC2. 
+
+At this point you can uncheck the **Assign Public IPs** check box if you need VMs to use private IP addresses.
+
+NOTE: The Access Key and Secret
 Key used by VM Service differs from the policy used by object storage in the previous section.
 
-* ** 
-. *AWS Region* (required): This is the region the application is in.
-. *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
-. *Subnets* (required): Choose subnets (public or private) where the VMs should be deployed. Note that all subnets must be in the same availability zone.
-. *Security Group ID* (required): This is the security group that will be attached to the VMs.
+* *AWS Region* (required): This is the region the application is in.
+* *AWS Linux AMI ID* (optional): If you wish to provide a custom AMI for Linux `machine` executors you can supply an AMI ID here. To create a Linux image use the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder]. If you leave this field blank, a default AMI will be used.
+* *AWS Windows AMI ID* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+* *Subnets* (required): Choose subnets (public or private) where the VMs should be deployed. Note that all subnets must be in the same availability zone.
+* *Security Group ID* (required): This is the security group that will be attached to the VMs.
 
 The recommended security group configuration can be found in the https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
 
