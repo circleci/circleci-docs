@@ -18,6 +18,8 @@ var els = {
   sidebarLangSelect: getElById('sidebarLangSelect'),
   footerLangSelect: getElById('footerLangSelect'),
   footerLangOptions: getElById('footerLangOptions'),
+  globalNavLangEng: getElById('globalNavLangEng'),
+  globalNavLangJap: getElById('globalNavLangJap'),
 };
 
 function redirectLocation(langCode) {
@@ -56,22 +58,37 @@ function handleSetLanguageOnLoad() {
  * Function to run when the sidebar language <select> is changed.
  * It checks the newly selected language code and reloads the page in that language.
  */
-function handleChangeLanguageSidebar() {
-  els.sidebarLangSelect.addEventListener('change', function (e) {
-    switch (e.target.value) {
-      case 'ja':
-        reloadWithNewLocale('ja');
-        break;
-      case 'en':
-        reloadWithNewLocale('en');
-        break;
-      default:
-        return;
-    }
+// function handleChangeLanguageSidebar() {
+//   els.sidebarLangSelect.addEventListener('change', function (e) {
+//     switch (e.target.value) {
+//       case 'ja':
+//         reloadWithNewLocale('ja');
+//         break;
+//       case 'en':
+//         reloadWithNewLocale('en');
+//         break;
+//       default:
+//         return;
+//     }
+//   });
+// }
+
+// Used to handle language change for new language picker design in header
+const handleChangeLanguageNav = () => {
+  els.globalNavLangEng.addEventListener('click', () => {
+    reloadWithNewLocale('en');
+    window.AnalyticsClient.trackAction('language-picker-english');
   });
-}
+  els.globalNavLangJap.addEventListener('click', () => {
+    reloadWithNewLocale('ja');
+    window.AnalyticsClient.trackAction('language-picker-japanese');
+  });
+  return;
+};
+handleChangeLanguageNav();
 
 export function init() {
-  handleChangeLanguageSidebar();
+  // handleChangeLanguageSidebar();
   handleSetLanguageOnLoad();
+  // handleChangeLanguageNav();
 }
