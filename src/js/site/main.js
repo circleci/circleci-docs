@@ -436,8 +436,10 @@ $(document).ready(function () {
     return render(interval, 'SECOND');
   }
 
-  var date = Date.parse(
-    document.getElementById('postedon').getAttribute('datetime'),
-  );
-  document.getElementById('postedago').innerHTML = ago(date);
+  if(document.getElementById('postedon') && document.getElementById('postedago')){
+    var date = Date.parse(
+      document.getElementById('postedon').getAttribute('datetime'),
+    );
+    document.getElementById('postedago').innerHTML = ago(date);
+  }
 });

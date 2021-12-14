@@ -711,15 +711,27 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 
 // CSS styling for the date modifiex X ago
 #postedon {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+	margin-top: -4px;
+}
+
+#postedon-text {
 	background: #F7F7F7;
 	border-radius: 20px;
-	padding: 10px;
-	margin-bottom: 10px;
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 12px;
-	line-height: 150%;
+	font-size: 13px;
 	letter-spacing: 0.05em;
 	color: #343434;
+	padding: 6px 10px 6px 9px;
+}
+
+#postedon-svg {
+	float: left;
+	margin-right: 6px;
+	height: 18px;
+	width: 18px;
 }
