@@ -20,10 +20,25 @@ toc::[]
 
 NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your server installation.
 
-== AWS EC2
-You will need the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
+== VM service settings
+You will need to provide the hostname for your VM service load balancer:
+
+. Once your server installation is up and running, run the following:
+----
+kubectl get svc/vm-service
+----
+. Enter the address listed under **External IP** in the **VM Service Load Balancer Hostname** field.
+
+
+
+== VM provider
+The following configuration options are for the VM provider. There are separate instructions for AWS and GCP.
+
+=== AWS EC2
+You will need to complete the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
 Key used by VM Service differs from the policy used by object storage in the previous section.
 
+* ** 
 . *AWS Region* (required): This is the region the application is in.
 . *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
 . *Subnets* (required): Choose subnets (public or private) where the VMs should be deployed. Note that all subnets must be in the same availability zone.
@@ -149,7 +164,7 @@ It is recommended to create a new user with programmatic access for this purpose
 }
 ----
 
-== Google Cloud Platform
+=== Google Cloud Platform
 You will need the following fields to configure your VM Service to work with Google Cloud Platform (GCP).
 
 . *GCP project ID* (required): Name of the GCP project the cluster resides.
