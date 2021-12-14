@@ -202,7 +202,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
-```
+```yaml
 version: 2
 jobs:
     build:
