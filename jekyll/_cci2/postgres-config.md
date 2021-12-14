@@ -59,7 +59,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            
+            - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
       # Bundle install dependencies
@@ -71,7 +71,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -127,7 +127,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            
+            - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
       # Bundle install dependencies
@@ -139,7 +139,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          
+          key: - rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -195,7 +195,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            
+            - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
       # Bundle install dependencies
@@ -207,7 +207,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          
+          key: - rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -316,8 +316,8 @@ jobs:
       - run: mkdir -p $TEST_RESULTS
 
       - restore_cache:
-          keys:
-            
+          keys: 
+            - go-mod-v1-{{ checksum "go.sum" }}
 
       - run:
           name: Get dependencies
@@ -347,7 +347,7 @@ jobs:
       - run: make
 
       - save_cache:
-          
+          key: - go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
 
@@ -403,7 +403,7 @@ jobs:
 
       - restore_cache:
           keys:
-            
+            - go-mod-v1-{{ checksum "go.sum" }}
 
       - run:
           name: Get dependencies
@@ -433,7 +433,7 @@ jobs:
       - run: make
 
       - save_cache:
-          
+          key: - go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
 
@@ -489,7 +489,7 @@ jobs:
 
       - restore_cache:
           keys:
-            
+            - go-mod-v1-{{ checksum "go.sum" }}
 
       - run:
           name: Get dependencies
@@ -519,7 +519,7 @@ jobs:
       - run: make
 
       - save_cache:
-          
+          key: - go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
 
