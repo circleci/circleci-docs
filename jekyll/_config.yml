@@ -23,7 +23,6 @@ plugins:
   - jekyll/minibundle
   - jekyll-last-modified-at
 
-# Date format - %d - day - %b - Month word abbreviation - %y year
 last-modified-at:
   date-format: '%d-%b-%y'
 
