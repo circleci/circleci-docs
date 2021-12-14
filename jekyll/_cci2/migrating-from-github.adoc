@@ -114,7 +114,7 @@ runs-on: ubuntu-latest # or windows, etc.
 
 # If running steps on a container
 container:
-  image: openjdk:11.0-jdk
+  image: openjdk:17.0-jdk
 ----
 
 a|
@@ -150,7 +150,7 @@ jobs:
 
     # Main container
     container:
-      image: openjdk:11.0-jdk
+      image: openjdk:17.0-jdk
 
     # Dependency Service(s)
     services:
