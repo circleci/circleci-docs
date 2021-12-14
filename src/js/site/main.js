@@ -2,7 +2,9 @@ import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
 
 hljs.initHighlightingOnLoad();
-hljs.initLineNumbersOnLoad();
+hljs.initLineNumbersOnLoad({
+  singleLine: true
+});
 
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
