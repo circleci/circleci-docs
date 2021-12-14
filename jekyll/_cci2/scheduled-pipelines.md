@@ -29,7 +29,7 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 - Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
 - Modify the schedule without having to edit `.circleci/config.yml`.
 - Interact with auto-cancelling of pipelines.
-- Specify pipeline parameters associated with a schedule.
+- Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
 - Consolidate the management of common schedules.
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
