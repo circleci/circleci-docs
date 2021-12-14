@@ -42,7 +42,13 @@
             </div>
             {% endif %}
 
-            Last modified at {% last_modified_at %}
+            {% if page.last_modified_at %}
+            <time id="postedon" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
+              posted <span id="postedago"></span>
+            </time>
+            {% else %}
+                Last updated: {{ page.date | date: date_format }}
+            {% endif %}
 
             {% if page.untranslated %}
             {% include_cached translation_in_progress.html site=site page=page %}
