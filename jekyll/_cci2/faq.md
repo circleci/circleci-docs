@@ -27,59 +27,38 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 ## Migration
 {: #migration }
 
+Visit the [Migration Introduction]({{ site.baseurl }}//2.0/migration-intro/) doc which links out to migration guides for various platforms.
+
 ### How do I migrate from Jenkins to CircleCI?
 {: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
-Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
-
-```yaml
-    steps:
-      - run: echo "Add any bash command you want here"
-      - run:
-          command: |
-            echo "Arbitrary multi-line bash"
-            echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
-```
 
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
-### Does CircleCI run inference commands?
-{: #does-circleci-run-inference-commands }
-{:.no_toc}
-CircleCI does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
-
 ### Can I use CircleCI without creating base images?
-{: #can-i-use-circleci-20-without-creating-base-images }
+{: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
-See the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) section for the latest image to use. These images have the same content as the image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it is less than ideal for local testing.
+Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
-The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
+For the `machine` executor, see the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) list.
 
-Here’s a [list of languages and tools]({{site.baseurl}}/2.0/executor-intro/) included in the image.
+For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
 
 ## Hosting
 {: #hosting }
 
-### Is CircleCI available to enterprise clients?
-{: #is-circleci-20-available-to-enterprise-clients }
+### Is CircleCI available to enterprise customers?
+{: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-Yes, CircleCI is available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions and [contact us](https://circleci.com/pricing/server/) to discuss your requirements.
+Yes, CircleCI server is available for installation on AWS or GCP. See the [CircleCI Server v3.x Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions. [Contact us](https://circleci.com/pricing/server/) to discuss your requirements.
 
 ### What are the differences between CircleCI’s hosting options?
 {: #what-are-the-differences-between-circlecis-hosting-options }
 {:.no_toc}
 - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
 
-- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
-
-### Why did you change the name from CircleCI Enterprise?
-{: #why-did-you-change-the-name-from-circleci-enterprise }
-{:.no_toc}
-The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
-
-CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
+- **Server** - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
 
 ## Troubleshooting
 {: #troubleshooting }
@@ -87,25 +66,22 @@ CircleCI is one product that can be accessed through our cloud service, installe
 ### Why aren't my jobs running when I push commits?
 {: #why-arent-my-jobs-running-when-i-push-commits }
 {:.no_toc}
-In the CircleCI application, check the Workflows tab for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
+In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
 
 See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
 
 After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
-### What is the difference between a usage queue and a run queue?
-{: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
+### Why is my job queued?
+{: #why-is-my-job-queued }
 {:.no_toc}
-A **usage queue** forms when an organization lacks the containers to run a build. The number of available containers is determined by the plan chosen when setting up a project on CircleCI. If your builds are queuing often, you can add more containers by changing your plan.
+A job might end up being **queued** because of a concurrency limit being imposed due to the plan you or your organisation are on. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
 
-A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
-
-In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
 
 ### Why are my builds queuing even though I'm on the Performance plan?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your builds, it's possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your jobs, it is possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
 
 ### Why can't I find my project on the Projects dashboard?
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
@@ -503,20 +479,22 @@ Hosts running with machine executor are configured with IPv6 addresses for `eth0
 You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup.  You can enable it globally by configuring docker daemon like the following:
 
 ```yaml
-   ipv6_tests:
-     machine: true
-     steps:
-     - checkout
-     - run:
-         name: enable ipv6
-         command: |
-           cat <<'EOF' | sudo tee /etc/docker/daemon.json
-           {
-             "ipv6": true,
-             "fixed-cidr-v6": "2001:db8:1::/64"
-           }
-           EOF
-           sudo service docker restart
+jobs:
+  ipv6_tests:
+  machine:
+    image: ubuntu-1604:202007-01
+  steps:
+    - checkout
+    - run:
+        name: enable ipv6
+        command: |
+          cat <<'EOF' | sudo tee /etc/docker/daemon.json
+          {
+            "ipv6": true,
+            "fixed-cidr-v6": "2001:db8:1::/64"
+          }
+          EOF
+          sudo service docker restart
 ```
 
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).

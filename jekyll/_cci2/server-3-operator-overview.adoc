@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Operations Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn about CircleCI server Operators via maintenance and monitoring.
 :icons: font
 :toc: macro
 :toc-title:

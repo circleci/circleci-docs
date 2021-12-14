@@ -11,7 +11,7 @@ const options = {
   },
 };
 
-describe('Amalytics Service', () => {
+describe('Analytics Service', () => {
   beforeEach(() => {
     jest.resetAllMocks();
 

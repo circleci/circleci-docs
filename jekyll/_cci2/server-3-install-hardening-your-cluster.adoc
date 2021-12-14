@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Hardening Your Cluster
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This section provides supplemental information on hardening your Kubernetes cluster.
 :icons: font
 :toc: macro
 :toc-title:

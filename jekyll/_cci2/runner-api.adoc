@@ -6,6 +6,7 @@ version:
 = CircleCI Runner API
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document contains all the external facing endpoints for the CircleCI runner API.
 :icons: font
 :toc: macro
 :toc-title:
@@ -331,7 +332,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-cla
 
 ```json
 {
-    "unclairunning_runner_tasksmed_task_count": 42
+    "running_runner_tasks": 42
 }
 ```
 

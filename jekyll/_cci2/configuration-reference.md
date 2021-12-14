@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuring CircleCI"
-short-title: "Configuring CircleCI"
-description: "Reference for .circleci/config.yml"
+title: Configuring CircleCI
+short-title: Configuring CircleCI
+description: Reference for .circleci/config.yml
 order: 20
 version:
 - Cloud
@@ -117,7 +117,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows).
@@ -174,7 +174,7 @@ working_directory | N | String | In which directory to run the steps. Will be in
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -346,7 +346,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
 
@@ -368,7 +368,7 @@ jobs:
 ##### Available `machine` images
 {: #available-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the deveoper hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
@@ -518,7 +518,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on Free and Performance plans. Available resources classes are restricted for customers on the Free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the Free plan.
+**Note:** This feature is automatically enabled on Free and Performance plans. See the [comparison table](https://circleci.com/pricing/#comparison-table) for which resource classes are available to Free and Performance plan customers.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -1020,13 +1020,12 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
 version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
 
-- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 

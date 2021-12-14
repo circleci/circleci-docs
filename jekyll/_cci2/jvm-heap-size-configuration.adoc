@@ -6,6 +6,7 @@ version:
 = Configuring the JVM Heap Size
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Use this CircleCI guide to help you configure the JVM_HEAP_SIZE value for each container.
 :icons: font
 :toc: macro
 :toc-title:

@@ -1,6 +1,11 @@
+---
+title: Migrating from Github Actions
+---
+
 = Migrating from Github Actions
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Github Actions to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:

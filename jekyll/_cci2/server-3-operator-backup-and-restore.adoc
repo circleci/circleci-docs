@@ -7,6 +7,7 @@ version:
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 :icons: font
 :toc: macro
 :toc-title:
