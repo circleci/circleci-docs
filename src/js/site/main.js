@@ -407,33 +407,33 @@ $(document).ready(highlightURLHash());
 $(document).ready(function () {
   function ago(date) {
     function render(n, unit) {
-      return n + ' ' + unit + (n == 1 ? '' : 's') + ' ago';
+      return n + ' ' + unit + (n == 1 ? '' : 'S') + ' AGO';
     }
 
     var seconds = Math.floor((new Date() - date) / 1000);
 
     var interval = Math.floor(seconds / (60 * 60 * 24 * 365));
     if (Math.floor(seconds / (60 * 60 * 24 * 30 * 365)) >= 1) {
-      return render(interval, 'year');
+      return render(interval, 'YEAR');
     }
     interval = Math.floor(seconds / (60 * 60 * 24 * 30));
     if (interval >= 1) {
-      return render(interval, 'month');
+      return render(interval, 'MONTH');
     }
     interval = Math.floor(seconds / (60 * 60 * 24));
     if (interval >= 1) {
-      return render(interval, 'day');
+      return render(interval, 'DAY');
     }
     interval = Math.floor(seconds / (60 * 60));
     if (interval >= 1) {
-      return render(interval, 'hour');
+      return render(interval, 'HOUR');
     }
     interval = Math.floor(seconds / 60);
     if (interval >= 1) {
-      return render(interval, 'minute');
+      return render(interval, 'MINUTE');
     }
     interval = Math.floor(seconds);
-    return render(interval, 'second');
+    return render(interval, 'SECOND');
   }
 
   var date = Date.parse(

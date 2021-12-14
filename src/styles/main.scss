@@ -708,3 +708,18 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   top: calc(50% - 11px);
   left: 18px;
 }
+
+// CSS styling for the date modifiex X ago
+#postedon {
+	background: #F7F7F7;
+	border-radius: 20px;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: 0.05em;
+	color: #343434;
+}

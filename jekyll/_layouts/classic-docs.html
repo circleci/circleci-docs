@@ -44,7 +44,7 @@
 
             {% if page.last_modified_at %}
             <time id="postedon" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
-              posted <span id="postedago"></span>
+              <span id="postedon-text">posted <span id="postedago"></span></span>
             </time>
             {% else %}
                 Last updated: {{ page.date | date: date_format }}
