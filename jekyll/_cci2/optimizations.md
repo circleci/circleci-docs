@@ -174,6 +174,41 @@ DLC is a feature that can help to reduce the _build time_ of a Docker image in y
 
 DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
+{:.tab.switcher.Cloud}
+```yaml
+version: 2.1
+jobs:
+ build:
+    docker:
+      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_3}
+```yaml
+version: 2.1
+jobs:
+ build:
+    docker:
+      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_2}
 ```yaml
 version: 2
 jobs:
