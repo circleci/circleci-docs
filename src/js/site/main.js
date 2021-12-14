@@ -436,7 +436,10 @@ $(document).ready(function () {
     return render(interval, 'SECOND');
   }
 
-  if(document.getElementById('postedon') && document.getElementById('postedago')){
+  if (
+    document.getElementById('postedon') &&
+    document.getElementById('postedago')
+  ) {
     var date = Date.parse(
       document.getElementById('postedon').getAttribute('datetime'),
     );
