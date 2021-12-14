@@ -211,7 +211,12 @@ jobs:
 ```
 
 {:.tab.switcher.Server_2}
+
 ```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
  build:
