@@ -162,7 +162,7 @@ describe('Optimizely Service', () => {
     it('test forceAll false, with valid options, get cookie but has no userId', async () => {
       const spy = jest.spyOn(Cookie, 'get').mockImplementation(() => 123);
       glob.forceAll = () => false;
-      glob.userData = {}
+      glob.userData = {};
       await expect(client.getVariationName(options)).resolves.toBe(null);
       expect(spy).toHaveBeenCalledWith(COOKIE_KEY);
     });
