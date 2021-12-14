@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-## This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
+This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
 
 * TOC
 {:toc}
