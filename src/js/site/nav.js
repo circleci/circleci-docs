@@ -51,3 +51,27 @@ $(document).ready(function () {
     });
   });
 })();
+
+// Language selector in header nav
+$(() => {
+  const globeBtn = $('#globe-lang-btn');
+  const langPicker = $('#lang-picker');
+
+  globeBtn.on('click', () => {
+    langPicker.show();
+  });
+
+  $('#globalNavLangEng').on('click', () => {
+    window.AnalyticsClient.trackAction('language-picker-english');
+  });
+  $('#globalNavLangJap').on('click', () => {
+    window.AnalyticsClient.trackAction('language-picker-japanese');
+  });
+
+  window.onclick = () => {
+    // console.log(window.event.target);
+    if (window.event.target == langPicker) {
+      langPicker.css('display', 'none');
+    }
+  };
+});
