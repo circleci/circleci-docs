@@ -29,20 +29,18 @@ describe('Optimizely Service', () => {
   };
 
   beforeEach(() => {
+    // ensure local storage clear
     window.localStorage.clear();
   });
 
   afterEach(() => {
+    glob.userData = null;
+    glob.forceAll = null;
     jest.clearAllMocks();
     jest.resetAllMocks();
   });
 
   describe('getUserId()', () => {
-    beforeEach(() => {
-      // Ensure glob is cleaned up after each test
-      glob.userData = null;
-    });
-
     it('test if userData exists but analytics_id undefined', () => {
       glob.userData = {};
       return client.getUserId().then((data) => {
@@ -89,10 +87,6 @@ describe('Optimizely Service', () => {
 
   // Function used in TrackExperimentViewed
   describe('isExperimentAlreadyViewed()', () => {
-    beforeEach(() => {
-      // ensure local storage clear
-      window.localStorage.clear();
-    });
     it('no experiment has been viewed before', () => {
       expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(null);
     });
@@ -110,13 +104,10 @@ describe('Optimizely Service', () => {
   describe('trackExperimentViewed()', () => {
     beforeEach(() => {
       global.AnalyticsClient = AnalyticsClient;
-      window.localStorage.clear();
-      jest.clearAllMocks();
     });
 
     afterEach(() => {
       delete global.AnalyticsClient;
-      jest.resetAllMocks();
     });
 
     it('expect trackExperimentViewed to not call trackAction as experiment viewed before', () => {
@@ -152,11 +143,6 @@ describe('Optimizely Service', () => {
   });
 
   describe('getVariationName()', () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-      jest.resetAllMocks();
-    });
-
     it('test forceAll is true return treatment', async () => {
       glob.forceAll = () => true;
       await expect(client.getVariationName(options)).resolves.toBe('treatment');
@@ -176,6 +162,7 @@ describe('Optimizely Service', () => {
     it('test forceAll false, with valid options, get cookie but has no userId', async () => {
       const spy = jest.spyOn(Cookie, 'get').mockImplementation(() => 123);
       glob.forceAll = () => false;
+      glob.userData = {}
       await expect(client.getVariationName(options)).resolves.toBe(null);
       expect(spy).toHaveBeenCalledWith(COOKIE_KEY);
     });
@@ -228,15 +215,6 @@ describe('Optimizely Service', () => {
 
   //Function used in TrackExperimentViewed
   describe('storeExperimentParticipation()', () => {
-    beforeEach(() => {
-      // ensure local storage clear
-      window.localStorage.clear();
-    });
-
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it('test function returns if data missing and storage null', () => {
       expect(storeExperimentParticipation('', '', '')).toBe();
       expect(window.localStorage.getItem(STORAGE_KEY)).toBe(null);
