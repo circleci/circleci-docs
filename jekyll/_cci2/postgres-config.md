@@ -24,7 +24,7 @@ follows, because the cimg/ruby:3.0-node image does not have psql installed
 by default and uses `pg` gem for database access.
 
 {:.tab.rails_app.Cloud}
-
+{% raw %}
 ```yaml
 version: 2.1
 jobs:
@@ -89,10 +89,10 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
+{% endraw %}
 
 {:.tab.rails_app.Server_3}
-
+{% raw %}
 ```yaml
 version: 2.1
 jobs:
@@ -157,10 +157,10 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
+{% endraw %}
 
 {:.tab.rails_app.Server_2}
-
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -225,7 +225,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
+{% endraw %}
 
 **Note:** An alternative is to build your own image by extending the current image,
 installing the needed packages, committing, and pushing it to Docker Hub or the
@@ -288,7 +288,7 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
 {:.tab.go_app.Cloud}
-
+{% raw %}
 ```yaml
 version: 2.1
 jobs:
@@ -371,10 +371,10 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
+{% endraw %}
 
 {:.tab.go_app.Server_3}
-
+{% raw %}
 ```yaml
 version: 2.1
 jobs:
@@ -457,10 +457,10 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
+{% endraw %}
 
 {:.tab.go_app.Server_2}
-
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -543,7 +543,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
+{% endraw %}
 
 ## Example mysql project.
 {: #example-mysql-project }
