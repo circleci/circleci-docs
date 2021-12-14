@@ -42,7 +42,7 @@
             </div>
             {% endif %}
 
-            {% if page.page-type == "index" %}
+            {% if page.page-type != "index" and page.page-type != "homepage" %}
             <time id="postedon" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
               <div id="postedon-text">
                 <div id="postedon-svg">
