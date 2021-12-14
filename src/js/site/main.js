@@ -3,7 +3,7 @@ import { highlightURLHash } from './highlightURLHash';
 
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
-  singleLine: true
+  singleLine: true,
 });
 
 // compiles an object of parameters relevant for analytics event tracking.
