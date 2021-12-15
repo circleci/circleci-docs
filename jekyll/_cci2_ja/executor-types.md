@@ -267,7 +267,7 @@ _クラウド版 CircleCI で利用可能です。オンプレミス版では現
 jobs:
   build:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
       # コマンドは、Xcode 11.3 がインストール済みの

@@ -64,7 +64,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
      ```yaml
          macos:
-           xcode: "9.0"
+           xcode: "12.5.1"
      ```
 
 6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。 それには、以下のコードを検索します。

@@ -127,7 +127,7 @@ machine: true
 
 # macOS Executor
 macos:
-  xcode: 11.3.0
+  xcode: 12.5.1
 
 # Windows Executor
 # NOTE: Orb declaration needed. See docs
@@ -236,15 +236,15 @@ orbs:
 
 jobs:
   build:
-    # executor config here 
+    # executor config here
 
     steps:
       - slack-orb/notify:
           color: '#32788D'
-          message: Tests passed 
+          message: Tests passed
           title: Testing Slack Orb
-          author_name: Bobby 
-          webhook: # WEBHOOK 
+          author_name: Bobby
+          webhook: # WEBHOOK
 ----
 
 2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
@@ -259,10 +259,10 @@ jobs:
     # environment config here
 
     steps:
-      - name: My Failure Step 
+      - name: My Failure Step
         run: echo "Failed step"
         if: failure()
-      - name: My Always Step 
+      - name: My Always Step
         run: echo "Always step"
         if: always()
 ----

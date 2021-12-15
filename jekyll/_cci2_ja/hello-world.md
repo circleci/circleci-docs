@@ -25,7 +25,7 @@ This document describes how to get started with a basic build of your Linux, And
    version: 2.1
      jobs:
        build:
-         docker: 
+         docker:
            - image: circleci/node:4.8.2 # ジョブのコマンドが実行されるプライマリ コンテナ
          steps:
            - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
@@ -71,7 +71,7 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
 jobs:
   build-macos:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 ```
 
 詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。

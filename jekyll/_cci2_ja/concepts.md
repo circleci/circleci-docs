@@ -130,8 +130,8 @@ jobs:
      image: ubuntu-2004:202010-01
 #...
  build3:
-     macos: # macOS 仮想マシンと Xcode バージョン 11.3 を指定します。
-       xcode: "11.3.0"
+     macos: # macOS 仮想マシンと Xcode バージョン 12.5.1 を指定します。
+       xcode: "12.5.1"
 # ...
 ```
 
@@ -166,8 +166,8 @@ jobs:
      image: ubuntu-2004:202010-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 11.3
-     xcode: "11.3.0"
+   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+     xcode: "12.5.1"
 # ...
 ```
 
@@ -204,8 +204,8 @@ jobs:
      image: ubuntu-1604:201903-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 11.3
-     xcode: "11.3.0"
+   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+     xcode: "12.5.1"
 # ...
 ```
 
@@ -275,8 +275,8 @@ jobs:
        image: ubuntu-1604:202007-01
 ...
    build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 9.0
-       xcode: "9.0"
+     macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+       xcode: "12.5.1"
  ...
  ```
 
@@ -444,7 +444,7 @@ workflows:
 version: 2
 jobs:
   build1:
-    docker: # 各ジョブで Executor (docker、macos、machine) 
+    docker: # 各ジョブで Executor (docker、macos、machine)
     # を指定する必要があります。 これらの比較や他の例
     # については、circleci.com/ja/docs/2.0/executor-types/
     # を参照してください。
@@ -699,7 +699,7 @@ jobs:
 #...
     steps:    
 
-      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス 
+      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス
       # (workspace/echo-output) をワークスペースに維持します。 このパスは、絶対パスまたは
       # working_directory からの相対パスでなければなりません。 This is a directory on the container which is
       # taken to be the root directory of the workspace.

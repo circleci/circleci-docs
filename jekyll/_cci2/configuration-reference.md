@@ -442,7 +442,7 @@ xcode | Y | String | The version of Xcode that is installed on the virtual machi
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 ```
 
 #### **`windows`**
@@ -611,7 +611,7 @@ large<sup>(3)</sup>| 8     | 16GB
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     resource_class: large
     steps:
       ... // other config
@@ -1963,7 +1963,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:

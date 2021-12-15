@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。 
+このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。
 
 NOTE: **ImagineX Consulting からのヒント**
 
@@ -191,7 +191,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osx-job:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"

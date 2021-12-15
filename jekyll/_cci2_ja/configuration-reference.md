@@ -8,19 +8,19 @@ version:
   - Cloud
   - Server v2.x
 suggested:
-  - 
+  -
     title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: Intro to dynamic config
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: Validate your config using local CLI
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: How to trigger a single job
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
@@ -208,7 +208,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:
@@ -449,13 +449,13 @@ CircleCI は [macOS](https://developer.apple.com/jp/macos/) 上でのジョブ�
 | xcode | ○  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。 iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
 {: class="table table-striped"}
 
-**例:** macOS 仮想マシンを Xcode バージョン 11.3 で使用する場合
+**例:** macOS 仮想マシンを Xcode バージョン 12.5.1 で使用する場合
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 ```
 
 #### **`windows`**
@@ -619,7 +619,7 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     resource_class: large
     steps:
       ... // 他の構成
@@ -1911,7 +1911,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:
