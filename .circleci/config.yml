@@ -73,7 +73,7 @@ commands:
       - run:
           name: Populate JEKYLL_BASENAME env var
           command: |
-            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main ]; then
+            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main -o ${CIRCLE_BRANCH} = /.*-preview/ ]; then
               echo "export JEKYLL_BASENAME=docs" >> $BASH_ENV;
             else
               echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
@@ -98,6 +98,14 @@ workflows:
             - js_build
             - build_server_pdfs
             - build_api_docs
+      - minimize-images:
+          requires:
+            - build              
+          filters: 
+            branches:
+              only: 
+                - master 
+                - /.*-preview/
       - datadog-synthetics-ci:
           context:
             - web-ui-datadog
@@ -112,6 +120,7 @@ workflows:
       - deploy-preview:
           requires:
             - datadog-synthetics-ci
+            - minimize-images
           filters:
             branches:
               only: /.*-preview/
@@ -123,6 +132,7 @@ workflows:
       - deploy:
           requires:
             - datadog-synthetics-ci
+            - minimize-images
           filters:
             branches:
               only: master
@@ -199,6 +209,7 @@ jobs:
             mv scripts/datadog-synthetics-preview.js /tmp/workspace/scripts/datadog-synthetics-preview.js
             mv scripts/datadog-synthetics-ci.sh /tmp/workspace/scripts/datadog-synthetics-ci.sh
             mv scripts/postinstall.sh /tmp/workspace/scripts/postinstall.sh
+            mv scripts/process-images.sh /tmp/workspace/scripts/process-images.sh
       - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
@@ -441,3 +452,26 @@ jobs:
       - run:
           name: Call Datadog CLI
           command: yarn datadog-synthetics-prod
+          
+  minimize-images:
+    executor:
+      name: node/default
+      tag: '14.17.3'
+    description: Compressing images with imagemin for prod
+    working_directory: *workspace_root
+    steps:
+      - *attach_workspace
+      - set-jekyll-basename
+      - run: 
+          name: move to correct workspace 
+          command: cd /tmp/workspace 
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run:
+          name: Minimize Images
+          command: yarn minimize-img
+      - persist_to_workspace:
+          root: *workspace_root
+          paths: 
+            - _site/*/assets/*
