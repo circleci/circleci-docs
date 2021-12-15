@@ -130,10 +130,76 @@ You will also need the following information:
 * The GPC Project you want to run nomad clients in. 
 * The GPC Zone you want to run nomad clients in. 
 * The GPC Region you want to run nomad clients in. 
-* The GPC Network you want to run nomad clients in. 
-* The ID of the GPC subnet you want to run nomad clients in. 
+* The GPC Network you want to run nomad clients in.
+* The GPC Subetwork you want to run nomad clients in. 
 
-You can copy the following example to your local environment and fill in the appropriate information for your specific setup. Once you have filled in the appropriate information you can deploy your nomad clients by running. 
+You can copy the following example to your local environment and fill in the appropriate information for your specific setup. 
+
+```
+variable "project" {
+  type    = string
+  default = "<your project>"
+}
+
+variable "region" {
+  type    = string
+  default = "<your-region>"
+}
+
+variable "zone" {
+  type    = string
+  default = "<your-zone>"
+}
+
+variable "network" {
+  type    = string
+  default = "<your-network-name>"
+  # if you are using a shared vpc, provide the network endpoint rather than the name. eg:
+  # default = "https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<your-network-name>"
+}
+
+variable "subnetwork" {
+  type    = string
+  default = "<your-subnetwork-name>"
+  # if you are using a shared vpc, provide the network endpoint rather than the name. eg:
+  # default = "https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<your-subnetwork-name>"
+}
+
+
+variable "server_endpoint" {
+  type    = string
+  default = "<nomad-server-loadbalancer>:4647"
+}
+
+provider "google-beta" {
+  project = var.project
+  region  = var.region
+  zone    = var.zone
+}
+
+
+module "nomad" {
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.3.0"
+
+  zone            = var.zone
+  region          = var.region
+  network         = var.network
+  subnetwork      = var.subnetwork
+  server_endpoint = var.server_endpoint
+  machine_type    = "n2-standard-8"
+
+  unsafe_disable_mtls    = true
+  assign_public_ip       = true
+  preemptible            = true
+  target_cpu_utilization = 0.50
+}
+
+output "module" {
+  value = module.nomad
+}
+```
+
+Once you have filled in the appropriate information you can deploy your nomad clients by running. 
 
 ----
 terraform init
