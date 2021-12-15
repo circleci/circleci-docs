@@ -24,7 +24,7 @@ toc::[]
 
 === Upgrade notes
 
-* The [rerun workflow](https://circleci.com/docs/api/v2/#operation/rerunWorkflow) endpoint now returns workflow ID rather than the message `accepted`.
+* The https://circleci.com/docs/api/v2/#operation/rerunWorkflow[rerun workflow] endpoint now returns workflow ID rather than the message `accepted`.
 
 === Fixes
 
