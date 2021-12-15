@@ -64,7 +64,6 @@ class OptimizelyClient {
       // it means the current user is not ready to see an experiment and so
       // getVariationName() will resolve to "null"
       const orgId = Cookies.get(COOKIE_KEY) ?? null;
-
       if (!orgId) {
         return resolve(null);
       }
