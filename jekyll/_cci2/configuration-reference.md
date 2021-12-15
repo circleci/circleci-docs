@@ -1172,7 +1172,7 @@ A path is not required here because the cache will be restored to the location f
 ##### **`deploy` – DEPRECATED**
 {: #deploy-deprecated }
 
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details. 
+**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
 
 Special step for deploying artifacts.
 
