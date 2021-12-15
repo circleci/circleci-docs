@@ -42,17 +42,27 @@ function reloadWithNewLocale(langCode) {
 }
 
 // Sets the sidebar language picker to the currently selected language
-function handleSetLanguageOnLoad() {
-  var currentLang = window.currentLang; // current lang is set in _includes/sidebar.html
+// function handleSetLanguageOnLoad() {
+//   var currentLang = window.currentLang; // current lang is set in _includes/sidebar.html
 
-  // Set value for 'sidebar'
-  for (var i, j = 0; (i = els.sidebarLangSelect.options[j]); j++) {
-    if (i.value == currentLang) {
-      els.sidebarLangSelect.selectedIndex = j;
-      break;
-    }
-  }
-}
+//   // Set value for 'sidebar'
+//   for (var i, j = 0; (i = els.sidebarLangSelect.options[j]); j++) {
+//     if (i.value == currentLang) {
+//       els.sidebarLangSelect.selectedIndex = j;
+//       break;
+//     }
+//   }
+// }
+
+// Sets the current active language in the dropdown
+const setLanguageSelectorOnLoad = () => {
+  const currentLang = window.currentLang;
+  currentLang === 'en'
+    ? $('#globalNavLangEng').css('background', '#F3F3F3')
+    : $('#globalNavLangJap').css('background', '#F3F3F3');
+  return;
+};
+setLanguageSelectorOnLoad();
 
 /**
  * Function to run when the sidebar language <select> is changed.
@@ -73,15 +83,23 @@ function handleSetLanguageOnLoad() {
 //   });
 // }
 
-// Used to handle language change for new language picker design in header
+/*
+ *  Reloads and changes the site to the selected language on click from the language dropdown
+ */
 const handleChangeLanguageNav = () => {
   els.globalNavLangEng.addEventListener('click', () => {
     reloadWithNewLocale('en');
-    window.AnalyticsClient.trackAction('language-picker-english');
+    window.AnalyticsClient.trackAction('Language Selector', {
+      selected: 'English',
+      browserNativeLang: window.navigator.language,
+    });
   });
   els.globalNavLangJap.addEventListener('click', () => {
     reloadWithNewLocale('ja');
-    window.AnalyticsClient.trackAction('language-picker-japanese');
+    window.AnalyticsClient.trackAction('Language Selector', {
+      selected: 'Japanese',
+      browserNativeLang: window.navigator.language,
+    });
   });
   return;
 };
@@ -89,6 +107,5 @@ handleChangeLanguageNav();
 
 export function init() {
   // handleChangeLanguageSidebar();
-  handleSetLanguageOnLoad();
-  // handleChangeLanguageNav();
+  // handleSetLanguageOnLoad();
 }
