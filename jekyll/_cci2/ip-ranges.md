@@ -145,6 +145,10 @@ Specific rates and details are being finalized and will be published when the fe
 
 While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold. 
 
+IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
+
+![Screenshot showing the location of the IP ranges feature]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
+
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
 
