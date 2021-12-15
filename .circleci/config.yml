@@ -103,7 +103,9 @@ workflows:
             - build              
           filters: 
             branches:
-              only: master 
+              only: 
+                - master 
+                - /.*-preview/
       - datadog-synthetics-ci:
           context:
             - web-ui-datadog
