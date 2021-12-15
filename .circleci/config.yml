@@ -73,7 +73,7 @@ commands:
       - run:
           name: Populate JEKYLL_BASENAME env var
           command: |
-            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main ]; then
+            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main -o ${CIRCLE_BRANCH} = /.*-preview/ ]; then
               echo "export JEKYLL_BASENAME=docs" >> $BASH_ENV;
             else
               echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
@@ -461,6 +461,7 @@ jobs:
     working_directory: *workspace_root
     steps:
       - *attach_workspace
+      - set-jekyll-basename
       - run: 
           name: move to correct workspace 
           command: cd /tmp/workspace 
@@ -472,4 +473,5 @@ jobs:
           command: yarn minimize-img
       - persist_to_workspace:
           root: *workspace_root
-          paths: _site/docs/assets/*
+          paths: 
+            - _site/*/assets/*
