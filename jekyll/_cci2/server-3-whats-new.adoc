@@ -24,11 +24,13 @@ toc::[]
 
 === Upgrade notes
 
-#DO WE NEED ANY NOTES HERE FOR THIS PATCH RELEASE - DO WE ASK PEOPLE TO GO THROUGH EVERY RELEASE OR CAN THEY JUMP?#
+* The [rerun workflow](https://circleci.com/docs/api/v2/#operation/rerunWorkflow) endpoint now returns workflow ID rather than the message `accepted`.
 
 === Fixes
 
-#TBC#
+* TLS is terminated outside of `frontend` so the SSL server has been completely removed from the `frontend` container.
+* Moved the default certificate logic from KOTS to helm.
+* Fixed the build agent image version used in server v3.x. The image used previously was causing problems with runner.
 
 === Known issues
 
