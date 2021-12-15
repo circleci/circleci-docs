@@ -480,6 +480,7 @@ We recommend you create a unique service account used exclusively by VM Service.
 ```bash
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ```
+NOTE: If your are deploying CircleCI server in a shared VCP, you will want to create this user in the project that you intend to have your VM jobs run.
 
 . *Get the service account email address*
 +
@@ -526,10 +527,18 @@ Name of the GCP project the cluster resides. Below this you can uncheck the box 
 GCP zone the virtual machines instances should be created in for example “us-east1-b”.
 
 ** *GCP VPC Network (required)* - 
-Name of the VPC Network.
+Name of the VPC Network. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the host network rather than the name. eg: 
++
+```
+https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<network-name>
+```
 
 ** *GCP VPC Subnet (optional)* - 
-Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
+Name of the VPC Subnet. If using auto-subnetting, leave this field blank. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the shared subnetwork rather than the name. eg: 
++
+```
+https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<subnetwork-name>
+```
 
 ** *GCP Service Account JSON Key File (required)* - 
 Copy and paste the contents of your service account JSON file.
