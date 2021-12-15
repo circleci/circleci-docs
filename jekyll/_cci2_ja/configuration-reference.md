@@ -609,8 +609,9 @@ jobs:
 
 | クラス                 | vCPU | RAM  |
 | ------------------- | ---- | ---- |
-| medium (デフォルト)      | 4    | 8GB  |
-| large<sup>(3)</sup> | 8    | 16GB |
+| medium (デフォルト)      | 4 @ 2.7 GHz    | 8GB  |
+| macos.x86.medium.gen2      | 4 @ 3.2 GHz    | 8GB  |
+| large<sup>(3)</sup> | 8 @ 2.7 GHz    | 16GB |
 {: class="table table-striped"}
 
 ###### 例
