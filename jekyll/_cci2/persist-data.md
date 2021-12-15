@@ -81,11 +81,7 @@ To determine which jobs utilize the above actions, you can search for the follow
 * `store_artifacts`
 * `store_test_results`
 
-All network egress will accrue network usage; the relevant actions are:
-
-* Restoring caches and workspaces to self-hosted runners
-* Downloading artifacts
-* Pushing data from jobs outside of CircleCI
+The relevant action resulting in network egress that will accrue network transfer usage is **restoring caches and workspaces to self-hosted runners**.
 
 Details about your storage and network transfer usage can be viewed on your Plan > Plan Usage screen. On this screen you can find:
 
