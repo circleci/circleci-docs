@@ -14,7 +14,6 @@ const Cookie = CookieOrginal;
 
 describe('Optimizely Service', () => {
   const client = new OptimizelyClient();
-  const userDataReady = new CustomEvent('userDataReady');
 
   const orgId = 'circle';
   const experimentKey = 'experiment_key';
@@ -41,60 +40,29 @@ describe('Optimizely Service', () => {
   });
 
   describe('getUserId()', () => {
-    it('test if userData exists but analytics_id undefined', () => {
+    it('returns null when userData is empty', () => {
       glob.userData = {};
       return client.getUserId().then((data) => {
         expect(data).toBe(null);
       });
     });
 
-    it('test if userData exists and analytics_id not null', async () => {
+    it('returns analytics_id when userData has a valid analytics_id', async () => {
       glob.userData = {
         analytics_id: '00000000-0000-0000-0000-000000000000',
       };
       await expect(client.getUserId()).resolves.toBe(
-        '00000000-0000-0000-0000-000000000000',
-      );
-    });
-
-    it('test waiting for userData to populate from null but without analytics_id', async () => {
-      glob.userData = null;
-
-      setTimeout(() => {
-        glob.userData = {
-          analytics_id: undefined,
-        };
-        window.dispatchEvent(userDataReady);
-      }, 100);
-
-      await expect(client.getUserId()).resolves.toBe(null);
-    });
-
-    it('test if userData does not exist initially and defined later with analytics_id', async () => {
-      glob.userData = null;
-      setTimeout(() => {
-        glob.userData = {
-          analytics_id: '00000000-0000-0000-0000-000000000000',
-        };
-        window.dispatchEvent(userDataReady);
-      }, 100);
-
-      await expect(client.getUserId()).resolves.toBe(
-        '00000000-0000-0000-0000-000000000000',
+        glob.userData.analytics_id,
       );
     });
   });
 
   // Function used in TrackExperimentViewed
   describe('isExperimentAlreadyViewed()', () => {
-    it('no experiment has been viewed before', () => {
-      expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(null);
-    });
-    it('experiment has not been viewed before but an experiment has been viewed', () => {
-      storeExperimentParticipation(orgId, experimentKey + '456', variationName);
+    it('returns false when experiment has not been viewed before', () => {
       expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(false);
     });
-    it('experiment has been viewed before', () => {
+    it('returns true when experiment has been viewed before', () => {
       storeExperimentParticipation(orgId, experimentKey, variationName);
       expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(true);
     });
@@ -110,11 +78,10 @@ describe('Optimizely Service', () => {
       delete global.AnalyticsClient;
     });
 
-    it('expect trackExperimentViewed to not call trackAction as experiment viewed before', () => {
-      storeExperimentParticipation(orgId, experimentKey, variationName);
-      expect(isExperimentAlreadyViewed(orgId, experimentKey)).toBe(true);
-
+    it('does not call trackAction when experiment viewed before', () => {
       const spy = jest.spyOn(window.AnalyticsClient, 'trackAction');
+      storeExperimentParticipation(orgId, experimentKey, variationName);
+
       trackExperimentViewed(
         orgId,
         experimentKey,
@@ -124,11 +91,13 @@ describe('Optimizely Service', () => {
         '5',
         '5',
       );
+
       expect(spy).not.toHaveBeenCalled();
     });
 
-    it('expect trackExperimentViewed to have not been viewed call trackAction', () => {
+    it('does call trackAction when experiment not viewed before', () => {
       const spy = jest.spyOn(window.AnalyticsClient, 'trackAction');
+
       trackExperimentViewed(
         orgId,
         experimentKey,
@@ -138,47 +107,48 @@ describe('Optimizely Service', () => {
         '5',
         '5',
       );
+
       expect(spy).toHaveBeenCalledWith('Experiment Viewed', expect.any(Object));
     });
   });
 
   describe('getVariationName()', () => {
-    it('test forceAll is true return treatment', async () => {
+    beforeEach(() => {
+      glob.forceAll = () => false;
+    });
+
+    it('returns treatment when forceAll is true', async () => {
       glob.forceAll = () => true;
       await expect(client.getVariationName(options)).resolves.toBe('treatment');
     });
 
-    it('test forceAll is false but options null', async () => {
+    it('returns error when options null', async () => {
       const errorObject = { error: 'Missing required options' };
-      glob.forceAll = () => false;
       await expect(client.getVariationName(null)).rejects.toEqual(errorObject);
     });
 
-    it('test forceAll is false, with valid options but no cookie', async () => {
-      glob.forceAll = () => false;
+    it('returns null when no cookie', async () => {
       await expect(client.getVariationName(options)).resolves.toBe(null);
     });
 
-    it('test forceAll false, with valid options, get cookie but has no userId', async () => {
+    it('returns null when no userId', async () => {
       const spy = jest.spyOn(Cookie, 'get').mockImplementation(() => 123);
-      glob.forceAll = () => false;
       glob.userData = {};
       await expect(client.getVariationName(options)).resolves.toBe(null);
       expect(spy).toHaveBeenCalledWith(COOKIE_KEY);
     });
 
-    describe('test when an organization is in the exclusion group', () => {
+    describe('getVariationName when an organization is in the exclusion group', () => {
       beforeEach(() => {
         glob.userData = {
           analytics_id: '11111111-1111-1111-1111-111111111111',
         };
-        glob.forceAll = () => false;
         jest.spyOn(Cookie, 'get').mockImplementation(() => ({
           userId: '11111111-1111-1111-1111-111111111111',
         }));
       });
 
-      it('GrowthExperiment is control', () => {
+      it('returns null when growthExperiment is control', () => {
         jest
           .spyOn(client.client, 'getVariation')
           .mockImplementationOnce(() => 'control');
@@ -187,7 +157,7 @@ describe('Optimizely Service', () => {
         });
       });
 
-      it('GrowthExperiment is treatment and variationName is control', () => {
+      it('returns control when growthExperiment is treatment and variationName is control', () => {
         jest
           .spyOn(client.client, 'getVariation')
           .mockImplementationOnce(() => 'treatment');
@@ -199,7 +169,7 @@ describe('Optimizely Service', () => {
         });
       });
 
-      it('GrowthExperiment is treatment and variationName is treatment', () => {
+      it('returns treatment when growthExperiment is treatment and variationName is treatment', () => {
         jest
           .spyOn(client.client, 'getVariation')
           .mockImplementationOnce(() => 'treatment');
@@ -215,27 +185,14 @@ describe('Optimizely Service', () => {
 
   //Function used in TrackExperimentViewed
   describe('storeExperimentParticipation()', () => {
-    it('test function returns if data missing and storage null', () => {
+    it('should not effect local storage if options invalid', () => {
       expect(storeExperimentParticipation('', '', '')).toBe();
       expect(window.localStorage.getItem(STORAGE_KEY)).toBe(null);
     });
 
-    it('test localStorage overriten and not null', () => {
+    it('should effect local storage if options are valid', () => {
       storeExperimentParticipation(orgId, experimentKey, variationName);
       expect(window.localStorage.getItem(STORAGE_KEY)).not.toBe(null);
-    });
-
-    it('test localStorage called', () => {
-      jest.spyOn(window.localStorage.__proto__, 'setItem');
-      window.localStorage.__proto__.setItem = jest.fn();
-
-      jest.spyOn(window.localStorage.__proto__, 'getItem');
-      window.localStorage.__proto__.getItem = jest.fn();
-
-      storeExperimentParticipation(orgId, experimentKey, variationName);
-
-      expect(window.localStorage.setItem).toHaveBeenCalled();
-      expect(localStorage.getItem).toBeCalledWith(STORAGE_KEY);
     });
   });
 });

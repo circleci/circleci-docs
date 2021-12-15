@@ -190,9 +190,7 @@ export const isExperimentAlreadyViewed = (orgId, experimentKey) => {
   try {
     const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
     return (
-      experiments &&
       Object.prototype.hasOwnProperty.call(experiments, orgId) &&
-      experiments[orgId] &&
       Object.prototype.hasOwnProperty.call(experiments[orgId], experimentKey)
     );
   } catch (_) {
