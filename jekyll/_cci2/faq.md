@@ -311,20 +311,15 @@ Calculate your monthly costs by finding your Storage and Network usage on the [C
 {: #storage }
 {:.no_toc}
 
-To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be mutliplied by 420 credits to estimate the total montly costs.
-
-![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
+To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 ##### Network
 {: #network }
 {:.no_toc}
 
-To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be mutliplied by 420 credits to estimate the total montly costs.
+To calculate monthly network costs from your usage, click on the **Network** tab to see if your organization has accrued any overages. In the same scenario as storage above, your network overage GB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
-
-![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
-
 
 #### Why does CircleCI have per-active-user pricing?
 {: #why-does-circleci-have-per-active-user-pricing }
