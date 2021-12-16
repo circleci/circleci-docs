@@ -170,6 +170,9 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 ```
 
 === Create a new GitHub OAuth app
+
+CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain then images will fail to load.
+
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
 . In your browser navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.

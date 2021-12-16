@@ -2,6 +2,7 @@
 
 import * as Cookie from 'js-cookie';
 import * as highlightjsBadge from 'highlightjs-badge';
+import * as highlightjsLineNumbers from 'highlightjs-line-numbers.js';
 
 import services from './services';
 import site from './site';

@@ -5,6 +5,8 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 
 ## 1. Local Development with Docker (recommended)
 
+If you are planning on making a pull request, please see the [pull request](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#submitting-pull-requests) instructions first.
+
 1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
 3. Start Docker Desktop
@@ -30,6 +32,10 @@ Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Ge
 We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
 
 You're welcome to use [Bundler](https://bundler.io/) to install these gems.
+
+## Submitting Pull Requests
+
+If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and follow the steps in [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) above. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
 
 ## Building js assets
 
@@ -86,7 +92,7 @@ If you want to work on the way search works on docs, follow the below instructio
 
 The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
-All docs live in folders named after the version of CircleCI. The only one you need to worry about is `jekyll/_cci2` or `jekyll/_cci2_ja` if you want to work on our translated content. .
+All docs live in folders named after the version of CircleCI. The only folder relevant to editing docs locally is `jekyll/_cci2`.
 
 1. Create a branch and switch to it:
 
@@ -143,10 +149,6 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 # Not in the TOC
 {:.no_toc}
 ```
-
-## Submitting Pull Requests
-
-If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and follow the steps in [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) above. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
 
 ## Docker Tag List for CircleCI Convenience Images
 
