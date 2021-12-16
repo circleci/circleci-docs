@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "Webhook"
 short-title: "Webhook を使って CircleCI のイベントを受け取る"
 description: "Webhook を使って CircleCI のイベントを受け取る"
@@ -413,5 +413,4 @@ Webhook イベントに関連するトリガーに関するデータ
     "number": 136
   }
 }
-
 ```
