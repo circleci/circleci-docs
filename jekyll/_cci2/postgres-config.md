@@ -347,7 +347,7 @@ jobs:
       - run: make
 
       - save_cache:
-          key: - go-mod-v1-{% raw %}{ checksum "go.sum" }}{% endraw %}
+          key: - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
           paths:
             - "/go/pkg/mod"
 
