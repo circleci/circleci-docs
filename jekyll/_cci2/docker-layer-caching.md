@@ -125,7 +125,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci \
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Debian Jessie is EOL'd and original repos don't work.
+# Debian Jessie is EOL'd and original repos do not work.
 # Switch to the archive mirror until we can get people to
 # switch to Stretch.
 RUN if grep -q Debian /etc/os-release && grep -q jessie /etc/os-release; then \
