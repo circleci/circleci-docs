@@ -40,11 +40,11 @@ CAUTION: サブネットは、 アドレスが枯渇することが*決してな
 
 // Check whether the ACL needs to be more open so the services/build can download build images
 
-== 計画
+== 事前準備
 インストールを開始する前に、以下の情報とポリシーを確認してください。
 
 * ネットワーク プロキシを使用する場合は、インストールを開始する前に、お客様のアカウントチームに連絡してください。
-* Services 用に 1つ、Nomad クライアントの最初のセット用に 1つ、少なくとも 2つの AWS インスタンスのプロビジョニングを計画します。 ベストプラクティスとして、Services と Nomad クライアントの両方のインスタンスに、8つの vCPU と 32 GB の RAM を備えた `m4.2xlarge` インスタンスを使用することをお勧めします。
+* Services 用に 1つ、Nomad クライアントの最初のセット用に 1つ、少なくとも 2つの AWS インスタンスのプロビジョニングを行います。 ベストプラクティスとして、Services と Nomad クライアントの両方のインスタンスに、8つの vCPU と 32 GB の RAM を備えた `m4.2xlarge` インスタンスを使用することをお勧めします。
 * AWS インスタンスには、Docker コンテナをプルし、ライセンスを確認するために、アウトバウンドアクセスが必要です。 外部アクセスを制限したい場合は、https://help.replicated.com/community/t/customer-firewalls/55[[アクセスが必要なポート一覧]]を参照してください。
 * Terraform を使用して必要な AWS エンティティをプロビジョニングするには、次の権限を持つ IAM ユーザーが必要です (IAM ユーザーの作成については、https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[AWS ガイダンス] を参照してください）。
 +
