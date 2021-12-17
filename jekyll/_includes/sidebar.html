@@ -11,8 +11,7 @@
           <!-- "main items" (Getting Started, Configuration etc.) -->
           <div class="list-wrap">
             {% if main-item.icon %}
-            <img class="icon"
-              src="{{ site.baseurl }}/{% ministamp { source_path: 'assets/img/{{ main-item.icon }}', destination_path: 'assets/{{ main-item.icon }}' } %}">
+              <img class="icon" src="{{ site.baseurl }}/assets/img/{{ main-item.icon }}">
             {% endif %}
 
             {% if main-item.i18n_name %}
@@ -30,8 +29,9 @@
             {% endif %}
 
             {% if main-item.children %}
-            <img class="arrow" crossorigin="anonymous"
-              src="{{ site.baseurl }}/{% ministamp assets/img/docs/arrow-right.svg assets/docs/arrow-right.svg %}">
+
+              <img class="arrow" crossorigin="anonymous" src="{{ site.baseurl }}/assets/img/docs/arrow-right.svg">
+
             {% endif %}
           </div>
 
