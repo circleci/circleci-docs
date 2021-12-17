@@ -407,7 +407,7 @@ $(document).ready(highlightURLHash());
 $(document).ready(function () {
   function ago(date) {
     function render(n, unit) {
-      return n + ' ' + unit + (n == 1 ? '' : 'S') + ' AGO';
+      return n + ' ' + unit + (n === 1 ? '' : 'S') + ' AGO';
     }
 
     var seconds = Math.floor((new Date() - date) / 1000);
@@ -437,12 +437,12 @@ $(document).ready(function () {
   }
 
   if (
-    document.getElementById('postedon') &&
-    document.getElementById('postedago')
+    document.getElementById('time-posted-on') &&
+    document.getElementById('time-posted-ago')
   ) {
     var date = Date.parse(
-      document.getElementById('postedon').getAttribute('datetime'),
+      document.getElementById('time-posted-on').getAttribute('datetime'),
     );
-    document.getElementById('postedago').innerHTML = ago(date);
+    document.getElementById('time-posted-ago').innerHTML = ago(date);
   }
 });

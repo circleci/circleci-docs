@@ -710,14 +710,14 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 }
 
 // CSS styling for the date modifiex X ago
-#postedon {
+#time-posted-on {
 	display: flex;
 	align-items: center;
 	margin-bottom: 16px;
 	margin-top: -4px;
 }
 
-#postedon-text {
+#time-posted-on-text {
 	background: #F7F7F7;
 	border-radius: 20px;
 	font-family: Roboto;
@@ -729,9 +729,6 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 	padding: 6px 10px 6px 9px;
 }
 
-#postedon-svg {
-	float: left;
-	margin-right: 6px;
-	height: 18px;
-	width: 18px;
+#time-posted-on-svg {
+	margin: 0px 3px 3px 0px;
 }
