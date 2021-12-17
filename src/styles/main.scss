@@ -13,13 +13,13 @@
 @import 'spacing';
 @import 'syntax';
 @import 'snippets';
+@import 'progressbar';
 
 // General
 body {
 	color: $body-text-color;
 	display: block;
 	width: 100%;
-	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 30%, #fff 30%, #fff 100%);
 	font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -66,7 +66,6 @@ div.main-body{
 
 div.main-body {
 	display: flex;
-	background: #fff;
 }
 
 .text-center-small-float-right {
@@ -205,7 +204,7 @@ div.article-container{
     @media (max-width: $screen-sm) {
       width: 100%;
     }
-    min-height: calc(100vh - 68px); // make sure content always fills available space (68px is header size)
+    min-height: calc(100vh - $sticky-height); // make sure content always fills available space (70px is header size)
 }
 
 article{

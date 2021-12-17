@@ -57,7 +57,7 @@ export function fetchUserData() {
     });
 }
 
-$(fetchUserData());
+$(fetchUserData);
 
 export function setAmplitudeId() {
   const DAYS_PER_MINUTE = 1 / 24 / 60;

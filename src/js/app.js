@@ -14,6 +14,7 @@ import experiments from './experiments';
 services.instantsearch.init();
 services.lang.init();
 services.rum.init();
+services.progressbar.init();
 
 // adding "Clients" to the window object so they can be accessed by other js inside Jekyll
 window.Cookie = Cookie;

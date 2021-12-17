@@ -3,7 +3,8 @@ import * as instantsearch from './instantsearch';
 import * as lang from './lang';
 import OptimizelyClient from './optimizely';
 import * as rum from './rum';
-import highlightjsBadge from '../services/highlightJSBadge';
+import highlightjsBadge from './highlightJSBadge';
+import * as progressbar from './progressbar';
 
 export default {
   AnalyticsClient,
@@ -12,4 +13,5 @@ export default {
   OptimizelyClient,
   rum,
   highlightjsBadge,
+  progressbar,
 };
