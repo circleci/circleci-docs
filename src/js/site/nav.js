@@ -52,15 +52,22 @@ $(document).ready(function () {
   });
 })();
 
-// Language selector in header nav
+// Open dropdown in language selector
 $(() => {
   const globeBtn = $('#globe-lang-btn');
   const langPicker = $('#lang-picker');
-  globeBtn.on('click', () => {
-    if (langPicker.css('display') == 'none') {
-      langPicker.css('display', 'block');
-    } else {
-      langPicker.css('display', 'none');
+
+  $('body').mouseup((e) => {
+    globeBtn.on('click', () => {
+      langPicker.toggleClass('lang-active');
+    });
+
+    if (
+      !langPicker.is(e.target) &&
+      langPicker.has(e.target).length === 0 &&
+      langPicker.hasClass('lang-active')
+    ) {
+      langPicker.removeClass('lang-active');
     }
   });
 });
