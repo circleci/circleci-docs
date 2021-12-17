@@ -221,6 +221,10 @@ $btn-selected-blue: #004A95;
   padding: 8px 0 0 0;
 }
 
+.lang-selector-wrapper {
+  position: relative;
+}
+
 .lang-picker-mobile {
   display: none;
   @media (max-width: $screen-md) {
@@ -244,17 +248,20 @@ $btn-selected-blue: #004A95;
   box-shadow: 0px 0px 8px 0px #1616161F;
   z-index: 30;
   margin-top: 5px;
+  left: -21px;
 }
+
 .lang-dropdown {
   width: 160px;
 }
+
 .lang-option {
   display: block;
   color: $black;
   margin: 4px 0px;
   padding: 4px 20px;
   font-size: 15px;
-  font-family: "Roboto";
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 18px;
   &:hover {
     color: $btn-hover-blue;
@@ -275,6 +282,7 @@ $btn-selected-blue: #004A95;
     }
     margin: 0 16px;
   }
+
 
   --link-color: #{$gray-dark};
   --link-color-hover: #{$btn-hover-blue};
