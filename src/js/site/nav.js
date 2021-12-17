@@ -57,7 +57,7 @@ $(() => {
   const globeBtn = $('#globe-lang-btn');
   const langPicker = $('#lang-picker');
 
-  $('body').mouseup((e) => {
+  $('body').on('mouseup', (e) => {
     globeBtn.on('click', () => {
       langPicker.toggleClass('lang-active');
     });
