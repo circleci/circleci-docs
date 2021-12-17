@@ -221,7 +221,7 @@ $btn-selected-blue: #004A95;
   padding: 8px 0 0 0;
 }
 
-.language-picker-mobile {
+.lang-picker-mobile {
   display: none;
   @media (max-width: $screen-md) {
     display: block;
@@ -263,6 +263,9 @@ $btn-selected-blue: #004A95;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     transition-duration: .15s;
   }
+}
+.lang-active {
+  display: block;
 }
 
 .global-nav--external-link {
