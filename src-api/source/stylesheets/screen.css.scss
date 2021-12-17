@@ -358,15 +358,13 @@ html, body {
     clear: both;
   }
 
-
-
-  .header-links,  {
+  .header-links {
     margin-right: 50%;
     padding: 24px 28px;
     box-sizing: border-box;
     display: flex;
-
   }
+
   .content-link {
     color: #7F7F7F;
     display: flex;
@@ -379,12 +377,19 @@ html, body {
     }
   }
 
+  .content-link-v2banner {
+    color: #7F7F7F;
+    text-decoration: none;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
   .new-window {
     color: grey;
     width: 12px;
     padding-left: 8px;
   }
-
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
     margin-right: $examples-width;
@@ -524,9 +529,7 @@ html, body {
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
-    margin-top: 1.5em;
     margin-bottom: 1.5em;
-    background: $aside-notice-bg;
     line-height: 1.6;
 
     &.warning {
@@ -535,6 +538,16 @@ html, body {
 
     &.success {
       background-color: $aside-success-bg;
+    }
+
+    &.notice {
+      margin-top: 1.5em;
+      background: $aside-notice-bg;
+    }
+
+    &.v2-banner {
+      margin-top: 0em;
+      background: $aside-v2banner-bg;
     }
   }
 
