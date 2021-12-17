@@ -30,14 +30,14 @@ Apple は、アクセス許可を付与するコマンドラインベースの�
 
 一意の `TCC.db` ファイルが 2 つ使用されています。 1つ目のコピーは、ホームディレクトリの `~/Library/Application Support/com.apple.TCC/TCC.db` に、2つ目のコピーは、 `/Library/Application Support/com.apple.TCC/TCC.db` にあります。 アクセス許可を追加または変更する場合は、実行時にアクセス許可が確実に有効となるようこの２つのファイル両方を編集する必要があります。
 
-System Integrity Protection (SIP: システム整合性保護) が有効な状態だと、ホームディレクトリに配置されているコピーへの書き込みは可能ですが、`/Library/Application Support/com.apple.TCC/TCC.db` への書き込みはできません (macOS Mojave以降)。 CircleCI 上では、Xcode 11.7 以降のすべてのイメージの SIP が無効になっています。 SIP が有効なイメージに対して `TCC.db` への書き込みを行うと、ジョブが失敗します。
+System Integrity Protection (SIP: システム整合性保護) が有効な状態だと、ホームディレクトリに配置されているコピーへの書き込みは可能ですが、`/Library/Application Support/com.apple.TCC/TCC.db` への書き込みはできません (macOS Mojave以降)。 CircleCI 上では、Xcode 12.5.1 以降のすべてのイメージの SIP が無効になっています。 SIP が有効なイメージに対して `TCC.db` への書き込みを行うと、ジョブが失敗します。
 
 アクセス許可の追加は、CircleCI の設定で `sqlite3` コマンドを使って手動で書くこともできますが、 [CircleCIでは、これを簡略化するための Orb](https://circleci.com/developer/orbs/orb/circleci/macos) を提供しています。
 
 ## サポートされている Xcode および macOS のバージョン
 {: #supported-xcode-and-macos-versions }
 
-macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
+macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 12.5.1 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
 詳細については、 [サポートされている Xcode バージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) のリストを参照してください。
 
@@ -66,7 +66,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -126,7 +126,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -161,7 +161,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -191,7 +191,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -211,7 +211,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -233,7 +233,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/delete-permission:

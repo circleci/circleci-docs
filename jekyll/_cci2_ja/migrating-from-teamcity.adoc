@@ -1,4 +1,4 @@
-= TeamCity からの移行 
+= TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: pygments.rb
@@ -102,7 +102,7 @@ a|
 [source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 version: "2019.2"
 
@@ -221,7 +221,7 @@ project {
     parallel {
         build(Test1)
         build(Test2)
-    } 
+    }
     build(Package)
     build(Publish)
   }
@@ -279,7 +279,7 @@ jobs:
   my-mac-job:
     # Executor の定義
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 
     # ステップの定義
     steps:

@@ -127,14 +127,14 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.0
+      xcode: 12.5.1
     steps:
       # ...
       - run: bundle exec fastlane test
 
   adhoc:
     macos:
-      xcode: 12.5.0
+      xcode: 12.5.1
     steps:
       # ...
       - run: bundle exec fastlane adhoc
@@ -185,7 +185,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "12.5.1"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
@@ -204,7 +204,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
+      xcode: "12.5.1"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output

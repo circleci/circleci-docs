@@ -10,7 +10,7 @@ title: Migrating from GitLab
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from GitLab to CircleCI. 
+This document provides an overview of how to migrate from GitLab to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
@@ -196,7 +196,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osx-job:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"

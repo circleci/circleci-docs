@@ -78,7 +78,7 @@ Using the basics from the Linux and Android examples above, you can add a job th
 jobs:
   build-macos:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 ```
 
 Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.

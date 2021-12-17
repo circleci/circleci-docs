@@ -39,7 +39,7 @@ version:
 
 - Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[CircleCI イメージ]({{ site.baseurl }}/2.0/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはオペレーティング システムの全体ではないので、通常はソフトウェアのビルドの効率化が図れます。
 - Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、Ubuntu バージョン (16.04 など) を使用します。
-- macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (10.0.0 など) を使用します。
+- macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。
 
 ## Docker を使用する
 {: #using-docker }
@@ -267,10 +267,10 @@ _クラウド版 CircleCI で利用可能です。オンプレミス版では現
 jobs:
   build:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
-      # コマンドは、Xcode 11.3 がインストール済みの
+      # コマンドは、Xcode 12.5.1 がインストール済みの
       # macOS コンテナ内で実行されます
       - run: xcodebuild -version
 ```

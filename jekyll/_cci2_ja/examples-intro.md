@@ -106,7 +106,7 @@ _macOS Executor は、オンプレミス版の CircleCI Server では現在サ�
 jobs:
   build-and-test:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       ...
       - run:

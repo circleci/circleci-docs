@@ -59,10 +59,10 @@ jobs:
 jobs:
   build: # ジョブの名前
     macos: # Executor タイプ
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
-      # Xcode 11.3 がインストールされた
+      # Xcode 12.5.1 がインストールされた
       # macOS 仮想マシン環境で実行するコマンド
 ```
 

@@ -10,22 +10,22 @@ version:
   - Cloud
   - Server v2.x
 suggested:
-  - 
+  -
     title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: How to create a webhook
     link: https://circleci.com/blog/using-circleci-webhooks/
-  - 
+  -
     title: Automate your releases
     link: https://circleci.com/blog/automating-your-releases-with-circleci-and-the-github-cli-orb/
-  - 
+  -
     title: Customize your Slack notifications
     link: https://support.circleci.com/hc/en-us/articles/360052728991-How-to-customize-your-Slack-messages-when-using-CircleCI-s-Slack-Orb
-  - 
+  -
     title: Validate your config using local CLI
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: Deploy with approval-based workflows
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
@@ -1202,7 +1202,7 @@ jobs:
 
   build-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 12.5.1
     parameters:
       label:
         type: string
@@ -1304,7 +1304,7 @@ jobs:
 
   test-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 12.5.1
     parameters:
       label:
         type: string
@@ -1378,7 +1378,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run:

@@ -38,7 +38,7 @@ It is possible to specify a different executor type for every job in your ['.cir
 
 - Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version such as 16.04.
-- Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
+- Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
 ## Using Docker
 {: #using-docker }
@@ -300,11 +300,11 @@ You can also specify which version of Xcode should be used. See the [Supported X
 jobs:
   build:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 11.3 installed
+      # with Xcode 12.5.1 installed
       - run: xcodebuild -version
 ```
 

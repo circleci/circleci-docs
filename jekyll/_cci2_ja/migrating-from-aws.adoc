@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-このドキュメントでは、AWS CodeCommit から CircleCI に移行する方法を概説します。 
+このドキュメントでは、AWS CodeCommit から CircleCI に移行する方法を概説します。
 
 NOTE: **ImagineX Consulting からのヒント**
 
@@ -60,7 +60,7 @@ AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップ�
 |===
 | AWS | CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義 
+2+| 1つのビルドステップを実行するジョブの定義
 
 a|
 [source, json]
@@ -204,7 +204,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"
