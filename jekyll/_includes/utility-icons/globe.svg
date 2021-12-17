@@ -4,7 +4,6 @@
   {% assign size = 12 %}
 {% endif %}
 
-<?xml version="1.0" encoding="utf-8"?>
 <svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
     <g stroke="currentColor" stroke-miterlimit="10" stroke-width="1.25">
         <path d="m9.00001 17.3077c4.58819 0 8.30769-3.7195 8.30769-8.30771s-3.7195-8.307693-8.30769-8.307693c-4.58821 0-8.307688 3.719483-8.307688 8.307693s3.719478 8.30771 8.307688 8.30771z"></path>
