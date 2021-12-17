@@ -270,7 +270,7 @@ jobs:
       xcode: 12.5.1
 
     steps:
-      # コマンドは、Xcode 11.3 がインストール済みの
+      # コマンドは、Xcode 12.5.1 がインストール済みの
       # macOS コンテナ内で実行されます
       - run: xcodebuild -version
 ```

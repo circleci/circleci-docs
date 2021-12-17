@@ -67,7 +67,7 @@ The Azure DevOps Pipelines and CircleCI configurations will be different. It may
 |===
 | Azure DevOps | CircleCI
 
-2+| Define a job that executes a single build step. 
+2+| Define a job that executes a single build step.
 
 a|
 [source, ini]
@@ -203,7 +203,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"
