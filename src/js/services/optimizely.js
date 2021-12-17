@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { isProduction } from '../utils';
 import Cookies from 'js-cookie';
 
-const COOKIE_KEY = 'cci-org-analytics-id';
-const STORAGE_KEY = 'growth-experiments-participated';
+export const COOKIE_KEY = 'cci-org-analytics-id';
+export const STORAGE_KEY = 'growth-experiments-participated';
 const optimizelyLogLevel = isProduction() ? 'error' : 'info';
 optimizelySDK.setLogLevel(optimizelyLogLevel);
 
@@ -147,7 +147,7 @@ class OptimizelyClient {
 // trackExperimentViewed checks if we alredy have sent the Experiment Viewed
 // event to segment/amplitude by looking into the localstorage.
 // If not, it builds the properties needed and call trackAction with it
-const trackExperimentViewed = (
+export const trackExperimentViewed = (
   orgId,
   experimentKey,
   experimentContainer,
@@ -185,14 +185,11 @@ const trackExperimentViewed = (
 
 // isExperimentAlreadyViewed checks in the localstorage if we already
 // marked the experiment as viewed
-const isExperimentAlreadyViewed = (orgId, experimentKey) => {
+export const isExperimentAlreadyViewed = (orgId, experimentKey) => {
   try {
     const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
     return (
-      experiments &&
       Object.prototype.hasOwnProperty.call(experiments, orgId) &&
-      experiments[orgId] &&
       Object.prototype.hasOwnProperty.call(experiments[orgId], experimentKey)
     );
   } catch (_) {
@@ -203,7 +200,11 @@ const isExperimentAlreadyViewed = (orgId, experimentKey) => {
 
 // storeExperimentParticipation stores the experiment variationName in the
 // localstorage
-const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
+export const storeExperimentParticipation = (
+  orgId,
+  experimentKey,
+  variationName,
+) => {
   if (!orgId || !experimentKey || !variationName) {
     return;
   }

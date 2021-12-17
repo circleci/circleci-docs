@@ -145,6 +145,10 @@ Specific rates and details are being finalized and will be published when the fe
 
 While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold. 
 
+IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
+
+![Screenshot showing the location of the IP ranges feature]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
+
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
 
@@ -173,5 +177,6 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 ## Known limitations
 {: #knownlimiations}
 
+- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 - IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
 - If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses](https://circleci.com/docs/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.

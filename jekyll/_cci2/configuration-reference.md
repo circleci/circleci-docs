@@ -1172,7 +1172,7 @@ A path is not required here because the cache will be restored to the location f
 ##### **`deploy` – DEPRECATED**
 {: #deploy-deprecated }
 
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and scheduling keys.**
+**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
 
 Special step for deploying artifacts.
 
@@ -1460,7 +1460,7 @@ workflows:
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
 
 ### **`version`**
-{: #version }
+{: #workflow-version }
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
 
 Key | Required | Type | Description
