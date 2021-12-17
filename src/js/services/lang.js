@@ -1,28 +1,24 @@
 /**
- * JS related to our language switcher in the footer
+ * JS related to the language selector in the header nav
  */
 
 // helpers -------------------
 
-function getElById(id) {
-  return document.getElementById(id);
-}
+const getElById = (id) => document.getElementById(id);
 
-var languages = {
+const languages = {
   en: { name: 'English', url: 'docs/' },
   ja: { name: '日本語', url: 'docs/ja/' },
 };
 
 // List of elements that have dynamic content based on our selected language
-var els = {
-  sidebarLangSelect: getElById('sidebarLangSelect'),
-  footerLangSelect: getElById('footerLangSelect'),
-  footerLangOptions: getElById('footerLangOptions'),
+const els = {
   globalNavLangEng: getElById('globalNavLangEng'),
   globalNavLangJap: getElById('globalNavLangJap'),
 };
 
-function redirectLocation(langCode) {
+// Sets the new url for the lanuage selected
+const redirectLocation = (langCode) => {
   const parser = new RegExp(
     '^(https?://' + window.location.host + '/)(docs/[a-z]{2}/|docs/)(.*)',
     's',
@@ -35,26 +31,14 @@ function redirectLocation(langCode) {
     parser,
     '$1' + languages[langCode].url + '$3',
   );
-}
+};
 
-function reloadWithNewLocale(langCode) {
+// Reloads the page with the new url of the selected language applied
+const reloadWithNewLocale = (langCode) => {
   window.location.href = redirectLocation(langCode);
-}
+};
 
-// Sets the sidebar language picker to the currently selected language
-// function handleSetLanguageOnLoad() {
-//   var currentLang = window.currentLang; // current lang is set in _includes/sidebar.html
-
-//   // Set value for 'sidebar'
-//   for (var i, j = 0; (i = els.sidebarLangSelect.options[j]); j++) {
-//     if (i.value == currentLang) {
-//       els.sidebarLangSelect.selectedIndex = j;
-//       break;
-//     }
-//   }
-// }
-
-// Sets the current active language in the dropdown
+// Shows the current active/selected language in the dropdown
 const setLanguageSelectorOnLoad = () => {
   const currentLang = window.currentLang;
   currentLang === 'en'
@@ -62,30 +46,8 @@ const setLanguageSelectorOnLoad = () => {
     : $('#globalNavLangJap').css('background', '#F3F3F3');
   return;
 };
-setLanguageSelectorOnLoad();
 
-/**
- * Function to run when the sidebar language <select> is changed.
- * It checks the newly selected language code and reloads the page in that language.
- */
-// function handleChangeLanguageSidebar() {
-//   els.sidebarLangSelect.addEventListener('change', function (e) {
-//     switch (e.target.value) {
-//       case 'ja':
-//         reloadWithNewLocale('ja');
-//         break;
-//       case 'en':
-//         reloadWithNewLocale('en');
-//         break;
-//       default:
-//         return;
-//     }
-//   });
-// }
-
-/*
- *  Reloads and changes the site to the selected language on click from the language dropdown
- */
+//  Reloads and changes the site to the selected language on click from the language dropdown
 const handleChangeLanguageNav = () => {
   els.globalNavLangEng.addEventListener('click', () => {
     reloadWithNewLocale('en');
@@ -103,9 +65,8 @@ const handleChangeLanguageNav = () => {
   });
   return;
 };
-handleChangeLanguageNav();
 
 export function init() {
-  // handleChangeLanguageSidebar();
-  // handleSetLanguageOnLoad();
+  setLanguageSelectorOnLoad();
+  handleChangeLanguageNav();
 }
