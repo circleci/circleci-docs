@@ -20,7 +20,6 @@ plugins:
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
-  - jekyll/minibundle
 
 algolia:
   application_id: U0RXNGRK45

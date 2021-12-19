@@ -80,7 +80,6 @@ GEM
       jekyll (>= 3.0.0)
     jekyll-include-cache (0.2.1)
       jekyll (>= 3.7, < 5.0)
-    jekyll-minibundle (3.0.0)
     jekyll-sass-converter (2.1.0)
       sassc (> 2.0.1, < 3.0)
     jekyll-sitemap (1.4.0)
@@ -173,7 +172,6 @@ DEPENDENCIES
   jekyll-algolia (~> 1.0)
   jekyll-asciidoc
   jekyll-include-cache
-  jekyll-minibundle
   jekyll-sitemap
   jekyll-target-blank
   jekyll-toc
