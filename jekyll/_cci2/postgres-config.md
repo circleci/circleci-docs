@@ -139,7 +139,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
 
