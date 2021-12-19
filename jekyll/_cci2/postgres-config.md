@@ -23,144 +23,6 @@ sure that `psql` is installed in your PATH and has the proper permissions, as
 follows, because the cimg/ruby:3.0-node image does not have psql installed
 by default and uses `pg` gem for database access.
 
-{:.tab.rails_app.Cloud}
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    working_directory: ~/circleci-demo-ruby-rails
-
-    # Primary container image where all commands run
-
-    docker:
-      - image: cimg/ruby:3.0-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
-
-    # Service container image available at `host: localhost`
-
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle-test_test
-
-    steps:
-      - checkout
-
-      # Restore bundle cache
-      - restore_cache:
-          keys:
-            - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
-            - rails-demo-
-
-      # Bundle install dependencies
-      - run:
-          name: Install dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
-
-      - run: sudo apt install -y postgresql-client || true
-
-      # Store bundle cache
-      - save_cache:
-          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
-          paths:
-            - vendor/bundle
-
-      - run:
-          name: Database Setup
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:structure:load
-
-      - run:
-          name: Parallel RSpec
-          command: bin/rails test
-
-      # Save artifacts
-      - store_test_results:
-          path: /tmp/test-results
-```
-
-
-{:.tab.rails_app.Server_3}
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    working_directory: ~/circleci-demo-ruby-rails
-
-    # Primary container image where all commands run
-
-    docker:
-      - image: cimg/ruby:3.0-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
-
-    # Service container image available at `host: localhost`
-
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle-test_test
-
-    steps:
-      - checkout
-
-      # Restore bundle cache
-      - restore_cache:
-          keys:
-            - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
-            - rails-demo-
-
-      # Bundle install dependencies
-      - run:
-          name: Install dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
-
-      - run: sudo apt install -y postgresql-client || true
-
-      # Store bundle cache
-      - save_cache:
-          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
-          paths:
-            - vendor/bundle
-
-      - run:
-          name: Database Setup
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:structure:load
-
-      - run:
-          name: Parallel RSpec
-          command: bin/rails test
-
-      # Save artifacts
-      - store_test_results:
-          path: /tmp/test-results
-```
-
-
-{:.tab.rails_app.Server_2}
-
 ```yaml
 version: 2
 jobs:
@@ -207,7 +69,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
 
@@ -225,7 +87,6 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
 
 **Note:** An alternative is to build your own image by extending the current image,
 installing the needed packages, committing, and pushing it to Docker Hub or the
@@ -287,180 +148,6 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
-{:.tab.go_app.Cloud}
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    docker:
-      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go/
-      - image: cimg/go:1.17
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres/
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: circleci-demo-go
-          POSTGRES_DB: circle_test
-
-    environment:
-      TEST_RESULTS: /tmp/test-results
-
-    steps:
-      - checkout
-      - run: mkdir -p $TEST_RESULTS
-
-      - restore_cache:
-          keys: 
-            - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
-
-      - run:
-          name: Get dependencies
-          command: |
-            go get -v
-
-      - run:
-          name: Get go-junit-report for setting up test timings on CircleCI
-          command: |
-            go get github.com/jstemmer/go-junit-report
-            # Remove go-junit-report from go.mod
-            go mod tidy
-
-      #  Wait for Postgres to be ready before proceeding
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: |
-            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
-            make test | tee ${TEST_RESULTS}/go-test.out
-      - run: make
-
-      - save_cache:
-          key: - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
-          paths:
-            - "/go/pkg/mod"
-
-      - run:
-          name: Start service
-          environment:
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: ./workdir/contacts
-          background: true
-
-      - run:
-          name: Validate service is working
-          command: |
-            sleep 5
-            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results:
-          path: /tmp/test-results
-```
-
-
-{:.tab.go_app.Server_3}
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    docker:
-      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go/
-      - image: cimg/go:1.17
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres/
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: circleci-demo-go
-          POSTGRES_DB: circle_test
-
-    environment:
-      TEST_RESULTS: /tmp/test-results
-
-    steps:
-      - checkout
-      - run: mkdir -p $TEST_RESULTS
-
-      - restore_cache:
-          keys:
-            - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
-
-      - run:
-          name: Get dependencies
-          command: |
-            go get -v
-
-      - run:
-          name: Get go-junit-report for setting up test timings on CircleCI
-          command: |
-            go get github.com/jstemmer/go-junit-report
-            # Remove go-junit-report from go.mod
-            go mod tidy
-
-      #  Wait for Postgres to be ready before proceeding
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: |
-            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
-            make test | tee ${TEST_RESULTS}/go-test.out
-      - run: make
-
-      - save_cache:
-          key: - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
-          paths:
-            - "/go/pkg/mod"
-
-      - run:
-          name: Start service
-          environment:
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: ./workdir/contacts
-          background: true
-
-      - run:
-          name: Validate service is working
-          command: |
-            sleep 5
-            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results:
-          path: /tmp/test-results
-```
-
-
-{:.tab.go_app.Server_2}
-
 ```yaml
 version: 2
 jobs:
@@ -479,35 +166,35 @@ jobs:
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
-
+ 
     environment:
       TEST_RESULTS: /tmp/test-results
-
+ 
     steps:
       - checkout
       - run: mkdir -p $TEST_RESULTS
-
+ 
       - restore_cache:
           keys:
             - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
-
+ 
       - run:
           name: Get dependencies
           command: |
             go get -v
-
+ 
       - run:
           name: Get go-junit-report for setting up test timings on CircleCI
           command: |
             go get github.com/jstemmer/go-junit-report
             # Remove go-junit-report from go.mod
             go mod tidy
-
+ 
       #  Wait for Postgres to be ready before proceeding
       - run:
           name: Waiting for Postgres to be ready
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
+ 
       - run:
           name: Run unit tests
           environment: # environment variables for the database url and path to migration files
@@ -517,12 +204,12 @@ jobs:
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
       - run: make
-
+ 
       - save_cache:
-          key: - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
+          key: go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
           paths:
             - "/go/pkg/mod"
-
+ 
       - run:
           name: Start service
           environment:
@@ -530,7 +217,7 @@ jobs:
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: ./workdir/contacts
           background: true
-
+ 
       - run:
           name: Validate service is working
           command: |
@@ -539,11 +226,10 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
-
+ 
       - store_test_results:
           path: /tmp/test-results
 ```
-
 
 ## Example mysql project.
 {: #example-mysql-project }
