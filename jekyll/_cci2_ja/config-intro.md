@@ -61,7 +61,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  この例
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-ノード コンテナで実行していることを示す、小さな `run` ブロックも追加しています。
+{% highlight yaml linenos %}
 image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline'
 
       - run:
