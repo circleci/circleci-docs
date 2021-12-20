@@ -3,18 +3,22 @@
  */
 
 // helpers -------------------
-
 const getElById = (id) => document.getElementById(id);
 
 const languages = {
-  en: { name: 'English', url: 'docs/' },
-  ja: { name: '日本語', url: 'docs/ja/' },
-};
-
-// List of elements that have dynamic content based on our selected language
-const els = {
-  globalNavLangEng: getElById('globalNavLangEng'),
-  globalNavLangJap: getElById('globalNavLangJap'),
+  en: {
+    name: 'English',
+    url: 'docs/',
+    id: 'globalNavLangEng',
+    domEl: getElById('globalNavLangEng'),
+  },
+  ja: {
+    name: '日本語',
+    url: 'docs/ja/',
+    id: 'globalNavLangJap',
+    element: 'globalNavLangJap',
+    domEl: getElById('globalNavLangJap'),
+  },
 };
 
 // Sets the new url for the lanuage selected
@@ -40,30 +44,27 @@ const reloadWithNewLocale = (langCode) => {
 
 // Shows the current active/selected language in the dropdown
 const setLanguageSelectorOnLoad = () => {
-  const currentLang = window.currentLang;
-  currentLang === 'en'
-    ? $('#globalNavLangEng').css('background', '#F3F3F3')
-    : $('#globalNavLangJap').css('background', '#F3F3F3');
-  return;
+  // if currentLang is not available, grab default language from user's browser.
+  // Default to english if neither can be accessed.
+  const currentLang =
+    languages[window.currentLang] ||
+    languages[window.navigator.language] ||
+    languages['en'];
+  $(currentLang.domEl).css('background', '#F3F3F3');
 };
 
 //  Reloads and changes the site to the selected language on click from the language dropdown
 const handleChangeLanguageNav = () => {
-  els.globalNavLangEng.addEventListener('click', () => {
-    reloadWithNewLocale('en');
-    window.AnalyticsClient.trackAction('Language Selector', {
-      selected: 'English',
-      browserNativeLang: window.navigator.language,
+  for (const langCode in languages) {
+    const langValue = languages[langCode];
+    langValue.domEl.addEventListener('click', () => {
+      reloadWithNewLocale(langCode);
+      window.AnalyticsClient.trackAction('Language Selector', {
+        selected: langValue.name,
+        browserNativeLang: window.navigator.language,
+      });
     });
-  });
-  els.globalNavLangJap.addEventListener('click', () => {
-    reloadWithNewLocale('ja');
-    window.AnalyticsClient.trackAction('Language Selector', {
-      selected: 'Japanese',
-      browserNativeLang: window.navigator.language,
-    });
-  });
-  return;
+  }
 };
 
 export function init() {
