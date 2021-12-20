@@ -177,7 +177,7 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
       TEST_RESULTS: /tmp/test-results
 ```
 
-Now we need to add several `steps` within the `build` job. ジョブの大半を占めるのがステップです。
+`build` ジョブ内にいくつかの `steps` を追加します。 ジョブの大半を占めるのがステップです。
 
 [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。
 
@@ -194,13 +194,13 @@ Now we need to add several `steps` within the `build` job. ジョブの大半を
 
 その後、キャッシュをプルダウンします (存在する場合)。 初回実行時にはこの処理は実行されません。
 
-**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
+{% raw %}
 ```yaml
       - restore_cache: # restores saved cache if no changes are detected since last run
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
 ```
-`run` ステップを使用して、テスト スイートを実行します。
+{% endraw %}
 
 JUnit レポート作成ツールの Go 実装とアプリケーションの他の依存関係をインストールします。 これらは、プライマリ コンテナにプリインストールしておくと便利です。
 
