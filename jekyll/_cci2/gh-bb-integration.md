@@ -392,11 +392,13 @@ However, it is still possible to create a user key by following this workaround:
 5. Find and click the `checkout-key` with a 201 status and copy
    the `public_key` to your clipboard.![](
    {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
+
+6. Click the **Add User Key** button to paste in the `public_key` and create your user key.
    
-6. Add the key to Bitbucket by following Bitbucket's guide on
+7. Add the key to Bitbucket by following Bitbucket's guide on
    [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
-7. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys`
+8. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys`
    key:
 
 ```yaml
