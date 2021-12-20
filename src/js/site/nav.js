@@ -53,7 +53,7 @@ $(document).ready(function () {
 })();
 
 // Open dropdown in language selector
-$(() => {
+const openLangDropdown = () => {
   const globeBtn = $('#globe-lang-btn');
   const langPicker = $('#lang-picker');
 
@@ -70,4 +70,9 @@ $(() => {
       langPicker.removeClass('lang-active');
     }
   });
+};
+
+// Another PR will address refactoring rest of functions to be added to this callback
+$(document).ready(() => {
+  openLangDropdown();
 });
