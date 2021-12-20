@@ -42,7 +42,7 @@ CircleCI は、コードを以下のような様々な環境にデプロイす�
 - Microsoft Azure
 - Heroku
 
-[Orb レジストリ](https://circleci.com/developer/orbs) には、一般的なデプロイターゲットに使用できる再利用可能な設定パッケージが入っています。 Orb を使うと、設定を簡略化し効率化することができます。
+[Orb レジストリ](https://circleci.com/developer/orbs) には、一般的なデプロイターゲットに使用できる、再利用可能な設定のパッケージが含まれています。 Orb を使うと、設定を簡略化し効率化することができます。
 
 その他のクラウド型デプロイサービスを使っている場合は、 SSH を使うか、ジョブ設定において各サービスの API クライアントを導入することで、スクリプト化することができます。
 
@@ -51,23 +51,23 @@ CircleCI は、コードを以下のような様々な環境にデプロイす�
 
 CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できるためです。
 
-CircleCI では、高度な[キャッシュ]({{site.baseurl}}/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/2.0/optimizations/#resource-class)によって、きわめて複雑なパイプラインを効率的に実行するように設定できます。
+CircleCI では、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)によって、きわめて複雑なパイプラインを効率的に実行するように設定できます。
 
 CircleCI を使用すると、開発者として以下のことが可能です。
-- [任意のジョブに SSH 接続し]({{site.baseurl}}/2.0/ssh-access-jobs/)、ビルドの問題をデバッグする。
-- [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) ファイルに[並列処理]({{site.baseurl}}/2.0/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
-- 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/2.0/caching/)を設定し、[ワークフロー]({{site.baseurl}}/2.0/workflows/)内で以前のジョブのデータを再利用する。
-- セルフホスト型の [ランナー]({{site.baseurl}}/2.0/runner-overview/) を設定し、独自のプラットフォームをサポートする。
-- Machine Executor の [Arm リソース]({{site.baseurl}}/2.0/arm-resources/)にアクセスする。
-- 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/2.0/using-orbs/) を使って、サードパーティツールと連携する。
-- さまざまな言語であらかじめビルドされた Docker [イメージ]({{site.baseurl}}/2.0/circleci-images/) を使用する。
+- [任意のジョブに SSH 接続し]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)、ビルドの問題をデバッグする。
+- [.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルに[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
+- 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を設定し、[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)内で以前のジョブのデータを再利用する。
+- セルフホスト型の [ランナー]({{site.baseurl}}/ja/2.0/runner-overview/) を設定し、独自のプラットフォームをサポートする。
+- Machine Executor の [Arm リソース]({{site.baseurl}}/ja/2.0/arm-resources/)にアクセスする。
+- 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/ja/2.0/using-orbs/) を使って、サードパーティツールと連携する。
+- さまざまな言語であらかじめビルドされた Docker [イメージ]({{site.baseurl}}/ja/2.0/circleci-images/) を使用する。
 - [API](https://circleci.com/docs/api/v2/) を使ってジョブやワークフローの情報を取得する。
-- [CLI]({{site.baseurl}}/2.0/local-cli/) を使って高度なツールにローカルでアクセスする。
-- [テストのインサイト]({{site.baseurl}}/2.0/insights-tests/)を使って不安定なテストを検出する。
+- [CLI]({{site.baseurl}}/ja/2.0/local-cli/) を使って高度なツールにローカルでアクセスする。
+- [テストのインサイト]({{site.baseurl}}/ja/2.0/insights-tests/)を使って不安定なテストを検出する。
 
 お客様のサーバーにインストールされた CircleCI のオペレーターや管理者として、ビルドの監視やインサイトを提供したり、[Nomad](https://www.nomadproject.io/) を使用してスケジューリングすることが可能です。
 
-サーバーに関する詳細は、[CircleCI の運用およびインストールガイド]({{site.baseurl}}/2.0/server-3-overview/)をご覧ください。
+サーバーに関する詳細は、[CircleCI の運用およびインストールガイド]({{site.baseurl}}/ja/2.0/server-3-overview/)をご覧ください。
 
 ## 料金オプション
 {: #pricing-options }
