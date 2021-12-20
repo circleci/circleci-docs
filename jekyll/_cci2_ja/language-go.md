@@ -1,8 +1,8 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "言語ガイド: Go"
 short-title: "Go"
-description: "Building and Testing with Go (Golang) on CircleCI"
+description: "CircleCI  での Go (Golang) を使用したビルドとテスト"
 categories:
   - language-guides
 order: 3
@@ -177,7 +177,7 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
       TEST_RESULTS: /tmp/test-results
 ```
 
-`build` ジョブ内にいくつかの `steps` を追加します。 ジョブの大半を占めるのがステップです。
+Now we need to add several `steps` within the `build` job. ジョブの大半を占めるのがステップです。
 
 [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。
 
