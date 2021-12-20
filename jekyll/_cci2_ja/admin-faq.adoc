@@ -141,7 +141,7 @@ Services マシンの Replicated ログデータは `/var/log/replicated` 配下
 [discrete]
 ==== 5. 現在実行している Docker コンテナを確認する
 
-Replicated は、CircleCI Server v".x を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
+Replicated は、CircleCI Server v2.x を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
 
 実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
 
