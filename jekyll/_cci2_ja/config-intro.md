@@ -74,7 +74,7 @@ image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!'
 ### 学習ポイント
 {: #learnings }
 {:.no_toc}
-{% highlight yaml linenos %} version: 2.1 jobs: Hello-World: docker:
+コンフィグに 2つの小さな変更を加えただけですが、これらは重要な組織的概念を表しています。
 
 - 行 7: `checkout` コマンドは、ジョブにコンテキストを与える、組み込みの予約語の一例です。  この例では、ビルドを開始できるように、このコマンドがコードをプル ダウンします。
 - 行 13 ～ 17: `build` ジョブの 2 つ目の run は、チェックアウトの内容を (`ls -al` で) リストします。  これで、ブランチを操作できるようになります。
