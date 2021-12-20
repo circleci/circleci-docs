@@ -2,17 +2,17 @@
 layout: classic-docs
 title: "コンセプト"
 short-title: "コンセプト"
-description: "CircleCI concepts"
+description: "CircleCI  のコンセプト"
 categories:
   - はじめよう
 order: 1
 version:
-  - クラウド
+  - Cloud
   - Server v3.x
   - Server v2.x
 ---
 
-This guide introduces some basic concepts to help you understand how CircleCI manages your CI/CD pipelines.
+ここでは CircleCI がお客様の CI/CD パイプラインを管理する方法を理解するための基本的なコンセプトを説明します。
 
 * 目次
 {:toc}
@@ -22,9 +22,9 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 
 CircleCI プロジェクトは、関連付けられているコード リポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。 プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
 
-{:.tab.addprojectpage.Cloud}
-* [Add Project (プロジェクトの追加)] ページでは、VCS で所有者になっているプロジェクトを*セットアップ*するか、組織内のプロジェクトを*フォロー*することで、パイプラインにアクセスし、プロジェクトのステータスに関する\[メール通知\]({{site.baseurl }}/2.0/notifications/)を受け取ることができます。
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to \[email notifications\]({{ site.baseurl }}/2.0/notifications/) for the project's status.
+プロジェクトのダッシュボードで、以下のいずれかが可能です。
+* VCS で所有者になっているプロジェクトを_セットアップ_する
+* 組織内のプロジェクトを_フォロー_して、パイプラインにアクセスし、プロジェクトのステータスに関する \[メール通知\] ({{ site.baseurl }}/2.0/notifications/) を受け取る
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
