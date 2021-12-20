@@ -6,6 +6,7 @@ description: "Collecting test metadata"
 order: 34
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -34,18 +35,18 @@ The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-refe
 
 Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
 
-**If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
+**If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
-_The above screenshot applies to CircleCI Server only._
+_The above screenshot applies to CircleCI server v2.x only._
 
-**If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling formatters
 {: #enabling-formatters }
 
-Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
+Test metadata is not automatically collected in CircleCI until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
 - RSpec requires the following be added to your gemfile:
 
@@ -531,9 +532,9 @@ steps:
       path: ./reports/junit
 ```
 
-For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
-**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
+**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized execution environment within the virtual machine.
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 

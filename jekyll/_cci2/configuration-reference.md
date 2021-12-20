@@ -1,11 +1,12 @@
 ---
 layout: classic-docs
-title: "Configuring CircleCI"
-short-title: "Configuring CircleCI"
-description: "Reference for .circleci/config.yml"
+title: Configuring CircleCI
+short-title: Configuring CircleCI
+description: Reference for .circleci/config.yml
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: 6 config optimization tips
@@ -20,11 +21,9 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
 
-This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
+This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
 
 You can see a complete `config.yml` in our [full example](#example-full-configuration).
-
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
 ---
 
@@ -62,7 +61,7 @@ executors | N | Map | A map of strings to executor definitions. See the [Executo
 commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
+The following example calls an orb named `hello-build` that exists in the certified `circleci` namespace.
 
 ```
 version: 2.1
@@ -118,7 +117,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows).
@@ -156,7 +155,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
-Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 {: #lessjobnamegreater }
@@ -175,7 +174,7 @@ working_directory | N | String | In which directory to run the steps. Will be in
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -230,7 +229,7 @@ See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+An "executor" is roughly "a place where steps occur". CircleCI can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {: #docker }
@@ -250,7 +249,7 @@ auth | N | Map | Authentication for registries using standard `docker login` cre
 aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
-The first `image` listed in the file defines the primary container image where all steps will run.
+The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
 `entrypoint` overrides the image's `ENTRYPOINT`.
 
@@ -347,7 +346,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
 
@@ -369,8 +368,9 @@ jobs:
 ##### Available `machine` images
 {: #available-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the deveoper hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
+* `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
@@ -394,6 +394,7 @@ The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/dock
 
 When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
 
+* `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
 * `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
 * `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1, Docker v19.03.13, nvidia-container-toolkit v1.4.0-1
 * `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
@@ -435,6 +436,7 @@ xcode | Y | String | The version of Xcode that is installed on the virtual machi
 {: class="table table-striped"}
 
 **Example:** Use a macOS virtual machine with Xcode version 11.3:
+
 
 ```yaml
 jobs:
@@ -516,7 +518,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on Free and Performance plans. Available resources classes are restricted for customers on the Free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the Free plan.
+**Note:** This feature is automatically enabled on Free and Performance plans. See the [comparison table](https://circleci.com/pricing/#comparison-table) for which resource classes are available to Free and Performance plan customers.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -536,6 +538,7 @@ xlarge                | 8     | 16GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
 
 ```yaml
 jobs:
@@ -568,6 +571,8 @@ jobs:
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 jobs:
   build:
@@ -600,6 +605,8 @@ large<sup>(3)</sup>| 8     | 16GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 jobs:
   build:
@@ -623,6 +630,8 @@ xlarge            | 16    | 60GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 
@@ -653,6 +662,8 @@ gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 
@@ -678,6 +689,8 @@ windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 |
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 orbs:
@@ -695,7 +708,7 @@ jobs:
 
 <sup>(3)</sup> _This resource is available only for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans._
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
 
 **Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
@@ -873,7 +886,7 @@ step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-**Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or reaching the global 5 hour timeout.
+**Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or has reached the runtime timeout limit.
 
 ``` YAML
 - run:
@@ -900,6 +913,7 @@ run: |
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ```yaml
 steps:
@@ -937,6 +951,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 
 ###### *Example*
 {: #example }
+{:.no_toc}
 
 ```
 version: 2.1
@@ -1005,13 +1020,12 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
 version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
 
-- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -1030,7 +1044,7 @@ when | N | String | [Specify when to enable or disable the step](#the-when-attri
 
 The cache for a specific `key` is immutable and cannot be changed once written.
 
-**Note** If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step.
+**Note:** If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
@@ -1061,6 +1075,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 {% raw %}
 ``` YAML
@@ -1068,6 +1083,21 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
       - /home/ubuntu/.m2
+```
+{% endraw %}
+
+**Notes:**
+- Wildcards are not currently supported in `save_cache` paths. Please visit the [Ideas board](https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths) and vote for this feature if it would be useful for you or your organization.
+
+- In some instances, a workaround for this is to save a particular workspace to cache:
+
+{% raw %}
+``` YAML
+- save_cache:
+    key: v1-{{ checksum yark.lock }}
+    paths:
+      - node_modules/workspace-a
+      - node_modules/workspace-c
 ```
 {% endraw %}
 
@@ -1119,6 +1149,7 @@ A path is not required here because the cache will be restored to the location f
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 {% raw %}
 ``` YAML
@@ -1141,7 +1172,7 @@ A path is not required here because the cache will be restored to the location f
 ##### **`deploy` – DEPRECATED**
 {: #deploy-deprecated }
 
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and scheduling keys.**
+**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
 
 Special step for deploying artifacts.
 
@@ -1161,11 +1192,12 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - deploy:
     command: |
-      if [ "${CIRCLE_BRANCH}" == "master" ]; then
+      if [ "${CIRCLE_BRANCH}" == "main" ]; then
         ansible-playbook site.yml
       fi
 ```
@@ -1189,6 +1221,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - run:
@@ -1204,7 +1237,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites.
 
-It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1213,6 +1246,7 @@ path | Y | String | Path (absolute, or relative to your `working_directory`) to 
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 Directory structure:
 
@@ -1311,6 +1345,7 @@ at | Y | String | Directory to attach the workspace to.
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - attach_workspace:
@@ -1397,6 +1432,7 @@ Enables jobs to go through a set of well-defined IP address ranges. See [IP rang
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 ```yaml
 version: 2.1
@@ -1424,7 +1460,7 @@ workflows:
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
 
 ### **`version`**
-{: #version }
+{: #workflow-version }
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
 
 Key | Required | Type | Description
@@ -1460,7 +1496,7 @@ workflows:
            filters:
              branches:
                only:
-                 - master
+                 - main
                  - beta
      jobs:
        - test
@@ -1487,7 +1523,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 {: #branches }
 {:.no_toc}
 
-The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
+The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
 
@@ -1505,7 +1541,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 
 #### **`jobs`**
 {: #jobs-in-workflow }
-A job can have the keys `requires`, `context`, `type`, and `filters`.
+A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1524,7 +1560,15 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 Key | Required | Type | Description
 ----|-----------|------|------------
 requires | N | List | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
-name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
+{: class="table table-striped"}
+
+###### **`name`**
+{: #name }
+The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
 {: class="table table-striped"}
 
 ###### **`context`**
@@ -1889,7 +1933,7 @@ workflows:
   my-workflow:
       when:
         or:
-          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ main, << pipeline.git.branch >> ]
           - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
@@ -1900,7 +1944,7 @@ workflows:
       and:
         - not:
             matches:
-              pattern: "^master$"
+              pattern: "^main$"
               value: << pipeline.git.branch >>
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
@@ -2057,7 +2101,7 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - run:
-          name: Deploy if tests pass and branch is Master
+          name: Deploy if tests pass and branch is Main
           command: ansible-playbook site.yml -i production
 
 workflows:
@@ -2081,7 +2125,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 {% endraw %}
 

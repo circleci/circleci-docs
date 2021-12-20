@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Help and Support"
-short-title: "Help and Support"
-description: "A list of possible support options"
+title: Help and Support
+short-title: Help and Support
+description: A list of possible support options
 categories: [reference]
 order: 3
 ---
@@ -20,4 +20,3 @@ Our [docs repo](https://github.com/circleci/circleci-docs/) is open source and h
 {: #make-a-pull-request }
 
 We love contributions to our documentation repo! Please suggest a change or addition by following our [Contributing Guide](https://github.com/circleci/circleci-docs/blob/master/docs/CONTRIBUTING.md#pull-requests).
-

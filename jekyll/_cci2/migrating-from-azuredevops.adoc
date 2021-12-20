@@ -1,6 +1,11 @@
+---
+title: Migrating from Azure DevOps
+---
+
 = Migrating from Azure DevOps
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Azure DevOps to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:

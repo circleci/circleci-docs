@@ -1,67 +1,69 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Installation Phase 3
+= CircleCI Server v3.x インストール ステップ 3
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI server v3.x build services installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
+CircleCI サーバー v3.x ビルドサービスのインストールステップを開始する前に、 xref:server-3-install-prerequisites.adoc[ステップ 1: 前提条件] と xref:server-3-install.adoc[ステップ 2: コアサービスのインストール]が実行済みであることを確認してください。
+
+NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
-== Phase 3: Build services installation
+== ステップ 3: ビルドサービスのインストール
 
-=== Output Processor 
-==== Overview 
-Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand. 
+=== 出力プロセッサ 
+==== 概要 
+出力プロセッサは、 Normad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。 
 
-Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>`
+KOTS の管理者コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
-Locate and enter the following in Settings: 
+設定で次の項目を入力します。 
 
-. *Output Processor Load Balancer (required)* - 
-The following command will provide the IP address of the service 
+. *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)](必須)*: 次のコマンドにより、サービスの IP アドレスを取得します 
 +
 ```bash
-kubectl get service output-processor --namespace=circleci-server
+kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
-. *Save your configuration*. You will deploy and validate your setup after you complete Nomad client setup.  
+. *[Save your configuration (設定を保存)]*: Nomad クライアントの設定の完了後、設定のデプロイと確認を行います。  
 
-=== Nomad Clients 
-==== Overview  
+=== Nomad クライアント 
+==== 概要  
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (via Nomad Server) and run (via Nomad Clients) CircleCI jobs.
 
-Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. The communication between your Nomad Clients and the nomad control plane are secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete the Nomad Clients installation. 
+Nomad クライアントは Kubernetes クラスタの外部にインストールされ、コントロールプレーン（ Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 mTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
+ 
 
-Once completed you will be able to update your CircleCI server configuration so your Nomad control plane is able to communicate with your Nomad Clients. 
+完了すると、 CircleCI Server の設定を更新して、 Nomad コントロールプレーンが Nomad クライアントと通信できるようになります。 
 
-==== Cluster Creation with Terraform
+==== Terraform によるクラスタの作成
 
-CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://circleci.com/docs/2.0/server-3-overview[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
+CircleCI では、任意のクラウド プロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. `main.tf` を完了するには、クラスタとサーバーのインストールに関する情報が必要です。 以下でその情報を入手する方法を説明します。
 
 ===== AWS
-You will need some information about your cluster and server installation to complete the required fields for the terraform configuration file (`main.tf`). A full example as well as a full list of variables can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here]. 
+クラスタおよびサーバのインストールに関する情報を Terraform 設定ファイル (`main.tf`) のフィールドに入力します。 A full example as well as a full list of variables can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here]. 
 
-* *Server_endpoint* - You will need to know the Nomad Server endpoint, which is the external IP address of the nomad-server-external Loadbalancer. You can get this information with the following command: 
+* *[Server_endpoint (サーバーエンドポイント)]* : Nomad サーバーエンドポイント（Nomad サーバー外部ロードバランサー の外部 IP アドレス）が必要です。 この情報は以下のコマンドで入手します。 
 +
 ```bash
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE> 
 ```
 
-* *Subnet ID (subnet)*, *VPC ID (vpcId)*, and *DNS server (dns_server)* of your cluster. 
-Run the following command to get the cluster VPC ID (vpcId), CIDR block (serviceIpv4Cidr), and subnets (subnetIds): 
+* クラスタの *Subnet ID (サブネット)*、*VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* :  
+以下のコマンドを実行して、クラスタの VPC ID (VPCのID)、CIDR ブロック (serviceIpv4Cidr)、およびサブネット (サブネットの ID)を入手します。 
 +
 ```bash
-aws eks describe-cluster --name=<name of your cluster>
+aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 ```
 +
-This will return something similar to the following: 
+すると、以下のようなコマンドが返されます。 
 +
 [source, json]
 {...
@@ -85,13 +87,13 @@ This will return something similar to the following:
 ...
 }
 +
-Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`serviceIpv4Cidr`), for example your CIDR block might be `10.100.0.0/16` so the third IP would be `10.100.0.2`.
+次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 AWS の場合、 DNS サーバーは CIDR ブロック (`CidrBlock`) の３番目の IP です。たとえば、 CIDR ブロックが `10.100.0.0/16 `の場合、 3 番目の IP は `10.100.0.2`になります。
 +
 ```bash
-aws ec2 describe-vpcs --filters Name=vpc-id,Values=<your-VPCID>
+aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 ```
 +
-This will return something like the following: 
+すると、以下のようなコマンドが返されます。 
 +
 [source, json]
 {...
@@ -102,7 +104,7 @@ This will return something like the following:
 ...}
 
 
-Once you have filled in the appropriate information you can deploy your nomad clients by running the following from within the directory of the `main.tf` file. 
+適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Normad クライアントをデプロイすることができます。 
 
 ----
 terraform init
@@ -114,24 +116,24 @@ terraform plan
 terraform apply
 ----
 
-After Terraform is done spinning up the Nomad client(s), it will output the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe. The apply process usually only takes a minute. 
+Terraform は、 Nomad クライアントのスピンアップが完了すると、 CircleCI Server で Nomad コントロールプレーンを設定するために必要な証明書とキーを出力します。 この情報は、安全な場所にコピーしてください。 この適用プロセスには 通常 1 分しかかかりません。 
 
 ===== GKE 
-You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by issuing the following command: 
+CircleCI Server のデプロイ時に作成した Nomad コントロールプレーン（Nomad サーバー）の IP アドレスが必要になります。 以下のコマンドを発行することで IP アドレスを取得できます。 
 
 ----
-kubectl get service nomad-server-external --namespace=circleci-server 
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
-You will also need the following information: 
+以下の情報も必要です。 
 
-* The GPC Project you want to run nomad clients in. 
-* The GPC Zone you want to run nomad clients in. 
-* The GPC Region you want to run nomad clients in. 
-* The GPC Network you want to run nomad clients in. 
-* The ID of the GPC subnet you want to run nomad clients in. 
+* Nomad クライアントを実行する GPC プロジェクト 
+* Nomad クライアントを実行する GPC ゾーン 
+* Nomad クライアントを実行する GPC リージョン 
+* Nomad クライアントを実行する GPC ネットワーク 
+* Nomad クライアントを実行する GPC サブネットの ID 
 
-You can copy the following example to your local environment and fill in the appropriate information for your specific setup. Once you have filled in the appropriate information you can deploy your nomad clients by running. 
+以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。 適切な情報を入力したら、以下を実行して Normad クライアントをデプロイできます。 
 
 ----
 terraform init
@@ -143,152 +145,149 @@ terraform plan
 terraform apply
 ----
 
-After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe.
+Terraform は、 Nomad クライアントのスピンアップが完了すると、 CircleCI Server で Nomad コントロールプレーンを設定するために必要な証明書とキーを出力します。 この情報は、安全な場所にコピーしてください。
 
-==== Configure and Deploy
-Now that you have successfully deployed your Nomad clients, you can configure CircleCI Server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` 
+==== 設定とデプロイ
+Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 KOTS の管理者コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` 
 
-Enter the following in Settings: 
+設定で次の項目を入力します。 
 
-* *Nomad Load Balancer (required)*
+* *[Nomad Load Balancer (Normad ロードバランサー)](必須)*
 +
 ```bash 
-kubectl get service nomad-server-external --namespace=circleci-server
+kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
-* *Nomad Server Certificate (required)* - 
-Provided in the output from `terraform apply`
+* *[Nomad Server Certificate (Nomad サーバーの証明書)](必須)*:
+ `terraform apply`からの出力で提供されます。
 
-* *Nomad Server Private Key (required)* - 
-Provided in the output from `terraform apply`
+* *[Nomad Server Private Key (Nomad サーバーのプライベートキー)](必須)*:
+ `terraform apply`からの出力で提供されます。
 
-* *Nomad Server Certificate Authority (CA) Certificate (required)* - 
-Provided in the output from `terraform apply`
+* *[Nomad Server Certificate Authority (CA) (Nomad サーバーの証明書認証局)](必須)*:
+ `terraform apply`からの出力で提供されます。
 
-* *Output Processor Load Balancer (required)*
-+
-```bash 
-kubectl get service output-processor --namespace=circleci-server
-```
+*[Save config (設定の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
-Click the *Save config* button to update your installation and re-deploy server.
+==== Normad クライアントの確認
 
-==== Nomad Clients Validation
+CircleCI Server のインストールをテストできる https://github.com/circleci/realitycheck/tree/server-3.0[realitycheck] というプロジェクトを作成しました。 CircleCI ではこのプロジェクトをフォローし、システムが期待どおりに動作しているかどうかを確認していきます。 引き続き次のステップを実行すると、 realitycheck のセクションが赤から緑に変わります。 
 
-CircleCI has created a project called https://github.com/circleci/realitycheck/tree/server-3.0[realitycheck] which allows you to test your Server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red to green. 
-
-To run realitycheck you will need to clone the repository. Depending on your Github setup you can do one of the following. 
+realitycheck を実行するには、リポジトリのクローンを実行する必要があります。 Github の設定に応じて、以下のいずれかを実行します。 
 
 ===== Github Cloud 
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 ----
 
-===== Github Enterprise
+===== GitHub Enterprise
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
-git remote set-url origin <your-ghe-repo-url>
+git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-Once you have successfully cloned the repository you can follow it from within your CircleCI server installation. You will need to set the following variables. For full instructions please see the https://github.com/circleci/realitycheck/tree/server-3.0[repository readme]. 
+レポジトリのクローンに成功したら、CircleCI Server 内からフォローすることができます。 以下の変数を設定する必要があります。 詳細はhttps://github.com/circleci/realitycheck/tree/server-3.0[リポジトリの README] を参照してください。 
 
-.Environmental Variables
+.環境変数
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|Name
-|Value
+|名前
+|値
 
 |CIRCLE_HOSTNAME
-|<your circleci installation URL>
+|<YOUR_CIRCLECI_INSTALLATION_URL>
 
 |CIRCLE_TOKEN
-|<your circleci api token>
+
+|<YOUR_CIRCLECI_API_TOKEN>
 |===
 
-.Contexts
+.コンテキスト
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|Name
-|Environmental Variable Key
-|Environmental Variable Value
+|名前
+|環境変数キー
+|環境変数値
 
 |org-global
 |CONTEXT_END_TO_END_TEST_VAR
-|Leave blank
+|空欄のまま
 
 |individual-local
 |MULTI_CONTEXT_END_TO_END_VAR
 |Leave blank
 |===
 
-Once you have configured the environmental variables and contexts, rerun the realitycheck tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following: 
+環境変数とコンテキストを設定したら、 realitycheck テストを再実行します。 機能とリソースジョブが正常に完了したことが表示されます。 テスト結果は次のようになります。
+ 
 
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
-=== VM service
+=== VM サービス
 
-VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to EKS and GKE installations because it specifically relies on features of these cloud providers.
+VM サービスは、VM とリモート Docker ジョブを設定します。 スケーリング ルールなど、VM サービスのさまざまなオプションを設定することができます。 VM サービスは、 EKS および GKE のインストールに固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの機能に特に依存しているためです。
 
 ==== EKS
-. *Get the Information Needed to Create Security Groups*
+. *セキュリティグループの作成に必要な情報を入手する*
 +
-The following will return your VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) values, which you will need throughout this section: 
+以下のコマンドにより、VPC ID (`vpcId`)、CIDR ブロック (`serviceIpv4Cidr`)、クラスタ セキュリティーグループ ID (`clusterSecurityGroupId`)、 および Cluster ARN (`arn`) の値が返されます。これらの情報はこのセクションを通して必要です。 
 +
 ```bash
 aws eks describe-cluster --name=<your-cluster-name>
 ```
 
-. *Create a security group*
+. *セキュリティーグループを作成する*
 +
-Run the following commands to create a security group for VM service. 
+以下のコマンドを実行して、VM サービス用のセキュリティーグループを作成します。 
 +
 ```bash
-aws ec2 create-security-group --vpc-id "<your-vpcId>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
+aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
 ```
 +
-This will output a GroupID to be used in the next steps: 
+これにより次の手順で使用するグループ ID が出力されます。 
 +
 [source, json]
 {
     "GroupId": "sg-0cd93e7b30608b4fc"
 }
 
-. *Apply security group Nomad*
+. *セキュリティーグループ Nomad を適用する*
 +
-Use the security group you just created and CIDR block values to apply the security group to the following: 
+作成したセキュリティーグループと CIDR ブロック値を使ってセキュリティーグループを以下に適用します。 
 +
 ```bash
-aws ec2 authorize-security-group-ingress --group-id "<GroupId>" --protocol tcp --port 22 --cidr "<serviceIpv4Cidr>"
+aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 22 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
 ```bash
-aws ec2 authorize-security-group-ingress --group-id "<GroupId>" --protocol tcp --port 2376 --cidr "<serviceIpv4Cidr>"
+aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 2376 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
-NOTE: If you created your Nomad Clients in a different subnet from CircleCI server, you will need to rerun the above two commands with each subnet CIDR. 
+NOTE: CircleCI Server とは異なるサブネットに Nomad クライアントを作成した場合は、サブネット CIDR ごとに上記の 2 つのコマンドを再実行する必要があります。 
 
-. *Apply the Security Group for SSH*
+. *セキュリティーグループに SSH接続を適用する*
 +
-Run the following command to apply the security group rules so users can SSH into their jobs:
+次のコマンドを実行してセキュリティグループルールを適用し、ユーザーがジョブに SSH 接続できるようにします。
 +
 ```bash
-aws ec2 authorize-security-group-ingress --group-id "<GroupId>" --protocol tcp --port 54782
+aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 54782
 ```
 
-. *Create user*
+. *ユーザーを作成する*
 +
-Create a new user with programmatic access: 
+プログラムでのアクセス権を持つ新規ユーザーを作成します。 
 +
 ```bash
 aws iam create-user --user-name circleci-server-vm-service
 ```
 
-. *Create Policy*
+. *ポリシーを作成する*
 +
-Create a `policy.json` file with the following content. You should fill in Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) below. 
+以下の内容の `policy.json` ファイルを作成します。 クラスタのセキュリティーグループ ID (`clusterSecurityGroupId`) とCluster ARN (`arn`)を以下に入力します。
+ 
 +
 [source,json]
 ----
@@ -307,7 +306,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<clusterSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<YOUR_clusterSecurityGroupID>"
       ]
     },
     {
@@ -316,7 +315,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -330,7 +329,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       ],
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -379,7 +378,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-server-vm-service"
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -394,7 +393,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<arn>"
+          "ec2:Vpc": "<YOUR_arn>"
         }
       }
     }
@@ -402,44 +401,44 @@ Create a `policy.json` file with the following content. You should fill in Clust
 }
 ----
 
-. *Attach Policy to User* 
+. *ポリシーをユーザーにアタッチする* 
 +
-Once you have created the policy.json file attach it to an IAM policy and created user. 
-+
-```bash
-aws iam put-user-policy --user-name circleci-server-vm-service --policy-name circleci-server-vm-service --policy-document file://policy.json
-```
-
-. *Create an access key and secret for the user*
-+
-If you have not already, you will need an access key and secret for the `circleci-server-vm-service` user. You can create that by running the following command:
+policy.json ファイルを作成したら、IAM ポリティーと作成したユーザーにアタッチします。 
 +
 ```bash
-aws iam create-access-key --user-name circleci-server-vm-service
+aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
 ```
 
-. *Configure Server*
+. *ユーザー用のアクセスキーとシークレットを作成する*
 +
-Configure VM Service through the KOTs admin console. The following fields need to be completed for VM service to operate correctly. 
+作成していない場合は、`circleci-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行して作成することができます。
 +
-** *AWS Region (required)* - This is the region the application is in.
-** *Subnets (required)* - Choose a subnet (public or private) where the VMs should be deployed. If you haven’t created a unique subnet you can use the subnet of the cluster. Note that all subnets must be in the same availability zone. 
-** *Security Group ID (required)* - This is the security group that will be attached to the VMs. It was created previously. 
-** *AWS IAM Access Key ID (required)* - AWS Access Key ID for EC2 access.
-** *AWS IAM Secret Key (required)* - IAM Secret Key for EC2 access.
-** *AWS Windows AMI ID (optional)* - If you require Windows builders, you can supply an AMI ID for them here.
+```bash
+aws iam create-access-key --user-name circleci-vm-service
+```
 
-Once you have configured the fields, *save your config* and deploy your updated application. 
+. *サーバーの設定*
++
+VM サービスをKOTS 管理者コンソールから設定します。 VM サービスを正しく動作させるために、次のフィールドに入力する必要があります。 
++
+** *[AWS Region (AWS リージョン)](必須)*: アプリケーションのリージョン
+** *[Subnet (サブネット)] (必須)*: VM のデプロイ先になるサブネット (パブリックまたはプライベート) を選択します。 一意のサブネットを作成していない場合は、クラスタのサブネットを使用できます。 なお、すべてのサブネットが同じアベイラビリティーゾーンにある必要があります。 
+** *[Security Group ID (セキュリティ グループ ID)] (必須)*: VM にアタッチするセキュリティ グループ。 先ほど作成した ID です。 
+** *[AWS IAM Access Key ID (AWS IAM アクセスキー  ID)] (必須)*: EC2 アクセス用の AWS アクセスキー ID 
+** *[AWS IAM Secret Key (AWS IAM シークレットキー)](必須)*: EC2 アクセス用の IAM シークレットキー
+** *[AWS Windows AMI ID] (オプション)*: Windows ビルダーが必要な場合、その AMI ID をここに指定できます。
+
+フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。 
 
 ==== GKE 
 
-You will need additional information about your cluster to complete the next section. Run the following: 
+以下のセクションを完了するにはクラスタに関する追加情報が必要です。 以下を実行します。 
 
 ```bash
 gcloud container clusters describe
 ```
 
-This command will return something like the following, which will include network, region and other details that you will need to complete the next section: 
+このコマンドは、次のような情報を返します。この情報には、ネットワーク、リージョン、および次のセクションを完了するために必要なその他の詳細情報が含まれます。 
 
 [source, json]
 ----
@@ -459,15 +458,16 @@ databaseEncryption:
 …
 ----
 
-. *Create firewall rules*
+. *ファイアウォール ルールを作成する*
 +
-Run the following commands to create a firewall rules for VM service in GKE:
+以下のコマンドを実行して、GKE の VM サービス用のファイヤーウォール ルールを作成します。
 +
 ```bash
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
+
 ```
 +
-NOTE: You can find the Nomad clients CIDR based on the region by referring to the https://cloud.google.com/vpc/docs/vpc#ip-ranges[table here] if you have used auto-mode. 
+NOTE: 自動モードを使用している場合は、https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づき Nomad クライアントの CIDR を検索できます。 
 +
 ```bash
 gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
@@ -475,94 +475,93 @@ gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --net
 +
 ```bash
 gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
+
 ```
 
-. *Create user*
+. *ユーザーを作成する*
 +
-We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role documentation as reference.
+VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス許可をより詳細に設定したい場合は、 コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメントを参照してください。
 +
 ```bash
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
+
 ```
 
-. *Get the service account email address*
+. *サービスアカウントのメールアドレスを取得する*
 +
 ```bash
 gcloud iam service-accounts list --filter="displayName:circleci-server-vm service account" --format 'value(email)'
 ```
 
-. *Apply role to service account*
+. *ロールをサービスアカウントに適用する*
 +
-Apply the Compute Instance Admin (Beta) role to the service account. 
-+
-```bash
-gcloud projects add-iam-policy-binding <PROJECT_ID> --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
-```
-+
-And 
+コンピューティング インスタンス管理者 (ベータ版) ロールをサービスアカウントに適用します。 
 +
 ```bash
-gcloud projects add-iam-policy-binding <PROJECT_ID> --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
+gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
 ```
-
-. *Get JSON Key File*
 +
-After running the following, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation. 
+さらに 
 +
 ```bash
-gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <SERVICE_ACCOUNT_EMAIL>
+gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ```
 
-. *Configure Server*
+. *JSON キーファイルを取得する*
 +
-Configure VM service through the KOTS admin console: 
-+
-** *VM Service Load Balancer (required)*
-This can be found using the following command:
+以下を実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 サーバーインストールを設定する際に必要になります。 
 +
 ```bash
-kubectl get service vm-service --namespace=circleci-server
+gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
+
 ```
-** *GCP project ID (required)* - 
-Name of the GCP project the cluster resides.
 
-** *GCP Zone (required)* - 
-GCP zone the virtual machines instances should be created in for example “us-east1-b”.
-
-** *GCP VPC Network (required)* - 
-Name of the VPC Network.
-
-** *GCP VPC Subnet (optional)* - 
-Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
-
-** *GCP Service Account JSON Key File (required)* - 
-Copy and paste the contents of your service account JSON file.
-
-** *GCP Windows Image (optional)* - 
-Name of the image used for Windows builds. Leave this field blank if you do not require them.
-
-Click the *Save config* button to update your installation and re-deploy server.
-
-==== Additional VM Service Configuration
-
-* *Number of <VM type> VMs to keep prescaled (optional)* - By default, this field is set to 0 which will create and provision instances of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating instances lowers the start time allowing for faster machine and remote_docker builds. 
+. *サーバーの設定*
 +
-NOTE: that preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
+VM サービスをKOTS 管理者コンソールから設定します。 
++
+** *[VM Service Load Balancer (VM サービスロードバランサー ](必須)*: 以下のコマンドで確認できます。
++
+```bash
+kubectl get service vm-service --namespace=<YOUR_CIRCLECI_NAMESPACE>
+```
+** *[GCP project ID (GCP プロジェクト ID)] (必須)*: クラスタが存在する GCP プロジェクトの名前
 
-==== VM Service Validation
+** *[GCP Zone (GCP ゾーン)](必須)*: us-east1-b などに仮想マシン インスタンスを作成する GCP ゾーン
 
-Once you have configured and deployed CircleCI server you should validate that VM Service is operational. You can re-run the reality checker project within your CircleCI installation and you should see the VM Service Jobs complete with green. At this point all tests should pass with green. 
+** *[GCP VPC Network (GCP VPC ネットワーク)] (必須)*: VPC ネットワークの名前
 
-== Runner 
+** *[GCP VPC Subnet (GCP VPC サブネット)](オプション)*: VPC サブネットの名前 自動サブネット化を使用する場合は、このフィールドは空欄にします。
 
-=== Overview 
+** <strong>[GCP Service Account JSON Key File (GCP サービスアカウントの JSON
+ キーファイル] (必須)</strong>:サービスアカウントの JSON ファイルの内容をコピー＆ペーストします。
 
-CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you do need to create a runner and configure the runner agent to be aware your server installation. For complete instructions for setting up runner see the link:https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[runner documentation]. 
+** *[GCP Windows Image (GCP Windows イメージ)](オプション)*: Windows ビルドに使用するイメージの名前。 Windows ビルドが不要な場合は、このフィールドを空欄にします。
 
-NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation you will need to set up a runner namespace for each organization within your server installation. 
+*[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
-## What to read next
+==== VM サービスに関するその他の設定
 
-* https://circleci.com/docs/2.0/server-3-install-post[Server 3.x Phase 4 - Post installation]
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* *[Number of<VM type>VMs to keep prescaled (事前スケーリングする VM 数)]*: デフォルトでは、このフィールドは 0 に設定されています。 この値の場合、該当するリソース タイプのインスタンスがオンデマンドで作成、プロビジョニングされます。 リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと remote_docker のビルド速度が速くなります。 
++
+NOTE: ただし、事前割り当てされたインスタンスは常に実行されるため、コストが上がる可能性があります。 また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
+
+==== VM サービスの確認
+
+CircleCI Server の設定とデプロイが完了したら、VM サービスが適切に動作しているか確認する必要がありあます。 CircleCI Server 内で、realitycheckプロジェクトを再実行できます。 緑色であれば VM サービスジョブは完了してます。 この時点で、すべてのテストが緑色で合格しているはずです。 
+
+=== ランナー 
+
+==== 概要 
+
+CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 For complete instructions for setting up runner see the link:https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[runner documentation]. 
+
+NOTE: ランナーには各組織につき１つ名前空間が必要です。  CircleCI Server には複数の組織を存在させることができます。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。 
+
+ifndef::pdf[]
+## 次に読む
+
+* https://circleci.com/docs/2.0/server-3-install-post[Server 3.x ステップ 4: ポストインストール]
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+endif::pdf[]

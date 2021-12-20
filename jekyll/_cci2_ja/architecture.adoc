@@ -2,15 +2,14 @@
 version:
 - Server v2.x
 ---
-= CircleCI Server コンテナのアーキテクチャ
+= CircleCI Server Container Architecture
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-本ドキュメントでは、CircleCI ServerのインストールされるServicesマシン上で実行されるコンテナ化されたサービスの概要を説明します。
- このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
+This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
 toc::[]
 

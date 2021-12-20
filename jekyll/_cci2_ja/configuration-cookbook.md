@@ -63,14 +63,14 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 
 ### 構成レシピ
 {: #setting-environment-variables }
-CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)を参照してください。
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
+これらの環境変数の設定方法の詳細については、[環境変数に関するドキュメント](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
 
 **Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
@@ -222,7 +222,7 @@ workflows:
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 {: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
 
-CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。このorbdでは以下のタスクを行うことができます。
+CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。 このorbdでは以下のタスクを行うことができます。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
@@ -723,7 +723,8 @@ parameters:
 workflows:
   # when pipeline parameter, run-build-service-1-job is true, the
   # build-service-1 job is triggered.
-  <code>build-service-1</code> ジョブ: <code>maven</code> Orb を使用して service1 コードのコンパイルとインストールを行います。 テストはスキップします。
+  <code>build-service-1</code> ジョブ: <code>maven</code> Orb を使用して service1 コードのコンパイルとインストールを行います。
+  テストはスキップします。
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
@@ -745,30 +746,8 @@ workflows:
           command: '-X verify'
           app_src_directory: 'tests'
 ```
- ジョブ: maven Orb を使用して service1 コードのコンパイルとインストールを行います。 テストはスキップします。
-  service-2:
-    when: << pipeline.parameters.run-build-service-2-job >>
-    jobs:
-      - maven/test:
-          name: build-service-2
-          command: 'install -DskipTests'
-          app_src_directory: 'service2'
-  # when pipeline parameter, run-build-service-1-job OR
-  # run-build-service-2-job is true, run-integration-tests job is
-  # triggered. see:
-  # https://circleci.com/docs/2.0/configuration-reference/#logic-statements
-  # for more information.
-  run-integration-tests:
-    when:
-      or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
-    jobs:
-      - maven/test:
-          name: run-integration-tests
-          command: '-X verify'
-          app_src_directory: 'tests'
-</code>
 
-利用可能な機能や必要なパラメータなどの詳細については `path-filtering` [Orb のドキュメント](https://circleci.com/developer/orbs/orb/circleci/path-filtering) を参照してください。
+In the above configuration, we:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
@@ -784,7 +763,7 @@ workflows:
   - `run-integration-tests` ワークフロー: `path-filtering` Orb の実行結果に基づいて `run-build-service-1-job` または `run-build-service-2-job` パイプライン パラメータの値が `true` に更新された場合に実行されます。
   - `check-updated-files` ワークフロー: このパイプラインがトリガーされた場合に必ず実行されます。
 
-そのため、 CircleCI では [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering) Orb を提供しています。
+利用可能な機能や必要なパラメータなどの詳細については `path-filtering` [Orb のドキュメント](https://circleci.com/developer/orbs/orb/circleci/path-filtering) を参照してください。
 
 ## Use matrix jobs to run multiple OS tests
 {: #use-matrix-jobs-to-run-multiple-os-tests }

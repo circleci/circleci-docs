@@ -6,6 +6,7 @@ description: "Frequently asked questions from orb authors."
 order: 20
 version:
 - Cloud
+- Server v3.x
 ---
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.
@@ -45,7 +46,7 @@ circleci orb unlist <namespace>/<orb> <true|false> [flags]
 
 **Use caution when unlisting Private Orbs.**
 <br/>
-Currently the `orb source` and `orb info` CircleCI CLI commands do not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
+Currently the `orb source` CircleCI CLI command does not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
 {: class="alert alert-warning"}
 
 ## Secure API tokens
@@ -89,7 +90,7 @@ CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-co
 
 Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
 
-**Interactive Interpreter (or example, Python)**
+**Interactive Interpreter (for example, Python)**
 
 For some use-cases an orb might only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. Consider utilizing the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
 

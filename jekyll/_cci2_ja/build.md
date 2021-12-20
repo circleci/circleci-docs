@@ -21,12 +21,12 @@ description: "CircleCI 2.0 のビルド環境の構成"
 
 | ドキュメント                    | 説明                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------ |
-| <a href="{{ site.baseurl }}/ja/2.0/circleci-images/">Prebuilt Images</a> | CircleCI が提供しているビルド済み Docker イメージの一覧                                           |
+| <a href="{{ site.baseurl }}/ja/2.0/circleci-images/">ビルド済みイメージ</a> | CircleCI が提供しているビルド済み Docker イメージの一覧                                           |
 | <a href="{{ site.baseurl }}/ja/2.0/custom-images/">プライベート イメージの使用</a> | CircleCI におけるカスタム Docker イメージの作成方法と使用方法                                        |
-| <a href="{{ site.baseurl }}/ja/2.0/private-images/">カスタム ビルドの Docker イメージの使用</a> | Use Docker authenticated pulls to access private images and avoid rate limits. |
+| <a href="{{ site.baseurl }}/ja/2.0/private-images/">カスタム ビルドの Docker イメージの使用</a> | Docker の認証付きプルを使用して、プライベート イメージにアクセスし、レート制限を回避する方法                             |
 | <a href="{{ site.baseurl }}/ja/2.0/building-docker-images/">Docker コマンドの実行手順</a> | 他の場所にデプロイしたり、高度なテストを行ったりするための Docker イメージのビルド方法や、リモート Docker コンテナ内のサービスを開始する方法 |
 | <a href="{{ site.baseurl }}/ja/2.0/docker-compose/">docker-compose のインストールと使用</a> | docker-compose をジョブ実行時にプライマリ コンテナにインストールして使用する方法                               |
-| <a href="{{ site.baseurl }}/ja/2.0/docker-layer-caching/">Docker レイヤーキャッシュ (DLC) 機能を有効化して、設定ファイルに追加する方法</a> | How to request the DLC feature and add it to your configuration file.          |
+| <a href="{{ site.baseurl }}/ja/2.0/docker-layer-caching/">Docker レイヤーキャッシュ (DLC) 機能を有効化して、設定ファイルに追加する方法</a> | Docker レイヤーキャッシュ (DLC) 機能を有効化して、設定ファイルに追加する方法                                  |
 {: class="table table-striped"}
 
 ## iOS と Mac
@@ -48,6 +48,6 @@ description: "CircleCI 2.0 のビルド環境の構成"
 | <a href="{{ site.baseurl }}/ja/2.0/hello-world-windows/">macOS での Hello World</a> | macOS Executor と CircleCI を利用する方法 |
 {: class="table table-striped"}
 
-We’re thrilled to have you here. Happy building!
+このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。
 
 _CircleCI チーム_

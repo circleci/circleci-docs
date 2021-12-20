@@ -7,6 +7,7 @@ categories: [language-guides]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -60,7 +61,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-- **Config Version**: Current is `2.1`. Unless using a CircleCI Server installation, we recommend using 2.1.
+- **Config Version**: Current is `2.1`. If you are using CircleCI server v2.x, you will need to use config version 2.
 - **Orbs**: CircleCI offers [orbs](https://circleci.com/developer/orbs), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to make use of a pre-defined execution environment later on.
 
 {% raw %}

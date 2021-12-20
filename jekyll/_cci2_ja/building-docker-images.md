@@ -37,7 +37,7 @@ jobs:
 {: #specifications }
 {:.no_toc}
 
-リモート Docker 環境の技術仕様は以下のとおりです (CircleCI サーバーをお使いの場合は、システム管理者にお問い合わせください)。
+The Remote Docker Environment has the following technical specifications (for CircleCI Server installations, contact the systems administrator for specifications):
 
 | CPU 数 | プロセッサー                    | RAM  | HD    |
 | ----- | ------------------------- | ---- | ----- |
@@ -73,7 +73,7 @@ jobs:
 以下の例では、Docker Executorを使用して、リモートDockerで、[Docker のデモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージを構築してデプロイしています。
 
 <!-- markdownlint-disable MD046 -->
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -85,11 +85,13 @@ jobs:
     steps:
       - checkout
       # ... アプリのビルド・テストに関する記述 ...
+
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
     
       # Docker イメージをビルドしプッシュします。
+    
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -111,7 +113,7 @@ jobs:
 
 1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
-3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) を有効化して、イメージのビルドを高速化します (**注:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 また、DLC は CircleCI サーバー で利用できます)。 (11 行目)
+3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) を有効化して、イメージのビルドを高速化します (**注:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 DLC is available on CircleCI Server installations). (11 行目)
 4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
 
 ## Docker のバージョン
@@ -140,7 +142,7 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**Note:** The `version` key is not currently supported on CircleCI Server installations. お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ## 環境の分離
 {: #separation-of-environments }
@@ -211,7 +213,6 @@ services:
      COMPRESS: 'false'
    volumes:
      - bundler-data:/source/bundler-data
-
 ```
 
 次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
@@ -251,7 +252,6 @@ services:
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
       - ~/bundler-cache
-
 ```
 {% endraw %}
 

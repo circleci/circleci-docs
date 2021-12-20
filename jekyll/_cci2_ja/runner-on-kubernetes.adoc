@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Kubernetes での CircleCI ランナーの使用
+= CircleCI Runner Installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -14,43 +14,41 @@ toc::[]
 
 == はじめに
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
-
 ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
 
-この Helm チャートでは、*同じランナー リソース クラス*の Pod を 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
+The Helm chart will spin up one or more pods of *the same runner resource class*. This is useful for when you want all of these runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
 ワークロードごとに専用のランナーが必要な場合は、ランナー リソース クラスを複数作成して下記手順を繰り返し実行するか、作成したい各ランナー クラス用に個別の Helm チャートを作成することをお勧めします。
 
 === 前提条件
-* Scale プランを利用しているか、試用している。 上記を参照してください。
-* ランナーのデプロイ先で Kubernetes クラスタを稼動させている。
-* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
+* ランナーのデプロイ先で Kubernetes クラスタが稼働している。
+* Go through the steps to <<runner-installation#authentication, create and authenticate a CircleCI runner resource class>>.
 
-=== CircleCI Server Installation
+=== CircleCI Server のインストール
 
-When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
+CircleCI Server 上で Helmチャートを使用する場合、 `agentVersion` を xref:runner-installation.adoc[ランナーのインストール] の説明で指定されたバージョンに設定する必要があります。
 
-==== Upgrading Runner Deployment for Server
+==== ランナーのデプロイをアップグレードする
 
 . Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<チャートの値>> section of this document for more details about the `+values.yaml+` file.
-. Deploy the changes to the cluster 
+. 変更内容をクラスターにデプロイします。 
 +
 ....
 $ helm upgrade -f values.yaml "circleci-runner" ./ \
   --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
   --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
   --namespace your-namespace
+
 ....
 +
 
-Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
+`$ helm upgrade` コマンドおよび使用方法に関する詳細は、https://helm.sh/docs/helm/helm_upgrade/[Helm に関するドキュメント]をご覧ください。
 
 == 使用方法
 
-. https://github.com/CircleCI-Public/circleci-runner-k8s にあるリポジトリをクローンします。
-. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
-. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
+. https://github.com/CircleCI-Public/circleci-runner-k8sにあるリポジトリをクローンします。
+. Modify the chart's values in `+values.yaml+` per your needs. 「<<chart-values, チャートの値>>」を参照してください。
+. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication, authentication step>>:
 +
 ....
 $ helm install "circleci-runner" ./ \
@@ -93,18 +91,18 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 `+image.tag+`
 | `+circleci/runner+`
 `+launch-agent+`
-| 必須
-| You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
+| ○
+| You can <<runner-installation#docker-installation, extend a custom Docker image>> from the CircleCI default runner and use that instead.
 
-| `+replicaCount+`  | 1         | 必須         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<limitationspending-work,Pending Work>>.
+| `+replicaCount+`  | 1         | ○         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 「<<limitationspending-work, 制限事項/今後解決予定の問題>>」を参照してください。
 
-| `+resourceClass+` | -         | 必須         | ランナー用に作成したリソース クラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+| `+resourceClass+` | -         | ○         | ランナー用に作成したリソース クラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
-| `+runnerToken+`   | -         | 必須         | ランナー リソース クラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+| `+runnerToken+`   | -         | ○         | ランナー リソース クラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
-| `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI Server installations.
+| `+agentVersion+`  | -         | ×         | 指定する`circleci-task-agent`のバージョン。 CircleCI Server のインストール時にのみ使用されます。
 
-| その他すべての値  | -         | N         | 変更はお客様自身の判断と責任で行ってください。
+| その他すべての値  | -         | ×         | 変更はお客様自身の判断と責任で行ってください。
 
 |===
 

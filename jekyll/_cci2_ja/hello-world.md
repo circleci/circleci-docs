@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
+This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
@@ -20,7 +20,7 @@ version:
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-1. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します。
+1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
      jobs:
@@ -100,7 +100,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblock.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```yaml
 version: 2
 
@@ -136,8 +151,11 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 {:.tab.switcher.Cloud}
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-{:.tab.switcher.Server-v2}
-![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
+{:.tab.switcher.Server_3}
+![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server_2}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 表示したいプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 

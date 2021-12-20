@@ -1,0 +1,122 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= macOSへのCircleCI ランナーインストール
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このページでは、CircleCI ランナーをmacOSにインストールする方法を説明します。 
+
+NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
+
+toc::[]
+
+== CircleCI ランナー設定ファイルを作成する
+
+CircleCI ランナーを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。
+
+下記のテンプレートを、大文字で記載されたパラメーターを適切な値で置き換えて完成させます。 完成したら、`launch-agent-config.yaml` として保存します。
+
+```yaml
+api:
+  auth_token: AUTH_TOKEN
+  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
+  # url: https://circleci.example.com
+
+runner:
+  name: RUNNER_NAME
+  command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
+  working_directory: /tmp/%s
+  cleanup_working_directory: true
+
+logging:
+  file: /Library/Logs/com.circleci.runner.log
+```
+
+== CircleCI ランナー設定ファイルをインストールする
+
+`root` ユーザーとして、CircleCI ランナー設定ファイルの保存ディレクトリを作成します。
+
+```bash
+sudo mkdir -p '/Library/Preferences/com.circleci.runner'
+```
+
+このディレクトリに、先ほど作成した `launch-agent-config.yaml` をコピーします。
+
+```bash
+sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/launch-agent-config.yaml'
+```
+
+== `launchd .plist` をインストールする
+
+次の内容を `/Library/LaunchDaemons/com.circleci.runner.plist` にコピーし、所有者を `root` に、パーミッションを `644` に設定します。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.circleci.runner</string>
+
+        <key>Program</key>
+        <string>/opt/circleci/circleci-launch-agent</string>
+
+        <key>ProgramArguments</key>
+        <array>
+            <string>circleci-launch-agent</string>
+            <string>--config</string>
+            <string>/Library/Preferences/com.circleci.runner/launch-agent-config.yaml</string>
+        </array>
+
+        <key>RunAtLoad</key>
+        <true/>
+
+        <!-- ランナーは実行状態を維持する必要があります -->
+        <key>KeepAlive</key>
+        <true/>
+
+        <!-- ランナーによるリソースの使用が macOS で制限されないようにする設定です-->
+        <key>ProcessType</key>
+        <string>Interactive</string>
+
+        <!-- 失敗時または更新後にランナーを再起動する頻度を増やします -->
+        <key>ThrottleInterval</key>
+        <integer>3</integer>
+
+        <!-- ランナーがシャットダウンするまで 10 分間待機します (ランナー自体はタスクが完了するまで待機します) -->
+        <key>ExitTimeOut</key>
+        <integer>600</integer>
+
+        <!-- ログの出力とローテーションの設定はランナー固有のものを使用します -->
+        <key>StandardOutPath</key>
+        <string>/dev/null</string>
+        <key>StandardErrorPath</key>
+        <string>/dev/null</string>
+    </dict>
+</plist>
+```
+
+== `launchd` サービスを有効にする
+
+2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
+
+
+```bash
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+これで、サービスをロードできます。
+
+```bash
+sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+== サービスの実行状態を確認する
+
+macOS のコンソールを使用して、CircleCI ランナーのログを確認できます。 `com.circleci.runner.log` という名前のログに含まれる "Log Reports" の部分を確認してください。

@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
 title: "Configuration Introduction"
-description: "Landing page for CircleCI 2.0 Config"
+description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -28,11 +29,11 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 
 1. If you haven’t already, go ahead and sign-up with CircleCI and select either GitHub or Bitbucket. If you prefer, you can also sign up through the GitHub marketplace.
 2. Make sure the project you want to manage has been added.
-3. Add a `.circleci` folder at the top of your project’s master branch.  If you want to experiment on a different branch, you can do that too.  Make sure the folder starts with a period.  This folder is special and hence the .circleci format.
+3. Add a `.circleci` folder at the top of your project’s main branch.  If you want to experiment on a different branch, you can do that too.  Make sure the folder starts with a period.  This folder is special and hence the .circleci format.
 4. Add a `config.yml` file inside the .circleci folder.
 5. Add the following contents to your `config.yml` file.
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -71,7 +72,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. Now, add a second `run` step and do an `ls -al` to see that all of your code is available.
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -108,7 +109,7 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -155,7 +156,7 @@ In the example below, an event triggering a build will cause `Hello-World` to st
 All of the job names are arbitrary.  This allows you to create workflows as complex as you need while staying meaningful and clear to the next developer that reads the `config.yml`.
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   Hello-World:

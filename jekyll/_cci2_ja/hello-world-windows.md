@@ -17,7 +17,7 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 {:toc}
 
 
-# 前提条件
+## 前提条件
 {: #prerequisites }
 
 作業を行う前に、以下を準備しておく必要があります。
@@ -26,7 +26,7 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 * Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
 * クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
 
-# Windows Executor の概要
+## Windows Executor の概要
 {: #overview-of-the-windows-executor }
 
 Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) アプリケーション、.NET 実行可能ファイル、(.NET フレームワークなどの) Windows 固有プロジェクトといった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
@@ -42,7 +42,7 @@ Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) ア�
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
 - Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
 
-## Windows Executor イメージ
+### Windows Executor イメージ
 {: #windows-executor-images }
 
 現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに何が含まれているのか、詳しい情報についてはシステム管理者にお問い合わせください。
@@ -72,7 +72,27 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblockone.Server}
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_2}
 ```yaml
 version: 2
 
@@ -93,7 +113,7 @@ jobs:
 ```
 
 
-## 既知の問題
+### 既知の問題
 {: #known-issues }
 
 Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
@@ -101,17 +121,17 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 * SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
-# サンプルの設定ファイル
+## サンプルの設定ファイル
 {: #example-configuration-file }
 
 以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
 
 {:.tab.windowsblocktwo.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -125,7 +145,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblocktwo.Server}
+{:.tab.windowsblocktwo.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblocktwo.Server_2}
 ```yaml
 version: 2
 
@@ -142,12 +177,12 @@ jobs:
 
 ここからはバージョン 2.1 の構文を使用して Windows Executor の使用について説明しますが、CircleCI Server を使用している場合は前述の Executor 定義構文を参考にしてください。
 
-# Windows Executor でのシェルの指定
+## Windows Executor でのシェルの指定
 {: #specifying-a-shell-with-the-windows-executor }
 
 Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
 
-* PowerShell 5
+* PowerShell (Windows Orb のデフォルト)
 * Bash
 * コマンド
 
@@ -178,9 +213,31 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server}
+{:.tab.windowsblockthree.Server_3}
 ```YAML
 version: 2.0
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```YAML
+version: 2
 
 jobs:
   build: # name of your job
@@ -221,9 +278,9 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server}
+{:.tab.windowsblockfour.Server_3}
 ```YAML
-version: 2.0
+version: 2.1
 
 jobs:
   build: # name of your job
@@ -236,10 +293,25 @@ jobs:
       - run: pwsh ./<my-script>.ps1
 ```
 
-# サンプル アプリケーション
+{:.tab.windowsblockfour.Server_2}
+```YAML
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+## サンプル アプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
@@ -271,7 +343,7 @@ jobs:
       - checkout
 ```
 
-最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
+In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
 
 ```yaml
       - restore_cache:
@@ -304,12 +376,12 @@ jobs:
 
 最後のステップでは、ビルド実行可能ファイルをアーティファクトとして保存し、CircleCI Web アプリケーションまたは API からアクセスできるようにします。
 
-# ビルドへの SSH 接続
+## ビルドへの SSH 接続
 {: #ssh-into-your-build }
 
 Windows ビルド コンテナに SSH 接続することができます。 これは、パイプラインに関する問題のトラブルシューティングに便利です。 Windows コンテナに SSH 接続するには、以下の手順を実行します。
 
-## 手順
+### 手順
 {: #steps }
 
 1. SSH キーを [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) アカウントまたは [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) アカウントに追加していることを確認します。
@@ -328,7 +400,7 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 
 ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を参照してください。
 
-# 次のステップ
+## 次のステップ
 {: #next-steps }
 
 CircleCI の機能については、以下のドキュメントを確認してください。
@@ -337,7 +409,7 @@ CircleCI の機能については、以下のドキュメントを確認して�
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
 * すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)」を参照してください。
 
-# Windows イメージにプリインストールされているソフトウェア
+## Windows イメージにプリインストールされているソフトウェア
 {: #software-pre-installed-in-the-windows-image }
 
 **Windows Server 2019 with Visual Studio 2019**
@@ -347,37 +419,51 @@ CircleCI の機能については、以下のドキュメントを確認して�
     * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
-* シェル
+* AWS
+    * AWS CLI 1.16.209
+    * Python 3.6.0
+    * Botocore 1.12.199
+* Shells:
     * Powershell 5
     * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
-* .NET Framework 4.8
+* .NET Framework 5
 * .NET Core
+    * SDK 5.0.402
+    * SDK 5.0.401
     * SDK 3.1.406 (x64)
     * SDK 3.0.100-preview7-012821
     * Runtime 3.0.0-preview6-27804-01
     * SDK 2.2.401
     * Runtime 2.2.6
     * SDK 2.1.801
-* Git 2.22.0
+* Nunit 3.10.0
+* Git 2.33.1
 * Git LFS 2.7.2
+* Gzip 1.3.12
+* 7zip 19.00
+* PsExec64 2.34
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
-* Docker Engine - Enterprise バージョン 18.09.7
+* Docker Engine - Enterprise version 18.09.7
 * NuGet CLI 5.2.0.6090
-* Chocolatey v0.10.15
+* Chocolatey v0.11.2
 * Azure Service Fabric
     * SDK 3.3.617.9590
     * Runtime 6.4.617.9590
+* Azure CLI 2.0.70
 * OpenJDK 12.0.2
-* Node.js v12.8.0
-* NVM (Node Version Manager)
+* Node.js 14.17.5
+* NVM (Node Version Manager) 1.1.7
+* Yarn 1.22.17
 * Ruby 2.6.3
-* Go 1.12.7
-* Python 3.7.3
+* Go 1.17
+* Python 3.9
+* Java 12.0.2
 * Miniconda 3
-* テキスト エディター
-    * nano 2.5.3
-    * vim 8.0.604
+* WinAppDriver 1.1.1809.18001
+* Text editors
+    * nano 2.5
+    * vim 8.2
 * jq 1.5

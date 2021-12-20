@@ -6,6 +6,7 @@ description: "How to Write YAML on CircleCI"
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -161,7 +162,7 @@ see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) 
 CircleCI has also developed "orbs," which enable you to use pre-configured and tested packages of configuration elements that you can use in your configuration workflow. Utilizing DRY (Don't Repeat Yourself), orbs enable you to quickly and easily incorporate configuration elements (jobs, executors, commands) in your workflow. For more detailed information about orbs:
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of orbs.
-- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Orb Intro]({{site.baseurl}}/2.0/orb-intro/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - For a more exhaustive overview of YAML,

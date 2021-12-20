@@ -10,6 +10,7 @@ gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"
 gem "liquid-c"
+gem 'nokogiri', '~> 1.12', '>= 1.12.5'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'
@@ -18,7 +19,6 @@ group :jekyll_plugins do
   gem 'jekyll-target-blank'
   gem 'jekyll-toc'
   gem 'jekyll-asciidoc'
-  gem 'jekyll-minibundle'
 end
 
 group :test, :development do

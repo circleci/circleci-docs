@@ -6,7 +6,7 @@ description: "Starting point for CircleCI Server v2.18 docs"
 categories: [getting-started]
 order: 1
 ---
-This document provides a summary of features and product notes for the release of CircleCI Server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
+This document provides a summary of features and product notes for the release of CircleCI server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
 ## Requirements for upgrading
 {: #requirements-for-upgrading }

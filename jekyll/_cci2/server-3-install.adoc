@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Installation Phase 2
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find the steps and prerequisites for the server v3.x installation.
 :icons: font
 :toc: macro
 :toc-title:
@@ -146,19 +147,16 @@ A JSON format key of the Service Account to use for bucket access.
 * *Storage Object Expiry (optional)* - 
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
 
-==== Nomad
-Set mTLS to `disabled`. This should be disabled by default but there is a known issue currently preventing this. Disabling allows you to ignore Nomad settings until phase 3 of the installation process where we will install build services.
-
 ==== Postgres, MongoDB, Vault settings
 
 You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
 
-==== Save and Deploy
+=== Save and deploy
 Once you have completed the fields detailed above it is time to deploy. The deployment will install the core services and provide you an IP address for the Traefik load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation. 
 
 NOTE: In this first stage we skipped a lot of fields in the config. Not to worry. We will revisit those in the next stages of installation.
 
-==== Create DNS Entry 
+=== Create DNS entry 
 Create a DNS entry for your Traefik load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record. 
 
 You will need the IP address or, if using AWS, the DNS name of the Traefik load balancer. You can find this with the following command:
@@ -173,7 +171,7 @@ For more information on adding a new DNS record, see the following documentation
 
 * link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
 
-==== Validation
+=== Validation
 
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now let’s move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to be status of running and ready should show 1/1): 
 

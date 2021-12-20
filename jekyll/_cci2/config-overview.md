@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
-title: "Configuration"
-short-title: "Configuration"
-description: "Description of configuration"
+title: "Configuration Overview"
+description: "Overview of CircleCI configuration"
 categories: [configuration]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 

@@ -32,10 +32,8 @@ As an example, the AWS S3 orb includes a _command_ to copy a file or object to a
 
 ```yaml
 version: 2.1
-
 orbs:
   aws-s3: circleci/aws-s3@x.y.z
-
 jobs:
   build:
     docker:
@@ -50,7 +48,6 @@ jobs:
       - aws-s3/copy:
           from: bucket/build_asset.txt
           to: 's3://my-s3-bucket-name'
-
   #... workflows , other jobs etc.
 ```
 
@@ -97,7 +94,6 @@ parameters:
 description: >
   Select the version of Ruby to use. Uses CircleCI's highly cached convenience
   images built for CI.
-
   Any available tag from this list can be used:
   https://hub.docker.com/r/cimg/ruby/tags
 docker:
@@ -126,10 +122,8 @@ When importing an orb which has jobs, you can reference them directly from your 
 
 ```
 version: 2.1
-
 orbs:
   <orb>: <namespace>/<orb>@x.y #orb version
-
 workflows:
   use-orb-job:
     jobs:
@@ -145,7 +139,6 @@ Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development
 
 ```yaml
 # Source https://github.com/circleci-public/orb-project-template/blob/master/src/examples/example.yml
-
 description: >
   Sample example description.
 usage:
@@ -156,7 +149,6 @@ usage:
     use-my-orb:
       jobs:
         - <orb-name>/<job-name>
-
 ```
 
 ## Namespaces
@@ -300,7 +292,6 @@ steps:
 ```bash
 # This is a bash file, but could really be any text-based file
 echo "Hello World"
-
 ```
 
 {:.tab.fileInclude.Packed_Command-yaml}
