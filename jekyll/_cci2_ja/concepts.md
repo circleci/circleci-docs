@@ -22,7 +22,7 @@ version:
 
 CircleCI プロジェクトは、関連付けられているコード リポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。 プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
 
-プロジェクトのダッシュボードで、以下のいずれかが可能です。
+プロジェクトのダッシュボードで、以下のいずれかを実行します。
 * VCS で所有者になっているプロジェクトを_セットアップ_する
 * 組織内のプロジェクトを_フォロー_して、パイプラインにアクセスし、プロジェクトのステータスに関する \[メール通知\] ({{ site.baseurl }}/2.0/notifications/) を受け取る
 
@@ -31,7 +31,7 @@ CircleCI プロジェクトは、関連付けられているコード リポジ�
 ## 設定
 {: #configuration }
 
-CircleCI believes in *configuration as code*. Your entire continuous integration and deployment process is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
+CircleCI は *Configuration as Code* を貫いています。 継続的インテグレーションとデプロイのプロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。  `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定ファイルでは YAML 構文を使用します。基本事項については、[YAML の記述]({{ site.baseurl }}/2.0/writing-yaml/) を参照してください。
 
 ```bash
 ├── .circleci
@@ -40,9 +40,9 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 └── all-other-project-files-and-folders
 ```
 
-`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that are used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) page for more information.
+`config.yml` は、プロジェクトの全パイプラインを定義する強力な YAML ファイルです。 使用される様々なキーの概要の詳細は、[設定ファイルのリファレンス]({{ site.baseurl }}/2.0/configuration-reference/)をご覧ください。
 
-Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
+CircleCI の設定はお客様のプロジェクトの様々なニーズに合わせて変更できます。 下記の用語は粒度と依存度の順に並べられており、最も一般的な CircleCI プロジェクトのコンポーネントを表しています。
 
 - **[Pipeline](#pipelines)**: Represents the entirety of your configuration. Available in CircleCI Cloud only.
 - **[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に表示されます。
