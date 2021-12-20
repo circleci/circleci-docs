@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "SSH を使用したデバッグ"
 short-title: "SSH を使用したデバッグ"
 description: "How to access a build container using SSH on CircleCI"
