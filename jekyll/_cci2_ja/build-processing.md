@@ -7,11 +7,11 @@ categories:
   - settings
 order: 1
 version:
-  - クラウド
+  - Cloud
   - Server v3.x
 ---
 
-CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 Pipelines are available on CircleCI cloud and self hosted installations of CircleCI server v3.x.
+CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 パイプラインは クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
 
 * 目次
 {:toc}
@@ -19,26 +19,26 @@ CircleCI API または自動キャンセルのワークフローからワーク�
 ## はじめに
 {: #what-are-pipelines }
 
-CircleCI Pipelines encompass the full set of workflows you run when triggering work on your projects in CircleCI. Workflows coordinate the jobs defined within your project configuration.
+CircleCI のパイプラインには、 CircleCI のプロジェクトで作業をトリガーするときに実行する一連のワークフローがすべて含まれます。 ワークフローはプロジェクトの設定で定義したジョブを調整します。
 
 ## パイプラインのメリット
 {: #benefits-of-using-pipelines }
 
-Pipelines offer the following benefits:
+パイプラインには以下のメリットがあります。
 
 {% include snippets/pipelines-benefits.adoc %}
 
 ## トラブルシューティング
 {: #implications-of-pipelines }
 
-When using pipelines, please note the following:
+パイプラインを使用する際は、次の点に注意してください。
 
-- アンカーは、アプリケーションの設定ファイルに表示されることなく、処理されて解決されます。
+- ビルドまたはワークフローが定義されていない場合は、エラーとなります。
 
 ## トラブルシューティング
 {: #transitioning-to-pipelines }
 
-The following sections outline the process of transitioning to pipelines.
+以下のセクションでは、パイプラインへの移行プロセスについて概説します。
 
 ### 2.0 構成でのパイプライン
 {: #pipelines-with-20-configuration }
@@ -50,7 +50,7 @@ The following sections outline the process of transitioning to pipelines.
 {: #giving-feedback }
 {:.no_toc}
 
-If you have feedback, suggestions, or comments:
+フィードバック、ご提案、コメントは、以下の方法でお寄せください。
 
 - CircleCI の Twitter アカウント (@CircleCIJapan) 宛てにツイートする
 - [アイデア ボード](https://ideas.circleci.com/)で既存の投稿に投票する、または投稿を追加する
@@ -59,4 +59,4 @@ If you have feedback, suggestions, or comments:
 {: #see-also }
 {:.no_toc}
 
-詳細については、「[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/#冗長ビルドの自動キャンセル)」を参照してください。
+詳細については、[ビルドのスキップとキャンセル]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build)を参照してください。
