@@ -66,6 +66,6 @@ AWS API を使用して、このプロセスを自動化することもできま
 
 ```shell
 circleci dev-console
-# Wait for console to load
+# コンソールのロードを待つ
 user=> (admin/delete-build "https://my-circleci-hostname.com/gh/my-org/my-project/1234")
 ```
