@@ -540,6 +540,8 @@ html, body {
     &.v2-banner {
       margin-top: 0em;
       background: $aside-v2banner-bg;
+      position: sticky;
+      top: 0;
     }
   }
 
