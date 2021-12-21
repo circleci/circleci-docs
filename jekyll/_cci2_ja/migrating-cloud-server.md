@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "Cloud から Server への移行"
 short-title: "Cloud から Server への移行"
 description: "Cloud からの 2.0 Server へのプロジェクト移行"
