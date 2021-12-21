@@ -102,7 +102,7 @@ workflows:
 
 1 つの設定ファイル内、および 1 つのワークフロー内でも、複数のリソースを混在させることができます。
 
-## 関連項目
+## 制限事項
 {: #limitations }
 
 * 現在、実行可能ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
