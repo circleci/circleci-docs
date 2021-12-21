@@ -1,0 +1,29 @@
+
+
+<div class="global-nav--list global-nav--external-links lang-selector-wrapper">
+  <div class="mobile-top-row">
+    <div>< </div>
+    <!-- TODO: figure out if "Select Language" that needs to be translated -->
+    <div>Select Language</div>
+    <div>X</div>
+  </div>
+
+
+  <button id="globe-lang-btn" class="global-nav--language-picker" data-analytics-action="click-outer-cta">
+    <span class="globe-icon">{% include utility-icons/globe.svg size="24" %}</span>
+    <span class="lang-picker-mobile">Select Language</span>
+  </button>
+  <div id="lang-picker" class="lang-picker">
+    <div class="lang-dropdown">
+      <div class="lang-row">
+        <a id="globalNavLangEng" class="lang-option">English</a>
+        <span class="right-arrow"> > </span>
+      </div>
+
+      <div class="lang-row">
+        <a id="globalNavLangJap" class="lang-option">日本語</a>
+        <span class="right-arrow"> > </span>
+      </div>
+    </div>
+  </div>
+</div>
