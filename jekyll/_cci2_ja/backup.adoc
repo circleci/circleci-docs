@@ -1,68 +1,68 @@
 ---
-description: "This document provides guidance on backing up your CircleCI server v2.x installation as well as tips for disaster recovery."
+description: このドキュメントでは、CircleCI Server v2d.x のインストールのバックアップおよび災害復旧のためのヒントを紹介します。
 version:
 - Server v2.x
-- Admin
+- 管理者
 ---
-= Backup and Recovery
+= バックアップと復旧
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This chapter describes failover or replacement of the services machine. Refer to the Backup section below for information about possible backup strategies and procedures for implementing a regular backup image or snapshot of the services machine.
+ここでは Services マシンのフェイルオーバーや交換について説明します。 Services マシンの定期的なバックアップイメージまたはスナップショットを実装するためのバックアップ戦略および手順については、以下の「バックアップ」セクションを参照してください。
 
 toc::[]
 
-== Disaster Recovery
-Specify a spare machine, in an alternate location, with the same specs for disaster recovery of the services machine. Having a hot spare regularly imaged with the backup snapshot in a failure scenario is best practice.
+== 災害復旧
+Services マシンの災害復旧用に同じ仕様の予備マシンを別の場所に設定します。 障害発生時に備えて、バックアップスナップショットを使ってホットスペアのイメージを定期的に作成することをお勧めします。
 
-At the very least, provide systems administrators of the CircleCI installation with the hostname and location (even if co-located) of an equivalent server on which to install a replacement server with the latest snapshot of the services machine configuration. To complete recovery, use the Installation procedure, replacing the image from that procedure with your backup image.
+少なくとも、CircleCI のシステム管理者に、Services マシンの設定の最新のスナップショットを保有する代替サーバーをインストールする同等のサーバーのホスト名と場所（同じ場所の場合も含む）を通知します。 イメージをバックアップイメージに置き換えたインストール手順により復旧を完了します。
 
-== Backing up CircleCI Data
+== CircleCI データのバックアップ
 
-This document describes how to back up your CircleCI application so that you can recover from accidental or unexpected loss of CircleCI data attached to the Services machine:
+このドキュメントでは、CircleCI アプリケーションをバックアップし、事故や予期しない理由により Services マシン内の CircleCI データが消失した場合の復旧方法について説明します。
 
-NOTE: If you are running CircleCI in an HA configuration, you must use standard backup mechanisms for the external datastores. Contact support@circleci.com for more information document for more information.
+NOTE: CircleCI を HA 構成で実行している場合、外部データストアの標準のバックアップ機構を使用する必要があります。 より詳細なドキュメントは、support@circleci.com にお問い合わせ下さい。
 
-== Backing up the Database
+== データベースのバックアップ
 
-If you have **not** configured CircleCI for external services, the best practice for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. There is a small risk, that varies by filesystem and distribution, that snapshots taken without a reboot may have some data corruption, but this is rare in practice.
+CircleCI を外部サービス用に設定*していない*場合、CircleCI データをバックアップするためのベストプラクティスとして、Services マシンのルートボリュームとして機能する、仮想ディスクの VM スナップショットを使用することをお勧めします。 基盤となる仮想ディスクが、AWS EBSと同様に動作をサポートしていれば、ダウンタイムなくバックアップを実行できます。 再起動せずにスナップショットを作成すると、ファイルシステムと分散によっては一部のデータが破損してしまうリスクが僅かにありますが、これは実際には稀です。
 
-NOTE: "Snapshots Disabled" refers to Replicated's built-in snapshot feature that is turned off by default.
+NOTE: 「Snapshots Disabled 」とは、Replicated の内蔵スナップショット機能がデフォルトでオフになっていることを指します。
 
-== Backing up Object Storage
+== オブジェクトストレージのバックアップ
 
-Build artifacts, output, and caches are generally stored in object storage services like AWS S3. These services are considered highly redundant and are unlikely to require separate backup. An exception is if your instance is setup to store large objects locally on the Services machine, either directly on-disk or on an NFS volume. In this case, you must separately back these files up and ensure they are mounted back to the same location on restore.
+ビルドアーティファクト、出力、キャッシュは、通常 AWS S3 などのオブジェクトストレージサービスに保存されます。 これらのサービスは冗長性が高いため、別のバックアップを必要とする可能性は低いと考えられます。 ただし、インスタンスがディスク上に直接、または NFS ボリューム上で、Services マシンに大きなオブジェクトをローカルに保存するようセットアップされている場合は例外となります。 この場合、これらのファイルを別にバックアップし、リストア時に必ず同じ場所へマウントされるようにする必要があります。
 
-== Snapshotting on AWS EBS
+== AWS EBSのスナップショットの作成
 
-There are a few features of AWS EBS snapshots that make the backup process quite easy:
+AWS EBSスナップショットには、バックアップ処理を簡単にするため、いくつかの機能が搭載されています。
 
-1. To take a manual backup, choose the instance in the EC2 console and select Actions > Image > Create Image.
+1. 手動でバックアップを作成するには、EC2 コンソールでインスタンスを選択し、[アクション] > [イメージ] > [イメージの作成] を選択します。
 
-2. Select the No reboot option if you want to avoid downtime.
-An AMI that can be readily launched as a new EC2 instance for restore purposes is created.
+2. ダウンタイムを避けたい場合は、[再起動しない] オプションを選択します。
+リストア用の新しい EC2 インスタンスとしてすぐに起動できる AMI が作成されます。
 
-It is also possible to automate this process with the AWS API.  Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see https://aws.amazon.com/premiumsupport/knowledge-center/ebs-snapshot-billing/[Amazon's EBS snapshot billing] document for details.
+AWS API を使用して、このプロセスを自動化することもできます。  それ以後の AMI やスナップショットは、前回のスナップショットから異なる分 (変更されたブロック) の大きさしかないため、頻繁にスナップショットを作成してもストレージコストが必ずしも増加するわけではありません。詳細については、「https://aws.amazon.com/premiumsupport/knowledge-center/ebs-snapshot-billing/[Amazon EBS スナップショットの利用料金]」を参照してください。
 
-== Restoring From Backup
+== バックアップからのリストア
 
-When restoring test backups or performing a restore in production, you may need to make a couple of changes on the newly launched instance if its public or private IP addresses have changed:
+テスト用バックアップのリストア、または本番環境でリストアを実行するとき、公開または非公開 IP アドレスが変更されている場合は、新たに開始されたインスタンスにいくつかの変更が必要になることがあります。
 
-1. Launch a fresh EC2 instance using the newly generated AMI from the previous steps
-2. Stop the app in the Management Console (at port 8800) if it is already running
-3. Ensure that the hostname configured in the Management Console at port 8800 reflects the correct address. If this hostname has changed, you will also need to change it in the corresponding GitHub OAuth application settings or create a new OAuth app to test the recovery and log in to the application.
-4. Update any references to the backed-up instance's public and private IP addresses in `/etc/default/replicated` and `/etc/default/replicated-operator` on Debian/Ubuntu or `/etc/sysconfig/*` in RHEL/CentOS to the new IP addresses.
-5. From the root directory of the Services box, run `sudo rm -rf /opt/nomad`. State is saved in the `/opt/nomad` folder that can interfere with builds running when an installation is restored from a backup. The folder and its contents will be regenerated by Nomad when it starts.
-6. Restart the app in the Management Console at port 8800.
+1. 先述の手順で新たに作成された AMI を使用して、新しい EC2 インスタンスを開始します。
+2. 管理コンソール (ポート8800) で実行されているアプリがあれば、停止します。
+3. 管理コンソールのポート8800 で設定されているホスト名が、正しいアドレスを反映していることを確認します。 ホスト名が変更されている場合、対応する GitHub OAuth アプリケーションの設定も変更するか、新しい OAuth アプリケーションを復旧テスト用に作成し、そのアプリケーションにログインする必要があります。
+4. Debian/Ubuntuの`/etc/default/replicated`および`/etc/default/replicated-operator`、または RHEL/CentOS の`/etc/sysconfig/*`にある、バックアップされたインスタンスの公開および非公開 IP アドレスへの参照をすべて、新しい IP アドレスに変更します。
+5. Services ボックスのルートディレクトリから、`sudo rm -rf /opt/nomad`を実行します。 状態が `/opt/nomad` フォルダに保存され、インストールをバックアップからリストアする際に実行されるビルドに支障をきたす可能性があります。 このフォルダとその中身は、Nomad の起動時に再び作成されます。
+6. 管理コンソールのポート8800 で、アプリケーションを再起動します。
 
-== Cleaning up Build Records
+== ビルドレコードのクリーンアップ
 
-While filesystem-level data integrity issues are rare and preventable, there will likely be some data anomalies in a point-in-time backup taken while builds are running on the system. For example, a build that is only half-way finished at backup time may result in missing the latter half of its command output, and it may permanently show that it is in Running state in the application.
+ファイルシステムレベルのデータインテグリティーの問題は稀であり、防止可能ですが、ビルドがシステムで実行中の特定の時間に作成されたバックアップでは、一部のデータ異常の可能性が高くなります。 たとえば、バックアップの時点でビルトが半分しか完了していなかった場合、コマンド出力の後半が存在せず、アプリケーションは恒久的に実行中の状態として表示される可能性があります。
 
-If you want to clean up any abnormal build records in your database after a recovery, you can delete them by running the following commands on the Services machine replacing the example build URL with an actual URL from your CircleCI application:
+復旧後に、データベース内の異常なビルドレコードをクリーンアップするには、Servicesマシンで次のコマンドを実行します。例のビルド URL を、CircleCI アプリケーションの実際の URL に置き換えてください。
 
 ```shell
 circleci dev-console
