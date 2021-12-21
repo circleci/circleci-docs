@@ -413,7 +413,9 @@ $(document).ready(function () {
     var seconds = Math.floor((new Date() - date) / 1000);
 
     var interval = Math.floor(seconds / (60 * 60 * 24 * 365));
-    if (Math.floor(seconds / (60 * 60 * 24 * 30 * 365)) >= 1) {
+    console.log("what is my interval? ", interval)
+    if (interval >= 1) {
+      console.log('what is going on here? ')
       return '+1 year ago';
     }
     interval = Math.floor(seconds / (60 * 60 * 24 * 30));
