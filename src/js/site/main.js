@@ -405,47 +405,31 @@ $(document).ready(highlightURLHash());
 
 // update date shown to be X ago
 $(document).ready(function () {
-  const timeposted = document.querySelectorAll('#time-posted-on');
-  const tooltiptime = document.querySelector('#tooltiptime');
+  // tooltip code for posted on time
+  const tooltiptime = document.getElementById('tooltiptime');
+  let timeposted = document.getElementById('time-posted-on');
+  let popperInstance = null;
+  var showEvents = ['mouseenter', 'focus'];
+  var hideEvents = ['mouseleave', 'blur'];
 
-  timeposted.forEach(function (posted) {
-    let popperInstance = null;
+  showEvents.forEach((event) => {
+    timeposted.addEventListener(event, () => {
+      tooltiptime.setAttribute('data-show', '');
+      popperInstance = createPopper(timeposted, tooltiptime, {})
+    });
+  });
 
-    function create() {
-      popperInstance = createPopper(posted, tooltiptime, {
-        placement: 'bottom',
-      });
-    }
-
-    function destroy() {
+  hideEvents.forEach((event) => {
+    timeposted.addEventListener(event, () => {
+      tooltiptime.removeAttribute('data-show');
       if (popperInstance) {
         popperInstance.destroy();
         popperInstance = null;
       }
-    }
-
-    function show() {
-      tooltiptime.setAttribute('data-show', '');
-      create();
-    }
-
-    function hide() {
-      tooltiptime.removeAttribute('data-show');
-      destroy();
-    }
-
-    var showEvents = ['mouseenter', 'focus'];
-    var hideEvents = ['mouseleave', 'blur'];
-
-    showEvents.forEach((event) => {
-      posted.addEventListener(event, show);
-    });
-
-    hideEvents.forEach((event) => {
-      posted.addEventListener(event, hide);
     });
   });
 
+  // change date into how long ago that date is relative to when view page
   function ago(date) {
     function render(n, unit) {
       return n + ' ' + unit + (n === 1 ? '' : 's') + ' ago';
