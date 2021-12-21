@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "言語ガイド: Java (Maven を使用)"
 short-title: "Maven を使用した Java プロジェクト"
 description: "Building and Testing with Java and Maven on CircleCI"
