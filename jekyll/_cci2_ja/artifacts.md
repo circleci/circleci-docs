@@ -162,7 +162,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
-コマンドでビルドのすべてのアーティファクト詳細をフェッチし、それを grep にパイプして URL を抽出します。 最後に、wget を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
+同様に、ビルドの_最新_のアーティファクトをダウンロードする場合は、curl の呼び出しを以下のように URL で置き換えます。
 
 ```bash
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
