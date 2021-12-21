@@ -54,3 +54,35 @@ export function updateCookieExpiration(cookieName, newExpiration) {
   // Re-set cookie with same values and new expiration date
   Cookies.set(cookieName, existingValue, { expires: newExpiration });
 }
+
+// change date into how long ago that date is relative to when view page
+export function dateHowLongAgo(date) {
+  function render(n, unit) {
+    return n + ' ' + unit + (n === 1 ? '' : 's') + ' ago';
+  }
+
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = Math.floor(seconds / (60 * 60 * 24 * 365));
+  if (interval >= 1) {
+    return '+1 year ago';
+  }
+  interval = Math.floor(seconds / (60 * 60 * 24 * 30));
+  if (interval >= 1) {
+    return render(interval, 'month');
+  }
+  interval = Math.floor(seconds / (60 * 60 * 24));
+  if (interval >= 1) {
+    return render(interval, 'day');
+  }
+  interval = Math.floor(seconds / (60 * 60));
+  if (interval >= 1) {
+    return render(interval, 'hour');
+  }
+  interval = Math.floor(seconds / 60);
+  if (interval >= 1) {
+    return render(interval, 'minute');
+  }
+  interval = Math.floor(seconds);
+  return render(interval, 'second');
+}

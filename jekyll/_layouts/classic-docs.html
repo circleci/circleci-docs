@@ -28,20 +28,19 @@
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
 
+            <!-- Quick info list - time posted + server version -->
+            {% if page.page-type != "index" and page.page-type != "homepage" %}
             <div id="tooltip" role="tooltip" class="tooltip-popover"></div>
-            <div id="tooltiptime" role="tooltip" class="tooltip-popover">
+            <div id="tooltip-time" role="tooltip" class="tooltip-popover">
               Last updated
               <div id='arrow' data-popper-arrow></div>
             </div>
 
-            <!-- Quick info list - time posted + server version -->
             <div class="quick-info-list">
-              {% if page.page-type != "index" and page.page-type != "homepage" %}
-              <time aria-describedby="tooltiptime" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
+              <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
                 <img src="/docs/assets/img/docs/duration.svg">
                 {% if page.last_modified_at %}<span id="time-posted-ago"></span>{% else %} {{ page.date | date: '%d-%b-%y' }} {% endif %}
               </time>
-              {% endif %}
               
               {% if page.version %}
               <div class="server-version-wrapper">
@@ -53,6 +52,7 @@
               </div>
               {% endif %}
             </div>
+            {% endif %}
 
             {% if page.untranslated %}
             {% include_cached translation_in_progress.html site=site page=page %}

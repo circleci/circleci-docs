@@ -477,12 +477,13 @@ pre {
 }
 
 .tooltip-popover {
-    background-color: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 13px;
-    z-index: 1;
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  z-index: 1;
+  display: none;
 }
 
 /* Shows when screen > $screen-md, hides when smaller */
@@ -682,7 +683,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   left: 18px;
 }
 
-// CSS styling for the date modifiex X ago
+// CSS styling for the date modified X ago
 .quick-info-list {
   background: #FFFFFF;
   border: 1px solid #DDDDDD;
@@ -690,6 +691,10 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   border-radius: 4px;
   margin-bottom: 24px;
   display: flex;
+
+  img {
+	margin: 0px 3px 3px 0px;
+  }
 }
 
 #time-posted-on {
@@ -699,10 +704,6 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   font-weight: normal;
   font-size: 15px;
   color: #343434;
-}
-
-.quick-info-list img {
-  margin: 0px 3px 3px 0px;
 }
 
 // badge tags
@@ -715,8 +716,12 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   font-size: 15px;
   line-height: 18px;
   padding: 0px;
+  color: #343434;
   cursor: pointer;
 
+  // We want to put a dot between every tag and there is undetermined number of tags
+  // First child is the tag icon
+  // Second child is the first tag name
   &:not(:nth-child(1)):not(:nth-child(2)):before {
     content:"\A";
     width: 3px;
@@ -734,8 +739,8 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   border-left: 1px solid #DDDDDD;
 }
 
-#tooltiptime {
-	background: #333;
+#tooltip-time {
+  background: #333;
   color: white;
   font-weight: bold;
   padding: 4px 8px;
@@ -744,10 +749,10 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   display: none;
 }
 
-#tooltiptime[data-show] {
+#tooltip-time[data-show] {
   display: block;
 }
 
-#tooltiptime[data-popper-placement^=bottom] > #arrow {
+#tooltip-time[data-popper-placement^=bottom] > #arrow {
   top: -4px;
 }

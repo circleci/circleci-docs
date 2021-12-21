@@ -1,5 +1,6 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
+import { dateHowLongAgo } from '../utils';
 
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
@@ -406,7 +407,7 @@ $(document).ready(highlightURLHash());
 // update date shown to be X ago
 $(document).ready(function () {
   // tooltip code for posted on time
-  const tooltiptime = document.getElementById('tooltiptime');
+  const tooltiptime = document.getElementById('tooltip-time');
   let timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
   var showEvents = ['mouseenter', 'focus'];
@@ -429,45 +430,13 @@ $(document).ready(function () {
     });
   });
 
-  // change date into how long ago that date is relative to when view page
-  function ago(date) {
-    function render(n, unit) {
-      return n + ' ' + unit + (n === 1 ? '' : 's') + ' ago';
-    }
-
-    var seconds = Math.floor((new Date() - date) / 1000);
-
-    var interval = Math.floor(seconds / (60 * 60 * 24 * 365));
-    if (interval >= 1) {
-      return '+1 year ago';
-    }
-    interval = Math.floor(seconds / (60 * 60 * 24 * 30));
-    if (interval >= 1) {
-      return render(interval, 'month');
-    }
-    interval = Math.floor(seconds / (60 * 60 * 24));
-    if (interval >= 1) {
-      return render(interval, 'day');
-    }
-    interval = Math.floor(seconds / (60 * 60));
-    if (interval >= 1) {
-      return render(interval, 'hour');
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval >= 1) {
-      return render(interval, 'minute');
-    }
-    interval = Math.floor(seconds);
-    return render(interval, 'second');
-  }
-
   if (
     document.getElementById('time-posted-on') &&
     document.getElementById('time-posted-ago')
   ) {
-    var date = Date.parse(
+    const date = Date.parse(
       document.getElementById('time-posted-on').getAttribute('datetime'),
     );
-    document.getElementById('time-posted-ago').innerHTML = ago(date);
+    document.getElementById('time-posted-ago').innerHTML = dateHowLongAgo(date);
   }
 });
