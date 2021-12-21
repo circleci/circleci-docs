@@ -35,6 +35,8 @@ The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-refe
 
 Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
 
+Each JUnit XML or Cucumber JSON file can be up to 100MB. For jobs using parallelism, up to 250MB of total data is supported. If each file is within the limit but the total limit is exceeded, the upload will succeed and most features such as the tests tab will work, but the results will not be available from the API.
+
 **If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
