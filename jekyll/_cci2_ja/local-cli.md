@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "CircleCI のローカル CLI の使用"
 short-title: "CircleCI のローカル CLI の使用"
 description: "CLI を使用したローカル ジョブの実行方法"
