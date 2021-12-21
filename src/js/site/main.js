@@ -415,7 +415,7 @@ $(document).ready(function () {
   showEvents.forEach((event) => {
     timeposted.addEventListener(event, () => {
       tooltiptime.setAttribute('data-show', '');
-      popperInstance = createPopper(timeposted, tooltiptime, {})
+      popperInstance = createPopper(timeposted, tooltiptime, {});
     });
   });
 

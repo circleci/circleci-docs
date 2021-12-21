@@ -27,9 +27,8 @@
             <div>
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
-            <div id="tooltip" role="tooltip" class="tooltip-popover">
-            </div>
 
+            <div id="tooltip" role="tooltip" class="tooltip-popover"></div>
             <div id="tooltiptime" role="tooltip" class="tooltip-popover">
               Last updated
               <div id='arrow' data-popper-arrow></div>
