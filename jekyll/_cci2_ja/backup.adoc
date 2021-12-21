@@ -1,5 +1,5 @@
 ---
-description: このドキュメントでは、CircleCI Server v2d.x のインストールのバックアップおよび災害復旧のためのヒントを紹介します。
+description: "このドキュメントでは、CircleCI Server v2d.x のインストールのバックアップおよび災害復旧のためのヒントを紹介します。"
 version:
 - Server v2.x
 - 管理者
