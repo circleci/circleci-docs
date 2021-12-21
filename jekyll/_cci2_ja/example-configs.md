@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "パブリック リポジトリの例"
 short-title: "パブリック リポジトリの例"
 description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
