@@ -31,7 +31,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -70,7 +70,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -107,7 +107,7 @@ Although we’ve only made two small changes to the config, these represent sign
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -154,7 +154,7 @@ We also added a small `run` block that demonstrates we are running in a node con
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   Hello-World:
