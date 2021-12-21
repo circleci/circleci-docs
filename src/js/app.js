@@ -3,6 +3,7 @@
 import * as Cookie from 'js-cookie';
 import * as highlightjsBadge from 'highlightjs-badge';
 import * as highlightjsLineNumbers from 'highlightjs-line-numbers.js';
+import * as Popper from '@popperjs/core';
 
 import services from './services';
 import site from './site';
@@ -19,3 +20,4 @@ services.rum.init();
 window.Cookie = Cookie;
 window.AnalyticsClient = services.AnalyticsClient; // because it only has static methods, AnalyticsClient is not instantiated
 window.OptimizelyClient = new services.OptimizelyClient();
+window.Popper = Popper;

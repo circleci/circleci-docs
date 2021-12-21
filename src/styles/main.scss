@@ -716,6 +716,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   line-height: 18px;
   color: #27A0B6;
   padding: 0px;
+  cursor: pointer;
 
   &:not(:nth-child(1)):not(:nth-child(2)):before {
     content:"\A";
@@ -726,11 +727,6 @@ Fixing styling for the code example tables in the "Migrating From..." pages
     display:inline-block;
     margin: 0px 5px 3px 0px;
   }
-
-  &:hover {
-    color: #36D4ED;
-    text-decoration: none;
-  }
 }
 
 .server-version-wrapper {
@@ -739,6 +735,20 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   border-left: 1px solid #DDDDDD;
 }
 
-.server-version-tag-svg {
-    
+#tooltiptime {
+	background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  display: none;
+}
+
+#tooltiptime[data-show] {
+  display: block;
+}
+
+#tooltiptime[data-popper-placement^=bottom] > #arrow {
+  top: -4px;
 }

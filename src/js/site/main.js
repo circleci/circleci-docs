@@ -405,6 +405,47 @@ $(document).ready(highlightURLHash());
 
 // update date shown to be X ago
 $(document).ready(function () {
+  const timeposted = document.querySelectorAll('#time-posted-on');
+  const tooltiptime = document.querySelector('#tooltiptime');
+
+  timeposted.forEach(function (posted) {
+    let popperInstance = null;
+
+    function create() {
+      popperInstance = createPopper(posted, tooltiptime, {
+        placement: 'bottom',
+      });
+    }
+
+    function destroy() {
+      if (popperInstance) {
+        popperInstance.destroy();
+        popperInstance = null;
+      }
+    }
+
+    function show() {
+      tooltiptime.setAttribute('data-show', '');
+      create();
+    }
+
+    function hide() {
+      tooltiptime.removeAttribute('data-show');
+      destroy();
+    }
+
+    var showEvents = ['mouseenter', 'focus'];
+    var hideEvents = ['mouseleave', 'blur'];
+
+    showEvents.forEach((event) => {
+      posted.addEventListener(event, show);
+    });
+
+    hideEvents.forEach((event) => {
+      posted.addEventListener(event, hide);
+    });
+  });
+
   function ago(date) {
     function render(n, unit) {
       return n + ' ' + unit + (n === 1 ? '' : 's') + ' ago';

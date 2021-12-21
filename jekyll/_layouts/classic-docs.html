@@ -28,24 +28,28 @@
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
             <div id="tooltip" role="tooltip" class="tooltip-popover">
-              This document is applicable to the following:
-              <div id="arrow" data-popper-arrow></div>
+            </div>
+
+            <div id="tooltiptime" role="tooltip" class="tooltip-popover">
+              Last updated
+              <div id='arrow' data-popper-arrow></div>
             </div>
 
             <!-- Quick info list - time posted + server version -->
             <div class="quick-info-list">
               {% if page.page-type != "index" and page.page-type != "homepage" %}
-              <time id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
+              <time aria-describedby="tooltiptime" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
                 <img src="/docs/assets/img/docs/duration.svg">
                 {% if page.last_modified_at %}<span id="time-posted-ago"></span>{% else %} {{ page.date | date: '%d-%b-%y' }} {% endif %}
               </time>
+            </button>
               {% endif %}
               
               {% if page.version %}
               <div class="server-version-wrapper">
                 <img class="server-version-tag-svg" src="/docs/assets/img/docs/tag.svg">
                 {% for version in page.version %}
-                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
+                <span class="server-version-badge" aria-describedby="tooltip">{{ version }}</span>
                 <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
                 {% endfor %}
               </div>
