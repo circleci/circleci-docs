@@ -69,7 +69,7 @@ Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、Bro
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
-CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 An example of running parallel tests using this orb is shown below:
+CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 この Orb を使用することで Lambda tunnel をすばやくセットアップし、テストのステップを定義できます。
 
 {% raw %}
 ```yaml
