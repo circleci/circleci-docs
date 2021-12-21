@@ -54,20 +54,23 @@ $(document).ready(function () {
 
 // Open dropdown in language selector
 const openLangDropdown = () => {
-  const globeBtn = $('#globe-lang-btn');
-  const langPicker = $('#lang-picker');
+  const globeBtn = document.getElementById("globe-lang-btn");
+  const langPicker = document.getElementById("lang-picker");
+  const underlyingMobileMenu = document.querySelector('.mobile-sidebar');
+  const dimmer = document.querySelector(".lang-picker-mobile-dimmer");
 
-  $('body').on('mouseup', (e) => {
-    globeBtn.on('click', () => {
-      langPicker.toggleClass('lang-active');
-    });
 
-    if (
-      !langPicker.is(e.target) &&
-      langPicker.has(e.target).length === 0 &&
-      langPicker.hasClass('lang-active')
-    ) {
-      langPicker.removeClass('lang-active');
+  globeBtn.addEventListener('click', () => {
+    langPicker.classList.toggle('lang-active');
+    underlyingMobileMenu.classList.add('hidden-md');
+    dimmer.style.display = "inherit";
+  });
+
+  $('body').on('click', (e) => {
+    if (!globeBtn.contains(e.target) && !langPicker.contains(e.target)) {
+      underlyingMobileMenu.classList.remove('hidden-md');
+      langPicker.classList.remove('lang-active');
+      dimmer.style.display = "none";
     }
   });
 };
