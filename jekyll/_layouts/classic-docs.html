@@ -31,25 +31,25 @@
               This document is applicable to the following:
               <div id="arrow" data-popper-arrow></div>
             </div>
-            {% if page.version %}
-            <div class="server-version-wrapper">
-              {% for version in page.version %}
-              <span class="badge badge-primary">
-                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
-                <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-              </span>
-              {% endfor %}
-            </div>
-            {% endif %}
 
-            {% if page.page-type != "index" and page.page-type != "homepage" %}
-            <time id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
-              <div id="time-posted-on-text">
+            <!-- Badge list -->
+            <div class="quick-info-list">
+              {% if page.page-type != "index" and page.page-type != "homepage" %}
+              <time id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
                 <img id="time-posted-on-svg" src="/docs/assets/img/docs/duration.svg">
                 {% if page.last_modified_at %}<span id="time-posted-ago"></span>{% else %} {{ page.date | date: '%d-%b-%y' }} {% endif %}
+              </time>
+              {% endif %}
+              
+              {% if page.version %}
+              <div class="server-version-wrapper">
+                {% for version in page.version %}
+                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
+                <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
+                {% endfor %}
               </div>
-            </time>
-           {% endif %}
+              {% endif %}
+            </div>
 
             {% if page.untranslated %}
             {% include_cached translation_in_progress.html site=site page=page %}
