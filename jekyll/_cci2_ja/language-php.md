@@ -142,7 +142,7 @@ jobs:
 [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 
-**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
+{% raw %}
 ```yaml
       <br />      - restore_cache: 
           keys:
@@ -163,7 +163,7 @@ jobs:
           paths:
             - node_modules
 ```
-`run` ステップを使用して、テスト スイートを実行します。
+{% endraw %}
 
 最後に、Sqlite テスト データベースを準備し、移行を実行し、テストを実行します。
 
