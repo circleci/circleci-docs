@@ -260,7 +260,6 @@ $btn-selected-blue: #004A95;
     margin: 4px 0px;
     padding: 4px 16px;
     font-size: 15px;
-    font: "Roboto";
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 18px;
     &:hover {
@@ -278,54 +277,52 @@ $btn-selected-blue: #004A95;
 
   .lang-request-form {
     height: 95px;
-  }
 
-  .lang-form-title {
-    display: block;
-    color: $black;
-    margin: 4px 0px;
-    padding: 4px 16px;
-    font-size: 12px;
-    font: "Roboto";
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    line-height: 14px;
-  }
+    .lang-form-title {
+      display: block;
+      color: $black;
+      margin: 4px 0px;
+      padding: 4px 16px;
+      font-size: 12px;
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 14px;
+    }
 
-  #lang-form {
-    background: #FBFBFB;
-    border: 1px solid #D4D4D4;
-    border-radius: 0px;
-    box-sizing: border-box;
-    width: 128px;
-    height: 40px;
-    margin: 0 16px;
-
-    font-size: 15px;
-    line-height: 18px;
-    color: #161616;
-    opacity: 0.5;
-  }
-
-  #submit-btn {
-    font: "Roboto";
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: $btn-hover-blue;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
-    margin-left: 106px;
-  }
+    #lang-form {
+      background: #FBFBFB;
+      border: 1px solid #D4D4D4;
+      border-radius: 0px;
+      box-sizing: border-box;
+      width: 128px;
+      height: 40px;
+      margin: 0 16px;
+      padding: 11px 10px 11px 16px;
   
-  #lang-submitted {
-    display: none;
-    font: "Roboto";
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    line-height: 14px;
-    color: $black;
-    text-align: right;
-    margin: 0 16px;
+      font-size: 15px;
+      line-height: 18px;
+      color: #161616;
+      opacity: 0.5;
+    }
+
+    #submit-btn {
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: $btn-hover-blue;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14px;
+      margin-left: 106px;
+    }
+
+    #lang-submitted {
+      display: none;
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      line-height: 14px;
+      color: $black;
+      text-align: right;
+      margin: 0 16px;
+    }
   }
 }
 
