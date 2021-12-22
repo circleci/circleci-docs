@@ -170,6 +170,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - set-jekyll-basename
       - run: 
           name: "Lint JS assets"
           command: yarn lint
