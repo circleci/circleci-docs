@@ -156,6 +156,11 @@ $btn-selected-blue: #004A95;
     &.in {
       overflow-y: auto;
     }
+
+    // for hiding the mobile nav when user is using language picker
+    &.lang-picker-open {
+      max-height: 0;
+    }
   }
 
   &.in {
@@ -167,6 +172,15 @@ $btn-selected-blue: #004A95;
     flex-direction: row;
     align-items: center;
     min-height: 48px;
+    &.lang-picker-open {
+      max-height: inherit;
+    }
+
+
+    // ??????
+    // &.hidden {
+    //   max-height: 0;
+    // }
   }
 }
 

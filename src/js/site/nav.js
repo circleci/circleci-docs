@@ -65,11 +65,14 @@ const openLangDropdown = () => {
   const dimmer = document.querySelector('.lang-picker-mobile-dimmer');
   const mobileBackBtn = document.getElementById('lang-picker-back-button');
   const mobileCloseBtn = document.getElementById('lang-picker-close-button');
+  const globalNav = document.querySelector('.global-nav--nav');
 
+  // open the menu
   globeBtn.addEventListener('click', () => {
     langPicker.classList.toggle('lang-active');
     underlyingMobileMenu.classList.add('hidden-md');
     dimmer.style.display = 'inherit';
+    globalNav.classList.add('lang-picker-open');
   });
 
   // enable going 'back' to the mobile menu.
@@ -77,8 +80,10 @@ const openLangDropdown = () => {
     langPicker.classList.remove('lang-active');
     underlyingMobileMenu.classList.remove('hidden-md');
     dimmer.style.display = 'none';
+    globalNav.classList.remove('lang-picker-open');
   });
 
+  // closes the lang picker, restoring the mobile menu.
   mobileCloseBtn.addEventListener('click', () => {
     underlyingMobileMenu;
     langPicker.classList.remove('lang-active');
@@ -86,6 +91,7 @@ const openLangDropdown = () => {
     dimmer.style.display = 'none';
     // simulate a click to close the menu.
     document.querySelector('.global-nav--toggle').click();
+    globalNav.classList.remove('lang-picker-open');
   });
 
   $('body').on('click', (e) => {

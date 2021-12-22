@@ -104,7 +104,6 @@ $border-col: rgba(229,231,235, 1);
       left: 0;
       top: -6px;
       width: 100%;
-      height: 400px;
     }
 
     .lang-active {
@@ -150,6 +149,7 @@ $border-col: rgba(229,231,235, 1);
       padding: 12px 10px 12px 20px;
       align-items: center;
       border-bottom: 1px solid $border-col;
+      margin-bottom: 0px;
     }
 
     .lang-picker-mobile-dimmer {
