@@ -26,9 +26,9 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 ## macOS Executor を使用する
 {: #using-the-macos-executor }
 
-各 `macos `ジョブは、特定のバージョンの macOS を実行する新しい仮想マシン上で実行されます。 できる限り迅速なデプロイを行うために、CircleCI では Apple から Xcode の新しい安定版またはベータ版がリリースされるたびに新しいイメージを作成しています。 通常、特定のビルドイメージの内容は変更されません。ただし例外的に、特定の理由によりコンテナを再ビルドせざるを得ない状況になることがあります。 Our goal is to keep your execution environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+各 `macos `ジョブは、特定のバージョンの macOS を実行する新しい仮想マシン上で実行されます。 できる限り迅速なデプロイを行うために、CircleCI では Apple から Xcode の新しい安定版またはベータ版がリリースされるたびに新しいイメージを作成しています。 通常、特定のビルドイメージの内容は変更されません。ただし例外的に、特定の理由によりコンテナを再ビルドせざるを得ない状況になることがあります。 CircleCI では、安定したビルド環境を維持すること、そして `config.yml` ファイルに `xcode` キーを設定し、最新のコンテナを選択できるようにすることを目標としています。
 
-Periodically, we will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the execution environment is kept stable.
+ビルド環境が最新であることを確認するために、各イメージに含まれる macOS のバージョンを定期的に更新します。 macOS の新しいメジャー バージョンがリリースされると、Xcode の新しいメジャー バージョンが `xx.2` リリースに達した時点で、ビルド環境を安定した状態に保てるよう新しいバージョンに切り替えます。
 
 新しい macOS コンテナに関する情報は、[Discuss フォーラムの Announcements (お知らせ) ](https://discuss.circleci.com/c/announcements)で確認できます。
 
