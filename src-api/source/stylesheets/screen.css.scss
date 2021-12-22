@@ -274,6 +274,13 @@ html, body {
   &.open {left: $nav-width}
 }
 
+h2,
+h3,
+h4,
+h5,
+h6{
+  scroll-margin-top: 74px;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
@@ -539,7 +546,8 @@ html, body {
 
     &.v2-banner {
       margin-top: 0em;
-      background: $aside-v2banner-bg;
+      background: #FBF8E5;
+      position: -webkit-sticky;
       position: sticky;
       top: 0;
     }
