@@ -3,6 +3,7 @@ $btn-hover-green: #048c43;
 $btn-outer-blue: #0078ca;
 $btn-hover-blue: #0062b0;
 $black: #161616;
+$border-col: rgba(229,231,235, 1);
 
 .lang-selector-wrapper {
   position: relative;
@@ -60,6 +61,7 @@ $black: #161616;
     display: block;
     color: $black;
     margin: 4px 0px;
+    margin-top: 0px;
     padding: 4px 20px;
     font-size: 15px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -86,6 +88,8 @@ $black: #161616;
   }
 
   // Mobile styling for the language selector
+  // This converts the language picker on the desktop nav into a popover modal
+  // to try and mimic what we have on circleci.com
   @media (max-width: $screen-md) {
     // lang selector wrapper parent class changes:
     position: initial;
@@ -111,30 +115,41 @@ $black: #161616;
       width: 100%;
     }
 
+    .back-btn {
+      transform: scaleX(-1);
+    }
+
     .mobile-top-row {
       display: flex;
       justify-content: space-between;
       height: 72px;
       display: flex;
       align-items: center;
-      padding: 0 16px;
-      border-bottom: 1px solid rgba(229,231,235, 1);
+      padding: 0 14px;
+      border-bottom: 1px solid $border-col;
     }
+
+    // some bespoke styling to align the x of the lang selector with the
+    // bootstrap "X" that we can't unfortunately use here.
+    #lang-picker-close-button, #lang-picker-back-button {
+      position: relative;
+      top: -2px;
+      left: -1px;
+    }
+
 
     .select-language {
       font-weight: 700;
-      font-size: 16px;
+      color: #161616;
+      font-size: 18px;
     }
 
     .lang-option {
       display: flex;
       justify-content: space-between;
-      padding: 16px;
-    }
-
-    .right-arrow {
-      display: flex;
-      color: limegreen; // just for now I swear
+      padding: 12px 10px 12px 20px;
+      align-items: center;
+      border-bottom: 1px solid $border-col;
     }
 
     .lang-picker-mobile-dimmer {
@@ -148,5 +163,12 @@ $black: #161616;
       pointer-events: none;
       height: 100vh;
     }
+    .lang-picker-icon-btn {
+      outline: none;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
   }
 }

@@ -8,21 +8,29 @@
 
   <div id="lang-picker" class="lang-picker">
     <div class="mobile-top-row">
-      <div>< </div>
+
+      <button id="lang-picker-back-button" class="lang-picker-icon-btn">
+        <img class="back-btn arrow" src="{{ site.baseurl }}/assets/img/docs/arrow-green-right.svg">
+      </button>
+
       <!-- TODO: figure out if "Select Language" that needs to be translated -->
       <div class="select-language">Select Language</div>
-      <div>X</div>
+
+      <button id="lang-picker-close-button" class="lang-picker-icon-btn">
+        <img src="{{ site.baseurl }}/assets/img/docs/close.svg">
+      </button>
+
     </div>
 
     <div class="lang-dropdown">
         <a id="globalNavLangEng" class="lang-option">
           <span>English</span>
-          <span class="right-arrow"> > </span>
+          <img class="right-arrow" src="{{ site.baseurl }}/assets/img/docs/arrow-green-right.svg">
         </a>
 
         <a id="globalNavLangJap" class="lang-option">
           <span>日本語</span>
-          <span class="right-arrow"> > </span>
+          <img class="right-arrow" src="{{ site.baseurl }}/assets/img/docs/arrow-green-right.svg">
         </a>
     </div>
   </div>

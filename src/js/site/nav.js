@@ -52,25 +52,47 @@ $(document).ready(function () {
   });
 })();
 
-// Open dropdown in language selector
+/**
+ * openLangDropdown handles setting up the toggling of our language picker
+ * on mobile and on desktop.
+ * */
 const openLangDropdown = () => {
-  const globeBtn = document.getElementById("globe-lang-btn");
-  const langPicker = document.getElementById("lang-picker");
+  const globeBtn = document.getElementById('globe-lang-btn');
+  const langPicker = document.getElementById('lang-picker');
   const underlyingMobileMenu = document.querySelector('.mobile-sidebar');
-  const dimmer = document.querySelector(".lang-picker-mobile-dimmer");
 
+  // These vars are specific to the mobile picker.
+  const dimmer = document.querySelector('.lang-picker-mobile-dimmer');
+  const mobileBackBtn = document.getElementById('lang-picker-back-button');
+  const mobileCloseBtn = document.getElementById('lang-picker-close-button');
 
   globeBtn.addEventListener('click', () => {
     langPicker.classList.toggle('lang-active');
     underlyingMobileMenu.classList.add('hidden-md');
-    dimmer.style.display = "inherit";
+    dimmer.style.display = 'inherit';
+  });
+
+  // enable going 'back' to the mobile menu.
+  mobileBackBtn.addEventListener('click', () => {
+    langPicker.classList.remove("lang-active");
+    underlyingMobileMenu.classList.remove('hidden-md');
+    dimmer.style.display = 'none';
+  });
+
+  mobileCloseBtn.addEventListener('click', () => {
+    underlyingMobileMenu
+    langPicker.classList.remove("lang-active");
+    underlyingMobileMenu.classList.remove('hidden-md');
+    dimmer.style.display = 'none';
+    // simulate a click to close the menu.
+    document.querySelector(".global-nav--toggle").click();
   });
 
   $('body').on('click', (e) => {
     if (!globeBtn.contains(e.target) && !langPicker.contains(e.target)) {
       underlyingMobileMenu.classList.remove('hidden-md');
       langPicker.classList.remove('lang-active');
-      dimmer.style.display = "none";
+      dimmer.style.display = 'none';
     }
   });
 };
