@@ -74,18 +74,18 @@ const openLangDropdown = () => {
 
   // enable going 'back' to the mobile menu.
   mobileBackBtn.addEventListener('click', () => {
-    langPicker.classList.remove("lang-active");
+    langPicker.classList.remove('lang-active');
     underlyingMobileMenu.classList.remove('hidden-md');
     dimmer.style.display = 'none';
   });
 
   mobileCloseBtn.addEventListener('click', () => {
-    underlyingMobileMenu
-    langPicker.classList.remove("lang-active");
+    underlyingMobileMenu;
+    langPicker.classList.remove('lang-active');
     underlyingMobileMenu.classList.remove('hidden-md');
     dimmer.style.display = 'none';
     // simulate a click to close the menu.
-    document.querySelector(".global-nav--toggle").click();
+    document.querySelector('.global-nav--toggle').click();
   });
 
   $('body').on('click', (e) => {
