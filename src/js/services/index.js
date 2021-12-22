@@ -3,7 +3,7 @@ import * as instantsearch from './instantsearch';
 import * as lang from './lang';
 import OptimizelyClient from './optimizely';
 import * as rum from './rum';
-import highlightjsBadge from './highlightJSBadge';
+import * as highlightjsBadge from './highlightJSBadge';
 import * as progressbar from './progressbar';
 
 export default {
