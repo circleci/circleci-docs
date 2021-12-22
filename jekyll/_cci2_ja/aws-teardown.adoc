@@ -1,5 +1,5 @@
 ---
-description: Terraform を使用してインストールした CircleCI Server v2 を破棄するための基本的な手順
+description: "Terraform を使用してインストールした CircleCI Server v2 を破棄するための基本的な手順"
 version:
 - Server v2.x
 - 管理者
