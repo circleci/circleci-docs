@@ -1,6 +1,6 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
-import { dateHowLongAgo } from '../utils';
+import { dateHowLongAgo } from '../dateHowLongAgo';
 
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
@@ -402,10 +402,10 @@ $(document).ready(function () {
 });
 
 // Currently this function is only used for the insights table
-$(document).ready(highlightURLHash());
+$(highlightURLHash);
 
 // update date shown to be X ago
-$(document).ready(function () {
+$(function () {
   // tooltip code for posted on time
   const tooltiptime = document.getElementById('tooltip-time');
   let timeposted = document.getElementById('time-posted-on');
