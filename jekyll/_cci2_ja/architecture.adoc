@@ -1,5 +1,5 @@
 ---
-description: このドキュメントでは、CircleCI Server v2 を構成する様々なサービスを紹介します。
+description: "このドキュメントでは、CircleCI Server v2 を構成する様々なサービスを紹介します。"
 version:
 - 管理者
 - Server v2.x
