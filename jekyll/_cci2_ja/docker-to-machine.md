@@ -1,5 +1,5 @@
 ---
-layout: このスクリプトは、上記のコマンドを使用してインスタンスをドレインモードに設定し、インスタンス上で実行中のジョブをモニタリングし、ジョブが完了するのを待ってからインスタンスを終了します。
+layout: classic-docs
 title: "Executor Migration from Docker to Machine"
 short-title: "Migrating Executor from Docker to `machine`"
 description: "Best practices and considerations when migrating executor"
