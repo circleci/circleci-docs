@@ -410,8 +410,8 @@ $(document).ready(function () {
   const tooltiptime = document.getElementById('tooltip-time');
   let timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
-  var showEvents = ['mouseenter', 'focus'];
-  var hideEvents = ['mouseleave', 'blur'];
+  let showEvents = ['mouseenter', 'focus'];
+  let hideEvents = ['mouseleave', 'blur'];
 
   showEvents.forEach((event) => {
     timeposted.addEventListener(event, () => {
