@@ -8,6 +8,9 @@
 
 <div class="outer">
   {% include_cached global-nav.html site=site page=page %}
+  <div id="progress-bar-container">
+    {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
+  </div>
   {% include_cached hits-target.html %}
   <div class="main-body">
     {% assign lang = page.lang %}
