@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Execution Environments"
-description: "CircleCI execution environment configuration"
+title: "実行環境"
+description: "CircleCI の実行環境の構成"
 ---
 
 
