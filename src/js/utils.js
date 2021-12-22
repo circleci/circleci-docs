@@ -61,9 +61,9 @@ export function dateHowLongAgo(date) {
     return n + ' ' + unit + (n === 1 ? '' : 's') + ' ago';
   }
 
-  var seconds = Math.floor((new Date() - date) / 1000);
+  let seconds = Math.floor((new Date() - date) / 1000);
 
-  var interval = Math.floor(seconds / (60 * 60 * 24 * 365));
+  let interval = Math.floor(seconds / (60 * 60 * 24 * 365));
   if (interval >= 1) {
     return '+1 year ago';
   }
