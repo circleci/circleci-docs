@@ -27,7 +27,7 @@ Building a snap on CircleCI is mostly the same as on your local machine, wrapped
 任意の環境 (ローカル、企業サーバー CI など) で Snap をビルドするには、Snapcraft 設定ファイルが必要です。 通常、`snap/snapcraft.yml` に格納されています。 ここでは、このファイルが既に存在し、ローカル マシンで Snap を正しくビルドできると想定します。 そうでない場合は、[Snapcraft のドキュメント](https://docs.snapcraft.io/build-snaps/your-first-snap)を参照して、ローカル マシンで Snap をビルドしてください。
 
 
-## Execution environment
+## 実行環境
 {: #build-environment }
 
 ```yaml
@@ -160,7 +160,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "Publish to Store"
+          name: "ストアへのパブリッシュ"
           command: |
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
