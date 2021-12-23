@@ -544,7 +544,7 @@ API v2 エンドポイントに使用に関する詳細は、[API Reference]({{ 
 
 ブランチのフィルタリングは、以前はワークフローでのみ可能でしたが、コンパイル時のロジックステートメントによりジョブのステップでもブランチのフィルタリングが可能です。
 
-The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
+以下の例では、[パイプラインの値、]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values)`pipeline.git.branch` を使っていつステップを実行するか (`when`)を制御する方法を紹介します。 この例では、コミットがメインブランチに置かれた場合のみ `run: echo "I am on main"` ステップを実行します。
 
 ```yaml
 version: 2.1
@@ -573,9 +573,9 @@ workflows:
 ## ダイナミック コンフィグ
 {: #dynamic-configuration }
 
-ここでは、下記のダイナミック コンフィグの使用方法の例を紹介します。
+このセクションでは、[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config)セクションを既にお読みになっていること、 [入門ガイド]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)に記載されている手順が実行済みであることを前提としています。
 
-上記の例では、以下のような要素が実装されています:
+以下にダイナミック コンフィグの使用例を示します。
 
 - [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
 - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
@@ -583,7 +583,7 @@ workflows:
 ### 基本的な例
 {: #a-basic-example }
 
-以下に、CircleCI のダイナミック コンフィグ機能の基本的な使用例を示します。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
+以下は、CircleCI のダイナミック コンフィグ機能の基本的な使用例です。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
 
 ```yaml
 version: 2.1
@@ -625,18 +625,18 @@ workflows:
     - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
-**注意:** 1 個の `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 に制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
+**注意:パイプラインの設定の一部として、** 1 つの `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 つに制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the [Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
+`continuation` Orb の内容の詳細については、当該 Orb のソース コードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミック コンフィグの FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
 
 ### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
 
-場合によっては、ある`ワークフロー`や`ステップ`を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したいことがあります。 条件に応じた実行は、コードやマイクロ サービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
+`ワークフロー`や`ステップ`を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したい場合があります。 条件に応じた実行は、コードやマイクロ サービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
-例えば、以下のようなモノレポ構成を考えます:
+これを可能にするために、CircleCI には [`path-filtering`](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering) Orb が用意されています。この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
 
-上記のような状況におけるダイナミック コンフィグの実装例が、以下の `config.yml` および `continue_config.yml` です:
+たとえば、以下のようのモノレポ構成があります。
 
 ```shell
 .
@@ -750,14 +750,14 @@ workflows:
           app_src_directory: 'tests'
 ```
 
-利用可能な機能や必要なパラメータなどの詳細については `path-filtering` [Orb のドキュメント](https://circleci.com/developer/orbs/orb/circleci/path-filtering) を参照してください。
+上記の設定ファイルは、以下のように構成されています。
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
 - `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプライン パラメーターを定義します。
 - `check-updated-files`、`build-service-1`、`build-service-2`、`run-integration-tests` という 4 つのジョブを定義します。
   - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプライン パラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
-  - version: 2.1 orbs: maven: circleci/maven@1.2.0 # デフォルトのパイプライン パラメータ # path-filgering Orb により値は適宜書き換えられる parameters: run-build-service-1-job: type: boolean default: false run-build-service-2-job: type: boolean default: false # ワークフローを実際に定義 # ほとんどはパイプライン パラメータの値に準じて特定条件下でのみ実行される # それぞれのワークフローは上記 jobs セクションで定義されたジョブを実行 workflows: # run-build-service-1-job パラメータが true のときのみ # build-service-1 ジョブを起動 service-1: when: &lt;&lt; pipeline.parameters.run-build-service-1-job &gt;&gt; jobs: - maven/test: name: build-service-1 command: 'install -DskipTests' app_src_directory: 'service1' # run-build-service-2-job パラメータが true のときのみ # build-service-2 ジョブを起動 service-2: when: &lt;&lt; pipeline.parameters.run-build-service-2-job &gt;&gt; jobs: - maven/test: name: build-service-2 command: 'install -DskipTests' app_src_directory: 'service2' # run-build-service-1-job パラメータもしくは run-build-service-2-job パラメータが OR # true のとき run-integration-tests ジョブを起動 # 詳細は https://circleci.com/docs/2.0/configuration-reference/#logic-statements を参照 run-integration-tests: when: or: [&lt;&lt; pipeline.parameters.run-build-service-1-job &gt;&gt;, &lt;&lt; pipeline.parameters.run-build-service-2-job &gt;&gt;] jobs: - maven/test: name: run-integration-tests command: '-X verify' app_src_directory: 'tests'
+  - `build-service-1` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
   - `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
   - `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
 - 以下の 4 つのワークフローを定義します。 そのうち、3 つのワークフローは条件に従って実行されます。
@@ -766,14 +766,14 @@ workflows:
   - `run-integration-tests` ワークフロー: `path-filtering` Orb の実行結果に基づいて `run-build-service-1-job` または `run-build-service-2-job` パイプライン パラメータの値が `true` に更新された場合に実行されます。
   - `check-updated-files` ワークフロー: このパイプラインがトリガーされた場合に必ず実行されます。
 
-利用可能な機能や必要なパラメータなどの詳細については `path-filtering` [Orb のドキュメント](https://circleci.com/developer/orbs/orb/circleci/path-filtering) を参照してください。
+利用可能な機能や必要なパラメータなどの詳細については、`path-filtering` [Orb のドキュメント](https://circleci.com/developer/orbs/orb/circleci/path-filtering) を参照してください。
 
-## Use matrix jobs to run multiple OS tests
+## マトリックスジョブを使用して、複数の OS テストを実行する
 {: #use-matrix-jobs-to-run-multiple-os-tests }
 
-Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
+マトリックスジョブを使用すると、パラメータを使用して、異なる引数でジョブを複数回実行することができます。 これは、複数のオペレーティングシステムでのテストや、異なる言語 / ライブラリバージョンに対するテストなど、多くの用途に役立ちます。
 
-In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
+以下の例では、`test`ジョブが Linux コンテナ、Linux VM、macOS 環境で実行されます。 `test` ジョブの各実行において OS と Node.js の両方のバージョンを設定するために異なるパラメーターが渡されます。
 
 ```yaml
 version: 2.1
@@ -819,7 +819,7 @@ workflows:
               node-version: ["14.17.6", "16.9.0"]
 ```
 
-The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
+このマトリックスの拡張バージョンでは、 `all-tests` ワークフローの下で以下の一連のジョブが実行されます。
 
 ```
     - test-14.17.6-docker
