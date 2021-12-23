@@ -44,19 +44,5 @@ if (
         }
       </style>`,
     );
-
-    const globeBtn = document.getElementById('globe-lang-btn');
-    const globeImg = document.getElementsByClassName('globe-icon');
-    // remove exsisting globe img with broken path from DOM
-    globeBtn.removeChild(globeImg);
-
-    // create JEKYLL_BASENAME from preview url to use for globe img source
-    const previewURL = jekyllBaseName;
-    const start = previewURL.indexOf('/');
-    const imgPath = previewURL.substring(start);
-    globeBtn.insertAdjacentHTML(
-      'afterbegin',
-      `<img src="/${imgPath}assets/img/compass/globe.svg" class="globe-icon">`,
-    );
   });
 }
