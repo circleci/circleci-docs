@@ -89,6 +89,9 @@ const languageRequest = () => {
     window.AnalyticsClient.trackAction('New Language Request', {
       requestedLanguage: input.value,
       browserNativeLang: window.navigator.language,
+      app: 'Docs',
+      location: window.location.href,
+      path: window.location.pathname,
     });
 
     // Swap out button with submit message after submission
