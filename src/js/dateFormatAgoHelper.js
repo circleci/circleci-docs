@@ -1,5 +1,5 @@
 // change date into how long ago that date is relative to when view page
-export function dateHowLongAgo(date) {
+export function dateFormatAgoHelper(date) {
   function render(n, unit) {
     return n + ' ' + unit + (n === 1 ? '' : 's') + ' ago';
   }

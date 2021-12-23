@@ -722,7 +722,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   // First child is the tag icon
   // Second child is the first tag name
   &:not(:nth-child(1)):not(:nth-child(2)):before {
-    content:"\A";
+    content: "\A";
     width: 3px;
     height: 3px;
     border-radius:50%;

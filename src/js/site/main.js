@@ -1,6 +1,6 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
-import { dateHowLongAgo } from '../dateHowLongAgo';
+import { dateFormatAgoHelper } from '../dateFormatAgoHelper';
 
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
@@ -408,10 +408,10 @@ $(highlightURLHash);
 $(function () {
   // tooltip code for posted on time
   const tooltiptime = document.getElementById('tooltip-time');
-  let timeposted = document.getElementById('time-posted-on');
+  const timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
-  let showEvents = ['mouseenter', 'focus'];
-  let hideEvents = ['mouseleave', 'blur'];
+  const showEvents = ['mouseenter', 'focus'];
+  const hideEvents = ['mouseleave', 'blur'];
 
   showEvents.forEach((event) => {
     timeposted.addEventListener(event, () => {
@@ -437,6 +437,7 @@ $(function () {
     const date = Date.parse(
       document.getElementById('time-posted-on').getAttribute('datetime'),
     );
-    document.getElementById('time-posted-ago').innerHTML = dateHowLongAgo(date);
+    document.getElementById('time-posted-ago').innerHTML =
+      dateFormatAgoHelper(date);
   }
 });

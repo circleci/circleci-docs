@@ -1,6 +1,6 @@
-import { dateHowLongAgo } from './dateHowLongAgo.js';
+import { dateFormatAgoHelper } from './dateFormatAgoHelper.js';
 
-describe('dateHowLongAgo', () => {
+describe('dateFormatAgoHelper', () => {
   let date;
   beforeEach(() => {
     date = new Date();
@@ -8,15 +8,15 @@ describe('dateHowLongAgo', () => {
 
   it('Should return +1 year ago', () => {
     let twoyearsago = new Date(date.getFullYear() - 2);
-    expect(dateHowLongAgo(twoyearsago)).toEqual('+1 year ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('+1 year ago');
   });
   it('Should return 1 month ago', () => {
     let twoyearsago = new Date(date.getFullYear(), date.getMonth() - 1);
-    expect(dateHowLongAgo(twoyearsago)).toEqual('1 month ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('1 month ago');
   });
   it('Should return 2 months ago', () => {
     let twoyearsago = new Date(date.getFullYear(), date.getMonth() - 2);
-    expect(dateHowLongAgo(twoyearsago)).toEqual('2 months ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('2 months ago');
   });
   it('Should return 1 day ago', () => {
     let twoyearsago = new Date(
@@ -24,7 +24,7 @@ describe('dateHowLongAgo', () => {
       date.getMonth(),
       date.getDate() - 1,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('1 day ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('1 day ago');
   });
   it('Should return 2 days ago', () => {
     let twoyearsago = new Date(
@@ -32,7 +32,7 @@ describe('dateHowLongAgo', () => {
       date.getMonth(),
       date.getDate() - 2,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('2 days ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('2 days ago');
   });
   it('Should return 1 hour ago', () => {
     let twoyearsago = new Date(
@@ -41,7 +41,7 @@ describe('dateHowLongAgo', () => {
       date.getDate(),
       date.getHours() - 1,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('1 hour ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('1 hour ago');
   });
   it('Should return 2 hours ago', () => {
     let twoyearsago = new Date(
@@ -50,7 +50,7 @@ describe('dateHowLongAgo', () => {
       date.getDate(),
       date.getHours() - 2,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('2 hours ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('2 hours ago');
   });
   it('Should return 1 minute ago', () => {
     let twoyearsago = new Date(
@@ -60,7 +60,7 @@ describe('dateHowLongAgo', () => {
       date.getHours(),
       date.getMinutes() - 1,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('1 minute ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('1 minute ago');
   });
   it('Should return 2 minutes ago', () => {
     let twoyearsago = new Date(
@@ -70,7 +70,7 @@ describe('dateHowLongAgo', () => {
       date.getHours(),
       date.getMinutes() - 2,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('2 minutes ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('2 minutes ago');
   });
   it('Should return 1 second ago', () => {
     let twoyearsago = new Date(
@@ -81,7 +81,7 @@ describe('dateHowLongAgo', () => {
       date.getMinutes(),
       date.getSeconds() - 1,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('1 second ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('1 second ago');
   });
   it('Should return 2 seconds ago', () => {
     let twoyearsago = new Date(
@@ -92,6 +92,6 @@ describe('dateHowLongAgo', () => {
       date.getMinutes(),
       date.getSeconds() - 2,
     );
-    expect(dateHowLongAgo(twoyearsago)).toEqual('2 seconds ago');
+    expect(dateFormatAgoHelper(twoyearsago)).toEqual('2 seconds ago');
   });
 });
