@@ -67,7 +67,39 @@ const handleChangeLanguageNav = () => {
   }
 };
 
+// Request New Language form
+const languageRequest = () => {
+  const submitBtn = $('#submit-btn');
+  const langForm = $('.lang-form');
+  const input = $('#lang-req')[0];
+
+  // Add styles for input form when active
+  // Remove hover effect styles on input form
+  langForm.on('click', () => {
+    langForm.addClass('active');
+    $(document).on('click', (e) => {
+      // Remove styles for active input form after users click off it
+      // Reinitialize hover effect
+      if (!$(e.target).is(langForm)) {
+        langForm.removeClass('active');
+      }
+    });
+  });
+  submitBtn.on('click', () => {
+    window.AnalyticsClient.trackAction('New Language Request', {
+      requestedLanguage: input.value,
+      browserNativeLang: window.navigator.language,
+    });
+
+    // Swap out button with submit message after submission
+    submitBtn.replaceWith(
+      '<span id=lang-submitted>' + 'Thank you for your help' + '</span>',
+    );
+  });
+};
+
 export function init() {
   setLanguageSelectorOnLoad();
   handleChangeLanguageNav();
+  languageRequest();
 }
