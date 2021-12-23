@@ -75,14 +75,14 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 
 これらの環境変数の設定方法の詳細については、[環境変数に関するドキュメント](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
 
-Google Kubernetes Engine (GKE) にソフトウェアの変更をデプロイする前に以下の要件を満たしている必要があります。
+**注意: **このサンプルで使用されている `CIRCLE_SHA1` は組み込まれているため、いつでも使用できます。
 
-### 前提条件
+### サービスの更新のビルド、プッシュ、およびデプロイ
 {: #build-push-and-deploy-a-service-update }
 
-上の例では、2 つの Orb (`aws-cli: circleci/aws-cli@0.1.4` と `aws-ecs: circleci/aws-ecs@0.0.3`) をインスタンス化し、いくつかの連続したステップを実行して、Amazon CLI をインストール・構成してから、Amazon ECS サービスを更新しています。
+[ AWS サービスの更新](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html)をAWS ECR から新しくビルドされたイメージをデプロイするように設定するには、 Orb を使って設定をできる限りシンプルにすることが可能です。つまり、`aws-ecr` Orb で更新されたイメージをビルドして ECR にプッシュし、 `aws-ecs` Orb でサービスの更新をデプロイします。
 
-CircleCI Orb を使用して、AWS CLI を更新せずに Amazon ECS サービスを更新するには、ECS サービスの更新方法を示す以下の例を参照してください。
+以下の例では、イメージをビルドして AWS ECR にプッシュし、そのイメージをサービスの更新として AWS ECS にプッシュする方法を示しています。
 
 ```yml
 version: 2.1 # 2.1 config required to use orbs
@@ -105,12 +105,12 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-Docker イメージを GKE クラスタにロールアウトしながら、これらのアクションを実行するコードの例を以下に示します。
+使用方法のオプションと Orb エレメントの全リストについては、 CircleCI Orb レジストリの[AWS-ECS Orb のページ](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)を参照してください。
 
-### Amazon ECS サービスを更新する
+### Amazon ECS サービスの更新を検証する
 {: #verify-the-aws-ecs-service-update }
 
-Amazon ECS サービスの更新を検証する To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
+Amazon ECS サービスの更新が完了したら、更新が正しく行われたかを検証することができます。 設定をできる限りシンプルにするために、AWS CLI Orbと ECS Orb を使います。 ここでは、 Orb の組み込みジョブを使用して必要なプロセスを実行するのではなく、 Orb からのコマンドを `verify-deployment` という名前のジョブの定義のステップとして使用します。
 
 ```yaml
 version: 2.1
@@ -150,18 +150,18 @@ workflows:
       - verify-deployment
 ```
 
-この例は、Orb を使用して AWS CLI をインストール・構成し、タスク定義を取得してから、このリビジョンがデプロイされたかどうかを検証する方法を示しています。 イメージを構成して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws-ecr-と-aws-ecs-の-orb-のサンプル)を参照してください。
+この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 イメージを設定して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples)を参照してください。
 
 Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
 
-## ソフトウェアの変更を Google Kubernetes Engine (GKE) にデプロイする
+## Google Kubernetes Engine (GKE) との連携
 {: #interact-with-google-kubernetes-engine-gke }
 
-Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化して、コードやアプリケーションの更新を顧客にすばやく簡単にデプロイできます。 更新の配信に長い時間はかかりません。 CircleCI は、GKE 固有の CircleCI Orb を開発すると共に、GKE のテクノロジーを活用して、特定のジョブで GKE を操作できるようにしました。 GKE を使用する前に、[Google Kubernetes Engine のドキュメント](https://cloud.google.com/kubernetes-engine/docs/)をご一読ください。
+Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化して、コードやアプリケーションの更新をすばやく簡単にデプロイすることができ、更新の配信に長時間かかることはありません。 CircleCI は、GKE 固有の CircleCI Orb を開発すると共に GKE のテクノロジーを活用して、特定のジョブ内での GKE との連携を可能にしました。 GKE を使用する前に、[Google Kubernetes Engine のドキュメント](https://cloud.google.com/kubernetes-engine/docs/)をご一読ください。
 
 ### 環境変数の設定
 {: #set-environment-variables }
-Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 - `GCLOUD_SERVICE_KEY` (必須)
 - `GOOGLE_PROJECT_ID`
