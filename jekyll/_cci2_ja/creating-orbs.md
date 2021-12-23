@@ -32,7 +32,7 @@ version:
 
 以下では、Orb の新しいセマンティックリリースを公開する方法について説明します。 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 このブランチは、リポジトリの非デフォルトのブランチに新機能やバグ修正、パッチなどを作成するためのものであり、名前に深い意味はありません。 コードの追加や更新を行いリリースを公開する準備が整ったら、以下の手順を行います。
 
-1. **デフォルトのブランチに新しいプルリクエストを作成します。** <br/>新しいリリースは、デフォルトのブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)と[単体テスト]({{site.baseurl}}/2.0/testing-orbs/#unit-testing)が有効になっています。 Orb が正常に機能するかを確認するため、少なくとも結合テストは有効にしておくことを強くお勧めします。 Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
+1. **デフォルトのブランチに新しいプルリクエストを作成します。** <br/>新しいリリースは、デフォルトのブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[インテグレーションテスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)と[ユニットテスト]({{site.baseurl}}/2.0/testing-orbs/#unit-testing)が有効になっています。 Orb が正常に機能するかを確認するため、少なくともインテグレーションテストは有効にしておくことを強くお勧めします。 Orb でスクリプトを使用しない場合や、現時点ではユニットテストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
 
 1. **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上においてプルリクエスト内で直接確認できます。 また、CircleCI.com ではパイプライン全体に対する詳細な結果を確認できます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
@@ -72,7 +72,7 @@ Orb パイプラインは、次の 2 つのワークフローで実行されま�
 
 2 つのワークフローのうち、[`test-pack`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L40) が先に実行され、 このワークフローは、**いずれかの**ブランチのリポジトリにコードがコミットされるたびに実行されます。
 
-この`test-pack` ワークフローでは、開発版の Orb のパブリッシュ前に行うすべてのテストを実行します。 結合テスト (次のワークフローで実施) は、開発版の Orb がパブリッシュされテストを実行可能になるまで実行できません。
+この`test-pack` ワークフローでは、開発版の Orb のパブリッシュ前に行うすべてのテストを実行します。 インテグレーションテスト (次のワークフローで実施) は、開発版の Orb がパブリッシュされテストを実行可能になるまで実行できません。
 
 [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) ジョブで開発版の Orb を作成するので、このジョブを実行するために、[制限付きコンテキスト](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62)で保護されているパーソナルアクセス トークンへのアクセス権が必要になります。 ここで制限付きコンテキストを使用する理由は、トークンを環境変数として保存することで、ジョブをトリガーできるユーザーをこのコンテキストへのアクセス権を持つ人だけに制限し、パブリッシュステージを "保護" するためです。
 
@@ -94,9 +94,9 @@ Orb パイプラインは、次の 2 つのワークフローで実行されま�
 
 CircleCI 製の Orb 開発パイプラインで実行されるワークフローは、次の [`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) で最後です。 このワークフローは、`test-pack` ワークフローの完了時に API から自動的にトリガーされます。 このワークフローには、`test-pack` ワークフローで独自に生成された[開発版]({{site.baseurl}}/2.0/orb-concepts/#orb-versions-development-vs-production-vs-inline)の Orb へのアクセス権が付与されています。
 
-このパイプラインの第 2 ステージでは[結合テスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)を実行し、開発版に追加およびパブリッシュされた新しい Orb の動作を確認します。
+このパイプラインの第 2 ステージでは[インテグレーションテスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)を実行し、開発版に追加およびパブリッシュされた新しい Orb の動作を確認します。
 
-結合テストが完了すると、デフォルトのブランチでのみデプロイジョブが実行されます。 [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) により、SHA 固有の開発版の Orb が取得され、セマンティックバージョン付きの公開バージョンにプロモートされます。
+インテグレーションテストが完了すると、デフォルトのブランチでのみデプロイジョブが実行されます。 [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) により、SHA 固有の開発版の Orb が取得され、セマンティックバージョン付きの公開バージョンにプロモートされます。
 
 {% raw %}
 ```
