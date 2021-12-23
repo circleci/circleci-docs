@@ -381,7 +381,7 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 **Docker on Mac**
 
-Local execution in Docker Desktop for Mac using cgroupsv2, is temporarily blocked pending system updates. Follow the [Github issue](https://github.com/CircleCI-Public/circleci-cli/issues/589) for the latest information. 
+Local execution in Docker Desktop for Mac using cgroupsv2, is temporarily blocked pending system updates. Follow the [Github issue](https://github.com/CircleCI-Public/circleci-cli/issues/589) for the latest information.
 
 **Machine Executor**
 
