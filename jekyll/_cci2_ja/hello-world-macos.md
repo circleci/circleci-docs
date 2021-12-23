@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "macOS での Hello World"
 short-title: "macOS での Hello World"
-description: "First macOS project on CircleCI"
+description: "CircleCI での最初の macOS プロジェクト"
 categories:
   - はじめよう
 order: 4
