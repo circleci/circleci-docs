@@ -19,7 +19,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-コンテキストは、CircleCI アプリケーションの [Organization Settings (Organization の設定)] ページで作成します。 コンテキストを表示、作成、編集するには、対象の Organization のメンバーである必要があります。 コンテキストを作成したら、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションで `context` キーを適切に設定することで、キーを設定されたジョブに当該コンテキストに関連付けられた環境変数を受け渡すことができます。
+コンテキストは、CircleCI アプリケーションの [Organization Settings (Organization の設定)] ページで作成および管理します。 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
@@ -30,29 +30,29 @@ version:
 {:.tab.contextsimage.Server_2}
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
-To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set.
+[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
 
-Context names must be unique for each GitHub or Bitbucket organization.
+コンテキスト名は、各 GitHub 組織または Bitbucket 組織内で一意でなければなりません。
 
-**Note:** Contexts created with the initial default name of `org-global` will continue to work.
+**注意:** 最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 
-### CircleCI がプライベート サーバーにインストールされる場合のコンテキストの命名規則
+### CircleCI Server のコンテキスト名の設定
 {: #context-naming-for-circleci-server }
 {:.no_toc}
 
-For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error.
+お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
 
-### Organization とリポジトリの名称変更
+### 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
 
-If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+過去に CircleCI に接続した組織やリポジトリの名前を変更する場合は、以下の手順を参考にしてください。
 
-1. VCS 上で Organization 及びリポジトリの名称を変更します。
-2. 必要に応じて、環境変数のローテーションを実行しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
-3. CircleCI のプラン、プロジェクト一覧、各種設定が正しく引き継がれていることを確認します。
-4. 必要な場合、上記 3 の確認後、古い Org 名/リポジトリ名を再利用し新しい Org/リポジトリを作成します。
+1. VCS 上で 組織名およびリポジトリ名を変更します。
+2. CircleCI アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびレポジトリ名を使用します。
+3. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
+4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
 
-    **注意**: 上記の手順で変更を行わない場合、**環境変数**、**コンテキスト**を含む、 Organization およびレポジトリの設定が失われる可能性があります。
+    **注意**: 上記の手順で変更を行わない場合、**環境変数**や**コンテキスト**などの組織やレポジトリの設定にアクセスができなくなる可能性があります。
 
 ## コンテキストの作成と使用
 {: #creating-and-using-a-context }
@@ -369,7 +369,7 @@ To create an environment variable using the API, call the [Add Environment Varia
 
 To delete an environment variable using the CLI, perform the following steps:
 
-1. 必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
+1. まだ削除していない場合は、削除する環境変数を含むコンテキスト名を検索します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 2. 当該コンテキスト内のローテーションの対象である環境変数を確認します。 下記コマンドを実行します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
 
@@ -433,5 +433,5 @@ The value of the context will not be masked in the build output if:
 {: #see-also }
 {:.no_toc}
 
-* [必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`]({{ site.baseurl }}/ja/2.0/env-vars/)
+* [CircleCI 環境変数の説明]({{ site.baseurl }}/ja/2.0/env-vars/)
 * [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)
