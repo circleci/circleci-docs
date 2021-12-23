@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "CircleCI config クックブック"
-short-title: "Config クックブック"
-description: "Config クックブック入門編"
+title: "CircleCI 設定クックブック"
+short-title: "設定クックブック"
+description: "設定クックブック入門編"
 categories:
   - はじめよう
 order: 1
@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-*CircleCI config クックブック*は、 Orb のような CircleCI のリソースを使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
+*CircleCI 設定クックブック*は、 Orb のような CircleCI のリソースを使用してさまざまな設定タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
 
 * 目次
 {:toc}
@@ -20,17 +20,17 @@ version:
 ## はじめに
 {: #introduction }
 
-This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. この「クックブック」の「レシピ」はそれぞれ 1 つのタスクに対応します。 これらのタスクは、CircleCI Orb などの CircleCI リソースに加えて、ユーザー独自のリソースを使用して CircleCI プラットフォームで実行できます。
+本ガイドおよび関連レシピでは、具体的な設定タスクを実行する方法を説明します。 レシピにはプロジェクトに合わせてカスタマイズできるよう、コードスニペットや設定例も記載されています。 このクックブックの各レシピは、それぞれ 1 つのタスクについて記載されています。 これらのタスクは、CircleCI Orb などの CircleCI リソースに加えて、ユーザー独自のリソースを使用して CircleCI プラットフォームで実行できます。
 
 ### CircleCI Orb とは
 {: #what-are-circleci-orbs }
 {:.no_toc}
 
-CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orb を使用すると、複数のプロジェクトで構成を共有、標準化、簡略化することができます。 構成のベスト プラクティスの参考として Orb を使用することも可能です。
+CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための設定パッケージです。 Orb を使用すると、複数のプロジェクトで設定を共有、標準化、簡略化することができます。 設定のベスト プラクティスの参考として Orb を使用することも可能です。
 
 現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にて確認してください。
 
-既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 The following example invokes the [`node` orb](https://circleci.com/developer/orbs/orb/circleci/node) in the `circleci` namespace.
+既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 以下の例では、`circleci` 名前空間で [`node` Orb](https://circleci.com/developer/orbs/orb/circleci/node) を呼び出します。
 
 ```yaml
 version: 2.1
@@ -45,26 +45,26 @@ workflows:
           version: <node-version>
 ```
 
-For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
+CircleCI Orb の詳細については、[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)を参照してください。
 
 ## CircleCI プラットフォームおよび Orb を使用するための環境構成
 {: #configure-your-environment-for-circleci-pipelines-and-orbs }
 {:.no_toc}
 
-Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
+このクックブックのほとんどのレシピでは、バージョン 2.1 の設定、パイプラインおよびOrb が必要です。 記載されている例を使用する前に、これらの機能が設定済みであることを確認してください。 必要に応じて、以下の注意事項や手順を実行してください。
 
-* `GCLOUD_SERVICE_KEY` (必須)
-* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using CircleCI server v2.x, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
-* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
-* Any items that appear within `< >` should be replaced with your own parameters.
+* パイプラインの機能や Orb を使用するには、`version 2.1` の設定ファイルを使用する必要があります。
+* `<docker-image-name-tag>` を使ってどこで[ジョブに Docker イメージ]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice)を指定するかを記載しました。
+* `version 2.0` の設定ファイルを引き続き使用する場合や CircleCI Server v2.x をご使用の場合も、[Orb レジストリ](https://circleci.com/developer/orbs)で幅広い Orb ソースを参照し、それぞれのジョブやコマンドのビルド方法をご覧いただけるためこのレシピを活用してください。
+* このページの Orb を使用したサンプルでは、例えば`aws-s3: circleci/aws-s3@x.y.z`のように Orb はタグによるバージョンがつけられてています。 サンプルをコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
+* `< >`の間の項目は、すべてご自身のパラメーターに置き換える必要があります。
 
-## ソフトウェアの変更を Amazon ECS にデプロイする
+## 変更を Amazon ECS にデプロイする
 {: #deploy-changes-to-amazon-ecs }
 
-Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することで、独自のコンテナ オーケストレーション ソフトウェアをインストール・構成せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このセクションでは、CircleCI Orb を使用してソフトウェアの変更を Amazon ECS サービスにすばやく簡単にデプロイする方法を取り上げますが、Amazon ECS サービスの機能や基本的なコンポーネントとアーキテクチャについての詳細情報を確認したい場合は、[Amazon ECS のドキュメント](https://https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)を参照してください。
+Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することにより、独自のコンテナ オーケストレーション ソフトウェアをインストール・設定せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このセクションでは、CircleCI Orb を使用してソフトウェアの変更を Amazon ECS サービスにすばやく簡単にデプロイする方法を説明しますが、Amazon ECS サービスの機能や基本的なコンポーネントとアーキテクチャについての詳細情報については、[Amazon ECS のドキュメント](https://https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)を参照してください。
 
-### 構成レシピ
+### 環境変数の設定
 {: #setting-environment-variables }
 以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
