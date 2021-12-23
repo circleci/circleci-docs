@@ -288,7 +288,7 @@ $btn-selected-blue: #004A95;
       line-height: 14px;
     }
 
-    #lang-form {
+    .lang-form {
       background: #FBFBFB;
       border: 1px solid #D4D4D4;
       border-radius: 0px;
@@ -300,9 +300,19 @@ $btn-selected-blue: #004A95;
   
       font-size: 15px;
       line-height: 18px;
-      color: #161616;
+      color: $black;
       opacity: 0.5;
+      &:hover {
+        border: 1px solid $black;
+        background: $white;
+      }
     }
+      .active {
+        border: 1px solid #1D97E4;
+        background: $white;
+        opacity: 1;
+        pointer-events: none;
+      }
 
     #submit-btn {
       font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -312,10 +322,16 @@ $btn-selected-blue: #004A95;
       font-size: 12px;
       line-height: 14px;
       margin-left: 106px;
+      &:hover {
+        color: $btn-hover-blue;
+        font-weight: 700;
+        transition: all 200ms;
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+        transition-duration: .15s;
+      }
     }
 
     #lang-submitted {
-      display: none;
       font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 12px;
       line-height: 14px;
