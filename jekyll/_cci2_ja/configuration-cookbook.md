@@ -167,11 +167,11 @@ Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化し�
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
-Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
+これらの環境変数の設定方法の詳細については、[環境変数の使用](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
 
-### GKE アクションを管理する
+### クラスタの作成と削除
 {: #creating-and-deleting-clusters }
-以下のステップを実行して、CircleCI と Orb を使用できるように環境を構成します。 Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
+CircleCI GKE Orb を使うと最小限の設定で複雑なアクションを実行することができます。 たとえば、前のセクションで説明した環境変数を設定した後、次のスニペットを使用して新しい GKE クラスタを作成できます。
 
 ```yaml
 version: 2.1
@@ -186,7 +186,7 @@ workflows:
           cluster: gcp-testing
 ```
 
-To delete a cluster, all you need is:
+以下により、クラスタを削除できます。
 
 ```yaml
 version: 2.1
@@ -204,7 +204,7 @@ workflows:
 ### GKE クラスタにイメージをパブリッシュおよびロールアウトする
 {: #publishing-and-rolling-out-the-image-to-the-gke-cluster }
 
-CircleCI GKE Orb を使用して Google Cloud Platform (GCP) にログインし、Docker イメージをビルドおよびパブリッシュして、そのイメージを GKE クラスタにロールアウトする例を示します。 All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/developer/orbs/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
+CircleCI GKE Orb を使用すると、以下の例のようにとても簡単に Docker イメージをパブリッシュして GKE クラスタにロールアウトすることができます。 必要なのは、Orb に組み込まれている `publish-and-rollout-image`コマンドと、いくつかの必須パラメータの定義のみです。 このジョブに使用できるパラメーターの全リストは、CircleCI Orb レジストリの[GKE](https://circleci.com/developer/orbs/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image)のページをご覧ください。
 
 ```yaml
 version: 2.1
@@ -225,19 +225,19 @@ workflows:
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 {: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
 
-CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。 このorbdでは以下のタスクを行うことができます。
+CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes Orbを提供しています。 この Orb では以下のタスクを行うことができます。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-CircleCI AWS-EKSのorbを使用する前に、CircleCI Orb Registryページの [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) orbの仕様を確認しておくとよいでしょう。
+CircleCI AWS-EKSのorbを使用する前に、CircleCI Orb レジストリページの [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) Orbの仕様を確認しておくとよいでしょう。
 
 ### EKS クラスタを作成する
 {: #create-an-eks-cluster }
 
-Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
+この`aws-eks` Orb を使用して、以下のサンプルようなコードにより EKS クラスタを作成、テスト、破棄することができます。
 
 ```yaml
 version: 2.1
@@ -279,18 +279,18 @@ workflows:
             - test-cluster
 ```
 
-In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
+このサンプルでは２つの Orb が使用されており、 クラスタの作成、テスト、破棄には、`aws-eks` Orb に組み込まれているジョブやコマンドが使われています。 `kubectl`のインストるには、`kubernetes` Orb に組み込まれている `install` コマンドが使われています。
 
 ### Kubernetes デプロイの作成
 {: #create-a-kubernetes-deployment }
 
-CircleCI AWS-EKS Orb を使用するための要件を満たしていることが確認できたら、以下のコード例を使用して EKS クラスタを作成できます。
+Kubernetes デプロイを作成します。これにより、クラスタの管理など、以下のようなさまざまなアクションをクラスタ内で実行できるようになります。
 
 * クラスタ内のリソースの更新
-* Authenticator を使用した Kubernetes 構成の更新
-* コンテナ イメージの更新
+* Authenticator を使用した Kubernetes 設定の更新
+* コンテナイメージの更新
 
-Slack チャンネルに承認待ちを通知する
+Kubernetes デプロイを作成するコードの例を示します。
 
 ```yaml
 version: 2.1
@@ -344,12 +344,12 @@ workflows:
             - aws-eks/update-container-image
 ```
 
-### EKS クラスタを作成する
+### クラスタに Helm Chart をインストールする
 {: #install-a-helm-chart-in-your-cluster }
 
 Helm は、Kubernetes クラスタ上で実行される強力なアプリケーション パッケージ マネージャーです。 Helm Chart を使用することで、アプリケーション構造を記述し、シンプルなコマンドによってその構造を管理できます。 Helm では、関連する Kubernetes リソース一式を記述するファイルが、チャートと呼ばれるパッケージ形式に集約されます。 1 つのチャートを使用して、memcached ポッドのような単純なアプリケーションから、HTTP サーバー、データベース、キャッシュなどから成る完全な Web アプリ スタックのような複雑なアプリケーションまで、幅広くデプロイできます。
 
-Kubernetes クラスタに Helm をインストールしたら、以下のコード例を使用して Helm Chart をインストールできます。 Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
+`aws-eks`により、Kubernetes クラスタに Helm をインストールし、Orb に組み込まれているジョブにより、Helm Chart をインストールできます。 以下はそのためのコード例です。プロセスの最後でリリースとクラスタを削除すると、クリーンアップされます。
 
 ```yaml
 version: 2.1
@@ -392,7 +392,7 @@ Slack は、リアルタイム コラボレーション アプリケーション
 ### 承認待ちの状態をSlackチャンネルに通知する
 {: #notifying-a-slack-channel-of-pending-approval }
 
-CircleCI Slack Orb を使用すると、さまざまな通知やメッセージを作成して必要な受信者に配信できます。 その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
+[CircleCI Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack) を使用すると、さまざまな通知やメッセージを作成して必要な受信者に配信できます。 その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
 
 ```yaml
 version: 2.1
@@ -407,14 +407,14 @@ workflows:
           message: Pending approval
           webhook: webhook
 ```
-ジョブの終了時にステータス アラートを送信する例を以下に示します。
+上の例では、ワークフローを実行する前に、まず `circleci/slack@x.y.z` Orb を呼び出す必要があることに注意してください。これで、`message` や `webhook` を関連付けて通知を送信できるようになります。
 
-There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
+ここに記載されていない Slack 通知をカスタマイズするパラメータが多数あります。 この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/orb/circleci/slack)の Slack Orb を参照してください。
 
-### カスタムメッセージをSlackチャンネルに通知する
+### カスタムメッセージを Slack チャンネルに通知する
 {: #notifying-a-slack-channel-with-custom-messages }
 
-CircleCI Slack Orb では、カスタム メッセージを含む通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
+CircleCI Slack Orb では、お客様が作成したカスタムメッセージによる通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
 
 カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
 
@@ -444,19 +444,19 @@ workflows:
       - build
 ```
 
-CircleCI Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/heroku)を参照してください。
+この例では、 Slack Orb の`notify`と以下のパラメーターを使用してカスタム通知が作成されています。
 
 1. メッセージ テキストの `color` を指定します。
 2. メッセージの受信者 (`mentions`) を指定します。
 3. 配信したいテキストを `message` に入力します。
 4. メッセージの `webhook` を指定します。 Slack Web フックの作成方法については、[こちらのガイド](https://api.slack.com/incoming-webhooks)を参照してください。
 
-### コンテナ イメージを更新する
+### ジョブの終了時に成功または失敗のステータスアラートを送信する
 {: #sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure }
 
-ジョブの終了時に受信者にステータス アラートを送信することも可能です。 このステータス アラートの送信は、ジョブの最後のステップにする必要があります。
+ジョブの終了時に受信者にステータスアラートを送信することも可能です。 このステータスアラートの送信は、ジョブの最後のステップにする必要があります。
 
-ジョブの終了時にステータス アラートを送信する例を以下に示します。
+ジョブの終了時にステータスアラートを送信する例を以下に示します。
 
 ```yaml
 version: 2.1
@@ -480,16 +480,16 @@ jobs:
           webhook: webhook
 ```
 
-上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
+上の例では、ジョブが実行されて失敗した場合に、Slack ステータスアラートが受信者 (USERID1、USERID2) に送信されます。
 
-ジョブの終了時にステータス アラートを送信する例を以下に示します。
+この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/orb/circleci/slack)の Slack Orb を参照してください。
 
-## Selecting a workflow to run using pipeline parameters
+## パイプラインのパラメーターを使って実行するワークフローを選択する
 {: #selecting-a-workflow-to-run-using-pipeline-parameters }
 
-You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run.
+API を使用して特定のワークフローを手動で実行しながら、プロジェクトへのプッシュごとにワークフローを実行できるようにしたい場合があります。 これを行うには、 [パイプラインのパラメーター]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使用して、実行するワークフローを決定します。
 
-Docker イメージをビルドしたら、以下のステップを実行してカスタム通知を作成します。
+以下の例ではデフォルトで`build`ワークフローを実行し、API を使用して他にどのワークフローを実行するか制御することができます。
 
 ```yaml
 version: 2.1
@@ -527,7 +527,7 @@ workflows:
       - report
 ```
 
-The `action` parameter will default to `build` on pushes to the project. Below is an example of supplying a different value to `action` using the API v2 [Trigger a New Pipeline]({{ site.baseurl }}/api/v2/#operation/triggerPipeline) endpoint to select a different workflow to run, in this example, the workflow named `report` would run. Remember to substitute [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) with your values.
+この `action `パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build`されます。 次に、 API v2 の [新しいパイプラインのトリガ ]({{ site.baseurl }}/api/v2/#operation/triggerPipeline)エンドポイントを使って別のワークフローを選択するために、`action` に別の値を指定する例を示します。この例では、`report` という名前のワークフローが実行されます。 [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api)をご自身の値に置き換えてください。
 
 ```sh
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -537,12 +537,12 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -d '{ "parameters": { "action": report } }'
 ```
 
-For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
+API v2 エンドポイントに使用に関する詳細は、[API Reference]({{ site.baseurl }}/api/v2/) や [API API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request) を参照してください。
 
-## Branch-filtering for job steps
+## ジョブのステップでの branch-filtering
 {: #branch-filtering-for-job-steps }
 
-上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
+ブランチのフィルタリングは、以前はワークフローでのみ可能でしたが、コンパイル時のロジックステートメントによりジョブのステップでもブランチのフィルタリングが可能です。
 
 The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
 
