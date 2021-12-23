@@ -44,7 +44,8 @@
     };
 
     var refreshToc = function () {
-      var currentTop = $(document).scrollTop() + scrollOffset;
+      // 74 because v2-banner expands up to 74px scroll-margin-top is set to 74
+      var currentTop = $(document).scrollTop() + scrollOffset + 74;
 
       if (currentTop + windowHeight >= pageHeight) {
         // at bottom of page, so just select last header by making currentTop very large
