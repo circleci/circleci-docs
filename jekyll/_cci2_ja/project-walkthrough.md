@@ -126,7 +126,7 @@ jobs:
             FLASK_CONFIG: staging
 ```
 
-### コンテナの使用
+### 依存関係のキャッシュ
 {: #caching-dependencies }
 {:.no_toc}
 
