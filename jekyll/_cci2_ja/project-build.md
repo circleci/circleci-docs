@@ -64,7 +64,7 @@ When viewing a single job in a pipeline, you can use the breadcrumbs at the top 
 
 ![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
 
-## 設定ファイルの詳細
+## 関連項目
 {: #see-also }
 
 [Settings]({{ site.baseurl }}/ja/2.0/settings)
