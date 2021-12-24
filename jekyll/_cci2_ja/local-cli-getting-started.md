@@ -32,7 +32,7 @@ version:
 ## 手順
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
-### Initialize a git repo
+### Git リポジトリを初期化する
 次に、ログインと Hub CLI の承認に関するプロンプトに従います。
 
 基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
@@ -55,7 +55,7 @@ git add . # コミットするすべてのファイルをステージングし�
 git commit -m "Initial commit" # 最初のコミットを実行します
 ```
 
-### Connect your git repo to a VCS
+### Git リポジトリを VCS に接続する
 これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
 
 完了です。 前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 ローカルの Git リポジトリは、バージョン管理システム (GitHub または BitBucket) に接続する必要があります。 やってみましょう。
@@ -77,7 +77,7 @@ git push --set-upstream origin master
 
 これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
 
-### Download and set up the CircleCI CLI
+### CircleCI CLI をダウンロードして準備する
 ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
 
 次に、CircleCI CLI をインストールし、いくつかの機能を試してみます。 CLI を Unix マシンにインストールするには、ターミナルで以下のコマンドを実行します。
@@ -98,7 +98,7 @@ circleci setup
 
 CLI に戻って API トークンを貼り付ければセットアップは完了です。
 
-### Setup and validate our first config
+### 最初の設定ファイルを準備してバリデーションする
 "build" ジョブをローカルで実行してみます。
 
 ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
@@ -178,7 +178,7 @@ git push
 
 ブラウザーで CircleCI に戻ると、[Start building (ビルドの開始)] をクリックしてビルドを実行できます。
 
-## Next steps
+## 次のステップ
 {: #next-steps }
 
 このドキュメントでは、CircleCI CLI ツールの使用を開始するための手順を簡単に説明してきました。 CircleCI CLI は、さらに複雑な機能も提供しています。
