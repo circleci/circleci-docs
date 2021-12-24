@@ -17,7 +17,7 @@ order: 1
 {: #overview }
 {:.no_toc}
 
-To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux resources.
+オープンソース コミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソース プロジェクト用にクレジットが毎週無料で提供されます。 これらのクレジットは、Linux のリソースで使用可能です。
 
 **備考:**
 * If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
