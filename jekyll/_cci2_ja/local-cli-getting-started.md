@@ -94,7 +94,7 @@ curl -fLSs https://circle.ci/cli | bash
 circleci setup
 ```
 
-ここで API トークンを要求されます。 [アカウントの設定ページ](https://circleci.com/account/api)に移動し、`[Create New Token (新しいトークンを作成する)]` をクリックします。 トークンに名前を付け、生成されたトークン文字列をコピーして、安全な場所に保存します。
+ここで API トークンを要求されます。 [アカウントの設定ページ](https://app.circleci.com/settings/user/tokens)に移動し、`[Create New Token (新しいトークンを作成する)]` をクリックします。 トークンに名前を付け、生成されたトークン文字列をコピーして、安全な場所に保存します。
 
 CLI に戻って API トークンを貼り付ければセットアップは完了です。
 
@@ -166,7 +166,7 @@ Success!
 ### Connect your repo to CircleCI
 {: #connect-your-repo-to-circleci }
 
-このステップでは、ターミナルを離れる必要があります。 [[Add Projects (プロジェクトの追加)] ページ](https://circleci.com/add-projects)にアクセスします。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
+このステップでは、ターミナルを離れる必要があります。 [[Add Projects (プロジェクトの追加)] ページ](https://app.circleci.com/projects/project-dashboard/github/circleci/)にアクセスします。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
 
 プロジェクトのリストから目的のプロジェクト ("foo_ci" または GitHub で付けた名前) を見つけ、[Set Up Project (プロジェクトのセットアップ)] をクリックします。 次に、ターミナルに戻り、最新の変更を GitHub にプッシュします (`config.yml` ファイルの追加分)。
 
