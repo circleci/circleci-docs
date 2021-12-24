@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Scala"
 short-title: "言語ガイド: Scala"
-description: "CircleCI Language Guide: Scala"
+description: "CircleCI 言語ガイド: Scala"
 categories:
   - はじめよう
 order: 1
@@ -31,7 +31,7 @@ version:
 ## 前提条件
 {: #prerequisites }
 
-CircleCI requires you to create a new directory in the repo's root and a YAML file within this new directory. これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
+CircleCI では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
 
 ```
 mkdir .circleci/
