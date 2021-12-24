@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "移行"
 short-title: "移行"
-description: "CircleCI Migration Introduction"
+description: "CircleCI への移行の概要"
 categories:
   - 移行
 order: 1
