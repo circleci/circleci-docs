@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Ruby"
 short-title: "Ruby"
-description: "Building and Testing with Ruby and Rails on CircleCI"
+description: "CircleCI での Ruby on Rails を使用したビルドとテスト"
 categories:
   - language-guides
 order: 8
@@ -50,15 +50,15 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
 # 設定で使用する Orb を宣言します。
-# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
+# Orb に関する詳細は、https://circleci.com/docs/ja/2.0/orb-intro/をご覧ください。
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
 
 jobs:
-  build: # our first job, named "build"
+  build: #  "build"という名前の最初のジョブです。
     docker:
-      - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
+      - image: cimg/ruby:2.7-node # カスタマイズされた CircleCI Docker イメージを使用します。
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
