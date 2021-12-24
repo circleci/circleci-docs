@@ -10,7 +10,7 @@ description: "Jira と CircleCI の接続"
 
 **メモ:** CircleCI Jira プラグインは Jira 管理者のみがインストールできます。
 
-## Installation steps
+## インストール手順
 {: #installation-steps }
 
 1. Navigate to project settings and select `JIRA integration` ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
@@ -20,7 +20,7 @@ description: "Jira と CircleCI の接続"
 
 ---
 
-## Viewing build and deploy statuses in Jira
+## Jiraでビルドとデプロイのステータスを表示
 {: #viewing-build-and-deploy-statuses-in-jira }
 
 CircleCI Orb を使用すると、Jira でビルドとデプロイのステータスを確認できるようになります。 そのプロセスは以下のとおりです。
