@@ -194,7 +194,7 @@ jobs:
 
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
-## 言語別の最新イメージ タグ
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
