@@ -245,7 +245,7 @@ Packagecloud also provides a robust API to manage package repositories. You can 
 
 {:.no_toc}
 
-## ブランチでのパイプラインのオプトイン
+## 関連項目
 {: #see-also }
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)
