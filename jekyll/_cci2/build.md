@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Build Environments"
-description: "CircleCI 2.0 Build Environment Configuration"
+title: "Execution Environments"
+description: "CircleCI execution environment configuration"
 ---
 
 
@@ -36,7 +36,7 @@ Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/hello-world-macos/">Hello World on MacOS</a> | Getting started with the macOS executor and CircleCI
 <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a> | How to set up and customize testing for an iOS application with CircleCI.
-<a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0.
+<a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI.
 {: class="table table-striped"}
 
 

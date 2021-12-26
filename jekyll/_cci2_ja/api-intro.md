@@ -4,7 +4,7 @@ title: "API リファレンス"
 short-title: "API リファレンス"
 description: "CircleCI API の概要"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
   - Cloud
@@ -32,9 +32,9 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 - ユーザー
 - プロジェクト (プレビュー)
 - ジョブ
-- Insights
+- インサイト
 
-**メモ:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
+**注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
 
 ## API v2 の利用開始
 {: #getting-started-with-the-api-v2 }
@@ -54,11 +54,9 @@ CircleCI API v2 では、API トークンを HTTP リクエストのユーザー
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**メモ:** パスワードがないことを示すために `:` が記述されています。
-**Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
+**注意:** パスワードがないことを示すために `:` が記述されています。 **注意:** [プロジェクトトークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 
 #### パラメーターを使用したパイプラインのトリガーの例
-
 {: #triggering-a-pipeline-with-parameters-example }
 
 以下は、パラメーターを使用したパイプラインを `curl` でトリガーする例です。
@@ -81,28 +79,26 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
 
-For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+API v2 のすべてのエンドポイントは、[API v2 リファレンス ガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用する場合のコード例が掲載されています。
 
-### New endpoints
+### 新しいエンドポイント
 {: #new-endpoints }
-
-API v2 は現在、CircleCI Server のセルフホスティング環境ではサポートされていません。
 
 最新の v2 バージョンの CircleCI API に追加された新しいエンドポイントは以下の表のとおりです。
 
-| エンドポイント                                                               | 説明                                                                                          |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `GET /workflow/:id`                                                   | リクエスト内で渡されるパラメーター `id` に基づいて、個別のワークフローが返されます。                                               |
-| `GET /workflow/:id/jobs`                                              | 固有の `id` に基づいて、特定のワークフローに関連付けられているジョブをすべて取得します。                                             |
-| `GET /project/:project_slug`                                          | 固有のスラッグに基づいて、特定のプロジェクトを取得します。                                                               |
-| `POST /project/:project_slug/pipeline`                                | 指定したプロジェクトに対して新規パイプラインをトリガーします。                                                             |
-| `GET /pipeline/:id`                                                   | リクエスト内で渡す `id` に基づいて、個別のパイプラインを取得します。                                                       |
-| `GET /pipeline/:id/config`                                            | 特定のパイプラインの設定ファイルを取得します。                                                                     |
-| `GET /project/:project_slug/pipelines/[:filter]`                      | 特定のプロジェクトの最新のパイプライン セットを取得します。                                                              |
-| `GET /insights/:project-slug/workflows`                               | This endpoint enables you to retrieve summary metrics for an individual project's workflow. |
-| `GET /insights/:project-slug/workflows/:workflow-name`                | This endpoint enables you to retrieve recent runs for a workflow.                           |
-| `GET /insights/:project-slug/workflows/:workflow-name/jobs`           | This endpoint enables you to retrieve summary metrics for a project workflow's jobs.        |
-| `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | This endpoint enables you to retrieve recent runs of a job within a workflow.               |
+| エンドポイント                                                               | 説明                                              |
+| --------------------------------------------------------------------- | ----------------------------------------------- |
+| `GET /workflow/:id`                                                   | リクエスト内で渡されるパラメーター `id` に基づいて、個々のワークフローが返されます。   |
+| `GET /workflow/:id/jobs`                                              | 固有の `id` に基づいて、特定のワークフローに関連付けられているジョブをすべて取得します。 |
+| `GET /project/:project_slug`                                          | 固有のスラッグに基づいて、特定のプロジェクトを取得します。                   |
+| `POST /project/:project_slug/pipeline`                                | 指定したプロジェクトに対して新規パイプラインをトリガーします。                 |
+| `GET /pipeline/:id`                                                   | リクエスト内で渡す `id` に基づいて、個々のパイプラインを取得します。           |
+| `GET /pipeline/:id/config`                                            | 特定のパイプラインの設定ファイルを取得します。                         |
+| `GET /project/:project_slug/pipelines/[:filter]`                      | 特定のプロジェクトの最新のパイプライン セットを取得します。                  |
+| `GET /insights/:project-slug/workflows`                               | 個々のプロジェクトのワークフローに関するサマリーメトリクスを取得します。            |
+| `GET /insights/:project-slug/workflows/:workflow-name`                | ワークフローの最近の実行結果を取得します。                           |
+| `GET /insights/:project-slug/workflows/:workflow-name/jobs`           | プロジェクト ワークフローのジョブに関するサマリーメトリクスを取得します。           |
+| `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | ワークフロー内のジョブの最近の実行結果を取得します。                      |
 
 ### 非推奨のエンドポイント
 {: #deprecated-endpoints }
@@ -110,21 +106,22 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 
 最新の API v2 リリースでサポートされなくなったエンドポイントは以下の表のとおりです。
 
-| エンドポイント                                            | 説明                        |
-| -------------------------------------------------- | ------------------------- |
-| `POST /project/:vcs-type/:username/:project`       | 新規ビルドをトリガーします。            |
-| `POST /project/:vcs-type/:username/:project/build` | 指定したプロジェクトで新規ビルドをトリガーします。 |
-| `GET /recent-builds`                               | 最近のビルドのサマリーを配列で取得します。     |
+| エンドポイント                                             | 説明                        |
+| --------------------------------------------------- | ------------------------- |
+| `POST /project/:vcs-type/:username/:project`        | 新規ビルドをトリガーします。            |
+| `POST /project/:vcs-type/:username/:project/build
+` | 指定したプロジェクトで新規ビルドをトリガーします。 |
+| `GET /recent-builds`                                | 最近のビルドの配列を取得します。          |
 
-## オンプレミス版をご利用のお客様
+## API v2 および CircleCI Server をご利用のお客様
 {: #api-v2-and-server-customers }
 
-API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x.
+API v2 は、CircleCI Server 2.x. のセルフホスティング環境ではサポートされていません。 CircleCI Server 3.x. のセルフホスティング環境ではサポートされています。
 
-## Data insights
+## データ インサイト
 {: #data-insights }
 
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. API v2 のすべてのエンドポイントは、[API v2 リファレンス ガイド](https://circleci.com/docs/api/v2/)をご覧ください。 Some examples of insights endpoints include:
+CircleCI API v2 では、特定のエンドポイントセットを呼び出して、ジョブやワークフローに関する詳細なインサイトやデータを取得することができます。 この情報により、ジョブやワークフローのパフォーマンスをより良く理解することができ、また、ワークフローやビルドを最適化するためのデータポイントを提供します。 API v2 のすべてのエンドポイントは、[API v2 リファレンス ガイド](https://circleci.com/docs/api/v2/)をご覧ください。 以下は、インサイトのエンドポイントの例です。
 
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`

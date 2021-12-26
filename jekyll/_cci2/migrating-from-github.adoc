@@ -1,6 +1,11 @@
+---
+title: Migrating from Github Actions
+---
+
 = Migrating from Github Actions
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Github Actions to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
@@ -12,7 +17,7 @@ This document provides an overview of how to migrate from Github Actions to Circ
 CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
 
 1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
-2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into a build environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
+2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
 3. **Resource Classes** - you can use various different https://circleci.com/docs/2.0/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
 4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
 
@@ -26,7 +31,7 @@ Both Github Actions and CircleCI share similar concepts around "jobs" and "workf
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
@@ -92,7 +97,7 @@ See the table in the next section to compare configuration.
 
 == Configuration Comparison
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
@@ -208,7 +213,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]

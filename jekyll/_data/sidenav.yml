@@ -1,4 +1,9 @@
 en:
+- name: Video Tutorials
+  icon: icons/sidebar/youtube_tutorials.svg
+  children:
+    - name: CircleCI Video Tutorials
+      link: 2.0/video-tutorials/
 - name: Getting Started
   icon: icons/sidebar/getting_started.svg
   children:
@@ -14,6 +19,8 @@ en:
           link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
+        - name: FAQ
+          link: 2.0/faq/
     - name: Migration
       link: 2.0/migration-intro/
       children:
@@ -35,14 +42,22 @@ en:
           link: 2.0/migrating-from-teamcity/
         - name: Migrating from Travis CI
           link: 2.0/migrating-from-travis/
-        - name: Jenkins Converter
-          link: 2.0/jenkins-converter/
 
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
   children:
+    - name: Overview
+      children:
+        - name: Pipelines overview
+          link: 2.0/pipelines/
+        - name: Pipeline processing
+          link: 2.0/build-processing
+        - name: Skip or cancel pipelines
+          link: 2.0/skip-build/
     - name: Features
       children:
+        - name: Scheduled Pipelines
+          link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
         - name: Environment variables
@@ -70,7 +85,7 @@ en:
         - name: Optimizations cookbook
           link: 2.0/optimization-cookbook/
 
-- name: Executors and Images
+- name: Execution environments
   icon: icons/sidebar/executors.svg
   children:
     - name: Overview
@@ -84,6 +99,8 @@ en:
           hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
+        - name: Migrating to Next-Gen Images
+          link: 2.0/next-gen-migration-guide/
         - name: Docker compose
           link: 2.0/docker-compose/
         - name: Docker layer caching
@@ -130,10 +147,22 @@ en:
       children:
         - name: Runner Overview
           link: 2.0/runner-overview/
-        - name: Runner Installation
+        - name: Getting Started with Runner Installation
           link: 2.0/runner-installation/
-        - name: Runner on Kubernetes
+        - name: Linux Runner Installation
+          link: 2.0/runner-installation-linux/
+        - name: Windows Runner Installation
+          link: 2.0/runner-installation-windows/
+        - name: macOS Runner Installation
+          link: 2.0/runner-installation-mac/
+        - name: Docker Runner Installation
+          link: 2.0/runner-installation-docker/
+        - name: Kubernetes Runner Installation
           link: 2.0/runner-on-kubernetes/
+        - name: Scaling Runner
+          link: 2.0/runner-scaling/
+        - name: Runner Configuration Reference
+          link: 2.0/runner-config-reference/
         - name: Upgrading Runner on Server
           link: 2.0/runner-upgrading-on-server/
         - name: Runner API
@@ -151,6 +180,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Sample Configuration
+          link: 2.0/sample-config/
         - name: Reusing Configuration
           link: 2.0/reusing-config/
         - name: Dynamic Configuration
@@ -219,10 +250,14 @@ en:
           link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
+        - name: Status Badges
+          link: 2.0/status-badges/
         - name: Webhooks
           link: 2.0/webhooks/
         - name: Using Credits
           link: 2.0/credits/
+        - name: Persisting Data
+          link: 2.0/persist-data
     - name: security
       link: 2.0/security/
       children:
@@ -308,9 +343,6 @@ en:
         link: 2.0/glossary/
       - name: Help and Support
         link: 2.0/help-and-support/
-      - name: Archive of 1.0 Docs
-        link: 2.0/archive/
-
 
 - name: Server Administration
   icon: icons/sidebar/admin.svg
@@ -322,17 +354,21 @@ en:
           link: 2.0/server-3-overview
         - name: What's New in v3.x
           link: 2.0/server-3-whats-new
+        - name: Upgrade
+          link: 2.0/server-3-upgrade
         - name: FAQ
           link: 2.0/server-3-faq
     - name: Server v3.x Install
       link: 2.0/server-3-install-prerequisites
       children:
-        - name: Prerequisites
+        - name: Phase 1 - Prerequisites
           link: 2.0/server-3-install-prerequisites
-        - name: Your First Cluster
-          link: 2.0/server-3-install-creating-your-first-cluster
-        - name: Installation
+        - name: Phase 2 - Install Core Services
           link: 2.0/server-3-install
+        - name: Phase 3 - Install Execution Environment
+          link: 2.0/server-3-install-build-services
+        - name: Phase 4 - Post Installation
+          link: 2.0/server-3-install-post
         - name: Migration
           link: 2.0/server-3-install-migration
         - name: Hardening Your Cluster
@@ -344,6 +380,8 @@ en:
           link: 2.0/server-3-operator-overview
         - name: Metrics and Monitoring
           link: 2.0/server-3-operator-metrics-and-monitoring
+        - name: Configuring a Proxy
+          link: 2.0/server-3-operator-proxy
         - name: User Accounts
           link: 2.0/server-3-operator-user-accounts
         - name: Orbs
@@ -352,6 +390,8 @@ en:
           link: 2.0/server-3-operator-vm-service
         - name: Externalizing Services
           link: 2.0/server-3-operator-externalizing-services
+        - name: Expanding Internal Database Volumes
+          link: 2.0/server-3-operator-extending-internal-volumes
         - name: Load Balancers
           link: 2.0/server-3-operator-load-balancers
         - name: Authentication
@@ -370,6 +410,15 @@ en:
           link: 2.0/server-3-operator-troubleshooting-and-support
         - name: Backup and Restore
           link: 2.0/server-3-operator-backup-and-restore
+    - name: Server v3.2.x PDFs
+      link: 2.0/server-3-overview
+      children:
+        - name: v3.2 Overview
+          link: 2.0/CircleCI-Server-3.2.0-Overview.pdf
+        - name: v3.2 Installation Guide
+          link: 2.0/CircleCI-Server-3.2.0-Installation-Guide.pdf
+        - name: v3.2 Operations Guide
+          link: 2.0/CircleCI-Server-3.2.0-Operations-Guide.pdf
     - name: Server v3.1.x PDFs
       link: 2.0/server-3-overview
       children:
@@ -551,8 +600,6 @@ ja:
         - name: Migrating from Travis CI
           link: ja/2.0/migrating-from-travis/
           i18n_name: TravisCIからの移行
-        - name: Jenkins Converter
-          link: ja/2.0/jenkins-converter/
 
 - name: Pipelines
   i18n_name: パイプライン
@@ -645,6 +692,9 @@ ja:
           link: ja/2.0/docker-to-machine
           i18n_name: インストール済ソフト
           hash: pre-installed-software
+        - name: Android Machine Image
+          i18n_name: Android マシン イメージ
+          link: ja/2.0/android-machine-image
         - name: Arm Resources
           i18n_name: Arm リソース
           link: ja/2.0/arm-resources/
@@ -709,6 +759,9 @@ ja:
         - name: Configuration Reference
           link: ja/2.0/configuration-reference/
           i18n_name: リファレンス
+        - name: Sample Configuration
+          link: ja/2.0/sample-config/
+          i18n_name: 設定ファイルサンプル
         - name: Reusing Configuration
           link: ja/2.0/reusing-config/
           i18n_name: 設定ファイル再利用(Orbs)
@@ -763,16 +816,16 @@ ja:
   children:
     - name: Overview
       i18n_name: 概要
-      link: 2.0/insights/
+      link: ja/2.0/insights/
     - name: Metrics glossary
       i18n_name: メトリクスの用語集
-      link: 2.0/insights-glossary/
+      link: ja/2.0/insights-glossary/
     - name: Test Insights
       i18n_name: テスト結果
-      link: 2.0/insights-tests/
+      link: ja/2.0/insights-tests/
     - name: Data Partnerships
       i18n_name: パートナーシップ
-      link: 2.0/insights-partnerships/
+      link: ja/2.0/insights-partnerships/
     - name: Insights API
       i18n_name: Insights API
       link: api/v2/
@@ -848,7 +901,7 @@ ja:
         - name: Ruby
           link: ja/2.0/language-ruby/
         - name: Other supported languages
-          link: 2.0/tutorials
+          link: ja/2.0/tutorials
           i18n_name: その他の言語
 
     - name: Databases
@@ -927,9 +980,6 @@ ja:
       - name: Help and Support
         link: ja/2.0/help-and-support/
         i18n_name: ヘルプとサポート
-      - name: Archive of 1.0 Docs
-        link: ja/2.0/archive/
-        i18n_name: アーカイブ
 
 - name: Server Administration
   i18n_name: Server管理
@@ -952,20 +1002,24 @@ ja:
       link: ja/2.0/server-3-install-prerequisites
       i18n_name: Server 3.xのインストール
       children:
-        - name: Prerequisites
+        - name: Phase 1 - Prerequisites
           link: ja/2.0/server-3-install-prerequisites
-          i18n_name: 必須要件
-        - name: Your First Cluster
-          i18n_name: クラスター作成
-          link: ja/2.0/server-3-install-creating-your-first-cluster
-        - name: Installation
+          i18n_name: フェーズ1 - 必須要件
+        - name: Phase 2 - Install Core Services
           link: ja/2.0/server-3-install
-          i18n_name: インストール
+          i18n_name: フェーズ2 - コアサービスのインストール
+        - name: Phase 3 - Install Build Services
+          link: ja/2.0/server-3-install-build-services
+          i18n_name: フェーズ3 - ビルドサービスのインストール
+        - name: Phase 4 - Post Installation
+          link: ja/2.0/server-3-install-post
+          i18n_name: フェーズ4 - インストールの後処理
         - name: Migration
           link: ja/2.0/server-3-install-migration
           i18n_name: 移行
         - name: Hardening Your Cluster
           link: ja/2.0/server-3-install-hardening-your-cluster
+          i18n_name: クラスタのハードニング
     - name: Server v3.x Operations
       i18n_name: v3.x 管理者ガイド
       link: ja/2.0/server-3-operator-overview
@@ -976,6 +1030,9 @@ ja:
         - name: Metrics and Monitoring
           i18n_name: メトリクスとモニタリング
           link: ja/2.0/server-3-operator-metrics-and-monitoring
+        - name: Configuring a Proxy
+          i18n_name: プロキシの設定
+          link: ja/2.0/server-3-operator-proxy
         - name: User Accounts
           i18n_name: ユーザー管理
           link: ja/2.0/server-3-operator-user-accounts
@@ -988,6 +1045,9 @@ ja:
         - name: Externalizing Services
           i18n_name: サービスの外部化
           link: ja/2.0/server-3-operator-externalizing-services
+        - name: Expanding Internal Database Volumes
+          i18n_name: 内部データベースボリュームの拡張
+          link: ja/2.0/server-3-operator-extending-internal-volumes
         - name: Load Balancers
           i18n_name: ロードバランサー
           link: ja/2.0/server-3-operator-load-balancers

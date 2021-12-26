@@ -10,6 +10,19 @@ version:
   - Cloud
   - Server v2.x
   - Server v3.x
+suggested:
+  - 
+    title: CircleCI CLI tutorial
+    link: https://circleci.com/blog/local-pipeline-development/
+  - 
+    title: Validate your config using local CLI
+    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
+  - 
+    title: Check your CircleCI installation
+    link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
+  - 
+    title: Troubleshoot CLI errors
+    link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
 
 ## 概要
@@ -23,7 +36,7 @@ CircleCI CLI は、CircleCI の高度で便利なツールの多くを、使い�
 - Orbs の作成、公開、表示、管理
 - コンテキストの管理
 
-このドキュメントでは、CLI ツールのインストールと使用方法について説明します。 **注:** 現在、最新の CLI は、サーバー上にインストールした CircleCI では利用できません。 旧バージョンの CLI であればサーバー上でも動作するため、インストールが可能です。
+このドキュメントでは、CLI ツールのインストールと使用方法について説明します。 **Note:** the new CLI is currently not available on server installations of CircleCI. The legacy CLI does work in Server and can be installed.
 
 * 目次
 {:toc}
@@ -211,7 +224,7 @@ bar:
 {: #an-example-packed-configyml }
 {:.no_toc}
 
-複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orbs トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードのパブリッシュの準備時に、プロジェクトの CI/CD ワークフローの一部として実行します。
+複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orb トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードのパブリッシュの準備時に、プロジェクトの CI/CD ワークフローの一部として実行します。
 
 ## 設定ファイルの処理
 {: #processing-a-config }
@@ -359,10 +372,10 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 
 CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための[テストの分割](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)にも使用できます。
 
-## CircleCI Server での CLI の使用
+## Using the CLI on CircleCI server
 {: #using-the-cli-on-circleci-server }
 
-現在、サーバーにインストールした CircleCI 上で実行できるのは、旧バージョンの CircleCI CLI のみです。 macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
+Currently, only the legacy CircleCI CLI is available to run on server installations of CircleCI. macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
 
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
 2. 以下のコマンドを実行して、CLI をインストールします。

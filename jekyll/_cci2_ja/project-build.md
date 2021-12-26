@@ -32,10 +32,13 @@ On the Projects Dashboard, you can either:
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-{:.tab.addprojectpage.Server}
+{:.tab.addprojectpage.Server_3}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+
+{:.tab.addprojectpage.Server_2}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/ja/2.0/notifications/) for the project [build status]({{ site.baseurl }}/ja/2.0/status/) and adds the project to their CircleCI dashboard.
+*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects.  Users may not view project data that is stored in environment variables.
 
@@ -46,7 +49,10 @@ If you do not see your project and it is not currently building on CircleCI, che
 {:.tab.switcher.Cloud}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server_3}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 ## Viewing and navigating pipelines

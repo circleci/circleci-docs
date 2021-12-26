@@ -6,7 +6,17 @@ description: "Using Workflows to Schedule Jobs"
 order: 30
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
+suggested:
+  - title: Manual job approval and scheduled workflow runs
+    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
+  - title: Filter workflows by branch
+    link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - title: How to trigger a workflow
+    link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - title: Conditional workflows
+    link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
@@ -69,7 +79,7 @@ To run a set of concurrent jobs, add a new `workflows:` section to the end of yo
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -78,7 +88,7 @@ jobs:
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -212,8 +222,9 @@ workflows:
 The outcome of the above example is that the `deploy:` job will not run until
 you click the `hold` job in the Workflows page of the CircleCI app and then
 click Approve. In this example the purpose of the `hold` job is to wait for
-approval to begin deployment. A job can be approved for up to 15 days after
-being issued.
+approval to begin deployment. A job can be approved for up to 90 days after
+being issued. However, workspaces expire after 15 days, so if the jobs after
+the hold job utilize workspaces, the effective approval time-limit is 15 days.
 
 Some things to keep in mind when using manual approval in a workflow:
 
@@ -229,7 +240,10 @@ The following screenshot demonstrates a workflow on hold.
 {:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server_3}
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+
+{:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
@@ -254,7 +268,7 @@ Consider running workflows that are resource-intensive or that generate reports 
 
 By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
-In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `main` and `beta` branches.
 
 **Note:** Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain reliability during busy times such as 12:00am UTC. Scheduled workflows should not assume they are started with to-the-minute accuracy.
 
@@ -272,7 +286,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - beta
     jobs:
       - coverage

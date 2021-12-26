@@ -32,10 +32,11 @@ Note: When CircleCI runs your pipeline, the [`run` ](https://circleci.com/docs/2
 
 CircleCI CLI を使用してテスト ファイルを分割するか、環境変数を使用して並列マシンを個別に構成します。
 
+
 ### リソース クラス
 {: #resource-class }
 
-ジョブごとに CPU および RAM リソースを構成して、リソースを効率的に使用することができます。 [リソース クラス]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class)は、`.circleci/config.yml` ファイルで指定する必要があります。 
+ジョブごとに CPU および RAM リソースを構成して、リソースを効率的に使用することができます。 [リソース クラス]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class)は、`.circleci/config.yml` ファイルで指定する必要があります。
 
 ### キャッシュ
 {: #cache }
@@ -46,6 +47,7 @@ CircleCI CLI を使用してテスト ファイルを分割するか、環境変
 {: #workflows }
 
 CircleCI の [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)は、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用などによって、ソフトウェア開発をスピードアップさせる便利な機能です。
+
 
 ## オペレーター向け機能
 {: #operator-features }

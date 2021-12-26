@@ -6,11 +6,12 @@ version:
 = Running GPU Executors
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
+This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
 
 toc::[]
 

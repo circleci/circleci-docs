@@ -1,4 +1,5 @@
 ---
+description: "See a summary of features and product notes for the release of CircleCI Server v2.19.x. View requirements for upgrading, notes and best practices, and known issues."
 version:
 - Server v2.x
 - Server Admin
@@ -10,7 +11,9 @@ version:
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
+This document provides a summary of features and product notes for the release of CircleCI server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
+
+NOTE: In March 2022 updates to CircleCI server v2.x will stop. Support for customers using CircleCI server v2.x will continue.
 
 ## Requirements for Upgrading
 
@@ -41,6 +44,10 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
+## What's New in v2.19.13
+
+* Various security and vulnerability patches.
 
 ## What's New in v2.19.12
 
@@ -139,7 +146,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19
 
-* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in Server v2.19].
+* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in server v2.19].
 
 * CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
 

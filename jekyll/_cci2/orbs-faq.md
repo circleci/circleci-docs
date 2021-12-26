@@ -6,6 +6,7 @@ description: "FAQs for Orbs"
 order: 20
 version:
 - Cloud
+- Server v3.x
 ---
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.
@@ -15,7 +16,7 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are available on any of our paid [plans](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for more information.
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are available on any of our [current plans](https://circleci.com/pricing).
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
@@ -49,7 +50,7 @@ This document describes various questions and technical issues that you may find
 
 * **Answer:** To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
 
-**Note:** _Uncertified orbs are not tested or verified by CircleCI._
+**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, and not certified._
 
 ## How to use the latest version of an orb
 {: #how-to-use-the-latest-version-of-an-orb }
@@ -77,10 +78,9 @@ You attempted to run a local build with version 2.1 of configuration.
 
 * **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
 
-
 ## See also
 {: #see-also }
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
+- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
 - Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.

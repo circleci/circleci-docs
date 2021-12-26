@@ -15,15 +15,16 @@ CircleCI では Artifactory への直接アップロードがサポートされ�
 {:toc}
 
 ## デプロイ
+{: #deploy }
+
 Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API) を活用する方法については、Artifactory からわかりやすいドキュメントが提供されています。
 
 ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
 
-Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
+このサンプルを実行する前に、リポジトリが作成されていることを確認してください。 リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
 
 ## Artifactory プラグイン
 {: #artifactory-plugins }
-
 Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
 
 - [Maven でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
@@ -31,7 +32,6 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
 
 ## JFrog CLI
 {: #jfrog-cli }
-
 If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
 
 ```

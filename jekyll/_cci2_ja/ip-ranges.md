@@ -21,7 +21,7 @@ CircleCI ジョブで使用される IP アドレスを、明確に定義され�
 
 IP アドレスの範囲は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 この機能の実装に伴い、CircleCI では、CircleCI サービスが利用する IP アドレスのリストを公開しました。 CircleCI のジョブでこの機能を有効にした場合、そのジョブから発生するネットワーク トラフィックは、リストにある IP アドレスのいずれかを使用するようになります。
 
-本機能は現在プレビュー段階であり、[Performance または Scale プラン](https://circleci.com/ja/pricing/)のお客様がご利用いただけます。 将来的に、この機能を有効にしたジョブのネットワーク転送量に応じてクレジット消費が発生しますが、 プレビュー段階では無料で使用可能です。料金の詳細については、後日の一般公開時にお知らせします。
+本機能は現在プレビュー段階であり、[Performance または Scale プラン](https://circleci.com/ja/pricing/)のお客様がご利用いただけます。 将来的に、この機能を有効にしたジョブのネットワーク転送量に応じてクレジット消費が発生しますが、 プレビュー段階では無料で使用可能です。 料金の詳細については、後日の一般公開時にお知らせします。
 
 ## IP アドレスの範囲: ユース ケース
 {: #usecases }
@@ -59,7 +59,7 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*最終更新*: 2021 年 8 月 2 日
+*最終更新*: 2021 年 8 月 23 日
 
 IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
@@ -93,17 +93,26 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 - 54.83.41.200
 - 54.92.235.88
 
-**注:** _ジョブが使用するアドレスは上記のいずれかであり、指定はできません。 また、このアドレス リストは、本機能を有効化しているすべての CircleCI ユーザーと共有されることに注意してください。_
+**注:** _ジョブが使用するアドレスは上記のいずれかであり、指定はできません。 また、このアドレス リストは、本機能を有効化しているすべての CircleCI ユーザーと共有されることに注意してください。 _
 {: class="alert alert-warning"}
 
 コア サービス (ジョブのトリガーや CircleCI と GitHub 間でのユーザーに関する情報の交換などに使用されるサービス) の IP アドレスの範囲は以下のとおりです。
 
 - 18.214.70.5
 - 52.20.166.242
-- 35.174.249.131
 - 18.214.156.84
 - 54.236.156.101
+- 52.22.215.219
+- 52.206.105.184
+- 52.6.77.249
+- 34.197.216.176
+- 35.174.249.131
 - 3.210.128.175
+
+### Upcoming changes to the list of IP address ranges
+
+#### 2021-08-23
+* Added new items to the list of IP address ranges for core services.
 
 **IP アドレス リストの変更予定** (最終更新: 2021 年 8 月 2 日): なし
 
@@ -136,18 +145,18 @@ IP アドレスの範囲機能が有効なジョブも含め、*すべてのジ�
 - [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI は *us-east-1* および *us-east-2* リージョンを使用
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI は *us-east1* および *us-central1* リージョンを使用
 - CircleCI macOS 用クラウド:
- - 162.252.208.0/24
- - 162.252.209.0/24
- - 192.206.63.0/24
- - 162.221.90.0/24
- - 38.39.177.0/24
- - 38.39.178.0/24
- - 38.39.188.0/24
- - 38.39.189.0/24
- - 38.39.186.0/24
- - 38.39.187.0/24
- - 38.39.184.0/24
- - 138.39.185.0/24
+  - 162.252.208.0/24
+  - 162.252.209.0/24
+  - 192.206.63.0/24
+  - 162.221.90.0/24
+  - 38.39.177.0/24
+  - 38.39.178.0/24
+  - 38.39.188.0/24
+  - 38.39.189.0/24
+  - 38.39.186.0/24
+  - 38.39.187.0/24
+  - 38.39.184.0/24
+  - 138.39.185.0/24
 
 大半が CircleCI のマシンではないため、AWS または GCP の IP アドレスに基づいて IP ベースのファイアウォールを構成することは*推奨されません*。 また、AWS および GCP のエンドポイントのアドレス割り当ては継続的に変更されるので、常に同じであるという*保証はありません*。
 
@@ -156,4 +165,5 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 ## 既知の制限
 {: #knownlimiations}
 
-現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。
+- When downloading or uploading files larger than ~10 MB during execution of jobs with IP ranges enabled, intermittently, the job may receive TCP reset (RST) packets and drop the connection. This could cause the job to fail if there is no retry logic in place while downloading/uploading the file.  CircleCI recommends including robust retry mechanisms in your config when attempting to download/upload large files during execution of jobs with IP ranges enabled.  For example, if your job uses [curl](http://www.ipgp.fr/~arnaudl/NanoCD/software/win32/curl/docs/curl.html) to download/upload a large file, include the `--retry <num>` flag and set `<num>` to a large number such as 1,000.

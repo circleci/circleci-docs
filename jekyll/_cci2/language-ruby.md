@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Language Guide: Ruby"
 short-title: "Ruby"
-description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
+description: "Building and Testing with Ruby and Rails on CircleCI"
 categories: [language-guides]
 order: 8
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -59,7 +60,7 @@ for the sample application.
 version: 2.1 # Use 2.1 to enable using orbs and other features.
 
 # Declare the orbs that we'll use in our config.
-# read more about orbs: https://circleci.com/docs/2.0/using-orbs/
+# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
@@ -145,7 +146,7 @@ workflows:
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. [Fork the project][fork-demo-project] on GitHub to your own account.
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked.
+2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 ## See also

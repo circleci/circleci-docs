@@ -6,12 +6,13 @@ description: "How to reuse unchanged cache layers in images you build to reduce 
 categories: [optimization]
 order: 70
 version:
- - Cloud
- - Server v2.x
+- Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
-the [Performance and Scale](https://circleci.com/pricing/) usage plans (at 200 credits per job run) and on installations of [CircleCI server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
+the [Free and above](https://circleci.com/pricing/) usage plans (credits are charged per run job) and on installations of [CircleCI server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 * TOC
 {:toc}
@@ -38,7 +39,7 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment.
+DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
 ``` YAML
 version: 2
@@ -116,56 +117,95 @@ Let's use the following Dockerfile to illustrate how Docker Layer Caching works.
 {:.no_toc}
 
 ```
-FROM elixir:1.6.5
+FROM elixir:1.11.4
 
-# Make apt non-interactive
+# make Apt non-interactive
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci \
   && echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci
 
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Debian Jessie is EOL'd and original repos do not work.
+# Switch to the archive mirror until we can get people to
+# switch to Stretch.
+RUN if grep -q Debian /etc/os-release && grep -q jessie /etc/os-release; then \
+	rm /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian/ jessie main" >> /etc/apt/sources.list \
+    && echo "deb http://security.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list \
+	; fi
+
+# Make sure PATH includes ~/.local/bin
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=839155
+# This only works for root. The circleci user is done near the end of this Dockerfile
+RUN echo 'PATH="$HOME/.local/bin:$PATH"' >> /etc/profile.d/user-local-path.sh
 
 # man directory is missing in some base images
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
 RUN apt-get update \
   && mkdir -p /usr/share/man/man1 \
   && apt-get install -y \
-    git mercurial xvfb \
+    git mercurial xvfb apt \
     locales sudo openssh-client ca-certificates tar gzip parallel \
-    net-tools netcat unzip zip bzip2 gnupg curl wget
+    net-tools netcat unzip zip bzip2 gnupg curl wget make
 
-# Set timezone to utc
+
+# Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
 # Use unicode
 RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 
-# Install docker
+# install jq
+RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" \
+  && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \
+  && chmod +x /usr/bin/jq \
+  && jq --version
+
+# Install Docker
+
+#>    # To install, run the following commands as root:
+#>    curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-17.05.0-ce.tgz && tar --strip-components=1 -xvzf docker-17.05.0-ce.tgz -C /usr/local/bin
+#>
+#>    # Then start docker in daemon mode:
+#>    /usr/local/bin/dockerd
+
 RUN set -ex \
-  && export DOCKER_VERSION=$(curl --silent --fail --retry 3 \
-    https://download.docker.com/linux/static/stable/x86_64/ | \
-    grep -o -e 'docker-[.0-9]*-ce\.tgz' | sort -r | head -n 1) \
+  && export DOCKER_VERSION=docker-19.03.12.tgz \
   && DOCKER_URL="https://download.docker.com/linux/static/stable/x86_64/${DOCKER_VERSION}" \
   && echo Docker URL: $DOCKER_URL \
   && curl --silent --show-error --location --fail --retry 3 --output /tmp/docker.tgz "${DOCKER_URL}" \
   && ls -lha /tmp/docker.tgz \
   && tar -xz -C /tmp -f /tmp/docker.tgz \
   && mv /tmp/docker/* /usr/bin \
-  && rm -rf /tmp/docker /tmp/docker.tgz
+  && rm -rf /tmp/docker /tmp/docker.tgz \
+  && which docker \
+  && (docker version || true)
 
-# Install docker-compose
-RUN curl --silent --show-error --location --fail --retry 3 --output /usr/bin/docker-compose \
-    https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/docker-compose-latest \
+# docker compose
+RUN COMPOSE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/docker-compose-latest" \
+  && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/docker-compose $COMPOSE_URL \
   && chmod +x /usr/bin/docker-compose \
   && docker-compose version
 
-# Setup circleci user
+# install dockerize
+RUN DOCKERIZE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/dockerize-latest.tar.gz" \
+  && curl --silent --show-error --location --fail --retry 3 --output /tmp/dockerize-linux-amd64.tar.gz $DOCKERIZE_URL \
+  && tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64.tar.gz \
+  && rm -rf /tmp/dockerize-linux-amd64.tar.gz \
+  && dockerize --version
+
 RUN groupadd --gid 3434 circleci \
   && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci \
   && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
   && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' >> /etc/sudoers.d/env_keep
 
+# BEGIN IMAGE CUSTOMIZATIONS
+
+# END IMAGE CUSTOMIZATIONS
+
 USER circleci
+ENV PATH /home/circleci/.local/bin:/home/circleci/bin:${PATH}
 
 CMD ["/bin/sh"]
 ```
@@ -202,7 +242,7 @@ RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linu
   && jq --version
 ```
 
-On the next commit, DLC will ensure that we still get cached image layers for the first few steps in our Dockerfile—pulling from `elixir:1.6.5` as our base image, the `# make apt non-interactive` step, the step starting with `RUN apt-get update`, the `# set timezone to UTC` step, and the `# use unicode` step.
+On the next commit, DLC will ensure that we still get cached image layers for the first few steps in our Dockerfile—pulling from `elixir:1.11.4` as our base image, the `# make apt non-interactive` step, the step starting with `RUN apt-get update`, the `# set timezone to UTC` step, and the `# use unicode` step.
 
 However, because our `#install jq` step is new, it and all subsequent steps will need to be run from scratch, because the Dockerfile changes will invalidate the rest of the image layer cache. Overall, though, with DLC enabled, our image will still build more quickly, due to the unchanged layers/steps towards the beginning of the Dockerfile.
 
@@ -243,4 +283,4 @@ So, if you change something in the Dockerfile, all of those later steps are inva
 
 ## Learn More
 {: #learn-more }
-Take the [DLC course](https://academy.circleci.com/docker-layer-caching) with CircleCI Academy to learn more.
+Take the [DLC course](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) with CircleCI Academy to learn more.

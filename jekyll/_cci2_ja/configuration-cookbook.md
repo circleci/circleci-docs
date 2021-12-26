@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-*CircleCI config クックブック*は、 Orbs のような CircleCI のリソースを使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
+*CircleCI config クックブック*は、 Orb のような CircleCI のリソースを使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
 
 * 目次
 {:toc}
@@ -63,14 +63,14 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 
 ### 構成レシピ
 {: #setting-environment-variables }
-CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)を参照してください。
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-CircleCI Orb を使用して、AWS CLI を更新せずに Amazon ECS サービスを更新するには、ECS サービスの更新方法を示す以下の例を参照してください。
+これらの環境変数の設定方法の詳細については、[環境変数に関するドキュメント](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
 
 **Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
@@ -107,7 +107,7 @@ For a full list of usage options and orb elements see the [AWS-ECS orb page](htt
 ### Verify the AWS ECS service update
 {: #verify-the-aws-ecs-service-update }
 
-Once you have updated the Amazon ECS service, you can verify the update was correctly applied. Amazon ECS サービスの更新を検証する To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
 
 ```yaml
 version: 2.1
@@ -158,6 +158,7 @@ Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化し�
 
 ### 環境変数の設定
 {: #set-environment-variables }
+The following environment variables need to be set in CircleCI either directly or through a context:
 
 - `GCLOUD_SERVICE_KEY` (必須)
 - `GOOGLE_PROJECT_ID`
@@ -221,14 +222,14 @@ workflows:
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 {: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
 
-CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。このorbでは以下の作業を行うことができます。
+CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。 このorbdでは以下のタスクを行うことができます。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-CircleCI AWS-EKS orbを使用する場合は、事前にCircleCI Orb Registryページで[AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start)orbの仕様を確認しておくとよいでしょう。
+CircleCI AWS-EKSのorbを使用する前に、CircleCI Orb Registryページの [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) orbの仕様を確認しておくとよいでしょう。
 
 ### EKS クラスタを作成する
 {: #create-an-eks-cluster }
@@ -403,7 +404,6 @@ workflows:
           message: Pending approval
           webhook: webhook
 ```
-
 In the above example, note that you first need to invoke the `circleci/slack@x.y.z` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
 
 There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
@@ -570,12 +570,12 @@ workflows:
 ## ダイナミック コンフィグ
 {: #dynamic-configuration }
 
-このセクションは、「[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config)」を読み、「[CircleCI のダイナミック コンフィグの使用を開始する]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)」セクションに記載の手順を完了済みであることを前提としています。
-
 ここでは、下記のダイナミック コンフィグの使用方法の例を紹介します。
 
-- [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+上記の例では、以下のような要素が実装されています:
+
+- [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 
 ### 基本的な例
 {: #a-basic-example }
@@ -612,7 +612,7 @@ workflows:
       - setup
 ```
 
-上記の例では、以下のような要素が実装されています:
+上記の設定ファイルは、以下のように構成されています。
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - ダイナミック コンフィグ機能を使用するために `continuation` Orb を呼び出します。
@@ -622,18 +622,18 @@ workflows:
     - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
-**注意:** 1 個の `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 に制限されています。つまりパイプラインのセットアップ フェースでは、ワークフローはひとつしか実行できません。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
+**注意:** 1 個の `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 に制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-`continuation` Orb の内容の詳細については、当該 Orb のソース コードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミック コンフィグの FAQ]({{ site.baseurl }}/ja/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the [Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
 
 ### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
 
 場合によっては、ある`ワークフロー`や`ステップ`を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したいことがあります。 条件に応じた実行は、コードやマイクロ サービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
-そのため、 CircleCI では [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering) Orb を提供しています。この Orb を使用することで、特定のファイルの変更有無に応じて後続のパイプラインの動作を制御することができます。
-
 例えば、以下のようなモノレポ構成を考えます:
+
+上記のような状況におけるダイナミック コンフィグの実装例が、以下の `config.yml` および `continue_config.yml` です:
 
 ```shell
 .
@@ -648,7 +648,7 @@ workflows:
 │   ├── IntegrationTests.java
 ```
 
-上記のような状況におけるダイナミック コンフィグの実装例が、以下の `config.yml` および `continue_config.yml` です:
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
 
 #### config.yml
 {: #configyml }
@@ -678,6 +678,23 @@ workflows:
             service2/.* run-build-service-2-job true
           base-revision: master
           # パス フィルタリングとパイプライン パラメータの設定が完了した後に実行するコンフィグへのパス .
+  always-run:
+    jobs:
+      # the path-filtering/filter job determines which pipeline
+      # parameters to update.
+      - path-filtering/filter:
+          name: check-updated-files
+          # 3-column, whitespace-delimited mapping. One mapping per
+          # line:
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+          mapping: |
+            service1/.* run-build-service-1-job true
+            service2/.* run-build-service-2-job true
+          base-revision: master
+          # this is the path of the configuration we should trigger once
+          # path filtering and pipeline parameter value updates are
+          # complete. In this case, we are using the parent dynamic
+          # configuration itself.
           config-path: .circleci/continue_config.yml
 ```
 
@@ -690,8 +707,8 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.2.0
 
-# デフォルトのパイプライン パラメータ
-# path-filgering Orb により値は適宜書き換えられる
+# the default pipeline parameters, which will be updated according to
+# the results of the path-filtering orb
 parameters:
   run-build-service-1-job:
     type: boolean
@@ -700,21 +717,14 @@ parameters:
     type: boolean
     default: false
 
-# ワークフローを実際に定義
-# ほとんどはパイプライン パラメータの値に準じて特定条件下でのみ実行される 
-# それぞれのワークフローは上記 jobs セクションで定義されたジョブを実行
+# here we specify our workflows, most of which are conditionally
+# executed based upon pipeline parameter values. Each workflow calls a
+# specific job defined above, in the jobs section.
 workflows:
-  # run-build-service-1-job パラメータが true のときのみ
-  # build-service-1 ジョブを起動
-  service-1:
-    when: << pipeline.parameters.run-build-service-1-job >>
-    jobs:
-      - maven/test:
-          name: build-service-1
-          command: 'install -DskipTests'
-          app_src_directory: 'service1'
-  # run-build-service-2-job パラメータが true のときのみ
-  # build-service-2 ジョブを起動
+  # when pipeline parameter, run-build-service-1-job is true, the
+  # build-service-1 job is triggered.
+  <code>build-service-1</code> ジョブ: <code>maven</code> Orb を使用して service1 コードのコンパイルとインストールを行います。
+  テストはスキップします。
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
@@ -722,9 +732,11 @@ workflows:
           name: build-service-2
           command: 'install -DskipTests'
           app_src_directory: 'service2'
-  # run-build-service-1-job パラメータもしくは run-build-service-2-job パラメータが OR
-  # true のとき run-integration-tests ジョブを起動 
-  # 詳細は https://circleci.com/docs/2.0/configuration-reference/#logic-statements を参照
+  # when pipeline parameter, run-build-service-1-job OR
+  # run-build-service-2-job is true, run-integration-tests job is
+  # triggered. see:
+  # https://circleci.com/docs/2.0/configuration-reference/#logic-statements
+  # for more information.
   run-integration-tests:
     when:
       or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
@@ -735,14 +747,14 @@ workflows:
           app_src_directory: 'tests'
 ```
 
-上記の設定ファイルは、以下のように構成されています。
+In the above configuration, we:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
 - `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプライン パラメーターを定義します。
 - `check-updated-files`、`build-service-1`、`build-service-2`、`run-integration-tests` という 4 つのジョブを定義します。
   - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプライン パラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
-  - `build-service-1` ジョブ: `maven` Orb を使用して service1 コードのコンパイルとインストールを行います。 テストはスキップします。
+  - version: 2.1 orbs: maven: circleci/maven@1.2.0 # デフォルトのパイプライン パラメータ # path-filgering Orb により値は適宜書き換えられる parameters: run-build-service-1-job: type: boolean default: false run-build-service-2-job: type: boolean default: false # ワークフローを実際に定義 # ほとんどはパイプライン パラメータの値に準じて特定条件下でのみ実行される # それぞれのワークフローは上記 jobs セクションで定義されたジョブを実行 workflows: # run-build-service-1-job パラメータが true のときのみ # build-service-1 ジョブを起動 service-1: when: &lt;&lt; pipeline.parameters.run-build-service-1-job &gt;&gt; jobs: - maven/test: name: build-service-1 command: 'install -DskipTests' app_src_directory: 'service1' # run-build-service-2-job パラメータが true のときのみ # build-service-2 ジョブを起動 service-2: when: &lt;&lt; pipeline.parameters.run-build-service-2-job &gt;&gt; jobs: - maven/test: name: build-service-2 command: 'install -DskipTests' app_src_directory: 'service2' # run-build-service-1-job パラメータもしくは run-build-service-2-job パラメータが OR # true のとき run-integration-tests ジョブを起動 # 詳細は https://circleci.com/docs/2.0/configuration-reference/#logic-statements を参照 run-integration-tests: when: or: [&lt;&lt; pipeline.parameters.run-build-service-1-job &gt;&gt;, &lt;&lt; pipeline.parameters.run-build-service-2-job &gt;&gt;] jobs: - maven/test: name: run-integration-tests command: '-X verify' app_src_directory: 'tests'
   - `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
   - `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
 - 以下の 4 つのワークフローを定義します。 そのうち、3 つのワークフローは条件に従って実行されます。
@@ -758,26 +770,27 @@ workflows:
 
 Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
 
-In the following example the `test` job is run across Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
+In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
 
 ```yaml
 version: 2.1
 
 orbs:
-  node: circleci/node@4.0.0
-  win: circleci/windows@2.2.0
+  node: circleci/node@4.7
 
 executors:
-  linux: # linux executor using the node base image
+  docker: # Docker using the Base Convenience Image
     docker:
-      - image: cimg/node
+      - image: cimg/base:stable
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  windows: win/default # windows executor - uses the default executor from the windows orb
-  macos: # macos executor using xcode 11.6
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
     macos:
-      xcode: 11.6
+      xcode: 12.5
 
 jobs:
   test:
@@ -792,7 +805,6 @@ jobs:
       - node/install:
           node-version: << parameters.node-version >>
           install-yarn: true
-      - run: yarn test
 
 workflows:
   all-tests:
@@ -800,18 +812,19 @@ workflows:
       - test:
           matrix:
             parameters:
-              os: [linux, windows, macos]
-    
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
+```
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
 ```
-    - test-13.13.0-linux
-    - test-14.0.0-linux
-    - test-13.13.0-windows
-    - test-14.0.0-windows
-    - test-13.13.0-macos
-    - test-14.0.0-macos
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
 ```
 
 For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/ja/2.0/configuration-reference/#matrix-requires-version-21).

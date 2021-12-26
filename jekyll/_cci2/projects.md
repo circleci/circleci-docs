@@ -7,6 +7,7 @@ categories: [projects]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -17,13 +18,16 @@ the owner of on your VCS, or, _Follow_ any project in your organization to gain
 access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
 
-## Add projects page
-{: #add-projects-page }
+## Projects dashboard
+{: #projects-dashboard }
 
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-{:.tab.addprojectpage.Server}
+{:.tab.addprojectpage.Server_3}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+
+{:.tab.addprojectpage.Server_2}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects.  Users may not view project data that is stored in environment variables.

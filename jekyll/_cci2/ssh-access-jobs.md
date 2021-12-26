@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Debugging with SSH"
 short-title: "Debugging with SSH"
-description: "How to access a build container using SSH on CircleCI 2.0"
+description: "How to access a build container using SSH on CircleCI"
 categories: [troubleshooting]
 order: 20
 version:
@@ -11,14 +11,14 @@ version:
 - Server v3.x
 ---
 
-This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
+This document describes how to access a build container using SSH on CircleCI in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
 {: #overview }
-Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
+Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
 When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, **or** you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run (you may wish to execute `pwd` or `ls` to ensure that you are in the correct directory).
 
@@ -42,7 +42,7 @@ Please note that a default CircleCI pipeline executes steps in a non-interactive
 If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, To run  `powershell` in your build you
 would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
 
-The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down. (Or you can cancel it.) After you SSH into the build, the connection will remain open for **two hours**.
+The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down (or you can cancel it). After you SSH into the build, the connection will remain open for **one hour** for customers on a free plan or **two hours** for all other customers.
 
 **Note**: If your job has parallel steps, CircleCI launches more than one VM to perform them. Thus, you'll see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
 
@@ -144,7 +144,7 @@ If it was not offered, you can specify it via the `-i` command-line
 argument to SSH. For example:
 
 ```
-$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
+$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 
 ## See also

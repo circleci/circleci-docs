@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Node.js - JavaScript Tutorial"
 short-title: "JavaScript"
-description: "Building and Testing with JavaScript and Node.js on CircleCI 2.0"
+description: "Building and Testing with JavaScript and Node.js on CircleCI"
 categories: [language-guides]
 order: 5
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -78,4 +79,4 @@ Success! You just set up a Node.js app to build on CircleCI with version: 2.1 co
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public JavaScript projects.
-- If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

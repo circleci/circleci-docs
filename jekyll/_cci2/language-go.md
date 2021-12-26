@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Language Guide: Go"
 short-title: "Go"
-description: "Building and Testing with Go (Golang) on CircleCI 2.0"
+description: "Building and Testing with Go (Golang) on CircleCI"
 categories: [language-guides]
 order: 3
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -19,12 +20,12 @@ installed in a Docker image. If you’re in a rush, just copy the sample configu
 ## Quickstart: Demo Go reference project
 {: #quickstart-demo-go-reference-project }
 
-We maintain a reference Go project to show how to build on CircleCI 2.0:
+We maintain a reference Go project to show how to build on CircleCI:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a>
 - [Demo Go Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Go projects.
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI with Go projects.
 
 
 ## Sample configuration
@@ -33,7 +34,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
@@ -129,7 +130,7 @@ We recommend using a CircleCI pre-built image that comes pre-installed with tool
 A good way to start using CircleCI is to build a project yourself. Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
 
 1. Fork the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a> to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
+2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
@@ -294,7 +295,7 @@ workflows:
       - build
 ```
 
-Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
 {: #see-also }

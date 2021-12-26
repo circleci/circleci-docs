@@ -27,10 +27,7 @@ This document provides a step-by-step tutorial for getting your first successful
 Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
 
 1. Navigate to GitHub and [create a new repository](https://github.com/new).
-1. Input the name of your repository, in this case "hello-world", then click
-**Initialize this repository with a README**. Finally, click **Create repository**.
-
-![Creating a Repository]( {{ site.baseurl }}/assets/img/docs/getting-started--new-repo.png){:.img--bordered}
+1. Input the name of your repository, in this case "hello-world", then select the option to initialize the repository with a README file. Finally, click **Create repository**.
 
 ## Setting up CircleCI
 {: #setting-up-circleci }
@@ -41,22 +38,18 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
 1. If you created your new repository under an organization you will need to
    select the organization name when you login to CircleCI.
-1. Once on the Project page, find the project you are using, in our case
-  `hello-world`, and click **Set Up Project**.
+1. Once on the Project page, select the project you are using (in our case
+  `hello-world`).
+1. Select the option to use a starter config.yml template, and click **Set Up Project**.
+1. Next, choose a language from the list of sample configs to get a
+  pre-populated config.yml file with suggested best practices for your project.
+  For this example, because we have an empty repository, we will use the `Hello World` configuration example.
 
-1. On the following screen, choose a language from the dropdown to get a
-  pre-populated config.yml file with suggested best-practices for your project.
-  For this example, because we have an empty repository, we will use the `Hello
-  World` configuration example at the bottom of the list.
-
-    ![Getting a sample configuration]( {{ site.baseurl }}/assets/img/docs/getting-started--sample-config.png){:.img--bordered}
-
-    **Note:** Based on which language you choose you can view related
-    documentation in the sidebar on the right of the screen
-
+    **Note:** Based on which language you choose, you can view related
+    documentation in the sidebar on the right of the screen.
 1. Click **Commit and Run**. This will create a file `.circleci/config.yml` at
    the root of your repository on a new branch called `circle-ci-setup`. If you
-   are happy with this configuration you can merge it into your main branch
+   are happy with this configuration, you can merge it into your main branch
    later, or continue to make changes.
 
 ## Digging into your first pipeline
@@ -66,31 +59,17 @@ You should see your pipeline start to run automatically—and pass! So, what jus
 happened? Click on the green **Success** button on your pipeline to investigate
 the following parts of the run:
 
-![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
-
 1. **Which workflows ran?**: After clicking **Success**, we are taken to a page
    listing the jobs that ran. If this is your first build, you probably only ran
    **one job**  (which automatically runs inside **one workflow**).  In our
-   case, we only ran one job, called `welcome/run`. Click on `welcome/run` and let's
+   case, we only ran one job, called `say-hello`. Click on `say-hello` and let's
    investigate the steps of our job.
 
-   ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png)
-
-
-1. **Spin up environment:** CircleCI used an [orb](https://circleci.com/orbs) to
-   help provide some defaults for this project. By using an orb, we can get
-   quick access to common configuration. In this case,
-   `circleci/welcome-orb@0.4.1` provides a "pre-built" job you can run which
-   simply greets the user.
-
-1. **Views step results:** Every job is made up of a series of steps - some
+1. **View step results:** Every job is made up of a series of steps - some
    steps, like
    [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are
    special, reserved commands in CircleCI. Other steps are specified by a user to achieve
-   a specific purpose. Because we are using the `welcome` orb, we don't see
-   custom steps; they are configured in the orb. But no problem! We can view the
-   [source of an
-   orb](https://circleci.com/developer/orbs/orb/circleci/welcome-orb) online.
+   a specific purpose. In our Hello World example config, we use both `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run).
 
 Even though there was no actual source code in your repo, and no actual tests
 configured in your `config.yml`, CircleCI considers your build to have
@@ -118,7 +97,7 @@ Let's use the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node).
 ```yaml
 version: 2.1
 orbs:
-  node: circleci/node@1.1
+  node: circleci/node@4.7.0
 jobs:
   build:
     executor:
@@ -274,7 +253,10 @@ comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 {:.tab.switcher.Cloud}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server_3}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server_2}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 

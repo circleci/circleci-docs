@@ -27,11 +27,11 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 
 1. まだ登録がお済みでない場合は、CircleCI にアクセスして登録し、GitHub または Bitbucket を選択してください。 GitHub Marketplace からの登録も可能です。
 2. 管理するプロジェクトが追加されていることを確認します。
-3. プロジェクトの master ブランチの最上部に `.circleci` フォルダーを追加します。  必要に応じて master 以外のブランチで試してみることも可能です。  フォルダー名は、必ずピリオドで始めてください。  これは .circleci 形式の特別なフォルダーです。
+3. Add a `.circleci` folder at the top of your project’s master branch.  必要に応じて master 以外のブランチで試してみることも可能です。  フォルダー名は、必ずピリオドで始めてください。  これは .circleci 形式の特別なフォルダーです。
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -70,7 +70,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -90,7 +90,6 @@ jobs:
             echo '^^^That should look familiar^^^'
 {% endhighlight %}
 
-
 ### 学習ポイント
 {: #learnings }
 {:.no_toc}
@@ -108,7 +107,7 @@ Although we’ve only made two small changes to the config, these represent sign
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -127,6 +126,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
+    
       - run:
           name: Running in a Unique Container
           command: |
@@ -154,7 +154,7 @@ We also added a small `run` block that demonstrates we are running in a node con
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   Hello-World:
@@ -192,7 +192,6 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-
 workflows:
  version: 2
  Example_Workflow:
@@ -200,17 +199,21 @@ workflows:
      - Hello-World
      - I-Have-Code:
          requires:
+    
            - Hello-World
      - Run-With-Node:
          requires:
+    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
+    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
+    
            - Hold-For-Approval
 
 {% endhighlight %}
