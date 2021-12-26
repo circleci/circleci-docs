@@ -130,7 +130,7 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
        steps:
          - checkout
          - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します。
-           - run: sleep 15 # 15 秒間スリープします
+         - run: sleep 15 # 15 秒間スリープします
    # このワークフローでは、マッピングを行い、上記で定義した 2 つのジョブを調整することができます。
    workflows:
      version: 2
