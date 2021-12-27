@@ -30,7 +30,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
         <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/orb-concepts/">Orbs の使用</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/orb-concepts/">Orbs の使用</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
