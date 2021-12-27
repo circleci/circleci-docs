@@ -61,7 +61,7 @@ The information below describes how your network and storage usage is accumulati
 
 **NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
 
-### ストレージとネットワーク転送の概要
+### Overview of all storage and network transfer
 {: #overview-of-storage-and-network-transfer }
 
 ジョブ内でデータを保持するための操作には、ネットワークとストレージの使用が発生します。関連するアクションは次のとおりです。
@@ -79,17 +79,13 @@ The information below describes how your network and storage usage is accumulati
 * `store_artifacts`
 * `store_test_results`
 
-すべてのネットワーク転送にはネットワークの使用が発生します。関連するアクションは次のとおりです。
-
-* キャッシュとワークスペースのセルフホストランナーへの復元
-* アーティファクトのダウンロード
-* CircleCI 外のジョブからのデータプッシュ
+The relevant action resulting in network egress that will accrue network transfer usage (billable) is **restoring caches and workspaces to self-hosted runners**.
 
 ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 On this screen you can find:
 
-* Total network and storage usage (table at the top of the screen)
+* Billable Network Transfer & Egress (table at the top of the screen)
 * Network and storage usage for individual projects (Projects tab)
-* Storage data activity (Objects tab)
+* Storage data activity (Network tab)
 * Total storage volume data (Storage tab)
 
 個々のステップのストレージおよびネットワーク転送の使用方法の詳細については、以下のジョブページのステップ出力を参照してください。
@@ -99,7 +95,7 @@ The information below describes how your network and storage usage is accumulati
 ### How to calculate an approximation of your monthly costs
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
-Charges apply when an organization has network egress beyond the included GB allotment for storage and network usage.
+Charges apply when an organization has runner network egress beyond the included GB allotment for storage and network usage.
 
 #### ストレージ
 {: #storage }
@@ -107,19 +103,15 @@ Charges apply when an organization has network egress beyond the included GB all
 
 Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
 
-To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be multiplied by 420 credits to estimate the total monthly costs.
-
-![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
+To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 #### ネットワーク
 {: #network }
 {:.no_toc}
 
-To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be multiplied by 420 credits to estimate the total monthly costs.
+To calculate monthly network costs from your usage, click on the **Network** tab to see if your organization has accrued any overages. In the same scenario as storage above, your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
-
-![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
 
 ### How to optimize your storage and network transfer use
 {: #how-to-optimize-your-storage-and-network-transfer-use }
