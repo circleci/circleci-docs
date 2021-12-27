@@ -56,29 +56,31 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
 {: #supported-xcode-versions }
 
 
- | 設定       | Xcode のバージョン                 | macOS のバージョン | macOS UI テストのサポート | ソフトウェア マニフェスト                                                                                    | リリースノート                                                                                       |
- | -------- | ---------------------------- | ------------ | ----------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
- | `13.2.0` | Xcode 13.2 Beta 2 (13C5081f) | 11.6.2       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6443/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-13-2-beta-2-released/41995)                    |
- | `13.1.0` | Xcode 13.1 (13A1030d)        | 11.6.1       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6269/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-13-1-rc-released/41577)                        |
- | `13.0.0` | Xcode 13.0 (13A233)          | 11.5.2       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-13-rc-released/41256)                          |
- | `12.5.1` | Xcode 12.5.1 (12E507)        | 11.4.0       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
- | `12.4.0` | Xcode 12.4 (12D4e)           | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
- | `12.3.0` | Xcode 12.3 (12C33)           | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
- | `12.2.0` | Xcode 12.2 (12B45b)          | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
- | `12.1.1` | Xcode 12.1.1 RC (12A7605b)   | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4054/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-12-1-1-rc-released/38023)                      |
- | `12.0.1` | Xcode 12.0.1 (12A7300)       | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3933/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-12-0-1-released-xcode-12-0-0-deprecated/37630) |
- | `11.7.0` | Xcode 11.7 (11E801a)         | 10.15.5      | Yes               | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-7-released/37312)                           |
- | `11.6.0` | Xcode 11.6 (11E708)          | 10.15.5      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)                         |
- | `11.5.0` | Xcode 11.5 (11E608c)         | 10.15.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)                      |
- | `11.4.1` | Xcode 11.4.1 (11E503a)       | 10.15.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)                       |
- | `11.3.1` | Xcode 11.3.1 (11C505)        | 10.15.1      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)                       |
- | `11.2.1` | Xcode 11.2.1 (11B500)        | 10.15.0      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)            |
- | `11.1.0` | Xcode 11.1 (11A1027)         | 10.14.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)                  |
- | `11.0.0` | Xcode 11.0 (11A420a)         | 10.14.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)     | [リリースノート](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)                |
- | `10.3.0` | Xcode 10.3 (10G8)            | 10.14.4      | No                | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)               |
+ | 設定                      | Xcode のバージョン               | macOS のバージョン | macOS UI テストのサポート | ソフトウェア マニフェスト                                                                                | リリースノート                                                                                       |
+ | ----------------------- | -------------------------- | ------------ | ----------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+ | `13.2.1`                | Xcode 13.2.1 (13C100)      | 11.6.2       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6690/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-13-2-1-released/42334)                         |
+ | `13.1.0`                | Xcode 13.1 (13A1030d)      | 11.6.1       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6269/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-13-1-rc-released/41577)                        |
+ | `12.1.0`                | Xcode 13.0 (13A233)        | 11.5.2       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-13-rc-released/41256)                          |
+ | `12.5.1`                | Xcode 10.2.1 (10E1001)     | 11.4.0       | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
+ | `12.4.0`                | Xcode 12.4 (12D4e)         | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
+ | `12.3.0`                | Xcode 12.3 (12C33)         | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
+ | `12.2.0`                | Xcode 12.2 (12B45b)        | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
+ | `12.1.1`                | Xcode 12.1.1 RC (12A7605b) | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4054/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-12-1-1-rc-released/38023)                      |
+ | `12.0.1`                | Xcode 12.0.1 (12A7300)     | 10.15.5      | ○                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3933/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-12-0-1-released-xcode-12-0-0-deprecated/37630) |
+ | `11.7.0`                | Xcode 11.7 (11E801a)       | 10.15.5      | はい                | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-7-released/37312)                           |
+ | `11.6.0`                | Xcode 11.6 (11E708)        | 10.15.5      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)                         |
+ | `11.5.0`                | Xcode 11.5 (11E608c)       | 10.15.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)                      |
+ | `11.4.1`                | Xcode 11.4.1 (11E503a)     | 10.15.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)                       |
+ | `11.3.1` **Deprecated** | Xcode 11.3.1 (11C505)      | 10.15.1      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)                       |
+ | `11.2.1` **Deprecated** | Xcode 11.2.1 (11B500)      | 10.15.0      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)            |
+ | `11.1.0` **Deprecated** | Xcode 11.1 (11A1027)       | 10.14.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)                  |
+ | `11.0.0` **Deprecated** | Xcode 11.0 (11A420a)       | 10.14.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)                |
+ | `10.3.0`                | Xcode 10.3 (10G8)          | 10.14.4      | いいえ               | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
 
  
  {: class="table table-striped"}
+ 
+ **Note:** Xcode images `11.0.0`, `11.1.0`, `11.2.1` and `11.3.1` are deprecated and will be removed on 12 January 2022.
  
  
 
@@ -102,7 +104,7 @@ CircleCI でプロジェクトを設定した後、 fastlane でビルドする�
 2. 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
 3. `myproject.xcodeproj/xcshareddata/xcschemes` ディレクトリが Git リポジトリに組み込まれていることを確認し、変更をプッシュします
 
-単純なプロジェクトであれば、最小限の設定で実行できます。 最小限の設定ファイルの例は、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」を参照してください。
+単純なプロジェクトであれば、最小限の設定で実行できます。 You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
 
 
@@ -205,7 +207,7 @@ end
 ```
 
 
-上記の設定は、以下の CircleCI の設定ファイルと組み合わせて使用できます。
+上記の設定は、以下の CircleCI のコンフィグファイルと組み合わせて使用できます。
 
 
 
@@ -278,7 +280,7 @@ fastlane match の使用に関する詳細は、[ iOS コード署名に関す�
 
 CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#supported-xcode-versions)に記載されています。
 
-マニフェストで「available to chruby (chruby で使用可)」と記載されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
+マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
 **注:** システムディレクトリに適用されるアクセス許可が制限されるため、システムのRuby を使って Gems をインストールすることは推奨しません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
 
@@ -426,7 +428,7 @@ steps:
 
 **注:** Ruby バージョンを追加インストールするにはかなりの時間を要します。 デフォルトでイメージにインストールされていな特定のバージョンを使用する必要がある場合のみ行うことを推奨します。
 
-プリインストールされていない Ruby のバージョンでジョブを実行するには、そのバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
+プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
 
 
 
@@ -468,7 +470,7 @@ steps:
 
 {% endraw %}
 
-次に、コマンドの前に `bundle exec` を記述して、確実に使用できるようにします。
+また、コマンドにプレフィックス `bundle exec` を付加しておくと、確実に使用できるようになります。
 
 
 
@@ -552,7 +554,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 以下に例を示します。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようにします。
 
 
 
@@ -666,7 +668,7 @@ steps:
 
 {:.no_toc}
 
-デフォルトでは、fastlane scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_types` を変更して、これらの形式を無効化することができます。
+デフォルトで、fastlane scan はテスト出力レポートを `html` 形式や `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_types` を変更して、これらの形式を無効化することを検討してください。
 
 
 
@@ -678,9 +680,9 @@ steps:
 
 {:.no_toc}
 
-基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN の利用が可能な CocoaPods 1.8 以降を使用することをお勧めします。 そうすることで、ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降では `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前を使用している場合はアップグレードを検討してください。
+基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降を使用することをお勧めします。 ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降では `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前を使用している場合はアップグレードを検討してください。
 
-実行するには　Podfile ファイルの先頭行を次のように記述します。
+CocoaPods を使用するには、プロファイルの先頭行を次のように記述します。
 
 
 
@@ -689,7 +691,7 @@ source 'https://cdn.cocoapods.org/'
 ```
 
 
-1.7 以前からアップグレードする場合はさらに、Podfile から以下の行を削除すると共に、CircleCI 設定ファイルの "Fetch CocoaPods Specs" ステップを削除します。
+1.7 以前からアップグレードする場合はさらに、プロファイルから次の行を削除すると共に、CircleCI 設定ファイルの "Fetch CocoaPods Specs" ステップを削除します。
 
 
 
@@ -707,7 +709,7 @@ sudo gem install cocoapods
 ```
 
 
-[Pods ディレクトリをソース管理に](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)チェックインすることをお勧めします。 そうすることで、決定論的で再現可能なビルドを実現できます。
+[Pods ディレクトリをソース管理に](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)チェックインすることをお勧めします。 そうすると、決定論的で再現可能なビルドを実現できます。
 
 **注:** CocoaPods 1.8 のリリース以降、CocoaPods Spec レポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することを強くお勧めします。
 
@@ -790,7 +792,7 @@ React Native プロジェクトは、CircleCI  上で `macos` および `docker`
 
 {:.no_toc}
 
-プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)ドキュメントを参照してください。
+プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 See the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `config.yml` file.
 
 
 
