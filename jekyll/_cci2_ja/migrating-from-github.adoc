@@ -1,13 +1,18 @@
-= Github Actions からの移行
+---
+title: Migrating from Github Actions
+---
+
+= Migrating from Github Actions
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Github Actions to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
 このドキュメントでは、Github Actions から CircleCI に移行する方法を概説します。
 
-== CircleCI に移行する理由
+== CircleCIに移行する理由
 
 CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
 
@@ -17,9 +22,9 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 4. *テスの並列処理*: CircleCI のプラットフォームは、https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
  https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
-その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]お試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただき]、トライアルを設定してください。
 
-== 概念
+== コンセプト
 
 === ジョブとワークフロー
 
