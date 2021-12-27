@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
-title: "CircleCI CLI"
+title: CircleCI CLI
+description: How to run local jobs with the CLI.
 redirect: /docs/2.0/local-cli/
 ---
 

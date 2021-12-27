@@ -118,15 +118,21 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 
 The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
-**Machine-consumable lists can be found below:**
+**Machine-consumable lists can be found by querying the DNS A records below:**
 
-- IP address ranges *for jobs*: [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
+- IP address ranges *for jobs*: `jobs.knownips.circleci.com`.
 
-- IP address ranges *for core services*: [DNS A record](https://dnsjson.com/core.knownips.circleci.com/A.json).
+- IP address ranges *for core services*: `core.knownips.circleci.com`.
 
-- *All IP address ranges*:  [DNS A record](https://dnsjson.com/all.knownips.circleci.com/A.json).
+- *All IP address ranges*:  `all.knownips.circleci.com`.
 
 During the preview phase, this list may change. You should check regularly for updates, at least once a week.
+
+To query these, you can use any DNS resolver. Here's an example using `dig` with the default resolver:
+
+```
+dig all.knownips.circleci.com A +short
+```
 
 Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
 
@@ -138,6 +144,10 @@ Pricing will be calculated based on data usage of jobs opted into the IP ranges 
 Specific rates and details are being finalized and will be published when the feature is generally available.
 
 While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold. 
+
+IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
+
+![Screenshot showing the location of the IP ranges feature]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
 
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
@@ -167,5 +177,6 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 ## Known limitations
 {: #knownlimiations}
 
+- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 - IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
 - If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses](https://circleci.com/docs/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.

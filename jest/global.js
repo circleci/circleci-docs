@@ -1,3 +1,7 @@
+import $ from 'jquery';
+
+global.$ = global.jQuery = $;
+
 global.analytics = {
   page: jest.fn(),
   track: jest.fn(),

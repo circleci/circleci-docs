@@ -1,6 +1,11 @@
+---
+title: Migrating from AWS
+---
+
 = Migrating from AWS
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :toc: macro
 :toc-title:

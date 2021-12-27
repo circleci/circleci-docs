@@ -94,9 +94,9 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 === Enable the `systemd` unit
 
-Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
+ `/opt/circleci/circleci.service` を所有者を `root` にして作成し、アクセス許可を `755` に設定します。
 
-You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
+`TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
 If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
 
@@ -114,7 +114,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-You can now enable the service:
+次に、下記コマンドによりサービスを有効化します。
 
 ```bash
 systemctl enable /opt/circleci/circleci.service
@@ -122,7 +122,7 @@ systemctl enable /opt/circleci/circleci.service
 
 === Start the service
 
-When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+CircleCI ランナー サービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
 
 ```bash
 systemctl start circleci.service
@@ -132,13 +132,13 @@ systemctl start circleci.service
 
 The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
 
-You can see the status of the agent by running:
+エージェントの状態は、次のコマンドを実行して確認できます。
 
 ```bash
 systemctl status circleci.service --no-pager
 ```
 
-Which should produce output similar to:
+このコマンドの出力は次のようになります。
 
 ```
 circleci.service - CircleCI Runner
@@ -151,7 +151,7 @@ circleci.service - CircleCI Runner
            └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
 ```
 
-You can also see the logs for the system by running:
+また、次のコマンドを実行してシステムのログを確認することもできます。
 
 ```bash
 journalctl -u circleci

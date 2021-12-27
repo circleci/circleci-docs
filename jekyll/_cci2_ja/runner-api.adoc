@@ -114,7 +114,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | Format
 
 |200
-|List of agents
+|エージェントの一覧
 |JSON
 |===
 
@@ -123,10 +123,10 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Required
-| Description
+| 名前
+| 型
+| 必須
+| 説明
 
 |items
 |[object]
@@ -135,18 +135,18 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 |resource_class
 |string
-|true
-|runner resource class
+|必須
+|ランナーのリソース クラス
 
 |hostname
 |string
-|true
-|runner hostname
+|必須
+|ランナーのホスト名
 
 |name
 |string
-|true
-|runner name
+|必須
+|ランナー名
 
 |first_connected
 |string (date-time)
@@ -165,8 +165,8 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 |version
 |string
-|true
-|version of the launch-agent running
+|必須
+|実行中のローンチ エージェントのバージョン
 |===
 
 ==== Example
@@ -204,17 +204,17 @@ Get the number of unclaimed tasks for a given resource class.
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Input
-| Required
-| Description
+| 名前
+| 型
+| 入力
+| 必須
+| 説明
 
 | resource-class
 | string
-| query
-| true
-| filters tasks by specific resource class.
+| クエリ
+| 必須
+| 指定したリソース クラスでタスクを絞り込みます。
 |===
 
 ==== Examples
@@ -243,10 +243,10 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Required
-| Description
+| 名前
+| 型
+| 必須
+| 説明
 
 |unclaimed_task_count
 |int

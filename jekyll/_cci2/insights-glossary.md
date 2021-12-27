@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
-title: "Insights metrics glossary"
-short-title: "Insights metrics glossary"
-short-title: "Metric definitions for CircleCI insights"
+title: Insights metrics glossary
+description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
 version:
 - Cloud
 - Server v3.x
@@ -25,15 +24,16 @@ General metrics appear across the Insights experience and can refer to different
 entities, depending on the context. For example, the `Runs` metric may refer to a
 count of workflow executions or jobs, depending on the context.
 
-| Term                  | Definition                                                                                                                                                                                                                                                                                                             |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Runs                  | The count of executions in a selected time window.                                                                                                                                                                                                                                                                     |
-| Total Duration        | The sum of execution times for all workflows in a project.                                                                                                                                                                                                                                                             |
-| P95 Duration          | The 95th percentile of execution times for an entity in a selected time window (i.e. 95% of runs completed in the same or less amount of this time). <br/> _The 95th percentile is a standard measure used to interpret performance data. It provides a measure of max value when outlier or transient values are excluded._ |
-| P50 (median) Duration | The median execution time. <br/> _Medians are a better measure of central tendency than arithmetic means because they are more resilient to_ skewness _in datasets_.                                                                                                                                                         |
-| Total Credits         | The sum of credits consumed during execution.                                                                                                                                                                                                                                                                          |
-| Success Rate          | The percentage of runs that completed successfully, calculated by `100 x (Successful Runs / All Runs)`                                                                                                                                                                                                                   |
+| Term                                                 | Definition                                                                                                                                                                                                                                                                                                             |
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| {::nomarkdown}<div id="runs-definition">Runs</div>{:/} | The count of executions in a selected time window.                                                                                                                                                                                                                                                                     |
+| {::nomarkdown}<div id="totalDuration-definition">Total Duration</div>{:/}         | The sum of execution times for all workflows in a project.                                                                                                                                                                                                                                                             |
+| {::nomarkdown}<div id="p95Duration-definition">P95 Duration</div>{:/}            | The 95th percentile of execution times for an entity in a selected time window (i.e. 95% of runs completed in the same or less amount of this time). <br/> _The 95th percentile is a standard measure used to interpret performance data. It provides a measure of max value when outlier or transient values are excluded._ |
+| {::nomarkdown}<div id="p50Duration-definition">P50 (median) Duration</div>{:/} | The median execution time. <br/> _Medians are a better measure of central tendency than arithmetic means because they are more resilient to_ skewness _in datasets_.                                                                                                                                                         |
+| {::nomarkdown}<div id="totalCredits-general-definition">Total Credits</div>{:/}         | The sum of credits consumed during execution.                                                                                                                                                                                                                                                                          |
+| {::nomarkdown}<div id="successRate-definition">Success Rate</div>{:/}         | The percentage of runs that completed successfully, calculated by `100 x (Successful Runs / All Runs)`                                                                                                                                                                                                                   |
 {: class="table table-striped"}
+{: #insights-table}
 
 ## Organization-level metrics
 {: #organization-level-metrics }
@@ -44,11 +44,12 @@ Organization-level metrics allow you to analyze your organization’s performanc
 
 | Term                    | Definition     |
 |-------------------------|----------------|
-| Workflow Runs | The count of all workflows executions for an organization for the selected projects in the selected time frame. |
-| Total Workflow Duration | The total execution time of all workflows runs for an organization within the selected projects and time frame. |
-| Total Credits | The total credits consumed across all selected projects in an organization. |
-| Overall Success Rate | The percentage of runs that completed successfully across all runs in the selected projects and workflows. (calculated by `100 x (All Successful Runs/ All Runs)`) |
+| {::nomarkdown}<div id="workflowRuns-definition">Workflow Runs</div>{:/} | The count of all workflows executions for an organization for the selected projects in the selected time frame. |
+| {::nomarkdown}<div id="totalWorkflowDuration-definition">Total Workflow Duration</div>{:/} | The total execution time of all workflows runs for an organization within the selected projects and time frame. |
+| {::nomarkdown}<div id="totalCredits-organization-definition">Total Credits</div>{:/} | The total credits consumed across all selected projects in an organization. |
+| {::nomarkdown}<div id="overallSuccesRate-definition">Overall Success Rate</div>{:/} | The percentage of runs that completed successfully across all runs in the selected projects and workflows. (calculated by `100 x (All Successful Runs/ All Runs)`) |
 {: class="table table-striped"}
+{: #insights-table}
 
 ## Workflow Metrics
 {: #workflow-metrics }
@@ -57,11 +58,11 @@ Organization-level metrics allow you to analyze your organization’s performanc
 
 | Term                    | Definition     |
 |-------------------------|----------------|
-| Time to Recovery | Total time spent in a failed state before a successful execution. |
-| Mean Time to Recovery (MTTR)| The average time it takes to get back to a successful execution from a failed one (Calculated by `total recovery time / # of failures`). <br> _If there are no failed builds (and thus no recoveries) in the current time window, the MTTR value will be empty. Empty MTTR values will be treated as 0 when calculating Trends._ |
-| Throughput | The average (mean) number of builds of any status per day. Calculated by `Sum of builds/ # of days.` |
+| {::nomarkdown}<div id="timeToRecovery-definition">Time to Recovery</div>{:/} | Total time spent in a failed state before a successful execution. |
+| {::nomarkdown}<div id="meanTimeToRecovery-definition">Mean Time to Recovery (MTTR)</div>{:/}| The average time it takes to get back to a successful execution from a failed one (Calculated by `total recovery time / # of failures`). <br> _If there are no failed builds (and thus no recoveries) in the current time window, the MTTR value will be empty. Empty MTTR values will be treated as 0 when calculating Trends._ |
+| {::nomarkdown}<div id="throughput-definition">Throughput</div>{:/} | The average (mean) number of builds of any status per day. Calculated by `Sum of builds/ # of days.` |
 {: class="table table-striped"}
-
+{: #insights-table}
 
 ## Trends
 {: #trends }

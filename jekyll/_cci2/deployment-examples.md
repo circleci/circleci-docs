@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Deployment Examples"
-short-title: "Deployment Examples"
+title: Deployment Examples
+description: This document presents example configs for a variety of popular deployment targets.
 version:
 - Cloud
 - Server v3.x

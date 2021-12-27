@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -11,8 +11,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'jekyll/assets/'),
-    publicPath: '',
+    publicPath: `/${process.env.JEKYLL_BASENAME || 'docs'}/assets/`,
     filename: 'js/[name].bundle.js',
+    chunkFilename: 'js/[name].chunk.js',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -41,14 +42,19 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+            },
+          },
           'sass-loader',
         ],
       },
     ],
   },
   // Ignore warnings about default exports because some of our legacy
-  // code inported in app.js are not modules:
+  // code imported in app.js are not modules:
   // - src/js/site/main.js
   // - src/js/site/user.js
   ignoreWarnings: [
@@ -60,7 +66,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new TerserPlugin({ extractComments: false }),
-      new CssMinimizerPlugin()
+      new CssMinimizerPlugin(),
     ],
   },
 };

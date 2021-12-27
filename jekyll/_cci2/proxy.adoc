@@ -6,6 +6,7 @@ version:
 = Setting Up HTTP Proxies
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how to configure CircleCI server to use an HTTP proxy.
 :icons: font
 :toc: macro
 :toc-title:

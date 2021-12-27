@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuring CircleCI"
-short-title: "Configuring CircleCI"
-description: "Reference for .circleci/config.yml"
+title: Configuring CircleCI
+short-title: Configuring CircleCI
+description: Reference for .circleci/config.yml
 order: 20
 version:
 - Cloud
@@ -117,7 +117,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows).
@@ -174,7 +174,7 @@ working_directory | N | String | In which directory to run the steps. Will be in
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -346,7 +346,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
 
@@ -368,7 +368,7 @@ jobs:
 ##### Available `machine` images
 {: #available-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the deveoper hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
@@ -436,6 +436,7 @@ xcode | Y | String | The version of Xcode that is installed on the virtual machi
 {: class="table table-striped"}
 
 **Example:** Use a macOS virtual machine with Xcode version 11.3:
+
 
 ```yaml
 jobs:
@@ -517,7 +518,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on Free and Performance plans. Available resources classes are restricted for customers on the Free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the Free plan.
+**Note:** This feature is automatically enabled on Free and Performance plans. See the [comparison table](https://circleci.com/pricing/#comparison-table) for which resource classes are available to Free and Performance plan customers.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -537,6 +538,7 @@ xlarge                | 8     | 16GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
 
 ```yaml
 jobs:
@@ -569,6 +571,8 @@ jobs:
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 jobs:
   build:
@@ -601,6 +605,8 @@ large<sup>(3)</sup>| 8     | 16GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 jobs:
   build:
@@ -624,6 +630,8 @@ xlarge            | 16    | 60GB
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 
@@ -654,6 +662,8 @@ gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 
@@ -679,6 +689,8 @@ windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 |
 
 ###### Example usage
 {: #example-usage }
+{:.no_toc}
+
 ```yaml
 version: 2.1
 orbs:
@@ -901,6 +913,7 @@ run: |
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ```yaml
 steps:
@@ -938,6 +951,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 
 ###### *Example*
 {: #example }
+{:.no_toc}
 
 ```
 version: 2.1
@@ -1006,13 +1020,12 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
 version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
 
-- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -1062,6 +1075,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 {% raw %}
 ``` YAML
@@ -1135,6 +1149,7 @@ A path is not required here because the cache will be restored to the location f
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 {% raw %}
 ``` YAML
@@ -1157,7 +1172,7 @@ A path is not required here because the cache will be restored to the location f
 ##### **`deploy` – DEPRECATED**
 {: #deploy-deprecated }
 
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and scheduling keys.**
+**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
 
 Special step for deploying artifacts.
 
@@ -1177,6 +1192,7 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - deploy:
@@ -1205,6 +1221,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ###### Example
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - run:
@@ -1229,6 +1246,7 @@ path | Y | String | Path (absolute, or relative to your `working_directory`) to 
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 Directory structure:
 
@@ -1327,6 +1345,7 @@ at | Y | String | Directory to attach the workspace to.
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 ``` YAML
 - attach_workspace:
@@ -1413,6 +1432,7 @@ Enables jobs to go through a set of well-defined IP address ranges. See [IP rang
 
 ###### _Example_
 {: #example }
+{:.no_toc}
 
 ```yaml
 version: 2.1
@@ -1440,7 +1460,7 @@ workflows:
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
 
 ### **`version`**
-{: #version }
+{: #workflow-version }
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
 
 Key | Required | Type | Description

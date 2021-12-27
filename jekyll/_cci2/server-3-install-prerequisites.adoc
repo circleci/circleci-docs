@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Installation Phase 1
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server application.
 :icons: font
 :toc: macro
 :toc-title:
@@ -20,6 +21,8 @@ image::server-install-flow-chart.png[Flow chart showing the installation flow fo
 
 === Install required software
 Download and install the following software before continuing:
+
+**Note about KOTS installation**: Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac users will need to grant a security exception.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -40,10 +43,30 @@ Download and install the following software before continuing:
 | {helmversion} or greater
 | Kubernetes Package Management
 
-| https://kots.io/[Kots]
-| {kotsversion} or greater
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux]. 
+| {kotsversion}
 | Replicated Kubernetes Application Management
+
+| https://github.com/vmware-tanzu/velero/releases[Velero CLI] 
+| Latest
+| Backup and restore capability
 |===
+
+==== AWS required software
+
+- https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] is installed.
+
+==== GCP required software
+
+- `gcloud` and `gsutil` are installed. You can set them up by installing Google Cloud SDK, which includes both, by referring to the https://cloud.google.com/sdk/docs/[documentation].
+
+For more information, see Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation.
+
+Below, you will find instructions for creating a server 3.x backup on AWS and GCP.
+
+==== S3 compatible storage required software
+
+- https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] is installed and configured for your storage provider.
 
 === Create a Kubernetes cluster
 CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
@@ -78,8 +101,8 @@ Supported Kubernetes versions:
 | CircleCI Version
 | Kubernetes Version
 
-| 3.0.0 - 3.2.x
-| < 1.22
+| 3.0.0 - 3.2.1
+| < 1.21
 
 | 3.3.x+
 | >= 1.16
@@ -147,6 +170,9 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 ```
 
 === Create a new GitHub OAuth app
+
+CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain then images will fail to load.
+
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
 . In your browser navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
@@ -286,7 +312,78 @@ aws iam create-user --user-name circleci-server
     {
       "Effect": "Allow",
       "Action": [
-        "s3:*"
+        "s3:PutAnalyticsConfiguration",
+        "s3:GetObjectVersionTagging",
+        "s3:CreateBucket",
+        "s3:GetObjectAcl",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:DeleteBucketWebsite",
+        "s3:PutLifecycleConfiguration",
+        "s3:GetObjectVersionAcl",
+        "s3:PutObjectTagging",
+        "s3:DeleteObject",
+        "s3:DeleteObjectTagging",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetObjectRetention",
+        "s3:GetBucketWebsite",
+        "s3:GetJobTagging",
+        "s3:DeleteObjectVersionTagging",
+        "s3:PutObjectLegalHold",
+        "s3:GetObjectLegalHold",
+        "s3:GetBucketNotification",
+        "s3:PutBucketCORS",
+        "s3:GetReplicationConfiguration",
+        "s3:ListMultipartUploadParts",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:PutBucketNotification",
+        "s3:DescribeJob",
+        "s3:PutBucketLogging",
+        "s3:GetAnalyticsConfiguration",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetLifecycleConfiguration",
+        "s3:GetInventoryConfiguration",
+        "s3:GetBucketTagging",
+        "s3:PutAccelerateConfiguration",
+        "s3:DeleteObjectVersion",
+        "s3:GetBucketLogging",
+        "s3:ListBucketVersions",
+        "s3:ReplicateTags",
+        "s3:RestoreObject",
+        "s3:ListBucket",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketPolicy",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetObjectVersionTorrent",
+        "s3:AbortMultipartUpload",
+        "s3:PutBucketTagging",
+        "s3:GetBucketRequestPayment",
+        "s3:GetAccessPointPolicyStatus",
+        "s3:GetObjectTagging",
+        "s3:GetMetricsConfiguration",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutMetricsConfiguration",
+        "s3:PutObjectVersionTagging",
+        "s3:GetBucketVersioning",
+        "s3:GetBucketAcl",
+        "s3:PutInventoryConfiguration",
+        "s3:GetObjectTorrent",
+        "s3:PutBucketWebsite",
+        "s3:PutBucketRequestPayment",
+        "s3:PutObjectRetention",
+        "s3:GetBucketCORS",
+        "s3:GetBucketLocation",
+        "s3:GetAccessPointPolicy",
+        "s3:GetObjectVersion",
+        "s3:GetAccessPoint",
+        "s3:GetAccountPublicAccessBlock",
+        "s3:ListAllMyBuckets",
+        "s3:ListAccessPoints",
+        "s3:ListJobs"
       ],
       "Resource": [
         "arn:aws:s3:::<YOUR_BUCKET_NAME>",

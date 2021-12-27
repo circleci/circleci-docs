@@ -10,13 +10,13 @@ version:
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI server v3.x build services installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
+Before you begin with the CircleCI server v3.x execution installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
 
 NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
-== Phase 3: Build services installation
+== Phase 3: Execution environment installation
 
 === Output Processor 
 ==== Overview 
@@ -205,7 +205,7 @@ Once you have successfully cloned the repository you can follow it from within y
 
 .Contexts
 [.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=3*, options="header", stripes=even]
 |===
 |Name
 |Environmental Variable Key
@@ -312,7 +312,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -326,7 +326,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       ],
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-server-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -375,7 +375,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-server-vm-service"
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
         }
       }
     },
@@ -403,15 +403,15 @@ Create a `policy.json` file with the following content. You should fill in Clust
 Once you have created the policy.json file attach it to an IAM policy and created user. 
 +
 ```bash
-aws iam put-user-policy --user-name circleci-server-vm-service --policy-name circleci-server-vm-service --policy-document file://policy.json
+aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
 ```
 
 . *Create an access key and secret for the user*
 +
-If you have not already, you will need an access key and secret for the `circleci-server-vm-service` user. You can create that by running the following command:
+If you have not already, you will need an access key and secret for the `circleci-vm-service` user. You can create that by running the following command:
 +
 ```bash
-aws iam create-access-key --user-name circleci-server-vm-service
+aws iam create-access-key --user-name circleci-vm-service
 ```
 
 . *Configure Server*
