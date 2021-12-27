@@ -6,6 +6,7 @@ categories:
 description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -235,7 +236,7 @@ workflows:
 
 The workflows section will tie together both the `test` and `deploy` jobs into sequential steps in the build process.
 
-You can read more about publishing npm packages to packagecloud on the CircleCI blog post: [Publishing npm Packages Using CircleCI 2.0](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
+You can read more about publishing npm packages to packagecloud on the CircleCI blog post: [Publishing npm Packages Using CircleCI](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
 
 ## packagecloud API の使用方法
 {: #using-the-packagecloud-api }
@@ -244,7 +245,7 @@ Packagecloud also provides a robust API to manage package repositories. You can 
 
 {:.no_toc}
 
-## See also
+## 関連項目
 {: #see-also }
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)

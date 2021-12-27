@@ -7,7 +7,8 @@ categories:
   - language-guides
 order: 7
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -205,7 +206,7 @@ jobs:
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2 
 jobs: # A basic unit of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     # directory where steps are run
@@ -225,20 +226,7 @@ jobs: # A basic unit of work in a run
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # environment variables for the Postgres container.
-          version: 2
-jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: circleci/python:3.6.4 # 各ジョブで Docker Executor のイメージを定義する必要があり、後続のジョブでは別のイメージを定義できます
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2 # サービス コンテナの指定方法を示す例
-        environment:
           POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-        POSTGRES_USER: root
           POSTGRES_DB: circle_test
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory

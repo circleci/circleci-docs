@@ -173,7 +173,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 === 手順 3 - Velero のインストールと起動
 
 * 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
-Make sure that you pass the correct file name containing the AWS credentials that you have created in <<手順 2 - Velero の権限の設定, Step 2>>.
+Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
 NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
@@ -227,7 +227,7 @@ BUCKET=<YOUR_BUCKET>
 gsutil mb gs://$BUCKET/
 ----
 
-=== Step 2 - Setup permissions for Velero
+=== 手順 2 - Velero の権限の設定
 
 CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[[GKE のドキュメント]]を参照してください。
 
@@ -374,9 +374,8 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 以下の手順では、S3 互換オブジェクト ストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
-また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 
-これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[[こちら]] の Velero ドキュメントを元にしています。
+これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[こちら] の Velero ドキュメントを元にしています。
 
 === 手順 1 - `mc` クライアントの設定
 

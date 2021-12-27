@@ -14,7 +14,7 @@ circleci namespace create <my-namespace> github <my-gh-org>
 ```
 **注**: CircleCI CLI から名前空間を作成する場合は、必ず VCS プロバイダーを指定してください。
 
-1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。 **[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を作成する場合:
+1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。 **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**. **[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を作成する場合:
 ```sh
 circleci orb create <my-namespace>/<my-orb-name>
 ```
@@ -65,7 +65,7 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 circleci orb list <my-namespace>
 ```
 
-To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace> --private
 ```

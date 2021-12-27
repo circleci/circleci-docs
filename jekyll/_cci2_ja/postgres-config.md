@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "データベースの設定例"
 short-title: "データベースの設定例"
-description: "PostgreSQL の設定例"
+description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 order: 35
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -93,7 +94,7 @@ jobs:
 {: #example-environment-setup }
 {:.no_toc}
 
-CircleCI 2.0 では、複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベースの設定は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
+複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベースの設定は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
 
 1.  DATABASE_URL 環境変数 (設定されている場合)
 2.  `config.yml` ファイル内の該当する環境の test セクションの設定 (通常、テスト スイートでは `test`)。

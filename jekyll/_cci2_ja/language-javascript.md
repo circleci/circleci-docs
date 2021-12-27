@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "Node.js - JavaScript チュートリアル"
 short-title: "JavaScript"
-description: "CircleCI 2.0 での JavaScript および Node.js を使用したビルドとテスト"
+description: "Building and Testing with JavaScript and Node.js on CircleCI"
 categories:
   - language-guides
 order: 5
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -79,4 +80,4 @@ Node Orb の `test` コマンドにより、オプションのパラメータを
 
 - デプロイ ターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)ドキュメントを参照してください。
 - その他のパブリック JavaScript プロジェクトの設定例については、[設定例]({{ site.baseurl }}/2.0/examples/)のページを参照してください。
-- CircleCI 2.0 を初めて使用する場合は、[プロジェクトの詳細]({{ site.baseurl }}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
+- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

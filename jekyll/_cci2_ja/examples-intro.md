@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "サンプル"
 short-title: "サンプル"
-description: "CircleCI 2.0 サンプルの紹介"
+description: "CircleCI Examples Introduction"
 categories:
-  - migration
+  - 移行
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 

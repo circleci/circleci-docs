@@ -5,7 +5,8 @@ short-title: "コンテキストの使用"
 description: "プロジェクト間で共有できる安全なリソース"
 order: 41
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -18,37 +19,40 @@ version:
 {: #overview }
 {:.no_toc}
 
-コンテキストは、CircleCI アプリケーションの [Organization Settings (Organization の設定)] ページで作成します。 コンテキストを表示、作成、編集するには、対象の Organization のメンバーである必要があります。 コンテキストを作成したら、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションで `context` キーを適切に設定することで、キーを設定されたジョブに当該コンテキストに関連付けられた環境変数を受け渡すことができます。
+コンテキストは、CircleCI アプリケーションの [Organization Settings (Organization の設定)] ページで作成および管理します。 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
 
-{:.tab.contextsimage.Server}
+{:.tab.contextsimage.Server_3}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server_2}
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
-To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set.
+[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
 
-Context names must be unique for each GitHub or Bitbucket organization.
+コンテキスト名は、各 GitHub 組織または Bitbucket 組織内で一意でなければなりません。
 
-**Note:** Contexts created with the initial default name of `org-global` will continue to work.
+**注意:** 最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 
-### CircleCI がプライベート サーバーにインストールされる場合のコンテキストの命名規則
+### CircleCI Server のコンテキスト名の設定
 {: #context-naming-for-circleci-server }
 {:.no_toc}
 
-For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error.
+お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
 
-### Organization とリポジトリの名称変更
+### 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
 
-If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+過去に CircleCI に接続した組織やリポジトリの名前を変更する場合は、以下の手順を参考にしてください。
 
-1. VCS 上で Organization 及びリポジトリの名称を変更します。
-2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
-3. CircleCI のプラン、プロジェクト一覧、各種設定が正しく引き継がれていることを確認します。
-4. 必要な場合、上記 3 の確認後、古い Org 名/リポジトリ名を再利用し新しい Org/リポジトリを作成します。
+1. VCS 上で 組織名およびリポジトリ名を変更します。
+2. CircleCI アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびレポジトリ名を使用します。
+3. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
+4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
 
-    **注意**: 上記の手順で変更を行わない場合、**環境変数**、**コンテキスト**を含む、 Organization およびレポジトリの設定が失われる可能性があります。
+    **注意**: 上記の手順で変更を行わない場合、**環境変数**や**コンテキスト**などの組織やレポジトリの設定にアクセスができなくなる可能性があります。
 
 ## コンテキストの作成と使用
 {: #creating-and-using-a-context }
@@ -59,7 +63,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
-    **Note**: If you are using CircleCI Server, Organization Settings can still be accessed as normal using the **Settings** link in the main navigation.
+    **Note**: If you are using CircleCI server, Organization Settings can still be accessed as normal using the **Settings** link in the main navigation.
 
 2. [Create Context (コンテキストの作成)] ボタンをクリックし、コンテキストに一意な名前をつけます。 ダイアログ ボックス内の [Create Context (コンテキストの作成)] ボタンをクリックすると、コンテキストが作成され、コンテキストの一覧に表示されます。 このとき、作成されたコンテキストの [Security (セキュリティ)] の列には、当該コンテキストに Organization 内の任意のユーザーがアクセス可能であることを示す `All members (メンバー全員)` の表示が出ます。
 
@@ -93,7 +97,33 @@ jobs:
           command: echo $MY_ENV_VAR
 ```
 
-{:.tab.contexts.Server}
+{:.tab.contexts.Server_3}
+```yaml
+version: 2.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - run-tests:
+          context:
+            - org-global
+            - my-context
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+```
+
+{:.tab.contexts.Server_2}
 ```yaml
 version: 2.1
 
@@ -142,7 +172,7 @@ You can combine several contexts for a single job by just adding them to the con
 ## コンテキストの制限
 {: #restricting-a-context }
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's GitHub teams. If you are using CircleCI Server with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's GitHub teams. If you are using CircleCI server v2.x with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
@@ -174,7 +204,7 @@ Only members of the selected groups may now use the context in their workflows o
 
 Changes to security group restrictions for Contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the Org Administrator to refresh permissions once the change has been made. The **Refresh Permissions** button can be found on the [Account Integrations](https://app.circleci.com/settings/user) page.
 
-Administrators of CircleCI Server installations can find the **Refresh Permissions** button at `<circleci-hostname>/account`.
+Administrators of CircleCI server installations can find the **Refresh Permissions** button at `<circleci-hostname>/account`.
 
 ### 制限付きコンテキストと承認ジョブの組み合わせ
 {: #approving-jobs-that-use-restricted-contexts }
@@ -319,7 +349,7 @@ _If this is your first time using the CLI, follow the instructions on [CircleCI 
 
 To create an environment variable using our CLI, perform the following steps:
 
-1. If you have not already done so, find the right context name that will contain the new environment variable. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
+1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 2. 新しい環境変数を対象コンテキスト配下に保存します。 下記コマンドを実行します: `circleci context store-secret <vcs タイプ> <org 名> <コンテキスト名> <環境変数名>`
 
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
@@ -339,7 +369,7 @@ To create an environment variable using the API, call the [Add Environment Varia
 
 To delete an environment variable using the CLI, perform the following steps:
 
-1. 必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
+1. まだ削除していない場合は、削除する環境変数を含むコンテキスト名を検索します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 2. 当該コンテキスト内のローテーションの対象である環境変数を確認します。 下記コマンドを実行します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
 
@@ -388,7 +418,7 @@ To rotate an environment variable from our API, call the [Update Environment Var
 
 ## シークレットのマスキング
 {: #secrets-masking }
-_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
+_Secrets masking is not currently available on self-hosted installations of CircleCI server_
 
 Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security, CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that contains env var values.
 
@@ -403,5 +433,5 @@ The value of the context will not be masked in the build output if:
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/ja/2.0/env-vars/)
+* [CircleCI 環境変数の説明]({{ site.baseurl }}/ja/2.0/env-vars/)
 * [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)

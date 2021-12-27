@@ -4,6 +4,7 @@ title: "チュートリアル"
 description: "チュートリアルおよびガイド付き 2.0 サンプル アプリケーション"
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -17,7 +18,7 @@ version:
 | [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
 {: class="table table-striped"}
 
-## Sample projects with companion guides
+## ガイド付きサンプルプロジェクト
 {: #sample-projects-with-companion-guides }
 
 サンプル プロジェクトを参照すると、アプリケーションの記述に使用する言語やフレームワークの構築に役立ちます。
