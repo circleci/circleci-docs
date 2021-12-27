@@ -6,6 +6,7 @@ version:
 = CircleCI Runner API
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document contains all the external facing endpoints for the CircleCI runner API.
 :icons: font
 :toc: macro
 :toc-title:
@@ -64,7 +65,7 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 ==== 認証方法
 
 * Circle-Token (個人認証)
-* Browser Session Authentication
+* ブラウザー セッション認証
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
 * ローンチ トークン
 
@@ -92,7 +93,7 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 | 指定した名前空間でランナーの一覧を絞り込みます。
 |===
 
-==== Examples
+==== サンプル
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
@@ -104,72 +105,72 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
 
-==== Response
+==== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
-| Description
-| Format
+| ステータス
+| お問い合わせ内容
+| 形式
 
 |200
-|エージェントの一覧
+|ランナーの一覧
 |JSON
 |===
 
-==== Response Schema
+==== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
 | 名前
-| 型
+| タイプ
 | 必須
-| 説明
+| お問い合わせ内容
 
 |items
-|[object]
+|オブジェクト配列
 |true
-|array containing the runners
+|ランナーの配列
 
 |resource_class
 |string
-|必須
+|true
 |ランナーのリソース クラス
 
 |hostname
 |string
-|必須
+|true
 |ランナーのホスト名
 
 |name
 |string
-|必須
+|true
 |ランナー名
 
 |first_connected
-|string (date-time)
+|文字列 (日付と時刻)
 |true
-|first time the runner was connected
+|ランナーが最初に接続した日時
 
 |last_connected
-|string (date-time)
+|文字列 (日付と時刻)
 |true
-|last time the runner was connected
+|ランナーが最後に接続した日時
 
 |last_used
-|string (date-time)
+|文字列 (日付と時刻)
 |true
-|last time the runner was used to run a job
+|ジョブの実行にランナーを最後に使用した日時
 
 |version
 |string
-|必須
+|true
 |実行中のローンチ エージェントのバージョン
 |===
 
-==== Example
+==== 例
 
 ```sh
 {
@@ -190,71 +191,71 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 === GET /api/v2/runner/tasks
 
-Get the number of unclaimed tasks for a given resource class.
+指定したリソース クラスで未処理のタスクの数を取得します。
 
-==== Authentication Methods
+==== 認証方法
 
-* Circle-Token (personal authentication)
-* Browser Session Authentication
+* circle-token (個人認証)
+* ブラウザー セッション認証
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* ローンチ トークン
 
-==== Request
+==== リクエスト
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
 | 名前
-| 型
+| タイプ
 | 入力
 | 必須
-| 説明
+| お問い合わせ内容
 
 | resource-class
 | string
 | クエリ
-| 必須
+| true
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
-==== Examples
+==== サンプル
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
-==== Response
+==== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
-| Description
-| Format
+| ステータス
+| お問い合わせ内容
+| 形式
 
 |200
-|Number of unclaimed tasks
+|未処理のタスクの数
 |JSON
 |===
 
-==== Response Schema
+==== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
 | 名前
-| 型
+| タイプ
 | 必須
-| 説明
+| お問い合わせ内容
 
 |unclaimed_task_count
-|int
+|整数
 |true
-|number of unclaimed tasks
+|未処理のタスクの数
 |===
 
-==== Example
+==== 例
 
 ```json
 {
@@ -266,72 +267,72 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 
 Get the number of running tasks for a given resource class.
 
-==== Authentication Methods
+==== 認証方法
 
-* Circle-Token (personal authentication)
-* Browser Session Authentication
+* circle-token (個人認証)
+* ブラウザー セッション認証
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
 
-==== Request
+==== リクエスト
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Input
-| Required
-| Description
+| 名前
+| タイプ
+| 入力
+| 必須
+| お問い合わせ内容
 
 | resource-class
 | string
-| query
+| クエリ
 | true
-| filters tasks by specific resource class.
+| 指定したリソース クラスでタスクを絞り込みます。
 |===
 
-==== Examples
+==== サンプル
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
-==== Response
+==== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
-| Description
-| Format
+| ステータス
+| お問い合わせ内容
+| 形式
 
 |200
 |Number of running tasks
 |JSON
 |===
 
-==== Response Schema
+==== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Required
-| Description
+| 名前
+| タイプ
+| 必須
+| お問い合わせ内容
 
 |running_runner_tasks
-|int
+|整数
 |true
 |number of running tasks
 |===
 
-==== Example
+==== 例
 
 ```json
 {
-    "unclairunning_runner_tasksmed_task_count": 42
+    "running_runner_tasks": 42
 }
 ```
 
