@@ -94,7 +94,7 @@ jobs:
 {: #example-environment-setup }
 {:.no_toc}
 
-You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
+複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベースの設定は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
 
 1.  DATABASE_URL 環境変数 (設定されている場合)
 2.  `config.yml` ファイル内の該当する環境の test セクションの設定 (通常、テスト スイートでは `test`)。
