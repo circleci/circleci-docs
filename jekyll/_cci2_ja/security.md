@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "セキュリティ機能"
 category:
-  - administration
+  - 管理
 order: 5
 description: "CircleCI のセキュリティ機能"
 ---

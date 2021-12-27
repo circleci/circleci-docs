@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
 title: "設定ファイルの概要"
-description: "CircleCI 2.0 設定ファイルのランディング ページ"
+description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -61,7 +62,7 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 
 ## パート 2: ビルドのための情報と準備
 {: #part-two-info-and-preparing-to-build }
-That was nice but let’s get real.  Delivery graphs start with code.  In this example we will add a few lines that will get your code and then list it.  We will also do this in a second run.
+That was nice but let’s get real.  Delivery graphs start with code.  この例では、コードを取得してリストするための行を追加します。  We will also do this in a second run.
 
 1. まだパート 1 の手順を実行していない場合は、パート 1 を完了して、簡単な `.circleci/config.yml` ファイルをプロジェクトに追加してください。
 
@@ -93,7 +94,7 @@ jobs:
 ### 学習ポイント
 {: #learnings }
 {:.no_toc}
-Although we’ve only made two small changes to the config, these represent significant organizational concepts.
+コンフィグに 2つの小さな変更を加えただけですが、これらは重要な組織的概念を表しています。
 
 - 行 7: `checkout` コマンドは、ジョブにコンテキストを与える、組み込みの予約語の一例です。  この例では、ビルドを開始できるように、このコマンドがコードをプル ダウンします。
 - 行 13 ～ 17: `build` ジョブの 2 つ目の run は、チェックアウトの内容を (`ls -al` で) リストします。  これで、ブランチを操作できるようになります。

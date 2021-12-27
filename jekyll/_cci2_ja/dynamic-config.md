@@ -73,6 +73,6 @@ CircleCI のダイナミック コンフィグを使用する際のパイプラ�
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
 Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.

@@ -101,7 +101,7 @@ API では、`project_slug` というトリプレットの文字列表現が導�
 
 `project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更される可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式で用いられるはずです。
 
-![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
+![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
 ## レート制限
 {: #rate-limits }
@@ -133,22 +133,22 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 オンボーディングにアクセスするには、アプリケーションのサイドバーにある [Add Projects (プロジェクトの追加)] をクリックするか、リンク： https://onboarding.circleci.com/project-dashboard/{VCS}/{org_name}を開きます。ここでは、`VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` には組織名または個人の VCS ユーザー名を指定します。 オンボーディングリストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 オンボーディングが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれます。
+2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 You can either visit the CircleCI application and click on "Projects" in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/, where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the list and click Set Up Project. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. この例では、 `config.yml` には以下の内容が含まれます。
 
     ```yaml
     # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/2.0/configuration-reference
     version: 2.1
     # Orb という設定パッケージを使用します。
     orbs:
-      # welcome-orb で依存関係を宣言します。
-      welcome: circleci/welcome-orb@0.4.1
-      # 一連のジョブのオーケストレーションまたはスケジューリングをします。
+      # Declare a dependency on the node orb
+      node: circleci/node@4.7.0
+      # Orchestrate or schedule a set of jobs
       workflows:
-      # ワークフロー名を "welcome"にします。
-      welcome:
-      # コンテナで  welcome/run ジョブを実行します。 
-        jobs:
-        - welcome/run
+      # Name the workflow "test_my_app"
+        test_my_app:
+      # Run the node/test job in its own container
+          jobs:
+          - node/test
     ```
 
 3. [パーソナル API トークン](https://circleci.com/account/api)のページで API トークンを追加します。 APIトークンを生成した後は、必ず書き留めて安全な場所に保管してください。
@@ -291,7 +291,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 {: #get-project-details }
 {:.no_toc}
 
-プロジェクトが帰属する組織の名前や、プロジェクトをホストするバージョンコントロールシステム（vcs）など、特定のプロジェクトに関する情報を取得できれば、と思うことがあるでしょう。 CircleCI API では、 `project/{project-slug}` エンドポイントに `project-slug` パラメータを渡して GET リクエストを一度行えば、 そのような情報やその他の情報を返すことができます。
+プロジェクトが帰属する組織の名前や、プロジェクトをホストするバージョンコントロールシステム（vcs）など、特定のプロジェクトに関する情報を取得できれば、とお思いではないですか。 CircleCI API では、 `project/{project-slug}` エンドポイントに `project-slug` パラメータを渡して GET リクエストを一度行えば、 そのような情報やその他の情報を返すことができます。
 
 この API 呼び出しを行う際に、 `project-slug` という新しい概念があることに気づかれるかもしれません。 `project-slug` は、以下の形式の「トリプレット」です。
 
@@ -309,11 +309,11 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 
 CircleCI API v2 では、プロジェクト関連の API エンドポイントがいくつか用意されていますが、 `/project/{project-slug}` エンドポイントへの GET リクエストでは、 `project_slug` パラメーターをリクエストと共に渡すことで、特定のプロジェクトに関する詳細情報を返すことができます。
 
-**注意:** 中括弧 `{}`がある場合は、リクエスト内で手動で入力しなければならない変数を表しています。
+**注意:** 中括弧 `{}`がある場合は、リクエスト内で手動で入力する変数を表しています。
 
 プロジェクトの詳細を返すには、以下の手順で行います。
 
-1. この GET API コールでは、  `parameters` キーの下に `project_slug` が定義されています(<project_type>/<org_name>/<repo_name>) パラメータを、 `curl` リクエストの JSON ペイロードで返したい場合は、以下のようにします。
+1. この GET API 呼び出しでは、  `parameters` キーの下に `project_slug` を定義します (<project_type>/<org_name>/<repo_name>) パラメータを、 `curl` リクエストの JSON ペイロードで返したい場合は、以下のようにします。
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
@@ -345,19 +345,19 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
 前述のプロジェクトの詳細を取得するための API リクエストと同様に、ジョブの詳細を取得するための API リクエストでは、1 回の API リクエストで CircleCI API から特定のジョブ情報を取得することができます。 ジョブの実行状況、使用されたリソース（パイプラインや Executor タイプ など）、ジョブが終了するまでにかかった時間に関する情報を知りたい場合、ジョブ情報の取得は非常に便利です。
 
-ジョブはステップの集合体であることを忘れないでください。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `machine` には、指定されない場合はデフォルトのイメージが含まれ、`docker`にはプライマリコンテナに使用するイメージを指定し、`macos`には、Xcode のバージョンを指定し、`windows` には、Windows Orb を使用します。.
+ジョブはステップの集合体であることを忘れないでください。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `machine` には、指定されない場合はデフォルトのイメージが含まれ、`docker`にはプライマリコンテナに使用するイメージを指定し、`macos`には Xcode のバージョンを指定し、`windows` には Windows Orb を使用します。.
 
-#### ステップ
+#### 手順
 {: #steps }
 {:.no_toc}
 
 CircleCI API v2 で利用できるジョブ関連の API エンドポイントのうち、ジョブの詳細情報を受け取るために呼び出す特定のエンドポイントがあります。  `GET /project/{project_slug}/job/{job-number}`エンドポイントへの API 呼び出しでは、 `project-slug` パラメーターと `job-number` パラメーターを渡すことで、特定のジョブに関する詳細な情報を返すことができます。
 
-**注意:** 中括弧 `{}`がある場合は、リクエスト内で手動で入力しなければならない変数を表しています。
+**注意:** 下記の例では中括弧 `{}`がある場合は、リクエスト内で手動で入力する変数を表しています。
 
-ジョブの詳細を返すには、以下の手順で行います。
+ジョブの詳細を返すには、以下の手順を実行します。
 
-1. この GET API 呼び出しでは、 `parameters` キーの下に、`curl`リクエストの JSON ペイロードに返したい `project_slug` パラメーターと `job_number` パラメーターを以下のように定義します。
+1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` パラメーターと `job_number` パラメーターを、 `parameters` キーの下に以下のように定義します。
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
@@ -422,25 +422,25 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 ### アーティファクトのダウンロード
 {: #download-artifacts }
 
-The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
 
-#### Steps
+#### 手順
 {: #steps }
 {:.no_toc}
 
 
 
-1. First, we will ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
+1. まず、APIトークンが環境変数として設定されていることを確認します。 認証時にすでに行っているかもしれませんが、そうでない場合は、ターミナルでパーソナル API Tトークンに置き換えて以下のコマンドを実行してください。
 
     ```
     export CIRCLECI_TOKEN={your_api_token}
     ```
 
-2.  Next, retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
+2.  次に、アーティファクトを取得したいジョブのジョブ番号を取得します。 ジョブ番号は、UIの「ジョブの詳細」ページのパンくずリスト、または URL で確認することができます。
 
-    ![Job Number]({{ site.baseurl }}/assets/img/docs/job-number.png)
+    ![ジョブ番号]({{ site.baseurl }}/assets/img/docs/job-number.png)
 
-3.  Next, use the `curl` command to return a list of artifacts for a specific job.
+3.  次に、 `curl` コマンドを使用して、特定のジョブのアーティファクトのリストを返します。
 
     ```sh
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
@@ -449,7 +449,7 @@ The following section details the steps you need to follow to download artifacts
     --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
 
-    You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
+    選択したジョブに関連するアーティファクトがある場合、アーティファクトのリストが返ってきます。 以下は、ドキュメントをビルドするジョブのアーティファクトをリクエストしたときの出力の抜粋です。
 
     ```
     {
@@ -469,7 +469,7 @@ The following section details the steps you need to follow to download artifacts
     },
     ```
 
-4. Next, you may extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following command, remembering to substitute your own values in the request:
+4. 次に、この API 呼び出しを拡張して、アーティファクトをダウンロードすることができます。 アーティファクトをダウンロードしたい場所に移動して、リクエストの値をご自身の値に変更して以下のコマンドを実行してください。
 
      ```sh
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
@@ -477,25 +477,25 @@ The following section details the steps you need to follow to download artifacts
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
     | grep -o 'https://[^"]*' \
-    | wget -v -i -
+    | wget --header="Circle-Token: $CIRCLECI_TOKEN" -v -i -
     ```
 
-    **Note:** `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
+    **注意: ** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
 
-### Gather insights
+### インサイトの収集
 {: #gather-insights }
 
-The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. By making API calls to these endpoints, you can better understand how to optimize your workflows and jobs so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containing information about metrics and credit usage.
+CircleCI API v2 には、ワークフローや個々のジョブに関する詳細な情報を取得できるエンドポイントも含まれています。 これらのエンドポイントに API 呼び出しを行うことで、ワークフローやジョブを最適化する方法をより深く理解することができ、クレジットの使用量や消費を最小限に抑えながらワークフローのパフォーマンスを向上させることができます。 以下の例では、メトリクスやクレジットの使用状況に関する情報を含む単一のワークフローに関する情報を返す方法を説明しています。
 
-#### Returning workflow metrics
+#### ワークフローメトリクスを返す方法
 {: #returning-workflow-metrics }
 {:.no_toc}
 
-To return aggregated data for an individual workflow, perform the steps listed below.
+個々のワークフローの集計データを返すには、以下の手順を実行します。
 
-**Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+**注意:** 中括弧 `{}`がある場合は、リクエスト内で手動で入力する変数を表しています。
 
-1. For this GET API call, under the `parameters` key, define the `project_slug` in your `curl` request as follows:
+1. この GET API 呼び出しでは、 `parameters` キーの下に、  `curl` リクエスト内で`project_slug` を以下のように定義します。
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
@@ -503,7 +503,7 @@ To return aggregated data for an individual workflow, perform the steps listed b
     --header 'Accept: application/json'
     --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
-2. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
+2. `project-slug` を定義して API リクエストを行うと、以下の例のようなフォーマットされていない JSON テキストを受け取ります。
 
 ```json
 {
@@ -575,27 +575,27 @@ To return aggregated data for an individual workflow, perform the steps listed b
 }
 ```
 
-Notice that in this JSON response, you will receive detailed metrics for the set of workflows that were run, including:
+この JSON レスポンスでは、実行された一連のワークフローについて以下のような詳細なメトリクスを受け取ります。
 
-- `success_rate` - The ratio of successful runs (only those with a "success" status) over the total number of runs (any status) in the aggregation window.
-- `total_runs` - The total number of runs that were performed.
-- `failed_runs` - The number of runs that failed.
-- `successful_runs` - The number of runs that were successful.
-- `throughput` - The average number of builds per day.
-- `mttr` - The Mean Time to Recovery (MTTR). This is the average time it takes, when a CI build fails, to get it back to a "success" status.
-- `duration_metrics` - A collection of specific metrics and measurements that provide the duration of the workflow, which includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`.
-- `total credits used` - The total number of credits that were used during the build.
-- `windows_start & windows_end` - The time the build was initiated, and then completed.
+- `success_rate`: 集計画面内の合計実行数（ステータスは問わない）に対する成功した実行数 (「SUCSESS」ステータスのもののみ) の比率
+- `total_runs`:  実行数の合計
+- `failed_runs`: 失敗した実行数
+- `successful_runs`: 成功した実行数
+- `throughput` : 1日あたりの平均ビルド数
+- `mttr`: MTTR (平均復旧時間)。 CI ビルドが失敗した時に「SUCCESS」ステータスに戻るまでの平均時間です。
+- `duration_metrics`: ワークフローの実行時間を示す一連の具体的なメトリクスと測定値で、`min`、`max`、`median`、 `mean`、`p95`、`standard_deviation` が含まれます。
+- `total credits used`: ビルド中に使用されたクレジットの合計数
+- `windows_start & windows_end` : ビルドの開始時間と完了時間
 
-**Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+**注意**: 上記は、一部のビルドの例です。 このコマンドを実行すると、最大 250 個の異なるビルドが表示され、より詳細に確認することができます。
 
-#### Reviewing individual job metrics
+#### 個々のジョブメトリクスの確認
 {: #reviewing-individual-job-metrics }
 {:.no_toc}
 
-Now that you have retrieved aggregated data for up to 250 different jobs, you will most likely want to review specific information about a single job, or smaller number of jobs, to ensure that your jobs are running efficiently. To review an individual job, follow the steps below.
+最大 250 個の異なるジョブの集計データを取得した後は、ジョブが効率的に実行されているかどうかを確認するために、一つのジョブまたは少数のジョブに関する具体的な情報を確認しましょう。 個々のジョブの確認は、以下の手順で行います。
 
-1. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following insights endpoint:
+1. ワークフローのデータを返すために行った前回の API 呼び出しで使用した `project-slug` を使用して、以下のインサイト エンドポイントに GET API 呼び出しを行います。
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
@@ -603,7 +603,7 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
     --header 'Accept: application/json'
     --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
-4. Once you call this insights endpoint, you will receive a JSON output similar to the example shown below.
+4. このインサイト エンドポイントを呼び出すと、以下の例のような JSON 出力が得られます。
 
 ```json
 {
@@ -657,19 +657,20 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
     "stopped_at" : "2020-01-20T05:38:21.392Z",
     "credits_used" : 193056
   },
+
 ```
 
-When reviewing each individual review job, please note that the following information returned for each job:
+個々のジョブを確認する際は、各ジョブに対して以下の情報が返されることに注意してください。
 
-- `id` - The ID associated with the individual job.
-- `status` - The status of the job.
-- `duration` - The total time of the job, in seconds.
-- `created_at` - The time the job started.
-- `stopped_at` - The time the job ended.
-- `credits_used` - The number of credits used during the job.
+- `id`: 個々のジョブの ID
+- `status`: ジョブのステータス
+- `duration`: ジョブの合計時間 (秒単位)
+- `created_at`: ジョブの開始時間
+- `stopped_at`: ジョブの完了時間
+- `credits_used`: そのジョブに使用されたクレジット
 
-## Reference
+## 参考情報
 {: #reference }
 
-- Refer to [API V2 Introduction]({{site.baseurl}}/2.0/api-intro/) for high-level information about the CircleCI V2 API.
-- Refer to [API V2 Reference Guide]({{site.baseurl}}/api/v2/) for a detailed list of all endpoints that make up the CircleCI V2 API.
+- CircleCI V2 API に関する詳細情報は、[API V2 の概要]({{site.baseurl}}/2.0/api-intro/) をご覧ください。
+- CircleCI V2 API を構成するすべてのエンドポイントの詳細なリストは、[API V2 リファレンスガイド]({{site.baseurl}}/api/v2/)をご覧ください。

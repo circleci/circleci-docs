@@ -81,7 +81,7 @@ https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-t
 
 ### 過去のジョブとビルドの履歴がありません。どこに移動されたのですか？
 * 既存のジョブとビルドの履歴はすべて、[Legacy Jobs (レガシージョブ)] ビューに移動されます。  ジョブの全履歴は、以下のいずれかの方法で表示できます。
-    ** [Projects (プロジェクト)] -> [PROJECT_NAME] の順に選択し、プロジェクトのビルド履歴下部にある `{startsb}legacy jobs view (レガシー ジョブ ビュー){endsb}` リンクを選択する。
+    ** [Projects (プロジェクト)] -> [PROJECT_NAME] の順に選択し、プロジェクトのビルド履歴下部にある `[legacy jobs view (レガシー ジョブ ビュー)]` リンクを選択する。
     ** Using the following URL pattern: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
     ** For a specific job, append a job number to the URL: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
 

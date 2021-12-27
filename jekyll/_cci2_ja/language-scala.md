@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Scala"
 short-title: "言語ガイド: Scala"
-description: "CircleCI 2.0 言語ガイド: Scala"
+description: "CircleCI 言語ガイド: Scala"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -30,7 +31,7 @@ version:
 ## 前提条件
 {: #prerequisites }
 
-CircleCI 2.0 では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
+CircleCI では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
 
 ```
 mkdir .circleci/
@@ -42,7 +43,7 @@ touch .circleci/config.yml
 ### Scala の config.yml ファイル
 {: #scala-configyml-file }
 
-最初に、新しく作成した `config.yml` を任意のテキスト エディタで開き、以下の CircleCI 2.0 スキーマをファイルに貼り付けます。 以下に、2.0 構成の全文を示します。
+To get started, open the newly created `config.yml` in your favorite text editor and paste the following CircleCI schema into the file. 以下に、2.0 構成の全文を示します。
 
 ```yaml
 version: 2
@@ -227,6 +228,6 @@ steps:
 {: #see-also }
 {:.no_toc}
 
-- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
 - デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。

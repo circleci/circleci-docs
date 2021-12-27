@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "2.0 プロジェクトのチュートリアル"
 short-title: "プロジェクトのチュートリアル"
-description: "Tutorial and sample config for a Flask project in CircleCI 2.0"
+description: "Tutorial and sample config for a Flask project in CircleCI"
 categories:
-  - migration
+  - 移行
 order: 3
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -125,7 +126,7 @@ jobs:
             FLASK_CONFIG: staging
 ```
 
-### Caching dependencies
+### 依存関係のキャッシュ
 {: #caching-dependencies }
 {:.no_toc}
 
@@ -218,7 +219,7 @@ jobs:
           background: true
 ```
 
-## Running tests
+## テストの実行
 {: #running-tests }
 
 このデモ アプリケーションでは、仮想の Python 環境が準備されており、unittest を使用してテストが実行されます。 テスト結果を XML ファイルとして保存するために、`unittest-xml-reporting` を使用します。 レポートと結果は `store_artifacts` ステップと `store_test_results` ステップで保存されます。
