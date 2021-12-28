@@ -49,14 +49,15 @@ As with the CircleCI legacy Container plan, CircleCI also supports a free-tier w
 | DOCKER LAYER CACHING | Efficiency features designed specifically for Docker, providing improved speed and efficiency |
 {: class="table table-striped"}
 
-
 ### Unlimited users
 
 When you use the free plan, you may have an unlimited number of users building and developing on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
 
 ### Expansive list of available resource classes
 
-On the free plan, you have the widest array of resource classes on Docker, Linux, Windows and macOS (coming soon) available to use. With this flexibility in choosing resource classes, you can be sure to choose the right compute resources for your job.
+When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows and macOS (coming soon) available to use. With this flexibility in choosing resource classes, you can be sure to choose the right compute resources for your job.
+
+For more information about these resources, please refer to the the [Executors and Images](https://circleci.com/docs/2.0/executor-intro/) page.
 
 ### Concurrency and test splitting
 
@@ -65,6 +66,10 @@ The ability to run multiple tests at the same time (concurrently) is a very powe
 For more information about how to utilize test splitting, refer to the [Running Tests In Parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-test-splitting-with-python-django-tests) page.
 
 ### Self hosted runners
+
+CircleCI runners allow you to use your own infrastructure for running jobs, providing more granular control of your own environment and flexibility in building and testing on a wide variety of architectures.
+
+For more information about using CircleCI runners, please see the [CircleCI Runner Overview](https://circleci.com/docs/2.0/runner-overview/) page.
 
 ### Flaky test detection
 
