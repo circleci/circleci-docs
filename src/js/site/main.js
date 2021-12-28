@@ -1,10 +1,14 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
+import { dateFormatAgoHelper } from '../dateFormatAgoHelper';
 
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
   singleLine: true,
 });
+
+const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
+const hideEvents = ['mouseout', 'mouseleave', 'blur'];
 
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
@@ -116,9 +120,6 @@ function renderVersionBlockPopover() {
       tooltip.removeAttribute('data-show');
       destroy();
     }
-
-    var showEvents = ['mouseenter', 'focus'];
-    var hideEvents = ['mouseleave', 'blur'];
 
     showEvents.forEach((event) => {
       badge.addEventListener(event, show);
@@ -271,8 +272,6 @@ $(document).ready(function () {
       }
     });
 
-  var showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
-  var hideEvents = ['mouseout', 'mouseleave', 'blur'];
   var clickEvents = ['click'];
 
   var makePopper = (icon) =>
@@ -401,4 +400,40 @@ $(document).ready(function () {
 });
 
 // Currently this function is only used for the insights table
-$(document).ready(highlightURLHash());
+$(highlightURLHash);
+
+// update date shown to be X ago
+$(function () {
+  // tooltip code for posted on time
+  const tooltiptime = document.getElementById('tooltip-time');
+  const timeposted = document.getElementById('time-posted-on');
+  let popperInstance = null;
+
+  showEvents.forEach((event) => {
+    timeposted.addEventListener(event, () => {
+      tooltiptime.setAttribute('data-show', '');
+      popperInstance = createPopper(timeposted, tooltiptime, {});
+    });
+  });
+
+  hideEvents.forEach((event) => {
+    timeposted.addEventListener(event, () => {
+      tooltiptime.removeAttribute('data-show');
+      if (popperInstance) {
+        popperInstance.destroy();
+        popperInstance = null;
+      }
+    });
+  });
+
+  if (
+    document.getElementById('time-posted-on') &&
+    document.getElementById('time-posted-ago')
+  ) {
+    const date = Date.parse(
+      document.getElementById('time-posted-on').getAttribute('datetime'),
+    );
+    document.getElementById('time-posted-ago').innerHTML =
+      dateFormatAgoHelper(date);
+  }
+});
