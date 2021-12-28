@@ -35,8 +35,11 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 ## Free plan
 {: #free-plan }
 
-As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free Plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient and fast. The table below lists some of these powerful features you will be able to use on the Free Plan.
+As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free Plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient and fast. 
 
+The free usage-based plan offers a set amount of build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory). With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
+
+The table below lists some of the features you will be able to use on the Free Plan.
 
 | Feature | Description |
 |-------|-------------|
@@ -50,53 +53,51 @@ As with the CircleCI legacy Container plan, CircleCI also supports a free-tier w
 {: class="table table-striped"}
 
 ### Unlimited users
+{: #unlimited-users }
 
 When you use the free plan, you may have an unlimited number of users building and developing on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
 
 ### Expansive list of available resource classes
+{: #expansive-list-of-available-resource-classes }
 
 When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows and macOS (coming soon) available to use. With this flexibility in choosing resource classes, you can be sure to choose the right compute resources for your job.
 
 For more information about these resources, please refer to the the [Executors and Images](https://circleci.com/docs/2.0/executor-intro/) page.
 
 ### Concurrency and test splitting
+{: #concurrency-and-test-splitting }
 
 The ability to run multiple tests at the same time (concurrently) is a very powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows. Because one of the most important contributors to developer efficiency is being able to retrieve test results quickly, CircleCI can intelligently split tests to get you your test results faster using test splitting.
 
 For more information about how to utilize test splitting, refer to the [Running Tests In Parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-test-splitting-with-python-django-tests) page.
 
 ### Self hosted runners
+{: #self-hosted-runners }
 
 CircleCI runners allow you to use your own infrastructure for running jobs, providing more granular control of your own environment and flexibility in building and testing on a wide variety of architectures.
 
 For more information about using CircleCI runners, please see the [CircleCI Runner Overview](https://circleci.com/docs/2.0/runner-overview/) page.
 
 ### Flaky test detection
+{: #flaky-test-detection }
 
 Flaky test detection is an important tool that helps you determine why a test may pass one time, and then fail the next time. Because the average failed workflow wastes approximately 30 minutes, having the ability to identify flaky tests can save you significant amounts of time in your builds and workflows.
 
 For more detailed information about flaky tests, refer to the [Test Insights](https://circleci.com/docs/2.0/insights-tests/#flaky-tests) page.
 
 ### Unlimited private orbs
+{: #unlimited-private-orbs }
 
 CircleCI orbs are shareable configuration packages that enable developers to create private, standardardized configurations that can be used across an organization by different teams.
 
 For more information on private orbs, refer to the [Orbs Introduction](https://circleci.com/docs/2.0/orb-intro/#private-orbs-vs-public-orbs) page.
 
 ### Docker layer caching
+{: #docker-layer-caching }
 
 Reducing the time it takes to build a Docker images is an important consideration for developers who consistently use these images in their workflows.  Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
 
 For more information about Docker Layer Caching, please refer to the [Enabling Docker Layer Caching](https://circleci.com/docs/2.0/docker-layer-caching/) page.
-
-while You can still make use of many key features offered by CircleCI, including:
-
-- Using Orbs
-- Workspaces
-- Dependency Caching
-- Windows/Linux builds
-
-The free usage-based plan offers a set amount of build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory). With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
 
 ## Performance plan
 {: #performance-plan }
