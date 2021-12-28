@@ -35,7 +35,7 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 ## Free plan
 {: #free-plan }
 
-As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free Plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient and fast. 
+As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free Plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient and fast.
 
 The free usage-based plan offers a set amount of build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory). With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
 
