@@ -135,7 +135,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: cimg/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:3.0.3-browsers + Browser Tools Orb
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -328,7 +328,7 @@ It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-confi
 jobs:
   myjob:
     docker:
-      - image: cimg/node:14.17.3
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -1395,7 +1395,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:latest
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
