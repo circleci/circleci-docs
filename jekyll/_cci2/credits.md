@@ -55,7 +55,7 @@ Docker, Linux and Windows (macOS coming soon) are available for us |
 ### Unlimited users
 {: #unlimited-users }
 
-When you use the free plan, you may have an unlimited number of users building and developing on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
+When you use the Free plan, you may have an unlimited number of users building and developing on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
 
 ### Expansive list of available resource classes
 {: #expansive-list-of-available-resource-classes }
