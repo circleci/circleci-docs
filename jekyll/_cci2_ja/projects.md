@@ -7,7 +7,8 @@ categories:
   - projects
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -19,10 +20,10 @@ On the "Add Projects" page, you can either _Set Up_ any project that you are the
 {: #projects-dashboard }
 
 {:.tab.addprojectpage.Cloud}
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
 {:.tab.addprojectpage.Server_3}
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
 {:.tab.addprojectpage.Server_2}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)

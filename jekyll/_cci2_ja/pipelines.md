@@ -4,10 +4,10 @@ title: "パイプラインの表示"
 short-title: "パイプラインの表示"
 description: "パイプラインの概要"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
 This document provides a summary of the Pipelines page in the CircleCI app and documents some of the changes to the CircleCI user interface.

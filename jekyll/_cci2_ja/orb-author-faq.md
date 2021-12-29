@@ -6,6 +6,7 @@ description: "Orb オーサリングに関してよく寄せられるご質問�
 order: 20
 version:
   - Cloud
+  - Server v3.x
 ---
 
 よく寄せられるご質問や技術的な問題など、Orb のオーサリングに役立つ情報をまとめました。
@@ -45,7 +46,7 @@ circleci orb unlist <namespace>/<orb> <true|false> [flags]
 
 **プライベート Orb をレジストリから除外する際はご注意ください。**
 <br/>
-CircleCI CLI コマンドの `orb source` および `orb info` は、レジストリにあるなしにかかわらず、現在すべてのプライベート Orb において動作しません。 そのため、プライベート Orb 名が除外前にどこにも記載されていない場合、その Orb を Orb レジストリや CircleCI CLI で見つけることはできません。 この問題が発生したと思われる場合は、 [サポートチケット](https://support.circleci.com/hc/en-us)を作成してください。
+Currently the `orb source` CircleCI CLI command does not work for _any_ Private Orbs, regardless if they are listed or unlisted. そのため、プライベート Orb 名が除外前にどこにも記載されていない場合、その Orb を Orb レジストリや CircleCI CLI で見つけることはできません。 この問題が発生したと思われる場合は、 [サポートチケット](https://support.circleci.com/hc/en-us)を作成してください。
 {: class="alert alert-warning"}
 
 ## API トークンの保護

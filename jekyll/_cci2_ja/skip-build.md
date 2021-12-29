@@ -6,6 +6,7 @@ description: CircleCI の自動ビルドを停止する方法
 order: 100
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 

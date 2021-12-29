@@ -17,7 +17,6 @@ NOTE: In the following steps replace any items or credentials displayed between 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
-
 CircleCI Server v3.x では、https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` の https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[プラグイン]です。
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
@@ -29,7 +28,7 @@ kubectl kots version
 
 NOTE: この KOTS コマンドにより管理者コンソールへの道が開きます。 WSL2 をインストールした Windows 上で実行する場合、ホスト マシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-From the terminal run (if you are installing behind a proxy see <<HTTP プロキシ経由でのインストール>>):
+From the terminal run (if you are installing behind a proxy see <<Installing behind HTTP Proxy>>):
 
 ```sh
 kubectl kots install circleci-server
@@ -46,7 +45,7 @@ NOTE: If you need to get back to the KOTS admin console at a later date you can 
 
 NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-=== Installing behind HTTP Proxy
+=== HTTP プロキシ経由でのインストール
 
 プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細はhttps://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
 
@@ -135,9 +134,6 @@ Github が提供する OAuth クライアント シークレットです。
 * *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービスアカウント キーです。
 
 * *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
-
-==== Nomad
-mTLSを `無効`に設定します。 この機能はデフォルトで無効になっているはずですが、現在既知の問題により無効になっていません。 無効にすると、ビルドサービスをインストールするインストールプロセスのステップ 3 まで、Nomadの設定を無視することができます。
 
 ==== Postgres、MongoDB、Vault の設定
 

@@ -7,7 +7,8 @@ categories:
   - language-guides
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -48,7 +49,7 @@ If you fork this project and want to push to DockerHub, this project assumes [a 
 
 See the config and modify as needed for your use case.
 
-## Config walkthrough
+## 設定ファイルの詳細
 {: #config-walkthrough }
 
 The first section of the file defines common items. The order in which things are defined in a CircleCI configuration doesn't matter - we have laid it out this way for readability.
@@ -60,7 +61,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-- **Config Version**: Current is `2.1`. Unless using a CircleCI Server installation, we recommend using 2.1.
+- **Config Version**: Current is `2.1`. If you are using CircleCI server v2.x, you will need to use config version 2.
 - **Orbs**: CircleCI offers [orbs](https://circleci.com/developer/orbs), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to make use of a pre-defined execution environment later on.
 
 {% raw %}

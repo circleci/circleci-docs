@@ -20,6 +20,10 @@ plugins:
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
+  - jekyll-last-modified-at
+
+last-modified-at:
+  date-format: '%d-%b-%y'
 
 algolia:
   application_id: U0RXNGRK45

@@ -14,6 +14,7 @@ jekyll/environments/
 jekyll/_includes/app.html
 jekyll/assets/css/*.bundle.css
 jekyll/assets/js/*.bundle.js
+jekyll/assets/js/*.chunk.js
 run-results/
 node_modules/
 release/

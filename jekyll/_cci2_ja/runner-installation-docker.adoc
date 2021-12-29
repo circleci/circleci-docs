@@ -22,16 +22,16 @@ toc::[]
 
 ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
-== CircleCI ランナーのイメージを拡張した Dockerfile を作成する
+== Create a Dockerfile that extends the CircleCI runner image
 
-次の例では、ベース イメージ上に python3 をインストールします。
+In this example, Python 3 is installed on top of the base image.
 
 `Dockerfile.runner.extended`
 
 ```
 FROM circleci/runner:launch-agent
-RUN apt-get update; \
-    apt-get install --no-install-recommends -y \
+RUN sudo apt-get update; \
+    sudo apt-get install --no-install-recommends -y \
         python3
 ```
 
@@ -69,7 +69,6 @@ docker stop <container-name>
 == Docke コンテナを削除する
 
 同じ名前のコンテナを再作成する場合など、停止したランナーコンテナをシステムから完全に削除する必要がある場合があります。
-
 
 ``` bash
 docker stop <container-name>; docker rm <container-name>;

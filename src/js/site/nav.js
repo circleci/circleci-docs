@@ -51,3 +51,28 @@ $(document).ready(function () {
     });
   });
 })();
+
+// Open dropdown in language selector
+const openLangDropdown = () => {
+  const globeBtn = $('#globe-lang-btn');
+  const langPicker = $('#lang-picker');
+
+  $('body').on('mouseup', (e) => {
+    globeBtn.on('click', () => {
+      langPicker.toggleClass('lang-active');
+    });
+
+    if (
+      !langPicker.is(e.target) &&
+      langPicker.has(e.target).length === 0 &&
+      langPicker.hasClass('lang-active')
+    ) {
+      langPicker.removeClass('lang-active');
+    }
+  });
+};
+
+// Another PR will address refactoring rest of functions to be added to this callback
+$(document).ready(() => {
+  openLangDropdown();
+});

@@ -47,7 +47,7 @@ Use this dashboard to:
   - Monitor real-time CI performance, activity, and health, or track over time.
   - Identify opportunities for optimization.
 
-![header]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
 
 Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
 

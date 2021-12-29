@@ -1,75 +1,76 @@
 ---
 layout: classic-docs
-title: "CircleCI に SSH 鍵を登録する"
-short-title: "CircleCI に SSH 鍵を登録する"
-description: "CircleCI に SSH 鍵を追加する方法"
+title: "CircleCI に SSH キーを登録する"
+short-title: "CircleCI に SSH キーを登録する"
+description: "CircleCI に SSH キーを追加する方法"
 order: 20
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
-サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
+サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH キーを登録する必要があります。
 
 ## 概要
 {: #overview }
 
-CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
+以下の２つを実行するためには、CircleCI に SSH キーに追加する必要があります。
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
+1 つ目の目的で SSH キーを登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
-それ以外の場合は、お使いの CircleCI のバージョン(クラウド/サーバー)に応じた以下の手順で、プロジェクトに SSH キーを追加してください。
+それ以外の場合は、お使いの CircleCI のバージョンに応じた以下の手順で、プロジェクトに SSH キーを追加してください。
 
-複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
+複数の SSH キーをまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
 ## 手順
 {: #steps }
 
-**注意:** CircleCI が SSH 鍵を復号化できるよう、鍵には常に空のパスフレーズを設定してください。
+**注意:** CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。
 
-### クラウド版 CircleCI の場合
-{: #circleci-cloud }
+### CircleCI Cloud または Server 3.x
+{: #circleci-cloud-or-server-3-x }
 
-1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
+1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳細については、[安全なシェルスクリプト (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. CircleCI アプリケーションで、 **Project Settings** ボタン (作業対象のプロジェクトの **Pipelines** ページの右上にあります) をクリックして、プロジェクトの設定に移動します。
+2. CircleCI アプリケーションで、 **[Project Settings (プロジェクトの設定)]** ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
 
-3. **Project Settings** ページにて、 **SSH Keys** をクリックします (画面左側のメニューにあります)。
+3. **[Project Settings (プロジェクトの設定)]** で、 **[SSH Keys (SSH キー)]** をクリックします (画面左側のメニュー)。
 
-4. スクロールし、 **Additional SSH Keys** のセクションに移動します。
+4. スクロールし、 **[Additional SSH Keys (追加 SSH キー)]** のセクションに移動します。
 
-5. **Add SSH Key** ボタンをクリックします。
+5. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-6. **Hostname** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
+6. **[Hostname (ホスト名)]** フィールドにキーに関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
 
-7. **Private Key** フィールドに登録する SSH 鍵を貼り付けます。
+7. **[Private Key (プライベート キー)]** フィールドに登録する SSH キーを貼り付けます。
 
-8. **Add SSH Key** ボタンをクリックします。
+8. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-### CircleCI Server の場合
-{: #circleci-server }
+### CircleCI Server 2.19.x
+{: #circleci-server-2-19-x }
 
-1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
+1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳細については、[安全なシェルスクリプト (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
 2. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
-2. **Permissions** セクションで、**SSH Permissions** をクリックします。
+2. **[Permissions (アクセス許可)]**で、**[SSH Permissions (SSH アクセス許可)]** をクリックします。
 
-3. **Add SSH Key** ボタンをクリックします。
+3. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-4. **Hostname** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
+4. **[Hostname (ホスト名)]** フィールドにキーに関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
 
-5. **Private Key** フィールドに登録する SSH 鍵を貼り付けます。
+5. **[Private Key (プライベート キー)]** フィールドに登録する SSH キーを貼り付けます。
 
-6. **Add SSH Key** ボタンをクリックします。
+6. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-## ジョブに SSH 鍵を登録する
+## ジョブに SSH キーを登録する
 {: #adding-ssh-keys-to-a-job }
 
-すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH 鍵に自動的に署名します。 ただし、コンテナに実際に鍵を登録するには、`add_ssh_keys` キーを使用する**必要があります**。
+すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH キーに自動的に署名します。 ただし、コンテナに実際にキーを登録するには、`add_ssh_keys` キーを**必ず使用してください**。
 
 SSH キーをコンテナに追加するには、 [特別なステップ]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
 
@@ -83,12 +84,12 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-**メモ:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録された鍵と一致している必要があります。
+**注意:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録されたキーと一致している必要があります。
 
-## ホスト名を指定せずに複数の鍵を登録する
+## ホスト名を指定せずに複数のキーを登録する
 {: #adding-multiple-keys-with-blank-hostnames }
 
-ホスト名を指定せずに複数の SSH 鍵をプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH 鍵がある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、その鍵が正しい鍵がどうかにかかわらず、常に最初の鍵が使用されます。 コンテナに SSH 鍵を登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録された鍵を読み取って、このジョブで使用する ssh-agent からすべての鍵を削除します。
+ホスト名を指定せずに複数の SSH キーをプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH キーがある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、そのキーが正しいキーがどうかにかかわらず、常に最初のキーが使用されます。 コンテナに SSH キーを登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録されたキーを読み取って、このジョブで使用する ssh-agent からすべてのキーを削除します。
 
 ## 関連項目
 {: #see-also }
