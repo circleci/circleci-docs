@@ -47,7 +47,7 @@ jobs:
   build:
     docker:
       # DLC does nothing here, its caching depends on commonality of the image layers.
-      - image: cimg/node:14.17.3-buster-browsers
+      - image: cimg/node:14.17.3-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
