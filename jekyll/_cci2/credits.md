@@ -47,7 +47,7 @@ The table below lists some of the features you will be able to use on the Free P
 Docker, Linux and Windows (macOS coming soon) are available for us |
 | CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equals increased productivity and speed when building on CircleCI |
 | SELF HOSTED RUNNERS | Increased number of runners you can use when working on CircleCI |
-| FLAKY TEST DETECTION | Improved inisghts are available to help analyze and detect flaky tests |
+| FLAKY TEST DETECTION | Improved insights are available to help analyze and detect flaky tests |
 | UNLIMITED PRIVATE ORBS | Streamline team collaboration by sharing CircleCI Orbs across teams and groups |
 | DOCKER LAYER CACHING | Efficiency features designed specifically for Docker, providing improved speed and efficiency |
 {: class="table table-striped"}
