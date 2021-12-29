@@ -379,6 +379,10 @@ The commands above will run the entire _build_ job (only jobs, not workflows, ca
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
 
+**Docker on Mac**
+
+Local execution in Docker Desktop for Mac using cgroupsv2, is temporarily blocked pending system updates. Follow the [Github issue](https://github.com/CircleCI-Public/circleci-cli/issues/589) for the latest information.
+
 **Machine Executor**
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
