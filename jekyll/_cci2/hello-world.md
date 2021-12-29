@@ -26,7 +26,7 @@ This example adds a job called `build` that spins up a container running a [pre-
    jobs:
      build:
        docker:
-         - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+         - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
            auth:
              username: mydockerhub-user
              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -59,7 +59,7 @@ Using the basic ideas from the Linux example above, you can add a job that uses 
 jobs:
   build-android:
     docker:
-      - image: cimg/android:api-25-alpha
+      - image: cimg/android:2021.10.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
