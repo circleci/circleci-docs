@@ -43,12 +43,12 @@ The table below lists some of the features you can use on the Free plan.
 
 | Feature | Description |
 |-------|-------------|
-| UNLIMITED USERS | There is no limit to the number of users who can build and develop on CircleCI. This enables you to have different teams and groups working together on projects. |
-| EXPANDED ARRAY OF AVAILABLE RESOURCE CLASSES | You have access to an expanded array of Docker, Linux and Windows resource classes (macOS coming soon). |
-| CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equals increased productivity and speed when building on CircleCI. |
-| SELF HOSTED RUNNERS | The number of runners you can use has been increased, providing you additional flexibility when working on CircleCI. |
-| FLAKY TEST DETECTION | Advanced insights are available to help you analyze and troubleshoot failed and flaky tests. |
-| UNLIMITED PRIVATE ORBS | There is no limit to the number of private orbs you can use to share across teams and groups. |
+| UNLIMITED USERS | There is no limit to the number of users who can build and develop on CircleCI. Collaborate with different teams and groups on multiple projects. |
+| EXPANDED ARRAY OF AVAILABLE RESOURCE CLASSES | You have access to an expanded array of Docker, Linux, and Windows resource classes (macOS coming soon). |
+| CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equal increased productivity and speed when building on CircleCI. |
+| SELF HOSTED RUNNERS | The number of runners you can use has been increased providing you additional flexibility when working on CircleCI. |
+| FLAKY TEST DETECTION | Advanced insights are available to help you troubleshoot failed and flaky tests. |
+| UNLIMITED PRIVATE ORBS | There is no limit to the number of private orbs you can use to securely share across teams and groups. |
 | DOCKER LAYER CACHING | Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster. |
 {: class="table table-striped"}
 
@@ -60,14 +60,14 @@ When you use the Free plan, you have an unlimited number of users that can build
 ### Expansive array of available resource classes
 {: #expansive-array-of-available-resource-classes }
 
-When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows and macOS (coming soon) available to use. This flexibility helps ensure that you choose the right compute resources.
+When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows, and macOS (coming soon) available to use. This flexibility helps ensure that you choose the right compute resources.
 
 For more information about these resources, please refer to the the [Executors and Images](https://circleci.com/docs/2.0/executor-intro/) page.
 
 ### Concurrency and test splitting
 {: #concurrency-and-test-splitting }
 
-The ability to run multiple tests at the same time (concurrently) is a very powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows.
+The ability to run multiple tests at the same time (concurrently) is a powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows.
 
 For more information about how to utilize test splitting, refer to the [Running Tests In Parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-test-splitting-with-python-django-tests) page.
 
@@ -81,14 +81,14 @@ For more information about using CircleCI runners, please see the [CircleCI Runn
 ### Flaky test detection
 {: #flaky-test-detection }
 
-The average failed workflow wastes approximately 30 minutes. Identifying flaky tests can save you significant amounts of time in your builds and workflows.
+The average failed workflow wastes approximately 30 minutes. Detecting flaky tests can save you significant amounts of time in your builds and workflows.
 
 For more detailed information about flaky tests, refer to the [Test Insights](https://circleci.com/docs/2.0/insights-tests/#flaky-tests) page.
 
 ### Unlimited private orbs
 {: #unlimited-private-orbs }
 
-CircleCI orbs are shareable configuration packages that enable developers to create private, standardardized configurations that can be used across an organization by different teams.
+CircleCI orbs are shareable configuration packages that enable developers to create private, standardardized configurations for use across an organization by different teams.
 
 For more information on private orbs, refer to the [Orbs Introduction](https://circleci.com/docs/2.0/orb-intro/#private-orbs-vs-public-orbs) page.
 
