@@ -39,35 +39,35 @@ As with the CircleCI legacy Container plan, CircleCI also supports a free-tier w
 
 The free usage-based plan offers a set amount of build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory). With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
 
-The table below lists some of the features you will be able to use on the Free Plan.
+The table below lists some of the features you can use on the Free plan.
 
 | Feature | Description |
 |-------|-------------|
-| UNLIMITED USERS | You may have an unlimited number of users. This enables you to have different teams and groups working together on projects |
-Docker, Linux and Windows (macOS coming soon) are available for us |
-| CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equals increased productivity and speed when building on CircleCI |
-| SELF HOSTED RUNNERS | Increased number of runners you can use when working on CircleCI |
-| FLAKY TEST DETECTION | Improved insights are available to help analyze and detect flaky tests |
-| UNLIMITED PRIVATE ORBS | Streamline team collaboration by sharing CircleCI Orbs across teams and groups |
-| DOCKER LAYER CACHING | Efficiency features designed specifically for Docker, providing improved speed and efficiency |
+| UNLIMITED USERS | There is no limit to the number of users who can build and develop on CircleCI. This enables you to have different teams and groups working together on projects. |
+| EXPANDED ARRAY OF AVAILABLE RESOURCE CLASSES | You have access to an expanded array of Docker, Linux and Windows resource classes (macOS coming soon). |
+| CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equals increased productivity and speed when building on CircleCI. |
+| SELF HOSTED RUNNERS | The number of runners you can use has been increased, providing you additional flexibility when working on CircleCI. |
+| FLAKY TEST DETECTION | Advanced insights are available to help you analyze and troubleshoot failed and flaky tests. |
+| UNLIMITED PRIVATE ORBS | There is no limit to the number of private orbs you can use to share across teams and groups. |
+| DOCKER LAYER CACHING | Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster. |
 {: class="table table-striped"}
 
 ### Unlimited users
 {: #unlimited-users }
 
-When you use the Free plan, you may have an unlimited number of users building and developing on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
+When you use the Free plan, you have an unlimited number of users that can build and develop on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
 
-### Expansive list of available resource classes
-{: #expansive-list-of-available-resource-classes }
+### Expansive array of available resource classes
+{: #expansive-array-of-available-resource-classes }
 
-When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows and macOS (coming soon) available to use. With this flexibility in choosing resource classes, you can be sure to choose the right compute resources for your job.
+When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows and macOS (coming soon) available to use. This flexibility helps ensure that you choose the right compute resources.
 
 For more information about these resources, please refer to the the [Executors and Images](https://circleci.com/docs/2.0/executor-intro/) page.
 
 ### Concurrency and test splitting
 {: #concurrency-and-test-splitting }
 
-The ability to run multiple tests at the same time (concurrently) is a very powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows. Because one of the most important contributors to developer efficiency is being able to retrieve test results quickly, CircleCI can intelligently split tests to get you your test results faster using test splitting.
+The ability to run multiple tests at the same time (concurrently) is a very powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows.
 
 For more information about how to utilize test splitting, refer to the [Running Tests In Parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-test-splitting-with-python-django-tests) page.
 
@@ -81,7 +81,7 @@ For more information about using CircleCI runners, please see the [CircleCI Runn
 ### Flaky test detection
 {: #flaky-test-detection }
 
-Flaky test detection is an important tool that helps you determine why a test may pass one time, and then fail the next time. Because the average failed workflow wastes approximately 30 minutes, having the ability to identify flaky tests can save you significant amounts of time in your builds and workflows.
+The average failed workflow wastes approximately 30 minutes. Identifying flaky tests can save you significant amounts of time in your builds and workflows.
 
 For more detailed information about flaky tests, refer to the [Test Insights](https://circleci.com/docs/2.0/insights-tests/#flaky-tests) page.
 
@@ -95,7 +95,7 @@ For more information on private orbs, refer to the [Orbs Introduction](https://c
 ### Docker layer caching
 {: #docker-layer-caching }
 
-Reducing the time it takes to build a Docker images is an important consideration for developers who consistently use these images in their workflows.  Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
+Reducing the time it takes to build a Docker image is an important consideration for developers who consistently use these images in their workflows. Consider using Docker Layer Caching (DLC) if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, rather than impact the actual container used to run your job.
 
 For more information about Docker Layer Caching, please refer to the [Enabling Docker Layer Caching](https://circleci.com/docs/2.0/docker-layer-caching/) page.
 
