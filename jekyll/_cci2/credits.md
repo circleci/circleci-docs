@@ -44,7 +44,7 @@ The table below lists some of the features you will be able to use on the Free P
 | Feature | Description |
 |-------|-------------|
 | UNLIMITED USERS | You may have an unlimited number of users. This enables you to have different teams and groups working together on projects |
-| EXPANSIVE LIST OF AVAILABLE RESOURCE CLASSES | Docker, Linux and Windows are available (macOS coming soon) are available for us |
+Docker, Linux and Windows (macOS coming soon) are available for us |
 | CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equals increased productivity and speed when building on CircleCI |
 | SELF HOSTED RUNNERS | Increased number of runners you can use when working on CircleCI |
 | FLAKY TEST DETECTION | Improved inisghts are available to help analyze and detect flaky tests |
