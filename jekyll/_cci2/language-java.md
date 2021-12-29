@@ -45,11 +45,11 @@ jobs: # a collection of steps
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker: # run the steps with Docker
-      - image: cimg/openjdk:11.0.3-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+      - image: cimg/openjdk:17.0.1 # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:12-alpine
+      - image: cimg/postgres:14.0.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -151,11 +151,11 @@ We also use the `environment` key to configure the JVM and Gradle to [avoid OOM 
 version: 2
 ...
     docker:
-      - image: cimg/openjdk:11.0.3-jdk-stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:12-alpine
+      - image: cimg/postgres:14.0.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
