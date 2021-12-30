@@ -101,8 +101,6 @@ import { isElementInViewport } from '../utils';
 
     enableAccordion(mainNavItems);
     enableAccordion(mobileNavItems);
-
-    highlightTocOnScroll();
   });
 })();
 

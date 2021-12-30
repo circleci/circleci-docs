@@ -14,7 +14,7 @@ window.Cookie = Cookie;
 window.AnalyticsClient = services.AnalyticsClient; // because it only has static methods, AnalyticsClient is not instantiated
 window.OptimizelyClient = new services.OptimizelyClient();
 
-import './site';
+import site from './site';
 
 services.rum.init();
 // Temporary service to check if user dark mode preferences
@@ -28,5 +28,7 @@ $(() => {
   services.progressbar.init();
   services.sectionShareButton.init();
   services.lang.init();
-  import(/* webpackPrefetch: true */ './experiments'); // imports all experiments
+  import(/* webpackPrefetch: true */ './experiments').then(
+    site.sidebar.highlightTocOnScroll,
+  ); // imports all experiments
 });
