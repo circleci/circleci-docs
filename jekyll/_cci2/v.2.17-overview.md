@@ -111,7 +111,7 @@ To take a snapshot of your installation:
 **Note:** It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
 Once you have the snapshot you are free to make changes on the Services machine.
 
-If you do need to rollback at any point, see our [restore from backup](http://localhost:4000/docs/2.0/backup/#restoring-from-backup) guide.
+If you do need to rollback at any point, see our [restore from backup]({{site.baseurl}}/2.0/backup/#restoring-from-backup) guide.
 
 ### Update Replicated
 {: #update-replicated }
