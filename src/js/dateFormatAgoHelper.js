@@ -1,3 +1,24 @@
+const monthsToSeconds = (month) =>
+  60 * 60 * 24 * new Date(new Date().getFullYear(), month, 0).getDate();
+
+function getMonthInterval(seconds) {
+  let month = new Date().getMonth();
+  let secondsInMonth = monthsToSeconds(month);
+  let interval = 0;
+
+  while (seconds >= secondsInMonth) {
+    month -= 1;
+    if (month < 0) {
+      month += 12;
+    }
+    seconds -= secondsInMonth;
+    secondsInMonth = monthsToSeconds(month);
+    interval += 1;
+  }
+
+  return interval;
+}
+
 // change date into how long ago that date is relative to when view page
 export function dateFormatAgoHelper(date) {
   function render(n, unit) {
@@ -9,7 +30,7 @@ export function dateFormatAgoHelper(date) {
   switch (true) {
     case interval >= 1:
       return '+1 year ago';
-    case (interval = Math.floor(seconds / (60 * 60 * 24 * 30))) >= 1:
+    case (interval = getMonthInterval(seconds)) >= 1:
       return render(interval, 'month');
     case (interval = Math.floor(seconds / (60 * 60 * 24))) >= 1:
       return render(interval, 'day');

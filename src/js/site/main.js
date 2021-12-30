@@ -410,14 +410,14 @@ $(function () {
   let popperInstance = null;
 
   showEvents.forEach((event) => {
-    timeposted.addEventListener(event, () => {
+    timeposted?.addEventListener(event, () => {
       tooltiptime.setAttribute('data-show', '');
       popperInstance = createPopper(timeposted, tooltiptime, {});
     });
   });
 
   hideEvents.forEach((event) => {
-    timeposted.addEventListener(event, () => {
+    timeposted?.addEventListener(event, () => {
       tooltiptime.removeAttribute('data-show');
       if (popperInstance) {
         popperInstance.destroy();
