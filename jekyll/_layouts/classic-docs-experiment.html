@@ -1,0 +1,21 @@
+---
+layout: classic-docs
+section: cci2
+---
+<div class="control {{ page.categories | join: ' ' }}">
+    {{content}}
+</div>
+<div class="treatment no_toc_section {{ page.categories | join: ' ' }}">
+    {% if page.categories contains "language-guides" %}
+        {% capture lang_guide %}
+            {% include_relative language-{{page.short-title | downcase}}.md %}
+        {% endcapture %}
+        {{ lang_guide | markdownify }}
+    {% endif %}
+</div>
+<style>#full-height{visibility:hidden}</style>
+<noscript class="no_toc_section">
+    {{content}}
+    <style>#full-height{visibility:visible}</style>
+</noscript>
+

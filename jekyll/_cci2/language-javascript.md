@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs-experiment
 title: "Node.js - JavaScript Tutorial"
 short-title: "JavaScript"
 description: "Building and Testing with JavaScript and Node.js on CircleCI"
