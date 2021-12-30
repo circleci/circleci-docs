@@ -49,20 +49,20 @@ import { isElementInViewport } from '../utils';
     function setSidebar() {
       // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
       if (
-        footer.getBoundingClientRect().top - window.innerHeight <= 0 &&
-        footer.getBoundingClientRect().top >= window.innerHeight
+        footer?.getBoundingClientRect?.()?.top - window.innerHeight <= 0 &&
+        footer?.getBoundingClientRect?.()?.top >= window.innerHeight
       ) {
-        if (sidebar.classList.contains('fixed')) {
+        if (sidebar?.classList?.contains?.('fixed')) {
           sidebar.classList.remove('fixed');
         }
       } else {
-        if (!sidebar.classList.contains('fixed')) {
+        if (!sidebar?.classList?.contains?.('fixed')) {
           sidebar.classList.add('fixed');
         }
       }
 
       // prevents display problems on very large screens with little content
-      if (footer.getBoundingClientRect().top <= window.innerHeight) {
+      if (footer?.getBoundingClientRect?.()?.top <= window.innerHeight) {
         sidebar.style.height = footer.getBoundingClientRect().top - 70 + 'px';
       } else {
         sidebar.style.height = null;
