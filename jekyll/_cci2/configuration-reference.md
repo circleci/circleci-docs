@@ -1031,7 +1031,7 @@ version | N        | String | Version string of Docker you would like to use (de
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ##### **`save_cache`**
-{: #savecache }
+{: #save_cache }
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
@@ -1103,7 +1103,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% endraw %}
 
 ##### **`restore_cache`**
-{: #restorecache }
+{: #restore_cache }
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
