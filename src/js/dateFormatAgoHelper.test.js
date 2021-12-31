@@ -11,11 +11,21 @@ describe('dateFormatAgoHelper', () => {
     expect(dateFormatAgoHelper(time)).toEqual('+1 year ago');
   });
   it('Should return 1 month ago', () => {
-    const time = new Date(date.getFullYear(), date.getMonth() - 1);
+    const month = date.getMonth() - 1;
+    const day = Math.min(
+      date.getDate(),
+      new Date(date.getFullYear(), month, 0).getDate(),
+    );
+    const time = new Date(date.getFullYear(), month, day);
     expect(dateFormatAgoHelper(time)).toEqual('1 month ago');
   });
   it('Should return 2 months ago', () => {
-    const time = new Date(date.getFullYear(), date.getMonth() - 2);
+    const month = date.getMonth() - 2;
+    const day = Math.min(
+      date.getDate(),
+      new Date(date.getFullYear(), month, 0).getDate(),
+    );
+    const time = new Date(date.getFullYear(), month, day);
     expect(dateFormatAgoHelper(time)).toEqual('2 months ago');
   });
   it('Should return 1 day ago', () => {
