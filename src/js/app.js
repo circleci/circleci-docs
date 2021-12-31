@@ -26,9 +26,8 @@ $(() => {
   services.instantsearch.init();
   services.highlightjsBadge.init();
   services.progressbar.init();
-  services.sectionShareButton.init();
-  services.lang.init();
-  import(/* webpackPrefetch: true */ './experiments').then(
-    site.sidebar.highlightTocOnScroll,
-  ); // imports all experiments
+  import(/* webpackPrefetch: true */ './experiments') // imports all experiments
+    .then(({ default: { languageGuides } = {} }) => languageGuides()) // ensure languageGuides is loaded
+    .catch(site.sidebar.highlightTocOnScroll)
+    .then(site.sidebar.highlightTocOnScroll); // execute TOC Highlighting finally
 });

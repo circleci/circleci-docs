@@ -111,13 +111,16 @@ import { isElementInViewport } from '../utils';
  * highlight it.
  *
  * */
-export function highlightTocOnScroll() {
+export function highlightTocOnScroll(headings) {
+  if (!headings) {
+    headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+  }
+
   const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
   const sidebarItemsText = sidebarItems.map((i) => i.innerText);
   const headlinesToIgnore = ['no_toc', 'toc-heading', 'help-improve-header'];
-  const allHeadlines = Array.from(
-    document.querySelectorAll('h2, h3, h4, h5, h6'),
-  ).filter(
+  const allHeadlines = Array.prototype.filter.call(
+    headings,
     (item) =>
       ![...item.classList].some((className) =>
         headlinesToIgnore.includes(className),
