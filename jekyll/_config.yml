@@ -9,6 +9,8 @@ url: "https://ui.circleci.com" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 devhub_base_url: "https://circleci.com/developer"
+blog_base_url: "https://circleci.com/blog"
+support_base_url: "https://support.circleci.com"
 noindex: false
 
 exclude:
