@@ -77,7 +77,7 @@ For additional information, refer to the **Schedule** section under the [API v2 
 {: #project-settings }
 {:.no_toc}
 
-1. In the CircleCI application, go to your project’s settings. There are various ways to get there. Select **Projects** in the sidebar, then the ellipsis (...) next to your project and select Project Settings. You can also click on the individual project from the list and find the **Project Settings** on the project's landing page.
+1. In the CircleCI application, go to your project’s settings by navigating to **Projects** in the sidebar, then clicking the ellipsis (...) next to your project. You can also find the **Project Settings** button on each project's landing page.
 2. Navigate to **Triggers**.
 3. To create a new schedule, click **Add Scheduled Trigger**.
 4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor, then save the trigger.
@@ -85,7 +85,7 @@ For additional information, refer to the **Schedule** section under the [API v2 
 ### Migrate scheduled workflows to scheduled pipelines
 {: #migrate-scheduled-workflows }
 
-The current method for scheduling work on your projects is to us the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
+The current method for scheduling work on your projects is to use the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
 
 * Cannot control the actor, so scheduled workflows can't use restricted contexts.
 * Cannot control the interaction with auto-cancelling of pipelines.
@@ -178,6 +178,8 @@ other-workflow:
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```
+
+`project-slug` takes the form of `vcs-slug/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
 
 **Q:** Why is my scheduled pipeline not running?
 
