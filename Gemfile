@@ -19,6 +19,7 @@ group :jekyll_plugins do
   gem 'jekyll-target-blank'
   gem 'jekyll-toc'
   gem 'jekyll-asciidoc'
+  gem "jekyll-last-modified-at"
 end
 
 group :test, :development do

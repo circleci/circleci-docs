@@ -1,9 +1,10 @@
 ---
+description: "This section provides information to help CircleCI server v3.x  operators manage user accounts."
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x ユーザー アカウント
+= CircleCI Server v3.x User Accounts
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

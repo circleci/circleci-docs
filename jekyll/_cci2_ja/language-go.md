@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Go"
 short-title: "Go"
-description: "CircleCI 2.0 での Go (Golang) を使用したビルドとテスト"
+description: "CircleCI  での Go (Golang) を使用したビルドとテスト"
 categories:
   - language-guides
 order: 3
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -19,12 +20,12 @@ CircleCI では、Docker イメージにインストール可能な任意のバ�
 ## クイック スタート: デモ用の Go リファレンス プロジェクト
 {: #quickstart-demo-go-reference-project }
 
-CircleCI 2.0 でのビルド方法を示すために、Go リファレンス プロジェクトを提供しています。
+We maintain a reference Go project to show how to build on CircleCI:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">GitHub 上の Go デモ プロジェクト</a>
 - [CircleCI でビルドされた Go デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
 
-このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 この設定ファイルは、Go プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 This file shows best practice for using CircleCI with Go projects.
 
 
 ## 設定ファイルの例
@@ -33,7 +34,7 @@ CircleCI 2.0 でのビルド方法を示すために、Go リファレンス プ
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
@@ -129,7 +130,7 @@ CircleCI のビルド済みイメージを使用することをお勧めしま�
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用して <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Go デモ プロジェクト</a>をビルドする方法を示します。
 
 1. お使いのアカウントに、GitHub 上の <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Go デモ プロジェクト</a>をフォークします。
-2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
+2. CircleCI アプリケーションの[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、フォークしたプロジェクトの隣にある**[Follow Project (プロジェクトをフォローする)]**ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 変更をローカルでテストする場合は、[CircleCI の CLI ツール](https://circleci.com/ja/docs/2.0/local-jobs/)を使用して `circleci build` を実行します。
@@ -240,7 +241,7 @@ Next we run our actual build command using `make` - the Go sample project uses m
 ```
 
 
-Now we will start the Postgres dependent service, using `curl` to ping it to validate that the service is up and running.
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 {% raw %}
 ```yaml
@@ -285,7 +286,7 @@ workflows:
       - build
 ```
 
-完了です。 これで Go アプリケーション用に CircleCI 2.0 を構成できました。 CircleCI でビルドを行うとどのように表示されるかについては、[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}を参照してください。
+完了です。 You just set up CircleCI for a Go app. CircleCI でビルドを行うとどのように表示されるかについては、[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}を参照してください。
 
 ## 関連項目
 {: #see-also }

@@ -8,8 +8,6 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-
-
 ---
 
 This document provides an overview of using GitHub, GitHub Enterprise, or
@@ -385,22 +383,22 @@ However, it is still possible to create a user key by following this workaround:
 
 1. In the CircleCI application, go to your project's settings.
 
-2. Navigate to the **Checkout SSH Keys** page.
+2. Navigate to the **SSH Keys** page.
 
-3. Right-click the **Create `<username>` user key** button and select the
-   **Inspect** option to open the browser inspector.![](
-   {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
+3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.![]({{ site.baseurl }}/assets/img/docs/bb_user_key.png)
 
-4. In the developer console, select the **Network** tab.![](
+4. In the developer console, select the **Network** tab, followed by the **Preview** tab.
+
+5. Find and click the `checkout-key` with a 201 status and copy
+   the `public_key` to your clipboard.![](
    {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
 
-5. In the developer console, click the `checkout-key` with a 201 status and copy
-   the `public_key` to your clipboard.
+6. Click the **Add User Key** button to paste in the `public_key` and create your user key.
+   
+7. Add the key to Bitbucket by following Bitbucket's guide on
+   [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
-6. Add the key to Bitbucket by following Bitbucket's guide on
-   [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
-
-7. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys`
+8. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys`
    key:
 
 ```yaml

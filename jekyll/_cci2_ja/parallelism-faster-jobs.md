@@ -7,7 +7,8 @@ categories:
   - 最適化
 order: 60
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 

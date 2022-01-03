@@ -26,7 +26,6 @@ $btn-selected-blue: #004A95;
   top: 0;
 
   background-color: $white;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
 
   @media (max-width: $screen-xs-max) {
     position: sticky;
@@ -202,31 +201,34 @@ $btn-selected-blue: #004A95;
   }
 }
 
-
-
-
-
 .lang-selector-wrapper {
   position: relative;
 
     .global-nav--language-picker {
-    @media (max-width: $screen-md) {
+      @media (max-width: $screen-md) {
       padding: 0;
     }
-    @media (min-width: $screen-md) {
-      &:hover {
-        color: $btn-hover-green;
+      
+      display: flex;
+      align-items: center;
+      color: $black;
+      background-color: transparent;
+      background: none;
+      border: none;
+      padding: 2px 0 0 0;
+
+    .globe-icon {
+      background-color:transparent;
+      color: $black;
+      @media (min-width: $screen-md) {
+        &:hover {
+          filter: invert(39%) sepia(99%) saturate(634%) hue-rotate(105deg) brightness(83%) contrast(97%);
+        }
       }
-    }
-
-    display: flex;
-    align-items: center;
-    color: $black;
-    background-color: transparent;
-    background: none;
-    border: none;
-    padding: 8px 0 0 0;
-
+      @media (max-width: $screen-md) {
+        padding-top: 6px;
+      }
+    } 
     .lang-picker-mobile {
       display: none;
       @media (max-width: $screen-md) {
@@ -235,13 +237,7 @@ $btn-selected-blue: #004A95;
         font-size: 16px;
         font-family: inherit;
       }
-    }
-
-    @media (max-width: $screen-md) {
-      .globe-icon {
-        padding-top: 6px;
-      }
-    }
+    } 
   }
 
   .lang-picker {

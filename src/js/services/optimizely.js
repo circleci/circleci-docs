@@ -43,7 +43,7 @@ class OptimizelyClient {
   // - User is in the exclusion group
   getVariationName(options) {
     return new Promise((resolve, reject) => {
-      if (forceAll()) {
+      if (typeof forceAll === 'function' && forceAll()) {
         return resolve('treatment');
       }
 

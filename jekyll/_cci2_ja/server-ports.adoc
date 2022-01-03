@@ -1,7 +1,8 @@
 ---
+description: ここでは CircleCI v2.x. のインストールにおけるシステム要件およびポートアクセス要件について説明します。
 version:
 - Server v2.x
-- サーバー管理
+- サーバー管理者
 ---
 = システム要件
 :page-layout: classic-docs
@@ -82,7 +83,7 @@ EBS は特定の IO 操作の後に IOPS を抑制します。 そのため、�
 
 負荷が大きい状況とは以下のようなものです。
 
-* Nomad クライアントにアタッチされたストレージの `BurstBalance` メトリクスが急激に減少している場合、環境に影響が及ぶほどワークロードの負荷が大きいことを示しています。 詳細については、https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html#ebs-volume-metrics[AWS EBS メトリクスのドキュメント]を参照してください。
+* Nomad クライアントにアタッチされたストレージの `BurstBalance` メトリクスが急激に減少している場合、環境に影響が及ぶほどワークロードの負荷が大きいことを示しています。 詳細については、https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html#ebs-volume-metrics[AWS EBS metrics document]を参照してください。
 * 継続的なディスク I/O が 500 MB/秒の場合、デフォルト ストレージ構成のバースト クレジットを 37.5 分で使い果たしてしまったという報告がお客様から寄せられています。
 
 この問題に対する推奨回避策は以下のとおりです。
@@ -115,7 +116,7 @@ Nomad クライアント数のベスト プラクティスを以下の表にま�
 
 == サーバー ポート
 
-CircleCI Server 2.0 のインストールで必要となるすべてのポートを、マシン タイプごとに以下の表に示します。
+CircleCI Server  のインストールで必要となるすべてのポートを、マシン タイプごとに以下の表に示します。
 
 === Services マシン
 

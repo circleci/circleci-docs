@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Android"
 short-title: "Android"
-description: "CircleCI 2.0 での Android アプリのビルドとテスト"
+description: "Building and Testing an Android App on CircleCI"
 categories:
   - language-guides
 order: 9
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -108,7 +109,7 @@ jobs:
 {: #react-native-projects }
 {:.no_toc}
 
-React Native プロジェクトは、Linux、Android、および macOS の機能を使用して CircleCI 2.0 上でビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
+React Native projects can be built on CircleCI using Linux, Android and macOS capabilities. React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
 ## Firebase Test Lab を使用したテスト
 {: #testing-with-firebase-test-lab }

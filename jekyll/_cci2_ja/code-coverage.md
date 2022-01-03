@@ -9,6 +9,7 @@ order: 50
 sitemap: false
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -20,7 +21,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 {:toc}
 
 
-# CircleCI でのカバレッジの表示
+## Viewing Coverage on CircleCI
 {: #viewing-coverage-on-circleci }
 
 コードカバレッジ レポートを直接 CircleCI にアップロードできます。 最初に、プロジェクトにカバレッジ ライブラリを追加し、CircleCI の[アーティファクト ディレクトリ]({{ site.baseurl }}/2.0/artifacts/)にカバレッジ レポートを書き込むようにビルドを設定します。 コードカバレッジ レポートはビルドアーティファクトとして、参照またはダウンロード可能な場所に保存されます。 カバレッジ レポートへのアクセス方法の詳細については、[ビルドアーティファクトに関するドキュメント]({{ site.baseurl }}/ja/2.0/artifacts/)を参照してください。
@@ -344,7 +345,7 @@ jobs:
 ```
 
 
-# コードカバレッジ サービスの使用
+# Using a code coverage service
 {: #using-a-code-coverage-service }
 
 ## Codecov

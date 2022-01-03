@@ -4,10 +4,11 @@ title: "Executor Migration from Docker to Machine"
 short-title: "Migrating Executor from Docker to `machine`"
 description: "Best practices and considerations when migrating executor"
 categories:
-  - migration
+  - 移行
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -16,7 +17,7 @@ This document contains some general guidelines and considerations to make when m
 * TOC
 {:toc}
 
-## Overview
+## はじめに
 {: #overview }
 {:.no_toc}
 

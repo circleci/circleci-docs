@@ -6,6 +6,10 @@ description: "高度な設定のオプションと機能の概要"
 categories:
   - 移行
 order: 2
+version:
+  - クラウド
+  - Server v3.x
+  - Server v2.x
 ---
 
 CircleCI では、高度な設定のオプションと機能を数多くサポートしています。 下記を参照して、どんなことができるかを確認してください。 高度な設定を最適化するヒントも紹介します。
@@ -48,7 +52,7 @@ jobs:
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
 ```
 
-シェルスクリプトを設定で使用する場合の詳細は、 [シェルスクリプトの使用ガイド]({{site.baseurl}}/2.0/using-shell-scripts/)を参照してください。
+シェルスクリプトを設定で使用する場合の詳細は、 [シェルスクリプトの使用ガイド]({{site.baseurl}}/ja/2.0/using-shell-scripts/)を参照してください。
 
 ## ブラウザーでのテスト
 {: #browser-testing }
@@ -77,7 +81,7 @@ jobs:
           background: true
 ```
 
-ブラウザーでのテストの詳細については、 [ブラウザーでのテストガイド]({{site.baseurl}}/2.0/browser-testing/) をご覧ください。
+ブラウザーでのテストの詳細については、 [ブラウザーでのテストガイド]({{site.baseurl}}/ja/2.0/browser-testing/) をご覧ください。
 
 ## データベースのテスト
 {: #database-testing }
@@ -105,7 +109,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 ```
 
-データベースの設定についての詳細は、 [データベースの設定ガイド]({{site.baseurl}}/2.0/databases/) を参照してください。
+データベースの設定についての詳細は、 [データベースの設定ガイド]({{site.baseurl}}/ja/2.0/databases/) を参照してください。
 
 ## Docker コマンドによる Docker イメージのビルド
 {: #run-docker-commands-to-build-your-docker-images }
@@ -137,7 +141,7 @@ jobs:
 
 ```
 
-Docker イメージのビルドに関する詳細は、 [Docker イメージのビルドガイド]({{site.baseurl}}/2.0/building-docker-images/) を参照してください。
+Docker イメージのビルドに関する詳細は、 [Docker イメージのビルドガイド]({{site.baseurl}}/ja/2.0/building-docker-images/) を参照してください。
 
 ## 高度な設定のヒント
 {: #tips-for-advanced-configuration }
