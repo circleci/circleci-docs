@@ -20,7 +20,7 @@ version:
 
 **save_cache ステップで作成されたキャッシュは、最長 15 日間保存されます。**
 
-Caching persists data between the same job in different builds, allowing you to reuse the data from expensive fetch operations from previous jobs. ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。
+キャッシュにより、異なるビルドにおける同じジョブのデータが保持され、高コストなフェッチ操作のデータを以前のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。
 
 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
@@ -83,7 +83,7 @@ The information below describes how your network and storage usage is accumulati
 
 ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 この画面では以下のことが確認できます。
 
-* 課金対象となるネットワーク転送使用
+* 課金対象となるネットワーク転送使用状況
 * 個々のプロジェクトのネットワークとストレージの使用状況は、プロジェクト タブに表示されます。
 * ストレージのデータとアクティビティは、ネットワーク タブに表示されます。
 * ストレージ総量のデータは、ストレージ タブに表示されます。
@@ -92,28 +92,28 @@ The information below describes how your network and storage usage is accumulati
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
 
-### How to calculate an approximation of your monthly costs
+### 月々の料金の概算方法
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
-Charges apply when an organization has runner network egress beyond the included GB allotment for storage and network usage.
+組織で、ストレージとネットワーク使用に含まれる GB を超えるランナー ネットワークを使用した場合、課金されます。
 
 #### ストレージ
 {: #storage }
 {:.no_toc}
 
-Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
+使用量はリアルタイムで課金され、一定期間保持されます。ワークスペースとキャッシュは15日間、アーティファクトとテスト結果は30日間保持されます。
 
-To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
+日々の使用量から1 か月のストレージコストを計算するには、 **Storage(ストレージ)** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に420クレジットを乗じることで、月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
 #### ネットワーク
 {: #network }
 {:.no_toc}
 
-To calculate monthly network costs from your usage, click on the **Network** tab to see if your organization has accrued any overages. In the same scenario as storage above, your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
+使用量から 1 か月のネットワーク コストを計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
-The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
 
-### How to optimize your storage and network transfer use
+### ストレージとネットワーク転送の使用を最適化する方法
 {: #how-to-optimize-your-storage-and-network-transfer-use }
 
 ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
@@ -194,7 +194,7 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 #### ネットワーク転送の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
 
-If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
+ネットワーク使用量を減らしたい場合、次のことをお試しください。
 
 * Runner の場合は、 AWS US-East-1 にクラウドベースのランナーをデプロイします。
 * アーティファクトを 1 度ダウンロードし、ご自身のサイトに保存して処理を追加します。
