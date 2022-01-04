@@ -40,7 +40,7 @@ follows:
 - CircleCI processes PR hooks (Pull Request Hooks) to store PR information for
   the CircleCI app. If the Only Build Pull Requests setting is enabled, CircleCI
   will only trigger builds when a PR is opened, or when there is a push to a
-  branch for which there is an existing PR. Even if this setting is enabled CircleCI will
+  branch for which there is an existing PR. Even if this setting is enabled, CircleCI will
   always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds
   in response to PRs created from forked repos.
