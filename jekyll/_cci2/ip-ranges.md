@@ -98,7 +98,7 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 - 54.83.41.200
 - 54.92.235.88
 
-**Note:** _The pricing model for IP ranges has been finalized.  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)._
+**Note:** _The pricing model for IP ranges has been finalized.  Details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)._
 {: class="alert alert-warning"}
 
 IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
