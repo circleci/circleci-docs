@@ -266,7 +266,7 @@ consider contacting your VCS provider to communicate your concerns.
 This section describes how to re-enable CircleCI after enabling third-party
 application restrictions for a GitHub organization. Go to
 [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb)
-and in the "Organization access" you will have the option to request accesss if you are not an admin, or grant access if you are an admin.
+and in the "Organization access" you will have the option to request access if you are not an admin, or grant access if you are an admin.
 
 #### Non-admin member workflow
 {: #non-admin-member-workflow }
