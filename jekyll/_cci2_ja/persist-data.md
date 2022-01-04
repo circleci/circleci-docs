@@ -61,7 +61,7 @@ The information below describes how your network and storage usage is accumulati
 
 **NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
 
-### Overview of all storage and network transfer
+### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
 
 ジョブ内でデータを保持するための操作には、ネットワークとストレージの使用が発生します。関連するアクションは次のとおりです。
@@ -79,14 +79,14 @@ The information below describes how your network and storage usage is accumulati
 * `store_artifacts`
 * `store_test_results`
 
-The relevant action resulting in network egress that will accrue network transfer usage (billable) is **restoring caches and workspaces to self-hosted runners**.
+ネットワーク転送使用（課金対象）が発生するネットワークに関連するアクションは、**キャッシュとワークスペースをセルフホストランナーにリストアする**ことです。
 
-ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 On this screen you can find:
+ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 この画面では以下のことが確認できます。
 
-* Billable Network Transfer & Egress (table at the top of the screen)
-* Network and storage usage for individual projects (Projects tab)
-* Storage data activity (Network tab)
-* Total storage volume data (Storage tab)
+* 課金対象となるネットワーク転送使用
+* 個々のプロジェクトのネットワークとストレージの使用状況は、プロジェクト タブに表示されます。
+* ストレージのデータとアクティビティは、ネットワーク タブに表示されます。
+* ストレージ総量のデータは、ストレージ タブに表示されます。
 
 個々のステップのストレージおよびネットワーク転送の使用方法の詳細については、以下のジョブページのステップ出力を参照してください。
 
