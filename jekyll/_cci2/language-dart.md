@@ -171,7 +171,7 @@ jobs:
 ```yaml
   build-mac:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       - run:
           name: Install Dart SDK
@@ -361,7 +361,7 @@ jobs:
 
   build-mac:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       - run:
           name: Install Dart SDK
