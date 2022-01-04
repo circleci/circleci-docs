@@ -309,10 +309,6 @@ not building new pushes), and API calls will be denied (causing, for instance,
 re-builds of old builds to fail the source checkout.) To get CircleCI working
 again, you have to grant access to the CircleCI application.
 
-The account and permissions system we use is not as clear as we would like and
-as mentioned we have a much improved system in development with users as first
-class citizens in CircleCI.
-
 ## Deployment keys and user keys
 {: #deployment-keys-and-user-keys }
 
