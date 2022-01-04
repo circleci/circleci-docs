@@ -40,14 +40,14 @@ CircleCI では 2 種類の API トークンを作成できます。
 ### プロジェクト API トークンの作成
 {: #creating-a-project-api-token }
 
-  1. CircleCI アプリケーションで、プロジェクトの設定に移動します。 There are various ways to get there. One way is to select **Projects** in the sidebar, then the ellipsis (`...`) next to your project and select **Project Settings**.
-  2. Select **API Permissions**.
+  1. CircleCI アプリケーションで、プロジェクトの設定に移動します。 移動にはいくつかの方法があります。 1 つの方法として、サイドバーから **Projects (プロジェクト)** を選択し、 プロジェクトの横の省略記号(`...`)を選択し、**Project Settings (プロジェクト設定)** を選択します。
+  2. **API Permissions (API のアクセス権)**を選択します。
   3. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
-  4. ドロップダウン メニューから権限の範囲を選択します。 These are described in the [Overview](#overview) section above.
-  5. In the **Label** field, type a memorable label for the token.
+  4. ドロップダウン メニューから権限の範囲を選択します。 権限については、ページ上部の [概要](#overview)セクションで説明しています。
+  5. **Label (ラベル)**フィールドに、覚えやすいラベルを入力します。
   6. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
 
-プロジェクト API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。 When the confirmation window appears, enter the text `DELETE` in the form and click the **Delete API Token** button.
+プロジェクト API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。 確認ウィンドウが表示されたら、フォームに `DELETE` と入力し、 **Delete API Token (API トークンを削除する)** ボタンをクリックします。
 
 
 ### パーソナル トークンとプロジェクト API トークンのローテーション
@@ -64,19 +64,19 @@ API トークンは共有されたり、従業員やチームの間で回され�
 1. [パーソナル API トークン](https://app.circleci.com/settings/user/tokens)をクリックします。
 1. パーソナル API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。
 1. **[Create New Token (新しいトークンを作成する)]** ボタンをクリックします。
-1. In the **Token name** field, type a new name for the old token you are rotating. 古いトークンと同じ名前でもかまいません。
+1. **Token name (トークン名)** フィールドに、ローテーションする古いトークンの新しい名前を入力します。 古いトークンと同じ名前でもかまいません。
 1. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
 1. トークンが表示されたら、別の場所にコピー & ペーストします。 トークンを再度表示することはできません。
 
 #### プロジェクト API トークンのローテーション
 {: #rotating-a-project-api-token }
 
-1. CircleCI アプリケーションで、プロジェクトの設定に移動します。 There are various ways to get there. One way is to select **Projects** in the sidebar, then the ellipsis (`...`) next to your project and select **Project Settings**.
-1. Select **API Permissions**.
-1. 入れ替えたいトークンの**[[Remove (削除する)]** 列の X をクリックします。 When the confirmation window appears, enter the text `DELETE` in the form and click the **Delete API Token** button.
-1. Click the **Create API Token** button.
+1. CircleCI アプリケーションで、プロジェクトの設定に移動します。 移動にはいくつかの方法があります。 1 つの方法として、サイドバーから **Projects (プロジェクト)** を選択し、 プロジェクトの横の省略記号(`...`)を選択し、**Project Settings (プロジェクト設定)** を選択します。
+1. **API Permissions (API のアクセス権)**を選択します。
+1. 入れ替えたいトークンの**[[Remove (削除する)]** 列の X をクリックします。 確認ウィンドウが表示されたら、フォームに `DELETE` と入力し、 **Delete API Token (API トークンを削除する)** ボタンをクリックします。
+1. **Create API Token (API トークンを作成する)** ボタンをクリックします。
 1. 古いトークンに使用したのと同じ範囲を、ドロップダウンメニューから選択します。
-1. In the **Label** field, type a label for the token. 古いトークンと同じ名前でもかまいません。
+1. **Label (ラベル)**フィールドに、トークンのラベルを入力します。 古いトークンと同じ名前でもかまいません。
 1. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
 
 ## 次のステップ
