@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "よくあるご質問"
 short-title: "よくあるご質問"
-description: "Frequently asked questions about CircleCI"
+description: "CircleCI に関してよく寄せられるご質問"
 categories:
   - 移行
 order: 1
