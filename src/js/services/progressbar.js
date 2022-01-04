@@ -4,13 +4,15 @@ export const init = () => {
   progressBar.style.background = 'white';
   progressBar = progressBar.children[0];
 
-  window.addEventListener('scroll', () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    const height =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
 
-    progressBar.style.width = `${(winScroll / height) * 100}%`;
-  });
+      progressBar.style.width = `${(winScroll / height) * 100}%`;
+    });
+  }
 };

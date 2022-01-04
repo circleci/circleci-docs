@@ -6,6 +6,7 @@ description: "CircleCI の API 使用に権限が指定されたトークンを�
 order: 20
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 

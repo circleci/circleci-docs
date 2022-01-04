@@ -7,7 +7,8 @@ categories:
   - builds
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 

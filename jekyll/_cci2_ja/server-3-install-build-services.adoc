@@ -406,12 +406,13 @@ aws iam create-user --user-name circleci-server-vm-service
 policy.json ファイルを作成したら、IAM ポリティーと作成したユーザーにアタッチします。 
 +
 ```bash
-aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
+aws iam put-user-policy --user-name circleci-server-vm-service --policy-name circleci-server-vm-service --policy-document file://policy.json
+
 ```
 
 . *ユーザー用のアクセスキーとシークレットを作成する*
 +
-作成していない場合は、`circleci-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行して作成することができます。
+作成していない場合は、`circleci-server-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行して作成することができます。
 +
 ```bash
 aws iam create-access-key --user-name circleci-vm-service
@@ -525,7 +526,8 @@ VM サービスをKOTS 管理者コンソールから設定します。
 ```bash
 kubectl get service vm-service --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
-** *[GCP project ID (GCP プロジェクト ID)] (必須)*: クラスタが存在する GCP プロジェクトの名前
+** *GCP project ID (required)* - 
+Name of the GCP project the cluster resides. Below this you can uncheck the box if you want to use private VMs, which request private IP addresses.
 
 ** *[GCP Zone (GCP ゾーン)](必須)*: us-east1-b などに仮想マシン インスタンスを作成する GCP ゾーン
 

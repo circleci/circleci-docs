@@ -24,7 +24,7 @@ toc::[]
 https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、https://circleci.com/docs/ja/2.0/configuration-reference[config.yml] ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、https://circleci.com/docs/ja/2.0/contexts/[コンテキスト]を作成するか、プロジェクトごとの環境変数を使用します。
 
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
-Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
+Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
 NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが*必要*なものだけにアクセスできるようにしたりするのにとても便利です。
 
@@ -187,7 +187,7 @@ workflows:
 ----
 
 ifndef::pdf[]
-## See also
+## 関連項目
 
 * https://circleci.com/docs/ja/2.0/configuration-reference[設定ファイル リファレンス]
 endif::[]

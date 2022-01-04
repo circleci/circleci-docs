@@ -4,7 +4,7 @@ title: "Orb のテスト手法"
 short-title: "テスト手法"
 description: "CircleCI Orb のテストに関する入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
   - クラウド

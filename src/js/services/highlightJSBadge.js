@@ -1,4 +1,4 @@
-$(() => {
+export const init = () => {
   let codeSnippetBadges;
 
   const options = {
@@ -70,4 +70,4 @@ $(() => {
       });
     }
   }
-});
+};

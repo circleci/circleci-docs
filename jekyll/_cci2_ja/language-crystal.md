@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Crystal"
 short-title: "Crystal"
-description: "CircleCI 2.0 での Crystal を使用したビルドとテスト"
+description: "Building and Testing with Crystal on CircleCI"
 categories:
   - language-guides
 order: 9
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -34,7 +35,7 @@ target="_blank">GitHub 上の Crystal デモ プロジェクト</a>
 
 {% raw %}
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 jobs: # a collection of jobs
   build:
     working_directory: ~/demo_app
@@ -119,7 +120,7 @@ jobs:
           command: crystal spec
 ```
 
-完了です。 これで基本的な Crystal アプリケーション用に CircleCI 2.0 をセットアップできました。
+完了です。 You've set up CircleCI for a basic Crystal application.
 
 ## デプロイ
 {: #deploy }

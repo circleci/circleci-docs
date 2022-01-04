@@ -32,7 +32,7 @@ This section covers setting up a pull through cache registry, which works as a m
 
 *Docker Hub アカウントを用意* します。 これは、レジストリのミラーから Docker Hub にアクセスする際に使用します。
 
-WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI Server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI Server installation.
+WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI server installation.
 
 NOTE: 有料アカウントを使用すると、回数制限をさらに緩めることができます。 https://www.docker.com/pricing を参照してください。
 
@@ -40,11 +40,11 @@ NOTE: 有料アカウントを使用すると、回数制限をさらに緩め�
 
 . *独立した Linux サーバーを用意* し、Docker をインストールします。
 +
-We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
+We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI server services.
 +
 例として、このサーバーの IP アドレスを `192.0.2.1` とします。 This URL will be needed later to arm Nomad clients and the VM Service.
 
-. Run the command below to *start the registry*.
+. 以下のコマンドを実行して、*キャッシュ サーバーを起動* します。
 +
 NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセス トークンに置き換えてください。
 +
@@ -63,7 +63,7 @@ Under certain circumstances (especially when you are enabling https://docs.docke
 
 . `sudo systemctl restart docker.service` を実行して、変更を適用します。
 +
-We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
+We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI server services.
 +
 NOTE: *The server needs to be accessible by its hostname*. Namely, you must configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. In this guide we assume that the URL for the registry we are setting up is `\https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). In this guide we assume that the URL for the registry we are setting up is `https://your-mirror.example.com` (be aware that the URL scheme is `http*_s_*`, not `http`).
 
@@ -118,7 +118,7 @@ https://docs.docker.com/registry/recipes/mirror/ (レジストリのミラー
 
 == Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Registry
 
-Follow the steps below on your services machine.
+Nomad クライアント「ごと」に以下の手順を実行します。
 
 . Run the command below to *create a directory for your customization files*.
 +
@@ -218,7 +218,7 @@ Follow the steps below on your services machine.
 
 . Run `sudo docker restart vm-service` to apply the change.
 
-== 関連資料
+== Resources
 
 * https://docs.docker.com/registry/recipes/mirror/[How to configure a pull through cache mirror]
 * https://hub.docker.com/_/registry[Official Docker Registry Docker image]

@@ -25,4 +25,4 @@ version:
 ## 次のステップ
 {: #next-steps }
 
-「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照し、プロジェクトの基礎、組織の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル (ビルド環境を決定し、テストを自動化するための設定ファイル) について学びましょう。
+Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) to learn about the basics of Projects, switching Orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your execution environment and automates your tests.

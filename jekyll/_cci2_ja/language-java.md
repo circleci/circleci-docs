@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Java"
 short-title: "Java"
-description: "CircleCI 2.0 での Java を使用したビルドとテスト"
+description: "Building and Testing with Java on CircleCI"
 categories:
   - language-guides
 order: 4
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -35,35 +36,40 @@ version:
 
 {% raw %}
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
-jobs: # 一連のステップ
+version: 2
+jobs: # a collection of steps
   build:
-    # 並列処理が必要ない場合は削除します
+    # Remove if parallelism is not desired
     parallelism: 2
     environment:
-      # OOM (メモリ不足) エラーを回避するように JVM と Gradle を構成します
+      # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
-    docker: # Docker でステップを実行します
-
-      - image: circleci/openjdk:11.0.3-jdk-stretch # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
+    docker: # run the steps with Docker
+      - image: circleci/openjdk:11.0.3-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
-    steps: # 実行可能コマンドの集合
-      - checkout # ソース コードを作業ディレクトリにチェックアウトします
-      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
+    steps: # a collection of executable commands
+      - checkout # check out source code to working directory
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: テストの並列実行 # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
-          # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します
+          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
-            # このノードで実行する必要があるテストのクラス名のリストを取得します
+            # Get list of classnames of tests that should run on this node
             CLASSNAMES=$(circleci tests glob "**/*.java" \
               | cut -c 1- | sed 's@/@.@g' \
               | sed 's/.\{5\}$//' \
@@ -185,7 +191,7 @@ version: 2
 
  追加の引数を使用して `./gradlew test` を実行します。 これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
 
- {% raw %}
+ **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 ```yaml
 ...
     steps:
@@ -205,7 +211,7 @@ version: 2
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
             ./gradlew test $GRADLE_ARGS
 ```
-{% endraw %}
+`run` ステップを使用して、テスト スイートを実行します。
 
 次回の処理を高速化するために、`save_cache` ステップを使用して Gradle ラッパーと依存関係を保存します。
 

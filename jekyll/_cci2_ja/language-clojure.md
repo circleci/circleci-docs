@@ -2,16 +2,17 @@
 layout: classic-docs
 title: "言語ガイド: Clojure"
 short-title: "Clojure"
-description: "CircleCI 2.0 での Clojure を使用したビルドとテスト"
+description: "Building and Testing with Clojure on CircleCI"
 categories:
   - language-guides
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
-このガイドでは、CircleCI 2.0 で Clojure アプリケーションをビルドする方法について説明します。 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+This guide will help you get started with a Clojure application on CircleCI. お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 * 目次
 {:toc}
@@ -35,29 +36,32 @@ version:
 {% raw %}
 
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
-jobs: # 1 回の実行の基本作業単位
-  build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
-    working_directory: ~/cci-demo-clojure # ステップが実行されるディレクトリ
-    docker: # Docker でステップを実行します
-      - image: circleci/clojure:lein-2.9.1 # ...このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-    environment: # プライマリ コンテナの環境変数
+version: 2
+jobs: # basic units of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/cci-demo-clojure # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment: # environment variables for primary container
       LEIN_ROOT: nbd
-      JVM_OPTS: -Xmx3200m # メモリ不足エラーを回避するために最大ヒープ サイズを制限します
-    steps: # `build` ジョブを構成するコマンド
-      - checkout # ソース コードを作業ディレクトリにチェックアウトします
-      - restore_cache: # 最後の実行からチェックサムが変化していない場合は、保存されているキャッシュを復元します
+      JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
+    steps: # commands that comprise the `build` job
+      - checkout # check out source code to working directory
+      - restore_cache: # restores saved cache if checksum hasn't changed since the last run
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein deps
-      - save_cache: # キー テンプレートを使用してキャッシュを生成し .m2 ディレクトリに保存します
+      - save_cache: # generate and store cache in the .m2 directory using a key template
           paths:
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト サマリーをアップロードします
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
-      # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 
 {% endraw %}

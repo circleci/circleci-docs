@@ -24,7 +24,7 @@ CircleCI Server は Nomad クライアント上で Docker ジョブを実行し�
 
 toc::[]
 
-## ビルド環境
+## Execution Environment
 
 CircleCI Server 3.x では、プライマリ ジョブ スケジューラとして Nomad を使用します。 ジョブ スケジューラ、およびクライアントとクラスタの基本的な操作方法については、https://circleci.com/docs/2.0/nomad/[Nomad クラスタの操作ガイド]を参照してください。
 

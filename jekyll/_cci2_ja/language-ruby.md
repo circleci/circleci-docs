@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Ruby"
 short-title: "Ruby"
-description: "CircleCI 2.0 での Ruby on Rails を使用したビルドとテスト"
+description: "CircleCI での Ruby on Rails を使用したビルドとテスト"
 categories:
   - language-guides
 order: 8
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -49,7 +50,7 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
 # 設定で使用する Orb を宣言します。
-# Orb に関する詳細は、https://circleci.com/docs/2.0/using-orbs/をご覧ください。
+# Orb に関する詳細は、https://circleci.com/docs/ja/2.0/orb-intro/をご覧ください。
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2

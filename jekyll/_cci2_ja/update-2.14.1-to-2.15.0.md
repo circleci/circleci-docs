@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "外部 MongoDB 使用時の MongoDB のアップグレード"
 category:
-  - administration
+  - 管理
 order: 12
 description: "外部 MongoDB の使用時に MongoDB を 3.2 から 3.6 にアップグレードする方法"
 version:
