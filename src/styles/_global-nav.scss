@@ -355,7 +355,7 @@ $btn-selected-blue: #004A95;
   align-items: center;
   letter-spacing: 0.19px;
   color: $black;
-  font-size: 14px;
+  font-size: 15px;
   text-decoration: none;
   font-weight: $font-weight-base;
   @media (max-width: $screen-sm-max) {
@@ -376,7 +376,7 @@ $btn-selected-blue: #004A95;
 
   @media (min-width: $screen-md) {
     margin-right: 20px;
-    font-size: 14px;
+    font-size: 15px;
 
     &:last-child {
       margin-right: 0;
