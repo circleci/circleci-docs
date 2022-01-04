@@ -358,13 +358,16 @@ $btn-selected-blue: #004A95;
   font-size: 15px;
   text-decoration: none;
   font-weight: $font-weight-base;
+  transition: text-shadow .1s;
   @media (max-width: $screen-sm-max) {
     color: $black;
   }
 
   &:hover {
-    font-weight: 500;
+    // font-weight: 500;
     color: $black;
+    // text-shadow: 0 0.015em #101010,0 -0.015em #101010,0.01em 0 #101010,-0.01em 0 #101010;
+    text-shadow: 0 0.015em $black, 0 -0.015em $black, 0.01em 0 $black, -0.01em 0 $black;
     text-decoration: none;
   }
   .external-icon {
@@ -383,7 +386,17 @@ $btn-selected-blue: #004A95;
     }
   }
 }
-
+// .global-nav--external-link::before {
+//   // display: block;
+//   // height: 0;
+//   // content: attr(title);
+//   content: 'circleci.com';
+//   font-weight: 500;
+//   color: $black;
+//   text-decoration: none;
+//   overflow: hidden;
+//   visibility: hidden;
+// }
 .global-nav--footer {
   @media (max-width: $screen-sm-max) {
     width: calc(100% + 30px);
