@@ -10,12 +10,12 @@ version:
   - Server v2.x
 ---
 
-To use the CircleCI API or view details about your pipelines, you will need API tokens with the appropriate permissions. This document describes the types of API tokens available, as well as how to create and delete them.
+CircleCI の API を使用したり、パイプラインの詳細を確認したりするには、適切なアクセス許可を持つ API トークンが必要です。 ここでは、利用可能な API トークンの種類と、トークンを作成および削除する方法について説明します。
 
 ## 概要
 {: #overview }
 
-There are two types of API token you can create within CircleCI.
+CircleCI では 2 種類の API トークンを作成できます。
 
   1. **パーソナル:** このトークンは CircleCI API とのやり取りに使用され、すべての情報の読み取りと書き込みに対するアクセス権を付与します。
   2. **プロジェクト**: このトークンは特定のプロジェクトに関する情報の読み取りと書き取りに対するアクセス権を付与します。 プロジェクト トークンには、*ステータス*、*読み取り専用*、*すべて*、の 3 つの権限範囲のオプションがあります。
