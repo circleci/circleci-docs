@@ -3,7 +3,7 @@ layout: classic-docs
 title: Jenkins との相違点
 categories:
   - migration
-description: Differences between CircleCI and Jenkins.
+description: CircleCI と Jenkins の相違点
 ---
 
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI in the following sections:
