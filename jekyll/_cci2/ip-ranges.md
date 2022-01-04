@@ -16,6 +16,9 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 * TOC
 {:toc}
 
+**Note:** _jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature._
+{: class="alert alert-warning"}
+
 ## Overview
 {: #overview }
 
@@ -95,7 +98,7 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 - 54.83.41.200
 - 54.92.235.88
 
-**Note:** _jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature._
+**Note:** _The pricing model for IP ranges has been finalized.  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)._
 {: class="alert alert-warning"}
 
 IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
@@ -141,7 +144,7 @@ Notifications of a change to this list will be sent out by email to all customer
 
 Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
-Specific rates and details are being finalized and will be published when the feature is generally available.
+Specific rates and details are available in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
 While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold. 
 
@@ -175,7 +178,7 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 **IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
 
 ## Known limitations
-{: #knownlimiations}
+{: #knownlimitations}
 
 - There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 - IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
