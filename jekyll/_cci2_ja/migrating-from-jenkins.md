@@ -6,7 +6,7 @@ categories:
 description: CircleCI と Jenkins の相違点
 ---
 
-This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI in the following sections:
+Jenkins を長年使用されていた方向けに、CircleCI に移行するうえで把握しておきたい基本的なコンセプトについて、以下のセクションに沿って説明します。
 
 * 目次
 {:toc}
@@ -82,7 +82,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 {:.no_toc}
 
 
-ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins does not provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
+ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
 
 CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細については、「[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)」と「[Docker]({{ site.baseurl }}/ja/2.0/build/#docker)」を参照してください。
 
