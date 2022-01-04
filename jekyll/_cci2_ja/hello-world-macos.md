@@ -10,7 +10,7 @@ version:
   - クラウド
 ---
 
-This document describes how to get started with continuous integration on **macOS execution environments** on CircleCI. CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)を参照することをお勧めします。 You may also wish to visit the documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
+CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)を参照することをお勧めします。 また、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」も併せてご覧ください。
 
 ## 前提条件
 {: #prerequisites }
@@ -24,16 +24,16 @@ This document describes how to get started with continuous integration on **macO
 ## macOS Executor の概要
 {: #overview-of-the-macos-executor }
 
-The macOS execution environment (or `executor`) is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
+macOS 実行環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
 macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
 
 ## サンプル アプリケーション
 {: #example-application }
 
-The example application is a simple mac app - it runs a 5 minute timer and contains a single unit test (real-world applications will be far more complex; this app simply serves as an introduction to the macOS execution environment).
+このサンプルアプリケーションは簡単な mac アプリです。5分間のタイマーが実行され、単体テストが含まれています (このアプリは単に macOS 実行環境の基礎を説明することを目的としており、実際のアプリケーションはこれよりもはるかに複雑です)。
 
-As a user getting to know the macOS execution environment, our ideal scenario is for CircleCI to help with the following:
+macOS 実行環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
 
 - コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
 - テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
@@ -100,7 +100,7 @@ macOS でのビルドの基礎について説明しているため、上記の�
 ## Xcodeのクロスコンパイル
 {: #xcode-cross-compilation }
 
-### Universal Binaries
+### ユニバーサル バイナリ
 {: #universal-binaries } Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables.
 
 ### Extracting Unwanted Architectures
