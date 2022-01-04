@@ -9,11 +9,11 @@
 *.adoc @circleci/docs
 *.pdf @circleci/docs
 
-/jekyll/_cci2_ja/ @circleci/translations
-/jekyll/_data/ja/ @circleci/translations
-/jekyll/_includes/ja/ @circleci/translations
-/jekyll/ja/ @circleci/translations
-*_ja* @circleci/translations
+# /jekyll/_cci2_ja/ @circleci/translations
+# /jekyll/_data/ja/ @circleci/translations
+# /jekyll/_includes/ja/ @circleci/translations
+# /jekyll/ja/ @circleci/translations
+# *_ja* @circleci/translations
 
 /src/** @circleci/docs-disco
 *package*.json @circleci/docs-disco
