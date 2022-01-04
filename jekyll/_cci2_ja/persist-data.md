@@ -57,9 +57,9 @@ version:
 ## ネットワークとストレージ使用の管理
 {: #managing-network-and-storage-use }
 
-The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
+以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
 
-**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+**注意:** お客様の全体的な**ネットワーク転送量**は、課金対象の使用量を表すものではありません。 特定のアクションによるネットワーク使用が、結果として課金対象となります。 これらのアクションについて、以下に説明します。
 
 ### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
@@ -92,7 +92,7 @@ The information below describes how your network and storage usage is accumulati
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
 
-### 月々の料金の概算方法
+### 1 か月の料金の概算方法
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
 組織で、ストレージとネットワーク使用に含まれる GB を超えるランナー ネットワークを使用した場合、課金されます。
@@ -118,18 +118,18 @@ GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用�
 
 ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
 
-For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept.
+たとえば、データ使用量を減らしたい場合、特定の使用方法が保持に値する価値を提供しているか検討してください。
 
-In the cases of caches and workspaces this can be quite easy to compare - does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+キャッシュとワークスペースの場合、比較が非常に簡単です。キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？
 
-See below for examples of storage and network optimization opportunities through reducing artifact, cache, and workspace traffic.
+以下では、アーティファクト、キャッシュ、ワークスペースのトラフィックを減らすことによる、ストレージとネットワークを最適化例について説明しています。
 
 #### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
 
-Often we see that the `store_artifacts` step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
+実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 You can use the `CIRCLE_NODE_INDEX` environment variable in a run step to change the behavior of scripts depending on the parallel task run.
+ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
 #### 大きなアーティファクトのアップロード
 {: #uploading-large-artifacts }
@@ -138,7 +138,7 @@ Often we see that the `store_artifacts` step is being used on a large directory 
 
 UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
 
-If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
+パイプラインがバイナリの uberJAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
 
 大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
 
@@ -147,16 +147,16 @@ If your pipelines build a binary or uberJAR, consider if these are necessary for
 
 ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。
 
-For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from `node_modules`.
+たとえば、 node-prune パッケージは、`node_modules` から不要なファイル (マークダウン、TypeScript ファイルなど) を削除します。
 
 #### キャッシュ使用率の最適化
 {: #optimizing-cache-usage }
 
-If you notice your cache usage is high and would like to reduce it:
+キャッシュの使用率が高く使用率を下げたい場合は以下をお試しください。
 
-* Search for the `save_cache` and `restore_cache` commands in your `config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
-* Narrow the scope of a cache from a large directory to a smaller subset of specific files.
-* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
+* `config.yml` ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
+* キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
+* キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
 {% raw %}
 ```sh
@@ -168,7 +168,7 @@ If you notice your cache usage is high and would like to reduce it:
 ```
 {% endraw %}
 
-上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. この方法では結局コストもかかり、時間も短縮できません。 Instead pick a cache `key` like the following:
+上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` はビルドごとに変更され、値が変更されていない場合でも毎回アップロードされます。 この方法では結局コストもかかり、時間も短縮できません。 代わりに、次のようなキャッシュ `key` を選択します。
 
 {% raw %}
 ```sh
@@ -180,7 +180,7 @@ If you notice your cache usage is high and would like to reduce it:
 ```
 {% endraw %}
 
-This will only change if the list of requested dependencies has changed. これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
+この場合、要求された依存関係のリストが変更された場合にのみ変更されます。 これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
 
 キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
 
@@ -189,7 +189,7 @@ This will only change if the list of requested dependencies has changed. これ�
 #### ワークスペースの使用率の最適化
 {: #optimizing-workspace-usage }
 
-If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを利用するすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを判断してください。
 
 #### ネットワーク転送の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
