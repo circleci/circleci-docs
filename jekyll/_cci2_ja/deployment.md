@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: デプロイ
-description: Use this doc to learn how CircleCI can be configured to deploy to virtually any service.
+description: このドキュメントを参考に、CircleCI を、ほぼすべてのサービスにデプロイできるように構成できます。
 version:
   - Cloud
   - Server v3.x
@@ -12,7 +12,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
 
 ## Amazon Web Services
-ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。
+{: #amazon-web-services }
 
 ```
     steps:
