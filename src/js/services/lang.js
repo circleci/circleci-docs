@@ -27,7 +27,9 @@ const redirectLocation = (langCode) => {
     '^(https?://' + window.location.host + '/)(docs/[a-z]{2}/|docs/)(.*)',
     's',
   );
-  const baseURL = 'https://circleci.com/' + languages[langCode].url + '2.0';
+  // const baseURL = 'https://circleci.com/' + languages[langCode].url + '2.0';
+  const baseURL = '{{site.baseurl}}' + languages[langCode].url + '2.0';
+  console.log(baseURL);
   if (!parser.test(window.location.href)) {
     return baseURL;
   }
