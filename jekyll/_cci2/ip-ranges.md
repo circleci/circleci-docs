@@ -16,7 +16,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 * TOC
 {:toc}
 
-**Note:** _The pricing model for IP ranges has been finalized.  Details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)._
+**Note:** The pricing model for IP ranges has been finalized. Details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 {: class="alert alert-info"}
 
 
@@ -100,7 +100,7 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 - 54.92.235.88
 
 **Note:** Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
-{: class="alert alert-warning"}
+{: class="alert alert-info"}
 
 IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
 
