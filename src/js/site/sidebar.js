@@ -31,7 +31,6 @@ import { isElementInViewport } from '../utils';
     }
 
     sidenavAutoExpand(sidebar);
-    sidenavAutoExpand(mobileSidebar);
     scrollToActiveSidebarItem();
 
     // for mobile sidebar, if sidebar is set, display proper item
