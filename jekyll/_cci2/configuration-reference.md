@@ -1096,7 +1096,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: v1-{{ checksum yark.lock }}
+    key: v1-{{ checksum "yarn.lock" }}
     paths:
       - node_modules/workspace-a
       - node_modules/workspace-c
