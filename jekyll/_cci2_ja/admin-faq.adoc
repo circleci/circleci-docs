@@ -1,4 +1,6 @@
 ---
+description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。 
+このガイドは他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。"
 version:
 - Server v2.x
 - 管理者
@@ -24,7 +26,7 @@ toc::[]
 [discrete]
 === ビルドコンテナの現在の状況を監視することはできますか？
 
-Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+Yes, refer to the <<nomad#basic-terminology-and-architecture, Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 [discrete]
 === 管理者ユーザーの追加方法を教えてください。
@@ -32,7 +34,7 @@ Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nom
 CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の ユーザーページ (`https://[domain-to-your-installation]/admin/users`) で行えます。
 
 [discrete]
-=== Nomad クライアントを安全にシャットダウンさせるには？
+=== Nomad クライアントを安全にシャットダウンするには？
 
 「Nomad クラスタの運用方法」を参照してください。
 
@@ -139,7 +141,7 @@ Services マシンの Replicated ログデータは `/var/log/replicated` 配下
 [discrete]
 ==== 5. 現在実行している Docker コンテナを確認する
 
-Replicated は、CircleCI Server を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
+Replicated は、CircleCI Server v2.x を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
 
 実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
 

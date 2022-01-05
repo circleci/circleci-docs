@@ -300,7 +300,7 @@ You can also specify which version of Xcode should be used. See the [Supported X
 jobs:
   build:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
       # Commands will execute in macOS container

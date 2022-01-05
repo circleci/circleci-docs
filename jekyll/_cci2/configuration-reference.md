@@ -370,6 +370,7 @@ jobs:
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the deveoper hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
+* `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
@@ -435,14 +436,14 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version 11.3:
+**Example:** Use a macOS virtual machine with Xcode version 12.5.1:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 ```
 
 #### **`windows`**
@@ -599,8 +600,9 @@ jobs:
 
 Class              | vCPUs | RAM
 -------------------|-------|-----
-medium (default)   | 4     | 8GB
-large<sup>(3)</sup>| 8     | 16GB
+medium (default)   | 4 @ 2.7 GHz    | 8GB
+macos.x86.medium.gen2   | 4 @ 3.2 GHz    | 8GB
+large<sup>(3)</sup>| 8 @ 2.7 GHz    | 16GB
 {: class="table table-striped"}
 
 ###### Example usage
@@ -611,7 +613,7 @@ large<sup>(3)</sup>| 8     | 16GB
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     resource_class: large
     steps:
       ... // other config
@@ -1963,7 +1965,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:

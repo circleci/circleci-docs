@@ -33,11 +33,11 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` には、任意の値を指定できまが、同じリソースクラスで使用される他のすべてのランナーの中で一意である必要があります。
+Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc#authentication[Authentication] step. `RUNNER_NAME` には、任意の値を指定できまが、同じリソースクラスで使用される他のすべてのランナーの中で一意である必要があります。
 
 == CircleCI ランナー設定ファイルをインストールする
 
-作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、パーミッションを `600` に設定します。
+Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
 
 ```bash
 sudo chown root: /opt/circleci/launch-agent-config.yaml
@@ -51,7 +51,7 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 === Ubuntu/Debian
 
 ```bash
-id -u circleci &>/dev/null || sudo adduser --uid 1500 --disabled-password --gecos GECOS circleci
+id -u circleci &>/dev/null || sudo adduser --disabled-password --gecos GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
@@ -60,7 +60,7 @@ sudo chown -R circleci /opt/circleci/workdir
 === CentOS/RHEL
 
 ```bash
-id -u circleci &>/dev/null || sudo adduser --uid 1500 -c GECOS circleci
+id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
@@ -90,13 +90,15 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
-== `systemd` ユニットを有効にする
+== Optional Steps
+
+=== Enable the `systemd` unit
 
  `/opt/circleci/circleci.service` を所有者を `root` にして作成し、アクセス許可を `755` に設定します。
 
 `TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
-CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとすぐにジョブを開始しようとすることに注意が必要です。そのため起動する前に設定を適切に行なっておく必要があります。 ローンチ エージェントはサービスとして設定可能であり、次のスクリプトで systemd により管理できます。
+If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -118,7 +120,7 @@ WantedBy = multi-user.target
 systemctl enable /opt/circleci/circleci.service
 ```
 
-== サービスを起動する
+=== Start the service
 
 CircleCI ランナー サービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
 
@@ -126,9 +128,9 @@ CircleCI ランナー サービスは起動するとすぐにジョブを実行�
 systemctl start circleci.service
 ```
 
-== サービスの実行状態を確認する
+=== Verify the service is running
 
-`systemctl` コマンドで表示されるシステム レポートの `Status` フィールドで、簡単な実行状態を確認できます。 このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
+The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
 
 エージェントの状態は、次のコマンドを実行して確認できます。
 

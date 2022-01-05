@@ -5,7 +5,8 @@ short-title: "次世代 CircleCI イメージへの移行"
 description: "従来のイメージから次世代イメージへの移行ガイド"
 order: 30
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
