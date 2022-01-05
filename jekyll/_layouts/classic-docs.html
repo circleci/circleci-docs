@@ -50,9 +50,7 @@
                   {% if timestampDiff > yearInSeconds %}
                     1+ year ago
                   {% else %}  
-                    is time ago not working {{ page.last_modified_at | timeago }} 
-                    no time ago
-                    {{ page.last_modified_at }} 
+                    {{ page.last_modified_at | timeago }} 
                   {% endif %} 
                 {% else %} 
                   {{ page.date | date: '%d-%b-%y' }} 
