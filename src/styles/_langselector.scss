@@ -31,8 +31,10 @@ $border-col: rgba(229,231,235, 1);
       @media (max-width: $screen-md) {
         display: block;
         margin-left: 16px;
-        font-size: 16px;
+        font-size: 14px;
         font-family: inherit;
+        font-weight: 600;
+
       }
     }
 
