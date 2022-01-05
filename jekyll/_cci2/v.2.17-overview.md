@@ -94,7 +94,7 @@ This document provides a summary of features and product notes for the release o
 {: #steps-to-update-to-circleci-server-v217 }
 Steps to update to CircleCI Server v2.17 are as follows:
 
-1. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
+1. Take a snapshot of your installation so you can roll back later if necessary (optional but recommended)
 2. Check you are running Docker v17.12.1 and update if necessary
 3. Update Replicated to v2.34.1 (steps in section below)
 4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
@@ -111,7 +111,7 @@ To take a snapshot of your installation:
 **Note:** It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
 Once you have the snapshot you are free to make changes on the Services machine.
 
-If you do need to rollback at any point, see our [restore from backup](http://localhost:4000/docs/2.0/backup/#restoring-from-backup) guide.
+If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/2.0/backup/#restoring-from-backup) guide.
 
 ### Update Replicated
 {: #update-replicated }
