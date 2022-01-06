@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Settings"
-short-title: "Settings"
-description: "Summary of project and org settings"
+title: "設定"
+short-title: "設定"
+description: "プロジェクト設定および組織設定の概要"
 categories:
   - settings
 order: 2

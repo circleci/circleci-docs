@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
-title: "CircleCI deployment"
+title: CircleCI deployment
+description: Learn how CircleCI can be configured to integrate with other services for QA/testing, feature management, and deployment strategies.
 redirect: /docs/2.0/deployment-integrations/
 ---
 

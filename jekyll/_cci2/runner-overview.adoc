@@ -6,6 +6,7 @@ version:
 = CircleCI Runner Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how CircleCI runner enables you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
 :toc-title:
@@ -106,7 +107,7 @@ Rather than limit the total number of registered runners, CircleCI runners are l
 
 CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
-NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
+NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
 
 == Public repositories
 

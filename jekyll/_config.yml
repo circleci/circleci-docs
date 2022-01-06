@@ -20,7 +20,10 @@ plugins:
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
-  - jekyll/minibundle
+  - jekyll-last-modified-at
+
+last-modified-at:
+  date-format: '%d-%b-%y'
 
 algolia:
   application_id: U0RXNGRK45
@@ -63,7 +66,7 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.2.1
+      serverversion: 3.2.2
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
@@ -76,7 +79,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.2.1
+    serverversion: 3.2.2
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0

@@ -12,13 +12,14 @@
 @import 'mobile';
 @import 'spacing';
 @import 'syntax';
+@import 'snippets';
+@import 'progressbar';
 
 // General
 body {
 	color: $body-text-color;
 	display: block;
 	width: 100%;
-	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 30%, #fff 30%, #fff 100%);
 	font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -65,7 +66,6 @@ div.main-body{
 
 div.main-body {
 	display: flex;
-	background: #fff;
 }
 
 .text-center-small-float-right {
@@ -204,7 +204,7 @@ div.article-container{
     @media (max-width: $screen-sm) {
       width: 100%;
     }
-    min-height: calc(100vh - 68px); // make sure content always fills available space (68px is header size)
+    min-height: calc(100vh - $sticky-height); // make sure content always fills available space (70px is header size)
 }
 
 article{
@@ -297,6 +297,27 @@ div.align-center img{
 	div {
 		scroll-margin-top: 5rem;
 	}
+}
+
+/* highlightjs number block of numbers */
+table tr td.hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    text-align: right;
+    color: #ccc;
+    vertical-align: top;
+    padding-right: 5px;
+	white-space: nowrap;
+}
+
+/* highlightjs number block of code */
+table tr td.hljs-ln-code {
+    padding-left: 10px;
 }
 
 // Homepage
@@ -454,40 +475,14 @@ pre {
 	color: #4e9eb3;
 }
 
-.server-version-badge {
-    background-color: white;
-    border: 1px solid #333;
-    padding: 2px 8px;
-    border-radius: 2px;
-    color: black;
-    margin: 0px 6px;
-    font-weight: bold;
-    font-size: 12px;
-    text-align: center;
-
-    &:first-child {
-      margin-left: 0px;
-    }
-}
-
 .tooltip-popover {
-    background-color: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 13px;
-    z-index: 1;
-}
-
-.server-version-wrapper {
-	display: flex;
-	align-items: center;
-  margin-bottom: 16px;
-  margin-top: -4px;
-
-  @media screen and (max-width: 1068px) {
-    margin: 0 0 16px 0;
-  }
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  z-index: 1;
+  display: none;
 }
 
 /* Shows when screen > $screen-md, hides when smaller */
@@ -685,4 +680,77 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   position: relative;
   top: calc(50% - 11px);
   left: 18px;
+}
+
+// CSS styling for the date modified X ago
+.quick-info-list {
+  background: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  display: flex;
+
+  img {
+	margin: 0px 3px 3px 0px;
+  }
+}
+
+#time-posted-on {
+  padding: 10px 10px 10px 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  color: #343434;
+}
+
+// badge tags
+.server-version-badge {
+  background-color: white;
+  border: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  padding: 0px;
+  color: #343434;
+
+  // We want to put a dot between every tag and there is undetermined number of tags
+  // First child is the tag icon
+  // Second child is the first tag name
+  &:not(:nth-child(1)):not(:nth-child(2)):before {
+    content: "\A";
+    width: 3px;
+    height: 3px;
+    border-radius:50%;
+    background: #343434;
+    display:inline-block;
+    margin: 0px 5px 3px 0px;
+  }
+}
+
+.server-version-wrapper {
+  padding: 10px;
+  flex-grow: 1;
+  border-left: 1px solid #DDDDDD;
+}
+
+#tooltip-time {
+  background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  display: none;
+}
+
+#tooltip-time[data-show] {
+  display: block;
+}
+
+#tooltip-time[data-popper-placement^=bottom] > #arrow {
+  top: -4px;
 }

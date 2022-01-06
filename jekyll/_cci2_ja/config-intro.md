@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
 title: "設定ファイルの概要"
-description: "CircleCI 2.0 設定ファイルのランディング ページ"
+description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -31,7 +32,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -61,7 +62,7 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 
 ## パート 2: ビルドのための情報と準備
 {: #part-two-info-and-preparing-to-build }
-That was nice but let’s get real.  Delivery graphs start with code.  In this example we will add a few lines that will get your code and then list it.  We will also do this in a second run.
+That was nice but let’s get real.  Delivery graphs start with code.  この例では、コードを取得してリストするための行を追加します。  We will also do this in a second run.
 
 1. まだパート 1 の手順を実行していない場合は、パート 1 を完了して、簡単な `.circleci/config.yml` ファイルをプロジェクトに追加してください。
 
@@ -70,7 +71,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -93,7 +94,7 @@ jobs:
 ### 学習ポイント
 {: #learnings }
 {:.no_toc}
-Although we’ve only made two small changes to the config, these represent significant organizational concepts.
+コンフィグに 2つの小さな変更を加えただけですが、これらは重要な組織的概念を表しています。
 
 - 行 7: `checkout` コマンドは、ジョブにコンテキストを与える、組み込みの予約語の一例です。  この例では、ビルドを開始できるように、このコマンドがコードをプル ダウンします。
 - 行 13 ～ 17: `build` ジョブの 2 つ目の run は、チェックアウトの内容を (`ls -al` で) リストします。  これで、ブランチを操作できるようになります。
@@ -107,7 +108,7 @@ Although we’ve only made two small changes to the config, these represent sign
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -154,7 +155,7 @@ We also added a small `run` block that demonstrates we are running in a node con
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   Hello-World:

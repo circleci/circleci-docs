@@ -74,7 +74,7 @@ jobs:
 The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
 
 <!-- markdownlint-disable MD046 -->
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -128,6 +128,7 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
+- `20.10.11`
 - `20.10.7`
 - `20.10.6`
 - `20.10.2`

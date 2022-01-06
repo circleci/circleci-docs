@@ -26,7 +26,6 @@ $btn-selected-blue: #004A95;
   top: 0;
 
   background-color: $white;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
 
   @media (max-width: $screen-xs-max) {
     position: sticky;
@@ -202,28 +201,104 @@ $btn-selected-blue: #004A95;
   }
 }
 
+.lang-selector-wrapper {
+  position: relative;
+
+    .global-nav--language-picker {
+      @media (max-width: $screen-md) {
+      padding: 0;
+    }
+      
+      display: flex;
+      align-items: center;
+      color: $black;
+      background-color: transparent;
+      background: none;
+      border: none;
+      padding: 2px 0 0 0;
+
+    .globe-icon {
+      background-color:transparent;
+      color: $black;
+      @media (min-width: $screen-md) {
+        &:hover {
+          filter: invert(39%) sepia(99%) saturate(634%) hue-rotate(105deg) brightness(83%) contrast(97%);
+        }
+      }
+      @media (max-width: $screen-md) {
+        padding-top: 6px;
+      }
+    } 
+    .lang-picker-mobile {
+      display: none;
+      @media (max-width: $screen-md) {
+        display: block;
+        margin-left: 16px;
+        font-size: 16px;
+        font-family: inherit;
+      }
+    } 
+  }
+
+  .lang-picker {
+    background: #FFFFFF;
+    display: none;
+    position: absolute;
+    box-shadow: 0px 0px 8px 0px #1616161F;
+    z-index: 30;
+    margin-top: 5px;
+    left: -21px;
+  }
+
+  .lang-dropdown {
+    width: 160px;
+  }
+
+  .lang-option {
+    display: block;
+    color: $black;
+    margin: 4px 0px;
+    padding: 4px 20px;
+    font-size: 15px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 18px;
+    &:hover {
+      color: $btn-hover-blue;
+      font-weight: 700;
+      transition: all 200ms;
+      transition-timing-function: cubic-bezier(.4,0,.2,1);
+      transition-duration: .15s;
+    }
+  }
+
+  .lang-active {
+    display: block;
+  }
+}
+
 .global-nav--external-link {
   &s {
     @media (min-width: $screen-md) {
       order: -1;
     }
+    margin: 0 16px;
   }
-
-  --link-color: #{$gray-dark};
-  --link-color-hover: #{$btn-hover-blue};
 
   display: flex;
   align-items: center;
   letter-spacing: 0.19px;
-  color: $gray-dark;
+  color: $black;
   font-size: 14px;
-  font-weight: $font-weight-bold;
+  text-decoration: none;
+  font-weight: $font-weight-base;
   @media (max-width: $screen-sm-max) {
     color: $black;
   }
 
   &:hover {
-    color: $btn-hover-blue;
+    font-weight: 500;
+    color: $black;
+    text-decoration: none;
   }
   .external-icon {
     margin-left: 4px;
@@ -231,7 +306,6 @@ $btn-selected-blue: #004A95;
     margin-top: 6px;
     margin-right: 4px;
   }
-
 
   @media (min-width: $screen-md) {
     margin-right: 20px;
@@ -390,9 +464,7 @@ body.global-nav-open .global-nav--search-button {
     }
 
     @media (min-width: $screen-md) {
-      border-left: solid 1px #aaaaaa;
-      margin-left: 24px;
-      margin-right: 24px;
+      margin-right: 16px;
       align-self: stretch;
       display: flex;
       align-items: center;

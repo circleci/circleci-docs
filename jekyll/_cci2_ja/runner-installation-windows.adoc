@@ -18,7 +18,7 @@ toc::[]
 
 NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、デスクトップ エクスペリエンス搭載 Datacenter エディションでテスト済みです。
 
-この手順では、CircleCI ローンチ エージェントとその依存関係 (Chocolatey、Git、Gzip) を Windows Server にインストールします。
+With this procedure, you install CircleCI launch agent and its dependencies, i.e., Chocolatey, Git and Gzip, on your Windows Server.
 
 セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
 
@@ -41,4 +41,4 @@ PowerShell インターフェイスにインストール結果が出力されま
 
 . インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[ランナー設定リファレンス]参照） The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
 
-セットアップが完了すると、ローンチ エージェントが自動的に起動し、処理対象のジョブの検索を開始します。
+After setup completes, the launch agent starts automatically and begins looking for jobs to process.

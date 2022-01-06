@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuring CircleCI"
-short-title: "Configuring CircleCI"
-description: "Reference for .circleci/config.yml"
+title: Configuring CircleCI
+short-title: Configuring CircleCI
+description: Reference for .circleci/config.yml
 order: 20
 version:
 - Cloud
@@ -117,7 +117,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows).
@@ -158,7 +158,7 @@ A Workflow is comprised of one or more uniquely named jobs. Jobs are specified i
 Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
-{: #lessjobnamegreater }
+{:job-name}
 
 Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
@@ -174,7 +174,7 @@ working_directory | N | String | In which directory to run the steps. Will be in
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -346,7 +346,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
 
@@ -368,8 +368,9 @@ jobs:
 ##### Available `machine` images
 {: #available-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the deveoper hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
+* `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
@@ -435,14 +436,14 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version 11.3:
+**Example:** Use a macOS virtual machine with Xcode version 12.5.1:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 ```
 
 #### **`windows`**
@@ -599,8 +600,9 @@ jobs:
 
 Class              | vCPUs | RAM
 -------------------|-------|-----
-medium (default)   | 4     | 8GB
-large<sup>(3)</sup>| 8     | 16GB
+medium (default)   | 4 @ 2.7 GHz    | 8GB
+macos.x86.medium.gen2   | 4 @ 3.2 GHz    | 8GB
+large<sup>(3)</sup>| 8 @ 2.7 GHz    | 16GB
 {: class="table table-striped"}
 
 ###### Example usage
@@ -611,7 +613,7 @@ large<sup>(3)</sup>| 8     | 16GB
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     resource_class: large
     steps:
       ... // other config
@@ -1020,13 +1022,12 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
 version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
 
-- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -1173,7 +1174,7 @@ A path is not required here because the cache will be restored to the location f
 ##### **`deploy` – DEPRECATED**
 {: #deploy-deprecated }
 
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and scheduling keys.**
+**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
 
 Special step for deploying artifacts.
 
@@ -1461,7 +1462,7 @@ workflows:
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
 
 ### **`version`**
-{: #version }
+{: #workflow-version }
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
 
 Key | Required | Type | Description
@@ -1550,7 +1551,7 @@ jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
 ##### **<`job_name`>**
-{: #lessjobnamegreater }
+{: #job-name-in-workflow }
 
 A job name that exists in your `config.yml`.
 
@@ -1964,7 +1965,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:

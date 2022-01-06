@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using Notifications"
-short-title: "Using Notifications"
+title: Using Notifications
+description: Learn how to use get CircleCI's job status via Slack, integrated chat, email and web notifications.
 order: 100
 published: true
 version:

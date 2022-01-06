@@ -4,7 +4,7 @@ title: "Introduction to Jenkins Converter"
 short-title: "Jenkins Converter Introduction"
 description: "Starting point for how to use the Jenkins Converter"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 noindex: true
 sitemap: false
@@ -14,7 +14,7 @@ The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-co
 
 Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started building on CircleCI.
 
-## Limitations
+## 制限事項
 {: #limitations }
 
 * A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
@@ -55,7 +55,7 @@ Depending on the use case, you might require the [machine executor](https://circ
 
 [CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
-### Jobs
+### ジョブ
 {: #jobs }
 
 Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
@@ -66,7 +66,7 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 - Caches, [saving](https://circleci.com/docs/2.0/configuration-reference/#save_cache) and [restoring](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
 - [Store Artifacts](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 
-### Steps
+### 手順
 {: #steps }
 
 While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.

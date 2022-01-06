@@ -798,7 +798,7 @@ executors:
       image: ubuntu-2004:202107-02
   macos: # macos executor running Xcode
     macos:
-      xcode: 12.5
+      xcode: 12.5.1
 
 jobs:
   test:

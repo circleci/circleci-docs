@@ -6,6 +6,7 @@ description: "テスト メタデータの収集"
 order: 34
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -31,18 +32,18 @@ CircleCI では、XML ファイルからテスト メタデータを収集し、
 
 ここで、`path` キーは、JUnit XML または Cucumber JSON テスト メタデータ ファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。 この `path` の値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
 
-**CircleCI Server をご使用の場合**、テストメタデータを収集するように設定すると、頻繁に失敗するテストが**インサイト**のページのリストに表示されます。それにより、不安定なテストを特定し、繰り返し発生する問題を隔離することができます。
+**If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![失敗したテストに関するインサイト]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
-_上記のスクリーンショットは CircleCI Server をご使用の場合のみ適用されます。_
+_The above screenshot applies to CircleCI server v2.x only._
 
-**クラウド版をご使用の場合は**、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/#circleci-api-insights)でテストの失敗に関する情報をご覧ください。
+**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## フォーマッタの有効化
 {: #enabling-formatters }
 
-JUnit フォーマッタを有効化するまで、テスト メタデータは CircleCI 2.0 で自動的には収集されません。 RSpec、Minitest、および Django に対して、以下の設定を追加してフォーマッタを有効化します。
+Test metadata is not automatically collected in CircleCI until you enable the JUnit formatters. RSpec、Minitest、および Django に対して、以下の設定を追加してフォーマッタを有効化します。
 
 - RSpec では、gemfile に以下を追加する必要があります。
 
@@ -529,9 +530,9 @@ steps:
       path: ./reports/junit
 ```
 
-全体の手順については、Viget の記事、[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
 
-**注意:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
+**注意:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 Using `--runInBand` will force Jest to use only the virtualized execution environment within the virtual machine.
 
 `--runInBand` の詳細については、[Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) ドキュメントを参照してください。 この問題の詳細については、公式 Jest リポジトリの [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) と [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) を参照してください。
 

@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 verison:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -17,7 +17,7 @@ verison:
 {: #quick-start }
 {:.no_toc}
 
-[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
+[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
 
 ## Orb の設定要素
 {: #orb-configuration-elements }
@@ -321,7 +321,7 @@ steps:
 Bash スクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/2.0/orb-author/#scripts) ガイドをご覧ください。
 
 ## Orb 内での Orb の使用と登録時の解決
-{: #using-orbs-within-your-orb-and-register-time-resolution }
+{: #-within-your-orb-and-register-time-resolution }
 
 Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、すべての Orb 依存関係は、ビルドの実行時ではなく Orb の登録時にすべて解決されます。
 

@@ -1,4 +1,9 @@
-= Migrating from TeamCity 
+---
+title: Migrating from TeamCity
+description: An overview of how to migrate from TeamCity to CircleCI.
+---
+
+= Migrating from TeamCity
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: pygments.rb
@@ -102,7 +107,7 @@ a|
 [source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 version: "2019.2"
 
@@ -146,7 +151,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-    # Define steps for job 
+    # Define steps for job
     steps:
       - checkout
       - run: echo "Hello World!"
@@ -221,7 +226,7 @@ project {
     parallel {
         build(Test1)
         build(Test2)
-    } 
+    }
     build(Package)
     build(Publish)
   }
@@ -279,7 +284,7 @@ jobs:
   my-mac-job:
     # Executor definition
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 
     # Steps definition
     steps:
