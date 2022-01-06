@@ -129,8 +129,8 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
-#### <a name="mochajs"></a>Mocha for Node.js
-{: #lessa-namemochajsgreaterlessagreatermocha-for-nodejs }
+#### Mocha for Node.js
+{: #mocha-for-node }
 {:.no_toc}
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
@@ -299,8 +299,8 @@ A working `.circleci/config.yml` section might look like this:
 // additional config...
 ```
 
-#### <a name="ava"></a>Ava for Node.js
-{: #lessa-nameavagreaterlessagreaterava-for-nodejs }
+#### Ava for Node.js
+{: #ava-for-node }
 {:.no_toc}
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
@@ -501,8 +501,8 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
           path: ~/test-results/junit
 ```
 
-#### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
-{: #lessa-namegradle-junit-resultsgreaterlessagreatergradle-junit-test-results }
+#### Gradle JUnit Test Results
+{: #gradle-junit-test-results }
 {:.no_toc}
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
