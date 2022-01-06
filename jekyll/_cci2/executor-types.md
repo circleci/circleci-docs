@@ -283,8 +283,6 @@ The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on m
 ## Using macOS
 {: #using-macos }
 
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
-
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. In macOS, the following resources classes are available:
 
 Class                 | vCPUs | RAM
@@ -292,6 +290,7 @@ Class                 | vCPUs | RAM
 medium                | 4 @ 2.7 GHz     | 8GB
 macos.x86.medium.gen2 | 4 @ 3.2 GHz     | 8GB
 large                 | 8 @ 2.7 GHz     | 16GB
+macos.x86.metal.gen1<sup>(1)</sup>                 | 12 @ 3.2 GHz     | 32GB
 {: class="table table-striped"}
 
 You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
@@ -307,6 +306,8 @@ jobs:
       # with Xcode 11.3 installed
       - run: xcodebuild -version
 ```
+
+<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) document to learn more about this resource class._
 
 ## Using the Windows executor
 {: #using-the-windows-executor }
