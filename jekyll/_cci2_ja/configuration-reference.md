@@ -10,19 +10,19 @@ version:
   - Server v2.x
 suggested:
   - 
-    title: 6 config optimization tips
+    title: 6 つの構成オプション
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
   - 
-    title: Intro to dynamic config
+    title: ダイナミック コンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
   - 
-    title: Using dynamic config
-    link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
+    title: ダイナミック コンフィグの使用
+    link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
-    title: Validate your config using local CLI
-    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
+    title: ローカル CLI を使用した設定のバリデーション
+    link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
-    title: How to trigger a single job
+    title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
 
