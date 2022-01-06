@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Skip or cancel jobs and workflows
+title: ジョブとワークフローのスキップとキャンセル
 description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
 order: 100
 version:
