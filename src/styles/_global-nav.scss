@@ -179,8 +179,10 @@ $btn-selected-blue: #004A95;
 
 .global-nav--list {
   @media (max-width: $screen-sm-max) {
-    margin-top: 7.5px;
-    margin-left: 0px;
+    display: flex;
+    width: 100%;
+    margin: 0 !important;
+    padding: 8px 0;
 
     &-item {
       position: relative;
@@ -423,11 +425,6 @@ body.global-nav-open .global-nav--search-button {
 }
 
 @media (max-width: $screen-sm-max) {
-  .global-nav--list,
-  .global-nav--footer {
-    margin-top: 15px;
-  }
-
   .global-nav--footer {
     width: 100%;
     box-sizing: content-box;

@@ -39,6 +39,10 @@ $border-col: rgba(229,231,235, 1);
     }
 
     @media (max-width: $screen-md) {
+      border-bottom: 1px solid #D8D8D8;
+      width: 100%;
+      padding: 16px 0 24px 0;
+
       .globe-icon {
         padding-top: 6px;
       }
@@ -155,6 +159,8 @@ $border-col: rgba(229,231,235, 1);
       align-items: center;
       border-bottom: 1px solid $border-col;
       margin-bottom: 0px;
+      // override css being set via jquery for desktop-only styles.
+      background: initial !important;
     }
 
     .lang-picker-mobile-dimmer {
