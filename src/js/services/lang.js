@@ -42,8 +42,10 @@ const languages = {
 //   window.location.href = redirectLocation(langCode);
 // };
 
+// Refactor function for setting language to work in preview builds as well
 const reloadNewLanguage = (langCode) => {
   const path = window.location.pathname;
+  // get index of path endpoint to insert lang code
   const insert = path.indexOf('/', 1) + 1;
 
   if (langCode === 'ja' && window.currentLang !== 'ja') {
@@ -72,7 +74,6 @@ const handleChangeLanguageNav = () => {
   for (const langCode in languages) {
     const langValue = languages[langCode];
     langValue.domEl.addEventListener('click', () => {
-      // reloadWithNewLocale(langCode);
       reloadNewLanguage(langCode);
       window.AnalyticsClient.trackAction('Language Selector', {
         selected: langValue.name,
@@ -84,10 +85,7 @@ const handleChangeLanguageNav = () => {
 
 // Request New Language form
 const languageRequest = () => {
-  const submitBtn = $('#submit-btn');
   const langForm = $('.lang-form');
-  const input = $('#lang-req')[0];
-
   // Add styles for input form when active
   // Remove hover effect styles on input form
   langForm.on('click', () => {
@@ -100,21 +98,38 @@ const languageRequest = () => {
       }
     });
   });
-  submitBtn.on('click', () => {
-    window.AnalyticsClient.trackAction('New Language Request', {
-      requestedLanguage: input.value,
-      browserNativeLang: window.navigator.language,
-      app: 'Docs',
-      location: window.location.href,
-      path: window.location.pathname,
-    });
-
-    // Swap out button with submit message after submission
-    submitBtn.replaceWith(
-      '<span id=lang-submitted>' + 'Thank you for your help' + '</span>',
-    );
-  });
 };
+
+const submitLanguage = () => {
+  const submitBtn = $('#submit-btn');
+  const input = $('#lang-req')[0];
+
+  if (input.value.length > 0) {
+    // If user input present, adjust UI and add event to submit data on click to amplitude
+    submitBtn.css({ opacity: '100%', cursor: 'pointer' });
+    submitBtn.on('click', () => {
+      clearInterval(checkInput);
+      window.AnalyticsClient.trackAction('New Language Request', {
+        requestedLanguage: input.value,
+        browserNativeLang: window.navigator.language,
+        app: 'Docs',
+        location: window.location.href,
+        path: window.location.pathname,
+      });
+      // Swap out button with submit message after submission
+      submitBtn.replaceWith(
+        '<span id=lang-submitted>' + 'Thank you for your help' + '</span>',
+      );
+    });
+  }
+  // If no user input present, adjust UI and remove event from submit btn
+  if (!input.value.length) {
+    submitBtn.css({ opacity: '50%', cursor: 'not-allowed' });
+    submitBtn.off('click');
+  }
+};
+// use intervals to check if user provided input to alter UI and toggle on click event for submit btn
+const checkInput = setInterval(submitLanguage, 500);
 
 export function init() {
   setLanguageSelectorOnLoad();
