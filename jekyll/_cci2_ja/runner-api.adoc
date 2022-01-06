@@ -111,11 +111,11 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [cols=3*, options="header", stripes=even]
 |===
 | ステータス
-| お問い合わせ内容
+| 説明
 | 形式
 
 |200
-|ランナーの一覧
+|エージェントの一覧
 |JSON
 |===
 
@@ -127,7 +127,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | 名前
 | タイプ
 | 必須
-| お問い合わせ内容
+| 説明
 
 |items
 |オブジェクト配列
@@ -209,7 +209,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | タイプ
 | 入力
 | 必須
-| お問い合わせ内容
+| 説明
 
 | resource-class
 | string
@@ -231,7 +231,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 [cols=3*, options="header", stripes=even]
 |===
 | ステータス
-| お問い合わせ内容
+| 説明
 | 形式
 
 |200
@@ -247,7 +247,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 | 名前
 | タイプ
 | 必須
-| お問い合わせ内容
+| 説明
 
 |unclaimed_task_count
 |整数
@@ -282,7 +282,7 @@ Get the number of running tasks for a given resource class.
 | タイプ
 | 入力
 | 必須
-| お問い合わせ内容
+| 説明
 
 | resource-class
 | string
@@ -304,11 +304,11 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-cla
 [cols=3*, options="header", stripes=even]
 |===
 | ステータス
-| お問い合わせ内容
+| 説明
 | 形式
 
 |200
-|Number of running tasks
+|実行中のタスクの数
 |JSON
 |===
 
@@ -325,7 +325,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-cla
 |running_runner_tasks
 |整数
 |true
-|number of running tasks
+|実行中のタスクの数
 |===
 
 ==== 例
