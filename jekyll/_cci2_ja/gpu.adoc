@@ -6,12 +6,12 @@ version:
 = Running GPU Executors
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
+:page-description: ここでは、CircleCI server を使用して GPU (Graphics Processing Unit) Machine Executors を実行する方法の概要について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
+ここでは、CircleCI server を使用して GPU (Graphics Processing Unit) Machine Executors を実行する方法の概要について説明します。
 
 toc::[]
 
@@ -33,7 +33,7 @@ sudo apt-get --yes --force-yes install cuda
 nvidia-smi
 ```
 
-`nvidia-smi` is only required for testing purposes. GPU Executors は、ステップ 7 で CUDA ドライバをインストールした時点で有効になります。
+`nvidia-smi` はテスト目的でのみ必要です。 GPU Executors は、ステップ 7 で CUDA ドライバをインストールした時点で有効になります。
 
 == AMI への GPU 手順の追加
 
