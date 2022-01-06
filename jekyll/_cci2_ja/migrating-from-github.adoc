@@ -1,8 +1,8 @@
 ---
-title: Migrating from Github Actions
+title: Github Actions からの移行
 ---
 
-= Migrating from Github Actions
+= Github Actions からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Github Actions to CircleCI.
@@ -22,7 +22,7 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 4. *テスの並列処理*: CircleCI のプラットフォームは、https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
  https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
-その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]お試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただき]、トライアルを設定してください。
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
 == コンセプト
 
