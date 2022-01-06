@@ -1,9 +1,9 @@
 ---
-title: Migrating from TeamCity
-description: An overview of how to migrate from TeamCity to CircleCI.
+title: TeamCity からの移行
+description: TeamCity から CircleCI への移行方法の概説
 ---
 
-= Migrating from TeamCity
+= TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: pygments.rb
