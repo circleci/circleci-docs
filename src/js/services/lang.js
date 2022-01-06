@@ -21,27 +21,6 @@ const languages = {
   },
 };
 
-// Sets the new url for the lanuage selected
-// const redirectLocation = (langCode) => {
-//   const parser = new RegExp(
-//     '^(https?://' + window.location.host + '/)(docs/[a-z]{2}/|docs/)(.*)',
-//     's',
-//   );
-//   const baseURL = 'https://circleci.com/' + languages[langCode].url + '2.0';
-//   if (!parser.test(window.location.href)) {
-//     return baseURL;
-//   }
-//   return window.location.href.replace(
-//     parser,
-//     '$1' + languages[langCode].url + '$3',
-//   );
-// };
-
-// Reloads the page with the new url of the selected language applied
-// const reloadWithNewLocale = (langCode) => {
-//   window.location.href = redirectLocation(langCode);
-// };
-
 // Refactor function for setting language to work in preview builds as well
 const reloadNewLanguage = (langCode) => {
   const path = window.location.pathname;
@@ -83,16 +62,17 @@ const handleChangeLanguageNav = () => {
   }
 };
 
-// Request New Language form
+/*
+  Handle functionality and UI changes for language request input form and new language submission when an input is provided
+*/
+const langForm = $('.lang-form');
+
 const languageRequest = () => {
-  const langForm = $('.lang-form');
   // Add styles for input form when active
-  // Remove hover effect styles on input form
   langForm.on('click', () => {
     langForm.addClass('active');
     $(document).on('click', (e) => {
       // Remove styles for active input form after users click off it
-      // Reinitialize hover effect
       if (!$(e.target).is(langForm)) {
         langForm.removeClass('active');
       }
@@ -105,10 +85,12 @@ const submitLanguage = () => {
   const input = $('#lang-req')[0];
 
   if (input.value.length > 0) {
-    // If user input present, adjust UI and add event to submit data on click to amplitude
+    // If user input present, adjust UI and add event listener to submit data on click to amplitude
     submitBtn.css({ opacity: '100%', cursor: 'pointer' });
     submitBtn.on('click', () => {
-      clearInterval(checkInput);
+      clearInterval(checkLangInput);
+      langForm.css('pointer-events', 'none');
+
       window.AnalyticsClient.trackAction('New Language Request', {
         requestedLanguage: input.value,
         browserNativeLang: window.navigator.language,
@@ -129,7 +111,7 @@ const submitLanguage = () => {
   }
 };
 // use intervals to check if user provided input to alter UI and toggle on click event for submit btn
-const checkInput = setInterval(submitLanguage, 500);
+const checkLangInput = setInterval(submitLanguage, 500);
 
 export function init() {
   setLanguageSelectorOnLoad();
