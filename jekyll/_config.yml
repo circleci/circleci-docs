@@ -21,9 +21,13 @@ plugins:
   - jekyll-target-blank
   - jekyll-toc
   - jekyll-last-modified-at
+  - jekyll-timeago
 
 last-modified-at:
   date-format: '%d-%b-%y'
+
+jekyll_timeago:
+  depth: 1
 
 algolia:
   application_id: U0RXNGRK45
