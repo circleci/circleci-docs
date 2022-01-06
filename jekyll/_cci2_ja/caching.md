@@ -286,7 +286,7 @@ CircleCI manual dependency caching requires that you be explicit about what you 
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/mysql:5.6
+      - image: cimg/mysql:5.7
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
