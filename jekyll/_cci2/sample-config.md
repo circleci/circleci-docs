@@ -589,7 +589,7 @@ jobs:
     working_directory: ~/mern-starter
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
-      - image: circleci/node:14.17.3-buster
+      - image: cimg/node:16.13.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -614,7 +614,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:14.17.3-buster
+      - image: cimg/node:16.13.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -959,11 +959,11 @@ version: 2.0
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -977,11 +977,11 @@ jobs:
 
   bundle_dependencies:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -999,11 +999,11 @@ jobs:
 
   rake_test:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -1021,11 +1021,11 @@ jobs:
 
   precompile_assets:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

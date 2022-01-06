@@ -161,7 +161,7 @@ and copy and paste the following text into it.
    jobs: # we now have TWO jobs, so that a workflow can coordinate them!
      one: # This is our first job.
        docker: # it uses the docker executor
-         - image: circleci/ruby:2.4.1 # specifically, a docker image with ruby 2.4.1
+         - image: cimg/ruby:2.6.8 # specifically, a docker image with ruby 2.6.8
            auth:
              username: mydockerhub-user
              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -172,7 +172,7 @@ and copy and paste the following text into it.
          - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
      two: # This is our second job.
        docker: # it runs inside a docker image, the same as above.
-         - image: circleci/ruby:2.4.1
+         - image: cimg/ruby:3.0.2
            auth:
              username: mydockerhub-user
              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -213,7 +213,7 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: cimg/ruby:3.0.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -230,7 +230,7 @@ jobs:
             - echo-output
   two:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: cimg/ruby:3.0.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

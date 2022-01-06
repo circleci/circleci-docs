@@ -83,7 +83,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-30-alpha
+      - image: cimg/android:2021.10.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -183,7 +183,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+      - image: cimg/android:2021.10.2  # gcloud is baked into this image
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
