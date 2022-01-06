@@ -98,9 +98,9 @@ The system has been designed to allow administrators to configure the task-agent
 
 == Runner concurrency
 
-You can break your single build process into different steps and run them concurrently (at the same time).
+To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to runners across all your resource classes.
 
-While there are limits to the number of registered runners you can have, the limit applies to the total number of runner jobs across resource classes. With this flexibility you can use multiple resource classes to deploy work to runners to get a better throughput.
+Rather than limit the total number of registered runners, CircleCI runners are limited by the total number of runner jobs (tasks) across your resource classes.
 
 == Debugging with SSH
 
