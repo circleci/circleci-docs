@@ -400,27 +400,3 @@ $(document).ready(function () {
 
 // Currently this function is only used for the insights table
 $(highlightURLHash);
-
-// update date shown to be X ago tooltip code
-$(function () {
-  const tooltiptime = document.getElementById('tooltip-time');
-  const timeposted = document.getElementById('time-posted-on');
-  let popperInstance = null;
-
-  showEvents.forEach((event) => {
-    timeposted?.addEventListener(event, () => {
-      tooltiptime.setAttribute('data-show', '');
-      popperInstance = createPopper(timeposted, tooltiptime, {});
-    });
-  });
-
-  hideEvents.forEach((event) => {
-    timeposted?.addEventListener(event, () => {
-      tooltiptime.removeAttribute('data-show');
-      if (popperInstance) {
-        popperInstance.destroy();
-        popperInstance = null;
-      }
-    });
-  });
-});
