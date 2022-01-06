@@ -26,7 +26,7 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
 
-This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
+`.circleci/config.yml` ファイルで使用される CircleCI 2.x 構成キーのリファレンス ガイドです。
 
 `config.yml` の全体は「[サンプル コード](#サンプル-コード)」で確認できます。
 
