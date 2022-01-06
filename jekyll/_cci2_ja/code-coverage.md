@@ -369,7 +369,7 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 ## Coveralls
 {: #coveralls }
 
-Coveralls のユーザーは、 [カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
+Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
 
