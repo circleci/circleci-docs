@@ -6,6 +6,7 @@ description: "Using Workflows to Schedule Jobs"
 order: 30
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: Manual job approval and scheduled workflow runs
@@ -253,6 +254,10 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
+<div class="alert alert-warning" role="alert">
+  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+</div>
+
 It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
 Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
@@ -267,7 +272,7 @@ Consider running workflows that are resource-intensive or that generate reports 
 
 By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
-In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `main` and `beta` branches.
 
 **Note:** Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain reliability during busy times such as 12:00am UTC. Scheduled workflows should not assume they are started with to-the-minute accuracy.
 
@@ -285,7 +290,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - beta
     jobs:
       - coverage

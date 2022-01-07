@@ -22,7 +22,7 @@ Google Cloud SDK は、Google Cloud Platform (GCP) サービスへのアクセ�
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI 2.0 プロジェクト
+- A CircleCI project.
 - GCP プロジェクト
 
 ### Google Cloud SDK のインストール

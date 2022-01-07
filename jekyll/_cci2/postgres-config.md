@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
-description: "Example of Configuring PostgreSQL"
+description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 order: 35
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -99,7 +100,7 @@ registry of your choosing.
 {: #example-environment-setup }
 {:.no_toc}
 
-In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
 1.	DATABASE_URL environment variable, if set
 2.	The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).

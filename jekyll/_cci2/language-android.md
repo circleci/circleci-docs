@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Language Guide: Android"
 short-title: "Android"
-description: "Building and Testing an Android App on CircleCI 2.0"
+description: "Building and Testing an Android App on CircleCI"
 categories: [language-guides]
 order: 9
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -119,7 +120,7 @@ jobs:
 {: #react-native-projects }
 {:.no_toc}
 
-React Native projects can be built on CircleCI 2.0 using Linux, Android
+React Native projects can be built on CircleCI using Linux, Android
 and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.

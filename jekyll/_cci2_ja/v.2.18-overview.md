@@ -4,11 +4,11 @@ title: "CircleCI Server v2.18 の新機能"
 short-title: "CircleCI Server v2.18 の新機能"
 description: "CircleCI Server v2.18 の入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 ---
 
-CircleCI Server v2.18 の機能強化や不具合修正についてまとめます。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。 For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
+This document provides a summary of features and product notes for the release of CircleCI server v2.18. パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。 For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
 ## Requirements for upgrading
 {: #requirements-for-upgrading }
@@ -61,15 +61,15 @@ CircleCI Server v2.18 の機能強化や不具合修正についてまとめま�
 
 <br>
 
-* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.
+* リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.
 
 ## Fixed in release 2.18
 {: #fixed-in-release-218 }
 
-* Additional fixes around contexts and org renames.
-* Fixed an issue where occasionally volumes would fail to attach to spun up Remote Docker/`machine` instances.
-* Fixed an issue where the CircleCI integration could not be installed on JIRA instances with the jira.com subdomain.
-* Fixed an issue where the Workflows page would still point to an old repo after renaming an organization.
-* Fixed an issue where the Workflows UI would fail to refresh data automatically.
-* Improved context loading times in cases when they could cause timeouts in the UI.
-* Fixed an issue where contexts would cause builds to return CIRCLE_BUG .
+* コンテキストと組織の名前変更に関して、追加の修正を行いました。
+* ボリュームのアタッチに失敗してリモート Docker/`machine` インスタンスをスピンアップできないことがある問題を修正しました。
+* jira.com サブドメインを持つ JIRA インスタンスに CircleCI インテグレーションをインストールできない問題を修正しました。
+* 組織の名前を変更した後でもワークフローのページが古いリポジトリを指す問題を修正しました。
+* ワークフローの UI がデータを自動的に更新できない問題を修正しました。
+* UI でタイム アウトが発生する場合のコンテキストの読み込み時間を改善しました。
+* コンテキストによってビルドが CIRCLE_BUG を返すことがある問題を修正しました。

@@ -5,7 +5,7 @@ short-title: "通知の使用"
 order: 100
 published: true
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -21,12 +21,18 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -37,14 +43,6 @@ workflows:
     # IRC インテグレーションによってジョブごとの通知が送信されます
       - build
       - test
-      - build
-      - test
-      - build
-      - test
-      - build
-      - test
-      - build
-      - test
 ```
 
 続いて、各通知タイプ (チャット、メール、Web) の設定方法について説明していきます。
@@ -52,7 +50,7 @@ workflows:
 ## チャット通知の有効化
 {: #set-or-change-email-notifications }
 
-Use the [Notifications](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
+CircleCI アプリケーションの [[Notifications (通知)](https://app.circleci.com/settings/user/notifications){:rel="nofollow"}] ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
 
 Slack 通知の例を以下に示します。
 

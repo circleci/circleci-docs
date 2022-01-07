@@ -7,7 +7,8 @@ categories:
   - 設定ファイル
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
 ---
 
 ここでは、再利用可能なコマンド、ジョブ、Executor、Orb を利用する方法について説明します。 また、パラメーター化された再利用可能な要素を作成するためのパラメーターの使用方法についても取り上げます。
@@ -185,9 +186,8 @@ commands:
     parameters:
       os:
         default: "linux"
-        description: The target Operating System for the heroku binary.
- Must be one of "linux", "darwin", "win32".
-                type: enum
+        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
+        type: enum
         enum: ["linux", "darwin", "win32"]
 ```
 
@@ -416,12 +416,12 @@ commands:
 {: #the-commands-key }
 
 
-コマンドは、ジョブ内で実行される一連のステップのシーケンスをマップとして定義します。これにより、1 つのコマンド定義を複数のジョブで再利用することができます。
+コマンドは、ジョブ内で実行される一連のステップのシーケンスをマップとして定義します。 これにより、1 つのコマンド定義を複数のジョブで再利用することができます。
 
 | キー          | 必須 | 種類    | 説明                                                                                                                                                                              |
 | ----------- | -- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                                                                                    |
-| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%A7%8B%E6%96%87)」セクションを参照してください。 |
+| ステップ        | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                                                                                    |
+| パラメーター      | ×  | マップ   | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%A7%8B%E6%96%87)」セクションを参照してください。 |
 | description | ×  | 文字列   | コマンドの目的を記述する文字列。 ドキュメントの生成に使用します。                                                                                                                                               |
 {: class="table table-striped"}
 
@@ -586,7 +586,7 @@ jobs:
 ### `executors` キー
 {: #the-executors-key }
 
-Executor は、ジョブのステップが実行される環境を定義します。1 つの Executor 定義を複数のジョブで 再利用することができます。
+Executor は、ジョブのステップが実行される環境を定義します。 1 つの Executor 定義を複数のジョブで 再利用することができます。
 
 | キー                | 必須               | 種類  | 説明                                                                                                                                                                                                         |
 | ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -760,7 +760,7 @@ executors:
       - image: cimg/node:lts
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
      ENV: ci
 
@@ -770,8 +770,8 @@ jobs:
       - image: cimg/base:stable
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    # 以下のテスト Executor は、より明示的な "docker" Executor があれば上書きされます。 任意の環境変数が追加されます。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # The test executor below will be overwritten by the more explicit "docker" executor. Any env vars will be added.
     executor: node
     steps:
       - run: echo "Node will not be installed."
@@ -787,11 +787,10 @@ jobs:
       - image: cimg/base:stable
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
-     ENV: ci       # Executor で設定された値
- 
-     steps:
+     ENV: ci       # From executor.
+    steps:
       - run: echo "Node will not be installed."
 ```
 
@@ -826,7 +825,7 @@ workflows:
 ```
 {% endraw %}
 
-**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 このキーに割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
+**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
 
 ```yaml
 workflows:
@@ -972,7 +971,6 @@ workflows:
     jobs:
       - sayhello:
           saywhat: Everyone
-
 ```
 
 ### 同じジョブの複数回の呼び出し

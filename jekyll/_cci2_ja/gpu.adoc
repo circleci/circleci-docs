@@ -1,4 +1,5 @@
 ---
+description: "This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server."
 version:
 - Server v2.x
 - Server Admin
@@ -10,15 +11,15 @@ version:
 :toc: macro
 :toc-title:
 
-This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
+This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
 
 toc::[]
 
-== Prerequisites
+== 前提条件
 
 Configure the `vm-service` in the Replicated management console to start a GPU-enabled instance.
 
-== Overview
+== 概要
 Run the following commands on any Nvidia GPU-enabled instance. The following example uses CUDA 8.0, but you can use any CUDA runtime version supported by your GPU instance.
 
 ```shell
@@ -36,4 +37,4 @@ nvidia-smi
 
 == Adding GPU Steps to an AMI
 
-To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the <<vm-service#overview,Configuring VM Service>> documentation.
+To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the <<vm-service#overview, Configuring VM Service>> documentation.

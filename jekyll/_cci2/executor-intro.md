@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Executors and Images"
 short-title: "Executors and Images"
-description: "CircleCI 2.0 executors and images"
+description: "CircleCI executors and images"
 categories: [configuration]
 order: 1
 version:
@@ -11,7 +11,7 @@ version:
 - Server v3.x
 ---
 
-CircleCI offers several build environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
+CircleCI offers several execution environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
 
 ![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -54,7 +54,7 @@ jobs:
   build: # name of your job
     machine: # executor type
       image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
-      
+
     steps:
       # Commands run in a Linux virtual machine environment
 ```
@@ -75,13 +75,13 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 ## macOS
 {: #macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
 ```
 jobs:
   build: # name of your job
     macos: # executor type
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
       # Commands run in a macOS virtual machine environment
@@ -96,7 +96,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 The syntax for using the Windows executor in your config differs depending on whether you are using:
 
 * The cloud version of CircleCI, using config version 2.1 and the Windows orb.
-* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```

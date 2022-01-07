@@ -21,7 +21,7 @@ The Google Cloud SDK is a powerful set of tools that can be used to access Googl
 {: #prerequisites }
 {:.no_toc}
 
-- A CircleCI 2.0 project.
+- A CircleCI project.
 - A GCP project.
 
 ### Installing the Google Cloud SDK
@@ -69,7 +69,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-If you are using a custom image, you must authenticate to GCR. Use the [`auth` key (https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
+If you are using a custom image, you must authenticate to GCR. Use the [`auth` key](https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
 
 ```yaml
 version: 2.1

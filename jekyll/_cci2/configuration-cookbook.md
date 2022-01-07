@@ -7,6 +7,8 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
+- Server v2.x
 ---
 
 The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
@@ -27,18 +29,19 @@ CircleCI orbs are configuration packages that enable you to get started with the
 
 Refer to the [CircleCI Orbs Registry](https://circleci.com/developer/orbs) for the complete list of available orbs.
 
-To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/developer/orbs/orb/circleci/hello-build) in the `circleci` namespace.
+To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`node` orb](https://circleci.com/developer/orbs/orb/circleci/node) in the `circleci` namespace.
 
 ```yaml
 version: 2.1
 
 orbs:
-  hello: circleci/hello-build@x.y.z
+  node: circleci/node@x.y #orb version
 
 workflows:
-  "Hello Workflow":
+  test_my_app:
     jobs:
-      - hello/hello-build
+      - node/test:
+          version: <node-version>
 ```
 
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
@@ -51,7 +54,7 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 
 * In order to use pipelines features and orbs you must use `version 2.1` config.
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
+* If you wish to remain using `version 2.0` config, or are using CircleCI server v2.x, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items that appear within `< >` should be replaced with your own parameters.
 
@@ -540,7 +543,7 @@ For more information on using API v2 endpoints, see the [API Reference Documenta
 
 Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
 
-The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
+The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
 
 ```yaml
 version: 2.1
@@ -556,9 +559,9 @@ jobs:
       - checkout
       - when:
           condition:
-            equal: [ master, << pipeline.git.branch >> ]
+            equal: [ main, << pipeline.git.branch >> ]
           steps:
-            - run: echo "I am on master"
+            - run: echo "I am on main"
 
 workflows:
   my-workflow:
@@ -686,7 +689,7 @@ workflows:
           mapping: |
             service1/.* run-build-service-1-job true
             service2/.* run-build-service-2-job true
-          base-revision: master
+          base-revision: main
           # this is the path of the configuration we should trigger once
           # path filtering and pipeline parameter value updates are
           # complete. In this case, we are using the parent dynamic
@@ -795,7 +798,7 @@ executors:
       image: ubuntu-2004:202107-02
   macos: # macos executor running Xcode
     macos:
-      xcode: 12.5
+      xcode: 12.5.1
 
 jobs:
   test:

@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Android"
 short-title: "Android"
-description: "CircleCI 2.0 での Android アプリのビルドとテスト"
+description: "Building and Testing an Android App on CircleCI"
 categories:
   - language-guides
 order: 9
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -52,7 +53,7 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
-以下の例は、Android マシン イメージではなく Android Docker イメージを使用する例を示しています。
+上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
 
 
 ## 単体テストの設定ファイルの例
@@ -95,12 +96,12 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/ja/2.0/artifacts/
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
           destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/ja/2.0/collect-test-data/
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
-      # See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 {% endraw %}
 
@@ -108,7 +109,7 @@ jobs:
 {: #react-native-projects }
 {:.no_toc}
 
-React Native プロジェクトは、Linux、Android、および macOS の機能を使用して CircleCI 2.0 上でビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
+React Native projects can be built on CircleCI using Linux, Android and macOS capabilities. React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
 ## Firebase Test Lab を使用したテスト
 {: #testing-with-firebase-test-lab }

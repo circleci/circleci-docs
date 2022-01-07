@@ -4,7 +4,7 @@ title: "Linux プロジェクトの 1.0 から 2.0 への移行"
 short-title: "Linux プロジェクトの 1.0 から 2.0 への移行"
 description: "CircleCI 1.0 から 2.0 に移行する理由と方法"
 categories:
-  - migration
+  - 移行
 order: 15
 version:
   - Server v2.x
@@ -103,9 +103,9 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 ## 環境変数
 次のように置き換えます。
 
-CircleCI 2.0 では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
+In CircleCI, all defined environment variables are treated literally. コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
-詳細については、「[環境変数を使用する]({{ site.baseurl }}/ja/2.0/env-vars/)」を参照してください。
+For more information, refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## ワークフローを構成する手順
 {: #steps-to-configure-workflows }
@@ -199,7 +199,7 @@ dependencies:
     - <インストール済み依存関係>
 ```
 
-Is replaced with:
+次のように置き換えます。
 
 ```yaml
       - run:
@@ -214,7 +214,7 @@ Is replaced with:
     - "vendor/bundle"
 ```
 
-With the following, nested under `steps:` and customizing for your application as appropriate:
+次のように置き換えて `steps:` の下にネストし、実際のアプリケーションに合わせて適切にカスタマイズします。
 
 ```yaml
      - save_cache:

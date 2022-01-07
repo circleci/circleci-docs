@@ -1,4 +1,5 @@
 ---
+description: "This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform."
 version:
 - Server v2.x
 - Server Admin
@@ -10,17 +11,17 @@ version:
 :toc: macro
 :toc-title:
 
-The following sections provide planning information, system requirements and step-by-step instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
+The following sections provide planning information, system requirements and step-by-step instructions for installing CircleCI server on Amazon Web Services (AWS) with Terraform.
 
-Refer to the <<v.2.19-overview#,What's New>> page for full details of what's new and fixed in this release.
+Refer to the <<v.2.19-overview#, What's New>> page for full details of what's new and fixed in this release.
 
-If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation,Upgrading a Server Installation>>.
+If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation, Upgrading a Server Installation>>.
 
 toc::[]
 
 == Support Packages
 
-CircleCI 2.0 may be installed without a support package, on AWS, using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below:
+CircleCI server may be installed without a support package, on AWS, using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below:
 
 === Non-AWS Platform Support
 

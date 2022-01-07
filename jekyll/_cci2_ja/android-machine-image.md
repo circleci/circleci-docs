@@ -108,7 +108,7 @@ jobs:
       # "post-emulator-launch-assemble-command" コマンドを指定して
       # gradle コマンドの実行をオーバーライドするか、"wait-for-emulator" を false に設定して
       # エミュレーターの待機を完全に無効にします
-      - android/start-emulator:
+       - android/start-emulator:
           avd-name: myavd
           no-window: true
           restore-gradle-cache-prefix: v1a

@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -30,7 +30,7 @@ CircleCI Orb とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring
 {: #private-orbs }
 
 
-**メモ:** プライベート Orb 機能は、いずれかの有料[プラン](https://circleci.com/ja/pricing/)で利用いただけます。 パフォーマンスプランのお客様は、最大3つのプライベート Orb を作成することができ、スケールプランのお客様は、作成できるプライベート Orb の数に制限はありません。 詳細については、営業担当者へお問い合わせください。
+**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
 {: class="alert alert-warning"}
 
 プライベート Orb 機能と使うと、以下の状態で Orb をオーサリングできます。
@@ -126,7 +126,7 @@ workflows:
 | Certified | Written and tested by the CircleCI team | | Partner | Written by our technology partners | | Community | Written by the community |
 {: class="table table-striped"}
 
-**注:** _未承認の Orb を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)]** ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。 </p>
+**注:** _未承認の Orb を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)]** ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。
 {: class="alert alert-warning"}
 
 それぞれのOrb には、Orb レジストリにリストされている説明とドキュメントが含まれています。 多くの場合、Orb には参考になる使用例が記載されています。

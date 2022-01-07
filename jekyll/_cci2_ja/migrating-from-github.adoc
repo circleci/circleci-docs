@@ -1,30 +1,31 @@
-= Migrating from Github Actions
+= Github Actions からの移行
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from Github Actions to CircleCI.
+このドキュメントでは、Github Actions から CircleCI に移行する方法を概説します。
 
-== Why Migrate to CircleCI?
+== CircleCI に移行する理由
 
-CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
+CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
 
-1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
-2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into a build environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
-3. **Resource Classes** - you can use various different https://circleci.com/docs/2.0/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
-4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
+1. *高度なキャッシュ*: https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ]に加えて、CircleCI では https://circleci.com/docs/2.0/docker-layer-caching/[Docker イメージレイヤー]に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
+2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. これは、失敗したビルドのデバッグに非常に役立ちます。
+3. *リソースクラス*: プラットフォーム上でさまざまなサイズの https://circleci.com/docs/2.0/optimizations/#resource-class[Executor] を使用することができ、Node 上のワークロードの大きさに応じた調整に最適です。
+4. *テスの並列処理*: CircleCI のプラットフォームは、https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
+ https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
-We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
-== Concepts
+== 概念
 
-=== Jobs and Workflows
+=== ジョブとワークフロー
 
-Both Github Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
+Github Actions と CircleCI には、「ジョブ」と「ワークフロー」という似たような概念があります。 ワークフローは、複数のジョブのエンド ツー エンドの流れであり、ジョブは小さなタスク（例えば、「ユニットテストの実行」や「Docker イメージのビルド」）を実行するためのコマンドで構成されています。
 
-CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
+主に異なる点は、CircleCI では設定構文においてワークフローとジョブの依存関係をジョブのインラインではなく別のセクションで設定します。
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header", stripes=even]
@@ -35,7 +36,7 @@ CircleCI differs primarily in configuration syntax, setting up workflow and job 
 a|
 [source, yaml]
 ----
-name: My GitHub Actions Workflow
+name: GitHub Actions のワークフロー
 
 on: [push]
 
@@ -43,12 +44,13 @@ jobs:
   job_1:
     runs-on: ubuntu-latest
     steps:
-      # job steps
+      # ジョブのステップです。
   job_2:
     needs: job_1
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
-      # job steps
+      # ジョブのステップです。
+
 ----
 
 a|
@@ -58,11 +60,11 @@ jobs:
   job_1:
     executor: my-ubuntu-exec
     steps:
-      # job steps
+      # ジョブのステップです。
   job_2:
     executor: my-ubuntu-exec
     steps:
-      # job steps
+      # ジョブのステップです。
 
 workflows:
   my_workflow:
@@ -74,38 +76,39 @@ workflows:
 ----
 |===
 
-=== Actions vs. Orbs
-"Actions" in Github are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
+=== Actions と Orb の比較
+Githubの「アクション」とは、ジョブ内で実行する再利用可能なコマンドやタスクのことです。 しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
 
-CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
+CircleCI の場合は、 同様の機能を https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orb] で提供しています。 主な違いは、CircleCI の Orb はパッケージ化された再利用可能なYAMLであり、再利用可能なジョブ、Executor、またはコマンドを 「Orb 化」し、ジョブやワークフローの中で適切に使用することができます。
 
-Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
+Github では、Marketplace でアクションを参照できます。CircleCI では、パートナーやコミュニティの多数の認定 Orb やインテグレーションが記載された https://circleci.com/integrations/[インテグレーションのページ] だけでなく、https://circleci.com/developer/orbs[Orb レジストリ]もあります。
 
-=== Runners vs. Executors
-In GitHub, you can specify your builds to run in Linux, macOS, and Windows environments via a `runs-on` key in the YAML, and if you want to run anything in a container, you specify an additional `container` key.
+=== Runner と Executor の比較
+GitHub では、YAMLの `runs-on` キーによって、Linux、macOS、Windows 環境で実行するビルドを指定することができ、コンテナで何かを実行したい場合は、追加の`コンテナ`キーを指定します。
 
-In CircleCI, you have the same choice of environments (called Executors), with additional options and features for Docker.
+CircleCI では、同じように環境（Executorと呼ばれる）を選択でき、Docker 用のオプションや機能が追加されています。
 
-For each of the https://circleci.com/docs/2.0/executor-types/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
+各https://circleci.com/docs/2.0/executor-types/[Executor のタイプ] にお好きなバージョンを選択することができ、それによりその後インストールされるベースソフトウェアのバージョンが異なります。
 
-See the table in the next section to compare configuration.
+以下の表を参照して設定を比較してください。
 
-== Configuration Comparison
+== 設定の比較
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| Github Config | CircleCI Config
+| Github の設定 | CircleCI の設定
 
-2+| Specifying execution environment. While container execution is specified separately in Github, +
-`docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
+2+| 実行環境の指定:  Githubではコンテナの実行は別々に指定されますが、CircleCI では <br>`Docker`が https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor[Executor の独自のクラス]です。
 
 a|
 [source, yaml]
 ----
-# Choosing an Operating System
-runs-on: ubuntu-latest # or windows, etc. # If running steps on a container
+# オペレーティングシステムを選択します。
+runs-on: ubuntu-latest # or windows, etc.
+
+# コンテナでステップを実行する場合は、
 container:
   image: openjdk:11.0-jdk
 ----
@@ -113,7 +116,7 @@ container:
 a|
 [source, yaml]
 ----
-# Docker (container) Executor
+# Docker (コンテナ) Executor
 docker:
   - image: circleci/openjdk:11.0-jdk
     auth:
@@ -128,11 +131,13 @@ macos:
   xcode: 11.3.0
 
 # Windows Executor
-# NOTE: Orb declaration needed. See docs
+# 注意: Orb を宣言する必要があります。
+ See docs
 executor: win/vs2019
+
 ----
 
-2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated https://circleci.com/docs/2.0/configuration-reference/#docker[as dependencies].
+2+| 依存関係/サービスの指定:  CircleCI で最初に指定されたイメージ以降に指定されたイメージは、すべて https://circleci.com/docs/2.0/configuration-reference/#docker[依存関係]として扱われます。
 
 a|
 [source, yaml]
@@ -141,11 +146,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Main container
+    # メインのコンテナです。
     container:
       image: openjdk:11.0-jdk
 
-    # Dependency Service(s)
+    # 依存関係のサービスです。
     services:
       postgres:
         image: postgres:10.8
@@ -161,34 +166,34 @@ a|
 jobs:
   build:
     docker:
-      # Primary Executor
+      # プライマリ Executor です。
       - image: circleci/openjdk:11.0-jdk
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 
-      # Dependency Service(s)
+      # 依存関係のサービスです。
       - image: postgres:10.8
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
 ----
 
-2+| Specifying steps to https://circleci.com/docs/2.0/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
+2+| ジョブ内でhttps://circleci.com/docs/2.0/configuration-reference/#run[実行する]ステップの指定:  同じような機能ですが、構文が異なります。
 
 a|
 [source, yaml]
 ----
 jobs:
   build:
-    # runner config here
+    # ここでランナーを設定します。
 
     steps:
-      - name: Build with Gradle
+      - name: Gradle でビルド
         run: ./gradlew build
 ----
 
@@ -197,26 +202,25 @@ a|
 ----
 jobs:
   build:
-    # executor config here
+    # ここで Executor を設定します。
 
     steps:
       - run:
-          name: Build with Gradle
+          name: Gradle でビルド
           command: ./gradlew build
 ----
 
-2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
+2+| 共有タスクの利用 (Github ならアクション、CircleCIなら Orb): CircleCIでは、<br>最初に Orb を宣言し、https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します]。これは Python や JavaScript のインポートに似た概念です。
 
 a|
 [source, yaml]
 ----
 jobs:
   build:
-    # runner config here
+    # ここでランナーを設定します。
 
     steps:
-      - name: Slack Notify
+      - name: Slack の通知
         uses: rtCamp/action-slack-notify@v1.0.0
         env:
           SLACK_COLOR: '#32788D'
@@ -224,6 +228,7 @@ jobs:
           SLACK_TITLE: Slack Notify GA
           SLACK_USERNAME: Bobby
           SLACK_WEBHOOK: # WEBHOOK
+
 ----
 
 a|
@@ -234,33 +239,32 @@ orbs:
 
 jobs:
   build:
-    # executor config here 
+    # ここで Executor を設定します。
 
     steps:
       - slack-orb/notify:
           color: '#32788D'
-          message: Tests passed 
+          message: Tests passed
           title: Testing Slack Orb
-          author_name: Bobby 
+          author_name: Bobby
           webhook: # WEBHOOK 
 ----
 
-2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
-on_success, on_failure) as well as https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21[conditional steps] based on parameters. We also have https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
-currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
+2+| ワークフローでの条件付きステップの使用: CircleCIでは、https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[ステップの基本的な条件]（例: on_success (デフォルト)、
+on_success、on_failure）だけでなく、パラメーターに基づいた https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 また、https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration[条件付きのジョブ]も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが 現在https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中]です。
 
 a|
 [source, yaml]
 ----
 jobs:
   build:
-    # environment config here
+    # ここで環境を設定します。
 
     steps:
-      - name: My Failure Step 
+      - name: 失敗したステップ
         run: echo "Failed step"
         if: failure()
-      - name: My Always Step 
+      - name: 常に実行するステップ
         run: echo "Always step"
         if: always()
 ----
@@ -270,25 +274,25 @@ a|
 ----
 jobs:
   build:
-    # executor config here
+    # ここで Executor を設定します。
 
     steps:
       - run:
-          name: My Failure Step
+          name: 失敗したステップ
           command: echo "Failed step"
           when: on_fail
       - run:
-          name: My Always Step
+          name: 常に実行するステップ
           command: echo "Always step"
           when: always
 ----
 |===
 
-For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials] and https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] pages.
+CircleCI のその他の設定例は、 https://circleci.com/docs/2.0/tutorials/#section=configuration[チュートリアル]とhttps://circleci.com/docs/2.0/example-configs/#section=configuration[プロジェクトの例] をご覧ください。
 
-Since the configuration between Github Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
+Github Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。 しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 
-. https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
-. https://circleci.com/docs/2.0/workflows/[More Advanced Workflow and Job Dependency Configuration]
-. https://circleci.com/docs/2.0/orb-intro/[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
-. https://circleci.com/docs/2.0/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]
+. https://circleci.com/docs/2.0/concepts/#section=getting-started[ジョブ、ステップ、ワークフロー]
+. https://circleci.com/docs/2.0/workflows/[より高度なワークフローとジョブの依存関係の設定]
+. https://circleci.com/docs/2.0/orb-intro/[Orb へのアクション]  (レジストリはhttps://circleci.com/developer/orbs?filterBy=all[こちら]）
+. https://circleci.com/docs/2.0/optimizations/#section=projects[キャッシュ、ワークスペース、並列処理などの最適化]

@@ -1,7 +1,8 @@
 ---
+description: "This document describes the process for upgrading your CircleCI server installation to v2.19.x. View the org rename script and upgrade steps overview."
 version:
 - Server v2.x
-- サーバー管理
+- Server Admin
 ---
 [#upgrade]
 = CircleCI Server のアップグレード
@@ -17,7 +18,7 @@ toc::[]
 
 == Nomad の起動設定
 
-WARNING: *Before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
+WARNING: *Before upgrading* to v2.19, follow <<update-nomad-clients#, this guide>> to update your nomad launch configuration.
 
 == 組織名変更スクリプト
 
@@ -44,12 +45,13 @@ NOTE: この手順は任意ですが、実行しておくことをお勧めし�
 image::stop_replicated_update_available.png[Stop CircleCI]
 . `nomad status` を実行して、Nomad クライアントでジョブが実行されていないことを確認します。
 . AWS EC2 管理コンソールにアクセスし、Services マシンのインスタンスを選択します。
-. [Actions (アクション)] > [Image (イメージ)] > [Create Image (イメージの作成)] の順に選択します。ダウンタイムを回避する場合は、このときに [No reboot (再起動なし)] オプションを選択します。 ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。
+. [Actions (アクション)] > [Image (イメージ)] > [Create Image (イメージの作成)] の順に選択します。 ダウンタイムを回避する場合は、このときに [No reboot (再起動なし)] オプションを選択します。 ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。
 +
 .スナップショット イメージの作成
 image::create_snapshot.png[Snapshot Image Creation]
 
-NOTE: AWS API を使用して、このプロセスを自動化することもできます。 以後の AMI やスナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさになるため、頻繁にスナップショットを作成してもストレージ コストを抑えられる場合があります。詳細については、Amazon の EBS スナップショットの料金に関するドキュメントをご覧ください。
+NOTE: AWS API を使用して、このプロセスを自動化することもできます。 以後の AMI やスナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさになるため、頻繁にスナップショットを作成してもストレージ コストを抑えられる場合があります。
+詳細については、Amazon の EBS スナップショットの料金に関するドキュメントをご覧ください。
 スナップショットの作成後は、Services マシンを自由に変更してかまいません。
 
 ロールバックが必要になった場合は、https://circleci.com/docs/ja/2.0/backup/#restoring-from-backup[バックアップからの復元に関するガイド]をご覧ください。
@@ -66,8 +68,8 @@ NOTE: AWS API を使用して、このプロセスを自動化することもで
 replicated --version
 ```
 +
-If you are running a version of Replicated pre v2.10.3 please reach out to support@circleci.com.
-If you are already on v2.38.6 or above you can skip the next step and move to <<3-upgrade-circleci-server,upgrade the CircleCI application>>
+Replicated v2.10.3 未満のバージョンを実行している場合は、support@circleci.com までご連絡ください。
+既に v2.38.6 以上を実行している場合は、次の手順をスキップして、<<3-upgrade-circleci-server, CircleCI アプリケーションのアップグレード>>に進んでください。
 
 ==== b.  準備
 
@@ -107,7 +109,7 @@ replicatedctl app status inspect
 ]
 ```
 
-. Replicated の更新を完了するには、Docker が推奨バージョンの 17.12.1 である必要があります。 `docker version` を実行して実行中のバージョンを確認します。更新が必要な場合は、以下のコマンドを実行します。
+. Replicated の更新を完了するには、Docker が推奨バージョンの 17.12.1 である必要があります。 `docker version` を実行して実行中のバージョンを確認します。 更新が必要な場合は、以下のコマンドを実行します。
 +
 ```shell
 sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
@@ -176,5 +178,5 @@ TIP: インストール プロセス中に不要な待ち時間が発生する�
 .利用可能なリリースの表示
 image::release_history.png[View Available Releases]
 +
-インストール プロセスには数分間かかる場合があります。インストールの状況は [Releases (リリース)] ページとメイン ダッシュボードの両方に表示されます。
-. インストールが完了したら、ダッシュボードに移動してシステムを起動します。最新バージョンを実行している場合には、ダッシュボードの中央のボックスに "CircleCI is up to date (CircleCI は最新の状態です)" と表示されます。
+インストール プロセスには数分間かかる場合があります。 インストールの状況は [Releases (リリース)] ページとメイン ダッシュボードの両方に表示されます。
+. 最新バージョンを実行している場合には、ダッシュボードの中央のボックスに "CircleCI is up to date (CircleCI は最新の状態です)" と表示されます。

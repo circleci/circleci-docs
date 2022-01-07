@@ -135,22 +135,22 @@ The following section details the steps you would need, from start to finish, to
 
 1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
 
-2. Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{org_name} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the onboarding list and click Setup Project. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
+2. Next, follow the onboarding for a new project on CircleCI. You can either visit the CircleCI application and click on "Projects" in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/, where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the list and click Set Up Project. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
 
     ```yaml
     # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
     version: 2.1
     # Use a package of configuration called an orb.
     orbs:
-      # Declare a dependency on the welcome-orb
-      welcome: circleci/welcome-orb@0.4.1
+      # Declare a dependency on the node orb
+      node: circleci/node@4.7.0
       # Orchestrate or schedule a set of jobs
       workflows:
-      # Name the workflow "welcome"
-      welcome:
-      # Run the welcome/run job in its own container
-        jobs:
-        - welcome/run
+      # Name the workflow "test_my_app"
+        test_my_app:
+      # Run the node/test job in its own container
+          jobs:
+          - node/test
     ```
 
 3. Add an API token from the [Personal API Tokens page](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.

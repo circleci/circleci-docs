@@ -1,4 +1,9 @@
-= Migrating from TeamCity 
+---
+title: Migrating from TeamCity
+description: An overview of how to migrate from TeamCity to CircleCI.
+---
+
+= Migrating from TeamCity
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: pygments.rb
@@ -24,7 +29,7 @@ CircleCI has various differences in setup and configuration from TeamCity. For t
 CircleCI is a modern CI/CD tool aimed at performance and developer productivity. With a flexible system for configuration, you can define complex workflows and jobs for your application's specific needs.
 
 **Configuration As Code**:: The majority of CircleCI's configuration is done via YAML. It is easy to maintain and trivial to learn, and your CI/CD pipeline can be tracked and versioned like the rest of your source code.
-**Auto-Scaling Architecture**:: All build environments are dynamically created according to your config and terminated on completion of tasks. You can run one - or hundreds - of jobs concurrently without any hassle or overhead.
+**Auto-Scaling Architecture**:: All execution environments are dynamically created according to your config and terminated on completion of tasks. You can run one - or hundreds - of jobs concurrently without any hassle or overhead.
 **Flexibility**:: CircleCI is vendor and tool-agnostic. Our config allows integration with any platform or cloud provider that has an API. See our https://circleci.com/integrations/[integrations page] for existing partnerships. Dependencies and libraries can be installed ad-hoc in your job, and we offer https://circleci.com/docs/2.0/caching/[dependency caching] to speed up subsequent builds.
 **Shareable, Reusable Configuration**:: Steps, execution environments, and jobs can be templated, parameterized, shared, and reused across different projects and teams using https://circleci.com/docs/2.0/orb-intro/#section=configuration[CircleCI orbs]. Take advantage of the https://circleci.com/developer/orbs[numerous integrations and orbs] already written for you.
 
@@ -102,7 +107,7 @@ a|
 [source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 version: "2019.2"
 
@@ -146,7 +151,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-    # Define steps for job 
+    # Define steps for job
     steps:
       - checkout
       - run: echo "Hello World!"
@@ -221,7 +226,7 @@ project {
     parallel {
         build(Test1)
         build(Test2)
-    } 
+    }
     build(Package)
     build(Publish)
   }
@@ -279,7 +284,7 @@ jobs:
   my-mac-job:
     # Executor definition
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 
     # Steps definition
     steps:

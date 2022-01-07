@@ -6,6 +6,7 @@ categories:
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -21,7 +22,7 @@ Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifact
 
 ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
 
-このサンプルを実行する前に、リポジトリが作成されていることを確認してください。リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
+このサンプルを実行する前に、リポジトリが作成されていることを確認してください。 リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
 
 ## Artifactory プラグイン
 {: #artifactory-plugins }
@@ -32,7 +33,7 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
 
 ## JFrog CLI
 {: #jfrog-cli }
-If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
+.circleci/config.yml ファイル全体は、以下のようになります。
 
 ```
 - run:
@@ -47,13 +48,13 @@ If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/
 - run: ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 ```
 
-If you would like to upload JAR files use the following example:
+JAR ファイルをアップロードする場合には、以下の例を使用します。
 
 ```
 - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
-If you would like to upload WAR files use the following example:
+WAR ファイルをアップロードする場合には、以下の例を使用します。
 
 ```
 - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false

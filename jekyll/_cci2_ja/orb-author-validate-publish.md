@@ -14,11 +14,11 @@ circleci namespace create <my-namespace> github <my-gh-org>
 ```
 **注**: CircleCI CLI から名前空間を作成する場合は、必ず VCS プロバイダーを指定してください。
 
-1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。 To create a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
+1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。 **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**. **[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を作成する場合:
 ```sh
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を作成する場合:
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
 ```sh
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
@@ -36,13 +36,6 @@ commands:
                 default: World
         steps:
             - run: echo "Hello, << parameters.to >>"
-        parameters:
-            to:
-                type: string
-                default: World
-        steps:
-            - run: echo "Hello, << parameters.to >>"
-
 ```
 
 1. CLI を使用して、Orb コードをバリデーションします。
@@ -58,7 +51,6 @@ circleci orb publish /tmp/orb.yml <my-namespace>/<my-orb-name>@dev:first
 1. Orb を安定版にプッシュする準備が整ったら、`circleci orb publish` を使用して手動でパブリッシュするか、開発版から直接プロモートすることができます。 以下のコマンドを使用すると、開発版のバージョン番号を `0.0.1` にインクリメントできます。
 ```sh
 circleci orb publish promote <my-namespace>/<my-orb-name>@dev:first patch
-
 ```
 
 1. 安定版の Orb が変更不可形式でパブリッシュされ、CircleCI プロジェクトで安全に使用できるようになりました。 以下のコマンドを使用して、Orb のソースをプルします。
@@ -68,15 +60,14 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
-**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
+**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace>
 ```
 
-**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace> --private
-
 ```
 
-**プライベート</a>** Orb を一覧表示する場合:
+`circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。

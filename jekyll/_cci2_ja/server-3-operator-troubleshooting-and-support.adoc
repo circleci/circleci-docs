@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-ここでは、CircleCI Server v3.x で問題が発生した場合の初期トラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポート バンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
+ここでは、CircleCI Server v3.x で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポート バンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
 
 toc::[]
 
@@ -21,7 +21,6 @@ toc::[]
 [source,bash]
 ----
 kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
-
 ----
 
 ブラウザーを開いて、http://localhost:8800 にアクセスし、管理者コンソールを表示します。
@@ -45,7 +44,6 @@ audit-log-service-77c478f9d5-5dfzv 1/1 Running 0 6d20h
 builds-service-v1-5f8568c7f5-62h8n 1/1 Running 0 6d20h
 circleci-mongodb-0 1/1 Running 0 6d20h
 circleci-nomad-0 1/1 Running 6 6d20h
-…
 ----
 
 ステータスが `Running` 以外の Pod だけを表示するには、--field-selector オプションを使用します。
@@ -82,4 +80,4 @@ kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
 ## ビルドのキューイングのデバッグ
-ビルドのキューイングのデバッグに関する問題を解決するには、CircleCI Server 2.x のhttps://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[[トラブルシューティング]]ガイドを参照してください。
+ビルドのキューイングのデバッグに関する問題を解決するには、CircleCI Server 2.x のhttps://circleci.com/docs/ja/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング]ガイドを参照してください。

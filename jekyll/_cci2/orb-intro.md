@@ -29,8 +29,7 @@ There are two different types of orbs you can use in your configuration, dependi
 {: #private-orbs }
 
 
-**Note:** _Private orbs are available on any of our [paid plans listed on our plans page](https://circleci.com/pricing). Performance plan customers can create
-up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for more information._
+**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
 {: class="alert alert-warning"}
 
 Using a private orb enables you to author an orb while ensuring the following:
@@ -180,6 +179,15 @@ jobs:
       - checkout
       - node/install-packages # Utilize commands in steps
 ```
+
+## Orbs page in the CircleCI app
+{: #orbs-view}
+
+The Orbs page gives users visibility into the orbs their organization has created. Users can review the orb type (public or private), orb usage (how many times the orb is used across all configurations), latest version, and description directly from the list view on the page.
+
+To access the Orbs page, navigate to Organization Settings in the app.
+
+Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI Orb Registry in that the details page provides the orb's contents, commands, and usage examples. Note: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
 
 
 ## See also
