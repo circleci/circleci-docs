@@ -256,6 +256,7 @@ $(document).ready(function () {
 
   // Give article headings direct links to anchors
   $('article h1, article h2, article h3, article h4, article h5, article h6')
+    .not('.card')
     .filter('[id]')
     .each(function () {
       var isMainTitle = $(this).prop('nodeName') === 'H1';
@@ -367,6 +368,7 @@ $(document).ready(function () {
   });
 
   $('article h1, article h2, article h3, article h4, article h5, article h6')
+    .not('.card')
     .filter('[id]')
     .hover(function () {
       $(this).find('i').toggle();

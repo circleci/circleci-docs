@@ -1,3 +1,9 @@
+const displayElement = (el) => {
+  if (el) {
+    el.style.display = 'initial';
+  }
+};
+
 // https://app.optimizely.com/v2/projects/16812830475/experiments/20872380274/variations
 export default () =>
   window.OptimizelyClient.getVariationName({
@@ -9,10 +15,22 @@ export default () =>
       windowWidth: window.innerWidth ?? 0,
     },
   }).then((variation) => {
-    const element = document.getElementsByClassName(
-      `${variation ?? 'control'} language-guides`,
-    )[0];
+    const elements = document.getElementsByClassName(variation ?? 'control');
 
+    const homepage = document
+      .getElementById('main')
+      .getElementsByClassName(`row`)[0];
+
+    const deferred = document.getElementsByClassName('loading-deferred');
+
+    if (homepage) {
+      Array.prototype.forEach.call(elements, displayElement);
+      homepage.style.display = 'initial';
+      Array.prototype.forEach.call(deferred, displayElement);
+      return;
+    }
+
+    const element = elements[0];
     if (!element) return;
 
     if (
@@ -29,35 +47,38 @@ export default () =>
     const stack = [['H2', tocList]];
     const headings = element.querySelectorAll('h2, h3, h4, h5, h6');
     Array.prototype.forEach.call(headings, (htag) => {
-      const a = document.createElement('a');
-      a.href = `#${htag.id}`;
-      a.text = htag.textContent;
+      if (!htag.className.includes('no_toc')) {
+        const a = document.createElement('a');
+        a.href = `#${htag.id}`;
+        a.text = htag.textContent;
 
-      const li = document.createElement('li');
-      li.classList.add('toc-entry', `toc-${htag.tagName.toLowerCase()}`);
-      li.append(a);
+        const li = document.createElement('li');
+        li.classList.add('toc-entry', `toc-${htag.tagName.toLowerCase()}`);
+        li.append(a);
 
-      let [lastHTag, lastUL] = stack.slice(-1)[0];
-      if (!lastUL.hasChildNodes()) {
-        lastUL.append(li);
-        return;
-      }
+        let [lastHTag, lastUL] = stack.slice(-1)[0];
+        if (!lastUL.hasChildNodes()) {
+          lastUL.append(li);
+          return;
+        }
 
-      while (lastHTag > htag.tagName) {
-        stack.pop();
-        [lastHTag, lastUL] = stack.slice(-1)[0];
-      }
+        while (lastHTag > htag.tagName) {
+          stack.pop();
+          [lastHTag, lastUL] = stack.slice(-1)[0];
+        }
 
-      if (htag.tagName === lastHTag) {
-        lastUL.append(li);
-      } else if (lastHTag < htag.tagName) {
-        const ul = document.createElement('ul');
-        ul.append(li);
-        stack.push([htag.tagName.toUpperCase(), ul]);
-        lastUL.lastChild.appendChild(ul);
+        if (htag.tagName === lastHTag) {
+          lastUL.append(li);
+        } else if (lastHTag < htag.tagName) {
+          const ul = document.createElement('ul');
+          ul.append(li);
+          stack.push([htag.tagName.toUpperCase(), ul]);
+          lastUL.lastChild.appendChild(ul);
+        }
       }
     });
 
     document.getElementById('full-height').style.visibility = 'visible';
+    Array.prototype.forEach.call(deferred, displayElement);
     return headings;
   });
