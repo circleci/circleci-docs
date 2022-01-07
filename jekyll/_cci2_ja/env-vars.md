@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "環境変数の使用"
 short-title: "環境変数の使用"
-description: "A list of supported environment variables in CircleCI"
+description: "CircleCI でサポートされている環境変数の一覧"
 order: 40
 version:
   - クラウド
@@ -83,7 +83,7 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 
 `FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 [Contexts (コンテキスト)] ページで追加された環境変数は、[Project Settings (プロジェクト設定)] ページで追加された変数よりも優先されます。
 
-![Env Var Order]({{ site.baseurl }}/assets/img/docs/env-var-order.png)
+![環境変数の優先順位]({{ site.baseurl }}/assets/img/docs/env-var-order.png)
 
 #### セキュリティに関する注意事項
 {: #notes-on-security }
@@ -602,11 +602,11 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 | `CIRCLE_WORKING_DIRECTORY`{:.env_var}     | 文字列  | 現在のジョブの `working_directory` キーの値。                                                                                                                                    |
 | `CIRCLE_INTERNAL_TASK_DATA`{:.env_var}    | 文字列  | **内部用**。 ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。                                                                                  |
 | `CIRCLE_COMPARE_URL`{:.env_var}           | 文字列  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{ site.baseurl }}/ja/2.0/pipeline-variables/)" が導入されています。 |
-| `CI_PULL_REQUEST`{:.env_var}              | 文字列  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 Use `CIRCLE_PULL_REQUEST` instead.                                                                                     |
-| `CI_PULL_REQUESTS`{:.env_var}             | リスト  | **Deprecated**. Kept for backward compatibility with CircleCI 1.0. Use `CIRCLE_PULL_REQUESTS` instead.                                                               |
+| `CI_PULL_REQUEST`{:.env_var}              | 文字列  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUEST` の使用が推奨されます。                                                                                      |
+| `CI_PULL_REQUESTS`{:.env_var}             | リスト  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUESTS` の使用が推奨されます。                                                                                     |
 {:class="table table-striped"}
 
-**注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{ site.baseurl }}/ja/2.0/pipeline-variables/#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E5%80%A4)」を参照してください。
+**注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{ site.baseurl }}/ja/2.0/pipeline-variables/#pipeline-values)」を参照してください。
 
 ## 関連項目
 {: #see-also }
