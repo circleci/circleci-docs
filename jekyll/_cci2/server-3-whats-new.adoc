@@ -20,6 +20,16 @@ patch releases and quarterly feature releases.
 
 toc::[]
 
+== Release 3.3.0
+
+=== Upgrade notes
+
+=== New features
+
+=== Fixes
+
+=== Known issues
+
 == Release 3.2.2
 
 === Upgrade notes
