@@ -25,9 +25,9 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
   "build_time_millis" : 23505,
   "username" : "circleci",
   "reponame" : "mongofinil",
-  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
   "outcome" : "success", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-  "status" : "success", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  "status" : "success", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
   "retry_of" : null, // build_num of the build this is a retry of
   "steps" : [ {
     "name" : "configure the build",
@@ -347,7 +347,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
   "committer_date": "2014-04-17T08:41:40Z",
   "start_time": null,
   "stop_time": null,
-  "lifecycle": "not_running", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "lifecycle": "not_running", // :queued, :not_run, :not_running, :running or :finished
   "user": {
     "email": "arohner@gmail.com",
     "name": "Allen Rohner",
