@@ -1436,7 +1436,7 @@ jobs:
 #### **`circleci_ip_ranges`**
 {: #circleciipranges }
 
-Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
+ジョブで使用される IP アドレスを、明確に定義された範囲のみに限定できます。 詳しくは  [IPアドレスの範囲]({{ site.baseurl }}/ja/2.0/ip-ranges/)をご確認ください。
 
 ###### _例_
 ビルド中に何が行われているのか詳しく見てみましょう。
