@@ -15,8 +15,7 @@ version:
 This document describes how to configure CircleCI using a sample application written in Node.js.
 {% endraw %}
 
-* TOC
-{:toc}
+{% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_suffix="javascript-react-app" %}
 
 ## Configuration Walkthrough
 {: #configuration-walkthrough }
@@ -158,12 +157,12 @@ workflows:
               only: main # only deploy when on main
 ```
 
-## Conclusion
+### 5. Conclusion
 {: #conclusion }
 
 Success! You just set up a Node.js app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/2.0/project-build/#overview) to see how this looks when building on CircleCI.
 
-### Full configuration file
+## Full configuration file
 {: #full-configuration-file }
 
 ```yaml
@@ -213,7 +212,6 @@ workflows:
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
 - [Continuous deployment of Node apps to Heroku]({{site.blog_base_url}}/continuous-deployment-to-heroku/)
 - [Continuous deployment of Node.js to Azure VM]({{site.blog_base_url}}/cd-azure-vm/)

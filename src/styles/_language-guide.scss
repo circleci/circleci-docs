@@ -1,7 +1,87 @@
-.control, .treatment {
+.row, .control, .treatment, .loading-deferred {
     display: none;
 }
 
 #current-variation {
     display: initial;
+}
+
+#cards {
+    display: flex;
+
+    .card {
+        width: 50%;
+        padding: 24px;
+
+        ul {
+            display: list-item;
+            list-style-type: none;
+        }
+        
+        ul#markdown-toc {
+            display: initial;
+            list-style-type: none;
+        }
+    }
+
+    #card-or-card-container {
+        position: relative;
+        width: 0;
+        height: 100%;
+
+        #card-or-card {
+            position: absolute;
+            top: 18em;
+            right: -20.5px;
+            background: #F7F7F7;
+            border-radius: 75px;
+            font-weight: 700;
+            padding: 10px;
+            z-index: 10;
+        }
+    }
+
+    @media(min-width: $screen-sm) {
+        .card:first-of-type {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .card:last-of-type {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: 0;
+        }
+    }
+
+    @media(max-width: $screen-sm) {
+        flex-direction: column; 
+
+        .card {
+            width: 100%;
+        }
+
+        .card:first-of-type {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            margin-bottom: 0;
+        }
+
+        .card:last-of-type {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-top: 0;
+        }
+
+        #card-or-card-container {
+            width: 100%;
+            height: 0;
+
+            #card-or-card {
+                top: 0;
+                right: 0;
+                margin: -20.5px calc((100% - 42px) / 2)
+            }
+        }
+    }
 }

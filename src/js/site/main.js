@@ -253,6 +253,7 @@ $(document).ready(function () {
   });
 
   $('article h1, article h2, article h3, article h4, article h5, article h6')
+    .not('.card')
     .filter('[id]')
     .hover(function () {
       $(this).find('i').toggle();

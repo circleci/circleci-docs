@@ -17,8 +17,7 @@ how to configure CircleCI
 using a sample application written in Python.
 {% endraw %}
 
-* TOC
-{:toc}
+{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_suffix="python-django" %}
 
 ## Configuration Walkthrough
 {: #configuration-walkthrough }
@@ -132,12 +131,12 @@ workflows:
               only: main # only deploy when on main
 ```
 
-## Conclusion
+### 5. Conclusion
 {: #conclusion }
 
 Success! You just set up a Python app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/2.0/project-build/#overview) to see how this looks when building on CircleCI.
 
-### Full configuration file
+## Full configuration file
 {: #full-configuration-file }
 
 ```yaml
