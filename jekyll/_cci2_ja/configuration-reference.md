@@ -9,19 +9,19 @@ version:
   - Server v3.x
   - Server v2.x
 suggested:
-  - 
+  -
     title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: Intro to dynamic config
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: Validate your config using local CLI
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: How to trigger a single job
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
@@ -1094,7 +1094,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: v1-{{ checksum yark.lock }}
+    key: v1-{{ checksum "yarn.lock" }}
     paths:
       - node_modules/workspace-a
       - node_modules/workspace-c
