@@ -85,7 +85,7 @@ For additional information, refer to the **Schedule** section under the [API v2 
 ### Migrate scheduled workflows to scheduled pipelines
 {: #migrate-scheduled-workflows }
 
-The current method for scheduling work on your projects is to us the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
+The current method for scheduling work on your projects is to use the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
 
 * Cannot control the actor, so scheduled workflows can't use restricted contexts.
 * Cannot control the interaction with auto-cancelling of pipelines.
