@@ -641,6 +641,8 @@ to discern what might be failing.
 
 It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
+Also note that jobs and workflows that are 90 days or older are unable to be re-run.
+
 ### Workflows waiting for status in GitHub
 {: #workflows-waiting-for-status-in-github }
 {:.no_toc}
