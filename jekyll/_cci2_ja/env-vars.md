@@ -29,13 +29,13 @@ suggested:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、スコープや認証レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D)に基づいて使用され、構成において各レベルで制御することができます。
+CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、構成において各レベルで制御することができます。
 
-プライベート プロジェクト全体で使用する**プライベート キー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで [[Project Settings (プロジェクト設定)] の [Environment Variables (環境変数)] ページ](#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
+プライベート プロジェクト全体で使用する**プライベート キー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで[Project Settings (プロジェクト設定)] の [[Environment Variables (環境変数)] ページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
 
-プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、「[オープンソース プロジェクトの構築]({{ site.baseurl }}/2.0/oss/)」ページを参照してください。
+プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、「[オープンソース プロジェクトの構築]({{ site.baseurl }}/ja/2.0/oss/)」ページを参照してください。
 
-Use Contexts to [further restrict access to environment variables](#setting-an-environment-variable-in-a-context). CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 For more information about controlling access to env vars with Contexts, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
+[[環境変数へのアクセスをさらに制限する]](#setting-an-environment-variable-in-a-context)には、コンテキストを使用してください。 CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 コンテキストを使用した環境変数へのアクセス制御について詳しく知りたい場合は「[コンテキストの制限]({{ site.baseurl }}/ja/2.0/contexts/#restricting-a-context)」ページを参照してください。
 
 ## シークレットのマスキング
 {: #secrets-masking }
