@@ -47,6 +47,7 @@ The name of your repository is not critical, but we recommend something similar 
     {: class="alert alert-warning"}
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
+
 To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb
@@ -55,6 +56,8 @@ To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orb
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
+Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Please make sure to add the `--private` flag if you intend to create a private orb.
+    
 The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
 1. **Choose the fully automated orb setup option.**
