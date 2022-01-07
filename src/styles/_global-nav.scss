@@ -258,9 +258,9 @@ $btn-selected-blue: #004A95;
     display: block;
     color: $black;
     margin: 4px 0px;
-    padding: 4px 20px;
+    padding: 4px 16px;
     font-size: 15px;
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Roboto";
     line-height: 18px;
     &:hover {
       color: $btn-hover-blue;
@@ -273,6 +273,67 @@ $btn-selected-blue: #004A95;
 
   .lang-active {
     display: block;
+  }
+
+  .lang-request-form {
+    height: 95px;
+
+    .lang-form-title {
+      display: block;
+      color: $black;
+      margin: 4px 0px;
+      padding: 4px 16px;
+      font-size: 12px;
+      font-family: "Roboto";
+      line-height: 14px;
+    }
+
+    .lang-form {
+      background: #FBFBFB;
+      border: 1px solid #D4D4D4;
+      border-radius: 0px;
+      box-sizing: border-box;
+      width: 128px;
+      height: 40px;
+      margin: 0 16px;
+      padding: 11px 10px 11px 16px;
+  
+      font-size: 15px;
+      line-height: 18px;
+      color: $black;
+      opacity: 0.5;
+      &:hover {
+        border: 1px solid $black;
+        background: $white;
+      }
+    }
+      .active {
+        border: 1px solid #1D97E4;
+        background: $white;
+        opacity: 1;
+        pointer-events: none;
+      }
+
+    #submit-btn {
+      opacity: 50%;
+      cursor: not-allowed;
+      font-family: "Roboto";
+      color: $btn-hover-blue;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14px;
+      margin-left: 106px;
+    }
+
+    #lang-submitted {
+      font-family: "Roboto";
+      font-size: 12px;
+      line-height: 14px;
+      color: $black;
+      text-align: right;
+      margin: 0 16px;
+    }
   }
 }
 
@@ -288,16 +349,17 @@ $btn-selected-blue: #004A95;
   align-items: center;
   letter-spacing: 0.19px;
   color: $black;
-  font-size: 14px;
+  font-size: 15px;
   text-decoration: none;
   font-weight: $font-weight-base;
+  transition: text-shadow .1s;
   @media (max-width: $screen-sm-max) {
     color: $black;
   }
 
   &:hover {
-    font-weight: 500;
     color: $black;
+    text-shadow: 0 0.015em $black, 0 -0.015em $black, 0.01em 0 $black, -0.01em 0 $black;
     text-decoration: none;
   }
   .external-icon {
@@ -309,7 +371,7 @@ $btn-selected-blue: #004A95;
 
   @media (min-width: $screen-md) {
     margin-right: 20px;
-    font-size: 14px;
+    font-size: 15px;
 
     &:last-child {
       margin-right: 0;
