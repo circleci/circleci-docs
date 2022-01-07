@@ -42,19 +42,11 @@
             <div class="quick-info-list">
               <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
                 <img alt="Clock" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
-                {% if page.last_modified_at %}
                   {% assign dateStart = page.last_modified_at | date: '%s' %}
                   {% assign nowTimestamp = 'now' | date: '%s' %}  
                   {% assign timestampDiff = nowTimestamp | minus: dateStart %}
                   {% assign yearInSeconds = 60 | times: 60 | times: 24 | times: 365 %}
-                  {% if timestampDiff > yearInSeconds %}
-                    1+ year ago
-                  {% else %}  
-                    {{ page.last_modified_at | timeago }} 
-                  {% endif %} 
-                {% else %} 
-                  {{ page.date | date: '%d-%b-%y' }} 
-                {% endif %}
+                  {% if timestampDiff > yearInSeconds %} 1+ year ago {% else %} {{ page.last_modified_at | timeago }} {% endif %}
               </time>
               
               {% if page.version %}
