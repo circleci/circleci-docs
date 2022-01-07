@@ -315,8 +315,8 @@ $btn-selected-blue: #004A95;
       }
 
     #submit-btn {
-      opacity: 50%;
-      cursor: not-allowed;
+      border: none;
+      background: none;
       font-family: "Roboto";
       color: $btn-hover-blue;
       font-style: normal;
@@ -324,6 +324,11 @@ $btn-selected-blue: #004A95;
       font-size: 12px;
       line-height: 14px;
       margin-left: 106px;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
 
     #lang-submitted {
