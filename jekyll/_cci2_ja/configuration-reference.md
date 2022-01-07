@@ -9,19 +9,19 @@ version:
   - Server v3.x
   - Server v2.x
 suggested:
-  - 
+  -
     title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: Intro to dynamic config
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: Validate your config using local CLI
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: How to trigger a single job
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
@@ -159,11 +159,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-<<<<<<< HEAD
 **Note:** Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
-=======
-**Note:** Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
->>>>>>> master
 
 ### **<`job_name`>**
 {: #lessjobnamegreater }
@@ -892,11 +888,7 @@ A value of `always` means that the step will run regardless of the exit status o
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-<<<<<<< HEAD
 **Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or has reached the runtime timeout limit.
-=======
-**メモ:** `store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or reaching the global 5 hour timeout.
->>>>>>> master
 
 ``` YAML
 - run:
@@ -1102,7 +1094,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: v1-{{ checksum yark.lock }}
+    key: v1-{{ checksum "yarn.lock" }}
     paths:
       - node_modules/workspace-a
       - node_modules/workspace-c
@@ -1519,11 +1511,7 @@ Trigger Filters can have the key `branches`.
 {: #branches }
 {:.no_toc}
 
-<<<<<<< HEAD
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
-=======
-`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
->>>>>>> master
 
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
 

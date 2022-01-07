@@ -40,5 +40,5 @@ body::before {
     bottom: 0;
     width: 100%;
     z-index: -1;
-    background: white;
+    background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 calc(50% - 860px), #fff calc(50% - 860px), #fff 100%);;
 }

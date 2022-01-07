@@ -38,9 +38,9 @@ There are some additional, less common cases where CircleCI uses hooks, as
 follows:
 
 - CircleCI processes PR hooks (Pull Request Hooks) to store PR information for
-  the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI
+  the CircleCI app. If the Only Build Pull Requests setting is enabled, CircleCI
   will only trigger builds when a PR is opened, or when there is a push to a
-  branch for which there is an existing PR. Even if this setting is set we will
+  branch for which there is an existing PR. Even if this setting is enabled, CircleCI will
   always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds
   in response to PRs created from forked repos.
@@ -144,7 +144,7 @@ repo settings, including **environment variables** and **contexts**.
 CircleCI expects that your personal/default org matches your VCS username.
 Bitbucket now supports renaming your personal workspace to differ from your
 username; however, this is not currently supported by CircleCI. If you are
-building projects in your personal workspace with CircleCI, please ensure its
+building projects in your personal workspace with CircleCI, make sure its
 name matches your username.
 
 ## Enable your project to check out additional private repositories
@@ -266,7 +266,7 @@ consider contacting your VCS provider to communicate your concerns.
 This section describes how to re-enable CircleCI after enabling third-party
 application restrictions for a GitHub organization. Go to
 [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb)
-and in the "Organization access" you will have the option to request accesss if you are not an admin, or grant access if you are an admin.
+and in the "Organization access" you will have the option to request access if you are not an admin, or grant access if you are an admin.
 
 #### Non-admin member workflow
 {: #non-admin-member-workflow }
@@ -304,14 +304,10 @@ settings page on GitHub, and clicking "Setup application access restrictions"
 button in the "Third-party application access policy" section.
 
 If you enable these restrictions on an organization for which CircleCI has been
-running builds then we will stop receiving push event hooks from GitHub (thus
+running builds, CircleCI will stop receiving push event hooks from GitHub (thus
 not building new pushes), and API calls will be denied (causing, for instance,
 re-builds of old builds to fail the source checkout.) To get CircleCI working
-again you have to grant access to the CircleCI application.
-
-The account and permissions system we use is not as clear as we would like and
-as mentioned we have a much improved system in development with users as first
-class citizens in CircleCI.
+again, you have to grant access to the CircleCI application.
 
 ## Deployment keys and user keys
 {: #deployment-keys-and-user-keys }
@@ -418,10 +414,10 @@ When CircleCI builds your project, the private key is installed into the `.ssh`
 directory and SSH is subsequently configured to communicate with your version
 control provider. Therefore, the private key is used for:
 
-- checking out the main project
-- checking out any GitHub-hosted submodules
-- checking out any GitHub-hosted private dependencies
-- automatic git merging/tagging/etc.
+- Checking out the main project
+- Checking out any GitHub-hosted submodules
+- Checking out any GitHub-hosted private dependencies
+- Automatic git merging/tagging/etc
 
 For this reason, a deploy key isn't sufficiently powerful for projects with
 additional private dependencies.
@@ -453,8 +449,8 @@ When using SSH keys to checkout repositories, it may be necessary to add the
 fingerprints for GitHub or BitBucket to a "known hosts" file
 (`~/.ssh/known_hosts`) so that the executor can verify that the host it's
 connecting to is authentic. The `checkout`job step does this automatically, so
-the following command will need to be used if you opt to use a custom checkout
-command.
+you will need to run the following commands if you opt to use a custom checkout
+command:
 
 ```
 mkdir -p ~/.ssh

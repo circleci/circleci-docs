@@ -106,7 +106,7 @@ _The macOS executor is not currently available on self-hosted installations of C
 jobs:
   build-and-test:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       ...
       - run:

@@ -2,7 +2,7 @@
   <div class="lang-picker-mobile-dimmer"></div>
 
   <button id="globe-lang-btn" class="global-nav--language-picker" data-analytics-action="click-outer-cta">
-    <span class="globe-icon">{% include utility-icons/globe.svg size="24" %}</span>
+    <img src='{{ site.baseurl }}/assets/img/compass/globe.svg' class="globe-icon"></img>
     <span class="lang-picker-mobile">Select Language</span>
   </button>
 
@@ -14,6 +14,7 @@
         <img class="back-btn arrow" src="{{ site.baseurl }}/assets/img/docs/arrow-green-right.svg">
       </button>
 
+      <!-- TODO: figure out if "Select Language" that needs to be translated -->
       <div class="select-language">Select Language</div>
 
       <button id="lang-picker-close-button" class="lang-picker-icon-btn">

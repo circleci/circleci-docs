@@ -158,7 +158,7 @@ A Workflow is comprised of one or more uniquely named jobs. Jobs are specified i
 Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
-{: #lessjobnamegreater }
+{:job-name}
 
 Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
@@ -436,14 +436,14 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version 11.3:
+**Example:** Use a macOS virtual machine with Xcode version 12.5.1:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 ```
 
 #### **`windows`**
@@ -600,8 +600,9 @@ jobs:
 
 Class              | vCPUs | RAM
 -------------------|-------|-----
-medium (default)   | 4     | 8GB
-large<sup>(3)</sup>| 8     | 16GB
+medium (default)   | 4 @ 2.7 GHz    | 8GB
+macos.x86.medium.gen2   | 4 @ 3.2 GHz    | 8GB
+large<sup>(3)</sup>| 8 @ 2.7 GHz    | 16GB
 {: class="table table-striped"}
 
 ###### Example usage
@@ -612,7 +613,7 @@ large<sup>(3)</sup>| 8     | 16GB
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     resource_class: large
     steps:
       ... // other config
@@ -1095,7 +1096,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: v1-{{ checksum yark.lock }}
+    key: v1-{{ checksum "yarn.lock" }}
     paths:
       - node_modules/workspace-a
       - node_modules/workspace-c
@@ -1550,7 +1551,7 @@ jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
 ##### **<`job_name`>**
-{: #lessjobnamegreater }
+{: #job-name-in-workflow }
 
 A job name that exists in your `config.yml`.
 
@@ -1964,7 +1965,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:
