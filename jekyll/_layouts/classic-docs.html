@@ -46,14 +46,7 @@
                   {% assign nowTimestamp = 'now' | date: '%s' %}  
                   {% assign timestampDiff = nowTimestamp | minus: dateStart %}
                   {% assign yearInSeconds = 60 | times: 60 | times: 24 | times: 365 %}
-                  {% if timestampDiff > yearInSeconds %}
-                    1+ year ago
-                  {% else %}  
-                    {{ page.last_modified_at | timeago }} 
-                  {% endif %} 
-                {% else %} 
-                  {{ page.date | date: '%d-%b-%y' }} 
-                {% endif %}
+                  {% if timestampDiff > yearInSeconds %} 1+ year ago {% else %} {{ page.last_modified_at | timeago }} {% endif %}
               </time>
               
               {% if page.version %}
