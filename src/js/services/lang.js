@@ -65,9 +65,10 @@ const handleChangeLanguageNav = () => {
 /*
   Handle functionality and UI changes for language request input form and new language submission when an input is provided
 */
-const langForm = $('.lang-form');
-
 const languageRequest = () => {
+  const langForm = $('.lang-form');
+  const submitBtn = $('#submit-btn');
+
   // Add styles for input form when active
   langForm.on('click', () => {
     langForm.addClass('active');
@@ -78,40 +79,31 @@ const languageRequest = () => {
       }
     });
   });
-};
 
-const submitLanguage = () => {
-  const submitBtn = $('#submit-btn');
-  const input = $('#lang-req')[0];
+  // Toggle submit button UI and button state based on user input
+  langForm.on('keyup', (e) => {
+    if (e.currentTarget.value == '') {
+      submitBtn.attr('disabled', 'disabled');
+    } else {
+      submitBtn.removeAttr('disabled');
+    }
+  });
 
-  if (input.value.length > 0) {
-    // If user input present, adjust UI and add event listener to submit data on click to amplitude
-    submitBtn.css({ opacity: '100%', cursor: 'pointer' });
-    submitBtn.on('click', () => {
-      clearInterval(checkLangInput);
-      langForm.css('pointer-events', 'none');
-
-      window.AnalyticsClient.trackAction('New Language Request', {
-        requestedLanguage: input.value,
-        browserNativeLang: window.navigator.language,
-        app: 'Docs',
-        location: window.location.href,
-        path: window.location.pathname,
-      });
-      // Swap out button with submit message after submission
-      submitBtn.replaceWith(
-        '<span id=lang-submitted>' + 'Thank you for your help' + '</span>',
-      );
+  submitBtn.on('click', () => {
+    langForm.addClass('lang-submitted');
+    window.AnalyticsClient.trackAction('New Language Request', {
+      requestedLanguage: langForm[0].value,
+      browserNativeLang: window.navigator.language,
+      app: 'Docs',
+      location: window.location.href,
+      path: window.location.pathname,
     });
-  }
-  // If no user input present, adjust UI and remove event from submit btn
-  if (!input.value.length) {
-    submitBtn.css({ opacity: '50%', cursor: 'not-allowed' });
-    submitBtn.off('click');
-  }
+    // Swap out button with submit message after submission
+    submitBtn.replaceWith(
+      `<span id=lang-submitted>Thank you for your help</span>`,
+    );
+  });
 };
-// use intervals to check if user provided input to alter UI and toggle on click event for submit btn
-const checkLangInput = setInterval(submitLanguage, 500);
 
 export function init() {
   setLanguageSelectorOnLoad();

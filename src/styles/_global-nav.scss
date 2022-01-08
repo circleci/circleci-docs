@@ -302,21 +302,25 @@ $btn-selected-blue: #004A95;
       line-height: 18px;
       color: $black;
       opacity: 0.5;
+
       &:hover {
         border: 1px solid $black;
         background: $white;
       }
     }
-      .active {
-        border: 1px solid #1D97E4;
-        background: $white;
-        opacity: 1;
-        pointer-events: none;
-      }
+    .active {
+      border: 1px solid #1D97E4;
+      background: $white;
+      opacity: 1;
+      pointer-events: none;
+    }
+    .lang-submitted {
+      pointer-events: none;
+    }
 
     #submit-btn {
-      opacity: 50%;
-      cursor: not-allowed;
+      border: none;
+      background: none;
       font-family: "Roboto";
       color: $btn-hover-blue;
       font-style: normal;
@@ -324,6 +328,11 @@ $btn-selected-blue: #004A95;
       font-size: 12px;
       line-height: 14px;
       margin-left: 106px;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
 
     #lang-submitted {
