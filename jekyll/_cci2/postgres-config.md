@@ -376,7 +376,7 @@ workflows:
   version: 2
   main:
     jobs:
-      - build:
+      - build
 ```
 
 {% endraw %}
