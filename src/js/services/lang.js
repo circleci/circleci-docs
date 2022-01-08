@@ -68,7 +68,6 @@ const handleChangeLanguageNav = () => {
 const languageRequest = () => {
   const langForm = $('.lang-form');
   const submitBtn = $('#submit-btn');
-  const input = $('#lang-req')[0];
 
   // Add styles for input form when active
   langForm.on('click', () => {
@@ -82,17 +81,18 @@ const languageRequest = () => {
   });
 
   // Toggle submit button UI and button state based on user input
-  langForm.on('keyup', () => {
-    submitBtn.removeAttr('disabled');
-    if (input.value == '') {
+  langForm.on('keyup', (e) => {
+    if (e.currentTarget.value == '') {
       submitBtn.attr('disabled', 'disabled');
+    } else {
+      submitBtn.removeAttr('disabled');
     }
   });
 
   submitBtn.on('click', () => {
-    langForm.css('pointer-events', 'none');
+    langForm.addClass('lang-submitted');
     window.AnalyticsClient.trackAction('New Language Request', {
-      requestedLanguage: input.value,
+      requestedLanguage: langForm[0].value,
       browserNativeLang: window.navigator.language,
       app: 'Docs',
       location: window.location.href,
@@ -100,7 +100,7 @@ const languageRequest = () => {
     });
     // Swap out button with submit message after submission
     submitBtn.replaceWith(
-      '<span id=lang-submitted>' + 'Thank you for your help' + '</span>',
+      `<span id=lang-submitted>Thank you for your help</span>`,
     );
   });
 };
