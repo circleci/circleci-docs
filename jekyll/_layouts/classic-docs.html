@@ -46,7 +46,12 @@
                   {% assign nowTimestamp = 'now' | date: '%s' %}  
                   {% assign timestampDiff = nowTimestamp | minus: dateStart %}
                   {% assign yearInSeconds = 60 | times: 60 | times: 24 | times: 365 %}
-                  {% if timestampDiff > yearInSeconds %} 1+ year ago {% else %} {{ page.last_modified_at | timeago }} {% endif %}
+                  {% assign ghLink = 'https://github.com/circleci/circleci-docs/commits/master/jekyll/' | append: page.path %}
+                  {% if timestampDiff > yearInSeconds %}
+                    <a href="{{ ghLink }}" target="_blank" class="no-external-icon">1+ year ago</a>
+                  {% else %} 
+                    <a href="{{ ghLink }}" target="_blank" class="no-external-icon">{{ page.last_modified_at | timeago }}</a>
+                  {% endif %}
               </time>
               
               {% if page.version %}
