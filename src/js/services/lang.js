@@ -82,7 +82,7 @@ const languageRequest = () => {
 
   // Toggle submit button UI and button state based on user input
   langForm.on('keyup', (e) => {
-    if (e.currentTarget.value == '') {
+    if (e.currentTarget.value === '') {
       submitBtn.attr('disabled', 'disabled');
     } else {
       submitBtn.removeAttr('disabled');
@@ -92,7 +92,7 @@ const languageRequest = () => {
   submitBtn.on('click', () => {
     langForm.addClass('lang-submitted');
     window.AnalyticsClient.trackAction('New Language Request', {
-      requestedLanguage: langForm[0].value,
+      requestedLanguage: langForm[0].value.toLowerCase(),
       browserNativeLang: window.navigator.language,
       app: 'Docs',
       location: window.location.href,
