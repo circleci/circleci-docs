@@ -199,7 +199,7 @@ output "module" {
 }
 ```
 
-Once you have filled in the appropriate information you can deploy your nomad clients by running. 
+Once you have filled in the appropriate information you can deploy your Nomad Clients by running the following: 
 
 ----
 terraform init
