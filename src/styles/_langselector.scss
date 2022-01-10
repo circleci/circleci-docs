@@ -131,10 +131,13 @@ $border-col: rgba(229,231,235, 1);
         opacity: 1;
         pointer-events: none;
       }
+      .lang-submitted {
+        pointer-events: none;
+      }
 
-    #submit-btn {
-      opacity: 50%;
-      cursor: not-allowed;
+    #submit-lang-btn {
+      border: none;
+      background: none;
       font-family: "Roboto";
       color: $btn-hover-blue;
       font-style: normal;
@@ -142,6 +145,10 @@ $border-col: rgba(229,231,235, 1);
       font-size: 12px;
       line-height: 14px;
       margin-left: 106px;
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
 
     #lang-submitted {
