@@ -86,9 +86,8 @@ commands:
 # the jobs for this pipeline are # configured below
 workflows:
   runner-workflow:
-      runner-testing:
-          jobs:
-              - build
+    jobs:
+      - build
 
   build-deploy:
     when: 
