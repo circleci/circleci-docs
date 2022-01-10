@@ -40,8 +40,8 @@
             </div>
 
             <div class="quick-info-list">
+              <img alt="Last updated" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
               <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
-                <img alt="Clock" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
                   {% assign dateStart = page.last_modified_at | date: '%s' %}
                   {% assign nowTimestamp = 'now' | date: '%s' %}  
                   {% assign timestampDiff = nowTimestamp | minus: dateStart %}
@@ -51,7 +51,7 @@
               
               {% if page.version %}
               <div class="server-version-wrapper">
-                <img alt="Shopping Tag" class="server-version-tag-svg" src="{{ site.baseurl }}/assets/img/docs/tag.svg">
+                <img alt="Tags" class="server-version-tag-svg" src="{{ site.baseurl }}/assets/img/docs/tag.svg">
                 {% for version in page.version %}
                 <span class="server-version-badge" aria-describedby="tooltip">{{ version }}</span>
                 <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
