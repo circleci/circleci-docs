@@ -28,7 +28,7 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 - Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context).
 - Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
 - Modify the schedule without having to edit `.circleci/config.yml`.
-- Take advantage of auto-cancelling.
+- Take advantage of [auto-cancelling]({{site.baseurl}}/2.0/skip-build/#auto-cancelling).
 - Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
 - Manage common schedules, e.g. across workflows.
 
