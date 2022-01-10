@@ -57,6 +57,7 @@ $border-col: rgba(229,231,235, 1);
 
   .lang-dropdown {
     width: 160px;
+    margin-top: 4px;
   }
 
   .lang-option {
@@ -68,6 +69,11 @@ $border-col: rgba(229,231,235, 1);
     font-size: 15px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 18px;
+    &.selected {
+      background: #F3F3F3;
+      font-weight: bold;
+    }
+
     &:hover {
       color: $btn-hover-blue;
       font-weight: 700;
@@ -260,10 +266,6 @@ $border-col: rgba(229,231,235, 1);
       margin-bottom: 0px;
       // override css being set via jquery for desktop-only styles.
       background: initial !important;
-      &.selected {
-        background: #F3F3F3;
-        font-weight: bold;
-      }
     }
 
     .lang-picker-mobile-dimmer {
