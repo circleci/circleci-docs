@@ -73,6 +73,7 @@ const openLangDropdown = () => {
     underlyingMobileMenu.classList.add('hidden-md');
     dimmer.style.display = 'inherit';
     globalNav.classList.add('lang-picker-open');
+    mobileCloseBtn.classList.add('clickable');
   });
 
   // enable going 'back' to the mobile menu.
@@ -92,6 +93,7 @@ const openLangDropdown = () => {
     // simulate a click to close the menu.
     document.querySelector('.global-nav--toggle').click();
     globalNav.classList.remove('lang-picker-open');
+    mobileCloseBtn.classList.remove('clickable');
   });
 
   // close out the menu if you click anywhere outside of it.

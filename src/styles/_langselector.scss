@@ -239,6 +239,10 @@ $border-col: rgba(229,231,235, 1);
       position: relative;
       top: -2px;
       left: -1px;
+      pointer-events: none;
+      &.clickable {
+        pointer-events: initial;
+      }
     }
 
     .select-language {
