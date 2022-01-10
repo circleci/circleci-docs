@@ -182,9 +182,9 @@ $sidebar-spacing-base: 5px;
 
 aside.full-height {
   .full-height-sticky {
-    position: sticky; 
-    max-height: calc(100vh - 140px); 
-    overflow: auto; 
+    position: sticky;
+    max-height: calc(100vh - 140px);
+    overflow: auto;
     padding-left: 5px;
     top: 83px;
     max-width: 400px;
@@ -221,7 +221,7 @@ aside.full-height {
 
   ul, li {
     list-style-type: none;
-    padding-left: 8px;
+    padding: 0px 8px;
     margin: 4px 0;
     &:first {
       padding-left: 0px;
