@@ -96,6 +96,14 @@ $border-col: rgba(229,231,235, 1);
   .lang-request-form {
     height: 95px;
 
+
+    @media (max-width: $screen-md) {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      height: auto;
+    }
+
     .lang-form-title {
       display: block;
       color: $black;
@@ -104,6 +112,12 @@ $border-col: rgba(229,231,235, 1);
       font-size: 12px;
       font-family: "Roboto";
       line-height: 14px;
+
+      @media (max-width: $screen-md) {
+        padding: 4px 0;
+        font-weight: 500;
+        font-size: 14px;
+      }
     }
 
     .lang-form {
@@ -124,6 +138,13 @@ $border-col: rgba(229,231,235, 1);
         border: 1px solid $black;
         background: $white;
       }
+
+      @media (max-width: $screen-md) {
+        width: 100%;
+        margin: 0;
+        background: #FBFBFB;
+      }
+
     }
       .active {
         border: 1px solid #1D97E4;
@@ -133,6 +154,10 @@ $border-col: rgba(229,231,235, 1);
       }
       .lang-submitted {
         pointer-events: none;
+
+        @media (max-width: $screen-md) {
+          margin: 8px 0;
+        }
       }
 
     #submit-lang-btn {
@@ -148,6 +173,12 @@ $border-col: rgba(229,231,235, 1);
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+      }
+      @media (max-width: $screen-md) {
+        align-self: flex-end;
+        margin-top: 8px;
+        margin-left: 0;
+
       }
     }
 
