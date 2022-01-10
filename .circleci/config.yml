@@ -85,6 +85,10 @@ commands:
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
+  runner-workflow:
+      runner-testing:
+          jobs:
+              - build
 
   build-deploy:
     when: 
