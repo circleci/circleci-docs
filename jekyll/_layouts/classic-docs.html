@@ -40,14 +40,18 @@
             </div>
 
             <div class="quick-info-list">
+              <img alt="Last updated" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
               <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
-                <img src="{{ site.baseurl }}/assets/img/docs/duration.svg">
-                {% if page.last_modified_at %}<span id="time-posted-ago"></span>{% else %} {{ page.date | date: '%d-%b-%y' }} {% endif %}
+                  {% assign dateStart = page.last_modified_at | date: '%s' %}
+                  {% assign nowTimestamp = 'now' | date: '%s' %}  
+                  {% assign timestampDiff = nowTimestamp | minus: dateStart %}
+                  {% assign yearInSeconds = 60 | times: 60 | times: 24 | times: 365 %}
+                  {% if timestampDiff > yearInSeconds %} 1+ year ago {% else %} {{ page.last_modified_at | timeago }} {% endif %}
               </time>
               
               {% if page.version %}
               <div class="server-version-wrapper">
-                <img class="server-version-tag-svg" src="{{ site.baseurl }}/assets/img/docs/tag.svg">
+                <img alt="Tags" class="server-version-tag-svg" src="{{ site.baseurl }}/assets/img/docs/tag.svg">
                 {% for version in page.version %}
                 <span class="server-version-badge" aria-describedby="tooltip">{{ version }}</span>
                 <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
