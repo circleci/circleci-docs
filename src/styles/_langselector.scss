@@ -24,7 +24,7 @@ $border-col: rgba(229,231,235, 1);
     background-color: transparent;
     background: none;
     border: none;
-    padding: 8px 0 0 0;
+    // padding: 8px 0 0 0;
 
     .lang-picker-mobile {
       display: none;
@@ -92,6 +92,68 @@ $border-col: rgba(229,231,235, 1);
   .mobile-top-row {
     display: none;
   }
+
+  .lang-request-form {
+    height: 95px;
+
+    .lang-form-title {
+      display: block;
+      color: $black;
+      margin: 4px 0px;
+      padding: 4px 16px;
+      font-size: 12px;
+      font-family: "Roboto";
+      line-height: 14px;
+    }
+
+    .lang-form {
+      background: #FBFBFB;
+      border: 1px solid #D4D4D4;
+      border-radius: 0px;
+      box-sizing: border-box;
+      width: 128px;
+      height: 40px;
+      margin: 0 16px;
+      padding: 11px 10px 11px 16px;
+
+      font-size: 15px;
+      line-height: 18px;
+      color: $black;
+      opacity: 0.5;
+      &:hover {
+        border: 1px solid $black;
+        background: $white;
+      }
+    }
+      .active {
+        border: 1px solid #1D97E4;
+        background: $white;
+        opacity: 1;
+        pointer-events: none;
+      }
+
+    #submit-btn {
+      opacity: 50%;
+      cursor: not-allowed;
+      font-family: "Roboto";
+      color: $btn-hover-blue;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14px;
+      margin-left: 106px;
+    }
+
+    #lang-submitted {
+      font-family: "Roboto";
+      font-size: 12px;
+      line-height: 14px;
+      color: $black;
+      text-align: right;
+      margin: 0 16px;
+    }
+  }
+
 
   // Mobile styling for the language selector
   // This converts the language picker on the desktop nav into a popover modal

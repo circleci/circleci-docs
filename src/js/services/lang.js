@@ -82,7 +82,7 @@ const languageRequest = () => {
 };
 
 const submitLanguage = () => {
-  const submitBtn = $('#submit-btn');
+  const submitBtn = $('#submit-lang-btn');
   const input = $('#lang-req')[0];
 
   if (input.value.length > 0) {
@@ -112,6 +112,7 @@ const submitLanguage = () => {
   }
 };
 // use intervals to check if user provided input to alter UI and toggle on click event for submit btn
+//
 const checkLangInput = setInterval(submitLanguage, 500);
 
 export function init() {

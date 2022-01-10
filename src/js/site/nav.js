@@ -94,8 +94,14 @@ const openLangDropdown = () => {
     globalNav.classList.remove('lang-picker-open');
   });
 
+  // close out the menu if you click anywhere outside of it.
+  let submitBtn = document.getElementById('submit-lang-btn');
   $('body').on('click', (e) => {
-    if (!globeBtn.contains(e.target) && !langPicker.contains(e.target)) {
+    if (
+      !globeBtn.contains(e.target) &&
+      !langPicker.contains(e.target) &&
+      !submitBtn.contains(e.target)
+    ) {
       underlyingMobileMenu.classList.remove('hidden-md');
       langPicker.classList.remove('lang-active');
       dimmer.style.display = 'none';
