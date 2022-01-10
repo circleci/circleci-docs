@@ -24,7 +24,7 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 | Proper Orb Slug | Bad Orb Slug |
 | --------------- | ------------ |
 | circleci/node   | circleci/node-orb |
-| company/orb  | company/company |
+| company/orb  | company/cci-plugin |
 {: class="table table-striped"}
 
 #### Categorize your orb
@@ -218,6 +218,14 @@ Executors are especially useful outside of orbs, as a way to create [matrix test
 {: #examples }
 
 Orb [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
+
+Be sure to name your usage examples so they reflect the use-case they demonstrate.
+
+| Good Usage Example Names | Bad Usage Example Names |
+| ------------------------ | ----------------------- |
+| deploy-to-service   | example |
+| install-cli  | demo |
+{: class="table table-striped"}
 
 #### All public orbs should contain at least one usage example.
 {: #all-public-orbs-should-contain-at-least-one-usage-example }
