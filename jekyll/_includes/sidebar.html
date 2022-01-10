@@ -3,7 +3,7 @@
   <nav class="sidebar fixed">
     <div class="sidebar-item-group">
       {% assign url_slug = current_url | slugify %}
-
+      
       {% for main-item in sidenav %}
       <ul>
         {% assign section_slug = main-item.name | slugify %}
@@ -92,12 +92,12 @@
                 <li class="subnav-item">
                   {% assign link_slug = item.link | slugify %}
                   <a class="{% if url_slug == link_slug %} active {% endif %}"
-                     href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}" data-section="{{ section_slug }}">
+                    href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}" data-section="{{ section_slug }}">
                     {{display_name}}
                   </a>
                 </li>
-                {% endif %}
-                {% endfor %}
+              {% endif %}
+            {% endfor %}
           </ul>
           {% endif %}
         </li>
