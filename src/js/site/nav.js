@@ -69,7 +69,7 @@ const openLangDropdown = () => {
 
   // open the menu
   globeBtn.addEventListener('click', () => {
-    langPicker.classList.toggle('lang-active');
+    langPicker.classList.add('lang-active');
     underlyingMobileMenu.classList.add('hidden-md');
     dimmer.style.display = 'inherit';
     globalNav.classList.add('lang-picker-open');
@@ -105,6 +105,7 @@ const openLangDropdown = () => {
       !submitBtn.contains(e.target)
     ) {
       underlyingMobileMenu.classList.remove('hidden-md');
+      globalNav.classList.remove('lang-picker-open');
       langPicker.classList.remove('lang-active');
       dimmer.style.display = 'none';
     }
