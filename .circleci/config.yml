@@ -236,7 +236,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.7.4-browsers' 
+      tag: '2.7.4-browsers'
     steps:
       - checkout
       - install-shared-assets
