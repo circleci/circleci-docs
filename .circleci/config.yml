@@ -16,6 +16,9 @@ parameters:
   run-schedule:
     type: boolean
     default: false
+  new-param:
+    type: boolean
+    default: false
 
 # Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
 # In this case, we are commonly using the "workspaces" feature to share
