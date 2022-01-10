@@ -131,7 +131,7 @@ You will also need the following information:
 * The GPC Zone you want to run nomad clients in. 
 * The GPC Region you want to run nomad clients in. 
 * The GPC Network you want to run nomad clients in.
-* The GPC Subetwork you want to run nomad clients in. 
+* The GPC Subnetwork you want to run Nomad Clients in. 
 
 You can copy the following example to your local environment and fill in the appropriate information for your specific setup. 
 
