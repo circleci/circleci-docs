@@ -18,7 +18,7 @@ This section describes the available configuration options for VM service. These
 
 toc::[]
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#eks[AWS] and {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#eks[GCP].
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#eks[AWS] and {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#gke[GCP].
 
 == VM service settings
 You will need to provide the hostname for your VM service load balancer:
