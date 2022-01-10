@@ -166,8 +166,9 @@ workflows:
 
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
-    machine: true
-    resource_class: circleci-runner/alberto-macbook
+    executor: # we specify our executor to use the node orb.
+      name: node/default
+      tag: '14.17.3'
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
@@ -227,8 +228,8 @@ jobs:
             - scripts
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
-    machine: true
-    resource_class: circleci-runner/alberto-macbook
+    docker:
+      - image: asciidoctor/docker-asciidoctor
     steps:
       - *attach_workspace
       - checkout
@@ -239,8 +240,9 @@ jobs:
           path: release/tmp/
 
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
-    machine: true
-    resource_class: circleci-runner/alberto-macbook
+   executor:
+      name: ruby/default
+      tag: '2.7.4-browsers' 
     steps:
       - checkout
       - install-shared-assets
@@ -275,8 +277,10 @@ jobs:
   # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
   # and puts everything in its place for a Jekyll build.
   build:
-    machine: true
-    resource_class: circleci-runner/whiskey
+    executor:
+      name: ruby/default
+      tag: '2.7.4-browsers'
+    resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -358,8 +362,9 @@ jobs:
             - _site/*
 
   datadog-synthetics-ci:
-    machine: true
-    resource_class: circleci-runner/alberto-macbook
+    executor:
+      name: node/default
+      tag: '14.17.3'
     description: Use Datadog CLI to run synthetic tests on internal server
     working_directory: *workspace_root
     steps:
@@ -382,8 +387,9 @@ jobs:
             kill -9 %1
   
   reindex-search:
-    machine: true
-    resource_class: circleci-runner/alberto-macbook
+    executor:
+      name: ruby/default
+      tag: '2.7.4-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
