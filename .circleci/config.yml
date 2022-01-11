@@ -273,7 +273,6 @@ jobs:
   build:
     machine: true
     resource_class: circleci-runner/alberto-macbook
-    resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
