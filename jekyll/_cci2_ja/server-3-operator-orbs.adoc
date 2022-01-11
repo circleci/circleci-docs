@@ -35,7 +35,7 @@ local to that orb repository by passing `--host \http://cirlceci.somehostname.co
 circleci orb list
 ----
 
-(ローカルの CircleCI Server Orb リポジトリに登録された) 利用可能なプライベート Orb を一覧表示するには、次のコマンドを実行します。
+To list available private orbs (registered in your local server orb repository) run:
 [source,bash]
 ----
 circleci orb list --host <your server install domain> --token <your api token>
@@ -48,7 +48,7 @@ circleci orb list --host <your server install domain> --token <your api token>
 circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
 ```
 
-## パブリック Orb の更新のフェッチ
+## Fetch a public orb’s updates
 ローカルの CircleCI Server Orb リポジトリに存在するパブリック Orb を新しいバージョンに更新するには、以下のコマンドを実行します。
 
 [source,bash]
