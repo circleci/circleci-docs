@@ -364,7 +364,7 @@ images!
 
 **Usage:** Add the following under `docker:` in your config.yml:
 
-`- image: cimg/{{ image[0] }}:[TAG]`
+`- image: circleci/{{ image[0] }}:[TAG]`
 
 **Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
 
