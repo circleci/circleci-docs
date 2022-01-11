@@ -16,11 +16,24 @@
         ul {
             display: list-item;
             list-style-type: none;
+
+            &#markdown-toc {
+                display: initial;
+                list-style-type: none;
+            }
         }
-        
-        ul#markdown-toc {
-            display: initial;
-            list-style-type: none;
+
+        @media(min-width: $screen-sm) {
+            &:first-of-type {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            &:last-of-type {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-left: 0;
+            }
         }
     }
 
@@ -41,36 +54,23 @@
         }
     }
 
-    @media(min-width: $screen-sm) {
-        .card:first-of-type {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        .card:last-of-type {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-left: 0;
-        }
-    }
-
     @media(max-width: $screen-sm) {
         flex-direction: column; 
 
         .card {
             width: 100%;
-        }
 
-        .card:first-of-type {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            margin-bottom: 0;
-        }
+            &:first-of-type {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                margin-bottom: 0;
+            }
 
-        .card:last-of-type {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            border-top: 0;
+            &:last-of-type {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-top: 0;
+            }
         }
 
         #card-or-card-container {
