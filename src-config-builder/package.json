@@ -21,7 +21,7 @@
     "react-codemirror2": "^6.0.0",
     "react-dom": "^16.12.0",
     "react-gtm-module": "^2.0.8",
-    "react-scripts": "3.4.0",
+    "react-scripts": "4.0.0",
     "react-select": "^3.0.8",
     "typescript": "^3.7.5"
   },
