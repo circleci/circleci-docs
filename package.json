@@ -15,7 +15,7 @@
     "datadog-synthetics-prod": "yarn datadog-ci synthetics run-tests -f ./.datadog/production.synthetics.json",
     "caddy-dev": "caddy run --config ./Caddyfile-dev",
     "jekyll-dev": "bundle exec jekyll serve -s jekyll --incremental --host=0.0.0.0",
-    "webpack-dev": "webpack --mode=development",
+    "webpack-dev": "webpack --watch --mode=development",
     "dev": "concurrently \"yarn caddy-dev\" \"yarn webpack-dev\" \"yarn jekyll-dev\"",
     "dev-clean": "bundle exec jekyll clean",
     "start": "./scripts/start.sh",
