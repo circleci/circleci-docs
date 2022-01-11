@@ -11,10 +11,9 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI server's VM service controls how https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor
-(Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
+CircleCI Server の VM サービスでは、https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor (Linux イメージおよび Windows イメージ) とhttps://circleci.com/docs/2.0/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
-This section describes the available configuration options for VM service. These config options are all accessible from the KOTS admin console by choosing the Config tab frm your dashboard.
+このセクションでは、VM サービスで利用可能な構成オプションについて説明します。 この構成オプションには、KOTS admin コンソールのダッシュボードで Config タブを選択することでアクセスできます。
 
 toc::[]
 
