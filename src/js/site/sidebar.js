@@ -138,7 +138,7 @@ export function highlightTocOnScroll() {
 
   // https://caniuse.com/intersectionobserver
   if (typeof IntersectionObserver !== 'undefined') {
-    var observer = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       function (entry) {
         // check that 1) the item is visible/intersecting
         // and 2) that the sidebar items text actually has that headline before we make any changes.
