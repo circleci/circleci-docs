@@ -690,15 +690,16 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   box-sizing: border-box;
   border-radius: 4px;
   margin-bottom: 24px;
+  padding: 0px 16px;
   display: flex;
 
   img {
-	margin: 0px 3px 3px 0px;
+	  margin: 0px 3px 3px 0px;
   }
 }
 
 #time-posted-on {
-  padding: 10px 10px 10px 10px;
+  padding: 10px 16px 10px 7px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -733,7 +734,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 }
 
 .server-version-wrapper {
-  padding: 10px;
+  padding: 10px 16px;
   flex-grow: 1;
   border-left: 1px solid #DDDDDD;
 }

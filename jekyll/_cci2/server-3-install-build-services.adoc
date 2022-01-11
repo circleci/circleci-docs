@@ -419,14 +419,7 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *Configure Server*
 +
-Configure VM Service through the KOTs admin console. The following fields need to be completed for VM service to operate correctly. 
-+
-** *AWS Region (required)* - This is the region the application is in.
-** *Subnets (required)* - Choose a subnet (public or private) where the VMs should be deployed. If you haven’t created a unique subnet you can use the subnet of the cluster. Note that all subnets must be in the same availability zone. 
-** *Security Group ID (required)* - This is the security group that will be attached to the VMs. It was created previously. 
-** *AWS IAM Access Key ID (required)* - AWS Access Key ID for EC2 access.
-** *AWS IAM Secret Key (required)* - IAM Secret Key for EC2 access.
-** *AWS Windows AMI ID (optional)* - If you require Windows builders, you can supply an AMI ID for them here.
+Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-vm-operator-service[VM Service] guide.
 
 Once you have configured the fields, *save your config* and deploy your updated application. 
 
@@ -514,39 +507,9 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *Configure Server*
 +
-Configure VM service through the KOTS admin console: 
-+
-** *VM Service Load Balancer (required)*
-This can be found using the following command:
-+
-```bash
-kubectl get service vm-service --namespace=<YOUR_CIRCLECI_NAMESPACE>
-```
-** *GCP project ID (required)* - 
-Name of the GCP project the cluster resides. Below this you can uncheck the box if you want to use private VMs, which request private IP addresses.
+Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-vm-operator-service[VM Service] guide.
 
-** *GCP Zone (required)* - 
-GCP zone the virtual machines instances should be created in for example “us-east1-b”.
-
-** *GCP VPC Network (required)* - 
-Name of the VPC Network.
-
-** *GCP VPC Subnet (optional)* - 
-Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
-
-** *GCP Service Account JSON Key File (required)* - 
-Copy and paste the contents of your service account JSON file.
-
-** *GCP Windows Image (optional)* - 
-Name of the image used for Windows builds. Leave this field blank if you do not require them.
-
-Click the *Save config* button to update your installation and re-deploy server.
-
-==== Additional VM Service Configuration
-
-* *Number of <VM type> VMs to keep prescaled (optional)* - By default, this field is set to 0 which will create and provision instances of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating instances lowers the start time allowing for faster machine and remote_docker builds. 
-+
-NOTE: that preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
+Once you have configured the fields, *save your config* and deploy your updated application. 
 
 ==== VM Service Validation
 

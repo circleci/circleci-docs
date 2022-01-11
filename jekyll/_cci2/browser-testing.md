@@ -246,7 +246,7 @@ Now, you can run integration tests from the command line and watch the browser f
 
 If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
 
-1. Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it before your tests:
+1. Download [`x11vnc`](https://github.com/LibVNC/x11vnc) and start it before your tests:
 
 ```
 steps:
@@ -267,7 +267,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz] (http://xquartz.macosforge.org/landing/).
+1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
 
 2. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 

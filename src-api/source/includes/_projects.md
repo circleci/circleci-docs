@@ -152,9 +152,9 @@ curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
   "build_time_millis" : 23505,
   "username" : "circleci",
   "reponame" : "mongofinil",
-  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
   "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
   "retry_of" : null, // build_num of the build this is a retry of
   "previous" : { // previous build
     "status" : "failed",
@@ -207,9 +207,9 @@ curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
   "build_time_millis" : 23505,
   "username" : "circleci",
   "reponame" : "mongofinil",
-  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
   "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
   "retry_of" : null, // build_num of the build this is a retry of
   "previous" : { // previous build
     "status" : "failed",
