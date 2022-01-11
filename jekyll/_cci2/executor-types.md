@@ -245,9 +245,6 @@ Using the `machine` executor gives your application full access to OS resources 
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-**Note**:
-Using `machine` may require additional fees in a future pricing update.
-
 To use the machine executor,
 set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
 
