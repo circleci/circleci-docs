@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Migration
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn now to migrate from CircleCI server 2.19.x to 3.x.
 :icons: font
 :toc: macro
 :toc-title:

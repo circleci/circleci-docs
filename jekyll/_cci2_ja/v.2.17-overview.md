@@ -4,11 +4,11 @@ title: "CircleCI Server v2.17 の新機能"
 short-title: "CircleCI Server v2.17 の新機能"
 description: "CircleCI Server v2.17 の入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 ---
 
-CircleCI Server v2.17 の機能強化や不具合修正についてまとめます。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
+This document provides a summary of features and product notes for the release of CircleCI server v2.17. パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
 
 ## What's new in release 2.17
 {: #whats-new-in-release-217 }
@@ -18,7 +18,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 * 名称が変更された組織のフローを変更しました。 これにより、名称が変更された組織は今後エラーが発生しないようになります。 このユース ケースで回避策を適用していたユーザーは、今後その回避策は不要となります。
 * ワークフローが占有する DB スペースが減り、管理が容易になります。
 * GraphQL API の直前のキャッシュ改善し、全体的なパフォーマンスを改善しました。
-* Added backpressure to avoid overwhelming nomad with requests, this will result in increased performance from existing nomad clusters.
+* リクエスト時に Nomad クライアントの容量飽和を避けるために、バックプレッシャー制御を追加しました。これにより、既存の Nomad クラスターのパフォーマンスが向上します。
 
 ## Fixed in release 2.17
 {: #fixed-in-release-217 }
@@ -86,7 +86,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
   * Mongo 3.6.12-xenial
   * Redis 4.0.14
 
-* We are removing the 1.0 Single-Box options from CircleCI 2.0. We found a few critical vulnerabilities in our 1.0 build image, and we have long stopped recommending it for trials. ワークフローに確実に必要な場合はご連絡ください。 なお、クラスター モードで 1.0 を実行しているユーザーには影響しません。
+* We are removing the 1.0 Single-Box options from CircleCI. We found a few critical vulnerabilities in our 1.0 build image, and we have long stopped recommending it for trials. ワークフローに確実に必要な場合はご連絡ください。 なお、クラスター モードで 1.0 を実行しているユーザーには影響しません。
 
 ## Steps to update to CircleCI Server v2.17
 {: #steps-to-update-to-circleci-server-v217 }

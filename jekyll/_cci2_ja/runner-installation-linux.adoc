@@ -1,0 +1,158 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= Linux への CircleCI ランナーのインストール
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+このページでは、CircleCI ランナーを Linux にインストールする方法を説明します。 
+
+NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
+
+== CircleCI ランナー設定ファイルを作成する
+
+Linux 用の推奨される CircleCI ランナー設定ファイルを次に示します。
+
+```yaml
+api:
+  auth_token: AUTH_TOKEN
+  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
+  # url: https://circleci.example.com
+
+runner:
+  name: RUNNER_NAME
+  command_prefix: ["sudo", "-niHu", "circleci", "--"]
+  working_directory: /opt/circleci/workdir/%s
+  cleanup_working_directory: true
+```
+
+Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc#authentication[Authentication] step. `RUNNER_NAME` には、任意の値を指定できまが、同じリソースクラスで使用される他のすべてのランナーの中で一意である必要があります。
+
+== CircleCI ランナー設定ファイルをインストールする
+
+Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
+
+```bash
+sudo chown root: /opt/circleci/launch-agent-config.yaml
+sudo chmod 600 /opt/circleci/launch-agent-config.yaml
+```
+
+== CircleCI ユーザーと作業ディレクトリを作成する
+
+これらはタスク エージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
+
+=== Ubuntu/Debian
+
+```bash
+id -u circleci &>/dev/null || sudo adduser --disabled-password --gecos GECOS circleci
+
+sudo mkdir -p /opt/circleci/workdir
+sudo chown -R circleci /opt/circleci/workdir
+```
+
+=== CentOS/RHEL
+
+```bash
+id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
+
+sudo mkdir -p /opt/circleci/workdir
+sudo chown -R circleci /opt/circleci/workdir
+```
+
+== SELinux ポリシーを構成する (RHEL 8)
+
+RHEL 8 システムでランナーがジョブを受け取り、実行するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このランナーが実行する個別のジョブで必要になる可能性がある権限を追加するものではないことに留意してください。
+
+`/opt/circleci/policy` というディレクトリを作成し、最初のポリシー モジュールを生成します。
+
+```bash
+sudo mkdir -p /opt/circleci/policy
+
+# まだインストールしていない場合 sepolicy と rpmbuild をインストールする
+sudo yum install -y policycoreutils-devel
+sudo yum install -y rpm-build
+
+sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci-launch-agent
+```
+
+次の Type Enforcement ファイル https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] をダウンロードして、ポリシーをインストールします。
+
+```bash
+sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
+
+sudo /opt/circleci/policy/circleci_launch_agent.sh
+```
+
+== Optional Steps
+
+=== Enable the `systemd` unit
+
+ `/opt/circleci/circleci.service` を所有者を `root` にして作成し、アクセス許可を `755` に設定します。
+
+`TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
+
+If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
+
+```
+[Unit]
+Description=CircleCI Runner
+After=network.target
+[Service]
+ExecStart=/opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+Restart=always
+User=root
+NotifyAccess=exec
+TimeoutStopSec=18300
+[Install]
+WantedBy = multi-user.target
+```
+
+次に、下記コマンドによりサービスを有効化します。
+
+```bash
+systemctl enable /opt/circleci/circleci.service
+```
+
+=== Start the service
+
+CircleCI ランナー サービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
+
+```bash
+systemctl start circleci.service
+```
+
+=== Verify the service is running
+
+The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
+
+エージェントの状態は、次のコマンドを実行して確認できます。
+
+```bash
+systemctl status circleci.service --no-pager
+```
+
+このコマンドの出力は次のようになります。
+
+```
+circleci.service - CircleCI Runner
+   Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
+ Main PID: 5592 (circleci-launch)
+   Status: "Healthy"
+    Tasks: 8 (limit: 2287)
+   CGroup: /system.slice/circleci.service
+           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+```
+
+また、次のコマンドを実行してシステムのログを確認することもできます。
+
+```bash
+journalctl -u circleci
+```

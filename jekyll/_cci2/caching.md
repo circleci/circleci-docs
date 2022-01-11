@@ -7,6 +7,7 @@ categories: [optimization]
 order: 50
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -45,9 +46,9 @@ Caching keys are simple to configure. The following example updates a cache if i
 {: #introduction }
 {:.no_toc}
 
-Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control.
+Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control.
 
-This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible.
+This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI job runs are automatically cached on the server infrastructure where possible.
 
 For information about enabling a premium feature to reuse the unchanged layers of your Docker image, see the [Enabling Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
 
@@ -68,7 +69,7 @@ If your project is open source/available to be forked and receive PRs from
 contributors, please make note of the following:
 
 - PRs from the same fork repo will share a cache (this includes, as previously
-  stated, that PRs in the master repo share a cache with master).
+  stated, that PRs in the main repo share a cache with main).
 - Two PRs in different Fork Repos will have different caches.
 - enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
   will enable cache sharing between the original repo and all forked builds.
@@ -88,7 +89,7 @@ Tools that are not explicitly required for your project are best stored on the D
 
 Jobs in one workflow can share caches. Note that this makes it possible to create race conditions in caching across different jobs in workflows.
 
-Cache is immutable on write: once a cache is written for a particular key like `node-cache-master`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
+Cache is immutable on write: once a cache is written for a particular key like `node-cache-main`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
 
 In a run of the workflow, Job3 may use the cache written by Job1 or Job2.  Since caches are immutable, this would be whichever job saved its cache first.  This is usually undesireable because the results aren't deterministic--part of the result depends on chance.  You could make this workflow deterministic by changing the job dependencies: make Job1 and Job2 write to different caches and Job3 loads from only one, or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
 
@@ -207,7 +208,7 @@ To keep cache sizes down, consider splitting into multiple distinct caches.
 ## Basic example of dependency caching
 {: #basic-example-of-dependency-caching }
 
-The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
+CircleCI manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 

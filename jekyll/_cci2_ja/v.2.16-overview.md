@@ -4,11 +4,11 @@ title: "CircleCI Server v2.16 の新機能"
 short-title: "CircleCI Server v2.16 の新機能"
 description: "CircleCI Server v2.16 の入門ガイド"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 ---
 
-CircleCI Server v2.16 の機能強化や不具合修正についてまとめます。
+This document provides a summary of features and product notes for the release of CircleCI server v2.16.
 
 ## What's new in release 2.16
 {: #whats-new-in-release-216 }
@@ -65,7 +65,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 - Ubuntu 14.04 ベースの環境を使用していること
 - Services マシンで Replicated バージョン 2.10.3 を実行していること
   - `replicated --version`
-- Your installation is **not** airgapped and you can access the internet from it
+- お使いの環境が孤立して**おらず**、インターネットにアクセスできること
 - Services マシン上ですべての手順が完了していること
 
 ### 準備

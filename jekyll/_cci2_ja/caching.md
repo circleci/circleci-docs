@@ -8,6 +8,7 @@ categories:
 order: 50
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -46,9 +47,9 @@ version:
 {: #introduction }
 {:.no_toc}
 
-CircleCI 2.0 では依存関係キャッシュの自動化を利用できません。 このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 2.0 では、キャッシュを手動で構成し、より高度な戦略を立て、きめ細かに制御することができます。
+Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. 2.0 では、キャッシュを手動で構成し、より高度な戦略を立て、きめ細かに制御することができます。
 
-ここでは、キャッシュの手動構成、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。 **メモ:** CircleCI 2.0 のジョブ実行に使用される Docker イメージは、サーバー インフラストラクチャに自動的にキャッシュされます (可能な場合)。
+ここでは、キャッシュの手動構成、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。 **Note:** The Docker images used for CircleCI job runs are automatically cached on the server infrastructure where possible.
 
 Docker イメージの未変更レイヤーを再利用するプレミアム機能を有効にする方法については、「[Docker レイヤー キャッシュの有効化]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)」を参照してください。
 
@@ -67,7 +68,7 @@ Docker イメージの未変更レイヤーを再利用するプレミアム機�
 
 プロジェクトがオープン ソースであるか、フォーク可能としてコントリビューターのプル リクエスト (PR) を受け付ける場合は、次のことに注意してください。
 
-- 同じフォーク リポジトリからの PR では、キャッシュを共有します (前述のように、これには master リポジトリ内の PR と master によるキャッシュの共有が含まれます)。
+- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the main repo share a cache with main).
 - それぞれ異なるフォーク リポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。
 - [環境変数]({{site.baseurl}}/2.0/env-vars)の共有を有効にすると、元のリポジトリとフォークされているすべてのビルド間でキャッシュ共有が有効になります。
 
@@ -86,7 +87,7 @@ Docker イメージの未変更レイヤーを再利用するプレミアム機�
 
 同じワークフロー内のジョブどうしはキャッシュを共有できます。 このため、複数のワークフローの複数のジョブにまたがってキャッシュを実行すると、競合状態が発生する可能性があります。
 
-つまり、`node-cache-master` などの特定のキーにキャッシュが書き込まれると、そのキーに再度書き込むことはできません。 この中で、Job3 は Job1 と Job2 に依存しています ({Job1, Job2} -> Job3)。  これらは、すべて同じキャッシュ キーに対して読み書きを行います。
+Cache is immutable on write: once a cache is written for a particular key like `node-cache-main`, it cannot be written to again. この中で、Job3 は Job1 と Job2 に依存しています ({Job1, Job2} -> Job3)。  これらは、すべて同じキャッシュ キーに対して読み書きを行います。
 
 このワークフローの実行中、Job3 は Job1 または Job2 によって書き込まれたキャッシュを使用します。  キャッシュは変更不可なので、どちらかのジョブによって最初に保存されたキャッシュが使用されます。  結果が確定的ではなく、その時々によって結果が異なるため、通常、この動作は好ましくありません。  これを確定的なワークフローにするには、ジョブの依存関係を変更します。 Job1 と Job2 で別のキャッシュに書き込み、Job3 ではいずれかのキャッシュから読み込みます。 または、一方向の依存関係を指定します (Job1 -> Job2 ->Job3)。
 
@@ -139,7 +140,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 commands:
   create_concatenated_package_lock:
     description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
-        parameters:
+    parameters:
       filename:
         type: string
     steps:
@@ -201,7 +202,7 @@ commands:
 ## 基本的な依存関係キャッシュの例
 {: #basic-example-of-dependency-caching }
 
-CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 その他の例については、「CircleCI を設定する」の「[save_cache]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache)」セクションを参照してください。
+CircleCI manual dependency caching requires that you be explicit about what you cache and how you cache it. その他の例については、「CircleCI を設定する」の「[save_cache]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache)」セクションを参照してください。
 
 ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルでジョブに `save_cache` ステップを追加します。
 
@@ -413,8 +414,7 @@ steps:
 {: #gradle-java }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ **
-はい。
+**部分キャッシュ リストアを使用しても安全でしょうか？** はい。
 
 Gradle リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、キャッシュの一部を復元できます。
 
@@ -440,8 +440,7 @@ steps:
 {: #maven-java-and-leiningen-clojure }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ **
-はい。
+**部分キャッシュ リストアを使用しても安全でしょうか？** はい。
 
 Maven リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、キャッシュの一部を復元できます。
 
@@ -469,8 +468,7 @@ steps:
 {: #npm-node }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ **
-はい。 ただし、NPM5 以降を使用する必要があります。
+**部分キャッシュ リストアを使用しても安全でしょうか？** はい。 ただし、NPM5 以降を使用する必要があります。
 
 NPM5 以降でロック ファイルを使用すると、部分キャッシュ リストアを安全に行うことができます。
 
@@ -496,8 +494,7 @@ steps:
 {: #pip-python }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ ** 
-はい。 ただし、Pipenv を使用する必要があります。
+**部分キャッシュ リストアを使用しても安全でしょうか？** はい。ただし、Pipenv を使用する必要があります。
 
 Pip では、`requirements.txt` で明示的に指定されていないファイルを使用できます。 [Pipenv](https://docs.pipenv.org/) を使用するには、ロック ファイルでバージョンを明示的に指定する必要があります。
 
@@ -523,8 +520,7 @@ steps:
 {: #yarn-node }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ **
-はい。
+**部分キャッシュ リストアを使用しても安全でしょうか？** はい。
 
 Yarn では、部分キャッシュ リストアを実行するために、既にロック ファイルが使用されています。
 

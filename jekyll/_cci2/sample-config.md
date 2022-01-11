@@ -7,6 +7,7 @@ categories: [migration]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 suggested:
   - title: Using dynamic config
@@ -647,11 +648,11 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 {% endraw %}
 
-This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 ## Sample configuration with fan-in/fan-out workflow
 {: #sample-configuration-with-fan-infan-out-workflow }
@@ -1058,9 +1059,9 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Deploy Master to Heroku
+          name: Deploy Main to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git main
 
 workflows:
   version: 2
@@ -1197,7 +1198,7 @@ jobs:
 
   build-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 12.5.1
     parameters:
       label:
         type: string
@@ -1299,7 +1300,7 @@ jobs:
 
   test-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 12.5.1
     parameters:
       label:
         type: string
@@ -1362,7 +1363,7 @@ workflows:
           context: github
           filters:
             branches:
-              only: master
+              only: main
 ```
 
 {:.tab.multiple-executors.Example-2}
@@ -1373,7 +1374,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run:

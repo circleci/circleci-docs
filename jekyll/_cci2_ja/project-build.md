@@ -2,12 +2,12 @@
 layout: classic-docs
 title: "Projects and Pipelines"
 short-title: "Projects and Pipelines"
-description: "CircleCI 2.0 プロジェクトの入門ガイド"
+description: "Starting point for CircleCI projects"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
 This document describes how CircleCI automates your pipelines.
@@ -32,8 +32,11 @@ On the Projects Dashboard, you can either:
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-{:.tab.addprojectpage.Server}
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+{:.tab.addprojectpage.Server_3}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+
+{:.tab.addprojectpage.Server_2}
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
 *Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
 
@@ -41,12 +44,15 @@ The *Project Administrator* is the user who adds a GitHub or Bitbucket repositor
 
 ### Org switching
 {: #org-switching }
-If you do not see your project and it is not currently building on CircleCI, check your Organization in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
+If you do not see your project and it is not currently building on CircleCI, check your Organization in the top left corner of the CircleCI application.  たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 
 {:.tab.switcher.Cloud}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-{:.tab.switcher.Server-v2}
+{:.tab.switcher.Server_3}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 ## Viewing and navigating pipelines
@@ -58,7 +64,7 @@ When viewing a single job in a pipeline, you can use the breadcrumbs at the top 
 
 ![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
 
-## See also
+## 関連項目
 {: #see-also }
 
-[Settings]({{ site.baseurl }}/2.0/settings)
+[Settings]({{ site.baseurl }}/ja/2.0/settings)

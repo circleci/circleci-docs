@@ -7,6 +7,15 @@ orbs:
   node: circleci/node@4.7.0
   md-proofer: hubci/md-proofer@0.1
 
+# This is using the new Scheduled Pipeline feature.
+# Right now (10/2021) there is no UI to configure it, so if you need to
+# change it's behavior, you'll have to do it manualy:
+# https://circleci.atlassian.net/wiki/spaces/CD/pages/6301483319/Schedule+Pipelines+Migration#Other-methods
+# See the "GET", "DELETE" or "PATCH" section.
+parameters:
+  run-schedule:
+    type: boolean
+    default: false
 
 # Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
 # In this case, we are commonly using the "workspaces" feature to share
@@ -64,7 +73,7 @@ commands:
       - run:
           name: Populate JEKYLL_BASENAME env var
           command: |
-            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main ]; then
+            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main -o ${CIRCLE_BRANCH} = /.*-preview/ ]; then
               echo "export JEKYLL_BASENAME=docs" >> $BASH_ENV;
             else
               echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
@@ -75,45 +84,69 @@ commands:
 workflows:
 
   build-deploy:
+    when: 
+      not: << pipeline.parameters.run-schedule >>
     jobs:
       - js_build
       - build_server_pdfs:
           filters:
             branches:
-              only: /server\/.*/
+              only: /.*/server/
       - build_api_docs
       - build:
           requires:
             - js_build
             - build_server_pdfs
             - build_api_docs
-      - reindex-search:
+      - minimize-images:
+          requires:
+            - build              
+          filters: 
+            branches:
+              only: 
+                - master 
+                - /.*-preview/
+      - datadog-synthetics-ci:
+          context:
+            - web-ui-datadog
           requires:
             - build
+      - reindex-search:
+          requires:
+            - datadog-synthetics-ci
           filters:
             branches:
               only: master
       - deploy-preview:
           requires:
-            - build
+            - datadog-synthetics-ci
+            - minimize-images
           filters:
             branches:
               only: /.*-preview/
+      - datadog-synthetics-preview:
+          context:
+            - web-ui-datadog
+          requires:
+            - deploy-preview
       - deploy:
           requires:
-            - build
+            - datadog-synthetics-ci
+            - minimize-images
           filters:
             branches:
               only: master
+      - datadog-synthetics:
+          context:
+            - web-ui-datadog
+          requires:
+            - deploy
+
   # We run a nightly build for running build/maintenance tasks
   # such as pulling in docker image tags or automating our api documentation
+  # Triggered every day at 08:00 AM on master branch
   nightly-build:
-    triggers:
-      - schedule:
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only: master
+    when: << pipeline.parameters.run-schedule >>
     jobs:
       - js_build
       - build_api_docs
@@ -125,12 +158,11 @@ workflows:
           requires:
             - build
 
-
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
       name: node/default
-      tag: '14.1'
+      tag: '14.17.3'
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
@@ -138,21 +170,56 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - set-jekyll-basename
+      - run: 
+          name: "Lint JS assets"
+          command: yarn lint
+      - run:
+          name: "Run tests"
+          command: yarn test:ci
       - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: yarn webpack-prod
       - run:
-          name: "Persist JS assets" # Move our JS into our workspace.
+          name: "Persist JS assets" # Move our JS+CSS into our workspace.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
-            mv jekyll/assets/js/*.bundle.js /tmp/workspace/js/
+            mkdir -p /tmp/workspace/css
+            mv jekyll/assets/js/* /tmp/workspace/js/
+            mv jekyll/assets/css/* /tmp/workspace/css/
+      - run:
+          name: "Persist package.json" # Move our package.json into our workspace for datadog synthetic tests.
+          command:
+            mv package.json /tmp/workspace/package.json
+      - run:
+          name: "Persist yarn.lock" # Move our yarn.lock into our workspace for datadog synthetic tests.
+          command:
+            mv yarn.lock /tmp/workspace/yarn.lock
+      - run:
+          name: "Persist .datadog" # Move our .datadog into our workspace for datadog synthetic tests.
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/.datadog
+            mv .datadog/*.synthetics.json /tmp/workspace/.datadog/
+      - run:
+          name: "Persist postinstall script" # Move our relevant shell scripts into our workspace for datadog synthetic tests.
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/scripts
+            mv scripts/datadog-synthetics-preview.js /tmp/workspace/scripts/datadog-synthetics-preview.js
+            mv scripts/datadog-synthetics-ci.sh /tmp/workspace/scripts/datadog-synthetics-ci.sh
+            mv scripts/postinstall.sh /tmp/workspace/scripts/postinstall.sh
+            mv scripts/process-images.sh /tmp/workspace/scripts/process-images.sh
       - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
             - js
-
-
+            - css
+            - package.json
+            - yarn.lock
+            - .datadog
+            - scripts
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
@@ -169,7 +236,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.7.2-browsers'
+      tag: '2.7.4-browsers'
     steps:
       - checkout
       - install-shared-assets
@@ -182,12 +249,12 @@ jobs:
       - ruby-deps:
           dir: src-api
       - restore_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
       - run:
           name: Install Node dependencies
           command: cd src-api; yarn install
       - save_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
           paths:
             - src-api/node_modules
       - run:
@@ -206,7 +273,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.7.2-browsers'
+      tag: '2.7.4-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -220,9 +287,9 @@ jobs:
           version: "0.3.0"
       - run:
           name: "Test Markdown Files"
-          command: md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
+          command: md-proofer lint jekyll/_cci2/ jekyll/_api/
       - run:
-          name: Install dependecies for pronto gem
+          name: Install dependencies for pronto gem
           command: |
             sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
@@ -244,7 +311,9 @@ jobs:
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
-            mv /tmp/workspace/js/* jekyll/assets/js/
+            mkdir -p /tmp/workspace/css
+            mv -fn /tmp/workspace/js/* jekyll/assets/js/
+            mv -fn /tmp/workspace/css/* jekyll/assets/css/
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/ jekyll/_api/
             # remove unusued /api folder.
@@ -286,10 +355,35 @@ jobs:
           paths:
             - _site/*
 
+  datadog-synthetics-ci:
+    executor:
+      name: node/default
+      tag: '14.17.3'
+    description: Use Datadog CLI to run synthetic tests on internal server
+    working_directory: *workspace_root
+    steps:
+      - *attach_workspace
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run:
+          name: Add ui.circleci.com DNS record # Allows us to ping ui.circleci.com instead localhost or 127.0.0.1
+          command: |
+            sudo tee -a /etc/hosts \<<<'127.0.0.1 ui.circleci.com'
+            cat /etc/hosts
+      - run:
+          name: Serve static files & Call Datadog Synthetics Test
+          command: |
+            set -exu
+            yarn serve _site -p 4000 > /dev/null &
+            sleep 5
+            ./scripts/datadog-synthetics-ci.sh
+            kill -9 %1
+  
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.7.2-browsers'
+      tag: '2.7.4-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -304,16 +398,6 @@ jobs:
           name: Update Algolia Index
           command: |
             ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --source jekyll --config jekyll/_config.yml
-  deploy:
-    docker:
-      - image: cibuilds/aws:1.16.185
-    steps:
-      - attach_workspace:
-          at: ./generated-site
-      - set-jekyll-basename
-      - run:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync generated-site/_site/${JEKYLL_BASENAME} s3://circle-production-static-site/${JEKYLL_BASENAME}/ --delete
 
   deploy-preview:
     docker:
@@ -328,3 +412,67 @@ jobs:
       - run:
           name: Preview deployment URL
           command: echo "Preview is deployed at http://circleci-doc-preview.s3-website-us-east-1.amazonaws.com/${JEKYLL_BASENAME}/?force-all"
+
+  datadog-synthetics-preview:
+    executor:
+      name: node/default
+      tag: '14.17.3'
+    description: Use Datadog CLI to run synthetic tests on preview S3
+    working_directory: *workspace_root
+    steps:
+      - *attach_workspace
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run:
+          name: Call Datadog CLI
+          command: yarn datadog-synthetics-preview 
+
+  deploy:
+    docker:
+      - image: cibuilds/aws:1.16.185
+    steps:
+      - attach_workspace:
+          at: ./generated-site
+      - set-jekyll-basename
+      - run:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: aws s3 sync generated-site/_site/${JEKYLL_BASENAME} s3://circle-production-static-site/${JEKYLL_BASENAME}/ --delete
+
+  datadog-synthetics:
+    executor:
+      name: node/default
+      tag: '14.17.3'
+    description: Use Datadog CLI to run synthetic tests on production
+    working_directory: *workspace_root
+    steps:
+      - *attach_workspace
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run:
+          name: Call Datadog CLI
+          command: yarn datadog-synthetics-prod
+          
+  minimize-images:
+    executor:
+      name: node/default
+      tag: '14.17.3'
+    description: Compressing images with imagemin for prod
+    working_directory: *workspace_root
+    steps:
+      - *attach_workspace
+      - set-jekyll-basename
+      - run: 
+          name: move to correct workspace 
+          command: cd /tmp/workspace 
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
+      - run:
+          name: Minimize Images
+          command: yarn minimize-img
+      - persist_to_workspace:
+          root: *workspace_root
+          paths: 
+            - _site/*/assets/*

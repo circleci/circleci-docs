@@ -8,6 +8,9 @@
 
 <div class="outer">
   {% include_cached global-nav.html site=site page=page %}
+  <div id="progress-bar-container">
+    {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
+  </div>
   {% include_cached hits-target.html %}
   <div class="main-body">
     {% assign lang = page.lang %}
@@ -27,20 +30,33 @@
             <div>
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
-            <div id="tooltip" role="tooltip" class="tooltip-popover">
-              This document is applicable to the following:
-              <div id="arrow" data-popper-arrow></div>
+
+            <!-- Quick info list - time posted + server version -->
+            {% if page.page-type != "index" and page.page-type != "homepage" %}
+            <div id="tooltip" role="tooltip" class="tooltip-popover"></div>
+            <div id="tooltip-time" role="tooltip" class="tooltip-popover">
+              Last updated
+              <div id='arrow' data-popper-arrow></div>
             </div>
-            {% if page.version %}
-            <div class="server-version-wrapper">
-              {% for version in page.version %}
-              <span class="badge badge-primary">
-                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
+
+            <div class="quick-info-list">
+              <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
+                <img src="{{ site.baseurl }}/assets/img/docs/duration.svg">
+                {% if page.last_modified_at %}<span id="time-posted-ago"></span>{% else %} {{ page.date | date: '%d-%b-%y' }} {% endif %}
+              </time>
+              
+              {% if page.version %}
+              <div class="server-version-wrapper">
+                <img class="server-version-tag-svg" src="{{ site.baseurl }}/assets/img/docs/tag.svg">
+                {% for version in page.version %}
+                <span class="server-version-badge" aria-describedby="tooltip">{{ version }}</span>
                 <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-              </span>
-              {% endfor %}
+                {% endfor %}
+              </div>
+              {% endif %}
             </div>
             {% endif %}
+
             {% if page.untranslated %}
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}
@@ -53,24 +69,26 @@
 
         {% if page.toc != false %}
         <aside class="full-height">
-          <h5 class="toc-heading">On this page</h5>
-          <div class="toc-indent">
-            {{ content | toc_only }}
-          </div>
-          {% if page.suggested != false %}
-          <div id="related-resources">
-            <h5 class="related-heading">Helpful resources</h5>
-            <div class="related-indent">
-              <ul class="section-nav">
-                {% for item in page.suggested %}
-                <li class="related-entry related-h2">
-                  <a href="{{item.link}}" target="_blank">{{item.title}}</a>
-                </li>
-                {% endfor %}
-              </ul>
+          <div class='full-height-sticky'>
+            {% if page.suggested != false %}
+            <div id="related-resources">
+              <h5 class="related-heading">Helpful resources</h5>
+              <div class="related-indent">
+                <ul class="section-nav">
+                  {% for item in page.suggested %}
+                  <li class="related-entry related-h2">
+                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+            <h5 class="toc-heading">On this page</h5>
+            <div class="toc-indent">
+              {{ content | toc_only }}
             </div>
           </div>
-          {% endif %}
         </aside>
         {% endif %}
       </div> <!-- .article-toc -->

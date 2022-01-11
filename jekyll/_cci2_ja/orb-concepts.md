@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 verison:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -17,7 +17,7 @@ verison:
 {: #quick-start }
 {:.no_toc}
 
-[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
+[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
 
 ## Orb の設定要素
 {: #orb-configuration-elements }
@@ -53,7 +53,6 @@ jobs:
           to: 's3://my-s3-bucket-name'
 
   #...ワークフロー、その他のジョブなど
-
 ```
 
 詳細は、レジストリの[AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands)をご覧ください。
@@ -96,6 +95,9 @@ parameters:
 ```yaml
 description: >
   使用する Ruby のバージョンを選択。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
+  images built for CI.
+
+  CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
 
   このリストの中から利用可能なタグを使用することができます。
   https://hub.docker.com/r/cimg/ruby/tags
@@ -108,6 +110,7 @@ parameters:
   tag:
     default: '2.7'
     description:`circleci/ruby` の Docker イメージのバージョンを示すタグ
+    type: string
     type: string
 ```
 {% endraw %}
@@ -173,9 +176,9 @@ _名前空間_ は、一連の Orb をオーサー別にグループ化するた
 ## セマンティック バージョニング
 {: #semantic-versioning }
 
-Orb は [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。各Orbのアップデートは標準化されたバージョニング パターンに従っており、Orb のオーサーやユーザーはそれを活用してください。
+Orb は [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。 各Orbのアップデートは標準化されたバージョニング パターンに従っており、Orb のオーサーやユーザーはそれを活用してください。
 
-セマンティック バージョニングでは、リリース バージョンは `.`で区切られた 3 つの整数で表されます。それぞれの整数は、追加される変更の種類を表します。
+セマンティック バージョニングでは、リリース バージョンは `.`で区切られた 3 つの整数で表されます。 それぞれの整数は、追加される変更の種類を表します。
 
 ```
 [Major].[Minor].[Patch]
@@ -190,12 +193,12 @@ Orb は [セマンティック バージョニング](https://semver.org/) の�
 
 Orb をインポートすると、その Orb を特定のセマンティック バージョニングのコンポーネントに固定することができます。
 
-| インポートバージョン | 説明                                                                              |
-| ---------- | ------------------------------------------------------------------------------- |
-| 1.2.3      | フルバージョンと一致。 変更は取り込まれません。                                                        |
-| 1.2        | メジャーバージョン `1`、マイナーバージョン `2`にロックされており、すべてのパッチアップデートを受け取ります。                      |
-| 1          | メジャーバージョン`1`にロックされており、 すべてのマイナーアップデートとパッチアップデートを受け取ります。 メジャーバージョンは自動的には変更されません。 |
-| 揮発性        | **推奨しません。** 最後にパブリッシュされたバージョンの Orb をプルするためテスト時には便利です。 セマンティック バージョニングは適用されません。  |
+| インポートバージョン | 説明                                                                               |
+| ---------- | -------------------------------------------------------------------------------- |
+| 1.2.3      | フルバージョンと一致。 変更は取り込まれません。                                                         |
+| 1.2        | メジャーバージョン `1`、マイナーバージョン `2`にロックされており、すべてのパッチアップデートを受け取ります。                       |
+| 1          | メジャーバージョン`1`にロックされています。 すべてのマイナーアップデートとパッチアップデートを受け取ります。 メジャーバージョンは自動的には変更されません。 |
+| volatile   | **推奨しません。 ** 最後にパブリッシュされたバージョンの Orb をプルするためテスト時には便利です。 セマンティック バージョニングは適用されません。  |
 {: class="table table-striped"}
 
 ユーザーの CI プロセスに悪影響を与えないように、Orb オーサーはセマンティック バージョン管理を厳密に行い、 `マイナー` または `パッチ` レベルの更新時に大きな変更が取り込まれないようにする必要があります。
@@ -213,7 +216,7 @@ Orb をインポートすると、その Orb を特定のセマンティック �
 安定版の Orb は変更不可であり、[Orb レジストリ](https://circleci.com/developer/orbs)で見つけることができます。
 
 - 安定版 Orbは、変更不可であり、削除や編集ができず、更新は新しいセマンティック バージョンのリリースで提供される必要があります。
-- バージョンの文字列は セマンティック バージョニング形式でなければなりません。例えば、 `<namespace>/<orb>@1.2.3`のようになります。
+- バージョンの文字列は セマンティック バージョニング形式でなければなりません。 例えば、 `<namespace>/<orb>@1.2.3`のようになります。
 - 安定版 Orb は、名前空間の組織のオーナーのみがパブリッシュできます。
 - Orb レジストリへのパブリッシュ
 - オープンソースは [MIT ライセンス](https://circleci.com/developer/orbs/licensing)でリリースされます。
@@ -293,7 +296,6 @@ steps:
   - run:
       name: Hello Greeting
       command: <<include(scripts/file.sh)>>
-
 ```
 
 {:.tab.fileInclude.file-sh}
@@ -319,7 +321,7 @@ steps:
 Bash スクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/2.0/orb-author/#scripts) ガイドをご覧ください。
 
 ## Orb 内での Orb の使用と登録時の解決
-{: #using-orbs-within-your-orb-and-register-time-resolution }
+{: #-within-your-orb-and-register-time-resolution }
 
 Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、すべての Orb 依存関係は、ビルドの実行時ではなく Orb の登録時にすべて解決されます。
 

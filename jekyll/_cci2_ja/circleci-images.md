@@ -8,8 +8,13 @@ categories:
 order: 20
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
+
+<div class="alert alert-warning" role="alert">
+  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+</div>
 
 CircleCI が提供しているビルド済みイメージの概要と、言語別、サービス タイプ別、タグ別のイメージについて、以下のセクションに沿って説明します。
 
@@ -25,10 +30,10 @@ CircleCI では、すぐに使える Docker イメージを多数提供してい
 イメージを直接検索したい場合は、以下の場所から CircleCI イメージを閲覧することができます。
 
 - 各次世代イメージのリポジトリへのリンクについては、[ディベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
-- GitHub の `circleci-images` リポジトリには、[従来の CiecleCI イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。
-- すべての ビルド済み CircleCI イメージは、[Docker ハブ](https://hub.docker.com/search?q=circleci&type=image) から入手できます。
+- Find all CircleCI pre-built images available on [Docker Hub](https://hub.docker.com/u/cimg).
+- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
 
-_**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
+__**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
 
 ### 例
 {: #examples }
@@ -53,7 +58,6 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
   myjob:
     docker:
       - image: cimg/base:2021.04
-
 ```
 
 これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 次世代版の CircleCI イメージは、すべてこのイメージがベースとなります。
@@ -64,7 +68,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 **関連資料**
 
-このイメージの設定ファイルのサンプルは [デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base) を、ソースコードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) を参照してください。　
+このイメージの設定ファイルのサンプルは [デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base) を、ソースコードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) を参照してください。
 
 以下の例では、上記の `ベースのイメージ`をベースにした、次世代のGoイメージを使用する方法を示しています。
 
@@ -72,7 +76,6 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
   myjob:
     docker:
       - image:  cimg/go:1.16
-
 ```
 
 これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker ハブ の名前空間が `cimg` であることにご注意ください。 他の言語の次世代イメージは、[以下](#next-gen-language-images)をご覧ください。
@@ -292,30 +295,15 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 
 **関連資料:**
 
-- [Docker ハブ](https://hub.docker.com/r/circleci/{{ image[0] }}) - イメージやその他の役立つ情報が提供されています。
+- [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
 
 **使用方法:** config.yml の `docker:` に以下の行を追加します。
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**最新のタグ:** <small>(すべてのイメージ タグは[こちら]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
+**Recent Tags:**
 
-<ul class="list-3cols">
-{% assign tags = image[1].tags | sort | reverse %}
-{% assign tagCounter = 1 %}
-{% for tag in tags %}
-    {% if tagCounter > 99 %}
-        {% break %}
-    {% endif %}
-    {% unless tag contains "-browsers" or tag contains "-node" or tag contains "-ram" %}
-    <li>{{ tag }}</li>
-    {% assign tagCounter = tagCounter | plus:1 %}
-    {% endunless %}
-{% endfor %}
-</ul>
-
-<br/>
-注: このイメージで使用可能なバリアントは、上記のタグにバリアント タグを追加することで使用できます。 すべてのイメージ タグは[こちら]({{ site.baseurl }}/2.0/docker-image-tags.json)で確認できます。
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }})/tags?ordering=last_updated).
 
 ---
 
@@ -325,6 +313,6 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 {: #see-also }
 {:.no_toc}
 
-- プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
-- iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/2.0/testing-ios/) を参照してください。
-- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/2.0/building-docker-images/)」を参照してください。
+- See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- iOS 用の macOS イメージの詳細については、({{ site.baseurl }}/2.0/testing-ios/) を参照してください。
+- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/2.0/building-docker-images/)」を参照してください。

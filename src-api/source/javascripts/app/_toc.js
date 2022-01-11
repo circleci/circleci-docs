@@ -1,16 +1,16 @@
 //= require ../lib/_jquery
 //= require ../lib/_imagesloaded.min
-;(function () {
+(function () {
   'use strict';
 
-  var htmlPattern = /<[^>]*>/g;
+  var htmlPattern = /<[^>]*>/g; // eslint-disable-line no-unused-vars
   var loaded = false;
 
-  var debounce = function(func, waitTime) {
+  var debounce = function (func, waitTime) {
     var timeout = false;
-    return function() {
+    return function () {
       if (timeout === false) {
-        setTimeout(function() {
+        setTimeout(function () {
           func();
           timeout = false;
         }, waitTime);
@@ -19,9 +19,9 @@
     };
   };
 
-  var closeToc = function() {
-    $(".toc-wrapper").removeClass('open');
-    $("#nav-button").removeClass('open');
+  var closeToc = function () {
+    $('.toc-wrapper').removeClass('open');
+    $('#nav-button').removeClass('open');
   };
 
   function loadToc($toc, tocLinkSelector, tocListSelector, scrollOffset) {
@@ -30,21 +30,22 @@
     var windowHeight = 0;
     var originalTitle = document.title;
 
-    var recacheHeights = function() {
+    var recacheHeights = function () {
       headerHeights = {};
       pageHeight = $(document).height();
       windowHeight = $(window).height();
 
-      $toc.find(tocLinkSelector).each(function() {
+      $toc.find(tocLinkSelector).each(function () {
         var targetId = $(this).attr('href');
-        if (targetId[0] === "#") {
+        if (targetId[0] === '#') {
           headerHeights[targetId] = $(targetId).offset().top;
         }
       });
     };
 
-    var refreshToc = function() {
-      var currentTop = $(document).scrollTop() + scrollOffset;
+    var refreshToc = function () {
+      // 74 because v2-banner expands up to 74px scroll-margin-top is set to 74
+      var currentTop = $(document).scrollTop() + scrollOffset + 74;
 
       if (currentTop + windowHeight >= pageHeight) {
         // at bottom of page, so just select last header by making currentTop very large
@@ -55,7 +56,11 @@
 
       var best = null;
       for (var name in headerHeights) {
-        if ((headerHeights[name] < currentTop && headerHeights[name] > headerHeights[best]) || best === null) {
+        if (
+          (headerHeights[name] < currentTop &&
+            headerHeights[name] > headerHeights[best]) ||
+          best === null
+        ) {
           best = name;
         }
       }
@@ -67,43 +72,47 @@
       }
 
       var $best = $toc.find("[href='" + best + "']").first();
-      if (!$best.hasClass("active")) {
+      if (!$best.hasClass('active')) {
         // .active is applied to the ToC link we're currently on, and its parent <ul>s selected by tocListSelector
         // .active-expanded is applied to the ToC links that are parents of this one
-        $toc.find(".active").removeClass("active");
-        $toc.find(".active-parent").removeClass("active-parent");
-        $best.addClass("active");
-        $best.parents(tocListSelector).addClass("active").siblings(tocLinkSelector).addClass('active-parent');
-        $best.siblings(tocListSelector).addClass("active");
-        $toc.find(tocListSelector).filter(":not(.active)").slideUp(150);
-        $toc.find(tocListSelector).filter(".active").slideDown(150);
+        $toc.find('.active').removeClass('active');
+        $toc.find('.active-parent').removeClass('active-parent');
+        $best.addClass('active');
+        $best
+          .parents(tocListSelector)
+          .addClass('active')
+          .siblings(tocLinkSelector)
+          .addClass('active-parent');
+        $best.siblings(tocListSelector).addClass('active');
+        $toc.find(tocListSelector).filter(':not(.active)').slideUp(150);
+        $toc.find(tocListSelector).filter('.active').slideDown(150);
         if (window.history.replaceState) {
-          window.history.replaceState(null, "", best);
+          window.history.replaceState(null, '', best);
         }
-        var thisTitle = $best.data("title")
+        var thisTitle = $best.data('title');
         if (thisTitle !== undefined && thisTitle.length > 0) {
-          document.title = thisTitle + " – " + originalTitle;
+          document.title = thisTitle + ' – ' + originalTitle;
         } else {
           document.title = originalTitle;
         }
       }
     };
 
-    var makeToc = function() {
+    var makeToc = function () {
       recacheHeights();
       refreshToc();
 
-      $("#nav-button").click(function() {
-        $(".toc-wrapper").toggleClass('open');
-        $("#nav-button").toggleClass('open');
+      $('#nav-button').click(function () {
+        $('.toc-wrapper').toggleClass('open');
+        $('#nav-button').toggleClass('open');
         return false;
       });
-      $(".page-wrapper").click(closeToc);
-      $(".toc-link").click(closeToc);
+      $('.page-wrapper').click(closeToc);
+      $('.toc-link').click(closeToc);
 
       // reload immediately after scrolling on toc click
-      $toc.find(tocLinkSelector).click(function() {
-        setTimeout(function() {
+      $toc.find(tocLinkSelector).click(function () {
+        setTimeout(function () {
           refreshToc();
         }, 0);
       });

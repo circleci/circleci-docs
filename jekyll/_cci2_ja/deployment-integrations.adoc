@@ -1,17 +1,17 @@
 ---
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
-= デプロイの設定
+= Configuring Deploys
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-:toc-title:version:
+:toc-title:
 
-
-サークルCIでのデプロイは、他のジョブ設定と同じように、ジョブを作成し、ほぼすべてのターゲットにデプロイするように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
+Deployment at CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
 
 toc::[]
 
@@ -26,17 +26,17 @@ toc::[]
 
 == デプロイ: 基礎編
 
-* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
+* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview, job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#, deployment examples>> document covers example config for many common deployment targets.
 
 * *デプロイ パラメーター*: デプロイするための手順を実行するには、環境変数やSSHキーの追加が必要な場合があります。 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり（詳しい手順は以下のリンクを参照）、設定で定義することができます。 環境変数を _設定で_ 定義する例は、このページの下方にある、Heroku Orb を使用しないデプロイジョブの設定で紹介しています。
-** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
-** Add project-level <<add-ssh-key#,SSH keys>> 
+** Add project-level <<env-vars#setting-an-environment-variable-in-a-project, environment variables>>
+** Add project-level <<add-ssh-key#, SSH keys>> 
 
-* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
+* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval, hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
 
 == Orb を使用したデプロイメントの簡素化
 
-At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orb は多くの一般的なデプロイ ターゲットに対応しており、設定の簡素化と効率化に役立ちます。 https://circleci.com/developer/orbs[Orb レジストリ]で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。 
+At CircleCI we offer packages of reusable configuration, known as <<orb-intro#, orbs>>. Orb は多くの一般的なデプロイ ターゲットに対応しており、設定の簡素化と効率化に役立ちます。 https://circleci.com/developer/orbs[Orb レジストリ]で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。 
 
 例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `デプロイ` ジョブが設定されており、Orb スタンザを追加してオーブが起動したら、 `aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
 
@@ -49,7 +49,7 @@ orbs:
 workflows:
   deploy_application:
     jobs:
-      - aws-code-deploy/deploy 
+      - aws-code-deploy/deploy
           application-name: myApplication
           deployment-group: myDeploymentGroup
           service-role-arn: myDeploymentGroupRoleARN
@@ -67,7 +67,7 @@ Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定�
 
 以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
 
- https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
+https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
 
 ```yaml
 version: 2.1
@@ -80,7 +80,7 @@ workflows:
     jobs:
       - build
       - heroku/deploy-via-git:# 事前に設定されたジョブ deploy-via-git を使う
-          requires:         
+          requires:
             - build
           filters:
             branches:
@@ -128,38 +128,38 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory:~/circleci-demo-workflows
-   steps:
+    working_directory: ~/circleci-demo-workflows
+    steps:
       - checkout
-      # インストールの依存関係をバンドル
+      # Bundle install dependencies
       - run: bundle install --path vendor/bundle
 
-      # データベースのセットアップ
+      # Database setup
       - run: bundle exec rake db:create db:schema:load
 
       - run:
-          name:Run tests
+          name: Run tests
           command: rake
 
   deploy:
     machine:
         enabled: true
-    working_directory:~/circleci-demo-workflows
+    working_directory: ~/circleci-demo-workflows
     environment:
       HEROKU_APP: "sleepy-refuge-55486" # define env var $HEROKU_APP
     steps:
       - checkout
       - run:
           name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh # Herokuをセットアップするスクリプトを実行
+          command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
 
       - run:
-          command:|
-            git push heroku sequential-branch-filter:master
+          command: |
+            git push heroku sequential-branch-filter:main
             heroku run rake db:migrate
-            sleep 5 # ５秒間スリープしてDynoを待つ
+            sleep 5 # sleep for 5 seconds to wait for dynos
             heroku restart
-
+            
 workflows:
   version: 2
   build-and-deploy:
@@ -176,4 +176,4 @@ workflows:
 //== Deployment Security Considerations
 
 == 次のステップ
-Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. お客様のデプロイ ターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 If not consider <<orb-author-intro#,authoring one>>!
+Look through the <<deployment-examples#, deployment examples>> document, which provides config examples for some popular deployment targets. お客様のデプロイ ターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 If not consider <<orb-author-intro#, authoring one>>!
