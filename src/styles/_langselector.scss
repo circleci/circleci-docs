@@ -140,6 +140,9 @@ $border-col: rgba(229,231,235, 1);
         border: 1px solid $black;
         background: $white;
       }
+      &:active {
+        background: $white;
+      }
 
       @media (max-width: $screen-md) {
         width: 100%;
