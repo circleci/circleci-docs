@@ -138,10 +138,7 @@ $border-col: rgba(229,231,235, 1);
       opacity: 0.5;
       &:hover {
         border: 1px solid $black;
-        background: $white;
-      }
-      &:active {
-        background: $white;
+        background: #fff;
       }
 
       @media (max-width: $screen-md) {
@@ -152,7 +149,7 @@ $border-col: rgba(229,231,235, 1);
     }
       .active {
         border: 1px solid #1D97E4;
-        background: $white;
+        background: #fff;
         opacity: 1;
         pointer-events: none;
       }
