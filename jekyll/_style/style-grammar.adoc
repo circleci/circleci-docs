@@ -1,0 +1,15 @@
+= Grammar
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+"Login" and "Setup" are not verbs, they are nouns. Use as follows:
+
+* The login screen …
+* Log in to your account …
+* Read the setup guide …
+* Set up your account …
+
+

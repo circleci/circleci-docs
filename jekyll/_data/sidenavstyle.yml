@@ -1,0 +1,35 @@
+en:
+- name: Style
+  icon: icons/sidebar/getting_started.svg
+  children:
+    - name: Style and Voice
+      link: style/style-voice/
+    - name: Styling Text
+      link: style/style-formatting/
+    - name: Headings
+      link: style/style-headings/
+    - name: Links
+      link: style/style-links/
+    - name: Using code samples
+      link: style/style-code/
+    - name: Grammar
+      link: style/style-grammar/
+    - name: Using Images
+      link: style/style-images/
+    - name: Using Screenshots
+      link: style/style-screenshots/
+
+ja:
+- name: Style
+  i18n_name: はじめよう
+  icon: icons/sidebar/getting_started.svg
+  children:
+    - name: Style and voice
+      i18n_name: 概要
+      link: ja/style/style-voice/
+    - name: CircleCI headings
+      i18n_name: 概要
+      link: ja/style/style-headings/
+    - name: CircleCI links
+      i18n_name: 概要
+      link: ja/style/style-links/

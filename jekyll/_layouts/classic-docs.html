@@ -7,17 +7,22 @@
 {% endif %}
 
 <div class="outer">
-  {% include_cached global-nav.html site=site page=page %}
   <div id="progress-bar-container">
     {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
   </div>
+  {% assign lang = page.lang %}
+  {% if page.collection == "style" %}
+    {% assign sidenav = site.data.sidenavstyle[lang] %}
+  {% else %}
+    {% assign sidenav = site.data.sidenav[lang] %}
+  {% endif %}
+
+  {% include_cached global-nav.html site=site page=page sidenav=sidenav current_url=current_url %}
+
   {% include_cached hits-target.html %}
   <div class="main-body">
-    {% assign lang = page.lang %}
-    {% assign sidenav = site.data.sidenav[lang] %}
-    {% assign current_url = page.url | slice: 1, page.url.size %}
-    {% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url%}
-
+      {% assign current_url = page.url | slice: 1, page.url.size %}
+      {% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url %}
     <div class="article-toc-footer">
       <div class="article-toc">
         <div class="article-container docs" id="main">
