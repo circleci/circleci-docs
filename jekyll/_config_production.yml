@@ -4,3 +4,10 @@ rollbar_env: production
 
 # Optimizely SDK key for prod env
 optimizely: "2DuqgdSgVTZ1n4upLM2Her"
+
+defaults:
+  # Enable sitemap in prod
+  - scope:
+      path: ""
+    values:
+      sitemap: true
