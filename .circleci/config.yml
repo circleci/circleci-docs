@@ -272,7 +272,7 @@ jobs:
   # and puts everything in its place for a Jekyll build.
   build:
     machine: true
-    resource_class: circleci-runner/whiskey
+    resource_class: circleci-runner/alberto-macbook
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
