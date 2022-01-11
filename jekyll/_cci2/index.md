@@ -12,6 +12,35 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 <hr class="hidden-xs" />
 
 <div class="row">
+  <div class="treatment col-xs-12">
+    <h2>Examples and Guides</h2>
+    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/tutorials/">guides</a> or explore a sample app.</p>
+  </div>
+  <div class="treatment col-xs-12 col-sm-6">
+    <div class="card col-sm-12">
+      {% capture node-js-anchor %}
+        {{site.baseurl}}/2.0/language-javascript/
+      {% endcapture %}
+      {% capture node-js-card %}
+        {% include snippets/language-card.md lang="Node.JS" anchor=node-js-anchor %}
+      {% endcapture %}
+      {{ node-js-card | markdownify }}
+    </div>
+  </div>
+  <div class="treatment col-xs-12 col-sm-6">
+    <div class="card col-sm-12">
+      {% capture python-anchor %}
+        {{site.baseurl}}/2.0/language-python/
+      {% endcapture %}
+      {% capture python-card %}
+        {% include snippets/language-card.md lang="Python" anchor=python-anchor %}
+      {% endcapture %}
+      {{ python-card | markdownify }}
+    </div>
+  </div>
+  <div class="treatment col-xs-12">
+    <hr />
+  </div>
   <div class="col-xs-12 col-sm-6">
     <h2>Get Started</h2>
     <p>Get started with CircleCI automated builds.</p>

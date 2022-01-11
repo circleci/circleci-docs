@@ -21,7 +21,7 @@ OR
 
 Check out a {{include.lang}} sample app running on CircleCI.
 
-* [View live {{include.lang}} sample app](https://github.com/CircleCI-Public/circleci-demo-{{include.demo_url_suffix}}){:target="_blank"}{:rel="noopener noreferrer"}
-* [View on GitHub](https://github.com/CircleCI-Public/circleci-demo-{{include.demo_url_suffix}}){:target="_blank"}{:rel="noopener noreferrer"}
+* [View live {{include.lang}} sample app pipeline]({{site.cci_public_org_url}}/circleci-demo-{{include.demo_url_suffix}}){:target="_blank"}{:rel="noopener noreferrer"}
+* [View on GitHub]({{site.gh_public_org_url}}/circleci-demo-{{include.demo_url_suffix}}){:target="_blank"}{:rel="noopener noreferrer"}
 </div>
 </div>
