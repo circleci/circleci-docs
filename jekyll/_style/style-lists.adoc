@@ -1,0 +1,12 @@
+= Using lists
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+* Use ordered lists for steps in a process. All other lists should be unordered.
+
+* Capitalize the first word of each item in a list.
+
+* If the text in the bullet is a full sentence or completes the intro stem, use a full stop at the end.

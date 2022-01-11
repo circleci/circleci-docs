@@ -3,8 +3,8 @@
   <nav class="sidebar fixed">
     <div class="sidebar-item-group">
       {% assign url_slug = current_url | slugify %}
-      
-      {% for main-item in sidenav %}
+
+      {% for main-item in include.sidenav %}
       <ul>
         {% assign section_slug = main-item.name | slugify %}
         <li class="main-nav-item closed" data-section="{{ section_slug }}">
