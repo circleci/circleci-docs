@@ -19,6 +19,19 @@ using a sample application written in Python.
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_suffix="python-django" %}
 
+## Overview
+{: #overview }
+
+This guide uses a sample Django application
+to describe configuration best practices
+for Python applications building on CircleCI.
+The application is [hosted on GitHub]({{site.gh_public_org_url}}/circleci-demo-python-django)
+and is [building on CircleCI]({{site.cci_public_org_url}}/circleci-demo-python-django){:rel="nofollow"}.
+
+Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
+and rewriting [the configuration file]({{site.gh_public_org_url}}/circleci-demo-python-django/blob/master/.circleci/config.yml)
+as you follow this guide.
+
 ## Configuration Walkthrough
 {: #configuration-walkthrough }
 
@@ -82,7 +95,8 @@ jobs:
           command: python -m pytest
       - persist_to_workspace:
           root: ~/project
-          paths: .
+          paths:
+            - .
 ```
 
 #### b. Deploy the app
@@ -158,7 +172,8 @@ jobs:
           command: python -m pytest
       - persist_to_workspace:
           root: ~/project
-          paths: .
+          paths:
+            - .
  
   deploy: # this can be any name you choose
     docker:

@@ -17,6 +17,19 @@ This document describes how to configure CircleCI using a sample application wri
 
 {% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_suffix="javascript-react-app" %}
 
+## Overview
+{: #overview }
+
+This guide uses a sample Node.JS application
+to describe configuration best practices
+for Node.JS applications building on CircleCI.
+The application is [hosted on GitHub]({{site.gh_public_org_url}}/circleci-demo-javascript-react-app)
+and is [building on CircleCI]({{site.cci_public_org_url}}/circleci-demo-javascript-react-app){:rel="nofollow"}.
+
+Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
+and rewriting [the configuration file]({{site.gh_public_org_url}}/circleci-demo-javascript-react-app/blob/master/.circleci/config.yml)
+as you follow this guide.
+
 ## Configuration Walkthrough
 {: #configuration-walkthrough }
 
@@ -106,7 +119,8 @@ jobs:
           name: Build app
       - persist_to_workspace:
           root: ~/project
-          paths: .
+          paths:
+            - .
 ```
 
 Because we are using the Node orb, this job will install your Node packages with automated caching and best practices applied. Note that it requires a lock file.
@@ -187,7 +201,8 @@ jobs:
           name: Build app
       - persist_to_workspace:
           root: ~/project
-          paths: .
+          paths:
+            - .
  
   deploy: # this can be any name you choose
     docker:
