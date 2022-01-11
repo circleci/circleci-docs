@@ -130,10 +130,76 @@ You will also need the following information:
 * The GPC Project you want to run nomad clients in. 
 * The GPC Zone you want to run nomad clients in. 
 * The GPC Region you want to run nomad clients in. 
-* The GPC Network you want to run nomad clients in. 
-* The ID of the GPC subnet you want to run nomad clients in. 
+* The GPC Network you want to run nomad clients in.
+* The GPC Subnetwork you want to run Nomad Clients in. 
 
-You can copy the following example to your local environment and fill in the appropriate information for your specific setup. Once you have filled in the appropriate information you can deploy your nomad clients by running. 
+You can copy the following example to your local environment and fill in the appropriate information for your specific setup. 
+
+```
+variable "project" {
+  type    = string
+  default = "<your-project>"
+}
+
+variable "region" {
+  type    = string
+  default = "<your-region>"
+}
+
+variable "zone" {
+  type    = string
+  default = "<your-zone>"
+}
+
+variable "network" {
+  type    = string
+  default = "<your-network-name>"
+  # if you are using a shared vpc, provide the network endpoint rather than the name. eg:
+  # default = "https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<your-network-name>"
+}
+
+variable "subnetwork" {
+  type    = string
+  default = "<your-subnetwork-name>"
+  # if you are using a shared vpc, provide the network endpoint rather than the name. eg:
+  # default = "https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<your-subnetwork-name>"
+}
+
+
+variable "server_endpoint" {
+  type    = string
+  default = "<nomad-server-loadbalancer>:4647"
+}
+
+provider "google-beta" {
+  project = var.project
+  region  = var.region
+  zone    = var.zone
+}
+
+
+module "nomad" {
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.3.0"
+
+  zone            = var.zone
+  region          = var.region
+  network         = var.network
+  subnetwork      = var.subnetwork
+  server_endpoint = var.server_endpoint
+  machine_type    = "n2-standard-8"
+
+  unsafe_disable_mtls    = true
+  assign_public_ip       = true
+  preemptible            = true
+  target_cpu_utilization = 0.50
+}
+
+output "module" {
+  value = module.nomad
+}
+```
+
+Once you have filled in the appropriate information you can deploy your Nomad Clients by running the following: 
 
 ----
 terraform init
@@ -480,6 +546,7 @@ We recommend you create a unique service account used exclusively by VM Service.
 ```bash
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ```
+NOTE: If your are deploying CircleCI server in a shared VCP, you will want to create this user in the project that you intend to have your VM jobs run.
 
 . *Get the service account email address*
 +
@@ -526,10 +593,18 @@ Name of the GCP project the cluster resides. Below this you can uncheck the box 
 GCP zone the virtual machines instances should be created in for example “us-east1-b”.
 
 ** *GCP VPC Network (required)* - 
-Name of the VPC Network.
+Name of the VPC Network. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the host network rather than the name. eg: 
++
+```
+https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<network-name>
+```
 
 ** *GCP VPC Subnet (optional)* - 
-Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
+Name of the VPC Subnet. If using auto-subnetting, leave this field blank. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the shared subnetwork rather than the name. eg: 
++
+```
+https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<subnetwork-name>
+```
 
 ** *GCP Service Account JSON Key File (required)* - 
 Copy and paste the contents of your service account JSON file.
