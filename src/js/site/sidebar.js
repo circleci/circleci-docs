@@ -159,7 +159,7 @@ export function highlightTocOnScroll() {
       observer.observe(headline);
     });
   }
-  
+
   // on page load, find the highest item in the article view port that is also
   // in the sidebar and then add active class to it.
   const firstHeadlineInViewport = allHeadlines.find(isElementInViewport);
