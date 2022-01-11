@@ -29,5 +29,5 @@ $(() => {
   import(/* webpackPrefetch: true */ './experiments') // imports all experiments
     .then(({ default: { languageGuides } = {} }) => languageGuides()) // ensure languageGuides is loaded
     .catch(site.sidebar.highlightTocOnScroll)
-    .then(site.sidebar.highlightTocOnScroll); // execute TOC Highlighting finally
+    .then(site.sidebar.highlightTocOnScroll); // .then allows the fn to take an argument from languageGuides which .finally wouldn't pass along
 });
