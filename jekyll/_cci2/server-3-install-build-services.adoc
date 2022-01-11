@@ -45,7 +45,9 @@ Once completed you will be able to update your CircleCI server configuration so 
 
 ==== Cluster Creation with Terraform
 
-CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository] including example Terraform config files (man.tf) for both AWS and GKEs for `main.tf`. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
+CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files (`main.tf`) for both AWS and GCP. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections. 
+
+NOTE: If you would also like to set up Nomad Autoscaler at this time, see the <<#nomad-autoscaler-optional,Nomad Autoscaler>> section of this doc as some of the requirements can be included in this Terraform setup.
 
 ===== AWS
 You will need some information about your cluster and server installation to complete the required fields for the terraform configuration file (`main.tf`). A full example as well as a full list of variables can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here]. 
@@ -118,7 +120,7 @@ terraform apply
 
 After Terraform is done spinning up the Nomad client(s), it will output the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe. The apply process usually only takes a minute. 
 
-===== GKE 
+===== GCP 
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by issuing the following command: 
 
 ----
@@ -213,8 +215,67 @@ terraform apply
 
 After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe.
 
+==== Nomad Autoscaler (Optional)
+Nomad provides a utility to automatically scale up or down your nomad clients provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you only need to provide permission for the utility to manage your autoscaling resource and where it is located. You can enable this resource via KOTS, which will deploy the Nomad Autoscaler service along with your Nomad servers. Below we will go through how to set up Nomad Autoscaler for your provider.
+
+NOTE: The maximum and minimum nomad client count will overwrite the corresponding values set when you created your autoscaling group or managed instance group. It is recommended that you keep these values and those used in your Terraform the same so that the two don't compete.
+
+If you do not require this service then feel free to jump to the *Save config* button to update your installation and re-deploy server.
+
+===== AWS
+. Create an IAM user/role and policy for Nomad Autoscaler. You may take one of the following approaches:
+  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+  * You may also create a nomad IAM user manually. The user will need an IAM policy with the following rules attached:
+[source, json]
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "autoscaling:CreateOrUpdateTags",
+                "autoscaling:UpdateAutoScalingGroup",
+                "autoscaling:TerminateInstanceInAutoScalingGroup"
+            ],
+            "Resource": "<<Your Autoscaling Group ARN>>"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "autoscaling:DescribeScalingActivities",
+                "autoscaling:DescribeAutoScalingGroups"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+. Set Nomad Auto-Scaler to `enabled`
+. Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
+. Set Min Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
+. Select cloud provider: `AWS EC2`
+. Add the region of the auto scaling group
+. Add the Nomad Autoscaler user's access key
+. Add the Nomad Autoscaler user's secret key
+. Add the name of the autoscaling Group your nomad clients were created in
+
+===== GCP
+. Create a service account for Nomad Autoscaler
+  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. If you've already created the clients, you can simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`.
+  * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`.
+. Set Nomad Auto-Scaler to `enabled`
+. Set Maximum Node Count*
+. Set Minimum Node Count*
+. Select cloud provider: `Google Cloud Platform`
+. Add your Project ID
+. Add Managed Instance Group Name
+. Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
+. JSON of GCP service account for Nomad Auto-Scaler
+
 ==== Configure and Deploy
-Now that you have successfully deployed your Nomad clients, you can configure CircleCI Server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` 
+
+Now that you have successfully deployed your Nomad clients, you can configure CircleCI server and the Nomad control plane. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` 
 
 Enter the following in Settings: 
 
