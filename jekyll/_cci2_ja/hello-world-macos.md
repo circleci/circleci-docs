@@ -51,17 +51,17 @@ version: 2.1
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 12.5.1 # indicate our selected version of Xcode
+      xcode: 12.5.1 # indicate your selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
 
-  build: 
+  build:
     macos:
-      xcode: 12.5.1 # indicate our selected version of Xcode
-    steps: 
+      xcode: 12.5.1 # indicate your selected version of Xcode
+    steps:
       - checkout
       - run:
           # build our application
