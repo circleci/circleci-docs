@@ -162,7 +162,7 @@ jobs:
 **注意:** ジョブの最大実行時間は、Free プランは 1 時間、Performance プランは 3 時間、Scale プランは 5 時間となります。 ジョブがタイムアウトする場合は、より大きな[リソース クラス]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)の使用や、[並列処理]({{site.baseurl}}/2.0/parallelism-faster-jobs)を検討してください。  また、料金プランのアップグレードや、[ワークフロー]({{ site.baseurl }}/2.0/workflows/)を利用した複数ジョブの同時実行も可能です。
 
 ### **<`job_name`>**
-{: #lessjobnamegreater }
+{:job-name}
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 名前は、その `jobs` リスト内で一意である必要があります。 値となるマップでは下記の属性を使用できます。
 
@@ -386,8 +386,9 @@ jobs:
 ##### 使用可能な `machine` イメージ
 {: #available-machine-images }
 
-**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、developer hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/ja/machine/image/ubuntu-2004)で確認できます。 最新の利用可能なイメージの一覧については、[Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847) を参照してください。
+**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 For a full list of images see the [Ubuntu 20.04 page in the developer hub](https://circleci.com/developer/machine/image/ubuntu-2004). 最新の利用可能なイメージの一覧については、[Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847) を参照してください。
 
+* `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04、Docker v20.10.6、Docker Compose v1.29.1
@@ -450,14 +451,14 @@ CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実�
 | xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
 {: class="table table-striped"}
 
-**例:** macOS 仮想マシンを Xcode バージョン 11.3 で使用する場合
+**Example:** Use a macOS virtual machine with Xcode version 12.5.1:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 ```
 
 #### **`windows`**
@@ -612,10 +613,11 @@ jobs:
 ##### macOS Executor
 {: #macos-executor }
 
-| クラス                 | vCPU | RAM   |
-| ------------------- | ---- | ----- |
-| medium (デフォルト)      | 4    | 8 GB  |
-| large<sup>(3)</sup> | 8    | 16 GB |
+| クラス                   | vCPU        | RAM   |
+| --------------------- | ----------- | ----- |
+| medium (デフォルト)        | 4 @ 2.7 GHz | 8 GB  |
+| macos.x86.medium.gen2 | 4 @ 3.2 GHz | 8 GB  |
+| large<sup>(3)</sup>   | 8 @ 2.7 GHz | 16 GB |
 {: class="table table-striped"}
 
 ###### 例
@@ -626,7 +628,7 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     resource_class: large
     steps:
       ... // 他の構成
@@ -1557,7 +1559,7 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 {: class="table table-striped"}
 
 ##### **<`job_name`>**
-{: #lessjobnamegreater }
+{: #job-name-in-workflow }
 
 `config.yml` ファイルで定義するジョブの名前です。
 
@@ -1945,7 +1947,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 11.4
+      xcode: 12.5.1
 
 jobs:
   test:
