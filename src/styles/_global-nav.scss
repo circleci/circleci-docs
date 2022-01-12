@@ -352,6 +352,7 @@ $btn-selected-blue: #004A95;
     // Turn off default input field border
     #search-box input.instantsearch-search {
       border: none;
+      padding-bottom: 20px;
     }
 
     // Put border on .main-searchbar element so we can enclose the cancel button on desktop
@@ -373,13 +374,13 @@ $btn-selected-blue: #004A95;
 
   @media (max-width: $screen-sm-max) {
     left: 0;
-    width: 100%;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
   }
 }
 
-@media (max-width: $screen-sm-max) {
+@media (max-width: $screen-xs-max) {
   .global-nav--search-bar {
     display: none; // hidden by default; shown when search is open
   }
