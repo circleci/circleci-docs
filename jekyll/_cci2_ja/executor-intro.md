@@ -76,14 +76,12 @@ _The macOS executor is not currently available on self-hosted installations of C
 ```
 jobs:
   build: # ジョブの名前
-    machine:
-      image: windows-default # Windows マシン イメージ
-    resource_class: windows.medium
-    steps:
-      # Windows 仮想マシン環境で実行するコマンド
+    macos: # Executor タイプ
+      xcode: 12.5.1
 
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+    steps:
+      # Xcode 11.3 がインストールされた
+      # macOS 仮想マシン環境で実行するコマンド
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
