@@ -40,13 +40,13 @@ By default, the machine executor images come installed with useful utilities, bu
 -   jq
 -   redis
 -   memcached
--   rabbitMQ
+-   rabbitmq
 -   firefox
 -   chrome
 -   phantomjs
 -   awscli
 -   gcloud
--   honeybadger
+-   heroku
 -   python 2.7.12\*
 -   python 3.5.2
 -   nodejs 6.1.0\*
