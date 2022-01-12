@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-* Ensure all images have descriptive alternative text. This is particularly important to readers who are using a screenreader. For example, in asciidoc:
+* Ensure all images have descriptive alternative text. For example, in asciidoc:
 +
 ----
 .Image Title

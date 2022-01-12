@@ -1,9 +1,11 @@
-= Styling text
+= Formatting
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
+
+== Styling text
 
 * Use **bold** for GUI menu options and button text. For example:
 ** Select **Organization Settings** from the sidebar
