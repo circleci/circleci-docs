@@ -136,26 +136,29 @@ export function highlightTocOnScroll() {
     });
   });
 
-  var observer = new IntersectionObserver(
-    function (entry) {
-      // check that 1) the item is visible/intersecting
-      // and 2) that the sidebar items text actually has that headline before we make any changes.
-      if (
-        entry[0].isIntersecting === true &&
-        sidebarItemsText.includes(entry[0].target.innerText)
-      ) {
-        let intersectingEntry = entry[0].target;
-        let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
-        sidebarItems.forEach((el) => el.classList.remove('active'));
-        sidebarItems[indexOfCurrentHeadline].classList.add('active');
-      }
-    },
-    { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
-  );
+  // https://caniuse.com/intersectionobserver
+  if (typeof IntersectionObserver !== 'undefined') {
+    const observer = new IntersectionObserver(
+      function (entry) {
+        // check that 1) the item is visible/intersecting
+        // and 2) that the sidebar items text actually has that headline before we make any changes.
+        if (
+          entry[0].isIntersecting === true &&
+          sidebarItemsText.includes(entry[0].target.innerText)
+        ) {
+          let intersectingEntry = entry[0].target;
+          let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
+          sidebarItems.forEach((el) => el.classList.remove('active'));
+          sidebarItems[indexOfCurrentHeadline].classList.add('active');
+        }
+      },
+      { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
+    );
 
-  allHeadlines.forEach((headline) => {
-    observer.observe(headline);
-  });
+    allHeadlines.forEach((headline) => {
+      observer.observe(headline);
+    });
+  }
 
   // on page load, find the highest item in the article view port that is also
   // in the sidebar and then add active class to it.

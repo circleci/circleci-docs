@@ -462,3 +462,7 @@ docker push username/ruby-node:0.1
 ```
 
 カスタム イメージを使用するには、`.circleci/config.yml` イメージ キーから ruby-node/bar:0.1 を参照します。 これで、プライマリ コンテナによってイメージが実行されます。 gist を使用して Dockerfile をコミットし、Docker ハブからリンクすると、設定が失われることを回避できます。
+
+## Caching Docker images
+{: #caching-docker-images }
+For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/2.0/executor-types/#caching-docker-images).

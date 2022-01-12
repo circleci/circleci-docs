@@ -1,5 +1,4 @@
 ---
-description: "This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform."
 version:
 - Server v2.x
 - Server Admin
@@ -7,6 +6,7 @@ version:
 = Installation Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :toc: macro
 :toc-title:
@@ -25,16 +25,16 @@ CircleCI server may be installed without a support package, on AWS, using the ex
 
 === Non-AWS Platform Support
 
-With a Platinum CircleCI support package it is possible to install and configure CircleCI on Azure or any other platform used in your organization. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] or your account representative to get started.
+With a Platinum CircleCI support package it is possible to install and configure CircleCI on Azure or any other platform used in your organization. まずは、https://support.circleci.com/hc/ja/requests/new[CircleCI サポート]またはお客様のアカウント担当者にお問い合わせください。
 
-=== Externalization
+=== 外部処理化
 
 With a Platinum support agreement, it is possible to improve performance and resilience by configuring the following services to run externally to the Services machine:
 
 - PostgreSQL
 - MongoDB
 - Vault
-- Rabbitmq
+- RabbitMQ
 - Redis
 - Nomad
 
