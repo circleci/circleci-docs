@@ -123,20 +123,28 @@ You should have created your S3 Compatible bucket and optional IAM account durin
 * *Storage Bucket Name (required)* -
 The bucket used for server.
 
-* *Access Key ID (required)* -
-Access Key ID for S3 bucket access.
-
-* *Secret Key (required)* -
-Secret Key for S3 bucket access.
-
 * *AWS S3 Region (optional)* -
 AWS region of bucket if your provider is AWS. S3 Endpoint is ignored if this option is set.
 
 * *S3 Endpoint (optional)* -
 API endpoint of S3 storage provider. Required if your provider is not AWS. AWS S3 Region is ignored if this option is set.
 
-* *Storage Object Expiry (optional)* -
+* *Storage Object Expiry (required)* -
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
+
+====== Authentication
+One of the following is required. Either select IAM keys and provide:
+
+* *Access Key ID (required)* -
+Access Key ID for S3 bucket access.
+
+* *Secret Key (required)* -
+Secret Key for S3 bucket access.
+
+Or select IAM role and provide:
+
+* *Role ARN* - 
+Role ARN (Amazon Resource Name) for S3 bucket access.
 
 ===== Google Cloud Storage 
 You should have created your Google Cloud Storage bucket and service account during the prerequisite steps. 
@@ -144,11 +152,18 @@ You should have created your Google Cloud Storage bucket and service account dur
 * *Storage Bucket Name (required)* - 
 The bucket used for server.
 
+* *Storage Object Expiry (required)* - 
+Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
+
+====== Authentication
+One of the following is required. Either select IAM keys and provide:
+
 * *Service Account JSON (required)* - 
 A JSON format key of the Service Account to use for bucket access.
 
-* *Storage Object Expiry (optional)* - 
-Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
+Or select IAM role and provide:
+
+* *Service Account File (required)* - Service account file for the Workload Identity.
 
 ==== Postgres, MongoDB, Vault settings
 
