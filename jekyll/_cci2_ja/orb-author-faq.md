@@ -90,7 +90,7 @@ CircleCI Orb では、再利用可能な CircleCI 設定ファイル</a>をパ�
 
 Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash は、ネイティブの [run]({{site.baseurl}}/2.0/configuration-reference/#run) コマンドを使用して直接、簡単に記述できます。 MacOS と Linux のデフォルトのシェルは Bash になります。
 
-**対話型インタープリター ( Python など)**
+**Interactive Interpreter (for example, Python)**
 
 ユースケースによっては、Orb が特定の環境にしか存在しないことがあります。 たとえば、Orb が一般的な Python ユーティリティとして使用される場合は、Python を Orb の依存関係として要求した方が合理的です。 [run]({{site.baseurl}}/2.0/configuration-reference/#run) コマンドの シェルパラメーターを、次のように変更して使用してください。
 
