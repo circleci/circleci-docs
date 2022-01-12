@@ -33,7 +33,18 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 5. 以下の内容を `config.yml` ファイルに追加します。
 
 {% highlight yaml %}
-version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+
 {% endhighlight %}
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -62,8 +73,18 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 
 
 {% highlight yaml %}
-image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
       - run:
           name: Code Has Arrived
           command: |
@@ -89,8 +110,19 @@ image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!'
 
 
 {% highlight yaml %}
-image: alpine:3.7 steps: - run: name: 最初のステップ command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-
+version: 2.1
+jobs:
+  build:
+    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
+    docker:
+      - image: circleci/node:14-browsers
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
       - run:
           name: Code Has Arrived
           command: |
@@ -125,10 +157,48 @@ image: alpine:3.7 steps: - run: name: 最初のステップ command: | echo 'Hel
 
 
 {% highlight yaml %}
-image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!' echo 'This is the delivery pipeline' - run: name: コードの取得 command: | ls -al echo '^^^That should look familiar^^^'
-
-workflows: version: 2 Example_Workflow: jobs:
-
+version: 2.1
+jobs:
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Hello World
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  I-Have-Code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+  Run-With-Node:
+    docker:
+      - image: circleci/node:14-browsers
+    steps:
+      - run:
+          name: Running In A Container With Node
+          command: |
+            node -v
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'Do work once the approval has completed'
+          
+workflows:
+ version: 2
+ Example_Workflow:
+   jobs:
      - Hello-World
      - I-Have-Code:
          requires:
