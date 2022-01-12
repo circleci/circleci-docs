@@ -1,6 +1,5 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
-import { dateFormatAgoHelper } from '../dateFormatAgoHelper';
 
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
@@ -402,9 +401,8 @@ $(document).ready(function () {
 // Currently this function is only used for the insights table
 $(highlightURLHash);
 
-// update date shown to be X ago
+// update date shown to be X ago tooltip code
 $(function () {
-  // tooltip code for posted on time
   const tooltiptime = document.getElementById('tooltip-time');
   const timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
@@ -425,15 +423,4 @@ $(function () {
       }
     });
   });
-
-  if (
-    document.getElementById('time-posted-on') &&
-    document.getElementById('time-posted-ago')
-  ) {
-    const date = Date.parse(
-      document.getElementById('time-posted-on').getAttribute('datetime'),
-    );
-    document.getElementById('time-posted-ago').innerHTML =
-      dateFormatAgoHelper(date);
-  }
 });

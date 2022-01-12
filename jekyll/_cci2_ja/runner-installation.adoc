@@ -6,6 +6,7 @@ version:
 = Get Started: Installing the CircleCI Runner
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find resources to install CircleCI runner on Linux, macOS, Docker, and Windows platforms.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +17,7 @@ toc::[]
 
 インストール プロセスでは、システムに以下のユーティリティをインストール済みであることを前提としています。
 
-* <<local-cli#installation, CircleCI CLI>>
+* <<local-cli#installation, CircleCI CLI>>. If you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 * curl (macOS ではデフォルトでインストール済み)
 * sha256sum (Linux では apt または yum により coreutils の一部としてインストール、macOS では brew によりインストール)
 * バージョン 235 以降の systemd (Linux のみ)
@@ -33,9 +34,9 @@ toc::[]
 
 == 認証
 
-NOTE: 以下のコマンドを実行できるのは、組織のオーナーまたは管理者だけです。
+NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-認証のために、下記手順を実行して名前空間と認証トークンを作成する必要があります。
+In order to install runner you will need to create a namespace and authentication token by performing the steps listed below – these commands can only be run by an owner/admin of your organization:
 
 . 組織のランナー リソース用の名前空間を作成します。
 +
@@ -135,7 +136,7 @@ grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$fi
 
 他のプラットフォームに関する詳細は、「xref:runner-overview.adoc#available-circleci-runner-platforms[利用可能な CircleCI ランナー プラットフォーム]」を参照してください。
 
-== Runner for server compatibility
+== CircleCI Server とランナーの互換性
 _CircleCI runner is available from server v3.1.0_
 
 CircleCI Server のマイナー バージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。 以下の表に、CircleCI Server バージョンごとに、ランナーのインストール時に使用できる `circleci-launch-agent` のバージョンを示します。

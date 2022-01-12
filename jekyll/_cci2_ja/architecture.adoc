@@ -4,7 +4,7 @@ version:
 - 管理者
 - Server v2.x
 ---
-= CircleCI Server Container Architecture
+= CircleCI Server コンテナのアーキテクチャ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
