@@ -72,7 +72,7 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
 jobs:
   build-macos:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 ```
 
 詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
@@ -156,7 +156,7 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
 {:.tab.switcher.Server_2}
-![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
+![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 表示したいプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 

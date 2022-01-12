@@ -46,14 +46,18 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
     {: class="alert alert-warning"}
 
-1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**. To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
+1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
+
+**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
+**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
+Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Please make sure to add the `--private` flag if you intend to create a private orb.
+
 `circleci orb init` コマンドを、Orb プロジェクト用に作成して初期化するディレクトリを付けて呼び出します。 このディレクトリと Git のプロジェクト リポジトリには、同じ名前を使用することをお勧めします。
 
 1. **Orb の完全自動セットアップ オプションを選択します。**
@@ -99,7 +103,7 @@ $ git branch
 
 **_例: Orb プロジェクトの構造_**
 
-| 種類                        | 名前                                                                                               |
+| type                      | name                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci)       |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.github](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.github)           |
@@ -117,7 +121,7 @@ $ git branch
 
 **_例: Orb プロジェクトの "src" ディレクトリ_**
 
-| 種類                         | 名前                                                                                             |
+| type                       | name                                                                                           |
 | -------------------------- | ---------------------------------------------------------------------------------------------- |
 | <i class="fa fa-folder" aria-hidden="true"></i>  | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands)   |
 | <i class="fa fa-folder" aria-hidden="true"></i>  | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples)   |

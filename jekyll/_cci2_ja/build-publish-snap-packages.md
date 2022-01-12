@@ -160,7 +160,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "Publish to Store"
+          name: "ストアへのパブリッシュ"
           command: |
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg

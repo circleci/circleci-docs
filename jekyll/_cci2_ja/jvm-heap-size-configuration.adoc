@@ -6,17 +6,18 @@ version:
 = Configuring the JVM Heap Size
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Use this CircleCI guide to help you configure the JVM_HEAP_SIZE value for each container.
 :icons: font
 :toc: macro
 :toc-title:
 
 The JVM heap size is configurable for the following containers: `frontend`, `test-results`, `output-processing` and `contexts-service`. You might want to consider increasing the heap size if you see "out of memory" errors, such as: `Terminating due to java.lang.OutOfMemoryError: Java heap space`.
 
-== Setting up
+== 設定
 
 To be able to configure the JVM_HEAP_SIZE value for each container, you will first need to create customizations files on your services machine.
 
-1. Create customizations files:
+1. 以下のように customizations ファイルを作成します。
 +
 ```sh
 /etc/circleconfig/frontend/customizations
@@ -34,7 +35,7 @@ export JVM_HEAP_SIZE=2g
 3. Stop and restart CircleCI application from the Management Console dashboard (for example, your-circleci-hostname.com:8800)
 
 
-== Verify customization is applied
+== 変更後の検証
 Once your installation has successfully restarted, you can confirm the configured value was applied correctly by running the following REPL commands per container:
 
 

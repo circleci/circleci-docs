@@ -1,17 +1,16 @@
 ---
 layout: classic-docs
-title: "パイプラインの有効化"
-short-title: "パイプラインの有効化"
-description: "パイプラインを有効にする方法"
+title: "Pipeline Processing"
+description: "This document describes CircleCI pipelines, what they encompass, and some features available to use in your pipelines"
 categories:
   - settings
 order: 1
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
 ---
 
-CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 パイプラインは クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
+This document describes how your projects are processed using our pipelines engine and some of the features available to use in your pipelines. パイプラインは クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
 
 * 目次
 {:toc}
@@ -19,44 +18,29 @@ CircleCI API または自動キャンセルのワークフローからワーク�
 ## はじめに
 {: #what-are-pipelines }
 
-CircleCI のパイプラインには、 CircleCI のプロジェクトで作業をトリガーするときに実行する一連のワークフローがすべて含まれます。 ワークフローはプロジェクトの設定で定義したジョブを調整します。
+CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
 
-## パイプラインのメリット
-{: #benefits-of-using-pipelines }
+Pipelines are not available on installations of CircleCI server v2.x.
 
-パイプラインには以下のメリットがあります。
+The following features are available for use in your pipelines:
 
 {% include snippets/pipelines-benefits.adoc %}
 
 ## トラブルシューティング
-{: #implications-of-pipelines }
-
-パイプラインを使用する際は、次の点に注意してください。
-
-- ビルドまたはワークフローが定義されていない場合は、エラーとなります。
-
-## トラブルシューティング
 {: #transitioning-to-pipelines }
 
-以下のセクションでは、パイプラインへの移行プロセスについて概説します。
+When migrating from a server v2.x to a v3.x installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v3.x installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
 
 ### 2.0 構成でのパイプライン
 {: #pipelines-with-20-configuration }
 {:.no_toc}
 
-2.0 構成でパイプラインを使用する場合、CircleCI では `CIRCLE_COMPARE_URL` 環境変数がすべてのジョブに挿入され、下位互換性が確保されます。 この環境変数は、従来のジョブで使用可能な環境変数とは異なる方法で生成され、いつでも使用できるわけではありません。 たとえば、空のリポジトリへのコミットを初めてプッシュした場合や、追加のコミットなしに新しいブランチが作成/プッシュされた場合など、以前のリビジョンが存在しない場合は挿入されません。
+When using CircleCI cloud or server v3.x the CircleCI pipelines engine is automatically enabled. If, for whatever reason, you continue to use a 2.0 config, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility.
 
-## パイプラインへの移行
-{: #giving-feedback }
-{:.no_toc}
+This environment variable is generated in a different way compared to the version available in legacy jobs, and is not always available – it is not injected when there is no meaningful previous revision, for example, on the first push of commits to an empty repository, or when a new branch is created/pushed without any additional commits.
 
-フィードバック、ご提案、コメントは、以下の方法でお寄せください。
-
-- CircleCI の Twitter アカウント (@CircleCIJapan) 宛てにツイートする
-- [アイデア ボード](https://ideas.circleci.com/)で既存の投稿に投票する、または投稿を追加する
-
-## ブランチでのパイプラインのオプトイン
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
-詳細については、[ビルドのスキップとキャンセル]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build)を参照してください。
+詳細については、[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/#auto-cancelling-a-redundant-build)のページを参照してください。

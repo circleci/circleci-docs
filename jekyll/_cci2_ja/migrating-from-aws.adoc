@@ -1,11 +1,16 @@
-= AWS からの移行
+---
+title: Migrating from AWS
+---
+
+= Migrating from AWS
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :toc: macro
 :toc-title:
 
-このドキュメントでは、AWS CodeCommit から CircleCI に移行する方法を概説します。 
+このドキュメントでは、AWS CodeCommit から CircleCI に移行する方法を概説します。
 
 NOTE: **ImagineX Consulting からのヒント**
 
@@ -60,7 +65,7 @@ AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップ�
 |===
 | AWS | CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義 
+2+| 1つのビルドステップを実行するジョブの定義
 
 a|
 [source, json]
@@ -82,7 +87,7 @@ jobs:
 
 ----
 
-2+| ジョブに使用するDocker イメージの指定
+2+| ジョブに使用する Docker イメージの指定
 
 a|
 [source, json]
@@ -204,7 +209,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -251,7 +256,7 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトや Docker-composeファイルの実行
+. シェルスクリプトやDocker-composeファイルの実行
 . https://circleci.com/docs/2.0/workflows/[ワークフロー]
 . https://circleci.com/docs/2.0/artifacts/[アーティファクト]
 . https://circleci.com/docs/2.0/caching/[キャッシュ]
