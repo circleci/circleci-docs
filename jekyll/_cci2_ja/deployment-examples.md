@@ -37,7 +37,7 @@ For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, r
 ### Deploy to S3
 {: #deploy-to-s3 }
 {:.no_toc}
-#### AWS Orb の使用
+#### AWS S3 Orb の使用
 {: #using-the-aws-s3-orb }
 {:.no_toc}
 
