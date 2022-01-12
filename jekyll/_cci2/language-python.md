@@ -11,11 +11,9 @@ version:
 - Server v2.x
 ---
 
-{% raw %}
 This document describes
 how to configure CircleCI
 using a sample application written in Python.
-{% endraw %}
 
 * TOC
 {:toc}

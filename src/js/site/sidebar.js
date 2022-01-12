@@ -112,8 +112,10 @@ import { isElementInViewport } from '../utils';
  *
  * */
 export function highlightTocOnScroll(headings) {
+  let isExperiment = true;
   if (!headings) {
     headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+    isExperiment = false;
   }
 
   const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
@@ -149,6 +151,18 @@ export function highlightTocOnScroll(headings) {
         ) {
           let intersectingEntry = entry[0].target;
           let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
+
+          if (isExperiment) {
+            window.AnalyticsClient.trackAction(
+              'docs-guided-tour-section-observed',
+              {
+                sectionTitle: intersectingEntry.innerText,
+                sectionIndex: indexOfCurrentHeadline,
+                page: location.pathname,
+              },
+            );
+          }
+
           sidebarItems.forEach((el) => el.classList.remove('active'));
           sidebarItems[indexOfCurrentHeadline].classList.add('active');
         }

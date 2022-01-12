@@ -258,7 +258,7 @@ $(document).ready(function () {
 
   // Give article headings direct links to anchors
   $(HEADER_TAGS)
-    .not(`.card ${HEADER_TAGS}`)
+    .not(HEADER_TAGS.replace(/article/gm, '.card'))
     .filter('[id]')
     .each(function () {
       var isMainTitle = $(this).prop('nodeName') === 'H1';
