@@ -217,7 +217,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -234,7 +234,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -736,7 +736,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -809,18 +809,18 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
 
     steps:
       - checkout
       - run:
-          name: CocoaPod のインストール
+          name: Install CocoaPods
           command: pod install --verbose
 
       - run:
-          name: ビルドとテストの実行
+          name: Build and run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -836,7 +836,7 @@ jobs:
       - image: bytesguy/swiftlint:latest
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: swiftlint lint --reporter junit | tee result.xml
@@ -850,7 +850,7 @@ jobs:
       - image: bytesguy/danger:latest
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: danger
@@ -861,7 +861,6 @@ workflows:
       - swiftlint
       - danger
       - build-and-test
-
 ```
 
 
