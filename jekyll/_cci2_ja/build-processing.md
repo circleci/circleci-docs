@@ -27,7 +27,7 @@ The following features are available for use in your pipelines:
 {% include snippets/pipelines-benefits.adoc %}
 
 ## トラブルシューティング
-このセクションでは、パイプラインへの移行プロセスについて概説します。
+{: #transitioning-to-pipelines }
 
 When migrating from a server v2.x to a v3.x installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v3.x installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
 
