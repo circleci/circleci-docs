@@ -1,8 +1,13 @@
+# this script looks at all the images in the jekyll/assets/img folder and
+# collects the resolution and file size of all images.
+# it then spits out a images.csv file that can be uploaded to google drive.
+
 import os
 import glob
 from pathlib import Path
 from PIL import Image # run `pip install pillow` to get this lib.
 import enum
+import csv
 
 
 img_path = "../jekyll/assets/img/**/*"
@@ -55,17 +60,24 @@ def get_img_data():
 
 
 def print_report():
-    print("\n The following images from ../jekyll/assets/img/ are soted by size.")
+    print("\nThe following images from ../jekyll/assets/img/ are soted by size.\n")
     print ("{:<60} | {:<7} | {:<7} | {:<7}".format('File', 'width', 'height', "size"))
     print ("-----------------------------------------------------------------------------------------------------------------")
 
-    Images.sort(key = lambda i: (i['size']))
+    Images.sort(key = lambda i: (i['width']))
     Images.reverse()
     for idx, img in enumerate(Images):
         path = img["path"].split("../jekyll/assets/img/")[1]
         imgSize = convert_unit(img["size"], SIZE_UNIT.MB)
         print ("{:<60} | {:<7} | {:<7} | {:<7}".format(path,  img["width"], img["height"], imgSize))
 
+def write_csv():
+    keys = Images[0].keys()
+    with open('images.csv', 'w', newline='') as output_file:
+        dict_writer = csv.DictWriter(output_file, keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(Images)
 
 get_img_data()
 print_report()
+write_csv()
