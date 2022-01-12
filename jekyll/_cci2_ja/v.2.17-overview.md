@@ -90,9 +90,9 @@ This document provides a summary of features and product notes for the release o
 
 ## Steps to update to CircleCI Server v2.17
 {: #steps-to-update-to-circleci-server-v217 }
-Steps to update to CircleCI Server v2.17 are as follows:
+CircleCI Server v2.17 に更新する手順は次のとおりです。
 
-1. 後から必要に応じてロールバックできるよう、お使いの環境のスナップショットを取得します (任意ですが推奨の手順です)。
+1. Take a snapshot of your installation so you can roll back later if necessary (optional but recommended)
 2. Docker v17.12.1 を実行していることを確認し、必要に応じて更新します。
 3. Replicated を v2.34.1 に更新します (後述のセクションを参照)。
 4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
@@ -100,19 +100,19 @@ Steps to update to CircleCI Server v2.17 are as follows:
 ### Snapshot for rollback
 {: #snapshot-for-rollback }
 
-To take a snapshot of your installation:
+お使いの環境のスナップショットを取得するには、以下のとおり実行します。
 
 1. Go to the Management Console (`<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
 2. `nomad status` を実行して、Nomad クライアントでジョブが実行されていないことを確認します。
 3. AWS EC2 管理コンソールにアクセスし、Services マシンのインスタンスを選択します。
-4. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。 **メモ:** AWS API を使用すると、このプロセスを自動化することも可能です。 以後の AMI/スナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさであるため、頻繁にスナップショットを作成しても、ストレージ コストが必ず大きくなるわけではありません。 詳細については、Amazon の EBS スナップショットの請求に関するドキュメントをご覧ください。 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
+4. [Actions (アクション)] > [Image (イメージ)] > [Create Image (イメージの作成)] の順に選択します。 ダウンタイムを回避する場合は、このときに [No reboot (再起動なし)] オプションを選択します。 ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。 **メモ:** AWS API を使用すると、このプロセスを自動化することも可能です。 以後の AMI/スナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさであるため、頻繁にスナップショットを作成しても、ストレージ コストが必ず大きくなるわけではありません。 詳細については、Amazon の EBS スナップショットの請求に関するドキュメントをご覧ください。 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
 
-If you do need to rollback at any point, see our [restore from backup](http://localhost:4000/docs/2.0/backup/#restoring-from-backup) guide.
+If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/2.0/backup/#restoring-from-backup) guide.
 
 ### Replicated の更新
 {: #update-replicated }
 
-**Perquisites**
+**前提条件**
 
 - Ubuntu 14.04 または 16.04 ベースの環境を使用していること
 - You are running replicated version 2.10.3<= on your services machine
@@ -124,7 +124,7 @@ If you do need to rollback at any point, see our [restore from backup](http://lo
 #### Preparations for updating Replicated
 {: #preparations-for-updating-replicated }
 
-Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
+Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/ja/2.0/backup/)に従ってデータをバックアップします。
 
 - 以下のコマンドで CircleCI アプリケーションを停止させます。
 
@@ -132,13 +132,13 @@ Before performing a replicated version update, backup your data using the [Backu
     replicatedctl app stop
 ```
 
-Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
+アプリケーションのシャットダウンには数分かかります。 管理ダッシュボードを確認して、ステータスが [Stopped (停止)] になってから続行してください。 以下のコマンドを実行してアプリケーションのステータスを表示する方法もあります。
 
 ```
     replicatedctl app status inspect
 ```
 
-Example Output:
+以下のように出力されます。
 ```
 [
     {
@@ -169,33 +169,33 @@ Example Output:
 #### Replicated の更新
 {: #update-replicated }
 
-Perform the Replicated update by executing the update script as follows:
+以下のように更新スクリプトを実行して、Replicated の更新を実行します。
 
 ```
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
 ```
 
-Double-check your replicated and docker versions:
+Replicated と Docker の両方のバージョンをチェックしてください。
 
-Example Output
+以下のように出力されます。
 ```
     replicatedctl version    # 2.34.1
     docker -v                # 17.12.1
 ```
 
-Restart the app with
+以下のコマンドでアプリケーションを再起動します。
 
 ```
     replicatedctl app start
 ```
 
-The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
+アプリケーションのスピンアップには数分かかります。 以下のコマンドを実行するか、管理ダッシュボードにアクセスして進行状況を確認できます。
 
 ```
     replicatedctl app status inspect
 ```
 
-Example output:
+以下のように出力されます。
 ```
 [
     {
