@@ -121,7 +121,7 @@ container:
 a|
 [source, yaml]
 ----
-# Docker (コンテナ) Executor
+# Docker (container) Executor
 docker:
   - image: circleci/openjdk:11.0-jdk
     auth:
@@ -133,11 +133,10 @@ machine: true
 
 # macOS Executor
 macos:
-  xcode: 11.3.0
+  xcode: 12.5.1
 
 # Windows Executor
-# 注意: Orb を宣言する必要があります。
- See docs
+# NOTE: Orb declaration needed. See docs
 executor: win/vs2019
 
 ----
@@ -252,7 +251,7 @@ jobs:
           message: Tests passed
           title: Testing Slack Orb
           author_name: Bobby
-          webhook: # WEBHOOK 
+          webhook: # WEBHOOK
 ----
 
 2+| ワークフローでの条件付きステップの使用: CircleCIでは、https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[ステップの基本的な条件]（例: on_success (デフォルト)、
