@@ -74,7 +74,7 @@ jobs:
 以下の例では、Docker Executorを使用して、リモートDockerで、[Docker のデモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージを構築してデプロイしています。
 
 <!-- markdownlint-disable MD046 -->
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI 環境変数の参照 steps: - checkout # ... steps for building/testing app ...
 
       - setup_remote_docker:
@@ -119,13 +119,14 @@ version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: 
 
 CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
 
+- `20.10.11`
 - `20.10.7`
-- `20.10.6`
-- `20.10.2`
-- `19.03.14`
-- `19.03.13`
-- `19.03.12`
-- `19.03.8`
+- `17.03.0-ce`
+- `17.03.0-ce`
+- `17.05.0-ce`
+- `17.06.0-ce`
+- `17.06.1-ce`
+- `17.07.0-ce`
 - `18.09.3`
 - `17.09.0-ce` (デフォルト)
 
