@@ -65,7 +65,7 @@ Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、Bro
 ## LambdaTest
 {: #lambdatest }
 
-すばやい市場投入をご支援するべく、LambdaTest を CircleCI に統合しました。 自動化されたクロスブラウザー テストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
+[LambdaTest](https://www.lambdatest.com/) now integrates with CircleCI to boost your go-to-market delivery. 自動化されたクロスブラウザー テストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
@@ -241,7 +241,7 @@ ubuntu@box159:~$ firefox &
 
 VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
 
-1. [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) をダウンロードして、テストの前に起動します。
+1. [`x11vnc`](https://github.com/LibVNC/x11vnc) をダウンロードして、テストの前に起動します。
 
 ```
 steps:
@@ -262,7 +262,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 
-1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、\[XQuartz\] (http://xquartz.macosforge.org/landing/) の使用を検討してください。
+1. コンピューターに X Window System をインストールします。 If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
 
 2. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)します。 `-X` フラグを使用して転送をセットアップします。
 
