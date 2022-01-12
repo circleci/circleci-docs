@@ -107,7 +107,7 @@ commands:
 
 ## **`parameters`** (version: 2.1 が必須)
 {: #parameters-requires-version-21 }
-設定ファイル内で使用するパイプライン パラメーターを定義します。 使用方法の詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration)を参照してください。
+設定ファイル内で使用するパイプライン パラメーターを定義します。 使用方法の詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/ja/2.0/pipeline-variables#pipeline-marameters-in-configuration)を参照してください。
 
 | キー         | 必須 | タイプ | 説明                                                                                                                            |
 | ---------- | -- | --- | ----------------------------------------------------------------------------------------------------------------------------- |
