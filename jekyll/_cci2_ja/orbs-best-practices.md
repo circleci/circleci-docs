@@ -22,10 +22,10 @@ version:
 
 Orb のスラッグ "slug" は、_名前空間_と _Orb_ 名をスラッシュで区切って指定します。 名前空間には Orb を所有し管理するユーザー、会社、または組織を指定し、Orb 名自体には、その Orb で提供するプロダクトやサービス、アクションを記述します。
 
-| 適切な Orb スラッグ  | 不適切な Orb スラッグ     |
-| ------------- | ----------------- |
-| circleci/node | circleci/node-orb |
-| company/orb   | company/company   |
+| 適切な Orb スラッグ  | 不適切な Orb スラッグ      |
+| ------------- | ------------------ |
+| circleci/node | circleci/node-orb  |
+| company/orb   | company/cci-plugin |
 {: class="table table-striped"}
 
 #### Categorize your orb
@@ -234,6 +234,14 @@ Executor は、Orb 以外でも、特にカスタム ジョブの[マトリッ�
 
 Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/2.0/orb-concepts/#usage-examples)は、コミュニティにユースケースやベスト プラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
 
+Be sure to name your usage examples so they reflect the use-case they demonstrate.
+
+| Good Usage Example Names | Bad Usage Example Names |
+| ------------------------ | ----------------------- |
+| deploy-to-service        | 例                       |
+| install-cli              | demo                    |
+{: class="table table-striped"}
+
 #### All public orbs should contain at least one usage example.
 {: #all-public-orbs-should-contain-at-least-one-usage-example }
 {:.no_toc}
@@ -259,7 +267,7 @@ Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/2.0/orb-c
 {: #secrets-should-never-be-directly-entered }
 {:.no_toc}
 
-API キーや認証トークン、パスワードなど、"シークレット" に該当する情報はすべて、パラメーター値として直接入力しないようにしてください。 その代わりに、[env_var_name]({{site.baseurl}}/ja/2.0/reusing-config/#environment-variable-name) パラメーター型を使用して環境変数の名前を文字列値として指定し、この変数に機密情報を指定します。
+API キーや認証トークン、パスワードなど、"シークレット" に該当する情報はすべて、パラメーター値として直接入力しないようにしてください。 その代わりに、[env_var_name]({{site.baseurl}}/2.0/reusing-config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E5%90%8D) パラメーター型を使用して環境変数の名前を文字列値として指定し、この変数に機密情報を指定します。
 
 #### Parameterize the installation path
 {: #parameterize-the-installation-path }
@@ -274,7 +282,7 @@ API キーや認証トークン、パスワードなど、"シークレット" �
 {: #always-follow-strict-semantic-versioning }
 {:.no_toc}
 
-セマンティック バージョニングに従うと、バージョン番号からバグの修正やパッチ、新機能の追加、互換性を損なう変更のいずれが行われたかわかるので、更新やリリースではこの手法に従うことが重要です。 たとえば、互換性を損なう変更をパッチとして導入すると、Orb のユーザーに対し、CI プロセスの妨げになる更新プログラムが自動で配信されてしまう可能性があります。 Orb を更新する前に、[セマンティック バージョニング]({{site.baseurl}}/ja/2.0/orb-concepts/#semantic-versioning)に関する記事をよく読み、この手法を身につけてください。
+セマンティック バージョニングに従うと、バージョン番号からバグの修正やパッチ、新機能の追加、互換性を損なう変更のいずれが行われたかわかるので、更新やリリースではこの手法に従うことが重要です。 たとえば、互換性を損なう変更をパッチとして導入すると、Orb のユーザーに対し、CI プロセスの妨げになる更新プログラムが自動で配信されてしまう可能性があります。 Orb を更新する前に、[セマンティック バージョニング]({{site.baseurl}}/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0)に関する記事をよく読み、この手法を身につけてください。
 
 ### Keep a changelog
 {: #keep-a-changelog }

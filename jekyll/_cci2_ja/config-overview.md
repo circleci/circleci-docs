@@ -1,13 +1,12 @@
 ---
 layout: classic-docs
-title: "設定ファイル"
-short-title: "設定ファイル"
-description: "設定ファイルの説明"
+title: "Configuration Overview"
+description: "Overview of CircleCI configuration"
 categories:
-  - 設定
+  - configuration
 order: 2
 version:
-  - クラウド
+  - Cloud
   - Server v3.x
   - Server v2.x
 ---

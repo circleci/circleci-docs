@@ -75,17 +75,7 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    steps:
-      - checkout
-      # ... アプリのビルド・テストに関する記述 ...
+version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI 環境変数の参照 steps: - checkout # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
@@ -129,6 +119,7 @@ jobs:
 
 CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
 
+- `20.10.11`
 - `20.10.7`
 - `20.10.6`
 - `20.10.2`

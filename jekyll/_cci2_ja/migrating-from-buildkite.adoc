@@ -1,11 +1,16 @@
-= Buildkite からの移行
+---
+title: Migrating from Buildkite
+---
+
+= Migrating from Buildkite
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Buildkite to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
-このドキュメントでは、Buildkite から CircleCI に移行する方法を概説します。 
+このドキュメントでは、Buildkite から CircleCI に移行する方法を概説します。
 
 NOTE: **ImagineX Consulting からのヒント**
 
@@ -17,7 +22,7 @@ NOTE: **ImagineX Consulting からのヒント**
 
 === GitHub Enterprise
 
-以下は、Git のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
+以下は、GitHub のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
 
 . GitHub Enterprise のインスタンスに空のリポジトリを作成します。
 . Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
@@ -61,7 +66,7 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 |===
 | Buildkite | CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義 
+2+| 1つのビルドステップを実行するジョブの定義
 
 a|
 [source, yaml]
@@ -78,9 +83,10 @@ jobs:
     steps:
       - checkout
       - run: "execute-script-for-job1"
+
 ----
 
-2+| ジョブに使用するDocker イメージの指定
+2+| ジョブに使用する Docker イメージの指定
 
 a|
 [source, yaml]
@@ -192,7 +198,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -201,7 +207,7 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトや Docker-composeファイルの実行
+. シェルスクリプトやDocker-composeファイルの実行
 . https://circleci.com/docs/2.0/workflows/[ワークフロー]
 . https://circleci.com/docs/2.0/artifacts/[アーティファクト]
 . https://circleci.com/docs/2.0/caching/[キャッシュ]
