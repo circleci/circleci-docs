@@ -211,7 +211,7 @@ In summary, the availability of caching is not something that can be controlled 
 | クラス                    | vCPU | RAM   |
 | ---------------------- | ---- | ----- |
 | small                  | 1    | 2 GB  |
-| medium (デフォルト)         | 2    | 4 GB  |
+| medium                 | 2    | 4 GB  |
 | medium+                | 3    | 6 GB  |
 | large                  | 4    | 8 GB  |
 | xlarge                 | 8    | 16 GB |
