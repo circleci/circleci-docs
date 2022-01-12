@@ -40,13 +40,13 @@ By default, the machine executor images come installed with useful utilities, bu
 -   jq
 -   redis
 -   memcached
--   rabbitmq
+-   rabbitMQ
 -   firefox
 -   chrome
 -   phantomjs
 -   awscli
 -   gcloud
--   heroku
+-   honeybadger
 -   python 2.7.12\*
 -   python 3.5.2
 -   nodejs 6.1.0\*
@@ -67,14 +67,14 @@ Additional packages can be installed with `sudo apt-get install <package>`. If t
 ## Running docker containers on machine
 {: #running-docker-containers-on-machine }
 
-Machine executors come installed with Docker, which can be used to run your application within a container rather than installing additional dependencies. Note, it is recommended this is done with a customer Docker image rather than a CircleCI convenience image, which are built under the assumption they will be used with the Docker executor and may be tricky to work around. Since each machine executor enviornment is a dedicated virtual machine, commands to run background containers can be used is normal.
+Machine executors come installed with Docker, which can be used to run your application within a container rather than installing additional dependencies. Note, it is recommended this is done with a customer Docker image rather than a CircleCI convenience image, which are built under the assumption they will be used with the Docker executor and may be tricky to work around. Since each machine executor environment is a dedicated virtual machine, commands to run background containers can be used is normal.
 
 **Note:** if you have Docker Layer Caching (DLC) enabled for your account, machine executors can utilize this to cache your image layers for subsequent runs.
 
 ## Why use docker executors at all?
 {: #why-use-docker-executors-at-all }
 
-While machine executors do offer twice the memory and a more isolated enviornment, there is some additional overhead regarding spin up time, and, depending on the approach taken for running the application, more time is taken to install the required dependencies or pull your Docker image. The Docker executor will also cache as many layers as possible from your image during spin-up, as opposed to the machine executor, where DLC will need to be enabled.
+While machine executors do offer twice the memory and a more isolated environment, there is some additional overhead regarding spin up time, and, depending on the approach taken for running the application, more time is taken to install the required dependencies or pull your Docker image. The Docker executor will also cache as many layers as possible from your image during spin-up, as opposed to the machine executor, where DLC will need to be enabled.
 
 All executors have their pros and cons, which have been laid out here to help decide which is right for your pipelines.
 
