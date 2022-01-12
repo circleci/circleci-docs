@@ -131,8 +131,8 @@ jobs:
      image: ubuntu-2004:202010-01
 #...
  build3:
-     macos: # macOS 仮想マシンと Xcode バージョン 11.3 を指定します。
-       xcode: "11.3.0"
+   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+     xcode: "12.5.1"
 # ...
 ```
 
@@ -167,8 +167,8 @@ jobs:
      image: ubuntu-2004:202010-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 11.3
-     xcode: "11.3.0"
+   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+     xcode: "12.5.1"
 # ...
 ```
 
@@ -205,8 +205,8 @@ jobs:
      image: ubuntu-1604:201903-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 11.3
-     xcode: "11.3.0"
+   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+     xcode: "12.5.1"
 # ...
 ```
 
@@ -276,8 +276,8 @@ jobs:
        image: ubuntu-1604:202007-01
 ...
    build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 9.0
-       xcode: "9.0"
+     macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+       xcode: "12.5.1"
  ...
  ```
 
