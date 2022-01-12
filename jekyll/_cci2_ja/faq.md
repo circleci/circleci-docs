@@ -141,7 +141,7 @@ jobs:
 利用可能なタイムゾーンの一覧は [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) で確認できます。
 
 ## ワークフロー
-ワークフローの図
+{: #workflows }
 
 ### Workflows のなかで API は使えますか？
 {: #can-i-use-the-api-with-workflows }
