@@ -104,16 +104,15 @@ Copy the following to `/Library/LaunchDaemons/com.circleci.runner.plist`, owned 
 
 == Enable the `launchd` service
 
-If you are following these instructions for a second time, you should unload the following existing service:
-
-```bash
-sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
-```
-
 Now you can load the service:
 
 ```bash
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+NOTE: If you are following these instructions for a second time, you should unload the following existing service:
+```bash
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 == Verify the service is running

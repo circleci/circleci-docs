@@ -31,7 +31,6 @@ import { isElementInViewport } from '../utils';
     }
 
     sidenavAutoExpand(sidebar);
-    sidenavAutoExpand(mobileSidebar);
     scrollToActiveSidebarItem();
 
     // for mobile sidebar, if sidebar is set, display proper item
@@ -49,20 +48,20 @@ import { isElementInViewport } from '../utils';
     function setSidebar() {
       // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
       if (
-        footer.getBoundingClientRect().top - window.innerHeight <= 0 &&
-        footer.getBoundingClientRect().top >= window.innerHeight
+        footer?.getBoundingClientRect?.()?.top - window.innerHeight <= 0 &&
+        footer?.getBoundingClientRect?.()?.top >= window.innerHeight
       ) {
-        if (sidebar.classList.contains('fixed')) {
+        if (sidebar?.classList?.contains?.('fixed')) {
           sidebar.classList.remove('fixed');
         }
       } else {
-        if (!sidebar.classList.contains('fixed')) {
+        if (!sidebar?.classList?.contains?.('fixed')) {
           sidebar.classList.add('fixed');
         }
       }
 
       // prevents display problems on very large screens with little content
-      if (footer.getBoundingClientRect().top <= window.innerHeight) {
+      if (footer?.getBoundingClientRect?.()?.top <= window.innerHeight) {
         sidebar.style.height = footer.getBoundingClientRect().top - 70 + 'px';
       } else {
         sidebar.style.height = null;
@@ -137,26 +136,29 @@ export function highlightTocOnScroll() {
     });
   });
 
-  var observer = new IntersectionObserver(
-    function (entry) {
-      // check that 1) the item is visible/intersecting
-      // and 2) that the sidebar items text actually has that headline before we make any changes.
-      if (
-        entry[0].isIntersecting === true &&
-        sidebarItemsText.includes(entry[0].target.innerText)
-      ) {
-        let intersectingEntry = entry[0].target;
-        let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
-        sidebarItems.forEach((el) => el.classList.remove('active'));
-        sidebarItems[indexOfCurrentHeadline].classList.add('active');
-      }
-    },
-    { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
-  );
+  // https://caniuse.com/intersectionobserver
+  if (typeof IntersectionObserver !== 'undefined') {
+    const observer = new IntersectionObserver(
+      function (entry) {
+        // check that 1) the item is visible/intersecting
+        // and 2) that the sidebar items text actually has that headline before we make any changes.
+        if (
+          entry[0].isIntersecting === true &&
+          sidebarItemsText.includes(entry[0].target.innerText)
+        ) {
+          let intersectingEntry = entry[0].target;
+          let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
+          sidebarItems.forEach((el) => el.classList.remove('active'));
+          sidebarItems[indexOfCurrentHeadline].classList.add('active');
+        }
+      },
+      { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
+    );
 
-  allHeadlines.forEach((headline) => {
-    observer.observe(headline);
-  });
+    allHeadlines.forEach((headline) => {
+      observer.observe(headline);
+    });
+  }
 
   // on page load, find the highest item in the article view port that is also
   // in the sidebar and then add active class to it.

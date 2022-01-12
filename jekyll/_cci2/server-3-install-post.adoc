@@ -12,6 +12,11 @@ version:
 
 Before you begin with the CircleCI server v3.x post installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites], xref:server-3-install.adoc[Phase 2 - Core services installation] and xref:server-3-install-build-services.adoc[Phase 3 - Build services installation].
 
+NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
+
+.Installation Experience Flow Chart Phase 4
+image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
+
 toc::[]
 
 == Phase 4: Post installation

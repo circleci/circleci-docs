@@ -175,7 +175,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -192,7 +192,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -547,7 +547,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -593,7 +593,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
 

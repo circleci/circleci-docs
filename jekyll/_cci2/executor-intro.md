@@ -54,7 +54,7 @@ jobs:
   build: # name of your job
     machine: # executor type
       image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
-      
+
     steps:
       # Commands run in a Linux virtual machine environment
 ```
@@ -81,7 +81,7 @@ _The macOS executor is not currently available on self-hosted installations of C
 jobs:
   build: # name of your job
     macos: # executor type
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
       # Commands run in a macOS virtual machine environment

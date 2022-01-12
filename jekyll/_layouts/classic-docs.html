@@ -30,20 +30,10 @@
             <div>
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
-            <div id="tooltip" role="tooltip" class="tooltip-popover">
-              This document is applicable to the following:
-              <div id="arrow" data-popper-arrow></div>
-            </div>
-            {% if page.version %}
-            <div class="server-version-wrapper">
-              {% for version in page.version %}
-              <span class="badge badge-primary">
-                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
-                <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-              </span>
-              {% endfor %}
-            </div>
-            {% endif %}
+
+            <!-- Quick info list - time posted + server version -->
+            {% include_cached quick-info-list.html page=page %}
+
             {% if page.untranslated %}
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}

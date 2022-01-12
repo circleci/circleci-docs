@@ -27,7 +27,7 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 ## Migration
 {: #migration }
 
-Visit the [Migration Introduction]({{ site.baseurl }}//2.0/migration-intro/) doc which links out to migration guides for various platforms.
+Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
 
 ### How do I migrate from Jenkins to CircleCI?
 {: #how-do-i-migrate-from-jenkins-to-circleci }
