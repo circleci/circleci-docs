@@ -20,7 +20,7 @@ using a sample application written in Python.
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_suffix="python-django" %}
 
 ## Overview
-{: #overview }
+{: #overview-new }
 
 This guide uses a sample Django application
 to describe configuration best practices
@@ -33,12 +33,12 @@ and rewriting [the configuration file]({{site.gh_public_org_url}}/circleci-demo-
 as you follow this guide.
 
 ## Configuration Walkthrough
-{: #configuration-walkthrough }
+{: #configuration-walkthrough-new }
 
 Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
 
 ### 1. Specify a version
-{: #specify-a-version }
+{: #specify-a-version-new }
 
 Every config.yml starts with the version key. This key is used to issue warnings about breaking changes.
 ```yaml
@@ -151,7 +151,7 @@ workflows:
 Success! You just set up a Python app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/2.0/project-build/#overview) to see how this looks when building on CircleCI.
 
 ## Full configuration file
-{: #full-configuration-file }
+{: #full-configuration-file-new }
 
 ```yaml
 version: 2.1
@@ -197,7 +197,7 @@ workflows:
 ```
 
 ## See also
-{: #see-also }
+{: #see-also-new }
 
 - [Use test splitting with Python Django tests]({{site.support_base_url}}/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests)
 - [Testing Flask framework with Pytest]({{site.blog_base_url}}/testing-flask-framework-with-pytest/)

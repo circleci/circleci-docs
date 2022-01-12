@@ -226,7 +226,7 @@ workflows:
 ```
 
 ## See also
-{: #see-also }
+{: #see-also-new }
 
 - [Continuous deployment of Node apps to Heroku]({{site.blog_base_url}}/continuous-deployment-to-heroku/)
 - [Continuous deployment of Node.js to Azure VM]({{site.blog_base_url}}/cd-azure-vm/)

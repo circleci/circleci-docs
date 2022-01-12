@@ -254,7 +254,7 @@ $(document).ready(function () {
     $('nav.sidebar').toggleClass('open');
   });
 
-  $('article h1, article h2, article h3, article h4, article h5, article h6')
+  $(HEADER_TAGS)
     .not('.card')
     .filter('[id]')
     .hover(function () {

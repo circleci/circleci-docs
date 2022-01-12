@@ -10,12 +10,7 @@ section: cci2
         {% capture lang_guide %}
             {% include_relative language-{{page.short-title | downcase}}-experimental.md %}
         {% endcapture %}
-        {{ lang_guide | markdownify }}
+{{ lang_guide | split: "---" | last | markdownify }}
     {% endif %}
 </div>
 <style>#full-height{visibility:hidden}</style>
-<noscript class="no_toc_section">
-    {{content}}
-    <style>#full-height{visibility:visible}</style>
-</noscript>
-

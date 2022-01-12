@@ -1,8 +1,11 @@
-const displayElement = (el) => {
+const displayElement = (el, display) => {
   if (el) {
-    el.style.display = 'initial';
+    el.style.display = display;
   }
 };
+
+const displayInitialElement = (el) => displayElement(el, 'initial');
+const displayBlockElement = (el) => displayElement(el, 'block');
 
 // https://app.optimizely.com/v2/projects/16812830475/experiments/20872380274/variations
 export default () =>
@@ -24,21 +27,15 @@ export default () =>
     const deferred = document.getElementsByClassName('loading-deferred');
 
     if (homepage) {
-      Array.prototype.forEach.call(elements, displayElement);
+      Array.prototype.forEach.call(elements, displayInitialElement);
       homepage.style.display = 'initial';
-      Array.prototype.forEach.call(deferred, displayElement);
+      Array.prototype.forEach.call(deferred, displayBlockElement);
       return;
     }
 
     const element = elements[0];
     if (!element) return;
 
-    if (
-      element.firstElementChild?.firstElementChild?.firstElementChild
-        ?.tagName === 'PRE'
-    ) {
-      element.removeChild(element.firstElementChild);
-    }
     element.setAttribute('id', 'current-variation');
 
     const tocList = document.getElementById('toc');
@@ -79,6 +76,6 @@ export default () =>
     });
 
     document.getElementById('full-height').style.visibility = 'visible';
-    Array.prototype.forEach.call(deferred, displayElement);
+    Array.prototype.forEach.call(deferred, displayBlockElement);
     return headings;
   });
