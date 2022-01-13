@@ -143,7 +143,7 @@ Notifications of a change to this list will be sent out by email to all customer
 ## Pricing
 {: #pricing }
 
-Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  
 
 Specific rates and details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
@@ -152,6 +152,12 @@ While IP ranges is in preview, CircleCI may contact you if the amount of traffic
 IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
 
 ![Screenshot showing the location of the IP ranges feature]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
+
+The IP ranges usage value in the "Plan Usage" page of the CircleCI app represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.  
+
+This number includes your overall Network Transfer (the sum of all Network Transfer triggered by projects shown in the table on the “Network tab”) _and_ any other bytes that go in or out of the Docker container.   Use [managing network and storage](https://circleci.com/docs/2.0/persist-data/#managing-network-and-storage-use) for tips to reduce your Network Transfer. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+
 
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
