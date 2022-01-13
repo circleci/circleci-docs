@@ -10,12 +10,10 @@ en:
       link: style/style-links/
     - name: Grammar
       link: style/style-grammar/
-    - name: Styling Text
+    - name: Formatting
       link: style/style-formatting/
     - name: Using code samples
       link: style/style-code/
-    - name: Formatting
-      link: style/style-formatting/
     - name: Using lists
       link: style/style-lists/
     - name: Using tables

@@ -31,5 +31,4 @@ For asciidoc content use the following:
 | Should currently be `2`
 |===
 ----
-
-* 
+ 
