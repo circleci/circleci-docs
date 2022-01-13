@@ -361,6 +361,10 @@ $btn-selected-blue: #004A95;
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
 }
 
 @media (max-width: $screen-xs-max) {
@@ -522,6 +526,10 @@ a.nav-skip-button {
     height: auto;
     overflow: visible;
   }
+}
+
+.no-display {
+  display: none;
 }
 
 // -- Docs Disco Experiments
