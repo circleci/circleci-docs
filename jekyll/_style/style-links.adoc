@@ -14,7 +14,7 @@
 The equivalent for asciidoc content is:
 +
 ----
-[GitHub and Bitbucket Integration]({{ \site.url }}/{{ \site.baseurl }}/2.0/gh-bb-integration/
+[GitHub and Bitbucket Integration](+{{ site.url }}/{{ site.baseurl }}/2.0/gh-bb-integration/+)
 ----
 
 * Links should explicitly name the document or section to which they are linking.
