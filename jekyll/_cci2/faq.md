@@ -301,11 +301,11 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
 
-#### How do I calculate my monthly costs?
-{: #how-do-I-calculate-my-monthly-costs }
+#### How do I calculate my monthly storage and network costs?
+{: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage. If you have IP Ranges enabled, you can also find your usage here.
+Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
 
 ##### Storage
 {: #storage }
@@ -321,9 +321,11 @@ To calculate monthly network costs from your usage, click on the **Network** tab
 
 The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
 
-##### IP ranges
-{: #ip-ranges }
+#### How do I calculate my monthly IP ranges cost?
+{: #how-do-I-calculate-my-monthly-IP-ranges-costs }
 {:.no_toc}
+
+Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
 
 In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
 
