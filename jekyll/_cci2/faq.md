@@ -305,7 +305,7 @@ You can choose to pay for premium features per active user, compute, and optiona
 {: #how-do-I-calculate-my-monthly-costs }
 {:.no_toc}
 
-Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage. If you have IP Ranges enabled, you can also find your usage here.
 
 ##### Storage
 {: #storage }
@@ -325,10 +325,11 @@ The GB allotment only applies to outbound traffic from CircleCI. Traffic within 
 {: #ip-ranges }
 {:.no_toc}
 
-The IP ranges usage value in the "Plan Usage" page of the CircleCI app represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.  
+In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
 
 This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 #### Why does CircleCI have per-active-user pricing?
 {: #why-does-circleci-have-per-active-user-pricing }
