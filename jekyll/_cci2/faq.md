@@ -305,7 +305,7 @@ You can choose to pay for premium features per active user, compute, and optiona
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
 
 ##### Storage
 {: #storage }
