@@ -7,6 +7,9 @@
 	<meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 	{% if page.redirect %}<meta http-equiv="refresh" content="0; url={{ page.redirect }}">{% endif %}
   	{% assign current_url = page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url %}
+	{% if jekyll.environment == "production" %}
+		{% include_cached google-tag-manager.html %}
+	{% endif %}
 	<link rel="canonical" href="{{current_url}}">
   	<link rel="alternate" hreflang="{{page.lang}}" href="{{current_url}}" />
   	{% if page.lang == "en" %}
