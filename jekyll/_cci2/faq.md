@@ -321,6 +321,15 @@ To calculate monthly network costs from your usage, click on the **Network** tab
 
 The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
 
+##### IP ranges
+{: #ip-ranges }
+{:.no_toc}
+
+The IP ranges usage value in the "Plan Usage" page of the CircleCI app represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.  
+
+This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+
 #### Why does CircleCI have per-active-user pricing?
 {: #why-does-circleci-have-per-active-user-pricing }
 {:.no_toc}
