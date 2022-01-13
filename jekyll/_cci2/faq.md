@@ -231,15 +231,13 @@ See the [comparison table](https://circleci.com/pricing/#comparison-table) for w
 {: #what-exact-version-of-windows-are-you-using }
 {:.no_toc}
 
-The [Hello World on Windows] page outlines which versions of Windows are offered.
+The [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page outlines which versions of Windows are offered.
 
 ### What is installed on the machine?
 {: #what-is-installed-on-the-machine }
 {:.no_toc}
 
-The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our "[Hello World On
-Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
-
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our [Hello World On Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
 
 ### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
