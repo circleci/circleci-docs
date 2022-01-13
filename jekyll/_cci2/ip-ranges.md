@@ -155,7 +155,7 @@ IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
 
 The IP ranges usage value in the "Plan Usage" page of the CircleCI app represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.  
 
-This number includes your overall network transfer (the sum of all network transfer triggered by projects shown in the table on the “Network” tab) _and_ any other bytes that go in or out of the Docker container. Use [managing network and storage]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) for tips to reduce your Network Transfer. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+This number includes your overall network transfer (the sum of all network transfer triggered by projects shown in the table on the “Network” tab) _and_ any other bytes that go in or out of the Docker container. Use [managing network and storage]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) for tips to reduce your network transfer. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
