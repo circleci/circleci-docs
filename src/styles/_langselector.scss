@@ -9,13 +9,8 @@ $border-col: rgba(229,231,235, 1);
   position: relative;
 
   .global-nav--language-picker {
-    @media (max-width: $screen-md) {
+    @media (max-width: $screen-xs-max) {
       padding: 0;
-    }
-    @media (min-width: $screen-md) {
-      &:hover {
-        color: $btn-hover-green;
-      }
     }
 
     display: flex;
@@ -24,21 +19,30 @@ $border-col: rgba(229,231,235, 1);
     background-color: transparent;
     background: none;
     border: none;
-    // padding: 8px 0 0 0;
+    padding: 2px 0 0 0;
+
+    .globe-icon {
+      background-color:transparent;
+      color: $black;
+      @media (min-width: $screen-sm) {
+        &:hover {
+          filter: invert(39%) sepia(99%) saturate(634%) hue-rotate(105deg) brightness(83%) contrast(97%);
+        }
+      }
+    }
 
     .lang-picker-mobile {
       display: none;
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
         display: block;
         margin-left: 16px;
         font-size: 14px;
         font-family: inherit;
-        font-weight: 600;
-
       }
     }
 
-    @media (max-width: $screen-md) {
+    // might not need
+    @media (max-width: $screen-xs-max) {
       border-bottom: 1px solid #D8D8D8;
       width: 100%;
       padding: 16px 0 24px 0;
@@ -99,7 +103,7 @@ $border-col: rgba(229,231,235, 1);
     height: 95px;
 
 
-    @media (max-width: $screen-md) {
+    @media (max-width: $screen-xs-max) {
       display: flex;
       flex-direction: column;
       padding: 16px;
@@ -115,7 +119,7 @@ $border-col: rgba(229,231,235, 1);
       font-family: "Roboto";
       line-height: 14px;
 
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
         padding: 4px 0;
         font-weight: 500;
         font-size: 14px;
@@ -141,7 +145,7 @@ $border-col: rgba(229,231,235, 1);
         background: #fff;
       }
 
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
         width: 100%;
         margin: 0;
       }
@@ -171,7 +175,7 @@ $border-col: rgba(229,231,235, 1);
         opacity: 0.5;
         cursor: not-allowed;
       }
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
         align-self: flex-end;
         margin-top: 8px;
         margin-left: 0;
@@ -194,7 +198,7 @@ $border-col: rgba(229,231,235, 1);
   // Mobile styling for the language selector
   // This converts the language picker on the desktop nav into a popover modal
   // to try and mimic what we have on circleci.com
-  @media (max-width: $screen-md) {
+  @media (max-width: $screen-xs-max) {
     // lang selector wrapper parent class changes:
     position: initial;
 
