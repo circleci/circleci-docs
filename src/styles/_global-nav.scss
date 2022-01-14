@@ -64,7 +64,7 @@ $btn-selected-blue: #004A95;
 
 .global-nav--row {
   &-mobile {
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: $screen-xs-max) {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -74,7 +74,7 @@ $btn-selected-blue: #004A95;
   }
 
   &-desktop {
-    @media (min-width: $screen-md) {
+    @media (min-width: $screen-sm) {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -136,30 +136,13 @@ $btn-selected-blue: #004A95;
     }
   }
 
-  @media (min-width: $screen-md) {
+  @media (min-width: $screen-sm) {
     display: none;
   }
 }
 
 .global-nav--nav {
-  @media (max-width: $screen-sm-max) {
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 0 -15px;
-    padding: 0 15px;
-    max-height: 500px;
-    border-top: 1px solid $gray;
-
-    &.in {
-      overflow-y: auto;
-    }
-  }
-
-  &.in {
-    display: flex;
-  }
-
-  @media (min-width: $screen-md) {
+  @media (min-width: $screen-sm) {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -205,7 +188,7 @@ $btn-selected-blue: #004A95;
   position: relative;
 
     .global-nav--language-picker {
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
       padding: 0;
     }
       
@@ -220,18 +203,18 @@ $btn-selected-blue: #004A95;
     .globe-icon {
       background-color:transparent;
       color: $black;
-      @media (min-width: $screen-md) {
+      @media (min-width: $screen-sm) {
         &:hover {
           filter: invert(39%) sepia(99%) saturate(634%) hue-rotate(105deg) brightness(83%) contrast(97%);
         }
       }
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
         padding-top: 6px;
       }
     } 
     .lang-picker-mobile {
       display: none;
-      @media (max-width: $screen-md) {
+      @media (max-width: $screen-xs-max) {
         display: block;
         margin-left: 16px;
         font-size: 16px;
@@ -390,12 +373,15 @@ $btn-selected-blue: #004A95;
 }
 
 .global-nav--footer {
-  @media (max-width: $screen-sm-max) {
+  @media (max-width: $screen-xs-max) {
     width: calc(100% + 30px);
     padding: 15px;
     margin: 10px -15px 0;
     text-align: center;
     border-top: 1px solid $gray;
+  }
+  @media (max-width: $screen-sm-max) {
+    margin-left: 16px;
   }
 }
 
@@ -421,6 +407,7 @@ $btn-selected-blue: #004A95;
     // Turn off default input field border
     #search-box input.instantsearch-search {
       border: none;
+      padding-bottom: 20px;
     }
 
     // Put border on .main-searchbar element so we can enclose the cancel button on desktop
@@ -442,13 +429,17 @@ $btn-selected-blue: #004A95;
 
   @media (max-width: $screen-sm-max) {
     left: 0;
-    width: 100%;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
 }
 
-@media (max-width: $screen-sm-max) {
+@media (max-width: $screen-xs-max) {
   .global-nav--search-bar {
     display: none; // hidden by default; shown when search is open
   }
@@ -471,7 +462,7 @@ $btn-selected-blue: #004A95;
     height: auto;
   }
 
-  @media (min-width: $screen-md) {
+  @media (min-width: $screen-sm) {
     display: none;
   }
 
@@ -524,7 +515,7 @@ body.global-nav-open .global-nav--search-button {
   .divider {
     position: relative;
 
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: $screen-xs-max) {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -532,10 +523,10 @@ body.global-nav-open .global-nav--search-button {
       width: calc(100% + 30px);
       margin: 0 -15px;
       padding: 0 15px;
-      border-bottom: solid 1px $gray;
+      border-bottom: solid 2px $gray;
     }
 
-    @media (min-width: $screen-md) {
+    @media (min-width: $screen-sm) {
       margin-right: 16px;
       align-self: stretch;
       display: flex;
@@ -557,7 +548,7 @@ body.global-nav-open .global-nav--search-button {
   }
 }
 
-@media (max-width: $screen-sm-max) {
+@media (max-width: $screen-xs-max) {
   .global-nav--list,
   .global-nav--footer {
     margin-top: 15px;
@@ -577,7 +568,7 @@ body.global-nav-open .global-nav--search-button {
 
 // Allow expanded version to use full screen height with sticky footer on mobile
 .global-nav--nav {
-  @media (max-width: $screen-sm-max) {
+  @media (max-width: $screen-xs-max) {
     max-height: none;
   }
 }
@@ -609,6 +600,10 @@ a.nav-skip-button {
   }
 }
 
+.no-display {
+  display: none;
+}
+
 // -- Docs Disco Experiments
 
 .dd-global-nav--component {
@@ -622,15 +617,14 @@ a.nav-skip-button {
     }
   }
 
-
   .global-nav--row {
     &-mobile {
-      @media (max-width: $screen-sm-max) {
+      @media (max-width: $screen-xs-max) {
       }
     }
 
     &-desktop {
-      @media (min-width: $screen-md) {
+      @media (min-width: $screen-sm) {
         padding: 10px 0 16px 0;
       }
     }
@@ -641,7 +635,4 @@ a.nav-skip-button {
     margin-top: 2px;
     margin-left: 8px;
   }
-
-
-
 }
