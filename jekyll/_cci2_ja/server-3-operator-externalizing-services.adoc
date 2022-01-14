@@ -1,11 +1,12 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x 外部サービスの設定
+= CircleCI Server v3.x Configuring External Services
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
 :icons: font
 :toc: macro
 :toc-title:
