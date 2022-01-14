@@ -346,13 +346,12 @@ and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-2. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy
-   key". Enter a title in the "Title" field, then copy and paste the public key
-   you created in step 1. Check "Allow write access", then click "Add key".
+2. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy
+   Key**. Enter a title in the "Title" field, then copy and paste the public key
+   you created in step 1. Check **Allow write access**, then click **Add key**.
 
-3. Go to your project settings, click on SSH Keys, and "Add SSH key", and add
-   the private key you created in step 1. In the "Hostname" field, enter
-   "github.com", and press the submit button.
+3. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter
+   `github.com`and add the private key you created in step 1. Then click **Add SSH Key**.
 
 4. In your config.yml, add the fingerprint using the `add_ssh_keys` key:
 
