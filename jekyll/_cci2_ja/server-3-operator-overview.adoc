@@ -3,9 +3,10 @@ version:
 - Server v3.x
 - サーバー管理
 ---
-= CircleCI Server v3.x の運用方法
+= CircleCI Server v3.x Operations Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI サーバーの運用者に役立つメンテナンスとモニタリングに関する情報
 :icons: font
 :toc: macro
 :toc-title:
@@ -24,7 +25,7 @@ CircleCI Server は Nomad クライアント上で Docker ジョブを実行し�
 
 toc::[]
 
-## Execution Environment
+## 実行環境
 
 CircleCI Server 3.x では、プライマリ ジョブ スケジューラとして Nomad を使用します。 ジョブ スケジューラ、およびクライアントとクラスタの基本的な操作方法については、https://circleci.com/docs/2.0/nomad/[Nomad クラスタの操作ガイド]を参照してください。
 

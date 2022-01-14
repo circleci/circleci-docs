@@ -81,10 +81,10 @@ Orb パイプラインは、次の 2 つのワークフローで実行されま�
 * パーソナルアクセス トークンへの特別なアクセス権が不要なテストが実行されます。このステージは、オープンソースのプルリクエストから実行可能です。
 * [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) ジョブにより、開発版の Orb が次のように 2 回パブリッシュされます。
 
-    | Published Development Tag                              | Description                                                                      |
-    | ------------------------------------------------------ | -------------------------------------------------------------------------------- |
-    | `<namespace>/<orb>@dev:<branch>`     | A development tag linked to the branch name. Useful for testing in your configs. |
-    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | A development tag specific to this SHA. Used in the following workflow.          |
+    | パブリッシュされる開発タグ                                          | 説明                                         |
+    | ------------------------------------------------------ | ------------------------------------------ |
+    | `<namespace>/<orb>@dev:<branch>`     | ブランチ名にリンクされる開発タグです。 設定ファイルのテストを行う場合に使用します。 |
+    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | この SHA に固有の開発タグです。 次のワークフローで使用します。         |
     {: class="table table-striped"}
 
 テストジョブの詳細については、[Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs)を参照してください。

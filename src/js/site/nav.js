@@ -1,10 +1,18 @@
 // Modal search on mobile
 $(document).ready(
   (function () {
-    $('.global-nav--search-button').on('click', function (e) {
+    const body = $('body');
+    const mobileSearchIcon = $('.global-nav--search-button');
+    const mobileMenuBtn = $('.global-nav--toggle');
+
+    mobileSearchIcon.on('click', function (e) {
       e.preventDefault();
-      $('body').addClass('search-open');
+      body.addClass('search-open');
       $('.global-nav--search-bar .instantsearch-search').focus();
+      if (body.hasClass('search-open')) {
+        mobileSearchIcon.addClass('no-display');
+        mobileMenuBtn.addClass('no-display');
+      }
     });
   })(),
 );

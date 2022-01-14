@@ -28,7 +28,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 
 1. まだ登録がお済みでない場合は、CircleCI にアクセスして登録し、GitHub または Bitbucket を選択してください。 GitHub Marketplace からの登録も可能です。
 2. 管理するプロジェクトが追加されていることを確認します。
-3. Add a `.circleci` folder at the top of your project’s master branch.  必要に応じて master 以外のブランチで試してみることも可能です。  フォルダー名は、必ずピリオドで始めてください。  これは .circleci 形式の特別なフォルダーです。
+3. プロジェクトの main ブランチの最上部に `.circleci` フォルダーを追加します。  必要に応じて master 以外のブランチで試してみることも可能です。  フォルダー名は、必ずピリオドで始めてください。  これは .circleci 形式の特別なフォルダーです。
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
@@ -44,6 +44,7 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
+
 {% endhighlight %}
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -62,7 +63,7 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 
 ## パート 2: ビルドのための情報と準備
 {: #part-two-info-and-preparing-to-build }
-That was nice but let’s get real.  Delivery graphs start with code.  この例では、コードを取得してリストするための行を追加します。  We will also do this in a second run.
+コードをさらにリアルにしましょう。  デリバリーにはコードが必要です。  この例では、コードを取得してリストするための行を追加します。  これは 2つ目の run で行います。
 
 1. まだパート 1 の手順を実行していない場合は、パート 1 を完了して、簡単な `.circleci/config.yml` ファイルをプロジェクトに追加してください。
 
@@ -134,7 +135,7 @@ jobs:
             node -v
 {% endhighlight %}
 
-We also added a small `run` block that demonstrates we are running in a node container.
+ノードコンテナで実行していることを示す、小さな `run` ブロックも追加しています。
 
 ### 学習ポイント
 {: #learnings }
@@ -193,6 +194,7 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
+          
 workflows:
  version: 2
  Example_Workflow:
@@ -239,4 +241,4 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-[Configuring CircleCI]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)
