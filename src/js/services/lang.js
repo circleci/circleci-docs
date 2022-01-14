@@ -100,7 +100,7 @@ const languageRequest = () => {
     });
     // Swap out button with submit message after submission
     submitBtn.replaceWith(
-      `<span id=lang-submitted>Thank you for your help</span>`,
+      `<span id=lang-submitted>Thank you for your help.</span>`,
     );
   });
 };

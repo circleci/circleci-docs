@@ -155,10 +155,6 @@ $border-col: rgba(229,231,235, 1);
       }
       .lang-submitted {
         pointer-events: none;
-
-        @media (max-width: $screen-md) {
-          margin: 8px 0;
-        }
       }
 
     #submit-lang-btn {
@@ -190,7 +186,7 @@ $border-col: rgba(229,231,235, 1);
       line-height: 14px;
       color: $black;
       text-align: right;
-      margin: 0 16px;
+      margin-top: 8px;
     }
   }
 
