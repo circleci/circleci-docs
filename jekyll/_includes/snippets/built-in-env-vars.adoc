@@ -83,7 +83,7 @@
 
 | `CIRCLE_USERNAME`              
 | String  
-| The GitHub or Bitbucket username of the user who triggered the pipeline.
+| The GitHub or Bitbucket username of the user who triggered the pipeline (only if the user has a CircleCI account).
 
 | `CIRCLE_WORKFLOW_ID`           
 | String  
