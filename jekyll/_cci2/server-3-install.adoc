@@ -144,7 +144,7 @@ Secret Key for S3 bucket access.
 Or select IAM role and provide:
 
 * *Role ARN* - 
-Role ARN (Amazon Resource Name) for S3 bucket access.
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html[Role ARN] (Amazon Resource Name) for S3 bucket access.
 
 ===== Google Cloud Storage 
 You should have created your Google Cloud Storage bucket and service account during the prerequisite steps. 
@@ -163,7 +163,7 @@ A JSON format key of the Service Account to use for bucket access.
 
 Or select IAM role and provide:
 
-* *Service Account File (required)* - Service account file for the Workload Identity.
+* *Service Account File (required)* - Service account file for the https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity].
 
 ==== Postgres, MongoDB, Vault settings
 
