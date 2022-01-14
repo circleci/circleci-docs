@@ -4,7 +4,6 @@
  */
 import * as Cookie from 'js-cookie';
 import 'highlightjs-badge';
-import 'highlightjs-line-numbers.js';
 
 import services from './services';
 import '../styles/main.scss';
