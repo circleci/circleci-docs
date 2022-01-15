@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
-ruby '2.7.4'
+ruby '2.7.5'
 
-gem "jekyll", '~> 4.2.0', github: "jekyll/jekyll"
+gem "jekyll", '~> 4.2.1', github: "jekyll/jekyll"
 gem 'html-proofer'
 gem 'asciidoctor'
-gem 'pygments.rb', '~> 1.1.2'
+gem 'pygments.rb'
 gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"
 gem "liquid-c"
-gem 'nokogiri', '~> 1.12', '>= 1.12.5'
+gem 'nokogiri'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'
