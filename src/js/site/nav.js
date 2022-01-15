@@ -44,6 +44,13 @@ $(document).ready(function () {
     });
   });
 
+  // Remove search open when mobile menu is open
+  const mobileMenu = $('.global-nav--toggle');
+  const mobileSearchIcon = $('.global-nav--search-button');
+  mobileMenu.on('click', () => {
+    mobileSearchIcon.toggleClass('no-display');
+  });
+
   // Open dropdowns on keyboard focus
   $(document).ready(function () {
     $('.nav-item').each(function () {
