@@ -226,9 +226,10 @@ NOTE: The maximum and minimum nomad client count will overwrite the correspondin
 If you do not require this service then feel free to jump to the *Save config* button to update your installation and re-deploy server.
 
 ===== AWS
-. Create an IAM user/role and policy for Nomad Autoscaler. You may take one of the following approaches:
+. Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
-  * You may also create a nomad IAM user manually. The user will need an IAM policy with the following rules attached:
+  * You may also create a Nomad Autoscaler IAM user manually with the IAM policy below attached. Then you will need to generate an access and secret key for this user.
+  * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the following IAM policy:
 [source, json]
 {
     "Version": "2012-10-17",
@@ -254,13 +255,14 @@ If you do not require this service then feel free to jump to the *Save config* b
         }
     ]
 }
-. Set Nomad Auto-Scaler to `enabled`
+. In your KOTS admin console, set Nomad Auto-Scaler to `enabled`
 . Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Set Min Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Select cloud provider: `AWS EC2`
 . Add the region of the auto scaling group
-. Add the Nomad Autoscaler user's access key
-. Add the Nomad Autoscaler user's secret key
+. You can chose one of the following:
+.. Add the Nomad Autoscaler user's access key and secret key
+.. Or, the Nomad Autoscaler role's ARN
 . Add the name of the autoscaling Group your nomad clients were created in
 
 ===== GCP
