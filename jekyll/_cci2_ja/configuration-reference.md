@@ -196,42 +196,20 @@ jobs:
 例
 
 ```yaml
-version: 2.1
-
-executors:
-  linux-13:
+jobs:
+  build:
     docker:
-      - image: cimg/node:13.13
+      - image: buildpack-deps:trusty
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-  macos: &macos-executor
-    macos:
-      xcode: 11.4
-
-jobs:
-  test:
-    parameters:
-      os:
-        type: executor
-      node-version:
-        type: string
-    executor: << parameters.os >>
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      FOO: bar
+    parallelism: 3
+    resource_class: large
+    working_directory: ~/my-app
     steps:
-      - checkout
-      - when:
-          condition:
-            equal: [ *macos-executor, << parameters.os >> ]
-          steps:
-            - run: echo << parameters.node-version >>
-      - run: echo 0
-
-workflows:
-  all-tests:
-    jobs:
-      - test:
-          os: macos
-          node-version: "13.13.0"
+      - run: go test -v $(go list ./... | circleci tests split)
 ```
 
 #### `parameters`
@@ -386,7 +364,7 @@ jobs:
 ##### 使用可能な `machine` イメージ
 {: #available-machine-images }
 
-**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 For a full list of images see the [Ubuntu 20.04 page in the developer hub](https://circleci.com/developer/machine/image/ubuntu-2004). 最新の利用可能なイメージの一覧については、[Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847) を参照してください。
+**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、developer hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/ja/machine/image/ubuntu-2004)で確認できます。 最新の利用可能なイメージの一覧については、[Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847) を参照してください。
 
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
@@ -451,7 +429,7 @@ CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実�
 | xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version 12.5.1:
+**例:** macOS 仮想マシンを Xcode バージョン 12.5.1 で使用する場合
 
 
 ```yaml
@@ -544,7 +522,7 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 | クラス                    | vCPU | RAM   |
 | ---------------------- | ---- | ----- |
 | small                  | 1    | 2 GB  |
-| medium (デフォルト)         | 2    | 4 GB  |
+| medium                 | 2    | 4 GB  |
 | medium+                | 3    | 6 GB  |
 | large                  | 4    | 8 GB  |
 | xlarge                 | 8    | 16 GB |
@@ -721,7 +699,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-<sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。</em>
+<sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。_
 
 <sup>(3)</sup> _このリソースは、年間契約をご購入のお客様のみ使用可能です。 年間プランの詳細については、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)しお問い合わせください。
 
@@ -928,7 +906,7 @@ run: |
 ```
 
 ###### Example
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ```yaml
@@ -966,7 +944,7 @@ steps:
 {: class="table table-striped"}
 
 ###### *Example*
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ```
@@ -1040,7 +1018,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 | version                | ×  | 文字列型 | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/2.0/building-docker-images/#docker-のバージョン)を参照してください。 |
 {: class="table table-striped"}
 
-ワークフローの `version` フィールドは、非推奨またはベータ版での互換性を損なう変更について注意を促すために記述します。
+**メモ**:
 
 - `setup_remote_docker` は、`machine` Executor と互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について、詳細は「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor)」を参照してください。
 - 現在、プライベート クラウドまたはデータセンターにインストールされている CircleCI では、`version` キーがサポートされていません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
@@ -1079,7 +1057,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。
 
 テンプレートの例
- * Docker レイヤー キャッシュを利用するには、[Performance プランまたは Custom プラン](https://circleci.com/ja/pricing/)に登録済みの有料アカウントが必要です。
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。 このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - 上の例と同じように、ファイルの内容が変わるたびにキャッシュが再生成されますが、各ブランチで個別のキャッシュが生成されます。
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - ジョブを実行するごとに個別のキャッシュが生成されます。
 
@@ -1120,7 +1098,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 ##### **`restore_cache`**
 {: #restorecache }
 
-`key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
+`key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/ja/2.0/caching/)を参照してください。
 
 | キー   | 必須               | タイプ  | 説明                                                        |
 | ---- | ---------------- | ---- | --------------------------------------------------------- |
@@ -1164,7 +1142,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 元々のキャッシュの保存場所に復元されるため、restore_cache では path の指定は不要です。
 
 ###### 例
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 {% raw %}
@@ -1205,7 +1183,7 @@ artifact のデプロイを行う特殊なステップです。
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### 例
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ``` YAML
@@ -1234,7 +1212,7 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 ジョブでは複数の `store_artifacts` ステップを指定することもできます。 ファイルが上書きされたりしないよう、ステップごとにユニークなプレフィックスを付加するようにしてください。
 
 ###### 例
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ``` YAML
@@ -1259,7 +1237,7 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 {: class="table table-striped"}
 
 ###### _例_
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ディレクトリ構造
@@ -1330,19 +1308,19 @@ root キーは Workspace のルートディレクトリとなるコンテナ内�
 `paths` では、Go 言語の `Glob` 関数をベースにした、[filepath.Match](https://golang.org/pkg/path/filepath/#Match) によるパターンマッチングに対応します。
 
 ```
-pattern:
+パターン
         { term }
 term:
-        '*' matches any sequence of non-Separator characters
-        '?' matches any single non-Separator character
-        '[' [ '^' ] { character-range }
-        ']' character class (must be non-empty)
-        c matches character c (c != '*', '?', '\\', '[')
-        '\\' c matches character c
+        '*'　区切り文字を含まない文字シーケンスの全てにマッチする
+        '?'　区切り文字を含まないあらゆる文字 1 つにマッチする
+        '[' [ '^' ] { character-range } ']'
+　　　　　　　　文字クラス（空文字は不可）
+        c　文字 c にマッチする（'*'　'?'　'\\'　'[' 以外）
+        '\\'c　文字 c にマッチする
 character-range:
-        c matches character c (c != '\\', '-', ']')
-        '\\' c matches character c
-        lo '-' hi matches character c for lo <= c <= hi
+        c　文字 c にマッチする（'\\'　'-'　']' 以外)
+        '\\'c　文字 c にマッチする
+        lo '-' hi　lo <= c <= hi の範囲にある文字 c にマッチする
 ```
 
 Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名でパターンを記述できるとしています（/ は区切り文字です）。 **メモ:** すべての要素はワークスペースのルート ディレクトリからの相対パスです。
@@ -1352,13 +1330,13 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 Workflows で使用している Workspace を現在のコンテナにアタッチするのに利用する特殊なステップです。 Workspace 内のコンテンツは完全な状態でダウンロードされ、Workspace がアタッチされているディレクトリにコピーされます。
 
-| キー | 必須  | タイプ  | 説明                    |
-| -- | --- | ---- | --------------------- |
-| at | and | 文字列型 | ワークスペースのアタッチ先のディレクトリ。 |
+| キー | 必須 | タイプ  | 説明                    |
+| -- | -- | ---- | --------------------- |
+| at | ○  | 文字列型 | ワークスペースのアタッチ先のディレクトリ。 |
 {: class="table table-striped"}
 
 ###### _例_
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ``` YAML
@@ -1405,16 +1383,16 @@ steps:
 
 パイプライン値はすべてのパイプライン構成で使用でき、事前の宣言なしに利用できます。 利用可能なパイプライン値は次のとおりです。
 
-| 値                          | 説明                                                  |
-| -------------------------- | --------------------------------------------------- |
-| pipeline.id                | パイプラインを表す、グローバルに一意の ID。                             |
-| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID                          |
-| pipeline.project.git_url   | 例:  例： 例： https://github.com/circleci/circleci-docs |
-| pipeline.project.type      | 例:  例:  "github"                                    |
-| pipeline.git.tag           | パイプラインをトリガーするタグ。                                    |
-| pipeline.git.branch        | パイプラインをトリガーするブランチ。                                  |
-| pipeline.git.revision      | 現在の git リビジョン。                                      |
-| pipeline.git.base_revision | 以前の git リビジョン。                                      |
+| 値                          | 説明                                            |
+| -------------------------- | --------------------------------------------- |
+| pipeline.id                | パイプラインを表す、グローバルに一意の ID。                       |
+| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID                    |
+| pipeline.project.git_url   | 例:  https://github.com/circleci/circleci-docs |
+| pipeline.project.type      | 例:  "github"                                  |
+| pipeline.git.tag           | パイプラインをトリガーするタグ。                              |
+| pipeline.git.branch        | パイプラインをトリガーするブランチ。                            |
+| pipeline.git.revision      | 現在の git リビジョン。                                |
+| pipeline.git.base_revision | 以前の git リビジョン。                                |
 {: class="table table-striped"}
 
 例えば下記のようにします。
@@ -1441,7 +1419,7 @@ jobs:
 ジョブで使用される IP アドレスを、明確に定義された範囲のみに限定できます。 詳しくは  [IPアドレスの範囲]({{ site.baseurl }}/ja/2.0/ip-ranges/)をご確認ください。
 
 ###### _例_
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ```yaml
@@ -1460,7 +1438,7 @@ workflows:
       - build
 ```
 
-ワークフローの `version` フィールドは、非推奨またはベータ版での互換性を損なう変更について注意を促すために記述します。
+**Notes**:
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - IP ranges is currently in open preview for paid accounts. 具体的な料金や詳細については、機能の一般公開時にお知らせします。
@@ -1585,9 +1563,9 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 {: #context }
 ジョブは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については[コンテキスト]({{ site.baseurl }}/2.0/contexts)を参照してください。
 
-| キー      | 必須 | タイプ            | 説明                                                                                                                                                                      |
-| ------- | -- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| context | ×  | 文字列、または文字列のリスト | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 CircleCI Server を使用している場合、ワークフローごとに使用できるコンテキストは 1 つのみです。 **注:** 一意のコンテキストは、すべてのワークフローを合わせて 100 個まで使用できます。 |
+| キー      | 必須 | タイプ     | 説明                                                                                                                                                                      |
+| ------- | -- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| context | ×  | 文字列/リスト | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 CircleCI Server を使用している場合、ワークフローごとに使用できるコンテキストは 1 つのみです。 **注:** 一意のコンテキストは、すべてのワークフローを合わせて 100 個まで使用できます。 |
 {: class="table table-striped"}
 
 ###### **`type`**
@@ -1727,7 +1705,7 @@ workflows:
       - ...
 ```
 
-###### 依存関係とマトリックス ジョブ
+###### マトリックスから一部のパラメーターを除外する
 {: #excluding-sets-of-parameters-from-a-matrix }
 {:.no_toc}
 一部の値を_除き_、あらゆる引数の組み合わせについてジョブを実行したいことがあります。 これを行うには、`exclude` スタンザを使用します。
@@ -1889,10 +1867,10 @@ Workflows の詳細な例と概念については「[ジョブの実行を Workf
 
 一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| タイプ                                                                                                | 引数             | `true` と評価される条件                              | 例                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML リテラル                                                                                        | なし                  | 真である                              | `true`/`42`/`"a string"`                                                 | | YAML エイリアス                                                                                          | なし                  | 解決結果が真             | *my-alias                                                                | | [パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | なし                  | 解決結果が真             | `<< pipeline.git.branch >>`                                             | | [パイプライン パラメーター]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | なし                  | 解決結果が真             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N 個のロジック ステートメント    | すべての引数が真               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N 個のロジック ステートメント    | いずれかの引数が真                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 個のロジック ステートメント     | 引数が偽             | `not: true`                                                              | | equal                                                                                               | N 個の値              | すべての引数の評価結果が等しい | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` および `value` | `value` が `pattern` に一致する          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
-**メモ:** ワークフロー レベルでロジック ステートメントを使用する場合、`condition:` キーは含めないようにしてください (`condition` キーは`ジョブ` レベルのロジック ステートメント以外では必要ありません)。
+次の論理値は偽とみなされます。
 
 - false
 - null
