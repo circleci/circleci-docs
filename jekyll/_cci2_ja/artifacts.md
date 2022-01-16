@@ -136,7 +136,7 @@ jobs:
 
 ![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンス ガイド](https://circleci.com/docs/api/#artifacts) を参照してください。
+CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブにコア ダンプ ファイルへのリンクが表示されます。
 
 ## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
@@ -168,7 +168,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
 ```
 
-You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/v1/#artifacts).
+CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンス ガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
 
 | プレースホルダー      | 意味                                                                           |
 | ------------- | ---------------------------------------------------------------------------- |
