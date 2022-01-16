@@ -144,7 +144,7 @@ Secret Key for S3 bucket access.
 Or select IAM role and provide:
 
 * *Role ARN* - 
-https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html[Role ARN] (Amazon Resource Name) for S3 bucket access.
+https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
 ===== Google Cloud Storage 
 You should have created your Google Cloud Storage bucket and service account during the prerequisite steps. 
