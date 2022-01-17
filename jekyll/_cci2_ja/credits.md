@@ -130,9 +130,9 @@ Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 2
 ### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-はい。 If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+はい。 ジョブが "queud(キューに入っている)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing(準備中)" の場合は、CircleCIがセットアップを行っているか、ジョブの実行を開始しようとしています。
 
-If you find that jobs are "preparing" for quite some time, you may be able to reduce it if your jobs use the docker executor; try using more recent docker images to decrease preparation time.
+ジョブが頻繁に "preparing(準備中)" になる場合、Docker executor を使用しているのであれば、より新しい Docker イメージを使用することで、準備時間を短くできる可能性があります。
 
 ## ご意見・ご質問
 {: #questions-and-comments }

@@ -94,10 +94,10 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
-## Executors and images
-{: #executors-and-images }
+## Execution environments
+{: #execution-environments }
 
-Each separate job defined within your config will run in a unique executor. An executor can be a Docker container or a virtual machine running Linux, Windows, or macOS. Note, macOS is not available on installations of CircleCI server v2.x.
+Each separate job defined within your config will run in a unique Execution environment. We call them *executors*. An executor can be a Docker container or a virtual machine running Linux, Windows, or macOS. Note, macOS is not available on installations of CircleCI server v2.x.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -240,10 +240,10 @@ jobs:
 #...
 ```
 
-## Image
-{: #image }
+## Images
+{: #images }
 
-An image is a packaged system that has instructions for creating a running container.
+An image is a packaged system that includes instructions for creating a running container.
 The primary container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
 
  ```yaml

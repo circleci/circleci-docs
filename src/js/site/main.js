@@ -2,9 +2,6 @@ import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
 
 hljs.initHighlightingOnLoad();
-hljs.initLineNumbersOnLoad({
-  singleLine: true,
-});
 
 const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
 const hideEvents = ['mouseout', 'mouseleave', 'blur'];
