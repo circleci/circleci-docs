@@ -596,7 +596,7 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 | `CIRCLE_REPOSITORY_URL`{:.env_var}        | 文字列  | GitHub または Bitbucket リポジトリ URL                                                                                                                                  |
 | `CIRCLE_SHA1`{:.env_var}                  | 文字列  | 現在のビルドの前回のコミットの SHA1 ハッシュ                                                                                                                                       |
 | `CIRCLE_TAG`{:.env_var}                   | 文字列  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳しくは [Git タグを使ったジョブの実行]({{site.baseurl}}/2.0/workflows/#executing-workflows-for-a-git-tag)を参照してください。                            |
-| `CIRCLE_USERNAME`{:.env_var}              | 文字列  | パイプラインをトリガーしたユーザーの GitHub または Bitbucket ユーザー名                                                                                                                   |
+| `CIRCLE_USERNAME`{:.env_var}              | 文字列  | The GitHub or Bitbucket username of the user who triggered the pipeline (only if the user has a CircleCI account).                                              |
 | `CIRCLE_WORKFLOW_ID`{:.env_var}           | 文字列  | 現在のジョブのワークフロー インスタンスの一意の識別子。 この識別子は、特定のワークフロー インスタンス内のすべてのジョブで同じです。                                                                                             |
 | `CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | 文字列  | An identifier for the [workspace]({{site.baseurl}}/2.0/glossary/#workspace) of the current job. この識別子は、特定のワークスペース内のすべてのジョブで同じです。                                |
 | `CIRCLE_WORKING_DIRECTORY`{:.env_var}     | 文字列  | 現在のジョブの `working_directory` キーの値。                                                                                                                               |
