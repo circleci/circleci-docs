@@ -34,7 +34,7 @@
       <nav class="collapse global-nav--nav" id="global-nav">
         <div class="divider"></div>
 
-        {% include_cached mobile-sidebar.html site=site page=page %}
+        {% include_cached mobile-sidebar.html site=site page=page sidenav=include.sidenav %}
         <div class="global-nav--list global-nav--external-links lang-selector-wrapper">
           <button id="globe-lang-btn" class="global-nav--language-picker" data-analytics-action="click-outer-cta">
             <img src='{{ site.baseurl }}/assets/img/compass/globe.svg' class="globe-icon"></img>
@@ -73,6 +73,7 @@
         </div>
       </nav>
     </div>
+
   </div>
   <script>
     window.currentLang = "{{lang}}"

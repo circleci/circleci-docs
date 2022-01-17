@@ -1,0 +1,12 @@
+= Using code samples
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+* When using example code snippits, be mindful that people are likely to copy and paste them. Always point out, just before the snippet, which items or values need to be replaced with the reader’s own data – including whether they should replace the surrounding `< >`` or `“ “` if there are any.
+
+* When a user’s data needs to be substituted in a code snippet, always use `< >` , for example, `<my-data>` .
+
+
