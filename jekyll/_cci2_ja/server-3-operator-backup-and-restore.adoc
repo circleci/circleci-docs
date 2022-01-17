@@ -1,12 +1,13 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x のバックアップと復元
+= CircleCI Server v3.x Backup and Restore
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 :icons: font
 :toc: macro
 :toc-title:

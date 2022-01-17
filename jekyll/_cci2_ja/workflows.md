@@ -126,7 +126,7 @@ workflows:
 
 ![順次ジョブを実行するワークフロー]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
-このサンプルの全文は、[順次ワークフローの設定例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
+下記で示した `config.yml` のコードは、シーケンシャルジョブの設定を施した Workflow の例です。
 
 ```yaml
 workflows:
@@ -147,7 +147,7 @@ workflows:
 
 ここに示されているように、依存関係は `requires:` キーを設定することで定義します。 `deploy:` ジョブは、`build`、`test1`、`test2` の各ジョブが正常に完了するまで実行されません。 ジョブは、依存関係グラフ内のすべてのアップストリーム ジョブが実行を完了するまで待機する必要があります。 したがって、`deploy` ジョブは `test2` ジョブを待ち、`test2` ジョブは `test1` ジョブを待ち、`test1` ジョブは `build` ジョブを待ちます。
 
-下記で示した `config.yml` のコードは、順次ジョブの設定を施した ワークフローの例です。
+このサンプルの全文は、[順次ワークフローの構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
 
 ### ファンアウト/ファンイン ワークフローの例
 {: #fan-outfan-in-workflow-example }
@@ -660,8 +660,12 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 
 ## ビデオ: ワークフローに複数のジョブを設定する
 {: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
