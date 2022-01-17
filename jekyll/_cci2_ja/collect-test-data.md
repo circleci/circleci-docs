@@ -632,6 +632,4 @@ Clojure のテスト出力を XML 形式に変換するには、[test2junit](htt
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
-{:.no_toc}
-
-<iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc} <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
