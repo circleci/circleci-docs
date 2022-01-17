@@ -20,11 +20,11 @@ version:
 ## プロジェクト
 {: #projects }
 
-CircleCI プロジェクトは、関連付けられているコード リポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。 プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
+A CircleCI project shares the name of the associated code repository in your [Version Control System]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
 
 プロジェクトのダッシュボードで、以下のいずれかを実行します。
 * VCS で所有者になっているプロジェクトを_セットアップ_する
-* 組織内のプロジェクトを_フォロー_して、パイプラインにアクセスし、プロジェクトのステータスに関する \[メール通知\] ({{ site.baseurl }}/ja/2.0/notifications/) を受け取る
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/2.0/notifications/) for the project's status.
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
@@ -78,7 +78,7 @@ Pipelines represent methods for interacting with your configuration:
 ## ワークフロー
 {: #orbs }
 
-Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/orb-concepts/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
+Orb は、再利用可能なコード スニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 See [Using Orbs]({{ site.baseurl }}/2.0/orb-concepts/) for details about how to use orbs in your config and an introduction to orb design. [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
 
 The graphic above illustrating an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with [the Maven orb](https://circleci.com/developer/orbs/orb/circleci/maven). Here, the orb will setup a default executor that can execute steps with maven and run a common job (`maven/test`).
 
@@ -89,16 +89,16 @@ The graphic above illustrating an example Java configuration could be simplified
 
 Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 指定しなかった場合、`machine` には [デフォルト イメージ](https://circleci.com/ja/docs/2.0/executor-intro/#machine) が含まれます。 `docker` には、プライマリ コンテナで使用する [イメージを指定](https://circleci.com/ja/docs/2.0/executor-intro/#docker) する必要があります。 `macos` には [Xcode バージョン](https://circleci.com/ja/docs/2.0/executor-intro/#macos) を指定する必要があります。 `windows` では、[Windows Orb](https://circleci.com/ja/docs/2.0/executor-intro/#windows) を使用する必要があります。
 
-![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
+![ジョブの図]( {{ site.baseurl }}/assets/img/docs/job.png)
 
-## Executors and images
-{: #executors-and-images }
+## 実行環境
+{: #execution-environments }
 
-Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not available on installations of CircleCI server v2.x.
+Each separate job defined within your config will run in a unique Execution environment. We call them *executors*. An executor can be a Docker container or a virtual machine running Linux, Windows, or macOS. Note, macOS is not available on installations of CircleCI server v2.x.
 
-![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
+![ジョブの図]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
-You can define an image for each executor. An image is a packaged system that has the instructions for creating a running container or virtual machine. CircleCI provide a range of images for use with the Docker executor. For more information see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
+You can define an image for each executor. An image is a packaged system that includes the instructions for creating a running container or virtual machine. CircleCI provides a range of images for use with the Docker executor. For more information, see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
 
 {:.tab.executors.Cloud}
 ```yaml
@@ -210,14 +210,14 @@ jobs:
 # ...
 ```
 
-The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Subsequent images can be added to spin up Secondary/Service Containers.
+The primary container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプの選び方]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。 Subsequent images can be added to spin up secondary/service containers.
 
-When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
+When using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
 ## ステップ
 {: #steps }
 
-ステップとは、ジョブを実行するために行う必要があるアクションのことです。 ステップは通常、実行可能なコマンドの集まりです。 たとえば以下の例では、`checkout` ステップが SSH コマンドでジョブのソース コードをチェックアウトします。 次に、`run` ステップが、デフォルトで非ログイン シェルを使用して、`make test` コマンドを実行します。 Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
+ステップとは、ジョブを実行するために行う必要があるアクションのことです。 ステップは通常、実行可能なコマンドの集まりです。 For example, the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step, which is a built-in step available across all CircleCI projects, checks out the source code for a job over SSH. 次に、`run` ステップが、デフォルトで非ログイン シェルを使用して、`make test` コマンドを実行します。 Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
 ```yaml
 #...
@@ -240,9 +240,9 @@ jobs:
 ```
 
 ## イメージ
-{: #image }
+{: #images }
 
-イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリ コンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージとして定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
+An image is a packaged system that includes instructions for creating a running container. The primary container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
 
  ```yaml
  version: 2
@@ -287,13 +287,13 @@ jobs:
 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
 
 {:.tab.workflows.Cloud}
-![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server_3}
-![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server_2}
-![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
@@ -504,10 +504,10 @@ workflows:
 ```
 {% endraw %}
 
-## キャッシュ、ワークスペース、アーティファクト
+## Caches, workspaces, and artifacts
 {: #caches-workspaces-and-artifacts }
 
-![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 ビルドを高速化するために、以前のジョブに含まれる依存関係をキャッシュする特別なステップを各ジョブに追加できます。
 
@@ -764,13 +764,13 @@ jobs:
 ```
 {% endraw %}
 
-Note the following distinctions between Artifacts, Workspaces, and Caches:
+Note the following distinctions between artifacts, workspaces, and caches:
 
-| タイプ      | ライフタイム               | 用途                                                    | Example                                                                                                                                      |
-| -------- | -------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 数か月                  | 長期アーティファクトを保存します。                                     | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.             |
-| ワークスペース  | Duration of workflow | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。 | The `attach_workspace` copies and re-creates the entire workspace content when it runs.                                                      |
-| キャッシュ    | 数か月                  | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。         | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
+| タイプ      | ライフタイム    | 用途                                                    | 例                                                                                                                                            |
+| -------- | --------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                     | **[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に表示されます。                            |
+| ワークスペース  | ワークフローの期間 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                        |
+| キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。         | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
@@ -779,4 +779,4 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
+`jobs` と `steps` のキーとオプションの使用方法については、「[Orb、ジョブ、ステップ、ワークフロー]({{ site.baseurl }}/ja/2.0/jobs-steps/)」を参照してください。
