@@ -310,7 +310,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the [`aws_auth` field]({{ site.baseurl }}/2.0/configuration-reference/#docker-machine-macos-windows-executor) as in the following example:
 
 ```yaml
 jobs:
