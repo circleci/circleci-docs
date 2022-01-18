@@ -38,7 +38,6 @@
     "@optimizely/optimizely-sdk": "4.6.2",
     "@popperjs/core": "^2.10.1",
     "highlightjs-badge": "0.1.9",
-    "highlightjs-line-numbers.js": "^2.8.0",
     "jquery": "3.6.0",
     "js-cookie": "2.2.1",
     "lodash.debounce": "4.0.8",
