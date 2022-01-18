@@ -322,7 +322,7 @@ VALUES (
 {: #example-mssql-project }
 
 The following example runs a maven build in the primary container and spins up a Microsoft SQL Server in a secondary container.
-It waits for the database to start up with the `wait-for` ORB and then runs `sqlcmd` to create a test database.
+It waits for the database to start up with the `nc` shell command and then runs `sqlcmd` to create a test database.
 Finally it runs the maven build and tests against the database `circle_test` on `localhost:1433`
 The test user is `sa` to keep it simple (the database is temporary just to run the tests, so security is not really an issue).
 
@@ -330,9 +330,6 @@ The test user is `sa` to keep it simple (the database is temporary just to run t
 
 ```yaml
 version: 2.1
-
-orbs:
-  wait-for: cobli/wait-for@0.0.2
 
 var:
   job:
@@ -359,12 +356,16 @@ jobs:
       - run:
           name: Install packages
           command: sudo apt-get update -qq && sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-      # See documentation at: https://circleci.com/developer/orbs/orb/cobli/wait-for#commands-port
-      - wait-for/port:
-          description: wait for MS SQL Server
-          timeout: 600
-          seconds-between-retries: 10
-          port: 1433
+      - run:
+          name: Wait for MS SQL Server
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 1433 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MS SQL Server && exit 1
       - run:
           name: Create test database
           command: /opt/mssql-tools/bin/sqlcmd -U sa -P YourStrongDbPassword -Q "CREATE DATABASE circle_test"
