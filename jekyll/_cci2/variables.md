@@ -11,6 +11,7 @@ version:
 This page is a reference for all built-in values available for use in your CircleCI projects.
 
 ## Built-in environment variables
+{: #built-in-environment-variables }
 
 The following built-in environment variables are available for all CircleCI projects. Environment variables are scoped at the job level. They can be used within the context of a job but do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
 
@@ -20,6 +21,7 @@ to export the new environment variables using `BASH_ENV`. For more details, see 
 {% include snippets/built-in-env-vars.md %}
 
 ## Pipeline values
+{: #pipeline-values }
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
