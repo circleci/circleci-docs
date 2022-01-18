@@ -20,11 +20,11 @@ version:
 ## プロジェクト
 {: #projects }
 
-A CircleCI project shares the name of the associated code repository in your [Version Control System]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
+CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS)内の、関連するコードリポジトリの名前を共有します。 プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
 
 プロジェクトのダッシュボードで、以下のいずれかを実行します。
 * VCS で所有者になっているプロジェクトを_セットアップ_する
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/2.0/notifications/) for the project's status.
+* 組織内のプロジェクトを_フォロー_して、パイプラインにアクセスし、プロジェクトのステータスに関する[メール通知]({{site.baseurl }}/ja/2.0/notifications/)を受け取る
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
@@ -51,7 +51,7 @@ CircleCI の設定はお客様のプロジェクトの様々なニーズに合�
 
 The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements:
 
-![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
+![設定要素]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
 ## ユーザー種別
 {: #user-types }
@@ -766,11 +766,11 @@ jobs:
 
 Note the following distinctions between artifacts, workspaces, and caches:
 
-| タイプ      | ライフタイム    | 用途                                                    | 例                                                                                                                                            |
-| -------- | --------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                     | **[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に表示されます。                            |
-| ワークスペース  | ワークフローの期間 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                        |
-| キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。         | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
+| タイプ      | ライフタイム    | 用途                                                          | 例                                                                                                                                            |
+| -------- | --------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                           | **[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に表示されます。                            |
+| ワークスペース  | ワークフローの期間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチする。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                        |
+| キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。               | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
