@@ -31,7 +31,7 @@ In the primary image the config defines an environment variable with the `enviro
 Set the POSTGRES_USER environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
 ```yml
-      - image: circleci/postgres:14.0
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -49,7 +49,7 @@ jobs:
     # Primary container image where all commands run
 
     docker:
-      - image: circleci/python:3.10.0-browsers
+      - image: cimg/python:3.10.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -58,7 +58,7 @@ jobs:
 
     # Service container image
 
-      - image: circleci/postgres:12.0
+      - image: cimg/postgres:12.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
