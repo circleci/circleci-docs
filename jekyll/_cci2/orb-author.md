@@ -49,12 +49,12 @@ The name of your repository is not critical, but we recommend something similar 
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation.**
 <br>
-To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
+To initialize a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
 <!---->
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
+To initialize a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
@@ -72,7 +72,7 @@ circleci orb init /path/to/myProject-orb --private
   No, I'll handle everything myself.
 ```
 <!---->
-    When choosing the manual option, see [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
+    When choosing the manual option, see [Manual Orb Authoring Process]({{site.baseurl}}/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
 
     When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included.
 
@@ -384,12 +384,12 @@ To see which categorizations have been applied an orb, check the output of `circ
 
 List your available orbs using the CLI:
 
-To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
 ```sh
 circleci orb list <my-namespace>
 ```
 
-To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
 ```sh
 circleci orb list <my-namespace> --private
 ```
