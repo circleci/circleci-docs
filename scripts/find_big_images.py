@@ -42,6 +42,7 @@ def make_img_dict(imgPath, Img):
         "path": imgPath,
         "width": Img.width,
         "height": Img.height,
+        "PIL_Image": Img,
         "size":   os.stat(imgPath).st_size
     }
     return f
@@ -71,6 +72,18 @@ def print_report():
         imgSize = convert_unit(img["size"], SIZE_UNIT.MB)
         print ("{:<60} | {:<7} | {:<7} | {:<7}".format(path,  img["width"], img["height"], imgSize))
 
+
+def resize_image():
+   """If image is larger than img_size, resize it to img_size"""
+   for idx, img in enumerate(Images):
+      # If you want to resize images and keep their aspect ratios, then you
+      # should instead use the thumbnail() function to resize them. This also
+      # takes a two-integer tuple argument representing the maximum width and
+      # maximum height of the thumbnail.
+      if img["width"] > 1920 or img["height"] > 1920:
+         img["PIL_Image"].thumbnail((1920, 1920))
+         img["PIL_Image"].save(img["path"])
+
 def write_csv():
     keys = Images[0].keys()
     with open('images.csv', 'w', newline='') as output_file:
@@ -78,6 +91,8 @@ def write_csv():
         dict_writer.writeheader()
         dict_writer.writerows(Images)
 
+
 get_img_data()
-print_report()
-write_csv()
+# print_report()
+# write_csv()
+resize_image()
