@@ -30,7 +30,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 
 Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
 
-### How do I migrate from Jenkins to CircleCI?
+### Jenkins から CircleCI  へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
 
