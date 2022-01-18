@@ -156,14 +156,9 @@ The bucket used for server.
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
 
 ====== Authentication
-One of the following is required. Either select IAM keys and provide:
 
 * *Service Account JSON (required)* - 
 A JSON format key of the Service Account to use for bucket access.
-
-Or select IAM role and provide:
-
-* *Service Account File (required)* - Service account file for the https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity].
 
 ==== Postgres, MongoDB, Vault settings
 
