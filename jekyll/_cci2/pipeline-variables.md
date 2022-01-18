@@ -21,7 +21,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#pipeline-values).
 
-{% include snippets/pipeline-values.adoc %}
+{% include snippets/pipeline-values.md %}
 
 Usage example:
 

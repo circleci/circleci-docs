@@ -1,33 +1,29 @@
 ---
+layout: classic-docs
+title: "Project values and variables"
 description: A list of all built-in variables for your CircleCI projects.
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
-= Project values and variables
-:page-layout: classic-docs
-:page-liquid:
-:icons: font
-:toc: macro
-:toc-title:
 
 This page is a reference for all built-in values available for use in your CircleCI projects.
 
-== Built-in environment variables
+## Built-in environment variables
 
 The following built-in environment variables are available for all CircleCI projects. Environment variables are scoped at the job level. They can be used within the context of a job but do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
 
-NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step
-to export the new environment variables using `BASH_ENV`. For more details, see [Setting an Environment Variable in a Shell Command](#setting-an-environment-variable-in-a-shell-command).
+**Note**: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step
+to export the new environment variables using `BASH_ENV`. For more details, see [Setting an Environment Variable in a Shell Command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
 
-{% include snippets/built-in-env-vars.adoc %}
+{% include snippets/built-in-env-vars.md %}
 
-== Pipeline values
+## Pipeline values
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
-{% include snippets/pipeline-values.adoc %}
+{% include snippets/pipeline-values.md %}
 
 For example:
 
