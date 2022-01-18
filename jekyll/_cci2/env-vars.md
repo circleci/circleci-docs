@@ -565,7 +565,7 @@ Start a run with the POST API call, see the [new build](https://circleci.com/doc
 ## Built-in environment variables
 {: #built-in-environment-variables }
 
-Built-in environment variables are exported in each build and can be used for more complex testing or deployment. 
+Built-in environment variables are exported in each build and can be used for more complex testing or deployment.
 
 {% include snippets/built-in-env-vars.adoc %}
 
