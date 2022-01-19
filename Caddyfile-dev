@@ -1,4 +1,0 @@
-ui.circleci.com
-
-reverse_proxy localhost:4000
-tls internal
