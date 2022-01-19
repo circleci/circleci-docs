@@ -4,6 +4,7 @@ title: AWS ECR/ECS へのデプロイ
 description: CircleCI を使用した AWS ECR から ECS へのデプロイ方法
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -122,7 +123,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows/)」について参照してください。
+ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/2.0/workflows/)」について参照してください。
 
 ## 関連項目
 {: #see-also }

@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: "デプロイ"
-short-title: "デプロイ"
+title: デプロイ
+description: このドキュメントを参考に、CircleCI を、ほぼすべてのサービスにデプロイできるように構成できます。
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -11,7 +12,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
 
 ## Amazon Web Services
-ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。
+{: #amazon-web-services }
 
 ```
     steps:
@@ -150,4 +151,4 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
             dotnet nuget push --source "${NUGET_FEED_URL}" --api-key="${NUGET_KEY}" <output-directory>/*.nupkg
 ```
 
-Use the above examples to get started with automating deployment of green builds to your desired targets.
+ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。

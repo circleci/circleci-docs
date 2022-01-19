@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "言語ガイド: Scala"
 short-title: "言語ガイド: Scala"
-description: "CircleCI 2.0 言語ガイド: Scala"
+description: "CircleCI 言語ガイド: Scala"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -30,7 +31,7 @@ version:
 ## 前提条件
 {: #prerequisites }
 
-CircleCI 2.0 では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
+CircleCI では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
 
 ```
 mkdir .circleci/
@@ -42,7 +43,7 @@ touch .circleci/config.yml
 ### Scala の config.yml ファイル
 {: #scala-configyml-file }
 
-最初に、新しく作成した `config.yml` を任意のテキスト エディタで開き、以下の CircleCI 2.0 スキーマをファイルに貼り付けます。 以下に、2.0 構成の全文を示します。
+To get started, open the newly created `config.yml` in your favorite text editor and paste the following CircleCI schema into the file. 以下に、2.0 構成の全文を示します。
 
 ```yaml
 version: 2
@@ -118,7 +119,7 @@ jobs:
 
 docker/image キーは、ビルドに使用する Docker イメージを表します。 この例では、[Docker Hub](https://hub.docker.com/_/openjdk/) にある公式の `openjdk:8` イメージを使用します。 これには、この Scala プロジェクトに必要なネイティブ Java コンパイラが含まれます。
 
-environment/SBT_VERSION は、以降のコマンドでダウンロードする sbt のバージョンを指定する環境変数です。これは Scala アプリケーションのコンパイルに必要です。
+environment/SBT_VERSION は、以降のコマンドでダウンロードする sbt のバージョンを指定する環境変数です。 これは Scala アプリケーションのコンパイルに必要です。
 
 ```yaml
 version: 2
@@ -208,8 +209,8 @@ steps/run キーは、実行するアクションのタイプを指定します�
 
 **Note:** `cat /dev/null` is normally used to prevent a command from hanging if it prompts for interactive input and does not detect whether it is running with an interactive TTY. `sbt` will prompt on failures by default.
 
-- [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
-- [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
+- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
+- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 2.0 スキーマの最後の部分は deploy コマンド キーです。 これは、コンパイルされた samplescala.zip を $CIRCLE_ARTIFACTS/ ディレクトリに移動し、その名前を変更します。  その後、指定された AWS S3 バケットにファイルがアップロードされます。
 
@@ -227,6 +228,6 @@ steps:
 {: #see-also }
 {:.no_toc}
 
-- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
 - デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。

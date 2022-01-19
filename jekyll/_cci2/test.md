@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
 title: "Test"
-description: "CircleCI 2.0 test automation setup"
+description: "CircleCI test automation setup"
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -28,9 +29,9 @@ Document | Description
 <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a> | How to set up and customize testing for an iOS application with CircleCI.
 [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) | How to glob and split tests inside a job.
 <a href="{{ site.baseurl }}/2.0/postgres-config/">Database Configuration Examples</a> | Example configuration files for PostgreSQL and MySQL.
-[Configuring Databases]({{ site.baseurl }}/2.0/databases/) | Overview of using service images and basic steps for configuring database tests in CircleCI 2.0.
+[Configuring Databases]({{ site.baseurl }}/2.0/databases/) | Overview of using service images and basic steps for configuring database tests in CircleCI.
 **Code Signing** |
-<a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0.
+<a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI.
 {: class="table table-striped"}
 
 ## Deploy

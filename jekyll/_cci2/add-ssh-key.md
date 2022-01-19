@@ -6,6 +6,7 @@ description: "How to Add an SSH Key to CircleCI"
 order: 20
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -21,7 +22,7 @@ There are two reasons to add SSH keys to CircleCI:
 
 If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
 
-Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
+Otherwise, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
 
 **Note:** You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
 
@@ -30,8 +31,8 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
-### CircleCI Cloud
-{: #circleci-cloud }
+### CircleCI cloud or server 3.x
+{: #circleci-cloud-or-server-3-x }
 
 1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
@@ -49,8 +50,8 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 
 8. Click the **Add SSH Key** button.
 
-### CircleCI Server
-{: #circleci-server }
+### CircleCI server 2.19.x
+{: #circleci-server-2-19-x }
 
 1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
 

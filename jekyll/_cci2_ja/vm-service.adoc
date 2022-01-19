@@ -1,9 +1,10 @@
 ---
+description: View how to set up and customize VM service for your CircleCI server v2 installation. VM Service controls how machine (Linux and Windows images) and remote Docker jobs are run.
 version:
 - Server v2.x
-- サーバー管理
+- Server Admin
 ---
-= VM サービス
+= VM Service
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -18,10 +19,10 @@ toc::[]
 
 == 概要
 
-AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/2.0/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/2.0/executor-types/#using-machine[`machine` Executor] を使用してジョブを実行できます。
+VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
 
 .VM サービスの設定
-image::vm-service.png[Configuring VM Service on CircleCI Server,width=120%]
+image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
 
 CAUTION: 管理コンソール設定に変更を加えると、CircleCI アプリケーションが再起動し、ダウンタイムが生じます。
 
@@ -31,7 +32,7 @@ VM サービスを設定する場合、管理コンソールの設定で [AWS EC
 
 == 1.  AMI の指定
 
-以下のセクションで説明するように、VM サービス用にカスタムの https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon マシン イメージ] (AMI) を指定できます。 カスタム イメージを指定しない場合、すべての `machine` Executor とリモート Docker ジョブは、CircleCI のデフォルトの AMI (下記参照) のいずれかで構築されたインスタンスで実行されます。このデフォルトの AMI は、Ubuntu 16.04、Docker バージョン 18.06.3 を使用し、一般的な言語、ツール、フレームワークのセットがインストールされています。 詳細については、https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[image-builder リポジトリの `picard-vm-image` ブランチ]を参照してください。 Windows ジョブを実行するには、Windows AMI を指定する必要があります。これを指定しないと、Windows ジョブの実行は失敗します。
+以下のセクションで説明するように、VM サービス用にカスタムの https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon マシン イメージ] (AMI) を指定できます。 カスタム イメージを指定しない場合、すべての `machine` Executor とリモート Docker ジョブは、CircleCI のデフォルトの AMI (下記参照) のいずれかで構築されたインスタンスで実行されます。 このデフォルトの AMI は、Ubuntu 16.04、Docker バージョン 18.06.3 を使用し、一般的な言語、ツール、フレームワークのセットがインストールされています。 詳細については、https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[image-builder リポジトリの `picard-vm-image` ブランチ]を参照してください。 Windows ジョブを実行するには、Windows AMI を指定する必要があります。 これを指定しないと、Windows ジョブの実行は失敗します。
 
 === デフォルトの VM サービス用 Linux AMI
 
@@ -54,7 +55,7 @@ VM サービスを設定する場合、管理コンソールの設定で [AWS EC
 
 お使いの CircleCI 環境に合わせて VM サービス イメージをカスタマイズすることで、Docker や Docker Compose のバージョンを指定したり、CI/CD パイプラインに依存関係を追加インストールしたりすることができます。 リモート Docker や `machine` Executor を使用するジョブの個別の AMI を作成したり、`machine` 向けに Linux と Windows の個別の AMI を指定したりできます。 ベース Linux イメージをカスタマイズしない場合、こうした追加インストールや更新のステップをコミットのたびに実行するように、`config.yml` ファイルのジョブを構成する必要があります。
 
-*CircleCI Server v2.18 以降*では、以下の画像で "1" とマークされているフィールドを使用することで、1 つのカスタム Linux AMI を `machine` ジョブとリモート Docker ジョブの両方に指定できるようになりました。また、"2" とマークされているフィールドにもう 1 つのカスタム AMI を指定することで、それぞれのジョブに異なる設定を使用することもできます。
+*CircleCI Server v2.18 以降*では、以下の画像で "1" とマークされているフィールドを使用することで、1 つのカスタム Linux AMI を `machine` ジョブとリモート Docker ジョブの両方に指定できるようになりました。
 
 .カスタム VM サービス イメージ
 image::vm-service-custom.png[Custom VM Service Images]
@@ -76,25 +77,25 @@ image::vm-service-custom.png[Custom VM Service Images]
 AMI を作成したら、AMI ID を上記スクリーンショットの該当するフィールドにコピーします。
 
 === Windows AMI の作成
-_CircleCI Server v2. 18.3 からサポート_
+_CircleCI Server v2.  18.3 からサポート_
 
 Windows イメージを作成して VM サービスの設定で指定すると、専用の Windows VM でユーザーがジョブを実行できるようになります。 To create your Windows image run through the steps listed in our https://github.com/CircleCI-Public/circleci-server-windows-image-builder[image builder repo], then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
 
 NOTE: Windows イメージは CircleCI Server 上で構築されるため、このプロセスは CircleCI Server が起動してから行うことをお勧めします。 または、別の CircleCI アカウント (クラウド版 CircleCI を含む) を使用してイメージを作成します。
 
 == 2. インスタンス タイプの定義
-使用する AWS インスタンス タイプを定義するためのフィールドは 2 つあります。 1 つ目にはデフォルトのインスタンス タイプを指定します。2 つ目には、ジョブで `large` リソース クラスを指定しているときに使用するインスタンス タイプを設定します。
+使用する AWS インスタンス タイプを定義するためのフィールドは 2 つあります。 2 つ目には、ジョブで `large` リソース クラスを指定しているときに使用するインスタンス タイプを設定します。
 
 == 3. オンデマンド インスタンスと事前割り当てインスタンス
 リモート Docker インスタンスと `machine` Executor インスタンスは、オンデマンドでスピンアップされます。 リモート Docker および `machine` ジョブの実行に備えて、インスタンスを事前に割り当てて稼動させておくこともできます (図 1 の最後 2 つのフィールドを参照)。
 
-WARNING: https://circleci.com/docs/ja/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。*1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
+WARNING: https://circleci.com/docs/ja/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
 
 NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
 == ジョブとインスタンスの管理
 
-リモート Docker 環境または `machine` Executor を使用して実行するジョブは、Nomad サーバーから Nomad クライアントにスケジュールに沿ってディスパッチされ、そこからリモート Docker または `machine` に渡されます。 つまり、リモート Docker および `machine` Executor で実行されるジョブは、通常どおり Nomad CLI を使用して監視できます。 See our <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
+リモート Docker 環境または `machine` Executor を使用して実行するジョブは、Nomad サーバーから Nomad クライアントにスケジュールに沿ってディスパッチされ、そこからリモート Docker または `machine` に渡されます。 つまり、リモート Docker および `machine` Executor で実行されるジョブは、通常どおり Nomad CLI を使用して監視できます。 See our <<nomad#basic-terminology-and-architecture, Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
 
 // add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
 

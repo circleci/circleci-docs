@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.17. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog).
+This document provides a summary of features and product notes for the release of CircleCI server v2.17. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog).
 
 ## What's new in release 2.17
 {: #whats-new-in-release-217 }
@@ -88,13 +88,13 @@ This document provides a summary of features and product notes for the release o
   * Mongo 3.6.12-xenial
   * Redis 4.0.14
 
-* We are removing the 1.0 Single-Box options from CircleCI 2.0. We found a few critical vulnerabilities in our 1.0 build image, and we have long stopped recommending it for trials. If this is absolutely critical to your workflow please reach out to us. This does not impact people who are running 1.0 in clustered mode.
+* We are removing the 1.0 Single-Box options from CircleCI. We found a few critical vulnerabilities in our 1.0 build image, and we have long stopped recommending it for trials. If this is absolutely critical to your workflow please reach out to us. This does not impact people who are running 1.0 in clustered mode.
 
 ## Steps to update to CircleCI Server v2.17
 {: #steps-to-update-to-circleci-server-v217 }
 Steps to update to CircleCI Server v2.17 are as follows:
 
-1. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
+1. Take a snapshot of your installation so you can roll back later if necessary (optional but recommended)
 2. Check you are running Docker v17.12.1 and update if necessary
 3. Update Replicated to v2.34.1 (steps in section below)
 4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
@@ -111,7 +111,7 @@ To take a snapshot of your installation:
 **Note:** It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
 Once you have the snapshot you are free to make changes on the Services machine.
 
-If you do need to rollback at any point, see our [restore from backup](http://localhost:4000/docs/2.0/backup/#restoring-from-backup) guide.
+If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/2.0/backup/#restoring-from-backup) guide.
 
 ### Update Replicated
 {: #update-replicated }

@@ -1,4 +1,5 @@
 ---
+description: "See a summary of features and product notes for the release of CircleCI Server v2.19.x. View requirements for upgrading, notes and best practices, and known issues."
 version:
 - Server v2.x
 - Server Admin
@@ -10,25 +11,27 @@ version:
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
+This document provides a summary of features and product notes for the release of CircleCI server v2.19. パッチ リリースを含むすべての変更の一覧は、https://circleci.com/ja/server/changelog[変更履歴]でご確認ください。 For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration, upgrade guide>>.
 
-## Requirements for Upgrading
+NOTE: CircleCI Server v2.x の更新は、2022 年 3 月に終了します。 CircleCI Server v2.x をご利用のお客様へのサポートは、引き続きご提供いたします。
 
-WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a non-root path, you will need to unset the `OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` environment variable in your output processor customization script. See the https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Customizations Guide] in our documentation for more information on using customization scripts.
+## アップグレードの要件
 
-WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
+WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a non-root path, you will need to unset the `OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` environment variable in your output processor customization script. See the https://circleci.com/ja/docs/2.0/customizations/#service-configuration-overrides[Customizations Guide] in our documentation for more information on using customization scripts.
 
-WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your organization name, there is a <<updating-server#org-rename-script,script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important, this guide>> to update your nomad launch configuration.
 
-## Notes and Best Practices
+WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your organization name, there is a <<updating-server#org-rename-script, script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
 
-* We now require a minimum 32GB of RAM for the Services Machine. 
-* We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
+## 注意事項とベスト プラクティス
+
+* Services マシンには最低 32 GB の RAM が必要になりました。 
+* We made some changes to our Redis configuration in v2.18. Redis を外部処理化している場合は、構成を更新する必要があります。 Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
 * We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to v2.19.
 
-## Known Issues
+## 既知の問題
 
-* On static (non-AWS) installations with `NONE` selected under storage driver settings, tests can be split only by file name or file size. If a user attempts to split tests by timing data, static instances will split them by file name instead.
+* ストレージ ドライバーの設定で `NONE` が選択されている静的な(AWS 以外の) 環境では、テストはファイル名およびファイルサイズによってのみ分割することが可能です。 タイミングデータによりテストを分割しようとすると、静的インスタンスは自動的にファイル名で分割します。
 
 * **If you are using an HTTP proxy for your installation, upgrade to v2.19.02 or above**. We had a known issue around job step logging and docker commands customization that made pre-2.19.2 releases incompatible with an HTTP proxy setup of CircleCI Server.
 
@@ -36,11 +39,15 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 * If any changes have been made to your networking configuration from the default, you may need to run the following steps to ensure you can use SSH to inspect your builds:
 ** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
-** This file should contain the public (if applicable) or private IP of the nomad client
+** このファイルには、Nomad クライアントのパブリック IP アドレス (該当するアドレスがある場合)、 またはプライベート IP アドレスを記載してください。
 +
 TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
+## What's New in v2.19.13
+
+* 各種セキュリティおよび脆弱性対応パッチ
 
 ## What's New in v2.19.12
 
@@ -139,7 +146,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19
 
-* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in Server v2.19].
+* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in server v2.19].
 
 * CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
 

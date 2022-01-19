@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using Notifications"
-short-title: "Using Notifications"
+title: Using Notifications
+description: Learn how to use get CircleCI's job status via Slack, integrated chat, email and web notifications.
 order: 100
 published: true
 version:
@@ -20,7 +20,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -29,7 +29,7 @@ jobs:
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

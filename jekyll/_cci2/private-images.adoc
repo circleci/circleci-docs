@@ -7,6 +7,7 @@ version:
 = Using Docker Authenticated Pulls
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document describes how to authenticate with your Docker registry provider to pull images.
 :icons: font
 :toc: macro
 :toc-title:
@@ -26,7 +27,7 @@ the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[c
 place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
 
 NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
-Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
+Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
 NOTE: Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
 
@@ -49,6 +50,17 @@ jobs:
         auth:
           username: mydockerhub-user  # can specify string literal values
           password: $DOCKERHUB_PASSWORD  # or project environment variable reference
+----
+
+If you have https://docs.docker.com/docker-hub/2fa/[two-factor authentication set up on Docker Hub], you can simply use https://docs.docker.com/docker-hub/access-tokens/[your personal access token] for the `password` key instead.
+For example:
+
+[source,yaml]
+----
+- image: acme-private/private-image:321
+  auth:
+    username: mydockerhub-user
+    password: $DOCKERHUB_ACCESS_TOKEN
 ----
 
 You can also use images from a private repository like https://cloud.google.com/container-registry[gcr.io] or
@@ -195,6 +207,8 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
+ifndef::pdf[]
 ## See also
 
 * https://circleci.com/docs/2.0/configuration-reference[Configuration Reference]
+endif::[]

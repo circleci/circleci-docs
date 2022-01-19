@@ -22,6 +22,8 @@ CircleCI のダイナミック コンフィグ機能では、`セットアップ
 
 ダイナミック コンフィグ機能を使用するには、(`.circleci/` ディレクトリにある) 親設定ファイルの最上部に `setup` キーを追加し、値として `true` を設定します。 これで `config.yaml` が`セットアップ ワークフロー`構成として指定され、ダイナミック コンフィグを利用できるようになります。
 
+**Note**: *At this time, Dynamic Configuration does not work with Scheduled Workflows. We are working on Scheduled Pipelines, which will alleviate this. This feature is expected to launch in the near future. A possible work around can be found on our [Discuss page](https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344).
+
 詳細については、この後の[使用開始に関するセクション](#getting-started-with-dynamic-config-in-circleci)を参照してください。
 
 ## CircleCI のダイナミック コンフィグの使用を開始する
@@ -37,6 +39,8 @@ CircleCI でダイナミック コンフィグの使用を開始するには、�
 ![UI でのダイナミック コンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 これで、プロジェクトで設定ファイルの動的な生成と更新ができるようになりました。
+
+Note: While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will not be used until you add the key `setup` with a value of `true` to that `config.yml`.
 
 ダイナミック コンフィグを使用する場合には、`セットアップ` ワークフローの終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。 詳しくは、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照)。
 
@@ -68,3 +72,7 @@ CircleCI のダイナミック コンフィグを使用する際のパイプラ�
   - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
+
+## さらに詳しく
+{: #learn-more }
+Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.

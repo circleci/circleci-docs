@@ -1,17 +1,15 @@
 ---
 layout: classic-docs
-title: "Pipeline Variables"
-short-title: "Pipeline Variables"
-description: "Detailed information about Pipeline variables, parameters and values"
+title: "Pipeline values and parameters"
+description: "Detailed information about pipeline parameters and values"
 categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
-Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher.
-
-There are two types of pipeline variables:
+Pipeline values and parameters can be used to create reusable pipeline configurations.
 
 * **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
 * **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API.
@@ -21,21 +19,11 @@ There are two types of pipeline variables:
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-Value                       | Description
-----------------------------|--------------------------------------------------------
-pipeline.id                 | A [globally unique id](https://en.wikipedia.org/wiki/Universally_unique_identifier) representing for the pipeline
-pipeline.number             | A project unique integer id for the pipeline
-pipeline.project.git_url    | The URL where the current project is hosted. E.g. https://github.com/circleci/circleci-docs
-pipeline.project.type       | The lower-case name of the VCS provider, E.g. “github”, “bitbucket”.
-pipeline.git.tag            | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
-pipeline.git.branch         | The name of the git branch that was pushed to trigger the pipeline.
-pipeline.git.revision       | The long (40-character) git SHA that is being built.
-pipeline.git.base_revision  | The long (40-character) git SHA of the build prior to the one being built.
-{: class="table table-striped"}
+For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#pipeline-values).
 
-Note: While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
+{% include snippets/pipeline-values.md %}
 
-For example:
+Usage example:
 
 ```yaml
 version: 2.1
@@ -55,7 +43,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-Note: When using the above method to set the variables in the `environment` key if the pipeline variable is empty it will set the variable to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
+**Note:** When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
 
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }
@@ -188,7 +176,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 ## Conditional workflows
 {: #conditional-workflows }
 
-Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy values can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
+Use the [`when` clause](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 

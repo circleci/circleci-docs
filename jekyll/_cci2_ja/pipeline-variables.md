@@ -7,10 +7,10 @@ categories:
   - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
-パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
+パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
 
 パイプライン変数には、次の 2 つの種類があります。
 
@@ -22,21 +22,23 @@ version:
 
 パイプライン値はすべてのパイプライン構成で使用でき、事前に宣言することなく使用できます。
 
-| 値                          | 説明                                                                                    |
-| -------------------------- | ------------------------------------------------------------------------------------- |
-| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。 |
-| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                           |
-| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： https://github.com/circleci/circleci-docs                 |
-| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                              |
-| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                    |
-| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                    |
-| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                             |
-| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字）                                                  |
+| 値                          | 説明                                                                                                                                                                                                                                                                                             |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。                                                                                                                                                                                                          |
+| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                                                                                                                                                                                                                                    |
+| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： 例： https://github.com/circleci/circleci-docs                                                                                                                                                                                                                    |
+| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                                                                                                                                                                                                                                       |
+| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                                                                                                                                                                                                                             |
+| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                                                                                                                                                                                                                             |
+| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                                                                                                                                                                                                                                      |
+| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字） <br/><br/> **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。 |
+| pipeline.in_setup          | True if the pipeline is in the setup phase, i.e. running a [setup workflow]({{ site.baseurl }}/2.0/dynamic-config/).                                                                                                                                                                           |
+| pipeline.trigger_source    | The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`                                                                                                                                                                                               |
+| pipeline.schedule.name     | The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources                                                                                                                                                                |
+| pipeline.schedule.id       | The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources                                                                                                                                                           |
 {: class="table table-striped"}
 
-注: 多くの場合、`pipeline.git.base_revision` は、現在実行しているパイプラインより前のパイプラインを実行する SHA ですが、いくつか注意事項があります。 ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
-
-以下に例を示します。
+例えば下記のようにします。
 
 ```yaml
 version: 2.1
@@ -53,12 +55,12 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-注: `environment`キーで上記の方法で変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+**Note:** When using the above method to set the variables in the `environment` key if the pipeline variable is empty it will set the variable to `<nil>`. 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 ## 設定ファイルにおけるパイプライン パラメーター
 {: #pipeline-parameters-in-configuration }
 
-パイプライン パラメーターは、`.circleci/config.yml` ファイルの一番上にある`parameters` キーを使って宣言します。
+パイプライン パラメーターは、`.circleci/config.yml` のトップ レベルで `parameters` キーを使って宣言します。
 
 パイプライン パラメーターは次のデータ型をサポートしています。
 * 文字列
@@ -66,9 +68,9 @@ jobs:
 * 整数
 * 列挙型
 
-詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。
+詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 
-パイプライン パラメーターは値で参照され、`pipeline.parameters`のスコープの下で設定ファイル内の変数として使用できます。
+パイプライン パラメーターは値として参照され、スコープ `pipeline.parameters` の下で設定ファイル内の変数として使用できます。
 
 以下の例では、2 つのパイプライン パラメーター (`image-tag`、`workingdir`) が設定ファイルの上部で定義され、後続の `build` ジョブで参照されています。
 
@@ -80,7 +82,6 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照 :
-    environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>
     steps:
@@ -95,7 +96,7 @@ jobs:
 
 **注: **この`POST`で`parameters`キーを渡すリクエストは、**シークレットではありません**のでご注意ください。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーする際にパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (メモ: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -109,7 +110,8 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ## パイプライン パラメーターのスコープ
 {: #the-scope-of-pipeline-parameters }
 
-パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ解決することができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、Orb 内でパイプラインのスコープへのアクセスを認めると、カプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が危険にさらされ、脆弱性が表面化する可能性があるためです。
+パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、Orb 内でパイプラインのスコープへのアクセスを認めると、カプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が危険にさらされ、脆弱性が表面化する可能性があるためです。
+
 
 ## 構成プロセスの段階とパラメーターのスコープ
 {: #config-processing-stages-and-parameter-scopes }
@@ -176,7 +178,7 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ## 条件付きワークフロー
 {: #conditional-workflows }
 
-ワークフロー宣言の下で `when` 句（または逆の`unless` 句）を使用すると、真偽値を使ってそのワークフローを実行するかどうかを判断できます。 真偽値は、ブール値、数値、および文字列です。 偽値は、false、0、空の文字列、null、および NaN のいづれかです。 それ以外はすべて真値です。
+Use the [`when` clause](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 この構成の最も一般的な活用方法は、値としてパイプライン パラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 
@@ -198,13 +200,10 @@ workflows:
       - mytestjob
 
 jobs:
-  mytestjob:
-    steps:
-      - checkout
-      - ... # job steps
+...
 ```
 
-上記の例では、以下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
+この例では、下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
 
 ```json
 {

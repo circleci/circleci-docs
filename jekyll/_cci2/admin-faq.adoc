@@ -1,4 +1,6 @@
 ---
+description: "This document is intended for system administrators of self-hosted installations of CircleCI Server. 
+This guide, as well as the rest of our docs, are open-source and available on GitHub."
 version:
 - Server v2.x
 - Admin
@@ -140,7 +142,7 @@ You can find Replicated logs on the Services machine under `/var/log/replicated`
 [discrete]
 ==== 5. Check what Docker containers are currently running
 
-Replicated starts many Docker containers to run CircleCI Server, so it can be useful to check what containers are running.
+Replicated starts many Docker containers to run CircleCI server v2.x, so it can be useful to check what containers are running.
 
 To check what containers are currently running, run `sudo docker ps` and you should see something similar to this output:
 

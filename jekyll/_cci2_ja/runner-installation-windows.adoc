@@ -1,0 +1,44 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= WindowsへのCircleCI ランナーインストール
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このページでは、CircleCI ランナーをWindowsにインストールする方法を説明します。 
+
+NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
+
+toc::[]
+
+NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、デスクトップ エクスペリエンス搭載 Datacenter エディションでテスト済みです。
+
+With this procedure, you install CircleCI launch agent and its dependencies, i.e., Chocolatey, Git and Gzip, on your Windows Server.
+
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
+
+* また、このセットアップをドメイン環境で行う際には、Windows Server はドメイン メンバーである必要があります。 ランナー インスタンスは、ドメイン コントローラーとして動作している Windows Server では実行できません。
+
+== インストール手順
+
+. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。 
+
+. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+
+. 以下を PowerShell で実行します。
++
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+./Install-CircleCIRunner.ps1
+```
++
+PowerShell インターフェイスにインストール結果が出力されます。
+
+. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[ランナー設定リファレンス]参照） The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+
+After setup completes, the launch agent starts automatically and begins looking for jobs to process.

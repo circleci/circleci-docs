@@ -1,11 +1,16 @@
+---
+title: Migrating from Buildkite
+---
+
 = Migrating from Buildkite
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Buildkite to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from Buildkite to CircleCI. 
+This document provides an overview of how to migrate from Buildkite to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
@@ -61,7 +66,7 @@ The Buildkite and CircleCI configurations will be different. It may be helpful t
 |===
 | Buildkite | CircleCI
 
-2+| Define a job that executes a single build step. 
+2+| Define a job that executes a single build step.
 
 a|
 [source, yaml]
@@ -114,7 +119,7 @@ a|
 steps:
   - label: 'job1'
     command: 'make build dependencies'
- 
+
   - label: 'job2'
     command: 'make build artifacts'
 
@@ -192,7 +197,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"

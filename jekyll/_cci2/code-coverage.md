@@ -8,6 +8,7 @@ order: 50
 sitemap: false
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -21,7 +22,7 @@ or using partners.
 {:toc}
 
 
-# Viewing Coverage on CircleCI
+## Viewing Coverage on CircleCI
 {: #viewing-coverage-on-circleci }
 
 You can upload your code coverage reports directly to CircleCI. First, add a
@@ -393,7 +394,7 @@ Read more about Codecov's orb in their [guest blog post](https://circleci.com/bl
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://docs.coveralls.io/)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
+[environment variables]( {{ site.baseurl }}/2.0/env-vars/).
 
 Coveralls will automatically handle the merging of coverage stats in
 concurrent jobs.

@@ -6,6 +6,7 @@ version:
 = CircleCI Server v3.x Operations Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn about CircleCI server Operators via maintenance and monitoring.
 :icons: font
 :toc: macro
 :toc-title:
@@ -28,7 +29,7 @@ Nomad clients will need access to object storage.
 
 toc::[]
 
-## Build Environment
+## Execution Environment
 
 CircleCI server 3.x uses Nomad as the primary job scheduler. Refer to our https://circleci.com/docs/2.0/nomad/[Introduction to Nomad Cluster Operation]
 to learn more about the job scheduler and how to perform basic client and cluster operations.

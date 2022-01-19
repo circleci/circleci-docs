@@ -2,14 +2,15 @@
 layout: classic-docs
 title: "データベースの構成"
 short-title: "データベースの構成"
-description: "PostgreSQL の構成例"
+description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
 order: 35
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
-ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI 2.0 でデータベースサービスに使用する方法について説明します。
+This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
 
 * 目次
 {:toc}
@@ -91,7 +92,7 @@ jobs:
 
 `postgresql-client-9.6` のインストールの後には、データベース サービスとやり取りするための 3 つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、値をそのテーブルに挿入して、テーブルから選択します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリ コンテナがスピンアップされます。
 
-**メモ:** CircleCI では、複数のコンビニエンス環境変数がプライマリ コンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は並列ビルドに関連しています。 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)を参照してください。
+**メモ:** CircleCI では、複数のコンビニエンス環境変数がプライマリ コンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)を参照してください。
 
 データベース サービスがスピンアップされると、データベースの `circlecitest` および `root` のロールが自動的に作成されます。 データベース サービスは `root` ではなく、`circle` アカウントを使用して実行されます。 次に、データベースのテストが実行されてテーブルが作成され、値がそのテーブルに挿入されます。 テーブルで SELECT が実行されると、値が取得されます。
 

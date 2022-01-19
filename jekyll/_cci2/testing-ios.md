@@ -25,9 +25,9 @@ There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tu
 ## Using the macOS executor
 {: #using-the-macos-executor }
 
-Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your execution environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
-Periodically, we will update the version of macOS each image includes to ensure the build environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the build environment is kept stable.
+Periodically, we will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the execution environment is kept stable.
 
 We announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
@@ -52,6 +52,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
+ `13.2.1` | Xcode 13.2.1 (13C100) | 11.6.2 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6690/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-2-1-released/42334)
+ `13.1.0` | Xcode 13.1 (13A1030d) | 11.6.1 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6269/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-1-rc-released/41577)
  `13.0.0` | Xcode 13.0 (13A233) | 11.5.2 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-rc-released/41256)
  `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)
  `12.4.0` | Xcode 12.4 (12D4e) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)
@@ -63,12 +65,14 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)
  `11.5.0` | Xcode 11.5 (11E608c)    | 10.15.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)
  `11.4.1` | Xcode 11.4.1 (11E503a)    | 10.15.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)
- `11.3.1` | Xcode 11.3.1 (11C505)     | 10.15.1 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)
- `11.2.1` | Xcode 11.2.1 (11B500)     | 10.15.0 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)
- `11.1.0` | Xcode 11.1 (11A1027)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)
- `11.0.0` | Xcode 11.0 (11A420a)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)
+ `11.3.1` **Deprecated** | Xcode 11.3.1 (11C505)     | 10.15.1 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)
+ `11.2.1` **Deprecated** | Xcode 11.2.1 (11B500)     | 10.15.0 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)
+ `11.1.0` **Deprecated** | Xcode 11.1 (11A1027)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)
+ `11.0.0` **Deprecated** | Xcode 11.0 (11A420a)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)
  `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
 {: class="table table-striped"}
+
+**Note:** Xcode images `11.0.0`, `11.1.0`, `11.2.1` and `11.3.1` are deprecated and will be removed on 12 January 2022.
 
 ## Getting started
 {: #getting-started }
@@ -171,7 +175,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -188,7 +192,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -231,56 +235,103 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 
 **Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
 
-### Images using Xcode 11.7 and later
-{: #images-using-xcode-117-and-later }
+### Switching Rubies with the macOS Orb (Recommended)
+{: #switching-rubies-with-the-macos-orb-recommended }
 
-As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later images default to Ruby 2.7 via `chruby`.
+Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
 
-Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
-
-To switch to another Ruby version, see [our chruby documentation](#images-using-xcode-112-and-later). To revert back to the system Ruby, add the following to the beginning of your job:
+To get started, include the orb at the top of your config:
 
 ```yaml
 # ...
-run:
-  name: Set Ruby Version
-  command: echo 'chruby system' >> ~/.bash_profile
+orbs:
+  macos: circleci/macos@2
+```
+
+Then, call the `switch-ruby` command with the version number required. For example, to switch to Ruby 2.6:
+
+```yaml
+steps:
+  # ...
+  - macos/switch-ruby:
+      version: "2.6"
+```
+
+Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+
+To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
+
+```yaml
+steps:
+  # ...
+  - macos/switch-ruby:
+      version: "system"
+```
+
+**Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Xcode 11.6 images and earlier default to the System Ruby.
+
+### Images using Xcode 11.7 and later
+{: #images-using-xcode-117-and-later }
+{:.no_toc}
+
+To switch to another Ruby version, add the following to the beginning of your job.
+
+```yaml
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+```
+
+Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+
+To revert back to the system Ruby, add the following to the beginning of your job:
+
+```yaml
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
 {: #images-using-xcode-112-and-later }
+{:.no_toc}
 
-The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
+To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
 ```yaml
-# ...
-run:
-  name: Set Ruby Version
-  command: echo 'chruby ruby-2.6' >> ~/.bash_profile
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command: echo 'chruby ruby-2.6' >> ~/.bash_profile
 ```
 
 Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Images using Xcode 11.1 and earlier
 {: #images-using-xcode-111-and-earlier }
+{:.no_toc}
 
-Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
-
-To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
-
-If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+To specify a version of Ruby to use, you can [create a file named `.ruby-version`, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
 
 ```yaml
-# ...
-run:
-  name: Set Ruby Version
-  command:  echo "ruby-2.4" > ~/.ruby-version
+steps:
+  # ...
+  - run:
+      name: Set Ruby Version
+      command:  echo "ruby-2.4" > ~/.ruby-version
 ```
 
 Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Installing additional Ruby versions
 {: #installing-additional-ruby-versions }
+
+**Note:** Installing additional Ruby versions consumes a lot of job time. We only recommend doing this if you must use a specific version that is not installed in the image by default.
 
 To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
@@ -396,31 +447,43 @@ After the app has been tested and signed, you are ready to configure deployment 
 
 ### Pre-starting the simulator
 {: #pre-starting-the-simulator }
-{:.no_toc}
 
 Pre-start the iOS simulator before building your
 application to make sure that the simulator is booted in time.
 Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
-To pre-start the simulator, add the following to your
-`config.yml` file, assuming that you are running your tests on an iPhone 11 Pro
-simulator with iOS 13.2:
+To pre-start the simulator, add the macOS Orb (version `2.0.0` or higher) to your config:
 
 ```yaml
-# ...
-steps:
-  - run:
-      name: pre-start simulator
-      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+orbs:
+  macos: circleci/macos@2
 ```
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7
-simulator, as the phone + watch simulator is also present in the build
-image:
+Then call the `preboot-simulator` command, as shown in the example below:
 
-* `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
-* `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
+```yaml
+steps:
+  - macos/preboot-simulator:
+      version: "15.0"
+      platform: "iOS"
+      device: "iPhone 13 Pro Max"
+```
+
+It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
+
+If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS Orb:
+
+```yaml
+steps:
+  - macos/preboot-paired-simulator:
+      iphone-device: "iPhone 13"
+      iphone-version: "15.0"
+      watch-device: "Apple Watch Series 7 - 45mm"
+      watch-version: "8.0"
+```
+
+**Note:** It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
 
 ### Collecting iOS simulator crash reports
 {: #collecting-ios-simulator-crash-reports }
@@ -430,9 +493,9 @@ Often if your `scan` step fails, for example due to a test runner timeout, it is
 
 ```yaml
 steps:
-# ...
-- store_artifacts:
-  path: ~/Library/Logs/DiagnosticReports
+  # ...
+  - store_artifacts:
+    path: ~/Library/Logs/DiagnosticReports
 ```
 
 ### Optimizing Fastlane
@@ -484,7 +547,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -530,7 +593,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     environment:
       FL_OUTPUT_DIR: output
 

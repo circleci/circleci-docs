@@ -21,6 +21,8 @@ include::server-3-operator-overview.adoc[]
 
 include::server-3-operator-metrics-and-monitoring.adoc[]
 
+include::server-3-operator-proxy.adoc[]
+
 include::server-3-operator-user-accounts.adoc[]
 
 include::server-3-operator-orbs.adoc[]
@@ -28,6 +30,8 @@ include::server-3-operator-orbs.adoc[]
 include::server-3-operator-vm-service.adoc[]
 
 include::server-3-operator-externalizing-services.adoc[]
+
+include::server-3-operator-extending-internal-volumes.adoc[]
 
 include::server-3-operator-load-balancers.adoc[]
 

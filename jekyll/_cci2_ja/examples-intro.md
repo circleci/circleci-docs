@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "サンプル"
 short-title: "サンプル"
-description: "CircleCI 2.0 サンプルの紹介"
+description: "CircleCI Examples Introduction"
 categories:
-  - migration
+  - 移行
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -24,7 +25,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 The job's commands run in this container.
+    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
         auth:
@@ -89,24 +90,24 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
 #         command: sudo chmod +x ./gradlew
       - run:
-          name: Download Dependencies
+          name: 依存関係のダウンロード
           command: ./gradlew androidDependencies
 ```
 
 {% endraw %}
 
-## iOS
+## macOS
 {: #macos }
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
 
 ```
 jobs:
   build-and-test:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       ...
       - run:
@@ -123,10 +124,10 @@ jobs:
 
 {:.tab.windowsblock.Cloud}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -140,7 +141,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblock.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```yaml
 version: 2
 

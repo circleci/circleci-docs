@@ -1,11 +1,12 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x ビルド アーティファクト
+= CircleCI Server v3.x build artifacts
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
 :icons: font
 :toc: macro
 :toc-title:
@@ -15,7 +16,7 @@ version:
 toc::[]
 
 == 安全なコンテンツのタイプと安全ではないコンテンツのタイプ
-デフォルトで許可されているのは、あらかじめ決められたタイプのアーティファクトのみです。 これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
+デフォルトでレンダリングが許可されているのは、あらかじめ決められたタイプのアーティファクトのみです。 これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -76,7 +77,7 @@ toc::[]
 [cols=2*, options="header", stripes=even]
 |===
 | カテゴリ
-| タイプ
+| 安全でないタイプ
 
 | テキスト
 | html
@@ -99,3 +100,9 @@ toc::[]
 | テキスト
 | xml
 |===
+
+=== 安全でないタイプの許可
+KOTS管理コンソールのフロントエンド設定にある [Server Unsafe Artifacts]チェックボックスをチェックすることで、必要に応じて安全でないタイプのレンダリングを許可するように選択することができます。
+
+.CircleCI Server v3.x のアーティファクト
+image::server-3-unsafe-artifacts.png[Screenshot highlighting the option to server unsafe build artifacts]

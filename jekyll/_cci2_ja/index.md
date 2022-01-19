@@ -4,6 +4,7 @@ title: "CircleCI ドキュメントへようこそ"
 description: "CircleCI ドキュメントへようこそ"
 permalink: /ja/2.0/
 toc: false
+page-type: index
 ---
 
 CircleCI について理解を深めていただけるよう、チュートリアルやサンプル、ハウツーといった参考情報をまとめました。
@@ -30,7 +31,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
         <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/using-orbs/">Orbs の使用</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/orb-concepts/">Orbs の使用</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
@@ -44,6 +45,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="{{ site.baseurl }}/ja/2.0/writing-yaml/">YAML の記述</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/env-vars/">環境変数の使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/ssh-access-jobs/">SSH を使用したデバッグ</a></li>
+      <li id="full-config-example"><a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#example-full-configuration">Full Config Example</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">

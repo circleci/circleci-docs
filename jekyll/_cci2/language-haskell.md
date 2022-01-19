@@ -2,16 +2,17 @@
 layout: classic-docs
 title: "Language Guide: Haskell"
 short-title: "Haskell"
-description: "Building and Testing with Haskell on CircleCI 2.0"
+description: "Building and Testing with Haskell on CircleCI"
 categories: [language-guides]
 order: 2
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
 This guide will help you get started with a basic Haskell application on
-CircleCI 2.0. If you’re in a rush, feel free to copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+CircleCI. If you’re in a rush, feel free to copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 * TOC
 {:toc}

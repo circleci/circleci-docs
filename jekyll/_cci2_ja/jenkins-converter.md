@@ -4,15 +4,17 @@ title: "Introduction to Jenkins Converter"
 short-title: "Jenkins Converter Introduction"
 description: "Starting point for how to use the Jenkins Converter"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
+noindex: true
+sitemap: false
 ---
 
 The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter) is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you to get started building on CircleCI quickly and easily.
 
 Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started building on CircleCI.
 
-## Limitations
+## 制限事項
 {: #limitations }
 
 * A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
@@ -42,7 +44,7 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 ### Executors
 {: #executors }
 
-A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor](https://circleci.com/docs/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
+A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
 
 Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
 
@@ -53,18 +55,18 @@ Depending on the use case, you might require the [machine executor](https://circ
 
 [CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
-### Jobs
+### ジョブ
 {: #jobs }
 
 Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
 
-- [Checkout code](https://circleci.com/docs/2.0/configuration-reference/#checkout)
-- [Resource class](https://circleci.com/docs/2.0/configuration-reference/#resource_class)
-- [Parallelism](https://circleci.com/docs/2.0/configuration-reference/#parallelism)
+- [Checkout code](https://circleci.com/docs/ja/2.0/configuration-reference/#checkout)
+- [Resource class](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class)
+- [Parallelism](https://circleci.com/docs/ja/2.0/configuration-reference/#parallelism)
 - Caches, [saving](https://circleci.com/docs/2.0/configuration-reference/#save_cache) and [restoring](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
-- [Store Artifacts](https://circleci.com/docs/2.0/configuration-reference/#store_artifacts)
+- [Store Artifacts](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 
-### Steps
+### 手順
 {: #steps }
 
 While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
@@ -74,17 +76,17 @@ While the Jenkinsfile Converter attempts to directly translate steps, it does no
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
-| Jenkinsfile Syntax | Approx. CircleCI Syntax                                                                          | Status                                                                                |
-| ------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| agent              | [executor](https://circleci.com/docs/2.0/configuration-reference/#executors-requires-version-21) | Static                                                                                |
-| post               | [when attribute](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute)      | See [when](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) |
-| stages             | [workflows](https://circleci.com/docs/2.0/workflows/)                                            | Supported                                                                             |
-| steps              | [step](https://circleci.com/docs/2.0/jobs-steps/#steps-overview)                                 | Limited                                                                               |
-| environment        | [environment](https://circleci.com/docs/2.0/env-vars/)                                           | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)            |
-| options            | N/A                                                                                              | See [Supported Jenkins Plugins](#supported-jenkins-plugins)                           |
-| parameters         | [parameters](https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration)     | Unsupported                                                                           |
-| triggers           | [cron](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow)                           | Unsupported                                                                           |
-| stage              | [job](https://circleci.com/docs/2.0/configuration-reference/#jobs)                               | Supported                                                                             |
+| Jenkinsfile Syntax | Approx. CircleCI Syntax                                                                             | Status                                                                                |
+| ------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| agent              | [executor](https://circleci.com/docs/ja/2.0/configuration-reference/#executors-requires-version-21) | Static                                                                                |
+| post               | [when attribute](https://circleci.com/docs/ja/2.0/configuration-reference/#the-when-attribute)      | See [when](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) |
+| stages             | [workflows](https://circleci.com/docs/ja/2.0/workflows/)                                            | Supported                                                                             |
+| steps              | [step](https://circleci.com/docs/ja/2.0/jobs-steps/#steps-overview)                                 | Limited                                                                               |
+| environment        | [environment](https://circleci.com/docs/ja/2.0/env-vars/)                                           | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)            |
+| options            | N/A                                                                                                 | See [Supported Jenkins Plugins](#supported-jenkins-plugins)                           |
+| parameters         | [parameters](https://circleci.com/docs/ja/2.0/reusing-config/#using-the-parameters-declaration)     | Unsupported                                                                           |
+| triggers           | [cron](https://circleci.com/docs/ja/2.0/workflows/#scheduling-a-workflow)                           | Unsupported                                                                           |
+| stage              | [job](https://circleci.com/docs/ja/2.0/configuration-reference/#jobs)                               | Supported                                                                             |
 {: class="table table-striped"}
 
 ## Supported Jenkins plugins

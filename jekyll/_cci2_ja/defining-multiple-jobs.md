@@ -1,7 +1,8 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0"
-redirect: /docs/ja/2.0/workflows/
+title: CircleCI のワークフロー
+description: Use this document to learn how workflows support complex job orchestration using a simple set of configuration keys.
+redirect: /ja/docs/2.0/workflows/
 ---
 
-<h1>このページは移動しました。 移動しない場合は、<a href="/docs/ja/2.0/workflows/">ここをクリック</a>してください。</h1>
+<h2>このページは移動しました。 自動的に移動しない場合は、<a href="/docs/ja/2.0/workflows/">ここ</a>をクリックしてください。</h2>

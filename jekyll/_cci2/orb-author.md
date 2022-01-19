@@ -15,7 +15,7 @@ version:
 ## Introduction
 {: #introduction }
 
-This orb authoring guide assumes you have read the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-intro) document and claimed your namespace. At this point you are ready to develop an orb.
+This orb authoring guide assumes you have read the [Introduction to orbs]({{site.baseurl}}/2.0/orb-intro) document, the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-author-intro) document, and claimed your namespace. At this point you are ready to develop an orb.
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our [orb development kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/2.0/reusing-config), they can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
@@ -36,9 +36,10 @@ The orb development kit refers to a suite of tools that work together to simplif
 
 To begin creating your new orb with the orb development kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
-Ensure the organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
+Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
 
-1. **Create a new [GitHub repository](https://github.com/new).**<br/>
+1. **Create a new [GitHub repository](https://github.com/new).**
+<br>
 The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
     When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Write down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
@@ -46,33 +47,46 @@ The name of your repository is not critical, but we recommend something similar 
     **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
     {: class="alert alert-warning"}
 
-1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
-To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
+1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation.**
+<br>
+To initialize a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
+<!---->
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
+To initialize a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
-The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
+<!---->
+    Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Please make sure to add the `--private` flag if you intend to create a private orb.
+    
+    The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
 1. **Choose the fully automated orb setup option.**
+<br>
+<!---->
 ```
-? Would you like to perform an automated setup of this orb?:
-  ▸ Yes, walk me through the process.
-    No, I'll handle everything myself.
+  ? Would you like to perform an automated setup of this orb?:
+      ▸ Yes, walk me through the process.
+  No, I'll handle everything myself.
 ```
-When choosing the manual option, see [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
+<!---->
+    When choosing the manual option, see [Manual Orb Authoring Process]({{site.baseurl}}/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
 
-When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. <br/><br/>
-For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
-Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
+    When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included.
 
-1. **Answer questions to configure and set up your orb.**<br/>
-In the background, the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will also be asked for the remote git repository URL that you obtained back in step 1.<br/><br/>
-The [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) contains a full CI/CD pipeline (described in [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/)) which automatically [packs]({{site.baseurl}}/2.0/orb-concepts/#orb-packing), [tests]({{site.baseurl}}/2.0/testing-orbs/), and publishes your orb. <br/><br/>
-In the setup process you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/2.0/contexts/). Saving this token is necessary for publishing development and production versions of your orb.
+    For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
+
+    Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
+
+1. **Answer questions to configure and set up your orb.**
+<br>
+    In the background, the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will also be asked for the remote git repository URL that you obtained back in step 1.
+
+    The [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) contains a full CI/CD pipeline (described in [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/)) which automatically [packs]({{site.baseurl}}/2.0/orb-concepts/#orb-packing), [tests]({{site.baseurl}}/2.0/testing-orbs/), and publishes your orb.
+
+    In the setup process you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/2.0/contexts/). Saving this token is necessary for publishing development and production versions of your orb.
 
     **Ensure the context is restricted**
     <br/>
@@ -83,19 +97,24 @@ In the setup process you will be asked if you would like to save your [Personal 
     For more information, see the [Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
     {: class="alert alert-warning"}
 
-1. **Push the changes up to Github.**<br/>
-During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com. Run the following command from a separate terminal when prompted to do so, substituting the name of your default branch:
-```bash
-git push origin <default-branch>
-```
-Once complete, return to your terminal and confirm the changes have been pushed.
+1. **Push the changes up to Github.**
+<br>
+    During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com. Run the following command from a separate terminal when prompted to do so, substituting the name of your default branch:
+    ```bash
+    git push origin <default-branch>
+    ```
+    Once complete, return to your terminal and confirm the changes have been pushed.
 
-1. **Complete and write your orb.**<br/>
-The CLI will finish by automatically following your new orb project on CircleCI and generating the first development version `<namespace>/<orb>@dev:alpha` for testing (a hello-world sample).<br/><br/>
-You will be provided with a link to the project building on CircleCI where you can view the validation, packing, testing, and publication process.
-You should also see the CLI has automatically migrated you into a new development branch, named `alpha`.<br/><br/>
-From your new branch you are now ready to make and push changes. From this point on, on every commit, your orb will be packed, validated, tested (optional), and can be published.<br/><br/>
-When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
+1. **Complete and write your orb.**
+<br>
+    The CLI will finish by automatically following your new orb project on CircleCI and generating the first development version `<namespace>/<orb>@dev:alpha` for testing (a hello-world sample).
+
+    You will be provided with a link to the project building on CircleCI where you can view the validation, packing, testing, and publication process.
+    You should also see the CLI has automatically migrated you into a new development branch, named `alpha`.
+
+    From your new branch you are now ready to make and push changes. From this point on, on every commit, your orb will be packed, validated, tested (optional), and can be published.
+
+    When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
 ### Writing your orb
 {: #writing-your-orb }
@@ -365,12 +384,12 @@ To see which categorizations have been applied an orb, check the output of `circ
 
 List your available orbs using the CLI:
 
-To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
 ```sh
 circleci orb list <my-namespace>
 ```
 
-To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
 ```sh
 circleci orb list <my-namespace> --private
 ```

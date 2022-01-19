@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Settings"
-short-title: "Settings"
-description: "Summary of project and org settings"
+title: "設定"
+short-title: "設定"
+description: "プロジェクト設定および組織設定の概要"
 categories:
   - settings
 order: 2
@@ -20,7 +20,7 @@ The guides included in this Settings section of the CircleCI docs cover features
 * [Using Contexts]({{ site.baseurl }}/2.0/contexts/), including creating, managing and restricting contexts, and security considerations.
 * [Setting up iOS code signing]({{ site.baseurl }}/2.0/ios-codesigning/) for your iOS project on CircleCI.
 
-CircleCI provides Project and Org settings with encrypted storage in the CircleCI app.
+CircleCI は、CircleCI アプリケーション内でプロジェクト設定と組織設定のための暗号化ストレージを提供しています。
 
 ## Project settings page
 {: #project-settings-page }
@@ -28,15 +28,21 @@ CircleCI provides Project and Org settings with encrypted storage in the CircleC
 {:.tab.settingsscreenshot.Cloud}
 ![settings]( {{ site.baseurl }}/assets/img/docs/project-settings-cloud.png)
 
-{:.tab.settingsscreenshot.Server}
+{:.tab.settingsscreenshot.Server_3}
+![settings]( {{ site.baseurl }}/assets/img/docs/project-settings-cloud.png)
+
+{:.tab.settingsscreenshot.Server_2}
 ![settings]( {{ site.baseurl }}/assets/img/docs/settings.png)
 
 ## Organization settings page
 {: #organization-settings-page }
 
 {:.tab.orgsettingsscreenshot.Cloud}
-![settings]( {{ site.baseurl }}/assets/img/docs/org-settings-cloud.png)
+![settings]( {{ site.baseurl }}/assets/img/docs/org-settings-with-orbs.png)
 
-{:.tab.orgsettingsscreenshot.Server}
+{:.tab.orgsettingsscreenshot.Server_3}
+![settings]( {{ site.baseurl }}/assets/img/docs/org-settings-with-orbs.png)
+
+{:.tab.orgsettingsscreenshot.Server_2}
 ![settings]( {{ site.baseurl }}/assets/img/docs/plan-settings.png)
 

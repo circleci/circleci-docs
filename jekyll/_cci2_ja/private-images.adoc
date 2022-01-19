@@ -4,9 +4,10 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= Docker の認証付きプルの使用
+= Using Docker Authenticated Pulls
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document describes how to authenticate with your Docker registry provider to pull images.
 :icons: font
 :toc: macro
 :toc-title:
@@ -24,8 +25,7 @@ toc::[]
 https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、https://circleci.com/docs/ja/2.0/configuration-reference[config.yml] ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、https://circleci.com/docs/ja/2.0/contexts/[コンテキスト]を作成するか、プロジェクトごとの環境変数を使用します。
 
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
-Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
-Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
+Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
 NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが*必要*なものだけにアクセスできるようにしたりするのにとても便利です。
 
@@ -50,7 +50,18 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ----
 
-また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 たとえば下記のようにします。
+If you have https://docs.docker.com/docker-hub/2fa/[two-factor authentication set up on Docker Hub], you can simply use https://docs.docker.com/docker-hub/access-tokens/[your personal access token] for the `password` key instead.
+たとえば下記のようにします。
+
+[source,yaml]
+----
+- image: acme-private/private-image:321
+  auth:
+    username: mydockerhub-user
+    password: $DOCKERHUB_ACCESS_TOKEN
+----
+
+また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 具体的な例は、次のようになります。
 
 [source,yaml]
 ----
@@ -84,12 +95,7 @@ jobs:
     machine: true
     steps:
       - docker/check:
-          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN がデフォルト値です。
-          存在する場合、自動的に使用されます。
-          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD がデフォルト値です。
-      - docker/pull:
-          images: 'circleci/node:latest'
-          存在する場合、自動的に使用されます。
+          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN がデフォルト値です。存在する場合、自動的に使用されます。
           docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD がデフォルト値です。
       - docker/pull:
           images: 'circleci/node:latest'
@@ -192,6 +198,8 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
-## See also
+ifndef::pdf[]
+## 関連項目
 
-* https://circleci.com/docs/2.0/configuration-reference[設定ファイル リファレンス]
+* https://circleci.com/docs/ja/2.0/configuration-reference[設定ファイル リファレンス]
+endif::[]

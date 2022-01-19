@@ -1,11 +1,16 @@
+---
+title: Migrating from AWS
+---
+
 = Migrating from AWS
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from AWS CodeCommit to CircleCI. 
+This document provides an overview of how to migrate from AWS CodeCommit to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
@@ -60,12 +65,12 @@ The AWS CodeBuild and CircleCI configurations will be different. It may be helpf
 |===
 | AWS | CircleCI
 
-2+| Define a job that executes a single build step. 
+2+| Define a job that executes a single build step.
 
 a|
 [source, json]
 ----
-phases:  
+phases:
   build:
     commands:
        - ./execute-script-for-job1.sh
@@ -172,8 +177,8 @@ workflows:
 a|
 [source, json]
 ----
-# Environments are selected in the CodeBuild 
-# web console or defined in a project  
+# Environments are selected in the CodeBuild
+# web console or defined in a project
 # configuration file:
 {
   "name": "linux project",
@@ -202,7 +207,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -213,9 +218,9 @@ jobs:
 a|
 [source, json]
 ----
-# If custom cache is enabled in the web 
-# console, CLI or CloudFormation, cache 
-# locations can be specified in the 
+# If custom cache is enabled in the web
+# console, CLI or CloudFormation, cache
+# locations can be specified in the
 # buildspec.yml file:
 
 phases:

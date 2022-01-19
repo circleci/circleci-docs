@@ -4,10 +4,11 @@ title: "CircleCI 最適化クックブック"
 short-title: "最適化クックブック"
 description: "最適化クックブック入門編"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -118,7 +119,7 @@ Installing dependencies in the primary container on CircleCI, rather than relyin
 {: #test-execution-optimization }
 {:.no_toc}
 
-Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/ja/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
+Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
 
 The figure below illustrates how overall these changes can reduce the total workflow time.
 
@@ -184,7 +185,7 @@ jobs:
 
 To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run across the CircleCI application project actually decreased the test time **from 26:11 down to 3:55**.
 
-Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/).
+Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
 
 ## Workflows increase deployment frequency
 {: #workflows-increase-deployment-frequency }
@@ -193,19 +194,19 @@ Providing value to your customers is the top goal for any organization, and one 
 
 While many organizations deploy value to customer once per quarter or once per month, the basics of raising this frequency to once per week or once per day is represented by the same type of orchestration added to an organization's value *pipeline*.
 
-To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
+To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of main, without being on the main branch. This is possible with the use of workflow orchestration in your continuous integration suite.
 
 {%comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
 endcomment %}
 
-When you provide developers with a workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
+When you provide developers with a workflow that runs all of their tests in the main environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
 
 {%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
 endcomment %}
 
-A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
+A workflow that runs all tests *as if they were on main* gives developers the confidence they need to merge to main knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
 
-A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed.
+A simple example would configure deployment to run *only* if a change is merged to main and the test jobs have already passed.
 
 For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
 
@@ -220,10 +221,11 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 
-The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
+
+The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to main. If changes happen *on main* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
 
 For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
 
@@ -235,7 +237,7 @@ workflows:
           cron: '0 8 ***'
           filters:
             branches:
-              only: master
+              only: main
     jobs:
       - build
       - test
@@ -245,9 +247,9 @@ workflows:
 The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
 
 
-## See also
+## ブランチでのパイプラインのオプトイン
 {: #see-also }
 {:.no_toc}
 
-- Refer to [Optimizations]({{site.baseurl}}/ja/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
-- Refer to [Caching]({{site.baseurl}}/ja/2.0/caching/#introduction) for high-level information about caching.
+- Refer to [Optimizations]({{site.baseurl}}/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
+- Refer to [Caching]({{site.baseurl}}/2.0/caching/#introduction) for high-level information about caching.

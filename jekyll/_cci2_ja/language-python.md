@@ -7,7 +7,8 @@ categories:
   - language-guides
 order: 7
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -52,7 +53,7 @@ jobs:
 ```
 
 ### Executor タイプの選択
-{: #choose-an-executor-type }
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
@@ -65,12 +66,9 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4  # ビルド ジョブのプライマリ コンテナ
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-**メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
+**メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[ CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
 
 ### 他サービスの追加と環境変数の設定
 {: #add-other-services-and-set-environment-variables }
@@ -101,8 +99,6 @@ jobs:
 
 ### 依存関係のインストール
 {: #install-dependencies }
-
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
@@ -210,7 +206,7 @@ jobs:
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2 
 jobs: # A basic unit of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     # directory where steps are run
@@ -230,20 +226,7 @@ jobs: # A basic unit of work in a run
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # environment variables for the Postgres container.
-          version: 2
-jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: circleci/python:3.6.4 # 各ジョブで Docker Executor のイメージを定義する必要があり、後続のジョブでは別のイメージを定義できます
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2 # サービス コンテナの指定方法を示す例
-        environment:
           POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-        POSTGRES_USER: root
           POSTGRES_DB: circle_test
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
@@ -275,4 +258,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)」を参照してください。
+- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)」を参照してください。

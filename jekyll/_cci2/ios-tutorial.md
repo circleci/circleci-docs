@@ -3,7 +3,7 @@ layout: classic-docs
 title: iOS Project Tutorial
 short-title: iOS Project Tutorial
 categories: [platforms]
-description: Setting Up iOS applications on CircleCI 2.0
+description: Setting Up iOS applications on CircleCI
 order: 20
 version:
 - Cloud
@@ -45,7 +45,7 @@ For iOS projects, it is possible to run your tests with Fastlane Scan as follows
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       ...
       - run:
@@ -102,13 +102,13 @@ version: 2.1
 jobs:
   test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: fastlane scan
   deploy:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - deploy:
@@ -138,4 +138,4 @@ advanced details on configuring iOS projects.
 
 See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for an example of how to build, test and sign an iOS project using
-Fastlane on CircleCI 2.0.
+Fastlane on CircleCI.

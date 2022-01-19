@@ -6,6 +6,7 @@ description: "A guide for migrating from using legacy images to next-gen images.
 order: 30
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -50,8 +51,6 @@ Also, the following image will be renamed:
 
 All Legacy to Next-Gen image changes are captured below in this table:
 
-
-
 | Legacy Image | Next-Gen Image |
 | --- | --- |
 | circleci/buildpack-deps | cimg/base |
@@ -65,13 +64,13 @@ All Legacy to Next-Gen image changes are captured below in this table:
 
 With legacy images, there were 4 different variant tags you could use to get browser testing for a particular image. For example, if you were doing browser testing with the Python v3.7.0 image, you might have used Docker image: circleci/python:3.7.0-browsers. These 4 tags have now been consolidated into a single tag designed to be used together with the [CircleCI Browser Tools orb](https://circleci.com/developer/orbs/orb/circleci/browser-tools).
 
-<table>
-<tr><th>Legacy Variant Tags</th><th>Next-gen Variant Tags</th></tr>
-<tr><td>-browsers</td><td rowspan=4>-browsers + Browser Tools Orb</td></tr>
-<tr><td>-browsers-legacy</td></tr>
-<tr><td>-node-browsers</td></tr>
-<tr><td>-node-browsers-legacy</td></tr>
-</table>
+| Legacy variant tags | Next-gen variant tags |
+| --- | --- |
+| `-browsers` | `-browsers` + browser orb tools  |
+| `-browsers-legacy` | |
+| `-node-browsers` | |
+| `-node-browsers-legacy` | |
+{: class="table table-striped"}
 
 The new, single browsers variant tag includes Node.js, common utilities to use in browser testing such as Selenium, but not the actual browsers. Please note the browsers are no longer pre-installed. Instead, browsers such as Google Chrome and Firefox, as well as their drivers Chromedriver and Gecko, are installed via the `browsers-tools` orb. This provides the flexibility to mix and match the browser versions you need in a build rather than using strictly what CircleCI provides. You can find examples of how to use this orb [here](https://circleci.com/developer/orbs/orb/circleci/browser-tools#usage-install_browsers).
 

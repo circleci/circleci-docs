@@ -5,15 +5,14 @@ short-title: "Using Arm resources on CircleCI"
 description: "Using Arm resources on CircleCI"
 version:
 - Cloud
+- Server v3.x
 ---
 
-# Overview
-{: #overview }
-
 This document will walk you through the setup steps required to use an Arm
-resource on CircleCI. Arm resources are not available on CircleCI Server 1.x or
-2.x.
+resource on CircleCI. Arm resources are available on cloud and server 3.x.
 
+## Overview
+{: #overview }
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
 CircleCI `config.yml` file you can choose the right environment for your job using the
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
@@ -42,16 +41,12 @@ The following Arm resource class is available to all CircleCI customers:
 
 For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
 
-At this moment, Arm resources are only available on our cloud offering. If you
-are a CircleCI Server customer and are looking to try Arm resources, consider
-creating a CircleCI Cloud account, or contact your Customer Success Manager to
-request Arm on Server.
-
 ## Using Arm resources
 {: #using-arm-resources }
 
 Update your `.circleci/config.yml` file to use Arm resources. Consider the example config:
 
+{:.tab.armblock.Cloud}
 ```yaml
 # .circleci/config.yml
 version: 2.1
@@ -80,6 +75,35 @@ workflows:
       - build-large
 ```
 
+{:.tab.armblock.Server_3}
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+  build-large:
+    machine:
+      image: arm-default
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+```
+
 Please note that it is indeed possible to mix various resources in the same
 configuration (and even the same workflow).
 
@@ -96,6 +120,9 @@ configuration (and even the same workflow).
 * If there is software you require that is not available in the image, please
   [open an issue](https://github.com/CircleCI-Public/arm-preview-docs/issues) to
   let us know.
+* In server 3.x, Arm resources are only available when using the EC2 provider
+  for VM service. This is because there are no Arm instances available in GCP.
+
 
 ## Learn More
 {: #learn-more }

@@ -1,44 +1,44 @@
 ---
 layout: classic-docs
-title: Deploying iOS Applications
-short-title: Deploying iOS Applications
+title: iOS アプリケーションのデプロイ
+short-title: iOS アプリケーションのデプロイ
 categories:
-  - platforms
-description: Deploying iOS Applications
+  - プラットフォーム
+description: iOS アプリケーションのデプロイ
 order: 1
 version:
   - Cloud
 ---
 
-This document describes how to configure Fastlane to automatically deploy iOS apps from CircleCI to a distribution service.
+ここでは、CircleCI 上で iOS アプリを配信サービスに自動的にデプロイするための fastlane の設定方法について説明します。
 
-* TOC
+* 目次
 {:toc}
 
-## Overview
+## 概要
 {: #overview }
 {:.no_toc}
 
-Utilising Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta, or release, version of an iOS app to the intended audience.
+fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版の対象ユーザーへの配信に必要な手動ステップが不要になります。
 
-These deployment lanes can be combined with testing lanes so that the app is automatically deployed upon a successful build and test.
+デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/).
+**注意:** 以下のデプロイ例を使用するには、コード署名がプロジェクト用に設定されている必要があります。 コード署名の設定方法については、 [コード署名に関するドキュメント]({{ site.baseurl }}/2.0/ios-codesigning/)をご覧ください。
 
-## Best practices
+## ベストプラクティス
 {: #best-practices }
 
-### Using Git branches
+### Git ブランチの使用
 {: #using-git-branches }
 
-It is advisable to only run your release lane on a specific branch of your git repository, for example a dedicated release/beta branch. This will allow releases on only successful merges into the specified branch, prevent a release every time a push is committed during your development phase. In turn this will also reduce job completion time as uploading to an external service may take some time depending on the size our the iOS app binary. For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) documentation.
+リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローの設定方法については、[ブランチレベルでのジョブの実行]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution)をご覧ください。
 
-### Setting the build number
+### ビルド番号の設定
 {: #setting-the-build-number }
 
-When uploading to a deployment service, it is important to consider the build number of the iOS app binary. Commonly this is set in the `.xcproject` and has to be updated manually to ensure it is unique. If the build number is not updated before each run of the deployment lane, you may find the receiving service rejects the binary due to a build number conflict.
+デプロイサービスにアップロードする際には、iOS アプリのバイナリのビルド番号を考慮することが重要です。 一般的には、 `.xcproject` で設定されていますが、一意になるように手動で更新する必要があります。 各デプロイレーンの実行前にビルド番号が更新されていない場合、受信サービスがビルド番号の競合によりバイナリを拒否することがあります。
 
-Fastlane provides an `increment_build_number` [action](https://docs.fastlane.tools/actions/increment_build_number/) which allows the build number to be modified during the lane execution. As an example, if you want to tie the build number to a particular CircleCI job, consider using the `$CIRCLE_BUILD_NUM` environment variable:
+fastlane は、レーン実行中にビルド番号を変更できる `increment_build_number` [アクション](https://docs.fastlane.tools/actions/increment_build_number/) を提供しています。 たとえば、特定の CircleCI ジョブにビルド番号を関連付けたい場合は、 環境変数 `$CIRCLE_BUILD_NUM` の使用を検討してください。
 
 ```ruby
 increment_build_number(
@@ -46,29 +46,29 @@ increment_build_number(
 )
 ```
 
-## App store connect
+## App Store Connect
 {: #app-store-connect }
 
-### Setting up
+### 設定
 {: #setting-up }
 
-To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account.
+fastlane が iOS バイナリを App Store Connect や TestFlight に自動的にアップロードするように設定するには、fastlane が App Store Connect アカウントにアクセスできるよういくつかのステップを実施する必要があります。
 
-The recommended way to set this up is to generate and use an App Store Connect API key. This prevents issues occurring with 2FA, which is now mandatory for Apple IDs, and is the most reliable way of interacting with the service.
+この設定には、App Store Connect APIキーを生成して使用することをお勧めします。 それにより、Apple ID で必須となっている 2FA で問題が発生することを防ぎ、最も確実な方法でサービスを利用することができます。
 
-To create an API Key, follow the steps outlined in the [Apple Developer Documentation](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api). Once you have the resulting `.p8` file, make a note of the *Issuer ID* and *Key ID* which can be found on the [App Store Connect API Keys page](https://appstoreconnect.apple.com/access/api).
+API キーを作成するには、 [Apple 開発者向けドキュメント](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api)で説明されている手順に従ってください。 その結果 `.p8` を取得したら、[App Store Connect API キーのページ](https://appstoreconnect.apple.com/access/api)に表示される*発行者 ID* と*キー ID* をメモします。
 
-**Note:** Ensure you download the `.p8` file and store it somewhere safe. The file cannot be downloaded again once you navigate away from the App Store Connect portal.
+**注意:** `.p8` ファイルをダウンロードし、安全な場所に保存したことを確認してください。 App Store Connect のポータルから離れてしまうと、ファイルを再度ダウンロードすることはできません。
 
-Next, a few environment variables need to be set. In the project settings on CircleCI, navigate to **Build Settings -> Environment Variables** and add the `FASTLANE_PASSWORD` variable, and set its value to the password for the App Store Connect account.
+次に、いくつかの環境変数を設定する必要があります。 CircleCI プロジェクトで、 **ビルド設定 > 環境変数** に移動し、以下を設定します。
 
-* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID. Example: `6053b7fe-68a8-4acb-89be-165aa6465141`
-* `APP_STORE_CONNECT_API_KEY_KEY_ID` to your Key ID. Example: `D383SF739`
-* `APP_STORE_CONNECT_API_KEY_KEY` to the contents of your `.p8` file. Example: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`
+* 発行者 ID に、`APP_STORE_CONNECT_API_KEY_ISSUER_ID`  (例：`6053b7fe-68a8-4acb-89be-165aa6465141`)
+* キー ID に、`APP_STORE_CONNECT_API_KEY_KEY_ID`    (例: `D383SF739`)
+* `.p8` ファイルの内容に、`APP_STORE_CONNECT_API_KEY_KEY`   (例: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMGByqGSM49AgCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`)
 
-**Note:** To find the contents of the `.p8` file, open it in a text editor. You will need to replace each new line with `\n` so that it forms one long string.
+**注意:** `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
 
-Finally, Fastlane requires some information from us in order to know which Apple ID to use and which app identifier we are targeting. These can be set in the `fastlane/Appfile` as follows:
+最後に、fastlane ではどの Apple ID を使用するか、またどのアプリの識別子をターゲットにするかを知るために、いくつかの情報が要求されます。 これらの情報は、 `fastlane/Appfile` で以下のように設定できます。
 
 ```ruby
 # fastlane/Appfile
@@ -76,14 +76,14 @@ apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
 
-Once this is configured, you just need to call `app_store_connect_api_key` in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
+この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で `app_store_connect_api_key` を呼び出すだけでよくなります。
 
-### Deploying to the App Store
+### App Store へのデプロイ
 {: #deploying-to-the-app-store }
 
-The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The `deliver` action provided by Fastlane is a powerful tool that automates the App Store submission process.
+下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する `deliver` アクションは、App Store への申請プロセスを自動化する強力なツールです。
 
-Deliver also allows various options such as automatic uploading of metadata and screenshots (which can be generated with the [screenshot](https://docs.fastlane.tools/actions/snapshot/) and [frameit](https://docs.fastlane.tools/actions/frameit/) actions). For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
+また、メタデータやスクリーンショット ([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の [配信に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
 
 ```ruby
 # fastlane/Fastfile
@@ -96,10 +96,10 @@ platform :ios do
 
   desc "Upload Release to App Store"
   lane :upload_release do
-    # Get the version number from the project and check against
-    # the latest build already available on App Store Connect, then
-    # increase the build number by 1. If no build is available
-    # for that version, then start at 1
+    # プロジェクトからバージョン番号を取得します。
+    # App Store Connect で既に使用可能な最新のビルドと照合します。
+    # ビルド番号を１増やします。 使用可能なビルドがない場合は、
+    # 1 から始めます。
     increment_build_number(
       build_number: app_store_build_number(
         initial_build_number: 1,
@@ -107,10 +107,10 @@ platform :ios do
         live: false
       ) + 1,
     )
-    # Set up Distribution code signing and build the app
+    # 配信コード署名を設定し、アプリをビルドします。
     match(type: "appstore")
     gym(scheme: "HelloCircle")
-    # Upload the binary to App Store Connect
+    #App Store Connect にバイナリをアップロードします。
     deliver(
       submit_for_review: false,
       force: true
@@ -119,12 +119,12 @@ platform :ios do
 end
 ```
 
-### Deploying to TestFlight
+### TestFlight へのデプロイ
 {: #deploying-to-testflight }
 
-TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the `pilot` action to make managing TestFlight distribution simple.
+TestFlight は、App Store Connect と連動した Apple のベータ版配信サービスです。 fastlane は、TestFlight の配信管理が簡単に行える`pilot` アクションを提供しています。
 
-The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary. Pilot has lots of customisation options to help deliver apps to TestFlight, so it is highly recommended to check out the [pilot documentation](https://docs.fastlane.tools/actions/pilot/) for further information.
+下記の例では、 iOS バイナリを自動的にビルド、署名、アップロードするように fastlane を設定する方法を紹介しています。 Pilot には TestFlight にアプリを配信するためのカスタムオプションがたくさんあります。その詳細を [Pilot のドキュメント](https://docs.fastlane.tools/actions/pilot/)で詳細をぜひご確認ください。
 
 ```ruby
 # fastlane/Fastfile
@@ -137,21 +137,21 @@ platform :ios do
 
   desc "Upload to Testflight"
   lane :upload_testflight do
-    # Get the version number from the project and check against
-    # the latest build already available on TestFlight, then
-    # increase the build number by 1. If no build is available
-    # for that version, then start at 1
+    # プロジェクトからバージョン番号を取得します。
+    # TestFlight で既に利用可能な最新のビルドと照合します。
+    # ビルド番号を 1 増やします。 使用可能なビルドがない場合は、
+    # 1 から始めます。
     increment_build_number(
       build_number: latest_testflight_build_number(
         initial_build_number: 1,
         version: get_version_number(xcodeproj: "HelloWorld.xcodeproj")
       ) + 1,
     )
-    # Set up Distribution code signing and build the app
+    # 配信コード署名を設定し、アプリをビルドします。
     match(type: "appstore")
     gym(scheme: "HelloWorld")
-    # Upload the binary to TestFlight and automatically publish
-    # to the configured beta testing group
+    # TestFlight にバイナリをアップロードし、
+    # 設定したベータ版のテストグループに自動的にパブリッシュします。
     pilot(
       distribute_external: true,
       notify_external_testers: true,
@@ -162,34 +162,34 @@ platform :ios do
 end
 ```
 
-## Deploying to Firebase
+## Firebase へのデプロイ
 {: #deploying-to-firebase }
 
-Firebase is a distribution service from Google. Deploying to Firebase is simplified by installing the [Firebase app distribution plugin](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution).
+Firebaseは、Google が提供する配信サービスです。 Firebase へのデプロイは、 [Firebase アプリ配信プラグイン](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution)をインストールすることで簡単に行うことができます。
 
-### Fastlane Plugin Setup
+### Fastlane プラグインの設定
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
+プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin firebase_app_distribution` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
-### Generating a CLI Token
+### CLI トークンの生成
 {: #generating-a-cli-token }
 
-Firebase requires a token to used during authentication. To generate the token, we need to use the Firebase CLI and a browser - as CircleCI is a headless environment, we will need to generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
+Firebase では、認証時にトークンを使用する必要があります。 トークンを生成するには、Firebase CLI とブラウザを使用する必要があります。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
 
-1. Download and install the Firebase CLI locally with the command `curl -sL https://firebase.tools | bash`
-2. Trigger a login by using the command `firebase login:ci`
-3. Complete the sign in via the browser window, then copy the token provided in the Terminal output
-4. Go to your project settings in CircleCI and create a new environment variable named `FIREBASE_TOKEN` with the value of the token.
+1. コマンド `curl -sL https://firebase.tools | bash`で、Firebase CLI をダウンロードしてローカルにインストールします。
+2. `firebase login:ci`というコマンドでログインをトリガーします。
+3. ブラウザウィンドウでサインインを完了し、ターミナルの出力で提供されたトークンをコピーします。
+4. CircleCI のプロジェクト設定で、 `FIREBASE_TOKEN` という名前の新しい環境変数を作成し、トークンの値を入力します。
 
-### Fastlane configuration
+### Fastlane の設定
 {: #fastlane-configuration }
 
-The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to `Settings -> General`. Under "Your apps", you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
+Firebase プラグインは、最小限の設定で iOS のバイナリを Firebase にアップロードすることができます。 主なパラメータは `app` で、Firebase が設定した App ID が必要になります。 これを確認するには、 [Firebase のコンソール](https://console.firebase.google.com)でプロジェクトにアクセスし、 `Settings -> General` を選択します。 [Your apps (お客様のアプリ)]の下に、プロジェクト内のアプリのリストと、App ID (通常、`1:123456789012:ios:abcd1234abcd1234567890` の形式) などの情報が表示されます。
 
-For more configuration options, see the [Firebase Fastlane plugin documentation](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app).
+その他の設定オプションについては、 [Firebase Fastlane プラグインのドキュメント](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app)を参照してください。
 
 ```ruby
 # Fastlane/fastfile
@@ -210,19 +210,20 @@ platform :ios do
     firebase_app_distribution(
       app: "1:123456789012:ios:abcd1234abcd1234567890",
       release_notes: "This is a test release!"
+
     )
   end
 end
 ```
 
-To use the Firebase Fastlane plugin, the Firebase CLI must be installed as part of the job via the `curl -sL https://firebase.tools | bash` command:
+Firebase Fastlane のプラグインを使用するには、 `curl -sL https://firebase.tools | bash` コマンドにより Firebase CLI をジョブの一部としてインストールする必要があります。
 
 ```yaml
 version: 2.1
 jobs:
   adhoc:
     macos:
-      xcode: "11.3.1"
+      xcode: "12.5.1"
     environment:
       FL_OUTPUT_DIR: output
     steps:
@@ -238,41 +239,41 @@ workflows:
       - adhoc
 ```
 
-**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{ site.baseurl }}/2.0/testing-ios/#using-ruby)
+**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{ site.baseurl }}/2.0/testing-ios/#using-ruby)ことをお勧めします。
 
-## Deploying to Visual Studio App Center
+## Visual Studio App Center へのデプロイ
 {: #deploying-to-visual-studio-app-center }
 
-Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
+Visual Studio App Center (正式名称: HockeyApp) は、マイクロソフトの配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
 
-### Fastlane Plugin Setup
+### Fastlane プラグインの設定
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin appcenter`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
+プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、コマンド `fastlane add_plugin firebase_app_distribution` を実行します。 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
-### App Center Setup
+### App Center の設定
 {: #app-center-setup }
 
-First, the app needs to be created in VS App Center.
+まず、VS App Center でアプリを作成する必要があります。
 
-1. Log in, or sign up, to [Visual Studio App Center](https://appcenter.ms/)
-2. At the top-right of the page, click on "Add New", then select "Add New App"
-3. Fill out the required information in the form as required
+1. [Visual Studio App Center](https://appcenter.ms/)にログイン、またはサインアップします。
+2. ページの右上にある [Add New (追加)] "をクリックし、[Add New App (新しいアプリを追加する)] を選択します。
+3. 必要に応じて、必要な情報を入力します。
 
-Once this is complete you will need to generate an API token to allow Fastlane to upload to App Center.
+完了したら、Fastlane が App Center にアップロードできるようにするための API トークンを生成する必要があります。
 
-1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
-2. Click on "New API Token"
-3. Enter a description for the token, then set the access to "Full Access"
-4. When the token is generated, make sure to copy it somewhere safe.
-5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
+1. 設定の [API トークン](https://appcenter.ms/settings/apitokens) に移動します。
+2. [New API Token (新しい API トークン)] "をクリックします。
+3. トークンの説明を入力し、アクセスを [Full Access (フルアクセス)] に設定します。
+4. トークンが生成されたら、必ず安全な場所にコピーしてください。
+5. CircleCI のプロジェクト設定で、`VS_API_TOKEN` という名前の新しい環境変数を作成し、トークンの値を入力します。
 
-### Fastlane configuration
+### fastlane の設定
 {: #fastlane-configuration }
 
-Below is an example of a lane that distributes beta app builds to Visual Studio App Center. Both the username of your App Center account and an API Token with "Full Access" is required to upload the binary to App Center.
+下記は、ベータ版アプリのビルドを Visual Studio App Center に配信するレーンの例です。 App Center にバイナリをアップロードするには、App Center アカウントのユーザー名と「フルアクセス」 の API トークンの両方が必要です。
 
 ```ruby
 # Fastlane/fastfile
@@ -285,16 +286,16 @@ platform :ios do
 
 desc "Upload to VS App Center"
   lane :upload_appcenter do
-    # Here we are using the CircleCI job number
-    # for the build number
+    #  ここでは ビルド番号に
+    # CircleCI ジョブ番号を使います。
     increment_build_number(
       build_number: "$CIRCLE_BUILD_NUM"
     )
-    # Set up Adhoc code signing and build  the app
+    # Adhoc コード署名を設定し、アプリをビルドします。
     match(type: "adhoc")
     gym(scheme: "HelloWorld")
-    # Set up the required information to upload the
-    # app binary to VS App Center
+    # 必要な情報を設定し、
+    # アプリのバイナリを VS App Center にアップロードします。
     appcenter_upload(
       api_token: ENV[VS_API_TOKEN],
       owner_name: "YOUR_VS_APPCENTER_USERNAME",
@@ -303,23 +304,24 @@ desc "Upload to VS App Center"
     )
   end
 end
+
 ```
 
-## Uploading to TestFairy
+## TestFairy へのアップロード
 {: #uploading-to-testfairy }
 
-[TestFairy](https://www.testfairy.com) is another popular Enterprise App distribution and testing service. Fastlane has built in support for TestFairy making it quick and easy to upload new builds to the service.
+[TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の任意のイメージ](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
 
-1. On the TestFairy dashboard, navigate to the Preferences page.
-2. On the Preferences page, go to the API Key section and copy your API Key.
-3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
+1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
+2. そのページの API キーのセクションで API キーをコピーします。
+3. CircleCI のプロジェクト設定で、`TESTFAIRY_API_KEY` という名前の新しい環境変数を作成し、API キーの値を入力します。
 
-### Fastlane configuration
+### fastlane の設定
 {: #fastlane-configuration }
 
-To configure uploading to TestFairy within Fastlane, see the following example:
+fastlane 内で TestFairy へのアップロードを設定するには、次の例を参照してください。
 
 ```ruby
 # Fastlane/fastfile
@@ -332,16 +334,16 @@ platform :ios do
 
 desc "Upload to TestFairy"
   lane :upload_testfairy do
-    # Here we are using the CircleCI job number
-    # for the build number
+    # ここではビルド番号に
+    # CircleCI ジョブ番号を使います。
     increment_build_number(
       build_number: "$CIRCLE_BUILD_NUM"
     )
-    # Set up Adhoc code signing and build  the app
+    # Adhoc コード署名を設定し、アプリをビルドします。
     match(type: "adhoc")
     gym(scheme: "HelloWorld")
-    # Set up the required information to upload the
-    # app binary to VS App Center
+    # 必要な情報を設定し、
+    # アプリのバイナリを VS App Center にアップロードします。
     testfairy(
       api_key: ENV[TESTFAIRY_API_KEY],
       ipa: 'path/to/ipafile.ipa',

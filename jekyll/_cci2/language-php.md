@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Language Guide: PHP"
 short-title: "PHP"
-description: "Building and Testing with PHP on CircleCI 2.0"
+description: "Building and Testing with PHP on CircleCI"
 categories: [language-guides]
 order: 6
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -18,12 +19,12 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 ## Quickstart: Demo PHP Laravel reference project
 {: #quickstart-demo-php-laravel-reference-project }
 
-We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
+We maintain a reference PHP Laravel project to show how to build PHP on CircleCI:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">Demo PHP Laravel Project on GitHub</a>
 - [Demo PHP Laravel Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI with PHP projects.
 
 ## Pre-built CircleCI Docker images
 {: #pre-built-circleci-docker-images }
@@ -50,7 +51,7 @@ Following is the commented `.circleci/config.yml` file in the demo project.
 
 {% raw %}
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2
 
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
@@ -187,7 +188,7 @@ Finally, we will set up a test database with Sqlite, run migrations and run test
 
 ---
 
-Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
 {: #see-also }
@@ -197,4 +198,4 @@ Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [
 
 - Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public PHP projects.
 
-- If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

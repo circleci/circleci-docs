@@ -1,15 +1,15 @@
 ---
 layout: classic-docs
-title: "Working with Pipelines"
-short-title: "Enabling Pipelines"
-description: "How to work effectively with CircleCI pipelines"
+title: "Pipeline Processing"
+description: "This document describes CircleCI pipelines, what they encompass, and some features available to use in your pipelines"
 categories: [settings]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
-This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows. Pipelines are not currently available on self hosted installations of CircleCI Server.
+This document describes how your projects are processed using our pipelines engine and some of the features available to use in your pipelines. Pipelines are available on CircleCI cloud and self hosted installations of CircleCI server v3.x.
 
 * TOC
 {:toc}
@@ -17,41 +17,26 @@ This document describes how to enable the pipelines engine if you need to trigge
 ## What are pipelines?
 {: #what-are-pipelines }
 
-CircleCI Pipelines encompass the full set of workflows you run when triggering work on your projects in CircleCI. Workflows coordinate the jobs defined within your project configuration.
+CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
 
-## Benefits of using pipelines
-{: #benefits-of-using-pipelines }
+Pipelines are not available on installations of CircleCI server v2.x.
 
-Pipelines offer the following benefits:
+The following features are available for use in your pipelines:
 
 {% include snippets/pipelines-benefits.adoc %}
-
-## Implications of pipelines
-{: #implications-of-pipelines }
-
-When using pipelines, please note the following:
-
-- If no builds or workflows are defined, you will receive an error.
 
 ## Transitioning to pipelines
 {: #transitioning-to-pipelines }
 
-The following sections outline the process of transitioning to pipelines.
+When migrating from a server v2.x to a v3.x installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v3.x installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
 
 ### Pipelines with 2.0 configuration
 {: #pipelines-with-20-configuration }
 {:.no_toc}
 
-When using 2.0 configuration in combination with pipelines, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility. This environment variable is generated in a different way to the version that is available in legacy jobs, and is not always available – it is not injected when there is no meaningful previous revision, for example, on the first push of commits to an empty repository, or when a new branch is created/pushed without any additional commits.
+When using CircleCI cloud or server v3.x the CircleCI pipelines engine is automatically enabled. If, for whatever reason, you continue to use a 2.0 config, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility.
 
-## Giving feedback
-{: #giving-feedback }
-{:.no_toc}
-
-If you have feedback, suggestions, or comments:
-
-- Tweet @circleci with thoughts
-- Vote or add to our [Ideas board](https://ideas.circleci.com/)
+This environment variable is generated in a different way compared to the version available in legacy jobs, and is not always available – it is not injected when there is no meaningful previous revision, for example, on the first push of commits to an empty repository, or when a new branch is created/pushed without any additional commits.
 
 ## See also
 {: #see-also }

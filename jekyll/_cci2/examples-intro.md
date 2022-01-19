@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Examples"
 short-title: "Examples"
-description: "CircleCI 2.0 Examples Introduction"
+description: "CircleCI Examples Introduction"
 categories: [migration]
 order: 1
 version:
 - Cloud
+- Server v3.x
 - Server v2.x
 ---
 
@@ -105,7 +106,7 @@ _The macOS executor is not currently available on self-hosted installations of C
 jobs:
   build-and-test:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       ...
       - run:
@@ -139,7 +140,22 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblock.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_2}
 ```yaml
 version: 2
 

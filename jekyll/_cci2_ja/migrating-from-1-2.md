@@ -4,7 +4,7 @@ title: "Linux プロジェクトの 1.0 から 2.0 への移行"
 short-title: "Linux プロジェクトの 1.0 から 2.0 への移行"
 description: "CircleCI 1.0 から 2.0 に移行する理由と方法"
 categories:
-  - migration
+  - 移行
 order: 15
 version:
   - Server v2.x
@@ -34,7 +34,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 `config-translation` エンドポイントを使用すると、1.0 の設定ファイルから 2.0 の設定ファイルへの変換をすぐに始めることができます。 詳細については、「[1.0 から 2.0 への config-translation エンドポイントを使用する]({{ site.baseurl }}/ja/2.0/config-translation)」を参照してください。
 
 ## 必須キーを構成する手順
-{: #steps-to-configure-required-keys }
+次のように `run` ステップに置き換えます。
 
 1. 既存の `circle.yml` ファイルをコピーして、プロジェクト リポジトリのルートにある新しい `.circleci` ディレクトリに置きます。
 
@@ -56,9 +56,6 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
          docker:
            - image: circleci/ruby:2.7
-             auth:
-               username: mydockerhub-user
-               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
      最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。 ジョブごとにコマンドを宣言します。 Docker コンテナを初めて使用する場合は、「[Docker 入門](https://docs.docker.com/get-started/#docker-concepts)」を参照してください。
      ```yaml
@@ -67,7 +64,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
      ```yaml
          macos:
-           xcode: 11.3.0
+           xcode: 12.5.1
      ```
 
 6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。 それには、以下のコードを検索します。
@@ -104,11 +101,11 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 8. <http://codebeautify.org/yaml-validator> で YAML をバリデーションして、変更をチェックします。
 
 ## 環境変数
-{: #environment-variables }
+次のように置き換えます。
 
-CircleCI 2.0 では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
+In CircleCI, all defined environment variables are treated literally. コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
-詳細については、「[環境変数を使用する]({{ site.baseurl }}/ja/2.0/env-vars/)」を参照してください。
+For more information, refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## ワークフローを構成する手順
 {: #steps-to-configure-workflows }
@@ -202,7 +199,7 @@ dependencies:
     - <インストール済み依存関係>
 ```
 
-次のように `run` ステップに置き換えます。
+次のように置き換えます。
 
 ```yaml
       - run:
@@ -217,7 +214,7 @@ dependencies:
     - "vendor/bundle"
 ```
 
-以下のように、`steps:`の下にネストにして、必要に応じてアプリケーションに合わせてカスタマイズします。
+次のように置き換えて `steps:` の下にネストし、実際のアプリケーションに合わせて適切にカスタマイズします。
 
 ```yaml
      - save_cache:

@@ -6,21 +6,22 @@ version:
 = Configuring Nomad Client Metrics
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how Nomad Metrics is a helper service used to collect metrics data from the Nomad server and clients running on the Services and Nomad instances.
 :icons: font
 :toc: macro
 :toc-title:
 
-Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture,Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
+Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture, Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
 
 == Nomad メトリクスサーバー
 
-The Nomad Metrics container is run on the services host using the server flag and is installed as part of the CircleCI Server installation process, requiring no additional configuration.
+The Nomad Metrics container is run on the services host using the server flag and is installed as part of the CircleCI server installation process, requiring no additional configuration.
 
 == Nomad メトリクスクライアント
 
 The Nomad Metrics client is installed and run on all Nomad client instances. Nomad メトリクスクライアントをインストールおよび設定するには、AWS の起動設定を更新する必要があります。  Additionally, you will need to modify the AWS security group to ensure that UDP port 8125 is open on the Services machine. Steps for both configuration changes are explained below.
 
-NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. 必ず、CircleCI Server の実行に使用する領域にログインしてください。
+NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. Make sure that you logged into the region you use to run CircleCI server.
 
 === Updating the Services machine Security Group
 
@@ -58,7 +59,7 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 . [`Name (名前)`] フィールドを `nomad-builder-with-metrics-lc-DATE` などのわかりやすい名前で更新します。
 . [`Advanced Details (詳細情報)`] ドロップダウンを選択します。
 . 下のテキストフィールドから [`User data (ユーザーデータ)`] に起動設定スクリプトをコピー＆ペーストします。
-. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。 For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`.
+. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。 （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
 . Select the `Skip to review` button and then the `Create launch configuration` button.
 
 ```bash
@@ -224,7 +225,7 @@ docker run -d --name $CONTAINER_NAME \
 . In the description box at the bottom, select the `Edit` button.
 . ドロップダウンから、新たに作成した起動設定を選択します。
 . [`Save (保存する)`] ボタンを押します。
-. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。  They will be replaced with newer Nomad clients running Nomad Metrics.
+. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。
 
 == StatsD メトリクス
 
@@ -331,8 +332,7 @@ NOTE: 終了状態 (`complete` と `dead`) にあるジョブの数は、通常�
 * CPU リソースは MHz 単位で報告されます。  メモリリソースは MB 単位で報告されます。  ディスク (容量) リソースは MB 単位で報告されます。
 * リソースメトリクスは、Nomad メトリクスがポーリングするように設定されている Nomad ノードをその範囲とします。  `--client` モードで動作している単一の Nomad メトリクスジョブから得られた数値は、クラスタ全体を代表する数値とは_言えません_ (ただし、これらの時系列のデータを外部のメカニズムによって集計することで、クラスタ全体の傾向をつかむことはできます)。
 * `circle.nomad.client_agent.resources` 名前空間内のメトリクスにはすべて、DogStatsD への書き込み時に以下のタグが付けられます。
-** `drain`: `true` if the Nomad node has been marked as drained; `false`
-    otherwise.
+** `drain`：Nomad ノードがドレイン済みとしてマークされている場合は `true`、そうでない場合は `false` が付けられます。
 ** `status`： `initializing`、`ready`、または `down` のいずれかが付けられます。
 
 ====

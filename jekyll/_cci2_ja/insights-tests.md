@@ -10,30 +10,58 @@ version:
 ## 概要
 {: #overview }
 
-CircleCI テスト インサイトを使用すると、最近の実行におけるテストのパフォーマンスを分析して、テストの最適化の余地を把握することができます。 テスト インサイトを確認するには、ワークフローの **[Insights (インサイト)]** ページで **[Tests (テスト)]** タブを選択します。
+Using CircleCI test insights, you are able to analyze your test performance within the most recent executions and identify opportunities for test optimization. To access test insights, select the **Tests** tab on the **Workflow Insights** page.
 
-次のテスト インサイトが表示されます。
+The next sections go over what test insights are available.
 
 ### パフォーマンスの概要
 {: #performance-summary }
 
+The summary section displays test suite performance across your most recent 100 runs. You can view the following:
+- average test per run
+- number of all flaky tests detected
+- failure counts
+- slow run times in test suite
 
-![]({{ site.baseurl }}/assets/img/docs/insights-test-performance.png)
+![]({{ site.baseurl }}/assets/img/docs/test-insights-performance-summary.png)
 
-サマリーグラフには、最近 10 回のワークフロー実行のテスト パフォーマンスが表示されます。 各棒グラフにカーソルを合わせると、テストの回数、スキップされたテストの数、テストの成功率を確認できます。
+### Most Recent Runs
+{: #most-recent-runs }
 
-### [Top 10 most failed tests (失敗の多いテスト上位 10 個)]
-{: #top-10-most-failed-tests }
+The most recent runs chart displays the most recent 100 executions of the test suite. You can hover over each bar to review the following:
+- test count
+- skipped tests
+- success rate of tests
 
-![]({{ site.baseurl }}/assets/img/docs/insights-test-most-failed.png)
+![]({{ site.baseurl }}/assets/img/docs/test-insights-recent-runs.png)
 
-最近のパイプライン実行のうち、成功率が低いテスト上位 10 個を確認できます。 この表には、テストの名前、関連するジョブ、実行時間、成功率が表示されます。
+### Flaky Tests
+{: #flaky-tests }
 
+Flaky tests are tests that fail non-deterministically; they pass and fail due to some state external to the repository. As a result, flaky tests introduce uncertainty to a project’s build state.
 
-### [Top 10 slowest tests (実行速度の遅いテスト上位 10 個)]
-{: #top-10-slowest-tests }
+Test insights detect flaky tests by identifying tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and demonstrate the same behavior on re-runs. Additionally, these types of tests are labeled “FLAKY” throughout the CircleCI app making them easy to identify and fix.
 
-![]({{ site.baseurl }}/assets/img/docs/insights-test-slowest.png)
+![]({{ site.baseurl }}/assets/img/docs/test-insights-flaky.png)
 
-最近のパイプライン実行のうち、実行速度が遅いテスト上位 10 個を確認できます。 この表には、テストの名前、関連するジョブ、実行時間、成功率が表示されます。
+### Most Failed Tests
+{: #most-failed-tests }
 
+You can view the 100 tests with the lowest success rates in their most recent pipeline executions. The table provides the following:
+- test name
+- associated job
+- run time
+- success rate
+
+![]({{ site.baseurl }}/assets/img/docs/test-insights-failed.png)
+
+### Slowest Tests
+{: #slowest-tests }
+
+You can view the 100 tests with the longest run times in their most recent pipeline executions. The table provides the following:
+- test name
+- associated job
+- run time
+- success rate
+
+![]({{ site.baseurl }}/assets/img/docs/test-insights-slowest.png)
