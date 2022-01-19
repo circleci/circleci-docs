@@ -22,13 +22,29 @@ toc::[]
 
 == Release 3.3.0
 
-=== Upgrade notes
-
 === New features
+
+* Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/2.0/server-3-install-build-services/nomad-autoscaler[execution environments installation docs].
+* https://circleci.com/docs/2.0/webhooks/[Webhooks] are now available.
+* IRSA (AWS) can now be used as an alternative to keys for object storage authentication.
+* The email address from which build notifications are sent is now configurable from the KOTS admin console.
 
 === Fixes
 
+* Upgraded Python to v3 in Vault container.
+* https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[Docs improvements] on using the shared VPC architecture in GCP. 
+* The JVM heap size has been updated so that `output-processor` can use up to 80% of the pod memory limit.
+
 === Known issues
+
+* Updating GitHub Enterprise with a modified Let's Encrypt certificate is unsupported.
+* Let's Encrypt's new root certificate `isrgrootx1` is not trusted.
+* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
+identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
+* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+* Runner cannot be used when server is installed behind a proxy.
 
 == Release 3.2.2
 
