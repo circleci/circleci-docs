@@ -20,6 +20,27 @@
     display: initial;
 }
 
+.card {
+    img{
+        margin: 15px 0 0 0;
+    }
+
+    h3 {
+        line-height: 31.2px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 12px;
+        margin-bottom: 4px;
+    }
+
+    h3 + p {
+        margin-bottom: 4px;
+        line-height: 24px;
+    }
+
+}
+
 #cards {
     display: flex;
     margin-top: 25px;
@@ -28,9 +49,18 @@
         width: 50%;
         padding: 24px;
         color: #555555;
-        
+
+        img {
+            margin: 0;
+        }
+
         h1, h2, h3, h4, h5, h6 {
+            margin-top: 16px;
             color: black;
+        }
+
+        h3 + p {
+            margin-bottom: 12px;
         }
 
         & > ul {
@@ -59,12 +89,14 @@
 
             span {
                 padding: 0 15px 0 4.5px;
+                line-height: 18px;
             }
         }
 
         ul {
             display: list-item;
             list-style-type: none;
+            line-height: 28.8px;
 
             &#markdown-toc {
                 display: initial;
@@ -141,5 +173,9 @@
 
     img {
         padding: 11px 0 0 8px;
+    }
+
+    & + p {
+        margin: 0;
     }
 }
