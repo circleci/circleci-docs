@@ -85,7 +85,7 @@ jobs:
             - "~/.ivy2/cache"
             - "~/.sbt"
             - "~/.m2"
-      - deploy:
+      - run:
           command: |
               mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
               aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
@@ -212,17 +212,17 @@ Below is an explanation of the preceding example:
 - [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
 - [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
 
-The final portion of the 2.0 schema are the deploy command keys which move and rename the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
+The final portion of the 2.0 schema is the run command key which moves and renames the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
 
 ```yaml
 steps:
-  - deploy:
+  - run:
       command: |
         mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
         aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 ```
 
-The deploy command is another multi-line execution.
+The run command is another multi-line execution.
 
 ## See also
 {: #see-also }
