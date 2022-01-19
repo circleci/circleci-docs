@@ -110,6 +110,7 @@ jobs:
 
 {% highlight yaml %}
 jobs:
+version: 2.1
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
