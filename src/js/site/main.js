@@ -1,7 +1,7 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
 
-hljs.initHighlightingOnLoad();
+//hljs.initHighlightingOnLoad();
 
 const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
 const hideEvents = ['mouseout', 'mouseleave', 'blur'];

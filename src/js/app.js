@@ -20,7 +20,7 @@ services.rum.init();
 
 $(() => {
   services.instantsearch.init();
-  services.highlightjsBadge.init();
+  //services.highlightjsBadge.init();
   services.progressbar.init();
   import(/* webpackPrefetch: true */ './experiments'); // imports all experiments
 });
