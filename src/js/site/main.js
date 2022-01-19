@@ -421,3 +421,11 @@ $(function () {
     });
   });
 });
+
+$(document).ready(() => {
+  window.AnalyticsClient.trackAction('User Dark Mode Preference', {
+    darkModeEnabled:
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches,
+  });
+});
