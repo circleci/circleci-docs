@@ -1174,7 +1174,7 @@ A path is not required here because the cache will be restored to the location f
 ```
 {% endraw %}
 
-#### **`deploy` - DEPRECATED**
+##### **`deploy` - DEPRECATED**
 {: #deploy-deprecated }
 {:.no_toc}
 
