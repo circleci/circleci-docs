@@ -52,7 +52,7 @@ export class SnippetFeedback {
       className: 'prompt',
       text: 'Was this helpful?',
     });
-    const slash = this._makeElement({ kind: 'span', text: ' / ' });
+    const slash = this._makeElement({ kind: 'span', text: ' /' });
     this.yesBtnEl = this._renderYesNoButton({ text: 'Yes' });
     this.noBtnEl = this._renderYesNoButton({ text: 'No' });
     // append dom nodes.
