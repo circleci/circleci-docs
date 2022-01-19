@@ -30,7 +30,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 
 Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
 
-### How do I migrate from Jenkins to CircleCI?
+### Jenkins から CircleCI  へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
 
@@ -219,25 +219,19 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-[Performance plan](https://circleci.com/pricing/usage/) と、 [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) が必要となります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+See the [comparison table](https://circleci.com/pricing/#comparison-table) for which plans can access Windows resources.
 
 ### 使用している Windows のバージョンを教えてください。
 {: #what-exact-version-of-windows-are-you-using }
 {:.no_toc}
 
-Windows Server 2019 Datacenter エディションの Server Core オプションを使用しています。
+The [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page outlines which versions of Windows are offered.
 
 ### マシンには何がインストールされていますか?
 {: #what-is-installed-on-the-machine }
 {:.no_toc}
 
-[使用可能な依存関係の一覧]({{site.baseurl}}/2.0/hello-world-windows/#windows-イメージにプリインストールされているソフトウェア)が「[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows/)」に掲載されています。
-
-### マシンのサイズを教えてください。
-{: #what-is-the-machine-size }
-{:.no_toc}
-
-4 基の vCPU と 15 GB の RAM を備えた Windows マシンです。
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our [Hello World On Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
 
 ### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
@@ -293,11 +287,11 @@ You pay to the next nearest credit. 1 分未満の秒単位は切り上げでク
   - クレジットは毎月ロールオーバーされ、1 年後に失効します。
 - Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
 
-#### How do I calculate my monthly costs?
-{: #how-do-I-calculate-my-monthly-costs }
+#### How do I calculate my monthly storage and network costs?
+{: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
 
 ##### ストレージ
 {: #storage }
@@ -312,6 +306,18 @@ Calculate your monthly costs by finding your Storage and Network usage on the [C
 使用量から 1 か月のネットワーク コストを計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
 GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
+
+#### How do I calculate my monthly IP ranges cost?
+{: #how-do-I-calculate-my-monthly-IP-ranges-costs }
+{:.no_toc}
+
+Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+
+In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
+
+This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 #### アクティブ ユーザー単位の料金が設定されているのはなぜですか?
 {: #why-does-circleci-have-per-active-user-pricing }
@@ -335,7 +341,7 @@ GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用�
 
 To find a list of your Active Users, log in to the CircleCI web app > click `Plan` > click `Plan Usage` > click on the `Users` tab.
 
-#### クレジットを使い切るとどうなりますか?
+#### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
 {:.no_toc}
 
@@ -345,17 +351,17 @@ If you notice that your account is receiving repeated refills, review your credi
 
 On the **Free plan**, jobs will fail to run once you have run out of credits.
 
-#### クレジットに有効期限はありますか?
+#### クレジットに有効期限はありますか？
 {: #do-credits-expire }
 {:.no_toc}
 **Performance plan**: Credits expire one year after purchase. ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
 
-#### 支払い方法について教えてください。
+#### 支払い方法は？
 {: #how-do-i-pay }
 {:.no_toc}
 CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
 
-#### 支払いのスケジュールについて教えてください。
+#### 支払いのスケジュールは？
 {: #when-do-i-pay }
 {:.no_toc}
 
@@ -364,7 +370,7 @@ On the **Performance plan**, at the beginning of your billing cycle, you will be
 #### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-はい。 If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+はい。 ジョブが "queud(キューに入っている)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing(準備中)" の場合は、CircleCIがセットアップを行っているか、ジョブの実行を開始しようとしています。
 
 #### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
@@ -381,7 +387,7 @@ On the **Performance plan**, at the beginning of your billing cycle, you will be
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
+Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド向けの無料クレジットは、組織あたり最大 2 件のジョブの同時実行に使用できます。
 
@@ -413,22 +419,22 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 {:.no_toc}
 * Linux プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、[Add Containers (コンテナの追加)] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
-#### 組織内でプランを共有し、請求をまとめることは可能ですか?
+#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
 はい。 CircleCI アプリケーションで [Settings (設定)] > [Share & Transfer (共有 & 転送)] > [Share Plan (プランの共有)] を開き、プランに追加したい組織を選択してください。
 
-#### 請求先を個人アカウントから組織アカウントに変更できますか?
+#### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
 {: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
 {:.no_toc}
 はい、請求は組織全体に関連付けられています。 Org の設定ページにて、ユーザー自身がその Org として支払うことができます。 ただし、そのユーザーが全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub Org 管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
 
-#### 課金に関連してコンテナはどのように定義されますか?
+#### 課金におけるコンテナの定義は？
 {: #what-is-the-definition-of-a-container-in-the-context-of-billing }
 {:.no_toc}
 ここでのコンテナとは、CPU 2 基と 4 GB の RAM を搭載したマシンを指し、このマシンのご利用に対して料金が発生します。 コンテナはタスクの同時実行（5 つの異なるジョブを実行するなど）や並列実行（1 つのジョブを 5 つの異なるタスクに分解してそれぞれを一斉に実行するなど）を行うのに使われます。 この場合はどちらの例でも 5 つのコンテナが必要になります。
 
-#### リモート Docker の起動処理時間に料金が発生するのはなぜですか?
+#### リモート Docker の起動処理時間に料金が発生するのはなぜですか？
 {: #why-am-i-being-charged-for-remote-docker-spin-up-time }
 {:.no_toc}
 CircleCI がリモート Docker インスタンスを起動するとき、プライマリコンテナを実行する必要があり、コンピューティングリソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
