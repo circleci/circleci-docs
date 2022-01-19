@@ -111,7 +111,7 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
-      - deploy:
+      - run:
           name: Deploy
           command: fastlane release_appstore
 
