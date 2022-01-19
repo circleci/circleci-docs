@@ -226,8 +226,6 @@ If you enable these restrictions on an organization for which CircleCI has been 
 ### GitHub のデプロイ キーの作成
 {: #creating-a-github-deploy-key }
 
-{:.no_toc}
-
 In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
 1. [GitHub の説明](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)に従い、下記コマンドを実行しSSH 鍵ペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
@@ -235,9 +233,9 @@ In this example, the GitHub repository is `https://github.com/you/test-repo`, an
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-2. `https://github.com/you/test-repo/settings/keys` に移動し、[Add deploy key (デプロイ キーを追加)] をクリックします。 [Title (タイトル)] フィールドにタイトルを入力し、手順 1 で作成した鍵をコピーして貼り付けます。 [Allow write access (書き込みアクセスを許可)] をオンにし、[Add key (キーを追加)] をクリックします。
+2. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy Key**. [Title (タイトル)] フィールドにタイトルを入力し、手順 1 で作成した鍵をコピーして貼り付けます。 Check **Allow write access**, then click **Add key**.
 
-3. プロジェクトの設定画面に移動し、 [SSH Key (SSH 鍵)]、 [Add SSH key (SSH 鍵の追加)] の順にクリックし、手順 1 で作成した鍵を追加します。 [Hostname (ホスト名)] フィールドに「github.com」と入力し、送信ボタンを押します。
+3. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `github.com`and add the private key you created in step 1. Then click **Add SSH Key**.
 
 4. config.yml で `add_ssh_keys` キーを使用して、以下のようにフィンガープリントを追加します。
 
@@ -256,41 +254,28 @@ When you push to your GitHub repository from a job, CircleCI will use the SSH ke
 ### Bitbucket ユーザー キーの作成
 {: #creating-a-bitbucket-user-key }
 
-{:.no_toc}
-
-現在、Bitbucket は、ユーザー キーを作成する API を CircleCI に提供していません。 しかし、以下の回避策でユーザー キーを作成できます。
+Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following this workaround:
 
 1. CircleCI アプリケーションで、プロジェクトの設定に移動します。
 
-2. Navigate to the **SSH Keys** page.
+2. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
 
-3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.![]({{ site.baseurl }}/assets/img/docs/bb_user_key.png)
+3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector. ![]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
 
-4. In the developer console, select the **Network** tab, followed by the **Preview** tab.
+4. In the browser inspector, select the **Network** tab, and clear the console.
 
-5. Find and click the `checkout-key` with a 201 status and copy the `public_key` to your clipboard.![](
-{{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
+5. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_. ![]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
 
-6. Click the **Add User Key** button to paste in the `public_key` and create your user key.
+6. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard. ![]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
 
-7. Bitbucket の [SSH 鍵の設定方法](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/)の説明に従って、Bitbucket にキーを追加します。
+7. Add the key to Bitbucket by following Bitbucket's guide on [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
-8. `.circleci/config.yml` で `add_ssh_keys` キーを使用して、以下のようにフィンガープリントを追加します。
-
-```yaml
-version: 2
-jobs:
-  deploy-job:
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SO:ME:FIN:G:ER:PR:IN:T"
-```
+This SSH user key will have a "PREFERRED" label; if the project also has a deploy key, the SSH user key will be used first.
 
 ### これらのキーの使用方法
 {: #how-are-these-keys-used }
 
-CircleCI がプロジェクトをビルドするときには、秘密鍵が `.ssh` ディレクトリにインストールされ、それに続いて SSH がバージョン管理プロバイダーと通信するように設定されます。 したがって、秘密鍵は以下の用途で使用されます。
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
 - Checking out the main project
 - いずれかの GitHub でホスティングされるサブモジュールのチェックアウト
@@ -302,13 +287,13 @@ For this reason, a deploy key isn't sufficiently powerful for projects with addi
 ### これらのキーのセキュリティ
 {: #what-about-security }
 
-CircleCI が生成するチェックアウト キー ペアの秘密鍵は CircleCI システムを出ることはなく (公開鍵のみ GitHub に転送)、また、ストレージ上では安全に暗号化されています。 しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH でビルド環境にログインする権限を持つ開発者は、この鍵に直接アクセスできます。
+The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
 
-**デプロイ キーとユーザー キーの違い**
+**Isn't there a difference between deploy keys and user keys?**
 
-GitHub がサポートするキーの種類は、デプロイ キーとユーザー キーだけです。 デプロイ キーはグローバルに一意であり (たとえば、複数のリポジトリへのアクセス権を持つデプロイ キーを作成するメカニズムはありません)、またユーザー キーには、それに関連付けられているユーザーとは別の*スコープ*の概念はありません。
+Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
 
-複数のリポジトリへのアクセス権をきめ細かく設定するには、GitHub でマシン ユーザーと呼ばれるアカウントの作成を検討してください。 このユーザーにビルドが必要とする権限を正確に付与し、次にそのユーザー キーを CircleCI 上のプロジェクトに関連付けます。
+To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
 ## SSH ホストの信頼性の確立
 {: #establishing-the-authenticity-of-an-ssh-host }
@@ -323,10 +308,10 @@ bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqT
 ' >> ~/.ssh/known_hosts
 ```
 
-対象サーバーの SSH 公開鍵は `ssh-keyscan <host>` コマンドで取得できます。 そして、取得されたテキストのうち `ssh-rsa` プレフィックスがついているものをジョブの `known_hosts` ファイルに追加することで、利用できるようになります。 たとえば、以下のようになります。
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. You can see this in action here:
 
 ```
-➜  ~ ssh-keyscan github.com           
+➜  ~ ssh-keyscan github.com
 # github.com:22 SSH-2.0-babeld-2e9d163d
 github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
 # github.com:22 SSH-2.0-babeld-2e9d163d
@@ -336,5 +321,5 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 
 You can add the key to known_hosts by running the following command:
 ```
-ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH 鍵を使用します。
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 ```

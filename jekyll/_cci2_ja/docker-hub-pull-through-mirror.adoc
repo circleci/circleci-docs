@@ -3,9 +3,10 @@ version:
 - Server v2.x
 - Server Admin
 ---
-= Docker Hub のミラーの使用
+= Setting Up Docker Hub Pull Through Mirror
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how to configure a Docker Hub pull through registry mirror.
 :icons: font
 :toc: macro
 :toc-title:
@@ -71,7 +72,7 @@ NOTE: *The server needs to be accessible by its hostname*. Namely, you must conf
 +
 NOTE: This guide assumes you are obtaining a certificate issued by a well-known CA, not a self-signed certificate. Use of self-signed certificates has NOT been tested.
 
-. Run the command below to *start the registry*.
+. 以下のコマンドを実行して、*キャッシュ サーバーを起動* します。
 +
 [NOTE]
 ====
@@ -210,7 +211,7 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 
 === Disarm VM Service
 
-Follow the steps below on your services machine.
+Nomad クライアント「ごと」に以下の手順を実行します。
 
 . *Void the `JAVA_OPTS` environment variable* by running the command below.
 +

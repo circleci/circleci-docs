@@ -1308,7 +1308,7 @@ root キーは Workspace のルートディレクトリとなるコンテナ内�
 `paths` では、Go 言語の `Glob` 関数をベースにした、[filepath.Match](https://golang.org/pkg/path/filepath/#Match) によるパターンマッチングに対応します。
 
 ```
-パターン
+pattern:
         { term }
 term:
         '*'　区切り文字を含まない文字シーケンスの全てにマッチする

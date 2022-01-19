@@ -44,7 +44,6 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
-
 {% endhighlight %}
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -194,7 +193,7 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-          
+
 workflows:
  version: 2
  Example_Workflow:
