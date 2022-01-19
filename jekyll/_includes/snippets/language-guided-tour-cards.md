@@ -20,7 +20,7 @@ OR
 <div class="card">
 
 ![Explore Logo]({{ site.baseurl }}/assets/img/compass/bookmark.svg)
-## Explore a sample app
+### Explore a sample app
 {: #explore-a-sample-app}
 {:.no_toc}
 
