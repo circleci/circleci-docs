@@ -251,7 +251,6 @@ jobs:
     - store_artifacts:
         path: htmlcov
 workflows:
-  version: 2
   workflow:
     jobs:
     - build
@@ -286,7 +285,6 @@ jobs:
     - store_artifacts:
         path: htmlcov
 workflows:
-  version: 2
   workflow:
     jobs:
     - build

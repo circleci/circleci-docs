@@ -200,7 +200,6 @@ jobs:
             echo 'Do work once the approval has completed'
 
 workflows:
- version: 2
  Example_Workflow:
    jobs:
      - Hello-World
