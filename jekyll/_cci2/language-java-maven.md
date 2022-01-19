@@ -216,7 +216,7 @@ jobs:
   test:
     parallelism: 2 # parallel containers to split the tests among
     docker:
-      - image: cimg/openjdk:stretch
+      - image: cimg/openjdk:17.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
