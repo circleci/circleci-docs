@@ -46,11 +46,6 @@ At this point you can uncheck the **Assign Public IPs** check box if you need VM
 * *Security Group ID* (required): This is the security group that will be attached to the VMs.
 +
 The recommended security group configuration can be found in the https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
-* *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
-+
-NOTE: The Access Key and Secret
-Key used by VM Service differs from the policy used by object storage in the previous section.
-* *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for EC2 access.
 * *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating instances lowers the start time, allowing for faster machine and `remote_docker` builds. 
 +
 NOTE: Preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
@@ -58,6 +53,20 @@ NOTE: Preallocated instances are always running and could potentially increase c
 WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on demand. To ensure this can happen, **either** check any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 +
 NOTE: When using preallocated instances, be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
+
+==== Authentication
+One of the following is required. Either select "IAM Keys" and provide:
+
+* *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
++
+NOTE: The Access Key and Secret
+Key used by VM Service differs from the policy used by object storage in the previous section.
+* *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
+
+Or select "IAM role" and provide:
+
+* *Role ARN* (required): 
+https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
 
 ==== Default AWS AMI list
 
