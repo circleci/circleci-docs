@@ -11,6 +11,8 @@ export default () =>
     .then((variation) => {
       const elements = document.getElementsByClassName(variation ?? 'control');
 
+      // the homepage represents a separate problem because it does not change
+      // all of the content. instead, it only adds a few sections to the top.
       const homepage = document
         .getElementById('main')
         .getElementsByClassName(`row`)[0];
@@ -24,6 +26,10 @@ export default () =>
         return;
       }
 
+      // by contrast to the homepage, all other pages rewrite the content in its
+      // entirety.
+      // the expectation is that all non-homepage guided tour pages only contain
+      // 1 div element per treatment/control classes
       const element = elements[0];
       if (!element) return;
 
