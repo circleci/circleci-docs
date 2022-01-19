@@ -186,3 +186,11 @@ export function highlightTocOnScroll(headings) {
     });
   }
 }
+
+let isTocHighlighted = false;
+export const highlightTocOnScrollOnce = () => {
+  if (!isTocHighlighted) {
+    isTocHighlighted = true;
+    highlightTocOnScroll();
+  }
+};

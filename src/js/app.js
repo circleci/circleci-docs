@@ -26,8 +26,13 @@ $(() => {
   services.instantsearch.init();
   services.highlightjsBadge.init();
   services.progressbar.init();
+
+  if (!/language-(javascript|python)/gm.test(window.location.pathname)) {
+    site.sidebar.highlightTocOnScrollOnce();
+  }
+
   import(/* webpackPrefetch: true */ './experiments') // imports all experiments
     .then(({ default: { languageGuides } = {} }) => languageGuides()) // ensure languageGuides is loaded
-    .catch(site.sidebar.highlightTocOnScroll)
-    .then(site.sidebar.highlightTocOnScroll); // .then allows the fn to take an argument from languageGuides which .finally wouldn't pass along
+    .catch(site.sidebar.highlightTocOnScrollOnce)
+    .then(site.sidebar.highlightTocOnScrollOnce); // .then allows the fn to take an argument from languageGuides which .finally wouldn't pass along
 });
