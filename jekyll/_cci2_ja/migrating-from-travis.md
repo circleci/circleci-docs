@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: "Travis CI からの移行"
+title: Travis CI からの移行
 categories:
   - migration
-description: "Travis CI からの移行"
+description: An overview of how to migrate from Travis CI to CircleCI.
 ---
 
 Travis CI から CircleCI に移行する方法を概説します。

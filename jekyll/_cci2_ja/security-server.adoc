@@ -2,11 +2,12 @@
 version:
 - Server v2.x
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= セキュリティ
+= Security
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
 :toc: macro
 :toc-title:

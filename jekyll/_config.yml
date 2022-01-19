@@ -21,9 +21,12 @@ plugins:
   - jekyll-target-blank
   - jekyll-toc
   - jekyll-last-modified-at
+  - jekyll-timeago
 
-last-modified-at:
-  date-format: '%d-%b-%y'
+# Approximate distance, with customizable threshold, 
+# ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
+jekyll_timeago:
+  depth: 1
 
 algolia:
   application_id: U0RXNGRK45
@@ -143,7 +146,7 @@ defaults:
     values:
       toc: true
 
-  # Disable suggested by default
+  # Disable helpful resources section by default
   - scope:
       path: ""
     values:

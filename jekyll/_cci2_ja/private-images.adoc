@@ -4,9 +4,10 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= Docker の認証付きプルの使用
+= Using Docker Authenticated Pulls
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document describes how to authenticate with your Docker registry provider to pull images.
 :icons: font
 :toc: macro
 :toc-title:
@@ -49,7 +50,18 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ----
 
-また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 たとえば下記のようにします。
+If you have https://docs.docker.com/docker-hub/2fa/[two-factor authentication set up on Docker Hub], you can simply use https://docs.docker.com/docker-hub/access-tokens/[your personal access token] for the `password` key instead.
+たとえば下記のようにします。
+
+[source,yaml]
+----
+- image: acme-private/private-image:321
+  auth:
+    username: mydockerhub-user
+    password: $DOCKERHUB_ACCESS_TOKEN
+----
+
+また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 具体的な例は、次のようになります。
 
 [source,yaml]
 ----

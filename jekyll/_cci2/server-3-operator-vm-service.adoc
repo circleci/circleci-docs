@@ -14,160 +14,99 @@ version:
 CircleCI server's VM service controls how https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor
 (Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
 
-This section describes the available configuration options for VM service. These config options are all accessible from the KOTS admin console by choosing the Config tab frm your dashboard.
+This section describes the available configuration options for VM service. These config options are all accessible from the KOTS admin console by choosing the **Config** tab from your dashboard.
 
 toc::[]
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your server installation.
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#eks[AWS] and {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#gke[GCP].
 
-== AWS EC2
-You will need the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
-Key used by VM Service differs from the policy used by object storage in the previous section.
+== VM service settings
+You will need to provide the hostname for your VM service load balancer:
 
-. *AWS Region* (required): This is the region the application is in.
-. *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
-. *Subnets* (required): Choose subnets (public or private) where the VMs should be deployed. Note that all subnets must be in the same availability zone.
-. *Security Group ID* (required): This is the security group that will be attached to the VMs.
+. Once your server installation is up and running, run the following:
++
+----
+kubectl get svc/vm-service
+----
+. Enter the address listed under **External IP** in the **VM Service Load Balancer Hostname** field.
 
+There is also an option to change the port used for VM service. The default is `3000` and this should only be changed if you are guided to do so by a CircleCI support engineer.
+
+== VM provider
+The following configuration options are for the VM provider: either AWS or GCP.
+
+=== AWS EC2
+You will need to complete the following fields to configure your VM Service to work with AWS EC2. 
+
+At this point you can uncheck the **Assign Public IPs** check box if you need VMs to use private IP addresses.
+
+* *AWS Region* (required): This is the region the application is in.
+* *AWS Linux AMI ID* (optional): If you wish to provide a custom AMI for Linux `machine` executors you can supply an AMI ID here. To create a Linux image use the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder]. If you leave this field blank, a <<default-aws-ami-list,default AMI>> will be used.
+* *AWS Windows AMI ID* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Leave this field blank if you do not require them.
+* *Subnets* (required): Choose subnets (public or private) where the VMs should be deployed. Note that all subnets must be in the same availability zone.
+* *Security Group ID* (required): This is the security group that will be attached to the VMs.
++
 The recommended security group configuration can be found in the https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
+* *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
++
+NOTE: The Access Key and Secret
+Key used by VM Service differs from the policy used by object storage in the previous section.
+* *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for EC2 access.
+* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
+of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
+instances lowers the start time allowing for faster machine and `remote_docker` builds. 
++
+NOTE: preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
++
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. To ensure this can happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
++
+NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
 
-[start=5]
-. *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
-. *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for EC2 access.
+==== Default AWS AMI list
 
-It is recommended to create a new user with programmatic access for this purpose. You should attach the following IAM policy to the user:
+The default AMIs for server v3.x are based on Ubuntu 20.04.
 
-[source,json]
 ----
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "ec2:RunInstances",
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:ec2:*::image/*",
-        "arn:aws:ec2:*::snapshot/*",
-        "arn:aws:ec2:*:*:key-pair/*",
-        "arn:aws:ec2:*:*:launch-template/*",
-        "arn:aws:ec2:*:*:network-interface/*",
-        "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:volume/*",
-        "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/${SECURITY_GROUP_ID}"
-      ]
-    },
-    {
-      "Action": "ec2:RunInstances",
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:instance/*",
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:CreateVolume"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:ec2:*:*:volume/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateTags"
-      ],
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:CreateAction" : "CreateVolume"
-        }
-      }
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateTags"
-      ],
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:CreateAction" : "RunInstances"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:CreateTags",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances",
-        "ec2:AttachVolume",
-        "ec2:DetachVolume",
-        "ec2:DeleteVolume"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:RunInstances",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:subnet/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:Vpc": "${VPC_ARN}"
-        }
-      }
-    }
-  ]
-}
+"us-east-1" "ami-04f249339fa8afc90" 
+"ca-central-1" "ami-002f61fb4f6cd4f04" 
+"ap-south-1" "ami-0309e6438340ff3f5" 
+"ap-southeast-2" "ami-03ac956e1d298b76a" 
+"ap-southeast-1" "ami-0272b002478c96552" 
+"eu-central-1" "ami-07266a91e4ef7e3e8" 
+"eu-west-1" "ami-0bc8a965f9ae82e44" 
+"eu-west-2" "ami-0bcbed1cffe3866c2" 
+"sa-east-1" "ami-05291e231356c0387" 
+"us-east-2" "ami-08735066168c5c8e9" 
+"us-west-1" "ami-035e0e862838fcb21" 
+"us-west-2" "ami-0b4970c467d8baaef" 
+"ap-northeast-1" "ami-0b9233227f60abc2c" 
+"ap-northeast-2" "ami-08e7a9df6ab2f6b9d" 
+"eu-west-3" "ami-07f0d51c7621f0c39" 
+"us-gov-east-1" "ami-0f68718afd37587ae" 
+"us-gov-west-1" "ami-8e2106ef"
 ----
 
-== Google Cloud Platform
-You will need the following fields to configure your VM Service to work with Google Cloud Platform (GCP).
-
-. *GCP project ID* (required): Name of the GCP project the cluster resides.
-. *GCP Zone* (required): GCP zone the virtual machines instances should be created in IE `us-east1-b`.
-. *GCP Windows Image* (optional): Name of the image used for Windows builds. Leave this field blank if you do not require them.
-. *GCP VPC Network* (required): Name of the VPC Network.
-. *GCP VPC Subnet* (optional): Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
-. *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file].
+=== Google Cloud Platform
+You will need the following fields to configure your VM service to work with Google Cloud Platform (GCP).
 
 WARNING: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta)
 role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
 
-== Configuring VM Service
+At this point you can uncheck the **Assign Public IPs** check box if you need VMs to use private IP addresses.
 
-. *Number of <VM type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
+* *GCP project ID* (required): Name of the GCP project the cluster resides.
+* *GCP Zone for your VMs* (required): GCP zone the virtual machines instances should be created in IE `us-east1-b`.
+* *GCP Windows Image* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Leave this field blank if you do not require them.
+* *GCP VPC Network* (required): Name of the VPC Network.
+* *GCP VPC Subnet* (optional): Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
+* *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file].
+* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
 of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
-instances lowers the start time allowing for faster machine and `remote_docker` builds. Note, that preallocated instances
-are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes
-to take effect. You have the option of terminating those instances manually, if required.
-. *Configure VM Service to use private IP addresses*: This is a checkbox option. Leave the box checked to use public IP addresses or uncheck to ensure private IP addresses are used. 
+instances lowers the start time allowing for faster machine and `remote_docker` builds. 
++
+NOTE: preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
++
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. To ensure this can happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
++
+NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.

@@ -117,7 +117,13 @@ CLI は、テスト スイートによって生成されたタイミング デ�
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
-手動でタイミングデータを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) ステップを使用します。
+For partially found test results, we automatically assign a random small value to any test we did not find timing data for. You can override this assigned value to a specific value with the `--time-default` flag.
+
+```
+circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
+```
+
+手動でタイミング データを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) ステップを使用します。
 
 注: タイミングデータが見つからない場合、`Error autodetecting timing type, falling back to weighting by name` というメッセージが出力されます。 この場合、テストは、テスト名に基づきアルファベット順に分割されます。
 
@@ -125,7 +131,7 @@ cat my_java_test_classnames | circleci tests split --split-by=timings --timings-
 {: #splitting-by-name }
 {:.no_toc}
 
-デフォルトでは、`--split-by` フラグを使用しない場合、`circleci tests split` はファイル名またはクラス名の一覧が渡されることを想定しており、テスト名によってアルファベット順にテストを分割します。 ファイル名の一覧は、以下に挙げる複数の方法で用意できます。
+デフォルトでは、`--split-by` フラグを使用しない場合、`circleci tests split` はファイル名またはクラス名の一覧が渡されることを想定しており、テスト名またはクラス名によってアルファベット順にテストを分割します。 ファイル名の一覧は、以下に挙げる複数の方法で用意できます。
 
 テストファイル名を含むテキストファイルを作成する
 
@@ -145,7 +151,7 @@ circleci tests split < /path/to/items/to/split
 circleci tests glob "test/**/*.java" | circleci tests split
 ```
 
-CLI は、使用可能なコンテナ数と現在のコンテナインデックスを調べます。 次に、決定論的な分割アルゴリズムを使用して、使用可能なすべてのコンテナでテストファイルを分割します。
+CLI は、使用可能なコンテナ数と現在のコンテナ インデックスを調べます。 次に、決定論的な分割アルゴリズムを使用して、使用可能なすべてのコンテナでテスト ファイルを分割します。
 
 デフォルトでは、`parallelism` キーによってコンテナ数を指定します。 `--total` フラグを使用すれば、手動で設定できます。
 
@@ -153,7 +159,7 @@ CLI は、使用可能なコンテナ数と現在のコンテナインデック�
 circleci tests split --total=4 test_filenames.txt
 ```
 
-同様に、現在のコンテナインデックスは環境変数を基に自動的に決定されますが、`--index` フラグを使用して手動で設定することも可能です。
+同様に、現在のコンテナ インデックスは環境変数を基に自動的に決定されますが、`--index` フラグを使用して手動で設定することも可能です。
 
 ```
 circleci tests split --index=0 test_filenames.txt
@@ -163,7 +169,7 @@ circleci tests split --index=0 test_filenames.txt
 {: #splitting-by-filesize }
 {:.no_toc}
 
-ファイルパスを指定すれば、CLI はファイルサイズでも分割できます。 それには、分割タイプ `filesize` を付けて `--split-by` フラグを使用します。
+ファイル パスを指定すれば、CLI はファイル サイズでも分割できます。 それには、分割タイプ `filesize` を付けて `--split-by` フラグを使用します。
 
 ```
 circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
@@ -172,12 +178,12 @@ circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 ## 環境変数を使用したテストの分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables)」を参照してください。
+CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
 
 ## 分割テストの実行
 {: #running-split-tests }
 
-テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテストランナーに渡します。
+テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテスト ランナーに渡します。
 
 ```bash
 circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
@@ -197,13 +203,13 @@ CircleCI でテスト分割を活用するには、実行するテストの一�
 ```
 - run:
     command: |
-      # get test files while ignoring __init__ files
+      # __init__ ファイルを除外してテストファイルを取得
       TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
       echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
       cat circleci_test_files.txt
       TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
-      # massage filepaths into format manage.py test accepts
-      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
+      # manage.py テストに合わせた形式にファイルパスを変更
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
       echo $TESTFILES
       pipenv run python manage.py test --verbosity=2 $TESTFILES
 ```
@@ -285,17 +291,19 @@ workflows:
 {: #video-troubleshooting-globbing }
 {:.no_toc}
 
-注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。  
+
+<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 関連項目
 {: #see-also }
 
-[コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)
+[コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
 
-一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされています。 CircleCI ではこれらのアプリケーションの開発やサポートを行っていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、[CircleCI の Discuss フォーラム](https://discuss.circleci.com/)で対処方法を検索するか、質問してみてください。
+一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされています。 これらのアプリケーションは、CircleCI では開発およびサポートが行われていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、CircleCI のフォーラム「[CircleCI Discuss](https://discuss.circleci.com/)」で対処方法を検索するか、質問してみてください。
 
 - **[Knapsack Pro](https://knapsackpro.com)**: 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 CI のビルド時間への効果は[こちらのグラフ](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress)でご確認ください。
 

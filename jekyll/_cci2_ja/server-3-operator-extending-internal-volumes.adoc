@@ -99,13 +99,13 @@ gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   t
 Postgres の場合:
 [source,bash]
 ----
-circleci-user ~ $ kubectl delete sts postgresql --cascade=false
+kubectl delete sts postgresql --cascade=false
 ----
 
 Mongodbの場合:
 [source,bash]
 ----
-circleci-user ~ $ kubectl delete sts mongodb --cascade=false
+kubectl delete sts mongodb --cascade=false
 ----
 
 === ステップ 3: データベースの PVC サイズを更新する
@@ -114,13 +114,13 @@ circleci-user ~ $ kubectl delete sts mongodb --cascade=false
 Postgres の場合:
 [source,bash]
 ----
-circleci-user ~ $ kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
+kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
 Mongodbの場合:
 [source,bash]
 ----
-circleci-user ~ $ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
+kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
 === ステップ 4: KOTS 管理者を新しい PVC サイズに更新する
@@ -156,17 +156,50 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 ご覧のように、ディレクトリのサイズが拡張されています。
 
-
-NOTE: これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動することができます。
+When running through these steps, if you find, as expected, that the new pods **do** show the resized volumes, it is still worth running the `kubectl describe` commands shown below to check. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
 
 Postgres の場合:
 [source,bash]
 ----
-circleci-user ~ $ kubectl rollout restart sts postgresql
+kubectl describe pvc data-postgresql-0
 ----
 
 Mongodbの場合:
 [source,bash]
 ----
-circleci-user ~ $ kubectl rollout restart sts mongodb
+kubectl describe pvc datadir-mongodb-0
 ----
+
+success looks like:
+```
+Events:
+Type    Reason                      Age   From     Message
+
+Normal  FileSystemResizeSuccessful  19m   kubelet  MountVolume.NodeExpandVolume succeeded for volume "pvc-b3382dd7-3ecc-45b0-aeff-45edc31f48aa"
+```
+
+Failure might look like:
+```
+Warning  VolumeResizeFailed  58m   volume_expand  error expanding volume "circleci-server/datadir-mongodb-0" of plugin "kubernetes.io/aws-ebs": AWS modifyVolume failed for vol-08d0861715c313887 with VolumeModificationRateExceeded: You've reached the maximum modification rate per volume limit. Wait at least 6 hours between modifications per EBS volume.
+status code: 400, request id: 3bd43d1e-0420-4807-9c33-df26a4ca3f23
+Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolume.NodeExpandVolume succeeded for volume "pvc-29456ce2-c7ff-492b-add4-fcf11872589f"
+```
+
+== トラブルシューティング
+
+これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 This will cause downtime of 1-5 mins as the databases restart. 以下のコマンドでデータベースを再起動することができます。
+
+Postgres の場合:
+[source,bash]
+----
+kubectl rollout restart sts postgresql
+----
+
+Mongodbの場合:
+[source,bash]
+----
+kubectl rollout restart sts mongodb
+----
+
+
+

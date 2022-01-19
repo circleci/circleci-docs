@@ -27,7 +27,7 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 ## Migration
 {: #migration }
 
-Visit the [Migration Introduction]({{ site.baseurl }}//2.0/migration-intro/) doc which links out to migration guides for various platforms.
+Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
 
 ### How do I migrate from Jenkins to CircleCI?
 {: #how-do-i-migrate-from-jenkins-to-circleci }
@@ -225,26 +225,19 @@ CircleCI provides no guarantees about precision. A scheduled workflow will be ru
 ### What do I need to get started building on Windows?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-You will need a [Performance plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows jobs are charged at 40 credits/minute.
+See the [comparison table](https://circleci.com/pricing/#comparison-table) for which plans can access Windows resources.
 
 ### What exact version of Windows are you using?
 {: #what-exact-version-of-windows-are-you-using }
 {:.no_toc}
 
-We use Windows Server 2019 Datacenter Edition, the Server Core option.
+The [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page outlines which versions of Windows are offered.
 
 ### What is installed on the machine?
 {: #what-is-installed-on-the-machine }
 {:.no_toc}
 
-The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our "[Hello World On
-Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
-
-### What is the machine size?
-{: #what-is-the-machine-size }
-{:.no_toc}
-
-The Windows machines have 4 vCPUs and 15GB RAM.
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our [Hello World On Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
 
 ### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
@@ -301,11 +294,11 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
 
-#### How do I calculate my monthly costs?
-{: #how-do-I-calculate-my-monthly-costs }
+#### How do I calculate my monthly storage and network costs?
+{: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-Calculate your monthly costs by finding your Storage and Network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
 
 ##### Storage
 {: #storage }
@@ -320,6 +313,18 @@ To calculate monthly storage costs from your daily usage, click on the **Storage
 To calculate monthly network costs from your usage, click on the **Network** tab to see if your organization has accrued any overages. In the same scenario as storage above, your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+
+#### How do I calculate my monthly IP ranges cost?
+{: #how-do-I-calculate-my-monthly-IP-ranges-costs }
+{:.no_toc}
+
+Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+
+In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
+
+This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 #### Why does CircleCI have per-active-user pricing?
 {: #why-does-circleci-have-per-active-user-pricing }

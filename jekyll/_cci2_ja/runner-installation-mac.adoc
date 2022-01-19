@@ -104,16 +104,15 @@ sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/lau
 
 == `launchd` サービスを有効にする
 
-2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
-
-```bash
-sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
-```
-
 これで、サービスをロードできます。
 
 ```bash
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+NOTE: 2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
+```bash
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 == サービスの実行状態を確認する

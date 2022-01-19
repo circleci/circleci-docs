@@ -13,7 +13,10 @@ version:
 
 Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
-NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
+
+.Installation Experience Flow Chart Phase 2
+image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
 
 toc::[]
 
@@ -170,6 +173,8 @@ For more information on adding a new DNS record, see the following documentation
 * link:https://cloud.google.com/dns/docs/records#adding_a_record[Managing Records] (GCP)
 
 * link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
+
+NOTE: The Traefik load balancer has a healthcheck that serves a JSON payload at https://loadbalancer-address/status.
 
 === Validation
 

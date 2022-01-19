@@ -81,15 +81,17 @@ This section provides the following test runner examples:
 | Language   | Test Runner  | Formatter                                                                               | Example(s)                                                                                                                             |   |   |
 |:-----------|:-------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|---|---|
 | JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                  | [example]( {{ site.baseurl }}/2.0/collect-test-data/#jest)                                                                             |   |   |
-| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/)                                  | [example]({{site.baseurl}}/2.0/collect-test-data/#mochajs), [example with NYC]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |   |   |
+| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                                  | [example]({{site.baseurl}}/2.0/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |   |   |
 | JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)              | [example]({{site.baseurl}}/2.0/collect-test-data/#karma)                                                                               |   |   |
-| JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/2.0/collect-test-data/#ava)                                                                                 |   |   |
+| JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/2.0/collect-test-data/#ava-for-node)                                                                        |   |   |
 | JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                  | [example]({{site.baseurl}}/2.0/collect-test-data/#eslint)                                                                              |   |   |
 | Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/2.0/collect-test-data/#rspec)                                                                               |   |   |
 | Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                    | [example]({{site.baseurl}}/2.0/collect-test-data/#minitest)                                                                            |   |   |
 |            | Cucumber     | built in                                                                                | [example]({{site.baseurl}}/2.0/collect-test-data/#cucumber)                                                                            |   |   |
 | Python     | pytest       | built in                                                                                | [example]({{site.baseurl}}/2.0/collect-test-data/#pytest)                                                                              |   |   |
 | Python     | unittest     | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests         | [example]({{site.baseurl}}/2.0/collect-test-data/#unittest)                                                                            |   |   |
+| Java     | Maven     | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)            | [example]({{site.baseurl}}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                        |   |   |
+| Java     | Gradle     | built in                                                                                    | [example]({{site.baseurl}}/2.0/collect-test-data/#gradle-junit-test-results)                                                           |   |   |
 | PHP        | PHPUnit      | built in                                                                                | [example]({{site.baseurl}}/2.0/collect-test-data/#phpunit)                                                                             |   |   |
 | .NET       |              | [trx2junit](https://github.com/gfoidl/trx2junit)                                        | [example]({{site.baseurl}}/2.0/collect-test-data/#dot-net)                                                                             |   |   |
 | Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                   | [example]({{site.baseurl}}/2.0/collect-test-data/#kaocha)                                                                              |   |   |
@@ -129,8 +131,8 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
-#### <a name="mochajs"></a>Mocha for Node.js
-{: #lessa-namemochajsgreaterlessagreatermocha-for-nodejs }
+#### Mocha for Node.js
+{: #mocha-for-node }
 {:.no_toc}
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
@@ -299,8 +301,8 @@ A working `.circleci/config.yml` section might look like this:
 // additional config...
 ```
 
-#### <a name="ava"></a>Ava for Node.js
-{: #lessa-nameavagreaterlessagreaterava-for-nodejs }
+#### Ava for Node.js
+{: #ava-for-node }
 {:.no_toc}
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
@@ -501,8 +503,8 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
           path: ~/test-results/junit
 ```
 
-#### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
-{: #lessa-namegradle-junit-resultsgreaterlessagreatergradle-junit-test-results }
+#### Gradle JUnit Test Results
+{: #gradle-junit-test-results }
 {:.no_toc}
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
