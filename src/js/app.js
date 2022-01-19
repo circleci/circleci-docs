@@ -26,12 +26,16 @@ $(() => {
   services.highlightjsBadge.init();
   services.progressbar.init();
 
-  if (!/language-(javascript|python)/gm.test(window.location.pathname)) {
-    site.sidebar.highlightTocOnScrollOnce();
+  const isGatedPath =
+    ['/docs/', '/docs/2.0/'].includes(window.location.pathname) ||
+    ['-preview/', 'view/2.0/'].includes(window.location.pathname.slice?.(-9)) ||
+    /language-(javascript|python)/gm.test(window.location.pathname);
+  if (!isGatedPath) {
+    site.toc.highlightTocOnScrollOnce();
   }
 
-  import(/* webpackPrefetch: true */ './experiments') // imports all experiments
-    .then(({ default: { languageGuides } = {} }) => languageGuides()) // ensure languageGuides is loaded
-    .catch(site.sidebar.highlightTocOnScrollOnce)
-    .then(site.sidebar.highlightTocOnScrollOnce); // .then allows the fn to take an argument from languageGuides which .finally wouldn't pass along
+  import(/* webpackPrefetch: true */ './experiments').then(
+    ({ default: { languageGuides } = {} }) =>
+      isGatedPath ? languageGuides() : null,
+  ); // ensure languageGuides is loaded; // imports all experiments
 });
