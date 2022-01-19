@@ -49,7 +49,7 @@ jobs: # a collection of steps
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:14.0.0
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -155,7 +155,7 @@ version: 2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:14.0.0
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
