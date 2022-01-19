@@ -121,6 +121,7 @@ jobs:
       - image: cimg/node:17.2-browsers
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: The First Step
           command: |

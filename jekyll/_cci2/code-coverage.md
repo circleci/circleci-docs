@@ -88,6 +88,7 @@ jobs:
           POSTGRES_PASSWORD: ""
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: Bundle Install
           command: bundle check || bundle install
@@ -128,6 +129,7 @@ jobs:
           POSTGRES_PASSWORD: ""
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: Bundle Install
           command: bundle check || bundle install
@@ -234,6 +236,7 @@ jobs:
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
+    - browser-tools/install-browser-tools
     - run:
         name: Setup testing environment
         command: |
@@ -268,6 +271,7 @@ jobs:
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
+    - browser-tools/install-browser-tools
     - run:
         name: Setup testing environment
         command: |
@@ -427,6 +431,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run : mvn test
       - store_artifacts:
           path:  target
@@ -446,6 +451,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run : mvn test
       - store_artifacts:
           path:  target
@@ -493,6 +499,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run: npm install
       - run:
           name: "Run Jest and Collect Coverage Reports"
@@ -515,6 +522,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run: npm install
       - run:
           name: "Run Jest and Collect Coverage Reports"
@@ -573,6 +581,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
@@ -594,6 +603,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
