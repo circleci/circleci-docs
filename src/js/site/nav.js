@@ -92,24 +92,26 @@ const openLangDropdown = () => {
   });
 
   // enable going 'back' to the mobile menu.
-  mobileBackBtn.addEventListener('click', () => {
-    langPicker.classList.remove('lang-active');
-    underlyingMobileMenu.classList.remove('hidden-md');
-    dimmer.style.display = 'none';
-    globalNav.classList.remove('lang-picker-open');
-  });
+  mobileBackBtn &&
+    mobileBackBtn.addEventListener('click', () => {
+      langPicker.classList.remove('lang-active');
+      underlyingMobileMenu.classList.remove('hidden-md');
+      dimmer.style.display = 'none';
+      globalNav.classList.remove('lang-picker-open');
+    });
 
   // closes the lang picker, restoring the mobile menu.
-  mobileCloseBtn.addEventListener('click', () => {
-    underlyingMobileMenu;
-    langPicker.classList.remove('lang-active');
-    underlyingMobileMenu.classList.remove('hidden-md');
-    dimmer.style.display = 'none';
-    // simulate a click to close the menu.
-    document.querySelector('.global-nav--toggle').click();
-    globalNav.classList.remove('lang-picker-open');
-    mobileCloseBtn.classList.remove('clickable');
-  });
+  mobileCloseBtn &&
+    mobileCloseBtn.addEventListener('click', () => {
+      underlyingMobileMenu;
+      langPicker.classList.remove('lang-active');
+      underlyingMobileMenu.classList.remove('hidden-md');
+      dimmer.style.display = 'none';
+      // simulate a click to close the menu.
+      document.querySelector('.global-nav--toggle').click();
+      globalNav.classList.remove('lang-picker-open');
+      mobileCloseBtn.classList.remove('clickable');
+    });
 
   // close out the menu if you click anywhere outside of it.
   let submitBtn = document.getElementById('submit-lang-btn');
