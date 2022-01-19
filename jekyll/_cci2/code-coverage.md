@@ -251,7 +251,7 @@ jobs:
     - store_artifacts:
         path: htmlcov
 workflows:
-  workflow:
+  test-workflow:
     jobs:
     - build
 ```
@@ -285,7 +285,7 @@ jobs:
     - store_artifacts:
         path: htmlcov
 workflows:
-  workflow:
+  test-workflow:
     jobs:
     - build
 ```
