@@ -1,7 +1,7 @@
 import '../../../jest/global';
-import { highlightTocOnScroll, highlightTocOnScrollOnce } from './sidebar';
+import { highlightTocOnScroll, highlightTocOnScrollOnce } from './toc';
 
-describe('Sidebar', () => {
+describe('Table of Contents', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -122,16 +122,16 @@ describe('Sidebar', () => {
     });
 
     it('Calls observe', () => {
-      const sidebar = require('./sidebar');
+      const toc = require('./toc');
       // because InteractionObserver is a class on the window we need to actually
       // spy on the prototype of the method.
       const spy = jest.spyOn(IntersectionObserver.prototype, 'observe');
-      sidebar.highlightTocOnScrollOnce();
+      toc.highlightTocOnScrollOnce();
       expect(spy).toHaveBeenCalled();
     });
 
     it('Does not call observe if there are no titles.', () => {
-      const sidebar = require('./sidebar');
+      const toc = require('./toc');
       const spy = jest.spyOn(IntersectionObserver.prototype, 'observe');
       let tocItem = document.createElement('a');
 
@@ -149,20 +149,20 @@ describe('Sidebar', () => {
           return items.childNodes;
         });
 
-      sidebar.highlightTocOnScrollOnce();
+      toc.highlightTocOnScrollOnce();
       expect(spy).not.toHaveBeenCalled();
     });
 
     it("A document with one h2 is in the TOC and is 'active'", () => {
-      const sidebar = require('./sidebar');
-      sidebar.highlightTocOnScrollOnce();
+      const toc = require('./toc');
+      toc.highlightTocOnScrollOnce();
       expect([...tocItem.classList]).toEqual(
         expect.arrayContaining(['active']),
       );
     });
 
     it('Does not add an active class to TOC item when a ignored headline is encountered', () => {
-      const sidebar = require('./sidebar');
+      const toc = require('./toc');
       let h2 = document.createElement('h2');
       h2.classList.add('help-improve-header');
 
@@ -181,7 +181,7 @@ describe('Sidebar', () => {
           return items.childNodes;
         });
 
-      sidebar.highlightTocOnScrollOnce();
+      toc.highlightTocOnScrollOnce();
 
       expect([...tocItem.classList]).toEqual(
         expect.not.arrayContaining(['active']),
