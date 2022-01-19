@@ -146,7 +146,7 @@ defaults:
     values:
       toc: true
 
-  # Disable suggested by default
+  # Disable helpful resources section by default
   - scope:
       path: ""
     values:
