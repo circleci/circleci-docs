@@ -23,15 +23,24 @@ _(Warning: This may take up to 10 minutes to build)_
 
 **Note:** In the event you find yourself needing to cleanup docker/jekyll cache, you can use the `yarn clean` command.
 
-## 2. Local Development with Ruby and Bundler (alternative to Docker)
+## 2. Local Development with Ruby and Bundler
 
-If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
+If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing external dependencies, you can follow these instructions. Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
 
-Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
+1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
+2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
+3. Start Docker Desktop
+4. Add the following line to your `/etc/hosts` file:
+   ```bash
+   127.0.0.1 ui.circleci.com
+   ```
+5. Run `bundle install`. You will need to have [Bundler](https://bundler.io/) installed on your local machine.
+6. Run `yarn install`. You will need to have [Yarn](https://yarnpkg.com/getting-started) installed on your local machine.
+7. Finally, run `yarn dev` to start the site.
+8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
+9. To gracefully stop the running commands you can CTRL-C.
 
-We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
-
-You're welcome to use [Bundler](https://bundler.io/) to install these gems.
+**Note:** In the event you find yourself needing to cleanup jekyll cache, you can use the `yarn dev-clean` command.
 
 ## Submitting Pull Requests
 
