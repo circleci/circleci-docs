@@ -13,6 +13,7 @@ $btn-selected-green: #00701B;
 $btn-outer-blue: #0078CA;
 $btn-hover-blue: #0062B0;
 $btn-selected-blue: #004A95;
+$desktop-header-nav-height: 68.5px;
 
 // Copy of outer blog-nav, renmaed to global-nav
 ///////////////////////////////////////////////////////////////////////////////
@@ -465,7 +466,7 @@ a.nav-skip-button {
 // Ensures header does not expand after opening the dropdown menu and expanding the window view size
 @media (min-width: $screen-sm) {
   .global-nav--component .global-nav--row-desktop {
-    height: 68.5px;
+    height: $desktop-header-nav-height;
   }
 }
 
