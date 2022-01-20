@@ -25,7 +25,7 @@ _(Warning: This may take up to 10 minutes to build)_
 
 ## 2. Local Development with Ruby and Bundler
 
-If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing external dependencies, you can follow these instructions. Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
+If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing external dependencies, you can follow these instructions. Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we are currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
 
 1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
