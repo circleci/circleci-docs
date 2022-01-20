@@ -6,7 +6,7 @@ export default () =>
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_guided_language_tours_test',
     groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
-    experimentContainer: '.treatment',
+    experimentContainer: '.article-toc .treatment',
   })
     .then((variation) => {
       const elements = document.getElementsByClassName(variation ?? 'control');
