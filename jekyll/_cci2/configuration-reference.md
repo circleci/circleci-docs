@@ -135,7 +135,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: cimg/ruby:3.0.3-browsers + Browser Tools Orb
+      - image: cimg/ruby:3.0.3-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
