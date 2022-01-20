@@ -551,7 +551,7 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *Configure server*
 +
-Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-vm-operator-service[VM Service] guide.
+Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
 
 Once you have configured the fields, *save your config* and deploy your updated application. 
 
