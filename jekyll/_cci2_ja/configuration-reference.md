@@ -306,7 +306,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
 ```
 
-[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 認証情報での認証が必要です。 デフォルトでは、CircleCI アプリケーションの [Project (プロジェクト)] > [Settings (設定)] > [AWS Permissions (AWS 権限)] ページで追加した AWS 認証情報、またはプロジェクト環境変数の `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使用します。 下記のように `aws_auth` フィールドを用いて認証情報をセットすることも可能です。
+[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 認証情報での認証が必要です。 By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the [`aws_auth` field]({{ site.baseurl }}/2.0/configuration-reference/#docker-machine-macos-windows-executor) as in the following example:
 
 ```yaml
 jobs:
@@ -1438,7 +1438,7 @@ workflows:
       - build
 ```
 
-**Notes**:
+**注意:**
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - IP ranges is currently in open preview for paid accounts. 具体的な料金や詳細については、機能の一般公開時にお知らせします。
