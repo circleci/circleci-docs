@@ -251,7 +251,7 @@ Next, from the KOTS Admin Console dashboard, select Version History from the men
 
 == Release 3.0.1
 
-- `build agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
+- `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
 - Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
 - Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
 
