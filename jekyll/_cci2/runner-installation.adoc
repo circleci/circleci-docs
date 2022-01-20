@@ -165,6 +165,9 @@ depending on your version of server:
 
 | 3.2
 | 1.0.19813-e9e1cd9
+
+| 3.3
+| 1.0.29477-605777e
 |===
 
 == Additional Resources
