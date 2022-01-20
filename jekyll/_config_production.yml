@@ -4,3 +4,40 @@ rollbar_env: production
 
 # Optimizely SDK key for prod env
 optimizely: "2DuqgdSgVTZ1n4upLM2Her"
+
+defaults:
+  - scope:
+      path: ""
+      type: "cci2"
+    values:
+      lang: "en"
+
+  - scope:
+      path: ""
+      type: "cci2_ja"
+    values:
+      lang: "ja"
+
+  - scope:
+      path: ""
+    values:
+      hide: false
+      search: true
+
+  # Enable TOC by default
+  - scope:
+      path: ""
+    values:
+      toc: true
+
+  # Disable helpful resources section by default
+  - scope:
+      path: ""
+    values:
+      suggested: false
+
+  # Enable sitemap in prod
+  - scope:
+      path: ""
+    values:
+      sitemap: true
