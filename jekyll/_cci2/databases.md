@@ -104,7 +104,7 @@ This section describes additional optional configuration for further customizing
 {:.no_toc}
 
 PostGIS is available and can be used like this:
-`circleci/postgres:12.0-postgis`
+`cimg/postgres:12.0-postgis`
 
 ### Using binaries
 {: #using-binaries }
