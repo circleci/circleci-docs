@@ -569,44 +569,11 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 ## 定義済み環境変数
 {: #built-in-environment-variables }
 
-以下の環境変数はビルドごとにエクスポートされているので、より複雑なテストやデプロイに使用することができます。
+Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
 
-**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。
+{% include snippets/built-in-env-vars.md %}
 
-詳しくは[シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command)をご覧ください。
-
-| 変数                                        | タイプ  | 値                                                                                                                                                               |
-| ----------------------------------------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CI`{:.env_var}                           | ブール値 | `true` (現在の環境が CI 環境かどうかを表します)                                                                                                                                  |
-| `CIRCLECI`{:.env_var}                     | ブール値 | `true` (現在の環境が CircleCI 環境かどうかを表します)                                                                                                                            |
-| `CIRCLE_BRANCH`{:.env_var}                | 文字列  | 現在ビルド中の Git ブランチの名前                                                                                                                                             |
-| `CIRCLE_BUILD_NUM`{:.env_var}             | 整数   | 現在のジョブの番号。 この番号はジョブごとに一意です。                                                                                                                                     |
-| `CIRCLE_BUILD_URL`{:.env_var}             | 文字列  | CircleCI での現在のジョブの URL                                                                                                                                          |
-| `CIRCLE_JOB`{:.env_var}                   | 文字列  | 現在のジョブの名前                                                                                                                                                       |
-| `CIRCLE_NODE_INDEX`{:.env_var}            | 整数   | (並列処理を有効化してジョブを実行する場合) 並列実行の現在のインデックスです。 0 から "`CIRCLE_NODE_TOTAL` - 1" までの値を取ります。                                                                              |
-| `CIRCLE_NODE_TOTAL`{:.env_var}            | 整数   | (並列処理を有効化してジョブを実行する場合) 並列実行の総数です。 設定ファイルの `parallelism` の値と等しくなります。                                                                                             |
-| `CIRCLE_PR_NUMBER`{:.env_var}             | 整数   | 関連付けられた GitHub または Bitbucket プル リクエストの番号。 フォークされた PR でのみ使用できます。                                                                                                 |
-| `CIRCLE_PR_REPONAME`{:.env_var}           | 文字列  | プル リクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークされた PR でのみ使用できます。                                                                                             |
-| `CIRCLE_PR_USERNAME`{:.env_var}           | 文字列  | プル リクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークされた PR でのみ使用できます。                                                                                            |
-| `CIRCLE_PREVIOUS_BUILD_NUM`{:.env_var}    | 整数   | 現在のブランチのこれまでのビルドの数                                                                                                                                              |
-| `CIRCLE_PROJECT_REPONAME`{:.env_var}      | 文字列  | 現在のプロジェクトのリポジトリの名前                                                                                                                                              |
-| `CIRCLE_PROJECT_USERNAME`{:.env_var}      | 文字列  | 現在のプロジェクトの GitHub または Bitbucket ユーザー名                                                                                                                           |
-| `CIRCLE_PULL_REQUEST`{:.env_var}          | 文字列  | 関連付けられたプル リクエストの URL。 複数のプル リクエストが関連付けられている場合は、いずれか 1 つの URL がランダムに選択されます。                                                                                      |
-| `CIRCLE_PULL_REQUESTS`{:.env_var}         | リスト  | 現在のビルドに関連付けられたプル リクエストの URL の一覧 (カンマ区切り)                                                                                                                        |
-| `CIRCLE_REPOSITORY_URL`{:.env_var}        | 文字列  | GitHub または Bitbucket リポジトリ URL                                                                                                                                  |
-| `CIRCLE_SHA1`{:.env_var}                  | 文字列  | 現在のビルドの前回のコミットの SHA1 ハッシュ                                                                                                                                       |
-| `CIRCLE_TAG`{:.env_var}                   | 文字列  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳しくは [Git タグを使ったジョブの実行]({{site.baseurl}}/2.0/workflows/#executing-workflows-for-a-git-tag)を参照してください。                            |
-| `CIRCLE_USERNAME`{:.env_var}              | 文字列  | パイプラインをトリガーしたユーザーの GitHub または Bitbucket ユーザー名 （そのユーザーが CircleCI のアカウントを持っている場合のみ）                                                                               |
-| `CIRCLE_WORKFLOW_ID`{:.env_var}           | 文字列  | 現在のジョブのワークフロー インスタンスの一意の識別子。 この識別子は、特定のワークフロー インスタンス内のすべてのジョブで同じです。                                                                                             |
-| `CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | 文字列  | An identifier for the [workspace]({{site.baseurl}}/2.0/glossary/#workspace) of the current job. この識別子は、特定のワークスペース内のすべてのジョブで同じです。                                |
-| `CIRCLE_WORKING_DIRECTORY`{:.env_var}     | 文字列  | 現在のジョブの `working_directory` キーの値。                                                                                                                               |
-| `CIRCLE_INTERNAL_TASK_DATA`{:.env_var}    | 文字列  | **内部用**。 ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。                                                                             |
-| `CIRCLE_COMPARE_URL`{:.env_var}           | 文字列  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/)" が導入されています。 |
-| `CI_PULL_REQUEST`{:.env_var}              | 文字列  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUEST` の使用が推奨されます。                                                                                 |
-| `CI_PULL_REQUESTS`{:.env_var}             | リスト  | **非推奨**。 CircleCI 1.0 との下位互換性を確保するために残されています。 `CIRCLE_PULL_REQUESTS` の使用が推奨されます。                                                                                |
-{:class="table table-striped"}
-
-**注:** パイプライン値とパラメーターの一覧については、「[パイプライン変数]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-values)」を参照してください。
+For a full list of available built-in data see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#built-in-environment-variables).
 
 ## 関連項目
 {: #see-also }
