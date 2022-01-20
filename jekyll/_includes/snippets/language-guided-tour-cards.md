@@ -7,7 +7,7 @@
 
 <div id="completion-time" class="card">
 <img alt="Completion Time" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
-<span>50 min read</span>
+<span>{{ include.guide_completion_time }} mins</span>
 </div>
 
 * TOC
@@ -24,11 +24,11 @@ OR
 {: #explore-a-sample-app}
 {:.no_toc}
 
-Check out a {{include.lang}} sample app running on CircleCI.
+Check out a {{ include.lang }} sample app running on CircleCI.
 
 <div id="completion-time" class="card">
 <img alt="Completion Time" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
-<span>50 min read</span>
+<span>{{ include.sample_completion_time }} mins</span>
 </div>
 
 * [View live {{include.lang}} sample app pipeline]({{site.cci_public_org_url}}/circleci-demo-{{include.demo_url_suffix}}){:target="_blank"}{:rel="noopener noreferrer"}

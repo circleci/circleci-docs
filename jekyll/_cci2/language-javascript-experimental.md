@@ -15,7 +15,7 @@ version:
 This document describes how to configure CircleCI using a sample application written in Node.js.
 {% endraw %}
 
-{% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_suffix="javascript-react-app" %}
+{% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_suffix="javascript-react-app" guide_completion_time="50" sample_completion_time="10" %}
 
 ## Overview
 {: #overview }
