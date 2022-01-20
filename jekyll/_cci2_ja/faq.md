@@ -84,12 +84,12 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 {:.no_toc}
 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
-### Why can't I find my project on the Projects dashboard?
+### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Projects`.  GitHub のプロジェクト名 `your-org/project` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [Switch Organization] メニューから目的の Org である `your-org` に切り替えます。
+ビルドしようとしているプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  左上に表示されているのがあなたのユーザー名 `my-user` の場合、`my-user` に属する GitHub プロジェクトだけが  `Projects` の下に表示されます。  GitHub プロジェクト `your-org/project` をビルドする場合、アプリケーションの [Switch Organization] メニューでお客様の組織を `your-org` に変更します。
 
-### 「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。しかし、現在のプランはその条件を満たしています。 なぜエラーになるのでしょうか？
+### 現在のプランでコンテナ数は十分にあるのに、「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。 なぜですか?
 {: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
 {:.no_toc}
 CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI Japanese Support Center](https://support.circleci.com/hc/ja) よりお問い合わせください。
@@ -97,7 +97,7 @@ CircleCI のデフォルト設定では、1 プロジェクトあたりの並列
 ### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. [公式の Docker イメージ](https://hub.docker.com/explore/)に対して行えるのは、以下のように名称やタグを指定したプルのみです。
+CircleCI  では、現在のところ [Docker Hub][docker-hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ][docker-library]に対して行えるのは、以下のようにイメージの名称やタグを指定したプルのみです。
 
 ```
 golang:1.7.1-jessie
@@ -158,7 +158,7 @@ jobs:
 {:.no_toc}
 `store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。 また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
 
-### オンプレミス環境にインストールした CircleCI でも Workflows は使えますか？
+### オンプレミス環境にインストールした CircleCI でもワークフローは使えますか？
 {: #can-i-use-workflows-with-the-installable-circleci }
 {:.no_toc}
 はい、お客様のオンプレミス環境でもご利用いただけます。 CircleCI のインストール手順などについては「[管理者向け概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
@@ -166,9 +166,9 @@ jobs:
 ### 同時に実行できるジョブの数はいくつですか？
 {: #how-many-jobs-can-i-run-at-one-time }
 {:.no_toc}
-同時に実行できるジョブの数は、ご契約中のプランの利用可能なコンテナ数によって決まります。 仮に 10 個の Workflows ジョブが実行されようとしていて、プラン上は 5 つのコンテナしか使えない場合は、実行されるのは一度に 5 つのジョブまでです。 Workflow の設定を行うことで、複数のジョブを同時もしくは連続的に実行できます。 ファンアウト（複数のジョブを同時実行する）、あるいはファンイン（その前の独立したジョブが完了するまで以降の全ジョブを待機させる）が可能です。
+同時に実行できるジョブの数は、ご契約中のプランの利用可能なコンテナ数によって決まります。 仮に 10 個の ワークフロージョブが実行されようとしていて、プラン上は 5 つのコンテナしか使えない場合は、実行されるのは一度に 5 つのジョブまでです。 ワークフローの設定を行うことで、複数のジョブを同時もしくは連続的に実行できます。 ファンアウト（複数のジョブを同時実行する）、あるいはファンイン（その前の独立したジョブが完了するまで以降の全ジョブを待機させる）が可能です。
 
-### 同一の Workflow 内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
+### 同一のワークフロー内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
 {:.no_toc}
 既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/ja/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
@@ -183,12 +183,12 @@ jobs:
 {:.no_toc}
 いいえ、できません。
 
-### Workflows でフォークするプルリクエストをビルドすることは可能ですか？
+### ワークフローでフォークするプルリクエストをビルドすることは可能ですか？
 {: #can-i-build-fork-prs-using-workflows }
 {:.no_toc}
 はい。
 
-### Workflows を指定した日時にスケジュール実行することは可能ですか？
+### ワークフローを指定した日時にスケジュール実行することは可能ですか？
 {: #can-workflows-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
 はい、クラウド版の CircleCI アプリケーションであれば可能です。 例えば、午後 4 時に Workflow を実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。
@@ -201,17 +201,17 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### ビルドのスケジュール実行が失敗する理由は？
 {: #why-didnt-my-scheduled-build-run }
 {:.no_toc}
-スケジュールを設定したワークフローを実行するブランチを正確に指定したうえで、ビルドしたいブランチに対して config.yml ファイルをプッシュしてください。 `master` ブランチにおけるプッシュは、`master` ブランチに対する Workflow しかスケジュールされません。
+スケジュールを設定したワークフローを実行するブランチを正確に指定したうえで、ビルドしたいブランチに対して config.yml ファイルをプッシュする必要があります。 `master` ブランチにおけるプッシュは、`master` ブランチに対するワークフローしかスケジュールされません。
 
-### 複数の Workflows をスケジュール実行できますか？
+### 複数のワークフローをスケジュール実行できますか？
 {: #can-i-schedule-multiple-workflows }
 {:.no_toc}
 はい、可能です。`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
 
-### スケジュールされた Workflows は、指定された時間通り正確に実行されますか？
+### スケジュールされたワークフローは、指定された時間通り正確に実行されますか？
 {: #are-scheduled-workflows-guaranteed-to-run-at-precisely-the-time-scheduled }
 {:.no_toc}
-スケジュールの正確性については保証できません。 設定した時間にコミットがプッシュされたとして Workflow をスケジュール実行します。
+スケジュールの正確性については保証できません。 設定した時間にコミットがプッシュされたとしてワークフローをスケジュール実行します。
 
 ## Windows
 {: #windows }
@@ -219,25 +219,25 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-See the [comparison table](https://circleci.com/pricing/#comparison-table) for which plans can access Windows resources.
+[比較表](https://circleci.com/pricing/#comparison-table)を参照して、Windows のリソースにアクセスできるプランを確認してください。
 
 ### 使用している Windows のバージョンを教えてください。
 {: #what-exact-version-of-windows-are-you-using }
 {:.no_toc}
 
-The [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page outlines which versions of Windows are offered.
+[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows/)のページに使用している Windows のバージョンが掲載されています。
 
 ### マシンには何がインストールされていますか?
 {: #what-is-installed-on-the-machine }
 {:.no_toc}
 
-The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our [Hello World On Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
+[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows/) のページに[使用可能な依存関係の一覧]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image)が掲載されています。
 
-### Is Windows available on CircleCI server?
+### CircleCI Server 上で Windows は利用できますか？
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-The Windows executor is available on CircleCI server v3.x and v2.x
+CircleCI Server v３.x および v2.x で Windows Exexutor をご利用いただけます。
 
 ## 料金・支払い
 {: #billing }
@@ -245,25 +245,25 @@ The Windows executor is available on CircleCI server v3.x and v2.x
 ### 従量課金制（クレジット）プラン
 {: #credit-usage-plans }
 {:.no_toc}
-Visit our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
+[料金プランページ](https://circleci.com/pricing/)でプランの詳細をご確認ください。
 
 #### クレジットとは何ですか？
 {: #what-are-credits }
 {:.no_toc}
 クレジットは、マシンのタイプとサイズに基づく使用料の支払いに充てられます。 また、Docker レイヤー キャッシュなどの有料機能を使用したときにも消費されます。
 
-For example, the 25,000 credit package would provide 2,500 build minutes when using a Docker or Linux "medium" compute at 10 credits per minute. CircleCI provides multiple compute sizes so you can optimize builds between performance (improved developer productivity) and value.
+たとえば、毎分 10 クレジットのレートで Docker または Linux の Medium コンピューティング オプションを利用する場合、25,000 クレジットのパッケージでは 2,500 分のビルドが可能です。 CircleCI ではパフォーマンス (開発者の生産性の向上) と価値を備えた最適なビルドを行なっていただけるよう複数のコンピューティングサイズを提供しています。
 
-When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
+必要に応じて、並列処理を使用してビルド時間をさらに短縮できます。並列処理を使用すると、ジョブを複数のテストに分割して同時に実行できます。 2倍の並列処理により、通常 2,500 分で実行されるビルドが 1,250 分で実行できるため、開発者の生産性がさらに向上します。 2つの Executor がそれぞれ 1,250 分間並行して実行している場合、合計ビルド時間は 2,500 分になります。
 
-#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
+#### 異なる組織間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
 選択したクレジット パッケージの料金が、毎月初めに請求されます。
 
-On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. 子組織のすべてのクレジットとその他の利用料金は親組織に請求されます。
+Free プラン以外のプランでは、`共有組織の追加`オプションによりお客様が管理者としてのアクセス権を持つ Free プランの組織とプランを共有することができます。 プランを共有するすべての組織が「Share & Transfer」のページに記載され、子組織のすべてのクレジットとその他の利用料金が親組織に請求されます。
 
-On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
+Free プラン以外のプランでは、`転送プラン`</code>オプションによりお客様が管理者としてのアクセス権を持つ他の Free プランの組織にお客様のプランを転送することができます。 When you transfer a paid plan to another org, your org will be downgraded to the free plan.
 
 #### コンテナの使用時間が 1 分未満の場合でも 1 分間の料金を支払う必要がありますか？
 {: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
@@ -493,3 +493,4 @@ CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources](
 
 
 [docker-hub]: https://hub.docker.com
+[docker-library]: https://hub.docker.com/explore/
