@@ -65,14 +65,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)
  `11.5.0` | Xcode 11.5 (11E608c)    | 10.15.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)
  `11.4.1` | Xcode 11.4.1 (11E503a)    | 10.15.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)
- `11.3.1` **Deprecated** | Xcode 11.3.1 (11C505)     | 10.15.1 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)
- `11.2.1` **Deprecated** | Xcode 11.2.1 (11B500)     | 10.15.0 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)
- `11.1.0` **Deprecated** | Xcode 11.1 (11A1027)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)
- `11.0.0` **Deprecated** | Xcode 11.0 (11A420a)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)
  `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
 {: class="table table-striped"}
-
-**Note:** Xcode images `11.0.0`, `11.1.0`, `11.2.1` and `11.3.1` are deprecated and will be removed on 12 January 2022.
 
 ## Getting started
 {: #getting-started }

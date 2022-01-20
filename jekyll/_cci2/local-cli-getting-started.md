@@ -112,7 +112,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: cimg/ruby:3.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

@@ -1,11 +1,12 @@
 ---
 version:
 - Server v2.x
-- 管理者
+- Admin
 ---
-= ビルドアーティファクト
+= Build Artifacts
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Build artifacts persist data after a job is completed and can be used for longer-term storage of your build process outputs.
 :icons: font
 :toc: macro
 :toc-title:

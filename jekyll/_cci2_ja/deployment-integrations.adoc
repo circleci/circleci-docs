@@ -7,6 +7,7 @@ version:
 = Configuring Deploys
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how CircleCI can be configured to integrate with other services for QA/testing, feature management, and deployment strategies.
 :icons: font
 :toc: macro
 :toc-title:
@@ -18,7 +19,7 @@ toc::[]
 [discrete]
 == 概要
 
-ソフトウェア・アプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCIは、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
+ソフトウェア・アプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI can deploy to virtually any target, and can be easily configured to integrate with other services for QA/testing, feature management, and deployment strategies such as blue-green or canary deployment. 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
  
 //.Deployment
 // image::pipeline-to-deployment.png[Deployment]

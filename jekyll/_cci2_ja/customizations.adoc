@@ -6,6 +6,7 @@ version:
 = Customization and Configuration
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This documentation summarizes the key files and variables that impact CircleCI server behavior, and configuration options for your server installation.
 :icons: font
 :toc: macro
 :toc-title:
@@ -126,8 +127,8 @@ The value of FOO will take precedence over the default values set in the default
 /etc/circleconfig/workflows-conductor/customizations
 ```
 
-=== Resource Classes
-_Introduced in CircleCI server v2.19_
+=== リソース クラス
+_CircleCI Server v2. 19 からサポート_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
@@ -137,13 +138,13 @@ TIP: Once resource classes are set using the steps below, make these options ava
 
 Following are the steps required to customize resource classes for the Docker executors:
 
-. SSH into the Services machine.
-. Run the following:
+. Services マシンに SSH を行います。
+. 以下を実行します。
 +
 ```shell
 sudo mkdir /etc/circleconfig/picard-dispatcher
 ```
-. Run the following:
+. 以下を実行します。
 +
 ```shell
 sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
@@ -151,7 +152,7 @@ sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 +
 NOTE: This file replaces the full resource class definition for your installation so it is important to include all resource classes your users need at this point, not just those you wish to customize.
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
-. Run:
+. 以下を実行します。
 +
 ```shell
 echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
@@ -216,7 +217,7 @@ circleci dev-console
 ////
 
 === Login Screen
-_Introduced in CircleCI Server v2.17.3_
+_CircleCI Server v2. 17.3 からサポート_
 
 You can add a banner to your login screen as follows:
 

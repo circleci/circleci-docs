@@ -194,16 +194,11 @@ aside.full-height {
     display: none;
   }
 
-  #related-resources {
-    /* hidden by default since it is still an experiment */
-    display: none;
-  }
-
-  .toc-heading, .related-heading {
+  .toc-heading, .helpful-heading {
     margin-left: -2px;
   }
 
-  .toc-indent, .related-indent {
+  .toc-indent, .helpful-indent {
     border-left: 2px solid #EEEEEE;
 
     a {
@@ -212,11 +207,6 @@ aside.full-height {
         color: $link-text-color;
       }
     }
-  }
-
-  /* if both sections are one after another */
-  .toc-indent + #related-resources {
-    margin-top: 40px;
   }
 
   ul, li {

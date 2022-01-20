@@ -76,7 +76,7 @@ you might configure the following job run step:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1-jessie
+      - image: cimg/ruby:3.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD # context / project UI env-var reference

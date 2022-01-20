@@ -22,7 +22,7 @@ toc::[]
 == Phase 3: Execution environment installation
 
 === 出力プロセッサ 
-==== 会社概要 
+==== 概要 
 出力プロセッサは、 Normad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。 
 
 KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
@@ -38,7 +38,7 @@ kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 . *[Save your configuration (設定を保存)]*: Nomad クライアントの設定の完了後、設定のデプロイと確認を行います。  
 
 === Nomad クライアント 
-==== 会社概要  
+==== 概要  
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (via Nomad Server) and run (via Nomad Clients) CircleCI jobs.
 
 Nomad クライアントは Kubernetes クラスタの外部にインストールされ、コントロールプレーン（ Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 MTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
@@ -513,7 +513,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *サーバーの設定*
 +
-Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-vm-operator-service[VM Service] guide.
+Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-operator-vm-service[VM Service] guide.
 
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。 
 

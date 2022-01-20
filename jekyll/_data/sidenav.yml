@@ -337,6 +337,8 @@ en:
         link: 2.0/api-developers-guide/
       - name: API v1.1 Reference
         link: api/v1
+      - name: Project Values and Variables
+        link: 2.0/variables/
       - name: Prebuilt Images
         link: 2.0/circleci-images/
       - name: Glossary
