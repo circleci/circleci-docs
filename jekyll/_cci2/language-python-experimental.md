@@ -17,7 +17,7 @@ how to configure CircleCI
 using a sample application written in Python.
 {% endraw %}
 
-{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_suffix="python-django" %}
+{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_suffix="python-django" guide_completion_time="50" sample_completion_time="10" %}
 
 ## Overview
 {: #overview-new }

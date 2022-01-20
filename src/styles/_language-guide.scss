@@ -39,6 +39,13 @@
         line-height: 24px;
     }
 
+    h3 + p + p {
+        margin-bottom: 16px;
+
+        strong {
+            font-weight: 500;
+        }
+    }
 }
 
 #cards {
@@ -70,7 +77,7 @@
         #completion-time {
             padding: 0;
             font-size: 15px;
-            width: 151px;
+            width: 126px;
             line-height: 18px;
 
             * {
