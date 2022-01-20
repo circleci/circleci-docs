@@ -142,6 +142,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir test-reports
+      - run: browser-tools/install-browser-tools
       - run:
           name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
