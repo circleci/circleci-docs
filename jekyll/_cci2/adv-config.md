@@ -161,13 +161,14 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node-browsers
+      - image: cimg/node:17.0-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
+      - run: browser-tools/install-browser-tools
       - run:
           name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
@@ -235,6 +236,7 @@ jobs:
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-9.6
+      - run: browser-tools/install-browser-tools
       - run: whoami
       - run: |
           psql \
