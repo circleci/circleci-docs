@@ -135,7 +135,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node-browsers
+      - image: cimg/node:17.0-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -280,6 +280,7 @@ jobs:
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-9.6
+      - run: browser-tools/install-browser-tools
       - run: whoami
       - run: |
           psql \
