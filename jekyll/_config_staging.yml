@@ -1,9 +1,2 @@
 url: "https://static-staging.circleci.com"
 rollbar_env: development
-
-defaults:
-  # Enable sitemap in staging
-  - scope:
-      path: ""
-    values:
-      sitemap: true
