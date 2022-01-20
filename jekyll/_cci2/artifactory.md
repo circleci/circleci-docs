@@ -66,7 +66,7 @@ version: 2
 jobs:
   upload-artifact:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:17.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
