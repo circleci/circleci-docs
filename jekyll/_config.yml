@@ -152,12 +152,6 @@ defaults:
     values:
       suggested: false
 
-  # Disable sitemap by default (only want in prod)
-  - scope:
-      path: ""
-    values:
-      sitemap: false
-
 t:
     translation_in_progress:
         ja: "このページはただいま翻訳中です"
