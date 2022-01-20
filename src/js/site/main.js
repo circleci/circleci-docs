@@ -422,10 +422,20 @@ $(function () {
   });
 });
 
+/*
+  Check if users have dark mode enabled
+  Set key if user response has not already been tracked to ensure we dont get multiple events from the same user
+ */
 $(document).ready(() => {
-  window.AnalyticsClient.trackAction('User Dark Mode Preference', {
-    darkModeEnabled:
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches,
-  });
+  const storageKey = 'provided-dark-mode-reponse';
+  if (localStorage.getItem(storageKey)) {
+    return;
+  } else {
+    localStorage.setItem(storageKey, true);
+    window.AnalyticsClient.trackAction('User Dark Mode Preference', {
+      darkModeEnabled:
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches,
+    });
+  }
 });
