@@ -143,7 +143,7 @@ jobs:
 ## ワークフロー
 {: #workflows }
 
-### Workflows のなかで API は使えますか？
+### ワークフローに API は使用できますか?
 {: #can-i-use-the-api-with-workflows }
 {:.no_toc}
 はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/2.0/build-processing/)」をご覧ください。
@@ -263,12 +263,12 @@ CircleCI Server v３.x および v2.x で Windows Exexutor をご利用いただ
 
 Free プラン以外のプランでは、`共有組織の追加`オプションによりお客様が管理者としてのアクセス権を持つ Free プランの組織とプランを共有することができます。 プランを共有するすべての組織が「Share & Transfer」のページに記載され、子組織のすべてのクレジットとその他の利用料金が親組織に請求されます。
 
-Free プラン以外のプランでは、`転送プラン`</code>オプションによりお客様が管理者としてのアクセス権を持つ他の Free プランの組織にお客様のプランを転送することができます。 When you transfer a paid plan to another org, your org will be downgraded to the free plan.
+Free プラン以外のプランでは、`譲渡プラン`</code>オプションによりお客様が管理者としてのアクセス権を持つ他の Free プランの組織にお客様のプランを譲渡することができます。 有料プランを別の組織に譲渡した場合、お客様の組織は Free プランにダウングレードされます。
 
 #### コンテナの使用時間が 1 分未満の場合でも 1 分間の料金を支払う必要がありますか？
 {: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
 {:.no_toc}
-You pay to the next nearest credit. 1 分未満の秒単位は切り上げでクレジットを計算します。
+はい、その場合でも 1 分間分の料金をお支払いいただく必要があります。 1 分未満の秒単位は切り上げでクレジットを計算します。
 
 #### クレジットの購入方法は？ 必要な時に必要な分だけ購入できますか？
 {: #how-do-i-buy-credits-can-i-buy-in-any-increments }
@@ -287,11 +287,11 @@ You pay to the next nearest credit. 1 分未満の秒単位は切り上げでク
   - クレジットは毎月ロールオーバーされ、1 年後に失効します。
 - Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
 
-#### How do I calculate my monthly storage and network costs?
+#### 毎月のストレージ使用料金とネットワーク転送料金はどのように計算するのですか？
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動して、ストレージとネットワークの使用状況を検索し、毎月のストレージ使用料金とネットワーク転送料金を計算します。
 
 ##### ストレージ
 {: #storage }
@@ -307,7 +307,7 @@ Calculate your monthly storage and network costs by finding your storage and net
 
 GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
 
-#### How do I calculate my monthly IP ranges cost?
+#### 毎月の IP アドレスの範囲機能の料金はどのように計算するのですか？
 {: #how-do-I-calculate-my-monthly-IP-ranges-costs }
 {:.no_toc}
 
