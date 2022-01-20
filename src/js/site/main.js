@@ -426,7 +426,7 @@ $(function () {
   Check if users have dark mode enabled
   Set key if user response has not already been tracked to ensure we dont get multiple events from the same user
  */
-const trackDarkModePreference = () => {
+export function trackDarkModePreference() {
   const storageKey = 'provided-dark-mode-response';
   if (localStorage.getItem(storageKey)) {
     return;
@@ -438,5 +438,4 @@ const trackDarkModePreference = () => {
         window.matchMedia('(prefers-color-scheme: dark)').matches,
     });
   }
-};
-trackDarkModePreference();
+}
