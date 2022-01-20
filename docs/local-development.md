@@ -18,7 +18,7 @@ If you are planning on making a pull request, please see the [pull request](http
 _(Learn how to install yarn on your machine [here](https://classic.yarnpkg.com/lang/en/docs/install/).)_
 6. Run `yarn start` to create needed js assets & build the static site in Docker
 _(Warning: This may take up to 10 minutes to build)_
-8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
+8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser displays a HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
 9. To gracefully stop the running commands you can CTRL-C.
 
 **Note:** In the event you find yourself needing to cleanup docker/jekyll cache, you can use the `yarn clean` command.
