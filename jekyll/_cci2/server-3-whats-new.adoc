@@ -20,6 +20,33 @@ patch releases and quarterly feature releases.
 
 toc::[]
 
+== Release 3.3.0
+
+=== New features
+
+* Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/2.0/server-3-install-build-services/nomad-autoscaler[execution environments installation docs].
+* https://circleci.com/docs/2.0/webhooks/[Webhooks] are now available.
+* The Insights dashboard is now available.
+* IRSA (AWS) can now be used as an alternative to keys for object storage authentication.
+* The email address from which build notifications are sent is now configurable from the KOTS Admin Console.
+
+=== Fixes
+
+* Upgraded Python to v3 in Vault container.
+* https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[Docs improvements] on using the shared VPC architecture in GCP. 
+* The JVM heap size has been updated so that `output-processor` can use up to 80% of the pod memory limit.
+
+=== Known issues
+
+* Updating GitHub Enterprise with a modified Let's Encrypt certificate is unsupported.
+* Let's Encrypt's new root certificate `isrgrootx1` is not trusted.
+* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
+identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
+* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
+* Runner cannot be used when server is installed behind a proxy.
+
 == Release 3.2.2
 
 === Upgrade notes
@@ -41,7 +68,7 @@ identical names. This should be avoided as doing so could lead to errors and une
 application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
 CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
 and get details of the possible cause of the issue.
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
 * Runner cannot be used when server is installed behind a proxy.
 * Let's Encrypt certificate generation does not work. You will need to provide your own certificates or use the default certificates provided.
 
@@ -49,7 +76,7 @@ and get details of the possible cause of the issue.
 
 === Upgrade notes
 
-From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+From the KOTS Admin Console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
 
 See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
@@ -70,7 +97,7 @@ identical names. This should be avoided as doing so could lead to errors and une
 application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
 CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
 and get details of the possible cause of the issue.
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
 * Runner cannot be used when server is installed behind a proxy.
 * Let's Encrypt certificate generation does not work. You will need to provide your own certificates or use the default certificates provided.
 
@@ -78,9 +105,9 @@ and get details of the possible cause of the issue.
 
 === Upgrade notes
 
-From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+From the KOTS Admin Console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
 
-When upgrading from server 3.1.x to 3.2 there will be some downtime due to a change to the PostgreSQL pod. There are two issues you could run into with this update, which are covered in the following sections.
+When upgrading from server 3.1.x to 3.2, there will be some downtime due to a change to the PostgreSQL pod. There are two issues you could run into with this update, which are covered in the following sections.
 
 ==== PostgreSQL pod stuck in `pending`
 If you find that the PostgreSQL pod is stuck in a `pending` state after upgrading, scale down the pods to 0 and then scale up again by following the steps below.
@@ -132,31 +159,30 @@ Remove the older Traefik pod with the following command:
 kubectl delete pod circleci-server-traefik-<older pod hash>
 ```
 
-The new Traefik pos will then start ot schedule correctly.
+The new Traefik pod will then start to schedule correctly.
 
 === New features
 
-* Customers who require a fully private installation can now access a setting in the KOTS admin console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a work-around will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
-* Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS admin console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
+* Customers who require a fully private installation can now access a setting in the KOTS Admin Console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a workaround will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
+* Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS Admin Console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
 * We have expanded the machine execution environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
 * The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
 * We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server. 
 * You can now supply a custom Linux AMI for VM service.
-* SSL termination can now be disabled - If you have put server login behind a firewall, this will enable SSL termination at the firewall.
+* SSL termination can now be disabled. If you have put server login behind a firewall, this will enable SSL termination at the firewall.
 * You can now control the size of persistent volumes. For larger customers, the initial persistent volume size was too small, by default. You can now set this at install time, providing an easier migration for those customers that require it. For further information see the https://circleci.com/docs/2.0/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
 * We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]. 
 * You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/2.0/server-3-operator-build-artifacts/[Build Artifacts doc].
 
 === Fixes
 
-* The default windows executor was not as documented, we have increased the size to align with documentation and cloud. 
+* The default windows executor was not as documented. We have increased the size to align with documentation and cloud. 
 
 === Known issues
 
-* KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after nomad clients have been deployed.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
-* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
-identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
+* KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after Nomad clients have been deployed.
+* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations. However, for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
 * CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
 application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
 CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
@@ -169,26 +195,23 @@ and get details of the possible cause of the issue.
 
 === Upgrade notes
 
-IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles
-all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing
-to the `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember,
-you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik`
-in a terminal that has access to the cluster.
+IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing to the `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember,
+you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik` in a terminal that has access to the cluster.
 
-To update your DNS record and upgrade your server installation follow these steps:
+To update your DNS record and upgrade your server installation, follow these steps:
 
 . Retrieve the external IP or DNS name for the traefik load balancer as described or by looking the DNS A record for `app.<your domain name>`` - this should already point to your traefik load balancer.
 . Locate the DNS A record that points to the domain name of your server installation (not the one pointing to the `app.` subdomain)
 . Edit the A record so that it points to the traefik load balancer, just like the record for the `app. subdomain does. Your changes might need a couple of minutes to take effect, depending on you DNS service.
 
-Next, from the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.1.0.
+Next, from the KOTS Admin Console dashboard, select Version History from the menu bar and click **Deploy** for server v3.1.0.
 
 === New features
 
-* Telegraf plugins can now be added to server and customized to use third party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* Telegraf plugins can now be added to server and customized to use third-party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] guide.
-* Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/2.0/server-3-install/[Installation guide] for further information.
-* Dynamic config via setup workflows is now available on server installations. For more information see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/2.0/dynamic-config/[Dynamic Configuration docs page].
+* Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/2.0/server-3-install/[Installation guide].
+* Dynamic config via setup workflows is now available on server installations. For more information, see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/2.0/dynamic-config/[Dynamic Configuration docs page].
 * Runner is now available on server. For further information, including installation steps, see the https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[Runner docs]. Runner allows the use of the macOS executor in server installations and VM service functionality for customers with server installed in a private data centre.
 * The frontend load balancer from v3.0 has been removed and replaced with an Ingress resource and the Traefik Ingress controller. This is a breaking change requiring you to reconfigure your DNS. See the https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0[What's New in server docs] for further information and guidance.
 * The following services can now be externalized. For setup information, see the https://circleci.com/docs/2.0/server-3-install/[server v3.x installation guide]:
@@ -196,16 +219,16 @@ Next, from the KOTS admin console dashboard, select Version History from the men
 ** MongoDB
 ** Vault
 * Backup and restore functionality is now available. For more information see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[Backup and Restore] guide.
-* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS admin UI. For further information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS Admin UI. For further information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * Server now supports the 2XL resource class. The Nomad cluster needs to be made large enough to account for larger resource classes.
-* The lifecycle of build artifacts and test results can now be configured from the KOTS admin console under Storage Object Expiry, including the option to disable the expiration and retain artifacts and test results indefinitely.
+* The lifecycle of build artifacts and test results can now be configured from the KOTS Admin Console under **Storage Object Expiry**, including the option to disable the expiration and retain artifacts and test results indefinitely.
 
 === Fixes
 
 * Resolved a collection of bugs that were causing sensitive information to be leaked into CircleCI support bundles:
-  * Instances of faulty and partial redactions of secrets were detected, in part due to 3rd party bugs.
-  * PostgresDB leaking sensitive information to STDOUT.
-  * Several CircleCI services were logging secrets.
+  ** Instances of faulty and partial redactions of secrets were detected, in part due to 3rd party bugs.
+  ** PostgresDB leaking sensitive information to STDOUT.
+  ** Several CircleCI services were logging secrets.
 * Tightened network security in the Nomad terraform module.
 * Terraform v0.15.0 and up are now supported.
 * Updated installation scripts to use functions supported by most recent versions of Terraform.
@@ -218,12 +241,8 @@ Next, from the KOTS admin console dashboard, select Version History from the men
 
 === Known issues
 
-* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
-identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
 
 == Release 3.0.2
 
