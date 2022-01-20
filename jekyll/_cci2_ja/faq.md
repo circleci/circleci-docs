@@ -28,7 +28,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 ## 移行
 {: #migration }
 
-Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
+[移行の概要]({{ site.baseurl }}/2.0/migration-intro/)ドキュメントをご覧ください。さまざまなプラットフォーム用の移行ガイドへのリンクにアクセスできます。
 
 ### Jenkins から CircleCI  へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci }
@@ -36,30 +36,30 @@ Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc 
 
 Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/2.0/migrating-from-jenkins/)」をご覧ください。
 
-### Can I use CircleCI without creating base images?
+### 基本イメージを作成していなくても、CircleCI  を使用できますか?
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
 
-Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
+はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/2.0/circleci-images/)をご覧ください。
 
-For the `machine` executor, see the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) list.
+`machine` Executor に関しては、[利用可能なマシンイメージ](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images)のリストをご覧ください。
 
-For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
+実行環境やイメージに関する概要は、[Executor とイメージに関するガイド]({{site.baseurl}}/2.0/executor-intro/)をご覧ください。
 
 ## ホスティング
 {: #hosting }
 
-### Is CircleCI available to enterprise customers?
+### CircleCI  はオンプレミスでも利用できますか?
 {: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-Yes, CircleCI server is available for installation on AWS or GCP. See the [CircleCI Server v3.x Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions. [Contact us](https://circleci.com/pricing/server/) to discuss your requirements.
+はい、CircleCI Server は AWS または GCP 上で利用できます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/2.0/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
 {:.no_toc}
 - **クラウド:** CircleCI のチームがサーバーの初期設定、インフラストラクチャ、セキュリティ対策を管理し、サービスのメンテナンスを担当します。 新機能や自動アップグレードが即座に反映され、システムの内部的な管理負担が軽減されます。
 
-- **Server** - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
+- **サーバー**: AWS や GCP などのサービスを介してご自身で CircleCI のインストールや管理を行います。 サーバーのインストールはお客様のチームがデータセンターのポリシーに従って設定し、保守を行うファイアウォールの内側にあます。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限がお客様にあります。
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -67,22 +67,22 @@ Yes, CircleCI server is available for installation on AWS or GCP. See the [Circl
 ### コミットをプッシュしてもジョブが実行されません。
 {: #why-arent-my-jobs-running-when-i-push-commits }
 {:.no_toc}
-In the CircleCI application, check the individual job and workflow views for error messages. 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
+CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
 詳しくは「[YAML の書き方]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご確認ください。
 
-`config.yml` のフォーマットのミスを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
+`config.yml` のフォーマットのミスを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で問題を検索してみてください。
 
-### Why is my job queued?
+### ジョブがキューイングされるのはなぜですか？
 {: #why-is-my-job-queued }
 {:.no_toc}
-A job might end up being **queued** because of a concurrency limit being imposed due to the plan you or your organisation are on. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
+お客様のプランまたは組織のプランによっては同時実行の制限が課せられるため、ジョブが**キューイングされる**場合があります。 ジョブが頻繁にキューイングされる場合は、[プランのアップグレード](https://circleci.com/pricing/)をご検討ください。
 
 
-### Why are my builds queuing even though I'm on the Performance plan?
+### Performance プランを利用しているのに、ビルドがキューイングするのはなぜですか?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 If you are experiencing queuing on your jobs, it is possible you are hitting these limits. [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### Why can't I find my project on the Projects dashboard?
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
