@@ -37,7 +37,7 @@ If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel co
 5. Run `bundle install`. You will need to have [Bundler](https://bundler.io/) installed on your local machine.
 6. Run `yarn install`. You will need to have [Yarn](https://yarnpkg.com/getting-started) installed on your local machine.
 7. Finally, run `yarn dev` to start the site.
-8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
+8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser displays a HSTS Security Warning, you can safely bypass it, as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
 9. To gracefully stop the running commands you can CTRL-C.
 
 **Note:** In the event you find yourself needing to cleanup jekyll cache, you can use the `yarn dev-clean` command.
