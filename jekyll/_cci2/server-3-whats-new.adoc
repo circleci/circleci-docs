@@ -26,6 +26,7 @@ toc::[]
 
 * Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/2.0/server-3-install-build-services/nomad-autoscaler[execution environments installation docs].
 * https://circleci.com/docs/2.0/webhooks/[Webhooks] are now available.
+* The Insights dashboard is now available.
 * IRSA (AWS) can now be used as an alternative to keys for object storage authentication.
 * The email address from which build notifications are sent is now configurable from the KOTS Admin Console.
 
