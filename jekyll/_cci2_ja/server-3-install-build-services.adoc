@@ -424,7 +424,7 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *サーバーの設定*
 +
-Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-operator-vm-service[VM Service] guide.
+Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-vm-operator-service[VM Service] guide.
 
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。 
 
@@ -513,7 +513,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *サーバーの設定*
 +
-Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-operator-vm-service[VM Service] guide.
+Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the {{ site.url }}/{{ site.baseurl }}/2.0/server-3-vm-operator-service[VM Service] guide.
 
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。 
 
