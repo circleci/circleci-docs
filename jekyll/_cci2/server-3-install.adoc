@@ -33,7 +33,7 @@ kubectl kots version
 NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
-From the terminal run (if you are installing behind a proxy see <<Installing behind HTTP Proxy>>):
+From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 
 ```sh
 kubectl kots install circleci-server

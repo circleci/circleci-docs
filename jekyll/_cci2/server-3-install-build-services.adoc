@@ -25,7 +25,7 @@ toc::[]
 ==== Overview 
 Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand. 
 
-Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+Access the KOTS Admin Console. Get to the KOTS Admin Console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 Locate and enter the following in Settings: 
 
@@ -255,11 +255,11 @@ If you do not require this service then feel free to jump to the *Save config* b
         }
     ]
 }
-. In your KOTS admin console, set Nomad Autoscaler to `enabled`
+. In your KOTS Admin Console, set Nomad Autoscaler to `enabled`
 . Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Set Min Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Select cloud provider: `AWS EC2`
-. Add the region of the auto scaling group
+. Add the region of the autoscaling group
 . You can chose one of the following:
 .. Add the Nomad Autoscaler user's access key and secret key
 .. Or, the Nomad Autoscaler role's ARN
