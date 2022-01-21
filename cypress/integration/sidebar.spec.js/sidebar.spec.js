@@ -27,15 +27,14 @@ describe('sidebar', () => {
       // Check defaultSectionName open then close defaultSectionName
       cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('not.have.class', 'closed').children('.list-wrap').click()
       // Check defaultSectionName closed then open
-      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').click()
-      // Check defaultSectionName open
-      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('not.have.class', 'closed')
+      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
     })
 
     it('should bring you to right url', () =>{
       // Click second element in getting started which is migration-intro
       cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).children().next().click()
       cy.url().should('include', 'migration-intro')
+      cy.get(`[href="${basepath}migration-intro/"]`).should('have.class', 'active')
     })
 
     it('should load a page open the right section in the sidebar', () =>{
