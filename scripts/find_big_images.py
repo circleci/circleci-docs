@@ -86,11 +86,7 @@ def resize_image():
       # maximum height of the thumbnail.
       if img["width"] > 1920 or img["height"] > 1920:
          img["PIL_Image"].thumbnail((1920, 1920))
-         # if it's a png, use compress_level,
-         # print(img["path"])
-         # os.system(f"convert {img['path']} -resize 1920 {img['path']}")
-         # img["PIL_Image"].save(img["path"], optimize=True)
-         # otherwise, if it's jpeg, set quality to ...n?
+         img["PIL_Image"].save(img["path"], optimize=True)
 
 def write_csv():
     keys = Images[0].keys()
