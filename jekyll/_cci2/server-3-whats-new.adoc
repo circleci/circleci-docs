@@ -24,7 +24,7 @@ toc::[]
 
 === New features
 
-* Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/2.0/server-3-install-build-services/nomad-autoscaler[execution environments installation docs].
+* Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/2.0/server-3-install-build-services/#nomad-autoscaler[execution environments installation docs].
 * https://circleci.com/docs/2.0/webhooks/[Webhooks] are now available.
 * The Insights dashboard is now available.
 * IRSA (AWS) can now be used as an alternative to keys for object storage authentication.
@@ -33,7 +33,7 @@ toc::[]
 === Fixes
 
 * Upgraded Python to v3 in Vault container.
-* https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[Docs improvements] on using the shared VPC architecture in GCP. 
+* https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[Docs improvements] on using the shared VPC architecture in GCP.
 * The JVM heap size has been updated so that `output-processor` can use up to 80% of the pod memory limit.
 
 === Known issues
@@ -126,16 +126,16 @@ The following command will scale down pods to 0 and terminate the application po
 kubectl scale deployment -l layer=application --replicas 0
 ```
 
-Once all the application-layer pods have finished terminating do *one* of the following 
+Once all the application-layer pods have finished terminating do *one* of the following
 
-* *either* redeploy the update from the KOTS admin console 
+* *either* redeploy the update from the KOTS admin console
 * *or* run the following two commands to redeploy the pods and return server to a functional state:
 +
 ```bash
 kubectl scale deployment -l layer=application --replicas 1
 ```
 +
-Then scale `output-processor` up with the following command: 
+Then scale `output-processor` up with the following command:
 +
 ```bash
 kubectl scale deployment output-processor --replicas 2
@@ -147,7 +147,7 @@ If you find that there are two Traefik pods after upgrading, you will need to lo
 To see the status of your Traefik pod:
 
 ```bash
-$ kubectl get pod -l app=traefik 
+$ kubectl get pod -l app=traefik
 NAME                                      READY   STATUS    RESTARTS   AGE
 circleci-server-traefik-9d6b86fd8-f7n2x   1/1     Running   0          24d
 circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
@@ -165,18 +165,18 @@ The new Traefik pod will then start to schedule correctly.
 
 * Customers who require a fully private installation can now access a setting in the KOTS Admin Console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a workaround will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
 * Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS Admin Console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
-* We have expanded the machine execution environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes. 
+* We have expanded the machine execution environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes.
 * The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
-* We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server. 
+* We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server.
 * You can now supply a custom Linux AMI for VM service.
 * SSL termination can now be disabled. If you have put server login behind a firewall, this will enable SSL termination at the firewall.
 * You can now control the size of persistent volumes. For larger customers, the initial persistent volume size was too small, by default. You can now set this at install time, providing an easier migration for those customers that require it. For further information see the https://circleci.com/docs/2.0/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
-* We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]. 
+* We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform].
 * You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/2.0/server-3-operator-build-artifacts/[Build Artifacts doc].
 
 === Fixes
 
-* The default windows executor was not as documented. We have increased the size to align with documentation and cloud. 
+* The default windows executor was not as documented. We have increased the size to align with documentation and cloud.
 
 === Known issues
 
