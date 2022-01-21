@@ -1,3 +1,7 @@
+# dependencies
+# requires python3.x
+# pip install pillow
+#
 # this script looks at all the images in the jekyll/assets/img folder and
 # collects the resolution and file size of all images.
 # it then spits out a images.csv file that can be uploaded to google drive.
@@ -82,7 +86,11 @@ def resize_image():
       # maximum height of the thumbnail.
       if img["width"] > 1920 or img["height"] > 1920:
          img["PIL_Image"].thumbnail((1920, 1920))
-         img["PIL_Image"].save(img["path"], optimize=True)
+         # if it's a png, use compress_level,
+         # print(img["path"])
+         # os.system(f"convert {img['path']} -resize 1920 {img['path']}")
+         # img["PIL_Image"].save(img["path"], optimize=True)
+         # otherwise, if it's jpeg, set quality to ...n?
 
 def write_csv():
     keys = Images[0].keys()
