@@ -13,7 +13,7 @@ export const init = () => {
       var isMainTitle = $(this).prop('nodeName') === 'H1';
       $(this).append(
         (isMainTitle ? ' <a href="#' : '<a href="#' + $(this).attr('id')) +
-          '"><i class="fa fa-link"></i></a>',
+        '"><i class="fa fa-link"></i></a>',
       );
       if (isMainTitle) {
         $(this).find('i').toggle();
