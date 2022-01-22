@@ -306,7 +306,7 @@ Webhook イベントに関連するトリガーに関するデータ
   "organization": {
     "id": "f22b6566-597d-46d5-ba74-99ef5bb3d85c",
     "name": "circleci"
-  }
+  },
   "workflow": {
     "id": "fda08377-fe7e-46b1-8992-3a7aaecac9c3",
     "name": "build-test-deploy",
@@ -343,7 +343,7 @@ Webhook イベントに関連するトリガーに関するデータ
       },
       "branch": "main"
     }
-  },
+  }
 }
 ```
 
