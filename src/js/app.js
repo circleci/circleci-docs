@@ -25,5 +25,6 @@ $(() => {
   services.instantsearch.init();
   services.highlightjsBadge.init();
   services.progressbar.init();
+  services.sectionShareButton.init();
   import(/* webpackPrefetch: true */ './experiments'); // imports all experiments
 });

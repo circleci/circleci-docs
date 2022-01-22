@@ -5,6 +5,7 @@ import OptimizelyClient from './optimizely';
 import * as rum from './rum';
 import * as highlightjsBadge from './highlightJSBadge';
 import * as progressbar from './progressbar';
+import * as sectionShareButton from './sectionShareButton';
 
 export default {
   AnalyticsClient,
@@ -14,4 +15,5 @@ export default {
   rum,
   highlightjsBadge,
   progressbar,
+  sectionShareButton,
 };
