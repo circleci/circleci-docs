@@ -87,6 +87,16 @@ For additional conceptual information on using workspaces, caching, and artifact
 
 Workspaces are stored for up to 15 days. Workspaces are not shared between pipelines, and the only way to access a workspace once the workflow has completed is if the workflow is rerun within the 15 day window.
 
+## Workspaces and runner network charges
+
+When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit, charges will apply, based on your accrued overages. The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited. Also you will see no egress traffic or charges for any runners deployed within AWS `us-east-1`.
+
+Restoring caches and workspaces to self-hosted runners results in network egress. To view your network egress usage select **Plan** from the app sidebar, then **Plan Usage** and select the **Network** tab. Here you will find a breakdown of your network usage for the billing period broken down by object type: cache, testresult, artifact, workspace.
+
+Your network overage GB/TB can be multiplied by 420 credits to estimate total monthly costs. For example, 2 GB-Months overage x 420 credits = 840 credits ($.50).
+
+For more on storage and networking, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) guide.
+
 ## See also
 {: #see-also }
 {:.no_toc}

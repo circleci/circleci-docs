@@ -66,6 +66,8 @@ en:
           link: 2.0/caching/
         - name: Artifacts
           link: 2.0/artifacts/
+        - name: Workspaces
+          link: 2.0/workspaces/
         - name: Collecting test data
           link: 2.0/collect-test-data/
         - name: Debugging with SSH
