@@ -105,6 +105,8 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 
 | `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI server installations.
 
+| `+env+`           | -         | N         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
+
 | all other values  | -         | N         | Modify at your own discretion and risk.
 
 |===
