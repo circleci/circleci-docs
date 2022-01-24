@@ -8,6 +8,10 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
+
+suggested:
+  - title: Context deadline exceeded after 1 hour - Build timed out
+    link: https://support.circleci.com/hc/en-us/articles/4410707277083-Context-deadline-exceeded-after-1-hour-Build-timed-out-Free-tier-only-
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
