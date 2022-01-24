@@ -6,7 +6,7 @@ describe('sidebar', () => {
   const basepath = '/docs/2.0/'
   beforeEach(() => {
     // Takes to starting url which is baseURL
-    cy.visit(`${basepath}`)
+    cy.visit(basepath)
   })
 
   describe('Full screen', () => {

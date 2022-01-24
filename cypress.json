@@ -1,4 +1,3 @@
 {
-  "baseUrl": "https://ui.circleci.com",
-  "defaultCommandTimeout": 10000
+  "baseUrl": "https://ui.circleci.com"
 }
