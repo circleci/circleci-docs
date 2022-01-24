@@ -1,6 +1,16 @@
-# this script looks at all the images in the jekyll/assets/img folder and
+# dependencies
+#
+# requires python3.x
+# pip install pillow
+#
+# This script looks at all the images in the jekyll/assets/img folder and
 # collects the resolution and file size of all images.
 # it then spits out a images.csv file that can be uploaded to google drive.
+#
+# Then, all images beyond 1920 in width or height are resized to fit 1920 on whichever axis is largest.
+# NOTE the resizing can still result in larger output than input of png's ,based on how they are encoded.
+# so, we save the output to a folder called "images_to_compress", which we then do manually using
+# https://tinypng.com/ (which is probably using a superior algorithm? I donno.)
 
 import os
 import glob
@@ -8,6 +18,7 @@ from pathlib import Path
 from PIL import Image # run `pip install pillow` to get this lib.
 import enum
 import csv
+from shutil import copyfile
 
 
 img_path = "../jekyll/assets/img/**/*"
@@ -42,6 +53,8 @@ def make_img_dict(imgPath, Img):
         "path": imgPath,
         "width": Img.width,
         "height": Img.height,
+        "PIL_Image": Img,
+        "file_name": os.path.basename(imgPath),
         "size":   os.stat(imgPath).st_size
     }
     return f
@@ -71,6 +84,17 @@ def print_report():
         imgSize = convert_unit(img["size"], SIZE_UNIT.MB)
         print ("{:<60} | {:<7} | {:<7} | {:<7}".format(path,  img["width"], img["height"], imgSize))
 
+
+def resize_images():
+   """If image is larger than img_size, move it to a folder for manual resizing"""
+   if not os.path.exists("./images_to_compress"):
+      os.mkdir("./images_to_compress")
+   for idx, img in enumerate(Images):
+      if img["width"] > 1920 or img["height"] > 1920:
+
+         img["PIL_Image"].thumbnail((1920, 1920))
+         img["PIL_Image"].save("./images_to_compress/" + img["file_name"])
+
 def write_csv():
     keys = Images[0].keys()
     with open('images.csv', 'w', newline='') as output_file:
@@ -78,6 +102,8 @@ def write_csv():
         dict_writer.writeheader()
         dict_writer.writerows(Images)
 
+
 get_img_data()
-print_report()
-write_csv()
+# print_report()
+# write_csv()
+resize_images()
