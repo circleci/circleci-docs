@@ -16,11 +16,11 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 * TOC
 {:toc}
 
-After an initial job run, future instances of the job run faster because you are not redoing work.
+After an initial job run, subsequent instances of the job run faster, as you are not redoing work.
 
 ![caching data flow]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
-Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download _new_ or updated dependencies, rather than downloading everything on each build.
+Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
 
 <div class="alert alert-warning" role="alert">
 <b>Warning:</b> Caching files between different executors, for example, between Docker and Machine, Linux, Windows or MacOS, or CircleCI Image and Non-CircleCI Image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Please use extra care when caching files in these cases.
@@ -50,6 +50,10 @@ Automatic dependency caching is not available in CircleCI, so it is important to
 
 This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI job runs are automatically cached on the server infrastructure where possible.
 
+<div class="alert alert-warning" role="alert">
+<b>Important:</b>
+Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.</div>
+
 For information about enabling a premium feature to reuse the unchanged layers of your Docker image, see the [Enabling Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
 
 ## Overview
@@ -58,7 +62,7 @@ For information about enabling a premium feature to reuse the unchanged layers o
 
 A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but, in the case of a cache miss or zero cache restore, the job still runs successfully. For example, you might cache `NPM` package directories (known as `node_modules`). The first time your job runs, it downloads all your dependencies, caches them, and (provided your cache is valid) the cache is used to speed up your job the next time it is run.
 
-Caching is about achieving a balance between reliability (not using an out-of-date or inappropriate cache) and getting maximum performance (using a full cache for every build). In general, it is safer to pursue reliability than to risk a corrupted build or to build very quickly using stale dependencies. 
+Caching is about achieving a balance between reliability and getting maximum performance. In general, it is safer to pursue reliability than to risk a corrupted build or to build very quickly using out-of-date dependencies. 
 
 ## Caching and open source
 {: #caching-and-open-source }
@@ -94,7 +98,7 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 ## Restoring cache
 {: #restoring-cache }
 
-CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the most recently generated cache is used.
+CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. The cache is restored from the first matching key. If there are multiple matches, the most recently generated cache is used.
 
 In the example below, two keys are provided:
 
@@ -273,6 +277,9 @@ Template | Description
 {:.no_toc}
 
 The following example demonstrates how to use `restore_cache` and `save_cache`, together with templates and keys in your `.circleci/config.yml` file.
+
+<div class="alert alert-warning" role="alert">
+<b>Warning:</b> This is example is only a <i>potential</i> solution and might be unsuitable for your specific needs.</div>
 
 {% raw %}
 
