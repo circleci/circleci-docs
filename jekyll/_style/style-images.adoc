@@ -1,0 +1,12 @@
+= Using images
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+* Ensure all images have descriptive alternative text. For example, in asciidoc:
++
+----
+.Image Title
+image::name-of-image.png[Alternative text to describe the image, including, if possible any text in the image itself]
+----
