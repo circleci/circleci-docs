@@ -165,6 +165,8 @@ kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE
 
 * link:https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成] (AWS)
 
+NOTE: The Traefik load balancer has a healthcheck that serves a JSON payload at https://loadbalancer-address/status.
+
 === バリデーション
 
 これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (実行中および準備完了状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。 
