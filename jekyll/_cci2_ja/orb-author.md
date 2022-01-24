@@ -214,7 +214,7 @@ steps:
 {: #executors }
 {:.no_toc}
 
-[パラメーター化された Executor]({{site.baseurl}}/2.0/reusing-config/#%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA-executor-%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0) をオーサリングして、`src/executors` ディレクトリに追加できます。
+[パラメーター化された Executor]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-executors) をオーサリングして、`src/executors` ディレクトリに追加できます。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb Executor として扱われます。名前にはファイル名が使用されます。
 
@@ -224,7 +224,7 @@ steps:
 {: #jobs }
 {:.no_toc}
 
-[パラメーター化されたジョブ]({{site.baseurl}}/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E3%82%B8%E3%83%A7%E3%83%96%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0) をオーサリングして、`src/jobs` ディレクトリに追加できます。
+[パラメーター化されたジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs) をオーサリングして、`src/jobs` ディレクトリに追加できます。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb ジョブとして扱われます。名前にはファイル名が使用されます。
 
