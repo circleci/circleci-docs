@@ -79,13 +79,15 @@ def print_report():
         print ("{:<60} | {:<7} | {:<7} | {:<7}".format(path,  img["width"], img["height"], imgSize))
 
 
-def collect_oversized_images():
+def resize_images():
    """If image is larger than img_size, move it to a folder for manual resizing"""
    if not os.path.exists("./images_to_resize"):
       os.mkdir("./images_to_resize")
    for idx, img in enumerate(Images):
       if img["width"] > 1920 or img["height"] > 1920:
-         copyfile(img["path"], "./images_to_resize/" + img["file_name"])
+
+         img["PIL_Image"].thumbnail((1920, 1920))
+         img["PIL_Image"].save("./images_to_resize/" + img["file_name"])
 
 def write_csv():
     keys = Images[0].keys()
@@ -98,4 +100,4 @@ def write_csv():
 get_img_data()
 # print_report()
 # write_csv()
-collect_oversized_images()
+resize_images()
