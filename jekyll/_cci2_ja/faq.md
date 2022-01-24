@@ -87,7 +87,7 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 ### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-ビルドしようとしているプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  左上に表示されているのがあなたのユーザー名 `my-user` の場合、`my-user` に属する GitHub プロジェクトだけが  `Projects` の下に表示されます。  GitHub プロジェクト `your-org/project` をビルドする場合、アプリケーションの [Switch Organization] メニューでお客様の組織を `your-org` に変更します。
+ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  左上にユーザー `my-user` が表示されている場合、`my-user` に属する GitHub プロジェクトだけが  `Projects` の下に表示されます。  GitHub プロジェクト `your-org/project` をビルドする場合、アプリケーションの [Switch Organization] メニューでお客様の組織を `your-org` に変更します。
 
 ### 現在のプランでコンテナ数は十分にあるのに、「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。 なぜですか?
 {: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
