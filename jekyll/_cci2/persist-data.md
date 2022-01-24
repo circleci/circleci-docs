@@ -61,7 +61,8 @@ guide.
 
 The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
-**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+**Note:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+{: class="alert alert-info" }
 
 ### Overview of all storage and network transfer
 {: #overview-of-storage-and-network-transfer }
@@ -104,6 +105,9 @@ Charges apply when an organization has runner network egress beyond the included
 {:.no_toc}
 
 Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
+
+**Note:** The duration of storage for workspaces, caches, artifacts and tests results are set by CircleCI. You are unable to customize these durations at this time.
+{: class="alert alert-info" }
 
 To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
