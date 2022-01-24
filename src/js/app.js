@@ -7,6 +7,7 @@ import 'highlightjs-badge';
 
 import services from './services';
 import '../styles/main.scss';
+import { trackDarkModePreference } from './site/main';
 
 // adding "Clients" to the window object so they can be accessed by other js inside Jekyll
 window.Cookie = Cookie;
@@ -17,6 +18,8 @@ import './site';
 
 services.lang.init();
 services.rum.init();
+// Temporary service to check if user dark mode preferences
+trackDarkModePreference();
 
 $(() => {
   services.instantsearch.init();
