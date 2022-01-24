@@ -206,7 +206,7 @@ jobs:
 ### 複数のワークフローをスケジュール実行できますか？
 {: #can-i-schedule-multiple-workflows }
 {:.no_toc}
-はい、可能です。`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
+はい。`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
 
 ### スケジュールされたワークフローは、指定された時間通り正確に実行されますか？
 {: #are-scheduled-workflows-guaranteed-to-run-at-precisely-the-time-scheduled }
@@ -259,7 +259,7 @@ CircleCI Server v３.x および v2.x で Windows Exexutor をご利用いただ
 #### 異なる組織間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-選択したクレジット パッケージの料金が、毎月初めに請求されます。
+可能です。CircleCI アプリのサイドバーから `Plan` を選択し、`Share & Transfer` をクリックします。
 
 Free プラン以外のプランでは、`共有組織の追加`オプションによりお客様が管理者としてのアクセス権を持つ Free プランの組織とプランを共有することができます。 プランを共有するすべての組織が「Share & Transfer」のページに記載され、子組織のすべてのクレジットとその他の利用料金が親組織に請求されます。
 
@@ -268,7 +268,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 #### コンテナの使用時間が 1 分未満の場合でも 1 分間の料金を支払う必要がありますか？
 {: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
 {:.no_toc}
-はい、その場合でも 1 分間分の料金をお支払いいただく必要があります。 1 分未満の秒単位は切り上げでクレジットを計算します。
+はい、その場合でも 1 分間分の料金をお支払いいただく必要があります。 1 分未満の秒単位は切り上げてクレジットを計算します。
 
 #### クレジットの購入方法は？ 必要な時に必要な分だけ購入できますか？
 {: #how-do-i-buy-credits-can-i-buy-in-any-increments }
@@ -278,52 +278,52 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 #### 支払う料金の内訳は？
 {: #what-do-i-pay-for }
 {:.no_toc}
-プレミアム機能を利用するアクティブ ユーザーの人数分の料金、コンピューティングに対する料金のほか、プレミアム サポートを利用している場合はその料金も含まれます。
+プレミアム機能を利用するアクティブユーザーの人数分の料金、コンピューティングに対する料金のほか、プレミアム サポートを利用している場合はその料金も含まれます。
 
 
-- 新しいマシン サイズなどを利用するには、アクティブ ユーザー 1 人あたり月額 15 ドル (税抜) が必要です。
+- マシンサイズを選べる機能などを利用するには、１アクティブ ユーザー あたり月額 25,000 クレジット (税抜) が必要です。
 - コンピューティングの月額料金は、マシンのサイズと使用時間に基づいて、クレジットで支払われます。
   - 25,000 クレジットで 1 パッケージとなっており、1 パッケージは 15 ドル (税抜) です。
-  - クレジットは毎月ロールオーバーされ、1 年後に失効します。
+  - クレジットは毎月持ち越され、1 年後に失効します。
 - Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
 
-#### 毎月のストレージ使用料金とネットワーク転送料金はどのように計算するのですか？
+#### 毎月のストレージ使用料金とネットワーク料金の計算方法は？
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動して、ストレージとネットワークの使用状況を検索し、毎月のストレージ使用料金とネットワーク転送料金を計算します。
+[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動して、お客様のストレージとネットワークの使用状況を確認し、毎月のストレージとネットワークの料金を計算します。
 
 ##### ストレージ
 {: #storage }
 {:.no_toc}
 
-日々の使用量から1 か月のストレージコストを計算するには、 **Storage(ストレージ)** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に420クレジットを乗じることで、月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+日々の使用量から1 か月のストレージ料金を計算するには、 **Storage ** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
 ##### ネットワーク
 {: #network }
 {:.no_toc}
 
-使用量から 1 か月のネットワークコストを計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+使用量から 1 か月のネットワーク料金を計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
 GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
 
-#### 毎月の IP アドレスの範囲機能の料金はどのように計算するのですか？
+#### 毎月の IP アドレスの範囲機能料金の計算方法は？
 {: #how-do-I-calculate-my-monthly-IP-ranges-costs }
 {:.no_toc}
 
-Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+毎月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
 
-In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
+**IP 範囲機能の使用状況 **のサマリーに加えて、**IP Ranges** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
-This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+このバイト数には、ジョブの全体のネットワーク転送_および_ Docker コンテナの送受信に使われるバイトも含まれます。  ジョブの実行を開始する前に Docker イメージをコンテナにプルするために使用されるデータは、IP 範囲が有効なジョブでは_ 使用コストが発生しません _。
 
-This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
+この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。
 
 #### アクティブ ユーザー単位の料金が設定されているのはなぜですか?
 {: #why-does-circleci-have-per-active-user-pricing }
 {:.no_toc}
 
-クレジットは、コンピューティングの利用に対して消費されます。 CircleCI は、できるだけ使用コストを抑えながら、CI の基本的な推奨事項である「頻繁なジョブ実行」を行っていただくことを目指しています。 アクティブ ユーザー単位で設定しているのは、プラットフォーム機能とジョブ オーケストレーションの利用に対する料金です。 たとえば、依存関係のキャッシュ、アーティファクトのキャッシュ、ワークスペースなどがあり、いずれの機能も追加のコンピューティング コストをかけずにビルド時間を短縮するのに役立ちます。
+クレジットは、コンピューティングの利用に対して消費されます。 CircleCI は、できるだけコストを抑えながら、CI の基本的な推奨事項である「頻繁なジョブ実行」を行っていただくことを目指しています。 アクティブ ユーザー単位で設定しているのは、プラットフォーム機能とジョブ オーケストレーションの利用に対する料金です。 たとえば、依存関係のキャッシュ、アーティファクトのキャッシュ、ワークスペースなどがあり、いずれの機能も追加のコンピューティング コストをかけずにビルド時間を短縮するのに役立ちます。
 
 #### *アクティブ ユーザー*の定義を教えてください。
 {: #what-constitutes-an-active-user }
@@ -337,9 +337,9 @@ This feature will consume 450 credits from your account for each GB of data used
 - スケジュールされたワークフローの使用
 - マシン ユーザー
 
-**メモ:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブ ユーザーとは**見なされません**。
+**注意:** プロジェクトが[オープンソース]({{ site.baseurl }}/2.0/oss)の場合は、アクティブ ユーザーとは**見なされません**。
 
-To find a list of your Active Users, log in to the CircleCI web app > click `Plan` > click `Plan Usage` > click on the `Users` tab.
+アクティブ ユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
 
 #### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
