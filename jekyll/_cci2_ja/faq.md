@@ -89,15 +89,15 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 {:.no_toc}
 ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  左上にユーザー `my-user` が表示されている場合、`my-user` に属する GitHub プロジェクトだけが  `Projects` の下に表示されます。  GitHub プロジェクト `your-org/project` をビルドする場合、アプリケーションの [Switch Organization] メニューでお客様の組織を `your-org` に変更します。
 
-### 現在のプランでコンテナ数は十分にあるのに、「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。 なぜですか?
+### 現在のプランでコンテナ数は十分にあるのに、「build didn’t run because it needs more containers than your plan allows (お客様のプランで使用可能なコンテナ数の不足によりビルドを実行できませんでした）」というエラーが表示されます。 なぜですか?
 {: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
 {:.no_toc}
-CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI Japanese Support Center](https://support.circleci.com/hc/ja) よりお問い合わせください。
+CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI 日本語サポートセンター](https://support.circleci.com/hc/ja) よりお問い合わせください。
 
-### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
+### Docker イメージ名の仕組みは？ つけ方を教えてほしい。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI  では、現在のところ [Docker Hub][docker-hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ][docker-library]に対して行えるのは、以下のようにイメージの名称やタグを指定したプルのみです。
+CircleCI  では、現在のところ [Docker Hub][docker-hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ][docker-library]に対して行えるのは、以下のようにイメージ名やタグを指定したプルのみです。
 
 ```
 golang:1.7.1-jessie
@@ -110,15 +110,15 @@ Docker Hub のパブリックイメージについては、下記のようにア
 my-user/couchdb:1.6.1
 ```
 
-### Docker イメージのバージョンを指定するときのベストな方法は？
+### Docker イメージのバージョンを指定するときのベストプラクティスは？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
+`最新の`タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 その他の例は、「Executor タイプの選び方」の[ Docker イメージのベストプラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「[CircleCI イメージ」]({{ site.baseurl }}/2.0/circleci-images/#best-practices)のベストプラクティスの項を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
 {:.no_toc}
-Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 下記のように `.circleci/config.yml` を編集してみてください。
+Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 下記のように `.circleci/config.yml` を編集してください。
 
 環境変数 `TZ` を定義する `.circleci/config.yml` の設定例
 
@@ -143,27 +143,27 @@ jobs:
 ## ワークフロー
 {: #workflows }
 
-### ワークフローに API は使用できますか?
+### ワークフローで API は使用できますか?
 {: #can-i-use-the-api-with-workflows }
 {:.no_toc}
 はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/2.0/build-processing/)」をご覧ください。
 
-### Workflows でビルドの「自動キャンセル」はできますか？
+### ワークフローでビルドの「自動キャンセル」はできますか？
 {: #can-i-use-the-auto-cancel-feature-with-workflows }
 {:.no_toc}
-<br/>可能です。「[ビルドのスキップ・キャンセル]({{ site.baseurl }}/ja/2.0/skip-build/)」で設定手順をご確認ください。
+<br/>可能です。[ビルドのスキップおよびキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/)で設定手順をご確認ください。
 
-### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
+### ワークフローで `store_test_results`（試験結果を保存する)  を使えますか？
 {: #can-i-use-storetestresults-with-workflows }
 {:.no_toc}
-`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。 また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
+`store_test_results` を使って、テスト結果のデータを [Test Summary] セクションに記録することができます。また、[タイミング データに基づいたテストの分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)にも使用できます。 時系列のテストデータは CircleCI 2.0 の ワークフローより使用できるようになったもので、同一名称のジョブのデータを使って 50 ビルド分さかのぼることができます。
 
 ### オンプレミス環境にインストールした CircleCI でもワークフローは使えますか？
 {: #can-i-use-workflows-with-the-installable-circleci }
 {:.no_toc}
 はい、お客様のオンプレミス環境でもご利用いただけます。 CircleCI のインストール手順などについては「[管理者向け概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
 
-### 同時に実行できるジョブの数はいくつですか？
+### 同時に実行できるジョブの数は？
 {: #how-many-jobs-can-i-run-at-one-time }
 {:.no_toc}
 同時に実行できるジョブの数は、ご契約中のプランの利用可能なコンテナ数によって決まります。 仮に 10 個の ワークフロージョブが実行されようとしていて、プラン上は 5 つのコンテナしか使えない場合は、実行されるのは一度に 5 つのジョブまでです。 ワークフローの設定を行うことで、複数のジョブを同時もしくは連続的に実行できます。 ファンアウト（複数のジョブを同時実行する）、あるいはファンイン（その前の独立したジョブが完了するまで以降の全ジョブを待機させる）が可能です。
@@ -171,32 +171,32 @@ jobs:
 ### 同一のワークフロー内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
 {:.no_toc}
-既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/ja/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
+既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプの項を参照してください。
 
-### `config.yml` ファイルの内容を複数ファイルに分割することはできますか？
+### `config.yml` ファイルを複数ファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
-`config.yml` の内容を複数のファイルに分割する機能は今のところ提供していません。
+`config.yml` を複数のファイルに分割する機能は今のところ提供していません。
 
 ### 変更のあった単一のジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
 いいえ、できません。
 
-### ワークフローでフォークするプルリクエストをビルドすることは可能ですか？
+### ワークフローを使ってフォークするプルリクエストをビルドすることは可能ですか？
 {: #can-i-build-fork-prs-using-workflows }
 {:.no_toc}
-はい。
+はい、可能です！
 
 ### ワークフローを指定した日時にスケジュール実行することは可能ですか？
 {: #can-workflows-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-はい、クラウド版の CircleCI アプリケーションであれば可能です。 例えば、午後 4 時に Workflow を実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。
+はい、クラウド版の CircleCI アプリケーションであれば可能です。 例えば、ワークフローを午後 4 時に実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。
 
 ### スケジュール実行の際に使われるタイムゾーンは？
 {: #what-time-zone-is-used-for-schedules }
 {:.no_toc}
-UTC 協定世界時のタイムゾーンに基づいてスケジュールを指定できます。
+スケジュールの指定は、UTC 協定世界時のタイムゾーンに基づきます
 
 ### ビルドのスケジュール実行が失敗する理由は？
 {: #why-didnt-my-scheduled-build-run }
