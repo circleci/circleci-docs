@@ -18,6 +18,7 @@ import './site';
 
 services.lang.init();
 services.rum.init();
+// Temporary service to check if user dark mode preferences
 trackDarkModePreference();
 
 $(() => {
