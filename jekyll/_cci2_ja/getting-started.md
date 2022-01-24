@@ -8,12 +8,12 @@ categories:
 order: 41
 ---
 
-CircleCI ではじめてビルドを成功（グリーンビルド）させるためのステップについて詳しくご説明します。
+CircleCI ではじめてビルドを成功 (グリーンビルド) させるためのステップについて詳しくご説明します。
 
 * 目次
 {:toc}
 
-## 初回のビルド実行にあたっての前提条件
+## はじめてのビルド実行に必要な前提条件
 {: #prerequisites-for-running-your-first-build }
 {:.no_toc}
 
@@ -25,31 +25,31 @@ CircleCI ではじめてビルドを成功（グリーンビルド）させる�
 ## リポジトリを作成する
 CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
-最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしても問題ありません。
+最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしてください。
 
 1. GitHub に移動して、[新規リポジトリを作成](https://github.com/new)します。
-1. Input the name of your repository, in this case "hello-world", then select the option to initialize the repository with a README file. 最後に、**[Create repository (リポジトリを作成)]** をクリックします。
+1. リポジトリの名前 (ここでは "hello-world") を入力して、README ファイルを使ってリポジトリを初期化するを選択します。 最後に、**[Create repository (リポジトリを作成)]** をクリックします。
 
 ## CircleCI をセットアップする
 {: #setting-up-circleci }
 
-If you have not yet, create an account on CircleCI by navigating to [the signup page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
+CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub で登録]** をクリックしてアカウントを作成します。
 
-1. CircleCI の[プロジェクト ページ](https://app.circleci.com/projects/)に移動します。
+1. CircleCI の [Project ページ](https://app.circleci.com/projects/)に移動します。
 1. 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
-1. Once on the Project page, select the project you are using (in our case `hello-world`).
-1. Select the option to use a starter config.yml template, and click **Set Up Project**.
-1. Next, choose a language from the list of sample configs to get a pre-populated config.yml file with suggested best practices for your project. For this example, because we have an empty repository, we will use the `Hello World` configuration example.
+1. Project ページで、使用するプロジェクトを選択します (今回は、`hello-world`)。
+1. config.yml のスターターテンプレートの使用を選択し、**[Set Up Project]**をクリックします。
+1. 次に、設定サンプルリストから言語を選択して、プロジェクト向けの推奨ベストプラクティスがあらかじめ記述されている config.yml ファイルを取得します。 この例では、空のリポジトリを用意したので、リスト下部にある `Hello World` 設定サンプルを使用します。
 
-    **Note:** Based on which language you choose, you can view related documentation in the sidebar on the right of the screen.
-1. Click **Commit and Run**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circle-ci-setup`. If you are happy with this configuration, you can merge it into your main branch later, or continue to make changes.
+    **注:** 選択した言語に応じて、参考ドキュメントが画面右側のサイドバーに表示されます。
+1. **[Commit and Run]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。 この設定で問題がなければ、後にメインブランチにマージする、もしくは引き続き変更を行うことができます。
 
-## 最初のパイプラインを掘り下げる
+## はじめて作成したパイプラインを掘り下げる
 {: #digging-into-your-first-pipeline }
 
-You should see your pipeline start to run automatically—and pass! So, what just happened? Click on the green **Success** button on your pipeline to investigate the following parts of the run:
+ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するのを確認できます。 実行結果を確認しましょう。 パイプラインの緑色の **[Success]** ボタンをクリックして、実行について以下の部分を確認しましょう。
 
-1. **実行されたワークフローを確認する**: **[Success (成功)]** をクリックすると、実行されたジョブの一覧ページに移動します。 初めてのビルドであれば、(**1 つのワークフロー**内で自動的に実行される) **1 つのジョブ** だけが実行されています。  In our case, we only ran one job, called `say-hello`. Click on `say-hello` and let's investigate the steps of our job.
+1. **実行されたワークフローを確認する**: **[Success]** をクリックすると、実行されたジョブの一覧ページに移動します。 はじめてのビルドであれば、**1 つのジョブ** だけが実行されているはずです (**1 つのワークフロー**内で自動的に実行されます) 。  今回は、 `say-hello`という名前のジョブだけが実行されました。 `say-hello` をクリックして、ジョブのステップを調査してみましょう。
 
 1. **View step results:** Every job is made up of a series of steps - some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. Other steps are specified by a user to achieve a specific purpose. In our Hello World example config, we use both `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run).
 
