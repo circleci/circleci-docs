@@ -12,6 +12,7 @@ from pathlib import Path
 from PIL import Image # run `pip install pillow` to get this lib.
 import enum
 import csv
+from shutil import copyfile
 
 
 img_path = "../jekyll/assets/img/**/*"
@@ -47,6 +48,7 @@ def make_img_dict(imgPath, Img):
         "width": Img.width,
         "height": Img.height,
         "PIL_Image": Img,
+        "file_name": os.path.basename(imgPath),
         "size":   os.stat(imgPath).st_size
     }
     return f
@@ -77,16 +79,13 @@ def print_report():
         print ("{:<60} | {:<7} | {:<7} | {:<7}".format(path,  img["width"], img["height"], imgSize))
 
 
-def resize_image():
-   """If image is larger than img_size, resize it to img_size"""
+def collect_oversized_images():
+   """If image is larger than img_size, move it to a folder for manual resizing"""
+   if not os.path.exists("./images_to_resize"):
+      os.mkdir("./images_to_resize")
    for idx, img in enumerate(Images):
-      # If you want to resize images and keep their aspect ratios, then you
-      # should instead use the thumbnail() function to resize them. This also
-      # takes a two-integer tuple argument representing the maximum width and
-      # maximum height of the thumbnail.
       if img["width"] > 1920 or img["height"] > 1920:
-         img["PIL_Image"].thumbnail((1920, 1920))
-         img["PIL_Image"].save(img["path"], optimize=True)
+         copyfile(img["path"], "./images_to_resize/" + img["file_name"])
 
 def write_csv():
     keys = Images[0].keys()
@@ -99,4 +98,4 @@ def write_csv():
 get_img_data()
 # print_report()
 # write_csv()
-resize_image()
+collect_oversized_images()
