@@ -345,57 +345,57 @@ GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用�
 {: #what-happens-when-i-run-out-of-credits }
 {:.no_toc}
 
-Performance プランでは、クレジットが残り 10% を下回ると、25% 相当のクレジット サブスクリプションが自動的に補充されます (料金はプラン料金の 25%)。 たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされるしくみです (1 クレジットあたり税抜 0.0006 ドル)。
+Performance プランでは、クレジットが残り 2% になると、25% のクレジット サブスクリプション (最低でも 25,000 クレジット) が補充されます)。 たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
 
-If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
+アカウントで補充が繰り返し行われていることに気付いた場合は、 CircleCI ウェブアプリにログインし、`Plan` > `Plan Usage` をクリックします。 多くの場合、クレジットパッケージを増やすことにより補充の繰り返しを最小限に抑えることができます。 プランを管理するには、 `Plan Overview` をクリックしてください。
 
-On the **Free plan**, jobs will fail to run once you have run out of credits.
+**Free プラン**では、クレジットがなくなるとジョブの実行に失敗します。
 
 #### クレジットに有効期限はありますか？
 {: #do-credits-expire }
 {:.no_toc}
-**Performance plan**: Credits expire one year after purchase. ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
+**Performance プラン**のクレジットは、購入後 1 年で失効します。 ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
 
 #### 支払い方法は？
 {: #how-do-i-pay }
 {:.no_toc}
-CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
+毎月の料金は CircleCI アプリ内で支払えます。
 
 #### 支払いのスケジュールは？
 {: #when-do-i-pay }
 {:.no_toc}
 
-On the **Performance plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. 自動チャージは、保有クレジット数の残りが、月額購入数に対して 2% になった時、 25% 相当分（最小25,000クレジット）を自動追加するというものです。
+**Permance プラン**では、請求サイクルの初日に、プレミアム サポートの料金と毎月のクレジット パッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
 
 #### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-はい。 ジョブが "queud(キューに入っている)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing(準備中)" の場合は、CircleCIがセットアップを行っているか、ジョブの実行を開始しようとしています。
+はい。 ジョブが "queud (キューイング中)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
 
 #### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
 {:.no_toc}
 
-更新日は、以下にあげる CircleCI からの請求が発生する日に加え、有料プランへアップグレードまたは別の有料プランへ変更し、初めてクレジットカードで決済した日付に設定されます。
+更新日は、以下の CircleCI からの請求日に加え、有料プランへアップグレードまたは別の有料プランへ変更し、初めてクレジットカードで決済した日付に設定されます。
 
 - 月間プランの場合、毎月の月額料金の請求日が更新日になります。
 - 年間プランの場合、年に一度の年間料金の請求日が更新日になります。
 - 年間プランを利用中でも、ユーザーの追加やクレジットの消費により未払い残高が発生した場合、その月の最終日が更新日になります。
 - Performance プランでは、クレジットの残高が設定された最低残高を下回った場合、自動的にクレジット購入が実行されます。
 
-#### オープンソース プロジェクト向けのクレジットベース プランはありますか?
+#### オープンソース プロジェクト向けのクレジットベースプランはありますか?
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
+**Free プラン**を利用するオープンソースの組織には、Linux オープンソース プロジェクトに使用できる 400,000 クレジットが毎月無料で付与されます。  オープンソースのクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
-CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド向けの無料クレジットは、組織あたり最大 2 件のジョブの同時実行に使用できます。
+CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソースプロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド用の無料クレジットは、１組織あたり最大 2 件のジョブの同時実行に使用できます。
 
 #### 現在、コンテナベース プランのオープンソース プロジェクトで無料クレジットを受け取っています。 Performance プランのオープンソース プロジェクトで割引を受けるにはどうすればよいですか?
 {: #i-currently-get-free-credits-for-open-source-projects-on-my-container-plan-how-do-i-get-discounts-for-open-source-on-the-performance-plan }
 {:.no_toc}
 
-CircleCI no longer offers discounts for open source customers on the Performance plan.
+現在、Performance プランでオープンソースをご利用のお客様への割引は行っていません。
 
 #### Docker レイヤー キャッシュの利用に料金が発生するのはなぜですか?
 {: #why-does-circleci-charge-for-docker-layer-caching }
@@ -403,7 +403,7 @@ CircleCI no longer offers discounts for open source customers on the Performance
 
 Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
-ユーザーに DLC をご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステート ドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時処理の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが引き継がれます。
+お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステート ドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時処理の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが請求されます。
 
 DLC のご利用金額を見積もるには、設定ファイル内の Docker レイヤー キャッシュが有効になっているジョブと、それらのジョブでビルドしている Docker イメージの数を確認してください。 設定ファイルに書き込んでいるジョブは 1 行でも、たとえば並列処理を有効にした場合、そのジョブがパイプラインで複数回実行される場合もあります。
 
@@ -411,23 +411,23 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 
 ---
 
-### コンテナ課金プラン
+### コンテナベースプラン
 {: #container-based-plans }
 
-#### コンテナ数を増やし、ビルドの待機時間を解消するには、どのようにコンテナ プランをアップグレードしたらよいですか?
+#### コンテナ数を増やし、ビルドの待機時間を解消するには、どのようにコンテナベースプランをアップグレードしたらよいですか?
 {: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
 {:.no_toc}
-* Linux プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、[Add Containers (コンテナの追加)] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
+* Linux プランの変更: CircleCI アプリケーションで [Settings]  > [Plan Overview ]を開き、[Add Containers]ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、Pay Now ボタンをクリックして支払方法の設定画面へと進みます。
 
-#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
+#### 複数の組織で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-はい。 CircleCI アプリケーションで [Settings (設定)] > [Share & Transfer (共有 & 転送)] > [Share Plan (プランの共有)] を開き、プランに追加したい組織を選択してください。
+はい。 CircleCI アプリケーションで [Settings] > [Share & Transfer] > [Share Plan] を開き、プランに追加したい組織を選択してください。
 
-#### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
+#### 個人アカウントではなく組織宛に請求されるよう設定できますか？
 {: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
 {:.no_toc}
-はい、請求は組織全体に関連付けられています。 Org の設定ページにて、ユーザー自身がその Org として支払うことができます。 ただし、そのユーザーが全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub Org 管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
+はい、請求は組織にひも付けられています。 組織の設定ページから組織アカウントで料金の支払いを行うことができます。 ただし、お客様が全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub 組織管理者をたてる必要があります。 この件については、よりスムーズに対応いただけるよう、今後の更新で方針を見直す予定です。
 
 #### 課金に関連してコンテナはどのように定義されますか？
 {: #what-is-the-definition-of-a-container-in-the-context-of-billing }
@@ -437,7 +437,7 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 #### リモート Docker の起動処理時間に料金が発生するのはなぜですか？
 {: #why-am-i-being-charged-for-remote-docker-spin-up-time }
 {:.no_toc}
-CircleCI がリモート Docker インスタンスを起動するとき、プライマリコンテナを実行する必要があり、コンピューティングリソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
+CircleCI がリモート Docker インスタンスを起動するには、プライマリコンテナを実行する必要があり、コンピューティングリソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
 
 ---
 
@@ -447,9 +447,9 @@ CircleCI がリモート Docker インスタンスを起動するとき、プラ
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
-machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
+Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
 IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。  下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
@@ -472,10 +472,10 @@ jobs:
           sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
+Docker に IPv6 アドレスを割り当てる手法は複数あります。上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を用いる方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
 
-### What operating systems does CircleCI support?
+### CircleCI  がサポートしている OS は？
 {: #what-operating-systems-does-circleci-20-support }
 {:.no_toc}
 - **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
@@ -489,7 +489,7 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
+Docker ジョブは `amd64`を、マシンジョブは`amd64` と [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) をサポートしています。
 
 
 [docker-hub]: https://hub.docker.com
