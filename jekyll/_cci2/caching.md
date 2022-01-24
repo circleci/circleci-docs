@@ -87,13 +87,13 @@ Tools that are not explicitly required for your project are best stored on the D
 
 Jobs in one workflow can share caches. This makes it possible to create race conditions in caching across different jobs in workflows.
 
-Cache is immutable on write. Once a cache is written for a specific key like `node-cache-main`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
+Cache is immutable on write. Once a cache is written for a specific key like `node-cache-main`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3. They all read and write to the same cache key.
 
 In a run of the workflow, Job3 may use the cache written by Job1 or Job2. Since caches are immutable, this would be whichever job saved its cache first. This is usually undesirable, because the results are not deterministic. Part of the result depends on chance. You could make this workflow deterministic by changing the job dependencies. For example, make Job1 and Job2 write to different caches, and Job3 loads from only one. Or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
 
 There are more complex cases where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`. A race condition is still possible, but the details may change. For instance, the downstream job uses the cache from the upstream job to run last.
 
-Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: Job1 and Job2. Job2 uses the cache saved from Job1.  Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it. Job2 could also load a cache from a previous workflow. If this happens, this means Job2 tried to load the cache before Job1 saved it. This can be resolved by creating a workflow dependency: Job1 -> Job2. This forces Job2 to wait until Job1 has finished running.
+Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: Job1 and Job2. Job2 uses the cache saved from Job1. Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it. Job2 could also load a cache from a previous workflow. If this happens, this means Job2 tried to load the cache before Job1 saved it. This can be resolved by creating a workflow dependency: Job1 -> Job2. This forces Job2 to wait until Job1 has finished running.
 
 ## Restoring cache
 {: #restoring-cache }
@@ -197,9 +197,7 @@ For example, you may want to clear the cache in the following scenarios by incre
 ### Cache size
 {: #cache-size }
 {:.no_toc}
-We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks.Above this limit, check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
-Larger cache sizes are allowed, but may cause problems due to a higher chance of decompression issues and corruption during download.
-To keep cache sizes down, consider splitting them into multiple distinct caches.
+We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks. Above this limit, check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step. Larger cache sizes are allowed, but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting them into multiple distinct caches.
 
 ## Basic example of dependency caching
 {: #basic-example-of-dependency-caching }
@@ -241,7 +239,7 @@ The example may output a string similar to the following:
 
 If the contents of the `package-lock` file were to change, the `checksum` function would return a different, unique string, indicating the need to invalidate the cache.
 
-When choosing suitable templates for your cache `key`, remember that cache saving is not a free operation. It will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, include a `key` that generates a new cache only if something  changes.
+When choosing suitable templates for your cache `key`, remember that cache saving is not a free operation. It will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, include a `key` that generates a new cache only if something changes.
 
 The first step is to decide when a cache will be saved or restored by using a key for which some value is an explicit aspect of your project. For example, when a build number increments, when a revision is incremented, or when the hash of a dependency manifest file changes.
 
@@ -425,7 +423,7 @@ steps:
 **Safe to Use Partial Cache Restoration?**
 Yes.
 
-Gradle repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are  added to classpaths of generated artifacts.
+Gradle repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are added to classpaths of generated artifacts.
 
 {% raw %}
 
@@ -452,7 +450,7 @@ steps:
 **Safe to Use Partial Cache Restoration?**
 Yes.
 
-Maven repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are  added to classpaths of generated artifacts.
+Maven repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are added to classpaths of generated artifacts.
 
 Since Leiningen uses Maven under the hood, it behaves in a similar way.
 
