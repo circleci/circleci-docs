@@ -106,8 +106,11 @@ Supported Kubernetes versions:
 | 3.0.0 - 3.2.1
 | < 1.21
 
-| 3.2.2+
+| 3.2.2
 | 1.16 - 1.21
+
+| 3.3.0 -
+| 1.16 - 1.22
 |===
 
 Creating a Kubernetes cluster is your responsibility. Please note:
