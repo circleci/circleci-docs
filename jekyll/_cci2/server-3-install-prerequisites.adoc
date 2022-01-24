@@ -43,14 +43,16 @@ Download and install the following software before continuing:
 | {helmversion} or greater
 | Kubernetes Package Management
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux]. 
-| {kotsversion}
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux].
+| {kotsversion} *
 | Replicated Kubernetes Application Management
 
-| https://github.com/vmware-tanzu/velero/releases[Velero CLI] 
+| https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 | Latest
 | Backup and restore capability
 |===
+
+NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
 ==== AWS required software
 
@@ -104,8 +106,11 @@ Supported Kubernetes versions:
 | 3.0.0 - 3.2.1
 | < 1.21
 
-| 3.3.x+
-| >= 1.16
+| 3.2.2
+| 1.16 - 1.21
+
+| 3.3.0+
+| 1.16 - 1.22
 |===
 
 Creating a Kubernetes cluster is your responsibility. Please note:
