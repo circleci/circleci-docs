@@ -46,7 +46,7 @@ Caching keys are simple to configure. The following example updates a cache if i
 {: #introduction }
 {:.no_toc}
 
-Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/) page for  tips on caching strategies.
+Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/) page for tips on caching strategies.
 
 This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI job runs are automatically cached on the server infrastructure where possible.
 
