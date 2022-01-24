@@ -621,7 +621,7 @@ In this example, `restore_cache` looks for a cache hit from the current git revi
 
 If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that updates more often as the current branch and git revision change.
 
-Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (for example, with [API-triggered builds](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflow job.
+Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (for example, with [API-triggered builds](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) or when using workflows, where you might otherwise need to `checkout` the same repository once per workflow job.
 
 However, it is worth comparing build times with and without source caching. `git clone` is often faster than `restore_cache`.
 
