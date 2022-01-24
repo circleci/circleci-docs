@@ -106,9 +106,6 @@ Charges apply when an organization has runner network egress beyond the included
 
 Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
 
-**Note:** The duration of storage for workspaces, caches, artifacts and tests results are set by CircleCI. You are unable to customize these durations at this time.
-{: class="alert alert-info" }
-
 To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 #### Network
