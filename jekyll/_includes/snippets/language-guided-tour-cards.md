@@ -6,8 +6,8 @@
 {% include snippets/language-card.md lang=include.lang %}
 
 <div id="completion-time" class="card">
-<img alt="Completion Time" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
-<span>{{ include.guide_completion_time }} mins</span>
+<img alt="Completion Time" src="{{ site.baseurl }}/assets/img/compass/git-commit.svg">
+<span>{{ include.guide_completion_time }} min task</span>
 </div>
 
 * TOC
@@ -27,8 +27,8 @@ OR
 Check out a {{ include.lang }} sample app running on CircleCI.
 
 <div id="completion-time" class="card">
-<img alt="Completion Time" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
-<span>{{ include.sample_completion_time }} mins</span>
+<img alt="Completion Time" src="{{ site.baseurl }}/assets/img/compass/repo-forked.svg">
+<span>{{ include.sample_completion_time }} min task</span>
 </div>
 
 * [View live {{include.lang}} sample app pipeline]({{site.cci_public_org_url}}/circleci-demo-{{include.demo_url_suffix}}){:target="_blank"}{:rel="noopener noreferrer"}
