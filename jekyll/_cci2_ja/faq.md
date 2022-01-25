@@ -34,7 +34,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 {: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
 
-Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/2.0/migrating-from-jenkins/)」をご覧ください。
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ### 基本イメージを作成していなくても、CircleCI  を使用できますか?
 {: #can-i-use-circleci-without-creating-base-images }
@@ -52,7 +52,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 ### CircleCI  はオンプレミスでも利用できますか?
 {: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-はい、CircleCI Server は AWS または GCP 上で利用できます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/2.0/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
+はい、CircleCI Server は AWS または GCP 上で利用できます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/ja/2.0/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
@@ -113,7 +113,7 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストプラクティスは？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`最新の`タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 その他の例は、「Executor タイプの選び方」の[ Docker イメージのベストプラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「[CircleCI イメージ」]({{ site.baseurl }}/2.0/circleci-images/#best-practices)のベストプラクティスの項を参照してください。
+`最新の`タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 その他の例は、「Executor タイプの選び方」の[ Docker イメージのベストプラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「[CircleCI イメージ」]({{ site.baseurl }}/ja/2.0/circleci-images/#best-practices)のベストプラクティスの項を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -146,7 +146,7 @@ jobs:
 ### ワークフローで API は使用できますか?
 {: #can-i-use-the-api-with-workflows }
 {:.no_toc}
-はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/2.0/build-processing/)」をご覧ください。
+はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing/)」をご覧ください。
 
 ### ワークフローでビルドの「自動キャンセル」はできますか？
 {: #can-i-use-the-auto-cancel-feature-with-workflows }
@@ -171,7 +171,7 @@ jobs:
 ### 同一のワークフロー内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
 {:.no_toc}
-既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプの項を参照してください。
+既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプの項を参照してください。
 
 ### `config.yml` ファイルを複数ファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
@@ -489,7 +489,7 @@ Docker に IPv6 アドレスを割り当てる手法は複数あります。上�
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-Docker ジョブは `amd64`を、マシンジョブは`amd64` と [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) をサポートしています。
+Docker ジョブは `amd64`を、マシンジョブは`amd64` と [ARM resources]({{ site.baseurl }}/ja/2.0/arm-resources/) をサポートしています。
 
 
 [docker-hub]: https://hub.docker.com
