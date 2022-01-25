@@ -28,7 +28,7 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 ## 移行
 {: #migration }
 
-[移行の概要]({{ site.baseurl }}/2.0/migration-intro/)ドキュメントをご覧ください。さまざまなプラットフォーム用の移行ガイドへのリンクにアクセスできます。
+[移行の概要]({{ site.baseurl }}/ja/2.0/migration-intro/)ドキュメントをご覧ください。さまざまなプラットフォーム用の移行ガイドへのリンクにアクセスできます。
 
 ### Jenkins から CircleCI  へ移行する方法を教えてください。
 {: #how-do-i-migrate-from-jenkins-to-circleci }
