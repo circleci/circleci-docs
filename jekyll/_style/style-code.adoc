@@ -3,3 +3,7 @@
 :icons: font
 :toc: macro
 :toc-title:
+
+* When using example code snippits, be mindful that people are likely to copy paste them. Always point out, just before the snippet, which, if any, items or values need to be replaced with the reader’s own data – including whether they should replace the surrounding `< >`` or `“ “`.
+
+* When a reader needs to substitute some of their own data into a snippet or command, use `< >` , for example, `<my-data>`.
