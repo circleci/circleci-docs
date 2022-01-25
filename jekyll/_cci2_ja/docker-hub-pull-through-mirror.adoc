@@ -3,7 +3,7 @@ version:
 - Server v2.x
 - Server Admin
 ---
-= Setting Up Docker Hub Pull Through Mirror
+= Docker Hub のミラーの使用
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to configure a Docker Hub pull through registry mirror.
@@ -119,7 +119,7 @@ https://docs.docker.com/registry/recipes/mirror/ (レジストリのミラー
 
 == Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Registry
 
-Nomad クライアント「ごと」に以下の手順を実行します。
+サービスマシンで、以下の手順を実行します。
 
 . Run the command below to *create a directory for your customization files*.
 +

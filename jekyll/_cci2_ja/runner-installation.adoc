@@ -90,11 +90,19 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 | `platform=darwin/arm64`
 |===
 
+例
+```bash
+export platform=darwin/amd64
+```
+
 次に、`circleci-launch-agent` バージョンを設定します。 クラウド版 CircleCI のランナーは、サポートされている最新バージョンに自動的に更新されます。 CircleCI Server の場合、特定のランナー バージョンの相互運用性は検証されていますが、ランナーは自動更新されません。 CircleCI Server 用の `circleci-launch-agent` バージョンについては、<<runner-for-server-compatibility, こちらの表>>を参照してください。
 
 クラウド版 CircleCI の場合、以下を実行します。
 ```bash
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+```
+followed by:
+```bash
 export agent_version=$(curl "${base_url}/release.txt")
 ```
 

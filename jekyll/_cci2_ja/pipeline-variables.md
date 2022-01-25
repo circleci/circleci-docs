@@ -1,18 +1,16 @@
 ---
 layout: classic-docs
-title: "パイプライン変数"
-short-title: "パイプライン変数"
-description: "パイプラインの変数、パラメーター、値についての詳細情報"
+title: "Pipeline values and parameters"
+description: "Detailed information about pipeline parameters and values"
 categories:
   - はじめよう
 order: 1
 version:
   - クラウド
+  - Server v3.x
 ---
 
-パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
-
-パイプライン変数には、次の 2 つの種類があります。
+Pipeline values and parameters can be used to create reusable pipeline configurations.
 
 * **パイプライン値**: 設定ファイル全体で使用できるメタデータ。
 * **パイプライン パラメーター**: 型指定された変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
@@ -20,25 +18,13 @@ version:
 ## パイプライン値
 {: #pipeline-values }
 
-パイプライン値はすべてのパイプライン構成で使用でき、事前に宣言することなく使用できます。
+パイプライン値は、あらゆるパイプライン構成で使用可能であり、事前に宣言することなく使用できます。
 
-| 値                          | 説明                                                                                                                                                                                                                                                                                             |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pipeline.id                | パイプラインを表す、[グローバルに一意のID](https://en.wikipedia.org/wiki/Universally_unique_identifier)。                                                                                                                                                                                                          |
-| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID。                                                                                                                                                                                                                                                                    |
-| pipeline.project.git_url   | 現在のプロジェクトがホストされている URL 。 例： 例： 例： https://github.com/circleci/circleci-docs                                                                                                                                                                                                                    |
-| pipeline.project.type      | 小文字の VCS プロバイダ名。 例: “github”、“bitbucket”                                                                                                                                                                                                                                                       |
-| pipeline.git.tag           | パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。                                                                                                                                                                                                                             |
-| pipeline.git.branch        | パイプラインをトリガーするためにプッシュされた git タグの名前。                                                                                                                                                                                                                                                             |
-| pipeline.git.revision      | 現在ビルドしている長い git SHA（４０文字）                                                                                                                                                                                                                                                                      |
-| pipeline.git.base_revision | 現在ビルドしているものより前のビルドの長い git SHA （４０文字） <br/><br/> **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。 |
-| pipeline.in_setup          | True if the pipeline is in the setup phase, i.e. running a [setup workflow]({{ site.baseurl }}/2.0/dynamic-config/).                                                                                                                                                                           |
-| pipeline.trigger_source    | The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`                                                                                                                                                                                               |
-| pipeline.schedule.name     | The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources                                                                                                                                                                |
-| pipeline.schedule.id       | The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggerd by other sources                                                                                                                                                           |
-{: class="table table-striped"}
+For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#pipeline-values).
 
-例えば下記のようにします。
+{% include snippets/pipeline-values.md %}
+
+Usage example:
 
 ```yaml
 version: 2.1
@@ -55,7 +41,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**Note:** When using the above method to set the variables in the `environment` key if the pipeline variable is empty it will set the variable to `<nil>`. 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+**Note:** When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 ## 設定ファイルにおけるパイプライン パラメーター
 {: #pipeline-parameters-in-configuration }
@@ -110,7 +96,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ## パイプライン パラメーターのスコープ
 {: #the-scope-of-pipeline-parameters }
 
-パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、Orb 内でパイプラインのスコープへのアクセスを認めると、カプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が危険にさらされ、脆弱性が表面化する可能性があるためです。
+パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、パイプラインのスコープを Orb 内に認めるとカプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が台無しになり、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
 
 
 ## 構成プロセスの段階とパラメーターのスコープ
