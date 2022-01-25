@@ -8,4 +8,4 @@
 
 * Capitalize the first word of each item in a list.
 
-* If the text in the bullet is a full sentence or completes the intro stem, use a full stop at the end.
+* If the text in the bullet is a full sentence or completes the intro stem use a period at the end.

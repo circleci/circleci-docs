@@ -15,9 +15,10 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 
 == Word choices
 * Steer clear of making assumptions about the complexity of a process. Avoid descriptions like "easy", "easily" or "simply".
+* Avoid ambiguous language such as "should" and "should be". If something is optional, say so, if not make it clear it is an essential step.
 * When specifying a tool or way of performing an action, use "using" instead of "via". The latter is harder on non-English speakers.
 * No whitelist/blacklist. Instead use safelist/blocklist.
-* No master/slave. Instead use leader/follower.
+* No master/slave. Instead use leader/follower or primary/replica depending on the context.
 
 == Abbreviations
 * Do not use the abbreviations "e.g." or "i.e.". Instead, use "for example" and "that is", respectively.
@@ -25,6 +26,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 == Punctuation
 * Avoid semicolons and dashes (en or em) to split sentences. Instead, add a new sentence, or use commas and periods.
 * Do not use ampersands (&) as a substitute for the word "and". The ampersand is used in logical notation for the binary operator AND.
+* Don't put a period at the end of a sentence if the sentence ends with a URL, code sample or command. People will be likely to copy and paste and could end up copying the period too.
 
 == Grammar
 * "Login" and "Setup" are not verbs, they are nouns. Use as follows:

@@ -1,25 +1,22 @@
 en:
-- name: Style
-  icon: icons/sidebar/getting_started.svg
-  children:
-    - name: Style and Voice
-      link: style/style-voice/
-    - name: Headings
-      link: style/style-headings/
-    - name: Links
-      link: style/style-links/
-    - name: Formatting
-      link: style/style-formatting/
-    - name: Using code samples
-      link: style/style-code/
-    - name: Using lists
-      link: style/style-lists/
-    - name: Using tables
-      link: style/style-tables/
-    - name: Using Screenshots
-      link: style/style-screenshots/
-    - name: Using Images
-      link: style/style-images/
+- name: Style Guide Introduction
+  link: style/index/
+- name: Style and Voice
+  link: style/style-voice/
+- name: Headings
+  link: style/style-headings/
+- name: Links
+  link: style/style-links/
+- name: Formatting
+  link: style/style-formatting/
+- name: Using code samples
+  link: style/style-code/
+- name: Using lists
+  link: style/style-lists/
+- name: Using tables
+  link: style/style-tables/
+- name: Using Images
+  link: style/style-images/
     
 
 ja:
