@@ -672,10 +672,10 @@ jobs:
 ```
 
 
-# Using a code coverage service
+## Using a code coverage service
 {: #using-a-code-coverage-service }
 
-## Codecov
+### Codecov
 {: #codecov }
 
 Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
@@ -693,7 +693,7 @@ jobs:
 
 Read more about Codecov's orb in their [guest blog post](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/).
 
-## Coveralls
+### Coveralls
 {: #coveralls }
 
 If you're a Coveralls customer, follow
