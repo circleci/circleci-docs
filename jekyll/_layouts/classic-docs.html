@@ -3,13 +3,10 @@
 {% include_cached head.html site=site page=page %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
-  {% include_cached google-tag-manager-noscript.html %}
+  {% include_cached google-tag-manager.html %}
 {% endif %}
 
 <div class="outer">
-  <div id="progress-bar-container">
-    {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
-  </div>
   {% assign lang = page.lang %}
   {% if page.collection == "style" %}
     {% assign sidenav = site.data.sidenavstyle[lang] %}
@@ -18,6 +15,10 @@
   {% endif %}
 
   {% include_cached global-nav.html site=site page=page sidenav=sidenav current_url=current_url %}
+
+  <div id="progress-bar-container">
+    {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
+  </div>
 
   {% include_cached hits-target.html %}
   <div class="main-body">
