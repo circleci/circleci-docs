@@ -26,7 +26,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 == Punctuation
 * Avoid semicolons and dashes (en or em) to split sentences. Instead, add a new sentence, or use commas and periods.
 * Do not use ampersands (&) as a substitute for the word "and". The ampersand is used in logical notation for the binary operator AND.
-* Don't put a period at the end of a sentence if the sentence ends with a URL, code sample or command. People will be likely to copy and paste and could end up copying the period too.
+* Do not put a period at the end of a sentence if the sentence ends with a URL, code sample or command. People are likely to copy and paste and could end up copying the period too.
 
 == Grammar
 * "Login" and "Setup" are not verbs, they are nouns. Use as follows:
