@@ -17,6 +17,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * Steer clear of making assumptions about the complexity of a process. Avoid descriptions like "easy", "easily" or "simply".
 * Avoid ambiguous language such as "should" and "should be". If something is optional, say so, if not make it clear it is an essential step.
 * When specifying a tool or way of performing an action, use "using" instead of "via". The latter is harder on non-English speakers.
+* Avoid contractions, for example "don't", "you're". They make the content harder for non-native english speakers to read.
 * No whitelist/blacklist. Instead use safelist/blocklist.
 * No master/slave. Instead use leader/follower or primary/replica depending on the context.
 
