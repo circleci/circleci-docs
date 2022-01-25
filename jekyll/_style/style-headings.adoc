@@ -6,7 +6,7 @@
 
 * Write headings in a logical sequence. If you read section titles in order, the flow should present a good storyline for the doc.
 
-* Do not skip heading levels – try not to jump from, for example, `h2` to `h4`.
+* Do not skip heading levels. For example, try not to jump from `h2` to `h4`, missing out `h3`.
 
 * Try not to have a heading with no paragraph text to accompany it. Add at least an overview or intro to what comes next.
 
