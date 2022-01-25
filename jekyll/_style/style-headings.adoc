@@ -4,7 +4,7 @@
 :toc: macro
 :toc-title:
 
-* Write headings in a logical sequence. If you read out section titles in order, this should present a good storyline for the doc.
+* Write headings in a logical sequence. If you read section titles in order, the flow should present a good storyline for the doc.
 
 * Do not skip heading levels – try not to jump from, for example, `h2` to `h4`.
 
