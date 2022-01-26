@@ -17,7 +17,7 @@ how to configure CircleCI
 using a sample application written in Python.
 {% endraw %}
 
-{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_suffix="python-django" guide_completion_time="15" sample_completion_time="5" %}
+{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="5" %}
 
 ## Overview
 {: #overview-new }
@@ -80,7 +80,7 @@ A traditional ask from developers who are getting started with CircleCI is to pe
 #### a. Build and test the app
 {: #build-and-test-the-app }
 
-For this step, we are using the `python/install-packages` command that comes from the Python [orb]({{site.devhub_base_url}}/orbs/orb/circleci/python). This command automatically sets up a python environment and installs the packages for your project either globally with `pip` or in a `virtualenv` with `poetry` or `pipenv`. 
+For this step, we are using the `python/install-packages` command that comes from the Python [orb]({{site.devhub_base_url}}/orbs/orb/circleci/python). This command automatically sets up a python environment and installs the packages for your project either globally with `pip` or in a `virtualenv` with `poetry` or `pipenv`.
 ```yaml
 jobs:
   build_and_test: # this can be any name you choose
@@ -174,7 +174,7 @@ jobs:
           root: ~/project
           paths:
             - .
- 
+
   deploy: # this can be any name you choose
     docker:
       - image: cimg/python:3.10.1

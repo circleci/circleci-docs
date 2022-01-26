@@ -15,7 +15,7 @@ version:
 This document describes how to configure CircleCI using a sample application written in Node.js.
 {% endraw %}
 
-{% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_suffix="javascript-react-app" guide_completion_time="15" sample_completion_time="5" %}
+{% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_slug="javascript" demo_branch="master" guide_completion_time="15" sample_completion_time="5" %}
 
 ## Overview
 {: #overview }
@@ -203,7 +203,7 @@ jobs:
           root: ~/project
           paths:
             - .
- 
+
   deploy: # this can be any name you choose
     docker:
       - image: cimg/node:17.2.0
