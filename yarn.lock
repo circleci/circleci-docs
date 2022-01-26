@@ -928,28 +928,28 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@datadog/browser-core@3.6.13":
-  version "3.6.13"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-3.6.13.tgz#e9d7f43b50e7d52a3615619695210cf809a6bb04"
-  integrity sha512-bIvfSFYNanxY0NFePxv46oYsqxy3ygJhPWKV59XQqWYqmtq/29zVj3RmxMW4uxV/mdqGhshNrIvAYO17fc15vw==
+"@datadog/browser-core@3.11.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-3.11.0.tgz#84b9168e35bdb0fdc42c376bb33d79357791bf61"
+  integrity sha512-NfvEE+mImWYKVcN9BkfNSYVwRCL4SFUrZrpKX8zDdtwGPa7E9+L1l0nwC35b4CCGwS1dPoTDzWKkAsC7f2VmPg==
   dependencies:
     tslib "^1.10.0"
 
-"@datadog/browser-rum-core@3.6.13":
-  version "3.6.13"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-core/-/browser-rum-core-3.6.13.tgz#100fa64580251d200318a87356ce50bb99321b7f"
-  integrity sha512-AT5ktBT1T3HbwK86+E6adKTkn0makv2d5LBU7tshnQk/4ZfjhctBCCRQnHuiXmwwvt0isn8H5q/VVs7xIhaGSA==
+"@datadog/browser-rum-core@3.11.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-core/-/browser-rum-core-3.11.0.tgz#8f0225723b6ce020c1609037f4abb462293b952c"
+  integrity sha512-rwuKyjlXR+s16Bq8cynb/Fp+eZRt4f5+RUB2ryZQO/3gJAa0c/07Z3ZQbBvyxkd4XWV++nvhWMp4jbUskUQ2Ag==
   dependencies:
-    "@datadog/browser-core" "3.6.13"
+    "@datadog/browser-core" "3.11.0"
     tslib "^1.10.0"
 
-"@datadog/browser-rum@^3.6.13":
-  version "3.6.13"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-3.6.13.tgz#bd000fed617e2258da0b501813e68052e152ef82"
-  integrity sha512-mzJeiBtgP0+OBwx9e4qZbNFWAN5duI2w/hU3Zf4RqI0wMWXRxSXBr4E1XNZcppvdhRaHHSlR0dPLGJfH8Q8jXA==
+"@datadog/browser-rum@^3.8.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-3.11.0.tgz#a2a6329b8e7a97197d1d6f49d304911ea55bc80c"
+  integrity sha512-3CQOass81VaSube5FiF/uttHWgLGwwH24fyZL1swy4zgwdzBQF7naVfo3YLwWw7P1S0WxZuAKCt8PrqbV/En+Q==
   dependencies:
-    "@datadog/browser-core" "3.6.13"
-    "@datadog/browser-rum-core" "3.6.13"
+    "@datadog/browser-core" "3.11.0"
+    "@datadog/browser-rum-core" "3.11.0"
     tslib "^1.10.0"
 
 "@datadog/datadog-ci@^0.17.8":
@@ -4334,6 +4334,11 @@ highlightjs-badge@0.1.9:
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/highlightjs-badge/-/highlightjs-badge-0.1.9.tgz#39cec0ff9d55d4ca02ea04ab31e376331f66d9b1"
   integrity sha512-uWA5OvsV3zTnzlXWv12AymBwWwH7VjzndiX/ts2O4NXnM6ezpbkjMKfB6WtYF84syNltoOZgMrluPvwI4utrUw==
+
+highlightjs-line-numbers.js@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/highlightjs-line-numbers.js/-/highlightjs-line-numbers.js-2.8.0.tgz#479ea8cff0c31fadc1578a66fa03e38b801f9ca6"
+  integrity sha512-TEf1gw0c8mb8nan0QwliqS7obT4cpUd9hzsGzsZLweteNnWea/VIqy5/aQqsa5wnz9lnvmtAkS1ZtDTjB/goYQ==
 
 hosted-git-info@^2.1.4:
   version "2.8.9"
