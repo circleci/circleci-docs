@@ -5,9 +5,11 @@ export const init = () => {
   const hideEvents = ['mouseout', 'mouseleave', 'blur'];
   const clickEvents = ['click'];
   const tooltip = document.querySelector('.tooltip-popover');
+  const headerTags =
+    'article h1, article h2, article h3, article h4, article h5, article h6';
 
   // Give article headings direct links to anchors
-  $('article h1, article h2, article h3, article h4, article h5, article h6')
+  $(headerTags)
     .filter('[id]')
     .each(function () {
       var isMainTitle = $(this).prop('nodeName') === 'H1';
