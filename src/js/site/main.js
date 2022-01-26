@@ -325,3 +325,14 @@ export function trackDarkModePreference() {
     });
   }
 }
+
+/*
+  Checking if users are attempting to print docs pages to gauge interest of print button 
+ */
+export function checkIfUsersPrint() {
+  window.onbeforeprint = () => {
+    window.AnalyticsClient.trackAction('User Attempting to Print', {
+      page: window.location.pathname,
+    });
+  };
+}
