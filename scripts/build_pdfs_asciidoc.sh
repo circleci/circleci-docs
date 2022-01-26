@@ -25,10 +25,10 @@ echo "Done!"
 
 # Build Install Guide for GCP
 echo "Building Server Installation Guide for GCP..."
-asciidoctor-pdf -a env-gcp=true -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme-install.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a skip-front-matter -a pdf=true -a revdate=${DATE} -a revnumber=${SERVERVERSION} -a revremark=${COMMENT} -a serverversion=${SERVERVERSION} -a terraformversion=${TERRAFORMVERSION} -a kubectlversion=${KUBECTLVERSION} -a helmversion=${HELMVERSION} -a kotsversion=${KOTSVERSION} -D ${OUT_DIR} -o CircleCI-Server-${VERSION}-GCP-Installation-Guide.pdf jekyll/_cci2/_server-3-install-guide.adoc
+asciidoctor-pdf -a env-gcp=true -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme-install.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a skip-front-matter -a pdf=true -a revdate=${DATE} -a revnumber=${SERVERVERSION} -a revremark=${COMMENT} -a serverversion=${SERVERVERSION} -a terraformversion=${TERRAFORMVERSION} -a kubectlversion=${KUBECTLVERSION} -a helmversion=${HELMVERSION} -a kotsversion=${KOTSVERSION} -D ${OUT_DIR} -o CircleCI-Server-${VERSION}-GCP-Installation-Guide.pdf jekyll/_cci2/_server-3-install-guide-gcp.adoc
 echo "Done!"
 
 # Build Install Guide for AWS
 echo "Building Server Installation Guide for AWS..."
-asciidoctor-pdf -a env-aws=true -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme-install.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a skip-front-matter -a pdf=true -a revdate=${DATE} -a revnumber=${SERVERVERSION} -a revremark=${COMMENT} -a serverversion=${SERVERVERSION} -a terraformversion=${TERRAFORMVERSION} -a kubectlversion=${KUBECTLVERSION} -a helmversion=${HELMVERSION} -a kotsversion=${KOTSVERSION} -D ${OUT_DIR} -o CircleCI-Server-${VERSION}-AWS-Installation-Guide.pdf jekyll/_cci2/_server-3-install-guide.adoc
+asciidoctor-pdf -a env-aws=true -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme-install.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a skip-front-matter -a pdf=true -a revdate=${DATE} -a revnumber=${SERVERVERSION} -a revremark=${COMMENT} -a serverversion=${SERVERVERSION} -a terraformversion=${TERRAFORMVERSION} -a kubectlversion=${KUBECTLVERSION} -a helmversion=${HELMVERSION} -a kotsversion=${KOTSVERSION} -D ${OUT_DIR} -o CircleCI-Server-${VERSION}-AWS-Installation-Guide.pdf jekyll/_cci2/_server-3-install-guide-aws.adoc
 echo "Done!"
