@@ -16,12 +16,14 @@ Use workspaces to pass along data that is unique to a workflow and is needed for
 For example, a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace
 
 ## Overview
+{: #overview }
 
 Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ## Workspace configuration
+{: #workspace-configuration }
 
 To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
@@ -88,6 +90,7 @@ For additional conceptual information on using workspaces, caching, and artifact
 Workspaces are stored for up to 15 days. Workspaces are not shared between pipelines, and the only way to access a workspace once the workflow has completed is if the workflow is rerun within the 15 day window.
 
 ## Workspaces and runner network charges
+{: #workspaces-and-runner-network-charges }
 
 When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit charges will apply These charges are based on your accrued overages. The GB allocation for the plan you are on only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited. Also, you will see no egress traffic or charges for any runners deployed within AWS `us-east-1`.
 
