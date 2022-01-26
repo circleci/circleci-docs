@@ -510,10 +510,12 @@ workflows:
 ```
 {% endraw %}
 
-## Caches, workspaces, and artifacts
-{: #caches-workspaces-and-artifacts }
+## Data Persistence
+{: #data-persistence }
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+
+### Caches
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
@@ -651,7 +653,11 @@ jobs:
 ```
 {% endraw %}
 
+### Workspaces
+
 Workspaces are a workflow-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
+
+### Artifacts
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
