@@ -38,14 +38,14 @@
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}
             {{ content }}
-            {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
           </article>
         </div><!-- .article-container -->
 
         {% if page.toc != false %}
-        <aside class="full-height">
+        <aside id="full-height">
           <div class='full-height-sticky'>
             {% if page.suggested != false %}
             <div id="helpful-resources">
@@ -79,5 +79,6 @@
   {% include_cached js-config.html site=site page=page %}
   {% include_cached js-assets.html %}
 </div><!-- .outter -->
+{% include_cached no-script.html %}
 </body>
 </html>
