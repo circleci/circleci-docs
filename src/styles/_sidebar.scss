@@ -180,7 +180,7 @@ $sidebar-spacing-base: 5px;
   }
 }
 
-aside#full-height {
+aside.full-height {
   .full-height-sticky {
     position: sticky;
     max-height: calc(100vh - 140px);
