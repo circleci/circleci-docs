@@ -9,13 +9,13 @@ version:
   - Server v3.x
   - Server v2.x
 suggested:
-  - 
+  -
     title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
-  - 
+  -
     title: Troubleshoot env vars settings
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
-  - 
+  -
     title: Insert files as environment variables
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
 ---
@@ -235,7 +235,7 @@ steps:
 version: 2.1
 
 jobs:
-  build:    
+  build:
     shell: /bin/sh -leo pipefail
     environment:
 
@@ -248,7 +248,7 @@ jobs:
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#using-parameters-and-bash-environment)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
-version: 2.1 
+version: 2.1
 
 jobs:
   build:
@@ -352,7 +352,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - run: 
+      - run:
           name: "コンテキストに含まれる環境変数を出力"
           command: |
             echo $MY_ENV_VAR
@@ -390,7 +390,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - run: 
+      - run:
           name: "プロジェクトに含まれる環境変数を出力"
           command: |
             echo $MY_ENV_VAR # この環境変数はプロジェクト内で設定が必要
@@ -483,7 +483,7 @@ CircleCI API v2 を使用すると、パイプライン パラメーターから
 
 下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
-```sh
+```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
@@ -511,7 +511,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 たとえば、以下のパラメーターを渡すとします。
 
-```sh
+```shell
 {
   "build_parameters": {
     "foo": "bar",
@@ -524,7 +524,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 このビルドは、以下の環境変数を受け取ります。
 
-```sh
+```shell
 export foo="bar"
 export baz="5"
 export qux="{\"quux\": 1}"
@@ -535,7 +535,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 
 `build_parameters` キーを使用して環境変数を挿入することで、実行のたびに異なるターゲットに対して機能テストをビルドできます。 たとえば、ステージング環境へのデプロイ ステップを持つ実行で、さまざまなホストに対する機能テストをビルドするとします。 `bash` と `curl` を使用した以下の例のように、JSON 本体を `Content-type: application/json` で送信することで、`build_parameters` を使用できます (ただし、選択した言語の HTTP ライブラリを使用することも可能です)。
 
-```sh
+```shell
 {
   "build_parameters": {
     "param1": "value1",
@@ -546,7 +546,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 
 たとえば、`curl` を使用する場合
 
-```sh
+```shell
 curl \
   --header "Content-Type: application/json" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -559,7 +559,7 @@ curl \
 
 このビルドは、以下の環境変数を受け取ります。
 
-```sh
+```shell
 export param1="value1"
 export param2="500"
 ```

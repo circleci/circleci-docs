@@ -179,7 +179,7 @@ The branch name should be url-encoded.
 
 You can download an individual artifact file via the API with an API-token authenticated HTTP request.
 
-```sh
+```shell
 curl -L -H "Circle-Token: <circle-token>" https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt
 ```
 

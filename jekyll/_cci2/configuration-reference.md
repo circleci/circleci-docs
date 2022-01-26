@@ -63,7 +63,7 @@ commands | N | Map | A map of command names to command definitions. See the [Com
 
 The following example calls an orb named `hello-build` that exists in the certified `circleci` namespace.
 
-```
+```yaml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -1873,7 +1873,7 @@ jobs:
 
 This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
-```sh
+```shell
 {
     "parameters": {
         "run_integration_tests": true

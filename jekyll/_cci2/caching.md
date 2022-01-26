@@ -232,7 +232,7 @@ neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 A cache-key is a _user-defined_ string that corresponds to a data cache. A cache-key can be created by interpolating **dynamic values** — these are called **templates**. Anything you see in a cache-key between curly braces is a template. Consider the following example:
 
-```sh
+```shell
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
@@ -240,8 +240,8 @@ The above example will output a unique string to represent this key. Here, the e
 
 The example may output a string that looks like the following:
 
-```sh
-{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ={% endraw %}
+```shell
+myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 ```
 
 If the contents of the `package-lock` file were to change, the `checksum` function would return a different, unique string, indicating the need to invalidate the cache.

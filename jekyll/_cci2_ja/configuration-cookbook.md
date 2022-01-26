@@ -529,7 +529,7 @@ workflows:
 
 この `action `パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build`されます。 次に、 API v2 の [新しいパイプラインのトリガ ]({{ site.baseurl }}/api/v2/#operation/triggerPipeline)エンドポイントを使って別のワークフローを選択するために、`action` に別の値を指定する例を示します。この例では、`report` という名前のワークフローが実行されます。 [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api)をご自身の値に置き換えてください。
 
-```sh
+```shell
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -589,7 +589,7 @@ workflows:
 version: 2.1
 
 # CircleCI のダイナミック コンフィグ機能を有効にする。
-setup: true 
+setup: true
 
 # ダイナミック コンフィグの使用には continuation Orb が必要。
 orbs:
@@ -604,7 +604,7 @@ jobs:
       - run: # コマンドの実行
           name: 設定ファイルの生成
           command: |
-            ./generate-config > generated_config.yml 
+            ./generate-config > generated_config.yml
       - continuation/continue:
           configuration_path: generated_config.yml # 新しく生成した設定ファイルを使用して続行
 

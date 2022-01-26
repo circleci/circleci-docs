@@ -18,7 +18,7 @@ toc::[]
 
 設定ファイルの形式は次のとおりです。下記で説明する各種パラメーターを使用します。
 
-```sh
+```shell
 api:
   auth_token: AUTH_TOKEN
 runner:
@@ -47,7 +47,7 @@ This controls the file where the launch agent and task agent logs will go. See x
 
 Example:
 
-```sh
+```shell
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ```

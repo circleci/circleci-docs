@@ -20,7 +20,7 @@ Yarn might already be installed in your execution environment if you are using t
 
 独自の Docker イメージ ベース、または `macos`、`windows`、`machine` の Executor を使用している場合は、[Yarn の公式ドキュメント](https://yarnpkg.com/lang/ja/docs/install/)の手順に従って Yarn をインストールできます。 Yarn ドキュメントには、マシン環境別のインストール手順が記載されています。 たとえば Unix 系の環境にインストールする場合は、以下の curl コマンドを使用します。
 
-```sh
+```shell
 curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
 

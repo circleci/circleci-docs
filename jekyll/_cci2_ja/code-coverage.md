@@ -103,11 +103,11 @@ jobs:
 
 [Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) は、Python でコードカバレッジ レポートを生成する際によく使用されるライブラリです。 まず、以下のように Coverage.py をインストールします。
 
-```sh
+```shell
 pip install coverage
 ```
 
-```sh
+```shell
 # これまでは、たとえば以下のように Python プロジェクトを実行していました。
 python my_program.py arg1 arg2
 
@@ -118,7 +118,7 @@ coverage run my_program.py arg1 arg2
 
 この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジレポートを生成できます。
 
-```sh
+```shell
 coverage run -m pytest
 coverage report
 coverage html  # ブラウザーで htmlcov/index.html を開きます。
@@ -312,7 +312,7 @@ jobs:
 
 Go には、コードカバレッジ レポートを生成する機能が組み込まれています。 レポートを生成するには、`-coverprofile=c.out` フラグを追加します。 これでカバレッジレポートが生成され、`go tool` を使用して html に変換できます。
 
-```sh
+```shell
 go test -cover -coverprofile=c.out
 go tool cover -html=c.out -o coverage.html
 ```

@@ -35,7 +35,7 @@ Yarn、Cargo、Pip など多数のツールでは、ロック ファイルを作
 
 Pip と pip-tools を使用して Python プロジェクトをインストールするシンプルな方法を、以下に示します。
 
-```sh
+```shell
 $ echo 'flask' > requirements.in
 $ pip-compile --generate-hashes requirements.in --output-file requirements.txt
 $ pip install --no-deps -r requirements.txt
@@ -47,7 +47,7 @@ $ pip install --no-deps -r requirements.txt
 
 $ yarn add express
 
-```sh
+```shell
 $ yarn add express
 
 # ビルド中

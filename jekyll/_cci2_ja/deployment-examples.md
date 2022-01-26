@@ -707,7 +707,7 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
     それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 次の行を探します。
 
-    ```sh
+    ```shell
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
 
@@ -751,13 +751,13 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
 4.  新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
 
-    ```sh
+    ```shell
     npm version 10.0.1
     ```
 
     これで、`package.json` ファイルがアップデートされ、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。
 
-    ```sh
+    ```shell
     git push --follow-tags
     ```
 5.  テストが完了すると、パッケージが npm に自動的にパブリッシュされます。

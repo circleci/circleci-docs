@@ -161,7 +161,7 @@ If you notice your cache usage is high and would like to reduce it:
 * Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
 {% raw %}
-```sh
+```shell
      - save_cache:
          key: brew-{{epoch}}
          paths:
@@ -173,7 +173,7 @@ If you notice your cache usage is high and would like to reduce it:
 Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
 
 {% raw %}
-```sh
+```shell
      - save_cache:
          key: brew-{{checksum “Brewfile”}}
          paths:

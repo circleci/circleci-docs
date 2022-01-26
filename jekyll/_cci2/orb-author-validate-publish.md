@@ -9,18 +9,18 @@ version:
 This guide covers the steps required to create a simple orb, manually, without using the orb development kit. We recommend the orb development kit for most orb projects, to find out more, see the [Orb Authoring Guide]({{site.baseurl}}/2.0/orb-author).
 
 1. If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub org name:
-```sh
+```shell
 circleci namespace create <my-namespace> github <my-gh-org>
 ```
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
 1. Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published. **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
 To create a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
-```sh
+```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
 To create a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
-```sh
+```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
 
@@ -45,29 +45,29 @@ circleci orb validate /tmp/orb.yml
 ```
 
 1. Publish a dev version of your orb:
-```sh
+```shell
 circleci orb publish /tmp/orb.yml <my-namespace>/<my-orb-name>@dev:first
 ```
 
 1. Once you are ready to push your orb to production, you can publish it manually using `circleci orb publish` or promote it directly from the dev version. Using the following command will increment the dev version to become `0.0.1`:
-```sh
+```shell
 circleci orb publish promote <my-namespace>/<my-orb-name>@dev:first patch
 ```
 
 1. Your orb is now published, in an immutable form, as a production version and can be used safely in CircleCI projects. You can pull the source of your orb using:
-```sh
+```shell
 circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 ```
 
 1. List your available orbs using the CLI:
 
 To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
-```sh
+```shell
 circleci orb list <my-namespace>
 ```
 
 To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
-```sh
+```shell
 circleci orb list <my-namespace> --private
 ```
 

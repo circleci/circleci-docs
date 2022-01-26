@@ -28,7 +28,7 @@ To see test results as build artifacts, upload them using the [`store_artifacts`
 
 The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your config looks like the following:
 
-```sh
+```shell
 - store_test_results:
     path: test-results
 ```

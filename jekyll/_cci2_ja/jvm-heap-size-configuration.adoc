@@ -19,7 +19,7 @@ To be able to configure the JVM_HEAP_SIZE value for each container, you will fir
 
 1. 以下のように customizations ファイルを作成します。
 +
-```sh
+```shell
 /etc/circleconfig/frontend/customizations
 /etc/circleconfig/test-results/customizations
 /etc/circleconfig/output-processor/customizations
@@ -28,7 +28,7 @@ To be able to configure the JVM_HEAP_SIZE value for each container, you will fir
 
 2. In each customization file add the line below to export your desired JVM heap size:
 +
-```sh
+```shell
 export JVM_HEAP_SIZE=2g
 ```
 
@@ -41,17 +41,17 @@ Once your installation has successfully restarted, you can confirm the configure
 
 * `frontend`
 +
-```sh
+```shell
 sudo docker exec -it frontend lein repl :connect 6005
 ```
 * `test-results`
 +
-```sh
+```shell
 sudo docker exec -it test-results lein repl :connect 2719
 ```
 * `output-processing`
 +
-```sh
+```shell
 sudo docker exec -it picard-output-processor lein repl :connect 6007
 ```
 

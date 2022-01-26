@@ -224,7 +224,7 @@ CircleCI manual dependency caching requires that you be explicit about what you 
 
 各キャッシュ キーは、1 つのデータ キャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュ キーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュ キー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
 
-```sh
+```shell
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
@@ -232,7 +232,7 @@ CircleCI manual dependency caching requires that you be explicit about what you 
 
 この例では、以下のような文字列が出力されます。
 
-```sh
+```shell
 {% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ={% endraw %}
 ```
 
@@ -385,7 +385,7 @@ steps:
 {: #bundler-ruby }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？**  
+**部分キャッシュ リストアを使用しても安全でしょうか？**
 はい。ただし、注意点があります。
 
 Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。

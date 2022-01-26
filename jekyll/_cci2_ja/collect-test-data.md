@@ -25,7 +25,7 @@ CircleCI では、XML ファイルからテスト メタデータを収集し、
 
 設定ファイルでは、以下のように [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) キーが使用されます。
 
-```sh
+```shell
 - store_test_results:
     path: test-results
 ```
@@ -632,6 +632,6 @@ Clojure のテスト出力を XML 形式に変換するには、[test2junit](htt
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
-{:.no_toc} 
+{:.no_toc}
 
 <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>

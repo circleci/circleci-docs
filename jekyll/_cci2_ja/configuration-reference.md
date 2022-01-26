@@ -9,19 +9,19 @@ version:
   - Server v3.x
   - Server v2.x
 suggested:
-  - 
+  -
     title: 6 つの構成オプション
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: ダイナミック コンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: ダイナミック コンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
@@ -1852,7 +1852,7 @@ jobs:
 
 この例では、`POST` 本体に以下が含まれた状態でパイプラインがトリガーされたときに、テストが明示的に呼び出されない限りは `integration_tests` ワークフローは実行されないようにしています。
 
-```sh
+```shell
 {
     "parameters": {
         "run_integration_tests": true

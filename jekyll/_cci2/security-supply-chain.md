@@ -64,7 +64,7 @@ version, or overwriting the contents at a given version number.
 
 Consider the following simple method for installing a Python project using pip and pip-tools.
 
-```sh
+```shell
 $ echo ‘flask’ > requirements.in
 $ pip-compile --generate-hashes requirements.in --output-file requirements.txt
 $ pip install --no-deps -r requirements.txt
@@ -80,7 +80,7 @@ installed when using `yarn`.
 
 $ yarn add express
 
-```sh
+```shell
 $ yarn add express
 
 # during your build

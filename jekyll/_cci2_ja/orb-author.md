@@ -356,12 +356,12 @@ Orb に適用したカテゴリ項目を表示するには、`circleci orb info 
 CLI を使用して、公開されている Orb を一覧表示できます。
 
 **[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
-```sh
+```shell
 circleci orb list <my-namespace>
 ```
 
 **[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
-```sh
+```shell
 circleci orb list <my-namespace> --private
 ```
 

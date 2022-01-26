@@ -159,7 +159,7 @@ UI テストのイメージや動画をアップロードする場合は、フ�
 * キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
 {% raw %}
-```sh
+```shell
        - save_cache:
          key: brew-{{epoch}}
          paths:
@@ -171,7 +171,7 @@ UI テストのイメージや動画をアップロードする場合は、フ�
 上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` はビルドごとに変更され、値が変更されていない場合でも毎回アップロードされます。 この方法では結局コストもかかり、時間も短縮できません。 代わりに、次のようなキャッシュ `key` を選択します。
 
 {% raw %}
-```sh
+```shell
      - save_cache:
          key: brew-{{checksum “Brewfile”}}
          paths:
