@@ -89,17 +89,21 @@ Workspaces are stored for up to 15 days. Workspaces are not shared between pipel
 
 ## Workspaces and runner network charges
 
-When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit, charges will apply, based on your accrued overages. The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited. Also you will see no egress traffic or charges for any runners deployed within AWS `us-east-1`.
+When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit charges will apply These charges are based on your accrued overages. The GB allocation for the plan you are on only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited. Also, you will see no egress traffic or charges for any runners deployed within AWS `us-east-1`.
 
-Restoring caches and workspaces to self-hosted runners results in network egress. To view your network egress usage select **Plan** from the app sidebar, then **Plan Usage** and select the **Network** tab. Here you will find a breakdown of your network usage for the billing period broken down by object type: cache, testresult, artifact, workspace.
+### Viewing network egress usage
+Restoring caches and workspaces to self-hosted runners results in network egress. To view your network egress usage follow these steps:
+1. Select **Plan** from the app sidebar then 
+2. Select **Plan Usage** 
+3. Select the **Network** tab. 
 
-Your network overage GB/TB can be multiplied by 420 credits to estimate total monthly costs. For example, 2 GB-Months overage x 420 credits = 840 credits ($.50).
+Within the network tab you will find a breakdown of your network usage for the billing period. The usage is also broken down by storage object type: cache, testresult, artifact, workspace.
 
-For more on storage and networking, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) guide.
+For more on storage and networking, and calculating your monthly storage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-calculate-an-approximation-of-your-monthly-costs) guide. 
 
 ## See also
 {: #see-also }
 {:.no_toc}
 
 - For further information and strategies for persisting data see the [Persisting Data]({{ site.baseurl }}/2.0/persist-data) guide.
-- For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ.
+- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows) guide.
