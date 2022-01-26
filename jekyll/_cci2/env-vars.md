@@ -581,30 +581,3 @@ For a full list of available built-in data see the [Project Values and Variables
 
 [Contexts]({{site.baseurl}}/2.0/contexts/)
 [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
-
-
-<!-- Docs Disco: This snippet only applies to this page,
-     it adds an additional line to the 'helpful resources' page
-     as part of an experiment. -->
-<script>
-  window.onload = function () {
-    console.log(window.OptimizelyClient)
-    window.OptimizelyClient.getVariationName({
-      experimentKey: 'dd_docs_knowledge_base_pt2_test',
-      groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
-      experimentContainer: '.hljs',
-    }).then((variation) => {
-    console.log("variation is ", variation)
-    if (variation === 'treatment') {
-      var sideNavResources = document.querySelector(".section-nav")
-      var li = document.createElement("li");
-      li.classList.add("helpful-entry", "helpful-h2")
-      var link = document.createElement("a")
-      link.href = "https://support.circleci.com/hc/en-us/articles/4410707277083-Context-deadline-exceeded-after-1-hour-Build-timed-out-Free-tier-only-"
-      link.textContent = "Context deadline exceeded after 1 hour - Build timed out"
-      li.appendChild(link)
-      sideNavResources.append(li);
-      }
-    })
-  }
-</script>
