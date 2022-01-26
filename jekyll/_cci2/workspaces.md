@@ -12,7 +12,7 @@ Workflows each have an associated `workspace`. Workspaces are used to transfer d
 
 Use workspaces to pass along data that is unique to a workflow and is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
 
-For example, a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace
+For example, a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace.
 
 ## Overview
 {: #overview }
@@ -103,7 +103,7 @@ Restoring caches and workspaces to self-hosted runners results in network egress
 
 Within the network tab you will find a breakdown of your network usage for the billing period. The usage is also broken down by storage object type: cache, testresult, artifact, workspace.
 
-For more on storage and networking, and calculating your monthly storage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-calculate-an-approximation-of-your-monthly-costs) guide. 
+For more on storage and networking, and calculating your monthly storage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-calculate-an-approximation-of-your-monthly-costs) guide.
 
 ## See also
 {: #see-also }
