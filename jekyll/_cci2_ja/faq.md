@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "よくあるご質問"
 short-title: "よくあるご質問"
-description: "CircleCI 2.0 に関してよく寄せられるご質問"
+description: "CircleCI に関してよく寄せられるご質問"
 categories:
-  - migration
+  - 移行
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -27,66 +28,38 @@ CircleCI の従業員がお客様の許諾を得ずにコードを見ること�
 ## 移行
 {: #migration }
 
-### CircleCI 1.0 から 2.0 へ移行するメリットを教えてください。
-{: #why-migrate-from-circleci-10-to-20 }
+Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
+
+### Jenkins から CircleCI  へ移行する方法を教えてください。
+{: #how-do-i-migrate-from-jenkins-to-circleci }
 {:.no_toc}
-- CircleCI 2.0 ではコンテナの利用に関する仕様が大幅に変更され、多数のジョブの高速化と、使用可能なコンテナのアイドル状態の防止を図っています。
-- CircleCI 2.0 ではジョブが複数のステップで構成されます。 ジョブ内の各ステップは自由に編集でき、ビルドの方法をニーズに合わせて柔軟にカスタマイズできるようになりました。
-- CircleCI 2.0 のジョブでは、公開されているほぼすべての Docker イメージに加え、独自に依存関係を設定しているカスタム イメージも利用できます。
 
-### Jenkins から CircleCI 2.0 へ移行する方法を教えてください。
-{: #how-do-i-migrate-from-jenkins-to-circleci-20 }
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/2.0/migrating-from-jenkins/)」をご覧ください。
+
+### Can I use CircleCI without creating base images?
+{: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
-```yaml
-    steps:
-      - run: echo "bash コマンドをここに記述します"
-      - run:
-          command: |
-            echo "2 行以上の bash コマンドはこのように記述します"
-            echo "通常は Jenkins の Execute Shell の内容をコピー ＆ ペーストすればよいだけです"
-```
+Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
-Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
+For the `machine` executor, see the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) list.
 
-### inference コマンドは CircleCI 2.0 でも実行できますか?
-{: #does-circleci-20-run-inference-commands }
-{:.no_toc}
-CircleCI 2.0 は、プロジェクトの内容から推測して変換するようなことはしません。 構成ビルダー インターフェイスによって `config.yml` のすべてのジョブを構成できる、スマート デフォルト型モデルの採用を進めています。
-
-### 基本イメージを作成していなくても、CircleCI 2.0 を使用できますか?
-{: #can-i-use-circleci-20-without-creating-base-images }
-{:.no_toc}
-はい、CircleCIが提供しているものをお使いください。 ただし、お使いになる基本イメージのサポートが将来のリリースによって終了する場合もありますのでご注意ください。
-
-たとえば `circleci/build-image:ubuntu-14.04-XL-922-9410082` というイメージは、CircleCI の Web アプリケーションで使用している Ubuntu 14.04 (Trusty Tahr) のイメージと同等の内容になっています。 容量はかなり大きく (非圧縮時で 17.5 GB 程度)、ローカル環境でのテストにはあまり適していません。
-
-このイメージは、デフォルトで `ubuntu` ユーザーとしてアクションを実行し、Docker Compose で提供されるネットワーク サービスと連携するよう設計されています。
-
-このイメージに含まれている言語やツールの一覧は、[こちら]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)でご確認いただけます。
+For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
 
 ## ホスティング
 {: #hosting }
 
-### CircleCI 2.0 はオンプレミスでも利用できますか?
-{: #is-circleci-20-available-to-enterprise-clients }
+### Is CircleCI available to enterprise customers?
+{: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-はい、お客様のオンプレミス環境でもご利用いただけます。詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
+Yes, CircleCI server is available for installation on AWS or GCP. See the [CircleCI Server v3.x Overview]({{ site.baseurl }}/2.0/server-3-overview) for details and links to installation instructions. [Contact us](https://circleci.com/pricing/server/) to discuss your requirements.
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
 {:.no_toc}
-- **クラウド:** CircleCI のチームがサーバーの初期設定、インフラストラクチャ、セキュリティ対策を管理し、サービスのメンテナンスを担当します。 最新機能や自動アップグレードをすぐに利用できるため、お客様の内部システムの管理にかかる負担が軽減されます。
+- **クラウド:** CircleCI のチームがサーバーの初期設定、インフラストラクチャ、セキュリティ対策を管理し、サービスのメンテナンスを担当します。 新機能や自動アップグレードが即座に反映され、システムの内部的な管理負担が軽減されます。
 
-- **サーバー:** AWS などと同様に、お客様が CircleCI のインストールと管理を行います。 お客様のデータセンター ポリシーに沿ってファイアウォールの内側でサーバーの初期設定やメンテナンスを実施できます。 あらゆる管理権限がお客様に付与されるため、自由にカスタマイズしたり、最新バージョンのリリース直後にアップグレードしたりといったことが可能です。
-
-### CircleCI Enterprise という名称を使わなくなったのはなぜですか?
-{: #why-did-you-change-the-name-from-circleci-enterprise }
-{:.no_toc}
-Enterpriseという名称は、ファイアウォールの内側を指すために使われていました。 しかし、この名称によってお客様や CircleCI の従業員に混乱が生じていました。
-
-そこで「CircleCI」という総称を使用することで、クラウド サービス経由で使用したり、ファイアウォールの内側にインストールしたり、あるいはその両方を組み合わせたハイブリッド環境で活用したりと、1 つの製品で多様なニーズに対応できることを明確にしました。
+- **Server** - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -94,40 +67,37 @@ Enterpriseという名称は、ファイアウォールの内側を指すため�
 ### コミットをプッシュしてもジョブが実行されません。
 {: #why-arent-my-jobs-running-when-i-push-commits }
 {:.no_toc}
-CircleCI アプリケーションの Workflows タブで、エラー メッセージが出力されていないかどうかを確認してください。 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
+In the CircleCI application, check the individual job and workflow views for error messages. 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
+詳しくは「[YAML の書き方]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご確認ください。
 
-`config.yml` のフォーマットエラーを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
+`config.yml` のフォーマットのミスを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
 
-### 「usage キュー」と「run キュー」の違いは何ですか?
-{: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
+### Why is my job queued?
+{: #why-is-my-job-queued }
 {:.no_toc}
-**usage キュー**は 1 つの組織内でビルドを実行するためのコンテナが不足しているときに発生します。 使用可能なコンテナの数は、CircleCI のプロジェクト セットアップ時に選択したプランによって決まります。 ビルドの待機時間が頻繁に発生しているようであれば、プランを変更して、使用するコンテナ数を増やすことをお勧めします。
+A job might end up being **queued** because of a concurrency limit being imposed due to the plan you or your organisation are on. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
 
-**run キュー**は CircleCI に高い負荷がかかっているときに発生します。 この場合、ユーザーのビルドはいったん run キューに入り、マシンが利用できる状態になったら処理されます。
-
-つまり、**usage キュー**が発生したときは[コンテナを追加購入する](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing)ことで処理時間を短縮できますが、**run キュー**による待機時間は避けようがありません (とはいえ、CircleCI では少しでも待機時間を解消できるように努めています)。
 
 ### Why are my builds queuing even though I'm on the Performance plan?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 ビルドの待機時間が発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 If you are experiencing queuing on your jobs, it is possible you are hitting these limits. [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### Why can't I find my project on the Projects dashboard?
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Projects`.  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
+If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Projects`.  GitHub のプロジェクト名 `your-org/project` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [Switch Organization] メニューから目的の Org である `your-org` に切り替えます。
 
-### 現在のプランではコンテナ数が不足していないのに「build didn’t run because it needs more containers than your plan allows」というエラー メッセージが表示されます。 なぜですか?
+### 「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。しかし、現在のプランはその条件を満たしています。 なぜエラーになるのでしょうか？
 {: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
 {:.no_toc}
-CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストすると、ビルドが失敗します。 並列処理数の上限を引き上げたい場合は、[サポート センターまたはカスタマー サクセス マネージャー](https://support.circleci.com/hc/ja)にお問い合わせください。
+CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI Japanese Support Center](https://support.circleci.com/hc/ja) よりお問い合わせください。
 
-### Docker イメージの名前の付け方は？ 規則について教えてください。
+### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI 2.0 では、現在のところ [Docker Hub](https://hub.docker.com) からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ](https://hub.docker.com/explore/)に対して行えるのは、以下のように名称やタグを指定したプルのみです。
+CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. [公式の Docker イメージ](https://hub.docker.com/explore/)に対して行えるのは、以下のように名称やタグを指定したプルのみです。
 
 ```
 golang:1.7.1-jessie
@@ -140,17 +110,17 @@ Docker Hub のパブリックイメージについては、下記のようにア
 my-user/couchdb:1.6.1
 ```
 
-### イメージのバージョン指定に関するベスト プラクティスを教えてください。
+### Docker イメージのバージョンを指定するときのベストな方法は？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 特定のバージョンとタグを使用するのもよいでしょう。 たとえば、`circleci/ruby:2.4-jessie-node` のように限定的にイメージを指定すると、ベースとなるイメージのディストリビューションが変更されたときも、アップストリームの影響がコンテナに及ぶのを防ぐことができます。 一方、`circleci/ruby:2.4` とだけ指定していると、`jessie` から `stretch` への予期しない変更による影響を受けるおそれがあります。 その他の応用例は、「Executor タイプを選択する」の「[Docker イメージのベスト プラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-イメージのベスト-プラクティス)」や、「CircleCI のビルド済み Docker イメージ」の「[ベスト プラクティス]({{ site.baseurl }}/ja/2.0/circleci-images/#ベスト-プラクティス)」でご覧いただけます。
+`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
 {:.no_toc}
-Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 たとえば、以下のように `.circleci/config.yml` を編集します。
+Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 下記のように `.circleci/config.yml` を編集してみてください。
 
-この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
+環境変数 `TZ` を定義する `.circleci/config.yml` の設定例
 
 ```yaml
 version: 2
@@ -168,7 +138,7 @@ jobs:
 
 この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
-設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
+利用可能なタイムゾーンの一覧は [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) で確認できます。
 
 ## ワークフロー
 {: #workflows }
@@ -176,7 +146,7 @@ jobs:
 ### Workflows のなかで API は使えますか？
 {: #can-i-use-the-api-with-workflows }
 {:.no_toc}
-はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing/)」をご覧ください。
+はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/2.0/build-processing/)」をご覧ください。
 
 ### Workflows でビルドの「自動キャンセル」はできますか？
 {: #can-i-use-the-auto-cancel-feature-with-workflows }
@@ -186,22 +156,17 @@ jobs:
 ### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 {: #can-i-use-storetestresults-with-workflows }
 {:.no_toc}
-`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。 また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
-
-### CircleCI 1.0 で Workflows を使うことはできますか？
-{: #can-i-use-workflows-with-circleci-10 }
- {:.no_toc}
-ワークフローは CircleCI 2.0 で実装された機能です。 ワークフローを使用するには、CircleCI 2.0 でビルドを実行する必要があります。
+`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。 また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timing-data)を行う際にも利用できます。 時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
 
 ### オンプレミス環境にインストールした CircleCI でも Workflows は使えますか？
 {: #can-i-use-workflows-with-the-installable-circleci }
 {:.no_toc}
-はい、お客様のオンプレミス環境でもご利用いただけます。 詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
+はい、お客様のオンプレミス環境でもご利用いただけます。 CircleCI のインストール手順などについては「[管理者向け概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
 
 ### 同時に実行できるジョブの数はいくつですか？
 {: #how-many-jobs-can-i-run-at-one-time }
 {:.no_toc}
-同時に実行できるジョブの数は、ご契約中のプランの利用可能なコンテナ数によって決まります。 たとえば、5 つのコンテナが利用できる場合、ワークフロー内の 10 個のジョブを実行しようとしても、一度に実行されるジョブの数は 5 つまでとなります。 ワークフローの構成により、複数のジョブを同時に実行、または連続して実行することができます。 ファンアウト (複数のジョブを同時実行する) またはファンイン (依存関係にあるジョブが完了するまで、他の全ジョブを待機させる) が可能です。
+同時に実行できるジョブの数は、ご契約中のプランの利用可能なコンテナ数によって決まります。 仮に 10 個の Workflows ジョブが実行されようとしていて、プラン上は 5 つのコンテナしか使えない場合は、実行されるのは一度に 5 つのジョブまでです。 Workflow の設定を行うことで、複数のジョブを同時もしくは連続的に実行できます。 ファンアウト（複数のジョブを同時実行する）、あるいはファンイン（その前の独立したジョブが完了するまで以降の全ジョブを待機させる）が可能です。
 
 ### 同一の Workflow 内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
@@ -223,30 +188,30 @@ jobs:
 {:.no_toc}
 はい。
 
-### ワークフローの実行スケジュールを指定することは可能ですか?
+### Workflows を指定した日時にスケジュール実行することは可能ですか？
 {: #can-workflows-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-はい、クラウド版の CircleCI アプリケーションであれば可能です。 たとえば、午後 4 時にワークフローを実行したいときには、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンに基づきます。
+はい、クラウド版の CircleCI アプリケーションであれば可能です。 例えば、午後 4 時に Workflow を実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。
 
 ### スケジュール実行の際に使われるタイムゾーンは？
 {: #what-time-zone-is-used-for-schedules }
 {:.no_toc}
 UTC 協定世界時のタイムゾーンに基づいてスケジュールを指定できます。
 
-### スケジュールを指定したビルドが失敗してしまいました。
+### ビルドのスケジュール実行が失敗する理由は？
 {: #why-didnt-my-scheduled-build-run }
 {:.no_toc}
-スケジュールを設定したワークフローを実行するブランチを正確に指定したうえで、ビルドしたいブランチに対して config.yml ファイルをプッシュしてください。 `master` ブランチへのプッシュでは、`master` ブランチのワークフローしかスケジュールが設定されません。
+スケジュールを設定したワークフローを実行するブランチを正確に指定したうえで、ビルドしたいブランチに対して config.yml ファイルをプッシュしてください。 `master` ブランチにおけるプッシュは、`master` ブランチに対する Workflow しかスケジュールされません。
 
-### 複数のワークフローの実行スケジュールを指定することは可能ですか?
+### 複数の Workflows をスケジュール実行できますか？
 {: #can-i-schedule-multiple-workflows }
 {:.no_toc}
 はい、可能です。`trigger:` キー内で `schedule` を設定したワークフローは、すべて指定したスケジュールに基づいて実行されます。
 
-### スケジュールを設定したワークフローは、指定した時間どおりに正確に実行されますか?
+### スケジュールされた Workflows は、指定された時間通り正確に実行されますか？
 {: #are-scheduled-workflows-guaranteed-to-run-at-precisely-the-time-scheduled }
 {:.no_toc}
-スケジュールの正確性については保証できません。 スケジュールを設定したワークフローは、指定した時間にコミットがプッシュされたように実行されます。
+スケジュールの正確性については保証できません。 設定した時間にコミットがプッシュされたとして Workflow をスケジュール実行します。
 
 ## Windows
 {: #windows }
@@ -254,70 +219,63 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-[Performance plan](https://circleci.com/pricing/usage/) と、 [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) が必要となります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+See the [comparison table](https://circleci.com/pricing/#comparison-table) for which plans can access Windows resources.
 
 ### 使用している Windows のバージョンを教えてください。
 {: #what-exact-version-of-windows-are-you-using }
 {:.no_toc}
 
-Windows Server 2019 Datacenter エディションの Server Core オプションを使用しています。
+The [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page outlines which versions of Windows are offered.
 
 ### マシンには何がインストールされていますか?
 {: #what-is-installed-on-the-machine }
 {:.no_toc}
 
-[使用可能な依存関係の一覧]({{site.baseurl}}/ja/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image)が「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows/)」に掲載されています。
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our [Hello World On Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
 
-### マシンのサイズを教えてください。
-{: #what-is-the-machine-size }
-{:.no_toc}
-
-4 基の vCPU と 15 GB の RAM を備えた Windows マシンです。
-
-### インストール版の CircleCI で Windows は利用できますか?
+### Is Windows available on CircleCI server?
 {: #is-windows-available-on-installed-versions-of-circleci }
 {:.no_toc}
 
-残念ながら、現時点ではサーバー インストール版の CircleCI で Windows をご利用いただくことはできません。
+The Windows executor is available on CircleCI server v3.x and v2.x
 
 ## 料金・支払い
 {: #billing }
 
 ### 従量課金制（クレジット）プラン
 {: #credit-usage-plans }
-
-#### 新しい料金プランによって私たちユーザーにはどのような影響がありますか?
-{: #how-do-the-new-pricing-plans-affect-me-as-a-customer }
 {:.no_toc}
-For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
+Visit our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
 
-#### 「クレジット」とは何ですか?
+#### クレジットとは何ですか？
 {: #what-are-credits }
 {:.no_toc}
 クレジットは、マシンのタイプとサイズに基づく使用料の支払いに充てられます。 また、Docker レイヤー キャッシュなどの有料機能を使用したときにも消費されます。
 
-たとえば、毎分 10 クレジットのデフォルト レートで 1 台のマシンを使用する場合、25,000 クレジットのパッケージでは 2,500 分のビルドが可能です。 同じパッケージで 2 倍の並列処理を実行する場合は 1,250 分、10 倍の並列処理を実行する場合は 250 分のビルドが可能です。
+For example, the 25,000 credit package would provide 2,500 build minutes when using a Docker or Linux "medium" compute at 10 credits per minute. CircleCI provides multiple compute sizes so you can optimize builds between performance (improved developer productivity) and value.
 
-#### 組織内でプランを共有し、請求をまとめることは可能ですか?
+When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
+
+#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+選択したクレジット パッケージの料金が、毎月初めに請求されます。
 
 On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. 子組織のすべてのクレジットとその他の利用料金は親組織に請求されます。
 
 On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
 
-#### コンテナの使用時間が 1 分未満でも、1 分間分の料金が計上されますか?
+#### コンテナの使用時間が 1 分未満の場合でも 1 分間の料金を支払う必要がありますか？
 {: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
 {:.no_toc}
-You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
+You pay to the next nearest credit. 1 分未満の秒単位は切り上げでクレジットを計算します。
 
-#### クレジットの購入方法を教えてください。 必要な分だけ購入することは可能ですか?
+#### クレジットの購入方法は？ 必要な時に必要な分だけ購入できますか？
 {: #how-do-i-buy-credits-can-i-buy-in-any-increments }
 {:.no_toc}
 選択したクレジット パッケージの料金が、毎月初めに請求されます。
 
-#### 支払う料金の内訳はどのようになっていますか?
+#### 支払う料金の内訳は？
 {: #what-do-i-pay-for }
 {:.no_toc}
 プレミアム機能を利用するアクティブ ユーザーの人数分の料金、コンピューティングに対する料金のほか、プレミアム サポートを利用している場合はその料金も含まれます。
@@ -329,6 +287,37 @@ You pay to the next nearest credit. First we round up to the nearest second, and
   - クレジットは毎月ロールオーバーされ、1 年後に失効します。
 - Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
 
+#### How do I calculate my monthly storage and network costs?
+{: #how-do-I-calculate-my-monthly-storage-and-network-costs }
+{:.no_toc}
+
+Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+
+##### ストレージ
+{: #storage }
+{:.no_toc}
+
+日々の使用量から1 か月のストレージコストを計算するには、 **Storage(ストレージ)** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に420クレジットを乗じることで、月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+
+##### ネットワーク
+{: #network }
+{:.no_toc}
+
+使用量から 1 か月のネットワーク コストを計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+
+GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
+
+#### How do I calculate my monthly IP ranges cost?
+{: #how-do-I-calculate-my-monthly-IP-ranges-costs }
+{:.no_toc}
+
+Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+
+In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
+
+This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 #### アクティブ ユーザー単位の料金が設定されているのはなぜですか?
 {: #why-does-circleci-have-per-active-user-pricing }
@@ -352,7 +341,7 @@ You pay to the next nearest credit. First we round up to the nearest second, and
 
 To find a list of your Active Users, log in to the CircleCI web app > click `Plan` > click `Plan Usage` > click on the `Users` tab.
 
-#### クレジットを使い切るとどうなりますか?
+#### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
 {:.no_toc}
 
@@ -362,17 +351,17 @@ If you notice that your account is receiving repeated refills, review your credi
 
 On the **Free plan**, jobs will fail to run once you have run out of credits.
 
-#### クレジットに有効期限はありますか?
+#### クレジットに有効期限はありますか？
 {: #do-credits-expire }
 {:.no_toc}
-**Performance plan**: Credits expire one year after purchase. アカウントのサブスクリプションを停止した場合も、未使用のクレジットは失効します。
+**Performance plan**: Credits expire one year after purchase. ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
 
-#### 支払い方法について教えてください。
+#### 支払い方法は？
 {: #how-do-i-pay }
 {:.no_toc}
-You can pay from inside the CircleCI app for monthly pricing.
+CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
 
-#### 支払いのスケジュールについて教えてください。
+#### 支払いのスケジュールは？
 {: #when-do-i-pay }
 {:.no_toc}
 
@@ -381,24 +370,24 @@ On the **Performance plan**, at the beginning of your billing cycle, you will be
 #### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-いいえ. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+はい。 ジョブが "queud(キューに入っている)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing(準備中)" の場合は、CircleCIがセットアップを行っているか、ジョブの実行を開始しようとしています。
 
 #### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
 {:.no_toc}
 
-CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
+更新日は、以下にあげる CircleCI からの請求が発生する日に加え、有料プランへアップグレードまたは別の有料プランへ変更し、初めてクレジットカードで決済した日付に設定されます。
 
-- 月間プランでは、毎月の月額料金の請求日が更新日になります。
-- 年間プランでは、年に一度の年額料金の請求日が更新日になります。
-- 年間プランをご利用中でも、ユーザーの追加やクレジットの補充によって未払い残高が発生した場合は、その月の最終日が更新日になります。
-- Performance プランでは、クレジットの残りが設定された最小値を下回った場合、自動的にクレジットが購入されます。
+- 月間プランの場合、毎月の月額料金の請求日が更新日になります。
+- 年間プランの場合、年に一度の年間料金の請求日が更新日になります。
+- 年間プランを利用中でも、ユーザーの追加やクレジットの消費により未払い残高が発生した場合、その月の最終日が更新日になります。
+- Performance プランでは、クレジットの残高が設定された最低残高を下回った場合、自動的にクレジット購入が実行されます。
 
 #### オープンソース プロジェクト向けのクレジットベース プランはありますか?
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs.
+Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド向けの無料クレジットは、組織あたり最大 2 件のジョブの同時実行に使用できます。
 
@@ -422,72 +411,74 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 
 ---
 
-### コンテナベース プラン
+### コンテナ課金プラン
 {: #container-based-plans }
 
 #### コンテナ数を増やし、ビルドの待機時間を解消するには、どのようにコンテナ プランをアップグレードしたらよいですか?
 {: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
 {:.no_toc}
-* Linux プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、[Add Containers (コンテナの追加)] ボタンをクリックします。 Linux プランの入力フィールドに必要なコンテナの数を入力したら、[Pay Now (今すぐ支払う)] ボタンをクリックして、支払い方法の設定画面へと進みます。
+* Linux プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、[Add Containers (コンテナの追加)] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
-#### 組織内でプランを共有し、請求をまとめることは可能ですか?
+#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
 はい。 CircleCI アプリケーションで [Settings (設定)] > [Share & Transfer (共有 & 転送)] > [Share Plan (プランの共有)] を開き、プランに追加したい組織を選択してください。
 
-#### 請求先を個人アカウントから組織アカウントに変更できますか?
+#### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
 {: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
 {:.no_toc}
-はい、請求は組織全体に関連付けられています。 組織の管理者は、組織の設定ページから組織アカウントで料金の支払いを行えます。 しかし、そのユーザーがすべてのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub 組織の管理者を立てる必要があります。 この件については、よりスムーズに対応いただけるよう、今後の更新で方針を見直す予定です。
+はい、請求は組織全体に関連付けられています。 Org の設定ページにて、ユーザー自身がその Org として支払うことができます。 ただし、そのユーザーが全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub Org 管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
 
-#### 課金に関連してコンテナはどのように定義されますか?
+#### 課金におけるコンテナの定義は？
 {: #what-is-the-definition-of-a-container-in-the-context-of-billing }
 {:.no_toc}
-ここでのコンテナとは、CPU 2 基と 4 GB の RAM を搭載したマシンを指し、このマシンのご利用に対して料金が発生します。 コンテナは、タスクの同時実行 (例: 5 つの異なるジョブを実行する) や並列実行 (例: 1 つのジョブを 5 つの異なるタスクに分解して一度に実行する) を行うために使用されます。 どちらの例でも 5 つのコンテナが必要になります。
+ここでのコンテナとは、CPU 2 基と 4 GB の RAM を搭載したマシンを指し、このマシンのご利用に対して料金が発生します。 コンテナはタスクの同時実行（5 つの異なるジョブを実行するなど）や並列実行（1 つのジョブを 5 つの異なるタスクに分解してそれぞれを一斉に実行するなど）を行うのに使われます。 この場合はどちらの例でも 5 つのコンテナが必要になります。
 
-#### リモート Docker の起動処理時間に料金が発生するのはなぜですか?
+#### リモート Docker の起動処理時間に料金が発生するのはなぜですか？
 {: #why-am-i-being-charged-for-remote-docker-spin-up-time }
 {:.no_toc}
-CircleCI がリモート Docker インスタンスを起動するとき、プライマリ コンテナを実行する必要があり、コンピューティング リソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
+CircleCI がリモート Docker インスタンスを起動するとき、プライマリコンテナを実行する必要があり、コンピューティングリソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
 
 ---
 
 ## アーキテクチャ
 {: #architecture }
 
-### テストで IPv6 を利用できますか?
+### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
-Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワーク インターフェイスに対して IPv6 アドレスを割り当てられます。
+machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を構成することも可能です。  以下のように Docker デーモンを構成することで、グローバルに有効化することができます。
+IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。  下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
 ```yaml
-   ipv6_tests:
-     machine: true
-     steps:
-     - checkout
-     - run:
-         name: enable ipv6
-         command: |
-           cat <<'EOF' | sudo tee /etc/docker/daemon.json
-           {
-             "ipv6": true,
-             "fixed-cidr-v6": "2001:db8:1::/64"
-           }
-           EOF
-           sudo service docker restart
+jobs:
+  ipv6_tests:
+  machine:
+    image: ubuntu-1604:202007-01
+  steps:
+    - checkout
+    - run:
+        name: enable ipv6
+        command: |
+          cat <<'EOF' | sudo tee /etc/docker/daemon.json
+          {
+            "ipv6": true,
+            "fixed-cidr-v6": "2001:db8:1::/64"
+          }
+          EOF
+          sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる方法は複数あり、上記のように [Docker デーモンを構成する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを使用する方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を使用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)が挙げられます。
+Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
 
-### CircleCI 2.0 ではどの OS をサポートしていますか?
+### What operating systems does CircleCI support?
 {: #what-operating-systems-does-circleci-20-support }
 {:.no_toc}
-- **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも対応します。
+- **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
 
 - **Android:** 詳細は「[言語ガイド: Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
 
@@ -495,7 +486,10 @@ Docker に IPv6 アドレスを割り当てる方法は複数あり、上記の�
 
 - **Windows:** 現在、Windows は早期アクセス版のみご利用いただけます。 早期アクセス版のお申し込みについては、CircleCI Discuss の[こちらの投稿](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977)をご参照ください。
 
-### CircleCI ではどの CPU アーキテクチャをサポートしていますか?
+### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-サポートしている CPU アーキテクチャは、`amd64` のみとなります。
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
+
+
+[docker-hub]: https://hub.docker.com

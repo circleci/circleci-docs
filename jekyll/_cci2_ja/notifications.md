@@ -1,11 +1,11 @@
 ---
 layout: classic-docs
-title: "通知の使用"
-short-title: "通知の使用"
+title: 通知の使用
+description: Learn how to use get CircleCI's job status via Slack, integrated chat, email and web notifications.
 order: 100
 published: true
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -50,7 +50,7 @@ workflows:
 ## チャット通知の有効化
 {: #set-or-change-email-notifications }
 
-Use the [Notifications](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
+CircleCI アプリケーションの [[Notifications (通知)](https://app.circleci.com/settings/user/notifications){:rel="nofollow"}] ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
 
 Slack 通知の例を以下に示します。
 
@@ -84,7 +84,7 @@ Orb を使用すれば、さまざまな種類の通知を構成に統合でき�
 Orb を構成に統合する前に、以下の 2 つの手順を実行する必要があります。
 
 1. Increment the `version` key in your config to `2.1` and;
-2. {% include snippets/enable-pipelines.md %}
+2. パイプラインを有効化していない場合は、**[Project Settings (プロジェクト設定)] -> [Build Settings (ビルド設定)] -> [Advanced Settings (詳細設定)]** の順に選択して有効化します。
 
 ### Slack Orb の使用
 {: #using-the-slack-orb }

@@ -65,7 +65,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -86,7 +86,7 @@ Fastlane allows you to avoid calling lengthy Xcode commands manually and instead
 write a simple configuration file to initiate the macOS app tests. With Fastlane
 you can build, sign (for testing) and test a macOS app. Please note that when
 using Fastlane, depending on the actions in your configuration, you may need to
-setup a 2-factor Authentication (2FA). 
+setup a 2-factor Authentication (2FA).
 See the [Fastlane Docs for more information](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication).
 
 A simple config can be found below. Note that this config relies on the project
@@ -134,7 +134,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -168,7 +168,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -198,7 +198,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -218,7 +218,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -240,7 +240,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/delete-permission:

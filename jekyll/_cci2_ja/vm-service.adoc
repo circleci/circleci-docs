@@ -1,9 +1,10 @@
 ---
+description: View how to set up and customize VM service for your CircleCI server v2 installation. VM Service controls how machine (Linux and Windows images) and remote Docker jobs are run.
 version:
 - Server v2.x
-- サーバー管理
+- Server Admin
 ---
-= VM サービス
+= VM Service
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -18,10 +19,10 @@ toc::[]
 
 == 概要
 
-AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/2.0/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/2.0/executor-types/#using-machine[`machine` Executor] を使用してジョブを実行できます。
+VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
 
 .VM サービスの設定
-image::vm-service.png[Configuring VM Service on CircleCI Server,width=120%]
+image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
 
 CAUTION: 管理コンソール設定に変更を加えると、CircleCI アプリケーションが再起動し、ダウンタイムが生じます。
 
@@ -29,7 +30,7 @@ CAUTION: 管理コンソール設定に変更を加えると、CircleCI アプ�
 
 VM サービスを設定する場合、管理コンソールの設定で [AWS EC2] オプションを選択することをお勧めします。 これで、CircleCI が専用の EC2 インスタンスを使用して、リモート Docker および `machine` Executor ジョブを実行できるようになります。
 
-== 1. AMI の指定
+== 1.  AMI の指定
 
 以下のセクションで説明するように、VM サービス用にカスタムの https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon マシン イメージ] (AMI) を指定できます。 カスタム イメージを指定しない場合、すべての `machine` Executor とリモート Docker ジョブは、CircleCI のデフォルトの AMI (下記参照) のいずれかで構築されたインスタンスで実行されます。 このデフォルトの AMI は、Ubuntu 16.04、Docker バージョン 18.06.3 を使用し、一般的な言語、ツール、フレームワークのセットがインストールされています。 詳細については、https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[image-builder リポジトリの `picard-vm-image` ブランチ]を参照してください。 Windows ジョブを実行するには、Windows AMI を指定する必要があります。 これを指定しないと、Windows ジョブの実行は失敗します。
 
@@ -69,14 +70,14 @@ image::vm-service-custom.png[Custom VM Service Images]
 
 1. https://github.com/circleci/image-builder/tree/picard-vm-imageをクローンします。
 2. エディターで `aws-vm.json` を開きます。 このファイルは、Packer で AMI を作成するための基本テンプレートです。 AWS アクセス キー ID とシークレット アクセス キーをアップロードする必要があります。 Packer での AWS 認証の管理に関する詳細は、https://packer.io/docs/builders/amazon.html#authentication[こちら]を参照してください。 基本テンプレートでは足りない場合は、https://packer.io/docs/builders/amazon.html[こちら]にある追加の AWS 構成オプションを参照してください。
-3. (オプション) `ami_groups` は組織内のみに制限することをお勧めします。 AMI グループの詳細については、https://packer.io/docs/builders/amazon-ebs.html#ami_groupsを参照してください。
+3.  (オプション) `ami_groups` は組織内のみに制限することをお勧めします。 AMI グループの詳細については、https://packer.io/docs/builders/amazon-ebs.html#ami_groupsを参照してください。
 4. https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh には、構成済みの依存関係リストが提供されています。 お使いの環境のニーズに合わせて、この provision.sh スクリプトをカスタマイズします。
 5. `packer build aws-vm.json` を実行します。
 
 AMI を作成したら、AMI ID を上記スクリーンショットの該当するフィールドにコピーします。
 
 === Windows AMI の作成
-_CircleCI Server v2. 18.3 からサポート_
+_CircleCI Server v2.  18.3 からサポート_
 
 Windows イメージを作成して VM サービスの設定で指定すると、専用の Windows VM でユーザーがジョブを実行できるようになります。 To create your Windows image run through the steps listed in our https://github.com/CircleCI-Public/circleci-server-windows-image-builder[image builder repo], then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
 
@@ -94,7 +95,7 @@ NOTE: 事前割り当てインスタンスを使用する場合、インスタ�
 
 == ジョブとインスタンスの管理
 
-リモート Docker 環境または `machine` Executor を使用して実行するジョブは、Nomad サーバーから Nomad クライアントにスケジュールに沿ってディスパッチされ、そこからリモート Docker または `machine` に渡されます。 つまり、リモート Docker および `machine` Executor で実行されるジョブは、通常どおり Nomad CLI を使用して監視できます。 See our <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
+リモート Docker 環境または `machine` Executor を使用して実行するジョブは、Nomad サーバーから Nomad クライアントにスケジュールに沿ってディスパッチされ、そこからリモート Docker または `machine` に渡されます。 つまり、リモート Docker および `machine` Executor で実行されるジョブは、通常どおり Nomad CLI を使用して監視できます。 See our <<nomad#basic-terminology-and-architecture, Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
 
 // add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
 

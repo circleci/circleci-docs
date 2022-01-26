@@ -2,16 +2,17 @@
 layout: classic-docs
 title: "Windows での Hello World"
 short-title: "Windows での Hello World"
-description: "CircleCI 2.0 での最初の Windows プロジェクト"
+description: "First Windows project on CircleCI"
 categories:
-  - getting-started
+  - はじめよう
 order: 4
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
-CircleCI の **Windows ビルド環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)をご覧になることをお勧めします。
+This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/2.0/getting-started/).
 
 * 目次
 {:toc}
@@ -29,20 +30,19 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 ## Windows Executor の概要
 {: #overview-of-the-windows-executor }
 
-Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) アプリケーション、.NET 実行可能ファイル、(.NET フレームワークなどの) Windows 固有プロジェクトといった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
+The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. Windows Executor の仕様と機能は以下のとおりです。
 
 - VM ベースでジョブの完全分離を保証
 - Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
-- vCPU 4 基と RAM 15 GB を搭載
 - PowerShell がデフォルトのシェル (Bash と cmd を手動で選択可能)
 - Windows コンテナの実行に Docker Engine - Enterprise を使用可能
 
 **備考:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
-- Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
+- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
 
-### Windows Executor イメージ
+## Windows Executor イメージ
 {: #windows-executor-images }
 
 現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに何が含まれているのか、詳しい情報についてはシステム管理者にお問い合わせください。
@@ -113,7 +113,7 @@ jobs:
 ```
 
 
-### 既知の問題
+## 既知の問題
 {: #known-issues }
 
 Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
@@ -311,7 +311,7 @@ jobs:
 ## サンプル アプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
@@ -343,7 +343,7 @@ jobs:
       - checkout
 ```
 
-In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
+最初のステップでは、[`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
 
 ```yaml
       - restore_cache:
@@ -415,7 +415,7 @@ CircleCI の機能については、以下のドキュメントを確認して�
 **Windows Server 2019 with Visual Studio 2019**
 
 * Visual Studio 2019 Community エディション
-* Visual Studio 2019 Community Edition
+* Visual Studio 2019 Community エディション
     * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
@@ -423,8 +423,8 @@ CircleCI の機能については、以下のドキュメントを確認して�
     * AWS CLI 1.16.209
     * Python 3.6.0
     * Botocore 1.12.199
-* Shells:
-    * Powershell 5
+* シェル
+    * PowerShell 5
     * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
 * .NET Framework 5
@@ -446,7 +446,7 @@ CircleCI の機能については、以下のドキュメントを確認して�
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
-* Docker Engine - Enterprise version 18.09.7
+* Docker Engine - Enterprise バージョン 18.09.7
 * NuGet CLI 5.2.0.6090
 * Chocolatey v0.11.2
 * Azure Service Fabric
@@ -463,7 +463,7 @@ CircleCI の機能については、以下のドキュメントを確認して�
 * Java 12.0.2
 * Miniconda 3
 * WinAppDriver 1.1.1809.18001
-* Text editors
+* テキスト エディター
     * nano 2.5
     * vim 8.2
 * jq 1.5

@@ -4,18 +4,19 @@ title: "config.yml のサンプル ファイル"
 short-title: "config.yml のサンプル ファイル"
 description: "config.yml のサンプル ファイル"
 categories:
-  - migration
+  - 移行
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 suggested:
   - 
-    title: Using dynamic config
-    link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
+    title: ダイナミック コンフィグの使用
+    link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
     title: How to create a webhook
-    link: https://circleci.com/blog/using-circleci-webhooks/
+    link: https://circleci.com/ja/blog/create-customizable-experiences-with-circleci-webhooks/
   - 
     title: Automate your releases
     link: https://circleci.com/blog/automating-your-releases-with-circleci-and-the-github-cli-orb/
@@ -23,8 +24,8 @@ suggested:
     title: Customize your Slack notifications
     link: https://support.circleci.com/hc/en-us/articles/360052728991-How-to-customize-your-Slack-messages-when-using-CircleCI-s-Slack-Orb
   - 
-    title: Validate your config using local CLI
-    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
+    title: ローカル CLI を使用した設定のバリデーション
+    link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
     title: Deploy with approval-based workflows
     link: https://circleci.com/blog/deploying-with-approvals/
@@ -653,11 +654,11 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 ```
 {% endraw %}
 
-以下に、同時実行ワークフローの設定ファイル サンプルを示します。 ここでは、`build` ジョブと `test` ジョブを一度に実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+This example shows a sequential workflow with the `test` job configured to run only on the main branch. ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 ## ファンイン・ファンアウト ワークフローの設定例
 {: #sample-configuration-with-fan-infan-out-workflow }
@@ -1064,9 +1065,9 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Deploy Master to Heroku
+          name: Deploy Main to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git main
 
 workflows:
   version: 2
@@ -1202,7 +1203,7 @@ jobs:
 
   build-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 12.5.1
     parameters:
       label:
         type: string
@@ -1292,19 +1293,19 @@ jobs:
             $ProgressPreference = "SilentlyContinue"
             Expand-Archive .\\<< parameters.label >>.zip .
       - run:
-          name: 実行可能ファイルのテスト
+          name: Test executable
           command: .\\<< parameters.label >>\bin\iperf3.exe -v
       - run:
-          name: サーバーとして実行
+          name: Run as a server
           command: .\\<< parameters.label >>\bin\iperf3.exe -s
           background: true
       - run:
-          name: クライアントとして実行
+          name: Run as a client
           command: .\\<< parameters.label >>\bin\iperf3.exe -c localhost -R
 
   test-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 12.5.1
     parameters:
       label:
         type: string
@@ -1367,7 +1368,7 @@ workflows:
           context: github
           filters:
             branches:
-              only: master
+              only: main
 ```
 
 {:.tab.multiple-executors.Example-2}
@@ -1378,7 +1379,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run:

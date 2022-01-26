@@ -4,10 +4,11 @@ title: "ステータス"
 short-title: "ステータス"
 description: "ステータス ダッシュボード"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 

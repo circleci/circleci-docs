@@ -27,5 +27,35 @@ if (
   currentPage.host === PREVIEW_DOMAIN &&
   new RegExp(`[?&]${FORCE_QUERY_KEY}`).test(currentPage.href ?? '')
 ) {
-  localStorage.setItem(FORCE_STORAGE_KEY, getJekyllBaseName());
+  const jekyllBaseName = getJekyllBaseName();
+  localStorage.setItem(FORCE_STORAGE_KEY, jekyllBaseName);
+
+  $(() => {
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      `
+      <style>
+        .compass-copy {
+          background-image: url('http://${jekyllBaseName}assets/img/compass/copy.svg');
+        }
+
+        .compass-check-circle {
+          background-image: url('http://${jekyllBaseName}assets/img/compass/check.svg');
+        }
+
+        .globe-icon {
+          background-color:transparent;
+          color: $black;
+          @media (min-width: $screen-md) {
+            &:hover {
+              filter: invert(39%) sepia(99%) saturate(634%) hue-rotate(105deg) brightness(83%) contrast(97%);
+            }
+          }
+          @media (max-width: $screen-md) {
+            padding-top: 6px;
+          }
+        } 
+      </style>`,
+    );
+  });
 }

@@ -6,6 +6,7 @@ description: "ビルド中に作成されるアーティファクトのアップ
 order: 70
 version:
   - Cloud
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -131,11 +132,11 @@ jobs:
 
 `ulimit -c unlimited` は、コア ダンプ ファイルのファイル サイズ制限をなくします。 この制限をなくすと、プログラムがクラッシュするたびに、作業中のカレント ディレクトリにコア ダンプ ファイルが作成されます。 コア ダンプ ファイルには、`core.%p.%E` という名前が付きます。 `%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
 
-`curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
+最後に、`store_artifacts` によってアーティファクト サービスの `/tmp/core_dumps` ディレクトリにコア ダンプ ファイルが格納されます。
 
 ![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンス ガイド](https://circleci.com/docs/api/#artifacts) を参照してください。
+CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブにコア ダンプ ファイルへのリンクが表示されます。
 
 ## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
@@ -161,13 +162,13 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
-Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
+同様に、ビルドの_最新_のアーティファクトをダウンロードする場合は、curl の呼び出しを以下のように URL で置き換えます。
 
 ```bash
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
 ```
 
-You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/v1/#artifacts).
+CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンス ガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
 
 | プレースホルダー      | 意味                                                                           |
 | ------------- | ---------------------------------------------------------------------------- |

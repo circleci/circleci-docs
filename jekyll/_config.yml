@@ -7,8 +7,14 @@ description: > # this means to ignore newlines until "baseurl:"
 
 url: "https://ui.circleci.com" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
+gh_help_articles_url: "https://help.github.com/articles"
 gh_url: "https://github.com/circleci/circleci-docs"
+gh_private_org_url: "https://github.com/circleci"
+gh_public_org_url: "https://github.com/CircleCI-Public"
+cci_public_org_url: "https://app.circleci.com/pipelines/github/CircleCI-Public"
 devhub_base_url: "https://circleci.com/developer"
+blog_base_url: "https://circleci.com/blog"
+support_base_url: "https://support.circleci.com"
 noindex: false
 
 exclude:
@@ -20,7 +26,13 @@ plugins:
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
-  - jekyll/minibundle
+  - jekyll-last-modified-at
+  - jekyll-timeago
+
+# Approximate distance, with customizable threshold, 
+# ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
+jekyll_timeago:
+  depth: 1
 
 algolia:
   application_id: U0RXNGRK45
@@ -63,7 +75,7 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.2.1
+      serverversion: 3.3.0
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
@@ -76,7 +88,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.2.1
+    serverversion: 3.3.0
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
@@ -87,13 +99,6 @@ collections:
   # before the collections that render the actual pages.
   # jekyll is processing in alpha order...
   _glossary:
-  cci1:
-    name: "1.0 Docs"
-    site_section: true
-    output: true
-    permalink: /1.0/:path/
-    prefix: "/1.0"
-    selectorName: "1.0"
   cci2:
     name: "2.0 Docs"
     site_section: true
@@ -147,11 +152,17 @@ defaults:
     values:
       toc: true
 
-  # Disable suggested by default
+  # Disable helpful resources section by default
   - scope:
       path: ""
     values:
       suggested: false
+
+  # Disable sitemap by default (only want in prod)
+  - scope:
+      path: ""
+    values:
+      sitemap: false
 
 t:
     translation_in_progress:

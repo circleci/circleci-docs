@@ -6,20 +6,21 @@ version:
 = Running GPU Executors
 :page-layout: classic-docs
 :page-liquid:
+:page-description: ここでは、CircleCI server を使用して GPU (Graphics Processing Unit) Machine Executors を実行する方法の概要について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
+ここでは、CircleCI server を使用して GPU (Graphics Processing Unit) Machine Executors を実行する方法の概要について説明します。
 
 toc::[]
 
-== Prerequisites
+== 前提条件
 
-Configure the `vm-service` in the Replicated management console to start a GPU-enabled instance.
+GPU 対応インスタンスを開始するには、Replicated 管理コンソールで `vm-service` を設定しておく必要があります。
 
-== Overview
-Run the following commands on any Nvidia GPU-enabled instance. The following example uses CUDA 8.0, but you can use any CUDA runtime version supported by your GPU instance.
+== 概要
+任意の NVIDIA GPU 対応インスタンスで、以下のコマンドを実行します。 以下の例では CUDA 8.0 を使用していますが、GPU インスタンスでサポートされていれば、どの CUDA ランタイムバージョンでも使用できます。
 
 ```shell
 wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
@@ -32,8 +33,8 @@ sudo apt-get --yes --force-yes install cuda
 nvidia-smi
 ```
 
-`nvidia-smi` is only required for testing purposes. After you install the CUDA driver in Step 7 you should be good to go!
+`nvidia-smi` はテスト目的でのみ必要です。 GPU Executors は、ステップ 7 で CUDA ドライバをインストールした時点で有効になります。
 
-== Adding GPU Steps to an AMI
+== AMI への GPU 手順の追加
 
-To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the <<vm-service#overview,Configuring VM Service>> documentation.
+To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the <<vm-service#overview, Configuring VM Service>> documentation.

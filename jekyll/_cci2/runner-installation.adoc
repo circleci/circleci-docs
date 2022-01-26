@@ -6,6 +6,7 @@ version:
 = Get Started: Installing the CircleCI Runner
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find resources to install CircleCI runner on Linux, macOS, Docker, and Windows platforms.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +17,7 @@ toc::[]
 
 The installation process assumes you have installed the following utilities on your system:
 
-* <<local-cli#installation,CircleCI CLI>>
+* <<local-cli#installation,CircleCI CLI>>. If you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 * curl (installed by default on macOS)
 * sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
 * systemd version 235+ (Linux only)
@@ -33,9 +34,9 @@ Running jobs requires you have the following tools available on your machine:
 
 == Authentication
 
-NOTE: These commands can only be run by an owner/admin of your organization.
+NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
+In order to install runner you will need to create a namespace and authentication token by performing the steps listed below – these commands can only be run by an owner/admin of your organization:
 
 . Create a namespace for your organization's runner resources.
 +
@@ -89,11 +90,19 @@ First, set one of these variables as appropriate for for your installation targe
 | `platform=darwin/arm64`
 |===
 
+Example:
+```bash
+export platform=darwin/amd64
+```
+
 Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
 
 For cloud, you can run the following:
 ```bash
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+```
+followed by:
+```bash
 export agent_version=$(curl "${base_url}/release.txt")
 ```
 
@@ -156,6 +165,9 @@ depending on your version of server:
 
 | 3.2
 | 1.0.19813-e9e1cd9
+
+| 3.3
+| 1.0.29477-605777e
 |===
 
 == Additional Resources

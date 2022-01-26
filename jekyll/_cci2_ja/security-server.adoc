@@ -7,6 +7,7 @@ version:
 = Security
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +17,7 @@ CircleCI に組み込まれているセキュリティ機能と、関連する�
 toc::[]
 
 == 会社概要
-CircleCI では、セキュリティを最優先事項と考え、セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 Report security issues to security@circleci.com with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
+CircleCI では、セキュリティを最優先事項と考え、セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 セキュリティに関する問題が発生した場合には、CircleCI セキュリティ チームの GPG キー (ID: 0x4013DDA7、フィンガープリント: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、security@circleci.com まで暗号化メッセージをお送りください。
 
 == 暗号化
 CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。 これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。 ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 構成を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
@@ -31,9 +32,9 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 
 - *WebSocket:* CircleCI は、サーバーとブラウザー間の WebSocket 通信に https://pusher.com/[Pusher] クライアント ライブラリを使用していますが、インストールには slanger という内部サーバーを使用しています。 そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうしたしくみによって、たとえば、ビルド リストが動的に更新されたり、ビルドの出力が発生と同時に 1 行ずつ表示されたりします。 ビルド ステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を構成しない限り、SSL 上で同じ証明書を使用して行われます)。 したがって、転送時には暗号化されます。
 
-- **Replicated** We use http://www.replicated.com/[Replicated] to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。
+- *Replicated:* CircleCI は、http://www.replicated.com/[Replicated] を使用して、インストール ウィザード、ライセンス キー、システム監査ログ、ソフトウェアの更新など、CircleCI のメンテナンスやシステムに関する作業を管理します。 CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。
 
-- **Source Control Systems** To use CircleCI you will set up a direct connection with your instance of GitHub Enterprise or GitHub.com. CircleCI のセットアップ時に、プライベート リポジトリのチェックアウトをシステムに許可します。 You may revoke this permission at any time through your GitHub application settings page and by removing Circle's Deploy Keys and Service Hooks from your repositories' Admin pages. While CircleCI allows you to selectively build your projects, GitHub's permissions model is "all or nothing" — CircleCI gets permission to access all of a user's repositories or none of them. CircleCI インスタンスは、Git リポジトリでホスティングされているすべての項目にアクセスでき、コードのプッシュやユーザーの追加など、さまざまなイベントの Web フックを作成します。 これが CircleCI にコール バックして、1 つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプル ダウンされます。
+- *ソース管理システム:* CircleCI を使用するには、GitHub Enterprise、GitHub.com などのインスタンスとの直接接続をセットアップします。 CircleCI のセットアップ時に、プライベート リポジトリのチェックアウトをシステムに許可します。 この権限は、GitHub アプリケーションの設定ページで、リポジトリの管理者ページから CircleCI のデプロイ キーとサービス フックを削除することで、いつでも取り消すことができます。 CircleCI ではプロジェクトを選択してビルドできますが、GitHub の権限モデルは極端なものであるため、CircleCI にはすべてのリポジトリへのアクセスが許可されるか、一切許可されないかのどちらかになります。 CircleCI インスタンスは、Git リポジトリでホスティングされているすべての項目にアクセスでき、コードのプッシュやユーザーの追加など、さまざまなイベントの Web フックを作成します。 これが CircleCI にコール バックして、1 つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプル ダウンされます。
 
 - *依存関係とソースのキャッシュ:* ほとんどの CircleCI ユーザーは、Amazon VPC などのプライベート クラウド インフラストラクチャ内で S3 または同等のクラウドベースのストレージを使用して、依存関係やソースのキャッシュを格納しています。 これらのストレージ サーバーは、このようなサービス上に格納されるすべての項目の標準的なセキュリティ パラメーターの対象となります。 つまり、ほとんどの場合、ユーザーは外部からのアクセスを阻止できます。
 
@@ -42,7 +43,7 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 == 監査ログ
 監査ログ機能は、独自のサーバーまたはプライベートクラウド上にインストールした CircleCI でのみ使用できます。
 
-CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 Audit logs are separate from system logs that track performance and network metrics.
+CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワーク メトリクスを追跡するシステム ログとは区別されます。
 
 完全な監査ログは、アプリケーションの管理者セクション内にある [Audit Log (監査ログ)] ページから CSV ファイル形式でダウンロードできます。  ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。 監査ログのダウンロードには非常に時間がかかることがありますので、「ダウンロード」ボタンをクリックしてしばらくお待ちください。
 
@@ -81,23 +82,22 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - *version:* イベント スキーマのバージョン。 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせてこの値も変更になる可能性があります。
 - *scope:* ターゲットが CircleCI ドメイン モデル内のアカウントによって所有されている場合、アカウント フィールドにはアカウント名と ID が挿入されます。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - *success:* アクションが成功したかどうかを示すフラグ。
-- *request:* 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。 同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+- *request:* 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。 同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
 
 == CircleCI を安全に使用していただくためのチェックリスト
 
 CircleCI を使用するときには、CircleCI の_ユーザー_として、セキュリティ面のベスト プラクティスに関していくつかの事項を考慮する必要があります。
 
-- Minimise the number of secrets (private keys / environment variables) your
-  build needs and rotate secrets regularly.
+- ビルドで必要とされるシークレット (プライベート キー、環境変数) の数を最小限に抑え、定期的にシークレットを入れ替えます。
   - 組織のシークレットを定期的に (チーム メンバーが変わるときは特に) 入れ替えることが重要です。
   - シークレットを定期的に入れ替えることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。
-  - _使用するシークレット_は範囲を制限し、ビルドの目的を満たす最低限の権限のみを許可することを徹底します。 Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or Github's https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
+  - _使用するシークレット_は範囲を制限し、ビルドの目的を満たす最低限の権限のみを許可することを徹底します。 AWS 上での IAM 権限や GitHub の https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] 機能など、CircleCI の外部で使用する他のプラットフォームのロールおよび権限システムについては、慎重に判断していただくようお願いします。
 - ユーザーが何らかのツールを誤用することで、シークレットが偶然に stdout に出力され、ログに記録されてしまう可能性があります。 以下の場合には注意してください。
   - すべての環境変数を stdout に出力する `env` または `printenv` を実行する場合
   - `echo` を使用し、コード ベースまたはシェル内のシークレットを出力する場合
   - プログラムやデバッグ ツールがエラー時にシークレットを出力する場合
-- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of Least Privilege].
-- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 Read through the <<contexts#restricting-a-context,contexts>> document to learn more.
+- VCS プロバイダーから付与された組織の権限を確認したうえで、https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%E3%81%AE%E5%8E%9F%E5%89%87[最小権限の原則]に従うよう努めます (組織に属している場合)。
+- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 Read through the <<contexts#restricting-a-context, contexts>> document to learn more.
 - SSH キーへのアクセス権を持つ人間は、必ず組織による監査の対象とします。
-- VCS で 2 要素認証 (2FA) を必ず使用します (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]、https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket])。 If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
-- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. これは、デフォルトでは*有効になっていません*。 You can read more about these settings and open source security in our <<oss#security,Open Source Projects document>>.
+- VCS で 2 要素認証 (2FA) を必ず使用します (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]、https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket])。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるアクターによってコードがプッシュされたり、秘密が盗まれたりする危険性があります。
+- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、_フォークされたバージョンのリポジトリ_に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは*有効になっていません*。 You can read more about these settings and open source security in our <<oss#security, Open Source Projects document>>.

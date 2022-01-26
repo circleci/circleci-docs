@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
+import { updateCookieExpiration } from '../utils';
 
-function setUserData(userData) {
+export function setUserData(userData) {
   window.userData = userData;
   const { name, jekyllProperties } = window.currentPage;
   if (window.userData.created_at) {
@@ -17,21 +18,24 @@ function setUserData(userData) {
   window.dispatchEvent(userDataReady);
 }
 
-function setLoggedIn(userData) {
+export function setLoggedIn(userData) {
   $(document.body).addClass('loggedin');
-  Cookies.set('cci-customer', 'true', { expires: 3650 });
+  Cookies.set('cci-customer', 'true', { expires: 365 * 2 });
 
   setUserData(userData);
 }
 
-function setLoggedOut() {
+export function setLoggedOut() {
   $(document.body).removeClass('loggedin');
-  Cookies.set('cci-customer', 'false', { expires: 3650 });
+  Cookies.set('cci-customer', 'false', { expires: 365 * 2 });
 
   setUserData({});
 }
 
-$(function () {
+export function fetchUserData() {
+  // Update cookie expiry (migrating from 10 years to 2 years)
+  updateCookieExpiration('cci-customer', 365 * 2);
+
   if (Cookies.get('cci-customer') === 'true') {
     $(document.body).addClass('loggedin');
   }
@@ -51,9 +55,11 @@ $(function () {
     .fail(function () {
       setLoggedOut();
     });
-});
+}
 
-function setAmplitudeId() {
+$(fetchUserData);
+
+export function setAmplitudeId() {
   const DAYS_PER_MINUTE = 1 / 24 / 60;
   const sessionId = window.AnalyticsClient.getSessionId();
 

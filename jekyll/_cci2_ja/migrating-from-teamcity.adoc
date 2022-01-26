@@ -1,4 +1,9 @@
-= TeamCity からの移行 
+---
+title: TeamCity からの移行
+description: TeamCity から CircleCI への移行方法の概説
+---
+
+= TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: pygments.rb
@@ -19,16 +24,16 @@ CircleCI と TeamCity ではセットアップや設定が様々な点で異な�
 . *次に、 https://circleci.com/docs/2.0/optimizations/[高度な機能を使って] ジョブを最適化し、* CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
 . *このプロセスにおいてCircleCI のプラットフォームで利用可能なすべての設定のリストは、 https://circleci.com/docs/2.0/configuration-reference/#section=configuration[CircleCI の設定]* を参照してください。
 
-== CircleCIに移行する理由
+== CircleCI に移行する理由
 
 CircleCI は、パフォーマンスと開発者の生産性の向上のために開発された最新の CI/CD ツールです。 柔軟な設定が可能なため、お客様のアプリケーション固有のニーズに応じた複雑なワークフローやジョブを定義することができます。
 
 **コードとしての設定**:: CircleCI の設定の大部分は YAML で行われます。 メンテナンスが容易で、習得も簡単ですし、CI/CD パイプラインを他のソースコードと同様に追跡することが可能です。
-**自動スケーリング アーキテクチャ**:: すべてのビルド環境は、設定に応じて動的に作成され、タスクの完了時に終了します。 1つのジョブから数百のジョブまで、手間や追加費用をかけずに同時に実行することができます。
+**自動スケーリング アーキテクチャ**:: すべての実行環境は、設定に応じて動的に作成され、タスクの完了時に終了します。 1つのジョブから数百のジョブまで、手間や追加費用をかけずに同時に実行することができます。
 **柔軟性**:: CircleCIはベンダーやツールを選びません。 CircleCI の設定では、API を持つあらゆるプラットフォームやクラウドプロバイダーとの統合が可能です。 既存のパートナーシップについては、 https://circleci.com/integrations/[インテグレーションのページ] をご覧ください。 依存関係やライブラリは、ジョブの中でアドホックにインストールすることができ、その後のビルドを高速化するために、 https://circleci.com/docs/2.0/caching/[依存関係のキャッシュ] を提供しています。
 **共有・再利用可能な設定**:: ステップ、実行環境、ジョブは、 https://circleci.com/docs/2.0/orb-intro/#section=configuration[CircleCI Orb] を使って、異なるプロジェクトやチーム間でテンプレート化、パラメータ化、共有、再利用することができます。 すでに作成されている https://circleci.com/developer/orbs[数々のインテグレーションや Orb ] をぜひ活用してください。
 
-その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]お試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただき]、トライアルを設定してください。
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
 == コンセプト
 
@@ -102,7 +107,7 @@ a|
 [source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 version: "2019.2"
 
@@ -221,7 +226,7 @@ project {
     parallel {
         build(Test1)
         build(Test2)
-    } 
+    }
     build(Package)
     build(Publish)
   }
@@ -265,7 +270,7 @@ workflows:
 |===
 CircleCI のコンセプトの詳細については、 https://circleci.com/docs/2.0/concepts/[コンセプト] と https://circleci.com/docs/2.0/pipelines/#section=pipelines[パイプライン] のドキュメントページをご覧ください。
 
-== 設定
+== 設定ファイル
 
 === 環境
 
@@ -279,7 +284,7 @@ jobs:
   my-mac-job:
     # Executor の定義
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
 
     # ステップの定義
     steps:
@@ -287,7 +292,7 @@ jobs:
       # ...など
 ----
 
-=== ステップ
+=== Steps
 
 TeamCity では、定義されたランナータイプ（Visual Studio、Maven、Gradleなど）のリストからビルドステップを選択します。 CircleCI では、ステップの定義では、ターミナルやコマンド プロンプトで実行するコマンドを柔軟に取り入れることができます。
 

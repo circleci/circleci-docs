@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Migrating From Travis CI"
+title: Migrating From Travis CI
 categories: [migration]
-description: "Migrating from Travis CI"
+description: An overview of how to migrate from Travis CI to CircleCI.
 ---
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.
@@ -100,7 +100,7 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/node:14.17.3 # Primary execution image
+      - image: cimg/node:17.2.0 # Primary execution image
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

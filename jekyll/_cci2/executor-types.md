@@ -37,7 +37,7 @@ An *executor type* defines the underlying technology or environment in which to 
 It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
 
 - Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
-- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version such as 16.04.
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
 
 ## Using Docker
@@ -188,6 +188,20 @@ Capability | `docker` | `machine`
 
 For more information on `machine`, see the next section below.
 
+### Caching Docker images
+{: caching-docker-images }
+
+This section discusses caching in the Docker Executor relating to the "Spin Up Environment" step for the main container in the job. It does not apply to [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature of the Remote Docker environment.
+
+The time it takes to spin up a docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
+
+Generally if you are using a more popular image, such as CircleCI Convenience Images, then cache hits are more likely for a larger number of layers. Most of our popular CircleCI images use the same base image so the majority of the base layers will be the same between images and you therefore have a greater chance of having a cache hit.
+
+The environment has to spin up for every new job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run - for security reasons, we never reuse containers. Once the job is finished the container is destroyed. We cannot guarantee jobs, even in the same workflow, will run on the same docker host machine and therefore the cache status may differ.
+
+In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst case scenario of a full image pull should be accounted for in all jobs.
+
+In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chance of hitting cached layers in the "Spin Up Environment" Step.
 
 ### Available Docker resource classes
 {: #available-docker-resource-classes }
@@ -231,9 +245,6 @@ Using the `machine` executor gives your application full access to OS resources 
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-**Note**:
-Using `machine` may require additional fees in a future pricing update.
-
 To use the machine executor,
 set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
 
@@ -244,6 +255,7 @@ jobs:
   build:
     machine:
       image: ubuntu-1604:202007-01
+    resource_class: large
 ```
 
 You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
@@ -270,13 +282,22 @@ The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on m
 
 _Available on CircleCI Cloud - not currently available on self-hosted installations_
 
-Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
+Using the `macos` executor allows you to run your job in a macOS environment on a VM. In macOS, the following resources classes are available:
+
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+medium                | 4 @ 2.7 GHz     | 8GB
+macos.x86.medium.gen2 | 4 @ 3.2 GHz     | 8GB
+large                 | 8 @ 2.7 GHz     | 16GB
+{: class="table table-striped"}
+
+You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 
     steps:
       # Commands will execute in macOS container

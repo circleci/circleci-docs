@@ -46,8 +46,18 @@ en:
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
   children:
+    - name: Overview
+      children:
+        - name: Pipelines overview
+          link: 2.0/pipelines/
+        - name: Pipeline processing
+          link: 2.0/build-processing
+        - name: Skip or cancel pipelines
+          link: 2.0/skip-build/
     - name: Features
       children:
+        - name: Scheduled Pipelines
+          link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
         - name: Environment variables
@@ -68,6 +78,8 @@ en:
       children:
         - name: Pipeline variables
           link: 2.0/pipeline-variables/
+        - name: Persisting Data
+          link: 2.0/persist-data
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/
         - name: Docker layer caching
@@ -75,7 +87,7 @@ en:
         - name: Optimizations cookbook
           link: 2.0/optimization-cookbook/
 
-- name: Executors and Images
+- name: Execution environments
   icon: icons/sidebar/executors.svg
   children:
     - name: Overview
@@ -89,6 +101,8 @@ en:
           hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
+        - name: Migrating to Next-Gen Images
+          link: 2.0/next-gen-migration-guide/
         - name: Docker compose
           link: 2.0/docker-compose/
         - name: Docker layer caching
@@ -147,6 +161,8 @@ en:
           link: 2.0/runner-installation-docker/
         - name: Kubernetes Runner Installation
           link: 2.0/runner-on-kubernetes/
+        - name: Scaling Runner
+          link: 2.0/runner-scaling/
         - name: Runner Configuration Reference
           link: 2.0/runner-config-reference/
         - name: Upgrading Runner on Server
@@ -236,12 +252,12 @@ en:
           link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
+        - name: Status Badges
+          link: 2.0/status-badges/
         - name: Webhooks
           link: 2.0/webhooks/
         - name: Using Credits
           link: 2.0/credits/
-        - name: Persisting Data
-          link: 2.0/persist-data
     - name: security
       link: 2.0/security/
       children:
@@ -321,6 +337,8 @@ en:
         link: 2.0/api-developers-guide/
       - name: API v1.1 Reference
         link: api/v1
+      - name: Project Values and Variables
+        link: 2.0/variables/
       - name: Prebuilt Images
         link: 2.0/circleci-images/
       - name: Glossary
@@ -349,7 +367,7 @@ en:
           link: 2.0/server-3-install-prerequisites
         - name: Phase 2 - Install Core Services
           link: 2.0/server-3-install
-        - name: Phase 3 - Install Build Services
+        - name: Phase 3 - Install Execution Environment
           link: 2.0/server-3-install-build-services
         - name: Phase 4 - Post Installation
           link: 2.0/server-3-install-post
@@ -394,6 +412,15 @@ en:
           link: 2.0/server-3-operator-troubleshooting-and-support
         - name: Backup and Restore
           link: 2.0/server-3-operator-backup-and-restore
+    - name: Server v3.3.x PDFs
+      link: 2.0/server-3-overview
+      children:
+        - name: v3.3 Overview
+          link: 2.0/CircleCI-Server-3.3.0-Overview.pdf
+        - name: v3.3 Installation Guide
+          link: 2.0/CircleCI-Server-3.3.0-Installation-Guide.pdf
+        - name: v3.3 Operations Guide
+          link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs
       link: 2.0/server-3-overview
       children:

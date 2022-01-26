@@ -1,11 +1,12 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x への移行
+= CircleCI Server v3.x Migration
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn now to migrate from CircleCI server 2.19.x to 3.x.
 :icons: font
 :toc: macro
 :toc-title:
@@ -32,7 +33,7 @@ toc::[]
 . 2.19 インスタンスのバックアップが完了している。
 . 新しい CirclCI Server 3.x インスタンスでコンテキストを使用した https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了している。
 
-## 移行
+## Migration
 
 WARNING: CircleCI Server v3.x に移行すると、v2.19 アプリケーションはシャットダウンされます。 v2.19 アプリケーションは自動では再起動されませんが、管理コンソールを使用して手動で再起動することはできます。
 
@@ -81,7 +82,7 @@ https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-t
 
 ### 過去のジョブとビルドの履歴がありません。どこに移動されたのですか？
 * 既存のジョブとビルドの履歴はすべて、[Legacy Jobs (レガシージョブ)] ビューに移動されます。  ジョブの全履歴は、以下のいずれかの方法で表示できます。
-    ** [Projects (プロジェクト)] -> [PROJECT_NAME] の順に選択し、プロジェクトのビルド履歴下部にある `{startsb}legacy jobs view (レガシー ジョブ ビュー){endsb}` リンクを選択する。
+    ** [Projects (プロジェクト)] -> [PROJECT_NAME] の順に選択し、プロジェクトのビルド履歴下部にある `[legacy jobs view (レガシー ジョブ ビュー)]` リンクを選択する。
     ** Using the following URL pattern: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
     ** For a specific job, append a job number to the URL: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
 

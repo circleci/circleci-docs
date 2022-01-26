@@ -3,11 +3,14 @@
 {% include_cached head.html site=site page=page %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
-  {% include_cached google-tag-manager.html %}
+  {% include_cached google-tag-manager-noscript.html %}
 {% endif %}
 
 <div class="outer">
   {% include_cached global-nav.html site=site page=page %}
+  <div id="progress-bar-container">
+    {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
+  </div>
   {% include_cached hits-target.html %}
   <div class="main-body">
     {% assign lang = page.lang %}
@@ -27,40 +30,30 @@
             <div>
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
-            <div id="tooltip" role="tooltip" class="tooltip-popover">
-              This document is applicable to the following:
-              <div id="arrow" data-popper-arrow></div>
-            </div>
-            {% if page.version %}
-            <div class="server-version-wrapper">
-              {% for version in page.version %}
-              <span class="badge badge-primary">
-                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
-                <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-              </span>
-              {% endfor %}
-            </div>
-            {% endif %}
+
+            <!-- Quick info list - time posted + server version -->
+            {% include_cached quick-info-list.html page=page %}
+
             {% if page.untranslated %}
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}
             {{ content }}
-            {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
           </article>
         </div><!-- .article-container -->
 
         {% if page.toc != false %}
-        <aside class="full-height">
+        <aside id="full-height">
           <div class='full-height-sticky'>
             {% if page.suggested != false %}
-            <div id="related-resources">
-              <h5 class="related-heading">Helpful resources</h5>
-              <div class="related-indent">
+            <div id="helpful-resources">
+              <h5 class="helpful-heading">Helpful resources</h5>
+              <div class="helpful-indent">
                 <ul class="section-nav">
                   {% for item in page.suggested %}
-                  <li class="related-entry related-h2">
+                  <li class="helpful-entry helpful-h2">
                     <a href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}
@@ -86,5 +79,6 @@
   {% include_cached js-config.html site=site page=page %}
   {% include_cached js-assets.html %}
 </div><!-- .outter -->
+{% include_cached no-script.html %}
 </body>
 </html>

@@ -19,6 +19,7 @@ font:
       bold: roboto-bold.ttf
       thin: roboto-thin.ttf
       light: roboto-light.ttf
+      italic: Roboto-Italic.ttf
 page:
   background_color: ffffff
   layout: portrait

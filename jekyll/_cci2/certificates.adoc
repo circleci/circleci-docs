@@ -6,6 +6,7 @@ version:
 = Setting Up Certificates
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing (ELB) certificate.
 :icons: font
 :toc: macro
 :toc-title:

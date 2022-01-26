@@ -5,20 +5,21 @@ short-title: "ワークフローを使用したジョブのスケジュール"
 description: "ワークフローを使用したジョブのスケジュール"
 order: 30
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 suggested:
   - 
     title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
   - 
-    title: Filter workflows by branch
+    title: ブランチ毎のワークフローのフィルタリング
     link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   - 
     title: How to trigger a workflow
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   - 
-    title: Conditional workflows
+    title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
@@ -125,7 +126,7 @@ workflows:
 
 ![順次ジョブを実行するワークフロー]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
-このサンプルの全文は、[順次ワークフローの設定例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
+下記で示した `config.yml` のコードは、シーケンシャルジョブの設定を施した Workflow の例です。
 
 ```yaml
 workflows:
@@ -146,7 +147,7 @@ workflows:
 
 ここに示されているように、依存関係は `requires:` キーを設定することで定義します。 `deploy:` ジョブは、`build`、`test1`、`test2` の各ジョブが正常に完了するまで実行されません。 ジョブは、依存関係グラフ内のすべてのアップストリーム ジョブが実行を完了するまで待機する必要があります。 したがって、`deploy` ジョブは `test2` ジョブを待ち、`test2` ジョブは `test1` ジョブを待ち、`test1` ジョブは `build` ジョブを待ちます。
 
-下記で示した `config.yml` のコードは、順次ジョブの設定を施した ワークフローの例です。
+このサンプルの全文は、[順次ワークフローの構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
 
 ### ファンアウト/ファンイン ワークフローの例
 {: #fan-outfan-in-workflow-example }
@@ -249,6 +250,10 @@ workflows:
 ## ワークフローのスケジュール実行
 {: #scheduling-a-workflow }
 
+<div class="alert alert-warning" role="alert">
+  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+</div>
+
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
 
 リソースに高い負荷がかかるワークフローや、レポートを生成するワークフローは、コミットのたびに実行するのではなく、設定ファイルに `triggers` キーを追加してスケジュールに沿って実行することを検討してください。 `triggers` キーは、`workflows` キーの下に**のみ**追加できます。 この機能により、指定したブランチについて、協定世界時 (UTC) を表す `cron` 構文で ワークフローの実行をスケジューリングすることができます。
@@ -263,7 +268,7 @@ workflows:
 
 デフォルトでは、`git push` ごとにワークフローがトリガーされます。 スケジュールに沿ってワークフローをトリガーするには、ワークフローに `triggers` キーを追加し、`schedule` を指定します。
 
-下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格の `crontab` の構文で表記します。 `cron` の書き方については [Crontabのマニュアル](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 以下の例では、ワークフローは `master` と `beta` のブランチにおいてのみ実行されます。
+下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格の `crontab` の構文で表記します。 `cron` の書き方については [Crontabのマニュアル](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 The workflow will be run on the `main` and `beta` branches.
 
 **注:** ワークフローのスケジュール実行は、最大 15 分遅れることがあります。 これは、午前 0 時 (UTC) などの混雑時の信頼性を維持するために実施されます。 スケジュールが設定されたワークフローが分単位の正確性で開始されることを想定しないようにご注意ください。
 
@@ -281,7 +286,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - beta
     jobs:
       - coverage
@@ -655,8 +660,12 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 
 ## ビデオ: ワークフローに複数のジョブを設定する
 {: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc} 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc} 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>

@@ -6,6 +6,7 @@ version:
 = Maintenance
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how CircleCI's system checks work, and the basics of user management and maintenance.
 :icons: font
 :toc: macro
 :toc-title:
@@ -19,8 +20,9 @@ toc::[]
 === When are executor instances created and destroyed?
 
 **Answer:**
-CircleCI creates a new instance for each job.  The instance will be destroyed at the end of the job.
+CircleCI creates a new instance for each job. The instance will be destroyed at the end of the job.
 However, given that cloud instance creation may take significant time (~1 to 3 minutes), CircleCI offers a pre-scale option, where a set number of instances will be created in anticipation of demand.  These will be killed at the end of the job.  The number of pre-scaled instances is configured in the settings section of the Management Console.
+
 At any given time, CircleCI expects to have a base of pre-scaled instances and the required instances to service current job load.
 
 === When are executor instances reused?

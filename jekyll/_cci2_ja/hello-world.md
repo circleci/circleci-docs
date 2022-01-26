@@ -2,16 +2,17 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "CircleCI 2.0 での最初のプロジェクト"
+description: "First project on CircleCI"
 categories:
-  - getting-started
+  - はじめよう
 order: 4
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
-[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
+This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
@@ -20,7 +21,7 @@ version:
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-1. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します。
+2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
      jobs:
@@ -34,9 +35,9 @@ version:
 
 2. 変更をコミットし、プッシュします。
 
-3. CircleCI アプリケーションの [Projects (プロジェクト)] ページで **[Add Projects (プロジェクトの追加)]** ボタンをクリックし、プロジェクトの横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
+3. Go to the Projects page in the CircleCI app, then click the **Set Up Project** button next to your project. プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
 
-1. **[Start Building (ビルドの開始)]** ボタンをクリックすると、最初のビルドがトリガーされます。
+4. Follow the steps to configure your `config.yml` file for the project and trigger your first build.
 
 [Workflows (ワークフロー)] ページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
 
@@ -63,7 +64,7 @@ jobs:
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
-_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
+_The macOS executor is not currently available on installations of CircleCI server v2.x_
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
@@ -71,7 +72,7 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
 jobs:
   build-macos:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
 ```
 
 詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
@@ -155,7 +156,7 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
 {:.tab.switcher.Server_2}
-![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
+![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 表示したいプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 

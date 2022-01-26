@@ -7,7 +7,8 @@ categories:
   - language-guides
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -21,56 +22,61 @@ version:
 {% raw %}
 
 ```yaml
-version: 2  # CircleCI Classic ではなく CircleCI 2.0 を使用します
-jobs:  # 1 回の実行の基本作業単位
-  build:  # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
-    parallelism: 1  # このジョブのインスタンスを 1 つだけ並列実行します
-    docker:  # Docker でステップを実行します
-      - image: circleci/elixir:1.7.3  # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-        environment:  # プライマリ コンテナの環境変数
+version: 2 
+jobs:  # basic units of work in a run
+  build:  # runs not using Workflows must have a `build` job as entry point
+    parallelism: 1  # run only one instance of this job
+    docker:  # run the steps with Docker
+      - image: circleci/elixir:1.7.3  # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:  # environment variables for primary container
           MIX_ENV: test
-      - image: circleci/postgres:10.1-alpine  # データベース イメージ
-        environment:  # データベースの環境変数
+      - image: circleci/postgres:10.1-alpine  # database image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:  # environment variables for database
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
           POSTGRES_PASSWORD:
 
-    working_directory: ~/app  # ステップが実行されるディレクトリ
+    working_directory: ~/app  # directory where steps will run
 
-    steps:  # `build` ジョブを構成するコマンド
+    steps:  # commands that comprise the `build` job
+      - checkout  # check out source code to working directory
 
-      - checkout  # ソース コードを作業ディレクトリにチェックアウトします
+      - run: mix local.hex --force  # install Hex locally (without prompt)
+      - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
 
-      - run: mix local.hex --force  # Hex をローカルにインストールします (プロンプトなし)
-      - run: mix local.rebar --force  # rebar のコピーをフェッチします (プロンプトなし)
-
-      - restore_cache:  # 保存されているミックス キャッシュを復元します
-      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-          keys:  # キャッシュ キーのリスト (特定性の高い順)
+      - restore_cache:  # restores saved mix cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          keys:  # list of cache keys, in decreasing specificity
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
             - v1-mix-cache
-      - restore_cache:  # 保存されているビルド キャッシュを復元します
+      - restore_cache:  # restores saved build cache
           keys:
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
-      - run: mix do deps.get, compile  # 更新された依存関係を取得してコンパイルします
-      - save_cache:  # ミックス キャッシュを生成して保存します
+      - run: mix do deps.get, compile  # get updated dependencies & compile them
+      - save_cache:  # generate and store mix cache
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
-      - save_cache:  # 特定性の低い別のキャッシュを作成します
-          key: v1-mix-cache-{{ .Branch }}
-          paths: "deps"
+      - save_cache: # don't forget to save a *build* cache, too
+          key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
 
-      - run:  # データベースが準備できるまでメインの処理を停止する特別なユーティリティ
-          name: DB を待機
+      - run:  # special utility that stalls main process until DB is ready
+          name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: mix test  # プロジェクトのすべてのテストを実行します
+      - run: mix test  # run all tests in project
 
-      - store_test_results:  # テスト サマリーに表示する JUnit テスト結果をアップロードします
-          # 詳しくは https://circleci.com/ja/docs/2.0/collect-test-data/ を参照してください
-          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # アプリの名前に置換します
+      - store_test_results:  # upload junit test results for display in Test Summary
+          # Read more: https://circleci.com/docs/2.0/collect-test-data/
+          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
 ```
 
 {% endraw %}

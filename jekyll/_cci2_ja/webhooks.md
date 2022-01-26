@@ -45,16 +45,12 @@ CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コ
 
 Webhook には、以下のような多くの HTTP ヘッダーが設定されています。
 
-| ヘッダー名              | 値                                                                                                                                                                                                                                         |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 型                  | `` `application/json ``                                                                                                                                                                                                                   |
-| User-Agent         | `|
-| User-Agent          | 送信者が CircleCI であることを示す文字列（`CircleCI-Webhook/1.0`）。 この値はプレビュー期間中に変更される場合があります。</td>
-</tr>
-<tr>
-  <td>Circleci-Event-Type</td>
-  <td>イベントのタイプ （<code>workflow-completed`、`job-completed`など） |
-| Circleci-Signature | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。                                                                                                                                                                          |
+| ヘッダー名               | 値                                                                                       |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| 型                   | `application/json`                                                                      |
+| User-Agent          | 送信者が CircleCI であることを示す文字列（</code>CircleCI-Webhook/1.0</0>)）。 この値はプレビュー期間中に変更される場合があります。 |
+| Circleci-Event-Type | イベントのタイプ （`workflow-completed`、`job-completed`など）                                       |
+| Circleci-Signature  | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。                        |
 {: class="table table-striped"}
 
 ## Webhookのセットアップ
@@ -152,7 +148,7 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 | イベントタイプ            | 説明                  | 状態の例                                                     | 含まれるサブエンティティ                |
 | ------------------ | ------------------- | -------------------------------------------------------- | --------------------------- |
 | workflow-completed | ワークフローが終了状態になっています。 | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン     |
-| job-completed      | ジョブが終了状態になっています。    | "success", "failed", "canceled", "unauthorized"          | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
+| job-completed      | ジョブが終了状態になっています。    | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
 {: class="table table-striped"}
 
 ## Webhookの共通のトップ レベル キー

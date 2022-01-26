@@ -26,7 +26,7 @@ jobs:
     working_directory: ~/mern-starter
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
-      - image: circleci/node:14.17.3-buster
+      - image: cimg/node:17.3.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -78,7 +78,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: cimg/android:2021.10.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -106,7 +106,7 @@ _The macOS executor is not currently available on self-hosted installations of C
 jobs:
   build-and-test:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       ...
       - run:

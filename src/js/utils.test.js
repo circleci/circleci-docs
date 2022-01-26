@@ -41,4 +41,42 @@ describe('Utils', () => {
       expect(utils.isUnsupportedBrowser()).toBe(false);
     });
   });
+
+  describe('isElementInViewport', () => {
+    it('Should return false if not passed a DomElement', () => {
+      let nonElement = {};
+      expect(utils.isElementInViewport(nonElement)).toBe(false);
+    });
+
+    it('Should return true when element is in viewport.', () => {
+      let mockElement = document.createElement('div');
+      window.innerHeight = 700;
+      window.innerWidth = 1200;
+
+      mockElement.getBoundingClientRect = jest.fn().mockReturnValueOnce({
+        bottom: 300,
+        left: 300,
+        right: 1200,
+        top: 300,
+      });
+      const result = utils.isElementInViewport(mockElement);
+      expect(result).toBeTruthy();
+    });
+
+    it('Should return false when element is not in the viewport.', () => {
+      let mockElement = document.createElement('div');
+      window.innerHeight = 700;
+      window.innerWidth = 1200;
+
+      mockElement.getBoundingClientRect = jest.fn().mockReturnValueOnce({
+        bottom: 1809.75,
+        left: 328,
+        right: 1147.328125,
+        top: 1769.75,
+      });
+
+      const result = utils.isElementInViewport(mockElement);
+      expect(result).toBe(false);
+    });
+  });
 });

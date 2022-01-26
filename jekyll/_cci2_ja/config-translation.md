@@ -4,7 +4,7 @@ title: "1.0 から 2.0 への config-translation エンドポイントの使用"
 short-title: "1.0 から 2.0 への config-translation エンドポイントを使用する"
 description: "CircleCI 1.0 の設定ファイルを 2.0 形式に変換する実験的な変換ツールの使用手順"
 categories:
-  - migration
+  - 移行
 hide: true
 order: 60
 version:

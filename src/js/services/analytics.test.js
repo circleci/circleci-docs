@@ -1,7 +1,6 @@
 import AnalyticsClient from './analytics.js';
 import { default as CookieOrginal } from 'js-cookie';
 import glob from '../../../jest/global';
-import { describe } from 'jest-circus';
 
 jest.mock('js-cookie');
 const Cookie = CookieOrginal;
@@ -12,7 +11,7 @@ const options = {
   },
 };
 
-describe('Amalytics Service', () => {
+describe('Analytics Service', () => {
   beforeEach(() => {
     jest.resetAllMocks();
 

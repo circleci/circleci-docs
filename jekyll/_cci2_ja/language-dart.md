@@ -7,7 +7,8 @@ categories:
   - language-guides
 order: 2
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -48,7 +49,7 @@ If you fork this project and want to push to DockerHub, this project assumes [a 
 
 See the config and modify as needed for your use case.
 
-## Config walkthrough
+## 設定ファイルの詳細
 {: #config-walkthrough }
 
 The first section of the file defines common items. The order in which things are defined in a CircleCI configuration doesn't matter - we have laid it out this way for readability.
@@ -60,7 +61,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-- **Config Version**: Current is `2.1`. Unless using a CircleCI Server installation, we recommend using 2.1.
+- **Config Version**: Current is `2.1`. If you are using CircleCI server v2.x, you will need to use config version 2.
 - **Orbs**: CircleCI offers [orbs](https://circleci.com/developer/orbs), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to make use of a pre-defined execution environment later on.
 
 {% raw %}
@@ -170,7 +171,7 @@ jobs:
 ```yaml
   build-mac:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       - run:
           name: Install Dart SDK
@@ -360,7 +361,7 @@ jobs:
 
   build-mac:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       - run:
           name: Install Dart SDK
@@ -433,10 +434,10 @@ jobs:
 ## Additional resources
 {: #additional-resources }
 
-- [Getting Started](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
+- [はじめよう](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
 - [Migrating to CircleCI](https://circleci.com/docs/2.0/migration-intro/#section=getting-started)
-- [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
-- [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
+- [依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+- [データベースの構成]({{ site.baseurl }}/2.0/databases/)
 - [Deploying on CircleCI](https://circleci.com/docs/2.0/deployment-integrations/#section=deployment)
-- [Using Contexts](https://circleci.com/docs/2.0/contexts/)
-- [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
+- [コンテキストの使用](https://circleci.com/docs/2.0/contexts/)
+- [設定に関するリファレンス](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)

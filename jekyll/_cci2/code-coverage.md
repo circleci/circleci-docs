@@ -64,7 +64,94 @@ end
 
 Now configure your `.circleci/config.yml` for uploading your coverage report.
 
+{:.tab.ruby_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          RAILS_ENV: test
+      - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run Tests
+          command: bin/rails test
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.ruby_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          RAILS_ENV: test
+      - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run Tests
+          command: bin/rails test
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.ruby_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -75,7 +162,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine
+      - image: cimg/postgres:9.6
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -135,7 +222,80 @@ coverage html  # open htmlcov/index.html in a browser
 The generated files will be found under `htmlcov/`, which can be uploaded in a
 `store_artifacts` step in your config:
 
+{:.tab.python_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+    - image: cimg/python:3.10-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+    - checkout
+    - browser-tools/install-browser-tools
+    - run:
+        name: Setup testing environment
+        command: |
+          pip install '.[test]' --user
+          echo $HOME
+    - run:
+        name: Run Tests
+        command: |
+          $HOME/.local/bin/coverage run -m pytest
+          $HOME/.local/bin/coverage report
+          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
+    - store_artifacts:
+        path: htmlcov
+workflows:
+  test-workflow:
+    jobs:
+    - build
+```
+
+{:.tab.python_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+    - image: cimg/python:3.10-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+    - checkout
+    - browser-tools/install-browser-tools
+    - run:
+        name: Setup testing environment
+        command: |
+          pip install '.[test]' --user
+          echo $HOME
+    - run:
+        name: Run Tests
+        command: |
+          $HOME/.local/bin/coverage run -m pytest
+          $HOME/.local/bin/coverage report
+          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
+    - store_artifacts:
+        path: htmlcov
+workflows:
+  test-workflow:
+    jobs:
+    - build
+```
+
+{:.tab.python_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -253,9 +413,54 @@ also converted to an `html` page, like many other coverage tools. The Pom file
 above writes to the `target` directory, which you can then store as an artifact
 in your CircleCI `config.yml` file.
 
-Here is a  minimal CI configuration to correspond with the above example:
+Here is a minimal CI configuration to correspond with the above example:
 
+{:.tab.java_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run : mvn test
+      - store_artifacts:
+          path:  target
+```
+
+{:.tab.java_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run : mvn test
+      - store_artifacts:
+          path:  target
+```
+
+{:.tab.java_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -278,7 +483,59 @@ jobs:
 JavaScript projects. Another popular testing tool, Jest, uses Istanbul to
 generate reports. Consider this example:
 
+{:.tab.js_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:17.2-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run: npm install
+      - run:
+          name: "Run Jest and Collect Coverage Reports"
+          command: jest --collectCoverage=true
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.js_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:17.2-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run: npm install
+      - run:
+          name: "Run Jest and Collect Coverage Reports"
+          command: jest --collectCoverage=true
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.js_example.Server_2}
+
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -308,8 +565,56 @@ a tool called phpdbg; you can generate a report using the command `phpdbg -qrr v
 In the following basic `.circleci/config.yml` we upload the coverage reports in
 the `store_artifacts` step at the end of the config.
 
-
+{:.tab.php_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: "Run tests"
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path:  build/coverage-report
+```
+
+{:.tab.php_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: "Run tests"
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path:  build/coverage-report
+```
+
+{:.tab.php_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -346,7 +651,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.16
+      - image: cimg/go:1.16
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -367,10 +672,10 @@ jobs:
 ```
 
 
-# Using a code coverage service
+## Using a code coverage service
 {: #using-a-code-coverage-service }
 
-## Codecov
+### Codecov
 {: #codecov }
 
 Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
@@ -388,13 +693,13 @@ jobs:
 
 Read more about Codecov's orb in their [guest blog post](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/).
 
-## Coveralls
+### Coveralls
 {: #coveralls }
 
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://docs.coveralls.io/)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
+[environment variables]( {{ site.baseurl }}/2.0/env-vars/).
 
 Coveralls will automatically handle the merging of coverage stats in
 concurrent jobs.

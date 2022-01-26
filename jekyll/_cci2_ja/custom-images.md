@@ -7,7 +7,8 @@ categories:
   - コンテナ化
 order: 30
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -200,7 +201,7 @@ jobs:
 ## Ruby 用のカスタム Dockerfile の例
 {: #detailed-custom-dockerfile-example-for-ruby }
 
-このセクションでは、Ruby コンテナをビルドして CircleCI 2.0 で使用する方法について説明します。 **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
+This section demonstrates how to build a Ruby container to use on CircleCI. **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
 
 以下の例では、最初に [Ruby 2.1](https://hub.docker.com/_/ruby/) イメージを使用しています。 ただし、ここでは FROM ruby:2.1 を基本イメージとして使用する方法ではなく、コンテナのビルド方法について説明します。 Ruby Docker ハブのページから、[2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10) に移動してください。 また、正しいバージョンをプルするために使用されている環境変数に注目してください。
 
@@ -461,3 +462,7 @@ docker push username/ruby-node:0.1
 ```
 
 カスタム イメージを使用するには、`.circleci/config.yml` イメージ キーから ruby-node/bar:0.1 を参照します。 これで、プライマリ コンテナによってイメージが実行されます。 gist を使用して Dockerfile をコミットし、Docker ハブからリンクすると、設定が失われることを回避できます。
+
+## Caching Docker images
+{: #caching-docker-images }
+For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/2.0/executor-types/#caching-docker-images).

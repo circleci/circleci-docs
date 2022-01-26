@@ -3,7 +3,7 @@ layout: classic-docs
 title: Jenkins との相違点
 categories:
   - migration
-description: Jenkins との相違点
+description: CircleCI と Jenkins の相違点
 ---
 
 Jenkins を長年使用されていた方向けに、CircleCI に移行するうえで把握しておきたい基本的なコンセプトについて、以下のセクションに沿って説明します。
@@ -15,9 +15,9 @@ Jenkins を長年使用されていた方向けに、CircleCI に移行するう
 {: #quick-start }
 {:.no_toc}
 
-CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD の管理方法についても多くの相違点が見られます。 ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 To get started quickly, try one of these options:
+CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD の管理方法についても多くの相違点が見られます。 ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 すばやく移行に取り掛かれるよう、以下のいずれかをお試しください。
 
-1. **入門用資料を確認する:** [入門用のビデオや手順]({{ site.baseurl }}/ja/)を参照しながら、CircleCI 2.0 で最初のビルドを実行し、成功させましょう。
+1. **Getting Started:** Run your first green build on CircleCI using the [getting started video and steps]({{ site.baseurl }}/2.0/).
 
 2. **Execute Shell のコマンドをコピー & ペーストする:** Jenkins 内のプロジェクトをそのまま複製して使用できる場合は、以下の内容のファイルを `config.yml` という名前でプロジェクトの `.circleci/` ディレクトリに追加します。
 
@@ -47,17 +47,15 @@ CircleCI のビルドに関する設定の大部分は、各プロジェクト�
 
 Jenkins サーバーの管理は、運用部門のメンバーやチームに委ねられているケースがほとんどです。 その担当者は、依存関係のインストールやトラブルシューティングなど、CI メンテナンスに関するさまざまなタスクに日々追われています。
 
-CircleCI では、カスタムの依存関係が自動的にインストールされる (ビルド プロセス全体が確実に自動化される) フレッシュな環境で各ビルドが開始されるため、依存関係をインストールするために CircleCI 環境にアクセスする必要はありません。 また、ビルド環境でのトラブルシューティングは、CircleCI の [SSH 機能]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)を使用して、開発者が簡単かつ安全に実行できます。
+It is never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{ site.baseurl }}/2.0/ssh-access-jobs/).
 
-CircleCI を独自のハードウェアにインストールする場合、(「物理」レベルまたは VM レベルの) ホスト OS とコンテナ化されたビルド環境を分けておくと、セキュリティと運用の面できわめて有用です (詳細については、以下のセクション「コンテナ内のビルド」を参照してください)。 運用部門のメンバーは、ビルドに支障をきたすことなくホスト OS 上で必要な作業を行うことができ、開発者にアクセス権を付与する必要はありません。 また開発者は、CircleCI の SSH 機能を使用して、運用に支障をきたすことなく任意のコンテナレベルでビルドをデバッグできます。
+If you install CircleCI on your own hardware, the divide between the host OS (at the “metal”/VM level) and the containerized execution environments can be extremely useful for security and ops (see Your Builds in Containers below). 運用部門のメンバーは、ビルドに支障をきたすことなくホスト OS 上で必要な作業を行うことができ、開発者にアクセス権を付与する必要はありません。 また開発者は、CircleCI の SSH 機能を使用して、運用に支障をきたすことなく任意のコンテナレベルでビルドをデバッグできます。
 
 ## Web UI
 {: #web-ui }
 {:.no_toc}
 
 CircleCI は、高速かつ魅力的なユーザー エクスペリエンスを提供するシングルページ Web アプリケーションです。 CircleCI のチームは CircleCI の UI を継続的に更新して改善を図っています。 CircleCI のモダンな UI はたいへんご好評を頂いておりますが、日々変わり続けるテクノロジーやユーザーのニーズを踏まえ、チームでは常に UI の向上に努めています。
-
-![](  {{ site.baseurl }}/assets/img/docs/circle-ui.png)
 
 ## プラグイン
 {: #plugins }
@@ -71,12 +69,12 @@ CircleCI にはすべてのコア CI 機能が組み込まれています。 Git
 
 Jenkins サーバーでも、ビルドを複数の「エージェント」マシンに分散させてジョブを実行することはできますが、事前に多くの作業を要します。 この点については [Jenkins の Wiki](https://wiki.jenkins.io/display/JA/Distributed+builds) に、Jenkins はクラスタリング ミドルウェアではないため、事前の準備は容易ではないと説明されています。
 
-CircleCI は、デフォルトでビルドを大規模なビルド マシン フリートに分散させます。 SaaS ベースの circleci.com を使用すれば、分散が自動的に行われます。 プラン内で処理できるビルド数に達しない限り、ビルドがキューイングされることはありません。 CircleCI を独自の環境にインストールして使用する場合も、CircleCI で Builder マシン クラスタが管理されるため、余計なツールを使用せずに済み、たいへん便利です。
+CircleCI は、デフォルトでビルドを大規模なビルド マシン フリートに分散させます。 SaaS ベースの circleci.com を使用すれば、分散が自動的に行われます。プラン内で処理できるビルド数に達しない限り、ビルドがキューイングされることはありません。 CircleCI を独自の環境にインストールして使用する場合も、CircleCI で Builder マシン クラスタが管理されるため、余計なツールを使用せずに済み、たいへん便利です。
 
 ## コンテナと Docker
 {: #containers-and-docker }
 
-ビルドシステム内のコンテナ化は複雑になる傾向があります。 CI システムの実装を構成するコンテナ内で任意のビルド コマンドやテスト コマンドが実行され、それらのコマンド自体にコンテナの実行が含まれることもあるためです。 これらの点については、以下で詳しく説明します。 また、コンテナを実行するツールとしては Docker が絶大な人気を誇りますが、それ以外にもさまざまなツールが存在します。 Both the terms “container” (general) and “Docker” (specific) will be used.
+ビルドシステム内のコンテナ化は複雑になる傾向があります。CI システムの実装を構成するコンテナ内で任意のビルド コマンドやテスト コマンドが実行され、それらのコマンド自体にコンテナの実行が含まれることもあるためです。 これらの点については、以下で詳しく説明します。 また、コンテナを実行するツールとしては Docker が絶大な人気を誇りますが、それ以外にもさまざまなツールが存在します。 ここでは、一般的な「コンテナ」と製品名である「Docker」という用語を使い分けながら説明していきます。
 
 
 ### ビルド内のコンテナ
@@ -84,7 +82,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 {:.no_toc}
 
 
-ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールをビルド環境にインストールする必要があります。
+ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
 
 CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細については、「[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)」と「[Docker]({{ site.baseurl }}/ja/2.0/build/#docker)」を参照してください。
 
@@ -99,7 +97,7 @@ Jenkins は一般に、ビルド サーバーの通常のディレクトリ内�
 CircleCI では、すべての Linux および Android のビルドが専用コンテナで実行され、コンテナは使用後に直ちに破棄されます (macOS ビルドは使い捨ての VM で実行されます)。 これにより、ビルドごとにフレッシュな環境が作成され、ビルドに不正なデータが入り込むことを防止できます。 このように 1 回限りの環境を使用して、使い捨ての概念を浸透させることで、すべての依存関係がコードに記述されるようになり、ビルド サーバーがそれぞれに少しずつ異なってしまう「スノーフレーク化」の問題を防止できます。
 
 
-独自のハードウェアで [CircleCI](https://circleci.com/ja/enterprise/) を使用してビルドを実行する場合は、すべてのビルドをコンテナで実行することで、ビルドを実行するためのハードウェアを有効に活用できます。
+独自のハードウェアで [CircleCI](https://circleci.jp/enterprise/) を使用してビルドを実行する場合は、すべてのビルドをコンテナで実行することで、ビルドを実行するためのハードウェアを有効に活用できます。
 
 ## 並列処理
 {: #parallelism }

@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
 ---
 
 * 目次
@@ -30,7 +30,7 @@ CircleCI Orb とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring
 {: #private-orbs }
 
 
-**メモ:** プライベート Orb 機能は、いずれかの有料[プラン](https://circleci.com/ja/pricing/)で利用いただけます。 パフォーマンスプランのお客様は、最大3つのプライベート Orb を作成することができ、スケールプランのお客様は、作成できるプライベート Orb の数に制限はありません。 詳細については、営業担当者へお問い合わせください。
+**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
 {: class="alert alert-warning"}
 
 プライベート Orb 機能と使うと、以下の状態で Orb をオーサリングできます。
@@ -179,6 +179,15 @@ jobs:
       - node/install-packages # steps でコマンドを使用する
 ```
 
+## Orbs page in the CircleCI app
+{: #orbs-view}
+
+The Orbs page gives users visibility into the orbs their organization has created. Users can review the orb type (public or private), orb usage (how many times the orb is used across all configurations), latest version, and description directly from the list view on the page.
+
+To access the Orbs page, navigate to Organization Settings in the app.
+
+Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI Orb Registry in that the details page provides the orb's contents, commands, and usage examples. Note: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
+
 
 ## 関連項目
 {: #see-also }
@@ -190,6 +199,6 @@ jobs:
 - [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 独自に作成した Orb のテスト方法
 - [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orb を使用するためのレシピ
 
-## Learn More
+## 詳しく見る
 {: #learn-more }
 Take the [orbs course](https://academy.circleci.com/orbs-course?access_code=public-2021) with CircleCI academy to learn more.

@@ -2,17 +2,17 @@
 layout: classic-docs
 title: "Executor とイメージ"
 short-title: "Executor とイメージ"
-description: "CircleCI 2.0 の Executor とイメージ"
+description: "CircleCI executors and images"
 categories:
-  - configuration
+  - 設定
 order: 1
 version:
-  - Cloud
+  - クラウド
   - Server v2.x
   - Server v3.x
 ---
 
-CircleCIでは、複数のビルド環境を用意しています。 CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCI offers several execution environments. CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -57,13 +57,12 @@ jobs:
 `machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
 ```
 jobs:
-  build: # ジョブの名前
-    macos: # Executor タイプ
-      xcode: 11.3.0
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
 
     steps:
-      # Xcode 11.3 がインストールされた
-      # macOS 仮想マシン環境で実行するコマンド
+      # Commands run in a Linux virtual machine environment
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
@@ -71,19 +70,17 @@ jobs:
 ## macOS
 {: #macos }
 
-_macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
+_The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
 ```
 jobs:
   build: # ジョブの名前
-    machine:
-      image: windows-default # Windows マシン イメージ
-    resource_class: windows.medium
-    steps:
-      # Windows 仮想マシン環境で実行するコマンド
+    macos: # Executor タイプ
+      xcode: 12.5.1
 
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+    steps:
+      # Xcode 11.3 がインストールされた
+      # macOS 仮想マシン環境で実行するコマンド
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
@@ -94,7 +91,7 @@ jobs:
 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
 * クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
-* オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。 これは、*CircleCI Server v2.18.3* からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
+* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```
@@ -154,6 +151,6 @@ jobs:
 * [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
 * [Windows でビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
 
-## Learn More
+## さらに詳しく
 {: #learn-more }
 CircleCI Academy の [ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021) を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。

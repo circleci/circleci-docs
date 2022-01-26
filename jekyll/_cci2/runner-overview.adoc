@@ -6,6 +6,7 @@ version:
 = CircleCI Runner Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how CircleCI runner enables you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
 :toc-title:
@@ -96,11 +97,17 @@ The runner consists of two components: the launch agent and the task agent.
 
 The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
 
+== Runner concurrency
+
+To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to runners across all your resource classes.
+
+Rather than limit the total number of registered runners, CircleCI runners are limited by the total number of runner jobs (tasks) across your resource classes.
+
 == Debugging with SSH
 
 CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
-NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
+NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
 
 == Public repositories
 

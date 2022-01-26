@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation on Linux
+= Linux への CircleCI ランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,18 +12,18 @@ version:
 
 toc::[]
 
-This page describes how to install CircleCI runner on Linux. 
+このページでは、CircleCI ランナーを Linux にインストールする方法を説明します。 
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
 
-== Create the CircleCI runner configuration
+== CircleCI ランナー設定ファイルを作成する
 
-The recommended CircleCI runner configuration for Linux is:
+Linux 用の推奨される CircleCI ランナー設定ファイルを次に示します。
 
 ```yaml
 api:
   auth_token: AUTH_TOKEN
-  # On server, set url to the hostname of your server installation. For example,
+  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
   # url: https://circleci.example.com
 
 runner:
@@ -33,25 +33,25 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
+Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc#authentication[Authentication] step. `RUNNER_NAME` には、任意の値を指定できまが、同じリソースクラスで使用される他のすべてのランナーの中で一意である必要があります。
 
-== Install the CircleCI runner configuration
+== CircleCI ランナー設定ファイルをインストールする
 
-Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`.
+Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
 
 ```bash
 sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-== Create the circleci user & working directory
+== CircleCI ユーザーと作業ディレクトリを作成する
 
-These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+これらはタスク エージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
 === Ubuntu/Debian
 
 ```bash
-id -u circleci &>/dev/null || sudo adduser --uid 1500 --disabled-password --gecos GECOS circleci
+id -u circleci &>/dev/null || sudo adduser --disabled-password --gecos GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
@@ -60,29 +60,29 @@ sudo chown -R circleci /opt/circleci/workdir
 === CentOS/RHEL
 
 ```bash
-id -u circleci &>/dev/null || sudo adduser --uid 1500 -c GECOS circleci
+id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
 ```
 
-== Configure SELinux policy (RHEL 8)
+== SELinux ポリシーを構成する (RHEL 8)
 
-An SELinux policy is required for runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this runner install.
+RHEL 8 システムでランナーがジョブを受け取り、実行するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このランナーが実行する個別のジョブで必要になる可能性がある権限を追加するものではないことに留意してください。
 
-Create directory `/opt/circleci/policy` and generate the initial policy module:
+`/opt/circleci/policy` というディレクトリを作成し、最初のポリシー モジュールを生成します。
 
 ```bash
 sudo mkdir -p /opt/circleci/policy
 
-# Install sepolicy and rpmbuild if you haven't already
+# まだインストールしていない場合 sepolicy と rpmbuild をインストールする
 sudo yum install -y policycoreutils-devel
 sudo yum install -y rpm-build
 
 sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci-launch-agent
 ```
 
-Download the following type enforcing file https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] and install the policy:
+次の Type Enforcement ファイル https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] をダウンロードして、ポリシーをインストールします。
 
 ```bash
 sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
@@ -90,13 +90,15 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
-== Enable the `systemd` unit
+== Optional Steps
+
+=== Enable the `systemd` unit
 
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
 
-If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by systemd with the following scripts:
+If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -112,13 +114,15 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
+NOTE: Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[Please visit the `systemd` documentation for more information].
+
 You can now enable the service:
 
 ```bash
 systemctl enable /opt/circleci/circleci.service
 ```
 
-== Start the service
+=== Start the service
 
 When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
@@ -126,9 +130,9 @@ When the CircleCI runner service starts, it will immediately attempt to start ru
 systemctl start circleci.service
 ```
 
-== Verify the service is running
+=== Verify the service is running
 
-The system reports a very basic health status through the `Status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
+The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
 
 You can see the status of the agent by running:
 

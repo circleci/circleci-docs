@@ -2,12 +2,13 @@
 layout: classic-docs
 title: "最適化"
 short-title: "最適化"
-description: "CircleCI 2.0 ビルドの最適化"
+description: "CircleCI build optimizations"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
+  - Server v3.x
   - Server v2.x
 ---
 
@@ -193,7 +194,7 @@ jobs:
 
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 

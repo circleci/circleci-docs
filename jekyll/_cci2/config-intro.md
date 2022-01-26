@@ -33,7 +33,7 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 4. Add a `config.yml` file inside the .circleci folder.
 5. Add the following contents to your `config.yml` file.
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -53,13 +53,13 @@ Check-in the config and see it run.  You can see the output of the job in the Ci
 {: #learnings }
 {:.no_toc}
 
-The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in details
+The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in detail:
 
 - Line 1: This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
 - Line 2-3: The `jobs` level contains a collection of arbitrarily named children.  `build` is the first named child in the `jobs` collection.  In this case `build` is also the only job.
 - Line 6-7: The `steps` collection is an ordered list of `run` directives.  Each `run` directive is executed in the order in which it was declared.
 - Line 8: The `name` attribute provides useful organizational information when returning warnings, errors, and output.  The `name` should be meaningful to you as an action within your build process
-- Line 9-11: This is the magic.  The `command` attribute is a list of shell commands that represent the work you want done.  The initial pipe, `|`, indicates that there will be more than one line of shell commands.  Here line 10 will print out `Hello World!` in your build shell and line 11 will print out `This is the delivery pipeline`
+- Line 9-11: This is the magic.  The `command` attribute is a list of shell commands that represent the work you want done.  The initial pipe, `|`, indicates that there will be more than one line of shell commands.  Here, line 10 will print out `Hello World!` in your build shell, and line 11 will print out `This is the delivery pipeline`.
 
 ## Part two: Info and preparing to build
 {: #part-two-info-and-preparing-to-build }
@@ -72,7 +72,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. Now, add a second `run` step and do an `ls -al` to see that all of your code is available.
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   build:
@@ -109,15 +109,19 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
 jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
-      - image: circleci/node:14-browsers
+      - image: cimg/node:17.2-browsers
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: The First Step
           command: |
@@ -143,7 +147,7 @@ We also added a small `run` block that demonstrates we are running in a node con
 The above two changes to the config significantly affect how you get work done.  By associating a docker container to a job and then dynamically running the job in the container, you don’t need to perform special magic or operational gymnastics to upgrade, experiment or tune the environment you run in.  With a small change you can dramatically upgrade a mongo environment, grow or shrink the base image, or even change languages.
 
 - Line 4: Here we see a comment in-line in yml.  Like any other unit of code, comments are a useful tool as config gets complicated.
-- Line 5-6: These lines indicate that docker image to use for the job.  Because you can have more than one job in your config (as we will see next) you can also run different parts of your config in different environments.  For example, you could perform a build job in a thin java container and then perform a test job using a container with browsers pre-installed. In this case, it uses  a [pre-built container from CircleCI]({{ site.baseurl }}/2.0/circleci-images/) that already has a browser and other useful tools built in.
+- Line 5-6: These lines indicate that docker image to use for the job.  Because you can have more than one job in your config (as we will see next) you can also run different parts of your config in different environments.  For example, you could perform a build job in a thin java container and then perform a test job using a container with browsers pre-installed. In this case, it uses a [pre-built container from CircleCI]({{ site.baseurl }}/2.0/circleci-images/) that already has a browser and other useful tools built in.
 - Line 19-22: These lines add a run step that returns the version of node available in the container. Try experimenting with different containers from CircleCI’s pre-built convenience images or even public containers from Docker hub.
 
 ## Part four: Approved to start
@@ -156,7 +160,7 @@ In the example below, an event triggering a build will cause `Hello-World` to st
 All of the job names are arbitrary.  This allows you to create workflows as complex as you need while staying meaningful and clear to the next developer that reads the `config.yml`.
 
 
-{% highlight yaml linenos %}
+{% highlight yaml %}
 version: 2.1
 jobs:
   Hello-World:
@@ -180,7 +184,7 @@ jobs:
             echo '^^^That should look familiar^^^'
   Run-With-Node:
     docker:
-      - image: circleci/node:14-browsers
+      - image: cimg/node:17.2
     steps:
       - run:
           name: Running In A Container With Node
@@ -196,7 +200,6 @@ jobs:
             echo 'Do work once the approval has completed'
 
 workflows:
- version: 2
  Example_Workflow:
    jobs:
      - Hello-World

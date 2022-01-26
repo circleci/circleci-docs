@@ -5,6 +5,8 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 
 ## 1. Local Development with Docker (recommended)
 
+If you are planning on making a pull request, please see the [pull request](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#submitting-pull-requests) instructions first.
+
 1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
 3. Start Docker Desktop
@@ -16,20 +18,33 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 _(Learn how to install yarn on your machine [here](https://classic.yarnpkg.com/lang/en/docs/install/).)_
 6. Run `yarn start` to create needed js assets & build the static site in Docker
 _(Warning: This may take up to 10 minutes to build)_
-8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
+8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser displays a HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
 9. To gracefully stop the running commands you can CTRL-C.
 
 **Note:** In the event you find yourself needing to cleanup docker/jekyll cache, you can use the `yarn clean` command.
 
-## 2. Local Development with Ruby and Bundler (alternative to Docker)
+## 2. Local Development with Ruby and Bundler
 
-If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
+If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel comfortable installing external dependencies, you can follow these instructions. Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we are currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
 
-Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
+1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
+2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
+3. Start Docker Desktop
+4. Add the following line to your `/etc/hosts` file:
+   ```bash
+   127.0.0.1 ui.circleci.com
+   ```
+5. Run `bundle install`. You will need to have [Bundler](https://bundler.io/) installed on your local machine.
+6. Run `yarn install`. You will need to have [Yarn](https://yarnpkg.com/getting-started) installed on your local machine.
+7. Finally, run `yarn dev` to start the site.
+8. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser displays a HSTS Security Warning, you can safely bypass it, as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
+9. To gracefully stop the running commands you can CTRL-C.
 
-We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
+**Note:** In the event you find yourself needing to cleanup jekyll cache, you can use the `yarn dev-clean` command.
 
-You're welcome to use [Bundler](https://bundler.io/) to install these gems.
+## Submitting Pull Requests
+
+If you want to submit a pull request to update the docs, you'll need to [make a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of this repo and follow the steps described in the [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) section. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
 
 ## Building js assets
 
@@ -86,7 +101,7 @@ If you want to work on the way search works on docs, follow the below instructio
 
 The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
-All docs live in folders named after the version of CircleCI. The only one you need to worry about is `jekyll/_cci2` or `jekyll/_cci2_ja` if you want to work on our translated content. .
+All docs live in folders named after the version of CircleCI. The only folder relevant to editing docs locally is `jekyll/_cci2`.
 
 1. Create a branch and switch to it:
 
@@ -143,10 +158,6 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 # Not in the TOC
 {:.no_toc}
 ```
-
-## Submitting Pull Requests
-
-If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and follow the steps in [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) above. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
 
 ## Docker Tag List for CircleCI Convenience Images
 

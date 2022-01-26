@@ -7,6 +7,7 @@ version:
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,20 +17,19 @@ toc::[]
 == Overview
 _Backup and restore is available for server v3.1.0 and up._
 
-While operating and administering CircleCI server, you will undoubtedly ponder how to maintain backups 
-and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+While operating and administering CircleCI server, you will consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
 This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 
-CircleCI server is administered via https://kots.io/[Kots], which uses https://velero.io/[Velero] for backup and restore.
+CircleCI server is administered via https://kots.io/[KOTS], which uses https://velero.io/[Velero] for backup and restore.
 The benefit of this approach is that it not only restores your application's data,
 but it also restores the state of the Kubernetes cluster and its resources at the time of the backup.
 In this way, we can also restore admin-console configurations and customizations you made to your cluster. 
 
-NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully brought up Velero in the cluster. From there you can recover the CircleCI services.
+NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
 
 == The setup
 
-Backups of CircleCI server can be created quite easily through https://kots.io/[Kots].
+Backups of CircleCI server can be created quite easily through https://kots.io/[KOTS].
 However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
 The following sections outline the steps needed to install Velero on your cluster.
 
@@ -141,7 +141,7 @@ aws iam put-user-policy \
   --policy-document file://velero-policy.json
 ----
 
-* Create an access key for user `velero`
+* Create an access key for user `velero`:
 
 [source,bash]
 ----
@@ -162,7 +162,7 @@ The result should look like this:
 }
 ----
 
-* Create a Velero-specific credentials file (eg: `./credentials-velero`) in your local directory, with the following contents:
+* Create a Velero-specific credentials file (for example, `./credentials-velero`) in your local directory, with the following contents:
 
 [source,bash]
 ----
@@ -177,7 +177,7 @@ where the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are value
 * Run the following `velero` `install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
-NOTE: kots backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
 [source, bash]
 ----
@@ -192,7 +192,7 @@ velero install \
     --wait
 ----
 
-* Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, e.g.:
+* Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, for example:
 
 [source,bash]
 ----
@@ -219,9 +219,7 @@ The following steps are specific for Google Cloud Platform and it is assumed you
 These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
 
 === Step 1 - Create a GCP bucket
-To reduce the chance of typos, we will set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session,
-do not forget to reset variables as necessary before proceeding. In the step below, for example, we will define a variable for your bucket name. Replace
-the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
+To reduce the risk of typos, we will set some of the parameters as shell variables. If you are unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, we will define a variable for your bucket name. Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
 
 [source,bash]
 ----
@@ -242,7 +240,7 @@ created. More information can be found in the https://cloud.google.com/kubernete
 gcloud config list
 ----
 
-. If the project is correct, set the variable:
+. If the project is correct, set the variable as follows:
 +
 [source,bash]
 ----
@@ -256,7 +254,7 @@ PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
-NOTE: If you run several clusters with Velero, you might want to consider using a more specific name for the Service Account besides `velero`, as suggested here.
+NOTE: If you run several clusters with Velero, you might want to consider using a more specific name for the Service Account besides `velero`, as suggested in the example above.
 
 . You can check if the service account has been created successfully by running:
 +
@@ -312,7 +310,7 @@ You can simply pass a JSON credentials file to Velero to authorize it to perform
 gcloud iam service-accounts keys create credentials-velero \
     --iam-account $SERVICE_ACCOUNT_EMAIL
 ----
-After running this, you should have a file named `credentials-velero` in your local working directory.
+After running this command, you should see a file named `credentials-velero` in your local working directory.
 
 ==== Option 2: Workload Identities
 
@@ -356,7 +354,7 @@ velero install \
 
 For more options on customizing your installation, refer to the https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero documentation].
 
-* Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset. eg:
+* Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, for example:
 
 [source,bash]
 ----
@@ -378,7 +376,7 @@ As restic is a daemonset, there should be one pod for each node in your Kubernet
 ////
 == Server 3.x backups with S3 Compatible Storage
 
-The following steps will assume you're using S3 compatible object storage, but not necessarily AWS S3, for your backups.
+The following steps will assume you arre using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
 
 These instructions were sourced from the Velero documentation https://velero.io/docs/v1.6/contributions/minio/[here].
@@ -399,7 +397,7 @@ You can verify your client is correctly configured by running `mc ls my-provider
 
 === Step 2 - Create a bucket
 
-Create a bucket for your backups. It is important that a new bucket is used, as Velero cannot use a preexisting bucket with other content.
+Create a bucket for your backups. It is important that a new bucket is used, as Velero cannot use an existing bucket that already contains other content.
 
 [source, bash]
 ----
@@ -456,7 +454,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 Run the following `velero install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
 
-NOTE: kots backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
 [source, bash]
 ----
@@ -471,7 +469,7 @@ velero install --provider aws \
 ----
 
 Once Velero is installed on your cluster, check the new `velero` namespace. You
-should have a Velero deployment and a restic daemonset, e.g.:
+should have a Velero deployment and a restic daemonset, for example:
 
 [source,bash]
 ----
@@ -488,14 +486,14 @@ As restic is a daemonset, there should be one pod for each node in your
 Kubernetes cluster.
 
 == Creating backups
-Now that Velero is installed on your cluster, you should see the snapshots option in the navbar of the management console.
+Now that Velero is installed on your cluster, you should see the **Snapshots** option in the navbar of the management console.
 
 image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 
 If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
 <<troubleshooting-backups-and-restoration, troubleshooting>> section.
 
-=== Option 1 - Create a backup with kots CLI
+=== Option 1 - Create a backup with KOTS CLI
 
 To create the backup, run:
 
@@ -504,13 +502,13 @@ To create the backup, run:
 kubectl kots backup --namespace <your namespace>
 ----
 
-=== Option 2 - Create a backup with kots admin console
+=== Option 2 - Create a backup with KOTS Admin Console
 
 Select *Snapshots* from the navbar. The default selection should be *Full Snapshots*, which is recommended.
 
 image::kots-admin-full-snapshot.png[Kots Navbar]
 
-Select the *Start a snapshot* button.
+Click the *Start a snapshot* button.
 
 image::kots-admin-create-backup.png[Kots Create Snapshot]
 
@@ -518,14 +516,13 @@ image::kots-admin-create-backup.png[Kots Create Snapshot]
 
 === Option 1 - Restore a backup from a snapshot
 
-To restore from a backup stored in your S3 compatible storage, you will need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups.  When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed before-hand. When using GKE or other platforms, a cluster with just velero installed may work.  
+To restore from a backup stored in your S3 compatible storage, you will need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups. When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed beforehand. When using GKE or other platforms, a cluster with just velero installed may work.  
 
-NOTE: If this is a new cluster or if you need to re-install Velero, the installation should be done with the same credentials
-generated above.
+NOTE: If this is a new cluster or if you need to reinstall Velero, the installation should be done with the same credentials generated above.
 
-=== Option 2 - Restore a backup using the kots CLI
+=== Option 2 - Restore a backup using the KOTS CLI
 
-To restore a backup using the kots CLI, run the following to get a list of backups:
+To restore a backup using the KOTS CLI, run the following command to get a list of backups:
 
 [source,bash]
 ----
@@ -539,39 +536,36 @@ Using a backup name from the previous command, run the following to start the re
 kubectl kots restore --from-backup <backup-instance-id>
 ----
 
-=== Option 3 - Restore a backup using the kots administration console UI
+=== Option 3 - Restore a backup using the KOTS Admin Console UI
 
-As with backups, navigate to *Snapshots* in kots admin. Now you should see a list of all your backups, each with a restore icon.
+As with backups, navigate to *Snapshots* in the KOTS Admin Console. Now you should see a list of all your backups, each with a restore icon.
 Choose the backup you wish to use and select restore.
 
 image::kots-admin-restore.png[Kots Create Snapshot]
 
-IMPORTANT: The restore will create new load balancers for CircleCI's services. You will need to either update your DNS
-records or the hostname configurations in kots admin-console as a result. You may also need to consider updating the
-`nomad server endpoint` provided to your nomad clients.
+IMPORTANT: The restore will create new load balancers for CircleCI's services. You will need to either update your DNS records or the hostname configurations in KOTS Admin Console as a result. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
 
-IMPORTANT: If you are using pre-existing nomad clients, you will need to restart them before they will connect to the
-nomad-server cluster.
+IMPORTANT: If you are using pre-existing Nomad clients, you will need to restart them before they will connect to the nomad-server cluster.
 
 It should take roughly 10-15 mins for CircleCI server to be restored and operational.
 
 == Optional - Scheduling backups with kots
 
-To schedule regular backups, select *Snapshots*, and then *Settings & Schedule* from the kots administration console.
+To schedule regular backups, select *Snapshots*, and then *Settings & Schedule* from the KOTS Admin Console.
 
 image::kots-admin-scheduled-backup.png[Snapshots Selected]
 
-And here, you can find configurations related to your snapshots, including scheduling.
+And here you can find configurations related to your snapshots, including scheduling.
 
 image::kots-admin-scheduled-snapshots.png[Snapshot Settings]
 
 == Troubleshooting Backups and Restoration
 
-=== Snapshots are not available in kots admin console
+=== Snapshots are not available in KOTS Admin Console
 
-If your kots admin console does not display the snapshot option, you may try the following:
+If your KOTS Admin Console does not display the snapshot option, you may try the following:
 
-* Confirm that your version of kots supports snapshots. At this time, we recommend v1.40.0 or above:
+* Confirm that your version of KOTS supports snapshots. At this time, we recommend v1.40.0 or above:
 
 ```
 $ kubectl kots version
@@ -586,7 +580,7 @@ $ kubectl logs deployment/velero --namespace velero
 
 You may need to reinstall Velero as a result.
 
-* Confirm that snapshots are available on your license. You may reach out to our Customer Support Team to validate this.
+* Confirm that snapshots are available on your license. You may reach out to our Customer Support Team for confirmation.
 
 === Errors occur during backup or restore process
 
@@ -594,10 +588,10 @@ If you experience an error during backup or restore processes, the first place t
 Using the command above, you may find 4XX errors, which would likely be caused by issues with your storage bucket access.
 
 * Confirm that your bucket exists and is in the region you expect.
-* Then confirm that the credentials provided to Velero can be used to access the bucket.
-* You may need to run the command to install Velero again, this time with updated bucket info.
+* Confirm that the credentials provided to Velero can be used to access the bucket.
+* You may need to run the command to install Velero again, this time with updated bucket information.
 
-You may also check the status of pods in the `velero` namespace.
+You may also check the status of pods in the `velero` namespace:
 
 ```
 $ kubectl get pods --namespace velero
@@ -609,5 +603,4 @@ restic-mknws              1/1     Running   0          10m
 velero-68788b675c-dm2s7   1/1     Running   0          10m
 ```
 
-In the above example, some restic pods are pending, which means they are waiting for a node to have available CPU or
-memory resources. You may need to scale your nodes to accommodate restic in this case.
+In the above example, some restic pods are pending, which means they are waiting for a node to have available CPU or memory resources. In this case, you may need to scale your nodes to accommodate restic.
