@@ -6,9 +6,9 @@ version:
 
 suggested_links_has_experiments: true
 suggested:
-  - title: How to refresh user permissions
+  - title: アカウントのパーミッションの更新について
     isExperiment: true
-    link: アカウントのパーミッションの更新について
+    link: https://support.circleci.com/hc/ja/articles/360048210711
 ---
 = 認証
 :page-layout: classic-docs
