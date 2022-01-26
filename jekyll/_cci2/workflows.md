@@ -92,10 +92,7 @@ workflows:
 ```
 See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
-## Tips for advanced configuration
-{: #tips-for-advanced-configuration }
-
-Using workflows enables users to create much more advanced configurations over running a single set of jobs. With more customizability and control comes more room for error, however. When using workflows try to do the following:
+When using workflows try to do the following:
 
 - Move the quickest jobs up to the start of your workflows. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
@@ -104,7 +101,6 @@ Consider reading the [optimization]({{ site.baseurl }}/2.0/optimizations) and [a
 
 ### Sequential job execution example
 {: #sequential-job-execution-example }
-{:.no_toc}
 
 The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram.
 
@@ -135,7 +131,6 @@ See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/c
 
 ### Fan-out/fan-in workflow example
 {: #fan-outfan-in-workflow-example }
-{:.no_toc}
 
 The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs concurrently, and finally fans-in to run a common deploy job.
 
@@ -256,7 +251,6 @@ Consider running workflows that are resource-intensive or that generate reports 
 
 ### Nightly example
 {: #nightly-example }
-{:.no_toc}
 
 By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
@@ -288,7 +282,6 @@ In the above example, the `commit` workflow has no `triggers` key and will run o
 
 ### Specifying a valid schedule
 {: #specifying-a-valid-schedule }
-{:.no_toc}
 
 A valid `schedule` requires a `cron` key and a `filters` key.
 
@@ -327,7 +320,6 @@ The following sections provide example for using Contexts and filters to manage 
 
 ### Using job contexts to share environment variables
 {: #using-job-contexts-to-share-environment-variables }
-{:.no_toc}
 
 The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
@@ -356,7 +348,6 @@ The environment variables are defined by setting the `context` key as shown to t
 
 ### Branch-level job execution
 {: #branch-level-job-execution }
-{:.no_toc}
 
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
@@ -391,7 +382,6 @@ For a full example of workflows, see the [configuration file](https://github.com
 
 ### Executing workflows for a git tag
 {: #executing-workflows-for-a-git-tag }
-{:.no_toc}
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches)
 to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
@@ -518,7 +508,6 @@ CircleCI may not receive all of them.
 
 ### Using regular expressions to filter tags and branches
 {: #using-regular-expressions-to-filter-tags-and-branches }
-{:.no_toc}
 
 CircleCI branch and tag filters support the Java variant of regex pattern matching. When writing filters, CircleCI matches exact regular expressions.
 
@@ -528,8 +517,8 @@ Using tags for semantic versioning is a common use case. To match patch versions
 
 For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
-## Using workspaces to share data among jobs
-{: #using-workspaces-to-share-data-among-jobs }
+## Using workspaces to share data between jobs
+{: #using-workspaces-to-share-data-between-jobs }
 
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. For further information on workspaces and their configuration see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces) doc.
 
@@ -555,13 +544,11 @@ to discern what might be failing.
 
 ### Rerunning workflows fails
 {: #rerunning-workflows-fails }
-{:.no_toc}
 
 It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
 ### Workflows waiting for status in GitHub
 {: #workflows-waiting-for-status-in-github }
-{:.no_toc}
 
 If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 

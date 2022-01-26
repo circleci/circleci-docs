@@ -8,8 +8,7 @@ version:
 - Server v2.x
 ---
 
-Workflows each have an associated workspace. Workspaces are used to transfer data to downstream jobs as the workflow progresses.
-
+Workflows each have an associated `workspace`. Workspaces are used to transfer data to downstream jobs as the workflow progresses.
 
 Use workspaces to pass along data that is unique to a workflow and is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
 
