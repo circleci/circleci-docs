@@ -8,9 +8,10 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-
+suggested_links_has_experiments: true
 suggested:
   - title: Context deadline exceeded after 1 hour - Build timed out
+    isExperiment: true
     link: https://support.circleci.com/hc/en-us/articles/4410707277083-Context-deadline-exceeded-after-1-hour-Build-timed-out-Free-tier-only-
 ---
 

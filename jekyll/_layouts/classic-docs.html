@@ -47,13 +47,14 @@
         {% if page.toc != false %}
         <aside class="full-height">
           <div class='full-height-sticky'>
+
             {% if page.suggested != false %}
-            <div id="helpful-resources">
+            <div id="helpful-resources" class="{% if page.suggested_links_has_experiments %}has-experiment-links {% endif%}">
               <h5 class="helpful-heading">Helpful resources</h5>
               <div class="helpful-indent">
                 <ul class="section-nav">
                   {% for item in page.suggested %}
-                  <li class="helpful-entry helpful-h2">
+                  <li class="helpful-entry helpful-h2 {% if item.isExperiment%} experimental-link {% endif%}">
                     <a href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}
