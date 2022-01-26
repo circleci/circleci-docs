@@ -1,5 +1,5 @@
 ---
-layout: classic-docs-experimental
+layout: classic-docs
 title: "Configuring a Python Application on CircleCI"
 short-title: "Python"
 description: "Continuous integration with Python on CircleCI"
