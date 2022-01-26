@@ -9,12 +9,12 @@ describe('sidebar', () => {
     cy.visit(basepath)
   })
 
-  describe('Full screen', () => {
+  describe('Desktop', () => {
     beforeEach(() => {
       cy.viewport(1280, 720)
     })
 
-    it('should load sidebar in full screen', () => {
+    it('should load sidebar', () => {
       // A nav should exist and one should have class sidebar
       cy.get('nav').should('exist').should('have.class', 'sidebar')
 
@@ -23,11 +23,14 @@ describe('sidebar', () => {
       cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').should('have.length.greaterThan', 0)
     })
 
-    it('should close getting started and open pipelines', () => {
+    it('should close a section', () => {
       // Check defaultSectionName open then close defaultSectionName
-      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('not.have.class', 'closed').children('.list-wrap').click()
+      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').should('not.have.class', 'closed').last().click().should('not.have.class', 'closed')
+    })
+
+    it('should open a section', () => {
       // Check defaultSectionName closed then open
-      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
+      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children('.closed').last().click().should('not.have.class', 'closed')
     })
 
     it('should bring you to right url', () =>{
@@ -37,7 +40,7 @@ describe('sidebar', () => {
       cy.get(`[href="${basepath}migration-intro/"]`).should('have.class', 'active')
     })
 
-    it('should load a page open the right section in the sidebar', () =>{
+    it('should open the right section in the sidebar on page load', () =>{
       const path = `${basepath}pipelines/`
       cy.visit(`${path}`)
       cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="pipelines"]`).should('not.have.class', 'closed')
@@ -50,7 +53,7 @@ describe('sidebar', () => {
       cy.viewport(320, 568)
     })
 
-    it('should load sidebar closed in mobile', () => {
+    it('should have sidebar closed by default', () => {
       // no sidebar should be visible
       cy.get('nav').should('have.css', 'display', 'none')
 
@@ -63,7 +66,7 @@ describe('sidebar', () => {
       cy.get('[data-target="#global-nav"]').should('have.class', 'collapsed')
     })
 
-    it('should open sidebar in mobile', () => {
+    it('should open sidebar when clicking hamburger menu', () => {
       cy.get('[data-target="#global-nav"]').should('have.class', 'collapsed').click().should('not.have.class', 'collapsed')
       cy.get('nav.mobile-sidebar').should('have.class', 'mobile-sidebar').and('have.css', 'display', 'block')
     })
@@ -74,13 +77,14 @@ describe('sidebar', () => {
         cy.get('nav').should('have.class', 'sidebar').and('have.css', 'display', 'block').and('not.have.class', 'collapsed')
       })
 
-      it('should close getting started and open pipelines', () => {
-        // Check defaultSectionName closed then Open defaultSectionName
-        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').children('.list-wrap').click()
+      it('should close a section', () => {
         // Check defaultSectionName open then close defaultSectionName
-        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).should('not.have.class', 'closed').children('.list-wrap').click()
-        // Check defaultSectionName closed
-        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed')
+        cy.get('nav.mobile-sidebar').children('ul').should('not.have.class', 'closed').last().click().should('not.have.class', 'closed')
+      })
+  
+      it('should open a section', () => {
+        // Check defaultSectionName closed then open
+        cy.get('nav.mobile-sidebar').children('ul').children('.closed').last().click().should('not.have.class', 'closed')
       })
 
       it('should bring you to right url', () =>{
@@ -89,6 +93,7 @@ describe('sidebar', () => {
         // Click second element in getting started which is migration-intro
         cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).children().next().click()
         cy.url().should('include', 'migration-intro')
+        cy.get(`[href="${basepath}migration-intro/"]`).should('have.class', 'active')
       })
     })
   })
