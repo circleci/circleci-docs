@@ -51,12 +51,14 @@ Following is the commented `.circleci/config.yml` file in the demo project.
 
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2
 
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
-      - image: cimg/php:8.0.14-node # ...with this image as the primary container; this is where all `steps` will run
+      - image: cimg/php:8.0.14-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -64,7 +66,7 @@ jobs: # a collection of steps
     steps: # a set of executable commands
       - checkout # special step to check out source code to working directory
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
-      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install pecl
       - run: sudo composer self-update
       - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
@@ -119,11 +121,13 @@ In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#
 to specify a custom Docker image. We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes browser tooling.
 
 ```yaml
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2
 jobs:
   build:
     docker:
-      - image: cimg/php:8.0.14-node
+      - image: cimg/php:8.0.14-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
