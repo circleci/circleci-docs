@@ -8,6 +8,7 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
+suggested_links_has_experiments: true
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
@@ -18,6 +19,7 @@ suggested:
   - title: Conditional workflows
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
   - title: Updates to maximum duration of jobs
+    isExperiment: true
     link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
 ---
 
