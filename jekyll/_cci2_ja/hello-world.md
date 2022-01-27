@@ -24,13 +24,16 @@ This document describes how to get started with a basic build of your Linux, And
 2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
-     jobs:
-       build:
-         docker: 
-           - image: circleci/node:4.8.2 # ジョブのコマンドが実行されるプライマリ コンテナ
-         steps:
-           - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
-           - run: echo "hello world" # `echo` コマンドを実行します
+   jobs:
+     build:
+       docker:
+         - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+       steps:
+         - checkout # check out the code in the project directory
+         - run: echo "hello world" # run the `echo` command
    ```
 
 2. 変更をコミットし、プッシュします。
@@ -56,7 +59,10 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
 jobs:
   build-android:
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: cimg/android:2021.10.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
