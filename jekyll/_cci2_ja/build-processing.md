@@ -1,16 +1,16 @@
 ---
 layout: classic-docs
-title: "Pipeline Processing"
-description: "This document describes CircleCI pipelines, what they encompass, and some features available to use in your pipelines"
+title: "パイプラインの処理"
+description: "ここでは CircleCI パイプラインの詳細、およびお客様のパイプラインで使用できる機能を紹介します。"
 categories:
-  - settings
+  - 設定
 order: 1
 version:
   - クラウド
   - Server v3.x
 ---
 
-This document describes how your projects are processed using our pipelines engine and some of the features available to use in your pipelines. パイプラインは クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
+ここでは、CIrcleCI のパイプラインエンジンを使ってプロジェクトを処理する方法と、パイプラインで使用できる機能の一部について説明します。 パイプラインは、クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
 
 * 目次
 {:toc}
@@ -18,7 +18,7 @@ This document describes how your projects are processed using our pipelines engi
 ## はじめに
 {: #what-are-pipelines }
 
-CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
+CircleCI パイプラインは最高レベルの作業単位であり、プロジェクトのすべての`.circleci/config.yml` が含まれます。 Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
 
 Pipelines are not available on installations of CircleCI server v2.x.
 
