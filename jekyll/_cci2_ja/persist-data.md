@@ -59,7 +59,8 @@ version:
 
 以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
 
-**注意:** お客様の全体的な**ネットワーク転送量**は、課金対象の使用量を表すものではありません。 特定のアクションによるネットワーク使用が、結果として課金対象となります。 これらのアクションについて、以下に説明します。
+**Note:** Your overall **Network Transfer** amount is not representative of your billable usage. 特定のアクションによるネットワーク使用が、結果として課金対象となります。 これらのアクションについて、以下に説明します。
+{: class="alert alert-info" }
 
 ### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
