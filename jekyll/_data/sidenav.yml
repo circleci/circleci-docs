@@ -557,17 +557,17 @@ en:
 
 - name: CircleCI Plans
   icon: icons/sidebar/logo_black.svg
-    children:
-      - name: Plan Overview
-        link: 2.0/plan-overview
-      - name: Free
-        link: 2.0/plan-free
-      - name: Performance
-        link: 2.0/plan-performance
-      - name: Scale
-        link: 2.0/plan-scale
-      - name: Server
-        link: 2.0/plan-server
+  children:
+    - name: Plan Overview
+      link: 2.0/plan-overview
+    - name: Free
+      link: 2.0/plan-free
+    - name: Performance
+      link: 2.0/plan-performance
+    - name: Scale
+      link: 2.0/plan-scale
+    - name: Server
+      link: 2.0/plan-server
 
 ja:
 - name: Getting Started
