@@ -1,96 +1,97 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Customization and Configuration
+= カスタマイズおよび設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This documentation summarizes the key files and variables that impact CircleCI server behavior, and configuration options for your server installation.
+:page-description: ここでは CircleCI Server の動作に影響を与える重要なファイルや変数について、また設定オプションについて概説します。
 :icons: font
 :toc: macro
 :toc-title:
 
-The following sections summarize the key files and variables that impact CircleCI server behavior, and configuration options for your server installation.
+下記では CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションに関する概説します。
 
 toc::[]
 
-== Notable Files & Folders
+== 注意が必要なファイルとフォルダー
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
 | Need
-| Path
-| More info
+| パス
+| 詳細情報
 
-| General Config
+| 全般設定
 | `/etc/circle-installation-customizations`
-| See table below for values
+| 下記の値の表を参照。
 
-| JVM Heap Sizes
+| JVM ヒープサイズ
 | `/etc/circleconfig/XXXX/customizations`  Supports: frontend, test_results
-| Adjust heap size for individual containers with `JVM_HEAP_SIZE`
+| `JVM_HEAP_SIZE` を使って個々のコンテナのヒープサイズを設定。
 
-| Custom CA Certs
+| カスタム CA 証明書
 | `/usr/local/share/ca-certificates/`
 |
 
-| Container Customizations
+| コンテナのカスタマイズ
 | `/etc/circleconfig/XXX/customizations`
 | Used lots of places in replicated
 
 | `/etc/hosts`
 | `/etc/hosts`
-| Respected by several containers including frontend, copied to container's /etc/hosts
+| フロントエンドを含む複数のコンテナが参照し、コンテナの /etc/hostsにコピー。
 
 | `/etc/environment`
 | `/etc/environment`
-| Respected by all containers
+| すべてのコンテナが参照。
 |===
 
-=== Properties of `/etc/circle-installation-customizations`
+=== `/etc/circle-installation-customizations` のプロパティー
 
-NOTE: Every property should be in the format `export ENV_VAR="value"`
+NOTE: すべてのプロパティーが`export ENV_VAR="value"`の形式である必要があります。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Property
-| Impact
-| More info
+| プロパティー
+| 影響
+| 詳細情報
 
 | CIRCLE_URL
-| Override the scheme and host that CircleCI uses
+| CircleCI が使用するスキームとホストをオーバーライドします。
 |
 
 | JVM_HEAP_SIZE
-| Set JVM heap size for *all* containers reading this property
-| Use container specific settings when possible (see files above)
+| このプロパティーを読み取る*すべての*コンテナの JVM ヒープサイズを設定します。
+| 可能であればコンテナ固有の設定を使用 (上記ファイルを参照)
 |===
 
-=== Other Properties and Env Vars
+=== その他のプロパティーと環境変数
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Property
-| Impact
-| More info
+| プロパティー
+
+| 影響
+| 詳細情報
 
 | HTTP_PROXY, NO_PROXY
-| Proxy for replicated and other services outside CircleCI containers to use
+| Replicated  と使用する CircleCI コンテナ外その他のサービスのプロキシ
 |
 |===
 
 <<<
 
-== Service Configuration Overrides
-This section describes the configuration interface for overriding services in CircleCI server.
+== サービス設定のオーバーライド
+ここでは CircleCI サーバーのサービスをオーバーライドするための設定インターフェイスについて説明します。
 
-WARNING: Customizing your configuration can have potentially damaging consequences, so we recommend contacting support@circleci.com for guidance before making any changes.
+WARNING: 設定のカスタマイズにより悪影響を及ぼす可能性があります。変更を行う前に、 mailto:support@circleci.com[support@circleci.com ]にお問い合わせください。
 
-Configuration is done by exporting environment variables in files located on the Services machine.
+設定は、Services マシン上のファイルに環境変数をエキスポートすることで行われます。
 
 Consider the file “customizations” created at the following path /etc/circleconfig/workflows-conductor:
 
