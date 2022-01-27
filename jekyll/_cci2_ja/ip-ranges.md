@@ -42,7 +42,7 @@ IP アドレスに基づくアクセス制御は、以下のようなユース �
 
 これまで、静的 IP アドレスを構成および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能であれば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
 
-IP ranges only routes traffic through one of the defined IP address ranges _during job execution_.  Any step that occurs before the job has started to execute will not have its traffic routed thorugh one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
+IP ranges only routes traffic through one of the defined IP address ranges _during job execution_. Any step that occurs before the job has started to execute will not have its traffic routed through one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
 
 ## IP アドレスの範囲機能を使用した設定ファイルの例
 {: #exampleconfiguration }
@@ -143,7 +143,7 @@ dig all.knownips.circleci.com A +short
 ## 使用料金
 {: #pricing }
 
-Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。  ジョブの実行を開始する前に Docker イメージをコンテナにプルするために使用されるデータは、IP 範囲が有効なジョブでは_ 使用コストが発生しません _。
 
 Specific rates and details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
