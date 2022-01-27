@@ -3,7 +3,7 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= CircleCI Plan Overview
+= CircleCI Server Plan
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Server plan available to developers.
