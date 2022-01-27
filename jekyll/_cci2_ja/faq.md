@@ -42,7 +42,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 
 はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/2.0/circleci-images/)をご覧ください。
 
-`machine` Executor に関しては、[利用可能なマシンイメージ](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images)のリストをご覧ください。
+`machine` Executor に関しては、[利用可能なマシンイメージ]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-machine-images)のリストをご覧ください。
 
 実行環境やイメージに関する概要は、[Executor とイメージに関するガイド]({{site.baseurl}}/2.0/executor-intro/)をご覧ください。
 
