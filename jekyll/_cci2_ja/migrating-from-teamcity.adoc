@@ -348,24 +348,24 @@ workflows:
 jobs:
   Gradle:
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI 環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout # ソースコードをチェックアウトします。
+      - checkout # Checks out source code
       - run:
           name: Clean and Build
           command: ./gradlew clean build
 
   Maven:
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI 環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout # ソースコードをチェックアウトします。
+      - checkout # Checks out source code
       - run:
           name: Clean and Package
           command: mvn clean package
@@ -429,24 +429,24 @@ workflows:
 jobs:
   Gradle:
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI 環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout # ソースコードをチェックアウトします。
+      - checkout # Checks out source code
       - run:
           name: Clean and Build
           command: ./gradlew clean build
 
   Maven:
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI 環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout # ソースコードをチェックアウトします。
+      - checkout # Checks out source code
       - run:
           name: Clean and Package
           command: mvn clean package
