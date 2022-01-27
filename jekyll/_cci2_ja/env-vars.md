@@ -102,22 +102,22 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 ```yaml
 version: 2.1
 
-jobs: # 実行時の基本的な作業単位を定義
+jobs: # basic units of work in a run
   build:
-    docker: #  Docker Executor を使用
-      # CircleCI の Node.js イメージはこちらで確認できます: https://hub.docker.com/r/circleci/node/
-      - image: circleci/node:10.0-browsers
+    docker: # use the Docker executor
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキストまたはプロジェクトの画面で設定した環境変数を参照
-    steps: # `build` ジョブを構成するステップを定義
-      - checkout # 作業用ディレクトリにソースコードをチェックアウト
-      # 環境変数をセットアップするステップを実行
-      # MY_ENV_VAR を $BASH_ENV にリダイレクト
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      # Run a step to setup an environment variable
+      # Redirect MY_ENV_VAR into $BASH_ENV
       - run:
           name: "Setup custom environment variables"
           command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
-      - run: # 現在のブランチ名を print
+      - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       # 上記のステップと同じことをするステップを実行
@@ -184,18 +184,16 @@ jobs:
         type: string
         default: my_repo
     docker:
-
-      - image: circleci/go:1.15.0
+      - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
 workflows:
   my_workflow:
     jobs:
-
       - build:
           org_name: my_organization
           repo_name: project1
@@ -338,22 +336,20 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-
       - build:
-          context: my_context_name # MY_ENV_VAR という名前の環境変数を持つ
+          context: my_context_name # has an env var called MY_ENV_VAR
 
 jobs:
   build:
     docker:
-
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: 
-          name: "コンテキストに含まれる環境変数を出力"
+      - run:
+          name: "echo an env var that is part of our context"
           command: |
             echo $MY_ENV_VAR
 ```
@@ -377,23 +373,21 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-
       - build
 
 jobs:
   build:
     docker:
-
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: 
-          name: "プロジェクトに含まれる環境変数を出力"
+      - run:
+          name: "echo an env var that is part of our project"
           command: |
-            echo $MY_ENV_VAR # この環境変数はプロジェクト内で設定が必要
+            echo $MY_ENV_VAR # this env var must be set within the project
 ```
 
 作成された環境変数は、アプリケーションに表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
