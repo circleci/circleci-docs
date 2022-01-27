@@ -1,17 +1,17 @@
 ---
 layout: classic-docs
-title: "Scheduled Pipelines"
-short-title: "Scheduled Pipelines"
-description: "Learn how to schedule pipelines for your CircleCI projects."
+title: "パイプラインのスケジュール実行"
+short-title: "パイプラインのスケジュール実行"
+description: "CircleCI プロジェクトでパイプラインをスケジュール実行する方法"
 order: 20
 version:
   - クラウド
 suggested:
   -
-    title: Manual job approval and scheduled workflow runs
+    title: 手動でのジョブの承認およびワークフローのスケジュール実行
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
   -
-    title: How to trigger a workflow
+    title: ワークフローをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   -
     title: 条件付きワークフロー
@@ -24,35 +24,35 @@ suggested:
 ## はじめに
 {: #overview }
 
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule.
+パイプラインのスケジュール実行により、スケージュールに沿って定期的にパイプラインをトリガーすることができます。
 
-Since the scheduled run is based on pipelines, scheduled pipelines have all the features that come with using pipelines:
+スケジュール実行はパイプラインに基づいているため、パイプラインのスケジュール実行にはパイプラインの使用における下記の機能がすべて備わっています。
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context).
-- Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
-- Modify the schedule without having to edit `.circleci/config.yml`.
-- Take advantage of [auto-cancelling]({{site.baseurl}}/2.0/skip-build/#auto-cancelling).
-- Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
-- Manage common schedules, e.g. across workflows.
+- パイプラインに関連付けるユーザーの管理。これにより、[ 制限付きコンテキスト]({{site.baseurl}}/2.0/contexts/#restricting-a-context)の使用が可能になります。
+- セットアップ ワークフロー経由[のダイナミックコンフィグ]({{site.baseurl}}/2.0/dynamic-config/)の使用。
+- `.circleci/config.yml` の編集が不要なスケジュール変更。
+- [自動キャンセル機能]({{site.baseurl}}/2.0/skip-build/#auto-cancelling)の利用。
+- スケジュールに関連付ける[パイプライン パラメーター]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)の指定。
+- ワークフロー間などで共通するスケジュールの管理。
 
-Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
+パイプラインのスケジュール実行は、API を使って、または CircleCI アプリケーションのプロジェクト設定から設定します。
 
-## Get started with scheduled pipelines in CircleCI
+## パイプラインのスケジュール実行機能の使い方
 {: #get-started }
 
-You have the option of setting up scheduled pipelines from scratch, or you can migrate existing scheduled workflows to scheduled pipelines.
+パイプラインのスケジュール実行には、最初から設定する、またはスケジュール実行化した既存のワークフローをパイプラインのスケジュール実行に移行するという二つの方法があります。
 
-### Start from scratch
+### 最初から設定する
 {: #start-from-scratch }
 
-#### Use the API
+#### API を使用する
 {: #api }
 {:.no_toc}
 
-If your project has no scheduled workflows and you would like to try out scheduled pipelines:
+プロジェクトにスケジュール実行化したワークフローがなく、パプラインのスケジュール実行を試してみたい場合：
 
-1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/2.0/managing-api-tokens/).
-2. Create a new schedule using the API. 例えば下記のようにします。
+1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/2.0/managing-api-tokens/)に沿って新しいトークンを作成します。
+2. API を使って新しいスケジュールを作成します。 例えば下記のようにします。
 
 ```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
@@ -74,32 +74,32 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-For additional information, refer to the **Schedule** section under the [API v2 docs](https://circleci.com/docs/api/v2/).
+詳細は、[API v2 に関するドキュメント](https://circleci.com/docs/api/v2/)の**スケジュール**のセクションを参照してください。
 
-#### Use project settings
+#### プロジェクト設定を使う
 {: #project-settings }
 {:.no_toc}
 
-1. In the CircleCI application, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project. You can also find the **Project Settings** button on each project's landing page.
-2. Navigate to **Triggers**.
-3. To create a new schedule, click **Add Scheduled Trigger**.
-4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor (i.e. user associated with the schedule), then save the trigger.
+1. CircleCI アプリケーションで、サイドバーにある **Projects** に移動し、お客様のプロジェクトの横の省略記号 (...) をクリックします。  **Project Settings** ボタンは各プロジェクトのランディングページにもあります。
+2. **Triggers** に移動します。
+3. 新しいスケジュールを作成するには、**Add Scheduled Trigger** をクリックします。
+4. 新しいスケジュールの名前、タイムテーブル、パイプラインのパラメーター、実行ユーザー (スケジュールに関連付けられているユーザー）を定義し、トリガーを保存します。
 
-### Migrate scheduled workflows to scheduled pipelines
+### スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行
 {: #migrate-scheduled-workflows }
 
-The current method for scheduling work on your projects is to use the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
+プロジェクトの作業をスケジュール化するには、現在はワークフローのスケジュール実行機能を利用しています。 しかしこの機能には制限があるため、スケジュール実行化したワークフローをパイプラインのスケジュール実行機能に移行することを検討してください。 ワークフローのスケジュール実行には以下のような制限があります。
 
-* Cannot control the actor, so scheduled workflows can't use restricted contexts.
-* Cannot control the interaction with auto-cancelling of pipelines.
-* Cannot use scheduled workflows together with dynamic config without complex workarounds.
-* Cannot change or cancel scheduled workflows on a branch without triggering a pipeline.
-* Cannot kick off test runs for scheduled workflows without changing the schedule.
-* Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks.
+* 実行ユーザーを制御できないため、ワークフローのスケジュール実行では制限されたコンテキストを使用できません。
+* パイプラインの自動キャンセル操作を制御することができません。
+* 複雑な回避策がないと、ワークフローのスケジュール実行機能をダイナミックコンフィグで使用することはできません。
+* パイプラインをトリガーしないと、1つのブランチ上のスケジュール実行化されたワークフローの変更やキャンセルができません。
+* スケジュールを変更しないと、スケジュール実行化されたワークフローのテスト実行を開始できません。
+* ワークフローを Webhook で実行する場合は、 PR ブランチからのワークフローのスケジュール実行を制限できません。
 
-To migrate from scheduled workflows to scheduled pipelines, follow the steps below:
+スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行するには 次の手順に従います。
 
-1. Find the scheduled trigger in your project's `.circleci/config.yml` For example, it might look like:
+1. プロジェクトの`.circleci/config.yml`で、以下の例のようなスケジュールされたトリガーを見つけます。
 
     ```yaml
     daily-run-workflow:
@@ -115,9 +115,9 @@ To migrate from scheduled workflows to scheduled pipelines, follow the steps bel
         - test
         - build
     ```
-2. Interpret the frequency your trigger needs to run from the cron expression.
-3. Use the same step from the [Start from scratch](#start-from-scratch) section above to create the schedule via the API or project settings.
-4. In the config file, remove the `triggers` section, so that it resembles a standard workflow.
+2. cron 式からトリガーを実行する頻度を解釈します。
+3. API またはプロジェクト設定を使用してスケジュールを作成するには、上記の[ 最初から設定する](#start-from-scratch)と同じ手順で行います。
+4. 設定ファイルで、 `triggers`の部分を削除して通常のワークフローと同じようにします。
     ```yaml
     daily-run-workflow:
       jobs:
@@ -125,13 +125,13 @@ To migrate from scheduled workflows to scheduled pipelines, follow the steps bel
         - build
     ```
 
-#### Add workflows filtering
+#### ワークフローのフィルター機能の追加
 {: #workflows-filtering }
 {:.no_toc}
 
-As a scheduled pipeline is essentially a triggered pipeline, it will run every workflow in the config.
+スケジュール実行化されたパイプラインは基本的にトリガーされたパイプラインであるため、設定内のすべてのワークフローが実行されます。
 
-One way to implement workflows filtering is by using the [pipeline values]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values). 例えば下記のようにします。
+[パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)を使うことによりワークフローのフィルター機能を開始するすることも可能です。 例えば下記のようにします。
 
 ```yaml
 daily-run-workflow:
@@ -144,11 +144,11 @@ daily-run-workflow:
     - build
 ```
 
-Note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
+上記の例では、`when` の下の２番目の `equal` は厳密には必要ではありません。 `pipeline.schedule.name` は、パイプラインがスケジュールによってトリガーされたときに使用可能なパイプライン値です。
 
-You may also add filtering for workflows that should NOT run when a schedule triggers:
+スケジュールがトリガーされる時に実行しないワークフローのフィルタリングを追加することもできます。
 
-**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
+{% raw %}
 ```yaml
 daily-run-workflow:
   when:
@@ -167,25 +167,25 @@ other-workflow:
    - build
    - deploy
 ```
-`run` ステップを使用して、テスト スイートを実行します。
+{% endraw %}
 
 ## FAQ
 {: #faq }
 
-**Q:** How do I find the schedules that I have created?
+**質問:** 作成したスケジュールはどうやって探せば良いですか？
 
-**A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
+**回答: **スケジュール実行化されたパイプラインは CircleCI に直接保存されるため、スケジュール毎に関連付けされた UUID があります。 作成したスケジュールは、プロジェクト設定の**トリガー**のページで閲覧できます。 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
 
 ```shell
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```
 
-`project-slug` takes the form of `vcs-slug/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
+`project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-slug/org-name/repo-name` の形式を取ります。
 
-**Q:** Why is my scheduled pipeline not running?
+**質問:**スケジュールしたパイプラインが実行されないのはなぜですか？
 
-**A:** There could be a few possible reasons:
-* Is the actor who is set for the scheduled pipelines still part of the organization?
-* Is the branch set for the schedule deleted?
-* Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
+**回答: 考えられる理由が 2つあり得ます。</p>
+* スケジュール実行化されたパイプラインに設定されている実行ユーザーは今も組織の一員ですか？
+* スケジュールに設定されたブランチが削除されていませんか？
+* ご自身の GitHub 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効していると GiHub へのリクエストが失敗します。
