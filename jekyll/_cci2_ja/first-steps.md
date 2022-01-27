@@ -10,36 +10,36 @@ version:
   - Cloud
 ---
 
-To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/){:target="_blank"} page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code later in the process.
+CircleCI で最初のビルドを実行するには、[登録](https://circleci.com/signup/){:target="_blank"}ページに移動してください。 GitHub または Bitbucket アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
 
-## Sign up with GitHub or BitBucket
+## GitHub または Bitbucket のアカウントでの登録
 {: #vcs-signup }
 
-1. **[Sign Up with GitHub (GitHub アカウントで登録)]** または **[Sign Up with Bitbucket (Bitbucket アカウントで登録)]** のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。 **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. [Sign Up (登録)]ボタンの横にあるドロップダウンメニューを使ってリストから[Public Repos Only (パブリックレポジトリのみ)]を選択します。
+1. **GitHub で登録** または **Bitbucket で登録** のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。 **注:** GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 [Sign Up (登録)]ボタンの横にあるドロップダウンメニューを使ってリストから[Public Repos Only (パブリックレポジトリのみ)]を選択します。
 
 2. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインします。
 
 3. [Authorize Application (アプリケーションの認証)] または同等のボタンをクリックします。 CircleCI のパイプライン ダッシュボードが表示されます。
 
-4. Use the Projects page of the CircleCI app to start building your project code.
+4. CircleCI アプリケーションの Project ページから、プロジェクトコードのビルドを開始します。
 
-## Sign up with email
+## メールアドレスでの登録
 {: #email-signup }
 
-1. Click **Sign Up with Email**.
+1. **メールで登録**をクリックします。
 
-2. Enter your email address, and then set a secure password for your CircleCI account. A verification email is sent to the email address provided.
+2. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます。
 
-3. Select the options that best describe you and your engineering organization.
+3. お客様とお客様のエンジニアリング組織に最も当てはまるオプションを選択してください。
 
-4. Connect to your code, or explore some example projects within the CircleCI app if you don't want to connect to your code at this time.
+4. コードに接続します。今はコードに接続しない場合は、CircleCI アプリケーション内のサンプルプロジェクトを参照してください。
 
-    - Connect to your GitHub or Bitbucket account to build and deploy your projects on CircleCI. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインします。
-    - Explore the app using a popular open source project building on CircleCI ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react)), or one of our own sample projects: a [sample JavaScript app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/), and a [sample Python app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/). You'll be able to start exploring features such as [pipelines]({{ site.baseurl }}/2.0/pipelines/) and [workflows]({{ site.baseurl }}). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your GitHub or Bitbucket accounts.
+    - GitHub または Bitbucket アカウントに接続し、 CircleCI 上でプロジェクトをビルドし、デプロイします。 GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインをクリックします。
+    - CircleCI 上の一般的なオープンソースプロジェクトビルドを使って([React  by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Pyton サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) のいずれかを使用して、CircleCI アプリケーションをお試しください。 [パイプライン]({{ site.baseurl }}/2.0/pipelines/)や[ワークフロー]({{ site.baseurl }}) などの機能をご覧いただけます。 [Dashboard (ダッシュボード)] 、 [Projects (プロジェクト)] 、 [Organization Settings (組織の設定)] 、および [Plan (プラン)] のページは、 GitHub アカウントまたは Bitbucket アカウントを接続するまで使用できません。
 
 
 ## 次のステップ
 {: #next-steps }
 
-- Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) page to learn the basics of setting up projects, switching orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your execution environment and automates your tests.
-- Read the [Concepts]({{ site.baseurl }}/2.0/concepts/) page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.
+- 「[Hello World]({{ site.baseurl }}/2.0/hello-world/)」を参照し、プロジェクトの基礎、組織の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
+- [コンセプト]({{ site.baseurl }}/2.0/concepts/)のページでパイプライン、Executor、イメージ、ワークフロー、ジョブなどの CircleCI の基本的なコンセプトの概要をご確認ください。
