@@ -1,4 +1,4 @@
-.row, .control, .treatment, .loading-deferred {
+.control, .treatment, .loading-deferred {
     display: none;
 
     a.no-external-icon.col-sm-12 {
@@ -21,30 +21,30 @@
 }
 
 .card {
-    img{
+    img {
         margin: 15px 0 0 0;
     }
 
     h3 {
         line-height: 31.2px;
+
+        & + p {
+            margin-bottom: 4px;
+            line-height: 24px;
+
+            & + p {
+                margin-bottom: 16px;
+
+                strong {
+                    font-weight: 500;
+                }
+            }
+        }
     }
 
     h1, h2, h3, h4, h5, h6 {
         margin-top: 12px;
         margin-bottom: 4px;
-    }
-
-    h3 + p {
-        margin-bottom: 4px;
-        line-height: 24px;
-    }
-
-    h3 + p + p {
-        margin-bottom: 16px;
-
-        strong {
-            font-weight: 500;
-        }
     }
 }
 
@@ -144,7 +144,7 @@
     }
 
     @media(max-width: $screen-sm) {
-        flex-direction: column; 
+        flex-direction: column;
 
         .card {
             width: 100%;

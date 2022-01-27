@@ -26,6 +26,8 @@ $(() => {
   services.instantsearch.init();
   services.highlightjsBadge.init();
   services.progressbar.init();
+  services.sectionShareButton.init();
+  services.lang.init();
 
   // Boolean whether or not URL is in Guided Tour experiment
   const isGatedPath =
