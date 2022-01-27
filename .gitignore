@@ -33,6 +33,3 @@ vendor
 jekyll/_config_override.yml
 markdownlint-results.json
 .tool-versions
-
-# cypress videos
-cypress/videos/*

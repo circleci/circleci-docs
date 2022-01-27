@@ -78,7 +78,7 @@ describe('sidebar', () => {
       cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="configuration"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}configuration-reference/"]`).should('have.class', 'active')
     })
 
-    it('should bring you to right url for hompage', () =>{
+    it('should bring you to right url for homepage', () =>{
       // start where defaultSectionName is closed
       cy.visit(basepath + 'configuration-reference')
       cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
