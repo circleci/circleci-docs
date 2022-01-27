@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "パイプラインの処理"
-description: "ここでは CircleCI パイプラインの詳細、およびお客様のパイプラインで使用できる機能を紹介します。"
+description: "ここでは CircleCI パイプラインの詳細およびパイプラインで使用できる機能を紹介します。"
 categories:
   - 設定
 order: 1
@@ -10,7 +10,7 @@ version:
   - Server v3.x
 ---
 
-ここでは、CIrcleCI のパイプラインエンジンを使ってプロジェクトを処理する方法と、パイプラインで使用できる機能の一部について説明します。 パイプラインは、クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
+ここでは、CircleCI のパイプラインエンジンを使ってプロジェクトを処理する方法と、パイプラインで使用できる機能の一部について説明します。 パイプラインは、クラウド版 および オンプレミス版 CircleCI Server でご利用いただけます。
 
 * 目次
 {:toc}
@@ -18,26 +18,26 @@ version:
 ## はじめに
 {: #what-are-pipelines }
 
-CircleCI パイプラインは最高レベルの作業単位であり、プロジェクトのすべての`.circleci/config.yml` が含まれます。 Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
+CircleCI パイプラインは、プロジェクトのすべての `.circleci/config.yml` ファイルを含む最高レベルの作業単位です。 パイプラインには、ジョブを管理するワークフローが含まれます。 固定の直線的なライフサイクルがあり、特定のユーザーに関連付けられています。 パイプラインは、変更が CircleCI 設定ファイルを含むプロジェクトにプッシュされた際にトリガーされますが、 CircleCI アプリケーションから又は API を使用して手動でスケジュールを設定したりトリガーすることもできます。
 
-Pipelines are not available on installations of CircleCI server v2.x.
+ハイプラインは CircleCI Server v2.x では使用できません。
 
-The following features are available for use in your pipelines:
+パイプラインでは以下の機能を利用できます。
 
 {% include snippets/pipelines-benefits.adoc %}
 
 ## トラブルシューティング
 {: #transitioning-to-pipelines }
 
-When migrating from a server v2.x to a v3.x installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v3.x installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
+Server v2.x からv3 に移行する場合、パイプラインを導入する前にプロジェクトの設定を行います。 Server v3.x では、パイプラインが自動的に有効化されるため、プロジェクトの設定 (` .circleci/_config.yml`) を` version: 2.1` に変更するだけで、上記で述べたすべての機能にアクセスすることができます。
 
-### 2.0 構成でのパイプライン
+### 2.0 設定でのパイプライン
 {: #pipelines-with-20-configuration }
 {:.no_toc}
 
-When using CircleCI cloud or server v3.x the CircleCI pipelines engine is automatically enabled. If, for whatever reason, you continue to use a 2.0 config, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility.
+クラウド版や Server v3.x をご使用の場合は、CircleCI パイプラインエンジンは自動的に有効化されます。 何らかの理由により、2.0 の設定の使用を継続する場合、CircleCI では `CIRCLE_COMPARE_URL` 環境変数がすべてのジョブに挿入され、下位互換性が確保されます。
 
-This environment variable is generated in a different way compared to the version available in legacy jobs, and is not always available – it is not injected when there is no meaningful previous revision, for example, on the first push of commits to an empty repository, or when a new branch is created/pushed without any additional commits.
+この環境変数は、従来のジョブで使用可能な環境変数とは異なる方法で生成され、いつでも使用できるわけではありません。たとえば、空のリポジトリへのコミットを初めてプッシュした場合や、追加のコミットなしに新しいブランチが作成/プッシュされた場合など、以前のリビジョンが存在しない場合は挿入されません。
 
 ## 関連項目
 {: #see-also }
