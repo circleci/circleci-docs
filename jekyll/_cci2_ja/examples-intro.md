@@ -27,7 +27,7 @@ jobs:
     working_directory: ~/mern-starter
     # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: cimg/node:17.3.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -79,7 +79,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: cimg/android:2021.10.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -90,7 +90,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
           name: 依存関係のダウンロード
