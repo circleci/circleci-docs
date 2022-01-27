@@ -54,8 +54,8 @@
               <div class="helpful-indent">
                 <ul class="section-nav">
                   {% for item in page.suggested %}
-                  <li class="helpful-entry helpful-h2 {% if item.isExperiment%} experimental-link {% endif%}">
-                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+                  <li class="helpful-entry helpful-h2">
+                    <a class="{% if item.isExperiment %} experimental-link {% endif %}" href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}
                 </ul>

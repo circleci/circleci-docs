@@ -17,7 +17,7 @@ function trackExperimentalKnowledgeBaseLinks() {
     window.AnalyticsClient.trackAction(
       'docs-experimental-knowledgebase-link-clicked',
       {
-        link: $(this).children('a').first().attr('href'),
+        link: $(this).attr('href'),
         title: $(this).text(),
         location: window.location.href,
       },
