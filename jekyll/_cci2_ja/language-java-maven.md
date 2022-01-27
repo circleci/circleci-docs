@@ -52,7 +52,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -74,7 +74,7 @@ version: 2.0
 jobs:
   test:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -84,7 +84,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -103,7 +103,7 @@ workflows:
             - build
 ```
 
-### Caching dependencies
+### 依存関係のキャッシュ
 {: #caching-dependencies }
 
 The following code sample details the use of **caching**.
@@ -115,7 +115,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: ccimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -148,7 +148,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -162,7 +162,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -197,7 +197,7 @@ jobs:
   test:
     parallelism: 2 # parallel containers to split the tests among
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -216,7 +216,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -257,7 +257,7 @@ version: 2.0
 jobs:
   test:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -292,7 +292,7 @@ jobs:
   test:
     parallelism: 2
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -319,7 +319,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:stretch
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -351,7 +351,7 @@ workflows:
 ```
 {% endraw %}
 
-このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 Nice! これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を構成できました。
+このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 完了です。 これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を構成できました。
 
 ## 設定ファイルの詳細
 {: #see-also }
