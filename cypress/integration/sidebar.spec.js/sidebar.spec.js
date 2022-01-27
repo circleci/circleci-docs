@@ -1,12 +1,47 @@
 /// <reference types="cypress" />
+YAML = require('yamljs')
+const slugify = require('slugify')
 
 describe('sidebar', () => {
   // Based on sidebar.js
   const defaultSectionName = 'getting-started';
   const basepath = '/docs/2.0/'
   beforeEach(() => {
-    // Takes to starting url which is baseURL
     cy.visit(basepath)
+  })
+
+  describe('Not screen size dependant', () => {
+    it('should go through sidebar yml to see if all links exist in EN then JA', () => {
+      cy.readFile('./jekyll/_data/sidenav.yml').then(function (yamlString) {
+        const sidenav = YAML.parse(yamlString);
+        for(let key of Object.keys(sidenav)) {
+          cy.get('#globe-lang-btn').click() 
+          cy.get(`#globalNavLang-${key}`).click() 
+
+          for(let parent of sidenav[key]){
+            for(let child of parent.children){
+              if(child.children) {
+                for (let subchild of child.children) {
+                  if(subchild.link) {
+                    cy.get(`[href="/docs/${subchild.link}"]`).should('exist')
+                  }
+                }
+              }
+              if(child.link) {
+                cy.get(`[href="/docs/${child.link}"]`).should('exist')
+              }
+            }
+            
+            // slug is needed because data section is parent.name | slugify
+            let slug = slugify(parent.name, {
+              replacement: '-',  // replace spaces with replacement character, defaults to `-`
+              lower: true,      // convert to lower case, defaults to `false`
+            })
+            cy.get(`[data-section="${slug}"]`).should('exist')
+          }
+        }
+      })
+    })
   })
 
   describe('Desktop', () => {
@@ -33,18 +68,25 @@ describe('sidebar', () => {
       cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children('.closed').last().click().should('not.have.class', 'closed')
     })
 
-    it('should bring you to right url', () =>{
-      // Click second element in getting started which is migration-intro
-      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).children().next().click()
-      cy.url().should('include', 'migration-intro')
-      cy.get(`[href="${basepath}migration-intro/"]`).should('have.class', 'active')
+    it('should bring you to right url for configuration reference', () =>{
+      // start where configuration is closed
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="configuration"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="configuration"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}configuration-reference/"]`).click()
+      // Navigate to configuration-reference now `configuration` is open and configuration-reference is active 
+      cy.url().should('include', 'configuration-reference')
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="configuration"]`).should('not.have.class', 'closed')
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="configuration"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}configuration-reference/"]`).should('have.class', 'active')
     })
 
-    it('should open the right section in the sidebar on page load', () =>{
-      const path = `${basepath}pipelines/`
-      cy.visit(`${path}`)
-      cy.get('nav.sidebar').children('.sidebar-item-group').children('ul').children(`[data-section="pipelines"]`).should('not.have.class', 'closed')
-      cy.get(`[href="${path}"]`).should('have.class', 'active')
+    it('should bring you to right url for hompage', () =>{
+      // start where defaultSectionName is closed
+      cy.visit(basepath + 'configuration-reference')
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}"]`).click()
+      // Navigate to homepage now defaultSectionName is open and defaultSectionName is active 
+      cy.url().should('equal', Cypress.config().baseUrl + basepath)
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).should('not.have.class', 'closed')
+      cy.get('nav.sidebar div.sidebar-item-group').children('ul').children(`[data-section="${defaultSectionName}"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}"]`).should('have.class', 'active')
     })
   })
 
@@ -87,13 +129,16 @@ describe('sidebar', () => {
         cy.get('nav.mobile-sidebar').children('ul').children('.closed').last().click().should('not.have.class', 'closed')
       })
 
-      it('should bring you to right url', () =>{
-        // Open getting started
-        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').children('.list-wrap').click()
-        // Click second element in getting started which is migration-intro
-        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).children().next().click()
-        cy.url().should('include', 'migration-intro')
-        cy.get(`[href="${basepath}migration-intro/"]`).should('have.class', 'active')
+      it('should bring you to right url for configuration reference', () =>{
+        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="reference"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
+        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="reference"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}configuration-reference/"]`).click()
+        cy.url().should('include', 'configuration-reference')
+      })
+
+      it('should bring you to right url for homepage', () =>{
+        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).should('have.class', 'closed').click().should('not.have.class', 'closed')
+        cy.get('nav.mobile-sidebar').children('ul').children(`[data-section="${defaultSectionName}"]`).children('ul.subnav').children('ul').children('li.subnav-item').children(`[href="${basepath}"]`).click()
+        cy.url().should('equal', Cypress.config().baseUrl + basepath)
       })
     })
   })

@@ -1,3 +1,4 @@
 {
-  "baseUrl": "https://ui.circleci.com"
+  "baseUrl": "https://ui.circleci.com",
+  "video": false
 }

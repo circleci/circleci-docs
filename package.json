@@ -75,11 +75,13 @@
     "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
     "serve": "^13.0.2",
+    "slugify": "^1.6.5",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.2.5",
     "uglifyjs-webpack-plugin": "1.1.2",
     "wait-on": "^6.0.0",
     "webpack": "5.59.0",
-    "webpack-cli": "4.9.1"
+    "webpack-cli": "4.9.1",
+    "yamljs": "^0.3.0"
   }
 }
