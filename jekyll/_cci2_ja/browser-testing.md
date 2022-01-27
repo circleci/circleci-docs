@@ -178,13 +178,13 @@ CircleCI 上で HTTP サーバーを実行するテストを行う場合、ロ�
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-2. コマンドにポート転送を追加するには、`-L` フラグを使用します。 次の例では、ブラウザーでの `http://localhost:3000` へのリクエストを CircleCI コンテナ上のポート `8080` に転送します。 これは、ジョブで Ruby on Rails デバッグ アプリを実行し、それがポート 8080 をリスンする場合などに使用できます。 これを実行した後、ブラウザーに移動して http://localhost:3000 をリクエストすると、コンテナのポート 8080 の処理の内容が表示されます。
 
-**注:** `8080`をCircleCIで実行しているポートに更新してください。
+1. コマンドにポート転送を追加するには、`-L` フラグを使用します。 次の例では、ブラウザーでの `http://localhost:3000` へのリクエストを CircleCI コンテナ上のポート `8080` に転送します。 これは、ジョブで Ruby on Rails デバッグ アプリを実行し、それがポート 8080 をリスンする場合などに使用できます。 これを実行した後、ブラウザーに移動して http://localhost:3000 をリクエストすると、コンテナのポート 8080 の処理の内容が表示されます。 <br><br> **Note:** Update `8080` to be the port you are running on the CircleCI container.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
-3. 次に、ローカル マシンでブラウザーを開き、`http://localhost:8080` に移動すると、CircleCI コンテナ上のポート `3000` で実行されているサーバーに直接リクエストが送信されます。 CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
+
+1. 次に、ローカル マシンでブラウザーを開き、`http://localhost:8080` に移動すると、CircleCI コンテナ上のポート `3000` で実行されているサーバーに直接リクエストが送信されます。 CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
 
 この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
 
@@ -196,39 +196,33 @@ VNC を使用して、テストを実行しているブラウザーを表示し�
 
 1. VNC ビューアをインストールします。 macOS を使用している場合は、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討してください。 [RealVNC](http://www.realvnc.com/download/viewer/) もほとんどのプラットフォームで使用できます。
 
-2. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
-
+1. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
 ```bash
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
-3. `vnc4server` パッケージと `metacity` パッケージをインストールします。 `metacity` を使用して、ブラウザーを操作し、ターミナル ウィンドウに戻ります。
-
+1. `vnc4server` パッケージと `metacity` パッケージをインストールします。 `metacity` を使用して、ブラウザーを操作し、ターミナル ウィンドウに戻ります。
 ```bash
 sudo apt install vnc4server metacity
 ```
-4. CircleCIコンテナに接続後、VNCサーバーを起動します。
-
+1. CircleCIコンテナに接続後、VNCサーバーを起動します。
 ```bash
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
-5. SSH の接続はセキュリティ保護されているため、強力なパスワードは必要ありません。 しかし、パスワードが *1* つ必要なので、プロンプトに `password` を入力します。
+1. SSH の接続はセキュリティ保護されているため、強力なパスワードは必要ありません。 しかし、パスワードが *1* つ必要なので、プロンプトに `password` を入力します。
 
-6. VNC ビューアを起動し、`localhost:5902` に接続します。 プロンプトに `password` を入力します。
+1. VNC ビューアを起動し、`localhost:5902` に接続します。 プロンプトに `password` を入力します。
 
-7. ターミナル ウィンドウが含まれるディスプレイが表示されます。 SSH トンネルを通して接続はセキュリティ保護されているため、安全ではない接続または暗号化されていない接続に関する警告は無視してください。
+1. ターミナル ウィンドウが含まれるディスプレイが表示されます。 SSH トンネルを通して接続はセキュリティ保護されているため、安全ではない接続または暗号化されていない接続に関する警告は無視してください。
 
-8. VNC サーバーでウィンドウを開くために、`DISPLAY` 変数を設定します。 このコマンドを実行しないと、ウィンドウはデフォルトの (ヘッドレス) X サーバーで開きます。
-
+1. VNC サーバーでウィンドウを開くために、`DISPLAY` 変数を設定します。 このコマンドを実行しないと、ウィンドウはデフォルトの (ヘッドレス) X サーバーで開きます。
 ```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
-9. ` metacity ` をバックグラウンドで起動します。
-
+1. ` metacity ` をバックグラウンドで起動します。
 ```bash
 ubuntu@box159:~$ metacity &
 ```
-10. `firefox` をバックグラウンドで起動します。
-
+1. `firefox` をバックグラウンドで起動します。
 ```bash
 ubuntu@box159:~$ firefox &
 ```
@@ -242,7 +236,6 @@ ubuntu@box159:~$ firefox &
 VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
 
 1. [`x11vnc`](https://github.com/LibVNC/x11vnc) をダウンロードして、テストの前に起動します。
-
 ```
 steps:
   - run:
@@ -252,7 +245,7 @@ steps:
         x11vnc -forever -nopw
       background: true
 ```
-2. これで、[SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
+1. これで、[SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
 ```
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
@@ -264,20 +257,17 @@ CircleCI は、SSH からの X11 転送もサポートしています。 X11 転
 
 1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、[XQuartz](http://xquartz.macosforge.org/landing/) の使用を検討してください。
 
-2. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)します。 `-X` フラグを使用して転送をセットアップします。
-
+1. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)します。 `-X` フラグを使用して転送をセットアップします。
 ```
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
 これによって、X11 転送が有効な状態で SSH セッションが開始されます。
 
-3. お使いのマシンに VM のディスプレイを接続するには、ディスプレイ環境変数を `localhost:10.0` に設定します。
-
+1. お使いのマシンに VM のディスプレイを接続するには、ディスプレイ環境変数を `localhost:10.0` に設定します。
 ```
 ubuntu@box10$ export DISPLAY=localhost:10.0
 ```
-4. xclock を起動して、すべて正しく動作していることを確認します。
-
+1. xclock を起動して、すべて正しく動作していることを確認します。
 ```
 ubuntu@box10$ xclock
 ```
@@ -288,4 +278,4 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 ## 関連項目
 {: #see-also }
 
-[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)
+[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)
