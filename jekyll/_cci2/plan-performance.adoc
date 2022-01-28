@@ -36,6 +36,6 @@ A significant increase in the amount of self-hosted runners, allowing you to run
 Additional support through SLAs (limited hours and days), and support package add-ons. The Performance plan also has access to the community forums, support portal, and our global ticket-based system.
 
 == CircleCI features
-In addition to the upgraded features listed above, the Performance plan also has access to the features listed below - available across all of CircleCI's plans.. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment.
+In addition to the upgraded features listed above, the Performance plan also has access to the features listed below - available across all of CircleCI's plans. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment.
 
 {% include snippets/features-of-circleci.adoc %}
