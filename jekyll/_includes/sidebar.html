@@ -52,7 +52,7 @@
                     {% if item.link %}
                       {% assign link_slug = item.link | slugify %}
                       <a class="{% if url_slug == link_slug %} active {% endif %}"
-                        href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                        href="{{ site.baseurl }}/{{ item.link }}"
                         data-proofer-ignore
                         data-section="{{ section_slug }}">
                         {{ display_name }}
@@ -92,7 +92,7 @@
                 <li class="subnav-item">
                   {% assign link_slug = item.link | slugify %}
                   <a class="{% if url_slug == link_slug %} active {% endif %}"
-                    href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}" data-section="{{ section_slug }}">
+                    href="{{ site.baseurl }}/{{ item.link }}" data-section="{{ section_slug }}">
                     {{display_name}}
                   </a>
                 </li>

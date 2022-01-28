@@ -97,8 +97,7 @@ en:
     - name: Docker
       children:
         - name: Overview
-          link: 2.0/executor-types/
-          hash: using-docker
+          link: 2.0/executor-types/#using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
@@ -116,11 +115,9 @@ en:
     - name: Machine
       children:
         - name: Overview
-          link: 2.0/executor-types/
-          hash: using-machine
+          link: 2.0/executor-types/#using-machine
         - name: Pre-installed software
-          link: 2.0/docker-to-machine
-          hash: pre-installed-software
+          link: 2.0/docker-to-machine/#pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
         - name: Arm Resources
@@ -229,8 +226,7 @@ en:
     - name: Data Partnerships
       link: 2.0/insights-partnerships/
     - name: Insights API
-      link: api/v2/
-      hash: tag/Insights
+      link: api/v2/#tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
@@ -330,13 +326,13 @@ en:
       - name: Configuration Reference
         link: 2.0/configuration-reference/
       - name: API v2 Reference
-        link: api/v2
+        link: api/v2/
       - name: API v2 Introduction
         link: 2.0/api-intro/
       - name: API v2 Developer's Guide
         link: 2.0/api-developers-guide/
       - name: API v1.1 Reference
-        link: api/v1
+        link: api/v1/
       - name: Project Values and Variables
         link: 2.0/variables/
       - name: Prebuilt Images
@@ -555,8 +551,6 @@ en:
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
 
-
-
 ja:
 - name: Getting Started
   i18n_name: はじめよう
@@ -672,9 +666,8 @@ ja:
     - name: Docker
       children:
         - name: Overview
-          link: ja/2.0/executor-types/
+          link: ja/2.0/executor-types/#using-docker
           i18n_name: 概要
-          hash: using-docker
         - name: CircleCI Images
           link: ja/2.0/circleci-images/
           i18n_name: CircleCIイメージ
@@ -696,13 +689,11 @@ ja:
     - name: Machine
       children:
         - name: Overview
-          link: ja/2.0/executor-types/
+          link: ja/2.0/executor-types/#using-machine
           i18n_name: 概要
-          hash: using-machine
         - name: Pre-installed software
-          link: ja/2.0/docker-to-machine
+          link: ja/2.0/docker-to-machine/#pre-installed-software
           i18n_name: インストール済ソフト
-          hash: pre-installed-software
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
           link: ja/2.0/android-machine-image
@@ -839,8 +830,7 @@ ja:
       link: ja/2.0/insights-partnerships/
     - name: Insights API
       i18n_name: Insights API
-      link: api/v2/
-      hash: tag/Insights
+      link: api/v2/#tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト
