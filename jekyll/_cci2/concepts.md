@@ -521,6 +521,8 @@ workflows:
 ## Data Persistence
 {: #data-persistence }
 
+Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts. 
+
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ### Caches
@@ -780,10 +782,10 @@ Workspaces | Duration of workflow | Attach the workspace in a downstream contain
 Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
 {: class="table table-striped"}
 
+See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+
 ## See also
 {: #see-also }
 {:.no_toc}
 
-* [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
-
-* [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
+[Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
