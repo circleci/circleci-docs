@@ -1,18 +1,19 @@
+/* This theme is based on the theme from PrismJS.
+ * It is modified to use the same colors as the default theme from our in-app config editor.
+ * See: https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vsc-dark-plus.css
+ */
+
 pre[class*="language-"],
 code[class*="language-"] {
-	//color: #d4d4d4;
   color: #ffffff;
-	//font-size: 13px;
   font-size: 14px;
 	text-shadow: none;
-	//font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
   font-family: Menlo, Monaco, "Courier New", monospace;
 	direction: ltr;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
 	word-break: normal;
-	//line-height: 1.5;
   line-height: 24px;
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
@@ -46,16 +47,12 @@ pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
 	overflow: auto;
-	//background: #1e1e1e;
   background: #2B2B2B;
 }
 
 :not(pre) > code[class*="language-"] {
-	//padding: .1em .3em;
 	border-radius: .3em;
-	//color: #db4c69;
   color: #555;
-	//background: #1e1e1e;
   background:#1b1f230d;
   word-wrap: anywhere;
   padding: 2px;
@@ -78,7 +75,6 @@ pre[class*="language-"] {
 
 .token.comment,
 .token.prolog {
-	//color: #6a9955;
   color: #959595;
 }
 
@@ -96,7 +92,6 @@ pre[class*="language-"] {
 .token.symbol,
 .token.inserted,
 .token.unit {
-	//color: #b5cea8;
   color: #ffffff;
 }
 
@@ -110,7 +105,6 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.deleted {
-  //color: #ce9178;
   color: #ffffff;
 }
 
@@ -128,7 +122,6 @@ pre[class*="language-"] {
 }
 
 .token.atrule {
-	//color: #ce9178;
   color: #fff176;
 }
 

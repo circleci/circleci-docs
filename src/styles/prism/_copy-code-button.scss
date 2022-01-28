@@ -1,0 +1,42 @@
+// TODO: figure out why the prism css is overwriting all this custom css
+// we should not have to use `!important`
+
+.toolbar {
+  top: 0.2em !important;
+  right: 0.2em !important;
+  padding: 6px;
+
+  .copy-to-clipboard-button {
+    display: none;
+    background-color: #EDEDED !important;
+    background-position: 50% !important;
+    background-repeat: no-repeat !important;
+    border-radius: 4px !important;
+    height: 30px;
+    width: 46px;
+
+    span {
+      display: none;
+    }
+
+    &:hover {
+      background-color: #E3E3E3 !important;
+    }
+
+    &[data-copy-state="copy"] {
+      background-image: url('/docs/assets/img/compass/copy.svg') !important;
+    }
+
+    &[data-copy-state="copy-success"] {
+      background-color: #E3E3E3 !important;
+      background-image: url('/docs/assets/img/compass/check.svg') !important;
+    }
+  }
+}
+
+// TODO: this is prety abrubt and it should have a better fade-in/fade-out animation
+.code-toolbar:hover {
+  .copy-to-clipboard-button {
+    display: inline;
+  }
+}

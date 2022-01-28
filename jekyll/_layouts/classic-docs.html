@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang }}">
 {% include_cached head.html site=site page=page %}
-<body class="line-numbers {% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
+<body data-prismjs-copy-timeout="2" class="line-numbers {% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
   {% include_cached google-tag-manager-noscript.html %}
 {% endif %}
