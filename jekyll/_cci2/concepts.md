@@ -782,6 +782,22 @@ Caches     | Months               | Store non-vital data that may help the job r
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
+## Contexts
+{: #contexts }
+
+Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project `config.yml` file to give any job(s) access to the environment variables associated with the context.
+
+{:.tab.contextsimage.Cloud}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server_3}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server_2}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
+
+See [Using Contexts]({{ site.baseurl }}/2.0/contexts/) for more information.
+
 ## See also
 {: #see-also }
 {:.no_toc}
