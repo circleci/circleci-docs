@@ -98,7 +98,6 @@ en:
       children:
         - name: Overview
           link: 2.0/executor-types/#using-docker
-          hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
@@ -117,10 +116,8 @@ en:
       children:
         - name: Overview
           link: 2.0/executor-types/#using-machine
-          hash: using-machine
         - name: Pre-installed software
-          link: 2.0/docker-to-machine#pre-installed-software
-          hash: pre-installed-software
+          link: 2.0/docker-to-machine/#pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
         - name: Arm Resources
@@ -229,8 +226,7 @@ en:
     - name: Data Partnerships
       link: 2.0/insights-partnerships/
     - name: Insights API
-      link: api/v2/
-      hash: tag/Insights
+      link: api/v2/#tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
@@ -670,9 +666,8 @@ ja:
     - name: Docker
       children:
         - name: Overview
-          link: ja/2.0/executor-types/
+          link: ja/2.0/executor-types/#using-docker
           i18n_name: 概要
-          hash: using-docker
         - name: CircleCI Images
           link: ja/2.0/circleci-images/
           i18n_name: CircleCIイメージ
@@ -694,13 +689,11 @@ ja:
     - name: Machine
       children:
         - name: Overview
-          link: ja/2.0/executor-types/
+          link: ja/2.0/executor-types/#using-machine
           i18n_name: 概要
-          hash: using-machine
         - name: Pre-installed software
-          link: ja/2.0/docker-to-machine
+          link: ja/2.0/docker-to-machine/#pre-installed-software
           i18n_name: インストール済ソフト
-          hash: pre-installed-software
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
           link: ja/2.0/android-machine-image
@@ -837,8 +830,7 @@ ja:
       link: ja/2.0/insights-partnerships/
     - name: Insights API
       i18n_name: Insights API
-      link: api/v2
-      hash: tag/Insights
+      link: api/v2/#tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト
