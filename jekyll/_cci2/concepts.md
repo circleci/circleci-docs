@@ -784,6 +784,32 @@ Caches     | Months               | Store non-vital data that may help the job r
 
 See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
+## Parallelism
+{: #parallelism }
+
+The more tests your project involves, the longer it takes for them to complete on a single machine. With _parallelism_, you can spread your tests across a specified number of separate executors.
+
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
+
+To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
+
+```yaml
+# ~/.circleci/config.yml
+version: 2
+jobs:
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    parallelism: 4
+```
+
+![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+
+See the [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) document for more information.
+
 ## See also
 {: #see-also }
 {:.no_toc}
