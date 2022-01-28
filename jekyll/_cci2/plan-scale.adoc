@@ -17,6 +17,11 @@ The Scale plan grows with your team and your business, and offers a wide range o
 
 The Scale plan offers several improvements over the Free and Performance plans:
 
+=== Access to IP ranges
+Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature feature enabled will have their traffic routed through one of the defined IP address ranges during job execution (the IP ranges feature is the same on the Performance and Scale plan).
+
+For more information about this features, please refer to the <<ip-ranges#,IP Ranges>> page.
+
 === Access to all resource classes
 Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
