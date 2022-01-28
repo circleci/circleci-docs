@@ -252,7 +252,7 @@ The **machine executor** spins up a complete Ubuntu virtual machine image, givin
 See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
 
  ```yaml
- version: 2
+ version: 2.1
  jobs:
    build1: # job name
      docker: # Specifies the primary container image,
@@ -449,7 +449,7 @@ workflows:
 {:.tab.workflows-example.Server_2}
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build1:
@@ -503,7 +503,7 @@ jobs:
           command: bundle exec rake assets:precompile
 #...
 workflows:
-  version: 2
+  version: 2.1
   build_and_test: # name of your workflow
     jobs:
       - build1
@@ -622,7 +622,7 @@ jobs:
 {:.tab.cache.Server_2}
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build1:
@@ -742,7 +742,7 @@ jobs:
 {:.tab.workspace.Server_2}
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build1:
@@ -783,6 +783,81 @@ Caches     | Months               | Store non-vital data that may help the job r
 {: class="table table-striped"}
 
 See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+
+## Docker Layer Caching
+{: #docker-layer-caching }
+
+Docker Layer Caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
+
+In the `config.yml` snippet below, the `build_exlixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+
+```yaml
+version: 2.1
+jobs:
+  build_elixir:
+    machine:
+      image: ubuntu-2004:202104-01
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: build Elixir image
+          command: docker build -t circleci/elixir:example .
+```
+
+On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds significantly faster.
+
+See [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) for more information.
+
+## Parallelism
+{: #parallelism }
+
+The more tests your project involves, the longer it takes for them to complete on a single machine. With _parallelism_, you can spread your tests across a specified number of separate executors.
+
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
+
+To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
+
+```yaml
+# ~/.circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    parallelism: 4
+```
+
+![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+
+See [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for more information.
+
+## Dynamic Configuration
+{: #dynamic-configuration }
+
+Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. This is especially helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from *specific* parts of your project, rather than rebuilding everything each time.
+
+See [Dynamic Configuration]({{ site.baseurl }}/2.0/dynamic-config/) for more information.
+
+## Contexts
+{: #contexts }
+
+Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project `config.yml` file to give any job(s) access to the environment variables associated with the context.
+
+{:.tab.contextsimage.Cloud}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server_3}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server_2}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
+
+See [Using Contexts]({{ site.baseurl }}/2.0/contexts/) for more information.
+
 
 ## See also
 {: #see-also }
