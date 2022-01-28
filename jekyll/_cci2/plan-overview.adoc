@@ -24,7 +24,7 @@ The right plan for you and your team will depend on several factors:
 - How many users are on your team
 - How much support you need (community support, standard support, or premium support)
 - If you want access to different machine-types and resource classes
-- If you want a limited or unlimited number of private orbs or self-hosted runners
+- If you want a limited or unlimited number of self-hosted runners
 
 Let's look at how a team might use credits. In this example, your team is divided into several groups working on different projects; some projects are larger while others are smaller and need less resources from a CI configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
 

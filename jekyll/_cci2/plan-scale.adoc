@@ -31,9 +31,6 @@ Customize the amount of active users based on your needs.
 === Unlimited self-hosted runners
 Unlimited self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners, Self-hosted runners>> below for more information.
 
-=== Unlimited private orbs
-There is no limit to the number of private orbs you can use to securely share across teams and groups. See <<#private-orbs, Private orbs>> below for more information.
-
 === Additional support options
 Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Scale plan also has access to the community forums, support portal, and our global ticket-based system.
 

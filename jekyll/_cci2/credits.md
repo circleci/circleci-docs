@@ -19,7 +19,7 @@ The right plan for you and your team will depend on several factors:
 - How many users are on your team
 - How much support you need (community support, standard support, or premium support)
 - If you want access to different machine-types and resource classes
-- If you want a limited or unlimited number of private orbs or self-hosted runners
+- If you want a limited or unlimited number of self-hosted runners
 
 You can view the [Plan Overview]({{site.baseurl}}/2.0/plan-overview) page for more information, or if you'd like more details on what features are available per plan, view the individual plan pages:
 - [Free Plan]({{site.baseurl}}/2.0/plan-free)
@@ -27,7 +27,7 @@ You can view the [Plan Overview]({{site.baseurl}}/2.0/plan-overview) page for mo
 - [Scale Plan]({{site.baseurl}}/2.0/plan-scale)
 - [Server Plan]({{site.baseurl}}/2.0/plan-server)
 
-Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn more about how credits are distributed across different machine types.
+Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn more about how credits are distributed across different machine types and resource classes.
 
 ## Open source credit usage
 {: #open-source-credit-usage }
