@@ -16,7 +16,7 @@ This document describes the Performance plan available to developers.
 == Performance plan
 The Performance plan offers a set amount of build credits across a variety of resource classes, per month, which you can customize depending on your build configuration and execution environment.
 
-In addition to an higher amount of network usage included, the Performance plan offers several improvements over the Free plan:
+In addition to a higher amount of network usage included, the Performance plan offers several improvements over the Free plan:
 
 === Additional resource classes
 Access to some of the larger machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
