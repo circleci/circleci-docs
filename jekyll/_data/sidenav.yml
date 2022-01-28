@@ -97,7 +97,8 @@ en:
     - name: Docker
       children:
         - name: Overview
-          link: 2.0/executor-types/#using-docker
+          link: 2.0/executor-types/
+          hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
@@ -115,7 +116,8 @@ en:
     - name: Machine
       children:
         - name: Overview
-          link: 2.0/executor-types/#using-machine
+          link: 2.0/executor-types/
+          hash: using-machine
         - name: Pre-installed software
           link: 2.0/docker-to-machine/
           hash: pre-installed-software
@@ -227,7 +229,8 @@ en:
     - name: Data Partnerships
       link: 2.0/insights-partnerships/
     - name: Insights API
-      link: api/v2/#tag/Insights
+      link: api/v2/
+      hash: tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
@@ -667,8 +670,9 @@ ja:
     - name: Docker
       children:
         - name: Overview
-          link: ja/2.0/executor-types/#using-docker
+          link: ja/2.0/executor-types/
           i18n_name: 概要
+          hash: using-docker
         - name: CircleCI Images
           link: ja/2.0/circleci-images/
           i18n_name: CircleCIイメージ
@@ -690,8 +694,9 @@ ja:
     - name: Machine
       children:
         - name: Overview
-          link: ja/2.0/executor-types/#using-machine
+          link: ja/2.0/executor-types/
           i18n_name: 概要
+          hash: using-machine
         - name: Pre-installed software
           link: ja/2.0/docker-to-machine/
           i18n_name: インストール済ソフト
@@ -831,7 +836,8 @@ ja:
       link: ja/2.0/insights-partnerships/
     - name: Insights API
       i18n_name: Insights API
-      link: api/v2/#tag/Insights
+      link: api/v2/
+      hash: tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト
