@@ -1,6 +1,6 @@
-# Snippets CSV
+# Pages CSV
 
-Convenience script for exporting snippets data into a CSV file.
+Convenience script for exporting pages data into a CSV file.
 
 ## Usage
 
@@ -18,4 +18,4 @@ To run the export job:
 yarn export
 ```
 
-This will create a `snippets.csv` file that you can then import in Google Spreadsheet if you wish to do so.
+This will create a `pages.csv` file that you can then import in Google Spreadsheet if you wish to do so.
