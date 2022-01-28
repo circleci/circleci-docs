@@ -51,10 +51,15 @@ pre[class*="language-"] {
 }
 
 :not(pre) > code[class*="language-"] {
-	padding: .1em .3em;
+	//padding: .1em .3em;
 	border-radius: .3em;
-	color: #db4c69;
-	background: #1e1e1e;
+	//color: #db4c69;
+  color: #555;
+	//background: #1e1e1e;
+  background:#1b1f230d;
+  word-wrap: anywhere;
+  padding: 2px;
+  white-space: pre-wrap;
 }
 /*********************************************************
 * Tokens
