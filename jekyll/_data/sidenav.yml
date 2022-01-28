@@ -117,7 +117,8 @@ en:
         - name: Overview
           link: 2.0/executor-types/#using-machine
         - name: Pre-installed software
-          link: 2.0/docker-to-machine/#pre-installed-software
+          link: 2.0/docker-to-machine/
+          hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
         - name: Arm Resources
@@ -692,7 +693,7 @@ ja:
           link: ja/2.0/executor-types/#using-machine
           i18n_name: 概要
         - name: Pre-installed software
-          link: ja/2.0/docker-to-machine/#pre-installed-software
+          link: ja/2.0/docker-to-machine/
           i18n_name: インストール済ソフト
         - name: Android Machine Image
           i18n_name: Android マシン イメージ

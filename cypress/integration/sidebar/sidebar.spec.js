@@ -23,12 +23,14 @@ describe('sidebar', () => {
               if(child.children) {
                 for (let subchild of child.children) {
                   if(subchild.link) {
-                    cy.get(`[href="/docs/${subchild.link}"]`).should('exist')
+                    const subchildlink = subchild.link + (subchild.hash ? `#${subchild.hash}` : '')
+                    cy.get(`[href="/docs/${subchildlink}"]`).should('exist')
                   }
                 }
               }
               if(child.link) {
-                cy.get(`[href="/docs/${child.link}"]`).should('exist')
+                const childlink = child.link + (child.hash ? `#${child.hash}` : '')
+                cy.get(`[href="/docs/${childlink}"]`).should('exist')
               }
             }
             
