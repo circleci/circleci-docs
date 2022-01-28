@@ -782,6 +782,13 @@ Caches     | Months               | Store non-vital data that may help the job r
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
+## Dynamic Configuration
+{: #dynamic-configuration }
+
+Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. This is especially helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from *specific* parts of your project, rather than rebuilding everything each time.
+
+See [Dynamic Configuration]({{ site.baseurl }}/2.0/dynamic-config/) for more information.
+
 ## See also
 {: #see-also }
 {:.no_toc}
