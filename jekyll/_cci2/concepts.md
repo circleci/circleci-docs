@@ -808,7 +808,32 @@ jobs:
 
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-See the [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) document for more information.
+See [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for more information.
+
+## Docker Layer Caching
+{: #docker-layer-caching }
+
+Docker Layer Caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
+
+In the `config.yml` snippet below, the `build_exlixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+
+```yaml
+version: 2
+jobs:
+  build_elixir:
+    machine:
+      image: ubuntu-2004:202104-01
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: build Elixir image
+          command: docker build -t circleci/elixir:example .
+```
+
+On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds significantly faster.
+
+See [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) for more information.
 
 ## See also
 {: #see-also }
