@@ -30,4 +30,4 @@ A wide array of resource classes on Docker, Linux, Windows, and macOS (coming so
 {% include snippets/features-of-circleci.adoc %}
 
 === Support
-Support is available through the community forums, support portal, and our global ticket-based system.
+Support is available through the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
