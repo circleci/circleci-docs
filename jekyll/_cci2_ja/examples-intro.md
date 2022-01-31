@@ -90,7 +90,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         name: パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
 #         command: sudo chmod +x ./gradlew
       - run:
           name: 依存関係のダウンロード
