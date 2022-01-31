@@ -5,7 +5,7 @@ version:
 = CircleCI Performance Plan
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the Performance plan available to developers.
+:page-description: This document describes the CircleCI Performance plan available to developers.
 :icons: font
 :toc: macro
 :toc-title:
