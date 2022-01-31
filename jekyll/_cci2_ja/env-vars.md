@@ -117,7 +117,7 @@ jobs: # 実行時の基本的な作業単位を定義
       - run:
           name: "Setup custom environment variables"
           command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
-      - run: # 現在のブランチ名を printo
+      - run: # 現在のブランチ名を print
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       # 上記のステップと同じことをするステップを実行
@@ -345,11 +345,11 @@ jobs:
       - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       - checkout
       - run:
-          name: "echo an env var that is part of our context"
+          name: "コンテキストに含まれる環境変数を出力"
           command: |
             echo $MY_ENV_VAR
 ```
