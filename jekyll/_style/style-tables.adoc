@@ -1,7 +1,10 @@
+---
+toc: false
+---
+
 = Using tables
 :page-layout: classic-docs
 :icons: font
-:toc: macro
 :toc-title:
 
 * For markdown content use the following format for tables:

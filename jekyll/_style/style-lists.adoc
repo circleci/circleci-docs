@@ -1,7 +1,9 @@
+---
+toc: false
+---
 = Using lists
 :page-layout: classic-docs
 :icons: font
-:toc: false
 :toc-title:
 
 * Use ordered lists for steps in a process. All other lists should be unordered.
