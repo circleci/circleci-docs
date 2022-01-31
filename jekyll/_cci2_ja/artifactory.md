@@ -76,19 +76,19 @@ jobs:
       - checkout
       - run: mvn dependency:go-offline
       - run:
-          name: maven build
+          name: maven ビルド
           command: |
             mvn clean install
       - run:
-          name: Install JFrog CLI
+          name: JFrog CLI のインストール
           command: curl -fL https://getcli.jfrog.io | sh
       - run:
-          name: Push to Artifactory
+          name: Artifactory へのプッシュ
           command: |
             ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
             ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
-            ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
-            ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
+            ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # エージェント上のすべての環境変数を収集します
+            ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # Artifactory 内のビルドに ^^ を付加します
 ```
 
 ## 関連項目
