@@ -47,6 +47,7 @@ en:
         name: 機能
         children:
           - 
+            name: パイプラインのスケジュール実行
           - 
             name: ワークフロー
           - 
@@ -66,6 +67,8 @@ en:
         name: 最適化
         children:
           - 
+          - 
+            name: データの永続化
           - 
           - 
             name: Docker レイヤーキャッシュ
@@ -219,8 +222,6 @@ en:
             link: 2.0/credits/
           - 
             name: クレジットの使用
-          - 
-            name: データの永続化
       - 
         name: security
         children:
@@ -368,6 +369,15 @@ en:
             link: 2.0/server-3-operator-backup-and-restore
           - 
           - 
+      - 
+        link: 2.0/install-overview/
+        children:
+          - 
+            name: What's New in v2.38
+          - 
+            name: v2.38.3 Installation Guide
+          - 
+            name: v2.38.3 Operations Guide
       - 
         name: Server v3.1.x PDFs
         link: 2.0/install-overview/
