@@ -15,14 +15,14 @@ description: "セキュリティーに関する推奨事項"
 ## CircleCI を安全に使用していただくためのチェックリスト
 {: #checklist-for-using-circleci-securely-as-a-customer }
 
-If you are getting started with CircleCI, there are some security best practices you can ask your team to consider as _users_ of CircleCI:
+CircleCI の使用を開始するにあたり、 チームが CircleCI の ユーザー として考慮すべきセキュリティ上のベストプラクティスがいくつかあります。
 
-- Minimize the number of secrets (private keys / environment variables) your build needs and rotate secrets regularly.
-  - It is important to rotate secrets regularly in your organization, especially as team members come and go.
-  - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
-  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Understand the role and permission systems of other platforms you use outside of CircleCI; for example, IAM permissions on AWS, or GitHub's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature.
-- Follow the advice in [Handling secrets securely](#handling-secrets-securely), below, when writing scripts and working on the command-line.
-- Consult your VCS provider's permissions for your organization (if you are in an organization) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
+- ビルドが必要とするシークレット (プライベートキー、環境変数) の数を最小限に抑え、定期的にシークレットのローテーションを行ってください。
+  - 組織のシークレットを定期的に (チーム メンバーが変わるときは特に) ローテーションすることが重要です。
+  - シークレットを定期的にローテーションすることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。
+  - _使用するシークレット_は範囲を制限し、必ずビルドのために必要な最低限の権限のみを許可してください。 AWS 上での IAM 権限や GitHub の [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) 機能など、CircleCI の外部で使用する他のプラットフォームのロールや権限システムについてもよくご理解いただくようお願いします。
+- スクリプトを書いたりコマンドラインで作業をする際は、下記の [シークレットの安全な取り扱い](#handling-secrets-securely)に記載されているアドバイスに従ってください。
+- VCS プロバイダーから付与された組織の権限を確認したうえで (組織に属している場合)、できる限り[最小権限の原則](https://en.wikipedia.org/wiki/Principle_of_least_privilege)に従ってください。
 - Use Restricted Contexts with teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
 - Ensure you audit who has access to SSH keys in your organization.
 - Ensure that your team is using Two-Factor Authentication (2FA) with your VCS ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa), [Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html)). If a user's GitHub or Bitbucket account is compromised, a nefarious actor could push code or potentially steal secrets.
