@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "IP アドレスの範囲"
-short-title: "IP アドレスの範囲"
+title: "IP アドレスの範囲機能"
+short-title: "IP アドレスの範囲機能"
 description: "CircleCI ジョブで使用される IP アドレスを、明確に定義された範囲のみに限定できます。"
 categories: [ ]
 order: 70
@@ -16,14 +16,14 @@ CircleCI ジョブで使用される IP アドレスを、明確に定義され�
 * 目次
 {:toc}
 
-**Note:** The pricing model for IP ranges has been finalized. Details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
+**注: **IP 範囲機能の料金体系が決定しました。 詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
 {: class="alert alert-info"}
 
 
 ## 概要
 {: #overview }
 
-IP アドレスの範囲は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 この機能では、 CircleCI のサービスが使用する IP アドレスのリストを提供します。 CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
+IP アドレスの範囲機能は、制限された環境へのアクセスを IP アドレスに基づいて設定したいお客様のための機能です。 この機能では、 CircleCI のサービスが使用する IP アドレスのリストを提供します。 CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
 本機能は現在プレビュー段階であり、[Performance または Scale プラン](https://circleci.com/ja/pricing/)のお客様がご利用いただけます。 なお、この機能では、当該機能を有効にしたジョブのネットワーク転送量に応じてクレジットの消費が発生します。 料金の詳細については、後日の一般公開時にお知らせします。
 
