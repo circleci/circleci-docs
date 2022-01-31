@@ -20,10 +20,8 @@ This document provides example database [config.yml]({{ site.baseurl }}/2.0/data
 
 If you are migrating a Rails app configured with a `structure.sql` file make
 sure that `psql` is installed in your PATH and has the proper permissions, as
-follows, because the circleci/ruby:2.4.1-node image does not have psql installed
+follows, because the cimg/ruby:3.0-node image does not have psql installed
 by default and uses `pg` gem for database access.
-
-{% raw %}
 
 ```yaml
 version: 2
@@ -34,7 +32,7 @@ jobs:
     # Primary container image where all commands run
 
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: cimg/ruby:3.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -45,7 +43,7 @@ jobs:
 
     # Service container image available at `host: localhost`
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -59,7 +57,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
             - rails-demo-
 
       # Bundle install dependencies
@@ -71,7 +69,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
 
@@ -89,8 +87,6 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
-
-{% endraw %}
 
 **Note:** An alternative is to build your own image by extending the current image,
 installing the needed packages, committing, and pushing it to Docker Hub or the
@@ -122,7 +118,7 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
+      # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6-jessie
         auth:
@@ -152,55 +148,53 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
-{% raw %}
-
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.12
+      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go/
+      - image: cimg/go:1.17
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: circleci/postgres:9.6-alpine
+      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres/
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
-
+ 
     environment:
       TEST_RESULTS: /tmp/test-results
-
+ 
     steps:
       - checkout
       - run: mkdir -p $TEST_RESULTS
-
+ 
       - restore_cache:
           keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
-
+            - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
+ 
       - run:
           name: Get dependencies
           command: |
             go get -v
-
+ 
       - run:
           name: Get go-junit-report for setting up test timings on CircleCI
           command: |
             go get github.com/jstemmer/go-junit-report
             # Remove go-junit-report from go.mod
             go mod tidy
-
+ 
       #  Wait for Postgres to be ready before proceeding
       - run:
           name: Waiting for Postgres to be ready
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
+ 
       - run:
           name: Run unit tests
           environment: # environment variables for the database url and path to migration files
@@ -210,12 +204,12 @@ jobs:
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
       - run: make
-
+ 
       - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
+          key: go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
           paths:
             - "/go/pkg/mod"
-
+ 
       - run:
           name: Start service
           environment:
@@ -223,7 +217,7 @@ jobs:
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: ./workdir/contacts
           background: true
-
+ 
       - run:
           name: Validate service is working
           command: |
@@ -232,19 +226,118 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
-
+ 
       - store_test_results:
           path: /tmp/test-results
 ```
-
-{% endraw %}
 
 ## Example mysql project.
 {: #example-mysql-project }
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
+{:.tab.mysql_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers # The primary container where steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/mysql:8.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
+    steps:
+      - checkout
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+```
+
+{:.tab.mysql_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers # The primary container where steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/mysql:8.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
+    steps:
+      - checkout
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+```
+
+{:.tab.mysql_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -253,7 +346,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/mysql:8.0.4
+      - image: cimg/mysql:8.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

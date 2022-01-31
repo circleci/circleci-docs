@@ -182,13 +182,15 @@ If you are running a test that runs an HTTP server on CircleCI, it is sometimes 
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` on your local browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
 
+1. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` on your local browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
+<br><br>
 **Note:** Update `8080` to be the port you are running on the CircleCI container.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
-3. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
+
+1. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
 
 This is a very easy way to debug things when setting up Selenium tests, for example.
 
@@ -201,39 +203,33 @@ VNC allows you to view and interact with the browser that is running your tests.
 1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/).
 [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
-2. Open a Terminal window, [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
-
+1. Open a Terminal window, [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
 ```bash
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
-3. Install the `vnc4server` and `metacity` packages. You can use `metacity` to move the browser around and return to your Terminal window.
-
+1. Install the `vnc4server` and `metacity` packages. You can use `metacity` to move the browser around and return to your Terminal window.
 ```bash
 sudo apt install vnc4server metacity
 ```
-4. After connecting to the CircleCI container, start the VNC server.
-
+1. After connecting to the CircleCI container, start the VNC server.
 ```bash
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
-5. Since your connection is secured with SSH, there is no need for a strong password. However, you still need _a_ password, so enter `password` at the prompt.
+1. Since your connection is secured with SSH, there is no need for a strong password. However, you still need _a_ password, so enter `password` at the prompt.
 
-6. Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
+1. Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
 
-7. You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
+1. You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
 
-8. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
-
+1. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
 ```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
-9. Start `metacity` in the background.
-
+1. Start `metacity` in the background.
 ```bash
 ubuntu@box159:~$ metacity &
 ```
-10. Start `firefox` in the background.
-
+1. Start `firefox` in the background.
 ```bash
 ubuntu@box159:~$ firefox &
 ```
@@ -247,7 +243,6 @@ Now, you can run integration tests from the command line and watch the browser f
 If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
 
 1. Download [`x11vnc`](https://github.com/LibVNC/x11vnc) and start it before your tests:
-
 ```
 steps:
   - run:
@@ -257,7 +252,7 @@ steps:
         x11vnc -forever -nopw
       background: true
 ```
-2. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
+1. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 ```
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
@@ -269,20 +264,17 @@ CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC
 
 1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
 
-2. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
-
+1. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 ```
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
 This will start an SSH session with X11 forwarding enabled.
 
-3. To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
-
+1. To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
 ```
 ubuntu@box10$ export DISPLAY=localhost:10.0
 ```
-4. Check that everything is working by starting xclock.
-
+1. Check that everything is working by starting xclock.
 ```
 ubuntu@box10$ xclock
 ```

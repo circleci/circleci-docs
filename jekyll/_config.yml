@@ -69,7 +69,7 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.2.2
+      serverversion: 3.3.0
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
@@ -82,7 +82,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.2.2
+    serverversion: 3.3.0
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
@@ -151,6 +151,12 @@ defaults:
       path: ""
     values:
       suggested: false
+
+  # Disable sitemap by default (only want in prod)
+  - scope:
+      path: ""
+    values:
+      sitemap: false
 
 t:
     translation_in_progress:

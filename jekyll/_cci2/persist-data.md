@@ -61,7 +61,8 @@ guide.
 
 The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
-**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+**Note:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+{: class="alert alert-info" }
 
 ### Overview of all storage and network transfer
 {: #overview-of-storage-and-network-transfer }

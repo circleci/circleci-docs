@@ -103,7 +103,7 @@ jobs: # basic units of work in a run
   build:
     docker: # use the Docker executor
       # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
-      - image: circleci/node:14.17-browsers
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -183,7 +183,7 @@ jobs:
         type: string
         default: my_repo
     docker:
-      - image: circleci/go:1.15.0
+      - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -342,7 +342,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -378,7 +378,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
