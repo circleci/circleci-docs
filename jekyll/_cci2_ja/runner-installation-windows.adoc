@@ -16,7 +16,7 @@ NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[Ci
 
 toc::[]
 
-NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、デスクトップ エクスペリエンス搭載 Datacenter エディションでテスト済みです。
+NOTE: This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition.  Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
 With this procedure, you install CircleCI launch agent and its dependencies, i.e., Chocolatey, Git and Gzip, on your Windows Server.
 
