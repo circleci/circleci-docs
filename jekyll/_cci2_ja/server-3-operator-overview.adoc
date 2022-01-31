@@ -11,17 +11,16 @@ version:
 :toc: macro
 :toc-title:
 
-以下のガイドは、CircleCI Server 3.x の保守・監視を行う CircleCI Server の運用者の方々に役立つ情報が含まれます。
+The following guide contains information useful for CircleCI server Operators, or those responsible for ensuring CircleCI server 3.x is running properly through maintenance and monitoring.
 
 本ページの内容は、https://circleci.com/docs/2.0/server-3-overview[CircleCI Server 3.x の概要]を先に読んでいることを前提としています。
 
 CircleCI Server では、https://www.nomadproject.io/[Nomad スケジューラ]を使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 Nomad のクライアントは、Nomad のコントロール プレーンと出力プロセッサ、VM サービスにアクセスする必要があります。
 
-CircleCI Server は Nomad クライアント上で Docker ジョブを実行しますが、専用の VM でジョブを実行することもできます。 これらのVMジョブはNomad クライアントによって制御されるため、 Nomad クライアントは、SSH 接続用にポート 22、リモート Docker ジョブ用にポート 2376 で VM にアクセスできる必要があります。
+CircleCI Server は Nomad クライアント上で Docker ジョブを実行しますが、専用の VM でジョブを実行することもできます。 These VM jobs are controlled by the Nomad clients, therefore the Nomad clients must be able to access the VM machines on port 22 for SSH and port 2376 for remote Docker jobs.
 
-ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
-オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。
-そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
+Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients will need access to object storage.
 
 toc::[]
 
@@ -29,18 +28,18 @@ toc::[]
 
 CircleCI Server 3.x では、プライマリ ジョブ スケジューラとして Nomad を使用します。 ジョブ スケジューラ、およびクライアントとクラスタの基本的な操作方法については、https://circleci.com/docs/2.0/nomad/[Nomad クラスタの操作ガイド]を参照してください。
 
-デフォルトでは、CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに構成されている Executor に従って、コンピューティング リソースを自動的にプロビジョニングします。
+By default, CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
 
 ### Nomad クライアント
 Nomad クライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
 
-すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューイングされているビルドを追跡し、必要に応じて Nomad クライアント マシンの数を増やして負荷を分散させます。 メトリクス追跡の詳細についてはxref:server-3-operator-metrics-and-monitoring.adoc[メトリクスと監視に関するページ]をご覧ください。
+To ensure enough Nomad clients are running to handle all builds, track the queued builds, and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
 
-ジョブのリソース クラスで必要なリソースが Nomad クライアントのインスタンス タイプで利用可能な量を超える場合、ジョブは保留状態のままになります。  Nomad クライアントのインスタンス タイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソース クラスが制限されます。  https://circleci.com/docs/ja/2.0/executor-types/#available-docker-resource-classes[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。  デフォルトのインスタンス タイプでは、最大で `xlarge` リソース クラスを実行できます。
+ジョブのリソース クラスで必要なリソースが Nomad クライアントのインスタンス タイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンス タイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソース クラスが制限されます。 https://circleci.com/docs/ja/2.0/executor-types/#available-docker-resource-classes[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。  デフォルトのインスタンス タイプでは、最大で `xlarge` リソース クラスを実行できます。
 
 Nomad クライアントのリソースを最適に使用するためのオプションについては、https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
 
-NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/64 CPU です。 これよりも大きなNomad クライアント マシンを使用したい場合は、CircleCI のアカウント担当者にお問い合わせください。
+NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/64 CPU です。 Contact your CircleCI account representative to request use of larger machines for Nomad clients.
 
 Nomad のポート要件の詳細については、https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[クラスタのハードニング]セクションをご覧ください。
 
@@ -49,7 +48,7 @@ CircleCI では、GitHub または GitHub Enterprise を ID プロバイダー�
 
 NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。
 
-以下の表に、GitHub を実行するマシンで Services および Nomad クライアント インスタンスと通信する際に使用されるポートを示します。
+The following table describes the ports used on machines running GitHub to communicate with the services and Nomad client instances.
 
 --
 [.table.table-striped]
