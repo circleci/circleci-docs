@@ -35,7 +35,7 @@ A larger amount of jobs that can run concurrently, as described below in <<#conc
 Included is a set number of active users. Additional users can be added by using your credits. If you need more credits, they can be purchased to cover additional users on a per month basis. This process allows you to scale your credit package to align with build activity.
 
 === Additional self-hosted runners
-A significant increase in the amount of self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners, Self-hosted runners>> below for more information.
+A significant increase in the amount of self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
 
 === Additional support options
 Additional support through SLAs (limited hours and days), and support package add-ons. The Performance plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
