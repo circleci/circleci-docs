@@ -149,7 +149,7 @@ jobs:
       - image: buildpack-deps:trusty
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     environment:
       FOO: bar
     parallelism: 3
@@ -176,14 +176,14 @@ orbs:
 jobs:
  build:
     docker:
-      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: cimg/node:17.2-browsers # ここでは、DLC は何もしません。キャッシュの状況は、イメージレイヤーにどれだけ共通点があるかによって左右されます。
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+          docker_layer_caching: true # ここでは、DLC はレイヤーを明示的にキャッシュし、リビルドを避けようとします
       - run: docker build .
 ```
 
@@ -193,14 +193,14 @@ version: 2.1
 jobs:
  build:
     docker:
-      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: cimg/node:17.2-browsers # ここでは、DLC は何もしません。キャッシュの状況は、イメージレイヤーにどれだけ共通点があるかによって左右されます。
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+          docker_layer_caching: true # ここでは、DLC はレイヤーを明示的にキャッシュし、リビルドを避けようとします
       - run: docker build .
 ```
 
@@ -215,23 +215,14 @@ version: 2
 jobs:
  build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers # ここでは DLC は動作しません。
-        キャッシュの状況は、イメージ レイヤーがどれだけ共有されているかによって決まります。
+      - image: circleci/node:14.17.3-buster-browsers # ここでは、DLC は何もしません。キャッシュの状況は、イメージレイヤーにどれだけ共通点があるかによって左右されます。
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
-        キャッシュの状況は、イメージ レイヤーがどれだけ共有されているかによって決まります。
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+          docker_layer_caching: true # ここでは、DLC はレイヤーを明示的にキャッシュし、リビルドを避けようとします
       - run: docker build .
 ```
 
