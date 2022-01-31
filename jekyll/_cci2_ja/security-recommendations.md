@@ -39,33 +39,33 @@ CircleCI の使用を開始するにあたり、 チームが CircleCI の ユ�
 Unix シェルと Linux シェルが機密データを公開する方法はいくつかあります。 CircleCI を使ってコマンドラインで作業をする場合は、すべての方法を考慮することが重要です。
 
 * **Command history**: If you include a secret in a command’s parameters, such as `export MY_SECRET='value'` or `curl --header 'authorization: Basic TOKEN'`, that value could be written into your shell’s history file, such as `.bash_history`. Anyone with access to that file could then retrieve the secret.
-* **プロセスの引数**: プロセスの実行中、同じシステム上のユーザーは誰でも開始したコマンドを見ることができます。 コマンドを見る一番簡単な方法は`ps -ef`を実行することですが、他の方法もあります。 Critically, this information is exposed after environment variables have been interpreted, so that when running `mycommand "$MYVAR"`, `ps` will show `mycommand <value of MYVAR>`. On some older variants of Unix, such as AIX, it is also possible for all users to see all environment variables for any process.
-* **System logs**: Many systems log all commands executed using `sudo` for auditing. There are many auditing services that record all commands. このようなサービスは、機密データを安全に保つように設計されていないシステムにログをエクスポートする可能性があります。
-* **Console output**: Depending on your threat model and what kind of console is in use, simply printing a secret to the console could carry risk. For example, use of screen-sharing tools for activities like pair-programming can lead to accidental, persistent exposure of secrets transited through untrusted videoconferencing providers, possibly even in video recordings. It is best to choose tools that print secrets to the console only when necessary and explicitly told to do so by the user.
-* **Persistent, unencrypted secrets on disk**: Although it is common practice for command-line tools to store and use secrets stored in files in your home directory, such files' availability to all processes and persistence over time may be a significant risk. Some of the techniques below can help avoid the need to leave secrets on disk.
+* **プロセスの引数**: プロセスの実行中、同じシステム上のユーザーは誰でも開始したコマンドを見ることができます。 コマンドを見る一番簡単な方法は`ps -ef`を実行することですが、他の方法もあります。 この情報は、環境変数が解釈された後に公開されるため、`mycommand "$MYVAR"` を実行すると、`ps` に `mycommand <value of MYVAR>`が表示されます。 また、AIX などの一部の古い Unix では、すべてのユーザが任意のプロセスのすべての環境変数を見ることができます。
+* **システムのログ**: 多くのシステムでは、`sudo`を使用して実行されたすべてのコマンドが監査のためにログに記録されます。 すべてのコマンドを記録する監査サービスは数多くあります。 このようなサービスは、機密データを安全に保つように設計されていないシステムにログをエクスポートする可能性があります。
+* **コンソールの出力**: 脅威モデルや使用しているコンソールの種類によっては、コンソールにシークレットを出力するだけでリスクになる場合があります。 たとえば、ペアプログラミングなどのアクティビティに画面共有ツールを使用すると、信頼できないビデオ会議プロバイダーを経由して伝送された機密情報が、ビデオレコーディングの場合でも、偶発的かつ永続的に漏洩する可能性があります。 必要なときに、そしてユーザーが明示的に指示した場合のみシークレットをコンソールに出力するツールを選びましょう。
+* **ディスク上の永続的な暗号化されていないシークレット**: コマンドラインツールでは、ホームディレクトリのファイルに保存されているシークレットを保存して使用するのが一般的ですが、このようなファイルがすべてのプロセスで使用可能であり、時間の経過に伴う永続性が重大なリスクになる可能性があります。 以下のテクニックの中には、ディスクにシークレットを残す必要を避ける必要がなくなるものがあります。
 
-### Mitigation techniques
+### リスク低減テクニック
 {: #mitigation-techniques }
 
-There are many techniques to help mitigate the risks discussed above. Here, we will focus on methods for using `curl` and [the CircleCI CLI]({{site.baseurl}}/2.0/local-cli) securely with the Bash shell.
+上記のリスクを低減させるテクニックはたくさんあります。 ここでは `curl` と [the CircleCI CLI]({{site.baseurl}}/2.0/local-cli) を Bash シェルで安全に使う方法を説明します。
 
-#### General precautions
+#### 一般的な注意事項
 {: #general-precautions }
 
-running `env` or `printenv` which will print all your environment variables to `stdout`.
+シークレットを含むすべての環境変数の値を出力する `env` または `printenv` を実行しないようにします。
 
-Avoid writing secrets into your shell history with these two techniques. However, note that turning off history will not prevent commands from being exposed through audit logs and `ps`:
-  - Running `set +o history` before the sensitive commands will prevent them from being written to the history file. `set -o history` will turn history logging back on.
-  - If your shell supports the `HISTCONTROL` environment variable, and it is set to `ignoreboth` or `ignorespace`, placing a space before your command will prevent it from being written to the history file.
+以下の２つのテクニックを使ってシェルの履歴にシークレットを記載しないようにします。 ただし、履歴をオフにしても、コマンドが監査ログや`ps` によって公開されるのを防ぐことはできません。
+  - 機密性の高いコマンドの前に`set+o history` を実行すると、これらのコマンドが履歴ファイルに書き込まれなくなります。 `set -o history` により履歴の記録が再び有効になります。
+  - シェルが `HISTCONTROL` 環境変数をサポートしていて、`ignoreboth` または `ignorespace` に設定されている場合、コマンドの前にスペースを置くと、履歴ファイルに書き込まれません。
 
-Be aware that `export` is built in to Bash and other common shells. This means that, with precautions, you can avoid exposure of secrets to the history file, `ps`, and audit logs when using `export`:
-  - Make sure to avoid writing to the shell history by using `set +o history` or `HISTCONTROL`.
-  - Next, if unsure, verify that `export` is really a shell built-in by using the `type` command: `type export`
-  - Remember that information will still be exposed in your console, and make sure you are OK with that risk.
-  - Follow the rest of the precautions on this page related to the use of environment variables.
-  - As soon as you are finished using a secret you have `export`ed, consider using `unset` to remove it from the shell. Otherwise, the `export`ed environment variable will still be available to all processes spawned from that console.
+`export` は Bash およびその他の共通シェルに組み込まれているのでご注意ください。 つまり`export` を使用する際に予防策を講じることにより、履歴ファイル、`ps`、および監査ログへのシークレットの漏洩を回避することができるのです。
+  - `set+o history` または `HISTCONTROL` を使用したシェル履歴への書き込みは避けてください。
+  - 次に、よくわからない場合は `type` コマンド, `type export`を使って、`export` が本当にシェルビルトインであることを確認します。
+  - 情報は引き続きコンソールに表示されます。そのリスクに問題がないことを確認してください。
+  - このページの環境変数の使用に関するその他の注意事項に従ってください。
+  - `export`したシークレットの使用が終了したらすぐに `unset` によりシェルから削除してください。 削除しないと、`export`された環境変数は、そのコンソールから生成されたすべてのプロセスで引き続き閲覧できます。
 
-`read`, another shell built-in, can be used to set an environment variable without exposing it to the console.
+`read` や他のシェルビルトインを使用して、環境変数をコンソールに公開せずに設定することもできます。
 ```
 # Check that your version of read supports the -s option
 help read
@@ -83,10 +83,10 @@ secret_producer | IFS='' read -r MY_VAR
 export MY_VAR
 ```
 
-#### Using the CircleCI CLI
+#### CircleCI の CLI の使用
 {: #using-the-circleci-cli }
 
-Use the [the CircleCI local CLI]({{site.baseurl}}/2.0/local-cli) instead of `curl` when possible. The CLI takes extra precautions to avoid leaking secrets when performing sensitive operations. For example, when [adding a secret to a context]({{site.baseurl}}/2.0/local-cli), the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
+可能な場合は`curl`の代わりに[the CircleCI local CLI]({{site.baseurl}}/2.0/local-cli)を使用します。 CLI では、機密性の高い操作を実行するときにシークレットが漏洩するのを防ぐために特別な注意を払っています。 For example, when [adding a secret to a context]({{site.baseurl}}/2.0/local-cli), the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
 
 If writing a shell script that uses the CircleCI CLI, remember that in Bash you can avoid exposing secrets stored in environment variables or text by using the `<<<` construct, which does not spawn a new process while piping a value: `circleci context store-secret <vcs-type> <org-name> <context-name> <secret name> <<< "$MY_SECRET"`. This is more reliable than using `echo` or `printf`, which may or may not be shell built-ins and therefore could spawn a process.
 
