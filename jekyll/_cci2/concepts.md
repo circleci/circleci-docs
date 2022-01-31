@@ -449,7 +449,7 @@ workflows:
 {:.tab.workflows-example.Server_2}
 {% raw %}
 ```yaml
-version: 2.1
+version: 2.0
 
 jobs:
   build1:
@@ -622,7 +622,7 @@ jobs:
 {:.tab.cache.Server_2}
 {% raw %}
 ```yaml
-version: 2.1
+version: 2.0
 
 jobs:
   build1:
@@ -742,7 +742,7 @@ jobs:
 {:.tab.workspace.Server_2}
 {% raw %}
 ```yaml
-version: 2.1
+version: 2.0
 
 jobs:
   build1:
