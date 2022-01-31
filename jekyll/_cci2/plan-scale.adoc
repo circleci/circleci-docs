@@ -5,7 +5,7 @@ version:
 = CircleCI Scale Plan
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the Scale plan available to developers.
+:page-description: This document describes the CircleCI Scale plan available to developers.
 :icons: font
 :toc: macro
 :toc-title:
