@@ -3,10 +3,8 @@ CircleCI orbs are shareable configuration packages that enable developers to cre
 
 For more information on private orbs, refer to the <<orb-intro/#private-orbs-vs-public-orbs,Orbs Introduction>> page.
 
-=== Concurrency and test splitting
-The ability to run multiple tests at the same time (concurrently) is a powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows.
-
-For more information about how to utilize test splitting, refer to the <<parallelism-faster-jobs#,Running Tests In Parallel>> page.
+=== Concurrency
+Concurrency is the ability to run multiple jobs in your workflows at the same time. This is a powerful feature that allows you to decrease your build times and shorten feedback cycles.
 
 === Self-hosted runners
 CircleCI runners allow you to use your own infrastructure for running jobs, providing more granular control of your own environment and flexibility in building and testing on a wide variety of architectures.

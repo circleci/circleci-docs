@@ -95,8 +95,8 @@ Details about individual step storage and network transfer usage can be found in
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
 
-### How to calculate an approximation of your monthly costs
-{: #how-to-calculate-an-approximation-of-your-monthly-costs}
+### How to calculate an approximation of your storage and network costs?
+{: #how-to-calculate-an-approximation-of-your-network-and-storage-costs}
 
 Charges apply when an organization has runner network egress beyond the included GB allotment for storage and network usage.
 

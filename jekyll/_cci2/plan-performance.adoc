@@ -5,7 +5,7 @@ version:
 = CircleCI Performance Plan
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the CircleCI Performance plan available to developers.
+:page-description: This document describes the Performance plan available to developers on CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
@@ -14,7 +14,7 @@ version:
 This document describes the Performance plan available to developers.
 
 == Performance plan
-The Performance plan offers a set amount of build credits across a variety of resource classes, per month, which you can customize depending on your build configuration and execution environment.
+The Performance plan offers a set amount of credits across a variety of resource classes, per month, which you can customize depending on your build configuration and execution environment.
 
 In addition to a higher amount of network usage included, the Performance plan offers several improvements over the Free plan:
 
@@ -29,7 +29,7 @@ Access to some of the larger machine sizes on Docker, Linux, Windows, and macOS.
 For more information about these resources, please refer to the the <<executor-intro#,Executors and Images>> page.
 
 === Less queuing with more concurrency
-A larger amount of jobs that can run concurrently, as described below in <<#concurrency-and-test-splitting, Concurrency and test splitting>>.
+A larger amount of jobs that can run concurrently in your workflows, as described below in <<#concurrency,Concurrency>>.
 
 === Scalable user seat count
 Included is a set number of active users. Additional users can be added by using your credits. If you need more credits, they can be purchased to cover additional users on a per month basis. This process allows you to scale your credit package to align with build activity.
@@ -41,6 +41,6 @@ A significant increase in the amount of self-hosted runners, allowing you to run
 Additional support through SLAs (limited hours and days), and support package add-ons. The Performance plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
 
 == CircleCI features
-In addition to the upgraded features listed above, the Performance plan also has access to the features listed below - available across all of CircleCI's plans. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment.
+In addition to the upgraded features listed above, the Performance plan also has access to the features listed below. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 
 {% include snippets/features-of-circleci.adoc %}
