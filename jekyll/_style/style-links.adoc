@@ -1,7 +1,7 @@
 = Links
 :page-layout: classic-docs
 :icons: font
-:toc: macro
+:toc: false
 :toc-title:
 
 * In markdown content, internal links within docs should use `{{ site.baseurl }}` in order to create relative links. This means when you build docs locally the links will work between local versions rather than taking you to the production docs site:

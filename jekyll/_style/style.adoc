@@ -2,6 +2,7 @@
 description: "Style guide for contributions to CircleCI docs."
 permalink: style/
 page-type: index
+:toc: false
 ---
 = Welcome to the CircleCI style guide
 :page-layout: classic-docs
