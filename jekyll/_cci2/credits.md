@@ -21,7 +21,7 @@ The right plan for you and your team will depend on several factors:
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-You can view the [Plan Overview]({{site.baseurl}}/2.0/plan-overview) page for more information, or if you'd like more details on what features are available per plan, view the individual plan pages:
+You can view the [Plan Overview]({{site.baseurl}}/2.0/plan-overview) page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
 - [Free Plan]({{site.baseurl}}/2.0/plan-free)
 - [Performance Plan]({{site.baseurl}}/2.0/plan-performance)
 - [Scale Plan]({{site.baseurl}}/2.0/plan-scale)
