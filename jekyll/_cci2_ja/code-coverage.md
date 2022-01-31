@@ -111,13 +111,13 @@ jobs:
       - image: cimg/ruby:3.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
@@ -154,13 +154,13 @@ jobs:
       - image: circleci/ruby:2.5.3-node-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:9.6
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
@@ -224,7 +224,7 @@ jobs:
     - image: cimg/python:3.10-browsers
       auth:
         username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        password: $DOCKERHUB_PASSWORD  ## コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
     - checkout
     - browser-tools/install-browser-tools
@@ -238,7 +238,7 @@ jobs:
         command: |
           $HOME/.local/bin/coverage run -m pytest
           $HOME/.local/bin/coverage report
-          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
+          $HOME/.local/bin/coverage html  # ブラウザで htmlcov/index.html を開きます。
     - store_artifacts:
         path: htmlcov
 workflows:
