@@ -31,7 +31,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:17.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -75,7 +75,7 @@ parameters:
 jobs:
   build:
     docker:
-      - image: circleci/node:<< pipeline.parameters.image-tag >>
+      - image: cimg/node:<< pipeline.parameters.image-tag >>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
