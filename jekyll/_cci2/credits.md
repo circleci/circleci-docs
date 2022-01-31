@@ -116,11 +116,6 @@ Organizations on our Free plan receive a set amount of free credits per month fo
 
 If you build on macOS, we also offer organizations on our Free plan a number of free credits every month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
 
-## Docker layer caching
-{: #docker-layer-caching }
-
-You are able to use credits per run job for Docker Layer Caching (DLC). DLC is only available on the Performance plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
-
 ## Troubleshooting
 {: #troubleshooting }
 
