@@ -1,18 +1,18 @@
 ---
 layout: classic-docs
-title: "Security recommendations"
+title: "セキュリティーに関する推奨事項"
 category:
   - 管理
 order: 5
-description: "CircleCI security recommendations."
+description: "セキュリティーに関する推奨事項"
 ---
 
-This document outlines recommended best practices to ensure the security of your data and secrets when using CircleCI.
+このドキュメントでは、 CircleCI を使用する際にデータとシークレットのセキュリティを確保するために推奨されるベストプラクティスについて説明します。
 
 * TOC
 {:toc}
 
-## Checklist for using CircleCI securely as a customer
+## CircleCI を安全に使用していただくためのチェックリスト
 {: #checklist-for-using-circleci-securely-as-a-customer }
 
 If you are getting started with CircleCI, there are some security best practices you can ask your team to consider as _users_ of CircleCI:
