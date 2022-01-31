@@ -65,9 +65,8 @@ jobs: # a collection of steps
     working_directory: ~/laravel # directory where steps will run
     steps: # a set of executable commands
       - checkout # special step to check out source code to working directory
-      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
-      - run: sudo docker-php-ext-install pecl
-      - run: sudo composer self-update
+      - run: sudo pecl install pcov
+      - run: sudo composer selfupdate
       - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
