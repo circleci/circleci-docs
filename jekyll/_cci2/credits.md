@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Using Credits
 categories: [how-to]
-description: Learn about CircleCI credits based system
+description: Learn about the CircleCI credits-based plan system
 version:
 - Cloud
 ---
