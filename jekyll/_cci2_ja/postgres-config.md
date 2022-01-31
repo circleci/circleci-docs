@@ -18,7 +18,7 @@ PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.
 ## structure.sql を使用した Rails アプリケーション用の CircleCI 設定例
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
-If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the cimg/ruby:3.0-node image does not have psql installed by default and uses `pg` gem for database access.
+`structure.sql` ファイルを使用して構成した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、cimg/ruby:3.0-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
 
 ```yaml
 version: 2
@@ -26,24 +26,24 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # Primary container image where all commands run
+    # すべてのコマンドを実行するプライマリコンテナのイメージです。
 
     docker:
       - image: cimg/ruby:3.0-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # Service container image available at `host: localhost`
+    # `host: localhost` にあるサービスコンテナイメージです。
 
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
@@ -51,36 +51,36 @@ jobs:
     steps:
       - checkout
 
-      # Restore bundle cache
+      # バンドルキャッシュを復元します。
       - restore_cache:
           keys:
             - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
             - rails-demo-
 
-      # Bundle install dependencies
+      # 依存関係をバンドルインストールします。
       - run:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # Store bundle cache
+      # バンドルキャッシュを保存します。
       - save_cache:
           key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
 
       - run:
-          name: Database Setup
+          name: データベースのセットアップ
           command: |
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
       - run:
-          name: Parallel RSpec
+          name: 並列 RSpec
           command: bin/rails test
 
-      # Save artifacts
+      # アーティファクトを保存します。
       - store_test_results:
           path: /tmp/test-results
 ```
@@ -107,14 +107,14 @@ jobs:
       - image: ruby:2.3.1-jessie
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
-      # which includes a few enhancements and modifications. どちらのイメージも使用できます。
+      # 以下の例では公式のPostgres 9.6 イメージを使用していますが、 いくつかの機能強化とカスタマイズが加えられた
+      # cimg/postgres:9.6 も使用可能です。 どちらのイメージも使用できます。
       
       - image: postgres:9.6-jessie
         auth:
@@ -175,25 +175,25 @@ jobs:
             - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
 
       - run:
-          name: Get dependencies
+          name: 依存関係の取得
           command: |
             go get -v
 
       - run:
-          name: Get go-junit-report for setting up test timings on CircleCI
+          name: Get go-junit-report を取得してCircleCI でテストのタイミングを設定する
           command: |
             go get github.com/jstemmer/go-junit-report
-            # Remove go-junit-report from go.mod
+            # go.mod からgo-junit-report を削除します。
             go mod tidy
 
-      #  Wait for Postgres to be ready before proceeding
+      #  Postgres が準備ができるまで待機し、その後処理します。
       - run:
           name: Waiting for Postgres to be ready
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
+          name: ユニットテストの実行
+          environment: # データベース URL 用の環境変数と移行ファイルへのパスを指定します。
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: |
@@ -207,7 +207,7 @@ jobs:
             - "/go/pkg/mod"
 
       - run:
-          name: Start service
+          name: サービスの開始
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
@@ -215,7 +215,7 @@ jobs:
           background: true
 
       - run:
-          name: Validate service is working
+          name: サービスが稼働しているかどうかの確認
           command: |
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
@@ -240,14 +240,14 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/php:8.1-browsers # The primary container where steps are run
+      - image: cimg/php:8.1-browsers # ステップが実行されるプライマリコンテナ
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
       - image: cimg/mysql:8.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -257,7 +257,7 @@ jobs:
     steps:
       - checkout
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+      # プライマリコンテナは MySQL ではないので、準備ができるまでスリープコマンドを実行します。
           name: MySQL が準備できるまで待機
           command: |
             for i in `seq 1 10`;
@@ -288,14 +288,14 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/php:8.1-browsers # The primary container where steps are run
+      - image: cimg/php:8.1-browsers # ステップが実行されるプライマリコンテナ
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
       - image: cimg/mysql:8.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -305,7 +305,7 @@ jobs:
     steps:
       - checkout
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+      # プライマリコンテナは MySQL ではないので、準備ができるまでスリープコマンドを実行します。
           name: MySQL が準備できるまで待機
           command: |
             for i in `seq 1 10`;
@@ -338,14 +338,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+      - image: circleci/php:7.1-apache-node-browsers # ステップを実行するプライマリコンテナです。
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
       - image: cimg/mysql:8.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -355,7 +355,7 @@ jobs:
     steps:
       - checkout
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+      # プライマリコンテナは MYSQL ではないので、準備ができるまでスリープコマンドを実行します。
           name: MySQL が準備できるまで待機
           command: |
             for i in `seq 1 10`;
@@ -408,4 +408,4 @@ VALUES (
 {: #see-also }
 
 
-サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を「[データベースを設定する]({{ site.baseurl }}/ja/2.0/databases/)」ページで紹介しています。
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
