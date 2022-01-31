@@ -16,33 +16,33 @@ CircleCI ジョブで使用される IP アドレスを、明確に定義され�
 * 目次
 {:toc}
 
-**注: **IP 範囲機能の料金体系が決定しました。 詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
+**注: **IP 範囲機能の課金モデルが決定しました。 詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
 {: class="alert alert-info"}
 
 
 ## 概要
 {: #overview }
 
-IP アドレスの範囲機能は、制限された環境へのアクセスを IP アドレスに基づいて設定したいお客様のための機能です。 この機能では、 CircleCI のサービスが使用する IP アドレスのリストを提供します。 CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
+IP アドレスの範囲は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 お客様には CircleCI のサービスで使用する IP アドレスのリストが提供されます。 この機能を有効にしたジョブのトラフィックは、リスト上のいずれかの IP アドレスを使用するようになります。
 
-本機能は現在プレビュー段階であり、[Performance または Scale プラン](https://circleci.com/ja/pricing/)のお客様がご利用いただけます。 なお、この機能では、当該機能を有効にしたジョブのネットワーク転送量に応じてクレジットの消費が発生します。 料金の詳細については、後日の一般公開時にお知らせします。
+本機能は現在プレビュー段階であり、[Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のお客様のみご利用いただけます。 なお、この機能を有効にしたジョブのネットワーク転送量に応じてクレジットの消費が発生します。 料金の詳細については、後日の一般公開時にお知らせします。
 
-## IP アドレスの範囲: ユース ケース
+## IP アドレスの範囲機能: ユースケース
 {: #usecases }
 
-この機能を使用すれば、ご利用のインフラストラクチャへのインバウンド接続を、CircleCI に関連していることが確かな IP アドレスのみに制限することができます。
+IP アドレスの範囲機能により、ご利用のインフラストラクチャへのインバウンド接続を、CircleCI に確実に関連付けられている IP アドレスのみに制限することができます。
 
-IP アドレスに基づくアクセス制御は、以下のようなユース ケースに便利です。
+IP アドレスに基づくアクセス制御は、以下のようなユースケースに便利です。
 - プライベートのアーティファクト リポジトリにアクセスする
 - ファイアウォール内でホストされている CocoaPods プロキシから依存関係をプルする
-- 内部環境でテスト ケースを実行する
+- 内部環境でテストケースを実行する
 - プライベートの AWS リソースに対して結合テストを実行する
 - 機密データが含まれる内部アプリケーションをデプロイする
 - 本番環境ネットワークへのアクセスを許可する
 
-これまで、静的 IP アドレスを構成および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能であれば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
+これまで、静的 IP アドレスを設定および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能を使えば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
 
-IP ranges only routes traffic through one of the defined IP address ranges _during job execution_. Any step that occurs before the job has started to execute will not have its traffic routed through one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
+この機能により、_ジョブの実行中_のトラフィックは、定義されたいづれかの IP アドレスのみを経由するようになります。 ジョブの実行が開始される前に発生するステップのトラフィックは、定義された IP アドレス範囲にルーティングされません。  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
 
 ## IP アドレスの範囲機能を使用した設定ファイルの例
 {: #exampleconfiguration }
