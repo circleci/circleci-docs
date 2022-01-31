@@ -27,13 +27,13 @@ This document describes how to get started with a basic build of your Linux, And
    jobs:
      build:
        docker:
-         - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+         - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリ コンテナ
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
        steps:
-         - checkout # check out the code in the project directory
-         - run: echo "hello world" # run the `echo` command
+         - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
+         - run: echo "hello world" # `echo` コマンドを実行します
    ```
 
 2. 変更をコミットし、プッシュします。
