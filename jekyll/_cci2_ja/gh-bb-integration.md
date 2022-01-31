@@ -320,5 +320,5 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 
 You can add the key to known_hosts by running the following command:
 ```
-ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH 鍵を使用します。
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 ```
