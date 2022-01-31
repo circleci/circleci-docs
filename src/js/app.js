@@ -16,7 +16,6 @@ window.OptimizelyClient = new services.OptimizelyClient();
 
 import './site';
 
-services.lang.init();
 services.rum.init();
 // Temporary service to check if user dark mode preferences
 trackDarkModePreference();
@@ -28,5 +27,6 @@ $(() => {
   services.highlightjsBadge.init();
   services.progressbar.init();
   services.sectionShareButton.init();
+  services.lang.init();
   import(/* webpackPrefetch: true */ './experiments'); // imports all experiments
 });

@@ -70,7 +70,7 @@
                 <li class="subnav-item">
                   {% assign link_slug = sub-item.link | slugify %}
                   <a class="{% if url_slug == link_slug %} active {% endif %}"
-                    href="{{ site.baseurl }}/{{ sub-item.link }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                    href="{{ site.baseurl }}/{{ sub-item.link }}{% if sub-item.hash %}#{{sub-item.hash}}{% endif %}"
                     data-section="{{ section_slug }}"
                     data-proofer-ignore>{{ display_name }}</a>
                 </li>
