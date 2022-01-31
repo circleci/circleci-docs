@@ -16,7 +16,7 @@ version:
 toc::[]
 
 == 安全なコンテンツのタイプと安全ではないコンテンツのタイプ
-デフォルトでレンダリングが許可されているのは、あらかじめ決められたタイプのアーティファクトのみです。 これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
+By default, only predefined artifact types are allowed to be rendered. これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -102,7 +102,7 @@ toc::[]
 |===
 
 === 安全でないタイプの許可
-KOTS管理コンソールのフロントエンド設定にある [Server Unsafe Artifacts]チェックボックスをチェックすることで、必要に応じて安全でないタイプのレンダリングを許可するように選択することができます。
+You can choose to allow unsafe types to be rendered, if required, by checking the **Server Unsafe Artifacts** checkbox within the **Frontend Settings** in the KOTS Admin Console.
 
 .CircleCI Server v3.x のアーティファクト
 image::server-3-unsafe-artifacts.png[Screenshot highlighting the option to server unsafe build artifacts]
