@@ -13,7 +13,7 @@ version:
 This document describes the Scale plan available to developers.
 
 == Scale plan
-The Scale plan grows with your team and your business, and offers a wide range of customization. The Scale plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment. This plan provides access to the highest amount of network and storage usage that CircleCI offers.
+The Scale plan grows with your team and your business, and offers a wide range of customizations. The Scale plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment. This plan provides access to the highest amount of network and storage usage that CircleCI offers.
 
 The Scale plan offers several improvements over the Free and Performance plans:
 
