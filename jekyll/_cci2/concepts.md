@@ -175,7 +175,7 @@ jobs:
 
 {:.tab.executors.Server_2}
 ```yaml
-version: 2.0
+version: 2
 
 jobs:
  build1: # job name
@@ -449,7 +449,7 @@ workflows:
 {:.tab.workflows-example.Server_2}
 {% raw %}
 ```yaml
-version: 2.0
+version: 2
 
 jobs:
   build1:
@@ -622,7 +622,7 @@ jobs:
 {:.tab.cache.Server_2}
 {% raw %}
 ```yaml
-version: 2.0
+version: 2
 
 jobs:
   build1:
@@ -742,7 +742,7 @@ jobs:
 {:.tab.workspace.Server_2}
 {% raw %}
 ```yaml
-version: 2.0
+version: 2
 
 jobs:
   build1:
@@ -857,7 +857,6 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
 See [Using Contexts]({{ site.baseurl }}/2.0/contexts/) for more information.
-
 
 ## See also
 {: #see-also }
