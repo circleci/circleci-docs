@@ -26,7 +26,7 @@ For more information about this features, please refer to the <<ip-ranges#,IP Ra
 === Additional resource classes
 Access to some of the larger machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
-For more information about these resources, please refer to the the <<executor-intro#, Executors and Images>> page.
+For more information about these resources, please refer to the the <<executor-intro#,Executors and Images>> page.
 
 === Less queuing with more concurrency
 A larger amount of jobs that can run concurrently, as described below in <<#concurrency-and-test-splitting, Concurrency and test splitting>>.
