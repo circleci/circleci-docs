@@ -113,4 +113,4 @@ Docker Compose を使用して Docker Compose ファイルを含むマルチコ�
 
 {:.no_toc}
 
-サンプルと詳細については、[Docker コマンドの実行のフォルダーのマウントのセクション]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders)をご覧ください。
+See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
