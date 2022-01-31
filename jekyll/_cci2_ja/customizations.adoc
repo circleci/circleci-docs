@@ -3,7 +3,7 @@ version:
 - Server v2.x
 - サーバー管理者
 ---
-= カスタマイズおよび設定
+= カスタマイズと設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは CircleCI Server の動作に影響を与える重要なファイルや変数について、また設定オプションについて概説します。
@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-下記では CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションに関する概説します。
+ここでは CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションについて概説します。
 
 toc::[]
 
@@ -20,17 +20,17 @@ toc::[]
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Need
+| ニーズ
 | パス
 | 詳細情報
 
 | 全般設定
 | `/etc/circle-installation-customizations`
-| 下記の値の表を参照。
+| 下記の値の表を参照してください。
 
 | JVM ヒープサイズ
 | `/etc/circleconfig/XXXX/customizations`  Supports: frontend, test_results
-| `JVM_HEAP_SIZE` を使って個々のコンテナのヒープサイズを設定。
+| `JVM_HEAP_SIZE` で個々のコンテナのヒープサイズを調節してください。
 
 | カスタム CA 証明書
 | `/usr/local/share/ca-certificates/`
@@ -38,15 +38,15 @@ toc::[]
 
 | コンテナのカスタマイズ
 | `/etc/circleconfig/XXX/customizations`
-| Used lots of places in replicated
+| CircleCI コンテナが随所で使用
 
 | `/etc/hosts`
 | `/etc/hosts`
-| フロントエンドを含む複数のコンテナが参照し、コンテナの /etc/hostsにコピー。
+| フロントエンドを含む複数のコンテナが参照し、コンテナの /etc/hosts にコピーします。
 
 | `/etc/environment`
 | `/etc/environment`
-| すべてのコンテナが参照。
+| すべてのコンテナが参照します。
 |===
 
 === `/etc/circle-installation-customizations` のプロパティー
@@ -66,7 +66,7 @@ NOTE: すべてのプロパティーが`export ENV_VAR="value"`の形式であ�
 
 | JVM_HEAP_SIZE
 | このプロパティーを読み取る*すべての*コンテナの JVM ヒープサイズを設定します。
-| 可能であればコンテナ固有の設定を使用 (上記ファイルを参照)
+| 可能であれば、コンテナ固有の設定を使用してください (上記ファイルを参照)。
 |===
 
 === その他のプロパティーと環境変数
@@ -80,28 +80,28 @@ NOTE: すべてのプロパティーが`export ENV_VAR="value"`の形式であ�
 | 詳細情報
 
 | HTTP_PROXY, NO_PROXY
-| Replicated  と使用する CircleCI コンテナ外その他のサービスのプロキシ
+| Replicated  と使用する CircleCI コンテナ外部のその他のサービスのプロキシです。
 |
 |===
 
 <<<
 
 == サービス設定のオーバーライド
-ここでは CircleCI サーバーのサービスをオーバーライドするための設定インターフェイスについて説明します。
+ここでは CircleCI Server のサービスをオーバーライドするための設定インターフェイスについて説明します。
 
 WARNING: 設定のカスタマイズにより悪影響を及ぼす可能性があります。変更を行う前に、 mailto:support@circleci.com[support@circleci.com ]にお問い合わせください。
 
 設定は、Services マシン上のファイルに環境変数をエキスポートすることで行われます。
 
-Consider the file “customizations” created at the following path /etc/circleconfig/workflows-conductor:
+/etc/circeconfig/workflows-conductor というパスで作成されたファイル  「customizations」について考えてみましょう。
 
 ```shell
 export FOO="bar"
 ```
 
-The value of FOO will take precedence over the default values set in the default container mapping in the CircleCI server configuration.
+FOOの値は、CircleCI Server 設定のデフォルトコンテナマッピングで設定されたデフォルト値よりも優先されます。　
 
-=== Available Overrides
+=== 使用可能なオーバーライド
 
 ```
 /etc/circleconfig/api-service/customizations
@@ -131,13 +131,13 @@ The value of FOO will take precedence over the default values set in the default
 === リソース クラス
 _CircleCI Server v2. 19 からサポート_
 
-You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
+リソースクラスをカスタマイズして、開発者に設定するジョブの https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM オプション] を提供することができます。
 
-NOTE: The resources for `machine` executors can't be configured using the method described on this page. To change CPU and memory size for VMs, change `AWS Instance Type` in the VM Provider section of the Management Console. See the <<vm-service#, VM Service>> guide for more details.
+NOTE: `machine` Executor のリソースは、このページで説明する方法では設定できません。 VM の CPU およびメモリサイズを変更するには、管理コンソールの [VM Provider] で、 `AWS Instance Type ` を変更します。 See the <<vm-service#, VM Service>> guide for more details.
 
-TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
+TIP: リソースクラスの設定を以下の手順で完了したら、開発者がこれらのオプションを正しく使用できるように設定します。
 
-Following are the steps required to customize resource classes for the Docker executors:
+Dcoker Executor でのリソースクラスのカスタマイズは、以下の手順に行います。
 
 . Services マシンに SSH を行います。
 . 以下を実行します。
@@ -151,18 +151,18 @@ sudo mkdir /etc/circleconfig/picard-dispatcher
 sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 +
-NOTE: This file replaces the full resource class definition for your installation so it is important to include all resource classes your users need at this point, not just those you wish to customize.
-. Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
+NOTE: このファイルは CircleCI Server のリソースクラス定義をすべて置き換えるため、ご自身がカスタマイズをしたいリソースクラスだけでなくこの時点でお客様のユーザーが必要とするすべてのリソースクラスを含めることが重要です。
+. 必要なカスタマイズをファイルに追加して vim を保存し、 `:wq `で終了します。オプションとフォーマットについては、以下を参照してください。
 . 以下を実行します。
 +
 ```shell
 echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
 ```
-. Restart the CircleCI server application. The application can be stopped and started again from the Management Console Dashboard (for example, `<circleci-hostname>.com:8800`).
+. CircleCI Server アプリケーションを再起動します。 The application can be stopped and started again from the Management Console Dashboard (for example, `<circleci-hostname>.com:8800`).
 
-Below is an example resource class configuration:
+以下はリソースクラスのサンプル設定です。
 
-Example config:
+サンプル設定: 
 
 ```
 {:default-resource-class :medium
@@ -182,19 +182,19 @@ Example config:
    :windows.medium {:id "windows.medium" :availability :general :ui {:cpu 2.0 :ram 8192 :class :windows.medium} :outer {:cpu 1 :ram 512}}}}}
 ```
 
-Let's take a look at one of the options in more detail
+この中の一つを詳しく見てみましょう。
 
 ```
 :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
-* `:medium`  - this is the name that your developers will use to refer to the resource class in their config.yml and the is the external facing name of the resource class.
-* `:id "d1.medium"` - this is the internal name for the resource class. You can customize this ID for Docker resource classes.
-* `:availability :general` - required field
-* `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. This this should be kept in parity with :outer - see below.
+* `:medium` : 開発者が config.yml 内のリソースクラスを参照するために使用する名前で、リソースクラスの外部向けの名前です。
+* `:id "d1.medium"` : リソースクラスの内部用の名前です。  この ID を Docker のリソースクラス用にカスタマイズすることができます。
+* `:availability :general`: 必須フィールドです。
+* `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. これは、以下の :outer と一致している必要があります。
 * `:outer {:cpu 4.0 :ram 8192}` - This defines the CPU and RAM for the resource class.
 
-CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to allocate the resources required. If not, the job will be queued. See our <<nomad-metrics#configuring-nomad-client-metrics, Nomad metrics guide>> for information on monitoring the capacity of your Nomad cluster, and <<server-ports#nomad-clients, Nomad Client System Requirements>> for more about capacity, and how Nomad allocates jobs.
+CAUTION: ジョブは、必要なリソースを割り当てるために Nomad クライアントに十分な CPU/RAM がある場合にのみ実行できます。 そうでない場合、ジョブはキューイングします。 See our <<nomad-metrics#configuring-nomad-client-metrics, Nomad metrics guide>> for information on monitoring the capacity of your Nomad cluster, and <<server-ports#nomad-clients, Nomad Client System Requirements>> for more about capacity, and how Nomad allocates jobs.
 
 ////
 ==== Enable the Large Resource Class for Machine Executor
@@ -217,18 +217,18 @@ circleci dev-console
 ```
 ////
 
-=== Login Screen
+=== ログイン画面
 _CircleCI Server v2. 17.3 からサポート_
 
-You can add a banner to your login screen as follows:
+ログイン画面へのバナーの追加は以下のように行います。
 
-. Access the file: `/etc/circleconfig/frontend/customizations` on the Services machine
-. Add the following line, substituting the text you wish to display in the banner:
+. Services マシンから `/etc/circleconfig/frontend/customizations`ファイルにアクセスします。
+. バナーに表示するテキストに置き換えて以下の行を追加します。
 +
 ```
 export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
 ```
-. Restart CircleCI from the Management Console (your-circleci-hostname.com:8800)
+. 管理コンソール (your-circleci-hostname.com:8800) から CircleCI を再起動します。
 
-.Login Screen Banner Example
+.ログイン画面のバナー例
 image::banner.png[]
