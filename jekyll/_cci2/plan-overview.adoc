@@ -26,7 +26,7 @@ The right plan for you and your team will depend on several factors:
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-Let's look at how a team might use credits. In this example, your team is divided into several groups working on different projects; some projects are larger while others are smaller and need less resources from a CI configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
+Let's look at how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need less resources from a CI configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
 
 For example, your team might use a `large` `resource_class` (4 CPUs and 8 GB of memory) and make use of more credits/minute to speed up a build for a bigger project, while only using the `small` `resource_class` (1 CPU, 2 GB memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
 
