@@ -91,7 +91,7 @@ Workspaces are stored for up to 15 days. Workspaces are not shared between pipel
 ## Workspaces and runner network charges
 {: #workspaces-and-runner-network-charges }
 
-When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit charges will apply These charges are based on your accrued overages. The GB allocation for the plan you are on only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited. Also, you will see no egress traffic or charges for any runners deployed within AWS `us-east-1`.
+When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit charges will apply. These charges are based on your accrued overages.
 
 ### Viewing network egress usage
 {: #viewing-network-egress-usage }
