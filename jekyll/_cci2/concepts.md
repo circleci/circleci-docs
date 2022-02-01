@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-This guide introduces some basic concepts to help you understand how CircleCI manages your CI/CD pipelines.
+This guide introduces some basic concepts to help you understand how CircleCI manages your [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) pipelines.
 
 * TOC
 {:toc}
@@ -19,7 +19,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 ## Projects
 {: #projects }
 
-A CircleCI project shares the name of the associated code repository in your [Version Control System]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). Click **Add Project** in the CircleCI application to enter the Projects dashboard. From here you can set up and follow the projects you have access to.
+A CircleCI project shares the name of the associated code repository in your [Version Control System]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). Select **Projects** in the CircleCI web app side bar to enter the projects dashboard. From here you can set up and follow the projects you have access to.
 
 On the Projects Dashboard, you can either:
 * _Set Up_ any project that you are the owner of in your VCS.
@@ -30,7 +30,7 @@ On the Projects Dashboard, you can either:
 ## Configuration
 {: #configuration }
 
-CircleCI believes in *configuration as code*. Your entire continuous integration and deployment process is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config. See the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for a basic introduction.
+CircleCI believes in *configuration as code*. Your entire CI/CD process is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config. See the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for a basic introduction.
 
 ```bash
 ├── .circleci
@@ -39,11 +39,11 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 └── all-other-project-files-and-folders
 ```
 
-`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) page.
+`.circleci/config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) page.
 
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
-- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. Available in CircleCI Cloud only.
+- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. (not available for server v2.x)
 - **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
 - **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project.
@@ -81,14 +81,14 @@ Pipelines represent methods for interacting with your configuration:
 
 Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/orb-concepts/) for details on how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
 
-The illustration above showing an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with [the Maven orb](https://circleci.com/developer/orbs/orb/circleci/maven). Here, the orb sets up a default executor that can execute steps with Maven and run a common job (`maven/test`).
+The illustration in the [Configuration](#configuration) section showing an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with [the Maven orb](https://circleci.com/developer/orbs/orb/circleci/maven). Here, the orb sets up a default executor that can execute steps with Maven and run a common job (`maven/test`).
 
 ![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
 ## Jobs
 {: #jobs }
 
-Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified. For `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container. For `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos). For `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
+Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container. For `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos). For `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
@@ -99,7 +99,7 @@ Each separate job defined within your config runs in a unique Execution environm
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
-You can define an image for each executor. An image is a packaged system that includes instructions for creating a running container or virtual machine. CircleCI provides a range of images for use with the Docker executor. For more information, see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
+You can define an image for each executor. An image is a packaged system that includes instructions for creating a running container or virtual machine. CircleCI provides a range of images for use with the Docker executor, we call these _convenience images_. For more information, see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
 
 {:.tab.executors.Cloud}
 ```yaml
@@ -862,4 +862,4 @@ See [Using Contexts]({{ site.baseurl }}/2.0/contexts/) for more information.
 {: #see-also }
 {:.no_toc}
 
-[Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
+[Your First Green Build]({{ site.baseurl }}/2.0/getting-started/) guides you step-by-step through setting up a working pipeline.
