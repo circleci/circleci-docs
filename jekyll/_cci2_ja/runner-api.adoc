@@ -263,7 +263,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 }
 ```
 
-=== GET /api/v2/runner/tasks/running
+=== GET /api/v2/tasks/running
 
 Get the number of running tasks for a given resource class.
 
@@ -294,7 +294,7 @@ Get the number of running tasks for a given resource class.
 ==== サンプル
 
 ```sh
-curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
