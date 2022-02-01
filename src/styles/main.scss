@@ -356,9 +356,20 @@ body.homepage{
 	}
 }
 
+table {
+  tr {
+    th,td {
+      code {
+        white-space: nowrap !important;
+      }
+    }
+  }
+}
+
 code {
   padding: 2px;
   word-wrap: anywhere;
+  white-space: pre-wrap !important;
 }
 
 code.env_var {
