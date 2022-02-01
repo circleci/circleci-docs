@@ -69,23 +69,30 @@ $border-col: rgba(229,231,235, 1);
     color: $black;
     margin: 4px 0px;
     margin-top: 0px;
-    padding: 4px 16px;
+    padding: 4px 20px;
     font-size: 15px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 18px;
     &.selected {
-      background: #F3F3F3;
+      // background: #F3F3F3;
       @media (max-width: $screen-xs-max) {
         font-weight: bold;
       }
     }
 
     &:hover {
-      color: $btn-hover-blue;
+      background: #F3F3F3;
       font-weight: 700;
       transition: all 200ms;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 0.15s;
+    }
+    .select-lang-wrap {
+      color: $btn-outer-green;
+      padding-right: 3px;
+      @media (max-width: $screen-xs-max) {
+        display: none;
+      }
     }
   }
 
