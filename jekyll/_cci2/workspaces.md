@@ -12,7 +12,7 @@ Workflows each have an associated `workspace`. Workspaces are used to transfer d
 
 Use workspaces to pass along data that is unique to a workflow and is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
 
-For example, a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace.
+For example, a project with a `build` job that builds a `.jar` file and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace.
 
 ## Overview
 {: #overview }
