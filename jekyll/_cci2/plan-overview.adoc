@@ -17,7 +17,7 @@ This document is an introduction to the plans CircleCI offers to developers.
 NOTE: If you are an existing customer currently on the legacy CircleCI Container-based plan, you may want to consider consulting the document on using <<containers#,containers>>. If you want to switch from using containers to using credits, please https://support.circleci.com/hc/en-us/requests/new[open a support ticket] requesting to do so.
 
 == Overview
-The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's CI/CD (continuous integration, continuous development) solution. Credits are consumed by the second, at varying rates per minute, according to what build configuration you use.
+The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's https://circleci.com/continuous-integration/#what-is-continuous-integration[CI/CD] solution. Credits are consumed by the second, at varying rates per minute, according to what build configuration you use.
 
 The right plan for you and your team will depend on several factors:
 

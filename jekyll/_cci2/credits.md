@@ -12,7 +12,7 @@ This document describes how to find the available resources regarding credits wi
 ## Overview
 {: #overview }
 
-Credits are used on CircleCI's Free, Performance, Scale, and Server plans. Each plan offers key CI/CD (continuous integration, continuous development) features, and some plans offer customization options depending on your needs.
+Credits are used on CircleCI's Free, Performance, Scale, and Server plans. Each plan offers key CI/CD features, and some plans offer customization options depending on your needs.
 
 The right plan for you and your team will depend on several factors:
 
