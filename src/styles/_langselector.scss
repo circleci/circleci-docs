@@ -4,6 +4,7 @@ $btn-outer-blue: #0078ca;
 $btn-hover-blue: #0062b0;
 $black: #161616;
 $border-col: rgba(229,231,235, 1);
+$nav-bg: #F3F3F3 !default;
 
 .lang-selector-wrapper {
   position: relative;
@@ -74,14 +75,13 @@ $border-col: rgba(229,231,235, 1);
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 18px;
     &.selected {
-      // background: #F3F3F3;
       @media (max-width: $screen-xs-max) {
         font-weight: bold;
       }
     }
 
     &:hover {
-      background: #F3F3F3;
+      background: $nav-bg;
       font-weight: 700;
       transition: all 200ms;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
