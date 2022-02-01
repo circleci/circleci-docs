@@ -357,7 +357,9 @@ body.homepage{
 }
 
 table {
-  tr {
+table tr th:first-of-type code, table tr td:first-of-type code {
+  white-space: nowrap !important;
+}
     th,td {
       code {
         white-space: nowrap !important;
