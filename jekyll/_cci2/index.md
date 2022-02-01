@@ -11,7 +11,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 
 <hr class="hidden-xs" />
 
-<div class="row">
+<div class="row loading-deferred">
   <div class="treatment col-xs-12">
     <span id="homepage-guide-links"><h2>Examples and Guides</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="New"></span>
     <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/tutorials/">guides</a> or explore a sample app.</p>

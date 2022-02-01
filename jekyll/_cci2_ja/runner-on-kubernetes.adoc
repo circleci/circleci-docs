@@ -106,6 +106,8 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 
 | `+agentVersion+`  | -         | ×         | 指定する`circleci-task-agent`のバージョン。 This is only used for CircleCI server installations.
 
+| `+env+`           | -         | ×         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
+
 | その他すべての値  | -         | ×         | 変更はお客様自身の判断と責任で行ってください。
 
 |===

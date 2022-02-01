@@ -254,122 +254,8 @@ $(document).ready(function () {
     $('nav.sidebar').toggleClass('open');
   });
 
-  var tooltip = document.querySelector('.tooltip-popover');
-
-  // Give article headings direct links to anchors
   $(HEADER_TAGS)
-    .not(HEADER_TAGS.replace(/article/gm, '.card'))
-    .filter('[id]')
-    .each(function () {
-      var isMainTitle = $(this).prop('nodeName') === 'H1';
-      $(this).append(
-        (isMainTitle ? ' <a href="#' : '<a href="#' + $(this).attr('id')) +
-          '"><i class="fa fa-link"></i></a>',
-      );
-      if (isMainTitle) {
-        $(this).find('i').toggle();
-      }
-    });
-
-  var clickEvents = ['click'];
-
-  var makePopper = (icon) =>
-    Object.assign(icon, {
-      show() {
-        tooltip.setAttribute('data-show', '');
-        // change tooltip text based on current button popover.
-        tooltip.innerHTML = "Copy link<div id='arrow' data-popper-arrow></div>";
-        icon.instance = createPopper(icon, tooltip, {
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 8],
-              },
-            },
-          ],
-        });
-        window.AnalyticsClient.trackAction('docs-share-button-hover', {
-          page: location.pathname,
-          success: true,
-        });
-      },
-      copy(event) {
-        let url = event.target.href;
-        // to account for if section copied and shared is the page title
-        let section =
-          url.charAt(url.length - 1) === '#'
-            ? 'Page Title'
-            : url.substring(url.indexOf('#'));
-        event.preventDefault();
-        navigator?.clipboard
-          .writeText(event.target.href)
-          .then(() => {
-            icon.hide();
-            tooltip.setAttribute('data-show', '');
-            // change tooltip text based on current button popover.
-            tooltip.innerHTML =
-              "Copied!<div id='arrow' data-popper-arrow></div>";
-            icon.instance = createPopper(icon, tooltip, {
-              modifiers: [
-                {
-                  name: 'offset',
-                  options: {
-                    offset: [0, 8],
-                  },
-                },
-              ],
-            });
-            window.history.pushState({}, document.title, event.target.href);
-            window.AnalyticsClient.trackAction('docs-share-button-click', {
-              page: location.pathname,
-              success: true,
-              section,
-            });
-          })
-          .catch((error) =>
-            window.AnalyticsClient.trackAction('docs-share-button-click', {
-              page: location.pathname,
-              success: false,
-              error,
-            }),
-          );
-      },
-      hide() {
-        tooltip.removeAttribute('data-show');
-        if (icon.instance) {
-          icon.instance.destroy();
-          icon.instance = null;
-        }
-      },
-    });
-
-  // https://app.optimizely.com/v2/projects/16812830475/experiments/20631440733/variations
-  window.OptimizelyClient.getVariationName({
-    experimentKey: 'dd_share_section_icon_test',
-    groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
-    experimentContainer: '.external-link-tag-wrapper',
-  }).then((variation) => {
-    if (variation === 'treatment') {
-      document.querySelectorAll('.fa-link').forEach((icon) => {
-        makePopper(icon);
-
-        SHOW_EVENTS.forEach((event) => {
-          icon.parentElement.addEventListener(event, icon.show);
-        });
-
-        HIDE_EVENTS.forEach((event) => {
-          icon.parentElement.addEventListener(event, icon.hide);
-        });
-
-        clickEvents.forEach((event) => {
-          icon.parentElement.addEventListener(event, icon.copy);
-        });
-      });
-    }
-  });
-
-  $(HEADER_TAGS)
+    .not('.card')
     .filter('[id]')
     .hover(function () {
       $(this).find('i').toggle();
@@ -441,4 +327,15 @@ export function trackDarkModePreference() {
         window.matchMedia('(prefers-color-scheme: dark)').matches,
     });
   }
+}
+
+/*
+  Checking if users are attempting to print docs pages to gauge interest of print button 
+ */
+export function checkIfUsersPrint() {
+  window.onbeforeprint = () => {
+    window.AnalyticsClient.trackAction('User Attempting to Print', {
+      page: window.location.pathname,
+    });
+  };
 }

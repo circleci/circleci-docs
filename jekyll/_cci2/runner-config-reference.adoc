@@ -35,7 +35,7 @@ This is a token used to identify the launch agent to CircleCI and can be generat
 === api.url
 `$LAUNCH_AGENT_API_URL`
 
-This is a fully qualified URL used by runner to communicate with CircleCI. This variable is only required for runners installed for the 3.2 version of server.
+This is a fully qualified URL used by runner to communicate with CircleCI. This variable is only required for runners installed for the 3.2 or later version of server.
 
 Example:
 

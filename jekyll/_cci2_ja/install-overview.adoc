@@ -1,17 +1,17 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Installation Overview
+= インストールの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform.
+:page-description: Terraform を使って Amazon Web Services (AWS) 上に CircleCI Server v2.x をインストールするためのシステム要件と手順およびプラン情報
 :icons: font
 :toc: macro
 :toc-title:
 
-The following sections provide planning information, system requirements and step-by-step instructions for installing CircleCI server on Amazon Web Services (AWS) with Terraform.
+ここでは、Terraform を使って Amazon Web Services (AWS) 上に CircleCI Server v2.x をインストールするためのシステム要件と手順およびプラン情報について概説します。
 
 Refer to the <<v.2.19-overview#, What's New>> page for full details of what's new and fixed in this release.
 
@@ -19,17 +19,17 @@ If you are looking to update an existing installation, see our guide to <<updati
 
 toc::[]
 
-== Support Packages
+== サポートパッケージ
 
-CircleCI server may be installed without a support package, on AWS, using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below:
+サポートパッケージ契約をしていなくても、本ドキュメントの例と指示に沿って AWS に CircleCI v2. をインストールすることは可能です。 しかし、サポートパッケージにお申し込みいただくと、下記のような数多くのメリットがあります。
 
-=== Non-AWS Platform Support
+=== AWS 以外のプラットフォームのサポート
 
-With a Platinum CircleCI support package it is possible to install and configure CircleCI on Azure or any other platform used in your organization. まずは、https://support.circleci.com/hc/ja/requests/new[CircleCI サポート]またはお客様のアカウント担当者にお問い合わせください。
+Platinum サポートパッケージでは、Azure などお客様の組織でお使いのすべてのプラットフォームに  CircleCI をインストールおよび設定することが可能です。 まずは、https://support.circleci.com/hc/ja/requests/new[CircleCI サポート]またはお客様のアカウント担当者にお問い合わせください。
 
 === 外部処理化
 
-With a Platinum support agreement, it is possible to improve performance and resilience by configuring the following services to run externally to the Services machine:
+Platinum サポートをご契約いただくと、 下記サービスを Services マシンの外部で実行するように設定することで、パフォーマンスと復旧能力を向上させることができます。
 
 - PostgreSQL
 - MongoDB
@@ -38,4 +38,4 @@ With a Platinum support agreement, it is possible to improve performance and res
 - Redis
 - Nomad
 
-Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] or your account representative to evaluate your installation against the current requirements for running external services.
+https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート]またはお客様のアカウント担当者にお問い合わせいただき、お客様の CircleCI Server が外部サービスを実行するための最新要件を満たしているかをご確認ください。

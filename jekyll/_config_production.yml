@@ -18,6 +18,13 @@ defaults:
     values:
       lang: "ja"
 
+  -
+    scope:
+      path: ""
+      type: "style"
+    values:
+      lang: "en"
+
   - scope:
       path: ""
     values:
