@@ -115,6 +115,8 @@ The OAuth Client Secret provided by Github.
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
+ifndef::env-gcp[]
+
 ===== S3 Compatible
 You should have created your S3 Compatible bucket and optional IAM account during the prerequisite steps. 
 
@@ -144,6 +146,10 @@ Or select IAM role and provide:
 * *Role ARN* - 
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
 ===== Google Cloud Storage 
 You should have created your Google Cloud Storage bucket and service account during the prerequisite steps. 
 
@@ -157,6 +163,8 @@ Number of days to retain your test results and artifacts. Set to 0 to disable an
 
 * *Service Account JSON (required)* - 
 A JSON format key of the Service Account to use for bucket access.
+
+endif::env-aws[]
 
 ==== Postgres, MongoDB, Vault settings
 

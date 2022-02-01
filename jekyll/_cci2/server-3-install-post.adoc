@@ -26,11 +26,8 @@ toc::[]
 Backups of CircleCI server can be created quite easily through https://kots.io/[KOTS].
 However, to enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
 
-////
+ifndef::env-gcp[]
 
-* AWS SETUP *
-
-////
 === Server 3.x backups on AWS
 
 The following steps will assume AWS as your provider.
@@ -180,11 +177,10 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 
 As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
-////
+endif::env-gcp[]
 
-* GCP SETUP *
+ifndef::env-aws[]
 
-////
 === Server 3.x backups on GCP
 
 The following steps are specific for Google Cloud Platform and it is assumed you have met the <<prerequisites, prerequisites>>.
@@ -346,6 +342,8 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
 As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
+
+endif::env-aws[]
 
 ////
 

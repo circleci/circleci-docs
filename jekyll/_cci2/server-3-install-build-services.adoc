@@ -52,6 +52,8 @@ CircleCI curates Terraform modules to help install Nomad clients in your cloud p
 
 NOTE: If you would also like to set up Nomad Autoscaler at this time, see the <<#nomad-autoscaler-optional,Nomad Autoscaler>> section of this guide, as some of the requirements can be included in this Terraform setup.
 
+ifndef::env-gcp[]
+
 ===== AWS
 You will need some information about your cluster and server installation to complete the required fields for the terraform configuration file (`main.tf`). A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
 
@@ -122,6 +124,10 @@ terraform apply
 ----
 
 After Terraform is done spinning up the Nomad client(s), it will output the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe. The apply process usually only takes a minute.
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
 
 ===== GCP
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by running the following command:
@@ -218,12 +224,16 @@ terraform apply
 
 After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for configuring the Nomad control plane in CircleCI server. Make sure to copy them somewhere safe.
 
+endif::env-aws[]
+
 ==== Nomad Autoscaler
 Nomad provides a utility to automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you only need to provide permission for the utility to manage your autoscaling resource and where it is located. You can enable this resource via KOTS, which will deploy the Nomad Autoscaler service along with your Nomad servers. Below we will go through how to set up Nomad Autoscaler for your provider.
 
 NOTE: The maximum and minimum Nomad client count will overwrite the corresponding values set when you created your autoscaling group or managed instance group. It is recommended that you keep these values and those used in your Terraform the same so that the two don't compete.
 
 If you do not require this service then feel free to jump to the *Save config* button to update your installation and redeploy server.
+
+ifndef::env-gcp[]
 
 ===== AWS
 . Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
@@ -265,6 +275,10 @@ If you do not require this service then feel free to jump to the *Save config* b
 .. Or, the Nomad Autoscaler role's ARN
 . Add the name of the autoscaling Group your Nomad clients were created in
 
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
 ===== GCP
 . Create a service account for Nomad Autoscaler
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. If you've already created the clients, you can simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`.
@@ -277,6 +291,8 @@ If you do not require this service then feel free to jump to the *Save config* b
 . Add Managed Instance Group Name
 . Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
 . JSON of GCP service account for Nomad Autoscaler
+
+endif::env-aws[]
 
 ==== Configure and Deploy
 
@@ -360,7 +376,9 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 
 VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to EKS and GKE installations because it specifically relies on features of these cloud providers.
 
-==== EKS
+ifndef::env-gcp[]
+
+==== AWS
 . *Get the Information Needed to Create Security Groups*
 +
 The following command will return your VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) values, which you will need throughout this section:
@@ -555,7 +573,11 @@ Configure VM Service through the KOTS admin console. Details of the available co
 
 Once you have configured the fields, *save your config* and deploy your updated application.
 
-==== GKE
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+==== GCP
 
 You will need additional information about your cluster to complete the next section. Run the following command:
 
@@ -643,6 +665,8 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
 
 Once you have configured the fields, *save your config* and deploy your updated application.
+
+endif::env-aws[]
 
 ==== VM Service Validation
 
