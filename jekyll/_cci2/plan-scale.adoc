@@ -28,7 +28,7 @@ Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The add
 For more information about these resources, please refer to the the <<executor-intro#,Executors and Images>> page.
 
 === Custom concurrency
-Customize the the amount of jobs you need to run concurrently. This customization is available on all build configurations and execution environments. See <<#concurrency,Concurrency>> below for more information.
+Customize the amount of jobs you need to run concurrently. This customization is available on all build configurations and execution environments. See <<#concurrency,Concurrency>> below for more information.
 
 === Custom user seat count
 Customize the amount of active users based on your needs.
