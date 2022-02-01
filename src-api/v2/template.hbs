@@ -13,6 +13,30 @@
       padding: 0;
       margin: 0;
     }
+
+    .side-section-cta {
+      position: absolute;
+      right: 0;
+      top: 32px;
+      width: 400px;
+      min-height: 100px;
+      z-index: 1;
+      width: calc((100% - 260px) * 0.4);
+      background: #1a2326;
+      display: flex;
+      padding: 32px;
+      box-sizing: border-box;
+      color: #efefef;
+      font-family: 'Roboto';
+      font-size: 14px;
+    }
+
+    @media(max-width: 1200px) {
+      .side-section-cta {
+        display: none;
+      }
+    }
+
   </style>
   {{{redocHead}}}
   {{#unless disableGoogleFont}}
@@ -26,6 +50,9 @@
 
 <body>
   {{{redocHTML}}}
+  <div class="side-section-cta">
+    Scroll down for code samples, example requests and responses. Above each snippet you can change the language / framework used to make the request.
+  </div>
 </body>
 
 </html>
