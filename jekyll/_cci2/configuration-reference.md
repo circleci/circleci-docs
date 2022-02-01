@@ -187,7 +187,7 @@ A map of environment variable names and values. These will override any environm
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 Example:
 
@@ -770,6 +770,9 @@ Each built-in step is described in detail below.
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
+**Note:** the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, use [workflows](#workflows) plus associated [filtering]({{site.baseurl}}/2.0/configuration-reference/#jobfilters) and/or [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). See [fan-out/fan-in examples]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
+{: class="alert alert-info"}
+
 Key | Required | Type | Description
 ----|-----------|------|------------
 command | Y | String | Command to run via the shell
@@ -1171,42 +1174,11 @@ A path is not required here because the cache will be restored to the location f
 ```
 {% endraw %}
 
-##### **`deploy` – DEPRECATED**
+##### **`deploy` - DEPRECATED**
 {: #deploy-deprecated }
-
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
-
-Special step for deploying artifacts.
-
-`deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
-
-In general `deploy` step behaves just like `run` with two exceptions:
-
-- In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
-- In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
-  > **skipping deploy**
-  > Running in SSH mode.  Avoid deploying.
-
-When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
-
-- [Workflows](https://circleci.com/docs/2.0/workflows/)
-- [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
-
-###### Example
-{: #example }
 {:.no_toc}
 
-``` YAML
-- deploy:
-    command: |
-      if [ "${CIRCLE_BRANCH}" == "main" ]; then
-        ansible-playbook site.yml
-      fi
-```
-
-**Note:** The `run` step allows you to use a shortcut like `run: my command`; however, if you try to use a similar shortcut for the `deploy` step like `deploy: my command`, then you will receive the following error message in CircleCI:
-
-`In step 3 definition: This type of step does not support compressed syntax`
+Please see [run](#run) for current processes.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
