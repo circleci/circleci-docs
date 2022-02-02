@@ -16,16 +16,16 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 * TOC
 {:toc}
 
-**Note:** The pricing model for IP ranges has been finalized. Details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
+**Note:** Details on the IP ranges pricing model can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 {: class="alert alert-info"}
 
 
 ## Overview
 {: #overview }
 
-IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
+IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.  
 
-The feature is currently available in preview to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing will be calculated based on network data usage of jobs that have opted in to using the IP ranges feature. There is no charge while the feature is in preview and pricing details will be shared once the feature is generally available.  
+The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing is calculated based on data usage of jobs that have opted in to using the IP ranges feature. Details on the pricing model can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
 ## IP ranges: use cases
 {: #usecases }
@@ -130,8 +130,6 @@ The machine-consumable lists have also been updated to reflect the new IP addres
 
 - *All IP address ranges*:  `all.knownips.circleci.com`.
 
-During the preview phase, this list may change. You should check regularly for updates, at least once a week.
-
 To query these, you can use any DNS resolver. Here's an example using `dig` with the default resolver:
 
 ```
@@ -146,8 +144,6 @@ Notifications of a change to this list will be sent out by email to all customer
 Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
 Specific rates and details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
-
-While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold. 
 
 IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
 
