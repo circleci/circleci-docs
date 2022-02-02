@@ -48,7 +48,7 @@ After setup completes, the launch agent starts automatically and begins looking 
 
 Uninstalling CircleCI runner will prepare the system for installation again.
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from Github to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
 . Run the following in your PowerShell:
