@@ -61,15 +61,13 @@ $nav-bg: #F3F3F3 !default;
   }
 
   .lang-dropdown {
-    width: 168px;
-    margin-top: 4px;
+    width: 160px;
   }
 
   .lang-option {
     display: block;
     color: $black;
-    margin: 4px 0px;
-    margin-top: 0px;
+    margin: 4px 0px 4px;
     padding: 4px 20px;
     font-size: 15px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -89,9 +87,14 @@ $nav-bg: #F3F3F3 !default;
     }
     .select-lang-wrap {
       color: $btn-outer-green;
-      padding-right: 3px;
       @media (max-width: $screen-xs-max) {
         display: none;
+      }
+      > img {
+        padding: 0 9px 2px 0;
+      }
+      > span {
+        color: $black;
       }
     }
   }
@@ -112,7 +115,8 @@ $nav-bg: #F3F3F3 !default;
     min-width: 148px;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 8px 20px;
+    margin: 4px 0px;
+    padding: 0 20px 4px 20px;
 
 
     @media (max-width: $screen-xs-max) {
