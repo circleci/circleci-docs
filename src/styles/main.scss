@@ -356,10 +356,14 @@ body.homepage{
 	}
 }
 
+table tr th:first-of-type code, table tr td:first-of-type code {
+  white-space: nowrap !important;
+}
+
 code {
   padding: 2px;
-  white-space: pre-wrap !important;
   word-wrap: anywhere;
+  white-space: pre-wrap !important;
 }
 
 code.env_var {
