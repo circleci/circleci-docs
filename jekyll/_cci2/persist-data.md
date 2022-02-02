@@ -98,7 +98,7 @@ Details about individual step storage and network transfer usage can be found in
 ### How to calculate an approximation of your monthly costs
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
-**NOTE:** Billing for network egress and storage will start to take effect on March 1 2022 (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+**NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
 Charges apply when an organization has runner network egress beyond the included GB allotment for storage and network usage.
