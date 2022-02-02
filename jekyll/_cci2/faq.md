@@ -298,7 +298,7 @@ You can choose to pay for premium features per active user, compute, and optiona
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**NOTE:** Billing for network egress and storage will start to take effect on March 1 2022 (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022 date. Current usage can be found on the [CircleCI web application](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+**NOTE:** Billing for network egress and storage will start to take effect on March 1 2022 (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022 date. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
 Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI web app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
