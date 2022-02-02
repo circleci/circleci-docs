@@ -290,7 +290,7 @@ The following example demonstrates how to use `restore_cache` and `save_cache`, 
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/mysql:5.6
+      - image: cimg/mysql:5.7
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
