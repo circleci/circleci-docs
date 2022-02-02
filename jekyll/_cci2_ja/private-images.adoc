@@ -4,30 +4,30 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= Using Docker Authenticated Pulls
+= Docker の認証付きプルの使用
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to authenticate with your Docker registry provider to pull images.
+:page-description: ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
 ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
 
-プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。 It may also grant higher rate limits, depending on your registry provider.
+プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。 お使いのレジストリ プロバイダーによっては、レート制限が引き上げられる可能性もあります。
 
-CircleCI は Docker と連携して、ユーザーの皆さまが今後もレート制限なしで Docker Hub にアクセスできるようにしています。 2020 年 11 月 1 日時点では、いくつかの例外を除き、CircleCI を通じて Docker Hub からイメージをプルする際に、レート制限の影響を受けることはありません。 However, these rate limits may be implemented for CircleCI users in the future. This is why we are encouraging you and your team to add Docker Hub authentication to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+CircleCI は Docker と連携して、ユーザーの皆さまが今後もレート制限なしで Docker Hub にアクセスできるようにしています。 2020 年 11 月 1 日時点では、いくつかの例外を除き、CircleCI を通じて Docker Hub からイメージをプルする際に、レート制限の影響を受けることはありません。 ただし、今後 CircleCI ユーザーにもレート制限が適用される可能性があります。 そのため、将来的にレート制限の影響を受けることのないよう、お使いの CircleCI 設定ファイルに Docker Hub 認証を追加すると共に、必要に応じてご利用中の Docker Hub プランのアップグレードを検討することをお勧めします。
 
 toc::[]
 
 ## Docker Executor
 
-For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password, place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
+https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、https://circleci.com/docs/ja/2.0/configuration-reference[config.yml ファイル]の `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、https://circleci.com/docs/ja/2.0/contexts/[コンテキスト]を作成するか、プロジェクトごとの環境変数を使用します。
 
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
 Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
-NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。__
+NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが_必要_なものだけにアクセスできるようにしたりするのにとても便利です。
 
 次の例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与しています。
 
