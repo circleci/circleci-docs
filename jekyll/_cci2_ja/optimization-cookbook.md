@@ -247,7 +247,7 @@ workflows:
 The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
 
 
-## ブランチでのパイプラインのオプトイン
+## See also
 {: #see-also }
 {:.no_toc}
 
