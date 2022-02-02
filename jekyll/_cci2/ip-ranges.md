@@ -9,16 +9,10 @@ version:
  - Cloud
 ---
 
-
 Enable CircleCI jobs to go through a set of well-defined IP address ranges.
-
 
 * TOC
 {:toc}
-
-**Note:** Details on the IP ranges pricing model can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
-{: class="alert alert-info"}
-
 
 ## Overview
 {: #overview }
