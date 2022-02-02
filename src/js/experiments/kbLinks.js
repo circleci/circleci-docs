@@ -1,5 +1,5 @@
 function renderExperimentalKnowledgeBaseLinks() {
-  // https://app.optimizely.com/v2/projects/16812830475/experiments/20790151733/variations
+  // https://app.optimizely.com/v2/projects/16812830475/experiments/21129180862/variations
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_docs_knowledge_base_pt2_test',
     groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
