@@ -519,7 +519,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** For new projects created after September 1, 2021 that do not specify a resource class, CircleCI will try to find the right default value for your organization. To avoid using a default, explicilty specify a resource class size in your config for each job.
+**Note:** For new projects created after September 1, 2021 that do not specify a resource class, CircleCI will try to find the right default value for your organization. To avoid using a default, explicitly specify a resource class size in your config for each job.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
