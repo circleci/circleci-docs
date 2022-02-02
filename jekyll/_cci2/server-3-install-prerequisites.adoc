@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
 == Phase 1: Prerequisites
 Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
@@ -54,13 +56,19 @@ Download and install the following software before continuing:
 
 NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
+// Don't include this section in the GCP PDF. 
+
 ifndef::env-gcp[]
 
 ==== AWS required software
 
 - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] is installed.
 
+// Stop hiding from GCP PDF:
+
 endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
 
 ifndef::env-aws[]
 
