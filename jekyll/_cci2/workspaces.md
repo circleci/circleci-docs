@@ -105,6 +105,19 @@ Within the network tab you will find a breakdown of your network usage for the b
 
 For more on storage and networking, and calculating your monthly storage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-calculate-an-approximation-of-your-monthly-costs) guide.
 
+## Workspace usage optimization
+{: #workspace-usage-optimization }
+
+It is important to define paths and files when using `persist_to_workspace`. Not doing so can cause a significant increase is storage. Specify paths and files using the following syntax:
+
+```yml
+- persist_to_workspace:
+    root: /tmp/dir
+    paths:
+      - foo/bar
+      - baz
+```
+
 ## See also
 {: #see-also }
 {:.no_toc}
