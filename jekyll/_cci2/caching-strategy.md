@@ -33,7 +33,7 @@ If your project has "flaky tests" workflows might be rerun unnecessarily. This w
 ### Split cache keys by directory
 {: #split-cache-keys-by-directory }
 
-Having multiple directories under a single cache key increases the chances of there being a change to the cache. In the example below, there may be changes in the first 2 directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
+Having multiple directories under a single cache key increases the chances of there being a change to the cache. In the example below, there may be changes in the first two directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
 
 ```yml
 dependency_cache_paths:
