@@ -64,6 +64,8 @@ en:
           link: 2.0/env-vars/
         - name: Caching
           link: 2.0/caching/
+        - name: Caching strategies
+          link: 2.0/caching-strategy/
         - name: Artifacts
           link: 2.0/artifacts/
         - name: Workspaces

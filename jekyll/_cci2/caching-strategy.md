@@ -16,16 +16,66 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 {:toc}
 
 ## Cache optimization
-When setting up caches for your projects, the goal would be a 10x - 20x ROI (return on investment). The following tips can help you achieve this.
+{: #cache-optimization }
 
-### Use cache keys that are less strict
+When setting up caches for your projects, the goal would be a 10x - 20x ROI (return on investment). This means you should be aiming for a situation where the amount of cache restored should be 10x - 20x the cache saved. The following tips can help you achieve this.
+
+### Avoid strict cache keys
+{: #avoid-strict-cache-keys }
+
+Using cache keys that are too strict can mean that you will only get a minimal number of cache hits for a workflow. For example, if you used the key `CIRCLE_SHA1` (SHA of the last commit of the current pipeline) this would only get matched once for a workflow. Consider using cache keys that are less strict to ensure more cache hits.
+
 ### Avoid unnecessary workflow reruns
-### Split cache keys by directory
-### Combine jobs in a workflow if no affect on workflow length
-### Reorder jobs to create meaningful workflows
-### Check for language-specific caching tips
-### Check cache is actually being restored as well as saved
+{: #avoid-unnecessary-workflow-reruns }
 
+If your project has "flaky tests" workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see [Test Insights]({{ site.baseurl }}/2.0/insights-tests/#flaky-tests)). You can also consider configuring your projects to only rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#the-when-attribute).
+
+### Split cache keys by directory
+{: #split-cache-keys-by-directory }
+
+Having multiple directories under a single cache key increases the chances of there being a change to the cache. In the example below, there may be changes in the first 2 directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
+
+```yml
+dependency_cache_paths:
+  - /mnt/ramdisk/node_modules
+  - /mnt/ramdisk/.cache/yarn
+  - /mnt/ramdisk/apps/a/node_modules
+  - /mnt/ramdisk/apps/b/node_modules
+```
+
+### Combine jobs when possible
+{: #combine-jobs-when-possible }
+
+As an example, a workflow including three jobs running in parallel:
+
+* lint (20 seconds)
+* code-cov (30 seconds)
+* test (8 mins)
+
+All running a similar set of steps:
+
+* checkout 
+* restore cache 
+* build
+* save cache
+* run command
+
+The `lint` and `code-cov` jobs could be combined with no affect on workflow length, but saving on duplicate steps.
+
+### Order jobs to create meaningful workflows
+{: #order-jobs-to-create-meaningful-workflows }
+
+If no job ordering is used in a workflow all jobs run concurrently. If all the jobs have a `save_cache` step, they could be uploading files multiple times. Consider reordering jobs in a workflow so subsequent jobs can make use of assets created in previous jobs. 
+
+### Check for language-specific caching tips
+{: #check-for-language-specific-caching-tips }
+
+Check #partial-dependency-caching-strategies to see if there are tips for the language you are using.
+
+### Check cache is being restored as well as saved
+{: #check-cache-is-being-restored-as-well-as-saved }
+
+If you find that a cache is not being restored, see [this support article](https://support.circleci.com/hc/en-us/articles/360004632473-No-Cache-Found-and-Skipping-Cache-Generation) for tips.
 
 ## Partial dependency caching strategies
 {: #partial-dependency-caching-strategies }
