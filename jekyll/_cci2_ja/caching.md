@@ -24,14 +24,14 @@ version:
 キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係を復元することで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> 異なる Executor 間 (たとえば、Docker と Machine、Linux、Windows、MacOS の間、または CircleCI イメージとそれ以外のイメージの間) でファイルをキャッシュすると、ファイル パーミッション エラーまたはパス エラーが発生することがあります。 これらのエラーは、ユーザーが存在しない、ユーザーの UID が異なる、パスが存在しないなどの理由で発生します。 異なる Executor 間でファイルをキャッシュする場合は、特に注意してください。
+<b>警告:</b> 異なる Executor 間で (たとえば、Docker と Machine、Linux、Windows、または MacOS の間、または CircleCI イメージとそれ以外のイメージの間で) ファイルをキャッシュすると、ファイル パーミッションエラーまたはパスエラーが発生することがあります。 これらのエラーは、ユーザーが存在しない、ユーザーの UID が異なる、パスが存在しないなどの理由で発生します。 異なる Executor 間でファイルをキャッシュする場合は、特に注意してください。
 </div>
 
-## キャッシュ構成の例
+## キャッシュの設定例
 {: #example-caching-configuration }
 {:.no_toc}
 
-キャッシュ キーは簡単に構成できます。 以下の例では、`pom.xml` のチェックサムとカスケード フォールバックを使用して、変更があった場合にキャッシュを更新しています。
+キャッシュ キーは簡単に設定できます。 以下の例では、`pom.xml` のチェックサムとカスケード フォールバックを使用して、変更があった場合にキャッシュを更新しています。
 
 {% raw %}
 ```yaml
@@ -47,13 +47,12 @@ version:
 {: #introduction }
 {:.no_toc}
 
-Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. 2.0 では、キャッシュを手動で構成し、より高度な戦略を立て、きめ細かに制御することができます。 See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/) page for tips on caching strategies.
+CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 2.0 では、キャッシュを手動で設定し、より高度な戦略を立て、きめ細かに制御することができます。 キャッシュ戦略に関するヒントは[データの永続化]({{site.baseurl}}/2.0/persist-data/)をご覧ください。
 
-ここでは、キャッシュの手動構成、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。 **Note:** The Docker images used for CircleCI job runs are automatically cached on the server infrastructure where possible.
+ここでは、キャッシュの手動構成、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。 **注:** CircleCI  のジョブ実行に使用される Docker イメージは、サーバーインフラストラクチャに自動的にキャッシュされます (可能な場合)。
 
 <div class="alert alert-warning" role="alert">
-<b>Important:</b>
-Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.</div>
+<b>重要:</b> 下記では様々な例を紹介していますが、キャッシュ戦略は各プロジェクトごとに入念に計画する必要があります。 サンプルコードのコピー＆ペーストではお客様のニーズに合わない場合があります。</div>
 
 Docker イメージの未変更レイヤーを再利用するプレミアム機能を有効にする方法については、「[Docker レイヤー キャッシュの有効化]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)」を参照してください。
 
@@ -61,34 +60,34 @@ Docker イメージの未変更レイヤーを再利用するプレミアム機�
 {: #overview }
 {:.no_toc}
 
-キャッシュは、キーに基づいてファイルの階層を保存します。 Use the cache to store data that makes your job faster, but, in the case of a cache miss or zero cache restore, the job still runs successfully. For example, you might cache `NPM` package directories (known as `node_modules`). The first time your job runs, it downloads all your dependencies, caches them, and (provided your cache is valid) the cache is used to speed up your job the next time it is run.
+キャッシュは、キーに基づいてファイルの階層を保存します。 キャッシュを使用してデータを保存するとジョブが高速に実行されますが、キャッシュミス (ゼロキャッシュ リストア) が起きた場合でも、ジョブは正常に実行されます。 たとえば、`NPM`パッケージディレクトリ (`node_modules`として知られています) をキャッシュするとします。 ジョブを初めて実行すると、依存関係がすべてダウンロードされ、キャッシュされます。また、キャッシュが有効な場合は、次回ジョブを実行するときにそのキャッシュを使用してジョブを高速化します。
 
-Caching is about achieving a balance between reliability and getting maximum performance. In general, it is safer to pursue reliability than to risk a corrupted build or to build very quickly using out-of-date dependencies.
+キャッシュにより、信頼性と最大限のパフォーマンスのバランスを取ることができます。 通常、ビルドが破損したり、古い依存関係を使用して迅速にビルドするといったリスクを背負うよりも、信頼性を追求する方が安全です。
 
-## キャッシュとオープン ソース
+## キャッシュとオープンソース
 {: #caching-and-open-source }
 
-If your project is open source/available to be forked and receive PRs from contributors, please make note of the following:
+プロジェクトがオープンソースの場合や、フォーク可能としてコントリビューターのプルリクエスト (PR) を受け付ける場合は、次のことに注意してください。
 
-- PRs from the same fork repo share a cache (this includes, as previously stated, that PRs in the main repo share a cache with main).
-- Two PRs in different fork repos have different caches.
-- Enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars) allows cache sharing between the original repo and all forked builds.
+- 同じフォークリポジトリからの PR は、キャッシュを共有します (前述のように、これには main リポジトリ内の PR と main によるキャッシュの共有が含まれます)。
+- それぞれ異なるフォークリポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。
+- [環境変数]({{site.baseurl}}/2.0/env-vars)の共有を有効にすると、元のリポジトリとフォークされているすべてのビルド間でキャッシュ共有が有効になります。
 
 ## ライブラリのキャッシュ
 {: #caching-libraries }
 
-The most important dependencies to cache during a job are the libraries on which your project depends. 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
+ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるパスが個別に用意されています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
 
-現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 The Docker image(s) prebuilt by CircleCI have tools preinstalled that are generic for building projects using the relevant language. For example, the `circleci/ruby:2.4.1` image includes useful tools like git, openssh-client, and gzip.
+現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 たとえば、`circleci/ruby:2.4.1` というビルド済みイメージには git、openssh-client、gzip がプリインストールされています。
 
 ![依存関係のキャッシュ]( {{ site.baseurl }}/assets/img/docs/cache_deps.png)
 
 ## ワークフローでのキャッシュへの書き込み
 {: #writing-to-the-cache-in-workflows }
 
-同じワークフロー内のジョブどうしはキャッシュを共有できます。 This makes it possible to create race conditions in caching across different jobs in workflows.
+同じワークフロー内の複数のジョブでキャッシュを共有することができます。 このため、複数のワークフローの複数のジョブにまたがってキャッシュを実行すると、競合状態が発生する可能性があります。
 
-Cache is immutable on write. Once a cache is written for a specific key like `node-cache-main`, it cannot be written to again. この中で、Job3 は Job1 と Job2 に依存しています ({Job1, Job2} -> Job3)。 それら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
+キャッシュの書き換えはできません。 `node-cache-main`のように特定のキーにキャッシュを一度書き込むと、再度書き込むことはできません。 この中で、Job3 は Job1 と Job2 に依存しています ({Job1, Job2} -> Job3)。 それら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
 
 Workflow の実行中は、最後の ジョブ 3 はジョブ 1 もしくはジョブ 2 のどちらかが書き込んだキャッシュを使用します。 ただし、キャッシュは書き換え不可のため、ジョブ 1 とジョブ 2 のどちらかが最初に書き込んだキャッシュを使うことになります。 This is usually undesirable, because the results are not deterministic. Part of the result depends on chance. You could make this workflow deterministic by changing the job dependencies. For example, make Job1 and Job2 write to different caches, and Job3 loads from only one. Or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
 
