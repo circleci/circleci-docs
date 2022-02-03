@@ -12,16 +12,16 @@ version:
   - Server v2.x
 ---
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations.
+キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。
 
 * 目次
 {:toc}
 
-After an initial job run, subsequent instances of the job run faster, as you are not redoing work.
+ジョブを 1 回実行すると、以降のジョブインスタンスでは同じ処理をやり直す必要がなくなり、その分高速化されます。
 
 ![キャッシュのデータ フロー]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
-キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
+キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係を復元することで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
 <div class="alert alert-warning" role="alert">
 <b>警告:</b> 異なる Executor 間 (たとえば、Docker と Machine、Linux、Windows、MacOS の間、または CircleCI イメージとそれ以外のイメージの間) でファイルをキャッシュすると、ファイル パーミッション エラーまたはパス エラーが発生することがあります。 これらのエラーは、ユーザーが存在しない、ユーザーの UID が異なる、パスが存在しないなどの理由で発生します。 異なる Executor 間でファイルをキャッシュする場合は、特に注意してください。
