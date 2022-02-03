@@ -72,12 +72,6 @@ $nav-bg: #F3F3F3 !default;
     font-size: 15px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 18px;
-    &.selected {
-      @media (max-width: $screen-xs-max) {
-        font-weight: bold;
-      }
-    }
-
     &:hover {
       background: $nav-bg;
       font-weight: 700;
@@ -87,14 +81,26 @@ $nav-bg: #F3F3F3 !default;
     }
     .select-lang-wrap {
       color: $btn-outer-green;
-      @media (max-width: $screen-xs-max) {
-        display: none;
-      }
       > img {
         padding: 0 9px 2px 0;
+        visibility: hidden;
+        @media (max-width: $screen-xs-max) {
+          display: none;
+        }
       }
       > span {
         color: $black;
+      }
+    }
+  }
+  .selected {
+    @media (max-width: $screen-xs-max) {
+      font-weight: bold;
+    }
+    > span > img {
+      @media (min-width: $screen-xs-max) {
+        // override css being set w/ toggleClass for selected lang
+        visibility: visible !important;
       }
     }
   }
