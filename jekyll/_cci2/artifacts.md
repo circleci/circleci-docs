@@ -18,35 +18,24 @@ This document describes how to work with Artifacts on CircleCI.
 ## Artifacts overview
 {: #artifacts-overview }
 
-Artifacts persist data after a job is completed
-and may be used for storage of the outputs of your build process.
+Artifacts persist data after a job is completed and may be used for storage of the outputs of your build process.
 
-For example, when a Java build/test process finishes,
-the output of the process is saved as a `.jar` file.
-CircleCI can store this file as an artifact,
-keeping it available after the process has finished.
+For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available after the process has finished.
 
-![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
+![artifacts data flow]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
 
-If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
-deployment tarballs, CircleCI can automatically save and link them for you.
+If a job produces persistent artifacts such as screenshots, coverage reports, core files, or deployment tarballs, CircleCI can automatically save and link them for you.
 
-![artifacts tab screenshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circleci.com/) to find the **Artifacts** tab. Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects. There is a 3GB `curl` file size limit.
 
-Find links to the artifacts under the "Artifacts" tab on the **Job page**.
-Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
-There is a 3GB `curl` file size limit.
+![artifacts tab screenshot]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
 **Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
 
 **Note:**
-Uploaded artifact filenames are encoded
-using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html).
-Keep this in mind
-if you are expecting
-to find artifacts at a given path within the application.
+Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
 ## Uploading artifacts
 {: #uploading-artifacts }
@@ -80,14 +69,12 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.
-There is no limit on the number of `store_artifacts` steps a job can run.
-
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job** page in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step. There is no limit on the number of `store_artifacts` steps a job can run.
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
-  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
+  - `destination` **(optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
 
 ## Uploading core files
 {: #uploading-core-files }
@@ -147,27 +134,18 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 
 ![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-When CircleCI runs a job,
-a link to the core dump file appears in the Artifacts tab of the **Job page**.
+When CircleCI runs a job, a link to the core dump file appears in the **Artifacts** tab of the **Job** page.
 
 ## Downloading all artifacts for a build on CircleCI
 {: #downloading-all-artifacts-for-a-build-on-circleci }
 
-To download your artifacts with `curl`,
-follow the steps below.
+To download your artifacts with `curl`, follow the steps below.
 
-1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)
-and copy it to a clipboard.
+1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token) and copy it to a clipboard.
 
-2. In a Terminal window,
-`cd` to a directory
-where you want
-to store the artifacts.
+2. In a Terminal window, `cd` to a directory where you want to store the artifacts.
 
-3. Run the commands below.
-Use the table beneath the commands
-to substitute actual values
-for all variables that start with `:`.
+3. Run the commands below. Use the table beneath the commands to substitute actual values for all variables that start with `:`.
 
 ```bash
 # Set an environment variable for your API token.
@@ -199,8 +177,26 @@ Placeholder   | Meaning                                                         
 `:build_num`  | The number of the job (aka. build) for which you want to download artifacts. 
 {: class="table table-striped"}
 
+## Artifacts optimization
+{: #artifacts-optimization }
+
+Optimization options will be different for each project depending on what you are trying to accomplish. You can try the following actions to reduce network and storage usage:
+
+- Check if `store_artifacts` is uploading unnecessary files
+- Check for identical artifacts if you are using parallelism
+- Compress text artifacts at minimal cost
+- Filter out and upload only failing UI tests with images/videos
+- Filter out and upload only failures or successes
+- Upload artifacts to a single branch
+- Upload large artifacts to your own bucket at no cost
+
+Visit the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-optimize-your-storage-and-network-transfer-use) page for more information.
+
+You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
+
 ## See also
 {: #see-also }
 {:.no_toc}
 
-[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+- [Caching Dependencies]({{site.baseurl}}/2.0/caching/)
+- [Persisting Data]({{site.baseurl}}/2.0/persist-data/#using-artifacts)
