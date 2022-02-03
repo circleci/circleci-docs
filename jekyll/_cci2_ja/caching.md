@@ -121,25 +121,25 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 `keys:` リストのすべての行は _1 つのキャッシュ_を管理します (各行が固有のキャッシュに**対応しているわけではありません**)。 この例でリストされているキー {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュの復元が必要になると CircleCI は、まず (最も特定度の高い) 最初のキーに基づいてキャッシュを検証し、次に他のキーを順に調べ、他のキャッシュキーに変更があるかどうかを確認します。
 
-The first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`. If this file changed in your commit, CircleCI would see a new cache key.
+最初のキーにより、 `package-lock.json` ファイルのチェックサムが文字列 `v1-nPM-deps-` に連結されます。 コミットでこのファイルが変更された場合は、新しいキャッシュキーが調べられます。
 
-The next key does not have a dynamic component to it. It is simply a static string: `v1-npm-deps-`. キャッシュを手動で無効にするには、`config.yml` ファイルで `v1` を `v2` にバンプします。 In this case, you would now have a new cache key `v2-npm-deps`, which triggers the storing of a new cache.
+2 つ目のキーには動的コンポーネントが連結されていません。 これは静的な文字列 `v1-npm-deps-`です。 キャッシュを手動で無効にするには、`config.yml` ファイルで `v1` を `v2` にバンプします。 これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
 
-### モノレポ (モノリポ) でのキャッシュの使用
+### モノレポ でのキャッシュの使用
 {: #using-caching-in-monorepos }
 
-モノレポでキャッシュを活用する際のアプローチは数多くあります。 The following approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo.
+モノレポでキャッシュを活用する方法は数多くあります。 ここで紹介する方法は、モノレポのさまざまな部分にある複数のファイルに基づいて共有キャッシュを管理する必要がある場合に使用できます。
 
-#### 連結 `package-lock` ファイルの作成と構築
+#### 連結 `package-lock` ファイルの作成とビルド
 {: #creating-and-building-a-concatenated-package-lock-file }
 
-1. Add custom command to config:
+1. カスタムコマンドを設定ファイルに追加します。
 
       {% raw %}
       ```yaml
       commands:
         create_concatenated_package_lock:
-          description: "Concatenate all package-lock.json files recognized by lerna.js into single file. ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
+          description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
           parameters:
             filename:
               type: string
@@ -150,7 +150,7 @@ The next key does not have a dynamic component to it. It is simply a static stri
       ```
       {% endraw %}
 
-2. Use custom command in build to generate the concatenated `package-lock` file:
+2. ビルド時にカスタムコマンドを使用して、連結 `package-lock` ファイルを生成します。
 
       {% raw %}
       ```yaml
@@ -158,7 +158,7 @@ The next key does not have a dynamic component to it. It is simply a static stri
             - checkout
             - create_concatenated_package_lock:
                 filename: combined-package-lock.txt
-            ## Use combined-package-lock.text in cache key
+            ## キャッシュキーに combined-package-lock.text を使用します。
             - restore_cache:
                 keys:
                   - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
@@ -178,33 +178,33 @@ The next key does not have a dynamic component to it. It is simply a static stri
 {: #clearing-cache }
 {:.no_toc}
 
-If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example. Then change the cache key names in your `config.yml` file and commit the change to clear the cache.
+言語または依存関係管理ツールのバージョンが変更され、キャッシュをクリアする必要がある場合は、上の例のような命名戦略を使用します。 その後、`config.yml` ファイルのキャッシュキー名を変更して、変更をコミットしてキャッシュをクリアします。
 
 <div class="alert alert-info" role="alert">
-<b>Tip:</b> Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
+<b>ヒント:</b> キャッシュは変更不可なので、すべてのキャッシュ キーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
 </div>
 
 下記のような状況では、キャッシュキーの名前を変えることによるキャシュのクリアを検討してみてください。
 
-* npm コマンドがバージョンアップするなど、依存関係管理ツールのバージョンが変更になった.
-* Language version change, for example, you change Ruby 2.3 to 2.4.
-* プロジェクトから依存関係が削除された.
+* npm コマンドがバージョンアップするなど、依存関係管理ツールのバージョンが変更になった場合
+* Ruby のバージョンが 2.3 から 2.4 に変更されるなど、言語のバージョンが変更された場合
+* プロジェクトから依存関係が削除された場合
 
 <div class="alert alert-info" role="alert">
-  <b>Tip:</b> Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Consider using keys within [a-z][A-Z] in your cache key prefix.
+  <b>ヒント:</b> キャッシュキーに <code class="highlighter-rouge">:、?、&、=、/、#</code> などの特殊文字や予約文字を使用すると、ビルドの際に問題が発生する可能性があるため、注意が必要です。 キャッシュキーのプレフィックスには [a-z][A-Z] の文字を使用してください。
 </div>
 
 ### キャッシュ サイズ
 {: #cache-size }
 {:.no_toc}
-We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks. Above this limit, check times would be excessively long. キャッシュ サイズは、CircleCI の [Jobs (ジョブ)] ページの `restore_cache` ステップで確認できます。 Larger cache sizes are allowed, but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting them into multiple distinct caches.
+キャッシュサイズは 500 MB 未満に抑えることをお勧めします。 これは、破損チェックを実行するための上限のサイズです。 このサイズを超えると、チェック時間が非常に長くなります。 キャッシュサイズは、CircleCI のジョブページの `restore_cache` ステップで確認できます。 キャッシュサイズを増やすこともできますが、キャッシュの復元中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュサイズを抑えるため、複数のキャッシュに分割することを検討してください。
 
 ## 基本的な依存関係キャッシュの例
 {: #basic-example-of-dependency-caching }
 
-CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. その他の例については、「CircleCI を設定する」の「[save_cache]({{ site.baseurl }}/2.0/configuration-reference/#save_cache)」セクションを参照してください。
+CircleCI  の手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 他の例については、「CircleCI の設定」の[キャッシュの保存]({{ site.baseurl }}/2.0/configuration-reference/#save_cache)セクションを参照してください。
 
-ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルで指定している ジョブに `save_cache` ステップを追加します。
+ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルで指定しているジョブに `save_cache` ステップを追加します。
 
 ```yaml
     steps:
@@ -217,20 +217,20 @@ CircleCI manual dependency caching requires you to be explicit about what you ca
 
 ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
-**Note:** Unlike the special step [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+**注:** 特別なステップ[`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
 
 ## キーとテンプレートの使用
 {: #using-keys-and-templates }
 
-A cache key is a _user-defined_ string that corresponds to a data cache. A cache key can be created by interpolating **dynamic values**. These are called **templates**. Anything that appears between curly braces in a cache key is a template. 以下を例に考えてみましょう。
+各キャッシュ キーは、1 つのデータキャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュキーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュキー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
 
 ```sh
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
-The above example outputs a unique string to represent this key. The example is using a [checksum](https://en.wikipedia.org/wiki/Checksum) to create a unique string that represents the contents of a `package-lock.json` file.
+上の例の出力は、このキーを表す一意の文字列です。 ここでは、[チェックサム](https://ja.wikipedia.org/wiki/チェックサム)を使用して、`package-lock.json` の内容を表す一意の文字列を作成しています。
 
-The example may output a string similar to the following:
+この例では、以下のような文字列が出力されます。
 
 ```sh
 {% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ={% endraw %}
@@ -238,7 +238,7 @@ The example may output a string similar to the following:
 
 `package-lock` ファイルの内容が変更された場合、`checksum` 関数は別の一意の文字列を返し、キャッシュを無効化する必要があることが示されます。
 
-When choosing suitable templates for your cache `key`, remember that cache saving is not a free operation. It will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, include a `key` that generates a new cache only if something changes.
+キャッシュの `key` に使用するテンプレートを選択するうえでは、キャッシュの保存にはコストがかかることを留意してください。 キャッシュを CircleCI ストレージにアップロードするにはある程度の時間がかかります。 To avoid generating a new cache every build, include a `key` that generates a new cache only if something changes.
 
 まず初めに、プロジェクトにおいて一意となる値のキーを用いて、キャッシュを保存・復元するタイミングを決めます。 ビルド番号が増えたとき、リビジョンが上がったとき、依存マニフェストファイルのハッシュ値が変わったときなどが考えられます。
 
