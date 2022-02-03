@@ -156,22 +156,22 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 ## CircleCI macOS Cloud:
 {: #circleci-macos-cloud }
 
-In addition to AWS and GCP (above), CircleCI's macOS Cloud hosts jobs executed by machines. IP address ranges for CircleCI macOS Cloud:
+In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. IP address ranges for CircleCI macOS Cloud:
 
-162.252.208.0/24
-162.252.209.0/24
-192.206.63.0/24
-162.221.90.0/24
-38.39.177.0/24
-38.39.178.0/24
-38.39.188.0/24
-38.39.189.0/24
-38.39.186.0/24
-38.39.187.0/24
-38.39.184.0/24
-38.39.185.0/24
-38.39.183.0/24
-198.206.135.0/24
+- 162.252.208.0/24
+- 162.252.209.0/24
+- 192.206.63.0/24
+- 162.221.90.0/24
+- 38.39.177.0/24
+- 38.39.178.0/24
+- 38.39.188.0/24
+- 38.39.189.0/24
+- 38.39.186.0/24
+- 38.39.187.0/24
+- 38.39.184.0/24
+- 38.39.185.0/24
+- 38.39.183.0/24
+- 198.206.135.0/24
 
 **IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
 
