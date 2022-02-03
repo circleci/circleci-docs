@@ -688,14 +688,14 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   display: flex;
 
   img {
-	  margin: 0px 4px 2px 0px;
+	  margin: 0px 4px 0px 0px;
     width: 24px;
   }
 }
 
 #time-posted-on {
-  padding: 10px 16px 10px 7px;
-  font-family: Roboto;
+  padding: 11px 16px 10px 7px;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -706,7 +706,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 .server-version-badge {
   background-color: white;
   border: none;
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
