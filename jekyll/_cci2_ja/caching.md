@@ -7,7 +7,7 @@ categories:
   - optimization
 order: 50
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---
@@ -19,9 +19,9 @@ version:
 
 ジョブを 1 回実行すると、以降のジョブインスタンスでは同じ処理をやり直す必要がなくなり、その分高速化されます。
 
-![キャッシュのデータ フロー]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
+![キャッシュのデータフロー]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
-キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係を復元することで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
+キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
 <div class="alert alert-warning" role="alert">
 <b>警告:</b> 異なる Executor 間で (たとえば、Docker と Machine、Linux、Windows、または MacOS の間、または CircleCI イメージとそれ以外のイメージの間で) ファイルをキャッシュすると、ファイル パーミッションエラーまたはパスエラーが発生することがあります。 これらのエラーは、ユーザーが存在しない、ユーザーの UID が異なる、パスが存在しないなどの理由で発生します。 異なる Executor 間でファイルをキャッシュする場合は、特に注意してください。
@@ -91,14 +91,14 @@ Docker イメージの未変更レイヤーを再利用するプレミアム機�
 
 このワークフローの実行中、Job 3 は Job 1 または Job 2 によって書き込まれたキャッシュを使用します。 キャッシュは書き換え不可のため、どちらかのジョブが最初に保存したキャッシュが使用されます。 これは、結果が確定的ではないため通常は望ましくありません。 結果の一部が異なる場合があります。 ジョブの依存関係を変更することにより、ワークフローを確定的にすることができます。 たとえば、ジョブ 1 とジョブ 2 では別々のキャッシュに書き込み、 Job 3 ではいずれかのキャッシュからのみ読み込みます。 または、一方向の依存関係を指定します (Job1 -> Job2 -> Job3)
 
-{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用して復元を行うような、より複雑なジョブのケースもあります。 この場合でも競合状態になる可能性はありますが、詳細はケースによって異なります。 たとえば、ダウンストリームジョブがアップストリームジョブのキャッシュを使用して最後に実行されるようなケースです。
+{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用してリストアを行うような、より複雑なジョブのケースもあります。 この場合でも競合状態になる可能性はありますが、詳細はケースによって異なります。 たとえば、ダウンストリームジョブがアップストリームジョブのキャッシュを使用して最後に実行されるようなケースです。
 
-ジョブ間でキャッシュを共有している場合に発生する競合状態もあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなるワークフローを考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使います。 ジョブ 1 がキャッシュの保存を報告したとしても、ジョブ 2 でキャッシュを正常に復元できることもあれば、キャッシュが見つからないと報告することもあります。 また、ジョブ 2 が以前のワークフローからキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 この問題を解決するには、ワークフローの依存関係 (Job1 -> Job2) を作成します。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 が強制的に待機することになります。
+ジョブ間でキャッシュを共有している場合に発生する競合状態もあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなるワークフローを考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使います。 ジョブ 1 がキャッシュの保存を報告したとしても、ジョブ 2 でキャッシュを正常にリストアできることもあれば、キャッシュが見つからないと報告することもあります。 また、ジョブ 2 が以前のワークフローからキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 この問題を解決するには、ワークフローの依存関係 (Job1 -> Job2) を作成します。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 が強制的に待機することになります。
 
-## キャッシュの復元
+## キャッシュのリストア
 {: #restoring-cache }
 
-CircleCI では、`restore_cache` ステップにリストされているキーの順番でキャッシュが復元されます。 各キャッシュキーはプロジェクトごとに名前空間をもち、プレフィックスの一致で検索されます。 最初に一致したキーのキャッシュが復元されます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
+CircleCI では、`restore_cache` ステップにリストされているキーの順番でキャッシュがリストアされます。 各キャッシュキーはプロジェクトごとに名前空間をもち、プレフィックスの一致で検索されます。 最初に一致したキーのキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
 次の例では、2 つのキーが提供されています。
 
@@ -119,7 +119,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 下記の例では、これらのキーがどのように使用されるかの詳細を説明します。
 
-`keys:` リストのすべての行は _1 つのキャッシュ_を管理します (各行が固有のキャッシュに**対応しているわけではありません**)。 この例でリストされているキー {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュの復元が必要になると CircleCI は、まず (最も特定度の高い) 最初のキーに基づいてキャッシュを検証し、次に他のキーを順に調べ、他のキャッシュキーに変更があるかどうかを確認します。
+`keys:` リストのすべての行は _1 つのキャッシュ_を管理します (各行が固有のキャッシュに**対応しているわけではありません**)。 この例でリストされているキー {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュのリストアが必要になると CircleCI は、まず (最も特定度の高い) 最初のキーに基づいてキャッシュを検証し、次に他のキーを順に調べ、他のキャッシュキーに変更があるかどうかを確認します。
 
 最初のキーにより、 `package-lock.json` ファイルのチェックサムが文字列 `v1-nPM-deps-` に連結されます。 コミットでこのファイルが変更された場合は、新しいキャッシュキーが調べられます。
 
@@ -197,7 +197,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ### キャッシュ サイズ
 {: #cache-size }
 {:.no_toc}
-キャッシュサイズは 500 MB 未満に抑えることをお勧めします。 これは、破損チェックを実行するための上限のサイズです。 このサイズを超えると、チェック時間が非常に長くなります。 キャッシュサイズは、CircleCI のジョブページの `restore_cache` ステップで確認できます。 キャッシュサイズを増やすこともできますが、キャッシュの復元中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュサイズを抑えるため、複数のキャッシュに分割することを検討してください。
+キャッシュサイズは 500 MB 未満に抑えることをお勧めします。 これは、破損チェックを実行するための上限のサイズです。 このサイズを超えると、チェック時間が非常に長くなります。 キャッシュサイズは、CircleCI のジョブページの `restore_cache` ステップで確認できます。 キャッシュサイズを増やすこともできますが、キャッシュのリストア中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュサイズを抑えるため、複数のキャッシュに分割することを検討してください。
 
 ## 基本的な依存関係キャッシュの例
 {: #basic-example-of-dependency-caching }
@@ -240,7 +240,7 @@ CircleCI  の手動で設定可能な依存関係キャッシュを最大限に�
 
 キャッシュの `key` に使用するテンプレートを選択するうえでは、キャッシュの保存にはコストがかかることを留意してください。 キャッシュを CircleCI ストレージにアップロードするにはある程度の時間がかかります。 ビルドのたびに新しいキャッシュが生成されるのを避けるには、変更があった場合にのみ新しいキャッシュを生成する`キー`を指定します。
 
-まず、プロジェクトにおいて一意となる値のキーを用いて、キャッシュを保存または復元するタイミングを決めます。 たとえば、ビルド番号が増えたとき、リビジョン番号が増えたとき、依存関係マニフェスト ファイルのハッシュが変更されたときなどです。
+まず、プロジェクトにおいて一意となる値のキーを用いて、キャッシュを保存またはリストアするタイミングを決めます。 たとえば、ビルド番号が増えたとき、リビジョン番号が増えたとき、依存関係マニフェストファイルのハッシュが変更されたときなどです。
 
 以下は、さまざまな目的に合わせたキャッシュ戦略の例です。
 
@@ -269,7 +269,7 @@ CircleCI  の手動で設定可能な依存関係キャッシュを最大限に�
 - キャッシュ変数には、ビルドで使用している場合は、[パラメーターの使用">パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors)も使用できます。 たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} などです。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。
 
-### キャッシュの保存および復元の例
+### キャッシュの保存およびリストアの例
 {: #full-example-of-saving-and-restoring-cache }
 {:.no_toc}
 
@@ -347,7 +347,7 @@ CircleCI  の手動で設定可能な依存関係キャッシュを最大限に�
 {: #partial-dependency-caching-strategies }
 {:.no_toc}
 
-依存関係管理ツールの中には、部分的に復元された依存関係ツリー上へのインストールを正しく処理できないものがあります。
+依存関係管理ツールの中には、部分的にリストアされた依存関係ツリー上へのインストールを正しく処理できないものがあります。
 
 {% raw %}
 
@@ -361,7 +361,7 @@ steps:
 ```
 {% endraw %}
 
-上の例では、2 番目または 3 番目のキャッシュ キーによって依存関係ツリーが部分的に復元された場合に、依存関係管理ツールによっては古い依存関係ツリーの上に誤ってインストールを行ってしまいます。
+上の例では、2 番目または 3 番目のキャッシュキーによって依存関係ツリーが部分的にリストアされた場合に、依存関係管理ツールによっては古い依存関係ツリーの上に誤ってインストールを行ってしまいます。
 
 カスケードフォールバックの代わりに、以下のように単一バージョンのプレフィックスが付いたキャッシュ キーを使用することで、動作の信頼性が高まります。
 
@@ -480,7 +480,7 @@ NPM5 以降でロック ファイルを使用すると、部分キャッシュ �
 steps:
   - restore_cache:
       keys:
-        # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュを復元します
+        # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュをリストアします
         - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
         - node-v1-{{ .Branch }}-
         - node-v1-
@@ -506,7 +506,7 @@ Pip では、`requirements.txt` で明示的に指定されていないファイ
 steps:
   - restore_cache:
       keys:
-        # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュを復元します
+        # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュをリストアします
         - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
         - pip-packages-v1-{{ .Branch }}-
         - pip-packages-v1-
@@ -553,33 +553,33 @@ steps:
 ## キャッシュ戦略のトレードオフ
 {: #caching-strategy-tradeoffs }
 
-使用言語のビルド ツールが依存関係を難なく処理できる場合は、ゼロ キャッシュ リストアよりも部分キャッシュ リストアの方がパフォーマンス上は有利です。 If you get a zero cache restore, you have to reinstall all your dependencies, which can cause reduced performance. One alternative is to get a large percentage of your dependencies from an older cache, instead of starting from zero.
+使用言語のビルド ツールが依存関係を難なく処理できる場合は、ゼロキャッシュリストアよりも部分キャッシュリストアの方がパフォーマンス上は有利です。 ゼロキャッシュリストアでは、依存関係をすべて再インストールしなければならないため、パフォーマンスが低下することがあります。 これを避けるためには、一から作り直すのではなく、依存関係の大部分を古いキャッシュからリストアする方法が有効です。
 
-However, for other language types, partial caches carry the risk of creating code dependencies that are not aligned with your declared dependencies and do not break until you run a build without a cache. 依存関係が頻繁に変更されない場合は、ゼロ キャッシュ リストア キーをリストの最初に配置してみてください。
+一方、それ以外の言語では、部分キャッシュリストアを実行すると、宣言された依存関係と矛盾するコード依存関係が作成されるリスクがあり、キャッシュなしでビルドを実行するまでその矛盾は解決されません。 依存関係が頻繁に変更されない場合は、ゼロ キャッシュリストアキーをリストの最初に配置してみてください。
 
-Then track the costs over time. If the performance costs of zero cache restores (also referred to as a *cache miss*) prove significant over time, only then consider adding a partial cache restore key.
+次に時間の経過に伴うコストを追跡します。 時間の経過に伴いゼロキャッシュリストア (*キャッシュミス*) のパフォーマンスコストが大幅に増加することがわかった場合には、部分キャッシュリストアキーの追加を検討してください。
 
-Listing multiple keys for restoring a cache increases the chances of a partial cache hit. ただし、`restore_cache`の対象が時間的に広がることで、さらに多くの混乱を招く危険性もあります。 たとえば、アップグレードしたブランチに Node v6 の依存関係がある一方で、他のブランチでは Node v5 の依存関係が使用されている場合は、他のブランチを検索する `restore_cache` ステップで、アップグレードしたブランチとは互換性がない依存関係が復元される可能性があります。
+キャッシュをリストアするためのキーを複数列挙すると、部分キャッシュがヒットする可能性が高くなります。 ただし、より広範囲に `restore_cache` の対象が広がることで、さらに多くの混乱を招く危険性もあります。 たとえば、アップグレードしたブランチに Node v6 の依存関係がある一方で、他のブランチでは Node v5 の依存関係が使用されている場合は、他のブランチを検索する `restore_cache` ステップで、アップグレードしたブランチとは互換性がない依存関係がリストアされる可能性があります。
 
-### ロック ファイルの使用
+### ロックファイルの使用
 {: #using-a-lock-file }
 {:.no_toc}
 
 依存関係管理ツールが扱う Lock ファイル (`Gemfile.lock` や `yarn.lock` など) のチェックサムは、キャッシュキーに適しています。
 
-An alternative is to run the command `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file, you could install the dependencies within a virtualenv in the project root `venv` and then run the command `ls -laR venv > python_deps_checksum`.
+また、`ls -laR your-deps-dir > deps_checksum` を実行し、{% raw %}`{{ checksum "deps_checksum" }}`{% endraw %} で参照するという方法もあります。 たとえば、Python で `requirements.txt` ファイルのチェックサムよりも限定的なキャッシュを取得するには、プロジェクト ルート `venv` の virtualenv 内に依存関係をインストールし、`ls -laR venv > python_deps_checksum` を実行します。
 
 ### 言語ごとに異なるキャッシュを使用する
 {: #using-multiple-caches-for-different-languages }
 {:.no_toc}
 
-ジョブを複数のキャッシュに分割することで、キャッシュ ミスのコストを抑制できます。 By specifying multiple `restore_cache` steps with different keys, each cache is reduced in size, thereby reducing the performance impact of a cache miss. Consider splitting caches by language type (npm, pip, or bundler), if you know how each dependency manager stores its files, how it upgrades, and how it checks dependencies.
+ジョブを複数のキャッシュに分割することで、キャッシュミスのコストを抑制できます。 異なるキーを使用して複数の `restore_cache` ステップを指定することで、各キャッシュのサイズを小さくし、キャッシュ ミスによるパフォーマンスへの影響を抑えることができます。 それぞれの依存関係管理ツールによるファイルの保存方法、ファイルのアップグレード方法、および依存関係のチェック方法がわかっている場合は、言語ごとに (npm、pip、bundler) キャッシュを分割することを検討してください。
 
 ### 高コストのステップのキャッシュ
 {: #caching-expensive-steps }
 {:.no_toc}
 
-Certain languages and frameworks include more expensive steps that can and should be cached. たとえば、Scala や Elixir では、コンパイル ステップをキャッシュすることで、効率が大幅に向上します。 Rails の開発者も、フロントエンドのアセットをキャッシュするとパフォーマンスが大幅に向上することをご存じでしょう。
+言語やフレームワークによっては、キャッシュ可能で、キャッシュする方が望ましいものの、大きなコストがかかるステップがあります。 たとえば、Scala や Elixir では、コンパイル ステップをキャッシュすることで、効率が大幅に向上します。 Rails の開発者も、フロントエンドのアセットをキャッシュするとパフォーマンスが大幅に向上することをご存じでしょう。
 
 すべてをキャッシュするのではなく、コンパイルのようなコストがかかるステップをキャッシュすることを*お勧めします*。
 
@@ -608,15 +608,15 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 
 {% endraw %}
 
-この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュ ヒットを探し、次に現在のブランチからキャッシュ ヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュ ヒットを探します。 When CircleCI encounters a list of `keys`, the cache is restored from the first match. If there are multiple matches, the most recently generated cache is used.
+この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュヒットを探し、次に現在のブランチからキャッシュヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュヒットを探します。 `keys` リストが検出されると、最初に一致するキーからキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
-ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 This produces a more granular source cache that updates more often as the current branch and git revision change.
+ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 そうすることで、現在のブランチや git のリビジョンの変更が頻繁に行われる場合でも、より細やかなソースコードのキャッシュ管理を実現できます。
 
-Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (for example, with [API-triggered builds](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) or when using workflows, where you might otherwise need to `checkout` the same repository once per workflow job.
+最も限定的な `restore_cache` オプション({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}) を指定した場合でも、ソースのキャッシュはきわめて有効です。たとえば、同じ git リビジョンに対してビルドを繰り返す場合 ([API トリガーのビルド](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) や、ワークフローを使用する場合です。ワークフローを使用するときには、ソースをキャッシュしないと、ワークフローのジョブごとに同じリポジトリを 1 回ずつ `checkout` しなければならなくなるためです。
 
-However, it is worth comparing build times with and without source caching. `git clone` is often faster than `restore_cache`.
+とはいえ、ソースのキャッシュを使用する場合と使用しない場合のビルド時間を比較した方が良い場合もあります。 `restore_cache`よりも`git clone`の方が高速な場合も多々あります。
 
-**メモ:** 組み込みの `checkout` コマンドを実行すると、git の自動ガベージ コレクションが無効になります。 `save_cache` を実行する前に、`run` ステップで `git gc` を手動で実行すると、保存されるキャッシュのサイズが小さくなります。
+**注:** 既に組み込まれている `checkout` コマンドを実行すると、git の自動ガベージコレクションが無効になります。 `save_cache` を実行する前に、`run` ステップで `git gc` を手動で実行すると、保存されるキャッシュのサイズが小さくなります。
 
 ## 関連項目
 {: #see-also }
