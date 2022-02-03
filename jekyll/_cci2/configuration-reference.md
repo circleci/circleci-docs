@@ -8,6 +8,8 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
+
+suggested_links_has_experiments: true
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -19,6 +21,12 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
   - title: How to trigger a single job
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
+  - title: Updates to maximum duration of jobs
+    link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
+    isExperiment: true
+  - title: How to refresh user permissions
+    isExperiment: true
+    link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.

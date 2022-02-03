@@ -9,15 +9,15 @@ version:
   - Server v3.x
   - Server v2.x
 suggested:
-  - 
-    title: Keep environment variables private
+  - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
-  - 
-    title: Troubleshoot env vars settings
+  - title: Troubleshoot env vars settings
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
-  - 
-    title: Insert files as environment variables
+  - title: Insert files as environment variables
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
+  - title: 「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）
+    link: https://support.circleci.com/hc/ja/articles/4410707277083
+    isExperiment: true
 ---
 
 以下のセクションに沿って、CircleCI で環境変数を使用する方法について説明します。

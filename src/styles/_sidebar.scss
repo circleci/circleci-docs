@@ -198,6 +198,19 @@ aside#full-height {
     margin-left: -2px;
   }
 
+  // hide the "helpful-resources" section if it has experimental links.
+  .has-experiment-links {
+    display: none;
+    &.reveal {
+      display: inherit !important;
+    }
+  }
+
+
+  .toc-heading, .related-heading {
+    margin-left: -2px;
+  }
+
   .toc-indent, .helpful-indent {
     border-left: 2px solid #EEEEEE;
 
