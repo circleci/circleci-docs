@@ -54,8 +54,8 @@ As an example, a workflow including three jobs running in parallel:
 
 All running a similar set of steps:
 
-* checkout 
-* restore cache 
+* checkout
+* restore cache
 * build
 * save cache
 * run command
@@ -65,7 +65,7 @@ The `lint` and `code-cov` jobs could be combined with no affect on workflow leng
 ### Order jobs to create meaningful workflows
 {: #order-jobs-to-create-meaningful-workflows }
 
-If no job ordering is used in a workflow all jobs run concurrently. If all the jobs have a `save_cache` step, they could be uploading files multiple times. Consider reordering jobs in a workflow so subsequent jobs can make use of assets created in previous jobs. 
+If no job ordering is used in a workflow all jobs run concurrently. If all the jobs have a `save_cache` step, they could be uploading files multiple times. Consider reordering jobs in a workflow so subsequent jobs can make use of assets created in previous jobs.
 
 ### Check for language-specific caching tips
 {: #check-for-language-specific-caching-tips }
