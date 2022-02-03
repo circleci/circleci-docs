@@ -68,7 +68,7 @@ To view your network and storage usage follow these steps:
 
 1. Select **Plan** from the app sidebar.
 2. Select **Plan Usage**.
-3. Select the **Network** or **Storagek** tab depending on which you want to view.
+3. Select the **Network** or **Storage** tab depending on which you want to view.
 
 Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, testresult, artifact, workspace.
 
