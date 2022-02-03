@@ -23,7 +23,7 @@ When setting up caches for your projects, the goal is a 10x - 20x ROI (return on
 ### Avoid strict cache keys
 {: #avoid-strict-cache-keys }
 
-Using cache keys that are too strict can mean that you will only get a minimal number of cache hits for a workflow. For example, if you used the key `CIRCLE_SHA1` (SHA of the last commit of the current pipeline) this would only get matched once for a workflow. Consider using cache keys that are less strict to ensure more cache hits.
+Using cache keys that are too strict can mean that you will only get a minimal number of cache hits for a workflow. For example, if you used the key `CIRCLE_SHA1` (SHA of the last commit of the current pipeline), this would only get matched once for a workflow. Consider using cache keys that are less strict to ensure more cache hits.
 
 ### Avoid unnecessary workflow reruns
 {: #avoid-unnecessary-workflow-reruns }
