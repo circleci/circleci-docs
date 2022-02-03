@@ -28,7 +28,7 @@ Using cache keys that are too strict can mean that you will only get a minimal n
 ### Avoid unnecessary workflow reruns
 {: #avoid-unnecessary-workflow-reruns }
 
-If your project has "flaky tests" workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see [Test Insights]({{ site.baseurl }}/2.0/insights-tests/#flaky-tests)). You can also consider configuring your projects to only rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#the-when-attribute).
+If your project has "flaky tests," workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see [Test Insights]({{ site.baseurl }}/2.0/insights-tests/#flaky-tests)). You can also consider configuring your projects to only rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#the-when-attribute).
 
 ### Split cache keys by directory
 {: #split-cache-keys-by-directory }
