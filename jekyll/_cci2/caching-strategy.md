@@ -115,7 +115,7 @@ Since caches are immutable, this strategy allows you to regenerate all of your c
 - When you change the version of a language like Ruby.
 - When you add or remove dependencies from your project.
 
-The stability of partial dependency caching is dependent on your dependency manager. Below is a list of common dependency managers, recommended partial caching strategies, and associated justifications.
+The stability of partial dependency caching relies on your dependency manager. Below is a list of common dependency managers, recommended partial caching strategies, and associated justifications.
 
 ### Bundler (Ruby)
 {: #bundler-ruby }
