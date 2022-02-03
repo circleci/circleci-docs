@@ -97,7 +97,7 @@ $nav-bg: #F3F3F3 !default;
     @media (max-width: $screen-xs-max) {
       font-weight: bold;
     }
-    font-weight: 500;
+    font-weight: 700;
     > span > img {
       @media (min-width: $screen-xs-max) {
         // override css being set w/ toggleClass for selected lang
