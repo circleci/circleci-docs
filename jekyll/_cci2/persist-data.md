@@ -84,7 +84,7 @@ To determine which jobs utilize the above actions, you can search for the follow
 
 The relevant action resulting in network egress that will accrue network transfer usage (billable) is **restoring caches and workspaces to self-hosted runners**.
 
-Details about your storage and network transfer usage can be viewed on your Plan > Plan Usage screen. On this screen you can find:
+Details about your storage and network transfer usage can be viewed on your **Plan > Plan Usage** screen. On this screen you can find:
 
 * Billable Network Transfer & Egress (table at the top of the screen)
 * Network and storage usage for individual projects (Projects tab)
@@ -97,6 +97,9 @@ Details about individual step storage and network transfer usage can be found in
 
 ### How to calculate an approximation of your monthly costs
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
+
+**NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+{: class="alert alert-info" }
 
 Charges apply when an organization has runner network egress beyond the included GB allotment for storage and network usage.
 
