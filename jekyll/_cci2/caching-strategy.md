@@ -18,7 +18,7 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 ## Cache optimization
 {: #cache-optimization }
 
-When setting up caches for your projects, the goal would be a 10x - 20x ROI (return on investment). This means you should be aiming for a situation where the amount of cache restored should be 10x - 20x the cache saved. The following tips can help you achieve this.
+When setting up caches for your projects, the goal is a 10x - 20x ROI (return on investment). This means you are aiming for a situation where the amount of cache restored is 10x - 20x the cache saved. The following tips can help you achieve this.
 
 ### Avoid strict cache keys
 {: #avoid-strict-cache-keys }
