@@ -140,6 +140,8 @@ en:
           link: 2.0/testing-macos/
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
+        - name: Dedicated Host Resources
+          link: 2.0/dedicated-hosts-macos/
     - name: Windows
       children:
         - name: Overview
