@@ -64,6 +64,14 @@ The information below describes how your network and storage usage is accumulati
 **Note:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
 {: class="alert alert-info" }
 
+To view your network and storage usage follow these steps:
+
+1. Select **Plan** from the app sidebar.
+2. Select **Plan Usage**.
+3. Select the **Network** or **Storage** tab depending on which you want to view.
+
+Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, testresult, artifact, workspace.
+
 ### Overview of all storage and network transfer
 {: #overview-of-storage-and-network-transfer }
 
