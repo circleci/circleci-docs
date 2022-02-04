@@ -3,7 +3,7 @@
   browser & the dom when modifying file
  */
 import * as Cookie from 'js-cookie';
-import Prism from 'prismjs';
+import Prism from 'prismjs'; // eslint-disable-line no-unused-vars
 
 import services from './services';
 import '../styles/main.scss';
@@ -25,7 +25,6 @@ checkIfUsersPrint();
 
 $(() => {
   services.instantsearch.init();
-  //services.highlightjsBadge.init();
   services.progressbar.init();
   services.sectionShareButton.init();
   import(/* webpackPrefetch: true */ './experiments'); // imports all experiments
