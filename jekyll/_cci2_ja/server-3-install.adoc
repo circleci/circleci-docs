@@ -154,10 +154,10 @@ Number of days to retain your test results and artifacts. 有効期限を無効�
 
 ==== Postgres、MongoDB、Vault の設定
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 By default, CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。  
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。  
 
-=== Save and deploy
-Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Traefik load balancer. この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。 
+=== 保存とデプロイ
+上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Traefik ロードバランサー用のIPアドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。 
 
 NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 これらのフィールドについては次の段階で再度説明します。
 
