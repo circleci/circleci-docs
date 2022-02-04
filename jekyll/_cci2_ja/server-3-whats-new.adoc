@@ -1,5 +1,5 @@
 ---
-description: "Server 3.x is now generally available. Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more."
+description: "CiecleCI Server 3.x の一般公開が開始されました。 CircleCI Server 3.x では、Orb、ワークフローのスケジュール実行、マトリックス ジョブといった CircleCI の最新機能をご利用いただけます。"
 version:
 - Server v3.x
 - Server Admin
@@ -25,7 +25,7 @@ toc::[]
 * https://circleci.com/docs/2.0/webhooks/[Webhook] が利用できるようになりました。
 * インサイトダッシュボードが利用できるようになりました。
 * IRSA (AWS) をオブジェクトストレージの認証キーの代わりに使用できるようになりました。
-* The email address from which build notifications are sent is now configurable from the KOTS Admin Console.
+* ビルド通知を送信するメールアドレスを KOTS 管理者コンソールから設定できるようになりました。
 
 === 変更点
 
@@ -35,12 +35,12 @@ toc::[]
 
 === 既知の問題
 
-* Updating GitHub Enterprise with a modified Let's Encrypt certificate is unsupported.
-* Let's Encrypt's new root certificate `isrgrootx1` is not trusted.
+* 変更された Let's Encrypt 証明書での GitHub Enterprise の更新はサポートされていません。
+* Let's Encrypt の新しいルート証明書 `isrgrootx1` は信頼できません。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
-* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 
 == リリース 3.2.2
@@ -60,7 +60,7 @@ toc::[]
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
 * CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
-* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
 
@@ -68,7 +68,7 @@ toc::[]
 
 === アップグレードに関する注意事項
 
-From the KOTS Admin Console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
 See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
@@ -85,7 +85,7 @@ See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
 * CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
-* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
 
@@ -93,9 +93,9 @@ See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
 === アップグレードに関する注意事項
 
-From the KOTS Admin Console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
-When upgrading from server 3.1.x to 3.2, there will be some downtime due to a change to the PostgreSQL pod. このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
+サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
 
 ==== PostgreSQL ポッドが `[Pending(保留)]`のまま
 アップグレード後に PostgreSQL ポッドが `[Pending(保留)]` 状態のままである場合、ポッドを以下の手順で 0 にスケールダウンしてから、再度スケールアップしてください。
@@ -148,12 +148,12 @@ circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
 kubectl delete pod circleci-server-traefik-<older pod hash>
 ```
 
-The new Traefik pod will then start to schedule correctly.
+これにより、新しい Traefik ポッドが指定通りに実行されるようになります。
 
 === 新機能
 
-* Customers who require a fully private installation can now access a setting in the KOTS Admin Console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a workaround will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
-* Customers that manage outbound traffic through a proxy can now configure proxy settings through the KOTS Admin Console. サーバーのプロキシサポートの詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[サーバー 3.xのプロキシ設定]を参照してください。
+* 完全なプライベートネットワーク環境でのインストールを必要とするお客様は、KOTS管理コンソールの設定画面からパブリックIPがVMに割り当てられないようにすることができます。 なお、非パブリックIPの設定を有効にした場合、実行中のジョブにSSHアクセスが必要なときは、VPCにVPNを設定するなどの回避策が必要となりますのでご注意ください。
+* プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[サーバー 3.xのプロキシ設定]を参照してください。
 * マシン実行環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。
 * https://circleci.com/docs/ja/2.0/insights/[インサイトAPI]が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
 * 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。
@@ -172,10 +172,7 @@ The new Traefik pod will then start to schedule correctly.
 * KOTS 管理者の設定では、セットアップ中 Nomad mTLS を誤って`有効`に設定します。 It should be set to mTLS `disabled` until after Nomad clients have been deployed.
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 For this reason, retry with SSH for jobs using the machine executor works as standard for private installations. However, for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
 * It is currently possible for multiple organizations under the same CircleCI server account to have contexts with identical names. これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
+* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
