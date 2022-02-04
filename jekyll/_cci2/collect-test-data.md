@@ -143,16 +143,16 @@ A working `.circleci/config.yml` section for testing might look like this:
     steps:
       - checkout
       - run: npm install
-      - run: mkdir ~/junit
+      - run: mkdir /tmp/junit
       - run:
           command: mocha test --reporter mocha-junit-reporter
           environment:
-            MOCHA_FILE: ~/junit/test-results.xml
+            MOCHA_FILE: /tmp/junit/test-results.xml
           when: always
       - store_test_results:
-          path: ~/junit
+          path: /tmp/junit
       - store_artifacts:
-          path: ~/junit
+          path: /tmp/junit
 ```
 
 #### Mocha with nyc
