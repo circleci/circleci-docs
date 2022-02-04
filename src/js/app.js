@@ -3,7 +3,7 @@
   browser & the dom when modifying file
  */
 import * as Cookie from 'js-cookie';
-//import 'highlightjs-badge';
+import Prism from 'prismjs';
 
 import services from './services';
 import '../styles/main.scss';
