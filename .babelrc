@@ -20,7 +20,6 @@
           "toolbar",
           "copy-to-clipboard"
         ],
-        //"theme": "default",
         "css": true
       }
     ]
