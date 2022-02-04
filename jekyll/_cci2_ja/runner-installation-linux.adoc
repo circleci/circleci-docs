@@ -33,11 +33,11 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc#authentication[Authentication] step. `RUNNER_NAME` には、任意の値を指定できまが、同じリソースクラスで使用される他のすべてのランナーの中で一意である必要があります。
+`AUTH_TOKEN` を、「xref:runner-installation.adoc#authentication[認証]」で作成したトークンで置き換えます。 `RUNNER_NAME` には、任意の値を指定できまが、同じリソースクラスで使用される他のすべてのランナーの中で一意である必要があります。
 
 == CircleCI ランナー設定ファイルをインストールする
 
-Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
+作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、パーミッションを `600` に設定します。
 
 ```bash
 sudo chown root: /opt/circleci/launch-agent-config.yaml
@@ -98,7 +98,7 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 `TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
-CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとすぐにジョブを開始しようとすることに注意が必要です。そのため起動する前に設定を適切に行なっておく必要があります。 The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
+CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとすぐにジョブを開始しようとすることに注意が必要です。そのため起動する前に設定を適切に行なっておく必要があります。 ローンチ エージェントはサービスとして設定可能であり、次のスクリプトで `systemd` により管理できます。
 
 ```
 [Unit]
@@ -132,7 +132,7 @@ systemctl start circleci.service
 
 === サービスの実行状態を確認する
 
-The system reports a very basic health status through the `status` field in `systemctl`. このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
+`systemctl` コマンドで表示されるシステム レポートの `status` フィールドで、簡単な実行状態を確認できます。 このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
 
 エージェントの状態は、次のコマンドを実行して確認できます。
 
