@@ -29,7 +29,7 @@ Caching is particularly useful with **package dependency managers** such as Yarn
 
 Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration enables advanced strategies and fine-grained control. See the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) and [Persisting Data]({{site.baseurl}}/2.0/persist-data/) guides for tips on caching strategies and management.
 
-This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. 
+This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
 
 <div class="alert alert-warning" role="alert">
 <b>Note:</b>
@@ -46,7 +46,7 @@ For information about caching and reuse of unchanged layers of a Docker image, s
 
 A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but, in the case of a cache miss or zero cache restore, the job still runs successfully. For example, you might cache `NPM` package directories (known as `node_modules`). The first time your job runs, it downloads all your dependencies, caches them, and (provided your cache is valid) the cache is used to speed up your job the next time it is run.
 
-Caching is about achieving a balance between reliability and getting maximum performance. In general, it is safer to pursue reliability than to risk a corrupted build or to build very quickly using out-of-date dependencies. 
+Caching is about achieving a balance between reliability and getting maximum performance. In general, it is safer to pursue reliability than to risk a corrupted build or to build very quickly using out-of-date dependencies.
 
 ## Basic example of dependency caching
 {: #basic-example-of-dependency-caching }
@@ -123,23 +123,23 @@ Tools that are not explicitly required for your project are best stored on the D
 
 Jobs in one workflow can share caches. This makes it possible to create race conditions in caching across different jobs in a workflow.
 
-Cache is immutable on write. Once a cache is written for a specific key, for example, `node-cache-main`, it cannot be written to again. 
+Cache is immutable on write. Once a cache is written for a specific key, for example, `node-cache-main`, it cannot be written to again.
 
 ### Caching race condition example 1
 {: #caching-race-condition-example-1 }
 
 Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: `{Job1, Job2} -> Job3`. They all read and write to the same cache key.
 
-In a run of the workflow, Job3 may use the cache written by Job1 _or_ Job2. Since caches are immutable, this would be whichever job saved its cache first. 
+In a run of the workflow, Job3 may use the cache written by Job1 _or_ Job2. Since caches are immutable, this would be whichever job saved its cache first.
 
-This is usually undesirable, because the results are not deterministic. Part of the result depends on chance. 
+This is usually undesirable, because the results are not deterministic. Part of the result depends on chance.
 
 You can make this workflow deterministic by changing the job dependencies. For example, make Job1 and Job2 write to different caches, and Job3 loads from only one. Or ensure there can be only one ordering: `Job1 -> Job2 -> Job3`.
 
 ### Caching race condition example 2
 {: #caching-race-condition-example-2 }
 
-There are more complex cases where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`. 
+There are more complex cases where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`.
 
 A race condition is still possible, but the details may change. For instance, the downstream job uses the cache from the upstream job that ran last.
 
@@ -154,7 +154,7 @@ There are many different approaches to utilizing caching in monorepos. The follo
 {: #creating-and-building-a-concatenated-package-lock-file }
 
 1. Add custom command to config:
-   
+
       {% raw %}
       ```yaml
       commands:
@@ -277,8 +277,11 @@ Template | Description
 
 The following example demonstrates how to use `restore_cache` and `save_cache`, together with templates and keys in your `.circleci/config.yml` file.
 
+This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) guide.
+
 <div class="alert alert-warning" role="alert">
-<b>Warning:</b> This is example is only a <i>potential</i> solution and might be unsuitable for your specific needs.</div>
+<b>Warning:</b> This is example is only a <i>potential</i> solution and might be unsuitable for your specific needs.
+</div>
 
 {% raw %}
 
