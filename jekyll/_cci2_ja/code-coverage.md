@@ -399,7 +399,7 @@ workflows:
 
 `mvn test` を実行するとコードカバレッジレポート (`exec`) ファイルが生成され、他の多くのカバレッジツールと同様に、このファイルが `html` ページにも変換されます。 上記の Pom ファイルは `target` ディレクトリに書き込みを行い、これを CircleCI `config.yml` ファイルでアーティファクトとして保存できます。
 
-Here is a minimal CI configuration to correspond with the above example:
+上記の例に対応する最小の CI 設定は以下のとおりです。
 
 {:.tab.java_example.Cloud}
 ```yaml
