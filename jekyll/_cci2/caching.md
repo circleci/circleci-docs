@@ -277,7 +277,7 @@ Template | Description
 
 The following example demonstrates how to use `restore_cache` and `save_cache`, together with templates and keys in your `.circleci/config.yml` file.
 
-This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache, it is important be aware that this can also have a significant increase on storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) guide.
+This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) guide.
 
 <div class="alert alert-warning" role="alert">
 <b>Warning:</b> This is example is only a <i>potential</i> solution and might be unsuitable for your specific needs.
