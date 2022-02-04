@@ -55,7 +55,7 @@ The Python [orb]({{site.devhub_base_url}}/orbs/orb/circleci/python) contains a s
 To add the orb to your config, insert:
 ```yaml
 orbs:
-  node: circleci/python@1.5.0
+  python: circleci/python@1.5.0
 ```
 
 Note: You might need to enable organization settings to allow the use of third-party orbs in the CircleCI dashboard, or request permission from your organization’s CircleCI admin.
@@ -75,7 +75,7 @@ workflows:
 
 Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about [jobs]({{site.baseurl}}/2.0/configuration-reference/#jobs).
 
-A traditional ask from developers who are getting started with CircleCI is to perform 3 basic tasks: `build`, `test` and `deploy`. This section will guide you through each of the config changes needed. Because we are using the official Node.js orb, these steps can easily be accomplished:
+A traditional ask from developers who are getting started with CircleCI is to perform 3 basic tasks: `build`, `test` and `deploy`. This section will guide you through each of the config changes needed. Because we are using the official Python orb, these steps can easily be accomplished:
 
 #### a. Build and test the app
 {: #build-and-test-the-app }
@@ -106,7 +106,7 @@ In this example, we are choosing to deploy to Heroku. This can be done using the
 
 ```yaml
 orbs:
-  node: circleci/python@1.5.0
+  python: circleci/python@1.5.0
   heroku: circleci/heroku@1.2.6
 ```
 
@@ -120,7 +120,7 @@ jobs:
       - image: cimg/python:3.10.1
     steps:
       - attach_workspace:
-        at: ~/project
+          at: ~/project
       - heroku/deploy-via-git:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
