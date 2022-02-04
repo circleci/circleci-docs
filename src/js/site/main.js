@@ -1,8 +1,6 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
 
-//hljs.initHighlightingOnLoad();
-
 const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
 const hideEvents = ['mouseout', 'mouseleave', 'blur'];
 
@@ -327,7 +325,7 @@ export function trackDarkModePreference() {
 }
 
 /*
-  Checking if users are attempting to print docs pages to gauge interest of print button 
+  Checking if users are attempting to print docs pages to gauge interest of print button
  */
 export function checkIfUsersPrint() {
   window.onbeforeprint = () => {
