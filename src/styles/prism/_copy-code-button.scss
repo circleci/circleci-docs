@@ -1,5 +1,8 @@
-// TODO: figure out why the prism css is overwriting all this custom css
-// we should not have to use `!important`
+/*
+* Some of the CSS here is overwriting CSS coming from prismjs.
+* !important is required because prism is packaged in app.bundle.js which is
+* loaded after our app.bundle.css
+*/
 
 .toolbar {
   top: 0.2em !important;
@@ -7,7 +10,9 @@
   padding: 6px;
 
   .copy-to-clipboard-button {
-    display: none;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+
     background-color: #EDEDED !important;
     background-position: 50% !important;
     background-repeat: no-repeat !important;
@@ -34,9 +39,8 @@
   }
 }
 
-// TODO: this is prety abrubt and it should have a better fade-in/fade-out animation
 .code-toolbar:hover {
   .copy-to-clipboard-button {
-    display: inline;
+    opacity: 1;
   }
 }

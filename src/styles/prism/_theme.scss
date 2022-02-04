@@ -1,7 +1,24 @@
-/* This theme is based on the theme from PrismJS.
+/*
+ * This theme is based on the theme from PrismJS.
  * It is modified to use the same colors as the default theme from our in-app config editor.
  * See: https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vsc-dark-plus.css
+ *
+ * Some of the CSS here is overwriting CSS coming from prismjs.
+ * !important is required because prism is packaged in app.bundle.js which is
+ * loaded after our app.bundle.css
  */
+
+/*
+ * setting basic style on HTML pre tag to avoid
+ * too much content shift once prismjs is loaded
+ */
+ pre.highlight {
+  padding: 1em;
+  padding-left: 3.8em;
+  margin: 0.5em 0;
+  color: #ffffff;
+  background-color: #2B2B2B;
+}
 
 pre[class*="language-"],
 code[class*="language-"] {
@@ -291,10 +308,10 @@ pre[class*="language-"] > code[class*="language-"] {
 }
 
 .line-numbers .line-numbers-rows {
-  border-right: 0px;
-  top: -4px;
+  border-right: 0px !important;
+  top: -4px !important;
 
   span:before {
-    color: #858585;
+    color: #858585 !important;
   }
 }
