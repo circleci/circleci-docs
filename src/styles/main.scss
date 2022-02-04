@@ -356,7 +356,7 @@ body.homepage{
 	}
 }
 
-table tr th:first-of-type code .language-plaintext, table tr td:first-of-type code .language-plaintext{
+table tr th:first-of-type code.language-plaintext, table tr td:first-of-type code.language-plaintext{
   white-space: nowrap !important;
 }
 
