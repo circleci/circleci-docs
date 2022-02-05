@@ -74,9 +74,6 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 {: #macos }
-
-_The macOS executor is not currently available on self-hosted installations of CircleCI server_
-
 ```
 jobs:
   build: # name of your job
@@ -85,7 +82,7 @@ jobs:
 
     steps:
       # Commands run in a macOS virtual machine environment
-      # with Xcode 11.3 installed
+      # with Xcode 12.5.1 installed
 ```
 
 Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).

@@ -22,7 +22,6 @@ example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
 To follow along with this document you will need:
 
 - An [account](https://circleci.com/signup/) on CircleCI.
-- A subscription to a [paid plan](https://circleci.com/pricing/#build-os-x) to enable building on the macOS executor.
 - An Apple computer with XCode installed on it (if you want to open the example project).
 
 ## Overview of the macOS executor

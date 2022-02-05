@@ -45,7 +45,7 @@ The table below lists some of the features you can use on the Free plan.
 |-------|-------------|
 | UNLIMITED USERS | There is no limit to the number of users who can build and develop on CircleCI. Collaborate with different teams and groups on multiple projects. |
 | EXPANDED ARRAY OF AVAILABLE RESOURCE CLASSES | You have access to an expanded array of Docker, Linux, and Windows resource classes (macOS coming soon). |
-| CONCURRENCY AND TEST SPLITTING | Faster builds and test splitting equal increased productivity and speed when building on CircleCI. |
+| CONCURRENCY | Run jobs simultaneously for increased productivity and speed when building on CircleCI. |
 | SELF HOSTED RUNNERS | The number of runners you can use has been increased providing you additional flexibility when working on CircleCI. |
 | FLAKY TEST DETECTION | Advanced insights are available to help you troubleshoot failed and flaky tests. |
 | UNLIMITED PRIVATE ORBS | There is no limit to the number of private orbs you can use to securely share across teams and groups. |
@@ -64,12 +64,10 @@ When using the free plan, you have the widest array of resource classes on Docke
 
 For more information about these resources, please refer to the the [Executors and Images](https://circleci.com/docs/2.0/executor-intro/) page.
 
-### Concurrency and test splitting
-{: #concurrency-and-test-splitting }
+### Concurrency
+{: #concurrency }
 
-The ability to run multiple tests at the same time (concurrently) is a powerful feature that allows you to decrease your build times and shorten feedback cycles by running jobs concurrently with workflows.
-
-For more information about how to utilize test splitting, refer to the [Running Tests In Parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-test-splitting-with-python-django-tests) page.
+The ability to run jobs at the same time (concurrently) is a powerful feature that allows you to decrease your build times and shorten feedback cycles. With concurrency, you will have less jobs waiting in a queue.
 
 ### Self hosted runners
 {: #self-hosted-runners }
@@ -117,11 +115,6 @@ Upgrading to a Performance plan offers several improvements over the Free plan:
 Organizations on our Free plan receive a set amount of free credits per month for Linux open source builds. Using our Free plan and keeping your repository public will enable this for you.  Open-source credit availability and limits will not be visible in the UI.
 
 If you build on macOS, we also offer organizations on our Free plan a number of free credits every month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
-
-## Docker layer caching
-{: #docker-layer-caching }
-
-You are able to use credits per run job for Docker Layer Caching (DLC). DLC is only available on the Performance plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
 
 ## Troubleshooting
 {: #troubleshooting }

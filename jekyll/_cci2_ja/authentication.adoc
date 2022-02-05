@@ -3,6 +3,12 @@ description: "このドキュメントでは、お客様の CircleCI Server v2 �
 version:
 - Server v2.x
 - サーバー管理
+
+suggested_links_has_experiments: true
+suggested:
+  - title: アカウントのパーミッションの更新について
+    isExperiment: true
+    link: https://support.circleci.com/hc/ja/articles/360048210711
 ---
 = 認証
 :page-layout: classic-docs

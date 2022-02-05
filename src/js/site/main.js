@@ -1,8 +1,10 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
 
-const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
-const hideEvents = ['mouseout', 'mouseleave', 'blur'];
+const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
+const HIDE_EVENTS = ['mouseout', 'mouseleave', 'blur'];
+const HEADER_TAGS =
+  'article h1, article h2, article h3, article h4, article h5, article h6';
 
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
@@ -115,11 +117,11 @@ function renderVersionBlockPopover() {
       destroy();
     }
 
-    showEvents.forEach((event) => {
+    SHOW_EVENTS.forEach((event) => {
       badge.addEventListener(event, show);
     });
 
-    hideEvents.forEach((event) => {
+    HIDE_EVENTS.forEach((event) => {
       badge.addEventListener(event, hide);
     });
   });
@@ -250,7 +252,8 @@ $(document).ready(function () {
     $('nav.sidebar').toggleClass('open');
   });
 
-  $('article h1, article h2, article h3, article h4, article h5, article h6')
+  $(HEADER_TAGS)
+    .not('.card')
     .filter('[id]')
     .hover(function () {
       $(this).find('i').toggle();
@@ -288,14 +291,14 @@ $(function () {
   const timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
 
-  showEvents.forEach((event) => {
+  SHOW_EVENTS.forEach((event) => {
     timeposted?.addEventListener(event, () => {
       tooltiptime.setAttribute('data-show', '');
       popperInstance = createPopper(timeposted, tooltiptime, {});
     });
   });
 
-  hideEvents.forEach((event) => {
+  HIDE_EVENTS.forEach((event) => {
     timeposted?.addEventListener(event, () => {
       tooltiptime.removeAttribute('data-show');
       if (popperInstance) {

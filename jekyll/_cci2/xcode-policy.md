@@ -23,26 +23,26 @@ This document outlines the CircleCI Xcode release, update and deprecation policy
 
 We aim to retain 4 major versions of Xcode, with more recent versions having a larger number of images to choose from.
 
-Example with Xcode 12 being the latest major version being released:
+Example with Xcode 13 being the latest major version being released:
 
 Xcode Version  | Action
 ----------------|---------------------------------
+Xcode 13 | We will keep all major.minor versions at the latest patch version
 Xcode 12 | We will keep all major.minor versions at the latest patch version
-Xcode 11 | We will keep all major.minor versions at the latest patch version
-Xcode 10 | As further Xcode 12 releases are announced, we will begin deprecating older versions of Xcode 10 in stages
-Xcode 9 | We retain a single image which will be the last stable release of Xcode 9
-Xcode 8 | Removed entirely
+Xcode 11 | As further Xcode 13 releases are announced, we will begin deprecating older versions of Xcode 11 in stages
+Xcode 10 | We retain a single image which will be the last stable release of Xcode 10
+Xcode 9 | Removed entirely
 {: class="table table-striped"}
 
-Future example when Xcode 13 enters Beta:
+Future example when Xcode 14 enters Beta:
 
 Xcode Version | Action
 ----------------|---------------------------------
-Xcode 13 | Beta image will be released and updated as per the beta image policy
-Xcode 12 | We will keep all `major.minor` versions at the latest patch version
-Xcode 11 | We will keep all `major.minor` versions at the latest patch version during the beta period and begin to flag images for deprecation during the Xcode 13 release cycle
-Xcode 10 | All images except for the final release will be flagged for deprecation and removed when Xcode 13 reaches GM
-Xcode 9 | Flagged for deprecation, removed when Xcode 13 reaches GM
+Xcode 14 | Beta image will be released and updated as per the beta image policy
+Xcode 13 | We will keep all `major.minor` versions at the latest patch version
+Xcode 12 | We will keep all `major.minor` versions at the latest patch version during the beta period and begin to flag images for deprecation during the Xcode 14 release cycle
+Xcode 11 | All images except for the final release will be flagged for deprecation and removed when Xcode 14 reaches GM
+Xcode 10 | Flagged for deprecation, removed when Xcode 14 reaches GM
 {: class="table table-striped"}
 
 When an image is selected for deprecation and removal, we will create an announcement on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will always aim to provide 4 weeks notice.

@@ -34,7 +34,7 @@
       <nav class="collapse global-nav--nav" id="global-nav">
         <div class="divider"></div>
 
-        {% include_cached mobile-sidebar.html site=site page=page %}
+        {% include_cached mobile-sidebar.html site=site page=page sidenav=include.sidenav %}
         {% include_cached lang_picker.html %}
         <div class="global-nav--list global-nav--external-links">
           <a href="{{ '/' | outer_url }}" class="global-nav--external-link global-nav--list-item"

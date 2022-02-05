@@ -9,15 +9,15 @@ const languages = {
   en: {
     name: 'English',
     url: 'docs/',
-    id: 'globalNavLangEng',
-    domEl: getElById('globalNavLangEng'),
+    id: 'globalNavLang-en',
+    domEl: getElById('globalNavLang-en'),
   },
   ja: {
     name: '日本語',
     url: 'docs/ja/',
-    id: 'globalNavLangJap',
-    element: 'globalNavLangJap',
-    domEl: getElById('globalNavLangJap'),
+    id: 'globalNavLang-ja',
+    element: 'globalNavLang-ja',
+    domEl: getElById('globalNavLang-ja'),
   },
 };
 
@@ -45,7 +45,7 @@ const setLanguageSelectorOnLoad = () => {
     languages[window.currentLang] ||
     languages[window.navigator.language] ||
     languages['en'];
-  $(currentLang.domEl).addClass('selected');
+  $(currentLang.domEl).toggleClass('selected', true);
 };
 
 //  Reloads and changes the site to the selected language on click from the language dropdown

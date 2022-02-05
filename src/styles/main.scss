@@ -15,6 +15,7 @@
 @import 'snippets';
 @import 'utilities';
 @import 'progressbar';
+@import 'language-guide';
 
 // prism related scss
 @import 'prism/theme';
@@ -337,10 +338,14 @@ body.homepage{
 	}
 }
 
+table tr th:first-of-type code.language-plaintext, table tr td:first-of-type code.language-plaintext{
+  white-space: nowrap !important;
+}
+
 code {
   padding: 2px;
-  white-space: pre-wrap !important;
   word-wrap: anywhere;
+  white-space: pre-wrap !important;
 }
 
 code.env_var {
@@ -610,13 +615,14 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   display: flex;
 
   img {
-	  margin: 0px 3px 3px 0px;
+	  margin: 0px 4px 0px 0px;
+    width: 24px;
   }
 }
 
 #time-posted-on {
-  padding: 10px 16px 10px 7px;
-  font-family: Roboto;
+  padding: 12px 16px 10px 7px;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -627,7 +633,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 .server-version-badge {
   background-color: white;
   border: none;
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
