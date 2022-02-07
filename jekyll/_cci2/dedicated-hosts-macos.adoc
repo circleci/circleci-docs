@@ -5,7 +5,7 @@ version:
 = Dedicated Hosts for macOS
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI's dedicated host offering for macOS users.
+:page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +16,7 @@ The dedicated host resource class is a new macOS option for those developing, bu
 
 This resource class requires a 24-hour minimum lease and runs on Intel-based Mac hardware.
 
-The identifier for the dedicated host resource is metal and supports the following Xcode images:
+The identifier for the dedicated host resource is `metal` and supports the following Xcode images:
 
 - Xcode 13.0.0
 - Xcode 12.5.1
@@ -24,7 +24,7 @@ The identifier for the dedicated host resource is metal and supports the followi
 - Xcode 12.3.0
 - Xcode 12.2.0
 
-=== Pricing and specs
+== Pricing and specs
 
 Once a dedicated host has been allocated, you have exclusive access to it for a minimum of 24 hours. If the dedicated host is already in use when a job is kicked off, an additional dedicated host is reserved (with its own 24 hour lease window).
 
@@ -43,15 +43,15 @@ Each account can currently have a maximum of three concurrent dedicated hosts. A
 | 12 
 | 32 GB
 | 200 GB
-| 00 credits per minute (24-hour minimum)
+| 100 credits per minute (24-hour minimum)
 |===
 
-=== Known limitations
+== Known limitations
 
 - The resource class does not currently support test splitting or parallelism.
 - The host gets cleaned between jobs, which can take 5-45 minutes currently.
 
-=== Example configuration file using macOS dedicated host resources
+== Example configuration file using macOS dedicated host resources
 
 ```yaml
 # .circleci/config.yml
@@ -78,7 +78,7 @@ workflows:
       - build-and-test
 ```
 
-=== FAQ
+== FAQ
 
 *Q:* Is there an Apple Silicon option for dedicated hosts?
 
@@ -86,7 +86,7 @@ workflows:
 
 *Q:* Why is there a 24-hour minimum?
 
-*A:* Apple released an [updated end-user license agreement (EULA)](https://www.apple.com/legal/sla/docs/macOSBigSur.pdf) along with the release of Big Sur in November 2020, which requires cloud providers to lease Apple hardware to no more than one customer for a minimum of 24 hours.
+*A:* Apple released an https://www.apple.com/legal/sla/docs/macOSBigSur.pdf[updated end-user license agreement (EULA)] along with the release of Big Sur in November 2020, which requires cloud providers to lease Apple hardware to no more than one customer for a minimum of 24 hours.
 
 *Q:* How does a dedicated host differ from the other macOS resources on CircleCI?
 *A:* CircleCI's other macOS resources are run on isolated virtual machines, which means that multiple customers can be using VMs on the same host. Dedicated hosts provide exclusive access to an entire host, without worrying about sharing resources with other customers.
