@@ -76,7 +76,7 @@ you might configure the following job run step:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1-jessie
+      - image: cimg/ruby:3.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
@@ -334,8 +334,6 @@ as that user, for purposes of 'git' access to projects.
 ### Creating a GitHub deploy key
 {: #creating-a-github-deploy-key }
 
-{:.no_toc}
-
 In this example, the GitHub repository is `https://github.com/you/test-repo`,
 and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
@@ -346,13 +344,12 @@ and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-2. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy
-   key". Enter a title in the "Title" field, then copy and paste the public key
-   you created in step 1. Check "Allow write access", then click "Add key".
+2. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy
+   Key**. Enter a title in the "Title" field, then copy and paste the public key
+   you created in step 1. Check **Allow write access**, then click **Add key**.
 
-3. Go to your project settings, click on SSH Keys, and "Add SSH key", and add
-   the private key you created in step 1. In the "Hostname" field, enter
-   "github.com", and press the submit button.
+3. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter
+   `github.com`and add the private key you created in step 1. Then click **Add SSH Key**.
 
 4. In your config.yml, add the fingerprint using the `add_ssh_keys` key:
 
@@ -372,40 +369,27 @@ key you added.
 ### Creating a Bitbucket user key
 {: #creating-a-bitbucket-user-key }
 
-{:.no_toc}
-
 Bitbucket does not currently provide CircleCI with an API to create user keys.
 However, it is still possible to create a user key by following this workaround:
 
 1. In the CircleCI application, go to your project's settings.
 
-2. Navigate to the **SSH Keys** page.
+2. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
 
-3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.![]({{ site.baseurl }}/assets/img/docs/bb_user_key.png)
+3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.
+![]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
 
-4. In the developer console, select the **Network** tab, followed by the **Preview** tab.
+4. In the browser inspector, select the **Network** tab, and clear the console.
 
-5. Find and click the `checkout-key` with a 201 status and copy
-   the `public_key` to your clipboard.![](
-   {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
+5. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
+![]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
 
-6. Click the **Add User Key** button to paste in the `public_key` and create your user key.
+6. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
+![]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
    
-7. Add the key to Bitbucket by following Bitbucket's guide on
-   [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
+7. Add the key to Bitbucket by following Bitbucket's guide on [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
-8. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys`
-   key:
-
-```yaml
-version: 2
-jobs:
-  deploy-job:
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SO:ME:FIN:G:ER:PR:IN:T"
-```
+This SSH user key will have a "PREFERRED" label; if the project also has a deploy key, the SSH user key will be used first.
 
 ### How are these keys used?
 {: #how-are-these-keys-used }

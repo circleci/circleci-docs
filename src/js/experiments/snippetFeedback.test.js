@@ -35,7 +35,7 @@ describe('Snippet Feedback class', () => {
       'Was this helpful?',
     );
     expect(sf.wasThisHelpfulContainer.children[1].textContent).toBe('Yes');
-    expect(sf.wasThisHelpfulContainer.children[2].textContent).toBe(' / ');
+    expect(sf.wasThisHelpfulContainer.children[2].textContent).toBe(' /');
     expect(sf.wasThisHelpfulContainer.children[3].textContent).toBe('No');
     //
   });

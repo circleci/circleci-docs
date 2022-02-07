@@ -8,6 +8,8 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
+
+suggested_links_has_experiments: true
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -19,6 +21,12 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
   - title: How to trigger a single job
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
+  - title: Updates to maximum duration of jobs
+    link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
+    isExperiment: true
+  - title: How to refresh user permissions
+    isExperiment: true
+    link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
@@ -135,7 +143,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:3.0.3-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -187,7 +195,7 @@ A map of environment variable names and values. These will override any environm
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 Example:
 
@@ -310,7 +318,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the [`aws_auth` field]({{ site.baseurl }}/2.0/configuration-reference/#docker-machine-macos-windows-executor) as in the following example:
 
 ```yaml
 jobs:
@@ -328,7 +336,7 @@ It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-confi
 jobs:
   myjob:
     docker:
-      - image: circleci/node:14.17.3
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -368,7 +376,7 @@ jobs:
 ##### Available `machine` images
 {: #available-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the deveoper hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the developer hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
@@ -519,7 +527,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on Free and Performance plans. See the [comparison table](https://circleci.com/pricing/#comparison-table) for which resource classes are available to Free and Performance plan customers.
+**Note:** For new projects created after September 1, 2021 that do not specify a resource class, CircleCI will try to find the right default value for your organization. To avoid using a default, explicitly specify a resource class size in your config for each job.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -772,6 +780,9 @@ Each built-in step is described in detail below.
 {: #run }
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+
+**Note:** the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, use [workflows](#workflows) plus associated [filtering]({{site.baseurl}}/2.0/configuration-reference/#jobfilters) and/or [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). See [fan-out/fan-in examples]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
+{: class="alert alert-info"}
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1099,7 +1110,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: v1-{{ checksum yark.lock }}
+    key: v1-{{ checksum "yarn.lock" }}
     paths:
       - node_modules/workspace-a
       - node_modules/workspace-c
@@ -1174,42 +1185,11 @@ A path is not required here because the cache will be restored to the location f
 ```
 {% endraw %}
 
-##### **`deploy` – DEPRECATED**
+##### **`deploy` - DEPRECATED**
 {: #deploy-deprecated }
-
-**This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and/or [scheduled pipelines](https://circleci.com/docs/2.0/scheduled-pipelines/).** See [fan-out/fan-in examples](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
-
-Special step for deploying artifacts.
-
-`deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
-
-In general `deploy` step behaves just like `run` with two exceptions:
-
-- In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
-- In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
-  > **skipping deploy**
-  > Running in SSH mode.  Avoid deploying.
-
-When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
-
-- [Workflows](https://circleci.com/docs/2.0/workflows/)
-- [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
-
-###### Example
-{: #example }
 {:.no_toc}
 
-``` YAML
-- deploy:
-    command: |
-      if [ "${CIRCLE_BRANCH}" == "main" ]; then
-        ansible-playbook site.yml
-      fi
-```
-
-**Note:** The `run` step allows you to use a shortcut like `run: my command`; however, if you try to use a similar shortcut for the `deploy` step like `deploy: my command`, then you will receive the following error message in CircleCI:
-
-`In step 3 definition: This type of step does not support compressed syntax`
+Please see [run](#run) for current processes.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
@@ -1419,7 +1399,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

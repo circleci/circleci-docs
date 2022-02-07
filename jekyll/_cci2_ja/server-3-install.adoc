@@ -1,23 +1,28 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x インストール ステップ 2
+= CircleCI Server v3.x Installation Phase 2
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Find the steps and prerequisites for the server v3.x installation.
 :icons: font
 :toc: macro
 :toc-title:
 
 CircleCI Server v3.x のコアサービスのインストールステップを開始する前に、xref:server-3-install-prerequisites.adoc[前提条件]をすべて満たしていることをご確認ください。
 
-NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
+
+.Installation Experience Flow Chart Phase 2
+image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
-CircleCI Server v3.x では、https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` の https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[プラグイン]です。
+CircleCI Server v3.x は、https://www.replicated.com/[[Replicated]] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
+To install the latest version, you can run `curl  https://kots.io/install {vbar} bash`.
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
 次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。 
@@ -26,7 +31,7 @@ To install the latest version, you can run `curl \https://kots.io/install | bash
 kubectl kots version
 ```
 
-NOTE: この KOTS コマンドにより管理者コンソールへの道が開きます。 WSL2 をインストールした Windows 上で実行する場合、ホスト マシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
+NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホスト マシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
 From the terminal run (if you are installing behind a proxy see <<Installing behind HTTP Proxy>>):
 
@@ -34,7 +39,7 @@ From the terminal run (if you are installing behind a proxy see <<Installing beh
 kubectl kots install circleci-server
 ```
 
-以下の入力が求められます。
+すると、以下を入力するよう求められます。
 
 * デプロイ先の名前空間
 * KOTS 管理者コンソールのパスワード
@@ -120,7 +125,7 @@ Github が提供する OAuth クライアント シークレットです。
 
 * *[Secret Key (シークレット キー)] (必須)*: S3 バケットへのアクセス用のシークレット キーを指定します。
 
-* *[AWS S3 Region (AWS S3 リージョン)] (オプション)* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 このオプションを設定すると、S3 エンドポイントは無視されます。
+* *[AWS S3 Region (AWS S3 リージョン)] (オプション)* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 このオプションを設定すると、[S3 Endpoint (S3 エンドポイント)] は無視されます。
 
 * *[S3 Endpoint (S3 エンドポイント)]* (オプション): S3 ストレージ プロバイダーの API エンドポイントを指定します。 プロバイダーが AWS ではない場合は必須です。 このオプションを設定すると、AWS S3 リージョンは無視されます。
 
@@ -139,12 +144,12 @@ Github が提供する OAuth クライアント シークレットです。
 
 既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。  
 
-==== 保存とデプロイ
+=== Save and deploy
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Traefik ロードバランサー用のIPアドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。 
 
 NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 しかし、ご心配ありません。 これらのフィールドについては次の段階で再度説明します。
 
-==== DNS エントリーの作成 
+=== Create DNS entry 
 DNS エントリを作成します (例: `circleci.your.domain.com`、 `app.circleci.your.domain.com`)。 この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。 
 
 Traefik ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 この値は以下のコマンドで取得できます。
@@ -154,13 +159,15 @@ kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE
 
 ----
 
-新しい DNS レコードを追加する方法の詳細は、以下のドキュメントを参照してください。
+新しい DNS レコードを追加する方法について詳しくは、以下のドキュメントを参照してください。
 
 * link:https://cloud.google.com/dns/docs/records#adding_a_record[レコードの管理] (GCP)
 
-* link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成] (AWS)
+* link:https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成] (AWS)
 
-==== 確認
+NOTE: The Traefik load balancer has a healthcheck that serves a JSON payload at https://loadbalancer-address/status.
+
+=== バリデーション
 
 これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (実行中および準備完了状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。 
 

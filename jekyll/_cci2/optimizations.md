@@ -174,7 +174,49 @@ DLC is a feature that can help to reduce the _build time_ of a Docker image in y
 
 DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
+{:.tab.switcher.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+ build:
+    docker:
+      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_3}
+```yaml
+version: 2.1
+jobs:
+ build:
+    docker:
+      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_2}
+
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
  build:

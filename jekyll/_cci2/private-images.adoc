@@ -14,22 +14,20 @@ version:
 
 This document describes how to authenticate with your Docker registry provider to pull images.
 
-Authenticated pulls allow access to private Docker images.  It may also grant higher rate limits depending on your registry provider.
+Authenticated pulls allow access to private Docker images. It may also grant higher rate limits, depending on your registry provider.
 
-CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. That’s why we’re encouraging you and your team to add Docker Hub authentication to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may be implemented for CircleCI users in the future. This is why we are encouraging you and your team to add Docker Hub authentication to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
 toc::[]
 
 ## Docker executor
 
-For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in
-the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password,
-place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
+For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password, place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
 
 NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
 Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
-NOTE: Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
+NOTE: Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they _need_.
 
 In this example, we grant the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
 
@@ -63,8 +61,7 @@ For example:
     password: $DOCKERHUB_ACCESS_TOKEN
 ----
 
-You can also use images from a private repository like https://cloud.google.com/container-registry[gcr.io] or
-https://quay.io[quay.io]. Make sure to supply the full registry/image URL for the `image` key, and use the appropriate
+You can also use images from a private repository like https://cloud.google.com/container-registry[gcr.io] or https://quay.io[quay.io]. Ensure you supply the full registry/image URL for the `image` key, and use the appropriate
 username/password for the `auth` key. For example:
 
 [source,yaml]
@@ -108,7 +105,7 @@ jobs:
 
 ## Machine executor (with Docker CLI)
 
-or with the CLI:
+Or with the CLI:
 
 [source,yaml]
 ----
@@ -131,10 +128,8 @@ jobs:
 
 CircleCI now supports pulling private images from Amazon's ECR service.
 
-TIP: You can pull your private images from ECR repositories in any regions. However, for the best experience, we strongly
-recommend you make a copy of your image in `us-east-1` region, and specify that `us-east-1` image for the Docker executor.
-Our job execution infrastructure is in the `us-east-1` region so using `us-east-1` images speeds up the process of spinning
-up your environment.
+TIP: You can pull your private images from ECR repositories in any regions. However, for the best experience, we strongly recommend you make a copy of your image in `us-east-1` region, and specify that `us-east-1` image for the Docker executor.
+Our job execution infrastructure is in the `us-east-1` region, so using `us-east-1` images accelerates the process of spinning up your environment.
 
 You can start using private images from ECR in one of two ways:
 
@@ -153,10 +148,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ----
 
-Both options are virtually the same, however, the second option enables you to specify the variable name you want for the
-credentials. This can come in handy where you have different AWS credentials for different infrastructure. For example,
-let's say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag
-pushes, we run the full-blown test suite before deploying to production:
+Both options are virtually the same. However, the second option enables you to specify the variable name you want for the credentials. This can be useful where you have different AWS credentials for different infrastructures. For example, your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit, while for git tag pushes, we run the complete test suite before deploying to production:
 
 [source,yaml]
 ----

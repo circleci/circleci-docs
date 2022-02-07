@@ -27,7 +27,7 @@ If you want to have different runners specialized for different workloads, it is
 
 === CircleCI server installation
 
-When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc#runner-for-server-compatibility[Runner Installation] instructions.
+When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc#runner-for-server-compatibility[Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable either via the `--set` flag or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
 
 ==== Upgrading runner deployment for server
 
@@ -38,6 +38,7 @@ When installing the Helm chart for use with a CircleCI server installation the `
 $ helm upgrade -f values.yaml "circleci-runner" ./ \
   --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
   --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
+  --set env.LAUNCH_AGENT_API_URL=<server_host> \
   --namespace your-namespace
 ....
 +
@@ -104,6 +105,8 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 | `+runnerToken+`   | -         | Y         | The token you created for your runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
 | `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI server installations.
+
+| `+env+`           | -         | N         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
 
 | all other values  | -         | N         | Modify at your own discretion and risk.
 

@@ -1,11 +1,12 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
-= CircleCI Server v3.x 認証
+= CircleCI Server v3.x Authentication
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI server currently supports OAuth through GitHub or GitHub Enterprise.
 :icons: font
 :toc: macro
 :toc-title:

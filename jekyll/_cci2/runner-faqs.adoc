@@ -43,7 +43,7 @@ CAUTION: Using the checkout step will require access to your VCS provider. Using
 
 == How do caching and workspaces and artifacts work with CircleCI runner?
 
-Caches, workspaces, and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. Although CircleCI is not currently charging for runner usage, you may be charged for data transfer and storage in the future.
+Caches, workspaces, and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. 
 
 If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and uploading the artifacts directly to your chosen storage backend.
 

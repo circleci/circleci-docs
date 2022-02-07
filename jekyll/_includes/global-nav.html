@@ -34,20 +34,8 @@
       <nav class="collapse global-nav--nav" id="global-nav">
         <div class="divider"></div>
 
-        {% include_cached mobile-sidebar.html site=site page=page %}
-        <div class="global-nav--list global-nav--external-links lang-selector-wrapper">
-          <button id="globe-lang-btn" class="global-nav--language-picker" data-analytics-action="click-outer-cta">
-            <img src='{{ site.baseurl }}/assets/img/compass/globe.svg' class="globe-icon"></img>
-            <span class="lang-picker-mobile">Select Language</span>
-          </button>
-          <div id="lang-picker" class="lang-picker">
-            <div class="lang-dropdown">
-              <a id="globalNavLangEng" class="lang-option">English</a>
-              <a id="globalNavLangJap" class="lang-option">日本語</a>
-            </div>
-          </div>
-        </div>
-
+        {% include_cached mobile-sidebar.html site=site page=page sidenav=include.sidenav %}
+        {% include_cached lang_picker.html %}
         <div class="global-nav--list global-nav--external-links">
           <a href="{{ '/' | outer_url }}" class="global-nav--external-link global-nav--list-item"
             data-analytics-action="click-outer-cta" target="_blank" rel="noopener noreferrer">

@@ -1,5 +1,3 @@
-import { isElementInViewport } from '../utils';
-
 // making sidebar stick when touching footer
 // this improves the visual experience while interacting with the docs site
 (function () {
@@ -101,70 +99,5 @@ import { isElementInViewport } from '../utils';
 
     enableAccordion(mainNavItems);
     enableAccordion(mobileNavItems);
-
-    highlightTocOnScroll();
   });
 })();
-
-/**
- * highlightTocOnScroll sets up IntersectionObservers to watch for when a
- * headline comes into view when scrolling a page. When a headlines enters the
- * view, we check to see if it is in the right table of contents - if it is ->
- * highlight it.
- *
- * */
-export function highlightTocOnScroll() {
-  const sidebarItems = Array.from(document.querySelectorAll('.toc-entry a'));
-  const sidebarItemsText = sidebarItems.map((i) => i.innerText);
-  const headlinesToIgnore = ['no_toc', 'toc-heading', 'help-improve-header'];
-  const allHeadlines = Array.from(
-    document.querySelectorAll('h2, h3, h4, h5, h6'),
-  ).filter(
-    (item) =>
-      ![...item.classList].some((className) =>
-        headlinesToIgnore.includes(className),
-      ),
-  );
-
-  // on click - add active class to clicked sidebar item.
-  sidebarItems.forEach((clickedEntry) => {
-    clickedEntry.addEventListener('click', () => {
-      sidebarItems.forEach((el) => {
-        el.classList.remove('active');
-      });
-      clickedEntry.classList.add('active');
-    });
-  });
-
-  var observer = new IntersectionObserver(
-    function (entry) {
-      // check that 1) the item is visible/intersecting
-      // and 2) that the sidebar items text actually has that headline before we make any changes.
-      if (
-        entry[0].isIntersecting === true &&
-        sidebarItemsText.includes(entry[0].target.innerText)
-      ) {
-        let intersectingEntry = entry[0].target;
-        let indexOfCurrentHeadline = allHeadlines.indexOf(intersectingEntry);
-        sidebarItems.forEach((el) => el.classList.remove('active'));
-        sidebarItems[indexOfCurrentHeadline].classList.add('active');
-      }
-    },
-    { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
-  );
-
-  allHeadlines.forEach((headline) => {
-    observer.observe(headline);
-  });
-
-  // on page load, find the highest item in the article view port that is also
-  // in the sidebar and then add active class to it.
-  const firstHeadlineInViewport = allHeadlines.find(isElementInViewport);
-  if (firstHeadlineInViewport) {
-    sidebarItems.forEach((item) => {
-      if (item.textContent === firstHeadlineInViewport.textContent) {
-        item.classList.add('active');
-      }
-    });
-  }
-}

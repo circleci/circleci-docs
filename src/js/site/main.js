@@ -1,14 +1,12 @@
 import { createPopper } from '@popperjs/core';
 import { highlightURLHash } from './highlightURLHash';
-import { dateFormatAgoHelper } from '../dateFormatAgoHelper';
 
 hljs.initHighlightingOnLoad();
-hljs.initLineNumbersOnLoad({
-  singleLine: true,
-});
 
-const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
-const hideEvents = ['mouseout', 'mouseleave', 'blur'];
+const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
+const HIDE_EVENTS = ['mouseout', 'mouseleave', 'blur'];
+const HEADER_TAGS =
+  'article h1, article h2, article h3, article h4, article h5, article h6';
 
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
@@ -121,11 +119,11 @@ function renderVersionBlockPopover() {
       destroy();
     }
 
-    showEvents.forEach((event) => {
+    SHOW_EVENTS.forEach((event) => {
       badge.addEventListener(event, show);
     });
 
-    hideEvents.forEach((event) => {
+    HIDE_EVENTS.forEach((event) => {
       badge.addEventListener(event, hide);
     });
   });
@@ -256,121 +254,8 @@ $(document).ready(function () {
     $('nav.sidebar').toggleClass('open');
   });
 
-  var tooltip = document.querySelector('.tooltip-popover');
-
-  // Give article headings direct links to anchors
-  $('article h1, article h2, article h3, article h4, article h5, article h6')
-    .filter('[id]')
-    .each(function () {
-      var isMainTitle = $(this).prop('nodeName') === 'H1';
-      $(this).append(
-        (isMainTitle ? ' <a href="#' : '<a href="#' + $(this).attr('id')) +
-          '"><i class="fa fa-link"></i></a>',
-      );
-      if (isMainTitle) {
-        $(this).find('i').toggle();
-      }
-    });
-
-  var clickEvents = ['click'];
-
-  var makePopper = (icon) =>
-    Object.assign(icon, {
-      show() {
-        tooltip.setAttribute('data-show', '');
-        // change tooltip text based on current button popover.
-        tooltip.innerHTML = "Copy link<div id='arrow' data-popper-arrow></div>";
-        icon.instance = createPopper(icon, tooltip, {
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 8],
-              },
-            },
-          ],
-        });
-        window.AnalyticsClient.trackAction('docs-share-button-hover', {
-          page: location.pathname,
-          success: true,
-        });
-      },
-      copy(event) {
-        let url = event.target.href;
-        // to account for if section copied and shared is the page title
-        let section =
-          url.charAt(url.length - 1) === '#'
-            ? 'Page Title'
-            : url.substring(url.indexOf('#'));
-        event.preventDefault();
-        navigator?.clipboard
-          .writeText(event.target.href)
-          .then(() => {
-            icon.hide();
-            tooltip.setAttribute('data-show', '');
-            // change tooltip text based on current button popover.
-            tooltip.innerHTML =
-              "Copied!<div id='arrow' data-popper-arrow></div>";
-            icon.instance = createPopper(icon, tooltip, {
-              modifiers: [
-                {
-                  name: 'offset',
-                  options: {
-                    offset: [0, 8],
-                  },
-                },
-              ],
-            });
-            window.history.pushState({}, document.title, event.target.href);
-            window.AnalyticsClient.trackAction('docs-share-button-click', {
-              page: location.pathname,
-              success: true,
-              section,
-            });
-          })
-          .catch((error) =>
-            window.AnalyticsClient.trackAction('docs-share-button-click', {
-              page: location.pathname,
-              success: false,
-              error,
-            }),
-          );
-      },
-      hide() {
-        tooltip.removeAttribute('data-show');
-        if (icon.instance) {
-          icon.instance.destroy();
-          icon.instance = null;
-        }
-      },
-    });
-
-  // https://app.optimizely.com/v2/projects/16812830475/experiments/20631440733/variations
-  window.OptimizelyClient.getVariationName({
-    experimentKey: 'dd_share_section_icon_test',
-    groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
-    experimentContainer: '.external-link-tag-wrapper',
-  }).then((variation) => {
-    if (variation === 'treatment') {
-      document.querySelectorAll('.fa-link').forEach((icon) => {
-        makePopper(icon);
-
-        showEvents.forEach((event) => {
-          icon.parentElement.addEventListener(event, icon.show);
-        });
-
-        hideEvents.forEach((event) => {
-          icon.parentElement.addEventListener(event, icon.hide);
-        });
-
-        clickEvents.forEach((event) => {
-          icon.parentElement.addEventListener(event, icon.copy);
-        });
-      });
-    }
-  });
-
-  $('article h1, article h2, article h3, article h4, article h5, article h6')
+  $(HEADER_TAGS)
+    .not('.card')
     .filter('[id]')
     .hover(function () {
       $(this).find('i').toggle();
@@ -402,21 +287,20 @@ $(document).ready(function () {
 // Currently this function is only used for the insights table
 $(highlightURLHash);
 
-// update date shown to be X ago
+// update date shown to be X ago tooltip code
 $(function () {
-  // tooltip code for posted on time
   const tooltiptime = document.getElementById('tooltip-time');
   const timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
 
-  showEvents.forEach((event) => {
+  SHOW_EVENTS.forEach((event) => {
     timeposted?.addEventListener(event, () => {
       tooltiptime.setAttribute('data-show', '');
       popperInstance = createPopper(timeposted, tooltiptime, {});
     });
   });
 
-  hideEvents.forEach((event) => {
+  HIDE_EVENTS.forEach((event) => {
     timeposted?.addEventListener(event, () => {
       tooltiptime.removeAttribute('data-show');
       if (popperInstance) {
@@ -425,15 +309,37 @@ $(function () {
       }
     });
   });
-
-  if (
-    document.getElementById('time-posted-on') &&
-    document.getElementById('time-posted-ago')
-  ) {
-    const date = Date.parse(
-      document.getElementById('time-posted-on').getAttribute('datetime'),
-    );
-    document.getElementById('time-posted-ago').innerHTML =
-      dateFormatAgoHelper(date);
-  }
 });
+
+/*
+  Check if users have dark mode enabled
+  Set key if user response has not already been tracked to ensure we dont get multiple events from the same user
+ */
+export function trackDarkModePreference() {
+  try {
+    const storageKey = 'provided-dark-mode-response';
+    if (localStorage.getItem(storageKey)) {
+      return;
+    } else {
+      localStorage.setItem(storageKey, true);
+      window.AnalyticsClient.trackAction('User Dark Mode Preference', {
+        darkModeEnabled:
+          window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches,
+      });
+    }
+  } catch (_) {
+    return false;
+  }
+}
+
+/*
+  Checking if users are attempting to print docs pages to gauge interest of print button 
+ */
+export function checkIfUsersPrint() {
+  window.onbeforeprint = () => {
+    window.AnalyticsClient.trackAction('User Attempting to Print', {
+      page: window.location.pathname,
+    });
+  };
+}

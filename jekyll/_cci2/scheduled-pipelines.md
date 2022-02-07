@@ -27,10 +27,10 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 
 - Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context).
 - Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
-- Modify the schedule without having to edit `config.yml`.
-- Interact with auto-cancelling of pipelines.
-- Specify pipeline parameters associated with a schedule.
-- Consolidate the management of common schedules.
+- Modify the schedule without having to edit `.circleci/config.yml`.
+- Take advantage of [auto-cancelling]({{site.baseurl}}/2.0/skip-build/#auto-cancelling).
+- Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- Manage common schedules, e.g. across workflows.
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
 
@@ -77,15 +77,15 @@ For additional information, refer to the **Schedule** section under the [API v2 
 {: #project-settings }
 {:.no_toc}
 
-1. In the CircleCI application, go to your project’s settings. There are various ways to get there. Select **Projects** in the sidebar, then the ellipsis (...) next to your project and select Project Settings. You can also click on the individual project from the list and find the **Project Settings** on the project's landing page.
+1. In the CircleCI application, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project. You can also find the **Project Settings** button on each project's landing page.
 2. Navigate to **Triggers**.
 3. To create a new schedule, click **Add Scheduled Trigger**.
-4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor, then save the trigger.
+4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor (i.e. user associated with the schedule), then save the trigger.
 
 ### Migrate scheduled workflows to scheduled pipelines
 {: #migrate-scheduled-workflows }
 
-The current method for scheduling work on your projects is to us the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
+The current method for scheduling work on your projects is to use the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
 
 * Cannot control the actor, so scheduled workflows can't use restricted contexts.
 * Cannot control the interaction with auto-cancelling of pipelines.
@@ -178,6 +178,8 @@ other-workflow:
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```
+
+`project-slug` takes the form of `vcs-slug/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
 
 **Q:** Why is my scheduled pipeline not running?
 

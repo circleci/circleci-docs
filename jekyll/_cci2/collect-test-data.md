@@ -81,15 +81,17 @@ This section provides the following test runner examples:
 | Language   | Test Runner  | Formatter                                                                               | Example(s)                                                                                                                             |   |   |
 |:-----------|:-------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|---|---|
 | JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                  | [example]( {{ site.baseurl }}/2.0/collect-test-data/#jest)                                                                             |   |   |
-| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/)                                  | [example]({{site.baseurl}}/2.0/collect-test-data/#mochajs), [example with NYC]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |   |   |
+| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                                  | [example]({{site.baseurl}}/2.0/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |   |   |
 | JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)              | [example]({{site.baseurl}}/2.0/collect-test-data/#karma)                                                                               |   |   |
-| JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/2.0/collect-test-data/#ava)                                                                                 |   |   |
+| JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/2.0/collect-test-data/#ava-for-node)                                                                        |   |   |
 | JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                  | [example]({{site.baseurl}}/2.0/collect-test-data/#eslint)                                                                              |   |   |
 | Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/2.0/collect-test-data/#rspec)                                                                               |   |   |
 | Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                    | [example]({{site.baseurl}}/2.0/collect-test-data/#minitest)                                                                            |   |   |
 |            | Cucumber     | built in                                                                                | [example]({{site.baseurl}}/2.0/collect-test-data/#cucumber)                                                                            |   |   |
 | Python     | pytest       | built in                                                                                | [example]({{site.baseurl}}/2.0/collect-test-data/#pytest)                                                                              |   |   |
 | Python     | unittest     | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests         | [example]({{site.baseurl}}/2.0/collect-test-data/#unittest)                                                                            |   |   |
+| Java     | Maven     | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)            | [example]({{site.baseurl}}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                        |   |   |
+| Java     | Gradle     | built in                                                                                    | [example]({{site.baseurl}}/2.0/collect-test-data/#gradle-junit-test-results)                                                           |   |   |
 | PHP        | PHPUnit      | built in                                                                                | [example]({{site.baseurl}}/2.0/collect-test-data/#phpunit)                                                                             |   |   |
 | .NET       |              | [trx2junit](https://github.com/gfoidl/trx2junit)                                        | [example]({{site.baseurl}}/2.0/collect-test-data/#dot-net)                                                                             |   |   |
 | Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                   | [example]({{site.baseurl}}/2.0/collect-test-data/#kaocha)                                                                              |   |   |
@@ -160,7 +162,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
-```
+```yaml
 version: 2
 jobs:
     build:
@@ -168,7 +170,7 @@ jobs:
             CC_TEST_REPORTER_ID: code_climate_id_here
             NODE_ENV: development
         docker:
-            - image: circleci/node:14
+            - image: cimg/node:16.10
               auth:
                 username: mydockerhub-user
                 password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

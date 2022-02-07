@@ -79,7 +79,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.15
+      - image: cimg/go:1.17
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

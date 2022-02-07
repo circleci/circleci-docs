@@ -3,6 +3,7 @@
 @import 'sidebar';
 @import 'footer';
 @import 'global-nav';
+@import 'langselector';
 @import 'subnav';
 @import 'instantsearch';
 @import 'tooltip';
@@ -13,7 +14,9 @@
 @import 'spacing';
 @import 'syntax';
 @import 'snippets';
+@import 'utilities';
 @import 'progressbar';
+@import 'language-guide';
 
 // General
 body {
@@ -353,10 +356,14 @@ body.homepage{
 	}
 }
 
+table tr th:first-of-type code.language-plaintext, table tr td:first-of-type code.language-plaintext{
+  white-space: nowrap !important;
+}
+
 code {
   padding: 2px;
-  white-space: pre-wrap !important;
   word-wrap: anywhere;
+  white-space: pre-wrap !important;
 }
 
 code.env_var {
@@ -590,14 +597,6 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 }
 
 /*
-*  Experiment Key: dd_surfacing_full_example_config_experiment_test
-*  https://app.optimizely.com/v2/projects/16812830475/experiments/20742690126/variations
-*/
-#full-config-example {
-	visibility: hidden;
-}
-
-/*
 *  Experiment Key: dd_add_video_tab_to_docs_test
 *  https://app.optimizely.com/v2/projects/16812830475/experiments/20790151733/variations
 */
@@ -689,16 +688,18 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   box-sizing: border-box;
   border-radius: 4px;
   margin-bottom: 24px;
+  padding: 0px 16px;
   display: flex;
 
   img {
-	margin: 0px 3px 3px 0px;
+	  margin: 0px 4px 0px 0px;
+    width: 24px;
   }
 }
 
 #time-posted-on {
-  padding: 10px 10px 10px 10px;
-  font-family: Roboto;
+  padding: 12px 16px 10px 7px;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -709,7 +710,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 .server-version-badge {
   background-color: white;
   border: none;
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -732,7 +733,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 }
 
 .server-version-wrapper {
-  padding: 10px;
+  padding: 10px 16px;
   flex-grow: 1;
   border-left: 1px solid #DDDDDD;
 }

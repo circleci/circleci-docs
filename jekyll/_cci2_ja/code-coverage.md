@@ -21,7 +21,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 {:toc}
 
 
-## Viewing Coverage on CircleCI
+## CircleCI でのカバレッジの表示
 {: #viewing-coverage-on-circleci }
 
 コードカバレッジ レポートを直接 CircleCI にアップロードできます。 最初に、プロジェクトにカバレッジ ライブラリを追加し、CircleCI の[アーティファクト ディレクトリ]({{ site.baseurl }}/2.0/artifacts/)にカバレッジ レポートを書き込むようにビルドを設定します。 コードカバレッジ レポートはビルドアーティファクトとして、参照またはダウンロード可能な場所に保存されます。 カバレッジ レポートへのアクセス方法の詳細については、[ビルドアーティファクトに関するドキュメント]({{ site.baseurl }}/ja/2.0/artifacts/)を参照してください。
@@ -369,7 +369,7 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 ## Coveralls
 {: #coveralls }
 
-Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
+Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
 

@@ -180,11 +180,11 @@ $sidebar-spacing-base: 5px;
   }
 }
 
-aside.full-height {
+aside#full-height {
   .full-height-sticky {
-    position: sticky; 
-    max-height: calc(100vh - 140px); 
-    overflow: auto; 
+    position: sticky;
+    max-height: calc(100vh - 140px);
+    overflow: auto;
     padding-left: 5px;
     top: 83px;
     max-width: 400px;
@@ -194,16 +194,24 @@ aside.full-height {
     display: none;
   }
 
-  #related-resources {
-    /* hidden by default since it is still an experiment */
-    display: none;
+  .toc-heading, .helpful-heading {
+    margin-left: -2px;
   }
+
+  // hide the "helpful-resources" section if it has experimental links.
+  .has-experiment-links {
+    display: none;
+    &.reveal {
+      display: inherit !important;
+    }
+  }
+
 
   .toc-heading, .related-heading {
     margin-left: -2px;
   }
 
-  .toc-indent, .related-indent {
+  .toc-indent, .helpful-indent {
     border-left: 2px solid #EEEEEE;
 
     a {
@@ -214,14 +222,9 @@ aside.full-height {
     }
   }
 
-  /* if both sections are one after another */
-  .toc-indent + #related-resources {
-    margin-top: 40px;
-  }
-
   ul, li {
     list-style-type: none;
-    padding-left: 8px;
+    padding: 0px 8px;
     margin: 4px 0;
     &:first {
       padding-left: 0px;

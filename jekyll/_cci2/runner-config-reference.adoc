@@ -18,7 +18,7 @@ A YAML file is used to configure the launch agent, how it communicates with our 
 
 The configuration file uses the following format with the various parameters explained in more detail below:
 
-```sh
+```yaml
 api:
   auth_token: AUTH_TOKEN
 runner:
@@ -35,7 +35,14 @@ This is a token used to identify the launch agent to CircleCI and can be generat
 === api.url
 `$LAUNCH_AGENT_API_URL`
 
-This is the URL used by runner to communicate with CircleCI. This variable is only required for runners installed for the 3.2 version of server.
+This is a fully qualified URL used by runner to communicate with CircleCI. This variable is only required for runners installed for the 3.2 or later version of server.
+
+Example:
+
+```yaml
+api:
+  url: https://circleci.example.com
+```
 
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`
@@ -43,11 +50,13 @@ This is the URL used by runner to communicate with CircleCI. This variable is on
 `RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
 
 === logging.file
+`$LAUNCH_AGENT_LOGGING_FILE`
+
 This controls the file where the launch agent and task agent logs will go. See xref:runner-overview.adoc#circleci-runner-operation[CircleCI runner operation] for more information on the launch-agent and the task-agent.
 
 Example:
 
-```sh
+```yaml
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
@@ -55,29 +64,64 @@ logging:
 === runner.command_prefix
 `$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
-This prefix enables you to customize how the task agent process is launched. Using a custom script here can allow you to execute arbitrary commands before and after the task runner. You should take care to ensure the supplied arguments are executed, and the correct exit code is returned from the script upon completion.
+This prefix takes a YAML list of arguments and enables you to customize how the task agent process is launched. Using a custom script here can allow you to execute arbitrary commands before and after the task runner. You should take care to ensure the supplied arguments are executed, and the correct exit code is returned from the script upon completion.
+
+Example:
+
+```yaml
+runner:
+  command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
+```
 
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`
 
-This directory allows you to control the default working directory used by each job. If the directory already exists, the task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not automatically be removed.
+This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not automatically be removed.
+
+Example:
+
+```yaml
+runner:
+  working_directory: /opt/circleci/workdir
+```
 
 === runner.cleanup_working_directory
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
-This directory enables you to control the working directory cleanup after each job. The default value is `false`.
+This flag enables you to control the working directory cleanup after each job.
+
+The possible values are:
+
+* `true`
+* `false`
+
+NOTE: The default value is `false`.
+
+Example:
+
+```yaml
+runner:
+  cleanup_working_directory: true
+```
 
 === runner.mode
 `$LAUNCH_AGENT_RUNNER_MODE`
 
-This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (single-task) or to continuously poll for new available jobs.
+This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (`single-task`) or to continuously poll for new available jobs (`continuous`).
 
 The possible values are:
 
-* continuous
-* single-task
+* `continuous`
+* `single-task`
 
-NOTE: The default value is continuous.
+NOTE: The default value is `continuous`.
+
+Example:
+
+```yaml
+runner:
+  mode: continuous
+```
 
 === runner.max_run_time
 `$LAUNCH_AGENT_RUNNER_MAX_RUN_TIME`
@@ -93,6 +137,14 @@ Here are a few valid examples:
 * `1h30m20s` - An overly specific (yet still valid) duration
 
 NOTE: The default value is 5 hours.
+
+Example:
+
+```yaml
+runner:
+  max_run_time: 5h
+```
+
 
 ==== Customizing job timeouts and drain timeouts
 
@@ -112,6 +164,19 @@ This timeout will enable a launch agent to terminate if no task has been claimed
 
 NOTE: The default behaviour is to never time out due to inactivity.
 
+Example:
+
+```yaml
+runner:
+  idle_timeout: 1h
+```
+=== runner.disable_auto_update
+`$DISABLE_AUTO_UPDATE`
+
+This parameter will disable launch-agent from attempting to automatically update itself, and stop making requests to CircleCI to check for new versions. This parameter is recommended to be set to `true` on server installations where version pinning is used.
+
+Note: Setting this parameter will require runner installations to be manually upgraded to receive new features, security updates, and bug fixes.
+
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
 
@@ -120,6 +185,14 @@ This parameter enables the “Rerun job with SSH” feature. Before enabling thi
 The address is of the form `*host:port*` and is displayed in the “Enable SSH” and “Wait for SSH” sections for a job that is rerun.
 
 NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the “Rerun job with SSH” feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
+
+Example:
+
+```yaml
+runner:
+  ssh:
+    advertise_addr: HOSTNAME:54782
+```
 
 ==== Considerations before enabling SSH debugging
 

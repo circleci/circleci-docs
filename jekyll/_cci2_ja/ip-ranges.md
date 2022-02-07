@@ -16,12 +16,16 @@ CircleCI ジョブで使用される IP アドレスを、明確に定義され�
 * 目次
 {:toc}
 
+**Note:** The pricing model for IP ranges has been finalized. Details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
+{: class="alert alert-info"}
+
+
 ## 概要
 {: #overview }
 
-IP アドレスの範囲は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 この機能の実装に伴い、CircleCI では、CircleCI サービスが利用する IP アドレスのリストを公開しました。 CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
+IP アドレスの範囲は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 この機能では、 CircleCI のサービスが使用する IP アドレスのリストを提供します。 CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
-本機能は現在プレビュー段階であり、[Performance または Scale プラン](https://circleci.com/ja/pricing/)のお客様がご利用いただけます。 将来的に、この機能を有効にしたジョブのネットワーク転送量に応じてクレジット消費が発生しますが、 プレビュー段階では無料で使用可能です。 料金の詳細については、後日の一般公開時にお知らせします。
+本機能は現在プレビュー段階であり、[Performance または Scale プラン](https://circleci.com/ja/pricing/)のお客様がご利用いただけます。 なお、この機能では、当該機能を有効にしたジョブのネットワーク転送量に応じてクレジットの消費が発生します。 料金の詳細については、後日の一般公開時にお知らせします。
 
 ## IP アドレスの範囲: ユース ケース
 {: #usecases }
@@ -61,9 +65,9 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*Last updated*: 2021-08-23
+*最終更新*: 2021 年 8 月 23 日
 
-Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
+IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
 - 107.22.40.20
 - 18.215.226.36
@@ -95,10 +99,10 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 - 54.83.41.200
 - 54.92.235.88
 
-**Note:** _jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature._
-{: class="alert alert-warning"}
+**Note:** Jobs can use any of the address ranges above. また、このアドレス リストは、本機能を有効化しているすべての CircleCI ユーザーと共有されることに注意してください。
+{: class="alert alert-info"}
 
-IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
+コア サービス (ジョブのトリガーや CircleCI と GitHub 間でのユーザーに関する情報の交換などに使用されるサービス) の IP アドレスの範囲は以下のとおりです。
 
 - 18.214.70.5
 - 52.20.166.242
@@ -116,33 +120,43 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 #### 2021-08-23
 * Added new items to the list of IP address ranges for core services.
 
-The machine-consumable lists have also been updated to reflect the new IP address ranges.
+**IP アドレス リストの変更予定** (最終更新: 2021 年 8 月 2 日): なし
 
-**Machine-consumable lists can be found below:**
+**Machine-consumable lists can be found by querying the DNS A records below:**
 
-- *ジョブ用* IP アドレス範囲: [DNS A レコード](https://dnsjson.com/jobs.knownips.circleci.com/A.json)
+- IP address ranges *for jobs*: `jobs.knownips.circleci.com`.
 
-- *コア サービス用* IP アドレスの範囲: [DNS A レコード](https://dnsjson.com/core.knownips.circleci.com/A.json)
+- IP address ranges *for core services*: `core.knownips.circleci.com`.
 
-- *全 IP アドレス範囲*: [DNS A レコード](https://dnsjson.com/all.knownips.circleci.com/A.json)
+- *All IP address ranges*:  `all.knownips.circleci.com`.
 
-During the preview phase, this list may change. You should check regularly for updates, at least once a week.
+このリストは、プレビュー期間中に変更される可能性があります。 少なくとも週に一度は、更新がないか確認することをお勧めします。
 
-Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
+To query these, you can use any DNS resolver. Here's an example using `dig` with the default resolver:
+
+```
+dig all.knownips.circleci.com A +short
+```
+
+少なくとも 1 つのジョブについて IP アドレスの範囲機能を有効にしているお客様には、このリストの変更があり次第メールでお知らせします。 本機能の一般公開以降に既存の IP アドレス範囲が変更される場合、その **30 日前に通知**を行います。 今後の変更に応じて、このドキュメントとマシン用のリストも更新されます。
 
 ## 使用料金
 {: #pricing }
 
-Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
-Specific rates and details are being finalized and will be published when the feature is generally available.
+Specific rates and details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
-While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold.
+プレビュー期間中、この機能を有効にしたジョブからの送信トラフィックが許容量を超えた場合、該当のお客様に CircleCI からご連絡する場合があります。
+
+IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
+
+![Screenshot showing the location of the IP ranges feature]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
 
 ## AWS および GCP の IP アドレス
 {: #awsandgcpipaddresses }
 
-The machines that execute *all jobs* on CircleCI’s platform, not just jobs opted into IP ranges, are hosted on Amazon Web Services (AWS), Google Cloud Platform (GCP), and CircleCI's macOS Cloud. An exhaustive list of IP addresses that CircleCI’s traffic may come from on these cloud providers’ platforms can be found by looking up each cloud provider's IP address ranges. AWS & GCP offer endpoints to find this information.
+IP アドレスの範囲機能が有効なジョブも含め、*すべてのジョブ* を CircleCI のプラットフォームで実行するマシンは、Amazon Web Services (AWS)、Google Cloud Platform (GCP)、CircleCI の macOS 用クラウドでホストされます。 CircleCI のトラフィックの送信元となるこれらのクラウド プロバイダーの IP アドレスを網羅したリストについては、各プロバイダーの IP アドレスの範囲を参照してください。 AWS と GCP では、この情報を公開するエンドポイントが提供されています。
 
 - [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI は *us-east-1* および *us-east-2* リージョンを使用
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI は *us-east1* および *us-central1* リージョンを使用
@@ -160,12 +174,13 @@ The machines that execute *all jobs* on CircleCI’s platform, not just jobs opt
   - 38.39.184.0/24
   - 138.39.185.0/24
 
-CircleCI *does not recommend* configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
+大半が CircleCI のマシンではないため、AWS または GCP の IP アドレスに基づいて IP ベースのファイアウォールを構成することは*推奨されません*。 また、AWS および GCP のエンドポイントのアドレス割り当ては継続的に変更されるので、常に同じであるという*保証はありません*。
 
-**IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
+IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。
 
 ## 既知の制限
-{: #knownlimiations}
+{: #knownlimitations}
 
+- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 - 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。
 - If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses](https://circleci.com/docs/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.

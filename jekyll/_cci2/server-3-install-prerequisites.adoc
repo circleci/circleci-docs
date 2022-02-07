@@ -12,12 +12,12 @@ version:
 :toc-title:
 
 == Phase 1: Prerequisites
-Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. This installation guide assumes you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
+Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
-NOTE: In the following steps replace any items or credentials displayed between `< >` with your details.
+NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
-.Installation Experience Flow Chart
-image::server-install-flow-chart.png[Flow chart showing the installation flow for server 3.x]
+.Installation Experience Flow Chart Phase 1
+image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
 
 === Install required software
 Download and install the following software before continuing:
@@ -43,14 +43,16 @@ Download and install the following software before continuing:
 | {helmversion} or greater
 | Kubernetes Package Management
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux]. 
-| {kotsversion}
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux].
+| {kotsversion} *
 | Replicated Kubernetes Application Management
 
-| https://github.com/vmware-tanzu/velero/releases[Velero CLI] 
+| https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 | Latest
 | Backup and restore capability
 |===
+
+NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
 ==== AWS required software
 
@@ -104,14 +106,17 @@ Supported Kubernetes versions:
 | 3.0.0 - 3.2.1
 | < 1.21
 
-| 3.3.x+
-| >= 1.16
+| 3.2.2
+| 1.16 - 1.21
+
+| 3.3.0+
+| 1.16 - 1.22
 |===
 
 Creating a Kubernetes cluster is your responsibility. Please note:
 
 * Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
-* You must have appropriate permissions to list, create, edit and delete pods in your cluster. Run this to verify your permissions:
+* You must have appropriate permissions to list, create, edit, and delete pods in your cluster. Run this command to verify your permissions:
 +
 ```bash
 kubectl auth can-i <list|create|edit|delete> pods
@@ -124,7 +129,7 @@ You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/q
 
 . https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[Install] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configure] the AWS CLI for your AWS account.
 . Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`].
-. Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take upwards of 20 minutes to complete):
+. Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
 +
 ```bash
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
@@ -142,8 +147,8 @@ You can learn more about creating a GKE cluster https://cloud.google.com/kuberne
 
 CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
-. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. When you create your project make sure you also enabled API access. If you do not enable API access, the command we will run next, to create your cluster, will fail.
-. Create your cluster by entering running the following:
+. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. When you create your project, make sure you also enabled API access. If you do not enable API access, the command we will run next (to create your cluster) will fail.
+. Create your cluster by entering running the following command:
 +
 ```sh
 gcloud container clusters create circleci-server --project <YOUR_GOOGLE_CLOUD_PROJECT_ID> --region europe-west1 --num-nodes 3 --machine-type n1-standard-4
@@ -175,7 +180,7 @@ CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain the
 
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
-. In your browser navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
+. In your browser, navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
 +
 .New GitHub OAuth App
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
@@ -184,7 +189,7 @@ image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL will be the URL of your planned CircleCI installation followed by `/auth/github`
 
-. Once completed you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server.
+. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server.
 +
 .Client ID and Secret
 image::github-clientid.png[Screenshot showing GitHub Client ID]
@@ -192,17 +197,17 @@ image::github-clientid.png[Screenshot showing GitHub Client ID]
 NOTE: If using GitHub Enterprise, you will also need a personal access token and the domain name of your GitHub Enterprise instance.
 
 === Frontend TLS certificates
-By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[LetsEncrypt] certificate authority, for example, can issue a certificate for free using their link:https://certbot.eff.org/[certbot] tool. In the sections below we cover using Google Cloud DNS and AWS Route53.
+By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. In the sections below we cover using Google Cloud DNS and AWS Route53.
 
 ==== Google Cloud DNS
 
-. If you host your DNS on Google Cloud you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
+. If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
 +
 ```bash
 pip3 install certbot-dns-google
 ```
 
-. Then, the following commands will provision a certification for your installation:
+. Then the following commands will provision a certification for your installation:
 +
 ```bash
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
@@ -210,7 +215,7 @@ certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d 
 
 ==== AWS Route53
 
-. If you are using AWS Route53 for DNS you will need the *certbot-route53* plugin installed. You can install the plugin with the following command:
+. If you are using AWS Route53 for DNS, you will need the *certbot-route53* plugin installed. You can install the plugin with the following command:
 +
 ```bash
 pip3 install certbot-dns-route53
@@ -244,14 +249,14 @@ These keysets are used to encrypt and sign artifacts generated by CircleCI. You 
 CAUTION: Store these values securely. If they are lost, job history and artifacts will not be recoverable.
 
 ==== Artifact signing key
-To generate, run the following:
+To generate, run the following command:
 
 ```sh
 docker run circleci/server-keysets:latest generate signing -a stdout
 ```
 
 ==== Encryption signing key
-To generate, run the following:
+To generate, run the following command:
 
 ```sh
 docker run circleci/server-keysets:latest generate encryption -a stdout
@@ -270,7 +275,7 @@ While any S3 compatible object storage may work, we test and support AWS S3 and 
 
 Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Ensure the bucket name you provide exists in your chosen object storage provider before proceeding.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also, otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
 
 ==== Create an S3 storage bucket
 You will need the following details when you configure CircleCI server.
@@ -302,7 +307,109 @@ NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-e
 aws iam create-user --user-name circleci-server
 ```
 
-===== Step 3: create a policy document "policy.json" with the following content
+===== Step 3: Create a policy document _policy.json_
+
+If using IAM Roles for Service Accounts (IRSA) for authentication, use the following content
+
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutAnalyticsConfiguration",
+        "s3:GetObjectVersionTagging",
+        "s3:CreateBucket",
+        "s3:GetObjectAcl",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:DeleteBucketWebsite",
+        "s3:PutLifecycleConfiguration",
+        "s3:GetObjectVersionAcl",
+        "s3:PutObjectTagging",
+        "s3:DeleteObject",
+        "s3:DeleteObjectTagging",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetObjectRetention",
+        "s3:GetBucketWebsite",
+        "s3:GetJobTagging",
+        "s3:DeleteObjectVersionTagging",
+        "s3:PutObjectLegalHold",
+        "s3:GetObjectLegalHold",
+        "s3:GetBucketNotification",
+        "s3:PutBucketCORS",
+        "s3:GetReplicationConfiguration",
+        "s3:ListMultipartUploadParts",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:PutBucketNotification",
+        "s3:DescribeJob",
+        "s3:PutBucketLogging",
+        "s3:GetAnalyticsConfiguration",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetLifecycleConfiguration",
+        "s3:GetInventoryConfiguration",
+        "s3:GetBucketTagging",
+        "s3:PutAccelerateConfiguration",
+        "s3:DeleteObjectVersion",
+        "s3:GetBucketLogging",
+        "s3:ListBucketVersions",
+        "s3:ReplicateTags",
+        "s3:RestoreObject",
+        "s3:ListBucket",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketPolicy",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetObjectVersionTorrent",
+        "s3:AbortMultipartUpload",
+        "s3:PutBucketTagging",
+        "s3:GetBucketRequestPayment",
+        "s3:GetAccessPointPolicyStatus",
+        "s3:GetObjectTagging",
+        "s3:GetMetricsConfiguration",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutMetricsConfiguration",
+        "s3:PutObjectVersionTagging",
+        "s3:GetBucketVersioning",
+        "s3:GetBucketAcl",
+        "s3:PutInventoryConfiguration",
+        "s3:GetObjectTorrent",
+        "s3:PutBucketWebsite",
+        "s3:PutBucketRequestPayment",
+        "s3:PutObjectRetention",
+        "s3:GetBucketCORS",
+        "s3:GetBucketLocation",
+        "s3:GetAccessPointPolicy",
+        "s3:GetObjectVersion",
+        "s3:GetAccessPoint",
+        "s3:GetAccountPublicAccessBlock",
+        "s3:ListAllMyBuckets",
+        "s3:ListAccessPoints",
+        "s3:ListJobs"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<YOUR_BUCKET_NAME>",
+        "arn:aws:s3:::<YOUR_BUCKET_NAME>/*"
+      ]
+    }
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "sts:AssumeRole"
+      ],
+      "Resource": "<YOUR_OBJECT_STORAGE_ROLE>"
+    },
+  ]
+}
+----
+
+Otherwise, if using IAM keys for authentication, use the following content
 
 [source, json]
 ----
@@ -432,7 +539,7 @@ You will need the following details when you configure CircleCI server.
 
 * *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
 
-A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google’s Condition Editor of the IAM console:
+A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google’s Condition Editor in the IAM console:
 
 NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
 
@@ -453,7 +560,7 @@ gsutil mb gs://circleci-server-bucket
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
 ```
 
-You will need the email for the service account in the next step, run the following to find it:
+You will need the email for the service account in the next step. Run the following command to find it:
 
 ```sh
 gcloud iam service-accounts list \
@@ -481,7 +588,7 @@ gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-s
 ```
 
 ===== Step 4: JSON Key File
-After running the following, you should have a file named `circleci-server-keyfile` in your local working directory. You will need this when you configure your server installation.
+After running the following command, you should have a file named `circleci-server-keyfile` in your local working directory. You will need this when you configure your server installation.
 
 ```sh
 gcloud iam service-accounts keys create circleci-server-keyfile \

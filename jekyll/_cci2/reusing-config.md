@@ -123,18 +123,22 @@ Boolean parameters are useful for conditionals:
 ```yaml
 version: 2.1
 commands:
-  list-files:
+  npm-install:
     parameters:
-      all:
-        description: include all files
+      clean:
+        description: Perform a clean install
         type: boolean
         default: false
-      short:
-        description: Keep list of files short
-        type: boolean
-        default: true
     steps:
-      - run: ls <<# parameters.all >> -a <</ parameters.all >><<^ parameters.short >> -l <</ parameters.short >>
+      - when:
+          condition: << parameters.clean >>
+          steps:
+            - run: npm clean-install
+      - when:
+          condition:
+            not: << parameters.clean >>
+          steps:
+            - run: npm install
 ```
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
@@ -571,7 +575,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:2.5.1-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -605,7 +609,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:2.5.1-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -629,7 +633,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:2.5.1-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

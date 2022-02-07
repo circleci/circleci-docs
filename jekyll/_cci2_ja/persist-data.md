@@ -20,7 +20,7 @@ version:
 
 **save_cache ステップで作成されたキャッシュは、最長 15 日間保存されます。**
 
-Caching persists data between the same job in different builds, allowing you to reuse the data from expensive fetch operations from previous jobs. ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。
+キャッシュにより、異なるビルドにおける同じジョブのデータが保持され、高コストなフェッチ操作のデータを以前のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。
 
 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
@@ -57,9 +57,9 @@ Caching persists data between the same job in different builds, allowing you to 
 ## ネットワークとストレージ使用の管理
 {: #managing-network-and-storage-use }
 
-The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
+以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
 
-**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+**注意:** お客様の全体的な**ネットワーク転送量**は、課金対象の使用量を表すものではありません。 特定のアクションによるネットワーク使用が、結果として課金対象となります。 これらのアクションについて、以下に説明します。
 
 ### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
@@ -79,65 +79,57 @@ The information below describes how your network and storage usage is accumulati
 * `store_artifacts`
 * `store_test_results`
 
-すべてのネットワーク転送にはネットワークの使用が発生します。関連するアクションは次のとおりです。
+ネットワーク転送使用（課金対象）が発生するネットワークに関連するアクションは、**キャッシュとワークスペースをセルフホストランナーにリストアする**ことです。
 
-* キャッシュとワークスペースのセルフホストランナーへの復元
-* アーティファクトのダウンロード
-* CircleCI 外のジョブからのデータプッシュ
+ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 この画面では以下のことが確認できます。
 
-ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 On this screen you can find:
-
-* Total network and storage usage (table at the top of the screen)
-* Network and storage usage for individual projects (Projects tab)
-* Storage data activity (Objects tab)
-* Total storage volume data (Storage tab)
+* 課金対象となるネットワーク転送使用状況
+* 個々のプロジェクトのネットワークとストレージの使用状況は、プロジェクト タブに表示されます。
+* ストレージのデータとアクティビティは、ネットワーク タブに表示されます。
+* ストレージ総量のデータは、ストレージ タブに表示されます。
 
 個々のステップのストレージおよびネットワーク転送の使用方法の詳細については、以下のジョブページのステップ出力を参照してください。
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
 
-### How to calculate an approximation of your monthly costs
+### 1 か月の料金の概算方法
 {: #how-to-calculate-an-approximation-of-your-monthly-costs}
 
-Charges apply when an organization has network egress beyond the included GB allotment for storage and network usage.
+組織で、ストレージとネットワーク使用に含まれる GB を超えるランナー ネットワークを使用した場合、課金されます。
 
 #### ストレージ
 {: #storage }
 {:.no_toc}
 
-Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
+使用量はリアルタイムで課金され、一定期間保持されます。ワークスペースとキャッシュは15日間、アーティファクトとテスト結果は30日間保持されます。
 
-To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be multiplied by 420 credits to estimate the total monthly costs.
-
-![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
+日々の使用量から1 か月のストレージコストを計算するには、 **Storage(ストレージ)** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に420クレジットを乗じることで、月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
 #### ネットワーク
 {: #network }
 {:.no_toc}
 
-To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be multiplied by 420 credits to estimate the total monthly costs.
+使用量から 1 か月のネットワーク コストを計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
-The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
 
-![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
-
-### How to optimize your storage and network transfer use
+### ストレージとネットワーク転送の使用を最適化する方法
 {: #how-to-optimize-your-storage-and-network-transfer-use }
 
 ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
 
-For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept.
+たとえば、データ使用量を減らしたい場合、特定の使用方法が保持に値する価値を提供しているか検討してください。
 
-In the cases of caches and workspaces this can be quite easy to compare - does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+キャッシュとワークスペースの場合、比較が非常に簡単です。キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？
 
-See below for examples of storage and network optimization opportunities through reducing artifact, cache, and workspace traffic.
+以下では、アーティファクト、キャッシュ、ワークスペースのトラフィックを減らすことによる、ストレージとネットワークを最適化例について説明しています。
 
 #### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
 
-Often we see that the `store_artifacts` step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
+実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 You can use the `CIRCLE_NODE_INDEX` environment variable in a run step to change the behavior of scripts depending on the parallel task run.
+ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
 #### 大きなアーティファクトのアップロード
 {: #uploading-large-artifacts }
@@ -146,7 +138,7 @@ Often we see that the `store_artifacts` step is being used on a large directory 
 
 UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
 
-If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
+パイプラインがバイナリの uberJAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
 
 大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
 
@@ -155,16 +147,16 @@ If your pipelines build a binary or uberJAR, consider if these are necessary for
 
 ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。
 
-For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from `node_modules`.
+たとえば、 node-prune パッケージは、`node_modules` から不要なファイル (マークダウン、TypeScript ファイルなど) を削除します。
 
 #### キャッシュ使用率の最適化
 {: #optimizing-cache-usage }
 
-If you notice your cache usage is high and would like to reduce it:
+キャッシュの使用率が高く使用率を下げたい場合は以下をお試しください。
 
-* Search for the `save_cache` and `restore_cache` commands in your `config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
-* Narrow the scope of a cache from a large directory to a smaller subset of specific files.
-* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
+* `config.yml` ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
+* キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
+* キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
 {% raw %}
 ```sh
@@ -176,7 +168,7 @@ If you notice your cache usage is high and would like to reduce it:
 ```
 {% endraw %}
 
-上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. この方法では結局コストもかかり、時間も短縮できません。 Instead pick a cache `key` like the following:
+上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` はビルドごとに変更され、値が変更されていない場合でも毎回アップロードされます。 この方法では結局コストもかかり、時間も短縮できません。 代わりに、次のようなキャッシュ `key` を選択します。
 
 {% raw %}
 ```sh
@@ -188,7 +180,7 @@ If you notice your cache usage is high and would like to reduce it:
 ```
 {% endraw %}
 
-This will only change if the list of requested dependencies has changed. これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
+この場合、要求された依存関係のリストが変更された場合にのみ変更されます。 これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
 
 キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
 
@@ -197,12 +189,12 @@ This will only change if the list of requested dependencies has changed. これ�
 #### ワークスペースの使用率の最適化
 {: #optimizing-workspace-usage }
 
-If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを利用するすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを判断してください。
 
 #### ネットワーク転送の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
 
-If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
+ネットワーク使用量を減らしたい場合、次のことをお試しください。
 
 * Runner の場合は、 AWS US-East-1 にクラウドベースのランナーをデプロイします。
 * アーティファクトを 1 度ダウンロードし、ご自身のサイトに保存して処理を追加します。

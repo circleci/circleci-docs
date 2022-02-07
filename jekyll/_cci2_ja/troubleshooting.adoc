@@ -7,6 +7,7 @@ version:
 = Troubleshooting Server Installations
 :page-layout: classic-docs
 :page-liquid:
+:page-description: View an initial set of troubleshooting steps to take for problems with the CircleCI installation on private servers.
 :icons: font
 :toc: macro
 :toc-title:
@@ -18,7 +19,7 @@ toc::[]
 == Generating a Support Bundle
 To download a support bundle, select **Support** from the Management Console menu bar, and then select **Download Support Bundle**. CircleCI support engineers will often request support bundles to help diagnose/fix the problem you are experiencing.
 
-== Debug Queuing Builds
+== ビルドのキューイングのデバッグ
 
 If your Services component is fine, but builds are not running, or all builds are queueing, follow the steps below.
 
@@ -91,7 +92,7 @@ Stop and restart the CircleCI app in the Management Console at port 8800 to re-e
 `sudo docker logs picard-scheduler` を実行します。 `picard-scheduler` はジョブをスケジュールし、直接接続によってジョブを Nomad に送信します。 これを行っても、実際に CircleCI 内のジョブのキューイングが処理されるわけではありません。
 
 [discrete]
-=== 4. Check Nomad Node Status
+=== 4.  Check Nomad Node Status
 
 `nomad node-status -allocs` コマンドを実行し、以下のような出力を表示させて、Nomad ノードが存在するかどうかを確認します。
 

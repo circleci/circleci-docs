@@ -15,14 +15,14 @@ toc::[]
 
 == Introduction
 
-CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud or data center. 
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. 
 
 Server offers the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
 
 .CircleCI Server v3.x Architecture
 image::server-3-architecture-diagram.png[Services Architecture]
 
-The CircleCI server application exposes four services using load balancers. Three of these load balancers are VPC-internal for connecting to the Nomad cluster and virtual machines. If required, the frontend load balancer can be made private, separating it from the public internet. For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
+The CircleCI server application exposes four services using load balancers. Three of these load balancers are VPC-internal for connecting to the Nomad cluster and virtual machines. If required, the frontend load balancer can be made private, separating it from the public internet. For further information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] doc.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -98,16 +98,15 @@ The application exposes a number of external ports. These ports are used for var
 | Inbound
 |
 | SSH into builds
-| Only required for the nomad clients.
+| Only required for the Nomad clients.
 |===
 
 CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
 Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
 server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
-Job artifacts and output are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
-Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
-Nomad clients need access to object storage.
+Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
 == Services
 
@@ -136,7 +135,7 @@ CircleCI server 3.0 consists of the following services. Find their descriptions 
 
 | builds-service
 | App Core
-| Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service
+| Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service.
 |
 |
 
@@ -160,20 +159,20 @@ CircleCI server 3.0 consists of the following services. Find their descriptions 
 
 | circleci-rabbitmq
 | Pipelines and Execution
-| Queuing for workflow messaging, test-results, usage, crons, output, notifications, and scheduler
+| Queuing for workflow messaging, test results, usage, crons, output, notifications, and scheduler
 |
 |
 
 | circleci-redis
 | Execution
-| Cache data that will not be stored permanently (i.e. build logs), for request caching, and for rate limit calculations.
+| Cache data that will not be stored permanently (such as build logs), for request caching, and for rate limit calculations.
 | A failed cache can end up resulting in rate limiting from the VCS if too many calls are made to it.
 |
 
 | circleci-telegraf
 |
 | Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
-but can also be configured to be exported to other places (i.e. Datadog or Prometheus)
+but can also be configured to be exported to other places (i.e. Datadog or Prometheus).
 |
 |
 
@@ -215,15 +214,15 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 
 | exim
 |
-| Will be removed in GA, but users can provide mail submission credentials to an existing MTA
+| Will be removed in GA, but users can provide mail submission credentials to an existing MTA.
 | No email notifications will be sent.
 |
 
 | federations-service
 | App Core
-| Stores user identities (LDAP). API and permissions-service
+| Stores user identities (LDAP). API and permissions-service.
 | If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
-| LDAP integration not available
+| LDAP integration not available.
 
 | frontend
 | Frontend
@@ -233,49 +232,50 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 
 | inject-bottoken
 |
-| A Kubernetes job that inserts a "bot token" into MongoDB. Bot tokens are authorization interservice communication.		Mainly for www-api
+| A Kubernetes job that inserts a "bot token" into MongoDB. Bot tokens are authorization interservice communication.		
 |
-|
+| Mainly for www-api
 
 | kotsadm-kots
 | Licensing
-| The main Kots application. Runs the Kots admin console where upgrades and configuration of server take place	No admin console available.
-| No upgrades or configuration possible for server
+| The main KOTS application. Runs the KOTS Admin Console where upgrades and configuration of server take place.
+| No upgrades or configuration possible for server.
+No admin console available.
 |
 
 | kotsadm-migrations
 | Licensing
-| Performs database migrations to handle updates of Kotsadm
+| Performs database migrations to handle updates of Kotsadm.
 |
 |
 
 | kotsadm-minio
 | Licensing
-| Object storage for Kots licensing
+| Object storage for KOTS licensing.
 |
 |
 
 | kotsadm-operator
 | Licensing
-| Deploys and controls Kotsadm
+| Deploys and controls Kotsadm.
 |
 |
 
 | kotsadm-postgres
 | Licensing
-| Database for Kots licensing
+| Database for KOTS licensing.
 |
 |
 
 | legacy-notifier
 | App Core
-| Handles notifications to external services (Slack, email, etc.)
+| Handles notifications to external services (Slack, email, etc.).
 |
 |
 
 | prometheus
 | Server
-| Used for metrics
+| Used for metrics.
 |
 |
 
@@ -389,7 +389,7 @@ We do our best to support a wide range of platforms for installation. We use env
 | Untested 
 | Should work with Minio Digital Ocean gateway and Runner
 
-| OpenShift*
+| OpenShift
 | Untested
 | Known to not work
 
