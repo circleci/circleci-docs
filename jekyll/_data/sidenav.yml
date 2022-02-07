@@ -556,7 +556,7 @@ en:
           link: 2.0/circleci-ops-guide.pdf
 
 - name: CircleCI Plans
-  icon: icons/sidebar/logo_black.svg
+  icon: icons/sidebar/circleci_plans.svg
   children:
     - name: Plan Overview
       link: 2.0/plan-overview
