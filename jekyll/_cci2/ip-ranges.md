@@ -135,7 +135,7 @@ Notifications of a change to this list will be sent out by email to all customer
 ## Pricing
 {: #pricing }
 
-Pricing will be calculated based on data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+Pricing is calculated based on data usage of jobs opted into the IP ranges feature. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.  Data used to pull in the Docker image to the container before the job starts executing does _not incur usage costs_ for jobs with IP ranges enabled.
 
 Specific rates and details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
