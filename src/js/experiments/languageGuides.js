@@ -1,3 +1,5 @@
+import Prism from 'prismjs';
+
 import { reconstructToC, highlightTocOnScrollOnce } from '../site/toc';
 import { displayBlockElement, displayInitialElement } from '../utils';
 
@@ -38,5 +40,8 @@ export default () =>
       reconstructToC(element);
 
       Array.prototype.forEach.call(deferred, displayBlockElement);
+
+      // since the experiment will reveal new code snippets, we need to highlight them
+      Prism.highlightAll();
     })
     .catch(highlightTocOnScrollOnce);

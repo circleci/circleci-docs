@@ -3,7 +3,7 @@
   browser & the dom when modifying file
  */
 import * as Cookie from 'js-cookie';
-import Prism from 'prismjs'; // eslint-disable-line no-unused-vars
+import Prism from 'prismjs';
 
 import services from './services';
 import '../styles/main.scss';
@@ -15,6 +15,9 @@ window.AnalyticsClient = services.AnalyticsClient; // because it only has static
 window.OptimizelyClient = new services.OptimizelyClient();
 
 import site from './site';
+
+// set to manual so we can start highlighting once DOM is ready
+Prism.manual = true;
 
 services.rum.init();
 // Temporary service to check if user dark mode preferences
@@ -48,4 +51,6 @@ $(() => {
     ({ default: { languageGuides } = {} }) =>
       isGatedPath ? languageGuides() : null,
   ); // ensure languageGuides is loaded; // imports all experiments
+
+  Prism.highlightAll();
 });
