@@ -39,19 +39,17 @@ Set the POSTGRES_USER environment variable in your CircleCI config to `postgres`
           POSTGRES_USER: postgres
 ```
 
-This Postgres image in the example is slightly modified already with `-ram` at the end. It runs in-memory so it does not  hit the disk and that will significantly improve the testing performance on this PostgreSQL database by using this image.
-
 {% raw %}
 
 ```yml
-version: 2
+version: 2.1
 jobs:
   build:
 
     # Primary container image where all commands run
 
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.10.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -60,7 +58,7 @@ jobs:
 
     # Service container image
 
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:12.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -68,7 +66,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client-9.6
+      - run: sudo apt-get install postgresql-client-12
       - run: whoami
       - run: |
           psql \
@@ -86,7 +84,7 @@ jobs:
 
 {% endraw %}
 
-The `steps` run `checkout` first, then install the Postgres client tools. The `postgres:9.6.5-alpine-ram` image doesn't install any client-specific database adapters. For example, for Python, you might install [`psycopg2`](https://www.psycopg.org/) so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#service-images) for the list of images and for a video of this build configuration.
+The `steps` run `checkout` first, then install the PostgreSQL client tools. The `postgres:12.0` image doesn't install any client-specific database adapters. For example, for Python, you might install [`psycopg2`](https://www.psycopg.org/) so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#service-images) for the list of images and for a video of this build configuration.
 
 In this example, the config installs the PostgreSQL client tools to get access to `psql`.  **Note:** that `sudo` is run because the images do not run under the root account like most containers do by default. CircleCI has a circle account that runs commands by default, so if you want to do admin privileges or root privileges, you need to add `sudo` in front of your commands.
 
@@ -101,17 +99,12 @@ When the database service spins up, it automatically creates the database `circl
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
-### Optimizing Postgres images
-{: #optimizing-postgres-images }
+### Optimizing PostgreSQL images
+{: #optimizing-postgresql-images }
 {:.no_toc}
 
-The default `circleci/postgres` Docker image uses regular persistent storage on disk.
-Using `tmpfs` may make tests run faster and may use fewer resources. To use a variant
-leveraging `tmpfs` storage, just append `-ram` to the `circleci/postgres` tag (i.e.,
-`circleci/postgres:9.6-alpine-ram`).
-
-PostGIS is also available and can be combined with the previous example:
-`circleci/postgres:9.6-alpine-postgis-ram`
+PostGIS is available and can be used like this:
+`cimg/postgres:12.0-postgis`
 
 ### Using binaries
 {: #using-binaries }
@@ -121,8 +114,8 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 
 ```
      steps:
-    # Add the Postgres 9.6 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
+    # Add the Postgres 12.0 binaries to the path.
+       - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV
 ```
 
 ### Using Dockerize to wait for dependencies
@@ -142,7 +135,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: postgres:9.6.2-alpine
+      - image: postgres:12.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

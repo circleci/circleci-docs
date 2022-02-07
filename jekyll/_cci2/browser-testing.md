@@ -42,7 +42,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:buster-browsers
+      - image: cimg/node:16.13.1-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

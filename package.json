@@ -19,6 +19,8 @@
     "dev-clean": "bundle exec jekyll clean",
     "start": "./scripts/start.sh",
     "clean": "docker exec -it jekyll bundle exec jekyll clean",
+    "cypress:open": "cypress open",
+    "test:e2e:run": "yarn wait-on 'https://ui.circleci.com/docs/2.0' && yarn cypress run",
     "stop": "docker-compose down",
     "prod": "yarn webpack-prod && docker-compose up",
     "webpack-prod": "NODE_ENV=production webpack --mode=production",
@@ -57,6 +59,7 @@
     "concurrently": "^7.0.0",
     "css-loader": "^6.4.0",
     "css-minimizer-webpack-plugin": "^3.1.1",
+    "cypress": "^9.2.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^25.2.2",
@@ -72,10 +75,13 @@
     "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
     "serve": "^13.0.2",
+    "slugify": "^1.6.5",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.2.5",
     "uglifyjs-webpack-plugin": "1.1.2",
+    "wait-on": "^6.0.0",
     "webpack": "5.59.0",
-    "webpack-cli": "4.9.1"
+    "webpack-cli": "4.9.1",
+    "yamljs": "^0.3.0"
   }
 }

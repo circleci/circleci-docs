@@ -279,9 +279,6 @@ The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on m
 
 ## Using macOS
 {: #using-macos }
-
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
-
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. In macOS, the following resources classes are available:
 
 Class                 | vCPUs | RAM

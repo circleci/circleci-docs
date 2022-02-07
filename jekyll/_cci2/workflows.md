@@ -8,6 +8,7 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
+suggested_links_has_experiments: true
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
@@ -17,6 +18,9 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   - title: Conditional workflows
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
+  - title: Updates to maximum duration of jobs
+    isExperiment: true
+    link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
 ---
 
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
@@ -56,22 +60,10 @@ Workflows may appear with one of the following states:
 | NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project |
 {: class="table table-striped"}
 
-
-### Limitations
-{: #limitations }
-{:.no_toc}
-
-* Projects that have pipelines enabled may use the CircleCI API to trigger workflows.
-* Config without workflows requires a job called `build`.
-
-Refer to the [Workflows]({{ site.baseurl }}/2.0/faq/#workflows) section of the FAQ for additional information and limitations.
-
 ## Workflows configuration examples
 {: #workflows-configuration-examples }
 
-_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuring CircleCI document._
-
-**Note:** Projects configured with Workflows often include multiple jobs that share syntax for Docker images, environment variables, or `run` steps. Refer the [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) documentation for information about how to alias and reuse syntax to keep your `.circleci/config.yml` file small. See the [Reuse YAML in the CircleCI Config](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/) blog post for a summary.
+_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference._
 
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run concurrently.
 
@@ -104,10 +96,7 @@ workflows:
 ```
 See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
-## Tips for advanced configuration
-{: #tips-for-advanced-configuration }
-
-Using workflows enables users to create much more advanced configurations over running a single set of jobs. With more customizability and control comes more room for error, however. When using workflows try to do the following:
+When using workflows try to do the following:
 
 - Move the quickest jobs up to the start of your workflows. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
@@ -116,7 +105,6 @@ Consider reading the [optimization]({{ site.baseurl }}/2.0/optimizations) and [a
 
 ### Sequential job execution example
 {: #sequential-job-execution-example }
-{:.no_toc}
 
 The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram.
 
@@ -147,7 +135,6 @@ See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/c
 
 ### Fan-out/fan-in workflow example
 {: #fan-outfan-in-workflow-example }
-{:.no_toc}
 
 The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs concurrently, and finally fans-in to run a common deploy job.
 
@@ -268,7 +255,6 @@ Consider running workflows that are resource-intensive or that generate reports 
 
 ### Nightly example
 {: #nightly-example }
-{:.no_toc}
 
 By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
@@ -300,7 +286,6 @@ In the above example, the `commit` workflow has no `triggers` key and will run o
 
 ### Specifying a valid schedule
 {: #specifying-a-valid-schedule }
-{:.no_toc}
 
 A valid `schedule` requires a `cron` key and a `filters` key.
 
@@ -339,7 +324,6 @@ The following sections provide example for using Contexts and filters to manage 
 
 ### Using job contexts to share environment variables
 {: #using-job-contexts-to-share-environment-variables }
-{:.no_toc}
 
 The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
@@ -368,7 +352,6 @@ The environment variables are defined by setting the `context` key as shown to t
 
 ### Branch-level job execution
 {: #branch-level-job-execution }
-{:.no_toc}
 
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
@@ -403,7 +386,6 @@ For a full example of workflows, see the [configuration file](https://github.com
 
 ### Executing workflows for a git tag
 {: #executing-workflows-for-a-git-tag }
-{:.no_toc}
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches)
 to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
@@ -530,7 +512,6 @@ CircleCI may not receive all of them.
 
 ### Using regular expressions to filter tags and branches
 {: #using-regular-expressions-to-filter-tags-and-branches }
-{:.no_toc}
 
 CircleCI branch and tag filters support the Java variant of regex pattern matching. When writing filters, CircleCI matches exact regular expressions.
 
@@ -540,84 +521,10 @@ Using tags for semantic versioning is a common use case. To match patch versions
 
 For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
-## Using workspaces to share data among jobs
-{: #using-workspaces-to-share-data-among-jobs }
+## Using workspaces to share data between jobs
+{: #using-workspaces-to-share-data-between-jobs }
 
-Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses.
-The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
-
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
-
-Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
-
-For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
-
-A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
-
-To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
-
-Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
-
-```yaml
-# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
-# This allows defining a docker image to reuse across jobs.
-# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
-
-version: 2.1
-
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /tmp
-
-jobs:
-  flow:
-    executor: my-executor
-    steps:
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - echo-output
-
-  downstream:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
-
-workflows:
-  version: 2
-
-  btd:
-    jobs:
-      - flow
-      - downstream:
-          requires:
-            - flow
-```
-
-For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
-
-For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
+Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. For further information on workspaces and their configuration see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces) doc.
 
 ## Rerunning a workflow's failed jobs
 {: #rerunning-a-workflows-failed-jobs }
@@ -641,7 +548,6 @@ to discern what might be failing.
 
 ### Rerunning workflows fails
 {: #rerunning-workflows-fails }
-{:.no_toc}
 
 It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
@@ -649,7 +555,6 @@ Also, please note that you cannot re-run jobs and workflows that are 90 days or 
 
 ### Workflows waiting for status in GitHub
 {: #workflows-waiting-for-status-in-github }
-{:.no_toc}
 
 If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 
@@ -663,8 +568,6 @@ Go to Settings > Branches in GitHub and click the Edit button on the protected b
 ## See also
 {: #see-also }
 {:.no_toc}
-
-- For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document.
 
 - For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the  FAQ.
 

@@ -64,8 +64,12 @@ en:
           link: 2.0/env-vars/
         - name: Caching
           link: 2.0/caching/
+        - name: Caching strategies
+          link: 2.0/caching-strategy/
         - name: Artifacts
           link: 2.0/artifacts/
+        - name: Workspaces
+          link: 2.0/workspaces/
         - name: Collecting test data
           link: 2.0/collect-test-data/
         - name: Debugging with SSH
@@ -119,7 +123,7 @@ en:
           link: 2.0/executor-types/
           hash: using-machine
         - name: Pre-installed software
-          link: 2.0/docker-to-machine
+          link: 2.0/docker-to-machine/
           hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
@@ -332,13 +336,13 @@ en:
       - name: Configuration Reference
         link: 2.0/configuration-reference/
       - name: API v2 Reference
-        link: api/v2
+        link: api/v2/
       - name: API v2 Introduction
         link: 2.0/api-intro/
       - name: API v2 Developer's Guide
         link: 2.0/api-developers-guide/
       - name: API v1.1 Reference
-        link: api/v1
+        link: api/v1/
       - name: Project Values and Variables
         link: 2.0/variables/
       - name: Prebuilt Images
@@ -557,8 +561,6 @@ en:
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
 
-
-
 ja:
 - name: Getting Started
   i18n_name: はじめよう
@@ -702,9 +704,8 @@ ja:
           i18n_name: 概要
           hash: using-machine
         - name: Pre-installed software
-          link: ja/2.0/docker-to-machine
+          link: ja/2.0/docker-to-machine/
           i18n_name: インストール済ソフト
-          hash: pre-installed-software
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
           link: ja/2.0/android-machine-image
