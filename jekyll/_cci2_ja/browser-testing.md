@@ -38,7 +38,7 @@ WebDriver には、ローカルとリモートの 2 種類の動作モードが�
 
 プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 
-```yml
+```yaml
 version: 2
 jobs:
   build:

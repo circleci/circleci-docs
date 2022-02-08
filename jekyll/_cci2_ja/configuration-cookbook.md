@@ -84,7 +84,7 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 
 以下の例では、イメージをビルドして AWS ECR にプッシュし、そのイメージをサービスの更新として AWS ECS にプッシュする方法を示しています。
 
-```yml
+```yaml
 version: 2.1 # 2.1 config required to use orbs
 
 orbs:

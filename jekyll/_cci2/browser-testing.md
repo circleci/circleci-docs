@@ -37,7 +37,7 @@ WebDriver can operate in two modes: local or remote. When run locally, your test
 
 If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
-```yml
+```yaml
 version: 2
 jobs:
   build:

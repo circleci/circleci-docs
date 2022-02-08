@@ -187,7 +187,7 @@ downstream jobs as the workflow progresses. You can use workspaces to pass along
 data that is unique to this run and which is needed for downstream jobs. Try
 updating `config.yml` to the following:
 
-```yml
+```yaml
 version: 2
 jobs:
   one:

@@ -83,7 +83,7 @@ To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/lates
 
 The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
 
-```yml
+```yaml
 version: 2.1 # 2.1 config required to use orbs
 
 orbs:

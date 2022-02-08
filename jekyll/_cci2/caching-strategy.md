@@ -35,7 +35,7 @@ If your project has "flaky tests," workflows might be rerun unnecessarily. This 
 
 Having multiple directories under a single cache key increases the chances of there being a change to the cache. In the example below, there may be changes in the first two directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
 
-```yml
+```yaml
 dependency_cache_paths:
   - /mnt/ramdisk/node_modules
   - /mnt/ramdisk/.cache/yarn

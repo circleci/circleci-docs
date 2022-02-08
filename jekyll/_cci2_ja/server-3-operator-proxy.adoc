@@ -25,7 +25,7 @@ toc::[]
 kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-proxy <my-https-proxy> --no-proxy <my-no-proxy-list>
 ----
 
-=== プロキシの設定 
+=== プロキシの設定
 サーバーをインストールし、管理コンソールにアクセスできるようになったら、以下のスクリーンショットで示すように、設定セクションで入力しなければならない項目があります。 これらのフィールドは自動的には入力されないので、インストール時に入力したプロキシアドレスと非プロキシアドレスをご自身で入力する必要があります。 プロキシがユーザー名とパスワードによる認証を必要とする場合は、[HTTP Proxy authenticated(HTTP プロキシ認証済)]オプションにチェックを入れ、この時点で認証情報を追加します。
 
 .CircleCI Server v3.x プロキシの設定
@@ -48,7 +48,7 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 +
 以下のようにジョブに環境変数を設定することで、この問題を回避することができます。
 +
-```yml
+```yaml
 jobname:
   docker:
   - image: ubuntu:latest

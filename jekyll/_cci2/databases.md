@@ -30,7 +30,7 @@ In the primary image the config defines an environment variable with the `enviro
 
 Set the POSTGRES_USER environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
-```yml
+```yaml
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
@@ -41,7 +41,7 @@ Set the POSTGRES_USER environment variable in your CircleCI config to `postgres`
 
 {% raw %}
 
-```yml
+```yaml
 version: 2.1
 jobs:
   build:
@@ -125,7 +125,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI `config.yml` file:
 
-```yml
+```yaml
 version: 2.0
 jobs:
   build:
