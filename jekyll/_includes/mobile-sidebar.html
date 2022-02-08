@@ -1,11 +1,9 @@
 <!-- MOBILE SUBNAV /-->
 <div class="sidebar-mobile-wrapper">
     <nav class="mobile-sidebar">
-      {% assign lang = page.lang %}
-      {% assign sidenav = site.data.sidenav[lang] %}
       {% assign url_slug = current_url | slugify %}
 
-      {% for main-item in sidenav %}
+      {% for main-item in include.sidenav %}
         <ul>
           {% assign section_slug = main-item.name | slugify %}
           <li class="main-nav-item closed" data-section="{{ section_slug }}">

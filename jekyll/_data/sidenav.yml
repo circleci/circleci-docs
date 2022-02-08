@@ -64,8 +64,12 @@ en:
           link: 2.0/env-vars/
         - name: Caching
           link: 2.0/caching/
+        - name: Caching strategies
+          link: 2.0/caching-strategy/
         - name: Artifacts
           link: 2.0/artifacts/
+        - name: Workspaces
+          link: 2.0/workspaces/
         - name: Collecting test data
           link: 2.0/collect-test-data/
         - name: Debugging with SSH
@@ -417,8 +421,10 @@ en:
       children:
         - name: v3.3 Overview
           link: 2.0/CircleCI-Server-3.3.0-Overview.pdf
-        - name: v3.3 Installation Guide
-          link: 2.0/CircleCI-Server-3.3.0-Installation-Guide.pdf
+        - name: v3.3 Installation Guide for AWS
+          link: 2.0/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
+        - name: v3.3 Installation Guide for GCP
+          link: 2.0/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
         - name: v3.3 Operations Guide
           link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs

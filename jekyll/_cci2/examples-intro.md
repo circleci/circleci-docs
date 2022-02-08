@@ -100,8 +100,6 @@ jobs:
 
 ## macOS
 {: #macos }
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
-
 ```
 jobs:
   build-and-test:

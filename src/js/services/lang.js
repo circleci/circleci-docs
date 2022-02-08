@@ -45,7 +45,7 @@ const setLanguageSelectorOnLoad = () => {
     languages[window.currentLang] ||
     languages[window.navigator.language] ||
     languages['en'];
-  $(currentLang.domEl).addClass('selected');
+  $(currentLang.domEl).toggleClass('selected', true);
 };
 
 //  Reloads and changes the site to the selected language on click from the language dropdown
