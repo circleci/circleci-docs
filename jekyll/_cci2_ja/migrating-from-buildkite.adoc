@@ -27,18 +27,18 @@ NOTE: **ImagineX Consulting からのヒント**
 . GitHub Enterprise のインスタンスに空のリポジトリを作成します。
 . Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
 +
-```
+```shell
 git clone https://external-host.com/extuser/repo.git --bare
 ```
 . ローカルクローンに、GitHub Enterprise リポジトリをリモートリファレンスとして追加します。
 +
-```
+```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 ```
 . すべてのローカルリファレンス（refs/*）を、リモートの GitHub Enterprise リポジトリにプッシュします。
 +
-```
+```shell
 git push enterprise --mirror
 ```
 
