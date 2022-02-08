@@ -199,7 +199,7 @@ Caches created via the `save_cache` step are stored for up to 15 days.
 
 Caches currently cannot be cleared; however, if you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example. Then change the cache key names in your `config.yml` file and commit the change to clear the cache.
 
-You may create a new cache while still still keeping the "older" cache by incrementing the cache version; however, be aware that you will be creating an additional cache, which will be available for 15 days and will increase your storage. As a general best practice, you should review what is currently being cached and reduce its size as much as possible. 
+You may create a new cache while still still keeping the "older" cache by incrementing the cache version; however, be aware that you will be creating an additional cache, which will be available for 15 days and will increase your storage. As a general best practice, you should review what is currently being cached and reduce its size as much as possible.
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
