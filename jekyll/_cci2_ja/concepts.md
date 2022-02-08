@@ -40,7 +40,7 @@ CircleCI は *Configuration as Code* を貫いています。 継続的インテ
 └── all-other-project-files-and-folders
 ```
 
-`config.yml` は、プロジェクトの全パイプラインを定義する強力な YAML ファイルです。 For a full overview of the various keys used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) page.
+`config.yml` は、プロジェクトの全パイプラインを定義する強力な YAML ファイルです。 使用される様々なキーの概要については、[設定ファイルのリファレンス]({{ site.baseurl }}/2.0/configuration-reference/)をご覧ください。
 
 CircleCI の設定はお客様のプロジェクトの様々なニーズに合わせて変更できます。 下記の用語は粒度と依存度の順に並べられており、最も一般的な CircleCI プロジェクトのコンポーネントを表しています。
 
@@ -783,7 +783,7 @@ Note the following distinctions between artifacts, workspaces, and caches:
 | 型        | ライフタイム    | 用途                                                           | 例                                                                                                                                           |
 | -------- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | アーティファクト | 数か月       | 長期アーティファクトを保存します。                                            | **[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に表示されます。                           |
-| ワークスペース  | ワークフローの期間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | The `attach_workspace` copies and recreates the entire workspace content when it runs.                                                      |
+| ワークスペース  | ワークフローの期間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                       |
 | キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
 {: class="table table-striped"}
 
@@ -793,4 +793,4 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.¬
+`jobs` と `steps` のキーとオプションの使用方法については、「[Orb、ジョブ、ステップ、ワークフロー]({{ site.baseurl }}/2.0/jobs-steps/)」を参照してください。
