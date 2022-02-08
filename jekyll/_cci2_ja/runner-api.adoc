@@ -293,13 +293,8 @@ Get the number of running tasks for a given resource class.
 
 ==== サンプル
 
-<<<<<<< HEAD
 ```shell
-curl -X GET https://runner.circleci.com/api/v2/runner/tasks/running?resource-class=test-namespace/test-resource \
-=======
-```sh
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
->>>>>>> 7626e45fc82df4308a3969ce8eb452b1c6422f5d
     -H 'Circle-Token: secret-token'
 ```
 
