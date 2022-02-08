@@ -27,7 +27,7 @@ CA Certificates must be in a format understood by Java Keystore, and include the
 
 The following script provides the necessary steps:
 
-```
+```shell
 GHE_DOMAIN=github.example.com
 
 # Grab the CA chain from your GitHub Enterprise deployment.
@@ -212,7 +212,7 @@ When the TLS certificate has expired and you can not access the Replicated UI us
 
 Alternatively, you can upload the certificate and key by running the following command on the Services machine, substituting your hostname, path-to-key and path-to-certificate:
 
-```
+```shell
 $ sudo replicated console cert set <circleci-hostname> /path/to/key /path/to/cert
 $ replicatedctl app stop
 $ replicatedctl app start

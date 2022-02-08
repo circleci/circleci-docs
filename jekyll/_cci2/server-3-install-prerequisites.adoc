@@ -118,7 +118,7 @@ Creating a Kubernetes cluster is your responsibility. Please note:
 * Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * You must have appropriate permissions to list, create, edit, and delete pods in your cluster. Run this command to verify your permissions:
 +
-```bash
+```shell
 kubectl auth can-i <list|create|edit|delete> pods
 ```
 * There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you
@@ -131,12 +131,12 @@ You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/q
 . Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`].
 . Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
 +
-```bash
+```shell
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 ```
 . Once the cluster has been created, you can use the following command to configure `kubectl` access:
 +
-```bash
+```shell
 eksctl utils write-kubeconfig --name circleci-server
 ```
 
@@ -203,13 +203,13 @@ By default, CircleCI server will create self-signed certificates to get you star
 
 . If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
 +
-```bash
+```shell
 pip3 install certbot-dns-google
 ```
 
 . Then the following commands will provision a certification for your installation:
 +
-```bash
+```shell
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
@@ -217,13 +217,13 @@ certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d 
 
 . If you are using AWS Route53 for DNS, you will need the *certbot-route53* plugin installed. You can install the plugin with the following command:
 +
-```bash
+```shell
 pip3 install certbot-dns-route53
 ```
 
 . Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
 +
-```bash
+```shell
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 

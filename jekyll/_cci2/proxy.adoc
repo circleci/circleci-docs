@@ -74,7 +74,7 @@ systemctl restart replicated\*
 
 NOTE: NOTE: If the proxy requires user authentication, you will need to add user authentication information into <proxy-ip> like below:
 
-```
+```shell
 export HTTP_PROXY=http://<userid>:<password>@<proxy-ip>:<port>
 export HTTPS_PROXY=https://<userid>:<password>@<proxy-ip>:<port>
 ```
@@ -143,7 +143,7 @@ ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_mach
 
 ==== REPL time out
 If you experience a timeout when connecting to the REPL, you will need to allow access, through your corporate proxy, to the domains of any Clojure library repositories that are required to download dependencies for running the REPL.
-```
+```shell
 sudo su
 docker exec -it frontend /bin/bash
 lein repl :connect 6005
