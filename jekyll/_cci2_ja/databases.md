@@ -31,7 +31,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 以下のように CircleCI 設定ファイルで `postgres` に POSTGRES_USER 環境変数を設定して、イメージにロールを追加します。
 
 ```yml
-      - image: circleci/postgres:9.6-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

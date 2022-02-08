@@ -15,14 +15,14 @@ toc::[]
 
 == はじめに
 
-CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. 
 
 CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提供しますが、お客様のKubernetes クラスタ内で動作します。 
 
 .CircleCI Server v3.x のアーキテクチャ
 image::server-3-architecture-diagram.png[サービスs Architecture]
 
-CircleCI Server アプリケーションは、ロードバランサーを使って4つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 For further information see the <<server-3-operator-load-balancers#, Load Balancers>> doc.
+CircleCI Server アプリケーションは、ロードバランサーを使って4つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 詳細については、https://circleci.com/docs/2.0/server-3-operator-load-balancers/[ロード バランサーに関するページ]を参照してください。
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -98,14 +98,13 @@ CircleCI Server アプリケーションは、ロードバランサーを使っ�
 | インバウンド
 |
 | ビルドへの SSH 接続
-| Nomad クライアントでのみ必要
+| Only required for the Nomad clients.
 |===
 
 CircleCI Server では、https://www.nomadproject.io/[Nomad]スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
 
-ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
-オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。
-そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
+Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
 == サービス
 
@@ -134,7 +133,7 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | builds-service
 | アプリ コア
-| www-api から取り込みを行い、plans-service、workflows-conductor、orbs-service に送信します。
+| Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service.
 |
 |
 
@@ -158,19 +157,19 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | circleci-rabbitmq
 | パイプラインと実行
-| ワークフロー メッセージ、テスト結果、使用状況、cron、出力、通知、スケジューラーのキューイング
+| Queuing for workflow messaging, test results, usage, crons, output, notifications, and scheduler
 |
 |
 
 | circleci-redis
 | 実行
-| リクエストのキャッシュおよびレート制限の計算のために、一時的なデータ (ビルド ログなど) をキャッシュします。
+| Cache data that will not be stored permanently (such as build logs), for request caching, and for rate limit calculations.
 | キャッシュを適切に行えない場合、VCS の呼び出しが多くなり VCS からレート制限が適用されることがあります。
 |
 
 | circleci-telegraf
 |
-| Telegraf は StatsD メトリクスを収集します。 CircleCI サービスのホワイトボックス メトリクスはすべて、StatsD メトリクスを発行します。 これらは Telegraf に送信されますが、他の場所  ( Datadog や Prometheusなど) にエクスポートされるように構成することもできます。
+| Telegraf は StatsD メトリクスを収集します。 CircleCI サービスのホワイトボックス メトリクスはすべて、StatsD メトリクスを発行します。 Datadog or Prometheus).
 |
 |
 
@@ -212,15 +211,15 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | exim
 |
-| ただしユーザーは削除後も既存の MTA にメール送信用の認証情報を提供することができます。
+| Will be removed in GA, but users can provide mail submission credentials to an existing MTA.
 | メール通知が送信されなくなります。
 |
 
 | federations-service
 | アプリ コア
-| ユーザー ID を保存します (LDAP)。 API と permissions-service
+| ユーザー ID を保存します (LDAP)。 API と permissions-service.
 | LDAP 認証を使用している場合、すべてのログインが失敗するようになります。 また、一部の REST API 呼び出しが失敗する可能性があります。
-| LDAP 統合はできません。
+| LDAP integration not available.
 
 | frontend
 | フロントエンド
@@ -230,49 +229,50 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | inject-bottoken
 |
-| "ボット トークン" を MongoDB に挿入する Kubernetes ジョブ。 ボット トークンは、サービス間通信用の認証トークンです。		主に www-api で使用されます。
+| "ボット トークン" を MongoDB に挿入する Kubernetes ジョブ。 ボット トークンは、サービス間通信用の認証トークンです。		
 |
-|
+| 主に www-api で使用されます。
 
 | kotsadm-kots
 | ライセンス
-| メインの KOTS アプリケーションです。 CircleCI Server のアップグレードと設定を行う KOTS 管理者コンソールを実行します。 管理者コンソールは使用できません。
-| CircleCI Server のアップグレードと設定が行えなくなります。
+| The main KOTS application. Runs the KOTS Admin Console where upgrades and configuration of server take place.
+| No upgrades or configuration possible for server.
+No admin console available.
 |
 
 | kotsadm-migrations
 | ライセンス
-| Kotsadm の更新に合わせてデータベースの移行を行います。
+| Performs database migrations to handle updates of Kotsadm.
 |
 |
 
 | kotsadm-minio
 | ライセンス
-| KOTS ライセンス用のオブジェクト ストレージ
+| Object storage for KOTS licensing.
 |
 |
 
 | kotsadm-operator
 | ライセンス
-| Kotsadm のデプロイと制御を行います。
+| Deploys and controls Kotsadm.
 |
 |
 
 | kotsadm-postgres
 | ライセンス
-| KOTS ライセンス用のデータベース
+| Database for KOTS licensing.
 |
 |
 
 | legacy-notifier
 | アプリ コア
-| 外部サービス (Slack、メールなど) への通知を処理します。
+| Handles notifications to external services (Slack, email, etc.).
 |
 |
 
 | prometheus
 | サーバー
-| メトリクスに使用します。
+| Used for metrics.
 |
 |
 
@@ -386,7 +386,7 @@ CircleCI では、インストールするプラットフォームを幅広く�
 | テスト未実施 
 | Minio Digital Ocean ゲートウェイとランナーで動作する必要があります。
 
-| OpenShift*
+| OpenShift
 | テスト未実施
 | 動作しないことが分かっています。
 

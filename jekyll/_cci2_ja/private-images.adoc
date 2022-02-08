@@ -4,17 +4,17 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= Using Docker Authenticated Pulls
+= Docker の認証付きプルの使用
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to authenticate with your Docker registry provider to pull images.
+:page-description: ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
 ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
 
-プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。  お使いのレジストリ プロバイダーによっては、レート制限が引き上げられる可能性もあります。
+プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。 お使いのレジストリ プロバイダーによっては、レート制限が引き上げられる可能性もあります。
 
 CircleCI は Docker と連携して、ユーザーの皆さまが今後もレート制限なしで Docker Hub にアクセスできるようにしています。 2020 年 11 月 1 日時点では、いくつかの例外を除き、CircleCI を通じて Docker Hub からイメージをプルする際に、レート制限の影響を受けることはありません。 ただし、今後 CircleCI ユーザーにもレート制限が適用される可能性があります。 そのため、将来的にレート制限の影響を受けることのないよう、お使いの CircleCI 設定ファイルに Docker Hub 認証を追加すると共に、必要に応じてご利用中の Docker Hub プランのアップグレードを検討することをお勧めします。
 
@@ -22,12 +22,12 @@ toc::[]
 
 ## Docker Executor
 
-https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、https://circleci.com/docs/ja/2.0/configuration-reference[config.yml] ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、https://circleci.com/docs/ja/2.0/contexts/[コンテキスト]を作成するか、プロジェクトごとの環境変数を使用します。
+https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、https://circleci.com/docs/ja/2.0/configuration-reference[config.yml ファイル]の `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、https://circleci.com/docs/ja/2.0/contexts/[コンテキスト]を作成するか、プロジェクトごとの環境変数を使用します。
 
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
-Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
+Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
 
-NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが*必要*なものだけにアクセスできるようにしたりするのにとても便利です。
+NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが_必要_なものだけにアクセスできるようにしたりするのにとても便利です。
 
 次の例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与しています。
 
@@ -61,7 +61,7 @@ If you have https://docs.docker.com/docker-hub/2fa/[two-factor authentication se
     password: $DOCKERHUB_ACCESS_TOKEN
 ----
 
-また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 具体的な例は、次のようになります。
+また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。`image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 具体的な例は、次のようになります。
 
 [source,yaml]
 ----
@@ -148,7 +148,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
 ----
 
-いずれの方法もほぼ同じですが、2 番目の方法では認証情報に対して任意の変数名を指定できます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番へのデプロイ前に本格的なテスト スイートを実行する場合は、次のように記述します。
+いずれの方法もほぼ同じです。 2 番目の方法では認証情報に対して任意の変数名を指定できます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番にデプロイする前には本格的なテスト スイートを実行します。
 
 [source,yaml]
 ----

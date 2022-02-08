@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Configuring External Services
+= CircleCI Server v3.x 外部サービスの構成
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-このドキュメントでは、CircleCI Server 3.x のインストール で使用する以下の外部サービスの設定方法について説明します。 このガイドで説明している設定は、KOTS の管理者コンソールで確認できます。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+このドキュメントでは、CircleCI Server 3.x のインストール で使用する以下の外部サービスの設定方法について説明します。 The settings described in this guide can be found in the KOTS Admin Console. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 * PostgreSQL
 * MongoDB
@@ -21,7 +21,7 @@ toc::[]
 
 == PostgreSQL
 
-NOTE: ご自身の PostgresSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。 
+NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or greater. 
 
 .外部 PostgreSQL
 image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
@@ -38,7 +38,7 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 
 === PostgreSQL のベスト プラクティス
 
-プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
+Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -92,13 +92,13 @@ PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に�
 CircleCI では、以下を行うことを強くお勧めしています。
 
 * 毎日バックアップを行う
-* バックアップを少なくとも 30 日間保持する
+* Keeping at least 30 days of backups
 * データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
 * CircleCI Server のアップグレードを行う前には毎回バックアップを行う
 
 == MongoDB
 
-NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。 
+NOTE: If using your own MongoDB instance, it needs to be version 3.6 or greater. 
 
 .外部 MongoDB
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
@@ -107,9 +107,10 @@ image::server-3-external-mongo.png[Screenshot of KOTS admin console config showi
 
 * *[MongoDB connection host(s) or Ip(s)(MongoDB 接続ホストまたは IP](必須)*: MongoDB インスタンスのホスト名または IP。 コロンによるポートの指定と、共有インスタンスに対する複数のホストの両方がサポートされています。
 
-* *[Use SSL for connection to MongoDB (MongoDB への接続に SSL を使用)](必須)*: 外部 MongoDB インスタンスへの接続に SSL を使用するかどうかを指定します。
+* *Use SSL for connection to MongoDB (required)* - 
+Whether to use SSL when connecting to your external MongoDB instance.
 
-* *[Allow insecure TLS connections (セキュアでない TLS 接続を許可)](必須)*: 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 ただし、この設定はセキュアではありません。可能な限り有効な CA によって署名された TLS 証明書を使用することをお勧めします。
+* *[Allow insecure TLS connections (セキュアでない TLS 接続を許可)](必須)*: 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 However, this is an insecure setting and you should use a TLS certificate signed by a valid CA, if you can.
 
 * *[MongoDB  user (MongoDB ユーザー)] (必須)*: 使用するアカウントのユーザー名。 このアカウントには dbAdmin ロールが指定されている必要があります。
 
@@ -119,7 +120,7 @@ image::server-3-external-mongo.png[Screenshot of KOTS admin console config showi
 
 * *[MongoDB authentication mechanism (MongoDB 認証メカニズム)] (必須)*: 使用する認証メカニズム  (通常は SCRAM-SHA-1)。
 
-* *[Additional connection options (追加の接続オプション)](オプション)*: 使用する他の接続オプションを指定します。 This needs to be formatted as a query string (`key=value` pairs, separated by `&``, special characters need to be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+* *[Additional connection options (追加の接続オプション)](オプション)*: 使用する他の接続オプションを指定します。 This needs to be formatted as a query string (`key=value` pairs, separated by `&`. Special characters must be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
 
 == Vault
 
@@ -133,5 +134,3 @@ image::server-3-external-vault.png[Screenshot of KOTS admin console config showi
 * *Transit Path*: Vault シークレットの Transit パス
 
 * *Token*: Vault のアクセストークン
-
-

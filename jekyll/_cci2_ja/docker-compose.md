@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Installing and Using Docker Compose"
-short-title: "Installing and Using Docker Compose"
-description: "How to enable Docker Compose in your primary container"
+title: "Docker Compose のインストールと使用"
+short-title: "Docker Compose のインストールと使用"
+description: "プライマリコンテナで Docker Compose を有効化する方法"
 categories:
   - コンテナ化
 order: 40
@@ -12,14 +12,14 @@ version:
   - Server v2.x
 ---
 
-This document describes how to install and use Docker Compose, and assumes the reader has some experience using the `docker-compose` utility.
+ここでは、 Docker Compose のインストール方法および使用方法を説明します。読者が `docker-compose` ユーティリティーを使用した経験があることを前提としています。
 
-If you are new to Docker Compose, do consider reviewing the [official Docker Compose overview](https://docs.docker.com/compose/), or checking out the [Getting Started guide](https://docs.docker.com/compose/gettingstarted/).
+Docker Compose を初めて使う場合は、[公式の Docker Compose の概要](https://docs.docker.com/compose/)または[入門ガイド](https://docs.docker.com/compose/gettingstarted/)を参照してください。
 
 * 目次
 {:toc}
 
-The `docker-compose` utility is \[pre-installed in the CircleCI convenience images\]\[pre-installed\] and machine executors. If you are using another image, you can install it into your \[primary container\]\[primary-container\] during the job execution with the Remote Docker Environment activated by adding the following to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
+`docker-compose` ユーティリティは、Machine Executor と [CircleCI イメージ] にプリインストールされています。 別のイメージを使用している場合は、以下のコードを [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに追加することでアクティブ化されるリモート Docker 環境を使用して、ジョブ実行時に\[プライマリ コンテナ\]\[primary-container\]にインストールできます。
 
 ```yml
       - run:
@@ -32,16 +32,16 @@ The `docker-compose` utility is \[pre-installed in the CircleCI convenience ima
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
 
-The above code example assumes that you will also have `curl` available in your executor. If you are constructing your own docker images, consider reading the [custom docker images document]({{site.baseurl}}/2.0/custom-images/).
-[pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
+上記のコード例では、Executor で `curl` も 使用可能であることを想定しています。 独自の Docker イメージを構築する場合は、 [カスタム Docker イメージ]({{site.baseurl}}/ja/2.0/custom-images/)に関するドキュメントをお読みください。
+[pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ
 
-Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
+次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 
 ```yml
       setup_remote_docker
 ```
 
-This step enables you to run `docker-compose` commands to build images:
+以下のステップにより、`docker-compose` コマンドをビルドイメージに追加できます。
 
 ```yml
       - run:
@@ -49,7 +49,7 @@ This step enables you to run `docker-compose` commands to build images:
           command: docker-compose build
 ```
 
-Or to run the whole system:
+または、以下のステップで、システム全体を実行できます。
 
 ```yml
       - run:
@@ -57,7 +57,7 @@ Or to run the whole system:
           command: docker-compose up -d
 ```
 
-Or to also verify if a service is running for example:
+または、以下のステップで、サービスが実行しているか確認できます。
 
 ```yml
       - run:
@@ -79,30 +79,38 @@ Or to also verify if a service is running for example:
 ## サンプル プロジェクト
 {: #example-project }
 
-See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects.
+GitHub の [docker-compose サンプル プロジェクト](https://github.com/circleci/cci-demo-docker/tree/docker-compose)で、例を参照してください。また、[完全な設定ファイル](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml)をお客様のプロジェクトのテンプレートとして利用できます。
 
-**Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, run a container in the service's network.
+**注:** プライマリコンテナは、リモート Docker とは独立した環境で動作し、両者は直接通信できません。 実行中のサービスとやり取りするためには、サービスのネットワーク内でコンテナを実行します。
 
-## Using Docker Compose with machine executor
+## Docker Compose を Machine Executor と組み合わせて使用
 {: #using-docker-compose-with-machine-executor }
 
-If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `config.yml` file and use `docker-compose` as you would normally (see machine executor documentation [here](https://circleci.com/docs/2.0/executor-types/#using-machine) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details. **Note: There is an overhead for provisioning a machine executor as a result of spinning up a private Docker server. Use of the `machine` key may require additional fees in a future pricing update.**
+Docker Compose を使用して Docker Compose ファイルを含むマルチコンテナ セットアップを管理するには、`config.yml` ファイルで `machine` キーを使用し、`docker-compose `を通常どおりに使用します (詳細は[こちら](https://circleci.com/docs/2.0/executor-types/#using-machine)の Machine Executor に関するドキュメントを参照)。 つまり、Docker Compose ファイルがコンテナとローカル ディレクトリを共有する場合、予期したとおりに機能します。 詳細については、Docker ドキュメントの [最初の docker-compose.yml ファイル](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) を参照してください。 **注: プライベート Docker サーバーのスピンアップの結果として、Machine Executor をプロビジョニングするためのオーバーヘッドが存在します。 将来の料金改定では、`machine` キーの使用に追加料金が必要になる可能性があります。**
 
 
-## Using Docker Compose with docker executor
+## Docker Compose を Docker Executor と組み合わせて使用
 {: #using-docker-compose-with-docker-executor }
 
-Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
+`docker` を `setup_remote_docker` と組み合わせて使用すると、docker-machine を使用して作成した場合と同様のリモートエンジンを作成できます。 ただし、このセットアップでは、ボリュームのマウントとポート転送は同じようには**機能しません**。 リモート Docker デーモンは、Docker CLI や Docker Compose とは異なるシステム上で動作するため、これを機能させるにはデータの移動が必要です。 マウントは通常、Docker ボリュームでコンテンツを利用可能にすることで解決できます。 `docker cp` を使用して、CLI ホストから Docker リモート ホスト上で実行しているコンテナにデータを取得することで、Docker ボリュームにデータをロードできます。
 
-This combination is required if you want to build docker images for deployment.
+デプロイ用の Docker イメージをビルドする場合は、この組み合わせが必要です。
 
 ## 制限事項
 {: #limitations }
 
-Using `docker-compose` with the `macos` executor is not supported. See [our support article for more information](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-).
+`docker-compose` と `macos` Executor を組み合わせての使用はサポートしていません。 サポートに関する詳細は
+
+を参照してください。</p> 
+
+
 
 ## 関連項目
+
 {: #see-also }
+
+
+
 {:.no_toc}
 
 See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
