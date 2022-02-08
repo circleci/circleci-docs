@@ -13,7 +13,16 @@
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
 
-    background-color: #EDEDED !important;
+    background-color: #ededed!important;
+
+    &:hover {
+      background-color: #e3e3e3 !important;
+    }
+
+    &:active {
+      background-color: #d4d4d4 !important;
+    }
+
     background-position: 50% !important;
     background-repeat: no-repeat !important;
     border-radius: 4px !important;
@@ -22,10 +31,6 @@
 
     span {
       display: none;
-    }
-
-    &:hover {
-      background-color: #E3E3E3 !important;
     }
 
     &[data-copy-state="copy"] {
