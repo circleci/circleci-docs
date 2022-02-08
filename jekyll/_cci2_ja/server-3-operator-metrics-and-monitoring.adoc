@@ -22,14 +22,14 @@ toc::[]
 == メトリクスの収集
 
 === スコープ
-Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring the health of your system and debug issues with your installation.
+CircleCI Server では、システムのヘルス状態の監視や、システムの問題のデバッグに役立つ各種メトリクスとログをデフォルトで収集します。
 
 NOTE: データは最大 15 日間保持されます。
 
-NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみに限定されていません。 It will scrape metrics from your entire cluster by default. You may disable Prometheus from within the KOTS Admin Console config if needed.
+NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみに限定されていません。 デフォルトでは、クラスタ全体からメトリクスを収集します。 必要に応じて、KOTS 管理者コンソールの [Config (設定)] から Prometheus を無効にできます。
 
 === Prometheus
-https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラート システムです。 Server 3.x ships with basic implementation of monitoring common performance metrics. 
+https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラート システムです。 CircleCI Server 3.x には、一般的なパフォーマンス メトリクスの監視が実装されています。 
 
 === KOTS 管理者 - メトリクス グラフ
 デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 Once deployed, you may provide the address for your Prometheus instance to the KOTS Admin Console. KOTS will use this address to generate graph data for the CPU and memory usage of containers in your cluster.
