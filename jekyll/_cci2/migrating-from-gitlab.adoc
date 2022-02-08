@@ -33,7 +33,7 @@ git clone git@gitlab.com:[owner]/[repo-name].git --bare
 ```
 . Add your GitHub Enterprise repository as a remote reference in your local clone:
 +
-```
+```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 ```shell
