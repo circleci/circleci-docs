@@ -561,6 +561,20 @@ en:
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
 
+- name: CircleCI Plans
+  icon: icons/sidebar/circleci_plans.svg
+  children:
+    - name: Plan Overview
+      link: 2.0/plan-overview
+    - name: Free
+      link: 2.0/plan-free
+    - name: Performance
+      link: 2.0/plan-performance
+    - name: Scale
+      link: 2.0/plan-scale
+    - name: Server
+      link: 2.0/plan-server
+
 ja:
 - name: Getting Started
   i18n_name: はじめよう
