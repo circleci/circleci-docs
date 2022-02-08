@@ -25,7 +25,7 @@ Below are the features you can use on the Free plan. Refer to the https://circle
 NOTE: Please note, for the Free plan, resource classes on macOS are *coming soon*.
 
 === Available resource classes 
-A wide array of resource classes on Docker, Linux, Windows, and macOS (coming soon) are available to use. This flexibility helps ensure that you choose the right compute resources. To view examples, or find more information about these executors, please refer to the the <<executor-intro#,Executors and Images>> page.
+A wide array of resource classes on Docker, Linux, Windows, and macOS are available to use. This flexibility helps ensure that you choose the right compute resources. To view examples, or find more information about these executors, please refer to the the <<executor-intro#,Executors and Images>> page.
 
 {% include snippets/features-of-circleci.adoc %}
 
