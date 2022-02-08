@@ -21,12 +21,12 @@ xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの
 == サーバー上のランナーのアップグレード
 
 クラウド版の CircleCI とは異なり、CircleCI Server は`circleci-launch-agent`を自動的に更新しないため、手動による操作が必要です。 以下では、さまざまな環境で CircleCI Server のランナーをアップグレードする方法を詳しく説明します。
- 
+
 === コンテナ化された環境におけるランナーのアップグレード
 
 ここでは、Kurbernetes や Docker のコンテナ化された環境でランナーをアップグレードする方法について詳しく説明します。
 
-==== Kubernetes ランナーのアップグレード 
+==== Kubernetes ランナーのアップグレード
 
 xref:runner-on-kubernetes.adoc[Kubernetes のインストールガイド]を参照してください。
 
@@ -34,17 +34,17 @@ xref:runner-on-kubernetes.adoc[Kubernetes のインストールガイド]を参�
 
 . 現在実行中のすべてのランナーコンテナを停止します。
 +
-``` bash
+```shell
 docker stop <container-name>
 ```
 . ランナーのコンテナを削除します。
 +
-``` bash
+```shell
 docker stop <container-name>; docker rm <container-name>;
 ```
 . 新しいランナーの Docker コンテナを起動します。
 +
-``` bash
+```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 +
@@ -62,7 +62,7 @@ NOTE: サーバー上で Docker コンテナを起動する場合、 `--env`  �
 
 xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[ローンチエージェント バイナリのダウンロード]と同じ手順で、 `agent_version` の環境変数をxref:runner-installation.adoc#runner-for-server-compatibility[サーバーとランナーの互換性リスト]に記載されている正しいバージョンに更新します。
 
-``` bash
+```shell
 export agent_version="<launch-agent-version>"
 ```
 
@@ -76,7 +76,7 @@ Then, following the xref:runner-installation.adoc#platform-specific-instructions
 
 次のコマンドを実行します。
 
-``` bash
+```shell
 sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
@@ -85,7 +85,7 @@ sudo systemctl disable circleci.service
 
 次のコマンドを実行します。
 
-``` bash
+```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
@@ -106,7 +106,7 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 次のコマンドを実行します。
 
-``` bash
+```shell
 sudo systemctl reload circleci.service
 sudo systemctl enable circleci.service
 sudo systemctl start circleci.service
@@ -116,7 +116,7 @@ sudo systemctl start circleci.service
 
 次のコマンドを実行します。
 
-``` bash
+```shell
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 

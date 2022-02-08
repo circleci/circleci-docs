@@ -62,7 +62,7 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 . *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。 （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
 . Select the `Skip to review` button and then the `Create launch configuration` button.
 
-```bash
+```shell
 #!/bin/bash
 
 set -exu

@@ -113,7 +113,7 @@ Kubernetes クラスタの作成はご自身で行う必要があります。 �
 * クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
 * クラスタ内の Pod を一覧表示、作成、編集、削除するためのアクセス許可。 アクセス許可を確認するには以下を実行します。
 +
-```bash
+```shell
 kubectl auth can-i <list|create|edit|delete> pods
 ```
 * クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
@@ -125,12 +125,12 @@ Amazon EKS クラスタ の作成に関する詳細はhttps://aws.amazon.com/qui
 .  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`]をインストールします。
 . 以下を実行してクラスタを作成します（`eksctl` や EKS を使った CloudFormation には 20 分以上かかる場合があります。）
 +
-```bash
+```shell
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 ```
 . クラスタの作成が完了したら、以下のコマンドで`kubectl`のアクセスを設定します。
 +
-```bash
+```shell
 eksctl utils write-kubeconfig --name circleci-server
 ```
 
@@ -198,13 +198,13 @@ NOTE: GitHub Enterprise を使用する場合は、パーソナル アクセス 
 
 . DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
-```bash
+```shell
 pip3 install certbot-dns-google
 ```
 
 . 以下のコマンでインストール証明書をプロビジョニングします。
 +
-```bash
+```shell
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
@@ -212,13 +212,13 @@ certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d 
 
 . DNS に AWS Route53 で使用している場合、*certbot-route53* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
-```bash
+```shell
 pip3 install certbot-dns-route53
 ```
 
 . Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
 +
-```bash
+```shell
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 

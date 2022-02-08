@@ -20,7 +20,7 @@ If you are looking for information on creating an orb, see the https://circleci.
 toc::[]
 
 ## Orb の管理
-Orb には、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token]. 
+Orb には、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
 Please ensure that you are using a personal API token generated **after** your user account is made an admin.
 
 `--host` オプションを使用してローカル リポジトリの場所を指定することで、パブリック クラウドの Orb ではなくローカル サーバーの Orb にアクセスできます。 For
@@ -44,7 +44,7 @@ circleci orb list --host <your server install domain> --token <your api token>
 ## パブリック Orb のインポート
 パブリック Orb をローカルの CircleCI Server Orb リポジトリにインポートするには、次のコマンドを実行します。
 
-```bash
+```shell
 circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
 ```
 
@@ -60,7 +60,7 @@ circleci admin import-orb ns[orb[@version]] --host <your server installation dom
 
 Orb をインポートする際は、CLI が CircleCI サーバー環境および circleci.com と通信できる状態にある必要があります。 プロキシ内でサーバー環境を使用した状態で行う場合は、サーバー環境にリクエストをプロキシするのではなく、プロキシを使って`circleci.com`にリクエストを行うように CLI を設定する必要があります。 以下に、その例を示します。
 
-```bash
+```shell
 export NO_PROXY=server.example.com
 export HTTPS_PROXY=http://proxy.example.com:3128
 export HTTP_PROXY=http://proxy.example.com:3128

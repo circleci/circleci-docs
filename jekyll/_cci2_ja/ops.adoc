@@ -135,7 +135,7 @@ workflow.start
 . Set up the `awscli` and `jq` or another JSON processor for your OS.
 . In this example, grep for all `workflow.job.start` events.
 +
-```bash
+```shell
 #!/bin/bashBUCKET=YOUR-BUCKET-NAME
 for key in `aws s3api list-objects --bucket BUCKET --prefix audit-logs/audit_log/v1/ --output json | jq -r '.Contents[].Key'`;
 do

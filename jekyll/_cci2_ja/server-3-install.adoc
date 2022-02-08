@@ -54,7 +54,7 @@ NOTE: Once you have created your namespace we recommend setting your `kubectl` c
 
 プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細はhttps://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
 
-```bash
+```shell
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
 
 ```
@@ -79,13 +79,13 @@ NOTE: プライベート ロードバランサーの使用オプションを選�
 
 * *[Frontend TLS Private Key (フロントエンド TLS プライベートキー)] (必須)*: 前提条件のステップで作成したキーです。 この値は以下のコマンドで取得できます。
 +
-```bash
+```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
 * *[Frontend TLS Certificate (フロントエンド TLS 証明書)] (必須)*: 前提条件のステップで作成した証明書です。 この値は以下のコマンドで取得できます。
 +
-```bash
+```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 

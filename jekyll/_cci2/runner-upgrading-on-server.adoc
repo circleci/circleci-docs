@@ -21,12 +21,12 @@ Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[serve
 == Upgrading runner on server
 
 Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention. The following sections detail how to upgrade runners in your server installation across all environments.
- 
+
 === Upgrading runner in a containerized environment
 
 This section details how to upgrade runner in containerized environments: Kubernetes and Docker.
 
-==== Upgrading runner for Kubernetes 
+==== Upgrading runner for Kubernetes
 
 Refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions].
 
@@ -34,17 +34,17 @@ Refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions
 
 . Stop any currently running runner containers:
 +
-``` bash
+```shell
 docker stop <container-name>
 ```
 . Remove the runner containers:
 +
-``` bash
+```shell
 docker stop <container-name>; docker rm <container-name>;
 ```
 . Start a new runner Docker container:
 +
-``` bash
+```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 +
@@ -62,7 +62,7 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 
 Following the same process as in the xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation.adoc#runner-for-server-compatibility[Runner for server compatibility chart].
 
-``` bash
+```shell
 export agent_version="<launch-agent-version>"
 ```
 
@@ -76,7 +76,7 @@ The currently running `circleci-launch-agent` process will need to be halted bef
 
 Run the following commands:
 
-``` bash
+```shell
 sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
@@ -85,7 +85,7 @@ sudo systemctl disable circleci.service
 
 Run the following commands:
 
-``` bash
+```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
@@ -105,8 +105,8 @@ Platform-specific instructions are given below.
 
 Run the following commands:
 
-``` bash
-sudo systemctl reload circleci.service 
+```shell
+sudo systemctl reload circleci.service
 sudo systemctl enable circleci.service
 sudo systemctl start circleci.service
 ```
@@ -115,7 +115,7 @@ sudo systemctl start circleci.service
 
 Run the following command:
 
-``` bash
+```shell
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 

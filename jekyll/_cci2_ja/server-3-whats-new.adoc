@@ -76,7 +76,7 @@ KOTS 管理者コンソール ダッシュボードのメニューバーで  [Ve
 
 以下により、PostgreSQL ポッドが `[Pending(保留)]`状態かどうかを確認することができます。
 
-```bash
+```shell
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
 NAME           READY   STATUS    RESTARTS   AGE
 postgresql-0   1/1     Pending   0          3m
@@ -84,22 +84,22 @@ postgresql-0   1/1     Pending   0          3m
 
 以下のコマンドにより、データを損失することなくポッドを 0 にスケールダウンし、アプリケーションポッドを終了することができます。
 
-```bash
+```shell
 kubectl scale deployment -l layer=application --replicas 0
 ```
 
-すべてのアプリケーション層のポッドが終了したら、以下の*いずれか*を実行します。 
+すべてのアプリケーション層のポッドが終了したら、以下の*いずれか*を実行します。
 
-* KOTS 管理者コンソールからアップデートを再デプロイする*か*、 
+* KOTS 管理者コンソールからアップデートを再デプロイする*か*、
 * *または*、以下の 2 つのコマンドを実行して、ポッドを再デプロイし、サーバーを機能的な状態に戻します。
 +
-```bash
+```shell
 kubectl scale deployment -l layer=application --replicas 1
 ```
 +
-その後、次のコマンドで `output-processor` をスケールアップします。 
+その後、次のコマンドで `output-processor` をスケールアップします。
 +
-```bash
+```shell
 kubectl scale deployment output-processor --replicas 2
 
 ```
@@ -109,7 +109,7 @@ kubectl scale deployment output-processor --replicas 2
 
 以下により、Traefik ポッドの状態を確認することができます。
 
-```bash
+```shell
 $ kubectl get pod -l app=traefik
 NAME                                      READY   STATUS    RESTARTS   AGE
 circleci-server-traefik-9d6b86fd8-f7n2x   1/1     Running   0          24d
@@ -118,7 +118,7 @@ circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
 
 以下のコマンドで古い Traefik ポッドを削除します。
 
-```bash
+```shell
 kubectl delete pod circleci-server-traefik-<older pod hash>
 ```
 
@@ -128,18 +128,18 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 * 完全なプライベートネットワーク環境でのインストールを必要とするお客様は、KOTS管理コンソールの設定画面からパブリックIPがVMに割り当てられないようにすることができます。 なお、非パブリックIPの設定を有効にした場合、実行中のジョブにSSHアクセスが必要なときは、VPCにVPNを設定するなどの回避策が必要となりますのでご注意ください。
 * プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[サーバー 3.xのプロキシ設定]を参照してください。
-* マシン実行環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。 
+* マシン実行環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。
 * https://circleci.com/docs/ja/2.0/insights/[インサイトAPI]が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
-* 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。 
+* 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。
 * VMサービスにカスタムLinux AMIが利用できるようになりました。
 * SSLターミネーションを無効にできるようになりました - サーバーをファイアウォールの内側に置いている場合、これによりファイアウォールでのSSLターミネーションが利用できます。
 * 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張]のドキュメントを参照してください。
-* https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]にNomadのオートスケーリングの例を追加しました。 
+* https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]にNomadのオートスケーリングの例を追加しました。
 * 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-build-artifacts/[CircleCI Server v3.x ビルド アーティファクト]を参照してください。
 
 === 変更点
 
-* デフォルトのWindows Executorのサイズをクラウド版に合わせて大きくしました。 
+* デフォルトのWindows Executorのサイズをクラウド版に合わせて大きくしました。
 
 === 既知の問題
 
