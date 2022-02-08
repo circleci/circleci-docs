@@ -88,7 +88,7 @@ A few points to note regarding the use of the auto-cancel feature:
 {: #steps-to-enable-auto-cancel-for-pipelines-triggered-by-pushes-to-github-or-the-api }
 {:.no_toc}
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. An approval job will also remain on hold even when new commits are made with "Auto-cancel redundant builds" enabled.
 
 1. In the CircleCI application, go to your Project Settings.
 
