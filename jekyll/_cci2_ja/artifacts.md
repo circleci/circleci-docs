@@ -18,23 +18,23 @@ version:
 ## アーティファクトの概要
 {: #artifacts-overview }
 
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
+Artifacts persist data after a job is completed and may be used for storage of the outputs of your build process.
 
-たとえば、Java のビルドおよびテストのプロセスが 1 つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
+たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI can store this file as an artifact, keeping it available after the process has finished.
 
-![アーティファクトのデータ フロー]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータ フロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。
 
-ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
+If a job produces persistent artifacts such as screenshots, coverage reports, core files, or deployment tarballs, CircleCI can automatically save and link them for you.
 
-![[Artifacts (アーティファクト)] タブのスクリーンショット]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circleci.com/) to find the **Artifacts** tab. アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
-アーティファクトへのリンクは、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示されます。 アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
+![[Artifacts (アーティファクト)] タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
 **アーティファクトへは作成から30日間アクセスできます。 **  ドキュメントや永続的なコンテンツのソースとして依存している場合、S3や静的Webサイト用のGitHub Pages、Netlifyのような専用領域にデプロイすることを推奨します。
 
-**メモ:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
+**Note:** Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
 ## アーティファクトのアップロード
 {: #uploading-artifacts }
@@ -69,14 +69,13 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。        
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job** page in your browser. If you are uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.        
 単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
-
 
 現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
   - `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
-  - `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
+  - `destination` **(optional)** is a prefix added to the artifact paths in the artifacts API. `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
 
 ## コア ファイルのアップロード
 {: #uploading-core-files }
@@ -136,18 +135,18 @@ jobs:
 
 ![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブにコア ダンプ ファイルへのリンクが表示されます。
+When CircleCI runs a job, a link to the core dump file appears in the **Artifacts** tab of the **Job** page.
 
 ## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
 
-`curl` を使ってアーティファクトをダウンロードするには、以下の手順で行います。
+To download your artifacts with `curl`, follow the steps below.
 
-1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
+1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token) and copy it to a clipboard.
 
-2. ターミナル ウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
+2. In a Terminal window, `cd` to a directory where you want to store the artifacts.
 
-3. 以下のコマンドを実行します。 `:` で始まる変数は、コマンドの下に掲載した表を参照して、実際の値に置き換えてください。
+3. 以下のコマンドを実行します。 Use the table beneath the commands to substitute actual values for all variables that start with `:`.
 
 ```bash
 # Set an environment variable for your API token.
@@ -179,8 +178,26 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 | `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
 {: class="table table-striped"}
 
+## Artifacts optimization
+{: #artifacts-optimization }
+
+Optimization options will be different for each project depending on what you are trying to accomplish. You can try the following actions to reduce network and storage usage:
+
+- Check if `store_artifacts` is uploading unnecessary files
+- Check for identical artifacts if you are using parallelism
+- Compress text artifacts at minimal cost
+- Filter out and upload only failing UI tests with images/videos
+- Filter out and upload only failures or successes
+- Upload artifacts to a single branch
+- Upload large artifacts to your own bucket at no cost
+
+Visit the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-optimize-your-storage-and-network-transfer-use) page for more information.
+
+You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
+
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
+- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching/)
+- [データの永続化]({{site.baseurl}}/2.0/persist-data/#using-artifacts)
