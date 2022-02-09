@@ -93,7 +93,7 @@ WARNING: 設定のカスタマイズにより悪影響を及ぼす可能性が�
 
 設定は、Services マシン上のファイルに環境変数をエキスポートすることで行われます。
 
-/etc/circeconfig/workflows-conductor というパスで作成されたファイル  「customizations」について考えてみましょう。
+/etc/circleconfig/workflows-conductor というパスで作成されたファイル  「customizations」について考えてみましょう。
 
 ```shell
 export FOO="bar"
