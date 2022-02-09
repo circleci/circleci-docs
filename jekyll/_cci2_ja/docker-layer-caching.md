@@ -47,17 +47,15 @@ jobs:
   build:
     docker:
       # DLC does nothing here, its caching depends on commonality of the image layers.
-      キャッシュの状況は、イメージ レイヤーにどれだけ共通点があるかに左右されます。
-      - image: circleci/node:9.8.0-stretch-browsers
+      - image: cimg/node:14.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      # ここでは、DLC はレイヤーを明示的にキャッシュし、リビルドを避けようとします。
-      - run: docker build .
+      # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
 
@@ -261,10 +259,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers
+      - image: cimg/node:14.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
