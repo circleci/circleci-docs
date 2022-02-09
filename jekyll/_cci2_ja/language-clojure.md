@@ -41,7 +41,7 @@ jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/cci-demo-clojure # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
+      - image: cimg/clojure:1.10 # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -103,7 +103,7 @@ jobs:
 version: 2
 ...
     docker:
-      - image: circleci/clojure:lein-2.9.1
+      - image: cimg/clojure:1.10
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
