@@ -42,3 +42,17 @@ PowerShell インターフェイスにインストール結果が出力されま
 . インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[ランナー設定リファレンス]参照） The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the launch agent starts automatically and begins looking for jobs to process.
+
+
+== Uninstall / Reinstall Steps
+
+Uninstalling CircleCI runner will prepare the system for installation again.
+
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+
+. 以下を PowerShell で実行します。
++
+```
+./Uninstall-CircleCIRunner.ps1
+```
