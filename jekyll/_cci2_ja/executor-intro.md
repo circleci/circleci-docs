@@ -69,18 +69,15 @@ jobs:
 
 ## macOS
 {: #macos }
-
-_The macOS executor is not currently available on self-hosted installations of CircleCI server_
-
 ```
 jobs:
-  build: # ジョブの名前
-    macos: # Executor タイプ
+  build: # name of your job
+    macos: # executor type
       xcode: 12.5.1
 
     steps:
-      # Xcode 11.3 がインストールされた
-      # macOS 仮想マシン環境で実行するコマンド
+      # Commands run in a macOS virtual machine environment
+      # with Xcode 12.5.1 installed
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
@@ -141,7 +138,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
