@@ -1,6 +1,6 @@
 ---
-layout: classic-docs
-title: "Node.js - JavaScript チュートリアル"
+layout: classic-docs-experimental
+title: "Configuring a Node.js Application on CircleCI"
 short-title: "JavaScript"
 description: "Building and Testing with JavaScript and Node.js on CircleCI"
 categories:
