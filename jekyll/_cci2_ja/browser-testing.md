@@ -197,15 +197,15 @@ VNC を使用して、テストを実行しているブラウザーを表示し�
 1. VNC ビューアをインストールします。 macOS を使用している場合は、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討してください。 [RealVNC](http://www.realvnc.com/download/viewer/) もほとんどのプラットフォームで使用できます。
 
 1. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
-```bash
+```shell
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
 1. `vnc4server` パッケージと `metacity` パッケージをインストールします。 `metacity` を使用して、ブラウザーを操作し、ターミナル ウィンドウに戻ります。
-```bash
+```shell
 sudo apt install vnc4server metacity
 ```
 1. CircleCIコンテナに接続後、VNCサーバーを起動します。
-```bash
+```shell
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
 1. SSH の接続はセキュリティ保護されているため、強力なパスワードは必要ありません。 しかし、パスワードが *1* つ必要なので、プロンプトに `password` を入力します。
@@ -215,15 +215,15 @@ ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 1. ターミナル ウィンドウが含まれるディスプレイが表示されます。 SSH トンネルを通して接続はセキュリティ保護されているため、安全ではない接続または暗号化されていない接続に関する警告は無視してください。
 
 1. VNC サーバーでウィンドウを開くために、`DISPLAY` 変数を設定します。 このコマンドを実行しないと、ウィンドウはデフォルトの (ヘッドレス) X サーバーで開きます。
-```bash
+```shell
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
 1. ` metacity ` をバックグラウンドで起動します。
-```bash
+```shell
 ubuntu@box159:~$ metacity &
 ```
 1. `firefox` をバックグラウンドで起動します。
-```bash
+```shell
 ubuntu@box159:~$ firefox &
 ```
 

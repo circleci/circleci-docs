@@ -262,13 +262,13 @@ ifndef::env-aws[]
 
 . If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
 +
-```bash
+```shell
 pip3 install certbot-dns-google
 ```
 
 . Then, the following commands will provision a certification for your installation:
 +
-```bash
+```shell
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 

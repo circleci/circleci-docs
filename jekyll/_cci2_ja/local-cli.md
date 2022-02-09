@@ -430,7 +430,7 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 
 これらは CLI の "サブコマンド" であり、以下のように実行されます。
 
-```bash
+```shell
 circleci context list
 
 # 以下が返されます

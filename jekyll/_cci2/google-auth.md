@@ -84,7 +84,7 @@ jobs:
 
 **Note:** If base64 encoding is required for your particular workflow, use the following command:
 
-```bash
+```shell
 cat <file> | base64 -w 0
 ```
 
@@ -112,6 +112,6 @@ jobs:
 **Note:**
 If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.
 
-```bash
+```shell
 sudo gcloud --quiet components update
 ```

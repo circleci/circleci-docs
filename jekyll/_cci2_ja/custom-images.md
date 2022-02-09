@@ -123,7 +123,7 @@ ENTRYPOINT contacts
 
 `Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
 
-```bash
+```shell
 $ docker build <path-to-dockerfile>
 ```
 

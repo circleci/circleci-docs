@@ -64,7 +64,7 @@ If you are configuring network security, please ensure you whitelist the followi
 
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 
-```bash
+```shell
 $ curl -o ./init-services.sh https://s3.amazonaws.com/circleci-enterprise/init-services-2.0.sh
 $ sudo bash init-services.sh
 ```
@@ -96,7 +96,7 @@ If you are configuring network security, please ensure you whitelist the followi
 
 To kick off the process, ssh into the builder machine and run the following:
 
-```bash
+```shell
 $ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-lxc-2016-12-05.sh
 $ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh
 $ sudo bash ./provision-builder.sh
@@ -135,7 +135,7 @@ Integrating with external object storage typically requires creating CircleCI sp
 
 If running outside AWS, you need to create an AWS User with S3 access.  You can create one with the following commands:
 
-```bash
+```shell
 $ aws iam create-user --user-name circleci-user
 $ curl -sSL -o circleci-iam-policy-s3-only.json https://enterprise-docs.circleci.com/assets/aws/circleci-iam-policy-s3-only.json
 $ # Inspect policy to verify it only accesses S3 and modify accordingly
@@ -196,7 +196,7 @@ If your network is setup differently, you can set the following environment vari
 
 We strongly recommend using second volumes, preferably backed by SSD disks, for running builds.  If your cloud installation doesn't support attaching second volumes - we can use loopback devices backed by sparse files:
 
-```bash
+```shell
 $ sudo truncate -s 80G /tmp/sparse-file.img
 $ sudo \
   SERVICES_PRIVATE_IP=<private ip address of services box> \

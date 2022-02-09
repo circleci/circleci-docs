@@ -299,7 +299,7 @@ steps:
 ```
 
 {:.tab.fileInclude.file-sh}
-```bash
+```shell
 # これは bash ファイルですが、テキストベースのファイルであれば何でも構いません
 echo "Hello World"
 

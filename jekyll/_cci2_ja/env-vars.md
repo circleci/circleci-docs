@@ -447,21 +447,21 @@ jobs:
 
 複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
 
-```bash
+```shell
 $ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 
 結果の値を CircleCI 環境変数に格納します。
 
-```bash
+```shell
 $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
 その変数を使用するコマンド内で変数をデコードします。
 
-```bash
+```shell
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```

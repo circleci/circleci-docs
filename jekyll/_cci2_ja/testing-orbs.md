@@ -97,7 +97,7 @@ steps:
 
 {:.tab.unitTest.greet-sh}
 
-```bash
+```shell
 # Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh
 
 Greet() {
@@ -114,7 +114,7 @@ fi
 ```
 
 {:.tab.unitTest.greet-bats}
-```bash
+```shell
 # Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
 # Runs prior to every test
@@ -152,7 +152,7 @@ BATS テストのインクルードは必須ではなく、必要に応じて設
 
 ShellCheck Orb の BATS テスト スイートの簡略版スニペットを次に示します。
 
-```bash
+```shell
 # example BATS test
 setup() {
     # Sourcing our bash script allows us to acces to functions defined within.

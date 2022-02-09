@@ -174,7 +174,7 @@ consider using a background step instead of an entrypoint.
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
-```bash
+```shell
 $ docker build <path-to-dockerfile>
 ```
 

@@ -42,7 +42,7 @@ Several AWS resources are required to build and deploy the application in this g
 4. Update `~/terraform_setup/terraform.tfvars` with real values for the AWS variables. For more details, see the [Configure CircleCI Environment Variables](#configure-circleci-environment-variables) section below.
 5. Create the AWS resources by running the following commands.
 
-```bash
+```shell
 cd terraform_setup
 terraform init
 terraform plan  # review the plan

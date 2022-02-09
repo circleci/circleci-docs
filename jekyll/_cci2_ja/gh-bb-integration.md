@@ -228,7 +228,7 @@ If you enable these restrictions on an organization for which CircleCI has been 
 In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
 1. [GitHub の説明](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)に従い、下記コマンドを実行しSSH 鍵ペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
-```bash
+```shell
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 

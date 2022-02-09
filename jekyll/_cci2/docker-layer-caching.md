@@ -116,7 +116,7 @@ Let's use the following Dockerfile to illustrate how Docker Layer Caching works.
 {: #dockerfile }
 {:.no_toc}
 
-```
+```dockerfile
 FROM elixir:1.11.4
 
 # make Apt non-interactive
@@ -234,7 +234,7 @@ On subsequent commits, if our example Dockerfile has not changed, then DLC will 
 
 Now, let's say we add the following step to our Dockerfile, in between the `# use unicode` and `# install docker` steps:
 
-```
+```dockerfile
 # Install jq
 RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" \
   && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \

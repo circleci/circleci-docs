@@ -73,8 +73,7 @@ jobs:
 
 The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
 
-<!-- markdownlint-disable MD046 -->
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   build:
@@ -97,12 +96,11 @@ jobs:
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push CircleCI-Public/circleci-demo-docker:$TAG
-{% endhighlight %}
-<!-- markdownlint-enable MD046 -->
+```
 
 **Note:** The [CircleCI convenience images](https://circleci.com/docs/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
-```
+```yml
       # Install via apk on alpine based images
       - run:
           name: Install Docker client
@@ -121,7 +119,7 @@ Let’s break down what’s happening during this build’s execution:
 
 To specify the Docker version, you can set it as a `version` attribute:
 
-```
+```yml
       - setup_remote_docker:
           version: 19.03.13
 ```
@@ -155,7 +153,7 @@ The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run 
 
 It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
-```
+```yml
 # ...
       - run:
           name: "Start Service and Check That it’s Running"
@@ -167,7 +165,7 @@ It is **not** possible to start a service in remote docker and ping it directly 
 
 A different way to do this is to use another container running in the same network as the target container:
 
-```
+```yml
 # ...
       - run: |
           docker run -d --name my-app my-app
@@ -181,7 +179,7 @@ A different way to do this is to use another container running in the same netwo
 
 It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
-```
+```yml
 - run: |
     # create a dummy container which will hold a volume with config
     docker create -v /cfg --name configs alpine:3.4 /bin/true
@@ -193,7 +191,7 @@ It is **not** possible to mount a volume from your job space into a container in
 
 In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
 
-```
+```yml
 - run: |
     # start container with the application
     # make sure you're not using `--rm` option otherwise the container will be killed after finish
@@ -206,7 +204,7 @@ In the same way, if your application produces some artifacts that need to be sto
 
 It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
 
-```
+```yml
 version: '2'
 services:
  bundler-cache:
@@ -223,7 +221,7 @@ services:
 Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
 
 {% raw %}
-``` yaml
+```yml
 # Populate bundler-data container from circleci cache
 - restore_cache:
     keys:
@@ -264,7 +262,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
 
 When a remote Docker environment is spun up, an SSH alias is created for you so you can SSH into the remote Docker virtual machine. This may be helpful for debugging your builds, or modifying the Docker or VM filesystem configuration. To SSH into the remote Docker VM, run the following within your project configuration job steps, or during a SSH rerun:
 
-```
+```shell
 ssh remote-docker
 ```
 

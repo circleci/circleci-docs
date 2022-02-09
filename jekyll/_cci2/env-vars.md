@@ -449,21 +449,21 @@ jobs:
 
 If you are having difficulty adding a multiline environment variable, use `base64` to encode it.
 
-```bash
+```shell
 $ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 
 Store the resulting value in a CircleCI environment variable.
 
-```bash
+```shell
 $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
 Decode the variable in any commands that use the variable.
 
-```bash
+```shell
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```
@@ -510,7 +510,7 @@ Aside from the usual constraints for environment variables there are no restrict
 
 For example, when you pass the parameters:
 
-```shell
+```json
 {
   "build_parameters": {
     "foo": "bar",
@@ -534,7 +534,7 @@ Build parameters are exported as environment variables inside each job's contain
 
 You might want to inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run. For example, a run with a deploy step to a staging environment that requires functional testing against different hosts. It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl` (though you may also use an HTTP library in your language of choice).
 
-```shell
+```json
 {
   "build_parameters": {
     "param1": "value1",

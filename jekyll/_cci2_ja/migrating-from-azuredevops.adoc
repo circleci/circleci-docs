@@ -75,7 +75,7 @@ Azure DevOps Pipelines と CircleCI の設定は異なります。 ビルドス�
 2+| 1つのビルドステップを実行するジョブの定義
 
 a|
-[source, ini]
+[source, yaml]
 ----
 jobs:
   - job: job1
@@ -98,7 +98,7 @@ jobs:
 2+| ジョブに使用する Docker イメージの指定
 
 a|
-[source, ini]
+[source, yaml]
 ----
 jobs:
   - job: job1
@@ -121,7 +121,7 @@ jobs:
 2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
 a|
-[source, ini]
+[source, yaml]
 ----
 stages:
   - stage: build
@@ -180,7 +180,7 @@ workflows:
 2+| マルチプラットフォームでのジョブの実行:  Azure DevOps では、プールと要求によりビルドランナーを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
 
 a|
-[source, ini]
+[source, yaml]
 ----
 jobs:
   - job: ubuntuJob

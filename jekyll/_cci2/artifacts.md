@@ -147,11 +147,11 @@ To download your artifacts with `curl`, follow the steps below.
 
 3. Run the commands below. Use the table beneath the commands to substitute actual values for all variables that start with `:`.
 
-```bash
+```shell
 # Set an environment variable for your API token.
 export CIRCLE_TOKEN=':your_token'
 
-# `curl` gets all artifact details for a build 
+# `curl` gets all artifact details for a build
 # then, the result is piped into `grep` to extract the URLs.
 # finally, `wget` is used to download the the artifacts to the current directory in your terminal.
 
@@ -162,7 +162,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
 
 Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
 
-```bash
+```shell
 curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts
 ```
 
@@ -174,7 +174,7 @@ Placeholder   | Meaning                                                         
 `:vcs-type`   | The version control system (VCS) you are using. Either `github` or `bitbucket`.
 `:username`   | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application.
 `:project`    | The name of the target VCS repository.
-`:build_num`  | The number of the job (aka. build) for which you want to download artifacts. 
+`:build_num`  | The number of the job (aka. build) for which you want to download artifacts.
 {: class="table table-striped"}
 
 ## Artifacts optimization

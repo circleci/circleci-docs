@@ -233,7 +233,7 @@ expanded source configuration alongside your original config (useful if you are 
 
 Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
-```
+```yml
 version: 2.1
 
 orbs:
@@ -250,7 +250,7 @@ Running `circleci config process .circleci/config.yml` will output the following
 (which is a mix of the expanded source and the original config commented out).
 
 {% raw %}
-```shell
+```yml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
@@ -440,7 +440,7 @@ the CLI, you can execute several context-oriented commands:
 
 The above list are "sub-commands" in the CLI, which would be executed like so:
 
-```bash
+```shell
 circleci context create
 
 # Returns the following:

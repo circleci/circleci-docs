@@ -28,7 +28,7 @@ CircleCI API を使用してジョブをトリガーする方法について説�
 
 `curl` を使用して `deploy_docker` ジョブをトリガーする例を以下に示します。
 
-```bash
+```shell
 curl -u ${CIRCLE_API_USER_TOKEN}: \
      -d build_parameters[CIRCLE_JOB]=deploy_docker \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>

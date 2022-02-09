@@ -81,7 +81,7 @@ version:
 * 使用していたライブラリのバージョンが変わる
 * apt パッケージがプリインストールされなくなる。 この場合は、次のコマンドでパッケージをインストールしてください。
 
-```bash
+```shell
 sudo apt-get update && sudo apt-get install -y <the-package>
 ```
 

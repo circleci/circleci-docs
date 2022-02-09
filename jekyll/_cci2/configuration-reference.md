@@ -744,7 +744,7 @@ Here `run` is a step type. The `name` attribute is used by the UI for display pu
 
 Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
 
-```
+```yml
 jobs:
   build:
     steps:
@@ -1853,7 +1853,7 @@ jobs:
 
 This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
-```shell
+```json
 {
     "parameters": {
         "run_integration_tests": true

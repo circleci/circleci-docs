@@ -32,7 +32,7 @@ On the Projects Dashboard, you can either:
 
 CircleCI believes in *configuration as code*. Your entire CI/CD process is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config. See the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for a basic introduction.
 
-```bash
+```shell
 ├── .circleci
 │   ├── config.yml
 ├── README
@@ -521,7 +521,7 @@ workflows:
 ## Data Persistence
 {: #data-persistence }
 
-Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts. 
+Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts.
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 

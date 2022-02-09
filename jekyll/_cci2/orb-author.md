@@ -51,11 +51,11 @@ The name of your repository is not critical, but we recommend something similar 
 <br>
 To initialize a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
 <!---->
-```bash
+```shell
 circleci orb init /path/to/myProject-orb
 ```
 To initialize a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
-```bash
+```shell
 circleci orb init /path/to/myProject-orb --private
 ```
 <!---->
@@ -100,7 +100,7 @@ circleci orb init /path/to/myProject-orb --private
 1. **Push the changes up to Github.**
 <br>
     During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com. Run the following command from a separate terminal when prompted to do so, substituting the name of your default branch:
-    ```bash
+    ```shell
     git push origin <default-branch>
     ```
     Once complete, return to your terminal and confirm the changes have been pushed.
@@ -303,7 +303,7 @@ Using the orb development kit and the `<<include(file)>>` syntax, you can import
 
 To keep your scripts portable and locally executable, it is best practice to expect a set of environment variables within your scripts and set them at the config level. The `greet.sh` file, which was included with the special `<<include(file)>>` syntax above in our `greet.yml` command file, looks like this:
 
-```bash
+```shell
 echo Hello "${PARAM_TO}"
 ```
 

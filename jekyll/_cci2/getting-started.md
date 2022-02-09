@@ -267,7 +267,7 @@ Using some of the following commands, see if you can find and view the contents
 of the file you created using workspaces:
 
 ```
-pwd                  #  print what directory, find out where you are in the file system
+pwd                  # print what directory, find out where you are in the file system
 ls -al               # list what files and directories are in the current directory
 cd <directory_name>  # change directory to the <directory_name> directory
 cat <file_name>      # show me the contents of the file <file_name>

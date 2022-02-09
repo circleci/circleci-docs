@@ -204,15 +204,15 @@ VNC allows you to view and interact with the browser that is running your tests.
 [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
 1. Open a Terminal window, [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
-```bash
+```shell
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
 1. Install the `vnc4server` and `metacity` packages. You can use `metacity` to move the browser around and return to your Terminal window.
-```bash
+```shell
 sudo apt install vnc4server metacity
 ```
 1. After connecting to the CircleCI container, start the VNC server.
-```bash
+```shell
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
 1. Since your connection is secured with SSH, there is no need for a strong password. However, you still need _a_ password, so enter `password` at the prompt.
@@ -222,15 +222,15 @@ ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 1. You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
 
 1. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
-```bash
+```shell
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
 1. Start `metacity` in the background.
-```bash
+```shell
 ubuntu@box159:~$ metacity &
 ```
 1. Start `firefox` in the background.
-```bash
+```shell
 ubuntu@box159:~$ firefox &
 ```
 

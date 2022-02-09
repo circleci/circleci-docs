@@ -130,7 +130,7 @@ Use Selenium to manage in-browser testing:
 ```yaml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -156,7 +156,7 @@ jobs:
 ```yaml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -209,10 +209,10 @@ For more information on browser testing, see the [Browser Testing]({{site.baseur
 Use a service container to run database testing:
 
 {:.tab.executors_four.Cloud}
-``` yaml
+```yml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -253,10 +253,10 @@ jobs:
 ```
 
 {:.tab.executors_four.Server_3}
-``` yaml
+```yml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -297,7 +297,7 @@ jobs:
 ```
 
 {:.tab.executors_four.Server_2}
-``` yaml
+```yml
 version: 2
 
 jobs:
@@ -345,7 +345,7 @@ For more information on configuring databases, see the [Configuring Databases]({
 Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
 
 {:.tab.executors_five.Cloud}
-``` yaml
+```yml
 version: 2.1
 
 jobs:
@@ -370,7 +370,7 @@ jobs:
 ```
 
 {:.tab.executors_five.Server_3}
-``` yaml
+```yml
 version: 2.1
 
 jobs:
@@ -395,7 +395,7 @@ jobs:
 ```
 
 {:.tab.executors_five.Server_2}
-``` yaml
+```yml
 version: 2
 
 jobs:

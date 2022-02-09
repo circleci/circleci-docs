@@ -88,7 +88,7 @@ jobs:
 
 サービスコンテナを使用して、データベースのテストを実行します。
 
-``` yaml
+```yml
 version: 2
 jobs:
   build:
@@ -116,7 +116,7 @@ jobs:
 
 Docker コマンドを実行して Docker イメージをビルドします。 プライマリ Executor が Docker の場合、リモートの Docker 環境をセットアップします。
 
-``` yaml
+```yml
 version: 2
 
 jobs:
