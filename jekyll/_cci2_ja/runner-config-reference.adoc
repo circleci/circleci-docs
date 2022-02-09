@@ -170,6 +170,12 @@ NOTE: デフォルトでは、非アクティブな状態によりタイムア�
 runner:
   idle_timeout: 1h
 ```
+=== runner.disable_auto_update
+`$DISABLE_AUTO_UPDATE`
+
+This parameter will disable launch-agent from attempting to automatically update itself, and stop making requests to CircleCI to check for new versions. This parameter is recommended to be set to `true` on server installations where version pinning is used.
+
+Note: Setting this parameter will require runner installations to be manually upgraded to receive new features, security updates, and bug fixes.
 
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
