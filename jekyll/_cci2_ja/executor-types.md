@@ -12,9 +12,7 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ 
-[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ 
-[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 以下のセクションに沿って、利用可能な Executor タイプ (`docker`、`machine`、`macos`、`windows`) について説明します。
 
@@ -277,14 +275,11 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 
 ## macOS を使用する
 {: #using-macos }
-
-_クラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。_
-
 `macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 In macOS, the following resources classes are available:
 
 | クラス                   | vCPU        | RAM   |
 | --------------------- | ----------- | ----- |
-| medium (デフォルト)        | 4 @ 2.7 GHz | 8 GB  |
+| medium                | 4 @ 2.7 GHz | 8 GB  |
 | macos.x86.medium.gen2 | 4 @ 3.2 GHz | 8 GB  |
 | large                 | 8 @ 2.7 GHz | 16 GB |
 {: class="table table-striped"}
@@ -378,7 +373,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-CircleCI Server では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
+CircleCI Server では、VM サービスを構成することで GPU 対応の machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
 
 ## 関連項目
 {: #see-also }
