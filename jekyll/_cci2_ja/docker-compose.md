@@ -99,9 +99,7 @@ Docker Compose を使用して Docker Compose ファイルを含むマルチコ�
 ## 制限事項
 {: #limitations }
 
-`docker-compose` と `macos` Executor を組み合わせての使用はサポートしていません。 サポートに関する詳細は
-
-を参照してください。</p> 
+`docker-compose` と `macos` Executor を組み合わせての使用はサポートしていません。 詳細は<a href="https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-">サポート記事</a>を参照してください。
 
 
 
