@@ -576,7 +576,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:2.5.1-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
@@ -610,7 +610,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:2.5.1-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
@@ -634,10 +634,10 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:2.5.1-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   my-job:
