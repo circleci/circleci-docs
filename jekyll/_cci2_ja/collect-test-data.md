@@ -167,7 +167,7 @@ jobs:
             CC_TEST_REPORTER_ID: code_climate_id_here
             NODE_ENV: development
         docker:
-            - image: circleci/node:14
+            - image: cimg/node:16.10
               auth:
                 username: mydockerhub-user
                 password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -176,7 +176,7 @@ jobs:
             - image: mongo:4.0
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGO_INITDB_ROOT_USERNAME: admin
                 MONGO_INITDB_ROOT_PASSWORD: password
@@ -184,16 +184,16 @@ jobs:
         steps:
             - checkout
 
-            # npm を更新します。
+            # Update npm
             - run:
                 name: update-npm
                 command: 'sudo npm install -g npm@latest'
 
-            # 依存関係をダウンロードしてキャッシュします。
+            # Download and cache dependencies
             - restore_cache:
                 keys:
                     - v1-dependencies-{{ checksum "package-lock.json" }}
-                    # 完全一致がない場合、最新のキャッシュを使うようにフォールバックします。
+                    # fallback to using the latest cache if no exact match is found
                     - v1-dependencies-
 
             - run: npm install
@@ -207,25 +207,25 @@ jobs:
 
             - run: mkdir reports
 
-            # Mocha を実行します。
+            # Run mocha
             - run:
-                name: npm テスト
+                name: npm test
                 command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
                 when: always
 
-            # ESLint を実行します。
+            # Run eslint
             - run:
-                name: ESLint
+                name: eslint
                 command: |
                     ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
                 when: always
 
-            # Code Climate のカバレッジ レポートを実行します。
+            # Run coverage report for Code Climate
 
             - run:
-                name: Code Climate のテストレポーターのセットアップ
+                name: Setup Code Climate test-reporter
                 command: |
-                    # 静的バイナリとしてテストレポーターをダウンロードします。
+                    # download test reporter as a static binary
                     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
                     chmod +x ./cc-test-reporter
                     ./cc-test-reporter before-build
@@ -235,13 +235,13 @@ jobs:
                 name: code-coverage
                 command: |
                     mkdir coverage
-                    # nyc レポートが nyc が既に実行されていることを要求します。
-                    # それにより必要なデータを含む .nyc_output フォルダが作成されます。
+                    # nyc report requires that nyc has already been run,
+                    # which creates the .nyc_output folder containing necessary data
                     ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
                     ./cc-test-reporter after-build -t lcov
                 when: always
 
-            # 結果をアップロードします。
+            # Upload results
 
             - store_test_results:
                 path: reports
@@ -255,7 +255,6 @@ jobs:
             - store_artifacts: # upload test coverage as artifact
                 path: ./coverage/lcov.info
                 prefix: tests
-
 ```
 {% endraw %}
 
@@ -632,6 +631,4 @@ Clojure のテスト出力を XML 形式に変換するには、[test2junit](htt
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
-{:.no_toc} 
-
-<iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc} <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
