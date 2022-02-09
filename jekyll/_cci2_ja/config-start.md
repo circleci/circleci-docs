@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "設定"
+title: "設定ファイル入門ガイド"
 description: "CircleCI におけるコア体験は、config.yml ファイルを使用した決定論的なビルドの作成です。 circleci/config.yml 入門動画をご覧ください。"
 version:
   - Cloud

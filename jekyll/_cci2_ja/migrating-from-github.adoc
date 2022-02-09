@@ -115,7 +115,7 @@ runs-on: ubuntu-latest # or windows, etc.
 
 # コンテナでステップを実行する場合は、
 container:
-  image: openjdk:11.0-jdk
+  image: openjdk:17.0-jdk
 ----
 
 a|
@@ -123,7 +123,7 @@ a|
 ----
 # Docker (container) Executor
 docker:
-  - image: circleci/openjdk:11.0-jdk
+  - image: cimg/openjdk:17.0
     auth:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -152,7 +152,7 @@ jobs:
 
     # メインのコンテナです。
     container:
-      image: openjdk:11.0-jdk
+      image: openjdk:17.0-jdk
 
     # 依存関係のサービスです。
     services:
@@ -170,17 +170,17 @@ a|
 jobs:
   build:
     docker:
-      # プライマリ Executor です。
-      - image: circleci/openjdk:11.0-jdk
+      # Primary Executor
+      - image: cimg/openjdk:17.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      # 依存関係のサービスです。
+      # Dependency Service(s)
       - image: postgres:10.8
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres

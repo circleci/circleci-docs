@@ -28,11 +28,11 @@ suggested:
 
 スケジュール実行はパイプラインに基づいているため、パイプラインのスケジュール実行にはパイプラインの使用における下記の機能がすべて備わっています。
 
-- パイプラインに関連付けるユーザーの管理。これにより、[ 制限付きコンテキスト]({{site.baseurl}}/2.0/contexts/#restricting-a-context)の使用が可能になります。
-- セットアップ ワークフロー経由[のダイナミックコンフィグ]({{site.baseurl}}/2.0/dynamic-config/)の使用。
+- パイプラインに関連付けるユーザーの管理。これにより、[ 制限付きコンテキスト]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)の使用が可能になります。
+- セットアップ ワークフロー経由[のダイナミックコンフィグ]({{site.baseurl}}/ja/2.0/dynamic-config/)の使用。
 - `.circleci/config.yml` の編集が不要なスケジュール変更。
-- [自動キャンセル機能]({{site.baseurl}}/2.0/skip-build/#auto-cancelling)の利用。
-- スケジュールに関連付ける[パイプライン パラメーター]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)の指定。
+- [自動キャンセル機能]({{site.baseurl}}/ja/2.0/skip-build/#auto-cancelling)の利用。
+- スケジュールに関連付ける[パイプライン パラメーター]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-parameters-in-configuration)の指定。
 - ワークフロー間などで共通するスケジュールの管理。
 
 パイプラインのスケジュール実行は、API を使って、または CircleCI アプリケーションのプロジェクト設定から設定します。
@@ -49,9 +49,9 @@ suggested:
 {: #api }
 {:.no_toc}
 
-プロジェクトにスケジュール実行化したワークフローがなく、パプラインのスケジュール実行を試してみたい場合：
+プロジェクトにスケジュール実行化したワークフローがなく、パイプラインのスケジュール実行を試してみたい場合：
 
-1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/2.0/managing-api-tokens/)に沿って新しいトークンを作成します。
+1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/ja/2.0/managing-api-tokens/)に沿って新しいトークンを作成します。
 2. API を使って新しいスケジュールを作成します。 例えば下記のようにします。
 
 ```shell

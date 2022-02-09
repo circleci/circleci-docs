@@ -159,7 +159,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 以下は、[marcospgp](https://github.com/marcospgp) から提供された、Mocha と nyc の組み合わせに使用できるサンプルの全文です。
 
 {% raw %}
-```
+```yaml
 version: 2
 jobs:
     build:

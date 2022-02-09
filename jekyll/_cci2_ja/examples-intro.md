@@ -27,7 +27,7 @@ jobs:
     working_directory: ~/mern-starter
     # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: cimg/node:17.3.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -79,7 +79,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: cimg/android:2021.10.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

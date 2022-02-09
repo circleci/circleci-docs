@@ -104,13 +104,13 @@ version: 2.1
 
 jobs: # 実行時の基本的な作業単位を定義
   build:
-    docker: #  Docker Executor を使用
+    docker: # Docker executor を使用
       # CircleCI の Node.js イメージはこちらで確認できます: https://hub.docker.com/r/circleci/node/
-      - image: circleci/node:10.0-browsers
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキストまたはプロジェクトの画面で設定した環境変数を参照
-    steps: # `build` ジョブを構成するステップを定義
+    steps: # # `build` ジョブを構成するステップを定義
       - checkout # 作業用ディレクトリにソースコードをチェックアウト
       # 環境変数をセットアップするステップを実行
       # MY_ENV_VAR を $BASH_ENV にリダイレクト
@@ -184,8 +184,7 @@ jobs:
         type: string
         default: my_repo
     docker:
-
-      - image: circleci/go:1.15.0
+      - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
@@ -195,7 +194,6 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-
       - build:
           org_name: my_organization
           repo_name: project1
@@ -338,18 +336,16 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-
       - build:
           context: my_context_name # MY_ENV_VAR という名前の環境変数を持つ
 
 jobs:
   build:
     docker:
-
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       - checkout
       - run:
@@ -377,14 +373,12 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-
       - build
 
 jobs:
   build:
     docker:
-
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照

@@ -21,19 +21,19 @@ image::server-install-flow-chart-phase2.png[Flow chart showing the installation 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
-CircleCI Server v3.x は、https://www.replicated.com/[[Replicated]] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
+CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] to manage and distribute server v3.x. KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
 To install the latest version, you can run `curl  https://kots.io/install {vbar} bash`.
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
-次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。
+Ensure you are running the minimum KOTS version ({kotsversion}) by running the command:
 
 ```
 kubectl kots version
 ```
 
-NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホスト マシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
+NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 If running on Windows inside WSL2, the port is not available on the host machine. この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-From the terminal run (if you are installing behind a proxy see <<Installing behind HTTP Proxy>>):
+From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 
 ```shell
 kubectl kots install circleci-server
@@ -44,13 +44,13 @@ kubectl kots install circleci-server
 * デプロイ先の名前空間
 * KOTS 管理者コンソールのパスワード
 
-When complete, you should be provided with a URL to access the KOTS admin console, usually, `\http://localhost:8800`.
+When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
 
 NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
-NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
+NOTE: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-=== HTTP プロキシ経由でのインストール
+=== Installing behind an HTTP Proxy
 
 プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細はhttps://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
 
@@ -69,7 +69,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 .フロントエンドの設定
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
-以下のフィールドに入力します。 プライベート キーと証明書を指定するか、 [ Let's Encrypt (暗号化を許可) ] チェックボックスをオンにして、自動的に証明書を要求および管理します。 この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
+以下のフィールドに入力します。 You can either supply a private key and certificate, or check the box to allow Let's Encrypt to automatically request and manage certificates for you. この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
 
 NOTE: プライベート ロードバランサーの使用オプションを選択した場合、 [ Let's Encrypt (暗号化を許可) ] オプションは機能せず、使用できなくなります。
 
@@ -83,13 +83,13 @@ NOTE: プライベート ロードバランサーの使用オプションを選�
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
-* *[Frontend TLS Certificate (フロントエンド TLS 証明書)] (必須)*: 前提条件のステップで作成した証明書です。 この値は以下のコマンドで取得できます。
+* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. この値は以下のコマンドで取得できます。
 +
 ```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-* *[Private Load Balancer (プライベートロードバランサー)] (オプション)*:  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
+* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
 
 ==== アーティファクトと暗号化署名の設定
 暗号化キーとアーティファクト署名キーは、前提条件のステップで作成しました。 そのキーをここで入力します。
@@ -101,7 +101,7 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 * *暗号化署名キー (必須)*
 
 ==== Github の設定
-前提条件のステップで作成した Github OAuth アプリケーションのデータを使って以下を入力します。
+You created your Github OAuth application in the prerequisite phase. Use the data to complete the following:
 
 * *[Github Type (Github の種類)] (必須) * -
 Cloud または Enterprise (オンプレミス)を選択します。
@@ -114,40 +114,52 @@ Github が提供する OAuth クライアント シークレットです。
 
 ==== オブジェクトストレージの設定
 
-前提条件のステップで作成したオブジェクト ストレージ バケットとキーのデータを使って以下を入力します。
+You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
 ===== S3 互換
 前提条件のステップで、S3 互換バケットとオプションで IAM アカウントの作成が完了している必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
-* *[Access Key ID (アクセス キー ID) (必須)]*: S3 バケットへのアクセス用のアクセス キー ID を指定します。
-
-* *[Secret Key (シークレット キー)] (必須)*: S3 バケットへのアクセス用のシークレット キーを指定します。
-
 * *[AWS S3 Region (AWS S3 リージョン)] (オプション)* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 このオプションを設定すると、[S3 Endpoint (S3 エンドポイント)] は無視されます。
 
 * *[S3 Endpoint (S3 エンドポイント)]* (オプション): S3 ストレージ プロバイダーの API エンドポイントを指定します。 プロバイダーが AWS ではない場合は必須です。 このオプションを設定すると、AWS S3 リージョンは無視されます。
 
-* *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+* *Storage Object Expiry (required)* -
+Number of days to retain your test results and artifacts. 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+
+====== 認証
+One of the following is required. Either select IAM keys and provide:
+
+* *[Access Key ID (アクセス キー ID) (必須)]*: S3 バケットへのアクセス用のアクセス キー ID を指定します。
+
+* *[Secret Key (シークレット キー)] (必須)*: S3 バケットへのアクセス用のシークレット キーを指定します。
+
+Or select IAM role and provide:
+
+* *Role ARN* -
+https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
 ===== Google Cloud Storage
 前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
-* *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービスアカウント キーです。
+* *Storage Object Expiry (required)* -
+Number of days to retain your test results and artifacts. 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
-* *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+====== 認証
+
+* *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービスアカウント キーです。
 
 ==== Postgres、MongoDB、Vault の設定
 
 既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
 
-=== Save and deploy
+=== 保存とデプロイ
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Traefik ロードバランサー用のIPアドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
 
-NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 しかし、ご心配ありません。 これらのフィールドについては次の段階で再度説明します。
+NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 これらのフィールドについては次の段階で再度説明します。
 
 === Create DNS entry
 DNS エントリを作成します (例: `circleci.your.domain.com`、 `app.circleci.your.domain.com`)。 この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
@@ -169,7 +181,7 @@ NOTE: The Traefik load balancer has a healthcheck that serves a JSON payload at 
 
 === バリデーション
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (実行中および準備完了状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 Now we will move on to build services. すべてのサービスが立ち上がるまで時間がかかることがあります。 You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>

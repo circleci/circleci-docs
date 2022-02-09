@@ -119,7 +119,10 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: cimg/ruby:3.0-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "Hello World"
@@ -137,7 +140,7 @@ circleci config validate
 circleci config validate --help
 ```
 
-### Testing a job before pushing to a VCS
+### VCS にプッシュする前にジョブをテストする
 {: #testing-a-job-before-pushing-to-a-vcs }
 
 CircleCI CLI では、コマンド ラインからジョブをローカルでテストできます。 VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
@@ -163,7 +166,7 @@ Hello World
 Success!
 ```
 
-### Connect your repo to CircleCI
+### リポジトリを CircleCI に接続する
 {: #connect-your-repo-to-circleci }
 
 このステップでは、ターミナルを離れる必要があります。 [[Add Projects (プロジェクトの追加)] ページ](https://app.circleci.com/projects/project-dashboard/github/circleci/)にアクセスします。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。

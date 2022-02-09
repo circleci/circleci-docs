@@ -110,13 +110,17 @@ jobs:
 
 {% highlight yaml %}
 version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
 jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
-      - image: circleci/node:14-browsers
+      - image: cimg/node:17.2-browsers
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: The First Step
           command: |
@@ -127,7 +131,6 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-    
       - run:
           name: Running in a Unique Container
           command: |
@@ -143,14 +146,14 @@ jobs:
 設定ファイルに加えた上記の 2 つの変更は、作業をどのように実行するかに大きな影響を与えます。  実行環境をアップグレード、実験、または調整するために特別なコードやアクロバティックな操作は必要なく、Docker コンテナをジョブに関連付けてから、コンテナでジョブを動的に実行するだけです。  小さな変更を行うだけで、Mongo 環境を劇的にアップグレードしたり、基本イメージを拡大・縮小したり、さらには言語を変更することもできます。
 
 - 行 4: yml のインライン コメントです。  どのようなコード単位でも同じですが、設定ファイルが複雑になるほど、コメントの利便性が高くなります。
-- 行 5、6: ジョブに使用する Docker イメージを示します。  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/2.0/circleci-images/)を使用します。
+- 行 5、6: ジョブに使用する Docker イメージを示します。  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用します。
 - 行 19 ～ 22: コンテナで使用できるノードのバージョンを返す run ステップを追加します。 CircleCI のビルド済みのコンビニエンス イメージにある別のコンテナや、Docker Hub のパブリック コンテナなどを使用して、いろいろ試してみてください。
 
 ## パート 4: 開始の承認
 {: #part-four-approved-to-start }
-ここまでは問題ありませんね。  少し時間を取って、オーケストレーションについてご説明しましょう。  この例では、1 つずつの変更ではなく、分析に時間をかけます。 CircleCI のワークフロー モデルは、先行ジョブのオーケストレーションに基づいています。  ワークフローの定義に使用される予約語が `requires` であるのはこのためです。  ジョブの開始は、常に、先行するジョブが正常に完了することで定義されます。  たとえば、[A, B, C] のようなジョブ ベクトルは、ジョブ B およびジョブ C がそれぞれ先行するジョブを必要とすることで実装されます。  ジョブ A は直ちに開始されるため、requires ブロックを持ちません。 たとえば、ジョブ A は直ちに開始されますが、B には A が必要であり、C には B が必要です。
+ここまでは問題ないですね。  では少し時間を取って、オーケストレーションについて学びましょう。  この例では、1つずつの変更ではなく、分析に時間をかけます。 CircleCI のワークフローモデルは、先行ジョブのオーケストレーションに基づいています。  ワークフローの定義に使用される予約語が `requires` であるのはこのためです。  ジョブの開始は、常に、先行するジョブが正常に完了することで定義されます。  たとえば、[A, B, C] のようなジョブベクトルは、ジョブ B およびジョブ C がそれぞが先行するジョブを必要とすることで実装されます。  ジョブ A は直ちに開始されるため、requires ブロックを持ちません。 たとえば、ジョブ A は直ちに開始されますが、B には A が必要であり、C には B が必要です。
 
-以下の例では、ビルドをトリガーするイベントは、`Hello-World` を直ちに開始します。  残りのジョブは待機します。  `Hello-World` が完了すると、`I-Have-Code` と `Run-With-Node` の両方が開始します。  `I-Have-Code` と `Run-With-Node` はいずれも、開始前に `Hello-World` が正常に完了することが求められているためです。  次に、`I-Have-Code` と `Run-With-Node` の両方が完了すると、`Hold-For-Approval` という承認ジョブが利用可能になります。  `Hold-For-Approval` ジョブは、他のジョブとは少し異なります。  このジョブは、ワークフローの続行を許可するための手動操作を示しています。  ユーザーが (CircleCI UI または API から) ジョブを承認するまでワークフローが待機している間、すべての状態は、元のトリガー イベントに基づいて維持されます。  承認ジョブは早めに完了することが推奨されますが、実際には数時間、長いときは数日かかってしまう場合もあります。 手動操作によって `Hold-For-Approval` が完了すると、最後のジョブ `Now-Complete` が実行されます。
+以下の例では、ビルドをトリガーするイベントは、`Hello-World` を直ちに開始します。  残りのジョブは待機します。  `Hello-World` が完了すると、`I-Have-Code` と `Run-With-Node` の両方が開始します。  `I-Have-Code` と `Run-With-Node` はいずれも、開始前に `Hello-World` が正常に完了することが求められているためです。  次に、`I-Have-Code` と `Run-With-Node` の両方が完了すると、`Hold-For-Approval` という承認ジョブが利用可能になります。  `Hold-For-Approval` ジョブは、他のジョブとは少し異なります。  このジョブは、ワークフローの続行を許可するための手動操作を示しています。  ユーザーが (CircleCI UI または API から) ジョブを承認するまでワークフローが待機している間、すべての状態は、元のトリガーイベントに基づいて維持されます。  承認ジョブは早めに完了することが推奨されますが、実際には数時間、長いときは数日かかってしまう場合もあるでしょう。 手動操作によって `Hold-For-Approval` が完了すると、最後のジョブ `Now-Complete` が実行されます。
 
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
@@ -179,7 +182,7 @@ jobs:
             echo '^^^That should look familiar^^^'
   Run-With-Node:
     docker:
-      - image: circleci/node:14-browsers
+      - image: cimg/node:17.2
     steps:
       - run:
           name: Running In A Container With Node
@@ -195,29 +198,24 @@ jobs:
             echo 'Do work once the approval has completed'
 
 workflows:
- version: 2
  Example_Workflow:
    jobs:
      - Hello-World
      - I-Have-Code:
          requires:
-    
            - Hello-World
      - Run-With-Node:
          requires:
-    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
-    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
-    
            - Hold-For-Approval
-
+           
 {% endhighlight %}
 
 ### 学習ポイント
