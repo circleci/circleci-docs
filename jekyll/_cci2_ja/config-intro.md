@@ -33,17 +33,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 5. 以下の内容を `config.yml` ファイルに追加します。
 
 {% highlight yaml %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
 {% endhighlight %}
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -72,18 +62,8 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 
 
 {% highlight yaml %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - checkout
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+
       - run:
           name: Code Has Arrived
           command: |
@@ -111,26 +91,14 @@ jobs:
 {% highlight yaml %}
 version: 2.1
 
-orbs:
-  browser-tools: circleci/browser-tools@1.1.0
-jobs:
-  build:
-    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
-    docker:
-      - image: cimg/node:17.2-browsers
-    steps:
-      - checkout
-      - browser-tools/install-browser-tools
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built images: https://circleci.com/docs/2.0/circleci-images/ docker: - image: cimg/node:17.2-browsers steps: - checkout - browser-tools/install-browser-tools - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+
       - run:
           name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
+    
       - run:
           name: Running in a Unique Container
           command: |
@@ -159,63 +127,30 @@ jobs:
 
 
 {% highlight yaml %}
-version: 2.1
-jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Hello World
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-  I-Have-Code:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - checkout
-      - run:
-          name: Code Has Arrived
-          command: |
-            ls -al
-            echo '^^^That should look familiar^^^'
-  Run-With-Node:
-    docker:
-      - image: cimg/node:17.2
-    steps:
-      - run:
-          name: Running In A Container With Node
-          command: |
-            node -v
-  Now-Complete:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Approval Complete
-          command: |
-            echo 'Do work once the approval has completed'
+version: 2.1 jobs: Hello-World: docker: - image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline' I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: cimg/node:17.2 steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
 
-workflows:
- Example_Workflow:
-   jobs:
+workflows: Example_Workflow: jobs:
+
      - Hello-World
      - I-Have-Code:
          requires:
+    
            - Hello-World
      - Run-With-Node:
          requires:
+    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
+    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
+    
            - Hold-For-Approval
-           
+
 {% endhighlight %}
 
 ### 学習ポイント
