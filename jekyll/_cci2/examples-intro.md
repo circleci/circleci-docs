@@ -60,6 +60,24 @@ jobs:
 
 To use the machine executor with the default machine image, set the machine key to true in `.circleci/config.yml`:
 
+{:.tab.machineblock.Cloud}
+```yaml
+version: 2
+jobs:
+  build:
+    machine:
+      image: ubuntu-2004:202201-01
+```
+
+{:.tab.machineblock.Server_3}
+```yaml
+version: 2
+jobs:
+  build:
+    machine: true
+```
+
+{:.tab.machineblock.Server_2}
 ```yaml
 version: 2
 jobs:
