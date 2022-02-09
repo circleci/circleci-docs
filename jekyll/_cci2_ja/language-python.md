@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs-experimental
 title: "CircleCI での Python アプリケーションの構成"
 short-title: "Python"
 description: "CircleCI 上での Python による継続的インテグレーション"
