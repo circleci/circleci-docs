@@ -58,6 +58,7 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - context.delete
 - context.env_var.delete
 - context.env_var.store
+- context.secrets.accessed
 - project.env_var.create
 - project.env_var.delete
 - project.settings.update
