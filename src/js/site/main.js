@@ -1,4 +1,6 @@
 import { createPopper } from '@popperjs/core';
+import Prism from 'prismjs';
+
 import { highlightURLHash } from './highlightURLHash';
 
 const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
@@ -236,6 +238,9 @@ function renderTabbedHtml() {
       '.tab.' + e.target.className.split(' ').slice(2, 4).join('.');
     $(tabsToHide).not('.realtab').hide();
     $(tabToShow).not('.realtab').show();
+
+    // ask prism to process new code snippets
+    Prism.highlightAll();
   });
 
   $('.tabGroup').each(function () {
