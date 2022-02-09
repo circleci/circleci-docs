@@ -14,17 +14,17 @@ CircleCI Server v3.x のポストインストール ステップを開始する�
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
-.Installation Experience Flow Chart Phase 4
+.インストール 手順（フローチャートのフェーズ 4）
 image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
 
 toc::[]
 
 == ステップ 4: ポストインストール
 
-=== Set up backup and restore
+=== バックアップとリストアの設定
 
-Backups of CircleCI server can be created quite easily through https://kots.io/[KOTS].
-However, to enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
+CircleCI Server のバックアップは、https://kots.io/[KOTS]を介して簡単に作成できます。
+ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
 
 ////
 
@@ -33,7 +33,7 @@ However, to enable backup support, you will need to install and configure https:
 ////
 === AWS での CircleCI Server 3.x のバックアップ
 
-The following steps will assume AWS as your provider.
+次の手順では、プロバイダーを AWS と想定しています。
 
 これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら]の Velero ドキュメントを元にしています。
 
@@ -50,7 +50,7 @@ aws s3api create-bucket \
 ----
 NOTE: `us-east-1` では、https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[[LocationConstraint]] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
-==== Step 2 - Set up permissions for Velero
+==== 手順 2 - Velero の権限の設定
 
 * IAM ユーザーを作成します。
 
@@ -150,7 +150,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 * 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -165,7 +165,7 @@ velero install \
     --wait
 ----
 
-* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You should have a Velero deployment and a restic daemonset, for example:
+* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -192,7 +192,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[[こちら]]の Velero GCP プラグインのドキュメントを元にしています。
 
 ==== 手順 1 - GCP バケットの作成
-To reduce the risk of typos, we will set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. たとえば、以下の手順では、バケット名に対応する変数を定義しています。 Replace
+タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定しています。 すべての手順を 1 つのセッションで完了できず、再開する場合は、必要に応じて変数を再設定するようにしてください。 たとえば、以下の手順では、バケット名に対応する変数を定義しています。 Replace
 the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
 
 [source,bash]
@@ -227,9 +227,9 @@ PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
-NOTE: If you run several clusters with Velero, you might want to consider using a more specific name for the Service Account besides `velero`, as suggested above.
+NOTE: Velero がインストールされたクラスタを複数実行している場合は、サービス アカウントに対して、ここで示している `velero` ではなく具体的な名前を付けることをお勧めします。
 
-. You can check if the service account has been created successfully by running the following command:
+. 以下のコマンドを実行して、サービス アカウントが正常に作成されたことを確認します。
 +
 [source,bash]
 ----
@@ -273,7 +273,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 ----
 
-Now you need to ensure that Velero can use this Service Account.
+次に、Velero でこのサービス アカウントを使用できるようにする必要があります。
 
 [discrete]
 ===== オプション 1: JSON キー ファイル
@@ -284,7 +284,7 @@ Now you need to ensure that Velero can use this Service Account.
 gcloud iam service-accounts keys create credentials-velero \
     --iam-account $SERVICE_ACCOUNT_EMAIL
 ----
-After running this command, you should have a file named `credentials-velero` in your local working directory.
+このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
 
 [discrete]
 ===== オプション 2: Workload Identity
@@ -295,7 +295,7 @@ After running this command, you should have a file named `credentials-velero` in
 
 * サービス アカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
 
 [discrete]
 ===== JSON キー ファイルを使用する場合
@@ -329,7 +329,7 @@ velero install \
 
 システムをカスタマイズする他のオプションについては、https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[[Velero のドキュメント]]を参照してください。
 
-* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You should have a Velero deployment and a restic daemonset, for example:
+* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -372,14 +372,14 @@ mc alias set $ALIAS <YOUR_MINIO_ENDPOINT> <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO
 
 ==== 手順 2 - バケットの作成
 
-バックアップ用のバケットを作成します。 It is important that a new bucket is used, as Velero cannot use a preexisting bucket that contains other content.
+バックアップ用のバケットを作成します。 Velero では、他のコンテンツが含まれた既存のバケットを使用できないので、新しいバケットを使用する必要があります。
 
 [source, bash]
 ----
 mc mb ${ALIAS}/<YOUR_BUCKET>
 ----
 
-==== Step 3 - Create a user and policy
+==== 手順 3 - ユーザーとポリシーの作成
 
 次に、Velero がバケットにアクセスするためのユーザーとポリシーを作成します。
 
@@ -428,7 +428,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -442,8 +442,7 @@ velero install --provider aws \
   --wait
 ----
 
-Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You
-should have a Velero deployment and a restic daemonset, for example:
+Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -465,7 +464,7 @@ image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 
 このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[トラブルシューティングに関するセクション]を参照してください。
 
-==== Option 1 - Create a backup with Kots CLI
+==== オプション 1 - KOTS CLI を使用したバックアップ作成
 
 バックアップを作成するには、以下のコマンドを実行します。
 
@@ -474,13 +473,13 @@ image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 kubectl kots backup --namespace <your namespace>
 ----
 
-==== Option 2 - Create a backup with KOTS Admin Console
+==== オプション 2 - KOTS 管理者コンソールを使用したバックアップ作成
 
 ナビゲーション バーの *[Snapshots (スナップショット)]* を選択します。 デフォルトでは *[Full Snapshots (フル スナップショット)]* が選択されています。 これが推奨オプションです。
 
 image::kots-admin-full-snapshot.png[Kots Navbar]
 
-Click the *Start a snapshot* button.
+*[Start a snapshot (スナップショットの開始)]* ボタンをクリックします。
 
 image::kots-admin-create-backup.png[Kots Create Snapshot]
 
@@ -491,14 +490,14 @@ CircleCI Server システムには、固有のローカル Orb レジストリ�
 このレジストリは、CircleCI Server からのみアクセスできます。 設定ファイルで参照している Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 プロジェクト設定ファイルで参照された Orb はすべて、この _CircleCI Server_ の Orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 それには以下が含まれます。 
 
 * パブリック レジストリからの Orb のコピー 
-* Updating orbs that may have been copied before 
-* Registering your company's private orbs, if you have any
+* 以前コピーした Orb の更新 
+* 会社のプライベート Orb の登録 (存在する場合)
 
 詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[Orb on Server ガイド]を参照してください。
 
 === [Email Notifications (メール通知)] 
 
-Build notifications are sent by email. KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+ビルドの通知はメールで送信されます。 KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
 
 * *[Email Submission server hostname (メール送信サーバーのホスト名)] (必須)*: 送信サーバーのホスト名を指定します (例えば SendGrid の場合は smtp.sendgrid.net を使用)。
 
@@ -511,11 +510,11 @@ Build notifications are sent by email. KOTS の管理コンソールにアクセ
 NOTE: ポート 25 のアウトバウンド接続は、ほとんどのクラウド プロバイダーでブロックされます。 このポートを選択すると、通知の送信に失敗する可能性があります。
 Enable StartTLS を有効にすると、メール送信が暗号化されます。 
 
-* *Email from address (required)* - The _from_ address for the email.  
+* *[Email from address (メールの送信元アドレス)] (必須)*: メールの_送信元_アドレスを指定します。  
 
 NOTE: デフォルトでは StartTLS がメールの暗号化に使用されますが、これを無効にするのは、他にトラフィックの機密性を保証できる場合のみにしてください。
 
-Click the *Save config* button to update your installation and redeploy server.
+*[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
 ifndef::pdf[]
 ## 次に読む
