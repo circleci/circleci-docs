@@ -370,15 +370,6 @@ en:
           - 
           - 
       - 
-        link: 2.0/install-overview/
-        children:
-          - 
-            name: What's New in v2.38
-          - 
-            name: v2.38.3 Installation Guide
-          - 
-            name: v2.38.3 Operations Guide
-      - 
         name: Server v3.1.x PDFs
         link: 2.0/install-overview/
         children:
