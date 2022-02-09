@@ -34,7 +34,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -49,7 +49,7 @@ jobs:
 - イメージは Docker イメージです。 上記の例では、CircleCI によって提供される Debian Stretch 上の Python 3.6.2 を含み、テストをサポートするためにブラウザーがインストールされています。
 - 必須の `checkout` ステップで始まり、その後 `run:` キーが続く steps。 プライマリ コンテナ上でコマンドが順次実行されます。
 
-## Service containers
+## サービス コンテナ
 {: #service-containers }
 
 ジョブでデータベースなどのサービスが必要な場合は、`docker:` スタンザに `image:` をリストすることで、追加コンテナとしてサービスを実行できます。
@@ -61,14 +61,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -92,14 +92,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -138,14 +138,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -190,14 +190,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -229,14 +229,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -285,11 +285,11 @@ jobs:
 - `store_artifacts` ステップは特別なステップです。 `path:` は、ファイルが格納されるディレクトリをプロジェクトの `root` ディレクトリからの相対ディレクトリで指定します。 `destination:` は、ジョブ内の別のステップで同じ名前のディレクトリにアーティファクトが生成される場合に、一意性を確保するために選択されるプレフィックスを指定します。 CircleCI は、アーティファクトを収集し、S3 にアップロードして格納します。
 - ジョブが完了すると、アーティファクトは CircleCI の [Artifacts (アーティファクト)] タブに表示されます。
 
-![Artifacts on CircleCI]({{ site.baseurl }}/assets/img/docs/walkthrough7.png)
+![CircleCI 上のアーティファクト]({{ site.baseurl }}/assets/img/docs/walkthrough7.png)
 
 - 結果ファイルのパスは、プロジェクトの `root` ディレクトリからの相対パスです。 デモ アプリケーションでは、アーティファクトの格納に使用されたものと同じディレクトリを使用していますが、別のディレクトリも使用できます。 ジョブが完了すると、CircleCI でテスト タイミングが分析され、[Test Summary (テスト サマリー)] タブに概要が表示されます。
 
-![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
+![テスト結果の概要]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 
 詳しくは、「[ビルド アーティファクトの保存]({{ site.baseurl}}/ja/2.0/artifacts/)および「[テスト メタデータの収集]({{ site.baseurl}}/ja/2.0/collect-test-data/)」を参照してください。
 
@@ -311,14 +311,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -407,14 +407,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
