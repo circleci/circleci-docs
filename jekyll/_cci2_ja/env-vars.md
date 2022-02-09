@@ -8,6 +8,7 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
+suggested_links_has_experiments: true
 suggested:
   - 
     title: Keep environment variables private
@@ -18,6 +19,10 @@ suggested:
   - 
     title: Insert files as environment variables
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
+  - 
+    title: Context deadline exceeded after 1 hour - Build timed out
+    link: https://support.circleci.com/hc/en-us/articles/4410707277083
+    isExperiment: true
 ---
 
 以下のセクションに沿って、CircleCI で環境変数を使用する方法について説明します。
