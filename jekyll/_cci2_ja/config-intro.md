@@ -33,7 +33,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 5. 以下の内容を `config.yml` ファイルに追加します。
 
 {% highlight yaml %}
-vversion: 2.1
+version: 2.1
 jobs:
   build:
     docker:
