@@ -80,6 +80,8 @@ en:
           link: 2.0/contexts/
     - name: Optimizations
       children:
+        - name: Overview
+          link: 2.0/optimizations
         - name: Pipeline variables
           link: 2.0/pipeline-variables/
         - name: Persisting Data
