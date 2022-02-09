@@ -77,7 +77,8 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       - checkout
@@ -96,7 +97,8 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       - checkout
@@ -148,7 +150,8 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -162,7 +165,8 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -214,7 +218,8 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       # default shell is Powershell
@@ -235,7 +240,8 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       # default shell is Powershell
@@ -277,7 +283,8 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       - checkout
@@ -291,7 +298,8 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
       - checkout
