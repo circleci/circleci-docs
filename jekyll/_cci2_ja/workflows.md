@@ -8,7 +8,7 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: 必須
+suggested_links_has_experiments: true
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
@@ -24,7 +24,7 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
   - 
     title: Updates to maximum duration of jobs
-    isExperiment: 必須
+    isExperiment: true
     link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
 ---
 
