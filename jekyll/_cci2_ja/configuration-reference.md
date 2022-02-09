@@ -26,7 +26,7 @@ suggested:
   -
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-    
+
   - title: ジョブの最大実行時間の更新について
     link: https://support.circleci.com/hc/ja/articles/4411086979867
     isExperiment: true
@@ -487,7 +487,7 @@ jobs:
 
 `only` や `ignore` に記述する内容は、完全一致のフルネームおよび正規表現で表すことができます。 正規表現は、文字列**全体**に一致する必要があります。 例えば下記のようにします。
 
-``` YAML
+```yml
 jobs:
   build:
     branches:
@@ -498,7 +498,7 @@ jobs:
 
 この場合は、"main" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
 
-``` YAML
+```yml
 jobs:
   build:
     branches:
@@ -787,7 +787,7 @@ jobs:
 
 `run` を宣言するたびに新たなシェルが立ち上がることになります。 複数行の `command` を指定でき、その場合はすべての行が同じシェルで実行されます。
 
-``` YAML
+```yml
 - run:
     command: |
       echo Running test
@@ -813,7 +813,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 > パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェル コマンド、または中かっこ「{}」で囲まれたコマンド リストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
 
 つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 例えば下記のようにします。
-``` YAML
+```yml
 - run:
     command: |
       echo Running test
@@ -834,7 +834,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 > pipefail を有効にすると、パイプラインの戻り値は、0 以外のステータスで終了した最後 (右端) のコマンドのステータス値か、すべてのコマンドが正しく終了した場合に 0 となります。 シェルは、パイプライン内のすべてのコマンドの終了を待って値を返します。
 
 例えば下記のようにします。
-``` YAML
+```yml
 - run: make test | tee test-output.log
 ```
 
@@ -853,7 +853,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 `background` 属性はコマンドをバックグラウンドで実行するように設定するものです。 `background` 属性を `true` にセットすることで、ジョブ実行においてコマンドの終了を待つことなく、即座に次のステップへと処理を移します。 下記の例は Web の UI 検証に用いるツール Selenium のテスト時によく必要とされる、バックグラウンドにおける X virtual framebuffer の実行に関するコンフィグです。
 
-``` YAML
+```yml
 - run:
     name: X 仮想フレームバッファの実行
     command: Xvfb :99 -screen 0 1280x1024x24
@@ -867,7 +867,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 `run` ステップでは大変便利な簡略化構文を利用できます。
 
-``` YAML
+```yml
 - run: make test
 
 # 簡略化したうえで複数行のコマンドを実行
@@ -892,7 +892,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 **メモ:** `store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 ただし、ジョブがキャンセル要求により**強制終了**された場合、または実行時間がグローバル タイムアウト上限である 5 時間に達した場合、`when` 属性、`store_artifacts`、`store_test_results` は実行されません。
 
-``` YAML
+```yml
 - run:
     name: CodeCov.io データのアップロード
     command: bash <(curl -s https://codecov.io/bash) -F unittests
@@ -908,7 +908,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 以下の例では、`halt` を使用して、`develop` ブランチでジョブが実行されないようにしています。
 
-``` YAML
+```yml
 run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
@@ -1001,13 +1001,13 @@ workflows:
 
 単純に `checkout` する場合は、ステップタイプは属性なしで文字列を記述するだけです。
 
-``` YAML
+```yml
 - checkout
 ```
 
 **メモ:** CircleCI は、サブモジュールをチェックアウトしません。 そのプロジェクトにサブモジュールが必要なときは、下記の例のように適切なコマンドを実行する `run` ステップを追加してください。
 
-``` YAML
+```yml
 - checkout
 - run: git submodule sync
 - run: git submodule update --init
@@ -1082,7 +1082,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 {:.no_toc}
 
 {% raw %}
-``` YAML
+```yml
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
@@ -1096,7 +1096,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 - インスタンスによっては、特定のワークスペースをキャッシュに保存する回避策もあります。
 
 {% raw %}
-``` YAML
+```yml
 - save_cache:
     key: v1-{{ checksum "yarn.lock" }}
     paths:
@@ -1125,7 +1125,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 
 例えば下記のようにします。
 
-``` YAML
+```yml
 steps:
   - save_cache:
       key: v1-myapp-cache
@@ -1156,7 +1156,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 {:.no_toc}
 
 {% raw %}
-``` YAML
+```yml
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
@@ -1196,7 +1196,7 @@ artifact のデプロイを行う特殊なステップです。
 {: #example }
 {:.no_toc}
 
-``` YAML
+```yml
 - deploy:
     command: |
       if [ "${CIRCLE_BRANCH}" == "main" ]; then
@@ -1225,7 +1225,7 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 {: #example }
 {:.no_toc}
 
-``` YAML
+```yml
 - run:
     name: Build the Jekyll site
     command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
@@ -1264,7 +1264,7 @@ test-results
 
 `config.yml` の構文
 
-``` YAML
+```yml
 - store_test_results:
     path: test-results
 ```
@@ -1289,7 +1289,7 @@ root キーは Workspace のルートディレクトリとなるコンテナ内�
 
 下記の構文は `/tmp/dir` 内にある paths で指定している内容を、Workspace の `/tmp/dir` ディレクトリ内に相対パスで保持します。
 
-``` YAML
+```yml
 - persist_to_workspace:
     root: /tmp/dir
     paths:
@@ -1307,7 +1307,7 @@ root キーは Workspace のルートディレクトリとなるコンテナ内�
 ###### _paths キーの例_
 {: #example-for-paths-key }
 
-``` YAML
+```yml
 - persist_to_workspace:
     root: /tmp/workspace
     paths:
@@ -1349,7 +1349,7 @@ Workflows で使用している Workspace を現在のコンテナにアタッ�
 {: #example }
 {:.no_toc}
 
-``` YAML
+```yml
 - attach_workspace:
     at: /tmp/workspace
 ```

@@ -236,7 +236,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 
-``` YAML
+```yml
 version: 2.0
 jobs:
   build:

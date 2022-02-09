@@ -492,7 +492,7 @@ ignore | N | List | List of branches to ignore
 
 Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
 
-``` YAML
+```yml
 jobs:
   build:
     branches:
@@ -503,7 +503,7 @@ jobs:
 
 In this case, only "main" branch and branches matching regex "rc-.*" will be executed.
 
-``` YAML
+```yml
 jobs:
   build:
     branches:
@@ -755,7 +755,7 @@ In its short form, the `run` step allows us to directly specify which `command` 
 
 Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
 
-```
+```yml
 jobs:
   build:
     steps:
@@ -795,7 +795,7 @@ when | N | String | [Specify when to enable or disable the step](#the-when-attri
 
 Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell:
 
-``` YAML
+```yml
 - run:
     command: |
       echo Running test
@@ -821,7 +821,7 @@ Descriptions of the `-eo pipefail` options are provided below.
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
 So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
-``` YAML
+```yml
 - run:
     command: |
       echo Running test
@@ -842,7 +842,7 @@ So if in the previous example `mkdir` failed to create a directory and returned 
 > If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
 For example:
-``` YAML
+```yml
 - run: make test | tee test-output.log
 ```
 
@@ -861,7 +861,7 @@ For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using
 
 The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
-``` YAML
+```yml
 - run:
     name: Running X virtual framebuffer
     command: Xvfb :99 -screen 0 1280x1024x24
@@ -875,7 +875,7 @@ The `background` attribute enables you to configure commands to run in the backg
 
 `run` has a very convenient shorthand syntax:
 
-``` YAML
+```yml
 - run: make test
 
 # shorthanded command can also have multiple lines
@@ -901,7 +901,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 **Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or has reached the runtime timeout limit.
 
-``` YAML
+```yml
 - run:
     name: Upload CodeCov.io Data
     command: bash <(curl -s https://codecov.io/bash) -F unittests
@@ -917,7 +917,7 @@ A job can exit without failing by using `run: circleci-agent step halt`. This ca
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
-``` YAML
+```yml
 run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
@@ -966,7 +966,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: #example }
 {:.no_toc}
 
-```
+```yml
 version: 2.1
 
 jobs: # conditional steps may also be defined in `commands:`
@@ -1010,13 +1010,13 @@ If `path` already exists and is:
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
 
-``` YAML
+```yml
 - checkout
 ```
 
 **Note:** CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
-``` YAML
+```yml
 - checkout
 - run: git submodule sync
 - run: git submodule update --init
@@ -1091,7 +1091,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {:.no_toc}
 
 {% raw %}
-``` YAML
+```yml
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
@@ -1105,7 +1105,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 - In some instances, a workaround for this is to save a particular workspace to cache:
 
 {% raw %}
-``` YAML
+```yml
 - save_cache:
     key: v1-{{ checksum "yarn.lock" }}
     paths:
@@ -1134,7 +1134,7 @@ A key is searched against existing keys as a prefix.
 
 For example:
 
-``` YAML
+```yml
 steps:
   - save_cache:
       key: v1-myapp-cache
@@ -1165,7 +1165,7 @@ A path is not required here because the cache will be restored to the location f
 {:.no_toc}
 
 {% raw %}
-``` YAML
+```yml
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
@@ -1205,7 +1205,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 {: #example }
 {:.no_toc}
 
-``` YAML
+```yml
 - run:
     name: Build the Jekyll site
     command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
@@ -1244,7 +1244,7 @@ test-results
 
 `config.yml` syntax:
 
-``` YAML
+```yml
 - store_test_results:
     path: test-results
 ```
@@ -1269,7 +1269,7 @@ The root key is a directory on the container which is taken to be the root direc
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
-``` YAML
+```yml
 - persist_to_workspace:
     root: /tmp/dir
     paths:
@@ -1287,7 +1287,7 @@ After this step completes, the following directories are added to the workspace:
 ###### _Example for paths Key_
 {: #example-for-paths-key }
 
-``` YAML
+```yml
 - persist_to_workspace:
     root: /tmp/workspace
     paths:
@@ -1329,7 +1329,7 @@ at | Y | String | Directory to attach the workspace to.
 {: #example }
 {:.no_toc}
 
-``` YAML
+```yml
 - attach_workspace:
     at: /tmp/workspace
 ```
@@ -1468,7 +1468,7 @@ triggers | N | Array | Should currently be `schedule`.
 {: #schedule }
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
-```
+```yml
 workflows:
    version: 2
    nightly:
@@ -1566,7 +1566,7 @@ context | N | String/List | The name of the context(s). The initial default name
 {: #type }
 A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
-```
+```yml
       - hold:
           type: approval
           requires:
