@@ -23,7 +23,7 @@ toc::[]
 
 === 出力プロセッサ
 ==== 概要
-出力プロセッサは、 Normad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。
+出力プロセッサは、 Nomad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。
 
 KOTS の管理者コンソールにアクセスします。 Get to the KOTS Admin Console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
