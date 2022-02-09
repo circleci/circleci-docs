@@ -10,6 +10,8 @@ version:
 :toc: macro
 :toc-title:
 
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
 Before you begin with the CircleCI server v3.x execution installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
@@ -51,6 +53,10 @@ Nomad クライアントは Kubernetes クラスタの外部にインストー�
 CircleCI では、任意のクラウド プロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files (`main.tf`) for both AWS and GCP. `main.tf` を完了するには、クラスタとサーバーのインストールに関する情報が必要です。 以下でその情報を入手する方法を説明します。
 
 NOTE: If you would also like to set up Nomad Autoscaler at this time, see the <<#nomad-autoscaler-optional, Nomad Autoscaler>> section of this guide, as some of the requirements can be included in this Terraform setup.
+
+// Don't include this section in the GCP PDF:
+
+ifndef::env-gcp[]
 
 ===== AWS
 クラスタおよびサーバのインストールに関する情報を Terraform 設定ファイル (`main.tf`) のフィールドに入力します。 A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
@@ -110,7 +116,7 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 
 
 
-適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Nomad クライアントをデプロイすることができます。
+適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Normad クライアントをデプロイすることができます。
 
 ----
 terraform init
@@ -123,6 +129,14 @@ terraform apply
 ----
 
 Terraform は、 Nomad クライアントのスピンアップが完了すると、 CircleCI Server で Nomad コントロールプレーンを設定するために必要な証明書とキーを出力します。 この情報は、安全な場所にコピーしてください。 この適用プロセスには 通常 1 分しかかかりません。
+
+// Stop hiding from GCP PDF:
+
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+
+ifndef::env-aws[]
 
 ===== GCP
 CircleCI Server のデプロイ時に作成した Nomad コントロールプレーン（Nomad サーバー）の IP アドレスが必要になります。 以下のコマンドを実行することで IP アドレスを取得できます。
@@ -219,12 +233,16 @@ terraform apply
 
 Terraform は、 Nomad クライアントのスピンアップが完了すると、 CircleCI Server で Nomad コントロールプレーンを設定するために必要な証明書とキーを出力します。 この情報は、安全な場所にコピーしてください。
 
+endif::env-aws[]
+
 ==== Nomad Autoscaler
 Nomad provides a utility to automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you only need to provide permission for the utility to manage your autoscaling resource and where it is located. You can enable this resource via KOTS, which will deploy the Nomad Autoscaler service along with your Nomad servers. Below we will go through how to set up Nomad Autoscaler for your provider.
 
 NOTE: The maximum and minimum Nomad client count will overwrite the corresponding values set when you created your autoscaling group or managed instance group. It is recommended that you keep these values and those used in your Terraform the same so that the two don't compete.
 
 If you do not require this service then feel free to jump to the *Save config* button to update your installation and redeploy server.
+
+ifndef::env-gcp[]
 
 ===== AWS
 . Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
@@ -266,6 +284,10 @@ If you do not require this service then feel free to jump to the *Save config* b
 .. Or, the Nomad Autoscaler role's ARN
 . Add the name of the autoscaling Group your Nomad clients were created in
 
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
 ===== GCP
 . Create a service account for Nomad Autoscaler
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. If you've already created the clients, you can simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`.
@@ -278,6 +300,8 @@ If you do not require this service then feel free to jump to the *Save config* b
 . Add Managed Instance Group Name
 . Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
 . JSON of GCP service account for Nomad Autoscaler
+
+endif::env-aws[]
 
 ==== 設定とデプロイ
 
@@ -300,7 +324,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 * *[Nomad Server Certificate Authority (Nomad サーバーの証明書認証局)](必須)*:
  `terraform apply`からの出力で提供されます。
 
-Click the *Save config* button to update your installation and redeploy server.
+*[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
 ==== Normad クライアントの確認
 
@@ -364,7 +388,9 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 
 VM サービスは、VM とリモート Docker ジョブを設定します。 スケーリング ルールなど、さまざまなオプションを構成することができます。 VM サービスは、 EKS および GKE のインストールに固有のものです。これは、これらのクラウドプロバイダーの機能に特に依存しているためです。
 
-==== EKS
+ifndef::env-gcp[]
+
+==== AWS
 . *セキュリティグループの作成に必要な情報を入手する*
 +
 以下のコマンドにより、VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) および Cluster ARN (`arn`) 値が返されます。これらの情報はこのセクションを通して必要です。
@@ -560,7 +586,11 @@ VM サービスをKOTS 管理者コンソールから設定します。 利用�
 
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
-==== GKE
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+==== GCP
 
 以下のセクションを完了するにはクラスタに関する追加情報が必要です。 次のコマンドを実行します。
 
@@ -649,6 +679,8 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
 
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
+
+endif::env-aws[]
 
 ==== VM サービスの検証
 
