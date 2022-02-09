@@ -60,7 +60,7 @@ Make note of the use of a `checksum` in the cache `key`; this is used to calcula
 
 We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
-Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
+Consult the [Caching]({{site.baseurl}}/2.0/caching) page to learn more.
 
 ## Workflows
 {: #workflows }

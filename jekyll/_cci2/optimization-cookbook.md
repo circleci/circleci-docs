@@ -26,38 +26,13 @@ Sometimes when you are using the CircleCI platform, you may encounter unexpected
 ## Using caching to optimize builds and workflows
 {: #using-caching-to-optimize-builds-and-workflows }
 
-One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
+One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance.
 
-If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build. The example below shows how you can use caching for a package manager.
+If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
-{% raw %}
-```yaml
-version: 2
-jobs:
-  build:
-    steps: # a collection of executable commands making up the 'build' job
-      - checkout # pulls source code to the working directory
-      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # install and activate virtual environment with pip
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          paths:
-            - "venv"
-```
-{% endraw %}
+You can find an example of caching dependencies on the [Optimizations]({{site.baseurl}}/2.0/optimizations/#caching-dependencies) page. _Please note: Persisting data is project specific, and the examples on the Optimizations page are not meant to be copied and pasted into your own projects without some customization._
 
-Notice in the above example that you can use a `checksum` in the cache key. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) changes so the cache will be updated accordingly. Also note that the `restore_cache` example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
-
-**Note:** Before adding any caching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
-
-Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be used to optimize your config:
-
-- [Caching](https://circleci.com/docs/2.0/caching/)
+Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the [Caching]({{site.baseurl}}/2.0/caching/) page that describes caching, and how various strategies can be used to optimize your config.
 
 ## Improving test performance
 {: #improving-test-performance }
