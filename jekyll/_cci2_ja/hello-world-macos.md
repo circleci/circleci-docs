@@ -18,7 +18,6 @@ CircleCI の **macOS 実行環境**で継続的インテグレーションを開
 作業を行う前に、以下を準備しておく必要があります。
 
 - CircleCI の[アカウント](https://circleci.com/ja/signup/)
-- macOS Executor でのビルドを実行できる[有料プラン](https://circleci.com/ja/pricing/#build-os-x)のサブスクリプション
 - Xcode がインストールされた Apple コンピューター (サンプル プロジェクトを開く場合)
 
 ## macOS Executor の概要
