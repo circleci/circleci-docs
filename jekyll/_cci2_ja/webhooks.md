@@ -11,13 +11,11 @@ version:
 ## Webhookの概要
 {: #overview}
 
-Webhookにより、お客様が管理しているプラットフォーム（ご自身で作成した API またはサードパーティのサービス）と今後の一連の_イベント_を連携することができます。
+A webhook allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future _events_.
 
-CircleCI 上で Webhook を設定することにより、CircleCI から情報 (_イベント_と呼ばれます) をリアルタイムで受け取ることができます。 これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
+Setting up a webhook on CircleCI enables you to receive information (referred to as _events_) from CircleCI, as they happen. これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
 
-ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかを詳しく説明します。
-
-**注: ** CircleCI の Webhook 機能は、現在プレビュー版であり、ドキュメントや機能が変更または追加される場合があります。
+The rest of this document will detail how to set up a webhook as well as the shape of events that will be sent to your webhook destination.
 
 ## Webhookのユースケース
 {: #use-cases}
@@ -66,7 +64,7 @@ Webhook はプロジェクトごとにセットアップされます。 方法�
 1. Webhook フォームに入力します（フィールドとその説明については下の表をご覧ください）。
 1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。
 
-| フィールド                  | 必須？ | 説明                                                              |
+| フィールド                  | 必須? | 説明                                                              |
 | ---------------------- | --- | --------------------------------------------------------------- |
 | Webhook name           | ○   | Webhook 名                                                       |
 | URL                    | ○   | Webhook が Post リクエストを送信する URL                                   |
@@ -157,14 +155,14 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 
 イベントの一部として、各Webhook に共通するデータがあります。
 
-| フィールド       | 説明                                                          | タイプ |
-| ----------- | ----------------------------------------------------------- | --- |
-| id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。 ） | 文字列 |
-| happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                          | 文字列 |
-| webhook     | トリガーされた Webhook を表すメタデータのマップ                                | マップ |
+| フィールド       | 説明                                                          | タイプ  |
+| ----------- | ----------------------------------------------------------- | ---- |
+| id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。 ） | 文字列型 |
+| happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                          | 文字列型 |
+| webhook     | トリガーされた Webhook を表すメタデータのマップ                                | マップ  |
 {: class="table table-striped"}
 
-**注: ** イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずにWebhook のペイロードのマップに追加される可能性があります。
+**Note:** The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
 
 
 ## Webhookの共通のサブエンティティ
@@ -226,18 +224,18 @@ Webhook イベントに関連するワークフローに関するデータ
 
 | フィールド         | 常に表示 | 説明                                      |
 | ------------- | ---- | --------------------------------------- |
-| id            | ○    | ワークフローの一意の ID                           |
-| name          | ○    | .circleci/config.yml で定義されているワークフロー名    |
-| status        | ×    | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
-| created\_at | ○    | ワークフローが作成された時間                          |
-| stopped_at    | ×    | ワークフローが終了状態になった時間（該当する場合）               |
-| url           | ○    | CircleCI の UI にあるワークフローへの URL           |
+| id            | はい   | ワークフローの一意の ID                           |
+| name          | はい   | .circleci/config.yml で定義されているワークフロー名    |
+| status        | いいえ  | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
+| created\_at | はい   | ワークフローが作成された時間                          |
+| stopped_at    | いいえ  | ワークフローが終了状態になった時間（該当する場合）               |
+| url           | はい   | CircleCI の UI にあるワークフローへの URL           |
 {: class="table table-striped"}
 
 ### パイプライン
 {: #pipeline}
 
-パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
+パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 Pipelines can also be triggered manually through the API.
 
 Webhook イベントに関連するパイプラインに関するデータ
 
