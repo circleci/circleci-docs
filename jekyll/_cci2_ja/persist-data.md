@@ -62,6 +62,14 @@ version:
 **注意:** お客様の全体的な**ネットワーク転送量**は、課金対象の使用量を表すものではありません。 特定のアクションによるネットワーク使用が、結果として課金対象となります。 これらのアクションについて、以下に説明します。
 {: class="alert alert-info" }
 
+To view your network and storage usage follow these steps:
+
+1. Select **Plan** from the app sidebar.
+2. Select **Plan Usage**.
+3. Select the **Network** or **Storage** tab depending on which you want to view.
+
+Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, testresult, artifact, workspace.
+
 ### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
 
@@ -82,7 +90,7 @@ version:
 
 ネットワーク転送使用（課金対象）が発生するネットワークに関連するアクションは、**キャッシュとワークスペースをセルフホストランナーにリストアする**ことです。
 
-ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 この画面では以下のことが確認できます。
+Details about your storage and network transfer usage can be viewed on your **Plan > Plan Usage** screen. この画面では以下のことが確認できます。
 
 * 課金対象となるネットワーク転送使用状況
 * 個々のプロジェクトのネットワークとストレージの使用状況は、プロジェクト タブに表示されます。
@@ -93,8 +101,11 @@ version:
 
 ![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
 
-### 1 か月の料金の概算方法
-{: #how-to-calculate-an-approximation-of-your-monthly-costs}
+### How to calculate an approximation of your storage and network costs?
+{: #how-to-calculate-an-approximation-of-your-network-and-storage-costs}
+
+**NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+{: class="alert alert-info" }
 
 組織で、ストレージとネットワーク使用に含まれる GB を超えるランナー ネットワークを使用した場合、課金されます。
 
