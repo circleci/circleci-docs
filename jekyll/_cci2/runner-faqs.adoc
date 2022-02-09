@@ -17,7 +17,7 @@ toc::[]
 
 == What is the security model for the CircleCI runner?
 
-When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
+When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
 
 CAUTION: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
 
