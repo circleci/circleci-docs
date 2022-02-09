@@ -39,28 +39,26 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
           POSTGRES_USER: postgres
 ```
 
-この例の Postgres イメージは、あらかじめ若干変更されています (末尾に `-ram` が追加されています)。 このイメージはメモリ内で実行され、ディスクへの負荷は発生しません。 そのため、このイメージを使用すると PostgreSQL データベースでのテストのパフォーマンスが大幅に向上します。
-
 {% raw %}
 
 ```yml
-version: 2
+version: 2.1
 jobs:
   build:
 
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
+    # Primary container image where all commands run
 
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.10.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # サービス コンテナ イメージ
+    # Service container image
 
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: cimg/postgres:12.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -68,7 +66,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client-9.6
+      - run: sudo apt-get install postgresql-client-12
       - run: whoami
       - run: |
           psql \
@@ -86,39 +84,37 @@ jobs:
 
 {% endraw %}
 
-`steps` では最初に `checkout` が実行され、その後 Postgres クライアント ツールがインストールされます。 `postgres:9.6.5-alpine-ram` イメージでは、クライアント固有のデータベース アダプターはインストールされません。 たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 [CircleCI のビルド済みサービス イメージの説明]({{ site.baseurl }}/ja/2.0/circleci-images/#サービス-イメージ)で、イメージの一覧と、このビルド構成のビデオを参照できます。
+The `steps` run `checkout` first, then install the PostgreSQL client tools. The `postgres:12.0` image doesn't install any client-specific database adapters. たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 [CircleCI のビルド済みサービスイメージの説明]({{ site.baseurl }}/ja/2.0/circleci-images/#service-images)で、イメージの一覧と、このビルド設定のビデオを参照できます。
 
-この設定ファイルの例では、`psql` にアクセスするために PostgreSQL クライアント ツールがインストールされます。  **メモ:** ここで `sudo` を実行しているのは、ほとんどのコンテナがデフォルトで実行される一方で、root アカウントではイメージが実行されないためです。 CircleCI のデフォルトでは circle アカウントでコマンドが実行されるため、管理者権限や root 権限で実行するときは、コマンドの前に `sudo` を追加する必要があります。
+この例のコンフィグでは、`psql` にアクセスするために PostgreSQL クライアントツールがインストールされます。  **メモ:** ここで `sudo` を実行しているのは、ほとんどのコンテナがデフォルトで実行される一方で、root アカウントではイメージが実行されないためです。 CircleCI のデフォルトでは circle アカウントでコマンドが実行されるため、管理者権限や root 権限で実行するときは、コマンドの前に `sudo` を追加する必要があります。
 
-`postgresql-client-9.6` のインストールの後には、データベース サービスとやり取りするための 3 つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、値をそのテーブルに挿入して、テーブルから選択します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリ コンテナがスピンアップされます。
+`postgresql-client-9.6` のインストールの後には、データベースサービスとやり取りするための 3つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、値をそのテーブルに挿入して、テーブルから選択します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリコンテナがスピンアップされます。
 
 **メモ:** CircleCI では、複数のコンビニエンス環境変数がプライマリ コンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)を参照してください。
 
-データベース サービスがスピンアップされると、データベースの `circlecitest` および `root` のロールが自動的に作成されます。 データベース サービスは `root` ではなく、`circle` アカウントを使用して実行されます。 次に、データベースのテストが実行されてテーブルが作成され、値がそのテーブルに挿入されます。 テーブルで SELECT が実行されると、値が取得されます。
+データベースサービスがスピンアップされると、データベースの `circlecitest` および `root` ロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 データベースサービスは `root` ではなく、`circle` アカウントを使用して実行されます。 次に、データベースのテストが実行されてテーブルが作成され、値がそのテーブルに挿入されます。テーブルで SELECT が実行されると、値が取得されます。
 
 ## オプションのカスタマイズ
 {: #optional-customization }
 
-このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするためのオプションの追加構成について説明します。
+このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするための追加のオプション設定について説明します。
 
-### Postgres イメージの最適化
-{: #optimizing-postgres-images }
+### Optimizing PostgreSQL images
+{: #optimizing-postgresql-images }
 {:.no_toc}
 
-デフォルトの `circleci/postgres` Docker イメージは、ディスク上の通常の固定記憶域を使用します。 `tmpfs` を使用すると、テストの実行速度が向上し、リソースの使用量を抑えられる可能性があります。 `tmpfs` ストレージを利用するバリアントを使用するには、`-ram` を `circleci/postgres` タグ (`circleci/postgres:9.6-alpine-ram`など) に付加します。
-
-また、PostGIS も使用可能です。 上記の例では、`circleci/postgres:9.6-alpine-postgis-ram` のようになります。
+PostGIS is available and can be used like this: `cimg/postgres:12.0-postgis`
 
 ### バイナリの使用
 {: #using-binaries }
 {:.no_toc}
 
-`pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の構成を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベース ユーティリティを有効化します。
+`pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の設定を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベースユーティリティを有効にします。
 
 ```
      steps:
-    # Add the Postgres 9.6 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
+    # Add the Postgres 12.0 binaries to the path.
+       - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV
 ```
 
 ### Dockerize を使用した依存関係の待機
@@ -137,7 +133,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: postgres:9.6.2-alpine
+      - image: postgres:12.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -147,12 +143,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: dockerize のインストール
+          name: install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
           environment:
             DOCKERIZE_VERSION: v0.3.0
       - run:
-          name: db の待機
+          name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 ```
 
@@ -178,5 +174,5 @@ Redis では CLI も使用可能です。
 {: #see-also }
 {:.no_toc}
 
-他の設定ファイルの例については、「[データベースの構成例]({{ site.baseurl }}/ja/2.0/postgres-config/)」を参照してください。
+他の設定ファイルの例については、「[データベースの設定例]({{ site.baseurl }}/ja/2.0/postgres-config/)」を参照してください。
 
