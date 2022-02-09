@@ -53,11 +53,10 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 === サーバー上で Docker コンテナを起動する
 
-サーバー上で Docker コンテナを起動する場合、  `--env` フラグを使って `agent_version` の環境変数を渡す必要があります。
+サーバー上で Docker コンテナを起動する場合、`--env` フラグを使って `agent_version` と `LAUNCH_AGENT_API_URL`</0> の環境変数を渡す必要があります。
 
 ``` bash
-CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
-
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> LAUNCH_AGENT_API_URL=<server_host_name> docker run --env agent_version --env LAUNCH_AGENT_API_URL --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 
 == Docker コンテナを停止する

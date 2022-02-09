@@ -5,6 +5,7 @@ short-title: "Webhook を使って CircleCI のイベントを受け取る"
 description: "Webhook を使って CircleCI のイベントを受け取る"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## Webhookの概要
