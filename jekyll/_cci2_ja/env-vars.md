@@ -505,7 +505,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 たとえば、以下のパラメーターを渡すとします。
 
-```shell
+```json
 {
   "build_parameters": {
     "foo": "bar",
@@ -529,7 +529,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 
 `build_parameters` キーを使用して環境変数を挿入することで、実行のたびに異なるターゲットに対して機能テストをビルドできます。 たとえば、ステージング環境へのデプロイ ステップを持つ実行で、さまざまなホストに対する機能テストをビルドするとします。 `bash` と `curl` を使用した以下の例のように、JSON 本体を `Content-type: application/json` で送信することで、`build_parameters` を使用できます (ただし、選択した言語の HTTP ライブラリを使用することも可能です)。
 
-```shell
+```json
 {
   "build_parameters": {
     "param1": "value1",

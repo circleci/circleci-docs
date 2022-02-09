@@ -175,7 +175,7 @@ workflows:
 CircleCI 上で HTTP サーバーを実行するテストを行う場合、ローカル マシンで動作するブラウザーを使用して障害テストのデバッグを行うと便利な場合があります。 これは、SSH を有効にした実行によって簡単にセットアップできます。
 
 1. CircleCI アプリの**[Job (ジョブ)] ページ**の [Rerun Job with SSH (SSH でジョブを再実行)] ボタンを使用して SSH ビルドを実行します。 次のように、SSH からコンテナにログインするコマンドが表示されます。
-```
+```shell
 ssh -p 64625 ubuntu@54.221.135.43
 ```
 
@@ -236,7 +236,7 @@ ubuntu@box159:~$ firefox &
 VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
 
 1. [`x11vnc`](https://github.com/LibVNC/x11vnc) をダウンロードして、テストの前に起動します。
-```
+```yml
 steps:
   - run:
       name: Download and start X
@@ -246,7 +246,7 @@ steps:
       background: true
 ```
 1. これで、[SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
-```
+```shell
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
 
@@ -258,17 +258,17 @@ CircleCI は、SSH からの X11 転送もサポートしています。 X11 転
 1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、[XQuartz](http://xquartz.macosforge.org/landing/) の使用を検討してください。
 
 1. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)します。 `-X` フラグを使用して転送をセットアップします。
-```
+```shell
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
 これによって、X11 転送が有効な状態で SSH セッションが開始されます。
 
 1. お使いのマシンに VM のディスプレイを接続するには、ディスプレイ環境変数を `localhost:10.0` に設定します。
-```
+```shell
 ubuntu@box10$ export DISPLAY=localhost:10.0
 ```
 1. xclock を起動して、すべて正しく動作していることを確認します。
-```
+```shell
 ubuntu@box10$ xclock
 ```
 xclock がデスクトップに表示された後で、`Ctrl+c` を使用して終了できます。

@@ -560,7 +560,6 @@ gsutil mb gs://circleci-server-bucket
 
 ```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
-
 ```
 
 You will need the email for the service account in the next step. Run the following command to find it:
@@ -596,7 +595,6 @@ After running the following command, you should have a file named `circleci-serv
 ```shell
 gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
-
 ```
 
 ifndef::pdf[]

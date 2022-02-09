@@ -204,7 +204,7 @@ teardown() {
 
 [`integration-test-1` ジョブ](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) の定義は、上部の `jobs` キーで確認できます。
 
-```
+```yml
   integration-test-1:
     docker:
       - image: cimg/base:stable
@@ -222,7 +222,7 @@ teardown() {
 
 Orb のコマンドだけでなくジョブもテストする必要がある場合は、設定ファイルで、[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの `integration-test-1` のすぐ下にテストする Orb ジョブを追加します。
 
-```
+```yml
 integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:

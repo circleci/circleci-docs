@@ -78,7 +78,7 @@ suggested:
 
 以下の例は、承認済みの `circleci` 名前空間に置かれた `hello-build` という名前の Orb を呼び出します。
 
-```
+```yml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -739,7 +739,7 @@ jobs:
 
 場合によっては steps をより簡便に記述できます。 例えば `run` ステップを下記のように記述することが可能です。
 
-```
+```yml
 jobs:
   build:
     steps:
@@ -750,7 +750,7 @@ jobs:
 
 もう 1 つ、キーと値のペアの代わりにステップ名を文字列として使うシンプルな方法もあります。
 
-```
+```yml
 jobs:
   build:
     steps:
@@ -957,7 +957,7 @@ steps:
 {: #example }
 {:.no_toc}
 
-```
+```yml
 version: 2.1
 
 jobs: # conditional steps may also be defined in `commands:`
@@ -1484,7 +1484,7 @@ Workflow の実行契機となるトリガーを指定します。 デフォル�
 {: #schedule }
 Workflow では、一定時刻に実行を指示する `schedule` を記述することもできます。利用者の少ない毎日夜12時にビルドする、といったことが可能です。
 
-```
+```yml
 workflows:
    version: 2
    nightly:
@@ -1582,7 +1582,7 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 {: #type }
 `approval` の `type` を指定することで、その後のジョブを続行する前に手動の承認操作を求めることができるようになります。 下記の例にある通り、Workflow が `type: approval` キーを処理するまで、ジョブは依存関係通りの順番で実行されます。
 
-```
+```yml
       - hold:
           type: approval
           requires:
@@ -1862,7 +1862,7 @@ jobs:
 
 この例では、`POST` 本体に以下が含まれた状態でパイプラインがトリガーされたときに、テストが明示的に呼び出されない限りは `integration_tests` ワークフローは実行されないようにしています。
 
-```shell
+```json
 {
     "parameters": {
         "run_integration_tests": true

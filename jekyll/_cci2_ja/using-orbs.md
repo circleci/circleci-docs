@@ -127,7 +127,7 @@ parameters:
 
 ジョブがある Orb をインポートする際に、ワークフローから直接ジョブを参照することができます。
 
-```
+```yml
 version: 2.1
 orbs:
   <orb>: <namespace>/<orb>@x.y # Orb のバージョン

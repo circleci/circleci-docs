@@ -230,7 +230,7 @@ bar:
 
 Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
-```
+```yml
 version: 2.1
 
 orbs:
@@ -246,7 +246,7 @@ workflows:
 `circleci config process .circleci/config.yml` を実行すると、以下のように出力されます (これは、展開されたソースとコメントアウトされた元の設定ファイルから成ります)。
 
 {% raw %}
-```shell
+```yml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:

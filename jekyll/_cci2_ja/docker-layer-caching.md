@@ -118,7 +118,7 @@ machine:
 {: #dockerfile }
 {:.no_toc}
 
-```
+```dockerfile
 FROM elixir:1.11.4
 
 # make Apt non-interactive
@@ -236,7 +236,7 @@ jobs:
 
 では、Dockerfile の `# Unicode を使用`のステップと `# Docker をインストール`のステップの間に、以下のステップを追加します。
 
-```
+```dockerfile
 # jq をインストール
 RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" \
   && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \
