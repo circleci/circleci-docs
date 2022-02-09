@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
 Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
 NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
@@ -115,6 +117,10 @@ The OAuth Client Secret provided by Github.
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
+// Don't include this section in the GCP PDF.
+
+ifndef::env-gcp[]
+
 ===== S3 Compatible
 You should have created your S3 Compatible bucket and optional IAM account during the prerequisite steps.
 
@@ -144,6 +150,14 @@ Or select IAM role and provide:
 * *Role ARN* -
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
+// Stop hiding from GCP PDF:
+
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+
+ifndef::env-aws[]
+
 ===== Google Cloud Storage
 You should have created your Google Cloud Storage bucket and service account during the prerequisite steps.
 
@@ -157,6 +171,10 @@ Number of days to retain your test results and artifacts. Set to 0 to disable an
 
 * *Service Account JSON (required)* -
 A JSON format key of the Service Account to use for bucket access.
+
+endif::env-aws[]
+
+// Stop hiding from AWS PDF
 
 ==== Postgres, MongoDB, Vault settings
 

@@ -1,0 +1,34 @@
+---
+version:
+- Server v2.x
+- Server v3.x
+---
+= CircleCI Server Plan
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes the Server plan available to developers on CircleCI.
+:icons: font
+:toc: macro
+:toc-title:
+:concurrency:
+:orbs:
+
+This document describes the Server plan available to developers.
+
+== Server plan
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. Please see the <<server-3-overview#,Server documentation>> for more information.
+
+The Server plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment.
+
+The Server plan gives you access to a few additional upgrades over some of the other plans:
+
+=== Custom user seat count
+Customize the amount of active users based on your needs.
+
+=== Additional support options
+Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Server plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+
+== CircleCI features
+In addition to the upgraded features listed above, the Server plan also has access to the features listed below. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
+
+{% include snippets/features-of-circleci.adoc %}

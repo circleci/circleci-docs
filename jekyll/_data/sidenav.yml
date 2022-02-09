@@ -421,8 +421,10 @@ en:
       children:
         - name: v3.3 Overview
           link: 2.0/CircleCI-Server-3.3.0-Overview.pdf
-        - name: v3.3 Installation Guide
-          link: 2.0/CircleCI-Server-3.3.0-Installation-Guide.pdf
+        - name: v3.3 Installation Guide for AWS
+          link: 2.0/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
+        - name: v3.3 Installation Guide for GCP
+          link: 2.0/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
         - name: v3.3 Operations Guide
           link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs
@@ -558,6 +560,20 @@ en:
           link: 2.0/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
+
+- name: CircleCI Plans
+  icon: icons/sidebar/circleci_plans.svg
+  children:
+    - name: Plan Overview
+      link: 2.0/plan-overview
+    - name: Free
+      link: 2.0/plan-free
+    - name: Performance
+      link: 2.0/plan-performance
+    - name: Scale
+      link: 2.0/plan-scale
+    - name: Server
+      link: 2.0/plan-server
 
 ja:
 - name: Getting Started
