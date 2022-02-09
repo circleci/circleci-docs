@@ -3,10 +3,10 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Hardening Your Cluster
+= CircleCI Server v3.x クラスタのハードニング
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides supplemental information on hardening your Kubernetes cluster.
+:page-description: ここでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +16,7 @@ version:
 toc::[]
 
 ## ネットワーク トポロジ
-A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
+CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティング インスタンスを実行します。
 
 これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
 
@@ -27,16 +27,16 @@ A server installation basically runs three different type of compute instances: 
 現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
 
 ## ネットワーク トラフィック
-This section explains the minimum requirements that are needed for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad clients and VMs. Nomenclature between cloud providers differs, therefore, you will probably need to implement these rules using firewall rules and/or security groups.
+このセクションでは、CircleCI Server システムの稼働に必要な最小要件について説明します。 ワークロードによっては、Nomad クライアントと VM の送信にルールを追加する必要があります。 クラウド プロバイダーごとに名称は異なります。 そのため、ファイアウォール ルールやセキュリティ グループなどを使用した実装が必要になる可能性があります。
 
-表中の "外部" は、特に断りがない限り、すべての外部 IPv4 アドレスを意味します。 Depending on your particular setup, you might be able to be more specific (e.g., if you are using a proxy for all external traffic).
+表中の "外部" は、特に断りがない限り、すべての外部 IPv4 アドレスを意味します。 ただし、外部トラフィックすべてにプロキシを使用している場合など、お使いの環境によっては、より具体的に指定することができます。
 
-It is assumed that you have configured the load balancers for Nomad, vm-service and output processor to be internal load balancers. This is the default.
+なお、ここでは、Nomad、VM サービス、出力プロセッサそれぞれのロード バランサーは、すべて内部ロード バランサーにすることを前提としています。 （内部ロード バランサーがデフォルトです。）
 
-The rules explained here are assumed to be stateful and for TCP connections only, unless stated otherwise. ステートレス ルールを使用する場合には、下表の各項目に該当する送受信ルールをそれぞれ作成してください。
+また、下記のルールは、特別な記載のない限り、TCP 接続に対してステートフルで設定するものとします。 ステートレス ルールを使用する場合には、下表の各項目に該当する送受信ルールをそれぞれ作成してください。
 
 ## Kubernetes ロード バランサー
-Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). この場合には、ロード バランサーの背後にあるネットワーク トラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing you are using with your installation.
+お使いの環境によっては、ロード バランサーが透過的である (ネットワーク トポロジの個別のレイヤーとしては扱われない) ことがあります。 この場合には、ロード バランサーの背後にあるネットワーク トラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 CircleCI Server システムで使用している負荷分散の種類に応じたネットワーク セキュリティ ルールの適切な適用方法については、ご利用のクラウド プロバイダーのドキュメントをご覧ください。
 
 ### 受信
 ロード バランサーのトラフィック ルールが自動的に作成されていない場合は、次の各ポートを設定してください。
@@ -82,17 +82,17 @@ Depending on your setup, your load balancers might be transparent (that is, they
 以下のルールは、ロード バランサーを除くすべてのコンピューティング インスタンスに適用されます。
 
 ### 受信
-If you want to access your instances using SSH, you will need to open port 22 for TCP connections for the instances in question.
-It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule when needed.
+インスタンスに SSH でアクセスする必要がある場合は、該当するインスタンスへの TCP 接続用にポート 22 を開放してください。
+ルールの範囲は、許可されたソースIPにできるだけ近いものにすること、または、必要な場合にのみそのようなルールを追加することをお勧めします。
 
 ### 送信
-ほとんどの環境では、インスタンスすべてに対してインターネット リソースへのアクセスを許可することになります。 This will require you to allow egress for UDP and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
-Instances building jobs (i.e. the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with the destination of the VM subnet and your VCS at the very least.
+ほとんどの環境では、インスタンスすべてに対してインターネット リソースへのアクセスを許可することになります。 これを行うには、VPC 内にある DNS サーバーへのポート 53 からの UDP と TCP の送信を許可する必要があります。また、HTTP と HTTPS それぞれのトラフィックについて、ポート 80 と 443 からの TCP の送信を許可する必要もあります。
+ジョブのビルドを行うインスタンス (Nomad クライアントや外部 VM) では、多くの場合、SSH 経由でご利用中の VCS からコードをプルする必要があります (TCP ポート 22)。 SSH は、外部 VM との通信にも使用されます。 そのため、少なくとも送信先が VM サブネットおよび VCS であるインスタンスすべてについて、SSH を許可する必要があります。
 
 ## Kubernetes ノード
 
 ### ノード間のトラフィック
-デフォルトでは、K8s クラスタ内のトラフィックはネットワーク ポリシーにより制限されています。 For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between K8s nodes any further (i.e. it is fine to allow all traffic between K8s nodes).
+デフォルトでは、K8s クラスタ内のトラフィックはネットワーク ポリシーにより制限されています。 つまり、K8s ノード間のトラフィックを特別に制限する必要はなく、これらノード間のトラフィックはすべて許可してかまいません。
 
 クラスタ内でネットワーク ポリシーを使用するには、クラウド プロバイダーや環境設定にもよりますが、追加の手順を実行する必要があります。 以下の資料を参考にしてください。
 
@@ -126,7 +126,7 @@ Instances building jobs (i.e. the Nomad clients and external VMs) also will like
 |===
 
 ## Nomad クライアント
-Nomad clients do not need to communicate with each other. You can block traffic between Nomad client instances completely.
+Nomad クライアント同士は、通信する必要はありません。 Nomad クライアント インスタンス 間のトラフィックを完全にブロックできます。
 
 ### 受信
 [.table.table-striped]
