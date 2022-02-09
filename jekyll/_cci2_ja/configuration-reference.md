@@ -8,7 +8,7 @@ version:
   - Cloud
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: 必須
+suggested_links_has_experiments: true
 suggested:
   - 
     title: 6 つの構成オプション
@@ -28,10 +28,10 @@ suggested:
   - 
     title: Updates to maximum duration of jobs
     link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
-    isExperiment: 必須
+    isExperiment: true
   - 
     title: How to refresh user permissions
-    isExperiment: 必須
+    isExperiment: true
     link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
 
