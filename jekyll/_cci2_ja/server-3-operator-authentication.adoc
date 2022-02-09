@@ -6,7 +6,7 @@ version:
 = CircleCI Server v3.x における認証
 :page-layout: classic-docs
 :page-liquid:
-:page-description: 現在 CircleCI Server では、EnterpriseGitHub および GitHub Enterprise 経由の OAuth 認証をサポートしています。
+:page-description: 現在 CircleCI Server では、GitHub および GitHub Enterprise 経由の OAuth 認証をサポートしています。
 :icons: font
 :toc: macro
 :toc-title:
