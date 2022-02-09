@@ -99,18 +99,10 @@ Docker Compose を使用して Docker Compose ファイルを含むマルチコ�
 ## 制限事項
 {: #limitations }
 
-`docker-compose` と `macos` Executor を組み合わせての使用はサポートしていません。 サポートに関する詳細は
-
-を参照してください。</p> 
-
-
+`docker-compose` と `macos` Executor を組み合わせての使用はサポートしていません。 詳細は[サポート記事](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-)を参照してください。
 
 ## 関連項目
-
 {: #see-also }
-
-
-
 {:.no_toc}
 
 See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
