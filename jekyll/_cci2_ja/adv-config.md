@@ -19,6 +19,7 @@ CircleCI では、高度な設定のオプションと機能を数多くサポ�
 
 プロジェクト内のすべてのスクリプトをチェックするには、シェルチェック Orb を使用します。 [Orb レジストリのシェルチェックのページ](https://circleci.com/developer/orbs/orb/circleci/shellcheck)でバージョン管理と詳しい使用例を確認してください ( x.y.z を有効なバージョンに変更してください)。
 
+{:.tab.executors_one.Cloud}
 ```yaml
 version: 2.1
 
@@ -32,8 +33,76 @@ workflows:
 
 ```
 
+{:.tab.executors_one.Server_3}
+```yaml
+version: 2.1
+
+orbs:
+  shellcheck: circleci/shellcheck@x.y.z
+
+workflows:
+  shellcheck:
+    jobs:
+      - shellcheck/check
+
+```
+
+{:.tab.executors_one.Server_2}
+```yaml
+version: 2
+
+orbs:
+  shellcheck: circleci/shellcheck@x.y.z
+
+workflows:
+  shellcheck:
+    jobs:
+      - shellcheck/check
+```
+
 バージョン 2 の設定でも、Orb を使わずにシェルチェックを以下のように使用できます。
 
+{:.tab.executors_two.Cloud}
+```yaml
+version: 2.1
+
+jobs:
+  shellcheck:
+    docker:
+      - image: nlknguyen/alpine-shellcheck:v0.4.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: Check Scripts
+          command: |
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck --external-sources
+```
+
+{:.tab.executors_two.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  shellcheck:
+    docker:
+      - image: nlknguyen/alpine-shellcheck:v0.4.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: Check Scripts
+          command: |
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck --external-sources
+```
+
+{:.tab.executors_two.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -59,6 +128,59 @@ jobs:
 
 Selenium を使用して、ブラウザでのテストを管理します。
 
+{:.tab.executors_three.Cloud}
+```yaml
+version: 2.1
+
+orbs: 
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:17.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - run: browser-tools/install-browser-tools
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
+{:.tab.executors_three.Server_3}
+```yaml
+version: 2.1
+
+orbs: 
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:17.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - run: browser-tools/install-browser-tools
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
+{:.tab.executors_three.Server_2}
 ```yaml
 version: 2
 
@@ -88,25 +210,133 @@ jobs:
 
 サービスコンテナを使用して、データベースのテストを実行します。
 
+{:.tab.executors_four.Cloud}
 ``` yaml
-version: 2
+version: 2.1
+
+orbs: 
+  browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
 
-    # すべてのコマンドを実行するプライマリコンテナです。
+    # Primary container image where all commands run
+    docker:
+      - image: cimg/python:3.6.2-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+
+    # Service container image
+      - image: cimg/postgres:9.6.5
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-9.6
+      - run: browser-tools/install-browser-tools
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "SELECT * from test"
+```
+
+{:.tab.executors_four.Server_3}
+``` yaml
+version: 2.1
+
+orbs: 
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+
+    # Primary container image where all commands run
+    docker:
+      - image: cimg/python:3.6.2-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+
+    # Service container image
+      - image: cimg/postgres:9.6.5
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-9.6
+      - run: browser-tools/install-browser-tools
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "SELECT * from test"
+```
+
+{:.tab.executors_four.Server_2}
+``` yaml
+version: 2
+
+jobs:
+  build:
+
+    # Primary container image where all commands run
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # サービスコンテナのイメージです。
-      - image: circleci/postgres:9.6.5-alpine-ram
+    # Service container image
+      - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-9.6
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "SELECT * from test"
 ```
 
 データベースの設定についての詳細は、 [データベースの設定ガイド]({{site.baseurl}}/ja/2.0/databases/) を参照してください。
@@ -116,6 +346,57 @@ jobs:
 
 Docker コマンドを実行して Docker イメージをビルドします。 プライマリ Executor が Docker の場合、リモートの Docker 環境をセットアップします。
 
+{:.tab.executors_five.Cloud}
+``` yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: <primary-container-image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker # すべての Docker コマンドが実行されるリモート Docker コンテナを設定します。
+
+      - run:
+          name: コンテナの起動と動作確認
+          command: |
+            set -x
+            docker-compose up -d
+            docker run --network container:contacts \
+              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+```
+
+{:.tab.executors_five.Server_3}
+``` yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: <primary-container-image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker # すべての Docker コマンドが実行されるリモート Docker コンテナを設定します。
+
+      - run:
+          name: コンテナの起動と動作確認
+          command: |
+            set -x
+            docker-compose up -d
+            docker run --network container:contacts \
+              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+```
+
+{:.tab.executors_five.Server_2}
 ``` yaml
 version: 2
 
@@ -138,7 +419,6 @@ jobs:
             docker-compose up -d
             docker run --network container:contacts \
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
-
 ```
 
 Docker イメージのビルドに関する詳細は、 [Docker イメージのビルドガイド]({{site.baseurl}}/ja/2.0/building-docker-images/) を参照してください。
@@ -146,7 +426,7 @@ Docker イメージのビルドに関する詳細は、 [Docker イメージの�
 ## 高度な設定のヒント
 {: #tips-for-advanced-configuration }
 
-設定ファイルを最適化し、明確に保つためのヒントを紹介します。
+設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
 
 - 長いインライン bash スクリプトは使用しないでください。 特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、明確で読みやすい設定ファイルにします。
 - フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
