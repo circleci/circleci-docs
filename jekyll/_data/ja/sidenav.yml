@@ -55,7 +55,11 @@ en:
           - 
             name: キャッシュ
           - 
+            name: キャッシュの活用方法
+          - 
             name: アーティファクト
+          - 
+            name: ワークスペース
           - 
           - 
             name: SSH を使用したデバッグ
@@ -290,7 +294,7 @@ en:
             name: 設定に関するリファレンス
           - 
             name: API v2
-            link: api/v2
+            link: api/v2/
           - 
           - 
           - 
@@ -369,6 +373,15 @@ en:
             link: 2.0/server-3-operator-backup-and-restore
           - 
           - 
+      - 
+        link: 2.0/install-overview/
+        children:
+          - 
+            name: What's New in v2.38
+          - 
+          - 
+          - 
+            name: v2.38.3 Operations Guide
       - 
         name: Server v3.1.x PDFs
         link: 2.0/install-overview/
@@ -521,6 +534,17 @@ en:
             name: v2.16 Operations Guide
             link: 2.0/circleci-ops-guide.pdf
       - 
+  - 
+    children:
+      - 
+      - 
+        name: Free
+      - 
+        name: Performance
+      - 
+        name: Scale
+      - 
+        name: Server
 ja:
   - 
     name: はじめよう
