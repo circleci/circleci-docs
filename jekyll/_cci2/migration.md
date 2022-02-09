@@ -147,7 +147,7 @@ firefox &
 - You are limited by your imagination in CircleCI 2.0
 - The shell can be set to Python to just execute arbitrary Python in the YAML
 
-```yaml
+```yml
 			- run:
 				shell: /usr/bin/python3
 				command:

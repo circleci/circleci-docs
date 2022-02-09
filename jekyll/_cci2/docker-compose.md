@@ -24,7 +24,7 @@ can install it into your [primary container][primary-container] during the job
 execution with the Remote Docker Environment activated by adding the following
 to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
-```yaml
+```yml
       - run:
           name: Install Docker Compose
           environment:
@@ -44,13 +44,13 @@ executor. If you are constructing your own docker images, consider reading the
 
 Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
 
-```yaml
+```yml
       - setup_remote_docker
 ```
 
 This step enables you to run `docker-compose` commands to build images:
 
-```yaml
+```yml
       - run:
           name: Build images of services declared in docker-compose.yml
           command: docker-compose build
@@ -58,7 +58,7 @@ This step enables you to run `docker-compose` commands to build images:
 
 Or to run the whole system:
 
-```yaml
+```yml
       - run:
           name: Start all services declared in docker-compose.yml
           command: docker-compose up -d
@@ -66,7 +66,7 @@ Or to run the whole system:
 
 Or to also verify if a service is running for example:
 
-```yaml
+```yml
       - run:
           name: Start docker-compose and verify service(s)
           command: |

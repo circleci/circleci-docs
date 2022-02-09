@@ -110,7 +110,7 @@ For more on storage and networking, and calculating your monthly storage costs, 
 
 It is important to define paths and files when using `persist_to_workspace`. Not doing so can cause a significant increase is storage. Specify paths and files using the following syntax:
 
-```yaml
+```yml
 - persist_to_workspace:
     root: /tmp/dir
     paths:
