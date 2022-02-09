@@ -75,17 +75,7 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: cimg/go:1.17
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    steps:
-      - checkout
-      # ... アプリのビルド・テストに関する記述 ...
+version: 2.1 jobs: build: docker: - image: cimg/go:1.17 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference steps: - checkout # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
@@ -114,7 +104,7 @@ jobs:
 
 1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
-3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) を有効化して、イメージのビルドを高速化します (**注:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 DLC is available on CircleCI server installations). (11 行目)
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building.
 4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
 
 ## Docker のバージョン
