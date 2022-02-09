@@ -162,10 +162,6 @@ jobs:
 #...
  build2:
    machine: true
-#...
- build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
 # ...
 ```
 
@@ -194,11 +190,6 @@ jobs:
 #...
  build2:
    machine: true
-   
-#...
- build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
 # ...
 ```
 
@@ -514,7 +505,7 @@ workflows:
 ## Data Persistence
 {: #data-persistence }
 
-Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts. 
+Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts.
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
