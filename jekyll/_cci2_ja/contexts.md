@@ -8,11 +8,11 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: 必須
+suggested_links_has_experiments: true
 suggested:
   - 
     title: Context deadline exceeded after 1 hour - Build timed out
-    isExperiment: 必須
+    isExperiment: true
     link: https://support.circleci.com/hc/en-us/articles/4410707277083
 ---
 
