@@ -61,7 +61,7 @@ guide.
 
 The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
-**Note:** The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners**.
+**Note:** The only network traffic that will be billed is that accrued through **restoring caches and workspaces to self-hosted runners**.
 {: class="alert alert-info" }
 
 To view your network and storage usage follow these steps:
@@ -124,9 +124,7 @@ To calculate monthly storage costs from your daily usage, click on the **Storage
 
 To calculate monthly network costs from your usage, click on the **Network** tab to see if your organization has accrued any overages. In the same scenario as storage above, your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
-Billing for network usage is only applicable to traffic from CircleCI
-to self-hosted runners. If you are exclusively using our cloud-hosted executors,
-no network fees apply.
+Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
 
 ### How to optimize your storage and network transfer use
 {: #how-to-optimize-your-storage-and-network-transfer-use }
@@ -209,5 +207,4 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 #### Reducing excess use of network egress
 {: #reducing-excess-use-of-network-egress }
 
-Usage of network transfer to self-hosted runners can be mitigated by hosting
-runners on AWS, specifically in `US-East-1`.
+Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
