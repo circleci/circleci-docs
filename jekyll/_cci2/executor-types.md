@@ -331,8 +331,9 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine: true
-    resource_class: windows.medium
+    machine:
+      image: windows-default
+      resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
