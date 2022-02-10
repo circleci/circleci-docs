@@ -8,7 +8,6 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-
 suggested_links_has_experiments: true
 suggested:
   - 
@@ -24,9 +23,9 @@ suggested:
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
   - 
-    title: Updates to maximum duration of jobs
+    title: ジョブの最大実行時間の更新について
     isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
+    link: https://support.circleci.com/hc/ja/articles/4411086979867
 ---
 
 ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 ここでは、以下のセクションに沿って、ワークフロー機能について説明し、構成例を紹介します。
