@@ -133,14 +133,16 @@ Bundler では、明示的に指定されないシステム gem が使用され�
 steps:
   - restore_cache:
       keys:
-        # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュを復元します
-        - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
-        - gradle-repo-v1-{{ .Branch }}-
-        - gradle-repo-v1-
+        # lock ファイルが変更されると、より広範囲にマッチする 2 番目以降のパターンがキャッシュの復元に使われます
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+        - v1-gem-cache-{{ arch }}-
+  - run: bundle install
+  - run: bundle clean --force
   - save_cache:
       paths:
-        - ~/.gradle
-      key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+        - ~/.bundle
+      key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ```
 
 {% endraw %}
