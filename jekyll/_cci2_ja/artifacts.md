@@ -18,15 +18,15 @@ version:
 ## アーティファクトの概要
 {: #artifacts-overview }
 
-Artifacts persist data after a job is completed and may be used for storage of the outputs of your build process.
+アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
 
-たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI can store this file as an artifact, keeping it available after the process has finished.
+たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
 ![アーティファクトのデータ フロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。
 
-If a job produces persistent artifacts such as screenshots, coverage reports, core files, or deployment tarballs, CircleCI can automatically save and link them for you.
+ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
 Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circleci.com/) to find the **Artifacts** tab. アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
@@ -199,5 +199,5 @@ You can find out how much network and storage usage is available on your plan by
 {: #see-also }
 {:.no_toc}
 
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching/)
-- [データの永続化]({{site.baseurl}}/2.0/persist-data/#using-artifacts)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching/)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data/#using-artifacts)
