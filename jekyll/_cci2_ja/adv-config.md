@@ -224,7 +224,8 @@ jobs:
       - image: cimg/python:3.6.2-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
@@ -232,7 +233,7 @@ jobs:
       - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 
     steps:
       - checkout
@@ -268,15 +269,16 @@ jobs:
       - image: cimg/python:3.6.2-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # Service container image
+    # サービスコンテナイメージ
       - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 
     steps:
       - checkout
@@ -305,20 +307,20 @@ version: 2
 jobs:
   build:
 
-    # Primary container image where all commands run
+    # 全てのコマンドを実行するプライマリコンテナです。
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # Service container image
+    # サービスコンテナイメージ
       - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 
     steps:
       - checkout
@@ -356,7 +358,7 @@ jobs:
       - image: <primary-container-image>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       # ... steps for building/testing app ...
 
@@ -381,7 +383,7 @@ jobs:
       - image: <primary-container-image>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       # ... steps for building/testing app ...
 
