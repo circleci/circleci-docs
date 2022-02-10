@@ -68,8 +68,8 @@ This prefix takes a YAML list of arguments that form a prefix to launch the task
 
 If specifying a custom script, it must:
 
-1. take great care to ensure the task agent (i.e. the arguments passed to it) runs
-2. forward the exit code from task agent as its own exit code
+1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
+2. Forward the exit code from task agent as its own exit code
 
 Example:
 
