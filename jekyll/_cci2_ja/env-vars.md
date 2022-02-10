@@ -10,15 +10,18 @@ version:
   - Server v2.x
 suggested_links_has_experiments: true
 suggested:
-  - title: Keep environment variables private
+  - 
+    title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
-  - title: Troubleshoot env vars settings
+  - 
+    title: Troubleshoot env vars settings
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
-  - title: Insert files as environment variables
+  - 
+    title: Insert files as environment variables
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
   - 
     title: Context deadline exceeded after 1 hour - Build timed out
-    link: https://support.circleci.com/hc/en-us/articles/4410707277083
+    link: https://support.circleci.com/hc/ja/articles/4410707277083
     isExperiment: true
 ---
 
