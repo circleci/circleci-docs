@@ -72,7 +72,7 @@ jobs:
       - image: nlknguyen/alpine-shellcheck:v0.4.6
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       - checkout
       - run:
@@ -92,7 +92,7 @@ jobs:
       - image: nlknguyen/alpine-shellcheck:v0.4.6
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       - checkout
       - run:
@@ -140,16 +140,16 @@ jobs:
       - image: cimg/node:17.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       - checkout
       - run: mkdir test-reports
       - run: browser-tools/install-browser-tools
       - run:
-          name: Download Selenium
+          name: Selenium のダウンロード
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
       - run:
-          name: Start Selenium
+          name: Selenium の起動
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
@@ -166,16 +166,16 @@ jobs:
       - image: cimg/node:17.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
     steps:
       - checkout
       - run: mkdir test-reports
       - run: browser-tools/install-browser-tools
       - run:
-          name: Download Selenium
+          name: Selenium のダウンロード
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
       - run:
-          name: Start Selenium
+          name: Selenium の起動
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
