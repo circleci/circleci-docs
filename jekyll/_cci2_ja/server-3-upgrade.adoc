@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server v3.x をアップグレードするには、サーバーがインストールされている Kubernetes クラスタにアクセスし、KOTS 管理者のインスタンスを実行している必要があります。 
+Upgrading your server v3.x installation requires that you have access to the Kubernetes cluster in which server is installed, and have an instance of KOTS Admin Console running. 
 
 アップグレードをする前に、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[バックアップと復元]の設定が完了していることを確認してください。 
 
@@ -21,13 +21,13 @@ NOTE: リリースをスキップしないことをお勧めします。
 
 == CircleCI Server v３.x のアップグレード
 
-. KOTS の管理者コンソールにアクセスします。 アクセスするには、下記をご自身の CircleCI Server 名前空間に置き換えて実行します。 
+. Enter the KOTS Admin Console. アクセスするには、下記をご自身の CircleCI Server 名前空間に置き換えて実行します。 
 +
 ----
 kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-. インストールの際に作成したパスワードで管理者コンソールにログインします。
+. Log in to the Admin Console with the password you created during the installation process.
 
 . *Snapshots* タブを選択し、お使いの環境のスナップショットを作成します。 詳細については、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#creating-backups[バックアップと復元] ガイドを参照してください。
 

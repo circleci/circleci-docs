@@ -80,6 +80,8 @@ en:
           link: 2.0/contexts/
     - name: Optimizations
       children:
+        - name: Overview
+          link: 2.0/optimizations
         - name: Pipeline variables
           link: 2.0/pipeline-variables/
         - name: Persisting Data
@@ -424,9 +426,9 @@ en:
         - name: v3.3 Overview
           link: 2.0/CircleCI-Server-3.3.0-Overview.pdf
         - name: v3.3 Installation Guide for AWS
-          link: 2.0/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-3.0.0-AWS-Installation-Guide.pdf
         - name: v3.3 Installation Guide for GCP
-          link: 2.0/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-3.0.0-GCP-Installation-Guide.pdf
         - name: v3.3 Operations Guide
           link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs

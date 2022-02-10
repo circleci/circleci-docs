@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Configuration Overview"
-description: "Overview of CircleCI configuration"
+title: "設定ファイルの概要"
+description: "CircleCI の設定ファイルの概要を説明します。"
 categories:
   - configuration
 order: 2

@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Optimizations"
-short-title: "Optimizations"
+title: "Optimizations Overview"
+short-title: "Optimizations Overview"
 description: "CircleCI build optimizations"
 categories: [getting-started]
 order: 1
@@ -11,15 +11,13 @@ version:
 - Server v2.x
 ---
 
-This document provides an overview of several methods for optimizing your CircleCI configuration. Each optimization method will be described briefly, will present possible use cases, and will provide an example optimization for speeding up your jobs.
+This document provides an overview of ways to optimize your CircleCI configuration. Each optimization method will be described briefly, and present possible use cases for speeding up your jobs.
 
 * TOC
 {:toc}
 
-**Note**: For Cloud customers, some of the features discussed in this document may require a specific pricing
-plan. Visit our [pricing page](https://circleci.com/pricing/) to get an
-overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web
-application, go to **Plan** from the sidebar to view and make adjustments to your plan.
+**Warning:** Persisting data is project specific, and examples is this document are not meant to be copied and pasted into your project. The examples are meant to be guides to help you find areas of opportunity to optimize your own projects.
+{: class="alert alert-warning"}
 
 ## Docker image choice
 {: #docker-image-choice }
@@ -62,7 +60,7 @@ Make note of the use of a `checksum` in the cache `key`; this is used to calcula
 
 We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
-Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
+Consult the [Caching]({{site.baseurl}}/2.0/caching) page to learn more.
 
 ## Workflows
 {: #workflows }
@@ -100,7 +98,6 @@ workflows: # Here we can orchestrate our jobs into a workflow
       - test
 ```
 
-
 You can view more examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
 
 ## Workspaces
@@ -117,12 +114,7 @@ Read more about how to use workspaces in the [workflows document]({{site.baseurl
 ## Parallelism
 {: #parallelism }
 
-**Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
-
-If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)
-to split your tests across multiple machines. CircleCI supports automatic test
-allocation across machines on a file-basis, however, you can also manually
-customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -142,7 +134,7 @@ Read more in-depth about splitting tests in our [document on parallelism]({{site
 ## Resource class
 {: #resource-class }
 
-**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resourceclass) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
+**Note:**  If you are on a container-based plan, you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
 Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
 
@@ -168,9 +160,7 @@ jobs:
 ## Docker layer caching
 {: #docker-layer-caching }
 
-**Note**: [The Performance plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance plan](https://circleci.com/pricing/) to enable DLC for your organization.
-
-DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
+Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
 DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 

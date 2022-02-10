@@ -52,9 +52,7 @@ jobs:
 ```
 jobs:
   build: # name of your job
-    machine: # executor type
-      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
-
+    machine: true
     steps:
       # Commands run in a Linux virtual machine environment
 ```
@@ -63,8 +61,7 @@ jobs:
 ```
 jobs:
   build: # name of your job
-    machine: # executor type
-      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+    machine: true
 
     steps:
       # Commands run in a Linux virtual machine environment
@@ -119,8 +116,7 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
+    machine: true
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -134,8 +130,7 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
+    machine: true
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment

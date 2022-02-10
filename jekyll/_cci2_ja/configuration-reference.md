@@ -150,7 +150,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: cimg/ruby:3.0.3-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
@@ -334,7 +334,7 @@ jobs:
 jobs:
   myjob:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
@@ -522,7 +522,7 @@ jobs:
 
 CircleCI では、すべてのお客様がシステムを安定した状態で利用できるよう、リソース クラスごとに同時処理数のソフト制限を設けています。 Performance プランまたは Custom プランを使用していて、特定のリソース クラスで待機時間が発生している場合は、このソフト制限に達している可能性があります。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new) にお客様のアカウントの制限値引き上げを依頼してください。
 
-**メモ:** この機能は、Free プランおよび Performance プランでは自動的に有効化されています。 [比較表](https://circleci.com/ja/pricing/#comparison-table)で、Free プランと Performance プランで使用可能なリソース クラスをご確認ください。
+**メモ:** この機能は、Free プランおよび Performance プランでは自動的に有効化されています。 [比較表](https://circleci.com/ja/product/features/resource-classes/)で、Free プランと Performance プランで使用可能なリソース クラスをご確認ください。
 
 **CircleCI Server をオンプレミスでホスティングしている場合は、利用可能なリソース クラスについてシステム管理者に問い合わせてください**。 詳細については、サーバーの管理に関するドキュメントで [Nomad クライアントのシステム要件]({{ site.baseurl }}/2.0/server-ports/#nomad-clients)と[サーバーのリソース クラス]({{ site.baseurl }}/2.0/customizations/#resource-classes)のセクションを参照してください。
 
@@ -1412,7 +1412,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

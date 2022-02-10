@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-ここでは、CircleCI Server v3.x で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポート バンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI Server v3.x installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
 
 toc::[]
 
@@ -27,14 +27,14 @@ kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ブラウザーを開いて、http://localhost:8800 にアクセスし、管理者コンソールを表示します。
 
 ## サポート バンドルの生成
-サポート バンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 通常、サポート チケットを作成する場合、サポート バンドルを提出するように求められます。
+サポート バンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 They are typically requested when you open a ticket.
 
-CircleCI へのサポート依頼時に提出するサポート バンドルをダウンロードするには、管理者コンソールのメニュー バーの *[Troubleshoot (トラブルシューティング)]* タブを選択して、*[Analyze CircleCI Server (CircleCI Server の分析)]* をクリックします。
+To download a support bundle for CircleCI support, select the *Troubleshoot* tab from the Admin Console menu bar, and then click *Analyze CircleCI Server*.
 
 ## Pod の管理
 
 ### Pod の準備状況とステータスの確認
-注: `READY` 列と `STATUS` 列を確認してください。 `STATUS` が `Running` でも、Pod ではユーザーのリクエストを処理する準備はできていません。 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
+注: `READY` 列と `STATUS` 列を確認してください。 Even if the `STATUS` is `Running`, pods are not ready to serve user requests. 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
 
 [source,bash]
 ----
@@ -47,7 +47,7 @@ circleci-mongodb-0 1/1 Running 0 6d20h
 circleci-nomad-0 1/1 Running 6 6d20h
 ----
 
-ステータスが `Running` 以外の Pod だけを表示するには、--field-selector オプションを使用します。
+To show only pods with a status besides `Running`, you can use the `--field-selector` option.
 
 [source,bash]
 ----
@@ -57,7 +57,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 ### Pod の設定とステータスの確認
-Pod の詳細設定とステータスを表示するには、以下のコマンドを実行します。
+To show detailed settings and status of pods:
 
 [source,bash]
 ----
