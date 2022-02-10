@@ -356,7 +356,7 @@ version: 2.1
 jobs:
   build:
     machine:
-    resource_class: gpu.nvidia.small
+      resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
     steps:
       - run: nvidia-smi
