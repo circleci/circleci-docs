@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "依存関係のキャッシュ"
-description: "This document is a guide to caching dependencies in CircleCI pipelines."
+description: "このドキュメントでは、CircleCI パイプラインにおける依存関係のキャッシュについて説明します。"
 categories:
   - 最適化
 order: 50
@@ -11,52 +11,52 @@ version:
   - Server v2.x
 ---
 
-キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 ジョブを 1 回実行すると、以降のジョブインスタンスでは同じ処理をやり直す必要がなくなり、その分高速化されます。
+キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 ジョブを 1 回実行すると、それ以降のジョブインスタンスでは同じ処理をやり直す必要がなくなり、その分高速化されます。
 
 * 目次
 {:toc}
 
 ![キャッシュのデータフロー]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
-キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
+キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係のみをダウンロードすれば済むようになります。
 
 <div class="alert alert-warning" role="alert">
-<b>Warning:</b> Caching files between different executors, for example, between Docker and machine, Linux, Windows or macOS, or CircleCI image and non-CircleCI image, can result in file permissions and path errors. これらのエラーは、ユーザーが存在しない、ユーザーの UID が異なる、パスが存在しないなどの理由で発生します。 Use extra care when caching files in these cases.
+<b>警告:</b> 異なる Executor 間で (たとえば、Docker と Machine、Linux、Windows、または MacOS の間、または CircleCI イメージとそれ以外のイメージの間で) ファイルをキャッシュすると、ファイルへのアクセスエラーまたはパスエラーが発生することがあります。 これらのエラーは、ユーザーが存在しない、ユーザーの UID が異なる、パスが存在しないなどの理由で発生します。 異なる Executor 間でファイルをキャッシュする場合は、特に注意してください。
 </div>
 
 ## はじめに
 {: #introduction }
 {:.no_toc}
 
-CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 Manual configuration enables advanced strategies and fine-grained control. See the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) and [Persisting Data]({{site.baseurl}}/2.0/persist-data/) guides for tips on caching strategies and management.
+CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy/)と[データの永続化]({{site.baseurl}}/2.0/persist-data/)でキャッシュ戦略と管理に関するヒントを参照してださい。
 
-This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
+ここでは、手動によるキャッシュオプション、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。
 
 <div class="alert alert-warning" role="alert">
-<b>Note:</b>
-The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.</div>
+<br />
+<b>注: </b>CircleCI  のジョブ実行に使われる Docker イメージは、サーバーインフラ上で自動的にキャッシュされる場合があります。</div>
 
 <div class="alert alert-warning" role="alert">
 <b>重要:</b> 下記では様々な例を紹介していますが、キャッシュ戦略は各プロジェクトごとに入念に計画する必要があります。 サンプルコードのコピー＆ペーストではお客様のニーズに合わない場合があります。</div>
 
-For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
+Docker イメージの未変更レイヤー部分のキャッシュと再利用については、[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)のページをご覧ください。
 
-## How caching works
+## キャッシュとは
 {: #how-caching-works }
 
-キャッシュはキーで指定したファイル群の階層構造を保存するものです。 キャッシュを使用してデータを保存するとジョブが高速に実行されますが、キャッシュミス (ゼロキャッシュ リストア) が起きた場合でも、ジョブは正常に実行されます。 たとえば、`NPM`パッケージディレクトリ (`node_modules`として知られています) をキャッシュするとします。 ジョブを初めて実行すると、依存関係がすべてダウンロードされ、キャッシュされます。また、キャッシュが有効な場合は、次回ジョブを実行するときにそのキャッシュを使用してジョブを高速化します。
+キャッシュは、キーで指定したファイル群の階層構造を保存するものです。 キャッシュを使用してデータを保存するとジョブが高速で実行されますが、キャッシュミス (ゼロキャッシュリストア) が起きた場合でも、ジョブは正常に実行されます。 たとえば、`NPM`パッケージディレクトリ (`node_modules`として知られています) をキャッシュするとします。 ジョブを初めて実行すると、依存関係がすべてダウンロードされ、キャッシュされます。また、キャッシュが有効な場合は、次回ジョブを実行するときにそのキャッシュを使用してジョブを高速化します。
 
-キャッシュにより、信頼性と最大限のパフォーマンスのバランスを取ることができます。 通常、ビルドが破損したり、古い依存関係を使用して迅速にビルドするといったリスクを背負うよりも、信頼性を追求する方が安全です。
+キャッシュにより、信頼性を確保しつつ最大限のパフォーマンスを得ることができます。  通常、ビルドが破損するリスクを冒したり、古い依存関係を使用して迅速にビルドするよりも、信頼性を追求する方が安全です。
 
 ## 基本的な依存関係キャッシュの例
 {: #basic-example-of-dependency-caching }
 
-### Saving cache
+### キャッシュの保存
 {: #saving-cache }
 
-CircleCI  の手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 その他の例については、「CircleCI を設定する」の「[save_cache]({{ site.baseurl }}/2.0/configuration-reference/#save_cache)」セクションを参照してください。
+手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 下記以外の例については、「CircleCI の設定」の[キャッシュの保存]({{ site.baseurl }}/2.0/configuration-reference/#save_cache)セクションを参照してください。
 
-ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルで指定している ジョブに `save_cache` ステップを追加します。
+ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルで指定しているジョブに `save_cache` ステップを追加します。
 
 ```yaml
     steps:
@@ -69,12 +69,12 @@ CircleCI  の手動で設定可能な依存関係キャッシュを最大限に�
 
 ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
-**注:** 特別なステップ[`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
+**注:** 特別なステップである [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
 
 ### キャッシュのリストア
 {: #restoring-cache }
 
-CircleCI は、`restore_cache` ステップの keys 内で記述している順番通りにキャッシュを復元しようとします。 各キャッシュキーはプロジェクトごとに名前空間をもち、プレフィックスの一致で検索されます。 最初に一致したキーのキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
+CircleCI では、`restore_cache` ステップにリストされているキーの順番でキャッシュがリストアされます。 各キャッシュキーはプロジェクトごとに名前空間をもち、プレフィックスの一致で検索されます。 最初に一致したキーのキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
 2 つのキーを用いた例は下記の通りです。
 
@@ -102,7 +102,7 @@ CircleCI は、`restore_cache` ステップの keys 内で記述している順�
 ## キャッシュとオープンソース
 {: #caching-and-open-source }
 
-If your project is open source/available to be forked and receive PRs from contributors, make note of the following:
+プロジェクトがオープンソースの場合や、フォーク可能としてコントリビューターのプルリクエスト (PR) を受け付ける場合は、次のことに注意してください。
 
 - 同じフォークリポジトリからの PR は、キャッシュを共有します (前述のように、これには main リポジトリ内の PR と main によるキャッシュの共有が含まれます)。
 - それぞれ異なるフォークリポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。
@@ -120,14 +120,14 @@ If your project is open source/available to be forked and receive PRs from contr
 ## ワークフローでのキャッシュへの書き込み
 {: #writing-to-the-cache-in-workflows }
 
-同じワークフロー内のジョブどうしはキャッシュを共有できます。 This makes it possible to create race conditions in caching across different jobs in a workflow.
+同じワークフロー内の複数のジョブでキャッシュを共有することができます。 そのため、複数のワークフローの複数のジョブにまたがってキャッシュを実行すると、競合状態が発生する可能性があります。
 
-キャッシュの書き換えはできません。 Once a cache is written for a specific key, for example, `node-cache-main`, it cannot be written to again.
+キャッシュの書き換えはできません。 `node-cache-main`のように特定のキーにキャッシュを一度書き込むと、再度書き込むことはできません。
 
-### Caching race condition example 1
+### キャッシュの競合状態の例 1
 {: #caching-race-condition-example-1 }
 
-Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: `{Job1, Job2} -> Job3`. それら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
+たとえば、ジョブ 3 がジョブ 1 とジョブ 2 に依存する 3 つのジョブのワークフローがあるとします ({Job1, Job2} -&gt; Job3)。 これら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
 
 In a run of the workflow, Job3 may use the cache written by Job1 _or_ Job2. ただし、キャッシュは書き換え不可のため、ジョブ 1 とジョブ 2 のどちらかが最初に書き込んだキャッシュを使うことになります。
 
