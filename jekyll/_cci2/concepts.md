@@ -190,9 +190,8 @@ jobs:
          POSTGRES_USER: root
 #...
  build2:
-   machine: # Specifies a machine image.
+   machine: true # Specifies a machine image.
    # Contact your system administrator for details of the image.
-     image: window-default
 #...
 ```
 
