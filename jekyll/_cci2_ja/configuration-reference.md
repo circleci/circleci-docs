@@ -25,14 +25,14 @@ suggested:
   - 
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-    
-  - title: ジョブの最大実行時間の更新について
+  - 
+    title: ジョブの最大実行時間の更新について
     link: https://support.circleci.com/hc/ja/articles/4411086979867
     isExperiment: true
-
-  - title: アカウントのパーミッションの更新について
-    link: https://support.circleci.com/hc/ja/articles/360048210711
+  - 
+    title: アカウントのパーミッションの更新について
     isExperiment: true
+    link: https://support.circleci.com/hc/ja/articles/360048210711
 ---
 
 `.circleci/config.yml` ファイルで使用される CircleCI 2.x 構成キーのリファレンス ガイドです。
