@@ -25,14 +25,14 @@ suggested:
   - 
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-  - 
-    title: Updates to maximum duration of jobs
-    link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
+    
+  - title: ジョブの最大実行時間の更新について
+    link: https://support.circleci.com/hc/ja/articles/4411086979867
     isExperiment: true
-  - 
-    title: How to refresh user permissions
+
+  - title: アカウントのパーミッションの更新について
+    link: https://support.circleci.com/hc/ja/articles/360048210711
     isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
 
 `.circleci/config.yml` ファイルで使用される CircleCI 2.x 構成キーのリファレンス ガイドです。

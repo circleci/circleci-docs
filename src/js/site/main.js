@@ -3,8 +3,10 @@ import { highlightURLHash } from './highlightURLHash';
 
 hljs.initHighlightingOnLoad();
 
-const showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
-const hideEvents = ['mouseout', 'mouseleave', 'blur'];
+const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
+const HIDE_EVENTS = ['mouseout', 'mouseleave', 'blur'];
+const HEADER_TAGS =
+  'article h1, article h2, article h3, article h4, article h5, article h6';
 
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
@@ -117,11 +119,11 @@ function renderVersionBlockPopover() {
       destroy();
     }
 
-    showEvents.forEach((event) => {
+    SHOW_EVENTS.forEach((event) => {
       badge.addEventListener(event, show);
     });
 
-    hideEvents.forEach((event) => {
+    HIDE_EVENTS.forEach((event) => {
       badge.addEventListener(event, hide);
     });
   });
@@ -252,7 +254,8 @@ $(document).ready(function () {
     $('nav.sidebar').toggleClass('open');
   });
 
-  $('article h1, article h2, article h3, article h4, article h5, article h6')
+  $(HEADER_TAGS)
+    .not('.card')
     .filter('[id]')
     .hover(function () {
       $(this).find('i').toggle();
@@ -290,14 +293,14 @@ $(function () {
   const timeposted = document.getElementById('time-posted-on');
   let popperInstance = null;
 
-  showEvents.forEach((event) => {
+  SHOW_EVENTS.forEach((event) => {
     timeposted?.addEventListener(event, () => {
       tooltiptime.setAttribute('data-show', '');
       popperInstance = createPopper(timeposted, tooltiptime, {});
     });
   });
 
-  hideEvents.forEach((event) => {
+  HIDE_EVENTS.forEach((event) => {
     timeposted?.addEventListener(event, () => {
       tooltiptime.removeAttribute('data-show');
       if (popperInstance) {
@@ -313,16 +316,20 @@ $(function () {
   Set key if user response has not already been tracked to ensure we dont get multiple events from the same user
  */
 export function trackDarkModePreference() {
-  const storageKey = 'provided-dark-mode-response';
-  if (localStorage.getItem(storageKey)) {
-    return;
-  } else {
-    localStorage.setItem(storageKey, true);
-    window.AnalyticsClient.trackAction('User Dark Mode Preference', {
-      darkModeEnabled:
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches,
-    });
+  try {
+    const storageKey = 'provided-dark-mode-response';
+    if (localStorage.getItem(storageKey)) {
+      return;
+    } else {
+      localStorage.setItem(storageKey, true);
+      window.AnalyticsClient.trackAction('User Dark Mode Preference', {
+        darkModeEnabled:
+          window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches,
+      });
+    }
+  } catch (_) {
+    return false;
   }
 }
 

@@ -3,21 +3,27 @@
 {% include_cached head.html site=site page=page %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
-  {% include_cached google-tag-manager-noscript.html %}
+  {% include_cached google-tag-manager.html %}
 {% endif %}
 
 <div class="outer">
-  {% include_cached global-nav.html site=site page=page %}
+  {% assign lang = page.lang %}
+  {% if page.collection == "style" %}
+    {% assign sidenav = site.data.sidenavstyle[lang] %}
+  {% else %}
+    {% assign sidenav = site.data.sidenav[lang] %}
+  {% endif %}
+
+  {% include_cached global-nav.html site=site page=page sidenav=sidenav current_url=current_url %}
+
   <div id="progress-bar-container">
     {% if page.page-type != "index" and page.page-type != "homepage" %}<div id="progress-bar"></div>{% endif %}
   </div>
+
   {% include_cached hits-target.html %}
   <div class="main-body">
-    {% assign lang = page.lang %}
-    {% assign sidenav = site.data.sidenav[lang] %}
-    {% assign current_url = page.url | slice: 1, page.url.size %}
-    {% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url%}
-
+      {% assign current_url = page.url | slice: 1, page.url.size %}
+      {% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url %}
     <div class="article-toc-footer">
       <div class="article-toc">
         <div class="article-container docs" id="main">
@@ -38,23 +44,24 @@
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}
             {{ content }}
-            {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
           </article>
         </div><!-- .article-container -->
 
         {% if page.toc != false %}
-        <aside class="full-height">
+        <aside id="full-height">
           <div class='full-height-sticky'>
+
             {% if page.suggested != false %}
-            <div id="helpful-resources">
+            <div id="helpful-resources" class="{% if page.suggested_links_has_experiments %}has-experiment-links {% endif%}">
               <h5 class="helpful-heading">Helpful resources</h5>
               <div class="helpful-indent">
                 <ul class="section-nav">
                   {% for item in page.suggested %}
                   <li class="helpful-entry helpful-h2">
-                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+                    <a class="{% if item.isExperiment %} experimental-link {% endif %}" href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}
                 </ul>
@@ -79,5 +86,6 @@
   {% include_cached js-config.html site=site page=page %}
   {% include_cached js-assets.html %}
 </div><!-- .outter -->
+{% include_cached no-script.html %}
 </body>
 </html>

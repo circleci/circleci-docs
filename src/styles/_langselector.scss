@@ -4,6 +4,7 @@ $btn-outer-blue: #0078ca;
 $btn-hover-blue: #0062b0;
 $black: #161616;
 $border-col: rgba(229,231,235, 1);
+$nav-bg: #F3F3F3 !default;
 
 .lang-selector-wrapper {
   position: relative;
@@ -55,37 +56,53 @@ $border-col: rgba(229,231,235, 1);
     position: absolute;
     box-shadow: 0px 0px 8px 0px #1616161f;
     z-index: 30;
-    margin-top: 5px;
+    margin-top: 16px;
     left: -21px;
   }
 
   .lang-dropdown {
-    width: 168px;
-    margin-top: 4px;
+    width: 160px;
   }
 
   .lang-option {
     display: block;
     color: $black;
-    margin: 4px 0px;
-    margin-top: 0px;
-    padding: 4px 16px;
+    margin: 4px 0px 4px;
+    padding: 7px 20px;
     font-size: 15px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 18px;
-    &.selected {
-      background: #F3F3F3;
-      @media (max-width: $screen-xs-max) {
-        font-weight: bold;
-      }
-    }
-
     &:hover {
-      color: $btn-hover-blue;
+      background: $nav-bg;
       font-weight: 700;
       transition: all 200ms;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 0.15s;
+    }
+    .select-lang-wrap {
+      color: $btn-outer-green;
+      > img {
+        padding: 0 9px 2px 0;
+        visibility: hidden;
+        @media (max-width: $screen-xs-max) {
+          display: none;
+        }
+      }
+      > span {
+        color: $black;
+      }
+    }
+  }
+  .selected {
+    @media (max-width: $screen-xs-max) {
+      font-weight: bold;
+    }
+    font-weight: 700;
+    > span > img {
+      @media (min-width: $screen-xs-max) {
+        // override css being set w/ toggleClass for selected lang
+        visibility: visible !important;
+      }
     }
   }
 
@@ -105,7 +122,8 @@ $border-col: rgba(229,231,235, 1);
     min-width: 148px;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 8px 20px;
+    margin: 4px 0px;
+    padding: 0 20px 4px 20px;
 
 
     @media (max-width: $screen-xs-max) {
@@ -120,6 +138,7 @@ $border-col: rgba(229,231,235, 1);
       color: $black;
       margin: 4px 0px;
       font-size: 12px;
+      font-weight: 500;
       font-family: "Roboto";
       line-height: 14px;
       padding: 4px 0;

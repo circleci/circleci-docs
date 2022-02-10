@@ -180,7 +180,7 @@ $sidebar-spacing-base: 5px;
   }
 }
 
-aside.full-height {
+aside#full-height {
   .full-height-sticky {
     position: sticky;
     max-height: calc(100vh - 140px);
@@ -195,6 +195,19 @@ aside.full-height {
   }
 
   .toc-heading, .helpful-heading {
+    margin-left: -2px;
+  }
+
+  // hide the "helpful-resources" section if it has experimental links.
+  .has-experiment-links {
+    display: none;
+    &.reveal {
+      display: inherit !important;
+    }
+  }
+
+
+  .toc-heading, .related-heading {
     margin-left: -2px;
   }
 
