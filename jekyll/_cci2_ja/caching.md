@@ -276,10 +276,10 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 下記に、キーとテンプレートを含む `restore_cache` および `save_cache` の使い方がわかる `.circleci/config.yml` ファイルのサンプルコードを例示します。
 
-This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) guide.
+このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)ガイドをご覧ください。
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> この例は、<i>潜在的な</i>ソリューションであり、お客様のニーズには適さない可能性があります。
+<b>警告:</b> このサンプルは、<i>潜在的な</i>ソリューションであり、お客様のニーズには適さない可能性があります。
 </div>
 
 {% raw %}
@@ -289,22 +289,22 @@ This example uses a _very_ specific cache key. Making your caching key more spec
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照します。
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: circleci/mysql:5.6
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照します。
 
     steps:
       - checkout
       - run: cp config/{database_circleci,database}.yml
 
       # Bundler の実行
-      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドル インストール後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドルインストール後にキャッシュを保存します。
+      # 複数のキャッシュを使用して、キャッシュヒットの確率を上げます。
 
       - restore_cache:
           keys:
@@ -324,8 +324,8 @@ This example uses a _very_ specific cache key. Making your caching key more spec
       - run: bundle exec rake factory_girl:lint
 
       # アセットのプリコンパイル
-      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します。
+      # 複数のキャッシュを使用して、キャッシュヒットの確率を上げます。
 
       - restore_cache:
           keys:
@@ -372,7 +372,7 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 
 {% endraw %}
 
-この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュ ヒットを探し、次に現在のブランチからキャッシュ ヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュ ヒットを探します。 `keys` リストが検出されると、最初に一致するキーからキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
+この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュヒットを探し、次に現在のブランチからキャッシュヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュヒットを探します。 `keys` リストが検出されると、最初に一致するキーからキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
 ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 そうすることで、現在のブランチや git のリビジョンの変更が頻繁に行われる場合でも、より細やかなソースコードのキャッシュ管理を実現できます。
 
@@ -380,7 +380,7 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 
 とはいえ、ソースのキャッシュを使用する場合と使用しない場合のビルド時間を比較した方が良い場合もあります。 `restore_cache`よりも`git clone`の方が高速な場合も多々あります。
 
-**メモ:** 組み込みの `checkout` コマンドを実行すると、git の自動ガベージ コレクションが無効になります。 `save_cache` を実行する前に、`run` ステップで `git gc` を手動で実行すると、保存されるキャッシュのサイズが小さくなります。
+**注:** 既に組み込まれている `checkout` コマンドを実行すると、git の自動ガベージコレクションが無効になります。 `save_cache` を実行する前に、`run` ステップで `git gc` を手動で実行すると、保存されるキャッシュのサイズが小さくなります。
 
 ## 関連項目
 {: #see-also }
