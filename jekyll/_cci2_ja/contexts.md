@@ -11,9 +11,10 @@ version:
 suggested_links_has_experiments: true
 suggested:
   - 
-    title: Context deadline exceeded after 1 hour - Build timed out
+    title: '「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）'
     isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/4410707277083
+    link: https://support.circleci.com/hc/ja/articles/4410707277083
+---
 
 コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 このドキュメントでは、以下のセクションに沿って、CircleCI でコンテキストを作成および使用する方法について説明します。
 
