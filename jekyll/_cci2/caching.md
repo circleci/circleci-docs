@@ -199,7 +199,7 @@ Caches created via the `save_cache` step are stored for up to 15 days.
 
 Caches currently cannot be cleared. If you need to generate a new set of caches because you have updated language or build management tool versions, simply update the cache key, similar to the previous example.
 
-Updating the cache key on save and restore steps in the 'config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate & save cache for builds, so remember to rebase after the 'config.yml' changes when possible.
+Updating the cache key on save and restore steps in your '.circleci/config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
 
 You may create a new cache while still keeping the "older" cache by incrementing the cache version; however, be aware that you will be creating an additional cache, which will be available for 15 days and will increase your storage. As a general best practice, you should review what is currently being cached and reduce its size as much as possible.
 
