@@ -161,9 +161,8 @@ jobs:
          POSTGRES_USER: root
 #...
  build2:
-   machine: # Specifies a machine image.
+   machine: true
    # Contact your system administrator for details of the image.
-     image: windows-default
 #...
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
