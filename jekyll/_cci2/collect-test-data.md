@@ -1,47 +1,63 @@
 ---
 layout: classic-docs
-title: "Collecting Test Metadata"
-short-title: "Collecting Test Metadata"
-description: "Collecting test metadata"
-order: 34
+title: "Collecting test data"
+description: "A guide to collecting test data in your CircleCI projects."
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step.
+When you run tests in CircleCI there two ways to store your test results: using either artifacts or the {{site.url}}/{{site.baseurl}}/2.0/configuration-reference/#storetestresults[`store_test_results` step]. There are advantages to both methods, so the decision needs to be made for each project.
+
+When you save test data using the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults), CircleCI collects data from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
 * TOC
 {:toc}
 
-Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to
-not only upload and store test results, but also provides an easy-to-read UI of your passing/failing tests in the CircleCI
-application.
+## Overview
 
-You can access the test results interface from the *Tests* tab when viewing any particular [job]({{ site.baseurl}}/2.0/concepts/#jobs),
-as seen below.
+Using the **`store_test_results` step** gives you access to:
+
+* The **Tests** pane in the CircleCI web app, as described in the {{site.url}}/{{site.baseurl}}/2.0/collect-test-data/[Collecting Test Metadata guide].
+* Test insights and flaky test detection.
+* Test splitting
+
+Alternatively, storing test results as **artifacts** means you can look at the raw xml. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) step.
+
+## Using the `store_test_results` step
+
+Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to
+not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI
+web app.
+
+You can access the test results from the **Tests** tab when viewing a job, as shown below.
 
 ![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
 
-To see test results as build artifacts, upload them using the [`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) step.
-
-The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your config looks like the following:
+Below is an example of using  the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your `.circleci/config.yml`:
 
 ```sh
 - store_test_results:
     path: test-results
 ```
 
-Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
+The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
 
+**Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+
+## Test Insights
+See the [Test Insights guide]({{site.baseurl}}/2.0/insights-tests/) for information on using the Insights feature to gather information about your tests, including flaky test detection, viewing alist of tests that fail most often, slowest tests and abn overall performance summary.
+
+Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+
+## Test Insights for server v2.x
 **If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
 _The above screenshot applies to CircleCI server v2.x only._
 
-**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling formatters
 {: #enabling-formatters }
@@ -623,7 +639,7 @@ Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure t
 ## API
 {: #api }
 
-To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v1/#get-build-test-metadata).
+To access test metadata for a job from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v2/#operation/getTests).
 
 ## See Also
 {: #see-also }
