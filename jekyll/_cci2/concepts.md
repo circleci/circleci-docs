@@ -164,10 +164,6 @@ jobs:
    machine: true
    # Contact your system administrator for details of the image.
 #...
- build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
-# ...
 ```
 
 {:.tab.executors.Server_2}
@@ -198,10 +194,6 @@ jobs:
    # Contact your system administrator for details of the image.
      image: window-default
 #...
- build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
-# ...
 ```
 
 The primary container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Further images can be added to spin up secondary/service containers.
@@ -516,7 +508,7 @@ workflows:
 ## Data Persistence
 {: #data-persistence }
 
-Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts. 
+Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts.
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
