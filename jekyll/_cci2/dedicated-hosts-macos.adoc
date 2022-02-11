@@ -10,8 +10,6 @@ version:
 :toc: macro
 :toc-title:
 
-== Dedicated Hosts for macOS
-
 The dedicated host resource class is a new macOS option for those developing, building, testing, and signing iOS, iPadOS, macOS, WatchOS, and tvOS applications using the Xcode IDE. These dedicated resources provide an isolated environment for increased security.
 
 This resource class requires a 24-hour minimum lease and runs on Intel-based Mac hardware.
