@@ -216,11 +216,9 @@ medium                | 2     | 4GB
 medium+               | 3     | 6GB
 large                 | 4     | 8GB
 xlarge                | 8     | 16GB
-2xlarge<sup>(2)</sup> | 16    | 32GB
-2xlarge+<sup>(2)</sup>| 20    | 40GB
+2xlarge               | 16    | 32GB
+2xlarge+              | 20    | 40GB
 {: class="table table-striped"}
-
-<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
 
 Where example usage looks like the following:
 
