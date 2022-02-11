@@ -72,10 +72,10 @@ workflows:
 
 == FAQ
 
-*Q:* Why is there a 24-hour minimum?
-
-*A:* Apple released an https://www.apple.com/legal/sla/docs/macOSBigSur.pdf[updated end-user license agreement (EULA)] along with the release of Big Sur in November 2020, which requires cloud providers to lease Apple hardware to no more than one customer for a minimum of 24 hours.
-
 *Q:* How does a dedicated host differ from the other macOS resources on CircleCI?
 
 *A:* CircleCI's other macOS resources are run on isolated virtual machines, which means that multiple customers can be using VMs on the same host. Dedicated hosts provide exclusive access to an entire host, without worrying about sharing resources with other customers.
+
+*Q:* Why is there a 24-hour minimum?
+
+*A:* Apple released an https://www.apple.com/legal/sla/docs/macOSBigSur.pdf[updated end-user license agreement (EULA)] along with the release of Big Sur in November 2020, which requires cloud providers to lease Apple hardware to no more than one customer for a minimum of 24 hours.
