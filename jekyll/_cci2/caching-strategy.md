@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Caching strategies"
+title: "Caching Strategies"
 description: "This document is a guide to the various caching strategies available for managing dependency caches in CircleCI."
 categories: [optimization]
 order: 50
@@ -76,6 +76,50 @@ Check #partial-dependency-caching-strategies to see if there are tips for the la
 {: #check-cache-is-being-restored-as-well-as-saved }
 
 If you find that a cache is not being restored, see [this support article](https://support.circleci.com/hc/en-us/articles/360004632473-No-Cache-Found-and-Skipping-Cache-Generation) for tips.
+
+### Cache unused or superfluous dependencies
+{: #cache-unused-or-superfluous-dependencies }
+
+Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies.
+
+For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from `node_modules`.
+
+### Check if jobs need pruning
+{: #check-if-jobs-need-pruning}
+
+If you notice your cache usage is high and would like to reduce it:
+
+* Search for the `save_cache` and `restore_cache` commands in your `.circleci/config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
+* Narrow the scope of a cache from a large directory to a smaller subset of specific files.
+* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates).
+
+{% raw %}
+```sh
+     - save_cache:
+         key: brew-{{epoch}}
+         paths:
+           - /Users/distiller/Library/Caches/Homebrew
+           - /usr/local/Homebrew
+```
+{% endraw %}
+
+Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
+
+{% raw %}
+```sh
+     - save_cache:
+         key: brew-{{checksum “Brewfile”}}
+         paths:
+           - /Users/distiller/Library/Caches/Homebrew
+           - /usr/local/Homebrew
+```
+{% endraw %}
+
+This will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
+
+Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
+
+Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
 
 ## Partial dependency caching strategies
 {: #partial-dependency-caching-strategies }
@@ -320,4 +364,9 @@ Do not cache everything, but _do_ consider caching for costly steps like compila
 {: #see-also }
 {:.no_toc}
 
-[Optimizations]({{ site.baseurl }}/2.0/optimizations/)
+- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
+- [Caching Dependencies]({{site.baseurl}}/2.0/caching)
+- [Workspaces]({{site.baseurl}}/2.0/workspaces)
+- [Artifacts]({{site.baseurl}}/2.0/artifacts)
+- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+

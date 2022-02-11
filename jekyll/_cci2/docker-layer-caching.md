@@ -41,21 +41,61 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
-``` YAML
-version: 2
+{:.tab.switcher.Cloud}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
 jobs:
-  build:
+ build:
     docker:
-      # DLC does nothing here, its caching depends on commonality of the image layers.
-      - image: cimg/node:14.17.3
+      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true
-      # DLC will explicitly cache layers here and try to avoid rebuilding.
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_3}
+```yaml
+version: 2.1
+jobs:
+ build:
+    docker:
+      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_2}
+
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
+version: 2
+jobs:
+ build:
+    docker:
+      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
 

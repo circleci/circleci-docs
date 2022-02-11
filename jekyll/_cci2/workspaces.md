@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Using workspaces to share data between jobs"
+title: "Using Workspaces to Share Data between Jobs"
 description: "This document describes how to use workspaces to share data to downstream jobs in your workflows."
 version:
 - Cloud
@@ -28,8 +28,113 @@ To persist data from a job and make it available to other jobs, configure the jo
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
+{:.tab.workspaces.Cloud}
 ```yaml
 version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp
+
+jobs:
+  flow:
+    executor: my-executor
+    steps:
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
+
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+
+  downstream:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+
+      - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+
+workflows:
+  btd:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
+```
+
+{:.tab.workspaces.Server_3}
+```yaml
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp
+
+jobs:
+  flow:
+    executor: my-executor
+    steps:
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
+
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+
+  downstream:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+
+      - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+
+workflows:
+  btd:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
+```
+
+{:.tab.workspaces.Server_2}
+```yaml
+version: 2
 
 executors:
   my-executor:
@@ -88,14 +193,7 @@ For additional conceptual information on using workspaces, caching, and artifact
 
 Workspaces are stored for up to 15 days. Workspaces are not shared between pipelines, and the only way to access a workspace once the workflow has completed is if the workflow is rerun within the 15 day window.
 
-## Workspaces and runner network charges
-{: #workspaces-and-runner-network-charges }
-
-When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit charges will apply. These charges are based on your accrued overages.
-
-For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
-
-## Workspace usage optimization
+## Workspace optimization
 {: #workspace-usage-optimization }
 
 It is important to define paths and files when using `persist_to_workspace`. Not doing so can cause a significant increase is storage. Specify paths and files using the following syntax:
@@ -112,5 +210,9 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 {: #see-also }
 {:.no_toc}
 
-- For further information and strategies for persisting data see the [Persisting Data]({{ site.baseurl }}/2.0/persist-data) guide.
-- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows) guide.
+- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows) guide.
+- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
+- [Caching Dependencies]({{site.baseurl}}/2.0/caching)
+- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
+- [Artifacts]({{site.baseurl}}/2.0/artifacts)
+- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
