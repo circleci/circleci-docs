@@ -64,7 +64,12 @@ logging:
 === runner.command_prefix
 `$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
-This prefix takes a YAML list of arguments and enables you to customize how the task agent process is launched. Using a custom script here can allow you to execute arbitrary commands before and after the task runner. You should take care to ensure the supplied arguments are executed, and the correct exit code is returned from the script upon completion.
+This prefix takes a YAML list of arguments that form a prefix to launch the task agent.  This prefix can be a ready made tool that elevates permissions like `sudo`, or a customer script.  The arguments passed to `command_prefix` will launch the task agent process.
+
+If specifying a custom script, it must:
+
+1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
+2. Forward the exit code from task agent as its own exit code
 
 Example:
 
