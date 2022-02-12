@@ -91,9 +91,9 @@ CircleCI パイプラインとは、プロジェクトで作業をトリガす�
 
 {: #orbs }
 
-Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb のコンセプト]({{ site.baseurl }}/ja/2.0/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
+Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb のコンセプト]({{ site.baseurl }}/ja/2.0/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、設定作業の簡素化に役立つ Orb を検索できます。
 
-The illustration in the [Configuration](#configuration) section showing an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with [the Maven orb](https://circleci.com/developer/orbs/orb/circleci/maven). Here, the orb sets up a default executor that can execute steps with Maven and run a common job (`maven/test`).
+[設定](#configuration)セクションの図は、Orb を使用して Java 設定を簡素化する例です。 下記の図では、[Maven Orb](https://circleci.com/developer/orbs/orb/circleci/maven) を使って簡易化された設定を紹介しています。 ここでは Orb は、Maven でステップを実行し共通のジョブを実行できるデフォルトの Exexcutor を設定しています (`maven/test` ) 。
 
 ![ワークフローの図]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
@@ -103,7 +103,7 @@ The illustration in the [Configuration](#configuration) section showing an examp
 
 {: #jobs }
 
-Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 For `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container. For `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos). For `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `docker` の場合、プライマリコンテナで使うには[イメージを指定する](https://circleci.com/docs/2.0/executor-intro/#docker)必要があります。 `macos` の場合、[Xcode のバージョン](https://circleci.com/docs/2.0/executor-intro/#macos)を指定する必要があります。 `windows` の場合、[Windows Orb](https://circleci.com/docs/2.0/executor-intro/#windows) を指定する必要があります。
 
 ![ジョブの図]( {{ site.baseurl }}/assets/img/docs/job.png)
 
@@ -113,11 +113,11 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 
 {: #execution-environments }
 
-Each separate job defined within your config runs in a unique Execution environment. We call them *executors*. An executor can be a Docker container or a virtual machine running Linux, Windows, or macOS.
+設定内で定義された個々のジョブは、一意の実行環境で実行されます。 CircleCI ではこれらを *Executor* と呼んでいます。 Executor は、Docker コンテナまたは Linux、Windows、または macOS を実行する仮想マシンです。
 
 ![ジョブの図]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
-You can define an image for each executor. An image is a packaged system that includes instructions for creating a running container or virtual machine. CircleCI provides a range of images for use with the Docker executor, we call these _convenience images_. For more information, see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
+Executor ごとにイメージを定義することができます。 イメージは、実行コンテナや仮想マシンを作成するための指示を含むパッケージ化されたシステムです。 CircleCI では、 Docker の Executor で使用するさまざまなイメージを提供しています。これを _CircleCI イメージ_ と呼んでいます。 ビルド済み CircleCI Docker イメージの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/circleci-images/)を参照してください。
 
 {:.tab.executors.Cloud}
 
@@ -152,8 +152,8 @@ jobs:
      image: ubuntu-2004:202010-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
+     macos: # macOS 仮想マシンと Xcode バージョン 12.5 を指定します。
+       xcode: "1.12.5"
 # ...
 ```
 
@@ -191,8 +191,8 @@ jobs:
      image: ubuntu-2004:202010-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
+     macos: # macOS 仮想マシンと Xcode バージョン 12.5 を指定します。
+       xcode: "1.12.5"
 # ...
 ```
 
@@ -202,21 +202,23 @@ jobs:
 
 ```yaml
 version: 2
+ jobs:
+   build1: # ジョブ名
+     docker: # プライマリコンテナイメージを指定します。
+        - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
 
-jobs:
- build1: # job name
-   docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
-       auth:
+       - image: postgres:9.4.1 # データベース イメージを指定します。
+　　 auth:
          username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # for the secondary or service container run in a common
-      # network where ports exposed on the primary container are
-      # available on localhost.
+         password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
+        # セカンダリコンテナまたはサービスコンテナは、
+　　＃プライマリコンテナで公開されているポートが
+　　＃ローカルホストで使用可能な共通ネットワークで実行されます。
+       
+        
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
@@ -232,17 +234,17 @@ jobs:
      image: ubuntu-1604:201903-01
 #...
  build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
+     macos: # macOS 仮想マシンと Xcode バージョン 12.5 を指定します。
+       xcode: "1.12.5"
 # ...
 ```
 
 
-The primary container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプの選び方]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。 Further images can be added to spin up secondary/service containers.
+プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシンイメージをスピンアップします。 比較表と考慮事項については、「[Executor タイプの選び方]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。 さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
 
-For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
+Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
 
-**Note:** macOS is not available on installations of CircleCI server v2.x.
+**注: **macOS は CircleCI Server v 2.x. では使用できません。
 
 
 
@@ -250,7 +252,7 @@ For added security when using the Docker executor and running Docker commands, t
 
 {: #steps }
 
-Steps are usually a collection of the executable commands required to complete your job. For example, the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
+ステップは通常、ジョブを完了するために必要な実行可能コマンドの集まりです。 たとえば以下の例では、[checkout</code>]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップ (すべての CircleCI プロジェクトで使用できるビルトインステップ) が SSH コマンドでジョブのソースコードをチェックアウトします。 次に、`run` ステップで、デフォルトで非ログインシェルを使用して、`make test` コマンドなどのカスタムコマンドを実行します。 コマンドは、 [ジョブ宣言の外部]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) に定義することもでき、設定全体で再利用することができます。
 
 
 
@@ -281,9 +283,9 @@ jobs:
 
 {: #images }
 
-An image is a packaged system that includes instructions for creating a running container. The primary container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs, using the Docker or machine executor.
+イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。
 
-The **Docker executor** spins up a container with a Docker image. CircleCI maintains [convenience images]({{ site.baseurl }}/2.0/circleci-images/) for popular languages on Docker Hub.
+**Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI では一般的なプログラミング言語に対応する[CircleCI イメージ]({{ site.baseurl }}/2.0/circleci-images/)を Docker Hub 上に用意しています。
 
 The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/2.0/executor-types/#using-machine) doc.
 
