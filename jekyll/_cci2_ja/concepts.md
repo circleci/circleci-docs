@@ -943,7 +943,7 @@ jobs:
 
 後続のコミットでは、Dockerfile が変更されていない場合、DLC は ` build Elixir image`のステップでキャッシュから各 Docker イメージレイヤーをプルし、イメージのビルドが著しく高速化します。
 
-See [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) for more information.
+詳細は、[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)を参照して下さい。
 
 
 
@@ -951,9 +951,9 @@ See [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) for mor
 
 {: #parallelism }
 
-The more tests your project involves, the longer it takes for them to complete on a single machine. With _parallelism_, you can spread your tests across a specified number of separate executors.
+プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 _並列処理_により、指定した数の別々の Executor にテストを分散することができます。
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs)レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 1 よりも大きい値を設定します。
 
@@ -961,31 +961,31 @@ The more tests your project involves, the longer it takes for them to complete o
 
 ```yaml
 # ~/.circleci/config.yml
-version: 2.1
+version: 2
 jobs:
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: circleci/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照します。
     parallelism: 4
 ```
 
 
 ![並列処理]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-See [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for more information.
+詳細は、[テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照して下さい。
 
 
 
-## ダイナミック コンフィグ
+## ダイナミックコンフィグ
 
 {: #dynamic-configuration }
 
-Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. This is especially helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from *specific* parts of your project, rather than rebuilding everything each time.
+各プロジェクトの設定を手動で作成する代わりに、特定のパイプラインパラメーターまたはファイルパスに基づいて、この設定を動的に生成することができます。 これは、チームがモノレポ（単一のリポジトリ）で作業している場合に特に役立ちます。 ダイナミックコンフィグを使うと、プロジェクトの*特定の*部分からビルドをトリガーできます。毎回すべてを再ビルドする必要はありません。
 
-See [Dynamic Configuration]({{ site.baseurl }}/2.0/dynamic-config/) for more information.
+詳細は、[ダイナミックコンフィグ]({{ site.baseurl }}/2.0/dynamic-config/)を参照して下さい。
 
 
 
@@ -993,21 +993,21 @@ See [Dynamic Configuration]({{ site.baseurl }}/2.0/dynamic-config/) for more inf
 
 {: #contexts }
 
-コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 After a context has been created, you can use the `context` key in the workflows section of a project `config.yml` file to give any job(s) access to the environment variables associated with the context.
+コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 コンテキストを作成したら、`config.yml `ファイルのワークフローセクションで </code>context</code> キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_3}
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_2}
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
+![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
-See [Using Contexts]({{ site.baseurl }}/2.0/contexts/) for more information.
+詳細は、[コンテキストの使用]({{ site.baseurl }}/2.0/contexts/)を参照して下さい。
 
 
 
@@ -1019,4 +1019,4 @@ See [Using Contexts]({{ site.baseurl }}/2.0/contexts/) for more information.
 
 {:.no_toc}
 
-[Your First Green Build]({{ site.baseurl }}/2.0/getting-started/) guides you step-by-step through setting up a working pipeline.
+[はじめてのビルドの成功（グリーンビルド)]({{ site.baseurl }}/2.0/getting-started/) では、動作中のパイプラインを設定する方法を順を追って紹介しています。
