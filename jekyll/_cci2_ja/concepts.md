@@ -287,19 +287,19 @@ jobs:
 
 **Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI では一般的なプログラミング言語に対応する[CircleCI イメージ]({{ site.baseurl }}/2.0/circleci-images/)を Docker Hub 上に用意しています。
 
-The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/2.0/executor-types/#using-machine) doc.
+**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。 詳細は、[マシンの使用]({{ site.baseurl}}/2.0/executor-types/#using-machine)を参照して下さい。
 
-比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
+比較表と考慮事項については、「[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
 
 
 
  ```yaml
  version: 2.1
  jobs:
-   build1: # job name
-     docker: # Specifies the primary container image,
-     # see circleci.com/docs/2.0/circleci-images/ for
-     # the list of pre-built CircleCI images on dockerhub.
+   build1: # ジョブ名
+     docker: # プライマリコンテナイメージを指定します。
+     # dockerhub にあるビルド済みの CircleCI イメージの一覧は、
+     # circleci.com/ja/docs/2.0/circleci-images/ を参照してください。
        - image: buildpack-deps:trusty
          auth:
            username: mydockerhub-user
@@ -325,7 +325,7 @@ The **machine executor** spins up a complete Ubuntu virtual machine image, givin
        image: ubuntu-1604:202007-01
 ...
    build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+     macos: # macOS 仮想マシンと Xcode バージョン 12.5.1 を指定します。
        xcode: "12.5.1"
  ...
  ```
@@ -333,7 +333,7 @@ The **machine executor** spins up a complete Ubuntu virtual machine image, givin
 
 
 
-## ワークフローの図
+## ワークフロー
 
 {: #workflows }
 
@@ -351,7 +351,7 @@ The **machine executor** spins up a complete Ubuntu virtual machine image, givin
 
 ![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
-The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
+下記の設定サンプルでは、`build_and_test` というワークフローを紹介しています。`build1` ジョブを実行し、その後 `build2` ジョブと `build3` ジョブを同時に実行します。
 
 {:.tab.workflows-example.Cloud}
 
@@ -369,14 +369,14 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows
@@ -386,29 +386,29 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Running tests
+          name: テストの実行
           command: make test
   build3:
     docker:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Precompile assets
@@ -447,14 +447,14 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows
@@ -464,29 +464,29 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Running tests
+          name: テストの実行
           command: make test
   build3:
     docker:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Precompile assets
@@ -525,14 +525,14 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows
@@ -542,13 +542,13 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Running tests
@@ -558,13 +558,13 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Precompile assets
@@ -572,13 +572,13 @@ jobs:
 #...
 workflows:
   version: 2.1
-  build_and_test: # name of your workflow
+  build_and_test: # ワークフロー名。
     jobs:
       - build1
       - build2:
           requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # see circleci.com/docs/2.0/workflows/ for more examples.
+           - build1 # build1 ジョブが正常に完了するのを待ってから開始します。
+           # この他の例については、circleci.com/ja/docs/2.0/workflows/ を参照してください。
       - build3:
           requires:
            - build1 # build1 ジョブが正常に完了するのを待ってから、
@@ -590,11 +590,11 @@ workflows:
 
 
 
-## Data Persistence
+## データの保持
 
 {: #data-persistence }
 
-Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts. 
+データの保持により、ジョブ間でデータを動かし、ビルドを高速化することができます。 データを保持するには、キャッシュ、ワークスペース、アーティファクトを使った 3 つの方法があります。 
 
 ![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -602,9 +602,9 @@ Data persistence allows you to move data between jobs and speed up your build. T
 
 ### キャッシュ
 
-キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
+キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 ビルドを高速化するために、各ジョブには、以前のジョブからの依存関係をキャッシュするための特別な手順が含まれている場合があります。
 
-If you need to [clear your cache](https://circleci.com/docs/2.0/caching/#clearing-cache), refer to the [Caching Dependencies](https://circleci.com/docs/2.0/caching/) page for more information on caching.
+[キャッシュをクリアする](https://circleci.com/docs/2.0/caching/#clearing-cache)必要がある場合は、[依存関係のキャッシュ](https://circleci.com/docs/2.0/caching/)のページで詳細をご確認ください。
 
 {:.tab.cache.Cloud}
 
@@ -625,32 +625,32 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
-      # template for an environment variable,
-      # see circleci.com/docs/2.0/caching/
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
+      # 環境変数のテンプレートは、
+      #circleci.com/docs/2.0/caching/
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/circleci-demo-workflows
+            - ~/circleci-demo-workflows をご覧ください。
 
   build2:
     docker:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 
@@ -676,32 +676,32 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
-      # template for an environment variable,
-      # see circleci.com/docs/2.0/caching/
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
+      # 環境変数のテンプレートは、
+      #circleci.com/docs/2.0/caching/
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/circleci-demo-workflows
+            - ~/circleci-demo-workflows をご覧ください。
 
   build2:
     docker:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 
@@ -727,32 +727,32 @@ jobs:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
-      # template for an environment variable,
-      # see circleci.com/docs/2.0/caching/
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
+      # 環境変数のテンプレートは、
+      #circleci.com/docs/2.0/caching/
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/circleci-demo-workflows
+            - ~/circleci-demo-workflows をご覧ください。
 
   build2:
     docker:
       - image: cimg/ruby:2.4-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
       - image: cimg/postgres:9.4.12
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI の環境変数を参照します。
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係をリストアします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 
@@ -763,7 +763,7 @@ jobs:
 
 ### ワークスペース
 
-ワークスペースは、ワークフロー対応のストレージ メカニズムです。 ワークスペースには、ダウンストリームジョブで必要になる可能性がある、ジョブ固有のデータが保存されます。 Workflows 1 つ 1 つは、それぞれに一時的な Workspace が関連付けられています。  Workspace は同じ Workflows において、ジョブの実行中にビルドしたデータを他のジョブに渡すのに使います。
+ワークスペースは、ワークフロー対応のストレージメカニズムです。 ワークスペースには、ダウンストリームジョブで必要になる可能性がある、ジョブ固有のデータが保存されます。 各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用されます。
 
 
 
@@ -900,18 +900,18 @@ jobs:
 
 {% endraw %}
 
-Note the following distinctions between artifacts, workspaces, and caches:
+アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
 
 | タイプ      | ライフタイム    | 用途                                                           | 例                                                                                                                                           |
 | -------- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                            | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.            |
+| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                            | **Job ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>container`などのディレクトリの下に表示されます。                                     |
 | ワークスペース  | ワークフローの期間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                       |
 | キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
 
 
 {: class="table table-striped"}
 
-See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+ワークスペース、キャッシュ、アーティファクトに関する詳細は、[ワークフローでデータを保持する: キャッシュ、アーティファクト、ワークスペース活用のヒント](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 
 
@@ -919,9 +919,9 @@ See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspace
 
 {: #docker-layer-caching }
 
-Docker Layer Caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
+Docker Layer Caching  (DLC ) により、 ジョブにおいてビルドされた Docker イメージの個々のレイヤーがキャッシュされます。 変更されていないレイヤーは、毎回イメージを再ビルドするのではなく、後続の実行において使用されます。
 
-In the `config.yml` snippet below, the `build_exlixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+下記の `config.yml` スニペットでは、`build_exlixir` ジョブで `ubuntu-2004:202104-01` Dockerfile を使ってイメージをビルドしています。 `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
 
 
 
@@ -935,12 +935,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: build Elixir image
+          name: Elixir イメージのビルド
           command: docker build -t circleci/elixir:example .
+
 ```
 
 
-On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds significantly faster.
+後続のコミットでは、Dockerfile が変更されていない場合、DLC は ` build Elixir image`のステップでキャッシュから各 Docker イメージレイヤーをプルし、イメージのビルドが著しく高速化します。
 
 See [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) for more information.
 
