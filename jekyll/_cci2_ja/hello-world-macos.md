@@ -116,7 +116,7 @@ lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos 
 
 We can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64` which will output the following
 
-```shell
+```
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ```
 

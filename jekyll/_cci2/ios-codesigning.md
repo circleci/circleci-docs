@@ -71,7 +71,7 @@ On CircleCI, Fastlane Match will need to be run every time you build and sign yo
 
 **Note:** For the `match` action to work correctly, you *must* add `setup_circle_ci` to `before_all` in your `Fastfile`. This ensures that a temporary Fastlane keychain with full permissions is used. Without using this you may see build failures or inconsistent results.
 
-```
+```ruby
 # fastlane/Fastfile
 default_platform :ios
 
@@ -114,7 +114,7 @@ with GitHub* button.
 
 In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. For example:
 
-```
+```ruby
 git_url("git@github.com:fastlane/certificates")
 app_identifier("tools.fastlane.app")
 username("user@fastlane.tools")
@@ -183,7 +183,7 @@ workflows:
 
 The best practice configuration for setting up code signing for iOS projects is as follows:
 
-```
+```ruby
 # fastlane/fastfile
 default_platform :ios
 
