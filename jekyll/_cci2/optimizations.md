@@ -68,7 +68,7 @@ To persist data from a job and make it available to downstream jobs via the [`at
 
 If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
-* Read more about splitting tests on the [Parallelism]({{site.baseurl}}/2.0/parallelism/s) page.
+* Read more about splitting tests on the [Parallelism]({{site.baseurl}}/2.0/parallelism/) page.
 
 ## Resource class
 {: #resource-class }
