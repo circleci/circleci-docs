@@ -8,7 +8,7 @@ version:
   - Server v2.x
 ---
 
-ここでは、 CircleCI ビルド内外でデータを保持する様々な方法を概説します。 ジョブ間およびジョブの内外にデータを移動したり、データを永続化して後で使用するには複数の方法があります。 適切なタスクに適切な機能を使用することで、ビルドが高速化し、再現性と効率が向上します。
+ここでは、 CircleCI ビルド内外でデータを永続化する様々な方法を概説します。 ジョブ間およびジョブの内外にデータを移動したり、データを永続化して後で使用するには複数の方法があります。 適切なタスクに適切な機能を使用することで、ビルドが高速化し、再現性と効率が向上します。
 
 * 目次
 {:toc}
@@ -31,7 +31,7 @@ Yarn や Bundler、Pip といった依存関係管理ツールが良い例です
 ## ワークスペースの使用
 {: #using-workspaces }
 
-![Workspace のデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークスペースのデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 **ワークスペースは最長で15日間保存されます。**
 
@@ -59,7 +59,7 @@ Yarn や Bundler、Pip といった依存関係管理ツールが良い例です
 
 以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
 
-**注:** お客様の全体の**ネットワーク転送量**は、課金される使用量を表すものではありません。 特定のアクションによるネットワーク使用が、結果として課金対象となります。 これらのアクションについて、以下に説明します。
+**Note:** The only network traffic that will be billed is that accrued through **restoring caches and workspaces to self-hosted runners**.
 {: class="alert alert-info" }
 
 お客様のネットワークおよびストレージの使用状況は、以下のステップにより確認できます。
@@ -73,22 +73,21 @@ Yarn や Bundler、Pip といった依存関係管理ツールが良い例です
 ### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
 
-ジョブ内でデータを永続化するための操作には、ネットワークとストレージの使用が発生します。関連するアクションは次のとおりです。
+All data persistence operations within a job will accrue storage usage, the relevant actions are:
 
-* キャッシュのアップロードとダウンロード
-* ワークスペースのアップロードとダウンロード
+* Uploading caches
+* Uploading workspaces
 * アーティファクトのアップロード
 * テスト結果のアップロード
 
 上記のアクションを行うジョブを決定するには、プロジェクトの `config.yml `ファイルで次のコマンドを検索します。
 
 * `save_cache`
-* `restore_cache`
 * `persist_to_workspace`
 * `store_artifacts`
 * `store_test_results`
 
-ネットワーク転送（課金対象）が発生するネットワーク関連アクションは、**キャッシュとワークスペースのセルフホストランナーへのリストア**です。
+The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners**.
 
 ストレージとネットワーク転送の使用状況の詳細は、Plan > Plan Usage 画面で確認できます。 この画面では以下の内容を確認できます。
 
@@ -123,23 +122,23 @@ Yarn や Bundler、Pip といった依存関係管理ツールが良い例です
 
 使用量から 1 か月のネットワーク料金を計算するには、 **Network ** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
-GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
+Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
 
 ### ストレージとネットワーク転送の使用を最適化する方法
 {: #how-to-optimize-your-storage-and-network-transfer-use }
 
 ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
 
-たとえば、データ使用量を減らしたい場合、各データの使用を保持する価値があるかどうかを検討してください。
+たとえば、データ使用量を減らしたい場合、各データの使用量を保持する価値があるかどうかを検討してください。
 
 キャッシュとワークスペースの場合、比較が非常に簡単です。キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？
 
-以下では、アーティファクト、キャッシュ、ワークスペースのトラフィックを減らすことによる、ストレージとネットワークを最適化例について説明しています。
+以下では、アーティファクト、キャッシュ、ワークスペースのトラフィックを減らすことによる、ストレージとネットワークを最適化する例について説明しています。
 
 #### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
 
-実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
+実際に必要なファイルがわずかな場合でも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。それを防ぐための簡単な対策として、どのアーティファクトがなぜアップロードされているかを確認してください。
 
 ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
@@ -206,7 +205,4 @@ UI テストのイメージや動画をアップロードする場合は、フ�
 #### ネットワーク転送の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
 
-ネットワーク使用量を減らしたい場合、次のことをお試しください。
-
-* Runner の場合は、 AWS US-East-1 にクラウドベースのランナーをデプロイします。
-* アーティファクトを 1 度ダウンロードし、ご自身のサイトに保存して処理を追加します。
+Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
