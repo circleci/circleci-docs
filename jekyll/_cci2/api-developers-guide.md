@@ -434,7 +434,7 @@ The following section details the steps you need to follow to download artifacts
 
 1. First, we will ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
 
-    ```
+    ```shell
     export CIRCLECI_TOKEN={your_api_token}
     ```
 
@@ -453,7 +453,7 @@ The following section details the steps you need to follow to download artifacts
 
     You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
 
-    ```
+    ```json
     {
       "path": "circleci-docs/assets/img/docs/walkthrough6.png",
       "node_index": 0,
