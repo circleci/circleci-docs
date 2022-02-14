@@ -196,7 +196,7 @@ Workspaces are stored for up to 15 days. Workspaces are not shared between pipel
 ## Workspace optimization
 {: #workspace-usage-optimization }
 
-It is important to define paths and files when using `persist_to_workspace`. Not doing so can cause a significant increase is storage. Specify paths and files using the following syntax:
+It is important to define paths and files when using `persist_to_workspace`. Not doing so can cause a significant increase in storage. Specify paths and files using the following syntax:
 
 ```yml
 - persist_to_workspace:
