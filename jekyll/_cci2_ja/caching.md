@@ -196,7 +196,11 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ### キャッシュのクリア
 {: #clearing-cache }
 
-言語または依存関係管理ツールのバージョンが変更され、キャッシュをクリアする必要がある場合は、上の例のような命名戦略を使用します。 その後、`config.yml` ファイルのキャッシュキー名を変更して、変更をコミットしてキャッシュをクリアします。
+Caches cannot be cleared. If you need to generate a new set of caches you can update the cache key, similar to the previous example. You might wish to do this if you have updated language or build management tool versions.
+
+Updating the cache key on save and restore steps in your '.circleci/config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
+
+If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache, which will be available for 15 days. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
 
 <div class="alert alert-info" role="alert">
 <b>ヒント:</b> キャッシュは変更不可なので、すべてのキャッシュキーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
@@ -215,7 +219,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ### キャッシュサイズ
 {: #cache-size }
 
-キャッシュ サイズは 500 MB 未満に抑えることをお勧めします。 これは、破損チェックを実行するための上限のサイズです。 このサイズを超えると、チェック時間が非常に長くなります。 キャッシュサイズは、CircleCI の [Jobs (ジョブ)] ページの `restore_cache` ステップで確認できます。 キャッシュサイズを増やすこともできますが、キャッシュのリストア中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュサイズを抑えるため、複数のキャッシュに分割することを検討してください。
+We recommend keeping cache sizes under 500MB. これは、破損チェックを実行するための上限のサイズです。 このサイズを超えると、チェック時間が非常に長くなります。 キャッシュ サイズは、CircleCI の [Jobs (ジョブ)] ページの `restore_cache` ステップで確認できます。 キャッシュサイズを増やすこともできますが、キャッシュのリストア中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュサイズを抑えるため、複数のキャッシュに分割することを検討してください。
 
 ### ネットワークとストレージ使用状況の表示
 
@@ -224,13 +228,13 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ## キーとテンプレートの使用
 {: #using-keys-and-templates }
 
-各キャッシュキーは、1 つのデータキャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュキーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュキー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
+各キャッシュ キーは、1 つのデータキャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュキーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュキー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
 
 ```sh
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
-上の例の出力は、このキーを表す一意の文字列です。 ここでは、[チェックサム](https://en.wikipedia.org/wiki/Checksum)を使用して、`package-lock.json` の内容を表す一意の文字列を作成しています。
+上の例の出力は、このキーを表す一意の文字列です。 ここでは、[チェックサム](https://ja.wikipedia.org/wiki/チェックサム)を使用して、`package-lock.json` の内容を表す一意の文字列を作成しています。
 
 この例では、以下のような文字列が出力されます。
 
@@ -242,7 +246,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 キャッシュの `key` に使用するテンプレートを選択するうえでは、キャッシュの保存にはコストがかかることを留意してください。 キャッシュを CircleCI ストレージにアップロードするにはある程度の時間がかかります。 ビルドのたびに新しいキャッシュが生成されるのを避けるには、変更があった場合にのみ新しいキャッシュを生成する`キー`を指定します。
 
-まず初めに、プロジェクトにおいて一意となる値のキーを用いて、キャッシュを保存またはリストアするタイミングを決めます。 ビルド番号が増えたとき、リビジョンが上がったとき、依存マニフェストファイルのハッシュ値が変わったときなどが考えられます。
+まず初めに、プロジェクトにおいて一意となる値のキーを用いて、キャッシュを保存・復元するタイミングを決めます。 ビルド番号が増えたとき、リビジョンが上がったとき、依存マニフェストファイルのハッシュ値が変わったときなどが考えられます。
 
 以下は、さまざまな目的に合わせたキャッシュ戦略の例です。
 
@@ -279,7 +283,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)ガイドをご覧ください。
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> このサンプルは、<i>潜在的な</i>ソリューションであり、お客様のニーズには適さない可能性があります。
+<b>Warning:</b> This example is only a <i>potential</i> solution and might be unsuitable for your specific needs, and increase storage costs.
 </div>
 
 {% raw %}
@@ -372,7 +376,7 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 
 {% endraw %}
 
-この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュヒットを探し、次に現在のブランチからキャッシュヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュヒットを探します。 `keys` リストが検出されると、最初に一致するキーからキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
+この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュ ヒットを探し、次に現在のブランチからキャッシュ ヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュ ヒットを探します。 `keys` リストが検出されると、最初に一致するキーからキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
 ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 そうすることで、現在のブランチや git のリビジョンの変更が頻繁に行われる場合でも、より細やかなソースコードのキャッシュ管理を実現できます。
 
@@ -380,7 +384,7 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 
 とはいえ、ソースのキャッシュを使用する場合と使用しない場合のビルド時間を比較した方が良い場合もあります。 `restore_cache`よりも`git clone`の方が高速な場合も多々あります。
 
-**注:** 既に組み込まれている `checkout` コマンドを実行すると、git の自動ガベージコレクションが無効になります。 `save_cache` を実行する前に、`run` ステップで `git gc` を手動で実行すると、保存されるキャッシュのサイズが小さくなります。
+**メモ:** 組み込みの `checkout` コマンドを実行すると、git の自動ガベージ コレクションが無効になります。 `save_cache` を実行する前に、`run` ステップで `git gc` を手動で実行すると、保存されるキャッシュのサイズが小さくなります。
 
 ## 関連項目
 {: #see-also }
