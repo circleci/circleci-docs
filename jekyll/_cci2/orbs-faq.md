@@ -67,11 +67,11 @@ _**Note:** NOT RECOMMENDED - It is possible to use `@volatile` to receive the la
 
 * **Question:** Why do I get the following error when testing locally:
 
-```
+```bash
 circleci build -c .circleci/jobs.yml --job test
 ```
 
-```
+```bash
 Error:
 You attempted to run a local build with version 2.1 of configuration.
 ```

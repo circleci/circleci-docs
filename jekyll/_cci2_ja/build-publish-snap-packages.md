@@ -72,7 +72,7 @@ CircleCI で Snap をビルドすると、`.snap` ファイルが作成され、
 
 Snap のパブリッシュは、ほぼ 2 ステップで完了します。 以下に Linux マシン上の例を示します。
 
-```Bash
+```shell
 snapcraft login
 # プロンプトに従って Ubuntu One のアカウントでログインします
 snapcraft export-login snapcraft.login

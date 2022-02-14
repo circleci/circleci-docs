@@ -304,7 +304,7 @@ NOTE: `us-east-1`は LocationConstraint をサポートしていません。 `us
 
 ===== 手順 2:  CircleCI Server 用の IAM ユーザーを作成します。
 
-```
+```shell
 aws iam create-user --user-name circleci-server
 ```
 

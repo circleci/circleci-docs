@@ -28,7 +28,7 @@ To install the latest version, you can run `curl \https://kots.io/install | bash
 
 Ensure you are running the minimum KOTS version ({kotsversion}) by running the command:
 
-```
+```bash
 kubectl kots version
 ```
 
@@ -37,7 +37,7 @@ https://github.com/microsoft/WSL/issues/4199.
 
 From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 
-```shell
+```bash
 kubectl kots install circleci-server
 ```
 
@@ -56,7 +56,7 @@ NOTE: Once you have created your namespace, we recommend setting your `kubectl` 
 
 If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
 
-```shell
+```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
 ```
 
@@ -80,13 +80,13 @@ NOTE: If you are selecting the option to use private load balancers, the Let's E
 
 * *Frontend TLS Private Key (required)* - You created this during your pre-requisite steps. You can retrieve this value with the following command:
 +
-```shell
+```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
 * *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. You can retrieve this value with the following command:
 +
-```shell
+```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 

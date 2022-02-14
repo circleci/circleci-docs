@@ -172,7 +172,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 ==== 例
 
-```shell
+```json
 {
     "items": [
         {

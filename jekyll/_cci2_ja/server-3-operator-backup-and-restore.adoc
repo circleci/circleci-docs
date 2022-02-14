@@ -148,7 +148,7 @@ aws iam create-access-key --user-name velero
 ----
 
 このコマンドの結果は以下のようになります。
-[source,bash]
+[source,json]
 ----
 {
   "AccessKey": {

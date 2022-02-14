@@ -48,7 +48,7 @@ replicatedctl app status inspect
 +
 以下のように出力されます。
 +
-```shell
+```json
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",
@@ -105,7 +105,7 @@ replicatedctl app status inspect
 +
 以下のように出力されます。
 +
-```shell
+```json
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",
