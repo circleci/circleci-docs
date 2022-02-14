@@ -911,7 +911,7 @@ jobs:
 
 {: class="table table-striped"}
 
-ワークスペース、キャッシュ、アーティファクトに関する詳細は、[ワークフローでデータを保持する: キャッシュ、アーティファクト、ワークスペース活用のヒント](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+ワークスペース、キャッシュ、アーティファクトに関する詳細は、[ワークフローでデータを永続化する: キャッシュ、アーティファクト、ワークスペース活用のヒント](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 
 
