@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "最適化"
-short-title: "最適化"
+title: "Optimizations Overview"
+short-title: "Optimizations Overview"
 description: "CircleCI build optimizations"
 categories:
   - はじめよう
@@ -12,12 +12,13 @@ version:
   - Server v2.x
 ---
 
-このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 最適化の各方法について簡単に説明し、考えられるユース ケースを提示し、ジョブを最適化して高速化する例を示します。
+This document provides an overview of ways to optimize your CircleCI configuration. Each optimization method will be described briefly, and present possible use cases for speeding up your jobs.
 
 * TOC
 {:toc}
 
-**Note**: For Cloud customers, some of the features discussed in this document may require a specific pricing plan. Visit our [pricing page](https://circleci.com/pricing/) to get an overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web application, go to **Plan** from the sidebar to view and make adjustments to your plan.
+**Warning:** Persisting data is project specific, and examples is this document are not meant to be copied and pasted into your project. The examples are meant to be guides to help you find areas of opportunity to optimize your own projects.
+{: class="alert alert-warning"}
 
 ## Docker image choice
 {: #docker-image-choice }
@@ -59,7 +60,7 @@ jobs:
 
 依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
 
-詳細については、[キャッシュに関するドキュメント]({{site.baseurl}}/2.0/caching)を参照してください。
+Consult the [Caching]({{site.baseurl}}/2.0/caching) page to learn more.
 
 ## ワークフロー
 {: #workflows }
@@ -97,7 +98,6 @@ workflows: # Here we can orchestrate our jobs into a workflow
       - test
 ```
 
-
 その他のワークフローの例については、[CircleCI デモ ワークフロー リポジトリ](https://github.com/CircleCI-Public/circleci-demo-workflows/)を参照してください。
 
 ## ワークスペース
@@ -113,8 +113,6 @@ workflows: # Here we can orchestrate our jobs into a workflow
 
 ## 並列処理
 {: #parallelism }
-
-**メモ:** ビルドで使用できる並列処理のレベル (1、2、4 など) は、お使いの CircleCI プランによって決まります。
 
 If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
@@ -136,7 +134,7 @@ jobs:
 ## リソース クラス
 {: #resource-class }
 
-**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. コンテナ ベースのプランをご利用の場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)し、この機能をアカウントで有効にしてください。 セルフホスティング環境では、システム管理者がリソース クラスのオプションを設定できます。
+**Note:**  If you are on a container-based plan, you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. セルフホスティング環境では、システム管理者がリソース クラスのオプションを設定できます。
 
 `resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表](https://circleci.com/docs/2.0/configuration-reference/#resourceclass)にまとめています。オンプレミス版の一覧については、システム管理者にお問い合わせください。
 
@@ -162,11 +160,9 @@ jobs:
 ## Docker レイヤーキャッシュ
 {: #docker-layer-caching }
 
-**Note**: [The Performance plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance plan](https://circleci.com/pricing/) to enable DLC for your organization.
+Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
-DLC は、ビルド内の Docker イメージの_ビルド時間_を短縮するのに役立つ機能です。 日常的な CI/CD プロセスの中で頻繁に Docker イメージをビルドする場合に便利に活用できます。
-
-DLC は、ジョブ内でビルドしたイメージ レイヤーを_保存_し、それを後続のビルドで使用できるようにするという点で、前述の_依存関係のキャッシュ_に似ています。
+DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
 {:.tab.switcher.Cloud}
 ```yaml
@@ -187,7 +183,7 @@ jobs:
       - run: docker build .
 ```
 
-{:.tab.switcher.Server-v2}
+{:.tab.switcher.Server_3}
 ```yaml
 version: 2.1
 jobs:
@@ -204,7 +200,7 @@ jobs:
       - run: docker build .
 ```
 
-保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
+{:.tab.switcher.Server_2}
 
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
