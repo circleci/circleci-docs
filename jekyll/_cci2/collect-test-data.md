@@ -50,13 +50,13 @@ Test metadata is not automatically collected in CircleCI until you enable the JU
 
 - RSpec requires the following be added to your gemfile:
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 - Minitest requires the following be added to your gemfile:
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
@@ -68,7 +68,7 @@ gem 'minitest-ci'
 {: #metadata-collection-in-custom-test-steps }
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
-```
+```yaml
 - store_test_results:
     path: /tmp/test-results
 ```
@@ -309,7 +309,7 @@ To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner y
 
 A working `.circleci/config.yml` section for testing might look like the following example:
 
-```
+```yaml
     steps:
       - run:
           command: |
@@ -332,7 +332,7 @@ To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUni
 
 A working `.circleci/config.yml` test section might look like this:
 
-```
+```yaml
     steps:
       - run:
           command: |
@@ -354,13 +354,13 @@ A working `.circleci/config.yml` test section might look like this:
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 And modify your test command to this:
 
-```
+```yaml
     steps:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
@@ -378,13 +378,13 @@ And modify your test command to this:
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
 And modify your test command to this:
 
-```
+```yaml
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -443,7 +443,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
-```
+```yaml
       - run:
           name: run tests
           command: |
@@ -465,7 +465,7 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
 After adding pytest to your project, you can produce and upload the test results like this:
-```
+```yaml
       - run:
           name: run tests
           command: |
@@ -532,7 +532,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
-```
+```yaml
     steps:
       - run:
           command: |

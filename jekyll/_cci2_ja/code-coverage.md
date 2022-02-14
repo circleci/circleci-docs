@@ -36,7 +36,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 
 [SimpleCov](https://github.com/colszowka/simplecov) は、よく使用される Ruby コードカバレッジ ライブラリです。 まず、`simplecov` gem を `Gemfile` に追加します。
 
-```
+```ruby
 gem 'simplecov', require: false, group: :test
 ```
 
@@ -200,7 +200,6 @@ python my_program.py arg1 arg2
 
 # ここでは、コマンドにプレフィックス "coverage" を付けます。
 coverage run my_program.py arg1 arg2
-
 ```
 
 この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジレポートを生成できます。
@@ -677,4 +676,3 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
-

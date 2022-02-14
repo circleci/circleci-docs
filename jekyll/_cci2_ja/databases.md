@@ -30,7 +30,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 
 以下のように CircleCI 設定ファイルで `postgres` に POSTGRES_USER 環境変数を設定して、イメージにロールを追加します。
 
-```yml
+```yaml
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
@@ -43,7 +43,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 
 {% raw %}
 
-```yml
+```yaml
 version: 2
 jobs:
   build:
@@ -115,8 +115,8 @@ jobs:
 
 `pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の構成を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベース ユーティリティを有効化します。
 
-```
-     steps:
+```yaml
+    steps:
     # Add the Postgres 9.6 binaries to the path.
        - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
 ```
@@ -127,7 +127,7 @@ jobs:
 
 ジョブで複数の Docker コンテナを使用している場合、コンテナ内のサービスが開始される前にジョブがサービスを使用しようとすると、競合状態が発生することがあります。 たとえば、PostgreSQL コンテナが実行されていても、接続を受け入れる準備ができていない場合などです。 この問題を回避するには、`dockerize` を使用して依存関係を待機します。 以下の例は、CircleCI `config.yml` ファイルでこの問題を回避する方法を示しています。
 
-```yml
+```yaml
 version: 2.0
 jobs:
   build:

@@ -40,7 +40,7 @@ different languages.
 [Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code
 coverage library. To get started, add the `simplecov` gem to your `Gemfile`
 
-```
+```ruby
 gem 'simplecov', require: false, group: :test
 ```
 

@@ -47,13 +47,13 @@ Test metadata is not automatically collected in CircleCI until you enable the JU
 
 - RSpec では、gemfile に以下を追加する必要があります。
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 - Minitest では、gemfile に以下を追加する必要があります。
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
@@ -65,7 +65,7 @@ gem 'minitest-ci'
 {: #metadata-collection-in-custom-test-steps }
 
 ほとんどのテストランナーで何らかの形式でサポートされている JUnit XML 出力を生成するカスタム テストステップがある場合は、 XML ファイルを以下のようにサブディレクトリに書き込みます。
-```
+```yaml
 - store_test_results:
     path: /tmp/test-results
 ```
@@ -307,7 +307,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 `.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
-```
+```yaml
     steps:
       - run:
           command: |
@@ -330,7 +330,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 `.circleci/config.yml` の作業テスト セクションは、以下のようになります。
 
-```
+```yaml
     steps:
 
       - run:
@@ -356,13 +356,13 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 カスタム `rspec` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 さらに、テスト コマンドを以下のように変更します。
 
-```
+```yaml
     steps:
 
       - checkout
@@ -381,13 +381,13 @@ gem 'rspec_junit_formatter'
 
 カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
 さらに、テスト コマンドを以下のように変更します。
 
-```
+```yaml
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -448,7 +448,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 `pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
 
-```
+```yaml
       - run:
           name: テストの実行
           command: |
@@ -470,7 +470,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
 After adding pytest to your project, you can produce and upload the test results like this:
-```
+```yaml
       - run:
           name: テストの実行
           command: |
@@ -551,8 +551,7 @@ Visual Studio または .NET Core で出力される trx ファイルを XML 形
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
-```yaml
-    A working `.circleci/config.yml` section might look like this:
+A working `.circleci/config.yml` section might look like this:
 
 ```yaml
     steps:

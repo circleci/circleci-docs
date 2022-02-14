@@ -163,7 +163,7 @@ Below is an example resource class configuration:
 
 Example config:
 
-```
+```edn
 {:default-resource-class :medium
 
  :resource-classes
