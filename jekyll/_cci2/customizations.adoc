@@ -183,7 +183,7 @@ Example config:
 
 Let's take a look at one of the options in more detail
 
-```
+```edn
 :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
