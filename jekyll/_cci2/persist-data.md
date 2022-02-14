@@ -44,7 +44,7 @@ Workspaces are used to transfer data to downstream jobs as the workflow progress
 ### Workspace optimization
 {: #workspace-optimization }
 
-If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `.circleci/config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary. In the cases of caches and workspaces, this can be quite easy to compare. Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `.circleci/config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
 
 * For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 * For more information on workflows, see the [Workflows]({{site.baseurl}}/2.0/workflows/) page. 
