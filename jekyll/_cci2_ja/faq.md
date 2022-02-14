@@ -291,7 +291,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+**注: **ネットワーク転送とストレージに対する課金は、2022 年 3 月 1 日より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しています。 このセクションの内容は、2022 年 3 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
 Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan** Usage.
@@ -306,9 +306,9 @@ Calculate your monthly storage and network costs by finding your storage and net
 {: #network }
 {:.no_toc}
 
-使用量から 1 か月のネットワーク コストを計算するには、 **Network (ネットワーク)** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. [Read More]({{site.baseurl}}/2.0/persist-data/#overview-of-storage-and-network-transfer).
 
-GB の割り当ては、CircleCI 外部へのトラフィックにのみ適用されます。 CircleCI 内部のトラフィックには制限はありません。
+Your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
 #### 毎月の IP アドレスの範囲機能料金の計算方法は？
 {: #how-do-I-calculate-my-monthly-IP-ranges-costs }
