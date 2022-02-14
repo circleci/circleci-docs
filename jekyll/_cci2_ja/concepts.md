@@ -35,7 +35,7 @@ CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD 
 
 ```bash
 ├── .circleci
-│   ├── config.yml
+│   ├── config.yml
 ├── README
 └── all-other-project-files-and-folders
 ```
@@ -184,16 +184,9 @@ jobs:
          POSTGRES_USER: root
 #...
  build2:
-   machine: # Specifies a machine image that uses
-   # an Ubuntu version 20.04 image with Docker 19.03.13
-   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
-   # for new image releases.
-     image: ubuntu-2004:202010-01
+   machine: true
+   # Contact your system administrator for details of the image.
 #...
- build3:
-     macos: # macOS 仮想マシンと Xcode バージョン 12.5 を指定します。
-       xcode: "1.12.5"
-# ...
 ```
 
 
@@ -225,18 +218,9 @@ version: 2
          POSTGRES_USER: root
 #...
  build2:
-     machine: # Docker 17.06.1-ce および docker-compose 1.14.0 と
-     # 共に Ubuntu バージョン 14.04 イメージを使用する
-     # マシン イメージを指定します。 新しいイメージのリリースについては、
-     # CircleCI Discuss の「Announcements」をフォローしてください。
-       image: circleci/classic:201708-01
+   machine: true # Specifies a machine image.
+   # Contact your system administrator for details of the image.
 #...
-     image: ubuntu-1604:201903-01
-#...
- build3:
-     macos: # macOS 仮想マシンと Xcode バージョン 12.5 を指定します。
-       xcode: "1.12.5"
-# ...
 ```
 
 
@@ -594,7 +578,7 @@ workflows:
 
 {: #data-persistence }
 
-データの永続化により、ジョブ間でデータを動かし、ビルドを高速化することができます。 データを永続化するには、キャッシュ、ワークスペース、アーティファクトを使った 3 つの方法があります。 
+データの永続化により、ジョブ間でデータを動かし、ビルドを高速化することができます。 データを永続化するには、キャッシュ、ワークスペース、アーティファクトを使った 3 つの方法があります。
 
 ![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
