@@ -9,7 +9,7 @@ version:
   - Server v3.x
   - Server v2.x
 
-suggested_links_has_experiments: true
+experiment_only_suggestions: false
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行

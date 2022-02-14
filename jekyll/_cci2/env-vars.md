@@ -8,7 +8,7 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-suggested_links_has_experiments: true
+experiment_only_suggestions: false
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/

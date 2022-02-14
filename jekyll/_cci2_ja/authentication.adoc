@@ -4,7 +4,7 @@ version:
 - Server v2.x
 - サーバー管理
 
-suggested_links_has_experiments: true
+experiment_only_suggestions: true
 suggested:
   - title: アカウントのパーミッションの更新について
     isExperiment: true

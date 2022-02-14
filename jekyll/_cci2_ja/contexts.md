@@ -9,7 +9,7 @@ version:
   - Server v3.x
   - Server v2.x
 
-suggested_links_has_experiments: true
+experiment_only_suggestions: true
 suggested:
   - title: 「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）
     link: https://support.circleci.com/hc/ja/articles/4410707277083

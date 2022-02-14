@@ -4,7 +4,7 @@ version:
 - Server v2.x
 - Server Admin
 
-suggested_links_has_experiments: true
+experiment_only_suggestions: true
 suggested:
   - title: How to refresh user permissions
     isExperiment: true
