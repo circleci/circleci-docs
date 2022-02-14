@@ -17,7 +17,7 @@ toc::[]
 
 == CircleCI ランナーのセキュリティモデルは、どのようになっていますか。
 
-CircleCI ランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。 
+CircleCI ランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。
 
 CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可することと同等です。
 
@@ -41,11 +41,19 @@ NOTE: ランナーにインバウンド接続は必要ありません。 それ�
 
 CAUTION: チェックアウト ステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
-== CircleCI ランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
+== How do caching, workspaces, and artifacts work with CircleCI runner?
 
-キャッシュ、ワークスペース、アーティファクトは、S3 の us-east-1 リージョンに保存されます。 ランナーが別のリージョンでセットアップされている場合、パフォーマンスが低下する可能性があります。 
+Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. Caches, workspaces, and artifacts will be stored in the AWS us-east-1 region of S3. ランナーが別のリージョンでセットアップされている場合、パフォーマンスが低下する可能性があります。
 
-アーティファクト ストレージを自社で完全に管理したい場合は、組み込みのステップを使用せず、ご希望のストレージ バックエンドに直接アーティファクトをアップロードすることをお勧めします。
+Find out more about these concepts below:
+
+* <<caching#, キャッシュ>>
+* <<workspaces#, ワークスペース>>
+* <<artifacts#, アーティファクト>>
+
+You can also find out more on the <<persist-data#, Persisting Data>> page.
+
+If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and upload the artifacts directly to your chosen storage backend.
 
 == ジョブ間の状態管理に関するベストプラクティスを教えてください。
 
@@ -53,7 +61,7 @@ CAUTION: チェックアウト ステップでは、VCS プロバイダーへの
 
 一般的には、再現性が高まるよう、ジョブが状態に依存することは最小限に抑えることをお勧めします。 そのためには、前のジョブの結果に依存せずに確実にジョブが実行されるように、ジョブの最初にクリーンにするステップを配置するのが効果的です。
 
-ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。 また、長期的には、ディスク容量を使い果たす可能性もあります。
+CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。 また、長期的には、ディスク容量を使い果たす可能性もあります。 As a result, this trade-off could lead to higher billable usage.
 
 == 1 つのホスト上で複数のランナーを実行することはできますか。
 
