@@ -149,7 +149,7 @@ aws iam create-access-key --user-name velero
 ----
 
 The result should look like this:
-[source,bash]
+[source,json]
 ----
 {
   "AccessKey": {

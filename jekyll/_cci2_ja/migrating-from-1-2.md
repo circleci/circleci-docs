@@ -43,17 +43,17 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 3. `.circleci/config.yml` ファイルの先頭に、`version: 2` を記述します。
 
 4. `config.yml` ファイルのバージョンを指定する行の後に、以下の 2 行を追加します。 既存の構成内容に `machine:` を記述していた場合は、`machine:` を以下の 2 行に置き換え、古い設定ファイルのすべてのセクションを `build` の下にネストします。
-     ```
+     ```yaml
      jobs:
        build:
      ```
 5. `docker:` キーと `- image:` キーを記述するか、`machine: true` を設定するか、`macos` を指定して、プライマリ コンテナを実行するときの言語とバージョンを追加します。 以下の `ruby:` の例のように、構成に言語とバージョンが含まれている場合は、修正が必要です。
-     ```
+     ```yaml
        ruby:
          version: 2.7
      ```
      上記を以下の 2 行に置き換えます。
-     ```
+     ```yaml
          docker:
            - image: circleci/ruby:2.7
      ```
@@ -68,19 +68,19 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
 
 6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。 それには、以下のコードを検索します。
-     ```
+     ```yaml
      checkout:
        post:
      ```
      上記を以下のように置き換えます。
-     ```
+     ```yaml
          steps:
            - checkout
            - run:
      ```
 
      以下に例を示します。
-     ```
+     ```yaml
      checkout:
       post:
 
@@ -88,7 +88,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
         - echo "foo" > /tmp/test-data/foo
      ```
      上の例は次のようになります。
-     ```
+     ```yaml
          steps:
            - checkout
            - run: mkdir -p /tmp/test-data
@@ -115,14 +115,14 @@ For more information, refer to the CircleCI document [Using Environment Variable
 1. ワークフロー機能を使用するには、ビルド ジョブを複数のジョブに分割し、それぞれに一意の名前を付けます。 デプロイのみが失敗したときにビルド全体を再実行しなくても済むように、最初はデプロイ ジョブのみを分割するだけでもよいでしょう。
 
 2. ベスト プラクティスとしては、`workflows:`、`version: 2`、`<ワークフロー名>` の各行をマスター `.circleci/config.yml` ファイルの*末尾*に追加します。 `config.yml` ファイルのワークフロー セクションは、構成の中にネストしません。 ワークフロー セクションの `version: 2` は `config.yml` ファイルの先頭にある `version:` キーとは別に設定するものであるため、ワークフロー セクションはファイルの末尾に置くのが最善です。
-     ```
+     ```yaml
      workflows:
        version: 2
        <ワークフロー名>:
      ```
 3. `<ワークフロー名>` の下に `jobs:` キーの行を追加し、オーケストレーションするジョブ名をすべて記述します。 この例では、`build` と `test` を並列に実行しています。
 
-     ```
+     ```yaml
      workflows:
        version: 2
        <ワークフロー名>:
@@ -132,14 +132,14 @@ For more information, refer to the CircleCI document [Using Environment Variable
      ```
 4. 別のジョブが成功したかどうかに応じて順次実行する必要があるジョブについては、`requires:` キーを追加し、そのジョブを開始するために成功する必要があるジョブをその下にネストします。 `curl` コマンドを使用してジョブを開始していた場合、ワークフロー セクションでは、そのコマンドを削除して `requires:` キーでジョブを開始できます。
 
-     ```
+     ```yaml
       - <ジョブ名>:
           requires:
             - <ジョブ名>
      ```
 5. 特定のブランチでジョブを実行する必要がある場合は、`filters:` キーを追加し、その下に `branches` と `only` キーをネストします。 ジョブを特定のブランチで実行してはいけない場合は、`filters:` キーを追加し、その下に `branches` と `ignore` キーをネストします。 **メモ:** ワークフローは、ジョブ セクションに記述してあるブランチ指定を無視します。 したがって、ジョブでブランチを指定していて、後からワークフローを追加する場合は、ジョブ セクションのブランチ指定を削除し、`config.yml` のワークフロー セクションで以下のようにブランチを宣言する必要があります。
 
-     ```
+     ```yaml
      - <ジョブ名>:
          filters:
            branches:
