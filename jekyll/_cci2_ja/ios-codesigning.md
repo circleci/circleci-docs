@@ -58,7 +58,7 @@ CircleCI では、ユーザー アプリのアドホック ビルドを生成す
 
 **注意:** `fastlane match` を正しく動作させるには、`Fastfile` の `before_all` ブロックに `setup_circle_ci` を追加する*必要があります*。 そうすることで、全アクセス権を持つ一時的な fastlane キーチェーンが確実に使用されます。 これを使用しないと、ビルドに失敗したり、一貫性のない結果になる可能性があります。
 
-```
+```ruby
 # fastlane/Fastfile
 default_platform :ios
 
@@ -97,7 +97,7 @@ GitHub から証明書とキーを fastlane match にダウンロードするに
 
 `Matchfile` では、`git_url` は **HTTPS** URL ではなく、**SSH** URL (`git@github.com:...` 形式) にする必要があります。 SSH URL 形式にせずに match を使用すると、認証エラーが発生する可能性があります。 たとえば、以下のようになります。
 
-```
+```ruby
 git_url("git@github.com:fastlane/certificates")
 app_identifier("tools.fastlane.app")
 username("user@fastlane.tools")
@@ -157,7 +157,7 @@ workflows:
 
 iOS プロジェクトおよび Mac プロジェクトに対してコード署名をセットアップする設定ファイルのベスト プラクティスは以下のとおりです。
 
-```
+```ruby
 # fastlane/Fastfile
 default_platform :ios
 
