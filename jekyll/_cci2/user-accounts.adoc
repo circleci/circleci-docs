@@ -83,8 +83,7 @@ NOTE: Any form of organization membership is within the scope of this approval f
 
 To view a full list of users for your CircleCI server installation, first SSH into your Services machine, and then run:
 
-```
-circleci dev-console
+```clojure
 (circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
 ```
 
@@ -94,7 +93,6 @@ NOTE: If you have at any point changed your GitHub/Enterprise hostname associate
 
 If you need to remove a user from your installation of CircleCI server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's GitHub username:
 
-```shell
-circleci dev-console
+```clojure
 (circle.http.api.admin-commands.user/delete-by-login-vcs-type! "github-username-of-user" :github)
 ```

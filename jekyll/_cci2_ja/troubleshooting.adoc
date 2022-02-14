@@ -138,7 +138,7 @@ NOTE: The use of `--stderr` is to print the specific error if one exists.
 
 If the nomad client logs contain the following error message typw, check port 8585:
 
-```shell
+```json
 {"error":"rpc error: code = Unavailable desc = grpc: the connection is
 unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
 ```

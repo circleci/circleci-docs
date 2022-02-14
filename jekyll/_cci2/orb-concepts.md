@@ -124,7 +124,7 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 
 When importing an orb which has jobs, you can reference them directly from your workflows.
 
-```
+```yml
 version: 2.1
 
 orbs:

@@ -66,7 +66,7 @@ circleci orb init /path/to/myProject-orb --private
 1. **Choose the fully automated orb setup option.**
 <br>
 <!---->
-```
+```shell
   ? Would you like to perform an automated setup of this orb?:
       ▸ Yes, walk me through the process.
   No, I'll handle everything myself.

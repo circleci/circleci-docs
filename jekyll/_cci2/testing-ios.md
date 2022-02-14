@@ -519,7 +519,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 To update Cocoapods to the latest stable version, simply update the Ruby gem with the following command:
 
-```
+```shell
 sudo gem install cocoapods
 ```
 

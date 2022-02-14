@@ -47,7 +47,7 @@ Xcode の次回安定版リリースよりも前に開発者の方々がアプ�
 Apple は、今回のリリースで Intel (`x86_64` ) と Apple シリコン(`arm64`)の両方のツールチェーンを提供しているため、 Xcode`12.0.0`以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコン バイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
 CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple シリコン アプリケーションをネイティブで実行またはテストすることは現在不可能です。 アプリケーションをローカルでテストするには、バイナリを [アーティファクト](https://circleci.com/docs/ja/2.0/artifacts/) としてエクスポートする必要があります。 または、
- CircleCI のランナーを使用して、 Apple シリコン上でネイティブにジョブを実行することもできます。</p> 
+ CircleCI のランナーを使用して、 Apple シリコン上でネイティブにジョブを実行することもできます。</p>
 
 
 
@@ -73,16 +73,16 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
  | `11.4.1` | Xcode 11.4.1 (11E503a)     | 10.15.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)                       |
  | `10.3.0` | Xcode 10.3 (10G8)          | 10.14.4      | ×                 | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [リリースノート](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
 
- 
+
  {: class="table table-striped"}
- 
- 
+
+
 
 ## はじめよう
 
 {: #getting-started }
 
-CircleCI アプリケーションの** [Add Projects (プロジェクトの追加)] **ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。 macOS ビルドが可能なプランであることを確認する必要があります。またはプロジェクトがオープンソースの場合は、毎月無料ビルドクレジットがつく[ 特別プラン](https://circleci.com/open-source/)を申し込むことができます。 </p> 
+CircleCI アプリケーションの** [Add Projects (プロジェクトの追加)] **ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。 macOS ビルドが可能なプランであることを確認する必要があります。またはプロジェクトがオープンソースの場合は、毎月無料ビルドクレジットがつく[ 特別プラン](https://circleci.com/open-source/)を申し込むことができます。 </p>
 
 CircleCI でのアプリケーションのビルドと署名には [fastlane](https://fastlane.tools) を使用することを強くお勧めします。 fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
 
@@ -280,7 +280,7 @@ CircleCI の macOS イメージには、複数のバージョンの Ruby が格�
 
 
 
-### Ruby から macOS Orb への切り替え (推奨) 
+### Ruby から macOS Orb への切り替え (推奨)
 
 {: #switching-rubies-with-the-macos-orb-recommended }
 
@@ -492,7 +492,7 @@ Xcode イメージには少なくとも一つのバージョンの NodeJS が使
 
 Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。 また、`lts`はデフォルトの NodeJS バージョンとして設定されています。
 
-インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧になるか、またはジョブの中で `nvm ls` を実行してください。 
+インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧になるか、またはジョブの中で `nvm ls` を実行してください。
 
 以下のコマンドで `current` バージョンをデフォルトに設定します。
 
@@ -528,7 +528,7 @@ steps:
 ```
 
 
-これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性があります。 
+これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性があります。
 
 
 
@@ -540,7 +540,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 
 インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。 
+`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。
 
 
 
@@ -698,7 +698,7 @@ CocoaPods を最新の安定版に更新するには、以下のコマンドで 
 
 
 
-```
+```shell
 sudo gem install cocoapods
 ```
 

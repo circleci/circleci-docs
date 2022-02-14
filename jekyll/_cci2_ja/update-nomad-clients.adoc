@@ -97,7 +97,7 @@ Please use whatever works best with your existing methods of auto scaling group 
 
 . Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
 +
-```
+```shell
 ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
 ID        DC         Name                 Class        Drain  Eligibility  Status
 0cf07b07  default    i-070fdad5f0edef4c8  linux-64bit  false  eligible     ready
