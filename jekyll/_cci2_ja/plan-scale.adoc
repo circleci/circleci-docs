@@ -1,9 +1,9 @@
 ---
 
 version:
-- Cloud
+- クラウド
 ---
-= CircleCI Scale Plan
+= CircleCI Scale プラン
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Scale plan available to developers on CircleCI.
@@ -11,44 +11,44 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes the Scale plan available to developers.
+このドキュメントでは、開発者の皆様にご利用いただいける Scale プランについてご案内します。
 
-== Scale plan
+== Scale プラン
 
-The Scale plan grows with your team and your business, and offers a wide range of customizations. The Scale plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment. This plan provides access to the highest amount of network and storage usage that CircleCI offers.
+Scale プランでは、お客様のチームやビジネスに合わせた拡張や幅広いカスタマイズが可能です。 Scale プランにはカスタムクレジットオプションがあり、 CircleCI のすべてのリソースクラスでお客様のビルド設定や実行環境に応じて 1ヶ月単位でご利用いただけます。 このプランでは CircleCI が提供する最大量のネットワークおよびストレージをご利用いただけます。
 
-The Scale plan offers several improvements over the Free and Performance plans:
+Scaleプランでは、Free プランや Performanceプランに加えて以下の様々な機能をご利用いただけます。
 
-=== Access to IP ranges
+=== IP アドレスの範囲機能の利用
 
-Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature feature enabled will have their traffic routed through one of the defined IP address ranges during job execution (the IP ranges feature is the same on the Performance and Scale plan).
+IP アドレスの範囲機能により、制限された環境へのアクセスを IP アドレスに基づいて設定することができます。 この機能を有効にしたジョブのトラフィックは、ジョブの実行の際は指定したいずれかの IP アドレスを使用するようになります (この IP アドレスの範囲機能は Performance プランでも Scale プランでも同じです)。
 
-For more information about this features, please refer to the <<ip-ranges#,IP Ranges>> page.
+この機能に関する詳細は、<<ip-ranges#,IP Ranges>> のページをご覧ください。
 
-=== Access to all resource classes
+=== すべてのリソースクラスの利用
 
-Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
+Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイズをご利用いただけます。 コンピューティングタイプや実行環境別の追加リソースクラスを使用すると、CPU およびメモリの上限を拡大することが可能です。
 
-For more information about these resources, please refer to the the <<executor-intro#,Executors and Images>> page.
+これらのリソースに関する詳細は、<executor-intro#,Executors and Images> のページをご覧ください。
 
-=== Custom concurrency
+=== 同時処理数のカスタマイズ
 
-Customize the amount of jobs you need to run concurrently. This customization is available on all build configurations and execution environments. See <<#concurrency,Concurrency>> below for more information.
+同時に実行する必要があるジョブの数をカスタマイズすることができます。 このカスタマイズ機能はすべてのビルド設定および実行環境において利用できます。 詳細については<<#concurrency,同時処理>>のページをご覧ください。
 
-=== Custom user seat count
+=== ユーザーシート数のカスタマイズ
 
-Customize the amount of active users based on your needs.
+必要に応じてアクティブユーザー数をカスタマイズすることが可能です。
 
-=== セルフホストランナー数の制限なし
+=== 無制限のセルフホストランナー数
 
-Unlimited self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
+使用可能なセルフホストランナー数に制限がないため、お客様のインフラストラクチャ上でより多くのジョブを実行することができます。詳細は下記のセルフホストランナーのページをご覧ください。 詳細は<<#self-hosted-runners,セルフホストランナー>> のページをご覧ください。
 
-=== Additional support options
+=== 追加サポートオプション
 
-Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Scale plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Scale プランでは、[community forums] (https://discuss.circleci.com/)、[support portal] (https://support.circleci.com/hc/en-us)、および [global ticket-based system] (https://support.circleci.com/hc/en-us/requests/new) もご利用いただけます。
 
-== CircleCI features
+== CircleCI の機能
 
-In addition to the upgraded features listed above, the Scale plan also has access to the features listed below. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
+上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は [料金設定](https://circleci.com/pricing/)のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、[リソースクラスの機能] (https://circleci.com/product/features/resource-classes/)のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
 {% include snippets/features-of-circleci.adoc %}
