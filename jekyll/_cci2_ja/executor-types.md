@@ -208,18 +208,16 @@ In summary, the availability of caching is not something that can be controlled 
 
 [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
-| クラス                    | vCPU | RAM   |
-| ---------------------- | ---- | ----- |
-| small                  | 1    | 2 GB  |
-| medium                 | 2    | 4 GB  |
-| medium+                | 3    | 6 GB  |
-| large                  | 4    | 8 GB  |
-| xlarge                 | 8    | 16 GB |
-| 2xlarge<sup>(2)</sup>  | 16   | 32 GB |
-| 2xlarge+<sup>(2)</sup> | 20   | 40 GB |
+| クラス      | vCPU | RAM   |
+| -------- | ---- | ----- |
+| small    | 1    | 2 GB  |
+| medium   | 2    | 4 GB  |
+| medium+  | 3    | 6 GB  |
+| large    | 4    | 8 GB  |
+| xlarge   | 8    | 16 GB |
+| 2xlarge  | 16   | 32 GB |
+| 2xlarge+ | 20   | 40 GB |
 {: class="table table-striped"}
-
-<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
 
 たとえば次のように設定します。
 
@@ -265,8 +263,7 @@ jobs:
 version: 2.1
 jobs:
   build:
-    machine:
-      docker_layer_caching: true    # デフォルトは falseです。
+    machine: true
 ```
 
 **注意:** `image` キーは、プライベート環境の CircleCI ではサポートされていません。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。
@@ -327,12 +324,12 @@ jobs:
 version: 2
 
 jobs:
-  build: # ジョブの名前
+  build: # name of your job
     machine:
-      image: windows-default # Windows マシン イメージ
+      image: windows-default
     resource_class: windows.medium
     steps:
-      # Windows 仮想マシン環境で実行するコマンド
+      # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
@@ -373,7 +370,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-CircleCI Server では、VM サービスを構成することで GPU 対応の machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
+CircleCI Server では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
 
 ## 関連項目
 {: #see-also }
