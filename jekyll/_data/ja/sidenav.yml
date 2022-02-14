@@ -71,6 +71,8 @@ en:
         name: 最適化
         children:
           - 
+            name: 概要
+          - 
           - 
             name: データの永続化
           - 
