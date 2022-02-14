@@ -8,7 +8,7 @@ version:
 - Server v2.x
 ---
 
-This guide gives an introductory overview of the various ways to persist data within and beyond your CircleCI builds. There are a number of ways to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
+This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. There are a number of ways to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
 
 * TOC
 {:toc}
@@ -25,7 +25,7 @@ A prime example of a caching strategy is using a cache with dependency managers,
 
 Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches. 
 
-* For more information on caching dependencies, including race conditions, managing caches, expiration, and using cache keys, see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) guide.
+* For more information on caching dependencies, including race conditions, managing caches, expiration, and using cache keys, see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) page.
 
 ### Caching optimization
 {: #cache-optimization }
@@ -34,7 +34,7 @@ There are several common ways that your configuration can be optimized to ensure
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
-* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) guide.
+* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) page.
 
 ## Workspaces
 {: #workspaces }
@@ -46,8 +46,8 @@ Workspaces are used to transfer data to downstream jobs as the workflow progress
 
 If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `.circleci/config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary. In the cases of caches and workspaces, this can be quite easy to compare. Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
 
-* For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/2.0/workspaces/) guide.
-* For more information on workflows, see the [Workflows]({{site.baseurl}}/2.0/workflows/) guide. 
+* For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
+* For more information on workflows, see the [Workflows]({{site.baseurl}}/2.0/workflows/) page. 
 * Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
 ## Artifacts
@@ -70,7 +70,7 @@ Optimization options will be different for each project depending on what you ar
 - Upload artifacts to a single branch
 - Upload large artifacts to your own bucket at no cost
 
-* For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.
+* For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) page.
 
 ## Managing network and storage usage
 {: #managing-network-and-storage-usage }
@@ -103,6 +103,7 @@ To determine which jobs utilize the above actions, you can search for the follow
 - `store_test_results`
 
 The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners.**
+{: class="alert alert-info" }
 
 Details about your network and storage transfer usage can be viewed on your **Plan > Plan Usage** screen. On this screen you can find:
 
@@ -121,7 +122,7 @@ Details about individual step network and storage transfer usage can be found in
 If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
 
 * For runner, deploy any cloud-based runners in AWS US-East-1.
-* Download artifacts once and store them on your site for additional processing.
+* Download artifacts once, and store them on your site for additional processing.
 
 ### How to calculate an approximation of network and storage costs
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}

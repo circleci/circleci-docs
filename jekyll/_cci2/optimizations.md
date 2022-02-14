@@ -27,17 +27,26 @@ Choosing the right docker image for your project can have huge impact on build t
 * CircleCI provides a range of [convenience images](https://circleci.com/docs/2.0/circleci-images/#section=configuration), typically based on official Docker images, but with a range of useful language tools pre-installed.
 * You can [create your own images](https://circleci.com/docs/2.0/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide both a [Docker image build wizard](https://github.com/circleci-public/dockerfile-wizard), and [guidance for building images manually](https://circleci.com/docs/2.0/custom-images/#creating-a-custom-image-manually).
 
+## Docker layer caching
+{: #docker-layer-caching }
+
+Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
+
+DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
+
+* Read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page.
+
 ## Caching dependencies
 {: #caching-dependencies }
 
 Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
-* Consult the [Caching Dependencies]({{site.baseurl}}/2.0/caching) guide to learn more.
+* Read more on the [Caching Dependencies]({{site.baseurl}}/2.0/caching) page.
 
 ## Workflows
 {: #workflows }
 
-Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [Workflow]({{site.baseurl}}/2.0/workflows/) guide.
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows on the [Workflow]({{site.baseurl}}/2.0/workflows/) page.
 
 * You can view examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
 
@@ -50,16 +59,16 @@ Workspaces are used to pass along data that is _unique to a run_ and is needed f
 
 To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) key, configure the job to use the [`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
-* Read more in the [Workspaces]({{site.baseurl}}/2.0/workspaces/) guide.
+* Read more on the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 
-* The [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide has additional information about using workspaces to share data among jobs.
+* The [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) page has additional information about using workspaces to share data among jobs.
 
 ## Parallelism
 {: #parallelism }
 
 If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
-* Read more about splitting tests in the [Parallelism]({{site.baseurl}}/2.0/parallelism/s) guide.
+* Read more about splitting tests on the [Parallelism]({{site.baseurl}}/2.0/parallelism/s) page.
 
 ## Resource class
 {: #resource-class }
@@ -69,15 +78,6 @@ If your project has a large test suite, you can configure your build to use [`pa
 Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
 
 * See the `resource_class` section of the [Configuration Reference]({{site.baseURL}}/2.0/configuration-reference/#resourceclass) for more information.
-
-## Docker layer caching
-{: #docker-layer-caching }
-
-Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
-
-DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
-
-* Read more in the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) guide.
 
 ## See also
 {: #see-also }
