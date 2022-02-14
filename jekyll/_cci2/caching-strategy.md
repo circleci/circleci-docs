@@ -91,35 +91,35 @@ If you notice your cache usage is high and would like to reduce it:
 
 * Search for the `save_cache` and `restore_cache` commands in your `.circleci/config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
 * Narrow the scope of a cache from a large directory to a smaller subset of specific files.
-* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates).
+* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
-{% raw %}
-```sh
-     - save_cache:
-         key: brew-{{epoch}}
-         paths:
-           - /Users/distiller/Library/Caches/Homebrew
-           - /usr/local/Homebrew
-```
-{% endraw %}
+  {% raw %}
+  ```sh
+      - save_cache:
+          key: brew-{{epoch}}
+          paths:
+            - /Users/distiller/Library/Caches/Homebrew
+            - /usr/local/Homebrew
+  ```
+  {% endraw %}
 
-Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
+  Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
 
-{% raw %}
-```sh
-     - save_cache:
-         key: brew-{{checksum “Brewfile”}}
-         paths:
-           - /Users/distiller/Library/Caches/Homebrew
-           - /usr/local/Homebrew
-```
-{% endraw %}
+  {% raw %}
+  ```sh
+      - save_cache:
+          key: brew-{{checksum “Brewfile”}}
+          paths:
+            - /Users/distiller/Library/Caches/Homebrew
+            - /usr/local/Homebrew
+  ```
+  {% endraw %}
 
-This will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
+  This will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
 
-Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
+  Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
 
-Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
+  Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
 
 ## Partial dependency caching strategies
 {: #partial-dependency-caching-strategies }
