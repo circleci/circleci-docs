@@ -34,7 +34,7 @@ CircleCI でダイナミックコンフィグ機能の使用を開始するに�
 - 左側のパネルで **[Advanced (詳細設定)]** を選択します。
 - 画面下部にある **[Enable dynamic config using setup workflows (セットアップワークフローによるダイナミックコンフィグを有効にする)]** を、下記画像のようにオンにします。
 
-![UI でのダイナミック コンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
+![UI でのダイナミックコンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 これで、プロジェクトで設定ファイルの動的な生成と更新ができるようになりました。
 
@@ -42,19 +42,19 @@ CircleCI でダイナミックコンフィグ機能の使用を開始するに�
 
 ダイナミックコンフィグを使用する場合には、`setup workflow` の終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。 詳しくは、「[設定クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照して下さい)。
 
-`setup workflows` を使ってダイナミックコンフィグを使用する方法の基本的な例は、「[設定クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 クックブックにはより詳細な例が掲載されており、この機能の成熟に合わせて更新される予定です。
+`setup workflows` を使ってダイナミックコンフィグを使用する方法の基本的な例は、「[設定クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 このクックブックにはより詳細な例が掲載されており、この機能の成熟に合わせて更新される予定です。
 
-For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when using CircleCI's dynamic configuration, see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
+CircleCI のダイナミックコンフィグを使用する際のパイプライン作成/続行プロセスのバックグラウンド処理に関する詳細は、[GitHub のパブリックリポジトリ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts)を参照してください。
 
-## ダイナミック コンフィグに関するよくあるご質問
+## ダイナミックコンフィグに関するよくあるご質問
 {: #dynamic-config-faqs }
 
-### パイプライン パラメーター
+### パイプラインパラメーター
 {: #pipeline-parameters }
 
-**Q:** パイプライン パラメーターは API でしか使用できないのではありませんか？
+**Q:** パイプラインパラメーターは API でしか使用できないのではありませんか？
 
-**A:** 以前はそうでした。 But using our dynamic configuration feature, you can set pipeline parameters dynamically, before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
+**A:** 以前はそうでした。 しかし、ダイナミックコンフィグ機能を使用すると、パイプラインパラメーターを動的に設定してからパイプラインを実行したり、API または Web フック (VCS へのプッシュイベント) からパイプラインをトリガーしたりすることができます。
 
 ### continuation Orb
 {: #the-continuation-orb }
@@ -73,4 +73,4 @@ For a more in-depth explanation on the behind-the-scenes pipeline creation/conti
 
 ## さらに詳しく
 {: #learn-more }
-Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.
+Circle CI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
