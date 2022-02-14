@@ -40,7 +40,7 @@ This setting is only for packagecloud:enterprise customers. Under project settin
 
 To use the packagecloud CLI from CircleCI, install it using RubyGems by adding the following `run` step to your `.circleci/config.yml` under the job that is configured to deploy the package:
 
-```
+```yml
 - run:
    name: Install packagecloud CLI
    command: gem install package_cloud
