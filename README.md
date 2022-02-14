@@ -154,6 +154,9 @@ generated PDFs to your pull request. You will also need to change the links in `
 For more information on server documentation development (this includes overall syntax suggestions, local development, 
 and 2.x-specific information) check out the previous instructions [here](https://github.com/circleci/circleci-docs/blob/master/docs/server-docs.adoc).
 
+## Testing Checklist 
+To allow for more flexibility, please find the checklist inside our confluence [space](https://circleci.atlassian.net/l/c/Tm5oiCFF).
+
 ## License Information
 Documentation (guides, references, and associated images) is licensed as
 Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full

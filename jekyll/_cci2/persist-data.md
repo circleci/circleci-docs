@@ -70,12 +70,12 @@ Optimization options will be different for each project depending on what you ar
 - Upload artifacts to a single branch
 - Upload large artifacts to your own bucket at no cost
 
-* For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) page.
+For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) page.
 
 ## Managing network and storage usage
 {: #managing-network-and-storage-usage }
 
-Optimization goes beyond speeding up your builds and improving efficiency. Optimization can also help reduce costs.
+Optimization goes beyond speeding up your builds and improving efficiency. Optimization can also help reduce costs. The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
 To view your network and storage usage, visit the [CircleCI web app](https://app.circleci.com/) and follow these steps:
 
@@ -88,19 +88,19 @@ Within the network and storage tabs you will find a breakdown of your usage for 
 ### Overview of all network and storage transfer
 {: #overview-of-network-and-storage-transfer }
 
-All data persistence operations within a job will accrue network and storage usage, the relevant actions are:
+All data persistence operations within a job will accrue storage usage, the relevant actions are:
 
-- Uploading caches
-- Uploading workspaces
-- Uploading artifacts
-- Uploading test results
+* Uploading caches
+* Uploading workspaces
+* Uploading artifacts
+* Uploading test results
 
 To determine which jobs utilize the above actions, you can search for the following commands in your project's `.circleci/config.yml` file:
 
-- `save_cache`
-- `persist_to_workspace`
-- `store_artifacts`
-- `store_test_results`
+* `save_cache`
+* `persist_to_workspace`
+* `store_artifacts`
+* `store_test_results`
 
 The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners.**
 {: class="alert alert-info" }
@@ -119,10 +119,7 @@ Details about individual step network and storage transfer usage can be found in
 ### Reducing excess use of network egress
 {: #reducing-excess-use-of-network-egress }
 
-If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
-
-* For runner, deploy any cloud-based runners in AWS US-East-1.
-* Download artifacts once, and store them on your site for additional processing.
+Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
 
 ### How to calculate an approximation of network and storage costs
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
@@ -130,8 +127,7 @@ If you would like to try to reduce the amount of network egress that is contribu
 **NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
-Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. Billing for network usage is only applicable to traffic from CircleCI
-to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
+Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
