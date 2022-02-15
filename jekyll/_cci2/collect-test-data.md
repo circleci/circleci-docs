@@ -566,14 +566,8 @@ Edit the kaocha config file `test.edn` to use this test reporter
 ```
 
 Add the store_test_results step your `.circleci/config.yml`
-<<<<<<< HEAD
-
-```yaml
-version: 2.1
-=======
 ```yml
-version: 2
->>>>>>> c0505639f3a17d1fef05a1e3795561ea64a87920
+version: 2.1
 jobs:
   build:
     docker:
