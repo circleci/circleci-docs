@@ -698,6 +698,8 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 }
 
 #modal-content {
+  // If image has transparent background
+  background: white;
   margin: auto;
   display: block;
   width: 80%;
