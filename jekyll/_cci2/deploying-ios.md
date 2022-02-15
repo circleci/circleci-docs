@@ -246,7 +246,7 @@ workflows:
       - adhoc
 ```
 
-**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{ site.baseurl }}/2.0/testing-ios/#using-ruby).
+**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{site.baseurl}}/2.0/testing-ios/#using-ruby).
 
 ## Deploying to Visual Studio App Center
 {: #deploying-to-visual-studio-app-center }
@@ -256,7 +256,7 @@ workflows:
 ### Fastlane Plugin Setup
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command:
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the following command:
 ```bash
 fastlane add_plugin appcenter
 ```
