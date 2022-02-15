@@ -154,7 +154,7 @@ You will also need the following information:
 
 You can copy the following example to your local environment and fill in the appropriate information for your specific setup.
 
-```
+```php
 variable "project" {
   type    = string
   default = "<your-project>"
