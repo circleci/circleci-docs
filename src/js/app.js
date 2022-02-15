@@ -3,7 +3,7 @@
   browser & the dom when modifying file
  */
 import * as Cookie from 'js-cookie';
-import 'highlightjs-badge';
+import Prism from 'prismjs';
 
 import services from './services';
 import '../styles/main.scss';
@@ -16,6 +16,9 @@ window.OptimizelyClient = new services.OptimizelyClient();
 
 import site from './site';
 
+// set to manual so we can start highlighting once DOM is ready
+Prism.manual = true;
+
 services.rum.init();
 // Temporary service to check if user dark mode preferences
 trackDarkModePreference();
@@ -24,7 +27,6 @@ checkIfUsersPrint();
 
 $(() => {
   services.instantsearch.init();
-  services.highlightjsBadge.init();
   services.progressbar.init();
   services.sectionShareButton.init();
   services.lang.init();
@@ -49,4 +51,6 @@ $(() => {
     ({ default: { languageGuides } = {} }) =>
       isGatedPath ? languageGuides() : null,
   ); // ensure languageGuides is loaded; // imports all experiments
+
+  Prism.highlightAll();
 });

@@ -135,7 +135,7 @@ workflow.start
 . Set up the `awscli` and `jq` or another JSON processor for your OS.
 . In this example, grep for all `workflow.job.start` events.
 +
-```bash
+```shell
 #!/bin/bashBUCKET=YOUR-BUCKET-NAME
 for key in `aws s3api list-objects --bucket BUCKET --prefix audit-logs/audit_log/v1/ --output json | jq -r '.Contents[].Key'`;
 do
@@ -191,7 +191,7 @@ Refer to the <<monitoring#system-monitoring-metrics, Monitoring>> section for de
 
 **Answer:**
 
-```
+```javascript
 use <database>
 var coll = db.builds
 var items = coll.find({
@@ -308,21 +308,21 @@ Once you are in the repl, you can copy and paste any of the commands below, and 
 === How do I view all users?
 
 **Answer:**
-```
+```clojure
 (circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
 ```
 
 === ユーザーの削除方法
 
 **Answer:**
-```
+```clojure
 (circle.http.api.admin-commands.user/delete-by-login-vcs-type! "Sirparthington" :github)
 ```
 
 === How do I make a user an admin?
 
 **Answer:**
-```
+```clojure
 (circle.model.user/set-fields! (circle.model.user/find-one-by-github-login "your-github-username-here") {:admin "all"})
 ```
 
@@ -333,14 +333,14 @@ If a if you need some basic statistics (name, email, sign in history) for your u
 
 * *All Time*
 
-```shell
+```clojure
 circleci dev-console
 (circle.model.user/where {} :only [:name :login :emails :admin :dev_admin :activated :sign_in_count :current_sign_in_at :current_sign_in_ip :last_sign_in_at :last_sign_in_ip])
 ```
 
 * *Last Month*
 
-```shell
+```clojure
 (circle.model.user/where
   {:last_sign_in_at {:$gt (clj-time.core/minus (clj-time.core/now) (clj-time.core/months 1))}}
   :only
@@ -360,7 +360,7 @@ In the event the admin is unknown, or has left the company without creating a ne
 . Open the CircleCI dev console with the command `circleci dev-console`
 . Run this command (replacing \<username\> with the GitHub username of the person you want to promote:
 
-```shell
+```clojure
 (-> (circle.model.user/find-one-by-login "<username>") (circle.model.user/set-fields!  {:admin "write-settings"}))
 ```
 
@@ -391,7 +391,7 @@ Queues may become an issues for you if you are running version 2.10 or earlier. 
 
 === Checking Usage Queue
 
-```
+```clojure
 (in-ns 'circle.backend.build.usage-queue)
 (->> (all-builds) count) # Will give you the count for how many builds are in the queue
 
@@ -415,7 +415,7 @@ Its safe to do this by the 100's, but do not put the entire queue in.
 
 === Checking Run Queue
 
-```
+```clojure
 (circle.backend.build.run-queue/queue-depths) # returns how many are in the queue
 (->> (circle.backend.build.run-queue/all-builds) (take 3) (map circle.http.paths/build-url)) # Check the top three builds in the run-queue
 

@@ -32,7 +32,7 @@ The source code for this sample application is in the [Public samplescala GitHub
 
 CircleCI requires you to create a new directory in the repo's root and a YAML file within this new directory. The new assets must follow these naming schema's directory: `.circleci/` file: `config.yml`.
 
-```
+```shell
 mkdir .circleci/
 touch .circleci/config.yml
 ```
@@ -231,3 +231,4 @@ The run command is another multi-line execution.
 - Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
 - See the [Deploy]({{site.baseurl}}/2.0/deployment-integrations/) document for more example deploy target configurations.
 - How to [parallelize tests in SBT on CircleCI](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)
+  

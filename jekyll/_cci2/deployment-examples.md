@@ -473,13 +473,13 @@ workflows:
 
 In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
 
-```
+```shell
 npm install --save-dev firebase-tools
 ```
 
 Generate a Firebase CLI token using the following command:
 
-```
+```shell
 firebase login:ci
 ```
 
@@ -490,7 +490,6 @@ The following example shows how you can add a deploy to Firebase job to your pro
 {% raw %}
 
 ```yaml
-
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
@@ -569,7 +568,7 @@ In the following example, if the `build-job` passes and the current branch is `m
 
 {% raw %}
 
-```
+```yml
 version: 2
 
 jobs:
@@ -710,7 +709,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
     You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. Look for the following line:
 
-    ```sh
+    ```shell
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
 
@@ -754,13 +753,13 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
 4.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
-    ```sh
+    ```shell
     npm version 10.0.1
     ```
 
     This will update the `package.json` file and creates a tagged Git commit. Next, push the commit with tags:
 
-    ```sh
+    ```shell
     git push --follow-tags
     ```
 5.  If tests passed, CircleCI will publish the package to npm automatically.

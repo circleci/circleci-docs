@@ -110,13 +110,13 @@ Xcode 12.2+ will by default create universal binaries, compiling to a single exe
 
 Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
 
-```sh
+```shell
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
 ```
 
 We can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64` which will output the following
 
-```sh
+```
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ```
 

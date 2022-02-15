@@ -79,7 +79,7 @@ Below is an example
 of finding an invalid file inside [circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid)
 using the `find` command:
 
-```bash
+```shell
 # Start a shell inside the container
 $ docker run -it circleci/doc-highid sh
 

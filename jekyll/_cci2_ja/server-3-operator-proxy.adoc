@@ -25,7 +25,7 @@ toc::[]
 kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-proxy <my-https-proxy> --no-proxy <my-no-proxy-list>
 ----
 
-=== プロキシの設定 
+=== プロキシの設定
 Once you have installed server and accessed the management console, there are some fields that need to be completed in the configuration section, as shown in the screenshot below. These fields will not be automatically populated, and so the same proxy and no-proxy addresses you supplied during installation will need to be supplied here. If your proxy requires authentication in the form of a username and password, check the *HTTP Proxy authenticated* option to add the credentials.
 
 .CircleCI Server v3.x プロキシの設定
@@ -48,7 +48,7 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 +
 Users can get around this restriction by setting environment variables on their jobs. 例えば下記のようにします。
 +
-```yml
+```yaml
 jobname:
   docker:
   - image: ubuntu:latest

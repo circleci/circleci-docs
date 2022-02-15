@@ -473,13 +473,13 @@ workflows:
 
 In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
 
-```
+```shell
 npm install --save-dev firebase-tools
 ```
 
 以下のコマンドを使用して、Firebase CLI トークンを生成します。
 
-```
+```shell
 firebase login:ci
 ```
 
@@ -490,7 +490,6 @@ The following example shows how you can add a deploy to Firebase job to your pro
 {% raw %}
 
 ```yaml
-
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
@@ -569,7 +568,7 @@ In the following example, if the `build-job` passes and the current branch is `m
 
 {% raw %}
 
-```
+```yml
 version: 2
 
 jobs:
@@ -707,7 +706,7 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
     それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 次の行を探します。
 
-    ```sh
+    ```shell
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
 
@@ -751,13 +750,13 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
 4.  新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
 
-    ```sh
+    ```shell
     npm version 10.0.1
     ```
 
     これで、`package.json` ファイルがアップデートされ、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。
 
-    ```sh
+    ```shell
     git push --follow-tags
     ```
 5.  テストが完了すると、パッケージが npm に自動的にパブリッシュされます。

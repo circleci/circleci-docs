@@ -59,25 +59,25 @@ these things:
 A single command can be used to test that your keys are set up as expected. For
 GitHub run:
 
-```
+```bash
 ssh git@github.com
 ```
 
 or for Bitbucket run:
 
-```
+```bash
 ssh -Tv git@bitbucket.org
 ```
 
 and you should see:
 
-```
+```bash
 $ Hi :username! You've successfully authenticated...
 ```
 
 for GitHub or for Bitbucket:
 
-```
+```bash
 $ logged in as :username.
 ```
 
@@ -111,7 +111,7 @@ several reasons, depending on your SSH configuration.)
 Figure out which key is being offered to GitHub that authenticates you, by
 running:
 
-```
+```bash
 $ ssh -v git@github.com
 
 # Or
@@ -121,7 +121,7 @@ $ ssh -v git@bitbucket.com
 
 In the output, look for a sequence like this:
 
-```
+```bash
 debug1: Offering RSA public key: /Users/me/.ssh/id_rsa_github
 <...>
 debug1: Authentication succeeded (publickey).
@@ -133,7 +133,7 @@ GitHub accepted.
 Next, run the SSH command for your CircleCI build, but add the -v flag.
 In the output, look for one or more lines like this:
 
-```
+```bash
 debug1: Offering RSA public key: ...
 ```
 
@@ -143,7 +143,7 @@ example, /Users/me/.ssh/id_rsa_github) was also offered to CircleCI.
 If it was not offered, you can specify it via the `-i` command-line
 argument to SSH. For example:
 
-```
+```bash
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 

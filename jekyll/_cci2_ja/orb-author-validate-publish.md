@@ -9,17 +9,17 @@ version:
 ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は、[Orb のオーサリング プロセス]({{site.baseurl}}/2.0/orb-author)を参照してください。
 
 1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を入力して実行してください。
-```sh
+```shell
 circleci namespace create <my-namespace> github <my-gh-org>
 ```
 **注**: CircleCI CLI から名前空間を作成する場合は、必ず VCS プロバイダーを指定してください。
 
 1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。 **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**. **[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を作成する場合:
-```sh
+```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
 **[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
-```sh
+```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
 
@@ -44,29 +44,29 @@ circleci orb validate /tmp/orb.yml
 ```
 
 1. 開発版の Orb をパブリッシュします。
-```sh
+```shell
 circleci orb publish /tmp/orb.yml <my-namespace>/<my-orb-name>@dev:first
 ```
 
 1. Orb を安定版にプッシュする準備が整ったら、`circleci orb publish` を使用して手動でパブリッシュするか、開発版から直接プロモートすることができます。 以下のコマンドを使用すると、開発版のバージョン番号を `0.0.1` にインクリメントできます。
-```sh
+```shell
 circleci orb publish promote <my-namespace>/<my-orb-name>@dev:first patch
 ```
 
 1. 安定版の Orb が変更不可形式でパブリッシュされ、CircleCI プロジェクトで安全に使用できるようになりました。 以下のコマンドを使用して、Orb のソースをプルします。
-```sh
+```shell
 circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 ```
 
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
 **[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
-```sh
+```shell
 circleci orb list <my-namespace>
 ```
 
 **[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
-```sh
+```shell
 circleci orb list <my-namespace> --private
 ```
 

@@ -37,7 +37,7 @@ Hub CLI のインストールとセットアップが完了している場合は
 
 基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
 
-```sh
+```shell
 cd ~ # navigate to your home directory.
 cd ~ # ホーム ディレクトリに移動します
 mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
@@ -62,7 +62,7 @@ git commit -m "Initial commit" # 最初のコミットを実行します
 
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
-```sh
+```shell
 hub create
 ```
 
@@ -70,7 +70,7 @@ hub create
 
 Hub CLI を使用していない場合は、GitHub にアクセスしてログインし、[新しいリポジトリを作成](https://github.com/new)します。 指示に従ってコミットし、リモートにプッシュします。 この操作は通常、以下のようなコマンドになります。
 
-```sh
+```shell
 git remote add origin git@github.com:<YOUR_USERNAME>/foo_ci.git
 git push --set-upstream origin master
 ```
@@ -82,7 +82,7 @@ git push --set-upstream origin master
 
 次に、CircleCI CLI をインストールし、いくつかの機能を試してみます。 CLI を Unix マシンにインストールするには、ターミナルで以下のコマンドを実行します。
 
-```sh
+```shell
 curl -fLSs https://circle.ci/cli | bash
 ```
 
@@ -90,7 +90,7 @@ curl -fLSs https://circle.ci/cli | bash
 
 次に、インストール後のセットアップ手順を実行します。
 
-```sh
+```shell
 circleci setup
 ```
 
@@ -103,7 +103,7 @@ CLI に戻って API トークンを貼り付ければセットアップは完�
 
 ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
 
-```sh
+```shell
 cd ~/foo_ci # カレント ディレクトリが foo_ci フォルダーであることを確認します
 mkdir .circleci # ".circleci" という名前のディレクトリを作成します
 cd .circleci # カレント ディレクトリを新しいディレクトリに変更します
@@ -130,13 +130,13 @@ jobs:
 
 ここで、この構成が有効であるかどうかをバリデーションします。 プロジェクトのルートで、以下のコマンドを実行します。
 
-```sh
+```shell
 circleci config validate
 ```
 
 ブラウザーで CircleCI に戻ると、[Start building (ビルドの開始)] をクリックしてビルドを実行できます。
 
-```sh
+```shell
 circleci config validate --help
 ```
 
@@ -147,7 +147,7 @@ CircleCI CLI では、コマンド ラインからジョブをローカルでテ
 
 "build" ジョブをローカルで実行してみます。
 
-```sh
+```shell
 circleci local execute
 ```
 
@@ -155,7 +155,7 @@ circleci local execute
 
 ターミナルには大量のテキストが表示されるはずです。 出力の最後の数行は以下のようになります。
 
-```sh
+```shell
 ====>> Checkout code
   #!/bin/bash -eo pipefail
 mkdir -p /home/circleci/project && cp -r /tmp/_circleci_local_build_repo/. /home/circleci/project
@@ -173,7 +173,7 @@ Success!
 
 プロジェクトのリストから目的のプロジェクト ("foo_ci" または GitHub で付けた名前) を見つけ、[Set Up Project (プロジェクトのセットアップ)] をクリックします。 次に、ターミナルに戻り、最新の変更を GitHub にプッシュします (`config.yml` ファイルの追加分)。
 
-```sh
+```shell
 git add .
 git commit -m "add config.yml file"
 git push

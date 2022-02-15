@@ -10,16 +10,16 @@ version:
   - Server v2.x
   - Server v3.x
 suggested:
-  - 
+  -
     title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
-  - 
+  -
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
-  - 
+  -
     title: Check your CircleCI installation
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
-  - 
+  -
     title: Troubleshoot CLI errors
     link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
@@ -56,7 +56,7 @@ There are multiple installation options for the CircleCI CLI.
 
 以下のコマンドを実行すると、CircleCI CLI、Docker と共に、[Snap パッケージ](https://snapcraft.io/)と付属のセキュリティおよび自動更新機能をインストールできます。
 
-```sh
+```shell
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
 ```
@@ -68,7 +68,7 @@ sudo snap connect circleci:docker docker
 
 macOS で [Homebrew](https://brew.sh/index_ja) を使用している場合は、以下のコマンドを使用して CLI をインストールできます。
 
-```sh
+```shell
 brew install circleci
 ```
 
@@ -79,7 +79,7 @@ brew install circleci
 
 Windows ユーザー向けに [Chocolatey](https://chocolatey.org/) パッケージを提供しています。以下のコマンドを実行してください。
 
-```sh
+```shell
 choco install circleci-cli -y
 ```
 
@@ -88,13 +88,13 @@ choco install circleci-cli -y
 
 **Mac と Linux の場合**
 
-```sh
+```shell
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
 ```
 
 CircleCI の CLI ツールは、デフォルトで `/usr/local/bin` ディレクトリにインストールされます。 `/usr/local/bin` への書き込みアクセス権を持っていない場合は、上記コマンドのパイプと `bash` の間に `sudo` を挿入して実行する必要があります。 または、bash の実行時に `DESTDIR` 環境変数を定義して、別の場所にインストールすることも可能です。
 
-```sh
+```shell
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
 
@@ -114,7 +114,7 @@ CLI を手動でダウンロードしてインストールする場合は、[Git
 
 CLI の最新バージョンは [CircleCI パブリック オープン ソース プロジェクト](https://github.com/CircleCI-Public/circleci-cli)です。 [旧バージョンの CLI をインストールしている](https://github.com/circleci/local-cli)場合は、以下のコマンドを実行して更新を行い、最新バージョンの CLI に切り替えてください。
 
-```sh
+```shell
 circleci update
 circleci switch
 ```
@@ -126,7 +126,7 @@ circleci switch
 
 CLI を使用する前に、[[Personal API Token (パーソナル API トークン)] タブ](https://app.circleci.com/settings/user/tokens)で CircleCI の API トークンを生成する必要があります。 トークンを取得したら、以下を実行して CLI を構成します。
 
-```sh
+```shell
 circleci setup
 ```
 
@@ -139,14 +139,14 @@ CLI を使用して設定ファイルをローカルでバリデーションす�
 
 設定ファイルをバリデーションするには、`.circleci/config.yml` ファイルがあるディレクトリに移動し、以下を実行します。
 
-```sh
+```shell
 circleci config validate
 # 設定ファイル .circleci/config.yml が有効かどうかチェックします
 ```
 
 [Orbs](https://circleci.com/orbs/) を使用している場合は、それもバリデーションできます。
 
-```sh
+```shell
 circleci orb validate /tmp/my_orb.yml
 ```
 
@@ -162,7 +162,7 @@ circleci orb validate /tmp/my_orb.yml
 
 CLI の `circleci config pack` コマンド (上記の `circleci orb pack` とは異なる) を使用すると、複数のファイルをまとめて 1 つの YAML ファイルを作成できます。 `pack` コマンドには、ディレクトリ ツリー内の複数ファイルにまたがる YAML ドキュメントを解析する [FYAML](https://github.com/CircleCI-Public/fyaml) が実装されています。 これは、容量の大きな Orbs のソース コードを分割している場合に特に利便性が高く、Orbs の YAML 構成のカスタム編成を行うことができます。 `circleci config pack` は、ディレクトリ構造とファイルの内容に基づいて、ファイル システム ツリーを 1 つの YAML ファイルに変換します。 `pack` コマンドを使用するときのファイルの**名前**や**編成**に応じて、最終的にどのような `orb.yml` が出力されるかが決まります。 以下のフォルダー構造を例に考えます。
 
-```sh
+```shell
 $ tree
 .
 └── your-orb-source
@@ -179,7 +179,7 @@ Unix `tree` コマンドは、フォルダー構造の出力にたいへん便�
 
 
 {% raw %}
-```sh
+```shell
 $ circleci config pack your-orb-source
 ```
 
@@ -203,7 +203,7 @@ jobs:
 たとえば、以下のコマンドは
 
 {% raw %}
-```sh
+```shell
 $ cat foo/bar/@baz.yml
 {baz: qux}
 ```
@@ -230,7 +230,7 @@ bar:
 
 Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
-```
+```yml
 version: 2.1
 
 orbs:
@@ -246,7 +246,7 @@ workflows:
 `circleci config process .circleci/config.yml` を実行すると、以下のように出力されます (これは、展開されたソースとコメントアウトされた元の設定ファイルから成ります)。
 
 {% raw %}
-```sh
+```yml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
@@ -313,10 +313,10 @@ workflows:
 
 # Original config.yml file:
 # version: 2.1
-# 
+#
 # orbs:
 #   node: circleci/node@4.7.0
-# 
+#
 # workflows:
 #   version: 2
 #   example-workflow:
@@ -347,20 +347,20 @@ CLI を使用すると、Docker から設定ファイル内のジョブを実行
 
 CLI では、Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行できます。
 
-```sh
+```shell
 $ circleci local execute --job JOB_NAME
 ```
 
 CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合、ジョブを実行するには、まず設定ファイルを `process.yml` にエクスポートしてから、そのファイルを指定する必要があります。
 
-```sh
+```shell
 circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml --job JOB_NAME
 ```
 
 CircleCI のデモアプリケーションで、ローカルのマシンからビルドのサンプルを実行してみましょう。
 
-```sh
+```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
 cd circleci-demo-go
 circleci local execute --job build
@@ -410,7 +410,7 @@ Currently, only the legacy CircleCI CLI is available to run on server v2.x. inst
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
 2. 以下のコマンドを実行して、CLI をインストールします。
 
-```sh
+```shell
 $ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
 ```
 
@@ -430,7 +430,7 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 
 これらは CLI の "サブコマンド" であり、以下のように実行されます。
 
-```bash
+```shell
 circleci context list
 
 # 以下が返されます

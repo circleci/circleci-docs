@@ -40,7 +40,7 @@ different languages.
 [Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code
 coverage library. To get started, add the `simplecov` gem to your `Gemfile`
 
-```
+```ruby
 gem 'simplecov', require: false, group: :test
 ```
 
@@ -149,8 +149,8 @@ jobs:
 {:.tab.ruby_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -197,11 +197,11 @@ The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) 
 for generating Code Coverage Reports in python. To get started, install
 Coverage.py:
 
-```sh
+```shell
 pip install coverage
 ```
 
-```sh
+```shell
 # previously you might have run your python project like:
 python my_program.py arg1 arg2
 
@@ -213,7 +213,7 @@ In this
 [example](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial), you
 can generate a coverage report with the following commands:
 
-```sh
+```shell
 coverage run -m pytest
 coverage report
 coverage html  # open htmlcov/index.html in a browser
@@ -293,8 +293,8 @@ workflows:
 {:.tab.python_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -458,8 +458,8 @@ jobs:
 {:.tab.java_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -533,8 +533,8 @@ jobs:
 
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -612,8 +612,8 @@ jobs:
 {:.tab.php_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -639,7 +639,7 @@ Go has built-in functionality for generating code coverage reports. To generate
 reports, add the flag `-coverprofile=c.out`. This will generate a coverage
 report which can be converted to html via `go tool`.
 
-```sh
+```shell
 go test -cover -coverprofile=c.out
 go tool cover -html=c.out -o coverage.html
 ```

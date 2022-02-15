@@ -7,13 +7,13 @@ order: 20
 version:
   - クラウド
 suggested:
-  - 
+  -
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
-  - 
+  -
     title: ワークフローをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  - 
+  -
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
@@ -54,7 +54,7 @@ suggested:
 1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/ja/2.0/managing-api-tokens/)に沿って新しいトークンを作成します。
 2. API を使って新しいスケジュールを作成します。 例えば下記のようにします。
 
-```sh
+```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <your-cci-token>' \
 --header 'Content-Type: application/json' \
@@ -176,7 +176,7 @@ other-workflow:
 
 **回答: **スケジュール実行化されたパイプラインは CircleCI に直接保存されるため、スケジュール毎に関連付けされた UUID があります。 作成したスケジュールは、プロジェクト設定の**トリガー**のページで閲覧できます。 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
 
-```sh
+```shell
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```

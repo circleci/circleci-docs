@@ -20,7 +20,7 @@ If you are looking for information on creating an orb, see the https://circleci.
 toc::[]
 
 ## Managing Orbs
-Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token]. 
+Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
 Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
 
 Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, then you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
@@ -28,17 +28,14 @@ Providing a local repository location using the `--host` option allows you to ac
 ## List available orbs
 To list available public orbs, visit the orb directory, or run the following command:
 
-[source,bash]
-----
+```bash
 circleci orb list
-----
+```
 
 To list available private orbs (registered in your local server orb repository), run the following command:
-[source,bash]
-----
+```bash
 circleci orb list --host <your server install domain> --token <your api token>
-----
-
+```
 ## Import a public orb
 To import a public orb to your local server orb repository, run the following command:
 
@@ -49,10 +46,9 @@ circleci admin import-orb ns[orb[@version]] --host <your server installation dom
 ## Fetch a public orb’s updates
 To update a public orb in your local server orb repository with a new version, run:
 
-[source,bash]
-----
+```bash
 circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
-----
+```
 
 ## Using orbs behind a proxy
 

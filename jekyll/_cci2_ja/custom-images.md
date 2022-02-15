@@ -60,7 +60,7 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 
 あなたのDockerfileで、[`FROM` コマンド](https://docs.docker.com/engine/reference/builder/#from)を使ってベースイメージを拡張します。
 
-```Dockerfile
+```dockerfile
 FROM golang:1.8.0
 ```
 
@@ -70,7 +70,7 @@ FROM golang:1.8.0
 
 追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` コマンド](https://docs.docker.com/engine/reference/builder/#run)を使用します。
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
 ```
@@ -98,7 +98,7 @@ CircleCI でカスタム Docker イメージをプライマリ コンテナと�
 
 パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` コマンド](https://docs.docker.com/engine/reference/builder/#add)を使用します。
 
-``` Dockerfile
+```dockerfile
 ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
 ```
@@ -123,7 +123,7 @@ ENTRYPOINT contacts
 
 `Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
 
-```bash
+```shell
 $ docker build <path-to-dockerfile>
 ```
 
@@ -156,7 +156,7 @@ CircleCI でカスタム イメージを使用できるようにするには、�
 
 次に、アカウントとリポジトリ名を使用してイメージをリビルドします。
 
-``` Shell
+```shell
 $ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
 ```
 
@@ -172,7 +172,7 @@ $ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
 
 イメージを Docker ハブにプッシュします。
 
-``` Shell
+```shell
 $ docker login
 $ docker push circleci/cci-demo-docker-primary:0.0.1
 ```
@@ -185,7 +185,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 イメージが正常にプッシュされたら、以下のように指定することで、イメージを `.circleci/config.yml` で使用できます。
 
-``` YAML
+```yml
 version: 2.0
 jobs:
   build:
@@ -205,7 +205,7 @@ This section demonstrates how to build a Ruby container to use on CircleCI. **�
 
 以下の例では、最初に [Ruby 2.1](https://hub.docker.com/_/ruby/) イメージを使用しています。 ただし、ここでは FROM ruby:2.1 を基本イメージとして使用する方法ではなく、コンテナのビルド方法について説明します。 Ruby Docker ハブのページから、[2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10) に移動してください。 また、正しいバージョンをプルするために使用されている環境変数に注目してください。
 
-```
+```dockerfile
 FROM buildpack-deps:jessie
 
 # gem ドキュメントのインストールをスキップします。
@@ -282,7 +282,7 @@ CMD [ "irb" ]
 
 これで Ruby 2.1 イメージが作成されます。 次に、node:7.4 Dockerfile を使用してノード モジュール、`awscli`、および PostgreSQL 9.5 をインストールします。
 
-```
+```dockerfile
 FROM buildpack-deps:jessie
 
 RUN groupadd --gid 1000 node \
@@ -323,7 +323,7 @@ CMD [ "node" ]
 
 Ruby イメージには Git がプリインストールされているので、再インストールする必要はありません。 最後に、sudo、python2.7、postgresql-9.5 をインストール リストに追加します。 次に、yarn と npm をインストールします。
 
-```
+```dockerfile
 FROM buildpack-deps:jessie
 
 RUN groupadd --gid 1000 node \
@@ -359,7 +359,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Postgres 9.5
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list \
       && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C 
+      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C
 
 # gem ドキュメントのインストールをスキップします。
 RUN mkdir -p /usr/local/etc \
@@ -449,14 +449,14 @@ Successfully built 52b773cf50e2
 
 コンパイルが終了したら、Docker 出力から SHA を取り出し、以下のように実行します。
 
-```
+```shell
 $ docker run -it 52b773cf50e2 /bin/bash
 root@6cd398c7b61d:/# exit
 ```
 
 次に、以下のように指定してそのホスト名をコミットし、ruby-node を Docker ハブ でのユーザー名に置き換えます。
 
-```
+```shell
 docker commit 6cd398c7b61d username/ruby-node:0.1
 docker push username/ruby-node:0.1
 ```
