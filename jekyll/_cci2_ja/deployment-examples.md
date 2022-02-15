@@ -569,7 +569,7 @@ In the following example, if the `build-job` passes and the current branch is `m
 
 {% raw %}
 
-```
+```yml
 version: 2
 
 jobs:

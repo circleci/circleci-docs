@@ -25,7 +25,7 @@ CircleCI では、XML ファイルからテスト メタデータを収集し、
 
 設定ファイルでは、以下のように [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) キーが使用されます。
 
-```shell
+```yml
 - store_test_results:
     path: test-results
 ```
@@ -65,7 +65,7 @@ gem 'minitest-ci'
 {: #metadata-collection-in-custom-test-steps }
 
 ほとんどのテストランナーで何らかの形式でサポートされている JUnit XML 出力を生成するカスタム テストステップがある場合は、 XML ファイルを以下のようにサブディレクトリに書き込みます。
-```yaml
+```yml
 - store_test_results:
     path: /tmp/test-results
 ```
@@ -106,7 +106,7 @@ Jest で JUnit の互換テストデータを出力するには、[jest-junit](h
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
-```yaml
+```yml
 steps:
   - run:
       name: カバレッジ レポーターのインストール
@@ -136,7 +136,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 
 `.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
-```yaml
+```yml
     steps:
       - checkout
       - run: npm install
@@ -159,7 +159,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 以下は、[marcospgp](https://github.com/marcospgp) から提供された、Mocha と nyc の組み合わせに使用できるサンプルの全文です。
 
 {% raw %}
-```yaml
+```yml
 version: 2
 jobs:
     build:
@@ -267,7 +267,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
-```yaml
+```yml
     steps:
       - checkout
       - run: npm install
@@ -307,7 +307,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 `.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
-```yaml
+```yml
     steps:
       - run:
           command: |
@@ -330,7 +330,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 `.circleci/config.yml` の作業テスト セクションは、以下のようになります。
 
-```yaml
+```yml
     steps:
 
       - run:
@@ -362,7 +362,7 @@ gem 'rspec_junit_formatter'
 
 さらに、テスト コマンドを以下のように変更します。
 
-```yaml
+```yml
     steps:
 
       - checkout
@@ -387,7 +387,7 @@ gem 'minitest-ci'
 
 さらに、テスト コマンドを以下のように変更します。
 
-```yaml
+```yml
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -407,7 +407,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 カスタム Cucumber ステップの場合は、JUnit フォーマッタを使用してファイルを生成し、それを `cucumber` ディレクトリに書き込む必要があります。  `.circleci/config.yml` ファイルに追加するコードの例は以下のとおりです。
 
-```yaml
+```yml
     steps:
       - run:
           name: テスト結果の保存
@@ -425,7 +425,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 または、Cucumber の JSON フォーマッタを使用する場合は、出力ファイルに `.cucumber` で終わる名前を付け、それを `/cucumber` ディレクトリに書き出します。 例えば下記のようにします。
 
-```yaml
+```yml
     steps:
       - run:
           name: テスト結果の保存
@@ -448,7 +448,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 `pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
 
-```yaml
+```yml
       - run:
           name: テストの実行
           command: |
@@ -470,7 +470,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
 After adding pytest to your project, you can produce and upload the test results like this:
-```yaml
+```yml
       - run:
           name: テストの実行
           command: |
@@ -494,7 +494,7 @@ After adding pytest to your project, you can produce and upload the test results
 
 [Maven](http://maven.apache.org/) ベースのプロジェクトをビルドする場合は、[Maven Surefire プラグイン](http://maven.apache.org/surefire/maven-surefire-plugin/)を使用して XML 形式のテスト レポートを生成することがほとんどです。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
-```yaml
+```yml
     steps:
       - run:
           name: テスト結果の保存
@@ -514,7 +514,7 @@ After adding pytest to your project, you can produce and upload the test results
 
 [Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テスト レポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
-```yaml
+```yml
     steps:
       - run:
           name: テスト結果の保存
@@ -553,7 +553,7 @@ Visual Studio または .NET Core で出力される trx ファイルを XML 形
 
 A working `.circleci/config.yml` section might look like this:
 
-```yaml
+```yml
     steps:
       - checkout
       - run: dotnet build
@@ -599,7 +599,7 @@ Edit the kaocha config file `test.edn` to use this test reporter
 ```
 
 Add the store_test_results step your `.circleci/config.yml`
-```yaml
+```yml
 version: 2
 jobs:
   build:
