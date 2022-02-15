@@ -301,7 +301,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) document to learn more about this resource class._
+<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 ## Using the Windows executor
 {: #using-the-windows-executor }
