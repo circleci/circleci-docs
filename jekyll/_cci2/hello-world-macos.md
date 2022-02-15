@@ -115,7 +115,9 @@ You can learn more about the `config.yml` file in the [configuration reference g
 {: #xcode-cross-compilation }
 
 ### Universal Binaries
-{: #universal-binaries } Xcode currently supports the creation of universal
+{: #universal-binaries }
+
+Xcode currently supports the creation of universal
 binaries which can be run on both `x86_64` and `ARM64` CPU architectures without
 needing to ship separate executables. This is supported only under Xcode 12.2+
 although older Xcode versions can still be used to compile separate `x86_64` and
