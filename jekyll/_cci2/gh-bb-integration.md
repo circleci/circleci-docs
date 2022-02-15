@@ -340,7 +340,7 @@ and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 1. Create an SSH key pair by following the
    [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
    When prompted to enter a passphrase, do **not** enter one:
-```bash
+```shell
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
@@ -386,7 +386,7 @@ However, it is still possible to create a user key by following this workaround:
 
 6. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
 ![]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
-   
+
 7. Add the key to Bitbucket by following Bitbucket's guide on [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
 This SSH user key will have a "PREFERRED" label; if the project also has a deploy key, the SSH user key will be used first.
@@ -436,7 +436,7 @@ connecting to is authentic. The `checkout`job step does this automatically, so
 you will need to run the following commands if you opt to use a custom checkout
 command:
 
-```
+```shell
 mkdir -p ~/.ssh
 
 echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
@@ -448,7 +448,7 @@ SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding
 the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job.
 You can see this in action here:
 
-```
+```shell
 ➜  ~ ssh-keyscan github.com
 # github.com:22 SSH-2.0-babeld-2e9d163d
 github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
@@ -458,6 +458,6 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 ```
 
 You can add the key to known_hosts by running the following command:
-```
+```shell
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 ```

@@ -37,7 +37,7 @@ If some of these prerequisites sound unfamiliar, or you are new to the CircleCI 
 
 Let's start from the very basics: create a project and initialize a git repository. Refer to the below code block for a list of steps.
 
-```sh
+```shell
 cd ~ # navigate to your home directory.
 mkdir foo_ci # create your project in a folder called "foo_ci"
 cd foo_ci # change directories into the new foo_ci folder.
@@ -55,7 +55,7 @@ Great! We have a git repository set up, with one file that says "Hello World!". 
 
 If you have installed and setup the Hub CLI, you can simply run:
 
-```sh
+```shell
 hub create
 ```
 
@@ -63,7 +63,7 @@ Then follow any prompts regarding logins / authorizing the HUB CLI.
 
 If you aren't using Hub, head over to GitHub, login, and [create a new respository](https://github.com/new). Follow the instructions to commit and push to the remote. These instructions generally looks like this:
 
-```sh
+```shell
 git remote add origin git@github.com:<YOUR_USERNAME>/foo_ci.git
 git push --set-upstream origin master
 ```
@@ -75,7 +75,7 @@ You now have a git repo that is connected to a VCS. The remote on your VCS ("ori
 
 Next, we will install the CircleCI CLI and try out some of its features. To install the CLI on a unix machine run the following command in your terminal:
 
-```sh
+```shell
 curl -fLSs https://circle.ci/cli | bash
 ```
 
@@ -83,7 +83,7 @@ There are multiple installation methods for the CLI, you can read more about the
 
 Now run the setup step after the installation:
 
-```sh
+```shell
 circleci setup
 ```
 
@@ -96,7 +96,7 @@ Return to the CLI and paste in your API token to complete your setup.
 
 Now it's time to create a configuration file in our project directory.
 
-```sh
+```shell
 cd ~/foo_ci # Make sure you are still in the foo_ci folder
 mkdir .circleci # create a directory called ".circleci"
 cd .circleci # change directories to the new directory
@@ -123,13 +123,13 @@ jobs:
 
 Now let's validate your config to ensure it's useable. In the root of your project, run the following command:
 
-```sh
+```shell
 circleci config validate
 ```
 
 **NOTE**: if at any time you want to learn more about a command you are using you can append `--help` to receive additional information in the terminal about the command:
 
-```sh
+```shell
 circleci config validate --help
 ```
 
@@ -140,7 +140,7 @@ The CircleCI CLI enables you to test a job locally from the command line rather 
 
 Try running the "build" job locally:
 
-```sh
+```shell
 circleci local execute
 ```
 
@@ -148,7 +148,7 @@ This will pull down the docker image you have specified, in this case `circleci/
 
 You should see quite a bit of a text in your terminal. The last few lines of output should look similar to this:
 
-```sh
+```shell
 ====>> Checkout code
   #!/bin/bash -eo pipefail
 mkdir -p /home/circleci/project && cp -r /tmp/_circleci_local_build_repo/. /home/circleci/project
@@ -166,7 +166,7 @@ We will need to leave the terminal behind for this step. Head over to [the "Add 
 
 Find your project ("foo_ci", or whatever you named it on GitHub) in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
 
-```sh
+```shell
 git add .
 git commit -m "add config.yml file"
 git push

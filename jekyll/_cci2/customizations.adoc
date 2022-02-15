@@ -163,7 +163,7 @@ Below is an example resource class configuration:
 
 Example config:
 
-```
+```edn
 {:default-resource-class :medium
 
  :resource-classes
@@ -183,7 +183,7 @@ Example config:
 
 Let's take a look at one of the options in more detail
 
-```
+```edn
 :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
@@ -224,7 +224,7 @@ You can add a banner to your login screen as follows:
 . Access the file: `/etc/circleconfig/frontend/customizations` on the Services machine
 . Add the following line, substituting the text you wish to display in the banner:
 +
-```
+```shell
 export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
 ```
 . Restart CircleCI from the Management Console (your-circleci-hostname.com:8800)

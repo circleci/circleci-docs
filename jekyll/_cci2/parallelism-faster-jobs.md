@@ -108,19 +108,19 @@ Note: If you do not use `store_test_results`, there will be no timing data avail
 
 To split by test timings, use the `--split-by` flag with the `timings` split type. The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible leading to the fastest possible test run time
 
-```
+```shell
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
 The CLI expects both filenames and classnames to be present in the timing data produced by the testing suite. By default, splitting defaults to filename, but you can specify classnames by using the `--timings-type` flag.
 
-```
+```shell
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
 For partially found test results, we automatically assign a random small value to any test we did not find timing data for. You can override this assigned value to a specific value with the `--time-default` flag.
 
-```
+```shell
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
 ```
 
@@ -136,19 +136,19 @@ By default, if you don't specify a method using the `--split-by` flag, `circleci
 
 Create a text file with test filenames.
 
-```
+```shell
 circleci tests split test_filenames.txt
 ```
 
 Provide a path to the test files.
 
-```
+```shell
 circleci tests split < /path/to/items/to/split
 ```
 
 Or pipe a glob of test files.
 
-```
+```shell
 circleci tests glob "test/**/*.java" | circleci tests split
 ```
 
@@ -156,13 +156,13 @@ The CLI looks up the number of available containers, along with the current cont
 
 By default, the number of containers is specified by the `parallelism` key. You can manually set this by using the `--total` flag.
 
-```
+```shell
 circleci tests split --total=4 test_filenames.txt
 ```
 
 Similarly, the current container index is automatically picked up from environment variables, but can be manually set by using the `--index` flag.
 
-```
+```shell
 circleci tests split --index=0 test_filenames.txt
 ```
 
@@ -172,7 +172,7 @@ circleci tests split --index=0 test_filenames.txt
 
 When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
 
-```
+```shell
 circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 ```
 
@@ -188,7 +188,7 @@ See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env
 
 Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to a file, then passing this file to your test runner.
 
-```bash
+```shell
 circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
 bundle exec rspec $(cat /tmp/tests-to-run)
 ```
@@ -203,7 +203,7 @@ To utilize test splitting with CircleCI, you must pass in a list of tests to run
 Sometimes, users run into specific issues when performing test splitting for their own unique use cases. One example of a user resolving an issue when test splitting in Python Django did not perform correctly can be found in the following Discuss post, which can be found [here](https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624)
 
 Using this example, here is a quick example of how you can accomplish test splitting:
-```
+```yml
 - run:
     command: |
       # get test files while ignoring __init__ files
@@ -222,7 +222,7 @@ Using this example, here is a quick example of how you can accomplish test split
 
 If you try to split your tests across containers with pytest, you may encounter any of the following errors:
 
-```
+```shell
 No timing found for "tests/commands/__init__.py"
 No timing found for "tests/commands/test_1.py"
 No timing found for "tests/commands/test_2.py"
@@ -240,7 +240,7 @@ If so, you may need to adjust the file paths that are saving to your test metada
 
 To ensure test splitting performs correctly, make sure you are running your tests in the root directory. If your tests are not being run in the root directory, you may need to run the following command before you test the `run` command:
 
-```
+```shell
 cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 ```
 
@@ -258,7 +258,7 @@ Search for "families" to see the relevant information.
 
 The example below is a fork of our `sample-python-cfd` project(https://github.com/CircleCI-Public/sample-python-cfd) that shows how you can implement test splitting:
 
-```
+```yml
 version: 2.1
 orbs:
   python: circleci/python@1.2
@@ -319,6 +319,6 @@ suite. These applications are not developed or supported by CircleCI. Please che
   them in parallel based on timings on CI tools.
 - **[go list](https://golang.org/cmd/go/#hdr-List_packages_or_modules)** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
 
-  ```
+  ```shell
   go test -v $(go list ./... | circleci tests split)
   ```

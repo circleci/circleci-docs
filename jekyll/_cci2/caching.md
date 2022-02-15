@@ -231,7 +231,7 @@ For information on viewing your network and stoarage usage, and calculating your
 
 A cache key is a _user-defined_ string that corresponds to a data cache. A cache key can be created by interpolating **dynamic values**. These are called **templates**. Anything that appears between curly braces in a cache key is a template. Consider the following example:
 
-```sh
+```shell
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
@@ -239,8 +239,8 @@ The above example outputs a unique string to represent this key. The example is 
 
 The example may output a string similar to the following:
 
-```sh
-{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ={% endraw %}
+```shell
+myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 ```
 
 If the contents of the `package-lock` file were to change, the `checksum` function would return a different, unique string, indicating the need to invalidate the cache.

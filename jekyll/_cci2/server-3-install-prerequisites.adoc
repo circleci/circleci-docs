@@ -56,7 +56,7 @@ Download and install the following software before continuing:
 
 NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
-// Don't include this section in the GCP PDF. 
+// Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
@@ -122,11 +122,8 @@ Supported Kubernetes versions:
 | 3.0.0 - 3.2.1
 | < 1.21
 
-| 3.2.2
+| 3.2.2 - 3.3.0
 | 1.16 - 1.21
-
-| 3.3.0+
-| 1.16 - 1.22
 |===
 
 Creating a Kubernetes cluster is your responsibility. Please note:
@@ -134,7 +131,7 @@ Creating a Kubernetes cluster is your responsibility. Please note:
 * Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * You must have appropriate permissions to list, create, edit, and delete pods in your cluster. Run this command to verify your permissions:
 +
-```bash
+```shell
 kubectl auth can-i <list|create|edit|delete> pods
 ```
 * There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you
@@ -149,12 +146,12 @@ You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/q
 . Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`].
 . Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
 +
-```bash
+```shell
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 ```
 . Once the cluster has been created, you can use the following command to configure `kubectl` access:
 +
-```bash
+```shell
 eksctl utils write-kubeconfig --name circleci-server
 ```
 
@@ -172,27 +169,27 @@ CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is n
 . https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. When you create your project, make sure you also enabled API access. If you do not enable API access, the command we will run next (to create your cluster) will fail.
 . Create your cluster by entering running the following command:
 +
-```sh
+```shell
 gcloud container clusters create circleci-server --project <YOUR_GOOGLE_CLOUD_PROJECT_ID> --region europe-west1 --num-nodes 3 --machine-type n1-standard-4
 ```
 . Configure` kubectl` with your your credentials gcloud credentials:
 +
-```sh
+```shell
 gcloud container clusters get-credentials circleci-server --region europe-west1
 ```
 . Verify your cluster:
 +
-```sh
+```shell
 kubectl cluster-info
 ```
 . Create a service account for this cluster:
 +
-```sh
+```shell
 gcloud iam service-accounts create <YOUR_SERVICE_ACCOUNT_ID> --description="<YOUR_SERVICE_ACCOUNT_DISPLAY_NAME>"  --display-name="<YOUR_SERVICE_ACCOUNT_DISPLAY_NAME>"
 ```
 . Get the credentials for the service account:
 +
-```sh
+```shell
 gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-account <SERVICE_ACCOUNT_ID>@<YOUR_GOOGLE_CLOUD_PROJECT_ID>.iam.gserviceaccount.com
 ```
 endif::env-aws[]
@@ -228,27 +225,27 @@ ifndef::env-gcp[]
 
 . If you are using AWS Route53 for DNS, you will need the *certbot-route53* plugin installed. You can install the plugin with the following command:
 +
-```bash
+```shell
 pip3 install certbot-dns-route53
 ```
 
 . Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
 +
-```bash
+```shell
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
 You will need these certificates later, and they can be retrieved locally with the following commands:
 
-```sh
+```shell
 ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
 ```
 
-```sh
+```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-```sh
+```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
@@ -262,13 +259,13 @@ ifndef::env-aws[]
 
 . If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
 +
-```bash
+```shell
 pip3 install certbot-dns-google
 ```
 
 . Then, the following commands will provision a certification for your installation:
 +
-```bash
+```shell
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
@@ -284,14 +281,14 @@ CAUTION: Store these values securely. If they are lost, job history and artifact
 ==== Artifact signing key
 To generate, run the following command:
 
-```sh
+```shell
 docker run circleci/server-keysets:latest generate signing -a stdout
 ```
 
 ==== Encryption signing key
 To generate, run the following command:
 
-```sh
+```shell
 docker run circleci/server-keysets:latest generate encryption -a stdout
 ```
 
@@ -327,7 +324,7 @@ You will need the following details when you configure CircleCI server.
 
 ===== Step 1: Create AWS S3 Bucket
 
-```sh
+```shell
 aws s3api create-bucket \
     --bucket <YOUR_BUCKET_NAME> \
     --region <YOUR_REGION> \
@@ -338,7 +335,7 @@ NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-e
 
 ===== Step 2: Create an IAM user for CircleCI server
 
-```
+```shell
 aws iam create-user --user-name circleci-server
 ```
 
@@ -538,7 +535,7 @@ Otherwise, if using IAM keys for authentication, use the following content
 
 ===== Step 4: Attach policy to user
 
-```sh
+```shell
 aws iam put-user-policy \
   --user-name circleci-server \
   --policy-name circleci-server \
@@ -548,7 +545,7 @@ aws iam put-user-policy \
 ===== Step 5: Create Access Key for user circleci-server
 NOTE: You will need this when you configure your server installation later.
 
-```sh
+```shell
 aws iam create-access-key --user-name circleci-server
 ```
 
@@ -581,26 +578,26 @@ A dedicated service account is recommended. Add to it the Storage Object Admin r
 
 NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
 
-```sh
+```shell
 resource.name.startsWith("projects/_/buckets/<YOUR_BUCKET_NAME>")
 ```
 
 ===== Step 1: Create a GCP bucket
 If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
-```sh
+```shell
 gsutil mb gs://circleci-server-bucket
 ```
 
 ===== Step 2: Create a Service Account
 
-```sh
+```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
 ```
 
 You will need the email for the service account in the next step. Run the following command to find it:
 
-```sh
+```shell
 gcloud iam service-accounts list \
   --filter="displayName:circleci-server account" \
   --format 'value(email)'
@@ -608,27 +605,27 @@ gcloud iam service-accounts list \
 
 ===== Step 3: Grant Permissions to Service Account
 
-```sh
+```shell
 gcloud iam roles create circleci_server \
     --project <PROJECT_ID> \
     --title "CircleCI Server" \
     --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get
 ```
 
-```sh
+```shell
 gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> \
     --role projects/<PROJECT_ID>/roles/circleci_server
 ```
 
-```sh
+```shell
 gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-server-bucket
 ```
 
 ===== Step 4: JSON Key File
 After running the following command, you should have a file named `circleci-server-keyfile` in your local working directory. You will need this when you configure your server installation.
 
-```sh
+```shell
 gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
 ```

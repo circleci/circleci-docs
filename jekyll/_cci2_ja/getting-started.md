@@ -141,7 +141,7 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
 
 各ワークフローには 1 つのワークスペースが関連付けられ、ワークフローの進行に伴って後続のジョブにファイルを転送するために使用されます。 ワークスペースを使用して、後続のジョブに必要な、実行ごとに固有のデータを渡すことができます。 試しに下記に `config.yml` を書き換えてみてください。
 
-```yml
+```yaml
 version: 2
 jobs:
   one:
@@ -160,7 +160,7 @@ jobs:
           root: my_workspace
           # ルートからの相対パスでなければなりません。
           paths:
-            - echo-output      
+            - echo-output
   two:
     docker:
       - image: circleci/ruby:2.4.1
@@ -169,7 +169,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - run: echo "A more familiar hi"  
+      - run: echo "A more familiar hi"
       - attach_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。
           at: my_workspace

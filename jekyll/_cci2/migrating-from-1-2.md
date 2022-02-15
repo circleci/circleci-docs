@@ -42,17 +42,17 @@ The `config-translation` endpoint can help you quickly get started with converti
 3. Add `version: 2` to the top of the `.circleci/config.yml` file.
 
 4. Add the following two lines to your `config.yml` file, after the version line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the sections of the old config file under `build`.
-     ```
+     ```yaml
      jobs:
        build:
      ```
 5. Add the language and version you want to run the primary container to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true` or by using `macos`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
-     ```
+     ```yaml
        ruby:
          version: 2.7
      ```
      Replace with the following lines:
-     ```
+     ```yaml
          docker:
            - image: circleci/ruby:2.7
              auth:
@@ -70,26 +70,26 @@ The `config-translation` endpoint can help you quickly get started with converti
      ```
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
-     ```
+     ```yaml
      checkout:
        post:
      ```
      With the following:
-     ```
+     ```yaml
          steps:
            - checkout
            - run:
      ```
 
      For example:
-     ```
+     ```yaml
      checkout:
       post:
         - mkdir -p /tmp/test-data
         - echo "foo" > /tmp/test-data/foo
      ```
      becomes
-     ```
+     ```yaml
          steps:
            - checkout
            - run: mkdir -p /tmp/test-data
@@ -119,14 +119,14 @@ To increase the speed of your software development through faster feedback, shor
 1. To use the Workflows feature, split your build job into multiple jobs, each with a unique name. It might make sense to start by just splitting out a deploy job to prevent you from having to re-run the entire build when only the deployment fails.
 
 2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circleci/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.
-     ```
+     ```yaml
      workflows:
        version: 2
        <workflow_name>:
      ```
 3. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run concurrently.
 
-     ```
+     ```yaml
      workflows:
        version: 2
        <workflow_name>:
@@ -136,14 +136,14 @@ To increase the speed of your software development through faster feedback, shor
      ```
 4. For jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of jobs that must succeed for it to start. If you were using a `curl` command to start a job, Workflows enable you to remove the command and start the job by using the `requires:` key.
 
-     ```
+     ```yaml
       - <job_name>:
           requires:
             - <job_name>
      ```
 5. For jobs which must run on a particular branch, add the `filters:` key with a nested `branches` and `only` key. For jobs which must not run on a particular branch, add the `filters:` key with a nested `branches` and `ignore` key. **Note:** Workflows will ignore job-level branching, so if you have configured job-level branching and then add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
-     ```
+     ```yaml
      - <job_name>:
          filters:
            branches:

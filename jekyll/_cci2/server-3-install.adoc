@@ -26,9 +26,9 @@ toc::[]
 CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] to manage and distribute server v3.x. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
-Ensure you are running the minimum KOTS version ({kotsversion}) by running the command: 
+Ensure you are running the minimum KOTS version ({kotsversion}) by running the command:
 
-```
+```bash
 kubectl kots version
 ```
 
@@ -37,7 +37,7 @@ https://github.com/microsoft/WSL/issues/4199.
 
 From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 
-```sh
+```bash
 kubectl kots install circleci-server
 ```
 
@@ -60,12 +60,12 @@ If you wish to install CircleCI server behind a proxy, the following command str
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
 ```
 
-The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them. 
+The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
 
 For further information see the https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[Configuring a Proxy] guide.
 
-=== Frontend Settings 
-Frontend settings control the web application specific aspects of the CircleCI system. 
+=== Frontend Settings
+Frontend settings control the web application specific aspects of the CircleCI system.
 
 .Frontend Settings
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
@@ -74,9 +74,9 @@ Complete the fields described below. You can either supply a private key and cer
 
 NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
-* *Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate. 
+* *Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate.
 
-* *Frontend Replicas (optional)* - Used to increase the amount of traffic that can be handled by the frontend. 
+* *Frontend Replicas (optional)* - Used to increase the amount of traffic that can be handled by the frontend.
 
 * *Frontend TLS Private Key (required)* - You created this during your pre-requisite steps. You can retrieve this value with the following command:
 +
@@ -84,18 +84,18 @@ NOTE: If you are selecting the option to use private load balancers, the Let's E
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
-* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. You can retrieve this value with the following command: 
+* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. You can retrieve this value with the following command:
 +
 ```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses. 
+* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
 
 ==== Artifact and Encryption Signing Settings
-Encryption and artifact signing keys were created during prerequisites phase. You can enter them here now. 
+Encryption and artifact signing keys were created during prerequisites phase. You can enter them here now.
 
-Complete the following fields: 
+Complete the following fields:
 
 * *Artifact Signing Key (required)*
 
@@ -104,25 +104,25 @@ Complete the following fields:
 ==== Github Settings
 You created your Github OAuth application in the prerequisite phase. Use the data to complete the following:
 
-* *Github Type (required)* - 
+* *Github Type (required)* -
 Select Cloud or Enterprise (on premises).
 
-* *OAuth Client ID (required)* - 
-The OAuth Client ID provided by Github. 
+* *OAuth Client ID (required)* -
+The OAuth Client ID provided by Github.
 
-* *OAuth Client Secret (required)* - 
-The OAuth Client Secret provided by Github. 
+* *OAuth Client Secret (required)* -
+The OAuth Client Secret provided by Github.
 
 ==== Object Storage Settings
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
-// Don't include this section in the GCP PDF. 
+// Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
 ===== S3 Compatible
-You should have created your S3 Compatible bucket and optional IAM account during the prerequisite steps. 
+You should have created your S3 Compatible bucket and optional IAM account during the prerequisite steps.
 
 * *Storage Bucket Name (required)* -
 The bucket used for server.
@@ -147,7 +147,7 @@ Secret Key for S3 bucket access.
 
 Or select IAM role and provide:
 
-* *Role ARN* - 
+* *Role ARN* -
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
 // Stop hiding from GCP PDF:
@@ -158,18 +158,18 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-===== Google Cloud Storage 
-You should have created your Google Cloud Storage bucket and service account during the prerequisite steps. 
+===== Google Cloud Storage
+You should have created your Google Cloud Storage bucket and service account during the prerequisite steps.
 
-* *Storage Bucket Name (required)* - 
+* *Storage Bucket Name (required)* -
 The bucket used for server.
 
-* *Storage Object Expiry (required)* - 
+* *Storage Object Expiry (required)* -
 Number of days to retain your test results and artifacts. Set to 0 to disable and retain objects indefinitely.
 
 ====== Authentication
 
-* *Service Account JSON (required)* - 
+* *Service Account JSON (required)* -
 A JSON format key of the Service Account to use for bucket access.
 
 endif::env-aws[]
@@ -178,15 +178,15 @@ endif::env-aws[]
 
 ==== Postgres, MongoDB, Vault settings
 
-You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
 
 === Save and deploy
-Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Traefik load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation. 
+Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Traefik load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation.
 
 NOTE: In this first stage we skipped a lot of fields in the config. We will revisit those in the next stages of installation.
 
-=== Create DNS entry 
-Create a DNS entry for your Traefik load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record. 
+=== Create DNS entry
+Create a DNS entry for your Traefik load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
 You will need the IP address or, if using AWS, the DNS name of the Traefik load balancer. You can find this with the following command:
 
@@ -204,7 +204,7 @@ NOTE: The Traefik load balancer has a healthcheck that serves a JSON payload at 
 
 === Validation
 
-You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1): 
+You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>

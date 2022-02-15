@@ -41,7 +41,7 @@ The following sections walk through how to write Jobs and Steps that use `xcodeb
 
 For iOS projects, it is possible to run your tests with Fastlane Scan as follows:
 
-```
+```yml
 jobs:
   build-and-test:
     macos:
@@ -54,7 +54,6 @@ jobs:
           environment:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
-
 ```
 
 Refer to [the Xcode version section]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
@@ -71,7 +70,7 @@ To further customize your build process to use custom tools or run your own scri
 
 To install dependencies from homebrew, for example, use a `run` step with the appropriate command:
 
-```
+```yml
     steps:
       - run:
           name: Install Homebrew Dependencies
@@ -86,7 +85,7 @@ To install dependencies from homebrew, for example, use a `run` step with the ap
 
 The `run` step is also used to run your tests as in the following example of the short form `run` syntax:
 
-```
+```yml
     steps:
       - run: fastlane scan
 ```
@@ -97,7 +96,7 @@ The `run` step is also used to run your tests as in the following example of the
 
 To deploy your application with CircleCI using [Gym](https://github.com/fastlane/fastlane/tree/master/gym) and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools) specify an identifier, a branch or pattern that the release should run on, and a set of commands to run the release.
 
-```
+```yml
 version: 2.1
 jobs:
   test:

@@ -71,7 +71,7 @@ Building snaps on CircleCI results in a `.snap` file which is testable in additi
 
 Publishing a snap is more or less a two-step process. Here's on this might look on a Linux machine:
 
-```Bash
+```shell
 snapcraft login
 # Follow prompts for logging in with an Ubuntu One account
 snapcraft export-login snapcraft.login

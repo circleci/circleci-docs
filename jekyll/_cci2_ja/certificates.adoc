@@ -27,7 +27,7 @@ CA 証明書は、Java キーストアが理解できる形式で記述され、
 
 以下のスクリプトは、必要な手順を示しています。
 
-```
+```shell
 GHE_DOMAIN=github.example.com
 
 # Grab the CA chain from your GitHub Enterprise deployment.
@@ -212,7 +212,7 @@ TLS 証明書が失効すると、ドメイン名を使って Replicated の UI 
 
 または、ホスト名、path-to-key、path-to-certificate を変更して Services マシン上で以下のコマンドを実行して 証明書やキーをアップロードすることも可能です。
 
-```
+```shell
 $ sudo replicated console cert set <circleci-hostname> /path/to/key /path/to/cert
 $ replicatedctl app stop
 $ replicatedctl app start

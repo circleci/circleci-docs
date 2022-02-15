@@ -103,7 +103,7 @@ jobs:
 {: #macos }
 _macOS Executor は、オンプレミス版の CircleCI Server では現在サポートされていません。_
 
-```
+```yml
 jobs:
   build-and-test:
     macos:

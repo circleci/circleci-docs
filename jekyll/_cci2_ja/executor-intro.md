@@ -23,7 +23,7 @@ CircleCI offers several execution environments. CircleCI ではこれらを **Ex
   <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
-```
+```yaml
 jobs:
   build: # ジョブの名前
     docker: # Executor タイプ
@@ -39,13 +39,13 @@ jobs:
 {: #machine }
 
 {:.tab.machine.Cloud}
-```
+```yaml
 steps:
         # Linux 仮想マシン環境で実行するコマンド
 ```
 
 {:.tab.machine.Server}
-```
+```yaml
 jobs:
   build:
     machine:
@@ -55,7 +55,7 @@ jobs:
 ```
 
 `machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
-```
+```yaml
 jobs:
   build: # name of your job
     machine: # executor type
@@ -72,7 +72,7 @@ jobs:
 
 _The macOS executor is not currently available on self-hosted installations of CircleCI server_
 
-```
+```yaml
 jobs:
   build: # ジョブの名前
     macos: # Executor タイプ
@@ -94,7 +94,7 @@ Windows Executor を使用するための設定ファイルの構文は、以下
 * Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
-```
+```yaml
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
@@ -112,7 +112,7 @@ jobs:
 
 
 {:.tab.windowsblock.Server_3}
-```
+```yaml
 version: 2.1
 
 jobs:
@@ -127,7 +127,7 @@ jobs:
 ```
 
 {:.tab.windowsblock.Server_2}
-```
+```yaml
 version: 2
 
 jobs:

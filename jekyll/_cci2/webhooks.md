@@ -109,7 +109,7 @@ Here are some example signatures for given request bodies:
 
 The following is an example of how you might validate signatures in Python:
 
-```
+```python
 import hmac
 
 def verify_signature(secret, headers, body):

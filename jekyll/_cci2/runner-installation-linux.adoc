@@ -12,7 +12,7 @@ version:
 
 toc::[]
 
-This page describes how to install CircleCI runner on Linux. 
+This page describes how to install CircleCI runner on Linux.
 
 NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
 
@@ -39,7 +39,7 @@ Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
 
-```bash
+```shell
 sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
@@ -50,7 +50,7 @@ These will be used when executing the task agent. These commands must be run as 
 
 === Ubuntu/Debian
 
-```bash
+```shell
 id -u circleci &>/dev/null || sudo adduser --disabled-password --gecos GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
@@ -59,7 +59,7 @@ sudo chown -R circleci /opt/circleci/workdir
 
 === CentOS/RHEL
 
-```bash
+```shell
 id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
@@ -72,7 +72,7 @@ An SELinux policy is required for runner to accept and launch jobs on RHEL 8 sys
 
 Create directory `/opt/circleci/policy` and generate the initial policy module:
 
-```bash
+```shell
 sudo mkdir -p /opt/circleci/policy
 
 # Install sepolicy and rpmbuild if you haven't already
@@ -84,7 +84,7 @@ sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci
 
 Download the following type enforcing file https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] and install the policy:
 
-```bash
+```shell
 sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
 
 sudo /opt/circleci/policy/circleci_launch_agent.sh
@@ -118,7 +118,7 @@ NOTE: Unlike the task agent, which uses the environment of the `circleci` user, 
 
 You can now enable the service:
 
-```bash
+```shell
 systemctl enable /opt/circleci/circleci.service
 ```
 
@@ -126,7 +126,7 @@ systemctl enable /opt/circleci/circleci.service
 
 When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
-```bash
+```shell
 systemctl start circleci.service
 ```
 
@@ -136,7 +136,7 @@ The system reports a very basic health status through the `status` field in `sys
 
 You can see the status of the agent by running:
 
-```bash
+```shell
 systemctl status circleci.service --no-pager
 ```
 
@@ -155,6 +155,6 @@ circleci.service - CircleCI Runner
 
 You can also see the logs for the system by running:
 
-```bash
+```shell
 journalctl -u circleci
 ```

@@ -60,7 +60,7 @@ Every organization registered on CircleCI is able to claim **one** unique [names
 _note: Within CircleCI, we sometimes refer to individual users as "organizations" or "personal organizations", since from our perspective there aren't notable differences. Hence some commands refer to an `org-name`. This can simply be your GitHub username._
 
 Enter the following command to claim your namespace, if you have not yet claimed one:
-```sh
+```shell
 circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
 

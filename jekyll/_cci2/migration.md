@@ -85,7 +85,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 	- [CircleCI How to Handle OOM Errors blog](https://circleci.com/blog/how-to-handle-java-oom-errors/)
 - Scala projects can have filenames that are too long, include the `-Xmax-classfile-name` flag.
 
-	```
+	```shell
 			    scalacOptions ++= Seq(
 			      `-encoding`, `utf-8`,
 			      `-target:jvm-1.8`,
@@ -103,7 +103,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Take screenshots of failed tests to make debugging easier.
 - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. Run this from one of our browsers images:
 
-```
+```shell
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
 sudo apt install vnc4server metacity
 vnc4server -geometry 1280x1024 -depth 24

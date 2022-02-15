@@ -32,7 +32,7 @@ On the Projects Dashboard, you can either:
 
 CircleCI believes in *configuration as code*. Your entire CI/CD process is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config. See the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for a basic introduction.
 
-```bash
+```shell
 ├── .circleci
 │   ├── config.yml
 ├── README

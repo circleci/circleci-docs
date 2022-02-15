@@ -80,7 +80,7 @@ jobs:
 
 **Note:** If base64 encoding is required for your particular workflow, use the following command:
 
-```bash
+```yml
 version: 2
 jobs:
   deploy:
@@ -116,6 +116,6 @@ jobs:
 
 **Note:** If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.
 
-```bash
+```shell
 sudo gcloud --quiet components update
 ```
