@@ -93,17 +93,7 @@ Workspaces are stored for up to 15 days. Workspaces are not shared between pipel
 
 When using self-hosted runners there is a network and storage usage limit included in your plan. Once your usage exceeds your limit charges will apply. These charges are based on your accrued overages.
 
-### Viewing network egress usage
-{: #viewing-network-egress-usage }
-
-Restoring caches and workspaces to self-hosted runners results in network egress. To view your network egress usage follow these steps:
-1. Select **Plan** from the app sidebar.
-2. Select **Plan Usage**.
-3. Select the **Network** tab.
-
-Within the network tab you will find a breakdown of your network usage for the billing period. The usage is also broken down by storage object type: cache, testresult, artifact, workspace.
-
-For more on storage and networking, and calculating your monthly storage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-calculate-an-approximation-of-your-monthly-costs) guide.
+For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
 
 ## Workspace usage optimization
 {: #workspace-usage-optimization }

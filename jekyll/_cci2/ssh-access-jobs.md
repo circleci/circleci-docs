@@ -31,7 +31,7 @@ Please note that a default CircleCI pipeline executes steps in a non-interactive
 
 2. To start a job with SSH enabled, select the 'Rerun job with SSH' option from the 'Rerun Workflow' dropdown menu.
 
-     **Note:** The `Rerun job with SSH` feature is intended for debugging purposes; therefore, these jobs will not be reflected in your pipelines. When you rerun a job with SSH, a new pipeline is not triggered; a job is just rerun. If needed, you can access the running jobs via the legacy jobs view.
+     **Note:** The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job. 
 
 3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect.
 
