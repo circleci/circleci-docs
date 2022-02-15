@@ -32,7 +32,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   build:
@@ -44,7 +44,7 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
-{% endhighlight %}
+```
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
 
@@ -71,7 +71,7 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   build:
@@ -89,7 +89,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-{% endhighlight %}
+```
 
 ### 学習ポイント
 {: #learnings }
@@ -108,7 +108,7 @@ jobs:
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 
 orbs:
@@ -135,7 +135,7 @@ jobs:
           name: Running in a Unique Container
           command: |
             node -v
-{% endhighlight %}
+```
 
 ノードコンテナで実行していることを示す、小さな `run` ブロックも追加しています。
 
@@ -158,7 +158,7 @@ jobs:
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   Hello-World:
@@ -215,8 +215,7 @@ workflows:
      - Now-Complete:
          requires:
            - Hold-For-Approval
-           
-{% endhighlight %}
+```
 
 ### 学習ポイント
 {: #learnings }

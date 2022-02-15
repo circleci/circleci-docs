@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI ランナーを Docker にインストールする方法を説明します。 
+このページでは、CircleCI ランナーを Docker にインストールする方法を説明します。
 
 NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
 
@@ -28,7 +28,7 @@ In this example, Python 3 is installed on top of the base image.
 
 `Dockerfile.runner.extended`
 
-```
+```dockerfile
 FROM circleci/runner:launch-agent
 RUN sudo apt-get update; \
     sudo apt-get install --no-install-recommends -y \
@@ -37,7 +37,7 @@ RUN sudo apt-get update; \
 
 == Docker イメージをビルドする
 
-```bash
+```shell
 docker build --file ./Dockerfile.runner.extended .
 ```
 
@@ -45,7 +45,7 @@ docker build --file ./Dockerfile.runner.extended .
 
 NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
-```bash
+```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 
@@ -55,20 +55,20 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 サーバー上で Docker コンテナを起動する場合、`--env` フラグを使って `agent_version` と `LAUNCH_AGENT_API_URL`</0> の環境変数を渡す必要があります。
 
-``` bash
+``` shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> LAUNCH_AGENT_API_URL=<server_host_name> docker run --env agent_version --env LAUNCH_AGENT_API_URL --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 
 == Docker コンテナを停止する
 
-``` bash
+```shell
 docker stop <container-name>
 ```
 
-== Docke コンテナを削除する
+== Docker コンテナを削除する
 
 同じ名前のコンテナを再作成する場合など、停止したランナーコンテナをシステムから完全に削除する必要がある場合があります。
 
-``` bash
+```shell
 docker stop <container-name>; docker rm <container-name>;
 ```

@@ -23,7 +23,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-proxy.html#cli-co
 
 特に Services マシンについては、内部リクエストに対するプロキシの適用を避けてください。 To add these to the `NO_PROXY` rules, run:
 
-```shell
+```bash
 export NO_PROXY=<services_box_ip>
 ```
 
@@ -46,7 +46,7 @@ Services マシンには多数のコンポーネントがあり、以下のネ�
 
 For a static installation, not on AWS, SSH into the Services machine and run the following code snippet with your proxy address:
 
-```
+```bash
 echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee /etc/replicated.conf
 (cat <<'EOF'
 export HTTP_PROXY=<proxy-ip:port>
@@ -59,7 +59,7 @@ systemctl restart replicated\*
 
 If you run in Amazon's EC2 service then you'll need to include `169.254.169.254` EC2 services as shown below:
 
-```
+```bash
 echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee /etc/replicated.conf
 (cat <<EOF
 export HTTP_PROXY=<proxy-ip:port>
@@ -74,7 +74,7 @@ systemctl restart replicated\*
 
 NOTE: NOTE: If the proxy requires user authentication, you will need to add user authentication information into <proxy-ip> like below:
 
-```
+```bash
 export HTTP_PROXY=http://<userid>:<password>@<proxy-ip>:<port>
 export HTTPS_PROXY=https://<userid>:<password>@<proxy-ip>:<port>
 ```
@@ -116,7 +116,7 @@ CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, a
 * If you are running a static installation, add the following to the server before installation:
 +
 
-```
+```bash
 #!/bin/bash
 
 (cat <<EOF
@@ -137,13 +137,13 @@ If your containers need to use a proxy server you will need to set the following
 ==== Can't access the Management Console
 If you cannot access the CircleCI Management Console, but the Services machine seems to be running, try to SSH tunnel into the machine by running the following, substituting your proxy address and the IP address of your Services machine:
 
-```shell
+```bash
 ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_machine>
 ```
 
 ==== REPL time out
 If you experience a timeout when connecting to the REPL, you will need to allow access, through your corporate proxy, to the domains of any Clojure library repositories that are required to download dependencies for running the REPL.
-```
+```bash
 sudo su
 docker exec -it frontend /bin/bash
 lein repl :connect 6005

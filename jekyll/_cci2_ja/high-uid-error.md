@@ -45,7 +45,7 @@ Docker はコンテナを起動するとイメージをプルし、そのイメ�
 
 以下の例では、[circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid) 内で `find` コマンドを使用して無効なファイルを探します。
 
-```bash
+```shell
 # コンテナ内でシェルを開始します
 $ docker run -it circleci/doc-highid sh
 

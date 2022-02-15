@@ -324,7 +324,7 @@ In order to allow CircleCI's parallelization to use the `--split-by=timings` str
 
 By default, JUnitFormatter saves the output to the `_build/test/lib/<application name>` directory, so in your `.circleci/config.yml` you will want to configure the `store_test_results` step to point to that same directory:
 
-```
+```yml 
   - store_test_results:
       path: _build/test/lib/<application name>
 ```

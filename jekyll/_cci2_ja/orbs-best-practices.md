@@ -134,7 +134,7 @@ steps:
 
 コマンドに "sudo" を付ける場合、まずユーザーが既に root であるかどうかを確認してください。 この確認は、環境変数を用いることで動的に行なえます。
 
-```bash
+```shell
 if [[ $EUID == 0 ]]; then export SUDO=""; else # root ユーザーかどうかを確認
   export SUDO="sudo";
 fi

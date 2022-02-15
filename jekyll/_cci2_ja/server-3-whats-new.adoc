@@ -102,7 +102,7 @@ KOTS 管理者コンソール ダッシュボードのメニューバーで  [Ve
 
 以下により、PostgreSQL ポッドが `[Pending(保留)]`状態かどうかを確認することができます。
 
-```bash
+```shell
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
 NAME           READY   STATUS    RESTARTS   AGE
 postgresql-0   1/1     Pending   0          3m
@@ -110,7 +110,7 @@ postgresql-0   1/1     Pending   0          3m
 
 以下のコマンドにより、データを損失することなくポッドを 0 にスケールダウンし、アプリケーションポッドを終了することができます。
 
-```bash
+```shell
 kubectl scale deployment -l layer=application --replicas 0
 ```
 
@@ -119,13 +119,13 @@ kubectl scale deployment -l layer=application --replicas 0
 * KOTS 管理者コンソールからアップデートを再デプロイする*か*、
 * *または*、以下の 2 つのコマンドを実行して、ポッドを再デプロイし、サーバーを機能的な状態に戻します。
 +
-```bash
+```shell
 kubectl scale deployment -l layer=application --replicas 1
 ```
 +
 その後、次のコマンドで `output-processor` をスケールアップします。
 +
-```bash
+```shell
 kubectl scale deployment output-processor --replicas 2
 
 ```
@@ -135,7 +135,7 @@ kubectl scale deployment output-processor --replicas 2
 
 以下により、Traefik ポッドの状態を確認することができます。
 
-```bash
+```shell
 $ kubectl get pod -l app=traefik
 NAME                                      READY   STATUS    RESTARTS   AGE
 circleci-server-traefik-9d6b86fd8-f7n2x   1/1     Running   0          24d
@@ -144,7 +144,7 @@ circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
 
 以下のコマンドで古い Traefik ポッドを削除します。
 
-```bash
+```shell
 kubectl delete pod circleci-server-traefik-<older pod hash>
 ```
 

@@ -25,9 +25,9 @@ CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/
 To install the latest version, you can run `curl  https://kots.io/install {vbar} bash`.
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
-Ensure you are running the minimum KOTS version ({kotsversion}) by running the command: 
+Ensure you are running the minimum KOTS version ({kotsversion}) by running the command:
 
-```
+```bash
 kubectl kots version
 ```
 
@@ -35,7 +35,7 @@ NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きま
 
 From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 
-```sh
+```bash
 kubectl kots install circleci-server
 ```
 
@@ -59,12 +59,12 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 ```
 
-ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。 
+ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
 詳細については、https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定]ガイドを参照してください。
 
-=== フロントエンドの設定 
-フロントエンドの設定により、 CircleCI システムの Web アプリケーション固有の側面が制御されます。 
+=== フロントエンドの設定
+フロントエンドの設定により、 CircleCI システムの Web アプリケーション固有の側面が制御されます。
 
 .フロントエンドの設定
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
@@ -73,9 +73,9 @@ image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
 NOTE: プライベート ロードバランサーの使用オプションを選択した場合、 [ Let's Encrypt (暗号化を許可) ] オプションは機能せず、使用できなくなります。
 
-* *[Domain Name (ドメイン名)](必須)*: フロントエンド TLS キーと証明書を作成した際に指定したドメイン名を入力します。 
+* *[Domain Name (ドメイン名)](必須)*: フロントエンド TLS キーと証明書を作成した際に指定したドメイン名を入力します。
 
-* *[Frontend Replicas (フロントエンドのレプリカ)](オプション)*: フロントエンドで処理できるトラフィック量を増やす際に使用します。 
+* *[Frontend Replicas (フロントエンドのレプリカ)](オプション)*: フロントエンドで処理できるトラフィック量を増やす際に使用します。
 
 * *[Frontend TLS Private Key (フロントエンド TLS プライベートキー)] (必須)*: 前提条件のステップで作成したキーです。 この値は以下のコマンドで取得できます。
 +
@@ -83,18 +83,18 @@ NOTE: プライベート ロードバランサーの使用オプションを選�
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
-* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. この値は以下のコマンドで取得できます。 
+* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. この値は以下のコマンドで取得できます。
 +
 ```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses. 
+* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
 
 ==== アーティファクトと暗号化署名の設定
-暗号化キーとアーティファクト署名キーは、前提条件のステップで作成しました。 そのキーをここで入力します。 
+暗号化キーとアーティファクト署名キーは、前提条件のステップで作成しました。 そのキーをここで入力します。
 
-以下の項目を入力してください。 
+以下の項目を入力してください。
 
 * *アーティファクト署名キー (必須)*
 
@@ -107,17 +107,17 @@ You created your Github OAuth application in the prerequisite phase. Use the dat
 Cloud または Enterprise (オンプレミス)を選択します。
 
 * *[OAuth Client ID (OAuth クライアントID)] (必須)* -
-Github が提供する OAuth クライアントIDです。 
+Github が提供する OAuth クライアントIDです。
 
 * *[OAuth Client Secret (OAuth クライアント シークレット)] (必須)* -
-Github が提供する OAuth クライアント シークレットです。 
+Github が提供する OAuth クライアント シークレットです。
 
 ==== オブジェクトストレージの設定
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
 ===== S3 互換
-前提条件のステップで、S3 互換バケットとオプションで IAM アカウントの作成が完了している必要があります。 
+前提条件のステップで、S3 互換バケットとオプションで IAM アカウントの作成が完了している必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
@@ -137,15 +137,15 @@ One of the following is required. Either select IAM keys and provide:
 
 Or select IAM role and provide:
 
-* *Role ARN* - 
+* *Role ARN* -
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
-===== Google Cloud Storage 
-前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。 
+===== Google Cloud Storage
+前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
-* *Storage Object Expiry (required)* - 
+* *Storage Object Expiry (required)* -
 Number of days to retain your test results and artifacts. 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
 ====== 認証
@@ -154,15 +154,15 @@ Number of days to retain your test results and artifacts. 有効期限を無効�
 
 ==== Postgres、MongoDB、Vault の設定
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。  
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
 
 === 保存とデプロイ
-上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Traefik ロードバランサー用のIPアドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。 
+上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Traefik ロードバランサー用のIPアドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
 
 NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 これらのフィールドについては次の段階で再度説明します。
 
-=== Create DNS entry 
-DNS エントリを作成します (例: `circleci.your.domain.com`、 `app.circleci.your.domain.com`)。 この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。 
+=== Create DNS entry
+DNS エントリを作成します (例: `circleci.your.domain.com`、 `app.circleci.your.domain.com`)。 この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
 
 Traefik ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 この値は以下のコマンドで取得できます。
 
@@ -181,7 +181,7 @@ NOTE: The Traefik load balancer has a healthcheck that serves a JSON payload at 
 
 === バリデーション
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 Now we will move on to build services. すべてのサービスが立ち上がるまで時間がかかることがあります。 You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1): 
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 Now we will move on to build services. すべてのサービスが立ち上がるまで時間がかかることがあります。 You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>

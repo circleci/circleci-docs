@@ -3,8 +3,6 @@ description: "このドキュメントでは、お客様の CircleCI Server v2 �
 version:
 - Server v2.x
 - サーバー管理
-
-suggested_links_has_experiments: true
 suggested:
   - title: アカウントのパーミッションの更新について
     isExperiment: true
@@ -75,7 +73,7 @@ NOTE: 管理者の権限を付与するには、以下のいずれかの方法�
 
 *LDAP ユーザー名で指定されたユーザー（GitHub アカウントへの接続前、または GitHub アカウントを持っていない場合）*
 
-```sh
+```clojure
 (-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-ldap-username" :first_vcs_authorized_client_id nil} :limit 1)
     (first)
     (circle.model.user/set-fields! {:admin "all"})
@@ -85,7 +83,7 @@ NOTE: 管理者の権限を付与するには、以下のいずれかの方法�
 
 *GitHub ユーザー名を使用（GitHub アカウント接続後、以前のログイン値を置き換えます）*
 
-```sh
+```clojure
 (-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-github-username"} :limit 1)
     (first)
     (circle.model.user/set-fields! {:admin "all"})
@@ -95,7 +93,7 @@ NOTE: 管理者の権限を付与するには、以下のいずれかの方法�
 
 *アナリティクス ID を使用*
 
-```sh
+```clojure
 (-> (circle.model.user/find-one-by-analytics-id "3b35037c-6eb3-4e41-88e2-3913b2f43d96")
     (circle.model.user/set-fields! {:admin "all"})
     (:analytics-id)

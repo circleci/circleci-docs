@@ -34,7 +34,7 @@ Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to 
 {: #jfrog-cli }
 If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
 
-```
+```yml
 - run:
     name: Install jFrog CLI
     command: curl -fL https://getcli.jfrog.io | sh
@@ -43,25 +43,25 @@ If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/
 
 Now we need to configure JFrog to use our credentials securely. We configure the client to use our `$ARTIFACTORY_URL`, along with our `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. These can be entered under `Project Settings->Environment Variables`. Configure the CLI to use these settings:
 
-```
+```yml
 - run: ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 ```
 
 If you would like to upload JAR files use the following example:
 
-```
+```yml
 - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
 If you would like to upload WAR files use the following example:
 
-```
+```yml
 - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
 The full `.circleci/config.yml` file would look something like the following:
 
-```yaml
+```yml
 version: 2
 jobs:
   upload-artifact:
