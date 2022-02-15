@@ -403,7 +403,7 @@ Because environment variables can be shared, passed around between employees and
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI の構成](https://circleci.com/docs/ja/2.0/local-cli/?section=configuration#cli-%E3%81%AE%E6%A7%8B%E6%88%90) を参照して CircleCI CLI を構成してください。_
+_CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI の構成](https://circleci.com/docs/ja/2.0/local-cli/) を参照して CircleCI CLI を構成してください。_
 
 CircleCI CLI を使用して環境変数のローテーションを実行するには、下記ステップを実行します:
 
