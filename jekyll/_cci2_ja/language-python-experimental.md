@@ -21,7 +21,7 @@ version:
 ## はじめに
 {: #overview-new }
 
-このガイドでは、Django サンプルアプリケーションを使って、CircleCI 上で Python アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング]({}/circleci-demo-python-django)され、[CircleCI 上でビルド]({}/circleci-demo-python-django){:rel="nofollow"}されます。
+このガイドでは、Django サンプルアプリケーションを使って、CircleCI 上で Python アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング]({{site.gh_public_org_url}}/circleci-demo-python-django)され、[CircleCI 上でビルド]({{site.cci_public_org_url}}/circleci-demo-python-django){:rel="nofollow"}されます。
 
 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/circleci-demo-python-django/blob/master/.circleci/config.yml)を書き直してみることをお勧めします。
 
