@@ -3,8 +3,6 @@ description: "This document describes the various ways users of your CircleCI se
 version:
 - Server v2.x
 - Server Admin
-
-experiment_only_suggestions: true
 suggested:
   - title: How to refresh user permissions
     isExperiment: true
