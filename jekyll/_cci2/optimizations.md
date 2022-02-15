@@ -59,8 +59,6 @@ To persist data from a job and make it available to downstream jobs via the [`at
 
 * Read more on the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 
-* The [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) page has additional information about using workspaces to share data among jobs.
-
 ## Parallelism
 {: #parallelism }
 
