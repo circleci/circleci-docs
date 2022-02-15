@@ -99,7 +99,7 @@ The `steps` run `checkout` first, then install the PostgreSQL client tools. The 
 
 このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするための追加のオプション設定について説明します。
 
-### Optimizing PostgreSQL images
+### PostgreSQL イメージの最適化
 {: #optimizing-postgresql-images }
 {:.no_toc}
 
