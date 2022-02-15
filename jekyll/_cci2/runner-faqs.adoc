@@ -17,7 +17,7 @@ toc::[]
 
 == What is the security model for the CircleCI runner?
 
-When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
+When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
 
 CAUTION: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
 
@@ -41,11 +41,19 @@ NOTE: No inbound connectivity is required by runner. Any other required connecti
 
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
-== How do caching and workspaces and artifacts work with CircleCI runner?
+== How do caching, workspaces, and artifacts work with CircleCI runner?
 
-Caches, workspaces, and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. 
+Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. Caches, workspaces, and artifacts will be stored in the AWS us-east-1 region of S3. If your runners are not in this region then you may see reduced performance.
 
-If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and uploading the artifacts directly to your chosen storage backend.
+Find out more about these concepts below:
+
+* <<caching#,Caching>>
+* <<workspaces#,Workspaces>>
+* <<artifacts#,Artifacts>>
+
+You can also find out more on the <<persist-data#,Persisting Data>> page.
+
+If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and upload the artifacts directly to your chosen storage backend.
 
 == What are the best practices for managing state between jobs?
 
@@ -53,7 +61,7 @@ The runner itself is unopinionated about this. Runner can be configured to give 
 
 In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
 
-It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time.
+CAUTION: It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time. As a result, this trade-off could lead to higher billable usage.
 
 == Can I run multiple agents on a single host?
 

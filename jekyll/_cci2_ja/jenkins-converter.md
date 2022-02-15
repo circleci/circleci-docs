@@ -24,14 +24,14 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 * Only `Default` is supported as a tool name for `maven`, `jdk` and `gradle` in the [`tools` block](https://www.jenkins.io/doc/book/pipeline/syntax/#tools), and other names will cause conversion failures. Please configure them as follows or remove them manually.
 
   For example, the following stanza:
-  ```
+  ```groovy
   tools {
     maven 'Maven 3.6.3'
     jdk 'Corretto 8.232'
   }
   ```
   should be changed to:
-  ```
+  ```groovy
   tools {
     maven 'Default'
     jdk 'Default'

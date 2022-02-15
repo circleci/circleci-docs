@@ -35,7 +35,7 @@ You can access the test results from the **Tests** tab when viewing a job, as sh
 
 Below is an example of using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your `.circleci/config.yml`.
 
-```sh
+```yml
 steps:
   - run:
   #...
@@ -73,13 +73,13 @@ Test metadata is not automatically collected in CircleCI until you enable the JU
 
 - RSpec requires the following be added to your gemfile:
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 - Minitest requires the following be added to your gemfile:
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
@@ -122,7 +122,7 @@ To output JUnit compatible test data with Jest you can use [jest-junit](https://
 
 A working `.circleci/config.yml` section might look like this:
 
-```yaml
+```yml
 steps:
   - run:
       name: Install JUnit coverage reporter
@@ -149,7 +149,7 @@ To output junit tests with the Mocha test runner you can use [mocha-junit-report
 
 A working `.circleci/config.yml` section for testing might look like this:
 
-```yaml
+```yml
     steps:
       - checkout
       - run: npm install
@@ -169,7 +169,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
-```yaml
+```yml
 version: 2
 jobs:
     build:
@@ -269,7 +269,7 @@ To output JUnit tests with the Karma test runner you can use [karma-junit-report
 
 A working `.circleci/config.yml` section might look like this:
 
-```yaml
+```yml
     steps:
       - checkout
       - run: npm install
@@ -306,7 +306,7 @@ To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner y
 
 A working `.circleci/config.yml` section for testing might look like the following example:
 
-```yaml
+```yml
     steps:
       - run:
           command: |
@@ -326,7 +326,7 @@ To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUni
 
 A working `.circleci/config.yml` test section might look like this:
 
-```yaml
+```yml
     steps:
       - run:
           command: |
@@ -345,13 +345,13 @@ A working `.circleci/config.yml` test section might look like this:
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 And modify your test command to this:
 
-```yaml
+```yml
     steps:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
@@ -368,13 +368,13 @@ And modify your test command to this:
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
-```shell
+```ruby
 gem 'minitest-ci'
 ```
 
 And modify your test command to this:
 
-```yaml
+```yml
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -392,7 +392,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
 
-```yaml
+```yml
     steps:
       - run:
           name: Save test results
@@ -408,7 +408,7 @@ The `path:` is a directory relative to the project’s root directory where the 
 
 Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `/cucumber` directory. For example:
 
-```yaml
+```yml
     steps:
       - run:
           name: Save test results
@@ -428,17 +428,16 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
-```yaml
-steps:
-    - run:
-        name: run tests
-        command: |
-        . venv/bin/activate
-        mkdir test-results
-        pytest --junitxml=test-results/junit.xml
+```yml
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml
 
-    - store_test_results:
-        path: test-results
+      - store_test_results:
+          path: test-results
 ```
 
 #### unittest
@@ -447,9 +446,7 @@ steps:
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
 After adding pytest to your project, you can produce and upload the test results like this:
-
-```yaml
-    steps:
+```yml
       - run:
           name: run tests
           command: |
@@ -469,7 +466,7 @@ After adding pytest to your project, you can produce and upload the test results
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
-```yaml
+```yml
     steps:
       - run:
           name: Save test results
@@ -486,7 +483,7 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
-```yaml
+```yml
     steps:
       - run:
           name: Save test results
@@ -506,7 +503,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
-```yaml
+```yml
     steps:
       - run:
           command: |
@@ -527,7 +524,7 @@ Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / 
 
 A working `.circleci/config.yml` section might look like this:
 
-```yaml
+```yml
     steps:
       - checkout
       - run: dotnet build
@@ -569,9 +566,14 @@ Edit the kaocha config file `test.edn` to use this test reporter
 ```
 
 Add the store_test_results step your `.circleci/config.yml`
+<<<<<<< HEAD
 
 ```yaml
 version: 2.1
+=======
+```yml
+version: 2
+>>>>>>> c0505639f3a17d1fef05a1e3795561ea64a87920
 jobs:
   build:
     docker:

@@ -148,7 +148,7 @@ aws iam create-access-key --user-name velero
 ----
 
 このコマンドの結果は以下のようになります。
-[source,bash]
+[source,json]
 ----
 {
   "AccessKey": {
@@ -560,14 +560,14 @@ If your KOTS Admin Console does not display the snapshot option, you may try the
 
 * Confirm that your version of KOTS supports snapshots. 現時点では、v1.40.0 以上が推奨されます。
 
-```
+```shell
 $ kubectl kots version
 Replicated KOTS 1.40.0
 ```
 
 * Velero がデプロイされ、適切に動作していることを確認します。 Velero のログは、以下のコマンドで確認できます。
 
-```
+```shell
 $ kubectl logs deployment/velero --namespace velero
 ```
 

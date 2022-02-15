@@ -100,7 +100,7 @@ jobs:
 
 ## macOS
 {: #macos }
-```
+```yml
 jobs:
   build-and-test:
     macos:
@@ -144,7 +144,8 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -158,7 +159,8 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine: true
+    machine:
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment

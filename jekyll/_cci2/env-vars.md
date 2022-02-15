@@ -8,7 +8,6 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-suggested_links_has_experiments: true
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -449,21 +448,21 @@ jobs:
 
 If you are having difficulty adding a multiline environment variable, use `base64` to encode it.
 
-```bash
+```shell
 $ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 
 Store the resulting value in a CircleCI environment variable.
 
-```bash
+```shell
 $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
 Decode the variable in any commands that use the variable.
 
-```bash
+```shell
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```
@@ -482,7 +481,7 @@ This can be done by passing a `parameters` key in the JSON packet of the `POST` 
 
 The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
-```sh
+```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
@@ -510,7 +509,7 @@ Aside from the usual constraints for environment variables there are no restrict
 
 For example, when you pass the parameters:
 
-```sh
+```json
 {
   "build_parameters": {
     "foo": "bar",
@@ -523,7 +522,7 @@ For example, when you pass the parameters:
 
 Your build will see the environment variables:
 
-```sh
+```shell
 export foo="bar"
 export baz="5"
 export qux="{\"quux\": 1}"
@@ -534,7 +533,7 @@ Build parameters are exported as environment variables inside each job's contain
 
 You might want to inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run. For example, a run with a deploy step to a staging environment that requires functional testing against different hosts. It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl` (though you may also use an HTTP library in your language of choice).
 
-```sh
+```json
 {
   "build_parameters": {
     "param1": "value1",
@@ -545,7 +544,7 @@ You might want to inject environment variables with the `build_parameters` key t
 
 For example using `curl`
 
-```sh
+```shell
 curl \
   --header "Content-Type: application/json" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -559,7 +558,7 @@ In the above example,
 
 The build will see the environment variables:
 
-```sh
+```shell
 export param1="value1"
 export param2="500"
 ```
@@ -569,7 +568,7 @@ Start a run with the POST API call, see the [new build](https://circleci.com/doc
 ## Built-in environment variables
 {: #built-in-environment-variables }
 
-Built-in environment variables are exported in each job and can be used for more complex testing or deployment. 
+Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
 
 {% include snippets/built-in-env-vars.md %}
 

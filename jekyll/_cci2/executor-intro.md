@@ -22,7 +22,7 @@ CircleCI offers several execution environments. We call these **executors**. An 
   <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
-```
+```yml
 jobs:
   build: # name of your job
     docker: # executor type
@@ -38,7 +38,7 @@ Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/ex
 {: #machine }
 
 {:.tab.machine.Cloud}
-```
+```yml
 jobs:
   build: # name of your job
     machine: # executor type
@@ -49,19 +49,19 @@ jobs:
 ```
 
 {:.tab.machine.Server_3}
-```
+```yml
 jobs:
   build: # name of your job
-    machine: true
+    machine: true # executor type
     steps:
       # Commands run in a Linux virtual machine environment
 ```
 
 {:.tab.machine.Server_2}
-```
+```yml
 jobs:
   build: # name of your job
-    machine: true
+    machine: true # executor type
 
     steps:
       # Commands run in a Linux virtual machine environment
@@ -71,7 +71,7 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 {: #macos }
-```
+```yml
 jobs:
   build: # name of your job
     macos: # executor type
@@ -93,7 +93,7 @@ The syntax for using the Windows executor in your config differs depending on wh
 * Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
-```
+```yml
 version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
@@ -111,12 +111,13 @@ jobs:
 
 
 {:.tab.windowsblock.Server_3}
-```
+```yml
 version: 2.1
 
 jobs:
   build: # name of your job
-    machine: true
+    machine: # executor type
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -125,12 +126,13 @@ jobs:
 ```
 
 {:.tab.windowsblock.Server_2}
-```
+```yaml
 version: 2
 
 jobs:
   build: # name of your job
-    machine: true
+    machine: # executor type
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment

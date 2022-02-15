@@ -41,7 +41,7 @@ version:
 4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 詳細については、以下の「[CircleCI 環境変数を設定する](#configure-circleci-environment-variables)」セクションを参照してください。
 5. 以下のコマンドを実行して、AWS リソースを作成します。
 
-```bash
+```shell
 cd terraform_setup
 terraform init
 terraform plan  # プランをレビューします

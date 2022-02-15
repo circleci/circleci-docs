@@ -55,7 +55,7 @@ For the majority of installations, we recommend one of the following package man
 
 The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
 
-```sh
+```shell
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
 ```
@@ -67,7 +67,7 @@ sudo snap connect circleci:docker docker
 
 If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
 
-```sh
+```shell
 brew install circleci
 ```
 
@@ -78,7 +78,7 @@ brew install circleci
 
 For Windows users, we provide a [Chocolatey](https://chocolatey.org/) package:
 
-```sh
+```shell
 choco install circleci-cli -y
 ```
 
@@ -87,13 +87,13 @@ choco install circleci-cli -y
 
 **Mac and Linux:**
 
-```sh
+```shell
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
 ```
 
 By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` directory. If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo` after the pipe and before `bash`. Alternatively, you can install to an alternate location by defining the `DESTDIR` environment variable when invoking bash:
 
-```sh
+```shell
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
 
@@ -113,7 +113,7 @@ You can update to the newest version of the CLI using the following command: `ci
 
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
 
-```sh
+```shell
 circleci update
 circleci switch
 ```
@@ -125,7 +125,7 @@ This command may prompt you for `sudo` if your user doesn't have write permissio
 
 Before using the CLI you need to generate a CircleCI API Token from the [Personal API Token tab](https://app.circleci.com/settings/user/tokens). After you get your token, configure the CLI by running:
 
-```sh
+```shell
 circleci setup
 ```
 
@@ -139,14 +139,14 @@ You can avoid pushing additional commits to test your config.yml by using the CL
 
 To validate your config, navigate to a directory with a `.circleci/config.yml` file and run:
 
-```sh
+```shell
 circleci config validate
 # Config file at .circleci/config.yml is valid
 ```
 
 If you are working with [Orbs](https://circleci.com/orbs/) you can also validate your orb:
 
-```sh
+```shell
 circleci orb validate /tmp/my_orb.yml
 ```
 
@@ -162,7 +162,7 @@ The [orb development kit]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit
 
 The CLI provides a `circleci config pack` command (separate to `circleci orb pack` described above), allowing you to create a single YAML file from several separate files. The `pack` command implements [FYAML](https://github.com/CircleCI-Public/fyaml), a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
 
-```sh
+```shell
 $ tree
 .
 └── your-orb-source
@@ -181,7 +181,7 @@ file names to **YAML keys**  and the file contents as the **values** to those ke
 
 
 {% raw %}
-```sh
+```shell
 $ circleci config pack your-orb-source
 ```
 
@@ -205,7 +205,7 @@ A file beginning with `@` will have its contents merged into its parent folder l
 Thus:
 
 {% raw %}
-```sh
+```shell
 $ cat foo/bar/@baz.yml
 {baz: qux}
 ```
@@ -233,7 +233,7 @@ expanded source configuration alongside your original config (useful if you are 
 
 Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
-```
+```yml
 version: 2.1
 
 orbs:
@@ -250,7 +250,7 @@ Running `circleci config process .circleci/config.yml` will output the following
 (which is a mix of the expanded source and the original config commented out).
 
 {% raw %}
-```sh
+```yml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
@@ -317,10 +317,10 @@ workflows:
 
 # Original config.yml file:
 # version: 2.1
-# 
+#
 # orbs:
 #   node: circleci/node@4.7.0
-# 
+#
 # workflows:
 #   version: 2
 #   example-workflow:
@@ -351,20 +351,20 @@ You will need to have [Docker](https://www.docker.com/products/docker-desktop) i
 
 The CLI allows you to run a single job from CircleCI on your desktop using Docker.
 
-```sh
+```shell
 $ circleci local execute --job JOB_NAME
 ```
 
 If your CircleCI config is set to version 2.1 or greater, you must first export your config to `process.yml`, and specify it when executing:
 
-```sh
+```shell
 circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml --job JOB_NAME
 ```
 
 Let's run an example build on our local machine on one of CircleCI's demo applications:
 
-```sh
+```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
 cd circleci-demo-go
 circleci local execute --job build
@@ -415,7 +415,7 @@ installations of CircleCI. To install the legacy CLI on macOS and other Linux Di
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
 2. To install the CLI, run the following command:
 
-```sh
+```shell
 $ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
 ```
 
@@ -440,7 +440,7 @@ the CLI, you can execute several context-oriented commands:
 
 The above list are "sub-commands" in the CLI, which would be executed like so:
 
-```bash
+```shell
 circleci context create
 
 # Returns the following:

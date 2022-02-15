@@ -57,25 +57,25 @@ The build VM will remain available for an SSH connection for **10 minutes after 
 
 想定どおりにキーがセットアップされているかどうかは、コマンド 1 つでテストできます。 GitHub の場合は、以下を実行します。
 
-```
+```bash
 ssh git@github.com
 ```
 
 Bitbucket の場合は、以下を実行します。
 
-```
+```bash
 ssh -Tv git@bitbucket.org
 ```
 
 実行後、以下のように表示されます。
 
-```
+```bash
 $ Hi :username! You've successfully authenticated...
 ```
 
 GitHub および Bitbucket で共通です。
 
-```
+```bash
 $ logged in as :username.
 ```
 
@@ -99,7 +99,7 @@ CircleCI ビルドに SSH 接続するには、ビルドするプロジェクト
 
 認証を行う GitHub にどのキーを提供しているかを調べるには、以下を実行します。
 
-```
+```bash
 $ ssh -v git@github.com
 
 # または
@@ -109,7 +109,7 @@ $ ssh -v git@bitbucket.com
 
 出力から、以下のような箇所を探します。
 
-```
+```bash
 debug1: Offering RSA public key: /Users/me/.ssh/id_rsa_github
 <...>
 debug1: Authentication succeeded (publickey).
@@ -119,7 +119,7 @@ debug1: Authentication succeeded (publickey).
 
 次に、CircleCI ビルドに対し、-v フラグを追加して SSH コマンドを実行します。 出力から、以下のような行を探します。
 
-```
+```bash
 debug1: Offering RSA public key: ...
 ```
 
@@ -127,7 +127,7 @@ GitHub が受け付けたキー (この例では /Users/me/.ssh/id_rsa_github) �
 
 提供されていない場合は、SSH の `-i` コマンドライン引数を使用してキーを指定します。 たとえば下記のようにします。
 
-```
+```bash
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 

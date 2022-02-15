@@ -126,7 +126,7 @@ The machine-consumable lists have also been updated to reflect the new IP addres
 
 To query these, you can use any DNS resolver. Here's an example using `dig` with the default resolver:
 
-```
+```shell
 dig all.knownips.circleci.com A +short
 ```
 

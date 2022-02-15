@@ -61,7 +61,7 @@ guide.
 
 The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
 
-**Note:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+**Note:** The only network traffic that will be billed is that accrued through **restoring caches and workspaces to self-hosted runners**.
 {: class="alert alert-info" }
 
 To view your network and storage usage follow these steps:
@@ -75,22 +75,21 @@ Within the network and storage tabs you will find a breakdown of your usage for 
 ### Overview of all storage and network transfer
 {: #overview-of-storage-and-network-transfer }
 
-All data persistence operations within a job will accrue network and storage usage, the relevant actions are:
+All data persistence operations within a job will accrue storage usage, the relevant actions are:
 
-* Uploading and downloading caches
-* Uploading and downloading workspaces
+* Uploading caches
+* Uploading workspaces
 * Uploading artifacts
 * Uploading test results
 
 To determine which jobs utilize the above actions, you can search for the following commands in your project's `config.yml` file:
 
 * `save_cache`
-* `restore_cache`
 * `persist_to_workspace`
 * `store_artifacts`
 * `store_test_results`
 
-The relevant action resulting in network egress that will accrue network transfer usage (billable) is **restoring caches and workspaces to self-hosted runners**.
+The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners**.
 
 Details about your storage and network transfer usage can be viewed on your **Plan > Plan Usage** screen. On this screen you can find:
 
@@ -125,7 +124,7 @@ To calculate monthly storage costs from your daily usage, click on the **Storage
 
 To calculate monthly network costs from your usage, click on the **Network** tab to see if your organization has accrued any overages. In the same scenario as storage above, your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
-The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
 
 ### How to optimize your storage and network transfer use
 {: #how-to-optimize-your-storage-and-network-transfer-use }
@@ -173,7 +172,7 @@ If you notice your cache usage is high and would like to reduce it:
 * Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
 
 {% raw %}
-```sh
+```yml
      - save_cache:
          key: brew-{{epoch}}
          paths:
@@ -185,7 +184,7 @@ If you notice your cache usage is high and would like to reduce it:
 Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
 
 {% raw %}
-```sh
+```yml
      - save_cache:
          key: brew-{{checksum “Brewfile”}}
          paths:
@@ -208,7 +207,4 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 #### Reducing excess use of network egress
 {: #reducing-excess-use-of-network-egress }
 
-If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
-
-* For runner, deploy any cloud-based runners in AWS US-East-1.
-* Download artifacts once and store them on your site for additional processing.
+Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
