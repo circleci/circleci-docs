@@ -46,7 +46,7 @@ CircleCI プラットフォームでテストを行う際には、多様なテ�
 {: #testing-optimization-on-the-circleci-platform-for-a-python-django-project }
 {:.no_toc}
 
-一部の組織では、CircleCI を使用して、各変更をメイン ブランチにマージする前にテストを実行しています。 テストを高速化すると、フィードバック サイクルが速く回るようになり、自信を持ってコードを頻繁に配信できるようになります。 Python Django アプリケーションのワークフローの例を見てみましょう。CircleCI プラットフォームでテストを完了するのに 13 分以上かかっています。
+Some organizations use CircleCI to run tests for each change before merging to the main branch. テストを高速化すると、フィードバック サイクルが速く回るようになり、自信を持ってコードを頻繁に配信できるようになります。 Python Django アプリケーションのワークフローの例を見てみましょう。CircleCI プラットフォームでテストを完了するのに 13 分以上かかっています。
 
 テスト プロセスは以下のように表示されます。
 
