@@ -63,7 +63,7 @@
                 <ul class="section-nav">
                   {% for item in page.suggested %}
                   <li class="helpful-entry helpful-h2 {% if item.isExperiment %} has-experiment-links {% endif%}">
-                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+                    <a class="{% if item.isExperiment %} experimental-link {% endif %}" href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}
                 </ul>
