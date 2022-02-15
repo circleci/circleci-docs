@@ -14,16 +14,17 @@ Using the **`store_test_results` step** gives you access to:
 
 * The **Tests** pane in the CircleCI web app.
 * Test insights and flaky test detection.
-* Test splitting
+* Test splitting.
 
 Alternatively, storing test results as **artifacts** means you can look at the raw xml. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts).
 
-**Note:** You might choose to upbload your test results using both `store_test_results` and `store_artifacts`
+**Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
 * TOC
 {:toc}
 
 ## Overview
+{: #overview }
 
 Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to
 not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI
@@ -50,15 +51,18 @@ The `path` key is an absolute or relative path to your `working_directory` conta
 **Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
 ## Viewing storage usage
+{: #viewing-storage-usage }
 
 For information on viewing your stoarage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
 
 ## Test Insights
+{: #test-insights }
 See the [Test Insights guide]({{site.baseurl}}/2.0/insights-tests/) for information on using the Insights feature to gather information about your tests, including flaky test detection, viewing alist of tests that fail most often, slowest tests and abn overall performance summary.
 
 Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Test Insights for server v2.x
+{: #test-insights-for-server-v2x }
 **If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
