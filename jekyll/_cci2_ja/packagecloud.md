@@ -1,4 +1,3 @@
-
 ---
 layout: classic-docs
 title: packagecloud へのパッケージのパブリッシュ
