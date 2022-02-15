@@ -1,5 +1,6 @@
 import { createPopper } from '@popperjs/core';
 import Prism from 'prismjs';
+import { expandImageOnClick } from './expandImage';
 
 import { highlightURLHash } from './highlightURLHash';
 
@@ -287,9 +288,6 @@ $(document).ready(function () {
     });
 });
 
-// Currently this function is only used for the insights table
-$(highlightURLHash);
-
 // update date shown to be X ago tooltip code
 $(function () {
   const tooltiptime = document.getElementById('tooltip-time');
@@ -346,3 +344,11 @@ export function checkIfUsersPrint() {
     });
   };
 }
+
+// Used to call functions on document on ready
+$(function () {
+  // Currently this function is only used for the insights table
+  highlightURLHash();
+  // This function is used to be able to expand images when you click them
+  expandImageOnClick();
+});

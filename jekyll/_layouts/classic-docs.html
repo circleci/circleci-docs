@@ -47,6 +47,11 @@
             {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
+            <div id="expandModal" class="hidden">
+              <img id="closeImg" src="{{ site.baseurl }}/assets/img/docs/close-path.svg">
+              <span id="modalImg"></span>
+              <div id="caption"></div>
+            </div>
           </article>
         </div><!-- .article-container -->
 
