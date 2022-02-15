@@ -46,7 +46,7 @@ Caching should be one of the first things you consider when trying to optimize y
 ## Workflows
 {: #workflows }
 
-Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows on the [Workflow]({{site.baseurl}}/2.0/workflows/) page.
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your configuration you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the [Workflow]({{site.baseurl}}/2.0/workflows/) page.
 
 * You can view examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
 
