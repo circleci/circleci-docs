@@ -141,7 +141,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
-```
+```hcl
 variable "project" {
   type    = string
   default = "<your-project>"
