@@ -246,7 +246,7 @@ workflows:
       - adhoc
 ```
 
-**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{site.baseurl}}/2.0/testing-ios/#using-ruby).
+**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different Ruby version]({{site.baseurl}}/2.0/testing-ios/#using-ruby).
 
 ## Deploying to Visual Studio App Center
 {: #deploying-to-visual-studio-app-center }
