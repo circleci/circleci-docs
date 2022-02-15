@@ -473,13 +473,13 @@ workflows:
 
 In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
 
-```
+```shell
 npm install --save-dev firebase-tools
 ```
 
 以下のコマンドを使用して、Firebase CLI トークンを生成します。
 
-```
+```shell
 firebase login:ci
 ```
 
@@ -490,7 +490,6 @@ The following example shows how you can add a deploy to Firebase job to your pro
 {% raw %}
 
 ```yaml
-
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
