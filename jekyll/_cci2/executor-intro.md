@@ -71,7 +71,8 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 {: #macos }
-```yml
+
+```
 jobs:
   build: # name of your job
     macos: # executor type
