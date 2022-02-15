@@ -8,7 +8,6 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-experiment_only_suggestions: false
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -569,7 +568,7 @@ Start a run with the POST API call, see the [new build](https://circleci.com/doc
 ## Built-in environment variables
 {: #built-in-environment-variables }
 
-Built-in environment variables are exported in each job and can be used for more complex testing or deployment. 
+Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
 
 {% include snippets/built-in-env-vars.md %}
 

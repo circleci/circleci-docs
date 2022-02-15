@@ -8,7 +8,6 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-experiment_only_suggestions: true
 suggested:
   - title: Context deadline exceeded after 1 hour - Build timed out
     isExperiment: true

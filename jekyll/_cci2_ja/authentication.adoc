@@ -3,8 +3,6 @@ description: "このドキュメントでは、お客様の CircleCI Server v2 �
 version:
 - Server v2.x
 - サーバー管理
-
-experiment_only_suggestions: true
 suggested:
   - title: アカウントのパーミッションの更新について
     isExperiment: true
