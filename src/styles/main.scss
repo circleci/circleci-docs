@@ -678,3 +678,75 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 #tooltip-time[data-popper-placement^=bottom] > #arrow {
   top: -4px;
 }
+/*
+* enlarge image on click
+*/
+.enlarge {
+  cursor: zoom-in;
+}
+
+#expandModal {
+  position: fixed;
+  z-index: 1;
+  padding-top: 120px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#modal-content {
+  // If image has transparent background
+  background: white;
+  margin: auto;
+  display: block;
+  width: 80%;
+}
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+#closeImg {
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#closeImg:hover,
+#closeImg:focus {
+  opacity: 0.5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+  #modal-content {
+    width: 100%;
+  }
+  #closeImg {
+    top: 70px;
+  }
+}
