@@ -69,7 +69,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `10.3.0` | Xcode 10.3 (10G8)<sup>(1)</sup>         | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
 {: class="table table-striped"}
 
-<sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) document to learn more about this resource class._
+<sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 ## Getting started
 {: #getting-started }
