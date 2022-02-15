@@ -193,6 +193,13 @@ For additional conceptual information on using workspaces, caching, and artifact
 
 Workspaces are stored for up to 15 days. Workspaces are not shared between pipelines, and the only way to access a workspace once the workflow has completed is if the workflow is rerun within the 15 day window.
 
+## Workspaces and runner network charges
+{: #workspaces-runner-network-charges }
+
+When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+
+For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+
 ## Workspace optimization
 {: #workspace-usage-optimization }
 
