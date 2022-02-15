@@ -55,7 +55,7 @@ Workflows provide a means to define a collection of jobs and their run order. If
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
-To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) key, configure the job to use the [`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) key, configure the job to use the [`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
 * Read more on the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 
