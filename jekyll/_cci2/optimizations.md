@@ -32,7 +32,7 @@ Choosing the right docker image for your project can have huge impact on build t
 
 Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
-DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
+DLC is similar to _caching dependencies_, in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
 * Read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page.
 
@@ -52,8 +52,6 @@ Workflows provide a means to define a collection of jobs and their run order. If
 
 ## Workspaces
 {: #workspaces }
-
-**Note**: Using workspaces presumes that you are also using [Workflows](#workflows).
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
