@@ -2,112 +2,37 @@
 layout: classic-docs
 title: Using Credits
 categories: [how-to]
-description: How to leverage CircleCI credits
+description: Learn about the CircleCI credits-based plan system
 version:
 - Cloud
 ---
 
-This document describes the basics of using credits with CircleCI. If you are on the legacy CircleCI Container-based plan you may want to consider consulting the document on [using containers]({{site.baseurl}}/2.0/containers). If you want to switch from using containers to using credits, please [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
+This document describes how to find the available resources regarding credits with CircleCI. If you are on the legacy CircleCI Container-based plan, you may want to consider consulting the document on [using containers]({{site.baseurl}}/2.0/containers). If you want to switch from using containers to using credits, please [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
 
 ## Overview
 {: #overview }
 
-The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's CI solution. Credits are consumed by the second at varying rates according to what build configuration you use.
+Credits are used on CircleCI's Free, Performance, Scale, and Server plans. Each plan offers key CI/CD features, and some plans offer customization options depending on your needs.
 
 The right plan for you and your team will depend on several factors:
 
 - How many users are on your team
 - How much support you need (community support, standard support, or premium support)
-- If you want access to different machine-types
-- If you need features such as Docker Layer Caching, concurrent builds, or build history
+- If you want access to different machine-types and resource classes
+- If you want a limited or unlimited number of self-hosted runners
 
-Let's look at how a Performance plan might use credits. In this example, your team is divided into several groups working on different projects; some projects are larger while others are smaller and need less resources from a CI configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
+You can view the [Plan Overview]({{site.baseurl}}/2.0/plan-overview) page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
+- [Free Plan]({{site.baseurl}}/2.0/plan-free)
+- [Performance Plan]({{site.baseurl}}/2.0/plan-performance)
+- [Scale Plan]({{site.baseurl}}/2.0/plan-scale)
+- [Server Plan]({{site.baseurl}}/2.0/plan-server)
 
-For example, your team might use a `large` `resource_class` (4 vCPUs and 8gb of memory) and make use of more credits/minute to speed up a build for a bigger project, while only using the `small` `resource_class` (1 vCPU, 2gb Memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
+Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn more about how credits are distributed across different machine types and resource classes.
 
-Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn about what each CircleCI plan offers and how credits are distributed across different machine types.
+## Managing credit usage
+{: #managing-credit-usage }
 
-## Configuring your credit plan
-{: #configuring-your-credit-plan }
-
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
-
-## Free plan
-{: #free-plan }
-
-As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient and fast.
-
-The free usage-based plan offers a set amount of build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory). With this combination, a small number of credits are charged per minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
-
-The table below lists some of the features you can use on the Free plan.
-
-| Feature | Description |
-|-------|-------------|
-| UNLIMITED USERS | There is no limit to the number of users who can build and develop on CircleCI. Collaborate with different teams and groups on multiple projects. |
-| EXPANDED ARRAY OF AVAILABLE RESOURCE CLASSES | You have access to an expanded array of Docker, Linux, and Windows resource classes (macOS coming soon). |
-| CONCURRENCY | Run jobs simultaneously for increased productivity and speed when building on CircleCI. |
-| SELF HOSTED RUNNERS | The number of runners you can use has been increased providing you additional flexibility when working on CircleCI. |
-| FLAKY TEST DETECTION | Advanced insights are available to help you troubleshoot failed and flaky tests. |
-| UNLIMITED PRIVATE ORBS | There is no limit to the number of private orbs you can use to securely share across teams and groups. |
-| DOCKER LAYER CACHING | Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster. |
-{: class="table table-striped"}
-
-### Unlimited users
-{: #unlimited-users }
-
-When you use the Free plan, you have an unlimited number of users that can build and develop on CircleCI. This allows you to collaborate with more teams and groups within your organization, which can increase speed, productivity, and efficiency.
-
-### Expansive array of available resource classes
-{: #expansive-array-of-available-resource-classes }
-
-When using the free plan, you have the widest array of resource classes on Docker, Linux, Windows, and macOS (coming soon) available to use. This flexibility helps ensure that you choose the right compute resources.
-
-For more information about these resources, please refer to the the [Executors and Images](https://circleci.com/docs/2.0/executor-intro/) page.
-
-### Concurrency
-{: #concurrency }
-
-The ability to run jobs at the same time (concurrently) is a powerful feature that allows you to decrease your build times and shorten feedback cycles. With concurrency, you will have less jobs waiting in a queue.
-
-### Self hosted runners
-{: #self-hosted-runners }
-
-CircleCI runners allow you to use your own infrastructure for running jobs, providing more granular control of your own environment and flexibility in building and testing on a wide variety of architectures.
-
-For more information about using CircleCI runners, please see the [CircleCI Runner Overview](https://circleci.com/docs/2.0/runner-overview/) page.
-
-### Flaky test detection
-{: #flaky-test-detection }
-
-The average failed workflow wastes approximately 30 minutes. Detecting flaky tests can save you significant amounts of time in your builds and workflows.
-
-For more detailed information about flaky tests, refer to the [Test Insights](https://circleci.com/docs/2.0/insights-tests/#flaky-tests) page.
-
-### Unlimited private orbs
-{: #unlimited-private-orbs }
-
-CircleCI orbs are shareable configuration packages that enable developers to create private, standardardized configurations for use across an organization by different teams.
-
-For more information on private orbs, refer to the [Orbs Introduction](https://circleci.com/docs/2.0/orb-intro/#private-orbs-vs-public-orbs) page.
-
-### Docker layer caching
-{: #docker-layer-caching }
-
-Reducing the time it takes to build a Docker image is an important consideration for developers who consistently use these images in their workflows. Consider using Docker Layer Caching (DLC) if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, rather than impact the actual container used to run your job.
-
-For more information about Docker Layer Caching, please refer to the [Enabling Docker Layer Caching](https://circleci.com/docs/2.0/docker-layer-caching/) page.
-
-## Performance plan
-{: #performance-plan }
-
-Upgrading to a Performance plan offers several improvements over the Free plan:
-
-- Access to all machine sizes for Docker/Linux based machines
-- Access to medium sized MacOS machines
-- Scalable user seat count
-- Access to Docker Layer Caching
-- No queuing
-- Support
+Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/) page.
 
 ## Open source credit usage
 {: #open-source-credit-usage }
@@ -116,20 +41,12 @@ Organizations on our Free plan receive a set amount of free credits per month fo
 
 If you build on macOS, we also offer organizations on our Free plan a number of free credits every month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
 
-## Troubleshooting
+## Troubleshooting: Am I charged if my build is "queued" or "preparing"?
 {: #troubleshooting }
 
-### Am I charged if my build is "queued" or "preparing"?
-{: #am-i-charged-if-my-build-is-queued-or-preparing }
+No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
-No. If you are notified that a job is "queued", it indicates that your job is
-waiting due to a **plan** or **concurrency** limit. If your job indicates that
-it is "preparing", it means that CircleCI is setting up or _dispatching_ your
-job so that it may run.
-
-If you find that jobs are "preparing" for quite some time, you may be able to
-reduce it if your jobs use the docker executor; try using more recent docker
-images to decrease preparation time.
+If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent docker images. See [Building Docker Images]({{site.baseurl}}/2.0/building-docker-images/) for more information.
 
 ## Questions and comments
 {: #questions-and-comments }

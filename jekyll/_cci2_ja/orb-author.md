@@ -52,11 +52,11 @@ The name of your repository is not critical, but we recommend something similar 
 <br>
 To initialize a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
 <!---->
-```bash
+```shell
 circleci orb init /path/to/myProject-orb
 ```
 To initialize a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
-```bash
+```shell
 circleci orb init /path/to/myProject-orb --private
 ```
 <!---->
@@ -66,7 +66,7 @@ circleci orb init /path/to/myProject-orb --private
 
 1. **Choose the fully automated orb setup option.** <br>
 <!---->
-```
+```shell
   ? Would you like to perform an automated setup of this orb?:
       ▸ Yes, walk me through the process.
   No, I'll handle everything myself.
@@ -75,9 +75,9 @@ circleci orb init /path/to/myProject-orb --private
     When choosing the manual option, see [Manual Orb Authoring Process]({{site.baseurl}}/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
 
     When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。
-    
+
     For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
-    
+
     Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
 
 1. **Answer questions to configure and set up your orb.**
@@ -96,7 +96,7 @@ circleci orb init /path/to/myProject-orb --private
 1. **Push the changes up to Github.**
 <br>
     During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. CLI が処理を続行し、circleci.com でプロジェクトを自動的にフォローするには、その前に、CLI によって生成された修正済みのテンプレート コードがリポジトリにプッシュされている必要があります。 これを実行するよう要求されたら、別のターミナルから以下のコマンドを、「default-branch」を実際のデフォルト ブランチの名前に置き換えて実行します。
-    ```bash
+    ```shell
     git push origin <default-branch>
     ```
     完了したら、元のターミナルに戻って、変更がプッシュされたことを確認します。
@@ -298,7 +298,7 @@ Orb 開発キットと `<<include(file)>>` 構文を使用すると、既存の�
 
 スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 前述の `greet.yml` コマンド ファイルに特別な `<<include(file)>>` 構文でインクルードされた `greet.sh` ファイルは、次のようなものです。
 
-```bash
+```shell
 echo Hello "${PARAM_TO}"
 ```
 
@@ -380,14 +380,13 @@ Orb に適用したカテゴリ項目を表示するには、`circleci orb info 
 CLI を使用して、公開中の Orb を一覧表示します。
 
 To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
-```sh
+```shell
 circleci orb list <my-namespace>
 ```
 
 To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
-```sh
+```shell
 circleci orb list <my-namespace> --private
-
 ```
 
 `circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。

@@ -65,7 +65,7 @@ When running in AWS, the best backup strategy is making EBS volume snapshots on 
 
 Here is a sample bash script for performing EBS volume backup:
 
-```bash
+```shell
 # Find instance_id, you can hardcode it, or look it up dynamically
 SERVICES_INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=circleci_services" --output text --query 'Reservations[0].Instances[0].InstanceId')
 echo "Found Services box: $SERVICES_INSTANCE_ID"
@@ -119,7 +119,7 @@ If a restore is warranted, you need to find the appropriate latest snapshot to r
 
 You can find a list of the available snapshots from the EC2 console or by using `aws ec2 describe-snapshots` as below:
 
-```bash
+```shell
 $ aws ec2 describe-snapshots  --filters "Name=description,Values=CircleCI*"
 {
     "Snapshots": [
@@ -140,7 +140,7 @@ $ aws ec2 describe-snapshots  --filters "Name=description,Values=CircleCI*"
 
 In AWS EC2, to start from a snapshot, you would need to convert the snapshot to an AMI and then launch the instance.  The following is a sample script:
 
-```bash
+```shell
 $ aws ec2 register-image --name "CircleCI-restore-$(date '+%s')"  --description "CircleCI Services Box restored from snapshot-id $SNAPSHOT_ID" --architecture x86_64 --root-device-name '/dev/sda1' --block-device-mappings "[{\"DeviceName\": \"/dev/sda1\", \"Ebs\": {\"SnapshotId\": \"$SNAPSHOT_ID\"}}]"
 {
     "ImageId": "ami-<ami-id>"
@@ -156,7 +156,7 @@ NOTE: After restore occurrs, if CircleCI doesn't launch automatically you may ne
 If you are using the tarball backup strategy, you can restore backup tarball with using `circleci-restore`:
 
 
-```bash
+```shell
 $ # Download tarball as appropriate
 $ aws s3 cp s3://path/to/tarball/in/s3.tar.bz2 ./backup.tar.bz2
 $ # Restore
@@ -206,7 +206,7 @@ We discourage using private hostnames instead of private IP addresses.  Private 
 
 When using changing private ip addresses, you may need to pass additional environment variable to the launch configuration of builders: `CIRCLE_SECRET_PASSPHRASE`.  The value is initialized at initial boot up time.  You can retrieve it by running `sudo replicated admin get-secret-token` on the Services Box:
 
-```bash
+```shell
 ubuntu@ip-172-31-0-135:~$ sudo replicated admin get-secret-token
 export CIRCLE_SECRET_PASSPHRASE='300c61ca5e1551167f73612a3f0845c54cdb3c27'
 ```

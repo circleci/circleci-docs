@@ -74,7 +74,6 @@ liquid:
 
 asciidoc:
   attributes:
-      source-highlighter: rouge
       serverversion: 3.3.0
       terraformversion: 0.15.4
       kubectlversion: 1.19

@@ -55,7 +55,7 @@ Refer to the [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javas
 
 Using the basic ideas from the Linux example above, you can add a job that uses the `docker` executor with a pre-built Android image in the same `config.yml` file as follows:
 
-```
+```yaml
 jobs:
   build-android:
     docker:
@@ -74,7 +74,7 @@ _The macOS executor is not currently available on installations of CircleCI serv
 
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
-```
+```yaml
 jobs:
   build-macos:
     macos:

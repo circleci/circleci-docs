@@ -5,6 +5,7 @@ short-title: "Webhook を使って CircleCI のイベントを受け取る"
 description: "Webhook を使って CircleCI のイベントを受け取る"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## Webhookの概要
@@ -104,7 +105,7 @@ circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41cc
 
 以下は、Pythonで署名を検証する場合の例です。
 
-```
+```python
 import hmac
 
 def verify_signature(secret, headers, body):

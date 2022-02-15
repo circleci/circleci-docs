@@ -127,7 +127,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: ccimg/openjdk:17.0.1
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

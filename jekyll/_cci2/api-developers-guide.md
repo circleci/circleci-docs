@@ -45,7 +45,7 @@ To add an API token, perform the steps listed below.
 1. Visit the [Personal API Tokens page](https://app.circleci.com/settings/user/tokens) and follow the steps to add an API token.
 2.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
-    ```sh
+    ```shell
     export CIRCLE_TOKEN={your_api_token}
     curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
     ```
@@ -72,7 +72,7 @@ v1) return EDN if no accept header is specified.
 
 To return formatted JSON, include a `text/plain` header like the example shown below:
 
-```sh
+```shell
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
   --header 'Accept: text/plain'    \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
@@ -80,7 +80,7 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 
 To return compressed JSON:
 
-```sh
+```shell
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
   --header 'Accept: application/json'    \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
@@ -157,7 +157,7 @@ The following section details the steps you would need, from start to finish, to
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
-    ```sh
+    ```shell
     # First: set your CircleCI token as an environment variable
     export CIRCLECI_TOKEN={your_api_token}
 
@@ -205,7 +205,7 @@ The following section details the steps you would need, from start to finish, to
 
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
-    ```sh
+    ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -222,7 +222,7 @@ The following section details the steps you would need, from start to finish, to
 
     While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
-    ```sh
+    ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -255,7 +255,7 @@ The following section details the steps you would need, from start to finish, to
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
-    ```sh
+    ```shell
     curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
       "parameters": {
         "image-tag": "4.8.2"
@@ -319,7 +319,7 @@ To return project details, perform the following steps:
 
 1. For this GET API call, under the `parameters` key, define the `project_slug` (<project_type>/<org_name>/<repo_name>) parameter you want returned in the JSON payload in your `curl` request as follows:
 
-    ```sh
+    ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
@@ -362,7 +362,7 @@ To return job details, perform the following steps:
 
 1. For this GET API call, under the `parameters` key, define the `project_slug` and `job_number` parameters you want returned in the JSON payload in your `curl` request as follows:
 
-    ```sh
+    ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
@@ -434,7 +434,7 @@ The following section details the steps you need to follow to download artifacts
 
 1. First, we will ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
 
-    ```
+    ```shell
     export CIRCLECI_TOKEN={your_api_token}
     ```
 
@@ -444,7 +444,7 @@ The following section details the steps you need to follow to download artifacts
 
 3.  Next, use the `curl` command to return a list of artifacts for a specific job.
 
-    ```sh
+    ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -453,7 +453,7 @@ The following section details the steps you need to follow to download artifacts
 
     You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
 
-    ```
+    ```json
     {
       "path": "circleci-docs/assets/img/docs/walkthrough6.png",
       "node_index": 0,
@@ -473,7 +473,7 @@ The following section details the steps you need to follow to download artifacts
 
 4. Next, you may extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following command, remembering to substitute your own values in the request:
 
-     ```sh
+     ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -499,7 +499,7 @@ To return aggregated data for an individual workflow, perform the steps listed b
 
 1. For this GET API call, under the `parameters` key, define the `project_slug` in your `curl` request as follows:
 
-    ```sh
+    ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'
@@ -599,7 +599,7 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
 
 1. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following insights endpoint:
 
-    ```sh
+    ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'

@@ -114,7 +114,7 @@ If you find that the PostgreSQL pod is stuck in a `pending` state after upgradin
 
 To check if your postgreSQL pod is stuck in `pending`:
 
-```bash
+```shell
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
 NAME           READY   STATUS    RESTARTS   AGE
 postgresql-0   1/1     Pending   0          3m
@@ -122,7 +122,7 @@ postgresql-0   1/1     Pending   0          3m
 
 The following command will scale down pods to 0 and terminate the application pods without any data loss:
 
-```bash
+```shell
 kubectl scale deployment -l layer=application --replicas 0
 ```
 
@@ -131,13 +131,13 @@ Once all the application-layer pods have finished terminating do *one* of the fo
 * *either* redeploy the update from the KOTS admin console
 * *or* run the following two commands to redeploy the pods and return server to a functional state:
 +
-```bash
+```shell
 kubectl scale deployment -l layer=application --replicas 1
 ```
 +
 Then scale `output-processor` up with the following command:
 +
-```bash
+```shell
 kubectl scale deployment output-processor --replicas 2
 ```
 
@@ -146,7 +146,7 @@ If you find that there are two Traefik pods after upgrading, you will need to lo
 
 To see the status of your Traefik pod:
 
-```bash
+```shell
 $ kubectl get pod -l app=traefik
 NAME                                      READY   STATUS    RESTARTS   AGE
 circleci-server-traefik-9d6b86fd8-f7n2x   1/1     Running   0          24d
@@ -155,7 +155,7 @@ circleci-server-traefik-cf7d4d7f6-6mb5g   1/1     Error     0          3m
 
 Remove the older Traefik pod with the following command:
 
-```bash
+```shell
 kubectl delete pod circleci-server-traefik-<older pod hash>
 ```
 

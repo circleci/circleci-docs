@@ -74,30 +74,42 @@ CircleCI で同じ結果を得るために必要な構成をサンプル リポ�
 
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+
 jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-
-      - image: circleci/node:4.8.2
-      - image: mongo:3.4.4
+      - image: cimg/node:17.2.0 # Primary execution image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: mongo:3.4.4         # Service/dependency image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: npm の更新
+          name: update-npm
           command: 'sudo npm install -g npm@5'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: npm wee のインストール
+          name: install-npm-wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
-          name: テスト
+          name: test
           command: npm test
 ```
 {% endraw %}

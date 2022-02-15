@@ -40,9 +40,9 @@ In order to install runner you will need to create a namespace and authenticatio
 
 . Create a namespace for your organization's runner resources.
 +
-NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. 
-+ 
-Use the following command: 
+NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use.
++
+Use the following command:
 +
 ```
 circleci namespace create <name> <vcs-type> <org-name>
@@ -50,12 +50,12 @@ circleci namespace create <name> <vcs-type> <org-name>
 +
 For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 . Create a resource class for your runner for your namespace using the following command:
-+ 
++
 NOTE: Your newly created namespace is required in the command to create your resource class.
 +
 ```
 circleci runner resource-class create <name>/<resource-class> <description> --generate-token
-``` 
+```
 +
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
@@ -91,28 +91,28 @@ First, set one of these variables as appropriate for for your installation targe
 |===
 
 Example:
-```bash
+```shell
 export platform=darwin/amd64
 ```
 
 Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
 
 For cloud, you can run the following:
-```bash
+```shell
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 ```
 followed by:
-```bash
+```shell
 export agent_version=$(curl "${base_url}/release.txt")
 ```
 
 For server v3.1.0 and up, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<runner-for-server-compatibility>> to find the correct version):
-```bash
+```shell
 export agent_version="<launch-agent-version>"
 ```
 
 Finally, run the following script to download, verify and install the binary.
-```bash
+```shell
 # Set up runner directory
 prefix=/opt/circleci
 sudo mkdir -p "$prefix/workdir"
@@ -154,13 +154,13 @@ depending on your version of server:
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Server version  
+| Server version
 | Launch Agent Version
 
-| 3.0             
+| 3.0
 | Runner not supported
 
-| 3.1            
+| 3.1
 | 1.0.11147-881b608
 
 | 3.2

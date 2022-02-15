@@ -51,6 +51,10 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   // Ignore warnings about default exports because some of our legacy

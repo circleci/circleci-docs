@@ -1,7 +1,7 @@
 import { createPopper } from '@popperjs/core';
-import { highlightURLHash } from './highlightURLHash';
+import Prism from 'prismjs';
 
-hljs.initHighlightingOnLoad();
+import { highlightURLHash } from './highlightURLHash';
 
 const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
 const HIDE_EVENTS = ['mouseout', 'mouseleave', 'blur'];
@@ -238,6 +238,9 @@ function renderTabbedHtml() {
       '.tab.' + e.target.className.split(' ').slice(2, 4).join('.');
     $(tabsToHide).not('.realtab').hide();
     $(tabToShow).not('.realtab').show();
+
+    // ask prism to process new code snippets
+    Prism.highlightAll();
   });
 
   $('.tabGroup').each(function () {
@@ -334,7 +337,7 @@ export function trackDarkModePreference() {
 }
 
 /*
-  Checking if users are attempting to print docs pages to gauge interest of print button 
+  Checking if users are attempting to print docs pages to gauge interest of print button
  */
 export function checkIfUsersPrint() {
   window.onbeforeprint = () => {

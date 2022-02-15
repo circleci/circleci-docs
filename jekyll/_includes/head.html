@@ -20,14 +20,14 @@
 	<link href="{{ "/assets/img/icons/favicon.png" | prepend: site.baseurl }}" rel="icon" type="image/png" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
-	<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/app.bundle.css" />
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/app.bundle.css" />
+  
+  <title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
 	{% include_cached segment.html site=site page=page %}
 
 	<!-- Instant Search CDN links /-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.0.0/dist/algoliasearch-lite.umd.js" integrity="sha256-MfeKq2Aw9VAkaE9Caes2NOxQf6vUa8Av0JqcUXUGkd0=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.0.0/dist/instantsearch.production.min.js" integrity="sha256-6S7q0JJs/Kx4kb/fv0oMjS855QTz5Rc2hh9AkIUjUsk=" crossorigin="anonymous"></script>
-  	<script src="https://cdn.optimizely.com/datafiles/{{site.optimizely}}.json/tag.js"></script>
+  <script src="https://cdn.optimizely.com/datafiles/{{site.optimizely}}.json/tag.js"></script>
 </head>

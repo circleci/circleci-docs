@@ -51,7 +51,7 @@ If your project has no scheduled workflows and you would like to try out schedul
 1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/2.0/managing-api-tokens/).
 2. Create a new schedule using the API. For example:
 
-```sh
+```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <your-cci-token>' \
 --header 'Content-Type: application/json' \
@@ -174,7 +174,7 @@ other-workflow:
 
 **A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
 
-```sh
+```shell
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```

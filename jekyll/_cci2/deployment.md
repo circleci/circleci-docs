@@ -14,7 +14,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## Amazon Web Services
 {: #amazon-web-services }
 
-```
+```yml
     steps:
       - run:
           name: Install awscli
@@ -27,7 +27,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## Pivotal
 {: #pivotal }
 
-```
+```yml
     steps:
       - run:
           name: Setup CF CLI
@@ -57,7 +57,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## Google
 {: #google }
 
-```
+```yml
     steps:
       - run:
           name: Deploy Master to Firebase
@@ -68,7 +68,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## Heroku
 {: #heroku }
 
-```
+```yml
     steps:
       - checkout
       - run:
@@ -80,7 +80,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## NPM
 {: #npm }
 
-```
+```yml
     steps:
       - checkout
       - run:
@@ -93,7 +93,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## SSH
 {: #ssh }
 
-```
+```yml
     steps:
       - run:
           name: Deploy Over SSH
@@ -104,7 +104,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## Snapcraft
 {: #snapcraft }
 
-```
+```yml
     steps:
       - run:
           name: "Publish to Store"
@@ -117,7 +117,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## Artifactory
 {: #artifactory }
 
-```
+```yml
     steps:
       - run:
           name: Push to Artifactory
@@ -131,7 +131,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ## NuGet (via .NET Core CLI)
 {: #nuget-via-net-core-cli }
 
-```
+```yml
     steps:
       - run:
           name: Push to NuGet

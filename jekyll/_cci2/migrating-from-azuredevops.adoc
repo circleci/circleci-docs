@@ -32,18 +32,18 @@ Following are the steps required for using the git command line tool to import y
 . Create an empty repository on your GitHub Enterprise instance.
 . Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
 +
-```
+```shell
 git clone https://external-host.com/extuser/repo.git --bare
 ```
 . Add your GitHub Enterprise repository as a remote reference in your local clone.
 +
-```
+```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 ```
 . Push all local references (refs/*) up to your remote GitHub Enterprise repository.
 +
-```
+```shell
 git push enterprise --mirror
 ```
 
@@ -75,7 +75,7 @@ The Azure DevOps Pipelines and CircleCI configurations will be different. It may
 2+| Define a job that executes a single build step.
 
 a|
-[source, ini]
+[source, yaml]
 ----
 jobs:
   - job: job1
@@ -97,7 +97,7 @@ jobs:
 2+| Specify a docker image to use for a job.
 
 a|
-[source, ini]
+[source, yaml]
 ----
 jobs:
   - job: job1
@@ -120,7 +120,7 @@ jobs:
 2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
-[source, ini]
+[source, yaml]
 ----
 stages:
   - stage: build
@@ -179,7 +179,7 @@ workflows:
 2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
 
 a|
-[source, ini]
+[source, yaml]
 ----
 jobs:
   - job: ubuntuJob

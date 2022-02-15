@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI では通常、ログなどの使用状況データやその他の集計データを、製品やサービスの改善のために収集しています。 個人を特定できる情報や、プロジェクトやアカウントに固有の情報を収集することはありません。
+CircleCI typically collects usage data such as logs and other aggregated data for the purpose of improving our products and services. We will never collect personally identifiable information or information that is specific to your projects or accounts.
 
 ## 現在のデータ収集状況
 現時点で、CircleCI Server 3.0 にはデータ収集サービスは含まれていません。 このサービスは、今後のリリースで追加される予定です。

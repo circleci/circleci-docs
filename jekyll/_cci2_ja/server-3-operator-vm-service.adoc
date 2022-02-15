@@ -11,18 +11,18 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server の VM サービスでは、https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor (Linux イメージおよび Windows イメージ) とhttps://circleci.com/docs/2.0/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
+CircleCI server's VM service controls how https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor (Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
 
-このセクションでは、VM サービスで利用可能な構成オプションについて説明します。 These config options are all accessible from the KOTS admin console by choosing the **Config** tab from your dashboard.
+このセクションでは、VM サービスで利用可能な構成オプションについて説明します。 These config options are all accessible from the KOTS Admin Console by choosing the **Config** tab from your dashboard.
 
 toc::[]
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#eks[AWS] and {{ site.url }}/{{ site.baseurl }}/2.0/server-3-install-build-services/#gke[GCP].
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for https://circleci.com/docs/2.0/server-3-install-build-services/#eks[AWS] and https://circleci.com/docs/2.0/server-3-install-build-services/#gke[GCP].
 
 == VM service settings
 You will need to provide the hostname for your VM service load balancer:
 
-. Once your server installation is up and running, run the following:
+. Once your server installation is up and running, run the following command:
 +
 ----
 kubectl get svc/vm-service
@@ -39,25 +39,34 @@ You will need to complete the following fields to configure your VM Service to w
 
 At this point you can uncheck the **Assign Public IPs** check box if you need VMs to use private IP addresses.
 
-* *[AWS Region (AWS リージョン)]* (必須): アプリケーションのリージョンを指定します。
-* *AWS Linux AMI ID* (optional): If you wish to provide a custom AMI for Linux `machine` executors you can supply an AMI ID here. To create a Linux image use the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder]. If you leave this field blank, a <<default-aws-ami-list, default AMI>> will be used.
-* *AWS Windows AMI ID* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Windows ビルドが不要な場合は、このフィールドを空欄にします。
+* *AWS Region* (required): This is the region in which the application is hosted.
+* *AWS Linux AMI ID* (optional): If you wish to provide a custom AMI for Linux `machine` executors you can supply an AMI ID here. To create a Linux image, use the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder]. If you leave this field blank, a <<default-aws-ami-list, default AMI>> will be used.
+* *AWS Windows AMI ID* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Leave this field blank if you do not require Windows executors.
 * *[Subnet ID (サブネット ID)]* (必須): VM のデプロイ先になるサブネット (パブリックまたはプライベート) を選択します。 なお、すべてのサブネットが同じアベイラビリティーゾーンにある必要があります。
 * *[Security Group ID (セキュリティ グループ ID)]* (必須): VM にアタッチするセキュリティ グループを指定します。
 +
 推奨されるセキュリティ グループ構成については、https://circleci.com/docs/ja/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]を参照してください。
-* *[AWS IAM Access Key ID (AWS IAM アクセス キー ID)]* (必須): EC2 へのアクセス用のhttps://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
+* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances of a resource type on demand. リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 Preallocating instances lowers the start time, allowing for faster machine and `remote_docker` builds. 
++
+NOTE: Preallocated instances are always running and could potentially increase costs. また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
++
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on demand. To ensure this can happen, **either** check any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
++
+NOTE: When using preallocated instances, be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
+
+==== 認証
+One of the following is required. Either select "IAM Keys" and provide:
+
+* *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
 +
 NOTE: The Access Key and Secret
 Key used by VM Service differs from the policy used by object storage in the previous section.
-* *[AWS IAM Secret Key (AWS IAM シークレット キー)]* (必須): EC2 へのアクセス用のhttps://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM シークレット キー]を指定します。
-* *[Number of <VM-type> VMs to keep prescaled (事前スケーリングする <VM タイプ> の VM 数)]*: デフォルトでは、このフィールドは 0 に設定されています。 この値の場合、該当するリソース タイプのインスタンスがオンデマンドで作成、プロビジョニングされます。 リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 
-+
-NOTE: preallocated instances are always running and could potentially increase costs. また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
-+
-WARNING: https://circleci.com/docs/ja/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
-+
-NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
+* *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
+
+Or select "IAM role" and provide:
+
+* *Role ARN* (required): 
+https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
 
 ==== Default AWS AMI list
 
@@ -91,16 +100,24 @@ WARNING: VM サービス専用の一意のサービス アカウントを作成�
 At this point you can uncheck the **Assign Public IPs** check box if you need VMs to use private IP addresses.
 
 * *[GCP project ID (GCP プロジェクト ID)]* (必須): クラスタが存在する GCP プロジェクトの名前を指定します。
-* *GCP Zone for your VMs* (required): GCP zone the virtual machines instances should be created in IE `us-east1-b`.
-* *GCP Windows Image* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Windows ビルドが不要な場合は、このフィールドを空欄にします。
-* *[GCP VPC Network (GCP VPC ネットワーク)]* (必須): VPC ネットワークの名前を指定します。
-* *[GCP VPC Subnet (GCP VPC サブネット)]* (オプション): VPC サブネットの名前を指定します。 自動サブネット化を使用する場合は、このフィールドは空欄にします。
+* *GCP Zone for your VMs* (required): GCP zone the virtual machines instances should be created in, for example `us-east1-b`.
+* *GCP Windows Image* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Leave this field blank if you do not require Windows executors.
+* *[GCP VPC Network (GCP VPC ネットワーク)]* (必須): VPC ネットワークの名前を指定します。 If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the host network rather than the name, for example: 
++
+```
+https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<network-name>
+```
+* *[GCP VPC Subnet (GCP VPC サブネット)]* (オプション): VPC サブネットの名前を指定します。 自動サブネット化を使用する場合は、このフィールドは空欄にします。 If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the shared subnetwork rather than the name, for example: 
++
+```
+https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<subnetwork-name>
+```
 * *[GCP Service Account JSON file (GCP サービス アカウントの JSON ファイル)]* (必須): https://cloud.google.com/iam/docs/service-accounts[サービス アカウントの JSON ファイル]の内容をコピー & ペーストします。
-* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
+* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances
 of a resource type on demand. リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 
 +
-NOTE: preallocated instances are always running and could potentially increase costs. また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
+NOTE: Preallocated instances are always running and could potentially increase costs. また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
 +
-WARNING: https://circleci.com/docs/ja/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on demand. これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
 +
-NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
+NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.

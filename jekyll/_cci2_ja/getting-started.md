@@ -51,7 +51,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
 1. **実行されたワークフローを確認する**: **[Success]** をクリックすると、実行されたジョブの一覧ページに移動します。 はじめてのビルドであれば、**1 つのジョブ** だけが実行されているはずです (**1 つのワークフロー**内で自動的に実行されます) 。  今回は、 `say-hello`という名前のジョブだけが実行されました。 `say-hello` をクリックして、ジョブのステップを調査してみましょう。
 
-1. **ステップの結果を表示する:** どのジョブも、一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/ja/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で指定されている特別なコマンドです。 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 この Hello World のサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/ja/2.0/configuration-reference/#run) の両方を使います。
+1. **ステップの結果を表示する:** どのジョブも、一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で指定されている特別なコマンドです。 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 この Hello World のサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方を使います。
 
 リポジトリに実際のソースコードがなく、`config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[設定のリファレンス](https://circleci.com/docs/2.0/configuration-reference)を参照してください。
 
@@ -141,7 +141,7 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
 
 各ワークフローには 1 つのワークスペースが関連付けられ、ワークフローの進行に伴って後続のジョブにファイルを転送するために使用されます。 ワークスペースを使用して、後続のジョブに必要な、実行ごとに固有のデータを渡すことができます。 試しに下記に `config.yml` を書き換えてみてください。
 
-```yml
+```yaml
 version: 2
 jobs:
   one:
@@ -160,7 +160,7 @@ jobs:
           root: my_workspace
           # ルートからの相対パスでなければなりません。
           paths:
-            - echo-output      
+            - echo-output
   two:
     docker:
       - image: circleci/ruby:2.4.1
@@ -169,7 +169,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - run: echo "A more familiar hi"  
+      - run: echo "A more familiar hi"
       - attach_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。
           at: my_workspace

@@ -47,6 +47,7 @@ en:
         name: 機能
         children:
           - 
+            name: パイプラインのスケジュール実行
           - 
             name: ワークフロー
           - 
@@ -66,6 +67,8 @@ en:
         name: 最適化
         children:
           - 
+          - 
+            name: データの永続化
           - 
           - 
             name: Docker レイヤーキャッシュ
@@ -219,8 +222,6 @@ en:
             link: 2.0/credits/
           - 
             name: クレジットの使用
-          - 
-            name: データの永続化
       - 
         name: security
         children:

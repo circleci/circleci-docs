@@ -37,7 +37,7 @@ Hub CLI のインストールとセットアップが完了している場合は
 
 基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
 
-```sh
+```shell
 cd ~ # navigate to your home directory.
 cd ~ # ホーム ディレクトリに移動します
 mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
@@ -62,7 +62,7 @@ git commit -m "Initial commit" # 最初のコミットを実行します
 
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
-```sh
+```shell
 hub create
 ```
 
@@ -70,7 +70,7 @@ hub create
 
 Hub CLI を使用していない場合は、GitHub にアクセスしてログインし、[新しいリポジトリを作成](https://github.com/new)します。 指示に従ってコミットし、リモートにプッシュします。 この操作は通常、以下のようなコマンドになります。
 
-```sh
+```shell
 git remote add origin git@github.com:<YOUR_USERNAME>/foo_ci.git
 git push --set-upstream origin master
 ```
@@ -82,7 +82,7 @@ git push --set-upstream origin master
 
 次に、CircleCI CLI をインストールし、いくつかの機能を試してみます。 CLI を Unix マシンにインストールするには、ターミナルで以下のコマンドを実行します。
 
-```sh
+```shell
 curl -fLSs https://circle.ci/cli | bash
 ```
 
@@ -90,7 +90,7 @@ curl -fLSs https://circle.ci/cli | bash
 
 次に、インストール後のセットアップ手順を実行します。
 
-```sh
+```shell
 circleci setup
 ```
 
@@ -103,7 +103,7 @@ CLI に戻って API トークンを貼り付ければセットアップは完�
 
 ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
 
-```sh
+```shell
 cd ~/foo_ci # カレント ディレクトリが foo_ci フォルダーであることを確認します
 mkdir .circleci # ".circleci" という名前のディレクトリを作成します
 cd .circleci # カレント ディレクトリを新しいディレクトリに変更します
@@ -119,7 +119,10 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: cimg/ruby:3.0-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "Hello World"
@@ -127,24 +130,24 @@ jobs:
 
 ここで、この構成が有効であるかどうかをバリデーションします。 プロジェクトのルートで、以下のコマンドを実行します。
 
-```sh
+```shell
 circleci config validate
 ```
 
 ブラウザーで CircleCI に戻ると、[Start building (ビルドの開始)] をクリックしてビルドを実行できます。
 
-```sh
+```shell
 circleci config validate --help
 ```
 
-### Testing a job before pushing to a VCS
+### VCS にプッシュする前にジョブをテストする
 {: #testing-a-job-before-pushing-to-a-vcs }
 
 CircleCI CLI では、コマンド ラインからジョブをローカルでテストできます。 VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
 
 "build" ジョブをローカルで実行してみます。
 
-```sh
+```shell
 circleci local execute
 ```
 
@@ -152,7 +155,7 @@ circleci local execute
 
 ターミナルには大量のテキストが表示されるはずです。 出力の最後の数行は以下のようになります。
 
-```sh
+```shell
 ====>> Checkout code
   #!/bin/bash -eo pipefail
 mkdir -p /home/circleci/project && cp -r /tmp/_circleci_local_build_repo/. /home/circleci/project
@@ -163,14 +166,14 @@ Hello World
 Success!
 ```
 
-### Connect your repo to CircleCI
+### リポジトリを CircleCI に接続する
 {: #connect-your-repo-to-circleci }
 
 このステップでは、ターミナルを離れる必要があります。 [[Add Projects (プロジェクトの追加)] ページ](https://app.circleci.com/projects/project-dashboard/github/circleci/)にアクセスします。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
 
 プロジェクトのリストから目的のプロジェクト ("foo_ci" または GitHub で付けた名前) を見つけ、[Set Up Project (プロジェクトのセットアップ)] をクリックします。 次に、ターミナルに戻り、最新の変更を GitHub にプッシュします (`config.yml` ファイルの追加分)。
 
-```sh
+```shell
 git add .
 git commit -m "add config.yml file"
 git push

@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "概要"
+title: "CircleCI について"
 description: "このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明します。 CircleCI は、ソフトウェアのビルド、テスト、デプロイを自動化します。"
 categories:
   - はじめよう

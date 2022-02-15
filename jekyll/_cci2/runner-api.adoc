@@ -95,12 +95,12 @@ Lists the available runners based on the specified parameters. It is mandatory t
 
 ==== Examples
 
-```sh
+```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
-```sh
+```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
@@ -172,7 +172,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 ==== Example
 
-```sh
+```json
 {
     "items": [
         {
@@ -220,7 +220,7 @@ Get the number of unclaimed tasks for a given resource class.
 
 ==== Examples
 
-```sh
+```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
@@ -293,7 +293,7 @@ Get the number of running tasks for a given resource class.
 
 ==== Examples
 
-```sh
+```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```

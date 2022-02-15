@@ -24,7 +24,7 @@ CircleCI のデフォルトでは、ユーザーが変更をバージョン管�
 ## Trigger a job using curl and your API token
 {: #trigger-a-job-using-curl-and-your-api-token }
 
-```
+```shell
 curl -u ${CIRCLE_API_USER_TOKEN}: \
      -d 'build_parameters[CIRCLE_JOB]=deploy_docker' \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
@@ -33,7 +33,7 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
 ## Scheduled builds
 {: #scheduled-builds }
 
-```
+```yml
 workflows:
   version: 2
   commit:
@@ -56,7 +56,7 @@ workflows:
 ## Manual approval
 {: #manual-approval }
 
-```
+```yml
 workflows:
   version: 2
   build-test-and-approval-deploy:

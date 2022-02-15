@@ -24,13 +24,16 @@ This document describes how to get started with a basic build of your Linux, And
 2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
-     jobs:
-       build:
-         docker: 
-           - image: circleci/node:4.8.2 # ジョブのコマンドが実行されるプライマリ コンテナ
-         steps:
-           - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
-           - run: echo "hello world" # `echo` コマンドを実行します
+   jobs:
+     build:
+       docker:
+         - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリ コンテナ
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
+       steps:
+         - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
+         - run: echo "hello world" # `echo` コマンドを実行します
    ```
 
 2. 変更をコミットし、プッシュします。
@@ -52,11 +55,14 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
-```
+```yaml
 jobs:
   build-android:
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: cimg/android:2021.10.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
@@ -68,7 +74,7 @@ _The macOS executor is not currently available on installations of CircleCI serv
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
-```
+```yaml
 jobs:
   build-macos:
     macos:

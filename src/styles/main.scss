@@ -12,11 +12,14 @@
 @import 'buttons';
 @import 'mobile';
 @import 'spacing';
-@import 'syntax';
 @import 'snippets';
 @import 'utilities';
 @import 'progressbar';
 @import 'language-guide';
+
+// prism related scss
+@import 'prism/theme';
+@import 'prism/copy-code-button';
 
 // General
 body {
@@ -302,27 +305,6 @@ div.align-center img{
 	}
 }
 
-/* highlightjs number block of numbers */
-table tr td.hljs-ln-numbers {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    text-align: right;
-    color: #ccc;
-    vertical-align: top;
-    padding-right: 5px;
-	white-space: nowrap;
-}
-
-/* highlightjs number block of code */
-table tr td.hljs-ln-code {
-    padding-left: 10px;
-}
-
 // Homepage
 body.homepage{
   .article-container{
@@ -468,16 +450,6 @@ body > img:last-of-type{
 	display: none;
 }
 
-/* These two classes control code block rendering when line numbers are enabled, they are formatted as tables, so without the following you see the table borders in the Jekyll output which looks bad*/
-.lineno{
-	border-color: #f5f5f5
-}
-
-pre {
-	border-color: #f5f5f5;
-	margin-bottom: 10px;
-}
-
 .serveronly {
 	color: #4e9eb3;
 }
@@ -523,55 +495,6 @@ pre {
 
 h6{
 	font-size: 16px;
-}
-
-
-.code-badge {
-	background: #EDEDED!important;
-	border-radius: 4px!important;
-	margin: 8px;
-	opacity: 0!important;
-	padding: 0!important;
-	height: 30px;
-}
-
-.highlight:hover {
-	.code-badge {
-		opacity: 1!important;
-	}
-}
-
-.code-badge div:nth-child(2) {
-	padding-top: 3px;
-}
-
-#code-badge-clicked {
-	background-color: #D4D4D4;
-}
-
-.code-badge-copy-icon {
-	background-position: center;
-	background-repeat: no-repeat;
-	border-radius: 4px;
-	padding: 6px 23px !important;
-}
-
-.compass-copy {
-	background-color: #EDEDED;
-	background-image: url('/docs/assets/img/compass/copy.svg');
-}
-
-.compass-copy:hover {
-	background-color: #E3E3E3;
-}
-
-.compass-check-circle {
-	background-color: #E3E3E3;
-	background-image: url('/docs/assets/img/compass/check.svg');
-}
-
-.code-badge-language {
-	display: none;
 }
 
 /*
