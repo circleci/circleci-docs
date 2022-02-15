@@ -49,7 +49,7 @@ The `path` key is an absolute or relative path to your `working_directory` conta
 
 **Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
-### Viewing storage usage
+## Viewing storage usage
 
 For information on viewing your stoarage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
 
