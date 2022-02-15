@@ -18,6 +18,8 @@ Using the **`store_test_results` step** gives you access to:
 
 Alternatively, storing test results as **artifacts** means you can look at the raw xml. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts).
 
+**Note:** You might choose to upbload your test results using both `store_test_results` and `store_artifacts`
+
 * TOC
 {:toc}
 
@@ -34,7 +36,8 @@ You can access the test results from the **Tests** tab when viewing a job, as sh
 Below is an example of using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your `.circleci/config.yml`.
 
 ```sh
-steps
+steps:
+  - run:
   #...
   # run tests and store XML files to a subdirectory, for example, test-results
   #...
@@ -131,8 +134,6 @@ steps:
         JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
   - store_test_results:
       path: ./reports/junit/
-  - store_artifacts:
-      path: ./reports/junit
 ```
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
@@ -159,8 +160,6 @@ A working `.circleci/config.yml` section for testing might look like this:
             MOCHA_FILE: ~/junit/test-results.xml
           when: always
       - store_test_results:
-          path: ~/junit
-      - store_artifacts:
           path: ~/junit
 ```
 
@@ -257,12 +256,6 @@ jobs:
             - store_test_results:
                 path: reports
 
-            - store_artifacts:
-                path: ./reports/mocha/test-results.xml
-
-            - store_artifacts:
-                path: ./reports/eslint/eslint.xml
-
             - store_artifacts: # upload test coverage as artifact
                 path: ./coverage/lcov.info
                 prefix: tests
@@ -289,8 +282,6 @@ A working `.circleci/config.yml` section might look like this:
           when: always
       - store_test_results:
           path: ./junit
-      - store_artifacts:
-          path: ./junit
 ```
 
 ```javascript
@@ -315,7 +306,7 @@ To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner y
 
 A working `.circleci/config.yml` section for testing might look like the following example:
 
-```
+```yaml
     steps:
       - run:
           command: |
@@ -324,8 +315,6 @@ A working `.circleci/config.yml` section for testing might look like the followi
             ava --tap | tap-xunit > ~/reports/ava.xml
           when: always
       - store_test_results:
-          path: ~/reports
-      - store_artifacts:
           path: ~/reports
 ```
 
@@ -337,7 +326,7 @@ To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUni
 
 A working `.circleci/config.yml` test section might look like this:
 
-```
+```yaml
     steps:
       - run:
           command: |
@@ -345,8 +334,6 @@ A working `.circleci/config.yml` test section might look like this:
             eslint ./src/ --format junit --output-file ~/reports/eslint.xml
           when: always
       - store_test_results:
-          path: ~/reports
-      - store_artifacts:
           path: ~/reports
 ```
 
@@ -364,7 +351,7 @@ gem 'rspec_junit_formatter'
 
 And modify your test command to this:
 
-```
+```yaml
     steps:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
@@ -381,13 +368,13 @@ And modify your test command to this:
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
-```
+```shell
 gem 'minitest-ci'
 ```
 
 And modify your test command to this:
 
-```
+```yaml
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -415,8 +402,6 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
           when: always
       - store_test_results:
           path: ~/cucumber
-      - store_artifacts:
-          path: ~/cucumber
 ```
 
 The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
@@ -433,8 +418,6 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           when: always
       - store_test_results:
           path: ~/cucumber
-      - store_artifacts:
-          path: ~/cucumber
 ```
 
 ### Python
@@ -445,19 +428,17 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
-```
-      - run:
-          name: run tests
-          command: |
-            . venv/bin/activate
-            mkdir test-results
-            pytest --junitxml=test-results/junit.xml
+```yaml
+steps:
+    - run:
+        name: run tests
+        command: |
+        . venv/bin/activate
+        mkdir test-results
+        pytest --junitxml=test-results/junit.xml
 
-      - store_test_results:
-          path: test-results
-
-      - store_artifacts:
-          path: test-results
+    - store_test_results:
+        path: test-results
 ```
 
 #### unittest
@@ -466,7 +447,9 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
 After adding pytest to your project, you can produce and upload the test results like this:
-```
+
+```yaml
+    steps:
       - run:
           name: run tests
           command: |
@@ -475,9 +458,6 @@ After adding pytest to your project, you can produce and upload the test results
             pytest --junitxml=test-results/junit.xml tests
 
       - store_test_results:
-          path: test-results
-
-      - store_artifacts:
           path: test-results
 ```
 
@@ -499,8 +479,6 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
           when: always
       - store_test_results:
           path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 ```
 
 ### Gradle JUnit Test Results
@@ -518,8 +496,6 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
           when: always
       - store_test_results:
           path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 ```
 
 ### PHP
@@ -530,7 +506,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
-```
+```yaml
     steps:
       - run:
           command: |
@@ -538,8 +514,6 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
             phpunit --log-junit ~/phpunit/junit.xml tests
           when: always
       - store_test_results:
-          path: ~/phpunit
-      - store_artifacts:
           path: ~/phpunit
 ```
 
@@ -567,9 +541,6 @@ A working `.circleci/config.yml` section might look like this:
               trx2junit tests/**/TestResults/*.trx
       - store_test_results:
           path: tests/TestResults
-      - store_artifacts:
-          path: tests/TestResults
-          destination: TestResults
 ```
 
 ### Clojure
@@ -598,8 +569,9 @@ Edit the kaocha config file `test.edn` to use this test reporter
 ```
 
 Add the store_test_results step your `.circleci/config.yml`
+
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
