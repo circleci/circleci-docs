@@ -17,20 +17,20 @@ describe('Snippet Feedback class', () => {
     codeSnippetContainer.appendChild(document.createElement('pre'));
   });
 
-  test('Constructing a snippetFeedback class appends a was-this-helpful dom element to the original container', () => {
+  test('Constructing a snippetFeedback class appends a was-this-code-helpful dom element to the original container', () => {
     expect(codeSnippetContainer.children.length).toBe(1);
     new SnippetFeedback(codeSnippetContainer);
     expect(codeSnippetContainer.children.length).toBe(2);
     expect([...codeSnippetContainer.children[1].classList]).toStrictEqual([
-      'was-this-helpful',
+      'was-this-code-helpful',
     ]);
   });
 
-  test("The 'was this helpful' element contains required elements (text, yes, /, no).", () => {
+  test("The 'Was this code helpful' element contains required elements (text, yes, /, no).", () => {
     let sf = new SnippetFeedback(codeSnippetContainer);
     expect(sf.wasThisHelpfulContainer.children.length).toBe(4);
     expect(sf.wasThisHelpfulContainer.children[0].textContent).toBe(
-      'Was this helpful?',
+      'Was this code helpful?',
     );
     expect(sf.wasThisHelpfulContainer.children[1].textContent).toBe('Yes');
     expect(sf.wasThisHelpfulContainer.children[2].textContent).toBe(' /');
