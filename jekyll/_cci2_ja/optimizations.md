@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Optimizations Overview"
-short-title: "Optimizations Overview"
-description: "CircleCI build optimizations"
+title: "最適化の概要"
+short-title: "最適化の概要"
+description: "CircleCI ビルドの最適化"
 categories:
   - はじめよう
 order: 1
@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-This document provides an overview of ways to optimize your CircleCI configuration. Each optimization method will be described briefly, and present possible use cases for speeding up your jobs.
+このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 Each optimization method will be described briefly, and present possible use cases for speeding up your jobs.
 
 * TOC
 {:toc}
@@ -60,7 +60,7 @@ jobs:
 
 依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
 
-Consult the [Caching]({{site.baseurl}}/2.0/caching) page to learn more.
+詳細については、[キャッシュ]({{site.baseurl}}/2.0/caching)を参照してください。
 
 ## ワークフロー
 {: #workflows }
