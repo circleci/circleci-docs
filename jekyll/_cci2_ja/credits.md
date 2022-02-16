@@ -23,10 +23,10 @@ version:
 - セルフホストランナー数の制限の有無
 
 詳細は、[料金プランの概要]({{site.baseurl}}/2.0/plan-overview)のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
-- [Free プラン]({{site.baseurl}}/2.0/plan-free)
-- [Performance プラン]({{site.baseurl}}/2.0/plan-performance)
-- [Scale プラン]({{site.baseurl}}/2.0/plan-scale)
-- [Server  プラン]({{site.baseurl}}/2.0/plan-server)
+- [Free プラン]({{site.baseurl}}/ja/2.0/plan-free)
+- [Performance プラン]({{site.baseurl}}/ja/2.0/plan-performance)
+- [Scale プラン]({{site.baseurl}}/ja/2.0/plan-scale)
+- [Server  プラン]({{site.baseurl}}/ja/2.0/plan-server)
 
 マシンタイプ別、リソースクラス別の消費クレジットについては、[料金プラン](https://circleci.com/pricing/)のページもご確認ください。
 
