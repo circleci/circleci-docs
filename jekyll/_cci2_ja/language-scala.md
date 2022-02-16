@@ -21,7 +21,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-This document assumes that your [project’s AWS Permission settings]({{site.baseurl}}/2.0/deployment-integrations/#aws) are configured with valid AWS keys that are permitted to read and write to an S3 bucket. このドキュメントの例では、指定された S3 バケットにビルド パッケージがアップロードされます。
+このドキュメントは、[プロジェクトの AWS 権限](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws)に、S3 バケットの読み取りと書き込みが許可される有効な AWS キーが構成されていることを前提としています。 このドキュメントの例では、指定された S3 バケットにビルド パッケージがアップロードされます。
 
 ## Scala サンプル プロジェクトのソース コード
 {: #sample-scala-project-source-code }
@@ -38,7 +38,7 @@ mkdir .circleci/
 touch .circleci/config.yml
 ```
 
-最初のコマンドは `.circleci` という名前のディレクトリを作成し、次のコマンドは `.circleci` ディレクトリの中に `config.yml` という名前の新しいファイルを作成します。  繰り返しますが、.circleci というディレクトリ名と config.yml というファイル名を**使用する必要があります**。  バージョン 2.0 の前提条件については、[こちらのドキュメント]({{site.baseurl}}/2.0/migrating-from-1-2/)を参照してください。
+最初のコマンドは `.circleci` という名前のディレクトリを作成し、次のコマンドは `.circleci` ディレクトリの中に `config.yml` という名前の新しいファイルを作成します。  繰り返しますが、.circleci というディレクトリ名と config.yml というファイル名を**使用する必要があります**。  バージョン 2.0 の前提条件については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/migrating-from-1-2/)を参照してください。
 
 ### Scala の config.yml ファイル
 {: #scala-configyml-file }
@@ -203,16 +203,16 @@ steps/run キーは、実行するアクションのタイプを指定します�
 ```
 
 上記の例について以下に説明します。
-- [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container
-- [`restore_cache`]({{site.baseurl}}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. キー名は、このスキーマの後方にある save_cache キーで指定されます。 指定されたキーが見つからない場合は、何も復元されず、処理が続行されます。
-- [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
+- [`checkout`]({{site.baseurl}}/ja/2.0/configuration-reference/#checkout): 基本的に、git は GitHub から取得したプロジェクト リポジトリをコンテナにクローンします。
+- [`restore_cache`]({{site.baseurl}}/ja/2.0/configuration-reference/#restore_cache) キー: 復元するキャッシュ ファイルの名前を指定します。 キー名は、このスキーマの後方にある save_cache キーで指定されます。 指定されたキーが見つからない場合は、何も復元されず、処理が続行されます。
+- [`run`]({{site.baseurl}}/ja/2.0/configuration-reference/#run) コマンドの `cat /dev/null | sbt clean update dist`: パッケージの .zip ファイルを生成する sbt コンパイル コマンドを実行します。
 
 **Note:** `cat /dev/null` is normally used to prevent a command from hanging if it prompts for interactive input and does not detect whether it is running with an interactive TTY. `sbt` will prompt on failures by default.
 
 - [`store_artifacts`]({{site.baseurl}}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
 - [`save_cache`]({{site.baseurl}}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{site.baseurl}}/2.0/configuration-reference/#restore_cache) keys.
 
-The final portion of the 2.0 schema is the run command key which moves and renames the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  その後、指定された AWS S3 バケットにファイルがアップロードされます。
+2.0 スキーマの最後の部分は run コマンド キーです。これは、コンパイルされた samplescala.zip を $CIRCLE_ARTIFACTS/ ディレクトリに移動し、その名前を変更します。  その後、指定された AWS S3 バケットにファイルがアップロードされます。
 
 ```yaml
 steps:
@@ -222,12 +222,12 @@ steps:
         aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 ```
 
-The run command is another multi-line execution.
+この run コマンドも複数行実行コマンドです。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
 - Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
-- See the [Deploy]({{site.baseurl}}/2.0/deployment-integrations/) document for more example deploy target configurations.
+- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{site.baseurl}}/ja/2.0/deployment-integrations/)」を参照してください。
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。
