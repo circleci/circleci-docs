@@ -116,7 +116,7 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 
 
 
-適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Normad クライアントをデプロイすることができます。
+適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Nomad クライアントをデプロイすることができます。
 
 ----
 terraform init
@@ -219,7 +219,7 @@ output "module" {
 }
 ```
 
-適切な情報を入力したら、次のコマンドを実行して Normad クライアントをデプロイできます。
+適切な情報を入力したら、次のコマンドを実行して Nomad クライアントをデプロイできます。
 
 ----
 terraform init
