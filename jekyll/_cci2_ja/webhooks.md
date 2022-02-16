@@ -11,11 +11,11 @@ version:
 ## Webhookの概要
 {: #overview}
 
-A webhook allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future _events_.
+Webhookにより、お客様が管理しているプラットフォーム（ご自身で作成した API またはサードパーティのサービス）と今後の一連の_イベント_を連携することができます。
 
-Setting up a webhook on CircleCI enables you to receive information (referred to as _events_) from CircleCI, as they happen. これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
+CircleCI 上で Webhook を設定することにより、CircleCI から情報 (_イベント_と呼ばれます) をリアルタイムで受け取ることができます。 これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
 
-The rest of this document will detail how to set up a webhook as well as the shape of events that will be sent to your webhook destination.
+ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかを詳しく説明します。
 
 ## Webhookのユースケース
 {: #use-cases}
@@ -162,7 +162,7 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 | webhook     | トリガーされた Webhook を表すメタデータのマップ                                | マップ  |
 {: class="table table-striped"}
 
-**Note:** The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
+**注: ** イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずにWebhook のペイロードのマップに追加される可能性があります。
 
 
 ## Webhookの共通のサブエンティティ
@@ -224,18 +224,18 @@ Webhook イベントに関連するワークフローに関するデータ
 
 | フィールド         | 常に表示 | 説明                                      |
 | ------------- | ---- | --------------------------------------- |
-| id            | はい   | ワークフローの一意の ID                           |
-| name          | はい   | .circleci/config.yml で定義されているワークフロー名    |
-| status        | いいえ  | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
-| created\_at | はい   | ワークフローが作成された時間                          |
-| stopped_at    | いいえ  | ワークフローが終了状態になった時間（該当する場合）               |
-| url           | はい   | CircleCI の UI にあるワークフローへの URL           |
+| id            | ○    | ワークフローの一意の ID                           |
+| name          | ○    | .circleci/config.yml で定義されているワークフロー名    |
+| status        | ×    | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
+| created\_at | ○    | ワークフローが作成された時間                          |
+| stopped_at    | ×    | ワークフローが終了状態になった時間（該当する場合）               |
+| url           | ○    | CircleCI の UI にあるワークフローへの URL           |
 {: class="table table-striped"}
 
 ### パイプライン
 {: #pipeline}
 
-パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 Pipelines can also be triggered manually through the API.
+パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
 
 Webhook イベントに関連するパイプラインに関するデータ
 
