@@ -68,7 +68,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <h2>設定ファイル</h2>
     <p>ビルド構成のセットアップとデバッグについて解説します。</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/2.0/configuration-reference/">設定ファイル リファレンス</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/configuration-reference/">リファレンス</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/writing-yaml/">YAML の記述</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/env-vars/">環境変数の使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/ssh-access-jobs/">SSH を使用したデバッグ</a></li>
@@ -80,7 +80,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <p>CircleCI のワークフロー機能によってジョブのスケジュール実行と順次実行が構成できます。</p>
     <ul>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#workflows-configuration-examples">サンプル設定ファイル</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-
       workflows">ワークフローにおけるコンテキストとフィルターの使用</a></li>
