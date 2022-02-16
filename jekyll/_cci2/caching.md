@@ -67,6 +67,7 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
             - my-project/my-dependencies-directory
 ```
 
+CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep your cache keys under this maximum.
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
 **Note:**
@@ -272,6 +273,7 @@ Template | Description
 {: #further-notes-on-using-keys-and-templates }
 {:.no_toc}
 
+- A 900 character limit is imposed on each cache key. Be sure your key is shorter than this, otherwise your cache will not save.
 - When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you increase the chance of the cache being used.
 - Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors), if your build makes use of them. For example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
 - You do not have to use dynamic templates for your cache key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
