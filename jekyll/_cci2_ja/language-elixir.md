@@ -223,7 +223,7 @@ version: 2.1
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 [CircleCI 提供の Elixir Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#elixir)を使用します。
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 [CircleCI 提供の Elixir Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#elixir)を使用します。
 
 ```yaml
 jobs:
@@ -264,7 +264,7 @@ jobs:
 
 実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/2.0/caching/)を検討してください。
 
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. この例では、仮想環境とインストールされたパッケージがキャッシュされます。
+[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
 [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
