@@ -53,7 +53,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-`machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
+{:.tab.machine.Server_2}
 ```
 jobs:
   build: # name of your job
