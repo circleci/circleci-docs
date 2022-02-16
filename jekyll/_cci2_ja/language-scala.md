@@ -95,7 +95,7 @@ jobs:
 ## スキーマの詳細説明
 {: #schema-walkthrough }
 
-Every `config.yml` starts with the [`version`]({{site.baseurl}}/2.0/configuration-reference/#version) key. このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+`config.yml` は必ず [`version`]({{site.baseurl}}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 ```yaml
 version: 2
