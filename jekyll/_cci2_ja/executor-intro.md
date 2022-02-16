@@ -44,7 +44,7 @@ steps:
         # Linux 仮想マシン環境で実行するコマンド
 ```
 
-{:.tab.machine.Server}
+{:.tab.machine.Server_3}
 ```
 jobs:
   build: # name of your job
@@ -136,7 +136,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
