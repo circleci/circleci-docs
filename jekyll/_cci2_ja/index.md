@@ -51,7 +51,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
-    <h2>例</h2>
+    <h2>サンプル</h2>
     <p>人気のサンプルをチェックしましょう。</p>
     <ul>
         <li><a href="{{ site.baseurl }}/ja/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
