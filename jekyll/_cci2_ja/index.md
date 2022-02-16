@@ -46,7 +46,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="{{ site.baseurl }}/ja/2.0/first-steps/">ユーザー登録とトライアル</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/getting-started/">初回ビルドの前提条件</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/faq/">FAQ</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/faq/">よくあるご質問</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/orb-intro/">Orbs</a></li>
     </ul>
   </div>
@@ -58,7 +58,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
         <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/orb-concepts/">Orbs を使う</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/orb-concepts/">Orb の使用</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
@@ -72,7 +72,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="{{ site.baseurl }}/ja/2.0/writing-yaml/">YAML の記述</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/env-vars/">環境変数の使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/ssh-access-jobs/">SSH を使用したデバッグ</a></li>
-      <li id="full-config-example"><a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#example-full-configuration">Full Config Example</a></li>
+      <li id="full-config-example"><a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#example-full-configuration">設定例</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
@@ -95,7 +95,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <p>パイプラインの設定を支援し、インスピレーションを与えるレシピ。</p>
     <ul>
       <li><a href="{{ site.baseurl }}/ja/2.0/optimization-cookbook/">パイプラインを最適化する方法</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">様々なユースケースに対応したベスト・プラクティス</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/configuration-cookbook">様々なユースケースに対応したベスト・プラクティス</a></li>
     </ul>
   </div>
 </div>
