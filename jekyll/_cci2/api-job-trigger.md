@@ -62,6 +62,91 @@ For a complete reference of the API, see the [CircleCI API Documentation](https:
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 
+{:.tab.trigger.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          LANG: C.UTF-8
+    working_directory: /my-project
+    parallelism: 2
+    steps:
+      - checkout
+
+      - run: echo "run some tests"
+
+      - deploy:
+          name: conditionally run a deploy job
+          command: |
+            # replace this with your build/deploy check (i.e. current branch is "release")
+            if [[ true ]]; then
+              curl --user ${CIRCLE_API_USER_TOKEN}: \
+                --data 'build_parameters[CIRCLE_JOB]=deploy_docker' \
+                --data revision=$CIRCLE_SHA1 \
+                https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH
+            fi
+
+  deploy_docker:
+    docker:
+      - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /
+    steps:
+      - setup_remote_docker
+      - run: echo "deploy section running"
+```
+
+{:.tab.trigger.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          LANG: C.UTF-8
+    working_directory: /my-project
+    parallelism: 2
+    steps:
+      - checkout
+
+      - run: echo "run some tests"
+
+      - deploy:
+          name: conditionally run a deploy job
+          command: |
+            # replace this with your build/deploy check (i.e. current branch is "release")
+            if [[ true ]]; then
+              curl --user ${CIRCLE_API_USER_TOKEN}: \
+                --data 'build_parameters[CIRCLE_JOB]=deploy_docker' \
+                --data revision=$CIRCLE_SHA1 \
+                https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH
+            fi
+
+  deploy_docker:
+    docker:
+      - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /
+    steps:
+      - setup_remote_docker
+      - run: echo "deploy section running"
+```
+
+{:.tab.trigger.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -111,4 +196,4 @@ Notes on the above example:
 ## See also
 {: #see-also }
 
-[Triggers]({{ site.baseurl }}/2.0/triggers/)
+- [Triggers]({{site.baseurl}}/2.0/triggers/)

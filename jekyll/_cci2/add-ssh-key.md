@@ -74,6 +74,31 @@ Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SS
 
 To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/) in your configuration file.
 
+{:.tab.step.Cloud}
+```yaml
+version: 2.1
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+#...
+```
+
+{:.tab.step.Server_3}
+```yaml
+version: 2.1
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+#...
+```
+
+{:.tab.step.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -82,6 +107,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SO:ME:FIN:G:ER:PR:IN:T"
+#...
 ```
 
 **Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application.
@@ -94,4 +120,4 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 ## See Also
 {: #see-also }
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+- [GitHub and Bitbucket Integration]({{site.baseurl}}/2.0/gh-bb-integration/)

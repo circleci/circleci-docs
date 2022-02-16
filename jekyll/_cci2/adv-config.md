@@ -16,9 +16,8 @@ CircleCI supports many advanced configuration options and features, check out th
 ## Check your scripts
 {: #check-your-scripts }
 
-Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
+Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version). The following config is valid for Cloud and Server v3.x:
 
-{:.tab.executors_one.Cloud}
 ```yaml
 version: 2.1
 
@@ -31,75 +30,8 @@ workflows:
       - shellcheck/check
 ```
 
-{:.tab.executors_one.Server_3}
-```yaml
-version: 2.1
+You can also use shellcheck with version 2 config (for example, with Server v2.x), without using the orb, as follows:
 
-orbs:
-  shellcheck: circleci/shellcheck@x.y.z
-
-workflows:
-  shellcheck:
-    jobs:
-      - shellcheck/check
-```
-
-{:.tab.executors_one.Server_2}
-```yaml
-version: 2
-
-orbs:
-  shellcheck: circleci/shellcheck@x.y.z
-
-workflows:
-  shellcheck:
-    jobs:
-      - shellcheck/check
-```
-
-You can also use shellcheck with version 2 config, without using the orb, as follows:
-
-{:.tab.executors_two.Cloud}
-```yaml
-version: 2.1
-
-jobs:
-  shellcheck:
-    docker:
-      - image: nlknguyen/alpine-shellcheck:v0.4.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: Check Scripts
-          command: |
-            find . -type f -name '*.sh' | wc -l
-            find . -type f -name '*.sh' | xargs shellcheck --external-sources
-```
-
-{:.tab.executors_two.Server_3}
-```yaml
-version: 2.1
-
-jobs:
-  shellcheck:
-    docker:
-      - image: nlknguyen/alpine-shellcheck:v0.4.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: Check Scripts
-          command: |
-            find . -type f -name '*.sh' | wc -l
-            find . -type f -name '*.sh' | xargs shellcheck --external-sources
-```
-
-{:.tab.executors_two.Server_2}
 ```yaml
 version: 2
 
@@ -126,7 +58,7 @@ For more information on using shell scripts in your config, see the [Using Shell
 
 Use Selenium to manage in-browser testing:
 
-{:.tab.executors_three.Cloud}
+{:.tab.executors_two.Cloud}
 ```yaml
 version: 2.1
 
@@ -152,7 +84,7 @@ jobs:
           background: true
 ```
 
-{:.tab.executors_three.Server_3}
+{:.tab.executors_two.Server_3}
 ```yaml
 version: 2.1
 
@@ -178,7 +110,7 @@ jobs:
           background: true
 ```
 
-{:.tab.executors_three.Server_2}
+{:.tab.executors_two.Server_2}
 ```yaml
 version: 2
 
@@ -208,7 +140,7 @@ For more information on browser testing, see the [Browser Testing]({{site.baseur
 
 Use a service container to run database testing:
 
-{:.tab.executors_four.Cloud}
+{:.tab.executors_three.Cloud}
 ```yml
 version: 2.1
 
@@ -252,7 +184,7 @@ jobs:
           -c "SELECT * from test"
 ```
 
-{:.tab.executors_four.Server_3}
+{:.tab.executors_three.Server_3}
 ```yml
 version: 2.1
 
@@ -296,7 +228,7 @@ jobs:
           -c "SELECT * from test"
 ```
 
-{:.tab.executors_four.Server_2}
+{:.tab.executors_three.Server_2}
 ```yml
 version: 2
 
@@ -313,7 +245,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: circleci/postgres:9.6.5
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -344,7 +276,7 @@ For more information on configuring databases, see the [Configuring Databases]({
 
 Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
 
-{:.tab.executors_five.Cloud}
+{:.tab.executors_four.Cloud}
 ```yml
 version: 2.1
 
@@ -369,7 +301,7 @@ jobs:
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-{:.tab.executors_five.Server_3}
+{:.tab.executors_four.Server_3}
 ```yml
 version: 2.1
 
@@ -394,7 +326,7 @@ jobs:
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-{:.tab.executors_five.Server_2}
+{:.tab.executors_four.Server_2}
 ```yml
 version: 2
 
@@ -435,5 +367,5 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 ## See also
 {: #see-also }
 
-[Optimizations]({{ site.baseurl }}/2.0/optimizations/)
-[Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/)
+- [Optimizations]({{site.baseurl}}/2.0/optimizations/)
+- [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/)

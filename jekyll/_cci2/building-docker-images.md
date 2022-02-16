@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote docker environment.
+This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote Docker environment.
 
 * TOC
 {:toc}
@@ -20,7 +20,36 @@ This document explains how to build Docker images for deployment elsewhere or fu
 
 To build Docker images for deployment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
+{:.tab.docker.Cloud}
 ```yaml
+version: 2.1
+
+jobs:
+  build:
+    steps:
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:
+          version: 19.03.13
+```
+
+{:.tab.docker.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    steps:
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:
+          version: 19.03.13
+```
+
+{:.tab.docker.Server_2}
+```yaml
+version: 2
+
 jobs:
   build:
     steps:
@@ -51,6 +80,49 @@ CPUs | Processor                 | RAM | HD
 
 The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
 
+{:.tab.docker_two.Cloud}
+```yaml
+version: 2.1
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: |
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+         docker run -d --name db company/proprietary-db:1.2.3
+
+     # build the application image
+     - run: docker build -t company/app:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push company/app:$CIRCLE_BRANCH
+```
+
+{:.tab.docker_two.Server_3}
+```yaml
+version: 2.1
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: |
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+         docker run -d --name db company/proprietary-db:1.2.3
+
+     # build the application image
+     - run: docker build -t company/app:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push company/app:$CIRCLE_BRANCH
+```
+
+{:.tab.docker_two.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -71,10 +143,63 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
+The example below shows how you can build and deploy a Docker image for our [demo Docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
 
+{:.tab.docker_three.Cloud}
 ```yml
 version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.17
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push CircleCI-Public/circleci-demo-docker:$TAG
+```
+
+{:.tab.docker_three.Server_3}
+```yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.17
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push CircleCI-Public/circleci-demo-docker:$TAG
+```
+
+{:.tab.docker_three.Server_2}
+```yml
+version: 2
 jobs:
   build:
     docker:
@@ -101,10 +226,12 @@ jobs:
 **Note:** The [CircleCI convenience images](https://circleci.com/docs/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
 ```yml
-      # Install via apk on alpine based images
-      - run:
-          name: Install Docker client
-          command: apk add docker-cli
+#...
+# Install via apk on alpine based images
+- run:
+    name: Install Docker client
+    command: apk add docker-cli
+#...
 ```
 
 Let’s break down what’s happening during this build’s execution:
@@ -120,8 +247,10 @@ Let’s break down what’s happening during this build’s execution:
 To specify the Docker version, you can set it as a `version` attribute:
 
 ```yml
-      - setup_remote_docker:
-          version: 19.03.13
+#...
+- setup_remote_docker:
+    version: 19.03.13
+#...
 ```
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
@@ -137,15 +266,11 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `18.09.3`
 - `17.09.0-ce` (default)
 
-<!---
-Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
---->
-
 **Note:** The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## Separation of environments
 {: #separation-of-environments }
-The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
+The job and [remote Docker]({{site.baseurl}}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
 
 ### Accessing services
 {: #accessing-services }
@@ -155,11 +280,11 @@ It is **not** possible to start a service in remote docker and ping it directly 
 
 ```yml
 # ...
-      - run:
-          name: "Start Service and Check That it’s Running"
-          command: |
-            docker run -d --name my-app my-app
-            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
+- run:
+    name: "Start Service and Check That it’s Running"
+    command: |
+      docker run -d --name my-app my-app
+      docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
 # ...
 ```
 
@@ -167,9 +292,9 @@ A different way to do this is to use another container running in the same netwo
 
 ```yml
 # ...
-      - run: |
-          docker run -d --name my-app my-app
-          docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
+- run: |
+    docker run -d --name my-app my-app
+    docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
 # ...
 ```
 
@@ -180,6 +305,7 @@ A different way to do this is to use another container running in the same netwo
 It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
 ```yml
+#...
 - run: |
     # create a dummy container which will hold a volume with config
     docker create -v /cfg --name configs alpine:3.4 /bin/true
@@ -187,11 +313,13 @@ It is **not** possible to mount a volume from your job space into a container in
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
     # start an application container using this volume
     docker run --volumes-from configs app-image:1.2.3
+#...
 ```
 
 In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
 
 ```yml
+#...
 - run: |
     # start container with the application
     # make sure you're not using `--rm` option otherwise the container will be killed after finish
@@ -200,6 +328,7 @@ In the same way, if your application produces some artifacts that need to be sto
 - run: |
     # after application container finishes, copy artifacts directly from it
     docker cp app:/output /path/in/your/job/space
+#...
 ```
 
 It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
@@ -222,6 +351,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
 
 {% raw %}
 ```yml
+#...
 # Populate bundler-data container from circleci cache
 - restore_cache:
     keys:
@@ -273,10 +403,7 @@ Thanks to ryansch for contributing this example.
 ## See also
 {: #see-also }
 
-[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
-
-[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
-
-[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
-
-[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
+- [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching/)
+- [docker-layer-caching]({{site.baseurl}}/2.0/glossary/#docker-layer-caching)
+- [job-space]({{site.baseurl}}/2.0/glossary/#job-space)
+- [primary-container]({{site.baseurl}}/2.0/glossary/#primary-container)
