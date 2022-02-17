@@ -113,6 +113,9 @@ The OAuth Client ID provided by Github.
 * *OAuth Client Secret (required)* -
 The OAuth Client Secret provided by Github.
 
+* *Github Enterprise Fingerprint* -
+Required when using a proxy. Include the output of `ssh-keyscan github.example.com` in the text field.
+
 ==== Object Storage Settings
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
