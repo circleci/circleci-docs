@@ -73,7 +73,6 @@ If specifying a custom script, it must:
 
 Example with `sudo` prefix:
 
-- config snippet
 ```yaml
 runner:
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
@@ -81,13 +80,13 @@ runner:
 
 Example with custom script prefix:
 
-- config snippet
 ```yaml
 runner:
   command_prefix: ["/opt/circleci/wrapper.sh"]
 ```
 
-- `/opt/circleci/wrapper.sh`
+Prefix script saved as `/opt/circleci/wrapper.sh`:
+
 ```bash
 #!/bin/bash
 
