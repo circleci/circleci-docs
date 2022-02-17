@@ -114,7 +114,7 @@ The OAuth Client ID provided by Github.
 The OAuth Client Secret provided by Github.
 
 * *Github Enterprise Fingerprint* -
-Required when using a proxy.  Include the output of `ssh-keyscan github.example.com` in the textarea.
+Required when using a proxy. Include the output of `ssh-keyscan github.example.com` in the text field.
 
 ==== Object Storage Settings
 
