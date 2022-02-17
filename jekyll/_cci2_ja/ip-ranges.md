@@ -17,14 +17,14 @@ CircleCI のジョブで使用する IP アドレスを、明確に定義され�
 ## 概要
 [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)をトリガーします。
 
-IP アドレスの範囲は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 この機能の実装に伴い、CircleCI では、CircleCI サービスが利用する IP アドレスのリストを公開しました。 この機能を有効にしたジョブのトラフィックは、リスト上のいずれかの IP アドレスを使用するようになります。
+IP アドレスの範囲機能は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 この機能の実装に伴い、CircleCI では、CircleCI サービスが利用する IP アドレスのリストを公開しました。 この機能を有効にしたジョブのトラフィックは、リスト上のいずれかの IP アドレスを使用するようになります。
 
-The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing is calculated based on data usage of jobs that have opted in to using the IP ranges feature. Details on the pricing model can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
+本機能は現在 [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のお客様のみご利用いただけます。 この機能を有効にしたジョブのデータ使用量に応じてクレジットの消費が発生します。 料金に関する詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
 
 ## IP アドレスの範囲機能: ユースケース
 {: #usecases }
 
-この機能を使用すれば、ご利用のインフラストラクチャへのインバウンド接続を、CircleCI に関連していることが確かな IP アドレスのみに制限することができます。
+この機能により、ご利用のインフラストラクチャへのインバウンド接続を、CircleCI に関連していることが確かな IP アドレスのみに制限することができます。
 
 IP アドレスに基づくアクセス制御は、以下のようなユース ケースに便利です。
 - プライベートのアーティファクト リポジトリにアクセスする
@@ -132,10 +132,10 @@ dig all.knownips.circleci.com A +short
 
 少なくとも 1 つのジョブについて IP アドレスの範囲機能を有効にしているお客様には、このリストの変更があり次第メールでお知らせします。 本機能の一般公開以降に既存の IP アドレス範囲が変更される場合、その **30 日前に通知**を行います。 今後の変更に応じて、このドキュメントとマシン用のリストも更新されます。
 
-## 使用料金
+## 料金
 {: #pricing }
 
-Pricing is calculated based on data usage of jobs opted into the IP ranges feature. ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。  Data used to pull in the Docker image to the container before the job starts executing does _not incur usage costs_ for jobs with IP ranges enabled.
+この機能を有効にしたジョブのデータ使用量に応じてクレジットの消費が発生します。 ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
 料金に関する詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
 
@@ -146,7 +146,7 @@ IP アドレスの範囲機能の使用状況は、 CircleCI アプリケーシ�
 ## AWS および GCP の IP アドレス
 {: #awsandgcpipaddresses }
 
-The machines that execute *all jobs* on CircleCI’s platform, not just jobs opted into IP ranges, are hosted on Amazon Web Services (AWS), Google Cloud Platform (GCP), and CircleCI's macOS Cloud (see below). CircleCI のトラフィックの送信元となるこれらのクラウド プロバイダーの IP アドレスを網羅したリストについては、各プロバイダーの IP アドレスの範囲を参照してください。 AWS と GCP では、この情報を公開するエンドポイントが提供されています。
+IP アドレスの範囲機能が有効なジョブだけでなく、*すべてのジョブ* を CircleCI のプラットフォームで実行するマシンは、Amazon Web Services (AWS)、Google Cloud Platform (GCP)、CircleCI の macOS 用クラウドでホストされます。 CircleCI のトラフィックの送信元となるこれらのクラウド プロバイダーの IP アドレスを網羅したリストについては、各プロバイダーの IP アドレスの範囲を参照してください。 AWS と GCP では、この情報を公開するエンドポイントが提供されています。
 
 - [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI は *us-east-1* および *us-east-2* リージョンを使用
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI は *us-east1* および *us-central1* リージョンを使用
@@ -156,7 +156,7 @@ The machines that execute *all jobs* on CircleCI’s platform, not just jobs opt
 ## CircleCI macOS 用クラウド:
 {: #circleci-macos-cloud }
 
-In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. IP address ranges for CircleCI macOS Cloud:
+上記の AWS や GCP に加えて、CircleCI の macOS 用クラウドでもマシンが実行するジョブをホストしています。 CircleCI の macOS 用クラウドの IP アドレスの範囲は以下のとおりです。
 
 - 162.252.208.0/24
 - 162.252.209.0/24
