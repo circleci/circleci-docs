@@ -112,7 +112,7 @@ If your project is open source/available to be forked and receive PRs from contr
 ## Caching libraries
 {: #caching-libraries }
 
-If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and [demo projects](https://circleci.com/docs/2.0/demo-apps/) for the specifics for your stack.
+If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and [demo projects]({{site.baseurl}}/2.0/demo-apps/) for the specifics for your stack.
 
 Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) prebuilt by CircleCI have tools preinstalled that are generic for building projects using the relevant language. For example, the `circleci/ruby:2.4.1` image includes useful tools like git, openssh-client, and gzip.
 
