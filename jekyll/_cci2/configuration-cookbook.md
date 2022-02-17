@@ -673,7 +673,7 @@ setup: true
 # the path-filtering orb is required to continue a pipeline based on
 # the path of an updated fileset
 orbs:
-  path-filtering: circleci/path-filtering@0.0.2
+  path-filtering: circleci/path-filtering@0.1.1
 
 workflows:
   # the always-run workflow is always triggered, regardless of the pipeline parameters.
