@@ -504,6 +504,11 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 	background: none;
 }
 .table-migrating-page {
+    // this negates the changes to white-space: nowrap used in other tables.
+    td:first-of-type code {
+        white-space: pre-wrap !important;
+    }
+
 	tr > td:not(:only-child):first-child {
 		padding-left: 0px;
 		padding-right: 4px
