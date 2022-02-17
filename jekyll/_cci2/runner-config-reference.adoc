@@ -71,11 +71,31 @@ If specifying a custom script, it must:
 1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
 2. Forward the exit code from task agent as its own exit code
 
-Example:
+Example with `sudo` prefix:
 
 ```yaml
 runner:
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
+```
+
+Example with custom script prefix:
+
+```yaml
+runner:
+  command_prefix: ["/opt/circleci/wrapper.sh"]
+```
+
+Prefix script saved as `/opt/circleci/wrapper.sh`:
+
+```bash
+#!/bin/bash
+
+task_agent_cmd=${@:1}
+echo "About to run CircleCI task agent: ${task_agent_cmd}"
+$task_agent_cmd
+exit=$?
+echo "CircleCI task agent finished."
+exit $exit
 ```
 
 === runner.working_directory
