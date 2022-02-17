@@ -176,11 +176,10 @@ jobs:
 version: 2.1
 jobs:
   build:
-    docker:
-      - image: cimg/go:1.17
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    machine: true
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       # ... steps for building/testing app ...
@@ -202,11 +201,10 @@ jobs:
 version: 2
 jobs:
   build:
-    docker:
-      - image: cimg/go:1.17
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    machine: true
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       # ... steps for building/testing app ...

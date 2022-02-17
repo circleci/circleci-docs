@@ -13,6 +13,9 @@ version:
 
 Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.
 
+This page is in the process of being updated. The examples on this page should be used as a guide - you may need to implement a different solution.
+{: class="alert alert-info }
+
 ## Overview
 {: #overview }
 
@@ -173,7 +176,7 @@ version: 2.1
 
 jobs:
   build:
-    machine:
+    docker:
       - image: snapcore/snapcraft:latest
         auth:
           username: mydockerhub-user
@@ -223,7 +226,7 @@ version: 2.1
 
 jobs:
   build:
-    machine:
+    docker:
       - image: snapcore/snapcraft:latest
         auth:
           username: mydockerhub-user
@@ -272,7 +275,7 @@ workflows:
 version: 2
 jobs:
   build:
-    machine:
+    docker:
       - image: snapcore/snapcraft:latest
         auth:
           username: mydockerhub-user
