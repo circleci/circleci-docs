@@ -42,7 +42,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 To add an API token, perform the steps listed below.
 
 1. Log in to the CircleCI web application.
-1. Visit the [Personal API Tokens page](https://app.circleci.com/settings/user/tokens) and follow the steps to add an API token.
+1. [Create a personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) by visitng the [Personal API Tokens page](https://app.circleci.com/settings/user/tokens) and follow the steps to add an API token.
 2.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
     ```shell
