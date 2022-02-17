@@ -42,7 +42,7 @@ export class SnippetFeedback {
     // Create some dom elements:
     const container = this._makeElement({
       kind: 'div',
-      className: 'was-this-code-helpful',
+      className: 'was-this-helpful',
     });
     const textPrompt = this._makeElement({
       kind: 'span',
