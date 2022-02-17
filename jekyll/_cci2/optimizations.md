@@ -71,7 +71,7 @@ If your project has a large test suite, you can configure your build to use [`pa
 
 **Note:**  If you are on a container-based plan, you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
 
 * See the `resource_class` section of the [Configuration Reference]({{site.baseURL}}/2.0/configuration-reference/#resourceclass) for more information.
 
