@@ -196,14 +196,14 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ### キャッシュのクリア
 {: #clearing-cache }
 
-Caches cannot be cleared. If you need to generate a new set of caches you can update the cache key, similar to the previous example. You might wish to do this if you have updated language or build management tool versions.
+キャッシュはクリアできません。 新しくキャッシュを生成する必要がある場合は、上述の例と同様にキャッシュキーをアップデートします。 言語またはビルド管理ツールのバージョンを更新した際は、この操作を実行することをお勧めします。
 
-Updating the cache key on save and restore steps in your '.circleci/config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
+.circleci/config.yml ファイルの保存ステップとリストアステップでキャッシュキーを更新すると、その時点から一連のキャッシュが新たに生成されます。 以前のキーを使用して古いコミットを行ってもキャッシュが生成され保存される可能性があるため、 config.yml の変更後にリベースすることをお勧めします。
 
-If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache, which will be available for 15 days. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
+キャッシュのバージョンを上げて新しいキャッシュを作成しても、「古い」キャッシュは保存されます。 必ず別のキャッシュを作成して下さい。このキャッシュは 15 日間利用できます。 この方法ではストレージの使用量が増加します。 一般的なベストプラクティスとして、現在キャッシュされている内容を確認し、ストレージの使用量をできる限り削減する必要があります。
 
 <div class="alert alert-info" role="alert">
-<b>ヒント:</b> キャッシュは変更不可なので、すべてのキャッシュキーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
+<b>ヒント:</b> キャッシュは変更不可なので、すべてのキャッシュキーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 こうすれば、プレフィックスのバージョン番号を増やすだけでキャッシュ全体を再生成できます。
 </div>
 
 下記のような状況では、キャッシュキーの名前を変えることによるキャシュのクリアを検討してみてください。
@@ -283,7 +283,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)ガイドをご覧ください。
 
 <div class="alert alert-warning" role="alert">
-<b>Warning:</b> This example is only a <i>potential</i> solution and might be unsuitable for your specific needs, and increase storage costs.
+<b>警告:</b> この例は、<i>潜在的な</i>ソリューションであり、お客様のニーズには適さず、ストレージコストが増加する可能性があります。
 </div>
 
 {% raw %}
