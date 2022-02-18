@@ -390,5 +390,5 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 {: #see-also }
 {:.no_toc}
 
-* [キャッシュの活用方法]({{ site.baseurl }}/2.0/caching-strategy/)
-* [最適化]({{ site.baseurl }}/2.0/optimizations/)
+* [キャッシュの活用方法]({{ site.baseurl }}/ja/2.0/caching-strategy/)
+* [最適化]({{ site.baseurl }}/ja/2.0/optimizations/)
