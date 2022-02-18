@@ -36,7 +36,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 
 [SimpleCov](https://github.com/colszowka/simplecov) は、よく使用される Ruby コードカバレッジ ライブラリです。 まず、`simplecov` gem を `Gemfile` に追加します。
 
-```
+```ruby
 gem 'simplecov', require: false, group: :test
 ```
 
@@ -144,8 +144,8 @@ jobs:
 {:.tab.ruby_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -190,11 +190,11 @@ jobs:
 
 [Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
 
-```sh
+```shell
 pip install coverage
 ```
 
-```sh
+```shell
 # これまでは、たとえば以下のように Python プロジェクトを実行していました。
 python my_program.py arg1 arg2
 
@@ -205,7 +205,7 @@ coverage run my_program.py arg1 arg2
 
 この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジレポートを生成できます。
 
-```sh
+```shell
 coverage run -m pytest
 coverage report
 coverage html  # ブラウザーで htmlcov/index.html を開きます。
@@ -284,8 +284,8 @@ workflows:
 {:.tab.python_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -444,8 +444,8 @@ jobs:
 {:.tab.java_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -517,8 +517,8 @@ jobs:
 
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -592,8 +592,8 @@ jobs:
 {:.tab.php_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -617,7 +617,7 @@ jobs:
 
 Go には、コードカバレッジレポートを生成する機能が組み込まれています。 レポートを生成するには、`-coverprofile=c.out` フラグを追加します。 これでカバレッジレポートが生成され、`go tool` を使用して html に変換できます。
 
-```sh
+```shell
 go test -cover -coverprofile=c.out
 go tool cover -html=c.out -o coverage.html
 ```
