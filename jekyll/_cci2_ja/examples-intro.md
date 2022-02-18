@@ -101,7 +101,7 @@ jobs:
 
 ## macOS
 {: #macos }
-```
+```yml
 jobs:
   build-and-test:
     macos:
