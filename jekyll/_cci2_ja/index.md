@@ -7,7 +7,7 @@ toc: false
 page-type: index
 ---
 
-CircleCI について理解を深めていただけるよう、チュートリアルやサンプル、ハウツーといった参考情報をまとめました。
+CircleCI について理解を深めていただけるよう、チュートリアルやサンプル、ハウツーといった参考情報をまとめました。 here
 
 <hr class="hidden-xs" />
 
