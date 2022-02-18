@@ -67,7 +67,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
             - my-project/my-dependencies-directory
 ```
 
-ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
+CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep your cache keys under this maximum. ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
 **注:** 特別なステップである [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
 
@@ -230,7 +230,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 各キャッシュ キーは、1 つのデータキャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュキーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュキー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
 
-```sh
+```shell
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
@@ -238,8 +238,8 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 この例では、以下のような文字列が出力されます。
 
-```sh
-{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ={% endraw %}
+```shell
+myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 ```
 
 `package-lock` ファイルの内容が変更された場合、`checksum` 関数は別の一意の文字列を返し、キャッシュを無効化する必要があることが示されます。
@@ -271,7 +271,8 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 {: #further-notes-on-using-keys-and-templates }
 {:.no_toc}
 
-- キャッシュに一意の識別子を定義するときは、{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレートキーを過度に使用しないように注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。
+- A 900 character limit is imposed on each cache key. Be sure your key is shorter than this, otherwise your cache will not save.
+- キャッシュに一意の識別子を定義するときは、{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。
 - キャッシュ変数には、ビルドで使用している場合は、[パラメーターの使用">パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors)も使用できます。 たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} などです。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。
 
