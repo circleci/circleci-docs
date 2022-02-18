@@ -148,11 +148,11 @@ CircleCI がジョブを実行すると、**Job ページ**の [Artifacts] タ�
 
 3. 以下のコマンドを実行します。 `:` で始まる変数は、コマンドの下に掲載した表を参照して、実際の値に置き換えてください。
 
-```bash
+```shell
 # Set an environment variable for your API token.
 export CIRCLE_TOKEN=':your_token'
 
-# `curl` gets all artifact details for a build 
+# `curl` gets all artifact details for a build
 # then, the result is piped into `grep` to extract the URLs.
 # finally, `wget` is used to download the the artifacts to the current directory in your terminal.
 
@@ -163,7 +163,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
 
 同様に、ビルドの_最新_のアーティファクトをダウンロードする場合は、curl の呼び出しを以下のように URL で置き換えます。
 
-```bash
+```shell
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
 ```
 
