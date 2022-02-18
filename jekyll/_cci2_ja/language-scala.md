@@ -33,7 +33,7 @@ version:
 
 CircleCI では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
 
-```
+```shell
 mkdir .circleci/
 touch .circleci/config.yml
 ```

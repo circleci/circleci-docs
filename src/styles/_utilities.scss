@@ -2,6 +2,9 @@
   display: none;
 }
 
+.visible {
+  display: block;
+}
 
 @media (max-width: $screen-md) {
   .hidden-md {

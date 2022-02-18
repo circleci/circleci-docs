@@ -1,7 +1,10 @@
+---
+layout: compress
+---
 <!DOCTYPE html>
 <html lang="{{ page.lang }}">
 {% include_cached head.html site=site page=page %}
-<body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
+<body data-prismjs-copy-timeout="3000" class="line-numbers {% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
   {% include_cached google-tag-manager.html %}
 {% endif %}
@@ -47,6 +50,11 @@
             {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
+            <div id="expandModal" class="hidden">
+              <img id="closeImg" src="{{ site.baseurl }}/assets/img/docs/close-path.svg">
+              <span id="modalImg"></span>
+              <div id="caption"></div>
+            </div>
           </article>
         </div><!-- .article-container -->
 
@@ -55,12 +63,14 @@
           <div class='full-height-sticky'>
 
             {% if page.suggested != false %}
-            <div id="helpful-resources" class="{% if page.suggested_links_has_experiments %}has-experiment-links {% endif%}">
-              <h5 class="helpful-heading">Helpful resources</h5>
+            {% assign total_link = page.suggested | size %}
+            {% assign total_links_experiment = page.suggested | where: "isExperiment", true | size %}
+            <div id="helpful-resources" class="{% if total_link == total_links_experiment %} has-experiment-links {% endif%}">
+              <h5 class="helpful-heading">Helpful resources {{count_links_experiment}}</h5>
               <div class="helpful-indent">
                 <ul class="section-nav">
                   {% for item in page.suggested %}
-                  <li class="helpful-entry helpful-h2">
+                  <li class="helpful-entry helpful-h2 {% if item.isExperiment %} has-experiment-links {% endif%}">
                     <a class="{% if item.isExperiment %} experimental-link {% endif %}" href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}

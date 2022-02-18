@@ -32,9 +32,19 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
-{% highlight yaml %}
-version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-{% endhighlight %}
+```yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+```
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
 
@@ -61,15 +71,25 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-{% highlight yaml %}
-version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-
+```yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
       - run:
           name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-{% endhighlight %}
+```
 
 ### 学習ポイント
 {: #learnings }
@@ -88,7 +108,7 @@ version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: n
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 
 orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built images: https://circleci.com/docs/2.0/circleci-images/ docker: - image: cimg/node:17.2-browsers steps: - checkout - browser-tools/install-browser-tools - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
@@ -103,7 +123,7 @@ orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built image
           name: Running in a Unique Container
           command: |
             node -v
-{% endhighlight %}
+```
 
 ノードコンテナで実行していることを示す、小さな `run` ブロックも追加しています。
 
@@ -125,11 +145,44 @@ orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built image
 
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
-
-{% highlight yaml %}
-version: 2.1 jobs: Hello-World: docker: - image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline' I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: cimg/node:17.2 steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
-
-workflows: Example_Workflow: jobs:
+```yml
+version: 2.1
+jobs:
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Hello World
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  I-Have-Code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+  Run-With-Node:
+    docker:
+      - image: cimg/node:17.2
+    steps:
+      - run:
+          name: Running In A Container With Node
+          command: |
+            node -v
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'Do work once the approval has completed'
 
      - Hello-World
      - I-Have-Code:
@@ -150,8 +203,7 @@ workflows: Example_Workflow: jobs:
          requires:
     
            - Hold-For-Approval
-
-{% endhighlight %}
+```
 
 ### 学習ポイント
 {: #learnings }

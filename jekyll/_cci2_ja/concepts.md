@@ -33,7 +33,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 この `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 詳しくは「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご確認ください。
 
-```bash
+```shell
 ├── .circleci
 │   ├── config.yml
 ├── README
@@ -809,9 +809,9 @@ version: 2
 jobs:
   build1:
 #...
-    steps:    
+    steps:
 
-      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス 
+      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス
       # (workspace/echo-output) をワークスペースに維持します。 このパスは、絶対パスまたは
       # working_directory からの相対パスでなければなりません。 This is a directory on the container which is
       # taken to be the root directory of the workspace.

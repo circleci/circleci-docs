@@ -225,7 +225,7 @@ _CircleCI Server v2. 17.3 からサポート_
 . Services マシンから `/etc/circleconfig/frontend/customizations`ファイルにアクセスします。
 . バナーに表示するテキストに置き換えて以下の行を追加します。
 +
-```
+```shell
 export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
 ```
 . 管理コンソール (your-circleci-hostname.com:8800) から CircleCI を再起動します。

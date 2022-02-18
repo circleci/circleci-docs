@@ -126,7 +126,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 
 照会には、お好きな DNS リゾルバをご使用いただけます。 以下は、デフォルトのリゾルバで `dig` を使った例です。
 
-```
+```shell
 dig all.knownips.circleci.com A +short
 ```
 

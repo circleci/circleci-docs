@@ -111,7 +111,7 @@ PostGIS is available and can be used like this: `cimg/postgres:12.0-postgis`
 
 `pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の設定を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベースユーティリティを有効にします。
 
-```
+```yml
      steps:
     # Add the Postgres 12.0 binaries to the path.
        - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV

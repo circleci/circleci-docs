@@ -1,6 +1,5 @@
 # Local Development Instructions
 
-
 There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](https://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
@@ -45,6 +44,8 @@ If you already have a stable Ruby environment (currently Ruby 2.7.4) and feel co
 ## Submitting Pull Requests
 
 If you want to submit a pull request to update the docs, you'll need to [make a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of this repo and follow the steps described in the [Local Development with Docker](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#1-local-development-with-docker-recommended) section. After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
+
+Please note at this time, for maintenance and security reasons, we cannot accept any articles or examples that require the use of third party tools, such as third party orbs.
 
 ## Building js assets
 

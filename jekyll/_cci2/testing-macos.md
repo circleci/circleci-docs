@@ -142,7 +142,7 @@ jobs:
 
 Sample output:
 
-```bash
+```shell
 client              service                          allowed
 ------------------  -------------------------------  ----------
 com.apple.Terminal  kTCCServiceSystemPolicyAllFiles  1
@@ -176,7 +176,7 @@ jobs:
 
 Sample output:
 
-```bash
+```shell
 kTCCServiceMediaLibrary
 kTCCServiceSiri
 kTCCServiceMotion

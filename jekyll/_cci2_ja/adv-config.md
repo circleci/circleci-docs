@@ -211,7 +211,7 @@ jobs:
 サービスコンテナを使用して、データベースのテストを実行します。
 
 {:.tab.executors_four.Cloud}
-``` yaml
+``` yml
 version: 2.1
 
 orbs: 
@@ -256,10 +256,10 @@ jobs:
 ```
 
 {:.tab.executors_four.Server_3}
-``` yaml
+``` yml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -301,7 +301,7 @@ jobs:
 ```
 
 {:.tab.executors_four.Server_2}
-``` yaml
+``` yml
 version: 2
 
 jobs:
@@ -349,7 +349,7 @@ jobs:
 Docker コマンドを実行して Docker イメージをビルドします。 プライマリ Executor が Docker の場合、リモートの Docker 環境をセットアップします。
 
 {:.tab.executors_five.Cloud}
-``` yaml
+``` yml
 version: 2.1
 
 jobs:
@@ -374,7 +374,7 @@ jobs:
 ```
 
 {:.tab.executors_five.Server_3}
-``` yaml
+``` yml
 version: 2.1
 
 jobs:
@@ -399,7 +399,7 @@ jobs:
 ```
 
 {:.tab.executors_five.Server_2}
-``` yaml
+``` yml
 version: 2
 
 jobs:

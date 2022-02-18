@@ -33,7 +33,7 @@ KOTS の管理者コンソールにアクセスします。 Get to the KOTS Admi
 
 . *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)](必須)*: 次のコマンドにより、サービスの IP アドレスを取得します
 +
-```bash
+```shell
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
@@ -63,14 +63,14 @@ ifndef::env-gcp[]
 
 * *[erver_endpoint (サーバーエンドポイント)]* : Nomad サーバーエンドポイント（Nomad サーバー外部ロードバランサー の外部 IP アドレス）が必要です。 以下のコマンドで情報を入手します。
 +
-```bash
+```shell
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
-* クラスタの *Subnet ID (サブネット)*、 *VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* : 
+* クラスタの *Subnet ID (サブネット)*、 *VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* :
 以下のコマンドを実行して、クラスタの VPC ID ((vpcId)、CIDR (serviceIpv4Cidr)、およびサブネット (サブネットの ID)を入手します。
 +
-```bash
+```shell
 aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 ```
 +
@@ -100,7 +100,7 @@ aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 +
 次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 AWS の場合、 DNS サーバーは CIDR ブロック (`CidrBlock`) の３番目の IP です。たとえば、 CIDR ブロックが `10.100.0.0/16 `の場合、 3 番目の IP は `10.100.0.2`になります。
 +
-```bash
+```shell
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 ```
 +
@@ -155,7 +155,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
-```
+```hcl
 variable "project" {
   type    = string
   default = "<your-project>"
@@ -311,7 +311,7 @@ Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad
 
 * *[Nomad Load Balancer (Normad ロードバランサー)](必須)*
 +
-```bash
+```shell
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
@@ -395,7 +395,7 @@ ifndef::env-gcp[]
 +
 以下のコマンドにより、VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) および Cluster ARN (`arn`) 値が返されます。これらの情報はこのセクションを通して必要です。
 +
-```bash
+```shell
 aws eks describe-cluster --name=<your-cluster-name>
 ```
 
@@ -403,7 +403,7 @@ aws eks describe-cluster --name=<your-cluster-name>
 +
 以下のコマンドを実行して、VM サービス用のセキュリティーグループを作成します。
 +
-```bash
+```shell
 aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
 ```
 +
@@ -418,11 +418,11 @@ aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM
 +
 作成したセキュリティーグループと CIDR ブロック値を使ってセキュリティーグループを以下に適用します。
 +
-```bash
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 22 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
-```bash
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 2376 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
@@ -432,7 +432,7 @@ NOTE: CircleCI Server とは異なるサブネットに Nomad クライアント
 +
 次のコマンドを実行してセキュリティグループルールを適用し、ユーザーがジョブに SSH 接続できるようにします。
 +
-```bash
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 54782
 ```
 
@@ -440,7 +440,7 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 +
 プログラムでのアクセス権を持つ新規ユーザーを作成します。
 +
-```bash
+```shell
 aws iam create-user --user-name circleci-vm-service
 ```
 
@@ -568,7 +568,7 @@ Once done, you may skip to step 9 which is enabling vm-service in KOTS.
 +
 policy.json ファイルを作成したら、IAM ポリティーと作成したユーザーにアタッチします。
 +
-```bash
+```shell
 aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
 ```
 
@@ -576,7 +576,7 @@ aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-v
 +
 作成していない場合は、`circleci-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行し、作成することができます。
 +
-```bash
+```shell
 aws iam create-access-key --user-name circleci-vm-service
 ```
 
@@ -594,7 +594,7 @@ ifndef::env-aws[]
 
 以下のセクションを完了するにはクラスタに関する追加情報が必要です。 次のコマンドを実行します。
 
-```bash
+```shell
 gcloud container clusters describe
 ```
 
@@ -622,17 +622,17 @@ databaseEncryption:
 +
 以下のコマンドを実行して、GKE の VM サービス用のファイヤーウォール ルールを作成します。
 +
-```bash
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
 ```
 +
 NOTE: 自動モードを使用している場合は、https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づき Nomad クライアントの CIDR を検索できます。
 +
-```bash
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
 ```
 +
-```bash
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
 ```
 
@@ -640,14 +640,14 @@ gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network
 +
 VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス許可をより詳細に設定したい場合は、 コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメントを参照してください。
 +
-```bash
+```shell
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ```
 NOTE: If your are deploying CircleCI server in a shared VCP, you will want to create this user in the project that you intend to have your VM jobs run.
 
 . *サービスアカウントのメールアドレスを取得する*
 +
-```bash
+```shell
 gcloud iam service-accounts list --filter="displayName:circleci-server-vm service account" --format 'value(email)'
 ```
 
@@ -655,13 +655,13 @@ gcloud iam service-accounts list --filter="displayName:circleci-server-vm servic
 +
 コンピューティング インスタンス管理者 (ベータ版) ロールをサービスアカウントに適用します。
 +
-```bash
+```shell
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
 ```
 +
 さらに
 +
-```bash
+```shell
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ```
 
@@ -669,7 +669,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 +
 以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 サーバーインストールを設定する際に必要になります。
 +
-```bash
+```shell
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 
 ```

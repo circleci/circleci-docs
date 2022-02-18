@@ -126,7 +126,7 @@ parameters:
 
 ジョブがある Orb をインポートする際に、ワークフローから直接ジョブを参照することができます。
 
-```
+```yml
 version: 2.1
 
 orbs:
@@ -299,7 +299,7 @@ steps:
 ```
 
 {:.tab.fileInclude.file-sh}
-```bash
+```shell
 # これは bash ファイルですが、テキストベースのファイルであれば何でも構いません
 echo "Hello World"
 

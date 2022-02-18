@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI ランナーをmacOSにインストールする方法を説明します。 
+このページでは、CircleCI ランナーをmacOSにインストールする方法を説明します。
 
 NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
 
@@ -42,13 +42,13 @@ logging:
 
 `root` ユーザーとして、CircleCI ランナー設定ファイルの保存ディレクトリを作成します。
 
-```bash
+```shell
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'
 ```
 
 このディレクトリに、先ほど作成した `launch-agent-config.yaml` をコピーします。
 
-```bash
+```shell
 sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/launch-agent-config.yaml'
 ```
 
@@ -106,12 +106,12 @@ sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/lau
 
 これで、サービスをロードできます。
 
-```bash
+```shell
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 NOTE: 2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
-```bash
+```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 

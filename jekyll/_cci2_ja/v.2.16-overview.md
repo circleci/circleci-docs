@@ -75,18 +75,18 @@ Before performing a replicated version update, backup your data using the Backup
 
 - 以下のコマンドで CircleCI アプリケーションを停止させます。
 
-```
+```shell
     replicatedctl app stop
 ```
 
 Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
 
-```
+```shell
     replicatedctl app status inspect
 ```
 
 Example Output:
-```
+```json
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",
@@ -103,13 +103,13 @@ Example Output:
 
 - Replicated の更新を成功させるには、Docker を推奨バージョン 17.12.1 に更新する必要があります。
 
-```
+```shell
     sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 ```
 
 - 以下のコマンドを使用して Docker のバージョンを固定します。
 
-```
+```shell
     sudo apt-mark hold docker-ce
 ```
 
@@ -118,31 +118,31 @@ Example Output:
 
 Perform the Replicated update by executing the update script as follows:
 
-```
+```shell
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
 ```
 
 Double-check your replicated and docker versions:
 
-```
+```shell
     replicatedctl version    # 2.29.0
     docker -v                # 17.12.1
 ```
 
 Restart the app with
 
-```
+```shell
     replicatedctl app start
 ```
 
 The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
 
-```
+```shell
     replicatedctl app status inspect
 ```
 
 Example output:
-```
+```json
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",

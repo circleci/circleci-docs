@@ -112,8 +112,8 @@ PostGIS is available and can be used like this:
 
 To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
 
-```
-     steps:
+```yml
+    steps:
     # Add the Postgres 12.0 binaries to the path.
        - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV
 ```

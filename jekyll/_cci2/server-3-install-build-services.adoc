@@ -34,7 +34,7 @@ Locate and enter the following in Settings:
 . *Output Processor Load Balancer (required)* -
 The following command will provide the IP address of the service
 +
-```bash
+```shell
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
@@ -63,14 +63,14 @@ You will need some information about your cluster and server installation to com
 
 * *Server_endpoint* - You will need to know the Nomad Server endpoint, which is the external IP address of the nomad-server-external Loadbalancer. You can get this information with the following command:
 +
-```bash
+```shell
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
 * *Subnet ID (subnet)*, *VPC ID (vpcId)*, and *DNS server (dns_server)* of your cluster.
 Run the following command to get the cluster VPC ID (vpcId), CIDR block (serviceIpv4Cidr), and subnets (subnetIds):
 +
-```bash
+```shell
 aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 ```
 +
@@ -100,7 +100,7 @@ This will return something similar to the following:
 +
 Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16` so the third IP would be `10.100.0.2`.
 +
-```bash
+```shell
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 ```
 +
@@ -154,7 +154,7 @@ You will also need the following information:
 
 You can copy the following example to your local environment and fill in the appropriate information for your specific setup.
 
-```
+```hcl
 variable "project" {
   type    = string
   default = "<your-project>"
@@ -310,7 +310,7 @@ Enter the following in Settings:
 
 * *Nomad Load Balancer (required)*
 +
-```bash
+```shell
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
@@ -391,7 +391,7 @@ ifndef::env-gcp[]
 +
 The following command will return your VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) values, which you will need throughout this section:
 +
-```bash
+```shell
 aws eks describe-cluster --name=<your-cluster-name>
 ```
 
@@ -399,7 +399,7 @@ aws eks describe-cluster --name=<your-cluster-name>
 +
 Run the following commands to create a security group for VM service.
 +
-```bash
+```shell
 aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
 ```
 +
@@ -414,11 +414,11 @@ This will output a GroupID to be used in the next steps:
 +
 Use the security group you just created and CIDR block values to apply the security group to the following:
 +
-```bash
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 22 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
-```bash
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 2376 --cidr "<YOUR_serviceIpv4Cidr>"
 ```
 +
@@ -428,7 +428,7 @@ NOTE: If you created your Nomad Clients in a different subnet from CircleCI serv
 +
 Run the following command to apply the security group rules so users can SSH into their jobs:
 +
-```bash
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 54782
 ```
 
@@ -436,7 +436,7 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 +
 Create a new user with programmatic access:
 +
-```bash
+```shell
 aws iam create-user --user-name circleci-vm-service
 ```
 
@@ -563,7 +563,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
 +
 Once you have created the policy.json file attach it to an IAM policy and created user.
 +
-```bash
+```shell
 aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
 ```
 
@@ -571,7 +571,7 @@ aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-v
 +
 If you have not already, you will need an access key and secret for the `circleci-vm-service` user. You can create that by running the following command:
 +
-```bash
+```shell
 aws iam create-access-key --user-name circleci-vm-service
 ```
 
@@ -589,7 +589,7 @@ ifndef::env-aws[]
 
 You will need additional information about your cluster to complete the next section. Run the following command:
 
-```bash
+```shell
 gcloud container clusters describe
 ```
 
@@ -617,17 +617,17 @@ databaseEncryption:
 +
 Run the following commands to create a firewall rule for VM service in GKE:
 +
-```bash
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
 ```
 +
 NOTE: You can find the Nomad clients CIDR based on the region by referring to the https://cloud.google.com/vpc/docs/vpc#ip-ranges[table here] if you have used auto-mode.
 +
-```bash
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
 ```
 +
-```bash
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
 ```
 
@@ -635,14 +635,14 @@ gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network
 +
 We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role documentation as reference.
 +
-```bash
+```shell
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ```
 NOTE: If your are deploying CircleCI server in a shared VCP, you will want to create this user in the project that you intend to have your VM jobs run.
 
 . *Get the service account email address*
 +
-```bash
+```shell
 gcloud iam service-accounts list --filter="displayName:circleci-server-vm service account" --format 'value(email)'
 ```
 
@@ -650,13 +650,13 @@ gcloud iam service-accounts list --filter="displayName:circleci-server-vm servic
 +
 Apply the Compute Instance Admin (Beta) role to the service account.
 +
-```bash
+```shell
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
 ```
 +
 And
 +
-```bash
+```shell
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ```
 
@@ -664,7 +664,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 +
 After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
 +
-```bash
+```shell
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ```
 

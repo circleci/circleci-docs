@@ -8,11 +8,10 @@
  *
  * */
 export class SnippetFeedback {
-  constructor(snippetElement, snippetIndex) {
+  constructor(codeSnippetContainer, snippetIndex) {
     // Dom elements
-    this.snippetElement = snippetElement;
     this.snippetIndex = snippetIndex + 1; // let's offset 0 based indexes for data analysis.
-    this.codeSnippetContainer = null;
+    this.codeSnippetContainer = codeSnippetContainer;
     this.wasThisHelpfulContainer = null;
     this.feedbackForm = null;
     this.currCharCount = 0;
@@ -40,8 +39,6 @@ export class SnippetFeedback {
    * Construct a "Was this helpful" line, and inject it below the code snippet.
    */
   _renderWasThisHelpfulPrompt() {
-    const parentPreTag = this.snippetElement.closest('pre'); // get parent pre tag of code block
-    this.codeSnippetContainer = parentPreTag.closest('div'); // get div wrapping the pre tag.
     // Create some dom elements:
     const container = this._makeElement({
       kind: 'div',
@@ -50,7 +47,7 @@ export class SnippetFeedback {
     const textPrompt = this._makeElement({
       kind: 'span',
       className: 'prompt',
-      text: 'Was this helpful?',
+      text: 'Was this code helpful?',
     });
     const slash = this._makeElement({ kind: 'span', text: ' /' });
     this.yesBtnEl = this._renderYesNoButton({ text: 'Yes' });
@@ -272,19 +269,21 @@ function init() {
   window.OptimizelyClient.getVariationName({
     experimentKey: 'dd_docs_snippet_feedback_experiment_test',
     groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
-    experimentContainer: '.hljs',
+    experimentContainer: '.code-toolbar',
   }).then((variation) => {
     if (variation === 'treatment') {
       // NOTE: we are only adding the feedback form only when a user clicks the
       // copy-code button ( we don't add a form until the user copies code. )
       // The textarea forms are removed on submit.
-      const snippets = document.querySelectorAll('.code-badge-copy-icon');
-      for (let i = 0; i < snippets.length; i++) {
-        snippets[i].addEventListener(
+      const copyCodeBtns = document.querySelectorAll(
+        '.copy-to-clipboard-button',
+      );
+      for (let i = 0; i < copyCodeBtns.length; i++) {
+        copyCodeBtns[i].addEventListener(
           'click',
           (pointerEvent) => {
-            let snippetElement = pointerEvent.target;
-            new SnippetFeedback(snippetElement, i);
+            let btn = pointerEvent.target;
+            new SnippetFeedback(btn.closest('.code-toolbar'), i);
           },
           { once: true },
         );

@@ -46,7 +46,7 @@ API トークンの追加は、以下の手順で行います。
 1. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)に行き、API トークンの追加手順に従います。
 2.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
 
-    ```sh
+    ```shell
     export CIRCLE_TOKEN={your_api_token}
     curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
     ```
@@ -72,7 +72,7 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 
 フォーマットされた JSON を返すには、以下の例のように、 `text/plain` ヘッダーを記述します。
 
-```sh
+```shell
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
   --header 'Accept: text/plain'    \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
@@ -80,7 +80,7 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 
 圧縮した JSON を返す場合は、
 
-```sh
+```shell
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
   --header 'Accept: application/json'    \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
@@ -155,7 +155,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 4. `curl` を使って API トークンをテストし、動作に問題がないことを確認しましょう。 次のコードスニペットは、プロジェクトのすべてのパイプラインを照会する例です。 以下の例では、中括弧内 (`{}`) の値を、ユーザー名／組織名に応じた値に置き換える必要があります。
 
-    ```sh
+    ```shell
     # まず、CircleCI トークンを環境変数として設定します。
      export CIRCLECI_TOKEN={your_api_token}
 
@@ -203,7 +203,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 5. CircleCI API v2 の利点の一つは、パラメータを使ってパイプラインをリモートでトリガーできることです。 次のコードスニペットでは、 本文のパラメーターなしで `curl` を使ってパイプラインを簡単にトリガーします。
 
-    ```sh
+    ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -220,7 +220,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
     これだけでも便利ですが、この POST リクエストを送信する際にパイプラインのパラメーターをカスタマイズできるようにしたいと思います。 本文のパラメーターを`curl` リクエストに含めると ( `-d` を使用)、パイプラインの実行時にパイプラインの特定の属性（パイプラインパラメータ、ブランチ、 git タグ）をカスタマイズできます。 以下の例では、"my-branch " に対してトリガーするようパイプラインに指示しています。
 
-    ```sh
+    ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -254,7 +254,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 7. これで、以下のように POST リクエストで変数を渡す `curl` リクエストを実行できるようになりました。
 
-    ```sh
+    ```shell
     curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
       "parameters": {
         "image-tag": "4.8.2"
@@ -315,7 +315,7 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
 1. この GET API 呼び出しでは、  `parameters` キーの下に `project_slug` を定義します (<project_type>/<org_name>/<repo_name>) パラメータを、 `curl` リクエストの JSON ペイロードで返したい場合は、以下のようにします。
 
-    ```sh
+    ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
@@ -359,7 +359,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
 1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` パラメーターと `job_number` パラメーターを、 `parameters` キーの下に以下のように定義します。
 
-    ```sh
+    ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
@@ -432,7 +432,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
 1. まず、APIトークンが環境変数として設定されていることを確認します。 認証時にすでに行っているかもしれませんが、そうでない場合は、ターミナルでパーソナル API Tトークンに置き換えて以下のコマンドを実行してください。
 
-    ```
+    ```shell
     export CIRCLECI_TOKEN={your_api_token}
     ```
 
@@ -442,7 +442,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
 3.  次に、 `curl` コマンドを使用して、特定のジョブのアーティファクトのリストを返します。
 
-    ```sh
+    ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -451,7 +451,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
     選択したジョブに関連するアーティファクトがある場合、アーティファクトのリストが返ってきます。 以下は、ドキュメントをビルドするジョブのアーティファクトをリクエストしたときの出力の抜粋です。
 
-    ```
+    ```json
     {
       "path": "circleci-docs/assets/img/docs/walkthrough6.png",
       "node_index": 0,
@@ -471,7 +471,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
 4. 次に、この API 呼び出しを拡張して、アーティファクトをダウンロードすることができます。 アーティファクトをダウンロードしたい場所に移動して、リクエストの値をご自身の値に変更して以下のコマンドを実行してください。
 
-     ```sh
+     ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
@@ -497,7 +497,7 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
 1. この GET API 呼び出しでは、 `parameters` キーの下に、  `curl` リクエスト内で`project_slug` を以下のように定義します。
 
-    ```sh
+    ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'
@@ -597,7 +597,7 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
 1. ワークフローのデータを返すために行った前回の API 呼び出しで使用した `project-slug` を使用して、以下のインサイト エンドポイントに GET API 呼び出しを行います。
 
-    ```sh
+    ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'

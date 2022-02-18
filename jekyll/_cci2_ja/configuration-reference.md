@@ -8,25 +8,25 @@ version:
   - Cloud
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: true
+
 suggested:
-  - 
+  -
     title: 6 つの構成オプション
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: ダイナミック コンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: ダイナミック コンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-  - 
-    title: ジョブの最大実行時間の更新について
+
+  - title: ジョブの最大実行時間の更新について
     link: https://support.circleci.com/hc/ja/articles/4411086979867
     isExperiment: true
   - 
@@ -77,7 +77,7 @@ suggested:
 
 以下の例は、承認済みの `circleci` 名前空間に置かれた `hello-build` という名前の Orb を呼び出します。
 
-```
+```yml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -486,7 +486,7 @@ jobs:
 
 `only` や `ignore` に記述する内容は、完全一致のフルネームおよび正規表現で表すことができます。 正規表現は、文字列**全体**に一致する必要があります。 例えば下記のようにします。
 
-``` YAML
+```yml
 jobs:
   build:
     branches:
@@ -497,7 +497,7 @@ jobs:
 
 この場合は、"main" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
 
-``` YAML
+```yml
 jobs:
   build:
     branches:
@@ -738,7 +738,7 @@ jobs:
 
 場合によっては steps をより簡便に記述できます。 例えば `run` ステップを下記のように記述することが可能です。
 
-```
+```yml
 jobs:
   build:
     steps:
@@ -749,7 +749,7 @@ jobs:
 
 もう 1 つ、キーと値のペアの代わりにステップ名を文字列として使うシンプルな方法もあります。
 
-```
+```yml
 jobs:
   build:
     steps:
@@ -794,9 +794,7 @@ jobs:
 
 `run` を宣言するたびに新たなシェルが立ち上がることになります。 複数行の `command` を指定でき、その場合はすべての行が同じシェルで実行されます。
 
-
-
-``` YAML
+```yml
 - run:
     command: |
       echo Running test
@@ -827,10 +825,8 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 > パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェル コマンド、または中かっこ「{}」で囲まれたコマンド リストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
 
-つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 具体的な例は、次のようになります。
-
-
-``` YAML
+つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 例えば下記のようにします。
+```yml
 - run:
     command: |
       echo Running test
@@ -853,10 +849,8 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 > pipefail を有効にすると、パイプラインの戻り値は、0 以外のステータスで終了した最後 (右端) のコマンドのステータス値か、すべてのコマンドが正しく終了した場合に 0 となります。 シェルは、パイプライン内のすべてのコマンドの終了を待って値を返します。
 
-具体的な例は、次のようになります。
-
-
-``` YAML
+例えば下記のようにします。
+```yml
 - run: make test | tee test-output.log
 ```
 
@@ -881,7 +875,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 
 
-``` YAML
+```yml
 - run:
     name: X 仮想フレームバッファの実行
     command: Xvfb :99 -screen 0 1280x1024x24
@@ -899,9 +893,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 `run` ステップでは大変便利な簡略化構文を利用できます。
 
-
-
-``` YAML
+```yml
 - run: make test
 
 # 簡略化したうえで複数行のコマンドを実行
@@ -933,7 +925,7 @@ CircleCI のデフォルトでは、ジョブ ステップが `config.yml` に�
 
 
 
-``` YAML
+```yml
 - run:
     name: CodeCov.io データのアップロード
     command: bash <(curl -s https://codecov.io/bash) -F unittests
@@ -953,9 +945,7 @@ CircleCI のデフォルトでは、ジョブ ステップが `config.yml` に�
 
 以下の例では、`halt` を使用して、`develop` ブランチでジョブが実行されないようにしています。
 
-
-
-``` YAML
+```yml
 run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
@@ -1025,9 +1015,7 @@ steps:
 
 {:.no_toc}
 
-
-
-```
+```yml
 version: 2.1
 
 jobs: # conditional steps may also be defined in `commands:`
@@ -1078,9 +1066,7 @@ workflows:
 
 単純に `checkout` する場合は、ステップタイプは属性なしで文字列を記述するだけです。
 
-
-
-``` YAML
+```yml
 - checkout
 ```
 
@@ -1089,7 +1075,7 @@ workflows:
 
 
 
-``` YAML
+```yml
 - checkout
 - run: git submodule sync
 - run: git submodule update --init
@@ -1182,9 +1168,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 {:.no_toc}
 
 {% raw %}
-
-
-``` YAML
+```yml
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
@@ -1201,9 +1185,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 - インスタンスによっては、特定のワークスペースをキャッシュに保存する回避策もあります。
 
 {% raw %}
-
-
-``` YAML
+```yml
 - save_cache:
     key: v1-{{ checksum "yarn.lock" }}
     paths:
@@ -1241,7 +1223,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 
 
 
-``` YAML
+```yml
 steps:
   - save_cache:
       key: v1-myapp-cache
@@ -1279,9 +1261,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 {:.no_toc}
 
 {% raw %}
-
-
-``` YAML
+```yml
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
@@ -1340,9 +1320,7 @@ Web アプリケーションや API を通じて使うアーティファクト�
 
 {:.no_toc}
 
-
-
-``` YAML
+```yml
 - run:
     name: Jekyll サイトのビルド
     command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
@@ -1396,9 +1374,7 @@ test-results
 
 `config.yml` の構文
 
-
-
-``` YAML
+```yml
 - store_test_results:
     path: test-results
 ```
@@ -1434,7 +1410,7 @@ root キーは、ワークスペースのルートディレクトリとなるコ
 
 
 
-``` YAML
+```yml
 - persist_to_workspace:
     root: /tmp/dir
     paths:
@@ -1459,9 +1435,7 @@ root キーは、ワークスペースのルートディレクトリとなるコ
 
 {: #example-for-paths-key }
 
-
-
-``` YAML
+```yml
 - persist_to_workspace:
     root: /tmp/workspace
     paths:
@@ -1518,9 +1492,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 {:.no_toc}
 
-
-
-``` YAML
+```yml
 - attach_workspace:
     at: /tmp/workspace
 ```
@@ -1711,7 +1683,7 @@ workflows:
 
 
 
-```
+```yml
 workflows:
    version: 2
    nightly:
@@ -1863,7 +1835,7 @@ workflows:
 
 
 
-```
+```yml
       - hold:
           type: approval
           requires:
@@ -2221,9 +2193,7 @@ jobs:
 
 この例では、`POST` 本体に以下が含まれた状態でパイプラインがトリガーされたときに、テストが明示的に呼び出されない限りは `integration_tests` ワークフローは実行されないようにしています。
 
-
-
-```sh
+```json
 {
     "parameters": {
         "run_integration_tests": true

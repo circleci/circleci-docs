@@ -29,7 +29,7 @@ Use the [CircleCI API](https://circleci.com/docs/api/v1/#trigger-a-new-job) to t
 
 The following example shows how to trigger the `deploy_docker` job by using `curl`.
 
-```bash
+```shell
 curl -u ${CIRCLE_API_USER_TOKEN}: \
      -d 'build_parameters[CIRCLE_JOB]=deploy_docker' \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>

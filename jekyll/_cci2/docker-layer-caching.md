@@ -41,7 +41,7 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
-``` YAML
+```yml
 version: 2
 jobs:
   build:
@@ -84,7 +84,7 @@ With DLC enabled, the entirety of `/var/lib/docker` is cached to the remote volu
 
 To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
-``` YAML
+```yml
 - setup_remote_docker:
     docker_layer_caching: true  # default - false
 ```
@@ -101,7 +101,7 @@ If you run many concurrent jobs for the same project that depend on the same env
 
 Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
 
-``` YAML
+```yml
 machine:
   image: ubuntu-2004:202104-01  # any available image
   docker_layer_caching: true    # default - false
@@ -116,7 +116,7 @@ Let's use the following Dockerfile to illustrate how Docker Layer Caching works.
 {: #dockerfile }
 {:.no_toc}
 
-```
+```dockerfile
 FROM elixir:1.11.4
 
 # make Apt non-interactive
@@ -234,7 +234,7 @@ On subsequent commits, if our example Dockerfile has not changed, then DLC will 
 
 Now, let's say we add the following step to our Dockerfile, in between the `# use unicode` and `# install docker` steps:
 
-```
+```dockerfile
 # Install jq
 RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" \
   && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \

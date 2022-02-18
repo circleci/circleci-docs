@@ -230,7 +230,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 各キャッシュ キーは、1 つのデータキャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュキーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュキー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
 
-```sh
+```shell
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
@@ -238,7 +238,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 この例では、以下のような文字列が出力されます。
 
-```sh
+```shell
 {% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ={% endraw %}
 ```
 

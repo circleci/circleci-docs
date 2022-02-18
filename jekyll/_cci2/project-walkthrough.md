@@ -395,7 +395,7 @@ Other files required by Heroku are:
 
 The following commands would be used to manually build the app on Heroku for this demo before actual deployment.
 
-```
+```bash
 heroku create circleci-demo-python-flask # change this to a unique name
 heroku addons:create heroku-postgresql:hobby-dev
 heroku config:set FLASK_CONFIG=heroku

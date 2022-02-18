@@ -33,7 +33,7 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 4. Add a `config.yml` file inside the .circleci folder.
 5. Add the following contents to your `config.yml` file.
 
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
-{% endhighlight %}
+```
 
 Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
 
@@ -72,7 +72,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. Now, add a second `run` step and do an `ls -al` to see that all of your code is available.
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   build:
@@ -90,7 +90,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-{% endhighlight %}
+```
 
 ### Learnings
 {: #learnings }
@@ -109,7 +109,7 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 
 orbs:
@@ -136,7 +136,7 @@ jobs:
           name: Running in a Unique Container
           command: |
             node -v
-{% endhighlight %}
+```
 
 We also added a small `run` block that demonstrates we are running in a node container.
 
@@ -160,7 +160,7 @@ In the example below, an event triggering a build will cause `Hello-World` to st
 All of the job names are arbitrary.  This allows you to create workflows as complex as you need while staying meaningful and clear to the next developer that reads the `config.yml`.
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 jobs:
   Hello-World:
@@ -217,8 +217,7 @@ workflows:
      - Now-Complete:
          requires:
            - Hold-For-Approval
-
-{% endhighlight %}
+```
 
 ### Learnings
 {: #learnings }
