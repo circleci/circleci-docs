@@ -8,7 +8,6 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: true
 suggested:
   - 
     title: Keep environment variables private
@@ -20,7 +19,7 @@ suggested:
     title: Insert files as environment variables
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
   - 
-    title: Context deadline exceeded after 1 hour - Build timed out
+    title: '「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）'
     link: https://support.circleci.com/hc/ja/articles/4410707277083
     isExperiment: true
 ---
@@ -452,21 +451,21 @@ jobs:
 
 複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
 
-```bash
+```shell
 $ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 
 結果の値を CircleCI 環境変数に格納します。
 
-```bash
+```shell
 $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
 その変数を使用するコマンド内で変数をデコードします。
 
-```bash
+```shell
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```
@@ -482,7 +481,7 @@ CircleCI API v2 を使用すると、パイプライン パラメーターから
 
 下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
-```sh
+```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
@@ -510,7 +509,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 たとえば、以下のパラメーターを渡すとします。
 
-```sh
+```json
 {
   "build_parameters": {
     "foo": "bar",
@@ -523,7 +522,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 このビルドは、以下の環境変数を受け取ります。
 
-```sh
+```shell
 export foo="bar"
 export baz="5"
 export qux="{\"quux\": 1}"
@@ -534,7 +533,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 
 `build_parameters` キーを使用して環境変数を挿入することで、実行のたびに異なるターゲットに対して機能テストをビルドできます。 たとえば、ステージング環境へのデプロイ ステップを持つ実行で、さまざまなホストに対する機能テストをビルドするとします。 `bash` と `curl` を使用した以下の例のように、JSON 本体を `Content-type: application/json` で送信することで、`build_parameters` を使用できます (ただし、選択した言語の HTTP ライブラリを使用することも可能です)。
 
-```sh
+```json
 {
   "build_parameters": {
     "param1": "value1",
@@ -545,7 +544,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 
 たとえば、`curl` を使用する場合
 
-```sh
+```shell
 curl \
   --header "Content-Type: application/json" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -558,7 +557,7 @@ curl \
 
 このビルドは、以下の環境変数を受け取ります。
 
-```sh
+```shell
 export param1="value1"
 export param2="500"
 ```
