@@ -32,17 +32,27 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 4. .circleci フォルダーに `config.yml` ファイルを追加します。
 5. 以下の内容を `config.yml` ファイルに追加します。
 
-{% highlight yaml %}
-version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-{% endhighlight %}
+```yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+```
 
-設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
+コンフィグをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
 
 ### 学習ポイント
 {: #learnings }
 {:.no_toc}
 
-CircleCI 設定ファイルの構文はとても明快です。  特につまづきやすいポイントと言えば、インデントでしょう。  インデントの設定は必ず統一するように注意してください。  設定ファイルでよくある間違いはこれだけです。  それぞれの行について詳しく見ていきましょう。
+CircleCI コンフィグの構文はとても明快です。  特につまづきやすいポイントと言えば、インデントでしょう。  インデントの設定は必ず統一するように注意してください。  設定ファイルでよくある間違いはこれだけです。  それぞれの行について詳しく見ていきましょう。
 
 - 行 1: 使用している CircleCI プラットフォームのバージョンを示します。 `2.1` が最新のバージョンです。
 - 行 2、3: `jobs` レベルには、任意の名前が付いた子のコレクションが含まれます。  `build` は、`jobs` コレクション内の最初の名前付き子です。  この例では、`build` は唯一のジョブでもあります。
@@ -61,15 +71,25 @@ CircleCI 設定ファイルの構文はとても明快です。  特につまづ
 3. 次に、2 つ目の `run` ステップを追加し、`ls -al` を実行して、すべてのコードが利用可能であることを確認します。
 
 
-{% highlight yaml %}
-version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-
+```yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
       - run:
           name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-{% endhighlight %}
+```
 
 ### 学習ポイント
 {: #learnings }
@@ -80,30 +100,42 @@ version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: n
 - 行 13 ～ 17: `build` ジョブの 2 つ目の run は、チェックアウトの内容を (`ls -al` で) リストします。  これで、ブランチを操作できるようになります。
 
 ## パート 3: 処理の追加
-{: #part-three-thats-nice-but-i-need }
-コード ベースやプロジェクトは 1 つひとつ異なります。  それは問題ではありません。  多様性を認めています。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  ここでは、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
+I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: コードの取得 command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:10-browsers steps: - run: name: ノードを持つコンテナでの実行 command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: 承認の完了 command: | echo 'Do work once the approval has completed'
+コードベースやプロジェクトは 1つひとつ異なります。  それは問題ありません。  多様性は大切です。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  この例では、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
 
 1. このセクションでは、パート 1、2 のコードをさらに発展させます。  前のパートがまだ完了していない場合は、少なくともパート 1 を完了し、ブランチに作業中の `config.yml` ファイルを置いてください。
 
 2. ここで行うのはとてもシンプルですが、驚くほど強力な変更です。  ビルド ジョブに使用する Docker イメージへの参照を追加します。
 
 
-{% highlight yaml %}
+```yml
 version: 2.1
 
-orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built images: https://circleci.com/docs/2.0/circleci-images/ docker: - image: cimg/node:17.2-browsers steps: - checkout - browser-tools/install-browser-tools - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
+jobs:
+  build:
+    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
+    docker:
+      - image: cimg/node:17.2-browsers
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
       - run:
           name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-    
       - run:
           name: Running in a Unique Container
           command: |
             node -v
-{% endhighlight %}
+```
 
 ノードコンテナで実行していることを示す、小さな `run` ブロックも追加しています。
 
@@ -111,7 +143,7 @@ orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built image
 {: #learnings }
 {:.no_toc}
 
-設定ファイルに加えた上記の 2 つの変更は、作業をどのように実行するかに大きな影響を与えます。  実行環境をアップグレード、実験、または調整するために特別なコードやアクロバティックな操作は必要なく、Docker コンテナをジョブに関連付けてから、コンテナでジョブを動的に実行するだけです。  小さな変更を行うだけで、Mongo 環境を劇的にアップグレードしたり、基本イメージを拡大・縮小したり、さらには言語を変更することもできます。
+コンフィグに加えた上記の 2つの変更は、作業をどのように実行するかに大きな影響を与えます。  実行環境をアップグレード、実験、または調整するために特別なコードやアクロバティックな操作は必要なく、Docker コンテナをジョブに関連付けてから、コンテナでジョブを動的に実行するだけです。  小さな変更を行うだけで、Mongo 環境を劇的にアップグレードしたり、基本イメージを拡大・縮小したり、さらには言語を変更することもできます。
 
 - 行 4: yml のインライン コメントです。  どのようなコード単位でも同じですが、設定ファイルが複雑になるほど、コメントの利便性が高くなります。
 - 行 5、6: ジョブに使用する Docker イメージを示します。  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用します。
@@ -126,32 +158,55 @@ orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built image
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
 
-{% highlight yaml %}
-version: 2.1 jobs: Hello-World: docker: - image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline' I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: cimg/node:17.2 steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
+```yml
+image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  I-Have-Code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+  Run-With-Node:
+    docker:
+      - image: cimg/node:17.2
+    steps:
+      - run:
+          name: Running In A Container With Node
+          command: |
+            node -v
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'Do work once the approval has completed'
 
-workflows: Example_Workflow: jobs:
-
+workflows:
+ Example_Workflow:
+   jobs:
      - Hello-World
      - I-Have-Code:
          requires:
-    
            - Hello-World
      - Run-With-Node:
          requires:
-    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
-    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
-    
            - Hold-For-Approval
-
-{% endhighlight %}
+```
 
 ### 学習ポイント
 {: #learnings }
@@ -173,4 +228,4 @@ workflows: Example_Workflow: jobs:
 {: #see-also }
 {:.no_toc}
 
-[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
