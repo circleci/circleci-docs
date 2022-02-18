@@ -1,76 +1,95 @@
 ---
 layout: classic-docs
-title: "テスト メタデータの収集"
-short-title: "テスト メタデータの収集"
-description: "テスト メタデータの収集"
-order: 34
+title: "Collecting test data"
+description: "A guide to collecting test data in your CircleCI projects."
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-CircleCI では、XML ファイルからテスト メタデータを収集し、それを使用してジョブに関するインサイトを提供しています。 ここでは、よく使用されるテストランナー用にテストメタデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
+When you run tests in CircleCI there two ways to store your test results. You can use either [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project. When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
+
+Using the **`store_test_results` step** gives you access to:
+
+* The **Tests** pane in the CircleCI web app.
+* Test insights and flaky test detection.
+* テストの分割.
+
+Alternatively, storing test results as **artifacts** means you can look at the raw xml. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts).
+
+**Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
 * 目次
 {:toc}
 
-[`store_test_results `]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results)ステップを使用すると、テスト結果をアップロードして保存することができ、成功したテストおよび失敗したテストの読みやすい UI が提供されます。
+## 概要
+{: #overview }
 
-下記のように、特定の [ジョブ]({{ site.baseurl}}/2.0/concepts/#jobs) を表示して、*テスト* タブからテスト結果のインターフェースにアクセスできます。
+Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
+
+You can access the test results from the **Tests** tab when viewing a job, as shown below.
 
 ![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
 
-テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) ステップを使ってテスト結果をアップロードします。
+Below is an example of using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your `.circleci/config.yml`.
 
-設定ファイルでは、以下のように [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) キーが使用されます。
-
-```sh
-- store_test_results:
+```yml
+steps:
+  - run:
+  #...
+  # run tests and store XML files to a subdirectory, for example, test-results
+  #...
+  - store_test_results:
     path: test-results
 ```
 
-ここで、`path` キーは、JUnit XML または Cucumber JSON テスト メタデータ ファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。 この `path` の値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
+The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
 
+**Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+
+## Viewing storage usage
+{: #viewing-storage-usage }
+
+For information on viewing your stoarage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
+
+## テスト インサイト
+{: #test-insights }
+See the [Test Insights guide]({{site.baseurl}}/2.0/insights-tests/) for information on using the Insights feature to gather information about your tests, including flaky test detection, viewing alist of tests that fail most often, slowest tests and abn overall performance summary.
+
+Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+
+## Test Insights for server v2.x
+{: #test-insights-for-server-v2x }
 **If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![失敗したテストに関するインサイト]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
 _The above screenshot applies to CircleCI server v2.x only._
 
-**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## フォーマッタの有効化
 {: #enabling-formatters }
 
-Test metadata is not automatically collected in CircleCI until you enable the JUnit formatters. RSpec、Minitest、および Django に対して、以下の設定を追加してフォーマッタを有効化します。
+Test metadata is not automatically collected in CircleCI until you enable the JUnit formatters. RSpec、Minitest、および Django に対して、以下の構成を追加してフォーマッタを有効化します。
 
 - RSpec では、gemfile に以下を追加する必要があります。
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 - Minitest では、gemfile に以下を追加する必要があります。
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
-- Django は、[django-nose](https://github.com/django-nose/django-nose) テストランナーを使用して設定する必要があります。
+- Django は、[django-nose](https://github.com/django-nose/django-nose) テスト ランナーを使用して構成する必要があります。
 
 **注意:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{ site.baseurl}}/2.0/testing-ios/)をご覧ください。
 
-## カスタム テストステップでのメタデータの収集
-{: #metadata-collection-in-custom-test-steps }
-
-ほとんどのテストランナーで何らかの形式でサポートされている JUnit XML 出力を生成するカスタム テストステップがある場合は、 XML ファイルを以下のようにサブディレクトリに書き込みます。
-```
-- store_test_results:
-    path: /tmp/test-results
-```
-
-### カスタム テストランナーの例
+## カスタム テストランナーの例
 {: #custom-test-runner-examples }
 
 このセクションでは、以下のテスト ランナーの例を示します。
@@ -95,31 +114,28 @@ gem 'minitest-ci'
 | Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                   | [例]({{site.baseurl}}/2.0/collect-test-data/#test2junit-for-clojure-tests)                                                                     |  |  |
 {: class="table table-striped"}
 
-#### JavaScript
-`.circleci/config.yml` の例は以下のとおりです。
+### JavaScript
+{: #javascript }
 
-##### Jest
+#### Jest
 {: #jest }
-{:.no_toc}
 
 Jest で JUnit の互換テストデータを出力するには、[jest-junit](https://www.npmjs.com/package/jest-junit)を使用します。
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
-```yaml
+```yml
 steps:
   - run:
-      name: カバレッジ レポーターのインストール
+      name: Install JUnit coverage reporter
       command: yarn add --dev jest-junit
   - run:
-      name: JUnit でレポーターとしてテストを実行
+      name: Run tests with JUnit as reporter
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
         JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
   - store_test_results:
       path: ./reports/junit/
-  - store_artifacts:
-      path: ./reports/junit
 ```
 
 全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
@@ -128,15 +144,14 @@ steps:
 
 `--runInBand` の詳細については、[Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) ドキュメントを参照してください。 この問題の詳細については、公式 Jest リポジトリの [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) と [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) を参照してください。
 
-#### Node.js 用の Mocha
+### Node.js 用の Mocha
 {: #mocha-for-node }
-{:.no_toc}
 
 Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 
 `.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
-```yaml
+```yml
     steps:
       - checkout
       - run: npm install
@@ -148,18 +163,15 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
           when: always
       - store_test_results:
           path: ~/junit
-      - store_artifacts:
-          path: ~/junit
 ```
 
-#### Mocha と nyc の組み合わせ
+### Mocha と nyc の組み合わせ
 {: #mocha-with-nyc }
-{:.no_toc}
 
 以下は、[marcospgp](https://github.com/marcospgp) から提供された、Mocha と nyc の組み合わせに使用できるサンプルの全文です。
 
 {% raw %}
-```yaml
+```yml
 version: 2
 jobs:
     build:
@@ -246,27 +258,20 @@ jobs:
             - store_test_results:
                 path: reports
 
-            - store_artifacts:
-                path: ./reports/mocha/test-results.xml
-
-            - store_artifacts:
-                path: ./reports/eslint/eslint.xml
-
             - store_artifacts: # upload test coverage as artifact
                 path: ./coverage/lcov.info
                 prefix: tests
 ```
 {% endraw %}
 
-##### Karma
+#### Karma
 {: #karma }
-{:.no_toc}
 
 Karma テストランナーで JUnit テストを出力するには、[karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) を使用します。
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
-```yaml
+```yml
     steps:
       - checkout
       - run: npm install
@@ -278,8 +283,6 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: ./junit
-      - store_artifacts:
           path: ./junit
 ```
 
@@ -298,70 +301,59 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 // 追加コンフィグ...
 ```
 
-#### Node.js 用の AVA
+### Node.js 用の AVA
 {: #ava-for-node }
-{:.no_toc}
 
 [AVA](https://github.com/avajs/ava) テスト ランナーで JUnit テストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit) を指定して TAP レポーターを使用します。
 
 `.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
-```
+```yml
     steps:
       - run:
           command: |
-            yarn add ava tap-xunit --dev # または npm も使用できます。
+            yarn add ava tap-xunit --dev # or you could use npm
             mkdir -p ~/reports
             ava --tap | tap-xunit > ~/reports/ava.xml
           when: always
       - store_test_results:
           path: ~/reports
-      - store_artifacts:
-          path: ~/reports
 ```
 
 
-#### ESLint
+### ESLint
 {: #eslint }
-{:.no_toc}
 
 [ESLint](http://eslint.org/) から JUnit 結果を出力するには、[JUnit フォーマッタ](http://eslint.org/docs/user-guide/formatters/#junit)を使用します。
 
 `.circleci/config.yml` の作業テスト セクションは、以下のようになります。
 
-```
+```yml
     steps:
-
       - run:
           command: |
-            yarn add ava tap-xunit --dev # または npm を使用できます
             mkdir -p ~/reports
-            ava --tap | tap-xunit > ~/reports/ava.xml
+            eslint ./src/ --format junit --output-file ~/reports/eslint.xml
           when: always
-
       - store_test_results:
-          path: ~/reports
-
-      - store_artifacts:
           path: ~/reports
 ```
 
-#### Ruby
+### Ruby
 {: #ruby }
 
-###### RSpec
+##### RSpec
 {: #rspec }
-{:.no_toc}
 
 カスタム `rspec` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
-```
+```ruby
 gem 'rspec_junit_formatter'
 ```
 
 さらに、テスト コマンドを以下のように変更します。
 
-```
+```yml
     steps:
 
       - checkout
@@ -374,19 +366,18 @@ gem 'rspec_junit_formatter'
           path: test/reports
 ```
 
-##### Minitest
+#### Minitest
 {: #minitest }
-{:.no_toc}
 
 カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
-```
+```ruby
 gem 'minitest-ci'
 ```
 
 さらに、テスト コマンドを以下のように変更します。
 
-```
+```yml
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -401,22 +392,20 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 詳細については、[minitest-ci README](https://github.com/circleci/minitest-ci#readme) を参照してください。
 
-#### Cucumber
+### Cucumber
 {: #cucumber }
 
 カスタム Cucumber ステップの場合は、JUnit フォーマッタを使用してファイルを生成し、それを `cucumber` ディレクトリに書き込む必要があります。  `.circleci/config.yml` ファイルに追加するコードの例は以下のとおりです。
 
-```yaml
+```yml
     steps:
       - run:
-          name: テスト結果の保存
+          name: Save test results
           command: |
             mkdir -p ~/cucumber
             bundle exec cucumber --format junit --out ~/cucumber/junit.xml
           when: always
       - store_test_results:
-          path: ~/cucumber
-      - store_artifacts:
           path: ~/cucumber
 ```
 
@@ -424,30 +413,27 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 または、Cucumber の JSON フォーマッタを使用する場合は、出力ファイルに `.cucumber` で終わる名前を付け、それを `/cucumber` ディレクトリに書き出します。 例えば下記のようにします。
 
-```yaml
+```yml
     steps:
       - run:
-          name: テスト結果の保存
+          name: Save test results
           command: |
             mkdir -p ~/cucumber
             bundle exec cucumber --format pretty --format json --out ~/cucumber/tests.cucumber
           when: always
       - store_test_results:
           path: ~/cucumber
-      - store_artifacts:
-          path: ~/cucumber
 ```
 
-#### Python
+### Python
 {: #python }
 
-##### pytest
+#### pytest
 {: #pytest }
-{:.no_toc}
 
 `pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
 
-```
+```yml
       - run:
           name: テストの実行
           command: |
@@ -457,19 +443,15 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
       - store_test_results:
           path: test-results
-
-      - store_artifacts:
-          path: test-results
 ```
 
-##### unittest
+#### unittest
 {: #unittest }
-{:.no_toc}
 
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
 After adding pytest to your project, you can produce and upload the test results like this:
-```
+```yml
       - run:
           name: テストの実行
           command: |
@@ -479,21 +461,17 @@ After adding pytest to your project, you can produce and upload the test results
 
       - store_test_results:
           path: test-results
-
-      - store_artifacts:
-          path: test-results
 ```
 
-#### Java
+### Java
 {: #java }
 
-#### Java JUnit の結果に使用する Maven Surefire プラグイン
+### Java JUnit の結果に使用する Maven Surefire プラグイン
 {: #maven-surefire-plugin-for-java-junit-results }
-{:.no_toc}
 
 [Maven](http://maven.apache.org/) ベースのプロジェクトをビルドする場合は、[Maven Surefire プラグイン](http://maven.apache.org/surefire/maven-surefire-plugin/)を使用して XML 形式のテスト レポートを生成することがほとんどです。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
-```yaml
+```yml
     steps:
       - run:
           name: テスト結果の保存
@@ -503,17 +481,14 @@ After adding pytest to your project, you can produce and upload the test results
           when: always
       - store_test_results:
           path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 ```
 
-#### Gradle JUnit のテスト結果
+### Gradle JUnit のテスト結果
 {: #gradle-junit-test-results }
-{:.no_toc}
 
 [Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テスト レポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
-```yaml
+```yml
     steps:
       - run:
           name: テスト結果の保存
@@ -523,43 +498,44 @@ After adding pytest to your project, you can produce and upload the test results
           when: always
       - store_test_results:
           path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 ```
 
-#### PHP
+### PHP
 {: #php }
 
-##### PHPUnit
+#### PHPUnit
 {: #phpunit }
-{:.no_toc}
 
 PHPUnit テストの場合は、`--log-junit` コマンド ライン オプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
 
-```
-    {{ site.baseurl }}/ja/2.0/collect-test-data/#phpunit
+```yml
+    steps:
+      - run:
+          command: |
+            mkdir -p ~/phpunit
+            phpunit --log-junit ~/phpunit/junit.xml tests
+          when: always
+      - store_test_results:
+          path: ~/phpunit
 ```
 
-#### .NET
+### .NET
 {: #dot-net }
 
-##### Visual Studio/.NET Core テスト用の trx2junit
+#### Visual Studio/.NET Core テスト用の trx2junit
 {: #trx2junit-for-visual-studio-net-core-tests }
 {:.no_toc}
 Visual Studio または .NET Core で出力される trx ファイルを XML 形式に変換するには、[trx2junit](https://github.com/gfoidl/trx2junit) を使用します。
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
-```yaml
-    A working `.circleci/config.yml` section might look like this:
-
-```yaml
+```yml
     steps:
       - checkout
       - run: dotnet build
       - run: dotnet test --no-build --logger "trx"
       - run:
-          name: テスト結果
+          name: test results
           when: always
           command: |
               dotnet tool install -g trx2junit
@@ -567,17 +543,13 @@ Visual Studio または .NET Core で出力される trx ファイルを XML 形
               trx2junit tests/**/TestResults/*.trx
       - store_test_results:
           path: tests/TestResults
-      - store_artifacts:
-          path: tests/TestResults
-          destination: TestResults
 ```
 
-#### Clojure
+### Clojure
 {: #clojure }
 
-##### Kaocha
+#### Kaocha
 {: #kaocha }
-{:.no_toc}
 
 Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
 
@@ -599,8 +571,8 @@ Edit the kaocha config file `test.edn` to use this test reporter
 ```
 
 Add the store_test_results step your `.circleci/config.yml`
-```yaml
-version: 2
+```yml
+version: 2.1
 jobs:
   build:
     docker:
@@ -612,16 +584,15 @@ jobs:
           path: junit.xml
 ```
 
-##### Clojure テスト用の test2junit
+#### Clojure テスト用の test2junit
 {: #test2junit-for-clojure-tests }
-{:.no_toc}
 
 Clojure のテスト出力を XML 形式に変換するには、[test2junit](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、[サンプルプロジェクト](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
 
 ## API
 {: #api }
 
-実行時のテスト メタデータに API からアクセスするには、[テスト メタデータ API ドキュメント](https://circleci.com/docs/api/#get-build-test-metadata)を参照してください。
+To access test metadata for a job from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v2/#operation/getTests).
 
 ## 関連項目
 {: #see-also }
