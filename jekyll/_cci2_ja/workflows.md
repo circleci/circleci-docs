@@ -8,7 +8,6 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: true
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
