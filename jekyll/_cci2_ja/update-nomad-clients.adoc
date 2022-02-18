@@ -16,8 +16,8 @@ version:
 
 WARNING: This update must be run before upgrading to server v2.19
 
-* **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.  
-* This change is only compatible with CircleCI server versions greater than or equal to 2.19.0 
+* **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.
+* This change is only compatible with CircleCI server versions greater than or equal to 2.19.0
 * If you are using the Static version of CircleCI server, you will need to recreate your builders manually. Refer to the guide linked https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[here] for the updated scripts and further instruction.
 
 
@@ -38,7 +38,7 @@ WARNING: This update must be run before upgrading to server v2.19
 . In the left navigation pane, select `Launch Configurations`
 . Locate the launch configuration that matches the one found in step 3.
 . In the bottom pane, select the `View User Data ` link
-. Scroll down or search for the `Creating config.hcl` section.  
+. Scroll down or search for the `Creating config.hcl` section.
 . Write down or copy the service box private IP address located in the client portion of the config located next to `servers = ["IP_ADDRESS:4647"]` You will need this in the next step.
 +
 ```
@@ -56,21 +56,21 @@ client {
 
 
 
-### Create a New Launch Configuration 
+### Create a New Launch Configuration
 
-. Right-click the launch configuration and select `Copy Launch Configuration` 
+. Right-click the launch configuration and select `Copy Launch Configuration`
 . At the top of the screen, select `3. Configure details `
 . Update the name to something meaningful and easy to identify IE `nomad-client-lc-20200117`
 . Select the `Advanced Details` dropdown
-. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.  
-. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box. 
+. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.
+. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box.
 . Select the `Skip to review` button at the bottom right of the screen
 . Select the `Create Launch Configuration` Button
 . Verify that the SSH key-pair name is correct and select `Create launch configuration` button
 
 
 
-### Update the Auto Scaling group 
+### Update the Auto Scaling group
 
 . Return the `Auto Scaling Groups` page
 . Locate the auto scaling group we identified in the `Find the Launch Configuration and Service Box IP address` section above
@@ -87,7 +87,7 @@ There are many strategies you can use the update the builders.  Some ideas inclu
 * Terminate all of the existing nomad client instances and allow the auto scaler to recreate them.
 * Edit the auto scaling configuration and set the `Desired Capacity`  to 0.  Once the existing instances have terminated, set the `Desired Capacity` to the original number.
 
-Please use whatever works best with your existing methods of auto scaling group management. 
+Please use whatever works best with your existing methods of auto scaling group management.
 
 
 
@@ -97,7 +97,7 @@ Please use whatever works best with your existing methods of auto scaling group 
 
 . Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
 +
-```
+```shell
 ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
 ID        DC         Name                 Class        Drain  Eligibility  Status
 0cf07b07  default    i-070fdad5f0edef4c8  linux-64bit  false  eligible     ready
@@ -110,7 +110,7 @@ ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
 
 ## Updated Nomad Client Launch Configuration Script (Last Update: July 10, 2020)
 
-```bash
+```shell
 #!/bin/bash
 
 set -exu

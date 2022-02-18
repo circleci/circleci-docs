@@ -24,7 +24,7 @@ This document describes the available executor types (`docker`, `machine`, `wind
 {:.no_toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
 An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of four environments:
@@ -37,7 +37,7 @@ An *executor type* defines the underlying technology or environment in which to 
 It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
 
 - Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
-- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version such as 16.04.
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
 
 ## Using Docker
@@ -216,11 +216,9 @@ medium                | 2     | 4GB
 medium+               | 3     | 6GB
 large                 | 4     | 8GB
 xlarge                | 8     | 16GB
-2xlarge<sup>(2)</sup> | 16    | 32GB
-2xlarge+<sup>(2)</sup>| 20    | 40GB
+2xlarge               | 16    | 32GB
+2xlarge+              | 20    | 40GB
 {: class="table table-striped"}
-
-<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
 
 Where example usage looks like the following:
 
@@ -245,9 +243,6 @@ Using the `machine` executor gives your application full access to OS resources 
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-**Note**:
-Using `machine` may require additional fees in a future pricing update.
-
 To use the machine executor,
 set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
 
@@ -270,8 +265,7 @@ The following example uses an image and enables [Docker Layer Caching]({{ site.b
 version: 2.1
 jobs:
   build:
-    machine:
-      docker_layer_caching: true    # default - false
+    machine: true
 ```
 
 **Note:**
@@ -283,8 +277,6 @@ The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on m
 ## Using macOS
 {: #using-macos }
 
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
-
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. In macOS, the following resources classes are available:
 
 Class                 | vCPUs | RAM
@@ -292,6 +284,7 @@ Class                 | vCPUs | RAM
 medium                | 4 @ 2.7 GHz     | 8GB
 macos.x86.medium.gen2 | 4 @ 3.2 GHz     | 8GB
 large                 | 8 @ 2.7 GHz     | 16GB
+macos.x86.metal.gen1<sup>(1)</sup>                 | 12 @ 3.2 GHz     | 32GB
 {: class="table table-striped"}
 
 You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
@@ -307,6 +300,8 @@ jobs:
       # with Xcode 11.3 installed
       - run: xcodebuild -version
 ```
+
+<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 ## Using the Windows executor
 {: #using-the-windows-executor }
@@ -339,7 +334,7 @@ version: 2
 jobs:
   build: # name of your job
     machine:
-      image: windows-default # Windows machine image
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment

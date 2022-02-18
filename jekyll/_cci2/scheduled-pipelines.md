@@ -27,10 +27,10 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 
 - Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context).
 - Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
-- Modify the schedule without having to edit `config.yml`.
-- Interact with auto-cancelling of pipelines.
-- Specify pipeline parameters associated with a schedule.
-- Consolidate the management of common schedules.
+- Modify the schedule without having to edit `.circleci/config.yml`.
+- Take advantage of [auto-cancelling]({{site.baseurl}}/2.0/skip-build/#auto-cancelling).
+- Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- Manage common schedules, e.g. across workflows.
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
 
@@ -51,7 +51,7 @@ If your project has no scheduled workflows and you would like to try out schedul
 1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/2.0/managing-api-tokens/).
 2. Create a new schedule using the API. For example:
 
-```sh
+```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <your-cci-token>' \
 --header 'Content-Type: application/json' \
@@ -77,15 +77,15 @@ For additional information, refer to the **Schedule** section under the [API v2 
 {: #project-settings }
 {:.no_toc}
 
-1. In the CircleCI application, go to your project’s settings. There are various ways to get there. Select **Projects** in the sidebar, then the ellipsis (...) next to your project and select Project Settings. You can also click on the individual project from the list and find the **Project Settings** on the project's landing page.
+1. In the CircleCI application, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project. You can also find the **Project Settings** button on each project's landing page.
 2. Navigate to **Triggers**.
 3. To create a new schedule, click **Add Scheduled Trigger**.
-4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor, then save the trigger.
+4. Define the new schedule's name, timetable, pipeline parameters, and attribution actor (i.e. user associated with the schedule), then save the trigger.
 
 ### Migrate scheduled workflows to scheduled pipelines
 {: #migrate-scheduled-workflows }
 
-The current method for scheduling work on your projects is to us the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
+The current method for scheduling work on your projects is to use the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
 
 * Cannot control the actor, so scheduled workflows can't use restricted contexts.
 * Cannot control the interaction with auto-cancelling of pipelines.
@@ -174,10 +174,12 @@ other-workflow:
 
 **A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
 
-```sh
+```shell
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```
+
+`project-slug` takes the form of `vcs-slug/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
 
 **Q:** Why is my scheduled pipeline not running?
 
@@ -185,3 +187,13 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 * Is the actor who is set for the scheduled pipelines still part of the organization?
 * Is the branch set for the schedule deleted?
 * Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
+
+**Q:** Why did my scheduled pipeline run later than expected?
+
+**A:** There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to [the Cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).
+
+For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window.
+Note that it does not mean that it will run at 08:00 UTC exactly.
+
+However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run.
+In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.

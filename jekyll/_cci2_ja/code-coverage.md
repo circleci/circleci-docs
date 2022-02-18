@@ -21,7 +21,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 {:toc}
 
 
-## Viewing Coverage on CircleCI
+## CircleCI でのカバレッジの表示
 {: #viewing-coverage-on-circleci }
 
 コードカバレッジ レポートを直接 CircleCI にアップロードできます。 最初に、プロジェクトにカバレッジ ライブラリを追加し、CircleCI の[アーティファクト ディレクトリ]({{ site.baseurl }}/2.0/artifacts/)にカバレッジ レポートを書き込むようにビルドを設定します。 コードカバレッジ レポートはビルドアーティファクトとして、参照またはダウンロード可能な場所に保存されます。 カバレッジ レポートへのアクセス方法の詳細については、[ビルドアーティファクトに関するドキュメント]({{ site.baseurl }}/ja/2.0/artifacts/)を参照してください。
@@ -36,7 +36,7 @@ CircleCI は、組み込まれている CircleCI 機能をオープンソース 
 
 [SimpleCov](https://github.com/colszowka/simplecov) は、よく使用される Ruby コードカバレッジ ライブラリです。 まず、`simplecov` gem を `Gemfile` に追加します。
 
-```
+```ruby
 gem 'simplecov', require: false, group: :test
 ```
 
@@ -59,7 +59,94 @@ end
 
 次に、カバレッジ レポートをアップロードするために `.circleci/config.yaml` を設定します。
 
+{:.tab.ruby_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+        environment:
+          RAILS_ENV: test
+      - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run Tests
+          command: bin/rails test
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.ruby_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+        environment:
+          RAILS_ENV: test
+      - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - run:
+          name: Run Tests
+          command: bin/rails test
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.ruby_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -70,7 +157,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
         environment:
           RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine
+      - image: cimg/postgres:9.6
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
@@ -96,37 +183,109 @@ jobs:
           path: coverage
 ```
 
-さらに詳しい内容は、[SimpleCov README](https://github.com/colszowka/simplecov/#getting-started) を参照してください。
+[simplecov README](https://github.com/colszowka/simplecov/#getting-started) に、さらに詳細な説明があります。
 
 ## Python
 {: #python }
 
-[Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) は、Python でコードカバレッジ レポートを生成する際によく使用されるライブラリです。 まず、以下のように Coverage.py をインストールします。
+[Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
 
-```sh
+```shell
 pip install coverage
 ```
 
-```sh
+```shell
 # これまでは、たとえば以下のように Python プロジェクトを実行していました。
 python my_program.py arg1 arg2
 
 # ここでは、コマンドにプレフィックス "coverage" を付けます。
 coverage run my_program.py arg1 arg2
-
 ```
 
 この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジレポートを生成できます。
 
-```sh
+```shell
 coverage run -m pytest
 coverage report
 coverage html  # ブラウザーで htmlcov/index.html を開きます。
 ```
 
-生成されたファイルは `htmlcov/` 下にあり、設定の `store_artifacts` ステップでアップロードできます。
+生成されたファイルは `htmlcov/` 下にあり、コンフィグの `store_artifacts` ステップでアップロードできます。
 
+{:.tab.python_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+    - image: cimg/python:3.10-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  ## コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+    - checkout
+    - browser-tools/install-browser-tools
+    - run:
+        name: Setup testing environment
+        command: |
+          pip install '.[test]' --user
+          echo $HOME
+    - run:
+        name: Run Tests
+        command: |
+          $HOME/.local/bin/coverage run -m pytest
+          $HOME/.local/bin/coverage report
+          $HOME/.local/bin/coverage html  # ブラウザで htmlcov/index.html を開きます。
+    - store_artifacts:
+        path: htmlcov
+workflows:
+  test-workflow:
+    jobs:
+    - build
+```
+
+{:.tab.python_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+    - image: cimg/python:3.10-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+    - checkout
+    - browser-tools/install-browser-tools
+    - run:
+        name: Setup testing environment
+        command: |
+          pip install '.[test]' --user
+          echo $HOME
+    - run:
+        name: Run Tests
+        command: |
+          $HOME/.local/bin/coverage run -m pytest
+          $HOME/.local/bin/coverage report
+          $HOME/.local/bin/coverage html  # ブラウザで htmlcov/index.html を開きます。
+    - store_artifacts:
+        path: htmlcov
+workflows:
+  test-workflow:
+    jobs:
+    - build
+```
+
+{:.tab.python_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -237,11 +396,56 @@ workflows:
 
 ```
 
-`mvn test` を実行するとコードカバレッジ レポート (`exec`) ファイルが生成され、他の多くのカバレッジ ツールと同様に、このファイルが `html` ページにも変換されます。 上記の Pom ファイルは `target` ディレクトリに書き込みを行い、これを CircleCI `config.yml` ファイルでアーティファクトとして保存できます。
+`mvn test` を実行するとコードカバレッジレポート (`exec`) ファイルが生成され、他の多くのカバレッジツールと同様に、このファイルが `html` ページにも変換されます。 上記の Pom ファイルは `target` ディレクトリに書き込みを行い、これを CircleCI `config.yml` ファイルでアーティファクトとして保存できます。
 
 上記の例に対応する最小の CI 設定は以下のとおりです。
 
+{:.tab.java_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run : mvn test
+      - store_artifacts:
+          path:  target
+```
+
+{:.tab.java_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run : mvn test
+      - store_artifacts:
+          path:  target
+```
+
+{:.tab.java_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -258,11 +462,63 @@ jobs:
 ```
 
 ## JavaScript
-`.circleci/config.yml` の例は以下のとおりです。
+{: #javascript }
 
-[Istanbul](https://github.com/gotwarlost/istanbul) は、JavaScript プロジェクトでコードカバレッジ レポートの生成によく使用されるライブラリです。 人気のテストツールである Jest でも、Istanbul を使用してレポートを生成します。 以下のコード例を参照してください。
+[Istanbul](https://github.com/gotwarlost/istanbul) は、JavaScript プロジェクトでコードカバレッジレポートの生成によく使用されるライブラリです。 人気のテスト ツールである Jest でも、Istanbul を使用してレポートを生成します。 以下のコード例を参照してください。
+
+{:.tab.js_example.Cloud}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:17.2-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run: npm install
+      - run:
+          name: "Run Jest and Collect Coverage Reports"
+          command: jest --collectCoverage=true
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.js_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:17.2-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run: npm install
+      - run:
+          name: "Run Jest and Collect Coverage Reports"
+          command: jest --collectCoverage=true
+      - store_artifacts:
+          path: coverage
+```
+
+{:.tab.js_example.Server_2}
 
 ```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -284,12 +540,60 @@ jobs:
 ## PHP
 {: #php }
 
-PHPUnit は、よく使用される PHP のテスト フレームワークです。 PHP 5.6 より前のバージョンを使用している場合は、コードカバレッジ レポートを生成するには [PHP Xdebug](https://xdebug.org/) をインストールする必要があります。 PHP 5.6以降のバージョンでは、phpdbgというツールにアクセスできます。 `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report` コマンドでレポートを生成できます。
+PHPUnit は、よく使用される PHP のテストフレームワークです。 PHP 5.6 より前のバージョンを使用している場合は、コードカバレッジ レポートを生成するには [PHP Xdebug](https://xdebug.org/) をインストールする必要があります。 PHP 5.6以降のバージョンでは、phpdbgというツールにアクセスできます。 `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report` コマンドでレポートを生成できます。
 
-以下に示した基本の `.circleci/config.yml` では、設定の最後にある `store_artifacts` ステップでカバレッジレポートをアップロードしています。
+以下に示した基本の `.circleci/config.yml` では、コンフィグの最後にある `store_artifacts` ステップでカバレッジレポートをアップロードしています。
 
-
+{:.tab.php_example.Cloud}
 ```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。 e
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: "Run tests"
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path:  build/coverage-report
+```
+
+{:.tab.php_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: "Run tests"
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path:  build/coverage-report
+```
+
+{:.tab.php_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
 version: 2
 jobs:
   build:
@@ -310,9 +614,9 @@ jobs:
 ## Golang
 {: #golang }
 
-Go には、コードカバレッジ レポートを生成する機能が組み込まれています。 レポートを生成するには、`-coverprofile=c.out` フラグを追加します。 これでカバレッジレポートが生成され、`go tool` を使用して html に変換できます。
+Go には、コードカバレッジレポートを生成する機能が組み込まれています。 レポートを生成するには、`-coverprofile=c.out` フラグを追加します。 これでカバレッジレポートが生成され、`go tool` を使用して html に変換できます。
 
-```sh
+```shell
 go test -cover -coverprofile=c.out
 go tool cover -html=c.out -o coverage.html
 ```
@@ -324,7 +628,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.16
+      - image: cimg/go:1.16
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
@@ -332,7 +636,7 @@ jobs:
       - checkout
       - run: go build
       - run:
-          name: "アーティファクト用の一時ディレクトリの作成"
+          name: "Create a temp directory for artifacts"
           command: |
             mkdir -p /tmp/artifacts
       - run:
@@ -345,13 +649,13 @@ jobs:
 ```
 
 
-# Using a code coverage service
+## コードカバレッジ サービスの使用
 {: #using-a-code-coverage-service }
 
-## Codecov
+### Codecov
 {: #codecov }
 
-Codecov には、カバレッジレポートのアップロードを簡単に行うための [Orb](https://circleci.com/ja/orbs) があります。
+Codecov には、カバレッジレポートのアップロードを簡単に行うための [Orb](https://circleci.com/orbs) があります。
 
 ```yaml
 version: 2.1
@@ -366,10 +670,9 @@ jobs:
 
 Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/)を参照してください。
 
-## Coveralls
+### Coveralls
 {: #coveralls }
 
-Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
+Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
-

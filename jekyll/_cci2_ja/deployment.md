@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
-title: "デプロイ"
-short-title: "デプロイ"
-description: "Use this doc to learn how CircleCI can be configured to deploy to virtually any service."
+title: デプロイ
+description: このドキュメントを参考に、CircleCI を、ほぼすべてのサービスにデプロイできるように構成できます。
 version:
   - Cloud
   - Server v3.x
@@ -13,9 +12,9 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
 
 ## Amazon Web Services
-ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。
+{: #amazon-web-services }
 
-```
+```yml
     steps:
 
       - run:
@@ -30,7 +29,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Pivotal
 {: #pivotal }
 
-```
+```yml
     steps:
 
       - run:
@@ -62,7 +61,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Google
 {: #google }
 
-```
+```yml
     steps:
 
       - run:
@@ -74,7 +73,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Heroku
 {: #heroku }
 
-```
+```yml
     steps:
 
       - checkout
@@ -87,7 +86,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## NPM
 {: #npm }
 
-```
+```yml
     steps:
 
       - checkout
@@ -101,7 +100,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## SSH
 {: #ssh }
 
-```
+```yml
     steps:
 
       - run:
@@ -113,7 +112,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Snapcraft
 {: #snapcraft }
 
-```
+```yml
     steps:
 
       - run:
@@ -127,7 +126,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Artifactory
 {: #artifactory }
 
-```
+```yml
     steps:
 
       - run:
@@ -142,7 +141,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## NuGet (.NET Core CLI 経由)
 {: #nuget-via-net-core-cli }
 
-```
+```yml
     steps:
 
       - run:
@@ -152,4 +151,4 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
             dotnet nuget push --source "${NUGET_FEED_URL}" --api-key="${NUGET_KEY}" <output-directory>/*.nupkg
 ```
 
-Use the above examples to get started with automating deployment of green builds to your desired targets.
+ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。

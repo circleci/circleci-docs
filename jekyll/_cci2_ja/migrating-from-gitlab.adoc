@@ -1,11 +1,16 @@
-= GitLab からの移行
+---
+title: Migrating from GitLab
+---
+
+= Migrating from GitLab
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from GitLab to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
-このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。 
+このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。
 
 NOTE: **ImagineX Consulting からのヒント**
 
@@ -23,18 +28,18 @@ GitLab の SCM を使用している場合は、まずソースコードを GitH
 . GitHub Enterprise のインスタンスに空のリポジトリを作成します。
 . Create a bare clone of your GitLab.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
 +
-```
+```shell
 git clone git@gitlab.com:[owner]/[repo-name].git --bare
 ```
 . ローカルクローンに、GitHub Enterprise リポジトリをリモートリファレンスとして追加します。
 +
-```
+```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 ```
 . すべてのローカルリファレンス（refs/\*）を、リモートの GitHub Enterprise リポジトリにプッシュします。
 +
-```
+```shell
 git push enterprise --mirror
 ```
 
@@ -79,6 +84,7 @@ jobs:
     steps:
       - checkout
       - run: "execute-script-for-job1"
+
 ----
 
 2+| ジョブに使用するDocker イメージの指定
@@ -191,7 +197,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osx-job:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: echo "Hello, $USER!"

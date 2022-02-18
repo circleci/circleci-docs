@@ -6,7 +6,6 @@ const DOCS_GLOBALS = {
   analyticsTrackProps: 'readonly',
   getSessionId: 'writable', // TODO: remove when legacy analytics is removed
   forceAll: 'writable',
-  hljs: 'readonly',
   instantsearch: 'readonly',
   tooltip: 'readonly',
   trackEvent: 'readonly',
@@ -67,5 +66,9 @@ module.exports = {
     es2021: true,
     jquery: true,
   },
-  ignorePatterns: ['*.min.js', '*vendor*', 'src-api/source/javascripts/lib/*.js'],
+  ignorePatterns: [
+    '*.min.js',
+    '*vendor*',
+    'src-api/source/javascripts/lib/*.js',
+  ],
 };

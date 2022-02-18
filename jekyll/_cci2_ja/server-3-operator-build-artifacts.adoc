@@ -1,11 +1,12 @@
 ---
 version:
 - Server v3.x
-- サーバー管理
+- Server Admin
 ---
 = CircleCI Server v3.x ビルド アーティファクト
 :page-layout: classic-docs
 :page-liquid:
+:page-description: このページでは、ジョブの完了後にビルド アーティファクトにデータを維持する方法、およびビルド アーティファクトを使用してビルド プロセスの出力を長期間にわたって保存する方法について解説しています。
 :icons: font
 :toc: macro
 :toc-title:
@@ -101,7 +102,7 @@ toc::[]
 |===
 
 === 安全でないタイプの許可
-KOTS管理コンソールのフロントエンド設定にある [Server Unsafe Artifacts]チェックボックスをチェックすることで、必要に応じて安全でないタイプのレンダリングを許可するように選択することができます。
+KOTS管理コンソールの*Frontend Settings*にある *Server Unsafe Artifacts* チェックボックスをチェックすることで、必要に応じて安全でないタイプのレンダリングを許可できます。
 
 .CircleCI Server v3.x のアーティファクト
 image::server-3-unsafe-artifacts.png[Screenshot highlighting the option to server unsafe build artifacts]

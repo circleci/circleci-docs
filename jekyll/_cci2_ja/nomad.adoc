@@ -7,6 +7,7 @@ version:
 = Introduction to Nomad Cluster Operation
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 :icons: font
 :toc: macro
 :toc-title:
@@ -22,19 +23,19 @@ image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
 - **Nomad Server:** Nomad servers are the brains of the cluster; they receive and allocate jobs to Nomad clients. In CircleCI, a Nomad server runs on your Services machine as a Docker Container.
 
-- **Nomad Client:** Nomad clients execute the jobs they are allocated by Nomad servers. 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
+- **Nomad Client:** Nomad clients execute the jobs they are allocated by Nomad servers. 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
 
 - **Nomad Jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses parallelism, say 10 parallelism, then Nomad will run 10 jobs.
 
-- **Build Agent:** Build Agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build Agent is executed as the main process inside a Nomad Job.
+- *ビルドエージェント：*ビルドエージェントは CircleCI によって記述された Go プログラムで、ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内部のメイン処理として実行されます。
 
 == 基本的な操作
 
 The following section is a basic guide to operating a Nomad cluster in your installation.
 
-The `nomad` CLI is installed in the Service instance. It is pre-configured to talk to the Nomad cluster, so it is possible to use the `nomad` command to run the following commands in this section.
+`nomad` CLI は Service インスタンスにインストールされます。 Nomad クラスタとやり取りするようにあらかじめ設定されているため、`nomad` コマンドを使用して、以下で説明するコマンドを実行できます。
 
-=== Checking the Jobs Status
+=== ジョブステータスの確認
 
 The get a list of statuses for all jobs in your cluster, run:
 
@@ -44,23 +45,23 @@ nomad status
 
 The `Status` is the most important field in the output, with the following status type definitions:
 
-- `running`: Nomad has started executing the job. This typically means your job in CircleCI is started.
+- `running`: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
 
 - `pending`: There are not enough resources available to execute the job inside the cluster.
 
-- `dead`: Nomad has finished executing the job. The status becomes `dead` regardless of whether the corresponding CircleCI job/build succeeds or fails.
+- `dead`: Nomad でジョブの実行が終了しました。 対応する CircleCI のジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは `dead` になります。
 
-=== Checking the Cluster Status
+=== クラスタのステータスの確認
 
-To get a list of your Nomad clients, run:
+Nomad クライアントの一覧を表示するには、以下のコマンドを実行します。
 
 ```shell
 nomad node-status
 ```
 
-NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
+NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが `active`) と、クラスタから除外された Nomad クライアント (ステータスが `down`) の両方が報告されます。 したがって、現在のクラスタの容量を知るには、ステータスが `active` の Nomad クライアントの数を数える必要があります。
 
-To get more information about a specific client, run the following from that client:
+特定のクライアントの詳細情報を表示するには、そのクライアントで以下のコマンドを実行します。
 
 ```shell
 nomad node-status -self
@@ -68,7 +69,7 @@ nomad node-status -self
 
 This will give information such as how many jobs are running on the client and the resource utilization of the client.
 
-=== Checking Logs
+=== ログの確認
 
 As noted in the Nomad Jobs section above, a Nomad Job corresponds to an execution of a CircleCI job. Therefore, Nomad Job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run:
 
@@ -78,44 +79,44 @@ nomad logs -job -stderr <nomad-job-id>
 
 NOTE: Be sure to specify the `-stderr` flag as this is where most Build Agent logs appear.
 
-While the `nomad logs -job` command is useful, the command is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is out of scope for this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+`nomad logs -job` コマンドは便利ですが、`-job` フラグは指定されたジョブのランダム割り当てを使用するため、必ずしも正確とは限りません。 `割り当て`(allocation)は Nomad ジョブ内のさらに小さい単位です。 これについては、このドキュメントでは取り上げません。 詳細については、https://www.nomadproject.io/docs/internals/scheduling.html[Nomad の公式ドキュメント]を参照してください。
 
-Complete the following steps to get logs from the allocation of the specified job:
+指定されたジョブの割り当てからログを取得するには、以下の手順に従います。
 
-. Get the job ID with `nomad status` command.
+. `nomad status` コマンドで、ジョブ ID を取得します。
 . Get the allocation ID of the job with `nomad status <job-id>` command.
 . Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
 
 // ## Scaling the Nomad Cluster
 // Nomad itself does not provide a scaling method for cluster, so you must implement one. This section provides basic operations regarding scaling a cluster.
 
-=== Scaling the Cluster
+=== クラスタのスケールアップ
 
 By default, your Nomad Client is set up within an Auto Scaling Group (ASG) within AWS. To view settings:
 
 . Go to your EC2 Dashboard and select Auto Scaling Groups from the left hand menu
-. Select your Nomad Client
+. Nomad クライアントのシャットダウン
 . Select Actions > Edit to set Desired/Minimum/Maximum counts. This defines the number of Nomad Clients to spin up and keep available. Use the Scaling Policy tab to scale up your group automatically at your busiest times, see below for best practices for defining scaling policies. Use <<monitoring#nomad-job-metrics, nomad job metrics>> to assist in defining your scaling policies.
 
-==== Auto Scaling Policy Best Practices
+==== Auto Scaling ポリシーのベストプラクティス
 
-There is a https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/[blog post series] wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
+https://circleci.com/ja/blog/mathematical-justification-for-not-letting-builds-queue/[こちらの連載]では、CircleCI のエンジニアリング チームが自動スケーリングの一般的なベスト プラクティスを見つけるために取り組んだコスト削減のシミュレーションについて解説しています。 AWS の Auto Scaling を設定する際は、以下のベストプラクティスを適用することを検討してください。
 
-. In general, size your cluster large enough to avoid queueing builds. That is, less than one second of queuing for most workloads and less than 10 seconds for workloads run on expensive hardware or at highest parallellism. Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列処理で実行されるワークロードでは 10秒未満になるようにします。 Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
 
-. Create an Auto Scaling Group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. Scaling up during the weekday normal working hours and back down at night is the best practice to keep queue times down during peak development, without over provisioning at night when traffic is low. Looking at millions of builds over time, a bell curve during normal working hour emerges for most data sets.
+. Create an Auto Scaling Group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. 平日の勤務時間中にスケールアップし、夜間にスケールダウンしておくことで、トラフィックが少ない夜間にオーバープロビジョニングを発生させることなく、開発のピーク時に待ち時間を抑制するのがベスト プラクティスです。 なお、過去の数多くのビルドデータによると、通常の勤務時間中のデータセットはおおむね正規分布になっています。
 
-This is in contrast to auto scaling throughout the day based on traffic fluctuations, because modelling revealed that boot times are actually too long to prevent queuing in real time. Use http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html[Amazon's Step Policy] instructions to set this up along with Cloudwatch Alarms.
+This is in contrast to auto scaling throughout the day based on traffic fluctuations, because modelling revealed that boot times are actually too long to prevent queuing in real time. そのような状況では、http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html[ステップ ポリシーに関する Amazon のドキュメント]に従って、Auto Scaling とともに CloudWatch アラームを設定してください。
 
 // commenting until we have non-aws installations?
 // Scaling up Nomad cluster is very straightforward. To scale up, you need to register new Nomad clients into the cluster. If a Nomad client knows the IP addresses of Nomad servers, then the client can register to the cluster automatically.
 // HashiCorp recommends using Consul or other service discovery mechanisms to make this more robust in production. For more information, see the following pages in the official documentation for [Clustering](https://www.nomadproject.io/intro/getting-started/cluster.html), [Service Discovery](https://www.nomadproject.io/docs/service-discovery/index.html), and [Consul Integration](https://www.nomadproject.io/docs/agent/configuration/consul.html).
 
-=== Shutting Down a Nomad Client
+=== Nomad クライアントのシャットダウン
 
-When you want to shutdown a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
+Nomad クライアントをシャットダウンするときは、まずクライアントをドレイン (`drain`) モードに設定する必要があります。 `drain` モードのクライアントでは、それまでに割り当てられたジョブは完了しますが、新たにジョブを割り当てることはできません。
 
-. To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
+. クライアントをドレインするには、クライアントにログインし、`node-drain` コマンドを以下のように使用して、クライアントをドレインモードに設定します。
 +
 ```shell
 nomad node-drain -self -enable
@@ -131,12 +132,12 @@ Alternatively, you can drain a remote node with the following command, substitut
 nomad node-drain -enable -yes <node-id>
 ```
 
-=== Scaling Down the Client Cluster
+=== クライアントクラスタのスケールダウン
 
-To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
+クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain` モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
 
-The script should use the commands in the section above to do the following:
+このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
 
-1. Put the instance in drain mode
+1. インスタンスをドレイン モードに設定します。
 2. Monitor running jobs on the instance and wait for them to finish
 3. Terminate the instance

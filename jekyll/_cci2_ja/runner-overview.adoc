@@ -3,9 +3,10 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI ランナーの概要
+= CircleCI Runner Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Learn how CircleCI runner enables you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
 :toc-title:
@@ -26,8 +27,8 @@ CircleCI では、ランナーのユース ケースとして主に 2 つのシ�
 * 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。 ランナーを使用することで、次のようなことが可能になります。
 ** IP restrictions - Runners can have static IP addresses that you can control
 ** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions
-** Monitor the operating system
-** Connect to private networks
+** オペレーティングシステムの監視
+** プライベートネットワークへの接続
 
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
@@ -93,11 +94,17 @@ CircleCI ランナーのインストール後、ランナーは `circleci.com` �
 
 この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるよう構成できます。 ジョブの実行を許可したすべてのユーザーには、task-agent と同等の権限が付与されます。 以降で説明するデプロイメントの推奨事項は、このアプローチに基づいています (ローンチ エージェントは root ユーザー、タスク エージェントは circleci ユーザーとして実行されます)。
 
-== SSH を使用したデバッグ
+== Runner concurrency
+
+To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to runners across all your resource classes.
+
+Rather than limit the total number of registered runners, CircleCI runners are limited by the total number of runner jobs (tasks) across your resource classes.
+
+== SSH での再実行 (英語)
 
 CircleCI ランナーでは、デバッグのために SSHでジョブの再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#, Debugging with SSH>>.
 
-NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-installation.adoc#runner-ssh-advertise_addr[CircleCI ランナーのインストール]をご覧くださいい。
+NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-config-reference.adoc#runner-ssh-advertise_addr[CircleCI ランナーのインストール]をご覧くださいい。
 
 == パブリック リポジトリ
 
@@ -138,10 +145,10 @@ NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する�
 
 Almost all standard CircleCI features are available for use with runner jobs, however, a few features are not yet supported. ランナー ジョブを使用するうえでそれらの機能が重要な場合は、以下の canny ページのうち該当するものからお知らせください。
 
-- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割]
-- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
+- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割 (英語)]
+- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys (英語)`]
 
-== さらに詳しく
+== 詳細を確認する
 
 CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、インフラ上でのジョブの実行についてさらに詳しく学ぶことができます。
 

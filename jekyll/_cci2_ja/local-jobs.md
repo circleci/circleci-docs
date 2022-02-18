@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
-title: "CircleCI CLI"
+title: CircleCI CLI
+description: CLI を使用したローカル ジョブの実行方法.
 redirect: /docs/ja/2.0/local-cli/
 ---
 

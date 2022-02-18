@@ -171,7 +171,7 @@ jobs:
 ```yaml
   build-mac:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       - run:
           name: Install Dart SDK
@@ -361,7 +361,7 @@ jobs:
 
   build-mac:
     macos:
-      xcode: "11.3.0"
+      xcode: "12.5.1"
     steps:
       - run:
           name: Install Dart SDK
@@ -434,10 +434,10 @@ jobs:
 ## Additional resources
 {: #additional-resources }
 
-- [Getting Started](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
+- [はじめよう](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
 - [Migrating to CircleCI](https://circleci.com/docs/2.0/migration-intro/#section=getting-started)
-- [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
-- [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
+- [依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+- [データベースの構成]({{ site.baseurl }}/2.0/databases/)
 - [Deploying on CircleCI](https://circleci.com/docs/2.0/deployment-integrations/#section=deployment)
-- [Using Contexts](https://circleci.com/docs/2.0/contexts/)
-- [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
+- [コンテキストの使用](https://circleci.com/docs/2.0/contexts/)
+- [設定に関するリファレンス](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)

@@ -1,4 +1,5 @@
 export const init = () => {
+  document.body.style.backgroundColor = '#fff';
   let progressBar = document.getElementById('progress-bar-container');
 
   progressBar.style.background = 'white';

@@ -1,13 +1,18 @@
+---
+title: Github Actions からの移行
+---
+
 = Github Actions からの移行
 :page-layout: classic-docs
 :page-liquid:
+:page-description: An overview of how to migrate from Github Actions to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
 このドキュメントでは、Github Actions から CircleCI に移行する方法を概説します。
 
-== CircleCI に移行する理由
+== CircleCIに移行する理由
 
 CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
 
@@ -19,7 +24,7 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
-== 概念
+== コンセプト
 
 === ジョブとワークフロー
 
@@ -110,15 +115,15 @@ runs-on: ubuntu-latest # or windows, etc.
 
 # コンテナでステップを実行する場合は、
 container:
-  image: openjdk:11.0-jdk
+  image: openjdk:17.0-jdk
 ----
 
 a|
 [source, yaml]
 ----
-# Docker (コンテナ) Executor
+# Docker (container) Executor
 docker:
-  - image: circleci/openjdk:11.0-jdk
+  - image: cimg/openjdk:17.0
     auth:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -128,11 +133,10 @@ machine: true
 
 # macOS Executor
 macos:
-  xcode: 11.3.0
+  xcode: 12.5.1
 
 # Windows Executor
-# 注意: Orb を宣言する必要があります。
- See docs
+# NOTE: Orb declaration needed. See docs
 executor: win/vs2019
 
 ----
@@ -148,7 +152,7 @@ jobs:
 
     # メインのコンテナです。
     container:
-      image: openjdk:11.0-jdk
+      image: openjdk:17.0-jdk
 
     # 依存関係のサービスです。
     services:
@@ -166,17 +170,17 @@ a|
 jobs:
   build:
     docker:
-      # プライマリ Executor です。
-      - image: circleci/openjdk:11.0-jdk
+      # Primary Executor
+      - image: cimg/openjdk:17.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      # 依存関係のサービスです。
+      # Dependency Service(s)
       - image: postgres:10.8
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -247,7 +251,7 @@ jobs:
           message: Tests passed
           title: Testing Slack Orb
           author_name: Bobby
-          webhook: # WEBHOOK 
+          webhook: # WEBHOOK
 ----
 
 2+| ワークフローでの条件付きステップの使用: CircleCIでは、https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[ステップの基本的な条件]（例: on_success (デフォルト)、

@@ -223,7 +223,7 @@ version: 2.1
 jobs:
   adhoc:
     macos:
-      xcode: "11.3.1"
+      xcode: "12.5.1"
     environment:
       FL_OUTPUT_DIR: output
     steps:

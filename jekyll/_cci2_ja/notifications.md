@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "通知の使用"
-short-title: "通知の使用"
+title: 通知の使用
+description: Learn how to use get CircleCI's job status via Slack, integrated chat, email and web notifications.
 order: 100
 published: true
 version:
@@ -84,7 +84,7 @@ Orb を使用すれば、さまざまな種類の通知を構成に統合でき�
 Orb を構成に統合する前に、以下の 2 つの手順を実行する必要があります。
 
 1. Increment the `version` key in your config to `2.1` and;
-2. {% include snippets/enable-pipelines.md %}
+2. パイプラインを有効化していない場合は、**[Project Settings (プロジェクト設定)] -> [Build Settings (ビルド設定)] -> [Advanced Settings (詳細設定)]** の順に選択して有効化します。
 
 ### Slack Orb の使用
 {: #using-the-slack-orb }

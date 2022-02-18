@@ -16,9 +16,9 @@ toc::[]
 == Overview
 _Persistent volume expansion of MongoDB and Postgres is available for server v3.2.0 and up._
 
-If you have chosen to deploy either of the CircleCI databases (MongoDB or Postgres) within the cluster, as opposed to externally provisioning these databases, then there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster. 
+If you have chosen to deploy either of the CircleCI databases (MongoDB or Postgres) within the cluster, rather than externally provisioning these databases, then there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster. 
 
-This document runs through the steps required to increase PVCs in order to expand the space available to your internally deployed databases. This operation should not require any downtime unless you need to restart your database pods.
+This document runs through the steps required to increase PVCs to expand the space available to your internally deployed databases. This operation should not require any downtime, unless you need to restart your database pods.
 
 NOTE: Expanding persistent volumes does not affect the size of the storage attached to your nodes. Expanding node storage remains within the limitations of your cloud provider. Please refer to the docs for your chosen cloud provider for details on how to expand the storage attached to your cluster's nodes.
 
@@ -31,7 +31,7 @@ NOTE: As a precaution, it's always good to https://circleci.com/docs/2.0/server-
 
 
 === Step 0 - Confirm current volume size
-By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment from the Kots admin console. We can confirm the size of our persistent volume claim capacity using `kubectl get pvc <pvc-name>`.
+By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment from the KOTS Admin Console. We can confirm the size of our persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
 
 For postgres:
 [source,bash]
@@ -51,7 +51,7 @@ datadir-mongodb-0   Bound    pvc-58a2274c-31c0-487a-b329-0062426b5535   8Gi     
 
 We can also confirm this capacity is made available to a database by checking the size of its data directory.
 
-For postgres the directory is `/bitnami/postgresql`. We can confirm its size using the command below.
+For postgres, the directory is `/bitnami/postgresql`. We can confirm its size using the command below.
 
 [source,bash]
 ----
@@ -60,7 +60,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme4n1    7.8G  404M  7.4G   3% /bitnami/postgresql
 ----
 
-For mongodb the directory is `/bitnami/mongodb`.
+For mongodb, the directory is `/bitnami/mongodb`.
 [source,bash]
 ----
 circleci-user ~ $ kubectl exec mongodb-0 -- df -h /bitnami/mongodb
@@ -80,7 +80,7 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  1d
 ----
 
-As we can see, our default storage class does not allow volume expansion. However, we can change this with the `kubectl patch` command.
+As we can see, our default storage class does not allow volume expansion. However, we can change this with the `kubectl patch` command:
 
 [source,bash]
 ----
@@ -91,10 +91,10 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   true                  1d
 ----
 
-Now we may proceed to expand our volumes.
+Now we may proceed to expanding our volumes.
 
 === Step 2 - Delete the database's stateful set
-In this step we will delete the stateful set, which controls our database pod. The command below will delete the referenced database's stateful set without deleting the pod. We do not want to delete the pod itself as this would cause downtime. In the following steps we will be redeploying our stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=false` flag is most important here.
+In this step we will delete the stateful set, which controls our database pod. The command below will delete the referenced database's stateful set without deleting the pod. We do not want to delete the pod itself as this would cause downtime. In the following steps, we will be redeploying our stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=false` flag is most important here.
 
 For postgres:
 [source,bash]
@@ -123,8 +123,8 @@ For mongodb:
 kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
-=== Step 4 - Update KOTS admin with the new PVC size
-Now we need to head over to the KOTS admin console to persist our changes. In the config section, we will update the values for our PVC size to 10Gi as shown below.
+=== Step 4 - Update KOTS Admin Console with the new PVC size
+Now we need to head over to the KOTS Admin Console to persist our changes. In the config section, we will update the values for our PVC size to 10Gi as shown below.
 
 .Postgres
 image::kots-pg-pvc-size.png[Postgres PVC size]
@@ -132,7 +132,7 @@ image::kots-pg-pvc-size.png[Postgres PVC size]
 .MongoDB
 image::kots-mongo-pvc-size.png[MongoDB PVC size]
 
-Now save and deploy your changes. This will recreate the stateful set(s) that we destroyed earlier, but with the new PVC sizes which will persist through new releases.
+Now save and deploy your changes. This will recreate the stateful set(s) that we destroyed earlier, but with the new PVC sizes, which will persist through new releases.
 
 
 === Step 5 - Validate new volume size
@@ -156,21 +156,21 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 As we can see, the size of our directories has been increased.
 
-When running through these steps, if you find, as expected, that the new pods **do** show the resized volumes, it is still worth running the `kubectl describe` commands shown below to check. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
+When completing these steps, if you find, as expected, that the new pods _do_ show the resized volumes, it is still worth checking with the `kubectl describe` commands shown below. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
 
-For postgres
+For postgres:
 [source,bash]
 ----
 kubectl describe pvc data-postgresql-0
 ----
 
-For mongodb
+For mongodb:
 [source,bash]
 ----
 kubectl describe pvc datadir-mongodb-0
 ----
 
-success looks like:
+Success looks like this example:
 ```
 Events:
 Type    Reason                      Age   From     Message
@@ -178,7 +178,7 @@ Type    Reason                      Age   From     Message
 Normal  FileSystemResizeSuccessful  19m   kubelet  MountVolume.NodeExpandVolume succeeded for volume "pvc-b3382dd7-3ecc-45b0-aeff-45edc31f48aa"
 ```
 
-Failure might look like:
+Failure might look like this example:
 ```
 Warning  VolumeResizeFailed  58m   volume_expand  error expanding volume "circleci-server/datadir-mongodb-0" of plugin "kubernetes.io/aws-ebs": AWS modifyVolume failed for vol-08d0861715c313887 with VolumeModificationRateExceeded: You've reached the maximum modification rate per volume limit. Wait at least 6 hours between modifications per EBS volume.
 status code: 400, request id: 3bd43d1e-0420-4807-9c33-df26a4ca3f23
@@ -187,15 +187,15 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 
 == Troubleshooting
 
-If you find that after following these steps, the disk size allocated to your data directories have not increased, then you may need to restart your database pods. This will cause downtime of 1-5 mins as the databases restart. You can use the commands below to restart your databases.
+If you find that after following these steps, the disk size allocated to your data directories has not increased, then you may need to restart your database pods. This will cause downtime of 1-5 mins while the databases restart. You can use the commands below to restart your databases.
 
-For postgres
+For postgres:
 [source,bash]
 ----
 kubectl rollout restart sts postgresql
 ----
 
-For mongodb
+For mongodb:
 [source,bash]
 ----
 kubectl rollout restart sts mongodb

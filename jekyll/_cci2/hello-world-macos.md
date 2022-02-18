@@ -22,7 +22,6 @@ example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
 To follow along with this document you will need:
 
 - An [account](https://circleci.com/signup/) on CircleCI.
-- A subscription to a [paid plan](https://circleci.com/pricing/#build-os-x) to enable building on the macOS executor.
 - An Apple computer with XCode installed on it (if you want to open the example project).
 
 ## Overview of the macOS executor
@@ -116,7 +115,9 @@ You can learn more about the `config.yml` file in the [configuration reference g
 {: #xcode-cross-compilation }
 
 ### Universal Binaries
-{: #universal-binaries } Xcode currently supports the creation of universal
+{: #universal-binaries }
+
+Xcode currently supports the creation of universal
 binaries which can be run on both `x86_64` and `ARM64` CPU architectures without
 needing to ship separate executables. This is supported only under Xcode 12.2+
 although older Xcode versions can still be used to compile separate `x86_64` and
@@ -133,14 +134,14 @@ Assuming that we are interested in creating a standalone x86_64 binary from a
 universal binary called `circleci-demo-macos`, we can do so by running the
 command:
 
-```sh
+```shell
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
 ```
 
 We can then confirm the supported architecture of the extracted binary with
 `lipo -info circleci-demo-macos-x86_64` which will output the following
 
-```sh
+```
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ```
 

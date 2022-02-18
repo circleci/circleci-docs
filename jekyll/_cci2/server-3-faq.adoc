@@ -19,7 +19,7 @@ We do not currently support a defined data retention policy. Data is stored inde
 ## What control is granted over Nomad certificates?
 Full control of the certificates, all the way down to mTLS for Nomad.
 
-## Is the polling time which checks for health status able to be changed or disabled?
+## Is it possible to change or disable the polling time which checks for health status?
 No, this is not customizable.
 
 ## What do the Application Status options in KOTS mean?

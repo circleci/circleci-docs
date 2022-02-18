@@ -35,12 +35,25 @@ if (
       'beforeend',
       `
       <style>
-        .compass-copy {
-          background-image: url('http://${jekyllBaseName}assets/img/compass/copy.svg');
+        .toolbar .copy-to-clipboard-button[data-copy-state=copy] {
+          background-image: url('http://${jekyllBaseName}assets/img/compass/copy.svg') !important;
         }
 
-        .compass-check-circle {
-          background-image: url('http://${jekyllBaseName}assets/img/compass/check.svg');
+        .toolbar .copy-to-clipboard-button[data-copy-state=copy-success] {
+          background-image: url('http://${jekyllBaseName}assets/img/compass/check.svg') !important;
+        }
+
+        .globe-icon {
+          background-color:transparent;
+          color: $black;
+          @media (min-width: $screen-md) {
+            &:hover {
+              filter: invert(39%) sepia(99%) saturate(634%) hue-rotate(105deg) brightness(83%) contrast(97%);
+            }
+          }
+          @media (max-width: $screen-md) {
+            padding-top: 6px;
+          }
         }
       </style>`,
     );

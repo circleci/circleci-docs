@@ -376,7 +376,7 @@ Heroku ではその他に以下のファイルが必要です。
 
 実際にデプロイする前に、以下のコマンドを使用して Heroku 上にこのデモ アプリケーションを手動でビルドできます。
 
-```
+```bash
 heroku create circleci-demo-python-flask # これを一意の名前に置き換えます
 heroku addons:create heroku-postgresql:hobby-dev
 heroku config:set FLASK_CONFIG=heroku

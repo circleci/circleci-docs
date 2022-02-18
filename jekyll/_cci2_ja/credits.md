@@ -36,14 +36,69 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 ## Free プラン
 {: #free-plan }
 
-従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
+従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の多くの主要機能を利用して生産性、効率、速度を高めることが可能です。
 
-- Orb の使用
-- ワークスペース
-- 依存関係のキャッシュ
-- Windows/Linux でのビルド
+従量課金制の Free プランでは、Medium タイプのマシンに対して毎週一定のビルドクレジットが提供されます (CPU 2 基、4 GBのメモリが提供されます)。 この組み合わせでは、1 分あたりの消費クレジット数が少なく、ユーザーのシート数に制限はありません。 クレジット数の詳細については、 [Pricing](https://circleci.com/pricing/)のページを参照してください。
 
-従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。 With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats. Refer to the [Pricing](https://circleci.com/pricing/) page for more information on credit amounts.
+下記は Free プランでご利用いただける主要機能の一部です。
+
+| 機能                | 説明                                                                         |
+| ----------------- | -------------------------------------------------------------------------- |
+| 無制限のユーザー数         | CircleCI上でビルドおよび開発できるユーザー数に制限はありません。 異なるチームやグループで複数のプロジェクトの共同作業を行うことが可能です。 |
+| 使用可能なリソースクラスの拡張配列 | Docker、Linux、および Windows のリソースクラスの拡張配列にアクセスできます(macOS は近日リリース予定です)。        |
+| 同時処理とテスト分割        | ビルドとテスト分割の高速化により、ビルドの生産性とスピードが向上します。                                       |
+| セルフホストランナー        | 使用できるランナーの数が増え、CircleCIで作業する際の柔軟性が向上しました。                                  |
+| 不安定なテストの検出        | 失敗したテストや不安定なテストのトラブルシューティングに役立つ高度なインサイトをご利用いただけます。                         |
+| 無制限のプライベートOrb数    | チームやグループ間で安全に共有することができるプライベート Orbを無制限にご利用いただけます。                           |
+| Dockerレイヤーキャッシュ   | Docker のパフォーマンスを利用して迅速にビルドできるように効率化機能が設計されています。                            |
+{: class="table table-striped"}
+
+### 無制限のユーザー数
+{: #unlimited-users }
+
+Freeプランでは、ユーザー数に制限なく CircleCI 上でビルドや開発を行うことができます。 組織内のより多くのチームやグループとコラボレーションすることができ、スピード、生産性、効率が向上します。
+
+### 使用可能なリソースクラスの拡張配列
+{: #expansive-array-of-available-resource-classes }
+
+無料プランでは、 Docker、Linux、Windows、および macOS (近日リリース予定) で最も幅広いリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。
+
+これらのリソースの詳細については、[Executor とイメージ](https://circleci.com/docs/ja/2.0/executor-intro/)を参照してください。
+
+### 同時処理とテスト分割
+{: #concurrency-and-test-splitting }
+
+複数のテストを同時に実行する同時処理機能は、ワークフローと同時にジョブを実行することでビルド時間を短縮し、フィードバックサイクルを短縮することができる強力な機能です。
+
+テスト分割の活用方法の詳細は、[テストの並列実行](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#using-test-splitting-with-python-django-tests)を参照してください。
+
+### セルフホストランナー
+{: #self-hosted-runners }
+
+CircleCI ランナーにより、お客様のインフラを使用してジョブを実行できるため、お客様の環境をより詳細に制御することができ、さまざまなアーキテクチャでのビルドとテストを柔軟に行うことができます。
+
+CircleCI ランナーの使用方法の詳細については、[CircleCIランナーの概要](https://circleci.com/docs/ja/2.0/runner-overview/)を参照してください。
+
+### 不安定なテストの検出
+{: #flaky-test-detection }
+
+ワークフローの失敗による平均消費時間は約 30 分です。 不安定なテストを検出することで、ビルドやワークフローにかかる時間を大幅に短縮できます。
+
+不安定なテストの詳細については、[テスト インサイト](https://circleci.com/docs/ja/2.0/insights-tests/#flaky-tests)を参照してください。
+
+### 無制限のプライベートOrb数
+{: #unlimited-private-orbs }
+
+CircleCI Orb は共有可能な設定パッケージであり、開発者は組織全体で様々なチームが使用できるように、プライベートで標準化された設定を作成できます。
+
+プライベート Orb の詳細については、[Orbの概要](https://circleci.com/docs/ja/2.0/orb-intro/#private-orbs-vs-public-orbs)を参照してください。
+
+### Docker レイヤーキャッシュ
+{: #docker-layer-caching }
+
+ワークフローにおいて常に Dockerイメージを使用する開発者にとって、 Dockerイメージのビルドにかかる時間の短縮は重要な考慮事項です。 Dockerイメージのビルドが CI/CD プロセスにおける日常作業である場合、Docker レイヤーキャッシュ(DLC) の使用を検討してください。 DLC は、ジョブの実行に使用される実際のコンテナに影響を与えるのではなく、ジョブ内で作成されたイメージレイヤーを保存します。
+
+Docker レイヤーキャッシュの詳細は、[Dockerレイヤ ーキャッシュの有効化](https://circleci.com/docs/ja/2.0/docker-layer-caching/)を参照してください。
 
 ## Performance プラン
 {: #performance-plan }
@@ -60,26 +115,26 @@ Performance プランにアップグレードすると、Free プランの内容
 ## オープンソース プロジェクトでのクレジット使用
 {: #open-source-credit-usage }
 
-Free プランの組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソース プロジェクトのビルドに利用できます。 この特典を受け取るには、Free プランを利用し、リポジトリをパブリックにする必要があります。  Open-source credit availability and limits will not be visible in the UI.
+Free プランの組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソース プロジェクトのビルドに利用できます。 この特典を受け取るには、Free プランを利用し、リポジトリをパブリックにする必要があります。  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
 ## Docker レイヤー キャッシュ
 {: #docker-layer-caching }
 
-Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLCはPerformanceプランでのみ利用可能です。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)をご覧ください。
+Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLCはPerformanceプランでのみ利用可能です。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)をご覧ください。
 
 ## トラブルシューティング
 {: #troubleshooting }
 
-### Am I charged if my build is "queued" or "preparing"?
+### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-いいえ. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+はい。 ジョブが "queud(キューに入っている)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing(準備中)" の場合は、CircleCIがセットアップを行っているか、ジョブの実行を開始しようとしています。
 
-If you find that jobs are "preparing" for quite some time, you may be able to reduce it if your jobs use the docker executor; try using more recent docker images to decrease preparation time.
+ジョブが頻繁に "preparing(準備中)" になる場合、Docker executor を使用しているのであれば、より新しい Docker イメージを使用することで、準備時間を短くできる可能性があります。
 
-## Questions and comments
+## ご意見・ご質問
 {: #questions-and-comments }
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/ja/2.0/faq/#料金支払い)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
+ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/2.0/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。

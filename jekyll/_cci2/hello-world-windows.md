@@ -33,7 +33,6 @@ The Windows execution environment (or `executor`) gives users the tools to build
 
 - Is VM-based to guarantee full job isolation.
 - Uses the Server Core version of Windows Server 2019 Datacenter Edition.
-- Has 4 vCPUS and 15 GB of RAM.
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 

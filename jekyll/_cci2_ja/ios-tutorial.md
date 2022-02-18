@@ -40,11 +40,11 @@ version:
 
 iOS プロジェクトでは、fastlane Scan を使用して以下のようにテストを実行できます。
 
-```
+```yaml
 jobs:
   build-and-test:
     macos:
-      xcode: "9.3.0"
+      xcode: 12.5.1
     steps:
       ...
       - run:
@@ -70,7 +70,7 @@ To further customize your build process to use custom tools or run your own scri
 
 たとえば Homebrew から依存関係をインストールする場合は、`run` ステップを使用して適切なコマンドを指定します。
 
-```
+```yaml
     steps:
 
       - run:
@@ -87,7 +87,7 @@ To further customize your build process to use custom tools or run your own scri
 
 以下の短い `run` 構文例のように、`run` ステップを使用してテストを実行することもできます。
 
-```
+```yaml
     steps:
 
       - run: fastlane scan
@@ -99,18 +99,18 @@ To further customize your build process to use custom tools or run your own scri
 
 [fastlane](https://fastlane.tools) の [gym](https://github.com/fastlane/fastlane/tree/master/gym) と [deliver](https://github.com/fastlane/fastlane/tree/master/deliver) を使用して CircleCI でアプリケーションをデプロイするには、識別子、リリースを実行するブランチまたはパターン、および複数のコマンドを指定してリリースを実行します。
 
-```
+```yaml
 version: 2.1
 jobs:
   test:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - run: fastlane scan
   deploy:
     macos:
-      xcode: 11.3.0
+      xcode: 12.5.1
     steps:
       - checkout
       - deploy:

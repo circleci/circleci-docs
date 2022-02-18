@@ -32,6 +32,9 @@ Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgre
 
 ```yml
       - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
 ```
@@ -93,8 +96,8 @@ When the database service spins up, it automatically creates the database `circl
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
-### Optimizing Postgres images
-{: #optimizing-postgres-images }
+### Optimizing PostgreSQL images
+{: #optimizing-postgresql-images }
 {:.no_toc}
 
 The `cimg/postgres` Docker image uses regular persistent storage on disk. Storing the database in a ramdisk may improve performance. This can be done by setting the `PGDATA: /dev/shm/pgdata/data` environment variable in the service container image config.
@@ -105,10 +108,10 @@ The `cimg/postgres` Docker image uses regular persistent storage on disk. Storin
 
 To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
 
-```
-     steps:
-    # Add the Postgres 9.6 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
+```yml
+    steps:
+    # Add the Postgres 12.0 binaries to the path.
+       - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV
 ```
 
 ### Using Dockerize to wait for dependencies

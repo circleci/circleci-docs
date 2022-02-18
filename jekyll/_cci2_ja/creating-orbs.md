@@ -81,10 +81,10 @@ Orb パイプラインは、次の 2 つのワークフローで実行されま�
 * パーソナルアクセス トークンへの特別なアクセス権が不要なテストが実行されます。このステージは、オープンソースのプルリクエストから実行可能です。
 * [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) ジョブにより、開発版の Orb が次のように 2 回パブリッシュされます。
 
-    | Published Development Tag                              | Description                                                                      |
-    | ------------------------------------------------------ | -------------------------------------------------------------------------------- |
-    | `<namespace>/<orb>@dev:<branch>`     | A development tag linked to the branch name. Useful for testing in your configs. |
-    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | A development tag specific to this SHA. Used in the following workflow.          |
+    | パブリッシュされる開発タグ                                          | 説明                                         |
+    | ------------------------------------------------------ | ------------------------------------------ |
+    | `<namespace>/<orb>@dev:<branch>`     | ブランチ名にリンクされる開発タグです。 設定ファイルのテストを行う場合に使用します。 |
+    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | この SHA に固有の開発タグです。 次のワークフローで使用します。         |
     {: class="table table-striped"}
 
 テストジョブの詳細については、[Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs)を参照してください。
@@ -99,7 +99,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
 インテグレーションテストが完了すると、デフォルトのブランチでのみデプロイジョブが実行されます。 [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) により、SHA 固有の開発版の Orb が取得され、セマンティックバージョン付きの公開バージョンにプロモートされます。
 
 {% raw %}
-```
+```yml
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: <namespace>/<orb-name>
           context: <publishing-context>
@@ -126,7 +126,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
 CircleCI から GitHub にタグをプッシュするには、[書き込みアクセス権のあるデプロイ キー]({{site.baseurl}}/ja/2.0/add-ssh-key/)が必要です。 リンク先の記事を参照して、デプロイキーを生成し追加してください。 追加が完了すると、そのキー用に生成された、`"SO:ME:FIN:G:ER:PR:IN:T"` のような "フィンガープリント" が表示されます。 この SSH フィンガープリントを、`orb-tools/dev-promote-prod-from-commit-subject` ジョブの `ssh-fingerprints` パラメーターに追加します。
 
 {% raw %}
-```
+```yml
       - orb-tools/dev-promote-prod-from-commit-subject:
           publish-version-tag: true
           ssh-fingerprints: "SO:ME:FIN:G:ER:PR:IN:T"

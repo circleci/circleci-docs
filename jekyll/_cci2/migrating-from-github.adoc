@@ -114,7 +114,7 @@ runs-on: ubuntu-latest # or windows, etc.
 
 # If running steps on a container
 container:
-  image: openjdk:11.0-jdk
+  image: openjdk:17.0-jdk
 ----
 
 a|
@@ -122,7 +122,7 @@ a|
 ----
 # Docker (container) Executor
 docker:
-  - image: circleci/openjdk:11.0-jdk
+  - image: cimg/openjdk:17.0
     auth:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -150,7 +150,7 @@ jobs:
 
     # Main container
     container:
-      image: openjdk:11.0-jdk
+      image: openjdk:17.0-jdk
 
     # Dependency Service(s)
     services:
@@ -169,7 +169,7 @@ jobs:
   build:
     docker:
       # Primary Executor
-      - image: circleci/openjdk:11.0-jdk
+      - image: cimg/openjdk:17.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

@@ -174,7 +174,7 @@ consider using a background step instead of an entrypoint.
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
-```bash
+```shell
 $ docker build <path-to-dockerfile>
 ```
 
@@ -207,7 +207,7 @@ Log in to Docker Hub with your account and create a new repository on the [add r
 
 Next, rebuild your image using your account and repository name:
 
-``` Shell
+```shell
 $ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
 ```
 
@@ -223,7 +223,7 @@ The `-t` key specifies the name and tag of the new image:
 
 Push the image to Docker Hub:
 
-``` Shell
+```shell
 $ docker login
 $ docker push circleci/cci-demo-docker-primary:0.0.1
 ```
@@ -236,7 +236,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 
-``` YAML
+```yml
 version: 2.0
 jobs:
   build:
@@ -257,7 +257,7 @@ This section demonstrates how to build a Ruby container to use on CircleCI. **No
 The example starts with the [Ruby 2.1](https://hub.docker.com/_/ruby/) image. However, instead of using FROM ruby:2.1 as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the [2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10).
 Notice the environment variables that are used to pull in the proper versions.
 
-```
+```dockerfile
 FROM buildpack-deps:jessie
 
 # Skip installing gem documentation
@@ -334,7 +334,7 @@ CMD [ "irb" ]
 
 This will create a Ruby 2.1 image. Next, install node modules, `awscli`, and PostgreSQL 9.5 using the node:7.4 Dockerfile:
 
-```
+```dockerfile
 FROM buildpack-deps:jessie
 
 RUN groupadd --gid 1000 node \
@@ -375,7 +375,7 @@ Remove the associated files before committing the Docker image to install by usi
 
 The Ruby image comes with git pre-installed so there's no reason to reinstall it. Finally, add sudo, python2.7, and postgresql-9.5 to the list installation list. Then, install yarn with npm.
 
-```
+```dockerfile
 FROM buildpack-deps:jessie
 
 RUN groupadd --gid 1000 node \
@@ -501,14 +501,14 @@ Successfully built 52b773cf50e2
 
 After it finishes compiling, take the sha from the Docker output and run it as follows:
 
-```
+```shell
 $ docker run -it 52b773cf50e2 /bin/bash
 root@6cd398c7b61d:/# exit
 ```
 
 Then, commit that hostname replacing ruby-node with your Docker Hub username as follows:
 
-```
+```shell
 docker commit 6cd398c7b61d username/ruby-node:0.1
 docker push username/ruby-node:0.1
 ```

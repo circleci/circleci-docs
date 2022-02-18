@@ -28,18 +28,18 @@ Following are the steps required for using the git command line tool to import y
 . Create an empty repository on your GitHub Enterprise instance.
 . Create a bare clone of your GitLab.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
 +
-```
+```shell
 git clone git@gitlab.com:[owner]/[repo-name].git --bare
 ```
 . Add your GitHub Enterprise repository as a remote reference in your local clone:
 +
-```
+```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-```
+```shell
 . Push all local references (refs/\*) up to your remote GitHub Enterprise repository:
 +
-```
+```shell
 git push enterprise --mirror
 ```
 

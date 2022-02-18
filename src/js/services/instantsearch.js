@@ -227,6 +227,8 @@ export function init() {
   var documentBody = document.querySelector('body');
   var resultDisplay = document.querySelector('#hits-target');
   var form = document.querySelector('.main-searchbar form');
+  var mobileSearchIcon = document.querySelector('.global-nav--search-button');
+  var mobileMenuBtn = document.querySelector('.global-nav--toggle');
 
   function clearResults() {
     // Clear hit counts
@@ -279,6 +281,8 @@ export function init() {
     resetSearch();
     searchBox.blur();
     documentBody.classList.remove('search-open');
+    mobileSearchIcon.classList.remove('no-display');
+    mobileMenuBtn.classList.remove('no-display');
   });
 
   // Scroll results back to top upon tab change

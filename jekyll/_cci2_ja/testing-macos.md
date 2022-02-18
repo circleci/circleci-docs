@@ -66,7 +66,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -126,7 +126,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -135,7 +135,7 @@ jobs:
 
 以下のように出力されます。
 
-```bash
+```shell
 client              service                          allowed
 ------------------  -------------------------------  ----------
 com.apple.Terminal  kTCCServiceSystemPolicyAllFiles  1
@@ -161,7 +161,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -169,7 +169,7 @@ jobs:
 
 以下のように出力されます。
 
-```bash
+```shell
 kTCCServiceMediaLibrary
 kTCCServiceSiri
 kTCCServiceMotion
@@ -191,7 +191,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -211,7 +211,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -233,7 +233,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.1
     steps:
         - checkout
         - mac-permissions/delete-permission:

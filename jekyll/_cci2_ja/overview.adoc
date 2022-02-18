@@ -6,6 +6,7 @@ version:
 = Overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI server は、プライベート クラウドやデータセンターにインストールできる、モダンな継続的インテグレーションおよび継続的デリバリー　(CI/CD) のプラットフォームです。
 :icons: font
 :toc: macro
 :toc-title:
@@ -21,7 +22,7 @@ toc::[]
 .CircleCI Services Architecture
 image::arch_server.png[Services Architecture]
 <<<
-== Execution Environments
+== 実行環境
 
 CircleCI uses Nomad as the primary job scheduler. Refer to our <<nomad#introduction-to-nomad-cluster-operation, Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
 
@@ -34,10 +35,10 @@ Figure 1.1 illustrates CircleCI core components, build orchestration services, a
 Within the CircleCI UI is the Insights page, which acts as a dashboard showing the health of all repositories you are following including:
 // I feel like the insights page info needs to move somewhere else
 
-* median build time
-* median queue time
+* 平均ビルド時間
+* 平均キュー時間
 * last build time
-* success rate
+* 成功率
 * parallelism
 
 // Add screenshot of insights page

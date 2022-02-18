@@ -8,6 +8,7 @@ description: "外部 MongoDB の使用時に MongoDB を 3.2 から 3.6 にア�
 version:
   - Server v2.x
   - Server Admin
+toc: false
 ---
 
 If you are running an external MongoDB with your CircleCI installation, multiple MongoDB upgrades are recommended for use with CircleCI v2.15.0. Work with a CircleCI Solutions Engineer to complete the recommended upgrades to your custom HA configuration (requires Platinum Support). まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。

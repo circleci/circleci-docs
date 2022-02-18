@@ -11,9 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI
-Server v3.x installation. If your issue is not addressed below, you can generate a support bundle or contact your
-CircleCI account team.
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI Server v3.x installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
 
 toc::[]
 
@@ -29,17 +27,14 @@ kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 Open your browser and access http://localhost:8800 to see the Admin console.
 
 ## Generate Support Bundle
-A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically
-requested when you open a ticket.
+A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically requested when you open a ticket.
 
-To download a support bundle to provide to CircleCI for support, select the *Troubleshoot* tab from the Admin console
-menu bar, and then click *Analyze CircleCI Server*.
+To download a support bundle for CircleCI support, select the *Troubleshoot* tab from the Admin Console menu bar, and then click *Analyze CircleCI Server*.
 
 ## Managing Pods
 
 ### Verify Pod Readiness and Status
-Note: please check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to
-serve user requests. Some pods may take some time to become ready.
+Note: please check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. Some pods may take some time to become ready.
 
 [source,bash]
 ----
@@ -53,7 +48,7 @@ circleci-nomad-0 1/1 Running 6 6d20h
 …
 ----
 
-To show only pods with a status besides `Running`, you can use --field-selector option.
+To show only pods with a status besides `Running`, you can use the `--field-selector` option.
 
 [source,bash]
 ----
@@ -63,7 +58,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 ### Verify Pod Settings and Status
-To show detail settings and status of pods:
+To show detailed settings and status of pods:
 
 [source,bash]
 ----

@@ -5,22 +5,17 @@ short-title: "Using Webhooks to subscribe to CircleCI events"
 description: "Using Webhooks to subscribe to CircleCI events"
 version:
 - Cloud
+- Server v3.x
 ---
 
 ## Webhooks overview
 {: #overview}
 
-A webhook allows you to connect a platform you manage (either an API you create
-yourself, or a third party service) to a stream of future _events_.
+A webhook allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future _events_.
 
-Setting up a webhook on CircleCI enables you to receive information (referred to
-as _events_) from CircleCI, as they happen. This can help you avoid polling the
-API or manually checking the CircleCI web application for desired information.
+Setting up a webhook on CircleCI enables you to receive information (referred to as _events_) from CircleCI, as they happen. This can help you avoid polling the API or manually checking the CircleCI web application for desired information.
 
-The rest of this document will detail how to set up a webhook as well as the
-shape of events that will be sent to your webhook destination.
-
-**Note:** The webhooks feature on CircleCI is currently in preview; documentation and features may change or be added to.
+The rest of this document will detail how to set up a webhook as well as the shape of events that will be sent to your webhook destination.
 
 ## Use cases for webhooks
 {: #use-cases}
@@ -114,7 +109,7 @@ Here are some example signatures for given request bodies:
 
 The following is an example of how you might validate signatures in Python:
 
-```
+```python
 import hmac
 
 def verify_signature(secret, headers, body):
@@ -173,8 +168,7 @@ Each webhook will have some common data as part of the event:
 | webhook     | A map of metadata representing the webhook that was triggered                                      | Map    |
 {: class="table table-striped"}
 
-**Note:** The event payloads are open maps, meaning new fields may be added to
-maps in the webhook payload without considering it a breaking change.
+**Note:** The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
 
 
 ## Common sub-entities of webhooks
@@ -255,8 +249,7 @@ Data about the workflow associated with the webhook event.
 {: #pipeline}
 
 Pipelines are the most high-level unit of work, and contain zero or
-more workflows. A single git-push always triggers up to one pipeline. Pipelines
-can also be triggered manually through the API.
+more workflows. A single git-push always triggers up to one pipeline. Pipelines can also be triggered manually through the API.
 
 Data about the pipeline associated with the webhook event.
 
@@ -328,7 +321,7 @@ isn't associated with a git commit.
   "organization": {
     "id": "f22b6566-597d-46d5-ba74-99ef5bb3d85c",
     "name": "circleci"
-  }
+  },
   "workflow": {
     "id": "fda08377-fe7e-46b1-8992-3a7aaecac9c3",
     "name": "build-test-deploy",
@@ -365,7 +358,7 @@ isn't associated with a git commit.
       },
       "branch": "main"
     }
-  },
+  }
 }
 ```
 
