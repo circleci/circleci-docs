@@ -73,27 +73,34 @@ jobs:
 
 以下の例では、Docker Executorを使用して、リモートDockerで、[Docker のデモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージを構築してデプロイしています。
 
-<!-- markdownlint-disable MD046 -->
-{% highlight yaml %}
-version: 2.1 jobs: build: docker: - image: cimg/go:1.17 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference steps: - checkout # ... steps for building/testing app ...
+```yml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.17
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
-    
-      # Docker イメージをビルドしプッシュします。
-    
+
+      # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push CircleCI-Public/circleci-demo-docker:$TAG
-{% endhighlight %}
-<!-- markdownlint-enable MD046 -->
+```
 
 **注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ](https://circleci.com/docs/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
 
-```
+```yml
       # Alpine ベースのイメージに APK でインストールします。
       - run:
           name: Docker クライアントのインストール
@@ -112,7 +119,7 @@ version: 2.1 jobs: build: docker: - image: cimg/go:1.17 auth: username: mydocker
 
 ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
 
-```
+```yml
       - setup_remote_docker:
         version: 19.03.13
 ```
@@ -130,23 +137,24 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 - `18.09.3`
 - `17.09.0-ce` (デフォルト)
 
+
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI server installations. お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**Note:** The `version` key is not currently supported on CircleCI server installations. リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
 ## 環境の分離
 {: #separation-of-environments }
-ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
 ### サービスへのアクセス
 {: #accessing-services }
 {:.no_toc}
 
-リモート Docker でサービスを開始してプライマリ コンテナから直接 ping することや、リモート Docker 内のサービスに ping できるプライマリ コンテナを開始することは**できません**。 これを解決するには、リモート Docker から同じコンテナを通してサービスとやり取りする必要があります。
+リモート Docker でサービスを開始してプライマリ コンテナから直接 ping することや、リモート Docker 内のサービスに ping できるプライマリ コンテナを開始することは**できません**。 ただし、同じコンテナを経由する形でリモート Docker 側からサービスに対してコマンドを実行することで、この問題を解決できます。
 
-```
+```yml
 #...
       - run:
           name: "サービスの開始および実行チェック"
@@ -156,9 +164,9 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 #...
 ```
 
-同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります。
+あるいは、ターゲットとするコンテナと同じネットワーク内で実行しているもう 1 つのコンテナを使う方法もあります。
 
-```
+```yml
 #...
       - run: |
           docker run -d --name my-app my-app
@@ -172,7 +180,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ジョブ空間からリモート Docker 内のコンテナにボリュームをマウントすること (およびその逆) は**できません**。 `docker cp` コマンドを使用して、この 2 つの環境間でファイルを転送することは可能です。 たとえば以下のように、ソース コードから設定ファイルを使用してリモート Docker でコンテナを開始します。
 
-```
+```yml
 - run: |
     # 設定ファイルとボリュームを保持するダミー コンテナを作成します。
     docker create -v /cfg --name configs alpine:3.4 /bin/true
@@ -182,18 +190,18 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
+これを応用することで、アプリケーションが生成した何らかのデータを保管したいときに、リモート Docker からコピーさせる、という使い方ができます。
 
-```
+```yml
 run: |
   # アプリケーションとコンテナを開始します。
   # <code>--rm</code> オプションは使用しません (使用すると、終了時にコンテナが強制終了されます)。
   docker run --name app app-image:1.2.3
 ```
 
-また、https://github.com/outstand/docker-dockup やバックアップおよびリストア用の同様のイメージを使って、以下の例のようにコンテナをスピンアップさせることも可能です。 `circle-dockup.yml` の設定例:
+以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
 
-```
+```yml
 version: '2'
 services:
  bundler-cache:
@@ -210,7 +218,7 @@ services:
 次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
 
 {% raw %}
-``` yaml
+```yml
 # CircleCI キャッシュから bundler-data コンテナにデータを挿入します。
 
 - restore_cache:
@@ -252,21 +260,21 @@ services:
 
 リモート Docker 環境が起動されると、SSH エイリアスが作成され、リモート Docker 仮想マシンに対して SSH 接続できます。 SSH 接続は、ビルドをデバッグする場合や、Docker または VM ファイルシステムの構成を変更する場合に便利です。 リモート Docker 仮想マシンに SSH 接続するには、プロジェクトを構成するジョブ ステップ内で、または SSH 再実行中に、以下を実行します。
 
-```
+```shell
 ssh remote-docker
 ```
 
 **注:** 上記の例は、`docker` Executor で動作しないボリューム マウントを使用する方法を示しています。 この他に、ボリューム マウントが動作する `machine` Executor を使用する方法もあります。
 
-この例は、ryansch のご協力によって作成されました。
+これらのサンプルコードは ryansch 氏より提供していただきました。
 
 ## 関連項目
 {: #see-also }
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
+[ジョブ空間]({{ site.baseurl }}/2.0/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
