@@ -11,12 +11,14 @@ version:
 :toc: macro
 :toc-title:
 
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
 == ステップ 1: 前提条件
 CircleCI Server のインストールには 4つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 なお、このインストールガイドは、https://circleci.com/docs/ja/2.0/server-3-overview[[CircleCI Server 3.x の概要]] を先に読んでいることを前提としています。
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
-.Installation Experience Flow Chart Phase 1
+.インストール 手順（フローチャートのフェーズ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
 
 === 必要なソフトウェアのインストール
@@ -54,9 +56,21 @@ image::server-install-flow-chart-phase1.png[Flow chart showing the installation 
 
 NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
+// Don't include this section in the GCP PDF. 
+
+ifndef::env-gcp[]
+
 ==== AWS required software
 
 - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] をインストール済みであること。
+
+// Stop hiding from GCP PDF:
+
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+
+ifndef::env-aws[]
 
 ==== GCP required software
 
@@ -65,6 +79,8 @@ NOTE: * Please take note of the supported KOTS versions for your Kubernetes clus
 詳細については、Velero のhttps://velero.io/docs/v1.6/supported-providers/[[サポート対象プロバイダーに関するページ]]を参照してください。
 
 以下で、AWS と GCP のそれぞれで CircleCI Server 3.x のバックアップを作成する手順について説明します。
+
+endif::env-aws[]
 
 ==== S3 compatible storage required software
 
@@ -123,6 +139,8 @@ kubectl auth can-i <list|create|edit|delete> pods
 ```
 * クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
 
+ifndef::env-gcp[]
+
 ==== EKS
 Amazon EKS クラスタ の作成に関する詳細はhttps://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら]をご覧ください。 クラスタの作成にはhttps://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
@@ -140,6 +158,10 @@ eksctl utils write-kubeconfig --name circleci-server
 ```
 
 NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限]に関しては AWS のドキュメントをご覧ください。
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
 
 ==== GKE
 GKE クラスタ の作成に関する詳細は、https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[こちら]をご覧ください。
@@ -172,6 +194,7 @@ gcloud iam service-accounts create <YOUR_SERVICE_ACCOUNT_ID> --description="<YOU
 ```sh
 gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-account <SERVICE_ACCOUNT_ID>@<YOUR_GOOGLE_CLOUD_PROJECT_ID>.iam.gserviceaccount.com
 ```
+endif::env-aws[]
 
 === 新しい GitHub OAuth アプリの作成
 
@@ -199,19 +222,7 @@ NOTE: GitHub Enterprise を使用する場合は、パーソナル アクセス 
 === フロントエンド TLS 証明書
 デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
 
-==== Google Cloud DNS
-
-. If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. プラグインのインストールには以下のコマンドを実行します。
-+
-```bash
-pip3 install certbot-dns-google
-```
-
-. Then the following commands will provision a certification for your installation:
-+
-```bash
-certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
-```
+ifndef::env-gcp[]
 
 ==== AWS Route53
 
@@ -235,7 +246,6 @@ ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
 
 ```sh
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
-
 ```
 
 ```sh
@@ -243,6 +253,28 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
 NOTE: 使用する証明書には、サブジェクトとしてドメインと app.* サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が`server.example.com` でホストされている場合、証明書には app.server.example.com と server.example.com が含まれている必要があります。
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+==== Google Cloud DNS
+
+. If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. プラグインのインストールには以下のコマンドを実行します。
++
+```bash
+pip3 install certbot-dns-google
+```
+
+. 以下のコマンでインストール証明書をプロビジョニングします。
++
+```bash
+certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
+```
+
+NOTE: 使用する証明書には、サブジェクトとしてドメインと app.* サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が`server.example.com` でホストされている場合、証明書には app.server.example.com と server.example.com が含まれている必要があります。
+
+endif::env-aws[]
 
 === 暗号化/署名キー
 CircleCI で生成されるアーティファクトの暗号化と署名には、以下のキーセットを使用します。 CircleCI Server の設定にはこれらが必要な場合があります。
@@ -277,6 +309,8 @@ S3 互換のオブジェクト ストレージであればどれでも動作す�
 ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 先に進む前に、入力したバケット名が選択したオブジェクト ストレージ プロバイダーに存在することを確認してください。
 
 NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[[Configuring a Proxy (プロキシの設定)]]ガイドを参照してください。
+
+ifndef::env-gcp[]
 
 ==== S3 ストレージ バケットの作成
 CircleCI Server の設定には以下の詳細が必要になります。
@@ -534,6 +568,9 @@ aws iam create-access-key --user-name circleci-server
 
 ----
 
+endif::env-gcp[]
+
+ifndef::env-aws[]
 ==== Google Cloud ストレージバケットの作成
 CircleCI Server の設定には以下の詳細が必要になります。
 
@@ -598,6 +635,8 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
 
 ```
+
+endif::env-aws[]
 
 ifndef::pdf[]
 ## 次に読む

@@ -38,7 +38,7 @@ toc::[]
 
 | コンテナのカスタマイズ
 | `/etc/circleconfig/XXX/customizations`
-| CircleCI コンテナが随所で使用
+| Used in lots of places by CircleCI containers
 
 | `/etc/hosts`
 | `/etc/hosts`
@@ -93,7 +93,7 @@ WARNING: 設定のカスタマイズにより悪影響を及ぼす可能性が�
 
 設定は、Services マシン上のファイルに環境変数をエキスポートすることで行われます。
 
-/etc/circleconfig/workflows-conductor というパスで作成されたファイル  「customizations」について考えてみましょう。
+/etc/circleconfig/workflows-conductor というパスで作成されたファイル 「customizations」について考えてみましょう。
 
 ```shell
 export FOO="bar"
@@ -188,7 +188,7 @@ echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/reso
 :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
-* `:medium` : 開発者が config.yml 内のリソースクラスを参照するために使用する名前で、リソースクラスの外部向けの名前です。
+* `:medium`  - this is the name that your developers will use to refer to the resource class in their config.yml and the keyword `medium` is the external facing name of the resource class.
 * `:id "d1.medium"` : リソースクラスの内部用の名前です。  この ID を Docker のリソースクラス用にカスタマイズすることができます。
 * `:availability :general`: 必須フィールドです。
 * `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. これは、以下の :outer と一致している必要があります。

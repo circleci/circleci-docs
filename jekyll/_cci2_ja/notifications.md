@@ -78,14 +78,6 @@ While the process is similar for other browsers, please refer to their individua
 
 Orb を使用すれば、さまざまな種類の通知を構成に統合できます。 現在、CircleCI からは Slack Orb と IRC Orb が提供されており、サードパーティ製の Orb もいくつか存在します。 [Orb レジストリ](https://circleci.com/developer/ja/orbs?query=notification&filterBy=all)で *notifications* を検索して、現在使用できる Orb をご確認ください。
 
-### 前提条件
-{: #prerequisites }
-
-Orb を構成に統合する前に、以下の 2 つの手順を実行する必要があります。
-
-1. Increment the `version` key in your config to `2.1` and;
-2. パイプラインを有効化していない場合は、**[Project Settings (プロジェクト設定)] -> [Build Settings (ビルド設定)] -> [Advanced Settings (詳細設定)]** の順に選択して有効化します。
-
 ### Slack Orb の使用
 {: #using-the-slack-orb }
 

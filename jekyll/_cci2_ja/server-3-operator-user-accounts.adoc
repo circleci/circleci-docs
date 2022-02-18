@@ -1,17 +1,17 @@
 ---
-description: "This section provides information to help CircleCI server v3.x  operators manage user accounts."
+description: "このページでは、CircleCI Server v3.x のユーザーアカウントの管理に役立つ情報を紹介します。"
 version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x User Accounts
+= CircleCI Server v3.x ユーザーアカウント
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このセクションでは、ユーザー アカウントの管理に役立つ情報を紹介します。 For an overview of user accounts, see the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting *Admin*.
+このセクションでは、ユーザー アカウントの管理に役立つ情報を紹介します。 ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、*[Admin (管理者)]* を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。
 
 toc::[]
 
@@ -20,11 +20,11 @@ toc::[]
 
 ### 新規アカウント
 
-GitHub の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。 To control who has access, you can choose to automatically suspend all new users, requiring an administrator to activate them before they can log in. この機能を使用するには、以下の手順を行います。
+GitHub の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
 
 . CircleCI の [Admin Settings (管理者設定)] に移動します。
-. Select *System Settings* from the Admin Settings menu
-. Set *Suspend New Users* to *True*
+. [Admin Settings (管理者設定)] メニューから *[System Settings (システム設定)]* を選択します。
+. *[Suspend New Users (新規ユーザーの停止)]* を *[true (有効)]* に設定します。
 
 ### アクティブなアカウント
 When an account is no longer required, you can suspend the account. It will no longer be active and will not count against your license quota. アカウントを停止するには、以下の手順を行います。

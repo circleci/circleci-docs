@@ -3,15 +3,15 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Migration
+= CircleCI Server v3.x への移行方法
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn now to migrate from CircleCI server 2.19.x to 3.x.
+:page-description: このページでは、CircleCI server 2.19.x から 3.x に移行する方法について解説します。
 :icons: font
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 3.x requires you to back up your 2.19 instance data (Mongo, Postgres, and Vault) and then restore that data in a waiting Server 3.x instance. If you run into trouble, you can fallback to your 2.19 instance. 移行する場合、先に CircleCI Server 3.x システムのインストールを完了している必要があります。 Depending on the size of your data stores, the migration can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this process in a production environment. ステージング環境を挟むことで、移行プロセスに対する理解を深められるだけでなく、移行完了にかかる時間を確認することもできます。
+CircleCI Server 2.19.x から 3.x に移行する際は、2.19 インスタンスのデータ (Mongo、Postgres、Vault) をバックアップしてから、待機中の CircleCI Server 3.x インスタンスにそのデータを復元する必要があります。 問題が発生した場合は、2.19 インスタンスにフォールバックできます。 移行する場合、先に CircleCI Server 3.x システムのインストールを完了している必要があります。 移行には、データストアのサイズにより数分～数時間かかります。 移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を挟むことで、移行プロセスに対する理解を深められるだけでなく、移行完了にかかる時間を確認することもできます。
 
 toc::[]
 
@@ -20,7 +20,7 @@ toc::[]
 . 現在の CircleCI Server が 2.19 である。
 . 2.19 インスタンスのバックアップが完了している。  外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
 . CircleCI Server 3.x を新たにxref:server-3-install.adoc[インストール済み]である。
-. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts before starting.
+. コンテキストを使用した https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了している。
 . 移行スクリプトを実行するマシンに以下を準備する。
 - CircleCI Server 3.x インスタンスに合わせて構成した `kubectl`
 - CircleCI Server 2.19 Services box への `ssh` アクセス
@@ -33,19 +33,19 @@ toc::[]
 . 2.19 インスタンスのバックアップが完了している。
 . 新しい CirclCI Server 3.x インスタンスでコンテキストを使用した https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了している。
 
-## Migration
+## 移行
 
 WARNING: CircleCI Server v3.x に移行すると、v2.19 アプリケーションはシャットダウンされます。 v2.19 アプリケーションは自動では再起動されませんが、管理コンソールを使用して手動で再起動することはできます。
 
 WARNING: 移行プロセスを開始するとダウンタイムが発生します。 メンテナンス期間を計画しておくことをお勧めします。
 
-WARNING: Running server 2.19 and server 3.x at the same time can cause issues with your 2.19 build data. CircleCI Server 3.x を実行している間、CircleCI Server 2.19 は再起動しないでください。
+WARNING: CircleCI Server 2.19 と CircleCI Server 3.x を同時に実行すると、2.19 のビルド データに問題が発生するおそれがあります。 CircleCI Server 3.x を実行している間、CircleCI Server 2.19 は再起動しないでください。
 
 ### ステップ 1 - リポジトリのクローンと移行スクリプトの実行
 以下の手順に従って、CircleCI Server v2.19.x から CircleCI Server v3.x への移行スクリプトが含まれるリポジトリをクローンします。
 この移行スクリプトで行われる処理は、以下のとおりです。
 
-* Stop your v2.19.x application.
+* v2.19.x アプリケーションを停止させる。
 * 事前チェックを実行し、2.19.x の名前空間とデータストアを確認する。 
 * v2.19.x アプリケーションの PostgreSQL データベースおよび Mongo データベースの tarball を作成する。
 * Vault の既存のアプリケーション データと CircleCI の暗号化/署名キーをアーカイブする。
@@ -87,7 +87,7 @@ https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-t
     ** For a specific job, append a job number to the URL: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
 
 ### 移行後にプロジェクトで [Start Building (ビルドの開始)] を選択しても何も起こりません。なぜですか？
-* デフォルトでは、新しく追加されたプロジェクト (1 回もフォローされていないプロジェクト) は、初めてフォローされた後に自動的にビルドがトリガーされます。 If the project was or ever has been followed in 2.0 or 3.0, it will not be considered a new project or first build and a build will not be triggered after a follow. ビルドをトリガーするには、新しいコミットやブランチのプッシュなど、Github Web フックをトリガーするアクティビティを実行してください。
+* デフォルトでは、新しく追加されたプロジェクト (1 回もフォローされていないプロジェクト) は、初めてフォローされた後に自動的にビルドがトリガーされます。 プロジェクトが 2.0 または 3.0 でフォローされたことがある場合、そのプロジェクトは新しいプロジェクトや最初のビルドとは見なされず、フォロー後にビルドはトリガーされません。 ビルドをトリガーするには、新しいコミットやブランチのプッシュなど、Github Web フックをトリガーするアクティビティを実行してください。
 
 ### "Error from server (NotFound):" というエラーが表示されました。 
 * 移行スクリプトでは、Postgres および MongoDB の命名規則が特定のパターンに従っているものと想定しています。 このエラーが表示される場合、インストール環境が標準と異なっているか、DB が移行されていないなどの問題があります。 このエラーが表示された場合は、サポート バンドルと、移行スクリプトの出力を添えてサポートにお問い合わせ下さい。 

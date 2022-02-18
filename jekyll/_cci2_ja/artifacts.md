@@ -1,16 +1,16 @@
 ---
 layout: classic-docs
-title: "ビルド アーティファクトの保存"
-short-title: "ビルド アーティファクトの保存"
-description: "ビルド中に作成されるアーティファクトのアップロード例"
+title: "ビルドアーティファクトの保存"
+short-title: "ビルドアーティファクトの保存"
+description: "ビルド中に作成されたアーティファクトのアップロード例"
 order: 70
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-以下のセクションに沿って、アーティファクトの操作方法を説明します。
+このドキュメントでは、アーティファクトの取扱方法について説明します。
 
 * 目次
 {:toc}
@@ -18,23 +18,23 @@ version:
 ## アーティファクトの概要
 {: #artifacts-overview }
 
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
+アーティファクトには、ジョブが完了した後もデータが維持され、ビルドプロセス出力を格納するストレージとして使用できます。
 
-たとえば、Java のビルドおよびテストのプロセスが 1 つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
+たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
-![アーティファクトのデータ フロー]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータ フロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。
 
 ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
-![[Artifacts (アーティファクト)] タブのスクリーンショット]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+CircleCI Web アプリでパイプラインの **Job** ページに移動し、[**Artifacts**] タブを見つけます。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
-アーティファクトへのリンクは、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示されます。 アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
+![[Artifacts (アーティファクト)] タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
 **アーティファクトへは作成から30日間アクセスできます。 **  ドキュメントや永続的なコンテンツのソースとして依存している場合、S3や静的Webサイト用のGitHub Pages、Netlifyのような専用領域にデプロイすることを推奨します。
 
-**メモ:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
+**注:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
 ## アーティファクトのアップロード
 {: #uploading-artifacts }
@@ -69,19 +69,18 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。        
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job **ページの **[Artifacts]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。        
 単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
-
 
 現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
   - `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
   - `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
 
-## コア ファイルのアップロード
+## コアファイルのアップロード
 {: #uploading-core-files }
 
-このセクションでは、[コア ダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
+このセクションでは、[コアダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
 
 1. 以下の行を含む `Makefile` を作成します。
 
@@ -100,9 +99,9 @@ jobs:
      }
      ```
 
-3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)` を印刷します。
+3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)` を出力します。
 
-このサンプル C abort プログラムをコンパイルし、コア ダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
+このサンプル C abort プログラムをコンパイルし、コアダンプをアーティファクトとして収集する `config.yml` の全文は、以下のようになります。
 
 ```yaml
 version: 2
@@ -130,22 +129,22 @@ jobs:
           path: /tmp/core_dumps
 ```
 
-`ulimit -c unlimited` は、コア ダンプ ファイルのファイル サイズ制限をなくします。 この制限をなくすと、プログラムがクラッシュするたびに、作業中のカレント ディレクトリにコア ダンプ ファイルが作成されます。 コア ダンプ ファイルには、`core.%p.%E` という名前が付きます。 `%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
+`ulimit -c unlimited` により、コアダンプファイルのファイルサイズ制限がなくなります。 この制限がなくなると、プログラムがクラッシュするたびに、作業中のディレクトリにコアダンプファイルが作成されます。 コアダンプファイルには、`core.%p.%E` という名前が付きます。 `%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
 
-最後に、`store_artifacts` によってアーティファクト サービスの `/tmp/core_dumps` ディレクトリにコア ダンプ ファイルが格納されます。
+最後に、`store_artifacts` によってアーティファクトサービスの `/tmp/core_dumps` ディレクトリにコアダンプファイルが格納されます。
 
 ![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブにコア ダンプ ファイルへのリンクが表示されます。
+CircleCI がジョブを実行すると、**Job ページ**の [Artifacts] タブにコアダンプファイルへのリンクが表示されます。
 
-## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
+## ビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
 
-`curl` を使ってアーティファクトをダウンロードするには、以下の手順で行います。
+`curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
-1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
+1. [こちらの手順]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
 
-2. ターミナル ウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
+2. ターミナルウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 
 3. 以下のコマンドを実行します。 `:` で始まる変数は、コマンドの下に掲載した表を参照して、実際の値に置き換えてください。
 
@@ -168,7 +167,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
 ```
 
-CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンス ガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
+CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンスガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
 
 | プレースホルダー      | 意味                                                                           |
 | ------------- | ---------------------------------------------------------------------------- |
@@ -179,8 +178,26 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 | `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
 {: class="table table-striped"}
 
+## アーティファクトの最適化
+{: #artifacts-optimization }
+
+最適化オプションは、実行しようとしている内容に応じてプロジェクトごとに異なります。 ネットワークやストレージの使用量を削減するために、下記をお試しください。
+
+- `store_artifacts` が不必要なファイルをアップロードしていないか確認する。
+- 並列処理を使用している場合は、同じアーティファクトがないか確認する。
+- 最低限のコストでテキストのアーティファクトを圧縮する。
+- UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードする。
+- フィルタを外し、失敗したテストまたは成功したテストのみをアップロードする。
+- 1つのブランチにのみアーティファクトをアップロードする。
+- 大きなアーティファクトは、独自のバケットに無料でアップロードする。
+
+詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#how-to-optimize-your-storage-and-network-transfer-use)のページを参照して下さい。
+
+お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
+
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching/)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data/#using-artifacts)

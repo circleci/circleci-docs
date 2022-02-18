@@ -99,25 +99,25 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
    version: 2
    jobs: # 今回は 2 つのジョブを用意し、ワークフロー機能でジョブの調整を行います。
      one: # 1 つ目のジョブ
-       docker: # Docker Executor を使用します。
-         - image: circleci/ruby:2.4.1 # Ruby 2.4.1 を含む Docker イメージを指定します。
+       docker: # it uses the docker executor
+         - image: cimg/ruby:2.6.8 # specifically, a docker image with ruby 2.6.8
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-       # ステップは、上記の Docker コンテナ内で実行するコマンドのリストです
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+       # Steps are a list of commands to run inside the docker container above.
        steps:
          - checkout # GitHub からコードをプルします
          - run: echo "A first hello" # "A first hello" を stdout に出力します
          - run: sleep 25 # 25 秒間スリープするようにジョブに指示するコマンドです。
      two: # 2 つ目のジョブ
        docker: # 前述と同様に Docker イメージ内で実行します。
-         - image: circleci/ruby:2.4.1
+         - image: cimg/ruby:3.0.2
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
        steps:
          - checkout
-         - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します。
+         - run: echo "A more familiar hi" # We run a similar echo command to above.
          - run: sleep 15 # 15 秒間スリープします
    # このワークフローでは、マッピングを行い、上記で定義した 2 つのジョブを調整することができます。
    workflows:
@@ -146,32 +146,32 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: cimg/ruby:3.0.2
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "A first hello"
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspaces" > my_workspace/echo-output
       - persist_to_workspace:
-          # 絶対パスまたは working_directory からの相対パスでなければなりません。
+          # Must be an absolute path, or relative path from working_directory
           root: my_workspace
-          # ルートからの相対パスでなければなりません。
+          # Must be relative path from root
           paths:
-            - echo-output      
+            - echo-output
   two:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: cimg/ruby:3.0.2
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: echo "A more familiar hi"  
+      - run: echo "A more familiar hi"
       - attach_workspace:
-          # 絶対パスまたは working_directory からの相対パスでなければなりません。
+          # Must be absolute path or relative path from working_directory
           at: my_workspace
 
       - run: |

@@ -44,22 +44,20 @@ steps:
         # Linux 仮想マシン環境で実行するコマンド
 ```
 
-{:.tab.machine.Server}
+{:.tab.machine.Server_3}
 ```
 jobs:
-  build:
-    machine:
-      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+  build: # name of your job
+    machine: true # executor type
     steps:
       # Commands run in a Linux virtual machine environment
 ```
 
-`machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
+{:.tab.machine.Server_2}
 ```
 jobs:
   build: # name of your job
-    machine: # executor type
-      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+    machine: true # executor type
 
     steps:
       # Commands run in a Linux virtual machine environment
@@ -69,18 +67,15 @@ jobs:
 
 ## macOS
 {: #macos }
-
-_The macOS executor is not currently available on self-hosted installations of CircleCI server_
-
 ```
 jobs:
-  build: # ジョブの名前
-    macos: # Executor タイプ
+  build: # name of your job
+    macos: # executor type
       xcode: 12.5.1
 
     steps:
-      # Xcode 11.3 がインストールされた
-      # macOS 仮想マシン環境で実行するコマンド
+      # Commands run in a macOS virtual machine environment
+      # with Xcode 12.5.1 installed
 ```
 
 `macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
@@ -117,8 +112,8 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
+    machine: # executor type
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -132,8 +127,8 @@ version: 2
 
 jobs:
   build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
+    machine: # executor type
+      image: windows-default
     resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment

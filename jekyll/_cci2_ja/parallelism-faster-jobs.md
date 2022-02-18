@@ -291,9 +291,7 @@ workflows:
 {: #video-troubleshooting-globbing }
 {:.no_toc}
 
-注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。 
-
-<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 関連項目
 {: #see-also }
