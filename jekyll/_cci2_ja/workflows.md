@@ -217,7 +217,7 @@ workflows:
 - つまり、上の例の `build` や `test1` など、カスタム構成されたジョブに `type: approval` キーを指定することはできません。
 - 保留するジョブの名前は任意で、例えば、 `wait` や `pause`などでもよく、ジョブの中に `type: approval` というキーがあればよいのです。
 - 手動承認を行うジョブの後に実行するすべてのジョブには、そのジョブの名前を `require:` で_指定する必要があります_。 上記の例では `deploy:` ジョブがそれに該当します。
-- 依存しているジョブに続いて実行される `type: approval` キーのあるジョブまで、Workflow は順番通りに実行します。
+- ワークフローで `type: approval` キーを持つジョブと、そのジョブが依存するジョブが処理されるまでは、ジョブは定義された順序で実行されます。
 
 以下のスクリーンショットは、保留中のワークフローを示しています。
 
@@ -309,7 +309,7 @@ workflows:
 
 `filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
 
-詳細については、「CircleCI を設定する」の「[`branches`]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)」セクションを参照してください。
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)の`branches `セクションを参照してください。
 
 このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
 
@@ -344,12 +344,12 @@ workflows:
             - test2
 ```
 
-この例では、環境変数はデフォルト名の `org-global` としている `context` キーを設定することで定義されます。 Workflows にある `test1` と `test2` のジョブは、組織に属するユーザーが初期化した際に同じ共有環境変数を使います。 デフォルトでは、組織が管理している全プロジェクトがその組織の一連のコンテキストにアクセスできます。
+この例では、環境変数はデフォルト名の `org-global` としている `context` キーを設定することで定義されます。 この例のワークフローにある `test1` と `test2` のジョブは、組織に属するユーザーが初期化した際に同じ共有環境変数を使います。 デフォルトでは、組織が管理している全プロジェクトがその組織の一連のコンテキストにアクセスできます。
 
 ### ブランチレベルでジョブを実行する
 {: #branch-level-job-execution }
 
-下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定した  Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
+下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定したワークフロー の例です。 ワークフローは `jobs` 配下でネストしている `branches` キーを無視します。 そのため、ジョブレベルでブランチを宣言して、その後に ワークフローを追加する場合には、下記のように、ジョブレベルにあるブランチを削除し、`config.yml`のワークフローセクションで宣言しなければなりません。
 
 ![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
@@ -517,24 +517,24 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 ## ワークスペースによるジョブ間のデータ共有
 {: #using-workspaces-to-share-data-between-jobs }
 
-Workflow には必ず Workspace というものが割り当てられています。Workspace は、Workflow の進捗をチェックする目的で、それに続く後ろのジョブにファイルを渡すために使われます。 For further information on workspaces and their configuration see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces) doc.
+各ワークフローには 1 つのワークスペースが関連付けられ、ワークフローの進行に伴ってダウンストリーム ジョブにファイルを転送するために使用されます。 For further information on workspaces and their configuration see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces) doc.
 
 ## ワークフロー内の失敗したジョブの再実行
 {: #rerunning-a-workflows-failed-jobs }
 
-ワークフローを利用すると、ビルドの失敗に迅速に対応できるようになります。 その際、ワークフローのなかで**失敗した**ジョブのみを再実行できます。CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
+ワークフローを利用すると、ビルドの失敗に迅速に対応できるようになります。 ワークフローの中の**失敗した**ジョブのみを再実行するには、CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
 
-![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI のワークフローのページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 {: #troubleshooting }
 
-ここでは Workflow に関する一般的な問題とその解決方法について解説しています。
+ここではワークフローに関する一般的な問題とその解決方法について解説しています。
 
 ### ワークフローと後続のジョブがトリガーされない
 {: #workflow-and-subsequent-jobs-do-not-trigger }
 
-Workflows がトリガーされないのは、主に構成エラーによって Workflows の起動が妨げられていることが原因です。 そのため、Workflow がジョブを開始しない事態が発生します。 プロジェクトのパイプラインをナビゲートし、失敗の可能性を識別する Workflow 名をクリックしてください。
+ワークフローがトリガーされないのは、主に設定エラーによってワークフローの起動が妨げられていることが原因です。 そのため、ワークフローがジョブを開始しない事態が発生します。 プロジェクトのパイプラインに移動し、ワークフロー名 をクリックして、何が失敗しているかを確認します。
 
 ### ワークフローの再実行が失敗する
 {: #rerunning-workflows-fails }
@@ -559,9 +559,9 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #see-also }
 {:.no_toc}
 
-- Workflow に関するよくある質問は、FAQ ページの [Workflow]({{ site.baseurl }}/2.0/faq) セクションを参照してください。
+- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq)」のワークフロー セクションを参照してください。
 
-- Workflow を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) から入手できます。
+- ワークフローを使用して設定されたデモ アプリについては、GitHub で [CircleCI デモ ワークフロー](https://github.com/CircleCI-Public/circleci-demo-workflows)を参照してください。
 
 ## ビデオ: ワークフローに複数のジョブを設定する
 {: #video-configure-multiple-jobs-with-workflows }
