@@ -55,7 +55,7 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
-```
+```yaml
 jobs:
   build-android:
     docker:
@@ -74,7 +74,7 @@ _The macOS executor is not currently available on installations of CircleCI serv
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
-```
+```yaml
 jobs:
   build-macos:
     macos:
