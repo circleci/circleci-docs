@@ -193,7 +193,7 @@ The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) 
 ## Python
 {: #python }
 
-[Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) is a popular library
+[Coverage.py](https://coverage.readthedocs.io/en/6.3.1/) is a popular library
 for generating Code Coverage Reports in python. To get started, install
 Coverage.py:
 
