@@ -41,7 +41,7 @@ _**packagecloud:enterprise をお使いの方は、`$PACKAGECLOUD_URL` のみを
 
 CircleCI で packagecloud CLI を使用するには、RubyGems を使用してインストールします。そのためには、`.circleci/config.yml` でパッケージをデプロイするように設定したジョブの下に、以下の `run` ステップを追加します。
 
-```
+```yml
 - run:
    name: packagecloud CLI のインストール
    command: gem install package_cloud
