@@ -111,8 +111,21 @@ jobs:
 ```yml
 version: 2.1
 
-orbs: browser-tools: circleci/browser-tools@1.1.0 jobs: build: # pre-built images: https://circleci.com/docs/2.0/circleci-images/ docker: - image: cimg/node:17.2-browsers steps: - checkout - browser-tools/install-browser-tools - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
-
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
+jobs:
+  build:
+    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
+    docker:
+      - image: cimg/node:17.2-browsers
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
       - run:
           name: Code Has Arrived
           command: |
@@ -183,7 +196,10 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-
+            
+workflows:
+ Example_Workflow:
+   jobs:
      - Hello-World
      - I-Have-Code:
          requires:
