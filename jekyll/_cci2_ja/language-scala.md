@@ -33,7 +33,7 @@ version:
 
 CircleCI では、リポジトリの root に新しいディレクトリを作成し、そのディレクトリ内に YAML ファイルを作成する必要があります。 これらの新しいアセットの名前は、ディレクトリが `.circleci/`、ファイルが `config.yml` と、命名スキーマに従って指定する必要があります。
 
-```
+```shell
 mkdir .circleci/
 touch .circleci/config.yml
 ```
@@ -231,3 +231,4 @@ steps:
 - Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
 - デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{site.baseurl}}/ja/2.0/deployment-integrations/)」を参照してください。
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。
+  
