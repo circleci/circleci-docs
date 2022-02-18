@@ -70,7 +70,7 @@ suggested:
 
 `workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows)」セクション_を参照してください。
 
-ジョブ セットを同時に実行するには、既存の `.circleci/config.yml` ファイルの末尾に新しい `workflows:` セクションを追加し、バージョンとワークフローの一意名を指定します。 以下の `.circleci/config.yml` ファイルの例に、2 つの同時実行ジョブから成るデフォルトのワークフロー オーケストレーションを示します。 `build_and_test` という名前の `workflows:` キーで Workflow が定義され、その下にネストされた `jobs:` キーとジョブ名のリストが見えます。 依存関係が定義されていないため、これらのジョブは同時に実行されます。
+複数のジョブを同時に実行するには、既存の `.circleci/config.yml` ファイルの末尾に新しい `workflows:` セクションを追加し、バージョンとワークフローの一意名を指定します。 以下の `.circleci/config.yml` ファイルは、2 つの同時実行ジョブから成るデフォルトのワークフロー オーケストレーションの例です。 これは、`build_and_test` という名前の `workflows:` キーを使用し、ジョブ名のリストから成る `jobs:` キーをネストすることによって定義されています。 依存関係が定義されていないため、これらのジョブは同時に実行されます。
 
 ```yaml
 jobs:
@@ -106,14 +106,14 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前よりも先に実行することをお勧めします。
 - ワークフローの_先頭_に setup ジョブを実行すると、事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備にも役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/2.0/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/2.0/adv-config)」を参照してください。
 
 ### 順次ジョブ実行の例
 {: #sequential-job-execution-example }
 
 以下の例は、4 つの順次ジョブから成るワークフローを示しています。 ジョブは、構成された要件に従って実行されます。図に示すように、各ジョブは必要なジョブが正常に終了してから開始されます。
 
-![シーケンシャルジョブを実行する Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
+![順次ジョブを実行するワークフロー]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
 下記で示した `config.yml` のコードは、シーケンシャルジョブの設定を施した Workflow の例です。
 
@@ -143,7 +143,7 @@ workflows:
 
 以下に示すワークフローの例では、共通のビルド ジョブを実行し、次にファンアウトして一連の受け入れテスト ジョブを同時に実行し、最後にファンインして共通のデプロイ ジョブを実行します。
 
-![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
+![ファンアウト/ファンイン ワークフロー]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
 
 以下の `config.yml` スニペットは、ファンアウト/ファンイン ジョブの実行を設定するワークフローの例を示しています。
 
@@ -174,7 +174,7 @@ workflows:
 ```
 この例では、`build` ジョブが完了した後すぐに 4 つの `acceptance_test` ジョブがスタートします。 その後、 4 つの `acceptance_test` ジョブの完了を待って、`deploy` ジョブが実行されます。
 
-実際の設定サンプルは [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) で確認できます。
+このサンプルの全文は、[ファンイン/ファンアウトのワークフローの構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out)でご覧いただけます。
 
 ## 手動承認後に処理を続行するワークフロー
 {: #holding-a-workflow-for-a-manual-approval }
@@ -208,12 +208,12 @@ workflows:
             - hold
 ```
 
-上の例を実行した場合、CircleCI アプリケーションの [Workflows (ワークフロー)] ページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。 However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
+上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。 However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
 
 ワークフローで手動承認を使用する場合は、以下の点に注意する必要があります。
 
 - `approval` は、`workflow` キーの下にあるジョブで**のみ**使用できる特別な種類のジョブです。
-- `hold` のように待機用に用意するジョブは、他にジョブ名として使われていない一意の名前にする必要があります。
+- `hold` ジョブは、他のジョブで使用されていない一意の名前である必要があります。
 - つまり、上の例の `build` や `test1` など、カスタム構成されたジョブに `type: approval` キーを指定することはできません。
 - 保留するジョブの名前は任意で、例えば、 `wait` や `pause`などでもよく、ジョブの中に `type: approval` というキーがあればよいのです。
 - 手動承認を行うジョブの後に実行するすべてのジョブには、そのジョブの名前を `require:` で_指定する必要があります_。 上記の例では `deploy:` ジョブがそれに該当します。
