@@ -10,7 +10,7 @@
 <span>{{ include.guide_completion_time }} min task</span>
 </div>
 
-* TOC 
+* TOC
 {:toc}
 </div>
 <div id="card-or-card-container">
