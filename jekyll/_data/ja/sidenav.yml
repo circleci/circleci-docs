@@ -122,6 +122,7 @@ en:
           - 
           - 
           - 
+          - 
       - 
         name: Windows
         children:
@@ -313,7 +314,7 @@ en:
     children:
       - 
         name: Server v2.19.x Install
-        link: 2.0/install-overview/
+        link: 2.0/server-3-overview
         children:
           - 
             name: 会社概要
@@ -379,11 +380,11 @@ en:
         link: 2.0/install-overview/
         children:
           - 
-            name: What's New in v2.38
+            name: v3.3 Overview
           - 
           - 
           - 
-            name: v2.38.3 Operations Guide
+            name: v3.3 Operations Guide
       - 
         name: Server v3.1.x PDFs
         link: 2.0/install-overview/
