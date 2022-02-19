@@ -46,7 +46,7 @@ CircleCI プラットフォームでテストを行う際には、多様なテ�
 {: #testing-optimization-on-the-circleci-platform-for-a-python-django-project }
 {:.no_toc}
 
-一部の組織では、CircleCI を使用して、各変更をメイン ブランチにマージする前にテストを実行しています。 テストを高速化すると、フィードバックサイクルが速く回るようになり、自信を持ってコードを頻繁にリリースできるようになります。 Python Django アプリケーションのワークフローの例を見てみましょう。CircleCI プラットフォームでテストを完了するのに 13 分以上かかっています。
+CircleCI で各変更をメインブランチにマージする前にテストを実行している組織もあります。 テストを高速化すると、フィードバックサイクルが速く回るようになり、自信を持ってコードを頻繁にリリースできるようになります。 Python Django アプリケーションのワークフローの例を見てみましょう。CircleCI プラットフォームでテストを完了するのに 13 分以上かかっています。
 
 テストプロセスは以下のように表示されます。
 
@@ -166,7 +166,7 @@ jobs:
 ## ワークフローによりデプロイ頻度を上げる
 {: #workflows-increase-deployment-frequency }
 
-顧客に価値を提供することは、あらゆる組織の最優先目標であり、組織のパフォーマンスは、価値が提供される頻度 (デプロイ) で測ることができます。 DevOps Research and Assessment Report  (2019 年) によれば、パフォーマンスの高いチームはお客様に 1 日に何度も価値を提供しています。
+顧客に価値を提供することは、あらゆる組織の最優先目標であり、組織のパフォーマンスは、価値が提供される頻度 (デプロイ頻度) により測ることができます。 DevOps Research and Assessment Report  (2019 年) によれば、パフォーマンスの高いチームは顧客に 1 日に何度も価値を提供しています。
 
 多くの組織では、四半期に 1 回、または月に 1 回、顧客に価値をデプロイしていますが、この頻度を週に 1 回または 1 日に 1 回に上げる基本的な方法は、組織の価値の*パイプライン* に追加される同じタイプのオーケストレーションです。
 
@@ -175,16 +175,16 @@ jobs:
 {%comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
 endcomment %}
 
-開発者にメイン環境ですべてのテストを実行し、デプロイを実行しないワークフローを提供することにより、すべてのテストが合格するまで、ブランチでコードを安全にテストおよびデバッグできます。
+メイン環境ですべてのテストを実行し、デプロイは実行しないワークフローを提供することにより、開発者はすべてのテストが成功するまで、ブランチでコードを安全にテストおよびデバッグすることができます。
 
 {%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
 endcomment %}
 
-A workflow that runs all tests *as if they were on main* gives developers the confidence they need to merge to main knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
+すべてのテストを*メインにあるかのように*実行するワークフローにより、開発者はコードの破損や顧客のサービスが中断されることがないことを知っているため、安心してメインにマージすることができます。 このようなワークフローを設定するための小さな投資により、顧客にとって重要な変更のデプロイ頻度を増やすことができます。
 
-A simple example would configure deployment to run *only* if a change is merged to main and the test jobs have already passed.
+シンプルな例として、変更がメインにマージされ、テストジョブがすでに成功している場合*のみ*、デプロイを実行するように設定します。
 
-For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
+この設定は、1 日に何度もデプロイする組織では下記の YAML スニペットのようにシンプルです。
 
 ```yaml
 workflows:
@@ -201,9 +201,9 @@ workflows:
 ```
 
 
-The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to main. If changes happen *on main* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
+上記の方法でワークフローを*使用していない*組織のデプロイ頻度の差には、開発者の環境と本番環境を同じ環境にするために必要な時間が含まれます。また、コードに問題がないことを確認するために同じテストをすべて実行する時間も含まれます。 メインに他の変更を加える前に、すべての開発者がすべての環境の更新とテストを完了しなければなりません。 環境の更新中または独自のテストの実行中に*メインで*変更があった場合、コードの破損がないことを確認するためにすべてを再実行しなければなりません。
 
-For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
+ゆっくりとしたペースでデプロイする組織の場合、夜間にビルドワークフローを設定し、顧客がアップデートを必要とする日にテスト済みのデプロイ可能なビルドを提供することができます。
 
 ```yaml
 workflows:
@@ -220,7 +220,7 @@ workflows:
       - deploy
 ```
 
-The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
+時間の差には、上記で説明した遅れに加え、開発者が変更を完了してからスケジュール化されたビルドが実行されるまでのパイプラインの実行時間と経過時間も含まれます。 これらの時間を合わせると、開発者はコードの品質に対する信頼性を高めることができ、デプロイ頻度も高められます。
 
 
 ## 関連項目
