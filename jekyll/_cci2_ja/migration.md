@@ -134,7 +134,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # SSH で接続します
 
 
 
-## Fun facts
+## 豆知識
 
 - CircleCI 2.0 では、ユーザーの想像力を無限に活かすことができます。
 - シェルを Python に設定すれば、YAML で任意の Python を実行できます。
