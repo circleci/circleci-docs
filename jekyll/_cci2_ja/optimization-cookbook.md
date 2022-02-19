@@ -42,7 +42,7 @@ CircleCI プラットフォームでテストを実行するには、テスト�
 
 CircleCI プラットフォームでテストを行う際には、多様なテスト スイートやアプローチを採用できます。 CircleCI はテスト スイートに依存しませんが、以下の例 ([こちらのブログ記事](https://www.brautaset.org/articles/2019/speed-up-circleci.html)でこのテスト最適化ユース ケースについて説明している開発者から許可を得て改変) では、Django と CircleCI プラットフォームでテストを最適化する方法を説明します。
 
-### CircleCI プラットフォームでの Python Django プロジェクトのテストの最適化
+### CircleCI プラットフォームでの Python Django プロジェクトのテストを最適化する
 {: #testing-optimization-on-the-circleci-platform-for-a-python-django-project }
 {:.no_toc}
 
@@ -72,17 +72,17 @@ CircleCI プラットフォームでテストを行う際には、多様なテ�
 
 このように、実質的にテストを実行していないセットアップの段階でかなりの時間がかかっています。 このプロセスでは、実際のテストが実行されるまでに 6.5 分を必要とし、さらにもう 1 つのテスト ジョブの実行までに 6.5 分を要していました。
 
-### テストの準備の最適化
+### テストの準備を最適化する
 {: #test-preparation-optimization }
 {:.no_toc}
 
-このワークフローのステップの実行に 13 分は長すぎるため、以下のアプローチが採用されました。
+このワークフローのステップの実行に 13 分は長すぎるため、以下の方法を実行して最適化および時間を短縮しました。
 
 #### CI テストのワークフローの変更
 {: #changing-the-ci-test-workflow }
 {:.no_toc}
 
-ベース イメージのビルドを行わないように、CI テスト ワークフローを変更しました。 テスト ジョブも変更し、`docker-compose` を使用するのではなく、CircleCI の Docker Executor に備わっているサービス コンテナ サポートを使用して補助サービスを起動するようにしました。 さらに、メイン コンテナから `tox` を実行して、依存関係のインストールとテストの実行を行うようにすることで、イメージを保存してワークスペースから復元するのに要していた時間を削減しました。 これにより、Machine Executor の起動にかかる余分なコストも削減されました。
+ベースイメージのビルドを行わないように、CI テス ワークフローを変更しました。 テスト ジョブも変更し、`docker-compose` を使用するのではなく、CircleCI の Docker Executor に備わっているサービスコンテナサポートを使用して補助サービスを起動するようにしました。 さらに、メイン コンテナから `tox` を実行して、依存関係のインストールとテストの実行を行うようにすることで、イメージを保存してワークスペースからリストアするのに要していた時間を削減しました これにより、Machine Executor の起動にかかる余分なコストも削減されました。
 
 #### 依存関係の変更
 {: #dependency-changes }
@@ -90,11 +90,11 @@ CircleCI プラットフォームでテストを行う際には、多様なテ�
 
 Dockerfile を使用するのではなく、CircleCI のプライマリコンテナに依存関係をインストールすると、CircleCI のキャッシュ機能によって `virtualenv` の作成を高速化できる場合があります。
 
-### テスト実行の最適化
+### テストの実行を最適化する
 {: #test-execution-optimization }
 {:.no_toc}
 
-これでテストの準備時間が短縮されました。次は、実際のテストの実行を高速化することも可能です。 たとえば、テストの実行後にデータベースを保持する必要がない場合もあります。 テストを高速化するための一つの方法は、テストに使用するデータベースのイメージを[ディスクに保存されないメモリ内 Postgres イメージ]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) に置き換えることです。 Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
+上記の手順により、テストの準備時間が短縮されました。次は、実際のテストの実行を高速化しましょう。 たとえば、テストの実行後にデータベースを保持する必要がない場合もあります。 テストを高速化するための一つの方法は、テストに使用するデータベースのイメージを[ディスクに保存されないメモリ内 Postgres イメージ]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) に置き換えることです。 もう一つは、一度に一つのテストをする代わりに[テストを並列実行]({{site.baseurl}}/2.0/parallelism-faster-jobs/)する方法です。
 
 これらの変更によってワークフロー全体の時間がどれだけ短縮されたかは下図のとおりです。
 
@@ -102,20 +102,20 @@ Dockerfile を使用するのではなく、CircleCI のプライマリコンテ
 
 ここまで見てきたように、1 つの変更だけでワークフロー全体の時間を短縮したわけではありません。 たとえば、時間の大部分がテストの準備に費やされていたら、テストを並列実行してもそれほどメリットはなかったでしょう。 ローカルの環境ではなく CircleCI プラットフォームでテストを実行することの違いを認識し、テストの準備と実行にいくつかの変更を加えることでテストの実行時間を改善できます。
 
-## Test splitting to speed up pipelines
+## テストを分割してパイプラインを高速化する
 {: #test-splitting-to-speed-up-pipelines }
 
-Pipelines are often configured so that each time code is committed a set of tests are run. Test splitting is a great way to speed up the testing portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments running in parallel.
+パイプラインは、一般的にコードがコミットされるたびに一連のテストが実行されるように設定されます。 テストの分割は、CICD パイプラインのテスト部分を高速化できる優れた方法です。 テストは、常に順番に実行する必要はありません。一連のテストは、並行して実行されるさまざまなテスト環境に分割することができます。
 
-Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of test environments running in parallel, to give the lowest possible test time for the compute power in use.
+テスト分割を使用すると、名前やサイズなどによって、テストスイートのどこで分割するのかをインテリジェントに定義できます。 **タイミングベース**のテスト分割を使用すると、前回のテスト実行のタイミングデータを使用して、並行して実行されている指定された数のテスト環境でできるだけ均等にテストスイートを分割し、使用中の計算能力のテスト時間を最小限に抑えることができます。
 
 ![テストの分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-### Parallelism and test splitting
+### 並列処理とテスト分割
 {: #parallelism-and-test-splitting }
 {:.no_toc}
 
-To illustrate this with CI config, take a sequentially running test suite – all tests run in a single test environment (docker container):
+順次実行されるテストスイートを使って、これを CI 設定で説明します。すべてのテストは、単一のテスト環境（ Docker コンテナ）で実行されます。
 
 ```yaml
 jobs:
@@ -131,9 +131,10 @@ jobs:
     working_directory: ~/my-app
     steps:
       - run: go test
+
 ```
 
-To split these tests, using timing data, we first intoduce parallelism to spin up a number (10 in this case) of identical test environments. Then use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
+これらのテストを分割するには、タイミングデータを使用して、まず並列処理により同一のテスト環境の数（この場合は 10 ）をスピンアップします。 次に、 `--split-by=timings` フラグを指定して `circleci tests split` コマンドを使用して、すべての環境で可能な限り均等にテストを分割し、スイート全体が最短時間で実行されるようにします。
 
 ```yaml
 jobs:
@@ -152,29 +153,29 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-**Note:** The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
+**注: **テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行ではテスト時間が最適化されます。
 
-### Is it worth it?
+### 効果は？
 {: #is-it-worth-it }
 {:.no_toc}
 
-To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run across the CircleCI application project actually decreased the test time **from 26:11 down to 3:55**.
+このタイミングによる分割機能の効果を定量的に示すために、 CircleCI アプリケーションプロジェクト全体で実行されるテストスイートに`並列処理 :10`を追加すると、実際にテスト時間が **26:11 から 3:55** に短縮されました。
 
-Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
+テストスイートは、名前またはサイズで分割することもできますが、タイミングベースのテスト分割を使用すると、最も正確に分割することができ、各テストスイートの実行時に間違いなく最適化されます。分割する場所の定義には、常に最新のタイミングデータが使用されます。 詳細は、[並列処理を使ってジョブのテストを高速化する]({{site.baseurl}}/2.0/parallelism-faster-jobs/)を参照して下さい。
 
-## Workflows increase deployment frequency
+## ワークフローによりデプロイ頻度を上げる
 {: #workflows-increase-deployment-frequency }
 
-Providing value to your customers is the top goal for any organization, and one can measure the performance of an organization by how often (frequency) value is delivered (deployment). High-performing teams deploy value to customers multiple times per day according to the DevOps Research and Assessment Report, 2019.
+顧客に価値を提供することは、あらゆる組織の最優先目標であり、組織のパフォーマンスは、価値が提供される頻度 (デプロイ) で測ることができます。 DevOps Research and Assessment Report  (2019 年) によれば、パフォーマンスの高いチームはお客様に 1 日に何度も価値を提供しています。
 
-While many organizations deploy value to customer once per quarter or once per month, the basics of raising this frequency to once per week or once per day is represented by the same type of orchestration added to an organization's value *pipeline*.
+多くの組織では、四半期に 1 回、または月に 1 回、顧客に価値をデプロイしていますが、この頻度を週に 1 回または 1 日に 1 回に上げる基本的な方法は、組織の価値の*パイプライン* に追加される同じタイプのオーケストレーションです。
 
-To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of main, without being on the main branch. This is possible with the use of workflow orchestration in your continuous integration suite.
+開発者は、1 日に何度もデプロイするために、メインブランチにいなくても、メインの環境に正確に一致するコードブランチで変更をテストすることが可能な自動化されたワークフローを必要としています。 これは、継続的インテグレーションスイートでワークフローのオーケストレーションを使用することで可能になります。
 
 {%comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
 endcomment %}
 
-When you provide developers with a workflow that runs all of their tests in the main environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
+開発者にメイン環境ですべてのテストを実行し、デプロイを実行しないワークフローを提供することにより、すべてのテストが合格するまで、ブランチでコードを安全にテストおよびデバッグできます。
 
 {%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
 endcomment %}
