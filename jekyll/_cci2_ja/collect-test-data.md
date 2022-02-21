@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Collecting test data"
+title: "テストデータの収集"
 description: "A guide to collecting test data in your CircleCI projects."
 version:
   - クラウド
