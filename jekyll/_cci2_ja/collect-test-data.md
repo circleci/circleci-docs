@@ -1,24 +1,24 @@
 ---
 layout: classic-docs
 title: "テストデータの収集"
-description: "CircleCI プロジェクトでのテストデータ収集に関するガイド"
+description: "CircleCI プロジェクトにおけるテストデータ収集に関するガイド"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-CircleCI でテストを実行する際は、テスト結果を保存する方法が 2 つあります。 [アーティファクト]({{site.baseurl}}/2.0/artifacts)、または [store_test_results</code> ステップ]({{site.baseurl}}/2.0/configuration-reference/#storetestresults)を使用します。 それぞれの方法にメリットがあるため、プロジェクト毎に方法を決定する必要があります。 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
+CircleCI でテストを実行している場合、テスト結果を保存する方法が 2 つあります。 [アーティファクト]({{site.baseurl}}/2.0/artifacts)、または [`store_test_results` ステップ]({{site.baseurl}}/2.0/configuration-reference/#storetestresults)を使用する方法です。 それぞれの方法にメリットがあるため、プロジェクト毎に決定する必要があります。 `store_test_results` ステップを使ってデータを保存する場合、CircleCI はデータを XML ファイルから収集し、そのデータを使ってジョブのインサイトを提供します。 ここでは、よく使用されるテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
 
-Using the **`store_test_results` step** gives you access to:
+**`store_test_results` ステップ** を使うと以下が可能です。
 
-* The **Tests** pane in the CircleCI web app.
-* Test insights and flaky test detection.
+* CircleCI Web アプリの **テスト**
+* テストインサイトと結果が不安定なテストの検出
 * テストの分割.
 
-Alternatively, storing test results as **artifacts** means you can look at the raw xml. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts).
+一方で、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 これは、プロジェクトにおけるテスト結果の処理の設定に関する問題をデバッグする際に便利です。たとえば、誤ったファイルをアップロードしている場合に効果的です。 テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) ステップを使ってテスト結果をアップロードします。
 
-**Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
+**注: ** `store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
 
 * 目次
 {:toc}
