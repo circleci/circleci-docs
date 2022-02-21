@@ -26,9 +26,9 @@ CircleCI でテストを実行している場合、テスト結果を保存す�
 ## 概要
 {: #overview }
 
-Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
+[`store_test_results `]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results)ステップを使用すると、テスト結果をアップロードして保存することができ、また CircleCI のWeb アプリで成功したテストおよび失敗したテストを表示することができます。
 
-You can access the test results from the **Tests** tab when viewing a job, as shown below.
+このテスト結果機能は、ジョブを表示する際に**Tests**タブから利用できます。
 
 ![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
 
