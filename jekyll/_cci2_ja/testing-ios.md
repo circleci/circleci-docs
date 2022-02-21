@@ -77,7 +77,7 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
  
  {: class="table table-striped"}
  
- <sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
+ CircleCI 専有ホストでは <sup>(1)</sup> _Xcode 10.3 はサポートしていません。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p> 
  
  
 
@@ -204,7 +204,7 @@ end
 ```
 
 
-上記の設定は、以下の CircleCI のコンフィグファイルと組み合わせて使用できます。
+上記の設定は、以下の CircleCI の設定ファイルと組み合わせて使用できます。
 
 
 
@@ -541,9 +541,9 @@ steps:
 
 Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+インストールされている NodeJS のバージョン情報は、 [イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。 
 
 
 
