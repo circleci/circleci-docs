@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
 title: "テストデータの収集"
-description: "A guide to collecting test data in your CircleCI projects."
+description: "CircleCI プロジェクトでのテストデータ収集に関するガイド"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-When you run tests in CircleCI there two ways to store your test results. You can use either [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project. When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
+CircleCI でテストを実行する際は、テスト結果を保存する方法が 2 つあります。 [アーティファクト]({{site.baseurl}}/2.0/artifacts)、または [store_test_results</code> ステップ]({{site.baseurl}}/2.0/configuration-reference/#storetestresults)を使用します。 それぞれの方法にメリットがあるため、プロジェクト毎に方法を決定する必要があります。 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
 Using the **`store_test_results` step** gives you access to:
 
