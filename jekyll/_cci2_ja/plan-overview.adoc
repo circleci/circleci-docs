@@ -45,7 +45,7 @@ NOTE: 現在、従来の CircleCI コンテナベースプランを利用され�
 
 == クレジットベースプランの設定
 
-Free プランまたは Performance プランの設定を行うには、CircleCI Web アプリケーションから、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は、お問い合わせください (https://circleci.com/talk-to-us/)。
+Free プランまたは Performance プランの設定を行うには、CircleCI Web アプリケーションから、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は、[お問い合わせください ](https://circleci.com/talk-to-us/)。
 
 == クレジット使用量の管理
 
