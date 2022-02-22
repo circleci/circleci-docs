@@ -1,4 +1,4 @@
-= インストール ガイド: Amazon Web Service への CircleCI Server v{serverversion} のインストール/移行ガイド
+= インストール ガイド: Amazon Web Services への CircleCI Server v{serverversion} のインストール/移行ガイド
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/
