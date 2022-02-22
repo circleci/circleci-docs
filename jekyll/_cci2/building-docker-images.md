@@ -121,7 +121,7 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 ```yml
       - setup_remote_docker:
-          version: 19.03.13
+          version: 20.10.11
 ```
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
@@ -130,11 +130,7 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `20.10.7`
 - `20.10.6`
 - `20.10.2`
-- `19.03.14`
 - `19.03.13`
-- `19.03.12`
-- `19.03.8`
-- `18.09.3`
 - `17.09.0-ce` (default)
 
 <!---
