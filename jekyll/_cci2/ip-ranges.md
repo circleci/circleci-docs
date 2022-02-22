@@ -174,7 +174,7 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 - 198.206.135.0/24
 
 **IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform. 
-**Note:** You will not need to opt your job into the IP ranges feature by adding `circleci_ip_ranges: true` when using a macOS executor.
+**Note:** macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
 
 ## Known limitations
 {: #knownlimitations}
