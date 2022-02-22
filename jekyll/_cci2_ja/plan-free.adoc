@@ -34,4 +34,4 @@ Docker、 Linux、 Windows、および macOS （近日公開）のさまざま�
 
 === サポート
 
-[community forums] (https://discuss.circleci.com/)、[support portal] (https://support.circleci.com/hc/en-us)、および [global ticket-based system] (https://support.circleci.com/hc/ja/requests/new) からサポートをご利用いただけます。
+[community forums](https://discuss.circleci.com/)、[support portal](https://support.circleci.com/hc/en-us)、および [global ticket-based system](https://support.circleci.com/hc/ja/requests/new) からサポートをご利用いただけます。
