@@ -73,7 +73,7 @@ dependency_cache_paths:
 
 #partial-dependency-caching-strategies を参照して、使用している言語に関するヒントがあるかどうかを確認します。
 
-### キャッシュがリストアされ、保存されていることを確認
+### キャッシュがリストアされ、保存されていることを確認
 {: #check-cache-is-being-restored-as-well-as-saved }
 
 キャッシュがリストアされていない場合は、[こちらのサポート記事](https://support.circleci.com/hc/en-us/articles/360004632473-No-Cache-Found-and-Skipping-Cache-Generation)でヒントをお探しください。
