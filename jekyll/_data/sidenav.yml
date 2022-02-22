@@ -60,16 +60,14 @@ en:
           link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
-        - name: Environment variables
-          link: 2.0/env-vars/
-        - name: Caching
-          link: 2.0/caching/
-        - name: Caching strategies
-          link: 2.0/caching-strategy/
-        - name: Artifacts
-          link: 2.0/artifacts/
         - name: Workspaces
           link: 2.0/workspaces/
+        - name: Artifacts
+          link: 2.0/artifacts/
+        - name: Docker layer caching
+          link: 2.0/docker-layer-caching/
+        - name: Environment variables
+          link: 2.0/env-vars/
         - name: Collecting test data
           link: 2.0/collect-test-data/
         - name: Debugging with SSH
@@ -82,14 +80,16 @@ en:
       children:
         - name: Overview
           link: 2.0/optimizations
-        - name: Pipeline variables
-          link: 2.0/pipeline-variables/
         - name: Persisting Data
           link: 2.0/persist-data
+        - name: Caching dependencies
+          link: 2.0/caching/
+        - name: Caching strategies
+          link: 2.0/caching-strategy/
+        - name: Pipeline variables
+          link: 2.0/pipeline-variables/
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/
-        - name: Docker layer caching
-          link: 2.0/docker-layer-caching/
         - name: Optimizations cookbook
           link: 2.0/optimization-cookbook/
 
@@ -131,7 +131,6 @@ en:
           link: 2.0/android-machine-image
         - name: Arm Resources
           link: 2.0/arm-resources/
-
     - name: Mac
       children:
         - name: Overview
