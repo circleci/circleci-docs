@@ -44,7 +44,7 @@ Telegraf は複数の入出力タイプを同時に受け取ることができ�
 以下のコマンドで、メトリクスの設定ファイルを確認します。
 
 ifndef::pdf[{% raw %}]
-```sh
+```shell
 sudo docker inspect --format='{{range .Mounts}}{{println .Source "->" .Destination}}{{end}}' telegraf | grep telegraf.conf | awk '{ print $1 }' | xargs cat
 ```
 ifndef::pdf[{% endraw %}]
@@ -56,7 +56,7 @@ ifndef::pdf[{% endraw %}]
 * `\[[outputs.cloudwatch]]` – Output configuration to emit metrics to CloudWatch
 * `\[[outputs.datadog]]` – Output configuration to emit metrics to Datadog
 
-この設定ファイルは、Replicated (CircleCI Server v2.x を管理およびデプロイするためのサービス) によって自動的に生成され、管理もすべて Replicated が行います。 この標準の設定をカスタマイズしたい場合は、変更したいブロックを挿入*しない*ように Replicated を設定します。 
+この設定ファイルは、Replicated (CircleCI Server v2.x を管理およびデプロイするためのサービス) によって自動的に生成され、管理もすべて Replicated が行います。 この標準の設定をカスタマイズしたい場合は、変更したいブロックを挿入*しない*ように Replicated を設定します。
 
 CAUTION: ファイルを直接変更しないでください。 直接行った変更は、サービスの再起動などの特定のイベントでは Replicated によって破棄されます。 For example, if a customized `\[[inputs.statsd]]` block is added _without_ stopping automatic interpolation, you will encounter errors as Telegraf attempts to listen to `8125/UDP` twice, and the second attempt will fail with `EADDRINUSE`.
 

@@ -3,8 +3,6 @@ description: "This document describes the various ways users of your CircleCI se
 version:
 - Server v2.x
 - Server Admin
-
-suggested_links_has_experiments: true
 suggested:
   - title: How to refresh user permissions
     isExperiment: true
@@ -74,7 +72,7 @@ NOTE: Only one of the following methods should be necessary to grant admin acces
 
 *For a given user by LDAP user name (prior to GitHub account connection, or if they have no GitHub account):*
 
-```sh
+```clojure
 (-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-ldap-username" :first_vcs_authorized_client_id nil} :limit 1)
     (first)
     (circle.model.user/set-fields! {:admin "all"})
@@ -84,7 +82,7 @@ NOTE: Only one of the following methods should be necessary to grant admin acces
 
 *By GitHub user name (after GitHub account connection, which replaces prior :login value):*
 
-```sh
+```clojure
 (-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-github-username"} :limit 1)
     (first)
     (circle.model.user/set-fields! {:admin "all"})
@@ -94,7 +92,7 @@ NOTE: Only one of the following methods should be necessary to grant admin acces
 
 *By analytics ID*
 
-```sh
+```clojure
 (-> (circle.model.user/find-one-by-analytics-id "3b35037c-6eb3-4e41-88e2-3913b2f43d96")
     (circle.model.user/set-fields! {:admin "all"})
     (:analytics-id)

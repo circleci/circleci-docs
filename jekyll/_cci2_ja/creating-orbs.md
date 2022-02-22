@@ -99,7 +99,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
 インテグレーションテストが完了すると、デフォルトのブランチでのみデプロイジョブが実行されます。 [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) により、SHA 固有の開発版の Orb が取得され、セマンティックバージョン付きの公開バージョンにプロモートされます。
 
 {% raw %}
-```
+```yml
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: <namespace>/<orb-name>
           context: <publishing-context>
@@ -126,7 +126,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
 CircleCI から GitHub にタグをプッシュするには、[書き込みアクセス権のあるデプロイ キー]({{site.baseurl}}/ja/2.0/add-ssh-key/)が必要です。 リンク先の記事を参照して、デプロイキーを生成し追加してください。 追加が完了すると、そのキー用に生成された、`"SO:ME:FIN:G:ER:PR:IN:T"` のような "フィンガープリント" が表示されます。 この SSH フィンガープリントを、`orb-tools/dev-promote-prod-from-commit-subject` ジョブの `ssh-fingerprints` パラメーターに追加します。
 
 {% raw %}
-```
+```yml
       - orb-tools/dev-promote-prod-from-commit-subject:
           publish-version-tag: true
           ssh-fingerprints: "SO:ME:FIN:G:ER:PR:IN:T"

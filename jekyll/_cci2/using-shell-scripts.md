@@ -92,7 +92,7 @@ workflows:
 Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way.
 In the example below, observe how the `tmp.sh` script file reveals too much.
 
-```bash
+```shell
 > cat tmp.sh
 #!/bin/sh
 
@@ -118,7 +118,7 @@ You must set SECRET_ENV_VAR!
 There are several error flags you can set to automatically exit scripts when unfavorable conditions occur.
 As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
 
-```bash
+```shell
 #!/usr/bin/env bash
 
 # Exit script if you try to use an uninitialized variable.

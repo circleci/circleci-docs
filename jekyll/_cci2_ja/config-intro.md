@@ -157,9 +157,17 @@ jobs:
 
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
-
 ```yml
-image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!'
+version: 2.1
+jobs:
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Hello World
+          command: |
+            echo 'Hello World!'
             echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:
@@ -187,7 +195,6 @@ image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: 
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-
 workflows:
  Example_Workflow:
    jobs:

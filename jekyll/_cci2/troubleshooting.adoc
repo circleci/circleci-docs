@@ -30,7 +30,7 @@ Run `sudo docker logs dispatcher`, if you see log output that is free of errors 
 
 If the logs dispatcher container does not exist or is down, start it by running the `sudo docker start <container_name>` command and monitor the progress. The following output indicates that the logs dispatcher is up and running correctly:
 
-```shell
+```
 Jan 4 22:38:38.589:+0000 INFO circle.backend.build.run-queue dispatcher mode is on - no need for
 
  run-queue
@@ -55,7 +55,7 @@ If you can run 1.0 builds, but not 2.0 builds, or if you can only run 2.0 builds
 
 Run the `sudo docker logs picard-dispatcher` command. A healthy `picard-dispatcher` should output the following:
 
-```shell
+```
 Jan 9 19:32:33 INFO picard-dispatcher.init Still running...
 Jan 9 19:34:33 INFO picard-dispatcher.init Still running...
 Jan 9 19:34:44 INFO picard-dispatcher.core taking build=GERey/realitycheck/38
@@ -138,7 +138,7 @@ NOTE: The use of `--stderr` is to print the specific error if one exists.
 
 If the nomad client logs contain the following error message typw, check port 8585:
 
-```shell
+```json
 {"error":"rpc error: code = Unavailable desc = grpc: the connection is
 unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
 ```

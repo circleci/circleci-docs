@@ -21,7 +21,7 @@ Docker Compose を初めて使う場合は、[公式の Docker Compose の概要
 
 `docker-compose` ユーティリティは、Machine Executor と [CircleCI イメージ] にプリインストールされています。 別のイメージを使用している場合は、以下のコードを [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに追加することでアクティブ化されるリモート Docker 環境を使用して、ジョブ実行時に\[プライマリ コンテナ\]\[primary-container\]にインストールできます。
 
-```yml
+```yaml
       - run:
           name: Install Docker Compose
           environment:
@@ -37,13 +37,13 @@ Docker Compose を初めて使う場合は、[公式の Docker Compose の概要
 
 次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 
-```yml
+```yaml
       setup_remote_docker
 ```
 
 以下のステップにより、`docker-compose` コマンドをビルドイメージに追加できます。
 
-```yml
+```yaml
       - run:
           name: Build images of services declared in docker-compose.yml
           command: docker-compose build
@@ -51,7 +51,7 @@ Docker Compose を初めて使う場合は、[公式の Docker Compose の概要
 
 または、以下のステップで、システム全体を実行できます。
 
-```yml
+```yaml
       - run:
           name: Start all services declared in docker-compose.yml
           command: docker-compose up -d
@@ -59,7 +59,7 @@ Docker Compose を初めて使う場合は、[公式の Docker Compose の概要
 
 または、以下のステップで、サービスが実行しているか確認できます。
 
-```yml
+```yaml
       - run:
           name: Start docker-compose and verify service(s)
           command: |
@@ -68,7 +68,7 @@ Docker Compose を初めて使う場合は、[公式の Docker Compose の概要
             docker-compose --project circleci-demo-docker up -d
 
             # In this example, we have a "contacts" service, and
-            # we are trying to check, via `dockerize`, if the service is ready. 
+            # we are trying to check, via `dockerize`, if the service is ready.
             docker container run --network container:circleci-demo-docker_contacts_1 \
               docker.io/jwilder/dockerize \
               -wait http://localhost:8080/healthcheck \

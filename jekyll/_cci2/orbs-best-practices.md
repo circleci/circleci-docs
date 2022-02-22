@@ -133,7 +133,7 @@ steps:
 
 Before adding "sudo" to your commands, check to see if the user is already the root user. This can be done dynamically with environment variables.
 
-```bash
+```shell
 if [[ $EUID == 0 ]]; then export SUDO=""; else # Check if we are root
   export SUDO="sudo";
 fi

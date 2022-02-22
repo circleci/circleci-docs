@@ -64,19 +64,44 @@ logging:
 === runner.command_prefix
 `$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
-This prefix takes a YAML list of arguments that form a prefix to launch the task agent.  This prefix can be a ready made tool that elevates permissions like `sudo`, or a customer script.  The arguments passed to `command_prefix` will launch the task agent process.
+This prefix takes a YAML list of arguments that wraps and runs the task agent.
 
-If specifying a custom script, it must:
+For example, `sudo` can elevate permissions:
 
-1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
-2. Forward the exit code from task agent as its own exit code
-
-Example:
 
 ```yaml
 runner:
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
 ```
+
+The prefix can also be a custom script.  The arguments passed to the script will launch the task agent.
+
+The custom script must:
+
+1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
+2. Forward the exit code from task agent as its own exit code
+
+Example script saved as `/opt/circleci/wrapper.sh`:
+
+```bash
+#!/bin/bash
+
+task_agent_cmd=${@:1}
+echo "About to run CircleCI task agent: ${task_agent_cmd}"
+$task_agent_cmd
+exit=$?
+echo "CircleCI task agent finished."
+exit $exit
+```
+
+Config snippet for above example:
+
+```yaml
+runner:
+  command_prefix: ["/opt/circleci/wrapper.sh"]
+```
+
+Prefix
 
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`

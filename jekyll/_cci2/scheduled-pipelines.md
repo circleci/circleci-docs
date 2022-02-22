@@ -51,7 +51,7 @@ If your project has no scheduled workflows and you would like to try out schedul
 1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/2.0/managing-api-tokens/).
 2. Create a new schedule using the API. For example:
 
-```sh
+```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <your-cci-token>' \
 --header 'Content-Type: application/json' \
@@ -174,7 +174,7 @@ other-workflow:
 
 **A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
 
-```sh
+```shell
 curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
 --header 'circle-token: <PERSONAL_API_KEY>'
 ```
@@ -187,3 +187,13 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 * Is the actor who is set for the scheduled pipelines still part of the organization?
 * Is the branch set for the schedule deleted?
 * Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
+
+**Q:** Why did my scheduled pipeline run later than expected?
+
+**A:** There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to [the Cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).
+
+For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window.
+Note that it does not mean that it will run at 08:00 UTC exactly.
+
+However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run.
+In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.

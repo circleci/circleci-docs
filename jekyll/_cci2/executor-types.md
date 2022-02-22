@@ -24,7 +24,7 @@ This document describes the available executor types (`docker`, `machine`, `wind
 {:.no_toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
 An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of four environments:
@@ -276,6 +276,7 @@ The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on m
 
 ## Using macOS
 {: #using-macos }
+
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. In macOS, the following resources classes are available:
 
 Class                 | vCPUs | RAM
@@ -283,6 +284,7 @@ Class                 | vCPUs | RAM
 medium                | 4 @ 2.7 GHz     | 8GB
 macos.x86.medium.gen2 | 4 @ 3.2 GHz     | 8GB
 large                 | 8 @ 2.7 GHz     | 16GB
+macos.x86.metal.gen1<sup>(1)</sup>                 | 12 @ 3.2 GHz     | 32GB
 {: class="table table-striped"}
 
 You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
@@ -298,6 +300,8 @@ jobs:
       # with Xcode 11.3 installed
       - run: xcodebuild -version
 ```
+
+<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 ## Using the Windows executor
 {: #using-the-windows-executor }

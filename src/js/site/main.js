@@ -1,7 +1,8 @@
 import { createPopper } from '@popperjs/core';
-import { highlightURLHash } from './highlightURLHash';
+import Prism from 'prismjs';
+import { expandImageOnClick } from './expandImage';
 
-hljs.initHighlightingOnLoad();
+import { highlightURLHash } from './highlightURLHash';
 
 const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
 const HIDE_EVENTS = ['mouseout', 'mouseleave', 'blur'];
@@ -238,6 +239,9 @@ function renderTabbedHtml() {
       '.tab.' + e.target.className.split(' ').slice(2, 4).join('.');
     $(tabsToHide).not('.realtab').hide();
     $(tabToShow).not('.realtab').show();
+
+    // ask prism to process new code snippets
+    Prism.highlightAll();
   });
 
   $('.tabGroup').each(function () {
@@ -283,9 +287,6 @@ $(document).ready(function () {
       }
     });
 });
-
-// Currently this function is only used for the insights table
-$(highlightURLHash);
 
 // update date shown to be X ago tooltip code
 $(function () {
@@ -334,7 +335,7 @@ export function trackDarkModePreference() {
 }
 
 /*
-  Checking if users are attempting to print docs pages to gauge interest of print button 
+  Checking if users are attempting to print docs pages to gauge interest of print button
  */
 export function checkIfUsersPrint() {
   window.onbeforeprint = () => {
@@ -343,3 +344,11 @@ export function checkIfUsersPrint() {
     });
   };
 }
+
+// Used to call functions on document on ready
+$(function () {
+  // Currently this function is only used for the insights table
+  highlightURLHash();
+  // This function is used to be able to expand images when you click them
+  expandImageOnClick();
+});

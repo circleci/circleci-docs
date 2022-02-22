@@ -46,10 +46,10 @@ Docker、 Linux、 Windows、および macOS 上で大きなマシンサイズ�
 
 === 追加サポートオプション
 
-SLA を介した追加サポート(利用時間と日数の制限あり) の利用やサポートパッケージのアドオンが可能です。 Performance プランでは、[community forums] (https://discuss.circleci.com/)、[support portal] (https://support.circleci.com/hc/en-us)、および [global ticket-based system] (https://support.circleci.com/hc/en-us/requests/new) もご利用いただけます。
+SLA を介した追加サポート(利用時間と日数の制限あり) の利用やサポートパッケージのアドオンが可能です。 Performance プランでは、[community forums](https://discuss.circleci.com/)、[support portal](https://support.circleci.com/hc/en-us)、および [global ticket-based system](https://support.circleci.com/hc/en-us/requests/new) もご利用いただけます。
 
 == CircleCI の機能
 
-上記のアップグレード機能に加え、Performance プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は [料金設定](https://circleci.com/pricing/)のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、[リソースクラスの機能] (https://circleci.com/product/features/resource-classes/)のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
+上記のアップグレード機能に加え、Performance プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は [料金設定](https://circleci.com/pricing/)のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、[リソースクラスの機能](https://circleci.com/product/features/resource-classes/)のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
 {% include snippets/features-of-circleci.adoc %}

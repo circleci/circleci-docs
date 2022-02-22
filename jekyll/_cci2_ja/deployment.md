@@ -14,7 +14,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Amazon Web Services
 {: #amazon-web-services }
 
-```
+```yml
     steps:
 
       - run:
@@ -29,7 +29,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Pivotal
 {: #pivotal }
 
-```
+```yml
     steps:
 
       - run:
@@ -61,7 +61,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Google
 {: #google }
 
-```
+```yml
     steps:
 
       - run:
@@ -73,7 +73,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Heroku
 {: #heroku }
 
-```
+```yml
     steps:
 
       - checkout
@@ -86,7 +86,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## NPM
 {: #npm }
 
-```
+```yml
     steps:
 
       - checkout
@@ -100,7 +100,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## SSH
 {: #ssh }
 
-```
+```yml
     steps:
 
       - run:
@@ -112,7 +112,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Snapcraft
 {: #snapcraft }
 
-```
+```yml
     steps:
 
       - run:
@@ -126,7 +126,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## Artifactory
 {: #artifactory }
 
-```
+```yml
     steps:
 
       - run:
@@ -141,7 +141,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 ## NuGet (.NET Core CLI 経由)
 {: #nuget-via-net-core-cli }
 
-```
+```yml
     steps:
 
       - run:

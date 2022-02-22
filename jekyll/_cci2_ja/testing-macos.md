@@ -135,7 +135,7 @@ jobs:
 
 以下のように出力されます。
 
-```bash
+```shell
 client              service                          allowed
 ------------------  -------------------------------  ----------
 com.apple.Terminal  kTCCServiceSystemPolicyAllFiles  1
@@ -169,7 +169,7 @@ jobs:
 
 以下のように出力されます。
 
-```bash
+```shell
 kTCCServiceMediaLibrary
 kTCCServiceSiri
 kTCCServiceMotion

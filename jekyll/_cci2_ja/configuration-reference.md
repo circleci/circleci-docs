@@ -9,23 +9,23 @@ version:
   - Server v3.x
   - Server v2.x
 suggested:
-  - 
+  -
     title: 6 つの構成オプション
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: ダイナミック コンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: ダイナミック コンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-  - 
-    title: ジョブの最大実行時間の更新について
+
+  - title: ジョブの最大実行時間の更新について
     link: https://support.circleci.com/hc/ja/articles/4411086979867
     isExperiment: true
   - 

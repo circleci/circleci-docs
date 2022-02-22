@@ -35,7 +35,7 @@ A few points to note regarding the scope of the `ci skip` feature:
 {: #example-commit-title }
 {:.no_toc}
 
-```bash
+```shell
 $ git log origin/master..HEAD
 
 commit 63ce74221ff899955dd6258020d6cb9accede893
@@ -51,7 +51,7 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
 {: #example-commit-description }
 {:.no_toc}
 
-```bash
+```shell
 $ git log origin/master..HEAD
 
 commit 99b4ce4d59e79cb379987b39c65f7113631f0635

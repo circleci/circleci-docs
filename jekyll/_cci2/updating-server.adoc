@@ -93,7 +93,7 @@ replicatedctl app status inspect
 +
 Example Output:
 +
-```shell
+```json
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",
@@ -149,7 +149,7 @@ replicatedctl app status inspect
 +
 Example output:
 +
-```shell
+```json
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",

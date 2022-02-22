@@ -6,7 +6,7 @@ version:
 = CircleCI Server v3.x アプリケーションのライフサイクル
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、 CircleCI server v3.x のセマンティック バージョニングとリリーススケジュールについて解説します。
+:page-description: このページでは、 CircleCI Server v3.x のセマンティック バージョニングとリリーススケジュールについて解説します。
 :icons: font
 :toc: macro
 :toc-title:

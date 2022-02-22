@@ -75,7 +75,7 @@ Or to also verify if a service is running for example:
             docker-compose --project circleci-demo-docker up -d
 
             # In this example, we have a "contacts" service, and
-            # we are trying to check, via `dockerize`, if the service is ready. 
+            # we are trying to check, via `dockerize`, if the service is ready.
             docker container run --network container:circleci-demo-docker_contacts_1 \
               docker.io/jwilder/dockerize \
               -wait http://localhost:8080/healthcheck \

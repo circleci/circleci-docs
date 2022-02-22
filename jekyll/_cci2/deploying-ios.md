@@ -9,7 +9,7 @@ version:
 - Cloud
 ---
 
-This document describes how to configure Fastlane to automatically deploy iOS apps from CircleCI to a distribution service.
+This document describes how to configure [Fastlane](https://fastlane.tools/) to automatically deploy iOS apps from CircleCI to a distribution service.
 
 * TOC
 {:toc}
@@ -18,11 +18,11 @@ This document describes how to configure Fastlane to automatically deploy iOS ap
 {: #overview }
 {:.no_toc}
 
-Utilising Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta, or release, version of an iOS app to the intended audience.
+Using Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta, or release, version of an iOS app to the intended audience.
 
 These deployment lanes can be combined with testing lanes so that the app is automatically deployed upon a successful build and test.
 
-**Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/).
+**Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/2.0/ios-codesigning/) page.
 
 ## Best practices
 {: #best-practices }
@@ -30,14 +30,14 @@ These deployment lanes can be combined with testing lanes so that the app is aut
 ### Using Git branches
 {: #using-git-branches }
 
-It is advisable to only run your release lane on a specific branch of your git repository, for example a dedicated release/beta branch. This will allow releases on only successful merges into the specified branch, prevent a release every time a push is committed during your development phase. In turn this will also reduce job completion time as uploading to an external service may take some time depending on the size our the iOS app binary. For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) documentation.
+It is advisable to only run your release lane on a specific branch of your git repository, for example a dedicated release/beta branch. This will allow releases on only successful merges into the specified branch, prevent a release every time a push is committed during your development phase. In turn this will also reduce job completion time as uploading to an external service may take some time depending on the size our the iOS app binary. For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{site.baseurl}}/2.0/workflows/#branch-level-job-execution) page.
 
 ### Setting the build number
 {: #setting-the-build-number }
 
 When uploading to a deployment service, it is important to consider the build number of the iOS app binary. Commonly this is set in the `.xcproject` and has to be updated manually to ensure it is unique. If the build number is not updated before each run of the deployment lane, you may find the receiving service rejects the binary due to a build number conflict.
 
-Fastlane provides an `increment_build_number` [action](https://docs.fastlane.tools/actions/increment_build_number/) which allows the build number to be modified during the lane execution. As an example, if you want to tie the build number to a particular CircleCI job, consider using the `$CIRCLE_BUILD_NUM` environment variable:
+Fastlane provides an [`increment_build_number` action](https://docs.fastlane.tools/actions/increment_build_number/) which allows the build number to be modified during the lane execution. As an example, if you want to tie the build number to a particular CircleCI job, consider using the `$CIRCLE_BUILD_NUM` environment variable:
 
 ```ruby
 increment_build_number(
@@ -61,9 +61,12 @@ To create an API Key, follow the steps outlined in the [Apple Developer Document
 
 Next, a few environment variables need to be set. In your CircleCI project, navigate to **Build Settings -> Environment Variables** and set the following:
 
-* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID. Example: `6053b7fe-68a8-4acb-89be-165aa6465141`
-* `APP_STORE_CONNECT_API_KEY_KEY_ID` to your Key ID. Example: `D383SF739`
-* `APP_STORE_CONNECT_API_KEY_KEY` to the contents of your `.p8` file. Example: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`
+* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID
+  * Example: `6053b7fe-68a8-4acb-89be-165aa6465141`
+* `APP_STORE_CONNECT_API_KEY_KEY_ID` to your Key ID
+  * Example: `D383SF739`
+* `APP_STORE_CONNECT_API_KEY_KEY` to the contents of your `.p8` file
+  * Example: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`
 
 **Note:** To find the contents of the `.p8` file, open it in a text editor. You will need to replace each new line with `\n` so that it forms one long string.
 
@@ -75,12 +78,12 @@ apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
 
-Once this is configured, you just need to call `app_store_connect_api_key` in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
+Once this is configured, you just need to call [`app_store_connect_api_key`](http://docs.fastlane.tools/actions/app_store_connect_api_key/#app_store_connect_api_key) in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
 
 ### Deploying to the App Store
 {: #deploying-to-the-app-store }
 
-The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The `deliver` action provided by Fastlane is a powerful tool that automates the App Store submission process.
+The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The [`deliver` action](http://docs.fastlane.tools/actions/deliver/#deliver/) provided by Fastlane is a powerful tool that automates the App Store submission process.
 
 Deliver also allows various options such as automatic uploading of metadata and screenshots (which can be generated with the [screenshot](https://docs.fastlane.tools/actions/snapshot/) and [frameit](https://docs.fastlane.tools/actions/frameit/) actions). For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
 
@@ -122,7 +125,7 @@ end
 ### Deploying to TestFlight
 {: #deploying-to-testflight }
 
-TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the `pilot` action to make managing TestFlight distribution simple.
+TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the [`pilot` action](https://docs.fastlane.tools/actions/pilot/) to make managing TestFlight distribution simple.
 
 The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary. Pilot has lots of customisation options to help deliver apps to TestFlight, so it is highly recommended to check out the [pilot documentation](https://docs.fastlane.tools/actions/pilot/) for further information.
 
@@ -171,7 +174,11 @@ Firebase is a distribution service from Google. Deploying to Firebase is simplif
 ### Fastlane Plugin Setup
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
+To set up the plugin for your project, on your local machine, open your project directory in Terminal and run the following command:
+```bash
+fastlane add_plugin firebase_app_distribution
+```
+This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
 
 **Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
 
@@ -188,7 +195,7 @@ Firebase requires a token to used during authentication. To generate the token, 
 ### Fastlane configuration
 {: #fastlane-configuration }
 
-The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to `Settings -> General`. Under "Your apps", you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
+The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to **Project Settings -> General**. Under **Your apps**, you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
 
 For more configuration options, see the [Firebase Fastlane plugin documentation](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app).
 
@@ -239,17 +246,21 @@ workflows:
       - adhoc
 ```
 
-**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{ site.baseurl }}/2.0/testing-ios/#using-ruby)
+**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different Ruby version]({{site.baseurl}}/2.0/testing-ios/#using-ruby).
 
 ## Deploying to Visual Studio App Center
 {: #deploying-to-visual-studio-app-center }
 
-Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
+[Visual Studio App Center](https://appcenter.ms/) (formally HockeyApp), is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
 
 ### Fastlane Plugin Setup
 {: #fastlane-plugin-setup }
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin appcenter`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the following command:
+```bash
+fastlane add_plugin appcenter
+```
+ This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
 
 **Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
 
@@ -267,8 +278,8 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
 2. Click on "New API Token"
 3. Enter a description for the token, then set the access to "Full Access"
-4. When the token is generated, make sure to copy it somewhere safe.
-5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
+4. When the token is generated, make sure to copy it somewhere safe
+5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key
 
 ### Fastlane configuration
 {: #fastlane-configuration }
@@ -311,11 +322,11 @@ end
 
 [TestFairy](https://www.testfairy.com) is another popular Enterprise App distribution and testing service. Fastlane has built in support for TestFairy making it quick and easy to upload new builds to the service.
 
-![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy preferences image]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. On the TestFairy dashboard, navigate to the Preferences page.
-2. On the Preferences page, go to the API Key section and copy your API Key.
-3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
+2. On the Preferences page, go to the API Key section and copy your API Key
+3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key
 
 ### Fastlane configuration
 {: #fastlane-configuration }
