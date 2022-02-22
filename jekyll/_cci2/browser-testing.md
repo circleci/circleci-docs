@@ -37,12 +37,66 @@ WebDriver can operate in two modes: local or remote. When run locally, your test
 
 If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
+{:.tab.selenium.Cloud}
 ```yaml
-version: 2
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
     docker:
       - image: cimg/node:16.13.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
+{:.tab.selenium.Server_3}
+```yaml
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:16.13.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - browser-tools/install-browser-tools
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
+{:.tab.selenium.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:16.13.1-buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -73,8 +127,25 @@ As an alternative to configuring your environment for Selenium, you could move t
 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live, by executing a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
-LambdaTest has developed a [CircleCI orb](https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel) for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps
+LambdaTest has developed a [CircleCI orb](https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel) for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps.
 
+{:.tab.lambda.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+  lambda-tunnel: lambdatest/lambda-tunnel@0.0.1
+
+jobs:
+  lambdatest/with_tunnel:
+    tunnel_name: <your-tunnel-name>
+    steps:
+      - <your-test-steps>
+```
+{% endraw %}
+
+{:.tab.lambda.Server_3}
 {% raw %}
 ```yaml
 version: 2.1
@@ -103,6 +174,7 @@ If you are using JavaScript to test your web application, you can still take adv
 1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables]({{site.baseurl}}/2.0/env-vars/) in your Circle CI project.
 2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
 
+{:.tab.sourcelabs.Cloud}
 {% raw %}
 ```yaml
 version: 2.1
@@ -120,7 +192,30 @@ jobs:
       - saucectl/saucectl-run
 
 workflows:
-  version: 2
+  default_workflow:
+    jobs:
+      - test-cypress
+```
+{% endraw %}
+
+{:.tab.sourcelabs.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+orbs:
+  saucectl: saucelabs/saucectl-run@2.0.0
+
+jobs:
+  test-cypress:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.2
+      - saucectl/saucectl-run
+
+workflows:
   default_workflow:
     jobs:
       - test-cypress
@@ -139,6 +234,22 @@ For mobile applications, it is possible to use Appium or an equivalent platform 
 
 Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
 
+{:.tab.cyprus.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1.1.0
+
+workflows:
+  build:
+    jobs:
+      - cypress/run
+```
+{% endraw %}
+
+{:.tab.cyprus.Server_3}
 {% raw %}
 ```yaml
 version: 2.1
@@ -244,6 +355,7 @@ If you find yourself setting up a VNC server often, then you might want to autom
 
 1. Download [`x11vnc`](https://github.com/LibVNC/x11vnc) and start it before your tests:
 ```yaml
+#...
 steps:
   - run:
       name: Download and start X
@@ -251,6 +363,7 @@ steps:
         sudo apt-get install -y x11vnc
         x11vnc -forever -nopw
       background: true
+#...
 ```
 1. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 ```shell
@@ -285,4 +398,4 @@ Now you can run your integration tests from the command line and watch the brows
 ## See also
 {: #see-also }
 
-[Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
+- [Project Walkthrough]({{site.baseurl}}/2.0/project-walkthrough/)

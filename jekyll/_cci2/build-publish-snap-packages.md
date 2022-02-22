@@ -13,12 +13,15 @@ version:
 
 Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.
 
+This page is in the process of being updated. The examples on this page should be used as a guide - you may need to implement a different solution.
+{: class="alert alert-info }
+
 ## Overview
 {: #overview }
 
 A `.snap` file can be created once and installed on any Linux distro that supports `snapd`, such as Ubuntu, Debian, Fedora, Arch, and more. More information on Snapcraft itself can be found on [Snapcraft's website](https://snapcraft.io/).
 
-Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI syntax](https://circleci.com/docs/2.0/configuration-reference/). This document describes how to build a snap package and publish it to the [Snap Store](https://snapcraft.io/store) via CircleCI. The following sections use snippets of a sample `.circleci/config.yml` file with the full version at the [end of this doc](#full-example-config).
+Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI syntax](https://circleci.com/docs/2.0/configuration-reference/). This document describes how to build a snap package and publish it to the [Snap Store](https://snapcraft.io/store) via CircleCI. The following sections use snippets of a sample `.circleci/config.yml` file with the full version at the [end of this document](#full-example-config).
 
 ## Prerequisites
 {: #prerequisites }
@@ -29,13 +32,45 @@ To build a snap in any environment (local, company servers CI, etc) there needs 
 ## Execution environment
 {: #build-environment }
 
+{:.tab.snapcraft.Cloud}
+```yaml
+# ...
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      - image: snapcore/snapcraft:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+#...
+```
+
+{:.tab.snapcraft.Server_3}
+```yaml
+# ...
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      - image: snapcore/snapcraft:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+#...
+```
+
+{:.tab.snapcraft.Server_2}
 ```yaml
 # ...
 version: 2
+
 jobs:
   build:
-    docker:
-      - image: cibuilds/snapcraft:stable
+    machine:
+      - image: snapcore/snapcraft:latest
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -48,13 +83,13 @@ The `docker` executor is used here with the [`cibuilds/snapcraft`](https://githu
 {: #running-snapcraft }
 
 ```yaml
-...
+#...
     steps:
       - checkout
       - run:
           name: "Build Snap"
           command: snapcraft
-...
+#...
 ```
 
 On CircleCI, this single command is needed to actually build your snap. This will run Snapcraft, which will then go through all of its build steps and generate a `.snap` file for you. This file will typically be in the format of `<snap-name>-<snap-version>-<system-arch>.snap`.
@@ -83,14 +118,14 @@ base64 snapcraft.login | xsel --clipboard
     *Note: The default expiration time for the Snapcraft login file is 1 year. If you want the auth file to be valid for longer, make sure to set an expiration date with the `--expires` flag.*
 
     ```yaml
-    ...
-          - run:
-              name: "Publish to Store"
-              command: |
-                mkdir .snapcraft
-                echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-                snapcraft push *.snap --release stable
-    ...
+      #...
+      - run:
+          name: "Publish to Store"
+          command: |
+            mkdir .snapcraft
+            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+            snapcraft push *.snap --release stable
+      #...
     ```
 
 2. Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
@@ -118,15 +153,15 @@ We can utilize multiple jobs to better organize our snap build. A job to build/c
 Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
 
 ```yaml
-... # from a job that already has the snap
+#...  from a job that already has the snap
       - persist_to_workspace:
           root: .
           paths:
             - "*.snap"
-... # to the next job that needs the snap
+#...  to the next job that needs the snap
       - attach_workspace:
           at: .
-...
+#...
 ```
 
 Below is a complete example of how a snap package could be built on CircleCI. This same process is used the build the Snap pakcage for the [CircleCI Local CLI][local-cli-repo].
@@ -135,12 +170,14 @@ Below is a complete example of how a snap package could be built on CircleCI. Th
 ## Full example config
 {: #full-example-config }
 
+{:.tab.snapcraft_full.Cloud}
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build:
     docker:
-      - image: cibuilds/snapcraft:stable
+      - image: snapcore/snapcraft:latest
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -156,7 +193,106 @@ jobs:
 
   publish:
     docker:
-      - image: cibuilds/snapcraft:stable
+      - image: snapcore/snapcraft:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Publish to Store"
+          command: |
+            mkdir .snapcraft
+            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+            snapcraft push *.snap --release stable
+
+
+workflows:
+  main:
+    jobs:
+      - build
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+```
+
+{:.tab.snapcraft_full.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: snapcore/snapcraft:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "Build Snap"
+          command: snapcraft
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "*.snap"
+
+  publish:
+    docker:
+      - image: snapcore/snapcraft:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Publish to Store"
+          command: |
+            mkdir .snapcraft
+            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+            snapcraft push *.snap --release stable
+
+
+workflows:
+  main:
+    jobs:
+      - build
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+```
+
+{:.tab.snapcraft_full.Server_2}
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: snapcore/snapcraft:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "Build Snap"
+          command: snapcraft
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "*.snap"
+
+  publish:
+    docker:
+      - image: snapcore/snapcraft:latest
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
