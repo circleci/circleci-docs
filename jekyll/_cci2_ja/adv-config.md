@@ -211,7 +211,7 @@ jobs:
 サービスコンテナを使用して、データベースのテストを実行します。
 
 {:.tab.executors_four.Cloud}
-``` yml
+```yml
 version: 2.1
 
 orbs: 
@@ -256,7 +256,7 @@ jobs:
 ```
 
 {:.tab.executors_four.Server_3}
-``` yml
+```yml
 version: 2.1
 
 orbs:
@@ -301,7 +301,7 @@ jobs:
 ```
 
 {:.tab.executors_four.Server_2}
-``` yml
+```yml
 version: 2
 
 jobs:
@@ -349,7 +349,7 @@ jobs:
 Docker コマンドを実行して Docker イメージをビルドします。 プライマリ Executor が Docker の場合、リモートの Docker 環境をセットアップします。
 
 {:.tab.executors_five.Cloud}
-``` yml
+```yml
 version: 2.1
 
 jobs:
@@ -374,7 +374,7 @@ jobs:
 ```
 
 {:.tab.executors_five.Server_3}
-``` yml
+```yml
 version: 2.1
 
 jobs:
@@ -399,7 +399,7 @@ jobs:
 ```
 
 {:.tab.executors_five.Server_2}
-``` yml
+```yml
 version: 2
 
 jobs:
