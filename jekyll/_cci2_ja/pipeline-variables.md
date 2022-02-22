@@ -32,7 +32,10 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:17.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
@@ -61,13 +64,23 @@ jobs:
 以下の例では、2 つのパイプライン パラメーター (`image-tag`、`workingdir`) が設定ファイルの上部で定義され、後続の `build` ジョブで参照されています。
 
 ```yaml
+version: 2.1
+parameters:
+  image-tag:
+    type: string
+    default: "latest"
+  workingdir:
+    type: string
+    default: "~/main"
+
 jobs:
   build:
     docker:
-      - image: circleci/node:<< pipeline.parameters.image-tag >>
+      - image: cimg/node:<< pipeline.parameters.image-tag >>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照 :
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>
     steps:

@@ -85,7 +85,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:14.17-browsers # < 選択された任意の Docker イメージ
+      - image: cimg/node:16.13.1-browsers # < an arbitrarily chosen docker image.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

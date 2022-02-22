@@ -64,7 +64,12 @@ logging:
 === runner.command_prefix
 `$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
-This prefix takes a YAML list of arguments and enables you to customize how the task agent process is launched. ここでカスタム スクリプトを使用すると、タスク ランナーの前後で任意のコマンドを実行できます。 指定した引数が実行され、完了時にスクリプトから正しい終了コードが返されるよう特に注意してください。
+This prefix takes a YAML list of arguments that form a prefix to launch the task agent.  This prefix can be a ready made tool that elevates permissions like `sudo`, or a customer script.  The arguments passed to `command_prefix` will launch the task agent process.
+
+If specifying a custom script, it must:
+
+1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
+2. Forward the exit code from task agent as its own exit code
 
 例
 
@@ -170,6 +175,12 @@ NOTE: デフォルトでは、非アクティブな状態によりタイムア�
 runner:
   idle_timeout: 1h
 ```
+=== runner.disable_auto_update
+`$DISABLE_AUTO_UPDATE`
+
+This parameter will disable launch-agent from attempting to automatically update itself, and stop making requests to CircleCI to check for new versions. This parameter is recommended to be set to `true` on server installations where version pinning is used.
+
+Note: Setting this parameter will require runner installations to be manually upgraded to receive new features, security updates, and bug fixes.
 
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`

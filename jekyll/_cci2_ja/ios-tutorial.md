@@ -15,7 +15,7 @@ version:
 * 目次
 {:toc}
 
-**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
+**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{site.baseurl}}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
 
 ## 概要
 {: #overview }
@@ -27,12 +27,12 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。 詳細については「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照してください。
+- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/2.0/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
-2. 下図のように、Scheme Selector を使用してスキームの管理ダイアログ ボックスを開きます。![Xcode Scheme Selector](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-scheme-selector.png)
-3. スキームの管理ダイアログで、ビルドするスキームを選択し、[Shared (共有)] チェックボックスをオンにします。![スキームの管理ダイアログ](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
+2. 下図のように、Scheme Selector を使用してスキームの管理ダイアログ ボックスを開きます。![Xcode Scheme Selector]({{site.baseurl}}/assets/img/docs/ios-getting-started-scheme-selector.png)
+3. スキームの管理ダイアログで、ビルドするスキームを選択し、[Shared (共有)] チェックボックスをオンにします。![スキームの管理ダイアログ]({{site.baseurl}}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. スキームをコミットし、プッシュします。
 
 ## テストの実行
@@ -56,12 +56,12 @@ jobs:
 
 ```
 
-サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションで確認してください。
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションで確認してください。
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
 
-詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/ja/2.0/ios-codesigning/)」を参照してください。
+詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/2.0/ios-codesigning/)」を参照してください。
 
 To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) document for customizations.
 
@@ -113,7 +113,7 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
-      - deploy:
+      - run:
           name: Deploy
           command: fastlane release_appstore
 
@@ -132,7 +132,7 @@ workflows:
 ## 高度な構成
 {: #advanced-configuration }
 
-iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/docs/ja/2.0/testing-ios/)を参照してください。
+See the [Testing iOS Applications on macOS]({{site.baseurl}}/2.0/testing-ios/) document for more advanced details on configuring iOS projects.
 
 ## GitHub 上のサンプル アプリケーション
 {: #example-application-on-github }

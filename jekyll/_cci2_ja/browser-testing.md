@@ -43,15 +43,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:jessie-browsers
+      - image: cimg/node:16.13.1-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
       - run:
-          name: Selenium のダウンロード
+          name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
       - run:
-          name: Selenium の起動
+          name: Start Selenium
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```

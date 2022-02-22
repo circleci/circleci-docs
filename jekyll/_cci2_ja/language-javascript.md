@@ -1,8 +1,8 @@
 ---
-layout: classic-docs
-title: "Node.js - JavaScript チュートリアル"
+layout: classic-docs-experimental
+title: "CircleCI での Node.js アプリケーションの設定"
 short-title: "JavaScript"
-description: "Building and Testing with JavaScript and Node.js on CircleCI"
+description: "CircleCI  での JavaScript と Node.js を使用したビルドとテスト"
 categories:
   - language-guides
 order: 5
