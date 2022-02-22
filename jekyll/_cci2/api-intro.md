@@ -55,8 +55,8 @@ The CircleCI API v2 enables users to be authenticated by simply sending your [Pe
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**Note**, the `:` is included to indicate there is no password.
-**Note**, [Personal API tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) aare currently the only supported token API tokens on v2 API. [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2. 
+**Note:** the `:` is included to indicate there is no password.
+**Note:** Currently, [Personal API tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 
 #### Triggering a pipeline with parameters example
 {: #triggering-a-pipeline-with-parameters-example }
