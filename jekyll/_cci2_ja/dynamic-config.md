@@ -73,4 +73,4 @@ CircleCI のダイナミックコンフィグを使用する際のパイプラ�
 
 ## さらに詳しく
 {: #learn-more }
-Circle CI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
+CircleCI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
