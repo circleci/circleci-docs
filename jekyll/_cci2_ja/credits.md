@@ -47,7 +47,7 @@ Free プランで macOS でビルドを行っている組織にも、毎月 25,0
 
 請求されません。 ジョブが  "queud(キューに入っている)" と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが  "preparing (準備中)"  の場合は、CircleCI がセットアップを行っているか、ジョブの実行を_開始_しようとしているため間もなく実行される可能性があります。
 
-ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、[Doker イメージのビルド]({{site.baseurl}}/2.0/building-docker-images/)を参照してください。
+ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、[Docker イメージのビルド]({{site.baseurl}}/2.0/building-docker-images/)を参照してください。
 
 ## ご意見・ご質問
 {: #questions-and-comments }
