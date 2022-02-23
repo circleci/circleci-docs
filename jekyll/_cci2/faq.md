@@ -327,7 +327,11 @@ In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ran
 
 This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
-This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.  You can also view job-specific details of IP ranges usage in the Resources tab on the Job Details UI page.  See [IP ranges pricing](https://circleci.com/docs/2.0/ip-ranges/#pricing) for more.
+
+#### How do I predict my monthly IP ranges cost without enabling the feature first?
+
+You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the Resources tab on the Job Details UI page.  Convert this value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost of enabling IP ranges on that Docker job.
 
 #### Why does CircleCI have per-active-user pricing?
 {: #why-does-circleci-have-per-active-user-pricing }
