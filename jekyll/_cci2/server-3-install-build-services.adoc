@@ -446,7 +446,7 @@ Once done, you may skip to step 9 which is enabling vm-service in KOTS.
 [start=6]
 . *Create policy*
 +
-Create a `policy.json` file with the following content. You should fill in Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) below.
+Create a `policy.json` file with the following content. You should fill in the ID of the VM Service security group created in step 2 (`VMServiceSecurityGroupId`) and VPC ID (`vpcID`) below.
 +
 [source,json]
 ----
@@ -465,7 +465,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<YOUR_clusterSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<YOUR_VMServiceSecurityGroupID>"
       ]
     },
     {
@@ -552,7 +552,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<YOUR_arn>"
+          "ec2:Vpc": "<YOUR_vpcID>"
         }
       }
     }
