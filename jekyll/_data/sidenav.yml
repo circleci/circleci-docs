@@ -1,9 +1,4 @@
 en:
-- name: Video Tutorials
-  icon: icons/sidebar/youtube_tutorials.svg
-  children:
-    - name: CircleCI Video Tutorials
-      link: 2.0/video-tutorials/
 - name: Getting Started
   icon: icons/sidebar/getting_started.svg
   children:
