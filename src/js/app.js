@@ -53,4 +53,5 @@ $(() => {
   ); // ensure languageGuides is loaded; // imports all experiments
 
   Prism.highlightAll();
+  services.trackCopyCode.init();
 });
