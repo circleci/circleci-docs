@@ -1,10 +1,10 @@
 ---
-description: "This document describes the various ways users of your CircleCI server v2 installation can get access to and authenticate their accounts."
+description: このドキュメントでは、お客様の CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 suggested:
-  - title: How to refresh user permissions
+  - title: アクセス許可の更新方法
     isExperiment: true
     link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
