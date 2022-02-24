@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-このドキュメントでは、Orb、ジョブ、ステップ、ワークフローの概要を説明しています。
+このドキュメントでは、Orb、ジョブ、ステップ、ワークフローの概要を説明します。
 
 * 目次
 {:toc}
@@ -20,17 +20,17 @@ version:
 ## Orb の概要
 {: #orbs-overview }
 
-Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Orbs Concepts]({{ site.baseurl }}/2.0/orb-concepts/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
+Orb は、名前に基づいてインポートする、またはインラインで設定する設定ファイルのパッケージです。Orb により、プロジェクト内またはプロジェクト間で設定ファイルを共有および再利用して設定作業を簡略化することができます。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb のコンセプト]({{ site.baseurl }}/ja/2.0/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、設定作業の簡素化に役立つ Orb を検索できます。
 
 ## ジョブの概要
 {: #jobs-overview }
 
-Jobs are collections of steps. All of the steps in the job are executed in a single unit, either within a fresh container or VM.
+ジョブはステップの集まりです。 ジョブ内のすべてのステップが 1 単位として新しいコンテナまたは仮想マシン内で実行されます。
 
-The following diagram illustrates how data flows between jobs:
+下図はジョブ間のデータフローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
-* キャッシュは、異なるワークフロー ビルドにある同じジョブ間でデータを維持します。
-* アーティファクトは、ワークフローの終了後にデータを維持します。
+* キャッシュは、異なるワークフローの実行における同じジョブ間でデータを永続化します。
+* アーティファクトは、ワークフローの終了後にデータを永続化します。
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
