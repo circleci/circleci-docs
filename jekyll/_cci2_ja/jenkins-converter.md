@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Introduction to Jenkins Converter"
-short-title: "Jenkins Converter Introduction"
-description: "Starting point for how to use the Jenkins Converter"
+title: "Jenkins コンバーターの紹介"
+short-title: "Jenkins コンバーターの紹介"
+description: "Jenkins コンバーターの使い方"
 categories:
   - はじめよう
 order: 1
@@ -10,52 +10,71 @@ noindex: true
 sitemap: false
 ---
 
-The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter) is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you to get started building on CircleCI quickly and easily.
+CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/jenkins-converter)は、jenkinsfile を CircleCI の config.yml に簡単に変換できる Web ツールです。CircleCI でのビルドを素早く簡単に開始していただけます。
 
-Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started building on CircleCI.
+現在、このコンバーターは宣言型の Jenkinsfile のみをサポートしています。 ご利用いただけるプラグインとステップの数は増え続けていますが、このツールの使用により、少なくとも 50%  の作業を開始でき、 CircleCI 上でのビルドを開始しやすくなることを願っています。
 
 ## 制限事項
 {: #limitations }
 
-* A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
+* サポートされている構文やプラグインは限られています。 Jenkinsfiles がサポートされていない構文とプラグインに依存している場合は変換できません。 手動でそれらを削除して下さい。
 
-* Only a single Jenkinsfile is accepted per request. Namely, [Shared Libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/) will not be resolved, and the resulting `config.yml` may be incomplete. Note that under certain cases the converter does not raise errors even if there are unresolvable Shared Libraries.
+* 1 つのリクエストにつき受け付けられるのは１つの Jenkinsfile のみです。 つまり、[共有ライブラリ](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)は解決されず、結果として得られる `config.yml` は不完全な場合があります。 場合によっては、解決不可能な共有ライブラリが存在してもコンバーターがエラーを発しないことがあるのでご注意ください。
 
-* Only `Default` is supported as a tool name for `maven`, `jdk` and `gradle` in the [`tools` block](https://www.jenkins.io/doc/book/pipeline/syntax/#tools), and other names will cause conversion failures. Please configure them as follows or remove them manually.
-
-  For example, the following stanza:
-  ```groovy
+* `tools` ブロックでは、`maven`、`jdk`、`gradle` にはツール名として `Default` のみがサポートされています。他の名前だと変換に失敗します。 他の名前は以下のように設定するか、手動で削除して下さい。</p> 
+  
+  例えば、以下のスタンザは、 
+  
+  
+  ```
   tools {
     maven 'Maven 3.6.3'
     jdk 'Corretto 8.232'
   }
   ```
-  should be changed to:
-  ```groovy
+
+
+以下のように変更する必要があります。 
+
+
+  ```
   tools {
     maven 'Default'
     jdk 'Default'
   }
   ```
+</li> </ul> 
 
-## Next steps after conversion
+
+
+## 変換後の次のステップ 
+
 {: #next-steps-after-conversion }
 
-### Executors
+
+
+### Executor
+
 {: #executors }
 
-A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
+Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
 
 Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
 
 Depending on the use case, you might require the [machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) if your application requires full access to OS resources and the job environment, or the [macOS executor](https://circleci.com/docs/2.0/executor-types/#using-macos).
 
+
+
 ### Workflows
+
 {: #workflows }
 
 [CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
+
+
 ### ジョブ
+
 {: #jobs }
 
 Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
@@ -66,12 +85,18 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 - Caches, [saving](https://circleci.com/docs/2.0/configuration-reference/#save_cache) and [restoring](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
 - [Store Artifacts](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 
+
+
 ### 手順
+
 {: #steps }
 
 While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
 
+
+
 ## Supported syntax
+
 {: #supported-syntax }
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
@@ -87,9 +112,14 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 | parameters         | [parameters](https://circleci.com/docs/ja/2.0/reusing-config/#using-the-parameters-declaration)     | Unsupported                                                                           |
 | triggers           | [cron](https://circleci.com/docs/ja/2.0/workflows/#scheduling-a-workflow)                           | Unsupported                                                                           |
 | stage              | [job](https://circleci.com/docs/ja/2.0/configuration-reference/#jobs)                               | Supported                                                                             |
+
+
 {: class="table table-striped"}
 
+
+
 ## Supported Jenkins plugins
+
 {: #supported-jenkins-plugins }
 
 **Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise **you will see an error message saying something is "Unknown" or "Invalid"**. Please submit a ticket with our support center if you have a request to add a plugin to the list.
@@ -173,7 +203,10 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 - Pipeline Maven Integration Plugin (`pipeline-maven`)
 - Pipeline Utility Steps (`pipeline-utility-steps`)
 
+
+
 ## Feedback
+
 {: #feedback }
 
 To share any general feedback regarding this project, submit a ticket with our CircleCI Support team.
