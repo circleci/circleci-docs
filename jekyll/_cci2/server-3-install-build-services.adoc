@@ -380,6 +380,15 @@ Once you have configured the environmental variables and contexts, rerun the rea
 
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
+==== Enabling Nomad Client for External Image Repository
+For enabling Nomad Client to download images from External or Private repo, You can follow below step -
+
+* Make Image Registry Public to Private/Internal Network so that Nomad client can download them without any authentication.
+* Or, Embed the Private Image repository credentials in Nomad Client Image at `/root/.docker/config.json` assuming credentials are static.
+
+NOTE: If you are using AWS, GCP or any other cloud image registry, most of them are using temporary image repository (i.e. - AWS ECR,GCP Container Registry) credentials valid only for limited time to use. As soon as those credentials are expired, your nomad client will be unable to download the image from private image repository if image is not existing in Nomad client. You have to refresh the credentials again on those nomad client to pull the new images.
+
+
 === VM service
 
 VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to EKS and GKE installations because it specifically relies on features of these cloud providers.
