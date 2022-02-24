@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Pipeline values and parameters"
+title: "パイプラインの値とパラメーター"
 description: "Detailed information about pipeline parameters and values"
 categories:
   - はじめよう
