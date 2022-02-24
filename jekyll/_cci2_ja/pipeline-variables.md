@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "パイプラインの値とパラメーター"
-description: "Detailed information about pipeline parameters and values"
+title: "パイプライン値とパラメーター"
+description: "パイプラインのパラメーターと値に関する詳細情報"
 categories:
   - はじめよう
 order: 1
@@ -10,25 +10,23 @@ version:
   - Server v3.x
 ---
 
-Pipeline values and parameters can be used to create reusable pipeline configurations.
+パイプライン値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
 
 * **パイプライン値**: 設定ファイル全体で使用できるメタデータ。
-* **パイプライン パラメーター**: 型指定された変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
+* **パイプラインパラメーター**: 型指定されたパイプライン変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
 
 ## パイプライン値
 {: #pipeline-values }
 
-パイプライン値は、あらゆるパイプライン構成で使用可能であり、事前に宣言することなく使用できます。
+パイプライン値は、あらゆるパイプライン設定で使用可能であり、事前に宣言することなく使用できます。
 
-For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#pipeline-values).
+値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/2.0/variables/#pipeline-values)を参照して下さい。
 
 {% include snippets/pipeline-values.md %}
 
-Usage example:
+使用例:
 
 ```yaml
-version: 2.1
-
 jobs:
   build:
     docker:
@@ -44,14 +42,14 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**Note:** When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+**注: **上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで値を設定する]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
-## 設定ファイルにおけるパイプライン パラメーター
+## 設定ファイルにおけるパイプラインパラメーター
 {: #pipeline-parameters-in-configuration }
 
-パイプライン パラメーターは、`.circleci/config.yml` のトップ レベルで `parameters` キーを使って宣言します。
+パイプラインパラメーターは、`.circleci/config.yml` の一番上で  `parameters` キーを使って宣言します。
 
-パイプライン パラメーターは次のデータ型をサポートしています。
+パイプラインパラメーターでは以下のタイプのデータをサポートしています。
 * 文字列
 * ブール値
 * 整数
@@ -59,9 +57,9 @@ jobs:
 
 詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 
-パイプライン パラメーターは値として参照され、スコープ `pipeline.parameters` の下で設定ファイル内の変数として使用できます。
+パイプラインパラメーターは値で参照され、`pipeline.parameters`のスコープの下で設定ファイル内の変数として使用できます。
 
-以下の例では、2 つのパイプライン パラメーター (`image-tag`、`workingdir`) が設定ファイルの上部で定義され、後続の `build` ジョブで参照されています。
+以下の例では、2 つのパイプラインパラメーター (`image-tag`、`workingdir`) が設定ファイルの一番上で定義され、後続の `build` ジョブで参照されています。
 
 ```yaml
 version: 2.1
@@ -93,9 +91,9 @@ jobs:
 
 [パイプラインをトリガーする](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-**注: **この`POST`で`parameters`キーを渡すリクエストは、**シークレットではありません**のでご注意ください。
+**注: **この `POST` で `parameters` キーを渡すリクエストは、シークレットでは**ありません**のでご注意ください。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (メモ: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -106,25 +104,25 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-## パイプライン パラメーターのスコープ
+## パイプラインパラメーターのスコープ
 {: #the-scope-of-pipeline-parameters }
 
-パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、パイプラインのスコープを Orb 内に認めるとカプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が台無しになり、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
+パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。 これは、パイプラインのスコープを Orb 内で使用するとカプセル化が崩れ、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が損なわれ、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
 
 
-## 構成プロセスの段階とパラメーターのスコープ
+## 設定プロセスの段階とパラメーターのスコープ
 {: #config-processing-stages-and-parameter-scopes }
 
 ### プロセスの段階
 {: #processing-stages }
 
-構成プロセスは次の段階を経て進みます。
+設定プロセスは次の段階を経て進みます。
 
-- パイプライン パラメーターが解決され、型チェックされる
+- パイプラインパラメーターが解決され、型チェックされる
 - パイプライン パラメーターが Orb ステートメントに置き換えられる
 - Orb がインポートされる
 
-残りの構成プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
+残りの設定プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
 
 ## 要素パラメーターのスコープ
 {: #element-parameter-scope }
@@ -166,13 +164,13 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 
 パイプライン値、つまり CircleCI が提供するパイプライン内で使用できる値 (例: `<< pipeline.number >>`) は、常にスコープ内で有効です。
 
-### パイプライン パラメーターのスコープ
+### パイプラインパラメーターのスコープ
 {: #pipeline-parameter-scope }
 
-設定ファイル内で定義されているパイプライン パラメーターは常にスコープ内で有効ですが、2 つの例外があります。
+設定ファイル内で定義されているパイプラインパラメーターは常にスコープ内で有効ですが、2 つの例外があります。
 
-- パイプライン パラメーターは、他のパイプライン パラメーターの定義の範囲内では有効でないため、相互に依存させることはできません。
-- データ漏えいを防ぐために、パイプライン パラメーターは Orb 本体、Orb のインラインの範囲内では有効ではありません。
+- パイプラインパラメーターは、他のパイプラインパラメーターの定義の範囲内では有効でないため、相互に依存させることはできません。
+- データ漏えいを防ぐために、パイプラインパラメーターは Orb 本体、Orb のインラインの範囲内では有効ではありません。
 
 ## 条件付きワークフロー
 {: #conditional-workflows }
