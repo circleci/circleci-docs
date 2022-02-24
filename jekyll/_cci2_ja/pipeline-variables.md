@@ -18,7 +18,7 @@ version:
 ## パイプライン値
 {: #pipeline-values }
 
-パイプライン値は、あらゆるパイプライン設定で使用可能であり、事前に宣言することなく使用できます。
+パイプライン値は、あらゆるパイプライン設定で、事前に宣言することなく使用できます。
 
 値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/2.0/variables/#pipeline-values)を参照して下さい。
 
@@ -57,7 +57,7 @@ jobs:
 
 詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 
-パイプラインパラメーターは値で参照され、`pipeline.parameters`のスコープの下で設定ファイル内の変数として使用できます。
+パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
 
 以下の例では、2 つのパイプラインパラメーター (`image-tag`、`workingdir`) が設定ファイルの一番上で定義され、後続の `build` ジョブで参照されています。
 
@@ -175,11 +175,11 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ## 条件付きワークフロー
 {: #conditional-workflows }
 
-Use the [`when` clause](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+ワークフロー宣言の下で[ロジックステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
 
-この構成の最も一般的な活用方法は、値としてパイプライン パラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
+この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 
-以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
+以下の設定例では、パイプラインパラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
 ```yaml
 version: 2.1
@@ -210,4 +210,4 @@ jobs:
 }
 ```
 
-`when` キーは、パイプライン パラメーターだけでなくすべての真偽値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句と似た逆の意味の `unless` 句もあり、条件の真偽を逆に指定できます。
+`when` キーは、パイプライン パラメーターだけでなくすべての真偽値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句の逆の `unless` 句もあり、条件の真偽を逆に指定できます。
