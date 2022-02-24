@@ -5,6 +5,7 @@ const trackCopyCode = () => {
 
   copyBtnArr.forEach((btn, index) => {
     btn.addEventListener('click', () => {
+      // added this attribute in site/toc.js to help track where a code snippet is for pages with numerous snippets
       const closestTocSection =
         document.getElementById('active-toc-section').textContent;
 
