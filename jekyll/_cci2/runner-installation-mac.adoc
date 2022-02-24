@@ -52,9 +52,11 @@ Copy the previously created `launch-agent-config.yaml` into the directory:
 sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/launch-agent-config.yaml'
 ```
 
-== Install the `launchd .plist`
+== Create and install the `launchd .plist`
 
-Copy the following to `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`:
+Create a `com.circleci.runner.plist` file. You can do this with your text editor, or with Vim. Please note that if you choose to create the file with Vim, you will likely need to prefix `sudo` to the command. The path to the file should be the following: `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`.
+
+Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist` file:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

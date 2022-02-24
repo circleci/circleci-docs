@@ -17,7 +17,7 @@ toc::[]
 
 The installation process assumes you have installed the following utilities on your system:
 
-* <<local-cli#installation,CircleCI CLI>>. If you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+* <<local-cli#installation,CircleCI CLI>> - Please note that if you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required. Check <<runner-for-server-compatibility, runner for server compatibility>> below.
 * curl (installed by default on macOS)
 * sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
 * systemd version 235+ (Linux only)
@@ -32,15 +32,49 @@ Running jobs requires you have the following tools available on your machine:
 * coreutils (Linux only)
 * git (recommended, but not required)
 
-== Authentication
+== Authentication and installation from the CircleCI web app
 
 NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-In order to install runner you will need to create a namespace and authentication token by performing the steps listed below – these commands can only be run by an owner/admin of your organization:
+*_Agree to TOS to get access to runners_*.
 
-. Create a namespace for your organization's runner resources.
+In order to install runner you will need to create a namespace and authentication token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider.
+
+. On the https://app.circleci.com/[CircleCI web app], navigate to *Runner*.
 +
-NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use.
+image::runnerui_step_one.png[Runner Set Up - Get started]
++
+. Create a namespace and resource class for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace will be the same namespace as the orbs use.
++
+image::runnerui_step_two.png[Runner Set Up - Create a namespace and resource class]
++
+. Create a resource class token.
++
+image::runnerui_step_three.png[Runner Set Up - Create a resource class token]
++
+CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
++
+. You will need to follow the platform specific installation instructions to continue. The instructions are shown inside the UI, or you can find the instructions in the documentation from the list of links below. Please note that if you would like to use runner on Kubernetes, the instructions are not in the UI and you will need to refer to our documentation.
++
+image::runnerui_step_four.png[Runner Set Up - Set up runner on your specific machine]
++
+* xref:runner-installation-linux.adoc[Linux]
+* xref:runner-installation-mac.adoc[macOS]
+* xref:runner-installation-windows.adoc[Windows]
+* xref:runner-installation-docker.adoc[Docker]
+* xref:runner-on-kubernetes.adoc[Kubernetes]
++
+. You will get a verification in the UI that a new runner has been detected. You can then add your self-hosted runner to a project by copying the code into your project's `.circleci/config.yml` file.
++
+image::runnerui_step_five.png[Runner Set Up - Copy code to config file]
+
+== Authentication and installation from the command line
+
+NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+
+In order to install runner you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
+
+. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace will be the same namespace as the orbs use.
 +
 Use the following command:
 +
@@ -48,9 +82,11 @@ Use the following command:
 circleci namespace create <name> <vcs-type> <org-name>
 ```
 +
-For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
+For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`
+
 . Create a resource class for your runner for your namespace using the following command:
 +
+
 NOTE: Your newly created namespace is required in the command to create your resource class.
 +
 ```
@@ -59,17 +95,19 @@ circleci runner resource-class create <name>/<resource-class> <description> --ge
 +
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
-NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
-+
+
 CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
++
+*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#post-authentication-platform-specific-instructions, Post authentication instructions>>.
 
-== Installation
+=== Continued for Linux, macOS, and Server
 
-=== Download the launch agent binary and verify the checksum
-[[download]]
-The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
+Be sure to complete the steps in the <<#authentication-and-installation-from-the-command-line, Authentication and installation>> section before moving on to the steps below.
 
-First, set one of these variables as appropriate for for your installation target.
+. Download the launch agent binary and verify the checksum.
++
+The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location. First, set one of these variables as appropriate for for your installation target.
++
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -89,29 +127,37 @@ First, set one of these variables as appropriate for for your installation targe
 | For macOS M1
 | `platform=darwin/arm64`
 |===
-
++
 Example:
++
 ```shell
 export platform=darwin/amd64
 ```
++
 
-Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
-
-For cloud, you can run the following:
+. Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
++
+For *cloud*, you can run the following:
++
 ```shell
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 ```
-followed by:
++
+Followed by:
++
 ```shell
 export agent_version=$(curl "${base_url}/release.txt")
 ```
-
-For server v3.1.0 and up, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<runner-for-server-compatibility>> to find the correct version):
++
+For *server v3.1.0 and up*, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<runner-for-server-compatibility>> to find the correct version):
++
 ```shell
 export agent_version="<launch-agent-version>"
 ```
++
 
-Finally, run the following script to download, verify and install the binary.
+. Finally, run the following script to download, verify and install the binary.
++
 ```shell
 # Set up runner directory
 prefix=/opt/circleci
@@ -132,9 +178,9 @@ echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
-=== Platform-specific instructions
+== Post authentication platform-specific instructions
 
-Please refer to the platform-specific installation instructions:
+Please refer to the platform-specific installation instructions after you have created your namespace and resource class. These instructions are included in the UI when creating namespaces and resource classes from the CircleCI web app (with the exception of Kubernetes).
 
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
@@ -147,9 +193,7 @@ For other platforms, see xref:runner-overview.adoc#available-circleci-runner-pla
 == Runner for server compatibility
 _CircleCI runner is available from server v3.1.0_
 
-Each minor version of server is compatible with a specific version of
-`circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,
-depending on your version of server:
+Each minor version of server is compatible with a specific version of `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner, depending on your version of server.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
