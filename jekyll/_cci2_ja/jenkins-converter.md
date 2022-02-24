@@ -10,18 +10,18 @@ noindex: true
 sitemap: false
 ---
 
-CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/jenkins-converter)は、jenkinsfile を CircleCI の config.yml に簡単に変換できる Web ツールです。CircleCI でのビルドを素早く簡単に開始していただけます。
+CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/jenkins-converter)は、Jenkinsfile を CircleCI の config.yml に簡単に変換できる Web ツールです。CircleCI でのビルドを素早く簡単に開始していただけます。
 
-現在、このコンバーターは宣言型の Jenkinsfile のみをサポートしています。 ご利用いただけるプラグインとステップの数は増え続けていますが、このツールの使用により、少なくとも 50%  の作業を開始でき、 CircleCI 上でのビルドを開始しやすくなることを願っています。
+現在、このコンバーターは宣言型の Jenkinsfile のみをサポートしています。 ご利用いただけるプラグインとステップの数は増え続けていますが、このツールの使用により、少なくとも 50%  の作業が開始でき、 CircleCI 上でのビルドを開始しやすくなることを願っています。
 
 ## 制限事項
 {: #limitations }
 
-* サポートされている構文やプラグインは限られています。 Jenkinsfiles がサポートされていない構文とプラグインに依存している場合は変換できません。 手動でそれらを削除して下さい。
+* サポートされている構文やプラグインは限られています。 Jenkinsfile がサポートされていない構文とプラグインに依存している場合は変換できません。 それらを手動で削除して下さい。
 
-* 1 つのリクエストにつき受け付けられるのは１つの Jenkinsfile のみです。 つまり、[共有ライブラリ](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)は解決されず、結果として得られる `config.yml` は不完全な場合があります。 場合によっては、解決不可能な共有ライブラリが存在してもコンバーターがエラーを発しないことがあるのでご注意ください。
+* 1 つのリクエストにつき受け付けられるのは１つの Jenkinsfile のみです。 つまり、[共有ライブラリ](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)では解決されず、結果として得られる `config.yml` は不完全な場合があります。 場合によっては、解決不可能な共有ライブラリが存在してもコンバーターがエラーを発しないことがあるのでご注意ください。
 
-* `tools` ブロックでは、`maven`、`jdk`、`gradle` にはツール名として `Default` のみがサポートされています。他の名前だと変換に失敗します。 他の名前は以下のように設定するか、手動で削除して下さい。</p> 
+* `tools` ブロックでは、`maven`、`jdk`、`gradle` にはツール名として `Default` のみがサポートされています。それ以外の名前だと変換に失敗します。 その場合は以下のように設定するか、手動で削除して下さい。</p> 
   
   例えば、以下のスタンザは、 
   
@@ -59,17 +59,17 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 
 Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
 
-Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
+`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ](https://circleci.com/docs/2.0/custom-images/)を参照して下さい。
 
-Depending on the use case, you might require the [machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) if your application requires full access to OS resources and the job environment, or the [macOS executor](https://circleci.com/docs/2.0/executor-types/#using-macos).
+使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor](https://circleci.com/docs/2.0/executor-types/#using-macos) または [Machine Executor](https://circleci.com/docs/2.0/executor-types/#using-machine) が必要な場合があります。
 
 
 
-### Workflows
+### ワークフロー
 
 {: #workflows }
 
-[CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
+[CircleCI ワークフロー](https://circleci.com/docs/2.0/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド](https://circleci.com/docs/2.0/configuration-reference/#triggers)は転送しません。
 
 
 
@@ -77,13 +77,13 @@ Depending on the use case, you might require the [machine executor](https://circ
 
 {: #jobs }
 
-Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
+CircleCI ジョブの多くの設定オプションには、相当する Jenkins の製品がありません。  CircleCI でのエクスペリエンスを高めるには、次の機能から始めることをお勧めします。
 
-- [Checkout code](https://circleci.com/docs/ja/2.0/configuration-reference/#checkout)
-- [Resource class](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class)
-- [Parallelism](https://circleci.com/docs/ja/2.0/configuration-reference/#parallelism)
-- Caches, [saving](https://circleci.com/docs/2.0/configuration-reference/#save_cache) and [restoring](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
-- [Store Artifacts](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
+- [コードのチェックアウト](https://circleci.com/docs/ja/2.0/configuration-reference/#checkout)
+- [リソースクラス](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class)
+- [並列処理](https://circleci.com/docs/ja/2.0/configuration-reference/#parallelism)
+- キャッシュの[保存](https://circleci.com/docs/2.0/configuration-reference/#save_cache)と[リストア](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
+- [アーティファクトの保存](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 
 
 
@@ -91,38 +91,38 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 
 {: #steps }
 
-While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
+Jenkinsfile のコンバーターはステップを直接変換しようとしますが、すべてのステップを完全に変換するわけではありません。 これに対処するために、 `JFC_STACK_TRACE `キーが追加され、出力 YAML 内の特定のステップを変換し、サポートされていないステップディレクティブを処理する方法についてのガイダンスが提供されました。
 
 
 
-## Supported syntax
+## サポートされている構文
 
 {: #supported-syntax }
 
-Only declarative (pipeline) `Jenkinsfile`s are currently supported.
+現在サポートされているのは宣言型 (パイプライン)の `jenkinsfile` のみです。
 
-| Jenkinsfile Syntax | Approx. CircleCI Syntax                                                                             | Status                                                                                |
-| ------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| agent              | [executor](https://circleci.com/docs/ja/2.0/configuration-reference/#executors-requires-version-21) | Static                                                                                |
-| post               | [when attribute](https://circleci.com/docs/ja/2.0/configuration-reference/#the-when-attribute)      | See [when](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) |
-| stages             | [workflows](https://circleci.com/docs/ja/2.0/workflows/)                                            | Supported                                                                             |
-| steps              | [step](https://circleci.com/docs/ja/2.0/jobs-steps/#steps-overview)                                 | Limited                                                                               |
-| environment        | [environment](https://circleci.com/docs/ja/2.0/env-vars/)                                           | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)            |
-| options            | N/A                                                                                                 | See [Supported Jenkins Plugins](#supported-jenkins-plugins)                           |
-| parameters         | [parameters](https://circleci.com/docs/ja/2.0/reusing-config/#using-the-parameters-declaration)     | Unsupported                                                                           |
-| triggers           | [cron](https://circleci.com/docs/ja/2.0/workflows/#scheduling-a-workflow)                           | Unsupported                                                                           |
-| stage              | [job](https://circleci.com/docs/ja/2.0/configuration-reference/#jobs)                               | Supported                                                                             |
+| Jenkinsfile 構文 | 近似する CircleCI 構文                                                                                    | ステータス                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| agent          | [Executor](https://circleci.com/docs/ja/2.0/configuration-reference/#executors-requires-version-21) | 静的                                                                                    |
+| post           | [when 属性](https://circleci.com/docs/ja/2.0/configuration-reference/#the-when-attribute)             | [when](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) を参照 |
+| stage          | [workflow](https://circleci.com/docs/ja/2.0/workflows/)                                             | サポート                                                                                  |
+| step           | [step](https://circleci.com/docs/ja/2.0/jobs-steps/#steps-overview)                                 | 制限付き                                                                                  |
+| environment    | [environment](https://circleci.com/docs/ja/2.0/env-vars/)                                           | [非サポート](https://github.com/circleci/jenkinsfile-converter/issues/26)                  |
+| option         | 該当なし                                                                                                | [サポートされている Jenkins プラグイン](#supported-jenkins-plugins)を参照                              |
+| parameter      | [parameter](https://circleci.com/docs/ja/2.0/reusing-config/#using-the-parameters-declaration)      | 非サポート                                                                                 |
+| trigger        | [cron](https://circleci.com/docs/ja/2.0/workflows/#scheduling-a-workflow)                           | 非サポート                                                                                 |
+| stage          | [job](https://circleci.com/docs/ja/2.0/configuration-reference/#jobs)                               | サポート                                                                                  |
 
 
 {: class="table table-striped"}
 
 
 
-## Supported Jenkins plugins
+## サポートされている Jenkins プラグイン
 
 {: #supported-jenkins-plugins }
 
-**Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise **you will see an error message saying something is "Unknown" or "Invalid"**. Please submit a ticket with our support center if you have a request to add a plugin to the list.
+**注: 下記に記載されていないプラグインに依存する Jenkinsfile は変換できません**。 サポートされていないプラグイン（`options`など）に依存するスタンザは削除してください。そうしないと、**"Unknown" または "Invalid" というエラーメッセージが表示されます**。 プラグインの追加を依頼したい場合は、サポートセンターにチケットを提出して下さい。
 
 - Trilead API Plugin (`trilead-api`)
 - Folders Plugin (`cloudbees-folder`)
@@ -162,8 +162,8 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 - Gradle Plugin (`gradle`)
 - Pipeline: Milestone Step (`pipeline-milestone-step`)
 - Jackson 2 API Plugin (`jackson2-api`)
-- Pipeline: Input Step (`pipeline-input-step`)
-- Pipeline: Stage Step (`pipeline-stage-step`)
+- Pipeline: Input Step (`pipeline-input-step</cod</li>
+<li>Pipeline: Stage Step (<code>pipeline-stage-step`)
 - Pipeline Graph Analysis Plugin (`pipeline-graph-analysis`)
 - Pipeline: REST API Plugin (`pipeline-rest-api`)
 - JavaScript GUI Lib: Handlebars bundle plugin (`handlebars`)
@@ -205,8 +205,8 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 
 
-## Feedback
+## フィードバック
 
 {: #feedback }
 
-To share any general feedback regarding this project, submit a ticket with our CircleCI Support team.
+このプロジェクトに関するフィードバックを共有するには、サポートチームにチケットを提出して下さい。
