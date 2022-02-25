@@ -188,7 +188,7 @@ jobs:
 ## Python
 {: #python }
 
-[Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
+[Coverage.py](https://coverage.readthedocs.io/en/6.3.2/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
 
 ```shell
 pip install coverage
@@ -200,6 +200,7 @@ python my_program.py arg1 arg2
 
 # ここでは、コマンドにプレフィックス "coverage" を付けます。
 coverage run my_program.py arg1 arg2
+
 ```
 
 この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジレポートを生成できます。
@@ -676,3 +677,4 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
+
