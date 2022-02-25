@@ -145,7 +145,7 @@ IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
 
 On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on.
 
-**insert screenshot**
+![CircleCI about image]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
