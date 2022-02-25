@@ -132,8 +132,8 @@ Jenkinsfile のコンバーターはステップを直接変換しようとし�
 - Gradle Plugin (`gradle`)
 - Pipeline: Milestone Step (`pipeline-milestone-step`)
 - Jackson 2 API Plugin (`jackson2-api`)
-- Pipeline: Input Step (`pipeline-input-step</cod</li>
-<li>Pipeline: Stage Step (<code>pipeline-stage-step`)
+- Pipeline: Input Step (`pipeline-input-step`)
+- Pipeline: Stage Step (`pipeline-stage-step`)
 - Pipeline Graph Analysis Plugin (`pipeline-graph-analysis`)
 - Pipeline: REST API Plugin (`pipeline-rest-api`)
 - JavaScript GUI Lib: Handlebars bundle plugin (`handlebars`)
