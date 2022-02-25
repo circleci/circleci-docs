@@ -275,7 +275,7 @@ ifndef::env-gcp[]
 }
 . In your KOTS Admin Console, set Nomad Autoscaler to `enabled`
 . Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
-. Set Min Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
+. Set Min Node Count* - This will overwrite what is currently set as the min for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Select cloud provider: `AWS EC2`
 . Add the region of the autoscaling group
 . You can chose one of the following:
