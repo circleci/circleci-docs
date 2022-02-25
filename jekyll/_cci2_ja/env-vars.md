@@ -19,7 +19,7 @@ suggested:
     title: Insert files as environment variables
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
   - 
-    title: '「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）'
+    title: Context deadline exceeded after 1 hour - Build timed out
     link: https://support.circleci.com/hc/ja/articles/4410707277083
     isExperiment: true
 ---
@@ -237,7 +237,7 @@ steps:
 version: 2.1
 
 jobs:
-  build:
+  build:    
     shell: /bin/sh -leo pipefail
     environment:
 
@@ -250,7 +250,7 @@ jobs:
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#using-parameters-and-bash-environment)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
-version: 2.1
+version: 2.1 
 
 jobs:
   build:
