@@ -21,40 +21,27 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 
 * 1 つのリクエストにつき受け付けられるのは１つの Jenkinsfile のみです。 つまり、[共有ライブラリ](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)では解決されず、結果として得られる `config.yml` は不完全な場合があります。 場合によっては、解決不可能な共有ライブラリが存在してもコンバーターがエラーを発しないことがあるのでご注意ください。
 
-* `tools` ブロックでは、`maven`、`jdk`、`gradle` にはツール名として `Default` のみがサポートされています。それ以外の名前だと変換に失敗します。 その場合は以下のように設定するか、手動で削除して下さい。</p> 
-  
-  例えば、以下のスタンザは、 
-  
-  
+* [`tools` ブロック](https://www.jenkins.io/doc/book/pipeline/syntax/#tools)では、`maven`、`jdk`、`gradle` にはツール名として `Default` のみがサポートされています。それ以外の名前だと変換に失敗します。 その場合は以下のように設定するか、手動で削除して下さい。
+
+  例えば、以下のスタンザは、
   ```
   tools {
     maven 'Maven 3.6.3'
     jdk 'Corretto 8.232'
   }
   ```
-
-
-以下のように変更する必要があります。 
-
-
+  以下のように変更する必要があります。
   ```
   tools {
     maven 'Default'
     jdk 'Default'
   }
   ```
-</li> </ul> 
 
-
-
-## 変換後の次のステップ 
-
+## 変換後の次のステップ
 {: #next-steps-after-conversion }
 
-
-
 ### Executor
-
 {: #executors }
 
 Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
@@ -63,18 +50,12 @@ Jenkinsfile の入力で何が定義されていても、静的な Docker Execut
 
 使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor](https://circleci.com/docs/2.0/executor-types/#using-macos) または [Machine Executor](https://circleci.com/docs/2.0/executor-types/#using-machine) が必要な場合があります。
 
-
-
 ### ワークフロー
-
 {: #workflows }
 
 [CircleCI ワークフロー](https://circleci.com/docs/2.0/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド](https://circleci.com/docs/2.0/configuration-reference/#triggers)は転送しません。
 
-
-
 ### ジョブ
-
 {: #jobs }
 
 CircleCI ジョブの多くの設定オプションには、相当する Jenkins の製品がありません。  CircleCI でのエクスペリエンスを高めるには、次の機能から始めることをお勧めします。
@@ -85,18 +66,12 @@ CircleCI ジョブの多くの設定オプションには、相当する Jenkins
 - キャッシュの[保存](https://circleci.com/docs/2.0/configuration-reference/#save_cache)と[リストア](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
 - [アーティファクトの保存](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 
-
-
 ### 手順
-
 {: #steps }
 
 Jenkinsfile のコンバーターはステップを直接変換しようとしますが、すべてのステップを完全に変換するわけではありません。 これに対処するために、 `JFC_STACK_TRACE `キーが追加され、出力 YAML 内の特定のステップを変換し、サポートされていないステップディレクティブを処理する方法についてのガイダンスが提供されました。
 
-
-
 ## サポートされている構文
-
 {: #supported-syntax }
 
 現在サポートされているのは宣言型 (パイプライン)の `jenkinsfile` のみです。
@@ -112,14 +87,9 @@ Jenkinsfile のコンバーターはステップを直接変換しようとし�
 | parameter      | [parameter](https://circleci.com/docs/ja/2.0/reusing-config/#using-the-parameters-declaration)      | 非サポート                                                                                 |
 | trigger        | [cron](https://circleci.com/docs/ja/2.0/workflows/#scheduling-a-workflow)                           | 非サポート                                                                                 |
 | stage          | [job](https://circleci.com/docs/ja/2.0/configuration-reference/#jobs)                               | サポート                                                                                  |
-
-
 {: class="table table-striped"}
 
-
-
 ## サポートされている Jenkins プラグイン
-
 {: #supported-jenkins-plugins }
 
 **注: 下記に記載されていないプラグインに依存する Jenkinsfile は変換できません**。 サポートされていないプラグイン（`options`など）に依存するスタンザは削除してください。そうしないと、**"Unknown" または "Invalid" というエラーメッセージが表示されます**。 プラグインの追加を依頼したい場合は、サポートセンターにチケットを提出して下さい。
@@ -203,10 +173,7 @@ Jenkinsfile のコンバーターはステップを直接変換しようとし�
 - Pipeline Maven Integration Plugin (`pipeline-maven`)
 - Pipeline Utility Steps (`pipeline-utility-steps`)
 
-
-
 ## フィードバック
-
 {: #feedback }
 
 このプロジェクトに関するフィードバックを共有するには、サポートチームにチケットを提出して下さい。
