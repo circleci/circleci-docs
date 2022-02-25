@@ -14,7 +14,7 @@ CircleCI でテストを実行する場合、テスト結果を保存する方�
 
 * CircleCI Web アプリの **テスト**
 * テストインサイトと結果が不安定なテストの検出
-* テストの分割.
+* テストの分割
 
 一方で、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 これは、プロジェクトにおけるテスト結果の処理の設定に関する問題をデバッグする際に便利です。たとえば、誤ったファイルをアップロードしている場合に効果的です。 テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) ステップを使ってテスト結果をアップロードします。
 
@@ -51,7 +51,7 @@ steps:
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
 
-ストレージの使用状況の表示、および毎月のストレージの超過料金の計算については、[データの永続化 ]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
+ストレージの使用状況の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
 
 ## テストインサイト
 {: #test-insights }
