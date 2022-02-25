@@ -16,7 +16,7 @@ version:
 
 * **質問:** Orb はプライベートにできますか？
 
-* **回答:** [現在のすべての料金プラン](https://circleci.com/pricing)で</strong>プライベート Orb</a> をご利用いただけます。
+* **回答:** [現在のすべての料金プラン](https://circleci.com/ja/pricing/)で[プライベート Orb](https://circleci.com/docs/2.0/orb-intro/#private-orbs) をご利用いただけます。
 
 ## コマンドとジョブの違い
 {: #difference-between-commands-and-jobs }
@@ -67,11 +67,11 @@ _**注: **<非推奨> `@volatile` を使って最新バージョンの Orb を�
 
 * **質問:** ローカルでのテストで以下のエラーが表示されるのはなぜですか？
 
-```bash
+```
 circleci build -c .circleci/jobs.yml --job test
 ```
 
-```bash
+```
 Error:
 You attempted to run a local build with version 2.1 of configuration.
 ```
