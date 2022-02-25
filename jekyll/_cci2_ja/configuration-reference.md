@@ -1430,7 +1430,7 @@ workflows:
 
 ## **`workflows`**
 {: #workflows }
-あらゆるジョブの自動化に用います。 Workflow 1 つ 1 つはそれぞれ名前となるキーと、値となるマップからなります。 Workflow の名前は `config.yml` ファイル内でユニークでなければなりません。 Workflows の設定でトップレベルに置くべきキーは、`version` と `jobs` になります。
+あらゆるジョブの自動化に用います。 各ワークフローは、キーとなるワークフロー名と、値となるマップで構成します。 名前は、その `config.yml` 内で一意である必要があります。 Workflows の設定でトップレベルに置くべきキーは、`version` と `jobs` になります。
 
 ### **`バージョン`**
 {: #workflow-version }
@@ -1444,7 +1444,7 @@ Workflows の `version` フィールドは、機能の廃止やベータ版で�
 ### **<`workflow_name`>**
 {: #lessworkflownamegreater }
 
-Workflow に付けるユニークな名前です。
+ワークフローに付与する一意の名前です。
 
 #### **`triggers`**
 {: #triggers }
