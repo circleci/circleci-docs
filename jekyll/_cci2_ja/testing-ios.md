@@ -101,7 +101,7 @@ CircleCI でプロジェクトを設定した後、 fastlane でビルドする�
 2. 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
 3. `myproject.xcodeproj/xcshareddata/xcschemes` ディレクトリが Git リポジトリに組み込まれていることを確認し、変更をプッシュします
 
-単純なプロジェクトであれば、最小限の設定で実行できます。 You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
+単純なプロジェクトであれば、最小限の設定で実行できます。 最小限の設定ファイルの例は、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)を参照してください。
 
 
 
@@ -679,7 +679,7 @@ steps:
 
 基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降を使用することをお勧めします。 ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降では `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前を使用している場合はアップグレードを検討してください。
 
-CocoaPods を使用するには、プロファイルの先頭行を次のように記述します。
+実行するには　Podfile ファイルの先頭行を次のように記述します。
 
 
 
