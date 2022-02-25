@@ -12,9 +12,7 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ 
-[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ 
-[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 以下のセクションに沿って、利用可能な Executor タイプ (`docker`、`machine`、`macos`、`windows`) について説明します。
 
@@ -26,7 +24,7 @@ version:
 {:.no_toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 *Executor タイプ*は、ジョブを実行する基盤テクノロジーまたは環境を定義します。 CircleCI では、以下の 4 つの環境でジョブを実行できます。
@@ -376,7 +374,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-CircleCI Server では、VM サービスを構成することで GPU 対応の machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
+CircleCI Server では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
 
 ## 関連項目
 {: #see-also }
