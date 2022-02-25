@@ -314,7 +314,7 @@ en:
     children:
       - 
         name: Server v2.19.x Install
-        link: 2.0/server-3-overview
+        link: 2.0/install-overview/
         children:
           - 
             name: 会社概要
