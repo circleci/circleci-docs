@@ -32,7 +32,7 @@ Running jobs requires you have the following tools available on your machine:
 * coreutils (Linux only)
 * git (recommended, but not required)
 
-== Authentication and installation from the CircleCI web app
+== CircleCI web app: Authentication and installation
 
 NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
@@ -44,7 +44,7 @@ In order to install runner you will need to create a namespace and authenticatio
 +
 image::runnerui_step_one.png[Runner Set Up - Get started]
 +
-. Create a namespace and resource class for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace will be the same namespace as the orbs use.
+. Create a namespace and resource class for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace should be the same namespace orbs use.
 +
 image::runnerui_step_two.png[Runner Set Up - Create a namespace and resource class]
 +
@@ -54,7 +54,7 @@ image::runnerui_step_three.png[Runner Set Up - Create a resource class token]
 +
 CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
 +
-. You will need to follow the platform specific installation instructions to continue. The instructions are shown inside the UI, or you can find the instructions in the documentation from the list of links below. Please note that if you would like to use runner on Kubernetes, the instructions are not in the UI and you will need to refer to our documentation.
+. You will need to follow the platform specific installation instructions to continue. The instructions are shown inside the UI, or you can find the instructions in the documentation from the list of links below. Please note that if you would like to use runner on Kubernetes, the instructions are not included in the UI, and you will need to refer to our documentation.
 +
 image::runnerui_step_four.png[Runner Set Up - Set up runner on your specific machine]
 +
@@ -64,17 +64,17 @@ image::runnerui_step_four.png[Runner Set Up - Set up runner on your specific mac
 * xref:runner-installation-docker.adoc[Docker]
 * xref:runner-on-kubernetes.adoc[Kubernetes]
 +
-. You will get a verification in the UI that a new runner has been detected. You can then add your self-hosted runner to a project by copying the code into your project's `.circleci/config.yml` file.
+. You will get a verification in the UI that a new runner has been detected. You can then add your self-hosted runner to a project by copying all, or just the relevant parts of the code into your project's `.circleci/config.yml` file, depending on your existing config set up.
 +
 image::runnerui_step_five.png[Runner Set Up - Copy code to config file]
 
-== Authentication and installation from the command line
+== Command line: Authentication and installation
 
 NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
 In order to install runner you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace will be the same namespace as the orbs use.
+. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace should be the same namespace orbs use. *Please note, if you already have a runner namespace, you can skip ahead to step 2.*
 +
 Use the following command:
 +
@@ -82,22 +82,20 @@ Use the following command:
 circleci namespace create <name> <vcs-type> <org-name>
 ```
 +
-For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`
+For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 
-. Create a resource class for your runner for your namespace using the following command:
-+
-
-NOTE: Your newly created namespace is required in the command to create your resource class.
+. Create a resource class for your runner's namespace using the following command:
 +
 ```
 circleci runner resource-class create <name>/<resource-class> <description> --generate-token
 ```
 +
+*Your newly created namespace is required in the command to create your resource class.*
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 
 CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
-+
+
 *If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#post-authentication-platform-specific-instructions, Post authentication instructions>>.
 
 === Continued for Linux, macOS, and Server
