@@ -146,7 +146,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ## 環境の分離
 {: #separation-of-environments }
-ジョブと[リモート Docker]({{ site.baseurl }}/ja/2.0/glossary/#リモート-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+ジョブと[リモート Docker]({{ site.baseurl }}/ja/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
 ### サービスへのアクセス
 {: #accessing-services }
@@ -164,7 +164,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 #...
 ```
 
-同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
+同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります。
 
 ```yml
 #...
