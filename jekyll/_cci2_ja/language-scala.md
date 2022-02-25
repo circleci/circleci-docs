@@ -230,6 +230,6 @@ steps:
 {:.no_toc}
 
 - 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI  (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
-- デプロイターゲットのその他の設定例については、[デプロイ]({{site.baseurl}}/2.0/deployment-integrations/)を参照してください。
+- デプロイターゲットのその他の構成例については、[デプロイ]({{site.baseurl}}/ja/2.0/deployment-integrations/)を参照してください。
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。
   
