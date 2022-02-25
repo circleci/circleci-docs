@@ -116,4 +116,3 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 * The Helm chart currently does not configure permissions, therefore, the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
 * The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
 * The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you will need to set up separate charts for each one.
-

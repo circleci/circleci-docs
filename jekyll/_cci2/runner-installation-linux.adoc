@@ -18,7 +18,7 @@ NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Ru
 
 == Create the CircleCI runner configuration
 
-The recommended CircleCI runner configuration for Linux is:
+Create a `launch-agent-config.yaml` file. The recommended CircleCI runner configuration for Linux is:
 
 ```yaml
 api:
@@ -41,6 +41,9 @@ Once created, save the configuration file to `/opt/circleci/launch-agent-config.
 
 ```shell
 sudo chown root: /opt/circleci/launch-agent-config.yaml
+```
+
+```shell
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
@@ -90,11 +93,21 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
+{% include snippets/runner-config-reference.adoc %}
+
 == Optional Steps
 
 === Enable the `systemd` unit
 
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
+
+```shell
+sudo chown root: /opt/circleci/circleci.service
+```
+
+```shell
+sudo chmod 755 /opt/circleci/circleci.service
+```
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
 

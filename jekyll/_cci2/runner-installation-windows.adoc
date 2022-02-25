@@ -43,6 +43,7 @@ The installation will be output into your PowerShell interface.
 
 After setup completes, the launch agent starts automatically and begins looking for jobs to process.
 
+{% include snippets/runner-config-reference.adoc %}
 
 == Uninstall / Reinstall Steps
 
