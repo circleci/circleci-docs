@@ -10,7 +10,7 @@ gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"
 gem "liquid-c"
-gem 'nokogiri', '~> 1.12', '>= 1.12.5'
+gem 'nokogiri', '~> 1.13'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'
