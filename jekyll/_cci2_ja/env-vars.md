@@ -237,7 +237,7 @@ steps:
 version: 2.1
 
 jobs:
-  build:    
+  build:
     shell: /bin/sh -leo pipefail
     environment:
 
@@ -250,7 +250,7 @@ jobs:
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#using-parameters-and-bash-environment)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
-version: 2.1 
+version: 2.1
 
 jobs:
   build:
