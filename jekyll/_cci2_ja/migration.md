@@ -85,8 +85,8 @@ CircleCI 2.0 への移行を開始するにあたり、直ちにすべてを移�
     - [CircleCI のブログ記事「How to Handle OOM Errors (OOM エラーの対処方法)」](https://circleci.com/blog/how-to-handle-java-oom-errors/)
 - Scala プロジェクトのファイル名は長すぎる場合があるため、`-Xmax-classfile-name` フラグを追加してください。
 
-```shell
-scalacOptions ++= Seq( <code>-encoding</code>, <code>utf-8</code>, <code>-target:jvm-1.8</code>, <code>-deprecation</code>, <code>-unchecked</code>, <code>-Xlint</code>, <code>-feature</code>, <code>-Xmax-classfile-name</code>, <code>242</code> &#060;= add here ),
+    ```shell
+                ``` scalacOptions ++= Seq( <code>-encoding</code>, <code>utf-8</code>, <code>-target:jvm-1.8</code>, <code>-deprecation</code>, <code>-unchecked</code>, <code>-Xlint</code>, <code>-feature</code>, <code>-Xmax-classfile-name</code>, <code>242</code> &#060;= add here ),
 ```
 
 
@@ -139,7 +139,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # SSH で接続します
 - CircleCI 2.0 では、ユーザーの想像力を無限に活かすことができます。
 - シェルを Python に設定すれば、YAML で任意の Python を実行できます。
 
-```yaml
+```yml
             - run:
       shell: /usr/bin/python3
       command:
