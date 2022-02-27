@@ -67,11 +67,11 @@ _**注: **<非推奨> `@volatile` を使って最新バージョンの Orb を�
 
 * **質問:** ローカルでのテストで以下のエラーが表示されるのはなぜですか？
 
-```
+```bash
 circleci build -c .circleci/jobs.yml --job test
 ```
 
-```
+```bash
 Error:
 You attempted to run a local build with version 2.1 of configuration.
 ```
