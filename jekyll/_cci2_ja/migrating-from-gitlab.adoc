@@ -36,8 +36,8 @@ git clone git@gitlab.com:[owner]/[repo-name].git --bare
 ```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-```
-. すべてのローカルリファレンス（refs/\*）を、リモートの GitHub Enterprise リポジトリにプッシュします。
+```shell
+. Push all local references (refs/\*) up to your remote GitHub Enterprise repository:
 +
 ```shell
 git push enterprise --mirror
