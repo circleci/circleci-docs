@@ -40,7 +40,7 @@ git clone https://external-host.com/extuser/repo.git --bare
 ```shell
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-```shell
+```
 . すべてのローカルリファレンス（refs/*）を、リモートの GitHub Enterprise リポジトリにプッシュします。
 +
 ```shell
