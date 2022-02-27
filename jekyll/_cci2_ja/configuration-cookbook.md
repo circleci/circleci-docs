@@ -589,7 +589,7 @@ workflows:
 version: 2.1
 
 # CircleCI のダイナミック コンフィグ機能を有効にする。
-setup: true
+setup: true 
 
 # ダイナミック コンフィグの使用には continuation Orb が必要。
 orbs:
@@ -604,7 +604,7 @@ jobs:
       - run: # コマンドの実行
           name: 設定ファイルの生成
           command: |
-            ./generate-config > generated_config.yml
+            ./generate-config > generated_config.yml 
       - continuation/continue:
           configuration_path: generated_config.yml # 新しく生成した設定ファイルを使用して続行
 
@@ -659,28 +659,16 @@ workflows:
 ```yaml
 version: 2.1
 
-# CircleCI のダイナミック コンフィグ機能を有効にする
+# this allows you to use CircleCI's dynamic configuration feature
 setup: true
 
-# 更新対象のファイルセットのパスに基づいてパイプラインを続行するには path-filtering Orb が必要
+# the path-filtering orb is required to continue a pipeline based on
+# the path of an updated fileset
 orbs:
-  path-filtering: circleci/path-filtering@0.0.2
+  path-filtering: circleci/path-filtering@0.1.1
 
 workflows:
-  # always-run ワークフローはパイプライン パラメータの内容にかかわらず常時実行
-  always-run:
-    jobs:
-      # path-filtering/filter ジョブがどのパイプライン パラメータを
-      # 変更するべきかを決定
-      - path-filtering/filter:
-          name: check-updated-files
-          # 3 列を空白文字で区切ったマッピング 一行につき 1 マッピング
-          # <検証するパスの正規表現> <変更するパラメータ名> <設定されるパラメータの値>
-          mapping: |
-            service1/.* run-build-service-1-job true
-            service2/.* run-build-service-2-job true
-          base-revision: master
-          # パス フィルタリングとパイプライン パラメータの設定が完了した後に実行するコンフィグへのパス .
+  # the always-run workflow is always triggered, regardless of the pipeline parameters.
   always-run:
     jobs:
       # the path-filtering/filter job determines which pipeline
