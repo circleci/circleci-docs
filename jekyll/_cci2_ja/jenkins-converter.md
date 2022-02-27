@@ -24,14 +24,14 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 * [`tools` ブロック](https://www.jenkins.io/doc/book/pipeline/syntax/#tools)では、`maven`、`jdk`、`gradle` にはツール名として `Default` のみがサポートされています。それ以外の名前だと変換に失敗します。 その場合は以下のように設定するか、手動で削除して下さい。
 
   例えば、以下のスタンザは、
-  ```
+  ```groovy
   tools {
     maven 'Maven 3.6.3'
     jdk 'Corretto 8.232'
   }
   ```
   以下のように変更する必要があります。
-  ```
+  ```groovy
   tools {
     maven 'Default'
     jdk 'Default'
