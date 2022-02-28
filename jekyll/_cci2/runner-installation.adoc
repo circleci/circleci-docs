@@ -54,9 +54,11 @@ image::runnerui_step_three.png[Runner Set Up - Create a resource class token]
 +
 CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
 +
-. You will need to follow the platform specific installation instructions to continue. The instructions are shown inside the UI, or you can find the instructions in the documentation from the list of links below. Please note that if you would like to use runner on Kubernetes, the instructions are not included in the UI, and you will need to refer to our documentation.
+. After authenticating, you will need to follow the platform specific installation instructions to continue. The instructions are shown inside the UI, or you can find the instructions in the documentation from the list of links below. Please note that if you would like to use runner on Kubernetes, the instructions are not included in the UI, and you will need to refer to our documentation.
 +
 image::runnerui_step_four.png[Runner Set Up - Set up runner on your specific machine]
++
+Post authentication platform-specific instructions:
 +
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
@@ -74,7 +76,7 @@ NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be 
 
 In order to install runner you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace should be the same namespace orbs use. *Please note, if you already have a runner namespace, you can skip ahead to step 2.*
+. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace should be the same namespace orbs use. *Please note, if you already have a runner namespace, you can skip ahead to step 2.* If you already have a runner namespace and you try to enter a new one, you should see an error alerting you to the fact one already exists.
 +
 Use the following command:
 +
@@ -176,7 +178,7 @@ echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
-== Post authentication platform-specific instructions
+=== Post authentication platform-specific instructions
 
 Please refer to the platform-specific installation instructions after you have created your namespace and resource class. These instructions are included in the UI when creating namespaces and resource classes from the CircleCI web app (with the exception of Kubernetes).
 
