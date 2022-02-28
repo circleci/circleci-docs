@@ -36,7 +36,7 @@ version:
 
 1 つのキャッシュキーの下に複数のディレクトリがあると、キャッシュが変更される可能性が高くなります。 下記の例では、最初の 2 つのディレクトリには変更があっても、` a `または `b `ディレクトリには変更がない場合があります。 この 4 つのディレクトリをすべて 1 つのキャッシュキー下に保存すると、ストレージ使用量が増えてしまいます。 キャッシュのリストアステップでも、すべてのファイルがリストアされるため必要以上に時間がかかってしまいます。
 
-```yml
+```yaml
 dependency_cache_paths:
   - /mnt/ramdisk/node_modules
   - /mnt/ramdisk/.cache/yarn
@@ -73,7 +73,7 @@ dependency_cache_paths:
 
 #partial-dependency-caching-strategies を参照して、使用している言語に関するヒントがあるかどうかを確認します。
 
-### キャッシュがリストアされ、保存されていることを確認
+### キャッシュがリストアされ、保存されていることを確認
 {: #check-cache-is-being-restored-as-well-as-saved }
 
 キャッシュがリストアされていない場合は、[こちらのサポート記事](https://support.circleci.com/hc/en-us/articles/360004632473-No-Cache-Found-and-Skipping-Cache-Generation)でヒントをお探しください。
