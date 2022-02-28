@@ -809,9 +809,9 @@ version: 2
 jobs:
   build1:
 #...
-    steps:    
+    steps:
 
-      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス 
+      - persist_to_workspace: # ダウンストリーム ジョブで使用するために、指定されたパス
       # (workspace/echo-output) をワークスペースに維持します。 このパスは、絶対パスまたは
       # working_directory からの相対パスでなければなりません。 This is a directory on the container which is
       # taken to be the root directory of the workspace.
