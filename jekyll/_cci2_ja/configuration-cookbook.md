@@ -589,7 +589,7 @@ workflows:
 version: 2.1
 
 # CircleCI のダイナミック コンフィグ機能を有効にする。
-setup: true 
+setup: true
 
 # ダイナミック コンフィグの使用には continuation Orb が必要。
 orbs:
@@ -604,7 +604,7 @@ jobs:
       - run: # コマンドの実行
           name: 設定ファイルの生成
           command: |
-            ./generate-config > generated_config.yml 
+            ./generate-config > generated_config.yml
       - continuation/continue:
           configuration_path: generated_config.yml # 新しく生成した設定ファイルを使用して続行
 
