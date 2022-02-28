@@ -46,6 +46,14 @@ The Windows execution environment (or `executor`) gives users the tools to build
 
 Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
+The windows image is updated approximately every 30 days. If a tag is not specified when using the windows image, by default the latest stable version will be applied. The tagging scheme for the windows image is as follows:
+
+Stable - This image tag points to the latest, production ready Windows image. This image should be used by projects that want a decent level of stability but would like to get occasional software updates. It is typically updated once a month. 
+
+Previous - This image tag points to the previous ("Stable"), production read Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month. 
+
+Edge - This image tag points to the latest version of the Windows image and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes and not guaranteed to be stable
+
 Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
 
 {:.tab.windowsblockone.Cloud}
