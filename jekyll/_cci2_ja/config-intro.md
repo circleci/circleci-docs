@@ -101,7 +101,7 @@ jobs:
 
 ## パート 3: 処理の追加
 {: #part-three-thats-nice-but-i-need }
-コード ベースやプロジェクトは 1 つひとつ異なります。  それは問題ではありません。  多様性を認めています。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  ここでは、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
+コードベースやプロジェクトは 1つひとつ異なります。  それは問題ありません。  多様性は大切です。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  この例では、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
 
 1. このセクションでは、パート 1、2 のコードをさらに発展させます。  前のパートがまだ完了していない場合は、少なくともパート 1 を完了し、ブランチに作業中の `config.yml` ファイルを置いてください。
 
@@ -131,7 +131,6 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-    
       - run:
           name: Running in a Unique Container
           command: |
@@ -157,6 +156,7 @@ jobs:
 以下の例では、ビルドをトリガーするイベントは、`Hello-World` を直ちに開始します。  残りのジョブは待機します。  `Hello-World` が完了すると、`I-Have-Code` と `Run-With-Node` の両方が開始します。  `I-Have-Code` と `Run-With-Node` はいずれも、開始前に `Hello-World` が正常に完了することが求められているためです。  次に、`I-Have-Code` と `Run-With-Node` の両方が完了すると、`Hold-For-Approval` という承認ジョブが利用可能になります。  `Hold-For-Approval` ジョブは、他のジョブとは少し異なります。  このジョブは、ワークフローの続行を許可するための手動操作を示しています。  ユーザーが (CircleCI UI または API から) ジョブを承認するまでワークフローが待機している間、すべての状態は、元のトリガーイベントに基づいて維持されます。  承認ジョブは早めに完了することが推奨されますが、実際には数時間、長いときは数日かかってしまう場合もあるでしょう。 手動操作によって `Hold-For-Approval` が完了すると、最後のジョブ `Now-Complete` が実行されます。
 
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
+
 
 ```yml
 version: 2.1
@@ -196,28 +196,24 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-            
+
 workflows:
  Example_Workflow:
    jobs:
      - Hello-World
      - I-Have-Code:
          requires:
-    
            - Hello-World
      - Run-With-Node:
          requires:
-    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
-    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
-    
            - Hold-For-Approval
 ```
 

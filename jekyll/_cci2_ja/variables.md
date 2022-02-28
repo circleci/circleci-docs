@@ -1,28 +1,28 @@
 ---
 layout: classic-docs
-title: "Project values and variables"
-description: A list of all built-in variables for your CircleCI projects.
+title: "プロジェクトの値と変数"
+description: CircleCI プロジェクトで使用する定義済みの値のリスト
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-This page is a reference for all built-in values available for use in your CircleCI projects.
+このページでは、CircleCI プロジェクトで使用できる定義済みの値について説明します。
 
 ## 定義済み環境変数
 {: #built-in-environment-variables }
 
-The following built-in environment variables are available for all CircleCI projects. Environment variables are scoped at the job level. They can be used within the context of a job but do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
+下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 環境変数は 1 つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
 
-**Note**: You cannot use a built-in environment variable to define another environment variable. 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 For more details, see [Setting an Environment Variable in a Shell Command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
+**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 {% include snippets/built-in-env-vars.md %}
 
 ## パイプライン値
 {: #pipeline-values }
 
-パイプライン値はすべてのパイプライン構成で使用でき、事前の宣言なしに利用できます。 Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
+パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
 
 {% include snippets/pipeline-values.md %}
 
@@ -43,5 +43,5 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**Note:** When using the above method to set the variables in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. 文字列を空にする必要がある場合、[シェルコマンドでの変数の設定]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+注: 上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 

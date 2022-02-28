@@ -26,7 +26,7 @@ version:
 {:.no_toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 *Executor タイプ*は、ジョブを実行する基盤テクノロジーまたは環境を定義します。 CircleCI では、以下の 4 つの環境でジョブを実行できます。
@@ -274,13 +274,15 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 
 ## macOS を使用する
 {: #using-macos }
+
 `macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 In macOS, the following resources classes are available:
 
-| クラス                   | vCPU        | RAM   |
-| --------------------- | ----------- | ----- |
-| medium                | 4 @ 2.7 GHz | 8 GB  |
-| macos.x86.medium.gen2 | 4 @ 3.2 GHz | 8 GB  |
-| large                 | 8 @ 2.7 GHz | 16 GB |
+| クラス                                | vCPU         | RAM   |
+| ---------------------------------- | ------------ | ----- |
+| medium                             | 4 @ 2.7 GHz  | 8 GB  |
+| macos.x86.medium.gen2              | 4 @ 3.2 GHz  | 8 GB  |
+| large                              | 8 @ 2.7 GHz  | 16 GB |
+| macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
 このとき、どのバージョンの Xcode を使うか指定することもできます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
@@ -296,6 +298,8 @@ jobs:
       # 使用して、macOS コンテナ内で実行されます
       - run: xcodebuild -version
 ```
+
+<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }

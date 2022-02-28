@@ -239,7 +239,7 @@ ubuntu@box159:~$ firefox &
 VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
 
 1. [`x11vnc`](https://github.com/LibVNC/x11vnc) をダウンロードして、テストの前に起動します。
-```yml
+```yaml
 steps:
   - run:
       name: Download and start X

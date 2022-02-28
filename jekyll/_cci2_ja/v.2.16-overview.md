@@ -71,7 +71,7 @@ This document provides a summary of features and product notes for the release o
 ### 準備
 {: #preparations }
 
-Before performing a replicated version update, backup your data using the Backup section of the *CircleCI v2.16 Operations Guide*.
+Replicated バージョンの更新を行う前に、『*CircleCI v2.16 運用ガイド*』の「バックアップ」に従ってデータをバックアップしてください。
 
 - 以下のコマンドで CircleCI アプリケーションを停止させます。
 
@@ -79,13 +79,13 @@ Before performing a replicated version update, backup your data using the Backup
     replicatedctl app stop
 ```
 
-Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
+アプリケーションのシャットダウンには数分かかります。 管理ダッシュボードを確認して、ステータスが [Stopped (停止)] になってから続行してください。 以下のコマンドを実行してアプリケーションのステータスを表示する方法もあります。
 
 ```shell
     replicatedctl app status inspect
 ```
 
-Example Output:
+以下のように出力されます。
 ```json
 [
     {
@@ -116,32 +116,32 @@ Example Output:
 ### 更新
 {: #update }
 
-Perform the Replicated update by executing the update script as follows:
+以下のように更新スクリプトを実行して、Replicated の更新を実行します。
 
 ```shell
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
 ```
 
-Double-check your replicated and docker versions:
+Replicated と Docker の両方のバージョンをチェックしてください。
 
 ```shell
     replicatedctl version    # 2.29.0
     docker -v                # 17.12.1
 ```
 
-Restart the app with
+以下のコマンドでアプリケーションを再起動します。
 
 ```shell
     replicatedctl app start
 ```
 
-The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
+アプリケーションのスピンアップには数分かかります。 以下のコマンドを実行するか、管理ダッシュボードにアクセスして進行状況を確認できます。
 
 ```shell
     replicatedctl app status inspect
 ```
 
-Example output:
+以下のように出力されます。
 ```json
 [
     {

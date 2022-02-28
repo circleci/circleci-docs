@@ -60,17 +60,17 @@ CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl
 
 _note: Within CircleCI, we sometimes refer to individual users as "organizations" or "personal organizations", since from our perspective there aren't notable differences. Hence some commands refer to an `org-name`. This can simply be your GitHub username._
 
-Enter the following command to claim your namespace, if you have not yet claimed one:
+まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
 ```shell
 circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
 
-where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organization.
+`name` は要求する名前空間、`vcs-type` はお使いのバージョン管理システムの種類 (`github` または `bitbucket`)、`org-name` は自分の組織名に置き換えてください。
 
 ### 次のステップ
 {: #next-steps }
 
-Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
+Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
 
 
 ## 関連項目
