@@ -18,7 +18,8 @@ resource on CircleCI. Arm resources are available on cloud and server 3.x.
 **Note:** Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform.
 The Spin Up Environment job will give you a green tic, but you will see the following message in the response:
   
-```WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])```
+```WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
+  ```
   
 If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
 
