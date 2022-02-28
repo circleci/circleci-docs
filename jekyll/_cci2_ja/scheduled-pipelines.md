@@ -7,13 +7,13 @@ order: 20
 version:
   - クラウド
 suggested:
-  -
+  - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
-  -
+  - 
     title: ワークフローをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  -
+  - 
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
@@ -189,3 +189,11 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 * スケジュール実行化されたパイプラインに設定されている実行ユーザーは今も組織の一員ですか？
 * スケジュールに設定されたブランチが削除されていませんか？
 * ご自身の GitHub 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効していると GiHub へのリクエストが失敗します。
+
+**Q:** Why did my scheduled pipeline run later than expected?
+
+**A:** There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to [the Cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).
+
+For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window. Note that it does not mean that it will run at 08:00 UTC exactly.
+
+However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run. In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
