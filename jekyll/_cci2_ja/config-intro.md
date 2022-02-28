@@ -100,8 +100,8 @@ jobs:
 - 行 13 ～ 17: `build` ジョブの 2 つ目の run は、チェックアウトの内容を (`ls -al` で) リストします。  これで、ブランチを操作できるようになります。
 
 ## パート 3: 処理の追加
-{: #part-three-thats-nice-but-i-need }
-コード ベースやプロジェクトは 1 つひとつ異なります。  それは問題ではありません。  多様性を認めています。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  ここでは、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
+I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: コードの取得 command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:10-browsers steps: - run: name: ノードを持つコンテナでの実行 command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: 承認の完了 command: | echo 'Do work once the approval has completed'
+コードベースやプロジェクトは 1つひとつ異なります。  それは問題ありません。  多様性は大切です。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  この例では、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
 
 1. このセクションでは、パート 1、2 のコードをさらに発展させます。  前のパートがまだ完了していない場合は、少なくともパート 1 を完了し、ブランチに作業中の `config.yml` ファイルを置いてください。
 
@@ -131,7 +131,6 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-    
       - run:
           name: Running in a Unique Container
           command: |
@@ -158,17 +157,9 @@ jobs:
 
 ジョブ名はすべて任意です。  このため、複雑なワークフローを作成する必要がある場合にも、他の開発者が `config.yml` のワークフローの内容を理解しやすいよう、単純明快な名前を付けておくことができます。
 
+
 ```yml
-version: 2.1
-jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Hello World
-          command: |
-            echo 'Hello World!'
+image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!'
             echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:
@@ -196,28 +187,24 @@ jobs:
           name: Approval Complete
           command: |
             echo 'Do work once the approval has completed'
-            
+
 workflows:
  Example_Workflow:
    jobs:
      - Hello-World
      - I-Have-Code:
          requires:
-    
            - Hello-World
      - Run-With-Node:
          requires:
-    
            - Hello-World
      - Hold-For-Approval:
          type: approval
          requires:
-    
            - Run-With-Node
            - I-Have-Code
      - Now-Complete:
          requires:
-    
            - Hold-For-Approval
 ```
 

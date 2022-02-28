@@ -219,7 +219,7 @@ CircleCI でテスト分割を活用するには、実行するテストの一�
 
 pytest で複数のコンテナにテストを分割しようとすると、以下のいずれかのエラーが発生することがあります。
 
-```
+```shell
 No timing found for "tests/commands/__init__.py"
 No timing found for "tests/commands/test_1.py"
 No timing found for "tests/commands/test_2.py"
@@ -291,9 +291,7 @@ workflows:
 {: #video-troubleshooting-globbing }
 {:.no_toc}
 
-注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。
-
-<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 関連項目
 {: #see-also }

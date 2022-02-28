@@ -59,7 +59,7 @@ Yarn や Bundler、Pip といった依存関係管理ツールが良い例です
 
 以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
 
-**Note:** The only network traffic that will be billed is that accrued through **restoring caches and workspaces to self-hosted runners**.
+**注: **課金の対象となるネットワークトラフィックは、**キャッシュやワークスペースのセルフホストランナーへのリストア**により発生したトラフィックのみです。
 {: class="alert alert-info" }
 
 お客様のネットワークおよびストレージの使用状況は、以下のステップにより確認できます。
@@ -73,10 +73,10 @@ Yarn や Bundler、Pip といった依存関係管理ツールが良い例です
 ### ストレージとネットワーク転送の概要
 {: #overview-of-storage-and-network-transfer }
 
-All data persistence operations within a job will accrue storage usage, the relevant actions are:
+ジョブ内でデータを永続化するための操作には、ストレージの使用が発生します。関連するアクションは次のとおりです。
 
-* Uploading caches
-* Uploading workspaces
+* キャッシュのアップロード
+* ワークスペースのアップロード
 * アーティファクトのアップロード
 * テスト結果のアップロード
 
@@ -87,7 +87,7 @@ All data persistence operations within a job will accrue storage usage, the rele
 * `store_artifacts`
 * `store_test_results`
 
-The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners**.
+課金の対象となるネットワークトラフィックは、**キャッシュやワークスペースのセルフホストランナーへのリストア**により発生したトラフィックのみです。
 
 ストレージとネットワーク転送の使用状況の詳細は、Plan > Plan Usage 画面で確認できます。 この画面では以下の内容を確認できます。
 
@@ -122,7 +122,7 @@ The only network traffic that will be billed for is that accrued through **resto
 
 使用量から 1 か月のネットワーク料金を計算するには、 **Network ** タブをクリックし、組織で超過が発生していないかを確認します。 上記のストレージの場合と同様に、超過分の GB/TB に 420 クレジットを乗じることで月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
 
-Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
+ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Exexutor のみを使用している場合は、ネットワーク料金は適用されません。
 
 ### ストレージとネットワーク転送の使用を最適化する方法
 {: #how-to-optimize-your-storage-and-network-transfer-use }
@@ -205,4 +205,4 @@ UI テストのイメージや動画をアップロードする場合は、フ�
 #### ネットワーク転送の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
 
-Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
+セルフホストランナーへのネットワーク転送の使用量は、特に`US-East-1` でランナーを AWS 上でホストすることにより減らせます。

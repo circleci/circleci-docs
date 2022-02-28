@@ -216,10 +216,10 @@ Workspace については[こちら](https://circleci.com/docs/2.0/workflows/#us
 以下のコマンドを使用して、ワークスペースで作成したファイルの内容を表示できるかどうかを確認します。
 
 ```
-pwd                  #  "print what directory" の略で、ファイル システム内のどこにいるかを確認できます。
-ls -al               # 現在のディレクトリに含まれるファイルとディレクトリを一覧表示します。
-cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します。
-cat <file_name>      # ファイル <file_name> の内容を表示します。
+pwd                  # print what directory, find out where you are in the file system
+ls -al               # list what files and directories are in the current directory
+cd <directory_name>  # change directory to the <directory_name> directory
+cat <file_name>      # show me the contents of the file <file_name>
 ```
 **注:** `rerun job with ssh`を実行するには、 [ジョブにSSHキーを追加する](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job)という手順が必要です。
 

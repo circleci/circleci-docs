@@ -32,7 +32,7 @@ SSH を使用してログインすると、対話型のログイン シェルが
 
 2. SSH 接続を有効にしてジョブを起動するには、[Rerun Workflow (ワークフローを再実行する)] ドロップダウン メニューから [Rerun job with SSH (SSH でジョブを再実行する)] オプションを選択します。
 
-     **メモ:** `[Rerun job with SSH (SSH でジョブを再実行する)]` はデバッグのための機能ですので、ジョブを再実行してもパイプラインに反映されません。 SSH でジョブの再実行を行うと、新しいパイプラインはトリガーされず、ジョブだけが再実行されます。 必要に応じて、[legacy jobs view (レガシー ジョブ ビュー)] から実行中のジョブにアクセスできます。
+     **Note:** The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
 
 3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。
 
