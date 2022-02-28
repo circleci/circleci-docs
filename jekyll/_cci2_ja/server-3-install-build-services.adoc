@@ -67,7 +67,7 @@ ifndef::env-gcp[]
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
-* クラスタの *Subnet ID (サブネット)*、 *VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* : 
+* クラスタの *Subnet ID (サブネット)*、 *VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* :
 以下のコマンドを実行して、クラスタの VPC ID ((vpcId)、CIDR (serviceIpv4Cidr)、およびサブネット (サブネットの ID)を入手します。
 +
 ```shell
