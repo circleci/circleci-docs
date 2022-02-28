@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-This document describes how to configure [Fastlane](https://fastlane.tools/) to automatically deploy iOS apps from CircleCI to a distribution service.
+ここでは、CircleCI 上で iOS アプリを配信サービスに自動的にデプロイするための [fastlane](https://fastlane.tools/) の設定方法について説明します。
 
 * 目次
 {:toc}
@@ -19,11 +19,11 @@ This document describes how to configure [Fastlane](https://fastlane.tools/) to 
 {: #overview }
 {:.no_toc}
 
-Using Fastlane, CircleCI can automatically deploy iOS apps to various services. これにより、iOS アプリのベータ版またはリリース版の対象ユーザーへの配信に必要な手動ステップが不要になります。
+fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信する際の手動作業が不要になります。
 
 デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**注意:** 以下のデプロイ例を使用するには、コード署名がプロジェクト用に設定されている必要があります。 To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/2.0/ios-codesigning/) page.
+**注:** 下記のデプロイ例を使用するには、お客様のプロジェクトにコード署名が設定されている必要があります。 To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/2.0/ios-codesigning/) page.
 
 ## ベストプラクティス
 {: #best-practices }
