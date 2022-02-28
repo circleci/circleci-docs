@@ -38,7 +38,7 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 * The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from our application (inside the Kubernetes cluster) and from our Nomad node can reach your instance without additional configuration. CircleCI の SSH エージェントは、異なるネットワークプロトコルを使用しているため、プロキシの設定に従いません。 If a proxy is the only way that any traffic can reach outside the proxied environment, this means it will block SSH traffic and our application will fail.
 * ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
-* The KOTS Admin Console cannot be upgraded if proxy setting were configured. The proxy settings will be deleted and cause the KOTS Admin Console to break.
+* The KOTS Admin Console cannot be upgraded if proxy setting were configured. プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * プロキシを設定した VM サービスでは、カスタムイメージが必要になることがよくあります。 詳しくは https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder レポジトリ] をご覧ください。
 * If object storage is outside the proxy, no job features that use object storage will work. それには以下が含まれます。
 ** アーティファクト
