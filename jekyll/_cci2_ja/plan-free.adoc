@@ -28,7 +28,7 @@ NOTE: Free プランでは、 macOS のリソースクラスがまもなく公�
 
 === 利用可能なリソースクラス
 
-Docker、 Linux、 Windows、および macOS （近日公開）のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、<<executor-intro#,Executors and Images>> のページをご覧ください。
+A wide array of resource classes on Docker, Linux, Windows, and macOS are available to use. 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、<<executor-intro#,Executors and Images>> のページをご覧ください。
 
 {% include snippets/features-of-circleci.adoc %}
 
