@@ -28,7 +28,7 @@ version:
 {: #introduction }
 {:.no_toc}
 
-CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy/)と[データの永続化]({{site.baseurl}}/2.0/persist-data/)でキャッシュ戦略と管理に関するヒントを参照してださい。
+CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 See the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) and [Persisting Data]({{site.baseurl}}/2.0/persist-data/) pages for tips on caching strategies and management.
 
 ここでは、手動によるキャッシュオプション、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。
 
@@ -111,38 +111,110 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ## ライブラリのキャッシュ
 {: #caching-libraries }
 
-ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
+ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 See our Language guides and [demo projects]({{site.baseurl}}/2.0/demo-apps/) for the specifics for your stack.
 
 現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 たとえば、`circleci/ruby:2.4.1` というビルド済みイメージには git、openssh-client、gzip がプリインストールされています。
 
 ![依存関係のキャッシュ]( {{ site.baseurl }}/assets/img/docs/cache_deps.png)
 
+依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
+
+Example of caching `pip` dependencies:
+
+{:.tab.dependencies.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+jobs:
+  build:
+    steps: # a collection of executable commands making up the 'build' job
+      - checkout # pulls source code to the working directory
+      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run: # install and activate virtual environment with pip
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+```
+{% endraw %}
+
+{:.tab.dependencies.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+jobs:
+  build:
+    steps: # a collection of executable commands making up the 'build' job
+      - checkout # pulls source code to the working directory
+      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run: # install and activate virtual environment with pip
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache: # ** 依存関係のキャッシュを保存する特別なステップ **
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+```
+{% endraw %}
+
+{:.tab.dependencies.Server_2}
+{% raw %}
+```yaml
+version: 2
+jobs:
+  build:
+    steps: # 'build' ジョブを構成する一連の実行可能コマンド
+      - checkout # ソース コードを作業ディレクトリにプルします
+      - restore_cache: # **Branch キー テンプレート ファイルまたは requirements.txt ファイルが前回の実行時から変更されていない場合、保存されている依存関係キャッシュを復元します**
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run: # pip を使用して、仮想環境をインストールしてアクティブ化します
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+```
+{% endraw %}
+
+Make note of the use of a `checksum` in the cache `key`. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache will be updated accordingly. また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
+
 ## ワークフローでのキャッシュへの書き込み
 {: #writing-to-the-cache-in-workflows }
 
-同じワークフロー内の複数のジョブでキャッシュを共有することができます。 そのため、複数のワークフローの複数のジョブにまたがってキャッシュを実行すると、競合状態が発生する可能性があります。
+同じワークフロー内のジョブどうしはキャッシュを共有できます。 そのため、複数のワークフローの複数のジョブにまたがってキャッシュを実行すると、競合状態が発生する可能性があります。
 
 キャッシュの書き換えはできません。 `node-cache-main`のように特定のキーにキャッシュを一度書き込むと、再度書き込むことはできません。
 
 ### キャッシュの競合状態の例 1
 {: #caching-race-condition-example-1 }
 
-たとえば、ジョブ 3 がジョブ 1 とジョブ 2 に依存する 3 つのジョブのワークフローがあるとします ({Job1, Job2} -&gt; Job3)。 これら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
+たとえば、ジョブ 3 がジョブ 1 とジョブ 2 に依存する 3 つのジョブのワークフローがあるとします ({Job1, Job2} -&gt; Job3)。 それら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
 
-このワークフローの実行中、ジョブ 3 はジョブ 1 _または_ジョブ 2 によって書き込まれたキャッシュを使用します。 キャッシュは変更不可なので、どちらかのジョブによって最初に保存されたキャッシュが使用されます。
+このワークフローの実行中、ジョブ 3 はジョブ 1 _または_ジョブ 2 によって書き込まれたキャッシュを使用します。 ただし、キャッシュは書き換え不可のため、ジョブ 1 とジョブ 2 のどちらかが最初に書き込んだキャッシュを使うことになります。
 
-これは、結果が確定的ではないため通常は望ましくありません。 結果の一部が異なってしまう場合があります。
+これは、結果が確定的ではないため通常は望ましくありません。 結果の一部が異なる場合があります。
 
-ジョブの依存関係を変更することにより、ワークフローを確定的にすることができます。 たとえば、ジョブ 1 とジョブ 2 では別々のキャッシュに書き込み、 ジョブ 3 ではいずれかのキャッシュからのみ読み込みます。 または、一方向の依存関係を指定します (ジョブ 1 -&gt; ジョブ 2 -&gt; ジョブ 3)
+ジョブの依存関係を変更することにより、ワークフローを確定的にすることができます。 たとえば、ジョブ 1 とジョブ 2 では別々のキャッシュに書き込み、 Job 3 ではいずれかのキャッシュからのみ読み込みます。 または、一方向の依存関係を指定します (ジョブ 1 -&gt; ジョブ 2 -&gt; ジョブ 3)
 
 ### キャッシュの競合状態の例 2
 {: #caching-race-condition-example-2 }
 
 {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用してリストアを行うような、より複雑なジョブのケースもあります。
 
-この場合でも競合状態になる可能性がありますが、詳細は異なります。 たとえば、ダウンストリームジョブでは、最後に実行されたアップストリームジョブのキャッシュが使用されるようなケースです。
+この場合でも競合状態になる可能性はありますが、詳細はケースによって異なります。 たとえば、ダウンストリームジョブでは、最後に実行されたアップストリームジョブのキャッシュが使用されるようなケースです。
 
-ジョブ間でキャッシュを共有している場合に発生する競合状態もあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなるワークフローを考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使うこととします。 ジョブ 1 がキャッシュを保存していても、ジョブ 2 はそのキャッシュをリストアすることもあれば、キャッシュが見つからないと報告することもあります。 また、ジョブ 2 が以前のワークフローからキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 この問題を解決するには、ワークフローの依存関係 (ジョブ 1 -> ジョブ 2) を作成します。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 は強制的に待機することになります。
+ジョブ間で共有するキャッシュでレースコンディションが発生することもあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなるワークフローを考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使うこととします。 ジョブ 1 がキャッシュを保存していても、ジョブ 2 はそのキャッシュを復元することもあれば、キャッシュがないことを検出することもあります。 ジョブ 2 はさらに直前の Workflow からキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 この問題を解決するには、ワークフローの依存関係 (Job1 -> Job2) を作成します。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 が強制的に待機することになります。
 
 ## モノレポ でのキャッシュの使用
 {: #using-caching-in-monorepos }
@@ -223,7 +295,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 ### ネットワークとストレージ使用状況の表示
 
-ネットワークとストレージの使用状況の表示、および毎月のネットワークとストレージの超過コストの計算については、[データの永続化 ]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
+For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
 
 ## キーとテンプレートの使用
 {: #using-keys-and-templates }
@@ -281,7 +353,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 下記に、キーとテンプレートを含む `restore_cache` および `save_cache` の使い方がわかる `.circleci/config.yml` ファイルのサンプルコードを例示します。
 
-このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)ガイドをご覧ください。
+このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 However, it is important to be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) page.
 
 <div class="alert alert-warning" role="alert">
 <b>警告:</b> この例は、ソリューションの<i>候補</i>ではありますが、お客様の個別のニーズには適さず、ストレージコストが増加する可能性があります。
@@ -294,22 +366,22 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: circleci/mysql:5.6
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
 
     steps:
       - checkout
       - run: cp config/{database_circleci,database}.yml
 
       # Bundler の実行
-      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドルインストール後にキャッシュを保存します。
-      # 複数のキャッシュを使用して、キャッシュヒットの確率を上げます。
+      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドル インストール後にキャッシュを保存します
+      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
 
       - restore_cache:
           keys:
@@ -329,8 +401,8 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - run: bundle exec rake factory_girl:lint
 
       # アセットのプリコンパイル
-      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します。
-      # 複数のキャッシュを使用して、キャッシュヒットの確率を上げます。
+      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します
+      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
 
       - restore_cache:
           keys:
@@ -391,5 +463,9 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 {: #see-also }
 {:.no_toc}
 
-* [キャッシュの活用方法]({{ site.baseurl }}/ja/2.0/caching-strategy/)
-* [最適化]({{ site.baseurl }}/ja/2.0/optimizations/)
+- [データの永続化]({{site.baseurl}}/2.0/persist-data)
+- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/2.0/workspaces)
+- [アーティファクト]({{site.baseurl}}/2.0/artifacts)
+- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+
