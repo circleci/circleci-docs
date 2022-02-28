@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Insights データの連携
-description: This document describes how users may track and visualize analytical data across all of their jobs on CircleCI with third party integrations.
+title: インサイトデータの連携
+description: このドキュメントでは、 CircleCI のすべてのジョブで、サードパーティツールとの連携により分析データを追跡し、視覚化する方法について説明します。
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
 ---
 
@@ -12,104 +12,104 @@ version:
 
 {:toc}
 
-This document describes how you can connect Insights data with third party providers. Currently we support integrations with [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
+このドキュメントでは、インサイトのデータをサードパーティツールと連携させる方法について説明します。 CircleCI では現在、[Datadog](https://www.datadoghq.com/) と [Sumo Logic](https://www.sumologic.com/) との連携をサポートしています。
 
-## Datadog integration
+## Datadog との連携
 {: #datadog-integration }
 
-You can send data to Datadog through the use of webhooks with CircleCI.
+CircleCI では、Webhook を使って Datadog にデータを送ることができます。
 
-1. In the [CircleCI App](https://app.circleci.com/), click on the ellipsis menu for each project, and then click **Project Settings** > **Webhooks**.
-  - **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is your [Datadog API key](https://app.datadoghq.com/account/login).
-  - **Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
-  - **Events**: Select `Workflow Completed` and `Job Completed`.
-  - **Certificate verifications**: Enable this check.
+1. [CircleCI アプリ](https://app.circleci.com/)で、各プロジェクトの省略記号メニューをクリックし、**Project Settings** > **Webhooks** の順にクリックします。
+  - **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` が[ Datadog の API キー](https://app.datadoghq.com/account/login)です。
+  - **名前**: `Datadog CI Visibility` または指定したい識別名を入力します。
+  - **イベント**: `Workflow Completed` と `Job Completed` を選択します。
+  - **証明書の検証**: このチェックを有効にします。
 
-1. Click **Add Webhook** to save the new webhook.
+1. **Add Webhook** をクリックして新しい Webhook を保存します。
 
-### Visualize pipeline data in Datadog
+### Datadog でパイプラインデータを可視化する
 {: #visualize-pipeline-data-in-datadog }
 
-Sign in to [Datadog](https://app.datadoghq.com/account/login) and visit the Pipelines and Pipeline Executions pages to see data populate after workflows finish.
+[Datadog](https://app.datadoghq.com/account/login) にサインインし、パイプラインとパイプラインの実行ページにアクセスし、ワークフローの完了後にデータが入力されることを確認します。
 
-**Note**: The Pipelines page will only show data for the default branch of each repository.
+**注**: パイプラインのページでは各レポジトリのデフォルトのブランチのデータのみが表示されます。
 
-## Sumo Logic とのインテグレーション
+## Sumo Logic との連携
 {: #sumo-logic-integration }
 
-The CircleCI app for Sumo Logic provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
+Sumo Logic 用の CircleCI アプリでは、継続的インテグレーションやデプロイパイプラインのパフォーマンスやヘルス状態を追跡するための高度なビューを提供しています。
 
 
 ### Sumo Logic の CircleCI ダッシュボード
 {: #the-circleci-dashboard-for-sumo-logic }
 
-Use this dashboard to:
-  - Monitor real-time CI performance, activity, and health, or track over time.
-  - Identify opportunities for optimization.
+このダッシュボードを使って以下を実行します。
+  - パフォーマンス、アクティビティ、ヘルスの状態をリアルタイムで監視および時間の経過に伴った追跡
+  - 最適化の余地の特定
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
 
-Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
+含まれているダッシュボードパネルを使用して、パイプラインに関するインサイトを得ることができます。 特定のプロジェクトまたはジョブの各パネルを、任意の期間フィルタリングします。 ダッシュボードパネルには以下が表示されます：
 
-  - Total Jobs Ran
-  - Job Health (% success)
+  - 実行したジョブの合計数
+  - ジョブのヘルス (成功率%）
   - 概要
-  - Jobs Ran Per Project
-  - Daily Performance
-  - Jobs Per Day
-  - 5 Most Recent Failed Jobs
-  - 5 Most Recent Failed Workflows
-  - Top 10 Longest Workflows (Averaged)
-  - Top 10 Longest Running Jobs
-  - Average Job Runtime Per Day
+  - プロジェクト毎の実行ジョブ
+  - 1日のパフォーマンス
+  - 1日のジョブ数
+  - 最近失敗したジョブ 5 つ
+  - 最近失敗したワークフロー 5 つ
+  - 時間がかかったワークフロートップ 10 （平均）
+  - 実行時間の長いジョブトップ 10
+  - 1日の平均ジョブ実行時間
 
 CircleCI ダッシュボードは、ダッシュボードのホームページからアプリケーション カタログを使用してインストールできます。
 
-![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
 ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。 この Orb は、追跡するプロジェクトに含まれている必要があります。
 
-### Set up Sumo Logic metrics using CircleCI webhooks
+### CircleCI Webhook を使って Sumo Logic のメトリクスを設定する
 {: #set-up-sumo-logic-metrics-using-circleci-webhooks }
 
-To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
-#### Configure Webhooks
+Sumo Logic を使ってデータを収集し可視化するには、まずメトリクスデータを Sumo Logic に送るよう CircleCI Webhook を設定します。
+#### Webhook の設定
 {: #configure-webhooks }
-##### **ステップ 1。 Configure Hosted Collector**
+##### **ステップ 1: ホストコレクターを設定します。**
 {: #step-1-configure-hosted-collector }
 
-Follow the Sumo Logic documentation for [Configuring a Hosted Collector](https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector).
+Sumo Logic の[Configuring a Hosted Collector](https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector) についてのドキュメントに従います。
 
-##### **ステップ 2。 Add an HTTP Source**
+##### **ステップ 2:  HTTP ソースを追加します。**
 {: #step-2-add-an-http-source }
 
-To get the URL where the CircleCI Webhooks will be sent, and then recorded to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
+CircleCI Webhook を送付する URL を取得し、コレクターに記録するには、[HTTP ソースを追加](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source)する必要があります。
 
-When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the CircleCI Webhooks UI in the next step.
+完了したら、生成された「HTTP ソースアドレス」をコピーします。 このリンクはその後いつでも Sumo Logic から再取得することができます。 この URL を次のステップで CircleCI Webhook の UI に入力します。
 
-##### **ステップ 3。 Configure Project Webhooks**
+##### **ステップ 3:  プロジェクトの Webhook を設定します。**
 {: #step-3-configure-project-webhooks }
 
-For each project on CircleCI you wish to track, configure a webhook directed at the HTTP Source Address. Follow the [CircleCI docs for configuring webhooks]({{ site.baseurl }}/2.0/webhooks/#setting-up-a-hook).
+トラックするプロジェクト毎に、Webhook が先述の HTTP ソースアドレスに送信されるように設定します。 [Webhook の設定に関するドキュメント]({{ site.baseurl }}/2.0/webhooks/#setting-up-a-hook)に従ってください。
 
-When configuring the webooks, ensure to include both the “workflow-completed”, and “job-completed” events.
+Webhook を設定する際は、必ず「workflow-completed」イベントと「job-completed」イベントの両方を含めてください。
 
-### Install the CircleCI App for Sumo Logic
+### Sumo Logic 用の CircleCI アプリをインストールする
 {: #install-the-circleci-app-for-sumo-logic }
 
-Now that you have set up collection, install the Sumo Logic App for CircleCI to use the preconfigured searches and Dashboards that provide insight into your CI Pipeline.
+データ収集の設定は完了しま他ので、次に、 事前設定された検索機能と CI パイプラインにインサイトを送るダッシュボードを使用するために CircleCI 用 Sumo Logic アプリをインストールします。
 
-#### To install the CircleCI app for Sumo Logic:
+#### Sumo Logic アプリのインストール方法
 {: #to-install-the-circleci-app-for-sumo-logic }
 
-1. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
-2. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
-3. To install the app, complete the following fields.
-  - **App Name**. You can retain the existing name, or enter a name of your choice for the app.
-  - **Data Source**. Select either of these options for the data source:
-    - Choose **Source Category**, and select a source category from the list.
-    - Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
-  - **Advanced**. Select the Location in Library (the default is the Personal folder in the Library), or click **New Folder** to add a new folder.
-4. Click **Add to Library**.
+1. アプリカタログから CircleCI アプリを見つけてインストールします。 インストールの前にこのアプリに入っているダッシュボードのプレビューを見るには、**Preview Dashboards** をクリックします。
+2. 使用しているサービスのバージョンを選択し、 **Add to Library** をクリックします。 バージョンの選択は現在いくつかのアプリにのみで可能です。 詳細については、[Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) を参照して下さい。
+3. アプリをインストールするには、以下のフィールドに入力してください。
+  - **アプリ名**:  既存の名前をそのまま使用することも、アプリ用の名前を入力することもできます。
+  - **データソース**:  データソースに下記のいずれかのオプションを選択します。
+    - **Source Category** を選択び、リストからソースカテゴリーを選びます。
+    - **Enter a Custom Data Filter** を選び、アンダースコアで始まるカスタムソースカテゴリを入力します。 例: `(_sourceCategory=MyCategory)`
+  - **高度な設定**:  ライブラリ内の場所 (デフォルトではライブラリの個人フォルダ) を選択するか、**New Folder** をクリックして新しいフォルダを追加します。
+4. **Add to Library** をクリックします。
 
-Once an app is installed, it will appear in your Personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically. It is important to note that each panel slowly fills with data matching the time range query and received since the panel was created. Results won't immediately be available, but with a bit of time, you will see full graphs and maps.
+アプリがインストールされたら、個人フォルダーまたはライブラリ内でデフォルトとして設定した場所に表示されます。 これで、お客様の組織でこのアプリを共有することができます。 パネルが自動的に入力されます。 各パネルには、時間範囲のクエリに合致しパネルの作成以降に受信したデータが徐々に入力されることに注意してください。 結果はすぐには表示されませんが、少し時間が経つと、すべてのグラフとマップが表示されます。
