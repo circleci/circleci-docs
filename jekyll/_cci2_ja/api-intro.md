@@ -52,11 +52,11 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ### 認証
 {: #authentication }
 
-CircleCI API v2 では、API トークンを HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
+The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**注意:** パスワードがないことを示すために `:` が記述されています。 **注意:** [プロジェクトトークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+**Note:** the `:` is included to indicate there is no password. **Note:** Currently, [Personal API tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
