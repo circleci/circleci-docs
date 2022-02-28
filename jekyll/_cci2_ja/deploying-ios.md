@@ -23,7 +23,7 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 
 デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**注:** 下記のデプロイ例を使用するには、お客様のプロジェクトにコード署名が設定されている必要があります。 To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/ja/2.0/ios-codesigning/) page.
+**注:** 下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/2.0/ios-codesigning/)をご覧ください。
 
 ## ベストプラクティス
 {: #best-practices }
@@ -31,14 +31,14 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 ### Git ブランチの使用
 {: #using-git-branches }
 
-リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{site.baseurl}}/ja/2.0/workflows/#branch-level-job-execution) page.
+リリースレーンは、Git リポジトリの特定のブランチ (専用のリリース/ベータブランチなど) でのみ実行することをお勧めします。 そうすることで、指定したブランチへのマージが成功した場合のみリリースが可能となり、開発段階においてプッシュがコミットされるたびにリリースされるのを防ぐことができます。 また、iOS アプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローの設定方法については、[ブランチレベルでのジョブの実行]({{site.baseurl}}/2.0/workflows/#branch-level-job-execution)をご覧ください。
 
 ### ビルド番号の設定
 {: #setting-the-build-number }
 
-デプロイサービスにアップロードする際には、iOS アプリのバイナリのビルド番号を考慮することが重要です。 一般的には、 `.xcproject` で設定されていますが、一意になるように手動で更新する必要があります。 各デプロイレーンの実行前にビルド番号が更新されていない場合、受信サービスがビルド番号の競合によりバイナリを拒否することがあります。
+デプロイサービスにアップロードする際は、iOS アプリのバイナリのビルド番号にご注意ください。 一般的には、 `.xcproject` で設定されていますが、一意になるように手動で更新する必要があります。 各デプロイレーンの実行前にビルド番号が更新されていないと、受信サービスがビルド番号の競合によりバイナリを拒否する場合があります。
 
-Fastlane provides an [`increment_build_number` action](https://docs.fastlane.tools/actions/increment_build_number/) which allows the build number to be modified during the lane execution. たとえば、特定の CircleCI ジョブにビルド番号を関連付けたい場合は、 環境変数 `$CIRCLE_BUILD_NUM` の使用を検討してください。
+fastlane により、レーン実行中にビルド番号を変更できる [increment_build_number` `アクション](https://docs.fastlane.tools/actions/increment_build_number/) が可能です。 たとえば、ビルド番号を特定の CircleCI ジョブに関連付けたい場合には、 環境変数 `$CIRCLE_BUILD_NUM` の使用を検討してください。
 
 ```ruby
 increment_build_number(
@@ -54,22 +54,22 @@ increment_build_number(
 
 fastlane が iOS バイナリを App Store Connect や TestFlight に自動的にアップロードするように設定するには、fastlane が App Store Connect アカウントにアクセスできるよういくつかのステップを実施する必要があります。
 
-この設定には、App Store Connect APIキーを生成して使用することをお勧めします。 それにより、Apple ID で必須となっている 2FA で問題が発生することを防ぎ、最も確実な方法でサービスを利用することができます。
+この設定には、App Store Connect API キーを生成して使用することをお勧めします。 それにより、Apple ID で必須となっている 2FA で問題が発生することを防ぎ、最も確実な方法でサービスを利用することができます。
 
 API キーを作成するには、 [Apple 開発者向けドキュメント](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api)で説明されている手順に従ってください。 その結果 `.p8` を取得したら、[App Store Connect API キーのページ](https://appstoreconnect.apple.com/access/api)に表示される*発行者 ID* と*キー ID* をメモします。
 
-**注意:** `.p8` ファイルをダウンロードし、安全な場所に保存したことを確認してください。 App Store Connect のポータルから離れてしまうと、ファイルを再度ダウンロードすることはできません。
+**注:** `.p8` ファイルをダウンロードし、安全な場所に保存したことを確認してください。 App Store Connect のポータルから離れてしまうと、ファイルを再度ダウンロードすることはできません。
 
 次に、いくつかの環境変数を設定する必要があります。 CircleCI プロジェクトで、 **ビルド設定 > 環境変数** に移動し、以下を設定します。
 
-* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID
+* 発行者 ID に、`APP_STORE_CONNECT_API_KEY_ISSUER_ID`
   * (例：`6053b7fe-68a8-4acb-89be-165aa6465141`)
-* `APP_STORE_CONNECT_API_KEY_KEY_ID` to your Key ID
+* キー ID に、`APP_STORE_CONNECT_API_KEY_KEY_ID`
   * (例: `D383SF739`)
-* `APP_STORE_CONNECT_API_KEY_KEY` to the contents of your `.p8` file
+* `.p8` ファイルの内容に、`APP_STORE_CONNECT_API_KEY_KEY`
   * (例: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMGByqGSM49AgCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`)
 
-**注意:** `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
+**注:** `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
 
 最後に、fastlane ではどの Apple ID を使用するか、またどのアプリの識別子をターゲットにするかを知るために、いくつかの情報が要求されます。 これらの情報は、 `fastlane/Appfile` で以下のように設定できます。
 
@@ -246,7 +246,7 @@ workflows:
       - adhoc
 ```
 
-**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 It is therefore advisable to [switch to a different Ruby version]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby).
+**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 It is therefore advisable to [switch to a different Ruby version]({{site.baseurl}}/2.0/testing-ios/#using-ruby).
 
 ## Visual Studio App Center へのデプロイ
 {: #deploying-to-visual-studio-app-center }
