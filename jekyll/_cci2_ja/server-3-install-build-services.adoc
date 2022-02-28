@@ -276,7 +276,7 @@ ifndef::env-gcp[]
 }
 . In your KOTS Admin Console, set Nomad Autoscaler to `enabled`
 . Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
-. Set Min Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
+. Set Min Node Count* - This will overwrite what is currently set as the min for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Select cloud provider: `AWS EC2`
 . Add the region of the autoscaling group
 . You can chose one of the following:
@@ -443,14 +443,13 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 ```shell
 aws iam create-user --user-name circleci-vm-service
 ```
-
++
 Optionally, vm-service does support the use of a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
 Once done, you may skip to step 9 which is enabling vm-service in KOTS.
-
++
 . *Create policy*
 +
-以下の内容の `policy.json` ファイルを作成します。 クラスタのセキュリティーグループ ID (`clusterSecurityGroupId`) とCluster ARN を入力します。
-
+以下の内容の `policy.json` ファイルを作成します。 You should fill in the ID of the VM Service security group created in step 2 (`VMServiceSecurityGroupId`) and VPC ID (`vpcID`) below.
 +
 [source,json]
 ----
@@ -469,7 +468,7 @@ Once done, you may skip to step 9 which is enabling vm-service in KOTS.
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<YOUR_clusterSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<YOUR_VMServiceSecurityGroupID>"
       ]
     },
     {
@@ -556,7 +555,7 @@ Once done, you may skip to step 9 which is enabling vm-service in KOTS.
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<YOUR_arn>"
+          "ec2:Vpc": "<YOUR_vpcID>"
         }
       }
     }
@@ -583,7 +582,7 @@ aws iam create-access-key --user-name circleci-vm-service
 . *サーバーの設定*
 +
 VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
-
++
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
 endif::env-gcp[]
@@ -677,7 +676,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 . *サーバーの設定*
 +
 VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
-
++
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
 endif::env-aws[]
