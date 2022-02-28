@@ -28,7 +28,7 @@ NOTE: CircleCI サービスのバックアップと復元は、Velero に依存�
 
 == セットアップ
 
-Backups of CircleCI server can be created quite easily through https://kots.io/[KOTS].
+CircleCI Server のバックアップは、https://kots.io/[KOTS]を介して簡単に作成できます。
 ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
@@ -176,7 +176,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 * 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -191,7 +191,7 @@ velero install \
     --wait
 ----
 
-* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You should have a Velero deployment and a restic daemonset, for example:
+* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -218,7 +218,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[[こちら]]の Velero GCP プラグインのドキュメントを元にしています。
 
 === 手順 1 - GCP バケットの作成
-To reduce the risk of typos, we will set some of the parameters as shell variables. If you are unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. たとえば、以下の手順では、バケット名に対応する変数を定義しています。 Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
+タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定しています。 If you are unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. たとえば、以下の手順では、バケット名に対応する変数を定義しています。 Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
 
 [source,bash]
 ----
@@ -350,7 +350,7 @@ velero install \
 
 システムをカスタマイズする他のオプションについては、https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[[Velero のドキュメント]]を参照してください。
 
-* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You should have a Velero deployment and a restic daemonset, for example:
+* Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -379,7 +379,7 @@ The following steps will assume you arre using S3-compatible object storage, but
 
 === 手順 1 - `mc` クライアントの設定
 
-最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc.html[`mc`] を設定します。
+最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] を設定します。
 
 [source,bash]
 ----
@@ -448,7 +448,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. Velero のインストール時に、以下に示すように `--use-restic` フラグセットを設定してください。
+NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグセットを設定してください。
 
 [source, bash]
 ----
@@ -462,8 +462,7 @@ velero install --provider aws \
   --wait
 ----
 
-Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 You
-should have a Velero deployment and a restic daemonset, for example:
+Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -494,13 +493,13 @@ image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 kubectl kots backup --namespace <your namespace>
 ----
 
-=== Option 2 - Create a backup with KOTS Admin Console
+=== オプション 2 - KOTS 管理者コンソールを使用したバックアップ作成
 
 ナビゲーション バーの *[Snapshots (スナップショット)]* を選択します。 デフォルトでは *[Full Snapshots (フル スナップショット)]* が選択されています。 これが推奨オプションです。
 
 image::kots-admin-full-snapshot.png[Kots Navbar]
 
-Click the *Start a snapshot* button.
+*[Start a snapshot (スナップショットの開始)]* ボタンをクリックします。
 
 image::kots-admin-create-backup.png[Kots Create Snapshot]
 
@@ -560,14 +559,14 @@ If your KOTS Admin Console does not display the snapshot option, you may try the
 
 * Confirm that your version of KOTS supports snapshots. 現時点では、v1.40.0 以上が推奨されます。
 
-```shell
+```
 $ kubectl kots version
 Replicated KOTS 1.40.0
 ```
 
 * Velero がデプロイされ、適切に動作していることを確認します。 Velero のログは、以下のコマンドで確認できます。
 
-```shell
+```
 $ kubectl logs deployment/velero --namespace velero
 ```
 
