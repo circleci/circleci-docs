@@ -23,7 +23,7 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 
 デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**注:** 下記のデプロイ例を使用するには、お客様のプロジェクトにコード署名が設定されている必要があります。 To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/2.0/ios-codesigning/) page.
+**注:** 下記のデプロイ例を使用するには、お客様のプロジェクトにコード署名が設定されている必要があります。 To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/ja/2.0/ios-codesigning/) page.
 
 ## ベストプラクティス
 {: #best-practices }
@@ -31,7 +31,7 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 ### Git ブランチの使用
 {: #using-git-branches }
 
-リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{site.baseurl}}/2.0/workflows/#branch-level-job-execution) page.
+リリースレーンは、Git リポジトリの特定のブランチでのみ実行することをお勧めします。例えば、専用のリリース/ベータブランチなどです。 そうすることで、指定したブランチへのマージが成功した場合にのみリリースが可能となり、開発期間中にプッシュがコミットされるたびにリリースが行われることを防ぐことができます。 また、iOSアプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{site.baseurl}}/ja/2.0/workflows/#branch-level-job-execution) page.
 
 ### ビルド番号の設定
 {: #setting-the-build-number }
@@ -246,7 +246,7 @@ workflows:
       - adhoc
 ```
 
-**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 It is therefore advisable to [switch to a different Ruby version]({{site.baseurl}}/2.0/testing-ios/#using-ruby).
+**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 It is therefore advisable to [switch to a different Ruby version]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby).
 
 ## Visual Studio App Center へのデプロイ
 {: #deploying-to-visual-studio-app-center }
