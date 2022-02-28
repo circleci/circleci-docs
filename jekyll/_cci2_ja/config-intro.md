@@ -100,7 +100,7 @@ jobs:
 - 行 13 ～ 17: `build` ジョブの 2 つ目の run は、チェックアウトの内容を (`ls -al` で) リストします。  これで、ブランチを操作できるようになります。
 
 ## パート 3: 処理の追加
-I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: コードの取得 command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:10-browsers steps: - run: name: ノードを持つコンテナでの実行 command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: 承認の完了 command: | echo 'Do work once the approval has completed'
+{: #part-three-thats-nice-but-i-need }
 コードベースやプロジェクトは 1つひとつ異なります。  それは問題ありません。  多様性は大切です。  そうした理由から、CircleCI ではユーザーが好みのマシンや Docker コンテナを使用できるようにしています。  この例では、ノードを利用可能にしたコンテナで実行する例を示します。  他にも macOS マシン、java コンテナ、GPU を利用するケースが考えられます。
 
 1. このセクションでは、パート 1、2 のコードをさらに発展させます。  前のパートがまだ完了していない場合は、少なくともパート 1 を完了し、ブランチに作業中の `config.yml` ファイルを置いてください。
