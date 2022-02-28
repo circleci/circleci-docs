@@ -422,6 +422,8 @@ jobs:
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
 
+**Note**: While hard coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables won't be interpolated for non-primary containers.
+
 ```yaml
 version: 2.1
 
