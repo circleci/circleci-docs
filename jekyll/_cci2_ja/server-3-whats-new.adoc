@@ -229,7 +229,7 @@ Next, from the KOTS Admin Console dashboard, select Version History from the men
 === 既知の問題
 
 * It is currently possible for multiple organizations under the same CircleCI server account to have contexts with identical names. これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 
 == リリース 3.0.2
 
