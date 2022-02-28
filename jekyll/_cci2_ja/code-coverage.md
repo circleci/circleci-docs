@@ -188,7 +188,7 @@ jobs:
 ## Python
 {: #python }
 
-[Coverage.py](https://coverage.readthedocs.io/en/6.3.2/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
+[Coverage.py](https://coverage.readthedocs.io/en/6.3.1/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
 
 ```shell
 pip install coverage
