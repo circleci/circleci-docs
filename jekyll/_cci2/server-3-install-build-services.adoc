@@ -665,6 +665,8 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *Get JSON Key File*
 +
+If you are using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload identities] for GKE, this step is not required. 
++
 After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
 +
 ```shell

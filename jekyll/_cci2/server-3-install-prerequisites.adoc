@@ -194,6 +194,26 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 ```
 endif::env-aws[]
 
+===== Enabling Workload Identity in GKE
+https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload identities] for GKE allow workloads/pods in your GKE cluster to impersonate IAM service accounts to access Google Cloud services without using static service account credentials. You have to enable workload identities on your GKE cluster to use it. 
+
+====== Step 1: Enable Workload Identity on existing cluster
+```shell
+  gcloud container clusters update "<CLUSTER_NAME>" \
+    --region="<REGION>" \
+    --workload-pool="<PROJECT_ID>.svc.id.goog"
+```
+
+====== Step 2: Updating existing node pools
+```shell
+  gcloud container node-pools update "<NODEPOOL_NAME>" \
+    --cluster="<CLUSTER_NAME>" \
+    --workload-metadata="GKE_METADATA" \
+    --region="<REGION>"
+```
+    You have to repeat the above command for all the existing node pools.
+
+
 === Create a new GitHub OAuth app
 
 CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain then images will fail to load.
