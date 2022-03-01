@@ -319,8 +319,6 @@ en:
       link: 2.0/deployment-integrations/
     - name: Deploying iOS applications
       link: 2.0/deploying-ios/
-    - name: Publishing Snap packages
-      link: 2.0/build-publish-snap-packages/
     - name: Upload to Artifactory
       link: 2.0/artifactory/
     - name: Publishing to Packagecloud
