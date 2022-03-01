@@ -46,11 +46,11 @@ Congratulations! You will soon have your first green build. If you are happy wit
 So, what just happened?
 
 1. On your project's pipeline page, click the green **Success** button, which brings you to the workflow that ran (`say-hello-workflow`).
-1. Within this workflow, the pipeline ran one job, called `say-hello`. Click `say-hello` to see the steps in this job:
-  1. Spin up environment
-  2. Preparing environment variables
-  3. Checkout code
-  4. Say hello
+2. Within this workflow, the pipeline ran one job, called `say-hello`. Click `say-hello` to see the steps in this job:
+    1. Spin up environment
+    2. Preparing environment variables
+    3. Checkout code
+    4. Say hello
 
 Every job is made up of a series of steps. Some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout), are special, reserved commands in CircleCI. The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
 
