@@ -1,5 +1,3 @@
-import './signupLinksCta.scss';
-
 const isFirstStepsPage = window.location.pathname == '/docs/2.0/first-steps/';
 
 function showExperiment() {
@@ -27,21 +25,19 @@ function handleGithubDropdownClick(){
 function handleClickedLink() {
   $(".track-signup-link").each(function() {
     $(this).click((e) => {
-      console.log("event was ", e.target.innerText);
+      // TODO: tracking links
       e.stopPropagation()
     })
   })
 
 }
-
-
 window.OptimizelyClient.getVariationName({
-  experimentKey: 'dd_docs_knowledge_base_pt2_test', // TODO: replace
-  groupExperimentName: 'q4_fy22_docs_disco_experiment_group_test',
-  experimentContainer: '.full-height-sticky',
+  experimentKey: 'dd_first-steps-signup-cta_test',
+  groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
+  experimentContainer: '.sign-up-and-try-circleci',
+  guestExperiment: true,
 }).then((variation) => {
-  variation = "treatment"; // TODO remove when experiment is setup
-  if (variation === 'treatment' && isFirstStepsPage) {
+  if (variation === 'treatment') {
     showExperiment()
     handleGithubDropdownClick();
     handleClickedLink();
