@@ -34,8 +34,8 @@ There is no need to add any source code for now.
 ## Setting up CircleCI
 {: #setting-up-circleci }
 
-1. Navigate to the CircleCI [Projects Page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
-1. You will be taken to the Projects dashboard. On the dashboard, select the project you want to set up (`hello-world`).
+1. Navigate to the CircleCI [**Projects** page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
+1. You will be taken to the **Projects** dashboard. On the dashboard, select the project you want to set up (`hello-world`).
 1. Select the option to commit a starter CI pipeline to a new branch, and click **Set Up Project**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circleci-project-setup`.
 
 Congratulations! You will soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
@@ -95,7 +95,7 @@ jobs:
 ```
 
 
-Commit your change, then return to the Projects page
+Commit your change, then return to the **Projects** page
 in CircleCI. You should see a new pipeline running... and it will fail! What's going on?
 
 The Node orb runs some common Node tasks. Because you are working with an empty
@@ -151,7 +151,7 @@ and copy and paste the following text into it.
 
 
 1. Commit these changes to your repository and navigate back to the
-    CircleCI Pipelines page. You should see your pipeline running.
+    CircleCI **Pipelines** page. You should see your pipeline running.
 
 1. Click on the running pipeline to view the workflow you have created. You
     should see that two jobs ran (or are currently running!) concurrently.
