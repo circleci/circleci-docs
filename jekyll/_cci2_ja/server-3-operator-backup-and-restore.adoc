@@ -379,7 +379,8 @@ The following steps will assume you arre using S3-compatible object storage, but
 
 === 手順 1 - `mc` クライアントの設定
 
-最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] を設定します。
+To start, configure https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] to connect to your storage
+provider:
 
 [source,bash]
 ----
