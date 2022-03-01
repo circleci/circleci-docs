@@ -52,7 +52,7 @@ So, what just happened?
   3. Checkout code
   4. Say hello
 
-Every job is made up of a series of steps. Some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
+Every job is made up of a series of steps. Some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout), are special, reserved commands in CircleCI. The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
 
 Even though there is no actual source code in your repo, and no actual tests
 configured in your `.circleci/config.yml`, CircleCI considers your build to have
@@ -61,7 +61,7 @@ code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far
 more complicated, oftentimes with multiple Docker images and multiple steps,
 including a large number of tests. You can learn more about all the possible
 steps one may put in a `.circleci/config.yml` file in the [Configuration
-Reference](https://circleci.com/docs/2.0/configuration-reference).
+Reference]({{site.baseurl}}/2.0/configuration-reference).
 
 ### Breaking your build!
 {: #breaking-your-build }
@@ -157,7 +157,7 @@ and copy and paste the following text into it.
     should see that two jobs ran (or are currently running!) concurrently.
 
 Read more about workflows in the [Orchestrating
-Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
+Workflows]({{site.baseurl}}/2.0/workflows/#overview) documentation.
 
 ### Adding some changes to use the workspaces functionality
 {: #adding-some-changes-to-use-the-workspaces-functionality }
@@ -217,7 +217,7 @@ workflows:
             - one
 ```
 
-Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
+Read more about workspaces [here]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ### SSH into your {% comment %} todo: job {% endcomment %}build
 {: #ssh-into-your-percent-comment-percent-todo-job-percent-endcomment-percentbuild }
@@ -253,7 +253,7 @@ ls -al               # list what files and directories are in the current direct
 cd <directory_name>  # change directory to the <directory_name> directory
 cat <file_name>      # show me the contents of the file <file_name>
 ```
-**Note** To enable `rerun job with ssh`, you will need to follow the steps to [add ssh keys to your job](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job).
+**Note** To enable `rerun job with ssh`, you will need to follow the steps to [add ssh keys to your job]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job).
 
 ## Collaborating with teammates
 {: #collaborating-with-teammates }
@@ -266,27 +266,7 @@ even if they are not committing any code.
 {: #see-also }
 {:.no_toc}
 
-[Blog
-post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)
-on how to validate the CircleCI `config.yml` on every commit with a git hook.
+- [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/)
+- [CircleCI concepts]({{site.baseurl}}/)
+- [Automate common tasks with orbs]({{site.baseurl}}/)
 
-### CircleCI
-{: #circleci }
-{:.no_toc}
-
-* The [CircleCI blog](https://circleci.com/blog/).
-* [What is continuous integration?](https://circleci.com/blog/what-is-continuous-integration/)
-* CircleCI on [GitHub](https://github.com/circleci), [Twitter](https://twitter.com/circleci) and [Facebook](https://www.facebook.com/circleci)
-
-### Continuous integration
-{: #continuous-integration }
-{:.no_toc}
-
-* [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
-* [Best Practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices)
-
-### YAML
-{: #yaml }
-{:.no_toc}
-
-* [Advanced Concepts](https://en.wikipedia.org/wiki/YAML#Advanced_components)
