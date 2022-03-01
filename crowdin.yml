@@ -18,3 +18,5 @@ files:
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
   - source: /jekyll/_includes/snippets/*.adoc
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
+  - source: /jekyll/_cci2/images/linux-vm/*.md
+    translation: /jekyll/_cci2_%two_letters_code%/images/linux-vm/%original_file_name%

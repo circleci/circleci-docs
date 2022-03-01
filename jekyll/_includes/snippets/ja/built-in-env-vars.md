@@ -21,7 +21,7 @@
 | `CIRCLE_TAG`{:.env_var}                   | 文字列型  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳しくは [Git タグを使ったジョブの実行]({{site.baseurl}}/2.0/workflows/#executing-workflows-for-a-git-tag)を参照してください。                            |
 | `CIRCLE_USERNAME`{:.env_var}              | 文字列型  | パイプラインをトリガーしたユーザーの GitHub または Bitbucket ユーザー名 （そのユーザーが CircleCI のアカウントを持っている場合のみ）                                                                               |
 | `CIRCLE_WORKFLOW_ID`{:.env_var}           | 文字列型  | 現在のジョブのワークフロー インスタンスの一意の識別子。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。                                                                                          |
-| `CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | 文字列型  | An identifier for the [workspace]({{site.baseurl}}/2.0/glossary/#workspace) of the current job. This identifier is the same for every job in a given workflow.  |
+| `CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | 文字列型  | 現在のジョブの[ワークスペース]({{site.baseurl}}/2.0/glossary/#workspace)の識別子。 この識別子は、特定のワークスペース内のすべてのジョブで同じです。                                                                |
 | `CIRCLE_WORKING_DIRECTORY`{:.env_var}     | 文字列型  | 現在のジョブの `working_directory` キーの値。                                                                                                                               |
 | `CIRCLE_INTERNAL_TASK_DATA`{:.env_var}    | 文字列型  | **内部用**。 ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。                                                                             |
 | `CIRCLE_COMPARE_URL`{:.env_var}           | 文字列型  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/)" が導入されています。 |

@@ -5,6 +5,7 @@ import OptimizelyClient from './optimizely';
 import * as rum from './rum';
 import * as progressbar from './progressbar';
 import * as sectionShareButton from './sectionShareButton';
+import * as trackCopyCode from './trackCopyCode';
 
 export default {
   AnalyticsClient,
@@ -14,4 +15,5 @@ export default {
   rum,
   progressbar,
   sectionShareButton,
+  trackCopyCode,
 };

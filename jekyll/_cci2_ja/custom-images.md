@@ -60,7 +60,7 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 
 あなたのDockerfileで、[`FROM` コマンド](https://docs.docker.com/engine/reference/builder/#from)を使ってベースイメージを拡張します。
 
-```dockerfile
+```Dockerfile
 FROM golang:1.8.0
 ```
 
@@ -70,7 +70,7 @@ FROM golang:1.8.0
 
 追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` コマンド](https://docs.docker.com/engine/reference/builder/#run)を使用します。
 
-```dockerfile
+```Dockerfile
 RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
 ```
@@ -98,7 +98,7 @@ CircleCI でカスタム Docker イメージをプライマリ コンテナと�
 
 パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` コマンド](https://docs.docker.com/engine/reference/builder/#add)を使用します。
 
-```dockerfile
+``` Dockerfile
 ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
 ```
@@ -359,7 +359,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Postgres 9.5
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list \
       && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C
+      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C 
 
 # gem ドキュメントのインストールをスキップします。
 RUN mkdir -p /usr/local/etc \
