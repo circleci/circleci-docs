@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 41
 ---
 
-This document provides a step-by-step tutorial for getting your first successful (green) build on CircleCI.
+Follow this step-by-step guide to get your first successful green build on CircleCI using a GitHub repository.
 
 * TOC
 {:toc}
@@ -17,82 +17,65 @@ This document provides a step-by-step tutorial for getting your first successful
 {:.no_toc}
 
 * Some basic knowledge of Git.
-* A GitHub or Bitbucket account, of which you are logged into. We will use GitHub for this guide but you can follow the equivalent processes for Bitbucket if required.
-* An account on CircleCI.
-* Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
+* A GitHub or Bitbucket account. We will use GitHub in this guide but you can follow the equivalent steps for Bitbucket if necessary.
+* An account on CircleCI, connected to your version control system. If you do not already have an account, visit the [Signup page](https://circleci.com/signup/) to create one (optional: read through the [Sign Up & Try]({{site.baseurl}}/2.0/first-steps/) instructions).
+* Prior experience using the terminal or command line is helpful, as well as some basic `bash` knowledge.
 
-## Creating a repository
+## Create a repository
 {: #creating-a-repository }
 
-Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
+1. Log in to GitHub and begin the process to [create a new repository](https://github.com/new).
+1. Enter a name for your repository (for example, `hello-world`).
+1. Select the option to initialize the repository with a README file.
+1. Finally, click **Create repository**.
 
-1. Navigate to GitHub and [create a new repository](https://github.com/new).
-1. Input the name of your repository, in this case "hello-world", then select the option to initialize the repository with a README file. Finally, click **Create repository**.
+There is no need to add any source code for now.
 
 ## Setting up CircleCI
 {: #setting-up-circleci }
 
-If you have not yet, create an account on CircleCI by navigating to [the signup
-page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
+1. Navigate to the CircleCI [Projects Page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
+1. You'll be taken to the Projects dashboard. On the dashboard, select the project you want to set up (`hello-world`).
+1. Select the option to commit a starter CI pipeline to a new branch, and click **Set Up Project**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circleci-project-setup`.
 
-1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
-1. If you created your new repository under an organization you will need to
-   select the organization name when you login to CircleCI.
-1. Once on the Project page, select the project you are using (in our case
-  `hello-world`).
-1. Select the option to use a starter config.yml template, and click **Set Up Project**.
-1. Next, choose a language from the list of sample configs to get a
-  pre-populated config.yml file with suggested best practices for your project.
-  For this example, because we have an empty repository, we will use the `Hello World` configuration example.
-
-    **Note:** Based on which language you choose, you can view related
-    documentation in the sidebar on the right of the screen.
-1. Click **Commit and Run**. This will create a file `.circleci/config.yml` at
-   the root of your repository on a new branch called `circle-ci-setup`. If you
-   are happy with this configuration, you can merge it into your main branch
-   later, or continue to make changes.
+Congratulations! You should soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
 
 ## Digging into your first pipeline
 {: #digging-into-your-first-pipeline }
 
-You should see your pipeline start to run automatically—and pass! So, what just
-happened? Click on the green **Success** button on your pipeline to investigate
-the following parts of the run:
+So, what just happened?
 
-1. **Which workflows ran?**: After clicking **Success**, we are taken to a page
-   listing the jobs that ran. If this is your first build, you probably only ran
-   **one job**  (which automatically runs inside **one workflow**).  In our
-   case, we only ran one job, called `say-hello`. Click on `say-hello` and let's
-   investigate the steps of our job.
+1. On your project's pipeline page, click the green **Success** button, which brings you to the workflow that ran (`say-hello-workflow`).
+1. Within this workflow, the pipeline ran one job, called `say-hello`. Click `say-hello` to see the steps in this job:
+  1. Spin up environment
+  2. Preparing environment variables
+  3. Checkout code
+  4. Say hello
 
-1. **View step results:** Every job is made up of a series of steps - some
-   steps, like
-   [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are
-   special, reserved commands in CircleCI. Other steps are specified by a user to achieve
-   a specific purpose. In our Hello World example config, we use both `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run).
+Every job is made up of a series of steps. Some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
 
-Even though there was no actual source code in your repo, and no actual tests
-configured in your `config.yml`, CircleCI considers your build to have
-"succeeded" because all steps completed successfully (returned an [exit
+Even though there is no actual source code in your repo, and no actual tests
+configured in your `.circleci/config.yml`, CircleCI considers your build to have
+succeeded because all steps completed successfully (returned an [exit
 code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far
 more complicated, oftentimes with multiple Docker images and multiple steps,
 including a large number of tests. You can learn more about all the possible
-steps one may put in a `config.yml` file in the [Configuration
+steps one may put in a `.circleci/config.yml` file in the [Configuration
 Reference](https://circleci.com/docs/2.0/configuration-reference).
 
 ### Breaking your build!
 {: #breaking-your-build }
 {:.no_toc}
 
-Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
-GitHub, it is possible to edit files directly. Use the URL below and substitute
-the name of your repository and username (replace the text with `{brackets}`) and
-then paste it in your browser. If you are already familiar with Git, use your
-text-editor and push your changes with git.
+In this section, you'll edit the `.circleci/config.yml` file and see what happens if a build does not complete successfully.
+
+It is possible to edit files directly on GitHub. Open the URL below in a browser, substituting
+your username (or organization) and the name of your repository (replace the text with `{brackets}`). Or, if you are comfortable with Git and the command line, use your
+text editor and push your changes in the terminal.
 
 `https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
 
-Let's use the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node). Paste the following into your `config.yml`
+Let's use the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node). Replace the existing config by pasting the following code:
 
 ```yaml
 version: 2.1
@@ -112,13 +95,13 @@ jobs:
 ```
 
 
-Then, commit your change in the GitHub editor and return to the Projects page
-in CircleCI. You should see a new pipelines running... and it will fail! What's going on?
+Commit your change, then return to the Projects page
+in CircleCI. You should see a new pipeline running... and it will fail! What's going on?
 
-The Node orb runs some common Node tasks. Because we are working with an empty
-repository, running `npm run test`, a Node script, causes our configuration to
-fail.  How would we fix this? You would need to setup a Node project in your
-repository;  a topic for another tutorial. You can view several [demo
+The Node orb runs some common Node tasks. Since you are working with an empty
+repository, running `npm run test`, a Node script, causes the configuration to
+fail. To fix this, you would need to set up a Node project in your
+repository—a topic for another tutorial. You can view several [demo
 applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
 setting up CircleCI with various languages and frameworks.
 
@@ -130,9 +113,7 @@ You do not have to use orbs to use CircleCI. The following example details how
 to create a custom configuration that also uses the [workflow
 feature]({{site.baseurl}}/2.0/workflows) of CircleCI.
 
-1. Take a moment and read the comments in the code block below. Of course, we
-do not want to be copying and pasting code without understanding what we are
-doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file
+1. Take a moment and read the comments in the code block below. Then, to see workflows in action, edit your `.circleci/config.yml` file
 and copy and paste the following text into it.
 
    ```yaml
@@ -169,8 +150,8 @@ and copy and paste the following text into it.
    ```
 
 
-1. Commit these changes to your repository and navigate back over to the
-    CircleCI Pipelines page. You should see your CircleCI pipeline running.
+1. Commit these changes to your repository and navigate back to the
+    CircleCI Pipelines page. You should see your pipeline running.
 
 1. Click on the running pipeline to view the workflow you have created. You
     should see that two jobs ran (or are currently running!) concurrently.
