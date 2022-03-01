@@ -13,7 +13,7 @@ global.analytics = {
   user: jest.fn(() => userFn),
 };
 
-global.global._DATADOG_SYNTHETICS_BROWSER = false;
+global._DATADOG_SYNTHETICS_BROWSER = false;
 
 class IntersectionObserver {
   constructor() {}
