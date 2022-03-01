@@ -219,17 +219,14 @@ workflows:
 
 Learn more about this feature in the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 
-### SSH into your {% comment %} todo: job {% endcomment %}build
-{: #ssh-into-your-percent-comment-percent-todo-job-percent-endcomment-percentbuild }
+### SSH into your jobs
+{: #ssh-into-your-jobs}
 {:.no_toc}
 
-If you are comfortable with the terminal, you can SSH directly into your
-CircleCI jobs to troubleshoot issues with your builds by rerunning your {%
-comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
+If you are comfortable with the terminal, you can rerun a CircleCI job with SSH enabled, then SSH directly into your jobs to troubleshoot issues.
 
-*Note that you will need to add your SSH keys to your GitHub account:
-<https://help.github.com/articles/connecting-to-github-with-ssh/>*.
-
+- You will need to [add your SSH keys to your GitHub account](https://help.github.com/articles/connecting-to-github-with-ssh/).
+- To enable the **Rerun Job with SSH** option, you will also need to add your SSH keys to the appropriate job. Refer to the [Adding SSH Keys to a Job]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job) instructions.
 
 {:.tab.switcher.Cloud}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
@@ -241,8 +238,7 @@ comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
-Copy the `ssh` string from the enabling SSH section of your build. Open a
-terminal and paste in the `ssh` string.
+Copy the `ssh` string from the enabling SSH section of your build. Then, paste in and execute the `ssh` command in the terminal.
 
 Using some of the following commands, see if you can find and view the contents
 of the file you created using workspaces:
@@ -253,7 +249,7 @@ ls -al               # list what files and directories are in the current direct
 cd <directory_name>  # change directory to the <directory_name> directory
 cat <file_name>      # show me the contents of the file <file_name>
 ```
-**Note** To enable `rerun job with ssh`, you will need to follow the steps to [add ssh keys to your job]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job).
+
 
 ## Collaborating with teammates
 {: #collaborating-with-teammates }
