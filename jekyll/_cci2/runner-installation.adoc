@@ -44,7 +44,7 @@ In order to install runner you will need to create a namespace and authenticatio
 +
 image::runnerui_step_one.png[Runner Set Up - Get started]
 +
-. Create a namespace and resource class for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace should be the same namespace orbs use.
+. Create a namespace and resource class for your organization's runner resources. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
 +
 image::runnerui_step_two.png[Runner Set Up - Create a namespace and resource class]
 +
@@ -76,7 +76,7 @@ NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be 
 
 In order to install runner you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. If you already use orbs, this namespace should be the same namespace orbs use. *Please note, if you already have a runner namespace, you can skip ahead to step 2.* If you already have a runner namespace and you try to enter a new one, you should see an error alerting you to the fact one already exists.
+. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. If you already have a runner namespace and you try to enter a new one, you should see an error alerting you to the fact one already exists.
 +
 Use the following command:
 +
