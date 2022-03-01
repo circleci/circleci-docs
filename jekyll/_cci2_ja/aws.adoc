@@ -197,7 +197,7 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us." mes
 .Github Enterprise Token を入力します。
 image::ghe_token.png[Github Integration]
 . **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
-. **Privacy** – We recommend using an SSL certificate and key for your install. インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
+. **Privacy**: インストールには SSL 証明書と SSL キーの使用をお勧めします。 インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
 +
 .プライバシーの設定
 image::privacy.png[]
