@@ -1,15 +1,10 @@
 const isFirstStepsPage = window.location.pathname == '/docs/2.0/first-steps/';
 
-function showExperiment() {
-  $(".signup-and-try-experiment-block").toggleClass("show");
-}
-
 function handleGithubDropdownClick(){
   const dropdown = $('.gh-signup-dropdown')
   // toggle the popup
   $('.gh-dropdown-button').click((e) => {
     dropdown.toggleClass("show");
-    e.stopPropagation()
   })
 
   // clicking on body closes pop if it is open.
@@ -25,8 +20,9 @@ function handleGithubDropdownClick(){
 function handleClickedLink() {
   $(".track-signup-link").each(function() {
     $(this).click((e) => {
-      // TODO: tracking links
-      e.stopPropagation()
+      window.AnalyticsClient.trackAction("dd_first-steps-signup-cta_test", {
+        button: e.target.innerText
+      });
     })
   })
 
@@ -38,7 +34,7 @@ window.OptimizelyClient.getVariationName({
   guestExperiment: true,
 }).then((variation) => {
   if (variation === 'treatment') {
-    showExperiment()
+    $(".signup-and-try-experiment-block").toggleClass("show");
     handleGithubDropdownClick();
     handleClickedLink();
   }
