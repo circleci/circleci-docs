@@ -4,7 +4,8 @@ function handleGithubDropdownClick(){
   const dropdown = $('.gh-signup-dropdown')
   // toggle the popup
   $('.gh-dropdown-button').click((e) => {
-    dropdown.toggleClass("show");
+    dropdown.addClass("show");
+    e.stopPropagation()
   })
 
   // clicking on body closes pop if it is open.
