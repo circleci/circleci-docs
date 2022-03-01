@@ -76,9 +76,11 @@ NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be 
 
 In order to install runner you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. If you already have a runner namespace and you try to enter a new one, you should see an error alerting you to the fact one already exists.
+. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. 
 +
-Use the following command:
+If you receive an error creating a namespace, check to see if you have an existing one, and move on to step 2 below, using your existing namespace.
++
+Use the following command to create a namespace:
 +
 ```
 circleci namespace create <name> <vcs-type> <org-name>
@@ -92,7 +94,7 @@ For example, if your GitHub URL is `\https://github.com/circleci`, then use: `ci
 circleci runner resource-class create <name>/<resource-class> <description> --generate-token
 ```
 +
-*Your newly created namespace is required in the command to create your resource class.*
+*Your namespace is required in the command to create your resource class.*
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 
