@@ -67,7 +67,7 @@ class OptimizelyClient {
       const attributes = options.attributes ?? {};
 
       // capture if we are trying to run this experiment as a guest experiment
-      // defautl to false as most of our experiments are for logged in users
+      // default to false as most of our experiments are for logged in users
       const isGuestExperiment = options.guestExperiment ?? false;
 
       // Then, we check if we have the cookie. If the cookie is not present
