@@ -571,7 +571,7 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 
 Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
 
-{% include snippets/built-in-env-vars.md %}
+{% include snippets/ja/built-in-env-vars.md %}
 
 For a full list of available built-in data see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#built-in-environment-variables).
 
