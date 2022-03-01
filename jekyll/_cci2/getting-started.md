@@ -35,10 +35,10 @@ There is no need to add any source code for now.
 {: #setting-up-circleci }
 
 1. Navigate to the CircleCI [Projects Page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
-1. You'll be taken to the Projects dashboard. On the dashboard, select the project you want to set up (`hello-world`).
+1. You will be taken to the Projects dashboard. On the dashboard, select the project you want to set up (`hello-world`).
 1. Select the option to commit a starter CI pipeline to a new branch, and click **Set Up Project**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circleci-project-setup`.
 
-Congratulations! You should soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
+Congratulations! You will soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
 
 ## Digging into your first pipeline
 {: #digging-into-your-first-pipeline }
@@ -67,7 +67,7 @@ Reference]({{site.baseurl}}/2.0/configuration-reference).
 {: #breaking-your-build }
 {:.no_toc}
 
-In this section, you'll edit the `.circleci/config.yml` file and see what happens if a build does not complete successfully.
+In this section, you will edit the `.circleci/config.yml` file and see what happens if a build does not complete successfully.
 
 It is possible to edit files directly on GitHub. Open the URL below in a browser, substituting
 your username (or organization) and the name of your repository (replace the text with `{brackets}`). Or, if you are comfortable with Git and the command line, use your
@@ -98,9 +98,9 @@ jobs:
 Commit your change, then return to the Projects page
 in CircleCI. You should see a new pipeline running... and it will fail! What's going on?
 
-The Node orb runs some common Node tasks. Since you are working with an empty
+The Node orb runs some common Node tasks. Because you are working with an empty
 repository, running `npm run test`, a Node script, causes the configuration to
-fail. To fix this, you would need to set up a Node project in your
+fail. To fix this, you need to set up a Node project in your
 repository—a topic for another tutorial. You can view several [demo
 applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
 setting up CircleCI with various languages and frameworks.
@@ -217,7 +217,7 @@ workflows:
             - one
 ```
 
-Read more about workspaces [here]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
+Learn more about this feature in the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 
 ### SSH into your {% comment %} todo: job {% endcomment %}build
 {: #ssh-into-your-percent-comment-percent-todo-job-percent-endcomment-percentbuild }
