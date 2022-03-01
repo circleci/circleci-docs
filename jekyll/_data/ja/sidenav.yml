@@ -1,11 +1,10 @@
 ---
 en:
   - 
-  - 
     name: はじめよう
     children:
       - 
-        name: 会社概要
+        name: 概要
         children:
           - 
             link: ja/2.0/
@@ -51,16 +50,15 @@ en:
           - 
             name: ワークフロー
           - 
-            name: 環境変数
-          - 
-            name: キャッシュ
-          - 
-            name: キャッシュの活用方法
+            name: ワークスペース
           - 
             name: アーティファクト
           - 
-            name: ワークスペース
+            name: Docker レイヤーキャッシュ
           - 
+            name: 環境変数
+          - 
+            name: テストデータの収集
           - 
             name: SSH を使用したデバッグ
           - 
@@ -73,11 +71,13 @@ en:
           - 
             name: 概要
           - 
-          - 
             name: データの永続化
           - 
+            name: 依存関係のキャッシュ
           - 
-            name: Docker レイヤーキャッシュ
+            name: キャッシュ戦略
+          - 
+          - 
           - 
   - 
     name: 実行環境
@@ -93,7 +93,7 @@ en:
         name: Docker
         children:
           - 
-            name: 会社概要
+            name: 概要
           - 
           - 
           - 
@@ -107,7 +107,7 @@ en:
         name: Machine
         children:
           - 
-            name: 会社概要
+            name: 概要
           - 
           - 
             name: Android マシン イメージ
@@ -116,7 +116,7 @@ en:
       - 
         children:
           - 
-            name: 会社概要
+            name: 概要
           - 
           - 
           - 
@@ -127,7 +127,7 @@ en:
         name: Windows
         children:
           - 
-            name: 会社概要
+            name: 概要
       - 
         name: ランナーのバージョン
         children:
@@ -149,7 +149,7 @@ en:
             link: 2.0/runner-server/
           - 
   - 
-    name: 設定ファイル
+    name: 設定ファイル入門ガイド
     icon: icons/sidebar/configure.svg
     children:
       - 
@@ -163,7 +163,7 @@ en:
             name: 設定ファイルの例
           - 
           - 
-            name: ダイナミック コンフィグ
+            name: ダイナミックコンフィグ
           - 
             name: CircleCI のローカル CLI の使用
           - 
@@ -192,7 +192,7 @@ en:
     icon: icons/sidebar/insights.svg
     children:
       - 
-        name: 会社概要
+        name: 概要
         link: 2.0/insights/
       - 
         name: メトリクス用語集
@@ -273,7 +273,7 @@ en:
           - 
             name: 最適化
           - 
-            name: 設定ファイル
+            name: 設定ファイル入門ガイド
           - 
             name: デプロイ
   - 
@@ -317,7 +317,7 @@ en:
         link: 2.0/install-overview/
         children:
           - 
-            name: 会社概要
+            name: 概要
             link: 2.0/install-overview/
           - 
             name: What's New in v2.19.x
@@ -339,7 +339,7 @@ en:
         name: Server v2.19 PDFs
         children:
           - 
-            name: 会社概要
+            name: 概要
           - 
             name: v2.19 Installation Guide
           - 
@@ -360,7 +360,6 @@ en:
             name: 認証
             link: 2.0/server-3-operator-build-artifacts
           - 
-            name: Usage Data
             link: 2.0/server-3-operator-usage-data
           - 
             name: Security
@@ -416,7 +415,7 @@ en:
         link: 2.0/install-overview/
         children:
           - 
-            name: Overview
+            name: What's New in v2.17
             link: 2.0/install-overview/
           - 
             name: What's New in v2.19.x
@@ -429,7 +428,7 @@ en:
         link: 2.0/overview/
         children:
           - 
-            name: 会社概要
+            name: 概要
             link: 2.0/overview/
           - 
             name: Intro to Nomad
@@ -457,7 +456,7 @@ en:
         link: 2.0/v.2.19-overview/
         children:
           - 
-            name: 会社概要
+            name: 概要
             link: 2.0/v.2.19-overview/
           - 
             name: v2.19 Installation Guide
@@ -601,6 +600,7 @@ ja:
           - 
             name: アーティファクト
           - 
+            name: テストデータの収集
           - 
             name: SSH を使用したデバッグ
           - 
