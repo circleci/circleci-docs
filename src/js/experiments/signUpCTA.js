@@ -3,6 +3,7 @@ window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_update_signup_cta_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: '.global-nav--footer',
+  guestExperiment: true,
 }).then((variation) => {
   if (variation === 'treatment') {
     const ctaBtn = document.getElementById('signup-cta');
