@@ -31,7 +31,7 @@ Follow this step-by-step guide to get your first successful green build on Circl
 
 There is no need to add any source code for now.
 
-## Setting up CircleCI
+## Set up CircleCI
 {: #setting-up-circleci }
 
 1. Navigate to the CircleCI [**Projects** page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
@@ -40,7 +40,7 @@ There is no need to add any source code for now.
 
 Congratulations! You will soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
 
-## Digging into your first pipeline
+## Dig into your first pipeline
 {: #digging-into-your-first-pipeline }
 
 So, what just happened?
@@ -63,7 +63,7 @@ including a large number of tests. You can learn more about all the possible
 steps one may put in a `.circleci/config.yml` file in the [Configuration
 Reference]({{site.baseurl}}/2.0/configuration-reference).
 
-### Breaking your build!
+### Break your build!
 {: #breaking-your-build }
 {:.no_toc}
 
@@ -105,7 +105,7 @@ repository—a topic for another tutorial. You can view several [demo
 applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
 setting up CircleCI with various languages and frameworks.
 
-## Using the workflows functionality
+## Use workflows
 {: #using-the-workflows-functionality }
 {:.no_toc}
 
@@ -159,7 +159,7 @@ and copy and paste the following text into it.
 Read more about workflows in the [Orchestrating
 Workflows]({{site.baseurl}}/2.0/workflows/#overview) documentation.
 
-### Adding some changes to use the workspaces functionality
+### Add some changes to use workspaces
 {: #adding-some-changes-to-use-the-workspaces-functionality }
 {:.no_toc}
 
