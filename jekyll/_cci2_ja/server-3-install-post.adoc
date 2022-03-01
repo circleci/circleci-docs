@@ -365,7 +365,7 @@ endif::env-aws[]
 
 ==== 手順 1 - `mc` クライアントの設定
 
-最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc.html[`mc`] を設定します。
+最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] を構成します。
 
 [source,bash]
 ----
