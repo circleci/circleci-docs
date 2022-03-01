@@ -234,7 +234,7 @@ jobs:
 
 `machine` オプションは、以下のような仕様を持つ専用のエフェメラル VM でジョブを実行します。
 
-{% include snippets/machine-resource-table.md %}
+{% include snippets/ja/machine-resource-table.md %}
 
 `machine` Executor を使用すると、アプリケーションは OS のリソースにフル アクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、(ネットワーク インターフェイスのリッスンなどの目的で) ネットワーク スタックへのフル アクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/2.0/docker-to-machine)」を参照してください。
 
