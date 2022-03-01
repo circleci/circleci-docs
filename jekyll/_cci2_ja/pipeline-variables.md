@@ -22,7 +22,7 @@ version:
 
 値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/2.0/variables/#pipeline-values)を参照して下さい。
 
-{% include snippets/pipeline-values.md %}
+{% include snippets/ja/pipeline-values.md %}
 
 使用例:
 
