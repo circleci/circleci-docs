@@ -25,9 +25,17 @@
 .sign-up-and-try-circleci {
   .signup-and-try-experiment-block {
     margin-left: 42px;
-    // display: none // TODO: reveal this with js when ready
+    display: none;
     &.show {
       display: inherit;
+    }
+
+    // disable external link tag wrapper in the button blocks
+    .external-link-tag-wrapper  {
+      width: 100%;
+      .external-link-icon {
+        display: none;
+      }
     }
 
     .signup-buttons {
@@ -64,9 +72,47 @@
     align-items: center;
   }
 
+  .gh-signup-dropdown {
+    display: none;
+    background: white;
+    border-radius: 2px;
+    box-shadow: rgb(0 0 0 / 18%) 0px 6px 12px;
+    color: rgb(52, 52, 52);
+    letter-spacing: initial;
+    line-height: 1.5;
+    list-style: none;
+    margin: 10px 0px 0px;
+    min-width: 170px;
+    padding: 5px 0px;
+    position: absolute;
+    right: 0px;
+    text-align: left;
+    top: 50px;
+    z-index: 1;
+    &.show {
+      display: inherit;
+    }
+
+    li:hover {
+      background-color: rgb(245, 245, 245);
+    }
+  }
+
+  .gh-link {
+    font-size: 16px;
+    padding: 3px 20px;
+    display: block;
+    color: inherit;
+    white-space: nowrap;
+  }
+
   .signup-button-wrapper {
     display: flex;
     width: 300px;
+  }
+  .gh-signup-button-wrapper {
+    margin-right: 16px;
+    position: relative;
   }
 
   .gh-dropdown-button {
@@ -112,7 +158,7 @@
 
   .email-signup-button {
     @include cta-button;
-    background: #048C43;
+    background: #049B4A;
     color: #FFFFFF;
     &:hover {
       background-color: #048C43;
