@@ -46,7 +46,7 @@ CircleCI runner is available on multiple platforms. Support levels fall into two
 With a *Supported* platform, users receive the following:
 
 * Documentation and best practices
-* Support: CircleCI Customer Engineers will assist customers to resolve issues within their usual Gold Service Level Agreements (SLAs)
+* Support: CircleCI Customer Engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
 
 *Supported* CircleCI runners are available on the following platforms:
 
