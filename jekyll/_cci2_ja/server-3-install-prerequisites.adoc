@@ -314,7 +314,7 @@ CircleCI Server の設定には以下の詳細が必要になります。
 
 * *[Storage Bucket Name (ストレージ バケット名)]*: CircleCI Server に使用するバケット名
 
-* *[Access Key ID (アクセス キー ID)]*: S3 バケットへのアクセス用のアクセス キー ID 
+* *[Access Key ID (アクセス キー ID)]*: S3 バケットへのアクセス用のアクセス キー ID
 
 * *[Secret Key (シークレット キー)]*: S3 バケットへのアクセス用のシークレット キー
 
