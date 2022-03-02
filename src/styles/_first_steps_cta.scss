@@ -1,3 +1,6 @@
+$btn-breakpoint: 967px;
+$btn-breakpoint-sm: 360px;
+
 @mixin cta-button {
   align-items: center;
   border-color: transparent;
@@ -40,6 +43,10 @@
       display: flex;
       margin: 12px 0;
       flex: 1;
+
+      @media(max-width: $btn-breakpoint) {
+        flex-direction: column;
+      }
     }
   }
 
@@ -47,6 +54,11 @@
     color: inherit;
     font-weight: 700;
     font-size: 18px;
+
+
+    @media(max-width: $btn-breakpoint-sm) {
+      font-size: 14px;
+    }
   }
 
   // borrowed from outer.
@@ -58,6 +70,10 @@
     border-top-right-radius: 0;
     &:hover {
       background-color: #6a6a6a;
+    }
+
+    @media(max-width: $btn-breakpoint) {
+      margin-bottom: 16px;
     }
   }
   .gh-icon {
@@ -107,10 +123,18 @@
   .signup-button-wrapper {
     display: flex;
     width: 300px;
+
+    @media(max-width: $btn-breakpoint-sm) {
+      width: 250px;
+    }
   }
   .gh-signup-button-wrapper {
     margin-right: 16px;
     position: relative;
+
+    @media(max-width: $btn-breakpoint-sm) {
+      margin-right: 0px;
+    }
   }
 
   .gh-dropdown-button {
