@@ -136,7 +136,7 @@ jobs:
 ## コアファイルのアップロード
 {: #uploading-core-files }
 
-このセクションでは、[コア ダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
+このセクションでは、[コアダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
 
 1. 以下の行を含む `Makefile` を作成します。
 
@@ -157,7 +157,7 @@ jobs:
 
 3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)` を出力します。
 
-このサンプル C abort プログラムをコンパイルし、コア ダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
+このサンプル C abort プログラムをコンパイルし、コアダンプをアーティファクトとして収集する `config.yml` の全文は、以下のようになります。
 
 {:.tab.artifacts2.Cloud}
 ```yaml
@@ -240,9 +240,9 @@ jobs:
           path: /tmp/core_dumps
 ```
 
-`ulimit -c unlimited` は、コア ダンプ ファイルのファイル サイズ制限をなくします。 この制限をなくすと、プログラムがクラッシュするたびに、作業中のカレント ディレクトリにコア ダンプ ファイルが作成されます。 コア ダンプ ファイルには、`core.%p.%E` という名前が付きます。`%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
+`ulimit -c unlimited` により、コアダンプファイルのファイルサイズ制限がなくなります。 この制限がなくなると、プログラムがクラッシュするたびに、作業中のディレクトリにコアダンプファイルが作成されます。 コアダンプファイルには、`core.%p.%E` という名前が付きます。 `%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
 
-最後に、`store_artifacts` によってアーティファクト サービスの `/tmp/core_dumps` ディレクトリにコア ダンプ ファイルが格納されます。
+最後に、`store_artifacts` によってアーティファクトサービスの `/tmp/core_dumps` ディレクトリにコアダンプファイルが格納されます。
 
 ![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
@@ -265,18 +265,12 @@ export CIRCLE_TOKEN=':your_token'
 
 # `curl` gets all artifact details for a build
 # then, the result is piped into `grep` to extract the URLs.
-最後に、<code>wget</code> を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
+# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
 
 curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
    | grep -o 'https://[^"]*' \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
- を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
-
-curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
-   | grep -o 'https://[^"]*' \
-   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
-</code>
 
 同様に、ビルドの_最新_のアーティファクトをダウンロードする場合は、curl の呼び出しを以下のように URL で置き換えます。
 
@@ -322,8 +316,8 @@ UI テストのイメージや動画をアップロードする場合は、フ�
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [ワークスペース]({{site.baseurl}}/2.0/workspaces)
-- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
