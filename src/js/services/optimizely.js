@@ -26,9 +26,7 @@ class OptimizelyClient {
         // and sets this as anonymousId for each new visitor.
         // This call is always valid and will never return null. From the docs:
         // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
-        resolve(
-          analytics && analytics.user() ? analytics.user().anonymousId() : null,
-        );
+        resolve(analytics?.user()?.anonymousId() ?? null);
       } else {
         // If we are here it means we are still waiting on getting notified
         // that the call to /api/v1/me has resolved and the new userData is available
