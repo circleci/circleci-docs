@@ -7,7 +7,7 @@ function handleGithubDropdownClick() {
   const dropdown = $('.gh-signup-dropdown');
   // toggle the popup
   $('.gh-dropdown-button').click((e) => {
-    dropdown.addClass('show');
+    dropdown.toggleClass('show');
     e.stopPropagation();
   });
 
