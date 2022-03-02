@@ -399,6 +399,8 @@ The available options are:
 - bash.exe
 - cmd.exe
 
+Please note here is a known limitation with `bash.exe` at this time where bash doesn't not show the expected prompt.
+
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
 ## Next steps
