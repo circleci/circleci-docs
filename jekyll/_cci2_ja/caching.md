@@ -28,7 +28,7 @@ version:
 {: #introduction }
 {:.no_toc}
 
-CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 See the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) and [Persisting Data]({{site.baseurl}}/2.0/persist-data/) pages for tips on caching strategies and management.
+CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy/)と[データの永続化]({{site.baseurl}}/2.0/persist-data/)でキャッシュ戦略と管理に関するヒントを参照してださい。
 
 ここでは、手動によるキャッシュオプション、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。
 
@@ -111,7 +111,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 ## ライブラリのキャッシュ
 {: #caching-libraries }
 
-ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 See our Language guides and [demo projects]({{site.baseurl}}/2.0/demo-apps/) for the specifics for your stack.
+ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
 
 現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 たとえば、`circleci/ruby:2.4.1` というビルド済みイメージには git、openssh-client、gzip がプリインストールされています。
 
@@ -158,7 +158,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** 依存関係のキャッシュを保存する特別なステップ **
+      - save_cache: # ** special step to save dependency cache **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
@@ -295,7 +295,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 ### ネットワークとストレージ使用状況の表示
 
-For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+ネットワークとストレージの使用状況の表示、および毎月のネットワークとストレージの超過コストの計算については、[データの永続化 ]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)を参照してください。
 
 ## キーとテンプレートの使用
 {: #using-keys-and-templates }
@@ -353,7 +353,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 下記に、キーとテンプレートを含む `restore_cache` および `save_cache` の使い方がわかる `.circleci/config.yml` ファイルのサンプルコードを例示します。
 
-このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 However, it is important to be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) page.
+このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)をご覧ください。
 
 <div class="alert alert-warning" role="alert">
 <b>警告:</b> この例は、ソリューションの<i>候補</i>ではありますが、お客様の個別のニーズには適さず、ストレージコストが増加する可能性があります。
@@ -463,9 +463,9 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/2.0/persist-data)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [ワークスペース]({{site.baseurl}}/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
+- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
 
