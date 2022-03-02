@@ -76,7 +76,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 ## Terms
 {: #terms}
 
-By signing up, you are agreeing to our SaaS Agreement and Privacy Policy. We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and aren’t ready to share access to your private projects, you can choose public repos instead. Protected by reCAPTCHA, Google Privacy Policy and Terms of Service apply.
+By signing up, you are agreeing to our [SaaS Agreement](https://circleci.com/terms-of-service/) and [Privacy Policy](https://circleci.com/privacy/). We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and aren’t ready to share access to your private projects, you can choose public repos instead. Protected by reCAPTCHA, Google [Privacy Policy](https://policies.google.com/privacy?hl=en) and [Terms of Service](https://policies.google.com/terms?hl=en) apply.
 
 ## Next steps
 {: #next-steps }
