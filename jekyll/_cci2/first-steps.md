@@ -15,7 +15,6 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 {: #vcs-signup }
 
 1. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
-
     <!-- start: experiment code - #docs-discovery -->
     <div class="signup-and-try-experiment-block">
       <div class="signup-buttons">
@@ -32,7 +31,6 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
             <li><a class="gh-link track-signup-link" href="https://circleci.com/login-public/">Public Repos Only</a></li>
           </ul>
         </div>
-    
         <div class="signup-button-wrapper">
           <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket&return-to=" class="track-signup-link bb-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
