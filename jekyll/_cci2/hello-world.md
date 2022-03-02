@@ -38,11 +38,11 @@ This example adds a job called `build` that spins up a container running a [pre-
 3. Commit and push the changes.
 
 4. Go to the **Projects** page in the CircleCI app, then click
-the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated org. See the Org Switching section below for tips.
+the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated org. See the [Org Switching](#org-switching) section below for tips.
 
-5. Follow the steps to configure your `config.yml` file for the project and trigger your first build.
+5. Follow the steps to configure your `config.yml` file for the project and trigger your first pipeline.
 
-The Workflows page appears with your `build` job and prints `Hello World` to the console.
+The **Workflow** page appears with your `build` job and prints `Hello World` to the console.
 
 **Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
@@ -149,7 +149,7 @@ Orbs are a great way to simplify your config or re-use config across your projec
 ## Following / unfollowing projects
 {: #following-unfollowing-projects }
 
-You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking "Projects" in the sidebar, and then clicking the button next to the project you want to follow or stop following.
+You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking **Projects** in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
 ## Org switching
 {: #org-switching }
@@ -166,7 +166,7 @@ In the top left, you will find the Org switcher.
 {:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
+If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available. If you want to add the GitHub project `your-org/project`, you must select `your-org` from the org switcher.
 
 ## Next steps
 {: #next-steps }
