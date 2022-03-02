@@ -19,11 +19,11 @@ version:
 
 CircleCI では、Webhook を使って Datadog にデータを送ることができます。
 
-1. [CircleCI アプリ](https://app.circleci.com/)で、各プロジェクトの省略記号メニューをクリックし、**Project Settings** > **Webhooks** の順にクリックします。
+1. [CircleCI アプリ](https://app.circleci.com/)で、各プロジェクトの横の省略記号(…)をクリックし、**Project Settings** > **Webhooks** の順にクリックします。
   - **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` が[ Datadog の API キー](https://app.datadoghq.com/account/login)です。
-  - **名前**: `Datadog CI Visibility` または指定したい識別名を入力します。
-  - **イベント**: `Workflow Completed` と `Job Completed` を選択します。
-  - **証明書の検証**: このチェックを有効にします。
+  - **Name**: `Datadog CI Visibility` または指定したい識別名を入力します。
+  - **Events**: `Workflow Completed` と `Job Completed` を選択します。
+  - **Certificate verifications**: このチェックを有効にします。
 
 1. **Add Webhook** をクリックして新しい Webhook を保存します。
 
@@ -32,7 +32,7 @@ CircleCI では、Webhook を使って Datadog にデータを送ることがで
 
 [Datadog](https://app.datadoghq.com/account/login) にサインインし、パイプラインとパイプラインの実行ページにアクセスし、ワークフローの完了後にデータが入力されることを確認します。
 
-**注**: パイプラインのページでは各レポジトリのデフォルトのブランチのデータのみが表示されます。
+**注**: パイプラインのページでは各リポジトリのデフォルトのブランチのデータのみが表示されます。
 
 ## Sumo Logic との連携
 {: #sumo-logic-integration }
