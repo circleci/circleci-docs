@@ -15,6 +15,8 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 {: #vcs-signup }
 
 1. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
+
+    <!-- start: experiment code - #docs-discovery -->
     <div class="signup-and-try-experiment-block">
       <div class="signup-buttons">
         <div class="signup-button-wrapper gh-signup-button-wrapper">
@@ -26,8 +28,8 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
             <div class="gh-dropdown-caret"></div>
           </button>
           <ul class="gh-signup-dropdown">
-            <li><a class="gh-link" href="https://circleci.com/login/">All Repos</a></li>
-            <li><a class="gh-link" href="https://circleci.com/login-public/">Public Repos Only</a></li>
+            <li><a class="gh-link track-signup-link" href="https://circleci.com/login/">All Repos</a></li>
+            <li><a class="gh-link track-signup-link" href="https://circleci.com/login-public/">Public Repos Only</a></li>
           </ul>
         </div>
     
@@ -39,6 +41,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
         </div>
       </div>
     </div>
+    <!-- end: experiment code -->
 2. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
 
 3. Click the Authorize Application or equivalent button. The CircleCI Pipelines Dashboard appears.
