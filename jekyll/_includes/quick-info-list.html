@@ -5,6 +5,7 @@
   <div id='arrow' data-popper-arrow></div>
 </div>
 <div class="quick-info-list">
+  {% if page.readTime != false %}
   <img alt="Last updated" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
   <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
       {% assign dateStart = page.last_modified_at | date: '%s' %}
@@ -28,6 +29,7 @@
       • {{ ert }} min read
     </span>
   </time>
+  {% endif %}
   
   {% if page.version %}
   <div class="server-version-wrapper">
