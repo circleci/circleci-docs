@@ -1,3 +1,6 @@
+/**
+ * This experiment adds CTA signup buttons to the docs/2.0/first-steps document.
+ * */
 const isFirstStepsPage = window.location.pathname == '/docs/2.0/first-steps/';
 
 function handleGithubDropdownClick() {
@@ -36,7 +39,6 @@ window.OptimizelyClient.getVariationName({
   guestExperiment: true,
 }).then((variation) => {
   if (variation === 'treatment' && isFirstStepsPage) {
-    console.log("hi there!");
     $('.signup-and-try-experiment-block').toggleClass('show');
     handleGithubDropdownClick();
     handleClickedLink();
