@@ -25,11 +25,11 @@ CircleCI server may be installed without a support package, on AWS, using the ex
 
 === Non-AWS Platform Support
 
-With a Platinum CircleCI support package it is possible to install and configure CircleCI on Azure or any other platform used in your organization. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] or your account representative to get started.
+With a Premium CircleCI support package it is possible to install and configure CircleCI on Azure or any other platform used in your organization. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] or your account representative to get started.
 
 === Externalization
 
-With a Platinum support agreement, it is possible to improve performance and resilience by configuring the following services to run externally to the Services machine:
+With a Premium support agreement, it is possible to improve performance and resilience by configuring the following services to run externally to the Services machine:
 
 - PostgreSQL
 - MongoDB
