@@ -5,7 +5,6 @@
   <div id='arrow' data-popper-arrow></div>
 </div>
 <div class="quick-info-list">
-  {% if page.readTime != false %}
   <img alt="Last updated" src="{{ site.baseurl }}/assets/img/docs/duration.svg">
   <time aria-describedby="tooltip-time" id="time-posted-on" datetime="{{  page.last_modified_at | date_to_xmlschema }}">
       {% assign dateStart = page.last_modified_at | date: '%s' %}
@@ -18,6 +17,7 @@
       {% else %} 
         <a href="{{ ghLink }}" target="_blank" class="no-external-icon">{{ page.last_modified_at | timeago }}</a>
       {% endif %}
+    {% if page.readTime %}
     <span class="ert">
       {% assign words_total = page.content | strip_html | number_of_words %}
       {% assign words_without_code = page.content | replace: '<pre class="highlight">', '<!--' | replace: '</pre>', '-->' | strip_html | number_of_words %}
@@ -28,8 +28,8 @@
       {% assign ert = words_without_code_read_time | plus: words_code_read_time | at_least: 1 %}
       • {{ ert }} min read
     </span>
+    {% endif %}
   </time>
-  {% endif %}
   
   {% if page.version %}
   <div class="server-version-wrapper">
