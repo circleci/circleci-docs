@@ -138,7 +138,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows).
+For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) page for more information.
 {: class="alert alert-info" }
 
 ### More about using and authoring orbs
