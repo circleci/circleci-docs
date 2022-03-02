@@ -22,7 +22,7 @@ toc::[]
 +
 WARNING: If migrator services are down at startup connected services will fail.
 
-* With a Premium support contract some services can be externalized (marked with * here) and managed to suit your requirements. Externalization provides higher data security and allows for redundancy to be built into your system.
+* With a Premium support contract, some services can be externalized (marked with * here) and managed to suit your requirements. Externalization provides higher data security and allows for redundancy to be built into your system.
 
 [discrete]
 === key
