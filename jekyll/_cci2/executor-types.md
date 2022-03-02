@@ -51,10 +51,10 @@ Docker increases performance by building only what is required for your applicat
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/node:lts
 ```
 
-In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an official [Docker image](https://hub.docker.com/_/docker/).
+In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
 
 ### Docker image best practices
 {: #docker-image-best-practices }
@@ -66,7 +66,7 @@ In this example, all steps run in the container created by the first image liste
 
 - Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
 
-- If you experience increases in your run times due to installing additional tools during execution, it is best practice to use the [Building Custom Docker Images Documentation]({{ site.baseurl }}/2.0/custom-images/) to create a custom image with tools that are pre-loaded in the container to meet the job requirements.
+- If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the [Using Custom-Built Docker Images]({{site.baseurl}}/2.0/custom-images/) page for more information.
 
 - When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
 
@@ -83,17 +83,15 @@ jobs:
   build:
     docker:
     # Primary container image where all steps run.
-     - image: buildpack-deps:trusty
+     - image: cimg/base:current
     # Secondary container image on common network.
-     - image: mongo:2.6.8-jessie
+     - image: cimg/mariadb:10.6
        command: [mongod, --smallfiles]
 
-    working_directory: ~/
-
     steps:
-      # command will execute in trusty container
-      # and can access mongo on localhost
-      - run: sleep 5 && nc -vz localhost 27017
+      # command will execute in an Ubuntu-based container
+      # and can access MariaDB on localhost
+      - run: sleep 5 && nc -vz localhost 3306
 ```
 Docker images may be specified in a few ways:
 
@@ -226,7 +224,7 @@ Where example usage looks like the following:
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/base:current
     resource_class: xlarge
     steps:
     #  ...  other config
@@ -252,7 +250,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:current
     resource_class: large
 ```
 

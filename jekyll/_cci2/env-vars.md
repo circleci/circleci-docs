@@ -49,7 +49,9 @@ The value of the environment variable will not be masked in the build output if:
 * the value of the environment variable is less than 4 characters
 * the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
 
-**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{site.baseurl}}/2.0/ssh-access-jobs).
+**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using Shell Scripts]({{site.baseurl}}/2.0/using-shell-scripts)).
+
+If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{site.baseurl}}/2.0/ssh-access-jobs).
 
 ## Renaming orgs and repositories
 {: #renaming-orgs-and-repositories }

@@ -42,6 +42,63 @@ Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs
 
 To upload artifacts created during builds, use the following example:
 
+{:.tab.artifacts.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+```
+
+{:.tab.artifacts.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+```
+
+{:.tab.artifacts.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -102,6 +159,61 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
 
+{:.tab.artifacts2.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/work
+    steps:
+      - checkout
+      - run: make
+      - run: |
+          # tell the operating system to remove the file size limit on core dump files
+          ulimit -c unlimited
+          ./dump
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/core_dumps
+```
+
+{:.tab.artifacts2.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/work
+    steps:
+      - checkout
+      - run: make
+      - run: |
+          # tell the operating system to remove the file size limit on core dump files
+          ulimit -c unlimited
+          ./dump
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/core_dumps
+```
+
+{:.tab.artifacts2.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -180,23 +292,32 @@ Placeholder   | Meaning                                                         
 ## Artifacts optimization
 {: #artifacts-optimization }
 
-Optimization options will be different for each project depending on what you are trying to accomplish. You can try the following actions to reduce network and storage usage:
+#### Check which artifacts are being uploaded
+{: #check-which-artifacts-are-being-uploaded }
+{:.no_toc}
 
-- Check if `store_artifacts` is uploading unnecessary files
-- Check for identical artifacts if you are using parallelism
-- Compress text artifacts at minimal cost
-- Filter out and upload only failing UI tests with images/videos
-- Filter out and upload only failures or successes
-- Upload artifacts to a single branch
-- Upload large artifacts to your own bucket at no cost
+Often we see that the `store_artifacts` step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
 
-Visit the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#how-to-optimize-your-storage-and-network-transfer-use) page for more information.
+If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the `CIRCLE_NODE_INDEX` environment variable in a run step to change the behavior of scripts depending on the parallel task run.
 
-You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
+#### Uploading large artifacts
+{: #uploading-large-artifacts }
+{:.no_toc}
+
+Artifacts that are text can be compressed at very little cost.
+
+If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
+
+If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
+
+If you must upload a large artifact you can upload them to your own bucket at no cost.
 
 ## See also
 {: #see-also }
 {:.no_toc}
 
-- [Caching Dependencies]({{site.baseurl}}/2.0/caching/)
-- [Persisting Data]({{site.baseurl}}/2.0/persist-data/#using-artifacts)
+- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
+- [Caching Dependencies]({{site.baseurl}}/2.0/caching)
+- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
+- [Workspaces]({{site.baseurl}}/2.0/workspaces)
+- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)

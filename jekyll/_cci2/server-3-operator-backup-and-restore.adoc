@@ -383,7 +383,7 @@ These instructions were sourced from the Velero documentation https://velero.io/
 
 === Step 1 - Configure `mc` client
 
-To start, configure https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc.html[`mc`] to connect to your storage
+To start, configure https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] to connect to your storage
 provider:
 
 [source,bash]

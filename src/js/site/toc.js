@@ -30,8 +30,10 @@ export function highlightTocOnScroll(headings) {
     clickedEntry.addEventListener('click', () => {
       sidebarItems.forEach((el) => {
         el.classList.remove('active');
+        el.removeAttribute('id');
       });
       clickedEntry.classList.add('active');
+      clickedEntry.setAttribute('id', 'active-toc-section');
     });
   });
 
@@ -59,8 +61,15 @@ export function highlightTocOnScroll(headings) {
             );
           }
 
-          sidebarItems.forEach((el) => el.classList.remove('active'));
+          sidebarItems.forEach((el) => {
+            el.classList.remove('active');
+            el.removeAttribute('id');
+          });
           sidebarItems[indexOfCurrentHeadline].classList.add('active');
+          sidebarItems[indexOfCurrentHeadline].setAttribute(
+            'id',
+            'active-toc-section',
+          );
         }
       },
       { threshold: [1.0], rootMargin: '0px 0px -60% 0px' },
@@ -78,6 +87,7 @@ export function highlightTocOnScroll(headings) {
     sidebarItems.forEach((item) => {
       if (item.textContent === firstHeadlineInViewport.textContent) {
         item.classList.add('active');
+        item.setAttribute('id', 'active-toc-section');
       }
     });
   }
