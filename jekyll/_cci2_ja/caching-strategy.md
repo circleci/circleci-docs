@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Caching Strategies"
+title: "キャッシュ戦略"
 description: "このドキュメントでは、依存関係のキャッシュを管理するための様々なキャッシュ戦略について説明します。"
 categories:
   - 最適化
@@ -78,7 +78,7 @@ dependency_cache_paths:
 
 キャッシュがリストアされていない場合は、[こちらのサポート記事](https://support.circleci.com/hc/en-us/articles/360004632473-No-Cache-Found-and-Skipping-Cache-Generation)でヒントをお探しください。
 
-### Cache unused or superfluous dependencies
+### 未使用または余分な依存関係のキャッシュ
 {: #cache-unused-or-superfluous-dependencies }
 
 ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。
@@ -359,9 +359,9 @@ steps:
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching)
-- [ワークスペース]({{site.baseurl}}/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
+- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
 
