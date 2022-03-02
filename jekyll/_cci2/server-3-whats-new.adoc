@@ -28,6 +28,7 @@ toc::[]
 * Fixed a bug that was causing some intermittent broken dependency caches.
 * Removed outdated cert trust stores from some images. They were found to be causing access issues to some server installations.
 * Self-signed certificates or private certificate authorities are now supported when using GitHub Enterprise.
+* Fixed a bug that was affecting runner updates.
 
 === Known issues
 
