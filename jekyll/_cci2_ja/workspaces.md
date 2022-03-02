@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Using Workspaces to Share Data between Jobs"
+title: "ワークスペースによるジョブ間のデータ共有"
 description: "ここではワークスペースを使ってデータをワークフローのダウンストリームジョブで共有する方法を説明します。"
 version:
   - クラウド
@@ -213,14 +213,14 @@ workflows:
 ## ワークスペースとランナーネットワークの料金
 {: #workspaces-runner-network-charges }
 
-When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
 For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
 
 ## Workspace optimization
 {: #workspace-usage-optimization }
 
-`persist_to_workspace` を使用する際は、パスとファイルを定義することが重要です。 Not doing so can cause a significant increase in storage. パスとファイルは以下の構文を使って指定します。
+`persist_to_workspace` を使用する際は、パスとファイルを定義することが重要です。 定義しないと、ストレージが大幅に増加する場合があります。 パスとファイルは以下の構文を使って指定します。
 
 ```yml
 - persist_to_workspace:
@@ -234,9 +234,9 @@ For information on managing network and storage usage, see the [Persisting Data]
 {: #see-also }
 {:.no_toc}
 
-- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows) page.
-- [データの永続化]({{site.baseurl}}/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [アーティファクト]({{site.baseurl}}/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/2.0/workflows)を参照して下さい。
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
+- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
