@@ -318,7 +318,7 @@ After running this command, you should see a file named `credentials-velero` in 
 
 * サービス アカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic ]が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic]が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
 
 ==== JSON キー ファイルを使用する場合
 
