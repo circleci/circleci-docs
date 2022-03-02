@@ -65,7 +65,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 docker stop <container-name>
 ```
 
-== Docke コンテナを削除する
+== Docker コンテナを削除する
 
 同じ名前のコンテナを再作成する場合など、停止したランナーコンテナをシステムから完全に削除する必要がある場合があります。
 
