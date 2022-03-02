@@ -10,7 +10,7 @@ version:
 toc: false
 ---
 
-If you are running an external MongoDB with your CircleCI installation, multiple MongoDB upgrades are recommended for use with CircleCI v2.15.0. Work with a CircleCI Solutions Engineer to complete the recommended upgrades to your custom HA configuration (requires Premium Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+If you are running an external MongoDB with your CircleCI installation, multiple MongoDB upgrades are recommended for use with CircleCI v2.15.0. Work with a CircleCI solutions engineer to complete the recommended upgrades to your custom High Availability (HA) configuration (requires Premium Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
 <!---
 * TOC
