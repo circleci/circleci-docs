@@ -76,7 +76,7 @@ describe('Optimizely Service logged-in users', () => {
       await expect(client.getUserId(true)).resolves.toBe(null);
     });
 
-    it("returns null when analytics doesn't exists", async () => {
+    it("returns null when analytics doesn't exist", async () => {
       glob.analytics = null;
       await expect(client.getUserId(true)).resolves.toBe(null);
     });
