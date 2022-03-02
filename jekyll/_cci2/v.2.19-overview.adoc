@@ -21,7 +21,7 @@ WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a no
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
 
-WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your organization name, there is a <<updating-server#org-rename-script,script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
+WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your CircleCI organization name, there is a <<updating-server#org-rename-script,script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
 
 ## Notes and Best Practices
 
