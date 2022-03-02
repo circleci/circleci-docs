@@ -1,0 +1,124 @@
+@mixin cta-button {
+  // width: 100%;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 3px 0 0 3px;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 2px;
+  cursor: pointer;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 54px;
+  width: 100%;
+  outline: 0;
+  padding: 0;
+  transition: background-color 400ms;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  -webkit-transition: background-color 400ms;
+}
+
+.sign-up-and-try-circleci {
+  .signup-and-try-experiment-block {
+    margin-left: 42px;
+    // display: none // TODO: reveal this with js when ready
+    &.show {
+      display: inherit;
+    }
+
+    .signup-buttons {
+      display: flex;
+      margin: 12px 0;
+      flex: 1;
+    }
+  }
+
+  .button-text {
+    color: inherit;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  // borrowed from outer.
+  .gh-signup-button {
+    @include cta-button;
+    color: #FFFFFF;
+    background-color: #7f7f7f;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    &:hover {
+      background-color: #6a6a6a;
+    }
+  }
+  .gh-icon {
+    width: 44px;
+    height: 44px;
+    margin: 3px 5px 3px 3px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signup-button-wrapper {
+    display: flex;
+    width: 300px;
+  }
+
+  .gh-dropdown-button {
+    @include  cta-button;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left: 1px solid #555;
+    display: flex;
+    justify-content: center;
+    width: 50px;
+    background-color: #6a6a6a;
+    &:hover {
+      background-color: #7f7f7f;
+    }
+    &:active {
+      background-color: #555555;
+    }
+  }
+
+  .gh-dropdown-caret {
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border-top: 8px solid currentColor;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    margin-bottom: 1px;
+    color: white;
+  }
+
+  // bb button
+  .bb-signup-button {
+    @include cta-button;
+    background: #0078ca;
+    color: #FFFFFF;
+    &:hover {
+      background-color: #0062b0;
+    }
+    &:active {
+      background-color: #004a95;
+    }
+  }
+
+  .email-signup-button {
+    @include cta-button;
+    background: #048C43;
+    color: #FFFFFF;
+    &:hover {
+      background-color: #048C43;
+    }
+    &:active {
+      background-color: #00701B;
+    }
+  }
+}

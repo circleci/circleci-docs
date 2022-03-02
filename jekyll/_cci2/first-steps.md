@@ -16,6 +16,29 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 
 1. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
 
+<!-- start: experiment code - #docs-discovery -->
+<div class="signup-and-try-experiment-block">
+  <div class="signup-buttons">
+    <div style="margin-right: 16px;" class="signup-button-wrapper">
+      <div class="gh-signup-button">
+        <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
+        <a class="button-text" href="">Sign up with GitHub</a>
+      </div>
+      <button class="gh-dropdown-button">
+        <div class="gh-dropdown-caret"></div>
+      </button>
+    </div>
+
+    <div class="signup-button-wrapper">
+      <div class="bb-signup-button">
+        <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
+        <a class="button-text" href="">Sign up with BitBucket</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end: experiment code -->
+
 2. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
 
 3. Click the Authorize Application or equivalent button. The CircleCI Pipelines Dashboard appears.
@@ -26,6 +49,19 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 {: #email-signup }
 
 1. Click **Sign Up with Email**.
+
+<!-- start: experiment code - #docs-discovery -->
+<div class="signup-and-try-experiment-block">
+  <div class="signup-button-wrapper">
+    <div class="signup-buttons">
+      <div class="email-signup-button">
+        <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/circleci.svg"/>
+        <a class="button-text" href="">Sign Up with Email</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end: experiment code -->
 
 2. Enter your email address, and then set a secure password for your CircleCI account. A verification email is sent to the email address provided.
 
