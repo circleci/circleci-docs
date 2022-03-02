@@ -38,7 +38,7 @@ This example adds a job called `build` that spins up a container running a [pre-
 3. Commit and push the changes.
 
 4. Go to the **Projects** page in the CircleCI app, then click
-the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated org. See the [Org Switching](#org-switching) section below for tips.
+the **Set Up Project** button next to your project. If you do not see your project, make sure you have selected the associated org. See the [Org Switching](#org-switching) section below for tips.
 
 5. Follow the steps to configure your `config.yml` file for the project and trigger your first pipeline.
 
