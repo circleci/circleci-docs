@@ -548,6 +548,8 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   font-weight: normal;
   font-size: 15px;
   color: #343434;
+  border-right: 1px solid #DDDDDD;
+  margin-right: 16px;
 }
 
 // badge tags
@@ -577,9 +579,8 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 }
 
 .server-version-wrapper {
-  padding: 10px 16px;
+  padding: 10px 0px;
   flex-grow: 1;
-  border-left: 1px solid #DDDDDD;
 }
 
 #tooltip-time {

@@ -64,6 +64,7 @@ toc:
   min_level: 1
   max_level: 6
 
+readTime: true
 
 markdown: kramdown
 kramdown:

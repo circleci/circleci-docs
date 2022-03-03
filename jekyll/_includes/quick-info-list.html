@@ -17,6 +17,7 @@
       {% else %} 
         <a href="{{ ghLink }}" target="_blank" class="no-external-icon">{{ page.last_modified_at | timeago }}</a>
       {% endif %}
+    {% if page.readTime %}
     <span class="ert">
       {% assign words_total = page.content | strip_html | number_of_words %}
       {% assign words_without_code = page.content | replace: '<pre class="highlight">', '<!--' | replace: '</pre>', '-->' | strip_html | number_of_words %}
@@ -27,6 +28,7 @@
       {% assign ert = words_without_code_read_time | plus: words_code_read_time | at_least: 1 %}
       • {{ ert }} min read
     </span>
+    {% endif %}
   </time>
   
   {% if page.version %}
