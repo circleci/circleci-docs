@@ -21,7 +21,7 @@ version:
 ### CircleCI のスタッフにプログラムコードを見られる心配はありませんか?
 {: #does-circleci-look-at-my-code }
 {:.no_toc}
-CircleCI のスタッフがお客様の許諾を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望されるときには、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
+CircleCI のスタッフがお客様の許可を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望される際は、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
 
 詳しくは CircleCI の[セキュリティポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
 
@@ -291,7 +291,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**NOTE:** Billing for network egress and storage will start to take effect on **April 1 2022** (subject to change). CircleCI では現在、ネットワークとストレージの使用状況を管理していただくための変数と制御機能の追加を行なっています。 The information in this section is applicable after the changes take effect on April 1, 2022. 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+**注: **外向きの通信とストレージに対する課金は、**2022 年 4 月 1 日**より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理していただくための変数と制御機能の追加を行なっています。 このセクションの内容は、2022 年 4 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
 [CircleCI Web アプリ](https://app.circleci.com/)から **Plan > Plan Usage** に移動してお客様のストレージとネットワークの使用状況を確認し、1ヶ月のストレージ料金とネットワーク料金を計算してください。
@@ -320,11 +320,11 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 
 このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
-この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing](https://circleci.com/docs/2.0/ip-ranges/#pricing) for more information.
+この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金](https://circleci.com/docs/2.0/ip-ranges/#pricing)をご覧ください。
 
-#### How do I predict my monthly IP ranges cost without enabling the feature first?
+#### 有効化する前に 1ヶ月の IP アドレスの範囲機能の料金を把握するにはどうすれば良いですか？
 
-You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the Resources tab on the Job Details UI page.  Convert this value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost of enabling IP ranges on that Docker job.
+Job Details の UI ページの Resources タブから、すべての Docker ジョブ (リモート Docker を除く) の概算ネットワーク通信量を確認できます。  GB になっていない場合は、450 クレジットを乗じて GB に変換し、Docker ジョブで IP アドレスの範囲機能を有効にする場合の概算コストを把握してください。
 
 #### アクティブ ユーザー単位の料金が設定されているのはなぜですか?
 {: #why-does-circleci-have-per-active-user-pricing }
