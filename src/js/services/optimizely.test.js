@@ -75,6 +75,11 @@ describe('Optimizely Service logged-in users', () => {
       glob.userData = {};
       await expect(client.getUserId(true)).resolves.toBe(null);
     });
+
+    it("returns null when analytics doesn't exist", async () => {
+      glob.analytics = null;
+      await expect(client.getUserId(true)).resolves.toBe(null);
+    });
   });
 
   // Function used in TrackExperimentViewed
