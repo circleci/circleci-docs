@@ -21,31 +21,31 @@ toc::[]
 
 == Terraform の変数を定義する
 
-. Clone the https://github.com/circleci/enterprise-setup[Setup] repository. If you already have it cloned, make sure it is up-to-date and you are on the `main` branch by running:
+.  https://github.com/circleci/enterprise-setup[Setup] リポジトリをクローンします。 すでにクローンを作成している場合は、クローンが最新であり、メインブランチにいることを確認するために、下記を実行します。
 +
 git checkout main && git pull
-. Go to the top directory of the `enterprise-setup` repo on your local machine.
-. Run `terraform init` to initialize your working directory.
-. Run `make init` to initialize a `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
-. Open `terraform.tfvars` in an editor and fill in appropriate AWS values for section 1.
-. If you plan to use 1.0 builders, specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters, if not, leave it as is. 1.0 builders are disabled by default in section 3.
-. Nomad クライアントのインスタンスタイプを指定します。 By default, the value specified in the `terraform.tfvars` file for Nomad clients is `m5.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] guide for details, and read our guidance in the <<server-ports#nomad-clients,System Requirements>> document.
+. ローカルマシンの enterprise-setup リポジトリの一番上のディレクトリに移動します。
+. terraform init を実行して、作業ディレクトリを初期化します。
+. make init を実行し、terraform.tfvars ファイルを初期化します (既に terraform.tfvars が存在する場合、同じディレクトリにバックアップされます)。
+. エディターで terraform.tfvars を開き、1. に適切な AWS 値を入力します。
+. 1.0 Builder を使用する場合は、 2. で circle_secret_passphrase を指定し、 `...` を英数字に置き換えますが、1.0 Builder を使用しない場合はそのままにしておきます。1.0 Builder は、3. のデフォルト設定で無効になっています。
+. Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の terraform.tfvars ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、terraform.tfvars ファイルの 2. で nomad_client_instance_type の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,System Requirements>> をお読みください。
 +
-NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled by default in section 3.
-. 下記の 3. では、以下が可能です。
-.. choose to use 1.0 Builders if your project requires it (by changing the count to `1`)
+NOTE: builder_instance_type は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
+. 3.では、以下が可能です。
+.. プロジェクトで必要な場合は、カウントを 1 に変更して 1.0 Builder の使用を選択する。
 .. プロキシの詳細を入力し、AWS リージョン内に複数のインストールがある場合は、プレフィックスを入力する。Services および Nomad クライアントのインスタンスは、AWS コンソールではこのプレフィックスで表示されます。
 
 .tfvars の例
 #####################################
-# 1. Required Cloud Configuration
+# 1. 必要なクラウド設定
 #####################################
 
 aws_access_key = "..." aws_secret_key = "..." aws_region = "eu-central-1"
 aws_vpc_id = "..." aws_subnet_id = "..." aws_ssh_key_name = "..."
 
 #####################################
-# 2. Required CircleCI Configuration
+# 2. 必要な CircleCI の設定
 #####################################
 
 circle_secret_passphrase = "..." services_instance_type = "m4.2xlarge"
@@ -53,7 +53,7 @@ builder_instance_type = "r3.4xlarge"
 nomad_client_instance_type = "m4.2xlarge"
 
 #####################################
-# 3. Optional Cloud Configuration
+# 3. オプションのクラウド設定
 #####################################
 
 # Set this to `1` or higher to enable CircleCI 1.0 builders
