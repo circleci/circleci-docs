@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "Persisting Data Overview"
-description: "A introductory guide to the various ways to persist data in CircleCI"
+title: "データの永続化の概要"
+description: "CircleCI でデータを永続化する方法の紹介"
 version:
   - Cloud
   - Server v3.x
   - Server v2.x
 ---
 
-This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. There are a number of ways to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
+ここでは、 CircleCI ビルド内外でデータを永続化する様々な方法を概説します。 ジョブ間およびジョブの内外にデータを移動したり、データを永続化して後で使用するには複数の方法があります。 適切なタスクに適切な機能を使用することで、ビルドが高速化し、再現性と効率が向上します。
 
 * 目次
 {:toc}
@@ -21,7 +21,7 @@ This guide gives an introductory overview of the various ways to persist and opt
 ### 依存関係のキャッシュ
 {: #caching-dependencies }
 
-A prime example of a caching strategy is using a cache with dependency managers, such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload every dependency on every build.
+キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
 Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches.
 
@@ -137,8 +137,8 @@ For quesions on data usage for the IP ranges feature, visit the [FAQ](https://ci
 {: #see-also }
 {:.no_toc}
 - [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
+- [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)
 - [ワークスペース]({{site.baseurl}}/2.0/workspaces)
 - [アーティファクト]({{site.baseurl}}/2.0/artifacts)
-- [IP Ranges]({{site.baseurl}}/2.0/ip-ranges/)
+- [IP アドレスの範囲機能]({{site.baseurl}}/2.0/ip-ranges/)
 - [最適化の概要]({{site.baseurl}}/2.0/optimizations)
