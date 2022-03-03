@@ -1,0 +1,3 @@
+= Introduction
+
+This documentation includes an overview of the main concepts used in Continuous Release, along with a Getting Started guide.

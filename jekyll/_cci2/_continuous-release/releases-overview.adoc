@@ -1,0 +1,17 @@
+= Overview
+
+== What is Continuous Release?
+
+Continuous Release is taking your working code and making it accessible to users in a predictable, repeatable, and efficient way. The emphasis is on ensuring the release of a new version does not result in a worse user experience.
+
+Although Kubernetes provides an automated way of releasing code, it will not prevent you from replacing good code with worse code. Provided the new runs for long enough to pass a few simple checks, Kubernetes will use it as a replacement for the current version.
+
+With Continuous Release, each release is controlled by a release policy. This policy contains precise criteria for determining whether the new version is good enough to replace the current version. You decide which release policy is used for different types of release, such as emergency fixes, planned improvements, or new features.
+
+== Why is Continuous Release useful?
+
+Continuous Release provides your DevOps engineers with a holistic understanding of your application. Your DevOps team remains in control of what is deployed and when. They have control over technical releases and the policies used for feature releases. However, the decision on _when_ to release a new feature can sit with the Product Owner. It becomes a _business_ decision, rather than a _technical_ one. This frees up your DevOps engineers to focus on other tasks.
+
+This shift is especially powerful if your business needs to comply with legal or regulatory requirements before releasing a feature to users.
+
+Making the release process less technical and more goal-directed also means feature developers can self-manage the pre-production environments more efficiently, and with greater confidence.

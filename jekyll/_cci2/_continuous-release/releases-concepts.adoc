@@ -1,0 +1,69 @@
+= Continuous Release Concepts
+
+== Applications
+
+Conceptually, an application is a collection of microservices sharing a single Kubernetes Namespace.
+
+Continuous Release also allows you to release across multiple Kubernetes clusters and multiple cloud providers. In this case, an _application_ is a unique combination of a Kubernetes cluster and a Namespace name.
+
+NOTE: The Continuous Release definition of an application differs from the Kubernetes definition. In Kubernetes, an application is a single workload, plus configuration data.
+
+DTAP (Development, Test, Acceptance, and Production) is a traditional way of splitting up your environments and is typically used in monolithic application development.
+
+In Continuous Release, your Development, Test, Acceptance, and Production environments are different applications. For example, the Development, Test and Acceptance applications might share one cluster, with Production using a separate cluster. The different applications typically share the same microservices, but with different versions, and need to be updated sequentially.
+
+== Services
+
+In Continuous Release, a _service_ represents a single microservice.
+
+Throughout its lifetime, a service will go through multiple versions. At any time, there may be multiple instances of a given version running in different _applications_.
+
+As a _service_ can span multiple versions and multiple applications, you can track and compare the performance and reliability of your microservices. You can do this either individually, or as interdependent microservices within an application.
+
+[NOTE]
+====
+The Continuous Release definition of a service differs significantly from the definition of a Kubernetes Service.
+
+Kubernetes defines a Service as a network service, an abstract way to expose a set of Pods using a single DNS name and a load balancing strategy.
+
+A service in Continuous Release represents a superset of Kubernetes artifacts: a Kubernetes workload (a Deployment or a StatefulSet) plus, optionally, a Kubernetes Service.
+
+====
+
+== Releases
+
+There is significant confusion between the terms _deploy_ and _release_. The two terms refer to different acts, one technical and one business-driven.
+
+The key distinction between a _deployment_ and a _release_ is the business purpose.
+
+A deploy or deployment includes all the technical activities needed to make an application or feature available for use. For example, a fresh Docker container running in a Pod on a Kubernetes cluster. The software has passed all checks and tests in your CI/CD pipeline and is ready to receive traffic from production users, but it is not yet receiving any traffic. This part of the process just ensures the new version is healthy and running smoothly, it does not incur any the risk involved in serving production traffic. Based on this definition, _deploying_ software is a risk-free activity.
+
+A release comes _after_ a deployment and includes all the activities needed to move part, or all, of production traffic to the new version. All the business risks and problems (such as downtime, lost revenue, and unhappy customers) are related to the _release_, not to the deployment. _Releasing_ software is riskier than _deploying_ software. You may choose to release a new version as soon as it is deployed into production, but that should be a conscious business decision.
+
+When done correctly, deploying a new version of a microservice to production should have no direct impact on your users' experience. You want your users to enjoy the new features and improvements, thereby getting greater value from your product.
+
+However, there is always a risk the new version will deliver a degraded user experience. This could be the result of technical issues, or perhaps because your users do not like the product features and improvements in that new version.
+
+Continuous Release provides you with the tools to manage that risk. This feature simultaneously protects your users' experience and ensures new microservices versions are truly delivering additional business value.
+
+== Policies
+
+A _policy_ is a set of rules that defines how a version of a service should be validated when it is added to an application. If the policy conditions are not met, the new version is rolled back, with minimal impact on your users' experience.
+
+In Site Reliability Engineering (SRE) terms, a policy validates that a new version of a service complies with the Service Level Objectives (SLOs) defined for that service.
+
+Continuous Release currently supports validation-only policies.
+
+=== Validation-Only Policies
+
+A validation-only policy defines the set validation rules to objectively test whether a version of a service meets its objectives.
+
+Validation-only policies are employed for services that use a Kubernetes rolling update strategy. This means validation-only policies can be used with services that:
+
+* Are deployed using a Kubernetes StatefulSet, or
+* Are deployed using a Kubernetes Deployment, or
+* Do not expose a REST-based API or a GraphQL-based API, for example, message-based APIs.
+
+Validation-only policies rely on calling a user-defined webhook to roll back a failed version. If the newly released version passes all the tests defined in the policy, it remains as the live version. 
+
+If validation of the newly deployed version of the service fails for any reason, Continuous Release calls a webhook to roll back the service to the previous version. Typically, this webhook triggers an action on a CD pipeline.

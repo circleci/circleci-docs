@@ -1,0 +1,23 @@
+= INSTALLATION GUIDE: A guide for using continuous release
+docs@circleci.com
+:media: screen
+:title-page-background-image: image:pdf-header.png[]
+:imagesdir: ../../assets/img/docs/
+:doctype: book
+:toc:
+:toc-title: Contents
+:icons: font
+:page-liquid:
+:source-highlighter: rouge
+:pagenums:
+:idprefix:
+:idseparator: -
+:sectanchors:
+:autofit-option:
+
+:leveloffset: +1
+include::tutorial.adoc[]
+include::releasing-applications.adoc[]
+include::concepts.adoc[]
+
+:leveloffset: -1
