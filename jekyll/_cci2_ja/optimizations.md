@@ -12,75 +12,75 @@ version:
   - Server v2.x
 ---
 
-このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 Each optimization method will be described briefly, and present possible use cases for speeding up your jobs.
+このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 各方法について簡単に説明し、ジョブを高速化するためのユースケースを紹介します。
 
 * TOC
 {:toc}
 
-**Warning:** Persisting data is project specific, and examples is this document are not meant to be copied and pasted into your project. The examples are meant to be guides to help you find areas of opportunity to optimize your own projects.
+**警告: **データの永続化はプロジェクト固有であり、ここで紹介するサンプルはお客様のプロジェクトにコピー & ペーストしていただくためのものではありません。 これらのサンプルにより、お客様のプロジェクトを最適化する余地を見出していただければと思います。
 {: class="alert alert-warning"}
 
-## Docker image choice
+## Docker イメージの選択
 {: #docker-image-choice }
 
 プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを構成し、イメージを指定するときには、以下の点を考慮してください。
 
-* CircleCI provides a range of [convenience images]({{site.baseurl}}/2.0/circleci-images/#section=configuration), typically based on official Docker images, but with a range of useful language tools pre-installed.
-* You can [create your own images]({{site.baseurl}}/2.0/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide both a [Docker image build wizard](https://github.com/circleci-public/dockerfile-wizard), and [guidance for building images manually]({{site.baseurl}}/2.0/custom-images/#creating-a-custom-image-manually).
+* CircleCI には多数の [CircleCI イメージ]({{site.baseurl}}/2.0/circleci-images/#section=configuration) が用意されています。 多くは公式の Docker イメージに基づいていますが、便利な言語ツールもプリインストールされています。
+* プロジェクトに特化した[独自のイメージを作成](https://circleci.com/ja/docs/2.0/custom-images/#section=configuration)することも可能です。 そのサポートガイドとして、[Docker イメージ ビルドウィザード](https://github.com/circleci-public/dockerfile-wizard)や[イメージを手動でビルドするためのガイド]({{site.baseurl}}/2.0/custom-images/#creating-a-custom-image-manually)を提供しています。
 
 ## Docker レイヤーキャッシュ
 {: #docker-layer-caching }
 
-Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
+Docker レイヤーキャッシュは、ビルド内の Docker イメージの_ビルド時間_を短縮するのに役立つ機能です。 日常的な CI/CD プロセスの中で頻繁に Docker イメージをビルドする場合、DLC は大変便利です。
 
-DLC is similar to _caching dependencies_, in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
+DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し、それを後続のビルドで使用できるようにするという点で、前述の_依存関係のキャッシュ_に似ています。
 
-* Read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page.
+* 詳細については、[Docker レイヤーキャッシュ]({{site.baseurl}}/2.0/docker-layer-caching)を参照してください。
 
 ## 依存関係のキャッシュ
 {: #caching-dependencies }
 
 ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 一般的によく用いられるのが、パッケージ マネージャーや依存関係管理ツールです。 たとえば、プロジェクトで Yarn、Bundler、Pip などを利用すると、ジョブの実行中にダウンロードする依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用できるようにキャッシュされます。
 
-* Read more on the [Caching Dependencies]({{site.baseurl}}/2.0/caching) page.
+* 詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/2.0/caching)を参照してください。
 
 ## ワークフロー
 {: #workflows }
 
-ワークフローは、一連のジョブとその実行順序を定義する機能です。 If at any point in your configuration you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the [Workflow]({{site.baseurl}}/2.0/workflows/) page.
+ワークフローは、一連のジョブとその実行順序を定義する機能です。 設定の任意の時点で 2 つのジョブを互いに独立して実行してかまわないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、CI/CD を強化するための機能もいくつか用意されています。 詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
 
-* You can view examples of workflows in the [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
+* ワークフローの例については、[CircleCI デモワークフローリポジトリ](https://github.com/CircleCI-Public/circleci-demo-workflows/)を参照してください。
 
 ## ワークスペース
 {: #workspaces }
 
 ワークスペースを使用すると、_ダウンストリーム ジョブ_に必要な、_その実行に固有_のデータを渡せます。 つまり、ワークスペースを使用して、ビルドの最初の段階で実行するジョブのデータをフェッチし、そのデータをビルドの後段で実行するジョブで_利用する_ことができます。
 
-任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを構成します。 Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
+任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを構成します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
 
-* Read more on the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
+* 詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
 ## 並列処理
 {: #parallelism }
 
-If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
+プロジェクトに大規模なテストスイートがある場合は、[`並列処理`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[テスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
-* Read more about splitting tests on the [Parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) page.
+* テストの分割の詳細については、[並列処理]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
 
-## リソース クラス
+## リソースクラス
 {: #resource-class }
 
-**Note:**  If you are on a container-based plan, you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. セルフホスティング環境では、システム管理者がリソース クラスのオプションを設定できます。
+**注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 セルフホスティング環境では、リソースクラスのオプション設定はシステム管理者が行います。
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
-* See the `resource_class` section of the [Configuration Reference]({{site.baseURL}}/2.0/configuration-reference/#resourceclass) for more information.
+* 詳細については、[設定ファイルのリファレンス]({{site.baseURL}}/2.0/configuration-reference/#resourceclass)の`resource_class` を参照してください。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
 - [データの永続化]({{site.baseurl}}/2.0/persist-data)
-- For a complete list of customizations, view the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) page.
+- カスタマイズの全リストについては、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/)をご覧ください。
 - For information about how Yarn can potentially speed up builds and reduce errors, view the [Using Yarn]({{site.baseurl}}/2.0/yarn) page.
 - Coinbase published an article titled [Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161).
