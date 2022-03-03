@@ -56,20 +56,20 @@ nomad_client_instance_type = "m4.2xlarge"
 # 3. オプションのクラウド設定
 #####################################
 
-# Set this to `1` or higher to enable CircleCI 1.0 builders
+# 下記を `1` またはそれ以上に設定し、CircleCI 1.0 Builder を有効にします。
 desired_builders_count = "0"
 
-# Provide proxy address if your network configuration requires it
+# ネットワーク設定で必要な場合は、プロキシアドレスを指定します。
 http_proxy = ""
 https_proxy = ""
 no_proxy = ""
 
-# Use this var if you have multiple installation within one AWS region
+# 同一の AWS リージョン内に複数のサーバーをインストールしている場合、下記変数を使用します。
 prefix = "..."
 
-Above is an example of the `terraform.tfvars` file you will be editing. 下記の表では、デフォルト設定と、クラスタを更にカスタマイズする際に使用できるオプションの変数を紹介します。 A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory.
+上記の terraform.tfvarsファイル例を編集します。 下記の表では、デフォルト設定と、クラスタを更にカスタマイズする際に使用できるオプションの変数を紹介します。 変数とデフォルトの全リストは、enterprise-setup ディレクトリのルートにある variables.tf ファイルにあります。
 
-TIP: If you require your installation to work on AWS GovCloud, you can enable this by setting `enable_govcloud` to `true`.
+TIP: AWS GovCloud にインストールをする必要がある場合は、enable_govcloud を true に設定してください。
 
 変数のオプション
 
@@ -131,15 +131,15 @@ TIP: If you require your installation to work on AWS GovCloud, you can enable th
 
 == インスタンスのプロビジョニング
 
-. Save your changes to the `tfvars` file and run the following:
+. 変更内容を tfvars ファイルに保存し、以下を実行します。
 +
 terraform plan
 . インスタンスのプロビジョニングを行うために、以下を実行します。
 +
 terraform apply
 +
-You will be asked to confirm if you wish to go ahead by typing `yes`.
-. Terraform の出力の最後に IP アドレスが提供されます。 この IP にアクセスして、インストール作業を進めてください。
+その際、先に進むかどうかを yes と入力して確認するように求められます。
+. Terraform の出力の最後に IP アドレスが提供されます。 この IP アドレスにアクセスして、インストール作業を進めてください。
 +
 // explain what to do if this step fails
 
@@ -173,45 +173,45 @@ image::preflight.png[Preflight Checks]
 
 管理コンソールの設定ページ (your-circleci-hostname.com:8800) が表示されます。
 
-WARNING: You can make changes to the settings on this page at any time but changes here will require *downtime* while the service is restarted. 一部の設定については、「運用ガイド」で詳しく説明しています。
+WARNING: このページの設定はいつでも変更することができますが、変更する場合サービスの再起動時に *ダウンタイム* が発生します。 一部の設定については、「運用ガイド」で詳しく説明しています。
 
-. **Hostname** – The Hostname field should be pre-populated from earlier in the install process, but if you skipped that step, enter your domain or public IP of the Services machine instance. [Test Hostname Resolution] をクリックすると、正確に入力されているか確認できます。
-. **Services** – The Services section is only used when externalizing services. 外部化は Platinum サービス契約のお客様のみご利用いただけます。 Contact support@circleci.com if you would like to find out more.
+. **Hostname:** ホスト名フィールドは、インストールプロセスで事前に入力されているはずですが、そのステップをスキップした場合は、Servies マシンのインスタンスのドメインまたはパブリック IP を入力してください。 [Test Hostname Resolution] をクリックすると、正確に入力されているか確認できます。
+. **Services ** : Services のセクションは、サービスを外部化する場合のみ使用します。 外部化は Platinum サービス契約のお客様のみご利用いただけます。 詳細については、support@circleci.com までお問い合わせください。
 +
 .外部サービス
 image::hostname-services.png[Hostname and Services Settings]
-. **Execution Engines** – only select 1.0 Builders if you require them for a legacy project – most users will leave this unchecked.
-. **Builders Configuration** – select Cluster in the 2.0 section. シングルボックス オプションは、専用のインスタンスではなく Services マシン上でジョブを実行するため、システムの試用や小規模なチームにのみ適しています。
+. **Execution Engines** : レガシープロジェクトで 1.0 Builder が必要な場合のみ選択してください。ほとんどの場合、このチェックは外しておきます。
+. **Builders Configuration**: 2.0 のセクションでクラスタを選択します。 シングルボックス オプションは、専用のインスタンスではなく Services マシン上でジョブを実行するため、システムの試用や小規模なチームにのみ適しています。
 +
 .1.0 / 2.0 Builder
 image::builders.png[Execution Engine]
-. **GitHub Integration** – register CircleCI as a new OAuth application in GitHub.com or GitHub Enterprise by following the instructions provided on the page.
+. **GitHub Integration**: CircleCI を GitHub.com または GitHub Enterprise の新しい OAuth アプリケーションとして、ページに記載されている手順で登録します。
 +
-NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us." message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
+NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」というメッセージが表示された場合は、ホームページ URL とコールバック URL で https: の代わりに http: を使用してみてください。
 .. GitHub から Client ID と Secret をコピーして、該当するフィールドにペーストし、[Test Authentication] をクリックします。
 .. GitHub.com をご利用の場合は、ステップ 6 に進みます。 Github Enterprise をご利用の場合は、いくつかの追加手順を行い、API トークンを提供していただき、お客様の組織を確認する必要があります。 トークンを提供するには、GitHub Enterprise のダッシュボードから以下を実行してください。
-... Navigate to Personal Settings (top right) > Developer Settings > Personal Access Tokens.
+... Personal Settings (右上) に行き、  Developer Settings  Personal Access Tokens に移動します。
 ... [generate new token] をクリックします。 誤って削除されないように、トークンには適切な名前を付けてください。 チェックボックスには何もチェックを入れないでください。ここでは、デフォルトのパブリックな読み取りレベルのアクセスが必要なだけで、追加のアクセス権限は必要ありません。 このトークンは一人のユーザーが所有するのではなく、組織全体で共有することをお勧めします。
 ... 新しいトークンをコピーして、GitHub Enterprise Default API Token フィールドに貼り付けます。
 +
 .Github Enterprise Token を入力します。
 image::ghe_token.png[Github Integration]
-. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
+. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 LDAP 設定の詳細については、 https://circleci.com/docs/2.0/authentication/#ldap[LDAP 認証ガイド]をご覧ください。
 . **Privacy**: インストールには SSL 証明書と SSL キーの使用をお勧めします。 インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
 +
 .プライバシーの設定
 image::privacy.png[]
-. **Storage** – We recommend using S3 for storage and all required fields for Storage are pre-populated. The IAM user, as referred to in the <<aws-prereq#planning,planning>> section of this document, is used here.
+. **Storage** : ストレージには S3 の使用を推奨しており、入力が必要なフィールドはあらかじめ入力されています。 ここでは、本ドキュメントの <<aws-prereq#planning,planning>> で述べた IAM ユーザーを使用します。
 +
 .ストレージのオプション
 image::storage.png[]
-. **Enhanced AWS Integration** – Complete this section if you are using 1.0 builders.
+. **Enhanced AWS Integration**: 1.0 Builder を使用している場合は、ここに入力します。
 +
 // explain enhanced AWS integration 1.0 or just say ignore
-. **Email** Complete the Email section if you wish to configure your own email server for sending build update emails. デフォルトのメールサーバーを使用する場合は、入力しません。
+. **Email**:  Email セクションは、ビルドアップデートメールの送信に独自のメールサーバーを設定する場合に入力します。 デフォルトのメールサーバーを使用する場合は、入力しません。
 +
 NOTE: サードパーティツールの Replicated の問題により、現在 Test SMTP Authentication ボタンは動作していません。
-. **VM Provider** – Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, read our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
+. **VM Provider** : https://circleci.com/docs/2.0/building-docker-images/[リモート Docker] または `machine`  Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, read our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
 +
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. 事前割り当てが設定されている場合、cron ジョブが 1日に1回、事前割り当てされたインスタンスを回し、不良/デッド状態になることを防ぎます。
 +
