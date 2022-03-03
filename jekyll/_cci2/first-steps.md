@@ -19,7 +19,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
     <div class="signup-and-try-experiment-block">
       <div class="signup-buttons">
         <div class="signup-button-wrapper gh-signup-button-wrapper">
-          <a class="track-signup-link gh-signup-button" href="https://circleci.com/auth/vcs-connect?connection=Github&return-to=">
+          <a class="track-signup-link gh-signup-button" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
             <div class="button-text">Sign up with GitHub</div>
           </a>
@@ -27,12 +27,12 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
             <div class="gh-dropdown-caret"></div>
           </button>
           <ul class="gh-signup-dropdown">
-            <li><a class="gh-link track-signup-link" href="https://circleci.com/login/">All Repos</a></li>
-            <li><a class="gh-link track-signup-link" href="https://circleci.com/login-public/">Public Repos Only</a></li>
+            <li><a class="gh-link track-signup-link" target="_blank" href="https://circleci.com/login/">All Repos</a></li>
+            <li><a class="gh-link track-signup-link" target="_blank" href="https://circleci.com/login-public/">Public Repos Only</a></li>
           </ul>
         </div>
         <div class="signup-button-wrapper">
-          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket&return-to=" class="track-signup-link bb-signup-button">
+          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
             <div class="button-text">Sign up with BitBucket</div>
           </a>
