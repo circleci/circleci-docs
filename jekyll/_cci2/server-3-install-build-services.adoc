@@ -673,6 +673,16 @@ After running the following command, you should have a file named `circleci-serv
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ```
 
+. *Enable Workload Identity for Service Account*
++
+This step is required only if you are using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload identities] for GKE.
++
+```shell
+gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
+```
+
 . *Configure Server*
 +
 Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
