@@ -4,7 +4,7 @@ version:
 - Server v3.x
 - サーバー管理者
 ---
-= CircleCI Server v3.x What's New
+= CircleCI Server v3.x の What's New
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -38,7 +38,7 @@ toc::[]
 * 変更された Let's Encrypt 証明書での GitHub Enterprise の更新はサポートされていません。
 * Let's Encrypt の新しいルート証明書 `isrgrootx1` は信頼できません。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
-* 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* 現在、同一の CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
 * CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
@@ -172,7 +172,7 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 * KOTS 管理者の設定では、セットアップ中 Nomad mTLS を誤って`有効`に設定します。 Nomad クライアントがデプロイされるまで、 mTLS が`無効`になっている必要があります。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能します。 しかし、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 しかしこれは、エラーや予期せぬ動作を引き起こす可能性があるためお控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
@@ -199,15 +199,15 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 * Server 3.xは、ビルドの成果物、テスト結果、その他の状態をオブジェクトストレージに保管します。 S3 互換のあらゆるストレージと Google Cloud Storage をサポートしています。 設定方法について詳しくは、https://circleci.com/docs/2.0/server-3-install/[インストールガイド]を参照してください。
 * セットアップワークフローを利用した動的な設定 (Dynamic Config)が、サーバーで利用できるようになりました。 詳細については、https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事]およびhttps://circleci.com/docs/2.0/dynamic-config/[ダイナミックコンフィグ]を参照してください。
 * ランナーがサーバーで利用可能となりました。 インストール手順を含む詳細については、https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[ランナー]を参照してください。 ランナーを使うと、サーバー上での macOS Executor の使用や、プライベートデータセンターにサーバーを設置しているお客様による VM サービス機能のご利用が可能になります。
-* フロントエンドのロードバランサーが廃止され、代わりに Ingress リソースとTraefik Ingress コントローラが使用されるようになりました。 この互換性を損なう変更に伴い、DNSの再設定が必要になります。 詳細と手順については、https://circleci.com/docs/ja/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server の新機能に関するページ]を参照してください。
-* 以下のサービスが外部化できるようになりました。 設定方法について詳しくは、https://circleci.com/docs/ja/2.0/server-3-install/[CircleCI Server v3.x のインストールに関するページ]を参照してください。
+* フロントエンドのロードバランサーが廃止され、代わりに Ingress リソースとTraefik Ingress コントローラが使用されるようになりました。 この互換性を損なう変更に伴い、DNSの再設定が必要になります。 詳細と手順については、https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server のWhat's New]を参照してください。
+* 以下のサービスが外部化できるようになりました。 設定方法について詳しくは、https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x のインストールガイド]を参照してください。
 ** Postgres
 ** MongoDB
 ** Vault
-* バックアップ＆リストア機能が利用できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/[バックアップと復元に関するページ]を参照してください。
-* クラスタのヘルスチェックと使用状況を監視するためのPrometheusがサーバにデフォルトで導入されました。 Prometheus can be managed and configured from the KOTS Admin UI. 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
+* バックアップ＆リストア機能が利用できるようになりました。 詳細については、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[バックアップと復元]を参照してください。
+* クラスタのヘルスチェックと使用状況を監視するためのPrometheusがサーバにデフォルトで導入されました。 Prometheus の管理と設定は KOTS 管理者 UI で行えます。 詳細については、https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視]を参照してください。
 * 2XLリソースクラスをサポートするようになりました。 より大きなリソースクラスに対応するためには、Nomadクラスターを大きくする必要があります。
-* The lifecycle of build artifacts and test results can now be configured from the KOTS Admin Console under **Storage Object Expiry**, including the option to disable the expiration and retain artifacts and test results indefinitely.
+* ビルドアーティファクトとテスト結果のライフサイクルを KOTS 管理者コンソールの *Storage Object Expiry* で設定できるようになりました。また、期限切れを無効にしてアーティファクトとテスト結果を無期限に保持するオプションも追加されました。
 
 === 変更点
 
@@ -227,7 +227,7 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 
 === 既知の問題
 
-* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with identical names. これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
 * CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 
 == リリース 3.0.2
