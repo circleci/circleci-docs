@@ -381,12 +381,12 @@ Once you have configured the environmental variables and contexts, rerun the rea
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
 ==== Enabling Nomad Client for External Image Repository
-To enable a Nomad client to download images from an external or private repo, you can implement one of the two solutions suggested below:
+To enable the Nomad client so it can download images from an external or private repo, you can implement one of the two solutions suggested below:
 
-* Change the image registry from public to private/internal network so the Nomad client can download the images without any authentication.
-* Embed the private image repository credentials in a Nomad client image at `/root/.docker/config.json`, assuming the credentials are static.
+* Keep the image registry as `Public` within `Internal network` so the Nomad client can download the images without any authentication.
+* Or, Embed the private image repository credentials in the Nomad client image at `/root/.docker/config.json`, assuming the credentials are static.
 
-NOTE: If you are using AWS, GCP, or any other cloud image registry, most of them are using temporary image repository credentials (for example, AWS ECR,GCP Container Registry), valid to use for a limited time. As soon as those credentials expire, your Nomad client will be unable to download the image from a private image repository if the image does not exist in a Nomad client. You must refresh the credentials again on those Nomad clients to pull the new images.
+NOTE: If you are using Amazon Web Services (AWS), Google Cloud  Platform (GCP), or any other cloud image registry, most of these registries use temporary image repository credentials, valid to use for a limited time. As soon as those credentials expire, your Nomad client will be unable to download the image from the private image repository if the image does not already exist in a Nomad client. You must refresh the credentials again on those Nomad clients to pull the images.
 
 
 === VM service
