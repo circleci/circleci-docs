@@ -16,8 +16,11 @@ docs@circleci.com
 :autofit-option:
 
 :leveloffset: +1
-include::tutorial.adoc[]
-include::releasing-applications.adoc[]
+include::intro.adoc[]
+include::overview.adoc[]
 include::concepts.adoc[]
+include::releasing-applications.adoc[]
+include::getting-started/index.adoc[]
+include::tutorials/minikube.adoc[]
 
 :leveloffset: -1
