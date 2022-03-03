@@ -23,7 +23,7 @@ version:
 ## Docker イメージの選択
 {: #docker-image-choice }
 
-プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを構成し、イメージを指定するときには、以下の点を考慮してください。
+プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを設定し、イメージを指定するときには、以下の点を考慮してください。
 
 * CircleCI には多数の [CircleCI イメージ]({{site.baseurl}}/2.0/circleci-images/#section=configuration) が用意されています。 多くは公式の Docker イメージに基づいていますが、便利な言語ツールもプリインストールされています。
 * プロジェクトに特化した[独自のイメージを作成](https://circleci.com/ja/docs/2.0/custom-images/#section=configuration)することも可能です。 そのサポートガイドとして、[Docker イメージ ビルドウィザード](https://github.com/circleci-public/dockerfile-wizard)や[イメージを手動でビルドするためのガイド]({{site.baseurl}}/2.0/custom-images/#creating-a-custom-image-manually)を提供しています。
@@ -40,14 +40,14 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 ## 依存関係のキャッシュ
 {: #caching-dependencies }
 
-ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 一般的によく用いられるのが、パッケージ マネージャーや依存関係管理ツールです。 たとえば、プロジェクトで Yarn、Bundler、Pip などを利用すると、ジョブの実行中にダウンロードする依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用できるようにキャッシュされます。
+ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを活用できる場合があります。 一般的によく用いられるのが、パッケージ マネージャーや依存関係管理ツールです。 たとえば、プロジェクトで Yarn、Bundler、Pip などを利用すると、ジョブの実行中にダウンロードする依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用できるようにキャッシュされます。
 
 * 詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/2.0/caching)を参照してください。
 
 ## ワークフロー
 {: #workflows }
 
-ワークフローは、一連のジョブとその実行順序を定義する機能です。 設定の任意の時点で 2 つのジョブを互いに独立して実行してかまわないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、CI/CD を強化するための機能もいくつか用意されています。 詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
+ワークフローは、一連のジョブとその実行順序を定義する機能です。 設定の任意の時点で 2 つのジョブを互いに独立して実行しても問題のないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、CI/CD を強化するための機能もいくつか用意されています。 詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
 
 * ワークフローの例については、[CircleCI デモワークフローリポジトリ](https://github.com/CircleCI-Public/circleci-demo-workflows/)を参照してください。
 
@@ -56,7 +56,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 ワークスペースを使用すると、_ダウンストリーム ジョブ_に必要な、_その実行に固有_のデータを渡せます。 つまり、ワークスペースを使用して、ビルドの最初の段階で実行するジョブのデータをフェッチし、そのデータをビルドの後段で実行するジョブで_利用する_ことができます。
 
-任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを構成します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
+任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを設定します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
 
 * 詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
@@ -74,7 +74,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 `resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
-* 詳細については、[設定ファイルのリファレンス]({{site.baseURL}}/2.0/configuration-reference/#resourceclass)の`resource_class` を参照してください。
+* 詳細については、[設定ファイルのリファレンス]({{site.baseURL}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
 
 ## 関連項目
 {: #see-also }
@@ -82,5 +82,5 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 - [データの永続化]({{site.baseurl}}/2.0/persist-data)
 - カスタマイズの全リストについては、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/)をご覧ください。
-- For information about how Yarn can potentially speed up builds and reduce errors, view the [Using Yarn]({{site.baseurl}}/2.0/yarn) page.
-- Coinbase published an article titled [Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161).
+- Yarn がどのようにビルドを高速化し、エラーを減らせるかについては、[Yarn の使用]({{site.baseurl}}/2.0/yarn)を参照してください。
+- Coinbase から、「[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161) (Coinbase での継続的インテグレーション: CircleCI を最適化して処理速度を向上させ、ビルド時間を 75% 短縮)」というタイトルの記事が公開されています。
