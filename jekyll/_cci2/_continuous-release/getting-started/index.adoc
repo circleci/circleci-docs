@@ -1,0 +1,18 @@
+= Getting Started
+
+== Prerequisites
+
+
+== Step 1: Create an Application
+
+
+== Step 2: Create a Service
+
+
+== Step 3: Choose a Release Policy
+
+
+== Step 4: Expose Your Service
+
+
+== Step 6: Release Your Service
