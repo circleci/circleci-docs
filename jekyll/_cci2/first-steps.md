@@ -19,7 +19,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
     <div class="signup-and-try-experiment-block">
       <div class="signup-buttons">
         <div class="signup-button-wrapper gh-signup-button-wrapper">
-          <a class="track-signup-link gh-signup-button" href="https://circleci.com/auth/vcs-connect?connection=Github&return-to=">
+          <a class="track-signup-link gh-signup-button" href="https://circleci.com/auth/vcs-connect?connection=Github&return-to=https://circleci.com/docs/2.0/first-steps/">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
             <div class="button-text">Sign up with GitHub</div>
           </a>
@@ -32,7 +32,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
           </ul>
         </div>
         <div class="signup-button-wrapper">
-          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket&return-to=" class="track-signup-link bb-signup-button">
+          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket&return-to=https://circleci.com/docs/2.0/first-steps/" class="track-signup-link bb-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
             <div class="button-text">Sign up with BitBucket</div>
           </a>
