@@ -20,7 +20,7 @@ include::intro.adoc[]
 include::overview.adoc[]
 include::concepts.adoc[]
 include::releasing-applications.adoc[]
-include::getting-started/index.adoc[]
+include::getting-started/index.adoc[leveloffset=+1]
 include::tutorials/minikube.adoc[]
 
 :leveloffset: -1
