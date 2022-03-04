@@ -16,7 +16,6 @@ devhub_base_url: "https://circleci.com/developer"
 blog_base_url: "https://circleci.com/blog"
 support_base_url: "https://support.circleci.com"
 noindex: false
-readtime: true
 
 exclude:
   - .jekyll-cache
@@ -30,7 +29,7 @@ plugins:
   - jekyll-last-modified-at
   - jekyll-timeago
 
-# Approximate distance, with customizable threshold, 
+# Approximate distance, with customizable threshold,
 # ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
 jekyll_timeago:
   depth: 1
@@ -45,20 +44,12 @@ algolia:
     - html
     - md
     - adoc
-  nodes_to_index: 'p,h1'
+  nodes_to_index: "p,h1"
   settings:
-    highlightPreTag: '<strong>'
-    highlightPostTag: '</strong>'
-    attributesToSnippet: [
-      'content:80',
-      'headings',
-      'title'
-    ]
-    attributesToHighlight: [
-      'content:80',
-      'headings',
-      'title'
-    ]
+    highlightPreTag: "<strong>"
+    highlightPostTag: "</strong>"
+    attributesToSnippet: ["content:80", "headings", "title"]
+    attributesToHighlight: ["content:80", "headings", "title"]
     minProximity: 3
 
 toc:
@@ -74,11 +65,11 @@ liquid:
 
 asciidoc:
   attributes:
-      serverversion: 3.3.1
-      terraformversion: 0.15.4
-      kubectlversion: 1.19
-      helmversion: 3.4.0
-      kotsversion: 1.47.3
+    serverversion: 3.3.1
+    terraformversion: 0.15.4
+    kubectlversion: 1.19
+    helmversion: 3.4.0
+    kotsversion: 1.47.3
 
 asciidoctor:
   base_dir: _cci2/
@@ -131,57 +122,39 @@ twitter_username: circleci
 github_username: circleci
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "cci2"
     values:
       lang: "en"
 
-  -
-    scope:
+  - scope:
       path: ""
       type: "cci2_ja"
     values:
       lang: "ja"
 
-  -
-    scope:
+  - scope:
       path: ""
       type: "style"
     values:
       lang: "en"
 
-  -
-    scope:
+  - scope:
       path: ""
     values:
       hide: false
       search: true
-
-  # Enable TOC by default
-  - scope:
-      path: ""
-    values:
-      toc: true
-
-  # Disable helpful resources section by default
-  - scope:
-      path: ""
-    values:
-      suggested: false
-
-  # Disable sitemap by default (only want in prod)
-  - scope:
-      path: ""
-    values:
-      sitemap: false
+      toc: true # Enable TOC by default
+      suggested: false # Disable helpful resources section by default
+      sitemap: false # Disable sitemap by default (only want in prod)
+      readtime: true # Enable Read Time by default
 
 t:
-    translation_in_progress:
-        ja: "このページはただいま翻訳中です"
+  translation_in_progress:
+    ja: "このページはただいま翻訳中です"
 
-segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
+segment: "mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ"
 
 analytics:
   events:
@@ -190,5 +163,4 @@ rollbar_env: development
 
 # Optimizely SDK key for dev env
 optimizely: "GfYszBpMkefBSwiiEkH3b3"
-
 # server_version: "2.18.4"
