@@ -136,9 +136,9 @@ IP アドレスの範囲機能のデータ使用量に関するご質問につ�
 ## 関連項目
 {: #see-also }
 {:.no_toc}
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching)
-- [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)
-- [ワークスペース]({{site.baseurl}}/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/2.0/artifacts)
-- [IP アドレスの範囲機能]({{site.baseurl}}/2.0/ip-ranges/)
-- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
+- [IP アドレスの範囲機能]({{site.baseurl}}/ja/2.0/ip-ranges/)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
