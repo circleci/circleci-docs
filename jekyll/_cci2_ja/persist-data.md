@@ -23,14 +23,14 @@ version:
 
 キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
-Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches.
+キャッシュはプロジェクト内でグローバルなため、 1 つのブランチに保存されたキャッシュは、他のブランチで実行されるジョブで使用されます。 キャッシュは、ブランチ間での共有に適したデータにのみ使用してください。
 
-* For more information on caching dependencies, including race conditions, managing caches, expiration, and using cache keys, see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) page.
+* 競合状態、キャッシュの管理、有効期限、キャッシュキーの使用など依存関係のキャッシュに関する詳細は、[依存関係のキャッシュ]({{site.baseurl}}/2.0/caching/)をご覧ください。
 
-### Caching optimization
+### キャッシュの最適化
 {: #cache-optimization }
 
-There are several common ways that your configuration can be optimized to ensure you are getting the most out of your network and storage usage. たとえば、データ使用量を減らしたい場合、特定の使用方法が保持に値する価値を提供しているか検討してください。 In the cases of caches, this can be quite easy to compare. Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+ネットワークとストレージの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。 たとえば、データ使用量を減らしたい場合、各データの使用量を保持する価値があるかどうかを検討してください。 キャッシュの場合、比較検討が非常に簡単にできます。 Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
