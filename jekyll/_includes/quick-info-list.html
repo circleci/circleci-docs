@@ -17,7 +17,7 @@
     {% else %}
     <a href="{{ ghLink }}" target="_blank" class="no-external-icon">{{ page.last_modified_at | timeago }}</a>
     {% endif %}
-    {% if page.readtime != false %}
+    {% if page.readtime %}
     <span class="ert">
       {% assign words_total = page.content | strip_html | number_of_words %}
       {% assign words_without_code = page.content | replace: '
