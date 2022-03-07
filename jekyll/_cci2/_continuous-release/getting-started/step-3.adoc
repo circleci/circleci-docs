@@ -1,35 +1,27 @@
 == Step 3: Choose a Release Policy
 
-=== What is a Vamp Release Policy?
-
 A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
-
-The policy is evaluated every 30 seconds by the Vamp Release Agent running in the application namespace on your Kubernetes cluster. The Release Agent uses data from Kubernetes and your chosen Ingress controller, plus any custom metrics that are part of the release policy.
-
-Each release policy includes at least one step. At the start of each step, a percentage of users are exposed to the new version, and the Release Agent monitors the performance of that new version. If the policy conditions are not met, the new version is rolled back with minimal impact on your users' experience.
-
-NOTE: If the new version of a service does not meet all the conditions described by the release policy, Vamp immediately switches all users back to the current, live version. A rollback typically takes 30-60 seconds.
-
-==== Blue/Green Release
-
-A blue/green release uses two identical environments called _blue_ and _green_. The current live version is _blue_; the new version is _green_.
-
-A blue/green release policy includes only one step that targets all your users. At the start of the step, all users are switched from the live _blue_ version to the new _green_ version.
-
-The Release Agent monitors the performance of the new version. If everything is released successfully, the policy completes with the _green_ version becoming the live version.
-
-If the new version does not meet all the conditions specified in the release policy, the Release Agent immediate rolls back by switching all users to the _blue_ version.
-
-==== Canary Release
-
-A canary release uses a subset of users to identify any issues before a new version is rolled out to all users.
-
-A canary release policy typically includes three or more steps that  target progressively larger subsets of users. A step can target a percentage of your users, or it can target a specific user segment.
-
-The Release Agent monitors the performance of the new version. If everything is released successfully, the policy completes with all users receiving the new version.
-
-If the new version does not meet all the conditions specified in the release policy, the Release Agent immediately rolls back by switching all users to the current, live version.
 
 === Choosing a Default Policy
 
-You are prompted to choose
+You are prompted to choose a default policy for each of your services.
+
+TIP: A good default release policy balances the need to quickly validate emergency releases with the need to validate new features over a longer period, using a wider range of metrics.
+
+When you choose a policy from the list, the summary shows you which metrics that policy uses to validate a release, and the policy's duration.
+
+// add screenshot to show summary
+
+// link to page on creating your own policy
+
+// what policies are available?
+
+You can either select an existing policy, or create your own policy.
+
+=== Configuring Advanced Settings
+
+Choose _Yes_ under _Advanced_ to set specific policies for different types of release.
+
+When you have finished choosing your release policy, click **Next** to attach the policy to your service. 
+
+You will see a pop up message to confirm that the policy has been attached to your service.

@@ -1,2 +1,43 @@
 == Step 4: Expose Your Service
 
+To expose your service outside the Kubernetes cluster, you need to tell Vamp the domain name and path you want to use.
+
+First, choose whether you want to expose your application.
+
+// screenshot
+
+* Choose _Yes_ if your application includes a mix of services, some or all of which need to be exposed.
+* Choose _No_ only if _none_ of the services should be exposed. The _No_ option is available only if you selected _NO INGRESS_ in Step 1.
+
+If you chose _Yes_, you need to configure the following settings:
+
+=== Domain
+
+This is the fully qualified domain name that you want to use for your application. For example, _particles.mydomain.com_.
+
+TIP: Applications can be exposed as either a primary domain, such as _mydomain.com_, or a subdomain, such as _app.mydomain.com_.
+
+WARNING: Exposing multiple applications on the same primary domain or subdomain is not supported. For example, mydomain.com/app1 and mydomain.com/app2 is not supported.
+
+=== TLS
+
+Choose whether to use TLS to secure all external network traffic to your application.
+
+If you choose _Terminate at the Edge_, the URL of your application will start with _https://_ instead of _http://_.
+
+==== Secret Name
+
+If you enable TLS, you need to provide the name of a Kubernetes Secret for the TLS certificates.
+
+If you are using https://cert-manager.io/docs/[cert-manager] or a similar project to dynamically provision TLS certificates, use the name of the application as the certificate name, for example, _my-application-tls_.
+If you already have a TLS certificate for your domain, enter the name of the Kubernetes Secret that contains the certificate chain.
+
+==== Routes
+
+To expose a service, you need to give it a URL path.
+
+The default is to expose each of your services using the path name /<service-name>. If you want to expose your service on a different path,  you can edit the path.
+
+If you do not want to expose a service, you can delete the route.
+
+WARNING: If choose not to expose a service, you will be unable to use release policies that include traffic-based SLOs with that service.
