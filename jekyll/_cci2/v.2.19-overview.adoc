@@ -48,7 +48,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 ## What's New in v2.19.14
 
 * Security patches for the exim image.
-* Replaced deprecated github API endoint for teams.
+Replaced deprecated GitHub API endpoint for teams.
 
 ## What's New in v2.19.13
 
