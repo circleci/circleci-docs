@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-Docker レイヤー キャッシュ (DLC) を利用すると、CircleCI で Docker イメージのビルド時間を短縮できます。 DLC is available on the [Free and above](https://circleci.com/pricing/) usage plans (credits are charged per run job) and on installations of [CircleCI server](https://circleci.com/enterprise/). このドキュメントでは、以下のセクションに沿って、DLC について概説します。
+Docker レイヤー キャッシュ (DLC) を利用すると、CircleCI で Docker イメージのビルド時間を短縮できます。 DLC は、[Free および上記の](https://circleci.com/pricing/)利用プラン (ジョブの実行ごとにクレジットが請求されます) または [CircleCI Server](https://circleci.com/enterprise/) の環境でご利用いただけます。 このドキュメントでは、以下のセクションに沿って、DLC について概説します。
 
 * 目次
 {:toc}
@@ -39,7 +39,7 @@ Docker レイヤー キャッシュは、[`machine` Executor]({{ site.baseurl }}
 
 **注:** DLC は、ビルド コンテナとして使用する Docker イメージには影響を**及ぼしません**。 そのため、ジョブの_実行_に使用するコンテナは、[`docker` Executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) を使用している場合、`image` キーで指定したものが [Jobs (ジョブ)] ページの [Spin up Environment (環境のスピンアップ)] ステップに表示されます。
 
-DLC is only useful when creating your own Docker image with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
+DLC は、docker build、docker compose などの Docker コマンドを使用して独自の Docker イメージを作成する場合にのみ有効です。初期環境をスピンアップする際にすべてのビルドにかかる実測時間は短縮されません。
 
 {:.tab.switcher.Cloud}
 ```yaml
@@ -280,9 +280,9 @@ RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linu
   && jq --version
 ```
 
-On the next commit, DLC will ensure that we still get cached image layers for the first few steps in our Dockerfile—pulling from `elixir:1.11.4` as our base image, the `# make apt non-interactive` step, the step starting with `RUN apt-get update`, the `# set timezone to UTC` step, and the `# use unicode` step.
+次のコミットで DLC は、基本イメージとして `elixir:1.11.4` からプルし、Dockerfile の最初のいくつかのステップ、つまり `# make apt non-interactive` のステップ、`RUN apt-get update` で始まるステップ、`# set timezone to UTC` のステップ、および `# use unicode` のステップのキャッシュされたイメージレイヤーが引き続き確実に取得されるようにします。
 
-しかし、`# jq をインストール`のステップは新しいステップです。Dockerfile が変更されるとイメージレイヤーキャッシュの残りの部分は無効化されるため、このステップ以降のすべてのステップは最初から実行される必要があります。 それでも DLC が有効であれば、Dockerfile の先頭部分にある未変更のレイヤーとステップのおかげで、全体的なビルド時間は短縮されます。
+しかし、`#install jq<` のステップは新しいステップです。Dockerfile が変更されるとイメージレイヤーキャッシュの残りの部分は無効化されるため、このステップ以降のすべてのステップは最初から実行される必要があります。 それでも DLC が有効であれば、Dockerfile の先頭部分にある未変更のレイヤーとステップにより、全体的なビルド時間は短縮されます。
 
 サンプルの Dockerfile の最初のステップを変更する場合は、別の Elixir 基本イメージからプルする方がよいでしょう。この場合、Dockerfile の他の部分がすべて同じままであっても、このイメージのキャッシュ全体が無効化されます。
 
@@ -321,4 +321,4 @@ Dockerfile の一部を変更し、それによってイメージの一部が変
 
 ## さらに詳しく
 {: #learn-more }
-Take the [DLC course](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) with CircleCI Academy to learn more.
+Circle CI Academy の [DLC コース](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
