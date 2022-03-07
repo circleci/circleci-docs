@@ -138,7 +138,7 @@ DLC が有効な場合、リモート ボリュームには `/var/lib/docker` �
 {: #machine-executor }
 {:.no_toc}
 
-Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine) を使用して Docker イメージをビルドする際のジョブ実行時間を短縮することもできます。 `machine` キーの下に `docker_layer_caching: true` を追加することで (前述の[例](#configyml)を参照)、`machine` Executor で DLC を使用できます。
+Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine) を使用して Docker イメージをビルドする際のジョブ実行時間を短縮することもできます。 `machine` キーの下に `docker_layer_caching: true` を追加することで (後述の[例](#configyml)を参照)、`machine` Executor で DLC を使用できます。
 
 ```yml
 machine:
@@ -148,7 +148,7 @@ machine:
 ## 例
 {: #examples }
 
-以下の Dockerfile を例に、Docker レイヤーキャッシュがどのように機能するかを説明します。 この Dockerfile サンプルは、[Elixir コンビニエンスイメージ](https://hub.docker.com/r/circleci/elixir/~/dockerfile)から引用して改変したものです。
+以下の Dockerfile を例に、Docker レイヤーキャッシュがどのように機能するかを説明します。 この Dockerfile サンプルは、[Elixir 用 Circle CI イメージ](https://hub.docker.com/r/circleci/elixir/~/dockerfile)から引用して改変したものです。
 
 ### Dockerfile
 {: #dockerfile }
