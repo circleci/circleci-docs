@@ -30,24 +30,24 @@ version:
 ### キャッシュの最適化
 {: #cache-optimization }
 
-ネットワークとストレージの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。 たとえば、データ使用量を減らしたい場合、各データの使用量を保持する価値があるかどうかを検討してください。 キャッシュの場合、比較検討が非常に簡単にできます。 Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+ネットワークとストレージの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。 たとえば、データ使用量を減らしたい場合、各データの使用量を保持する価値があるかどうかを検討してください。 キャッシュの場合、比較検討が非常に簡単にできます。 キャッシュによる開発 / 計算時間の節約は、ダウンロードとアップロードのコストを上回っていますか？
 
-Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
+キャッシュ戦略の最適化には、不必要なワークフローの再実行の回避、ジョブの統合、有意義なワークフロー実行順序の作成、キャッシュの削除が含まれます。
 
-* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) page.
+* キャッシュの詳細や一部の依存関係のキャッシュ、キャッシュのトレードオフ、複数のキャッシュの使用などその他のキャッシュ戦略に関する情報は、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy/) をご覧ください。
 
 ## ワークスペース
 {: #workspaces }
 
-ワークスペースは、ワークフローが進むにつれてデータをダウンストリームジョブに転送するために使用されます。 ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 Downstream jobs can then use this workspace for their own needs, or add more layers on top.
+ワークスペースは、ワークフローが進むにつれてデータをダウンストリームジョブに転送するために使用されます。 ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 ダウンストリームジョブで必要に応じてこのワークスペースを使用したり、レイヤーをさらに追加することができます。
 
-### Workspace optimization
+### ワークスペースの最適化
 {: #workspace-optimization }
 
-If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `.circleci/config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
+ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを使用しているすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを判断してください。
 
-* For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
-* For more information on workflows, see the [Workflows]({{site.baseurl}}/2.0/workflows/) page.
+* ワークスペースの最適化、設定、有効期限に関する詳細は、[ワークスペースの使用]({{site.baseurl}}/2.0/workspaces/)をご覧ください。
+* ワークフローの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
 * [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
 
 ## アーティファクト
@@ -57,7 +57,7 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 
 プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーがアーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
 
-### Artifact optimization
+### アーティファクトの最適化
 {: #artifact-optimization }
 
 最適化オプションは、実行しようとしている内容に応じてプロジェクトごとに異なります。 ネットワークやストレージの使用量を削減するために、下記をお試しください。
