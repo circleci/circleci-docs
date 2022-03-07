@@ -338,7 +338,7 @@ If using GitHub personal access tokens in your CircleCI pipelines, you’ll also
 ### Common Issues
 {:.no_toc}
 
-See our support article [here](/hc/en-us/articles/360043002793) for troubleshooting common SSO/SAML-related issues for user GitHub OAuth credentials (used for most interactions with CircleCI, including creating pipelines on new commits).
+See our support article [here](https://support.circleci.com/hc/en-us/articles/360043002793) for troubleshooting common SSO/SAML-related issues for user GitHub OAuth credentials (used for most interactions with CircleCI, including creating pipelines on new commits).
 
 For troubleshooting issues with GitHub SSH keys and personal access tokens, see the above sections.
 
