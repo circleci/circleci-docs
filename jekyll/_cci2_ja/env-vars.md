@@ -33,7 +33,7 @@ suggested:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、構成において各レベルで制御することができます。
+CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、設定において各レベルで制御することができます。
 
 プライベート プロジェクト全体で使用する**プライベート キー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで[Project Settings (プロジェクト設定)] の [[Environment Variables (環境変数)] ページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
 
@@ -97,9 +97,9 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 
 `.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 シークレットやキーは、CircleCI アプリの[プロジェクト](#setting-an-environment-variable-in-a-project)や[コンテキスト](#setting-an-environment-variable-in-a-context)の設定に保存します。 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#encryption)」セクションを参照してください。
 
-構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
+設定内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
-### 環境変数の構成例
+### 環境変数の設定例
 {: #example-configuration-of-environment-variables }
 {:.no_toc}
 
@@ -116,7 +116,7 @@ jobs: # 実行時の基本的な作業単位を定義
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキストまたはプロジェクトの画面で設定した環境変数を参照
-    steps: # # `build` ジョブを構成するステップを定義
+    steps: # # `build` ジョブを設定するステップを定義
       - checkout # 作業用ディレクトリにソースコードをチェックアウト
       # 環境変数をセットアップするステップを実行
       # MY_ENV_VAR を $BASH_ENV にリダイレクト
@@ -165,7 +165,7 @@ workflows: # build という名前のジョブを実行するだけのワーク�
 {: #using-parameters-and-bash-environment }
 {:.no_toc}
 
-原則として、CircleCI はビルド構成への環境変数の挿入をサポートしていません。 使用する値はリテラルとして扱われます。 そのため、`working_directory` を定義するときや、`PATH` を変更するとき、複数の `run` ステップで変数を共有するときに、問題が発生する可能性があります。
+原則として、CircleCI はビルド設定への環境変数の挿入をサポートしていません。 使用する値はリテラルとして扱われます。 そのため、`working_directory` を定義するときや、`PATH` を変更するとき、複数の `run` ステップで変数を共有するときに、問題が発生する可能性があります。
 
 ただし、[プライベート イメージ]({{site.baseurl}}/2.0/private-images/)をサポートするため、Docker イメージ セクションは例外となっています。
 
@@ -175,7 +175,7 @@ workflows: # build という名前のジョブを実行するだけのワーク�
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ```
 
-`version: 2.1` の設定ファイルを使用すると、`config.yml` 全体の構成の一部を再利用できます。 以下のように `parameters` 宣言を使用することで、再利用可能な `commands` `jobs` や `executors` に挿入を行う (値を渡す) ことができます。
+`version: 2.1` の設定ファイルを使用すると、`config.yml` 全体の設定の一部を再利用できます。 以下のように `parameters` 宣言を使用することで、再利用可能な `commands` `jobs` や `executors` に挿入を行う (値を渡す) ことができます。
 
 ```yaml
 version: 2.1
