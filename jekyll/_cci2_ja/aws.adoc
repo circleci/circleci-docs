@@ -81,7 +81,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |変数 |説明 |デフォルト値
 
 |services_instance_type
-|一元管理された Services ボックスのインスタンスタイプです。  m4 インスタンスを推奨します。
+|一元管理されたサービスボックスのインスタンスタイプです。  m4 インスタンスを推奨します。
 |m4.2xlarge
 
 |builder_instance_type
@@ -117,7 +117,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |false
 
 |services_user_data_enabled
-|Services ボックスへの自動インストールを無効にするには、0 に設定します。
+|サービスボックスへの自動インストールを無効にするには、0 に設定します。
 |1
 
 |force_destroy_s3_bucket
@@ -125,7 +125,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |false
 
 |services_disable_api_termination
-|API の終了から Services インスタンスを保護します。 インストールのシャットダウン時に サービスボックスを自動的に終了させたい場合は、false に設定してください。
+|API の終了から サービスインスタンスを保護します。 インストールのシャットダウン時に サービスボックスを自動的に終了させたい場合は、false に設定してください。
 |true
 |===
 
@@ -149,7 +149,7 @@ terraform apply
 +
 .SSL セキュリティ
 image::browser-warning.png[SSL Security]
-. ホストネームを入力します。 ここではドメイン名または Services マシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
+. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
 このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
 +
 .ホスト名
@@ -181,7 +181,7 @@ WARNING: このページの設定はいつでも変更することができま�
 .外部サービス
 image::hostname-services.png[Hostname and Services Settings]
 . **Execution Engines** : レガシープロジェクトで 1.0 Builder が必要な場合のみ選択してください。ほとんどの場合、このチェックは外しておきます。
-. **Builders Configuration**: 2.0 のセクションでクラスタを選択します。 シングルボックス オプションは、専用のインスタンスではなく Services マシン上でジョブを実行するため、システムの試用や小規模なチームにのみ適しています。
+. **Builders Configuration**: 2.0 のセクションでクラスタを選択します。 シングルボックス オプションは、専用のインスタンスではなく サービスマシン上でジョブを実行するため、システムの試用や小規模なチームにのみ適しています。
 +
 .1.0 / 2.0 Builder
 image::builders.png[Execution Engine]
