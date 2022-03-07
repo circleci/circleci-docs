@@ -72,7 +72,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 **注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 セルフホスティング環境では、リソースクラスのオプション設定はシステム管理者が行います。
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
 * 詳細については、[設定ファイルのリファレンス]({{site.baseURL}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
 
@@ -80,7 +80,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/2.0/persist-data)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
 - カスタマイズの全リストについては、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/)をご覧ください。
 - Yarn がどのようにビルドを高速化し、エラーを減らせるかについては、[Yarn の使用]({{site.baseurl}}/2.0/yarn)を参照してください。
 - Coinbase から、「[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161) (Coinbase での継続的インテグレーション: CircleCI を最適化して処理速度を向上させ、ビルド時間を 75% 短縮)」というタイトルの記事が公開されています。
