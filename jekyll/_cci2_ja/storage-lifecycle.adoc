@@ -1,21 +1,21 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server AWS S3 Storage Lifecycle Guide
+= CircleCI Server AWS S3 ストレージライフサイクルに関するガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This guide is intended to help system administrators of CircleCI server installations on AWS better understand how S3 storage is used.
+:page-description: AWS にインストールした CircleCI Server のシステム管理者の皆さんに S3 ストレージの使い方を理解していただくためのガイドです。
 :source-highlighter: rouge
 :rouge-linenums-mode: inline
 :icons: font
 :toc: macro
 :toc-title:
 
-This guide is intended to help system administrators of CircleCI server installations on AWS better understand how S3 storage is used. This can help to cut compute resource costs and avoid issues for service users when removing resources. 
+これは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのガイドです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にサービスユーザーに問題が起きるのを回避することができます。 
 
-In CircleCI server, S3 Lifecycle policies are not configured automatically. The figures provided in this guide are examples to help you create a lifecycle policy for your installation. For more information on the steps required to add policy rules, see the https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide].
+CircleCI Server では、S3 ライフサイクルポリシーは自動的に設定されません。 このガイドで提供されている数値は、お客様のサーバーでのライフサイクルポリシーを作成するための例です。 ポリシーのルールの追加に必要なステップに関する詳細は、https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide]を参照してください。
 
 == Example Lifecycle Policy Configuration for S3 Buckets
 
