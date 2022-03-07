@@ -1,17 +1,104 @@
 = Getting Started
 
-This guide ...
+This guide walks you through the steps to complete your first release with Vamp, using the Quick Start Guide. You can use the Quick Start Guide to release up to six microservices.
 
 == Prerequisites
 
+To use the Quick Start Guide, you will need:
+
+* A Kubernetes cluster
+* https://kubernetes.io/docs/tasks/tools/[kubectl] - a command-line tool for running commands on your Kubernetes cluster
+
+Log in to Vamp, then navigate to the https://vamp.cloud/6/quickstart[Quick Start Guide with this link].
 
 == Step 1: Create an Application
+
+In Vamp, an application is a collection of microservices that share a single Kubernetes namespace.
+
+=== Name
+
+Enter a unique name for your application. This name is displayed wherever your application is used, including external notifications like Slack.
+
+=== Description
+
+Enter a description (optional).
+
+=== Cluster
+
+Select your cluster name from the list, or add a new one by clicking **Create New Cluster** at the bottom of the list. If your applications are distributed across multiple clusters, you can add additional clusters.
+
+=== Namespace
+
+Enter the namespace where your microservices will run.
+
+=== Ingress Controller
+
+Select your Ingress Controller. Vamp supports NGINX and Contour. If your application does not expose any services, choose _NO INGRESS_.
+
+TIP: We recommend you use Contour, as it allows a richer set of release policies.
+
+Once you have finished adding the details for your application, click **Next** in the bottom left-hand corner. You will see a pop up message to confirm that your application has been created.
 
 
 == Step 2: Create a Service
 
+In Vamp, a service is a microservice. You can create up to six services with the Quick Start Guide.
+
+=== Name
+
+Enter a unique name for your service. This name is displayed wherever your application is used, including external notifications like Slack.
+
+=== Description
+
+Enter a description (optional).
+
+=== Type
+
+Choose a service type. Vamp supports two types of service: _API-based services_ and _message-based services_.
+
+// Looks as though message-based services aren't currently supported. This option is greyed out.
+
+API-based services exposes a REST-based or GraphQL-based API and can be released progressively using traffic shaping.
+
+Message-based services either do not expose an API, or expose an API using a message system like NATS. This type of service cannot be progressively released.
+
+=== API-based Services Type
+
+An API-based service can be either headed or headless. A managed Kubernetes Service will be created for a headed service using the specified container port. Only headed services can be released progressively.
+
+=== Container Port
+
+Enter your container port number, for example _5000_.
+
+NOTE: Vamp currently supports only one network port per service.
+Your container can expose multiple network ports, but Vamp will only create a Kubernetes Service for the chosen port.
+
+There are several ways to find the container port for your service:
+
+* In Dockerfile, look for an `EXPOSE instruction`.
+* From a running Docker container, use the `docker port <container-id | container-name>` command.
+* For a Kubernetes deployment, look for the `containerPort` value in your YAML file.
+
+=== Workload Type
+
+Vamp supports two types of Kubernetes workload: Deployments and StatefulSets.
+
+// Looks as though StatefulSets aren't supported. This option is greyed out.
+
+=== App Label
+
+Vamp discovers new versions of your service using Kubernetes labels. Each Kubernetes workload released by Vamp needs to include an _app_ label set. This label is used to locate all the instances of your service for an application.
+
+The value for the app label must be unique and is normally the name of the service.
+
+=== Version Label
+
+Vamp uses the _version_ label to distinguish between versions of your service. This label is also used to decide which release policy to apply when releasing a new version of your service. You can either use the default _version_, or enter your own label here.
+
+When you have finished entering the details for your service, either click **Next** or click **Save & Add another service** if you want to create additional services.
 
 == Step 3: Choose a Release Policy
+
 
 
 == Step 4: Expose Your Service
