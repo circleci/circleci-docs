@@ -55,7 +55,7 @@ version:
 
 アーティファクトは、パイプラインの出力を長期保存するために使用されます。 たとえば Java プロジェクトを使用している場合、ビルドにより多くの場合、コードの` .jar `ファイルが生成されます。 このコードはテストによって検証されます。 ビルドやテストプロセスがすべて成功した場合は、プロセスの出力（` .jar `）をアーティファクトとして保存できます。 この `jar `ファイルは、ファイルを作成したワークフローの終了後も長期間アーティファクトシステムからダウンロードできます。
 
-プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーがアーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
+プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーが、アーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
 
 ### アーティファクトの最適化
 {: #artifact-optimization }
@@ -70,22 +70,22 @@ version:
 - 1つのブランチにのみアーティファクトをアップロードする。
 - 大きなアーティファクトは、独自のバケットに無料でアップロードする。
 
-For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) page.
+アーティファクトの最適化に関する詳細やアーティファクトを使用してジョブの完了後にデータを永続化する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/2.0/artifacts/)を参照してください。
 
-## Managing network and storage usage
+## ネットワークとストレージの使用状況の管理
 {: #managing-network-and-storage-usage }
 
-Optimization goes beyond speeding up your builds and improving efficiency. Optimization can also help reduce costs. 以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
+最適化により実現できるのは、ビルドの高速化や効率化の向上だけではありません。 最適化により、コストの削減も可能です。 以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
 
-To view your network and storage usage, visit the [CircleCI web app](https://app.circleci.com/) and follow these steps:
+ネットワークとストレージの使用量を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)を開いて以下のステップを実行します。
 
 1. アプリのサイドバーから **Plan** を選択します。
 2. **Plan Usage** を選択します。
 3. **Network** または **Storage** のどちらか表示したいタブを選択します。
 
-この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  The usage is also broken down by storage object type: cache, artifact, workspace, testresult.
+この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  使用量は、ストレージオブジェクトタイプ  (キャッシュ、アーティファクト、ワークスペース、テスト結果) 別にも分けられます。
 
-### Overview of all network and storage transfer
+### ストレージとネットワーク通信の概要
 {: #overview-of-network-and-storage-transfer }
 
 ジョブ内でデータを永続化するための操作には、ストレージの使用が発生します。関連するアクションは次のとおりです。
@@ -95,43 +95,43 @@ To view your network and storage usage, visit the [CircleCI web app](https://app
 * アーティファクトのアップロード
 * テスト結果のアップロード
 
-To determine which jobs utilize the above actions, you can search for the following commands in your project's `.circleci/config.yml` file:
+上記のアクションを行うジョブを決定するには、プロジェクトの`.circleci/config.yml` ファイルで次のコマンドを検索します。
 
 * `save_cache`
 * `persist_to_workspace`
 * `store_artifacts`
 * `store_test_results`
 
-The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners.**
+課金の対象となるネットワークトラフィックは、**キャッシュやワークスペースのセルフホストランナーへのリストア**により発生したトラフィックのみです。
 {: class="alert alert-info" }
 
-Details about your network and storage transfer usage can be viewed on your **Plan > Plan Usage** screen. この画面では以下のことが確認できます。
+ストレージとネットワーク通信の使用状況の詳細は、**Plan > Plan Usage** 画面で確認できます。 この画面では以下のことが確認できます。
 
-- 課金対象となるネットワーク転送量 (画面の一番上の表に表示)
+- 課金対象となるネットワーク通信量 (画面の一番上の表に表示)
 - 個々のプロジェクトのネットワークとストレージの使用量 (Project タブに表示)
 - ストレージのデータとアクティビティ (Network タブに表示)
 - ストレージ総量のデータ (Storage タブに表示)
 
-Details about individual step network and storage transfer usage can be found in the step output on the Jobs page as seen below.
+個々のステップのストレージおよびネットワーク通信の使用方法の詳細については、下記のジョブページのステップ出力を参照してください。
 
 ![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
 
-### ネットワーク転送の過剰な使用を減らす
+### ネットワーク通信の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress }
 
-セルフホストランナーへのネットワーク転送の使用量は、特に`US-East-1` でランナーを AWS 上でホストすることにより減らせます。
+セルフホストランナーへのネットワーク通信の使用量は、 `US-East-1` でランナーを AWS 上でホストすることにより減らせます。
 
-### How to calculate an approximation of network and storage costs
+### ストレージ料金とネットワーク料金の概算方法
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
 
-**NOTE:** Billing for network egress and storage will start to take effect on **April 1 2022** (subject to change). CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しています。 The information in this section is applicable after the changes take effect on April 1, 2022. 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+**注: **外向きの通信とストレージに対する課金は、**2022 年 4 月 1 日**より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しています。 このセクションの内容は、2022 年 4 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
-Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Exexutor のみを使用している場合は、ネットワーク料金は適用されません。
+プランに含まれているストレージとネットワークの使用 GB を超える量のランナーネットワーク通信を使用した場合、課金されます。 ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Exexutor のみを使用している場合は、ネットワーク料金は適用されません。
 
 お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
 
-For quesions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
 
 ## 関連項目
 {: #see-also }
