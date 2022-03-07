@@ -32,7 +32,7 @@ git checkout main && git pull
 . Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の terraform.tfvars ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、terraform.tfvars ファイルの 2. で nomad_client_instance_type の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,System Requirements>> をお読みください。
 +
 NOTE: builder_instance_type は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
-. ファイルの 3.では、以下が可能です。
+. 下記の 3. では、以下が可能です。
 .. プロジェクトで必要な場合は、カウントを 1 に変更して 1.0 Builder の使用を選択する。
 .. プロキシの詳細を入力し、AWS リージョン内に複数のインストールがある場合は、プレフィックスを入力する。Services および Nomad クライアントのインスタンスは、AWS コンソールではこのプレフィックスで表示されます。
 
@@ -81,7 +81,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |変数 |説明 |デフォルト値
 
 |services_instance_type
-|一元管理されたサービスボックスのインスタンスタイプです。  m4 インスタンスを推奨します。
+|一元管理された Services ボックスのインスタンスタイプです。  m4 インスタンスを推奨します。
 |m4.2xlarge
 
 |builder_instance_type
@@ -149,7 +149,7 @@ terraform apply
 +
 .SSL セキュリティ
 image::browser-warning.png[SSL Security]
-. ホストネームを入力します。 ここではドメイン名または Servives マシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
+. ホストネームを入力します。 ここではドメイン名または Services マシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
 このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
 +
 .ホスト名
@@ -216,13 +216,13 @@ NOTE: サードパーティツールの Replicated の問題により、現在 T
 インスタンスを事前に割り当てて常に起動しておくことで、リモート Docker や `machine` Executor ジョブが開始するまでの時間を短縮することが可能です。 事前割り当てが設定されている場合、cron ジョブが 1日に1回、事前割り当てされたインスタンスを回し、不良/デッド状態になることを防ぎます。
 +
 CAUTION: Docker Layer Caching (DLC) を使用する場合、VM の事前割り当てを `0` に設定し、 `machine` とリモート Docker の両方でコンテナが強制的にオンデマンドでスピンアップされるように設定する必要があります。 これらのフィールドが  `0` に設定されて**いない**のに、事前割り当てインスタンスがすべて使用されている場合、DLC は事前割り当てが `0` に設定されているかのように正常に動作することにご注意ください 。
-. **AWS Cloudwatch メトリクスや Datadog メトリクス**は、お客様のインストールに合わせて設定することが可能です。 該当するセクションでどちらかのメトリクスを設定します。 詳しくは、 https://circleci.com/docs/2.0/monitoring/[監視に関するガイド]をお読みください。
+. **AWS Cloudwatch Metrics や Datadog Metrics** は、お客様のインストールに合わせて設定することが可能です。 該当するセクションでどちらかのメトリクスを設定します。 詳しくは、 https://circleci.com/docs/2.0/monitoring/[監視に関するガイド]をお読みください。
 +
 .メトリクス
 image::metrics_setup.png[]
-. **カスタムメトリクス** で、Cloudwatch メトリクスや Datadog メトリクスの代わりに、Telegraf から受け取るメトリクスをカスタマイズすることも可能です。 詳しくは、 https://circleci.com/docs/2.0/monitoring/#custom-metrics[カスタムメトリクス]ガイドをお読みください。
-. **分散トレーシング** はサポートバンドルで使用されており、CircleCI サポートチームから変更要請がない限り、設定はデフォルトのままにしておく必要があります。
-. **アーティファクト** はジョブ終了後もデータを保持し、ビルドプロセスの出力を長期的に保存するために使用される場合があります。 CircleCI Server v2.x では、承認されたタイプのアーティファクトのみがデフォルトで利用可能です。 これは、ユーザーが悪意のあるコンテンツをアップロードおよび実行してしまう事態を防ぐための措置です。 **アーティファクト**の設定で、この保護を上書きすることができます。 詳細については、 https://circleci.com/docs/2.0/build-artifacts/[ビルドアーティファクト]を参照してください。
+. **Custom Metrics** で、Cloudwatch メトリクスや Datadog メトリクスの代わりに、Telegraf から受け取るメトリクスをカスタマイズすることも可能です。 詳しくは、 https://circleci.com/docs/2.0/monitoring/#custom-metrics[カスタムメトリクス]ガイドをお読みください。
+. **Distributed Tracing** はサポートバンドルで使用されており、CircleCI サポートチームから変更要請がない限り、設定はデフォルトのままにしておく必要があります。
+. **Artifacts** はジョブ終了後もデータを保持し、ビルドプロセスの出力を長期的に保存するために使用される場合があります。 CircleCI Server v2.x では、承認されたタイプのアーティファクトのみがデフォルトで利用可能です。 これは、ユーザーが悪意のあるコンテンツをアップロードおよび実行してしまう事態を防ぐための措置です。 **Artifacts**の設定で、この保護を上書きすることができます。 詳細については、 https://circleci.com/docs/2.0/build-artifacts/[ビルドアーティファクト]を参照してください。
 . 使用許諾契約に同意し、設定を保存した後、ポップアップから [Restart Now (今すぐ再起動)]を選択します。 その後、CircleCI を起動し、管理コンソールのダッシュボードを表示するようにリダイレクトされます。 必要な Docker コンテナすべてをダウンロードするまで、数分かかります。
 
 NOTE: 管理コンソールで、 `Failure reported from operator: no such image` と報告された場合、[Start] を再クリックすると動作が続行します。
