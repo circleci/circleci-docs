@@ -81,24 +81,24 @@ To utilize the caching feature on a runner, the data that needs to be cached sho
 When restoring the cache, the data will be restored in the same common folder.
 
 ```yaml
-job1:  
-    machine: true  
-    resource_class: your-namespace/your-resource  
-    steps:  
-      - run: echo "sent to job 2" >> /tmp/cache.txt  
-      - save_cache:  
-          paths:  
-            - /tmp/cache.txt  
-          key: runner-cache-v1              
+job1:
+  machine: true
+  resource_class: your-namespace/your-resource
+  steps:
+      - run: echo "sent to job 2" >> /tmp/cache.txt
+      - save_cache:
+          key: runner-cache-v1
+          paths:
+            - /tmp/cache.txt
   
-  job2:  
-    machine: true  
-    resource_class: your-namespace/your-resource  
-    steps:  
-      - restore_cache:  
-          keys:  
-            - runner-cache-v1  
-      - run: cat /tmp/cache.txt
+job2:
+  machine: true
+  resource_class: your-namespace/your-resource
+  steps:
+    - restore_cache:
+        keys:
+          - runner-cache-v1
+    - run: cat /tmp/cache.txt
 ```
 
 </details>
@@ -143,18 +143,18 @@ Extending on the method above, [here is an example Orb that will calculate the s
 To illustrate how to use [the \`network\` command of this Orb](https://circleci.com/developer/orbs/orb/nanophate/docker-profiling#commands-network), you can configure your config like this, to see how much bytes are transmitted and received for a \`curl\` request, for example:
 
 ```yaml
-version: '2.1'  
+version: '2.1'
   
-orbs:  
-  profiling: nanophate/docker-profiling@0.3.0  
+orbs:
+  profiling: nanophate/docker-profiling@0.3.0
   
-jobs:  
-  build:  
-    docker:  
-      - image: cimg/base:stable  
-  steps:  
-    - checkout  
-    - profiling/network  
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+  steps:
+    - checkout
+    - profiling/network
 ```
   
   
@@ -382,11 +382,12 @@ jobs:
 
 To work around this issue, customers can add an export step at the top of the `run` step where the environment variable is used
 
-```yaml
+```yml
 - run: |
-    export PATH=/usr/local/bin
-    # additional commands
+  export PATH=/usr/local/bin
+  # additional commands
 ```
+
 
 </details>
 
@@ -588,12 +589,12 @@ You can get in touch with our support team to help debug the issue by submitting
 The following can be added to assist in troubleshooting networking and other issues with Remote Docker. This should be added as the next steps immediately after [setup\_remote\_docker](https://circleci.com/docs/2.0/configuration-reference/#setup%5Fremote%5Fdocker)
 
 
-```yaml
-- run:  
-    background: true  
-    command: ssh remote-docker "sudo tail -f /var/log/dmesg"  
-- run:  
-    background: true  
+```yml
+- run:
+    background: true
+    command: ssh remote-docker "sudo tail -f /var/log/dmesg"
+- run:
+    background: true
     command: ssh remote-docker "sudo tail -f /var/log/syslog"
 ```
 
@@ -807,4 +808,3 @@ This will provide and output along the following lines:
 The format of the timing data is in HH:MM:SS which provides granular information that will help in tracking down steps that are taking longer than expected.
 
 </details>
-
