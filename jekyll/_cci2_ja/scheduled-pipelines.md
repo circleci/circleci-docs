@@ -186,14 +186,14 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 **質問:**スケジュールしたパイプラインが実行されないのはなぜですか？
 
 **回答: 考えられる理由が 2つあり得ます。</p>
-* スケジュール実行化されたパイプラインに設定されている実行ユーザーは今も組織の一員ですか？
+* スケジュール実行化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？
 * スケジュールに設定されたブランチが削除されていませんか？
 * ご自身の GitHub 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効していると GiHub へのリクエストが失敗します。
 
-**Q:** Why did my scheduled pipeline run later than expected?
+**質問:**スケジュールしたパイプラインの実行が思っていたより遅いのはなぜですか？
 
-**A:** There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to [the Cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).
+**回答:** [Cron 式](https://en.wikipedia.org/wiki/Cron#CRON_expression)と比較して、パイプラインのスケージュール実行にはスケジュール化の方法に微妙な違いがあります。
 
-For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window. Note that it does not mean that it will run at 08:00 UTC exactly.
+たとえば、08:00 (協定世界時) のスケジュールを 1 時間に 1 回と指定すると、スケジュールされたパイプラインは 08:00 ～ 09:00 (協定世界時) の間に 1 回実行されます。 これは 08:00 (協定世界時) ちょうどに実行されるという意味ではないのでご注意ください。
 
-However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run. In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
+このスケジュール化されたパイプラインの実行は、その後は常に前の実行時間と同じ時間に実行されます。 つまり、最初にスケジュールされたパイプラインが 08:11 (協定世界時) に実行された場合、次の実行も 08:11 (協定世界時) に行われます。
