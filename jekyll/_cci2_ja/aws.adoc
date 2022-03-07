@@ -125,7 +125,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |false
 
 |services_disable_api_termination
-|API の終了から Services インスタンスを保護します。 インストールのシャットダウン時に Services ボックスを自動的に終了させたい場合は、false に設定してください。
+|API の終了から Services インスタンスを保護します。 インストールのシャットダウン時に サービスボックスを自動的に終了させたい場合は、false に設定してください。
 |true
 |===
 
