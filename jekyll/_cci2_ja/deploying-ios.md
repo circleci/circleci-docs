@@ -281,7 +281,7 @@ workflows:
 
 {: #deploying-to-visual-studio-app-center }
 
-[Visual Studio App Center](https://appcenter.ms/) ( 以前は HockeyApp) は、Microsoft の配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
+[Visual Studio App Center](https://appcenter.ms/) (以前は HockeyApp) は、Microsoft の配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
 
 
 
