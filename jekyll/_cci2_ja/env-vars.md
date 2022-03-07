@@ -95,7 +95,7 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 {: #notes-on-security }
 {:.no_toc}
 
-`.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#%E6%9A%97%E5%8F%B7%E5%8C%96)」セクションを参照してください。
+`.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#encryption)」セクションを参照してください。
 
 構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
@@ -522,7 +522,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }
 ```
 
-ビルド時には下記のような環境変数となります。
+このビルドは、以下の環境変数を受け取ります。
 
 ```shell
 export foo="bar"
