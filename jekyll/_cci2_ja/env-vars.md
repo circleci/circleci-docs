@@ -10,16 +10,16 @@ version:
   - Server v2.x
 suggested:
   - 
-    title: Keep environment variables private
+    title: 環境変数を非公開のままにする
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
   - 
-    title: Troubleshoot env vars settings
+    title: 環境変数の設定のトラブルシューティング
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
   - 
-    title: Insert files as environment variables
+    title: 環境変数としてファイルを挿入する
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
   - 
-    title: '「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）'
+    title: '"Context deadline exceeded after 1 hour" エラー: ビルドのタイムアウト'
     link: https://support.circleci.com/hc/ja/articles/4410707277083
     isExperiment: true
 ---
@@ -44,7 +44,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 ## シークレットのマスキング
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
+_シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
 
 シークレットのマスキングは、[Project Settings (プロジェクト設定)] または [Contexts (コンテキスト)] で設定されている環境変数に適用されます。 環境変数は、プロジェクトのシークレットやキーを保持します。 シークレットやキーはアプリケーションにとってきわめて重要なものです。 シークレットのマスキングは、`echo` や `print` が使用される際にジョブ出力における環境変数を不明瞭にすることで、CircleCI のセキュリティを強化します。
 
@@ -53,9 +53,9 @@ _Secrets masking is not currently available on self-hosted installations of Circ
 * 環境変数の値が 4 文字未満
 * 環境変数の値が `true`、`True`、`false`、`False` のいずれか
 
-**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using Shell Scripts]({{site.baseurl}}/2.0/using-shell-scripts)).
+**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 `-x` や `-o xtrace` オプションを使ってバッシュシェルを呼び出すとマスキングされていないシークレットが誤ってログに記録される場合があります ([シェルスクリプトの使用]({{site.baseurl}}/2.0/using-shell-scripts)を参照してください)。
 
-テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 コンテキストの値には、[SSH を使用したデバッグ]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+別の場所 (テスト結果やアーティファクトなど)に出力される場合、シークレットはマスキングされません。 コンテキストの値には、[SSH を使用したデバッグ]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 組織とリポジトリの名前変更
 {: #renaming-orgs-and-repositories }
@@ -95,7 +95,7 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 {: #notes-on-security }
 {:.no_toc}
 
-`.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#encryption)」セクションを参照してください。
+`.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 シークレットやキーは、CircleCI アプリの[プロジェクト](#setting-an-environment-variable-in-a-project)や[コンテキスト](#setting-an-environment-variable-in-a-context)の設定に保存します。 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#encryption)」セクションを参照してください。
 
 構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
@@ -332,7 +332,7 @@ jobs:
 
     ![コンテキスト]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
-2. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
+2. 環境変数を関連付けるコンテキストを選択するか、[Create Context (コンテキストを作成)] ボタンをクリックして新しいコンテキストを作成します。
 3. [Add Environment Variable (環境変数を追加)] をクリックし、名前と値を入力します。
 4. 以下のように `.circleci/config.yml` ファイルで、workflows キーの下にコンテキストを追加してから、新しい環境変数を使用します。
 
@@ -569,11 +569,11 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 ## 定義済み環境変数
 {: #built-in-environment-variables }
 
-Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
+定義済みの環境変数はジョブごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
 
 {% include snippets/ja/built-in-env-vars.md %}
 
-For a full list of available built-in data see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#built-in-environment-variables).
+値や定義済みのデータの全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/2.0/variables/#built-in-environment-variables)を参照して下さい。
 
 ## 関連項目
 {: #see-also }
