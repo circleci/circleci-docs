@@ -85,12 +85,12 @@ dependency_cache_paths:
 
 たとえば、 node-prune パッケージは、`node_modules` から不要なファイル (マークダウン、TypeScript ファイルなど) を削除します。
 
-### Check if jobs need pruning
+### ジョブのプルーニングが必要かどうかの確認
 {: #check-if-jobs-need-pruning}
 
 キャッシュの使用率が高く使用率を下げたい場合は以下をお試しください。
 
-* Search for the `save_cache` and `restore_cache` commands in your `.circleci/config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
+* `.circleci/config.yml` ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
 * キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
 * キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
@@ -122,7 +122,7 @@ dependency_cache_paths:
 
   アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
-## 部分的な依存関係キャッシュの使用方法
+## 依存関係の部分キャッシュ戦略
 {: #partial-dependency-caching-strategies }
 
 依存関係管理ツールの中には、部分的にリストアされた依存関係ツリー上へのインストールを正しく処理できないものがあります。
@@ -139,7 +139,7 @@ steps:
 ```
 {% endraw %}
 
-上の例では、2 番目または 3 番目のキャッシュ キーによって依存関係ツリーが部分的に復元された場合に、依存関係管理ツールによっては古い依存関係ツリーの上に誤ってインストールを行ってしまいます。
+上の例では、2 番目または 3 番目のキャッシュキーによって依存関係ツリーが部分的にリストアされた場合に、依存関係管理ツールによっては古い依存関係ツリーの上に誤ってインストールを行ってしまいます。
 
 カスケードフォールバックの代わりに、以下のように単一バージョンのプレフィックスが付いたキャッシュ キーを使用することで、動作の信頼性が高まります。
 
@@ -169,7 +169,7 @@ steps:
 
 Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
 
-この問題を解決するには、キャッシュから依存関係を復元する前に Bundler をクリーンアップするステップを追加します。
+この問題を解決するには、キャッシュから依存関係をリストアする前に Bundler をクリーンアップするステップを追加します。
 
 {% raw %}
 
