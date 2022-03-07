@@ -12,7 +12,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v3.x execution installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
+CircleCI サーバー v3.x ビルドサービスのインストールステップを開始する前に、 xref:server-3-install-prerequisites.adoc[ステップ 1: 前提条件] と xref:server-3-install.adoc[ステップ 2: コアサービスのインストール]が実行済みであることを確認してください。
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
@@ -21,7 +21,7 @@ image::server-install-flow-chart-phase3.png[Flow chart showing the installation 
 
 toc::[]
 
-== Phase 3: Execution environment installation
+== ステップ 3: 実行環境のインストール
 
 === 出力プロセッサ
 ==== 概要
@@ -147,11 +147,11 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 以下の情報も必要です。
 
-* The GPC Project you want to run Nomad clients in.
-* The GPC Zone you want to run Nomad clients in.
-* The GPC Region you want to run Nomad clients in.
-* The GPC Network you want to run Nomad clients in.
-* The GPC Subnetwork you want to run Nomad clients in.
+* Nomad クライアントを実行する GPC プロジェクト
+* Nomad クライアントを実行する GPC ゾーン
+* Nomad クライアントを実行する GPC リージョン
+* Nomad クライアントを実行する GPC ネットワーク
+* Nomad クライアントを実行する GPC サブネットワーク
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
@@ -236,17 +236,18 @@ Terraform は、 Nomad クライアントのスピンアップが完了すると
 endif::env-aws[]
 
 ==== Nomad Autoscaler
-Nomad provides a utility to automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you only need to provide permission for the utility to manage your autoscaling resource and where it is located. You can enable this resource via KOTS, which will deploy the Nomad Autoscaler service along with your Nomad servers. Below we will go through how to set up Nomad Autoscaler for your provider.
+Nomad は、クライアントがクラウドプロバイダの自動スケーリングリソースによって管理されている場合、 Nomad クライアントを自動的にスケールアップまたはスケールダウンするユーティリティを提供します。
+ Nomad Autoscaler を使うと、自動スケーリングリソースとその場所を管理するための権限をユーティリティに与えるだけで済みます。 このリソースは KOTS 経由で有効化することができ、Nomad サーバーと Nomad Autoscaler サービスをデプロイします。 Below we will go through how to set up Nomad Autoscaler for your provider.
 
-NOTE: The maximum and minimum Nomad client count will overwrite the corresponding values set when you created your autoscaling group or managed instance group. It is recommended that you keep these values and those used in your Terraform the same so that the two don't compete.
+NOTE: 自動スケーリンググループや管理対象のインスタンスグループを作成すると、最大および最小の Nomad クライアント数によって、対応する値セットが上書きされます。 これらの値と Terraform で使った値の競合を避けるため、同じ値を使用することを推奨します。
 
-If you do not require this service then feel free to jump to the *Save config* button to update your installation and redeploy server.
+このサービスが不要な場合は、*Save config*ボタンに行き、インストール環境を更新し、サーバーを再デプロイしてください。
 
 ifndef::env-gcp[]
 
 ===== AWS
-. Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+. IAM ユーザーまたは Nomad Autoscaler の役割とポリシーを作成します。 次のいずれかの方法を使用できます。
+  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
   * You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. Then you will need to generate an access and secret key for this user.
   * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the following IAM policy:
 [source, json]
@@ -274,7 +275,7 @@ ifndef::env-gcp[]
         }
     ]
 }
-. In your KOTS Admin Console, set Nomad Autoscaler to `enabled`
+. KOTS 管理者コンソールで Nomad Autoscaler を `enabled` に設定します。
 . Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Set Min Node Count* - This will overwrite what is currently set as the min for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Select cloud provider: `AWS EC2`
