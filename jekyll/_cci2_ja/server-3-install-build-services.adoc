@@ -447,7 +447,7 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 aws iam create-user --user-name circleci-vm-service
 ```
 +
-オプションで、vm-service では AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの役割]の使用もサポートしています。 役割を使用する場合は、以下のステップ 6 のポリシーを使って次のhttps://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
+vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの役割]の使用もサポートしています。 役割を使用する場合は、以下のステップ 6 のポリシーを使って以下のhttps://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
 完了したら、ステップ 9 に進みます。手順 9 では、KOTS で VM サービスを有効化します。
 +
 . *ポリシーを作成する*
