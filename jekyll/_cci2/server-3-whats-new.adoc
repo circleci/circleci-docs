@@ -30,6 +30,7 @@ toc::[]
 * Self-signed certificates or private certificate authorities are now supported when using GitHub Enterprise.
 * Fixed a bug that was affecting runner updates.
 * SSH reruns now work when server is installed behind a proxy.
+* Replaced deprecated GitHub API endoint for `teams`
 
 === Known issues
 
