@@ -38,27 +38,22 @@ executors:
       - image: buildpack-deps:jessie
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp
 
 jobs:
-   flow:
+  flow:
     executor: my-executor
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # ダウンストリーム ジョブ用に、指定したパス (workspace/echo-output) をワークスペースに維持します。
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
-#  絶対パス、または working_directory からの相対パスで指定する必要があります。
-      ```
-- persist_to_workspace:
-          # working_directory からの相対パスか絶対パスを指定します
-``` これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-          
-            root: workspace
-          # ルートからの相対パスを指定する必要があります。
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
           paths:
             - echo-output
 
@@ -66,7 +61,7 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          # 絶対パスまたは working_directory からの相対パスを指定する必要があります。
+          # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
 
       - run: |
@@ -95,28 +90,22 @@ executors:
       - image: buildpack-deps:jessie
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp
 
 jobs:
-   flow:
+  flow:
     executor: my-executor
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # ダウンストリーム ジョブ用に、指定したパス (workspace/echo-output) を Workspace に維持します。
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
-#  絶対パス、または working_directory からの相対パスで指定する必要があります。
-      ```
-- persist_to_workspace:
-          # working_directory からの相対パスか絶対パスを指定します
-``` これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-          これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-                    root: workspace
-          # ルートからの相対パスを指定する必要があります。
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
           paths:
             - echo-output
 
@@ -124,7 +113,7 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          # 絶対パスまたは working_directory からの相対パスを指定する必要があります。
+          # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
 
       - run: |
@@ -163,18 +152,12 @@ jobs:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # ダウンストリーム ジョブ用に、指定したパス (workspace/echo-output) を Workspace に維持します。
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
-#  絶対パス、または working_directory からの相対パスで指定する必要があります。
-      ```
-- persist_to_workspace:
-          # working_directory からの相対パスか絶対パスを指定します
-``` これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-          これは、コンテナ上のディレクトリで、
-           # ワークスペースのルート ディレクトリと見なされます。
-                    root: workspace
-          # ルートからの相対パスを指定する必要があります。
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
           paths:
             - echo-output
 
@@ -182,7 +165,7 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          # 絶対パスまたは working_directory からの相対パスを指定する必要があります。
+          # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
 
       - run: |
