@@ -171,16 +171,16 @@ jobs:
 version: 2
 jobs:
   build:
-    steps: # 'build' ジョブを構成する一連の実行可能コマンド
-      - checkout # ソース コードを作業ディレクトリにプルします
-      - restore_cache: # **Branch キー テンプレート ファイルまたは requirements.txt ファイルが前回の実行時から変更されていない場合、保存されている依存関係キャッシュを復元します**
+    steps: # a collection of executable commands making up the 'build' job
+      - checkout # pulls source code to the working directory
+      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # pip を使用して、仮想環境をインストールしてアクティブ化します
+      - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
+      - save_cache: # ** special step to save dependency cache **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
