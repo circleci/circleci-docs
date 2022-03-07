@@ -21,6 +21,7 @@ group :jekyll_plugins do
   gem 'jekyll-asciidoc'
   gem 'jekyll-last-modified-at'
   gem 'jekyll-timeago'
+  gem 'jekyll-redirect-from'
 end
 
 group :test, :development do
