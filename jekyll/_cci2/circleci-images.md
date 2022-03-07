@@ -284,27 +284,6 @@ Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for 
 ## Pre-installed tools
 {: #pre-installed-tools }
 
-All convenience images have been extended with additional tools, installed with `apt-get`:
-
-- `bzip2`
-- `ca-certificates`
-- `curl`
-- `git`
-- `gnupg`
-- `gzip`
-- `locales`
-- `mercurial` (legacy images only)
-- `net-tools`
-- `netcat`
-- `openssh-client`
-- `parallel`
-- `sudo`
-- `tar`
-- `unzip`
-- `wget`
-- `xvfb` (legacy images only)
-- `zip`
-
 The specific version of a particular package that gets installed in a particular
 CircleCI image variant depends on the default version included in the package
 directory for the Linux distribution/version installed in that variant's base
@@ -313,13 +292,7 @@ or [Stretch](https://packages.debian.org/stretch/)-based images,
 however the next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
 For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
 
-The following packages are installed via `curl` or other means.
-
-- [Docker client](https://docs.docker.com/install/)
-- [Docker Compose](https://docs.docker.com/compose/overview/)
-- [dockerize](https://github.com/jwilder/dockerize)
-- [jq](https://stedolan.github.io/jq/)
-
+Please visit the [Discuss](https://discuss.circleci.com/) page to find up to date information on included software.
 
 ## Out of scope
 {: #out-of-scope }
