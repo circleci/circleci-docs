@@ -3,84 +3,84 @@ version:
 - Server v2.x
 - サーバー管理者
 ---
-= CircleCI Server AWS S3 ストレージライフサイクルに関するガイド
+= CircleCI Server AWS S3 ストレージのライフサイクルに関するガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: AWS にインストールした CircleCI Server のシステム管理者の皆さんに S3 ストレージの使い方を理解していただくためのガイドです。
+:page-description: AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのガイドです。
 :source-highlighter: rouge
 :rouge-linenums-mode: inline
 :icons: font
 :toc: macro
 :toc-title:
 
-これは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのガイドです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にサービスユーザーに問題が起きるのを回避することができます。 
+このガイドは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのものです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にユーザーに問題が発生するのを回避することができます。 
 
-CircleCI Server では、S3 ライフサイクルポリシーは自動的に設定されません。 このガイドで提供されている数値は、お客様のサーバーでのライフサイクルポリシーを作成するための例です。 ポリシーのルールの追加に必要なステップに関する詳細は、https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide]を参照してください。
+CircleCI Server では、S3 ライフサイクルポリシーは自動的に設定されません。 このガイドの図表は、お客様のサーバーのライフサイクルポリシーを作成する際に役立つ例です。 ポリシーのルールの追加に必要なステップの詳細は、https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide] を参照してください。
 
-== Example Lifecycle Policy Configuration for S3 Buckets
+== S3 バケットのライフサイクルポリシー設定例
 
-ifndef::pdf[NOTE: Scroll table to the right to view all content.]
+ifndef::pdf[NOTE: 表を右にスクロールするとすべての内容が表示されます。]
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| **Prefix**
-| **Tag**
-| **Suggested Number of Days**
-| **Description of files**
-| **Side effects of deletion**
+| **プレフィックス**
+| **タグ**
+| **想定される日数**
+| **ファイルの説明**
+| **削除した場合の影響**
 
-| `アーティファクト` 
-| (null) 
+| `artifacts` 
+| なし 
 | 30 
-| General artifacts (deliverables from `store_artifacts` and `store_test_results`) 
-| Artifacts will disappear from the list of artifacts in job results. URLs will return 404. 
+| 一般的なアーティファクト (0>store_artifacts</code> と `store_test_results`からの成果物) 
+| ジョブの結果のアーティファクトリストからアーティファクトがなくなります。 URL が 404 を返します。 
 
-| `アーティファクト` 
+| `artifacts` 
 | `"circleci.object_type" === "project.cache"` 
 | 15 
-| Dependency caches 
-| The first build after deletion will be slow due to cache miss.
+| 依存関係のキャッシュ 
+| キャッシュがないため削除後最初のビルドに時間がかかります。
 
-| `アーティファクト` 
+| `artifacts` 
 | `"circleci.object_type" === "workflow.workspace"` 
 | 15 
 | ワークスペース 
-| If a job depending on workspaces is rerun (e.g. SSH rerun), `attach_workspace` will restore no files, and subsequent steps will fail. 
+| ワークスペースに依存するジョブが再実行された場合 (SSH 再実行など)、`attach_workspace` はファイルをリストアせず、その後のステップが失敗します。 
 
 | `artifacts/picard-task-configs` 
-| (null) 
+| なし 
 | 1 
-| Task config 
+| タスクの設定 
 | なし
 
 | `action-logs` 
-| (null) 
+| なし 
 | 365 
-| Outputs from each step 
-| Outputs will not be shown any longer. Loading indicator will remain even after opening a pull-down for each step.
+| 各ステップからの出力 
+| 出力は表示されなくなります。 各ステップのプルダウンを開いても、ローディングインジケータは表示されたままになります。
 
-| `キャッシュ` 
-| (null) 
+| `cache ` 
+| なし 
 | 15 
-| Legacy cache 
-| This folder is not actively used. If a job depends on these files, the first build after deletion will be slow due to cache miss.
+| レガシーキャッシュ 
+| このフォルダーは積極的に使用されていません。 ジョブがこれらのファイルに依存している場合、キャッシュがないため削除後最初のビルドに時間がかかります。
 |===
 
 [discrete]
-== Additional Locations Not Listed Above
+== 上記リスト外の追加ローケーション
 
 [discrete]
 === `audit-logs`
 
-This is where audit logs are saved. Deleting this folder and files under this fodler has no impact on future operation of CircleCI, but deleted logs will be definitely lost and cannot be recovered.
+ここには監査ログが保存されます。 このフォルダーやこのフォルダー下のファイルを削除しても、その後の CircleCI の運用には影響はありませんが、削除したログは完全に消え、復元することはできません。
 
 [discrete]
 === `code-signing-keys`
 
-This is where signing keys for macOS/iOS apps are stored. This folder is no longer used actively.
+ここには macOS/iOS アプリ用の署名キーが保存されます。 このフォルダーは積極的に使用されていません。
 
 [discrete]
 === `test-results`
 
-This is where statistic data collected with `store_test_results` resides. The data is used for future test splitting with `circleci tests split --split-by=timings`. **Deleting test results will cause CIRCLE BUG errors in future jobs using `parallelism`**.
+ここには`store_test_results`で収集された統計データが保存されます。 このデータはその後 `circleci tests split --split-by=timings`を使ったテスト分割に使用されます。 *テスト結果を削除すると、`parallelism`を使ったその後のジョブで CIRCLE BUG エラーを引き起こします。*
