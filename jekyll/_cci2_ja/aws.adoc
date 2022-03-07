@@ -21,7 +21,7 @@ toc::[]
 
 == Terraform の変数を定義する
 
-.  https://github.com/circleci/enterprise-setup[Setup] リポジトリをクローンします。 すでにクローンを作成している場合は、クローンが最新であり、メインブランチにいることを確認するために、下記を実行します。
+.  https://github.com/circleci/enterprise-setup[Setup] リポジトリをクローンします。 すでにクローンしている場合は、クローンが最新であり、メインブランチにいることを確認するために、下記を実行します。
 +
 git checkout main && git pull
 . ローカルマシンの enterprise-setup リポジトリの一番上のディレクトリに移動します。
