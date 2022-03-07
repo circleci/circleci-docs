@@ -25,12 +25,6 @@ defaults:
     values:
       hide: false
       search: true
-
-  - scope:
-      path: ""
-    values:
-      hide: false
-      search: true
       toc: true # Enable TOC by default
       suggested: false # Disable helpful resources section by default
       sitemap: true # Enable sitemap in staging
