@@ -9,21 +9,23 @@ version:
 ---
 
 # Category 1
+{: #category-1 }
 
 <details markdown=block>
 
 <summary>Deprecating Ubuntu 14.04 and 16.04 images: EOL 5/31/22</summary>
 
 ### Applies to: jobs using `machine: true` or specifying a `14.04 ubuntu` Machine image
+{: #applies-to-jobs-using-machine-true-or-specifying-a-1404-ubuntu-machine-image }
 {:.no_toc}
 
-* **_Note:_** _Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI. We suggest upgrading to the latest Ubuntu 20.04 image for continued releases and support past April 2021._  
-    
+* **_Note:_** _Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI. We suggest upgrading to the latest Ubuntu 20.04 image for continued releases and support past April 2021._
+
 Please contact [support@circleci.com ](mailto:support@circleci.com)or open a ticket in the [CircleCI Support Center](https://support.circleci.com/hc/en-us/requests/new) with any questions or issues that arise during migration.
 
-If you don’t [specify a machine image](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images), you are using the default image and you’ll need to take action. 
+If you don’t [specify a machine image](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images), you are using the default image and you’ll need to take action.
 
-Currently, when using _`machine: true`_  builds are using a _`Ubuntu 14.04`_ image. If you do not specify an image, your build will be using the default image which will be _`Ubuntu 22.04`_ as of 31-May-2022\. This may lead to a breaking change. 
+Currently, when using _`machine: true`_  builds are using a _`Ubuntu 14.04`_ image. If you do not specify an image, your build will be using the default image which will be _`Ubuntu 22.04`_ as of 31-May-2022\. This may lead to a breaking change.
 
 You can tell if you fall into this category if any of your jobs look like this:
 
@@ -53,19 +55,22 @@ The following options are available, [given the deprecation of older images](htt
 
 See our documentation update on our [newer machine images.](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images "https://circleci.com/docs/2.0/configuration-reference/#available-machine-images")
 
-### How to Locate Image Use using GitHub Search  
+### How to Locate Image Use using GitHub Search
+{: #how-to-locate-image-use-using-github-search }
 {:.no_toc}
 
 _This does not find executors used via orbs - keep in mind if you are using an older version of an orb, it may have an executor using the Ubuntu 14.04 and 16.04 images_
 
 ### How to look for a Ubuntu 16.04 image
+{: #how-to-look-for-a-ubuntu-1604-image }
 {:.no_toc}
 
 `org:CircleCI-Public ubuntu-1604 path:.circleci filename:config.yml`
 
-Replace `CircleCI-Public` with the org that needs to be search. This searches all projects in that orb that mention that image.   
+Replace `CircleCI-Public` with the org that needs to be search. This searches all projects in that orb that mention that image.
 
 ### How to look for an Ubuntu 14.04 images
+{: #how-to-look-for-an-ubuntu-1404-images }
 {:.no_toc}
 
 `org:CircleCI-Public circleci/classic path:.circleci filename:config.yml`
@@ -107,30 +112,31 @@ job2:
 <details markdown=block>
 <summary>How to determine if your build is under-provisioned?</summary>
 
-Each build on CircleCI will be allocated specific vCPUs and memory, based on the [executor type](https://circleci.com/docs/2.0/executor-types/) selected.  
-  
+Each build on CircleCI will be allocated specific vCPUs and memory, based on the [executor type](https://circleci.com/docs/2.0/executor-types/) selected.
+
 We have since [released the Resources tab](https://circleci.com/changelog/#docker-resource-utilization-graphs) on the build UI for builds using the [Docker executor](https://circleci.com/docs/2.0/executor-intro/#docker).  
-This will allow developers to understand the CPU and memory utilization profile of their **Docker-executor** builds, especially if they are under-provisioned (or over-provisioned for that matter).  
-  
+This will allow developers to understand the CPU and memory utilization profile of their **Docker-executor** builds, especially if they are under-provisioned (or over-provisioned for that matter).
+
 ![Under provisioned screenshot]({{site.baseurl }}/assets/img/docs/troubleshooting_images/under_provisioned.png)
-  
+
 
 **Note** that for Docker-executor jobs that [uses multiple images](https://circleci.com/docs/2.0/executor-types/#using-multiple-docker-images), note that this graph accounts for **all of the containers,** not just the primary container.  
-In addition, the data points are captured at 15-seconds intervals, so if your job completes before 15 seconds, there would be no data points on the graph then.  
-  
-You can then provision a larger [resource class](https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes) to allocate resources accordingly.  
-  
+In addition, the data points are captured at 15-seconds intervals, so if your job completes before 15 seconds, there would be no data points on the graph then.
+
+You can then provision a larger [resource class](https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes) to allocate resources accordingly.
+
 </details>
 
 # Category 2
+{: #category-2 }
 
 <details markdown=block>
 <summary>How to estimate Network ingress and egress (bytes) within a build</summary>
 
-You can view details of your organization's network transfer and storage usage on your Plan > Plan Usage screen. In addition, you can [find out more about how to manage your network and storage costs here](https://circleci.com/docs/2.0/persist-data/#managing-network-and-storage-use).  
-  
-However, you may like to determine the network transfer (ingress and egress) of a specific build. This may be useful for your team, in order to diagnose which processes in the build may be consuming high network transfer usage for instance.  
-  
+You can view details of your organization's network transfer and storage usage on your Plan > Plan Usage screen. In addition, you can [find out more about how to manage your network and storage costs here](https://circleci.com/docs/2.0/persist-data/#managing-network-and-storage-use).
+
+However, you may like to determine the network transfer (ingress and egress) of a specific build. This may be useful for your team, in order to diagnose which processes in the build may be consuming high network transfer usage for instance.
+
 For Docker-based jobs, we can look at the [networking information, particularly from \`/proc/net/dev\`](https://www.kernel.org/doc/html/latest/filesystems/proc.html#id15), to figure out the network transfer, before and after a specific command.
 
 `cat /proc/net/dev`
@@ -156,8 +162,8 @@ jobs:
     - checkout
     - profiling/network
 ```
-  
-  
+
+
 **NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. For more information, do check out our guide here: <https://circleci.com/docs/2.0/persist-data/#overview-of-storage-and-network-transfer>
 
 </details>
@@ -166,17 +172,19 @@ jobs:
 <summary>How to Resolve Error: “block-unregistered-user”</summary>
 
 #### **Overview**
+{: #overview }
 {:.no_toc}
 
 The following issue of having unregistered users spend your organization’s credits through unsanctioned builds can be resolved by enabling a plan usage feature that will disable unregistered users from using credits belonging to your organization.
 
 #### **How to Enable Usage Control**
+{: #how-to-enable-usage-control }
 {:.no_toc}
 
 To disable the ability of unregistered users to trigger builds and save credits you can follow these steps:
 
 1\. Visit the Usage Control tab URL (also available on the left-hand column of the application landing page through the Plan tab): app.circleci.com/settings/plan/\[githubORbitbucket\]/\[OrganizationName\]/usage-controls
-  
+
 ![Fig_A.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/block_unregistered_Fig_A.jpeg)
 
 2\. Toggle on the usage control switch titled “Prevent unregistered user spend”. As noted in the example images below, upon a successful toggle the switch will turn blue.
@@ -185,9 +193,10 @@ To disable the ability of unregistered users to trigger builds and save credits 
 
 
 ![Fig_C.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/block_unregistered_Fig_C.jpeg)
-  
-  
+
+
 #### **How to Confirm Usage Control is Enabled**
+{: #how-to-confirm-usage-control-is-enabled }
 {:.no_toc}
 
 Once the Usage Control is enabled the feature is effective immediately. Any GitHub/Bitbucket user who is not associated with your organization’s GitHub/Bitbucket account will be unable to trigger a build moving forward, and thus halts their ability to misuse credits.
@@ -195,15 +204,17 @@ Once the Usage Control is enabled the feature is effective immediately. Any GitH
 Should an unregistered user trigger a build in your organization after the feature has been enabled, a failed build will occur in the Pipelines dashboard. Upon clicking into the job, one will note a message displaying “block-unregistered-user”, as noted in the image below:
 
 ![Fig_D.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/block_unregistered_Fig_D.jpeg)
-  
+
 #### How to Register a User
+{: #how-to-register-a-user }
 {:.no_toc}
 
-In order to register a user, they can [sign up for CircleCI](https://circleci.com/signup/) with their respective GitHub or Bitbucket login. If they are part of your organization, they can [follow projects](https://circleci.com/docs/2.0/project-build/#add-projects-page) in order to view build history. 
+In order to register a user, they can [sign up for CircleCI](https://circleci.com/signup/) with their respective GitHub or Bitbucket login. If they are part of your organization, they can [follow projects](https://circleci.com/docs/2.0/project-build/#add-projects-page) in order to view build history.
 
 Once registered they can then be included on the active user list on your Plan Usage page under the Users tab: app.circleci.com/settings/plan/\[githubORbitbucket\]/\[OrganizationName\]/usage
 
 #### How to Turn Off Usage Control
+{: #how-to-turn-off-usage-control }
 {:.no_toc}
 
 In order to disable the Usage Control and allow unregistered users to trigger builds, one can go into their Usage Controls section in the Plans tab and toggle the switch to an off position as noted in the images below.
@@ -285,8 +296,8 @@ For more information on `imdisk` please see [this link](https://sourceforge.net/
 <details markdown=block>
 <summary>Setup Workflows re-run from UI contains the continuation key error: {"message":"Key has expired."}</summary>
 
-This error can be encountered if attempted to re-run the [Setup Workflow](https://circleci.com/docs/2.0/dynamic-config/) from the UI.  
-  
+This error can be encountered if attempted to re-run the [Setup Workflow](https://circleci.com/docs/2.0/dynamic-config/) from the UI.
+
 For security and consistency reasons, continuation is allowed once per pipeline, and only for a certain amount of time after the setup phase started - if you see the the pipeline erroring instead of continuing it, please be aware this to prevent malicious continuing.
 
 </details>
@@ -295,20 +306,20 @@ For security and consistency reasons, continuation is allowed once per pipeline,
 <details markdown=block>
 <summary>Build Fails due to SSL Handshake</summary>
 
-On **Tuesday November 16, 2021**, GitHub sunset their DSA SHA256 key. 
+On **Tuesday November 16, 2021**, GitHub sunset their DSA SHA256 key.
 
 Details on this key sunset are here:
 
-<https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints> 
+<https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints>
 
 This would cause a custom image that has not updated \`git\` before November 16, 2021 to fail with the following error while attempting to \`checkout\` from GitHub:
 
 Either git or ssh (required by git to clone through SSH) is not installed in the image. Falling back to CircleCI's native git client but the behavior may be different from official git. If this is an issue, please use an image that has official git and ssh installed.
 Cloning git repository
 
-error cloning repository: ssh: handshake failed: knownhosts: key mismatch  
-  
-In this case, it will be necessary to update git on your custom image to utilize one of the recommended keys GitHub lists in the above documentation. 
+error cloning repository: ssh: handshake failed: knownhosts: key mismatch
+
+In this case, it will be necessary to update git on your custom image to utilize one of the recommended keys GitHub lists in the above documentation.
 
 </details>
 
@@ -317,6 +328,7 @@ In this case, it will be necessary to update git on your custom image to utilize
 <summary>Getting Started with GitHub SSO</summary>
 
 ### Enable SSO for SSH Keys and Tokens
+{: #enable-sso-for-ssh-keys-and-tokens }
 {:.no_toc}
 
 To get set up with GitHub SSO, there are a couple of settings a user must configure on their account. Follow the below instructions; failure to do so may cause access issues with some GitHub functionality, such as project [deploy/user SSH keys](https://circleci.com/docs/2.0/gh-bb-integration/#deployment-keys-and-user-keys), ability to initiate pipelines and edit config, etc.
@@ -328,6 +340,7 @@ To get set up with GitHub SSO, there are a couple of settings a user must config
 3. These SSH keys should now have access to the protected orgs. No further action within CircleCI is required.
 
 ### Enabling SSO for Tokens and Apps
+{: #enabling-sso-for-tokens-and-apps }
 {:.no_toc}
 
 If using GitHub personal access tokens in your CircleCI pipelines, you’ll also need to **Enable SSO** for each token. Follow the same steps as above:
@@ -336,6 +349,7 @@ If using GitHub personal access tokens in your CircleCI pipelines, you’ll also
 2. Follow the same steps as described above to enable protected org access for these tokens.
 
 ### Common Issues
+{: #common-issues }
 {:.no_toc}
 
 See our support article [here](https://support.circleci.com/hc/en-us/articles/360043002793) for troubleshooting common SSO/SAML-related issues for user GitHub OAuth credentials (used for most interactions with CircleCI, including creating pipelines on new commits).
@@ -395,8 +409,8 @@ To work around this issue, customers can add an export step at the top of the `r
 <details markdown=block>
 <summary>"Max number of workflows exceeded." error</summary>
 
-CircleCI Dynamic Configs, formally known as Setup Workflows, allows for a maximum of 1 workflows in the initial setup workflow. So if \`setup: true\` is set then the following config would be invalid:  
-  
+CircleCI Dynamic Configs, formally known as Setup Workflows, allows for a maximum of 1 workflows in the initial setup workflow. So if \`setup: true\` is set then the following config would be invalid:
+
 ```yaml
 workflows:
   one:
@@ -406,7 +420,7 @@ workflows:
     jobs:
       - integration-tests
 ```
-  
+
 Customers can work around this by trying to combine both workflows into a single workflow:
 
 ```yaml
@@ -484,6 +498,7 @@ _**Note:** In an effort to provide more flexibility and control we have launched
 _<https://circleci.com/docs/2.0/scheduled-pipelines/>_
 
 ### Scheduled workflows no longer running
+{: #scheduled-workflows-no-longer-running }
 {:.no_toc}
 
 If you notice that scheduled workflows that were previously triggered according to the schedule specified in your `config.yml` suddenly stopped running, you'll need to check the last **non-scheduled** build attempt on the related branch (triggered by a push, a pull-request or via the CircleCI API).
@@ -493,6 +508,7 @@ If that build attempt resulted in a `Build Error` failure due to a `Config Proce
 To restore the schedule you'll need to trigger a new build (with a valid configuration file) on the related branch.
 
 ### Gap in the scheduled workflows runs
+{: #gap-in-the-scheduled-workflows-runs }
 {:.no_toc}
 
 In case you see a gap in the scheduled workflows runs (they stopped running for a period of time, and then started running again), this means that at some point a build was triggered with an invalid configuration file which caused the situation described above.
@@ -526,6 +542,7 @@ to:
 </details>
 
 # Category 3
+{: #category-3 }
 
 <details markdown=block>
 <summary>Backtick (`) unable to be used in project level environment variables</summary>
@@ -620,6 +637,7 @@ jobs:
 The above would become instead `7.777777e+06` in the job. The reason for this conversion is how yaml interprets the value being passed. However, this can be avoided in a few different ways.
 
 ## Store value as a string
+{: #store-value-as-a-string }
 {:.no_toc}
 
 Instead of setting the value as an integer instead set it as a string. So instead of `7777777` set it to `"7777777"` like this:
@@ -636,6 +654,7 @@ jobs:
 ```
 
 ## Set the variable at the project level
+{: #set-the-variable-at-the-project-level }
 {:.no_toc}
 
 Instead of setting the variable in your `config.yml` directly, you can instead [set the variable at the project level](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) to utilize in jobs. This will ensure the value is protected and not automatically converted.
@@ -646,6 +665,7 @@ Instead of setting the variable in your `config.yml` directly, you can instead [
 <summary>Build "Not Running" due to concurrency limit but no other job is running</summary>
 
 ### Why is this happening?
+{: #why-is-this-happening }
 {:.no_toc}
 
 If a job is not starting and showing a status "**Not Running**" after you triggered a pipeline, it means that you have reached the **concurrency limit** of your plan.
@@ -657,6 +677,7 @@ However, customers on plans with a higher concurrency limit can also encounter t
 The delayed start of your job, and the fact it remains in a "Not Running" state before eventually starting, is due to the fact that other jobs are still running when the new job is triggered.
 
 ### Check for running SSH jobs
+{: #check-for-running-ssh-jobs }
 {:.no_toc}
 
 We found that this situation frequently arises due to running SSH jobs; once you navigate away from a running SSH job it won't appear in the pipelines view, so one can assume that no jobs are running at the time.
@@ -677,17 +698,18 @@ To do so, please follow instructions outlined in the Support article "[How to se
 <details markdown=block>
 <summary>Change SSH key formats during a job</summary>
 
-Some tools can have issues with the newer key formats generated and used by CircleCI. In these situations it can be helpful to change the key format within the VM so that. older tools can communicate using them. For example, [JGit+JSch can fail](https://clojure.atlassian.net/browse/TDEPS-91?page=com.atlassian.jira.plugin.system.issuetabpanels%3Aall-tabpanel) on CircleCI when using the newer OpenSSH keys created by default. 
+Some tools can have issues with the newer key formats generated and used by CircleCI. In these situations it can be helpful to change the key format within the VM so that. older tools can communicate using them. For example, [JGit+JSch can fail](https://clojure.atlassian.net/browse/TDEPS-91?page=com.atlassian.jira.plugin.system.issuetabpanels%3Aall-tabpanel) on CircleCI when using the newer OpenSSH keys created by default.
 
-Using ssh-keygen, we can modify the key at run time to a RSA format.   
-  
-**ssh-keygen -p -f \~/.ssh/id\_rsa -m pem -q -N ""** 
-  
+Using ssh-keygen, we can modify the key at run time to a RSA format.
+
+**ssh-keygen -p -f \~/.ssh/id\_rsa -m pem -q -N ""**
+
 This will reformat the key, and it can successfully be used for authentication.
 
 </details>
 
 # Category 4
+{: #category-4 }
 
 <details markdown=block>
 <summary>Speed up steps using a RAM disk</summary>
@@ -695,18 +717,21 @@ This will reformat the key, and it can successfully be used for authentication.
 Tasks which are heavily dependent on disk IO can be sped up by performing those operations in memory, and avoiding the disk. This is especially true if you're using the Docker executor on CircleCI, and we have an in depth [blog post here](https://circleci.com/blog/the-issue-of-speed-and-determinism-in-ci/) about the issue.
 
 ### Docker Executor
+{: #docker-executor }
 {:.no_toc}
 
 On the docker executor we have enabled an available RAM disk by default which you can use to dramatically increase step speeds. This is highly encouraged for steps like cache/workspace restores. You can read about configuring it [in our docs here](https://circleci.com/docs/2.0/executor-types/#ram-disks).
 
 The short version is that you have access to a special directory, **/mnt/ramdisk**, which acts as any other directory. Files stored here will use the machines assigned resource class memory. For instance, you can set your entire working directory to be stored in memory with **working\_directory: /mnt/ramdisk** in your job configuration.
 
-### Other executors  
+### Other executors
+{: #other-executors }
 {:.no_toc}
 
 The RAM disk is not configured by default on other executors. It's less likely that you'll need it because they operate as isolated VMs, and avoid the issues outlined in the blog post mentioned above. You may still find that a RAM disk offer performance benefits over utilizing the hard disk. In other executors (Machine, MacOS, etc) you have far more control over the environment, so it's possible to configure a RAM disk yourself. Using instructions such as [this stack exchange answer](https://unix.stackexchange.com/questions/66329/creating-a-ram-disk-on-linux) for Linux based systems
 
-#### Windows  
+#### Windows
+{: #windows }
 {:.no_toc}
 
 To configure a RAM disk on windows please see our guide [linked here](https://support.circleci.com/hc/en-us/articles/4411520952091)
@@ -726,7 +751,7 @@ Error: Call retries were exceeded
 
 Webpack4 starts using `terser-webpack-plugin` to minify your JavaScript as default. The default parallel option in `terser-webpack-plugin` is set to the number of CPUs `(os.cpus().length - 1)`. It means the function references the actual VM's CPU count, and it's a bigger number of CPUs than the docker executor has. Therefore, Webpack will make more workers than the vCPU counts, and it causes this error.
 
-  
+
 To work around this, you will need to specify the parallel option to set to the same number as the vCPUs. For example:
 
 ```javascript
