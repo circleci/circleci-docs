@@ -1,0 +1,95 @@
+== Prerequisites
+
+To use Vamp, you will need the following:
+
+* kubectl
+* Kubernetes cluster
+* Ingress controller (unless you are not planning to expose any of your services)
+* Prometheus
+* DNS entry
+
+=== kubectl
+
+The Kubernetes command-line tool, https://kubernetes.io/docs/reference/kubectl/kubectl/[kubectl], allows you to run commands on Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
+If you do not already have kubectl installed, https://kubernetes.io/docs/tasks/tools/install-kubectl/[follow the instructions here].
+
+==== Amazon Kubernetes Service (EKS)
+
+If you are using EKS, Amazon provides their own https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#eksctl-gs-install-kubectl[instructions for installing kubectl here].
+
+=== Kubernetes cluster
+
+// I don't think we need the existing code snippets
+
+* https://cloud.google.com/kubernetes-engine/docs/quickstart[Creating a cluster with Google Kubernetes Engine] (GKE)
+* https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[Creating a cluster with Amazon Kubernetes Service (EKS)]
+
+=== Ingress controller
+
+If you are exposing some of all of your services, you will need an Ingress controller.
+
+Vamp currently supports NGINX and Contour.
+
+If you do not already have NGINX or Contour, you can install them on your Kubernetes cluster with the following commands:
+
+==== Contour
+
+`kubectl apply -f https://projectcontour.io/quickstart/contour.yaml`
+
+For more information and installation options for Contour, see the https://projectcontour.io/getting-started/#option-1-quickstart[getting started guide].
+
+==== NGINX
+
+*AWS*
+
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/aws/deploy.yaml`
+
+*GKE and Azure*
+
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml`
+
+*Digital Ocean*
+
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/do/deploy.yaml`
+
+For more information and installation options for NGINX, see the https://kubernetes.github.io/ingress-nginx/deploy/[installation guide].
+
+=== Prometheus
+
+The Release Agent relies on an available instance of Prometheus, an open source monitoring system and time series database.
+
+If you deployed Contour or NGINX using the instructions above, you can deploy Prometheus into your cluster with one of the following commands:
+
+*Contour*
+
+`kubectl apply -f https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/contour/contour-prometheus.yaml`
+
+For more information on deploying Prometheus with Contour, see https://projectcontour.io/guides/prometheus/#deploy-prometheus[the full instructions].
+
+*NGINX*
+
+`kubectl apply -k github.com/kubernetes/ingress-nginx/deploy/prometheus/`
+
+For more information on deploying Prometheus with NGINX, see https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/#deploy-and-configure-prometheus-server[the full instructions].
+
+NOTE: If you already have Prometheus installed in your cluster, follow https://docs.vamp.cloud/release-agent/installation/custom-prometheus[these instructions] to configure a custom Prometheus location.
+
+=== DNS Entry for Your Application
+
+NOTE: If you are using https://github.com/kubernetes-sigs/external-dns[ExternalDNS] or a similar tool to dynamically manage the DNS records for Ingresses on your cluster, you can skip this section. For the Contour Ingress controller, you must use https://github.com/kubernetes-sigs/external-dns/releases[version 0.7.4 or newer of External DNS].
+
+==== Manual DNS entry
+
+If you deployed Contour or NGINX using the instructions above, you can get the IP address for the DNS record using these instructions:
+
+The following commands print the IP address you need to configure the DNS for your application:
+
+*Contour*
+
+`kubectl get service envoy --namespace=projectcontour -o=jsonpath='{.status.loadBalancer.ingress[0].ip}{"\n"}'`
+
+*NGINX*
+
+`kubectl get service ingress-nginx-controller --namespace=ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}{"\n"}'`
+
+NOTE: If your cluster is running on AWS, this command prints a domain name, not an IP address.
