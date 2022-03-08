@@ -323,6 +323,9 @@ Provided in the output from `terraform apply`
 * *Nomad Server Certificate Authority (CA) Certificate (required)* -
 Provided in the output from `terraform apply`
 
+* *Build Agent Image* - 
+Consult customer support to set up
+
 Click the *Save config* button to update your installation and redeploy server.
 
 ==== Nomad Clients Validation
