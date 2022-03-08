@@ -211,6 +211,8 @@ en:
           link: 2.0/orb-author-intro/
         - name: Author an Orb
           link: 2.0/orb-author/
+        - name: Author an Orb for Server
+          link: 2.0/orb-author-server/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orb Authoring Best Practices

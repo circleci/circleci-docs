@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 verison:
 - Cloud
+- Server v3.x
 ---
 
 * TOC
