@@ -73,6 +73,8 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
+Per [our data retention policy](https://circleci.com/privacy/#information) audit logs can be retrieved for up to 12 months. 
+
 ### Audit log events
 {: #audit-log-events }
 {:.no_toc}
