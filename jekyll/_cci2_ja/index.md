@@ -7,14 +7,14 @@ toc: false
 page-type: index
 ---
 
-CircleCI について理解を深めていただけるよう、チュートリアルやサンプル、ハウツーといった参考情報をまとめました。 こちらからも入手可能です。
+ここに掲載されているチュートリアル、サンプル、how-to、そしてリファレンスからCircleCIについて学ぶことができます。 こちらからも入手可能です。
 
 <hr class="hidden-xs" />
 
 <div class="row loading-deferred">
   <div class="treatment col-xs-12">
-    <span id="homepage-guide-links"><h2>Examples and Guides</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="ニュース"></span>
-    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/tutorials/">guides</a> or explore a sample app.</p>
+    <span id="homepage-guide-links"><h2>設定例と解説</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="ニュース"></span>
+    <p>こちらの<a href="{{site.baseurl}}/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
   </div>
   <div class="treatment col-xs-12 col-sm-6">
     <a class="no-external-icon col-sm-12" href="{{site.baseurl}}/ja/2.0/language-javascript/">
@@ -41,10 +41,10 @@ CircleCI について理解を深めていただけるよう、チュートリ�
   </div>
   <div class="col-xs-12 col-sm-6">
     <h2>はじめよう</h2>
-    <p>CircleCI でビルドの自動化を始めましょう。</p>
+    <p>CircleCI でビルドの自動化を始めよう</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/2.0/first-steps/">ユーザー登録とトライアル</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/getting-started/">初回ビルドの前提条件</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/first-steps/">サインアップして始める</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/getting-started/">最初の成功ビルド</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/faq/">よくあるご質問</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/orb-intro/">Orbs</a></li>
