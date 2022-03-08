@@ -777,7 +777,7 @@ ja:
           link: ja/2.0/xcode-policy/
           i18n_name: Xcodeイメージポリシー
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/
+          link: ja/2.0/dedicated-hosts-macos/
           i18n_name: macOS 専有ホスト
     - name: Windows
       children:
@@ -812,7 +812,7 @@ ja:
           link: ja/2.0/runner-scaling/
           i18n_name: ランナーのスケール
         - name: Runner Configuration Reference
-          link: 2.0/runner-config-reference/
+          link: ja/2.0/runner-config-reference/
           i18n_name: ランナーの設定リファレンス
         - name: Upgrading Runner on Server
           link: ja/2.0/runner-upgrading-on-server/
@@ -1170,7 +1170,7 @@ ja:
           link: ja/2.0/CircleCI-Server-3.0.0-GCP-Installation-Guide.pdf
           i18n_name: v3.3 インストールガイド GCP
         - name: v3.3 Operations Guide
-          link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
+          link: ja/2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
           i18n_name: v3.3 管理者ガイド
     - name: Server v3.2.x PDFs
       link: 2.0/server-3-overview
