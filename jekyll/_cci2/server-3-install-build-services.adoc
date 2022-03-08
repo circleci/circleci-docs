@@ -323,6 +323,9 @@ Provided in the output from `terraform apply`
 * *Nomad Server Certificate Authority (CA) Certificate (required)* -
 Provided in the output from `terraform apply`
 
+* *Build Agent Image* - 
+Consult customer support to set up
+
 Click the *Save config* button to update your installation and redeploy server.
 
 ==== Nomad Clients Validation
@@ -379,10 +382,6 @@ Once you have successfully cloned the repository, you can follow it from within 
 Once you have configured the environmental variables and contexts, rerun the realitycheck tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following:
 
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
-
-==== Hosting Build Agent Image in External Image Repository
-
-If you are hosting build agent image (`circleci/picard`), used by Nomad client, in an external or private repo, you have to keep the private image registry as Public and unauthenticated.
 
 === VM service
 
