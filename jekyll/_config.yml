@@ -28,6 +28,7 @@ plugins:
   - jekyll-toc
   - jekyll-last-modified-at
   - jekyll-timeago
+  - jekyll-redirect-from
 
 # Approximate distance, with customizable threshold, 
 # ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
