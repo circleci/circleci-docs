@@ -77,7 +77,7 @@ commands:
               echo "export JEKYLL_BASENAME=docs" >> $BASH_ENV;
             else
               echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
-              echo "export HOST_URL="http://circleci-doc-preview.s3-website-us-east-1.amazonaws.com"" >> $BASH_ENV;
+              echo "export HOST_URL='http://circleci-doc-preview.s3-website-us-east-1.amazonaws.com'" >> $BASH_ENV;
             fi
 
 # Workflows orchestrate a set of jobs to be run;
