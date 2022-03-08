@@ -1274,3 +1274,22 @@ ja:
           link: ja/2.0/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
           link: ja/2.0/circleci-ops-guide.pdf
+          
+- name: CircleCI Plans
+  i18n_name: CircleCI プラン
+  icon: icons/sidebar/circleci_plans.svg
+  children:
+    - name: Plan Overview
+      i18n_name: プランの概要
+      link: ja/2.0/plan-overview
+    - name: Free
+      i18n_name: Free
+      link: ja/2.0/plan-free
+    - name: Performance
+      i18n_name: Performance
+      link: ja/2.0/plan-performance
+    - name: Scale
+      i18n_name: Scale
+      link: ja/2.0/plan-scale
+    - name: Server
+      link: ja/2.0/plan-server
