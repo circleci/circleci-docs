@@ -2,8 +2,8 @@
 layout: classic-docs
 title: "CircleCI ドキュメントへようこそ"
 description: "CircleCI ドキュメントへようこそ"
-permalink: /ja/
-redirect_from: /ja/2.0/
+permalink: /ja/2.0/
+redirect_from: /ja/
 toc: false
 page-type: index
 ---
