@@ -19,6 +19,7 @@ docs@circleci.com
 include::intro.adoc[]
 include::overview.adoc[]
 include::concepts.adoc[]
+include::prerequisites.adoc[]
 include::releasing-applications.adoc[]
 include::getting-started/index.adoc[leveloffset=+1]
 include::tutorials/minikube.adoc[]

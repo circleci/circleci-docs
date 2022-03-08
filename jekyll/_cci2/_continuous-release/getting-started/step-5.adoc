@@ -1,1 +1,14 @@
 == Step 5: Install the Release Agent
+
+Before installing the Release Agent, ensure you have all the <<prerequisites,prerequisites>>.
+
+// link to prerequisites.adoc
+
+[IMPORTANT]
+====
+If the application namespace does not exist, it will be created automatically.
+
+If the application namespace already exists, follow these instructions to create a Kubernetes Secret before installing the Release Agent.
+====
+
+// link to prometheus.adoc
