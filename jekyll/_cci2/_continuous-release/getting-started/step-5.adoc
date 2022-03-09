@@ -1,27 +1,5 @@
 == Step 5: Install the Release Agent
 
-Before installing the Release Agent, ensure you have all the <<prerequisites,prerequisites>>.
-
-NOTE: If the application namespace does not exist, it will be created automatically during the installation.
-
-[IMPORTANT]
-====
-If the application namespace already exists, <<prometheus,follow these instructions>> to create a Kubernetes Secret before installing the Release Agent.
-
-If your Prometheus instance is in a custom location, <<prometheus,follow these instructions>> before running the installer.
-
-====
-
-To run the installer:
-
-. Click the *Show installation command* button.
-. Copy the command.
-. Run the command in your terminal
-
-IMPORTANT: The command is only valid for 30 minutes.
-
-If installation is successful, the status changes from _Installation pending_ to _Installation successful_.
-
-If installation fails for any reason, the status changes from _Installation pending_ to _Installation failed_. For guidance on resolving the issue, see the <<troubleshooting,troubleshooting guide>>.
+include::../includes/release-agent.adoc[]
 
 Once you see an _Installation successful_ status, click *Next*.
