@@ -159,16 +159,7 @@ jobs:
 
 
 ```yml
-version: 2.1
-jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Hello World
-          command: |
-            echo 'Hello World!'
+image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!'
             echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:

@@ -141,7 +141,11 @@ dig all.knownips.circleci.com A +short
 
 IP アドレスの範囲機能の使用状況は、 CircleCI アプリケーションの「 Plan Usage 」のページに表示されます。
 
-![IP アドレスの範囲機能の場所を示すスクリーンショット]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
+![IP アドレスの範囲機能の場所を示すスクリーンショット]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
+
+On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on.
+
+![CircleCI のコンセプト イメージ]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
 ## AWS および GCP の IP アドレス
 {: #awsandgcpipaddresses }
@@ -153,10 +157,10 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 
 大半が CircleCI のマシンではないため、AWS または GCP の IP アドレスに基づいて IP ベースのファイアウォールを構成することは*推奨されません*。 また、AWS および GCP のエンドポイントのアドレス割り当ては継続的に変更されるので、常に同じであるという*保証はありません*。
 
-## CircleCI macOS 用クラウド:
+## CircleCI macOS 用クラウド
 {: #circleci-macos-cloud }
 
-上記の AWS や GCP に加えて、CircleCI の macOS 用クラウドでもマシンが実行するジョブをホストしています。 CircleCI の macOS 用クラウドの IP アドレスの範囲は以下のとおりです。
+上記の AWS や GCP に加えて、CircleCI の macOS 用クラウドでもマシンが実行するジョブをホストしています。 The following IP address ranges are used by CircleCI macOS Cloud:
 
 - 162.252.208.0/24
 - 162.252.209.0/24
@@ -173,7 +177,7 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 - 38.39.183.0/24
 - 198.206.135.0/24
 
-IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。
+IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。 **Note:** macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
 
 ## 既知の制限
 {: #knownlimitations}

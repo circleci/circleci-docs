@@ -7,13 +7,13 @@ order: 20
 version:
   - クラウド
 suggested:
-  -
+  - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
-  -
+  - 
     title: ワークフローをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  -
+  - 
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
@@ -186,6 +186,14 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 **質問:**スケジュールしたパイプラインが実行されないのはなぜですか？
 
 **回答: 考えられる理由が 2つあり得ます。</p>
-* スケジュール実行化されたパイプラインに設定されている実行ユーザーは今も組織の一員ですか？
+* スケジュール実行化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？
 * スケジュールに設定されたブランチが削除されていませんか？
 * ご自身の GitHub 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効していると GiHub へのリクエストが失敗します。
+
+**質問:**スケジュールしたパイプラインの実行が思っていたより遅いのはなぜですか？
+
+**回答:** [Cron 式](https://en.wikipedia.org/wiki/Cron#CRON_expression)と比較して、パイプラインのスケージュール実行にはスケジュール方法に微妙な違いがあります。
+
+たとえば、08:00 (協定世界時) のスケジュールを 1 時間に 1 回と指定すると、このスケジュールされたパイプラインは 08:00 ～ 09:00 (協定世界時) の間に 1 回実行されます。 これは 08:00 (協定世界時) ちょうどに実行されるという意味ではないのでご注意ください。
+
+このスケジュールされたパイプラインの実行は、その後は常に最初の実行と同じ時間に実行されます。 つまり、最初にスケジュールされたパイプラインが 08:11 (協定世界時) に実行された場合、その次も 08:11 (協定世界時) に実行されます。

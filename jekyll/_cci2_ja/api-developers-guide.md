@@ -43,15 +43,15 @@ CircleCI API は、トークンベースの認証により API サーバーへ�
 API トークンの追加は、以下の手順で行います。
 
 1. CircleCI の Web アプリケーションにログインします。
-1. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)に行き、API トークンの追加手順に従います。
-2.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
+2. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)で[パーソナル API トークンを作成](https://circleci.com/docs/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)し、API トークンの追加手順に従います。
+3.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
 
     ```shell
     export CIRCLE_TOKEN={your_api_token}
     curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
-3.  以下のような JSON レスポンスが表示されます。
+4.  以下のような JSON レスポンスが表示されます。
 
     ```json
     {

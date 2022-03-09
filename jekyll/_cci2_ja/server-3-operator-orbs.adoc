@@ -36,7 +36,6 @@ To list available private orbs (registered in your local server orb repository),
 ```bash
 circleci orb list --host <your server install domain> --token <your api token>
 ```
-
 ## パブリック Orb のインポート
 To import a public orb to your local server orb repository, run the following command:
 
