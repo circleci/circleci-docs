@@ -21,8 +21,15 @@ Now follow the steps in the guide:
 . Release Your Service
 
 include::step-1.adoc[]
-include::step-2.adoc[leveloffset=+1]
+
+include::step-2.adoc[]
+
 include::step-3.adoc[]
+
 include::step-4.adoc[]
+
 include::step-5.adoc[]
+
 include::step-6.adoc[]
+
+include::next-steps.adoc[]

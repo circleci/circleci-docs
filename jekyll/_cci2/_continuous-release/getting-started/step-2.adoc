@@ -33,7 +33,7 @@ Your container can expose multiple network ports, but Vamp will only create a Ku
 
 There are several ways to find the container port for your service:
 
-* In Dockerfile, look for an `EXPOSE instruction`.
+* In Dockerfile, look for an `EXPOSE` instruction.
 * From a running Docker container, use the `docker port <container-id | container-name>` command.
 * For a Kubernetes deployment, look for the `containerPort` value in your YAML file.
 
