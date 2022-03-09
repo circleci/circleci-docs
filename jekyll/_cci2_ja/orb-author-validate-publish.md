@@ -8,7 +8,7 @@ version:
 
 ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は、[Orb のオーサリング プロセス]({{site.baseurl}}/2.0/orb-author)を参照してください。
 
-1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を入力して実行してください。
+1. If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub organization name:
 ```shell
 circleci namespace create <my-namespace> github <my-gh-org>
 ```
