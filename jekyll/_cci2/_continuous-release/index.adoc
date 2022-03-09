@@ -8,7 +8,7 @@ docs@circleci.com
 :toc-title: Contents
 :icons: font
 :page-liquid:
-:source-highlighter: highlightjs
+:source-highlighter: rouge
 :pagenums:
 :idprefix:
 :idseparator: -
@@ -31,5 +31,7 @@ include::getting-started/index.adoc[]
 include::using-continuous-release/index.adoc[]
 
 include::tutorials/minikube.adoc[]
+
+include::code-test.adoc[]
 
 :leveloffset: -1
