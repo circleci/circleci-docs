@@ -2,9 +2,14 @@
 
 This guide ...
 
-If you are new to Vamp, begin with the Quick Start Guide.
+If you are new to Vamp, begin with the Getting Started guide.
+
+// link to getting-started/index.adoc
+
 
 include::applications.adoc[]
+
+include::clusters.adoc[]
 
 include::services.adoc[]
 
