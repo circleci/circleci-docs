@@ -246,10 +246,10 @@ NOTE: 自動スケーリンググループや管理対象のインスタンス�
 ifndef::env-gcp[]
 
 ===== AWS
-. IAM ユーザーまたは Nomad Autoscaler の役割とポリシーを作成します。 次のいずれかの方法で作成します。
+. IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成します。 次のいずれかの方法で作成します。
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーアクセスキーは Terraform の出力で使用できます。
   * 以下の IAM ポリシーを使用して、手動で Nomad Autoscaler IAM ユーザーを作成します。 その場合、ユーザーにアクセスキーとシークレットキーを生成する必要があります。
-  * Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの役割]を作成し、次の IAM ポリシーを添付します。
+  * Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]を作成し、次の IAM ポリシーを添付します。
 [source, json]
 {
     "Version": "2012-10-17",
@@ -284,7 +284,7 @@ ifndef::env-gcp[]
 . 自動スケーリンググループのリージョンを追加します。
 . 以下のいづれかを選択します。
 .. Nomad Autoscaler  ユーザーのアクセスキーとシークレットキーを追加する。
-.. または、Nomad Autoscaler の役割の ARN を追加する。
+.. または、Nomad Autoscaler のロールの ARN を追加する。
 . Nomad クライアントが作成された自動スケーリンググループの名前を追加します。
 
 endif::env-gcp[]
@@ -294,7 +294,7 @@ ifndef::env-aws[]
 ===== GCP
 . Nomad Autoscaler のサービスアカウントを作成します。
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json`という名前のファイルにあります。
-  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには `compute.admin`の役割が必要です。
+  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには `compute.admin`のロールが必要です。
 . Nomad Autoscaler を `enabled` に設定します。
 . 最大 Node 数を設定します。
 . 最小 Node 数を設定します。
@@ -447,7 +447,7 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 aws iam create-user --user-name circleci-vm-service
 ```
 +
-vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの役割]の使用もサポートしています。 役割を使用する場合は、以下のステップ 6 のポリシーを使って以下のhttps://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
+vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下のhttps://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
 完了したら、ステップ 9 に進みます。手順 9 では、KOTS で VM サービスを有効化します。
 +
 . *ポリシーを作成する*
