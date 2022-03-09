@@ -1187,20 +1187,19 @@ A path is not required here because the cache will be restored to the location f
 {: #deploy-deprecated }
 {:.no_toc}
 
-Please see [run](#run) for current processes.
+Please see [run](#run) for current processes. If you have parallelism > in your job, please see [Migration from `deploy`]()
 
-###### **Migration from `deploy` to `run`**
+##### **Migration from `deploy` to `run`**
 
 *Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?*
-Swap out the `deploy` key for the [`run`](#run) key
+Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
 
 *Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?*
+There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism.
 
-There is no direct replacement for the deploy step if you are using parallelism > 1 in your job.  The recommendation is to to create two separate jobs within one workflow: a test job and a deploy job.  The test job runs the tests in parallel and the deploy job depends on the test job. The test job has parallelism > 1 and the deploy job would have the command from the previous deploy step replaced with ‘run’ and no parallelism.
+###### *Example*
 
-###### Example
-
-A config file that uses the deprecated `deploy` step and has parallelism > 1 which will be converted to not use the deprecated `deploy` step:
+A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
 
 ```yml
 # Example of deprecated syntax, do not copy
@@ -1235,7 +1234,7 @@ workflows:
       - deploy-step-job
 ```
 
-If you are entirely reliant on external resources (e.g. Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete.  `doing-things-job` uses parallelism of 3 while `deploy-step-job` performs the actual deployment:
+If you are entirely reliant on external resources (for example, Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete. `doing-things-job` uses parallelism of 3, while `deploy-step-job` performs the actual deployment. See example below:
 
 ```yml
 version: 2.1
@@ -1278,7 +1277,7 @@ workflows:
             - doing-things-job
 ```   
 
-If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them:
+If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
 
 ```yml
 version: 2.1
@@ -1327,7 +1326,7 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on this [page](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example).  Support for the deprecated `deploy` step will be removed at some point in the near future.  Ample time will be given for customers to migrate their config.
+This is effectively using a "fan-in" workflow which is described in detail on the [workflows](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
