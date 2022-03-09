@@ -36,19 +36,19 @@ This document describes how to get started with a basic build of your Linux, And
          - run: echo "hello world" # `echo` コマンドを実行します
    ```
 
-2. 変更をコミットし、プッシュします。
+3. 変更をコミットし、プッシュします。
 
-3. Go to the Projects page in the CircleCI app, then click the **Set Up Project** button next to your project. プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
+4. Go to the **Projects** page in the CircleCI app, then click the **Set Up Project** button next to your project. If you do not see your project, make sure you have selected the associated org. See the [Org Switching](#org-switching) section below for tips.
 
-4. Follow the steps to configure your `config.yml` file for the project and trigger your first build.
+5. Follow the steps to configure your `config.yml` file for the project and trigger your first pipeline.
 
-[Workflows (ワークフロー)] ページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
+The **Workflow** page appears with your `build` job and prints `Hello World` to the console.
 
-**メモ:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
+**Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
-CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピン アップし、そこでジョブを実行します。
+CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or virtual machine (VM). つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピン アップし、そこでジョブを実行します。
 
-サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/2.0/language-javascript/)を参照してください。
+Sample project: [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javascript/)
 
 ## Android での Hello World
 {: #hello-world-for-android }
@@ -70,9 +70,10 @@ jobs:
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
-_The macOS executor is not currently available on installations of CircleCI server v2.x_
+The macOS executor is not currently available on installations of CircleCI server v2.x.
+{: class="alert alert-info" }
 
-Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
+Using the basics from the Linux example above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
 ```yaml
 jobs:
@@ -81,12 +82,12 @@ jobs:
       xcode: 12.5.1
 ```
 
-詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
+詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/2.0/hello-world-macos)」を参照してください。
 
 ## Windows での Hello World
 {: #hello-world-for-windows }
 
-ここにも Linux、Android、macOS の例における基礎を流用できます。 同じ `.circleci/config.yml` ファイルに `orb:` キーを追加して、`win/vs2019` Executor (Windows Server 2019) を使用するジョブを追加します。 Notice the Cloud version of this requires the use of `version:2.1` config, and orbs:
+Using the basics from the Linux example above, you can add a job that uses the Windows executor as follows. Notice the cloud version of this requires the use of `version: 2.1` config as well as orbs:
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -137,7 +138,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-**メモ:** Windows ビルドでは、セットアップと前提条件が多少異なります。 詳しくは「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows)」を参照してください。
+For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) page for more information.
+{: class="alert alert-info" }
 
 ### Orb の使用とオーサリングの詳細
 {: #more-about-using-and-authoring-orbs }
@@ -147,7 +149,7 @@ Orb は、構成を簡略化したりプロジェクト間で再利用したり�
 ## プロジェクトのフォロー
 {: #following-unfollowing-projects }
 
-プッシュする新しいプロジェクトを自動的に*フォロー*することで、メール通知が届き、プロジェクトがダッシュボードに追加されます。 それには、CircleCI アプリケーションの [Projects (プロジェクト)] ページで組織を選択し、[Add Projects (プロジェクトの追加)] ボタンをクリックし、フォローを開始または停止するプロジェクトの横にあるボタンをクリックします。
+プッシュする新しいプロジェクトを自動的に*フォロー*することで、メール通知が届き、プロジェクトがダッシュボードに追加されます。 You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking **Projects** in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
 ## 組織の切り替え
 {: #org-switching }
@@ -161,10 +163,10 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 {:.tab.switcher.Server_3}
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-{:.tab.switcher.Server_2}
-![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
+保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
+![組織の切り替えメニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-表示したいプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
+プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある組織名を確認してください。 For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available. If you want to add the GitHub project `your-org/project`, you must select `your-org` from the org switcher.
 
 ## 次のステップ
 {: #next-steps }
