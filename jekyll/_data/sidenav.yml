@@ -389,7 +389,7 @@ en:
           link: 2.0/server-3-operator-proxy
         - name: User Accounts
           link: 2.0/server-3-operator-user-accounts
-        - name: Orbs
+        - name: Managing Orbs
           link: 2.0/server-3-operator-orbs
         - name: VM Service
           link: 2.0/server-3-operator-vm-service

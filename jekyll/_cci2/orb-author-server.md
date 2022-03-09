@@ -98,7 +98,7 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-hostname>
 
 1. **Push the changes up to Github.**
 <br>
-    During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com. Run the following command from a separate terminal when prompted to do so, substituting the name of your default branch:
+    During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleCI.com. Run the following command from a separate terminal when prompted to do so, substituting the name of your default branch:
     ```shell
     git push origin <default-branch>
     ```
@@ -343,3 +343,8 @@ circleci orb list <my-namespace> --private --host <your-server-hostname>
 ```
 
 For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+
+## Next steps
+{: #next-steps }
+
+* Find out about managing orbs for server in the [Managing Orbs]({{site.baseurl}}/2.0/server-3-operator-orbs/) guide guide.

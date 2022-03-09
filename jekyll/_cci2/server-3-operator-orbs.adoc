@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Orbs
+= CircleCI Server v3.x Managing Orbs
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Use this document to learn about orbs and how to manage them within CircleCI server v3.x.
