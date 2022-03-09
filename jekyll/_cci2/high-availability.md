@@ -8,5 +8,5 @@ version:
 - Server Admin
 ---
 
-High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption. Work with a CircleCI Solutions Engineer to set up a custom HA configuration (requires Platinum Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+High availability (HA) gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption. Work with a CircleCI Solutions Engineer to set up a custom HA configuration (requires Premium Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 

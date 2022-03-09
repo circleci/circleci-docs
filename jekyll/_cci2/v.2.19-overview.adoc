@@ -21,7 +21,7 @@ WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a no
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
 
-WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your organization name, there is a <<updating-server#org-rename-script,script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
+WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your CircleCI organization name, there is a <<updating-server#org-rename-script,script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
 
 ## Notes and Best Practices
 
@@ -44,6 +44,11 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
+## What's New in v2.19.14
+
+* Security patches for the exim image.
+Replaced deprecated GitHub API endpoint for teams.
 
 ## What's New in v2.19.13
 

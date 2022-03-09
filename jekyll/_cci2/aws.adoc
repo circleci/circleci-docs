@@ -193,7 +193,7 @@ WARNING: You can make changes to the settings on this page at any time but chang
 
 . **Hostname** – The Hostname field should be pre-populated from earlier in the install process, but if you skipped that step, enter your domain or public IP of the Services machine instance. You can check this has been entered correctly by clicking Test Hostname Resolution.
 
-. **Services** – The Services section is only used when externalizing services. Externalization is available with a Platinum service contract. Contact support@circleci.com if you would like to find out more.
+. **Services** – The Services section is only used when externalizing services. Externalization is available with a Premium service contract. Contact support@circleci.com if you would like to find out more.
 +
 .External Services
 image::hostname-services.png[Hostname and Services Settings]
