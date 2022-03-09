@@ -28,6 +28,8 @@ include::releasing-applications.adoc[]
 
 include::getting-started/index.adoc[]
 
+include::using-continuous-release/index.adoc[]
+
 include::tutorials/minikube.adoc[]
 
 :leveloffset: -1
