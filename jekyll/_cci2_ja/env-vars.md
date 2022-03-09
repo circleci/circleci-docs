@@ -424,6 +424,8 @@ jobs:
 
 以下に、プライマリ コンテナ イメージ (最初にリストされたイメージ) とセカンダリ サービス コンテナ イメージに別々の環境変数を設定する例を示します。
 
+**Note**: While hard-coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables will not be interpolated for non-primary containers.
+
 ```yaml
 version: 2.1
 
@@ -481,7 +483,7 @@ CircleCI API v2 を使用すると、パイプライン パラメーターから
 
 [パイプラインをトリガーする]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (メモ: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -494,12 +496,12 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 **重要:** パイプライン パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/ja/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/ja/2.0/glossary/#context)で確認できます。
 
-詳細については、「[パイプライン変数]({{site.baseurl}}/ja/2.0/pipeline-variables/)」を参照してください。
+詳細については、「[パイプライン変数]({{site.baseurl}}/2.0/pipeline-variables/)」を参照してください。
 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }
 
-ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
+ビルドパラメータは環境変数からなります。そのため、その環境変数名は下記の条件を満たしている必要があります。
 
 - 使用できるのは ASCII 文字、数字、アンダースコア文字のみです
 - 先頭に数字を使用することはできません
@@ -522,7 +524,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }
 ```
 
-このビルドは、以下の環境変数を受け取ります。
+ビルド時には下記のような環境変数となります。
 
 ```shell
 export foo="bar"
