@@ -14,7 +14,7 @@ This document provides a summary of features and product notes for the release o
 {: #requirements-for-upgrading }
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> 任意の時点で組織の名前を変更していた場合は、アップグレード プロセスを開始する前に、<a href="https://circleci.com/ja/docs/2.0/updating-server/#org-rename-script">スクリプト</a>を実行する<b>必要があります</b>。
+<b>Warning:</b> If at any time your CircleCI organization name has been changed, there is a <a href="https://circleci.com/docs/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before starting the upgrade process.
 </div>
 
 ## Notes and best practices
@@ -32,9 +32,9 @@ This document provides a summary of features and product notes for the release o
 ## What's new in release 2.18
 {: #whats-new-in-release-218 }
 
-* It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context).
-* Customers running storage drivers external to AWS will see improved routing times when searching for build Artifacts.
-* You can now customize the metrics that get output from CircleCI. For steps and options, see our [Custom Metrics guide]({{ site.baseurl }}/2.0/monitoring/#custom-metrics). Below is a short list of metrics that are included by default when enabling Custom Metrics:
+* コンテキストにセキュリティ グループを追加することで、実行時に環境変数の使用を制約できるようになりました。 セキュリティ グループは、GitHub チームまたは LDAP グループとして定義されます。 コンテキストにセキュリティ グループを追加すると、そのセキュリティ グループのメンバーである CircleCI ユーザーのみが、コンテキストの環境変数にアクセスまたは環境変数を使用できます。 For more information see our [guide to restricting a context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context).
+* AWS の外部でストレージ ドライバーを実行しているお客様は、ビルド アーティファクトを検索する際のルーティング時間が改善されます。
+* CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 For steps and options, see our [Custom Metrics guide]({{ site.baseurl }}/2.0/monitoring/#custom-metrics). 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
 
 <br>
 
