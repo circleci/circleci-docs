@@ -91,7 +91,6 @@ class OptimizelyClient {
 
       // once we have the userId
       this.getUserId(isGuestExperiment).then((userId) => {
-        console.log('---->', userId);
         if (!userId) {
           return resolve(null);
         }
