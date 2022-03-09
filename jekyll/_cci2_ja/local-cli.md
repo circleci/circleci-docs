@@ -108,6 +108,8 @@ CLI を手動でダウンロードしてインストールする場合は、[Git
 
 `circleci update` コマンドを使用して、CLI を最新のバージョンに更新できます。 なお、更新の有無を手動で確認するだけでインストールを行わない場合は、`circleci update check` コマンドで確認できます。
 
+If you installed the CLI with Homebrew, you will need to run `brew upgrade circleci` to update.
+
 ### 旧バージョンの CLI の更新
 {: #updating-the-legacy-cli }
 {:.no_toc}
