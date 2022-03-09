@@ -779,7 +779,7 @@ Each built-in step is described in detail below.
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-**Note:** the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, use [workflows](#workflows) plus associated [filtering]({{site.baseurl}}/2.0/configuration-reference/#jobfilters) and/or [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). See [fan-out/fan-in examples]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
+**Note:** the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 {: class="alert alert-info"}
 
 Key | Required | Type | Description
@@ -1187,7 +1187,7 @@ A path is not required here because the cache will be restored to the location f
 {: #deploy-deprecated }
 {:.no_toc}
 
-Please see [run](#run) for current processes. If you have parallelism > in your job, please see [Migration from `deploy`]()
+Please see [run](#run) for current processes. If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 
 ##### **Migration from `deploy` to `run`**
 
