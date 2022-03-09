@@ -109,7 +109,7 @@ DLC は、外部ボリュームを作成し、それを `machine` やリモー�
 
 DLC ボリュームは、ジョブで 3 日間使用されないと削除されます。
 
-CircleCI で 1つのプロジェクトに作成される DLC ボリュームの上限は 50個です。プロジェクトごとに最大 50個の同時 `machine` またはリモート Docker ジョブが DLC にアクセスできます。 これはジョブの並列処理を考慮するため、各プロジェクトで DLC にアクセスできるジョブの最大数は、50個の並列処理があるジョブの場合は 1つ、25個の並列処理があるジョブの場合は 2つとなります。
+CircleCI で 1 つのプロジェクトに作成される DLC ボリュームの上限は 50 個です。プロジェクトごとに最大 50 個の `machine` またはリモート Docker ジョブが同時に DLC にアクセスできます。 これはジョブの並列処理を考慮するため、各プロジェクトで DLC にアクセスできるジョブの最大数は、50個の並列処理があるジョブの場合は 1つ、25個の並列処理があるジョブの場合は 2つとなります。
 
 ![Docker レイヤーキャッシュ]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
@@ -290,7 +290,7 @@ RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linu
 {: #video-overview-of-docker-layer-caching }
 {:.no_toc}
 
-このビデオの例では、`setup_remote_docker` ステップの `docker_layer_caching: true` により、ジョブが Dockerfile 内のすべての手順を実行します。 2回目以降のジョブの実行時、Dockerfile 内の変更されていないステップは再利用されます。 したがって、最初の実行時は Docker イメージのビルドに 2分以上かかります。 2回目の実行前に Dockerfile が何も変更されなかった場合、これらのステップは一瞬 (0 秒) で完了します。
+このビデオの例では、`setup_remote_docker` ステップの `docker_layer_caching: true` により、ジョブが Dockerfile 内のすべての手順を実行します。 2 回目以降のジョブの実行時、Dockerfile 内の変更されていないステップは再利用されます。 したがって、最初の実行時は Docker イメージのビルドに 2 分以上かかりますが、 2 回目の実行前に Dockerfile が何も変更されなかった場合、これらのステップは一瞬 (0 秒) で完了します。
 
 ```yaml
 version: 2
