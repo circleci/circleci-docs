@@ -51,11 +51,11 @@ The name of your repository is not critical, but we recommend something similar 
 To initialize a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
 <!---->
 ```shell
-circleci orb init /path/to/myProject-orb
+circleci orb init /path/to/myProject-orb --host <your-server-hostname>
 ```
 To initialize a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
 ```shell
-circleci orb init /path/to/myProject-orb --private
+circleci orb init /path/to/myProject-orb --private --host <your-server-hostname>
 ```
 <!---->
     Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Please make sure to add the `--private` flag if you intend to create a private orb.
@@ -334,12 +334,12 @@ List your available orbs using the CLI:
 
 To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
 ```shell
-circleci orb list <my-namespace>
+circleci orb list <my-namespace> --host <your-server-hostname>
 ```
 
 To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
 ```shell
-circleci orb list <my-namespace> --private
+circleci orb list <my-namespace> --private --host <your-server-hostname>
 ```
 
 For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).

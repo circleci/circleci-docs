@@ -67,16 +67,9 @@ circleci namespace create <name> <vcs-type> <org-name> [flags]
 
 where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organization.
 
-### Next steps
+## Next steps
 {: #next-steps }
 
 * Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
 * If you are developing orbs or use on an installtaion on CircleCI server, read the [Orb Authoring Process on Server]({{site.baseurl}}/2.0/orb-author-server/) guide for information on developing your orb.
-
-## See also
-{: #see-also }
-{:.no_toc}
-
-- [Orb Authoring]({{site.baseurl}}/2.0/orb-author/)
-- [Orb Concepts]({{site.baseurl}}/2.0/orb-concepts/)
-- [Orb Author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)
+* Alternatively, to find out more about orbs read the [Orb Concepts]({{site.baseurl}}/2.0/orb-concepts/) page.
