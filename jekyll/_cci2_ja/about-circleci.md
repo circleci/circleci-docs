@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-CircleCI の使命は、テクノロジー主導の組織が最高の仕事をする支援を行い、エンジニアリングチームの生産性を高めることです。 インテリジェントな自動化により、ビルド、テスト、デプロイを行うことができます。
+Software teams want to move faster, but often lack the confidence to accelerate quickly. Our mission is to manage change so software teams can innovate faster. We want to empower technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. Build, test, and deploy by using intelligent automation.
 
 クラウドでもサーバー上でも、Linux、macOS、Android、そして Windows でも、お客様の環境に応じてご利用いただけます。 CircleCI は、エンタープライズクラスのサポートとサービスを、スタートアップ企業ならではの高い柔軟性をもって提供しています。
 
