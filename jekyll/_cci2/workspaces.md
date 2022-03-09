@@ -188,11 +188,6 @@ For a live example of using workspaces to pass data between build and deploy job
 
 For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
-## Workspace expiration
-{: #workspace-expiration }
-
-Workspaces are stored for up to 15 days. Workspaces are not shared between pipelines, and the only way to access a workspace once the workflow has completed is if the workflow is rerun within the 15 day window.
-
 ## Workspaces and runner network charges
 {: #workspaces-runner-network-charges }
 
