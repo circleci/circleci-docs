@@ -1,1 +1,3 @@
 == Installing the Release Agent
+
+include::../includes/release-agent.adoc[]

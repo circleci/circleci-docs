@@ -1,1 +1,17 @@
 = Using Continuous Release
+
+This guide ...
+
+If you are new to Vamp, begin with the Quick Start Guide.
+
+include::applications.adoc[]
+
+include::services.adoc[]
+
+include::releases.adoc[]
+
+include::segments.adoc[]
+
+include::policies.adoc[]
+
+include::installing-release-agent.adoc[]
