@@ -22,7 +22,7 @@ toc::[]
 ```shell
 git checkout main && git pull
 ```
-. ローカルマシンの enterprise-setup リポジトリの一番上のディレクトリに移動します。
+. ローカルマシンの `enterprise-setup` リポジトリの一番上のディレクトリに移動します。
 
 . terraform init を実行して、作業ディレクトリを初期化します。
 
