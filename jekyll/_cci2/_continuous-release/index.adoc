@@ -8,7 +8,7 @@ docs@circleci.com
 :toc-title: Contents
 :icons: font
 :page-liquid:
-:source-highlighter: rouge
+:source-highlighter: highlightjs
 :pagenums:
 :idprefix:
 :idseparator: -
