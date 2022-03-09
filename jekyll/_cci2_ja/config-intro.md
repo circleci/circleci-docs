@@ -145,9 +145,9 @@ jobs:
 
 設定ファイルに加えた上記の 2 つの変更は、作業をどのように実行するかに大きな影響を与えます。  実行環境をアップグレード、実験、または調整するために特別なコードやアクロバティックな操作は必要なく、Docker コンテナをジョブに関連付けてから、コンテナでジョブを動的に実行するだけです。  小さな変更を行うだけで、Mongo 環境を劇的にアップグレードしたり、基本イメージを拡大・縮小したり、さらには言語を変更することもできます。
 
-- 行 4: yml のインライン コメントです。  どのようなコード単位でも同じですが、設定ファイルが複雑になるほど、コメントの利便性が高くなります。
-- 行 5、6: ジョブに使用する Docker イメージを示します。  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用します。
-- 行 19 ～ 22: コンテナで使用できるノードのバージョンを返す run ステップを追加します。 CircleCI のビルド済みのコンビニエンス イメージにある別のコンテナや、Docker Hub のパブリック コンテナなどを使用して、いろいろ試してみてください。
+- Line 7: Here we see a comment in-line in yml.  どのようなコード単位でも同じですが、設定ファイルが複雑になるほど、コメントの利便性が高くなります。
+- Line 8-9: These lines indicate that docker image to use for the job.  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用します。
+- Line 23-26: These lines add a run step that returns the version of node available in the container. CircleCI のビルド済みのコンビニエンス イメージにある別のコンテナや、Docker Hub のパブリック コンテナなどを使用して、いろいろ試してみてください。
 
 ## パート 4: 開始の承認
 {: #part-four-approved-to-start }
@@ -159,16 +159,7 @@ jobs:
 
 
 ```yml
-version: 2.1
-jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Hello World
-          command: |
-            echo 'Hello World!'
+image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!'
             echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:
