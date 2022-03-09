@@ -9,6 +9,7 @@ docs@circleci.com
 :icons: font
 :page-liquid:
 :source-highlighter: rouge
+:docinfo: private
 :pagenums:
 :idprefix:
 :idseparator: -
