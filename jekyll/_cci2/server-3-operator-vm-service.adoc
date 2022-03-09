@@ -113,7 +113,15 @@ https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<n
 ```
 https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<subnetwork-name>
 ```
-* *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file].
+
+* *GCP IAM Access Type* (required): One of the following is required. Either select `GCP Service Account JSON file` and provide:
+
+** *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] if using the static GCP IAM service account credential.
++
+Or select `IAM Workload Identity` and provide: 
+
+** *GCP IAM Workload Identity* (required): Copy and paste the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[here] in point 2 & 3.
+
 * *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances
 of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
 instances lowers the start time allowing for faster machine and `remote_docker` builds. 
