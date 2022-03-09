@@ -32,7 +32,7 @@ jobs:
         # Commands run in the primary container
 ```
 
-Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-docker).
+Find out more about the `docker` executor in the [Using Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) section of the Choosing an Executor Type page.
 
 ## Machine
 {: #machine }
@@ -67,7 +67,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
+Find out more about the `machine` executor in the [Using machine]({{ site.baseurl }}/2.0/executor-types/#using-machine) section of the Choosing an Executor Type page.
 
 ## macOS
 {: #macos }
@@ -83,7 +83,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
+Find out more about the `macos` executor in the [Using macOS]({{ site.baseurl }}/2.0/executor-types/#using-macos) section of the Choosing an Executor Type page.
 
 ## Windows
 {: #windows }
@@ -141,7 +141,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor). See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
+Find out more about the `windows` executor in the [Using the Windows executor]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor) section of the Choosing an Executor Type page. See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See also
 {: #see-also }
