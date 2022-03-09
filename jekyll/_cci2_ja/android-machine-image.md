@@ -20,28 +20,7 @@ Android マシン イメージには、CircleCI で Linux マシン イメージ
 ## プリインストールされたソフトウェア
 Android マシン イメージには以下がプリインストールされています。
 
-この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
-
-### Android SDK
-{: #android-sdk }
-- sdkmanager
-- Android プラットフォーム 23、24、25、26、27、28、29、30、S
-- ビルド ツール 30.0.3
-- エミュレーター、platform-tools、tools
-- NDK (Side by side) 21.4.7075529
-- cmake 3.6.4111459
-- extras;android;m2repository、extras;google;m2repository、extras;google;google_play_service
-
-### その他
-{: #others }
-- gcloud
-- OpenJDK 8、OpenJDK 11 (デフォルト)
-- maven 3.6.3、gradle 6.8.3、ant
-- nodejs 12.21.0、14.16.0 (デフォルト)、15.11.0
-- python 2.7.18、python 3.9.2
-- ruby 2.7.2、ruby 3.0.0
-- docker 20.10.5、docker-compose 1.28.5
-- jq 1.6
+Please view the quarterly update announcement on our [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) page for a list of current pre-installed software.
 
 ## 制限事項
 {: #limitations }
