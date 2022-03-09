@@ -24,7 +24,7 @@ toc::[]
 .  https://github.com/circleci/enterprise-setup[Setup] リポジトリをクローンします。 すでにクローンしている場合は、クローンが最新であり、メインブランチにいることを確認するために、下記を実行します。
 +
 git checkout main && git pull
-. ローカルマシンの enterprise-setup リポジトリの一番上のディレクトリに移動します。
+. ローカルマシンの `enterprise-setup` リポジトリの一番上のディレクトリに移動します。
 . terraform init を実行して、作業ディレクトリを初期化します。
 . make init を実行し、terraform.tfvars ファイルを初期化します (既に terraform.tfvars が存在する場合、同じディレクトリにバックアップされます)。
 . エディターで terraform.tfvars を開き、1. に適切な AWS 値を入力します。
