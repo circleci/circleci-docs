@@ -14,45 +14,6 @@ verison:
 
 [CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
-## Private orbs vs. public orbs
-{: #private-orbs-vs-public-orbs }
-
-There are two different types of orbs you can use in your configuration, depending on how you want to publish your orbs. If you prefer to publish your orb internally, and not to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a private orb. However, if you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), use a public orb. Each type of orb is described in the sections below.
-
-### Private orbs
-{: #private-orbs }
-
-
-**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
-{: class="alert alert-warning"}
-
-Using a private orb enables you to author an orb while ensuring the following:
-
-* your orb does not appear in the CircleCI Orb Registry.
-
-* your orb cannot be viewed or used by someone outside of your organization.
-
-* your orb cannot be used in a pipeline that does not belong to your organization.
-
-By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:
-
-* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration.
-
-* You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
-
-### Public orbs
-{: #public-orbs }
-
-Public orbs are used by most users when authoring and publishing orbs to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). When authoring a public orb, you are enabling all  CircleCI users to use your orb in their own configurations.
-
-### Authoring orbs
-{: #authoring-orbs }
-
-Both public and private orbs can be authored in two ways:
-
-* Using the [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/)
-* Using the [Orb Development Kit](https://circleci.com/docs/2.0/orb-author/#orb-development-kit)  (recommended)
-
 ## Orb configuration elements
 {: #orb-configuration-elements }
 
@@ -282,6 +243,44 @@ _[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-
 - Not accessible outside of the repository
 - Not public
 - Not accessible via CircleCI CLI
+
+## Private orbs vs. public orbs
+{: #private-orbs-vs-public-orbs }
+
+There are two ways to publish an orb: publin or private. If you prefer to publish your orb internally, and not to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a private orb. However, if you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), use a public orb. Each type of orb is described in the sections below.
+
+### Private orbs
+{: #private-orbs }
+
+**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
+{: class="alert alert-warning"}
+
+Using a private orb enables you to author an orb while ensuring the following:
+
+* your orb does not appear in the CircleCI Orb Registry.
+
+* your orb cannot be viewed or used by someone outside of your organization.
+
+* your orb cannot be used in a pipeline that does not belong to your organization.
+
+By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:
+
+* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration.
+
+* You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
+
+### Public orbs
+{: #public-orbs }
+
+Public orbs are used by most users when authoring and publishing orbs to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). When authoring a public orb, you are enabling all  CircleCI users to use your orb in their own configurations.
+
+### Authoring orbs
+{: #authoring-orbs }
+
+Both public and private orbs can be authored in two ways:
+
+* Using the [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/)
+* Using the [Orb Development Kit](https://circleci.com/docs/2.0/orb-author/#orb-development-kit)  (recommended)
 
 ## Orb packing
 {: #orb-packing }

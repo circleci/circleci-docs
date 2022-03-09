@@ -678,7 +678,9 @@ jobs:
 ### Codecov
 {: #codecov }
 
-Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
+Codecov has an [orb](https://circleci.com/developer/orbs/orb/codecov/codecov) to help simplify the process of uploading your coverage reports. 
+
+**Note:** The Codecov orb is a Partner orb, and so uncertified orbs need to be alled for your organisation in order to use it. This setting is available at **Organization Settings > Security** in the CircleCI web app.
 
 ```yaml
 version: 2.1

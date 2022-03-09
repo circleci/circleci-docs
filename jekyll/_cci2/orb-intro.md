@@ -85,12 +85,16 @@ Orbs in the registry will appear with one of three different namespace designati
 | Community | Written by the community |
 {: class="table table-striped"}
 
-**Note:** _In order to use uncertified orbs, your organization’s administrator must opt-in to allow 3rd-party uncertified orb usage on the **Organization Settings > Security** page for your org._
+**Note:** _In order to use uncertified orbs (Partner or Community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org._
 {: class="alert alert-warning"}
 
 Each orb contains its own description and documentation listed in the orb registry. Often, orbs will have a set of usage examples to get you started.
 
 If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
+
+## Public or private
+{: #public-or-private }
+Orbs can be published publicly to the orb registy, for anyone to use, or privately, so only those within your organisaiton can use them. To understamd these concepts further read the [Public Orbs vs Private Orbs]({{site.baseurl}}/2.0/orb-concepts/#private-orbs-vs-public-orbs) section of the Orb Concepts page.
 
 ## Identifying orbs
 {: #identifying-orbs }
