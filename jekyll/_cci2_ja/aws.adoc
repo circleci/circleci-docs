@@ -41,14 +41,19 @@ NOTE: builder_instance_type は、CircleCI 1.0 でのみ使用され、3. では
 # 1. 必要なクラウド設定
 #####################################
 
-aws_access_key = "..." aws_secret_key = "..." aws_region = "eu-central-1"
-aws_vpc_id = "..." aws_subnet_id = "..." aws_ssh_key_name = "..."
+aws_access_key = "..."
+aws_secret_key = "..."
+aws_region = "eu-central-1"
+aws_vpc_id = "..."
+aws_subnet_id = "..."
+aws_ssh_key_name = "..."
 
 #####################################
 # 2. 必要な CircleCI の設定
 #####################################
 
-circle_secret_passphrase = "..." services_instance_type = "m4.2xlarge"
+circle_secret_passphrase = "..."
+services_instance_type = "m4.2xlarge"
 builder_instance_type = "r3.4xlarge"
 nomad_client_instance_type = "m4.2xlarge"
 
