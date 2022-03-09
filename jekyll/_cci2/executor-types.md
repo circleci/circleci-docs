@@ -36,14 +36,14 @@ An *executor type* defines the underlying technology or environment in which to 
 
 It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
 
-- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
+- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
 
 ## Using Docker
 {: #using-docker }
 
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+The `docker` key defines Docker as the underlying technology to run your jobs using Docker containers. Containers are an instance of the Docker image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
 Docker increases performance by building only what is required for your application. Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
 
@@ -72,7 +72,7 @@ In this example, all steps run in the container created by the first image liste
 
 - In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with docker images being used.
 
-More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
+More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
 ### Using multiple Docker images
 {: #using-multiple-docker-images }
@@ -155,7 +155,7 @@ Docker also has built-in image caching and enables you to build, run, and publis
 
 - Your application is self-sufficient
 - Your application requires additional services to be tested
-- Your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
+- Your application is distributed as a Docker image (requires using [Remote Docker][building-docker-images])
 - You want to use `docker-compose` (requires using [Remote Docker][building-docker-images])
 
 Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
@@ -172,7 +172,7 @@ Capability | `docker` | `machine`
  Full root access | No | Yes
  Run multiple databases | Yes <sup>(3)</sup> | Yes
  Run multiple versions of the same software | No | Yes
- [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
+ [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
@@ -189,11 +189,11 @@ For more information on `machine`, see the next section below.
 ### Caching Docker images
 {: caching-docker-images }
 
-This section discusses caching in the Docker Executor relating to the "Spin Up Environment" step for the main container in the job. It does not apply to [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature of the Remote Docker environment.
+This section discusses caching in the Docker executor relating to the "Spin Up Environment" step for the main container in the job. It does not apply to [Docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature of the Remote Docker environment.
 
 The time it takes to spin up a docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
 
-Generally if you are using a more popular image, such as CircleCI Convenience Images, then cache hits are more likely for a larger number of layers. Most of our popular CircleCI images use the same base image so the majority of the base layers will be the same between images and you therefore have a greater chance of having a cache hit.
+Generally if you are using a more popular image, such as CircleCI convenience images, then cache hits are more likely for a larger number of layers. Most of our popular CircleCI images use the same base image so the majority of the base layers will be the same between images and you therefore have a greater chance of having a cache hit.
 
 The environment has to spin up for every new job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run - for security reasons, we never reuse containers. Once the job is finished the container is destroyed. We cannot guarantee jobs, even in the same workflow, will run on the same docker host machine and therefore the cache status may differ.
 
@@ -256,7 +256,7 @@ jobs:
 
 You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
 
-The following example uses an image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** Check our [pricing page](https://circleci.com/pricing/) to see which plans include the use of Docker Layer Caching.
+The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow. **Note:** Check our [pricing page](https://circleci.com/pricing/) to see which plans include the use of Docker layer caching.
 
 {:.tab.machineblock.Server}
 ```yaml
