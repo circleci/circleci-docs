@@ -32,7 +32,7 @@ To follow along with this document you will need:
 The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - Is VM-based to guarantee full job isolation.
-- Uses the Server Core version of Windows Server 2019 Datacenter Edition.
+- Can use either the Server Core version of Windows Server 2019 Datacenter Edition or Windows Server 2022 Datacenter edition.
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 
@@ -44,9 +44,9 @@ The Windows execution environment (or `executor`) gives users the tools to build
 ## Windows executor images
 {: #windows-executor-images }
 
-Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
+CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
-The Windows image is updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
+The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
 - Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
 
