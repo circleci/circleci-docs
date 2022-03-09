@@ -16,6 +16,7 @@ devhub_base_url: "https://circleci.com/developer"
 blog_base_url: "https://circleci.com/blog"
 support_base_url: "https://support.circleci.com"
 noindex: false
+readtime: true
 
 exclude:
   - .jekyll-cache
@@ -63,7 +64,6 @@ algolia:
 toc:
   min_level: 1
   max_level: 6
-
 
 markdown: kramdown
 kramdown:
