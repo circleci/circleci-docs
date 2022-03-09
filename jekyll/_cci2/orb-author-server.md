@@ -31,11 +31,11 @@ The orb development kit refers to a suite of tools that work together to simplif
 ### Getting started
 {: #getting-started }
 
-**Note:** While the outlined process below only mentions GitHub, the development kit also works with Bitbucket repositories.
-
 To begin creating your new orb with the orb development kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
 Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
+
+Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, then you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
 
 1. **Create a new [GitHub repository](https://github.com/new).**
 <br>
@@ -51,11 +51,11 @@ The name of your repository is not critical, but we recommend something similar 
 To initialize a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
 <!---->
 ```shell
-circleci orb init /path/to/myProject-orb --host <your-server-hostname>
+circleci orb init /path/to/myProject-orb --host <your-server-installation-domain>
 ```
 To initialize a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
 ```shell
-circleci orb init /path/to/myProject-orb --private --host <your-server-hostname>
+circleci orb init /path/to/myProject-orb --private --host <your-server-installation-domain>
 ```
 <!---->
     Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Please make sure to add the `--private` flag if you intend to create a private orb.
