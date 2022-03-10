@@ -93,7 +93,7 @@ When you want to shutdown a Nomad client, you must first set the client to `drai
 . To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
 +
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad node-drain -self -enable
+nomad node-drain -self -enable
 ```
 . Then, make sure the client is in drain mode using the `node-status` command:
 +
