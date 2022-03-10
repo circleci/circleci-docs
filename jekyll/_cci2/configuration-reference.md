@@ -1199,7 +1199,7 @@ There is no direct replacement for the `deploy` step if you are using parallelis
 
 ###### *Example*
 
-A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+A config file that uses the deprecated `deploy` step must be converted and all instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.  The following example demonstrates how to convert a config file that uses the `deploy` step and has parallelism > 1 (this code is deprecated, do not copy):
 
 ```yml
 # Example of deprecated syntax, do not copy
