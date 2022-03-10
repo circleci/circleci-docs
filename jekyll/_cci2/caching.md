@@ -31,6 +31,8 @@ Automatic dependency caching is not available in CircleCI, so it is important to
 
 This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
 
+By default, cache storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
+
 <div class="alert alert-warning" role="alert">
 <b>Note:</b>
 The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.</div>

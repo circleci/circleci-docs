@@ -125,7 +125,7 @@ You can customize storage usage for artifacts, workspaces, test results, and cac
 
 Custom storage usage can help you sanitize your data, as well as reduce monthly costs. An example of this is setting a short storage period for artifacts. Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, 1 day, allows you to both troubleshoot the build, but save costs by not keeping unnecessary data in storage.
 
-If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for your set cache storage period.
+If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle with a 10 day storage period set, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for a new 10 day storage period.
 
 ### Reducing excess use of network egress
 {: #reducing-excess-use-of-network-egress }

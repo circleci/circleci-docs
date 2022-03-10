@@ -19,6 +19,8 @@ For example, a project with a `build` job that builds a `.jar` file and saves it
 
 Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
+By default, workspace storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
+
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ## Workspace configuration
