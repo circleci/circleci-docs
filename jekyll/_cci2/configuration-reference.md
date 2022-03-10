@@ -1197,9 +1197,11 @@ Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to m
 *Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?*
 There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism.
 
+A config file that uses the deprecated `deploy` step must be converted and all instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+
 ###### *Example*
 
-A config file that uses the deprecated `deploy` step must be converted and all instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.  The following example demonstrates how to convert a config file that uses the `deploy` step and has parallelism > 1 (this code is deprecated, do not copy):
+The following example demonstrates how to convert a config file that uses the `deploy` step and has parallelism > 1 (this code is deprecated, do not copy):
 
 ```yml
 # Example of deprecated syntax, do not copy
