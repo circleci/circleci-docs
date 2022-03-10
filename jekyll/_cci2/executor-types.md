@@ -275,13 +275,17 @@ You can view the list of available images [here]({{ site.baseurl }}/2.0/configur
 
 The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
 
-
+```yaml
+machine:
+  image: ubuntu-2004:202104-01
+  docker_layer_caching: true    # default - false
+```
 
 **Note:**
 The `image` key is not supported on private installations of CircleCI.
 See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
-The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on machine executor. This range should not be used in your jobs.
+The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the machine executor. This range should not be used in your jobs.
 
 ## Using macOS
 {: #using-macos }
