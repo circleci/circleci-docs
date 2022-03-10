@@ -24,9 +24,7 @@ toc::[]
 .  https://github.com/circleci/enterprise-setup[Setup] リポジトリをクローンします。 すでにクローンしている場合は、クローンが最新であり、メインブランチにいることを確認するために、下記を実行します。
 +
 git checkout main && git pull
-
 . ローカルマシンの `enterprise-setup` リポジトリの一番上のディレクトリに移動します。
-
 . terraform init を実行して、作業ディレクトリを初期化します。
 . make init を実行し、terraform.tfvars ファイルを初期化します (既に terraform.tfvars が存在する場合、同じディレクトリにバックアップされます)。
 . エディターで terraform.tfvars を開き、1. に適切な AWS 値を入力します。
@@ -178,7 +176,7 @@ image::preflight.png[Preflight Checks]
 WARNING: このページの設定はいつでも変更することができますが、変更する場合サービスの再起動時に *ダウンタイム* が発生します。 一部の設定については、「運用ガイド」で詳しく説明しています。
 
 . **Hostname:** ホスト名フィールドは、インストールプロセスで事前に入力されているはずですが、そのステップをスキップした場合は、Servies マシンのインスタンスのドメインまたはパブリック IP を入力してください。 [Test Hostname Resolution] をクリックすると、正確に入力されているか確認できます。
-. **Services ** : Services のセクションは、サービスを外部化する場合のみ使用します。 Externalization is available with a Premium service contract. 詳細については、support@circleci.com までお問い合わせください。
+. **Services ** : Services のセクションは、サービスを外部化する場合のみ使用します。 外部化はプレミアムサービス契約のお客様のみご利用いただけます。 詳細については、support@circleci.com までお問い合わせください。
 +
 .外部サービス
 image::hostname-services.png[Hostname and Services Settings]
