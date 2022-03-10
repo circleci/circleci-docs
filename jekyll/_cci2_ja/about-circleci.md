@@ -11,9 +11,9 @@ version:
   - Server v2.x
 ---
 
-ソフトウェアチームは高速化を求めていますが、多くの場合、迅速な高速化に対する自信に欠けています。 CircleCI の使命は、ソフトウェアチームがより迅速にイノベーションを実現できるように、変更を管理することです。 We want to empower technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. Build, test, and deploy by using intelligent automation.
+ソフトウェアチームは高速化を求めていますが、多くの場合、迅速な高速化に不安があります。 CircleCI の使命は、ソフトウェアチームがより迅速にイノベーションを実現できるよう、変更を管理することです。 私たちは、テクノロジー主導型の組織が最高の成果を挙げられるようにサポートし、変更を管理することでエンジニアリングチームの生産性と革新性を高めたいと考えています。 インテリジェントな自動化により、ビルド、テスト、デプロイを行うことができます。
 
-クラウドでもサーバー上でも、Linux、macOS、Android、そして Windows でも、お客様の環境に応じてご利用いただけます。 CircleCI は、エンタープライズクラスのサポートとサービスを、スタートアップ企業ならではの高い柔軟性をもって提供しています。
+CircleCI は、クラウドでもサーバー上でも、Linux、macOS、Android、そして Windows でも、お客様の環境に合わせてご利用いただけます。 CircleCI は、エンタープライズクラスのサポートとサービスを、スタートアップ企業ならではの高い柔軟性をもって提供しています。
 
 ## 継続的インテグレーションとは
 {: #what-is-continuous-integration }
