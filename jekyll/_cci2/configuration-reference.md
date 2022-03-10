@@ -1191,11 +1191,13 @@ Please see [run](#run) for current processes. If you have parallelism > in your 
 
 ##### **Migration from `deploy` to `run`**
 
+**Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+
 *Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?*
 Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
 
 *Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?*
-There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism.
+There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
 
 ###### *Example*
 
