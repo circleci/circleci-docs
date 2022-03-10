@@ -63,7 +63,7 @@ NOTE: `nomad node-status` reports both Nomad clients that are currently serving 
 To get more information about a specific client, run the following from that client:
 
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad node-status -self
+kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
 ```
 
 This will give information such as how many jobs are running on the client and the resource utilization of the client.
