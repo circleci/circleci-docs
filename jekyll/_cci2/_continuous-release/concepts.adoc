@@ -2,7 +2,7 @@
 
 == Applications
 
-Conceptually, an application is a collection of microservices sharing a single Kubernetes Namespace.
+Conceptually, an application is a collection of microservices sharing a single Kubernetes namespace.
 
 Continuous Release also allows you to release across multiple Kubernetes clusters and multiple cloud providers. In this case, an _application_ is a unique combination of a Kubernetes cluster and a Namespace name.
 

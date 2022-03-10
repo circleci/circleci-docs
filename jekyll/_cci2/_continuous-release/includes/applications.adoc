@@ -10,6 +10,10 @@ Enter a description (optional).
 
 Select your cluster name from the list, or add a new one by clicking **Create New Cluster** at the bottom of the list. If your applications are distributed across multiple clusters, you can add additional clusters.
 
+=== Creating a cluster
+
+include::create-cluster.adoc[]
+
 === Namespace
 
 Enter the namespace where your microservices will run.
