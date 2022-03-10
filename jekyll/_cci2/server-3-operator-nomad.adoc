@@ -98,7 +98,7 @@ nomad node-drain -self -enable
 . Then, make sure the client is in drain mode using the `node-status` command:
 +
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad node-status -self
+nomad node-status -self
 ```
 
 Alternatively, you can drain a remote node with the following command, substituting the node ID:
