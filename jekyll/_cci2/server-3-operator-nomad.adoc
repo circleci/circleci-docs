@@ -39,7 +39,7 @@ The `nomad` CLI is installed in the Nomad pod. It is pre-configured to talk to t
 The get a list of statuses for all jobs in your cluster, run:
 
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad status
+kubectl exec -it nomad-server-pod-ID -- nomad status
 ```
 
 The `Status` is the most important field in the output, with the following status type definitions:
