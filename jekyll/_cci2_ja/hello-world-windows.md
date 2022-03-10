@@ -24,13 +24,13 @@ version:
 作業を行う前に、以下を準備しておく必要があります。
 
 * CircleCI の[アカウント](https://circleci.com/ja/signup/)。
-* Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
-* クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
+* Free プラン (デフォルト) または [Performance または Scale プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方には以下に別のコード例を掲載していますので、そちらをご参照ください。
+* クラウド版でプロジェクトに Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
 
 ## Windows Executor の概要
 {: #overview-of-the-windows-executor }
 
-The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. Windows Executor の仕様と機能は以下のとおりです。
+Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプリケーションや .NET が実行可能な Windows 固有プロジェクト(.NET フレームワークなど) といった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
 
 - VM ベースでジョブの完全分離を保証
 - Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
@@ -40,22 +40,22 @@ The Windows execution environment (or `executor`) gives users the tools to build
 **備考:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
-- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
+- CircleCI Server v2.x では Orb の使用はサーポートしていません (CircleCI Server を使用の場合は、"Server" コードサンプルを参照してください)。
 
 ## Windows Executor イメージ
 {: #windows-executor-images }
 
-現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに何が含まれているのか、詳しい情報についてはシステム管理者にお問い合わせください。
+現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに含まれる内容の詳細についてはシステム管理者にお問い合わせください。
 
-The Windows image is updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
+Windows イメージは約 30 日ごとにアップデートされます。 Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
 
-- Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. アップデートは、通常月に 1 回の頻度で行われます。
+- Stable: 本番環境で使用可能な最新の Windows イメージを参照します。 このイメージは、安定性を適度に確保しつつ、ソフトウェアの定期アップデートを取り入れたいプロジェクトで使用してください。 アップデートは、通常月に 1 回の頻度で行われます。
 
-- Previous: This image tag points to the previous ("stable") production ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. アップデートは、通常月に 1 回の頻度で行われます。
+- Previous: 本番環境で使用可能な過去の (安定した)  Windows イメージを参照します。 このイメージは、最新のソフトウェアのアップデートに破壊的変更が含まれる場合などに使用できます。 アップデートは、通常月に 1 回の頻度で行われます。
 
-- Edge: This image tag points to the latest version of the Windows image, and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes, and not guaranteed to be stable.
+- Edge: 最新の Windows イメージを参照し、メインブランチの HEAD からビルドされます。 このタグは、最新の変更を含み完全な安定性が保証されていないテストバージョンのイメージとして使うことが想定されています。
 
-なお、WindowsのDockerコンテナは、このようにWindowsのExecutorで実行することも可能です。
+なお、Windows の Docker コンテナは、このように Windows の Executor で実行することも可能です。
 
 {:.tab.windowsblockone.Cloud}
 ```yaml
@@ -127,12 +127,12 @@ jobs:
 Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
 
 * SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
-* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
+* 現時点では、ネストされた仮想化をサポートしていません (`--platform linux` フラグの使用など)。
 
 ## サンプルの設定ファイル
 {: #example-configuration-file }
 
-以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
+以下の設定スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
 
 {:.tab.windowsblocktwo.Cloud}
 ```yaml
@@ -265,7 +265,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
+**注:** 更新版や他の Windows シェルツールをインストールすることも可能です。たとえば、`dotnet` CLI で PowerShell Core の最新版をインストールし、ジョブの一連のステップに使用できます。
 
 
 {:.tab.windowsblockfour.Cloud}
@@ -319,7 +319,7 @@ jobs:
 ## サンプル アプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。 **注:** CircleCI Server をご使用の場合は、上記のコードサンプルに記載されているように Orb をマシンイメージの使用に置き換えます。
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
@@ -417,7 +417,7 @@ CircleCI の機能については、以下のドキュメントを確認して�
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
 * すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)」を参照してください。
 
-## Software pre-installed on the Windows image
+## Windows イメージにプリインストールされているソフトウェア
 {: #software-pre-installed-on-the-windows-image }
 
-To find information on what software is pre-installed on the Windows image, please visit the [Discuss](https://discuss.circleci.com/) page.
+Windows イメージにプリインストールされているソフトフェアに関する情報は、[Discuss](https://discuss.circleci.com/) のページをご覧ください。
