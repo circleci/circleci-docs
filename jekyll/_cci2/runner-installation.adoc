@@ -36,7 +36,7 @@ Running jobs requires you have the following tools available on your machine:
 
 NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-*_Agree to TOS to get access to runners_*.
+WARNING: If you have not already agreed to Runner Terms in a signed Order, then by installing Runner, you are agreeing to the CircleCI Runner Terms which can be found at: https://circleci.com/legal/runner-terms. If you have already agreed to Runner Terms in a signed Order, the Runner Terms in the signed Order supersede the Runner Terms in the web address above. If you did not already agree to Runner Terms through a signed Order and do not agree to the Runner Terms in the web address above, please do not install or use Runner.
 
 In order to install runner you will need to create a namespace and authentication token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider.
 
