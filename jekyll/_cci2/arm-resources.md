@@ -11,6 +11,16 @@ version:
 This document will walk you through the setup steps required to use an Arm
 resource on CircleCI. Arm resources are available on cloud and server 3.x.
 
+<div class="alert alert-warning" role="alert">
+  <strong>CircleCI does not currently support support ARM with our Docker executor. If you would like to follow updates on this functionality, please refer to the following Canny post <a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor"</a>.
+</div>
+
+Note: Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The Spin Up Environment job will give you a green tic, but you will see the following message in the response:
+
+`WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])`
+
+If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
+
 ## Overview
 {: #overview }
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
