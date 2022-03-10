@@ -62,7 +62,7 @@ System Administrators are able to gather [metrics for monitoring]({{ site.baseur
 ### Nomad cluster
 {: #nomad-cluster }
 
-CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/nomad/) for understanding how to operate the Nomad Cluster in your CircleCI server installation.
+CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/server-3-operator-nomad/) for understanding how to operate the Nomad Cluster in your CircleCI server installation.
 
 ### APIs
 {: #apis }
