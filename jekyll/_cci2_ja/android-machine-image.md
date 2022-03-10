@@ -10,9 +10,9 @@ version:
 ## 概要
 {: #overview }
 
-Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
+Android マシンイメージには、CircleCI で Linux マシンイメージにアクセスする場合と同様に、[Linux `machine` Executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシンイメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
-## Android マシン イメージの使用
+## Android マシンイメージの使用
 {: #using-the-android-machine-image }
 
 設定ファイルに Android イメージを使用するには、[Orb]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
@@ -20,7 +20,7 @@ Android マシン イメージには、CircleCI で Linux マシン イメージ
 ## プリインストールされたソフトウェア
 Android マシン イメージには以下がプリインストールされています。
 
-Please view the quarterly update announcement on our [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) page for a list of current pre-installed software.
+現在プリインストールされているソフトウェアのリストについては、 [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) ページで四半期ごとの更新のお知らせを参照してください。
 
 ## 制限事項
 {: #limitations }
