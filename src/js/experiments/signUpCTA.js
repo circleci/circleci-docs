@@ -5,11 +5,19 @@ window.OptimizelyClient.getVariationName({
   experimentContainer: '.global-nav--footer',
   guestExperiment: true,
 }).then((variation) => {
+  const ctaBtn = document.getElementById('signup-cta');
   if (variation === 'treatment') {
-    const ctaBtn = document.getElementById('signup-cta');
     ctaBtn.innerHTML = 'Start Building for Free';
     ctaBtn.addEventListener('click', () => {
-      window.AnalyticsClient.trackAction('Clicked New Signup CTA');
+      window.AnalyticsClient.trackAction('Clicked New Signup CTA', {
+        ctaText: 'Start Building for Free',
+      });
+    });
+  } else if (variation === 'control') {
+    ctaBtn.addEventListener('click', () => {
+      window.AnalyticsClient.trackAction('Clicked Old Signup CTA', {
+        ctaText: 'Signup',
+      });
     });
   }
 });
