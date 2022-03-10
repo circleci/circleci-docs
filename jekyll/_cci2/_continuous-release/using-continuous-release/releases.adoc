@@ -19,3 +19,33 @@ A canary release policy typically includes three or more steps that  target prog
 The Release Agent monitors the performance of the new version. If everything is released successfully, the policy completes with all users receiving the new version.
 
 If the new version does not meet all the conditions specified in the release policy, the Release Agent immediately rolls back by switching all users to the current, live version.
+
+=== Viewing Releases
+
+The _Releases_ tab shows all running, pending, and completed releases across your applications and clusters.
+
+// screenshot
+
+An initial progressive release of a service for an application has only a target version, that is, the version that was released, and the status. 
+All other progressive releases indicate the source and target versions and the release policy that was used. 
+
+// screenshot
+
+Running releases are indicated by a blue Running status marker.
+In addition to the status, the number of steps is shown, along with when the release started. A running step is shown in blue. Successfully completed steps are shown in green, and failed steps in red.
+
+==== Viewing Release Details
+
+To view the details of a release, click the *Details* button next to the release in the list.
+
+// screenshot
+
+The release details page provides a detailed timeline of the events for each step in a release.
+
+The performance against each Service Level Objective (SLO) is shown as a chart.
+
+You can click on each running or completed step to see the performance of the service version that is being released.
+
+// screenshot
+
+NOTE: When viewing a running release, the charts typically lag 45 seconds behind the actual state of the cluster.

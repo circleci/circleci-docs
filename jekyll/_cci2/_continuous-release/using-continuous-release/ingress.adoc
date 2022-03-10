@@ -1,2 +1,26 @@
 == Ingress
 
+The _Ingress_ tab shows a list of the domains associated with the selected application and the paths and services exposed by the application. 
+
+// screenshot
+
+=== Domains
+
+==== Creating a Domain
+
+// need to use some includes here to avoid duplication with Getting Started.
+
+
+==== Editing a Domain
+
+To edit the domain, click the pencil icon next to the domain you wish to change.
+
+// screenshot
+
+=== Routes
+
+// use an include here
+
+To edit a path, click on the pencil icon next to the path you wish to change.
+
+// screenshot
