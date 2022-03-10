@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "設定ファイルの概要"
-description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
+description: "CircleCI のコアエクスペリエンス「config.yml 」を4 つの簡単な手順ではじめる方法をご確認ください。"
 version:
   - Cloud
   - Server v3.x
