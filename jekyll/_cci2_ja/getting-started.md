@@ -8,7 +8,7 @@ categories:
 order: 41
 ---
 
-Follow this step-by-step guide to get your first successful green build on CircleCI using a GitHub repository.
+ここでは GitHub リポジトリを使ってはじめてビルドを成功 (グリーンビルド) させるための詳しい手順を説明します。
 
 * 目次
 {:toc}
@@ -18,42 +18,42 @@ Follow this step-by-step guide to get your first successful green build on Circl
 {:.no_toc}
 
 * Git の基礎知識
-* A GitHub or Bitbucket account. We will use GitHub in this guide but you can follow the equivalent steps for Bitbucket if necessary.
-* An account on CircleCI, connected to your version control system. If you do not already have an account, visit the [Signup page](https://circleci.com/signup/) to create one (optional: read through the [Sign Up & Try]({{site.baseurl}}/2.0/first-steps/) instructions).
-* Prior experience using the terminal or command line is helpful, as well as some basic `bash` knowledge.
+* GitHub 又は Bitbucket アカウント:  このガイドでは GitHub を使用していますが、必要に応じて Bitbucket でも同じプロセスを実行していただけます。
+* バージョン管理システムと連携している CircleCI アカウント : まだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/signup/)に移動してアカウントを作成してください (オプション: [CircleCI のユーザー登録]({{site.baseurl}}/2.0/first-steps/)をお読みください)。
+* ターミナルやコマンドラインの使用経験や `bash` に関する基礎知識があるとスムーズに行えます。
 
-## Create a repository
+## リポジトリの作成
 CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
-1. Log in to GitHub and begin the process to [create a new repository](https://github.com/new).
-1. Enter a name for your repository (for example, `hello-world`).
-1. Select the option to initialize the repository with a README file.
+1. GitHub にログインして、[新規リポジトリを作成](https://github.com/new)します。
+1. リポジトリ名を入力します (例: `hello-world`)。
+1. README ファイルを使ってリポジトリを初期化するを選択します。
 1. 最後に、**[Create repository (リポジトリを作成)]** をクリックします。
 
-There is no need to add any source code for now.
+ここではソースコードを追加する必要はありません。
 
-## Set up CircleCI
+## CircleCI をセットアップする
 {: #setting-up-circleci }
 
-1. Navigate to the CircleCI [**Projects** page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
-1. You will be taken to the **Projects** dashboard. On the dashboard, select the project you want to set up (`hello-world`).
-1. Select the option to commit a starter CI pipeline to a new branch, and click **Set Up Project**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circleci-project-setup`.
+1. CircleCI の [Project</strong> ページ](https://app.circleci.com/projects/)に移動します。 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
+1. **Project** ダッシュボードに自動的に移動します。 ダッシュボードで、セットアップするプロジェクトを選択します (`hello-world`)。
+1. CI スターターパイプラインを新しいブランチにコミットするを選択し、config.yml のスターターテンプレートの使用を選択し、**[Set Up Project]**をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。
 
-Congratulations! You will soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
+おめでとうございます！ はじめてのビルドの成功 (グリーンビルド) です。 この設定で問題がなければ、後でこれをメインブランチにマージすることができます。
 
-## Dig into your first pipeline
+## はじめて作成したパイプラインを掘り下げる
 {: #digging-into-your-first-pipeline }
 
 実行結果を確認します。
 
-1. On your project's pipeline page, click the green **Success** button, which brings you to the workflow that ran (`say-hello-workflow`).
-2. Within this workflow, the pipeline ran one job, called `say-hello`. Click `say-hello` to see the steps in this job:  
-   a. Spin up environment  
-   b. Preparing environment variables  
-   c. Checkout code  
+1. プロジェクトのパイプラインのページで、緑色の **Success** ボタンをクリックすると、実行されたワークフローが表示されます (`say-hello-workflow`)。
+2. このワークフロー内で、パイプラインが `say-hello` というジョブを実行しました。 `say-hello` をクリックして、このジョブのステップを確認します:   
+   a. 環境のスピンアップ  
+   b.  環境変数の作成  
+   c. コードのチェックアウト  
    d. Say hello
 
-Every job is made up of a series of steps. Some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout), are special, reserved commands in CircleCI. The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
+どのジョブも一連のステップから構成されています。 [checkout</code>]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
 
 Even though there is no actual source code in your repo, and no actual tests configured in your `.circleci/config.yml`, CircleCI considers your build to have succeeded because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status) of 0). 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 You can learn more about all the possible steps one may put in a `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference).
 
