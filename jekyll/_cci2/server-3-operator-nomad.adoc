@@ -104,7 +104,7 @@ kubectl exec -it nomad-pod-IDm -- nomad node-status -self
 Alternatively, you can drain a remote node with the following command, substituting the node ID:
 
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad node-drain -enable -yes <node-id>
+nomad node-drain -enable -yes <node-id>
 ```
 
 === Scaling Down the Client Cluster
