@@ -55,7 +55,7 @@ The `Status` is the most important field in the output, with the following statu
 To get a list of your Nomad clients, run:
 
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad node-status
+kubectl exec -it nomad-server-pod-ID -- nomad node-status
 ```
 
 NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
