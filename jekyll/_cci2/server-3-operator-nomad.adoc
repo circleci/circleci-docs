@@ -73,7 +73,7 @@ This will give information such as how many jobs are running on the client and t
 As noted in the Nomad Jobs section above, a Nomad Job corresponds to an execution of a CircleCI job. Therefore, Nomad Job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run:
 
 ```shell
-kubectl exec -it nomad-pod-IDm -- nomad logs -job -stderr <nomad-job-id>
+kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
 ```
 
 NOTE: Be sure to specify the `-stderr` flag as this is where most Build Agent logs appear.
