@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "First project on CircleCI"
+description: "CircleCI  での最初のプロジェクト"
 categories:
   - はじめよう
 order: 4
@@ -12,12 +12,12 @@ version:
   - Server v2.x
 ---
 
-This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
+このページでは、[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後に CircleCI で Linux、Android、Windows、macOS プロジェクトの基本的なビルドを開始するための方法について解説しています。
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
 
-この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
