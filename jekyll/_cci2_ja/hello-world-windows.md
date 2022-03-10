@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Windows での Hello World"
 short-title: "Windows での Hello World"
-description: "First Windows project on CircleCI"
+description: "CircleCI  での最初の Windows プロジェクト"
 categories:
   - はじめよう
 order: 4
@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/2.0/getting-started/).
+このドキュメントでは、CircleCI の **Windows 実行環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)をご覧になることをお勧めします。
 
 * 目次
 {:toc}
