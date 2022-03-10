@@ -4,6 +4,7 @@ title: Configuring CircleCI
 short-title: Configuring CircleCI
 description: Reference for .circleci/config.yml
 order: 20
+readtime: false
 version:
 - Cloud
 - Server v3.x
