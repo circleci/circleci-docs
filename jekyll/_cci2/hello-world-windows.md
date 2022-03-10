@@ -16,6 +16,10 @@ This document describes how to get started with continuous integration on **Wind
 * TOC
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+  <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
+</div>
+
 
 ## Prerequisites
 {: #prerequisites }
