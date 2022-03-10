@@ -43,6 +43,15 @@ class OptimizelyClient {
       }
     });
   }
+
+  // Experiment entered tracking
+  getTrackExperimentEntry() {
+    let orgId = Cookies.get(COOKIE_KEY) ?? null;
+    this.getUserId().then((userId) => {
+      trackExperimentEntry(userId, orgId, 'docs');
+    });
+  }
+
   // getVariationName is always guaranteed to resolve with either "null" or a variation name.
   // This is consistent to what getVariation from the optimizely-sdk does.
   //
@@ -264,6 +273,19 @@ export const storeExperimentParticipation = (
     // Uglify /w browserlist force us to do catch (_)
     // We're deliberately ignoring it so that it doesn't break the app. It'll mean a few extra
     // events are emitted, but I think that's the lesser issue.
+  }
+};
+
+export const trackExperimentEntry = (userId, orgId, projectId) => {
+  if (userId && orgId) {
+    const properties = {
+      id: uuidv4(),
+      timestamp: Date.now().toISOString(),
+      userId,
+      orgId,
+      projectId,
+    };
+    window.AnalyticsClient.trackAction('Experiment Entry', properties);
   }
 };
 

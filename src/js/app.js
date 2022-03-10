@@ -55,4 +55,6 @@ $(() => {
   Prism.highlightAll();
   // trackCopyCode service MUST be initialized after PrismJS is initialized
   services.trackCopyCode.init();
+
+  window.OptimizelyClient.getTrackExperimentEntry();
 });
