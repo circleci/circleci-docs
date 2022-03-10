@@ -32,7 +32,7 @@ To follow along with this document you will need:
 The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - Is VM-based to guarantee full job isolation.
-- Can use either the Server Core version of Windows Server 2019 Datacenter Edition or Windows Server 2022 Datacenter edition.
+- Can use either the Server Core version of Windows Server 2019 Datacenter Edition, or Windows Server 2022 Datacenter edition.
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 
