@@ -2,7 +2,7 @@
 
 This guide ...
 
-If you are new to Vamp, begin with the xref:../getting-started/index#[Getting Started guide].
+If you are new to Vamp, begin with the Getting Started guide.
 
 // link to getting-started/index.adoc
 
