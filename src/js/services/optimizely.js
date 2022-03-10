@@ -277,7 +277,6 @@ export const storeExperimentParticipation = (
 };
 
 export const trackExperimentEntry = (userId, orgId, projectId) => {
-  console.log('track experiment entry 1111')
   if (userId && orgId) {
     const properties = {
       id: uuidv4(),
@@ -286,7 +285,6 @@ export const trackExperimentEntry = (userId, orgId, projectId) => {
       orgId,
       projectId,
     };
-    console.log('track experiment entry 22222')
     window.AnalyticsClient.trackAction('Experiment Entry', properties);
   }
 };
