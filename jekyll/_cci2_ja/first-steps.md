@@ -22,7 +22,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
         <div class="signup-button-wrapper gh-signup-button-wrapper">
           <a class="track-signup-link gh-signup-button" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
-            <div class="button-text">Sign up with GitHub</div>
+            <div class="button-text">GitHub で登録</div>
           </a>
           <button class="gh-dropdown-button">
             <div class="gh-dropdown-caret"></div>
@@ -35,7 +35,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
         <div class="signup-button-wrapper">
           <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
-            <div class="button-text">Sign up with BitBucket</div>
+            <div class="button-text">BitBucket で登録</div>
           </a>
         </div>
       </div>
@@ -50,7 +50,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 ## メールアドレスでの登録
 {: #email-signup }
 
-1. **メールで登録**をクリックします。
+1. **メールアドレスで登録**をクリックします。
 
     <!-- start: experiment code - #docs-discovery -->
     <div class="signup-and-try-experiment-block">
@@ -58,7 +58,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
         <div class="signup-buttons">
         <a href="https://circleci.com/auth/signup/" class="track-signup-link email-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/circleci.svg"/>
-            <div class="button-text">Sign Up with Email</div>
+            <div class="button-text">メールアドレスで登録</div>
         </a>
         </div>
       </div>
@@ -72,12 +72,12 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 4. コードに接続します。今はコードに接続しない場合は、CircleCI アプリケーション内のサンプルプロジェクトを参照してください。
 
     - GitHub または Bitbucket アカウントに接続し、 CircleCI 上でプロジェクトをビルドし、デプロイします。 GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインをクリックします。
-    - CircleCI 上の一般的なオープンソースプロジェクトビルドを使って([React  by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Pyton サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) のいずれかを使用して、CircleCI アプリケーションをお試しください。 You'll be able to start exploring features such as [pipelines]({{ site.baseurl }}/2.0/pipelines/) and [workflows]({{ site.baseurl }}/2.0/workflows). [Dashboard (ダッシュボード)] 、 [Projects (プロジェクト)] 、 [Organization Settings (組織の設定)] 、および [Plan (プラン)] のページは、 GitHub アカウントまたは Bitbucket アカウントを接続するまで使用できません。
+    - CircleCI 上の一般的なオープンソースプロジェクトビルドを使って([React  by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Pyton サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) のいずれかを使用して、CircleCI アプリケーションをお試しください。 [パイプライン]({{ site.baseurl }}/2.0/pipelines/)や[ワークフロー]({{ site.baseurl }}/2.0/workflows) などの機能をご覧いただけます。 [Dashboard (ダッシュボード)] 、 [Projects (プロジェクト)] 、 [Organization Settings (組織の設定)] 、および [Plan (プラン)] のページは、 GitHub アカウントまたは Bitbucket アカウントを接続するまで使用できません。
 
-## Terms
+## 利用規約
 {: #terms}
 
-By signing up, you are agreeing to our [SaaS Agreement](https://circleci.com/terms-of-service/) and [Privacy Policy](https://circleci.com/privacy/). CircleCI では、サービス改善を目的として、お客様のアカウント データへの読み取りアクセスまたは書き込みアクセスの許可をお願いすることがあります。 GitHub アカウントをお持ちで、CircleCI とのプライベート プロジェクトへのアクセス権の共有を希望されない方は、パブリック リポジトリを選択してください reCAPTCHA による確認が必要です、Google の[プライバシー ポリシー](https://policies.google.com/privacy?hl=ja)と[利用規約](https://policies.google.com/terms?hl=ja)が適用されます。
+ユーザー登録を行うことで、[ SaaS 利用規約](https://circleci.com/terms-of-service/)および[プライバシー ポリシー](https://circleci.com/privacy/)に同意したものと見なされます。 CircleCI では、サービス改善を目的として、お客様のアカウント データへの読み取りアクセスまたは書き込みアクセスの許可をお願いすることがあります。 GitHub アカウントをお持ちで、CircleCI とのプライベート プロジェクトへのアクセス権の共有を希望されない方は、パブリック リポジトリを選択してください reCAPTCHA による確認が必要です、Google の[プライバシー ポリシー](https://policies.google.com/privacy?hl=ja)と[利用規約](https://policies.google.com/terms?hl=ja)が適用されます。
 
 ## 次のステップ
 {: #next-steps }
