@@ -569,7 +569,7 @@ jobs:
 ##### machine Executor (Linux)
 {: #machine-executor-linux }
 
-{% include snippets/machine-resource-table.md %}
+{% include snippets/ja/machine-resource-table.md %}
 
 ###### 例
 {: #example-usage }

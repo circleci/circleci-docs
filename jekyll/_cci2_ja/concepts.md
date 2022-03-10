@@ -83,7 +83,7 @@ CircleCI パイプラインとは、プロジェクトで作業をトリガす�
 
 パイプラインとは、設定と対話するための手法です。
 
-{% include snippets/pipelines-benefits.adoc %}
+{% include snippets/ja/pipelines-benefits.adoc %}
 
 
 

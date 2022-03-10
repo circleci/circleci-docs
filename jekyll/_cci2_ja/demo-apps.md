@@ -14,7 +14,7 @@ version:
 
 Code that builds on Linux or iOS will generally build on CircleCI. CircleCI では、さまざまな言語で複数のデモ アプリケーションを用意しているため、お使いの言語で記述されているアプリケーションの例を参考にしながら学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリック リポジトリを公開しています。 それぞれをフォークし、内容をご確認ください。
 
-{% include snippets/language-guides.md %}
+{% include snippets/ja/language-guides.md %}
 
 ## サポートされている言語
 {: #supported-languages }
