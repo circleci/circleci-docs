@@ -20,9 +20,9 @@ order: 41
 * Git の基礎知識
 * GitHub 又は Bitbucket アカウント:  このガイドでは GitHub を使用していますが、必要に応じて Bitbucket でも同じプロセスを実行していただけます。
 * バージョン管理システムと連携している CircleCI アカウント : まだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/signup/)に移動してアカウントを作成してください (オプション: [CircleCI のユーザー登録]({{site.baseurl}}/2.0/first-steps/)をお読みください)。
-* ターミナルやコマンドラインの使用経験や `bash` に関する基礎知識があるとスムーズに行えます。
+* ターミナルやコマンドラインの使用経験や `bash` に関する基礎知識があると役立ちます。
 
-## リポジトリの作成
+## リポジトリを作成する
 CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
 1. GitHub にログインして、[新規リポジトリを作成](https://github.com/new)します。
@@ -37,9 +37,9 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
 1. CircleCI の [Project</strong> ページ](https://app.circleci.com/projects/)に移動します。 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
 1. **Project** ダッシュボードに自動的に移動します。 ダッシュボードで、セットアップするプロジェクトを選択します (`hello-world`)。
-1. CI スターターパイプラインを新しいブランチにコミットするを選択し、config.yml のスターターテンプレートの使用を選択し、**[Set Up Project]**をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。
+1. CI スターターパイプラインを新しいブランチにコミットするを選択し、config.yml のスターターテンプレートの使用を選択し、**[Set Up Project]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。
 
-おめでとうございます！ はじめてのビルドの成功 (グリーンビルド) です。 この設定で問題がなければ、後でこれをメインブランチにマージすることができます。
+おめでとうございます！ はじめてのビルドの成功 (グリーンビルド) です。 この設定で問題がなければ、後にこれをメインブランチにマージすることができます。
 
 ## はじめて作成したパイプラインを掘り下げる
 {: #digging-into-your-first-pipeline }
@@ -53,21 +53,21 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
    c. コードのチェックアウト  
    d. Say hello
 
-どのジョブも一連のステップから構成されています。 [checkout</code>]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
+どのジョブも一連のステップから構成されています。 [checkout</code>]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
 
-Even though there is no actual source code in your repo, and no actual tests configured in your `.circleci/config.yml`, CircleCI considers your build to have succeeded because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status) of 0). 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 You can learn more about all the possible steps one may put in a `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference).
+リポジトリに実際のソースコードがなく、`.circleci/config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトはこれよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[CircleCI の設定リファレンス]({{site.baseurl}}/2.0/configuration-reference)を参照してください。
 
-### Break your build!
+### ビルドを意図的に失敗させる
 {: #breaking-your-build }
 {:.no_toc}
 
-In this section, you will edit the `.circleci/config.yml` file and see what happens if a build does not complete successfully.
+ここでは、`.circleci/config.yml` ファイルを編集してビルドが成功しなかった場合に何が起きるか確認します。
 
-It is possible to edit files directly on GitHub. Open the URL below in a browser, substituting your username (or organization) and the name of your repository (replace the text with `{brackets}`). Or, if you are comfortable with Git and the command line, use your text editor and push your changes in the terminal.
+GitHub 上で直接ファイルを編集することができます。 下記 URL をブラウザーで開き、ユーザー名 (または組織) とリポジトリ名を自分のものに置き換えます (テキストを `{brackets}` に置き換えます)。 または、Git やコマンドラインに慣れている方は、テキストエディターを使って変更をターミナルにプッシュします。
 
 `https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
 
-今回は、[Node Orb](https://circleci.com/ja/developer/orbs/orb/circleci/node) を使用してみましょう。 Replace the existing config by pasting the following code:
+今回は、[Node Orb](https://circleci.com/ja/developer/orbs/orb/circleci/node) を使用してみましょう。 下記のコードをペーストして現在の設定を変更します。
 
 ```yaml
 version: 2.1
@@ -87,41 +87,41 @@ jobs:
 ```
 
 
-Commit your change, then return to the **Projects** page in CircleCI. You should see a new pipeline running... and it will fail! 何が起こったのでしょうか。
+変更をコミットし、CircleCI の **Project** ページに戻ります。 新しいパイプラインが実行され失敗することが確認できます。 何が起こったのでしょうか？
 
-Node Orb は、一般的な Node タスクを実行します。 Because you are working with an empty repository, running `npm run test`, a Node script, causes the configuration to fail. To fix this, you need to set up a Node project in your repository—a topic for another tutorial. 参考として、[デモ アプリケーション]({{site.baseurl}}/2.0/demo-apps/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
+Node Orb は、一般的な Node タスクを実行します。 今回は空のリポジトリで Node スクリプト `npm run test` を実行したので、設定が失敗したのです。 これを修正するには、リポジトリで Node プロジェクトをセットアップする必要があります。その方法は、別のチュートリアルで説明します。 参考として、[デモ アプリケーション]({{site.baseurl}}/2.0/demo-apps/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
 
-## Use workflows
+## ワークフローを使用する
 {: #using-the-workflows-functionality }
 {:.no_toc}
 
-CircleCI を使用する際には、必ずしも Orb を使用する必要はありません。 次の例では、カスタム設定ファイルの作成方法を説明します。 この例でも、CircleCI の[ワークフロー機能]({{site.baseurl}}/2.0/workflows)を使用します。
+CircleCI を使用する際に、必ずしも Orb を使う必要はありません。 次の例では、カスタム設定ファイルの作成方法を説明します。 ここでも、CircleCI の[ワークフロー機能]({{site.baseurl}}/2.0/workflows)を使用します。
 
-1. 以下のコードブロックと付記されているコメントを読み進めます。 Then, to see workflows in action, edit your `.circleci/config.yml` file and copy and paste the following text into it.
+1. 以下のコードブロックと付記されているコメントを読み進めます。 読み終えたら、ワークフローの動作を確認するために、`.circleci/config.yml` ファイルを編集して以下のテキストをコピー & ペーストします。
 
    ```yaml
    version: 2
    jobs: # 今回は 2 つのジョブを用意し、ワークフロー機能でジョブの調整を行います。
      one: # 1 つ目のジョブ
-       docker: # it uses the docker executor
-         - image: cimg/ruby:2.6.8 # specifically, a docker image with ruby 2.6.8
+       docker: # Docker Executor を使用します
+         - image: circleci/ruby:2.6.8 # Ruby 2.6.8 を含む Docker イメージを指定します
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-       # Steps are a list of commands to run inside the docker container above.
+             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+       # ステップは、上記の Docker コンテナ内で実行するコマンドのリストです
        steps:
          - checkout # GitHub からコードをプルします
          - run: echo "A first hello" # "A first hello" を stdout に出力します
          - run: sleep 25 # 25 秒間スリープするようにジョブに指示するコマンドです。
      two: # 2 つ目のジョブ
        docker: # 前述と同様に Docker イメージ内で実行します。
-         - image: cimg/ruby:3.0.2
+         - image: circleci/ruby:3.0.2
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
        steps:
          - checkout
-         - run: echo "A more familiar hi" # We run a similar echo command to above.
+         - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します
          - run: sleep 15 # 15 秒間スリープします
    # このワークフローでは、マッピングを行い、上記で定義した 2 つのジョブを調整することができます。
    workflows:
@@ -133,13 +133,13 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
    ```
 
 
-1. Commit these changes to your repository and navigate back to the CircleCI **Pipelines** page. You should see your pipeline running.
+1. これらの変更をリポジトリにコミットし、CircleCI の **パイプライン**ページに戻ります。 パイプラインが実行中であることがわかります。
 
 1. 実行中のパイプラインをクリックし、作成したワークフローを表示します。 2 つのジョブが同時に実行された (または現在実行されている) ことがわかります。
 
-Read more about workflows in the [Orchestrating Workflows]({{site.baseurl}}/2.0/workflows/#overview) documentation.
+ワークフローの詳細については、[ワークフローのオーケストレーション]({{site.baseurl}}/2.0/workflows/#overview)を参照してください。
 
-### Add some changes to use workspaces
+### 変更を追加してワークスペースを使用する
 {: #adding-some-changes-to-use-the-workspaces-functionality }
 {:.no_toc}
 
@@ -153,29 +153,29 @@ jobs:
       - image: cimg/ruby:3.0.2
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - run: echo "A first hello"
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspaces" > my_workspace/echo-output
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
+          # 絶対パスまたは working_directory からの相対パスでなければなりません。
           root: my_workspace
-          # Must be relative path from root
+          # ルートからの相対パスでなければなりません。
           paths:
-            - echo-output
+            - echo-output      
   two:
     docker:
       - image: cimg/ruby:3.0.2
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - run: echo "A more familiar hi"
+      - run: echo "A more familiar hi"  
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+          # 絶対パスまたは working_directory からの相対パスでなければなりません。
           at: my_workspace
 
       - run: |
@@ -194,16 +194,16 @@ workflows:
             - one
 ```
 
-Learn more about this feature in the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
+詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
-### SSH into your jobs
+### ジョブで SSH を使用する
 {: #ssh-into-your-jobs}
 {:.no_toc}
 
-If you are comfortable with the terminal, you can rerun a CircleCI job with SSH enabled, then SSH directly into your jobs to troubleshoot issues.
+ターミナルの操作に慣れている方は、SSH を有効にした CircleCI ジョブを再実行し、直接 SSH でジョブに接続してトラブルシューティングを行えます。
 
-- You will need to [add your SSH keys to your GitHub account](https://help.github.com/articles/connecting-to-github-with-ssh/).
-- To enable the **Rerun Job with SSH** option, you will also need to add your SSH keys to the appropriate job. Refer to the [Adding SSH Keys to a Job]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job) instructions.
+- [GitHub アカウントに SSH キーを追加する](https://help.github.com/articles/connecting-to-github-with-ssh/)必要があります。
+- **SSH でジョブを再実行する**オプションを有効にするには、適切なジョブにも SSH キーを追加する必要があります。 [ジョブに SSH キーを追加する方法]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job)を参照してください。
 
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
@@ -215,22 +215,22 @@ If you are comfortable with the terminal, you can rerun a CircleCI job with SSH 
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
-ビルドの SSH 有効化セクションから `ssh` の接続先をコピーします。 Then, paste in and execute the `ssh` command in the terminal.
+ビルドの SSH 有効化セクションから `ssh` の接続先をコピーします。 それをペーストし、ターミナルで `ssh` コマンドを実行します。
 
-以下のコマンドを使用して、ワークスペースで作成したファイルの内容を表示できるかどうかを確認します。
+以下のコマンドを使用して、ワークスペースを使って作成したファイルの内容を表示できるかどうかを確認します。
 
 ```
-pwd                  # print what directory, find out where you are in the file system
-ls -al               # list what files and directories are in the current directory
-cd <directory_name>  # change directory to the <directory_name> directory
-cat <file_name>      # show me the contents of the file <file_name>
+pwd                  #  "print what directory" の略で、ファイル システム内のどこにいるかを確認できます
+ls -al               # 現在のディレクトリに含まれるファイルとディレクトリを一覧表示します
+cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します
+cat <file_name>      # ファイル <file_name> の内容を表示します
 ```
 
 
 ## チームメイトと協力する
 {: #collaborating-with-teammates }
 
-チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローしたりできます。 チームメイトは、コードをまったくコミットしていないとしても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
+チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローすることができます。 チームメイトは、コードをまったくコミットしていなくても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
 
 ## 関連項目
 {: #see-also }
@@ -238,5 +238,5 @@ cat <file_name>      # show me the contents of the file <file_name>
 
 - [設定に関するリファレンス]({{site.baseurl}}/2.0/configuration-reference/)
 - [CircleCI  のコンセプト]({{site.baseurl}}/)
-- [Automate common tasks with orbs]({{site.baseurl}}/)
+- [Orb を使って共通タスクを自動化する]({{site.baseurl}}/)
 
