@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
 title: "設定ファイルの概要"
-description: "CircleCI のコアエクスペリエンス「config.yml 」を4 つの簡単な手順ではじめる方法をご確認ください。"
+description: "CircleCI のコアエクスペリエンス「config.yml 」を4 つの簡単な手順で開始する方法をご確認ください。"
 version:
   - Cloud
   - Server v3.x
   - Server v2.x
 ---
 
-このガイドでは、簡単なステップに沿って、CircleCI で作業の中心となる `config.yml` の概要を説明していきます。
+このガイドでは、簡単なステップに沿って、CircleCI のコアエクスペリエンスである `config.yml` を開始する方法を説明します。
 
 * 目次
 {:toc}
@@ -17,7 +17,7 @@ version:
 {: #getting-started-with-circleci-config }
 {:.no_toc}
 
-このガイドでは、初めに CircleCI が `config.yml` をどのように見つけて実行するか、さまざまな作業にシェル コマンドをどのように使用できるかを説明します。 次に、`config.yml` がどのようにコードとやり取りしてビルドを開始するかを概説します。 さらに、Docker コンテナを使用して、必要とする環境で正確に実行する方法についても説明します。 最後に、ワークフローについて簡単に説明し、ビルド、テスト、セキュリティ スキャン、承認ステップ、デプロイをオーケストレーションする方法について学びます。
+このガイドでは、まず CircleCI が `config.yml` をどのように見つけて実行するか、さまざまな作業にシェルコマンドをどのように使用できるかを説明します。 次に、`config.yml` がどのようにコードとやり取りしてビルドを開始するかを概説します。 さらに、Docker コンテナを使用して、必要とする環境で正確に実行する方法についても説明します。 最後に、ワークフローについて簡単に説明し、ビルド、テスト、セキュリティ スキャン、承認ステップ、デプロイをオーケストレーションする方法について学びます。
 
 CircleCI は *Configuration as Code* を貫いています。  そのため、ビルドからデプロイまでのデリバリー プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。  `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。  CircleCI の設定ファイルでは YAML 構文を使用します。 基本事項については、「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」を参照してください。
 
@@ -145,9 +145,9 @@ jobs:
 
 設定ファイルに加えた上記の 2 つの変更は、作業をどのように実行するかに大きな影響を与えます。  実行環境をアップグレード、実験、または調整するために特別なコードやアクロバティックな操作は必要なく、Docker コンテナをジョブに関連付けてから、コンテナでジョブを動的に実行するだけです。  小さな変更を行うだけで、Mongo 環境を劇的にアップグレードしたり、基本イメージを拡大・縮小したり、さらには言語を変更することもできます。
 
-- Line 7: Here we see a comment in-line in yml.  どのようなコード単位でも同じですが、設定ファイルが複雑になるほど、コメントの利便性が高くなります。
-- Line 8-9: These lines indicate that docker image to use for the job.  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用します。
-- Line 23-26: These lines add a run step that returns the version of node available in the container. CircleCI のビルド済みのコンビニエンス イメージにある別のコンテナや、Docker Hub のパブリック コンテナなどを使用して、いろいろ試してみてください。
+- 7行目: yml のインラインコメントです。  どのようなコード単位でも同じですが、設定ファイルが複雑になるほど、コメントの利便性が高くなります。
+- 8、9 行目: ジョブに使用する Docker イメージを示します。  設定ファイルには複数のジョブを含めることができるため (次のセクションで説明)、設定ファイルの各部分をそれぞれ異なる環境で実行することも可能です。  たとえば、シン Java コンテナでビルド ジョブを実行してから、ブラウザーがプリインストールされたコンテナを使用してテスト ジョブを実行できます。 この例では、ブラウザーや他の便利なツールが既に組み込まれている [CircleCI 提供のビルド済みコンテナ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用します。
+- 23 ～ 26 行目: コンテナで使用できるノードのバージョンを返す run ステップを追加します。 CircleCI のビルド済みのコンビニエンス イメージにある別のコンテナや、Docker Hub のパブリック コンテナなどを使用して、いろいろ試してみてください。
 
 ## パート 4: 開始の承認
 {: #part-four-approved-to-start }
@@ -159,7 +159,16 @@ jobs:
 
 
 ```yml
-image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!'
+version: 2.1
+jobs:
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Hello World
+          command: |
+            echo 'Hello World!'
             echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:
