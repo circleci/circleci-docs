@@ -46,6 +46,8 @@ The Windows execution environment (or `executor`) gives users the tools to build
 
 CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
 
+Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
 - Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
