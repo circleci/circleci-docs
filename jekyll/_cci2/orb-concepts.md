@@ -247,10 +247,10 @@ _[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-
 ## Private orbs vs. public orbs
 {: #private-orbs-vs-public-orbs }
 
-There are two ways to publish an orb: public or private: 
+There are two ways to publish an orb: public or private:
 
-* If you prefer to publish your orb so that only those within your organization can see and use it, you should publish a private orb. 
-* If you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs) for use by anyone, create a public orb. 
+* If you prefer to publish your orb so that only those within your organization can see and use it, you should publish a private orb.
+* If you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs) for use by anyone, create a public orb.
 
 Private orbs are described in more detail below.
 
@@ -270,7 +270,7 @@ Using a private orb enables you to author an orb while ensuring the following:
 
 By choosing to use a private orb instead of a public orb, you also need to understand certain inherent limitations, which include:
 
-* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use ond of the following options 
+* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use ond of the following options:
 
     * Paste the content of the orb into the `orbs` stanza of your configuration.
     * Use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration. The org slug is defined as `<your-VCS>/<your-org-name>`, for example, `gh/circleci`.
