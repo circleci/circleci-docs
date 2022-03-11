@@ -22,13 +22,16 @@ class OptimizelyClient {
           window.userData.analytics_id ? window.userData.analytics_id : null,
         );
       } else if (isGuestExperiment) {
-        // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
-        // and sets this as anonymousId for each new visitor.
-        // This call is always valid and will never return null. From the docs:
-        // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
-        resolve(
-          analytics && analytics.user() ? analytics.user().anonymousId() : null,
-        );
+        let anonymousId = null;
+        try {
+          // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
+          // and sets this as anonymousId for each new visitor.
+          // This call is always valid and will never return null. From the docs:
+          // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
+          anonymousId = analytics.user().anonymousId();
+        } finally {
+          resolve(anonymousId);
+        }
       } else {
         // If we are here it means we are still waiting on getting notified
         // that the call to /api/v1/me has resolved and the new userData is available

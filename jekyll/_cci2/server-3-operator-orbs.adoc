@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Orbs
+= CircleCI Server v3.x Managing Orbs
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Use this document to learn about orbs and how to manage them within CircleCI server v3.x.
@@ -33,15 +33,18 @@ circleci orb list
 ```
 
 To list available private orbs (registered in your local server orb repository), run the following command:
+
 ```bash
-circleci orb list --host <your server install domain> --token <your api token>
+circleci orb list --host <your-server-install-domain> --token <your-api-token>
 ```
 ## Import a public orb
 To import a public orb to your local server orb repository, run the following command:
 
 ```bash
-circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
+circleci admin import-orb <namespace>[<orb-name>[@<orb-version>]] --host <your-server-installation-domain> --token <your-api-token>
 ```
+
+NOTE: you can choose to only specify a namespace, in which case the most recent versions of all orbs in the namespace will be imported.
 
 ## Fetch a public orb’s updates
 To update a public orb in your local server orb repository with a new version, run:
