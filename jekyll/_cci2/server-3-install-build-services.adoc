@@ -300,7 +300,7 @@ ifndef::env-aws[]
 . Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
 . You can choose one of the following:
 .. JSON of GCP service account for Nomad Autoscaler
-.. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload identities]. Steps to enable Workload identities on GCP cluster are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here].
+.. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities]. Steps to enable Workload Identities on GCP cluster are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here].
 .. Enable workload identity for `nomad-autoscaler` (kubernetes) service account
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
