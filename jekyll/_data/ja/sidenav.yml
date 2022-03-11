@@ -109,6 +109,7 @@ en:
           - 
             name: 概要
           - 
+            name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
           - 
@@ -178,6 +179,7 @@ en:
       - 
         name: Orb のオーサリング
         children:
+          - 
           - 
           - 
           - 
@@ -344,9 +346,10 @@ en:
             name: v2.19 Installation Guide
           - 
           - 
+          - 
             name: ユーザーアカウント
           - 
-            name: Orbs
+            name: Orb の管理
           - 
             name: VM サービス
           - 
@@ -659,6 +662,7 @@ ja:
             name: 会社概要
             i18n_name: v2.19の新機能
           - 
+            name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
           - 
