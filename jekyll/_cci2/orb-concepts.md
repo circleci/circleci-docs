@@ -247,7 +247,12 @@ _[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-
 ## Private orbs vs. public orbs
 {: #private-orbs-vs-public-orbs }
 
-There are two ways to publish an orb: publin or private. If you prefer to publish your orb internally, and not to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a private orb. However, if you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), use a public orb. Each type of orb is described in the sections below.
+There are two ways to publish an orb: public or private: 
+
+* If you prefer to publish your orb so that only those within your organization can see and use it, you should publish a private orb. 
+* If you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs) for use by anyone, create a public orb. 
+
+Private orbs are described in more detail below.
 
 ### Private orbs
 {: #private-orbs }
@@ -257,22 +262,20 @@ There are two ways to publish an orb: publin or private. If you prefer to publis
 
 Using a private orb enables you to author an orb while ensuring the following:
 
-* your orb does not appear in the CircleCI Orb Registry.
+* Your orb will not appear in the [CircleCI Orb Registry](https://circleci.com/developer/orbs) unless you have the direct URL and are authenticated to the org that created it.
 
-* your orb cannot be viewed or used by someone outside of your organization.
+* Your orb cannot be viewed or used by someone outside of your organization.
 
-* your orb cannot be used in a pipeline that does not belong to your organization.
+* Your orb cannot be used in a pipeline that does not belong to your organization.
 
-By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:
+By choosing to use a private orb instead of a public orb, you also need to understand certain inherent limitations, which include:
 
-* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration. The org slug is defined as `<your-VCS>/<your-org-name>`, for example, `gh/circleci`.
+* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use ond of the following options 
+
+    * Paste the content of the orb into the `orbs` stanza of your configuration.
+    * Use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration. The org slug is defined as `<your-VCS>/<your-org-name>`, for example, `gh/circleci`.
 
 * You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
-
-### Public orbs
-{: #public-orbs }
-
-Public orbs are used by most users when authoring and publishing orbs to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). When authoring a public orb, you are enabling all  CircleCI users to use your orb in their own configurations.
 
 ### Authoring orbs
 {: #authoring-orbs }
