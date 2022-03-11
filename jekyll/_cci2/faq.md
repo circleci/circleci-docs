@@ -489,7 +489,7 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
 jobs:
   ipv6_tests:
   machine:
-    image: ubuntu-1604:202007-01
+    image: ubuntu-2004:current
   steps:
     - checkout
     - run:

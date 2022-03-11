@@ -725,7 +725,7 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
@@ -765,7 +765,7 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
@@ -869,7 +869,7 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
@@ -909,7 +909,7 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .

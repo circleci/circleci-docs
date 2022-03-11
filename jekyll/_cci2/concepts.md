@@ -263,10 +263,10 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
 ...
    build2:
      machine: # Specifies a machine image that uses
-     # an Ubuntu version 16.04 image
+     # an Ubuntu version 20.04 image
      # follow CircleCI Discuss Announcements
      # for new image releases.
-       image: ubuntu-1604:202007-01
+       image: ubuntu-2004:current
 ...
    build3:
      macos: # Specifies a macOS virtual machine with Xcode version 12.5.1

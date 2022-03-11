@@ -202,7 +202,7 @@ a|
 jobs:
   ubuntuJob:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     steps:
       - checkout
       - run: echo "Hello, $USER!"
