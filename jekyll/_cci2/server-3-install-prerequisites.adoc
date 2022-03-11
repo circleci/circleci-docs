@@ -662,6 +662,12 @@ gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> 
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/object-storage]"
 ```
+```shell
+gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
+    --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> \
+    --role roles/iam.serviceAccountTokenCreator \
+    --condition=None
+```
 
 
 endif::env-aws[]
