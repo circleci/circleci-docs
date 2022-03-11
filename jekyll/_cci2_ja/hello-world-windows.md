@@ -17,6 +17,9 @@ version:
 * 目次
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+  <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
+</div>
 
 ## 前提条件
 {: #prerequisites }
@@ -33,7 +36,7 @@ version:
 Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプリケーションや .NET が実行可能な Windows 固有プロジェクト(.NET フレームワークなど) といった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
 
 - VM ベースでジョブの完全分離を保証
-- Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
+- Can use either the Server Core version of Windows Server 2019 Datacenter Edition, or Windows Server 2022 Datacenter edition.
 - PowerShell がデフォルトのシェル (Bash と cmd を手動で選択可能)
 - Windows コンテナの実行に Docker Engine - Enterprise を使用可能
 
@@ -45,9 +48,11 @@ Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプ�
 ## Windows Executor イメージ
 {: #windows-executor-images }
 
-現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに含まれる内容の詳細についてはシステム管理者にお問い合わせください。
+CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
 
-Windows イメージは約 30 日ごとにアップデートされます。 Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
+Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+
+The Windows images are updated approximately every 30 days. Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
 
 - Stable: 本番環境で使用可能な最新の Windows イメージを参照します。 このイメージは、安定性を適度に確保しつつ、ソフトウェアの定期アップデートを取り入れたいプロジェクトで使用してください。 アップデートは、通常月に 1 回の頻度で行われます。
 
@@ -55,7 +60,7 @@ Windows イメージは約 30 日ごとにアップデートされます。 Wind
 
 - Edge: 最新の Windows イメージを参照し、メインブランチの HEAD からビルドされます。 このタグは、最新の変更を含み完全な安定性が保証されていないテストバージョンのイメージとして使うことが想定されています。
 
-なお、Windows の Docker コンテナは、このように Windows の Executor で実行することも可能です。
+なお、WindowsのDockerコンテナは、このようにWindowsのExecutorで実行することも可能です。
 
 {:.tab.windowsblockone.Cloud}
 ```yaml
@@ -130,9 +135,9 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 * 現時点では、ネストされた仮想化をサポートしていません (`--platform linux` フラグの使用など)。
 
 ## サンプルの設定ファイル
-{: #example-configuration-file }
+`config.yml` ファイルの詳細については、[構成リファレンス ガイド]({{site.baseurl}}/ja/2.0/configuration-reference/)を参照してください。
 
-以下の設定スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
+以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
 
 {:.tab.windowsblocktwo.Cloud}
 ```yaml
@@ -268,7 +273,7 @@ jobs:
 **注:** 更新版や他の Windows シェルツールをインストールすることも可能です。たとえば、`dotnet` CLI で PowerShell Core の最新版をインストールし、ジョブの一連のステップに使用できます。
 
 
-{:.tab.windowsblockfour.Cloud}
+以下のオプションが利用できます。
 ```YAML
 
 version: 2.1
