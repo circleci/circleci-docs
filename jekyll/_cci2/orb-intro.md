@@ -96,7 +96,7 @@ If you would like to contribute to an existing orb, or file an issue on the orb'
 {: #public-or-private }
 Orbs can be published in one of two ways:
 
-* **Publicly**: Searchable in orb registry, and available for anyone to use 
+* **Publicly**: Searchable in the orb registry, and available for anyone to use 
 * **Privately**: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated 
 
 To understand these concepts further read the [Public Orbs vs Private Orbs]({{site.baseurl}}/2.0/orb-concepts/#private-orbs-vs-public-orbs) section of the Orb Concepts page.
