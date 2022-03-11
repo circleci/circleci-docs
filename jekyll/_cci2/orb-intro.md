@@ -85,7 +85,7 @@ Orbs in the registry will appear with one of three different namespace designati
 | Community | Written by the community |
 {: class="table table-striped"}
 
-**Note:** _In order to use uncertified orbs (Partner or Community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org._
+**Note:** _In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org._
 {: class="alert alert-warning"}
 
 Each orb contains its own description and documentation listed in the orb registry. Often, orbs will have a set of usage examples to get you started.
