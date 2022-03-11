@@ -31,7 +31,6 @@ function handleClickedLink() {
   });
 }
 
-
 // https://app.optimizely.com/v2/projects/16812830475/experiments/21253750305/variations
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_first-steps-signup-cta_test',
