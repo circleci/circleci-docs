@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Windows での Hello World"
 short-title: "Windows での Hello World"
-description: "CircleCI  での最初の Windows プロジェクト"
+description: "CircleCI での最初の Windows プロジェクト"
 categories:
   - はじめよう
 order: 4
