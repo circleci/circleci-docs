@@ -4,8 +4,9 @@ title: CircleCI の設定
 short-title: CircleCI の設定
 description: .circleci/config.yml に関するリファレンス
 order: 20
+readtime: false
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 suggested:
@@ -774,7 +775,7 @@ jobs:
 
 あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列処理が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 ジョブの並列処理が > 1 つの場合は、[ワークフロー](#workflows)と関連付けられている[フィルタリング]({{site.baseurl}}/2.0/configuration-reference/#jobfilters)および/ または[パイプラインのスケジュール実行]({{site.baseurl}}/2.0/scheduled-pipelines/)を使用します。 詳細は、[ファンアウトとファンインの例]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example)を参照して下さい。
+**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列処理が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 If your job has parallelism >1, see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 {: class="alert alert-info"}
 
 | キー                  | 必須 | タイプ   | 説明                                                                                                                                                                        |
@@ -1181,12 +1182,151 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 {: #deploy-deprecated }
 {:.no_toc}
 
-現在のプロセスに関しては、[実行](#run)をご覧ください。
+現在のプロセスに関しては、[実行](#run)をご覧ください。 If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
+
+##### **Migration from `deploy` to `run`**
+
+**Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+
+*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?* Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
+
+*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?* There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
+
+###### *例*
+
+A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+
+```yml
+# Example of deprecated syntax, do not copy
+version: 2.1
+jobs:
+  deploy-step-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      - deploy: #deprecated deploy step, do not copy
+          command: |
+            echo "this is a deploy step which needs data from the rand"
+            cat rand_*.txt
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - deploy-step-job
+```
+
+If you are entirely reliant on external resources (for example, Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete. `doing-things-job` uses parallelism of 3, while `deploy-step-job` performs the actual deployment. See example below:
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+  # create a new job with the deploy step in it
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: # change "deploy" to "run"
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      # add your new job and make it depend on the 
+      # "doing-things-job"
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      # save the files your deploy step needs
+      - save_workspace:
+          root: .     # relative path to our working directory
+          paths:      # file globs which will be persisted to the workspace
+           - rand_*
+
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # attach the files you persisted in the doing-things-job
+      - attach_workspace:
+          at: . # relative path to our working directory
+      - run:
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+This is effectively using a "fan-in" workflow which is described in detail on the [workflows](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
 
-Web アプリまたは API からアクセスできるアーティファクト (ログ、バイナリなど) を格納するステップです。 詳細については、[アーティファクトに関するドキュメント]({{ site.baseurl }}/2.0/artifacts/)を参照してください。
+Web アプリケーションや API を通じて使う artifacts（ログ、バイナリなど）を保存するステップです。 詳細については、[アーティファクトに関するドキュメント]({{ site.baseurl }}/2.0/artifacts/)を参照してください。
 
 | キー          | 必須 | タイプ  | 説明                                                                         |
 | ----------- | -- | ---- | -------------------------------------------------------------------------- |
@@ -1194,7 +1334,7 @@ Web アプリまたは API からアクセスできるアーティファクト (
 | destination | ×  | 文字列型 | アーティファクト API でアーティファクトの保存先パスに追加するプレフィックス (デフォルトは `path` で指定したファイルのディレクトリ)。 |
 {: class="table table-striped"}
 
-ジョブでは複数の `store_artifacts` ステップを指定することもできます。 各ステップで一意のプレフィックスを使用すると、ファイルの上書きを防止できます。
+ジョブでは複数の `store_artifacts` ステップを指定することもできます。 ファイルが上書きされたりしないよう、ステップごとにユニークなプレフィックスを付加するようにしてください。
 
 ###### 例
 {: #example }
@@ -1214,7 +1354,7 @@ Web アプリまたは API からアクセスできるアーティファクト (
 
 ビルドのテスト結果をアップロードおよび保存するための特別なステップです。 テスト結果は、CircleCI Web アプリケーションで各ビルドの「テスト サマリー」セクションに表示されます。 テスト結果を保存すると、テスト スイートのタイミング分析に役立ちます。
 
-テスト結果をビルド アーティファクトとして保存することもできます。 その方法については [**store_artifacts** ステップ](#storeartifacts)を参照してください。
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
 | キー   | 必須 | タイプ  | 説明                                                                                                                         |
 | ---- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -1230,9 +1370,9 @@ Web アプリまたは API からアクセスできるアーティファクト (
 ```
 test-results
 ├── jest
-│   └── results.xml
+│   └── results.xml
 ├── mocha
-│   └── results.xml
+│   └── results.xml
 └── rspec
     └── results.xml
 ```
@@ -1247,19 +1387,19 @@ test-results
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
 
-ワークフローの実行時に、他のジョブが使っていた一時ファイルを保持しておくための特殊なステップです。
+Workflows の実行時に、他のジョブが使っていた一時ファイルを保持しておくための特殊なステップです。
 
 **注:** ワークスペースは、作成後最大 15 日間保存されます。 作成から 15 日以上が経過したワークスペースを使用するジョブは、すべて失敗します。これには、ワークフローの部分的な再実行や SSH による個別ジョブの再実行も含まれます。
 
-| キー    | 必須 | タイプ  | 説明                                                                                                                 |
-| ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------------ |
-| root  | ○  | 文字列型 | 絶対パス、または `working_directory` からの相対パス。                                                                              |
-| paths | ○  | リスト  | 共有ワークスペースに追加する、グロブで認識されるファイル、またはディレクトリへの非グロブ パス。 ワークスペースのルート ディレクトリへの相対パスと解釈され、 ワークスペースのルート ディレクトリ自体を指定することはできません。 |
+| キー    | 必須 | タイプ  | 説明                                                                                                                     |
+| ----- | -- | ---- | ---------------------------------------------------------------------------------------------------------------------- |
+| root  | ○  | 文字列型 | 絶対パス、または `working_directory` からの相対パス。                                                                                  |
+| paths | ○  | リスト  | 共有ワークスペースに追加する、グロブで認識されるファイル、またはディレクトリへの非グロブ パス。 Workspace のルートディレクトリへの相対パスと見なされ、 Workspace のルートディレクトリそのものにすることはできません。 |
 {: class="table table-striped"}
 
-root キーは、ワークスペースのルート ディレクトリとなる、コンテナ上のディレクトリを指定します。 paths の値は、すべてルート ディレクトリからの相対的パスです。
+root キーは Workspace のルートディレクトリとなるコンテナ内のディレクトリを指します。 一方、paths の値は必ずルートへの相対ディレクトリとなります。
 
-##### _root キーの例_
+##### _root キーの使用例_
 {: #example-for-root-key }
 
 下記の構文は `/tmp/dir` 内にある paths で指定している内容を、Workspace の `/tmp/dir` ディレクトリ内に相対パスで保持します。
@@ -1272,7 +1412,7 @@ root キーは、ワークスペースのルート ディレクトリとなる�
       - baz
 ```
 
-このステップが完了すると、ワークスペースには下記のディレクトリが追加されることになります。
+このステップが完了すると、Workspace には下記のディレクトリが追加されることになります。
 
 ```
 /tmp/dir/foo/bar
@@ -1308,12 +1448,12 @@ character-range:
         lo '-' hi　lo <= c <= hi の範囲にある文字 c にマッチする
 ```
 
-Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名でパターンを記述できるとしています（/ は区切り文字です）。 **注 :** どのような指定方法でもワークスペースのルートディレクトリへの相対パスとなります。
+Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名でパターンを記述できるとしています（/ は区切り文字です）。 **注:** すべての要素はワークスペースのルート ディレクトリからの相対パスです。
 
 ##### **`attach_workspace`**
 {: #attachworkspace }
 
-ワークフローで使用しているワークスペースを現在のコンテナにアタッチするのに利用する特殊なステップです。 ワークスペースのすべての内容がダウンロードされ、ワークスペースがアタッチされているディレクトリにコピーされます。
+ワークフローで使用しているワークスペースを現在のコンテナにアタッチするのに利用する特殊なステップです。 Workspace 内のコンテンツは完全な状態でダウンロードされ、Workspace がアタッチされているディレクトリにコピーされます。
 
 | キー | 必須 | タイプ  | 説明                    |
 | -- | -- | ---- | --------------------- |
@@ -1329,7 +1469,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
     at: /tmp/workspace
 ```
 
-ワークフロー1 つ 1 つは、それぞれに一時的なワークスペースが関連付けられています。  ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用します。 ジョブ内では `persist_to_workspace` ステップで Workspace にファイルを追加でき、さらに `attach_workspace` ステップを呼び出すと、Workspace 内のファイルをアタッチしたファイルシステムにダウンロードできます。 ワークスペースは追加専用です。ジョブは、ワークスペースにファイルを追加することはできますが、ワークスペースからファイルを削除することはできません。 各ジョブでは、そのアップストリームのジョブによってワークスペースに追加された内容を参照することのみ可能です。 ワークスペースをアタッチすると、アップストリーム ジョブがワークフロー グラフに現れる順番で、各アップストリーム ジョブからの「レイヤー」が適用されます。 2 つのジョブが同時に実行される場合、それらのレイヤーが適用される順番は不定になります。 同時に実行した複数のジョブが同じファイル名でデータを保持し Workspace にアタッチするようなケースでは、エラーが発生しますのでご注意ください。
+各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 Workspace は同じ Workflows において、ジョブの実行中にビルドしたデータを他のジョブに渡すのに使います。 ジョブ内では `persist_to_workspace` ステップで Workspace にファイルを追加でき、さらに `attach_workspace` ステップを呼び出すと、Workspace 内のファイルをアタッチしたファイルシステムにダウンロードできます。 Workspace で可能なのはファイルの追加のみです。ジョブから Workspace にファイルは追加できても、Workspace からファイルを削除することは不可能になっています。 ファイルを受け取る側のジョブは、ファイルを渡す側のジョブによって Workspace に追加されたファイルしか参照できないことになります。 Workspace をアタッチするとき、上流にある各ジョブの「レイヤー」は、Workflows グラフで表示される順序通りに上流のジョブから適用されます。 しかし、2 つのジョブを同時に実行すると、そのレイヤーの適用順序は確定できません。 同時に実行した複数のジョブが同じファイル名でデータを保持し Workspace にアタッチするようなケースでは、エラーが発生しますのでご注意ください。
 
 ワークフローを再度実行すると、元のワークフローと同じワークスペースを引き継ぎます。 失敗したジョブを再度実行したときも、そのジョブは元のワークフローで実行したジョブと同じワークスペースの内容を使えることになります。
 
@@ -1337,7 +1477,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 | タイプ      | 存続期間               | 用途                                                           | 例                                                                                                                                             |
 | -------- | ------------------ | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 1 か月               | 長期アーティファクトを保存します。                                            | **[Job (ジョブ)]** ページの [Artifacts (アーティファクト)] タブから参照できます。 `tmp/circle-artifacts.<hash>/container` などのディレクトリの下に格納されています。                   |
+| アーティファクト | 1 か月               | 長期アーティファクトを保存します。                                            | **[Job (ジョブ)]** ページの [Artifacts (アーティファクト)] タブから参照できます。`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に格納されています。                    |
 | ワークスペース  | ワークフローの間 (最長 15 日) | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                         |
 | キャッシュ    | 15 日               | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。   `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
 {: class="table table-striped"}
@@ -1349,7 +1489,7 @@ Workspace や キャッシュ、artifacts に関する詳細は、「[Workflows 
 
 プロジェクト設定でコンテナに対して SSH 鍵を登録する特殊なステップです。 下記のキーを使って SSH に関する設定を行えます。
 
-| キー           | 必須 | タイプ | 説明                                               |
+| キー           | 必須 | 型   | 説明                                               |
 | ------------ | -- | --- | ------------------------------------------------ |
 | fingerprints | ×  | リスト | 追加する鍵に対応するフィンガープリントのリスト (デフォルトでは、追加されるすべての鍵が対象)。 |
 {: class="table table-striped"}
@@ -1361,12 +1501,12 @@ steps:
         - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-**メモ:** CircleCI は追加されたすべての SSH 鍵に `ssh-agent` を使用して署名しますが、ユーザーは `add_ssh_keys` キーを使用して実際にコンテナに鍵を追加する**必要があります**。
+**注:** CircleCI は追加されたすべての SSH 鍵に `ssh-agent` を使用して署名しますが、ユーザーは `add_ssh_keys` キーを使用して実際にコンテナに鍵を追加する**必要があります**。
 
 ##### `pipeline.` 値の使用
 {: #using-pipeline-values }
 
-パイプライン値はすべてのパイプライン設定で使用でき、事前に宣言することなく使用できます。 利用可能なパイプライン値は次のとおりです。
+パイプライン値はすべてのパイプライン構成で使用でき、事前の宣言なしに利用できます。 利用可能なパイプライン値は次のとおりです。
 
 | 値                          | 説明                                            |
 | -------------------------- | --------------------------------------------- |
@@ -1450,9 +1590,9 @@ workflows:
 {: #triggers }
 ワークフローを実行するトリガーを指定します。 デフォルトの動作では、ブランチにプッシュされたときにワークフローがトリガーされます。
 
-| キー       | 必須 | 型  | 説明                           |
-| -------- | -- | -- | ---------------------------- |
-| triggers | ×  | 配列 | 現在は `schedule` を指定する必要があります。 |
+| キー       | 必須 | タイプ | 説明                           |
+| -------- | -- | --- | ---------------------------- |
+| triggers | ×  | 配列  | 現在は `schedule` を指定する必要があります。 |
 {: class="table table-striped"}
 
 ##### **`schedule`**
@@ -1498,7 +1638,7 @@ workflows:
 
 `branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
 
-ブランチでは、`only` キーと `ignore` キーを使用でき、どちらにもブランチ名を指す 1 つの文字列をマップさせます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
+branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - `ignore` を指定した場合、一致するブランチではジョブは実行されません。
@@ -1586,7 +1726,7 @@ workflows:
   build-deploy:
     jobs:
       - js_build
-      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
+      - build_server_pdfs: # << ブランチ名フィルターに応じて実行されるジョブ
           filters:
             branches:
               only: /server\/.*/
@@ -1711,7 +1851,7 @@ workflows:
 
 上記のマトリックスは、パラメーター `a` と `b` の組み合わせのうち、`{a: 3, b: 5}` の組み合わせを除いた 8 個のジョブに展開されます。
 
-###### 依存関係とマトリックスジョブ
+###### 依存関係とマトリックス ジョブ
 {: #dependencies-and-matrix-jobs }
 {:.no_toc}
 
@@ -1813,7 +1953,7 @@ workflows:
 ##### **ワークフローでの `when` の使用**
 {: #using-when-in-workflows }
 
-CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
+CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
 
 以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
