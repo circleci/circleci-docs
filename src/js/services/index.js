@@ -6,6 +6,7 @@ import * as rum from './rum';
 import * as progressbar from './progressbar';
 import * as sectionShareButton from './sectionShareButton';
 import * as trackCopyCode from './trackCopyCode';
+import * as trackExperimentEntry from './trackExperimentEntry';
 
 export default {
   AnalyticsClient,
@@ -16,4 +17,5 @@ export default {
   progressbar,
   sectionShareButton,
   trackCopyCode,
+  trackExperimentEntry,
 };
