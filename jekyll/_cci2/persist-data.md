@@ -121,6 +121,8 @@ Details about individual step network and storage transfer usage can be found in
 
 You can customize storage usage for artifacts, workspaces, test results, and caches in the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods. By default, the storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces.
 
+Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
+
 ![storage-usage-controls]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
 
 Custom storage usage can help you sanitize your data, as well as reduce monthly costs. An example of this is setting a short storage period for artifacts. Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, 1 day, allows you to both troubleshoot the build, but save costs by not keeping unnecessary data in storage.
