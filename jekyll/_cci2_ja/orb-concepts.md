@@ -8,6 +8,7 @@ categories:
 order: 1
 verison:
   - クラウド
+  - Server v3.x
 ---
 
 * 目次
