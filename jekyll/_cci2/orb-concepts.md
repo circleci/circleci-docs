@@ -262,7 +262,7 @@ Private orbs are described in more detail below.
 
 Using a private orb enables you to author an orb while ensuring the following:
 
-* Your orb will not appear in the [CircleCI Orb Registry](https://circleci.com/developer/orbs) unless you have the direct URL and are authenticated to the org that created it.
+* Your orb will not appear in the [CircleCI Orb Registry](https://circleci.com/developer/orbs) unless you have the direct URL and are authenticated with the org that created it.
 
 * Your orb cannot be viewed or used by someone outside of your organization.
 
