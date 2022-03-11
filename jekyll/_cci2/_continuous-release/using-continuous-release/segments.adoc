@@ -10,7 +10,6 @@ Vamp comes with a library of commonly used user segments, covering major web bro
 
 It also includes example user segments that demonstrate how you can target users by their geolocation. The examples cover a range of cloud and Content Delivery Network (CDN) providers.
 
-
 === Creating a Segment
 
 To create a new segment, click the *+Create Segment* button in the top right-hand corner of the _Segments_ page.
@@ -80,3 +79,7 @@ IMPORTANT: If you edit a segment that is the target of a policy, the change take
 To delete a segment, click the trash icon next to it in the Segments list. You will be asked to confirm that you wish to delete the segment. Then you will see a pop-up message to confirm that your segment has been deleted.
 
 // screenshot
+
+IMPORTANT: A segment cannot be deleted if it is the target of a policy. In this case, the delete icon will be grayed out.
+
+// check this statement

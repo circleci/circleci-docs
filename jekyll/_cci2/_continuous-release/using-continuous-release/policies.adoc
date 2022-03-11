@@ -1,5 +1,8 @@
 == Policies
 
+// Might need to divide this into separate pages
+
+
 === What is a Vamp Release Policy?
 
 A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
@@ -61,11 +64,14 @@ For patch releases, you usually want to use a quick running policy that validate
 
 Vamp uses the patch release policy if the new version is at least one patch version higher than the version that is currently live. For example, a change of semantic version from 1.2.3 to 1.2.4 is a patch release.
 
-=== Creating a Policy
+=== Viewing Policies
 
-To create a policy, go to the _Policies_ tab and click the *+ Create New Policy* button.
+To view the available policies, click the _Policies_ tab.
 
-// Current docs don't cover the first stage: How will this policy be used? Some of the information on this screen looks wrong, though. https://vamp.cloud/6/policyeditor
+
+
+
+
 
 
 
