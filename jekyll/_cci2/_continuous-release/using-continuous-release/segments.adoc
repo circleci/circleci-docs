@@ -1,12 +1,82 @@
 == Segments
 
+A segment is a group of users who share a characteristic, for example, users in the same geographical location, or those who use the same type of device to access an API.
+
+The segments list shows the reusable user segments available for use in policies.
+
+// screenshot
+
+Vamp comes with a library of commonly used user segments, covering major web browsers and mobile devices.
+
+It also includes example user segments that demonstrate how you can target users by their geolocation. The examples cover a range of cloud and Content Delivery Network (CDN) providers.
+
 
 === Creating a Segment
 
+To create a new segment, click the *+Create Segment* button in the top right-hand corner of the _Segments_ page.
 
+// screenshot of tab
+
+// screenshot of form
+
+==== Name
+
+This is the name displayed when you choose a segment to target as part of a policy.
+
+==== Description
+
+This is a short and meaningful description that provides additional context for the segment.
+
+==== Target Rules
+
+You must add at least one HTTP header or cookie rule.
+
+. Choose a type. This can be either _Cookie_ or _Header_.
+. Enter a name for your rule.
+. Choose an operator from the drop-down list. This can be _exists_, _equals_, _not equals_, _contains_, _not contains_.
+. Enter a value.
+
+// include screenshot of example
+
+To add more target rules, click the blue *+* button.
+
+IMPORTANT: The rules are ANDed. This means that to match the segment, a request must match _all_ the rules.
+
+When you have finished entering the details for your segment, click the blue *Create* button.
+
+You will see a pop-up message to confirm that your segment has been created.
+
+=== Duplicating a Segment
+
+To duplicate a segment, click the document icon next to it in the list. The duplicated segment appears under the original, with _-copy_ appended to the name.
+
+You can now click on the duplicate to edit it.
 
 === Editing a Segment
 
+To edit an existing segment, click on the segment in the Segments list.
+
+// screenshot
+
+From this screen, you can change the name and description and add or remove target rules. 
+
+To add a target rule, click the *+* button.
+
+To delete a target rule, click the trash icon next to it.
+
+// screenshot
+
+NOTE: You must add at least one HTTP header or cookie rule. You will be unable to delete a target rule if it is the only one.
+
+Once you have finished editing your segment, click the *Update* button in the bottom right-hand corner.
+
+// screenshot
+
+IMPORTANT: If you edit a segment that is the target of a policy, the change takes effect from the _next_ release. Any active releases that target that segment remain unaffected.
 
 
 === Deleting a Segment
+
+To delete a segment, click the trash icon next to it in the Segments list. You will be asked to confirm that you wish to delete the segment. Then you will see a pop-up message to confirm that your segment has been deleted.
+
+// screenshot
