@@ -101,33 +101,33 @@ CircleCI を使用する際に、必ずしも Orb を使う必要はありませ
 
    ```yaml
    version: 2
-   jobs: # 今回は 2 つのジョブを用意し、ワークフロー機能でジョブの調整を行います。
-     one: # 1 つ目のジョブ
-       docker: # Docker Executor を使用します
-         - image: circleci/ruby:2.6.8 # Ruby 2.6.8 を含む Docker イメージを指定します
+   jobs: # we now have TWO jobs, so that a workflow can coordinate them!
+     one: # This is our first job.
+       docker: # it uses the docker executor
+         - image: cimg/ruby:2.6.8 # specifically, a docker image with ruby 2.6.8
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-       # ステップは、上記の Docker コンテナ内で実行するコマンドのリストです
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+       # Steps are a list of commands to run inside the docker container above.
        steps:
-         - checkout # GitHub からコードをプルします
-         - run: echo "A first hello" # "A first hello" を stdout に出力します
-         - run: sleep 25 # 25 秒間スリープするようにジョブに指示するコマンドです。
-     two: # 2 つ目のジョブ
-       docker: # 前述と同様に Docker イメージ内で実行します。
-         - image: circleci/ruby:3.0.2
+         - checkout # this pulls code down from GitHub
+         - run: echo "A first hello" # This prints "A first hello" to stdout.
+         - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
+     two: # This is our second job.
+       docker: # it runs inside a docker image, the same as above.
+         - image: cimg/ruby:3.0.2
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
        steps:
          - checkout
-         - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します
-         - run: sleep 15 # 15 秒間スリープします
-   # このワークフローでは、マッピングを行い、上記で定義した 2 つのジョブを調整することができます。
+         - run: echo "A more familiar hi" # We run a similar echo command to above.
+         - run: sleep 15 # and then sleep for 15 seconds.
+   # Under the workflows: map, we can coordinate our two jobs, defined above.
    workflows:
      version: 2
-     one_and_two: # ワークフローの名前
-       jobs: # 実行するジョブをここにリストします
+     one_and_two: # this is the name of our workflow
+       jobs: # and here we list the jobs we are going to run.
          - one
          - two
    ```
@@ -237,6 +237,6 @@ cat <file_name>      # ファイル <file_name> の内容を表示します
 {:.no_toc}
 
 - [設定に関するリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference/)
-- [CircleCI  のコンセプト]({{site.baseurl}}/)
-- [Orb を使って共通タスクを自動化する]({{site.baseurl}}/)
+- [CircleCI  のコンセプト]({{site.baseurl}}/ja/2.0/concepts/)
+- [Orb を使って共通タスクを自動化する]({{site.baseurl}}/ja/2.0/orb-intro/)
 
