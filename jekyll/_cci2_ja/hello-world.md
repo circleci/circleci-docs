@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "CircleCI  での最初のプロジェクト"
+description: "CircleCI での最初のプロジェクト"
 categories:
   - はじめよう
 order: 4
@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-このページでは、[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後に CircleCI で Linux、Android、Windows、macOS プロジェクトの基本的なビルドを開始するための方法について解説しています。
+このページでは、[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後に CircleCI で Linux、Android、Windows、macOS プロジェクトの基本的なビルドを開始するための方法について解説しています。
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
@@ -48,7 +48,7 @@ version:
 
 CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
 
-サンプルプロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/2.0/language-javascript/)を参照してください。
+サンプルプロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/2.0/language-javascript/)を参照してください。
 
 ## Android での Hello World
 {: #hello-world-for-android }
@@ -82,7 +82,7 @@ jobs:
       xcode: 12.5.1
 ```
 
-詳細とサンプルプロジェクトについては、[macOS での Hello World]({{site.baseurl}}/2.0/hello-world-macos) を参照してください。
+詳細とサンプルプロジェクトについては、[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos) を参照してください。
 
 ## Windows での Hello World
 {: #hello-world-for-windows }
@@ -110,15 +110,15 @@ jobs:
 
 {:.tab.windowsblock.Server_3}
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
-  build: # ジョブの名前
+  build: # name of your job
     machine:
-      image: windows-default # Windows マシン イメージ
+      image: windows-default # Windows machine image
     resource_class: windows.medium
     steps:
-      # Windows 仮想マシン環境で実行するコマンド
+      # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
@@ -138,7 +138,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Windows のビルドでは、セットアップと前提条件が多少異なります。 詳しくは、[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows) を参照してください。
+Windows のビルドでは、セットアップと前提条件が多少異なります。 詳しくは、[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows) を参照してください。
 {: class="alert alert-info" }
 
 ### Orb の使用とオーサリングの詳細
