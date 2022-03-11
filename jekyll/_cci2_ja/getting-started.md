@@ -19,7 +19,7 @@ order: 41
 
 * Git の基礎知識
 * GitHub 又は Bitbucket アカウント:  このガイドでは GitHub を使用していますが、必要に応じて Bitbucket でも同じプロセスを実行していただけます。
-* バージョン管理システムと連携している CircleCI アカウント : まだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/signup/)に移動してアカウントを作成してください (オプション: [CircleCI のユーザー登録]({{site.baseurl}}/2.0/first-steps/)をお読みください)。
+* バージョン管理システムと連携している CircleCI アカウント : まだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup)に移動してアカウントを作成してください (オプション: [CircleCI のユーザー登録]({{site.baseurl}}/ja/2.0/first-steps/))をお読みください)。
 * ターミナルやコマンドラインの使用経験や `bash` に関する基礎知識があると役立ちます。
 
 ## リポジトリを作成する
@@ -236,7 +236,7 @@ cat <file_name>      # ファイル <file_name> の内容を表示します
 {: #see-also }
 {:.no_toc}
 
-- [設定に関するリファレンス]({{site.baseurl}}/2.0/configuration-reference/)
+- [設定に関するリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference/)
 - [CircleCI  のコンセプト]({{site.baseurl}}/)
 - [Orb を使って共通タスクを自動化する]({{site.baseurl}}/)
 
