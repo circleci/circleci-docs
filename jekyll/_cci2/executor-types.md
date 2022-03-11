@@ -281,10 +281,6 @@ machine:
   docker_layer_caching: true    # default - false
 ```
 
-**Note:**
-The `image` key is not supported on private installations of CircleCI.
-See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
-
 The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the machine executor. This range should not be used in your jobs.
 
 ## Using macOS
