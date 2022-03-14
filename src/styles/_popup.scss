@@ -39,6 +39,7 @@
   @media(max-width: $screen-sm) {
     min-height: auto;
     height: auto;
+    width: 95%;
   }
   &.popup-content-show {
     display: flex;

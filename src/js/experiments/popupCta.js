@@ -8,9 +8,12 @@ function openPopup() {
   window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__popup_seen');
 }
 
-function closePopup() {
+function closePopup(trackIt = true) {
   $(".popup-bg").removeClass("popup-bg-show");
   $(".popup-content").removeClass("popup-content-show");
+  if(trackIt) {
+    window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__popup_closed');
+  }
 }
 
 
@@ -41,7 +44,7 @@ window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_docs-popup-cta_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: '.main-body',
-  // guestExperiment: true, // FIXME: re-enable this for production.
+  // guestExperiment: true
 }).then((variation) => {
   if (variation === 'treatment') {
     const popupBg = $(".popup-bg");
@@ -49,11 +52,6 @@ window.OptimizelyClient.getVariationName({
     const skipButton = $(".popup-skip-btn");
     const signupButton = $(".popup-signup-cta");
     const timesVisited = getTimesVisited()
-    console.log(timesVisited);
-
-    // REVIEW: are we ok with closing the popup by clicking on the background outside of it
-    // of will the user have to click "Skip"?
-    // if the latter, remove this.
     popupBg.click(function(event) {
       if ($(this).has(popupContent).length === 0) {
         closePopup();
@@ -62,13 +60,14 @@ window.OptimizelyClient.getVariationName({
 
     signupButton.click(() => {
       window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__signup_clicked');
+      closePopup(false);
     })
 
     skipButton.click(() => {
-      window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__skip_clicked');
-      closePopup()
+      closePopup();
     })
-    if (timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
+    // if (timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
+    if (true) {
       // don't assume we have a popupwrapper in every docs layout.
       if (popupBg && popupContent) {
         openPopup()
