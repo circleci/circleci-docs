@@ -458,7 +458,7 @@ en:
     
 - name: Server Administration v2.x
   icon: icons/sidebar/admin.svg
-  - children:
+  children:
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
