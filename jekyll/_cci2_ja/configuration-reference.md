@@ -1482,7 +1482,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 | キャッシュ    | 15 日               | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。   `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
 {: class="table table-striped"}
 
-Workspace や キャッシュ、artifacts に関する詳細は、「[Workflows でデータを保持する。キャッシュ、Artifacts、Workspace 活用のキモ](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+ワークスペース、キャッシュ、アーティファクトに関する詳細は、「[ワークフローでのデータの保持: キャッシュ、アーティファクト、およびワークスペースの使用方法](https://circleci.com/ja/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 ##### **`add_ssh_keys`**
 {: #addsshkeys }
@@ -1851,7 +1851,7 @@ workflows:
 
 上記のマトリックスは、パラメーター `a` と `b` の組み合わせのうち、`{a: 3, b: 5}` の組み合わせを除いた 8 個のジョブに展開されます。
 
-###### 依存関係とマトリックス ジョブ
+###### 依存関係とマトリックスジョブ
 {: #dependencies-and-matrix-jobs }
 {:.no_toc}
 
