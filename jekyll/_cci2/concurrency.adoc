@@ -60,7 +60,7 @@ workflows:
       - build
       - test
 ```
-If you are still using `version 2`, your `workflows` section will need to be adjusted to include the version.
+If you are still using `version: 2`, your `workflows` section will need to be adjusted to include the version.
 
 ```yaml
 ...
