@@ -403,7 +403,7 @@ jobs:
 
 環境変数は Docker コンテナにも設定することができます。 設定するには、[`environment` キー]({{site.baseurl}}/2.0/configuration-reference/#docker)を使用します。
 
-**注:**: この方法で設定する環境変数は、コンテナ内で実行される*ステップ*では使用できません。 これらを使用できるのは、コンテナ*によって*実行されるエントリポイントとコマンドのみです。 CircleCI のデフォルトでは、ジョブのプライマリ コンテナのエントリポイントは無視されます。 プライマリ コンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、[カスタム ビルドの Docker イメージの使用ページの_エントリポイントの追加_セクション]({{site.baseurl}}/ja/2.0/custom-images/#adding-an-entrypoint)を参照してください。
+**注:**この方法で設定する環境変数は、コンテナ内で実行される*ステップ*では使用できません。 これらを使用できるのは、コンテナ*によって*実行されるエントリポイントとコマンドのみです。 CircleCI のデフォルトでは、ジョブのプライマリ コンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、[カスタム ビルドの Docker イメージの使用ページの_エントリポイントの追加_セクション]({{site.baseurl}}/ja/2.0/custom-images/#adding-an-entrypoint)を参照してください。
 
 ```yaml
 version: 2.1
@@ -424,7 +424,7 @@ jobs:
 
 以下に、プライマリ コンテナ イメージ (最初にリストされたイメージ) とセカンダリ サービス コンテナ イメージに別々の環境変数を設定する例を示します。
 
-**Note**: While hard-coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables will not be interpolated for non-primary containers.
+**注: **: ハードコードされた環境変数は、セカンダリコンテナまたはサービスコンテナに正しく渡されますが、コンテキストやプロジェクト固有の環境変数は、プライマリコンテナ以外のコンテナには挿入されません。
 
 ```yaml
 version: 2.1
