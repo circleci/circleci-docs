@@ -46,7 +46,7 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 *サポート対象*プラットフォームには、以下が提供されます。
 
 * ドキュメントとベストプラクティス
-* Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
+* サポート: CircleCI カスタマー エンジニアによる、アドバンスト サポートで規定されている通常のサービス レベル アグリーメント (SLA) の範囲内の問題解決支援
 
 *サポート対象*の CircleCI ランナーは、次のプラットフォームで利用できます。
 
