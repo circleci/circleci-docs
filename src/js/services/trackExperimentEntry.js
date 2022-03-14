@@ -6,7 +6,6 @@ const trackExperimentEntry = () => {
   let orgId = Cookies.get(COOKIE_KEY) ?? null;
   window.OptimizelyClient.getUserId().then((userId) => {
     if (userId && orgId) {
-
       const properties = {
         id: uuidv4(),
         timestamp: new Date().toISOString(),
