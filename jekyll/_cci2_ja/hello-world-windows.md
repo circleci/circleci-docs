@@ -135,7 +135,7 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 * 現時点では、ネストされた仮想化をサポートしていません (`--platform linux` フラグの使用など)。
 
 ## サンプルの設定ファイル
-`config.yml` ファイルの詳細については、[構成リファレンス ガイド]({{site.baseurl}}/ja/2.0/configuration-reference/)を参照してください。
+{: #example-configuration-file }
 
 以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
 
@@ -273,7 +273,7 @@ jobs:
 **注:** 更新版や他の Windows シェルツールをインストールすることも可能です。たとえば、`dotnet` CLI で PowerShell Core の最新版をインストールし、ジョブの一連のステップに使用できます。
 
 
-以下のオプションが利用できます。
+{:.tab.windowsblockfour.Cloud}
 ```YAML
 
 version: 2.1
@@ -332,7 +332,7 @@ Windows Executor を使用した例として、少し応用した (まだ初歩�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/2.0/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/2.0/build-processing/)を利用できます。
 
 ```yaml
 orbs:
@@ -411,7 +411,7 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 - bash.exe
 - cmd.exe
 
-ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/2.0/ssh-access-jobs)を参照してください。
+ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を参照してください。
 
 ## 次のステップ
 {: #next-steps }
