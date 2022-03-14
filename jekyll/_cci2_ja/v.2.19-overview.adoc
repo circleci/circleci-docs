@@ -104,41 +104,41 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 * サービスマシンのログが作成される前にバンドル作成がタイムアウトする原因となっていたバグを修正し、Replicated のログのみを残しました。
 
-* S3 connection pool metrics under `circle.s3.connection_pool.*` have been added to the test results service, making it easier to debug issues with this service.
+* `circle.s3.connection_pool.*` の下の S3 接続プールメトリックがテスト結果サービスに追加され、このサービスに関する問題のデバッグがしやすくなりました。
 
-* Added in missing environment variables for the workflows service. The absence of these environment variables was causing excessive stack tracing whenever workflows were run. This in turn lead to excessive log rotation.
+* ワークフローサービスの欠けていた環境変数が追加されました。 これらの環境変数がないことにより、ワークフローが実行されるたびに過剰なスタックトレースが発生していました。 これにより、ログのローテーションが過剰になります。
 
-* Fixed a bug that was causing failure to update GitHub statuses. Some customers experienced this bug when a project had a follower with a broken auth token.
+* GitHub ステータスの更新に失敗する原因となっていたバグを修正しました。 プロジェクトに壊れた認証トークンを持つユーザーがいる場合にこのバグが発生したお客様がいます。
 
-## What's New in v2.19.03
+## v2 19.03 の新機能
 
-* Removed the use of the depecated GitHub.com API endpoint `GET applications/%s/tokens/%s`.
+* 廃止された GitHub.com API のエンドポイント`GET applications/%s/tokens/%s`を削除しました。
 
-* Distributed tracing is now enabled by default for Server installations. Traces are used in CircleCI support bundles to improve our ability to troubleshoot Server issues. Options for the tracing sampling rate are displayed in the Replicated Management Console, but should only be changed from the default if requested by CircleCI Support.
+* サーバー環境において分散トレーシングがデフォルトで有効化されました。 トレースはサポートバンドルでサーバーの問題を解決する能力を向上するために使用されます。 サンプリングレートのトレースオプションは、Replicated の管理コンソールに表示されますが、CircleCI サポートから要求された場合にのみ、デフォルトから変更してください。
 
-* Fixed an issue that was preventing `restore_cache` from working with the storage driver set to "none" - i.e not S3.
+* ストレージドライバーを "none" (S3 以外) に設定すると、`restore_cache` が動作しない問題が修正されました。
 
-* Fixed an issue that was preventing the `output_processor` service from using AWS AssumeRole when the role was located in a subfolder. This issue affected customers with security policies forcing the use of a subfolder in this case, and the symptoms included the inability to store artifacts or use timings-based test splitting.
+* AWS AssumeRole がサブフォルダにあると、`output_processor`サービスが AWS AssumeRole を使用できない問題が修正されました。 この問題は、サブフォルダの使用が強制されるセキュリティポリシーを持つお客様に影響を与えていました。また、アーティファクトを保存できない、またはタイミングベースのテスト分割を使用できないという現象もありました。
 
-* JVM heap size can now be changed using the `JVM_HEAP_SIZE` environment variable for the following services: `vm-service`, `domain-service`, `permissions-service` and `federations-service`.
+* `vm-service`、`domain-service`、`permissions-service`  `federations-service`の各サービスで、`JVM_HEAP_SIZE`  環境変数を使用して JVM ヒープサイズを変更できるようになりました。
 
-## What's New in v2.19.02
+## v2 19.02 の新機能
 
-* In the LDAP login flow we now use an anonymous form to `POST` LDAP auth state, rather than sending it as a `GET` parameter. Previously, when a user authenticated using LDAP, their username and password were sent in plaintext as part of a query parameter in a `GET` request. As requests are over HTTPS, this left usernames and passwords in request logs, etc. This issue is now fixed. 
+* LDAP のログインフローにおいて、`GET` パラメーターとして送信するのではなく、匿名フォームを使って LDAP 認証状態を `POST` するようになりました。  以前は、LDAP を使ってユーザーを認証すると、ユーザー名とパスワードが`GET`リクエスト内のクエリパラメーターの一部としてプレーンテキストに送信されていました。 リクエストが HTTPS を介して行われると、リクエストログなどにユーザ名とパスワードが残っていましたが、 現在は修正されました。 
 
-* Optimizely and Zendesk are now removed from Server release images.
+* Optimizely と Zendesk がサーバーのリリースイメージから削除されました。
 
-* Fixed an issue in which setting `CIRCLE_ADMIN_SERVER_HTTP_THREADS` or `CIRCLE_PUBLIC_FACING_SERVER_HTTP_THREADS` too high would prevent the frontend container from starting.
+* `CIRCLE_ADMIN_SERVER_HTTP_THREADS` や `CIRCLE_PUBLIC_FACING_SERVER_HTTP_THREADS`を高すぎる値に設定すると、フロントエンドコンテナの起動が妨げられる問題が修正されました。
 
 * Due to changes in the GitHub API we have removed the use of `?client_id=x&client_secret=y` for GitHub, and GHE versions 2.17 and later.
 
-* Fixed an issue that was causing intermittent failures to spin up VMs with DLC in use.
+* DLC を使用していると VM のスピンアップに断続的に失敗する原因となっていた問題が修正されました。
 
-* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
+* Docker コンテナのプロキシ設定のカスタマイズを妨げていた問題が修正されました。 詳細は、https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad クライアントのプロキシ]とhttps://circleci.com/docs/2.0/customizations/#service-configuration-overrides[サービス設定のオーバーライド]のガイドを参照してください。
 
-* Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
+* ジョブコンテナにプロキシ設定が使われていると、成功したビルドのジョブステップが記録されないバグが修正されました。
 
-* Removed legacy TLS versions 1.0 and 1.1, in addition, enabled 1.2 and 1.3 TLS, and specified the following ciphersuites
+* レガシー TLS バージョン 1.0 および 1.1 を削除し、1.2 および 1.3 TLS を有効にして、次の暗号スイートを指定しました
 **  ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384
 
 * Fixed a `statsd` configuration issue that meant some services were not emitting Telegraf metrics.
