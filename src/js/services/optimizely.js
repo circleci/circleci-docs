@@ -43,7 +43,6 @@ class OptimizelyClient {
       }
     });
   }
-
   // getVariationName is always guaranteed to resolve with either "null" or a variation name.
   // This is consistent to what getVariation from the optimizely-sdk does.
   //
