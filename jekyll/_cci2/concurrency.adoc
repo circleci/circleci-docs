@@ -16,7 +16,7 @@ This documentation summarizes concurrency, and suggests ways to use concurrency 
 
 In CircleCI, **concurrency** refers to utilizing multiple containers to run multiple builds at the same time. This is different from CircleCI **parallelism**, which is test-splitting across multiple containers. If you would like information on parallelism, visit the <<parallelism-faster-jobs/#,Running Tests in Parallel>> page.
 
-Every plan with CircleCI includes the ability to concurrently run jobs, however, the amount of jobs you can run concurrently differs between plans. Please view the https://circleci.com/pricing/[pricing page] to see up to date information on the amount of concurrent job runs included in your plan.
+Every plan with CircleCI includes the ability to concurrently run jobs. However, the number of jobs you can run concurrently differs between plans. Please view the https://circleci.com/pricing/[pricing page] to see up to date information on the number of concurrent job runs included in your plan.
 
 toc::[]
 
