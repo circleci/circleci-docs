@@ -207,7 +207,12 @@ https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workloa
     --workload-pool="<PROJECT_ID>.svc.id.goog"
 ```
 
-====== Step 2: Updating existing node pools
+====== Step 2: Get node pools of existing GKE cluster
+```shell
+  gcloud container node-pools list --cluster "<CLUSTER_NAME>" --region "<REGION>"
+```
+
+====== Step 3: Updating existing node pools
 ```shell
   gcloud container node-pools update "<NODEPOOL_NAME>" \
     --cluster="<CLUSTER_NAME>" \
