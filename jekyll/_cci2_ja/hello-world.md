@@ -21,7 +21,7 @@ version:
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-2. 以下の行を含む[`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
+2. 以下の行を含む[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
    ```yaml
    version: 2.1
    jobs:
@@ -163,7 +163,7 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 {:.tab.switcher.Server_3}
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
+{:.tab.switcher.Server_2}
 ![組織の切り替えメニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある組織名を確認してください。 たとえば、左上にユーザー `my-user` が表示されている場合、`my-user` に所属する GitHub プロジェクトのみが使用可能です。 GitHub プロジェクト `your-org/project` を追加する場合は、組織の切り替えタブから `your-org` を選択する必要があります。
