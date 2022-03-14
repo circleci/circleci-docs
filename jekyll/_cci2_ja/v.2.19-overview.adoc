@@ -1,17 +1,17 @@
 ---
-description: "See a summary of features and product notes for the release of CircleCI Server v2.19.x. View requirements for upgrading, notes and best practices, and known issues."
+description: このドキュメントでは、CircleCI Server v2.19. の機能や注意事項についてまとめています。 アップグレードの要件、注意事項、ベストプラクティス、および既知の問題をご確認ください。
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v2.19.x What's New
+= CircleCI Server v2.19.x の新機能
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.19. パッチ リリースを含むすべての変更の一覧は、https://circleci.com/ja/server/changelog[変更履歴]でご確認ください。 For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration, upgrade guide>>.
+このドキュメントでは、CircleCI Server v2.19 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、https://circleci.com/server/changelog[更新履歴]でご確認ください。 For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration, upgrade guide>>.
 
 NOTE: CircleCI Server v2.x の更新は、2022 年 3 月に終了します。 CircleCI Server v2.x をご利用のお客様へのサポートは、引き続きご提供いたします。
 
