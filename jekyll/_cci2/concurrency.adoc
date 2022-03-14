@@ -1,0 +1,110 @@
+---
+version:
+- Cloud
+- Server 3
+- Server 2
+---
+= Concurrency
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This documentation summarizes concurrency, and suggests ways to use concurrency to your advantage.
+:icons: font
+:toc: macro
+:toc-title:
+
+This documentation summarizes concurrency, and suggests ways to use concurrency to your advantage. 
+
+In CircleCI, **concurrency** refers to utilizing multiple containers to run multiple builds at the same time. This is different than CircleCI **parallelism**, which is test-splitting across multiple containers. If you would like information on parallelism, visit the <<parallelism-faster-jobs/#,Running Tests in Parallel>> page.
+
+Every plan with CircleCI includes the ability to concurrently run jobs, however, the amount of jobs you can run concurrently differs between plans. Please view the https://circleci.com/pricing/[pricing page] to see up to date information on the amount of concurrent job runs included in your plan.
+
+toc::[]
+
+== Concurrency
+Concurrency allows multiple jobs to be run at the same time in a workflow through the use of multiple containers. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the <<configuration-reference/#resourceclass,resource classes>> for different executors. 
+
+If jobs are queued, it is possible you are hitting these limits. Hitting your limit may depend of a few factors, such as how many people in your organization are running jobs at once, or if you have overlapping workflows.
+
+Customers on a Performance or Scale plan can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+
+=== Concurrency in workflows
+To run a set of concurrent jobs, you will need to add a new `workflows` section to the end of your existing `.circleci/config.yml` file. With CircleCI `version: 2.1`, you do not need to specify a `version` in the new `workflows` section. If you are still using CircleCI `version: 2`, you will need to specify the `version` in the `workflows` section.
+
+The simple example below shows the default workflow orchestration with two concurrent jobs. The `workflows` key needs to have a unique name. In this example, the unique name is `build_and_test`. The `jobs` key is nested under the uniquely named workflow, and contains the list of job names. Since the jobs have no dependencies, they will run concurrently.
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+If you are still using `version 2`, your `workflows` section will need to be adjusted to include the version.
+
+```yaml
+...
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+...
+```
+
+=== Fan-out/fan-in workflow example
+A more complex example of using concurrent workflows is running a common build job, fanning-out to run a set of acceptance test jobs concurrently, and then fanning-in to run a common deploy job. This flow is illustrated below.
+
+image::fan-out-in.png[Fan-out and Fan-in Workflow]
+
+The `.circleci/config.yml` snippet below is an example of a `workflows` section configured for fan-out/fan-in job execution. In this example, as soon as the `build` job finishes successfully, all four acceptance test `jobs` start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
+
+```yaml
+...
+workflows:
+  build_accept_deploy:
+    jobs:
+      - build
+      - acceptance_test_1:
+          requires:
+            - build
+      - acceptance_test_2:
+          requires:
+            - build
+      - acceptance_test_3:
+          requires:
+            - build
+      - acceptance_test_4:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - acceptance_test_1
+            - acceptance_test_2
+            - acceptance_test_3
+            - acceptance_test_4
+...
+```
+
+Please note, if you are using CircleCI `version: 2`, you will need to specify the version in the `workflows` section, above the workflow name (in this example,` build_accept_deploy`). The snippet assumes you are using CircleCI `version: 2.1`, which does not need to be specified in `workflows`.
