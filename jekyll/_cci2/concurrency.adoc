@@ -108,3 +108,7 @@ workflows:
 ```
 
 Please note, if you are using CircleCI `version: 2`, you will need to specify the version in the `workflows` section, above the workflow name (in this example,` build_accept_deploy`). The snippet assumes you are using CircleCI `version: 2.1`, which does not need to be specified in `workflows`.
+
+== See also
+- <<workflows/#,Workflows>>
+- <<sample-config/#,Sample config.yml Files>>
