@@ -27,12 +27,12 @@ toc::[]
 * GitHub Enterprise を使用する際に、自己署名証明書またはプライベート認証機関に対応するようになりました。
 * ランナーの更新に影響を与えていたバグを修正しました。
 * サーバーがプロキシ内にインストールされている場合も、SSH 再実行ができるようになりました。
-* Replaced deprecated GitHub API endoint for `teams`.
+* 廃止予定のチーム用 GitHub API エンドポイントの置き換えを行いました。
 
 === 既知の問題
 
 * 変更された Let's Encrypt 証明書での GitHub Enterprise の更新はサポートされていません。
-* Let's Encrypt の新しいルート証明書 `isrgrootx1` は信頼できません。
+* Let's Encrypt の新しいルート証明書 `isrgrootx1` は信頼されません。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
@@ -47,7 +47,7 @@ toc::[]
 * IRSA (AWS) をオブジェクトストレージの認証キーの代わりに使用できるようになりました。
 * ビルド通知を送信するメールアドレスを KOTS 管理者コンソールから設定できるようになりました。
 
-=== 変更点
+=== 修正点
 
 * Vault コンテナの Python を v3 にアップグレードしました。
 * https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[GCP での共有 VPC アーキテクチャの使用に関するドキュメント]を改善しました。
@@ -95,7 +95,7 @@ See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 === 新機能
 * GCP 上でご使用で、プライベート VM がサポートされるようになりました。
 
-=== 変更点
+=== 修正点
 * mTLS がデフォルトで無効になりました。
 * VM の SSH タイムアウトが 10 分に延長されました。
 * プライベート VM がプライベート IP を要求するようになりました。
@@ -183,7 +183,7 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 * https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform]にNomadのオートスケーリングの例を追加しました。
 * 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-build-artifacts/[CircleCI Server v3.x ビルド アーティファクト]を参照してください。
 
-=== 変更点
+=== 修正点
 
 * デフォルトの Windows Executor が記載と異なっていました。 サイズをドキュメントの記載やクラウド版に合わせて大きくしました。
 
