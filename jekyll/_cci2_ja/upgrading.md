@@ -10,9 +10,9 @@ verison:
   - サーバー管理者
 ---
 
-Upgrading your private CircleCI server installation to 2.0 gives you the ability to use Workflows, Docker as a first-class executor, and all of the additional features and stability built into CircleCI. Work with a CircleCI solutions engineer to set up a 2.0 installation in your datacenter or private cloud (requires Premium Support). まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+CircleCI のプライベート環境を 2.0 にアップグレードすると、ワークフロー、高機能の Docker Executor 、CircleCI に搭載されたすべての追加機能を活用し、安定性を実感することができます。 CircleCI ソリューションエンジニアと一緒に、お客様のデータセンターまたはプライベートクラウドに 2.0 のインストールを設定しください。 まずは[サポートチケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
 
-## Migrating config to 2.0
+## 設定ファイルの 2.0 への移行
 {: #migrating-config-to-20 }
 
 1.0 から 2.0 への移行プロセスに関して各種のドキュメントをご用意しています。
