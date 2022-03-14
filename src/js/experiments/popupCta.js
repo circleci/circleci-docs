@@ -44,7 +44,7 @@ window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_docs-popup-cta_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: '.main-body',
-  // guestExperiment: true
+  guestExperiment: true
 }).then((variation) => {
   if (variation === 'treatment') {
     const popupBg = $(".popup-bg");
@@ -66,8 +66,7 @@ window.OptimizelyClient.getVariationName({
     skipButton.click(() => {
       closePopup();
     })
-    // if (timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
-    if (true) {
+    if (timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
       // don't assume we have a popupwrapper in every docs layout.
       if (popupBg && popupContent) {
         openPopup()
