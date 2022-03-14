@@ -142,9 +142,7 @@ ifndef::env-gcp[]
 Amazon EKS クラスタ の作成に関する詳細はhttps://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら]をご覧ください。 クラスタの作成にはhttps://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
 . AWS CLI をhttps://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール]し、お使いの AWS アカウント用にhttps://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
-
-. Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`].
-
+.  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
 . Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
 +
 ```shell
