@@ -39,7 +39,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
 
-| リソース クラス名    | 仕様              | 提供プラン                         |
+| リソース クラス名    | スペック            | 提供プラン                         |
 | ------------ | --------------- | ----------------------------- |
 | `arm.medium` | 2 vCPU、8GB RAM  | Free、Performance、Scale、Custom |
 | `arm.large`  | 4 vCPU、16GB RAM | Performance、Scale             |
@@ -50,7 +50,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 ## Arm リソースの使用方法
 {: #using-arm-resources }
 
-Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定ファイル例を参考にしてください。
+Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定例を参考にしてください。
 
 {:.tab.armblock.Cloud}
 ```yaml
