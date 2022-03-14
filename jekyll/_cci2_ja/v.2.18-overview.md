@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-このドキュメントでは、CircleCI Server v2.18 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。 お使いの CircleCI Server を v2.17.x から v2.18 に**アップグレード**する手順については、[アップグレードガイド]({{ site.baseurl }}/2.0/updating-server/)をご覧ください。
+このドキュメントでは、CircleCI Server v2.18 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。 お使いの CircleCI Server を v2.17.x から v2.18 に**アップグレード**する手順については、[アップグレードガイド]({{ site.baseurl }}/ja/2.0/updating-server/)をご覧ください。
 
 ## アップグレードの要件
 {: #requirements-for-upgrading }
@@ -27,14 +27,14 @@ order: 1
 ## バージョン 2.18.3 の新機能
 {: #whats-new-in-release-2183 }
 
-* Windows ベースのイメージを生成し、 `machine` Executor を使用して実行できるようになりました。 [イメージのビルドや使用できるようにする方法]({{ site.baseurl }}/2.0/vm-service/#creating-a-windows-ami)は、VM サービスガイドをご覧ください。 Windows Executor の使用に関する詳細は、[Executor とイメージの概要]({{ site.baseurl }}/2.0/executor-intro/#windows)を参照してください。
+* Windows ベースのイメージを生成し、 `machine` Executor を使用して実行できるようになりました。 [イメージのビルドや使用できるようにする方法]({{ site.baseurl }}/ja/2.0/vm-service/#creating-a-windows-ami)は、VM サービスガイドをご覧ください。 Windows Executor の使用に関する詳細は、[Executor とイメージの概要]({{ site.baseurl }}/ja/2.0/executor-intro/#windows)を参照してください。
 
 ## バージョン 2.18. の新機能
 {: #whats-new-in-release-218 }
 
-* コンテキストにセキュリティグループを追加することで、実行時に環境変数の使用を制約できるようになりました。 セキュリティグループは、GitHub チームまたは LDAP グループとして定義されます。 コンテキストにセキュリティグループを追加すると、そのセキュリティグループのメンバーである CircleCI ユーザーのみが、コンテキストの環境変数にアクセスまたは環境変数を使用できます。 詳細については、[コンテキストの制約に関するガイド]({{ site.baseurl }}/2.0/contexts/#restricting-a-context)をご覧ください。
+* コンテキストにセキュリティグループを追加することで、実行時に環境変数の使用を制約できるようになりました。 セキュリティグループは、GitHub チームまたは LDAP グループとして定義されます。 コンテキストにセキュリティグループを追加すると、そのセキュリティグループのメンバーである CircleCI ユーザーのみが、コンテキストの環境変数にアクセスまたは環境変数を使用できます。 詳細については、[コンテキストの制約に関するガイド]({{ site.baseurl }}/ja/2.0/contexts/#restricting-a-context)をご覧ください。
 * AWS の外部でストレージ ドライバーを実行しているお客様は、ビルドアーティファクトを検索する際のルーティング時間が改善されます。
-* CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 手順とオプションについては、[カスタムメトリクスに関するガイド]({{ site.baseurl }}/2.0/monitoring/#custom-metrics)をご覧ください。 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
+* CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 手順とオプションについては、[カスタムメトリクスに関するガイド]({{ site.baseurl }}/ja/2.0/monitoring/#custom-metrics)をご覧ください。 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
 
 <br>
 
@@ -61,7 +61,7 @@ order: 1
 
 <br>
 
-* リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/2.0/vm-service/)を参照してください。
+* リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/2.0/vm-service/)を参照してください。
 
 ## バージョン 2.18 での修正点
 {: #fixed-in-release-218 }
