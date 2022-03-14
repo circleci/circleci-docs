@@ -25,13 +25,13 @@ toc::[]
 +
 git checkout main && git pull
 . ローカルマシンの `enterprise-setup` リポジトリの一番上のディレクトリに移動します。
-. terraform init を実行して、作業ディレクトリを初期化します。
-. make init を実行し、terraform.tfvars ファイルを初期化します (既に terraform.tfvars が存在する場合、同じディレクトリにバックアップされます)。
-. エディターで terraform.tfvars を開き、1. に適切な AWS 値を入力します。
-. 1.0 Builder を使用する場合は、 2. で circle_secret_passphrase を指定し、 `...` を英数字に置き換えますが、1.0 Builder を使用しない場合はそのままにしておきます。1.0 Builder は、3. のデフォルト設定で無効になっています。
-. Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の terraform.tfvars ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、terraform.tfvars ファイルの 2. で nomad_client_instance_type の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,System Requirements>> をお読みください。
+. `terraform init` を実行して、作業ディレクトリを初期化します。
+. `make init` を実行し、`terraform.tfvars` ファイルを初期化します (既に `terraform.tfvars` が存在する場合、同じディレクトリにバックアップされます)。
+. エディターで `terraform.tfvars` を開き、1. に適切な AWS 値を入力します。
+. 1.0 Builder を使用する場合は、 2. で `circle_secret_passphrase` を指定し、 `...` を英数字に置き換えますが、1.0 Builder を使用しない場合はそのままにしておきます。1.0 Builder は、3. のデフォルト設定で無効になっています。
+. Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の `terraform.tfvars` ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、`terraform.tfvars` ファイルの 2. で `nomad_client_instance_type` の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,System Requirements>> をお読みください。
 +
-NOTE: builder_instance_type は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
+NOTE: `builder_instance_type` は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
 . 下記の 3. では、以下が可能です。
 .. プロジェクトで必要な場合は、カウントを 1 に変更して 1.0 Builder の使用を選択する。
 .. プロキシの詳細を入力し、AWS リージョン内に複数のインストールがある場合は、プレフィックスを入力する。Services および Nomad クライアントのインスタンスは、AWS コンソールではこのプレフィックスで表示されます。
@@ -131,14 +131,14 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 
 == インスタンスのプロビジョニング
 
-. 変更内容を tfvars ファイルに保存し、以下を実行します。
+. 変更内容を `tfvars` ファイルに保存し、以下を実行します。
 +
 terraform plan
 . インスタンスのプロビジョニングを行うために、以下を実行します。
 +
 terraform apply
 +
-その際、先に進むかどうかを yes と入力して確認するように求められます。
+その際、先に進むかどうかを `yes` と入力して確認するように求められます。
 . Terraform の出力の最後に IP アドレスが提供されます。 この IP アドレスにアクセスして、インストール作業を進めてください。
 +
 // explain what to do if this step fails
