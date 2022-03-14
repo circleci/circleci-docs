@@ -201,7 +201,7 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 === アップグレードに関する注意事項
 
-IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロードバランサーにより処理されます。 以前の 3.x バージョンからアップデートする場合、`frontend-external` ロードバランサーを参照する DNS レコードを、`circleci-server-traefik` ロードバランサーを参照するように更新する必要があります。 traefik ロードバランサーの外部 IP アドレスまたは DNS 名は、クラスタにアクセス可能なターミナルで `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
+IMPORTANT: 本リリースでは、`frontend-external` ロードバランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロードバランサーにより処理されます。 以前の 3.x バージョンからアップデートする場合、`frontend-external` ロードバランサーを参照する DNS レコードを、`circleci-server-traefik` ロードバランサーを参照するように更新する必要があります。 traefik ロードバランサーの外部 IP アドレスまたは DNS 名は、クラスタにアクセス可能なターミナルで `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
 
 DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。
 
@@ -224,8 +224,8 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 ** Postgres
 ** MongoDB
 ** Vault
-* バックアップと復元機能を利用できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/[バックアップと復元に関するページ]を参照してください。
-* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と設定は KOTS 管理者 UI で行えます。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
+* バックアップ＆リストア機能が利用できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/[バックアップと復元に関するページ]を参照してください。
+* クラスタのヘルスチェックと使用状況を監視するためのPrometheusがサーバにデフォルトで導入されました。 Prometheus の管理と設定は KOTS 管理者 UI で行えます。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
 * 2 X-large リソース クラスがサポートされるようになりました。 大きいリソース クラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
 * ビルドアーティファクトとテスト結果のライフサイクルを KOTS 管理者コンソールの *Storage Object Expiry* で設定できるようになりました。また、期限切れを無効にしてアーティファクトとテスト結果を無期限に保持するオプションも追加されました。
 
