@@ -43,7 +43,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 +
 TIP: CircleCI Server 環境における SSH 再実行についての詳細は、https://circleci.com/docs/2.0/ssh-server/[CircleCI Serverでの SSH 再実行のアーキテクチャ]ガイドを参照してください。
 
-* 下記に記載されている暗号スイートの変更により、v2.19.02 よりクラシックロードバランサは使用できなくなりました。 https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[クラシックロードバランサ]からのリクエストは受け付けなくなったため、https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[ネットワークロードバランサー (NLB)] または https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[アプリケーションロードバランサ (ALB)] に移行する必要があります。
+* 下記記載の暗号スイートの変更により、v2.19.02 よりクラシックロードバランサは使用できなくなりました。 https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[クラシックロードバランサ]からのリクエストは受け付けなくなったため、https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[ネットワークロードバランサー (NLB)] または https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[アプリケーションロードバランサ (ALB)] に移行する必要があります。
 
 ## v2 19.14 の新機能
 
@@ -61,48 +61,48 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 ## v2 19.11 の新機能
 
-* Fixed a bug that didn't allow more than 50 aliases in a configuration.
+* 一つの設定ファイルで 50 エイリアスまでしか使えなかったバグを修正しました。
 
-## What's New in v2.19.10
+## v2 19.10 の新機能
 
-* Fixed a bug that caused 'git checkout' to fail in go-git.
-* Fixed a bug in the YAML parser in picard dispatcher to support `config-str` to have more than 50 YAML aliases.
-* Fixed a bug where s3 retention policy deleted test results from an older job.
-* Reduced the likelihood of 'out-of-sequence' commit statuses.
-* General security updates.
+* go -git で「git checkout」 が 失敗する原因となっていたバグを修正しました。
+* picard dispatcher の YAML パーサーのバグを修正し、 `config-str` が 50 を超える YAML エイリアスを持てるようになりました。
+* S3 保持ポリシーにより古いジョブのテスト結果が削除されるバグを修正しました。
+* 「順序が正しくない」コミットステータスの可能性が減少しました。
+* 全体的なセキュリティーのアップデート
 
-## What's New in v2.19.09
+## v2 19.09 の新機能
 
-* Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the https://circleci.com/docs/2.0/private-images/#docker-executor[Docker ID password field under the `auth` key].
-* General security updates.
+* Docker Executor の認証パスワードで、英数字以外の文字をより適切に処理できるようになりました。 `auth`キーの下の Docker ID パスワードフィールド</a>で、 `~` と `?` の使用を妨げていたバグを修正しました。
+* 全体的なセキュリティーのアップデート
 
-## What's New in v2.19.08
+## v2 19.08 の新機能
 
-* Fixed a bug that was causing parallelism to fail for static installations with `NONE` selected under storage driver settings.
+* 静的なインストール環境においてストレージドライバーの設定で`NONE`が選択されている場合に、並列処理に失敗する原因となっていたバグを修正しました。
 
-## What's New in v2.19.07
+## V2 19.07 の新機能
 
-* Fixed a bug that was preventing authentication to China region ECR images in the docker executor.
+* Docker Exdecutor の中国地域 ECR イメージへの認証を妨げていたバグを修正しました。
 
-* Removed the recursive `chown` from startup of the `fileserverd` service. In instances of heavy usage this was causing the startup process to take a long time, or in some cases, startup was blocked.
+* `fileserverd` サービスの起動から再帰的な `chown` を削除しました。 これにより、使用量が多いインスタンスでは、起動プロセスに時間がかかったり、起動がブロックされる場合がありました。
 
-## What's New in v2.19.06
+## v2 19.06 の新機能
 
-* Fixed a bug that was causing workflow statuses to be displayed on GitHub in the wrong order.
+* ワークフローのステータスが GitHub で誤った順序で表示される原因となっていたバグを修正しました。
 
-* Introduced performance improvements to `workflows-conductor` that dramatically reduce CPU usage and latency.
+* CPU の使用と遅延を大幅に削減する、 ` workflows-conductor ` のパフォマンスが改善されました
 
-* Fixed a bug that was preventing use of an S3 storage region other than `us-east-1` via an IAM user.
+* IAM ユーザーを介して `us-east-1` 以外の S3 ストレージ領域を使用できないバグを修正しました。
 
-* Fixed formatting type of SMTP passwords to ensure they are masked during setup.
+* SMTP パスワードのフォーマットタイプが修正され、セットアップ時にマスキングされるようになりました。
 
-## What's New in v2.19.05
+## v2 19.05 の新機能
 
-* Fixed a bug that could lead to the VM database ending up in an incorrect state in the event of a Services Machine crash or manual termination of VM Service instances.
+* サービスマシンがクラッシュした場合や VM サービスインスタンスが手動で終了した場合に、 VM データベースが誤った状態になることがあるバグを修正しました。
 
-## What's New in v2.19.04
+## v2 19.04 の新機能
 
-* Fixed a bug that was leading to support bundle creation timing out before the Services machine logs had been created, leaving only Replicated logs.
+* サービスマシンのログが作成される前にバンドル作成がタイムアウトする原因となっていたバグを修正し、Replicated のログのみを残しました。
 
 * S3 connection pool metrics under `circle.s3.connection_pool.*` have been added to the test results service, making it easier to debug issues with this service.
 
