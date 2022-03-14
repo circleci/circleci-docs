@@ -18,7 +18,7 @@ version:
 チームに最適なプランを検討する際は、以下のような要素を考慮してください。
 
 - チームのユーザー数
-- How much support you need (community and free support, standard support, or premium support)
+- 必要なサポートのレベル (無料のコミュニティサポート、標準サポート、Premium サポート)
 - 複数のマシンタイプやリソースクラスの利用の要否
 - セルフホストランナー数の制限の有無
 
