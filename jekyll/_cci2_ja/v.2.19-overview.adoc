@@ -17,13 +17,13 @@ NOTE: CircleCI Server v2.x の更新は、2022 年 3 月に終了します。 Ci
 
 ## アップグレードの要件
 
-WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a non-root path, you will need to unset the `OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` environment variable in your output processor customization script. See the https://circleci.com/ja/docs/2.0/customizations/#service-configuration-overrides[Customizations Guide] in our documentation for more information on using customization scripts.
+WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用に関する詳細は、https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[カスタマイズガイド]を参照してください。
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important, this guide>> to update your nomad launch configuration.
 
-WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your CircleCI organization name, there is a <<updating-server#org-rename-script, script>> that *must* be run before starting the upgrade process. If you are already running v2.18.x, you will have run this already.
+WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your CircleCI organization name, there is a <<updating-server#org-rename-script, script>> that *must* be run before starting the upgrade process. v2.18.x を既に実行している場合は、このスクリプトは既に実行されています。
 
-## 注意事項とベスト プラクティス
+## 注意事項とベストプラクティス
 
 * Services マシンには最低 32 GB の RAM が必要になりました。 
 * We made some changes to our Redis configuration in v2.18. Redis を外部処理化している場合は、構成を更新する必要があります。 Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
