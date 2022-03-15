@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Docker レイヤー キャッシュの有効化"
-short-title: "Docker レイヤー キャッシュの有効化"
-description: "未変更のキャッシュ レイヤーを再利用してイメージをビルドすることにより、全体の実行時間を短縮する方法"
+title: "Docker レイヤーキャッシュの有効化"
+short-title: "Docker レイヤーキャッシュの有効化"
+description: "未変更のキャッシュレイヤーを再利用してイメージをビルドすることにより、全体の実行時間を短縮する方法"
 categories:
   - 最適化
 order: 70
@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-Docker レイヤー キャッシュ (DLC) を利用すると、CircleCI で Docker イメージのビルド時間を短縮できます。 DLC は、[Free および上記の](https://circleci.com/pricing/)利用プラン (ジョブの実行ごとにクレジットが請求されます) または [CircleCI Server](https://circleci.com/enterprise/) の環境でご利用いただけます。 このドキュメントでは、以下のセクションに沿って、DLC について概説します。
+Docker レイヤー キャッシュ (DLC) を利用すると、Docker イメージのビルド時間を短縮できます。 DLC は、[Free および有料](https://circleci.com/pricing/)プラン (ジョブの実行ごとにクレジットが請求されます)、そして [CircleCI Server](https://circleci.com/enterprise/) 環境でご利用いただけます。 このドキュメントでは、以下のセクションに沿って、DLC について概説します。
 
 * 目次
 {:toc}
@@ -20,17 +20,17 @@ Docker レイヤー キャッシュ (DLC) を利用すると、CircleCI で Dock
 ## 概要
 {: #overview }
 
-Docker レイヤー キャッシュ (DLC) は、Docker イメージのビルドが CI/CD プロセスの一環として定期的に行われる場合に役立つ優れた機能です。 DLC では、作成されるイメージレイヤーがジョブ内に保存されるため、ジョブの実行に使用される実際のコンテナには影響が及びません。
+Docker レイヤー キャッシュ (DLC) は、CI/CD プロセスにおいて Docker イメージのビルドを 定期的に行う場合に役立つ優れた機能です。 DLC では、作成されるイメージレイヤーがジョブ内に保存されるため、ジョブの実行に使用される実際のコンテナには影響が及びません。
 
 DLC では、CircleCI のジョブ中にビルドされた Docker イメージの各レイヤーがキャッシュされます。 その後で CircleCI を実行すると、イメージ全体が毎回リビルドされるのではなく、未変更のイメージレイヤーが再利用されます。 つまり、コミット間で Dockerfile の変更が少ないほど、イメージ ビルド ステップが短時間で完了します。
 
-Docker レイヤー キャッシュは、[`machine` Executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) と[リモート Docker 環境]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`) のどちらでも利用できます。
+Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) と[リモート Docker 環境]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`) のどちらでも利用できます。
 
 ### 制限事項
 {: #limitations }
 {:.no_toc}
 
-設定ファイルの [parallelism]({{site.baseurl}}/2.0/configuration-reference/#parallelism) の値が大きい状態 (30 以上) で DLC を利用すると、古いキャッシュがプルされてしまう、キャッシュがプルされないなどの問題が発生することがあります。 たとえば、次のとおりです。
+設定ファイルの [並列処理]({{site.baseurl}}/2.0/configuration-reference/#parallelism) の値が大きい状態 (30 以上) で DLC を利用すると、古いキャッシュがプルされてしまう、キャッシュがプルされないなどの問題が発生することがあります。 たとえば以下のようなケースが考えられます。
 
 - 30 の並列処理で 1 つのジョブを実行する場合、ワークフローが 1 つであれば正常に動作しますが、複数のワークフローがあるとキャッシュ ミスが発生します。
 - 30 を超える `parallelism` で任意の数のジョブを実行する場合、ワークフローの数に関係なく、キャッシュ ミスが発生します。
@@ -103,7 +103,7 @@ jobs:
 
 DLC は、外部ボリュームを作成し、それを `machine` やリモート Docker のジョブを実行するインスタンスにアタッチすることで、Docker イメージレイヤーをキャッシュします。 ボリュームのアタッチは、アタッチされるボリュームに Docker がイメージレイヤーを保存するような方法で実行されます。 ジョブが終了すると、ボリュームは切断され、その後のジョブで再利用されます。 つまり、DLC を使用して前のジョブでダウンロードされたレイヤーは、同じ DLC ボリュームを使用する次のジョブで使用できます。
 
-1 つの DLC ボリュームをアタッチできるのは、一度に 1 つの `machine` またはリモート Docker ジョブだけです。 存在する DLC ボリュームが 1 つだけで、DLC を要求するジョブが 2 つローンチされる場合、CircleCI は新しい DLC ボリュームを作成し、それを 2 番目のジョブにアタッチします。 プロジェクトでは、その時点以降、2つの DLC ボリュームが関連付けられることになります。 これは、並列ジョブにも適用されます。2 つの `machine` ジョブを並列実行している場合、これらのジョブは異なる DLC ボリュームを取得します。
+1 つの DLC ボリュームをアタッチできるのは、一度に 1 つの `machine` またはリモート Docker ジョブだけです。 存在する DLC ボリュームが 1 つだけで、DLC を要求するジョブが 2 つローンチされる場合、CircleCI は新しい DLC ボリュームを作成し、それを 2 番目のジョブにアタッチします。 プロジェクトでは、その時点以降、2 つの DLC ボリュームが関連付けられることになります。 これは、並列ジョブにも適用されます。2つの `machine` ジョブを並列実行している場合、これらのジョブは異なる DLC ボリュームを取得します。
 
 ボリュームがどのジョブで使用されるかに応じて、ボリューム上に異なるレイヤーが保存される場合があります。 使用頻度が低いボリュームには、古いレイヤーが保存されている可能性があります。
 
@@ -130,22 +130,22 @@ DLC が有効な場合、リモート ボリュームには `/var/lib/docker` �
 
 前のジョブでビルドされたレイヤーはすべて、リモート Docker 環境でアクセスできます。 ただし、設定で `docker_layer_caching: true` が指定されている場合でも、ジョブがクリーンな環境で実行される場合があります。
 
-同一プロジェクトの多くの同時実行ジョブが同じ環境に依存している場合、それらを実行すると、すべてのジョブにリモート Docker 環境が提供されます。 Docker レイヤーキャッシュは、他のジョブがアクセスできない排他的リモート Docker 環境をジョブが持つことを保証します。 しかしジョブは、キャッシュされたレイヤーを持つ場合も持たない場合もあり、また、すべてのジョブが同一のキャッシュを持つとは限りません。
+同一プロジェクトの多くの同時実行ジョブが同じ環境に依存している場合、それらを実行すると、すべてのジョブにリモート Docker 環境が提供されます。 Docker レイヤー キャッシュは、他のジョブがアクセスできない排他的なリモート Docker 環境をジョブが使用することを保証します。 しかしジョブは、キャッシュされたレイヤーを持つ場合も持たない場合もあり、また、すべてのジョブが同一のキャッシュを持つとは限りません。
 
-**注:** 以前、DLC は、`reusable: true` キーによって有効化されていましたが、 `reusable` キーは非推奨になり、`docker_layer_caching` キーがこれに代わりました。 `reusable` キーは非推奨になり、`docker_layer_caching` キーがこれに代わりました。 さらに、`exclusive: true` オプションも非推奨になり、すべてのリモート Docker VM が排他として扱われるようになりました。 つまり、DLC を使用すると、ジョブは必ず、他のジョブがアクセスできない排他的リモート Docker 環境を持つことになります。
+**注:** 以前、DLC は、`reusable: true` キーによって有効化されていましたが、 `reusable` キーは非推奨になり、`docker_layer_caching` キーがこれに代わりました。 さらに、`exclusive: true` オプションも非推奨になり、すべてのリモート Docker VM が排他として扱われるようになりました。 つまり、DLC を使用すると、ジョブは必ず、他のジョブがアクセスできない排他的リモート Docker 環境を持つことになります。
 
-### machine Executor
+### Machine Executor
 {: #machine-executor }
 {:.no_toc}
 
-Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine) を使用して Docker イメージをビルドする際のジョブ実行時間を短縮することもできます。 `machine` キーの下に `docker_layer_caching: true` を追加することで (後述の[例](#configyml)を参照)、`machine` Executor で DLC を使用できます。
+Docker レイヤーキャッシュは、[`maxhine` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine) を使用して Docker イメージをビルドする際のジョブ実行時間を短縮することもできます。 `machine` キーの下に `docker_layer_caching: true` を追加することで (後述の[例](#configyml)を参照)、`machine` Executor で DLC を使用できます。
 
 ```yml
 machine:
   docker_layer_caching: true    # デフォルトは false
 ```
 
-## 例
+## サンプル
 {: #examples }
 
 以下の Dockerfile を例に、Docker レイヤーキャッシュがどのように機能するかを説明します。 この Dockerfile サンプルは、[Elixir 用 Circle CI イメージ](https://hub.docker.com/r/circleci/elixir/~/dockerfile)から引用して改変したものです。

@@ -4,8 +4,9 @@ title: CircleCI の設定
 short-title: CircleCI の設定
 description: .circleci/config.yml に関するリファレンス
 order: 20
+readtime: false
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 suggested:
@@ -49,7 +50,7 @@ suggested:
 
 | キー    | 必須 | タイプ   | 説明                                                                                  |
 | ----- | -- | ----- | ----------------------------------------------------------------------------------- |
-| setup | ×  | ブール値型 | config.yaml で[ダイナミック コンフィグ]({{ site.baseurl }}/ja/2.0/dynamic-config/)機能を使用するように指定します。 |
+| setup | ×  | ブール値型 | config.yaml で[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config/)機能を使用するように指定します。 |
 {: class="table table-striped"}
 
 `setup` フィールドを指定すると、プライマリ .circleci 親ディレクトリ外部にある設定ファイルのトリガー、パイプライン パラメーターの更新、およびカスタマイズされた設定ファイルの生成を、条件に従って実行できます。
@@ -69,7 +70,7 @@ suggested:
 
 | キー        | 必須 | 型   | 説明                                                                                                                                                                         |
 | --------- | -- | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/ja/2.0/creating-orbs/)を参照してください。 |
+| orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/2.0/creating-orbs/)を参照してください。 |
 | executors | ×  | マップ | Executor 定義への文字列のマップ。 後述の [executors]({{ site.baseurl }}/ja/2.0/configuration-reference/#executors-requires-version-21) セクションも参照してください。                                    |
 | commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/ja/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照してください。                                        |
 {: class="table table-striped"}
@@ -167,7 +168,7 @@ jobs:
 
 ワークフローは 1 つ以上の一意の名前付きジョブで構成し、 それらのジョブの指定は `jobs` マップで行います。「[config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)」では `job` マップの 2 通りの例を紹介しています。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
 
-**注:** ジョブの最大実行時間は、Free プランは 1 時間、Performance プランは 3 時間、Scale プランは 5 時間となります。 ジョブがタイムアウトする場合は、より大きな[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resourceclass)の使用や、[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs)を検討してください。  また、料金プランのアップグレードや、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を利用した複数ジョブの同時実行も可能です。
+**注:** ジョブの最大実行時間は、Free プランは 1 時間、Performance プランは 3 時間、Scale プランは 5 時間となります。 ジョブがタイムアウトする場合は、より大きな[リソースクラス]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)の使用や、[並列処理]({{site.baseurl}}/2.0/parallelism-faster-jobs)を検討してください。  また、料金プランのアップグレードや、[ワークフロー]({{ site.baseurl }}/2.0/workflows/)を利用した複数ジョブの同時実行も可能です。
 
 ### **<`job_name`>**
 {:job-name}
@@ -235,7 +236,7 @@ jobs:
 <!-- Others? -->
 <!-- branches & type pass `circleci config validate`. Strange -->
 
-詳細については、「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」<!-- この参照先では、job-parameters に許可されている型については触れていません。-->を参照してください。
+詳細については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax)」<!-- この参照先では、job-parameters に許可されている型については触れていません。-->を参照してください。
 
 
 #### **`docker`**/**`machine`**/**`macos`**/**`windows`** (_Executor_)
@@ -267,7 +268,7 @@ jobs:
 
 ファイル内で最初に記述する `image` が、すべてのステップを実行するプライマリ コンテナ イメージとなります。
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `CMD` が無視されます。 というのも、プライマリ コンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです ([カスタム イメージはこの挙動を無効にし、`ENTRYPOINT` を強制的に実行する場合があります]({{ site.baseurl }}/ja/2.0/custom-images/#adding-an-entrypoint))。 ジョブの `steps` はプライマリ コンテナでのみ実行されます。
+[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `CMD` が無視されます。 というのも、プライマリ コンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです ([カスタム イメージはこの挙動を無効にし、`ENTRYPOINT` を強制的に実行する場合があります]({{ site.baseurl }}/2.0/custom-images/#adding-an-entrypoint))。 ジョブの `steps` はプライマリ コンテナでのみ実行されます。
 
 `name` では、セカンダリサービスコンテナにアクセスする際の名前を定義します。   デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。  これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
 
@@ -275,7 +276,7 @@ jobs:
 
 タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types)」を参照してください。
 
-Docker Hub など、一部のレジストリでは、匿名ユーザーによる Docker のプル回数に上限が設定されている場合があります。  こうした場合にプライベート イメージとパブリック イメージをプルするには、認証を行うことをお勧めします。 ユーザー名とパスワードは `auth` フィールドで指定できます。  詳細については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/2.0/private-images/)」を参照してください。
+Docker Hub など、一部のレジストリでは、匿名ユーザーによる Docker のプル回数に上限が設定されている場合があります。  こうした場合にプライベート イメージとパブリック イメージをプルするには、認証を行うことをお勧めします。 ユーザー名とパスワードは `auth` フィールドで指定できます。  詳細については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
 
 例
 
@@ -326,7 +327,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # UI から設定したプロジェクトの環境変数を参照するように指定します
 ```
 
-バージョン 2.1 を使用している場合、[宣言済みのコマンド]({{ site.baseurl }}/ja/2.0/reusing-config/)をジョブで再利用できます。 以下の例では `sayhello` コマンドを呼び出しています。
+バージョン 2.1 を使用している場合、[宣言済みのコマンド]({{ site.baseurl }}/2.0/reusing-config/)をジョブで再利用できます。 以下の例では `sayhello` コマンドを呼び出しています。
 
 ```yaml
 jobs:
@@ -350,7 +351,7 @@ jobs:
 | キー                     | 必須 | 種類    | 説明                                                                                                                                                                                                                                            |
 | ---------------------- | -- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | image                  | ○  | 文字列型  | 使用する VM イメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **注:** このキーは、オンプレミス環境では**サポートされません**。 ユーザーのサーバーにインストールされた CircleCI 上の `machine` Executor イメージをカスタマイズする方法については、\[VM サービスに関するドキュメントを参照してください\] ({{ site.baseurl }}/ja/2.0/vm-service)。 |
-| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)が有効になります。                                                                                                                                                       |
+| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。                                                                                                                                                       |
 {: class="table table-striped"}
 
 
@@ -390,7 +391,7 @@ jobs:
 
 ***注:*** *Ubuntu 16.04 LTS は 2021 年 4 月にサポート期間が終了し、Canonical によるサポートが終了します。 その結果、`ubuntu-1604:202104-01`がCircleCIにリリースされる最終的なUbuntu 16.04のイメージとなります。 2021年4月以降のリリースやサポートを受けるためには、最新のUbuntu 20.04イメージにアップグレードすることをお勧めします。 *</p>
 
-machine Executor は、ジョブや Workflows で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)をサポートしています。
+machine Executor は、ジョブや Workflows で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)をサポートしています。
 
 ##### 使用可能な Linux GPU イメージ
 {: #available-linux-gpu-images }
@@ -434,7 +435,7 @@ CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実�
 
 | キー    | 必須 | タイプ  | 説明                                                                                                                                               |
 | ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
+| xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
 {: class="table table-striped"}
 
 **例:** macOS 仮想マシンを Xcode バージョン 12.5.1 で使用する場合
@@ -451,7 +452,7 @@ jobs:
 {: #windows }
 {:.no_toc}
 
-CircleCI は、Windows 上でのジョブ実行をサポートしています。 Windows マシンでジョブを実行するには、`windows` キーをジョブ構成の最上位に追加する必要があります。 Orb を使用すると、Windows ジョブを簡単にセットアップできます。 Windows ジョブを実行する際の前提条件と、Windows マシンで提供される機能の詳細については、「[Windows での Hello World]({{ site.baseurl }}/ja/2.0/hello-world-windows)」を参照してください。
+CircleCI は、Windows 上でのジョブ実行をサポートしています。 Windows マシンでジョブを実行するには、`windows` キーをジョブ構成の最上位に追加する必要があります。 Orb を使用すると、Windows ジョブを簡単にセットアップできます。 Windows ジョブを実行する際の前提条件と、Windows マシンで提供される機能の詳細については、「[Windows での Hello World]({{ site.baseurl }}/2.0/hello-world-windows)」を参照してください。
 
 
 **例:** Windows Executor を使用して単純なジョブを実行する場合
@@ -475,7 +476,7 @@ jobs:
 
 **このキーは非推奨になりました。 [ワークフローのフィルタリング](#jobfilters)機能を使用して、どのジョブがどのブランチに対して実行されるかを制御することができます。**
 
-ワークフローを**設定せず**、バージョン 2.1 ではなく 2.0 の設定ファイルを使用している場合は、一部のブランチの実行を許可またはブロックするルールを定義できます。 [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)を使用している場合、ジョブレベルのブランチは無視されるため、`config.yml` ファイルの workflows セクションで設定する必要があります。 バージョン 2.1 の設定では、ワークフローを追加することでフィルタリングが可能です。 詳しくは後述の [ワークフロー](#workflows) を参照してください。 ジョブレベルの `branches` キーは下記の要素を用いて設定します。
+ワークフローを**設定せず**、バージョン 2.1 ではなく 2.0 の設定ファイルを使用している場合は、一部のブランチの実行を許可またはブロックするルールを定義できます。 [ワークフロー]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)を使用している場合、ジョブレベルのブランチは無視されるため、`config.yml` ファイルの workflows セクションで設定する必要があります。 バージョン 2.1 の設定では、ワークフローを追加することでフィルタリングが可能です。 詳しくは後述の [ワークフロー](#workflows) を参照してください。 ジョブレベルの `branches` キーは下記の要素を用いて設定します。
 
 | キー     | 必須 | タイプ | 説明              |
 | ------ | -- | --- | --------------- |
@@ -522,7 +523,7 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 
 **注:** 2021 年 9 月 1 日以降に作成され、リソースクラスが指定されていない新しいプロジェクトに対しては、 お客様の組織に適したデフォルト値を決定します。 デフォルトの使用を避けるには、各ジョブの設定でリソースクラスサイズを明示的に指定してください。
 
-**CircleCI Server をオンプレミスでホスティングしている場合は、利用可能なリソースクラスについてシステム管理者に問い合わせてください**。 詳細については、サーバーの管理に関するドキュメントの[Nomad クライアントのシステム要件]({{ site.baseurl }}/ja/2.0/server-ports/#nomad-clients)と[サーバーのリソースクラス]({{ site.baseurl }}/ja/2.0/customizations/#resource-classes)のセクションを参照してください。
+**CircleCI Server をオンプレミスでホスティングしている場合は、利用可能なリソースクラスについてシステム管理者に問い合わせてください**。 詳細については、サーバーの管理に関するドキュメントの[Nomad クライアントのシステム要件]({{ site.baseurl }}/2.0/server-ports/#nomad-clients)と[サーバーのリソースクラス]({{ site.baseurl }}/2.0/customizations/#resource-classes)のセクションを参照してください。
 
 ##### Docker Executor
 {: #docker-executor }
@@ -653,7 +654,7 @@ jobs:
 
 Executor が Windows Orb 内で定義されているため、`windows` ではリソース クラスの設定方法が異なっていることに注意してください。
 
-Windows Executor の詳細と例については、[Windows に関する入門ガイド]({{ site.baseurl }}/ja/2.0/hello-world-windows/) を参照してください。
+Windows Executor の詳細と例については、[Windows に関する入門ガイド]({{ site.baseurl }}/2.0/hello-world-windows/) を参照してください。
 
 ##### GPU Executor (Linux)
 {: #gpu-executor-linux }
@@ -774,7 +775,7 @@ jobs:
 
 あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列処理が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 ジョブの並列処理が > 1 つの場合は、[ワークフロー](#workflows)と関連付けられている[フィルタリング]({{site.baseurl}}/ja/2.0/configuration-reference/#jobfilters)および/ または[パイプラインのスケジュール実行]({{site.baseurl}}/ja/2.0/scheduled-pipelines/)を使用します。 詳細は、[ファンアウトとファンインの例]({{site.baseurl}}/ja/2.0/workflows/#fan-outfan-in-workflow-example)を参照して下さい。
+**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列処理が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 If your job has parallelism >1, see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 {: class="alert alert-info"}
 
 | キー                  | 必須 | タイプ   | 説明                                                                                                                                                                        |
@@ -850,7 +851,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 通常はデフォルトのオプション（`-eo pipefail`）を使うことを推奨しています。こうすることで、途中のコマンドでエラーがあっても気付くことができ、ジョブが失敗したときのデバッグも容易になります。 CircleCI 上では `run` ステップごとに使用したシェルとアクティブなオプションを表示するのも好都合です。
 
-詳細は[シェルスクリプトを使う]({{ site.baseurl }}/ja/2.0/using-shell-scripts/)を参照してください。
+詳細は[シェルスクリプトを使う]({{ site.baseurl }}/2.0/using-shell-scripts/)を参照してください。
 
 ###### _バックグラウンド コマンド_
 {: #background-commands }
@@ -949,7 +950,7 @@ steps:
 ##### **`when` ステップ** (version: 2.1 が必須)
 {: #the-when-step-requires-version-21 }
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#defining-conditional-steps)を参照してください。
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
 | キー        | 必須 | タイプ   | 説明                                                                                      |
 | --------- | -- | ----- | --------------------------------------------------------------------------------------- |
@@ -1017,30 +1018,30 @@ workflows:
 - run: git submodule update --init
 ```
 
-このコマンドは、SSH 経由で GitHub や Bitbucket を操作するために必要な認証キーを自動的に挿入します。この詳細は、カスタム チェックアウト コマンドを実装する際に役に立つ[インテグレーション ガイド]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#ssh-ホストの信頼性の確立)で解説しています。
+このコマンドは、SSH 経由で GitHub や Bitbucket を操作するために必要な認証キーを自動的に挿入します。この詳細は、カスタム チェックアウト コマンドを実装する際に役に立つ[インテグレーション ガイド]({{ site.baseurl }}/2.0/gh-bb-integration/#ssh-ホストの信頼性の確立)で解説しています。
 
 **注:** `checkout` ステップは、自動ガベージ コレクションをスキップするように Git を構成します。 [restore_cache](#restore_cache) キーで `.git` ディレクトリをキャッシュしていて、そのディレクトリ配下のデータ量を最小限にするのにガベージコレクションも実行したい場合は、先に [run](#run) ステップで `git gc` コマンドを実行しておく方法があります。
 
 ##### **`setup_remote_docker`**
 {: #setupremotedocker }
 
-Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/ja/2.0/building-docker-images/)を参照してください。
+Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/2.0/building-docker-images/)を参照してください。
 
 | キー                     | 必須 | タイプ  | 説明                                                                                                                                                   |
 | ---------------------- | -- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker_layer_caching | ×  | ブール値 | `True` に設定すると、リモート Docker 環境で [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/) が有効になります (デフォルトは `false`)。                           |
-| version                | ×  | 文字列型 | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/ja/2.0/building-docker-images/#docker-のバージョン)を参照してください。 |
+| docker_layer_caching | ×  | ブール値 | `True` に設定すると、リモート Docker 環境で [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) が有効になります (デフォルトは `false`)。                           |
+| version                | ×  | 文字列型 | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/2.0/building-docker-images/#docker-のバージョン)を参照してください。 |
 {: class="table table-striped"}
 
 **注:**
 
-- `setup_remote_docker` は、`machine` Executor と互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について、詳細は「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/ja/2.0/docker-layer-caching/#machine-executor)」を参照してください。
+- `setup_remote_docker` は、`machine` Executor と互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について、詳細は「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor)」を参照してください。
 - 現在、プライベート クラウドまたはデータセンターにインストールされている CircleCI では、`version` キーがサポートされていません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
 ##### **`save_cache`**
 {: #savecache }
 
-CircleCI のオブジェクトストレージにある、依存関係やソースコードのようなファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)することができます。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/ja/2.0/caching/)を参照してください。
+CircleCI のオブジェクトストレージにある、依存関係やソースコードのようなファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)することができます。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/2.0/caching/)を参照してください。
 
 | キー    | 必須 | 型    | 説明                                                                                                |
 | ----- | -- | ---- | ------------------------------------------------------------------------------------------------- |
@@ -1112,7 +1113,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 ##### **`restore_cache`**
 {: #restorecache }
 
-`key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/ja/2.0/caching/)を参照してください。
+`key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/2.0/caching/)を参照してください。
 
 | キー   | 必須               | タイプ  | 説明                                                        |
 | ---- | ---------------- | ---- | --------------------------------------------------------- |
@@ -1181,12 +1182,151 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 {: #deploy-deprecated }
 {:.no_toc}
 
-現在のプロセスに関しては、[実行](#run)をご覧ください。
+現在のプロセスに関しては、[実行](#run)をご覧ください。 If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
+
+##### **Migration from `deploy` to `run`**
+
+**Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+
+*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?* Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
+
+*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?* There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
+
+###### *例*
+
+A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+
+```yml
+# Example of deprecated syntax, do not copy
+version: 2.1
+jobs:
+  deploy-step-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      - deploy: #deprecated deploy step, do not copy
+          command: |
+            echo "this is a deploy step which needs data from the rand"
+            cat rand_*.txt
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - deploy-step-job
+```
+
+If you are entirely reliant on external resources (for example, Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete. `doing-things-job` uses parallelism of 3, while `deploy-step-job` performs the actual deployment. See example below:
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+  # create a new job with the deploy step in it
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: # change "deploy" to "run"
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      # add your new job and make it depend on the 
+      # "doing-things-job"
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      # save the files your deploy step needs
+      - save_workspace:
+          root: .     # relative path to our working directory
+          paths:      # file globs which will be persisted to the workspace
+           - rand_*
+
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # attach the files you persisted in the doing-things-job
+      - attach_workspace:
+          at: . # relative path to our working directory
+      - run:
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+This is effectively using a "fan-in" workflow which is described in detail on the [workflows](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
 
-Web アプリまたは API からアクセスできるアーティファクト (ログ、バイナリなど) を格納するステップです。 詳細については、[アーティファクトに関するドキュメント]({{ site.baseurl }}/ja/2.0/artifacts/)を参照してください。
+Web アプリまたは API からアクセスできるアーティファクト (ログ、バイナリなど) を格納するステップです。 詳細については、[アーティファクトに関するドキュメント]({{ site.baseurl }}/2.0/artifacts/)を参照してください。
 
 | キー          | 必須 | タイプ  | 説明                                                                         |
 | ----------- | -- | ---- | -------------------------------------------------------------------------- |
@@ -1214,7 +1354,7 @@ Web アプリまたは API からアクセスできるアーティファクト (
 
 ビルドのテスト結果をアップロードおよび保存するための特別なステップです。 テスト結果は、CircleCI Web アプリケーションで各ビルドの「テスト サマリー」セクションに表示されます。 テスト結果を保存すると、テスト スイートのタイミング分析に役立ちます。
 
-テスト結果をビルド アーティファクトとして保存することもできます。 その方法については [**store_artifacts** ステップ](#storeartifacts)を参照してください。
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
 | キー   | 必須 | タイプ  | 説明                                                                                                                         |
 | ---- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -1230,9 +1370,9 @@ Web アプリまたは API からアクセスできるアーティファクト (
 ```
 test-results
 ├── jest
-│   └── results.xml
+│   └── results.xml
 ├── mocha
-│   └── results.xml
+│   └── results.xml
 └── rspec
     └── results.xml
 ```
@@ -1257,12 +1397,12 @@ test-results
 | paths | ○  | リスト  | 共有ワークスペースに追加する、グロブで認識されるファイル、またはディレクトリへの非グロブ パス。 ワークスペースのルート ディレクトリへの相対パスと解釈され、 ワークスペースのルート ディレクトリ自体を指定することはできません。 |
 {: class="table table-striped"}
 
-root キーは、ワークスペースのルート ディレクトリとなる、コンテナ上のディレクトリを指定します。 paths の値は、すべてルート ディレクトリからの相対的パスです。
+root キーは、ワークスペースのルートディレクトリとなるコンテナ内のディレクトリを指します。 paths の値は、すべてルート ディレクトリからの相対的パスです。
 
-##### _root キーの例_
+##### _root キーの使用例_
 {: #example-for-root-key }
 
-下記の構文は `/tmp/dir` 内にある paths で指定している内容を、Workspace の `/tmp/dir` ディレクトリ内に相対パスで保持します。
+下記の構文は `/tmp/dir` 内にある paths で指定している内容を、ワークスペースの `/tmp/dir` ディレクトリ内に相対パスで保持します。
 
 ```yml
 - persist_to_workspace:
@@ -1329,7 +1469,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
     at: /tmp/workspace
 ```
 
-ワークフロー1 つ 1 つは、それぞれに一時的なワークスペースが関連付けられています。  ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用します。 ジョブ内では `persist_to_workspace` ステップで Workspace にファイルを追加でき、さらに `attach_workspace` ステップを呼び出すと、Workspace 内のファイルをアタッチしたファイルシステムにダウンロードできます。 ワークスペースは追加専用です。ジョブは、ワークスペースにファイルを追加することはできますが、ワークスペースからファイルを削除することはできません。 各ジョブでは、そのアップストリームのジョブによってワークスペースに追加された内容を参照することのみ可能です。 ワークスペースをアタッチすると、アップストリーム ジョブがワークフロー グラフに現れる順番で、各アップストリーム ジョブからの「レイヤー」が適用されます。 2 つのジョブが同時に実行される場合、それらのレイヤーが適用される順番は不定になります。 同時に実行した複数のジョブが同じファイル名でデータを保持し Workspace にアタッチするようなケースでは、エラーが発生しますのでご注意ください。
+各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用されます。 ジョブ内では、`persist_to_workspace` ステップを使用してワークスペースにファイルを追加でき、`attach_workspace` ステップを使用してワークスペースの内容をファイル システムにダウンロードできます。 ワークスペースは追加専用です。ジョブは、ワークスペースにファイルを追加することはできますが、ワークスペースからファイルを削除することはできません。 各ジョブでは、そのアップストリームのジョブによってワークスペースに追加された内容を参照することのみ可能です。 ワークスペースをアタッチすると、アップストリーム ジョブがワークフロー グラフに現れる順番で、各アップストリーム ジョブからの「レイヤー」が適用されます。 しかし、2 つのジョブを同時に実行すると、そのレイヤーの適用順序は確定できません。 同時に実行した複数のジョブが同じファイル名でデータを保持し ワークスペースにアタッチするようなケースでは、エラーが発生しますのでご注意ください。
 
 ワークフローを再度実行すると、元のワークフローと同じワークスペースを引き継ぎます。 失敗したジョブを再度実行したときも、そのジョブは元のワークフローで実行したジョブと同じワークスペースの内容を使えることになります。
 
@@ -1337,12 +1477,12 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 | タイプ      | 存続期間               | 用途                                                           | 例                                                                                                                                             |
 | -------- | ------------------ | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 1 か月               | 長期アーティファクトを保存します。                                            | **[Job (ジョブ)]** ページの [Artifacts (アーティファクト)] タブから参照できます。 `tmp/circle-artifacts.<hash>/container` などのディレクトリの下に格納されています。                   |
+| アーティファクト | 1 か月               | 長期アーティファクトを保存します。                                            | **[Job (ジョブ)]** ページの [Artifacts (アーティファクト)] タブから参照できます。`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に格納されています。                    |
 | ワークスペース  | ワークフローの間 (最長 15 日) | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                         |
 | キャッシュ    | 15 日               | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。   `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
 {: class="table table-striped"}
 
-Workspace や キャッシュ、artifacts に関する詳細は、「[Workflows でデータを保持する。キャッシュ、Artifacts、Workspace 活用のキモ](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+ワークスペース、キャッシュ、アーティファクトに関する詳細は、「[ワークフローでのデータの保持: キャッシュ、アーティファクト、およびワークスペースの使用方法](https://circleci.com/ja/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 ##### **`add_ssh_keys`**
 {: #addsshkeys }
@@ -1361,12 +1501,12 @@ steps:
         - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-**メモ:** CircleCI は追加されたすべての SSH 鍵に `ssh-agent` を使用して署名しますが、ユーザーは `add_ssh_keys` キーを使用して実際にコンテナに鍵を追加する**必要があります**。
+**注:** CircleCI は追加されたすべての SSH 鍵に `ssh-agent` を使用して署名しますが、ユーザーは `add_ssh_keys` キーを使用して実際にコンテナに鍵を追加する**必要があります**。
 
 ##### `pipeline.` 値の使用
 {: #using-pipeline-values }
 
-パイプライン値はすべてのパイプライン設定で使用でき、事前に宣言することなく使用できます。 利用可能なパイプライン値は次のとおりです。
+パイプライン値はすべてのパイプライン構成で使用でき、事前の宣言なしに利用できます。 利用可能なパイプライン値は次のとおりです。
 
 | 値                          | 説明                                            |
 | -------------------------- | --------------------------------------------- |
@@ -1450,9 +1590,9 @@ workflows:
 {: #triggers }
 ワークフローを実行するトリガーを指定します。 デフォルトの動作では、ブランチにプッシュされたときにワークフローがトリガーされます。
 
-| キー       | 必須 | 型  | 説明                           |
-| -------- | -- | -- | ---------------------------- |
-| triggers | ×  | 配列 | 現在は `schedule` を指定する必要があります。 |
+| キー       | 必須 | タイプ | 説明                           |
+| -------- | -- | --- | ---------------------------- |
+| triggers | ×  | 配列  | 現在は `schedule` を指定する必要があります。 |
 {: class="table table-striped"}
 
 ##### **`schedule`**
@@ -1496,9 +1636,9 @@ workflows:
 {: #branches }
 {:.no_toc}
 
-`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
+`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
 
-ブランチでは、`only` キーと `ignore` キーを使用でき、どちらにもブランチ名を指す 1 つの文字列をマップさせます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
+branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - `ignore` を指定した場合、一致するブランチではジョブは実行されません。
@@ -1546,7 +1686,7 @@ workflows:
 
 ###### **`context`**
 {: #context }
-ジョブは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を参照してください。
+ジョブは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については[コンテキスト]({{ site.baseurl }}/2.0/contexts)を参照してください。
 
 | キー      | 必須 | タイプ     | 説明                                                                                                                                                                      |
 | ------- | -- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1586,7 +1726,7 @@ workflows:
   build-deploy:
     jobs:
       - js_build
-      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
+      - build_server_pdfs: # << ブランチ名フィルターに応じて実行されるジョブ
           filters:
             branches:
               only: /server\/.*/
@@ -1594,7 +1734,7 @@ workflows:
 
 上記のスニペットでは、`build_server_pdfs` ジョブは、ビルド対象のブランチのパスが "server/" から始まる場合にのみ実行されます。
 
-設定ファイルでの正規表現の使い方の詳細については、[ワークフローに関するページ]({{ site.baseurl }}/ja/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches)を参照してください。
+設定ファイルでの正規表現の使い方の詳細については、[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches)を参照してください。
 
 ###### **`branches`**
 {: #branches }
@@ -1633,7 +1773,7 @@ tags では `only` キーと `ignore` キーが使えます。 スラッシュ�
 | ignore | ×  | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
 {: class="table table-striped"}
 
-詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/ja/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
+詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
 
 ###### **`matrix`** (version: 2.1 が必須)
 {: #matrix-requires-version-21 }
@@ -1813,7 +1953,7 @@ workflows:
 ##### **ワークフローでの `when` の使用**
 {: #using-when-in-workflows }
 
-CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
+CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
 
 以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
@@ -1845,24 +1985,14 @@ jobs:
 }
 ```
 
-Workflows の詳細な例と概念については「[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
+Workflows の詳細な例と概念については「[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/2.0/workflows)」を参照してください。
 
 ## ロジック ステートメント
 {: #logic-statements }
 
 一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
-|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
-| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
-| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
-| [Pipeline Value]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
-| [Pipeline Parameter]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
-| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
-| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
-| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
-| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
-| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| タイプ                                                                                                | 引数             | `true` と評価される条件                              | 例                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML リテラル                                                                                        | なし                  | 真である                              | `true`/`42`/`"a string"`                                                 | | YAML エイリアス                                                                                          | なし                  | 解決結果が真             | *my-alias                                                                | | [パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | なし                  | 解決結果が真             | `<< pipeline.git.branch >>`                                             | | [パイプライン パラメーター]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | なし                  | 解決結果が真             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N 個のロジック ステートメント    | すべての引数が真               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N 個のロジック ステートメント    | いずれかの引数が真                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 個のロジック ステートメント     | 引数が偽             | `not: true`                                                              | | equal                                                                                               | N 個の値              | すべての引数の評価結果が等しい | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` および `value` | `value` が `pattern` に一致する          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 次の論理値は偽とみなされます。
@@ -2092,4 +2222,4 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-[イントロダクション]({{site.baseurl}}/ja/2.0/config-intro/)
+[イントロダクション]({{site.baseurl}}/2.0/config-intro/)

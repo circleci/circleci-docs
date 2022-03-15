@@ -610,8 +610,7 @@ gcloud iam service-accounts list \
 ```shell
 gcloud iam roles create circleci_server \
     --project <PROJECT_ID> \
-    --title "CircleCI Server" \
-    --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get
+    --title "CircleCI Server"
 ```
 
 ```shell

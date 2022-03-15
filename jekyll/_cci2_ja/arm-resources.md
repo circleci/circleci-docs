@@ -10,8 +10,18 @@ version:
 
 ここでは、CircleCI の Arm リソースを使ううえで必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
 
+<div class="alert alert-warning" role="alert">
+  <strong>CircleCI does not currently support ARM with our Docker executor.</strong> If you would like to follow updates on this functionality, please refer to the following Canny post: <a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Support ARM resource class on Docker executor</a>.
+</div>
+
+Note: Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The Spin Up Environment job will give you a green tic, but you will see the following message in the response:
+
+`WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])`
+
+If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
+
 ## はじめに
-[CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)をトリガーします。
+{: #overview }
 CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部であり、次の 2 種類があります。
 
 * `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
@@ -22,7 +32,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 * `ubuntu-2004:202101-01` - 最新版であり、すべてのユーザーに推奨
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。 この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
+いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
 ## 料金と提供プラン
 {: #pricing-and-availability }

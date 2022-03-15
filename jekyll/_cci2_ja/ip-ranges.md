@@ -143,7 +143,7 @@ IP アドレスの範囲機能の使用状況は、 CircleCI アプリケーシ�
 
 ![IP アドレスの範囲機能の場所を示すスクリーンショット]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
 
-On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on.
+**Job Details** の UI  ページの **Resources** タブから、すべての Docker ジョブ (IP アドレスの範囲機能を無効にしているジョブを含む) の概算ネットワーク通信量を確認できます。 この概算値から、ジョブのIP アドレスの範囲機能を有効にした場合の料金を有効化する前に見積もることができます。  詳細については、[Discuss](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068) をご参照ください。
 
 ![CircleCI のコンセプト イメージ]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
@@ -160,7 +160,7 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 ## CircleCI macOS 用クラウド
 {: #circleci-macos-cloud }
 
-上記の AWS や GCP に加えて、CircleCI の macOS 用クラウドでもマシンが実行するジョブをホストしています。 The following IP address ranges are used by CircleCI macOS Cloud:
+上記の AWS や GCP に加えて、CircleCI の macOS 用クラウドでもマシンが実行するジョブをホストしています。 CiecleCI の macOS 用クラウドでは下記の IP アドレスを使用します。
 
 - 162.252.208.0/24
 - 162.252.209.0/24
@@ -177,11 +177,11 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 - 38.39.183.0/24
 - 198.206.135.0/24
 
-IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。 **Note:** macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
+IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。 **注:**macOS のビルドは記載されてるIP アドレスに自動的に制限されます。 つまり macOS のビルドでは、`circleci_ip_ranges: true` を明示的に設定する必要がありません。
 
 ## 既知の制限
 {: #knownlimitations}
 
 - 現在、[パイプラインのパラメーター機能](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
-- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
 - ジョブの IP アドレスの範囲機能を有効にし、 コンテンツ デリバリー ネットワーク (CDN)、[ Fastly ](https://www.fastly.com/)がホストする宛先に何かをプッシュした場合、発信ジョブのトラフィックは上記の明確に定義された IP アドレスを経由してルーティング**されません **。 代わりに、 IP アドレスは、 us-east-1 または us-east-2 領域で AWS が 使用するアドレスになります。 これは AWS と Fastly 間で確認されている既知の問題であり、 CircleCI は解決に取り組んでいます。

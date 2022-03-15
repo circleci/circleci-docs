@@ -109,6 +109,7 @@ en:
           - 
             name: 概要
           - 
+            name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
           - 
@@ -181,6 +182,7 @@ en:
           - 
           - 
           - 
+          - 
             name: Orb オーサリングに関するよくあるご質問
           - 
           - 
@@ -238,6 +240,7 @@ en:
           - 
             name: サプライチェーン攻撃への対策。
           - 
+            name: IP アドレスの範囲機能
   - 
     icon: icons/sidebar/examples.svg
     children:
@@ -282,7 +285,6 @@ en:
     children:
       - 
         name: デプロイの構成
-      - 
       - 
       - 
         name: Upload to Artifactory
@@ -344,9 +346,10 @@ en:
             name: v2.19 Installation Guide
           - 
           - 
+          - 
             name: ユーザーアカウント
           - 
-            name: Orbs
+            name: Orb の管理
           - 
             name: VM サービス
           - 
@@ -565,6 +568,8 @@ ja:
           - 
             name: Hello World
             i18n_name: Hello World
+          - 
+            name: FAQ
       - 
         name: 移行
         i18n_name: Nomadメトリクス
@@ -592,13 +597,17 @@ ja:
         name: 機能
         children:
           - 
+            name: パイプラインのスケジュール実行
+          - 
             name: ワークフロー
           - 
-            name: 環境変数
-          - 
-            name: キャッシュ
+            name: ワークスペース
           - 
             name: アーティファクト
+          - 
+            name: Docker レイヤーキャッシュ
+          - 
+            name: 環境変数
           - 
             name: テストデータの収集
           - 
@@ -611,12 +620,19 @@ ja:
         name: 最適化
         children:
           - 
+            name: 概要
+            i18n_name: v2.19の新機能
+          - 
+            name: データの永続化
+          - 
+            name: 依存関係のキャッシュ
+          - 
+            name: キャッシュ戦略
           - 
           - 
-            name: Docker レイヤーキャッシュ
           - 
   - 
-    name: Executor とイメージ
+    name: 実行環境
     icon: icons/sidebar/executors.svg
     children:
       - 
@@ -634,6 +650,7 @@ ja:
           - 
           - 
           - 
+          - 
             name: Docker レイヤーキャッシュ
           - 
           - 
@@ -645,6 +662,7 @@ ja:
             name: 会社概要
             i18n_name: v2.19の新機能
           - 
+            name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
           - 
@@ -656,6 +674,7 @@ ja:
           - 
             name: 会社概要
             i18n_name: v2.19の新機能
+          - 
           - 
           - 
           - 
@@ -673,15 +692,19 @@ ja:
           - 
           - 
           - 
-            name: Runner API
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
           - 
             name: Runner API
             link: ja/2.0/runner-api/
             i18n_name: ランナーAPI
           - 
-            name: Runner FAQs
+            name: Runner in Server
             link: ja/2.0/runner-faqs/
-            i18n_name: ランナーFAQ
           - 
   - 
     name: 設定ファイル
@@ -742,7 +765,6 @@ ja:
         name: データの連携
       - 
         name: Insights API
-        i18n_name: Insights API
         link: ja/api/v2/
         hash: tag/Insights
   - 
@@ -775,6 +797,7 @@ ja:
           - 
             name: サプライチェーン攻撃への対策。
           - 
+            name: IP アドレスの範囲機能
   - 
     icon: icons/sidebar/examples.svg
     children:
@@ -820,7 +843,6 @@ ja:
         name: デプロイの構成
       - 
       - 
-      - 
         name: Upload to Artifactory
       - 
   - 
@@ -838,6 +860,7 @@ ja:
           - 
           - 
             name: API v1.1
+          - 
           - 
             name: ビルド済みイメージ
           - 
@@ -858,15 +881,14 @@ ja:
           - 
             name: What's New in v2.19.x
             link: ja/2.0/v.2.19-overview/
-            i18n_name: v2.19.xの新機能
           - 
-            name: Upgrade to v2.19.x
+          - 
+            name: FAQ
             link: ja/2.0/updating-server/
             i18n_name: アップグレード方法
       - 
         name: Server v2.19.x Operations
         link: ja/2.0/overview/
-        i18n_name: 管理者ガイド
         children:
           - 
             link: ja/2.0/overview/
@@ -921,47 +943,65 @@ ja:
           - 
           - 
       - 
-        name: Server v2.18 PDFs
+        link: ja/2.0/v.2.18-overview/
+        children:
+          - 
+            name: v3.3 Overview
+          - 
+          - 
+          - 
+            name: v3.3 Operations Guide
+      - 
+        name: Server v3.1.x PDFs
+        link: 2.0/install-overview/
+        children:
+          - 
+            name: v3.1 Overview
+          - 
+            name: v3.1 Installation Guide
+          - 
+            name: v3.1 Operations Guide
+      - 
+        name: Server v3.x PDFs
         i18n_name: Server v3.x PDFs
         link: ja/2.0/v.2.18-overview/
         children:
           - 
-            name: What's New in v2.18
+            name: v3.0 Overview
             link: ja/2.0/v.2.18-overview/
           - 
-            name: v2.18.3 Installation Guide
+            name: v3.0 Installation Guide
             link: ja/2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
           - 
-            name: v2.18.3 Operations Guide
+            name: v3.0 Operations Guide
             link: ja/2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
       - 
-        name: Server v2.17.3 PDFs
+        name: Server v2.19.x Install
         i18n_name: Server v2.19.x Install
-        link: ja/2.0/v.2.17-overview/
+        link: ja/2.0/v.2.18-overview/
         children:
           - 
             name: What's New in v2.17
             link: ja/2.0/v.2.17-overview/
           - 
-            name: v2.17.3 Installation Guide
+            name: What's New in v2.19.x
             link: ja/2.0/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
           - 
-            name: v2.17.3 Operations Guide
+            name: Upgrade to v2.19.x
             link: ja/2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
       - 
-        name: Server v2.16 PDFs
+        name: Server v2.19.x Operations
         link: ja/2.0/v.2.16-overview/
-        i18n_name: Server v2.16 PDF
         children:
           - 
-            name: What's New in v2.16
+            name: 概要
             link: ja/2.0/v.2.16-overview/
-            i18n_name: v2.16の新機能
+            i18n_name: v2.19の新機能
           - 
-            name: v2.16 Installation Guide
+            name: Intro to Nomad
             link: ja/2.0/circleci-install-doc.pdf
           - 
-            name: v2.16 Operations Guide
+            name: Metrics & Monitoring
             link: ja/2.0/circleci-ops-guide.pdf
           - 
             name: システム要件
@@ -979,7 +1019,7 @@ ja:
         name: Server v2.19 PDFs
         children:
           - 
-            name: 会社概要
+            name: 概要
             i18n_name: v2.19の新機能
           - 
             name: v2.19 Installation Guide
@@ -991,7 +1031,7 @@ ja:
           - 
             name: 認証
           - 
-            name: VM サービスの設定
+            name: VM サービス
           - 
           - 
             name: 証明書
@@ -1047,3 +1087,17 @@ ja:
           - 
             name: v2.16 Operations Guide
       - 
+  - 
+    children:
+      - 
+      - 
+        name: Free
+        i18n_name: Free
+      - 
+        name: Performance
+        i18n_name: Performance
+      - 
+        name: Scale
+        i18n_name: Scale
+      - 
+        name: サーバー
