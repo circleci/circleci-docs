@@ -880,6 +880,9 @@ ja:
         - name: Author an Orb
           link: ja/2.0/orb-author/
           i18n_name: Orbs オーサリング
+        - name: Author an Orb for Server
+          link: ja/2.0/orb-author-server/
+          i18n_name: サーバー Orbs オーサリング
         - name: Orb Author FAQ
           link: ja/2.0/orb-author-faq/
           i18n_name: Orbs オーサリング FAQ
@@ -1116,6 +1119,9 @@ ja:
         - name: Metrics and Monitoring
           i18n_name: メトリクスとモニタリング
           link: ja/2.0/server-3-operator-metrics-and-monitoring
+        - name: Introduction to Nomad
+          i18n_name: Nomad 概要
+          link: ja/2.0/server-3-operator-nomad
         - name: Configuring a Proxy
           i18n_name: プロキシの設定
           link: ja/2.0/server-3-operator-proxy
@@ -1123,7 +1129,8 @@ ja:
           i18n_name: ユーザー管理
           link: ja/2.0/server-3-operator-user-accounts
         - name: Orbs
-          i18n_name: Orbs
+          i18n_name: Managing Orbs
+          i18n_name: Orb　の管理
           link: ja/2.0/server-3-operator-orbs
         - name: VM Service
           i18n_name: VM サービスの設定
