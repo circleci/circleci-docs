@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Prerequisites
 
 To use Vamp, you will need the following:
