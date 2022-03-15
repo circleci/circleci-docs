@@ -31,7 +31,7 @@ function getTimesVisited() {
 
 function incrementTimesVisited() {
   const timesVisited = getTimesVisited();
-  if (timesVisited == SHOW_POPUP_AFTER_N_TIMES) {
+  if (timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
     localStorage.setItem(LS_KEY, 0);
   } else {
     localStorage.setItem(LS_KEY, timesVisited + 1);
