@@ -76,7 +76,7 @@ Complete the fields described below. You can either supply a private key and cer
 
 If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, you can follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
-Once your have generated your certificates, you can enable ACM in your KOTS admin console under the Frontend section. You only need to check the ACM box, provide your ACM ARN (Amazon Resource Name) as in the example below.
+Once you have generated your certificates, you can enable ACM from the KOTS admin console under the Frontend section. Check the ACM box and provide your ACM ARN (Amazon Resource Name), as shown in the example below.
 
 .ACM Settings
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
