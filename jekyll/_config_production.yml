@@ -25,6 +25,13 @@ defaults:
     values:
       lang: "en"
 
+  -
+    scope:
+      path: ""
+      type: "release"
+    values:
+      lang: "en"
+
   - scope:
       path: ""
     values:
