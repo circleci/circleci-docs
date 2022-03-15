@@ -824,9 +824,9 @@ See [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)
 ## Concurrency
 {: #concurrency }
 
-In CircleCI, *concurrency* refers to utilizing multiple containers to run multiple builds at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{ site.baseurl }}/2.0/configuration-reference/#resource_class). If you are experiencing queueing on your jobs, it is possible you are hitting these limits. Customers on a Performance or Scale plan can request an increase to those limits at no extra charge.
+In CircleCI, *concurrency* refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resource_class) for different executors. If you are experiencing queueing on your jobs, it is possible you are hitting these limits. Customers on a Performance or Scale plan can request an increase to those limits at no extra charge.
 
-See [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) to configure concurrency as shown in the [Sample Config Files document]({{ site.baseurl }}/2.0/sample-config/#concurrent-workflow).
+See [Orchestrating Workflows]({{site.baseurl}}/2.0/workflows/) to configure concurrency as shown in the [Sample Config Files document]({{site.baseurl}}/2.0/sample-config/#concurrent-workflow).
 
 ## Dynamic Configuration
 {: #dynamic-configuration }
