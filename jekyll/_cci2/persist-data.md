@@ -124,7 +124,7 @@ Usage of network transfer to self-hosted runners can be mitigated by hosting run
 ### How to calculate an approximation of network and storage costs
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
 
-**NOTE:** Billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+**NOTE:** For our monthly performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
 Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
