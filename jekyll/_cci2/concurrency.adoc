@@ -7,7 +7,7 @@ version:
 = Concurrency
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This documentation summarizes concurrency, and suggests ways to use concurrency to your advantage.
+:page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 :icons: font
 :toc: macro
 :toc-title:
