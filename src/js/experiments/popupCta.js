@@ -22,10 +22,13 @@ function closePopup(trackIt = true) {
  * */
 function getPopupData() {
   if (!localStorage.getItem(LS_KEY)) {
-    localStorage.setItem(LS_KEY, JSON.stringify({
-      timesVisited: 1,
-      lastSeen: null
-    }))
+    localStorage.setItem(
+      LS_KEY,
+      JSON.stringify({
+        timesVisited: 1,
+        lastSeen: null,
+      }),
+    );
   }
   let popupData = JSON.parse(localStorage.getItem(LS_KEY));
   return popupData;
@@ -41,26 +44,27 @@ function getPopupData() {
  * */
 function canShowPopup() {
   let now = new Date();
-  let stillTheSameDay = false
+  let stillTheSameDay = false;
   const popupData = getPopupData();
-  if(popupData.lastSeen !== null) {
+  if (popupData.lastSeen !== null) {
     const popupLastSeen = new Date(popupData.lastSeen);
     stillTheSameDay =
       now.getFullYear() === popupLastSeen.getFullYear() &&
       now.getMonth() === popupLastSeen.getMonth() &&
-      now.getDate() === popupLastSeen.getDate()
+      now.getDate() === popupLastSeen.getDate();
   }
-  return popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES && !stillTheSameDay
+  return (
+    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES && !stillTheSameDay
+  );
 }
-
 
 function incrementTimesVisited() {
   let popupData = getPopupData();
   if (popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
-    popupData.timesVisited = 0
-    popupData.lastSeen = new Date()
+    popupData.timesVisited = 1;
+    popupData.lastSeen = new Date();
   } else {
-    popupData.timesVisited += 1
+    popupData.timesVisited += 1;
   }
   localStorage.setItem(LS_KEY, JSON.stringify(popupData));
 }
@@ -69,10 +73,10 @@ function incrementTimesVisited() {
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_docs-popup-cta_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
-  experimentContainer: '.main-body',
+  experimentContainer: 'body',
   attributes: {
     // This will only show the experiment to people who are guests to the docs site.
-    docs_is_logged_in: window.userData?.created_at === undefined
+    docs_is_logged_in: window.userData?.analytics_id === undefined,
   },
   guestExperiment: true,
 }).then((variation) => {
