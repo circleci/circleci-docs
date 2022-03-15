@@ -14,14 +14,17 @@ class OptimizelyClient {
       datafile: window.optimizelyDatafile,
     });
   }
-  getUserId(isGuestExperiment) {
+  getUserId(allowAnonymousId) {
     return new Promise((resolve) => {
       if (window.userData) {
         // if we already have userData
-        resolve(
-          window.userData.analytics_id ? window.userData.analytics_id : null,
-        );
-      } else if (isGuestExperiment) {
+        resolve({
+          source: 'analyticsId',
+          id: window.userData.analytics_id
+            ? window.userData.analytics_id
+            : null,
+        });
+      } else if (allowAnonymousId) {
         let anonymousId = null;
         try {
           // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
@@ -30,15 +33,18 @@ class OptimizelyClient {
           // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
           anonymousId = analytics.user().anonymousId();
         } finally {
-          resolve(anonymousId);
+          resolve({ id: anonymousId, source: 'anonymousId' });
         }
       } else {
         // If we are here it means we are still waiting on getting notified
         // that the call to /api/v1/me has resolved and the new userData is available
         window.addEventListener('userDataReady', () => {
-          resolve(
-            window.userData.analytics_id ? window.userData.analytics_id : null,
-          );
+          resolve({
+            source: 'analyticsId',
+            id: window.userData.analytics_id
+              ? window.userData.analytics_id
+              : null,
+          });
         });
       }
     });
@@ -90,7 +96,8 @@ class OptimizelyClient {
       }
 
       // once we have the userId
-      this.getUserId(isGuestExperiment).then((userId) => {
+      this.getUserId(isGuestExperiment).then((userData) => {
+        const userId = userData.id;
         if (!userId) {
           return resolve(null);
         }

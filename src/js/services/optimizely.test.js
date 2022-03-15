@@ -40,7 +40,10 @@ describe('Optimizely Service logged-in users', () => {
     it('returns null when userData is empty', () => {
       glob.userData = {};
       return client.getUserId().then((data) => {
-        expect(data).toBe(null);
+        expect(data).toStrictEqual({
+          source: 'analyticsId',
+          id: null,
+        });
       });
     });
 
@@ -48,9 +51,10 @@ describe('Optimizely Service logged-in users', () => {
       glob.userData = {
         analytics_id: '00000000-0000-0000-0000-000000000000',
       };
-      await expect(client.getUserId()).resolves.toBe(
-        glob.userData.analytics_id,
-      );
+      await expect(client.getUserId()).resolves.toStrictEqual({
+        source: 'analyticsId',
+        id: glob.userData.analytics_id,
+      });
     });
   });
 
@@ -59,26 +63,36 @@ describe('Optimizely Service logged-in users', () => {
 
     it('returns anonymousId when userData is not here', async () => {
       glob.userData = null;
-      await expect(client.getUserId(true)).resolves.toBe(anonymousId);
+      await expect(client.getUserId(true)).resolves.toStrictEqual({
+        source: 'anonymousId',
+        id: anonymousId,
+      });
     });
 
     it('returns analytics_id when userData has a valid analytics_id', async () => {
       glob.userData = {
         analytics_id: '00000000-0000-0000-0000-000000000000',
       };
-      await expect(client.getUserId(true)).resolves.toBe(
-        glob.userData.analytics_id,
-      );
+      await expect(client.getUserId(true)).resolves.toStrictEqual({
+        source: 'analyticsId',
+        id: glob.userData.analytics_id,
+      });
     });
 
     it('returns null when userData is empty', async () => {
       glob.userData = {};
-      await expect(client.getUserId(true)).resolves.toBe(null);
+      await expect(client.getUserId(true)).resolves.toStrictEqual({
+        source: 'analyticsId',
+        id: null,
+      });
     });
 
     it("returns null when analytics doesn't exist", async () => {
       glob.analytics = null;
-      await expect(client.getUserId(true)).resolves.toBe(null);
+      await expect(client.getUserId(true)).resolves.toStrictEqual({
+        source: 'anonymousId',
+        id: null,
+      });
     });
   });
 
