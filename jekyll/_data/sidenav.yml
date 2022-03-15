@@ -349,7 +349,7 @@ en:
       - name: Help and Support
         link: 2.0/help-and-support/
 
-- name: Server Administration
+- name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v3.x Overview
@@ -455,6 +455,10 @@ en:
           link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
           link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
+    
+- name: Server Administration v2.x
+  icon: icons/sidebar/admin.svg
+  children:
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
