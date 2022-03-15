@@ -1130,7 +1130,7 @@ ja:
           link: ja/2.0/server-3-operator-user-accounts
         - name: Orbs
           i18n_name: Managing Orbs
-          i18n_name: Orb　の管理
+          i18n_name: Orbs　の管理
           link: ja/2.0/server-3-operator-orbs
         - name: VM Service
           i18n_name: VM サービスの設定
