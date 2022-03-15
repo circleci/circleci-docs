@@ -263,9 +263,10 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
 ...
    build2:
      machine: # Specifies a machine image that uses
-     # an Ubuntu version 20.04 image
-     # follow CircleCI Discuss Announcements
-     # for new image releases.
+     # an Ubuntu version 20.04 image.
+     # The image uses the current tag, which always points to the most recent
+     # supported release. If stability and determinism are crucial for your CI
+     # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
        image: ubuntu-2004:current
 ...
    build3:
