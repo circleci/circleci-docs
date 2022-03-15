@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Services
 
 Under the _Services_ tab, you can view your services and the number of deployed versions for each service.

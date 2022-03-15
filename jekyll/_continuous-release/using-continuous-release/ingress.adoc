@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Ingress
 
 The _Ingress_ tab shows a list of the domains associated with the selected application and the paths and services exposed by the application. 

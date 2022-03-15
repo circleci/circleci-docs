@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Metrics
 
 // Incorporate content from here: https://docs.vamp.cloud/using-vamp-cloud/policies/built-in-metrics

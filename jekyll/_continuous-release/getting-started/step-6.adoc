@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Step 6: Release Your Service
 
 You are now ready to deploy the first version of your service into the application namespace on your Kubernetes cluster, where Vamp can release it.

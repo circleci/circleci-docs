@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Step 4: Expose Your Service
 
 To expose your service outside the Kubernetes cluster, you need to tell Vamp the domain name and path you want to use.

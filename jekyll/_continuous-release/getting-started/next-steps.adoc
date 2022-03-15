@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Next Steps
 
 Once your application has been successfully deployed, you can monitor the release under the Releases tab.

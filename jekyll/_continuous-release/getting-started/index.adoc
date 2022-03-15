@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 = Getting Started
 
 This guide walks you through the steps to complete your first release with Vamp, using the Quick Start Guide. You can use the Quick Start Guide to release up to six microservices.

@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Step 2: Create a Service
 
 In Vamp, a service is a microservice. You can create up to six services with the Quick Start Guide.

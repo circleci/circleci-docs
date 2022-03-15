@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Step 3: Choose a Release Policy
 
 A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.

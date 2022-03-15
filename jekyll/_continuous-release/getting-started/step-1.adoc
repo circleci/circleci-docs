@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Step 1: Create an Application
 
 In Vamp, an application is a collection of microservices that share a single Kubernetes namespace.

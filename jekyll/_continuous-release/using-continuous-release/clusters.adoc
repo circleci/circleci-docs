@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Clusters
 
 The Clusters list shows the number of applications associated with each Kubernetes cluster. To access the Clusters list, click the _Applications_ tab, then choose _Clusters_ from the menu.

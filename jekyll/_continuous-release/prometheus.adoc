@@ -1,2 +1,4 @@
+:page-layout: classic-docs
+
 == Prometheus
 

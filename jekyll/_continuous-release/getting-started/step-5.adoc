@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Step 5: Install the Release Agent
 
 include::../includes/release-agent.adoc[]

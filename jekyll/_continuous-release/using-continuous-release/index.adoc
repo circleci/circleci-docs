@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 = Using Continuous Release
 
 This guide ...

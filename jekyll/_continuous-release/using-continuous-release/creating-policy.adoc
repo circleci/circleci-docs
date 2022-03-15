@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Creating a Policy
 
 To create a policy, go to the _Policies_ tab and click the *+ Create New Policy* button.

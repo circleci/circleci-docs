@@ -1,38 +1,69 @@
-= INSTALLATION GUIDE: A guide for using continuous release
-docs@circleci.com
-:media: screen
-:title-page-background-image: image:pdf-header.png[]
-:imagesdir: ../../assets/img/docs/
-:doctype: book
-:toc:
-:toc-title: Contents
-:icons: font
-:page-liquid:
-:source-highlighter: rouge
-:docinfo: private
-:pagenums:
-:idprefix:
-:idseparator: -
-:sectanchors:
-:autofit-option:
+:page-layout: classic-docs
 
-:leveloffset: +1
-include::intro.adoc[]
+= Introduction
 
-include::overview.adoc[] 
+// = INSTALLATION GUIDE: A guide for using continuous release
 
-include::concepts.adoc[]
+// docs@circleci.com
 
-include::prerequisites.adoc[]
+// :media: screen
 
-include::releasing-applications.adoc[]
+// :title-page-background-image: image:pdf-header.png[]
 
-include::getting-started/index.adoc[]
+// :imagesdir: ../../assets/img/docs/
 
-include::using-continuous-release/index.adoc[]
+// :doctype: book
 
-include::tutorials/minikube.adoc[]
+// :toc:
 
-include::code-test.adoc[]
+// :toc-title: Contents
 
-:leveloffset: -1
+// :icons: font
+
+// :page-liquid:
+
+// :source-highlighter: rouge
+
+// :docinfo: private
+
+// :pagenums:
+
+// :idprefix:
+
+// :idseparator: -
+
+// :sectanchors:
+
+// :autofit-option:
+
+
+// :leveloffset: +1
+
+// include::intro.adoc[]
+
+
+// include::overview.adoc[] 
+
+
+// include::concepts.adoc[]
+
+
+// include::prerequisites.adoc[]
+
+
+// include::releasing-applications.adoc[]
+
+
+// include::getting-started/index.adoc[]
+
+
+// include::using-continuous-release/index.adoc[]
+
+
+// include::tutorials/minikube.adoc[]
+
+
+// include::code-test.adoc[]
+
+
+// :leveloffset: -1

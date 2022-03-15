@@ -1,3 +1,5 @@
+:page-layout: classic-docs
+
 == Custom Metrics
 
 To view your current custom metrics, click _Metrics_ under the _Policies_ tab.
