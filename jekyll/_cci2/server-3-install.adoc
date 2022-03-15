@@ -70,7 +70,22 @@ Frontend settings control the web application specific aspects of the CircleCI s
 .Frontend Settings
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
-Complete the fields described below. You can either supply a private key and certificate, or check the box to allow Let's Encrypt to automatically request and manage certificates for you. You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
+Complete the fields described below. You can either supply a private key and certificate, or check the box that allows Let's Encrypt or https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to automatically request and manage certificates for you. You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
+
+==== Using ACM TLS Certificates
+
+If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, you can follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+
+Once you have generated your certificates, you can enable ACM from the KOTS admin console under the Frontend section. Check the ACM box and provide your ACM ARN (Amazon Resource Name), as shown in the example below.
+
+.ACM Settings
+image::server-3-frontend-settings.png[Screenshot showing frontend settings]
+
+[WARNING]
+==== 
+If you have already deployed CircleCI server, enabling ACM is a destructive change to your frontend service. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated. 
+You will need to reroute your DNS records to the new loadbalancer once you have redeployed CircleCI server.
+====
 
 NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
