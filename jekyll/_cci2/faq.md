@@ -489,7 +489,10 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
 jobs:
   ipv6_tests:
   machine:
-    image: ubuntu-1604:202007-01
+    # The image uses the current tag, which always points to the most recent
+    # supported release. If stability and determinism are crucial for your CI
+    # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+    image: ubuntu-2004:current
   steps:
     - checkout
     - run:
