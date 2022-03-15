@@ -28,7 +28,7 @@ If jobs are queued, it is possible you are hitting these limits. Hitting your li
 Customers on a Performance or Scale plan can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
 
 === Concurrency in workflows
-To run a set of concurrent jobs, you will need to add a new `workflows` section to the end of your existing `.circleci/config.yml` file. With CircleCI `version: 2.1`, you do not need to specify a `version` in the new `workflows` section. If you are still using CircleCI `version: 2`, you will need to specify the `version` in the `workflows` section.
+To run a set of concurrent jobs, you will need to add a new `workflows` section to the end of your existing `.circleci/config.yml` file.
 
 The simple example below shows the default workflow orchestration with two concurrent jobs. The `workflows` key needs to have a unique name. In this example, the unique name is `build_and_test`. The `jobs` key is nested under the uniquely named workflow, and contains the list of job names. Since the jobs have no dependencies, they will run concurrently.
 
@@ -60,7 +60,8 @@ workflows:
       - build
       - test
 ```
-If you are still using `version: 2`, your `workflows` section will need to be adjusted to include the version.
+
+Please note, if you are still using Server 2 and `version: 2`, your `workflows` section will need to specify the version again, as in the below snippet:
 
 ```yaml
 ...
@@ -107,7 +108,7 @@ workflows:
 ...
 ```
 
-Please note, if you are using CircleCI `version: 2`, you will need to specify the version in the `workflows` section, above the workflow name (in this example,` build_accept_deploy`). The snippet assumes you are using CircleCI `version: 2.1`, which does not need to be specified in `workflows`.
+Please note, if you are still using CircleCI Server 2 with `version: 2`, you will need to specify the version in the `workflows` section, as mentioned in the <<#concurrency-in-workflows,Concurrency in workflows>> section.
 
 == See also
 - <<workflows/#,Workflows>>
