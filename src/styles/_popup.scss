@@ -7,7 +7,6 @@
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1031;
   top: 0;
-  display: flex;
   justify-content: center;
   align-items: center;
   left: 0;
@@ -20,7 +19,6 @@
 
 .popup-content {
   background: white;
-  background-image: url("/docs/assets/img/docs/modal-bg-pattern.svg");
   background-repeat: no-repeat;
   background-position-y: -12px;
   border-radius: 4px;
