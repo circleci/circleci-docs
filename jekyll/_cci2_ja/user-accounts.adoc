@@ -36,7 +36,7 @@ image::suspend_account.png[Suspend a User Account]
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
 2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
-3. View the Suspended window
+3. [Suspended (停止中)] ウィンドウを表示します。
 4. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
 .既存ユーザーの再アクティブ化
@@ -61,7 +61,7 @@ To activate an **new** account that was automatically suspended, and allow the a
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
 2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
-3. View the Suspended New Users window
+3. [Suspended New Users (停止中の新規ユーザー)] ウィンドウを表示します。
 4. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
 .停止中の新規ユーザーのアクティブ化

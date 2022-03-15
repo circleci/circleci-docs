@@ -56,7 +56,7 @@ image::server-install-flow-chart-phase1.png[Flow chart showing the installation 
 
 NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
-// Don't include this section in the GCP PDF. 
+// Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
@@ -122,11 +122,8 @@ Supported Kubernetes versions:
 | 3.0.0 - 3.2.1
 | 1.21 以下
 
-| 3.2.2
+| 3.2.2 - 3.3.0
 | 1.16 - 1.21
-
-| 3.3.0+
-| 1.16 - 1.22
 |===
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
@@ -262,13 +259,13 @@ ifndef::env-aws[]
 
 . If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. プラグインのインストールには以下のコマンドを実行します。
 +
-```bash
+```shell
 pip3 install certbot-dns-google
 ```
 
 . 以下のコマンでインストール証明書をプロビジョニングします。
 +
-```bash
+```shell
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
@@ -431,7 +428,7 @@ If using IAM Roles for Service Accounts (IRSA) for authentication, use the follo
         "arn:aws:s3:::<YOUR_BUCKET_NAME>",
         "arn:aws:s3:::<YOUR_BUCKET_NAME>/*"
       ]
-    }
+    },
     {
       "Effect": "Allow",
       "Action": [
@@ -439,7 +436,7 @@ If using IAM Roles for Service Accounts (IRSA) for authentication, use the follo
         "sts:AssumeRole"
       ],
       "Resource": "<YOUR_OBJECT_STORAGE_ROLE>"
-    },
+    }
   ]
 }
 ----
@@ -597,6 +594,7 @@ gsutil mb gs://circleci-server-bucket
 
 ```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
+
 ```
 
 You will need the email for the service account in the next step. Run the following command to find it:
@@ -632,6 +630,7 @@ After running the following command, you should have a file named `circleci-serv
 ```shell
 gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
+
 ```
 
 endif::env-aws[]

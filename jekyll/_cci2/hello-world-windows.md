@@ -16,6 +16,10 @@ This document describes how to get started with continuous integration on **Wind
 * TOC
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+  <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
+</div>
+
 
 ## Prerequisites
 {: #prerequisites }
@@ -45,6 +49,8 @@ The Windows execution environment (or `executor`) gives users the tools to build
 {: #windows-executor-images }
 
 CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
+
+Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 

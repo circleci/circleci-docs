@@ -4,6 +4,7 @@ title: Configuring CircleCI
 short-title: Configuring CircleCI
 description: Reference for .circleci/config.yml
 order: 20
+readtime: false
 version:
 - Cloud
 - Server v3.x
@@ -1201,7 +1202,7 @@ There is no direct replacement for the `deploy` step if you are using parallelis
 
 ###### *Example*
 
-A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+The following is an example of replacing the deprecated `deploy` step in a config file that has parallelism > 1 (this code is deprecated, do not copy):
 
 ```yml
 # Example of deprecated syntax, do not copy

@@ -17,14 +17,14 @@ version:
 
 **注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
-{% include snippets/built-in-env-vars.md %}
+{% include snippets/ja/built-in-env-vars.md %}
 
 ## パイプライン値
 {: #pipeline-values }
 
 パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
 
-{% include snippets/pipeline-values.md %}
+{% include snippets/ja/pipeline-values.md %}
 
 例えば下記のようにします。
 

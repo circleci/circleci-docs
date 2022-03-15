@@ -45,7 +45,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/ja/env-var-or-context.md %}
 
 3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
 
@@ -100,7 +100,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/ja/env-var-or-context.md %}
 
 3. `.circleci/config.yml` ファイルで、新しい `deploy` ジョブを作成します。 `deploy` ジョブで、プライマリ コンテナに `awscli` をインストールするステップを追加します。
 
@@ -155,7 +155,7 @@ AWS CLI のコマンドとオプションの一覧は、「[AWS CLI コマンド
 {:.no_toc}
 The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) for a full list of parameters, jobs, commands and options.
 
-Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. {% include snippets/env-var-or-context.md %}
+Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. {% include snippets/ja/env-var-or-context.md %}
 
 {% raw %}
 
@@ -184,7 +184,7 @@ workflows:
 
 Use the [AWS ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) and [ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
 
-Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. {% include snippets/env-var-or-context.md %}
+Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. {% include snippets/ja/env-var-or-context.md %}
 
 {% raw %}
 
@@ -248,7 +248,7 @@ This section describes a simple deployment to the Azure container registry (ACR)
 
 For detailed information about the Azure ACR orb, including all options, refer to the [CircleCI ACR Orb Reference](https://circleci.com/developer/orbs/orb/circleci/azure-acr) page.
 
-1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`. {% include snippets/env-var-or-context.md %}
+1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`. {% include snippets/ja/env-var-or-context.md %}
 
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
 
@@ -483,7 +483,7 @@ npm install --save-dev firebase-tools
 firebase login:ci
 ```
 
-Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/env-var-or-context.md %}
+Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/ja/env-var-or-context.md %}
 
 The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the main branch.
 
@@ -619,7 +619,7 @@ For another example, see our [CircleCI Google Cloud deployment example project](
 {:.no_toc}
 1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation to set up a project in your chosen language.
 
-2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
+2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/ja/env-var-or-context.md %}
 
 3. Use the [Heroku orb](https://circleci.com/developer/orbs/orb/circleci/heroku) to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the [orbs registry](https://circleci.com/developer/orbs/orb/circleci/heroku) for full details of parameters and options:
 

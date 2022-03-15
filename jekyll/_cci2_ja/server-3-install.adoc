@@ -118,7 +118,7 @@ Github が提供する OAuth クライアント シークレットです。
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
-// Don't include this section in the GCP PDF. 
+// Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
@@ -154,8 +154,8 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-===== Google Cloud Storage 
-前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。 
+===== Google Cloud Storage
+前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
