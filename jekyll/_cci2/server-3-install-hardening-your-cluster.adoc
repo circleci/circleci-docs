@@ -23,7 +23,9 @@ to control traffic between the different components of the system and isolate th
 
 As always, the rule is to make as many of the resources as private as possible, applies. If your users will access your
 CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a
-working NAT gateway setup. Otherwise, you will need at least one public subnet for the CircleCI server Traefik load balancer.
+working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-server-traefik` load balancer.
+
+NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by kong. Therefore, you will see a service named `circleci-server-traefik`, however, this service is actually for Kong.
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to
 SSH into jobs and scope access via networking rules.
