@@ -5,6 +5,7 @@ import signupLinksCta from './signupLinksCta';
 import './snippetFeedback';
 import signUpCTA from './signUpCTA';
 import popupCta from './popupCta';
+import gettingStartedGuide from './gettingStartedGuide';
 
 export default {
   forceAll,
@@ -13,4 +14,5 @@ export default {
   signUpCTA,
   signupLinksCta,
   popupCta,
+  gettingStartedGuide,
 };
