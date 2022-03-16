@@ -447,7 +447,7 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 aws iam create-user --user-name circleci-vm-service
 ```
 +
-vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下のhttps://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
+vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順] を実行します。
 完了したら、ステップ 9 に進みます。手順 9 では、KOTS で VM サービスを有効化します。
 +
 . *ポリシーを作成する*
@@ -584,7 +584,7 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *サーバーの設定*
 +
-VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
+VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
 +
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
@@ -628,7 +628,7 @@ databaseEncryption:
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
 ```
 +
-NOTE: 自動モードを使用している場合は、https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づき Nomad クライアントの CIDR を検索できます。
+NOTE: 自動モードを使用している場合は、 https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表] を参照して、リージョンに基づき Nomad クライアントの CIDR を検索できます。
 +
 ```shell
 gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
@@ -678,7 +678,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *サーバーの設定*
 +
-VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
+VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service]  ガイドを参照してください。
 +
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
