@@ -86,9 +86,10 @@ app_identifier "com.example.HelloWorld"
 
 下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する`deliver<code> アクション</a>は、App Store への申請プロセスを自動化する強力なツールです。</p>
 
-<p spaces-before="0">また、メタデータやスクリーンショット (<a href="https://docs.fastlane.tools/actions/snapshot/">screenshot</a> や <a href="https://docs.fastlane.tools/actions/frameit/">frameit</a> アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の <a href="https://docs.fastlane.tools/actions/deliver/">配信に関するドキュメント</a>を参照してください。</p>
+また、メタデータやスクリーンショット([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の[配信に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
 
-<pre><code class="ruby"># fastlane/Fastfile
+```ruby
+# fastlane/Fastfile
 default_platform :ios
 
 platform :ios do
@@ -119,9 +120,7 @@ platform :ios do
     )
   end
 end
-`</pre> 
-
-
+```
 
 ### TestFlight へのデプロイ
 

@@ -113,7 +113,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |Nomad クライアントの最大数です。
 |2
 
-|プレフィックス
+|prefix
 |リソース名のプレフィックスです。
 |circleci
 
