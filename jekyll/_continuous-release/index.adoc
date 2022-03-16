@@ -1,6 +1,5 @@
-:page-layout: classic-docs
-
 = Introduction
+:page-layout: classic-docs
 
 // = INSTALLATION GUIDE: A guide for using continuous release
 
