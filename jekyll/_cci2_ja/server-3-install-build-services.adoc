@@ -678,7 +678,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *サーバーの設定*
 +
-VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service]  ガイドを参照してください。
+VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
 +
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
