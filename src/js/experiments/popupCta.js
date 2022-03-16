@@ -69,7 +69,7 @@ function incrementTimesVisited() {
   localStorage.setItem(LS_KEY, JSON.stringify(popupData));
 }
 
-// https://app.optimizely.com/v2/projects/16812830475/experiments/21253750305/
+// https://app.optimizely.com/v2/projects/16812830475/experiments/21292260007
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_docs-popup-cta_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
