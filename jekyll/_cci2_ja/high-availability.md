@@ -9,5 +9,5 @@ version:
   - サーバー管理者
 ---
 
-高い可用性により、ダウンタイムやサービスの中断なく CircleCI のデータを複製し、単一のデータベースインスタンスの障害からのリカバリを自動化することができます。 CircleCI ソリューションエンジニアと共に、可用性の高いカスタム設定をセットアップしましょう (Platinum サポートが必要です）。 まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+High availability (HA) gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption. Work with a CircleCI Solutions Engineer to set up a custom HA configuration (requires Premium Support). まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
 

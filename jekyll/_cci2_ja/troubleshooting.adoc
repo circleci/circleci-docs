@@ -30,7 +30,7 @@ If your Services component is fine, but builds are not running, or all builds ar
 
 If the logs dispatcher container does not exist or is down, start it by running the `sudo docker start <container_name>` command and monitor the progress. 以下の出力では、ログディスパッチャが起動し、正しく実行されていることがわかります。
 
-```shell
+```
 Jan 4 22:38:38.589:+0000 INFO circle.backend.build.run-queue dispatcher mode is on - no need for
 
  run-queue
@@ -55,7 +55,7 @@ If you see errors or do not see the above output, investigate the stack traces b
 
 `sudo docker logs picard-dispatcher` コマンドを実行します。 A healthy `picard-dispatcher` should output the following:
 
-```shell
+```
 Jan 9 19:32:33 INFO picard-dispatcher.init Still running...
 Jan 9 19:34:33 INFO picard-dispatcher.init Still running...
 Jan 9 19:34:44 INFO picard-dispatcher.core taking build=GERey/realitycheck/38

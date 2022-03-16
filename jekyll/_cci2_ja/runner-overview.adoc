@@ -46,7 +46,7 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 *サポート対象*プラットフォームには、以下が提供されます。
 
 * ドキュメントとベストプラクティス
-* サポート: CircleCI カスタマーエンジニアによる、ゴールドサポートで規定されている通常のサービスレベルアグリーメント (SLA) の範囲内の問題解決支援
+* サポート: CircleCI カスタマー エンジニアによる、アドバンスト サポートで規定されている通常のサービス レベル アグリーメント (SLA) の範囲内の問題解決支援
 
 *サポート対象*の CircleCI ランナーは、次のプラットフォームで利用できます。
 
@@ -74,7 +74,7 @@ CircleCI ランナーは、複数のプラットフォームに対応してい�
 * 上記以外の Linux ディストリビューション - RHEL、SUSEなど (x86_64 または ARM64)
 * Kubernetes (ARM64)
 
-NOTE: 弊社では現在プレビューの CircleCI ランナーの開発を活発に行っています。お客様の環境に対するサポートやユースケースに関するご質問がある場合は、https://circleci.com/contact/[お問い合わせ]ください。 また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーについての Discuss のページ]への投稿もぜひお寄せください。
+NOTE: 弊社では現在プレビューの CircleCI ランナーの開発を活発に行っています。お客様の環境に対するサポートやユースケースに関するご質問がある場合は、https://circleci.com/ja/contact/[お問い合わせ]ください。 また、https://circleci.canny.io/cloud-feature-requests[フィードバック]やhttps://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーについての Discuss のページ]への投稿もぜひお寄せください。
 
 == はじめに
 

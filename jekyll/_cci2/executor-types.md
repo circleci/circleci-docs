@@ -34,16 +34,16 @@ An *executor type* defines the underlying technology or environment in which to 
 - Within a macOS VM image (`macos`)
 - Within a windows VM image (`windows`)
 
-It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
+It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
 
-- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
+- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
-- Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
+- Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
 ## Using Docker
 {: #using-docker }
 
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+The `docker` key defines Docker as the underlying technology to run your jobs using Docker containers. Containers are an instance of the Docker image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
 Docker increases performance by building only what is required for your application. Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
 
@@ -54,7 +54,9 @@ jobs:
       - image: cimg/node:lts
 ```
 
-In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
+In this example, all steps run in the container created by the first image listed under the `build` job.
+
+To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
 
 ### Docker image best practices
 {: #docker-image-best-practices }
@@ -62,7 +64,7 @@ In this example, all steps run in the container created by the first image liste
 
 - If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
 
-- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. That’s why we’re encouraging you and your team to [add Docker Hub authentication]({{ site.baseurl }}/2.0/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to [add Docker Hub authentication]({{ site.baseurl }}/2.0/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
 - Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
 
@@ -70,12 +72,13 @@ In this example, all steps run in the container created by the first image liste
 
 - When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
 
-- In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with docker images being used.
+- In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
 
-More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
+More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
 ### Using multiple Docker images
 {: #using-multiple-docker-images }
+
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```yaml
@@ -95,14 +98,15 @@ jobs:
 ```
 Docker images may be specified in a few ways:
 
-1. by the image name and version tag on Docker Hub, or
-2. by using the URL to an image in a registry
+- By the image name and version tag on Docker Hub, or
+- By using the URL to an image in a registry.
 
 The following examples show how you can use public images from various sources:
 
 #### CircleCI's public convenience images on Docker Hub
 {: #public-convenience-images-on-docker-hub }
 {:.no_toc}
+
   - `name:tag`
     - `cimg/node:14.17-browsers`
   - `name@digest`
@@ -111,6 +115,7 @@ The following examples show how you can use public images from various sources:
 #### Public images on Docker Hub
 {: #public-images-on-docker-hub }
 {:.no_toc}
+
   - `name:tag`
     - `alpine:3.13`
   - `name@digest`
@@ -119,6 +124,7 @@ The following examples show how you can use public images from various sources:
 #### Public images on Docker registries
 {: #public-docker-registries }
 {:.no_toc}
+
   - `image_full_url:tag`
     - `gcr.io/google-containers/busybox:1.24`
   - `image_full_url@digest`
@@ -151,14 +157,15 @@ jobs:
 
 ### Docker benefits and limitations
 {: #docker-benefits-and-limitations }
+
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
 
-- Your application is self-sufficient
-- Your application requires additional services to be tested
-- Your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
-- You want to use `docker-compose` (requires using [Remote Docker][building-docker-images])
+- Your application is self-sufficient.
+- Your application requires additional services to be tested.
+- Your application is distributed as a Docker image (requires using [Remote Docker][building-docker-images]).
+- You want to use `docker-compose` (requires using [Remote Docker][building-docker-images]).
 
-Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
+Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
 
 There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
 
@@ -172,7 +179,7 @@ Capability | `docker` | `machine`
  Full root access | No | Yes
  Run multiple databases | Yes <sup>(3)</sup> | Yes
  Run multiple versions of the same software | No | Yes
- [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
+ [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
@@ -187,19 +194,21 @@ Capability | `docker` | `machine`
 For more information on `machine`, see the next section below.
 
 ### Caching Docker images
-{: caching-docker-images }
+{: #caching-docker-images }
 
-This section discusses caching in the Docker Executor relating to the "Spin Up Environment" step for the main container in the job. It does not apply to [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature of the Remote Docker environment.
+This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to [Docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature used to speed up building new Docker images in your projects.
+{: class="alert alert-info" }
 
-The time it takes to spin up a docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
 
-Generally if you are using a more popular image, such as CircleCI Convenience Images, then cache hits are more likely for a larger number of layers. Most of our popular CircleCI images use the same base image so the majority of the base layers will be the same between images and you therefore have a greater chance of having a cache hit.
+The time it takes to spin up a Docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
 
-The environment has to spin up for every new job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run - for security reasons, we never reuse containers. Once the job is finished the container is destroyed. We cannot guarantee jobs, even in the same workflow, will run on the same docker host machine and therefore the cache status may differ.
+If you are using a more popular image, such as CircleCI convenience images, then cache hits are more likely for a larger number of layers. Most of the popular CircleCI images use the same base image. The majority of the base layers are the same between images, so you have a greater chance of having a cache hit.
 
-In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst case scenario of a full image pull should be accounted for in all jobs.
+The environment has to spin up for every new job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run. (CircleCI never reuses containers, for security reasons.) Once the job is finished, the container is destroyed. There is no guarantee that jobs, even in the same workflow, will run on the same Docker host machine. This implies that the cache status may differ.
 
-In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chance of hitting cached layers in the "Spin Up Environment" Step.
+In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst-case scenario of a full image pull should be accounted for in all jobs.
+
+In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chances of hitting cached layers in the "Spin Up Environment" step.
 
 ### Available Docker resource classes
 {: #available-docker-resource-classes }
@@ -237,7 +246,7 @@ The `machine` option runs your jobs in a dedicated, ephemeral VM that has the fo
 
 {% include snippets/machine-resource-table.md %}
 
-Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands. To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack; for example, to listen on a network interface, or to modify the system with `sysctl` commands. To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
@@ -254,10 +263,6 @@ jobs:
     resource_class: large
 ```
 
-You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
-
-The following example uses an image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** Check our [pricing page](https://circleci.com/pricing/) to see which plans include the use of Docker Layer Caching.
-
 {:.tab.machineblock.Server}
 ```yaml
 version: 2.1
@@ -266,11 +271,17 @@ jobs:
     machine: true
 ```
 
-**Note:**
-The `image` key is not supported on private installations of CircleCI.
-See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
+You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
 
-The IP range `192.168.53.0/24` is reserved by CircleCI for the internal use on machine executor. This range should not be used in your jobs.
+The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
+
+```yaml
+machine:
+  image: ubuntu-2004:202104-01
+  docker_layer_caching: true    # default - false
+```
+
+The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the machine executor. This range should not be used in your jobs.
 
 ## Using macOS
 {: #using-macos }
@@ -340,7 +351,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/developer/orbs/orb/circleci/windows) for more details.
+Cloud users will notice the Windows orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/developer/orbs/orb/circleci/windows) for more details.
 
 CircleCI server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 

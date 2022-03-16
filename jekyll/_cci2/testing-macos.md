@@ -69,7 +69,7 @@ jobs:
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
-        - mac-permissions/add-mac-uitest-permissions
+        - mac-permissions/add-uitest-permissions
         - run: bundle install
         - run: bundle exec fastlane testandbuild
 

@@ -23,7 +23,7 @@ version:
 
 サンプル プロジェクトを参照すると、アプリケーションの記述に使用する言語やフレームワークの構築に役立ちます。
 
-{% include snippets/language-guides.md %}
+{% include snippets/ja/language-guides.md %}
 
 ## サンプル ワークフロー
 {: #sample-workflows }

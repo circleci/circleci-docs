@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Projects and Pipelines"
-short-title: "Projects and Pipelines"
-description: "Starting point for CircleCI projects"
+title: "プロジェクトとパイプライン"
+short-title: "プロジェクトとパイプライン"
+description: "CircleCI プロジェクトの入門ガイド"
 categories:
   - はじめよう
 order: 1
@@ -10,14 +10,14 @@ version:
   - クラウド
 ---
 
-This document describes how CircleCI automates your pipelines.
+ここでは、CircleCI でパイプラインを自動化する方法について説明します。
 
 ## 概要
 {: #overview }
 
-After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{ site.baseurl }}/2.0/glossary/#project) to circleci.com, every code change triggers your project's [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines). A pipeline represents the entire configuration, including all workflows that are run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline. Jobs run in clean containers or VMs configured to the requirements set out in your configuration file.
+GitHub または Bitbucket 上のソフトウェアリポジトリが承認され、[プロジェクト]({{ site.baseurl }}/2.0/glossary/#project)として circleci.com に追加された後は、コードを変更するたびに、プロジェクトの[パイプライン]({{ site.baseurl }}/2.0/concepts/#pipelines)がトリガーされます。 パイプラインとは、CircleCI を使用するプロジェクトで作業をトリガーする際に実行されるすべてのワークフローを含むすべての設定を指す言葉です。 `.circleci/config.yml` ファイルの全体が 1 つのパイプラインによって実行されます。 ジョブは、設定ファイルで定義された要件に合わせて構成されたクリーンなコンテナまたは VM で実行されます。
 
-## Adding projects
+## プロジェクトの追加
 {: #adding-projects }
 
 A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select **Projects** from the CircleCI application sidebar to enter the Projects dashboard, where you can set up and follow any projects you have access to.

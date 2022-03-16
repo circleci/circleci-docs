@@ -14,7 +14,7 @@ version:
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 == ステップ 1: 前提条件
-CircleCI Server のインストールには 4つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 なお、このインストールガイドは、https://circleci.com/docs/ja/2.0/server-3-overview[[CircleCI Server 3.x の概要]] を先に読んでいることを前提としています。
+CircleCI Server のインストールには 4つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 なお、このインストールガイドは、 https://circleci.com/docs/ja/2.0/server-3-overview[[CircleCI Server 3.x の概要]] を先に読んでいることを前提としています。
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
@@ -56,7 +56,7 @@ image::server-install-flow-chart-phase1.png[Flow chart showing the installation 
 
 NOTE: * Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
-// Don't include this section in the GCP PDF. 
+// Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
@@ -122,11 +122,8 @@ Supported Kubernetes versions:
 | 3.0.0 - 3.2.1
 | 1.21 以下
 
-| 3.2.2
+| 3.2.2 - 3.3.0
 | 1.16 - 1.21
-
-| 3.3.0+
-| 1.16 - 1.22
 |===
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
@@ -145,7 +142,7 @@ ifndef::env-gcp[]
 Amazon EKS クラスタ の作成に関する詳細はhttps://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら]をご覧ください。 クラスタの作成にはhttps://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
 . AWS CLI をhttps://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール]し、お使いの AWS アカウント用にhttps://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
-.  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`]をインストールします。
+.  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
 . Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
 +
 ```shell
@@ -262,13 +259,13 @@ ifndef::env-aws[]
 
 . If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin installed. プラグインのインストールには以下のコマンドを実行します。
 +
-```bash
+```shell
 pip3 install certbot-dns-google
 ```
 
 . 以下のコマンでインストール証明書をプロビジョニングします。
 +
-```bash
+```shell
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
@@ -431,7 +428,7 @@ If using IAM Roles for Service Accounts (IRSA) for authentication, use the follo
         "arn:aws:s3:::<YOUR_BUCKET_NAME>",
         "arn:aws:s3:::<YOUR_BUCKET_NAME>/*"
       ]
-    }
+    },
     {
       "Effect": "Allow",
       "Action": [
@@ -439,7 +436,7 @@ If using IAM Roles for Service Accounts (IRSA) for authentication, use the follo
         "sts:AssumeRole"
       ],
       "Resource": "<YOUR_OBJECT_STORAGE_ROLE>"
-    },
+    }
   ]
 }
 ----
@@ -597,6 +594,7 @@ gsutil mb gs://circleci-server-bucket
 
 ```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
+
 ```
 
 You will need the email for the service account in the next step. Run the following command to find it:
@@ -612,8 +610,7 @@ gcloud iam service-accounts list \
 ```shell
 gcloud iam roles create circleci_server \
     --project <PROJECT_ID> \
-    --title "CircleCI Server" \
-    --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get
+    --title "CircleCI Server"
 ```
 
 ```shell
@@ -632,6 +629,7 @@ After running the following command, you should have a file named `circleci-serv
 ```shell
 gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
+
 ```
 
 endif::env-aws[]
