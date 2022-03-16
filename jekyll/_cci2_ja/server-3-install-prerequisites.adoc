@@ -14,7 +14,7 @@ version:
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 == ステップ 1: 前提条件
-CircleCI Server のインストールには 4つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 なお、このインストールガイドは、https://circleci.com/docs/ja/2.0/server-3-overview[[CircleCI Server 3.x の概要]] を先に読んでいることを前提としています。
+CircleCI Server のインストールには 4つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 なお、このインストールガイドは、 https://circleci.com/docs/ja/2.0/server-3-overview[[CircleCI Server 3.x の概要]] を先に読んでいることを前提としています。
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
@@ -610,8 +610,7 @@ gcloud iam service-accounts list \
 ```shell
 gcloud iam roles create circleci_server \
     --project <PROJECT_ID> \
-    --title "CircleCI Server" \
-    --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get
+    --title "CircleCI Server"
 ```
 
 ```shell

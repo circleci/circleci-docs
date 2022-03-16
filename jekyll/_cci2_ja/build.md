@@ -7,13 +7,12 @@ description: "CircleCI の実行環境の構成"
 
 お使いの環境に固有の作業手順については、以下のドキュメントを参照してください。
 
-| ドキュメント                                                                                                      | 説明                                                                  |
-| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/executor-types/">Executor タイプの選び方</a>                                                                                   | `docker`、`windows`、`machine`、`macos` の各 Executor の違い、メリットとデメリット、使用例 |
-| <a href="{{ site.baseurl }}/ja/2.0/caching/">依存関係のキャッシュ</a>                                                                                   | 高コストなフェッチ操作が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法           |
-| [CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-jobs/)                                             | ローカル環境でジョブを実行する手順                                                   |
-| [CircleCI での Yarn の使用]({{ site.baseurl }}/ja/2.0/yarn/)                                                     | Yarn のインストール方法と Yarn パッケージのキャッシュ方法                                  |
-| [CircleCI 上で Snapcraft を使用した Snap パッケージのビルドとパブリッシュ]({{ site.baseurl }}/ja/2.0/build-publish-snap-packages/) | Snapcraft のセットアップと、Snap パッケージのビルドからパブリッシュまでを解説した完全ガイド               |
+| ドキュメント                                                          | 説明                                                                  |
+| --------------------------------------------------------------- | ------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/executor-types/">Executor タイプの選び方</a>                                       | `docker`、`windows`、`machine`、`macos` の各 Executor の違い、メリットとデメリット、使用例 |
+| <a href="{{ site.baseurl }}/ja/2.0/caching/">依存関係のキャッシュ</a>                                       | 高コストなフェッチ操作が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法           |
+| [CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-jobs/) | ローカル環境でジョブを実行する手順                                                   |
+| [CircleCI での Yarn の使用]({{ site.baseurl }}/ja/2.0/yarn/)         | Yarn のインストール方法と Yarn パッケージのキャッシュ方法                                  |
 {: class="table table-striped"}
 
 ## Docker

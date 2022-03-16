@@ -84,7 +84,7 @@ app_identifier "com.example.HelloWorld"
 ### App Store へのデプロイ
 {: #deploying-to-the-app-store }
 
-下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する [`deliver`アクション](http://docs.fastlane.tools/actions/deliver/#deliver/)は、App Store への申請プロセスを自動化する強力なツールです。
+下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する[`deliver`アクション](http://docs.fastlane.tools/actions/deliver/#deliver/)は、App Store への申請プロセスを自動化する強力なツールです。
 
 また、メタデータやスクリーンショット([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の[配信に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
 
@@ -121,7 +121,6 @@ platform :ios do
   end
 end
 ```
-
 
 ### TestFlight へのデプロイ
 

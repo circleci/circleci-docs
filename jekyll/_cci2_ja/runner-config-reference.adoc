@@ -74,7 +74,7 @@ runner:
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
 ```
 
-このプレフィックスは、カスタムスクリプトの場合もあります。  スクリプトに渡される引数により、タスクエージェントが起動します。
+このプレフィックスは、カスタムスクリプトの場合もあります。 スクリプトに渡される引数により、タスクエージェントが起動します。
 
 カスタムスクリプトは以下の点に注意して下さい。
 
@@ -100,8 +100,6 @@ exit $exit
 runner:
   command_prefix: ["/opt/circleci/wrapper.sh"]
 ```
-
-プレフィックス
 
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`
