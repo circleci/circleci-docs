@@ -69,7 +69,7 @@ image::vm-service-custom.png[Custom VM Service Images]
 ==== カスタム Linux AMI の作成
 
 1. https://github.com/circleci/image-builder/tree/picard-vm-image をクローンします。
-2. エディターで `aws-vm.json` を開きます。 このファイルは、Packer で AMI を作成するための基本テンプレートです。 AWS アクセス キー ID とシークレット アクセス キーをアップロードする必要があります。 Packer での AWS 認証の管理に関する詳細は、  https://packer.io/docs/builders/amazon.html#authentication[こちら] を参照してください。 基本テンプレートでは足りない場合は、 https://packer.io/docs/builders/amazon.html[こちら] にある追加の AWS 構成オプションを参照してください。
+2. エディターで `aws-vm.json` を開きます。 このファイルは、Packer で AMI を作成するための基本テンプレートです。 AWS アクセス キー ID とシークレット アクセス キーをアップロードする必要があります。 Packer での AWS 認証の管理に関する詳細は、 https://packer.io/docs/builders/amazon.html#authentication[こちら] を参照してください。 基本テンプレートでは足りない場合は、 https://packer.io/docs/builders/amazon.html[こちら] にある追加の AWS 構成オプションを参照してください。
 3.  (オプション) `ami_groups` は組織内のみに制限することをお勧めします。 AMI グループの詳細については、https://packer.io/docs/builders/amazon-ebs.html#ami_groupsを参照してください。
 4. https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh には、構成済みの依存関係リストが提供されています。 お使いの環境のニーズに合わせて、この provision.sh スクリプトをカスタマイズします。
 5. `packer build aws-vm.json` を実行します。
