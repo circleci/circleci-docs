@@ -1,6 +1,7 @@
+= Prerequisites
 :page-layout: classic-docs
-
-== Prerequisites
+:icons: font
+:toc: macro
 
 To use Vamp, you will need the following:
 
@@ -11,27 +12,37 @@ To use Vamp, you will need the following:
 * Prometheus
 * DNS entry
 
-=== kubectl
+== kubectl
 
 The Kubernetes command-line tool, https://kubernetes.io/docs/reference/kubectl/kubectl/[kubectl], allows you to run commands on Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
 If you do not already have kubectl installed, https://kubernetes.io/docs/tasks/tools/install-kubectl/[follow the instructions here].
 
-==== Amazon Kubernetes Service (EKS)
+=== Amazon Kubernetes Service (EKS)
 
 If you are using EKS, Amazon provides their own https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#eksctl-gs-install-kubectl[instructions for installing kubectl here].
 
-=== Kubernetes cluster
+== Kubernetes cluster
 
-// I don't think we need the existing code snippets
+// I don't think we need the existing code snippets. If we include them, we'll need to cover all flavours.
+
+You will need a running Kubernetes cluster for deploying your application and installing the Release Agent.
+
+If you are using minikube or Docker Desktop to run Kubernetes locally, a default cluster will be created for you.
+
+For cloud providers, use the following links for instructions:
 
 * https://cloud.google.com/kubernetes-engine/docs/quickstart[Creating a cluster with Google Kubernetes Engine] (GKE)
 * https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[Creating a cluster with Amazon Kubernetes Service (EKS)]
 
-=== Containerized app
+== Containerized app
 
-// signpost some instructions here, e.g. on creating and pushing a Dockerfile. Customers might have an existing CCI pipeline that builds and deploys a Docker container.
+You will need a containerized app to deploy to Kubernetes. This is usually specified in your manifest or Helm chart.
 
-=== Ingress controller
+For more information on creating containerized apps, see the https://docs.docker.com/get-started/[Docker Getting Started guide].
+
+// signpost the tutorial with particles image
+
+== Ingress controller
 
 If you are exposing some of all of your services, you will need an Ingress controller.
 
@@ -39,29 +50,29 @@ Vamp currently supports NGINX and Contour.
 
 If you do not already have NGINX or Contour, you can install them on your Kubernetes cluster with the following commands:
 
-==== Contour
+=== Contour
 
-`kubectl apply -f https://projectcontour.io/quickstart/contour.yaml`
+`kubectl apply -f \https://projectcontour.io/quickstart/contour.yaml`
 
 For more information and installation options for Contour, see the https://projectcontour.io/getting-started/#option-1-quickstart[getting started guide].
 
-==== NGINX
+=== NGINX
 
 *AWS*
 
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/aws/deploy.yaml`
+`kubectl apply -f \https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/aws/deploy.yaml`
 
 *GKE and Azure*
 
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml`
+`kubectl apply -f \https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml`
 
 *Digital Ocean*
 
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/do/deploy.yaml`
+`kubectl apply -f \https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/do/deploy.yaml`
 
 For more information and installation options for NGINX, see the https://kubernetes.github.io/ingress-nginx/deploy/[installation guide].
 
-=== Prometheus
+== Prometheus
 
 The Release Agent relies on an available instance of Prometheus, an open source monitoring system and time series database.
 
@@ -69,7 +80,7 @@ If you deployed Contour or NGINX using the instructions above, you can deploy Pr
 
 *Contour*
 
-`kubectl apply -f https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/contour/contour-prometheus.yaml`
+`kubectl apply -f \https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/contour/contour-prometheus.yaml`
 
 For more information on deploying Prometheus with Contour, see https://projectcontour.io/guides/prometheus/#deploy-prometheus[the full instructions].
 
@@ -81,13 +92,13 @@ For more information on deploying Prometheus with NGINX, see https://kubernetes.
 
 NOTE: If you already have Prometheus installed in your cluster, follow https://docs.vamp.cloud/release-agent/installation/custom-prometheus[these instructions] to configure a custom Prometheus location.
 
-=== DNS Entry for Your Application
+== DNS Entry for Your Application
 
 NOTE: If you are using https://github.com/kubernetes-sigs/external-dns[ExternalDNS] or a similar tool to dynamically manage the DNS records for Ingresses on your cluster, you can skip this section. For the Contour Ingress controller, you must use https://github.com/kubernetes-sigs/external-dns/releases[version 0.7.4 or newer of External DNS].
 
-==== Manual DNS entry
+=== Manual DNS entry
 
-If you deployed Contour or NGINX using the instructions above, you can get the IP address for the DNS record using these instructions:
+If you deploy Contour or NGINX using the instructions above, you can get the IP address for the DNS record using these instructions:
 
 The following commands print the IP address you need to configure the DNS for your application:
 

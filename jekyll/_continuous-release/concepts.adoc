@@ -1,53 +1,15 @@
+= Continuous Release Concepts
 :page-layout: classic-docs
 :icons: font
-
-= Continuous Release Concepts
+:toc: macro
 
 == Applications
 
 Conceptually, an application is a collection of microservices sharing a single Kubernetes namespace.
 
-Continuous Release also allows you to release across multiple Kubernetes clusters and multiple cloud providers. In this case, an _application_ is a unique combination of a Kubernetes cluster and a Namespace name.
+Release Orchestration also allows you to release across multiple Kubernetes clusters and multiple cloud providers. In this case, an _application_ is a unique combination of a Kubernetes cluster and a Namespace name.
 
-NOTE: The Continuous Release definition of an application differs from the Kubernetes definition. In Kubernetes, an application is a single workload, plus configuration data.
-
-DTAP (Development, Test, Acceptance, and Production) is a traditional way of splitting up your environments and is typically used in monolithic application development.
-
-In Continuous Release, your Development, Test, Acceptance, and Production environments are different applications. For example, the Development, Test and Acceptance applications might share one cluster, with Production using a separate cluster. The different applications typically share the same microservices, but with different versions, and need to be updated sequentially.
-
-== Services
-
-In Continuous Release, a _service_ represents a single microservice.
-
-Throughout its lifetime, a service will go through multiple versions. At any time, there may be multiple instances of a given version running in different _applications_.
-
-As a _service_ can span multiple versions and multiple applications, you can track and compare the performance and reliability of your microservices. You can do this either individually, or as interdependent microservices within an application.
-
-[NOTE]
-====
-The Continuous Release definition of a service differs significantly from the definition of a Kubernetes Service.
-
-Kubernetes defines a Service as a network service, an abstract way to expose a set of Pods using a single DNS name and a load balancing strategy.
-
-A service in Continuous Release represents a superset of Kubernetes artifacts: a Kubernetes workload (a Deployment or a StatefulSet) plus, optionally, a Kubernetes Service.
-
-====
-
-== Releases
-
-There is significant confusion between the terms _deploy_ and _release_. The two terms refer to different acts, one technical and one business-driven.
-
-The key distinction between a _deployment_ and a _release_ is the business purpose.
-
-A deploy or deployment includes all the technical activities needed to make an application or feature available for use. For example, a fresh Docker container running in a Pod on a Kubernetes cluster. The software has passed all checks and tests in your CI/CD pipeline and is ready to receive traffic from production users, but it is not yet receiving any traffic. This part of the process just ensures the new version is healthy and running smoothly, it does not incur any the risk involved in serving production traffic. Based on this definition, _deploying_ software is a risk-free activity.
-
-A release comes _after_ a deployment and includes all the activities needed to move part, or all, of production traffic to the new version. All the business risks and problems (such as downtime, lost revenue, and unhappy customers) are related to the _release_, not to the deployment. _Releasing_ software is riskier than _deploying_ software. You may choose to release a new version as soon as it is deployed into production, but that should be a conscious business decision.
-
-When done correctly, deploying a new version of a microservice to production should have no direct impact on your users' experience. You want your users to enjoy the new features and improvements, thereby getting greater value from your product.
-
-However, there is always a risk the new version will deliver a degraded user experience. This could be the result of technical issues, or perhaps because your users do not like the product features and improvements in that new version.
-
-Continuous Release provides you with the tools to manage that risk. This feature simultaneously protects your users' experience and ensures new microservices versions are truly delivering additional business value.
+NOTE: The Release Orchestration definition of an application differs from the Kubernetes definition. In Kubernetes, an application is a single workload, plus configuration data.
 
 == Policies
 
@@ -55,18 +17,58 @@ A _policy_ is a set of rules that defines how a version of a service should be v
 
 In Site Reliability Engineering (SRE) terms, a policy validates that a new version of a service complies with the Service Level Objectives (SLOs) defined for that service.
 
-Continuous Release currently supports validation-only policies.
+Release Orchestration supports _release policies_ and _validation-only policies_.
+
+=== Release Policies
+
+A release policy defines a set of validation rules for how Vamp objectively tests if a version of a service meets its objectives. It also defines the user #segments# to be targeted during the tests.
+Release policies are used for services that support progressive releases using traffic shaping. 
+
+Normally as the release progresses, increasing numbers of API requests are sent to the newly deployed version of the service. If it passes all the tests defined in the policy, then it is designated as the live version, replacing the current version.
+
+If validation of the newly deployed version of the service fails for any reason, it is rolled back. The current version remains live and receives all API requests. The failed version no longer receives any API requests.
+
+* See XXXX for more information on release policies.
+* See XXXX for more information on user segments.
 
 === Validation-Only Policies
 
 A validation-only policy defines the set validation rules to objectively test whether a version of a service meets its objectives.
 
-Validation-only policies are employed for services that use a Kubernetes rolling update strategy. This means validation-only policies can be used with services that:
+Validation-only policies rely on calling a user-defined #webhook# to roll back a failed version. If the newly released version passes all the tests defined in the policy, it remains the live version. 
 
-* Are deployed using a Kubernetes StatefulSet, or
-* Are deployed using a Kubernetes Deployment, or
-* Do not expose a REST-based API or a GraphQL-based API, for example, message-based APIs.
+If validation of the newly deployed version of the service fails for any reason, Release Automation calls a webhook to roll back the service to the previous version. Typically, this webhook triggers an action on a CD pipeline.
 
-Validation-only policies rely on calling a user-defined webhook to roll back a failed version. If the newly released version passes all the tests defined in the policy, it remains as the live version. 
+* See XXXX for more information on validation-only policies.
+* See XXXX for more information on webhooks.
 
-If validation of the newly deployed version of the service fails for any reason, Continuous Release calls a webhook to roll back the service to the previous version. Typically, this webhook triggers an action on a CD pipeline.
+== Releases
+
+There is significant confusion between the terms _deploy_ and _release_. The two terms refer to different acts, one technical and one business-driven.
+
+The key distinction between a _deployment_ and a _release_ is the business purpose.
+
+A deploy or deployment includes all the technical activities needed to make an application or feature available for use. For example, a fresh Docker container running in a Pod on a Kubernetes cluster. The software has passed all checks and tests in your CI/CD pipeline and is ready to receive traffic from production users, but it is not yet receiving any traffic. This part of the process just ensures the new version is healthy and running smoothly; it does not incur any the risk involved in serving production traffic. Based on this definition, _deploying_ software is a risk-free activity.
+
+A release comes _after_ a deployment and includes all the activities needed to move part of, or all, production traffic to the new version. All the business risks and problems (such as downtime, lost revenue, and unhappy customers) are related to the _release_, not to the deployment. _Releasing_ software is riskier than _deploying_ software. You may choose to release a new version as soon as it is deployed into production, but that should be a conscious business decision.
+
+// signpost release policies and Release Agent here.
+
+Release Orchestration provides you with the tools to manage that risk. This feature simultaneously protects your users' experience and ensures new microservices versions are truly delivering additional business value.
+
+== Services
+
+In Release Orchestration, a _service_ represents a single microservice within an application. A version of that service is released, and release orchestration describes the steps that must be taken to establish whether that service _version_ can become live. Many of those steps are specified in a #release policy#.
+
+A service version can be reused across multiple applications. _Release modelling_ is used to plan the order in which each service version is released into the different applications. For example, some business need to deploy different versions to customers in different regions, across multiple Kubernetes clusters and cloud providers.
+
+As a _service_ can span multiple versions and multiple applications, you can track and compare the performance and reliability of your microservices. You can do this either individually, or as interdependent microservices within an application.
+
+[NOTE]
+====
+The Release Orchestration definition of a service differs significantly from the definition of a Kubernetes Service.
+
+Kubernetes defines a Service as a network service, an abstract way to expose a set of Pods using a single DNS name and a load balancing strategy.
+
+A service in Release Orchestration represents a superset of Kubernetes artifacts: a Kubernetes workload (a Deployment) plus, optionally, a Kubernetes Service.
+====
