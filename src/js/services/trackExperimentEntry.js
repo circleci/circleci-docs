@@ -19,7 +19,7 @@ const trackExperimentEntry = () => {
       properties = {
         ...properties,
         userId,
-        orgId: orgId,
+        orgId,
       };
     } else if (anonymousId) {
       properties = {
