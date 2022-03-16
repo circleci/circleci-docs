@@ -6,8 +6,7 @@ const trackExperimentEntry = () => {
   let orgId = Cookies.get(COOKIE_KEY) ?? null;
   const anonymousId = window.OptimizelyClient.getAnonymousId();
 
-  window.OptimizelyClient.getUserId().then((userData) => {
-    const userId = userData.id;
+  window.OptimizelyClient.getUserId().then((userId) => {
 
     let properties = {
       id: uuidv4(),
