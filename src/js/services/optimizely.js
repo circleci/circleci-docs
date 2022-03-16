@@ -14,37 +14,33 @@ class OptimizelyClient {
       datafile: window.optimizelyDatafile,
     });
   }
-  getUserId(allowAnonymousId) {
+  getAnonymousId() {
+    let anonymousId = null;
+    try {
+      // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
+      // and sets this as anonymousId for each new visitor.
+      // This call is always valid and will never return null. From the docs:
+      // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
+      anonymousId = analytics.user().anonymousId();
+    } catch (_) {
+      return null;
+    }
+    return anonymousId;
+  }
+  getUserId() {
     return new Promise((resolve) => {
       if (window.userData) {
         // if we already have userData
-        resolve({
-          source: 'analyticsId',
-          id: window.userData.analytics_id
-            ? window.userData.analytics_id
-            : null,
-        });
-      } else if (allowAnonymousId) {
-        let anonymousId = null;
-        try {
-          // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
-          // and sets this as anonymousId for each new visitor.
-          // This call is always valid and will never return null. From the docs:
-          // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
-          anonymousId = analytics.user().anonymousId();
-        } finally {
-          resolve({ id: anonymousId, source: 'anonymousId' });
-        }
+        resolve(
+          window.userData.analytics_id ? window.userData.analytics_id : null,
+        );
       } else {
         // If we are here it means we are still waiting on getting notified
         // that the call to /api/v1/me has resolved and the new userData is available
         window.addEventListener('userDataReady', () => {
-          resolve({
-            source: 'analyticsId',
-            id: window.userData.analytics_id
-              ? window.userData.analytics_id
-              : null,
-          });
+          resolve(
+            window.userData.analytics_id ? window.userData.analytics_id : null,
+          );
         });
       }
     });
@@ -96,8 +92,10 @@ class OptimizelyClient {
       }
 
       // once we have the userId
-      this.getUserId(isGuestExperiment).then((userData) => {
-        const userId = userData.id;
+      this.getUserId().then((userId) => {
+        // if we don't have a userId but we are in a guest experiment, we can request the anonymousId
+        userId = !userId && isGuestExperiment ? this.getAnonymousId() : userId;
+
         if (!userId) {
           return resolve(null);
         }
