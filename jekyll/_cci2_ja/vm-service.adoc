@@ -32,7 +32,7 @@ VM サービスを設定する場合、管理コンソールの設定で [AWS EC
 
 == 1.  AMI の指定
 
-以下のセクションで説明するように、VM サービス用にカスタムの https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon マシン イメージ] (AMI) を指定できます。 カスタム イメージを指定しない場合、すべての `machine` Executor とリモート Docker ジョブは、CircleCI のデフォルトの AMI (下記参照) のいずれかで構築されたインスタンスで実行されます。 このデフォルトの AMI は、Ubuntu 16.04、Docker バージョン 18.06.3 を使用し、一般的な言語、ツール、フレームワークのセットがインストールされています。 詳細については、https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[image-builder リポジトリの `picard-vm-image` ブランチ]を参照してください。 Windows ジョブを実行するには、Windows AMI を指定する必要があります。 これを指定しないと、Windows ジョブの実行は失敗します。
+以下のセクションで説明するように、VM サービス用にカスタムの https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon マシン イメージ] (AMI) を指定できます。 カスタム イメージを指定しない場合、すべての `machine` Executor とリモート Docker ジョブは、CircleCI のデフォルトの AMI (下記参照) のいずれかで構築されたインスタンスで実行されます。 このデフォルトの AMI は、Ubuntu 16.04、Docker バージョン 18.06.3 を使用し、一般的な言語、ツール、フレームワークのセットがインストールされています。 詳細については、 https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[image-builder リポジトリの `picard-vm-image` ブランチ] を参照してください。 Windows ジョブを実行するには、Windows AMI を指定する必要があります。 これを指定しないと、Windows ジョブの実行は失敗します。
 
 === デフォルトの VM サービス用 Linux AMI
 
@@ -68,8 +68,8 @@ image::vm-service-custom.png[Custom VM Service Images]
 
 ==== カスタム Linux AMI の作成
 
-1. https://github.com/circleci/image-builder/tree/picard-vm-imageをクローンします。
-2. エディターで `aws-vm.json` を開きます。 このファイルは、Packer で AMI を作成するための基本テンプレートです。 AWS アクセス キー ID とシークレット アクセス キーをアップロードする必要があります。 Packer での AWS 認証の管理に関する詳細は、https://packer.io/docs/builders/amazon.html#authentication[こちら]を参照してください。 基本テンプレートでは足りない場合は、https://packer.io/docs/builders/amazon.html[こちら]にある追加の AWS 構成オプションを参照してください。
+1. https://github.com/circleci/image-builder/tree/picard-vm-image をクローンします。
+2. エディターで `aws-vm.json` を開きます。 このファイルは、Packer で AMI を作成するための基本テンプレートです。 AWS アクセス キー ID とシークレット アクセス キーをアップロードする必要があります。 Packer での AWS 認証の管理に関する詳細は、  https://packer.io/docs/builders/amazon.html#authentication[こちら] を参照してください。 基本テンプレートでは足りない場合は、 https://packer.io/docs/builders/amazon.html[こちら] にある追加の AWS 構成オプションを参照してください。
 3.  (オプション) `ami_groups` は組織内のみに制限することをお勧めします。 AMI グループの詳細については、https://packer.io/docs/builders/amazon-ebs.html#ami_groupsを参照してください。
 4. https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh には、構成済みの依存関係リストが提供されています。 お使いの環境のニーズに合わせて、この provision.sh スクリプトをカスタマイズします。
 5. `packer build aws-vm.json` を実行します。
