@@ -61,6 +61,8 @@ en:
           link: 2.0/artifacts/
         - name: Docker layer caching
           link: 2.0/docker-layer-caching/
+        - name: Concurrency
+          link: 2.0/concurrency/
         - name: Environment variables
           link: 2.0/env-vars/
         - name: Collecting test data
