@@ -176,7 +176,7 @@ image::preflight.png[Preflight Checks]
 WARNING: このページの設定はいつでも変更することができますが、変更する場合サービスの再起動時に *ダウンタイム* が発生します。 一部の設定については、「運用ガイド」で詳しく説明しています。
 
 . **Hostname:** ホスト名フィールドは、インストールプロセスで事前に入力されているはずですが、そのステップをスキップした場合は、Servies マシンのインスタンスのドメインまたはパブリック IP を入力してください。 [Test Hostname Resolution] をクリックすると、正確に入力されているか確認できます。
-. **Services ** : Services のセクションは、サービスを外部化する場合のみ使用します。 外部化はプレミアムサービス契約のお客様のみご利用いただけます。 詳細については、support@circleci.com までお問い合わせください。
+. **Services ** : Services のセクションは、サービスを外部化する場合のみ使用します。 外部化は Premium サービス契約のお客様のみご利用いただけます。 詳細については、support@circleci.com までお問い合わせください。
 +
 .外部サービス
 image::hostname-services.png[Hostname and Services Settings]
