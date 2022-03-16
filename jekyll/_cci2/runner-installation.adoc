@@ -3,13 +3,26 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Get Started: Installing the CircleCI Runner
+= Get Started: Installing CircleCI Self-Hosted Runners
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find resources to install CircleCI runner on Linux, macOS, Docker, and Windows platforms.
+:page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.
 :icons: font
 :toc: macro
 :toc-title:
+
+++++
+<section style="
+    background-color: #d9edf7; 
+    border: 1px solid #bce8f1; 
+    border-radius: 4px; 
+    color: #31708f;
+    padding: 15px;
+    margin: 20px 0;
+">
+    Authenticating and installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a> ! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> (see below) before this option is available to you in the UI.
+</section>
+++++
 
 toc::[]
 
@@ -17,48 +30,53 @@ toc::[]
 
 The installation process assumes you have installed the following utilities on your system:
 
-* <<local-cli#installation,CircleCI CLI>> - Please note that if you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required. Check <<runner-for-server-compatibility, runner for server compatibility>> below.
-* curl (installed by default on macOS)
-* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
-* systemd version 235+ (Linux only)
-* sepolicy (RHEL 8 only)
-* rpmbuild (RHEL 8 only)
-* permissions to create a user, and create directories under /opt.
+* <<local-cli#installation,CircleCI CLI>> - Please note that if you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required. Check <<runner-for-server-compatibility, runner for server compatibility>> below.
+* https://curl.se/[curl] (installed by default on macOS)
+* sha256sum (installed as part of coreutils on Linux apt/yum, and on macOS via brew)
+* https://systemd.io/[systemd] version 235+ (Linux only)
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* Permissions to create a user, and create directories under `/opt`
 
 Running jobs requires you have the following tools available on your machine:
 
-* tar
-* gzip
-* coreutils (Linux only)
-* git (recommended, but not required)
+* https://www.gnu.org/software/tar/[tar]
+* https://www.gnu.org/software/gzip/[gzip]
+* https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
+* https://git-scm.com/[git] (recommended, but not required, installed by default on most macOS and Linux machines)
+
+=== Self-hosted Runner Terms Agreement
+Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the **Runners** section of the https://app.circleci.com/[CircleCI web app], an administrator in your organization needs to navigate to **Organization Settings > Runners**, and agree to the terms. Once the terms have been accepted, **Runners** will appear permanently in the side navigation.
+
+image::runnerui_terms.png[Runner Terms Agreement - Get started]
+
+If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
 
 == CircleCI web app: Authentication and installation
 
-NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-WARNING: If you have not already agreed to Runner Terms in a signed Order, then by installing Runner, you are agreeing to the CircleCI Runner Terms which can be found at: https://circleci.com/legal/runner-terms. If you have already agreed to Runner Terms in a signed Order, the Runner Terms in the signed Order supersede the Runner Terms in the web address above. If you did not already agree to Runner Terms through a signed Order and do not agree to the Runner Terms in the web address above, please do not install or use Runner.
+In order to install self-hosted runners, you will need to create a namespace and authentication token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider.
 
-In order to install runner you will need to create a namespace and authentication token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider.
-
-. On the https://app.circleci.com/[CircleCI web app], navigate to *Runner*.
+. On the https://app.circleci.com/[CircleCI web app], navigate to *Runners*.
 +
-image::runnerui_step_one.png[Runner Set Up - Get started]
+image::runnerui_step_one.png[Runner set up, step one - Get started]
 +
-. Create a namespace and resource class for your organization's runner resources. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
+. Create a namespace and resource class for your organization's self-hosted runner resources. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
 +
-image::runnerui_step_two.png[Runner Set Up - Create a namespace and resource class]
+image::runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
 +
 . Create a resource class token.
 +
-image::runnerui_step_three.png[Runner Set Up - Create a resource class token]
+image::runnerui_step_three.png[Runner set up, step three - Create a resource class token]
 +
 CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
 +
-. After authenticating, you will need to follow the platform specific installation instructions to continue. The instructions are shown inside the UI, or you can find the instructions in the documentation from the list of links below. Please note that if you would like to use runner on Kubernetes, the instructions are not included in the UI, and you will need to refer to our documentation.
+. After authenticating, you will need to follow the platform specific installation instructions to continue. Click the tab in the UI that is relevant to your environment (see image below). Please note that if you would like to use self-hosted runners on Kubernetes, the instructions are not included in the UI, and you will need to refer to the xref:runner-on-kubernetes.adoc[Kubernetes] page.
 +
-image::runnerui_step_four.png[Runner Set Up - Set up runner on your specific machine]
+image::runnerui_step_four.png[Runner set up on your specific machine]
 +
-Post authentication platform-specific instructions:
+The post authentication platform-specific instructions are also documented on their own individual pages if you need to refer to them.
 +
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
@@ -66,17 +84,19 @@ Post authentication platform-specific instructions:
 * xref:runner-installation-docker.adoc[Docker]
 * xref:runner-on-kubernetes.adoc[Kubernetes]
 +
-. You will get a verification in the UI that a new runner has been detected. You can then add your self-hosted runner to a project by copying all, or just the relevant parts of the code into your project's `.circleci/config.yml` file, depending on your existing config set up.
+. You will get a verification in the UI that a new self-hosted runner has been detected. You can then add your self-hosted runner to a project by copying all, or just the relevant parts of the code into your project's `.circleci/config.yml` file, depending on your existing config set up.
 +
-image::runnerui_step_five.png[Runner Set Up - Copy code to config file]
+image::runnerui_step_five.png[Runner set up, copy code to config file]
+
+You will be able to see a list of your self-hosted runners on the CircleCI web app, on the inventory page.
 
 == Command line: Authentication and installation
 
-NOTE: If you are installing **runner for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-In order to install runner you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
+In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-. Create a namespace for your organization's runner resources. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. 
+. Create a namespace for your organization's self-hosted runner resources. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. 
 +
 If you receive an error creating a namespace, check to see if you have an existing one, and move on to step 2 below, using your existing namespace.
 +
@@ -88,7 +108,7 @@ circleci namespace create <name> <vcs-type> <org-name>
 +
 For example, if your GitHub URL is `\https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 
-. Create a resource class for your runner's namespace using the following command:
+. Create a resource class for your self-hosted runner's namespace using the following command:
 +
 ```
 circleci runner resource-class create <name>/<resource-class> <description> --generate-token
@@ -137,7 +157,7 @@ export platform=darwin/amd64
 ```
 +
 
-. Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
+. Next, set the `circleci-launch-agent` version. Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability and self-hosted runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
 +
 For *cloud*, you can run the following:
 +
@@ -192,10 +212,12 @@ Please refer to the platform-specific installation instructions after you have c
 
 For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
 
-== Runner for server compatibility
+You will be able to see a list of your self-hosted runners on the CircleCI web app, on the inventory page.
+
+== Self-hosted runners for server compatibility
 _CircleCI runner is available from server v3.1.0_
 
-Each minor version of server is compatible with a specific version of `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner, depending on your version of server.
+Each minor version of server is compatible with a specific version of `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing self-hosted runners, depending on your version of server.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
