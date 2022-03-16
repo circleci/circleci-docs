@@ -28,7 +28,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 * We now require a minimum 32GB of RAM for the Services Machine. 
 * We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you will need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
 * We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to v2.19.
-* There has been a change to how you will checkout a via tags in jobs. Branch tags will now be referenced by either `CIRCLE_TAG` or `+refs/heads/tag/path`. eg `git checkout --force "$CIRCLE_TAG"` or `git fetch --force origin '+refs/heads/master:refs/remotes/origin/master'`
+* There has been a change to how you will checkout using tags in jobs. Branch tags will now be referenced by either `CIRCLE_TAG` or `+refs/heads/tag/path`. For example, `git checkout --force "$CIRCLE_TAG"` or `git fetch --force origin '+refs/heads/master:refs/remotes/origin/master'`
 
 ## Known Issues
 
