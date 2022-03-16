@@ -3,7 +3,8 @@ layout: classic-docs
 title: "CircleCI のユーザー登録"
 short-title: "CircleCI のユーザー登録"
 description: "CircleCI 導入の第一歩"
-categories: [はじめよう]
+categories:
+  - はじめよう
 order: 2
 version:
   - Cloud
