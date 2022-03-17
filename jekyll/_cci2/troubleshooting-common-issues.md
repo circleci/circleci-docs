@@ -20,7 +20,7 @@ However, it is still possible to trigger a specific workflow using the "[Trigger
 
 For example, if you have the following `workflows` declared in your `config.yml`:
 
-```yaml
+```yml
 workflows:
   version: 2
   build:
@@ -36,7 +36,7 @@ workflows:
 
 You will need to declare the following [pipeline parameters](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration):
 
-```yaml
+```yml
 version: 2.1  
 parameters:
   run_workflow_build:
@@ -56,7 +56,7 @@ _**Note**: setting the parameters' default value to "true" will allow the workfl
 
 And modify the `workflows` section as follows:
 
-```yaml
+```yml
 workflows:
   version: 2
   build:
@@ -76,7 +76,7 @@ workflows:
 
 Using the above example, the cURL request to only run the `test` workflow would be (i_n the following requests your_ `vcs-slug` _will be_ `bitbucket` _or_ `github` _depending on which VCS you use_):
 
-```yaml
+```sh
 curl --request POST \
   --url https://circleci.com/api/v2/project/vcs-slug/org-name/repo-name/pipeline \
   --header 'Circle-Token: ***********************************' \
@@ -88,7 +88,7 @@ _**Note**: keep in mind that you have to use a [personal API token](https://circ
 
 For clarity, you could also pass the parameter corresponding to the workflow you wish to run. Doing so would have the exact same outcome as the above request because the pipeline parameters were declared with a default value set to "true":
 
-```yaml
+```sh
 curl --request POST \
   --url https://circleci.com/api/v2/project/vcs-slug/org-name/repo-name/pipeline \
   --header 'Circle-Token: ***********************************' \
@@ -214,7 +214,7 @@ Because of [how DLC works](https://circleci.com/docs/2.0/docker-layer-caching/#h
 
 Alternatively, you can use the config below to run a very short job that consumes all 50 DLC volumes and purges docker caches. You can push it to a feature branch without disrupting your main branches:
 
-```yaml
+```yml
 version: 2  
  jobs:    
   docker-purge:  
@@ -258,7 +258,7 @@ Ensure that the command and/or entrypoint are correct so that the container can 
 
 Docker executor users can output the max memory consumed by a job by adding the following step to their config:
 
-```yaml
+```yml
 - run:  
     command: cat /sys/fs/cgroup/memory/memory.max_usage_in_bytes  
     when: always
@@ -275,7 +275,7 @@ This can help troubleshoot out-of-memory (OOM) errors.
 
 To log memory usage over time for both Docker and machine executors, you can also add this step as the first step in your job:
 
-```yaml
+```yml
 - run:  
     command: |  
       while true; do  
@@ -291,7 +291,7 @@ To log memory usage over time for both Docker and machine executors, you can als
 
 Alternatively, we can also take advantage of [the top command](https://man7.org/linux/man-pages/man1/top.1.html) (available on Docker, Machine (Linux) or MacOS executors). This can help show both memory and CPU utilization by individual processes.
 
-```yaml
+```yml
 - run:  
     name: Profile CPU and memory every 5s (background)  
     command: |  
@@ -348,7 +348,7 @@ _Note: Use the following with caution. Ensure you absolutely need this functiona
 
 The easiest way to implement this is to set up the step as follows:
 
-```yaml
+```yml
 - run: my_cool_command || true
 ```
 
@@ -356,7 +356,7 @@ This ensures that the step always returns a zero exit code, regardless of if the
 
 If you have a mutli-line command, or a script file, then you may consider overriding the default shell options to ensure an exit code zero is passed:
 
-```yaml
+```yml
 - run:  
     shell: /bin/bash  
     command: |  
@@ -497,7 +497,7 @@ run: ssh -V
 
 You can tell if you fall into this category if any of your jobs look like this:
 
-```yaml
+```yml
 jobs:
   build:
     machine: true # This is using the default old machine image
@@ -507,7 +507,7 @@ jobs:
 
 Or it may look like this which is an example of a 14.04 based image:
 
-```yaml
+```yml
 jobs:
   build:
     machine:
@@ -529,7 +529,7 @@ The following options are available, [given the deprecation of older images](htt
    2. This can also be done [via the API](https://circleci.com/docs/api/v2/#operation/createCheckoutKey "https://circleci.com/docs/api/v2/#operation/createCheckoutKey")
 3. Add a `run` step before your `- checkout` step that installs OpenSSH 7.2 or greater, as an example, this would install OpenSSH 8.1p1:
 
-```yaml
+```yml
 jobs:
   jobname:
     machine: true
@@ -559,7 +559,7 @@ The following options are available, given the support for the legacy `circleci`
    2. This can also be done [via the API](https://circleci.com/docs/api/v2/#operation/createCheckoutKey "https://circleci.com/docs/api/v2/#operation/createCheckoutKey")
 3. Add a `run` step before your `- checkout` step that installs OpenSSH 7.2 or greater, as an example, this would install OpenSSH 8.1p1:
 
-```yaml
+```yml
 jobs:
   jobname:
     docker:
@@ -593,7 +593,7 @@ With the above in mind, you'll really only be affected on your custom docker ima
 
 2\. Add a `run` step before your `- checkout` step that installs OpenSSH 7.2 or greater, as an example, this would install OpenSSH 8.1p1:
 
-```yaml
+```yml
 jobs:
   jobname:
     docker:
@@ -613,7 +613,7 @@ jobs:
 
 3\. If `git` is not installed on the image, you’ll need to install that before the `- checkout` step, an example of doing that here:
 
-```yaml
+```yml
 - run:
       name: Install git for checkout
       command: |
@@ -987,7 +987,7 @@ With the [recent addition of advanced logic in a config file](https://discuss.ci
 {: #job-step-example }
 {:.no_toc}
 
-```yaml
+```yml
 - when:
     condition:
       or:
@@ -1004,7 +1004,7 @@ With the [recent addition of advanced logic in a config file](https://discuss.ci
 {: #workflow-example }
 {:.no_toc}
 
-```yaml
+```yml
 workflows:
   conditional-workflow:
     when:
@@ -1019,7 +1019,7 @@ workflows:
 
 Conditions can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels. This allows for some complex logic, as an example of multiple nested conditions:
 
-```yaml
+```yml
 - when:
     condition:
       or:
@@ -1048,7 +1048,7 @@ Conditions can be nested in an arbitrary fashion, according to their argument sp
 
 You can filter your workflows to run on specific branches by adding the **filters** key to the job name in your **workflows** section.
 
-```yaml
+```yml
 workflows:  
     build:  
       jobs:  
@@ -1061,7 +1061,7 @@ workflows:
 
 It can also be used to prevent later jobs unless they are running on a specific branch
 
-```yaml
+```yml
 workflows:  
   build:  
     jobs:  
@@ -1144,7 +1144,7 @@ _**Note that you must use one of the following executors:**_
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
 * If the VPN client authentication is credentials-based (user-locked profile), you'll also need to add the username and password as environment variables (`VPN_USER` and `VPN_PASSWORD`).
 
-```yaml
+```yml
 version: 2.1
 workflows:
   btd:
@@ -1245,7 +1245,7 @@ jobs:
 * Make sure to [install the proper repository for the Ubuntu release](https://openvpn.net/cloud-docs/openvpn-3-client-for-linux/#installation-for-debian-and-ubuntu) you're using
 * With OpenVPN 3 Linux, storing user credentials in a text-based file to use when starting a VPN connection is **unsupported**. Please refer to [this documentation (OpenVPN 3 Linux and --auth-user-pass)](https://openvpn.net/openvpn-3-linux-and-auth-user-pass/) to set up a workaround.
 
-```yaml
+```yml
 version: 2.1
 workflows:
   btd:
@@ -1338,7 +1338,7 @@ Also, we suggest storing the default gateway IP address in an environment variab
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
 * If the VPN client authentication is credentials-based (user-locked profile), you'll also need to add the username and password as environment variables (`VPN_USER` and `VPN_PASSWORD`).
 
-```yaml
+```yml
 version: 2.1
 workflows:
   btd:
@@ -1449,7 +1449,7 @@ jobs:
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
 * If the VPN client authentication is credentials-based (user-locked profile), you'll also need to add the username and password as environment variables (`VPN_USER` and `VPN_PASSWORD`).
 
-```yaml
+```yml
 version: 2.1
 
 orbs:
@@ -1586,7 +1586,7 @@ Some test runners and tools make use of what is known as output buffering. This 
 
 In Python, this can be sometimes be disabled via the [PYTHONUNBUFFERED](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONUNBUFFERED) environment variable. This can be set in a job step via export:
 
-```yaml
+```yml
 steps:  
   - run:  
       name: Run Tests  
@@ -1597,7 +1597,7 @@ steps:
 
 If the task does not have a way to generate any output, the default context deadline can be increased
 
-```yaml
+```yml
 steps:  
  - run:  
      name: Run Tests  
