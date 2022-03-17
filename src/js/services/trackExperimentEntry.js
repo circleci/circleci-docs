@@ -7,7 +7,6 @@ const trackExperimentEntry = () => {
   const anonymousId = window.OptimizelyClient.getAnonymousId();
 
   window.OptimizelyClient.getUserId().then((userId) => {
-
     let properties = {
       id: uuidv4(),
       timestamp: new Date().toISOString(),
