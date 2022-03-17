@@ -9,6 +9,7 @@ version:
 ---
 
 #  API
+{: #api }
 
 <details markdown=block>
 <summary>How to trigger a workflow via CircleCI API v2</summary>
@@ -51,8 +52,8 @@ parameters:
     type: boolean
 ```
 
-_**Note**: setting the parameters' default value to "true" will allow the workflows to run when the pipeline is triggered by pushing commits._ 
-  
+_**Note**: setting the parameters' default value to "true" will allow the workflows to run when the pipeline is triggered by pushing commits._
+
 And modify the `workflows` section as follows:
 
 ```yaml
@@ -72,7 +73,7 @@ workflows:
       - job_c
 ```
 
-  
+
 Using the above example, the cURL request to only run the `test` workflow would be (i_n the following requests your_ `vcs-slug` _will be_ `bitbucket` _or_ `github` _depending on which VCS you use_):
 
 ```yaml
@@ -96,6 +97,7 @@ curl --request POST \
 ```
 
 ### References:
+{: #references }
 {:.no_toc}
 
 * [Trigger a new pipeline: _CircleCI API (v2)_ _documentation_](https://circleci.com/docs/api/v2/#operation/triggerPipeline)
@@ -106,6 +108,7 @@ curl --request POST \
 </details>
 
 # Common Issues
+{: #common-issues }
 
 <details markdown=block>
 <summary>Why Do My Tests Pass Locally but Fail on CircleCI?</summary>
@@ -129,6 +132,7 @@ Please submit a [support ticket](https://support.circleci.com/hc/en-us) if you n
 <summary>Build "Not Running" due to concurrency limit but no other job is running</summary>
 
 ### Why is this happening?
+{: #why-is-this-happening }
 {:.no_toc}
 
 If a job is not starting and showing a status "**Not Running**" after you triggered a pipeline, it means that you have reached the **concurrency limit** of your plan.
@@ -140,6 +144,7 @@ However, customers on plans with a higher concurrency limit can also encounter t
 The delayed start of your job, and the fact it remains in a "Not Running" state before eventually starting, is due to the fact that other jobs are still running when the new job is triggered.
 
 ### Check for running SSH jobs
+{: #check-for-running-ssh-jobs }
 {:.no_toc}
 
 We found that this situation frequently arises due to running SSH jobs; once you navigate away from a running SSH job it won't appear in the pipelines view, so one can assume that no jobs are running at the time.
@@ -157,6 +162,7 @@ To do so, please follow instructions outlined in the Support article "[How to se
 </details>
 
 # Docker
+{: #docker }
 
 <details markdown=block>
 <summary>Docker Layer Caching FAQ</summary>
@@ -164,26 +170,31 @@ To do so, please follow instructions outlined in the Support article "[How to se
 [Docker Layer Caching (DLC)](https://circleci.com/docs/2.0/docker-layer-caching/#overview) can reduce Docker image build times on CircleCI by caching individual layers of any Docker images built as part of your jobs. Here are some frequently asked questions around DLC:
 
 ### **Is DLC available between different workflows under the same project?**
+{: #is-dlc-available-between-different-workflows-under-the-same-project }
 {:.no_toc}
 
 Yes, DLC is not locked to workflows or jobs. You can create a maximum of 50 DLC volumes per project (including any parallelism).
 
 ### **Why are subsequent builds not able to access the cache consistently?**
+{: #why-are-subsequent-builds-not-able-to-access-the-cache-consistently }
 {:.no_toc}
 
 If a job fails while calling a specific DLC volume, it would require rebuilding when calling it again, causing inconsistencies. It is worth noting that different jobs may also use different volumes. An example being if two `machine` jobs are run in parallel, they [will get different DLC volumes](https://circleci.com/docs/2.0/docker-layer-caching/#how-dlc-works).
 
 ### How can I delete my DLC cache instance?
+{: #how-can-i-delete-my-dlc-cache-instance }
 {:.no_toc}
 
 DLC caches are immutable, so they cannot be selectively deleted. However, a cache will be deleted after 3 days of not being used in a project.
 
 ### Is DLC guaranteed?
+{: #is-dlc-guaranteed }
 {:.no_toc}
 
 DLC is not guaranteed. If you are experiencing issues with cache-misses or need high-parallelism, consider try caching using [docker build](https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources), which you can optionally implement using the [CircleCI Docker orb](https://circleci.com/developer/orbs/orb/circleci/docker#commands-build).
 
 ### As an admin, can I see the content of a DLC volume?
+{: #as-an-admin-can-i-see-the-content-of-a-dlc-volume }
 {:.no_toc}
 
 While you can see what volume is used for each job, at this time, the content is unavailable.
@@ -215,8 +226,8 @@ version: 2
       - run: docker volume prune -f
 ```
 
-If you're running into issues where stale volume caches are causing problems often, then consider using our new [docker registry image cache orb](https://circleci.com/orbs/registry/orb/cci-x/docker-registry-image-cache) as a substitute. It's more suitable for projects that have high concurrency throughput, or jobs that use parallelism due to the limited number of volumes available.  
-  
+If you're running into issues where stale volume caches are causing problems often, then consider using our new [docker registry image cache orb](https://circleci.com/orbs/registry/orb/cci-x/docker-registry-image-cache) as a substitute. It's more suitable for projects that have high concurrency throughput, or jobs that use parallelism due to the limited number of volumes available.
+
 If you notice errors always happen on the same volume, which you can see by checking the "spin up environment" step or "remote docker" please [contact support ](https://support.circleci.com/hc/en-us/requests/new?ticket%5Fform%5Fid=855268)
 
 </details>
@@ -234,7 +245,7 @@ starting container process caused "process_linux.go:303:
 getting the final child's pid from pipe caused \"EOF\"": unknown
 ```
 
-This usually occurs due to a bad [command](https://circleci.com/docs/2.0/configuration-reference/#docker) being passed to one of the secondary service containers in your job. 
+This usually occurs due to a bad [command](https://circleci.com/docs/2.0/configuration-reference/#docker) being passed to one of the secondary service containers in your job.
 
 The error message occurs due to the secondary service container crashing or exiting prematurely. This means CircleCI cannot get the PID from the Docker daemon and exits with a failure.
 
@@ -255,12 +266,12 @@ Docker executor users can output the max memory consumed by a job by adding the 
 
 **This step should be added as the last step in your job, to identify the max usage after all of the previous steps have completed.**
 
-  
-**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds](https://circleci.com/docs/2.0/executor-types/#using-multiple-docker-images) will only report the memory usage of the primary image.  
-  
+
+**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds](https://circleci.com/docs/2.0/executor-types/#using-multiple-docker-images) will only report the memory usage of the primary image.
+
 Memory usage will be reported in bytes. You can convert to GiB using your favorite search engine to check it against the amount of RAM available to your job, according to its assigned [resource class](https://circleci.com/docs/2.0/configuration-reference/#resource%5Fclass).
 
-This can help troubleshoot out-of-memory (OOM) errors. 
+This can help troubleshoot out-of-memory (OOM) errors.
 
 To log memory usage over time for both Docker and machine executors, you can also add this step as the first step in your job:
 
@@ -277,9 +288,9 @@ To log memory usage over time for both Docker and machine executors, you can als
     background: true
 ```
 
-  
-Alternatively, we can also take advantage of [the top command](https://man7.org/linux/man-pages/man1/top.1.html) (available on Docker, Machine (Linux) or MacOS executors). This can help show both memory and CPU utilization by individual processes.  
-  
+
+Alternatively, we can also take advantage of [the top command](https://man7.org/linux/man-pages/man1/top.1.html) (available on Docker, Machine (Linux) or MacOS executors). This can help show both memory and CPU utilization by individual processes.
+
 ```yaml
 - run:  
     name: Profile CPU and memory every 5s (background)  
@@ -293,8 +304,8 @@ Alternatively, we can also take advantage of [the top command](https://man7.org/
     background: true
 ```
 
-**Note** that you have may have to install these tools, or use an alternative command if these tools are not available in the specific Executor.  
-  
+**Note** that you have may have to install these tools, or use an alternative command if these tools are not available in the specific Executor.
+
 To get the memory usage of the [Remote Docker environment](https://circleci.com/docs/2.0/building-docker-images/#accessing-the-remote-docker-environment), you can pass the ps command **through SSH** with
 
 `ssh remote-docker ps auxwwf`
@@ -302,11 +313,13 @@ To get the memory usage of the [Remote Docker environment](https://circleci.com/
 </details>
 
 # General
+{: #general }
 
 <details markdown=block>
 <summary>Validating your CircleCI Configuration</summary>
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 If you want to confirm your configuration file is free of syntax, YAML linting issues, etc. You can validate your config file using CircleCI's local CLI:
@@ -315,12 +328,13 @@ If you want to confirm your configuration file is free of syntax, YAML linting i
 * Run **`circleci config validate`**in your project's root directory
 
 ## Troubleshooting
+{: #troubleshooting }
 {:.no_toc}
 
 * Confirm your configuration file is in the right directory: **`.circleci/config.yml`**
 * Run **`circleci version`** and share your issue with [support@circleci.com](mailto:support@circleci.com)
 
-If you're still experiencing issues, please submit a support ticket to [support@circleci.com](mailto:support@circleci.com) 
+If you're still experiencing issues, please submit a support ticket to [support@circleci.com](mailto:support@circleci.com)
 
 </details>
 
@@ -359,12 +373,12 @@ For more details on how the default shell options work, and why they have been c
 <details markdown=block>
 <summary>No matching manifest for linux/amd64 in the manifest list entries</summary>
 
-In the "Spin up Environment" step, or elsewhere when pulling a Docker image from a repository, you may run into an error similar to the following: 
+In the "Spin up Environment" step, or elsewhere when pulling a Docker image from a repository, you may run into an error similar to the following:
 
 Step 1/26 : FROM <IMAGE>
 latest: Pulling from library/<IMAGE>
 no matching manifest for linux/amd64 in the manifest list entries
-Exited with code 1  
+Exited with code 1
 
 There are three possible reasons for this error.
 
@@ -378,6 +392,7 @@ The image you are trying to build may be designed to run on a different architec
 </details>
 
 # General / JavaScript & Node.js
+{: #general-javascript-and-nodejs }
 
 <details markdown=block>
 <summary>How can I increase the max memory for Node?</summary>
@@ -386,8 +401,8 @@ Node has a default max memory usage of less than 2GB on some 64bit systems. This
 
 `--max-old-space-size=<memory in MB>`
 
-The flag can be difficult to ensure is being used. Especially when node processes are forked. The best way to ensure this setting will be picked up by all node processes within the environment is to apply this setting directly to an environment variable, which can be done using Node. 8 or higher  
-  
+The flag can be difficult to ensure is being used. Especially when node processes are forked. The best way to ensure this setting will be picked up by all node processes within the environment is to apply this setting directly to an environment variable, which can be done using Node. 8 or higher
+
 `NODE_OPTIONS=--max-old-space-size=4096`
 
 _**Note**: If you have specified `export NODEOPTIONS=<value>` in your `package.json`, it'll override what you set in the `NODEOPTIONS` environment variable in the `config.yml` (either at the container, job, or step respective level)_
@@ -401,6 +416,7 @@ _**Note**: If you have specified `export NODEOPTIONS=<value>` in your `package.j
 </details>
 
 # Github
+{: #github }
 
 <details markdown=block>
 <summary>How to stop building by manually removing the CircleCI webhook and deploy key from your GitHub repository</summary>
@@ -410,8 +426,8 @@ You can stop building your project on CircleCI at any time by navigating to the 
 
 ![Fig_A.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/stop_building_0.png)
 
-In the event you are for some reason unable to stop building, you can always manually stop building by removing access to the repository from GitHub.  
-  
+In the event you are for some reason unable to stop building, you can always manually stop building by removing access to the repository from GitHub.
+
 Some reasons you may potentially need to do this:
 
 * You have renamed your Organization, Username, or Repository
@@ -440,11 +456,11 @@ This will stop the project from building on CircleCI in the event you need to ma
 <details markdown=block>
 <summary>GitHub SSH Deprecation Information & Resolutions</summary>
 
-[On March 15th, 2022 GitHub will be deprecating the types of SSH keys that can be utilized to access their service. ](https://github.blog/2021-09-01-improving-git-protocol-security-github/ "https://github.blog/2021-09-01-improving-git-protocol-security-github/")With this deprecation, there are circumstances that could cause your builds to fail on the repository checkout step after the 15th. 
+[On March 15th, 2022 GitHub will be deprecating the types of SSH keys that can be utilized to access their service. ](https://github.blog/2021-09-01-improving-git-protocol-security-github/ "https://github.blog/2021-09-01-improving-git-protocol-security-github/")With this deprecation, there are circumstances that could cause your builds to fail on the repository checkout step after the 15th.
 
 **If you meet one of the following criteria, you will need to take action before March 15th, 2022:**
 
-1. Project created between Nov 2nd, 2021 - January 13th, 2022 that has a job using an Ubuntu 14.04-based machine image, including the default `machine: true` image  
+1. Project created between Nov 2nd, 2021 - January 13th, 2022 that has a job using an Ubuntu 14.04-based machine image, including the default `machine: true` image
 \- If you don’t [specify a machine image](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images), you are using the default image and you’ll need to take action
 2. Project created between Nov 2nd, 2021 - January 13th, 2022 using [deprecated Docker image](https://circleci.com/docs/2.0/next-gen-migration-guide/#overview "https://circleci.com/docs/2.0/next-gen-migration-guide/#overview")
 3. Project using an uploaded DSA SSH key for checkout purposes
@@ -476,6 +492,7 @@ run: ssh -V
 ```
 
 ## Jobs using `machine: true` or specifying a `14.04 ubuntu` Machine image
+{: #jobs-using-machine-true-or-specifying-a-1404-ubuntu-machine-image }
 {:.no_toc}
 
 You can tell if you fall into this category if any of your jobs look like this:
@@ -506,9 +523,9 @@ org:CircleCI-Public circleci/classic path:.circleci filename:config.yml
 The following options are available, [given the deprecation of older images](https://discuss.circleci.com/t/old-linux-machine-image-remote-docker-deprecation/37572 "https://discuss.circleci.com/t/old-linux-machine-image-remote-docker-deprecation/37572"), **our recommendation is to update your image**. However, all options listed will solve the issue at hand.
 
 1. Update to a [newer machine image](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images "https://circleci.com/docs/2.0/configuration-reference/#available-machine-images") any listed on that page have the proper items installed
-2. Regenerate your deploy/user key in your project settings  
-   1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)  
-         1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed  
+2. Regenerate your deploy/user key in your project settings
+   1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)
+         1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed
    2. This can also be done [via the API](https://circleci.com/docs/api/v2/#operation/createCheckoutKey "https://circleci.com/docs/api/v2/#operation/createCheckoutKey")
 3. Add a `run` step before your `- checkout` step that installs OpenSSH 7.2 or greater, as an example, this would install OpenSSH 8.1p1:
 
@@ -530,14 +547,15 @@ jobs:
 ```
 
 ## Jobs using `circleci` convenience images (i.e. `circleci/ruby:2.2.6`)
+{: #jobs-using-circleci-convenience-images-ie-circleciruby226 }
 {:.no_toc}
 
 The following options are available, given the support for the legacy `circleci` images is going away, the preferred option is to update your image. However, all options listed will solve the issue at hand.
 
 1. Update to a [next-gen convenience image](https://circleci.com/docs/2.0/next-gen-migration-guide/#overview "https://circleci.com/docs/2.0/next-gen-migration-guide/#overview"), all next-gen images have the proper items installed
-2. Regenerate your deploy/user key in your project settings  
-   1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)  
-         1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed  
+2. Regenerate your deploy/user key in your project settings
+   1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)
+         1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed
    2. This can also be done [via the API](https://circleci.com/docs/api/v2/#operation/createCheckoutKey "https://circleci.com/docs/api/v2/#operation/createCheckoutKey")
 3. Add a `run` step before your `- checkout` step that installs OpenSSH 7.2 or greater, as an example, this would install OpenSSH 8.1p1:
 
@@ -560,15 +578,16 @@ jobs:
 ```
 
 ## Jobs using [custom](https://circleci.com/docs/2.0/custom-images/ "https://circleci.com/docs/2.0/custom-images/") or non-circleci Docker images
+{: #jobs-using-customhttpscirclecicomdocs20custom-images-httpscirclecicomdocs20custom-images-or-non-circleci-docker-images }
 {:.no_toc}
 
-If the docker image you are utilizing has OpenSSH 7.2 or greater, and `git` installed, you do not need to make any changes. With both those requirements met, you’ll have no issues with the deprecation. In addition, if your image has _neither_ installed, you'll also not be affected as we'll take care of the checkout process on our side. 
+If the docker image you are utilizing has OpenSSH 7.2 or greater, and `git` installed, you do not need to make any changes. With both those requirements met, you’ll have no issues with the deprecation. In addition, if your image has _neither_ installed, you'll also not be affected as we'll take care of the checkout process on our side.
 
 With the above in mind, you'll really only be affected on your custom docker images if you specifically installed an old OpenSSH version.
 
 1\. Regenerate your deploy/user key in your project settings
 
-* This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)  
+* This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)
    * Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed
 * This can also be done [via the API](https://circleci.com/docs/api/v2/#operation/createCheckoutKey "https://circleci.com/docs/api/v2/#operation/createCheckoutKey")
 
@@ -604,6 +623,7 @@ jobs:
 4\. Swap to a different image, or build a custom image, that has both the proper OpenSSH version and `git` installed -- or one that doesn't have either installed.
 
 ## Projects with manually uploaded DSA or RSA SHA1 SSH keys
+{: #projects-with-manually-uploaded-dsa-or-rsa-sha1-ssh-keys }
 {:.no_toc}
 
 If you [manually uploaded an SSH key](https://circleci.com/docs/2.0/add-ssh-key/#overview) to use for checkout purposes, and that key is DSA, you’ll need to update the key to have it continue to work.
@@ -632,6 +652,7 @@ You will want to ensure that the person who runs this script, AKA the personal A
 Viewing webhooks on GitHub can be a useful diagnostic tool when attempting to discover why perhaps a push to your repo has potentially not resulted in a job on CircleCI.
 
 ## What is a webhook?
+{: #what-is-a-webhook }
 {:.no_toc}
 
 A webhook is what allows CircleCI to automatically take action every time you push a commit. GitHub will send us a packet of information about your project when a number of events occur, a _"_ _push"_ being the most popular.
@@ -639,24 +660,25 @@ A webhook is what allows CircleCI to automatically take action every time you pu
 [GitHub developer docs | Webhooks](https://docs.github.com/en/developers/webhooks-and-events/about-webhooks)
 
 ## How to find your webhooks
+{: #how-to-find-your-webhooks }
 {:.no_toc}
 
 1. Navigate to your repository's settings page.
 2. Select "**Webhooks**"in the left menu. (Alternatively, you can reach this page directly -> _https://github.com/<ORG>/<REPO>/settings/hooks)_
-3. You should now see a page similar to the following:  
-    
+3. You should now see a page similar to the following:
+
 ![GH repo settings]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_1.png)
 
-4. From here, click on the CircleCI webhook URL, and scroll down to "**Recent Deliveries**".  
-    
+4. From here, click on the CircleCI webhook URL, and scroll down to "**Recent Deliveries**".
+
 ![CircleCI webhook url recent deliveries]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_2.png)
 
-5. Click on any entry to view the delivery details. This will show the Headers and Payload of the webhook.  
-    
+5. Click on any entry to view the delivery details. This will show the Headers and Payload of the webhook.
+
 ![GH repo settings]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_3.png)
 
-The **X-GitHub-Delivery** value (which is the same as the id you clicked on to open this delivery) is useful for tracking your webhook. Support can use this to do further investigation if needed.  
-  
+The **X-GitHub-Delivery** value (which is the same as the id you clicked on to open this delivery) is useful for tracking your webhook. Support can use this to do further investigation if needed.
+
 In the **Payload** section under the **SHA** value, you can find the commit hash to ensure the webhook is referring to the correct commit.
 
 You can also check the response back from CircleCI when GitHub sent the response. Switch from the "**Request**" tab to the "**Response**" tab. If you see a "200" response, your WebHook was delivered successfully.
@@ -669,6 +691,7 @@ You can also check the response back from CircleCI when GitHub sent the response
 <summary>My GitHub organization is not listed</summary>
 
 ## 1\. Check oAuth app access restrictions
+{: #1-check-oauth-app-access-restrictions }
 {:.no_toc}
 
 Check to make sure CircleCI is enabled in your GitHub organization third-party app restrictions in your **Organization Settings**. You can read more about these restrictions on the GitHub docs page.
@@ -679,6 +702,7 @@ Check to make sure CircleCI is enabled in your GitHub organization third-party a
 
 
 ## 2\. Check the application page on GitHub
+{: #2-check-the-application-page-on-github }
 {:.no_toc}
 
 You may also need to enable CircleCI on the individual application page. You can do so with the following steps:
@@ -694,7 +718,8 @@ You may also need to enable CircleCI on the individual application page. You can
 
 You may have a use case for creating a new commit and pushing it to the same repository as part of your CircleCI job.
 
-## Configuration Steps 
+## Configuration Steps
+{: #configuration-steps }
 {:.no_toc}
 
 Here is how you can configure your CircleCI project to enable the above-mentioned use case.
@@ -706,6 +731,7 @@ Here is how you can configure your CircleCI project to enable the above-mentione
 1b) If you wish to use a read-write deployment key, follow the steps here to create it and configure the project so that the key has write permissions for it: <https://circleci.com/docs/2.0/gh-bb-integration/#creating-a-github-user-key> or <https://circleci.com/docs/2.0/gh-bb-integration/#creating-a-bitbucket-user-key> for Bitbucket users
 
 ## Common Issues:
+{: #common-issues }
 {:.no_toc}
 
 1) "\*\*\* Please tell me who you are." error message upon running "git commit"
@@ -715,7 +741,7 @@ In your CircleCI configuration file (config.yml), you might have to add commands
 git config user.email "username@mydomain.com"  
 git config user.name "My Name"
 
-  
+
 2) Running git push results in "ERROR: The key you are authenticating with has been marked as read only."
 
 The deploy key that the project is configured with, by default when you add a project on CircleCI, only has read access, so a key with write permissions needs to be configured to be used, to avoid the above error message. Please ensure that a user key or a read-write deployment key has been configured for the project (See "Configuration Steps" above).
@@ -731,7 +757,7 @@ To prevent a commit from triggering a new build, add "\[skip ci\]" to the commit
 <details markdown=block>
 <summary>Troubleshooting CircleCI access after enabling Github SSO</summary>
 
-A GitHub organization owner can[ enable SAML protection](https://docs.github.com/en/organizations/managing-saml-single-sign-on-for-your-organization/about-identity-and-access-management-with-saml-single-sign-on) for their org, which requires members to authenticate via SSO (e.g. Okta) before they are able to access any resources associated with that organization. When SSO/SAML protection is enabled, previously issued OAuth tokens for applications such as CircleCI become invalid for that organization, and future user GitHub authentication to CircleCI without an active SAML session will result in a loss of access to protected orgs. 
+A GitHub organization owner can[ enable SAML protection](https://docs.github.com/en/organizations/managing-saml-single-sign-on-for-your-organization/about-identity-and-access-management-with-saml-single-sign-on) for their org, which requires members to authenticate via SSO (e.g. Okta) before they are able to access any resources associated with that organization. When SSO/SAML protection is enabled, previously issued OAuth tokens for applications such as CircleCI become invalid for that organization, and future user GitHub authentication to CircleCI without an active SAML session will result in a loss of access to protected orgs.
 
 When CircleCI attempts to fetch the `config.yml of a project or read other org resources on behalf of a user, and that user has not authorized access to the SAML-protected org as part of the GitHub OAuth flow (see below), the operation will fail. This can impact UI/API interactions, as well as pipeline creation. In the case of VCS-initiated pipelines, GitHub will show a successful webhook delivery in the repository settings, but CircleCI will not be able to fetch the config and a pipeline will not be created.
 
@@ -740,8 +766,8 @@ The solution to this problem is for the user to revoke their CircleCI credential
 1. Go to your personal OAuth application settings for CircleCI: [CircleCI OAuth App ](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb)
 2. Click “Revoke access” and confirm.
 3. Go to <https://app.circleci.com> and log out if necessary.
-4. Log back in to CircleCI via GitHub (), or after logging in via another means (e.g. email+password), re-connect your VCS identity (<https://app.circleci.com/settings/user>)  
-   1. When prompted, be sure to click “Authorize” for any SAML-protected orgs you need access to  
+4. Log back in to CircleCI via GitHub (), or after logging in via another means (e.g. email+password), re-connect your VCS identity (<https://app.circleci.com/settings/user>)
+   1. When prompted, be sure to click “Authorize” for any SAML-protected orgs you need access to
    2. Click “Continue” to be redirected to CircleCI
 
 It’s important to note that CircleCI only stores a _single_ OAuth token for each GitHub user, _regardless_ of how many orgs they interact within CircleCI. This means that, if a user regularly interacts with multiple orgs, and does not want to re-authenticate when switching between them, it is recommended that they authorize SAML-protected orgs on _every_ re-authentication to CircleCI via GitHub, including when switching devices. This will prevent access-related problems arising from that user’s actions on either platform, e.g. failure to create CircleCI pipelines based when pushing commits.
@@ -755,6 +781,7 @@ If you are an org admin and are interested in some preventative steps or how you
 <summary>How do I deactivate or remove my account?</summary>
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 CircleCI connects your GitHub or Bitbucket account to our system when granting access to the VCS of your choice.
@@ -762,6 +789,7 @@ CircleCI connects your GitHub or Bitbucket account to our system when granting a
 If you no longer want to build on CircleCI, visit your projects page and unfollow all projects. Your account will no longer be active.
 
 ## Delete account
+{: #delete-account }
 {:.no_toc}
 
 If you would like full deletion of your account, please submit a [support ticket](https://support.circleci.com/hc/en-us) or contact [privacy@circleci.com](mailto:support@circleci.com).
@@ -780,21 +808,21 @@ Please reply to the email as soon as possible so that we can begin the deletion 
 
 
 > Hi,
-> 
+>
 > We have received your Data Deletion Request. Please respond to the following questions, accordingly.`
-> 
+>
 > As a part of our data deletion process, we ask that you respond to this message confirming you are requesting the full deletion of one or all of the following:
-> 
+>
 > * Organization or Account or Both: ______
-> 
+>
 > Can you:
-> 
+>
 > * Confirm if you would like to delete an Organization. `If so, please provide the Organization Name (case-sensitive) here and indicate if GitHub, Bitbucket, or both: _______`
-> 
+>
 > * Confirm if you would like to delete an account, if so please provide your associated email address and VCS username, indicating if it is Github or Bitbucket: _______
-> 
+>
 > If you are only requesting to be unsubscribed from marketing e-mails, please do confirm that you would not like any data deleted but are unsubscribing.
-> 
+>
 > Best regards,
 
 **Note**: In case, we don't receive a reply, the ticket will be closed automatically and we won't be able to delete the account.
@@ -832,6 +860,7 @@ Depending on the VCS you're using ([GitHub](#h%5F01ENQJ8A7ZTV38JV7NHCHKE51D) or 
 **NOTE: Taking the steps below will clear any [user keys](https://circleci.com/docs/2.0/gh-bb-integration/#deployment-keys-and-user-keys) that have been generated for any of your projects.**
 
 ### GitHub users
+{: #github-users }
 {:.no_toc}
 
 1. Sign out of your CircleCI account
@@ -840,6 +869,7 @@ Depending on the VCS you're using ([GitHub](#h%5F01ENQJ8A7ZTV38JV7NHCHKE51D) or 
 4. Sign back into your CircleCI account
 
 ### Bitbucket users
+{: #bitbucket-users }
 {:.no_toc}
 
 1. Sign out of your CircleCI account
@@ -850,18 +880,19 @@ Depending on the VCS you're using ([GitHub](#h%5F01ENQJ8A7ZTV38JV7NHCHKE51D) or 
 </details>
 
 # Login/Permissions
+{: #loginpermissions }
 
 <details markdown=block>
 <summary>Permission Denied When Creating Directory or Writing a File</summary>
 
-If you receive an error telling you that you do not have permissions to create a directory or to write a file to a directory then this is likely an indication that your script is attempting to write to a directory that the user running the build does not own. 
+If you receive an error telling you that you do not have permissions to create a directory or to write a file to a directory then this is likely an indication that your script is attempting to write to a directory that the user running the build does not own.
 
-This is a somewhat common pitfall that many users run into when the move into a CI environment. 
+This is a somewhat common pitfall that many users run into when the move into a CI environment.
 
 The key thing to remember is that the builds run as the `distiller` user on MacOS builds and typically `ubunutu` on Linux builds. These users only have write permissions in their `$HOME` folders and places like `/tmp`. This is not unique to CI, this is true by default in almost all Linux/Unix environments.
 
-To confirm which user your build runs as you can run the `whoami` command as a part of your build process.  
-  
+To confirm which user your build runs as you can run the `whoami` command as a part of your build process.
+
 Solution
 
 1. Store things inside of a folder that the user running the build has permissions to.
@@ -888,6 +919,7 @@ CircleCI recognizes users as whomever triggers a build by committing on GitHub. 
 </details>
 
 # MacOS
+{: #macos }
 
 <details markdown=block>
 <summary>Xcode 12.5 - Unable to build chain to self-signed root for signer</summary>
@@ -922,9 +954,9 @@ Then include it in the project's root. Afterward, it can be imported into the te
 <details markdown=block>
 <summary>fastlane gym failed with "** ARCHIVE FAILED **" error message (exit status 65)</summary>
 
-It is difficult to find out the issue from the above error message alone, as the [exit code 65](https://circleci.com/blog/xcodebuild-exit-code-65-what-it-is-and-how-to-solve-for-ios-and-macos-builds/) is used as a general xcodebuild error code. Hence there could be many reasons why the build failed at the archive step. 
+It is difficult to find out the issue from the above error message alone, as the [exit code 65](https://circleci.com/blog/xcodebuild-exit-code-65-what-it-is-and-how-to-solve-for-ios-and-macos-builds/) is used as a general xcodebuild error code. Hence there could be many reasons why the build failed at the archive step.
 
-You can try the following steps to troubleshoot this problem. 
+You can try the following steps to troubleshoot this problem.
 
 1. Check your [Code Signing setting](/hc/en-us/articles/115015983028)
 2. Check your environment variables. (For example: Build Number) If the build succeeds on your local machine but fails in the CI environment, there could be environment variables defined on the local machine, but not made available to builds on CircleCI, causing the build to fail.
@@ -942,6 +974,7 @@ You can try the following steps to troubleshoot this problem.
 </details>
 
 # Pipelines, Workflows, and Jobs
+{: #pipelines-workflows-and-jobs }
 
 <details markdown=block>
 <summary>Conditional steps in jobs and conditional workflows</summary>
@@ -951,6 +984,7 @@ With the [recent addition of advanced logic in a config file](https://discuss.ci
 [Specific logic statements can be used](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to create multiple nested conditions, that will always at the top level result in `true` or `false` \-- which in turn determines if the workflow or steps are triggered.
 
 ### Job Step Example
+{: #job-step-example }
 {:.no_toc}
 
 ```yaml
@@ -967,6 +1001,7 @@ With the [recent addition of advanced logic in a config file](https://discuss.ci
 ```
 
 ### Workflow Example
+{: #workflow-example }
 {:.no_toc}
 
 ```yaml
@@ -981,7 +1016,7 @@ workflows:
     jobs:
       - job-on-condition
 ```
- 
+
 Conditions can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels. This allows for some complex logic, as an example of multiple nested conditions:
 
 ```yaml
@@ -1045,6 +1080,7 @@ workflows:
 </details>
 
 # Settings
+{: #settings }
 
 <details markdown=block>
 <summary>How to insert files as environment variables with Base64</summary>
@@ -1094,6 +1130,7 @@ _**Note that you must use one of the following executors:**_
 * [windows](#h%5F01F7XH9G40MXW14H2GFHRD8XXJ)
 
 ## `machine` \[Linux\] executor ([Available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images))
+{: #machine-linux-executor-available-machine-imageshttpscirclecicomdocs20configuration-referenceavailable-machine-images }
 {:.no_toc}
 
 * [OpenVPN (2.x)](#openvpn)
@@ -1101,6 +1138,7 @@ _**Note that you must use one of the following executors:**_
 * [L2TP](#l2tp)
 
 #### **OpenVPN (2.x)**
+{: #openvpn-2x }
 {:.no_toc}
 
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
@@ -1200,6 +1238,7 @@ jobs:
 ```
 
 #### OpenVPN Connect (OpenVPN 3)
+{: #openvpn-connect-openvpn-3 }
 {:.no_toc}
 
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
@@ -1281,6 +1320,7 @@ jobs:
 ```
 
 #### L2TP
+{: #l2tp }
 {:.no_toc}
 
 To set up an L2TP VPN connection, we recommend referring to [this guide.](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients.md#configure-linux-vpn-clients-using-the-command-line)
@@ -1292,6 +1332,7 @@ Also, we suggest storing the default gateway IP address in an environment variab
 * `DEFAULT_GW_IP=$(ip route show default|awk '{print $3}')`
 
 ## `macos` executor ([Supported Xcode versions](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions))
+{: #macos-executor-supported-xcode-versionshttpscirclecicomdocs20testing-iossupported-xcode-versions }
 {:.no_toc}
 
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
@@ -1402,6 +1443,7 @@ jobs:
 ```
 
 ## `windows` executor ([Windows executor images](https://circleci.com/docs/2.0/hello-world-windows/#windows-executor-images))
+{: #windows-executor-windows-executor-imageshttpscirclecicomdocs20hello-world-windowswindows-executor-images }
 {:.no_toc}
 
 * Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
@@ -1486,7 +1528,7 @@ jobs:
 <details markdown=block>
 <summary>How to generate and store read/write SSH keys</summary>
 
-If you want to enable write-permissions to your checkout repo within a job, interact with other private repositories entirely, you'll need to add an SSH key to CircleCI which provides write access. 
+If you want to enable write-permissions to your checkout repo within a job, interact with other private repositories entirely, you'll need to add an SSH key to CircleCI which provides write access.
 
 Check out our docs with [with full instructions to generate and add the keys](https://circleci.com/docs/2.0/add-ssh-key/)
 
@@ -1505,34 +1547,35 @@ See GitHub and Bitbucket documentation for guidelines on storing SSH public keys
 
 If you revoke OAuth access to the CircleCI app on your VCS provider it will disable the keys that we used to authorize your account. We do not receive notifications when the auth is revoked, and may still attempt to use the now revoked auth. For instance, you may encounter this when trying to submit a PR to an open source project that uses CircleCI and it does not trigger. If you encounter this issue [submit a support ticket](https://support.circleci.com/hc/en-us/requests/new) and we can resolve it for you.
 
-  
+
 **If you're following the fork instead of the upstream repo**
 
 Sometimes you'll have a user who submits a pull request to your repository from a fork, but no pipeline will be triggered with the pull request. This can happen when the user is following the project fork on their personal account rather than the project itself on CircleCI.
 
-This will cause the jobs to trigger under the user's personal account. If the user is following a fork of the repository on CircleCI, we will only build on that fork and not the parent, so the parent’s PR will not get status updates. 
+This will cause the jobs to trigger under the user's personal account. If the user is following a fork of the repository on CircleCI, we will only build on that fork and not the parent, so the parent’s PR will not get status updates.
 
 In these cases have the user unfollow their fork of the project on CircleCI and follow the source project instead. This will trigger their jobs to run under the organization when they submit pull requests.
 
 **Note: This feature is not currently supported for BitBucket users.**
 
-**If the branch and the pull request happen to be created simultaneously**  
-  
-You might experience builds that are pull requests not running with the error message "This project is configured to only run builds that have open pull requests associated with them. Update the ['Only build pull requests'](https://circleci.com/gh/UrbanCompass/uc-frontend/edit#advanced-settings) setting to run this build." 
+**If the branch and the pull request happen to be created simultaneously**
+
+You might experience builds that are pull requests not running with the error message "This project is configured to only run builds that have open pull requests associated with them. Update the ['Only build pull requests'](https://circleci.com/gh/UrbanCompass/uc-frontend/edit#advanced-settings) setting to run this build."
 
 This happens due to a race condition when a branch is created and a pull request is opened simultaneously. CircleCI will receive notification the branch was created, and will not run the build because it is not a pull request.
 
 We will then receive a second notification of a pull request being opened, with the same commit hash. Since we will never run the same commit hash twice, the build is updated in the UI, but never ran.
 
-To ensure this doesn't happen to builds with "Only build pull requests" turned on, you can disable the "Branch or tag creation" setting in Github. This will ensure that the only webhooks we receive are when the pull request is open.  
-  
-How to find your webhook settings: <https://support.circleci.com/hc/en-us/articles/360021511153-How-to-view-your-GitHub-WebHook-deliveries>  
-  
+To ensure this doesn't happen to builds with "Only build pull requests" turned on, you can disable the "Branch or tag creation" setting in Github. This will ensure that the only webhooks we receive are when the pull request is open.
+
+How to find your webhook settings: <https://support.circleci.com/hc/en-us/articles/360021511153-How-to-view-your-GitHub-WebHook-deliveries>
+
 Find this option, and uncheck the box.
 
 </details>
 
 # Troubleshooting and Common Issues
+{: #troubleshooting-and-common-issues }
 
 <details markdown=block>
 <summary>Build Fails with "Too long with no output (exceeded 10m0s): context deadline exceeded"</summary>
@@ -1567,6 +1610,7 @@ The job step can also timeout because there is an issue with the tests or task i
 </details>
 
 # Windows
+{: #windows }
 
 <details markdown=block>
 <summary>How to `sudo` on Powershell - Windows executor</summary>
@@ -1585,6 +1629,6 @@ iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 set-executionpolicy unrestricted -s cu -f  
 scoop install sudo
 
-By installing this, you can use `sudo` just like you're in Linux. However with this, it's basically doing the same thing with the above so it's not possible to see the output anyway. (You can see the script inside here: <https://github.com/lukesampson/psutils/blob/master/sudo.ps1>) 
+By installing this, you can use `sudo` just like you're in Linux. However with this, it's basically doing the same thing with the above so it's not possible to see the output anyway. (You can see the script inside here: <https://github.com/lukesampson/psutils/blob/master/sudo.ps1>)
 
 </details>
