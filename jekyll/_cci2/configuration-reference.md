@@ -1496,7 +1496,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ##### **`add_ssh_keys`**
-{: #addsshkeys }
+{: #add-ssh-keys }
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
 
