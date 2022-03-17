@@ -1,0 +1,7 @@
+en:
+- name: Continuous Release
+  children:
+    - name: Overview
+      link: continuous-release/overview
+    - name: Introduction
+      link: continuous-release/intro

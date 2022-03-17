@@ -27,7 +27,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "release"
+      type: "continuous-release"
     values:
       lang: "en"
 

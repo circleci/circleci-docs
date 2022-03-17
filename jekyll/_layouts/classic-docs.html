@@ -13,6 +13,8 @@ layout: compress
   {% assign lang = page.lang %}
   {% if page.collection == "style" %}
     {% assign sidenav = site.data.sidenavstyle[lang] %}
+  {% elsif page.collection == "continuous-release" %}
+    {% assign sidenav = site.data.sidenavrelease[lang] %}
   {% else %}
     {% assign sidenav = site.data.sidenav[lang] %}
   {% endif %}

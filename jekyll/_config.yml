@@ -130,9 +130,9 @@ collections:
     name: "Continuous Release Docs"
     site_section: true
     output: true
-    permalink: /release/:path/
-    prefix: "/release"
-    selectorName: "release"
+    permalink: /continuous-release/:path/
+    prefix: "/continuous-release"
+    selectorName: "continuous-release"
 
 
 twitter_username: circleci
@@ -160,7 +160,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "release"
+      type: "continuous-release"
     values:
       lang: "en"
 
