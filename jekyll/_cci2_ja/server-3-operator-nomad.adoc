@@ -2,9 +2,9 @@
 
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= Introduction to Nomad Cluster Operation
+= Nomad クラスタの操作ガイド
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+CircleCI では、プライマリジョブスケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
 
 toc::[]
 
