@@ -20,7 +20,7 @@ version:
     padding: 15px;
     margin: 20px 0;
 ">
-    Authenticating and installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a> ! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> (see below) before this option is available to you in the UI.
+    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a> ! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> (see below) before this option is available to you in the UI.
 </section>
 ++++
 
@@ -28,51 +28,48 @@ toc::[]
 
 == Prerequisites
 
-The installation process assumes you have installed the following utilities on your system:
+To install and run jobs, you will need to have the following utilities and tools installed on your system:
 
 * <<local-cli#installation,CircleCI CLI>> - Please note that if you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required. Check <<runner-for-server-compatibility, runner for server compatibility>> below.
 * https://curl.se/[curl] (installed by default on macOS)
-* sha256sum (installed as part of coreutils on Linux apt/yum, and on macOS via brew)
+* sha256sum (installed by default on most macOS and Linux machines)
 * https://systemd.io/[systemd] version 235+ (Linux only)
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 * Permissions to create a user, and create directories under `/opt`
-
-Running jobs requires you have the following tools available on your machine:
-
 * https://www.gnu.org/software/tar/[tar]
 * https://www.gnu.org/software/gzip/[gzip]
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
 * https://git-scm.com/[git] (recommended, but not required, installed by default on most macOS and Linux machines)
 
 === Self-hosted Runner Terms Agreement
-Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the **Runners** section of the https://app.circleci.com/[CircleCI web app], an administrator in your organization needs to navigate to **Organization Settings > Runners**, and agree to the terms. Once the terms have been accepted, **Runners** will appear permanently in the side navigation.
+Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the **Runners** section of the https://app.circleci.com/[CircleCI web app], an administrator in your organization needs to navigate to **Organization Settings > Runners**, and agree to the terms. Once the terms have been accepted, **Runners** will appear permanently in the side navigation. CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, check the admin permissions on your VCS.
 
 image::runnerui_terms.png[Runner Terms Agreement - Get started]
 
 If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
 
-== CircleCI web app: Authentication and installation
+== CircleCI web app installation
 
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
-In order to install self-hosted runners, you will need to create a namespace and authentication token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider.
+In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider.
 
 . On the https://app.circleci.com/[CircleCI web app], navigate to *Runners*.
 +
 image::runnerui_step_one.png[Runner set up, step one - Get started]
 +
-. Create a namespace and resource class for your organization's self-hosted runner resources. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
+. Create a namespace and resource class for your organization's self-hosted runners. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
 +
 image::runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
 +
-. Create a resource class token.
+. Create a resource class token. This token is used during the installation process to configure your runners.
 +
 image::runnerui_step_three.png[Runner set up, step three - Create a resource class token]
 +
-CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
+CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 +
-. After authenticating, you will need to follow the platform specific installation instructions to continue. Click the tab in the UI that is relevant to your environment (see image below). Please note that if you would like to use self-hosted runners on Kubernetes, the instructions are not included in the UI, and you will need to refer to the xref:runner-on-kubernetes.adoc[Kubernetes] page.
+. You will need to follow the platform specific installation instructions to continue. Click the tab in the UI that is relevant to your environment (see image below). Please note that if you would like to use self-hosted runners on Kubernetes, the instructions are not included in the UI, and you will need to refer to the xref:runner-on-kubernetes.adoc[Kubernetes] page.
 +
 image::runnerui_step_four.png[Runner set up on your specific machine]
 +
@@ -87,16 +84,16 @@ The post authentication platform-specific instructions are also documented on th
 . You will get a verification in the UI that a new self-hosted runner has been detected. You can then add your self-hosted runner to a project by copying all, or just the relevant parts of the code into your project's `.circleci/config.yml` file, depending on your existing config set up.
 +
 image::runnerui_step_five.png[Runner set up, copy code to config file]
++
+. You will now be able to see a list of your self-hosted runners on the CircleCI web app, on the inventory page.
 
-You will be able to see a list of your self-hosted runners on the CircleCI web app, on the inventory page.
-
-== Command line: Authentication and installation
+== Command line installation
 
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
 In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-. Create a namespace for your organization's self-hosted runner resources. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. 
+. Create a namespace for your organization's self-hosted runners. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. 
 +
 If you receive an error creating a namespace, check to see if you have an existing one, and move on to step 2 below, using your existing namespace.
 +
@@ -118,13 +115,13 @@ circleci runner resource-class create <name>/<resource-class> <description> --ge
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 
-CAUTION: The default token cannot be retrieved again, so be sure to store it safely.
+CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
-*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#post-authentication-platform-specific-instructions, Post authentication instructions>>.
+*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#platform-specific-instructions, Platform specific installation>> instructions.
 
 === Continued for Linux, macOS, and Server
 
-Be sure to complete the steps in the <<#authentication-and-installation-from-the-command-line, Authentication and installation>> section before moving on to the steps below.
+Be sure to complete the steps in the <<#command-line-installation, Command line installation>> section before moving on to the steps below.
 
 . Download the launch agent binary and verify the checksum.
 +
@@ -200,7 +197,7 @@ echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
-=== Post authentication platform-specific instructions
+=== Platform-specific instructions
 
 Please refer to the platform-specific installation instructions after you have created your namespace and resource class. These instructions are included in the UI when creating namespaces and resource classes from the CircleCI web app (with the exception of Kubernetes).
 
