@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Orb Authoring Process for Server"
-description: "Starting point for authoring CircleCI orbs for server."
+title: "サーバーでの Orb オーサリングプロセス"
+description: "サーバーでの CircleCI Orb のオーサリング入門ガイド."
 categories:
   - はじめよう
 order: 1
@@ -15,9 +15,9 @@ version:
 ## はじめに
 {: #introduction }
 
-This orb authoring guide assumes you have read the [Introduction to orbs]({{site.baseurl}}/2.0/orb-intro) document, the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-author-intro) document, and claimed your namespace. これらが終わっていれば、Orb の開発準備は完了です。
+この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/2.0/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/2.0/orb-author-intro)のドキュメントを読み、名前空間の要求を既に完了していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
-Orb を初めて作成する方も、本番レベルで準備する方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 一方で、Orb は[再利用可能な構成]({{site.baseurl}}/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/2.0/local-cli/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB) を使用してパブリッシュすることもできます。
+Orb を初めて作成する方も、本番レベルで準備する方も、[Orb 開発キット](#orb-development-kit)を使って Orb の作成を開始することをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/2.0/local-cli/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB) を使用してパブリッシュすることも可能です。
 
 ## Orb 開発キット
 {: #orb-development-kit }
@@ -34,17 +34,17 @@ Orb を初めて作成する方も、本番レベルで準備する方も、[Orb
 
 Orb 開発キットで新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
-Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. 組織が自分個人のもので、名前空間のオーナーが自分自身であれば、問題ありません。
+GitHub 上の組織 (Organization) が、Orb の作成先となる[CircleCI の名前空間]({{site.baseurl}}/2.0/orb-concepts/#namespaces)のオーナーになります。 組織が自分個人のもので、名前空間のオーナーが自分自身であれば、問題ありません。
 
-Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, then you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
+`--host` オプションを使用してローカルリポジトリの場所を指定することで、パブリッククラウドの Orb ではなくローカルサーバーの Orb にアクセスできます。 例えば、サーバーの場所が `http://circleci.somehostname.com` である場合、 `--host \http://cirlceci.somehostname.com` を渡すと、その Orb リポジトリに対してローカルで Orb コマンドを実行できます。
 
-1. **Create a new [GitHub repository](https://github.com/new).**
+1. **新しい [GitHub リポジトリ](https://github.com/new)を作成します。**
 <br>
-The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
+リポジトリの名前は、特に重要ではありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    完了すると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
-    **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
+    **注: **Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルダウンする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
     {: class="alert alert-warning"}
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation.**
