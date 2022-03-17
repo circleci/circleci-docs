@@ -119,7 +119,7 @@ This behavior has several possible explanations:
 * **Different package versions**. Explicitly specify package versions in your configuration file.
 * **Timezone troubles**. Some testing frameworks may not have timezone-aware modules. If the machine does not have a set timezone, some tests may fail. See [this question](https://circleci.com/docs/2.0/faq/#how-can-i-set-the-timezone-in-docker-images) in the FAQ for more details.
 * **File ordering**. Some filesystems maintain an ordered file structure for each directory. This means that all files are read in the same order during each run. However, the filesystems in our build containers are unordered. If your tests only pass when run in a certain order, they may fail on CircleCI.
-* **"Out of Memory" errors**. If a process in your build container uses too much memory, Linux's OOM killer may end it. If you are interested in recording your memory usage, visit [How to record a job's memory usage](/hc/en-us/articles/360043994872).
+* **"Out of Memory" errors**. If a process in your build container uses too much memory, Linux's OOM killer may end it. If you are interested in recording your memory usage, visit [How to record a job's memory usage]https://support.circleci.com//hc/en-us/articles/360043994872().
 * **Differing startup times**. Applications like Elasticsearch and PostgreSQL may take more time to start up on CircleCI. You can fix this by explicitly waiting for a service to be available before running tests.
 * **Unreliable services**. If your tests rely on a third-party service, check that the service is actually running.
 
@@ -958,7 +958,7 @@ It is difficult to find out the issue from the above error message alone, as the
 
 You can try the following steps to troubleshoot this problem.
 
-1. Check your [Code Signing setting](/hc/en-us/articles/115015983028)
+1. Check your [Code Signing setting](https://support.circleci.com/hc/en-us/articles/115015983028)
 2. Check your environment variables. (For example: Build Number) If the build succeeds on your local machine but fails in the CI environment, there could be environment variables defined on the local machine, but not made available to builds on CircleCI, causing the build to fail.
 3. Check fastlane's log for more information about why the fastlane command failed. The log may contain details about the root cause of the error, for instance missing provisioning profiles. The log path is printed in the output of the fastlane command, for example: /Users/distiller/driver-application/buildlogs/gym/DriverApplication-DriverApplication.log You could either SSH into a rebuild to access the log or upload the file as an [artifact](https://circleci.com/docs/2.0/artifacts/#uploading-artifacts).
 4. Check if Xcode SDK version should be defined in the gym configuration in the Fastfile
