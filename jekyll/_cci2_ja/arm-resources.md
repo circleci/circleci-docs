@@ -11,7 +11,7 @@ version:
 ここでは、CircleCI の Arm リソースを使う上で必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
 
 <div class="alert alert-warning" role="alert">
-  <strong>現在、Docker Executor では ARM をサポートしていません。</strong>この機能に関する更新については、下記のフィーチャーリクエスト 「<a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Docker Executor で ARM リソースクラスをサポートする</a>」を参照してください。
+  <strong>現在、Docker Executor では ARM をサポートしていません。</strong>この機能の更新については、下記のフィーチャーリクエスト 「<a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Docker Executor で ARM リソースクラスをサポートする</a>」を参照してください。
 </div>
 
 注: M1 Mac でビルドした Docker イメージは、デフォルトでは CircleCI の標準のプラットフォームとの互換性がありません。 "環境のスピンアップ" ジョブにはグリーン表示されますが、以下のメッセージが表示されます。
@@ -29,7 +29,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 使用するイメージは、次のものから選択できます。
 
-* `ubuntu-2004:202101-01` - 最新版であり、すべてのユーザーに推奨
+* `ubuntu-2004:202101-01` - 最新版。すべてのユーザーに推奨
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
 これらは  `machine` Executor リソースであり、お客様のジョブのために作成された専用の VM であるため、ジョブの実行が完了すると削除されます。
@@ -115,7 +115,7 @@ workflows:
 ## 制限事項
 {: #limitations }
 
-* 現在、実行可能ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
+* 現在、実行ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
 * 現時点では、32 ビット版の Arm アーキテクチャはサポートされていません。 サポート対象は 64 ビット版の `arm64` アーキテクチャのみです。
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるにつれ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
