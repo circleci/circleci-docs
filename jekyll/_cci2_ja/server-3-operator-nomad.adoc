@@ -93,7 +93,7 @@ nomad node-drain -enable -yes <node-id>
 
 === クライアントクラスタのスケールダウン
 
-クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain`  モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。  https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック]  を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
+クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain`  モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック] を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
 
 このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
 
