@@ -105,6 +105,21 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
+### Passing parameters when triggering pipelines using the UI
+{: #passing-parameters-when-triggering-pipelines-using-the-ui }
+
+In addition to using the CLI and API, you can also trigger a pipeline with parameters from the UI. To do this,
+
+  1. Navigate to the dashboard view in the UI.
+  2. Use the project filter to select the desired project.
+  3. Use the branch filter to select the branch on which you want to run the new pipeline.
+  4. Click the **Trigger Pipeline** button (towards the top right corner of the page).
+  5. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
+  6. Click **Trigger Pipeline**.
+
+**NOTE:** Please note that if you pass a parameter when triggering a pipeline via the UI, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`)
+
+
 ## The scope of pipeline parameters
 {: #the-scope-of-pipeline-parameters }
 
