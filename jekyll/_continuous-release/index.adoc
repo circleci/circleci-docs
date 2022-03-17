@@ -1,5 +1,13 @@
+---
+permalink: release/
+page-type: index
+toc: false
+---
 = Introduction
 :page-layout: classic-docs
+:page-liquid:
+
+HELLO?
 
 // = INSTALLATION GUIDE: A guide for using continuous release
 

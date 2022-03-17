@@ -2,6 +2,6 @@
 
 == Step 5: Install the Release Agent
 
-include::../includes/release-agent.adoc[]
+// include::../includes/release-agent.adoc[]
 
 Once you see an _Installation successful_ status, click *Next*.

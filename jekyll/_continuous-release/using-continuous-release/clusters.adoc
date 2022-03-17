@@ -10,7 +10,7 @@ The Clusters list shows the number of applications associated with each Kubernet
 
 To create a cluster, click *+Create Cluster* on the Clusters page.
 
-include::../includes/create-cluster.adoc[]
+// include::../includes/create-cluster.adoc[]
 
 === Editing a cluster
 

@@ -1,6 +1,6 @@
-:page-layout: classic-docs
-
 = Getting Started
+:page-layout: classic-docs
+:page-liquid:
 
 This guide walks you through the steps to complete your first release with Vamp, using the Quick Start Guide. You can use the Quick Start Guide to release up to six microservices.
 
@@ -22,16 +22,16 @@ Now follow the steps in the guide:
 . Install the Release Agent
 . Release Your Service
 
-include::step-1.adoc[]
+// include::step-1.adoc[]
 
-include::step-2.adoc[]
+// include::step-2.adoc[]
 
-include::step-3.adoc[]
+// include::step-3.adoc[]
 
-include::step-4.adoc[]
+// include::step-4.adoc[]
 
-include::step-5.adoc[]
+// include::step-5.adoc[]
 
-include::step-6.adoc[]
+// include::step-6.adoc[]
 
-include::next-steps.adoc[]
+// include::next-steps.adoc[]

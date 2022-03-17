@@ -18,16 +18,16 @@ If you are new to Vamp, begin with the Getting Started guide.
 
 // Search
 
-include::applications.adoc[]
+// include::applications.adoc[]
 
-include::clusters.adoc[]
+// include::clusters.adoc[]
 
-include::services.adoc[]
+// include::services.adoc[]
 
-include::releases.adoc[]
+// include::releases.adoc[]
 
-include::segments.adoc[]
+// include::segments.adoc[]
 
-include::policies.adoc[]
+// include::policies.adoc[]
 
-include::installing-release-agent.adoc[]
+// include::installing-release-agent.adoc[]

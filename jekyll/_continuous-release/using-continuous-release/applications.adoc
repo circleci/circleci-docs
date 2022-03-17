@@ -12,7 +12,7 @@ You can view your applications under the _Applications_ tab. Click the *+* sign 
 
 To create a new application, click the *+Create Application* button on the Applications page.
 
-include::../includes/applications.adoc[]
+// include::../includes/applications.adoc[]
 
 Once you have finished adding the details for your application, click **Create application** in the bottom left-hand corner. You will see a pop-up message to confirm that your application has been created.
 

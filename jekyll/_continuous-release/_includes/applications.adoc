@@ -12,7 +12,7 @@ Select your cluster name from the list, or add a new one by clicking **Create Ne
 
 === Creating a cluster
 
-include::create-cluster.adoc[]
+// include::create-cluster.adoc[]
 
 === Namespace
 
