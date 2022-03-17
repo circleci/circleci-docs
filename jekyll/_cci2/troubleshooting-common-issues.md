@@ -375,10 +375,12 @@ For more details on how the default shell options work, and why they have been c
 
 In the "Spin up Environment" step, or elsewhere when pulling a Docker image from a repository, you may run into an error similar to the following:
 
+```
 Step 1/26 : FROM <IMAGE>
 latest: Pulling from library/<IMAGE>
 no matching manifest for linux/amd64 in the manifest list entries
 Exited with code 1
+```
 
 There are three possible reasons for this error.
 
