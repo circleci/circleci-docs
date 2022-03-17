@@ -40,13 +40,13 @@ Nomad Pod には `nomad` CLI がインストールされています。 Nomad �
 
 kubectl exec -it nomad-server-pod-ID -- nomad status
 
-The `Status` is the most important field in the output, with the following status type definitions:
+`Status` は、出力内容のうち最も重要なフィールドで、以下のステータスタイプが定義されます。
 
-- `running`: Nomad has started executing the job. このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
-- `pending`: There are not enough resources available to execute the job inside the cluster.
-- `dead`: Nomad has finished executing the job. The status becomes `dead` regardless of whether the corresponding CircleCI job/build succeeds or fails.
+- `running: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
+- `pending`: クラスタ内でジョブを実行するためのリソースが不足している状態です。
+- `dead`: Nomad によるジョブの実行が終了しています。 対応する CircleCI のジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは dead になります。
 
-=== クラスタ ステータスの確認
+=== クラスタステータスの確認
 
 Nomad クライアントの一覧を表示するには、以下のコマンドを実行します。
 
