@@ -183,7 +183,7 @@ You can skip these sections unless you plan on using an existing Postgres, Mongo
 === Save and deploy
 Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Kong load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation.
 
-NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by kong. Therefore, you will see a service named `circleci-server-traefik`, however, this service is actually for Kong.
+NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by Kong. Therefore, you will see a service named `circleci-server-traefik` but this service is actually for Kong.
 
 NOTE: In this first stage we skipped a lot of fields in the config. We will revisit those in the next stages of installation.
 
