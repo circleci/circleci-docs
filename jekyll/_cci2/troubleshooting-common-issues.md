@@ -181,7 +181,7 @@ DLC caches are immutable, so they cannot be selectively deleted. However, a cach
 ### Is DLC guaranteed?
 {:.no_toc}
 
-DLC is not guaranteed. If you are experiencing issues with cache-misses or need high-parallelism, consider try caching using `[docker build](https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources)`, which you can optionally implement using the [CircleCI Docker orb](https://circleci.com/developer/orbs/orb/circleci/docker#commands-build).
+DLC is not guaranteed. If you are experiencing issues with cache-misses or need high-parallelism, consider try caching using [docker build](https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources), which you can optionally implement using the [CircleCI Docker orb](https://circleci.com/developer/orbs/orb/circleci/docker#commands-build).
 
 ### As an admin, can I see the content of a DLC volume?
 {:.no_toc}
@@ -227,10 +227,12 @@ If you notice errors always happen on the same volume, which you can see by chec
 
 The following type of error can occur when adding a secondary service container for your job:
 
+```
 Unexpected environment preparation error: Error response from daemon:   
 OCI runtime create failed: container_linux.go:345:   
 starting container process caused "process_linux.go:303:   
 getting the final child's pid from pipe caused \"EOF\"": unknown
+```
 
 This usually occurs due to a bad [command](https://circleci.com/docs/2.0/configuration-reference/#docker) being passed to one of the secondary service containers in your job. 
 
@@ -295,7 +297,7 @@ Alternatively, we can also take advantage of [the top command](https://man7.org/
   
 To get the memory usage of the [Remote Docker environment](https://circleci.com/docs/2.0/building-docker-images/#accessing-the-remote-docker-environment), you can pass the ps command **through SSH** with
 
-ssh remote-docker ps auxwwf
+`ssh remote-docker ps auxwwf`
 
 </details>
 
@@ -405,7 +407,8 @@ _**Note**: If you have specified `export NODEOPTIONS=<value>` in your `package.j
 
 You can stop building your project on CircleCI at any time by navigating to the project settings page and clicking the "Stop Building" button.
 
-![blobid0.png](/hc/article_attachments/360063893032/blobid0.png)
+
+![Fig_A.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/stop_building_0.png)
 
 In the event you are for some reason unable to stop building, you can always manually stop building by removing access to the repository from GitHub.  
   
@@ -416,22 +419,23 @@ Some reasons you may potentially need to do this:
 
 1\. Start by accessing your GitHub repository settings. You can visit this directly by navigating to _https://github.com/Org/Repository_ and clicking the "settings" button on the repository page.
 
-![Screenshot_2020-06-03_at_19.36.02.png](/hc/article_attachments/360058626252/Screenshot_2020-06-03_at_19.36.02.png)
+![Fig_B.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/stop_building_1.png)
 
 2\. From the settings page, on the left side in the vertical navigation, we see the two pages we are interested in, "Webhooks" and "Deploy keys".
 
-![Screenshot_2020-06-03_at_19.39.59.png](/hc/article_attachments/360058626332/Screenshot_2020-06-03_at_19.39.59.png)
+![Fig_C.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/stop_building_2.png)
 
-3\. From the Webhooks page, locate any Webhooks that post to CircleCI and delete them. ![Screen_Shot_2019-04-15_at_10.54.26_AM.png](/hc/article_attachments/360032501573/Screen_Shot_2019-04-15_at_10.54.26_AM.png)
+3\. From the Webhooks page, locate any Webhooks that post to CircleCI and delete them.
+
+![Fig_D.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/stop_building_3.png)
 
 4\. Lastly, navigate to the "Deploy keys" page and delete the key added by CircleCI
 
-![Screen_Shot_2019-04-15_at_10.54.54_AM.png](/hc/article_attachments/360031680254/Screen_Shot_2019-04-15_at_10.54.54_AM.png)
+![Fig_E.jpg]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/stop_building_4.png)
 
 This will stop the project from building on CircleCI in the event you need to manually remove access.
 
 </details>
-
 
 <details markdown=block>
 <summary>GitHub SSH Deprecation Information & Resolutions</summary>
@@ -641,13 +645,15 @@ A webhook is what allows CircleCI to automatically take action every time you pu
 2. Select "**Webhooks**"in the left menu. (Alternatively, you can reach this page directly -> _https://github.com/<ORG>/<REPO>/settings/hooks)_
 3. You should now see a page similar to the following:  
     
-![GH_repo_settings.png](/hc/article_attachments/360061584832/GH_repo_settings.png)
+![GH repo settings]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_1.png)
+
 4. From here, click on the CircleCI webhook URL, and scroll down to "**Recent Deliveries**".  
     
-![Screen_Shot_2019-04-11_at_5.05.23_PM.png](/hc/article_attachments/360031366014/Screen_Shot_2019-04-11_at_5.05.23_PM.png)
+![CircleCI webhook url recent deliveries]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_2.png)
+
 5. Click on any entry to view the delivery details. This will show the Headers and Payload of the webhook.  
     
-![Screen_Shot_2019-04-11_at_5.06.12_PM.png](/hc/article_attachments/360032192553/Screen_Shot_2019-04-11_at_5.06.12_PM.png)
+![GH repo settings]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_3.png)
 
 The **X-GitHub-Delivery** value (which is the same as the id you clicked on to open this delivery) is useful for tracking your webhook. Support can use this to do further investigation if needed.  
   
@@ -655,11 +661,9 @@ In the **Payload** section under the **SHA** value, you can find the commit hash
 
 You can also check the response back from CircleCI when GitHub sent the response. Switch from the "**Request**" tab to the "**Response**" tab. If you see a "200" response, your WebHook was delivered successfully.
 
-![Screen_Shot_2019-04-11_at_5.31.21_PM.png](/hc/article_attachments/360032193953/Screen_Shot_2019-04-11_at_5.31.21_PM.png)
+![GH repo settings]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/view_webhook_4.png)
 
 </details>
-
-
 
 <details markdown=block>
 <summary>My GitHub organization is not listed</summary>
@@ -671,7 +675,8 @@ Check to make sure CircleCI is enabled in your GitHub organization third-party a
 
 <https://help.github.com/articles/about-oauth-app-access-restrictions/>
 
-![](/hc/article_attachments/115025491567/mceclip0.png)
+![org not listed]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/org_not_listed.png)
+
 
 ## 2\. Check the application page on GitHub
 {:.no_toc}
@@ -810,7 +815,7 @@ Revoke and re-create your Oauth Token - Please be sure to complete **all** of th
 4. Sign back into your CircleCI account
 5. Refresh permissions at <https://app.circleci.com/settings/user>
 
-![refresh_permission.png](/hc/article_attachments/360064969712/refresh_permission.png)
+![refresh permission]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/refresh_permission.png)
 
 If you still have any issues, please submit a ticket to [Support](https://support.circleci.com/hc/en-us) or write to [support@circleci.com](mailto:support@circleci.com).
 
@@ -1050,11 +1055,11 @@ If you need to insert sensitive text-based documents or even small binary files 
 
 Environment variables can be configured in the UI under "Project Settings":
 
-![project-settings-env-var-v2.png](/hc/article_attachments/360066587992/project-settings-env-var-v2.png)
+![project settings env var ]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/base_encode_1.png)
 
 While contexts can be configured under "Organization Settings":
 
-![org-settings-contexts-v2.png](/hc/article_attachments/360066588212/org-settings-contexts-v2.png)
+![org-settings-contexts-v2.png]( {{ site.baseurl }}/assets/img/docs/troubleshooting_images/base_encode_2.png)
 
 You can encode a file via your command line terminal by feeding it directly to base64.
 
@@ -1524,8 +1529,6 @@ To ensure this doesn't happen to builds with "Only build pull requests" turned o
 How to find your webhook settings: <https://support.circleci.com/hc/en-us/articles/360021511153-How-to-view-your-GitHub-WebHook-deliveries>  
   
 Find this option, and uncheck the box.
-
-![Screen_Shot_2019-08-16_at_4.33.15_PM.png](/hc/article_attachments/360043883474/Screen_Shot_2019-08-16_at_4.33.15_PM.png)
 
 </details>
 
