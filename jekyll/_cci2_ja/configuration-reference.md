@@ -221,7 +221,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split)
 ```
 
-#### `パラメーター`
+#### `parameters`
 {: #parameters }
 `parameters` は、[この`ジョブ`を`ワークフロー`で呼び出す](#jobs-in-workflow)ときに使用できます。
 
@@ -1178,23 +1178,23 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 ```
 {% endraw %}
 
-##### **`deploy` - 非推奨**
+##### **`deploy` - 廃止**
 {: #deploy-deprecated }
 {:.no_toc}
 
-現在のプロセスに関しては、[実行](#run)をご覧ください。 If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
+現在のプロセスに関しては、[実行](#run)をご覧ください。 並列処理が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
 
-##### **Migration from `deploy` to `run`**
+##### **`deploy` から `run` への移行**
 
-**Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+**注: **廃止された `deploy` ステップが使われている設定ファイルは、変換_しなければなりません_。ジョブに並列処理が使われているかいないかに関わらず、`deploy` ステップの_すべての_インスタンスを削除する必要があります。
 
-*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?* Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
+*ジョブの [並列処理](https://circleci.com/docs/2.0/parallelism-faster-jobs/)が 1 の場合 *`deploy` キーを [`run`](#run) キーにスワップアウトします。 移行に必要な処理はこれだけです。
 
-*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?* There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
+*ジョブの [並列処理](https://circleci.com/docs/2.0/parallelism-faster-jobs/)が 2 以上の場合* 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストを並列で実行し、デプロイジョブはテストジョブによって異なります。 テストジョブの並列処理が 2 つ以上の場合、以前の`deploy` ステップのコマンドが ‘run’  に置き換えられ 、並列処理は行われません。 以下の例をご覧ください。
 
 ###### *例*
 
-A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+廃止された`deploy` ステップを使用し、並列処理が 2 つ以上の設定ファイルは、変更し`deploy` ステップを削除する必要があります。 下記のサンプルをご覧ください (このコードは廃止されているため、コピーしないでください)。
 
 ```yml
 # Example of deprecated syntax, do not copy
