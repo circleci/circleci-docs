@@ -53,14 +53,14 @@ const addToDataTotal = async (filePath, lineStart, lineStop) => {
   // add a link to github at the very end
   info = {
     ...info,
-    link: `https://github.com/circleci/circleci-docs/blob/master/${filePath}?plain=1#L${lineStart}-L${lineStop}`,
+    link: `https://github.com/circleci/circleci-docs/blob/master/${filePath}`,
   };
 
   return info;
 };
 /* end exploreSingle */
 
-export const exploreTotal = async () => {
+export const articleTracking = async () => {
   const files = await glob(
     `${repoPath}/jekyll/@(${directories.join('|')})/*.@(md|adoc)`,
   );

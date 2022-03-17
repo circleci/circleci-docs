@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import { exploreSingle } from './runSnippetTracking.js'
-import { exploreTotal } from './runArticleTracking.js'
+import { snippetTracking } from './runSnippetTracking.js'
+import { articleTracking } from './runArticleTracking.js'
 
 export const log = (message) => {
   // eslint-disable-next-line no-console
@@ -20,7 +20,7 @@ const runSnippetTracking = async () => {
   }
 
   // get the data
-  const data = await exploreSingle();
+  const data = await snippetTracking();
   log(`Found ${data.length} snippets`);
 
   // write the data to the output CSV file in chuncks of 500
@@ -39,7 +39,7 @@ const runArticleTracking = async () => {
     }
 
     // get the data
-    const data = await exploreTotal();
+    const data = await articleTracking();
     log(`Found ${data.length} snippets`);
   
     // write the data to the output CSV file in chuncks of 500
