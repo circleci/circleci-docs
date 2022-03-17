@@ -119,7 +119,7 @@ This behavior has several possible explanations:
 * **Different package versions**. Explicitly specify package versions in your configuration file.
 * **Timezone troubles**. Some testing frameworks may not have timezone-aware modules. If the machine does not have a set timezone, some tests may fail. See [this question](https://circleci.com/docs/2.0/faq/#how-can-i-set-the-timezone-in-docker-images) in the FAQ for more details.
 * **File ordering**. Some filesystems maintain an ordered file structure for each directory. This means that all files are read in the same order during each run. However, the filesystems in our build containers are unordered. If your tests only pass when run in a certain order, they may fail on CircleCI.
-* **"Out of Memory" errors**. If a process in your build container uses too much memory, Linux's OOM killer may end it. If you are interested in recording your memory usage, visit [How to record a job's memory usage]https://support.circleci.com//hc/en-us/articles/360043994872().
+* **"Out of Memory" errors**. If a process in your build container uses too much memory, Linux's OOM killer may end it. If you are interested in recording your memory usage, visit [How to record a job's memory usage](https://support.circleci.com//hc/en-us/articles/360043994872).
 * **Differing startup times**. Applications like Elasticsearch and PostgreSQL may take more time to start up on CircleCI. You can fix this by explicitly waiting for a service to be available before running tests.
 * **Unreliable services**. If your tests rely on a third-party service, check that the service is actually running.
 
