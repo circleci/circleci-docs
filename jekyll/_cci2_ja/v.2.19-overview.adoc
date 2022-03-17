@@ -17,7 +17,7 @@ NOTE: CircleCI Server v2.x は、2022 年 3 月で更新が終了します。 Ci
 
 ## アップグレードの要件
 
-WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[カスタマイズガイド]を参照してください。
+WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、 https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[カスタマイズガイド] を参照してください。
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important, this guide>> to update your nomad launch configuration.
 
