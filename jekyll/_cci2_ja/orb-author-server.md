@@ -17,7 +17,7 @@ version:
 
 この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/2.0/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/2.0/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
-Orb を初めて作成する方も、本番レベルで準備する方も、[Orb 開発キット](#orb-development-kit)を使って Orb の作成を開始することをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/2.0/local-cli/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB) を使用してパブリッシュすることも可能です。
+Orb を初めて作成する方も、本番レベルで準備する方も、[Orb 開発キット](#orb-development-kit)を使って Orb の作成を開始することをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
 ## Orb 開発キット
 {: #orb-development-kit }
@@ -25,7 +25,7 @@ Orb を初めて作成する方も、本番レベルで準備する方も、[Orb
 キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットは、次の要素で構成されています。
 
 * [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)
-* [Orb パッケージ]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
+* [Orb パッケージ]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)
 * [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
@@ -44,10 +44,10 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[CircleCI の�
 
     完了すると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
-    **注: **Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルダウンする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
+    **注: **Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
     {: class="alert alert-warning"}
 
-1. **ターミナルを開き、`orb init` CLI コマンドを使って新しい Orb プロジェクトを初期化します。 ****CircleCI Server をご使用の場合は、必ずここで `--private` フラグを使って Orb をサーバー内でプライベートな状態に設定します。</p>
+1. **ターミナルを開き、`orb init` CLI コマンドを使って新しい Orb プロジェクトを初期化します。 ****CircleCI Server をご使用の場合は、必ずここで `--private` フラグを使って Orb をプライベートな状態に設定します。</p>
 <br>
 **[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
 <!---->
@@ -72,7 +72,7 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
   No, I'll handle everything myself.
 ```
 <!---->
-    手動オプションを選択した場合は、[手動による Orb オーサリングプロセス]({{site.baseurl}}/2.0/orb-author-validate-publish/)で Orb をパブリッシュする方法を参照してください。
+    手動オプションを選択した場合は、[手動による Orb オーサリングプロセス]({{site.baseurl}}/ja/2.0/orb-author-validate-publish/)で Orb をパブリッシュする方法を参照してください。
 
     完全自動オプションを選択すると、[Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。
     
@@ -84,13 +84,13 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 <br>
     バックグラウンドでは、入力内容に基づいて`orb init` コマンドが [Orb プロジェクトテンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をコピーし、カスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 で取得したリモート Git リポジトリ の URL も、入力が求められます。
 
-    [Orb プロジェクトテンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は、[Orb のパブリッシュプロセス]({{site.baseurl}}/2.0/creating-orbs/)を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。
+    [Orb プロジェクトテンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は、[Orb のパブリッシュプロセス]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。
 
-    セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/2.0/contexts/)に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。
+    セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/)を `orb-publishing` <a href="{{site.baseurl}}/ja/2.0/contexts/>コンテキスト</a>に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。
 
     **注: コンテキストの制限**
     <br/>
-    _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。 <br/><br/> Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。 詳細については、「[コンテキストの使用]({{site.baseurl}}/2.0/contexts/#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E5%88%B6%E9%99%90)」を参照してください。
+    _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。 <br/><br/> Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。 詳細については、「[コンテキストの使用]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)」を参照してください。
     {: class="alert alert-warning"}
 
 1. **変更を Github にプッシュします。**
@@ -109,7 +109,7 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 
     新しいブランチから、変更を行いプッシュする準備が整いました。 この時点から、コミットごとに、Orb のパッケージ化、確認、テスト (オプション) が行われ、パブリッシュできます。
 
-    最初のメジャーバージョンの Orb をデプロイする準備ができたら、セマンティックバージョニングを使用した変更のデプロイに関する情報を、[Orb のパブリッシュプロセス ]({site.basel}}/2.0/creating-orbs/) ガイドで確認してください。
+    When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
 ### Orb の記述
 {: #writing-your-orb }
@@ -343,4 +343,4 @@ circleci orb list <my-namespace> --private --host <your-server-hostname>
 ## 次のステップ
 {: #next-steps }
 
-* CircleCI Server で Orb を管理する方法に関する詳細は、[Orb の管理]({{site.baseurl}}/2.0/server-3-operator-orbs/)ガイドを参照してください。
+* CircleCI Server で Orb を管理する方法に関する詳細は、[Orb の管理]({{site.baseurl}}/ja/2.0/server-3-operator-orbs/)ガイドを参照してください。
