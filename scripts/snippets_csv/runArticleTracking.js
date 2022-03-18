@@ -61,16 +61,20 @@ const addToDataTotal = async (filePath, lineStart, lineStop) => {
 /* end exploreSingle */
 
 export const articleTracking = async () => {
-  const files = await glob(
+  let files = await glob(
     `${repoPath}/jekyll/@(${directories.join('|')})/*.@(md|adoc)`,
   );
   log(`Found ${files.length} files`);
+
+  // we want to filter out the ja files
+  files = files.filter(function(s) {
+      return s.indexOf("_cci2_ja") === -1;
+  });
 
   const results = await search.fileSearch(files, '```', {
     searchResults: 'lineNo',
   });
   let promises = [];
-
   results.forEach((lines) => {
     if (lines.length) {
       // cleanup file path
