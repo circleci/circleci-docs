@@ -22,7 +22,7 @@ CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提�
 .CircleCI Server v3.x のアーキテクチャ
 image::server-3-architecture-diagram.png[サービスs Architecture]
 
-CircleCI Server アプリケーションは、ロードバランサーを使って 4 つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 詳細については、https://circleci.com/docs/2.0/server-3-operator-load-balancers/[ロード バランサーに関するページ]を参照してください。
+CircleCI Server アプリケーションは、ロードバランサーを使って 4 つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 詳細については、 https://circleci.com/docs/2.0/server-3-operator-load-balancers/[ロード バランサーに関するページ] を参照してください。
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -101,7 +101,7 @@ CircleCI Server アプリケーションは、ロードバランサーを使っ�
 | Nomad クライアントでのみ必要
 |===
 
-CircleCI Server では、https://www.nomadproject.io/[Nomad]スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロールプレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロールプレーンは Kubernetes 内で動作します。 スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
 オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。

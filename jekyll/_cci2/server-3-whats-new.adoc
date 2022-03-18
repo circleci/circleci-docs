@@ -49,6 +49,7 @@ toc::[]
 * The Insights dashboard is now available.
 * IRSA (AWS) can now be used as an alternative to keys for object storage authentication.
 * The email address from which build notifications are sent is now configurable from the KOTS Admin Console.
+* We have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by kong. Therefore, you will see a service named `circleci-server-traefik`, however, this service is actually for Kong.
 
 === Fixes
 

@@ -37,6 +37,9 @@ Find out more about the `docker` executor in the [Using Docker]({{ site.baseurl 
 ## Machine
 {: #machine }
 
+Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+{: class="alert alert-warning"}
+
 {:.tab.machine.Cloud}
 ```yml
 jobs:
