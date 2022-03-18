@@ -35,7 +35,7 @@ suggested:
     link: https://support.circleci.com/hc/ja/articles/360048210711
 ---
 
-`.circleci/config.yml` ファイルで使用される CircleCI 2.x 構成キーのリファレンス ガイドです。
+このドキュメントは、`.circleci/config.yml` ファイルで使用される CircleCI 2.x 設定キーのリファレンスガイドです。
 
 `config.yml` の全体は「[サンプルコード](#サンプル-コード)」で確認できます。
 
@@ -63,7 +63,7 @@ suggested:
 | version | ○  | 文字列型 | `2`、`2.0`、または `2.1`。`.circleci/config.yml` ファイルの簡素化、再利用、パラメータ化ジョブの利用に役立つバージョン 2.1 の新しいキーの概要については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/ja/2.0/reusing-config/)を参照してください。 |
 {: class="table table-striped"}
 
-`version` フィールドは、将来的に非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
+`version` フィールドは、将来的にサポートの終了や 破壊的変更に対して警告するかどうかの判断に用いられます。
 
 ## **`orbs`** (version: 2.1 が必須)
 {: #orbs-requires-version-21 }
@@ -221,7 +221,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split)
 ```
 
-#### `パラメーター`
+#### `parameters`
 {: #parameters }
 `parameters` は、[この`ジョブ`を`ワークフロー`で呼び出す](#jobs-in-workflow)ときに使用できます。
 
@@ -567,7 +567,7 @@ jobs:
     resource_class: my-namespace/my-runner
 ```
 
-##### machine Executor (Linux)
+##### Machine Executor (Linux)
 {: #machine-executor-linux }
 
 {% include snippets/ja/machine-resource-table.md %}
@@ -586,7 +586,7 @@ jobs:
       ... // 他の構成
 ```
 
-`machine` クラスを使用して[ランナー インスタンス](https://circleci.com/docs/ja/2.0/runner-overview/#referencing-your-runner-on-a-job)を構成することも可能です。
+`machine` クラスを使用して[ランナー インスタンス](https://circleci.com/docs/ja/2.0/runner-overview/#referencing-your-runner-on-a-job)を設定することも可能です。
 
 例えば下記のようにします。
 
@@ -619,7 +619,7 @@ jobs:
       xcode: "12.5.1"
     resource_class: large
     steps:
-      ... // 他の構成
+      ... // その他の設定
 ```
 
 ##### Windows Executor
@@ -775,7 +775,7 @@ jobs:
 
 あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列処理が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 If your job has parallelism >1, see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
+**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列処理が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列処理が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
 {: class="alert alert-info"}
 
 | キー                  | 必須 | タイプ   | 説明                                                                                                                                                                        |
@@ -1148,7 +1148,7 @@ steps:
       key: v1-myapp-cache
 ```
 
-この例では、`v1-myapp-cache-new` で示したキャッシュが復元されます。最初のキー（`v1-myapp-cache`）にもマッチはしていますが、後の方のキーが `v1-myapp-cache` というプレフィックスで検索したときに一番最後にマッチしたものになるからです。
+この例では、`v1-myapp-cache-new` で示したキャッシュがリストアされます。最初のキー（`v1-myapp-cache`）にもマッチはしていますが、これが`v1-myapp-cache` というプレフィックスで検索したときに一番最後にマッチしたからです。
 
 key の詳しい書式については、[`save_cache` ステップ](#save_cache)の `key` セクションをご覧ください。
 
@@ -1178,23 +1178,23 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 ```
 {% endraw %}
 
-##### **`deploy` - 非推奨**
+##### **`deploy` - 廃止予定**
 {: #deploy-deprecated }
 {:.no_toc}
 
-現在のプロセスに関しては、[実行](#run)をご覧ください。 If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
+現在のプロセスに関しては、[実行](#run)をご覧ください。 並列処理が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
 
-##### **Migration from `deploy` to `run`**
+##### **`deploy` から `run` への移行**
 
-**Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+**注: **廃止予定の `deploy` ステップが使われている設定ファイルは、変更_する必要があります_。ジョブに並列処理が使われているかいないかに関わらず、`deploy` ステップの_すべての_インスタンスを削除する必要があります。
 
-*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?* Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
+*[並列処理](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 1 つの場合*、`deploy`キーと[`run`](#run) キーをスワップアウトします。 移行に必要な処理はこれだけです。
 
-*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?* There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
+*ジョブの [並列処理](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 2 つ以上の場合*、 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 テストジョブの並列処理が 2 つ以上の場合、以前の `deploy` ステップのコマンドが ‘run’  に置き換えられ 、並列処理は行われません。 以下のサンプルをご覧ください。
 
-###### *例*
+###### *サンプル*
 
-A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+廃止される `deploy` ステップが使用されており、並列処理が 2 つ以上の設定ファイルは、変更し`deploy` ステップを削除する必要があります。 下記のサンプルをご覧ください (このコードは廃止されるため、コピーしないでください)。
 
 ```yml
 # Example of deprecated syntax, do not copy
@@ -1229,7 +1229,7 @@ workflows:
       - deploy-step-job
 ```
 
-If you are entirely reliant on external resources (for example, Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete. `doing-things-job` uses parallelism of 3, while `deploy-step-job` performs the actual deployment. See example below:
+完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出します。これには`doing-things-job` を完了させる必要があります。 `doing-things-job` では 並列処理を 3 つ使用し、`deploy-step-job` では実際のデプロイを実行します。 以下のサンプルを参照してください。
 
 ```yml
 version: 2.1
@@ -1272,7 +1272,7 @@ workflows:
             - doing-things-job
 ```
 
-If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
+`deploy-job` の `doing-things-job` からファイルが必要な場合は、[ワークスペース](https://circleci.com/docs/ja/2.0/workspaces/)を使います。 これにより、2つジョブでファイルを共用でき、 `deploy-job` がファイルにアクセスできるようになります。 以下のサンプルを参照してください。
 
 ```yml
 version: 2.1
@@ -1321,7 +1321,7 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on the [workflows](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
+このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
@@ -1354,7 +1354,7 @@ Web アプリまたは API からアクセスできるアーティファクト (
 
 ビルドのテスト結果をアップロードおよび保存するための特別なステップです。 テスト結果は、CircleCI Web アプリケーションで各ビルドの「テスト サマリー」セクションに表示されます。 テスト結果を保存すると、テスト スイートのタイミング分析に役立ちます。
 
-It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
+テスト結果をビルドアーティファクトとして保存することもできます。その方法については [**store_artifacts** ステップ](#storeartifacts)を参照してください。
 
 | キー   | 必須 | タイプ  | 説明                                                                                                                         |
 | ---- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------- |
