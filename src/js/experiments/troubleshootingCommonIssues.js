@@ -6,9 +6,12 @@ $(document).ready(function () {
 
   if (isTroubleShootingPage) {
     $('details').click(function (e) {
-      window.AnalyticsClient.trackAction('dd_troubleshooting_common_issues_section_toggled', {
-        section: e.target.outerText
-      });
+      window.AnalyticsClient.trackAction(
+        'dd_troubleshooting_common_issues_section_toggled',
+        {
+          section: e.target.outerText,
+        },
+      );
     });
   }
 });
