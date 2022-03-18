@@ -42,7 +42,7 @@ kubectl exec -it nomad-server-pod-ID -- nomad status
 
 `Status` は、出力内容のうち最も重要なフィールドで、以下のステータスが表示されます。
 
-- `running: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
+- `running`: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
 - `pending`: クラスタ内でジョブを実行するためのリソースが不足している状態です。
 - `dead`: Nomad によるジョブの実行が終了しています。 対応する CircleCI ジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは dead になります。
 
@@ -52,7 +52,7 @@ Nomad クライアントの一覧を表示するには、以下のコマンド�
 
 kubectl exec -it nomad-server-pod-ID -- nomad node-status
 
-NOTE: nomad node-status コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
+NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
 
 特定のクライアントの詳細情報を表示するには、そのクライアントで以下のコマンドを実行します。
 
