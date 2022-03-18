@@ -1,6 +1,8 @@
 = Getting Started
 :page-layout: classic-docs
 :page-liquid:
+:icons: font
+:toc: macro
 
 This guide walks you through the steps to complete your first release with Vamp, using the Quick Start Guide. You can use the Quick Start Guide to release up to six microservices.
 
@@ -16,10 +18,8 @@ Log in to Vamp, then navigate to the https://vamp.cloud/6/quickstart[Quick Start
 Now follow the steps in the guide:
 
 . <<./step-1#,Create an Application>>
-. Create a Service
-. Choose a Release Policy
-. Expose your Service
-. Install the Release Agent
-. Release Your Service
-
-{% include_relative step-1.adoc %}
+. <<./step-2#,Create a Service>>
+. <<./step-3#,Choose a Release Policy>>
+. <<./step-4#,Expose your Service>>
+. <<./step-5#,Install the Release Agent>>
+. <<./step-6#,Release Your Service>>
