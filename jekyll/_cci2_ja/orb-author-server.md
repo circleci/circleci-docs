@@ -2,8 +2,7 @@
 layout: classic-docs
 title: "サーバーでの Orb オーサリングプロセス"
 description: "サーバーでの CircleCI Orb のオーサリング入門ガイド."
-categories:
-  - はじめよう
+categories: [はじめよう]
 order: 1
 version:
   - Server v3.x
@@ -47,11 +46,10 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[CircleCI の�
     **注: **Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
     {: class="alert alert-warning"}
 
-1. **ターミナルを開き、`orb init` CLI コマンドを使って新しい Orb プロジェクトを初期化します。 ****CircleCI Server をご使用の場合は、必ずここで `--private` フラグを使って Orb をプライベートな状態に設定します。</p>
+1. **ターミナルを開き、`orb init` CLI コマンドを使って新しい Orb プロジェクトを初期化します。 ****CircleCI Server をご使用の場合は、必ずここで `--private` フラグを使って Orb をプライベートな状態に設定します。
 <br>
 **[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
 <!---->
-</li> </ol>
 ```shell
 circleci orb init /path/to/myProject-orb --host <your-server-installation-domain>
 ```
@@ -64,7 +62,8 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 
     `circleci orb init` コマンドを、Orb プロジェクト用に作成して初期化するディレクトリを付けて呼び出します。 このディレクトリと Git のプロジェクト リポジトリには、同じ名前を使用することをお勧めします。
 
-1. **Orb 完全自動設定オプションを選択します。** <br>
+1. **Orb 完全自動設定オプションを選択します。**
+<br>
 <!---->
 ```shell
   ? Would you like to perform an automated setup of this orb?:
@@ -90,7 +89,11 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 
     **注: コンテキストの制限**
     <br/>
-    _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。 <br/><br/> Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。 詳細については、「[コンテキストの使用]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)」を参照してください。
+    _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。
+    <br/><br/>
+    Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。
+    <br/><br/>
+    詳細については、「[コンテキストの使用]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)」を参照してください。
     {: class="alert alert-warning"}
 
 1. **変更を Github にプッシュします。**
@@ -105,7 +108,8 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 <br>
     CLI は、自動的に CircleCI 上の新しい Orb プロジェクトに従ってテスト用の最初の開発バージョン `<namespace >/<orb>@dev:alpha` を生成し終了します (hello-world サンプル)。
 
-    CircleCI でビルドしているプロジェクトへのリンクが表示され、確認、パッケージ化、テスト、パブリッシュプロセスを確認できます。 また、 CLI によって自動的に ` alpha` という名前の新しい開発ブランチに移行されたことも確認できます。
+    CircleCI でビルドしているプロジェクトへのリンクが表示され、確認、パッケージ化、テスト、パブリッシュプロセスを確認できます。
+    また、 CLI によって自動的に ` alpha` という名前の新しい開発ブランチに移行されたことも確認できます。
 
     新しいブランチから、変更を行いプッシュする準備が整いました。 この時点から、コミットごとに、Orb のパッケージ化、確認、テスト (オプション) が行われ、パブリッシュできます。
 
