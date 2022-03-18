@@ -1,0 +1,25 @@
+=== Name
+
+Enter a unique name for your application. This name is displayed wherever your application is used, including external notifications like Slack.
+
+=== Description
+
+Enter a description (optional).
+
+=== Cluster
+
+Select your cluster name from the list, or add a new one by clicking **Create New Cluster** at the bottom of the list. If your applications are distributed across multiple clusters, you can add additional clusters.
+
+=== Creating a cluster
+
+// include::create-cluster.adoc[]
+
+=== Namespace
+
+Enter the namespace where your microservices will run.
+
+=== Ingress Controller
+
+Select your Ingress Controller. Vamp supports NGINX and Contour. If your application does not expose any services, choose _NO INGRESS_.
+
+NOTE: We recommend you use Contour, as it allows a richer set of release policies.
