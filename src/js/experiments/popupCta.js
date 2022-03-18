@@ -38,7 +38,7 @@ function getPopupData() {
  * @lastDay is string representation of a date, coming from localStorage
  * returns `true` if the user is visiting the same day as stored in local storage
  * */
-function isStillTheSameDay (lastDay) {
+function isStillTheSameDay(lastDay) {
   let stillTheSameDay = false;
   const now = new Date();
   const popupLastSeen = new Date(lastDay);
@@ -46,7 +46,7 @@ function isStillTheSameDay (lastDay) {
     now.getFullYear() === popupLastSeen.getFullYear() &&
     now.getMonth() === popupLastSeen.getMonth() &&
     now.getDate() === popupLastSeen.getDate();
-  return stillTheSameDay
+  return stillTheSameDay;
 }
 
 /**
@@ -60,7 +60,8 @@ function isStillTheSameDay (lastDay) {
 function canShowPopup() {
   const popupData = getPopupData();
   return (
-    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES && !isStillTheSameDay(popupData.lastSeen)
+    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES &&
+    !isStillTheSameDay(popupData.lastSeen)
   );
 }
 
