@@ -291,7 +291,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**注: **外向きの通信とストレージに対する課金は、**2022 年 4 月 1 日**より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理していただくための変数と制御機能の追加を行なっています。 このセクションの内容は、2022 年 4 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+**NOTE:** For our monthly Performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
 [CircleCI Web アプリ](https://app.circleci.com/)から **Plan > Plan Usage** に移動してお客様のストレージとネットワークの使用状況を確認し、1ヶ月のストレージ料金とネットワーク料金を計算してください。
@@ -464,7 +464,10 @@ IPv6 環境のサービスをテストするために、コンテナに IPv6 ア
 jobs:
   ipv6_tests:
   machine:
-    image: ubuntu-1604:202007-01
+    # The image uses the current tag, which always points to the most recent
+    # supported release. If stability and determinism are crucial for your CI
+    # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+    image: ubuntu-2004:current
   steps:
     - checkout
     - run:
