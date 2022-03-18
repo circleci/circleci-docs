@@ -53,7 +53,7 @@ If you are installing and using self-hosted runners through the CLI, you are agr
 
 == CircleCI web app installation
 
-NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+NOTE: Currently, the web app installation is available to **Cloud** customers. If you need to install **self-hosted runners for server** please use the <<#command-line-installation,CLI>>.
 
 In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider. 
 
