@@ -1,7 +1,9 @@
 /**
  * This experiment adds CTA signup buttons to the docs/2.0/first-steps document.
  * */
-const isFirstStepsPage = window.location.pathname == '/docs/2.0/first-steps/';
+const isFirstStepsPage =
+  window.location.pathname == '/docs/2.0/first-steps/' ||
+  window.location.pathname == '/docs/ja/2.0/first-steps/';
 
 function handleGithubDropdownClick() {
   const dropdown = $('.gh-signup-dropdown');
