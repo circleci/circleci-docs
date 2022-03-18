@@ -30,7 +30,7 @@ toc::[]
 
 To install and run jobs, you will need to have the following utilities and tools installed on your system:
 
-* <<local-cli#installation,CircleCI CLI>> - Please note that if you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required. Check <<runner-for-server-compatibility, runner for server compatibility>> below.
+* <<local-cli#installation,CircleCI CLI>> - Please note that if you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required. Check <<#runner-for-server-compatibility, runner for server compatibility>> below.
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
 * https://systemd.io/[systemd] version 235+ (Linux only)
 * https://curl.se/[curl] (installed by default on macOS)
@@ -55,7 +55,7 @@ If you are installing and using self-hosted runners through the CLI, you are agr
 
 NOTE: Currently, the web app installation is available to **Cloud** customers. If you need to install **self-hosted runners for server** please use the <<#command-line-installation,CLI>>.
 
-In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider. 
+In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider. You can read about namespaces and resource classes on the <<runner-overview#namespaces-and-resource-classes,Overview>> page.
 
 Currently, you can only create one runner per resource class through the UI. If you would like to add more runners to your resource class, you can use the CLI.
 
@@ -155,7 +155,7 @@ export platform=darwin/amd64
 ```
 +
 
-. Next, set the `circleci-launch-agent` version. Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability and self-hosted runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
+. Next, set the `circleci-launch-agent` version. Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability and self-hosted runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<#runner-for-server-compatibility,here>>.
 +
 For *cloud*, you can run the following:
 +
@@ -169,7 +169,7 @@ Followed by:
 export agent_version=$(curl "${base_url}/release.txt")
 ```
 +
-For *server v3.1.0 and up*, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<runner-for-server-compatibility>> to find the correct version):
+For *server v3.1.0 and up*, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<#runner-for-server-compatibility>> to find the correct version):
 +
 ```shell
 export agent_version="<launch-agent-version>"

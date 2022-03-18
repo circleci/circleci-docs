@@ -86,6 +86,16 @@ To get started with CircleCI runner:
 * Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runner platforms>> section)
 * xref:runner-installation.adoc[Install] CircleCI runner!
 
+== Namespaces and resource classes
+
+Runners require both a namespace and a resource class. 
+
+A **namespace** is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. Typically, the namespace chosen is the lowercase representation of your organization's name on your VCS (this is suggested).
+
+A **resource class** is the combination of your namespace and a label you choose to represent your pool of self-hosted runners. For example, a CircleCI resource class would be `circleci/new-label`. Optionally, you can give your resource class a description. Resources classes are created when you go through the process of installing self-hosted runners.
+
+Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs.
+
 == CircleCI runner operation
 
 Once CircleCI runner is installed, the runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
@@ -120,7 +130,7 @@ CircleCI runner is not recommended for use with public projects that have the "B
 
 {% include snippets/runner-config-reference.adoc %}
 
-NOTE: A namespace is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
 
 == Limitations
 
