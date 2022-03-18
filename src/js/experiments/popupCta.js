@@ -35,6 +35,21 @@ function getPopupData() {
 }
 
 /**
+ * @lastDay is string representation of a date, coming from localStorage
+ * returns `true` if the user is visiting the same day as stored in local storage
+ * */
+function isStillTheSameDay(lastDay) {
+  let stillTheSameDay = false;
+  const now = new Date();
+  const popupLastSeen = new Date(lastDay);
+  stillTheSameDay =
+    now.getFullYear() === popupLastSeen.getFullYear() &&
+    now.getMonth() === popupLastSeen.getMonth() &&
+    now.getDate() === popupLastSeen.getDate();
+  return stillTheSameDay;
+}
+
+/**
  * In order to show the popup to users we need to:
  * a) the user has to have visited three pages ("timesVisited")
  * b) the user must not have already seen a popup today.
@@ -43,18 +58,10 @@ function getPopupData() {
  * and determine if we can show the popup.
  * */
 function canShowPopup() {
-  let now = new Date();
-  let stillTheSameDay = false;
   const popupData = getPopupData();
-  if (popupData.lastSeen !== null) {
-    const popupLastSeen = new Date(popupData.lastSeen);
-    stillTheSameDay =
-      now.getFullYear() === popupLastSeen.getFullYear() &&
-      now.getMonth() === popupLastSeen.getMonth() &&
-      now.getDate() === popupLastSeen.getDate();
-  }
   return (
-    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES && !stillTheSameDay
+    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES &&
+    !isStillTheSameDay(popupData.lastSeen)
   );
 }
 
@@ -62,7 +69,9 @@ function incrementTimesVisited() {
   let popupData = getPopupData();
   if (popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
     popupData.timesVisited = 1;
-    popupData.lastSeen = new Date();
+    if (!isStillTheSameDay(popupData.lastSeen)) {
+      popupData.lastSeen = new Date();
+    }
   } else {
     popupData.timesVisited += 1;
   }
