@@ -14,10 +14,6 @@ verison:
 * 目次
 {:toc}
 
-## クイックスタート
-{: #quick-start }
-{:.no_toc}
-
 [CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
 
 ## Orb の設定要素
@@ -169,7 +165,7 @@ _名前空間_ は、一連の Orb をオーサー別にグループ化するた
 
 例えば、`circleci/rails` という Orb と `<other-namespace>/rails`という Orb は、別々の名前空間にあるため、レジストリ内で共存できます。
 
-デフォルトでは、各組織が要求できる名前空間は 1つに制限されています。 これは、名前の占有や名前空間のノイズを制限するためのポリシーです。 名前空間の変更が必要な場合は、サポートにお問い合わせください。
+デフォルトでは、組織は名前空間を 1つだけ要求できるように制限されています。 これは、名前空間の占拠や紛らわしさを制限するためのポリシーです。 名前空間の変更が必要な場合は、サポートにお問い合わせください。
 
 デフォルトでは、作成された名前空間は、 [Orb レジストリ](https://circleci.com/developer/orbs)の「コミュニティ」の名前空間として表示されます。
 
@@ -251,6 +247,47 @@ _[参照: インライン Orb の記述方法]({{site.baseurl}}/2.0/reusing-conf
 - 非公開です。
 - CircleCI CLI からはアクセスできません。
 
+## プライベート Orb とパブリック Orb
+{: #private-orbs-vs-public-orbs }
+
+There are two ways to publish an orb: public or private:
+
+* If you prefer to publish your orb so that only those within your organization can see and use it, you should publish a private orb.
+* If you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs) for use by anyone, create a public orb.
+
+Private orbs are described in more detail below.
+
+### プライベート Orbs
+{: #private-orbs }
+
+**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
+{: class="alert alert-warning"}
+
+プライベート Orbs 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。
+
+* Your orb will not appear in the [CircleCI Orb Registry](https://circleci.com/developer/orbs) unless you have the direct URL and are authenticated with the org that created it.
+
+* Your orb cannot be viewed or used by someone outside of your organization.
+
+* Your orb cannot be used in a pipeline that does not belong to your organization.
+
+By choosing to use a private orb instead of a public orb, you also need to understand certain inherent limitations, which include:
+
+* 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 You may, however, use ond of the following options:
+
+    * Paste the content of the orb into the `orbs` stanza of your configuration.
+    * Use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration. The org slug is defined as `<your-VCS>/<your-org-name>`, for example, `gh/circleci`.
+
+* 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
+
+### Orb のオーサリング
+{: #authoring-orbs }
+
+パブリック Orbs とプライベート Orbs はいずれも、2 種類の方法でオーサリングできます。
+
+* [Orb を手動でオーサリングする](https://circleci.com/docs/2.0/orb-author-validate-publish/)方法
+* [Orb 開発キット](https://circleci.com/docs/2.0/orb-author/#orb-development-kit)を使用する方法 (推奨)
+
 ## Orb のパッケージ化
 {: #orb-packing }
 
@@ -261,12 +298,12 @@ Orb 開発キットを使用している場合、オーブのパッケージ化�
 
 **_例: Orb プロジェクトの構造_**
 
-| 種類                        | 名前                                                                                             |
+| type                      | name                                                                                           |
 | ------------------------- | ---------------------------------------------------------------------------------------------- |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [コマンド](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands)       |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [例](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples)          |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [Executor](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors)  |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [ジョブ](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs)            |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands)   |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples)   |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs)           |
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
 {: class="table table-striped"}
 
@@ -324,13 +361,13 @@ Bash スクリプトを含めることに関する詳細は、[Orb オーサー]
 ## Orb 内での Orb の使用と登録時の解決
 {: #-within-your-orb-and-register-time-resolution }
 
-Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、すべての Orb 依存関係は、ビルドの実行時ではなく Orb の登録時にすべて解決されます。
+Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、Orb 依存関係の解決は、ビルドの実行時ではなく Orb の登録時にすべて行われます。
 
-例えば、`biz/baz@volatile` をインポートする orbs スタンザを含んだ Orb `foo/bar` が、バージョン 1.2.3 でパブリッシュされるとします。 `foo/bar@1.2.3` を登録する時点で、`biz/baz@volatile` が最新バージョンとして解決され、その要素がパッケージ バージョンの `foo/bar@1.2.3` に直接含められます。
+たとえば、`biz/baz@volatile` をインポートする orbs スタンザを含んだ Orb `foo/bar` が、バージョン 1.2.3 でパブリッシュされるとします。 `foo/bar@1.2.3` を登録する時点で、`biz/baz@volatile` が最新バージョンとして解決され、そのエレメントがパッケージバージョンの `foo/bar@1.2.3` に直接インクルードされます。
 
 `biz/baz` が `3.0.0` に更新されても、`foo/bar` が `1.2.3` よりも上のバージョンでパブリッシュされるまで、`foo/bar@1.2.3` を使用しているユーザーには `biz/baz@3.0.0` の変更が反映されません。
 
-メモ: Orb の要素は、他の Orb の要素を使用して直接構成できます。 例えば、以下の例のような Orb があるとします。
+メモ: Orb の要素は、他の Orb の要素を使用して直接構成できます。 たとえば、以下の例のような Orb を使用できます。
 
 
 ```yaml
