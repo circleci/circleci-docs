@@ -18,7 +18,7 @@ version:
 {:toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
+   <strong>Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、<a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a> を参照してください。</strong>
 </div>
 
 ## 前提条件
@@ -36,7 +36,7 @@ version:
 Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプリケーションや .NET が実行可能な Windows 固有プロジェクト(.NET フレームワークなど) といった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
 
 - VM ベースでジョブの完全分離を保証
-- Can use either the Server Core version of Windows Server 2019 Datacenter Edition, or Windows Server 2022 Datacenter edition.
+- Windows Server 2019 Datacenter エディションとWindows Server 2022 Datacenter エディションの Server Core オプションのどちらでも使用可能
 - PowerShell がデフォルトのシェル (Bash と cmd を手動で選択可能)
 - Windows コンテナの実行に Docker Engine - Enterprise を使用可能
 
@@ -48,11 +48,11 @@ Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプ�
 ## Windows Executor イメージ
 {: #windows-executor-images }
 
-CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
+CircleCI は Windows Server 2019 では Visual Studio 2019 を、Windows Server 2022 では Visual Studio 2022 をサポートしています。 CircleCI Server Windows イメージに含まれている内容の詳細はシステム管理者に問い合わせるか、[Discuss](https://discuss.circleci.com/) のページをご覧ください。
 
-Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+Windows Server 2022 イメージに関する詳細は、[Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1) を参照してください。
 
-The Windows images are updated approximately every 30 days. Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
+Windows イメージは約 30 日ごとにアップデートされます。 Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
 
 - Stable: 本番環境で使用可能な最新の Windows イメージを参照します。 このイメージは、安定性を適度に確保しつつ、ソフトウェアの定期アップデートを取り入れたいプロジェクトで使用してください。 アップデートは、通常月に 1 回の頻度で行われます。
 
