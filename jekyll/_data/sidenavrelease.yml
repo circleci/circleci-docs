@@ -1,7 +1,22 @@
 en:
-- name: Continuous Release
+- name: Release Orchestration
   children:
     - name: Overview
       link: continuous-release/overview
-    - name: Introduction
-      link: continuous-release/intro
+    - name: Getting Started
+      link: continuous-release/getting-started/getting-started
+      children:
+        - name: Step 1 - Create an Application
+          link: continuous-release/getting-started/step-1
+        - name: Step 2 - Create a Service
+          link: continuous-release/getting-started/step-2
+        - name: Step 3 - Choose a Release Policy
+          link: continuous-release/getting-started/step-3
+        - name: Step 4 - Expose Your Service
+          link: continuous-release/getting-started/step-4
+        - name: Step 5 - Install the Release Acknowledgments
+          link: continuous-release/getting-started/step-5
+        - name: Step 6 - Release Your Service
+          link: continuous-release/getting-started/step-6
+    - name: Using Release Orchestration
+      link: continuous-release/using-release-orchestration/using-release-orchestration
