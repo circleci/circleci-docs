@@ -3,6 +3,7 @@
 :icons: font
 :toc: macro
 
+This documentation includes an overview of the main concepts used in  Release Orchestration, along with a <<getting-started/getting-started#,Getting Started guide>>.
 
 // <<getting-started/step-1#,Getting Started>>
 

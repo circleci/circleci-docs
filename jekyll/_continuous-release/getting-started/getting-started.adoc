@@ -10,6 +10,8 @@ This guide walks you through the steps to complete your first release with Vamp,
 
 To use the Quick Start Guide, you will need:
 
+* Vamp login
+// add guidance on getting a login
 * A Kubernetes cluster
 * https://kubernetes.io/docs/tasks/tools/[kubectl] - a command-line tool for running commands on your Kubernetes cluster
 

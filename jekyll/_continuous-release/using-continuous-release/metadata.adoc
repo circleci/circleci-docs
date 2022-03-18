@@ -1,8 +1,0 @@
-:page-layout: classic-docs
-
-== Metadata
-
-=== Application metadata
-
-
-=== Service metadata
