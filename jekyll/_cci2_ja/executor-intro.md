@@ -20,7 +20,7 @@ CircleCI offers several execution environments. CircleCI ではこれらを **Ex
 {: #docker }
 
 <div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 ```yml
@@ -33,10 +33,13 @@ jobs:
         # プライマリ コンテナで実行するコマンド
 ```
 
-`docker` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker)をご覧ください。
+Find out more about the `docker` executor in the [Using Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) section of the Choosing an Executor Type page.
 
 ## Machine
 {: #machine }
+
+Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+{: class="alert alert-warning"}
 
 {:.tab.machine.Cloud}
 ```yml
@@ -63,7 +66,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+Find out more about the `machine` executor in the [Using machine]({{ site.baseurl }}/2.0/executor-types/#using-machine) section of the Choosing an Executor Type page.
 
 ## macOS
 {: #macos }
@@ -79,7 +82,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+Find out more about the `macos` executor in the [Using macOS]({{ site.baseurl }}/2.0/executor-types/#using-macos) section of the Choosing an Executor Type page.
 
 ## Windows
 {: #windows }
@@ -137,7 +140,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+Find out more about the `windows` executor in the [Using the Windows executor]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor) section of the Choosing an Executor Type page. Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
