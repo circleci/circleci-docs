@@ -15,23 +15,11 @@ Log in to Vamp, then navigate to the https://vamp.cloud/6/quickstart[Quick Start
 
 Now follow the steps in the guide:
 
-. Create an Application
+. <<./step-1#,Create an Application>>
 . Create a Service
 . Choose a Release Policy
 . Expose your Service
 . Install the Release Agent
 . Release Your Service
 
-// include::step-1.adoc[]
-
-// include::step-2.adoc[]
-
-// include::step-3.adoc[]
-
-// include::step-4.adoc[]
-
-// include::step-5.adoc[]
-
-// include::step-6.adoc[]
-
-// include::next-steps.adoc[]
+{% include_relative step-1.adoc %}

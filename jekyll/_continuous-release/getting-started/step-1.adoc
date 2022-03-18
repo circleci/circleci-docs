@@ -1,8 +1,9 @@
-= Getting Started - Step 1: Create an Application
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
+
+== Step 1: Create an Application
 
 In Vamp, an application is a collection of microservices that share a single Kubernetes namespace.
 
