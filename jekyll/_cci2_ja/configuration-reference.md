@@ -474,7 +474,7 @@ jobs:
       - run: echo 'Hello, Windows'
 ```
 
-#### **`branches` – 廃止予定**
+#### **`branches` – 非推奨**
 {: #branches-deprecated }
 
 **このキーは非推奨になりました。 実行するジョブと対象のブランチを制御するためには、[#jobfilters](#jobfilters)ワークフローでフィルターを使用してください。**
