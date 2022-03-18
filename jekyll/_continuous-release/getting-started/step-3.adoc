@@ -30,4 +30,6 @@ Choose _Yes_ under _Advanced_ to set specific policies for different types of re
 
 When you have finished choosing your release policy, click **Next** to attach the policy to your service. 
 
-You will see a pop up message to confirm that the policy has been attached to your service.
+You will see a pop-up message to confirm that the policy has been attached to your service.
+
+You can now proceed to <<step-4#,Step 4>>.

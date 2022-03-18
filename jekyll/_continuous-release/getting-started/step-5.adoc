@@ -6,6 +6,8 @@
 
 == Step 5: Install the Release Agent
 
-{% include snippets/release-agent.adoc %}
+{% include release-orchestration/release-agent.adoc %}
 
 Once you see an _Installation successful_ status, click *Next*.
+
+You can now proceed to <<step-6#,Step 6>>.

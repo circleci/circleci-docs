@@ -64,3 +64,5 @@ When you have finished entering the details for your service, either click **Nex
 You will see a pop up message to confirm that your service has been created.
 
 NOTE: You can create a total of six services in the Quick Start Guide.
+
+You can now proceed to <<step-3#,Step 3>>.

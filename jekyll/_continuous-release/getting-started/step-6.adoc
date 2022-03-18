@@ -28,3 +28,5 @@ For Vamp to release a version of a service, the workload must be labelled correc
 IMPORTANT: Vamp requires that the `app` and the `version` labels on the Kubernetes deployment and pod template match. If the labels do not match, the Release Agenty ignores the deployment and the new version is not released.
 
 // provide an example here, highlighting the relevant parts of the YAML file.
+
+You can now proceed to the <<next-steps#,Next Steps>>.

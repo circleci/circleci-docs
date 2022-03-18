@@ -4,7 +4,7 @@
 :icons: font
 :toc: macro
 
-This guide walks you through the steps to complete your first release with Vamp, using the Quick Start Guide. You can use the Quick Start Guide to release up to six microservices.
+This guide walks you through the steps to complete your first release with Vamp, using the https://vamp.cloud/6/quickstart[Quick Start Guide]. You can use the Quick Start Guide to release up to six microservices.
 
 == Prerequisites
 
@@ -15,7 +15,7 @@ To use the Quick Start Guide, you will need:
 
 Log in to Vamp, then navigate to the https://vamp.cloud/6/quickstart[Quick Start Guide with this link].
 
-Now follow the steps in the guide:
+Now follow the steps below:
 
 . <<./step-1#,Create an Application>>
 . <<./step-2#,Create a Service>>
