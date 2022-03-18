@@ -76,7 +76,7 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 
     完全自動オプションを選択すると、[Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。
     
-    含められる CI/CD パイプラインに関する詳細は、 [Orb のパブリッシュプロセス]({{site.baseurl}}/2.0/creating-orbs/) を参照してください。
+    含められる CI/CD パイプラインに関する詳細は、 [Orb のパブリッシュプロセス]({{site.baseurl}}/ja/2.0/creating-orbs/) を参照してください。
     
     または、[Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) をダウンロードするだけの便利な方法を選ぶ場合は、「すべて手動で行う」を選択します。
 
@@ -156,7 +156,7 @@ $ git branch
 
 上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートの役割を果たします。 任意で Orb 開発を強化するための [`scripts`](#scripts) ディレクトリと [`tests`](#testing-orbs) ディレクトリがプロジェクトに含まれている場合もあります。これらのディレクトリについては、このページの「[スクリプト](#scripts)」セクションと、「[Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/)」ガイドに解説があります。
 
-`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config)のコンポーネント タイプに対応しており、Orb から追加や削除をすることができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
+`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config)のコンポーネント タイプに対応しており、Orb から追加や削除をすることができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
 ##### @orb.yml
 {: #orbyml }
