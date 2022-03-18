@@ -1,0 +1,57 @@
+:page-layout: classic-docs
+
+== Metrics
+
+// Incorporate content from here: https://docs.vamp.cloud/using-vamp-cloud/policies/built-in-metrics
+
+=== Built-in Metrics
+
+// pod health and restarts
+
+By default, Vamp includes the following metrics.
+
+// signpost Policies
+
+==== Kubernetes-related metrics
+
+*Kubernetes Pod Restarts*
+
+NOTE: Every release policy must include a condition for Kubernetes Pod restarts. 
+
+Kubernetes Pod restarts are a good indicator of the basic performance of your service.
+
+Kubernetes restarts a Pod if it fails its regular _liveness probe_. Kubernetes uses liveness probes to catch situations where an application is running but unable to make progress. Restarting a container in such a state can help to make the application more available, even if there are bugs.
+
+Typically, a newly deployed version of a service will experience no restarts during a release, so you can set a low budget, for example,  fewer than two restarts per five-minute window.
+
+*Kubernetes Minimum Available Pods*
+
+TIP: We recommend including a condition for Kubernetes Minimum Available Pods in the first step of a multi-step release policy.
+
+// link to release policy
+
+The Kubernetes Minimum Available Pods metric is a good indicator of whether a newly deployed version of your service is stable enough to be released.
+
+This metric corresponds to the generic Kubernetes _Does not have minimum availability_ message seen when a workload is deployed. This can be caused by the nodes in the cluster lacking sufficient resources to run some or all of the requested Pods. It can also be caused by a misconfiguration, for example, a missing Kubernetes Secret.
+
+*Available Kubernetes Pods*
+
+The _Available Kubernetes Pods_ metric can be a useful indicator of both the stability and the efficiency of your service.
+
+Kubernetes marks a Pod as unavailable if it fails its regular readiness probe. 
+
+If you use a Horizontal Pod Autoscaler (HPA) to manage the number of Pods, a larger than expected number of available Pods can be an indicator that your new version is using more CPU or memory than expected.
+
+==== REST and GraphQL API Metrics
+
+// There are some warning messages here about NGINX, linking to some GitHub issues. It looks as though those issues have been resolved. Am awaiting clarification.
+
+*API Success Rate*
+
+If your service exposes a REST API or GraphQL API, the API Success Rate metric indicates how many of the requests returned an error instead of the expected response.
+
+*API Request Duration*
+
+If your service exposes a REST API or GraphQL API, the API Request Duration metric indicates the average response time in milliseconds (ms).
+
+

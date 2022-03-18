@@ -1,0 +1,7 @@
+:page-layout: classic-docs
+
+== Integrations
+
+// Need to add something on OpenTelemetry: https://docs.vamp.cloud/integrations/opentelemetry
+
+// Also add details on integrations with Honeycomb, Datadog, Rollbar, etc
