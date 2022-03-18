@@ -5,7 +5,6 @@ const isFirstStepsPage =
   window.location.pathname == '/docs/2.0/first-steps/' ||
   window.location.pathname == '/docs/ja/2.0/first-steps/';
 
-
 function handleGithubDropdownClick() {
   const dropdown = $('.gh-signup-dropdown');
   // toggle the popup
