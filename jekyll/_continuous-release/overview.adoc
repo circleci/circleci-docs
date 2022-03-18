@@ -3,6 +3,9 @@
 :icons: font
 :toc: macro
 
+
+// <<getting-started/step-1#,Getting Started>>
+
 == What is Release Orchestration?
 
 Release Orchestration is taking your working code and making it accessible to users in a predictable, repeatable, and efficient way. The emphasis is on ensuring that the release of a new version does not result in a worse user experience.

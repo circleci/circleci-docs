@@ -9,6 +9,8 @@ toc: false
 
 HELLO?
 
+<<getting-started/step-1#,Getting Started>>
+
 // = INSTALLATION GUIDE: A guide for using continuous release
 
 // docs@circleci.com
