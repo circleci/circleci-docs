@@ -108,7 +108,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ### Passing parameters when triggering pipelines using the UI
 {: #passing-parameters-when-triggering-pipelines-using-the-ui }
 
-In addition to using the CLI and API, you can also trigger a pipeline with parameters from the UI. To do this,
+In addition to using the CLI and API, you can also trigger a pipeline with parameters from the UI. To do this:
 
   1. Navigate to the dashboard view in the UI.
   2. Use the project filter to select the desired project.
