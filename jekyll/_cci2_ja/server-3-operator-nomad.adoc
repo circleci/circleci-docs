@@ -73,8 +73,8 @@ NOTE: `-stderr` フラグは必ず指定してください。 これにより、
 指定されたジョブの割り当てからログを取得するには、以下の手順に従います。
 
 . `nomad status` コマンドで、ジョブ ID を取得します。
-.  `nomad status <job-id>` コマンドで、ジョブの割り当て ID を取得します。
-.  `nomad logs -stderr <allocation-id>` で、割り当てからログを取得します。
+. `nomad status <job-id>` コマンドで、ジョブの割り当て ID を取得します。
+. `nomad logs -stderr <allocation-id>` で、割り当てからログを取得します。
 
 === Nomad クライアントのシャットダウン
 
