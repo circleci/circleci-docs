@@ -62,8 +62,7 @@ circleci orb init /path/to/myProject-orb --private --host <your-server-installat
 
     `circleci orb init` コマンドを、Orb プロジェクト用に作成して初期化するディレクトリを付けて呼び出します。 このディレクトリと Git のプロジェクト リポジトリには、同じ名前を使用することをお勧めします。
 
-1. **Orb 完全自動設定オプションを選択します。**
-<br>
+1. **Orb 完全自動設定オプションを選択します。** <br>
 <!---->
 ```shell
   ? Would you like to perform an automated setup of this orb?:
