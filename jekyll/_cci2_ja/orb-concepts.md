@@ -14,7 +14,7 @@ verison:
 * 目次
 {:toc}
 
-[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
+[CircleCI Orb](https://circleci.com/orbs/) とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、共有可能な設定要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
 
 ## Orb の設定要素
 {: #orb-configuration-elements }
@@ -250,33 +250,33 @@ _[参照: インライン Orb の記述方法]({{site.baseurl}}/2.0/reusing-conf
 ## プライベート Orb とパブリック Orb
 {: #private-orbs-vs-public-orbs }
 
-There are two ways to publish an orb: public or private:
+Orb をパブリッシュする方法は 2 つあります。パブリックまたはプライベートです。
 
-* If you prefer to publish your orb so that only those within your organization can see and use it, you should publish a private orb.
-* If you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs) for use by anyone, create a public orb.
+* 組織内のメンバーだけが Orb を閲覧したり使用できるようにするには、 プライベート Orb をパブリッシュします。
+* Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュし誰でも使用できるようにするには、パブリック Orb を作成します。
 
-Private orbs are described in more detail below.
+プライベート Orb について下記で詳しく説明します。
 
-### プライベート Orbs
+### プライベート Orb
 {: #private-orbs }
 
-**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
+**注:** プライベート Orb は、[料金プランのページに記載されているすべてのプラン](https://circleci.com/pricing)でご利用いただけます。</em>
 {: class="alert alert-warning"}
 
-プライベート Orbs 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。
+プライベート Orb 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。　
 
-* Your orb will not appear in the [CircleCI Orb Registry](https://circleci.com/developer/orbs) unless you have the direct URL and are authenticated with the org that created it.
+* 直接 URL があり、作成した組織で認証されていない限り、Orb が[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)に表示されることはありません。
 
-* Your orb cannot be viewed or used by someone outside of your organization.
+* お客様の組織以外のユーザーは閲覧、使用できません。
 
-* Your orb cannot be used in a pipeline that does not belong to your organization.
+* お客様の組織のものではないパイプラインでは使用できません。
 
-By choosing to use a private orb instead of a public orb, you also need to understand certain inherent limitations, which include:
+パブリック Orb ではなくプライベート Orb を選択する場合には、プライベート Orb ならではの制限事項も理解する必要があります。具体的には次のとおりです。
 
-* 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 You may, however, use ond of the following options:
+* 設定ファイルの検証に `circleci config validate` コマンドを使用できなくなります。 しかし、以下のいずれかを選択していただけます。
 
-    * Paste the content of the orb into the `orbs` stanza of your configuration.
-    * Use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration. The org slug is defined as `<your-VCS>/<your-org-name>`, for example, `gh/circleci`.
+    * Orb のコンテンツを設定ファイルの `orbs` スタンザに貼り付けます。
+    * `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` を使って設定を検証します。 組織のスラッグが、たとえば `gh/circleci` のように `<your-VCS>/<your-org-name>` として定義されます。
 
 * 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
@@ -367,7 +367,7 @@ Orb のスタンザは、Orb の中で使うことができます。 安定版 O
 
 `biz/baz` が `3.0.0` に更新されても、`foo/bar` が `1.2.3` よりも上のバージョンでパブリッシュされるまで、`foo/bar@1.2.3` を使用しているユーザーには `biz/baz@3.0.0` の変更が反映されません。
 
-メモ: Orb の要素は、他の Orb の要素を使用して直接構成できます。 たとえば、以下の例のような Orb を使用できます。
+Orb の要素は、他の Orb の要素を使用して直接構成できます。 たとえば、以下の例のような Orb を使用できます。
 
 
 ```yaml
