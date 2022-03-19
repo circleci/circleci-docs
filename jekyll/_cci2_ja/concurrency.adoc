@@ -1,11 +1,11 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3
 - Server 2
 ---
-= Concurrency
+= 同時処理
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
@@ -13,11 +13,11 @@ version:
 :toc: macro
 :toc-title:
 
-This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
+ここでは同時処理について概説し、同時処理を活用する方法を紹介します。
 
-In CircleCI, **concurrency** refers to utilizing multiple containers to run multiple jobs at the same time. This is different from CircleCI **parallelism**, which is test-splitting across multiple containers. If you would like information on parallelism, visit the <<parallelism-faster-jobs#,Running Tests in Parallel>> page.
+CircleCI では、**同時処理**とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 これは、複数のコンテナにテストを分割する **並列処理**とは異なります。 並列処理については、<<parallelism-faster-jobs#,Running Tests in Parallel>> のページをご覧ください。
 
-Every plan with CircleCI includes the ability to run jobs concurrently. However, the number of jobs you can run concurrently differs between plans. Please refer to the https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
+CircleCI のすべてのプランにジョブを同時に実行する機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 Please refer to the https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
 
 toc::[]
 
