@@ -13,34 +13,34 @@ version:
 :toc: macro
 :toc-title:
 
-ここでは同時処理について概説し、同時処理を活用する方法を紹介します。
+ここでは同時処理について概説し、活用する方法を紹介します。
 
 CircleCI では、**同時処理**とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 これは、複数のコンテナにテストを分割する **並列処理**とは異なります。 並列処理については、<<parallelism-faster-jobs#,Running Tests in Parallel>> のページをご覧ください。
 
-CircleCI のすべてのプランにジョブを同時に実行する機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 Please refer to the https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
+CircleCI のすべてのプランにジョブの同時処理機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 お客様のプランに含まれる同時処理が可能なジョブの数に関する最新情報は、 https://circleci.com/pricing/[料金プランのページ] を参照してください。
 
 toc::[]
 
 == 同時処理
 
-Within CircleCI, concurrent jobs can be classified as one of two situations:
+CircleCI では、ジョブの同時処理は下記の 2 つの状況に分られます。
 
-* Multiple running jobs configured in a single workflow
-* Multiple workflows running by multiple members within the organization
+* 1 つのワークフロー内に設定された複数の実行ジョブ
+* 組織内の複数のメンバーが実行する複数のワークフロー
 
-This page discusses the first point, and will provide examples of how to configure concurrent jobs in a single workflow. Configuring concurrency in a workflow allows multiple jobs to be run at the same time, in a single workflow, through the use of multiple containers.
+ここでは 1 つ目の状況について説明し、1 つのワークフロー内に複数のジョブを設定する方法の例を紹介します。 ワークフロー内で同時処理を設定すると、単一のワークフロー内で複数のコンテナを使用して複数のジョブを同時に実行することができます。
 
-To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the <<configuration-reference#resourceclass,resource classes>> for different executors.
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、各 Executor の<<configuration-reference#resourceclass,resource classes>> ごとに同時処理数のソフト制限が設けられています。
 
-If jobs are queued, it is possible you are hitting these limits. Hitting your limit may depend on a few factors, such as how many people in your organization are running jobs at once, or if you have overlapping workflows.
+ジョブがキューに入る場合、この制限に達している可能性が考えられます。 制限に達する理由は、組織内で同時にジョブを実行しているユーザーの数や、ワークフローが重複しているなど、複数の要因があります。
 
-Customers on a Performance or Scale plan can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+Performance プラン または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。 https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート] にご連絡ください。
 
-=== Concurrency in workflows
+=== ワークフロー内での同時処理
 
-To run a set of concurrent jobs, you will need to add a `workflows` section to your existing `.circleci/config.yml` file.
+一連の同時処理ジョブを実行するには、既存の `.circleci/config.yml` ファイルに `workflows` セクションを追加する必要があります。
 
-The simple example below shows the default workflow orchestration with two concurrent jobs. The `workflows` key needs to have a unique name. In this example, the unique name is `build_and_test`. The `jobs` key is nested under the uniquely named workflow, and contains the list of job names. Since the jobs have no dependencies, they will run concurrently.
+以下は、2 つの同時実行ジョブから成るデフォルトのワークフローオーケストレーションのシンプルな例です。 この `workflows` キーには一意の名前を指定する必要があります。 この例では、一意の名前は `build_and_test` です。 `jobs` キーは一意の名前のワークフローの下にネストされ、ジョブ名のリストが含まれます。 ジョブには依存関係が定義されていないため、同時に実行されます。
 
 version: 2.1
 
@@ -69,7 +69,7 @@ workflows:
       - build
       - test
 
-Please note, if you are still using Server 2 and `version: 2`, your `workflows` section will need to specify the version again, as in the below snippet:
+Server 2 で `version: 2` をご使用の場合は、 `workflows` のセクションで再びバージョンを下記のスニペットのように指定する必要があるのでご注意ください。
 
 ...
 workflows:
@@ -82,11 +82,11 @@ workflows:
 
 === ファンアウト/ファンイン ワークフローの例
 
-A more complex example of using concurrent workflows is running a common build job, fanning-out to run a set of acceptance test jobs concurrently, and then fanning-in to run a common deploy job. This flow is illustrated below.
+同時処理ワークフローを使ったより複雑な例では、共通のビルドジョブを実行し、次にファンアウトして一連の受け入れテストジョブを同時に実行し、最後にファンインして共通のデプロイジョブを実行します。 その流れは以下の通りです。
 
 image::fan-out-in.png[Fan-out and Fan-in Workflow]
 
-The `.circleci/config.yml` snippet below is an example of a `workflows` section configured for fan-out/fan-in job execution. In this example, as soon as the `build` job finishes successfully, all four acceptance test `jobs` start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
+下記の  `.circleci/config.yml` スニペットは、ファンイン・ファンアウトジョブの実行が設定された `workflows` の例です。 この例では、`build` ジョブが成功した後すぐに 4 つの受け入れテスト  `jobs` がスタートします。 4 つの acceptance_test ジョブすべてが成功するのを待って、 `deploy` ジョブが実行されます。
 
 ...
 workflows:
@@ -113,7 +113,7 @@ workflows:
             - acceptance_test_4
 ...
 
-Please note, if you are still using CircleCI Server 2 with `version: 2`, you will need to specify the version in the `workflows` section, as mentioned in the <<#concurrency-in-workflows,Concurrency in workflows>> section.
+<<#concurrency-in-workflows,ワークフロー内での同時処理>>で述べたように、Server 2 で `version: 2` をご使用の場合は、 `workflows` のセクションでバージョンを指定する必要があるのでご注意ください。
 
 == 関連項目
 
