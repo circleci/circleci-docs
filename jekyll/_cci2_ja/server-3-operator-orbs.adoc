@@ -1,17 +1,17 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Managing Orbs
+= CircleCI Server v3.x での Orb の管理
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to learn about orbs and how to manage them within CircleCI server v3.x.
+:page-description: このドキュメントでは Orb について、また CircleCI Server v3.x. で Orb を管理する方法を説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This section describes how to manage orbs for an installation of server v3.x. CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 All orbs referenced in configs refer to the orbs in the server orb registry. Orb のメンテナンスはご自身で行う必要があります。 This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
+ここでは Server v3.x. で Orb を管理する方法を説明します。 CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照された Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
 
 For information on orbs and related use cases, see the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs].
 
@@ -19,7 +19,7 @@ If you are looking for information on creating an orb, see the https://circleci.
 
 toc::[]
 
-## Managing Orbs
+## Orb の管理
 Orb には、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
 Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
 
