@@ -12,7 +12,7 @@ version:
   - Server v3.x
 ---
 
-CircleCIでは、複数のビルド環境を用意しています。 CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCIでは、複数のビルド環境を用意しており、 これらを **Executor** と呼んでいます。 **Executor** は、ジョブを実行する基盤テクノロジーまたは環境を定義する機能です。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -33,7 +33,7 @@ jobs:
         # プライマリ コンテナで実行するコマンド
 ```
 
-`docker` Executor についての詳細は、「Executor タイプの選択」の[Docker の使用]({{ site.baseurl }}/2.0/executor-types/#using-docker)のページをご覧ください。
+`docker` Executor についての詳細は、「Executor タイプの選び方」の[Docker を使用する]({{ site.baseurl }}/2.0/executor-types/#using-docker)のページをご覧ください。
 
 ## マシン
 {: #machine }
@@ -66,7 +66,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-`machine` Executor についての詳細は、「Executor タイプの選択」の[マシンの使用]({{ site.baseurl }}/2.0/executor-types/#using-machine)のページをご覧ください。
+`machine` Executor についての詳細は、「Executor タイプの選び方」の[マシンを使用する]({{ site.baseurl }}/2.0/executor-types/#using-machine)のページをご覧ください。
 
 ## macOS
 {: #macos }
@@ -82,7 +82,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-`macos` Executor についての詳細は、「Executor タイプの選択」の [macOS の使用]({{ site.baseurl }}/2.0/executor-types/#using-macos)のページをご覧ください。
+`macos` Executor についての詳細は、「Executor タイプの選び方」の [macOS を使用する]({{ site.baseurl }}/2.0/executor-types/#using-macos) のページをご覧ください。
 
 ## Windows
 {: #windows }
@@ -90,7 +90,7 @@ jobs:
 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
 * クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
-* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
+* オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。_CircleCI Server v2.18.3_ からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
 ```yml
@@ -140,7 +140,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about the `windows` executor in the [Using the Windows executor]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor) section of the Choosing an Executor Type page. Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor についての詳細は、「Executor タイプの選び方」の [Windows Executor を使用する]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor)のページをご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
@@ -148,7 +148,7 @@ Find out more about the `windows` executor in the [Using the Windows executor]({
 * [Executor タイプの選択]({{ site.baseurl }}/ja/2.0/executor-types/)
 * [ビルド済み CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)
 * [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
-* [Windows でビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
+* [Windows でのビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
 
 ## さらに詳しく
 {: #learn-more }
