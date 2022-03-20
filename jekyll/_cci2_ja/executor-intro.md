@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Executor とイメージ"
 short-title: "Executor とイメージ"
-description: "CircleCI executors and images"
+description: "CircleCI の Executor とイメージ"
 categories:
   - 設定
 order: 1
@@ -12,7 +12,7 @@ version:
   - Server v3.x
 ---
 
-CircleCI offers several execution environments. CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCIでは、複数のビルド環境を用意しています。 CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -33,12 +33,12 @@ jobs:
         # プライマリ コンテナで実行するコマンド
 ```
 
-Find out more about the `docker` executor in the [Using Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) section of the Choosing an Executor Type page.
+`docker` Executor についての詳細は、「Executor タイプの選択」の[Docker の使用]({{ site.baseurl }}/2.0/executor-types/#using-docker)のページをご覧ください。
 
-## Machine
+## マシン
 {: #machine }
 
-Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+Ubuntu 14.04 および 16.04 マシンイメージはすでにサポートが終了し、[2022 年 5 月 31 日に提供を終了します。](https://circleci.com/blog/ubuntu-14-16-image-deprecation/) この 2 つのイメージは、2022 年の 3 月 29 日と 4 月 26 日に、提供を一時的に中断します。 [14.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/14.04-to-20.04-migration/) および [16.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/16.04-to-20.04-migration/) イメージからの移行をお願いいたします。
 {: class="alert alert-warning"}
 
 {:.tab.machine.Cloud}
@@ -66,7 +66,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about the `machine` executor in the [Using machine]({{ site.baseurl }}/2.0/executor-types/#using-machine) section of the Choosing an Executor Type page.
+`machine` Executor についての詳細は、「Executor タイプの選択」の[マシンの使用]({{ site.baseurl }}/2.0/executor-types/#using-machine)のページをご覧ください。
 
 ## macOS
 {: #macos }
@@ -82,7 +82,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about the `macos` executor in the [Using macOS]({{ site.baseurl }}/2.0/executor-types/#using-macos) section of the Choosing an Executor Type page.
+`macos` Executor についての詳細は、「Executor タイプの選択」の [macOS の使用]({{ site.baseurl }}/2.0/executor-types/#using-macos)のページをご覧ください。
 
 ## Windows
 {: #windows }
