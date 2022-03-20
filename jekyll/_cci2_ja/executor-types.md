@@ -43,7 +43,7 @@ version:
 ## Docker を使用する
 {: #using-docker }
 
-`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナイメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
 Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 Docker イメージは、すべてのステップが実行されるプライマリコンテナを生成する [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで指定します。
 
@@ -202,13 +202,13 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 Docker コンテナのスピンアップからジョブの実行までに要する時間は、複数の要因により変わることがあります。要因としては、イメージのサイズのほか、レイヤーの一部または全部が基盤となる Docker ホストマシンに既にキャッシュされているかどうかも影響します。
 
-CircleCI イメージなどのより広く利用されているイメージほど、多くのレイヤーがキャッシュでヒットする可能性が高くなります。 よく使われる CircleCI イメージの多くで、同じ基本イメージが使用されています。 The majority of the base layers are the same between images, so you have a greater chance of having a cache hit.
+CircleCI イメージなどのより広く利用されているイメージほど、多くのレイヤーがキャッシュでヒットする可能性が高くなります。 よく使われる CircleCI イメージの多くで、同じ基本イメージが使用されています。 各イメージ間で大部分の基本レイヤーが同じなため、キャッシュがヒットする確率が高くなっています。
 
-環境のスピンアップは新しいジョブごとに必要です (新規ジョブが同じワークフロー内にある場合でも、ジョブの再実行や 2 回目以降の実行の場合でも)。 (CircleCI never reuses containers, for security reasons.) Once the job is finished, the container is destroyed. There is no guarantee that jobs, even in the same workflow, will run on the same Docker host machine. This implies that the cache status may differ.
+環境のスピンアップは新しいジョブごとに必要です (新規ジョブが同じワークフロー内にある場合でも、ジョブの再実行や 2 回目以降の実行の場合でも)。 CircleCI ではセキュリティ上の理由から、コンテナを再利用することはありません。 ジョブが終了すると、コンテナは破棄されます。 たとえ同じワークフロー内にある場合でも、ジョブが同じ Docker ホストマシンで実行される保証はありません。　 これは、キャッシュステータスが異なる可能性があることを意味します。
 
-In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst-case scenario of a full image pull should be accounted for in all jobs.
+いかなる場合でも、キャッシュのヒットは保証されるものではなく、ヒットすればラッキーな景品のようなものと言えるでしょう。 そのため、すべてのジョブでキャッシュがまったくヒットしないケースも想定しておいてください。
 
-In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chances of hitting cached layers in the "Spin Up Environment" step.
+つまり、キャッシュのヒット率は設定や構成で制御することはできません。[CircleCI イメージ](https://circleci.com/developer/images)など、広く利用されているイメージを選択すれば、"環境のスピンアップ" ステップでレイヤーがキャッシュでヒットする可能性が高まるでしょう。
 
 ### 使用可能な Docker リソース クラス
 {: #available-docker-resource-classes }
