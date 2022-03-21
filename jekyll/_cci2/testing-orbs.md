@@ -105,7 +105,7 @@ circleci local execute --job orb-tools/pack
 ### Shellcheck
 {: #shellcheck }
 
-One of the major benefits of using the orb development kit is the ability to [import external bash scripts]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/scripts) directory, you can run additional tests against your scripts.
+One of the major benefits of using the orb development kit is the ability to [import external bash scripts]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) directory, you can run additional tests against your scripts.
 
 The most basic tests to run against bash scripts are a form of validation: "shellchecking". This is similar to a linter for Bash, you can find out more at [shellcheck.net](https://www.shellcheck.net/).
 
