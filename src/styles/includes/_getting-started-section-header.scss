@@ -1,0 +1,37 @@
+.section-title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: left;
+  font-feature-settings: 'liga' off;
+  color: #000000;
+  
+  @media (max-width: $screen-sm) {
+    font-size: 30px;
+    line-height: 38px;
+    text-align: left;
+  }
+}
+
+.image-banner {
+  width: 100%;
+}
+
+.content-wrapper {
+  text-align: left;
+  > p {
+    color: #000000;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+
+    @media (max-width: $screen-sm) {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+}
