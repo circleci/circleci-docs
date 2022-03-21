@@ -22,9 +22,11 @@ When you choose a policy from the list, the summary shows you which metrics that
 
 // what policies are available?
 
-You can either select an existing policy, or create your own policy.
+You can either select an existing policy, or <<../using-release-orchestration/policies#,create your own policy>>.
 
 === Configuring Advanced Settings
+
+// screenshot
 
 Choose _Yes_ under _Advanced_ to set specific policies for different types of release.
 
@@ -32,4 +34,5 @@ When you have finished choosing your release policy, click **Next** to attach th
 
 You will see a pop-up message to confirm that the policy has been attached to your service.
 
+[example]
 You can now proceed to <<step-4#,Step 4>>.

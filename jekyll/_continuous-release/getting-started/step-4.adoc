@@ -48,4 +48,5 @@ If you do not want to expose a service, you can delete the route.
 
 WARNING: If choose not to expose a service, you will be unable to use release policies that include traffic-based SLOs with that service.
 
+[example]
 You can now proceed to <<step-5#,Step 5>>.
