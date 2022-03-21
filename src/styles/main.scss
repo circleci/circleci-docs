@@ -23,6 +23,9 @@
 @import 'prism/theme';
 @import 'prism/copy-code-button';
 
+// includes
+@import 'includes/two-up';
+
 // General
 body {
 	color: $body-text-color;
