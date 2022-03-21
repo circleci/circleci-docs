@@ -54,7 +54,7 @@ Your changes have now been merged to the default branch, but if you check the [O
 
 To publish a new version of our orb, we must tag our release. A tag can be created and pushed manually, however we recommend using [GitHub.com's Releases feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release).
 
-Using GitHub's Releases feature will allow us the change to publish "Release Notes", which will function as a changelog for the new version of the orb.
+Using GitHub's Releases feature will allow us to publish "Release Notes", which will function as a changelog for the new version of the orb.
 
 Follow the GitHub docs to create a new release.
 
