@@ -33,7 +33,7 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 
 It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
 
-Refer to CircleCI documentation of [Workflows filters]({{site.baseurl}}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes.
+Refer to the CircleCI documentation on [Workflows filters]({{site.baseurl}}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for information on how to build tag pushes.
 
 ### Add a .circleci/config.yml file
 {: #add-a-circleciconfigyml-file }
