@@ -208,6 +208,7 @@ Now OAuth tokens will, by default, _not_ have access to organization data when t
 If you are an owner/admin, you can enable third party access restrictions by visiting the [Organization settings](https://github.com/settings/organizations) page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
 
 If you enable these restrictions on an organization for which CircleCI has been running builds, CircleCI will stop receiving push event hooks from GitHub, and will not build new pushes. API calls will also be denied, causing, for instance, re-builds of old builds to fail the source checkout. To get CircleCI working again, you will need to grant access to the CircleCI application.
+{: class="alert alert-info" }
 
 ## Deployment keys and user keys
 {: #deployment-keys-and-user-keys }
