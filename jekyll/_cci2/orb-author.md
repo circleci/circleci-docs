@@ -133,7 +133,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
 
-    Be sure to view the _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ file to view how your orb components are being tested, and modify your tests as you change your orb. Learn more about testing your orb in the[Orb Testing documentation]({{site.baseurl}}/docs/2.0/testing-orbs/).
+    Be sure to view the _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ file to view how your orb components are being tested, and modify your tests as you change your orb. Learn more about testing your orb in the [Orb Testing documentation]({{site.baseurl}}/docs/2.0/testing-orbs/).
 
     When you are ready to deploy the first production version of your orb, find information on deploying changes in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
@@ -345,7 +345,6 @@ Read our full [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) do
 With the Orb Development Kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
-{: class="alert alert-warning"}
 
 ### Categorizing your orb
 {: #categorizing-your-orb }

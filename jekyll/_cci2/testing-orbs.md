@@ -23,7 +23,7 @@ Orbs are open source and contributions are expected, therefore, as with all soft
 
 If you are following this guide and have created your orb using the Orb Development Kit, your orb project will follow the same structure as the [Orb Template](https://github.com/CircleCI-Public/Orb-Template). If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
 
-### `config.yml`
+### config.yml
 
 The first config file is responsible for publishing a development version of our orb, so that we may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, we can not test the orb _directly_, but in this stage we can still lint, valid, review, and potentially even run unit tests against our scripts.
 
@@ -32,7 +32,7 @@ After the development version of the orb has been published, the final `orb-tool
 See the full [config.yml template here](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/config.yml).
 
 
-### `test-deploy.yml`
+### test-deploy.yml
 
 This second configuration file has two main tasks, as the development version of the orb has been published in the previous config, we may now _directly_ test our orb with integration testing, and in the event that a tag is created, this config will also publish the orb to the CircleCI registry.
 
