@@ -1,18 +1,20 @@
+= Clusters
 :page-layout: classic-docs
-
-== Clusters
+:page-liquid:
+:icons: font
+:toc: macro
 
 The Clusters list shows the number of applications associated with each Kubernetes cluster. To access the Clusters list, click the _Applications_ tab, then choose _Clusters_ from the menu.
 
 // screenshot
 
-=== Creating a cluster
+== Creating a cluster
 
 To create a cluster, click *+Create Cluster* on the Clusters page.
 
-// include::../includes/create-cluster.adoc[]
+{% include release-orchestration/create-cluster.adoc %}
 
-=== Editing a cluster
+== Editing a cluster
 
 To edit a cluster, click on it on the Clusters page.
 
@@ -24,7 +26,7 @@ When you have finished editing the details, click the blue *Update* button.
 
 You will be returned to the Clusters list and you will see a pop-up message to confirm that your cluster has been updated.
 
-=== Deleting a cluster
+== Deleting a cluster
 
 To delete a cluster, click the trash icon next to the cluster you wish to delete.
 
