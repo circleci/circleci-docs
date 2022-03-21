@@ -125,15 +125,15 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     You will be provided with a link to the project building on CircleCI where you can view the full pipeline.
     You should also see the CLI has automatically migrated you into a new development branch, named `alpha`. You can use any branch naming you would like, you do not need to exclusively develop on `alpha`.
 
-    Because we are making use of [dynamic configuration]({{site.baseurl}}/docs/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not enabled.
+    Because we are making use of [dynamic configuration]({{site.baseurl}}/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not enabled.
 
-    Following the [Getting started with dynamic config in CircleCI]({{site.baseurl}}/docs/2.0/dynamic-config/#getting-started-with-dynamic-config-in-circleci), open the **Project Settings** page for your orb on CircleCI, navigate to the **Advanced** tab, and click on the **Enable dynamic config using setup workflows** button.
+    Following the [Getting started with dynamic config in CircleCI]({{site.baseurl}}/2.0/dynamic-config/#getting-started-with-dynamic-config-in-circleci), open the **Project Settings** page for your orb on CircleCI, navigate to the **Advanced** tab, and click on the **Enable dynamic config using setup workflows** button.
 
 1. **Develop your orb**
 
     From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
 
-    Be sure to view the _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ file to view how your orb components are being tested, and modify your tests as you change your orb. Learn more about testing your orb in the [Orb Testing documentation]({{site.baseurl}}/docs/2.0/testing-orbs/).
+    Be sure to view the _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ file to view how your orb components are being tested, and modify your tests as you change your orb. Learn more about testing your orb in the [Orb Testing documentation]({{site.baseurl}}/2.0/testing-orbs/).
 
     When you are ready to deploy the first production version of your orb, find information on deploying changes in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
