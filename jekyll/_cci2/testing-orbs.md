@@ -20,10 +20,12 @@ This guide covers various best practices for testing orbs.
 Orbs are open source and contributions are expected, therefore, as with all software, setting up a solid testing pipeline for your orb is important. Because orbs are created in YAML, it may seem difficult to test them effectively. With the orb development kit, there is a simple path to implementing a full range of robust tests for your orb.
 
 ## Orb-tools Pipeline Overview
+{: #orb-tools-pipeline-overview }
 
 If you are following this guide and have created your orb using the Orb Development Kit, your orb project will follow the same structure as the [Orb Template](https://github.com/CircleCI-Public/Orb-Template). If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
 
 ### config.yml
+{: #configyml }
 
 The first config file is responsible for publishing a development version of our orb, so that we may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, we can not test the orb _directly_, but in this stage we can still lint, valid, review, and potentially even run unit tests against our scripts.
 
@@ -33,6 +35,7 @@ See the full [config.yml template here](https://github.com/CircleCI-Public/Orb-T
 
 
 ### test-deploy.yml
+{: #test-deployyml }
 
 This second configuration file has two main tasks, as the development version of the orb has been published in the previous config, we may now _directly_ test our orb with integration testing, and in the event that a tag is created, this config will also publish the orb to the CircleCI registry.
 
@@ -86,6 +89,7 @@ workflows:
 ```
 
 #### Local Orb Validate
+{: #local-orb-validate }
 
 To pack and validate your orb locally, run the following commands:
 
@@ -108,6 +112,7 @@ The most basic tests to run against bash scripts are a form of validation: "shel
 In the `lint-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
 
 #### Local ShellCheck
+{: #local-shellcheck }
 
 To run shellcheck locally, run the following commands:
 
@@ -132,6 +137,7 @@ Review Checks output to JUNIT XML formatted and are automatically uploaded to Ci
 When you click into the error you will receive more information such as what file and at what line in the code the error was found, along with suggestions for resolution.
 
 #### Local Review
+{: #local-review }
 
 The "review" job is built using the [BATS-Core](https://github.com/bats-core/bats-core) bash automation testing framework. If you have bats installed locally, you can review your orb by running:
 
