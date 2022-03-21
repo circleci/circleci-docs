@@ -126,7 +126,7 @@ Supported Kubernetes versions:
 | 1.16 - 1.21
 
 | 3.4.0
-| 1.16 - 1.22
+| 1.16 - 1.23
 |===
 
 Creating a Kubernetes cluster is your responsibility. Please note:
@@ -198,7 +198,7 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 endif::env-aws[]
 
 ===== Enabling Workload Identity in GKE
-https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload identities] for GKE allow workloads/pods in your GKE cluster to impersonate IAM service accounts to access Google Cloud services without using static service account credentials. You have to enable workload identities on your GKE cluster to use it. 
+https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload identities] for GKE allow workloads/pods in your GKE cluster to impersonate IAM service accounts to access Google Cloud services without using static service account credentials. You have to enable workload identities on your GKE cluster to use it.
 
 ====== Step 1: Enable Workload Identity on existing cluster
 ```shell
@@ -219,7 +219,7 @@ https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workloa
     --workload-metadata="GKE_METADATA" \
     --region="<REGION>"
 ```
-You must repeat Step 2 for all the existing node pools.    
+You must repeat Step 2 for all the existing node pools.
 Steps to enable Workload Identity for Kubernetes service accounts are here - link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#step-5-enable-workload-identity[Object-Storage]
 
 === Create a new GitHub OAuth app
@@ -651,7 +651,7 @@ gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-s
 ```
 
 ===== Step 4: JSON Key File
-This step is NOT required if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities].  
+This step is NOT required if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities].
 After running the following command, you should have a file named `circleci-server-keyfile` in your local working directory. You will need this when you configure your server installation.
 
 ```shell
