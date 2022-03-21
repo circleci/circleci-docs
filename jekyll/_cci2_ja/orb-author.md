@@ -75,9 +75,9 @@ circleci orb init /path/to/myProject-orb --private
     When choosing the manual option, see [Manual Orb Authoring Process]({{site.baseurl}}/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
 
     When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。
-
+    
     For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
-
+    
     Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
 
 1. **Answer questions to configure and set up your orb.**
@@ -387,6 +387,7 @@ circleci orb list <my-namespace>
 To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace> --private
+
 ```
 
 `circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。

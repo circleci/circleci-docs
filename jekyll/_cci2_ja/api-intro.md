@@ -52,11 +52,11 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ### 認証
 {: #authentication }
 
-CircleCI API v2 では、API トークンを HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
+CircleCI API v2 では、[パーソナル API トークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**注意:** パスワードがないことを示すために `:` が記述されています。 **注意:** [プロジェクトトークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+**注:** パスワードがないことを示すために `:` が記述されています。 **注:** [パーソナル API トークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) は、現在 API v2 ではサポートされていません。 [プロジェクトトークン](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
@@ -118,9 +118,9 @@ API v2 のすべてのエンドポイントは、[API v2 リファレンス ガ�
 ## API v2 および CircleCI Server をご利用のお客様
 {: #api-v2-and-server-customers }
 
-API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
+API v2 は、CircleCI Server 2.x. ではサポートされていません。 CircleCI Server 3.x. のセルフホスティング環境ではサポートされています。
 
-## データ インサイト
+## データインサイト
 {: #data-insights }
 
 CircleCI API v2 では、特定のエンドポイントセットを呼び出して、ジョブやワークフローに関する詳細なインサイトやデータを取得することができます。 この情報により、ジョブやワークフローのパフォーマンスをより良く理解することができ、また、ワークフローやビルドを最適化するためのデータポイントを提供します。 API v2 のすべてのエンドポイントは、[API v2 リファレンス ガイド](https://circleci.com/docs/api/v2/)をご覧ください。 以下は、インサイトのエンドポイントの例です。

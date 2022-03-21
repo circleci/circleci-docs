@@ -17,7 +17,7 @@ Credits are used on CircleCI's Free, Performance, Scale, and Server plans. Each 
 The right plan for you and your team will depend on several factors:
 
 - How many users are on your team
-- How much support you need (community support, standard support, or premium support)
+- How much support you need (community and free support, standard support, or premium support)
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 

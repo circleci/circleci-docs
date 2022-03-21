@@ -8,19 +8,18 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: true
 suggested:
   - 
-    title: Keep environment variables private
+    title: 環境変数を非公開のままにする
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
   - 
-    title: Troubleshoot env vars settings
+    title: 環境変数の設定のトラブルシューティング
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
   - 
-    title: Insert files as environment variables
+    title: 環境変数としてファイルを挿入する
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
   - 
-    title: Context deadline exceeded after 1 hour - Build timed out
+    title: '"Context deadline exceeded after 1 hour" エラー: ビルドのタイムアウト'
     link: https://support.circleci.com/hc/ja/articles/4410707277083
     isExperiment: true
 ---
@@ -34,7 +33,7 @@ suggested:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、構成において各レベルで制御することができます。
+CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、設定において各レベルで制御することができます。
 
 プライベート プロジェクト全体で使用する**プライベート キー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで[Project Settings (プロジェクト設定)] の [[Environment Variables (環境変数)] ページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
 
@@ -45,7 +44,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 ## シークレットのマスキング
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
+_シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
 
 シークレットのマスキングは、[Project Settings (プロジェクト設定)] または [Contexts (コンテキスト)] で設定されている環境変数に適用されます。 環境変数は、プロジェクトのシークレットやキーを保持します。 シークレットやキーはアプリケーションにとってきわめて重要なものです。 シークレットのマスキングは、`echo` や `print` が使用される際にジョブ出力における環境変数を不明瞭にすることで、CircleCI のセキュリティを強化します。
 
@@ -54,7 +53,9 @@ _Secrets masking is not currently available on self-hosted installations of Circ
 * 環境変数の値が 4 文字未満
 * 環境変数の値が `true`、`True`、`false`、`False` のいずれか
 
-**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 コンテキストの値には、[SSH を使用したデバッグ]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 `-x` や `-o xtrace` オプションを使ってバッシュシェルを呼び出すとマスキングされていないシークレットが誤ってログに記録される場合があります ([シェルスクリプトの使用]({{site.baseurl}}/2.0/using-shell-scripts)を参照してください)。
+
+別の場所 (テスト結果やアーティファクトなど)に出力される場合、シークレットはマスキングされません。 コンテキストの値には、[SSH を使用したデバッグ]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 組織とリポジトリの名前変更
 {: #renaming-orgs-and-repositories }
@@ -71,7 +72,7 @@ _Secrets masking is not currently available on self-hosted installations of Circ
 ## 環境変数の使用オプション
 {: #environment-variable-usage-options }
 
-CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従った環境変数が使用されます。 有効な文字は、アルファベット (大文字と小文字)、数字、およびアンダースコアです。 環境変数の最初の文字はアルファベットにする必要があります。
+CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従った環境変数が使用されます。 大文字・小文字のアルファベット、数字、アンダースコアが使用でき、 環境変数の頭文字はアルファベットとします。
 
 ### 優先順位
 {: #order-of-precedence }
@@ -79,14 +80,14 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 
 環境変数は、以下に示す優先順位に従って使用されます。
 
-1. `FOO=bar make install` など、`run` ステップの[シェル コマンド](#%E3%82%B7%E3%82%A7%E3%83%AB-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)で宣言された環境変数
-2. [`run` ステップ](#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)で `environment` キーを使用して宣言された環境変数
+1. `FOO=bar make install` など、`run` ステップの[シェル コマンド](#setting-an-environment-variable-in-a-shell-command)で宣言された環境変数
+2. [`run` ステップ](#setting-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
 3. [ジョブ](#%E3%82%B8%E3%83%A7%E3%83%96%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)で `environment` キーを使用して設定された環境変数
-4. このドキュメントの「[CircleCI 定義済み環境変数](#%E5%AE%9A%E7%BE%A9%E6%B8%88%E3%81%BF%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0)」セクションで解説されている特別な CircleCI 環境変数
+4. このドキュメントの「[CircleCI 定義済み環境変数](#built-in-environment-variables)」セクションで解説されている特別な CircleCI 環境変数
 5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)。 手順については、[コンテキストに関するドキュメント]({{site.baseurl}}/2.0/contexts)を参照してください。
-6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数](#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%81%AE%E8%A8%AD%E5%AE%9A)
+6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数](#setting-an-environment-variable-in-a-project)
 
-`FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 [Contexts (コンテキスト)] ページで追加された環境変数は、[Project Settings (プロジェクト設定)] ページで追加された変数よりも優先されます。
+`FOO=bar make install` のように、`run` ステップのシェルコマンド内で宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 [Contexts (コンテキスト)] ページで追加された環境変数は、[Project Settings (プロジェクト設定)] ページで追加された変数よりも優先されます。
 
 ![環境変数の優先順位]({{site.baseurl}}/assets/img/docs/env-var-order.png)
 
@@ -94,11 +95,11 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 {: #notes-on-security }
 {:.no_toc}
 
-`.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 シークレットやキーは、CircleCI アプリケーションの[プロジェクト設定](#setting-an-environment-variable-in-a-project)または[コンテキスト設定](#setting-an-environment-variable-in-a-context)に格納してください。 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#%E6%9A%97%E5%8F%B7%E5%8C%96)」セクションを参照してください。
+`.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 シークレットやキーは、CircleCI アプリの[プロジェクト](#setting-an-environment-variable-in-a-project)や[コンテキスト](#setting-an-environment-variable-in-a-context)の設定に保存します。 詳細については、セキュリティに関するドキュメントの「[暗号化]({{site.baseurl}}/ja/2.0/security/#encryption)」セクションを参照してください。
 
-構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
+設定内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
-### 環境変数の構成例
+### 環境変数の設定例
 {: #example-configuration-of-environment-variables }
 {:.no_toc}
 
@@ -115,7 +116,7 @@ jobs: # 実行時の基本的な作業単位を定義
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキストまたはプロジェクトの画面で設定した環境変数を参照
-    steps: # # `build` ジョブを構成するステップを定義
+    steps: # # `build` ジョブを設定するステップを定義
       - checkout # 作業用ディレクトリにソースコードをチェックアウト
       # 環境変数をセットアップするステップを実行
       # MY_ENV_VAR を $BASH_ENV にリダイレクト
@@ -158,13 +159,13 @@ workflows: # build という名前のジョブを実行するだけのワーク�
 
 ![環境変数の挿入例]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
 
-上の設定ファイルと出力には、「今いるブランチを表示」という 2 つの類似するステップが含まれています。 これらのステップは、環境変数を読み取るための 2 つの方法を示しています。 なお、`${VAR}` 構文と `$VAR` 構文のどちらもサポートされています。 シェル パラメーターの展開については、[Bash のドキュメント](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion)を参照してください。
+上の設定ファイルと出力には、「今いるブランチを表示」という 2 つの類似するステップが含まれています。 これらのステップは、環境変数を読み取るための 2 つの方法を示しています。 なお、`${VAR}` 構文と `$VAR` 構文がどちらもサポートされています。 シェル パラメーターの展開については、[Bash のドキュメント](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion)を参照してください。
 
 ### パラメーターと Bash 環境の使用
 {: #using-parameters-and-bash-environment }
 {:.no_toc}
 
-原則として、CircleCI はビルド構成への環境変数の挿入をサポートしていません。 使用する値はリテラルとして扱われます。 そのため、`working_directory` を定義するときや、`PATH` を変更するとき、複数の `run` ステップで変数を共有するときに、問題が発生する可能性があります。
+原則として、CircleCI はビルド設定への環境変数の挿入をサポートしていません。 使用する値はリテラルとして扱われます。 そのため、`working_directory` を定義するときや、`PATH` を変更するとき、複数の `run` ステップで変数を共有するときに、問題が発生する可能性があります。
 
 ただし、[プライベート イメージ]({{site.baseurl}}/2.0/private-images/)をサポートするため、Docker イメージ セクションは例外となっています。
 
@@ -174,7 +175,7 @@ workflows: # build という名前のジョブを実行するだけのワーク�
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ```
 
-`version: 2.1` の設定ファイルを使用すると、`config.yml` 全体の構成の一部を再利用できます。 以下のように `parameters` 宣言を使用することで、再利用可能な `commands` `jobs` や `executors` に挿入を行う (値を渡す) ことができます。
+`version: 2.1` の設定ファイルを使用すると、`config.yml` 全体の設定の一部を再利用できます。 以下のように `parameters` 宣言を使用することで、再利用可能な `commands` `jobs` や `executors` に挿入を行う (値を渡す) ことができます。
 
 ```yaml
 version: 2.1
@@ -331,7 +332,7 @@ jobs:
 
     ![コンテキスト]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
-2. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
+2. 環境変数を関連付けるコンテキストを選択するか、[Create Context (コンテキストを作成)] ボタンをクリックして新しいコンテキストを作成します。
 3. [Add Environment Variable (環境変数を追加)] をクリックし、名前と値を入力します。
 4. 以下のように `.circleci/config.yml` ファイルで、workflows キーの下にコンテキストを追加してから、新しい環境変数を使用します。
 
@@ -402,7 +403,7 @@ jobs:
 
 環境変数は Docker コンテナにも設定することができます。 設定するには、[`environment` キー]({{site.baseurl}}/2.0/configuration-reference/#docker)を使用します。
 
-**注:**: この方法で設定する環境変数は、コンテナ内で実行される*ステップ*では使用できません。 これらを使用できるのは、コンテナ*によって*実行されるエントリポイントとコマンドのみです。 CircleCI のデフォルトでは、ジョブのプライマリ コンテナのエントリポイントは無視されます。 プライマリ コンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、[カスタム ビルドの Docker イメージの使用ページの_エントリポイントの追加_セクション]({{site.baseurl}}/ja/2.0/custom-images/#adding-an-entrypoint)を参照してください。
+**注:**この方法で設定する環境変数は、コンテナ内で実行される*ステップ*では使用できません。 これらを使用できるのは、コンテナ*によって*実行されるエントリポイントとコマンドのみです。 CircleCI のデフォルトでは、ジョブのプライマリ コンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、[カスタム ビルドの Docker イメージの使用ページの_エントリポイントの追加_セクション]({{site.baseurl}}/ja/2.0/custom-images/#adding-an-entrypoint)を参照してください。
 
 ```yaml
 version: 2.1
@@ -421,7 +422,9 @@ jobs:
           MY_ENV_VAR_2: my-value-2
 ```
 
-以下に、プライマリ コンテナ イメージ (最初にリストされたイメージ) とセカンダリ (サービス) コンテナ イメージに、別々の環境変数を設定する例を示します。
+以下に、プライマリ コンテナ イメージ (最初にリストされたイメージ) とセカンダリ サービス コンテナ イメージに別々の環境変数を設定する例を示します。
+
+**注: **: ハードコードされた環境変数は、セカンダリコンテナまたはサービスコンテナに正しく渡されますが、コンテキストやプロジェクト固有の環境変数は、プライマリコンテナ以外のコンテナには挿入されません。
 
 ```yaml
 version: 2.1
@@ -480,7 +483,7 @@ CircleCI API v2 を使用すると、パイプライン パラメーターから
 
 [パイプラインをトリガーする]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (メモ: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -498,13 +501,13 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }
 
-ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
+ビルドパラメータは環境変数からなります。そのため、その環境変数名は下記の条件を満たしている必要があります。
 
 - 使用できるのは ASCII 文字、数字、アンダースコア文字のみです
 - 先頭に数字を使用することはできません
 - 少なくとも 1 文字を含む必要があります
 
-環境変数の通常の制限以外には、値自体への制限はなく、単純な文字列として扱われます。 ビルド パラメーターがロードされる順序は**保証されない**ため、ビルド パラメーターに値を挿入して別のビルド パラメーターに渡すことは避けてください。 ベスト プラクティスとして、独立した環境変数から成る順不同のリストとしてビルド パラメーターを設定することをお勧めします。
+環境変数における通常の制約の他に、変数値自体に注意すべきところはありません。単純な文字列として扱われるところも変わりありません。 ビルド パラメーターがロードされる順序は**保証されない**ため、ビルド パラメーターに値を挿入して別のビルド パラメーターに渡すことは避けてください。 順不同の独立した環境変数リストとしてビルドパラメータを設定するのがおすすめです。
 
 **重要:** ビルド パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/ja/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/ja/2.0/glossary/#context)で確認できます。
 
@@ -521,7 +524,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }
 ```
 
-このビルドは、以下の環境変数を受け取ります。
+ビルド時には下記のような環境変数となります。
 
 ```shell
 export foo="bar"
@@ -530,9 +533,9 @@ export qux="{\"quux\": 1}"
 export list="[\"a\", \"list\", \"of\", \"strings\"]"
 ```
 
-ビルド パラメーターは、ジョブのコンテナ内の環境変数としてエクスポートされ、`config.yml` 内のスクリプトまたはプログラム、コマンドで使用できます。 挿入された環境変数を使用して、ジョブの中で実行されるステップに影響を与えることができます。 挿入された環境変数よりも `config.yml` やプロジェクト設定で定義された値が優先されるので、注意が重要です。
+ビルドパラメータは各ジョブのコンテナ内で環境変数としてエクスポートされ、`config.yml` のスクリプトやプログラム、コマンドで使われることになります。 代入された環境変数はジョブ内のステップの実行内容を変えるのに使われることもあります。 ここで念頭に置いておかなければいけないのは、代入された環境変数は `config.yml` で定義されたものでも、プロジェクトの設定で定義されたものでも、上書きできないことです。
 
-`build_parameters` キーを使用して環境変数を挿入することで、実行のたびに異なるターゲットに対して機能テストをビルドできます。 たとえば、ステージング環境へのデプロイ ステップを持つ実行で、さまざまなホストに対する機能テストをビルドするとします。 `bash` と `curl` を使用した以下の例のように、JSON 本体を `Content-type: application/json` で送信することで、`build_parameters` を使用できます (ただし、選択した言語の HTTP ライブラリを使用することも可能です)。
+連続的に異なるターゲット OS で機能テストを行うのに、`build_parameters` キーに環境変数を代入したくなるかもしれません。 例えば、複数の異なるホストに対して機能テストが必要なステージング環境へのデプロイを実行するような場合です。 下記の例のように、`bash` と `curl` を組み合わせ (開発言語にあらかじめ用意されている HTTP ライブラリを使ってもかまいません)、`Content-type: application/json` として JSON フォーマットでデータ送信する形で `build_parameters` を含ませることが可能です。
 
 ```json
 {
@@ -543,7 +546,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 }
 ```
 
-たとえば、`curl` を使用する場合
+`curl` の場合は下記のようにします。
 
 ```shell
 curl \
@@ -556,23 +559,23 @@ curl \
 
 ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
 
-このビルドは、以下の環境変数を受け取ります。
+ビルド時には下記のような環境変数となります。
 
 ```shell
 export param1="value1"
 export param2="500"
 ```
 
-POST API 呼び出しを使用して実行を開始します。 詳細については、API ドキュメントで[新しいビルドのセクション](https://circleci.com/docs/api/v1/#trigger-a-new-build-with-a-branch)を参照してください。 本体が空の POST は、指定されたブランチの新しい実行を開始します。
+POST API 呼び出しを使用して実行を開始します。 詳細については、API ドキュメントで[新しいビルドのセクション](https://circleci.com/docs/api/v1/#trigger-a-new-build-with-a-branch)を参照してください。 パラメータなしで POST リクエストした場合は名前付きブランチが新規で実行されます。
 
 ## 定義済み環境変数
 {: #built-in-environment-variables }
 
-Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
+定義済みの環境変数はジョブごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
 
-{% include snippets/built-in-env-vars.md %}
+{% include snippets/ja/built-in-env-vars.md %}
 
-For a full list of available built-in data see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#built-in-environment-variables).
+値や定義済みのデータの全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/2.0/variables/#built-in-environment-variables)を参照して下さい。
 
 ## 関連項目
 {: #see-also }

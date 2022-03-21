@@ -9,6 +9,10 @@
 *.adoc @circleci/docs
 *.pdf @circleci/docs
 
+/jekyll/_cci2/ @circleci/docs
+/jekyll/_data/ @circleci/docs
+/jekyll/_includes/ @circleci/docs
+
 /jekyll/_cci2_ja/ @circleci/translations
 /jekyll/_data/ja/ @circleci/translations
 /jekyll/_includes/ja/ @circleci/translations

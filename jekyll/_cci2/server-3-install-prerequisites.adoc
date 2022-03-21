@@ -143,7 +143,7 @@ ifndef::env-gcp[]
 You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/quickstart/architecture/amazon-eks/[here]. We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which will create a VPC and select the proper security groups for you.
 
 . https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[Install] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configure] the AWS CLI for your AWS account.
-. Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`].
+. Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`].
 . Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
 +
 ```shell
@@ -608,8 +608,7 @@ gcloud iam service-accounts list \
 ```shell
 gcloud iam roles create circleci_server \
     --project <PROJECT_ID> \
-    --title "CircleCI Server" \
-    --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get
+    --title "CircleCI Server"
 ```
 
 ```shell

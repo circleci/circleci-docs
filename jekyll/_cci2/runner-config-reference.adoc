@@ -74,7 +74,7 @@ runner:
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
 ```
 
-The prefix can also be a custom script.  The arguments passed to the script will launch the task agent.
+The prefix can also be a custom script. The arguments passed to the script will launch the task agent.
 
 The custom script must:
 
@@ -100,8 +100,6 @@ Config snippet for above example:
 runner:
   command_prefix: ["/opt/circleci/wrapper.sh"]
 ```
-
-Prefix
 
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`

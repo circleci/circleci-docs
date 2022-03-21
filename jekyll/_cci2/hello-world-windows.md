@@ -16,6 +16,10 @@ This document describes how to get started with continuous integration on **Wind
 * TOC
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+  <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
+</div>
+
 
 ## Prerequisites
 {: #prerequisites }
@@ -32,7 +36,7 @@ To follow along with this document you will need:
 The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - Is VM-based to guarantee full job isolation.
-- Uses the Server Core version of Windows Server 2019 Datacenter Edition.
+- Can use either the Server Core version of Windows Server 2019 Datacenter Edition, or Windows Server 2022 Datacenter edition.
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 
@@ -44,7 +48,17 @@ The Windows execution environment (or `executor`) gives users the tools to build
 ## Windows executor images
 {: #windows-executor-images }
 
-Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
+CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
+
+Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+
+The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
+
+- Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
+
+- Previous: This image tag points to the previous ("stable") production ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month.
+
+- Edge: This image tag points to the latest version of the Windows image, and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes, and not guaranteed to be stable.
 
 Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
 
@@ -256,7 +270,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**Note** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
+**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
 
 
 {:.tab.windowsblockfour.Cloud}
@@ -410,61 +424,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
 
-## Software pre-installed in the Windows image
-{: #software-pre-installed-in-the-windows-image }
+## Software pre-installed on the Windows image
+{: #software-pre-installed-on-the-windows-image }
 
-**Windows Server 2019 with Visual Studio 2019**
-
-* Windows Server 2019 Core Datacenter Edition
-* Visual Studio 2019 Community Edition
-    * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/license-terms/mlt031819/) before using this Visual Studio version in your Windows jobs.
-    * Azure SDK for Visual Studio 2019
-    * Visual Studio 2019 Build Tools
-* AWS
-    * AWS CLI 1.16.209
-    * Python 3.6.0
-    * Botocore 1.12.199
-* Shells:
-    * Powershell 5
-    * GNU bash 4.4.231 (x86_64-pc-msys)
-    * cmd
-* .NET Framework 5
-* .NET Core
-    * SDK 5.0.402
-    * SDK 5.0.401
-    * SDK 3.1.406 (x64)
-    * SDK 3.0.100-preview7-012821
-    * Runtime 3.0.0-preview6-27804-01
-    * SDK 2.2.401
-    * Runtime 2.2.6
-    * SDK 2.1.801
-* Nunit 3.10.0
-* Git 2.33.1
-* Git LFS 2.7.2
-* Gzip 1.3.12
-* 7zip 19.00
-* PsExec64 2.34
-* Windows 10 SDK
-    * 10.0.26624
-    * 10.1.18362.1
-* Docker Engine - Enterprise version 18.09.7
-* NuGet CLI 5.2.0.6090
-* Chocolatey v0.11.2
-* Azure Service Fabric
-    * SDK 3.3.617.9590
-    * Runtime 6.4.617.9590
-* Azure CLI 2.0.70
-* OpenJDK 12.0.2
-* Node.js 14.17.5
-* NVM (Node Version Manager) 1.1.7
-* Yarn 1.22.17
-* Ruby 2.6.3
-* Go 1.17
-* Python 3.9
-* Java 12.0.2
-* Miniconda 3
-* WinAppDriver 1.1.1809.18001
-* Text editors
-    * nano 2.5
-    * vim 8.2
-* jq 1.5
+To find information on what software is pre-installed on the Windows image, please visit the [Discuss](https://discuss.circleci.com/) page.

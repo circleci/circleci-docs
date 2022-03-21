@@ -8,18 +8,17 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: true
 suggested:
-  -
+  - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
-  -
+  - 
     title: ブランチ毎のワークフローのフィルタリング
     link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  -
+  - 
     title: ワークフローをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  -
+  - 
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
   - 
@@ -68,7 +67,7 @@ suggested:
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
 
-`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows)」セクション_を参照してください。
+`workflows`キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの[ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)セクションを参照してください。
 
 複数のジョブを同時に実行するには、既存の `.circleci/config.yml` ファイルの末尾に新しい `workflows:` セクションを追加し、バージョンとワークフローの一意名を指定します。 以下の `.circleci/config.yml` ファイルは、2 つの同時実行ジョブから成るデフォルトのワークフロー オーケストレーションの例です。 これは、`build_and_test` という名前の `workflows:` キーを使用し、ジョブ名のリストから成る `jobs:` キーをネストすることによって定義されています。 依存関係が定義されていないため、これらのジョブは同時に実行されます。
 

@@ -261,7 +261,7 @@ pass:[*] if enabled
 
 As an example, following is how you would determine if the frontend is healthy:
 
-```
+```shell
 curl -s -o /dev/null -I -w "%{http_code}\n"  0.0.0.0:80/health-check
 ```
 
@@ -360,7 +360,7 @@ In the event the admin is unknown, or has left the company without creating a ne
 . Open the CircleCI dev console with the command `circleci dev-console`
 . Run this command (replacing \<username\> with the GitHub username of the person you want to promote:
 
-```clojure
+```shell
 (-> (circle.model.user/find-one-by-login "<username>") (circle.model.user/set-fields!  {:admin "write-settings"}))
 ```
 
@@ -416,10 +416,10 @@ Its safe to do this by the 100's, but do not put the entire queue in.
 === Checking Run Queue
 
 ```clojure
-(circle.backend.build.run-queue/queue-depths) # returns how many are in the queue
-(->> (circle.backend.build.run-queue/all-builds) (take 3) (map circle.http.paths/build-url)) # Check the top three builds in the run-queue
+(circle.backend.build.run-queue/queue-depths) ; returns how many are in the queue
+(->> (circle.backend.build.run-queue/all-builds) (take 3) (map circle.http.paths/build-url)) ; Check the top three builds in the run-queue
 
-# In case builds are jammed run the following. You can cancel in batches of 100.
+;; In case builds are jammed run the following. You can cancel in batches of 100.
 (->> (circle.backend.build.run-queue/all-builds) (take 100) (map circle.backend.build.cancel/cancel!))
 ```
 

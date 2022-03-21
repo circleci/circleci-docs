@@ -33,7 +33,6 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 
 == Known limitations
 
-* Installing behind a proxy will prevent the use of https://circleci.com/docs/2.0/runner-overview/[CircleCI runner].
 * Some additional configuration will be required to import orbs when installed behind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
 * The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from our application (inside the Kubernetes cluster) and from our Nomad node can reach your instance without additional configuration. Our SSH agents do not respect proxy settings because it uses a different network protocol. If a proxy is the only way that any traffic can reach outside the proxied environment, this means it will block SSH traffic and our application will fail.

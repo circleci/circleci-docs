@@ -132,7 +132,7 @@ Selenium を使用して、ブラウザでのテストを管理します。
 ```yaml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -140,16 +140,16 @@ jobs:
       - image: cimg/node:17.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
       - run: browser-tools/install-browser-tools
       - run:
-          name: Selenium のダウンロード
+          name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
       - run:
-          name: Selenium の起動
+          name: Start Selenium
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
@@ -158,7 +158,7 @@ jobs:
 ```yaml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -166,16 +166,16 @@ jobs:
       - image: cimg/node:17.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
       - run: browser-tools/install-browser-tools
       - run:
-          name: Selenium のダウンロード
+          name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
       - run:
-          name: Selenium の起動
+          name: Start Selenium
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
@@ -214,7 +214,7 @@ jobs:
 ```yml
 version: 2.1
 
-orbs: 
+orbs:
   browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
@@ -224,8 +224,7 @@ jobs:
       - image: cimg/python:3.6.2-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
-
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
@@ -233,7 +232,7 @@ jobs:
       - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
@@ -269,16 +268,15 @@ jobs:
       - image: cimg/python:3.6.2-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
-
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # サービスコンテナイメージ
+    # Service container image
       - image: cimg/postgres:9.6.5
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout

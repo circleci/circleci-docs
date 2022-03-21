@@ -124,19 +124,21 @@ Usage of network transfer to self-hosted runners can be mitigated by hosting run
 ### How to calculate an approximation of network and storage costs
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
 
-**NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+**NOTE:** For our monthly Performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
 Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
+For quesions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+
 ## See also
 {: #see-also }
 {:.no_toc}
-
 - [Caching Dependencies]({{site.baseurl}}/2.0/caching)
 - [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
 - [Workspaces]({{site.baseurl}}/2.0/workspaces)
 - [Artifacts]({{site.baseurl}}/2.0/artifacts)
+- [IP Ranges]({{site.baseurl}}/2.0/ip-ranges/)
 - [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)

@@ -33,7 +33,7 @@ Ensure you are running the minimum KOTS version ({kotsversion}) by running the c
 kubectl kots version
 ```
 
-NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 If running on Windows inside WSL2, the port is not available on the host machine. この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
+NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 If running on Windows inside WSL2, the port is not available on the host machine. この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
 From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 
@@ -54,7 +54,7 @@ NOTE: Once you have created your namespace, we recommend setting your `kubectl` 
 
 === Installing behind an HTTP Proxy
 
-プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細はhttps://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
+プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細は https://kots.io/kotsadm/installing/online-install/#proxies[こちら] の KOTS 文書をご覧ください）。
 
 ```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
@@ -63,7 +63,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
-詳細については、https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定]ガイドを参照してください。
+詳細については、 https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
 
 === フロントエンドの設定
 フロントエンドの設定により、 CircleCI システムの Web アプリケーション固有の側面が制御されます。
@@ -118,7 +118,7 @@ Github が提供する OAuth クライアント シークレットです。
 
 You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
 
-// Don't include this section in the GCP PDF. 
+// Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
@@ -154,8 +154,8 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-===== Google Cloud Storage 
-前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。 
+===== Google Cloud Storage
+前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
@@ -172,7 +172,7 @@ endif::env-aws[]
 
 ==== Postgres、MongoDB、Vault の設定
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書] を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
 
 === 保存とデプロイ
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Traefik ロードバランサー用のIPアドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。

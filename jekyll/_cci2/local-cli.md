@@ -107,6 +107,8 @@ You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-
 
 You can update to the newest version of the CLI using the following command: `circleci update`. If you would just like to check for updates manually (and not install them) use the command: `circleci update check`.
 
+If you installed the CLI with Homebrew, you will need to run `brew upgrade circleci` to update.
+
 ### Updating the legacy CLI
 {: #updating-the-legacy-cli }
 {:.no_toc}

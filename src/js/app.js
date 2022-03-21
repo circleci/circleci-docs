@@ -53,4 +53,7 @@ $(() => {
   ); // ensure languageGuides is loaded; // imports all experiments
 
   Prism.highlightAll();
+  // trackCopyCode service MUST be initialized after PrismJS is initialized
+  services.trackCopyCode.init();
+  services.trackExperimentEntry.init();
 });

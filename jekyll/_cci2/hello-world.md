@@ -35,20 +35,20 @@ This example adds a job called `build` that spins up a container running a [pre-
          - run: echo "hello world" # run the `echo` command
    ```
 
-2. Commit and push the changes.
+3. Commit and push the changes.
 
-3. Go to the Projects page in the CircleCI app, then click
-the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated Org. See the Org Switching section below for tips.
+4. Go to the **Projects** page in the CircleCI app, then click
+the **Set Up Project** button next to your project. If you do not see your project, make sure you have selected the associated org. See the [Org Switching](#org-switching) section below for tips.
 
-4. Follow the steps to configure your `config.yml` file for the project and trigger your first build.
+5. Follow the steps to configure your `config.yml` file for the project and trigger your first pipeline.
 
-The Workflows page appears with your `build` job and prints `Hello World` to the console.
+The **Workflow** page appears with your `build` job and prints `Hello World` to the console.
 
-**Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+**Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
-CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
+CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or virtual machine (VM). That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
 
-Refer to the [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javascript/) for a sample project.
+Sample project: [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javascript/)
 
 ## Hello world for Android
 {: #hello-world-for-android }
@@ -70,9 +70,10 @@ See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for det
 ## Hello world for macOS
 {: #hello-world-for-macos }
 
-_The macOS executor is not currently available on installations of CircleCI server v2.x_
+The macOS executor is not currently available on installations of CircleCI server v2.x.
+{: class="alert alert-info" }
 
-Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
+Using the basics from the Linux example above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
 ```yaml
 jobs:
@@ -86,7 +87,7 @@ Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) docu
 ## Hello world for Windows
 {: #hello-world-for-windows }
 
-Using the basics from the Linux, Android, and macOS examples above, you can add a job that uses the windows executor (Windows Server 2019) as follows. Notice the Cloud version of this requires the use of `version:2.1` config, and orbs:
+Using the basics from the Linux example above, you can add a job that uses the Windows executor as follows. Notice the cloud version of this requires the use of `version: 2.1` config as well as orbs:
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -137,7 +138,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-**Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows).
+For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) page for more information.
+{: class="alert alert-info" }
 
 ### More about using and authoring orbs
 {: #more-about-using-and-authoring-orbs }
@@ -147,7 +149,7 @@ Orbs are a great way to simplify your config or re-use config across your projec
 ## Following / unfollowing projects
 {: #following-unfollowing-projects }
 
-You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking "Projects" in the sidebar, and then clicking the button next to the project you want to follow or stop following.
+You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking **Projects** in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
 ## Org switching
 {: #org-switching }
@@ -164,7 +166,7 @@ In the top left, you will find the Org switcher.
 {:.tab.switcher.Server_2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
+If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available. If you want to add the GitHub project `your-org/project`, you must select `your-org` from the org switcher.
 
 ## Next steps
 {: #next-steps }

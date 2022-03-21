@@ -18,12 +18,12 @@ version:
 ## 全般
 {: #general }
 
-### CircleCI の従業員にプログラム コードを見られる心配はありませんか?
+### CircleCI のスタッフにプログラムコードを見られる心配はありませんか?
 {: #does-circleci-look-at-my-code }
 {:.no_toc}
-CircleCI の従業員がお客様の許諾を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望されるときには、事前に許可を得たうえで、サポート エンジニアがコードを確認させていただく場合があります。
+CircleCI のスタッフがお客様の許可を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望される際は、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
 
-詳しくは CircleCI の[セキュリティ ポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
+詳しくは CircleCI の[セキュリティポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
 
 ## 移行
 {: #migration }
@@ -94,10 +94,10 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 {:.no_toc}
 CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI 日本語サポートセンター](https://support.circleci.com/hc/ja) よりお問い合わせください。
 
-### Docker イメージ名の仕組みは？ つけ方を教えてほしい。
+### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI  では、現在のところ [Docker Hub][docker-hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ][docker-library]に対して行えるのは、以下のようにイメージ名やタグを指定したプルのみです。
+CircleCI  では、現在 [Docker Hub][docker-hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ][docker-library]に対して行えるのは、以下のようにイメージ名やタグを指定したプルのみです。
 
 ```
 golang:1.7.1-jessie
@@ -287,40 +287,44 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
   - クレジットは毎月持ち越され、1 年後に失効します。
 - Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
 
-#### 毎月のストレージ使用料金とネットワーク料金の計算方法は？
+#### 1ヶ月のストレージ使用料金とネットワーク料金の計算方法は？
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**注: **ネットワーク転送とストレージに対する課金は、2022 年 3 月 1 日より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しています。 このセクションの内容は、2022 年 3 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+**注: **外向きの通信とストレージに対する課金は、**2022 年 4 月 1 日**より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理していただくための変数と制御機能の追加を行なっています。 このセクションの内容は、2022 年 4 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
-Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan** Usage.
+[CircleCI Web アプリ](https://app.circleci.com/)から **Plan > Plan Usage** に移動してお客様のストレージとネットワークの使用状況を確認し、1ヶ月のストレージ料金とネットワーク料金を計算してください。
 
 ##### ストレージ
 {: #storage }
 {:.no_toc}
 
-日々の使用量から1 か月のストレージコストを計算するには、 **Storage(ストレージ)** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に420クレジットを乗じることで、月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+日々の使用量から 1ヶ月のストレージ料金を計算するには、 **Storage** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、1ヶ月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (50 ドル)。
 
 ##### ネットワーク
 {: #network }
 {:.no_toc}
 
-Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. [Read More]({{site.baseurl}}/2.0/persist-data/#overview-of-storage-and-network-transfer).
+ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 詳細は[こちら]({{site.baseurl}}/2.0/persist-data/#overview-of-storage-and-network-transfer)を参照してください。
 
-Your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット ($.50)。
+超過分（GB/TB）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (50 ドル)。
 
-#### 毎月の IP アドレスの範囲機能料金の計算方法は？
+#### 1ヶ月の IP アドレスの範囲機能料金の計算方法は？
 {: #how-do-I-calculate-my-monthly-IP-ranges-costs }
 {:.no_toc}
 
-毎月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
+1ヶ月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
 
 **IP 範囲機能の使用状況 **のサマリーに加えて、**[IP Ranges]** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
-このバイト数には、ジョブの全体のネットワーク転送_および_ Docker コンテナの送受信に使われるバイトも含まれます。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
+このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
-この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。
+この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金](https://circleci.com/docs/2.0/ip-ranges/#pricing)をご覧ください。
+
+#### 有効化する前に 1ヶ月の IP アドレスの範囲機能の料金を把握するにはどうすれば良いですか？
+
+Job Details の UI ページの Resources タブから、すべての Docker ジョブ (リモート Docker を除く) の概算ネットワーク通信量を確認できます。  GB になっていない場合は、450 クレジットを乗じて GB に変換し、Docker ジョブで IP アドレスの範囲機能を有効にする場合の概算コストを把握してください。
 
 #### アクティブ ユーザー単位の料金が設定されているのはなぜですか?
 {: #why-does-circleci-have-per-active-user-pricing }
@@ -338,7 +342,7 @@ Your network overage GB/TB can be multiplied by 420 credits to estimate the tota
 - CircleCI の Web アプリケーションでのジョブの再実行 ([SSH デバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を含む)
 - [ジョブの手動承認]({{ site.baseurl }}/ja/2.0/workflows/#手動承認後に処理を続行するワークフロー) (承認者はすべてのダウンストリーム ジョブのアクターと見なされる)
 - スケジュールされたワークフローの使用
-- マシン ユーザー
+- マシンユーザー
 
 **メモ:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブ ユーザーとは**見なされません**。
 
@@ -357,7 +361,7 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 #### クレジットに有効期限はありますか？
 {: #do-credits-expire }
 {:.no_toc}
-**Performance プラン**のクレジットは、購入後 1 年で失効します。 ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
+**Performance プラン**のクレジットは、購入後 1 年で失効します。 アカウントのサブスクリプションを停止した場合も、未使用のクレジットは失効します。
 
 #### 支払い方法は？
 {: #how-do-i-pay }
@@ -373,20 +377,20 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 #### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-いいえ、課金されません。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
+いいえ。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
 
 #### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
 {:.no_toc}
 
-更新日は、以下にあげる CircleCI からの請求が発生する日に加え、有料プランへアップグレードまたは別の有料プランへ変更し、初めてクレジットカードで決済した日付に設定されます。
+CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
 
 - 月間プランの場合、毎月の月額料金の請求日が更新日になります。
 - 年間プランの場合、年に一度の年間料金の請求日が更新日になります。
 - 年間プランを利用中でも、ユーザーの追加やクレジットの消費により未払い残高が発生した場合、その月の最終日が更新日になります。
 - Performance プランでは、クレジットの残高が設定された最低残高を下回った場合、自動的にクレジット購入が実行されます。
 
-#### オープンソース プロジェクト向けのクレジットベースプランはありますか?
+#### オープンソース プロジェクト向けのクレジットベース プランはありますか?
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
@@ -406,7 +410,7 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 
 Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
-ユーザーに DLC をご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステート ドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時処理の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが引き継がれます。
+お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時処理の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが引き継がれます。
 
 DLC のご利用金額を見積もるには、設定ファイル内の Docker レイヤー キャッシュが有効になっているジョブと、それらのジョブでビルドしている Docker イメージの数を確認してください。 設定ファイルに書き込んでいるジョブは 1 行でも、たとえば並列処理を有効にした場合、そのジョブがパイプラインで複数回実行される場合もあります。
 
@@ -417,12 +421,12 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 ### コンテナベースプラン
 {: #container-based-plans }
 
-#### コンテナ数を増やし、ビルドの待機時間を解消するには、どのようにコンテナベースプランをアップグレードしたらよいですか?
+#### コンテナ数を増やし、ビルドの待機時間を解消するには、どのようにコンテナ プランをアップグレードしたらよいですか?
 {: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
 {:.no_toc}
 * Linux プランの変更: CircleCI アプリケーションで [Settings]  > [Plan Overview ]を開き、[Add Containers]ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
-#### 複数の組織で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
+#### 異なる組織間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
 はい。 CircleCI アプリケーションで [Settings (設定)] > [Share & Transfer (共有 & 転送)] > [Share Plan (プランの共有)] を開き、プランに追加したい組織を選択してください。
@@ -430,17 +434,17 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 #### 個人アカウントではなく組織宛に請求されるよう設定できますか？
 {: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
 {:.no_toc}
-はい、請求は組織にひも付けられています。 組織の設定ページから組織アカウントで料金の支払いを行うことができます。 ただし、お客様が全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub 組織管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
+はい、請求は組織全体に関連付けられています。 組織の管理者は、組織の設定ページから組織アカウントで料金の支払いを行えます。 ただし、お客様が全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub 組織管理者をたてる必要があります。 この件については、よりスムーズに対応いただけるよう、今後の更新で方針を見直す予定です。
 
-#### 課金に関連してコンテナはどのように定義されますか？
+#### 課金に関連してコンテナはどのように定義されますか?
 {: #what-is-the-definition-of-a-container-in-the-context-of-billing }
 {:.no_toc}
-ここでのコンテナとは、CPU 2 基と 4 GB の RAM を搭載したマシンを指し、このマシンのご利用に対して料金が発生します。 コンテナはタスクの同時実行（5 つの異なるジョブを実行するなど）や並列実行（1 つのジョブを 5 つの異なるタスクに分解してそれぞれを一斉に実行するなど）を行うのに使われます。 この場合はどちらの例でも 5 つのコンテナが必要になります。
+ここでのコンテナとは、CPU 2 基と 4 GB の RAM を搭載したマシンを指し、このマシンのご利用に対して料金が発生します。 コンテナは、タスクの同時実行 (例: 5 つの異なるジョブを実行する) や並列実行 (例: 1 つのジョブを 5 つの異なるタスクに分解して一度に実行する) を行うために使用されます。 どちらの例でも 5 つのコンテナが必要になります。
 
 #### リモート Docker の起動処理時間に料金が発生するのはなぜですか？
 {: #why-am-i-being-charged-for-remote-docker-spin-up-time }
 {:.no_toc}
-CircleCI がリモート Docker インスタンスを起動するとき、プライマリコンテナを実行する必要があり、コンピューティングリソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
+CircleCI がリモート Docker インスタンスを起動するとき、プライマリ コンテナを実行する必要があり、コンピューティング リソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
 
 ---
 
@@ -450,11 +454,11 @@ CircleCI がリモート Docker インスタンスを起動するとき、プラ
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。  下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
+IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を構成することも可能です。  以下のように Docker デーモンを構成することで、グローバルに有効化することができます。
 
 ```yaml
 jobs:
@@ -475,7 +479,7 @@ jobs:
           sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
+Docker に IPv6 アドレスを割り当てる方法は複数あり、上記のように [Docker デーモンを構成する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを使用する方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を使用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)が挙げられます。
 
 
 ### CircleCI  がサポートしている OS は？

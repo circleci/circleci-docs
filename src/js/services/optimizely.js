@@ -14,6 +14,19 @@ class OptimizelyClient {
       datafile: window.optimizelyDatafile,
     });
   }
+  getAnonymousId() {
+    let anonymousId = null;
+    try {
+      // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
+      // and sets this as anonymousId for each new visitor.
+      // This call is always valid and will never return null. From the docs:
+      // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
+      anonymousId = analytics.user().anonymousId();
+    } catch (_) {
+      return null;
+    }
+    return anonymousId;
+  }
   getUserId() {
     return new Promise((resolve) => {
       if (window.userData) {
@@ -60,16 +73,29 @@ class OptimizelyClient {
       // defines additional attributes we will want to send to optimizely to qualify/disqualify a user
       const attributes = options.attributes ?? {};
 
+      // capture if we are trying to run this experiment as a guest experiment
+      // default to false as most of our experiments are for logged in users
+      const isGuestExperiment = options.guestExperiment ?? false;
+
       // Then, we check if we have the cookie. If the cookie is not present
       // it means the current user is not ready to see an experiment and so
       // getVariationName() will resolve to "null"
-      const orgId = Cookies.get(COOKIE_KEY) ?? null;
-      if (!orgId) {
+      let orgId = Cookies.get(COOKIE_KEY) ?? null;
+      if (!isGuestExperiment && !orgId) {
         return resolve(null);
+      }
+
+      // orgId is used as a localstorage key but since a guest doesn't have an org attached yet
+      // we create a "default" one
+      if (isGuestExperiment) {
+        orgId = 'no-org-id';
       }
 
       // once we have the userId
       this.getUserId().then((userId) => {
+        // if we don't have a userId but we are in a guest experiment, we can request the anonymousId
+        userId = !userId && isGuestExperiment ? this.getAnonymousId() : userId;
+
         if (!userId) {
           return resolve(null);
         }
@@ -80,16 +106,22 @@ class OptimizelyClient {
             timeout: 10000, // Optimizely default is 30s so we are reducing it to 10s
           })
           .then(() => {
-            // We check if user whether the user is in the provided
-            // exclusion group or not
+            let optimizelyAttributes = {
+              ...attributes,
+              id: userId,
+            };
+
+            // if we are not in a guest experiment, we need to bucket by orgId
+            // so users from the same org see the same variation
+            if (!isGuestExperiment) {
+              optimizelyAttributes.$opt_bucketing_id = orgId;
+            }
+
+            // We check whether the user is in the provided exclusion group or not
             const isInGrowthExperimentGroup = this.client.getVariation(
               options.groupExperimentName,
               userId,
-              {
-                ...attributes,
-                id: userId,
-                $opt_bucketing_id: orgId,
-              },
+              optimizelyAttributes,
             );
 
             // If the user is not in the exclusion group
@@ -99,11 +131,7 @@ class OptimizelyClient {
               const variationName = this.client.getVariation(
                 options.experimentKey,
                 userId,
-                {
-                  ...attributes,
-                  id: userId,
-                  $opt_bucketing_id: orgId,
-                },
+                optimizelyAttributes,
               );
 
               // send back variationName to caller
@@ -126,6 +154,7 @@ class OptimizelyClient {
                 variationName,
                 variationId,
                 userId,
+                isGuestExperiment,
               );
             } else {
               // If the user is in the exclusion group it means the current user
@@ -155,6 +184,7 @@ export const trackExperimentViewed = (
   variationName,
   variationId,
   userId,
+  isGuestExperiment,
 ) => {
   // don't track user if the experiment is not present in the current page
   if (!$(experimentContainer).length) {
@@ -167,8 +197,8 @@ export const trackExperimentViewed = (
       timestamp: new Date().toISOString(),
       experimentId,
       experimentName: experimentKey,
-      allocationType: 'organization_id',
-      orgId,
+      allocationType: isGuestExperiment ? 'user_id' : 'organization_id',
+      orgId: isGuestExperiment ? null : orgId,
       projectId: null, // This experiment is measured at the org level
       userId,
       variationId,

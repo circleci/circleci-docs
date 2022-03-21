@@ -43,3 +43,4 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 
 - 「[Hello World]({{ site.baseurl }}/2.0/hello-world/)」を参照し、プロジェクトの基礎、組織の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
 - [コンセプト]({{ site.baseurl }}/2.0/concepts/)のページでパイプライン、Executor、イメージ、ワークフロー、ジョブなどの CircleCI の基本的なコンセプトの概要をご確認ください。
+- 

@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Pipelines Introduction"
-description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
+title: "パイプラインの紹介"
+description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
 categories:
   - はじめよう
 order: 1
@@ -10,38 +10,38 @@ version:
   - Server v3.x
 ---
 
-This page provides information on CircleCI pipelines, how they are triggered, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
+ここでは、パイプラインをトリガーする方法やパイプラインの内容を紹介します。 パイプラインの処理やパイプラインで使用できる機能の詳細は、[パイプラインの処理]({{site.baseurl}}/2.0/build-processing)を参照して下さい。
 
 ## 概要
 {: #overview }
 
-CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
+CircleCI パイプラインは、プロジェクトの `.circleci/config.yml` ファイルすべてにおける最高レベルの作業単位です。 パイプラインには、ジョブを管理するワークフローが含まれます。 固定の直線的なライフサイクルがあり、特定のユーザーに関連付けられています。 パイプラインは、変更が CircleCI 設定ファイルを含むプロジェクトにプッシュされた際にトリガーされますが、 CircleCI アプリケーションから又は API を使用して手動でスケジュールを設定したりトリガーすることもできます。
 
-Pipelines are not available on installations of CircleCI server v2.x.
+ハイプラインは CircleCI Server v2.x では使用できません。
 
-When visiting your CircleCI dashboard, you are shown a list of recently triggered pipelines for your organization/account.
+CircleCI ダッシュボードにアクセスすると、お客様の組織またはアカウントで最近トリガーされたパイプラインのリストが表示されます。
 
-![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
+![CircleCI アプリのパイプラインダッシュボードのスクリーンショット]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
-## Triggering a pipeline
+## パイプラインのトリガー
 {: #running-a-pipeline }
 
-Pipelines can be triggered in several ways. Each method is described below.
+パイプラインをトリガーする方法は複数あります。 それぞれの方法を下記でご紹介します。
 
-### Trigger a pipeline on push to your code repository
+### コードリポジトリへのプッシュ時にパイプラインをトリガーする
 {: #run-a-pipeline-on-commit-to-your-code-repository }
 
-Each time a commit is pushed to one of your projects, on a branch that has a `.circleci/config.yml` file included, a pipeline is triggered.
+プロジェクトのcode>.circleci/config.yml</code> ファイルが含まれるブランチにコミットがプッシュされる度にパイプラインがトリガーされます。
 
-### Trigger a pipeline from the CircleCI app
+### CircleCI アプリからパイプラインをトリガーする
 {: #run-a-pipeline-from-the-circleci-app }
 
-In the CircleCI app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled. Click **Trigger Pipeline**, choose if you want to specify any pipeline parameters, and click **Trigger Pipeline** again.
+CircleCI アプリで特定のブランチを選択すると、**Trigger Pipeline** ボタンが有効になります。 **Trigger Pipeline** をクリックし、パイプラインのパラメーターを指定するかどうかを選択し、**Trigger Pipeline** を再度クリックします。
 
-### Trigger a pipeline using the API
+### API を使ってパイプラインをトリガーする
 {: #run-a-pipeline-using-the-api }
 
-You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{site.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
+[新しいパイプラインをトリガーする]({{site.baseurl}}/api/v2/#operation/triggerPipeline)ためのエンドポイントを使って、特定のプロジェクト用のパイプラインをトリガーすることができます。
 
 
 <!---
@@ -51,13 +51,13 @@ You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{si
 TBC
 --->
 
-## Pipeline architecture
+## パイプラインのアーキテクチャ
 {: #pipeline-architecture }
 
-パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプライン中のいずれかのジョブに移動すると、ジョブ出力、テスト結果、アーティファクトに各タブからアクセスできます。
+パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプラインのいずれかのジョブに移動すると、各タブからジョブ出力、テスト結果、アーティファクトにアクセスできます。
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-Further, the output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
+さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)

@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-ここでは CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションについて概説します。
+ここでは、CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションについて概説します。
 
 toc::[]
 
@@ -26,7 +26,7 @@ toc::[]
 
 | 全般設定
 | `/etc/circle-installation-customizations`
-| 下記の値の表を参照してください。
+| 値については下記表を参照してください。
 
 | JVM ヒープサイズ
 | `/etc/circleconfig/XXXX/customizations`  Supports: frontend, test_results
@@ -38,7 +38,7 @@ toc::[]
 
 | コンテナのカスタマイズ
 | `/etc/circleconfig/XXX/customizations`
-| Used in lots of places by CircleCI containers
+| CircleCI コンテナにより随所で使用されます。
 
 | `/etc/hosts`
 | `/etc/hosts`
@@ -164,7 +164,7 @@ echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/reso
 
 サンプル設定: 
 
-```
+```edn
 {:default-resource-class :medium
 
  :resource-classes
@@ -184,11 +184,11 @@ echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/reso
 
 この中の一つを詳しく見てみましょう。
 
-```
+```edn
 :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
-* `:medium`  - this is the name that your developers will use to refer to the resource class in their config.yml and the keyword `medium` is the external facing name of the resource class.
+* `:medium` : 開発者が config.yml 内のリソースクラスを参照するために使用する名前で、リソースクラスの外部用の名前です。
 * `:id "d1.medium"` : リソースクラスの内部用の名前です。  この ID を Docker のリソースクラス用にカスタマイズすることができます。
 * `:availability :general`: 必須フィールドです。
 * `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. これは、以下の :outer と一致している必要があります。
@@ -207,7 +207,7 @@ To use second machine type (`large` in the example above), a further step is req
 ```
 circleci dev-console
 ```
-. Run the following (substituting your organization name):
+. Run the following (substituting your CircleCI organization name):
 ```
 (admin/set-org-feature-unsafe "<org_name>" :picard-allowed-resource-classes :val #{"l1.large"})
 ```

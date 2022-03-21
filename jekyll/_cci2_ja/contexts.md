@@ -8,7 +8,6 @@ version:
   - クラウド
   - Server v3.x
   - Server v2.x
-suggested_links_has_experiments: true
 suggested:
   - 
     title: '「Context deadline exceeded」 についてのエラーの解決方法（Freeプラン対応）'
@@ -28,13 +27,13 @@ suggested:
 コンテキストは、CircleCI アプリケーションの [Organization Settings (Organization の設定)] ページで作成および管理します。 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_3}
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_2}
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
+![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
 [Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
 

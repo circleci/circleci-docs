@@ -29,7 +29,7 @@ IP アドレスの範囲機能により、制限された環境へのアクセ�
 
 Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイズをご利用いただけます。 コンピューティングタイプや実行環境別の追加リソースクラスを使用すると、CPU およびメモリの上限を拡大することが可能です。
 
-これらのリソースに関する詳細は、<executor-intro#,Executors and Images> のページをご覧ください。
+これらのリソースに関する詳細は、<<executor-intro#,Executors and Images>> のページをご覧ください。
 
 === 同時処理数のカスタマイズ
 
@@ -51,4 +51,4 @@ Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイ�
 
 上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は [料金設定](https://circleci.com/ja/pricing/)のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、[リソースクラスの機能](https://circleci.com/ja/product/features/resource-classes/)のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/features-of-circleci.adoc %}
+{% include snippets/ja/features-of-circleci.adoc %}

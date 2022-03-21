@@ -81,17 +81,16 @@ jobs:
       - image: cimg/go:1.17
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      # ... アプリのビルド・テストに関する記述 ...
+      # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
 
-      # Docker イメージをビルドしプッシュします。
-
+      # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -122,7 +121,7 @@ jobs:
 
 ```yml
       - setup_remote_docker:
-        version: 19.03.13
+        version: 20.10.11
 ```
 
 CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
@@ -131,22 +130,19 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 - `20.10.7`
 - `20.10.6`
 - `20.10.2`
-- `19.03.14`
 - `19.03.13`
-- `19.03.12`
-- `19.03.8`
-- `18.09.3`
 - `17.09.0-ce` (デフォルト)
+
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI server installations. お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ## 環境の分離
 {: #separation-of-environments }
-ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+ジョブと[リモート Docker]({{ site.baseurl }}/ja/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
 ### サービスへのアクセス
 {: #accessing-services }
@@ -266,14 +262,14 @@ ssh remote-docker
 
 **注:** 上記の例は、`docker` Executor で動作しないボリューム マウントを使用する方法を示しています。 この他に、ボリューム マウントが動作する `machine` Executor を使用する方法もあります。
 
-この例は、ryansch のご協力によって作成されました。
+これらのサンプルコードは ryansch 氏より提供していただきました。
 
 ## 関連項目
 {: #see-also }
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
+[ジョブ空間]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
 
 [プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
 

@@ -30,7 +30,7 @@ IP アドレスの範囲機能により、制限された環境へのアクセ�
 
 Docker、 Linux、 Windows、および macOS 上で大きなマシンサイズのご利用が可能です。 コンピューティングタイプや実行環境別の追加リソースクラスを使用すると、CPU およびメモリの上限を拡大することが可能です。
 
-これらのリソースに関する詳細は、<executor-intro#,Executors and Images> のページをご覧ください。
+これらのリソースに関する詳細は、<<executor-intro#,Executors and Images>>  のページをご覧ください。
 
 === 同時処理数の増加によるキューイングの削減
 
@@ -46,10 +46,10 @@ Docker、 Linux、 Windows、および macOS 上で大きなマシンサイズ�
 
 === 追加サポートオプション
 
-SLA を介した追加サポート(利用時間と日数の制限あり) の利用やサポートパッケージのアドオンが可能です。 Performance プランでは、[community forums](https://discuss.circleci.com/)、[support portal](https://support.circleci.com/hc/en-us)、および [global ticket-based system](https://support.circleci.com/hc/en-us/requests/new) もご利用いただけます。
+SLA を介した追加サポート(利用時間と日数の制限あり) の利用やサポートパッケージのアドオンが可能です。 Performance プランでは、 https://discuss.circleci.com/[community forums]、 https://support.circleci.com/hc/ja[support portal]、および https://support.circleci.com/hc/ja/requests/new[global ticket-based system]もご利用いただけます。
 
 == CircleCI の機能
 
-上記のアップグレード機能に加え、Performance プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は [料金設定](https://circleci.com/pricing/)のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、[リソースクラスの機能](https://circleci.com/product/features/resource-classes/)のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
+上記のアップグレード機能に加え、Performance プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は https://circleci.com/ja/pricing/[料金設定]のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/features-of-circleci.adoc %}
+{% include snippets/ja/features-of-circleci.adoc %}

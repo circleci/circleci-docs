@@ -12,8 +12,8 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ 
-[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ 
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
+[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
 [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 以下のセクションに沿って、利用可能な Executor タイプ (`docker`、`machine`、`macos`、`windows`) について説明します。
@@ -26,7 +26,7 @@ version:
 {:.no_toc}
 
 <div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 *Executor タイプ*は、ジョブを実行する基盤テクノロジーまたは環境を定義します。 CircleCI では、以下の 4 つの環境でジョブを実行できます。
@@ -53,10 +53,10 @@ Docker は、アプリケーションに必要なものだけをビルドする�
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/node:lts
 ```
 
-この例で、すべてのステップは、`build` ジョブの下に最初にリストされているイメージによって作成されるコンテナで実行されます。 スムーズに移行できるように、CircleCI は一般的な言語用のコンビニエンス イメージを Docker Hub で提供しています。 名前とタグの一覧については、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。 Docker がインストールされ Git が含まれている Docker イメージが必要な場合は、公式の [Docker イメージ](https://hub.docker.com/_/docker/)である `docker:stable-git` の使用をお勧めします。
+この例で、すべてのステップは、`build` ジョブの下に最初にリストされているイメージによって作成されるコンテナで実行されます。 スムーズに移行できるように、CircleCI は一般的な言語用のコンビニエンス イメージを Docker Hub で提供しています。 名前とタグの一覧については、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。 If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
 
 ### Docker イメージのベストプラクティス
 {: #docker-image-best-practices }
@@ -68,7 +68,7 @@ jobs:
 
 - `latest` や `1` のような可変タグを `config.yml file` でイメージのバージョンとして使用することは避けてください。 例に示すように、`redis:3.2.7`、`redis@sha256:95f0c9434f37db0a4f...` といった正確なイメージ バージョンまたはダイジェストを使用することをお勧めします。 可変タグは、多くの場合、ジョブ環境で予期しない変更を引き起こします。  CircleCI は、可変タグがイメージの最新バージョンを返すことを保証できません。 `alpine:latest` と指定しても、実際には 1 か月前の古いキャッシュが取得される場合があります。
 
-- 実行中に追加ツールがインストールされるために実行時間が長くなる場合は、「[カスタム ビルドの Docker イメージの使用]({{ site.baseurl }}/2.0/custom-images/)」を参照してカスタム イメージを作成し、ジョブの要件に応じてコンテナに事前ロードされるツールを含めることをお勧めします。
+- If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the [Using Custom-Built Docker Images]({{site.baseurl}}/2.0/custom-images/) page for more information.
 
 - [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) イメージを使用する場合は、`us-east-1` リージョンを使用することをお勧めします。 CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあるので、同じリージョンにイメージを配置すると、イメージのダウンロードにかかる時間が短縮されます。
 
@@ -85,17 +85,15 @@ jobs:
   build:
     docker:
     # すべてのステップが実行されるプライマリ コンテナ イメージ
-     - image: buildpack-deps:trusty
-    # 共通ネットワーク上のセカンダリ コンテナ イメージ
-     - image: mongo:2.6.8-jessie
+     - image: cimg/base:current
+    # Secondary container image on common network.
+     - image: cimg/mariadb:10.6
        command: [mongod, --smallfiles]
 
-    working_directory: ~/
-
     steps:
-      # コマンドは、信頼できるコンテナ内で実行され、
-      # ローカルホスト上で mongo にアクセスできます
-      - run: sleep 5 && nc -vz localhost 27017
+      # command will execute in an Ubuntu-based container
+      # and can access MariaDB on localhost
+      - run: sleep 5 && nc -vz localhost 3306
 ```
 Docker images may be specified in a few ways:
 
@@ -227,10 +225,10 @@ In summary, the availability of caching is not something that can be controlled 
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/base:current
     resource_class: xlarge
     steps:
-    #  ...  他の設定
+    #  ...  other config
 ```
 
 ## マシンの使用
@@ -238,7 +236,7 @@ jobs:
 
 `machine` オプションは、以下のような仕様を持つ専用のエフェメラル VM でジョブを実行します。
 
-{% include snippets/machine-resource-table.md %}
+{% include snippets/ja/machine-resource-table.md %}
 
 `machine` Executor を使用すると、アプリケーションは OS のリソースにフル アクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、(ネットワーク インターフェイスのリッスンなどの目的で) ネットワーク スタックへのフル アクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/2.0/docker-to-machine)」を参照してください。
 
@@ -252,7 +250,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:current
     resource_class: large
 ```
 
@@ -274,13 +272,15 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 
 ## macOS を使用する
 {: #using-macos }
+
 `macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 In macOS, the following resources classes are available:
 
-| クラス                   | vCPU        | RAM   |
-| --------------------- | ----------- | ----- |
-| medium                | 4 @ 2.7 GHz | 8 GB  |
-| macos.x86.medium.gen2 | 4 @ 3.2 GHz | 8 GB  |
-| large                 | 8 @ 2.7 GHz | 16 GB |
+| クラス                                | vCPU         | RAM   |
+| ---------------------------------- | ------------ | ----- |
+| medium                             | 4 @ 2.7 GHz  | 8 GB  |
+| macos.x86.medium.gen2              | 4 @ 3.2 GHz  | 8 GB  |
+| large                              | 8 @ 2.7 GHz  | 16 GB |
+| macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
 このとき、どのバージョンの Xcode を使うか指定することもできます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
@@ -296,6 +296,8 @@ jobs:
       # 使用して、macOS コンテナ内で実行されます
       - run: xcodebuild -version
 ```
+
+<sup>(1)</sup> _このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p>
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }

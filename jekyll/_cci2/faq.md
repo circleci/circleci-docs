@@ -298,7 +298,7 @@ You can choose to pay for premium features per active user, compute, and optiona
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**NOTE:** Billing for network egress and storage will start to take effect on **March 1 2022** (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage. The information in this section is applicable after the changes take effect on March 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+**NOTE:** For our monthly Performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
 Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan** Usage.
@@ -327,7 +327,11 @@ In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ran
 
 This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
-This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing](https://circleci.com/docs/2.0/ip-ranges/#pricing) for more information.
+
+#### How do I predict my monthly IP ranges cost without enabling the feature first?
+
+You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the Resources tab on the Job Details UI page.  Convert this value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost of enabling IP ranges on that Docker job.
 
 #### Why does CircleCI have per-active-user pricing?
 {: #why-does-circleci-have-per-active-user-pricing }
@@ -485,7 +489,10 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
 jobs:
   ipv6_tests:
   machine:
-    image: ubuntu-1604:202007-01
+    # The image uses the current tag, which always points to the most recent
+    # supported release. If stability and determinism are crucial for your CI
+    # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+    image: ubuntu-2004:current
   steps:
     - checkout
     - run:
