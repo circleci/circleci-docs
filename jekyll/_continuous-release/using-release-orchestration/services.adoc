@@ -1,6 +1,8 @@
+= Services
 :page-layout: classic-docs
-
-== Services
+:page-liquid:
+:icons: font
+:toc: macro
 
 Under the _Services_ tab, you can view your services and the number of deployed versions for each service.
 
@@ -8,17 +10,17 @@ Click on the *+* sign to show the applications where each version is currently d
 
 // screenshot
 
-=== Creating a Service
+== Creating a Service
 
 To create a service, click the *+Create Service* button on the Services page.
 
 // screenshot
 
-// use an include here to avoid duplication with Getting Started guide
+{% include release-orchestration/services.adoc %}
 
 When you have finished adding the details, click the *Create service* button. You will then see a pop-up message to confirm that you service has been created.
 
-=== Editing a Service
+== Editing a Service
 
 To edit a service, click *Details* next to the service in the list.
 
@@ -28,7 +30,7 @@ From here, you can also add metadata to your service, under the _Metadata_ tab.
 
 When you have finished editing the details, click the *Update service* button. You will then see a pop-up message to confirm that you service has been updated.
 
-=== Deleting a Service
+== Deleting a Service
 
 To delete a service, click *Details* next to the service in the list, then click the red *Delete service* button at the bottom of the page.
 
