@@ -253,7 +253,7 @@ _[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-
 
 All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
 
-If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
+If you are using the Orb Development Kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
 {: class="alert alert-warning"}
 
 **_Example: Orb Project Structure_**
@@ -275,7 +275,7 @@ Additionally, the _pack_ command provides a special pre-processor for orb develo
 
 `circleci orb pack <dir> > orb.yml`
 
-For orb development kit users, this step is handled automatically.
+For Orb Development Kit users, this step is handled automatically.
 
 ## File include syntax
 {: #file-include-syntax }
