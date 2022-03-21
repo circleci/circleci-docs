@@ -56,7 +56,7 @@ workflows:
 
 The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the orb development kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint).
 
-### Local YAML Linting
+#### Local YAML Linting
 {: #local-yaml-lint }
 
 If you have `yamllint` installed locally:
@@ -85,6 +85,7 @@ workflows:
       - orb-tools/pack # Packs the orb source and validates it
 ```
 
+#### Local Orb Validate
 
 To pack and validate your orb locally, run the following commands:
 
@@ -106,6 +107,19 @@ The most basic tests to run against bash scripts are a form of validation: "shel
 
 In the `lint-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
 
+#### Local ShellCheck
+
+To run shellcheck locally, run the following commands:
+
+```shell
+shellcheck src/scripts/*.sh
+```
+
+Or, using CircleCI's Local Execute:
+```shell
+circleci local execute --job shellcheck/check
+```
+
 ### Review
 {: #review }
 
@@ -116,6 +130,19 @@ Review Checks output to JUNIT XML formatted and are automatically uploaded to Ci
 ![orb-tools review check RC008]({{site.baseurl}}/assets/img/docs/orbtools-rc008.png)
 
 When you click into the error you will receive more information such as what file and at what line in the code the error was found, along with suggestions for resolution.
+
+#### Local Review
+
+The "review" job is built using the [BATS-Core](https://github.com/bats-core/bats-core) bash automation testing framework. If you have bats installed locally, you can review your orb by running:
+
+```shell
+bats src/scripts/review.bats
+```
+
+Or, using CircleCI's Local Execute:
+```shell
+circleci local execute --job orb-tools/review
+```
 
 ## Unit testing
 {: #unit-testing }
