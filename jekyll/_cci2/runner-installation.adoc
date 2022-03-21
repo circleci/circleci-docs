@@ -176,7 +176,7 @@ export agent_version="<launch-agent-version>"
 ```
 +
 
-. Finally, run the following script to download, verify and install the binary.
+. Finally, run the following script to download, verify, and install the binary.
 +
 ```shell
 # Set up runner directory
@@ -197,6 +197,14 @@ curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
++
+You can save the file as `download-launch-agent.sh` and run it with:
++
+```bash
+ sh download-launch-agent.sh
+```
++
+
 
 === Platform-specific instructions
 
