@@ -1,9 +1,9 @@
 <div class='section-header-wrapper'>
-  <h2 class='section-title'>{Placeholder for dynamic section title}</h2>
-  <span class='section-banner'>{Placeholder to include dynamic image}</span>
+  <h2 class='section-title'>{{include.title}}</h2>
+  <img class='image-banner' src="{{include.imagePath}}" alt="header banner" />
   <div class='content-wrapper'>
     <p>
-      {Placeholder for content here}
+      {{include.content}}
     </p>
   </div>
 </div>
