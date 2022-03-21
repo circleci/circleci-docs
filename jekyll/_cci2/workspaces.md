@@ -28,6 +28,8 @@ By default, workspace storage duration is set to 15 days. This can be customized
 
 To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
+If you have custom storage settings, `persist_to_workspace` will default to the customizations you have set for your workspaces. If none are set, `persist_to_workspace` will be the default setting of 15 days.
+
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
 {:.tab.workspaces.Cloud}
