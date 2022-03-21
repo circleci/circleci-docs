@@ -106,6 +106,17 @@ The most basic tests to run against bash scripts are a form of validation: "shel
 
 In the `lint-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
 
+### Review
+{: #review }
+
+The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored.
+
+Review Checks output to JUNIT XML formatted and are automatically uploaded to CircleCI to be displayed natively in the UI.
+
+![orb-tools review check RC008]({{site.baseurl}}/assets/img/docs/orbtools-rc008.png)
+
+When you click into the error you will receive more information such as what file and at what line in the code the error was found, along with suggestions for resolution.
+
 ## Unit testing
 {: #unit-testing }
 
