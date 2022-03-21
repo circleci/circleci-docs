@@ -4,9 +4,7 @@
 :icons: font
 :toc: macro
 
-This guide ...
-
-If you are new to Vamp, begin with the <<./getting-started/getting-started#,Getting Started guide>>.
+This section provides details on using the main features of Vamp. If you are new to Vamp, familiarize yourself with the <<../concepts#,key concepts>>, then begin with the <<../getting-started/getting-started#,Getting Started guide>>.
 
 == Dashboard
 
