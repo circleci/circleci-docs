@@ -1,3 +1,4 @@
+= Getting Started
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -7,8 +8,11 @@
 
 In Vamp, an application is a collection of microservices that share a single Kubernetes namespace.
 
+// screenshot
+
 {% include release-orchestration/applications.adoc %}
 
 Once you have finished adding the details for your application, click **Next** in the bottom left-hand corner. You will see a pop up message to confirm that your application has been created.
 
+[example]
 You can now proceed to <<step-2#,Step 2>>.

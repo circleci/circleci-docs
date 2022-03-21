@@ -16,6 +16,8 @@ To use the Quick Start Guide, you will need:
 
 See <<../prerequisites#,Prerequisites>> for more details on what you need to use Vamp.
 
+== Accessing the Quick Start Guide
+
 Once you have everything you need:
 
 * Log in to Vamp.

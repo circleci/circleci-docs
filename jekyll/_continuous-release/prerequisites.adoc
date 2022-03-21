@@ -1,5 +1,6 @@
 = Prerequisites
 :page-layout: classic-docs
+:page-liquid:
 :icons: font
 :toc: macro
 
@@ -15,6 +16,7 @@ To use Vamp, you will need the following:
 == kubectl
 
 The Kubernetes command-line tool, https://kubernetes.io/docs/reference/kubectl/kubectl/[kubectl], allows you to run commands on Kubernetes clusters. You can use kubectl to deploy applications, inspect and manage cluster resources, and view logs.
+
 If you do not already have kubectl installed, https://kubernetes.io/docs/tasks/tools/install-kubectl/[follow the instructions here].
 
 === Amazon Kubernetes Service (EKS)

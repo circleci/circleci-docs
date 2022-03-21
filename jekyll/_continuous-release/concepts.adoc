@@ -1,5 +1,6 @@
 = Continuous Release Concepts
 :page-layout: classic-docs
+:page-liquid:
 :icons: font
 :toc: macro
 
@@ -21,15 +22,15 @@ Release Orchestration supports _release policies_ and _validation-only policies_
 
 === Release Policies
 
-A release policy defines a set of validation rules for how Vamp objectively tests if a version of a service meets its objectives. It also defines the user #segments# to be targeted during the tests.
+A release policy defines a set of validation rules for how Vamp objectively tests if a version of a service meets its objectives. It also defines the user segments to be targeted during the tests.
 Release policies are used for services that support progressive releases using traffic shaping. 
 
 Normally as the release progresses, increasing numbers of API requests are sent to the newly deployed version of the service. If it passes all the tests defined in the policy, then it is designated as the live version, replacing the current version.
 
 If validation of the newly deployed version of the service fails for any reason, it is rolled back. The current version remains live and receives all API requests. The failed version no longer receives any API requests.
 
-* See XXXX for more information on release policies.
-* See XXXX for more information on user segments.
+* See <<using-release-orchestration/policies#,Policies>> for more information on release policies.
+* See <<using-release-orchestration/segments#,Segments>> for more information on user segments.
 
 === Validation-Only Policies
 
@@ -39,8 +40,8 @@ Validation-only policies rely on calling a user-defined #webhook# to roll back a
 
 If validation of the newly deployed version of the service fails for any reason, Release Automation calls a webhook to roll back the service to the previous version. Typically, this webhook triggers an action on a CD pipeline.
 
-* See XXXX for more information on validation-only policies.
-* See XXXX for more information on webhooks.
+* See <<using-release-orchestration/policies#,Policies>> for more information on validation-only policies.
+* See <<using-release-orchestration/webhooks#,Webhooks>> for more information on webhooks.
 
 == Releases
 
