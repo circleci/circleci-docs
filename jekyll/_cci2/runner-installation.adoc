@@ -59,6 +59,8 @@ In order to install self-hosted runners, you will need to create a namespace and
 
 Currently, you can only create one runner per resource class through the UI. If you would like to add more runners to your resource class, you can use the CLI.
 
+You can view your runners on the inventory page, by clicking *Runners* on the left navigation.
+
 . On the https://app.circleci.com/[CircleCI web app], navigate to *Runners*.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
@@ -80,18 +82,18 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on 
 The post authentication platform-specific instructions are also documented on their own individual pages if you need to refer to them. See the <<#platform-specific-instructions,Platform-specific instructions>> section for a list of these pages.
 +
 . You will get a verification in the UI that a new self-hosted runner has been detected. 
-
++
 You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if one doesn't exist in your config. If you don't have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
-+
-. You will now be able to see a list of your self-hosted runners on the CircleCI web app, on the inventory page.
 
 == Command line installation
 
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
 In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
+
+You can view your runners on the inventory page, by clicking *Runners* on the left navigation.
 
 . Create a namespace for your organization's self-hosted runners. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use. 
 +
@@ -203,8 +205,6 @@ You can save the file as `download-launch-agent.sh` and run it with:
 ```bash
  sh download-launch-agent.sh
 ```
-+
-
 
 === Platform-specific instructions
 
@@ -217,8 +217,6 @@ Please refer to the platform-specific installation instructions after you have c
 * xref:runner-on-kubernetes.adoc[Kubernetes]
 
 For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
-
-You will be able to see a list of your self-hosted runners on the CircleCI web app, on the inventory page.
 
 == Self-hosted runners for server compatibility
 _CircleCI runner is available from server v3.1.0_
