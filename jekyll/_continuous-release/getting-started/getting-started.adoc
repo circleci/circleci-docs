@@ -15,6 +15,8 @@ To use the Quick Start Guide, you will need:
 * A Kubernetes cluster
 * https://kubernetes.io/docs/tasks/tools/[kubectl] - a command-line tool for running commands on your Kubernetes cluster
 
+See <<../prerequisites#,Prerequisites>> for more details on what you need to use Vamp.
+
 Log in to Vamp, then navigate to the https://vamp.cloud/6/quickstart[Quick Start Guide with this link].
 
 Now follow the steps below:

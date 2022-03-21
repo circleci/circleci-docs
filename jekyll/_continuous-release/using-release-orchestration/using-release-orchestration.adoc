@@ -6,30 +6,26 @@
 
 This guide ...
 
-If you are new to Vamp, begin with the Getting Started guide.
+If you are new to Vamp, begin with the <<./getting-started/getting-started#,Getting Started guide>>.
 
-// link to getting-started/index.adoc
+== Dashboard
 
-// Logging in
+=== Logging in
 
 // Might need to include something on projects and API tokens, too.
 
 // Dashboard
 
+From the Dashboard, you can access the following tabs:
+
+* <<applications#,Applications>>
+* <<clusters#,Clusters>> (under Applications)
+* <<services#,Services>>
+* <<releases#,Releases>>
+* <<segments#,Segments>>
+* <<policies#,Policies>>
+* <<metrics#,Metrics>> (under Policies)
+
 // Notifications
 
 // Search
-
-// include::applications.adoc[]
-
-// include::clusters.adoc[]
-
-// include::services.adoc[]
-
-// include::releases.adoc[]
-
-// include::segments.adoc[]
-
-// include::policies.adoc[]
-
-// include::installing-release-agent.adoc[]

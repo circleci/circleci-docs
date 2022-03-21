@@ -5,12 +5,12 @@
 
 To use Vamp, you will need the following:
 
-* kubectl
-* Kubernetes cluster
-* Containerized app
-* Ingress controller (unless you are not planning to expose any of your services)
-* Prometheus
-* DNS entry
+* <<#kubectl,kubectl>>
+* <<#kubernetes-cluster,Kubernetes cluster>>
+* <<#containerized-app,Containerized app>>
+* <<#ingress-controller,Ingress controller>> (unless you are not planning to expose any of your services)
+* <<#prometheus,Prometheus>>
+* <<#dns-entry,DNS entry>>
 
 == kubectl
 
