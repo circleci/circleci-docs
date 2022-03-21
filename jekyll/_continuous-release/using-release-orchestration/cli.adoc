@@ -1,0 +1,37 @@
+= CLI
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+Vamp CLI is a command-line client that allows you to interact with your applications.
+
+== Installing the Vamp CLI
+
+
+https://github.com/magneticio/vamp-cloud-cli/releases/tag/v.1.0.25
+
+== Using the Vamp CLI
+
+=== Create cluster
+
+Create a new cluster in the project associated with the specified API key.
+
+=== Create application
+
+
+=== Create ingress
+
+
+=== Describe cluster
+
+
+=== Describe application
+
+
+=== Get installation command
+
+
+=== Watch release
+
+
