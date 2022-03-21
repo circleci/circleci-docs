@@ -93,7 +93,7 @@ jobs:
 ```
 
 **Note:**
-`circleci/python:3.6.4` is a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI.
+`cimg/python:3.10.1` is a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI.
 These images are extensions of official Docker images
 and include tools useful for CI/CD environments.
 
