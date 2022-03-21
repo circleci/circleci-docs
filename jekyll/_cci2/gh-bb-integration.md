@@ -19,7 +19,7 @@ This document provides an overview of using GitHub, GitHub Enterprise, or Bitbuc
 {: #overview }
 {:.no_toc}
 
-To use CircleCI you need to be using either GitHub or Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
+To use CircleCI you need to use either GitHub or Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
 
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket Cloud.
 - A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket Cloud.
