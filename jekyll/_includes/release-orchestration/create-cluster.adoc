@@ -1,3 +1,6 @@
+:page-liquid:
+:icons: font
+
 === Name
 
 This is the name displayed when you choose a cluster as part of creating an application.
