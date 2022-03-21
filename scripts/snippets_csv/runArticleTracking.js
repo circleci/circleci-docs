@@ -12,7 +12,8 @@ const directories = ['__glossary', '_cci2', '_cci2_ja'];
 
 /* Total */
 const addToDataTotal = async (filePath, lineStart, lineStop) => {
-  let pageName = (filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length - 1)).split('.')[0];
+  // We need to be careful to not have our file names use .md or .adoc in them except as file extensions
+  let pageName = (filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length)).replace('.md', '').replace('.adoc', '');
   let linkToDocs = 'https://circleci.com/docs/2.0/' + pageName;
   
   let info = {
