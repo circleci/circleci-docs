@@ -342,7 +342,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/php:7.1-browsers # The primary container where steps are run
+      - image: cimg/php:7.1 # The primary container where steps are run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

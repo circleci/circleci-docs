@@ -49,7 +49,7 @@ jobs:
 
     # Primary container image where all commands run
     docker:
-      - image: cimg/python:3.10-browsers
+      - image: cimg/python:3.10
         environment:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
         auth:
