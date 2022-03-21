@@ -34,6 +34,8 @@ Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circ
 
 By default, artifact storage duration is set to 30 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 30 days is also the maximum storage duration you can set.
 
+For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) page.
+
 **Note:**
 Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
