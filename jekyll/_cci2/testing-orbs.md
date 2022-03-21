@@ -183,6 +183,10 @@ workflows:
  - orb-tools/publish:
           requires:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check, bats/run]
+
+filters: &filters
+  tags:
+    only: /.*/
 ```
 
 Want to see how how CircleCI writes unit tests for Bash? Check out our [Slack orb](https://github.com/CircleCI-Public/slack-orb/blob/master/src/tests/notify.bats).
