@@ -25,6 +25,8 @@ en:
           link: continuous-release/getting-started/step-5
         - name: Step 6 - Release Your Service
           link: continuous-release/getting-started/step-6
+        - name: Next Steps
+          link: continuous-release/getting-started/next-steps
     - name: Using Release Orchestration
       link: continuous-release/using-release-orchestration/using-release-orchestration
       children:
