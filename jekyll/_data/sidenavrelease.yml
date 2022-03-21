@@ -1,12 +1,15 @@
 en:
 - name: Release Orchestration
   children:
-    - name: Overview
+    - name: Introduction
       link: continuous-release/overview
-    - name: Prerequisites
-      link: continuous-release/prerequisites
-    - name: Concepts
-      link: continuous-release/concepts
+      children:
+        - name: Overview
+          link: continuous-release/overview
+        - name: Prerequisites
+          link: continuous-release/prerequisites
+        - name: Concepts
+          link: continuous-release/concepts
     - name: Getting Started
       link: continuous-release/getting-started/getting-started
       children:
