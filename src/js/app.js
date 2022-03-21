@@ -7,7 +7,6 @@ import Prism from 'prismjs';
 
 import services from './services';
 import '../styles/main.scss';
-import { trackDarkModePreference, checkIfUsersPrint } from './site/main';
 
 // adding "Clients" to the window object so they can be accessed by other js inside Jekyll
 window.Cookie = Cookie;
@@ -20,10 +19,6 @@ import site from './site';
 Prism.manual = true;
 
 services.rum.init();
-// Temporary service to check if user dark mode preferences
-trackDarkModePreference();
-// Temporary service to check if users are printing a page
-checkIfUsersPrint();
 
 $(() => {
   services.instantsearch.init();
