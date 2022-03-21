@@ -37,6 +37,11 @@ $arrow-right-base64: "data:image/png;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGlu
     border-top: 1px solid #DDDDDD;
   }
 
+
+  h1 {
+    scroll-margin-top: 2.5em;
+  }
+
   // cap the max font size of headings.
   h2 {
     font-size: 18px;
