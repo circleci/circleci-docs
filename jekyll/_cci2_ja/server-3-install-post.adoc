@@ -25,7 +25,7 @@ toc::[]
 
 === バックアップとリストアの設定
 
-CircleCI Server のバックアップは、https://kots.io/[KOTS]を介して簡単に作成できます。
+CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して簡単に作成できます。
 ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
 
 // Don't include this section in the GCP PDF:
@@ -36,7 +36,7 @@ ifndef::env-gcp[]
 
 次の手順では、プロバイダーを AWS と想定しています。
 
-これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら]の Velero ドキュメントを元にしています。
+これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら] の Velero ドキュメントを元にしています。
 
 ==== 手順 1 - AWS S3 バケットの作成
 
@@ -49,7 +49,7 @@ aws s3api create-bucket \
     --region $REGION \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
-NOTE: `us-east-1` では、https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[[LocationConstraint]] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+NOTE: `us-east-1` では、 https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
 ==== 手順 2 - Velero の権限の設定
 
@@ -193,7 +193,7 @@ ifndef::env-aws[]
 
 以下の手順は、Google Cloud Platform を対象としており、<<prerequisites, 前提条件>>を満たしていることを前提としています。
 
-これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[[こちら]]の Velero GCP プラグインのドキュメントを元にしています。
+これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[こちら] の Velero GCP プラグインのドキュメントを元にしています。
 
 ==== 手順 1 - GCP バケットの作成
 タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定しています。 すべての手順を 1 つのセッションで完了できず、再開する場合は、必要に応じて変数を再設定するようにしてください。 たとえば、以下の手順では、バケット名に対応する変数を定義しています。 Replace
@@ -208,7 +208,7 @@ gsutil mb gs://$BUCKET/
 
 ==== 手順 2 - Velero の権限の設定
 
-CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[[GKE のドキュメント]]を参照してください。
+CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE のドキュメント] を参照してください。
 
 . 最初に、プロジェクト ID に対応するシェル変数を設定します。 それにはまず、次のコマンドを実行して現在の設定を調査し、`gcloud` CLI が正しいプロジェクトを参照していることを確認します。
 +
@@ -299,7 +299,7 @@ gcloud iam service-accounts keys create credentials-velero \
 
 * サービス アカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
 
 [discrete]
 ===== JSON キー ファイルを使用する場合
@@ -331,7 +331,7 @@ velero install \
     --wait
 ----
 
-システムをカスタマイズする他のオプションについては、https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[[Velero のドキュメント]]を参照してください。
+システムをカスタマイズする他のオプションについては、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero のドキュメント] を参照してください。
 
 * Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
@@ -361,7 +361,7 @@ endif::env-aws[]
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 
-これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[こちら] の Velero ドキュメントを元にしています。
+これらの手順は、 https://velero.io/docs/v1.6/contributions/minio/[こちら] の Velero ドキュメントを元にしています。
 
 ==== 手順 1 - `mc` クライアントの設定
 
@@ -434,7 +434,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップを使用するには、https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップを使用するには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -468,7 +468,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 
-このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[トラブルシューティングに関するセクション]を参照してください。
+このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、 https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[トラブルシューティングに関するセクション] を参照してください。
 
 ==== オプション 1 - KOTS CLI を使用したバックアップ作成
 
