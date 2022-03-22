@@ -56,6 +56,8 @@ en:
           - 
             name: Docker レイヤーキャッシュ
           - 
+            name: 同時実行件数
+          - 
             name: 環境変数
           - 
             name: テストデータの収集
@@ -426,6 +428,9 @@ en:
           - 
             name: Upgrade to v2.19.x
             link: 2.0/updating-server/
+  - 
+    icon: icons/sidebar/admin.svg
+    children:
       - 
         name: Server v2.19.x Operations
         link: 2.0/overview/
@@ -743,9 +748,10 @@ ja:
             i18n_name: v2.19の新機能
           - 
           - 
+          - 
             name: Orb オーサリングに関するよくあるご質問
           - 
-            name: Orb Authoring Best Practices
+            name: Orb のベスト プラクティス
           - 
             name: Orb のテスト手法
           - 
@@ -916,13 +922,13 @@ ja:
             link: ja/2.0/CircleCI-Server-AWS-Installation-Guide.pdf
           - 
           - 
+          - 
             name: ユーザーアカウント
             link: ja/2.0/CircleCI-Server-Operations-Guide.pdf
           - 
             name: Orbs
-            i18n_name: Orbs
           - 
-            name: VM サービスの設定
+            name: VM サービス
           - 
             name: Authentication
           - 
@@ -931,7 +937,6 @@ ja:
           - 
             name: 認証
           - 
-            name: Usage Data
           - 
             name: Security
           - 
