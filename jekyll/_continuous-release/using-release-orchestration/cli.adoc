@@ -53,6 +53,21 @@ vamp create application <application-name> --cluster=<cluster-name> --namespace=
 
 // add something on Ingress types? Or link to other docs?
 
+=== Attach service
+
+// test this one!
+
+Attach an existing service to the specified application:
+
+[source,shell]
+attach service <service-name> --application=<application-name> --policy=<policy-name>
+
+To specify an ingress and a route, use this format:
+
+[source,shell]
+attach service <service-name> --application=<application-name> --policy=<policy-name> --ingress="test.my.domain" --route="/"
+
+
 === Create ingress
 
 Create a new ingress in the specified appliation:
