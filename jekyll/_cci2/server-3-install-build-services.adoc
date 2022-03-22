@@ -117,12 +117,17 @@ This will return something like the following:
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command from within the directory of the `main.tf` file.
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -140,17 +145,18 @@ ifndef::env-aws[]
 ===== GCP
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by running the following command:
 
+[source,shell]
 ----
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 You will also need the following information:
 
-* The GPC Project you want to run Nomad clients in.
-* The GPC Zone you want to run Nomad clients in.
-* The GPC Region you want to run Nomad clients in.
-* The GPC Network you want to run Nomad clients in.
-* The GPC Subnetwork you want to run Nomad clients in.
+* The GCP Project you want to run Nomad clients in.
+* The GCP Zone you want to run Nomad clients in.
+* The GCP Region you want to run Nomad clients in.
+* The GCP Network you want to run Nomad clients in.
+* The GCP Subnetwork you want to run Nomad clients in.
 
 You can copy the following example to your local environment and fill in the appropriate information for your specific setup.
 
@@ -220,12 +226,17 @@ output "module" {
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -248,6 +259,7 @@ ifndef::env-gcp[]
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
   * You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. Then you will need to generate an access and secret key for this user.
   * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the following IAM policy:
++
 [source, json]
 {
     "Version": "2012-10-17",
@@ -332,11 +344,15 @@ CircleCI has created a project called https://github.com/circleci/realitycheck/t
 To run realitycheck, you will need to clone the repository. Depending on your Github setup you can do one of the following.
 
 ===== Github Cloud
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 ----
 
 ===== Github Enterprise
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 git remote set-url origin <YOUR_GH_REPO_URL>
@@ -689,6 +705,7 @@ CircleCI runner does not require any additional server configuration. Server shi
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you will need to set up a runner namespace for each organization within your server installation.
 
 ifndef::pdf[]
+
 ## What to read next
 
 * https://circleci.com/docs/2.0/server-3-install-post[Server 3.x Phase 4 - Post installation]
