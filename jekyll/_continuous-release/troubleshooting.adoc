@@ -54,6 +54,11 @@ Generate a new installation command by selecting your application in the Applica
 
 // screenshot
 
+Alternatively, if you have the <<using-release-orchestration/cli#,Vamp CLI>> installed and configured for your project, you can use the following command in the terminal:
+
+[source,shell]
+vamp get installer <application-name>
+
 ==== Restricted network access
 
 The installer runs as a Pod in your Kubernetes cluster. If your cluster restricts traffic to destinations outside your cluster, the installer will fail.
