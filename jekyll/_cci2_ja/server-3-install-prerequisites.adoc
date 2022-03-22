@@ -151,7 +151,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 . クラスタの作成が完了したら、以下のコマンドで`kubectl`のアクセスを設定します。
 +
 ```shell
-eksctl utils write-kubeconfig --name circleci-server
+eksctl utils write-kubeconfig --cluster circleci-server
 ```
 
 NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限]に関しては AWS のドキュメントをご覧ください。
