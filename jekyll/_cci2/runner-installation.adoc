@@ -53,7 +53,7 @@ If you are installing and using self-hosted runners through the CLI, you are agr
 
 == CircleCI web app installation
 
-NOTE: Currently, the web app installation is available to **Cloud** customers. If you need to install **self-hosted runners for server** please use the <<#command-line-installation,CLI>>.
+NOTE: Currently, the web app installation is available to **cloud** customers. If you need to install **self-hosted runners for server** please use the <<#command-line-installation,CLI>>.
 
 In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider. You can read about namespaces and resource classes on the <<runner-overview#namespaces-and-resource-classes,Overview>> page.
 
@@ -75,7 +75,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, s
 +
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 +
-. You will need to follow the platform specific installation instructions to continue. Click the tab in the UI that is relevant to your environment (see image below). Please note that if you would like to use self-hosted runners on Kubernetes, the instructions are not included in the UI, and you will need to refer to the xref:runner-on-kubernetes.adoc[Kubernetes] page.
+. You will need to follow the platform-specific installation instructions to continue. Click the tab in the UI that is relevant to your environment (see image below). Please note that if you would like to use self-hosted runners on Kubernetes, the instructions are not included in the UI, and you will need to refer to the xref:runner-on-kubernetes.adoc[Kubernetes] page.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on your specific machine]
 +
@@ -120,17 +120,50 @@ Example: `circleci runner resource-class create my-namespace/my-resource-class m
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
-*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#platform-specific-instructions, Platform specific installation>> instructions.
+*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#platform-specific-instructions, Platform-specific installation>> instructions.
 
 === Continued for Linux, macOS, and Server
 
 Be sure to complete the steps in the <<#command-line-installation, Command line installation>> section before moving on to the steps below.
 
-. Download the launch agent binary and verify the checksum.
+. Save the script below as `download-launch-agent.sh` in the root of your project. When run (see the next step) the script will download the launch agent binary, verify the checksum, and set the `circleci-launch-agent` version. 
 +
-The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location. First, set one of these variables as appropriate for for your installation target.
+Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
 +
+```shell
+#!/usr/bin/env sh
 
+set -eu pipefail
+
+echo "Installing CircleCI Runner for ${platform}"
+
+base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+if [ -z ${agent_version+x} ]; then
+  agent_version=$(curl "${base_url}/release.txt")
+fi
+
+# Set up runner directory
+echo "Setting up CircleCI Runner directory"
+prefix=/opt/circleci
+sudo mkdir -p "${prefix}/workdir"
+
+# Downloading launch agent
+echo "Using CircleCI Launch Agent version ${agent_version}"
+echo "Downloading and verifying CircleCI Launch Agent Binary"
+curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
+file="$(grep -F "${platform}" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
+mkdir -p "${platform}"
+echo "Downloading CircleCI Launch Agent: ${file}"
+curl --compressed -L "${base_url}/${agent_version}/${file}" -o "${file}"
+
+# Verifying download
+echo "Verifying CircleCI Launch Agent download"
+grep "${file}" checksums.txt | sha256sum --check && chmod +x "${file}"
+sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+```
++
+. Set your platform and run the `download-launch-agent.sh` script to download, verify, and install the binary. If you are using **cloud**, use the table below to find your platform variable:
++
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
@@ -150,65 +183,46 @@ The launch agent can be installed using the following script, which will use `op
 | `platform=darwin/arm64`
 |===
 +
-Example:
+For example, on **cloud**, to set your platform for macOS M1 and run the `download-launch-agent.sh` script, run the following:
 +
 ```shell
-export platform=darwin/amd64
+export platform=darwin/arm64 && sh ./download-launch-agent.sh
 ```
 +
+For *server v3.1.0 and up*, use the table below to find the compatible launch agent version for the version of server you are running:
++
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Server version
+| Launch Agent Version
 
-. Next, set the `circleci-launch-agent` version. Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability and self-hosted runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<#runner-for-server-compatibility,here>>.
-+
-For *cloud*, you can run the following:
-+
-```shell
-export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-```
-+
-Followed by:
-+
-```shell
-export agent_version=$(curl "${base_url}/release.txt")
-```
-+
-For *server v3.1.0 and up*, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<#runner-for-server-compatibility>> to find the correct version):
-+
-```shell
-export agent_version="<launch-agent-version>"
-```
-+
+| 3.0
+| Runner not supported
 
-. Finally, run the following script to download, verify, and install the binary.
+| 3.1
+| 1.0.11147-881b608
+
+| 3.2
+| 1.0.19813-e9e1cd9
+
+| 3.3
+| 1.0.29477-605777e
+|===
++
+Substitute `<launch-agent-version>` with your launch agent version for server and run the following:
 +
 ```shell
-# Set up runner directory
-prefix=/opt/circleci
-sudo mkdir -p "$prefix/workdir"
-
-# Downloading launch agent
-echo "Using CircleCI Launch Agent version $agent_version"
-echo "Downloading and verifying CircleCI Launch Agent Binary"
-base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
-mkdir -p "$platform"
-echo "Downloading CircleCI Launch Agent: $file"
-curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
-
-# Verifying download
-echo "Verifying CircleCI Launch Agent download"
-grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 +
-You can save the file as `download-launch-agent.sh` and run it with:
-+
-```bash
- sh download-launch-agent.sh
-```
+**Note:** Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
++ 
+. Continue with the platform-specific instructions in the next section.
 
 === Platform-specific instructions
 
-Please refer to the platform-specific installation instructions after you have created your namespace and resource class.
+Please continue with the platform-specific installation instructions below. This should be done only after you have created your namespace and resource class, and run the `download-launch-agent.sh` script from the previous section.
 
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
