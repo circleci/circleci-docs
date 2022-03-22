@@ -31,7 +31,7 @@ Access the KOTS Admin Console. Get to the KOTS Admin Console by running the foll
 
 Locate and enter the following in Settings:
 
-. *Output Processor Load Balancer (required)* -
+. *Output Processor Load Balancer Hostname* -
 The following command will provide the IP address of the service
 +
 ```shell
