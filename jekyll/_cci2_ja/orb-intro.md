@@ -23,7 +23,7 @@ CircleCI Orb とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#author
 
 Orb では設定ファイルの要素をパラメーター化できるため、設定を大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするための一般的な設定ファイルであり、ジョブの定義には、アプリケーションのテストに必要なステップが複数含まれています。一方、CircleCI Orb を使用する場合は、[`circleci/node`](https://circleci.com/developer/ja/orbs/orb/circleci/node) Orb に含まれる `test` ジョブを使用します。 Orb を使用すれば、パラメーター化された設定を 1 回記述するだけで、それをいくつもの類似したプロジェクトで利用できるようになります。
 
-{:.tab.nodeTest.Orb を使用}
+{:.tab.nodeTest.Orbs}
 ```yaml
 version: 2.1
 
@@ -80,7 +80,7 @@ workflows:
 
 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
-レジストリの Orb には、次の 3 つのラベルのいずれかが一緒に表示されます。
+レジストリの Orb には、次の 3 つのラベルのいずれかが表示されます。
 
 | Certified | Written and tested by the CircleCI team | | Partner | Written by our technology partners | | Community | Written by the community |
 {: class="table table-striped"}
