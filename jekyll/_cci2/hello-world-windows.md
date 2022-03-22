@@ -427,4 +427,4 @@ Also, consider reading documentation on some of CircleCI’s features:
 ## Software pre-installed on the Windows image
 {: #software-pre-installed-on-the-windows-image }
 
-To find information on what software is pre-installed on the Windows image, please visit the [Discuss](https://discuss.circleci.com/) page.
+To find information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server). The Windows image page on the Developer Hub lists links to the most recent updates.

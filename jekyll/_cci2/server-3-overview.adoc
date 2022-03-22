@@ -139,12 +139,6 @@ CircleCI server 3.0 consists of the following services. Find their descriptions 
 |
 |
 
-| circle-legacy-dispatcher
-| Execution
-| Part of Compute Management. Sends to usage Q (mongo) and back to VCS.
-|
-|
-
 | circleci-mongodb
 | Execution
 | Primary datastore
@@ -218,12 +212,6 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 | No email notifications will be sent.
 |
 
-| federations-service
-| App Core
-| Stores user identities (LDAP). API and permissions-service.
-| If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
-| LDAP integration not available.
-
 | frontend
 | Frontend
 | CircleCI web app and www-api proxy.
@@ -252,12 +240,6 @@ No admin console available.
 | kotsadm-minio
 | Licensing
 | Object storage for KOTS licensing.
-|
-|
-
-| kotsadm-operator
-| Licensing
-| Deploys and controls Kotsadm.
 |
 |
 
@@ -302,12 +284,6 @@ No admin console available.
 | Runs tasks sent to it. Works with Nomad server.
 | No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
 |
-
-| server-troubleshooter
-| Data
-| Runs commands inside pods and appends output to support bundles.
-|
-| May not be available in GA.
 
 | slanger
 | server
