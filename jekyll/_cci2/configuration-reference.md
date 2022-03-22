@@ -392,8 +392,10 @@ jobs:
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
 
 ***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical.
-As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.
-We suggest upgrading to the latest Ubuntu 20.04 image for continued releases and support past April 2021.*
+As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
+
+Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+{: class="alert alert-warning"}
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -1202,7 +1204,7 @@ There is no direct replacement for the `deploy` step if you are using parallelis
 
 ###### *Example*
 
-A config file that uses the deprecated `deploy` step and has parallelism > 1 will need to be converted to remove the `deploy` step. See example below (this code is deprecated, do not copy):
+The following is an example of replacing the deprecated `deploy` step in a config file that has parallelism > 1 (this code is deprecated, do not copy):
 
 ```yml
 # Example of deprecated syntax, do not copy
@@ -1496,7 +1498,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ##### **`add_ssh_keys`**
-{: #addsshkeys }
+{: #add-ssh-keys }
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
 

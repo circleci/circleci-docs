@@ -43,4 +43,15 @@ window.OptimizelyClient.getVariationName({
     handleGithubDropdownClick();
     handleClickedLink();
   }
+
+  if (variation === 'control' && isFirstStepsPage) {
+    $('a[href="https://circleci.com/signup/"]').click((e) => {
+      window.AnalyticsClient.trackAction(
+        'dd_first-steps-signup-cta_test_control_link',
+        {
+          text: e.target.innerText,
+        },
+      );
+    });
+  }
 });

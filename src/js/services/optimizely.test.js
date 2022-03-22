@@ -54,31 +54,11 @@ describe('Optimizely Service logged-in users', () => {
     });
   });
 
-  describe('getUserId() in a Guest Experiment', () => {
+  describe('getAnonymousId()', () => {
     glob.analytics.user().anonymousId.mockReturnValue(anonymousId);
 
-    it('returns anonymousId when userData is not here', async () => {
-      glob.userData = null;
-      await expect(client.getUserId(true)).resolves.toBe(anonymousId);
-    });
-
-    it('returns analytics_id when userData has a valid analytics_id', async () => {
-      glob.userData = {
-        analytics_id: '00000000-0000-0000-0000-000000000000',
-      };
-      await expect(client.getUserId(true)).resolves.toBe(
-        glob.userData.analytics_id,
-      );
-    });
-
-    it('returns null when userData is empty', async () => {
-      glob.userData = {};
-      await expect(client.getUserId(true)).resolves.toBe(null);
-    });
-
-    it("returns null when analytics doesn't exist", async () => {
-      glob.analytics = null;
-      await expect(client.getUserId(true)).resolves.toBe(null);
+    it('returns anonymousId when no error', async () => {
+      expect(client.getAnonymousId()).toBe(anonymousId);
     });
   });
 
