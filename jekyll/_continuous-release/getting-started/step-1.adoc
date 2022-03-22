@@ -14,5 +14,6 @@ In Vamp, an application is a collection of microservices that share a single Kub
 
 Once you have finished adding the details for your application, click **Next** in the bottom left-hand corner. You will see a pop up message to confirm that your application has been created.
 
-[sidebar]
+****
 You can now proceed to <<step-2#,Step 2>>.
+****
