@@ -132,7 +132,7 @@ While universal binaries are only supported under Xcode 12.2+, you can still cro
 ## 次のステップ
 {: #next-steps }
 
-macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの構成が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
+macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
 - [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/2.0/testing-ios)
 - [iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)
