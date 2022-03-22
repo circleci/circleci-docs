@@ -158,14 +158,14 @@ jobs:
 ### Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
 
-Docker にはもともとイメージのキャッシュ機能があり、\[リモート Docker\]\[building-docker-images\] を介した Docker イメージのビルド、実行、パブリッシュを可能にしています。 開発しているアプリケーションで Docker を利用する必要があるかどうか、再確認してください。 アプリケーションが下記内容に合致するなら、Docker を使うと良いでしょう。
+Docker にはもともとイメージのキャッシュ機能があり、[リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) を介した Docker イメージのビルド、実行、パブリッシュを可能にしています。 開発しているアプリケーションで Docker を利用する必要があるかどうか、再確認してください。 アプリケーションが下記内容に合致するなら、Docker を使うと良いでしょう。
 
 - 自己完結型のアプリケーションである.
 - テストのために他のサービスが必要なアプリケーションである.
-- アプリケーションが Docker イメージとして配布される (\[リモート Docker\]\[building-docker-images\] の使用が必要)。
-- `docker-compose` を使用したい (\[リモート Docker\]\[building-docker-images\] の使用が必要)。
+- アプリケーションが Docker イメージとして配布される ([リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) の使用が必要)。
+- `docker-compose` を使用したい ([リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) の使用が必要)。
 
-Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です)。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
+Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における [リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) の機能も同様です)。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
@@ -185,9 +185,9 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 | [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | はい               | はい        |
 {: class="table table-striped"}
 
-<sup>(1)</sup> \[カスタム Docker イメージの使用\]\[custom-images\] を参照してください。
+<sup>(1)</sup> [カスタム Docker イメージの使用]({{ site.baseurl }}/ja/2.0/custom-images/) を参照してください。
 
-<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
+<sup>(2)</sup> [リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) を使用する必要があります。
 
 <sup>(3)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 このときのパフォーマンスは、ご契約のコンテナ プランで利用できるコンピューティング能力に左右されます。
 
@@ -293,7 +293,7 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 | medium                             | 4 @ 2.7 GHz  | 8 GB  |
 | macos.x86.medium.gen2              | 4 @ 3.2 GHz  | 8 GB  |
 | large                              | 8 @ 2.7 GHz  | 16 GB |
-| macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32GB  |
+| macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
 このとき、どのバージョンの Xcode を使うか指定することもできます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
