@@ -33,7 +33,7 @@ jobs:
         # プライマリ コンテナで実行するコマンド
 ```
 
-`docker` Executor についての詳細は、「Executor タイプの選び方」の[Docker を使用する]({{ site.baseurl }}/2.0/executor-types/#using-docker)のページをご覧ください。
+`docker` Executor についての詳細は、「Executor タイプの選び方」の[Docker を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker)のページをご覧ください。
 
 ## マシン
 {: #machine }
