@@ -25,3 +25,8 @@ IMPORTANT: The command is only valid for 30 minutes.
 If installation is successful, the status changes from _Installation pending_ to _Installation successful_.
 
 If installation fails for any reason, the status changes from _Installation pending_ to _Installation failed_. For guidance on resolving the issue, see the <<../troubleshooting#release-agent,troubleshooting guide>>.
+
+Alternatively, if you have the <<using-release-orchestration/cli#,Vamp CLI>> installed and configured for your project, you can use the following command in the terminal:
+
+[source,shell]
+vamp get installer <application-name>
