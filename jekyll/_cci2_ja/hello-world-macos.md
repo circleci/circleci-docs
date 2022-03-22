@@ -104,20 +104,20 @@ macOS でのビルドの基礎について説明しているため、上記の�
 ### ユニバーサル バイナリ
 {: #universal-binaries }
 
-Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables.
+Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 この機能は Xcode 12.2 以降でのみサポートされていますが、古い Xcode バージョンを使用して、それぞれの `x86_64` と `ARM64` 実行可能ファイルをコンパイルすることもできます。
 
 ### 不要なアーキテクチャの抽出
 {: #extracting-unwanted-architectures }
 
-Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
+Xcode 12.2 以降では、デフォルトでユニバーサルバイナリが作成され、 `x86_64 `および `ARM64` ベースの CPU をサポートする実行可能ファイルにコンパイルされます。 一連の説明を削除する必要がある場合は、` ipo` ユーティリティを使って削除できます。
 
-Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
+`circleci-demo-macos` というユニバーサルバイナリからスタンドアロンの x86_64 バイナリを作成する場合は、次のコマンドを実行します。
 
 ```shell
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
 ```
 
-We can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64` which will output the following
+次に、`lipo -info circleci-demo-macos-x86_64`を使って抽出したバイナリがサポートするアーキテクチャを確認します。すると、以下が出力されます。
 
 ```
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
@@ -127,7 +127,8 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ### バイナリのクロスコンパイル
 {: #cross-compiled-binaries }
 
-While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the x86_64 architecture simply change `ARCHS` to `x86_64`.
+ユニバーサルバイナリは、Xcode 12.2 以降でのみサポートされていますが、バイナリのビルドに使用されるマシンのアーキテクチャ以外のアーキテクチャ用にバイナリをクロスコンパイルすることが可能です。 xcodebuild の場合、プロセスは比較的簡単です。 ARM64 バイナリをビルドするには、`xcodebuild` コマンドの先頭に `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` を追加して、 `xcodebuild ARCHS=ARM64
+ONLY_ACTIVE_ARCH=NO ...` を読み取ります。  `x86_64` のアーキテクチャの場合、`ARCHS` を `x86_64`  に変更します。
 
 ## 次のステップ
 {: #next-steps }
