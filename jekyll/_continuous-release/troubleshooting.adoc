@@ -60,4 +60,16 @@ The installer runs as a Pod in your Kubernetes cluster. If your cluster restrict
 
 IMPORTANT: The Vamp Release Agent needs frequent access to `vault.vamp.cloud` and `nats.vamp.cloud`.
 
+== NGINX
+
+=== My NGINX Ingress controller has a different name
+
+The installer looks for a deployment called `ingress-nginx-controller` in your cluster. The installer fails if it cannot find this deployment. 
+
+If your NGINX Ingress controller has a different name, you can pass the name of the controller to the installer using `-i my-controller-name`. For example:
+
+----
+curl -sSL https://vampcloud.github.io/vamp-cloud-installer/install.sh | sh -s -- -i my-controller-name <token>
+----
+
 {% include_relative prometheus.adoc %}
