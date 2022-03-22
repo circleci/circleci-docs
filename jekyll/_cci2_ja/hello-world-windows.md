@@ -425,4 +425,4 @@ CircleCI の機能については、以下のドキュメントを確認して�
 ## Windows イメージにプリインストールされているソフトウェア
 {: #software-pre-installed-on-the-windows-image }
 
-Windows イメージにプリインストールされているソフトフェアに関する情報は、[Discuss](https://discuss.circleci.com/) のページをご覧ください。
+To find information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server). The Windows image page on the Developer Hub lists links to the most recent updates.
