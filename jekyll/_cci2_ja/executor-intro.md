@@ -20,7 +20,7 @@ CircleCIでは、複数のビルド環境を用意しており、 これらを *
 {: #docker }
 
 <div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 ```yml
@@ -66,7 +66,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-`machine` Executor についての詳細は、「Executor タイプの選び方」の[マシンを使用する]({{ site.baseurl }}/2.0/executor-types/#using-machine)のページをご覧ください。
+`machine` Executor についての詳細は、「Executor タイプの選び方」の[マシンを使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine)のページをご覧ください。
 
 ## macOS
 {: #macos }
@@ -82,7 +82,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-`macos` Executor についての詳細は、「Executor タイプの選び方」の [macOS を使用する]({{ site.baseurl }}/2.0/executor-types/#using-macos) のページをご覧ください。
+`macos` Executor についての詳細は、「Executor タイプの選び方」の [macOS を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos) のページをご覧ください。
 
 ## Windows
 {: #windows }
@@ -140,7 +140,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor についての詳細は、「Executor タイプの選び方」の [Windows Executor を使用する]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor)のページをご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor についての詳細は、「Executor タイプの選び方」の [Windows Executor を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)のページをご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
