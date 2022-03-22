@@ -37,7 +37,7 @@ macOS 実行環境についての理解を深めていただければ、CircleCI
 - コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
 - テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
 
-You can check out the example application's repo on [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
+サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
 
 Please note, if you would like to test running the code in the example configuration file (below) yourself, you should either fork, or duplicate the example application from GitHub. The example configuration file is not guaranteed to work on any/all Xcode projects.
 
