@@ -1,4 +1,8 @@
+= Getting Started
 :page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
 
 == Step 4: Expose Your Service
 
@@ -38,8 +42,11 @@ If you already have a TLS certificate for your domain, enter the name of the Kub
 
 To expose a service, you need to give it a URL path.
 
-The default is to expose each of your services using the path name /<service-name>. If you want to expose your service on a different path,  you can edit the path.
+The default is to expose each of your services using the path name `/<service-name>`. If you want to expose your service on a different path,  you can edit the path.
 
 If you do not want to expose a service, you can delete the route.
 
 WARNING: If choose not to expose a service, you will be unable to use release policies that include traffic-based SLOs with that service.
+
+[example]
+You can now proceed to <<step-5#,Step 5>>.

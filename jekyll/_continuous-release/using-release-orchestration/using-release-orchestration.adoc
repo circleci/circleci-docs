@@ -1,0 +1,52 @@
+= Using Release Orchestration
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+This section provides details on using the main features of Vamp. If you are new to Vamp, familiarize yourself with the <<../concepts#,key concepts>>, then begin with the <<../getting-started/getting-started#,Getting Started guide>>.
+
+== Dashboard
+
+The Dashboard provides an overview of all the current and recent activity and allows you to quickly navigate to different parts of the Vamp Cloud application.
+
+You can access the Dashboard through https://vamp.cloud[vamp.cloud].
+
+=== Logging in
+
+// Might need to include something on projects and API tokens, too.
+
+Once you have logged in, you will see your name in the top right-hand corner. Underneath your name, you can:
+
+* Select your Project
+* View and revoke your API tokens
+* Log out
+
+// screenshot of Dashboard
+
+Your Project and API tokens should have been set up by a CircleCI representative.
+
+From the Dashboard, you can access the following tabs:
+
+* <<applications#,Applications>>
+* <<clusters#,Clusters>> (under Applications)
+* <<services#,Services>>
+* <<releases#,Releases>>
+* <<segments#,Segments>>
+* <<policies#,Policies>>
+* <<metrics#,Metrics>> (under Policies)
+
+// Notifications
+
+=== Notifications
+
+In the top right-hand corner of the Dashboard, you can view your notifications. Click the trash icon to remove them individually, or click *Remove All* to clear the list.
+
+// screenshot
+
+=== Searching
+
+To search your releases, policies, and users, click the magnifying glass icon in the top right-hand corner of the Vamp dashboard. The icon might not be visible unless your browser window is maximized.
+
+// screenshot
+

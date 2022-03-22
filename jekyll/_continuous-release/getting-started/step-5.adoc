@@ -1,7 +1,16 @@
+= Getting Started
 :page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
 
 == Step 5: Install the Release Agent
 
-// include::../includes/release-agent.adoc[]
+// add screenshots
+
+{% include release-orchestration/release-agent.adoc %}
 
 Once you see an _Installation successful_ status, click *Next*.
+
+[example]
+You can now proceed to <<step-6#,Step 6>>.

@@ -1,7 +1,11 @@
 = Overview
 :page-layout: classic-docs
+:page-liquid:
 :icons: font
 :toc: macro
+
+This documentation provides an overview of the main concepts used in  Release Orchestration. For more details and examples, see the <<using-release-orchestration/using-release-orchestration#,Using Release Orchestration>> guide. Or you can create your first application with the <<getting-started/getting-started#,Getting Started>> guide.
+
 
 == What is Release Orchestration?
 
@@ -9,7 +13,7 @@ Release Orchestration is taking your working code and making it accessible to us
 
 Although Kubernetes provides an automated way of releasing code, it does not prevent you from replacing good code with worse code. Provided the new version runs for long enough to pass a few simple checks, Kubernetes uses it as a replacement for the current version.
 
-With Release Orchestration, each release is controlled by a #release policy#. This policy contains precise criteria for determining whether the new version is good enough to replace the current version. You decide which release policy is used for different types of release, such as emergency fixes, planned improvements, or new features.
+With Release Orchestration, each release is controlled by a release policy. This policy contains precise criteria for determining whether the new version is good enough to replace the current version. You decide which release policy is used for different types of release, such as emergency fixes, planned improvements, or new features.
 
 == Why is Release Orchestration useful?
 

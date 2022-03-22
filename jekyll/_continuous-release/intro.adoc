@@ -1,5 +1,0 @@
-= Introduction
-:page-layout: classic-docs
-:icons: font
-
-This documentation includes an overview of the main concepts used in Continuous Release, along with a Getting Started guide.

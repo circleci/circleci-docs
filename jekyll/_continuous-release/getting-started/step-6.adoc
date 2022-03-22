@@ -1,4 +1,8 @@
+= Getting Started
 :page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
 
 == Step 6: Release Your Service
 
@@ -13,7 +17,7 @@ If you followed the preceeding steps, you should now have the following:
 
 You can now deploy the first version of your service using a kubectl command. For example:
 
-`kubectl apply -f https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/particles/particles-v1.0.0.yaml`
+`kubectl apply -f \https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/particles/particles-v1.0.0.yaml`
 
 Within around 30 seconds of deployment, the version will show a status of _Success_.
 
@@ -24,3 +28,5 @@ For Vamp to release a version of a service, the workload must be labelled correc
 IMPORTANT: Vamp requires that the `app` and the `version` labels on the Kubernetes deployment and pod template match. If the labels do not match, the Release Agenty ignores the deployment and the new version is not released.
 
 // provide an example here, highlighting the relevant parts of the YAML file.
+
+You can now proceed to the <<next-steps#,Next Steps>>.

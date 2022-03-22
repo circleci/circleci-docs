@@ -1,3 +1,7 @@
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+
 Before installing the Release Agent, ensure you have all the <<prerequisites,prerequisites>>.
 
 NOTE: If the application namespace does not exist, it will be created automatically during the installation.
@@ -20,4 +24,4 @@ IMPORTANT: The command is only valid for 30 minutes.
 
 If installation is successful, the status changes from _Installation pending_ to _Installation successful_.
 
-If installation fails for any reason, the status changes from _Installation pending_ to _Installation failed_. For guidance on resolving the issue, see the <<troubleshooting,troubleshooting guide>>.
+If installation fails for any reason, the status changes from _Installation pending_ to _Installation failed_. For guidance on resolving the issue, see the <<../troubleshooting#release-agent,troubleshooting guide>>.

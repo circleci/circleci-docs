@@ -1,6 +1,8 @@
+= Applications
 :page-layout: classic-docs
-
-== Applications
+:page-liquid:
+:icons: font
+:toc: macro
 
 In Vamp, an application is a collection of microservices sharing the same Kubernetes namespace.
 
@@ -8,17 +10,17 @@ You can view your applications under the _Applications_ tab. Click the *+* sign 
 
 // Screenshot - circle the + sign
 
-=== Creating an application
+== Creating an application
 
-To create a new application, click the *+Create Application* button on the Applications page.
+To create a new application, click the *+Create Application* button on  Applications page.
 
-// include::../includes/applications.adoc[]
+{% include release-orchestration/applications.adoc %}
 
 Once you have finished adding the details for your application, click **Create application** in the bottom left-hand corner. You will see a pop-up message to confirm that your application has been created.
 
 // Add content on Ingress and services here?
 
-=== Editing an application
+== Editing an application
 
 To edit an application, click *Details* next to its name in the list under the _Applications_ tab.
 
@@ -26,7 +28,7 @@ To edit an application, click *Details* next to its name in the list under the _
 
 When you have finished editing the details, click the *Update application* button in the bottom left-hand corner. You will see a pop-up message to confirm that your application details have been updated.
 
-=== Deleting an application
+== Deleting an application
 
 To delete an application, click *Details* next to its name in the list under the _Applications_ tab.
 
