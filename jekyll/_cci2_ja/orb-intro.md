@@ -99,7 +99,7 @@ Orb は以下のいずれかの方法でパブリッシュすることができ�
 * **パブリック**: Orb レジストリで検索でき、誰でも使用できます。
 * **プライベート**: 組織内でのみ使用することができ、直接 URL を使って認証されている場合のみレジストリ内で表示されます。
 
-Orb の概要のページの [パブリック Orb vs プライベート Orb ]({{site.baseurl}}/2.0/orb-concepts/#private-orbs-vs-public-orbs)を読み、これらの概念をご理解ください。
+Orb の概要のページの [パブリック Orb vs プライベート Orb ]({{site.baseurl}}/ja/2.0/orb-concepts/#private-orbs-vs-public-orbs)を読み、これらの概念をご理解ください。
 
 ## Orb の指定
 {: #identifying-orbs }
