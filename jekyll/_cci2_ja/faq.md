@@ -171,7 +171,7 @@ jobs:
 ### 同一のワークフロー内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
 {:.no_toc}
-既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプのセクションを参照してください。
+既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプのセクションを参照してください。
 
 ### `config.yml` ファイルを複数ファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
@@ -344,7 +344,7 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 - スケジュールされたワークフローの使用
 - マシンユーザー
 
-**注:** プロジェクトが[オープンソース]({{ site.baseurl }}/2.0/oss)の場合は、アクティブユーザーとは**見なされません**。
+**注:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブユーザーとは**見なされません**。
 
 アクティブユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
 
