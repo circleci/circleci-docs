@@ -60,7 +60,7 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 
 ==== 1. Replace the `circleci-launch-agent-binary` with the new version
 
-Following the same process as in the xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation.adoc#runner-for-server-compatibility[Runner for server compatibility chart].
+Following the same process as in the xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation.adoc#self-hosted-runners-for-server-compatibility[Self-hosted runners for server compatibility chart].
 
 ```shell
 export agent_version="<launch-agent-version>"
