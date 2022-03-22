@@ -42,7 +42,8 @@ Here is a list of the available commands in the Vamp CLI.
 
 Create a new cluster in the project associated with the specified API key:
 
-`vamp create cluster <cluster-name> --provider=<provider> --description=<description>`
+[source,shell]
+vamp create cluster <cluster-name> --provider=<provider> --description=<description>
 
 === Create application
 
