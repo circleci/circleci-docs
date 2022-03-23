@@ -46,7 +46,7 @@ You can configure the use of the Android image in your configuration with [orbs]
 ## Examples
 {: #examples }
 
-Below you will find several examples demonstrating the use of the Android machine image, both with and without orbs.
+Below you will find several examples demonstrating the use of the Android machine image on server v3.x installations, both with and without orbs.
 
 ### Example with orb
 {: #example-with-orb }
