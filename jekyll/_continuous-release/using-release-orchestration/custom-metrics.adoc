@@ -8,17 +8,17 @@ To view your current custom metrics, click _Metrics_ under the _Policies_ tab.
 
 // screenshot
 
-=== Creating a custom metric
+== Creating a custom metric
 
 To create a custom metric, click *+Create Metric* in the top right-hand corner of the Metrics page.
 
-==== Step 1 - Name
+=== Step 1 - Name
 
 Name - enter a distinctive name for the metric. This name will be displayed wherever the metric is used, for example, in alerts.
 
 Description - an optional description to help other users understand how to use the metric.
 
-==== Step 2 - Data Source
+=== Step 2 - Data Source
 
 Type - time-based or event-based
 
@@ -40,7 +40,7 @@ Default time window (in seconds, e.g. 60s) - the duration of the time window use
 
 When you have finished configuring the data source for your custom metric, click the blue *Next* button.
 
-==== Step 3 - Query
+=== Step 3 - Query
 
 Data Source - has to be Prometheus
 
@@ -50,7 +50,7 @@ Query - An expression written in the Prometheus Query Language. The result of th
 
 Purpose - ingress traffic metric or other
 
-==== Step 4 - Budget
+=== Step 4 - Budget
 
 Type - Define Global Default / Define in Every Policy
 
@@ -63,7 +63,7 @@ When you have finished configuring your custom metric, click the blue *Create* b
 
 Alternatively, you can click *Previous* to edit any of the previous steps.
 
-=== Editing a custom metric
+== Editing a custom metric
 
 To edit a custom metric, click on it in the Metrics list (accessible under the _Policies_ tab).
 
@@ -71,7 +71,7 @@ When you have finished configuring your custom metric, click the blue *Create* b
 
 Alternatively, to cancel your changes, click the *x* in the top right-hand corner.
 
-=== Deleting a custom metric
+== Deleting a custom metric
 
 IMPORTANT: You cannot delete a custom metric that is in use by a policy applied to an application.
 
