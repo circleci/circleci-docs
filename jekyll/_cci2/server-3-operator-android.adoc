@@ -19,7 +19,7 @@ toc::[]
 
 WARNING: Android machine images are only available on Google Cloud Platform (GCP) at this time.
 
-With the release of CircleCI server 3.4, customers on GCP will be able to use Android machine images in their workflows. These images are provided for you by default. As with CircleCI Cloud, CircleCI server 3.4 supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
+From CircleCI server 3.4, Android machine images are supported for installations on GCP. These images are provided by default. As with CircleCI cloud, CircleCI server 3.4 supports nested virtualization and x86 Android emulators, so these images can be used for Android UI testing. They also comes with the Android SDK pre-installed.
 
 ## Requirements
 {: #requirements }
