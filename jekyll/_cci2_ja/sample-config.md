@@ -731,12 +731,15 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
-                  name: Setup __BUILD_VERSION envvar
+                  name: __BUILD_VERSION 環境変数の設定
                   command: |
                       echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
             - docker/check:
@@ -755,7 +758,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
         parallelism: 2
         steps:
             - attach_workspace:
@@ -771,12 +774,12 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
-                  name: Setup __BUILD_VERSION envvar
+                  name: __BUILD_VERSION 環境変数の設定
                   command: |
                       echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
             - docker/check:
@@ -784,7 +787,7 @@ jobs:
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: Tag the image as latest
+                  name: イメージへの latest タグの付加
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
@@ -875,12 +878,15 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
-                  name: Setup __BUILD_VERSION envvar
+                  name: __BUILD_VERSION 環境変数の設定
                   command: |
                       echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
             - docker/check:
@@ -899,7 +905,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
         parallelism: 2
         steps:
             - attach_workspace:
@@ -915,12 +921,12 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
-                  name: Setup __BUILD_VERSION envvar
+                  name: __BUILD_VERSION 環境変数の設定
                   command: |
                       echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
             - docker/check:
@@ -928,7 +934,7 @@ jobs:
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: Tag the image as latest
+                  name: イメージへの latest タグの付加
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
