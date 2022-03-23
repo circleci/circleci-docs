@@ -1,20 +1,29 @@
 .banner-wrapper {
+  width: 100%;
   background: #FFFFFF;
   border: 1px solid #DDDDDD;
   box-sizing: border-box;
   border-radius: 4px;
-
+  color: $black-light;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
 
-  .icon-container {
-
-  }
-
-  .external-link-wrapper {
-    
-  }
+  .content-container {
+    img:first-of-type {
+      padding-left: 16px;
+    }
+    span:first-of-type {
+      padding-left: 7px;
+    }
+    .vcs-icon {
+      padding: 12px 0 12px 0;
+      margin: 0;
+     }
+     .text-wrapper {
+      padding: 15px 0 15px 0;
+     }
+  } 
 }
