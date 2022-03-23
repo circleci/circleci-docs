@@ -41,7 +41,7 @@ jobs:
 ## Using the Android machine image
 {: #using-the-android-machine-image }
 
-It is possible to configure the use of the Android image in your configuration with [orbs]({{site.baseurl}}/2.0/orb-intro), as well as manually. Using the Android orb will simplify your configuration, while more complex and custom configurations may benefit from manually configuring your usage. This document will cover both use cases.
+You can configure the use of the Android image in your configuration with [orbs]({{site.baseurl}}/2.0/orb-intro), as well as manually. Using the Android orb will simplify your configuration, while more complex and custom configurations may benefit from manually configuration. This document covers both use cases.
 
 ## Examples
 {: #examples }
