@@ -583,6 +583,8 @@ jobs:
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -605,6 +607,8 @@ jobs:
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -628,6 +632,8 @@ jobs:
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
