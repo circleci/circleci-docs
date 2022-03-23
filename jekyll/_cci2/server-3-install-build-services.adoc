@@ -190,6 +190,24 @@ variable "server_endpoint" {
   default = "<nomad-server-loadbalancer>:4647"
 }
 
+variable "nomad_auto_scaler" {
+  type        = bool
+  default     = false
+  description = "If true, terraform will create a service account to be used by nomad autoscaler."
+}
+
+variable "enable_workload_identity" {
+  type        = bool
+  default     = false
+  description = "If true, Workload Identity will be used rather than static credentials'"
+}
+
+variable "k8s_namespace" {
+  type        = string
+  default     = "circleci-server"
+  description = "If enable_workload_identity is true, provide application k8s namespace"
+}
+
 provider "google-beta" {
   project = var.project
   region  = var.region
@@ -198,7 +216,7 @@ provider "google-beta" {
 
 
 module "nomad" {
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.3.0"
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.4.0"
 
   zone            = var.zone
   region          = var.region
@@ -206,6 +224,9 @@ module "nomad" {
   subnetwork      = var.subnetwork
   server_endpoint = var.server_endpoint
   machine_type    = "n2-standard-8"
+  nomad_auto_scaler         = var.nomad_auto_scaler
+  enable_workload_identity  = var.enable_workload_identity
+  k8s_namespace             = var.k8s_namespace
 
   unsafe_disable_mtls    = true
   assign_public_ip       = true
