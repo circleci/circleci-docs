@@ -24,7 +24,19 @@ From CircleCI server 3.4, Android machine images are supported for installations
 ## Requirements
 {: #requirements }
 
-* Your machine image must be set to `android-default` in your jobs in order to use an Android machine image.
+* To use the Android machine image, set the `image` key to `android-default` in your jobs.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    machine:
+      image: android-default
+    steps:
+    # job steps here
+----
 
 ## Using the Android machine image
 {: #using-the-android-machine-image }
