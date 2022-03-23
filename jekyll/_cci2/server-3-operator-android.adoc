@@ -93,7 +93,7 @@ workflows:
 ### Example without orb
 {: #example-without-orb }
 
-The following is an example of using the Android machine image, _without_ using the [circleci/android orb](https://circleci.com/developer/orbs/orb/circleci/android). These steps are similar to the [run-ui-tests](https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests) job of the orb.
+The following is an example of using the Android machine image, _without_ using the https://circleci.com/developer/orbs/orb/circleci/android[circleci/android orb]. These steps are similar to the https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[run-ui-tests] job included in the orb.
 
 {% raw %}
 ```yaml
