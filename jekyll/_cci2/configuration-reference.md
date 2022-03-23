@@ -46,14 +46,14 @@ Key | Required | Type | Description
 setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config/) feature.
 {: class="table table-striped"}
 
-The `setup` field enables you to conditionally trigger configurations from outside the primary .circleci parent directory, update pipeline parameters, or generate customized configurations.
+The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
 
 ## **`version`**
 {: #version }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
@@ -79,12 +79,12 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/)
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/docs/2.0/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/docs/2.0/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
 
 ## **`commands`** (requires version: 2.1)
 {: #commands-requires-version-21 }
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/2.0/reusing-config/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -188,13 +188,12 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 #### `environment`
 {: #environment }
-A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
-
+A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/docs/2.0/env-vars/) page.
 
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This features is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) page.
 
 Example:
 
