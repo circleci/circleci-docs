@@ -332,7 +332,7 @@ Provided in the output from `terraform apply`
 Provided in the output from `terraform apply`
 
 * *Build Agent Image* - 
-Consult customer support to set up
+If you want to use a custom Docker registry to supply the CircleCI Build Agent, contact customer support for assistance.
 
 Click the *Save config* button to update your installation and redeploy server.
 
