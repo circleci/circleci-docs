@@ -21,7 +21,7 @@ en:
           link: continuous-release/getting-started/step-3
         - name: Step 4 - Expose Your Service
           link: continuous-release/getting-started/step-4
-        - name: Step 5 - Install the Release Acknowledgments
+        - name: Step 5 - Install the Release Agent
           link: continuous-release/getting-started/step-5
         - name: Step 6 - Release Your Service
           link: continuous-release/getting-started/step-6
@@ -61,7 +61,7 @@ en:
     - name: Troubleshooting
       link: continuous-release/troubleshooting 
       children:
-        - name: Prometheus
-          link: continuous-release/troubleshooting#prometheus
         - name: Release Agent 
           link: continuous-release/troubleshooting#release-agent
+        - name: Prometheus
+          link: continuous-release/troubleshooting#prometheus
