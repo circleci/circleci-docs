@@ -32,4 +32,4 @@ To delete a cluster, click the trash icon next to the cluster you wish to delete
 
 // screenshot
 
-IMPORTANT: A cluster cannot be deleted if it is used by any applications. To delete an application, see the <<applications,section on Applications>>.
+IMPORTANT: A cluster cannot be deleted if it is used by any applications. To delete an application, see the <<applications#,section on Applications>>.
