@@ -169,4 +169,4 @@ Orb のソースなどの詳しい情報は、Orb の名前をクリックする
 
 ## 詳しく見る
 {: #learn-more }
-Circle CI Academy の [Orb コース](https://academy.circleci.com/orbs-course?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
+CircleCI Academy の [Orb コース](https://academy.circleci.com/orbs-course?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
