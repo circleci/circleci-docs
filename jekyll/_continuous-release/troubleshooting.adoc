@@ -14,9 +14,8 @@ Check you have the NGINX Ingress controller deployed in the cluster.
 
 If your NGINX Ingress controller has a different name, you can pass the name of the controller to the Release Agent install using `-i my-controller-name`. For example:
 
-----
+[source,shell]
 curl -sSL https://vampcloud.github.io/vamp-cloud-installer/install.sh | sh -s -- -i my-controller-name <token>
-----
 
 === Error: couldn't find 'httpproxies.projectcontour.io' CRD
 
@@ -73,8 +72,7 @@ The installer looks for a deployment called `ingress-nginx-controller` in your c
 
 If your NGINX Ingress controller has a different name, you can pass the name of the controller to the installer using `-i my-controller-name`. For example:
 
-----
+[source,shell]
 curl -sSL https://vampcloud.github.io/vamp-cloud-installer/install.sh | sh -s -- -i my-controller-name <token>
-----
 
 {% include_relative prometheus.adoc %}

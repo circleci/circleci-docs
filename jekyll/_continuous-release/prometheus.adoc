@@ -1,4 +1,3 @@
-= Prometheus
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,9 +11,8 @@ If your Prometheus server is not in the default location for the selected Ingres
 
 You can do this with the create namespace command. For example:
 
-----
+[source,shell]
 kubectl create namespace my-application
-----
 
 === Step 2 - Create the Secret
 
@@ -22,11 +20,10 @@ You can do this with the `create secret generic` command.
 
 For example, if your Prometheus server is exposed by a Service named `prometheus` and is in a Namespace named `monitoring`:
 
-----
+[source,shell]
 kubectl create secret generic prometheus-connection \
   --namespace=my-application \
   --from-literal=url=http://prometheus.monitoring:9090
-----
 
 == My Prometheus server is running in a different cluster
 
@@ -36,20 +33,18 @@ WARNING: The Release Agent makes real-time decisions about the validity of your 
 
 You can do this with the `create namespace` command. For example:
 
-----
+[source,shell]
 kubectl create namespace my-application
-----
 
 === Step 2 - Create the secret
 
 You can do this with the `create secret generic` command.
 For example, if the URL of your Prometheus server is \https://prometheus.example.com:
 
-----
+[source,shell]
 kubectl create secret generic prometheus-connection \
   --namespace=my-application \
   --from-literal=url=https://prometheus.example.com
-----
 
 == My Prometheus server requires a password
 
@@ -59,20 +54,18 @@ If your Prometheus server uses basic authentication, that is, it requires a user
 
 You can do this with the `create namespace` command. For example:
 
-----
+[source,shell]
 kubectl create namespace my-application
-----
 
 === Step 2 - Create the secret
 
 You can do this with the `create secret generic` command.
 For example, if the URL of your Prometheus server is \https://prometheus.example.com:
 
-----
+[source,shell]
 kubectl create secret generic prometheus-connection \
   --namespace=my-application \
   --from-literal=url=https://prometheus.example.com
-----
 
 == I have metrics in more than one Prometheus server
 

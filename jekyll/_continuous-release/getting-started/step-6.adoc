@@ -17,7 +17,8 @@ If you followed the preceeding steps, you should now have the following:
 
 You can now deploy the first version of your service using a kubectl command. For example:
 
-`kubectl apply -f \https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/particles/particles-v1.0.0.yaml`
+[source,shell]
+kubectl apply -f https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/particles/particles-v1.0.0.yaml
 
 Within around 30 seconds of deployment, the version will show a status of _Success_.
 
