@@ -1,14 +1,16 @@
+= Ingress
 :page-layout: classic-docs
-
-== Ingress
+:page-liquid:
+:icons: font
+:toc: macro
 
 The _Ingress_ tab shows a list of the domains associated with the selected application and the paths and services exposed by the application. 
 
 // screenshot
 
-=== Domains
+== Domains
 
-==== Creating a Domain
+=== Creating a Domain
 
 To create a domain, click the the blue *+* button.
 
@@ -16,14 +18,14 @@ To create a domain, click the the blue *+* button.
 
 // need to use some includes here to avoid duplication with Getting Started.
 
-==== Editing a Domain
+=== Editing a Domain
 
 To edit a domain, click the pencil icon next to the domain you wish to change.
 
 // screenshot
 
 
-==== Creating a Route
+=== Creating a Route
 
 To create a domain, click the the blue *+* button.
 
@@ -31,7 +33,7 @@ To create a domain, click the the blue *+* button.
 
 // need to use some includes here to avoid duplication with Getting Started.
 
-==== Editing a Route
+=== Editing a Route
 
 // use an include here
 

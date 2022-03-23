@@ -1,6 +1,8 @@
+= Creating a Policy
 :page-layout: classic-docs
-
-== Creating a Policy
+:page-liquid:
+:icons: font
+:toc: macro
 
 To create a policy, go to the _Policies_ tab and click the *+ Create New Policy* button.
 
@@ -23,7 +25,7 @@ First, specify how this new policy will be used. From the options provide, choos
 
 When you have finished, click the blue *Continue* button.
 
-=== Policy details
+== Policy details
 
 Give your policy and name and provide a description.
 

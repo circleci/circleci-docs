@@ -1,6 +1,8 @@
+= Segments
 :page-layout: classic-docs
-
-== Segments
+:page-liquid:
+:icons: font
+:toc: macro
 
 A segment is a group of users who share a characteristic, for example, users in the same geographical location, or those who use the same type of device to access an API.
 
@@ -12,7 +14,7 @@ Vamp comes with a library of commonly used user segments, covering major web bro
 
 It also includes example user segments that demonstrate how you can target users by their geolocation. The examples cover a range of cloud and Content Delivery Network (CDN) providers.
 
-=== Creating a Segment
+== Creating a Segment
 
 To create a new segment, click the *+Create Segment* button in the top right-hand corner of the _Segments_ page.
 
@@ -20,15 +22,15 @@ To create a new segment, click the *+Create Segment* button in the top right-han
 
 // screenshot of form
 
-==== Name
+=== Name
 
 This is the name displayed when you choose a segment to target as part of a policy.
 
-==== Description
+=== Description
 
 This is a short and meaningful description that provides additional context for the segment.
 
-==== Target Rules
+=== Target Rules
 
 You must add at least one HTTP header or cookie rule.
 
@@ -47,13 +49,13 @@ When you have finished entering the details for your segment, click the blue *Cr
 
 You will see a pop-up message to confirm that your segment has been created.
 
-=== Duplicating a Segment
+== Duplicating a Segment
 
 To duplicate a segment, click the document icon next to it in the list. The duplicated segment appears under the original, with _-copy_ appended to the name.
 
 You can now click on the duplicate to edit it.
 
-=== Editing a Segment
+== Editing a Segment
 
 To edit an existing segment, click on the segment in the Segments list.
 
@@ -76,7 +78,7 @@ Once you have finished editing your segment, click the *Update* button in the bo
 IMPORTANT: If you edit a segment that is the target of a policy, the change takes effect from the _next_ release. Any active releases that target that segment remain unaffected.
 
 
-=== Deleting a Segment
+== Deleting a Segment
 
 To delete a segment, click the trash icon next to it in the Segments list. You will be asked to confirm that you wish to delete the segment. Then you will see a pop-up message to confirm that your segment has been deleted.
 

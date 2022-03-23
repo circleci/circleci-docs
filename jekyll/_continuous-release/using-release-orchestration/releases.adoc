@@ -1,4 +1,8 @@
+= Releases
 :page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
 
 == Releases
 
@@ -29,11 +33,13 @@ The _Releases_ tab shows all running, pending, and completed releases across you
 // screenshot
 
 An initial progressive release of a service for an application has only a target version, that is, the version that was released, and the status. 
+
 All other progressive releases indicate the source and target versions and the release policy that was used. 
 
 // screenshot
 
 Running releases are indicated by a blue Running status marker.
+
 In addition to the status, the number of steps is shown, along with when the release started. A running step is shown in blue. Successfully completed steps are shown in green, and failed steps in red.
 
 ==== Viewing Release Details

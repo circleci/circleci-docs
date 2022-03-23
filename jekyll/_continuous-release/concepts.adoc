@@ -1,4 +1,4 @@
-= Continuous Release Concepts
+= Release Orchestration Concepts
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

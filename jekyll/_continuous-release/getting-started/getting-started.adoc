@@ -37,3 +37,6 @@ Now follow the steps below:
 You can restart the Quick Start Guide at any stage by clicking *Reset* in the top right-hand corner.
 
 // screenshot
+
+[sidebar]
+Proceed to <<./step-1#,Step 1>>

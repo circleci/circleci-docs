@@ -1,6 +1,8 @@
+= Custom Metrics
 :page-layout: classic-docs
-
-== Custom Metrics
+:page-liquid:
+:icons: font
+:toc: macro
 
 To view your current custom metrics, click _Metrics_ under the _Policies_ tab.
 

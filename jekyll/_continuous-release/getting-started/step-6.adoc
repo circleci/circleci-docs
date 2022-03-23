@@ -29,4 +29,5 @@ IMPORTANT: Vamp requires that the `app` and the `version` labels on the Kubernet
 
 // provide an example here, highlighting the relevant parts of the YAML file.
 
+[sidebar]
 You can now proceed to the <<next-steps#,Next Steps>>.

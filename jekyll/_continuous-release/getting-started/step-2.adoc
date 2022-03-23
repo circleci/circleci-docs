@@ -14,5 +14,5 @@ In Vamp, a service is a microservice. You can create up to six services with the
 
 NOTE: You can create a total of six services in the Quick Start Guide.
 
-[example]
+[sidebar]
 You can now proceed to <<step-3#,Step 3>>.

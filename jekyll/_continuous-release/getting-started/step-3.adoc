@@ -34,5 +34,5 @@ When you have finished choosing your release policy, click **Next** to attach th
 
 You will see a pop-up message to confirm that the policy has been attached to your service.
 
-[example]
+[sidebar]
 You can now proceed to <<step-4#,Step 4>>.

@@ -12,5 +12,5 @@
 
 Once you see an _Installation successful_ status, click *Next*.
 
-[example]
+[sidebar]
 You can now proceed to <<step-6#,Step 6>>.

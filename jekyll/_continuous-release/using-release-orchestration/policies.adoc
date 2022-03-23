@@ -6,7 +6,6 @@
 
 // Might need to divide this into separate pages
 
-
 == What is a Vamp Release Policy?
 
 A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
