@@ -38,7 +38,9 @@ Nomad Pod には `nomad` CLI がインストールされています。 Nomad �
 
 クラスタ内のすべてのジョブのステータス一覧を表示するには、以下のコマンドを実行します。
 
+```shell
 kubectl exec -it nomad-server-pod-ID -- nomad status
+```
 
 `Status` は、出力内容のうち最も重要なフィールドで、以下のステータスが表示されます。
 
@@ -50,13 +52,17 @@ kubectl exec -it nomad-server-pod-ID -- nomad status
 
 Nomad クライアントの一覧を表示するには、以下のコマンドを実行します。
 
+```shell
 kubectl exec -it nomad-server-pod-ID -- nomad node-status
+```
 
 NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
 
 特定のクライアントの詳細情報を表示するには、そのクライアントで以下のコマンドを実行します。
 
+```shell
 kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
+```
 
 上記の手順を行うと、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
 
@@ -64,7 +70,9 @@ kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
 
 Nomad ジョブのセクションで前述したように、Nomad ジョブは CircleCI ジョブの実行と対応しています。 そのため、CircleCI ジョブで問題が発生した場合、Nomad ジョブのログを確認すると、そのジョブのステータスを理解するのに役立つことがあります。 特定のジョブのログを表示するには、以下の手順を行います。
 
+```shell
 kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
+```
 
 NOTE: `-stderr` フラグは必ず指定してください。 これにより、ほとんどのビルドエージェントのログが表示されます。
 
@@ -82,14 +90,21 @@ Nomad クライアントをシャットダウンするときは、まずクラ�
 
 . クライアントをドレインするには、クライアントにログインし、`node-drain`  コマンドを以下のように使用して、クライアントをドレインモードに設定します。
 +
+```shell
 nomad node-drain -self -enable
+```
+
 . 次に、 `node-status` コマンドを使用してクライアントがドレインモードに変更されていることを確認します。
 +
+```shell
 nomad node-status -self
+```
 
 また、下記のコマンドにノード ID を代入して実行し、リモートノードをドレインモードに設定することもできます。
 
+```shell
 nomad node-drain -enable -yes <node-id>
+```
 
 === クライアントクラスタのスケールダウン
 
