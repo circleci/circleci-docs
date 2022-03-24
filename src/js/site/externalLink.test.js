@@ -9,10 +9,10 @@ describe('externalLink', () => {
       document.body.innerHTML = '';
     });
 
-    it('if external link found add svg to last word with single word', () => {
+    it('adds an svg to last word of text when text is a single word', () => {
       document.body.innerHTML = `
             <div id="main">
-                <a>yes</a>
+                <a>test</a>
             </div>
         `;
       externalLink();
@@ -21,13 +21,13 @@ describe('externalLink', () => {
       ).not.toBeNull();
       expect(
         document.querySelector('.external-link-tag-wrapper').innerHTML,
-      ).toEqual('yes' + svg);
+      ).toEqual('test' + svg);
     });
 
-    it('if external link found add svg to last word in sentance', () => {
+    it('adds an svg to last word of text when text is a sentance', () => {
       document.body.innerHTML = `
             <div id="main">
-                <a>i like to make tests yes</a>
+                <a>i like to make tests</a>
             </div>
         `;
       externalLink();
@@ -36,7 +36,7 @@ describe('externalLink', () => {
       ).not.toBeNull();
       expect(
         document.querySelector('.external-link-tag-wrapper').innerHTML,
-      ).toEqual('yes' + svg);
+      ).toEqual('tests' + svg);
     });
   });
 });
