@@ -17,9 +17,9 @@ version:
 ## クイックスタート
 {: #quick-start }
 
-Orb とは、[再利用可能な設定]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
+Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
 
-Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
+Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
 Orb は、以下の 3 つの要素で構成されます。
 
@@ -57,7 +57,7 @@ Orb CLI のコマンドは、VCS (バージョン管理システム) によっ�
 ### 名前空間の登録
 {: #register-a-namespace }
 
-CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
+CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
 
 **注: **CircleCI では、個々のユーザーを「組織」または「個人組織」と呼ぶことがあります。なぜなら、私たちの観点からは大きな違いはないからです。 したがって、一部のコマンドは `org-name`を参照します。 これは GitHub または Bitbucket のユーザ名を指定するだけです。
 
@@ -72,5 +72,5 @@ circleci namespace create <name> <vcs-type> <org-name> [flags]
 {: #next-steps }
 
 * Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
-* CircleCI Server 環境で Orb を開発したり使用する場合は、[Orb のオーサリングAuthoring Process on Server]({site.basel}}/2.0/orb-author-server/) ガイドの Orb の開発に関する情報をお読みください。
+* CircleCI Server 環境で Orb を開発したり使用する場合は、[Orb のオーサリングプロセス on Server]({site.basel}}/ja/2.0/orb-author-server/) ガイドの Orb の開発に関する情報をお読みください。
 * または、[  Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)のページで詳細をご確認下さい。
