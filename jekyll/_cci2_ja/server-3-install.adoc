@@ -141,8 +141,7 @@ ifndef::env-gcp[]
 
 または、IAM ロールを選択し、以下を指定します。
 
-* *Role ARN* -
-https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
+* *Role ARN* : S3 バケットアクセス用 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name)
 
 // Stop hiding from GCP PDF:
 
@@ -157,8 +156,7 @@ ifndef::env-aws[]
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
-* *Storage Object Expiry (required)* -
-Number of days to retain your test results and artifacts. 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+* *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
 ====== 認証
 
@@ -173,16 +171,17 @@ endif::env-aws[]
 既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書] を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
 
 === 保存とデプロイ
-上記項目の設定が完了したら、いよいよデプロイです。 The deployment will install the core services and provide you with an IP address for the Kong load balancer. この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
+上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Kong ロードバランサー用のIP アドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
 
-NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by Kong. Therefore, you will see a service named `circleci-server-traefik` but this service is actually for Kong.
+NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 しかし、アップグレードの際の中断を最小限に留めるために、Kong   が使用するサービス名への変更はしておりません。 そのため、サービス名は、`circleci-server-traefik` と表示されますが、実際には Kong のサービスです。
 
 NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 これらのフィールドについては次の段階で再度説明します。
 
-=== Create DNS entry
-Create a DNS entry for your Kong load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
+=== DNS エントリーの作成
+Kong ロードバランサー の DNS エントリを作成します。例: (`circleci.your.domain.com` と `app.circleci.your.domain.com`) 。
+ この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
 
-You will need the IP address or, if using AWS, the DNS name of the Kong load balancer. この値は以下のコマンドで取得できます。
+Kong  ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 この値は以下のコマンドで取得できます。
 
 ----
 kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE>
