@@ -1,0 +1,123 @@
+= Using the CLI
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+Vamp CLI is a command-line client that allows you to interact with your applications.
+
+== Installing the Vamp CLI
+
+. Download the appropriate binary for your platform https://github.com/magneticio/vamp-cloud-cli/releases/tag/v.1.0.25[from the repo]. For Apple M1 processors, use the _arm64_ binary; for Apple Intel, use _amd64_.
+. Copy the downloaded binary to your binaries directory. For example, on MacOS (Intel): `cp vamp-darwin-amd64 /usr/local/bin/vamp`.
+. Make the _vamp_ directory executable: `chmod +x /usr/local/bin/vamp`
+. Check the installation by running: `vamp version`. You should see:
+
+[source,shell]
+client version: local
+api version: v1
+
+== Configuring the Vamp CLI
+
+Before you can manage your applications through the CLI, you need to create an environment variable for your API token. This authenticates your machine.
+
+=== Creating an environment variable
+
+Follow these steps to obtain your API token and add it as an environment variable.
+
+. Log in to the https://vamp.cloud/[Vamp UI].
+. Click the arrow next to your name in the top right-hand corner and click *API Tokens*.
+// screenshot
+. Find the Project you want to access and click *Show token*. 
+. Copy the token.
+. In your terminal, enter `export VAMP_CLOUD_API_KEY=<your API token>`.
+. To verify the environment variable has been set correctly, enter `printenv VAMP_CLOUD_API_KEY`. You should see the token you copied.
+
+== Using the Vamp CLI
+
+Here is a list of the available commands in the Vamp CLI.
+
+=== Create cluster
+
+Create a new cluster in the project associated with the specified API key:
+
+[source,shell]
+vamp create cluster <cluster-name> --provider=<provider> --description=<description>
+
+=== Create application
+
+Create a new application in the specified cluster:
+
+[source,shell]
+vamp create application <application-name> --cluster=<cluster-name> --namespace=<namespace> --ingress-type=<ingress-type>
+
+// add something on Ingress types? Or link to other docs?
+
+=== Attach service
+
+// test this one!
+
+Attach an existing service to the specified application:
+
+[source,shell]
+attach service <service-name> --application=<application-name> --policy=<policy-name>
+
+To specify an ingress and a route, use this format:
+
+[source,shell]
+attach service <service-name> --application=<application-name> --policy=<policy-name> --ingress="test.my.domain" --route="/"
+
+
+=== Create ingress
+
+Create a new ingress in the specified appliation:
+
+[source,shell]
+vamp create ingress <domain-name> --application=<application-name> --tls-secret=<tls-secret-name>
+
+=== Describe cluster
+
+Describe the cluster:
+
+[source,shell]
+vamp describe cluster <cluster-name>
+
+Example output:
+
+[source,shell]
+  NAME             PROVIDER     DESCRIPTION
+ ---------------- ------------ ---------------
+  <cluster-name>   <provider>   <description>
+
+=== Describe application
+
+Describe the application:
+
+[source,shell]
+vamp describe application <application-name>
+
+Example output:
+
+[source,shell]
+  NAME             PROVIDER     DESCRIPTION
+ ---------------- ------------ ---------------
+  <cluster-name>   <provider>   <description>
+
+=== Get installation command
+
+Retrieve the Release Agent installation command for the specified application:
+
+[source,shell]
+vamp get installer <application-name>
+
+=== Watch release
+
+Retrieve the latest release for the specified application and service and check its status every 30 seconds, until it completes or fails:
+
+[source,shell]
+vamp watch release <service-name> --application=<application-name>
+
+Example output:
+
+// replace this with a screenshot
+

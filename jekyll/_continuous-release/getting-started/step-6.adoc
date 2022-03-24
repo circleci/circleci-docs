@@ -1,0 +1,38 @@
+= Getting Started
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+== Step 6: Release Your Service
+
+You are now ready to deploy the first version of your service into the application namespace on your Kubernetes cluster, where Vamp can release it.
+
+If you followed the preceeding steps, you should now have the following:
+
+* An application created in Vamp that maps to a Kubernetes namespace.
+* An Ingress controller.
+* A Kubernetes service, if you are exposing your service.
+* A release policy for each Vamp service.
+
+You can now deploy the first version of your service using a kubectl command. For example:
+
+[source,shell]
+kubectl apply -f https://raw.githubusercontent.com/magneticio/vamp-cloud-demo/main/particles/particles-v1.0.0.yaml
+
+Within around 30 seconds of deployment, the version will show a status of _Success_.
+
+image::quickstart-step6-success.png[Successful release]
+
+When you have successfully released your service, click *Done* in the bottom left-hand corner.
+
+=== How to label your workload
+
+For Vamp to release a version of a service, the workload must be labelled correctly.
+
+IMPORTANT: Vamp requires that the `app` and the `version` labels on the Kubernetes deployment and pod template match. If the labels do not match, the Release Agenty ignores the deployment and the new version is not released.
+
+// provide an example here, highlighting the relevant parts of the YAML file.
+
+[sidebar]
+You can now proceed to the <<next-steps#,Next Steps>>.

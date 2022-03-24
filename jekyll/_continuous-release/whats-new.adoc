@@ -1,0 +1,4 @@
+= What's New
+:page-layout: classic-docs
+:icons: font
+:toc: macro

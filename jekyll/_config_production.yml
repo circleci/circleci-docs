@@ -24,6 +24,13 @@ defaults:
     values:
       lang: "en"
 
+  -
+    scope:
+      path: ""
+      type: "continuous-release"
+    values:
+      lang: "en"
+
   - scope:
       path: ""
     values:

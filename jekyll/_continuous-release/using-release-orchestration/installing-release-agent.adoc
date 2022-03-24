@@ -1,0 +1,14 @@
+= Installing the Release Agent
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+To install the Release Agent, go to the _Installation_ tab for your application.
+
+// screenshot
+
+{% include release-orchestration/release-agent.adoc %}
+
+
+// need to make sure the include is relevant 

@@ -1,0 +1,11 @@
+= Using Metadata
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+
+== Application metadata
+
+
+== Service metadata

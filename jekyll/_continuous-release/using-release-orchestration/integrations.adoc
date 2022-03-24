@@ -1,0 +1,7 @@
+= Integrations
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+// Also add details on integrations with Honeycomb, Datadog, Rollbar, etc

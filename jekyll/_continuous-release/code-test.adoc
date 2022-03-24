@@ -1,0 +1,33 @@
+:page-layout: classic-docs
+
+= Code Test
+
+[source%linenums,yaml,highlight=2..5]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: particles-v1.0.0
+  namespace: production
+  labels:
+    app: particles
+    version: 1.0.0
+spec:
+  selector:
+    matchLabels:
+      app: particles
+      version: 1.0.0
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: particles
+        version: 1.0.0
+    spec:
+      containers:
+      - name: particles
+        ports:
+        - containerPort: 5000
+
+----
+

@@ -1,0 +1,18 @@
+= Getting Started
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+== Step 2: Create a Service
+
+In Vamp, a service is a microservice. You can create up to six services with the Quick Start Guide.
+
+image::quickstart-step2-top.png[Step 2 of Quick Start Guide]
+
+{% include release-orchestration/services.adoc %}
+
+NOTE: You can create a total of six services in the Quick Start Guide.
+
+[sidebar]
+You can now proceed to <<step-3#,Step 3>>.

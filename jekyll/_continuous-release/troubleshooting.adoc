@@ -1,0 +1,78 @@
+= Troubleshooting
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+== Release Agent
+
+=== Error: couldn't find 'ingress-nginx-controller'
+
+This error occurs when the application is configured to use NGINX but the installer cannot find a Deployment called _ingress-nginx-controller_ anywhere in the cluster.
+
+Check you have the NGINX Ingress controller deployed in the cluster.
+
+If your NGINX Ingress controller has a different name, you can pass the name of the controller to the Release Agent install using `-i my-controller-name`. For example:
+
+[source,shell]
+curl -sSL https://vampcloud.github.io/vamp-cloud-installer/install.sh | sh -s -- -i my-controller-name <token>
+
+=== Error: couldn't find 'httpproxies.projectcontour.io' CRD
+
+This error occurs when the application is configured to use Contour but the installer cannot find Contour's HTTPProxy Custom Resource Definition (CRD) on the cluster.
+
+Check you have the Contour Ingress controller deployed in the cluster.
+
+The Vamp Release Agent works with Contour v1.6.0 and above.
+
+=== Error: couldn't find 'url' key in secret 'prometheus-connection' in namespace 'xyz'
+
+This error message indicates that the installer found the specified Namespace, but was unable to locate a Prometheus server using data from prometheus-secret.
+
+* Check that the `prometheus-connection` secret exists.
+* Check that the `prometheus-connection` secret contains a `url` key.
+* Check that the value of the `url` key is a valid URL and that the Prometheus server is accessible from the cluster.
+
+=== Error: couldn't connect to \http://prometheus.projectcontour-monitoring:9090
+
+This error occurs when the application is configured to use Contour but the installer did not find a Prometheus server in the expected location. By default, the installer tries to connect to a Service named `prometheus` in the `projectcontour-monitoring` Namespace.
+
+If Prometheus server is installed in a different location, follow these instructions to configure a custom Prometheus location.
+
+// link to Prometheus troubleshooting.
+
+=== Error: couldn't read config from Vault
+
+This error message indicates that the installer could not connect to Vamp Cloud to fetch the configuration data needed to complete the installation. Common causes of this error are:
+
+==== Expired token
+
+Tokens are only valid for 30 minutes and can be used only once. 
+
+Generate a new installation command by selecting your application in the Applications list, then choosing the Installation tab.
+
+// screenshot
+
+Alternatively, if you have the <<using-release-orchestration/cli#,Vamp CLI>> installed and configured for your project, you can use the following command in the terminal:
+
+[source,shell]
+vamp get installer <application-name>
+
+==== Restricted network access
+
+The installer runs as a Pod in your Kubernetes cluster. If your cluster restricts traffic to destinations outside your cluster, the installer will fail.
+
+IMPORTANT: The Vamp Release Agent needs frequent access to `vault.vamp.cloud` and `nats.vamp.cloud`.
+
+== NGINX
+
+=== My NGINX Ingress controller has a different name
+
+The installer looks for a deployment called `ingress-nginx-controller` in your cluster. The installer fails if it cannot find this deployment. 
+
+If your NGINX Ingress controller has a different name, you can pass the name of the controller to the installer using `-i my-controller-name`. For example:
+
+[source,shell]
+curl -sSL https://vampcloud.github.io/vamp-cloud-installer/install.sh | sh -s -- -i my-controller-name <token>
+
+{% include_relative prometheus.adoc %}

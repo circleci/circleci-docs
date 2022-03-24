@@ -1,0 +1,81 @@
+= Policies
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+// Might need to divide this into separate pages
+
+== What is a Vamp Release Policy?
+
+A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
+
+The policy is evaluated every 30 seconds by the Vamp Release Agent running in the application namespace on your Kubernetes cluster. The Release Agent uses data from Kubernetes and your chosen Ingress controller, plus any custom metrics that are part of the release policy.
+
+Each release policy includes at least one step. At the start of each step, a percentage of users are exposed to the new version, and the Release Agent monitors the performance of that new version. If the policy conditions are not met, the new version is rolled back with minimal impact on your users' experience.
+
+NOTE: If the new version of a service does not meet all the conditions described by the release policy, Vamp immediately switches all users back to the current, live version. A rollback typically takes 30-60 seconds.
+
+=== Release Health
+
+Every policy includes the Release Health SLO (service level objective), which protects your users' overall experience. The minimum Release Health level is 70%.
+
+=== Metrics
+
+This is a list of all the other SLOs the Release Agent monitors, in addition to Vamp Health. A typical policy monitors at least four SLOs, plus Vamp Health.
+
+NOTE: All policies must include SLOs for Release Health and for Kubernetes Pod restarts. 
+
+=== Duration
+
+Every policy has a maximum duration. If the policy uses only fixed duration steps, a successful release will always take the full duration to complete.
+
+If one or more of the steps in the policy is based on receiving a minimum number of requests, a successful release may be completed more quickly than the maximum duration.
+
+NOTE: A failed release ends as soon as any of the policy conditions are not met.
+
+// add something about the release policy library
+
+== Default Policy
+
+You are prompted to choose the default policy for each of your services.
+
+== Advanced Policies
+
+The default policy is used when there is no specific policy set for major, minor or patch releases. If you select the Advanced option, you can set specific policies for major, minor and patch releases. 
+
+=== Major Release
+A major release is a feature release that introduces one or more breaking changes, for example, deprecating an API endpoint.
+
+For major releases, you usually want to use a longer running policy that validates a mix of technical and business metrics.
+
+Vamp uses the major release policy if the new version is at least one major version higher than the version that is currently live. For example, a change of semantic version from 1.2.3 to 2.0.1 is a major release.
+
+=== Minor Release
+
+A minor release is a feature release that introduces new functionality without changing any of the existing functionality, for example, adding an API endpoint.
+
+For minor releases, you usually want to use a shorter running policy that validates a mix of technical and business metrics.
+
+Vamp uses the minor release policy if the new version is at least one minor version higher than the version that is currently live. For example, a change of semantic version from 1.2.3 to 1.3.4 is a minor release.
+
+=== Patch Release
+
+A patch release can be a planned maintenance release to fix bugs, or an update to the versions of software libraries. A patch release can also be an emergency release to quickly address critical security or performance issues. A patch release should not add or remove functionality.
+
+For patch releases, you usually want to use a quick running policy that validates mostly technical metrics.
+
+Vamp uses the patch release policy if the new version is at least one patch version higher than the version that is currently live. For example, a change of semantic version from 1.2.3 to 1.2.4 is a patch release.
+
+== Viewing Policies
+
+To view the available policies, click the _Policies_ tab.
+
+
+
+
+
+
+
+
+

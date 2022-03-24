@@ -1,0 +1,13 @@
+= Getting Started
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+== Next Steps
+
+Once your application has been successfully deployed, you can monitor the release under the Releases tab.
+
+// Presumably, this now needs to be on the CCI platform?
+
+// Link to dedicated section on Releases

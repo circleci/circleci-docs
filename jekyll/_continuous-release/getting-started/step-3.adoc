@@ -1,0 +1,40 @@
+= Getting Started
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+== Step 3: Choose a Release Policy
+
+A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
+
+image::quickstart-step3.png[Step 3 of Quick Start Guide]
+
+=== Choosing a Default Policy
+
+You are prompted to choose a default policy for each of your services.
+
+TIP: A good default release policy balances the need to quickly validate emergency releases with the need to validate new features over a longer period, using a wider range of metrics.
+
+When you choose a policy from the list, the summary shows you which metrics that policy uses to validate a release, and the policy's duration.
+
+// add screenshot to show summary
+
+// link to page on creating your own policy
+
+// what policies are available?
+
+You can either select an existing policy, or <<../using-release-orchestration/policies#,create your own policy>>.
+
+=== Configuring Advanced Settings
+
+// screenshot
+
+Choose _Yes_ under _Advanced_ to set specific policies for different types of release.
+
+When you have finished choosing your release policy, click **Next** in the bottom left-hand corner to attach the policy to your service. 
+
+You will see a pop-up message to confirm that the policy has been attached to your service.
+
+[sidebar]
+You can now proceed to <<step-4#,Step 4>>.

@@ -1,0 +1,67 @@
+en:
+- name: Release Orchestration
+  children:
+    - name: Introduction
+      link: continuous-release/overview
+      children:
+        - name: Overview
+          link: continuous-release/overview
+        - name: Prerequisites
+          link: continuous-release/prerequisites
+        - name: Concepts
+          link: continuous-release/concepts
+    - name: Getting Started
+      link: continuous-release/getting-started/getting-started
+      children:
+        - name: Step 1 - Create an Application
+          link: continuous-release/getting-started/step-1
+        - name: Step 2 - Create a Service
+          link: continuous-release/getting-started/step-2
+        - name: Step 3 - Choose a Release Policy
+          link: continuous-release/getting-started/step-3
+        - name: Step 4 - Expose Your Service
+          link: continuous-release/getting-started/step-4
+        - name: Step 5 - Install the Release Agent
+          link: continuous-release/getting-started/step-5
+        - name: Step 6 - Release Your Service
+          link: continuous-release/getting-started/step-6
+        - name: Next Steps
+          link: continuous-release/getting-started/next-steps
+    - name: Using Release Orchestration
+      link: continuous-release/using-release-orchestration/using-release-orchestration
+      children:
+        - name: Dashboard
+          link: continuous-release/using-release-orchestration/using-release-orchestration
+        - name: Applications
+          link: continuous-release/using-release-orchestration/applications
+        - name: Clusters 
+          link: continuous-release/using-release-orchestration/clusters
+        - name: Services 
+          link: continuous-release/using-release-orchestration/services
+        - name: Releases 
+          link: continuous-release/using-release-orchestration/releases
+        - name: Segments 
+          link: continuous-release/using-release-orchestration/segments
+        - name: Policies
+          link: continuous-release/using-release-orchestration/policies
+        - name: Metrics 
+          link: continuous-release/using-release-orchestration/metrics
+        - name: Webhooks
+          link: continuous-release/using-release-orchestration/webhooks
+        - name: Integrations
+          link: continuous-release/using-release-orchestration/integrations
+        - name: Using the CLI 
+          link: continuous-release/using-release-orchestration/cli
+    - name: Release Agent 
+      children: 
+        - name: Installing the Release Agent 
+          link: continuous-release/using-release-orchestration/installing-release-agent
+        - name: Troubleshooting the Release Agent 
+          link: continuous-release/troubleshooting#release-agent
+    - name: Troubleshooting
+      link: continuous-release/troubleshooting 
+      children:
+        - name: Release Agent 
+          link: continuous-release/troubleshooting#release-agent
+        - name: Prometheus
+          link: continuous-release/troubleshooting#prometheus

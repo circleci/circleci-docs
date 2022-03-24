@@ -1,0 +1,42 @@
+= Getting Started
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+This guide walks you through the steps to complete your first release with Vamp, using the https://vamp.cloud/6/quickstart[Quick Start Guide]. You can use the Quick Start Guide to release up to six microservices.
+
+== Prerequisites
+
+To use the Quick Start Guide, you will need:
+
+* Vamp login (contact your CircleCI representative to ensure your GitHub or GMail address has been authorized)
+* A Kubernetes cluster
+* https://kubernetes.io/docs/tasks/tools/[kubectl] - a command-line tool for running commands on your Kubernetes cluster
+
+See <<../prerequisites#,Prerequisites>> for more details on what you need to use Vamp.
+
+== Accessing the Quick Start Guide
+
+Once you have everything you need:
+
+* Log in to Vamp.
+* Navigate to the https://vamp.cloud/6/quickstart[Quick Start Guide with this link].
+
+You will see Step 1 of the Quick Start Guide.
+
+Now follow the steps below:
+
+. <<./step-1#,Create an Application>>
+. <<./step-2#,Create a Service>>
+. <<./step-3#,Choose a Release Policy>>
+. <<./step-4#,Expose your Service>>
+. <<./step-5#,Install the Release Agent>>
+. <<./step-6#,Release Your Service>>
+
+You can restart the Quick Start Guide at any stage by clicking *Reset* in the top right-hand corner.
+
+// screenshot
+
+[sidebar]
+Proceed to <<./step-1#,Step 1>>

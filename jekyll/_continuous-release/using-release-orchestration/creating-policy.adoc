@@ -1,0 +1,244 @@
+= Creating a Policy
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+To create a policy, go to the _Policies_ tab and click the *+ Create New Policy* button.
+
+// Current docs don't cover the first stage: How will this policy be used? Some of the information on this screen looks wrong, though. https://vamp.cloud/6/policyeditor - have queried on Slack.
+
+
+// might need to turn this into numbered stages - need to ensure these stages don't get tangled up with the steps, though.
+
+// link to a walkthrough for a sample policy - this would make a good mini tutorial.
+
+// screenshot
+
+First, specify how this new policy will be used. From the options provide, choose:
+
+. The type of service with which the policy will be used.
+// need to add some more details, once we know what service types are available
+. Whether the service will be accessible from outside the cluster (services can be canary released only if they are accessible outside the Kubernetes cluster).
+. The workload type (currently only Deployments are available).
+// check this
+
+When you have finished, click the blue *Continue* button.
+
+== Policy details
+
+Give your policy and name and provide a description.
+
+// screenshot
+
+The name should describe the purpose of the policy for other users.
+For example, _Minor - Samsung Native Browser_.
+
+This is the name you see when selecting the policy for a service. It is also shown on the Release page and in the notifications that are sent when a release starts.
+
+=== Adding steps to your policy
+
+The first step of a multi-step policy should focus on the technical stability of the new version.
+
+You want to limit the number of users who will be affected if the new version is flawed, so you should target just a small number of users.
+
+*Name*
+
+This is the name shown on the Releases page and in the notifications that are sent as a release progresses. For example: _Validate with 50% of Samsung Users_.
+
+*Targets*
+
+This defines the user segment or segments used to validate the new version during this step. For example: _This step is going to target 50% of Samsung Internet Users, which represents approximately 4.25% of all users_.
+
+Select either _All Users_ or a specific segment, for example, _All iPhone Users_.
+
+// Need to signpost section on creating and editing Segments
+
+To add further targets, click the *+Add more* button.
+
+To delete a target, click the trash icon next to it.
+
+// screenshot
+
+// Need to provide an example of how this works.
+
+// screenshot
+
+*End After*
+
+This defines the duration of the step. You can either end a step after a fixed time period or after a minimum number of requests have been received.
+
+In _Amount_, enter the number of requests. In _Requests in Max_, enter the time period. For example, the step below will fail unless 1775 requests are received within one hour.
+
+// screenshot
+
+Alternatively, you can specify a duration in seconds, for example, _120s_.
+
+// screenshot of example
+
+TIP: Ending a step after a fixed time period is useful when the success of the step depends on metrics that are not directly related to the amount of traffic the service receives.
+
+For example, assuming all the SLO conditions are met, this step will end successfully after 1775 requests have been received. If the required 1775 requests are not received within one hour, the step fails.
+
+// screenshot
+
+*Conditions*
+
+The conditions are the Service Level Objectives (SLO) that must be met for the step to be successful.
+
+[NOTE]
+====
+The success of every step must be conditional on at least two SLOs: the number of Kubernetes Pod restarts and Release Health. 
+
+Vamp adds a third SLO to the first of each policy - a check on whether the new version of the service has the required minimum number of Kubernetes Pods running.
+
+This third SLO - minimum availability - is optional, but we recommend you include it.
+====
+
+Although you cannot delete these mandatory SLOs, you can edit the budget by clicking the _Budget_ link to the right of the condition.
+
+// screenshot
+
+==== Restarts budget
+
+Here you can change the:
+
+. Maximum permitted number of pod restarts.
+. Time window in minutes used to calculate the SLO.
+. Grace period in minutes before time window begins.
+
+==== Release Health budget
+
+Here you can change the:
+
+. Aggregation (in percentiles).
+. Time window in minutes used to calculate the SLO.
+. Grace period in minutes before time window begins.
+
+==== Minimum Availability
+
+Here you can change the:
+
+. Threshold (as a percentage).
+. Aggregation (as a percentile). For example, if you choose a threshold of great than or equal to 5% and an aggregation of _90th Percentile_, this mean than 10% of the time, the minimum availability can be less than 5%.
+
+// screenshot
+
+// need to double-check the logic in the UI text
+
+. Time window in minutes used to calculate the SLO.
+. Grace period in minutes before time window begins.
+
+When you have finished editing the budget, click the blue *Submit* button.
+
+
+// screenshot
+
+In the example above, the success of this step is conditional on five SLOs remaining in budget for the duration of the step:
+
+* Vamp Health must remain at or above 70%.
+* The number of Kubernetes Pod restarts must remain at or below one across all the Pods.
+* The required minimum number of Kubernetes Pods must running for at least * 90% of the time.
+* At least 90% of responses must be successful.
+* At least 90% of requests must be completed within 400ms.
+
+All the SLOs will be evaluated over a five-minute rolling time window.
+
+To add more conditions:
+
+. Click *+Add more*.
+. Choose the metric from the drop-down list
+// where do these metrics come from? I think there's a separate page.
+. Click the _Budget_ link to edit the budget for your condition.
+
+==== Adding a Step Start webhook
+
+A step start webhook is called at the start of the step. To create a step start webhook, click *+Add more*.
+
+// screenshot
+
+
+// screenshot of Add a Webhook
+
+// Need to add some details here!
+
+// CircleCI - add screenshot and commentary
+
+// ArgoCD - add screenshot and commentary
+
+To add more step start webhooks, click *+ Add more*.
+
+// screenshot
+
+Otherwise, click the blue *Add* button.
+
+
+When you have finished creating your step, click the blue *Save* 
+
+To create an additional step, click *+Create New Step* next to _Step 1_.
+
+// screenshot, as this is confusing!
+
+Alternatively, if the details for the additional step are similar, you can click the blue *Duplicate* button at the bottom of your Step 1.
+
+You will see your new step alongside Step 1. The current step is highlighted with a blue border.
+
+// screenshot
+
+To delete a step, click the red *Delete step* button. 
+
+// screenshot
+
+You will be asked to confirm that you want to delete the step.
+
+=== Webhooks
+
+In addition to the step start webhook, you can add two more types of webhook:
+
+* Release success webhooks
+* Release failure webhooks
+
+*Release success webhooks* are called at the successful completion of a release. Example uses include triggering a CD pipeline to clean up the old version, triggering a CD pipeline to promote the new version into another application, or triggering an external notification.
+
+*Release failure webhooks* are called if the release fails. Example uses include triggering a CD pipeline to clean up the new version, or triggering an external notification or alert.
+
+
+To add a release success webhook, click *+Add more*.
+
+// screenshot
+
+// screenshot for webhook itself
+
+// This is essentially the same for release failure webhooks, so need to find some way of consolidating them.
+
+When you have finished adding steps and webhooks, click the blue *Create policy* button. You will be returned to the Policies list and see a pop-up message to confirm that your policy has been created.
+
+WARNING: The policy is not stored until you click the *Create policy* button. If you navigate away before saving, your changes will be lost.
+
+=== Editing a Policy
+
+To edit a policy, click on it in the Policies list.
+
+You will see a summary of your policy at the top.
+
+You can then edit, delete, or create steps and webhooks.
+
+When making changes to steps, you need to click the blue *Save* button.
+
+// screenshot
+
+When you have finished editing the policy, click the blue *Update policy* button.
+
+// screenshot
+
+You will see a pop-up message to confirm that your policy has been updated successfully.
+
+=== Deleting a Policy
+
+To delete a policy, click on it in the Policies list, then click the red *Delete policy* button at the bottom of the page.
+
+You will be asked to type the name of the policy in a pop-box to confirm that you wish to delete it.
+
+You will see a pop-up message to confirm that your policy has been deleted.
+
+NOTE: A policy cannot be deleted if it is used by an application.
