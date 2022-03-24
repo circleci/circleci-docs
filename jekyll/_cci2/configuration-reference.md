@@ -423,15 +423,11 @@ When using the [Windows GPU executor](#gpu-executor-windows), the available imag
 
 ```yaml
 version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
+
 jobs:
   build:
     machine:
       image: windows-server-2019-nvidia:stable
-      docker_layer_caching: true    # default - false
 ```
 
 #### **`macos`**
@@ -666,10 +662,11 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }
 
-Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
---------------------------------|-------|-----|------|-----------------|------------------
-gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
-gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB)
+--------------------------------|-------|-----|------|-------------------|------------------
+gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8
+gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16
+gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 | 
 {: class="table table-striped"}
 
 ###### Example usage
@@ -682,8 +679,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
