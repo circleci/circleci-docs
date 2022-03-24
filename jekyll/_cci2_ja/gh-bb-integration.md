@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-以下のセクションに沿って、CircleCI での GitHub、GitHub Enterprise、または Bitbucket Cloud の利用について概説します。
+ここでは、CircleCI での GitHub、GitHub Enterprise、または Bitbucket Cloud の利用について概説します。
 
 * 目次
 {:toc}
@@ -25,22 +25,22 @@ CircleCI を使用する際には、 VCS として GitHub もしくは BitBucket
 - **デプロイ キー**: GitHub または Bitbucket Cloud からプロジェクトをチェックアウトするために使用されます。
 - **サービス フック**: GitHub または Bitbucket Cloud にプッシュしたときに CircleCI に通知を送信するために使用されます。
 
-CircleCI のデフォルトでは、プッシュ フックでビルドが行われます。 したがって、リポジトリのすべてのプッシュ フックに対してビルドがトリガーされます。また、プッシュはビルドをトリガーする最も一般的なケースです。
+CircleCI のデフォルトでは、プッシュフックでビルドが行われます。 したがって、リポジトリのすべてのプッシュフックに対してビルドがトリガーされます。また、プッシュはビルドをトリガーする最も一般的なケースです。
 
 あまり一般的ではありませんが、CircleCI は以下の場合にもフックを使用します。
 
-- CircleCI は PR フック (プル リクエスト フック) を処理して、CircleCI アプリケーションの PR 情報を保存します。 If the Only Build Pull Requests setting is enabled, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
+- CircleCI は PR フック (プルリクエストフック) を処理して、CircleCI アプリケーションの PR 情報を保存します。 [Only Build Pull Requests (プル リクエストのみビルド)] が設定されていると、CircleCI は PR がオープンされたとき、または既存の PR が存在するブランチへのプッシュがあったときだけ、ビルドをトリガーします。 これが設定されている場合でも、プロジェクトのデフォルトのブランチへのすべてのプッシュは、常にビルドされます。
 - [Build Forked Pull Requests (フォークされたプル リクエストをビルド)] が設定されている場合、CircleCI はフォークされたリポジトリから作成された PR に応答してビルドをトリガーします。
 
-GitHub または Bitbucket Cloud で Web フックを編集して、ビルドをトリガーするイベントを制限できます。 Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 詳細については、[GitHub の「Edit a Hook (フックを編集する)」](https://developer.github.com/v3/repos/hooks/#edit-a-hook)または [Atlassian の「Manage Webhooks (Web フックを管理する)」](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html)を参照してください。
+GitHub または Bitbucket Cloud で Web フックを編集して、ビルドをトリガーするイベントを制限できます。 Web フックの設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュフックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Web フックの設定からプッシュフックを削除すると、ビルドを行いません。 詳細については、[GitHub の「Edit a Hook (フックを編集する)」](https://developer.github.com/v3/repos/hooks/#edit-a-hook)または [Atlassian の「Manage Webhooks (Web フックを管理する)」](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html)を参照してください。
 
-Refer to the CircleCI documentation on [Workflows filters]({{site.baseurl}}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for information on how to build tag pushes.
+タグプッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{site.baseurl}}/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
 
 ### .circleci/config.yml ファイルの追加
 {: #add-a-circleciconfigyml-file }
 {:.no_toc}
 
-After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository, CircleCI immediately checks your code out and runs your first job along with any configured tests. 例えば、Postgres の機能を駆使した Rails のプロジェクトに携わっているなら、下記のような run ステップのジョブを記述することになります。
+[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成して GitHub または Bitbucket Cloud リポジトリにコミットすると、CircleCI は直ちにユーザーコードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。 例えば、Postgres の機能を駆使した Rails のプロジェクトに携わっているなら、下記のような run ステップのジョブを記述することになります。
 
 ```yaml
 jobs:
@@ -66,46 +66,46 @@ CircleCI は毎回まっさらな閉じた環境のコンテナ上でテスト�
 
 ![プルリクエスト後のステータスアイコン]({{site.baseurl}}/assets/img/docs/status_check.png)
 
-## キーのベスト プラクティス
+## キーのベストプラクティス
 {: #best-practices-for-keys }
 
-- 可能な限り、デプロイ キーを使用します。
-- When Deploy Keys cannot be used, [Machine User Keys](#controlling-access-via-a-machine-user) must be used, and have their access restricted to the most limited set of repos and permissions necessary.
-- マシン ユーザー キー以外のユーザー キーは使用しないでください (キーは特定のユーザーではなく、ビルドに関連付ける必要があります)。
-- リポジトリへのユーザー アクセスを取り消す場合、デプロイ キーまたはユーザー キーを交換する必要があります。
-  1. GitHub へのユーザー アクセスを取り消した後、GitHub でキーを削除します。
+- 可能な限り、デプロイキーを使用します。
+- デプロイキーを使用できない場合は、マシンユーザーキーを使用し、必要最低限のリポジトリと権限にのみアクセスできるように制限します。
+- マシンユーザーキー以外のユーザーキーは使用しないでください (キーは特定のユーザーではなく、ビルドに関連付ける必要があります)。
+- リポジトリへのユーザーアクセスを取り消す場合、デプロイキーまたはユーザーキーを交換する必要があります。
+  1. GitHub へのユーザーアクセスを取り消した後、GitHub でキーを削除します。
   2. CircleCI プロジェクトでキーを削除します。
   3. CircleCI プロジェクトでキーを再生成します。
 - 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザー キーを使用してアクセスできないようにします。
 
-## プロジェクトで追加のプライベート リポジトリのチェックアウトの有効化
+## プロジェクトで追加のプライベートリポジトリのチェックアウトの有効化
 {: #renaming-orgs-and-repositories }
 
-If you find you need to rename an org or repo that you have previously hooked up to CircleCI, the best practice is to follow these steps:
+CircleCI と連携済みの組織やリポジトリの名称を変更する必要が生じた場合、下記の手順に従うことが推奨されます:
 
-1. VCS 上で Organization 及びリポジトリの名称を変更します。
-2. Head to the CircleCI application, using the new org/repo name, for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
+1. VCS 上で組織及びリポジトリの名称を変更します。
+2. CircleCI アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびレポジトリ名を使用します。
 3. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
 4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
 
-**Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
+**注:** この手順を実行しないと、**環境変数**や**コンテキスト**などの組織またはリポジトリの設定にアクセスできなくなる可能性があります。
 
-### チーム アカウントの権限
+### Bitbucket 個人組織
 {: #bitbucket-personal-orgs }
 
-CircleCI expects that your personal/default org matches your VCS username. Bitbucket now supports renaming your personal workspace to differ from your username; however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, make sure its name matches your username.
+CircleCI は個人およびデフォルトの組織と VCS ユーザー名が一致することを想定しています。 Bitbucket では現在ユーザー名と異なる名前にパーソナルワークスペースの名前を変更することができますが、CircleCI では対応していません。 CircleCI を使って個人ワークスペースでプロジェクトをビルドしている場合は、ワークスペースの名前がユーザー名と一致していることを確認してください。
 
-## Enable your project to check out additional private repositories
+## プロジェクトで追加のプライベートリポジトリのチェックアウトを有効にする
 {: #enable-your-project-to-check-out-additional-private-repositories }
 
-テストの一連の処理のなかで複数のリポジトリを参照している場合、CircleCI は GitHub の deploy key に加えてユーザーキー (SSH Keys) も要求します。ユーザーキーが_全ての_ GitHub リポジトリにアクセスしている間、各 deploy key は _1 つの_ リポジトリにしか有効にならないためです。
+テストプロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイキーに加えて GitHub ユーザー キーも必要となります。 これは、 GitHub ユーザーキーはユーザーの_すべて_の GitHub リポジトリに対してアクセス権を持ちますが、デプロイキーは*単一の*リポジトリに対してのみ有効であるためです。
 
-Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
+プロジェクトの **[Project Settings (プロジェクト設定)] > [SSH keys (SSH キー)]** のページで、CircleCI に渡す GitHub のユーザーキーを指定します。 **[User Key (ユーザーキー)]** のセクションまでスクロールし、 **[Authorize with GitHub (GitHub で認証する)]** ボタンをクリックします。 CircleCI は、この新しい SSH 鍵を作成し、それを GitHub のユーザー アカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
 
-## ユーザー キーのセキュリティ
+## ユーザーキーのセキュリティ
 {: #user-key-security }
 
-CircleCI は、紐づけたユーザーキー (SSH Keys) を第三者に公開することはありません。
+CircleCI が SSH キーを公開することはありません。
 
 SSH 鍵は信頼するユーザーとのみ共有してください。 GitHub collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
 
