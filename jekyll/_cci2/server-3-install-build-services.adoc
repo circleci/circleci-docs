@@ -329,7 +329,7 @@ gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> 
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/nomad-autoscaler]"
 ```
 
-NOTE: If you are switching from static json credentials to Workload Identity, you must delete the keys from GCP in order to avoid the key misuse.
+NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP.
 
 endif::env-aws[]
 
