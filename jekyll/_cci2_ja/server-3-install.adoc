@@ -34,7 +34,7 @@ kubectl kots version
 
 NOTE: KOTS コマンドにより、管理者コンソールへのトンネルが開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
+ターミナルでの実行 (プロキシ内にインストールする場合は、https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール]を参照してください。)
 
 ```bash
 kubectl kots install circleci-server
@@ -51,7 +51,7 @@ NOTE: If you need to get back to the KOTS admin console at a later date you can 
 
 NOTE: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-=== Installing behind an HTTP Proxy
+=== HTTP プロキシ経由でのインストール
 
 プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細は https://kots.io/kotsadm/installing/online-install/#proxies[こちら] の KOTS 文書をご覧ください）。
 
@@ -70,7 +70,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 .フロントエンドの設定
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
-以下のフィールドに入力します。 You can either supply a private key and certificate, or check the box to allow Let's Encrypt to automatically request and manage certificates for you. この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
+以下のフィールドに入力します。 プライベートキーと証明書を指定するか、 [ Let's Encrypt (暗号化を許可) ] チェックボックスをオンにして、自動的に証明書を要求および管理します。 この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
 
 NOTE: プライベート ロードバランサーの使用オプションを選択した場合、 [ Let's Encrypt (暗号化を許可) ] オプションは機能せず、使用できなくなります。
 
@@ -84,13 +84,13 @@ NOTE: プライベート ロードバランサーの使用オプションを選�
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
-* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. この値は以下のコマンドで取得できます。
+* *[Frontend TLS Certificate (フロントエンド TLS 証明書)] (必須)*: 前提条件のステップで作成した証明書です。 この値は以下のコマンドで取得できます。
 +
 ```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
+* *[Private Load Balancer (プライベートロードバランサー)] (オプション)*:  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
 
 ==== アーティファクトと暗号化署名の設定
 暗号化キーとアーティファクト署名キーは、前提条件のステップで作成しました。 そのキーをここで入力します。
@@ -102,7 +102,7 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 * *暗号化署名キー (必須)*
 
 ==== Github の設定
-You created your Github OAuth application in the prerequisite phase. Use the data to complete the following:
+前提条件のステップで作成した Github OAuth アプリケーションのデータを使って、 以下の作業を行ってください。
 
 * *[Github Type (Github の種類)] (必須) * -
 Cloud または Enterprise (オンプレミス)を選択します。
@@ -115,7 +115,7 @@ Github が提供する OAuth クライアント シークレットです。
 
 ==== オブジェクトストレージの設定
 
-You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
+前提条件のステップで作成したオブジェクトストレージ バケットとキーを使って、 以下の作業を行ってください。
 
 // Don't include this section in the GCP PDF.
 
@@ -130,17 +130,16 @@ ifndef::env-gcp[]
 
 * *[S3 Endpoint (S3 エンドポイント)]* (オプション): S3 ストレージ プロバイダーの API エンドポイントを指定します。 プロバイダーが AWS ではない場合は必須です。 このオプションを設定すると、AWS S3 リージョンは無視されます。
 
-* *Storage Object Expiry (required)* -
-Number of days to retain your test results and artifacts. 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+* *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
 ====== 認証
-One of the following is required. Either select IAM keys and provide:
+以下のいずれかを実行してください。 IAM キーを選択し、以下を指定します。
 
 * *[Access Key ID (アクセス キー ID) (必須)]*: S3 バケットへのアクセス用のアクセス キー ID を指定します。
 
 * *[Secret Key (シークレット キー)] (必須)*: S3 バケットへのアクセス用のシークレット キーを指定します。
 
-Or select IAM role and provide:
+または、IAM ロールを選択し、以下を指定します。
 
 * *Role ARN* -
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
