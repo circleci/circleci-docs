@@ -31,7 +31,7 @@ KOTS の管理者コンソールにアクセスします。 Get to the KOTS Admi
 
 設定で次の項目を探して入力します。
 
-. *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)](必須)*: 次のコマンドにより、サービスの IP アドレスを取得します
+. *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)のホストネーム]*: 次のコマンドにより、サービスの IP アドレスを取得します
 +
 ```shell
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
@@ -118,12 +118,17 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 
 適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Nomad クライアントをデプロイすることができます。
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -141,17 +146,18 @@ ifndef::env-aws[]
 ===== GCP
 CircleCI Server のデプロイ時に作成した Nomad コントロールプレーン（Nomad サーバー）の IP アドレスが必要になります。 以下のコマンドを実行することで IP アドレスを取得できます。
 
+[source,shell]
 ----
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 以下の情報も必要です。
 
-* Nomad クライアントを実行する GPC プロジェクト
-* Nomad クライアントを実行する GPC ゾーン
-* Nomad クライアントを実行する GPC リージョン
-* Nomad クライアントを実行する GPC ネットワーク
-* Nomad クライアントを実行する GPC サブネットワーク
+* Nomad クライアントを実行する GCP プロジェクト
+* Nomad クライアントを実行する GCP ゾーン
+* Nomad クライアントを実行する GCP リージョン
+* Nomad クライアントを実行する GCP ネットワーク
+* Nomad クライアントを実行する GCP サブネットワーク
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
@@ -221,12 +227,17 @@ output "module" {
 
 適切な情報を入力したら、次のコマンドを実行して Nomad クライアントをデプロイできます。
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -250,6 +261,7 @@ ifndef::env-gcp[]
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーアクセスキーは Terraform の出力で使用できます。
   * 以下の IAM ポリシーを使用して、手動で Nomad Autoscaler IAM ユーザーを作成します。 その場合、ユーザーにアクセスキーとシークレットキーを生成する必要があります。
   * Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]を作成し、次の IAM ポリシーを添付します。
++
 [source, json]
 {
     "Version": "2012-10-17",
@@ -336,12 +348,16 @@ CircleCI Server のインストールをテストできる https://github.com/ci
 realitycheck を実行するには、リポジトリのクローンを実行する必要があります。 Github の設定に応じて、以下のいずれかを実行します。
 
 ===== Github Cloud
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 
 ----
 
 ===== GitHub Enterprise
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 git remote set-url origin <YOUR_GH_REPO_URL>
@@ -697,6 +713,7 @@ CircleCI のランナーには、追加のサーバー設定は不要です。 C
 NOTE: ランナーには各組織につき１つ名前空間が必要です。  CircleCI Server には複数の組織が存在する場合があります。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
 
 ifndef::pdf[]
+
 ## 次に読む
 
 * https://circleci.com/docs/2.0/server-3-install-post[Server 3.x ステップ 4: ポストインストール]
