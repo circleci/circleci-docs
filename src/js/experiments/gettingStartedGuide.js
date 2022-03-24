@@ -1,5 +1,21 @@
 // https://app.optimizely.com/v2/projects/16812830475/experiments/21268663100/variations
 
+/**
+ * Changes "Your First Green Build" in the docs sidebar to "Quickstart Guide"
+ * Adds a "NEW" badge to the sidebar item as well.
+ **/
+function addNewBadgeToSidebar() {
+  const NEW_SIDEBAR_HTML = `
+    <a class="" href="/docs/2.0/getting-started/"
+       data-section="getting-started" data-proofer-ignore="">
+      <span>Quickstart Guide</span>
+      <img style="margin: -2px 0px 0px 4px;" src="/docs/assets/img/compass/new.svg" alt="New">
+    </a>
+`;
+
+  $("li > a[href='/docs/2.0/getting-started/']").replaceWith(NEW_SIDEBAR_HTML);
+}
+
 // NOTE: experimentContainer can be updated once we have the other components of this experiment created and in place
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_getting_started_docs_test',
@@ -8,6 +24,7 @@ window.OptimizelyClient.getVariationName({
   guestExperiment: false,
 }).then((variation) => {
   if (variation === 'treatment') {
+    addNewBadgeToSidebar();
     // console.log('IN TREATMENT GROUP');
   }
   if (variation === 'control') {
