@@ -1,7 +1,6 @@
 export function externalLink() {
     document.querySelectorAll('#main a:not(.no-external-icon)')
       .forEach((item) => {
-          console.log('item ', item)
         if (!item.origin.includes(window.location.origin)) {
           item.setAttribute('target', '_blank');
           item.setAttribute('rel', 'noopener noreferrer');
