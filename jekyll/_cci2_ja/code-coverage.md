@@ -183,7 +183,7 @@ jobs:
           path: coverage
 ```
 
-[simplecov README](https://github.com/colszowka/simplecov/#getting-started) に、さらに詳細な説明があります。
+詳細は、[simplecov README](https://github.com/colszowka/simplecov/#getting-started) を参照してください。
 
 ## Python
 {: #python }
