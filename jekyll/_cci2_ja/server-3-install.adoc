@@ -34,7 +34,7 @@ kubectl kots version
 
 NOTE: KOTS コマンドにより、管理者コンソールへのトンネルが開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
+ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/ja/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
 
 ```bash
 kubectl kots install circleci-server
