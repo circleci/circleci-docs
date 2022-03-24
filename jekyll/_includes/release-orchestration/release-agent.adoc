@@ -2,7 +2,7 @@
 :page-liquid:
 :icons: font
 
-Before installing the Release Agent, ensure you have all the <<prerequisites#,prerequisites>>.
+Before installing the Release Agent, ensure you have all the <<../prerequisites#,prerequisites>>.
 
 NOTE: If the application namespace does not exist, it will be created automatically during the installation.
 
