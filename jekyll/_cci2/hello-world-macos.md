@@ -46,8 +46,9 @@ As a user getting to know the macOS execution environment, our ideal scenario is
 - Run tests using XCode on the macOS VM whenever we push code.
 - Create and upload the compiled application as an artifact after tests have run successfully.
 
-You can checkout the example application's repo on
-[GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
+You can check out the example application's repo on [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
+
+Please note, if you would like to test running the code in the example configuration file (below) yourself, you should either fork, or duplicate the example application from GitHub. The example configuration file is not guaranteed to work on any/all Xcode projects.
 
 ## Example configuration file
 {: #example-configuration-file }

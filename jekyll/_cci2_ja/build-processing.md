@@ -24,7 +24,7 @@ CircleCI パイプラインは、プロジェクトのすべての `.circleci/co
 
 パイプラインでは以下の機能を利用できます。
 
-{% include snippets/pipelines-benefits.adoc %}
+{% include snippets/ja/pipelines-benefits.adoc %}
 
 ## トラブルシューティング
 {: #transitioning-to-pipelines }

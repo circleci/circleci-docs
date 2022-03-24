@@ -17,10 +17,18 @@
 @import 'progressbar';
 @import 'language-guide';
 @import 'first_steps_cta';
+@import 'popup';
+@import 'includes/getting-started-section-header';
+
+// pages with their own unique styling
+@import 'pages/troubleshooting-and-common-issues';
 
 // prism related scss
 @import 'prism/theme';
 @import 'prism/copy-code-button';
+
+// includes
+@import 'includes/two-up';
 
 // General
 body {
@@ -579,7 +587,7 @@ Fixing styling for the code example tables in the "Migrating From..." pages
 .server-version-wrapper {
   padding: 10px 16px;
   flex-grow: 1;
-  border-left: 1px solid #DDDDDD;
+  border-left: 1px solid #DDDDDD
 }
 
 #tooltip-time {

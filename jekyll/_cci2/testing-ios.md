@@ -52,7 +52,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Bare Metal Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
- `13.3.0` | Xcode 13.3 Beta 3 (13E5104i) | 12.2.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v7081/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2542/index.html) | [Release Notes](https://discuss.circleci.com/t/macos-monterey-xcode-13-3-beta-3-released-on-vm-and-metal-resource-classes/43061)
+ `13.3.0` | Xcode 13.3 (13E113) | 12.2.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v7260/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2639/index.html) | [Release Notes](https://discuss.circleci.com/t/macos-monterey-xcode-13-3-rc-released/43187)
  `13.2.1` | Xcode 13.2.1 (13C100) | 11.6.2 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6690/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2243/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-2-1-released/42334)
  `13.1.0` | Xcode 13.1 (13A1030d) | 11.6.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6269/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2218/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-1-rc-released/41577)
  `13.0.0` | Xcode 13.0 (13A233) | 11.5.2 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6052/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-1977/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-rc-released/41256)
@@ -70,6 +70,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 {: class="table table-striped"}
 
 <sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
+
+**Note:** [macOS App UI Testing]({{ site.baseurl }}/2.0/testing-macos) is supported on Xcode 11.7 and higher
 
 ## Getting started
 {: #getting-started }

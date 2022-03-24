@@ -10,9 +10,9 @@ version:
 ## 概要
 {: #overview }
 
-Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
+Android マシンイメージには、CircleCI で Linux マシンイメージにアクセスする場合と同様に、[Linux `machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシンイメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
-## Android マシン イメージの使用
+## Android マシンイメージの使用
 {: #using-the-android-machine-image }
 
 設定ファイルに Android イメージを使用するには、[Orb]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
@@ -20,28 +20,7 @@ Android マシン イメージには、CircleCI で Linux マシン イメージ
 ## プリインストールされたソフトウェア
 Android マシン イメージには以下がプリインストールされています。
 
-この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
-
-### Android SDK
-{: #android-sdk }
-- sdkmanager
-- Android プラットフォーム 23、24、25、26、27、28、29、30、S
-- ビルド ツール 30.0.3
-- エミュレーター、platform-tools、tools
-- NDK (Side by side) 21.4.7075529
-- cmake 3.6.4111459
-- extras;android;m2repository、extras;google;m2repository、extras;google;google_play_service
-
-### その他
-{: #others }
-- gcloud
-- OpenJDK 8、OpenJDK 11 (デフォルト)
-- maven 3.6.3、gradle 6.8.3、ant
-- nodejs 12.21.0、14.16.0 (デフォルト)、15.11.0
-- python 2.7.18、python 3.9.2
-- ruby 2.7.2、ruby 3.0.0
-- docker 20.10.5、docker-compose 1.28.5
-- jq 1.6
+現在プリインストールされているソフトウェアのリストについては、 [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) ページで四半期ごとの更新のお知らせを参照してください。
 
 ## 制限事項
 {: #limitations }
