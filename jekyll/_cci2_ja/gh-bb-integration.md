@@ -34,13 +34,13 @@ CircleCI のデフォルトでは、プッシュフックでビルドが行わ�
 
 GitHub または Bitbucket Cloud で Web フックを編集して、ビルドをトリガーするイベントを制限できます。 Web フックの設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュフックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Web フックの設定からプッシュフックを削除すると、ビルドを行いません。 詳細については、[GitHub の「Edit a Hook (フックを編集する)」](https://developer.github.com/v3/repos/hooks/#edit-a-hook)または [Atlassian の「Manage Webhooks (Web フックを管理する)」](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html)を参照してください。
 
-タグプッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{site.baseurl}}/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
+タグプッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{site.baseurl}}/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
 
 ### .circleci/config.yml ファイルの追加
 {: #add-a-circleciconfigyml-file }
 {:.no_toc}
 
-[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成して GitHub または Bitbucket Cloud リポジトリにコミットすると、CircleCI は直ちにユーザーコードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。 例えば、Postgres の機能を駆使した Rails のプロジェクトに携わっているなら、下記のような run ステップのジョブを記述することになります。
+[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成して GitHub または Bitbucket Cloud リポジトリにコミットすると、CircleCI は直ちにユーザーコードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。 例えば、Postgres の機能を駆使した Rails のプロジェクトに携わっているなら、下記のような run ステップのジョブを記述することになります。
 
 ```yaml
 jobs:
@@ -143,70 +143,70 @@ Permission denied (publickey).
 
 4. [Add Project (プロジェクトを追加する)] のページから、マシンユーザーにアクセスを許可するプロジェクトをフォローします。
 
-5. **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH キーのチェック アウト)]** ページで、[**Authorize With GitHub (GitHub で承認)**] ボタンをクリックします。 This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
+5. **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH キーのチェック アウト)]** ページで、[**Authorize With GitHub (GitHub で承認)**] ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
 
-6. **[Create and add XXXX user key (XXXX ユーザー キーを作成して追加)]** ボタンをクリックします。
+6. **[Create and add XXXX user key (XXXX ユーザーキーを作成して追加)]** ボタンをクリックします。
 
-Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
+これで、CircleCI はビルド中に実行されるすべての Git コマンドに対して、マシンユーザーの SSH キーを使用するようになります。
 
-## パーミッションの概要
+## 権限の概要
 {: #permissions-overview }
 
-CircleCI requests the following permissions from your VCS provider, as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes) and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
+CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](http://developer.github.com/v3/oauth/#scopes)や [Bitbucket の権限モデル](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes)で定義されている以下の権限を要求します。
 
-**読み取りアクセス権**
+**読み取り権限**
 
-- ユーザーのメール アドレスを取得する
+- ユーザーのメールアドレスを取得する
 
-**書き込みアクセス権**
+**書き込み権限**
 
-- リポジトリにデプロイ キーを追加する
-- リポジトリにサービス フックを追加する
+- ユーザーのリポジトリリストを取得する
+- ユーザーアカウントへの SSH キーの追加
 
-**Admin Permissions**, needed for setting up a project
+プロジェクトの設定に必要な**管理者の権限**
 
-- デプロイ キーのリポジトリへの追加
-- サービス フックのレポジトリへの追加
+- デプロイキーのリポジトリへの追加
+- サービスフックのレポジトリへの追加
 
-**メモ:** CircleCI は絶対に必要な権限しか要求しません。 However, CircleCI is constrained by the specific permissions each VCS provider chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub requires the [`repo` scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes), which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
+**注:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、 GitHub から全ユーザーのリポジトリ (公開・非公開の両方) の一覧を GitHub から取得する際には、 [`repo` スコープ](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes) の権限が必要で、これは書き込み権限に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
 
-If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting your VCS provider to communicate your concerns.
+CircleCI が使用する権限の数をどうしても減らしたい場合は、VCS プロバイダーに連絡して、その旨を伝えてください。
 
 
 ### GitHub 組織で CircleCI を再有効化する方法
 {: #how-to-re-enable-circleci-for-a-github-organization }
 {:.no_toc}
 
-ここでは、GitHub の組織に対するサードパーティアプリケーションのアクセス制限を有効化した際に、CircleCI の組織へのアクセスを再有効化する方法を解説します。 Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the **Organization access** section, you will have the option to request access if you are not an admin, or grant access if you are an admin.
+ここでは、GitHub の組織に対するサードパーティアプリケーションのアクセス制限を有効化した際に、CircleCI の組織へのアクセスを再有効化する方法を解説します。 [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) を開くと、**Organization access** セクションに、管理者でない場合はアクセスをリクエストする、管理者の場合はアクセスを付与するオプションがあります。
 
-#### Non-admin member workflow
+#### 管理者以外のメンバーのワークフロー
 {: #non-admin-member-workflow }
 {:.no_toc}
 
-- If you are member of a GitHub org (not an admin), click the **Request** button and a message will be sent to an admin of your organization. An admin will have to approve the request.
-- Click **Request approval from owners** to send an email to your organization’s owners.
-- While waiting for approval, you will see **Access request pending** next to your organization’s name.
-- If CircleCI has been approved by your organization, you will see a checkmark next to your organization’s name.
+- GitHub 組織のメンバー(管理者以外) は、**Request** ボタンをクリックすると、メッセージが組織の管理者に送信されます。 管理者がそのリクエストを承認する必要があります。
+- **Request approval from owners** をクリックすると、組織のオーナーにメールが送信されます。
+- 承認を待っている間は、組織名の隣に **Access request pending** が表示されます。
+- CircleCI が承認されると、組織名の隣にチェックマークが表示されます。
 
-#### Admin owner workflow
+#### 管理者・オーナーのワークフロー
 {: #admin-owner-workflow }
 {:.no_toc}
 
-- If you are an owner of your organization (an admin), you may grant access to CircleCI by clicking on the **Grant** button.
-- You may be asked to confirm your password in order to authorize our app.
-- Once you’ve approved CircleCI, you will see a checkmark next to your organization’s name.
+- 組織のオーナー (管理者) の場合、**Grant** ボタンをクリックするとCircleCI にアクセス権を付与することができます。
+- CircleCI アプリを認証するためにパスワードを確認される場合があります。
+- CircleCI を承認すると、組織名の隣にチェックマークが表示されます。
 
 アクセスが承認されると、CircleCI は元通りの挙動になるはずです。
 
-#### Third party applications
+#### サードパーティのアプリケーション
 {: #third-party-applications }
 {:.no_toc}
 
-GitHub recently added the ability to approve third party application access on a [per-organization level](https://help.github.com/articles/about-third-party-application-restrictions/). Before this change, any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account), and the application could use that OAuth token to act on behalf of the user via the API, with whatever permissions were granted during the OAuth flow.
+GitHub は最近、[組織単位での](https://help.github.com/articles/about-third-party-application-restrictions/)サードパーティーアプリケーションへのアクセスの承認機能を追加しました。 この変更が行われるまでは、組織のどのメンバーでも (GitHub のユーザーアカウントに紐づく OAuth トークンを生成して) アプリケーションを承認することが可能となっていました。また、アプリケーションはその OAuth トークンを用いることで、ユーザーが API を経由して実行するのと同じように、OAuth で認められている権限の範囲内で動作することができました。
 
-Now OAuth tokens will, by default, _not_ have access to organization data when third party access restrictions are enabled. OAuth の処理中かその後に、ユーザーは組織単位で明確にアクセス許可をリクエストしなければならず、組織の管理者はそのリクエストを承認する必要があります。
+現在のデフォルトでは、サードパーティのアクセス制限が有効になっている場合、OAuth トークンは組織のデータにアクセスできません。 OAuth の処理中かその後に、ユーザーは組織単位で明確にアクセス許可をリクエストしなければならず、組織の管理者はそのリクエストを承認する必要があります。
 
-If you are an owner/admin, you can enable third party access restrictions by visiting the [Organization settings](https://github.com/settings/organizations) page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
+オーナーまたは管理者の場合、GitHub の[Organization settings](https://github.com/settings/organizations) のページにアクセスし、その組織の **Settings** ボタンをクリックするとサードパーティのアクセス制限を有効にすることができます。 Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
 
 You can read more about these settings and how to configure them on [GitHub](https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization).
 
