@@ -23,7 +23,7 @@ image::server-install-flow-chart-phase2.png[Flow chart showing the installation 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
-CircleCI Server v3.x では、https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
+CircleCI Server v3.x では、 https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
 次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。
@@ -34,7 +34,7 @@ kubectl kots version
 
 NOTE: KOTS コマンドにより、管理者コンソールへのトンネルが開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-ターミナルでの実行 (プロキシ内にインストールする場合は、https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール]を参照してください。)
+ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
 
 ```bash
 kubectl kots install circleci-server
