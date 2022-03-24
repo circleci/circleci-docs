@@ -1,4 +1,6 @@
 .banner-wrapper {
+  display: flex;
+  align-items: center;
   width: 100%;
   background: #FFFFFF;
   border: 1px solid #DDDDDD;
@@ -10,21 +12,17 @@
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-  height: 48px;
+  padding: 12px 16px;
   
-  .content-container {
-    img:first-of-type {
-      padding-left: 16px;
-    }
-    span:first-of-type {
-      padding-left: 7px;
-    }
+  .icon-container {
+    padding-right: 4px;
+    min-width: 72px;
+    display: flex;
+    justify-content: space-evenly;
+    align-self: flex-start;
+
     .vcs-icon {
-      padding: 12px 0 12px 0;
       margin: 0;
-     }
-     .text-wrapper {
-      padding: 15px 0 15px 0;
-     }
-  } 
+    }
+  }
 }
