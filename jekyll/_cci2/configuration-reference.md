@@ -666,7 +666,7 @@ Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU M
 --------------------------------|-------|-----|------|-------------------|------------------
 gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8
 gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16
-gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 | 
+gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16
 {: class="table table-striped"}
 
 ###### Example usage
