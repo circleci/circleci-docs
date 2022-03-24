@@ -73,4 +73,4 @@ circleci namespace create <name> <vcs-type> <org-name> [flags]
 
 * Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
 * CircleCI Server 環境で Orb を開発したり使用する場合は、[Orb のオーサリングプロセス on Server]({site.basel}}/ja/2.0/orb-author-server/) ガイドの Orb の開発に関する情報をお読みください。
-* または、[  Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)のページで詳細をご確認下さい。
+* または、[ Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)のページで詳細をご確認下さい。
