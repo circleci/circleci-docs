@@ -8,6 +8,8 @@
 
 A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
 
+image::quickstart-step3.png[Step 3 of Quick Start Guide]
+
 === Choosing a Default Policy
 
 You are prompted to choose a default policy for each of your services.
@@ -30,7 +32,7 @@ You can either select an existing policy, or <<../using-release-orchestration/po
 
 Choose _Yes_ under _Advanced_ to set specific policies for different types of release.
 
-When you have finished choosing your release policy, click **Next** to attach the policy to your service. 
+When you have finished choosing your release policy, click **Next** in the bottom left-hand corner to attach the policy to your service. 
 
 You will see a pop-up message to confirm that the policy has been attached to your service.
 

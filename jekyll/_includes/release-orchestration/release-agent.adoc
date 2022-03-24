@@ -2,22 +2,26 @@
 :page-liquid:
 :icons: font
 
-Before installing the Release Agent, ensure you have all the <<prerequisites,prerequisites>>.
+Before installing the Release Agent, ensure you have all the <<prerequisites#,prerequisites>>.
 
 NOTE: If the application namespace does not exist, it will be created automatically during the installation.
 
 [IMPORTANT]
 ====
-If the application namespace already exists, <<prometheus,follow these instructions>> to create a Kubernetes Secret before installing the Release Agent.
+If the application namespace already exists, <<../troubleshooting#prometheus,follow these instructions>> to create a Kubernetes Secret before installing the Release Agent.
 
-If your Prometheus instance is in a custom location, <<prometheus,follow these instructions>> before running the installer.
+If your Prometheus instance is in a custom location, <<../troubleshooting#prometheus,follow these instructions>> before running the installer.
 
 ====
 
 To run the installer:
 
 . Click the *Show installation command* button.
++
+image::quickstart-step-5-button.png[Install Release Agent button]
 . Copy the command.
++
+image::quickstart-step-5-run-installer.png[Install Release Agent command]
 . Run the command in your terminal
 
 IMPORTANT: The command is only valid for 30 minutes.

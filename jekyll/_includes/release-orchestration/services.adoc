@@ -33,6 +33,8 @@ There are several ways to find the container port for your service:
 * From a running Docker container, use the `docker port <container-id | container-name>` command.
 * For a Kubernetes deployment, look for the `containerPort` value in your YAML file.
 
+image::quickstart-step2-bottom.png[Step 2 of Quick Start Guide - Kubernetes details]
+
 === Workload Type
 
 Vamp currently supports only Deployments.

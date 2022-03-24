@@ -3,18 +3,20 @@
 :icons: font
 :toc: macro
 
-== My Prometheus server is in a different location
+== Prometheus
+
+=== My Prometheus server is in a different location
 
 If your Prometheus server is not in the default location for the selected Ingress controller, you need to create a secret called `prometheus-connection` in the application Namespace.
 
-=== Step 1 - Create the application Namespace
+==== Step 1 - Create the application Namespace
 
 You can do this with the create namespace command. For example:
 
 [source,shell]
 kubectl create namespace my-application
 
-=== Step 2 - Create the Secret
+==== Step 2 - Create the Secret
 
 You can do this with the `create secret generic` command.
 
@@ -25,18 +27,18 @@ kubectl create secret generic prometheus-connection \
   --namespace=my-application \
   --from-literal=url=http://prometheus.monitoring:9090
 
-== My Prometheus server is running in a different cluster
+=== My Prometheus server is running in a different cluster
 
 WARNING: The Release Agent makes real-time decisions about the validity of your microservices. Using a Prometheus server in a different cluster introduces network latency. In extreme cases, these delays may cause the Release Agent to roll back a version because the required metrics are not available quickly enough.
 
-=== Step 1 - Create the application Namespace
+==== Step 1 - Create the application Namespace
 
 You can do this with the `create namespace` command. For example:
 
 [source,shell]
 kubectl create namespace my-application
 
-=== Step 2 - Create the secret
+==== Step 2 - Create the secret
 
 You can do this with the `create secret generic` command.
 For example, if the URL of your Prometheus server is \https://prometheus.example.com:
@@ -46,18 +48,18 @@ kubectl create secret generic prometheus-connection \
   --namespace=my-application \
   --from-literal=url=https://prometheus.example.com
 
-== My Prometheus server requires a password
+=== My Prometheus server requires a password
 
 If your Prometheus server uses basic authentication, that is, it requires a username and password,  you can add them to the URL.
 
-=== Step 1 - Create the application Namespace
+==== Step 1 - Create the application Namespace
 
 You can do this with the `create namespace` command. For example:
 
 [source,shell]
 kubectl create namespace my-application
 
-=== Step 2 - Create the secret
+==== Step 2 - Create the secret
 
 You can do this with the `create secret generic` command.
 For example, if the URL of your Prometheus server is \https://prometheus.example.com:
@@ -67,7 +69,7 @@ kubectl create secret generic prometheus-connection \
   --namespace=my-application \
   --from-literal=url=https://prometheus.example.com
 
-== I have metrics in more than one Prometheus server
+=== I have metrics in more than one Prometheus server
 
 IMPORTANT: The Release Agent can connect to only one Prometheus server.
 

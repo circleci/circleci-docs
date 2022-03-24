@@ -8,7 +8,7 @@
 
 In Vamp, a service is a microservice. You can create up to six services with the Quick Start Guide.
 
-// screenshot
+image::quickstart-step2-top.png[Step 2 of Quick Start Guide]
 
 {% include release-orchestration/services.adoc %}
 

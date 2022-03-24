@@ -10,7 +10,7 @@
 
 {% include release-orchestration/release-agent.adoc %}
 
-Once you see an _Installation successful_ status, click *Next*.
+Once you see an _Installation successful_ status, click *Next* in the bottom left-hand corner.
 
 [sidebar]
 You can now proceed to <<step-6#,Step 6>>.

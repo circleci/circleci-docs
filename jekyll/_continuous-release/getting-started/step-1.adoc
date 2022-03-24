@@ -8,7 +8,7 @@
 
 In Vamp, an application is a collection of microservices that share a single Kubernetes namespace.
 
-// screenshot
+image::quickstart-step1.png[Step 1 of Quick Start Guide]
 
 {% include release-orchestration/applications.adoc %}
 
