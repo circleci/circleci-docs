@@ -194,11 +194,11 @@ kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE
 
 * link:https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成] (AWS)
 
-NOTE: The Kong load balancer has a healthcheck that serves a JSON payload at https://loadbalancer-address/status
+NOTE: Kong ロードバランサーには、https://loadbalancer-address/status に JSON ペイロードを提供するヘルスチェク機能があります。
 
-=== バリデーション
+=== 確認
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 Now we will move on to build services. すべてのサービスが立ち上がるまで時間がかかることがあります。 You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
