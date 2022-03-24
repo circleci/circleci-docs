@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Runner Configuration reference
+= Self-hosted Runner Configuration reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,7 +12,7 @@ version:
 
 toc::[]
 
-== Runner configuration reference
+== Self-hosted runner configuration reference
 
 A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
 
@@ -35,7 +35,7 @@ This is a token used to identify the launch agent to CircleCI and can be generat
 === api.url
 `$LAUNCH_AGENT_API_URL`
 
-This is a fully qualified URL used by runner to communicate with CircleCI. This variable is only required for runners installed for the 3.2 or later version of server.
+This is a fully qualified URL used by self-hosted runner to communicate with CircleCI. This variable is only required for self-hosted runners installed for the 3.2 or later version of server.
 
 Example:
 
@@ -135,7 +135,7 @@ runner:
 === runner.mode
 `$LAUNCH_AGENT_RUNNER_MODE`
 
-This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (`single-task`) or to continuously poll for new available jobs (`continuous`).
+This parameter allows you to specify whether you want to terminate this self-hosted runner instance upon completion of a job (`single-task`) or to continuously poll for new available jobs (`continuous`).
 
 The possible values are:
 
@@ -203,7 +203,7 @@ runner:
 
 This parameter will disable launch-agent from attempting to automatically update itself, and stop making requests to CircleCI to check for new versions. This parameter is recommended to be set to `true` on server installations where version pinning is used.
 
-Note: Setting this parameter will require runner installations to be manually upgraded to receive new features, security updates, and bug fixes.
+Note: Setting this parameter will require self-hosted runner installations to be manually upgraded to receive new features, security updates, and bug fixes.
 
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
@@ -212,7 +212,7 @@ This parameter enables the “Rerun job with SSH” feature. Before enabling thi
 
 The address is of the form `*host:port*` and is displayed in the “Enable SSH” and “Wait for SSH” sections for a job that is rerun.
 
-NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the “Rerun job with SSH” feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
+NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the “Rerun job with SSH” feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the self-hosted runner is installed on and can be a proxy configuration.
 
 Example:
 
@@ -224,7 +224,7 @@ runner:
 
 ==== Considerations before enabling SSH debugging
 
-Task agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the system that the runner is installed on.
+Task agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the system that the self-hosted runner is installed on.
 
 * The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple launch agents are installed on the same host.
 * The SSH server will inherit the same user privileges and associated access authorizations as the task agent, defined by the <<#runner-command_prefix,runner.command_prefix parameter>>.

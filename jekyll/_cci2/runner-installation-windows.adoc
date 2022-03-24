@@ -3,16 +3,16 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation on Windows
+= CircleCI Self-hosted Runner Installation on Windows
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI runner on Windows. 
+This page describes how to install CircleCI self-hosted runners on Windows. 
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+NOTE: Please review the xref:runner-installation.adoc[Installing the Self-hosted CircleCI Runner] page to verify prerequisites and authentication.
 
 toc::[]
 
@@ -22,7 +22,7 @@ With this procedure, you install CircleCI launch agent and its dependencies, for
 
 Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
 
-*The Windows Server needs to be a domain member when you set this up in domain environments. The runner instance cannot run on a Windows Server operating as a domain controller.*
+*The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.*
 
 == Installation Steps
 
@@ -39,7 +39,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the Runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the self-hosted runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the launch agent starts automatically and begins looking for jobs to process.
 
@@ -47,7 +47,7 @@ After setup completes, the launch agent starts automatically and begins looking 
 
 == Uninstall / Reinstall Steps
 
-Uninstalling CircleCI runner will prepare the system for installation again.
+Uninstalling CircleCI self-hosted runners will prepare the system for installation again.
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.

@@ -3,21 +3,21 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner API
+= CircleCI Self-hosted Runner API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document contains all the external facing endpoints for the CircleCI runner API.
+:page-description: This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document contains all the external facing endpoints for the CircleCI runner API.
+This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
 
 toc::[]
 
 == Authentication Methods
 
-The CircleCI runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
+The CircleCI self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
 
 === Circle-Token (personal authentication)
 
@@ -60,7 +60,7 @@ This token is the same one used in the launch-agent setup.
 
 === GET /api/v2/runner
 
-Lists the available runners based on the specified parameters. It is mandatory to use one parameter to filter results.
+Lists the available self-hosted runners based on the specified parameters. It is mandatory to use one parameter to filter results.
 
 ==== Authentication Methods
 
@@ -84,13 +84,13 @@ Lists the available runners based on the specified parameters. It is mandatory t
 | string
 | query
 | false
-| filters the list of runners by specific resource class.
+| filters the list of sef-hosted runners by specific resource class.
 
 | namespace
 | string
 | query
 | false
-| filters the list of runners by namespace.
+| filters the list of self-hosted runners by namespace.
 |===
 
 ==== Examples
@@ -132,37 +132,37 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |items
 |[object]
 |true
-|array containing the runners
+|array containing the self-hosted runners
 
 |resource_class
 |string
 |true
-|runner resource class
+|self-hosted runner resource class
 
 |hostname
 |string
 |true
-|runner hostname
+|self-hosted runner hostname
 
 |name
 |string
 |true
-|runner name
+|self-hosted runner name
 
 |first_connected
 |string (date-time)
 |true
-|first time the runner was connected
+|first time the self-hosted runner was connected
 
 |last_connected
 |string (date-time)
 |true
-|last time the runner was connected
+|last time the self-hosted runner was connected
 
 |last_used
 |string (date-time)
 |true
-|last time the runner was used to run a job
+|last time the self-hosted runner was used to run a job
 
 |version
 |string

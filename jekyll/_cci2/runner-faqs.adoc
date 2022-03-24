@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner FAQs
+= CircleCI Self-hosted Runner FAQs
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This page answers the most frequently asked questions for the CircleCI self-hosted runner product. 
@@ -41,7 +41,7 @@ NOTE: No inbound connectivity is required by self-hosted runner. Any other requi
 
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
-== How do caching, workspaces, and artifacts work with CircleCI self-hosted runner?
+== How do caching, workspaces, and artifacts work with CircleCI self-hosted runners?
 
 Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. Caches, workspaces, and artifacts will be stored in the AWS us-east-1 region of S3. If your self-hosted runners are not in this region then you may see reduced performance.
 

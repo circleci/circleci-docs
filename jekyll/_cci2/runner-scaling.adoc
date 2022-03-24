@@ -1,10 +1,10 @@
 ---
-description: Learn how to scale CircleCI runners.
+description: Learn how to scale CircleCI self-hosted runners.
 version:
 - Cloud
 - Server v3.x
 ---
-= Scaling Runner
+= Scaling Self-hosted Runners
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -14,7 +14,7 @@ toc::[]
 
 == Introduction
 
-Maintaining a fixed compute fleet for CircleCI runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
+Maintaining a fixed compute fleet for CircleCI self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
 
 == Scaling data
 

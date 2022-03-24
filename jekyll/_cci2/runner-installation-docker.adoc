@@ -3,16 +3,16 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation with Docker
+= CircleCI Self-hosted Runner Installation with Docker
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI runner with Docker.
+This page describes how to install CircleCI self-hosted runner with Docker.
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Self-hosted Runner] page to verify prerequisites and authentication.
 
 toc::[]
 
@@ -22,7 +22,7 @@ The host needs to have Docker installed. Once the `runner` container is started,
 
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
-== Create a Dockerfile that extends the CircleCI runner image
+== Create a Dockerfile that extends the CircleCI self-hosted runner image
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
@@ -65,7 +65,7 @@ docker stop <container-name>
 
 == Remove the Docker container
 
-In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+In some cases you might need to fully remove a stopped self-hosted runner container from the system, such as when recreating a container using the same name.
 
 ```shell
 docker stop <container-name>; docker rm <container-name>;
