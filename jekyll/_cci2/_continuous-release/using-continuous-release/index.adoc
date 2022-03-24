@@ -6,6 +6,15 @@ If you are new to Vamp, begin with the Getting Started guide.
 
 // link to getting-started/index.adoc
 
+// Logging in
+
+// Might need to include something on projects and API tokens, too.
+
+// Dashboard
+
+// Notifications
+
+// Search
 
 include::applications.adoc[]
 

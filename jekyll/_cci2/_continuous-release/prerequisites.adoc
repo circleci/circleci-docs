@@ -4,6 +4,7 @@ To use Vamp, you will need the following:
 
 * kubectl
 * Kubernetes cluster
+* Containerized app
 * Ingress controller (unless you are not planning to expose any of your services)
 * Prometheus
 * DNS entry
@@ -23,6 +24,10 @@ If you are using EKS, Amazon provides their own https://docs.aws.amazon.com/eks/
 
 * https://cloud.google.com/kubernetes-engine/docs/quickstart[Creating a cluster with Google Kubernetes Engine] (GKE)
 * https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[Creating a cluster with Amazon Kubernetes Service (EKS)]
+
+=== Containerized app
+
+// signpost some instructions here, e.g. on creating and pushing a Dockerfile. Customers might have an existing CCI pipeline that builds and deploys a Docker container.
 
 === Ingress controller
 
