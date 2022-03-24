@@ -674,6 +674,7 @@ gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
     --condition=None
 ```
 
+NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
 
 endif::env-aws[]
 
