@@ -922,11 +922,11 @@ jobs:
 
 
 
-## 並列処理
+## 並列実行
 
 {: #parallelism }
 
-プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 _並列処理_により、指定した数の別々の Executor にテストを分散することができます。
+プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 _並列実行_により、指定した数の別々の Executor にテストを分散することができます。
 
 テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs)レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
@@ -948,7 +948,7 @@ jobs:
 ```
 
 
-![並列処理]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
 詳細は、[テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照して下さい。
 
@@ -958,9 +958,9 @@ jobs:
 
 {: #concurrency }
 
-In CircleCI, *concurrency* refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resource_class) for different executors. ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Performance または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
+CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Performance または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
 
-[設定ファイルのサンプル]({{site.baseurl}}/2.0/sample-config/#concurrent-workflow)に示す方法で並列処理を設定するには[ワークフローのオーケストレーション]({{site.baseurl}}/2.0/workflows/)を参照してください。
+[設定ファイルのサンプル]({{site.baseurl}}/2.0/sample-config/#concurrent-workflow)に示す方法で並列実行を設定するには[ワークフローのオーケストレーション]({{site.baseurl}}/2.0/workflows/)を参照してください。
 
 
 
