@@ -155,4 +155,5 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # SSH で接続します
           print(sys.version)
 ```
 
-- ``` - bash を上手に活用することで、何でも実行可能です。 `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
+- bash を上手に活用することで、何でも実行可能です。 
+            `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`

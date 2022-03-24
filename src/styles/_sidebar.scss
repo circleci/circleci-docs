@@ -120,6 +120,10 @@ $sidebar-spacing-base: 5px;
         color: $body-text-color;
         margin-left: 30px;
         display: inline-block;
+
+        &:hover{
+          color: $link-text-color;
+        }
       }
     }
 

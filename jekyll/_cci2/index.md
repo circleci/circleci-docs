@@ -2,7 +2,8 @@
 layout: classic-docs
 title: "Welcome to CircleCI Documentation"
 description: "Welcome to CircleCI Documentation"
-permalink: /2.0/
+permalink: /
+redirect_from: /2.0/
 toc: false
 page-type: index
 ---

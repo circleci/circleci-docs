@@ -19,7 +19,7 @@ CircleCI offers several execution environments. We call these **executors**. An 
 {: #docker }
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
 ```yml
@@ -32,10 +32,13 @@ jobs:
         # Commands run in the primary container
 ```
 
-Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-docker).
+Find out more about the `docker` executor in the [Using Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) section of the Choosing an Executor Type page.
 
 ## Machine
 {: #machine }
+
+Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+{: class="alert alert-warning"}
 
 {:.tab.machine.Cloud}
 ```yml
@@ -67,7 +70,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
+Find out more about the `machine` executor in the [Using machine]({{ site.baseurl }}/2.0/executor-types/#using-machine) section of the Choosing an Executor Type page.
 
 ## macOS
 {: #macos }
@@ -83,7 +86,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
+Find out more about the `macos` executor in the [Using macOS]({{ site.baseurl }}/2.0/executor-types/#using-macos) section of the Choosing an Executor Type page.
 
 ## Windows
 {: #windows }
@@ -141,7 +144,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor). See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
+Find out more about the `windows` executor in the [Using the Windows executor]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor) section of the Choosing an Executor Type page. See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See also
 {: #see-also }

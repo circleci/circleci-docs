@@ -20,7 +20,9 @@ CircleCI Server システムでは主に、Kubernetes ノード、Nomad クラ�
 
 これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
 
-通例どおり、リソースはできる限り非公開にすることが原則です。 CircleCI Server システムへのユーザー アクセスが VPN 経由に限られ、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 そうでない場合は、少なくとも CircleCI Server Traefik ロード バランサー用にパブリック サブネットを 1 つ用意する必要があります。
+通例どおり、リソースはできる限り非公開にすることが原則です。 CircleCI Server システムへのユーザー アクセスが VPN 経由に限られ、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 Otherwise, you will need at least one public subnet for the `circleci-server-traefik` load balancer.
+
+NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by Kong. Therefore, you will see a service named `circleci-server-traefik` but this service is actually for Kong.
 
 ただし、この場合には、パブリック サブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワーク ルールでアクセス スコープを設定することもお勧めします。
 

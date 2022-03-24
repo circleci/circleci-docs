@@ -39,6 +39,8 @@ macOS 実行環境についての理解を深めていただければ、CircleCI
 
 サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
 
+Please note, if you would like to test running the code in the example configuration file (below) yourself, you should either fork, or duplicate the example application from GitHub. The example configuration file is not guaranteed to work on any/all Xcode projects.
+
 ## サンプルの設定ファイル
 {: #example-configuration-file }
 

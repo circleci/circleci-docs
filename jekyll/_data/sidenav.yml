@@ -61,6 +61,8 @@ en:
           link: 2.0/artifacts/
         - name: Docker layer caching
           link: 2.0/docker-layer-caching/
+        - name: Concurrency
+          link: 2.0/concurrency/
         - name: Environment variables
           link: 2.0/env-vars/
         - name: Collecting test data
@@ -211,6 +213,8 @@ en:
           link: 2.0/orb-author-intro/
         - name: Author an Orb
           link: 2.0/orb-author/
+        - name: Author an Orb for Server
+          link: 2.0/orb-author-server/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orb Authoring Best Practices
@@ -347,7 +351,7 @@ en:
       - name: Help and Support
         link: 2.0/help-and-support/
 
-- name: Server Administration
+- name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v3.x Overview
@@ -383,11 +387,13 @@ en:
           link: 2.0/server-3-operator-overview
         - name: Metrics and Monitoring
           link: 2.0/server-3-operator-metrics-and-monitoring
+        - name: Introduction to Nomad
+          link: 2.0/server-3-operator-nomad
         - name: Configuring a Proxy
           link: 2.0/server-3-operator-proxy
         - name: User Accounts
           link: 2.0/server-3-operator-user-accounts
-        - name: Orbs
+        - name: Managing Orbs
           link: 2.0/server-3-operator-orbs
         - name: VM Service
           link: 2.0/server-3-operator-vm-service
@@ -451,6 +457,10 @@ en:
           link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
           link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
+    
+- name: Server Administration v2.x
+  icon: icons/sidebar/admin.svg
+  children:
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
@@ -876,6 +886,9 @@ ja:
         - name: Author an Orb
           link: ja/2.0/orb-author/
           i18n_name: Orbs オーサリング
+        - name: Author an Orb for Server
+          link: ja/2.0/orb-author-server/
+          i18n_name: サーバー Orbs オーサリング
         - name: Orb Author FAQ
           link: ja/2.0/orb-author-faq/
           i18n_name: Orbs オーサリング FAQ
@@ -1112,6 +1125,9 @@ ja:
         - name: Metrics and Monitoring
           i18n_name: メトリクスとモニタリング
           link: ja/2.0/server-3-operator-metrics-and-monitoring
+        - name: Introduction to Nomad
+          i18n_name: Nomad 概要
+          link: ja/2.0/server-3-operator-nomad
         - name: Configuring a Proxy
           i18n_name: プロキシの設定
           link: ja/2.0/server-3-operator-proxy
@@ -1119,7 +1135,8 @@ ja:
           i18n_name: ユーザー管理
           link: ja/2.0/server-3-operator-user-accounts
         - name: Orbs
-          i18n_name: Orbs
+          i18n_name: Managing Orbs
+          i18n_name: Orbs　の管理
           link: ja/2.0/server-3-operator-orbs
         - name: VM Service
           i18n_name: VM サービスの設定

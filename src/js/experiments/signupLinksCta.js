@@ -1,7 +1,9 @@
 /**
  * This experiment adds CTA signup buttons to the docs/2.0/first-steps document.
  * */
-const isFirstStepsPage = window.location.pathname == '/docs/2.0/first-steps/';
+const isFirstStepsPage =
+  window.location.pathname == '/docs/2.0/first-steps/' ||
+  window.location.pathname == '/docs/ja/2.0/first-steps/';
 
 function handleGithubDropdownClick() {
   const dropdown = $('.gh-signup-dropdown');
@@ -42,5 +44,16 @@ window.OptimizelyClient.getVariationName({
     $('.signup-and-try-experiment-block').toggleClass('show');
     handleGithubDropdownClick();
     handleClickedLink();
+  }
+
+  if (variation === 'control' && isFirstStepsPage) {
+    $('a[href="https://circleci.com/signup/"]').click((e) => {
+      window.AnalyticsClient.trackAction(
+        'dd_first-steps-signup-cta_test_control_link',
+        {
+          text: e.target.innerText,
+        },
+      );
+    });
   }
 });
