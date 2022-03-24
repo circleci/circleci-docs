@@ -674,6 +674,7 @@ gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
     --condition=None
 ```
 
+NOTE: If you are switching from static json credentials to Workload Identity, you must delete the keys from GCP in order to avoid the key misuse.
 
 endif::env-aws[]
 

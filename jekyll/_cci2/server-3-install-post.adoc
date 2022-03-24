@@ -298,6 +298,8 @@ If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/
 the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account will need the
 `iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
 
+NOTE: If you are switching from static json credentials to Workload Identity, you must delete the keys from GCP in order to avoid the key misuse.
+
 ==== Step 3 - Install and start Velero
 
 * Run one of the following `velero` `install` commands, depending on how you authorized the service account. This will create a namespace called `velero` and install all the necessary resources to run Velero.
