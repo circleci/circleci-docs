@@ -31,8 +31,7 @@ KOTS の管理者コンソールにアクセスします。 Get to the KOTS Admi
 
 設定で次の項目を探して入力します。
 
-. *Output Processor Load Balancer Hostname* -
-The following command will provide the IP address of the service
+. *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)のホストネーム]*: 次のコマンドにより、サービスの IP アドレスを取得します
 +
 ```shell
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
@@ -154,11 +153,11 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 以下の情報も必要です。
 
-* The GCP Project you want to run Nomad clients in.
-* The GCP Zone you want to run Nomad clients in.
-* The GCP Region you want to run Nomad clients in.
-* The GCP Network you want to run Nomad clients in.
-* The GCP Subnetwork you want to run Nomad clients in.
+* Nomad クライアントを実行する GCP プロジェクト
+* Nomad クライアントを実行する GCP ゾーン
+* Nomad クライアントを実行する GCP リージョン
+* Nomad クライアントを実行する GCP ネットワーク
+* Nomad クライアントを実行する GCP サブネットワーク
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
