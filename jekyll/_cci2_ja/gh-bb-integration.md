@@ -100,19 +100,19 @@ CircleCI は個人およびデフォルトの組織と VCS ユーザー名が一
 
 テストプロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイキーに加えて GitHub ユーザー キーも必要となります。 これは、 GitHub ユーザーキーはユーザーの_すべて_の GitHub リポジトリに対してアクセス権を持ちますが、デプロイキーは*単一の*リポジトリに対してのみ有効であるためです。
 
-プロジェクトの **[Project Settings (プロジェクト設定)] > [SSH keys (SSH キー)]** のページで、CircleCI に渡す GitHub のユーザーキーを指定します。 **[User Key (ユーザーキー)]** のセクションまでスクロールし、 **[Authorize with GitHub (GitHub で認証する)]** ボタンをクリックします。 CircleCI は、この新しい SSH 鍵を作成し、それを GitHub のユーザー アカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
+プロジェクトの **[Project Settings (プロジェクト設定)] > [SSH keys (SSH キー)]** のページで、CircleCI に渡す GitHub のユーザーキーを指定します。 **[User Key (ユーザーキー)]** のセクションまでスクロールし、 **[Authorize with GitHub (GitHub で認証する)]** ボタンをクリックします。 CircleCI は、この新しい SSH キーを作成し、それを GitHub のユーザーアカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
 
 ## ユーザーキーのセキュリティ
 {: #user-key-security }
 
 CircleCI が SSH キーを公開することはありません。
 
-SSH 鍵は信頼するユーザーとのみ共有してください。 GitHub collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
+SSH キーは信頼するユーザーとのみ共有してください。 ユーザーキーを使用するプロジェクトの場合、すべての GitHub コラボレーターがリポジトリにアクセスできるため、ユーザーキーはソースコードを委ねられる人とのみ共有してください。
 
 ## ユーザーキーアクセスに関するエラーメッセージ
 {: #user-key-access-related-error-messages }
 
-ユーザーキーを追加する際に表示されがちなエラーを挙げています。
+下記はユーザーキーを追加する際によく表示されるエラーです。
 
 **Python**: `pip install` ステップ実行中
 
@@ -129,21 +129,21 @@ Permission denied (publickey).
 ## マシンユーザーによるアクセス制御
 {: #controlling-access-via-a-machine-user }
 
-For fine-grained access to multiple repositories, it is best practice to create a machine user for your CircleCI projects. A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
+複数のリポジトリへのアクセス権をきめ細かく設定するには、CircleCI プロジェクト用にマシンユーザーを作成することをお勧めします。 [マシンユーザー](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users)とは、自動化タスクを実行するために作成する GitHub ユーザーです。 マシンユーザーの SSH キーを使用すれば、リポジトリへのアクセス権を持つ任意のユーザーにプロジェクトのビルド、テスト、デプロイを許可することができます。 マシンユーザーを作成することにより、単一ユーザーにリンクされた認証情報を紛失するリスクも低減できます。
 
-マシンユーザーのSSHキーを使用するには、以下の手順で行います。
+マシンユーザーの SSH キーを使用するには、以下の手順に従います。
 
-**メモ:** これらの手順を実行するには、マシン ユーザーが管理者アクセス権を持っている必要があります。 When you have finished adding projects, you can revert the machine user to read-only access.
+**注:** これらの手順を実行するには、マシンユーザーが管理者アクセス権を持っている必要があります。 プロジェクトの追加が終了したら、マシンユーザーのアクセス権を読み取り専用に戻すとよいでしょう。
 
-1. Create a machine user by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
+1. [GitHub の説明](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users)に従ってマシンユーザーを作成します。
 
 2. GitHub にマシンユーザーとしてログインします。
 
-3. [CircleCI にログイン](https://circleci.com/login)します。 When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
+3. [CircleCI にログイン](https://circleci.com/login)します。 CircleCI を承認するよう GitHub から要求されたら、[**Authorize application (アプリケーションを承認)**] ボタンをクリックします。
 
-4. From the Add Projects page, follow all projects you want the machine user to have access to.
+4. [Add Project (プロジェクトを追加する)] のページから、マシンユーザーにアクセスを許可するプロジェクトをフォローします。
 
-5. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
+5. **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH キーのチェック アウト)]** ページで、[**Authorize With GitHub (GitHub で承認)**] ボタンをクリックします。 This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
 6. **[Create and add XXXX user key (XXXX ユーザー キーを作成して追加)]** ボタンをクリックします。
 
