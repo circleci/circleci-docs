@@ -278,30 +278,30 @@ jobs:
 ### これらのキーの使用方法
 {: #how-are-these-keys-used }
 
-When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. したがって、秘密鍵は以下の用途で使用されます。
+CircleCI がプロジェクトをビルドするときには、プライベートキーが `.ssh` ディレクトリにインストールされ、それに続いて SSH がバージョン管理プロバイダーと通信するように設定されます。 したがって、プライベートキーは以下の用途で使用されます。
 
-- Checking out the main project
+- メインプロジェクトのチェックアウト
 - いずれかの GitHub でホスティングされるサブモジュールのチェックアウト
 - いずれかの GitHub でホスティングされるプライベート依存関係のチェックアウト
-- Automatic git merging/tagging/etc
+- Git の自動マージ、タグ付けなど
 
 そのため、デプロイ キーは、追加のプライベートな依存関係を持つプロジェクトに対しては十分に強力ではありません。
 
 ### これらのキーのセキュリティ
 {: #what-about-security }
 
-CircleCI が生成するチェックアウト キー ペアの秘密鍵は CircleCI システムを出ることはなく (公開鍵のみ GitHub に転送)、また、ストレージ上では安全に暗号化されています。 しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH 鍵を使用できる開発者は、この鍵に直接アクセスできます。
+CircleCI が生成するチェックアウトキーペアのプライベートキーが CircleCI システムの外に出ることはなく (パブリックキーのみ GitHub に転送)、ストレージ上では安全に暗号化されています。 しかし、これらはビルドコンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH キーを使用できる開発者は、このキーに直接アクセスできます。
 
-**デプロイ キーとユーザー キーの違い**
+**デプロイキーとユーザーキーの違い**
 
-GitHub がサポートするキーの種類は、デプロイ キーとユーザー キーだけです。 Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
+GitHub がサポートするキーの種類は、デプロイキーとユーザーキーだけです。 デプロイキーはグローバルに一意であり (たとえば、複数のリポジトリへのアクセス権を持つデプロイキーを作成するメカニズムはありません)、またユーザーキーには、それに関連付けられているユーザーとは別の*スコープ*の概念はありません。
 
-複数のリポジトリへのアクセス権をきめ細かく設定するには、GitHub でマシン ユーザーと呼ばれるアカウントの作成を検討してください。 このユーザーにビルドが必要とする権限を正確に付与し、次にそのユーザー キーを CircleCI 上のプロジェクトに関連付けます。
+複数のリポジトリへのアクセス権をきめ細かく設定するには、GitHub でマシンユーザーと呼ばれるアカウントの作成を検討してください。 このユーザーにビルドが必要とする権限を正確に付与し、次にそのユーザー キーを CircleCI 上のプロジェクトに関連付けます。
 
 ## SSH ホストの信頼性の確立
 {: #establishing-the-authenticity-of-an-ssh-host }
 
-When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for GitHub or BitBucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it's connecting to is authentic. The `checkout`job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+SSH キーを使用してレポジトリをチェックアウトするとき、既知のホストファイル (`~/.ssh/known_hosts`) に GitHub または Bitbucket のフィンガープリントを追加する必要があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブステップによって自動的に処理されます。カスタムのチェックアウトコマンドを使用したい場合には、以下のコマンドを使用する必要があります。
 
 ```shell
 mkdir -p ~/.ssh
@@ -311,7 +311,7 @@ bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqT
 ' >> ~/.ssh/known_hosts
 ```
 
-SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. たとえば、以下のようになります。
+対象サーバーの SSH キーは `ssh-keyscan <host>` を実行することで取得できます。 そして、取得されたテキストのうち `ssh-rsa` プレフィックスがついているものをジョブの `known_hosts` ファイルに追加することで、利用できるようになります。 たとえば、以下のようになります。
 
 ```shell
 ➜  ~ ssh-keyscan github.com
@@ -322,7 +322,7 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 ➜  ~ ✗
 ```
 
-You can add the key to known_hosts by running the following command:
+以下のコマンドを実行すると、キーを known_hosts に追加できます。
 ```shell
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 ```
