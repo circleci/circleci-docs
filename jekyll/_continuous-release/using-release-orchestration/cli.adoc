@@ -117,7 +117,3 @@ Retrieve the latest release for the specified application and service and check 
 [source,shell]
 vamp watch release <service-name> --application=<application-name>
 
-Example output:
-
-// replace this with a screenshot
-
