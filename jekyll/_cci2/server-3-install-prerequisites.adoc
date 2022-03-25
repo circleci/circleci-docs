@@ -45,7 +45,7 @@ Download and install the following software before continuing:
 | {helmversion} or greater
 | Kubernetes Package Management
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux].
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
 | {kotsversion} *
 | Replicated Kubernetes Application Management
 
