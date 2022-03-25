@@ -16,23 +16,20 @@ CircleCI's dynamic configuration feature allows you to:
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to using multiple repositories to store your code. In the case of using a monorepo, it would be optimal to only trigger certain builds in specific areas of your project. Otherwise, all of your microservices/sub-projects would go through the entirety of your build, test, and deployment processes when any single update is introduced.
 
-To use our dynamic configuration feature, you can add the key `setup` with a value of `true` to the top-level of your parent configuration file (in the `.circleci/` directory). This will designate that `config.yaml` as a `setup workflow` configuration, enabling you and your team to get up and running with dynamic configuration.
-
 ## Getting started with dynamic config in CircleCI
 {: #getting-started-with-dynamic-config-in-circleci }
 
 To get started with Dynamic Config in CircleCI:
 
-- Select the project you are interested in, in the **Projects** dashboard from the CircleCI application.
-- Click the **Project Settings** button in the upper-right corner.
-- On the left-hand panel, select **Advanced**.
-- Towards the bottom, toggle the switch for **Enable dynamic config using setup workflows** to the "on" position, as shown below:
+1. In the **Projects** dashboard from the CircleCI web application, select your project.
+2. Click the **Project Settings** button in the upper-right corner.
+3. On the left-hand panel, select **Advanced**.
+4. Scroll to the **Enable dynamic config using setup workflows** setting, and toggle it to the "on" position, as shown below:
 
 ![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
-Now, your project has the ability to dynamically generate and update configuration.
-
-Note: While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will not be used until you add the key `setup` with a value of `true` to that `config.yml`.
+5. While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will **not* be used until you add the key `setup` with a value of `true` to that `config.yml`.
+  Add the key `setup: true` to the top-level of your parent configuration file (in the `.circleci/` directory). This will designate that `config.yml` as a `setup workflow` configuration.
 
 When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation)
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
