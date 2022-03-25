@@ -30,6 +30,8 @@ en:
     - name: Using Release Orchestration
       link: continuous-release/using-release-orchestration/using-release-orchestration
       children:
+        - name: CLI 
+          link: continuous-release/using-release-orchestration/cli
         - name: Dashboard
           link: continuous-release/using-release-orchestration/using-release-orchestration
         - name: Applications
@@ -38,16 +40,16 @@ en:
           link: continuous-release/using-release-orchestration/clusters
         - name: Ingress
           link: continuous-release/using-release-orchestration/ingress
-        - name: Services 
-          link: continuous-release/using-release-orchestration/services
+        - name: Metadata
+          link: continuous-release/using-release-orchestration/metadata
+        - name: Policies
+          link: continuous-release/using-release-orchestration/policies
         - name: Releases 
           link: continuous-release/using-release-orchestration/releases
-        - name: Policies
-          link: continuous-release/using-release-orchestration/policies  
         - name: Segments 
           link: continuous-release/using-release-orchestration/segments
-        - name: Using the CLI 
-          link: continuous-release/using-release-orchestration/cli
+        - name: Services 
+          link: continuous-release/using-release-orchestration/services
     - name: Release Agent 
       children: 
         - name: Installing the Release Agent 

@@ -30,9 +30,151 @@ When you have successfully released your service, click *Done* in the bottom lef
 
 For Vamp to release a version of a service, the workload must be labelled correctly.
 
-IMPORTANT: Vamp requires that the `app` and the `version` labels on the Kubernetes deployment and pod template match. If the labels do not match, the Release Agenty ignores the deployment and the new version is not released.
+IMPORTANT: Vamp requires that the `app` and the `version` labels on the Kubernetes deployment and pod template match. If the labels do not match, the Release Agent ignores the deployment and the new version is not released.
 
 // provide an example here, highlighting the relevant parts of the YAML file.
+
+==== Canary Release example
+
+This is the Kubernetes Deployment YAML for version 1.0.0 of a demo service.
+
+The `app=particles` and `version=1.0.0` labels are set in three places:
+
+* `metadata.labels` (lines 7-8)
+* `spec.selector.matchLabels` (lines 12-13)
+* `spec.template.metadata.labels` (lines 18-19)
+
+[source,yaml]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: particles-v1.0.0
+  namespace: production
+  labels:
+    app: particles
+    version: 1.0.0
+spec:
+  selector:
+    matchLabels:
+      app: particles
+      version: 1.0.0
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: particles
+        version: 1.0.0
+    spec:
+      containers:
+      - name: particles
+        ports:
+        - containerPort: 5000
+
+For comparison, this is the Kubernetes Deployment YAML for version 1.0.1 of a demo service.
+
+The `app=particles` and `version=1.0.1` labels are set in three places:
+
+* `metadata.labels` (lines 7-8)
+* `spec.selector.matchLabels` (lines 12-13)
+* `spec.template.metadata.labels` (lines 18-19)
+
+[source,yaml]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: particles-v1.0.1
+  namespace: production
+  labels:
+    app: particles
+    version: 1.0.1
+spec:
+  selector:
+    matchLabels:
+      app: particles
+      version: 1.0.1
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: particles
+        version: 1.0.1
+    spec:
+      containers:
+      - name: particles
+        ports:
+        - containerPort: 5000
+
+==== Validation Release example
+
+[IMPORTANT] 
+.Validation Releases only
+====
+Do not set a version label on the spec.selector.matchLabels. Doing so will cause rolling updates to the Deployment to fail.
+====
+
+This is the Kubernetes Deployment YAML for version 1.0.0 of a demo service.
+
+The `app=particles` and `version=1.0.0` labels are set in two places:
+
+* `metadata.labels` (lines 7-8)
+* `spec.template.metadata.labels` (lines 12-13)
+
+[source,yaml]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: particles
+  namespace: production
+  labels:
+    app: particles
+    version: 1.0.0
+spec:
+  selector:
+    matchLabels:
+      app: particles
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: particles
+        version: 1.0.0
+    spec:
+      containers:
+      - name: particles
+        ports:
+        - containerPort: 5000
+
+For comparison, this is the Kubernetes Deployment YAML for version 1.0.1:
+
+The `app=particles` and `version=1.0.0` labels are set in two places:
+
+* `metadata.labels` (lines 7-8)
+* `spec.template.metadata.labels` (lines 12-13)
+
+[source,yaml]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: particles
+  namespace: production
+  labels:
+    app: particles
+    version: 1.0.0
+spec:
+  selector:
+    matchLabels:
+      app: particles
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: particles
+        version: 1.0.0
+    spec:
+      containers:
+      - name: particles
+        ports:
+        - containerPort: 5000
 
 [sidebar]
 You can now proceed to the <<next-steps#,Next Steps>>.

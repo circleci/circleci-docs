@@ -16,7 +16,6 @@ From this Applications tab, you can also access the following settings:
 * <<installing-release-agent#,Release Agent>>
 installation 
 * <<services#,Services>>
-* <<webhooks#,Webhooks>>
 * <<metadata#,Metadata>>
 
 == Creating an application

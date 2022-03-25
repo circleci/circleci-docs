@@ -4,8 +4,42 @@
 :icons: font
 :toc: macro
 
+You can create and edit two types of metadata in Vamp: application metadata and service metadata.
 
 == Application metadata
 
+To access Application metadata, click the _Metadata_ tab under _Applications_.
+
+image::application-metadata.png[Application metadata]
+
+=== Adding application metadata
+
+To add metadata to your application, click the blue *+* icon then enter your key-value pair. When you have finished, click the blue tick icon to save your metadata.
+
+You will see a pop-up message to confirm that your metadata has been added.
+
+=== Deleting application metadata
+
+To delete application metadata, click the trash icon next to the key-value pair in the list.
+
+If you accidentally delete metadata, you can restore it by clicking the red icon next to the tick.
 
 == Service metadata
+
+To access Service metadata, click the _Metadata_ tab under your Service.
+
+image::service-metadata.png[Service metadata]
+
+If you have already released a service through Vamp, you will see some CircleCI annotations.
+
+=== Adding service metadata
+
+To add your own service metadata, click the blue *+* icon. Enter your key-value pair, then choose an annotation type: annotation, label, or custom. 
+
+When you have finished, click the blue tick icon to save your metadata. You will see a pop-up message to confirm that your metadata has been added.
+
+=== Deleting service metadata
+
+To delete application metadata, click the trash icon next to the key-value pair in the list.
+
+If you accidentally delete metadata, you can restore it by clicking the red icon next to the tick.
