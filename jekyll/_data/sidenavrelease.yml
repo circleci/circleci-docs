@@ -46,10 +46,6 @@ en:
           link: continuous-release/using-release-orchestration/policies  
         - name: Segments 
           link: continuous-release/using-release-orchestration/segments
-        - name: Metrics 
-          link: continuous-release/using-release-orchestration/metrics
-        - name: Webhooks
-          link: continuous-release/using-release-orchestration/webhooks
         - name: Using the CLI 
           link: continuous-release/using-release-orchestration/cli
     - name: Release Agent 

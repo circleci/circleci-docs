@@ -6,6 +6,10 @@
 
 This documentation provides an overview of the main concepts used in  Release Orchestration. For more details and examples, see the <<using-release-orchestration/using-release-orchestration#,Using Release Orchestration>> guide. Or you can create your first application with the <<getting-started/getting-started#,Getting Started>> guide.
 
+== What is Vamp?
+
+Vamp is a _Release Orchestration_ system. It extends and enriches your current CI/CD solution with automated and smart features to achieve a controlled, safe, and scalable process for your release.
+
 
 == What is Release Orchestration?
 
