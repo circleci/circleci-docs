@@ -32,13 +32,13 @@ To access a specific project's insights, view a pipeline's workflow and click
  clicking on the **actions** button while viewing the _pipelines dashboard_.
 
 {:.tab.insight-access.Access_by_sidebar}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
+![Access insights from the CircleCI web app sidebar]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
 
 {:.tab.insight-access.Access_by_pipeline}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
+![Access insights from a pipeline in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
 
 {:.tab.insight-access.Access_by_workflow}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
+![Access insights from a workflow in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
 
 ### Workflow overview
