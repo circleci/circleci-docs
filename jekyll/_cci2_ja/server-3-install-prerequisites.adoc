@@ -45,7 +45,7 @@ image::server-install-flow-chart-phase1.png[Flow chart showing the installation 
 | {helmversion} 以上
 | Kubernetes パッケージの管理
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux].
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.64.0/kots_darwin_all.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.64.0/kots_linux_amd64.tar.gz[Linux].
 | {kotsversion} *
 | Replicated Kubernetes アプリケーションの管理
 
