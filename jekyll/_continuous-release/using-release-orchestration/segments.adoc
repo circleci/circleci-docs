@@ -8,7 +8,7 @@ A segment is a group of users who share a characteristic, for example, users in 
 
 The segments list shows the reusable user segments available for use in policies.
 
-// screenshot
+image::segments-cobrand.png[Segments list]
 
 Vamp comes with a library of commonly used user segments, covering major web browsers and mobile devices.
 
@@ -18,9 +18,7 @@ It also includes example user segments that demonstrate how you can target users
 
 To create a new segment, click the *+Create Segment* button in the top right-hand corner of the _Segments_ page.
 
-// screenshot of tab
-
-// screenshot of form
+image::create-segment.png[Create segment]
 
 === Name
 

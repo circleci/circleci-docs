@@ -1,3 +1,5 @@
+image::services-create-1.png[Create service]
+
 === Name
 
 Enter a unique name for your service. This name is displayed wherever your application is used, including external notifications like Slack.
@@ -16,6 +18,8 @@ API-based services exposes a REST-based or GraphQL-based API and can be released
 
 Message-based services either do not expose an API, or expose an API using a message system like NATS. This type of service cannot be progressively released.
 
+image::services-create-2.png[Create service]
+
 === API-based Services Type
 
 An API-based service can be either headed or headless. A managed Kubernetes Service will be created for a headed service using the specified container port. Only headed services can be released progressively.
@@ -32,8 +36,6 @@ There are several ways to find the container port for your service:
 * In Dockerfile, look for an `EXPOSE` instruction.
 * From a running Docker container, use the `docker port <container-id | container-name>` command.
 * For a Kubernetes deployment, look for the `containerPort` value in your YAML file.
-
-image::quickstart-step2-bottom.png[Step 2 of Quick Start Guide - Kubernetes details]
 
 === Workload Type
 

@@ -8,7 +8,16 @@ In Vamp, an application is a collection of microservices sharing the same Kubern
 
 You can view your applications under the _Applications_ tab. Click the *+* sign to display which versions of each service are currently deployed for the application and their status.
 
-// Screenshot - circle the + sign
+image::applications.png[Applications]
+
+From this Applications tab, you can also access the following settings:
+
+* <<ingress#,Ingress>>
+* <<installing-release-agent#,Release Agent>>
+installation 
+* <<services#,Services>>
+* <<webhooks#,Webhooks>>
+* <<metadata#,Metadata>>
 
 == Creating an application
 
@@ -37,3 +46,4 @@ Click the red *Delete application* button in the bottom left-hand corner. You wi
 // add screenshot
 
 You will see a pop-up message to confirm that your application has been deleted.
+

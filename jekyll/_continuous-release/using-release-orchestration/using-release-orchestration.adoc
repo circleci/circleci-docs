@@ -12,9 +12,10 @@ The Dashboard provides an overview of all the current and recent activity and al
 
 You can access the Dashboard through https://vamp.cloud[vamp.cloud].
 
-=== Logging in
+image::vamp-dashboard.png[Dashboard]
 
-// Might need to include something on projects and API tokens, too.
+
+=== Logging in
 
 Once you have logged in, you will see your name in the top right-hand corner. Underneath your name, you can:
 
@@ -38,7 +39,7 @@ From the Dashboard, you can access the following tabs:
 
 // Notifications
 
-=== Notifications
+=== Viewing notifications
 
 In the top right-hand corner of the Dashboard, you can view your notifications. Click the trash icon to remove them individually, or click *Remove All* to clear the list.
 
@@ -47,6 +48,4 @@ In the top right-hand corner of the Dashboard, you can view your notifications. 
 === Searching
 
 To search your releases, policies, and users, click the magnifying glass icon in the top right-hand corner of the Vamp dashboard. The icon might not be visible unless your browser window is maximized.
-
-// screenshot
 

@@ -36,20 +36,20 @@ en:
           link: continuous-release/using-release-orchestration/applications
         - name: Clusters 
           link: continuous-release/using-release-orchestration/clusters
+        - name: Ingress
+          link: continuous-release/using-release-orchestration/ingress
         - name: Services 
           link: continuous-release/using-release-orchestration/services
         - name: Releases 
           link: continuous-release/using-release-orchestration/releases
+        - name: Policies
+          link: continuous-release/using-release-orchestration/policies  
         - name: Segments 
           link: continuous-release/using-release-orchestration/segments
-        - name: Policies
-          link: continuous-release/using-release-orchestration/policies
         - name: Metrics 
           link: continuous-release/using-release-orchestration/metrics
         - name: Webhooks
           link: continuous-release/using-release-orchestration/webhooks
-        - name: Integrations
-          link: continuous-release/using-release-orchestration/integrations
         - name: Using the CLI 
           link: continuous-release/using-release-orchestration/cli
     - name: Release Agent 

@@ -6,7 +6,7 @@
 
 The _Ingress_ tab shows a list of the domains associated with the selected application and the paths and services exposed by the application. 
 
-// screenshot
+image::application-edit-ingress-cobrand.png[Edit ingress]
 
 == Domains
 
@@ -14,29 +14,33 @@ The _Ingress_ tab shows a list of the domains associated with the selected appli
 
 To create a domain, click the the blue *+* button.
 
-// screenshot
+Enter the fully qualified domain name that you want to use for your application. For example, _particles.mydomain.com_.
 
-// need to use some includes here to avoid duplication with Getting Started.
+TIP: Applications can be exposed as either a primary domain, such as _mydomain.com_, or a subdomain, such as _app.mydomain.com_.
+
+WARNING: Exposing multiple applications on the same primary domain or subdomain is not supported. For example, mydomain.com/app1 and mydomain.com/app2 is not supported.
+
+==== Kubernetes TLS Secret Name
+
+If you enable TLS, you need to provide the name of a Kubernetes Secret for the TLS certificates.
+
+If you are using https://cert-manager.io/docs/[cert-manager] or a similar project to dynamically provision TLS certificates, use the name of the application as the certificate name, for example, _my-application-tls_.
+If you already have a TLS certificate for your domain, enter the name of the Kubernetes Secret that contains the certificate chain.
 
 === Editing a Domain
 
 To edit a domain, click the pencil icon next to the domain you wish to change.
 
-// screenshot
-
-
 === Creating a Route
 
-To create a domain, click the the blue *+* button.
+To expose a service you need to give it a URL path.
 
-// screenshot
-
-// need to use some includes here to avoid duplication with Getting Started.
+To create a route, click the the blue *+* button.
 
 === Editing a Route
 
-// use an include here
-
 To edit a path, click on the pencil icon next to the path you wish to change.
 
-// screenshot
+=== Deleting a Route
+
+To delete a path, click the trash icon next to the path name.

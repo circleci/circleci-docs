@@ -1,6 +1,8 @@
 :page-liquid:
 :icons: font
 
+image::clusters-create-cobrand.png[Edit ingress]
+
 === Name
 
 This is the name displayed when you choose a cluster as part of creating an application.

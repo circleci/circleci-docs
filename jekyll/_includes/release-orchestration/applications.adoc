@@ -1,3 +1,5 @@
+image::application-create-cobrand.png[Releases running]
+
 === Name
 
 Enter a unique name for your application. This name is displayed wherever your application is used, including external notifications like Slack.
