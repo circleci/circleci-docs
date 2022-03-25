@@ -31,10 +31,10 @@ To get started with Dynamic Config in CircleCI:
 5. While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will **not* be used until you add the key `setup` with a value of `true` to that `config.yml`.
   Add the key `setup: true` to the top-level of your parent configuration file (in the `.circleci/` directory). This will designate that `config.yml` as a `setup workflow` configuration.
 
-When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation)
-[`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
+When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called (**NOTE:** this does not apply if you desire to conditionally execute workflows or steps based on **updates to specified files**, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
 
-
+## How dynamic config works
+{: #how-dynamic-config-works }
 
 CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that `setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml` that potentially exists in outside directories.
 
