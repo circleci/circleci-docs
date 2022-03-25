@@ -38,9 +38,18 @@ When using dynamic configuration, at the end of the `setup workflow`, a `continu
 
 CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that `setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml` that potentially exists in outside directories.
 
-For a basic example on how to use `setup workflows` for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration). Included in the cookbook are other more in-depth examples, which will be updated as this feature matures.
+Behind the scenes, the continuation configuration is implemented as a call to a public pipeline continuation API. This API accepts a _continuation_ key, which is a secret, unique-per-pipeline key, that is automatically injected into the environment of jobs executed as part of a setup workflow. It also accepts a configuration string, as well as a set of pipeline parameters.
 
-For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when using CircleCI's dynamic configuration, see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
+Note that:
+- the setup phase requires `version: 2.1` or higher,
+- a pipeline can only be continued once,
+- a pipeline can only be continued within six hours of its creation,
+- a pipeline cannot be continued with another setup configuration,
+- there can only be one workflow in the setup configuration,
+- pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger time,
+- pipeline parameters declared in the setup configuration must also be declared in the continuation configuration, and can be used at continuation time
+
+For a basic example on how to use `setup workflows` for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
 
 ## Dynamic configuration FAQs
 {: #dynamic-config-faqs }
