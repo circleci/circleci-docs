@@ -84,7 +84,7 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-**Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application.
+**Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
 
 ## Adding multiple keys with blank hostnames
 {: #adding-multiple-keys-with-blank-hostnames }
