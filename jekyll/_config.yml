@@ -84,7 +84,7 @@ asciidoctor:
   base_dir: :docdir
   safe: unsafe
   attributes:
-    imagesdir: /assets/img/docs/
+    imagesdir: jekyll/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
     serverversion: 3.3.1
