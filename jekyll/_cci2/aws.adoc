@@ -211,7 +211,7 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 
 .. Copy the Client ID and Secret from GitHub and paste it into the relevant fields, then click Test Authentication.
 
-.. If you are using GitHub.com, move on to step 6. If using Github Enterprise, you will also need to follow some suplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
+.. If you are using GitHub.com, move on to step 6. If using Github Enterprise, you will also need to follow some supplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
 ... Navigate to Personal Settings (top right) > Developer Settings > Personal Access Tokens.
 ... Click “generate new token”. Name the token appropriately to prevent accidental deletion. Do not tick any of the checkboxes, we only require the default public read-level access so no extra permissions are required. We recommend this token should be shared across your organization rather than being owned by a single user.
 ... Copy the new token and paste it into the GitHub Enterprise Default API Token field.
@@ -219,17 +219,17 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 .Enter Github Enterprise Token
 image::ghe_token.png[Github Integration]
 
-. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
+. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed run-through of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
 
 . **Privacy** – We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
 +
 .Privacy Settings
-image::privacy.png[]
+image::privacy.png[Privacy settings]
 
 . **Storage** – We recommend using S3 for storage and all required fields for Storage are pre-populated. The IAM user, as referred to in the <<aws-prereq#planning,planning>> section of this document, is used here.
 +
 .Storage Options
-image::storage.png[]
+image::storage.png[Storage options]
 
 . **Enhanced AWS Integration** – Complete this section if you are using 1.0 builders.
 // explain enhanced AWS integration 1.0 or just say ignore
@@ -247,7 +247,7 @@ CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be
 . **AWS Cloudwatch or Datadog Metrics** can be configured for your installation. Set either of these up in the relevant sections. For more information read our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
 .Metrics
-image::metrics_setup.png[]
+image::metrics_setup.png[AWS Cloudwatch and Datadog metrics]
 
 . **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you receive through Telegraf. For more on this read our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
 
@@ -265,7 +265,7 @@ NOTE: If the Management Console reports `Failure reported from operator: no such
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .Start CircleCI from your Dashboard
-image::dashboard.png[]
+image::dashboard.png[CircleCI server dashboard]
 
 . After build containers have started and images have been downloaded, the first build should begin immediately. If there are no updates after around **15 minutes**, and you have clicked the Refresh button, contact https://support.circleci.com/hc/en-us[CircleCI support] for assistance.
 
