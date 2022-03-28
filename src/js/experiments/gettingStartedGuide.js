@@ -6,10 +6,10 @@
  **/
 function addNewBadgeToSidebar() {
   const NEW_SIDEBAR_HTML = `
-    <a class="" href="/docs/2.0/getting-started/"
+    <a class="" style="display: flex; align-items: center" href="/docs/2.0/getting-started/"
        data-section="getting-started" data-proofer-ignore="">
       <span>Quickstart Guide</span>
-      <img style="margin: -2px 0px 0px 4px;" src="/docs/assets/img/compass/new.svg" alt="New">
+      <span class="getting-started-new-badge"> NEW </span>
     </a>
 `;
 
