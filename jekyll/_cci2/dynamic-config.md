@@ -6,7 +6,7 @@ version:
 - Cloud
 ---
 
-Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/) or file-paths.
+Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/) or file paths.
 
 CircleCI's dynamic configuration feature allows you to:
 
@@ -25,18 +25,17 @@ To get started with Dynamic Config in CircleCI:
 2. Click the **Project Settings** button in the upper-right corner.
 3. On the left-hand panel, select **Advanced**.
 4. Scroll to the **Enable dynamic config using setup workflows** setting, and toggle it to the "on" position, as shown below:
+  <br>
+  ![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
-![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
-
-5. While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will **not* be used until you add the key `setup` with a value of `true` to that `config.yml`.
-  Add the key `setup: true` to the top-level of your parent configuration file (in the `.circleci/` directory). This will designate that `config.yml` as a `setup workflow` configuration.
-
-When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called (**NOTE:** this does not apply if you desire to conditionally execute workflows or steps based on **updates to specified files**, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
+5. While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will **not** be used until you add the `setup` key with a value of `true` to that `config.yml`.
+  Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a `setup workflow` configuration.
+6. At the end of the `setup workflow`, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called. **NOTE:** This does not apply if you desire to conditionally execute workflows or steps based on **updates to specified files**, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example.
 
 ## How dynamic config works
 {: #how-dynamic-config-works }
 
-CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that `setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml` that potentially exists in outside directories.
+CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that `setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yml` files can then be passed into an additional `config.yml` that potentially exists in outside directories.
 
 Behind the scenes, the continuation configuration is implemented as a call to a public pipeline continuation API. This API accepts a _continuation_ key, which is a secret, unique-per-pipeline key, that is automatically injected into the environment of jobs executed as part of a setup workflow. It also accepts a configuration string, as well as a set of pipeline parameters.
 
