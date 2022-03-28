@@ -54,9 +54,9 @@ Use the [Notifications](https://app.circleci.com/settings/user/notifications){:r
 
 Email notifications will look like the following:
 
-![]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
+![Example success email notification]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
 
-![]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
+![Example failure email notification]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
 ## Enable web notifications
 {: #enable-web-notifications }
@@ -67,7 +67,7 @@ Perform the following steps to enable web notifications:
 
 2. Your browser will ask you to confirm that you want to allow notifications. Click `Allow`. See the screenshot below for additional details:
 
-![]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
+![Screenshots showing how to enable web notifications in your browser]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
 
 If you've previously denied CircleCI permission to send you web notifications
 you will need to manually turn those permissions on in your browser, as CircleCI cannot
