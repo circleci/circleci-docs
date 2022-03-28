@@ -24,7 +24,9 @@ When you choose a policy from the list, the summary shows you which metrics that
 
 // what policies are available?
 
-You can either select an existing policy, or <<../using-release-orchestration/policies#,create your own policy>>.
+You can either select an existing policy, or <<../using-release-orchestration/creating-policy#,create your own policy>>.
+
+See the <<../using-release-orchestration/policies#,Policies doc>> for more information on policy types.
 
 === Configuring Advanced Settings
 

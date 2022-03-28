@@ -1,4 +1,4 @@
-= Creating a Policy
+= Creating a Release Policy
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

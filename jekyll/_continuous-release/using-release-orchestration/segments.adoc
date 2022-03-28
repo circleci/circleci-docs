@@ -6,7 +6,7 @@
 
 A segment is a group of users who share a characteristic, for example, users in the same geographical location, or those who use the same type of device to access an API.
 
-The segments list shows the reusable user segments available for use in policies.
+The segments list shows the reusable user segments available for use in <<policies#,policies>>.
 
 image::segments-cobrand.png[Segments list]
 
