@@ -29,26 +29,25 @@ To get started with Dynamic Config in CircleCI:
   ![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 5. While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will **not** be used until you add the `setup` key with a value of `true` to that `config.yml`.
-  Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a `setup workflow` configuration.
-6. At the end of the `setup workflow`, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called. **NOTE:** This does not apply if you desire to conditionally execute workflows or steps based on **updates to specified files**, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example.
+  Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a setup configuration.
+6. At the end of the `setup` workflow, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called. **NOTE:** This does _not_ apply if you want to conditionally execute workflows or steps based on **updates to specified files**, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example.
 
 ## How dynamic config works
 {: #how-dynamic-config-works }
 
-CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that `setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yml` files can then be passed into an additional `config.yml` that potentially exists in outside directories.
+CircleCI's dynamic configuration feature uses a setup workflow. A setup workflow can contain jobs that set up children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yml` files can then be passed into an additional `config.yml` that potentially exists in outside directories.
 
-Behind the scenes, the continuation configuration is implemented as a call to a public pipeline continuation API. This API accepts a _continuation_ key, which is a secret, unique-per-pipeline key, that is automatically injected into the environment of jobs executed as part of a setup workflow. It also accepts a configuration string, as well as a set of pipeline parameters.
+Behind the scenes, the continuation configuration is implemented as a call to a public pipeline continuation API. This API accepts a continuation key, which is a secret, unique-per-pipeline key, that is automatically injected into the environment of jobs executed as part of a setup workflow. It also accepts a configuration string, as well as a set of pipeline parameters.
 
 Note that:
-- the setup phase requires `version: 2.1` or higher,
-- a pipeline can only be continued once,
-- a pipeline can only be continued within six hours of its creation,
-- a pipeline cannot be continued with another setup configuration,
-- there can only be one workflow in the setup configuration,
-- pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger time,
-- pipeline parameters declared in the setup configuration must also be declared in the continuation configuration, and can be used at continuation time
+- The setup phase requires `version: 2.1` or higher.
+- A pipeline can only be continued once (i.e. a pipeline cannot be continued with another setup configuration).
+- A pipeline can only be continued within six hours of its creation.
+- The setup configuration can only include one workflow.
+- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (i.e. setup) time.
+- Pipeline parameters declared in the setup configuration must also be declared in the continuation configuration. These parameters can be used at continuation time.
 
-For a basic example on how to use `setup workflows` for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
+For a basic example on how to use setup workflows for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
 
 ## Dynamic configuration FAQs
 {: #dynamic-config-faqs }
@@ -58,17 +57,27 @@ For a basic example on how to use `setup workflows` for dynamic configuration ge
 
 **Q:** I thought pipeline parameters could only be used with the API?
 
-**A:** Previously, this was true. But using our dynamic configuration feature, you can set pipeline parameters dynamically, before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
+**A:** Previously, this was true. With the dynamic configuration feature, you can now set pipeline parameters dynamically, before the pipeline is executed (triggered from either the API or a webhook—a push event to your VCS).
 
-### The continuation Orb
+### Custom executors
+{: #custom-executors}
+
+**Q:** Can I use a custom executor?
+
+**A:** Custom executors can be used, but require certain dependencies to be installed for the continuation step to work (currently: `curl`, `jq`).
+
+### The continuation orb
 {: #the-continuation-orb }
 
 **Q:** What is the `continuation` orb?
 
 **A:** The `continuation` orb assists CircleCI users in managing the pipeline continuation process easily. The
-`continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline)
-in an easy-to-use fashion. See the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
+`continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline). Refer to the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 documentation for more information.
+
+**Q:** Is it possible to **not** use the continuation orb?
+
+**A:** If you have special requirements not covered by the continuation orb, you can implement the same functionality in other ways. Refer to the [orb source code](https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source) to learn how the continuation functionality is implemented with the orb.
 
 ## What to read next
 {: #what-to-read-next }
