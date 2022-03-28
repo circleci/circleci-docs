@@ -72,6 +72,7 @@ Data persistence allows you to move data between jobs and speed up your build. T
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ### Caches
+{: #caches }
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
@@ -210,10 +211,12 @@ jobs:
 {% endraw %}
 
 ### Workspaces
+{: #workspaces }
 
 Workspaces are a workflow-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 
 ### Artifacts
+{: #artifacts }
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
@@ -329,8 +332,6 @@ Caches     | Months               | Store non-vital data that may help the job r
 {: class="table table-striped"}
 
 See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
-
-
 
 ## Docker Layer Caching
 {: #docker-layer-caching }
