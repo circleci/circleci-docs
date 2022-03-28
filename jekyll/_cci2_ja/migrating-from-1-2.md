@@ -23,7 +23,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **メモ:** 並列処理は `.circleci/config.yml` ファイルでのみ設定できます。 CircleCI アプリケーションでの並列処理設定は無視されます。
+CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **メモ:** 並列実行は `.circleci/config.yml` ファイルでのみ設定できます。 CircleCI アプリケーションでの並列実行設定は無視されます。
 
 既に `circle.yml` ファイルがある場合は、以降の各セクションの手順に従って、既存のファイルをコピーし、新しい必須キーを記述し、1.0 のキーを検索して 2.0 のキーに置き換えます。
 
