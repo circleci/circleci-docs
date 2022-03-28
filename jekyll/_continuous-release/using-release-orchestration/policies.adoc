@@ -10,7 +10,7 @@
 
 A release policy is a set of rules for determining how a version of a service should be validated when it is added to an application.
 
-The policy is evaluated every 30 seconds by the Vamp Release Agent running in the application namespace on your Kubernetes cluster. The Release Agent uses data from Kubernetes and your chosen Ingress controller, plus any custom metrics that are part of the release policy.
+The policy is evaluated every 30 seconds by the Release Agent running in the application namespace on your Kubernetes cluster. The Release Agent uses data from Kubernetes and your chosen Ingress controller, plus any custom metrics that are part of the release policy.
 
 Each release policy includes at least one step. At the start of each step, a percentage of users are exposed to the new version, and the Release Agent monitors the performance of that new version. If the policy conditions are not met, the new version is rolled back with minimal impact on your users' experience.
 

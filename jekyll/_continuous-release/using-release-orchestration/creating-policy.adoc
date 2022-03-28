@@ -6,19 +6,9 @@
 
 To create a policy, go to the _Policies_ tab and click the *+ Create New Policy* button.
 
-// Current docs don't cover the first stage: How will this policy be used? Some of the information on this screen looks wrong, though. https://vamp.cloud/6/policyeditor - have queried on Slack.
-
-
-// might need to turn this into numbered stages - need to ensure these stages don't get tangled up with the steps, though.
-
-// link to a walkthrough for a sample policy - this would make a good mini tutorial.
-
-// screenshot
-
 First, specify how this new policy will be used. From the options provide, choose:
 
 . The type of service with which the policy will be used.
-// need to add some more details, once we know what service types are available
 . Whether the service will be accessible from outside the cluster (services can be canary released only if they are accessible outside the Kubernetes cluster).
 . The workload type (currently only Deployments are available).
 // check this
@@ -29,7 +19,7 @@ When you have finished, click the blue *Continue* button.
 
 Give your policy and name and provide a description.
 
-// screenshot
+image::create-policy-name.png[Give the policy a name and description]
 
 The name should describe the purpose of the policy for other users.
 For example, _Minor - Samsung Native Browser_.
@@ -42,6 +32,8 @@ The first step of a multi-step policy should focus on the technical stability of
 
 You want to limit the number of users who will be affected if the new version is flawed, so you should target just a small number of users.
 
+image::create-policy-step1.png[Defining the first step of the policy]
+
 *Name*
 
 This is the name shown on the Releases page and in the notifications that are sent as a release progresses. For example: _Validate with 50% of Samsung Users_.
@@ -52,17 +44,11 @@ This defines the user segment or segments used to validate the new version durin
 
 Select either _All Users_ or a specific segment, for example, _All iPhone Users_.
 
-// Need to signpost section on creating and editing Segments
+To create a new segment, <<segments#,see the doc on Segments>>.
 
 To add further targets, click the *+Add more* button.
 
 To delete a target, click the trash icon next to it.
-
-// screenshot
-
-// Need to provide an example of how this works.
-
-// screenshot
 
 *End After*
 
@@ -70,17 +56,11 @@ This defines the duration of the step. You can either end a step after a fixed t
 
 In _Amount_, enter the number of requests. In _Requests in Max_, enter the time period. For example, the step below will fail unless 1775 requests are received within one hour.
 
-// screenshot
-
 Alternatively, you can specify a duration in seconds, for example, _120s_.
-
-// screenshot of example
 
 TIP: Ending a step after a fixed time period is useful when the success of the step depends on metrics that are not directly related to the amount of traffic the service receives.
 
 For example, assuming all the SLO conditions are met, this step will end successfully after 1775 requests have been received. If the required 1775 requests are not received within one hour, the step fails.
-
-// screenshot
 
 *Conditions*
 
@@ -96,8 +76,6 @@ This third SLO - minimum availability - is optional, but we recommend you includ
 ====
 
 Although you cannot delete these mandatory SLOs, you can edit the budget by clicking the _Budget_ link to the right of the condition.
-
-// screenshot
 
 ==== Restarts budget
 
@@ -121,28 +99,10 @@ Here you can change the:
 
 . Threshold (as a percentage).
 . Aggregation (as a percentile). For example, if you choose a threshold of great than or equal to 5% and an aggregation of _90th Percentile_, this mean than 10% of the time, the minimum availability can be less than 5%.
-
-// screenshot
-
-// need to double-check the logic in the UI text
-
 . Time window in minutes used to calculate the SLO.
 . Grace period in minutes before time window begins.
 
 When you have finished editing the budget, click the blue *Submit* button.
-
-
-// screenshot
-
-In the example above, the success of this step is conditional on five SLOs remaining in budget for the duration of the step:
-
-* Vamp Health must remain at or above 70%.
-* The number of Kubernetes Pod restarts must remain at or below one across all the Pods.
-* The required minimum number of Kubernetes Pods must running for at least * 90% of the time.
-* At least 90% of responses must be successful.
-* At least 90% of requests must be completed within 400ms.
-
-All the SLOs will be evaluated over a five-minute rolling time window.
 
 To add more conditions:
 
@@ -155,23 +115,15 @@ To add more conditions:
 
 A step start webhook is called at the start of the step. To create a step start webhook, click *+Add more*.
 
-// screenshot
+The webhook can be:
 
-
-// screenshot of Add a Webhook
-
-// Need to add some details here!
-
-// CircleCI - add screenshot and commentary
-
-// ArgoCD - add screenshot and commentary
+* An HTTP endpoint.
+* A CircleCI action (you will need to enter your CircleCI token).
+* An ArgoCD rollback (you will need the ArgoCD URL and API token).
 
 To add more step start webhooks, click *+ Add more*.
 
-// screenshot
-
 Otherwise, click the blue *Add* button.
-
 
 When you have finished creating your step, click the blue *Save* 
 
@@ -205,11 +157,11 @@ In addition to the step start webhook, you can add two more types of webhook:
 
 To add a release success webhook, click *+Add more*.
 
-// screenshot
+The webhook can be:
 
-// screenshot for webhook itself
-
-// This is essentially the same for release failure webhooks, so need to find some way of consolidating them.
+* An HTTP endpoint.
+* A CircleCI action (you will need to enter your CircleCI token)
+* An ArgoCD rollback (you will need the ArgoCD URL and API token)
 
 When you have finished adding steps and webhooks, click the blue *Create policy* button. You will be returned to the Policies list and see a pop-up message to confirm that your policy has been created.
 
