@@ -86,7 +86,7 @@ jobs: # basic units of work in a run
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
-            - "/go/pkg/mod"
+            - "/home/circleci/go/pkg/mod"
 
       - run:
           name: Start service
