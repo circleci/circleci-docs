@@ -5,8 +5,14 @@
  * Adds a "NEW" badge to the sidebar item as well.
  **/
 function addNewBadgeToSidebar() {
+  const isGettingStartedPage =
+        window.location.pathname == '/docs/2.0/getting-started/' ||
+        window.location.pathname == '/docs/ja/2.0/getting-started/';
+
   const NEW_SIDEBAR_HTML = `
-    <a class="" style="display: flex; align-items: center" href="/docs/2.0/getting-started/"
+    <a class="${isGettingStartedPage ? 'active' : ''}"
+       style="display: flex; align-items: center"
+       href="/docs/2.0/getting-started/"
        data-section="getting-started" data-proofer-ignore="">
       <span>Quickstart Guide</span>
       <span class="getting-started-new-badge"> NEW </span>
