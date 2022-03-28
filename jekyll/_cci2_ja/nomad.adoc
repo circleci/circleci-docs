@@ -101,7 +101,7 @@ By default, your Nomad Client is set up within an Auto Scaling Group (ASG) withi
 
 https://circleci.com/ja/blog/mathematical-justification-for-not-letting-builds-queue/[こちらの連載]では、CircleCI のエンジニアリング チームが自動スケーリングの一般的なベスト プラクティスを見つけるために取り組んだコスト削減のシミュレーションについて解説しています。 AWS の Auto Scaling を設定する際は、以下のベストプラクティスを適用することを検討してください。
 
-. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列処理で実行されるワークロードでは 10秒未満になるようにします。 Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列実行で実行されるワークロードでは 10秒未満になるようにします。 Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
 
 . Create an Auto Scaling Group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. 平日の勤務時間中にスケールアップし、夜間にスケールダウンしておくことで、トラフィックが少ない夜間にオーバープロビジョニングを発生させることなく、開発のピーク時に待ち時間を抑制するのがベスト プラクティスです。 なお、過去の数多くのビルドデータによると、通常の勤務時間中のデータセットはおおむね正規分布になっています。
 
