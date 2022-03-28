@@ -195,6 +195,7 @@ workflows:
 {% endraw %}
 
 ### Using the android image on server v3.x
+{: #using-the-android-image-on-server-v3x }
 
 **Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
