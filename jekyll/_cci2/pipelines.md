@@ -54,8 +54,8 @@ TBC
 
 A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
+![Job tab options in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
 Further, the output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+![Download and share job step output]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
