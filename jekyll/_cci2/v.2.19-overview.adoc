@@ -48,8 +48,8 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19.15
 
-* GitHub Enterprise custom CA certificates are now supported.
-* We have patched various security vulnerabilities.
+* Removed out-dated truststore for root CAs.
+* Patched various security vulnerabilities.
 
 ## What's New in v2.19.14
 
