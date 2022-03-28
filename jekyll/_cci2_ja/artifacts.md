@@ -67,6 +67,7 @@ jobs:
 
       - store_artifacts:
           path: /tmp/artifacts
+
 ```
 
 {:.tab.artifacts.Server_3}
@@ -110,9 +111,8 @@ jobs:
 
     working_directory: /tmp
     steps:
-
       - run:
-          name: ダミー アーティファクトの作成
+          name: Creating Dummy Artifacts
           command: |
             echo "my artifact file" > /tmp/artifact-1;
             mkdir /tmp/artifacts;
@@ -298,7 +298,7 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 
 実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
+ジョブで並列実行を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
 #### 大きなアーティファクトのアップロード
 {: #uploading-large-artifacts }
