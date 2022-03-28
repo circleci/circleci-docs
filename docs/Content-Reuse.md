@@ -20,8 +20,33 @@ Site variables are defined within `jekyll/_config.yml` as key value pairs:
 my-variable-name: my-variable-value
 ```
 
-To use the variable within a docs page, use the following syntax:
+### Markdown
+
+To use the variable within a Markdown page, use the following syntax:
 
 ```
 {{site.<my_variable_name>}}
 ```
+
+### AsciiDoc
+
+To include the variable in an AsciiDoc page, use the following syntax:
+
+```
+{<my_variable_name>}
+```
+
+To include the variable in a code block, use the following syntax:
+
+```
+[source,yaml,subs=attributes+]
+----
+version: 2.1
+jobs:
+  build:
+    machine:
+      image: {<my_variable_name>}
+    resource_class: large
+----
+```
+
