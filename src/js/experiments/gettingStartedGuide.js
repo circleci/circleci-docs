@@ -6,8 +6,8 @@
  **/
 function addNewBadgeToSidebar() {
   const isGettingStartedPage =
-        window.location.pathname == '/docs/2.0/getting-started/' ||
-        window.location.pathname == '/docs/ja/2.0/getting-started/';
+    window.location.pathname == '/docs/2.0/getting-started/' ||
+    window.location.pathname == '/docs/ja/2.0/getting-started/';
 
   const NEW_SIDEBAR_HTML = `
     <a class="${isGettingStartedPage ? 'active' : ''}"
