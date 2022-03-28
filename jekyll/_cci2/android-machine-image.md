@@ -5,6 +5,7 @@ short-title: "Android Image on the Machine Executor"
 description: "Using the Android Image on the Machine Executor"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## Overview
@@ -195,7 +196,7 @@ workflows:
 
 ### Using the android image on server v3.x
 
-NOTE: Android machine images are only available on Google Cloud Platform (GCP) at this time.
+**Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
 From CircleCI server 3.4, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
 
