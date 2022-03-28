@@ -35,7 +35,6 @@ From the Dashboard, you can access the following tabs:
 * <<releases#,Releases>>
 * <<segments#,Segments>>
 * <<policies#,Policies>>
-* <<metrics#,Metrics>> (under Policies)
 
 // Notifications
 
