@@ -60,12 +60,12 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 * 詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
-## 並列処理
+## 並列実行
 {: #parallelism }
 
-プロジェクトに大規模なテストスイートがある場合は、[`並列処理`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[テスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+プロジェクトに大規模なテストスイートがある場合は、[`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[テスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
-* テストの分割の詳細については、[並列処理]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
+* テストの分割の詳細については、[並列実行]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
 
 ## リソースクラス
 {: #resource-class }
