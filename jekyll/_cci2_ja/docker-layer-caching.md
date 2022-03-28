@@ -30,12 +30,12 @@ Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/
 {: #limitations }
 {:.no_toc}
 
-設定ファイルの [並列処理]({{site.baseurl}}/2.0/configuration-reference/#parallelism) の値が大きい状態 (30 以上) で DLC を利用すると、古いキャッシュがプルされてしまう、キャッシュがプルされないなどの問題が発生することがあります。 たとえば以下のようなケースが考えられます。
+設定ファイルの [並列実行]({{site.baseurl}}/2.0/configuration-reference/#parallelism) の値が大きい状態 (30 以上) で DLC を利用すると、古いキャッシュがプルされてしまう、キャッシュがプルされないなどの問題が発生することがあります。 たとえば以下のようなケースが考えられます。
 
-- 30 の並列処理で 1 つのジョブを実行する場合、ワークフローが 1 つであれば正常に動作しますが、複数のワークフローがあるとキャッシュ ミスが発生します。
-- 30 を超える `parallelism` で任意の数のジョブを実行する場合、ワークフローの数に関係なく、キャッシュ ミスが発生します。
+- 30 の並列実行で 1 つのジョブを実行する場合、ワークフローが 1 つであれば正常に動作しますが、複数のワークフローがあるとキャッシュミスが発生します。
+- 30 を超える `parallelism` で任意の数のジョブを実行する場合、ワークフローの数に関係なく、キャッシュミスが発生します。
 
-キャッシュ ミスの問題が発生している場合、または高並列処理を行う必要がある場合は、実験的な [docker-registry-image-cache Orb](https://circleci.com/developer/ja/orbs/orb/cci-x/docker-registry-image-cache) をお試しください。
+キャッシュミスの問題が発生している場合、または高並列実行を行う必要がある場合は、実験的な [docker-registry-image-cache Orb](https://circleci.com/developer/ja/orbs/orb/cci-x/docker-registry-image-cache) をお試しください。
 
 **注:** DLC は、ビルド コンテナとして使用する Docker イメージには影響を**及ぼしません**。 そのため、ジョブの_実行_に使用するコンテナは、[`docker` Executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) を使用している場合、`image` キーで指定したものが [Jobs (ジョブ)] ページの [Spin up Environment (環境のスピンアップ)] ステップに表示されます。
 
@@ -109,7 +109,7 @@ DLC は、外部ボリュームを作成し、それを `machine` やリモー�
 
 DLC ボリュームは、ジョブで 3 日間使用されないと削除されます。
 
-CircleCI で 1 つのプロジェクトに作成される DLC ボリュームの上限は 50 個です。プロジェクトごとに最大 50 個の `machine` またはリモート Docker ジョブが同時に DLC にアクセスできます。 これはジョブの並列処理を考慮するため、各プロジェクトで DLC にアクセスできるジョブの最大数は、50個の並列処理があるジョブの場合は 1つ、25個の並列処理があるジョブの場合は 2つとなります。
+CircleCI で 1 つのプロジェクトに作成される DLC ボリュームの上限は 50 個です。プロジェクトごとに最大 50 個の `machine` またはリモート Docker ジョブが同時に DLC にアクセスできます。 これはジョブの並列実行を考慮するため、各プロジェクトで DLC にアクセスできるジョブの最大数は、50個の並列実行を行うジョブの場合は 1つ、25個の並列実行を行うジョブの場合は 2つとなります。
 
 ![Docker レイヤーキャッシュ]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
