@@ -12,12 +12,12 @@ version:
   - Server v2.x
 ---
 
-プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の Executor に分散させて並列に実行することができます。 それには、並列処理レベルを指定して、テスト ジョブ用にスピン アップする個別の Executor の数を定義する必要があります。 そして、CircleCI CLI を使用してテストファイルを分割するか、環境変数を使用して各並列マシンを個別に構成します。
+プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の Executor に分散させて並列に実行することができます。 それには、並列実行レベルを指定して、テストジョブ用にスピン アップする個別の Executor の数を定義する必要があります。 そして、CircleCI CLI を使用してテストファイルを分割するか、環境変数を使用して各並列マシンを個別に構成します。
 
 * 目次
 {:toc}
 
-## ジョブの並列処理レベルの指定
+## ジョブの並列実行レベルの指定
 {: #specifying-a-jobs-parallelism-level }
 
 テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
@@ -37,7 +37,7 @@ jobs:
     parallelism: 4
 ```
 
-![並列処理]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
 詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#parallelism)」を参照してください。
 
@@ -178,7 +178,7 @@ circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 ## 環境変数を使用したテストの分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
+CircleCI には並列実行を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
 
 ## 分割テストの実行
 {: #running-split-tests }
