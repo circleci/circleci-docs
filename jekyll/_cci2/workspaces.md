@@ -192,12 +192,13 @@ For a live example of using workspaces to pass data between build and deploy job
 
 For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
-## Workspaces and runner network charges
-{: #workspaces-runner-network-charges }
+## Workspaces and self-hosted runner charges
+{: #workspaces-runner-charges }
 
 When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
-Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. The benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention (one day) for workspaces is recommended if this suits your needs.
+Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
+{: class="alert alert-info" }
 
 For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
 
@@ -213,8 +214,6 @@ It is important to define paths and files when using `persist_to_workspace`. Not
       - foo/bar
       - baz
 ```
-
-Please note, `persist_to_workspace` will automatically default to whatever you have set for your custom storage settings for workspace.
 
 ## See also
 {: #see-also }

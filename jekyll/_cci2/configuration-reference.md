@@ -1397,7 +1397,7 @@ test-results
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
 
-Special step used to persist a temporary file to be used by another job in the workflow.
+Special step used to persist a temporary file to be used by another job in the workflow. `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
 
 Key | Required | Type | Description
 ----|-----------|------|------------

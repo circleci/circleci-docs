@@ -46,6 +46,8 @@ Workspaces are used to transfer data to downstream jobs as the workflow progress
 
 If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `.circleci/config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
 
+You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
+
 * For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
 * For more information on workflows, see the [Workflows]({{site.baseurl}}/2.0/workflows/) page. 
 * Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
@@ -60,7 +62,9 @@ If your project needs to be packaged, say an Android app where the `.apk` file i
 ### Artifact optimization
 {: #artifact-optimization }
 
-Optimization options will be different for each project depending on what you are trying to accomplish. You can try the following actions to reduce network and storage usage:
+Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, one day, allows you to both troubleshoot the build, and save costs by not keeping unnecessary data in storage.
+
+If you do need to store artifacts for longer periods of time, there are other optimization options available, depending on what you are trying to accomplish. Every project is different, but you can try the following actions to reduce network and storage usage:
 
 - Check if `store_artifacts` is uploading unnecessary files
 - Check for identical artifacts if you are using parallelism
@@ -119,15 +123,11 @@ Details about individual step network and storage transfer usage can be found in
 ### Custom storage usage
 {: #custom-storage-usage }
 
-You can customize storage usage for artifacts, workspaces, test results, and caches in the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods. By default, the storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces.
+You can customize storage usage for workspaces, caches, artifacts, and test results on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods. By default, the storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces.
 
 Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
 
 ![storage-usage-controls]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
-
-Custom storage usage can help you sanitize your data, as well as reduce monthly costs. An example of this is setting a short storage period for artifacts. Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, 1 day, allows you to both troubleshoot the build, but save costs by not keeping unnecessary data in storage.
-
-Another example is workspace retention. Storing workspaces is helpful for re-running a build from fail.
 
 If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle with a 10 day storage period set, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for a new 10 day storage period.
 
@@ -146,7 +146,7 @@ Charges apply when an organization has runner network egress beyond the included
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
-For quesions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
 
 ## See also
 {: #see-also }
