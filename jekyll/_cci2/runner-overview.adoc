@@ -96,6 +96,8 @@ A **resource class** is a combination of your namespace and a label you choose t
 
 Resource class labels help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific places. For example, if you have multiple machines running macOS, and multiple machines running AWS EC2, you could create resource class labels for each of these, `macOS` and `aws-ec2-linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which set of self-hosted runner resources to send a job to based on the resource class.
 
+Runner resource classes help you create pools of self-hosted runners. Pooling runners with resource classes enables you to isolate a group of self-hosted runners for a specific subset of jobs. For example, if you have one set of machines running macOS, and one set of machines running Linux, you could create resource class labels for each: `macOS` and `linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate jobs (see <<Referencing your runner on a job>>) that are intended to run on macOS to the `macOS` resource class, and jobs intended for Linux machines to the `linux` resource class.
+
 Optionally, you can give your resource class a description.
 
 Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs.
