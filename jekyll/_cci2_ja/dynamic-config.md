@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "ダイナミック コンフィグ"
-description: "セットアップ ワークフローによるダイナミック コンフィグの使用方法に関する開発者向けページ"
+title: "ダイナミックコンフィグ"
+description: "セットアップワークフローによるダイナミックコンフィグの使用方法に関する開発者向けページ"
 version:
   - Cloud
 ---
@@ -12,51 +12,49 @@ version:
 
 どちらの (さらにその他多くの) ユース ケースでも、設定ファイルの自動動的生成を利用すると、CircleCI エクスペリエンスが最適化され、チームの時間とコストの両方を節約できます。
 
-CircleCI のダイナミック コンフィグ機能では、`セットアップ ワークフロー`構成を使用します。 `セットアップ ワークフロー`に含めたジョブでは、演算したパイプライン パラメーターを使用するか、スクリプトによるフォローアップ パイプラインを生成して、子パイプラインを`セットアップ`できます。 それらの演算されたパイプライン パラメーターや生成された `config.yaml` ファイルは、外部ディレクトリに存在する別の `config.yaml` に渡すことができます。
+CircleCI のダイナミックコンフィグ機能では、`setup workflow `設定を使用します。 `setup workflow` に含めたジョブでは、演算したパイプライン パラメーターを使用するか、スクリプトによるフォローアップ パイプラインを生成して、子パイプラインを `setup` できます。 それらの演算されたパイプラインパラメーターや生成された `config.yaml` ファイルは、外部ディレクトリに存在する別の `config.yaml` に渡すことができます。
 
-要約すると、CircleCI のダイナミック コンフィグ機能では以下が可能です。
+つまり、CircleCI のダイナミックコンフィグ機能では以下が可能です。
 
 - 条件付きでワークフローやコマンドを実行する
-- パイプライン パラメーターの値を渡す/別の設定ファイルを生成する
+- パイプラインパラメーターの値を渡す/ 別の設定ファイルを生成する
 - デフォルトの親 `.circleci/` ディレクトリの外部に存在する別の `config.yml` をトリガーする
 
-ダイナミック コンフィグ機能を使用するには、(`.circleci/` ディレクトリにある) 親設定ファイルの最上部に `setup` キーを追加し、値として `true` を設定します。 これで `config.yaml` が`セットアップ ワークフロー`構成として指定され、ダイナミック コンフィグを利用できるようになります。
+ダイナミックコンフィグ機能を使用するには、(`.circleci/` ディレクトリにある) 親設定ファイルの最上部に `setup` キーを追加し、値として `true` を設定します。 これで `config.yaml` が`セットアップ ワークフロー`設定として指定され、ダイナミックコンフィグを利用できるようになります。
 
-**Note**: *At this time, Dynamic Configuration does not work with Scheduled Workflows. We are working on Scheduled Pipelines, which will alleviate this. This feature is expected to launch in the near future. A possible work around can be found on our [Discuss page](https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344).
+詳細については、下記の[入門ガイド](#getting-started-with-dynamic-config-in-circleci)を参照してください。
 
-詳細については、この後の[使用開始に関するセクション](#getting-started-with-dynamic-config-in-circleci)を参照してください。
-
-## CircleCI のダイナミック コンフィグの使用を開始する
+## CircleCI のダイナミックコンフィグの入門ガイド
 {: #getting-started-with-dynamic-config-in-circleci }
 
-CircleCI でダイナミック コンフィグの使用を開始するには、以下の手順に従います。
+CircleCI でダイナミックコンフィグ機能の使用を開始するには、以下の手順に従います。
 
 - CircleCI アプリケーションの **[Projects (プロジェクト)]** ダッシュボードで、目的のプロジェクトを選択します。
 - 右上隅の **[Project Settings (プロジェクト設定)]** ボタンをクリックします。
 - 左側のパネルで **[Advanced (詳細設定)]** を選択します。
-- 画面下部にある **[Enable dynamic config using setup workflows (セットアップ ワークフローによるダイナミック コンフィグを有効にする)]** を、下記画像のようにオンにします。
+- 画面下部にある **[Enable dynamic config using setup workflows (セットアップワークフローによるダイナミックコンフィグを有効にする)]** を、下記画像のようにオンにします。
 
-![UI でのダイナミック コンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
+![UI でのダイナミックコンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 これで、プロジェクトで設定ファイルの動的な生成と更新ができるようになりました。
 
-Note: While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will not be used until you add the key `setup` with a value of `true` to that `config.yml`.
+注: 上記のステップにより、ダイナミックコンフィグ機能が使用できるようになりますが、静的な `config.yml` はこれまでどおり動作します。 この機能は、`config.yml` に `setup` キーと`true` 値を追加しないと使用できません。
 
-ダイナミック コンフィグを使用する場合には、`セットアップ` ワークフローの終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。 詳しくは、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照)。
+ダイナミックコンフィグを使用する場合には、`setup workflow` の終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。 詳しくは、「[設定クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照して下さい)。
 
-`セットアップ` ワークフローを使用してダイナミック コンフィグを利用する方法の基本的な例は、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 クックブックにはより詳細な例が掲載されており、この機能の成熟に合わせて更新される予定です。
+`setup workflows` を使ってダイナミックコンフィグを使用する方法の基本的な例は、「[設定クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 このクックブックにはより詳細な例が掲載されており、この機能の成熟に合わせて更新される予定です。
 
-CircleCI のダイナミック コンフィグを使用する際のパイプライン作成/続行プロセスのバックグラウンド処理に関する詳細は、[GitHub の公開リポジトリ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts)を参照してください。
+CircleCI のダイナミックコンフィグを使用する際のパイプライン作成/続行プロセスのバックグラウンド処理に関する詳細は、[GitHub のパブリックリポジトリ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts)を参照してください。
 
-## ダイナミック コンフィグに関するよくあるご質問
+## ダイナミックコンフィグに関するよくあるご質問
 {: #dynamic-config-faqs }
 
-### パイプライン パラメーター
+### パイプラインパラメーター
 {: #pipeline-parameters }
 
-**Q:** パイプライン パラメーターは API でしか使用できないのではありませんか？
+**Q:** パイプラインパラメーターは API でしか使用できないのではありませんか？
 
-**A:** 以前はそうでした。 しかし、ダイナミック コンフィグ機能を使用すると、パイプライン パラメーターを動的に設定してから、パイプラインを実行したり、API または Web フック (VCS へのプッシュ イベント) からパイプラインをトリガーしたりすることができます。
+**A:** 以前はそうでした。 しかし、ダイナミックコンフィグ機能を使用すると、パイプラインパラメーターを動的に設定してからパイプラインを実行したり、API または Web フック (VCS へのプッシュイベント) からパイプラインをトリガーしたりすることができます。
 
 ### continuation Orb
 {: #the-continuation-orb }
@@ -75,4 +73,4 @@ CircleCI のダイナミック コンフィグを使用する際のパイプラ�
 
 ## さらに詳しく
 {: #learn-more }
-Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.
+CircleCI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。

@@ -144,8 +144,8 @@ jobs:
 {:.tab.ruby_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -188,7 +188,7 @@ jobs:
 ## Python
 {: #python }
 
-[Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
+[Coverage.py](https://coverage.readthedocs.io/en/6.3.1/) は、Python でコードカバレッジレポートを生成する際によく使用されるライブラリです。 最初に、以下のように Coverage.py をインストールします。
 
 ```shell
 pip install coverage
@@ -200,6 +200,7 @@ python my_program.py arg1 arg2
 
 # ここでは、コマンドにプレフィックス "coverage" を付けます。
 coverage run my_program.py arg1 arg2
+
 ```
 
 この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジレポートを生成できます。
@@ -283,8 +284,8 @@ workflows:
 {:.tab.python_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -443,8 +444,8 @@ jobs:
 {:.tab.java_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -516,8 +517,8 @@ jobs:
 
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -591,8 +592,8 @@ jobs:
 {:.tab.php_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:
@@ -655,7 +656,9 @@ jobs:
 ### Codecov
 {: #codecov }
 
-Codecov には、カバレッジレポートのアップロードを簡単に行うための [Orb](https://circleci.com/orbs) があります。
+Codecov has an [orb](https://circleci.com/developer/orbs/orb/codecov/codecov) to help simplify the process of uploading your coverage reports.
+
+**Note:** The Codecov orb is a Partner orb. You or your organization admin will need to opt in to using uncertified orbs in order to use it. This setting is available at **Organization Settings > Security** in the CircleCI web app.
 
 ```yaml
 version: 2.1
@@ -676,3 +679,4 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
 Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
+

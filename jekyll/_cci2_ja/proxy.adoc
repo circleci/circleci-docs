@@ -156,7 +156,7 @@ Refer to the error output for guidance on which repositories need to be granted 
 - clojars.org
 - repo.clojars.org
 
-== Data Persistence
+== データの永続化
 Contact  https://support.circleci.com/hc/en-us[CircleCI Support] to discuss externalizing services for data persistence.
 // Refer to the "Adding External Services to CircleCI Server v2.17" document for instructions to configure your installation for data persistence.
 

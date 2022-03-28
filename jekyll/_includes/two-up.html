@@ -1,0 +1,18 @@
+{% comment %}
+twoup is a jekyll include for rendering "two-pane" content: an image and text side by side.
+  * Params: @title    - section title
+  *         @content  - dynamic paragraph content
+  *         @imageURL - string pointing to image asset
+  *         @imageAlt = Alt text for the image.
+{% endcomment %}
+
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">{{include.title}}</div>
+    {{include.content}}
+  </div>
+
+  <div class="right-side">
+    <img class="right-img" src="{{include.imageURL}}" alt="{{include.imageAlt}}" />
+  </div>
+</div>

@@ -174,4 +174,4 @@ docker exec usage-stats /src/builds/extract
 
 === セキュリティとプライバシー
 
-セキュリティとプライバシーに関する CircleCI の開示情報は、契約条件の別紙 C および CircleCI のhttps://circleci.com/legal/enterprise-license-agreement/[標準ライセンス契約]にてご覧いただけます。
+セキュリティとプライバシーに関する CircleCI の開示情報は、契約条件の別紙 C および CircleCI の https://circleci.com/legal/enterprise-license-agreement/[標準ライセンス契約] にてご覧いただけます。

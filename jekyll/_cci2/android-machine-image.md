@@ -29,34 +29,7 @@ below for more details.
 ## Pre-installed Software
 {: #pre-installed-software }
 
-The Android machine image comes with the following pre-installed:
-
-### Android SDK
-{: #android-sdk }
-- sdkmanager
-- Android platform 23, 24, 25, 26, 27, 28, 29, 30, S
-- Build tools 30.0.3
-- emulator, platform-tools, tools
-- NDK (Side-by-side) 21.4.7075529
-- cmake 3.6.4111459
-- extras;android;m2repository, extras;google;m2repository, extras;google;google_play_service
-
-### Others
-{: #others }
-- gcloud
-- OpenJDK 8, OpenJDK 11 (default)
-- maven 3.6.3, gradle 6.8.3, ant
-- nodejs 12.21.0, 14.16.0 (default), 15.11.0
-- python 2.7.18, python 3.9.2
-- ruby 2.7.2, ruby 3.0.0
-- docker 20.10.5, docker-compose 1.28.5
-- jq 1.6
-
-## Limitations
-{: #limitations }
-
-* There may be up to 2 mins of spin-up time before your job starts running. This
-  time will decrease as more customers start using the Android image.
+Please view the quarterly update announcement on our [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) page for a list of current pre-installed software.
 
 ## Pricing
 {: #pricing }
@@ -219,4 +192,62 @@ workflows:
       - build
 ```
 {% endraw %}
+
+### Using the android image on server v3.x
+
+NOTE: Android machine images are only available on Google Cloud Platform (GCP) at this time.
+
+From CircleCI server 3.4, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+
+```yaml
+version: 2.1
+
+jobs:
+  my-job:
+    machine:
+      image: android-default
+    steps:
+    # job steps here
+```
+
+It is also possible to use the android orb, as shown above for cloud. Your server administrator will need to import the orb first. View the [CircleCI Server v3.x Orbs](https://circleci.com/docs/2.0/server-3-operator-orbs) page for instructions on importing orbs.
+
+This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+orbs:
+  android: circleci/android@1.0
+jobs:
+  test:
+    machine:
+      image: android-default
+    steps:
+      - checkout
+      # Create an AVD named "myavd"
+      - android/create-avd:
+          avd-name: myavd
+          system-image: system-images;android-29;default;x86
+          install: true
+      # By default, after starting up the emulator, a cache will be restored,
+      # "./gradlew assembleDebugAndroidTest" will be run and then a script
+      # will be run to wait for the emulator to start up.
+      # Specify the "post-emulator-launch-assemble-command" command to override
+      # the gradle command run, or set "wait-for-emulator" to false to disable
+      # waiting for the emulator altogether.
+      - android/start-emulator:
+          avd-name: myavd
+          no-window: true
+          restore-gradle-cache-prefix: v1a
+      # Runs "./gradlew connectedDebugAndroidTest" by default.
+      # Specify the "test-command" parameter to customize the command run.
+      - android/run-tests
+      - android/save-gradle-cache:
+          cache-prefix: v1a
+workflows:
+  test:
+    jobs:
+      - test
+```
 

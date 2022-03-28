@@ -31,7 +31,7 @@ Access the KOTS Admin Console. Get to the KOTS Admin Console by running the foll
 
 Locate and enter the following in Settings:
 
-. *Output Processor Load Balancer (required)* -
+. *Output Processor Load Balancer Hostname* -
 The following command will provide the IP address of the service
 +
 ```shell
@@ -117,12 +117,17 @@ This will return something like the following:
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command from within the directory of the `main.tf` file.
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -140,17 +145,18 @@ ifndef::env-aws[]
 ===== GCP
 You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by running the following command:
 
+[source,shell]
 ----
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 You will also need the following information:
 
-* The GPC Project you want to run Nomad clients in.
-* The GPC Zone you want to run Nomad clients in.
-* The GPC Region you want to run Nomad clients in.
-* The GPC Network you want to run Nomad clients in.
-* The GPC Subnetwork you want to run Nomad clients in.
+* The GCP Project you want to run Nomad clients in.
+* The GCP Zone you want to run Nomad clients in.
+* The GCP Region you want to run Nomad clients in.
+* The GCP Network you want to run Nomad clients in.
+* The GCP Subnetwork you want to run Nomad clients in.
 
 You can copy the following example to your local environment and fill in the appropriate information for your specific setup.
 
@@ -241,12 +247,17 @@ output "module" {
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -269,6 +280,7 @@ ifndef::env-gcp[]
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
   * You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. Then you will need to generate an access and secret key for this user.
   * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the following IAM policy:
++
 [source, json]
 {
     "Version": "2012-10-17",
@@ -296,7 +308,7 @@ ifndef::env-gcp[]
 }
 . In your KOTS Admin Console, set Nomad Autoscaler to `enabled`
 . Set Max Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
-. Set Min Node Count* - This will overwrite what is currently set as the max for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
+. Set Min Node Count* - This will overwrite what is currently set as the min for you ASG. It is recommended to keep this value and what was set in your Terraform as the same.
 . Select cloud provider: `AWS EC2`
 . Add the region of the autoscaling group
 . You can chose one of the following:
@@ -366,11 +378,15 @@ CircleCI has created a project called https://github.com/circleci/realitycheck/t
 To run realitycheck, you will need to clone the repository. Depending on your Github setup you can do one of the following.
 
 ===== Github Cloud
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 ----
 
 ===== Github Enterprise
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 git remote set-url origin <YOUR_GH_REPO_URL>
@@ -473,13 +489,13 @@ Create a new user with programmatic access:
 ```shell
 aws iam create-user --user-name circleci-vm-service
 ```
-
++
 Optionally, vm-service does support the use of a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
 Once done, you may skip to step 9 which is enabling vm-service in KOTS.
-
++
 . *Create policy*
 +
-Create a `policy.json` file with the following content. You should fill in Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) below.
+Create a `policy.json` file with the following content. You should fill in the ID of the VM Service security group created in step 2 (`VMServiceSecurityGroupId`) and VPC ID (`vpcID`) below.
 +
 [source,json]
 ----
@@ -498,7 +514,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<YOUR_clusterSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<YOUR_VMServiceSecurityGroupID>"
       ]
     },
     {
@@ -585,7 +601,7 @@ Create a `policy.json` file with the following content. You should fill in Clust
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<YOUR_arn>"
+          "ec2:Vpc": "<YOUR_vpcID>"
         }
       }
     }
@@ -612,7 +628,7 @@ aws iam create-access-key --user-name circleci-vm-service
 . *Configure server*
 +
 Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
-
++
 Once you have configured the fields, *save your config* and deploy your updated application.
 
 endif::env-gcp[]
@@ -719,7 +735,7 @@ NOTE: If you are switching from static JSON credentials to Workload Identity, yo
 . *Configure Server*
 +
 Configure VM Service through the KOTS admin console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
-
++
 Once you have configured the fields, *save your config* and deploy your updated application.
 
 endif::env-aws[]
@@ -737,6 +753,7 @@ CircleCI runner does not require any additional server configuration. Server shi
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you will need to set up a runner namespace for each organization within your server installation.
 
 ifndef::pdf[]
+
 ## What to read next
 
 * https://circleci.com/docs/2.0/server-3-install-post[Server 3.x Phase 4 - Post installation]

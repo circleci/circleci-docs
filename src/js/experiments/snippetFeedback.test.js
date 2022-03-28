@@ -30,7 +30,7 @@ describe('Snippet Feedback class', () => {
     let sf = new SnippetFeedback(codeSnippetContainer);
     expect(sf.wasThisHelpfulContainer.children.length).toBe(4);
     expect(sf.wasThisHelpfulContainer.children[0].textContent).toBe(
-      'Was this helpful?',
+      'Was this code helpful?',
     );
     expect(sf.wasThisHelpfulContainer.children[1].textContent).toBe('Yes');
     expect(sf.wasThisHelpfulContainer.children[2].textContent).toBe(' /');

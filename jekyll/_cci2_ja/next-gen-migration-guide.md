@@ -21,8 +21,15 @@ version:
 
 従来のイメージから次世代版に移行するには、名前空間を変更する必要があります。 イメージの Docker 名前空間について、従来のものはすべて `circleci` でしたが、次世代イメージでは `cimg` に変わります。 たとえば、従来の Ruby および Python のイメージを次世代版に移行するには、それぞれ次のように変更します。
 
-* `circleci/ruby:2.3.0` -> `cimg/ruby:2.3.0`
-* `circleci/python:3.8.4` -> `cimg/python:3.8.4`
+```diff
+- circleci/ruby:2.7.4
++ cimg/ruby:2.7.4
+```
+
+```diff
+- circleci/python:3.8.4
++ cimg/python:3.8.4
+```
 
 ## 変更点
 {: #changes }

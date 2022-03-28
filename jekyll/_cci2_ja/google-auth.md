@@ -80,7 +80,7 @@ jobs:
 
 **Note:** If base64 encoding is required for your particular workflow, use the following command:
 
-```yml
+```shell
 version: 2
 jobs:
   deploy:

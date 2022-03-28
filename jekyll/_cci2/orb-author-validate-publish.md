@@ -8,7 +8,7 @@ version:
 
 This guide covers the steps required to create a simple orb, manually, without using the orb development kit. We recommend the orb development kit for most orb projects, to find out more, see the [Orb Authoring Guide]({{site.baseurl}}/2.0/orb-author).
 
-1. If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub org name:
+1. If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub organization name:
 ```shell
 circleci namespace create <my-namespace> github <my-gh-org>
 ```

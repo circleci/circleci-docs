@@ -1,21 +1,21 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Configuring the JVM Heap Size
+= JVM ヒープサイズの設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this CircleCI guide to help you configure the JVM_HEAP_SIZE value for each container.
+:page-description: このガイドは、コンテナごとに JVM_HEAP_SIZE の値を設定するためのものです。
 :icons: font
 :toc: macro
 :toc-title:
 
-The JVM heap size is configurable for the following containers: `frontend`, `test-results`, `output-processing` and `contexts-service`. You might want to consider increasing the heap size if you see "out of memory" errors, such as: `Terminating due to java.lang.OutOfMemoryError: Java heap space`.
+以下のコンテナには JVM ヒープサイズを設定することができます (`frontend`、`test-results`、`output-processing`、`contexts-service`)。 `「Terminating due to java.lang.OutOfMemoryError: Java heap space」`などの「メモリ不足」エラーが表示された場合は、ヒープサイズを増やすことを検討してください。
 
 == 設定
 
-To be able to configure the JVM_HEAP_SIZE value for each container, you will first need to create customizations files on your services machine.
+各コンテナの JVM_HEAP_SIZE の値を設定するには、まずサービスマシン上で customizaitions ファイルを作成する必要があります。
 
 1. 以下のように customizations ファイルを作成します。
 +
@@ -26,17 +26,17 @@ To be able to configure the JVM_HEAP_SIZE value for each container, you will fir
 /etc/circleconfig/contexts-service/customizations
 ```
 
-2. In each customization file add the line below to export your desired JVM heap size:
+2. 各 customizations ファイルで、次の行を追加して、ご希望の JVM ヒープサイズをエクスポートします。
 +
 ```shell
 export JVM_HEAP_SIZE=2g
 ```
 
-3. Stop and restart CircleCI application from the Management Console dashboard (for example, your-circleci-hostname.com:8800)
+3. 管理コンソールダッシュボードから CircleCI アプリケーションを終了して再起動します（例： your-circleci-hostname.com:8800 ）。
 
 
 == 変更後の検証
-Once your installation has successfully restarted, you can confirm the configured value was applied correctly by running the following REPL commands per container:
+正常に再起動したら、コンテナごとに次の REPL コマンドを実行することにより、設定値が正しく適用されているかを確認できます。
 
 
 * `frontend`
@@ -49,13 +49,13 @@ sudo docker exec -it frontend lein repl :connect 6005
 ```shell
 sudo docker exec -it test-results lein repl :connect 2719
 ```
-* `output-processing`
+* `output-processor`
 +
 ```shell
 sudo docker exec -it picard-output-processor lein repl :connect 6007
 ```
 
-And following are the outputs you should see:
+すると、以下の出力が表示されます。
 
 ```clojure
 (System/getenv "JVM_HEAP_SIZE") ;; should return what you have set above

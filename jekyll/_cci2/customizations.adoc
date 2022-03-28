@@ -206,7 +206,7 @@ To use second machine type (`large` in the example above), a further step is req
 ```
 circleci dev-console
 ```
-. Run the following (substituting your organization name):
+. Run the following (substituting your CircleCI organization name):
 ```
 (admin/set-org-feature-unsafe "<org_name>" :picard-allowed-resource-classes :val #{"l1.large"})
 ```
@@ -224,10 +224,11 @@ You can add a banner to your login screen as follows:
 . Access the file: `/etc/circleconfig/frontend/customizations` on the Services machine
 . Add the following line, substituting the text you wish to display in the banner:
 +
-```shell
-export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
-```
+[source,shell]
+----
+export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>"
+----
 . Restart CircleCI from the Management Console (your-circleci-hostname.com:8800)
 
 .Login Screen Banner Example
-image::banner.png[]
+image::banner.png[Example of banner]

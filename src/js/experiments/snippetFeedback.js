@@ -47,7 +47,7 @@ export class SnippetFeedback {
     const textPrompt = this._makeElement({
       kind: 'span',
       className: 'prompt',
-      text: 'Was this helpful?',
+      text: 'Was this code helpful?',
     });
     const slash = this._makeElement({ kind: 'span', text: ' /' });
     this.yesBtnEl = this._renderYesNoButton({ text: 'Yes' });

@@ -383,7 +383,7 @@ These instructions were sourced from the Velero documentation https://velero.io/
 
 === Step 1 - Configure `mc` client
 
-To start, configure https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc.html[`mc`] to connect to your storage
+To start, configure https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] to connect to your storage
 provider:
 
 [source,bash]
@@ -543,7 +543,7 @@ Choose the backup you wish to use and select restore.
 
 image::kots-admin-restore.png[Kots Create Snapshot]
 
-IMPORTANT: The restore will create new load balancers for CircleCI's services. You will need to either update your DNS records or the hostname configurations in KOTS Admin Console as a result. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
+IMPORTANT: The restore will create new load balancers for CircleCI's services. You will need to either update your DNS records or the hostname/IP configurations in KOTS Admin Console as a result. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
 
 IMPORTANT: If you are using pre-existing Nomad clients, you will need to restart them before they will connect to the nomad-server cluster.
 

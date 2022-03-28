@@ -10,16 +10,16 @@ version:
   - Server v2.x
   - Server v3.x
 suggested:
-  -
+  - 
     title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
-  -
+  - 
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
-  -
+  - 
     title: Check your CircleCI installation
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
-  -
+  - 
     title: Troubleshoot CLI errors
     link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
@@ -107,6 +107,8 @@ CLI を手動でダウンロードしてインストールする場合は、[Git
 {: #updating-the-cli }
 
 `circleci update` コマンドを使用して、CLI を最新のバージョンに更新できます。 なお、更新の有無を手動で確認するだけでインストールを行わない場合は、`circleci update check` コマンドで確認できます。
+
+Homebrew から CLI をインストールした場合は、`brew upgrade circleci` を実行してアップデートする必要があります。
 
 ### 旧バージョンの CLI の更新
 {: #updating-the-legacy-cli }

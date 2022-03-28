@@ -1,47 +1,72 @@
 ---
 layout: classic-docs
-title: "Collecting Test Metadata"
-short-title: "Collecting Test Metadata"
-description: "Collecting test metadata"
-order: 34
+title: "Collecting test data"
+description: "A guide to collecting test data in your CircleCI projects."
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step.
+When you run tests in CircleCI there two ways to store your test results. You can use either [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project. When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
+
+Using the **`store_test_results` step** gives you access to:
+
+* The **Tests** pane in the CircleCI web app.
+* Test insights and flaky test detection.
+* Test splitting.
+
+Alternatively, storing test results as **artifacts** means you can look at the raw XML. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{site.baseurl}}/2.0/configuration-reference/#storeartifacts).
+
+**Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
 * TOC
 {:toc}
 
-Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to
-not only upload and store test results, but also provides an easy-to-read UI of your passing/failing tests in the CircleCI
-application.
+## Overview
+{: #overview }
 
-You can access the test results interface from the *Tests* tab when viewing any particular [job]({{ site.baseurl}}/2.0/concepts/#jobs),
-as seen below.
+Using the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults) allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
 
-![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
+You can access the test results from the **Tests** tab when viewing a job, as shown below.
 
-To see test results as build artifacts, upload them using the [`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) step.
+![store-test-results-view]({{site.baseurl}}/assets/img/docs/test-summary.png)
 
-The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your config looks like the following:
+Below is an example of using the [`store_test_results` key]({{site.baseurl}}/2.0/configuration-reference/#storetestresults) in your `.circleci/config.yml`.
 
 ```yml
-- store_test_results:
+steps:
+  - run:
+  #...
+  # run tests and store XML files to a subdirectory, for example, test-results
+  #...
+  - store_test_results:
     path: test-results
 ```
 
-Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
+The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
 
+**Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+
+## Viewing storage usage
+{: #viewing-storage-usage }
+
+For information on viewing your stoarage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
+
+## Test Insights
+{: #test-insights }
+See the [Test Insights guide]({{site.baseurl}}/2.0/insights-tests/) for information on using the Insights feature to gather information about your tests, including flaky test detection, viewing alist of tests that fail most often, slowest tests and abn overall performance summary.
+
+Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+
+## Test Insights for server v2.x
+{: #test-insights-for-server-v2x }
 **If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
-![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
+![Insights for Failed Tests]({{site.baseurl}}/assets/img/docs/insights.png)
 
 _The above screenshot applies to CircleCI server v2.x only._
 
-**If you are using CircleCI cloud or server 3.x**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling formatters
 {: #enabling-formatters }
@@ -62,25 +87,16 @@ gem 'minitest-ci'
 
 - Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.
 
-**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
+**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{site.baseurl}}/2.0/testing-ios/) page.
 
-## Metadata collection in custom test steps
-{: #metadata-collection-in-custom-test-steps }
-
-Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
-```yml
-- store_test_results:
-    path: /tmp/test-results
-```
-
-### Custom test runner examples
+## Custom test runner examples
 {: #custom-test-runner-examples }
 
 This section provides the following test runner examples:
 
 | Language   | Test Runner  | Formatter                                                                               | Example(s)                                                                                                                             |   |   |
 |:-----------|:-------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|---|---|
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                  | [example]( {{ site.baseurl }}/2.0/collect-test-data/#jest)                                                                             |   |   |
+| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                  | [example]({{site.baseurl}}/2.0/collect-test-data/#jest)                                                                             |   |   |
 | JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                                  | [example]({{site.baseurl}}/2.0/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |   |   |
 | JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)              | [example]({{site.baseurl}}/2.0/collect-test-data/#karma)                                                                               |   |   |
 | JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/2.0/collect-test-data/#ava-for-node)                                                                        |   |   |
@@ -98,12 +114,11 @@ This section provides the following test runner examples:
 | Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                 | [example]({{site.baseurl}}/2.0/collect-test-data/#test2junit-for-clojure-tests)                                                        |   |   |
 {: class="table table-striped"}
 
-#### JavaScript
+### JavaScript
 {: #javascript }
 
-##### Jest
+#### Jest
 {: #jest }
-{:.no_toc}
 
 To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
 
@@ -121,8 +136,6 @@ steps:
         JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
   - store_test_results:
       path: ./reports/junit/
-  - store_artifacts:
-      path: ./reports/junit
 ```
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
@@ -131,9 +144,8 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
-#### Mocha for Node.js
+### Mocha for Node.js
 {: #mocha-for-node }
-{:.no_toc}
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
@@ -151,13 +163,10 @@ A working `.circleci/config.yml` section for testing might look like this:
           when: always
       - store_test_results:
           path: ~/junit
-      - store_artifacts:
-          path: ~/junit
 ```
 
-#### Mocha with nyc
+### Mocha with nyc
 {: #mocha-with-nyc }
-{:.no_toc}
 
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
@@ -249,21 +258,14 @@ jobs:
             - store_test_results:
                 path: reports
 
-            - store_artifacts:
-                path: ./reports/mocha/test-results.xml
-
-            - store_artifacts:
-                path: ./reports/eslint/eslint.xml
-
             - store_artifacts: # upload test coverage as artifact
                 path: ./coverage/lcov.info
                 prefix: tests
 ```
 {% endraw %}
 
-##### Karma
+#### Karma
 {: #karma }
-{:.no_toc}
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
@@ -282,8 +284,6 @@ A working `.circleci/config.yml` section might look like this:
           when: always
       - store_test_results:
           path: ./junit
-      - store_artifacts:
-          path: ./junit
 ```
 
 ```javascript
@@ -301,9 +301,8 @@ A working `.circleci/config.yml` section might look like this:
 // additional config...
 ```
 
-#### Ava for Node.js
+### Ava for Node.js
 {: #ava-for-node }
-{:.no_toc}
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
@@ -319,14 +318,11 @@ A working `.circleci/config.yml` section for testing might look like the followi
           when: always
       - store_test_results:
           path: ~/reports
-      - store_artifacts:
-          path: ~/reports
 ```
 
 
-#### ESLint
+### ESLint
 {: #eslint }
-{:.no_toc}
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
@@ -341,16 +337,13 @@ A working `.circleci/config.yml` test section might look like this:
           when: always
       - store_test_results:
           path: ~/reports
-      - store_artifacts:
-          path: ~/reports
 ```
 
-#### Ruby
+### Ruby
 {: #ruby }
 
-###### RSpec
+##### RSpec
 {: #rspec }
-{:.no_toc}
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -372,9 +365,8 @@ And modify your test command to this:
           path: ~/rspec
 ```
 
-##### Minitest
+#### Minitest
 {: #minitest }
-{:.no_toc}
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
@@ -397,7 +389,7 @@ And modify your test command to this:
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
-#### Cucumber
+### Cucumber
 {: #cucumber }
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
@@ -411,8 +403,6 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
             bundle exec cucumber --format junit --out ~/cucumber/junit.xml
           when: always
       - store_test_results:
-          path: ~/cucumber
-      - store_artifacts:
           path: ~/cucumber
 ```
 
@@ -430,16 +420,13 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           when: always
       - store_test_results:
           path: ~/cucumber
-      - store_artifacts:
-          path: ~/cucumber
 ```
 
-#### Python
+### Python
 {: #python }
 
-##### pytest
+#### pytest
 {: #pytest }
-{:.no_toc}
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
@@ -453,14 +440,10 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
 
       - store_test_results:
           path: test-results
-
-      - store_artifacts:
-          path: test-results
 ```
 
-##### unittest
+#### unittest
 {: #unittest }
-{:.no_toc}
 
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
@@ -475,17 +458,13 @@ After adding pytest to your project, you can produce and upload the test results
 
       - store_test_results:
           path: test-results
-
-      - store_artifacts:
-          path: test-results
 ```
 
-#### Java
+### Java
 {: #java }
 
-#### Maven Surefire Plugin for Java JUnit Results
+### Maven Surefire Plugin for Java JUnit Results
 {: #maven-surefire-plugin-for-java-junit-results }
-{:.no_toc}
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
@@ -499,13 +478,10 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
           when: always
       - store_test_results:
           path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 ```
 
-#### Gradle JUnit Test Results
+### Gradle JUnit Test Results
 {: #gradle-junit-test-results }
-{:.no_toc}
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
@@ -519,16 +495,13 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
           when: always
       - store_test_results:
           path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
 ```
 
-#### PHP
+### PHP
 {: #php }
 
-##### PHPUnit
+#### PHPUnit
 {: #phpunit }
-{:.no_toc}
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
@@ -541,14 +514,12 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
           when: always
       - store_test_results:
           path: ~/phpunit
-      - store_artifacts:
-          path: ~/phpunit
 ```
 
-#### .NET
+### .NET
 {: #dot-net }
 
-##### trx2junit for Visual Studio / .NET Core Tests
+#### trx2junit for Visual Studio / .NET Core Tests
 {: #trx2junit-for-visual-studio-net-core-tests }
 {:.no_toc}
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
@@ -569,17 +540,13 @@ A working `.circleci/config.yml` section might look like this:
               trx2junit tests/**/TestResults/*.trx
       - store_test_results:
           path: tests/TestResults
-      - store_artifacts:
-          path: tests/TestResults
-          destination: TestResults
 ```
 
-#### Clojure
+### Clojure
 {: #clojure }
 
-##### Kaocha
+#### Kaocha
 {: #kaocha }
-{:.no_toc}
 
 Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
 
@@ -602,7 +569,7 @@ Edit the kaocha config file `test.edn` to use this test reporter
 
 Add the store_test_results step your `.circleci/config.yml`
 ```yml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -614,22 +581,22 @@ jobs:
           path: junit.xml
 ```
 
-##### test2junit for Clojure Tests
+#### test2junit for Clojure Tests
 {: #test2junit-for-clojure-tests }
-{:.no_toc}
 
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
 ## API
 {: #api }
 
-To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v1/#get-build-test-metadata).
+To access test metadata for a job from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v2/#operation/getTests).
 
 ## See Also
 {: #see-also }
 {:.no_toc}
 
-[Using Insights]( {{ site.baseurl }}/2.0/insights/)
+- [Using Insights]({{site.baseurl}}/2.0/insights/)
+- [Test Insights]({{site.baseurl}}/2.0/insights-tests/)
 
 ## Video: Troubleshooting Test Runners
 {: #video-troubleshooting-test-runners }

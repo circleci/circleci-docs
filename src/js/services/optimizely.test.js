@@ -12,17 +12,16 @@ import { default as CookieOrginal } from 'js-cookie';
 jest.mock('js-cookie');
 const Cookie = CookieOrginal;
 
-describe('Optimizely Service', () => {
+describe('Optimizely Service logged-in users', () => {
   const client = new OptimizelyClient();
 
   const orgId = 'circle';
   const experimentKey = 'experiment_key';
   const variationName = 'variation_name';
+  const anonymousId = '22222222-2222-2222-2222-222222222222';
 
   const options = {
-    organizationId: '00000000-0000-0000-0000-000000000000',
-    userAnalyticsId: '11111111-1111-1111-1111-111111111111',
-    experimentKey: 'experiment_key',
+    experimentKey,
     groupExperimentName: 'experiment_group_test',
     experimentContainer: 'experiment_container',
   };
@@ -35,8 +34,6 @@ describe('Optimizely Service', () => {
   afterEach(() => {
     glob.userData = null;
     glob.forceAll = null;
-    jest.clearAllMocks();
-    jest.resetAllMocks();
   });
 
   describe('getUserId()', () => {
@@ -54,6 +51,14 @@ describe('Optimizely Service', () => {
       await expect(client.getUserId()).resolves.toBe(
         glob.userData.analytics_id,
       );
+    });
+  });
+
+  describe('getAnonymousId()', () => {
+    glob.analytics.user().anonymousId.mockReturnValue(anonymousId);
+
+    it('returns anonymousId when no error', async () => {
+      expect(client.getAnonymousId()).toBe(anonymousId);
     });
   });
 
@@ -127,7 +132,7 @@ describe('Optimizely Service', () => {
       await expect(client.getVariationName(null)).rejects.toEqual(errorObject);
     });
 
-    it('returns null when no cookie', async () => {
+    it('returns null when no org cookie', async () => {
       await expect(client.getVariationName(options)).resolves.toBe(null);
     });
 

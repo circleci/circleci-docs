@@ -1,3 +1,6 @@
+---
+layout: compress
+---
 <!DOCTYPE html>
 <html lang="{{ page.lang }}">
 {% include_cached head.html site=site page=page %}
@@ -26,7 +29,7 @@
       {% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url %}
     <div class="article-toc-footer">
       <div class="article-toc">
-        <div class="article-container docs" id="main">
+        <div class="article-container docs {{page.title | slugify}}" id="main">
           {% if page.collection == "ccie" %}{% include_cached v2-banner.html %}{% endif %}
           {% if page.collection == "cci1" %}{% include_cached v2-dev-banner.html %}{% endif %}
           {% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
@@ -93,6 +96,8 @@
   {% include_cached js-config.html site=site page=page %}
   {% include_cached js-assets.html %}
 </div><!-- .outter -->
+{% include popup_cta.html %}
+
 {% include_cached no-script.html %}
 </body>
 </html>

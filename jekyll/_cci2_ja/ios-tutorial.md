@@ -15,7 +15,7 @@ version:
 * 目次
 {:toc}
 
-**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
+**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{site.baseurl}}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
 
 ## 概要
 {: #overview }
@@ -27,12 +27,12 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。 詳細については「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照してください。
+- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/2.0/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
-2. 下図のように、Scheme Selector を使用してスキームの管理ダイアログ ボックスを開きます。![Xcode Scheme Selector](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-scheme-selector.png)
-3. スキームの管理ダイアログで、ビルドするスキームを選択し、[Shared (共有)] チェックボックスをオンにします。![スキームの管理ダイアログ](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
+2. 下図のように、Scheme Selector を使用してスキームの管理ダイアログ ボックスを開きます。![Xcode Scheme Selector]({{site.baseurl}}/assets/img/docs/ios-getting-started-scheme-selector.png)
+3. スキームの管理ダイアログで、ビルドするスキームを選択し、[Shared (共有)] チェックボックスをオンにします。![スキームの管理ダイアログ]({{site.baseurl}}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. スキームをコミットし、プッシュします。
 
 ## テストの実行
@@ -40,7 +40,7 @@ version:
 
 iOS プロジェクトでは、fastlane Scan を使用して以下のようにテストを実行できます。
 
-```yaml
+```yml
 jobs:
   build-and-test:
     macos:
@@ -53,15 +53,14 @@ jobs:
           environment:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
-
 ```
 
-サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションで確認してください。
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/2.0/testing-ios/#supported-xcode-versions)」セクションで確認してください。
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
 
-詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/ja/2.0/ios-codesigning/)」を参照してください。
+詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/2.0/ios-codesigning/)」を参照してください。
 
 To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) document for customizations.
 
@@ -70,7 +69,7 @@ To further customize your build process to use custom tools or run your own scri
 
 たとえば Homebrew から依存関係をインストールする場合は、`run` ステップを使用して適切なコマンドを指定します。
 
-```yaml
+```yml
     steps:
 
       - run:
@@ -87,7 +86,7 @@ To further customize your build process to use custom tools or run your own scri
 
 以下の短い `run` 構文例のように、`run` ステップを使用してテストを実行することもできます。
 
-```yaml
+```yml
     steps:
 
       - run: fastlane scan
@@ -99,7 +98,7 @@ To further customize your build process to use custom tools or run your own scri
 
 [fastlane](https://fastlane.tools) の [gym](https://github.com/fastlane/fastlane/tree/master/gym) と [deliver](https://github.com/fastlane/fastlane/tree/master/deliver) を使用して CircleCI でアプリケーションをデプロイするには、識別子、リリースを実行するブランチまたはパターン、および複数のコマンドを指定してリリースを実行します。
 
-```yaml
+```yml
 version: 2.1
 jobs:
   test:
@@ -113,7 +112,7 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
-      - deploy:
+      - run:
           name: Deploy
           command: fastlane release_appstore
 
@@ -132,7 +131,7 @@ workflows:
 ## 高度な構成
 {: #advanced-configuration }
 
-iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/docs/ja/2.0/testing-ios/)を参照してください。
+See the [Testing iOS Applications on macOS]({{site.baseurl}}/2.0/testing-ios/) document for more advanced details on configuring iOS projects.
 
 ## GitHub 上のサンプル アプリケーション
 {: #example-application-on-github }

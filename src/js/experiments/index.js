@@ -1,12 +1,18 @@
 import forceAll from './forceAll';
 import kbLinks from './kbLinks';
-import videoTutorials from './videoTutorials';
 import languageGuides from './languageGuides';
+import signupLinksCta from './signupLinksCta';
 import './snippetFeedback';
+import signUpCTA from './signUpCTA';
+import troubleShootingCommonIssues from './troubleshootingCommonIssues';
+import popupCta from './popupCta';
 
 export default {
   forceAll,
   languageGuides,
-  videoTutorials,
   kbLinks,
+  signUpCTA,
+  signupLinksCta,
+  troubleShootingCommonIssues,
+  popupCta,
 };

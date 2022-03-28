@@ -141,7 +141,11 @@ Specific rates and details can be found in this [Discuss post](https://discuss.c
 
 IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
 
-![Screenshot showing the location of the IP ranges feature]({{ site.baseurl }}/assets/img/docs/ip-ranges.png)
+![Screenshot showing the location of the IP ranges feature]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
+
+On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on.  See more details on [Discuss](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068).
+
+![CircleCI about image]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
@@ -153,10 +157,10 @@ The machines that execute *all jobs* on CircleCI’s platform, not just jobs opt
 
 CircleCI *does not recommend* configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
  
-## CircleCI macOS Cloud:
+## CircleCI macOS Cloud
 {: #circleci-macos-cloud }
 
-In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. IP address ranges for CircleCI macOS Cloud:
+In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. The following IP address ranges are used by CircleCI macOS Cloud:
 
 - 162.252.208.0/24
 - 162.252.209.0/24
@@ -173,11 +177,12 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 - 38.39.183.0/24
 - 198.206.135.0/24
 
-**IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
+**IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform. 
+**Note:** macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
 
 ## Known limitations
 {: #knownlimitations}
 
 - There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
-- IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
+- IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
 - If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses](https://circleci.com/docs/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.

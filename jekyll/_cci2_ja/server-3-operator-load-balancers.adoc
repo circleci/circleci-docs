@@ -3,17 +3,17 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Load Balancers
+= CircleCI Server v3.x ロードバランサー
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this guide to make the frontend load balancer private.
+:page-description: このページでは、フロントエンド ロードバランサーを非公開にする方法について解説しています。
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI server uses load balancers to manage network traffic entering and leaving the Kubernetes services cluster. Nomad クラスタへのトラフィックを管理するロード バランサーは 3 つあり、すべて VPC の内部ロード バランサーです。 これらは、さまざまなコンピューティング リソースへのジョブの分散を管理しています。 
+CircleCI Server では、ロード バランサーを使用して Kubernetes サービス クラスタで送受信されるネットワーク トラフィックを管理しています。 Nomad クラスタへのトラフィックを管理するロード バランサーは 3 つあり、すべて VPC の内部ロード バランサーです。 これらは、さまざまなコンピューティング リソースへのジョブの分散を管理しています。 
 
-The frontend load balancer manages traffic coming from developers and your VCS, including through the API, the CLI, and CircleCI app. フロントエンド ロード バランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
+フロントエンド ロード バランサーは、API、CLI、および CircleCI アプリなどを通じた、開発者や VCS からのトラフィックを管理しています。 フロントエンド ロード バランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
 
 toc::[]
 
@@ -24,7 +24,7 @@ toc::[]
 *Web フック:* フロントエンド ロード バランサーを非公開にする場合、Web フックを機能させるために、以下に示す VCS に応じた条件を満たす必要があります。 
 
 * *GitHub Enterprise* – CircleCI Server が GHE と同じ内部ネットワークにあること。 
-* **GitHub.com** – set up a proxy for incoming webhooks and set it as override for the webhook host URL. この設定は、CircleCI アプリの *[Admin Settings (管理者設定)]* > *[System Settings (システム設定)]* > *[Override webhook host URL (Web フック ホスト URLのオーバーライド)]* にあります。
+* *Github.com* – 受信 Web フックのプロキシをセットアップし、Web フック ホスト URL のオーバーライドとして設定すること。 この設定は、CircleCI アプリの *[Admin Settings (管理者設定)]* > *[System Settings (システム設定)]* > *[Override webhook host URL (Web フック ホスト URLのオーバーライド)]* にあります。
 ====
 
 NOTE: プライベート ロード バランサー オプションは、GKE または EKS 上の CircleCI Server でのみ使用できます。
@@ -35,4 +35,4 @@ NOTE: プライベート ロード バランサー オプションは、GKE ま�
 +
 NOTE: Let's Encrypt の TLS 証明書を使用している場合、このチェック ボックスは表示されません。 Let's Encrypt のチェック ボックスをオフにすると、プライベート ロード バランサーのオプションが表示されます。
 
-If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes will request a new load balancer with the new configuration.
+CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロード バランサーに送信されるよう古いパブリック ロード バランサーの削除が必要な場合があります。

@@ -17,7 +17,7 @@ To update your CircleCI server installation, see our https://circleci.com/docs/2
 
 * Ubuntu 14.04 または 16.04 ベースの環境を使用していること
 * お使いの環境が孤立して*おらず*、インターネットにアクセスできること.
-* We will be updating to Replicated v2.38, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
+* ここでは Replicated v2.38 への更新を行いますが、その前に Services マシンで v2.10.3 以上が実行されていることを確認する必要があります。 これを行うには、Services マシンに SSH で接続し、次のコマンドを実行します。
 +
 ```shell
 replicated --version
@@ -29,9 +29,9 @@ If you are running a version of Replicated pre 2.10.3 please reach out to suppor
 
 CAUTION: Remember to take a snapshot (described https://circleci.com/docs/2.0/updating-server/#section=server-administration[here]) before starting the Replicated update process
 
-. Stop the CircleCI application by clicking the Stop Now button on the Dashboard. アプリケーションのシャットダウンには数分かかります。 Wait for the status to become “Stopped” before continuing.
+. ダッシュボードの [Stop Now (今すぐ停止)] ボタンをクリックして、CircleCI アプリケーションを停止させます。 アプリケーションのシャットダウンには数分かかります。 ステータスが [Stopped (停止)] になってから次の手順に進んでください。
 +
-.Stop the CircleCI Application
+.CircleCI アプリケーションの停止
 image::stop_replicated_update_available.png[Stop the CircleCI Application]
 +
 Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
@@ -40,7 +40,7 @@ Alternatively you can SSH into the services machine and stop the CircleCI applic
 replicatedctl app stop
 ```
 +
-You can check the status using the followng:
+ステータスは、次のコマンドを実行して確認できます。
 +
 ```shell
 replicatedctl app status inspect
@@ -63,7 +63,7 @@ replicatedctl app status inspect
 ]
 ```
 
-. For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1. Check which version you are running with `docker version` and if you need to update, follow these steps:
+. Replicated の更新を完了するには、Docker が推奨バージョンの 17.12.1 である必要があります。 `docker version` を実行して実行中のバージョンを確認します。 更新が必要な場合は、以下のコマンドを実行します。
 // should there be a step to check Docker version first?
 +
 ```shell
@@ -76,7 +76,7 @@ sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 sudo apt-mark hold docker-ce
 ```
 
-== Perform Update
+== 更新の実行
 
 . 以下のように更新スクリプトを実行して、Replicated の更新を実行します。
 +

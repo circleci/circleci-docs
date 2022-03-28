@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
+Docker layer caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
 the [Free and above](https://circleci.com/pricing/) usage plans (credits are charged per run job) and on installations of [CircleCI server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 * TOC
@@ -20,11 +20,11 @@ the [Free and above](https://circleci.com/pricing/) usage plans (credits are cha
 ## Overview
 {: #overview }
 
-Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
+Docker layer caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
 
 DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
 
-Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
+Docker layer caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
 
 ### Limitations
 {: #limitations }
@@ -39,23 +39,62 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
+DLC is only useful when creating your own Docker image with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
-```yml
-version: 2
+{:.tab.switcher.Cloud}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
 jobs:
-  build:
+ build:
     docker:
-      # DLC does nothing here, its caching depends on commonality of the image layers.
-      - image: cimg/node:14.17.3
+      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true
-      # DLC will explicitly cache layers here and try to avoid rebuilding.
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_3}
+```yaml
+version: 2.1
+jobs:
+ build:
+    docker:
+      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
+```
+
+{:.tab.switcher.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
+# browser testing require the use of the CircleCI browser-tools orb, available 
+# with config version 2.1.
+version: 2
+jobs:
+ build:
+    docker:
+      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
 
@@ -91,7 +130,7 @@ To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` un
 
 Every layer built in a previous job will be accessible in the Remote Docker Environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
 
-If you run many concurrent jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker environment. Docker Layer Caching guarantees that jobs will have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical caches.
+If you run many concurrent jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker environment. Docker layer caching guarantees that jobs will have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical caches.
 
 **Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
 
@@ -99,7 +138,7 @@ If you run many concurrent jobs for the same project that depend on the same env
 {: #machine-executor }
 {:.no_toc}
 
-Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
+Docker layer caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
 
 ```yml
 machine:
@@ -110,7 +149,7 @@ machine:
 ## Examples
 {: #examples }
 
-Let's use the following Dockerfile to illustrate how Docker Layer Caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
+Let's use the following Dockerfile to illustrate how Docker layer caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
 
 ### Dockerfile
 {: #dockerfile }

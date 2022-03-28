@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-Our mission is to empower technology-driven organizations to do their best work -- and make engineering teams more productive. Build, test, and deploy using intelligent automation.
+Software teams want to move faster, but often lack the confidence to accelerate quickly. Our mission is to manage change so software teams can innovate faster. We want to empower technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. Build, test, and deploy by using intelligent automation.
 
 We work where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers. CircleCI provides enterprise-class support and services, with the flexibility of a startup.
 
