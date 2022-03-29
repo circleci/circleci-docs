@@ -11,6 +11,26 @@ version:
 :toc: macro
 :toc-title:
 
+NOTE: This is a very long note with a link http://circleci.com/docs[Link text]. This is a very long note with a link. This is a very long note with a link. This is a very long note with a link. This is a very long note with a link
+
+TIP: This is a tip with some **bold text**.
+
+IMPORTANT: This bit is important you should definitely _pay attention_.
+
+CAUTION: This is a caution. **Do not do this!!**
+
+WARNING: This is a warning. Don't!
+
+[IMPORTANT] 
+.Feeding the Werewolves
+==== 
+While werewolves are hardy community members, keep in mind the following dietary concerns:
+
+. They are allergic to cinnamon.
+. More than two glasses of orange juice in 24 hours makes them howl in harmony with alarms and sirens.
+. Celery makes them sad.
+====
+
 toc::[]
 
 == Introduction
