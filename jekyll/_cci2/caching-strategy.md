@@ -15,6 +15,15 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 * TOC
 {:toc}
 
+## Caching and self-hosted runner
+{: #caching-and-self-hosted-runner }
+
+When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+
+Retaining caches for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining caches, and how long caches need to be retained for your use case. To lower costs, consider a lower storage retention for caches, if that suits your needs.
+
+You can customize storage usage retention periods for caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+
 ## Cache optimization
 {: #cache-optimization }
 

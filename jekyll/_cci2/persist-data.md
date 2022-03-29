@@ -21,7 +21,7 @@ Caching persists data between the same job in different builds, allowing you to 
 ### Caching dependencies
 {: #caching-dependencies }
 
-A prime example of a caching strategy is using a cache with dependency managers, such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload every dependency on every build.
+A prime example of a caching strategy is using a cache with dependency managers, such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not re-download every dependency on every build.
 
 Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches. 
 
@@ -87,24 +87,22 @@ To view your network and storage usage, visit the [CircleCI web app](https://app
 2. Select **Plan Usage**.
 3. Select the **Network** or **Storage** tab depending on which you want to view.
 
-Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, artifact, workspace, testresult.
+Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, artifact, and workspace.
 
 ### Overview of all network and storage transfer
 {: #overview-of-network-and-storage-transfer }
 
-All data persistence operations within a job will accrue storage usage, the relevant actions are:
+All data persistence operations within a job will accrue storage usage, though not all storage usage will result in costs. The relevant actions for accruing storage usage are:
 
 * Uploading caches
 * Uploading workspaces
 * Uploading artifacts
-* Uploading test results
 
 To determine which jobs utilize the above actions, you can search for the following commands in your project's `.circleci/config.yml` file:
 
 * `save_cache`
 * `persist_to_workspace`
 * `store_artifacts`
-* `store_test_results`
 
 The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners.**
 {: class="alert alert-info" }
@@ -116,25 +114,24 @@ Details about your network and storage transfer usage can be viewed on your **Pl
 - Storage data activity (Network tab)
 - Total storage volume data (Storage tab)
 
-Details about individual step network and storage transfer usage can be found in the step output on the Jobs page as seen below.
+Details about individual step network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
 
 ![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
 
 ### Custom storage usage
 {: #custom-storage-usage }
 
-You can customize storage usage for workspaces, caches, artifacts, and test results on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods. By default, the storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts and test results, and 15 days for caches and workspaces.
+You can customize storage usage retention periods for workspaces, caches, and artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods by adjusting the sliders for each object type (see image below). By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+
+When you have determined your preferred storage retention for each object type, click the **Save Changes** button and your preferences will take effect immediately for any new workspaces, caches, or artifacts created. Previously created objects that are stored with a different retention period will continue to persist for the retention period set when the object was created.
+
+The  **Reset to Default Values** button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
 
 Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
 
 ![storage-usage-controls]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
 
 If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle with a 10 day storage period set, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for a new 10 day storage period.
-
-### Reducing excess use of network egress
-{: #reducing-excess-use-of-network-egress }
-
-Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
 
 ### How to calculate an approximation of network and storage costs
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
@@ -147,6 +144,11 @@ Charges apply when an organization has runner network egress beyond the included
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
 For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+
+### Reducing excess use of network egress
+{: #reducing-excess-use-of-network-egress }
+
+Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
 
 ## See also
 {: #see-also }
