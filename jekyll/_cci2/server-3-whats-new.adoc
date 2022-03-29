@@ -22,9 +22,12 @@ toc::[]
 
 == Release 3.4.0
 
-=== Upgrade/install notes
+=== Upgrade notes
 
-* Before installing or upgrading to v3.4.0, delete the deployment named `circleci-server-kube-state-metrics`.
+Before upgrading to v3.4.0, delete the deployment named `circleci-server-kube-state-metrics`:
+
+* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+* Redeploy the app from the KOTS admin console
 
 === New Features
 
