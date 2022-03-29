@@ -35,9 +35,9 @@ To get started with Dynamic Config in CircleCI:
 ## How dynamic config works
 {: #how-dynamic-config-works }
 
-CircleCI's dynamic configuration feature uses a setup workflow. A setup workflow can contain jobs that set up children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yml` files can then be passed into an additional `config.yml` that potentially exists in outside directories.
+CircleCI's dynamic configuration feature uses setup workflows. A setup workflow can contain jobs that compute pipeline parameters, which can then be passed into an additional configuration that potentially exists in other directories. A setup workflow can also be used to generate follow-up pipelines via pre-existing scripts.
 
-Behind the scenes, the continuation configuration is implemented as a call to a public pipeline continuation API. This API accepts a continuation key, which is a secret, unique-per-pipeline key, that is automatically injected into the environment of jobs executed as part of a setup workflow. It also accepts a configuration string, as well as a set of pipeline parameters.
+Behind the scenes, the continuation configuration is implemented as a call to a public pipeline continuation API. This API accepts a continuation key, which is a secret, unique-per-pipeline key that is automatically injected into the environment of jobs executed as part of a setup workflow. It also accepts a configuration string, as well as a set of pipeline parameters.
 
 Note that:
 - The setup phase requires `version: 2.1` or higher.
