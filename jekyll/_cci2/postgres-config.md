@@ -32,7 +32,7 @@ jobs:
     # Primary container image where all commands run
 
     docker:
-      - image: cimg/ruby:3.0-node
+      - image: cimg/ruby:2.6-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -109,7 +109,7 @@ jobs:
   build:
     working_directory: ~/appName
     docker:
-      - image: ruby:2.3.1-jessie
+      - image: cimg/ruby:2.6
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -120,7 +120,7 @@ jobs:
           RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
-      - image: postgres:9.6-jessie
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -153,12 +153,12 @@ version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go/
-      - image: cimg/go:1.17
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      - image: cimg/go:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres/
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
@@ -342,7 +342,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+      - image: cimg/php:7.1 # The primary container where steps are run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

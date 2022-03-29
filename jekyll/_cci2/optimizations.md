@@ -79,7 +79,7 @@ Using `resource_class`, it is possible to configure CPU and RAM resources for ea
 
 Please note, if a `resource_class` is not explicitly declared, CircleCI will try to find the best default resource class for your organization.
 
-* See the `resource_class` section of the [Configuration Reference]({{site.baseURL}}/2.0/configuration-reference/#resourceclass) for more information.
+* See the `resource_class` section of the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for more information.
 
 ## See also
 {: #see-also }
