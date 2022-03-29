@@ -89,6 +89,8 @@ To view your network and storage usage, visit the [CircleCI web app](https://app
 
 Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, artifact, and workspace.
 
+If you find you have more questions about your network and storage usage beyond what you can see on the CircleCI web app, please contact [support](https://support.circleci.com/hc/en-us/requests/new) by opening a ticket for **Accounts / Billing**.
+
 ### Overview of all network and storage transfer
 {: #overview-of-network-and-storage-transfer }
 
@@ -114,7 +116,7 @@ Details about your network and storage transfer usage can be viewed on your **Pl
 - Storage data activity (Network tab)
 - Total storage volume data (Storage tab)
 
-Details about individual step network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
+Details about individual network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
 
 ![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
 

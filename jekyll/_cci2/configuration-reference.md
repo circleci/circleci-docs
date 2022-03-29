@@ -159,7 +159,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 ## **`jobs`**
 {: #jobs }
 
-A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample config.yml]({{site.baseurl}}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
 Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
@@ -1046,7 +1046,9 @@ version | N        | String | Version string of Docker you would like to use (de
 ##### **`save_cache`**
 {: #savecache }
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more on the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) page.
+
+Cache retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1343,6 +1345,8 @@ destination | N | String | Prefix added to the artifact paths in the artifacts A
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
+Artifact storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
+
 ###### Example
 {: #example }
 {:.no_toc}
@@ -1359,7 +1363,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 ##### **`store_test_results`**
 {: #storetestresults }
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites.
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's **Test Summary** section. Storing test results is useful for timing analysis of your test suites.
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
@@ -1395,6 +1399,8 @@ test-results
 {: #persisttoworkspace }
 
 Special step used to persist a temporary file to be used by another job in the workflow. `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
+
+Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1465,6 +1471,8 @@ Key | Required | Type | Description
 at | Y | String | Directory to attach the workspace to.
 {: class="table table-striped"}
 
+Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
+
 ###### _Example_
 {: #example }
 {:.no_toc}
@@ -1481,7 +1489,7 @@ When attaching a workspace the "layer" from each upstream job is applied in the 
 
 If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
-Note the following distinctions between Artifacts, Workspaces, and Caches:
+Note the following distinctions between artifacts, workspaces, and caches:
 
 | Type      | Use                      | Example |
 |-----------|------------------------------------|---------
@@ -1489,6 +1497,9 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 | Workspaces| Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
 | Caches    | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
+
+The lifetime of artifacts, workspaces, and caches can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can control the storage retention periods for these objects. If no storage period is set, the default storage retention period of artifacts is 30 days, while the default storage retention period of workspaces and caches is 15 days.
+{: class="alert alert-info" }
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
