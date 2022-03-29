@@ -14,17 +14,16 @@ version:
 
 Before you begin with the CircleCI server v3.x execution installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
-
 .Installation Experience Flow Chart Phase 3
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
+
+NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
 == Phase 3: Execution environment installation
 
 === Output Processor
-==== Overview
 Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand.
 
 Access the KOTS Admin Console. Get to the KOTS Admin Console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
@@ -41,7 +40,6 @@ kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 . *Save your configuration*. You will deploy and validate your setup after you complete Nomad client setup.
 
 === Nomad Clients
-==== Overview
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete the Nomad Clients installation.
