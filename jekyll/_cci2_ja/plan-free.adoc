@@ -34,4 +34,4 @@ Docker、 Linux、 Windows、および macOS のさまざまなリソースク�
 
 === サポート
 
-Scale プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および https://support.circleci.com/hc/ja/requests/new[グローバルチケットシステム] もご利用いただけます。
+Scale プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
