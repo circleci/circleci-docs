@@ -8,7 +8,9 @@ version:
 - Server v2.x
 ---
 
-When you run tests in CircleCI there two ways to store your test results. You can use either [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project. When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
+When you run tests in CircleCI there two ways to store your test results. You can use either [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project. 
+
+When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
 Using the **`store_test_results` step** gives you access to:
 
@@ -16,7 +18,9 @@ Using the **`store_test_results` step** gives you access to:
 * Test insights and flaky test detection.
 * Test splitting.
 
-Alternatively, storing test results as **artifacts** means you can look at the raw XML. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{site.baseurl}}/2.0/configuration-reference/#storeartifacts). 
+Alternatively, storing test results as **artifacts** means you can look at the raw XML. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. 
+
+To see test results as build artifacts, upload them using the [`store_artifacts` step]({{site.baseurl}}/2.0/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
 
 **Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
