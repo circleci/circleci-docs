@@ -99,7 +99,7 @@ For the **Frontend TLS private key and certificate** you have 4 options:
 
 If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
-Once you have generated your certificates, you can enable ACM from the KOTS admin console under the Frontend section. Check the ACM box and provide your ACM ARN (Amazon Resource Name).
+Once you have generated your certificates, enable ACM from the KOTS admin console under the Frontend section. Check the ACM box and provide your ACM ARN (Amazon Resource Name).
 
 [WARNING]
 ==== 
