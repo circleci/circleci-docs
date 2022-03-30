@@ -69,7 +69,7 @@ Yes, by running multiple replicas of the `launch-agent` with unique names, it is
 
 == Can I delete self-hosted runner resource classes?
 
-Yes, self-hosted runner resource classes can be deleted through the CLI. Please be sure you want to permanently delete the resource class, as this action cannot be undone.
+Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the resource class, as this action cannot be undone.
 
 Before you can delete the resource class, any tokens associated with the resource class will need to be deleted first.
 

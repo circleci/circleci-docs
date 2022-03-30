@@ -99,6 +99,8 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 === Enable the `systemd` unit
 
+You will need to have https://systemd.io/[systemd] version 235+ installed for this optional step.
+
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
 ```shell

@@ -129,4 +129,4 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 == Verify the service is running
 
-The macOS application console can be used to view the logs for the CircleCI agent. Look under "Log Reports" for the logs called `com.circleci.runner.log`.
+Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.
