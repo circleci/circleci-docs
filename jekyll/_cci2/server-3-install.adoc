@@ -115,8 +115,10 @@ NOTE: If you are selecting the option to use private load balancers, the Let's E
 
 === Encryption
 
-==== Artifact and Encryption Signing Settings
 Encryption and artifact signing keys were created during prerequisites phase. You can enter them here now.
+
+.Encryption Settings
+image::server-3-encryption-settings.png[Screenshot showing encryption settings]
 
 Complete the following fields:
 
@@ -125,7 +127,11 @@ Complete the following fields:
 * *Encryption Signing Key (required)*
 
 === GitHub
-You created your Github OAuth application in the prerequisite phase. Use the data to complete the following:
+
+You created your Github OAuth application in the prerequisite phase. Use the data to complete the following settings.
+
+.GitHub Settings
+image::server-3-github-settings.png[Screenshot showing GitHub settings]
 
 * *Github Type (required)* -
 Select Cloud or Enterprise (on premises).
@@ -141,7 +147,10 @@ Required when using a proxy. Include the output of `ssh-keyscan github.example.c
 
 === Object storage
 
-You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following:
+You created your Object Storage Bucket and Keys in the prerequisite steps. Use the data to complete the following settings depending on your platform.
+
+.Object Storage Settings
+image::server-3-object-storage.png[Screenshot showing object storage settings]
 
 // Don't include this section in the GCP PDF.
 

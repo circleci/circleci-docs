@@ -229,7 +229,7 @@ You must repeat Step 2 for all the existing node pools. Follow these links for s
 
 === Create a new GitHub OAuth app
 
-CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain then images will fail to load.
+CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
