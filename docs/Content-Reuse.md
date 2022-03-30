@@ -20,7 +20,9 @@ Site variables are defined within `jekyll/_config.yml` as key value pairs:
 my-variable-name: my-variable-value
 ```
 
-### Markdown
+For AsciiDoc, the variables should be added under the _asciidoc, attributes_ section. If the variables are to be used in generated PDFs, they should also be added under the _asciidoctor, attributes_ section.
+
+### Using Site Variables with Markdown
 
 To use the variable within a Markdown page, use the following syntax:
 
@@ -28,7 +30,7 @@ To use the variable within a Markdown page, use the following syntax:
 {{site.<my_variable_name>}}
 ```
 
-### AsciiDoc
+### Using Site Variables with AsciiDoc
 
 To include the variable in an AsciiDoc page, use the following syntax:
 
