@@ -147,12 +147,12 @@ version: 2.1
 
 orbs:
   cypress: cypress-io/cypress@1
-
+  
 workflows:
   build:
     jobs:
-      - cypress/run
-        no-workspace: true
+      - cypress/run:
+          no-workspace: true
 ```
 {% endraw %}
 
