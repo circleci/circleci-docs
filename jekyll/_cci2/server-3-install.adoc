@@ -207,7 +207,7 @@ Skip over the next few sections - **Output Processor**, **Nomad** and **VM Servi
 
 === Postgres, MongoDB, Vault settings
 
-You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CirecleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case, see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CircleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
 
 === Save and deploy
 Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Kong load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation.
