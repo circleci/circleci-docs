@@ -146,7 +146,7 @@ To simplify this process, you may use a CircleCI-certified orb to perform many d
 version: 2.1
 
 orbs:
-  cypress: cypress-io/cypress@1.29.0
+  cypress: cypress-io/cypress@1
 
 workflows:
   build:
