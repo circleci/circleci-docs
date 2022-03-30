@@ -47,7 +47,7 @@ Docker、 Linux、 Windows、および macOS 上で大きなマシンサイズ�
 === 追加サポートオプション
 
 SLA を介した追加サポート(利用時間と日数の制限あり) の利用やサポートパッケージのアドオンが可能です。 Performance プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および 
- https://support.circleci.com/hc/ja/requests/new[グローバルチケットシステム] もご利用いただけます。
+ https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
 == CircleCI の機能
 
