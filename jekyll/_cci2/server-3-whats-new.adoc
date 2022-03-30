@@ -40,7 +40,7 @@ Before upgrading to v3.4.0, delete the deployment named `circleci-server-kube-st
 === Fixes
 
 * Fixed a bug that was causing the jobs page and step output access to run very slow in the CircleCI web app.
-* Fixed a bug that was causing the workflows conductor pod to crash and issues with StatsD metrics.
+* Fixed a bug that was causing the workflows conductor pod to crash and cause issues with StatsD metrics.
 
 === Known Issues
 

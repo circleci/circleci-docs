@@ -34,7 +34,7 @@ kubectl kots version
 NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
-. From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
+. From the terminal, run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 +
 ```bash
 kubectl kots install circleci-server
@@ -47,7 +47,7 @@ You will be prompted for:
 
 . When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
 
-TIP: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+TIP: If you need to get back to the KOTS admin console at a later date, run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 TIP: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
@@ -97,9 +97,9 @@ For the **Frontend TLS private key and certificate** you have 4 options:
 
 **Using ACM TLS Certificates**
 
-If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, you can follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
-Once you have generated your certificates, you can enable ACM from the KOTS admin console under the Frontend section. Check the ACM box and provide your ACM ARN (Amazon Resource Name).
+Once you have generated your certificates, enable ACM from the KOTS admin console under the Frontend section. Check the ACM box and provide your ACM ARN (Amazon Resource Name).
 
 [WARNING]
 ==== 
@@ -216,7 +216,7 @@ Skip over the next few sections - **Output Processor**, **Nomad** and **VM Servi
 
 === Postgres, MongoDB, Vault settings
 
-You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CirecleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case, see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CircleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
 
 === Save and deploy
 Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Kong load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation.
