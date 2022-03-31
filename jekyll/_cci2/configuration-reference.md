@@ -216,7 +216,7 @@ jobs:
 
 #### `parameters`
 {: #parameters }
-The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-in-workflow).
+`parameters` can be used when [calling that `job` in a `workflow`](#jobs-in-workflow).
 
 Reserved parameter-names:
 
@@ -235,49 +235,33 @@ See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-An "executor" is roughly "a place where steps occur". CircleCI can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+CircleCI offers several execution environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need. Learn more about executors in the [Executors and Image guide]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {: #docker }
-{:.no_toc}
 
 Configured by `docker` key which takes a list of maps:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The name of a custom docker image to use
-name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
-entrypoint | N | String or List | The command used as executable when launching the container
-command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
+image | Y | String | The name of a custom docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
+name | N | String | `name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
+entrypoint | N | String or List | The command used as executable when launching the container. `entrypoint` overrides the image's [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint).
+command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container. `command` overrides the image's `COMMAND`. It will be used as arguments to the image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
 user | N | String | Which user to run commands as within the Docker container
-environment | N | Map | A map of environment variable names and values
+environment | N | Map | A map of environment variable names and values. The `environment` settings apply to the entrypoint/command run by the docker container, not the job steps.
 auth | N | Map | Authentication for registries using standard `docker login` credentials
 aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
-The first `image` listed under a job defines the job's own primary container image where all steps will run.
-
-`entrypoint` overrides the image's `ENTRYPOINT`.
-
-`command` overrides the image's `COMMAND`; it will be used as arguments to the
-image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
-
-For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container)
-(the first container in the list), if neither `command` nor `entrypoint` is
-specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are
-ignored. This is because the primary container is typically used only for
-running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely. ([A custom image may disable
-this behavior and force the `ENTRYPOINT` to run.]({{ site.baseurl
-}}/2.0/custom-images/#adding-an-entrypoint)) The job `steps` run in the primary
-container only.
-
-`name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
-
-The `environment` settings apply to entrypoint/command run by the docker container, not the job steps.
+For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (the first container in the list) if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. 
+This is because the primary container is typically used only for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+A [custom image]({{ site.baseurl
+}}/2.0/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run. 
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
-Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It's recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
+Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
 
 Example:
 
@@ -316,7 +300,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the [`aws_auth` field]({{ site.baseurl }}/2.0/configuration-reference/#docker-machine-macos-windows-executor) as in the following example:
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
 
 ```yaml
 jobs:
@@ -328,30 +312,14 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
-It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
-
-```yaml
-jobs:
-  myjob:
-    docker:
-      - image: cimg/node:17.2.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - sayhello:
-          to: "Lev"
-```
-
 #### **`machine`**
 {: #machine }
-{:.no_toc}
 
-The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
+The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
+image | Y | String | The virtual machine image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/server-3-operator-vm-service).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
