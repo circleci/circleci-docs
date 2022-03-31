@@ -127,7 +127,7 @@ You can customize storage usage retention periods for workspaces, caches, and ar
 
 When you have determined your preferred storage retention for each object type, click the **Save Changes** button and your preferences will take effect immediately for any new workspaces, caches, or artifacts created. Previously created objects that are stored with a different retention period will continue to persist for the retention period set when the object was created.
 
-The  **Reset to Default Values** button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
+The **Reset to Default Values** button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
 
 Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
 
