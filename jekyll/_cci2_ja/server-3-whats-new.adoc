@@ -21,23 +21,23 @@ toc::[]
 
 === アップグレードに関する注意事項
 
-Before upgrading to v3.4.0, delete the deployment named `circleci-server-kube-state-metrics`:
+v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
 
-* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
-* Deploy the app from the KOTS admin console
+* `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`を実行します。
+* KOTS 管理者コンソールからアプリをデプロイします。
 
 === 新機能
 
-* Machine Executor 用の Android イメージの提供を開始しました。 For more information, see the https://circleci.com/docs/2.0/android-machine-image/[Using Android Images with the Machine Executor] guide.
+* Machine Executor 用の Android イメージの提供を開始しました。 詳細については、https://circleci.com/docs/2.0/android-machine-image/[Machine Executor での Android イメージの使用]ガイドを参照してください。
 * カスタム Docker レジストリから必要に応じて CircleCI Build Agent をプルできるようになりました。 詳細についてはカスタマーサポートにお問い合わせください。
-* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 For more information see the https://circleci.com/docs/2.0/server-3-install/#frontend-settings[Server v3.x Installation Guide].
+* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、https://circleci.com/docs/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド]を参照してください。
 * Kubernetes v1.16 - v1.23 に対応しました。
-* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
+* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 詳細については、https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[CircleCI Server v3.x のインストールガイド]を参照してください。
 
 === 修正点
 
 * CircleCI Web アプリで、ジョブページとステップ出力アクセスの動作が非常に遅くなる不具合を修正しました。
-* Fixed a bug that was causing the workflows conductor pod to crash and cause issues with StatsD metrics.
+* ワークフローコンダクターポッドがクラッシュする不具合と、StatsD メトリクスの問題を修正しました。
 
 === 既知の問題
 
