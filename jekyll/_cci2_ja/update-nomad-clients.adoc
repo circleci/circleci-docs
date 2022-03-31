@@ -21,24 +21,24 @@ WARNING: Server v2.19 にアップグレードする前にこの更新を実行�
 
 
 
-### Sign in to AWS
+### AWS へのサインイン
 
-. Login to the AWS
-. Select the region that your CircleCI server (Server) resides in
-. Select the `Services` tab and select `EC2`
+. AWS にログインします。
+. CircleCI Server が存在する地域を選択します。
+. `Services` タブを選択し、`EC2` を選択します。
 
 
 
-### Find the Launch Configuration and Service Box IP address
+### 起動設定とサービスボックスの IP アドレスを見つける
 
-. Select `Auto Scaling Groups` located near the bottom of the left navigation pane
-. Select the auto scaling group configuration associated with your server installation. Typically resembles `*-ghe_nomad_clients_asg`
-. Make note of the name of `Launch Configuration` under the `Details` tab. Typically resembles `terraform-20200114212820082700000001`
-. In the left navigation pane, select `Launch Configurations`
-. Locate the launch configuration that matches the one found in step 3.
-. In the bottom pane, select the `View User Data ` link
-. Scroll down or search for the `Creating config.hcl` section.
-. Write down or copy the service box private IP address located in the client portion of the config located next to `servers = ["IP_ADDRESS:4647"]` You will need this in the next step.
+. 左側のナビゲーションペインの下部にある`Auto Scaling Groups` (自動スケーリンググループ) を選択します。
+. お客様のサーバーに関連付けられた自動スケーリンググループを選択します。 通常、`*-ghe_nomad_clients_asg`のように表示されています。
+. `Details` タブの下にある`Launch Configuration`の名前をメモします。 通常、`terraform-20200114212820082700000001` のように表示されています。
+. 左側のナビゲーションペインで、`Launch Configurations`を選択します。
+. 手順 3 で見つかった起動設定と一致する起動設定を見つけます。
+. 下部ペインで、[View User Data] リンクを選択します。
+. スクロールダウンする、または`Creating config.hcl`を探します。
+. `servers = ["IP_ADDRESS:4647"]`の隣にある設定のクライアントの部分に記載されているサービスボックスのプライベート IP アドレスをメモする、またはコピーします。
 +
 ```
 ...
@@ -55,33 +55,33 @@ client {
 
 
 
-### Create a New Launch Configuration
+### 新しい起動設定の作成
 
-. Right-click the launch configuration and select `Copy Launch Configuration`
-. At the top of the screen, select `3. Configure details `
-. Update the name to something meaningful and easy to identify IE `nomad-client-lc-20200117`
-. Select the `Advanced Details` dropdown
-. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.
-. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box.
-. Select the `Skip to review` button at the bottom right of the screen
-. Select the `Create Launch Configuration` Button
-. Verify that the SSH key-pair name is correct and select `Create launch configuration` button
-
-
-
-### Update the Auto Scaling group
-
-. Return the `Auto Scaling Groups` page
-. Locate the auto scaling group we identified in the `Find the Launch Configuration and Service Box IP address` section above
-. Right-click the auto scaling group and select `Edit` from the menu
-. Select the launch configuration created in the previous section from the `Launch Configuration` drop-down menu.
-. Press the `Save` button
+. 起動設定を右クリックし、`Copy Launch Configuration`を選択します。
+. 画面の一番上で、 3. [Configure details] を選択します。
+. 分かりやすく IE  `nomad-client-lc-20200117` を識別しやすい名前に変更します。
+. `Advanced Details`ドロップダウンを選択します。
+. 更新された Nomad クライアントの設定が表示されます。  `User data`ペインの内容を下記のスクリプトに変更します。
+. *重要:*上記の手順 8 で見つかったコードのセクションに行き、IP アドレスをサービスボックスの IP アドレスに置き換えます。
+. 画面右下の`Skip to review`ボタンを選択します。
+. `Create Launch Configuration` ボタンを選択します。
+. SSH キーペアの名前が正しいことを確認し、`Create launch configuration` ボタンを選択します。
 
 
 
-### Rolling the Nomad Client Instances
+### 自動スケーリンググループの更新
 
-There are many strategies you can use the update the builders.  Some ideas include but are not limited to:
+. `Auto Scaling Groups`ページに戻ります。
+. 上記の「起動設定とサービスボックスの IP アドレスを見つける」セクションで特定した自動スケーリンググループを探します。
+. 自動スケーリンググループを右クリックし、メニューから`Edit`を選択します。
+.  `Launch Configuration`のドロップダウンメニューから前のセクションで作成した起動設定を選択します。
+. `Save` ボタンを押します。
+
+
+
+### Nomad クライアントインスタンスのローリング
+
+Builder の更新には多くの戦略があります。  その一部を以下に示します。
 
 * Terminate all of the existing nomad client instances and allow the auto scaler to recreate them.
 * Edit the auto scaling configuration and set the `Desired Capacity`  to 0.  Once the existing instances have terminated, set the `Desired Capacity` to the original number.
