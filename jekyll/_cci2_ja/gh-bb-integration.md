@@ -154,11 +154,11 @@ Permission denied (publickey).
 
 CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](http://developer.github.com/v3/oauth/#scopes)や [Bitbucket の権限モデル](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes)で定義されている以下の権限を要求します。
 
-**読み取り権限**
+**読み取りアクセス許可 **
 
 - ユーザーのメールアドレスを取得する
 
-**書き込み権限**
+**書き込みアクセス許可**
 
 - ユーザーのリポジトリリストを取得する
 - ユーザーアカウントへの SSH キーの追加
@@ -168,7 +168,7 @@ CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](
 - デプロイキーのリポジトリへの追加
 - サービスフックのレポジトリへの追加
 
-**注:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、 GitHub から全ユーザーのリポジトリ (公開・非公開の両方) の一覧を GitHub から取得する際には、 [`repo` スコープ](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes) の権限が必要で、これは書き込み権限に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
+**注:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、 GitHub から全ユーザーのリポジトリ (公開・非公開の両方) の一覧を GitHub から取得する際には、 [`repo` スコープ](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes) の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
 
 CircleCI が使用する権限の数をどうしても減らしたい場合は、VCS プロバイダーに連絡して、その旨を伝えてください。
 
@@ -220,7 +220,7 @@ CircleCI がビルドを実行している組織でこの制限を有効にす�
 
 新しいプロジェクトを追加すると、CircleCI は Web ベースの VCS (GitHub や Bitbucket) 上にそのプロジェクト用のデプロイキーを作成します。 デプロイキーは、リポジトリ固有の SSH キーです。 VCS として GitHub を使用している場合、GitHub にパブリックキーを持たせ、CircleCI にプライベートキーを格納します。 デプロイキーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイキーを読み取り専用に設定します。
 
-ビルドからリポジトリにプッシュするには、書き込みアクセス権のあるデプロイキーが必要です。 デプロイキーの作成手順は、VCS によって異なります。 GitHub 固有の手順については以下を参照してください。
+ビルドからリポジトリにプッシュするには、書き込みアクセス権のあるデプロイキーが必要です。 書き込みアクセス権のあるデプロイキーの作成手順は、VCS によって異なります。 GitHub 固有の手順については以下を参照してください。
 
 **ユーザーキーとは**
 
