@@ -19,7 +19,7 @@ toc::[]
 
 1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数「CIRCLE_OIDC_TOKEN」で OpenID Connect ID トークンを使用することができます。
 
-`context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows,workflows>> セクションに追加して、<<contexts/#creating-and-using-a-context,context to a job>> を追加します。
+`context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows, ワークフロー>>セクションに追加して、<<contexts/#creating-amd-using-a-context,ジョブにコンテキスト>>を追加します。
 
 workflows:
   my-workflow:
@@ -36,11 +36,11 @@ https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロ�
 
 お客様の組織 ID は、https://app.circleci.com/ [CircleCI Web アプリ] で  **Organization Settings > Contexts** に移動し、ページ上部で **Organization ID** を探します。
 
-CircleCI が発行した OpenID Connect ID トークンには、固定の対象者がいます (下記表の`aud` を参照)。これが組織 ID です。
+CircleCI が発行した OpenID Connect ID トークンには、固定の audience がいます (下記表の `aud` を参照)。これは組織 ID でもあります。
 
 == OpenID Connect ID トークンの形式
 
-OpenID Connect ID トークンには下記の標準 https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims] が含まれています。
+OpenID Connect ID トークンには下記の標準 https://openid.net/specs/openid-connect-core-1_0.html#IDToken[クレーム] が含まれています。
 
 [%autowidth]
 [.table.table-striped]
@@ -50,23 +50,23 @@ OpenID Connect ID トークンには下記の標準 https://openid.net/specs/ope
 |説明
 
 |`iss`
-|発行者。 ジョブが実行されている CircleCI 組織に固有の発行者です。 値は、 `"https://oidc.circleci.com/org/<organization-id>"` という文字列です。 `<organization-id>` は、現在のジョブのプロジェクトの組織を識別する UUID です。
+|issuer:  ジョブが実行されている CircleCI 組織に固有の issuer です。 値は、 `"https://oidc.circleci.com/org/<organization-id>"` という文字列です。 `<organization-id>` は、現在のジョブのプロジェクトの組織を識別する UUID です。
 
 |`sub`
-|件名。 CircleCI ジョブの実行者とその場所を示します。 値は、`"org/<organization-id>/project/<project-id>/user/<user-id>"` という文字列です。 `<organization-id>` 、`<project-id>`、 `<user-id>` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを示す UUID です。 ユーザーは、このジョブを実行させた CircleCI ユーザーです。
+|subject:  CircleCI ジョブの実行者とその場所を識別します。 値は、`"org/<organization-id>/project/<project-id>/user/<user-id>"` という文字列です。 `<organization-id>` 、`<project-id>`、 `<user-id>` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを示す UUID です。 ユーザーは、このジョブを実行した CircleCI ユーザーです。
 
 |`aud`
-|対象者。 現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を示す UUID を含む文字列です。
+|audience:  現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を識別する UUID を含む文字列です。
 
 
 |`iat`
-|発行時刻。 トークンが作成された時刻で、ジョブが開始される直前です。
+|time of issuance:  トークンが作成された時刻で、ジョブが開始される直前です。
 
 |`exp`
-|執行時刻。 発行から１時間後の値です。
+|expiration time:  発行から１時間後の値です。
 |===
 
-OpenID Connect IDトークンには、ジョブに関する追加のメタデータを含む https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[追加クレーム] も含まれています。
+OpenID Connect ID トークンには、ジョブに関する追加のメタデータを含む https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[追加クレーム] も含まれています。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -78,5 +78,5 @@ OpenID Connect IDトークンには、ジョブに関する追加のメタデー
 |ジョブが実行されているプロジェクトの ID です。 値は、CircleCI プロジェクトを識別するUUIDを含む文字列です。
 
 |`oidc.circleci.com/context-ids`
-|ジョブで使用されるコンテキストを識別する UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つだけです。
+|ジョブで使用されるコンテキストを識別する UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
 |===
