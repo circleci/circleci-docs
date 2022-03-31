@@ -83,11 +83,8 @@ window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_docs-popup-cta_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: 'body',
-  attributes: {
-    // This will only show the experiment to people who are guests to the docs site.
-    docs_is_logged_in: window.userData?.analytics_id === undefined,
-  },
   guestExperiment: true,
+  onlyQualifyGuests: true,
 }).then((variation) => {
   if (variation === 'treatment') {
     const popupBg = $('.popup-bg');
