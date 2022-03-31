@@ -181,12 +181,12 @@ workflows:
 ```
 {% endraw %}
 
-### Using the android image on server v3.x
+### CircleCI Server v3.x での Android イメージの使用
 {: #using-the-android-image-on-server-v3x }
 
-**Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
+**注**: Android マシンイメージは、現在は Google Cloud Platform (GCP) 上でのサーバー環境でのみご使用いただけます。
 
-From CircleCI server 3.4, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+CircleCI Server 3.4 以降では、GCP へのインストールでは Android マシンイメージがサポートされています。 プロジェクトで Android イメージを使用するには、ジョブで `image` キーを `android-default` に設定します。
 
 ```yaml
 version: 2.1
@@ -199,9 +199,9 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the [CircleCI Server v3.x Orbs](https://circleci.com/docs/2.0/server-3-operator-orbs) page for instructions on importing orbs.
+クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 また、Orb にビルドされているデフォルトの Executor を使用するのではなく、下記の例のように Machine Executor の `android-default` イメージを定義する必要があります。 Orb をインポートする方法については、[CircleCI Server v3.x の Orb についてのページ](https://circleci.com/docs/2.0/server-3-operator-orbs)を参照してください。
 
-This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
+この例では、細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 
 ```yaml
 # .circleci/config.yml
@@ -222,15 +222,15 @@ jobs:
       # By default, after starting up the emulator, a cache will be restored,
       # "./gradlew assembleDebugAndroidTest" will be run and then a script
       # will be run to wait for the emulator to start up.
-      # "post-emulator-launch-assemble-command" コマンドを指定して
-      # gradle コマンドの実行をオーバーライドするか、"wait-for-emulator" を false に設定して
-      # エミュレーターの待機を完全に無効にします
-       - android/start-emulator:
+      # Specify the "post-emulator-launch-assemble-command" command to override
+      # the gradle command run, or set "wait-for-emulator" to false to disable
+      # waiting for the emulator altogether.
+      - android/start-emulator:
           avd-name: myavd
           no-window: true
           restore-gradle-cache-prefix: v1a
-      # デフォルトで "./gradlew connectedDebugAndroidTest" を実行します
-      # "test-command" パラメーターを指定してコマンド実行をカスタマイズします
+      # Runs "./gradlew connectedDebugAndroidTest" by default.
+      # Specify the "test-command" parameter to customize the command run.
       - android/run-tests
       - android/save-gradle-cache:
           cache-prefix: v1a
