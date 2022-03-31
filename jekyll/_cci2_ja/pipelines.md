@@ -56,8 +56,8 @@ TBC
 
 パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプラインのいずれかのジョブに移動すると、各タブからジョブ出力、テスト結果、アーティファクトにアクセスできます。
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
+![Job tab options in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
 さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+![Download and share job step output]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
