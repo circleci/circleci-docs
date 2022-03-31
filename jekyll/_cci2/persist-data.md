@@ -106,15 +106,15 @@ To determine which jobs utilize the above actions, you can search for the follow
 * `persist_to_workspace`
 * `store_artifacts`
 
-The only network traffic that will be billed for is that accrued through **restoring caches and workspaces to self-hosted runners.**
-{: class="alert alert-info" }
-
 Details about your network and storage transfer usage can be viewed on your **Plan > Plan Usage** screen. On this screen you can find:
 
 - Billable Network Transfer & Egress (table at the top of the screen)
 - Network and storage usage for individual projects (Projects tab)
 - Storage data activity (Network tab)
 - Total storage volume data (Storage tab)
+
+The only **network traffic** that will result in billing is accrued through **restoring caches and workspaces to self-hosted runners.** Retention of artifact, workspace, and cache objects will result in billing for **storage usage**.
+
 
 Details about individual network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
 
