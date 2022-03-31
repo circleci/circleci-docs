@@ -1,63 +1,63 @@
 ---
-layout: classic-docs
-title: "Configuration Introduction"
-description: "Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps."
 version:
 - Cloud
-- Server v3.x
-- Server v2.x
+- Server 3
+- Server 2
 ---
+= Configuration Introduction
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Find out how to get started with the core of the CircleCI experience - config.yml - in four simple steps.
+:icons: font
+:toc: macro
+:toc-title:
 
 This guide focuses on getting you started with the core of the CircleCI experience - `config.yml` in the following simple steps:
 
-* TOC
-{:toc}
+toc::[]
 
-## Getting started with CircleCI config
-{: #getting-started-with-circleci-config }
-{:.no_toc}
+[#getting-started-with-circleci-config]
+== Getting started with CircleCI config
 
 This guide describes how CircleCI finds and runs `config.yml` and how you can use shell commands to do things, then it outlines how `config.yml` can interact with code and kick-off a build
 followed by how to use docker containers to run in precisely the environment that you need. Finally, there is a short exploration of workflows so you can learn to orchestrate your build, tests, security scans, approval steps, and deployment.
 
 CircleCI believes in *configuration as code*.  As a result, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the top of your project.  CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
 
+[#part-one-hello-its-all-about-the-shell]
+== Part one: Hello, it’s all about the shell
 
-## Part one: Hello, it’s all about the shell
-{: #part-one-hello-its-all-about-the-shell }
 Let’s get started.  CircleCI provides a powerful experience because we provide you an on-demand shell to run whatever you need.  In this first example, we will show you how easy it is to setup your first build and execute a shell command.
 
-1. If you haven’t already, go ahead and sign-up with CircleCI and select either GitHub or Bitbucket. If you prefer, you can also sign up through the GitHub marketplace.
-2. Make sure the project you want to manage has been added.
-3. Add a `.circleci` folder at the top of your project’s main branch.  If you want to experiment on a different branch, you can do that too.  Make sure the folder starts with a period.  This folder is special and hence the .circleci format.
-4. Add a `config.yml` file inside the .circleci folder.
-5. Add the following contents to your `config.yml` file.
+. If you haven’t already, go ahead and sign-up with CircleCI and select either GitHub or Bitbucket. If you prefer, you can also sign up through the GitHub marketplace.
+. Make sure the project you want to manage has been added.
+. Add a `.circleci` folder at the top of your project’s main branch.  If you want to experiment on a different branch, you can do that too.  Make sure the folder starts with a period.  This folder is special and hence the .circleci format.
+. Add a `config.yml` file inside the .circleci folder.
+. Add the following snippet contents to your `config.yml` file.
+. Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
 
-```yml
-version: 2.1
-jobs:
-  build:
+TIP: The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.
+
+[source,yaml]
+----
+version: 2.1 # <1>
+jobs: # <2>
+  build: # <3>
     docker:
       - image: alpine:3.7
-    steps:
-      - run:
+    steps: # <4>
+      - run: # <5>
           name: The First Step
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
-```
+----
 
-Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
-
-### Learnings
-{: #learnings }
-{:.no_toc}
-
-The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in detail:
-
-- Line 1: This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
-- Line 2-3: The `jobs` level contains a collection of arbitrarily named children.  `build` is the first named child in the `jobs` collection.  In this case `build` is also the only job.
-- Line 6-7: The `steps` collection is an ordered list of `run` directives.  Each `run` directive is executed in the order in which it was declared.
+<1>   This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
+<2>   The `jobs` level contains a collection of arbitrarily named children.  
+<3>   `build` is the first named child in the `jobs` collection.  In this case `build` is also the only job.
+<4>   The `steps` collection is an ordered list of `run` directives.  
+<5>   Each `run` directive is executed in the order in which it was declared.
 - Line 8: The `name` attribute provides useful organizational information when returning warnings, errors, and output.  The `name` should be meaningful to you as an action within your build process
 - Line 9-11: This is the magic.  The `command` attribute is a list of shell commands that represent the work you want done.  The initial pipe, `|`, indicates that there will be more than one line of shell commands.  Here, line 10 will print out `Hello World!` in your build shell, and line 11 will print out `This is the delivery pipeline`.
 
