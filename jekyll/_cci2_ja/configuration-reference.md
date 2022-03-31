@@ -419,15 +419,11 @@ machine Executor は、ジョブまたはワークフローで Docker イメー�
 
 ```yaml
 version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
+
 jobs:
   build:
     machine:
       image: windows-server-2019-nvidia:stable
-      docker_layer_caching: true    # デフォルトは false
 ```
 
 #### **`macos`**
@@ -662,10 +658,11 @@ Windows Executor の詳細と例については、[Windows に関する入門ガ
 ##### GPU Executor (Linux)
 {: #gpu-executor-linux }
 
-| クラス                             | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) |
-| ------------------------------- | ---- | --- | --- | --------------- | ------------- |
-| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4 | 8             |
-| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4 | 16            |
+| クラス                             | vCPU | RAM | GPU | GPU モデル           | GPU メモリ (GiB) |
+| ------------------------------- | ---- | --- | --- | ----------------- | ------------- |
+| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4   | 8             |
+| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4   | 16            |
+| gpu.nvidia.large<sup>(2)</sup>  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            |
 {: class="table table-striped"}
 
 ###### 例
@@ -678,8 +675,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
