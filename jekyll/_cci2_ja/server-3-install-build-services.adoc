@@ -336,14 +336,14 @@ ifndef::env-aws[]
 . 以下のいづれかを選択します。
 .. Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。
 .. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities]. Steps to enable Workload Identities on GCP cluster are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here].
-.. Enable workload identity for `nomad-autoscaler` (kubernetes) service account
+.. `nomad-autoscaler` (kubernetes) サービスアカウントの Workload Identity を有効にします。
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/nomad-autoscaler]"
 ```
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
 endif::env-aws[]
 
@@ -368,8 +368,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 * *[Nomad Server Certificate Authority (Nomad サーバーの証明書認証局)](必須)*:
  `terraform apply`からの出力で提供されます。
 
-* *Build Agent Image* - 
-If you want to use a custom Docker registry to supply the CircleCI Build Agent, contact customer support for assistance.
+* *[Build Agent Image (ビルドエージェントイメージ)]*:  カスタム Docker レジストリを使用してCircleCI ビルドエージェントを提供する場合は、カスタマサポートにお問い合わせください。
 
 *[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
@@ -726,7 +725,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 ```
 
-. *Enable Workload Identity for Service Account*
+. *サービスアカウントで Workload Identity を有効にする*
 +
 This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
 +
@@ -736,7 +735,7 @@ gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> 
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
 ```
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
 . *サーバーの設定*
 +
