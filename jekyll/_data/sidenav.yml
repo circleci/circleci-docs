@@ -676,6 +676,9 @@ ja:
         - name: Docker layer caching
           link: ja/2.0/docker-layer-caching/
           i18n_name: Docker レイヤーキャッシュ
+        - name: Concurrency
+          link: ja/2.0/concurrency/
+          i18n_name: 同時実行
         - name: Environment variables
           link: ja/2.0/env-vars/
           i18n_name: 環境変数
@@ -1075,8 +1078,8 @@ ja:
         link: ja/2.0/help-and-support/
         i18n_name: ヘルプとサポート
 
-- name: Server Administration
-  i18n_name: Server 管理
+- name: Server Administration v3.x
+  i18n_name: Server v3.x 管理
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v3.x Overview
@@ -1229,6 +1232,10 @@ ja:
         - name: v3.0 Operations Guide
           i18n_name: v3.0 管理者ガイド
           link: ja/2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
+- name: Server Administration v2.x
+  i18n_name: Server v2.x 管理
+  icon: icons/sidebar/admin.svg
+  children:
     - name: Server v2.19.x Install
       link: ja/2.0/install-overview/
       i18n_name: v2.19.x インストール

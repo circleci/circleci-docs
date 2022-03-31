@@ -474,10 +474,10 @@ jobs:
       - run: echo 'Hello, Windows'
 ```
 
-#### **`branches` – 非推奨**
+#### **`branches` – 廃止予定**
 {: #branches-deprecated }
 
-**このキーは非推奨になりました。 [ワークフローのフィルタリング](#jobfilters)機能を使用して、どのジョブがどのブランチに対して実行されるかを制御することができます。**
+**このキーは廃止されます。 [ワークフローのフィルタリング](#jobfilters)機能を使用して、どのジョブがどのブランチに対して実行されるかを制御することができます。**
 
 ワークフローを**設定せず**、バージョン 2.1 ではなく 2.0 の設定ファイルを使用している場合は、一部のブランチの実行を許可またはブロックするルールを定義できます。 [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)を使用している場合、ジョブレベルのブランチは無視されるため、`config.yml` ファイルの workflows セクションで設定する必要があります。 バージョン 2.1 の設定では、ワークフローを追加することでフィルタリングが可能です。 詳しくは後述の [ワークフロー](#workflows) を参照してください。 ジョブレベルの `branches` キーは下記の要素を用いて設定します。
 
@@ -1776,7 +1776,7 @@ tags では `only` キーと `ignore` キーが使えます。 スラッシュ�
 | ignore | ×  | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
 {: class="table table-striped"}
 
-詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/ja/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
+詳細については、ワークフローに関するドキュメントの [Git タグを用いてワークフローを実行する]({{ site.baseurl }}/ja/2.0/workflows/#executing-workflows-for-a-git-tag) を参照してください。
 
 ###### **`matrix`** (version: 2.1 が必須)
 {: #matrix-requires-version-21 }

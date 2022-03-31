@@ -535,7 +535,7 @@ As with backups, navigate to *Snapshots* in the KOTS Admin Console. 今回は、
 
 image::kots-admin-restore.png[Kots Create Snapshot]
 
-IMPORTANT: 復元すると、CircleCI サービス用に新しいロード バランサーが作成されます。 You will need to either update your DNS records or the hostname configurations in KOTS Admin Console as a result. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
+IMPORTANT: 復元すると、CircleCI サービス用に新しいロード バランサーが作成されます。 You will need to either update your DNS records or the hostname/IP configurations in KOTS Admin Console as a result. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
 
 IMPORTANT: If you are using pre-existing Nomad clients, you will need to restart them before they will connect to the nomad-server cluster.
 
