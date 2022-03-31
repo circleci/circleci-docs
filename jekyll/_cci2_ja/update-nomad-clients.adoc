@@ -1,5 +1,5 @@
 ---
-description: Nomad クライアントの起動設定の更新手順と更新スクリプトの確認。 Server v2.19 にアップグレードする前にこの更新を実行する必要があります。
+description: Nomad クライアントの起動設定の更新手順と更新済みスクリプトの確認。 Server v2.19 にアップグレードする前にこの更新を行う必要があります。
 version:
 - Server v2.x
 - サーバー管理
@@ -35,7 +35,7 @@ WARNING: Server v2.19 にアップグレードする前にこの更新を実行�
 . お客様のサーバーに関連付けられた自動スケーリンググループを選択します。 通常、`*-ghe_nomad_clients_asg`のように表示されています。
 . `Details` タブの下にある`Launch Configuration`の名前をメモします。 通常、`terraform-20200114212820082700000001` のように表示されています。
 . 左側のナビゲーションペインで、`Launch Configurations`を選択します。
-. 手順 3 で見つかった起動設定と一致する起動設定を見つけます。
+. 手順 3 で見つけた起動設定と一致する起動設定を見つけます。
 . 下部ペインで、[View User Data] リンクを選択します。
 . スクロールダウンする、または`Creating config.hcl`を探します。
 . `servers = ["IP_ADDRESS:4647"]`の隣にある設定のクライアントの部分に記載されているサービスボックスのプライベート IP アドレスをメモする、またはコピーします。
@@ -59,7 +59,7 @@ client {
 
 . 起動設定を右クリックし、`Copy Launch Configuration`を選択します。
 . 画面の一番上で、 3. [Configure details] を選択します。
-. 分かりやすく IE  `nomad-client-lc-20200117` を識別しやすい名前に変更します。
+. 名前を、分かりやすく、 IE  `nomad-client-lc-20200117` を識別しやすい名前に変更します。
 . `Advanced Details`ドロップダウンを選択します。
 . 更新された Nomad クライアントの設定が表示されます。  `User data`ペインの内容を下記のスクリプトに変更します。
 . *重要:*上記の手順 8 で見つかったコードのセクションに行き、IP アドレスをサービスボックスの IP アドレスに置き換えます。
@@ -72,7 +72,7 @@ client {
 ### 自動スケーリンググループの更新
 
 . `Auto Scaling Groups`ページに戻ります。
-. 上記の「起動設定とサービスボックスの IP アドレスを見つける」セクションで特定した自動スケーリンググループを探します。
+. 上記の「起動設定とサービスボックスの IP アドレスを見つける」セクションで見つけた自動スケーリンググループを探します。
 . 自動スケーリンググループを右クリックし、メニューから`Edit`を選択します。
 .  `Launch Configuration`のドロップダウンメニューから前のセクションで作成した起動設定を選択します。
 . `Save` ボタンを押します。
@@ -81,20 +81,20 @@ client {
 
 ### Nomad クライアントインスタンスのローリング
 
-Builder の更新には多くの戦略があります。  その一部を以下に示します。
+Builder の更新には様々な方法があります。  その一部を以下に示します。
 
-* Terminate all of the existing nomad client instances and allow the auto scaler to recreate them.
-* Edit the auto scaling configuration and set the `Desired Capacity`  to 0.  Once the existing instances have terminated, set the `Desired Capacity` to the original number.
+* Nomad クライアントのすべての既存インスタンスを終了し、自動スケーラがそれらを再作成できるようにします。
+* 自動スケーリング設定を編集し、`Desired Capacity`を 0 に設定します。  既存のインスタンスが終了したら、`Desired Capacity`を元の数字に戻します。
 
-Please use whatever works best with your existing methods of auto scaling group management.
+既存の自動スケーリンググループ管理方法に最も適した方法で更新してください。
 
 
 
-### Verify the New Nomad Clients are Communicating with Nomad Server
+### 新しい Nomad クライアントが Nomad サーバーと通信しているかを確認する
 
-. SSH into the CircleCI Services Box
+. CircleCI サービスボックスに SSH で接続します。
 
-. Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
+. 次のコマンドを入力します。: `sudo docker exec -it nomad nomad node-status`。 下記のような出力が表示されます。
 +
 ```shell
 ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
@@ -103,11 +103,11 @@ ID        DC         Name                 Class        Drain  Eligibility  Statu
 ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
 ```
 
-. Verify that there are new builders containing the `default` DC name and they are in a `ready` state.
+. `default`の DC 名を含む新しい Builder が表示され、状態が`ready` であることを確認しします。
 
 
 
-## Updated Nomad Client Launch Configuration Script (Last Update: July 10, 2020)
+## Nomad クライアント起動設定の更新済みスクリプト (最終更新: 2020 年 7 月 10 日)
 
 ```shell
 #!/bin/bash
