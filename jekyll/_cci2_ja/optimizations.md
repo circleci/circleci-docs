@@ -74,7 +74,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 `resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
-* 詳細については、[設定ファイルのリファレンス]({{site.baseURL}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
+* 詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
 
 ## 関連項目
 {: #see-also }
