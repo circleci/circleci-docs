@@ -21,14 +21,14 @@ This document describes how to use the official CircleCI pre-built Docker contai
 
 CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image) には、言語とサービスごとにビルド済みイメージが用意されています。 これは、各種の便利な要素をイメージに追加したデータベースのようなものです。
 
-以下には、`build` という 1 つのジョブが含まれている 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの例を示しています。 Executor に Docker が選択されており、最初のイメージとなるのは、すべての処理が実行されるプライマリ コンテナです。 この例には 2 番目のイメージがあり、これがサービス イメージとして使用されます。 最初のイメージのプログラミング言語は Python です。 Python イメージには `pip` がインストールされており、ブラウザーのテスト用に `-browsers` があります。 2 番目のイメージから、データベースなどにアクセスできます。
+The following example shows a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Executor に Docker が選択されており、最初のイメージとなるのは、すべての処理が実行されるプライマリ コンテナです。 この例には 2 番目のイメージがあり、これがサービス イメージとして使用されます。 最初のイメージのプログラミング言語は Python です。 Python イメージには `pip` がインストールされており、ブラウザーのテスト用に `-browsers` があります。 The service image gives access to additional services like databases.
 
 ## PostgreSQL データベースのテスト例
 {: #postgresql-database-testing-example }
 
-プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で構成する必要はありません。
+In the primary image, the config defines an environment variable with the `environment` key, giving it a URL. この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で構成する必要はありません。
 
-以下のように CircleCI 設定ファイルで `postgres` に POSTGRES_USER 環境変数を設定して、イメージにロールを追加します。
+Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
 ```yml
       - image: cimg/postgres:14.0
@@ -43,22 +43,23 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 
 ```yml
 version: 2.1
+
 jobs:
   build:
 
     # Primary container image where all commands run
-
     docker:
-      - image: cimg/python:3.10.0
+      - image: cimg/python:3.10
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
-
-      - image: cimg/postgres:12.0
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: postgres
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -66,7 +67,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client-12
+      - run: sudo apt-get install postgresql-client
       - run: whoami
       - run: |
           psql \
@@ -76,23 +77,19 @@ jobs:
           psql \
           -d $TEST_DATABASE_URL \
           -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
-      - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "SELECT * from test"
 ```
 
 {% endraw %}
 
-The `steps` run `checkout` first, then install the PostgreSQL client tools. The `postgres:12.0` image doesn't install any client-specific database adapters. たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 [CircleCI のビルド済みサービスイメージの説明]({{ site.baseurl }}/ja/2.0/circleci-images/#service-images)で、イメージの一覧と、このビルド設定のビデオを参照できます。
+`steps` では最初に `checkout` が実行され、その後 Postgres クライアントツールがインストールされます。 The `cimg/postgres:14.0` image doesn't install any client-specific database adapters. たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#next-gen-service-images) for the list of images.
 
-この例のコンフィグでは、`psql` にアクセスするために PostgreSQL クライアントツールがインストールされます。  **メモ:** ここで `sudo` を実行しているのは、ほとんどのコンテナがデフォルトで実行される一方で、root アカウントではイメージが実行されないためです。 CircleCI のデフォルトでは circle アカウントでコマンドが実行されるため、管理者権限や root 権限で実行するときは、コマンドの前に `sudo` を追加する必要があります。
+In this example, the config installs the PostgreSQL client tools, `postgresql-client` via `apt-get`, to get access to `psql`. Installing packages in images requires administrator privileges, therefore `sudo` is used - a password is not required.
 
-`postgresql-client-9.6` のインストールの後には、データベースサービスとやり取りするための 3つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、値をそのテーブルに挿入して、テーブルから選択します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリコンテナがスピンアップされます。
+Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
 **メモ:** CircleCI では、複数のコンビニエンス環境変数がプライマリ コンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)を参照してください。
 
-データベースサービスがスピンアップされると、データベースの `circlecitest` および `root` ロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 データベースサービスは `root` ではなく、`circle` アカウントを使用して実行されます。 次に、データベースのテストが実行されてテーブルが作成され、値がそのテーブルに挿入されます。テーブルで SELECT が実行されると、値が取得されます。
+When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
 
 ## オプションのカスタマイズ
 {: #optional-customization }
@@ -103,7 +100,7 @@ The `steps` run `checkout` first, then install the PostgreSQL client tools. The 
 {: #optimizing-postgresql-images }
 {:.no_toc}
 
-PostGIS is available and can be used like this: `cimg/postgres:12.0-postgis`
+The `cimg/postgres` Docker image uses regular persistent storage on disk. Storing the database in a ramdisk may improve performance. This can be done by setting the `PGDATA: /dev/shm/pgdata/data` environment variable in the service container image config.
 
 ### バイナリの使用
 {: #using-binaries }
@@ -113,7 +110,7 @@ PostGIS is available and can be used like this: `cimg/postgres:12.0-postgis`
 
 ```yml
     steps:
-    # Add the Postgres 12.0 binaries to the path.
+    # Postgres 12.0 バイナリをパスに追加します。
        - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV
 ```
 
@@ -133,7 +130,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: postgres:12.0
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -146,7 +143,7 @@ jobs:
           name: install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
           environment:
-            DOCKERIZE_VERSION: v0.3.0
+            DOCKERIZE_VERSION: v0.6.1
       - run:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
