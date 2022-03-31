@@ -1,9 +1,9 @@
 ---
 
 version:
-- Cloud
+- クラウド
 ---
-= Using OpenID Connect Tokens in Jobs
+= ジョブでの OpenID Connect トークンの使用
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
@@ -11,15 +11,15 @@ version:
 :toc: macro
 :toc-title:
 
-In jobs using a context, CircleCI provides an OpenID Connect ID token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
+コンテキストを使用するジョブでは、環境変数で OpenID Connect ID トークンを提供します。 ジョブは、CircleCI に保存されている長期認証情報を使用せずに、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
 
 toc::[]
 
-== OpenID Connect ID token availability
+== OpenID Connect ID トークンの使用
 
-In CircleCI jobs that use at least one context, the OpenID Connect ID token is available in the environment variable `CIRCLE_OIDC_TOKEN`.
+1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数「CIRCLE_OIDC_TOKEN」で OpenID Connect ID トークンを使用することができます。
 
-Add a <<contexts/#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference/#workflows,workflows>> section of your `circleci/config.yml` file:
+`context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows,workflows>> セクションに追加して、<<contexts/#creating-and-using-a-context,context to a job>> を追加します。
 
 workflows:
   my-workflow:
@@ -28,13 +28,13 @@ workflows:
           context:
             - my-context
 
-== Setting up your cloud service
+== クラウドサービスの設定
 
-Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
+お客様のクラウドサービスのドキュメントで ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は、https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
 
-The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the organization ID (UUID) that represents your organization.
+https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー] は、組織一意のものです。 URL は、`\https://oidc.circleci.com/org/<organization-id>` で、`<organization-id>`  は、お客様の組織を代表する組織 ID (UUID) です。
 
-You can find your CircleCI organization ID by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
+お客様の組織 ID は、https://app.circleci.com/ [CircleCI Webアプリ] で  **Organization Settings > Contexts** に移動し、ページ上部で **Organization ID** を探します。
 
 The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
 
