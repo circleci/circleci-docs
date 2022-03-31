@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { isDataDog } from '../utils';
 
 class AnalyticsClient {
   static getSessionId() {
@@ -16,7 +17,7 @@ class AnalyticsClient {
    * @param properties  A bag of metadata to send to Segment/Amplitude.
    */
   static trackAction(name, properties) {
-    if (isDataDogSynthetics()) return;
+    if (isDataDog()) return;
 
     properties = properties ?? null;
     window.analytics &&
@@ -33,7 +34,7 @@ class AnalyticsClient {
    * @param traits  Data about the current user session including source.
    */
   static trackUser(id, traits) {
-    if (isDataDogSynthetics()) return;
+    if (isDataDog()) return;
 
     traits = traits ?? null;
     window.analytics &&
@@ -50,7 +51,7 @@ class AnalyticsClient {
    * @param properties  A bag of metadata to send to Segment/Amplitude.
    */
   static trackPage(name, properties) {
-    if (isDataDogSynthetics()) return;
+    if (isDataDog()) return;
 
     properties = properties ?? null;
     window.analytics &&
@@ -61,8 +62,6 @@ class AnalyticsClient {
       });
   }
 }
-
-const isDataDogSynthetics = () => window._DATADOG_SYNTHETICS_BROWSER === true;
 
 export default AnalyticsClient;
 

@@ -63,3 +63,10 @@ export function updateCookieExpiration(cookieName, newExpiration) {
   // Re-set cookie with same values and new expiration date
   Cookies.set(cookieName, existingValue, { expires: newExpiration });
 }
+
+const isDataDogUserAgent = () =>
+  navigator.userAgent.indexOf('Datadog/Synthetics') !== -1;
+
+const isDataDogSynthetics = () => window._DATADOG_SYNTHETICS_BROWSER === true;
+
+export const isDataDog = () => isDataDogSynthetics() || isDataDogUserAgent();

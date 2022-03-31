@@ -1,6 +1,6 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
-import { isProduction } from '../utils';
+import { isProduction, isDataDog } from '../utils';
 import Cookies from 'js-cookie';
 
 export const COOKIE_KEY = 'cci-org-analytics-id';
@@ -56,6 +56,11 @@ class OptimizelyClient {
   // - User is in the exclusion group
   getVariationName(options) {
     return new Promise((resolve, reject) => {
+      // if datadog rum/browser is requesting our site, we don't want to show experiments
+      if (isDataDog()) {
+        return resolve(null);
+      }
+
       if (typeof forceAll === 'function' && forceAll()) {
         return resolve('treatment');
       }
