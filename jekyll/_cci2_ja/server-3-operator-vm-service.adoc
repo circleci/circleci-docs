@@ -55,7 +55,7 @@ WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Cac
 NOTE: When using preallocated instances, be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
 
 ==== 認証
-One of the following is required. Either select "IAM Keys" and provide:
+以下のいずれかを実行してください。 Either select "IAM Keys" and provide:
 
 * *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
 +
@@ -112,7 +112,15 @@ https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<n
 ```
 https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<subnetwork-name>
 ```
-* *[GCP Service Account JSON file (GCP サービス アカウントの JSON ファイル)]* (必須): https://cloud.google.com/iam/docs/service-accounts[サービス アカウントの JSON ファイル]の内容をコピー & ペーストします。
+
+* *GCP IAM Access Type* (required): One of the following is required. Either select `GCP Service Account JSON file` and provide:
+
+** *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] if using the static GCP IAM service account credential.
++
+Or select `IAM Workload Identity` and provide: 
+
+** *GCP IAM Workload Identity* (required): Copy and paste the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[here] in point 2 & 3.
+
 * *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances
 of a resource type on demand. リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 
 +
