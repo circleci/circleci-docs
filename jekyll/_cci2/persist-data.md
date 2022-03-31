@@ -64,7 +64,7 @@ If your project needs to be packaged, say an Android app where the `.apk` file i
 
 Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, one day, allows you to both troubleshoot the build, and save costs by not keeping unnecessary data in storage.
 
-If you do need to store artifacts for longer periods of time, there are other optimization options available, depending on what you are trying to accomplish. Every project is different, but you can try the following actions to reduce network and storage usage:
+If you need to store artifacts for longer periods of time, there are other optimization options available, depending on what you are trying to accomplish. Every project is different, but you can try the following actions to reduce network and storage usage:
 
 - Check if `store_artifacts` is uploading unnecessary files
 - Check for identical artifacts if you are using parallelism
