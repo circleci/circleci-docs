@@ -26,13 +26,13 @@ CircleCI Web アプリケーションのサイドバーから、組織全体の�
 特定のプロジェクトのインサイトにアクセスするには、パイプラインのワークフローを表示して **[Insights (インサイト)]** ボタンをクリックします。 または、_パイプライン ダッシュボード_で、**[actions (アクション)]** セクションの [Insights (インサイト)] ボタンをクリックします。
 
 {:.tab.insight-access.Access_by_sidebar}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
+![Access insights from the CircleCI web app sidebar]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
 
 {:.tab.insight-access.Access_by_pipeline}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
+![Access insights from a pipeline in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
 
 {:.tab.insight-access.Access_by_workflow}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
+![Access insights from a workflow in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
 
 ### ワークフローの概要
