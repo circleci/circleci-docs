@@ -201,7 +201,7 @@ jobs:
 
 クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 また、Orb にビルドされているデフォルトの Executor を使用するのではなく、下記の例のように Machine Executor の `android-default` イメージを定義する必要があります。 Orb をインポートする方法については、[CircleCI Server v3.x の Orb についてのページ](https://circleci.com/docs/2.0/server-3-operator-orbs)を参照してください。
 
-この例では、細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
+この例では、きめ細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの機能を実現する方法を示しています。
 
 ```yaml
 # .circleci/config.yml
