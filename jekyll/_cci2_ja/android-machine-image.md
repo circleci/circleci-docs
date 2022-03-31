@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Android イメージを Machine Executor で使用"
+title: "Android イメージの Machine Executor での使用"
 short-title: "Machine Executor 上の Android イメージ"
-description: "Machine Executor で Android イメージを使用"
+description: "Machine Executor での Android イメージの使用"
 version:
   - Cloud
 ---
