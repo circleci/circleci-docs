@@ -366,22 +366,22 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/mysql:5.6
+      - image: cimg/mysql:5.7
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
       - run: cp config/{database_circleci,database}.yml
 
-      # Bundler の実行
-      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドル インストール後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # Run bundler
+      # Load installed gems from cache if possible, bundle install then save cache
+      # Multiple caches are used to increase the chance of a cache hit
 
       - restore_cache:
           keys:
@@ -400,9 +400,9 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - run: bundle exec rake db:create db:schema:load --trace
       - run: bundle exec rake factory_girl:lint
 
-      # アセットのプリコンパイル
-      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # Precompile assets
+      # Load assets from cache if possible, precompile assets then save cache
+      # Multiple caches are used to increase the chance of a cache hit
 
       - restore_cache:
           keys:
