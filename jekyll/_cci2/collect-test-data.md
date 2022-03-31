@@ -18,7 +18,7 @@ Using the **`store_test_results` step** gives you access to:
 * Test insights and flaky test detection.
 * Test splitting.
 
-Alternatively, storing test results as **artifacts** means you can look at the raw XML. This can be useful when debugging issues with setting up your project's test results handling, for example, working out if you are uploading incorrect files. 
+Alternatively, storing test results as **artifacts** means you can look at the raw XML. This can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
 
 To see test results as build artifacts, upload them using the [`store_artifacts` step]({{site.baseurl}}/2.0/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
 
