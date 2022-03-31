@@ -203,8 +203,10 @@ Number of days to retain your test results and artifacts. Set to 0 to disable an
 
 ===== Authentication
 
-* *Service Account JSON (required)* -
-A JSON format key of the Service Account to use for bucket access.
+You can choose one of the following:
+
+  * *Service Account JSON (required)* - A JSON format key of the Service Account to use for bucket access.
+  * *Service Account Email (required)* - Service Account Email id if using Google Workload Identity.
 
 endif::env-aws[]
 
