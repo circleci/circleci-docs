@@ -225,7 +225,7 @@ https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workloa
     --region="<REGION>"
 ```
 
-You must repeat Step 2 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
+You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
 
 === Create a new GitHub OAuth app
 
