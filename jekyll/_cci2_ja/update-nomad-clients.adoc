@@ -1,5 +1,5 @@
 ---
-description: "Review Nomad client launch configuration update steps and the updated script. This update must be run before upgrading to Server v2.19
+description: Nomad クライアントの起動設定の更新手順と更新スクリプトの確認。 Server v2.19 にアップグレードする前にこの更新を実行する必要があります。
 "
 version:
 - Server v2.x
@@ -12,13 +12,13 @@ version:
 :toc: macro
 :toc-title:
 
-## IMPORTANT
+## 重要
 
-WARNING: This update must be run before upgrading to server v2.19
+WARNING: Server v2.19 にアップグレードする前にこの更新を実行する必要があります。
 
-* **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.
-* This change is only compatible with CircleCI server versions greater than or equal to 2.19.0
-* If you are using the Static version of CircleCI server, you will need to recreate your builders manually. Refer to the guide linked https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[here] for the updated scripts and further instruction.
+* *この更新にはダウンタイムが発生します*。  実行する前にメンテナンス期間を設定してください。
+* この変更は 2.19.0 以降の CircleCI Server にのみ対応します。
+* CircleCI Server の静的バージョンを使用している場合は、ご自身で Builder を再作成する必要があります。 https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[こちらのリンク]から更新スクリプトと詳細な手順をご確認ください。
 
 
 
