@@ -32,111 +32,16 @@ There are two key use cases CircleCI aims to meet with the self-hosted runner:
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
-== Available CircleCI self-hosted runner platforms
-
-CircleCI self-hosted runners are available on multiple platforms. Support levels fall into two categories:
-
-* <<Supported>>
-* <<Preview>>
-
-=== Supported
-
-*Supported* Level platforms ensure that CircleCI self-hosted runners are both built and tested on their respective systems.
-
-With a *Supported* platform, users receive the following:
-
-* Documentation and best practices
-* Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
-
-*Supported* CircleCI self-hosted runners are available on the following platforms:
-
-* Ubuntu 18.04 or later (x86_64 or ARM64)
-* RHEL8 (x86_64 or ARM64)
-* Mac OS X 10.15+ (Intel)
-* macOS 11.2+ (Apple M1)
-* Docker (x86_64 or ARM64)
-* Kubernetes (x86_64)
-* Windows Server 2019, 2016 (x86_64)
-
-=== Preview
-
-On *Preview* Level platforms, CircleCI self-hosted runners are currently in development, thus testing is not complete.
-
-With a *Preview* platform, users receive the following:
-
-* A full integration that is a work-in-progress -- thus, some manual configuration may be required to install, configure, and deploy
-* Work-in-progress documentation and best practices
-* Support: CircleCI Customer Engineers will provide assistance and guidance on best practices for installing, configuring, and operating CircleCI self-hosted runners
-** Users are encouraged to provide feedback in order to rapidly improve the CircleCI self-hosted runner user experience and meet its necessary criteria as a *Supported* platform
-
-*Preview* CircleCI self-hosted runners are available on the following platforms:
-
-* Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
-* Kubernetes (ARM64)
-
-NOTE: Given the active development of Preview CircleCI self-hosted runners, please https://circleci.com/contact/[contact us] if you
-have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
-and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
-prioritize development efforts from our team!
-
 == Getting Started
 
 To get started with CircleCI self-hosted runners:
 
-* Provide your own platform to deploy your CircleCI self-hosted runners (See the <<Available CircleCI self-hosted runner platforms>> section)
+* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#,Available CircleCI self-hosted runner platforms>> page for supported platforms)
 * xref:runner-installation.adoc[Install] CircleCI self-hosted runners!
-
-== Namespaces and resource classes
-
-Self-hosted runners require both a namespace and a resource class. 
-
-A **namespace** is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. Typically, the namespace chosen is the lowercase representation of your organization's name on your VCS (this is suggested).
-
-A **resource class** is a combination of your namespace and a label you choose to represent a pool of self-hosted runners. For example, a CircleCI resource class could be `circleci/documentation`. Resources classes are created when you go through the process of installing self-hosted runners.
-
-Resource class labels help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific places. For example, if you have multiple machines running macOS, and multiple machines running AWS EC2, you could create resource class labels for each of these, `macOS` and `aws-ec2-linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which set of self-hosted runner resources to send a job to based on the resource class.
-
-Runner resource classes help you create pools of self-hosted runners. Pooling runners with resource classes enables you to isolate a group of self-hosted runners for a specific subset of jobs. For example, if you have one set of machines running macOS, and one set of machines running Linux, you could create resource class labels for each: `macOS` and `linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate jobs (see <<Referencing your runner on a job>>) that are intended to run on macOS to the `macOS` resource class, and jobs intended for Linux machines to the `linux` resource class.
-
-Optionally, you can give your resource class a description.
-
-Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs.
 
 == CircleCI self-hosted runner operation
 
 Once CircleCI self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the self-hosted runner is not running a job, it will auto-update itself when a new version is released.
-
-The self-hosted runner consists of two components: the launch agent and the task agent.
-
-* launch agent (launch-agent) - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
-* task agent (task-agent) - handles running a task retrieved and configured by the launch agent
-
-The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
-
-== Self-hosted runner concurrency
-
-To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to self-hosted runners across all your resource classes.
-
-Rather than limit the total number of registered self-hosted runners, CircleCI self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your resource classes.
-
-== Debugging with SSH
-
-CircleCI self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
-
-NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner].
-
-== Public repositories
-
-CircleCI self-hosted runners are not recommended for use with public projects that have the "Build forked pull requests" setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
-
-* Malicious programs running on the machine
-* Escaping the machine's self-hosted runner sandbox
-* Exposing access to the machine's network environment
-* Persisting unwanted or dangerous data on the machine
-
-{% include snippets/runner-config-reference.adoc %}
-
-NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
 
 == Limitations
 
@@ -149,4 +54,6 @@ Almost all standard CircleCI features are available for use with self-hosted run
 
 Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
 
-
+== See Also
+- <<runner-concepts#,Runner Concepts>>
+- <<runner-installation#,Self-Hosted Runner Web App Installation>>

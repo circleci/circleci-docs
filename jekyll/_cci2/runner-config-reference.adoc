@@ -230,3 +230,27 @@ Task agent runs an embedded SSH server and agent on a dedicated port when the â€
 * The SSH server will inherit the same user privileges and associated access authorizations as the task agent, defined by the <<#runner-command_prefix,runner.command_prefix parameter>>.
 * The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH. However, only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
 * Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organizationâ€™s concurrency limit, and the task agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
+
+=== Basic full configuration for self-hosted runners
+
+The fields you must set for a specific job to run using your self-hosted runners are:
+
+* `machine: true`
+* `resource_class: your-namespace/your-resource`
+
+Here is a simple example of how you could set up a job:
+
+```yaml
+version: 2.1
+workflows:
+  testing:
+    jobs:
+      - runner
+jobs:
+  runner:
+    machine: true
+    resource_class: your-namespace/your-resource
+    steps:
+      - run: echo "Hi I'm on Runners!"
+```
+The job will then execute using your self-hosted runner when you push the config to your VCS provider.

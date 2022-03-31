@@ -154,6 +154,8 @@ en:
       children:
         - name: Self-hosted Runner Overview
           link: 2.0/runner-overview/
+        - name: Self-hosted Runner Concepts
+          link: 2.0/runner-concepts/
         - name: Web App Installation
           link: 2.0/runner-installation/
         - name: CLI Installation
@@ -168,6 +170,8 @@ en:
           link: 2.0/runner-installation-docker/
         - name: Kubernetes Installation
           link: 2.0/runner-on-kubernetes/
+        - name: Self-hosted Runner Supported Platforms
+          link: runner-supported-platforms/
         - name: Scaling Self-hosted Runner
           link: 2.0/runner-scaling/
         - name: Self-hosted Runner Configuration Reference

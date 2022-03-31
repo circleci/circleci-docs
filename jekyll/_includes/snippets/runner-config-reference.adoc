@@ -1,6 +1,6 @@
-== Referencing your runner on a job
+== Referencing your self-hosted runner on a job
 
-After setting up the runner, you will need to reference it on a job by setting some fields in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your runner are:
+After setting up your self-hosted runner, you will need to reference it on a job by setting some fields in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your self-hosted runners are:
 
 * `machine: true`
 * `resource_class: your-namespace/your-resource`
@@ -20,4 +20,4 @@ jobs:
     steps:
       - run: echo "Hi I'm on Runners!"
 ```
-The job will then execute using your runner when you push the config to your VCS provider.
+The job will then execute using your self-hosted runner when you push the config to your VCS provider.
