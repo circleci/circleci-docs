@@ -16,7 +16,7 @@ CircleCI でテストを実行する場合、テスト結果を保存する方�
 * テストインサイトと結果が不安定なテストの検出
 * テストの分割
 
-一方で、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 これは、プロジェクトにおけるテスト結果の処理の設定に関する問題をデバッグする際に便利です。たとえば、誤ったファイルをアップロードしている場合に効果的です。 テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) ステップを使ってテスト結果をアップロードします。
+Alternatively, storing test results as **artifacts** means you can look at the raw XML. これは、プロジェクトにおけるテスト結果の処理の設定に関する問題をデバッグする際に便利です。たとえば、誤ったファイルをアップロードしている場合に効果的です。 To see test results as build artifacts, upload them using the [`store_artifacts` step ]({{site.baseurl}}/2.0/configuration-reference/#storeartifacts).
 
 **注: ** `store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
 
@@ -26,13 +26,13 @@ CircleCI でテストを実行する場合、テスト結果を保存する方�
 ## 概要
 {: #overview }
 
-[`store_test_results `]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results)ステップを使用すると、テスト結果をアップロードして保存することができ、また CircleCI のWeb アプリで成功したテストおよび失敗したテストを表示することができます。
+Using the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults) allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
 
 このテスト結果の表示は、ジョブを表示する際に以下に示すように **Tests** タブから利用できます。
 
-![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
+![store-test-results-view]({{site.baseurl}}/assets/img/docs/test-summary.png)
 
-`.circleci/config.yml` では、[`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) キーは以下のように使用します。
+Below is an example of using the [`store_test_results` key]({{site.baseurl}}/2.0/configuration-reference/#storetestresults) in your `.circleci/config.yml`.
 
 ```yml
 steps:
@@ -63,7 +63,7 @@ steps:
 {: #test-insights-for-server-v2x }
 **CircleCI Server v2.x をご使用の場合**、テストメタデータを収集するように設定すると、頻繁に失敗するテストが**インサイト**のページのリストに表示されます。それにより、不安定なテストを特定し、繰り返し発生する問題を隔離することができます。
 
-![失敗したテストに関するインサイト]( {{ site.baseurl }}/assets/img/docs/insights.png)
+![失敗したテストに関するインサイト]({{site.baseurl}}/assets/img/docs/insights.png)
 
 _上記のスクリーンショットは CircleCI Server v2.x をご使用の場合のみ適用されます。_
 
@@ -87,7 +87,7 @@ gem 'minitest-ci'
 
 - Django は、[django-nose](https://github.com/django-nose/django-nose) テストランナーを使用して設定する必要があります。
 
-**注:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{ site.baseurl}}/2.0/testing-ios/)をご覧ください。
+**注意:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{site.baseurl}}/2.0/testing-ios/)をご覧ください。
 
 ## カスタムテストランナーの例
 {: #custom-test-runner-examples }
@@ -96,7 +96,7 @@ gem 'minitest-ci'
 
 | 言語         | テストランナー      | フォーマッタ                                                                                    | 例                                                                                                                             |  |  |
 |:---------- |:------------ |:----------------------------------------------------------------------------------------- |:----------------------------------------------------------------------------------------------------------------------------- |  |  |
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{ site.baseurl }}/2.0/collect-test-data/#jest)                                                                           |  |  |
+| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{site.baseurl}}/2.0/collect-test-data/#jest)                                                                             |  |  |
 | JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                | [例]({{site.baseurl}}/2.0/collect-test-data/#mocha-for-node)、[NYC での例]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |  |  |
 | JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                | [例]({{site.baseurl}}/2.0/collect-test-data/#karma)                                                                            |  |  |
 | JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                       | [例]({{site.baseurl}}/2.0/collect-test-data/#ava-for-node)                                                                     |  |  |
@@ -598,7 +598,8 @@ Clojure のテスト出力を XML 形式に変換するには、[test2junit](htt
 {: #see-also }
 {:.no_toc}
 
-[インサイトの利用]({{ site.baseurl }}/2.0/insights/)
+- [インサイトの利用]({{site.baseurl}}/2.0/insights/)
+- [テストインサイト]({{site.baseurl}}/2.0/insights-tests/)
 
 ## ビデオ: テストランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
