@@ -12,7 +12,7 @@ version:
 
 This page describes how to install CircleCI self-hosted runner with Docker.
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Self-hosted Runner] page to verify prerequisites and authentication.
+{% include snippets/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
