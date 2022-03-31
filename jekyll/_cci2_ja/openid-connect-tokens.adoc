@@ -1,0 +1,81 @@
+---
+
+version:
+- Cloud
+---
+= Using OpenID Connect Tokens in Jobs
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
+:icons: font
+:toc: macro
+:toc-title:
+
+In jobs using a context, CircleCI provides an OpenID Connect ID token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
+
+toc::[]
+
+== OpenID Connect ID token availability
+
+In CircleCI jobs that use at least one context, the OpenID Connect ID token is available in the environment variable `CIRCLE_OIDC_TOKEN`.
+
+Add a <<contexts/#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference/#workflows,workflows>> section of your `circleci/config.yml` file:
+
+workflows:
+  my-workflow:
+    jobs:
+      - run-tests:
+          context:
+            - my-context
+
+== Setting up your cloud service
+
+Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
+
+The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the organization ID (UUID) that represents your organization.
+
+You can find your CircleCI organization ID by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
+
+The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
+
+== Format of the OpenID Connect ID token
+
+The OpenID Connect ID token contains the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
+
+[%autowidth]
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Claims
+|説明
+
+|`iss`
+|The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/<organization-id>"`, a    string, where `<organization-id>` is a UUID identifying the current job's project's organization.
+
+|`sub`
+|The subject. This identifies who is running the CircleCI job and where. Its value is `"org/<organization-id>/project/<project-id>/user/<user-id>"`, a string, where `<organization-id>`, `<project-id>`, and `<user-id>` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+
+|`aud`
+|The audience. Currently, this is a fixed value `"<organization-id>"`, a string containing a UUID that identifies the job's project's organization.
+
+|`iat`
+|The time of issuance. This is the time the token was created, which is shortly before the job starts.
+
+|`exp`
+|The expiration time. Its value is one hour after the time of issuance.
+|===
+
+The OpenID Connect ID token also contains some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Additional claims
+|メタデータ
+
+|`oidc.circleci.com/project-id`
+|The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
+
+|`oidc.circleci.com/context-ids`
+|An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
+|===
