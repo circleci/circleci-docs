@@ -207,11 +207,20 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 
 例えば、`circleci/golang:1.9` イメージにブラウザーを追加する場合は、`circleci/golang:1.9-browsers` イメージを使用します。
 
-### 次世代の言語イメージ
-{: #service-images }
+### Next-Gen Service images
+{: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリ サービス コンテナとして使用します。
+サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 These images should be listed **after** language images so they become secondary service containers.
+
+- [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
+- [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
+- [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
+- [Redis](https://circleci.com/developer/images/image/cimg/redis)
+
+### Legacy Service images
+{: #legacy-service-images }
+{:.no_toc}
 
 CircleCI は、以下のサービスに対応する従来のイメージを提供しています。
 
@@ -231,7 +240,7 @@ CircleCI は、サービスイメージに対してバリアント 1つのみ用
 
 例えば、`circleci/postgres:9.5-postgis` イメージで RAM ボリュームを使用する場合は、`circleci/postgres:9.5-postgis-ram` イメージを使用します。
 
-### 次世代のサービス イメージ
+### 次世代サービス イメージ
 {: #next-gen-service-images }
 {:.no_toc}
 
@@ -318,5 +327,5 @@ See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.
 {:.no_toc}
 
 - プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
-- iOS 用の macOS イメージの詳細については、({{ site.baseurl }}/2.0/testing-ios/) を参照してください。
-- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/2.0/building-docker-images/)」を参照してください。
+- iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/2.0/testing-ios/) を参照してください。
+- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/2.0/building-docker-images/)」を参照してください。
