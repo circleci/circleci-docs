@@ -5,7 +5,7 @@ version:
 = Self-Hosted Runner Web App Installation
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, and Windows platforms.
+:page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.
 :icons: font
 :toc: macro
 :toc-title:
@@ -82,6 +82,15 @@ Please note that if you would like to use self-hosted runners on Kubernetes, the
 . You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if one doesn't exist in your config. If you don't have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
+
+=== Platform-specific instructions
+
+Listed below are the platform-specific installation pages.
+
+* xref:runner-installation-linux.adoc[Linux]
+* xref:runner-installation-mac.adoc[macOS]
+* xref:runner-installation-windows.adoc[Windows]
+* xref:runner-installation-docker.adoc[Docker]
 
 == Additional Resources
 
