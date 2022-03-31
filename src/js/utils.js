@@ -65,6 +65,8 @@ export function updateCookieExpiration(cookieName, newExpiration) {
 }
 
 const isDataDogUserAgent = () =>
+  navigator &&
+  navigator.userAgent &&
   navigator.userAgent.indexOf('Datadog/Synthetics') !== -1;
 
 const isDataDogSynthetics = () => window._DATADOG_SYNTHETICS_BROWSER === true;
