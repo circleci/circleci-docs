@@ -76,6 +76,7 @@ class OptimizelyClient {
       // capture if we are trying to run this experiment as a guest experiment
       // default to false as most of our experiments are for logged in users
       const isGuestExperiment = options.guestExperiment ?? false;
+      const onlyQualifyGuests = options.onlyQualifyGuests ?? false;
 
       // Then, we check if we have the cookie. If the cookie is not present
       // it means the current user is not ready to see an experiment and so
@@ -93,6 +94,12 @@ class OptimizelyClient {
 
       // once we have the userId
       this.getUserId().then((userId) => {
+        // if we only want to qualify guests to the experiment, we check whether or not
+        // their userId is null and we use the audience `docs_is_logged_in` variable
+        if (isGuestExperiment && onlyQualifyGuests) {
+          attributes.docs_is_logged_in = userId !== null;
+        }
+
         // if we don't have a userId but we are in a guest experiment, we can request the anonymousId
         userId = !userId && isGuestExperiment ? this.getAnonymousId() : userId;
 
