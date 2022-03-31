@@ -8,6 +8,7 @@
 | `CIRCLE_JOB`{:.env_var}                   | 文字列型  | 現在のジョブの名前。                                                                                                                                                      |
 | `CIRCLE_NODE_INDEX`{:.env_var}            | 整数型   | (並列実行を有効化してジョブを実行する場合) 並列実行の現在のインデックスです。 0 から "`CIRCLE_NODE_TOTAL` - 1" までの値を取ります。                                                                              |
 | `CIRCLE_NODE_TOTAL`{:.env_var}            | 整数型   | (並列実行を有効化してジョブを実行する場合) 並列実行の総数です。 設定ファイルの `parallelism` の値と等しくなります。                                                                                             |
+| `CIRCLE_OIDC_TOKEN`{:.env_var}            | 文字列型  | An OpenID Connect token signed by CircleCI which includes details about the current job. Available in jobs that use a context.                                  |
 | `CIRCLE_PR_NUMBER`{:.env_var}             | 整数型   | 関連付けられた GitHub または Bitbucket プル リクエストの番号。 フォークしたプルリクエストのみで使用可能です。                                                                                               |
 | `CIRCLE_PR_REPONAME`{:.env_var}           | 文字列型  | プル リクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。                                                                                           |
 | `CIRCLE_PR_USERNAME`{:.env_var}           | 文字列型  | プル リクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。                                                                                          |
