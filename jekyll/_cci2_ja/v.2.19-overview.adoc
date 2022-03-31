@@ -46,10 +46,15 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 * 下記記載の暗号スイートの変更により、v2.19.02 よりクラシックロードバランサは使用できなくなりました。 https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[クラシックロードバランサ]からのリクエストは受け付けなくなったため、https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[ネットワークロードバランサー (NLB)] または https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[アプリケーションロードバランサ (ALB)] に移行する必要があります。
 
+## v2 19.15 の新機能
+
+* ルート認証局 (CA) の古いトラストストアを削除しました。
+* 各種のセキュリティ脆弱性を修正しました。
+
 ## v2 19.14 の新機能
 
 * exim イメージのセキュリティパッチ。
-廃止予定のチーム用 GitHub API エンドポイントが置き換えられました。
+* 廃止予定のチーム用 GitHub API エンドポイントが置き換えられました。
 
 ## v2 19.13 の新機能
 
