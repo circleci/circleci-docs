@@ -15,7 +15,7 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 * TOC
 {:toc}
 
-## Caching and self-hosted runner
+## Cache storage customization
 {: #caching-and-self-hosted-runner }
 
 When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.

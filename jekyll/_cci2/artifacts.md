@@ -291,7 +291,7 @@ Placeholder   | Meaning                                                         
 `:build_num`  | The number of the job (aka. build) for which you want to download artifacts.
 {: class="table table-striped"}
 
-## Artifacts and self-hosted runner
+## Artifact storage customization
 {: #artifacts-and-self-hosted-runner }
 
 When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
