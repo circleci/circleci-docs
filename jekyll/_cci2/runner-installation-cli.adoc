@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+This page describes how to install self-hosted runners through the CLI.
+
 ++++
 <section style="
     background-color: #d9edf7; 
@@ -30,6 +32,7 @@ toc::[]
 
 To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
 
+* <<local-cli#,CircleCI CLI>>. If you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
 * https://curl.se/[curl] (installed by default on macOS)
 * sha256sum (if not pre-installed):

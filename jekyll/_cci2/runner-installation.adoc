@@ -10,6 +10,8 @@ version:
 :toc: macro
 :toc-title:
 
+This page describes how to install self-hosted runners through the CircleCI web app.
+
 ++++
 <section style="
     background-color: #d9edf7; 
@@ -80,7 +82,6 @@ The post authentication platform-specific instructions are also documented on th
 +
 Please note that if you would like to use self-hosted runners on Kubernetes, the instructions are not included in the UI, and you will need to refer to the xref:runner-on-kubernetes.adoc[Kubernetes] page.
 +
-. Once you've completed the installation steps for your specific platform, you will receive a popup notification when the self-hosted runner agent successfully connects to your cloud account.
 +
 . You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if one doesn't exist in your config. If you don't have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
 +
