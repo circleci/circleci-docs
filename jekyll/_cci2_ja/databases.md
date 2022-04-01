@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "データベースの構成"
 short-title: "データベースの構成"
-description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
+description: "ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI  でデータベースサービスに使用する方法について説明します。"
 order: 35
 version:
   - クラウド
@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
+ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI  でデータベースサービスに使用する方法について説明します。
 
 * 目次
 {:toc}
@@ -21,14 +21,14 @@ This document describes how to use the official CircleCI pre-built Docker contai
 
 CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image) には、言語とサービスごとにビルド済みイメージが用意されています。 これは、各種の便利な要素をイメージに追加したデータベースのようなものです。
 
-The following example shows a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Executor に Docker が選択されており、最初のイメージとなるのは、すべての処理が実行されるプライマリ コンテナです。 この例には 2 番目のイメージがあり、これがサービス イメージとして使用されます。 最初のイメージのプログラミング言語は Python です。 Python イメージには `pip` がインストールされており、ブラウザーのテスト用に `-browsers` があります。 The service image gives access to additional services like databases.
+以下には、`build` という 1 つのジョブが含まれている  [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの例を示しています。 Executor に Docker が選択されており、最初のイメージとなるのは、すべての処理が実行されるプライマリ コンテナです。 この例には 2 番目のイメージがあり、これがサービスイメージとして使用されます。 最初のイメージのプログラミング言語は Python です。 Python イメージには `pip` がインストールされており、ブラウザーのテスト用に `-browsers` があります。 サービスイメージによって、データベースなどの別のサービスへのアクセスが可能となります。
 
 ## PostgreSQL データベースのテスト例
 {: #postgresql-database-testing-example }
 
-In the primary image, the config defines an environment variable with the `environment` key, giving it a URL. この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で構成する必要はありません。
+プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で構成する必要はありません。
 
-Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
+以下のように CircleCI 設定ファイルで `postgres` に `POSTGRES_USER` 環境変数を設定して、イメージにロールを追加します。
 
 ```yml
       - image: cimg/postgres:14.0
@@ -81,7 +81,7 @@ jobs:
 
 {% endraw %}
 
-`steps` では最初に `checkout` が実行され、その後 Postgres クライアントツールがインストールされます。 The `cimg/postgres:14.0` image doesn't install any client-specific database adapters. たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#next-gen-service-images) for the list of images.
+`steps` では最初に `checkout` が実行され、その後 Postgres クライアントツールがインストールされます。 `cimg/postgres:14.0` イメージでは、クライアント固有のデータベースアダプターはインストールされません。 たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 イメージの一覧は、[ビルド済み CircleCI サービスイメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#next-gen-service-images) のページをご確認ください。
 
 In this example, the config installs the PostgreSQL client tools, `postgresql-client` via `apt-get`, to get access to `psql`. Installing packages in images requires administrator privileges, therefore `sudo` is used - a password is not required.
 
