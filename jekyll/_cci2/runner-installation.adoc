@@ -54,7 +54,7 @@ CircleCI mirrors VCS permissions for organizations. If you are an admin on your 
 
 NOTE: Currently, the web app installation is available to *cloud* customers. If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#,Self-Hosted Runners through the CLI>> page.
 
-In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization administrator in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
+In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
 
 You can view your runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
 

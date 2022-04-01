@@ -21,11 +21,11 @@ A **namespace** is a unique identifier claimed by a CircleCI organization. Each 
 
 A **resource class** is a label to match your CircleCI job with a type of runner that is identified to process that job. The first part of the resource class is your organization's namespace. For example, a CircleCI resource class could be `circleci/documentation`. Resources classes are created when you go through the process of installing self-hosted runners.
 
-Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific places. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgnamelinux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which set of self-hosted runner resources to send a job to based on the resource class.
+Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific places. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
 
 Optionally, you can give your resource class a description.
 
-Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs.
+Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
 
 == Launch agent and task agent
 
@@ -34,7 +34,7 @@ The self-hosted runner consists of two components: the launch agent and the task
 * launch agent (launch-agent) - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
 * task agent (task-agent) - handles running a task retrieved and configured by the launch agent
 
-The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
+The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
 
 == Self-hosted runner concurrency
 
