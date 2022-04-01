@@ -609,10 +609,9 @@ You will need the following details when you configure CircleCI server.
 
 * *Storage Bucket Name* - The bucket used for server.
 
-You can choose one of the following:
-
-  * *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
-  * *Service Account Email* - Service Account Email id if using Google Workload Identity.
+* You can choose one of the following:
+** *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
+** *Service Account Email* - Service Account Email id if using Google Workload Identity.
 
 A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google’s Condition Editor in the IAM console:
 
