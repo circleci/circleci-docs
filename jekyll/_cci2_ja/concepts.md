@@ -20,14 +20,14 @@ version:
 ## 同時実行
 {: #concurrency }
 
-CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Performance または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
+CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Performance または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
 
 [設定ファイルのサンプル]({{site.baseurl}}/ja/2.0/sample-config/#concurrent-workflow)に示す方法で並列実行を設定するには[ワークフローのオーケストレーション]({{site.baseurl}}/ja/2.0/workflows/)を参照してください。
 
 ## 設定
 {: #configuration }
 
-CircleCI は *Configuration as Code* を貫いています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 この `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 詳しくは「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご確認ください。
+CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 この `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 詳しくは「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご確認ください。
 
 ```shell
 ├── .circleci
@@ -71,7 +71,7 @@ Java アプリケーション例を用いてさまざまな設定要素を紹介
 
 ![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
-詳細は、[コンテキストの使用]({{ site.baseurl }}/2.0/contexts/)を参照して下さい。
+詳細は、[コンテキストの使用]({{ site.baseurl }}/ja/2.0/contexts/)を参照して下さい。
 
 
 
@@ -91,7 +91,7 @@ Java アプリケーション例を用いてさまざまな設定要素を紹介
 
 キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 ビルドを高速化するために、各ジョブには、以前のジョブからの依存関係をキャッシュするための特別な手順が含まれている場合があります。
 
-[キャッシュをクリアする](https://circleci.com/docs/2.0/caching/#clearing-cache)必要がある場合は、[依存関係のキャッシュ](https://circleci.com/docs/2.0/caching/)のページで詳細をご確認ください。
+[キャッシュをクリアする](https://circleci.com/docs/ja/2.0/caching/#clearing-cache)必要がある場合は、[依存関係のキャッシュ](https://circleci.com/docs/ja/2.0/caching/)のページで詳細をご確認ください。
 
 {:.tab.cache.Cloud}
 
@@ -101,7 +101,7 @@ Java アプリケーション例を用いてさまざまな設定要素を紹介
 
 
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build1:
@@ -152,7 +152,7 @@ jobs:
 
 
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build1:
@@ -270,7 +270,8 @@ jobs:
 
 
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build1:
 #...
@@ -311,7 +312,8 @@ jobs:
 
 
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build1:
 #...
@@ -396,7 +398,7 @@ jobs:
 
 {: class="table table-striped"}
 
-See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+ワークスペース、キャッシュ、アーティファクトに関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 
 
@@ -427,7 +429,7 @@ jobs:
 
 後続のコミットでは、Dockerfile が変更されていない場合、DLC は ` build Elixir image`のステップでキャッシュから各 Docker イメージレイヤーをプルし、イメージのビルドが著しく高速化します。
 
-詳細は、[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)を参照して下さい。
+詳細は、[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)を参照して下さい。
 
 
 
@@ -438,7 +440,7 @@ jobs:
 
 各プロジェクトの設定を手動で作成する代わりに、特定のパイプラインパラメーターまたはファイルパスに基づいて、この設定を動的に生成することができます。 これは、チームがモノレポ（単一のリポジトリ）で作業している場合に特に役立ちます。 ダイナミックコンフィグを使うと、プロジェクトの*特定の*部分からビルドをトリガーできます。毎回すべてを再ビルドする必要はありません。
 
-詳細は、[ダイナミックコンフィグ]({{ site.baseurl }}/2.0/dynamic-config/)を参照して下さい。
+詳細は、[ダイナミックコンフィグ]({{ site.baseurl }}/ja/2.0/dynamic-config/)を参照して下さい。
 
 
 
@@ -553,9 +555,9 @@ jobs:
 ```
 
 
-プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプの選び方]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。 さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
+プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。 さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
 
-Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
+Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/ja/2.0/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
 
 **注: **macOS は CircleCI Server v 2.x. では使用できません。
 
@@ -565,11 +567,11 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
 
 {: #images }
 
-イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。
+イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。
 
-**Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI では一般的なプログラミング言語に対応する[CircleCI イメージ]({{ site.baseurl }}/2.0/circleci-images/)を Docker Hub 上に用意しています。
+**Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI では一般的なプログラミング言語に対応する[CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)を Docker Hub 上に用意しています。
 
-**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。 詳細は、[マシンの使用]({{ site.baseurl}}/2.0/executor-types/#using-machine)を参照して下さい。
+**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。 詳細は、[マシンの使用]({{ site.baseurl}}/ja/2.0/executor-types/#using-machine)を参照して下さい。
 
 比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
 
@@ -663,7 +665,7 @@ jobs:
 
 ![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-詳細は、[テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照して下さい。
+詳細は、[テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)を参照して下さい。
 
 
 ## パイプライン
@@ -681,7 +683,7 @@ CircleCI パイプラインとは、プロジェクトで作業をトリガす�
 
 {: #projects }
 
-CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
+CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/ja/2.0/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
 
 プロジェクトダッシュボードで、以下のいずれかを実行します。
 
