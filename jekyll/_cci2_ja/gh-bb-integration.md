@@ -263,13 +263,13 @@ jobs:
 
 2. **SSH Keys** のページに移動し、**User Key** までスクロールダウンします。
 
-3. **Add User Key** ボタンを右クリックし、**Inspect**オプションを選択し、Web ブラウザーの検証ツールを起動します。 ![Project settings Add User Key button]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
+3. **Add User Key** ボタンを右クリックし、**Inspect**オプションを選択し、Web ブラウザーの検証ツールを起動します。 ![プロジェクト設定のユーザーキー追加ボタン]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
 
 4. ブラウザーの検証ツールで、**Network** タブを選択し、コンソールをクリアします。
 
-5. **Add User Key** をクリックし、**Confirm User** をクリックし、このモーダルでユーザーがマシンユーザーであることを確認します。 _必須ではありませんが、マシンユーザーを作成することを強く推奨します_。 ![Machine user modal]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
+5. **Add User Key** をクリックし、**Confirm User** をクリックし、このモーダルでユーザーがマシンユーザーであることを確認します。 _必須ではありませんが、マシンユーザーを作成することを強く推奨します_。 ![マシンユーザーモーダル]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
 
-6. フィルターボックスで、checkout と入力します。 これにより、`checkout-key` を見つけることができます。 ステータス 201 の `checkout-key` をクリックし、**Preview** タブを選択します。  `public_key` をクリップボードにコピーします。 ![Finding the public key]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
+6. フィルターボックスで、checkout と入力します。 これにより、`checkout-key` を見つけることができます。 ステータス 201 の `checkout-key` をクリックし、**Preview** タブを選択します。  `public_key` をクリップボードにコピーします。 ![パブリックキーを探す]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
 
 7. Bitbucket の [SSH キーの設定方法](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/)の説明に従って、Bitbucket にキーを追加します。
 
