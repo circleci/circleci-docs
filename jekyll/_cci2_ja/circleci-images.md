@@ -207,18 +207,18 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 
 例えば、`circleci/golang:1.9` イメージにブラウザーを追加する場合は、`circleci/golang:1.9-browsers` イメージを使用します。
 
-### Next-Gen Service images
+### 次世代サービスイメージ
 {: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 These images should be listed **after** language images so they become secondary service containers.
+サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリ サービス コンテナとして使用します。
 
 - [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
 - [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
 - [Redis](https://circleci.com/developer/images/image/cimg/redis)
 
-### Legacy Service images
+### レガシーサービスイメージ
 {: #legacy-service-images }
 {:.no_toc}
 
@@ -240,11 +240,11 @@ CircleCI は、サービスイメージに対してバリアント 1つのみ用
 
 例えば、`circleci/postgres:9.5-postgis` イメージで RAM ボリュームを使用する場合は、`circleci/postgres:9.5-postgis-ram` イメージを使用します。
 
-### 次世代サービス イメージ
+### 次世代サービスイメージ
 {: #next-gen-service-images }
 {:.no_toc}
 
-CircleCI では、次世代サービス コンビニエンス イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
+CircleCI では、次世代版 CircleCI イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
 
 ## プリインストール ツール
 {: #pre-installed-tools }
