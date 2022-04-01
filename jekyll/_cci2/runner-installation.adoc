@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= Self-Hosted Runner Web App Installation
+= Installing Self-Hosted Runners with the Web App
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.

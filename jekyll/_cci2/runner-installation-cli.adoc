@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Self-Hosted Runner CLI Installation
+= Installing Self-Hosted Runners with the CLI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.
