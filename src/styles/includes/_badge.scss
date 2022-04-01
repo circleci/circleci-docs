@@ -1,0 +1,28 @@
+@import "mixins/cta_badge";
+
+.include-badge {
+  width: 100%;
+  display: flex;
+  padding: 32px;
+  border: 1px solid #efefef;
+
+  .icon {
+    width: 32px;
+    height: 32px;
+
+  }
+
+  .name {
+    color: red;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  .is-new {
+    @include cta-badge;
+  }
+}

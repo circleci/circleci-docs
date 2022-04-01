@@ -12,6 +12,19 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 
 <hr class="hidden-xs" />
 
+
+{% capture qsGuideLogo %}{{site.baseurl}}/docs/assets/img/compass/nodejs.svg{% endcapture %}
+
+  <div>
+    {% include badge.html name="Quickstart Guide" icon=qsGuideLogo %}
+    {% include badge.html name="Node" %}
+  </div>
+
+  <div>
+    {% include badge.html name="Python" %}
+    {% include badge.html name="...All guides" %}
+  </div>
+
 <div class="row loading-deferred">
   <div class="treatment col-xs-12">
     <span id="homepage-guide-links"><h2>Examples and Guides</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="New"></span>
