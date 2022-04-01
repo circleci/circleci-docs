@@ -141,16 +141,20 @@ If you store data toward the end of your billing cycle, the data will be restore
 **NOTE:** For our monthly Performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
-Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
+Network charges apply when an organization has runner network egress beyond the included network GB allotment. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
+
+Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
 For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
 
-### Reducing excess use of network egress
-{: #reducing-excess-use-of-network-egress }
+### Reducing excess use of network egress and storage
+{: #reducing-excess-use-of-network-egress-and-storage }
 
 Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
+
+Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. 
 
 ## See also
 {: #see-also }
