@@ -36,7 +36,7 @@ https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロ�
 
 お客様の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で  **Organization Settings > Contexts** に移動し、ページ上部で **Organization ID** を探します。
 
-CircleCI が発行した OpenID Connect ID トークンには、固定の audience がいます (下記表の `aud` を参照)。これは組織 ID でもあります。
+CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
 == OpenID Connect ID トークンの形式
 
