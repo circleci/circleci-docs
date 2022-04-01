@@ -23,7 +23,7 @@ The summary section displays test suite performance across your most recent 100 
 - failure counts
 - slow run times in test suite
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-performance-summary.png)
+![Performance summary example]({{ site.baseurl }}/assets/img/docs/test-insights-performance-summary.png)
 
 ### Most Recent Runs
 {: #most-recent-runs }
@@ -33,7 +33,7 @@ The most recent runs chart displays the most recent 100 executions of the test s
 - skipped tests
 - success rate of tests
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-recent-runs.png)
+![Recent runs example]({{ site.baseurl }}/assets/img/docs/test-insights-recent-runs.png)
 
 ### Flaky Tests
 {: #flaky-tests }
@@ -42,7 +42,7 @@ Flaky tests are tests that fail non-deterministically; they pass and fail due to
 
 Test insights detect flaky tests by identifying tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and demonstrate the same behavior on re-runs. Additionally, these types of tests are labeled “FLAKY” throughout the CircleCI app making them easy to identify and fix.
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-flaky.png)
+![Flakey tests insights example]({{ site.baseurl }}/assets/img/docs/test-insights-flaky.png)
 
 ### Most Failed Tests
 {: #most-failed-tests }
@@ -53,7 +53,7 @@ You can view the 100 tests with the lowest success rates in their most recent pi
 - run time
 - success rate
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-failed.png)
+![Most failed tests examples]({{ site.baseurl }}/assets/img/docs/test-insights-failed.png)
 
 ### Slowest Tests
 {: #slowest-tests }
@@ -64,4 +64,4 @@ You can view the 100 tests with the longest run times in their most recent pipel
 - run time
 - success rate
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-slowest.png)
+![Slowest tests example]({{ site.baseurl }}/assets/img/docs/test-insights-slowest.png)

@@ -373,7 +373,7 @@ This example uses a _very_ specific cache key. Making your caching key more spec
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/mysql:5.6
+      - image: cimg/mysql:5.7
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
