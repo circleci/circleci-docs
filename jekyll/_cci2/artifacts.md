@@ -296,7 +296,7 @@ Placeholder   | Meaning                                                         
 
 When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
-Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. The benefit of retaining an artifact is that you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
+Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
 
 You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
 
