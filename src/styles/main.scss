@@ -17,10 +17,19 @@
 @import 'progressbar';
 @import 'language-guide';
 @import 'first_steps_cta';
+@import 'popup';
+@import 'includes/getting-started-section-header';
+@import 'includes/vcs-banner';
+
+// pages with their own unique styling
+@import 'pages/troubleshooting-and-common-issues';
 
 // prism related scss
 @import 'prism/theme';
 @import 'prism/copy-code-button';
+
+// includes
+@import 'includes/two-up';
 
 // General
 body {
@@ -189,10 +198,14 @@ div.article-container{
   }
 
   .external-link-tag-wrapper{
-	display: inline-block;
-	.external-link-icon {
-	  margin: 0 0 0 3px;
-	}
+	  display: inline-block;
+    .external-link-icon {
+      margin: 0 0 0 3px;
+    }
+  }
+
+  .margin-left {
+    margin-left: 3px;
   }
 
   padding: 0 48px;

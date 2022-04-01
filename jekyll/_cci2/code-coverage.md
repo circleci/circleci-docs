@@ -583,6 +583,8 @@ jobs:
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -605,6 +607,8 @@ jobs:
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -628,6 +632,8 @@ jobs:
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -678,7 +684,9 @@ jobs:
 ### Codecov
 {: #codecov }
 
-Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
+Codecov has an [orb](https://circleci.com/developer/orbs/orb/codecov/codecov) to help simplify the process of uploading your coverage reports. 
+
+**Note:** The Codecov orb is a Partner orb. You or your organization admin will need to opt in to using uncertified orbs in order to use it. This setting is available at **Organization Settings > Security** in the CircleCI web app.
 
 ```yaml
 version: 2.1

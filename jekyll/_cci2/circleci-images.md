@@ -12,7 +12,7 @@ version:
 ---
 
 <div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" will be <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
+  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
 This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
@@ -246,13 +246,20 @@ add one of the following suffixes to the end of an image tag.
 For example, if you want to add browsers to the `circleci/golang:1.9` image, use
 the `circleci/golang:1.9-browsers` image.
 
-### Service images
-{: #service-images }
+### Next-Gen Service images
+{: #next-gen-service-images }
 {:.no_toc}
 
-Service images are convenience images for services like databases. These images
-should be listed **after** language images so they become secondary service
-containers.
+Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
+
+- [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
+- [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
+- [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
+- [Redis](https://circleci.com/developer/images/image/cimg/redis)
+
+### Legacy Service images
+{: #legacy-service-images }
+{:.no_toc}
 
 CircleCI maintains legacy images for the services below.
 

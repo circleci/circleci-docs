@@ -73,7 +73,7 @@ If your project has a large test suite, you can configure your build to use [`pa
 
 Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
 
-* See the `resource_class` section of the [Configuration Reference]({{site.baseURL}}/2.0/configuration-reference/#resourceclass) for more information.
+* See the `resource_class` section of the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for more information.
 
 ## See also
 {: #see-also }

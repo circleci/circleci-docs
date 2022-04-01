@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Executor とイメージ"
 short-title: "Executor とイメージ"
-description: "CircleCI executors and images"
+description: "CircleCI の Executor とイメージ"
 categories:
   - 設定
 order: 1
@@ -12,7 +12,7 @@ version:
   - Server v3.x
 ---
 
-CircleCI offers several execution environments. CircleCI ではこれらを **Executor** と呼んでいます。 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCIでは、複数のビルド環境を用意しており、 これらを **Executor** と呼んでいます。 **Executor** は、ジョブを実行する基盤テクノロジーまたは環境を定義する機能です。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -20,7 +20,7 @@ CircleCI offers several execution environments. CircleCI ではこれらを **Ex
 {: #docker }
 
 <div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci / 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 ```yml
@@ -33,10 +33,13 @@ jobs:
         # プライマリ コンテナで実行するコマンド
 ```
 
-`docker` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker)をご覧ください。
+`docker` Executor についての詳細は、「Executor タイプの選び方」の[Docker を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker)のページをご覧ください。
 
-## Machine
+## マシン
 {: #machine }
+
+Ubuntu 14.04 および 16.04 マシンイメージはすでにサポートが終了し、[2022 年 5 月 31 日に提供を終了します。](https://circleci.com/blog/ubuntu-14-16-image-deprecation/) この 2 つのイメージは、2022 年の 3 月 29 日と 4 月 26 日に、提供を一時的に中断します。 [14.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/14.04-to-20.04-migration/) および [16.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/16.04-to-20.04-migration/) イメージからの移行をお願いいたします。
+{: class="alert alert-warning"}
 
 {:.tab.machine.Cloud}
 ```yml
@@ -63,7 +66,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+`machine` Executor についての詳細は、「Executor タイプの選び方」の[マシンを使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine)のページをご覧ください。
 
 ## macOS
 {: #macos }
@@ -79,7 +82,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+`macos` Executor についての詳細は、「Executor タイプの選び方」の [macOS を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos) のページをご覧ください。
 
 ## Windows
 {: #windows }
@@ -87,7 +90,7 @@ jobs:
 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
 * クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
-* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
+* オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。_CircleCI Server v2.18.3_ からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
 ```yml
@@ -137,7 +140,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor についての詳細は、「Executor タイプの選び方」の [Windows Executor を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)のページをご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 {: #see-also }
@@ -145,7 +148,7 @@ jobs:
 * [Executor タイプの選択]({{ site.baseurl }}/ja/2.0/executor-types/)
 * [ビルド済み CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)
 * [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
-* [Windows でビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
+* [Windows でのビルド]({{site.baseurl}}/ja/2.0/hello-world-windows)
 
 ## さらに詳しく
 {: #learn-more }

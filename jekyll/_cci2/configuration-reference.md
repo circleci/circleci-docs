@@ -4,6 +4,7 @@ title: Configuring CircleCI
 short-title: Configuring CircleCI
 description: Reference for .circleci/config.yml
 order: 20
+readtime: false
 version:
 - Cloud
 - Server v3.x
@@ -391,8 +392,10 @@ jobs:
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
 
 ***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical.
-As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.
-We suggest upgrading to the latest Ubuntu 20.04 image for continued releases and support past April 2021.*
+As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
+
+Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+{: class="alert alert-warning"}
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -420,15 +423,11 @@ When using the [Windows GPU executor](#gpu-executor-windows), the available imag
 
 ```yaml
 version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
+
 jobs:
   build:
     machine:
       image: windows-server-2019-nvidia:stable
-      docker_layer_caching: true    # default - false
 ```
 
 #### **`macos`**
@@ -663,10 +662,11 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }
 
-Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
---------------------------------|-------|-----|------|-----------------|------------------
-gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
-gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB)
+--------------------------------|-------|-----|------|-------------------|------------------
+gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8
+gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16
+gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16
 {: class="table table-striped"}
 
 ###### Example usage
@@ -679,8 +679,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
@@ -779,7 +779,7 @@ Each built-in step is described in detail below.
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-**Note:** the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, use [workflows](#workflows) plus associated [filtering]({{site.baseurl}}/2.0/configuration-reference/#jobfilters) and/or [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). See [fan-out/fan-in examples]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) for more details.
+**Note:** the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 {: class="alert alert-info"}
 
 Key | Required | Type | Description
@@ -1187,7 +1187,148 @@ A path is not required here because the cache will be restored to the location f
 {: #deploy-deprecated }
 {:.no_toc}
 
-Please see [run](#run) for current processes.
+Please see [run](#run) for current processes. If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
+
+##### **Migration from `deploy` to `run`**
+
+**Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
+
+*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?*
+Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
+
+*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?*
+There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
+
+###### *Example*
+
+The following is an example of replacing the deprecated `deploy` step in a config file that has parallelism > 1 (this code is deprecated, do not copy):
+
+```yml
+# Example of deprecated syntax, do not copy
+version: 2.1
+jobs:
+  deploy-step-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      - deploy: #deprecated deploy step, do not copy
+          command: |
+            echo "this is a deploy step which needs data from the rand"
+            cat rand_*.txt
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - deploy-step-job
+```
+
+If you are entirely reliant on external resources (for example, Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete. `doing-things-job` uses parallelism of 3, while `deploy-step-job` performs the actual deployment. See example below:
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+  # create a new job with the deploy step in it
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: # change "deploy" to "run"
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      # add your new job and make it depend on the 
+      # "doing-things-job"
+      - deploy-job:
+          requires:
+            - doing-things-job
+```   
+
+If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      # save the files your deploy step needs
+      - save_workspace:
+          root: .     # relative path to our working directory
+          paths:      # file globs which will be persisted to the workspace
+           - rand_*
+
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # attach the files you persisted in the doing-things-job
+      - attach_workspace:
+          at: . # relative path to our working directory
+      - run:
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+This is effectively using a "fan-in" workflow which is described in detail on the [workflows](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
@@ -1354,7 +1495,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ##### **`add_ssh_keys`**
-{: #addsshkeys }
+{: #add-ssh-keys }
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
 

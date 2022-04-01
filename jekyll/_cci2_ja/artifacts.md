@@ -41,6 +41,63 @@ CircleCI Web アプリでパイプラインの **Job** ページに移動し、[
 
 ビルド時に作成したアーティファクトをアップロードするには、以下の例を参考にしてください。
 
+{:.tab.artifacts.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+```
+
+{:.tab.artifacts.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+```
+
+{:.tab.artifacts.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -69,8 +126,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job **ページの **[Artifacts]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。        
-単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job **ページの **[Artifacts]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。 1つのジョブで実行できる `store_artifacts` ステップの数に制限はありません。
 
 現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
@@ -103,6 +159,61 @@ jobs:
 
 このサンプル C abort プログラムをコンパイルし、コアダンプをアーティファクトとして収集する `config.yml` の全文は、以下のようになります。
 
+{:.tab.artifacts2.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/work
+    steps:
+      - checkout
+      - run: make
+      - run: |
+          # tell the operating system to remove the file size limit on core dump files
+          ulimit -c unlimited
+          ./dump
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/core_dumps
+```
+
+{:.tab.artifacts2.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/work
+    steps:
+      - checkout
+      - run: make
+      - run: |
+          # tell the operating system to remove the file size limit on core dump files
+          ulimit -c unlimited
+          ./dump
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/core_dumps
+```
+
+{:.tab.artifacts2.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -181,23 +292,32 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 ## アーティファクトの最適化
 {: #artifacts-optimization }
 
-最適化オプションは、実行しようとしている内容に応じてプロジェクトごとに異なります。 ネットワークやストレージの使用量を削減するために、下記をお試しください。
+#### アップロードされているアーティファクトの確認
+{: #check-which-artifacts-are-being-uploaded }
+{:.no_toc}
 
-- `store_artifacts` が不必要なファイルをアップロードしていないか確認する。
-- 並列処理を使用している場合は、同じアーティファクトがないか確認する。
-- 最低限のコストでテキストのアーティファクトを圧縮する。
-- UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードする。
-- フィルタを外し、失敗したテストまたは成功したテストのみをアップロードする。
-- 1つのブランチにのみアーティファクトをアップロードする。
-- 大きなアーティファクトは、独自のバケットに無料でアップロードする。
+実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#how-to-optimize-your-storage-and-network-transfer-use)のページを参照して下さい。
+ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
-お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
+#### 大きなアーティファクトのアップロード
+{: #uploading-large-artifacts }
+{:.no_toc}
+
+テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。
+
+UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
+
+パイプラインがバイナリの uberJAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
+
+大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching/)
-- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data/#using-artifacts)
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)

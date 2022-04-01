@@ -725,7 +725,10 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
@@ -765,7 +768,7 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
@@ -869,7 +872,10 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
@@ -909,7 +915,7 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .

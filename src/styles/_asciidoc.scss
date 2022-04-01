@@ -51,3 +51,28 @@ span.icon>.fa {
 .green{
   color: #43C78A;
 }
+
+.sidebarblock{
+  border:1px solid #dddddd;
+  margin-bottom:1.25em;
+  padding:1.25em;
+  background:#f9f9f9;
+  -webkit-border-radius:4px;
+  border-radius:4px
+}
+
+.sidebarblock>:first-child{
+  margin-top:0
+}
+
+.sidebarblock>:last-child{
+  margin-bottom:0
+}
+
+.sidebarblock>.content>.title{
+  margin-top:0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-style: normal;
+  text-align:center;
+}

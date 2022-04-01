@@ -356,7 +356,7 @@ You can categorize your orb for better discoverability in the [Orb Registry](htt
 #### Listing categories
 {: #listing-categories }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-list-categories.png)
+![Example of showing listing categories using the CLI](  {{ site.baseurl }}/assets/img/docs/orb-categories-list-categories.png)
 
 You can select up to two categories for your orb. These are the available categories:
 
@@ -381,21 +381,21 @@ The list of categories can also be obtained by running the `circleci orb list-ca
 #### Add an orb to a category
 {: #add-an-orb-to-a-category }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-add-to-category.png)
+![Adding an orb category](  {{ site.baseurl }}/assets/img/docs/orb-categories-add-to-category.png)
 
 Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html).
 
 #### Remove an orb from a category
 {: #remove-an-orb-from-a-category }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
+![Removing an orb from a category](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
 
 Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html).
 
 #### Viewing an orb's categorizations
 {: #viewing-an-orbs-categorizations }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
+![Show which categorizations have been added to an orb](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
 
 To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
 

@@ -1,6 +1,6 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
 import { v4 as uuidv4 } from 'uuid';
-import { isProduction } from '../utils';
+import { isProduction, isDataDog } from '../utils';
 import Cookies from 'js-cookie';
 
 export const COOKIE_KEY = 'cci-org-analytics-id';
@@ -14,20 +14,25 @@ class OptimizelyClient {
       datafile: window.optimizelyDatafile,
     });
   }
-  getUserId(isGuestExperiment) {
+  getAnonymousId() {
+    let anonymousId = null;
+    try {
+      // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
+      // and sets this as anonymousId for each new visitor.
+      // This call is always valid and will never return null. From the docs:
+      // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
+      anonymousId = analytics.user().anonymousId();
+    } catch (_) {
+      return null;
+    }
+    return anonymousId;
+  }
+  getUserId() {
     return new Promise((resolve) => {
       if (window.userData) {
         // if we already have userData
         resolve(
           window.userData.analytics_id ? window.userData.analytics_id : null,
-        );
-      } else if (isGuestExperiment) {
-        // Analytics.js generates a universally unique ID (UUID) for the viewer during the library’s initialization phase
-        // and sets this as anonymousId for each new visitor.
-        // This call is always valid and will never return null. From the docs:
-        // If the user’s anonymousId is null (meaning not set) when you call this function, Analytics.js automatically generated and sets a new anonymousId for the user.
-        resolve(
-          analytics && analytics.user() ? analytics.user().anonymousId() : null,
         );
       } else {
         // If we are here it means we are still waiting on getting notified
@@ -51,6 +56,11 @@ class OptimizelyClient {
   // - User is in the exclusion group
   getVariationName(options) {
     return new Promise((resolve, reject) => {
+      // if datadog rum/browser is requesting our site, we don't want to show experiments
+      if (isDataDog()) {
+        return resolve(null);
+      }
+
       if (typeof forceAll === 'function' && forceAll()) {
         return resolve('treatment');
       }
@@ -71,6 +81,7 @@ class OptimizelyClient {
       // capture if we are trying to run this experiment as a guest experiment
       // default to false as most of our experiments are for logged in users
       const isGuestExperiment = options.guestExperiment ?? false;
+      const onlyQualifyGuests = options.onlyQualifyGuests ?? false;
 
       // Then, we check if we have the cookie. If the cookie is not present
       // it means the current user is not ready to see an experiment and so
@@ -87,7 +98,16 @@ class OptimizelyClient {
       }
 
       // once we have the userId
-      this.getUserId(isGuestExperiment).then((userId) => {
+      this.getUserId().then((userId) => {
+        // if we only want to qualify guests to the experiment, we check whether or not
+        // their userId is null and we use the audience `docs_is_logged_in` variable
+        if (isGuestExperiment && onlyQualifyGuests) {
+          attributes.docs_is_logged_in = userId !== null;
+        }
+
+        // if we don't have a userId but we are in a guest experiment, we can request the anonymousId
+        userId = !userId && isGuestExperiment ? this.getAnonymousId() : userId;
+
         if (!userId) {
           return resolve(null);
         }

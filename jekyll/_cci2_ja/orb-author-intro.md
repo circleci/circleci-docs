@@ -8,6 +8,7 @@ categories:
 order: 1
 version:
   - クラウド
+  - Server v3.x
 ---
 
 * 目次
@@ -16,9 +17,9 @@ version:
 ## クイックスタート
 {: #quick-start }
 
-Orb とは、[再利用可能な構成]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化してみましょう。
+Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
 
-Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
+Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
 Orb は、以下の 3 つの要素で構成されます。
 
@@ -56,9 +57,9 @@ Orb CLI のコマンドは、VCS (バージョン管理システム) によっ�
 ### 名前空間の登録
 {: #register-a-namespace }
 
-CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
 
-_note: Within CircleCI, we sometimes refer to individual users as "organizations" or "personal organizations", since from our perspective there aren't notable differences. Hence some commands refer to an `org-name`. This can simply be your GitHub username._
+**注: **CircleCI では、個々のユーザーを「組織」または「個人組織」と呼ぶことがあります。なぜなら、私たちの観点からは大きな違いはないからです。 したがって、一部のコマンドは `org-name`を参照します。 これは GitHub または Bitbucket のユーザ名を指定するだけです。
 
 まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
 ```shell
@@ -67,16 +68,9 @@ circleci namespace create <name> <vcs-type> <org-name> [flags]
 
 `name` は要求する名前空間、`vcs-type` はお使いのバージョン管理システムの種類 (`github` または `bitbucket`)、`org-name` は自分の組織名に置き換えてください。
 
-### 次のステップ
+## 次のステップ
 {: #next-steps }
 
-Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
-
-
-## 関連項目
-{: #see-also }
-{:.no_toc}
-
-- [Orb のオーサリング]({{site.baseurl}}/ja/2.0/orb-author/)
-- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)
-- [Orb オーサリングに関するよくあるご質問]({{site.baseurl}}/ja/2.0/orb-author-faq/)
+* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
+* CircleCI Server 環境で Orb を開発したり使用する場合は、[サーバーでの Orb オーサリングプロセス]({{site.baseurl}}/ja/2.0/orb-author-server/) ガイドの Orb の開発に関する情報をお読みください。
+* または、[ Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)のページで詳細をご確認下さい。

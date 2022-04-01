@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Windows での Hello World"
 short-title: "Windows での Hello World"
-description: "First Windows project on CircleCI"
+description: "CircleCI での最初の Windows プロジェクト"
 categories:
   - はじめよう
 order: 4
@@ -12,11 +12,14 @@ version:
   - Server v2.x
 ---
 
-This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/2.0/getting-started/).
+このドキュメントでは、CircleCI の **Windows 実行環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)をご覧になることをお勧めします。
 
 * 目次
 {:toc}
 
+<div class="alert alert-warning" role="alert">
+   <strong>Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、<a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a> を参照してください。</strong>
+</div>
 
 ## 前提条件
 {: #prerequisites }
@@ -24,28 +27,38 @@ This document describes how to get started with continuous integration on **Wind
 作業を行う前に、以下を準備しておく必要があります。
 
 * CircleCI の[アカウント](https://circleci.com/ja/signup/)。
-* Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
-* クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
+* Free プラン (デフォルト) または [Performance または Scale プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方には以下に別のコード例を掲載していますので、そちらをご参照ください。
+* クラウド版でプロジェクトに Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
 
 ## Windows Executor の概要
 {: #overview-of-the-windows-executor }
 
-The Windows execution environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. Windows Executor の仕様と機能は以下のとおりです。
+Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプリケーションや .NET が実行可能な Windows 固有プロジェクト(.NET フレームワークなど) といった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
 
 - VM ベースでジョブの完全分離を保証
-- Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
+- Windows Server 2019 Datacenter エディションとWindows Server 2022 Datacenter エディションの Server Core オプションのどちらでも使用可能
 - PowerShell がデフォルトのシェル (Bash と cmd を手動で選択可能)
 - Windows コンテナの実行に Docker Engine - Enterprise を使用可能
 
 **備考:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
-- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
+- CircleCI Server v2.x では Orb の使用はサーポートしていません (CircleCI Server を使用の場合は、"Server" コードサンプルを参照してください)。
 
 ## Windows Executor イメージ
 {: #windows-executor-images }
 
-現在、CircleCI は Windows イメージとして Windows Server 2019 with Visual Studio 2019 のみをサポートしています。 このイメージの完全な内容については、このドキュメント末尾の[インストール済みソフトウェアの一覧](#windows-イメージにプリインストールされているソフトウェア)を参照してください。 CircleCI Server の Windows イメージに何が含まれているのか、詳しい情報についてはシステム管理者にお問い合わせください。
+CircleCI は Windows Server 2019 では Visual Studio 2019 を、Windows Server 2022 では Visual Studio 2022 をサポートしています。 CircleCI Server Windows イメージに含まれている内容の詳細はシステム管理者に問い合わせるか、[Discuss](https://discuss.circleci.com/) のページをご覧ください。
+
+Windows Server 2022 イメージに関する詳細は、[Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1) を参照してください。
+
+Windows イメージは約 30 日ごとにアップデートされます。 Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
+
+- Stable: 本番環境で使用可能な最新の Windows イメージを参照します。 このイメージは、安定性を適度に確保しつつ、ソフトウェアの定期アップデートを取り入れたいプロジェクトで使用してください。 アップデートは、通常月に 1 回の頻度で行われます。
+
+- Previous: 本番環境で使用可能な過去の (安定した)  Windows イメージを参照します。 このイメージは、最新のソフトウェアのアップデートに破壊的変更が含まれる場合などに使用できます。 アップデートは、通常月に 1 回の頻度で行われます。
+
+- Edge: 最新の Windows イメージを参照し、メインブランチの HEAD からビルドされます。 このタグは、最新の変更を含み完全な安定性が保証されていないテストバージョンのイメージとして使うことが想定されています。
 
 なお、WindowsのDockerコンテナは、このようにWindowsのExecutorで実行することも可能です。
 
@@ -119,7 +132,7 @@ jobs:
 Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
 
 * SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
-* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
+* 現時点では、ネストされた仮想化をサポートしていません (`--platform linux` フラグの使用など)。
 
 ## サンプルの設定ファイル
 {: #example-configuration-file }
@@ -257,7 +270,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**メモ:** 更新版などの Windows シェル ツールをインストールすることも可能です。 `dotnet` CLI で PowerShell Core の最新版をインストールし、ジョブの一連のステップに使用できます。
+**注:** 更新版や他の Windows シェルツールをインストールすることも可能です。たとえば、`dotnet` CLI で PowerShell Core の最新版をインストールし、ジョブの一連のステップに使用できます。
 
 
 {:.tab.windowsblockfour.Cloud}
@@ -311,7 +324,7 @@ jobs:
 ## サンプル アプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。 **注:** CircleCI Server をご使用の場合は、上記のコードサンプルに記載されているように Orb をマシンイメージの使用に置き換えます。
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。
 
@@ -319,7 +332,7 @@ Windows Executor を使用した例として、少し応用した (まだ初歩�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/2.0/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/2.0/build-processing/)を利用できます。
 
 ```yaml
 orbs:
@@ -367,7 +380,7 @@ jobs:
           command: .\bin\Release\netcoreapp2.1\win10-x64\publish\circleci-demo-windows.exe
 ```
 
-続いて 2 つのステップを実行します。 1 つは Windows 10 用の実行可能ファイルをビルドし、もう 1 つはその実行可能ファイルをテストします (コンソールに「Hello World」と出力されます)。
+続いて 2 つのステップを実行します。1 つは Windows 10 用の実行可能ファイルをビルドし、もう 1 つはその実行可能ファイルをテストします (コンソールに「Hello World」と出力されます)。
 
 ```yaml
       - store_artifacts:
@@ -405,65 +418,11 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 
 CircleCI の機能については、以下のドキュメントを確認してください。
 
-* Windows Server 2019 Core Datacenter エディション
+* 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/2.0/concepts/)」を参照してください。
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
 * すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)」を参照してください。
 
 ## Windows イメージにプリインストールされているソフトウェア
-{: #software-pre-installed-in-the-windows-image }
+{: #software-pre-installed-on-the-windows-image }
 
-**Windows Server 2019 with Visual Studio 2019**
-
-* Visual Studio 2019 Community エディション
-* Visual Studio 2019 Community エディション
-    * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
-    * Azure SDK for Visual Studio 2019
-    * Visual Studio 2019 Build Tools
-* AWS
-    * AWS CLI 1.16.209
-    * Python 3.6.0
-    * Botocore 1.12.199
-* シェル
-    * PowerShell 5
-    * GNU bash 4.4.231 (x86_64-pc-msys)
-    * cmd
-* .NET Framework 5
-* .NET Core
-    * SDK 5.0.402
-    * SDK 5.0.401
-    * SDK 3.1.406 (x64)
-    * SDK 3.0.100-preview7-012821
-    * Runtime 3.0.0-preview6-27804-01
-    * SDK 2.2.401
-    * Runtime 2.2.6
-    * SDK 2.1.801
-* Nunit 3.10.0
-* Git 2.33.1
-* Git LFS 2.7.2
-* Gzip 1.3.12
-* 7zip 19.00
-* PsExec64 2.34
-* Windows 10 SDK
-    * 10.0.26624
-    * 10.1.18362.1
-* Docker Engine - Enterprise バージョン 18.09.7
-* NuGet CLI 5.2.0.6090
-* Chocolatey v0.11.2
-* Azure Service Fabric
-    * SDK 3.3.617.9590
-    * Runtime 6.4.617.9590
-* Azure CLI 2.0.70
-* OpenJDK 12.0.2
-* Node.js 14.17.5
-* NVM (Node Version Manager) 1.1.7
-* Yarn 1.22.17
-* Ruby 2.6.3
-* Go 1.17
-* Python 3.9
-* Java 12.0.2
-* Miniconda 3
-* WinAppDriver 1.1.1809.18001
-* テキスト エディター
-    * nano 2.5
-    * vim 8.2
-* jq 1.5
+Windows イメージにプリインストールされているソフトフェアに関する情報は、[Developer Hub](https://circleci.com/developer/machine/image/windows-server) をご覧ください。 Developer Hub の Windows イメージのページには、最新のアップデートへのリンクが掲載されています。
