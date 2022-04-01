@@ -17,7 +17,7 @@ NOTE: CircleCI Server v2.x は、2022 年 3 月で更新が終了します。 Ci
 
 ## アップグレードの要件
 
-WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[カスタマイズガイド]を参照してください。
+WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、 https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[カスタマイズガイド] を参照してください。
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important, this guide>> to update your nomad launch configuration.
 
@@ -28,6 +28,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 * サービスマシンには最低 32 GB の RAM が必要になりました。 
 * v2.18 では Redis の設定を一部変更しました。 Redis を外部処理化している場合は、設定を更新する必要があります。 2.18 以前のバージョンから 2.19 にアップグレードする場合は、担当のカスタマーサクセスマネージャーまでお問い合わせください。
 * 対応する Postgres バージョンを変更したため、postgreSQL v9.5.16 以降が必要です。 PostgreSQL を外部処理化している場合は、バージョン 2.17.x で更新してから、2.19 にアップグレードしてください。
+* ジョブでタグを使ってチェックアウトする方法が変更されました。 ブランチタグが、`CIRCLE_TAG` または `+refs/heads/tag/path` により参照されるようになりました (例: `git checkout --force "$CIRCLE_TAG"` または `git fetch --force origin '+refs/heads/master:refs/remotes/origin/master'`)。
 
 ## 既知の問題
 

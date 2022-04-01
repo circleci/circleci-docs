@@ -1,8 +1,9 @@
 import { createPopper } from '@popperjs/core';
 import Prism from 'prismjs';
-import { expandImageOnClick } from './expandImage';
 
+import { expandImageOnClick } from './expandImage';
 import { highlightURLHash } from './highlightURLHash';
+import { externalLink } from './externalLink';
 
 const SHOW_EVENTS = ['mouseover', 'hover', 'mouseenter', 'focus'];
 const HIDE_EVENTS = ['mouseout', 'mouseleave', 'blur'];
@@ -273,21 +274,6 @@ $(document).ready(function () {
   // });
 });
 
-$(document).ready(function () {
-  $('#main a')
-    .not('.no-external-icon')
-    .each(function () {
-      $(this).wrap("<div class='external-link-tag-wrapper'></div>");
-      var inlineSVG =
-        '<span class="external-link-icon"><svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.33318 10.6667H1.33318V2.66667H4.66651V1.33333H0.959845C0.699845 1.32667 0.453179 1.42 0.273179 1.6C0.086512 1.77333 -0.00682137 2.02 -0.000154701 2.27333V11.0667C-0.00682137 11.32 0.086512 11.56 0.273179 11.74C0.453179 11.92 0.706512 12.0133 0.959845 12.0067H9.70651C10.2398 12.0067 10.6665 11.5867 10.6665 11.0667V7.33333H9.33318V10.6667ZM9.72651 1.33333H7.33318C6.96651 1.33333 6.66651 1.03333 6.66651 0.666667C6.66651 0.3 6.96651 0 7.33318 0H11.3332C11.6998 0 11.9998 0.3 11.9998 0.666667V4.66667C11.9998 5.03333 11.6998 5.33333 11.3332 5.33333C10.9665 5.33333 10.6665 5.03333 10.6665 4.66667V2.27333L7.91985 5.02C7.65985 5.28 7.23985 5.28 6.97985 5.02C6.71985 4.76 6.71985 4.34 6.97985 4.08L9.72651 1.33333Z" fill="currentColor"></path></svg></span>';
-      if (!this.origin.includes(window.location.origin)) {
-        $(inlineSVG).appendTo(this);
-        $(this).attr('target', '_blank');
-        $(this).attr('rel', 'noopener noreferrer');
-      }
-    });
-});
-
 // update date shown to be X ago tooltip code
 $(function () {
   const tooltiptime = document.getElementById('tooltip-time');
@@ -312,43 +298,12 @@ $(function () {
   });
 });
 
-/*
-  Check if users have dark mode enabled
-  Set key if user response has not already been tracked to ensure we dont get multiple events from the same user
- */
-export function trackDarkModePreference() {
-  try {
-    const storageKey = 'provided-dark-mode-response';
-    if (localStorage.getItem(storageKey)) {
-      return;
-    } else {
-      localStorage.setItem(storageKey, true);
-      window.AnalyticsClient.trackAction('User Dark Mode Preference', {
-        darkModeEnabled:
-          window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches,
-      });
-    }
-  } catch (_) {
-    return false;
-  }
-}
-
-/*
-  Checking if users are attempting to print docs pages to gauge interest of print button
- */
-export function checkIfUsersPrint() {
-  window.onbeforeprint = () => {
-    window.AnalyticsClient.trackAction('User Attempting to Print', {
-      page: window.location.pathname,
-    });
-  };
-}
-
 // Used to call functions on document on ready
 $(function () {
   // Currently this function is only used for the insights table
   highlightURLHash();
   // This function is used to be able to expand images when you click them
   expandImageOnClick();
+  // This function is used to add external icons to urls outside of baseurl
+  externalLink();
 });

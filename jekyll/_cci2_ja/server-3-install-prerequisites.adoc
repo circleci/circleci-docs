@@ -45,7 +45,7 @@ image::server-install-flow-chart-phase1.png[Flow chart showing the installation 
 | {helmversion} 以上
 | Kubernetes パッケージの管理
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.47.3/kots_linux_amd64.tar.gz[Linux].
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.64.0/kots_darwin_all.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.64.0/kots_linux_amd64.tar.gz[Linux].
 | {kotsversion} *
 | Replicated Kubernetes アプリケーションの管理
 
@@ -151,7 +151,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 . クラスタの作成が完了したら、以下のコマンドで`kubectl`のアクセスを設定します。
 +
 ```shell
-eksctl utils write-kubeconfig --name circleci-server
+eksctl utils write-kubeconfig --cluster circleci-server
 ```
 
 NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限]に関しては AWS のドキュメントをご覧ください。

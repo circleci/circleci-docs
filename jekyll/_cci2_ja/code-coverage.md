@@ -183,7 +183,7 @@ jobs:
           path: coverage
 ```
 
-[simplecov README](https://github.com/colszowka/simplecov/#getting-started) に、さらに詳細な説明があります。
+詳細は、[simplecov README](https://github.com/colszowka/simplecov/#getting-started) を参照してください。
 
 ## Python
 {: #python }
@@ -656,7 +656,9 @@ jobs:
 ### Codecov
 {: #codecov }
 
-Codecov には、カバレッジレポートのアップロードを簡単に行うための [Orb](https://circleci.com/orbs) があります。
+Codecov には、カバレッジレポートのアップロードを簡単に行うための [Orb](https://circleci.com/developer/orbs/orb/codecov/codecov) があります。
+
+**注: **Codecov Orb は、パートナーが作成した Orb です。 使用するには、お客様ご自身または組織の管理者が、未承認 Orb の使用をオプトインする必要があります。 この設定は、CircleCI Web アプリの **Organization Settings > Security** で行えます。
 
 ```yaml
 version: 2.1

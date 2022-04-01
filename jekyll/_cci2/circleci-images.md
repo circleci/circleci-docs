@@ -246,13 +246,20 @@ add one of the following suffixes to the end of an image tag.
 For example, if you want to add browsers to the `circleci/golang:1.9` image, use
 the `circleci/golang:1.9-browsers` image.
 
-### Service images
-{: #service-images }
+### Next-Gen Service images
+{: #next-gen-service-images }
 {:.no_toc}
 
-Service images are convenience images for services like databases. These images
-should be listed **after** language images so they become secondary service
-containers.
+Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
+
+- [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
+- [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
+- [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
+- [Redis](https://circleci.com/developer/images/image/cimg/redis)
+
+### Legacy Service images
+{: #legacy-service-images }
+{:.no_toc}
 
 CircleCI maintains legacy images for the services below.
 

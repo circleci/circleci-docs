@@ -14,12 +14,12 @@ the CircleCI JIRA plugin, you can display your build statuses in JIRA.
 {: #installation-steps }
 
 1. Navigate to project settings and select `JIRA integration`
-![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
+![CircleCI web app Project Settings Jira integration options]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
 2. Go to the Atlassian Marketplace to get the [CircleCI JIRA Plugin](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)
-![]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
+![Atlassian marketplace showing CircleCI Jira plugin]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
 3. Install the plugin and follow the prompts to set it up.
-![]({{ site.baseurl }}/assets/img/docs/jira_plugin_3.png)
-![]({{ site.baseurl }}/assets/img/docs/jira_plugin_4.png)
+![Setting up the plugin 1]({{ site.baseurl }}/assets/img/docs/jira_plugin_3.png)
+![Setting up the plugin 2]({{ site.baseurl }}/assets/img/docs/jira_plugin_4.png)
 4. Return to the CircleCI JIRA Integration settings page and add the generated token.
 
 ---

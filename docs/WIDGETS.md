@@ -12,10 +12,10 @@ Here's how this would look in Jekyll's Markdown:
 
 ```md
 {:.tab.jobscreenshot.Cloud}
-![]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
+![Some alt text]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
 
 {:.tab.jobscreenshot.Server}
-![]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
+![Some alt text]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
 ```
 
 Using the example line `{:.tab.jobscreenshot.Cloud}`, let's look at how usage of tabs is broken down.

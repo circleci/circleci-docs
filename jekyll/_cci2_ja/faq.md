@@ -171,7 +171,7 @@ jobs:
 ### 同一のワークフロー内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
 {:.no_toc}
-既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプの項を参照してください。
+既にサポートしています。 [2.0 `config.yml` サンプルファイル]({{ site.baseurl }}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types)の複数の Executor タイプのセクションを参照してください。
 
 ### `config.yml` ファイルを複数ファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
@@ -278,7 +278,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 #### 支払う料金の内訳は？
 {: #what-do-i-pay-for }
 {:.no_toc}
-プレミアム機能を利用するアクティブユーザーの人数分の料金、コンピューティングに対する料金のほか、プレミアム サポートを利用している場合はその料金も含まれます。
+プレミアム機能を利用するアクティブユーザーの人数分の料金、コンピューティングに対する料金のほか、Premium サポートを利用している場合はその料金も含まれます。
 
 
 - マシンサイズを選べる機能などを利用するには、１アクティブ ユーザー あたり月額 25,000 クレジット (税抜) が必要です。
@@ -291,7 +291,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-**注: **外向きの通信とストレージに対する課金は、**2022 年 4 月 1 日**より有効になります (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理していただくための変数と制御機能の追加を行なっています。 このセクションの内容は、2022 年 4 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+**注:** Performance プランのお客様の場合、外向きの通信とストレージに対する課金は、2022 年 5 月 1 日より有効になり、お客様の請求日に基づいて請求されます (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しており、**2022 年 4 月 1 日**よりご利用いただける予定です。 ここで記載されている内容は、2022 年 5 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
 [CircleCI Web アプリ](https://app.circleci.com/)から **Plan > Plan Usage** に移動してお客様のストレージとネットワークの使用状況を確認し、1ヶ月のストレージ料金とネットワーク料金を計算してください。
@@ -344,9 +344,9 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 - スケジュールされたワークフローの使用
 - マシンユーザー
 
-**メモ:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブ ユーザーとは**見なされません**。
+**注:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブユーザーとは**見なされません**。
 
-アクティブ ユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
+アクティブユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
 
 #### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
@@ -372,7 +372,7 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 {: #when-do-i-pay }
 {:.no_toc}
 
-**Performance プラン**では、請求サイクルの初日に、プレミアム サポートの料金と毎月のクレジット パッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
+**Performance プラン**では、請求サイクルの初日に、Premium サポートの料金と毎月のクレジットパッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
 
 #### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
@@ -458,13 +458,16 @@ IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を構成することも可能です。  以下のように Docker デーモンを構成することで、グローバルに有効化することができます。
+IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を設定することも可能です。  以下のように Docker デーモンを設定することで、グローバルに有効化することができます。
 
 ```yaml
 jobs:
   ipv6_tests:
   machine:
-    image: ubuntu-1604:202007-01
+    # The image uses the current tag, which always points to the most recent
+    # supported release. If stability and determinism are crucial for your CI
+    # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+    image: ubuntu-2004:current
   steps:
     - checkout
     - run:
@@ -479,10 +482,10 @@ jobs:
           sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる方法は複数あり、上記のように [Docker デーモンを構成する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを使用する方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を使用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)が挙げられます。
+Docker に IPv6 アドレスを割り当てる方法は複数あり、上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを使用する方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を使用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)が挙げられます。
 
 
-### CircleCI  がサポートしている OS は？
+### CircleCI  がサポートする OS は？
 {: #what-operating-systems-does-circleci-20-support }
 {:.no_toc}
 - **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
@@ -496,7 +499,7 @@ Docker に IPv6 アドレスを割り当てる方法は複数あり、上記の�
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-Docker ジョブは `amd64`を、マシンジョブは`amd64` と [ARM resources]({{ site.baseurl }}/ja/2.0/arm-resources/) をサポートしています。
+Docker ジョブは `amd64`を、マシンジョブは `amd64` と [ARM リソース]({{ site.baseurl }}/ja/2.0/arm-resources/) をサポートしています。
 
 
 [docker-hub]: https://hub.docker.com

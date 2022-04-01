@@ -5,14 +5,14 @@ function openPopup() {
   $('.popup-bg').addClass('popup-bg-show');
   $('.popup-content').addClass('popup-content-show');
 
-  window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__popup_seen');
+  window.AnalyticsClient.trackAction('dd_docs-popup-cta_test2__popup_seen');
 }
 
 function closePopup(trackIt = true) {
   $('.popup-bg').removeClass('popup-bg-show');
   $('.popup-content').removeClass('popup-content-show');
   if (trackIt) {
-    window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__popup_closed');
+    window.AnalyticsClient.trackAction('dd_docs-popup-cta_test2__popup_closed');
   }
 }
 
@@ -35,6 +35,21 @@ function getPopupData() {
 }
 
 /**
+ * @lastDay is string representation of a date, coming from localStorage
+ * returns `true` if the user is visiting the same day as stored in local storage
+ * */
+function isStillTheSameDay(lastDay) {
+  let stillTheSameDay = false;
+  const now = new Date();
+  const popupLastSeen = new Date(lastDay);
+  stillTheSameDay =
+    now.getFullYear() === popupLastSeen.getFullYear() &&
+    now.getMonth() === popupLastSeen.getMonth() &&
+    now.getDate() === popupLastSeen.getDate();
+  return stillTheSameDay;
+}
+
+/**
  * In order to show the popup to users we need to:
  * a) the user has to have visited three pages ("timesVisited")
  * b) the user must not have already seen a popup today.
@@ -43,18 +58,10 @@ function getPopupData() {
  * and determine if we can show the popup.
  * */
 function canShowPopup() {
-  let now = new Date();
-  let stillTheSameDay = false;
   const popupData = getPopupData();
-  if (popupData.lastSeen !== null) {
-    const popupLastSeen = new Date(popupData.lastSeen);
-    stillTheSameDay =
-      now.getFullYear() === popupLastSeen.getFullYear() &&
-      now.getMonth() === popupLastSeen.getMonth() &&
-      now.getDate() === popupLastSeen.getDate();
-  }
   return (
-    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES && !stillTheSameDay
+    popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES &&
+    !isStillTheSameDay(popupData.lastSeen)
   );
 }
 
@@ -62,7 +69,9 @@ function incrementTimesVisited() {
   let popupData = getPopupData();
   if (popupData.timesVisited === SHOW_POPUP_AFTER_N_TIMES) {
     popupData.timesVisited = 1;
-    popupData.lastSeen = new Date();
+    if (!isStillTheSameDay(popupData.lastSeen)) {
+      popupData.lastSeen = new Date();
+    }
   } else {
     popupData.timesVisited += 1;
   }
@@ -71,14 +80,11 @@ function incrementTimesVisited() {
 
 // https://app.optimizely.com/v2/projects/16812830475/experiments/21292260007
 window.OptimizelyClient.getVariationName({
-  experimentKey: 'dd_docs-popup-cta_test',
+  experimentKey: 'dd_docs-popup-cta-2_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: 'body',
-  attributes: {
-    // This will only show the experiment to people who are guests to the docs site.
-    docs_is_logged_in: window.userData?.analytics_id === undefined,
-  },
   guestExperiment: true,
+  onlyQualifyGuests: true,
 }).then((variation) => {
   if (variation === 'treatment') {
     const popupBg = $('.popup-bg');
@@ -94,7 +100,7 @@ window.OptimizelyClient.getVariationName({
 
     signupButton.click(() => {
       window.AnalyticsClient.trackAction(
-        'dd_docs-popup-cta_test__signup_clicked',
+        'dd_docs-popup-cta_test2__signup_clicked',
       );
       closePopup(false);
     });
