@@ -35,7 +35,7 @@ version:
 ## 組織レベルのメトリクス
 {: #organization-level-metrics }
 
-![Organization-level metrics example]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
+![組織レベルのメトリクス例]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
 
 組織レベルのメトリクスは、組織のパフォーマンス分析に利用できます。
 
@@ -51,7 +51,7 @@ version:
 ## ワークフローのメトリクス
 {: #workflow-metrics }
 
-![Workflow metrics example]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
+![ワークフローメトリクスの例]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
 
 | 用語                                           | 定義                                                                                                                                     |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -96,7 +96,7 @@ version:
 
 ここでは、さまざまなメトリクスの傾向データの表示方法を説明します。
 
-![Trends data example]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
+![トレンドデータの例]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
 
 - **緑**: このメトリクスは改善傾向にあります。
 - **赤**: このメトリクスは悪化傾向にあります。
