@@ -50,13 +50,13 @@ OpenID Connect ID トークンには下記の標準 https://openid.net/specs/ope
 |説明
 
 |`iss`
-|issuer:  ジョブが実行されている CircleCI 組織に固有の issuer です。 値は、 `"https://oidc.circleci.com/org/<organization-id>"` という文字列です。 `<organization-id>` は、現在のジョブのプロジェクトの組織を識別する UUID です。
+|issuer:  ジョブが実行されている CircleCI 組織に固有の issuer です。 値は、 `"https://oidc.circleci.com/org/<organization-id>"` という文字列です。 `<organization-id>` は、現在のジョブのプロジェクトの組織を表す UUID です。
 
 |`sub`
-|subject:  CircleCI ジョブの実行者とその場所を識別します。 値は、`"org/<organization-id>/project/<project-id>/user/<user-id>"` という文字列です。 `<organization-id>` 、`<project-id>`、 `<user-id>` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを示す UUID です。 ユーザーは、このジョブを実行した CircleCI ユーザーです。
+|subject:  CircleCI ジョブの実行者とその場所を識別します。 値は、`"org/<organization-id>/project/<project-id>/user/<user-id>"` という文字列です。 `<organization-id>` 、`<project-id>`、 `<user-id>` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを表す UUID です。 ユーザーは、このジョブを実行した CircleCI ユーザーです。
 
 |`aud`
-|audience:  現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を識別する UUID を含む文字列です。
+|audience:  現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を表す UUID を含む文字列です。
 
 
 |`iat`
@@ -75,8 +75,8 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |メタデータ
 
 |`oidc.circleci.com/project-id`
-|ジョブが実行されているプロジェクトの ID です。 値は、CircleCI プロジェクトを識別するUUIDを含む文字列です。
+|ジョブが実行されているプロジェクトの ID です。 値は、CircleCI プロジェクトを表す UUID を含む文字列です。
 
 |`oidc.circleci.com/context-ids`
-|ジョブで使用されるコンテキストを識別する UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
+|ジョブで使用されるコンテキストを表す UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
 |===
