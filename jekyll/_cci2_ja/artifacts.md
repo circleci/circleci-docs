@@ -32,14 +32,16 @@ CircleCI Web アプリでパイプラインの **Job** ページに移動し、[
 
 ![[Artifacts (アーティファクト)] タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
-**アーティファクトへは作成から30日間アクセスできます。 **  ドキュメントや永続的なコンテンツのソースとして依存している場合、S3や静的Webサイト用のGitHub Pages、Netlifyのような専用領域にデプロイすることを推奨します。
+By default, artifact storage duration is set to 30 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 30 days is also the maximum storage duration you can set.
+
+For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) page.
 
 **注:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
 ## アーティファクトのアップロード
 {: #uploading-artifacts }
 
-ビルド時に作成したアーティファクトをアップロードするには、以下の例を参考にしてください。
+ビルド中に作成されるアーティファクトをアップロードするには、以下の例を使用します。
 
 {:.tab.artifacts.Cloud}
 ```yaml
@@ -136,7 +138,7 @@ jobs:
 ## コアファイルのアップロード
 {: #uploading-core-files }
 
-このセクションでは、[コアダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
+このセクションでは、[コア ダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
 
 1. 以下の行を含む `Makefile` を作成します。
 
@@ -157,7 +159,7 @@ jobs:
 
 3. 生成されたプログラムで `make` と `./dump` を実行し、`Aborted (core dumped)` を出力します。
 
-このサンプル C abort プログラムをコンパイルし、コアダンプをアーティファクトとして収集する `config.yml` の全文は、以下のようになります。
+このサンプル C abort プログラムをコンパイルし、コア ダンプをアーティファクトとして収集する `config.yml` の全体は、以下のようになります。
 
 {:.tab.artifacts2.Cloud}
 ```yaml
@@ -240,9 +242,9 @@ jobs:
           path: /tmp/core_dumps
 ```
 
-`ulimit -c unlimited` により、コアダンプファイルのファイルサイズ制限がなくなります。 この制限がなくなると、プログラムがクラッシュするたびに、作業中のディレクトリにコアダンプファイルが作成されます。 コアダンプファイルには、`core.%p.%E` という名前が付きます。 `%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
+`ulimit -c unlimited` は、コア ダンプ ファイルのファイル サイズ制限をなくします。 この制限をなくすと、プログラムがクラッシュするたびに、作業中のカレント ディレクトリにコア ダンプ ファイルが作成されます。 コア ダンプ ファイルには、`core.%p.%E` という名前が付きます。`%p` はプロセス ID、`%E` は実行可能ファイルのパス名です。 詳細については、`/proc/sys/kernel/core_pattern` で仕様を確認してください。
 
-最後に、`store_artifacts` によってアーティファクトサービスの `/tmp/core_dumps` ディレクトリにコアダンプファイルが格納されます。
+最後に、`store_artifacts` によってアーティファクト サービスの `/tmp/core_dumps` ディレクトリにコア ダンプ ファイルが格納されます。
 
 ![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
@@ -289,6 +291,15 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 | `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
 {: class="table table-striped"}
 
+## Artifact storage customization
+{: #artifacts-and-self-hosted-runner }
+
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+
+Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
+
+You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+
 ## アーティファクトの最適化
 {: #artifacts-optimization }
 
@@ -296,9 +307,9 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 {: #check-which-artifacts-are-being-uploaded }
 {:.no_toc}
 
-実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
+実際に必要なファイルがわずかな場合でも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。それを防ぐための簡単な対策として、どのアーティファクトがなぜアップロードされているかを確認してください。
 
-ジョブで並列実行を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
+ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
 #### 大きなアーティファクトのアップロード
 {: #uploading-large-artifacts }
