@@ -225,7 +225,7 @@ https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workloa
     --region="<REGION>"
 ```
 
-You must repeat Step 2 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#step-5-enable-workload-identity[Object-Storage]
+You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
 
 === 新しい GitHub OAuth アプリの作成
 
@@ -611,7 +611,9 @@ CircleCI Server の設定には以下の詳細が必要になります。
 
 * *[Storage Bucket Name (ストレージ バケット名)]* : CircleCI Server に使用するバケット
 
-* *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービス アカウント キー
+* 以下のいづれかを選択します。
+** *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービス アカウント キー
+** *Service Account Email* - Service Account Email id if using Google Workload Identity.
 
 専用のサービス アカウントをお勧めします。 アカウントを[ストレージ オブジェクト管理者]ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。 For example, enter the following into the Google’s Condition Editor in the IAM console:
 
@@ -691,7 +693,7 @@ gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
     --condition=None
 ```
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
 endif::env-aws[]
 
