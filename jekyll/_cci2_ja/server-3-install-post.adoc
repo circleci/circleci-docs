@@ -14,7 +14,7 @@ version:
 
 CircleCI Server v3.x のポストインストール ステップを開始する前に、 xref:server-3-install-prerequisites.adoc[ステップ 1 - 前提条件]、 xref:server-3-install.adoc[ステップ 2 - コアサービスのインストール] 、 xref:server-3-install-build-services.adoc[ステップ 3 - ビルドサービスのインストール]が実行済みであることを確認してください。
 
-.インストール 手順（フローチャートのフェーズ 4）
+.インストール手順のフローチャート ステップ 4）
 image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
@@ -25,8 +25,8 @@ toc::[]
 
 === バックアップとリストアの設定
 
-Backups of CircleCI server can be created through https://kots.io/[KOTS].
-To enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
+CircleCI Server のバックアップは、https://kots.io/[KOTS] を介して作成できます。
+バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
 
 // Don't include this section in the GCP PDF:
 
@@ -293,7 +293,7 @@ gcloud iam service-accounts keys create credentials-velero \
 
 クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービス アカウントを Velero の Kubernetes サービス アカウントにバインドします。 この場合、GCP サービス アカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
 ==== 手順 3 - Velero のインストールと起動
 
@@ -499,20 +499,20 @@ CircleCI Server システムには、固有のローカル Orb レジストリ�
 * 以前コピーした Orb の更新 
 * 会社のプライベート Orb の登録 (存在する場合)
 
-詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[Orb on Server ガイド]を参照してください。
+詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[サーバーでの Orb ガイド]を参照してください。
 
-=== [Email Notifications (メール通知)] 
+=== メール通知 
 
-ビルドの通知はメールで送信されます。 This section has details on how to set up build notifications by email. 
+ビルドの通知はメールで送信されます。 ここではメールによるビルド通知設定方法の詳細について説明します。 
 
-KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: 
+KOTS の管理コンソールにアクセスします。 名前空間を変更して下記を実行し、KOTS 管理者コンソールを表示します。 
 
 [source,shell]
 ----
 kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-Locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+*Settings* の *Email Notifications* セクションに行き、下記の詳細を入力してインストール環境のメール通知を設定します。
 
 * *[Email Submission server hostname (メール送信サーバーのホスト名)] (必須)*: 送信サーバーのホスト名を指定します (例えば SendGrid の場合は smtp.sendgrid.net を使用)。
 
