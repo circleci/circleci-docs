@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "データベースの設定"
 short-title: "データベースの設定"
-description: "ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI  でデータベースサービスに使用する方法について説明します。"
+description: "ここでは、正式な CircleCI ビルド済み Docker コンテナイメージを CircleCI  でデータベースサービスに使用する方法について説明します。"
 order: 35
 version:
   - クラウド
@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI  でデータベースサービスに使用する方法について説明します。
+ここでは、正式な CircleCI ビルド済み Docker コンテナイメージを CircleCI  でデータベースサービスに使用する方法について説明します。
 
 * 目次
 {:toc}
@@ -86,22 +86,22 @@ jobs:
 
 この例では、 `psql` にアクセスできるよう、設定で PostgreSQL クライアントツール、`postgresql-client` を `apt-get` からインストールします。 イメージのインストールパッケージには管理者の権限が必要なため、`sudo` が使われます。パスワードは不要です。
 
-Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
+`postgresql-client-` のインストールの後には、データベースサービスとやり取りするための 2 つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、そのテーブルに値を挿入します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリコンテナがスピンアップされます。
 
-**メモ:** CircleCI では、複数のコンビニエンス環境変数がプライマリ コンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)を参照してください。
+**注:** CircleCI では、複数のコンビニエンス環境変数がプライマリコンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)を参照してください。
 
-When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
+データベースサービスがスピンアップされると、データベースの `circle_test` および `postgres` ロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 その後、データベーステストを実行してテーブルを作成し、そのテーブルに値を挿入します。
 
 ## オプションのカスタマイズ
 {: #optional-customization }
 
-このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするための追加のオプション設定について説明します。
+このセクションでは、ビルドのさらなるカスタマイズや競合状態を避けるための追加のオプション設定について説明します。
 
 ### PostgreSQL イメージの最適化
 {: #optimizing-postgresql-images }
 {:.no_toc}
 
-The `cimg/postgres` Docker image uses regular persistent storage on disk. Storing the database in a ramdisk may improve performance. This can be done by setting the `PGDATA: /dev/shm/pgdata/data` environment variable in the service container image config.
+`circleci/postgres` Docker イメージは、ディスク上の通常の固定記憶域を使用します。 データベースを RAM ディスクに保存するとパフォーマンスが向上する場合があります。 これは、サービスコンテナイメージ設定ファイルの `PGDATA: /dev/shm/pgdata/data` 環境変数の設定で行えます。
 
 ### バイナリの使用
 {: #using-binaries }
