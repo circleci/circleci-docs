@@ -20,9 +20,9 @@ version:
 ## ストレージコントロールのカスタマイズ
 {: #custom-storage-controls }
 
-[CircleCI Web アプリ](https://app.circleci.com/)では、ワークスペース、キャッシュ、アーティファクトのストレージ保存期間のカスタマイズをコントロールすることができます。 You can find these settings by navigating to **Plan > Usage Controls**. By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+[CircleCI Web アプリ](https://app.circleci.com/)では、ワークスペース、キャッシュ、アーティファクトのストレージ保存期間のカスタマイズをコントロールすることができます。 この設定を確認するには、**Plan > Usage Controls** に移動します。 デフォルトでは、保存期間はアーティファクトの場合は 30 日間、キャッシュやワークスペースの場合は 15 日間です。 この日数はストレージの最大保存期間でもあります。 アーティファクトの最大保存期間は 30 日間、キャッシュやワークスペースの最大保存期間は 15 日間です。
 
-See the [Persisting Data]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage) page for more information on custom storage settings.
+ストレージのカスタム設定の詳細は、[データの永続化]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage)のページを参照してください。
 
 ## Docker イメージの選択
 {: #docker-image-choice }
@@ -67,18 +67,18 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 ## 並列実行
 {: #parallelism }
 
-If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests), or a [third party application or library]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+プロジェクトに大規模なテストスイートがある場合は、[`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[CircleCI のテスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
 * テストの分割の詳細については、[並列実行]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
 
-## リソース クラス
+## リソースクラス
 {: #resource-class }
 
-**注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 Resource class options for self-hosted installations are set by system administrators.
+**注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 セルフホスティング環境では、リソースクラスのオプション設定はシステム管理者が行います。
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self-hosted installations contact your system administrator for a list.
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
-Please note, if a `resource_class` is not explicitly declared, CircleCI will try to find the best default resource class for your organization.
+`resource_class` が明示的に宣言されていない場合、CircleCI は組織に最適なデフォルトのリソースを探します。
 
 * 詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
 
