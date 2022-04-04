@@ -8,7 +8,7 @@ toc: false
 page-type: index
 ---
 
-Use the tutorials, samples, how-to, and reference documentation to learn CircleCI. here
+Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
 
 <hr class="hidden-xs" />
 
