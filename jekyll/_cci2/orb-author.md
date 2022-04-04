@@ -41,7 +41,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![New GitHub Repo]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Write down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, whichever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
     **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
     {: class="alert alert-warning"}
@@ -73,6 +73,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     ```
 
     Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Please make sure to add the `--private` flag if you intend to create a private orb.
+    {: class="alert alert-warning"}
 
     The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
@@ -125,9 +126,13 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     You will be provided with a link to the project building on CircleCI where you can view the full pipeline.
     You should also see the CLI has automatically migrated you into a new development branch, named `alpha`. You can use any branch naming you would like, you do not need to exclusively develop on `alpha`.
 
-    Because we are making use of [dynamic configuration]({{site.baseurl}}/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not enabled.
+1. **Enable Dynamic Configuration**
+
+    Because we are making use of [dynamic configuration]({{site.baseurl}}/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not yet enabled.
 
     Following the [Getting started with dynamic config in CircleCI]({{site.baseurl}}/2.0/dynamic-config/#getting-started-with-dynamic-config-in-circleci), open the **Project Settings** page for your orb on CircleCI, navigate to the **Advanced** tab, and click on the **Enable dynamic config using setup workflows** button.
+
+    Once enabled, all future commits to your project will run through the full pipeline and test your orb. We could manually re-run the pipeline at this point, but since we are only working with sample code at this moment, we don't need to.
 
 1. **Develop your orb**
 
