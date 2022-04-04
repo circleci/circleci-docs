@@ -57,7 +57,7 @@ Copy the webhook URL here to your clipboard.
 
 ![Get webhook link]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_4.png)
 
-### 4.  Connect to CircleCI
+### 4. Connect to CircleCI
 {: #connect-to-circleci }
 
 With our webhook URL from Airtable in hand, we can now setup our webhooks for CircleCI. Begin by opening up the project settings for the repository you want to monitor on CircleCI, and select "Webhooks" from the side panel.
