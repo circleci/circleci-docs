@@ -19,7 +19,7 @@ version:
 
 ワークスペースは、追加のみが可能なデータストレージです。 ジョブはワークスペースに永続的にデータを保管することができます。 ワークスペースを使用すると、データはコンテナの外のストアにアーカイブされ保存されます。 ワークスペースにデータが追加されるたびに、そのストアに新しいレイヤーが作成されます。 ダウンストリームジョブは、コンテナのファイルシステムにそのワークスペースをアタッチできます。 ワークスペースをアタッチすると、ワークフロー内のアップストリームジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
 
-By default, workspace storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
+デフォルトのワークスペースの保存期間は 15 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 15 日間となっています。
 
 ![Workspace のデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
