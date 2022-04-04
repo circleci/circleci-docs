@@ -8,7 +8,7 @@ version:
   - Server v2.x
 ---
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). それぞれの方法にメリットがあるので、プロジェクト毎に決定する必要があります。
+CircleCI でテストを実行する場合、テスト結果を保存する方法が 2 つあります。 [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)を使用する方法と [`store_test_results` ステップ]({{site.baseurl}}/ja/2.0/configuration-reference/#storetestresults)を使用する方法です。 それぞれの方法にメリットがあるので、プロジェクト毎に決定する必要があります。
 
 `store_test_results` ステップを使ってデータを保存する場合、CircleCI はデータを XML ファイルから収集し、そのデータを使ってジョブのインサイトを提供します。 ここでは、よく使用されるテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
 
@@ -18,9 +18,9 @@ When you run tests in CircleCI there are two ways to store your test results. Yo
 * テストインサイトと結果が不安定なテストの検出
 * テストの分割
 
-一方で、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 This can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
+一方で、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 これは、プロジェクトにおけるテスト結果の処理の設定に関する問題をデバッグする際に便利です。たとえば、誤ってアップロードしたファイルを探す場合に効果的です。
 
-To see test results as build artifacts, upload them using the [`store_artifacts` step]({{site.baseurl}}/2.0/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
+テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{site.baseurl}}/ja/2.0/configuration-reference/#storeartifacts) ステップを使ってテスト結果をアップロードします。 アーティファクトはストレージを使用します。そのため、アーティファクトの保存によって料金が発生します。 アーティファクトなどのオブジェクトをストレージに保存する期間をカスタマイズする方法については、[データの永続化のページ]({{site.baseurl}}/ja/2.0/persist-data/#custom-storage-usage)を参照してください。
 
 **注: ** `store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
 
@@ -75,7 +75,7 @@ _上記のスクリーンショットは CircleCI Server v2.x をご使用の場
 ## フォーマッタの有効化
 {: #enabling-formatters }
 
-JUnit フォーマッタを有効化するまで、テストメタデータは CircleCI  で自動的には収集されません。 RSpec、Minitest、および Django に対して、以下の構成を追加してフォーマッタを有効化します。
+JUnit フォーマッタを有効化するまで、テストメタデータは CircleCI  で自動的には収集されません。 RSpec、Minitest、および Django に、以下の設定を追加してフォーマッタを有効化します。
 
 - RSpec では、gemfile に以下を追加する必要があります。
 
@@ -91,7 +91,7 @@ gem 'minitest-ci'
 
 - Django は、[django-nose](https://github.com/django-nose/django-nose) テストランナーを使用して設定する必要があります。
 
-**注意:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{site.baseurl}}/ja/2.0/testing-ios/)をご覧ください。
+**注:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{site.baseurl}}/ja/2.0/testing-ios/)をご覧ください。
 
 ## カスタムテストランナーの例
 {: #custom-test-runner-examples }
@@ -144,7 +144,7 @@ steps:
 
 全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
 
-**注意:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest は、ジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は、仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
+**注:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest は、ジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は、仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
 
 `--runInBand` の詳細については、[Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) ドキュメントを参照してください。 この問題の詳細については、公式 Jest リポジトリの [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) と [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) を参照してください。
 
@@ -153,7 +153,7 @@ steps:
 
 Mocha のテストランナーで JUnit テストを出力するには、[mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
+`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 ```yml
     steps:
@@ -349,7 +349,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 ##### RSpec
 {: #rspec }
 
-カスタム `rspec` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+カスタム `rspec` ビルドステップを使用するプロジェクトにテストメタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
 ```ruby
 gem 'rspec_junit_formatter'
@@ -373,7 +373,7 @@ gem 'rspec_junit_formatter'
 #### Minitest
 {: #minitest }
 
-カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+カスタム `minitest` ビルドステップを使用するプロジェクトにテストメタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
 ```ruby
 gem 'minitest-ci'
@@ -430,12 +430,12 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 ```
 
 ### Python
-生成されたファイルは `htmlcov/` 下にあり、設定ファイルの `store_artifacts` ステップでアップロードできます。
+{: #python }
 
 #### pytest
 {: #pytest }
 
-`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
+`pytest` を使用するプロジェクトにテストメタデータを追加するには、JUnit XML を出力するように指定したうえで、テストメタデータを保存します。
 
 ```yml
       - run:
@@ -490,7 +490,7 @@ unittest は JUnit XML をサポートしていませんが、ほぼすべての
 ### Gradle JUnit のテスト結果
 {: #gradle-junit-test-results }
 
-[Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テスト レポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
+[Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テストレポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
 ```yml
     steps:
