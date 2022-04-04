@@ -1,3 +1,8 @@
+// mixins
+@import 'mixins/cta_badge';
+@import 'mixins/cta_button';
+
+// scss files
 @import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
@@ -19,7 +24,7 @@
 @import 'first_steps_cta';
 @import 'popup';
 
-@import 'includes/badge.scss';
+@import 'includes/badge';
 
 @import 'pages/getting-started';
 
