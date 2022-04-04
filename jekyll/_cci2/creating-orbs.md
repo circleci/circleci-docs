@@ -17,7 +17,9 @@ This guide covers the steps required to publish an orb.
 ## Introduction
 {: #introduction }
 
-After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) tag, and the orb will appear publicly on the [Orb Registry](https://circleci.com/developer/orbs).
+After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) tag, and the orb will appear on the [Orb Registry](https://circleci.com/developer/orbs).
+
+**Note:** If your orb is private, it will not be searchable on the Orb Registry, however the URL will be accessible to authenticated users of the orb.
 
 ![Orb Publishing Process]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
