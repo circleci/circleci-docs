@@ -44,9 +44,9 @@ version:
 ### ワークスペースの最適化
 {: #workspace-optimization }
 
-ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを使用しているすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを判断してください。
+ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを使用しているすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを検討してください。
 
-You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
+また、失敗したビルドを再実行するためだけにワークスペースを使用している場合もあります。 ビルドが成功したら、そのワークスペースは不要になります。 保存期間を例えば 1 日に設定した方が、プロジェクトに適している場合があります。 ワークスペースのストレージ保存期間を短くし、ストレージに不要なデータを保存しないことにより、コストを削減できます。
 
 * ワークスペースの最適化、設定、有効期限に関する詳細は、[ワークスペースの使用]({{site.baseurl}}/2.0/workspaces/)をご覧ください。
 * ワークフローの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
@@ -62,9 +62,9 @@ You also might find that you are only using workspaces to be able to re-run buil
 ### アーティファクトの最適化
 {: #artifact-optimization }
 
-Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, one day, allows you to both troubleshoot the build, and save costs by not keeping unnecessary data in storage.
+アーティファクトにより、ビルドに失敗する問題を解決することができます。 問題が解決し、ビルドに成功したら、アーティファクトの役目はほぼ終了です。 保存期間を例えば 1 日に設定すると、ビルドのトラブルシューティングを行い、かつストレージに不要なデータを保存しないためコストを削減することができます。
 
-If you need to store artifacts for longer periods of time, there are other optimization options available, depending on what you are trying to accomplish. Every project is different, but you can try the following actions to reduce network and storage usage:
+アーティファクトを長期間保存する必要がある場合は、実行しようとしている内容に応じて様々な最適化オプションがあります。 どのプロジェクトもそれぞれ異なりますが、ネットワークとストレージの使用量の削減には以下のアクションをお試し下さい。
 
 - `store_artifacts` が不必要なファイルをアップロードしていないか確認する。
 - 並列実行を使用している場合は、同じアーティファクトがないか確認する。
@@ -87,14 +87,14 @@ If you need to store artifacts for longer periods of time, there are other optim
 2. **Plan Usage** を選択します。
 3. **Network** または **Storage** のどちらか表示したいタブを選択します。
 
-この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  The usage is also broken down by storage object type: cache, artifact, and workspace.
+この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  使用量は、ストレージオブジェクトタイプ  (キャッシュ、アーティファクト、ワークスペース) 別にも分けられます。
 
-If you find you have more questions about your network and storage usage beyond what you can see on the CircleCI web app, please contact [support](https://support.circleci.com/hc/en-us/requests/new) by opening a ticket for **Accounts / Billing**.
+CircleCI Web アプリで分かる範囲以上のご質問がある場合は、**アカウント / 請求** チケットをオープンして[サポート](https://support.circleci.com/hc/en-us/requests/new)にご連絡下さい。
 
 ### ストレージとネットワーク通信の概要
 {: #overview-of-network-and-storage-transfer }
 
-All data persistence operations within a job will accrue storage usage, though not all storage usage will result in costs. The relevant actions for accruing storage usage are:
+ジョブ内でデータを永続化するための操作には、ストレージの使用が発生しますが、すべてのストレージの使用に料金が発生するわけではありません。 ストレージ使用が発生する関連アクション:
 
 * キャッシュのアップロード
 * ワークスペースのアップロード
@@ -113,14 +113,14 @@ All data persistence operations within a job will accrue storage usage, though n
 - ストレージのデータとアクティビティ (Network タブに表示)
 - ストレージ総量のデータ (Storage タブに表示)
 
-The only **network traffic** that will result in billing is accrued through **restoring caches and workspaces to self-hosted runners.** Retention of artifact, workspace, and cache objects will result in billing for **storage usage**.
+請求の対象となる**ネットワーク通信**は、**キャッシュとワークスペースのセルフホストランナーへのリストア**により発生したトラッフィックのみです。
 
 
-Details about individual network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
+個々のステップのストレージおよびネットワーク通信の使用方法の詳細については、下記の**ジョブ**ページのステップ出力を参照してください。
 
 ![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
 
-### Custom storage usage
+### ストレージ使用量のカスタマイズ
 {: #custom-storage-usage }
 
 You can customize storage usage retention periods for workspaces, caches, and artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods by adjusting the sliders for each object type (see image below). By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
