@@ -14,7 +14,7 @@ version:
 
 CircleCI サーバー v3.x ビルドサービスのインストールステップを開始する前に、 xref:server-3-install-prerequisites.adoc[ステップ 1: 前提条件] と xref:server-3-install.adoc[ステップ 2: コアサービスのインストール]が実行済みであることを確認してください。
 
-.インストール 手順（フローチャートのフェーズ 3）
+.インストール手順のフローチャート ステップ 3）
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
@@ -370,7 +370,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 * *[Build Agent Image (ビルドエージェントイメージ)]*:  カスタム Docker レジストリを使用してCircleCI ビルドエージェントを提供する場合は、カスタマサポートにお問い合わせください。
 
-*[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
+*[Save config (設定の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
 ==== Normad クライアントの確認
 
@@ -436,7 +436,7 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 
 === VM サービス
 
-VM サービスは、VM とリモート Docker ジョブを設定します。 スケーリング ルールなど、さまざまなオプションを構成することができます。 VM サービスは、 EKS および GKE のインストールに固有のものです。これは、これらのクラウドプロバイダーの機能に特に依存しているためです。
+VM サービスは、VM とリモート Docker ジョブを設定します。 スケーリングルールなど、さまざまな VM サービスオプションを設定することができます。 VM サービスは、 EKS および GKE のインストールに固有のものです。これは、これらのクラウドプロバイダーの機能に特に依存しているためです。
 
 ifndef::env-gcp[]
 
