@@ -16,14 +16,14 @@ version:
 * TOC
 {:toc}
 
-## Cache storage customization
+## キャッシュストレージのカスタマイズ
 {: #caching-and-self-hosted-runner }
 
-セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 キャッシュに関連するアクションには、ネットワークとストレージの使用が発生するものがあります。 お客様の使用量が制限を超えた場合、料金が発生します。
 
-Retaining caches for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining caches, and how long caches need to be retained for your use case. To lower costs, consider a lower storage retention for caches, if that suits your needs.
+キャッシュを長期間保存すると、ストレージコストに影響が及ぶため、キャッシュを保存する理由やユースケースに応じた必要なキャッシュの保存期間を明確にすることをお勧めします。 ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
 
-You can customize storage usage retention periods for caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/)のページを参照してください。
 
 ## キャッシュの最適化
 {: #cache-optimization }
