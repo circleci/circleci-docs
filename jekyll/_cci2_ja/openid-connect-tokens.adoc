@@ -56,9 +56,7 @@ OpenID Connect ID トークンには下記の標準 https://openid.net/specs/ope
 |subject:  CircleCI ジョブの実行者とその場所を識別します。 値は、`"org/<organization-id>/project/<project-id>/user/<user-id>"` という文字列です。 `<organization-id>` 、`<project-id>`、 `<user-id>` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを表す UUID です。 ユーザーは、このジョブを実行した CircleCI ユーザーです。
 
 |`aud`
-|audience:  現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を表す
- UUID を含む文字列です。
-
+|audience:  現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を表す UUID を含む文字列です。
 
 |`iat`
 |time of issuance:  トークンが作成された時刻で、ジョブが開始される直前です。
