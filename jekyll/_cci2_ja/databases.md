@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "データベースの構成"
-short-title: "データベースの構成"
+title: "データベースの設定"
+short-title: "データベースの設定"
 description: "ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI  でデータベースサービスに使用する方法について説明します。"
 order: 35
 version:
@@ -26,7 +26,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 ## PostgreSQL データベースのテスト例
 {: #postgresql-database-testing-example }
 
-プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で構成する必要はありません。
+プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で設定する必要はありません。
 
 以下のように CircleCI 設定ファイルで `postgres` に `POSTGRES_USER` 環境変数を設定して、イメージにロールを追加します。
 
@@ -37,6 +37,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
+
 ```
 
 {% raw %}
@@ -83,7 +84,7 @@ jobs:
 
 `steps` では最初に `checkout` が実行され、その後 Postgres クライアントツールがインストールされます。 `cimg/postgres:14.0` イメージでは、クライアント固有のデータベースアダプターはインストールされません。 たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 イメージの一覧は、[ビルド済み CircleCI サービスイメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#next-gen-service-images) のページをご確認ください。
 
-In this example, the config installs the PostgreSQL client tools, `postgresql-client` via `apt-get`, to get access to `psql`. Installing packages in images requires administrator privileges, therefore `sudo` is used - a password is not required.
+この例では、 `psql` にアクセスできるよう、設定で PostgreSQL クライアントツール、`postgresql-client` を `apt-get` からインストールします。 イメージのインストールパッケージには管理者の権限が必要なため、`sudo` が使われます。パスワードは不要です。
 
 Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
