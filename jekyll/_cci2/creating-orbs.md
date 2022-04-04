@@ -30,7 +30,7 @@ If you are publishing your orb using the [Orb Development Kit]({{site.baseurl}}/
 ## Issue a new release with the orb development kit
 {: #issue-a-new-release-with-the-orb-development-kit }
 
-The steps below show how to issue a new semantic release of your orb. Once you have generated your orb sample project with the `circleci orb init` command, you will have been automatically migrated to the `alpha` branch. The name of the branch does not matter, it is just best practice to make our changes on a non-default branch. Once you have made your changes, commit them and push them up to your branch. We strongly encourage using [Conventional Commits](https://www.conventionalcommits.org/) for your commit messages.
+The steps below show how to issue a new semantic release of your orb. Once you have generated your orb sample project with the `circleci orb init` command, you will have been automatically migrated to the `alpha` branch. The name of the branch does not matter but it is best practice to make our changes on a non-default branch. Once you have made your changes, commit them and push them up to your branch. We strongly encourage using [Conventional Commits](https://www.conventionalcommits.org/) for your commit messages.
 
 Next, follow these steps to create a new release from your changes.
 
