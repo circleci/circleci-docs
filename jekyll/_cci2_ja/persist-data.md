@@ -21,7 +21,7 @@ version:
 ### 依存関係のキャッシュ
 {: #caching-dependencies }
 
-キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not re-download every dependency on every build.
+キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
 キャッシュはプロジェクト内でグローバルなため、 1 つのブランチに保存されたキャッシュは、他のブランチで実行されるジョブで使用されます。 キャッシュは、ブランチ間での共有に適したデータにのみ使用してください。
 
