@@ -100,22 +100,22 @@ gem 'minitest-ci'
 
 | 言語         | テストランナー      | フォーマッタ                                                                                    | 例                                                                                                                             |  |  |
 |:---------- |:------------ |:----------------------------------------------------------------------------------------- |:----------------------------------------------------------------------------------------------------------------------------- |  |  |
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{site.baseurl}}/2.0/collect-test-data/#jest)                                                                             |  |  |
+| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#jest)                                                                          |  |  |
 | JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                | [例]({{site.baseurl}}/2.0/collect-test-data/#mocha-for-node)、[NYC での例]({{site.baseurl}}/2.0/collect-test-data/#mocha-with-nyc) |  |  |
-| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                | [例]({{site.baseurl}}/2.0/collect-test-data/#karma)                                                                            |  |  |
-| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                       | [例]({{site.baseurl}}/2.0/collect-test-data/#ava-for-node)                                                                     |  |  |
-| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                    | [例]({{site.baseurl}}/2.0/collect-test-data/#eslint)                                                                           |  |  |
-| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [例]({{site.baseurl}}/2.0/collect-test-data/#rspec)                                                                            |  |  |
-| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                      | [例]({{site.baseurl}}/2.0/collect-test-data/#minitest)                                                                         |  |  |
-|            | Cucumber     | ビルトイン                                                                                     | [例]({{site.baseurl}}/2.0/collect-test-data/#cucumber)                                                                         |  |  |
+| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#karma)                                                                         |  |  |
+| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                       | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#ava-for-node)                                                                  |  |  |
+| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                    | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#eslint)                                                                        |  |  |
+| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#rspec)                                                                         |  |  |
+| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                      | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#minitest)                                                                      |  |  |
+|            | Cucumber     | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#cucumber)                                                                      |  |  |
 | Python     | pytest       | ビルトイン                                                                                     | [例]({{site.baseurl}}/2.0/collect-test-data/#pytest)                                                                           |  |  |
-| Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                     | [例]({{site.baseurl}}/2.0/collect-test-data/#unittest)                                                                         |  |  |
-| Java       | Maven        | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)          | [例]({{site.baseurl}}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                     |  |  |
-| Java       | Gradle       | ビルトイン                                                                                     | [例]({{site.baseurl}}/2.0/collect-test-data/#gradle-junit-test-results)                                                        |  |  |
-| PHP        | PHPUnit      | ビルトイン                                                                                     | [例]({{site.baseurl}}/2.0/collect-test-data/#phpunit)                                                                          |  |  |
-| .NET       |              | [trx2junit](https://github.com/gfoidl/trx2junit)                                          | [例]({{site.baseurl}}/2.0/collect-test-data/#dot-net)                                                                          |  |  |
-| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                     | [例]({{site.baseurl}}/2.0/collect-test-data/#kaocha)                                                                           |  |  |
-| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                   | [例]({{site.baseurl}}/2.0/collect-test-data/#test2junit-for-clojure-tests)                                                     |  |  |
+| Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                     | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#unittest)                                                                      |  |  |
+| Java       | Maven        | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)          | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                  |  |  |
+| Java       | Gradle       | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#gradle-junit-test-results)                                                     |  |  |
+| PHP        | PHPUnit      | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#phpunit)                                                                       |  |  |
+| .NET       |              | [trx2junit](https://github.com/gfoidl/trx2junit)                                          | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#dot-net)                                                                       |  |  |
+| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                     | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#kaocha)                                                                        |  |  |
+| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                   | [例]({{site.baseurl}}/ja/2.0/collect-test-data/#test2junit-for-clojure-tests)                                                  |  |  |
 {: class="table table-striped"}
 
 ### JavaScript
@@ -510,7 +510,7 @@ unittest は JUnit XML をサポートしていませんが、ほぼすべての
 #### PHPUnit
 {: #phpunit }
 
-PHPUnit テストの場合は、`--log-junit` コマンド ライン オプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
+PHPUnit テストの場合は、`--log-junit` コマンドラインオプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
 
 ```yml
     steps:
@@ -559,7 +559,7 @@ kaocha をテストランナーとして既にご利用の場合、以下を実�
 
 依存関係に `kaocha-junit-xml` を追加します。
 
-code>project.clj</code> を編集して lambdaisland/kaocha-junit-xml  プラグインを追加する、または deps.edn を使用している場合は同様なプラグインを追加します。
+`project.clj` を編集して lambdaisland/kaocha-junit-xml  プラグインを追加する、または deps.edn を使用している場合は同様なプラグインを追加します。
 ```clojure
 (defproject ,,,
   :profiles {,,,
