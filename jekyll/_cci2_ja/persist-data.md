@@ -62,7 +62,7 @@ version:
 ### アーティファクトの最適化
 {: #artifact-optimization }
 
-アーティファクトにより、ビルドに失敗する問題を解決することができます。 問題が解決し、ビルドに成功したら、アーティファクトの役目はほぼ終了です。 保存期間を例えば 1 日に設定すると、ビルドのトラブルシューティングを行い、かつストレージに不要なデータを保存しないためコストを削減することができます。
+アーティファクトにより、ビルドに失敗する問題を解決することができます。 問題が解決し、ビルドに成功したら、アーティファクトの役目はほぼ終了です。 保存期間を例えば 1 日に設定すると、ビルドのトラブルシューティングを行い、かつストレージに不要なデータを保存しないことによりコストを削減することができます。
 
 アーティファクトを長期間保存する必要がある場合は、実行しようとしている内容に応じて様々な最適化オプションがあります。 どのプロジェクトもそれぞれ異なりますが、ネットワークとストレージの使用量の削減には以下のアクションをお試し下さい。
 
@@ -106,7 +106,7 @@ CircleCI Web アプリで分かる範囲以上のご質問がある場合は、*
 * `persist_to_workspace`
 * `store_artifacts`
 
-ストレージとネットワーク通信の使用状況の詳細は、**Plan > Plan Usage** 画面で確認できます。 この画面では以下のことが確認できます。
+ストレージとネットワーク通信の使用状況の詳細は、**Plan > Plan Usage** 画面で確認できます。 この画面では以下の内容を確認できます。
 
 - 課金対象となるネットワーク通信量 (画面の一番上の表に表示)
 - 個々のプロジェクトのネットワークとストレージの使用量 (Project タブに表示)
@@ -123,17 +123,17 @@ CircleCI Web アプリで分かる範囲以上のご質問がある場合は、*
 ### ストレージ使用量のカスタマイズ
 {: #custom-storage-usage }
 
-You can customize storage usage retention periods for workspaces, caches, and artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods by adjusting the sliders for each object type (see image below). By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペース、キャッシュ、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 各オブジェクトタイプ毎にスライダーを調節して、カスタムのストレージ期間を設定することができます。 デフォルトでは、保存期間はアーティファクトの場合は 30 日、キャッシュやワークスペースの場合は 15 日です。 この日数はストレージの最大保存期間でもあります。 アーティファクトの最大保存期間は 30 日、キャッシュやワークスペースの最大保存期間は 15 日です。
 
-When you have determined your preferred storage retention for each object type, click the **Save Changes** button and your preferences will take effect immediately for any new workspaces, caches, or artifacts created. Previously created objects that are stored with a different retention period will continue to persist for the retention period set when the object was created.
+各オブジェクトタイプの希望するストレージ保存期間が決まったら、**Save Changes** ボタンをクリックします。その設定は即座に新しく作成されたすべてのワークスペース、キャッシュ、アーティファクトに適用されます。 別の保存期間で保存されている以前作成したオブジェクトに対しては、作成時に設定された保存期間が維持されます。
 
-The **Reset to Default Values** button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
+**Reset to Default Values** ボタンにより、オブジェクトタイプのデフォルトのストレージ保存期間 (アーティファクトは 30 日、キャッシュとワークスペースは 15 日) をリセットすることができます。
 
-Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
+組織の誰でもカスタムの使用量の制御を見ることはできますが、保存期間を変更できるのは管理者のみです。
 
 ![storage-usage-controls]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
 
-If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle with a 10 day storage period set, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for a new 10 day storage period.
+請求期間の終わりにデータを保存すると、使用状況の制御で設定した保存期間に関係なく、そのデータは新しい請求期間の開始時にリストアされます。 たとえば、請求期間の 25 日目に 10 日間の保存期間の設定でキャッシュを保存した場合に　30日目にそのキャッシュに何も変更がなかった場合、新しいキャッシュがビルドされ、新たに 10 日間の保存期間保存されます。
 
 ### ストレージ料金とネットワーク料金の概算方法
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
@@ -141,20 +141,20 @@ If you store data toward the end of your billing cycle, the data will be restore
 **注:** Performance プランのお客様の場合、外向きの通信とストレージに対する課金は、2022 年 5 月 1 日より有効になり、お客様の請求日に基づいて請求されます (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しており、**2022 年 4 月 1 日**よりご利用いただける予定です。 ここで記載されている内容は、2022 年 5 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
-Network charges apply when an organization has runner network egress beyond the included network GB allotment. ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Executor のみを使用している場合は、ネットワーク料金は適用されません。
+プランに含まれているネットワークの使用 GB を超える量のランナーネットワーク通信を使用した場合、課金されます。 ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Executor のみを使用している場合は、ネットワーク料金は適用されません。
 
-Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
+ストレージ料金は、プランに含まれているストレージの GB を超えるアーティファクト、ワークスペース、キャッシュを保存する場合に適用されます。
 
 お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
 
-For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
 
-### Reducing excess use of network egress and storage
+### ネットワーク通信の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress-and-storage }
 
 セルフホストランナーへのネットワーク通信の使用量は、 `US-East-1` でランナーを AWS 上でホストすることにより減らせます。
 
-Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
+ご自身のストレージのニーズを評価し、[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクト、ワークスペース、キャッシュ、のストレージ保存期間をカスタマイズすることによりストレージに対する課金を最小限にすることができます。
 
 ## 関連項目
 {: #see-also }
