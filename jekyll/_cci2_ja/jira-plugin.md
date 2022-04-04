@@ -13,9 +13,9 @@ description: "Jira と CircleCI の接続"
 ## インストール手順
 {: #installation-steps }
 
-1. [Project settings] > [`JIRA integration`] に移動します。 ![CircleCI web app Project Settings Jira integration options]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
-2. Atlassian Marketplace にアクセスし、[CircleCI Jira プラグイン](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)を入手します。 ![Atlassian marketplace showing CircleCI Jira plugin]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
-3. プラグインをインストールし、プロンプトに従ってセットアップします。![Setting up the plugin 1]({{ site.baseurl }}/assets/img/docs/jira_plugin_3.png) ![Setting up the plugin 2]({{ site.baseurl }}/assets/img/docs/jira_plugin_4.png)
+1. [Project settings] > [`JIRA integration`] に移動します。 ![CircleCI Web アプリの Jira インテグレーション オプション]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
+2. Atlassian Marketplace にアクセスし、[CircleCI Jira プラグイン](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)を入手します。 ![Atlassian マーケットプレイスの CircleCI Jira プラグイン]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
+3. プラグインをインストールし、プロンプトに従ってセットアップします。![プラグインの設定 1]({{ site.baseurl }}/assets/img/docs/jira_plugin_3.png) ![プラグインの設定 2]({{ site.baseurl }}/assets/img/docs/jira_plugin_4.png)
 4. CircleCI の [Jira Integration (Jira インテグレーション)] 設定ページに戻り、生成されたトークンを追加します。
 
 ---
