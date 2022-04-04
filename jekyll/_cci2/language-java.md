@@ -91,7 +91,6 @@ jobs: # a collection of steps
           path: build/test-results/test
       - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/test-results/test
-          when: always
       - run:
           name: Assemble JAR
           command: |
@@ -239,7 +238,6 @@ Next `store_test_results` uploads the JUnit test metadata from the `build/test-r
           path: build/test-results/test
       - store_artifacts:
           path: build/test-results/test
-          when: always
 ```
 {% endraw %}
 
