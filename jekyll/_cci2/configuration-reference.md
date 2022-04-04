@@ -254,10 +254,10 @@ auth | N | Map | Authentication for registries using standard `docker login` cre
 aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
-For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (the first container in the list) if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. 
+For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (the first container in the list) if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
 This is because the primary container is typically used only for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 A [custom image]({{ site.baseurl
-}}/2.0/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run. 
+}}/2.0/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
@@ -319,7 +319,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured usin
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/server-3-operator-vm-service).
+image | Y | String | The virtual machine image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/server-3-operator-vm-service).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
@@ -339,8 +339,8 @@ jobs:
           command: echo "Hi"
 ```
 
-##### Available `machine` images
-{: #available-machine-images }
+##### Available Linux `machine` images
+{: #available-linux-machine-images }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of images see the [Ubuntu 20.04 page in the developer hub](https://circleci.com/developer/machine/image/ubuntu-2004). And for up to date lists of what is available in each image see [Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847).
 
@@ -403,9 +403,8 @@ jobs:
 
 #### **`macos`**
 {: #macos }
-{:.no_toc}
 
-CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test, and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job in a macOS virtual machine, you must add the `macos` key to the top-level configuration for the job and specify the version of Xcode you would like to use.
+CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test, and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job in a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode you would like to use.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -424,10 +423,8 @@ jobs:
 
 #### **`windows`**
 {: #windows }
-{:.no_toc}
 
-CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
-
+CircleCI supports running jobs on Windows. To run a job on a Windows virtual machine, add the `windows` key to the top-level configuration for your job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
 
 **Example:** Use a windows executor to run a simple job.
 
@@ -450,44 +447,6 @@ jobs:
 
 **This key is deprecated. Use [workflows filtering](#jobfilters) to control which jobs run for which branches.**
 
-Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
-
-Key | Required | Type | Description
-----|-----------|------|------------
-only | N | List | List of branches that only will be executed
-ignore | N | List | List of branches to ignore
-{: class="table table-striped"}
-
-Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
-
-```yml
-jobs:
-  build:
-    branches:
-      only:
-        - main
-        - /rc-.*/
-```
-
-In this case, only "main" branch and branches matching regex "rc-.*" will be executed.
-
-```yml
-jobs:
-  build:
-    branches:
-      ignore:
-        - develop
-        - /feature-.*/
-```
-
-In this example, all the branches will be executed except "develop" and branches matching regex "feature-.*".
-
-If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
-
-A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
-
-To ensure the job runs for **all** branches, either don't use the `branches` key, or use the `only` key along with the regular expression: `/.*/` to catch all branches.
-
 #### **`resource_class`**
 {: #resourceclass }
 
@@ -497,7 +456,20 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 **Note:** For new projects created after September 1, 2021 that do not specify a resource class, CircleCI will try to find the right default value for your organization. To avoid using a default, explicitly specify a resource class size in your config for each job.
 
-**For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
+**For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**.
+
+##### Self-hosted runner
+
+Use the `resource_class` to configure a [self-hosted runner instance](https://circleci.com/docs/2.0/runner-overview/).
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
+```
 
 ##### Docker executor
 {: #docker-executor }
@@ -528,17 +500,6 @@ jobs:
     resource_class: xlarge
     steps:
       ... // other config
-```
-
-You may also use the `resource_class` to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
-
-For example:
-
-```yaml
-jobs:
-  job_name:
-    machine: true
-    resource_class: my-namespace/my-runner
 ```
 
 ##### Machine executor (Linux)
@@ -690,7 +651,6 @@ jobs:
 <sup>(4)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
-
 
 **Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
