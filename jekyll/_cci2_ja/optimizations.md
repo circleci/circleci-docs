@@ -60,7 +60,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 ワークスペースを使用すると、_ダウンストリーム ジョブ_に必要な、_その実行に固有_のデータを渡せます。 つまり、ワークスペースを使用して、ビルドの最初の段階で実行するジョブのデータをフェッチし、そのデータをビルドの後段で実行するジョブで_利用する_ことができます。
 
-任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを設定します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (および Workflow の再実行時に) 利用できるようにします。
+任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを設定します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
 
 * 詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
