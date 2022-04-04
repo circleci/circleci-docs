@@ -18,7 +18,7 @@ version:
 ## アーティファクトの概要
 {: #artifacts-overview }
 
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルドプロセス出力を格納するストレージとして使用できます。
+アーティファクトには、ジョブが完了した後もデータが保持され、ビルドプロセス出力を格納するストレージとして使用できます。
 
 たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
@@ -32,9 +32,9 @@ CircleCI Web アプリでパイプラインの **Job** ページに移動し、[
 
 ![[Artifacts (アーティファクト)] タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
-By default, artifact storage duration is set to 30 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 30 days is also the maximum storage duration you can set.
+デフォルトのアーティファクトの保存期間は 30 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 30 日間となっています。
 
-For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) page.
+ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/)のページを参照してください。
 
 **注:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
@@ -291,14 +291,14 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 | `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
 {: class="table table-striped"}
 
-## Artifact storage customization
+## アーティファクトストレージのカスタマイズ
 {: #artifacts-and-self-hosted-runner }
 
-セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 アーティファクトに関連するアクションには、ネットワークとストレージの使用が発生するものがあります。 お客様の使用量が制限を超えた場合、料金が発生します。
 
-Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
+アーティファクトを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 アーティファクトを保存する利点の一つは、ビルドが失敗する原因のトラブルシューティングにアーティファクトを使用できることです。 ビルドに成功したら、そのアーティファクトはほぼ必要ありません。 ニーズに合う場合は、アーティファクトのストレージ保存期間を短く設定することを推奨します。
 
-You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/)のページを参照してください。
 
 ## アーティファクトの最適化
 {: #artifacts-optimization }
