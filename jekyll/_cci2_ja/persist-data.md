@@ -21,7 +21,7 @@ version:
 ### 依存関係のキャッシュ
 {: #caching-dependencies }
 
-キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
+キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not re-download every dependency on every build.
 
 キャッシュはプロジェクト内でグローバルなため、 1 つのブランチに保存されたキャッシュは、他のブランチで実行されるジョブで使用されます。 キャッシュは、ブランチ間での共有に適したデータにのみ使用してください。
 
@@ -46,6 +46,8 @@ version:
 
 ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを使用しているすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを判断してください。
 
+You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
+
 * ワークスペースの最適化、設定、有効期限に関する詳細は、[ワークスペースの使用]({{site.baseurl}}/2.0/workspaces/)をご覧ください。
 * ワークフローの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
 * [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
@@ -55,12 +57,14 @@ version:
 
 アーティファクトは、パイプラインの出力を長期保存するために使用されます。 たとえば Java プロジェクトを使用している場合、ビルドにより多くの場合、コードの` .jar `ファイルが生成されます。 このコードはテストによって検証されます。 ビルドやテストプロセスがすべて成功した場合は、プロセスの出力（` .jar `）をアーティファクトとして保存できます。 この `jar `ファイルは、ファイルを作成したワークフローの終了後も長期間アーティファクトシステムからダウンロードできます。
 
-プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーが、アーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
+プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーがアーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
 
 ### アーティファクトの最適化
 {: #artifact-optimization }
 
-最適化オプションは、実行しようとしている内容に応じてプロジェクトごとに異なります。 ネットワークやストレージの使用量を削減するために、下記をお試しください。
+Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, one day, allows you to both troubleshoot the build, and save costs by not keeping unnecessary data in storage.
+
+If you need to store artifacts for longer periods of time, there are other optimization options available, depending on what you are trying to accomplish. Every project is different, but you can try the following actions to reduce network and storage usage:
 
 - `store_artifacts` が不必要なファイルをアップロードしていないか確認する。
 - 並列実行を使用している場合は、同じアーティファクトがないか確認する。
@@ -83,27 +87,24 @@ version:
 2. **Plan Usage** を選択します。
 3. **Network** または **Storage** のどちらか表示したいタブを選択します。
 
-この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  使用量は、ストレージオブジェクトタイプ  (キャッシュ、アーティファクト、ワークスペース、テスト結果) 別にも分けられます。
+この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  The usage is also broken down by storage object type: cache, artifact, and workspace.
+
+If you find you have more questions about your network and storage usage beyond what you can see on the CircleCI web app, please contact [support](https://support.circleci.com/hc/en-us/requests/new) by opening a ticket for **Accounts / Billing**.
 
 ### ストレージとネットワーク通信の概要
 {: #overview-of-network-and-storage-transfer }
 
-ジョブ内でデータを永続化するための操作には、ストレージの使用が発生します。関連するアクションは次のとおりです。
+All data persistence operations within a job will accrue storage usage, though not all storage usage will result in costs. The relevant actions for accruing storage usage are:
 
 * キャッシュのアップロード
 * ワークスペースのアップロード
 * アーティファクトのアップロード
-* テスト結果のアップロード
 
 上記のアクションを行うジョブを決定するには、プロジェクトの`.circleci/config.yml` ファイルで次のコマンドを検索します。
 
 * `save_cache`
 * `persist_to_workspace`
 * `store_artifacts`
-* `store_test_results`
-
-課金の対象となるネットワークトラフィックは、**キャッシュやワークスペースのセルフホストランナーへのリストア**により発生したトラフィックのみです。
-{: class="alert alert-info" }
 
 ストレージとネットワーク通信の使用状況の詳細は、**Plan > Plan Usage** 画面で確認できます。 この画面では以下のことが確認できます。
 
@@ -112,26 +113,48 @@ version:
 - ストレージのデータとアクティビティ (Network タブに表示)
 - ストレージ総量のデータ (Storage タブに表示)
 
-個々のステップのストレージおよびネットワーク通信の使用方法の詳細については、下記のジョブページのステップ出力を参照してください。
+The only **network traffic** that will result in billing is accrued through **restoring caches and workspaces to self-hosted runners.** Retention of artifact, workspace, and cache objects will result in billing for **storage usage**.
+
+
+Details about individual network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
 
 ![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
 
-### ネットワーク通信の過剰な使用を減らす
-{: #reducing-excess-use-of-network-egress }
+### Custom storage usage
+{: #custom-storage-usage }
 
-セルフホストランナーへのネットワーク通信の使用量は、 `US-East-1` でランナーを AWS 上でホストすることにより減らせます。
+You can customize storage usage retention periods for workspaces, caches, and artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods by adjusting the sliders for each object type (see image below). By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+
+When you have determined your preferred storage retention for each object type, click the **Save Changes** button and your preferences will take effect immediately for any new workspaces, caches, or artifacts created. Previously created objects that are stored with a different retention period will continue to persist for the retention period set when the object was created.
+
+The **Reset to Default Values** button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
+
+Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
+
+![storage-usage-controls]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
+
+If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle with a 10 day storage period set, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for a new 10 day storage period.
 
 ### ストレージ料金とネットワーク料金の概算方法
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
 
-**注:** Performance プランのお客様の場合、外向きの通信とストレージに対する課金は、2022 年 5 月 1 日より有効になり、お客様の請求日に基づいて請求されます (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しています。 ここで記載されている内容は、2022 年 5 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+**注:** Performance プランのお客様の場合、外向きの通信とストレージに対する課金は、2022 年 5 月 1 日より有効になり、お客様の請求日に基づいて請求されます (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しており、**2022 年 4 月 1 日**よりご利用いただける予定です。 ここで記載されている内容は、2022 年 5 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
 {: class="alert alert-info" }
 
-プランに含まれているストレージとネットワークの使用 GB を超える量のランナーネットワーク通信を使用した場合、課金されます。 ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Executor のみを使用している場合は、ネットワーク料金は適用されません。
+Network charges apply when an organization has runner network egress beyond the included network GB allotment. ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Executor のみを使用している場合は、ネットワーク料金は適用されません。
+
+Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
 お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
 
-IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
+For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+
+### Reducing excess use of network egress and storage
+{: #reducing-excess-use-of-network-egress-and-storage }
+
+セルフホストランナーへのネットワーク通信の使用量は、 `US-East-1` でランナーを AWS 上でホストすることにより減らせます。
+
+Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 ## 関連項目
 {: #see-also }
