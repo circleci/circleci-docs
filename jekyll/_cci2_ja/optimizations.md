@@ -17,13 +17,17 @@ version:
 * TOC
 {:toc}
 
-**警告: **データの永続化はプロジェクト固有であり、ここで紹介するサンプルはお客様のプロジェクトにコピー & ペーストしていただくためのものではありません。 これらのサンプルにより、お客様のプロジェクトを最適化する余地を見出していただければと思います。
-{: class="alert alert-warning"}
+## Custom storage controls
+{: #custom-storage-controls }
+
+The [CircleCI web app](https://app.circleci.com/) provides controls to customize the storage retention period of workspaces, caches, and artifacts. You can find these settings by navigating to **Plan > Usage Controls**. By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+
+See the [Persisting Data]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage) page for more information on custom storage settings.
 
 ## Docker イメージの選択
 {: #docker-image-choice }
 
-プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを設定し、イメージを指定するときには、以下の点を考慮してください。
+プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを構成し、イメージを指定するときには、以下の点を考慮してください。
 
 * CircleCI には多数の [CircleCI イメージ]({{site.baseurl}}/2.0/circleci-images/#section=configuration) が用意されています。 多くは公式の Docker イメージに基づいていますが、便利な言語ツールもプリインストールされています。
 * プロジェクトに特化した[独自のイメージを作成](https://circleci.com/ja/docs/2.0/custom-images/#section=configuration)することも可能です。 そのサポートガイドとして、[Docker イメージ ビルドウィザード](https://github.com/circleci-public/dockerfile-wizard)や[イメージを手動でビルドするためのガイド]({{site.baseurl}}/2.0/custom-images/#creating-a-custom-image-manually)を提供しています。
@@ -40,7 +44,7 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 ## 依存関係のキャッシュ
 {: #caching-dependencies }
 
-ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを活用できる場合があります。 一般的によく用いられるのが、パッケージ マネージャーや依存関係管理ツールです。 たとえば、プロジェクトで Yarn、Bundler、Pip などを利用すると、ジョブの実行中にダウンロードする依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用できるようにキャッシュされます。
+ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 一般的によく用いられるのが、パッケージ マネージャーや依存関係管理ツールです。 たとえば、プロジェクトで Yarn、Bundler、Pip などを利用すると、ジョブの実行中にダウンロードする依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用できるようにキャッシュされます。
 
 * 詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/2.0/caching)を参照してください。
 
@@ -56,23 +60,25 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 ワークスペースを使用すると、_ダウンストリーム ジョブ_に必要な、_その実行に固有_のデータを渡せます。 つまり、ワークスペースを使用して、ビルドの最初の段階で実行するジョブのデータをフェッチし、そのデータをビルドの後段で実行するジョブで_利用する_ことができます。
 
-任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを設定します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
+任意のジョブのデータを永続化し、[`attach_workspace`]({{site.baseurl}}/2.0/configuration-reference#attachworkspace) キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference#persisttoworkspace) キーを使用するようにジョブを設定します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、root キーで指定しているディレクトリの相対パスとなるワークフローの一時ワークスペースにアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (および Workflow の再実行時に) 利用できるようにします。
 
 * 詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
 ## 並列実行
 {: #parallelism }
 
-プロジェクトに大規模なテストスイートがある場合は、[`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[テスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests), or a [third party application or library]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
 * テストの分割の詳細については、[並列実行]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
 
-## リソースクラス
+## リソース クラス
 {: #resource-class }
 
-**注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 セルフホスティング環境では、リソースクラスのオプション設定はシステム管理者が行います。
+**注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 Resource class options for self-hosted installations are set by system administrators.
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self-hosted installations contact your system administrator for a list.
+
+Please note, if a `resource_class` is not explicitly declared, CircleCI will try to find the best default resource class for your organization.
 
 * 詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
 
