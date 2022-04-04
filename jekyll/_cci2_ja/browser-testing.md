@@ -136,19 +136,22 @@ workflows:
 ## Cypress
 {: #cypress }
 
-JavaScript エンドツーエンド テストに使用できるブラウザー テスト ソリューションとして、他にも [Cypress](https://www.cypress.io/) があります。 Selenium アーキテクチャを利用するブラウザー テスト ソリューションとは異なり、Cypress を使用する場合は、アプリケーションと同じ実行ループでテストを実行できます。 このプロセスを簡素化するために、CircleCI 承認済み Orb を使用して、結果を Cypress ダッシュボードにポストせずにすべての Cypress テストを実行するなどのさまざまなテストを実行することができます。 以下に例示する CircleCI 承認済み Orb では、結果がダッシュボードにパブリッシュされずに、すべての Cypress テストが実行されます。
+JavaScript エンドツーエンド テストに使用できるブラウザー テスト ソリューションとして、他にも [Cypress](https://www.cypress.io/) があります。 Selenium アーキテクチャを利用するブラウザー テスト ソリューションとは異なり、Cypress を使用する場合は、アプリケーションと同じ実行ループでテストを実行できます。
+
+このプロセスを簡素化するために、CircleCI 承認済み Orb を使用して、結果を Cypress ダッシュボードにポストせずにすべての Cypress テストを実行するなどのさまざまなテストを実行することができます。 以下に例示する CircleCI 承認済み Orb では、結果がダッシュボードにパブリッシュされずに、すべての Cypress テストが実行されます。
 
 {% raw %}
 ```yaml
 version: 2.1
 
 orbs:
-  cypress: cypress-io/cypress@1.1.0
+  cypress: cypress-io/cypress@1
 
 workflows:
   build:
     jobs:
-      - cypress/run
+      - cypress/run:
+          no-workspace: true
 ```
 {% endraw %}
 
@@ -281,4 +284,4 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 ## 関連項目
 {: #see-also }
 
-[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)
+[プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)
