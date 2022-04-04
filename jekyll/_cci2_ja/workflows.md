@@ -238,7 +238,7 @@ workflows:
 {: #scheduling-a-workflow }
 
 <div class="alert alert-warning" role="alert">
-  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+  <strong>ワークフローのスケジュール実行は 2022 年 6 月 3 日に廃止予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{ site.baseurl }}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
 </div>
 
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
