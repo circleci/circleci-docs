@@ -41,7 +41,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![New GitHub Repo]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Write down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, whichever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
     **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
     {: class="alert alert-warning"}
