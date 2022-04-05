@@ -1,3 +1,8 @@
+// mixins
+@import 'mixins/cta_badge';
+@import 'mixins/cta_button';
+
+// scss files
 @import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
@@ -18,6 +23,8 @@
 @import 'language-guide';
 @import 'first_steps_cta';
 @import 'popup';
+
+@import 'includes/badge';
 
 @import 'pages/getting-started';
 
@@ -319,10 +326,11 @@ body.homepage{
     }
   }
 
-	article{
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
+  article{
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      flex-direction: column;
 	}
 
 	div.category-section{
