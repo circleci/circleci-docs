@@ -32,7 +32,7 @@ Ensure you are running the minimum KOTS version ({kotsversion}) by running the c
 kubectl kots version
 ```
 
-NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
+NOTE: The KOTS command opens up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
 From the terminal run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
@@ -44,17 +44,17 @@ kubectl kots install circleci-server
 You will be prompted for a:
 
 * namespace for the deployment
-* password for the KOTS admin console
+* password for the KOTS Admin Console
 
-When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
+When complete, you should be provided with a URL to access the KOTS Admin Console, usually `\http://localhost:8800`.
 
-NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+NOTE: If you need to return to the KOTS Admin Console, you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
-NOTE: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
+NOTE: Once you have created your namespace, we recommend alsoo setting your `kubectl` context with the following command: `kubectl config set-context --current --namespace <namespace>`
 
 === Installing behind an HTTP Proxy
 
-If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
+If you wish to install CircleCI server behind a proxy, use the following command structure (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
 
 ```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
@@ -70,7 +70,7 @@ Frontend settings control the web application specific aspects of the CircleCI s
 .Frontend Settings
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
-Complete the fields described below. You can either supply a private key and certificate, or check the box to allow Let's Encrypt to automatically request and manage certificates for you. You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
+Complete the fields described below. You can either supply a private key and certificate, or check the box to allow Let's Encrypt to automatically request and manage certificates for you. You can also disable TLS termination at this point, but the system still needs to be accessed over HTTPS.
 
 NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
@@ -101,17 +101,17 @@ Complete the following fields:
 
 * *Encryption Signing Key (required)*
 
-==== Github Settings
+==== GitHub Settings
 You created your Github OAuth application in the prerequisite phase. Use the data to complete the following:
 
-* *Github Type (required)* -
+* *GitHub Type (required)* -
 Select Cloud or Enterprise (on premises).
 
 * *OAuth Client ID (required)* -
-The OAuth Client ID provided by Github.
+The OAuth Client ID provided by GitHub.
 
 * *OAuth Client Secret (required)* -
-The OAuth Client Secret provided by Github.
+The OAuth Client Secret provided by GitHub.
 
 ==== Object Storage Settings
 
@@ -178,19 +178,19 @@ endif::env-aws[]
 
 ==== Postgres, MongoDB, Vault settings
 
-You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CirecleCI server will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CirecleCI server creates its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace are included in the CircleCI backup and restore process.
 
 === Save and deploy
-Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Kong load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation.
+Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
 
-NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by Kong. Therefore, you will see a service named `circleci-server-traefik` but this service is actually for Kong.
+NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, to minimize disruption when upgrading, we chose not to rename the service used by Kong. Although you will see a service named `circleci-server-traefik`, this service is actually for Kong.
 
-NOTE: In this first stage we skipped a lot of fields in the config. We will revisit those in the next stages of installation.
+NOTE: In this first stage, we skipped a lot of fields in the config. We will revisit those fields in the next stages of installation.
 
 === Create DNS entry
 Create a DNS entry for your Kong load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
-You will need the IP address or, if using AWS, the DNS name of the Kong load balancer. You can find this with the following command:
+You need the IP address or, if using AWS, the DNS name of the Kong load balancer. You can find this information with the following command:
 
 ----
 kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE>
@@ -206,7 +206,9 @@ NOTE: The Kong load balancer has a healthcheck that serves a JSON payload at htt
 
 === Validation
 
-You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
+You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
+
+Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>

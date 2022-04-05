@@ -25,7 +25,7 @@ toc::[]
 
 === Set up backup and restore
 
-Backups of CircleCI server can be created quite easily through https://kots.io/[KOTS].
+Backups of CircleCI server can be created through https://kots.io/[KOTS].
 However, to enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
 
 // Don't include this section in the GCP PDF:
@@ -34,7 +34,7 @@ ifndef::env-gcp[]
 
 === Server 3.x backups on AWS
 
-The following steps will assume AWS as your provider.
+The following steps assume AWS as your provider.
 
 These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
 
@@ -136,7 +136,7 @@ The result should look like this:
 }
 ----
 
-* Create a Velero-specific credentials file (eg: `./credentials-velero`) in your local directory, with the following contents:
+* Create a Velero-specific credentials file (for example: `./credentials-velero`) in your local directory, with the following contents:
 
 [source,bash]
 ----
@@ -148,8 +148,8 @@ where the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are value
 
 ==== Step 3 - Install and start Velero
 
-* Run the following `velero` `install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
-Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
+* Run the following `velero` `install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
+Make sure that you pass the correct file name containing the AWS credentials that you created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
 NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
@@ -196,8 +196,7 @@ The following steps are specific for Google Cloud Platform and it is assumed you
 These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
 
 ==== Step 1 - Create a GCP bucket
-To reduce the risk of typos, we will set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, we will define a variable for your bucket name. Replace
-the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
+To reduce the risk of typos, you can set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, you can define a variable for your bucket name. Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
 
 [source,bash]
 ----
@@ -208,10 +207,9 @@ gsutil mb gs://$BUCKET/
 
 ==== Step 2 - Setup permissions for Velero
 
-If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be
-created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
 
-. First, we will set a shell variable for your project ID. To do so, first make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
+. First, you will set a shell variable for your project ID. To do so, make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
 +
 [source,bash]
 ----
@@ -232,7 +230,7 @@ PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
-NOTE: If you run several clusters with Velero, you might want to consider using a more specific name for the Service Account besides `velero`, as suggested above.
+NOTE: If you run several clusters with Velero, consider using a more specific name for the Service Account besides `velero`, as suggested above.
 
 . You can check if the service account has been created successfully by running the following command:
 +
@@ -283,24 +281,23 @@ Now you need to ensure that Velero can use this Service Account.
 [discrete]
 ===== Option 1: JSON key file
 
-You can simply pass a JSON credentials file to Velero to authorize it to perform actions as the Service Account. To do this, we first need to create a key:
+You can simply pass a JSON credentials file to Velero to authorize it to perform actions as the Service Account. To do this, you first need to create a key:
 [source,bash]
 ----
 gcloud iam service-accounts keys create credentials-velero \
     --iam-account $SERVICE_ACCOUNT_EMAIL
 ----
-After running this command, you should have a file named `credentials-velero` in your local working directory.
+After running this command, you should see a file named `credentials-velero` in your local working directory.
 
 [discrete]
 ===== Option 2: Workload Identities
 
-If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] in your cluster, you can bind
-the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account will need the
+If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account needs the
 `iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
 
 ==== Step 3 - Install and start Velero
 
-* Run one of the following `velero` `install` commands, depending on how you authorized the service account. This will create a namespace called `velero` and install all the necessary resources to run Velero.
+* Run one of the following `velero` `install` commands, depending on how you authorized the service account. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 
 NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
 
@@ -360,15 +357,14 @@ endif::env-aws[]
 ////
 === Server 3.x backups with S3 Compatible Storage
 
-The following steps will assume you're using S3 compatible object storage, but not necessarily AWS S3, for your backups.
+The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
 
 These instructions were sourced from the Velero documentation https://velero.io/docs/v1.6/contributions/minio/[here].
 
 ==== Step 1 - Configure `mc` client
 
-To start, configure https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] to connect to your storage
-provider:
+To start, configure https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] to connect to your storage provider:
 
 [source,bash]
 ----
@@ -424,7 +420,7 @@ mc admin policy add $ALIAS velero-policy velero-policy.json
 mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
 ----
 
-Finally, we add our new user's credentials to a file (`./credentials-velero` in
+Finally, you add your new user's credentials to a file (`./credentials-velero` in
 this example) with the following contents:
 
 [source,toml]
@@ -436,7 +432,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 ==== Step 4 - Install and start Velero
 
-Run the following `velero install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
+Run the following `velero install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 
 NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
@@ -477,9 +473,9 @@ image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
 https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[troubleshooting] section.
 
-==== Option 1 - Create a backup with Kots CLI
+==== Option 1 - Create a backup with KOTS CLI
 
-To create the backup, run:
+To create the backup, run the following command:
 
 [source,bash]
 ----
@@ -501,30 +497,33 @@ image::kots-admin-create-backup.png[Kots Create Snapshot]
 
 Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes: 
 
-* Copying orbs from the public registry 
-* Updating orbs that may have been copied before 
-* Registering your company's private orbs, if you have any
+* Copying orbs from the public registry.
+* Updating orbs that may have been copied previously.
+* Registering your company's private orbs, if you have any.
 
-For more information, and steps to complete these tasks see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
+For more information and steps to complete these tasks, see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
 
 === Email Notifications 
 
-Build notifications are sent by email. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+Build notifications are sent by email. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`. 
 
-* *Email Submission server hostname (required)* - Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
+Locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation:
 
-* *Username (required)* - Username to authenticate to submission server. This is commonly the same as the user’s e-mail address.
+* *Email Submission server hostname (required)* - Host name of the submission server (for example, for Sendgrid use smtp.sendgrid.net).
+
+* *Username (required)* - Username to authenticate to submission server. This is commonly the same as the user’s email address.
 
 * *Password (required)* - Password to authenticate to submission server.
 
 * *Port (optional)* - Port of the submission server. This is usually either 25 or 587. While port 465 is also commonly used for email submission, it is often used with implicit TLS instead of StartTLS. Server only supports StartTLS for encrypted submission. 
 +
-NOTE: Outbound connections on port 25 are blocked on most cloud providers. Should you select this port, be aware that your notifications may fail to send
-Enable StartTLS: Enabling this will encrypt mail submission. 
+NOTE: Outbound connections on port 25 are blocked on most cloud providers. Should you select this port, be aware that your notifications may fail to send.
+
+* *Enable StartTLS* - Enabling this will encrypt mail submission. 
++
+NOTE: StartTLS is used to encrypt mail by default, and you should only disable this if you can otherwise guarantee the confidentiality of traffic.
 
 * *Email from address (required)* - The _from_ address for the email.  
-
-NOTE: StartTLS is used to encrypt mail by default, and you should only disable this if you can otherwise guarantee the confidentiality of traffic.
 
 Click the *Save config* button to update your installation and redeploy server.
 
