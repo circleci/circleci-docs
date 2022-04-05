@@ -143,6 +143,19 @@ workflows:
       - build
 ```
 
+Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
+
+```
+jobs:
+  build-windows:
+    machine:
+      image: windows-server-2022:current
+      resource_class: windows.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
+```
+
+With that said, we strongly encourage using the orb as it helps simplify your configuration.
+
 ## Known issues
 {: #known-issues }
 
