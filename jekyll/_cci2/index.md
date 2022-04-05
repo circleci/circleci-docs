@@ -13,17 +13,23 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 <hr class="hidden-xs" />
 
 
-{% capture qsGuideLogo %}{{site.baseurl}}/docs/assets/img/compass/nodejs.svg{% endcapture %}
+<!--Do not translate: Experiment Code for https://circleci.atlassian.net/browse/DD-455 -->
+{% capture nodeLogo %}{{site.baseurl}}/assets/img/compass/nodejs.svg{% endcapture %}
+{% capture cciLogo %}{{site.baseurl}}/assets/img/compass/circle-logo.svg{% endcapture %}
+{% capture pyLogo %}{{site.baseurl}}/assets/img/compass/python.svg{% endcapture %}
+{% capture dotLogo %}{{site.baseurl}}/assets/img/compass/more.svg{% endcapture %}
 
-  <div>
-    {% include badge.html name="Quickstart Guide" icon=qsGuideLogo %}
-    {% include badge.html name="Node" %}
+<div class="">
+  <div class="flex mb-2">
+      {% include badge.html name="Quickstart Guide" icon=cciLogo new=true %}
+      {% include badge.html name="Node" icon=nodeLogo %}
   </div>
-
-  <div>
-    {% include badge.html name="Python" %}
-    {% include badge.html name="...All guides" %}
+  <div class="flex">
+      {% include badge.html name="Python" icon=pyLogo %}
+      {% include badge.html name="All guides" icon=dotLogo %}
   </div>
+</div>
+<!-- End: Experiment code. -->
 
 <div class="row loading-deferred">
   <div class="treatment col-xs-12">
