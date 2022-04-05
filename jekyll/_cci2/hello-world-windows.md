@@ -326,7 +326,7 @@ jobs:
 
 Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
 
-You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml).
+You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we'll focus on the `hello-world` workflow for now. 
 
 ```yaml
 version: 2.1
@@ -336,10 +336,19 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.4.0
 ```
 
-Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started.
+Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent verion.
+
+```yaml
+workflows:
+  hello-world:
+    jobs:
+      - build
+```
+
+We define a `hello-world` workflow, in which we run a single job named `build`.
 
 ```yaml
 jobs:
@@ -349,7 +358,7 @@ jobs:
       shell: powershell.exe
 ```
 
-Under the `jobs` key, we set the executor via the orb we are using. We can also declare the default shell to be applied across future steps in the configuration. The default shell is `Powershell.exe`
+Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using. We can also declare the default shell to be applied across future steps in the configuration. The default shell is `Powershell.exe`
 
 ```yaml
     steps:
