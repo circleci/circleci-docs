@@ -339,7 +339,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent verion.
+Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.
 
 ```yaml
 workflows:
@@ -357,7 +357,7 @@ jobs:
       name: win/default
 ```
 
-Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using. 
+Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using.
 
 ```yaml
     steps:
