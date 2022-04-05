@@ -25,7 +25,7 @@ toc::[]
 
 === バックアップとリストアの設定
 
-CircleCI Server のバックアップは、https://kots.io/[KOTS] を介して作成できます。
+CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して作成できます。
 バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
 
 // Don't include this section in the GCP PDF:
@@ -47,7 +47,7 @@ aws s3api create-bucket \
     --region $REGION \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
-NOTE: `us-east-1` では、https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[[LocationConstraint]] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+NOTE: `us-east-1` では、 https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
 ==== 手順 2 - Velero の権限の設定
 
