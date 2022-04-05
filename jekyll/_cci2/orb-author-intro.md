@@ -71,5 +71,4 @@ where `name` is the namespace you wish to claim, `vcs-type` is the type of your 
 {: #next-steps }
 
 * Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
-* If you are developing orbs or use on an installation on CircleCI server, read the [Orb Authoring Process on Server]({{site.baseurl}}/2.0/orb-author-server/) guide for information on developing your orb.
 * Alternatively, to find out more about orbs read the [Orb Concepts]({{site.baseurl}}/2.0/orb-concepts/) page.
