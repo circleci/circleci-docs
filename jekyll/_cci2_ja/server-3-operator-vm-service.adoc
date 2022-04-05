@@ -93,13 +93,13 @@ NOTE: VM サービスで使用するアクセスキーとシークレットキ�
 === Google Cloud Platform
 Google Cloud Platform (GCP) を使う場合は、以下のフィールドの入力をして VM サービスを設定する必要があります。
 
-WARNING: VM サービス専用の一意のサービスアカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント]を参照してください。
+WARNING: VM サービス専用の一意のサービスアカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント]を参照してください。
 
 この時点では、VMでプライベートIPアドレスを使用する必要がある場合は、*Assign Public IPs* チェックボックスをオフにしてもかまいません。
 
 * *[GCP project ID (GCP プロジェクト ID)]* (必須): クラスタが存在する GCP プロジェクトの名前を指定します。
 * *[VM 用の GCP Zone (GCP ゾーン)]* (必須): `us-east1-b`などに仮想マシンインスタンスを作成する GCP ゾーンを指定します。
-* *[GCP Windows イメージ]* (オプション): Windows Executor が必要な場合、その AMI ID をここに指定できます。 Windows イメージを作成するには、https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー]を使います。 Windows Executor が不要な場合は、このフィールドを空欄にします。
+* *[GCP Windows イメージ]* (オプション): Windows Executor が必要な場合、その AMI ID をここに指定できます。 Windows イメージを作成するには、 https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー]を使います。 Windows Executor が不要な場合は、このフィールドを空欄にします。
 * *[GCP VPC Network (GCP VPC ネットワーク)]* (必須): VPC ネットワークの名前を指定します。 共有 VPC で CircleCI Server をデプロイしている場合は、名前ではなく以下のようにホストネットワークのフルネットワークエンドポイントを使用します。 
 +
 ```
@@ -118,7 +118,7 @@ https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-r
 +
 または、`IAM Workload Identity`を選択して、以下を指定します。 
 
-** *GCP IAM Workload Identity* (必須):https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[こちら]の 2 & 3 で作成した VM サービスアカウントのメールアドレス (`service-account-name`@`project-id`.iam.gserviceaccount.com ) をコピー & ペーストします。
+** *GCP IAM Workload Identity* (必須): https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[こちら]の 2 & 3 で作成した VM サービスアカウントのメールアドレス (`service-account-name`@`project-id`.iam.gserviceaccount.com ) をコピー & ペーストします。
 
 * *[Number of <VM-type> VMs to keep prescaled (事前スケーリングする <VM タイプ> の VM 数)]*: デフォルトでは、このフィールドは 0 に設定されています。 この値の場合、該当するリソースタイプのインスタンスがオンデマンドで作成、プロビジョニングされます。 リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 
 +
