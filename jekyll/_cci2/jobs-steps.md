@@ -1,30 +1,22 @@
 ---
 layout: classic-docs
-title: "Orbs, Jobs, Steps, and Workflows"
-short-title: "Orbs, Jobs, Steps, and Workflows"
-description: "Description of Jobs and Steps"
-categories: [migration]
-order: 2
+title: "Jobs and Step"
+description: "Description of CircleCI jobs and steps."
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-The document provides an overview of orbs, jobs, steps and workflows.
+The document provides an overview of CircleCI jobs and steps.
 
 * TOC
 {:toc}
 
-## Orbs overview
-{: #orbs-overview }
-
-Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Orbs Concepts]({{ site.baseurl }}/2.0/orb-concepts/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
-
 ## Jobs overview
 {: #jobs-overview }
 
-Jobs are collections of steps. All of the steps in the job are executed in a single unit, either within a fresh container or VM.
+A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container or a virtual machine. Jobs are orchestrated using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 The following diagram illustrates how data flows between jobs:
 * Workspaces persist data between jobs in a single workflow.
@@ -33,89 +25,110 @@ The following diagram illustrates how data flows between jobs:
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-Jobs can be run using the `machine` (linux), macOS or Windows executors, or the `docker` executor, which can compose Docker containers to run your jobs and any services they require, such as databases.
+**Note**: The jobs names shown in this diagram are just examples, you can call your jobs whatever you want.
 
-When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start. Any public Docker images can be used with the `docker` executor.
+Jobs can be run in docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with linux, macOS or Windows images. Secondary containers or VMs can be configures to to attached services, such as databases, to run alongside your jobs.
+
+When using the Docker executor, images listed under the `docker:` key specifies the containers you want to start for your job. Any public Docker images can be used with the Docker executor but CircleCI provides convenience images for a variety of use-cases. For full lists of available convevience and VM images, see the [CircleCI Developer Hub](https://circleci.com/developer/images).
 
 See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for use cases and comparisons of the different executor types.
 
 ## Steps overview
 {: #steps-overview }
 
-Steps are a collection of executable commands which are run during a job, the `checkout:` key is required to checkout your code and a key for `run:` enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`,  `deploy:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps.
+Steps are a collection of executable commands which are run during a job. The `checkout:` key is required to checkout your code and the `run:` key enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps).
 
-## Sample configuration with imported orb
-{: #sample-configuration-with-imported-orb }
+## Passing parameters to jobs
+{: #passing-parameters-to-jobs }
 
-Find full details of the AWS S3 orb in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands-sync).
+Using parameters you can run a single job multiple times with different outcomes. An extension of this functionality is [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
 
-```yaml
+```yml
+version: 2.1
+​
+jobs:
+  print-a-message:
+    docker:
+      - image: cimg/base:2022.03
+    parameters:
+      message:
+        type: string
+    steps:
+      - run: echo << parameters.message >>
+​
+workflows:
+  my-workflow:
+    jobs:
+      - print-a-message:
+          message: Hello!
+```
+
+## Using a job from an orb
+{: #using-a-job-from-an-orb }
+
+Orbs are packages or reusable config that you can use in your project configuration. Orbs usually contain both commands that you can use in your jobs, and whole jobs that you can schedule in your workflows. Take the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example. This orb provides a job called [`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification) which you can ue in your workflows. This job pauses the workflow to require manual approval and send a slack notification. To use this job just reference it in your workflow (see line 10):
+
+```yml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@x.y.z #imports the s3 orb in the circleci namespace
-  # x.y.z should be replaced with the orb version you wish to use
-jobs:
-  deploy2s3:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - aws-s3/sync: #invokes the sync command declared in the s3 orb
-          from: .
-          to: "s3://mybucket_uri"
-          overwrite: true
+  slack: circleci/slack@4.1
 
 workflows:
-  build-test-deploy:
+  on-hold-example:
     jobs:
-      - deploy2s3
+      - my_test_job
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - my_test_job
+      - pause_workflow:
+          requires:
+            - my_test_job
+            - slack/on-hold
+          type: approval
+      - my_deploy_job:
+          requires:
+            - pause_workflow
 ```
 
-## Sample configuration with concurrent jobs
-{: #sample-configuration-with-concurrent-jobs }
+## Using a command from an orb in a job
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+Using the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example again, the orb includes a command called `notify`, to notify a specified slack channel. You can reference this command in your job as follows (see line 16):
 
-{% raw %}
-```yaml
-version: 2
+**Note**: This example also uses the [node orb](https://circleci.com/developer/orbs/orb/circleci/node).
+
+```yml
+version: 2.1
+
+orbs:
+  node: 'circleci/node:4.1'
+  slack: circleci/slack@4.1
 
 jobs:
-  build:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  deploy:
+    executor:
+      name: node/default
     steps:
       - checkout
-      - run: <command>
-  test:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: <command>
+      - node/install-packages
+      - run:
+          command: npm run deploy
+      - slack/notify:
+          channel: ABCXYZ
+          event: fail
+          template: basic_fail_1
+
 workflows:
-  version: 2
-  build_and_test:
+  deploy_and_notify:
     jobs:
-      - build
-      - test
+      - deploy:
+          context: slack-secrets
 ```
-{% endraw %}
-
-This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 
-## See also
-{: #see-also }
+## Next Steps
+{: #next-steps }
 
-- [Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-- [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+- Read more about orchestrating jobs in the [Using Workflows to Schedule Jobs ]({{ site.baseurl }}/2.0/workflows) page.
+- Read more about passing data between jobs in the [Using Workspaces to Share Data between Jobs ]({{ site.baseurl }}/2.0/workspaces) page.
