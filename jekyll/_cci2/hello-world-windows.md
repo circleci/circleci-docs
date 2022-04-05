@@ -355,10 +355,9 @@ jobs:
   build:
     executor:
       name: win/default
-      shell: powershell.exe
 ```
 
-Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using. We can also declare the default shell to be applied across future steps in the configuration. The default shell is `Powershell.exe`
+Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using. 
 
 ```yaml
     steps:
