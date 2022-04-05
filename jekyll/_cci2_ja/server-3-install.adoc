@@ -52,7 +52,7 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 
 === HTTP プロキシ経由でのインストール (オプション)
 
-プロキシ経由で CircleCI Server をインストールするには、上記の 2. で以下のコマンドを使用します (詳細はhttps://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
+プロキシ経由で CircleCI Server をインストールするには、上記の 2. で以下のコマンドを使用します (詳細は https://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
 
 ```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
@@ -61,7 +61,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
-詳細については、https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定]ガイドを参照してください。
+詳細については、 https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定]ガイドを参照してください。
 
 === フロントエンドの設定
 フロントエンドの設定により、 CircleCI システムの Web アプリケーション固有の側面が制御されます。
@@ -97,7 +97,7 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 **ACM TLS 証明書の使用**
 
-https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント]の ACM 証明書の生成方法に従ってください。
+https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント]の ACM 証明書の生成方法に従ってください。
 
 証明書を作成したら、フロントエンドセクションの KOTS コンソールで ACM を有効にしてください。 ACM のボックスにチェックを入れて、ACM ARN (Amazon Resource Name) を入力します。
 
