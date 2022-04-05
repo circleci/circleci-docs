@@ -1,7 +1,6 @@
 ---
 term: Authentication
 --- 
-Test test test
 
 Authentication of CircleCI projects using the hosted application is handled by
 GitHub, Bitbucket, or Google OAuth. Sessions last for 14 days. See the
