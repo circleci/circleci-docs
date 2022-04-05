@@ -22,11 +22,10 @@ function addNewBadgeToSidebar() {
 }
 
 function showHomePageBadges() {
-  const isGettingStartedPage =
-    window.location.pathname == '/docs/';
+  const isGettingStartedPage = window.location.pathname == '/docs/';
 
   if (isGettingStartedPage) {
-    $(".getting-started-experiment-badges").show();
+    $('.getting-started-experiment-badges').show();
   }
 }
 
