@@ -3,7 +3,7 @@
   display: flex;
   padding: 0 12px;
   border: 1px solid #efefef;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-right: 8px;
 
   .external-link-tag-wrapper {
@@ -15,6 +15,7 @@
    display: flex;
    align-items: center;
    color: #212121;
+   text-decoration: none;
    &:hover {
      color: #212121;
    }

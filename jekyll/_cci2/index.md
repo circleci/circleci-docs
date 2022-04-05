@@ -8,7 +8,7 @@ toc: false
 page-type: index
 ---
 
-Use the tutorials, samples, how-to, and reference documentation to learn CircleCI. here
+Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
 
 
 <!--Do not translate: Experiment Code for https://circleci.atlassian.net/browse/DD-455 -->
