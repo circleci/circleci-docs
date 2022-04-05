@@ -232,7 +232,7 @@ module "nomad" {
   enable_workload_identity  = var.enable_workload_identity
   k8s_namespace             = var.k8s_namespace
 
-  unsafe_disable_mtls    = true
+  unsafe_disable_mtls    = false
   assign_public_ip       = true
   preemptible            = true
   target_cpu_utilization = 0.50
