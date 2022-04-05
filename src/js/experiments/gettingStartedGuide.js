@@ -21,6 +21,14 @@ function addNewBadgeToSidebar() {
   $("li > a[href='/docs/2.0/getting-started/']").replaceWith(NEW_SIDEBAR_HTML);
 }
 
+function showHomePageBadges() {
+  const isGettingStartedPage = window.location.pathname == '/docs/';
+
+  if (isGettingStartedPage) {
+    $('.getting-started-experiment-badges').show();
+  }
+}
+
 // NOTE: experimentContainer can be updated once we have the other components of this experiment created and in place
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_getting_started_docs_test',
@@ -30,6 +38,7 @@ window.OptimizelyClient.getVariationName({
 }).then((variation) => {
   if (variation === 'treatment') {
     addNewBadgeToSidebar();
+    showHomePageBadges();
     // console.log('IN TREATMENT GROUP');
   }
   if (variation === 'control') {
