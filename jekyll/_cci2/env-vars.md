@@ -329,7 +329,7 @@ jobs:
 
 1. On the CircleCI web app, go to your organization settings by clicking the link in the left hand navigation.
 
-    ![Contexts]({{site.baseurl}}/assets/img/docs/org-settings-contexts.png)
+    ![Contexts]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
 2. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
 3. Click Add Environment Variable and enter a name and value.
@@ -366,7 +366,7 @@ Creating a context allows you to share environment variables across multiple pro
 
 1. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipses button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
 
-    ![Environment Variables]({{site.baseurl}}/assets/img/docs/project-settings-env-var.png)
+    ![Environment Variables]({{site.baseurl}}/assets/img/docs/project-settings-env-var-v2.png)
 
 2. Click on **Environment Variables** in the side navigation.
 3. Click the **Add Variable** button to enter a name and value of the new environment variable.
