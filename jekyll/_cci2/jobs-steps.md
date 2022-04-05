@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Jobs and Step"
+title: "Jobs and Steps"
 description: "Description of CircleCI jobs and steps."
 version:
 - Cloud
