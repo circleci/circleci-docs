@@ -90,7 +90,7 @@ CircleCI と連携済みの組織やリポジトリの名称を変更する必�
 
 **注:** この手順を実行しないと、**環境変数**や**コンテキスト**などの組織またはリポジトリの設定にアクセスできなくなる可能性があります。
 
-### Bitbucket 個人組織
+### Bitbucket 個人利用の組織
 {: #bitbucket-personal-orgs }
 
 CircleCI は個人およびデフォルトの組織と VCS ユーザー名が一致することを想定しています。 Bitbucket では現在ユーザー名と異なる名前にパーソナルワークスペースの名前を変更することができますが、CircleCI では対応していません。 CircleCI を使って個人ワークスペースでプロジェクトをビルドしている場合は、ワークスペースの名前がユーザー名と一致していることを確認してください。
@@ -154,11 +154,11 @@ Permission denied (publickey).
 
 CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](http://developer.github.com/v3/oauth/#scopes)や [Bitbucket の権限モデル](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes)で定義されている以下の権限を要求します。
 
-**読み取り権限**
+**読み取りアクセス許可 **
 
 - ユーザーのメールアドレスを取得する
 
-**書き込み権限**
+**書き込みアクセス許可**
 
 - ユーザーのリポジトリリストを取得する
 - ユーザーアカウントへの SSH キーの追加
@@ -168,7 +168,7 @@ CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](
 - デプロイキーのリポジトリへの追加
 - サービスフックのレポジトリへの追加
 
-**注:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、 GitHub から全ユーザーのリポジトリ (公開・非公開の両方) の一覧を GitHub から取得する際には、 [`repo` スコープ](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes) の権限が必要で、これは書き込み権限に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
+**注:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、 GitHub から全ユーザーのリポジトリ (公開・非公開の両方) の一覧を GitHub から取得する際には、 [`repo` スコープ](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes) の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
 
 CircleCI が使用する権限の数をどうしても減らしたい場合は、VCS プロバイダーに連絡して、その旨を伝えてください。
 
@@ -220,11 +220,11 @@ CircleCI がビルドを実行している組織でこの制限を有効にす�
 
 新しいプロジェクトを追加すると、CircleCI は Web ベースの VCS (GitHub や Bitbucket) 上にそのプロジェクト用のデプロイキーを作成します。 デプロイキーは、リポジトリ固有の SSH キーです。 VCS として GitHub を使用している場合、GitHub にパブリックキーを持たせ、CircleCI にプライベートキーを格納します。 デプロイキーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイキーを読み取り専用に設定します。
 
-ビルドからリポジトリにプッシュするには、書き込みアクセス権のあるデプロイキーが必要です。 デプロイキーの作成手順は、VCS によって異なります。 GitHub 固有の手順については以下を参照してください。
+ビルドからリポジトリにプッシュするには、書き込みアクセス権のあるデプロイキーが必要です。 書き込みアクセス権のあるデプロイキーの作成手順は、VCS によって異なります。 GitHub 固有の手順については以下を参照してください。
 
 **ユーザーキーとは**
 
-ユーザーキーは、ユーザーに固有の SSH キーです。 VCS に公開鍵を持たせ、CircleCI に秘密鍵を格納します。 秘密鍵を持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+ユーザーキーは、ユーザーに固有の SSH キーです。 VCS にパブリックキーを持たせ、CircleCI にプライベートキーを格納します。 プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
 
 ### GitHub のデプロイキーの作成
 {: #creating-a-github-deploy-key }
@@ -263,13 +263,13 @@ jobs:
 
 2. **SSH Keys** のページに移動し、**User Key** までスクロールダウンします。
 
-3. **Add User Key** ボタンを右クリックし、**Inspect**オプションを選択し、Web ブラウザーの検証ツールを起動します。 ![]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
+3. **Add User Key** ボタンを右クリックし、**Inspect**オプションを選択し、Web ブラウザーの検証ツールを起動します。 ![プロジェクト設定のユーザーキー追加ボタン]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
 
 4. ブラウザーの検証ツールで、**Network** タブを選択し、コンソールをクリアします。
 
-5. **Add User Key** をクリックし、**Confirm User** をクリックし、このモーダルでユーザーがマシンユーザーであることを確認します。 _必須ではありませんが、マシンユーザーを作成することを強く推奨します_。 ![]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
+5. **Add User Key** をクリックし、**Confirm User** をクリックし、このモーダルでユーザーがマシンユーザーであることを確認します。 _必須ではありませんが、マシンユーザーを作成することを強く推奨します_。 ![マシンユーザーモーダル]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
 
-6. フィルターボックスで、checkout と入力します。 これにより、`checkout-key` を見つけることができます。 ステータス 201 の `checkout-key` をクリックし、**Preview** タブを選択します。  `public_key` をクリップボードにコピーします。 ![]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
+6. フィルターボックスで、checkout と入力します。 これにより、`checkout-key` を見つけることができます。 ステータス 201 の `checkout-key` をクリックし、**Preview** タブを選択します。  `public_key` をクリップボードにコピーします。 ![パブリックキーを探す]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
 
 7. Bitbucket の [SSH キーの設定方法](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/)の説明に従って、Bitbucket にキーを追加します。
 
