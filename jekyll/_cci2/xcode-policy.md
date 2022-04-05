@@ -47,7 +47,7 @@ Xcode 11 | All images except for the final release will be flagged for deprecati
 Xcode 10 | Flagged for deprecation, removed when Xcode 14 reaches GM
 {: class="table table-striped"}
 
-When an image is selected for deprecation and removal, we will create an announcement on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will always aim to provide four weeks notice.
+When an image is selected for deprecation and removal, we will create an announcement on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will always aim to provide four weeks' notice.
 
 We will never automatically redirect requests for images to different `major.minor` versions, so when one of these images is removed, jobs will start to fail if the `.circleci/config.yml` has not been updated.
 
