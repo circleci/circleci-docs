@@ -126,6 +126,7 @@ jobs:
 ```
 
 Note that in order to use the Windows Server 2022 image in CircleCI cloud, it must be specified as the `executor`, as shown in the following:
+{: class="alert alert-info"}
 
 ```
 version: 2.1
