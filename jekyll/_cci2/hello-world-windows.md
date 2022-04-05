@@ -67,7 +67,7 @@ Please note that it is possible to run Windows Docker Containers on the Windows 
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1
 
 jobs:
   build:
@@ -144,7 +144,7 @@ Get started with Windows on CircleCI with the following configuration snippet th
 version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -207,7 +207,7 @@ You can configure the shell at the job level or at the step level. It is possibl
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1
 
 jobs:
   build:
@@ -279,7 +279,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1
 
 jobs:
   build:
