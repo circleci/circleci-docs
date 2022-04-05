@@ -3,9 +3,11 @@
 -->
 
 <div class="include-badge">
-  <img class="icon" src="{{include.icon}}" />
-  <div class="name"> {{include.name}}</div>
-  {% if include.new %}
-  <div class="is-new">NEW</div>
-  {% endif %}
+  <a class="wrapper-link" href="{{include.link}}">
+    <img class="icon" src="{{include.icon}}" />
+    <div class="name" >{{include.name}}</div>
+    {% if include.new %}
+    <div class="is-new">NEW</div>
+    {% endif %}
+  </a>
 </div>

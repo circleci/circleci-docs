@@ -10,23 +10,28 @@ page-type: index
 
 Use the tutorials, samples, how-to, and reference documentation to learn CircleCI. here
 
-<hr class="hidden-xs" />
-
 
 <!--Do not translate: Experiment Code for https://circleci.atlassian.net/browse/DD-455 -->
+<!-- we need to use "capture" because we can't use `{{site.baseurl}}` in includes. -->
+{% capture nodeLink %}{{site.baseurl}}/2.0/language-javascript{% endcapture %}
 {% capture nodeLogo %}{{site.baseurl}}/assets/img/compass/nodejs.svg{% endcapture %}
+{% capture cciLink %}{{site.baseurl}}/2.0/getting-started{% endcapture %}
 {% capture cciLogo %}{{site.baseurl}}/assets/img/compass/circle-logo.svg{% endcapture %}
+{% capture pyLink %}{{site.baseurl}}/2.0/language-python{% endcapture %}
 {% capture pyLogo %}{{site.baseurl}}/assets/img/compass/python.svg{% endcapture %}
+{% capture dotLink %}{{site.baseurl}}/2.0/tutorials{% endcapture %}
 {% capture dotLogo %}{{site.baseurl}}/assets/img/compass/more.svg{% endcapture %}
 
-<div class="">
-  <div class="flex mb-2">
-      {% include badge.html name="Quickstart Guide" icon=cciLogo new=true %}
-      {% include badge.html name="Node" icon=nodeLogo %}
+<div class="getting-started-experiment-badges">
+  <h2> Example and Guides</h2>
+    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/tutorials/">guides</a> or explore a sample app.</p>
+    <div class="flex mb-2">
+      {% include badge.html name="Quickstart Guide" icon=cciLogo new=true  link=cciLink%}
+      {% include badge.html name="Node" icon=nodeLogo  link=nodeLink%}
   </div>
   <div class="flex">
-      {% include badge.html name="Python" icon=pyLogo %}
-      {% include badge.html name="All guides" icon=dotLogo %}
+      {% include badge.html name="Python" icon=pyLogo link=pyLink %}
+      {% include badge.html name="All guides" icon=dotLogo link=dotLink %}
   </div>
 </div>
 <!-- End: Experiment code. -->

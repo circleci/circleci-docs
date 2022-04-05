@@ -2,9 +2,25 @@
   width: 100%;
   display: flex;
   padding: 0 12px;
-  align-items: center;
   border: 1px solid #efefef;
   margin-right: 8px;
+
+  .external-link-tag-wrapper {
+    width: 100%;
+  }
+
+ .wrapper-link {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   color: #555;
+   &:hover {
+     color: #555;
+   }
+ }
+  &:hover {
+    background-color: #f7f7f7;
+  }
 
   .icon {
     width: 32px;
@@ -24,4 +40,9 @@
   .is-new {
     @include cta-badge;
   }
+}
+
+.getting-started-experiment-badges {
+  display: none;
+  margin-bottom: 24px;
 }
