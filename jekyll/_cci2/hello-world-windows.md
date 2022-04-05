@@ -125,6 +125,22 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
+Note that in order to use the Windows Server 2022 image in CircleCI cloud, it must be specified as the `executor`, as shown in the following:
+
+```
+version: 2.1
+orbs:
+  win: circleci/windows@4.1
+jobs:
+  build:
+    executor: win/server-2022
+    steps:
+      - run: Write-Host 'Hello, Windows'
+workflows:
+  my-workflow:
+    jobs:
+      - build
+```
 
 ## Known issues
 {: #known-issues }
