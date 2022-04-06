@@ -19,84 +19,87 @@ version:
 ## Airtable をセットアップする
 {: #get-setup-in-airtable }
 
-### 1. Airtable で新しい "ベース"  を作成します。
+### 1. Airtable で新しい "base"  を作成します。
 {: #create-a-new-base-on-airtable }
 
-Airtable にログインし、新しいベースを作成します。
+Airtable にログインし、新しい "Base" を作成します。
 
 ![Creating a new base in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_1_new.png)
 
-### 2. テーブルとコラムのデータタイプを設定します。
+### 2. テーブルと列のデータタイプを設定します。
 {: #set-table-and-column-data-types }
 
-By default, your new "Grid view" will be named "Table 1" and will show several pre-defined columns, each with a different data type. We will replace these columns with what data we want to receive from CircleCI about our Project.
+デフォルトでは、新しい 「Grid view」が 「Table 1」という名前になり、事前定義された複数の列がそれぞれ異なるデータタイプで表示されます。 CircleCI では、これらの列を CircleCI から受け取るプロジェクトに関するデータに置き換えます。
 
-Most of our data will simply be "A single text line", but some values can use types like "date". For our example, remove the existing columns and enter the following three columns as "A single text line".
+CircleCI データの多くは、「A single text line (一行のテキスト)」になりますが、 「date」などのデータタイプを使用する値もあります。 この例では、既存の列を削除し、以下の３列を「A single text line」として挿入します。
 
 - ID
 - Job Name
-- ステータス
+- Status
 
-Finally, add one last column, but this time use the "date" data type:
+最後に列を１列追加します。ここでは「date」のデータタイプを使用します。
 
 - Happened At
 
 ![Changing the column types]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_2_datatypes.png)
 
-### 3. Prepare the webhook Automation
+### 3. Webhook の自動化の準備をします。
 {: #prepare-the-webhook-automation }
 
-In the top-right of Airtable, select the "Automations" button to open the right-side Automations panel, and select "Create a custom automation".
+Airtable の右上で、 [Automations] ボタンを選択し、右側の [Automations] パネルを開き、[Create a custom automation] を選択します。
 
 
 ![Open Automations]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_3_automation.png)
 
-The next screen will ask you to select a "trigger" to the automation. Select the option "When webhook received", and you will see the following screen which contains our Airtable webhook URL.
+次の画面で自動化の「trigger」を選択するよう求められます。 「When webhook received」を選択すると、CircleCI の Airtable Webhook URL が書かれた下記の画面が表示されます。
 
-Copy the webhook URL here to your clipboard.
+その Webhook URL をクリップボードにコピーします。
 
-![Get webhook link]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_4.png)
+![Get webhook link]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_4.png
+)
 
-### 4. Connect to CircleCI
+### 4. CircleCI に接続します。
 {: #connect-to-circleci }
 
-With our webhook URL from Airtable in hand, we can now setup our webhooks for CircleCI. Begin by opening up the project settings for the repository you want to monitor on CircleCI, and select "Webhooks" from the side panel.
+CircleCI の Airtable Webhook URL を入手したら、CircleCI 用の Webhook をセットアップできるようになります。 まず CircleCI で監視するリポジトリのプロジェクト設定を開き、サイドパネルから「Webhooks」を選択します。
 
-![Setup webhooks on circleci]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_5.png)
+![Setup webhooks on circleci]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_5.png
+)
 
-Click "Add Webhook" and enter a name for the webhook, the webhook URL we copied earlier, and select the "Job Completed" event, before saving by pressing "Add Webhook" again.
+[Add Webhook] をクリックして、Webhook 名 (先程コピーした Webhook URL ) を入力し、 再度 [AddWebhook] をクリックして保存する前に、[Job Completed] イベントを選択します。
 
 ![Entering details for a webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
 
-### 5. Trigger a test webhook
+### 5. テスト Webhook をトリガーします。
 {: #trigger-a-test-webhook }
 
-Now that our webhooks are configured, we want to trigger a CircleCI pipeline before going back to Airtable so that Airtable can see what kind of data we will be sending. View your project’s pipeline on CircleCI on any branch we can use for testing and click the "Run Pipeline" button:
+これで Webhook が設定されました。Airtable に戻る前に、CircleCI パイプラインをトリガーして CircleCI が送信するデータの種類を Airtable が分かるようにします。 CircleCI で、テストに使用できる任意のブランチでプロジェクトのパイプラインを表示し、[Run Piprline] ボタンをクリックします。
 
 ![Trigger a test webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_7_run_pipeline.png)
 
-Once the pipeline has completed the first test webhook should have been sent and we can validate this in Airtable. At the bottom of the webhook trigger config screen, press the "test" button and await for the webhook data to populate.
+パイプラインが完了すると、最初のテストの Webhook が送信され、Airtable で検証することができます。 Webhookトリガー設定画面の一番下で、[test] ボタンを押して、Webhook データが入力されるまで待ちます。
 
 ![Validate results in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_8_test.png)
 
-When you have received the data successfully, you may click "Done" and move on to creating an Action for the Trigger.
+データが正常に受信されたら、[Done] をクリックし、トリガーのアクションを作成します。
 
-### 6. Setup the Action for our webhook Trigger
+### 6. Webhook トリガーのアクションのセットアップ
 {: #setup-the-action-for-our-webhook-trigger }
 
-For the Action Type, select from the drop-down "Create record", and select your Table.
+「Action Type」には、ドロップダウンから [Create record] を選択し、テーブルを選択します。
 
-![Create action in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_9_action.png)
+![Create action in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_9_action.png
+)
 
-Next, click "Choose field" and map each column of our table to the corresponding webhook data.
+次に、[Choose field] をクリックし、テーブルの各列を対応する Webhook データにマッピングします。
 
 ![Map columns of table to webhook data]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_10_fields.png)
 
-Finally, click "Run test" to populate your first row.
+最後に [Run test] をクリックして最初の列を挿入します。
 
 ![Run airtable test]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_11_done.png)
 
-7. Done! Now, as jobs complete for your pipeline new data will be entered into Airtable. Airtable has both free and premium features for creating different views of your data. Your data can be cross-referenced with other tables, used in calculations, and more.
+7. 完了です！ パイプラインのジョブが完了すると、Airtable に新しいデータが入力されます。 Airtable has both free and premium features for creating different views of your data. Your data can be cross-referenced with other tables, used in calculations, and more.
 
 ### Tracking Deployments With Airtable
 {: #tracking-deployments-with-airtable }
