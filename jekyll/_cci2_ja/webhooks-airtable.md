@@ -1,32 +1,32 @@
 ---
 layout: classic-docs
-title: "CircleCI webhooks with Airtable"
-short-title: "Example webhooks use-case with webhooks"
-description: "Example webhooks use-case with webhooks"
+title: "Airtable を使った CircleCI Webhook"
+short-title: "Webhook を使った例"
+description: "Webhook を使った例"
 version:
-  - Cloud
+  - クラウド
 ---
 
-This document describes how you might use webhooks with a third party application - in this case, we are using [Airtable](https://airtable.com/) to demonstrate how one could capture and visualize the output of your pipelines.
+このドキュメントでは、サードパーティのアプリケーションを使って Webhook を使用する方法を説明します。今回は [Airtable](https://airtable.com/) を使って、パイプラインの出力をキャプチャし可視化する方法を説明します。
 
 **前提条件**
 
-- An account with CircleCI, with webhooks enabled (webhooks are currently in preview and may not yet be available.)
-- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks).
-- An Airtable account, if you wish to follow along.
+- Webhook を有効化した CircleCI のアカウント (Webhook は現在プレビュー段階であり、使用できない場合があります)。
+- [CircleCI での Webhook]({{site.baseurl}}/2.0/webhooks) 使用経験
+- Airtable のアカウント (下記例を使う場合)
 
 
-## Get setup in Airtable
+## Airtable をセットアップする
 {: #get-setup-in-airtable }
 
-### 1. Create a new "Base" on Airtable
+### 1. Airtable で新しい "ベース"  を作成します。
 {: #create-a-new-base-on-airtable }
 
-Log into Airtable and create a new "Base".
+Airtable にログインし、新しいベースを作成します。
 
 ![Creating a new base in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_1_new.png)
 
-### 2. Set table and column data types
+### 2. テーブルとコラムのデータタイプを設定します。
 {: #set-table-and-column-data-types }
 
 By default, your new "Grid view" will be named "Table 1" and will show several pre-defined columns, each with a different data type. We will replace these columns with what data we want to receive from CircleCI about our Project.
