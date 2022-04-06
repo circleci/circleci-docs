@@ -199,7 +199,7 @@ workflows:
 
 Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
-You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/ja/2.0/persist-data/#managing-network-and-storage-use) page.
 
 ## ワークスペースの最適化
 {: #workspace-usage-optimization }
@@ -218,7 +218,7 @@ You can customize storage usage retention periods for workspaces on the [CircleC
 {: #see-also }
 {:.no_toc}
 
-- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/2.0/workflows)を参照して下さい。
+- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)を参照して下さい。
 - [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
 - [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
 - [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)

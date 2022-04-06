@@ -136,7 +136,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 You can either visit the CircleCI application and click on "Projects" in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/, where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the list and click Set Up Project. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. この例では、 `config.yml` には以下の内容が含まれます。
 
     ```yaml
-    # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/2.0/configuration-reference
+    # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/ja/2.0/configuration-reference
     version: 2.1
     # Orb という設定パッケージを使用します。
     orbs:
@@ -301,7 +301,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 
 `project_slug` は、プロジェクトの情報をプルする際のペイロードに含まれ、特定のプロジェクトの詳細な情報を取得することができます。
 
-**注意:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト](https://circleci.com/docs/2.0/projects/) のページを参照してください。
+**注意:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト](https://circleci.com/docs/ja/2.0/projects/) のページを参照してください。
 
 #### 手順
 {: #steps }
@@ -422,7 +422,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 ### アーティファクトのダウンロード
 {: #download-artifacts }
 
-下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
+下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド](https://circleci.com/docs/ja/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
 
 #### 手順
 {: #steps }
@@ -672,5 +672,5 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 ## 参考情報
 {: #reference }
 
-- CircleCI V2 API に関する詳細情報は、[API V2 の概要]({{site.baseurl}}/2.0/api-intro/) をご覧ください。
+- CircleCI V2 API に関する詳細情報は、[API V2 の概要]({{site.baseurl}}/ja/2.0/api-intro/) をご覧ください。
 - CircleCI V2 API を構成するすべてのエンドポイントの詳細なリストは、[API V2 リファレンスガイド]({{site.baseurl}}/api/v2/)をご覧ください。

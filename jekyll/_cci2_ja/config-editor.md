@@ -7,7 +7,7 @@ version:
   - Server v3.x
 ---
 
-The CircleCI config editor is provided so you can modify your configuration files without the use of the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer experience by giving you the ability to modify your CI/CD processes in a more unified fashion.
+The CircleCI config editor is provided so you can modify your configuration files without the use of the [CircleCI CLI]({{ site.baseurl }}/ja/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer experience by giving you the ability to modify your CI/CD processes in a more unified fashion.
 
 ![設定ファイル エディター]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
 
@@ -72,5 +72,5 @@ CircleCI アプリの **[All Pipelines (すべてのパイプライン)]** ビ�
 ## 関連項目
 {: #see-also }
 
-- [CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
-- [CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli)
+- [CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+- [CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli)

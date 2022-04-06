@@ -39,7 +39,7 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
 - 角括弧のエスケープ (`-d build_parameters\[CIRCLE_JOB\]=deploy_docker`)
 
 この例には以下の変数が使用されているためご注意ください。
-- `CIRCLE_API_USER_TOKEN` は、[パーソナル API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
+- `CIRCLE_API_USER_TOKEN` は、[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
 - `<vcs-type>`は、 選択された VCS (`github` または `bitbucket`) を示すプレースホルダー変数です。
 - `<org>` は、プレースホルダー変数で、 CircleCIの組織名を指します。
 - `<repo>`は、プレースホルダー変数で、レポジトリ名を指します。
@@ -54,7 +54,7 @@ API の関連情報については、[CircleCI API ドキュメント](https://c
 - API によってトリガーされたジョブは、特定の [CircleCI コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)用に作成された環境変数にアクセス**できません**。
 - 環境変数を使用する場合は、それらの環境変数が[プロジェクトレベル]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)で定義されている必要があります。
 - 現在のところ、CircleCI 2.1 とワークフローを使用する場合には、単一のジョブをトリガーすることができません。
-- CircleCI APIを使って、[ワークフロー]({{ site.baseurl }}/2.0/workflows/) をトリガーすることが可能です。[単一のワークフローを再実行することも](https://circleci.com/docs/api/v2/#rerun-a-workflow)、 [パイプラインをトリガーして](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline)後続のワークフローを実行することも可能です。
+- CircleCI APIを使って、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/) をトリガーすることが可能です。[単一のワークフローを再実行することも](https://circleci.com/docs/api/v2/#rerun-a-workflow)、 [パイプラインをトリガーして](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline)後続のワークフローを実行することも可能です。
 
 ## API を使用したジョブの条件付き実行
 {: #conditionally-running-jobs-with-the-api }
@@ -111,4 +111,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[トリガー]({{ site.baseurl }}/2.0/triggers/)
+[トリガー]({{ site.baseurl }}/ja/2.0/triggers/)

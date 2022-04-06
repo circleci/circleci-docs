@@ -44,16 +44,16 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 ### Executor
 {: #executors }
 
-Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
+Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
 
-`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ](https://circleci.com/docs/2.0/custom-images/)を参照して下さい。
+`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ](https://circleci.com/docs/ja/2.0/custom-images/)を参照して下さい。
 
-使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor](https://circleci.com/docs/2.0/executor-types/#using-macos) または [Machine Executor](https://circleci.com/docs/2.0/executor-types/#using-machine) が必要な場合があります。
+使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-macos) または [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) が必要な場合があります。
 
 ### ワークフロー
 {: #workflows }
 
-[CircleCI ワークフロー](https://circleci.com/docs/2.0/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド](https://circleci.com/docs/2.0/configuration-reference/#triggers)は転送しません。
+[CircleCI ワークフロー](https://circleci.com/docs/ja/2.0/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド](https://circleci.com/docs/ja/2.0/configuration-reference/#triggers)は転送しません。
 
 ### ジョブ
 {: #jobs }
@@ -63,7 +63,7 @@ CircleCI ジョブの多くの設定オプションには、相当する Jenkins
 - [コードのチェックアウト](https://circleci.com/docs/ja/2.0/configuration-reference/#checkout)
 - [リソースクラス](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class)
 - [並列実行](https://circleci.com/docs/ja/2.0/configuration-reference/#parallelism)
-- キャッシュの[保存](https://circleci.com/docs/2.0/configuration-reference/#save_cache)と[リストア](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
+- キャッシュの[保存](https://circleci.com/docs/ja/2.0/configuration-reference/#save_cache)と[リストア](https://circleci.com/docs/ja/2.0/configuration-reference/#restore_cache)
 - [アーティファクトの保存](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 
 ### 手順
@@ -79,7 +79,7 @@ Jenkinsfile のコンバーターはステップを直接変換しようとし�
 | Jenkinsfile 構文 | 近似する CircleCI 構文                                                                                    | ステータス                                                                                 |
 | -------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | agent          | [Executor](https://circleci.com/docs/ja/2.0/configuration-reference/#executors-requires-version-21) | 静的                                                                                    |
-| post           | [when 属性](https://circleci.com/docs/ja/2.0/configuration-reference/#the-when-attribute)             | [when](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) を参照 |
+| post           | [when 属性](https://circleci.com/docs/ja/2.0/configuration-reference/#the-when-attribute)             | [when](https://circleci.com/docs/ja/2.0/configuration-reference/#the-when-attribute) を参照 |
 | stage          | [workflow](https://circleci.com/docs/ja/2.0/workflows/)                                             | サポート                                                                                  |
 | step           | [step](https://circleci.com/docs/ja/2.0/jobs-steps/#steps-overview)                                 | 制限付き                                                                                  |
 | environment    | [environment](https://circleci.com/docs/ja/2.0/env-vars/)                                           | [非サポート](https://github.com/circleci/jenkinsfile-converter/issues/26)                  |
