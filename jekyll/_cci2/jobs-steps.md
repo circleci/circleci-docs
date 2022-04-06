@@ -27,7 +27,7 @@ The following diagram illustrates how data flows between jobs:
 
 **Note**: The job names shown in this diagram are just examples, you can name your jobs whatever you want.
 
-Jobs can be run in docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with linux, macOS or Windows images. Secondary containers or VMs can be configures to to attached services, such as databases, to run alongside your jobs.
+Jobs can be run in docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with linux, macOS or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
 
 When using the Docker executor, images listed under the `docker:` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. For full lists of available convenience and VM images, see the [CircleCI Developer Hub](https://circleci.com/developer/images).
 
