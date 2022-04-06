@@ -364,7 +364,7 @@ Creating a context allows you to share environment variables across multiple pro
 ## Setting an environment variable in a project
 {: #setting-an-environment-variable-in-a-project }
 
-1. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipses button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
+1. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
 
     ![Environment Variables]({{site.baseurl}}/assets/img/docs/project-settings-env-var-v2.png)
 
