@@ -99,7 +99,7 @@ CircleCI の Airtable Webhook URL を入手したら、CircleCI 用の Webhook �
 
 ![Run airtable test]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_11_done.png)
 
-7. 完了です！ パイプラインのジョブが完了すると、Airtable に新しいデータが入力されます。 Airtable has both free and premium features for creating different views of your data. Your data can be cross-referenced with other tables, used in calculations, and more.
+7. 完了です！ パイプラインのジョブが完了すると、Airtable に新しいデータが入力されます。 Airtable には、データの様々な表示形式の作成に対する Free 機能と Premium 機能があります。 データは、他のテーブルと相互参照したり、計算等に使用することができます。
 
 ### Tracking Deployments With Airtable
 {: #tracking-deployments-with-airtable }
