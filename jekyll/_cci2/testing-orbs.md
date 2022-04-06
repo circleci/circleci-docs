@@ -243,7 +243,7 @@ Remember that you can have multiple jobs for testing commands if desired, or if 
 
 Testing the jobs within our orbs is very similar to testing commands, however there are a few additional restrictions to consider.
 
-First, in your `test-deploy` workflow, you will see, just as we mentioned with testing commands above, there is ultimately an `orb-tools/publish` job which requires every job before it in the workflow. To test the jobs of our orb, we simply need to add them to this workflow and ensure they are required in the `orb-tools/publish` job.
+First, in your `test-deploy` workflow, you will see, just as we mentioned with testing commands above, there is ultimately an `orb-tools/publish` job which requires every job before it in the workflow to have completed. To test the jobs of your orb, you need to add them to this workflow and ensure they are required in the `orb-tools/publish` job.
 
 Here is an example from CircleCI's [AWS ECR orb](https://github.com/CircleCI-Public/aws-ecr-orb/blob/0c27bfab932b60f1c60a4c2e74bee114f8d4b795/.circleci/test-deploy.yml#L40)
 
