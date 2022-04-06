@@ -37,7 +37,7 @@ See the full [config.yml template here](https://github.com/CircleCI-Public/Orb-T
 ### test-deploy.yml
 {: #test-deployyml }
 
-This second configuration file has two main tasks, as the development version of the orb has been published in the previous config, we may now _directly_ test our orb with integration testing, and in the event that a tag is created, this config will also publish the orb to the CircleCI registry.
+This second configuration file has two main tasks, as the development version of the orb has been published in the previous config, you may now _directly_ test your orb with integration testing, and in the event that a tag is created, this config will also publish the orb to the CircleCI orb registry.
 
 See the full [test-deploy.yml template here](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml).
 
