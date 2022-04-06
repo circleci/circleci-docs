@@ -84,7 +84,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 | string
 | query
 | false
-| filters the list of sef-hosted runners by specific resource class.
+| filters the list of self-hosted runners by specific resource class.
 
 | namespace
 | string
