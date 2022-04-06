@@ -17,20 +17,21 @@ toc::[]
 == Overview
 _Backup and restore is available for server v3.1.0 and up._
 
-While operating and administering CircleCI server, you will consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+While operating and administering CircleCI server, you will need to consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+
 This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 
-CircleCI server is administered via https://kots.io/[KOTS], which uses https://velero.io/[Velero] for backup and restore.
-The benefit of this approach is that it not only restores your application's data,
+CircleCI server is administered via https://kots.io/[KOTS], which uses https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
 but it also restores the state of the Kubernetes cluster and its resources at the time of the backup.
-In this way, we can also restore admin-console configurations and customizations you made to your cluster. 
+This means you can also restore Admin Console configurations and customizations you made to your cluster. 
 
 NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
 
-== The setup
+== The Setup
 
-Backups of CircleCI server can be created quite easily through https://kots.io/[KOTS].
-However, to enable backup support you will need to install and configure https://velero.io/[Velero] on your cluster.
+Backups of CircleCI server can be created through https://kots.io/[KOTS].
+However, to enable backup support you need to install and configure https://velero.io/[Velero] on your cluster.
+
 The following sections outline the steps needed to install Velero on your cluster.
 
 === Prerequisites
@@ -51,7 +52,7 @@ Below, you will find instructions for creating a server 3.x backup on AWS and GC
 
 ==== S3 Compatible Storage Prerequisites
 
-- https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] is installed and configured for your storage provider.
+- https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] is installed and configured for your storage provider.
 
 ////
 
@@ -60,7 +61,7 @@ Below, you will find instructions for creating a server 3.x backup on AWS and GC
 ////
 == Server 3.x backups on AWS
 
-The following steps will assume AWS as your provider and you have met the <<prerequisites, prerequisites>> listed above.
+The following steps assume AWS as your provider and that you have met the <<prerequisites, prerequisites>> listed above.
 
 These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
 
@@ -174,7 +175,7 @@ where the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are value
 
 === Step 3 - Install and start Velero
 
-* Run the following `velero` `install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
+* Run the following `velero` `install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
 NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
@@ -219,7 +220,7 @@ The following steps are specific for Google Cloud Platform and it is assumed you
 These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
 
 === Step 1 - Create a GCP bucket
-To reduce the risk of typos, we will set some of the parameters as shell variables. If you are unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, we will define a variable for your bucket name. Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
+To reduce the risk of typos, set some of the parameters as shell variables. If you are unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, you will define a variable for your bucket name. Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
 
 [source,bash]
 ----
@@ -230,10 +231,9 @@ gsutil mb gs://$BUCKET/
 
 === Step 2 - Setup permissions for Velero
 
-If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be
-created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
 
-. First, we will set a shell variable for your project ID. To do so, first make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
+. First, set a shell variable for your project ID. To do so, first make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
 +
 [source,bash]
 ----
@@ -256,7 +256,7 @@ gcloud iam service-accounts create velero \
 ----
 NOTE: If you run several clusters with Velero, you might want to consider using a more specific name for the Service Account besides `velero`, as suggested in the example above.
 
-. You can check if the service account has been created successfully by running:
+. You can check if the service account has been created successfully by running the following command:
 +
 [source,bash]
 ----
@@ -304,7 +304,7 @@ Now, you need to ensure that Velero can use this Service Account.
 
 ==== Option 1: JSON key file
 
-You can simply pass a JSON credentials file to Velero to authorize it to perform actions as the Service Account. To do this, we first need to create a key:
+You can simply pass a JSON credentials file to Velero to authorize it to perform actions as the Service Account. To do this, you first need to create a key:
 [source,bash]
 ----
 gcloud iam service-accounts keys create credentials-velero \
@@ -314,15 +314,14 @@ After running this command, you should see a file named `credentials-velero` in 
 
 ==== Option 2: Workload Identities
 
-If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] in your cluster, you can bind
-the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account will need the
+If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account needs the
 `iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
 
 === Step 3 - Install and start Velero
 
-* Run one of the following `velero` `install` commands, depending on how you authorized the service account. This will create a namespace called `velero` and install all the necessary resources to run Velero.
+* Run one of the following `velero` `install` commands, depending on how you authorized the service account. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 
-NOTE: kots backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
+NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
 
 ==== If using a JSON key file
 
@@ -376,7 +375,7 @@ As restic is a daemonset, there should be one pod for each node in your Kubernet
 ////
 == Server 3.x backups with S3 Compatible Storage
 
-The following steps will assume you arre using S3-compatible object storage, but not necessarily AWS S3, for your backups.
+The following steps assume you arre using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
 
 These instructions were sourced from the Velero documentation https://velero.io/docs/v1.6/contributions/minio/[here].
@@ -440,7 +439,7 @@ mc admin policy add $ALIAS velero-policy velero-policy.json
 mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
 ----
 
-Finally, we add our new user's credentials to a file (`./credentials-velero` in
+Finally, add your new user's credentials to a file (`./credentials-velero` in
 this example) with the following contents:
 
 [source,toml]
@@ -452,7 +451,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 === Step 4 - Install and start Velero
 
-Run the following `velero install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
+Run the following `velero install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 
 NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
@@ -482,8 +481,7 @@ restic-mknws              1/1     Running   0          2m
 velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
-As restic is a daemonset, there should be one pod for each node in your
-Kubernetes cluster.
+As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
 == Creating backups
 Now that Velero is installed on your cluster, you should see the **Snapshots** option in the navbar of the management console.
@@ -495,7 +493,7 @@ If you see this option, you are ready to create your first backup. If you do not
 
 === Option 1 - Create a backup with KOTS CLI
 
-To create the backup, run:
+To create the backup, run the following command:
 
 [source,bash]
 ----
@@ -506,17 +504,17 @@ kubectl kots backup --namespace <your namespace>
 
 Select *Snapshots* from the navbar. The default selection should be *Full Snapshots*, which is recommended.
 
-image::kots-admin-full-snapshot.png[Kots Navbar]
+image::kots-admin-full-snapshot.png[KOTS Navbar]
 
 Click the *Start a snapshot* button.
 
-image::kots-admin-create-backup.png[Kots Create Snapshot]
+image::kots-admin-create-backup.png[KOTS Create Snapshot]
 
 == Restoring backups
 
 === Option 1 - Restore a backup from a snapshot
 
-To restore from a backup stored in your S3 compatible storage, you will need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups. When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed beforehand. When using GKE or other platforms, a cluster with just velero installed may work.  
+To restore from a backup stored in your S3 compatible storage, you need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups. When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed beforehand. When using GKE or other platforms, a cluster with just Velero installed may work.  
 
 NOTE: If this is a new cluster or if you need to reinstall Velero, the installation should be done with the same credentials generated above.
 
@@ -541,15 +539,15 @@ kubectl kots restore --from-backup <backup-instance-id>
 As with backups, navigate to *Snapshots* in the KOTS Admin Console. Now you should see a list of all your backups, each with a restore icon.
 Choose the backup you wish to use and select restore.
 
-image::kots-admin-restore.png[Kots Create Snapshot]
+image::kots-admin-restore.png[KOTS Create Snapshot]
 
-IMPORTANT: The restore will create new load balancers for CircleCI's services. You will need to either update your DNS records or the hostname/IP configurations in KOTS Admin Console as a result. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
+IMPORTANT: The restore will create new load balancers for CircleCI's services. Consequently, you will need to either update your DNS records or the hostname/IP configurations in KOTS Admin Console. You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
 
-IMPORTANT: If you are using pre-existing Nomad clients, you will need to restart them before they will connect to the nomad-server cluster.
+IMPORTANT: If you are using pre-existing Nomad clients, you need to restart them before they will connect to the nomad-server cluster.
 
-It should take roughly 10-15 mins for CircleCI server to be restored and operational.
+It should take approximately 10-15 mins for CircleCI server to be restored and operational.
 
-== Optional - Scheduling backups with kots
+== Optional - Scheduling backups with KOTs
 
 To schedule regular backups, select *Snapshots*, and then *Settings & Schedule* from the KOTS Admin Console.
 
@@ -572,15 +570,15 @@ $ kubectl kots version
 Replicated KOTS 1.40.0
 ```
 
-* Check that Velero is deployed and running correctly. You may check the Velero logs with the command below.
+* Check that Velero is deployed and running correctly. You may check the Velero logs with the following command:
 
 ```
 $ kubectl logs deployment/velero --namespace velero
 ```
 
-You may need to reinstall Velero as a result.
+You may need to reinstall Velero afterwards.
 
-* Confirm that snapshots are available on your license. You may reach out to our Customer Support Team for confirmation.
+* Confirm that snapshots are available on your license. You may contact our Customer Support Team for confirmation.
 
 === Errors occur during backup or restore process
 
