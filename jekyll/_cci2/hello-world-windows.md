@@ -108,30 +108,10 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-{:.tab.windowsblockone.Server_2}
-```yaml
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
 Note that in order to use the Windows Server 2022 image in CircleCI cloud, it must be specified as the `executor`, as shown in the following:
 {: class="alert alert-info"}
 
-```
+```yaml
 version: 2.1
 orbs:
   win: circleci/windows@4.1
@@ -148,7 +128,7 @@ workflows:
 
 Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
 
-```
+```yaml
 jobs:
   build-windows:
     machine:
