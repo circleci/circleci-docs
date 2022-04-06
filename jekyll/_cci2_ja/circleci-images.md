@@ -13,7 +13,7 @@ version:
 ---
 
 <div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">廃止</a></strong>されます。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
+  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
 This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
@@ -207,11 +207,20 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 
 例えば、`circleci/golang:1.9` イメージにブラウザーを追加する場合は、`circleci/golang:1.9-browsers` イメージを使用します。
 
-### 次世代の言語イメージ
-{: #service-images }
+### 次世代サービスイメージ
+{: #next-gen-service-images }
 {:.no_toc}
 
 サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリ サービス コンテナとして使用します。
+
+- [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
+- [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
+- [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
+- [Redis](https://circleci.com/developer/images/image/cimg/redis)
+
+### レガシーサービスイメージ
+{: #legacy-service-images }
+{:.no_toc}
 
 CircleCI は、以下のサービスに対応する従来のイメージを提供しています。
 
@@ -231,11 +240,11 @@ CircleCI は、サービスイメージに対してバリアント 1つのみ用
 
 例えば、`circleci/postgres:9.5-postgis` イメージで RAM ボリュームを使用する場合は、`circleci/postgres:9.5-postgis-ram` イメージを使用します。
 
-### 次世代のサービス イメージ
+### 次世代サービスイメージ
 {: #next-gen-service-images }
 {:.no_toc}
 
-CircleCI では、次世代サービス コンビニエンス イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
+CircleCI では、次世代版 CircleCI イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
 
 ## プリインストール ツール
 {: #pre-installed-tools }
@@ -318,5 +327,5 @@ See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.
 {:.no_toc}
 
 - プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
-- iOS 用の macOS イメージの詳細については、({{ site.baseurl }}/2.0/testing-ios/) を参照してください。
-- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/2.0/building-docker-images/)」を参照してください。
+- iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/2.0/testing-ios/) を参照してください。
+- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/2.0/building-docker-images/)」を参照してください。

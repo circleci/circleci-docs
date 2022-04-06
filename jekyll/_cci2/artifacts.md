@@ -32,7 +32,9 @@ Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circ
 
 ![artifacts tab screenshot]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
-**Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
+By default, artifact storage duration is set to 30 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 30 days is also the maximum storage duration you can set.
+
+For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) page.
 
 **Note:**
 Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
@@ -288,6 +290,15 @@ Placeholder   | Meaning                                                         
 `:project`    | The name of the target VCS repository.
 `:build_num`  | The number of the job (aka. build) for which you want to download artifacts.
 {: class="table table-striped"}
+
+## Artifact storage customization
+{: #artifacts-and-self-hosted-runner }
+
+When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+
+Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
+
+You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
 
 ## Artifacts optimization
 {: #artifacts-optimization }

@@ -63,35 +63,27 @@ workflows:
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
-- 107.22.40.20
-- 18.215.226.36
-- 3.228.208.40
 - 3.228.39.90
-- 3.91.130.126
-- 34.194.144.202
+- 18.213.67.41
 - 34.194.94.201
+- 34.194.144.202
+- 34.197.6.234
 - 35.169.17.173
 - 35.174.253.146
-- 52.20.179.68
-- 52.21.153.129
-- 52.22.187.0
 - 52.3.128.216
 - 52.4.195.249
 - 52.5.58.121
+- 52.21.153.129
 - 52.72.72.233
-- 52.72.73.201
-- 54.144.204.41
-- 54.161.182.76
-- 54.162.196.253
-- 54.164.161.41
-- 54.167.72.230
-- 54.205.138.102
-- 54.209.115.53
-- 54.211.118.70
-- 54.226.126.177
-- 54.81.162.133
-- 54.83.41.200
 - 54.92.235.88
+- 54.161.182.76
+- 54.164.161.41
+- 54.166.105.113
+- 54.167.72.230
+- 54.172.26.132
+- 54.205.138.102
+- 54.208.72.234
+- 54.209.115.53
 
 **Note:** Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
 {: class="alert alert-info"}
@@ -143,7 +135,7 @@ IP ranges usage is visible in the "Plan Usage" page of the CircleCI app:
 
 ![Screenshot showing the location of the IP ranges feature]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
 
-On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on.  See more details on [Discuss](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068).
+On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on.  See more details on [Discuss](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068). You can also view whether or not the job has IP ranges enabled by viewing the "IP Ranges" badge.
 
 ![CircleCI about image]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 

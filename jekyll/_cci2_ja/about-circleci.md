@@ -55,7 +55,7 @@ CircleCI では、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)�
 
 CircleCI を使用すると、開発者として以下のことが可能です。
 - [任意のジョブに SSH 接続し]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)、ビルドの問題をデバッグする。
-- [.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルに[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
+- [.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルに[並列実行]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
 - 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を設定し、[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)内で以前のジョブのデータを再利用する。
 - セルフホスト型の [ランナー]({{site.baseurl}}/ja/2.0/runner-overview/) を設定し、独自のプラットフォームをサポートする。
 - Machine Executor の [Arm リソース]({{site.baseurl}}/ja/2.0/arm-resources/)にアクセスする。

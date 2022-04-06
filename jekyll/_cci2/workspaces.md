@@ -19,12 +19,16 @@ For example, a project with a `build` job that builds a `.jar` file and saves it
 
 Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
+By default, workspace storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
+
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ## Workspace configuration
 {: #workspace-configuration }
 
 To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+
+If you have custom storage settings, `persist_to_workspace` will default to the customizations you have set for your workspaces. If none are set, `persist_to_workspace` will be the default setting of 15 days.
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
@@ -188,17 +192,14 @@ For a live example of using workspaces to pass data between build and deploy job
 
 For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
-## Workspace expiration
-{: #workspace-expiration }
-
-Workspaces are stored for up to 15 days. Workspaces are not shared between pipelines, and the only way to access a workspace once the workflow has completed is if the workflow is rerun within the 15 day window.
-
-## Workspaces and runner network charges
-{: #workspaces-runner-network-charges }
+## Workspace storage customization
+{: #workspaces-and-self-hosted-runner }
 
 When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
-For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
+
+You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
 
 ## Workspace optimization
 {: #workspace-usage-optimization }

@@ -124,7 +124,7 @@ jobs:
 #### c.  ワークフローへのジョブの追加
 {: #add-jobs-to-the-workflow }
 
-これで `build_and_test` ジョブと `deploy` ジョブが作成されたので、`build_test_deploy`ワークフローを完成させます。 同時処理、連続、および手動承認ワークフローを使ったジョブ実行のオーケストレーションの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows)を参照してください。
+これで `build_and_test` ジョブと `deploy` ジョブが作成されたので、`build_test_deploy`ワークフローを完成させます。 同時実行、連続、および手動承認ワークフローを使ったジョブ実行のオーケストレーションの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows)を参照してください。
 
 ```yaml
 workflows:

@@ -54,9 +54,9 @@ CircleCI アプリケーションの [[Notifications (通知)](https://app.circl
 
 Slack 通知の例を以下に示します。
 
-![]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
+![成功を通知するメールのサンプル]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
 
-![]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
+![失敗を通知するメールのサンプル]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
 ## メール通知の設定と変更
 CircleCI アプリケーションの [[Notifications (通知)](https://circleci.com/account/notifications){:rel="nofollow"}] ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
@@ -67,7 +67,7 @@ CircleCI アプリケーションの [[Notifications (通知)](https://circleci.
 
 2. Your browser will ask you to confirm that you want to allow notifications. Click `Allow`. See the screenshot below for additional details:
 
-![]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
+![スクリーンショット: ブラウザで Web 通知を有効にする方法を示している]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
 
 過去に CircleCI からの Web 通知送信を拒否している場合、CircleCI は通知送信の権限を要求できないため、ブラウザー上で権限をオンにする必要があります。 通知を制御するには、ブラウザーの設定を使用してください。 Google Chrome を使用している場合は、下図のとおり、URL バーのロック アイコンをクリックし、[Permissions Settings (権限の設定)] から [Notifications (通知)] を選択すると、通知を制御できます。
 

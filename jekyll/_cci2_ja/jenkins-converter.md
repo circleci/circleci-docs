@@ -62,7 +62,7 @@ CircleCI ジョブの多くの設定オプションには、相当する Jenkins
 
 - [コードのチェックアウト](https://circleci.com/docs/ja/2.0/configuration-reference/#checkout)
 - [リソースクラス](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class)
-- [並列処理](https://circleci.com/docs/ja/2.0/configuration-reference/#parallelism)
+- [並列実行](https://circleci.com/docs/ja/2.0/configuration-reference/#parallelism)
 - キャッシュの[保存](https://circleci.com/docs/2.0/configuration-reference/#save_cache)と[リストア](https://circleci.com/docs/2.0/configuration-reference/#restore_cache)
 - [アーティファクトの保存](https://circleci.com/docs/ja/2.0/configuration-reference/#store_artifacts)
 

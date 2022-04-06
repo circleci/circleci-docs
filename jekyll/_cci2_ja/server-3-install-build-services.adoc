@@ -14,24 +14,23 @@ version:
 
 CircleCI サーバー v3.x ビルドサービスのインストールステップを開始する前に、 xref:server-3-install-prerequisites.adoc[ステップ 1: 前提条件] と xref:server-3-install.adoc[ステップ 2: コアサービスのインストール]が実行済みであることを確認してください。
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
-
-.インストール 手順（フローチャートのフェーズ 3）
+.インストール手順のフローチャート ステップ 3）
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
+
+NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
 == ステップ 3: 実行環境のインストール
 
 === 出力プロセッサ
-==== 概要
-出力プロセッサは、 Nomad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。
+出力プロセッサは、 Normad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。
 
 KOTS の管理者コンソールにアクセスします。 Get to the KOTS Admin Console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 設定で次の項目を探して入力します。
 
-. *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)](必須)*: 次のコマンドにより、サービスの IP アドレスを取得します
+. *[Output Processor Load Balancer (出力プロセッサ ロードバランサー)のホストネーム]*: 次のコマンドにより、サービスの IP アドレスを取得します
 +
 ```shell
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
@@ -40,7 +39,6 @@ kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 . *[Save your configuration (設定を保存)]*: Nomad クライアントの設定の完了後、設定のデプロイと確認を行います。
 
 === Nomad クライアント
-==== 概要
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
 
 Nomad クライアントは Kubernetes クラスタの外部にインストールされ、コントロールプレーン（ Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 mTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
@@ -67,7 +65,7 @@ ifndef::env-gcp[]
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ```
 
-* クラスタの *Subnet ID (サブネット)*、 *VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* :
+* クラスタの *Subnet ID (サブネット)*、 *VPC ID (VPC の ID)*、*DNS server (DNS サーバー)* : 
 以下のコマンドを実行して、クラスタの VPC ID ((vpcId)、CIDR (serviceIpv4Cidr)、およびサブネット (サブネットの ID)を入手します。
 +
 ```shell
@@ -118,12 +116,17 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 
 適切な情報を入力したら、 `main.tf `ファイルのディレクトリから次のコマンドを実行することにより、Nomad クライアントをデプロイすることができます。
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -139,19 +142,20 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 ===== GCP
-CircleCI Server のデプロイ時に作成した Nomad コントロールプレーン（Nomad サーバー）の IP アドレスが必要になります。 以下のコマンドを実行することで IP アドレスを取得できます。
+CircleCI Server のデプロイ時に作成した Nomad コントロールプレーン（ Nomad サーバー）の IP アドレスが必要になります。 以下のコマンドを実行することで IP アドレスを取得できます。
 
+[source,shell]
 ----
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 ----
 
 以下の情報も必要です。
 
-* Nomad クライアントを実行する GPC プロジェクト
-* Nomad クライアントを実行する GPC ゾーン
-* Nomad クライアントを実行する GPC リージョン
-* Nomad クライアントを実行する GPC ネットワーク
-* Nomad クライアントを実行する GPC サブネットワーク
+* Nomad クライアントを実行する GCP プロジェクト
+* Nomad クライアントを実行する GCP ゾーン
+* Nomad クライアントを実行する GCP リージョン
+* Nomad クライアントを実行する GCP ネットワーク
+* Nomad クライアントを実行する GCP サブネットワーク
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
@@ -191,6 +195,24 @@ variable "server_endpoint" {
   default = "<nomad-server-loadbalancer>:4647"
 }
 
+variable "nomad_auto_scaler" {
+  type        = bool
+  default     = false
+  description = "If true, terraform will create a service account to be used by nomad autoscaler."
+}
+
+variable "enable_workload_identity" {
+  type        = bool
+  default     = false
+  description = "If true, Workload Identity will be used rather than static credentials'"
+}
+
+variable "k8s_namespace" {
+  type        = string
+  default     = "circleci-server"
+  description = "If enable_workload_identity is true, provide application k8s namespace"
+}
+
 provider "google-beta" {
   project = var.project
   region  = var.region
@@ -199,7 +221,7 @@ provider "google-beta" {
 
 
 module "nomad" {
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.3.0"
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.4.0"
 
   zone            = var.zone
   region          = var.region
@@ -207,6 +229,9 @@ module "nomad" {
   subnetwork      = var.subnetwork
   server_endpoint = var.server_endpoint
   machine_type    = "n2-standard-8"
+  nomad_auto_scaler         = var.nomad_auto_scaler
+  enable_workload_identity  = var.enable_workload_identity
+  k8s_namespace             = var.k8s_namespace
 
   unsafe_disable_mtls    = true
   assign_public_ip       = true
@@ -219,14 +244,19 @@ output "module" {
 }
 ```
 
-適切な情報を入力したら、次のコマンドを実行して Nomad クライアントをデプロイできます。
+適切な情報を入力したら、以下を実行して Normad クライアントをデプロイできます。
 
+[source,shell]
 ----
 terraform init
 ----
+
+[source,shell]
 ----
 terraform plan
 ----
+
+[source,shell]
 ----
 terraform apply
 ----
@@ -250,6 +280,7 @@ ifndef::env-gcp[]
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーアクセスキーは Terraform の出力で使用できます。
   * 以下の IAM ポリシーを使用して、手動で Nomad Autoscaler IAM ユーザーを作成します。 その場合、ユーザーにアクセスキーとシークレットキーを生成する必要があります。
   * Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]を作成し、次の IAM ポリシーを添付します。
++
 [source, json]
 {
     "Version": "2012-10-17",
@@ -293,8 +324,8 @@ ifndef::env-aws[]
 
 ===== GCP
 . Nomad Autoscaler のサービスアカウントを作成します。
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json`という名前のファイルにあります。
-  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには `compute.admin`のロールが必要です。
+  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json`という名前のファイルにあります。 If you are using GKE link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには `compute.admin`のロールが必要です。 It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
 . Nomad Autoscaler を `enabled` に設定します。
 . 最大 Node 数を設定します。
 . 最小 Node 数を設定します。
@@ -302,13 +333,23 @@ ifndef::env-aws[]
 . プロジェクト ID を追加します。
 . 管理対象のインスタンスグループ名を追加します。
 . Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
-. Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。
+. 以下のいづれかを選択します。
+.. Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。
+.. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities]. Steps to enable Workload Identities on GCP cluster are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here].
+.. `nomad-autoscaler` (kubernetes) サービスアカウントの Workload Identity を有効にします。
+```shell
+gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/nomad-autoscaler]"
+```
+
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
 endif::env-aws[]
 
 ==== 設定とデプロイ
 
-Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 KOTS の管理者コンソールにアクセスします。 Get to the KOTS admin console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 設定で次の項目を入力します。
 
@@ -327,7 +368,9 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 * *[Nomad Server Certificate Authority (Nomad サーバーの証明書認証局)](必須)*:
  `terraform apply`からの出力で提供されます。
 
-*[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
+* *[Build Agent Image (ビルドエージェントイメージ)]*:  カスタム Docker レジストリを使用してCircleCI ビルドエージェントを提供する場合は、カスタマサポートにお問い合わせください。
+
+*[Save config (設定の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
 ==== Normad クライアントの確認
 
@@ -336,12 +379,16 @@ CircleCI Server のインストールをテストできる https://github.com/ci
 realitycheck を実行するには、リポジトリのクローンを実行する必要があります。 Github の設定に応じて、以下のいずれかを実行します。
 
 ===== Github Cloud
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 
 ----
 
 ===== GitHub Enterprise
+
+[source,shell]
 ----
 git clone -b server-3.0 https://github.com/circleci/realitycheck.git
 git remote set-url origin <YOUR_GH_REPO_URL>
@@ -389,7 +436,7 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 
 === VM サービス
 
-VM サービスは、VM とリモート Docker ジョブを設定します。 スケーリング ルールなど、さまざまなオプションを構成することができます。 VM サービスは、 EKS および GKE のインストールに固有のものです。これは、これらのクラウドプロバイダーの機能に特に依存しているためです。
+VM サービスは、VM とリモート Docker ジョブを設定します。 スケーリングルールなど、さまざまな VM サービスオプションを設定することができます。 VM サービスは、 EKS および GKE のインストールに固有のものです。これは、これらのクラウドプロバイダーの機能に特に依存しているためです。
 
 ifndef::env-gcp[]
 
@@ -669,6 +716,8 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *JSON キーファイルを取得する*
 +
+If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required. 
++
 以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 サーバーインストールを設定する際に必要になります。
 +
 ```shell
@@ -676,9 +725,21 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 ```
 
+. *サービスアカウントで Workload Identity を有効にする*
++
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
++
+```shell
+gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
+```
+
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
+
 . *サーバーの設定*
 +
-VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
+VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] ガイドを参照してください。
 +
 フィールドの設定が完了したら、*設定を保存*し、更新したアプリケーションをデプロイします。
 
@@ -697,6 +758,7 @@ CircleCI のランナーには、追加のサーバー設定は不要です。 C
 NOTE: ランナーには各組織につき１つ名前空間が必要です。  CircleCI Server には複数の組織が存在する場合があります。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
 
 ifndef::pdf[]
+
 ## 次に読む
 
 * https://circleci.com/docs/2.0/server-3-install-post[Server 3.x ステップ 4: ポストインストール]

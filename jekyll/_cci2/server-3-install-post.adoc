@@ -14,10 +14,10 @@ version:
 
 Before you begin with the CircleCI server v3.x post installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites], xref:server-3-install.adoc[Phase 2 - Core services installation] and xref:server-3-install-build-services.adoc[Phase 3 - Build services installation].
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
-
 .Installation Experience Flow Chart Phase 4
 image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
+
+NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
@@ -26,15 +26,13 @@ toc::[]
 === Set up backup and restore
 
 Backups of CircleCI server can be created through https://kots.io/[KOTS].
-However, to enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
+To enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
 
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
 
 === Server 3.x backups on AWS
-
-The following steps assume AWS as your provider.
 
 These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
 
@@ -295,6 +293,8 @@ After running this command, you should see a file named `credentials-velero` in 
 If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account needs the
 `iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
 
+NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
+
 ==== Step 3 - Install and start Velero
 
 * Run one of the following `velero` `install` commands, depending on how you authorized the service account. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
@@ -505,7 +505,16 @@ For more information and steps to complete these tasks, see the https://circleci
 
 === Email Notifications 
 
-Build notifications are sent by email. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`. 
+Build notifications are sent by email. This section has details on how to set up build notifications by email. 
+
+Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: 
+
+[source,shell]
+----
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
+----
+
+Locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
 
 Locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation:
 
