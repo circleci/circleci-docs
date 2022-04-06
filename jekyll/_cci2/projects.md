@@ -13,8 +13,7 @@ version:
 
 A CircleCI project shares the name of the associated code repository and is visible on the **Projects** page of the [CircleCI web app](https://app.circleci.com/). Projects are added by using the **Set Up Project** button.
 
-On the **Projects** page, you can either set up any project that you are the owner of on your VCS, or follow any project in your organization to gain
-access to its pipelines and to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project's status.
+On the **Projects** page, you can either set up any project that you are the owner of on your VCS, or follow any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project's status.
 
 ## Projects dashboard
 {: #projects-dashboard }
