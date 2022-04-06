@@ -115,7 +115,7 @@ orbs:
   browser-tools: circleci/browser-tools@1.1.0
 jobs:
   build:
-    # pre-built images: https://circleci.com/docs/ja/2.0/circleci-images/
+    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
       - image: cimg/node:17.2-browsers
     steps:

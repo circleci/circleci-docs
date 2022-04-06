@@ -47,7 +47,7 @@ CircleCI のビルドに関する設定の大部分は、各プロジェクト�
 
 Jenkins サーバーの管理は、運用部門のメンバーやチームに委ねられているケースがほとんどです。 その担当者は、依存関係のインストールやトラブルシューティングなど、CI メンテナンスに関するさまざまなタスクに日々追われています。
 
-It is never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/).
+It is never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{ site.baseurl }}/2.0/ssh-access-jobs/).
 
 If you install CircleCI on your own hardware, the divide between the host OS (at the “metal”/VM level) and the containerized execution environments can be extremely useful for security and ops (see Your Builds in Containers below). 運用部門のメンバーは、ビルドに支障をきたすことなくホスト OS 上で必要な作業を行うことができ、開発者にアクセス権を付与する必要はありません。 また開発者は、CircleCI の SSH 機能を使用して、運用に支障をきたすことなく任意のコンテナレベルでビルドをデバッグできます。
 
@@ -112,4 +112,4 @@ CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily c
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 
-Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation](https://circleci.com/docs/ja/2.0/jenkins-converter/).
+Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation](https://circleci.com/docs/2.0/jenkins-converter/).

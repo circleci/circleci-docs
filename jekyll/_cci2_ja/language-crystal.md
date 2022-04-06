@@ -47,7 +47,7 @@ jobs: # a collection of jobs
     steps: # a collection of executable steps
       - checkout # checks out source code to working directory
       - restore_cache: # Restore dependency cache
-      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
           name: Install dependencies.
@@ -59,7 +59,7 @@ jobs: # a collection of jobs
       - run:
           name: test
           command: crystal spec
-# See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
+# See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 {% endraw %}
 

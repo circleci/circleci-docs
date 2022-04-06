@@ -77,9 +77,9 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
  
  {: class="table table-striped"}
  
- CircleCI 専有ホストでは <sup>(1)</sup> _Xcode 10.3 はサポートしていません。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。</p> 
+ CircleCI 専有ホストでは <sup>(1)</sup> _Xcode 10.3 はサポートしていません。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p> 
  
- **Note:** [macOS App UI Testing]({{ site.baseurl }}/ja/2.0/testing-macos) is supported on Xcode 11.7 and higher
+ **Note:** [macOS App UI Testing]({{ site.baseurl }}/2.0/testing-macos) is supported on Xcode 11.7 and higher
  
  
 
@@ -799,7 +799,7 @@ React Native プロジェクトは、CircleCI  上で `macos` および `docker`
 
 {: #using-multiple-executor-types-macos-docker }
 
-同じワークフロー内で、複数の [Executor タイプ](https://circleci.com/ja/docs/ja/2.0/executor-types/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+同じワークフロー内で、複数の [Executor タイプ](https://circleci.com/ja/docs/2.0/executor-types/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 
 
@@ -883,6 +883,6 @@ workflows:
 
 - CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
 
-- 設定ファイルの詳しい説明については、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)を参照してください。
+- 設定ファイルの詳しい説明については、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)を参照してください。
 
 - fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/2.0/ios-codesigning/)を参照してください。

@@ -81,7 +81,7 @@ Docker Executor の詳細については、[CircleCI を設定する]({{ site.ba
 ### 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
 
-ジョブには複数のイメージを指定することが可能です。 たとえば、テストやその他の必要なサービスでデータベースを使用する必要がある場合は、複数のイメージを指定します。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)の`ローカルホスト`上で利用できます。
+ジョブには複数のイメージを指定することが可能です。 たとえば、テストやその他の必要なサービスでデータベースを使用する必要がある場合は、複数のイメージを指定します。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)の`ローカルホスト`上で利用できます。
 
 ```yaml
 jobs:
@@ -181,10 +181,10 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 | 完全なルート アクセス                                                                           | いいえ              | はい        |
 | 複数データベースの実行                                                                           | ○<sup>(3)</sup>  | はい        |
 | 同じソフトウェアの複数バージョンの実行                                                                   | いいえ              | はい        |
-| [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)                      | はい               | はい        |
+| [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                      | はい               | はい        |
 | 特権コンテナの実行                                                                             | いいえ              | はい        |
 | Docker Compose とボリュームの使用                                                              | いいえ              | はい        |
-| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class) | はい               | はい        |
+| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | はい               | はい        |
 {: class="table table-striped"}
 
 <sup>(1)</sup> [カスタム Docker イメージの使用]({{ site.baseurl }}/ja/2.0/custom-images/) を参照してください。
@@ -215,7 +215,7 @@ CircleCI イメージなどのより広く利用されているイメージほ�
 ### 使用可能な Docker リソース クラス
 {: #available-docker-resource-classes }
 
-[`resource_class`]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
+[`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
 | クラス      | vCPU | RAM   |
 | -------- | ---- | ----- |
@@ -273,7 +273,7 @@ jobs:
     machine: true
 ```
 
-使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-machine-images)で確認できます。
+使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images)で確認できます。
 
 以下の例では、イメージを使用して [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
 
@@ -298,7 +298,7 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 | macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
-このとき、どのバージョンの Xcode を使うか指定することもできます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
+このとき、どのバージョンの Xcode を使うか指定することもできます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
 
 ```yaml
 jobs:
@@ -312,7 +312,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-<sup>(1)</sup> _このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。</p>
+<sup>(1)</sup> _このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p>
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }
@@ -394,4 +394,4 @@ CircleCI Server では、VM サービスを設定することで GPU 対応の M
 ## 関連項目
 {: #see-also }
 
-[設定に関するリファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/)
+[設定に関するリファレンス]({{ site.baseurl }}/2.0/configuration-reference/)

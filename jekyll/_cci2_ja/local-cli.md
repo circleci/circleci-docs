@@ -157,7 +157,7 @@ circleci orb validate /tmp/my_orb.yml
 ## Orb 開発キット
 {: #orb-development-kit }
 
-[Orb 開発キット]({{ site.baseurl }}/ja/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットには、[`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) および [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html) という 2 つの CLI コマンドが含まれています。 Orb のパッケージ化の詳細については、[Orb のコンセプトに関するページ]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)を参照してください。
+[Orb 開発キット]({{ site.baseurl }}/ja/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットには、[`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) および [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html) という 2 つの CLI コマンドが含まれています。 Orb のパッケージ化の詳細については、[Orb のコンセプトに関するページ]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)を参照してください。
 
 ## 設定ファイルのパッケージ化
 {: #packing-a-config }
@@ -402,7 +402,7 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 ## テストの分割
 {: #test-splitting }
 
-CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための[テストの分割](https://circleci.com/ja/docs/ja/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割)にも使用できます。
+CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための[テストの分割](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割)にも使用できます。
 
 ## Using the CLI on CircleCI server v2.x
 {: #using-the-cli-on-circleci-server-v2-x }
@@ -421,7 +421,7 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 ## コンテキストの管理
 {: #context-management }
 
-[コンテキスト]({{site.baseurl}}/ja/2.0/contexts)は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行うことができましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
+[コンテキスト]({{site.baseurl}}/2.0/contexts)は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行うことができましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
 
 - *create* - 新しいコンテキストを作成します。
 - *delete* - 指定したコンテキストを削除します。

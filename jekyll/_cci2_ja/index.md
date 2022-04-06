@@ -15,7 +15,7 @@ page-type: index
 <div class="row">
   <div class="treatment col-xs-12">
     <span id="homepage-guide-links"><h2>設定例と解説</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="New"></span>
-    <p>こちらの<a href="{{site.baseurl}}/ja/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
+    <p>こちらの<a href="{{site.baseurl}}/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
   </div>
   <div class="treatment col-xs-12 col-sm-6">
     <a class="no-external-icon col-sm-12" href="{{site.baseurl}}/ja/2.0/language-javascript/">

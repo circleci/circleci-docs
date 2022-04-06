@@ -58,10 +58,10 @@ jobs: # basic units of work in a run
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/ja/2.0/artifacts/
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
-      # See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 
 {% endraw %}
@@ -109,7 +109,7 @@ version: 2
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/ja/2.0/circleci-images/#clojure)を使用します。
+`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
 
 ここでは、メモリ不足エラーが発生しないように、`JVM_OPTS` を設定して最大ヒープ サイズを制限します。 標準のコンテナの制限は 4 GB ですが、JVM がヒープ外に確保する分と Leiningen 自体のために、いくらかの容量を残しておきます。 (場合によっては、`lein trampoline ...` を使用して Leiningen のオーバーヘッドを回避できます)。 たとえば、データベースまたはキューのためのバックグラウンド コンテナがある場合は、メインの JVM ヒープにメモリを割り当てる際にそれらのコンテナを考慮してください。
 

@@ -14,7 +14,7 @@ version:
 
 This document is a walkthrough of a sample Dart project setup on CircleCI. The project cherry-picks `number_guesser` and `number_thinker` code from the [Write HTTP clients & servers](https://dart.dev/tutorials/server/httpserver) tutorial.
 
-We assume you have a basic working knowledge of CircleCI and associated terminology. If not, visit our [Getting Started docs]({{ site.baseurl }}/ja/2.0/getting-started/).
+We assume you have a basic working knowledge of CircleCI and associated terminology. If not, visit our [Getting Started docs]({{ site.baseurl }}/2.0/getting-started/).
 
 ## Quickstart
 {: #quickstart }
@@ -22,14 +22,14 @@ We assume you have a basic working knowledge of CircleCI and associated terminol
 **Repository**: [circleci-dart-demo](https://github.com/CircleCI-Public/circleci-dart-demo) **Builds**: [circleci-dart-demo on CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo)
 
 1. Find the full configuration at the bottom of this document or in the repository linked above.
-1. Copy that config into [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) in your project's root directory.
+1. Copy that config into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory.
 1. Modify as needed.
 
 The CircleCI config does the following:
 
 - **It runs the tests in a Docker container.**
     - The `test` job uses the `google/dart` Docker image as its execution image.
-    - The tests use the [junitreporter](https://pub.dev/packages/junitreport) package to produce JUnit XML output for CircleCI's [test metadata feature](https://circleci.com/docs/ja/2.0/collect-test-data/), which in turn supports features such as test summary, intelligent test splitting, and insights data/metrics.
+    - The tests use the [junitreporter](https://pub.dev/packages/junitreport) package to produce JUnit XML output for CircleCI's [test metadata feature](https://circleci.com/docs/2.0/collect-test-data/), which in turn supports features such as test summary, intelligent test splitting, and insights data/metrics.
 - **After tests run, it builds executables for deployment.**
     - `build-docker` uses Google's [`dart-runtime`](https://hub.docker.com/r/google/dart-runtime) as a base to build a Docker container. There's a commented section that pushes to DockerHub. It's there as an example.
     - The other three jobs compile native executables on macOS, Windows, and Linux VMs.
@@ -38,7 +38,7 @@ The CircleCI config does the following:
     - `~/.pub-cache` and `.dart_tool` folders are cached by default on Linux and macOS. `~/AppData/Local/Pub/Cache` if Windows.
     - For Dart projects that have it, you'll probably also want to add and cache the `.packages` folder in the main project directory.
 
-If you fork this project and want to push to DockerHub, this project assumes [a context](https://circleci.com/docs/ja/2.0/contexts/) called `dart-docker` with the following variables & keys:
+If you fork this project and want to push to DockerHub, this project assumes [a context](https://circleci.com/docs/2.0/contexts/) called `dart-docker` with the following variables & keys:
 
 | KEY          | VALUE                             |
 | ------------ | --------------------------------- |
@@ -114,7 +114,7 @@ commands:
 
 {% endraw %}
 
-- CircleCI offers [reusable configuration syntax]({{ site.baseurl }}/ja/2.0/reusing-config), which is what our orbs are built off of. Under `commands`, we define a few parameterized commands that run the same sequence of steps.
+- CircleCI offers [reusable configuration syntax]({{ site.baseurl }}/2.0/reusing-config), which is what our orbs are built off of. Under `commands`, we define a few parameterized commands that run the same sequence of steps.
     - `dependencies` checks out the code and restores/saves a dependency cache (Dart packages downloaded from last build).
     - `native-build` uses the `dart2native` command to compile a native executable for each operating system and then artifacts it, making it available to download from the job details.
     - In both commands, we take parameters to override a cache path and shell for different jobs. Dart's package cache is in a different location in Windows, and it also uses a different shell (Powershell).
@@ -245,7 +245,7 @@ jobs:
 ```
 
 - The final job builds a Docker image using Google's [`dart-runtime`](https://hub.docker.com/r/google/dart-runtime) as a base.
-- The commented section is code to build, tag, and push a Docker image according to environment variables defined in a [context](https://circleci.com/docs/ja/2.0/contexts/). It's included as an example.
+- The commented section is code to build, tag, and push a Docker image according to environment variables defined in a [context](https://circleci.com/docs/2.0/contexts/). It's included as an example.
 
 ## Full sample configuration
 {: #full-sample-configuration }
@@ -434,10 +434,10 @@ jobs:
 ## Additional resources
 {: #additional-resources }
 
-- [はじめよう](https://circleci.com/docs/ja/2.0/getting-started/#section=getting-started)
-- [Migrating to CircleCI](https://circleci.com/docs/ja/2.0/migration-intro/#section=getting-started)
-- [依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
-- [データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)
-- [Deploying on CircleCI](https://circleci.com/docs/ja/2.0/deployment-integrations/#section=deployment)
-- [コンテキストの使用](https://circleci.com/docs/ja/2.0/contexts/)
-- [設定に関するリファレンス](https://circleci.com/docs/ja/2.0/configuration-reference/#section=configuration)
+- [はじめよう](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
+- [Migrating to CircleCI](https://circleci.com/docs/2.0/migration-intro/#section=getting-started)
+- [依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+- [データベースの構成]({{ site.baseurl }}/2.0/databases/)
+- [Deploying on CircleCI](https://circleci.com/docs/2.0/deployment-integrations/#section=deployment)
+- [コンテキストの使用](https://circleci.com/docs/2.0/contexts/)
+- [設定に関するリファレンス](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)

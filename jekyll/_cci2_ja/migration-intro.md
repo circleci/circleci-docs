@@ -11,14 +11,14 @@ toc: false
 
 以下の各ドキュメントでは、CI/CD パイプラインの CircleCI への移行で役立つガイドやヒントを紹介しています。
 
-* [Travis CI からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-aws/)
-* [Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-azuredevops/)
-* [GitLab からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-buildkite/)
-* [Buildkite からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-gitlab/)
-* [Azure DevOps からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-github/)
+* [Travis CI からの移行]({{ site.baseurl }}/2.0/migrating-from-aws/)
+* [Jenkins からの移行]({{ site.baseurl }}/2.0/migrating-from-azuredevops/)
+* [GitLab からの移行]({{ site.baseurl }}/2.0/migrating-from-buildkite/)
+* [Buildkite からの移行]({{ site.baseurl }}/2.0/migrating-from-gitlab/)
+* [Azure DevOps からの移行]({{ site.baseurl }}/2.0/migrating-from-github/)
 * {{ site.baseurl }}/ja/2.0/migrating-from-aws/
-* [TeamCity からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-teamcity/)
-* [Travis CI からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-travis/)
+* [TeamCity からの移行]({{ site.baseurl }}/2.0/migrating-from-teamcity/)
+* [Travis CI からの移行]({{ site.baseurl }}/2.0/migrating-from-travis/)
 
 ## さらに詳しく
 {: #learn-more }

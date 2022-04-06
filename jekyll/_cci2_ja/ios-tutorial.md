@@ -27,7 +27,7 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/ja/2.0/hello-world/)」を参照してください。
+- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/2.0/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
@@ -62,7 +62,7 @@ jobs:
 
 詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/2.0/ios-codesigning/)」を参照してください。
 
-To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/ja/2.0/sample-config/) document for customizations.
+To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) document for customizations.
 
 ## 依存関係のインストール
 {: #installing-dependencies }
@@ -131,7 +131,7 @@ workflows:
 ## 高度な構成
 {: #advanced-configuration }
 
-See the [Testing iOS Applications on macOS]({{site.baseurl}}/ja/2.0/testing-ios/) document for more advanced details on configuring iOS projects.
+See the [Testing iOS Applications on macOS]({{site.baseurl}}/2.0/testing-ios/) document for more advanced details on configuring iOS projects.
 
 ## GitHub 上のサンプル アプリケーション
 {: #example-application-on-github }

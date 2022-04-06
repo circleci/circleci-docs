@@ -42,7 +42,7 @@ To use the CircleCI Check integration, you first need to navigate to your **Orga
 {: #prerequisites }
 
 - You must be using the cloud-hosted version of CircleCI.
-- Your project must be using [Workflows]({{ site.baseurl }}/ja/2.0/workflows/).
+- Your project must be using [Workflows]({{ site.baseurl }}/2.0/workflows/).
 - CircleCI Check インテグレーションを無効にするには、[Org Settings (組織の設定)] ページに移動した後、以下の手順に従って CircleCI Checks を使用しているリポジトリを削除します。
 
 ### 手順

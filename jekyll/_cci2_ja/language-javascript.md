@@ -70,7 +70,7 @@ workflows:
 
 Node Orb の `test` コマンドにより、オプションのパラメータを使って 1 行のコマンドでコードをテストすることができます。
 
-マトリックスジョブは、様々な Node 環境で Node アプリケーションをテストする簡単な方法です。 Node Orb によりマトリックスジョブを利用する方法の詳細な例は、 [マトリックスジョブ](https://circleci.com/blog/circleci-matrix-jobs/)に関する投稿を参照してください。 パイプラインパラメーターで Node のバージョンを設定する方法については、 [パイプラインパラメーターに関するドキュメント](https://circleci.com/docs/ja/2.0/pipeline-variables/#pipeline-parameters-in-configuration) を参照してください。
+マトリックスジョブは、様々な Node 環境で Node アプリケーションをテストする簡単な方法です。 Node Orb によりマトリックスジョブを利用する方法の詳細な例は、 [マトリックスジョブ](https://circleci.com/blog/circleci-matrix-jobs/)に関する投稿を参照してください。 パイプラインパラメーターで Node のバージョンを設定する方法については、 [パイプラインパラメーターに関するドキュメント](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) を参照してください。
 
 成功です！ CircleCI 2.1 上に Node.js アプリケーションをビルドするための設定が完了しました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[パイプラインのページ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-javascript-react-app)を参照してください。
 
@@ -79,5 +79,5 @@ Node Orb の `test` コマンドにより、オプションのパラメータを
 {:.no_toc}
 
 - デプロイ ターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)ドキュメントを参照してください。
-- その他のパブリック JavaScript プロジェクトの設定例については、[設定例]({{ site.baseurl }}/ja/2.0/examples/)のページを参照してください。
-- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/ja/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- その他のパブリック JavaScript プロジェクトの設定例については、[設定例]({{ site.baseurl }}/2.0/examples/)のページを参照してください。
+- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

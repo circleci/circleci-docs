@@ -330,7 +330,7 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 
 1. `FOO=bar make install` のような例を含め、`run` ステップの[シェル コマンド内]({{ site.baseurl }}/ja/2.0/env-vars/#シェル-コマンドでの環境変数の設定)で宣言された環境変数
 2. [`run` ステップで]({{ site.baseurl }}/ja/2.0/env-vars/#ステップでの環境変数の設定) `environment` キーを使用して宣言された環境変数
-3. [ジョブで]({{ site.baseurl }}/ja/2.0/env-vars/#ジョブでの環境変数の設定) `environment` キーを使用して設定された環境変数
+3. [ジョブで]({{ site.baseurl }}/2.0/env-vars/#ジョブでの環境変数の設定) `environment` キーを使用して設定された環境変数
 4. [環境変数の使用]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)で説明されている定義済みの CircleCI 特有の環境変数
 5. コンテキストで設定されている環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
 6. [Project Settings (プロジェクトの設定)] ページで設定された[プロジェクトレベル]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)の環境変数

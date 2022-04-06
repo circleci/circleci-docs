@@ -468,7 +468,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 
-このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、 https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[トラブルシューティングに関するセクション] を参照してください。
+このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、 https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[トラブルシューティングに関するセクション] を参照してください。
 
 ==== オプション 1 - KOTS CLI を使用したバックアップ作成
 
@@ -499,7 +499,7 @@ CircleCI Server システムには、固有のローカル Orb レジストリ�
 * 以前コピーした Orb の更新 
 * 会社のプライベート Orb の登録 (存在する場合)
 
-詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/ja/2.0/server-3-operator-orbs/[サーバーでの Orb ガイド]を参照してください。
+詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[サーバーでの Orb ガイド]を参照してください。
 
 === メール通知 
 
@@ -534,6 +534,6 @@ NOTE: デフォルトでは StartTLS がメールの暗号化に使用されま�
 ifndef::pdf[]
 ## 次に読む
 
-* https://circleci.com/docs/ja/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
-* https://circleci.com/docs/ja/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
 endif::[]

@@ -131,7 +131,7 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 
 スケジュール実行化されたパイプラインは基本的にトリガーされたパイプラインであるため、設定内のすべてのワークフローが実行されます。
 
-[パイプライン値]({{site.baseurl}}/ja/2.0/pipeline-variables/#pipeline-values)を使うことによりワークフローのフィルター機能を開始するすることも可能です。 例えば下記のようにします。
+[パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)を使うことによりワークフローのフィルター機能を開始するすることも可能です。 例えば下記のようにします。
 
 ```yaml
 daily-run-workflow:

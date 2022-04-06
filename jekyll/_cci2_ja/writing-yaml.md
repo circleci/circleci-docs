@@ -153,13 +153,13 @@ harry_data:
 
 YAML には他にも機能がありますが、YAML の基礎について理解し、CircleCI の設定ファイルを簡潔に保つには、上記の例で十分です。 さらに知識を深めたい場合は、以下の資料をご活用ください。
 
-- キーと値の具体的な例については、「[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。
+- キーと値の具体的な例については、「[CircleCI の設定]({{ site.baseurl }}/2.0/configuration-reference/)」を参照してください。
 - `config.yml` が有効な YAML かどうかがわからない場合は、[バリデーション ツール](http://yaml-online-parser.appspot.com/)を使って実行してください。
 
 CircleCI は「Orb」も開発しています。 Orb は、事前設定とテストを終えた状態の設定エレメントをまとめたパッケージで、お客様が設定したワークフローで使用することができます。 Orb を使えば、DRY (Don't Repeat Yourself: 繰り返しを避ける) の原則により、設定エレメント (ジョブ、Executor、コマンド) をワークフローにすばやく簡単に組み込むことができます。 Orb の詳細については、以下のドキュメントを参照してください。
 
-- [Orb の概要]({{site.baseurl}}/ja/2.0/orb-intro/): Orb の詳細な概要
-- Refer to [Orb Intro]({{site.baseurl}}/ja/2.0/orb-intro/), for more about how to use existing orbs.
-- [Orb の作成]({{site.baseurl}}/ja/2.0/creating-orbs/): ご自身で Orb を作成する手順
-- [設定ファイルの再利用]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の詳細
+- [Orb の概要]({{site.baseurl}}/2.0/orb-intro/): Orb の詳細な概要
+- Refer to [Orb Intro]({{site.baseurl}}/2.0/orb-intro/), for more about how to use existing orbs.
+- [Orb の作成]({{site.baseurl}}/2.0/creating-orbs/): ご自身で Orb を作成する手順
+- [設定ファイルの再利用]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の詳細
 - [「Learn X in Y Minutes」の YAML ページ](https://learnxinyminutes.com/docs/yaml/): YAML について詳しく取り上げた徹底ガイド

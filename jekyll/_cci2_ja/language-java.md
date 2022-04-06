@@ -25,7 +25,7 @@ version:
 
 ここでは、以下を前提としています。
 
-* [Gradle](https://gradle.org/) を使用している。 [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/ja/2.0/language-java-maven/))
+* [Gradle](https://gradle.org/) を使用している。 [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
 * Java 11 を使用している
 * Spring Framework を使用している。  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
 * アプリケーションをオールインワン uberjar として配布できる
@@ -59,13 +59,13 @@ jobs: # a collection of steps
           POSTGRES_DB: circle_test
     steps: # a collection of executable commands
       - checkout # check out source code to working directory
-      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Run tests in parallel # See: https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/
+          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
@@ -88,9 +88,9 @@ jobs: # a collection of steps
             - ~/.gradle/caches
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - store_test_results:
-      # テスト サマリー (https://circleci.com/ja/docs/ja/2.0/collect-test-data/) に表示するテスト結果をアップロードします
+      # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するテスト結果をアップロードします
           path: build/test-results/test
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/ja/2.0/artifacts/) に表示するテスト結果をアップロードします
+      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト結果をアップロードします
           path: build/test-results/test
           when: always
       - run:
@@ -103,7 +103,7 @@ jobs: # a collection of steps
       # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
       - store_artifacts:
           path: build/libs
-      # See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 workflows:
   version: 2
   workflow:
@@ -144,7 +144,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
-テストを[並列に実行](https://circleci.com/ja/docs/ja/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
+テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
 また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 Gradleプロセスが終了した後に終了させるため、Gradleデーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
@@ -189,14 +189,14 @@ version: 2
 ```
 {% endraw %}
 
- 追加の引数を使用して `./gradlew test` を実行します。 これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/ja/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
+ 追加の引数を使用して `./gradlew test` を実行します。 これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
 
  **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 ```yaml
 ...
     steps:
       - run:
-          name: Run tests in parallel # https://circleci.com/ja/docs/ja/2.0/parallelism-faster-jobs/ を参照してください
+          name: Run tests in parallel # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
           # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します
           command: |
             cd src/test/java

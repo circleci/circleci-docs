@@ -217,8 +217,8 @@ Orb に特定の実行環境が必要なジョブを複数設定しているの�
 CircleCI のジョブでは、その実行前後にステップを挿入することができます。また、パラメーターを使用することでジョブ内にステップを挿入することも可能です。 一般的に、カスタム ジョブにコマンドを組み込む (該当する場合) よりも、ジョブを設定する方がユーザーにとっては容易です。 挿入可能なステップを用いると、ジョブの柔軟性が高まるだけでなく、Orb で新機能を試しやすくなります。
 
 詳しくは次を参照してください。
-* [事前ステップと事後ステップ]({{site.baseurl}}/ja/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
-* [ステップ型パラメーター]({{site.baseurl}}/ja/2.0/reusing-config/#steps)
+* [事前ステップと事後ステップ]({{site.baseurl}}/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [ステップ型パラメーター]({{site.baseurl}}/2.0/reusing-config/#steps)
 
 ### Executor
 {: #executors }
@@ -268,7 +268,7 @@ Be sure to name your usage examples so they reflect the use-case they demonstrat
 {: #secrets-should-never-be-directly-entered }
 {:.no_toc}
 
-API キーや認証トークン、パスワードなど、"シークレット" に該当する情報はすべて、パラメーター値として直接入力しないようにしてください。 その代わりに、[env_var_name]({{site.baseurl}}/ja/2.0/reusing-config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E5%90%8D) パラメーター型を使用して環境変数の名前を文字列値として指定し、この変数に機密情報を指定します。
+API キーや認証トークン、パスワードなど、"シークレット" に該当する情報はすべて、パラメーター値として直接入力しないようにしてください。 その代わりに、[env_var_name]({{site.baseurl}}/2.0/reusing-config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E5%90%8D) パラメーター型を使用して環境変数の名前を文字列値として指定し、この変数に機密情報を指定します。
 
 #### Parameterize the installation path
 {: #parameterize-the-installation-path }
@@ -283,7 +283,7 @@ API キーや認証トークン、パスワードなど、"シークレット" �
 {: #always-follow-strict-semantic-versioning }
 {:.no_toc}
 
-セマンティック バージョニングに従うと、バージョン番号からバグの修正やパッチ、新機能の追加、互換性を損なう変更のいずれが行われたかわかるので、更新やリリースではこの手法に従うことが重要です。 たとえば、互換性を損なう変更をパッチとして導入すると、Orb のユーザーに対し、CI プロセスの妨げになる更新プログラムが自動で配信されてしまう可能性があります。 Orb を更新する前に、[セマンティック バージョニング]({{site.baseurl}}/ja/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0)に関する記事をよく読み、この手法を身につけてください。
+セマンティック バージョニングに従うと、バージョン番号からバグの修正やパッチ、新機能の追加、互換性を損なう変更のいずれが行われたかわかるので、更新やリリースではこの手法に従うことが重要です。 たとえば、互換性を損なう変更をパッチとして導入すると、Orb のユーザーに対し、CI プロセスの妨げになる更新プログラムが自動で配信されてしまう可能性があります。 Orb を更新する前に、[セマンティック バージョニング]({{site.baseurl}}/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0)に関する記事をよく読み、この手法を身につけてください。
 
 ### Keep a changelog
 {: #keep-a-changelog }

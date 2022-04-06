@@ -61,7 +61,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```yaml
          machine: true
      ```
-     使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/ja/2.0/executor-types/#machine-の使用)」を参照してください。
+     使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
      ```yaml
          macos:
            xcode: 12.5.1
@@ -105,7 +105,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 
 In CircleCI, all defined environment variables are treated literally. コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
-For more information, refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/ja/2.0/env-vars/).
+For more information, refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## ワークフローを構成する手順
 {: #steps-to-configure-workflows }

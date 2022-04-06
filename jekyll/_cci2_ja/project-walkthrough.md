@@ -25,7 +25,7 @@ version:
 {: #basic-setup }
 {:.no_toc}
 
-通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/ja/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
+通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
 
 以下は、CircleCI デモ プロジェクトの最もシンプルな例です。すべての構成が `build` ジョブの下にネストされています。
 
@@ -302,7 +302,7 @@ jobs:
 - Heroku アプリケーションが作成されている
 - `HEROKU_APP_NAME` と `HEROKU_API_KEY` の環境変数が設定されている
 
-If you have not completed any or all of these steps, follow the [instructions]({{ site.baseurl }}/ja/2.0/deployment-examples/#heroku) in the Heroku section of the Deployment document.
+If you have not completed any or all of these steps, follow the [instructions]({{ site.baseurl }}/2.0/deployment-examples/#heroku) in the Heroku section of the Deployment document.
 
 **メモ:** このデモ プロジェクトをフォークする場合は、Heroku プロジェクトの名前を変更すると、このチュートリアルで使用する名前空間と干渉しないように Heroku をデプロイできます。
 

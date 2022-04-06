@@ -182,6 +182,6 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 ## 既知の制限
 {: #knownlimitations}
 
-- 現在、[パイプラインのパラメーター機能](https://circleci.com/docs/ja/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
+- 現在、[パイプラインのパラメーター機能](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
 - 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
 - ジョブの IP アドレスの範囲機能を有効にし、 コンテンツ デリバリー ネットワーク (CDN)、[ Fastly ](https://www.fastly.com/)がホストする宛先に何かをプッシュした場合、発信ジョブのトラフィックは上記の明確に定義された IP アドレスを経由してルーティング**されません **。 代わりに、 IP アドレスは、 us-east-1 または us-east-2 領域で AWS が 使用するアドレスになります。 これは AWS と Fastly 間で確認されている既知の問題であり、 CircleCI は解決に取り組んでいます。

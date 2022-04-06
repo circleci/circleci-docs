@@ -36,7 +36,7 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 ## カスタム イメージの手動作成
 {: #creating-a-custom-image-manually }
 
-以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
+以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
 ### 前提条件
 {: #prerequisite }
@@ -465,4 +465,4 @@ docker push username/ruby-node:0.1
 
 ## Caching Docker images
 {: #caching-docker-images }
-For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/ja/2.0/executor-types/#caching-docker-images).
+For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/2.0/executor-types/#caching-docker-images).

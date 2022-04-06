@@ -27,7 +27,7 @@ Orb は、以下の 3 つの要素で構成されます。
 * [ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#executors)
 * [Executor]({{site.baseurl}}/ja/2.0/orb-concepts/#jobs)
 
-[インライン Orb]({{site.baseurl}}/ja/2.0/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
+[インライン Orb]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
 
 Orb をオーサリングすると、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと自動的に見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
 {: class="alert alert-success"}
@@ -38,7 +38,7 @@ Orb をオーサリングすると、CircleCI [コード共有利用規約](http
 ### Orb CLI
 {: #orb-cli }
 
-Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/ja/2.0/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
+Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/2.0/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
 
 ### 権限の一覧表
 {: #permissions-matrix }
@@ -71,6 +71,6 @@ circleci namespace create <name> <vcs-type> <org-name> [flags]
 ## 次のステップ
 {: #next-steps }
 
-* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/ja/2.0/orb-author/) ガイドに進んでください。
+* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
 * CircleCI Server 環境で Orb を開発したり使用する場合は、[サーバーでの Orb オーサリングプロセス]({{site.baseurl}}/ja/2.0/orb-author-server/) ガイドの Orb の開発に関する情報をお読みください。
 * または、[ Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)のページで詳細をご確認下さい。

@@ -28,11 +28,11 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 
 === 新機能
 
-* Machine Executor 用の Android イメージの提供を開始しました。 詳細については、https://circleci.com/docs/ja/2.0/android-machine-image/[Machine Executor での Android イメージの使用]ガイドを参照してください。
+* Machine Executor 用の Android イメージの提供を開始しました。 詳細については、https://circleci.com/docs/2.0/android-machine-image/[Machine Executor での Android イメージの使用]ガイドを参照してください。
 * カスタム Docker レジストリから必要に応じて CircleCI Build Agent をプルできるようになりました。 詳細についてはカスタマーサポートにお問い合わせください。
-* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド]を参照してください。
+* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、https://circleci.com/docs/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド]を参照してください。
 * Kubernetes v1.16 - v1.23 に対応しました。
-* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 詳細については、https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[CircleCI Server v3.x のインストールガイド]を参照してください。
+* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 詳細については、https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[CircleCI Server v3.x のインストールガイド]を参照してください。
 
 === 修正点
 
@@ -61,7 +61,7 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 === 既知の問題
 
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] 
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] 
 を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 
@@ -69,8 +69,8 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 
 === 新機能
 
-* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール]を参照してください。
-* https://circleci.com/docs/ja/2.0/webhooks/[Webhook] が利用できるようになりました。
+* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、 https://circleci.com/docs/2.0/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール]を参照してください。
+* https://circleci.com/docs/2.0/webhooks/[Webhook] が利用できるようになりました。
 * インサイトダッシュボードが利用できるようになりました。
 * IRSA (AWS) をオブジェクトストレージの認証キーの代わりに使用できるようになりました。
 * ビルド通知を送信するメールアドレスを KOTS 管理者コンソールから設定できるようになりました。
@@ -79,7 +79,7 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 === 修正点
 
 * Vault コンテナの Python を v3 にアップグレードしました。
-* https://circleci.com/docs/ja/2.0/server-3-operator-vm-service/#google-cloud-platform[GCP での共有 VPC アーキテクチャの使用に関するドキュメント]を改善しました。
+* https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[GCP での共有 VPC アーキテクチャの使用に関するドキュメント]を改善しました。
 * JVM のヒープサイズが更新され、`output-processor` がポッドメモリ制限の 80% まで使用できるようになりました。
 
 === 既知の問題
@@ -88,7 +88,7 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 * Let's Encrypt の新しいルート証明書 `isrgrootx1` は信頼できません。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 
@@ -245,8 +245,8 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 
 * Telegraf のプラグインをサーバーに追加してカスタマイズすることにより、例えば Datadog のようなサードパーティのモニタリングソリューションを使用できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
 * 完全にプライベートな環境にインストールしたいお客様のために、プライベートロードバランサーのみを使用するオプションが導入されました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-load-balancers/[ロード バランサーに関するページ]を参照してください。
-* Server 3.xは、ビルドの成果物、テスト結果、その他の状態をオブジェクトストレージに保管します。 S3互換のあらゆるストレージとGoogle Cloud Storageをサポートしています。 設定方法について詳しくは、 https://circleci.com/docs/ja/2.0/server-3-install/[インストールガイド] を参照してください。
-* セットアップワークフローを利用した動的な設定(Dynamic Config)が、サーバーで利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/ja/2.0/dynamic-config/[ダイナミックコンフィグ] を参照してください。
+* Server 3.xは、ビルドの成果物、テスト結果、その他の状態をオブジェクトストレージに保管します。 S3互換のあらゆるストレージとGoogle Cloud Storageをサポートしています。 設定方法について詳しくは、 https://circleci.com/docs/2.0/server-3-install/[インストールガイド] を参照してください。
+* セットアップワークフローを利用した動的な設定(Dynamic Config)が、サーバーで利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/2.0/dynamic-config/[ダイナミックコンフィグ] を参照してください。
 * Runnerがサーバーで利用可能となりました。 インストール手順を含む詳細については、https://circleci.com/docs/ja/2.0/runner-overview/?section=executors-and-images[ランナーに関するページ]を参照してください。 ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
 * v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 詳細と手順については、https://circleci.com/docs/ja/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server の新機能に関するページ]を参照してください。
 * 次のサービスを外部化できるようになりました。 設定方法について詳しくは、https://circleci.com/docs/ja/2.0/server-3-install/[CircleCI Server v3.x のインストールに関するページ]を参照してください。
@@ -277,7 +277,7 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 === 既知の問題
 
 * 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] 
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] 
 を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 
 == リリース 3.0.2
@@ -296,8 +296,8 @@ ifndef::pdf[]
 == 次に読む
 CircleCl Server v3.x の詳しい情報については、以下をご覧ください。
 
-* https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server 3.x の概要]
-* https://circleci.com/docs/ja/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
-* https://circleci.com/docs/ja/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
-* https://circleci.com/docs/ja/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
+* https://circleci.com/docs/2.0/server-3-overview[CircleCI Server 3.x の概要]
+* https://circleci.com/docs/2.0/server-3-install-prerequisites[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
 endif::pdf[]
