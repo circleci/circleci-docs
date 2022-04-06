@@ -27,7 +27,7 @@ If you want to have different self-hosted runners specialized for different work
 
 === CircleCI server installation
 
-When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc#runner-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable either via the `--set` flag or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
+When installing the Helm chart for use with a CircleCI server installation, the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc#runner-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable either via the `--set` flag or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
 
 ==== Upgrading self-hosted runner deployment for server
 
