@@ -76,7 +76,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 ## Getting started
 {: #getting-started }
 
-Select a macOS project repository you would like to build from the **Add Projects** page of the CircleCI application.
+Select a macOS project repository you would like to build from the **Projects** page of the [CircleCI web app](https://app.circleci.com/).
 
 We highly recommend using [Fastlane](https://fastlane.tools) to build and sign your apps in CircleCI. Fastlane requires minimal configuration in most cases and simplifies the build-test-deploy process.
 

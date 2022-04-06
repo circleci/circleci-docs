@@ -138,9 +138,9 @@ To use the SSH key of a machine user, follow the steps below.
 
 2. Log in to GitHub as the machine user.
 
-3. [Log in to CircleCI](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
+3. Log in to the [CircleCI web app](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
 
-4. From the Add Projects page, follow all projects you want the machine user to have access to.
+4. From the **Projects** page, follow all projects you want the machine user to have access to.
 
 5. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
