@@ -24,7 +24,7 @@ image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
 There are two key use cases CircleCI aims to meet with the self-hosted runner:
 
-* Privileged access & controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things that the self-hosted runner enables are:
+* Privileged access & controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things the self-hosted runner enables are:
 ** IP restrictions - Runners can have static IP addresses that you can control
 ** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions
 ** Monitor the operating system
