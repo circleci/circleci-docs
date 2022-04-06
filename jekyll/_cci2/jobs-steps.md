@@ -25,7 +25,7 @@ The following diagram illustrates how data flows between jobs:
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-**Note**: The jobs names shown in this diagram are just examples, you can call your jobs whatever you want.
+**Note**: The job names shown in this diagram are just examples, you can call your jobs whatever you want.
 
 Jobs can be run in docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with linux, macOS or Windows images. Secondary containers or VMs can be configures to to attached services, such as databases, to run alongside your jobs.
 
