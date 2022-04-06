@@ -24,12 +24,7 @@ toc::[]
 == Phase 3: Execution environment installation
 
 === Output Processor
-<<<<<<< HEAD
-==== Overview
-Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if your system is slowing down. We recommend increasing the output processor replica set to scale up the service to meet demand.
-=======
 Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand.
->>>>>>> cb8d6e0a04e1466b6e578a0312bc2bdfa0d934c3
 
 Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
@@ -325,13 +320,8 @@ ifndef::env-aws[]
 
 ===== GCP
 . Create a service account for Nomad Autoscaler
-<<<<<<< HEAD
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. If you've already created the clients, you can simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`.
-  * You may also create a nomad gcp service account manually. The service account needs the role `compute.admin`.
-=======
   * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. You may reference the examples in the link for more details. If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
   * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
->>>>>>> cb8d6e0a04e1466b6e578a0312bc2bdfa0d934c3
 . Set Nomad Autoscaler to `enabled`
 . Set Maximum Node Count*
 . Set Minimum Node Count*
@@ -720,13 +710,9 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *Get JSON Key File*
 +
-<<<<<<< HEAD
-After running the following command, you should see a file named `circleci-server-vm-keyfile` in your local working directory. You will need this file when you configure your server installation:
-=======
 If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required. 
 +
 After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
->>>>>>> cb8d6e0a04e1466b6e578a0312bc2bdfa0d934c3
 +
 ```shell
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
