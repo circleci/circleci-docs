@@ -39,9 +39,5 @@ window.OptimizelyClient.getVariationName({
   if (variation === 'treatment') {
     addNewBadgeToSidebar();
     showHomePageBadges();
-    // console.log('IN TREATMENT GROUP');
-  }
-  if (variation === 'control') {
-    // console.log('IN CONTROL GROUP');
   }
 });
