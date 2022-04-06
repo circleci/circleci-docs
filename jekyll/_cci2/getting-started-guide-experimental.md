@@ -198,7 +198,7 @@ A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">wo
 
 <!--- Section #3 - Content #3 -->
 {% capture content %}
-On a failed pipeline, you can <a class="no-external-ixon" href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
+On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
 {% endcapture %}
 
 {%- capture SSH-into-build -%}
