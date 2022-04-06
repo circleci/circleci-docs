@@ -85,7 +85,7 @@ en:
           link: 2.0/caching/
         - name: Caching strategies
           link: 2.0/caching-strategy/
-        - name: Pipeline variables
+        - name: Pipeline values and parameters
           link: 2.0/pipeline-variables/
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/

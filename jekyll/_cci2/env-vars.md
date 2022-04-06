@@ -496,7 +496,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 **IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
-Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
+Read more in the [Pipeline Values and Parameters]({{site.baseurl}}/2.0/pipeline-variables/) guide.
 
 ## Injecting environment variables with API v1
 {: #injecting-environment-variables-with-api-v1 }
