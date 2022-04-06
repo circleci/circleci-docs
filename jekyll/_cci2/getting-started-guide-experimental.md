@@ -5,6 +5,7 @@ short-title: "Quickstart Guide"
 description: "A tutorial for getting your first green CircleCI build"
 categories: [getting-started]
 order: 41
+toc: false
 ---
 
 <!--- Intro Header Content -->
@@ -16,8 +17,15 @@ Continuous integration is a practice that helps developers integrate their code 
 <!--- End Intro Header Content -->
 
 <!--- Prereq Section -->
-{% include getting-started-prereq.html %}
+{% capture content1 %}
+Sign up for a free CircleCI 
+{% endcapture %}
 
+{% capture content2 %}
+Sign in and connect a VCS 👋
+{% endcapture %}
+
+{% include getting-started-links.html title="Prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
 <!--- End Prereq Section -->
 
 <!--- Header #1 -->
@@ -207,3 +215,17 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 
 {% include getting-started-section-header.html title="04 Recommended learning" content=content %}
 <!--- End Header #4 -->
+
+<!--- Developer Resources Section -->
+{% capture content1 %}On-demand free developer training{% endcapture %}
+
+{% capture content2 %}CircleCI foundation videos{% endcapture %}
+
+{% capture content3 %}Introduction to configuration{% endcapture %}
+
+{% capture content4 %}CircleCI concepts{% endcapture %}
+
+{% capture content5 %}Benefits of CircleCI free plan{% endcapture %}
+
+{% include getting-started-links.html title="Developer resources" href1="https://circleci.com/training" href2="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href3="https://circleci.com/docs/2.0/config-intro/" href4="https://circleci.com/docs/2.0/concepts/" href5="https://circleci.com/docs/2.0/plan-free/"  content1=content1 content2=content2 content3=content3 content4=content4 content5=content5 %}
+<!--- End Developer Resources Section -->
