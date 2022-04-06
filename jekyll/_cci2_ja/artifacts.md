@@ -34,7 +34,7 @@ CircleCI Web アプリでパイプラインの **Job** ページに移動し、[
 
 デフォルトのアーティファクトの保存期間は 30 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 30 日間となっています。
 
-ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/)のページを参照してください。
+ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/2.0/persist-data/)のページを参照してください。
 
 **注:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
@@ -255,7 +255,7 @@ CircleCI がジョブを実行すると、**Job ページ**の [Artifacts] タ�
 
 `curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
-1. [こちらの手順]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
+1. [こちらの手順]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
 
 2. ターミナルウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 

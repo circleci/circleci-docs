@@ -18,7 +18,7 @@ This document presents example config for a variety of popular deployment target
 {:.no_toc}
 
 * In order to use orbs you must use `version 2.1` config.
-* `<docker-image-name-tag>` を使ってどこで[ジョブに Docker イメージ]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice)を指定するかを記載しました。
+* `<docker-image-name-tag>` を使ってどこで[ジョブに Docker イメージ]({{ site.baseurl }}/ja/2.0/optimizations/#docker-image-choice)を指定するかを記載しました。
 * If you wish to remain using `version 2.0` config, or are using an installation of CircleCI server v2.x, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the jobs are built.
 * このページの Orb を使用したサンプルでは、例えば`aws-s3: circleci/aws-s3@x.y.z`のように Orb はタグによるバージョンがつけられてています。 サンプルをコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
 * Any items in these examples that appear within `< >` should be replaced with your own parameters.
@@ -276,7 +276,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
     {% endraw %}
 
-If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]({{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. 次に、production ブランチを使用するように Azure Web App を設定します。
+If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]({{ site.baseurl }}/ja/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. 次に、production ブランチを使用するように Azure Web App を設定します。
 
 ## Capistrano
 {: #capistrano }
@@ -655,7 +655,7 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
 2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
 
-3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-types/).
+3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/ja/2.0/executor-types/).
 
 4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the main branch and deploy using a `git push` command.
 

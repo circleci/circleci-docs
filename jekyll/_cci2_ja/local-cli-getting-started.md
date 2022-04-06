@@ -15,7 +15,7 @@ version:
 ## はじめに
 {: #overview }
 
-開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 This document provides a step-by-step guide on initializing and working with a CircleCI project primarily from within the terminal. Please note that CircleCI server v2.x only supports a legacy version of the CLI. You can find more information on how to install that [here]({{site.baseurl}}/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x).
+開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 This document provides a step-by-step guide on initializing and working with a CircleCI project primarily from within the terminal. Please note that CircleCI server v2.x only supports a legacy version of the CLI. You can find more information on how to install that [here]({{site.baseurl}}/ja/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x).
 
 ## 前提条件
 {: #prerequisites }
@@ -27,7 +27,7 @@ version:
 - ターミナルを開いており、使用可能である。
 - オプション: Github の [`Hub`](https://hub.github.com/) コマンドライン ツールがインストールされている (Web UI ではなくコマンド ラインから Github を使用できます)。 Hub のインストール方法については、[こちら](https://github.com/github/hub#installation)を参照してください。
 
-上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント](https://circleci.com/ja/docs/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
+上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント](https://circleci.com/ja/docs/ja/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
 
 ## 手順
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。

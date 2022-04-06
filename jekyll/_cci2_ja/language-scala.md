@@ -21,7 +21,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-このドキュメントは、[プロジェクトの AWS 権限](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws)に、S3 バケットの読み取りと書き込みが許可される有効な AWS キーが設定されていることを前提としています。 このドキュメントの例では、指定された S3 バケットにビルドパッケージがアップロードされます。
+このドキュメントは、[プロジェクトの AWS 権限](https://circleci.com/ja/docs/ja/2.0/deployment-integrations/#aws)に、S3 バケットの読み取りと書き込みが許可される有効な AWS キーが設定されていることを前提としています。 このドキュメントの例では、指定された S3 バケットにビルドパッケージがアップロードされます。
 
 ## Scala サンプルプロジェクトのソースコード
 {: #sample-scala-project-source-code }
@@ -72,12 +72,12 @@ jobs:
                     apt-get clean && apt-get autoclean
       - checkout
       - restore_cache:
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
           key: sbt-cache
       - run:
           name: Compile samplescala dist package
           command: cat /dev/null | sbt clean update dist
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/ja/2.0/artifacts/
           path: target/universal/samplescala.zip
           destination: samplescala
       - save_cache:
@@ -211,7 +211,7 @@ steps/run キーは、実行するアクションのタイプを指定します�
 **注: **`cat /dev/null` は通常、コマンドが対話型の入力を要求し、対話型 TTY で実行されているかが検出されない場合に、コマンドがハングするのを防ぐために使用されます。 `sbt` がデフォルトで失敗時にプロンプトを表示します。
 
 - [`store_artifacts`]({{site.baseurl}}/ja/2.0/configuration-reference/#store_artifacts) パス: イメージの ARTIFACT の部分にコピーするソースファイルのパスを指定します。
-- [`save_cache`]({{site.baseurl}}/2.0/configuration-reference/#save_cache) パス: 将来のビルドで使用するために、指定されたディレクトリを保存します ([`restore_cache`]({{site.baseurl}}/2.0/configuration-reference/#restore_cache) キーで指定された場合)。
+- [`save_cache`]({{site.baseurl}}/ja/2.0/configuration-reference/#save_cache) パス: 将来のビルドで使用するために、指定されたディレクトリを保存します ([`restore_cache`]({{site.baseurl}}/ja/2.0/configuration-reference/#restore_cache) キーで指定された場合)。
 
 2.0 スキーマの最後の部分は run コマンドキーです。これは、コンパイルされた samplescala.zip を $CIRCLE_ARTIFACTS/ ディレクトリに移動し、その名前を変更します。  その後、指定された AWS S3 バケットにファイルがアップロードされます。
 

@@ -46,7 +46,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          # 依存関係のキャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
+          # 依存関係のキャッシュについては https://circleci.com/ja/docs/ja/2.0/caching/ をお読みください
           name: キャッシュされた依存関係の復元
           keys:
             - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
@@ -67,7 +67,7 @@ jobs:
             - "/root/.stack"
             - ".stack-work"
       - store_artifacts:
-          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するためにテスト サマリーをアップロードします
+          # アーティファクト (https://circleci.com/ja/docs/ja/2.0/artifacts/) に表示するためにテスト サマリーをアップロードします
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -150,7 +150,7 @@ jobs:
 
 ```yaml
       - store_artifacts:
-          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するためにビルド結果をアップロードします
+          # アーティファクト (https://circleci.com/ja/docs/ja/2.0/artifacts/) に表示するためにビルド結果をアップロードします
           path: ~/.local/bin/circleci-demo-haskell-exe 
           destination: circleci-demo-haskell-exe
 ```

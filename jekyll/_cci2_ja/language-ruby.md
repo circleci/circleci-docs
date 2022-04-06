@@ -31,7 +31,7 @@ CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/2.0/circleci-images/)の 1 つを使用しています。
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)の 1 つを使用しています。
 
 CircleCI のビルド済みイメージの使用を検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
@@ -67,7 +67,7 @@ jobs:
       - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
       # Node Orb を使ってパッケージをインストールします。
       # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
-      # 詳細は、 https://circleci.com/docs/2.0/caching/　を参照してください。
+      # 詳細は、 https://circleci.com/docs/ja/2.0/caching/　を参照してください。
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"

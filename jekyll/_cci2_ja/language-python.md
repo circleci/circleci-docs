@@ -57,7 +57,7 @@ jobs:
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。 ジョブのすべてのコマンドがこのコンテナで実行されます。
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。 ジョブのすべてのコマンドがこのコンテナで実行されます。
 
 ```yaml
 version: 2
@@ -182,7 +182,7 @@ jobs:
 
 [`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップを使用して、テスト結果を CircleCI にアップロードします。 この結果は、CircleCI アプリケーションの**テスト サマリー**セクションに表示されます。
 
-Use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step to save test results as artifacts.
+Use the [`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) step to save test results as artifacts.
 
 ```yaml
 version: 2
@@ -236,7 +236,7 @@ jobs: # A basic unit of work in a run
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
@@ -249,9 +249,9 @@ jobs: # A basic unit of work in a run
       - run:
           command: |
             pipenv run python manage.py test
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/ja/2.0/collect-test-data/
           path: test-results
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/ja/2.0/artifacts/
           path: test-results
           destination: tr1
 ```
@@ -261,4 +261,4 @@ jobs: # A basic unit of work in a run
 ## 関連項目
 {: #see-also }
 
-- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)」を参照してください。
+- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)」を参照してください。

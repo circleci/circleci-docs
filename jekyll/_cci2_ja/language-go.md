@@ -133,7 +133,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI アプリケーションの[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、フォークしたプロジェクトの隣にある**[Follow Project (プロジェクトをフォローする)]**ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-変更をローカルでテストする場合は、[CircleCI の CLI ツール](https://circleci.com/ja/docs/2.0/local-jobs/)を使用して `circleci build` を実行します。
+変更をローカルでテストする場合は、[CircleCI の CLI ツール](https://circleci.com/ja/docs/ja/2.0/local-jobs/)を使用して `circleci build` を実行します。
 
 ---
 
@@ -227,7 +227,7 @@ JUnit レポート作成ツールの Go 実装とアプリケーションの他�
 ```
 {% endraw %}
 
-The command for running unit tests is more complicated than some of our other steps. Here we are using \[test splitting\]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. Test splitting can help speed up your pipeline if your project has a large test suite.
+The command for running unit tests is more complicated than some of our other steps. Here we are using \[test splitting\]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. Test splitting can help speed up your pipeline if your project has a large test suite.
 
 Next we run our actual build command using `make` - the Go sample project uses make to run build commands. If this build happens to pull in new dependencies, we will cache them in the `save_cache` step.
 
@@ -291,8 +291,8 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-How to use [workflows]({{ site.baseurl }}/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
+How to use [workflows]({{ site.baseurl }}/ja/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
 
 キャッシュの活用方法については、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。

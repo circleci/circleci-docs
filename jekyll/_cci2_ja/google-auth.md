@@ -65,7 +65,7 @@ jobs:
       - image: google/cloud-sdk
 ```
 
-カスタム イメージを使用している場合は、GCR に対して認証が必要です。 Use the [`auth` key](https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
+カスタム イメージを使用している場合は、GCR に対して認証が必要です。 Use the [`auth` key](https://circleci.com/docs/ja/2.0/configuration-reference/#docker) to specify credentials.
 
 ```yaml
 version: 2

@@ -16,7 +16,7 @@ version:
 ## CircleCI での Yarn の使用方法
 {: #using-yarn-in-circleci }
 
-Yarn might already be installed in your execution environment if you are using the [`docker` executor](https://circleci.com/docs/2.0/executor-types/#using-docker). [CircleCI のビルド済み Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/)では、Node.js イメージ (`circleci/node`) に Yarn がプリインストールされています。 `circleci/python`、`circleci/ruby` などの他の言語イメージを使用している場合は、Yarn と Node.js を含む 2 つの[イメージ バリアント](https://circleci.com/docs/2.0/circleci-images/#language-image-variants)があります。 `-node` と `-node-browsers` のイメージ バリアントです。 For example, using the Docker image `circleci/python:3-node` will give you a Python execution environment with Yarn and NodeJS installed.
+Yarn might already be installed in your execution environment if you are using the [`docker` executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker). [CircleCI のビルド済み Docker イメージ](https://circleci.com/ja/docs/ja/2.0/circleci-images/)では、Node.js イメージ (`circleci/node`) に Yarn がプリインストールされています。 `circleci/python`、`circleci/ruby` などの他の言語イメージを使用している場合は、Yarn と Node.js を含む 2 つの[イメージ バリアント](https://circleci.com/docs/ja/2.0/circleci-images/#language-image-variants)があります。 `-node` と `-node-browsers` のイメージ バリアントです。 For example, using the Docker image `circleci/python:3-node` will give you a Python execution environment with Yarn and NodeJS installed.
 
 独自の Docker イメージ ベース、または `macos`、`windows`、`machine` の Executor を使用している場合は、[Yarn の公式ドキュメント](https://classic.yarnpkg.com/en/docs/install)の手順に従って Yarn をインストールできます。 Yarn ドキュメントには、マシン環境別のインストール手順が記載されています。 たとえば Unix 系の環境にインストールする場合は、以下の curl コマンドを使用します。
 
@@ -76,4 +76,4 @@ Yarn 1.x の例:
 ## 関連項目
 {: #see-also }
 
-[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)

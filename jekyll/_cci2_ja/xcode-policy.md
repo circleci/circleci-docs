@@ -75,7 +75,7 @@ Xcode の次の安定版がリリースされる前に開発者の方々がア�
 
 CircleCI では Apple の Xcode のリリース状況を注意深く追跡し、常に可能な限り迅速に新しいイメージをリリースするよう努めています。 この作業は Xcode と macOS で行われる変更に大きく依存するため、リリースについて SLA として所要時間を公式に定めてはおりません。
 
-新しいイメージがリリースされた際は必ず、[CircleCI の Discuss サイト](https://discuss.circleci.com/c/announcements/39)でリリース告知により通知します。 また、[こちらの Xcode バージョンの表](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions)に追記します。
+新しいイメージがリリースされた際は必ず、[CircleCI の Discuss サイト](https://discuss.circleci.com/c/announcements/39)でリリース告知により通知します。 また、[こちらの Xcode バージョンの表](https://circleci.com/docs/ja/2.0/testing-ios/#supported-xcode-versions)に追記します。
 
 ## macOS のバージョン
 {: #macos-versions }

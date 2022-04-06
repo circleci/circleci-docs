@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行するための正式なプロセスやツールセットはありません。 The process is to perform a fresh install of CircleCI server, using AWS and Terraform—see [Installation]({{ site.baseurl }}/2.0/aws) for instructions.
+CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行するための正式なプロセスやツールセットはありません。 The process is to perform a fresh install of CircleCI server, using AWS and Terraform—see [Installation]({{ site.baseurl }}/ja/2.0/aws) for instructions.
 
 インストールが完了したら、コンテキスト、環境変数、API トークンなどのすべてのプロジェクト設定を手動でコピーする必要があります。
 
@@ -16,7 +16,7 @@ CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行する�
 
 SaaS で動作している 2.0 `config.yml` ファイルであれば、Server でもそのまま問題なく動作します。 There are small differences between the 1.0 execution environments that may result in some 1.0 configs not translating 100% from SaaS to Server.
 
-カスタムの `machine` Executor AMI および構成可能なインスタンスの種類は、特定の方法で定義されます。 そのため、Server ビルド クラスタを定義するときには、チームが[構成可能なリソース](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class) (`resource_class`) を SaaS でどのように使用しているかを考慮してください。
+カスタムの `machine` Executor AMI および構成可能なインスタンスの種類は、特定の方法で定義されます。 そのため、Server ビルド クラスタを定義するときには、チームが[構成可能なリソース](https://circleci.com/ja/docs/ja/2.0/configuration-reference/#resource_class) (`resource_class`) を SaaS でどのように使用しているかを考慮してください。
 
 ## 制限事項
 {: #limitations }
