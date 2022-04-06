@@ -135,7 +135,7 @@ runner:
 === runner.mode
 `$LAUNCH_AGENT_RUNNER_MODE`
 
-This parameter allows you to specify whether you want to terminate this self-hosted runner instance upon completion of a job (`single-task`) or to continuously poll for new available jobs (`continuous`).
+This parameter allows you to specify whether you want to terminate this self-hosted runner instance upon completion of a job (`single-task`), or to continuously poll for new available jobs (`continuous`).
 
 The possible values are:
 
