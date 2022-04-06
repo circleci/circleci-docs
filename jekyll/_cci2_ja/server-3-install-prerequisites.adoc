@@ -51,7 +51,7 @@ NOTE: In the following sections, replace any items or credentials displayed betw
 | {kotsversion} *
 | Replicated Kubernetes アプリケーション管理。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
 To install the latest version, you can run `curl  https://kots.io/install {vbar} bash`.
-| Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac users will need to grant a security exception.
+| tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から`kots` を抽出したら、`sudo mv kots /usr/local/bin/kubectl-kots`を実行し、インストールします。 Mac users will need to grant a security exception.
 
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
