@@ -161,7 +161,7 @@ If you have an orb with sufficiently complex internal scripts, you may want to i
 
 For Bash unit testing, we recommend the [BATS-Core](https://github.com/bats-core/bats-core) library, which is an open source testing framework for Bash, analogous to [Jest](https://jestjs.io/) for JavaScript.
 
-CircleCI has created a [BATS orb](https://circleci.com/developer/orbs/orb/circleci/bats-core) to easily integrate BATS into your CircleCI Pipelines.
+CircleCI has created a [BATS orb](https://circleci.com/developer/orbs/orb/circleci/bats-core) to easily integrate BATS into your CircleCI pipelines.
 
 To add BATS to your orb, follow these steps:
 
