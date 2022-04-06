@@ -196,7 +196,7 @@ Want to see how how CircleCI writes unit tests for Bash? Check out our [Slack or
 ## Integration testing
 {: #integration-testing }
 
-After validating, linting, shellchecking, and any other testing that you can perform on the source code is complete, we must test our orb's functionality in a real CircleCI config. In the second config file (`test-deploy.yml`), we will access the development version of the orb we published in the first config, and attempt to execute our orbs commands and jobs.
+After validating, linting, shellchecking, and any other testing that you can perform on the source code is complete, you must test your orb's functionality in a real CircleCI config. In the second config file (`test-deploy.yml`), you can access the development version of the orb you published in the first config, and attempt to execute your orbs commands and jobs.
 
 ### Testing orb commands
 {: #testing-orb-commands }
