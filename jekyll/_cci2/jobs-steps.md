@@ -41,7 +41,7 @@ Steps are collections of executable commands, which are run during a job. The `c
 ## Passing parameters to jobs
 {: #passing-parameters-to-jobs }
 
-Using parameters you can run a single job multiple times with different outcomes. An extension of this functionality is [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
 
 ```yml
 version: 2.1
