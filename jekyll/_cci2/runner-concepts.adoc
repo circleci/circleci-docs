@@ -31,10 +31,10 @@ Please note, if you are already using <<orb-intro#,orbs>>, you have an existing 
 
 The self-hosted runner consists of two components: the launch agent and the task agent.
 
-* launch agent (launch-agent) - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
-* task agent (task-agent) - handles running a task retrieved and configured by the launch agent
+* launch agent - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
+* task agent - handles running a task retrieved and configured by the launch agent
 
-The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
+The system has been designed to allow admins to configure the task agent to run with a lower level of privileges than the launch agent. Any user who is able to execute a job will be able to gain the same privileges as task agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as `root`, but task agent will run as `circleci`).
 
 == Self-hosted runner concurrency
 
