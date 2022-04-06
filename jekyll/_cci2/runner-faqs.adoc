@@ -37,7 +37,7 @@ This approach is the most secure; however, this means that if the job’s depend
 
 In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
 
-NOTE: No inbound connectivity is required by self-hosted runner. Any other required connectivity is dependent on the content of the jobs themselves.
+NOTE: No inbound connectivity is required by a self-hosted runner. Any other required connectivity is dependent on the content of the jobs themselves.
 
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
