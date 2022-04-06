@@ -11,10 +11,10 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI is committed to supporting four minor versions of the software. This means a minor version will receive patches for up to 12 months. In order to help identify releases and their impact to your installation, we use semantic versioning.
+CircleCI is committed to supporting four minor versions of the software. This means a minor version will receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation.
 
 ## Semantic Versioning
-Given a version number, MAJOR.MINOR.PATCH increment, the:
+Given a version number, MAJOR.MINOR.PATCH increment, use the:
 
 . MAJOR version when you make incompatible API changes,
 . MINOR version when you add functionality in a backwards-compatible manner, and
