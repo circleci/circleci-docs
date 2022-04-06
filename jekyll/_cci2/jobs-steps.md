@@ -93,6 +93,7 @@ workflows:
 ```
 
 ## Using a command from an orb in a job
+{: #using-a-command-from-an-orb-in-a-job }
 
 Using the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example again, the orb includes a command called `notify`, to notify a specified slack channel. You can reference this command in your job as follows (see line 16):
 
