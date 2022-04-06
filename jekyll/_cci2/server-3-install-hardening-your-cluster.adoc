@@ -94,7 +94,7 @@ Instances building jobs (that is, the Nomad clients and external VMs) also will 
 ## Kubernetes Nodes
 
 ### Intra-node traffic
-By default, the traffic within your Kuberntes cluster is regulated by networking policies. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between Kuberntes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
+By default, the traffic within your Kuberntes cluster is regulated by networking policies. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 

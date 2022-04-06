@@ -694,7 +694,7 @@ endif::env-aws[]
 
 ==== VM Service Validation
 
-Once you have configured and deployed CircleCI server, you should validate that VM Service is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the VM Service Jobs complete with green. At this point, all tests should pass with green.
+Once you have configured and deployed CircleCI server, you should validate that VM Service is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the VM Service Jobs complete. At this point, all tests should pass.
 
 === Runner
 

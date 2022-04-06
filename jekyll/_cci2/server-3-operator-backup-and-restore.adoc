@@ -27,7 +27,7 @@ This means you can also restore Admin Console configurations and customizations 
 
 NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
 
-== The Setup
+== The setup
 
 Backups of CircleCI server can be created through https://kots.io/[KOTS].
 However, to enable backup support you need to install and configure https://velero.io/[Velero] on your cluster.
@@ -38,11 +38,11 @@ The following sections outline the steps needed to install Velero on your cluste
 
 - Download and install the https://velero.io/docs/v1.6/basic-install/[Velero CLI] for your environment.
 
-==== AWS Prerequisites
+==== AWS prerequisites
 
 - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] is installed.
 
-==== GCP Prerequisites
+==== GCP prerequisites
 
 - `gcloud` and `gsutil` are installed. You can set them up by installing Google Cloud SDK, which includes both, by referring to the https://cloud.google.com/sdk/docs/[documentation].
 
@@ -50,7 +50,7 @@ For more information, see Velero's https://velero.io/docs/v1.6/supported-provide
 
 Below, you will find instructions for creating a server 3.x backup on AWS and GCP.
 
-==== S3 Compatible Storage Prerequisites
+==== S3-compatible storage prerequisites
 
 - https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] is installed and configured for your storage provider.
 
@@ -373,9 +373,9 @@ As restic is a daemonset, there should be one pod for each node in your Kubernet
 * S3-COMPATIBLE SETUP *
 
 ////
-== Server 3.x backups with S3 Compatible Storage
+== Server 3.x backups with S3-compatible storage
 
-The following steps assume you arre using S3-compatible object storage, but not necessarily AWS S3, for your backups.
+The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
 
 These instructions were sourced from the Velero documentation https://velero.io/docs/v1.6/contributions/minio/[here].
@@ -439,8 +439,7 @@ mc admin policy add $ALIAS velero-policy velero-policy.json
 mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
 ----
 
-Finally, add your new user's credentials to a file (`./credentials-velero` in
-this example) with the following contents:
+Finally, add your new user's credentials to a file (`./credentials-velero` in this example) with the following contents:
 
 [source,toml]
 ----
@@ -467,8 +466,7 @@ velero install --provider aws \
   --wait
 ----
 
-Once Velero is installed on your cluster, check the new `velero` namespace. You
-should have a Velero deployment and a restic daemonset, for example:
+Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, for example:
 
 [source,bash]
 ----
@@ -486,7 +484,7 @@ As restic is a daemonset, there should be one pod for each node in your Kubernet
 == Creating backups
 Now that Velero is installed on your cluster, you should see the **Snapshots** option in the navbar of the management console.
 
-image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
+image::kots-admin-navbar-snapshot-option.png[KOTS Navbar]
 
 If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
 <<troubleshooting-backups-and-restoration, troubleshooting>> section.
@@ -514,7 +512,7 @@ image::kots-admin-create-backup.png[KOTS Create Snapshot]
 
 === Option 1 - Restore a backup from a snapshot
 
-To restore from a backup stored in your S3 compatible storage, you need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups. When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed beforehand. When using GKE or other platforms, a cluster with just Velero installed may work.  
+To restore from a backup stored in your S3-compatible storage, you need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups. When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed beforehand. When using GKE or other platforms, a cluster with just Velero installed may work.  
 
 NOTE: If this is a new cluster or if you need to reinstall Velero, the installation should be done with the same credentials generated above.
 
@@ -534,7 +532,7 @@ Using a backup name from the previous command, run the following to start the re
 kubectl kots restore --from-backup <backup-instance-id>
 ----
 
-=== Option 3 - Restore a backup using the KOTS Admin Console UI
+=== Option 3 - Restore a backup using the KOTS Admin Console
 
 As with backups, navigate to *Snapshots* in the KOTS Admin Console. Now you should see a list of all your backups, each with a restore icon.
 Choose the backup you wish to use and select restore.
@@ -547,7 +545,7 @@ IMPORTANT: If you are using pre-existing Nomad clients, you need to restart them
 
 It should take approximately 10-15 mins for CircleCI server to be restored and operational.
 
-== Optional - Scheduling backups with KOTs
+== Optional - Scheduling backups with KOTS
 
 To schedule regular backups, select *Snapshots*, and then *Settings & Schedule* from the KOTS Admin Console.
 
