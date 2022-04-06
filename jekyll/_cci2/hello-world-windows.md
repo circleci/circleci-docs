@@ -113,17 +113,20 @@ Note that in order to use the Windows Server 2022 image in CircleCI cloud, it mu
 
 ```yaml
 version: 2.1
-orbs:
-  win: circleci/windows@4.1
-jobs:
-  build:
-    executor: win/server-2022
-    steps:
-      - run: Write-Host 'Hello, Windows'
+
 workflows:
-  my-workflow:
+  build-and-unittest:
     jobs:
-      - build
+      - build-windows
+
+jobs:
+  build-windows:
+    machine:
+      image: windows-server-2022-gui:current
+      resource_class: windows.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
+    steps:
+      - run: echo 'test'
 ```
 
 Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
