@@ -1,3 +1,8 @@
+// mixins
+@import 'mixins/cta_badge';
+@import 'mixins/cta_button';
+
+// scss files
 @import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
@@ -24,6 +29,11 @@
 
 // pages with their own unique styling
 @import 'pages/troubleshooting-and-common-issues';
+
+@import 'pages/getting-started';
+
+
+@import 'includes/badge';
 
 @import 'pages/getting-started';
 
@@ -332,10 +342,11 @@ body.homepage{
     }
   }
 
-	article{
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
+  article{
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      flex-direction: column;
 	}
 
 	div.category-section{
