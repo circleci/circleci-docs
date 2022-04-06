@@ -17,7 +17,7 @@ This guide covers various best practices for testing orbs.
 ## Introduction
 {: #introduction }
 
-Orbs are open source and contributions are expected, therefore, as with all software, setting up a solid testing pipeline for your orb is important. Because orbs are created in YAML, it may seem difficult to test them effectively. With the Orb Development Kit, there is a simple path to implementing a full range of robust tests for your orb.
+Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. So like any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language, but with the Orb Development Kit, there is a simple path to implementing a full range of robust tests for your orb.
 
 ## Orb-tools Pipeline Overview
 {: #orb-tools-pipeline-overview }
