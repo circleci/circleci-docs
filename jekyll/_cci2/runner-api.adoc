@@ -17,7 +17,7 @@ toc::[]
 
 == Authentication Methods
 
-The CircleCI self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
+The CircleCI self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
 
 === Circle-Token (personal authentication)
 
