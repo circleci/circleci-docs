@@ -109,7 +109,7 @@ commands:
 
 ## **`parameters`** (requires version: 2.1)
 {: #parameters-requires-version-21 }
-Pipeline parameters declared for use in the configuration. See [Pipeline Vales and Parameters]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+Pipeline parameters declared for use in the configuration. See [Pipeline Values and Parameters]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
 ----|-----------|------|------------
