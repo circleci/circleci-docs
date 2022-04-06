@@ -10,7 +10,7 @@ table{
   width:70px
 }
 
-.admonitionblock td.icon [class^="fa icon-"]{font-size:1.8em;cursor:default}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:1.8em;cursor:default;padding-right: 15px;}
 .admonitionblock td.icon .icon-note:before{content:"\f05a";color:#31708f}
 .admonitionblock td.icon .icon-tip:before{content:"\f0eb";color:#555555}
 .admonitionblock td.icon .icon-warning:before{content:"\f071";color:#a94442}
@@ -57,6 +57,7 @@ table{
 .title{
   font-style: italic;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 .imageblock{
