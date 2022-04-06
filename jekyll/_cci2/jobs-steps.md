@@ -66,7 +66,7 @@ workflows:
 ## Using a job from an orb
 {: #using-a-job-from-an-orb }
 
-Orbs are packages or reusable config that you can use in your project configuration. Orbs usually contain both commands that you can use in your jobs, and whole jobs that you can schedule in your workflows. Take the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example. This orb provides a job called [`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification) which you can ue in your workflows. This job pauses the workflow to require manual approval and send a slack notification. To use this job just reference it in your workflow (see line 10):
+Orbs are packages or reusable config that you can use in your project configuration. Orbs usually contain both commands that you can use in your jobs, and whole jobs that you can schedule in your workflows. Take the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example. This orb provides a job called [`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification) which you can use in your workflows. This job pauses the workflow to require manual approval and send a slack notification. To use this job just reference it in your workflow (see line 10):
 
 ```yml
 version: 2.1
