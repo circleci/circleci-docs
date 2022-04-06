@@ -45,7 +45,7 @@ workflows:
           version: <node-version>
 ```
 
-CircleCI Orb の詳細については、[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)を参照してください。
+CircleCI Orb の詳細については、[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro/)を参照してください。
 
 ## CircleCI プラットフォームおよび Orb を使用するための環境構成
 {: #configure-your-environment-for-circleci-pipelines-and-orbs }
@@ -54,7 +54,7 @@ CircleCI Orb の詳細については、[Orb の概要]({{ site.baseurl }}/2.0/o
 このクックブックのほとんどのレシピでは、バージョン 2.1 の設定、パイプラインおよびOrb が必要です。 記載されている例を使用する前に、これらの機能が設定済みであることを確認してください。 必要に応じて、以下の注意事項や手順を実行してください。
 
 * パイプラインの機能や Orb を使用するには、`version 2.1` の設定ファイルを使用する必要があります。
-* `<docker-image-name-tag>` を使ってどこで[ジョブに Docker イメージ]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice)を指定するかを記載しました。
+* `<docker-image-name-tag>` を使ってどこで[ジョブに Docker イメージ]({{ site.baseurl }}/ja/2.0/optimizations/#docker-image-choice)を指定するかを記載しました。
 * `version 2.0` の設定ファイルを引き続き使用する場合や CircleCI Server v2.x をご使用の場合も、[Orb レジストリ](https://circleci.com/developer/orbs)で幅広い Orb ソースを参照し、それぞれのジョブやコマンドのビルド方法をご覧いただけるためこのレシピを活用してください。
 * このページの Orb を使用したサンプルでは、例えば`aws-s3: circleci/aws-s3@x.y.z`のように Orb はタグによるバージョンがつけられてています。 サンプルをコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
 * `< >`の間の項目は、すべてご自身のパラメーターに置き換える必要があります。
@@ -150,7 +150,7 @@ workflows:
       - verify-deployment
 ```
 
-この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 イメージを設定して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples)を参照してください。
+この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 イメージを設定して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/docs/ja/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples)を参照してください。
 
 Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
 
@@ -487,7 +487,7 @@ jobs:
 ## パイプラインのパラメーターを使って実行するワークフローを選択する
 {: #selecting-a-workflow-to-run-using-pipeline-parameters }
 
-API を使用して特定のワークフローを手動で実行しながら、プロジェクトへのプッシュごとにワークフローを実行できるようにしたい場合があります。 これを行うには、 [パイプラインのパラメーター]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使用して、実行するワークフローを決定します。
+API を使用して特定のワークフローを手動で実行しながら、プロジェクトへのプッシュごとにワークフローを実行できるようにしたい場合があります。 これを行うには、 [パイプラインのパラメーター]({{ site.baseurl }}/ja/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使用して、実行するワークフローを決定します。
 
 以下の例ではデフォルトで`build`ワークフローを実行し、API を使用して他にどのワークフローを実行するか制御することができます。
 
@@ -527,7 +527,7 @@ workflows:
       - report
 ```
 
-この `action `パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build`されます。 次に、 API v2 の [新しいパイプラインのトリガ ]({{ site.baseurl }}/api/v2/#operation/triggerPipeline)エンドポイントを使って別のワークフローを選択するために、`action` に別の値を指定する例を示します。この例では、`report` という名前のワークフローが実行されます。 [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api)をご自身の値に置き換えてください。
+この `action `パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build`されます。 次に、 API v2 の [新しいパイプラインのトリガ ]({{ site.baseurl }}/api/v2/#operation/triggerPipeline)エンドポイントを使って別のワークフローを選択するために、`action` に別の値を指定する例を示します。この例では、`report` という名前のワークフローが実行されます。 [`project-slug`]({{ site.baseurl }}/ja/2.0/api-developers-guide/#getting-started-with-the-api)をご自身の値に置き換えてください。
 
 ```shell
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -537,14 +537,14 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -d '{ "parameters": { "action": report } }'
 ```
 
-API v2 エンドポイントに使用に関する詳細は、[API Reference]({{ site.baseurl }}/api/v2/) や [API API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request) を参照してください。
+API v2 エンドポイントに使用に関する詳細は、[API Reference]({{ site.baseurl }}/api/v2/) や [API API Developers Guide Worked Example]({{ site.baseurl }}/ja/2.0/api-developers-guide/#example-end-to-end-api-request) を参照してください。
 
 ## ジョブのステップでの branch-filtering
 {: #branch-filtering-for-job-steps }
 
 ブランチのフィルタリングは、以前はワークフローでのみ可能でしたが、コンパイル時のロジックステートメントによりジョブのステップでもブランチのフィルタリングが可能です。
 
-以下の例では、[パイプラインの値、]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values)`pipeline.git.branch` を使っていつステップを実行するか (`when`)を制御する方法を紹介します。 この例では、コミットがメインブランチに置かれた場合のみ `run: echo "I am on main"` ステップを実行します。
+以下の例では、[パイプラインの値、]({{ site.baseurl }}/ja/2.0/pipeline-variables/#pipeline-values)`pipeline.git.branch` を使っていつステップを実行するか (`when`)を制御する方法を紹介します。 この例では、コミットがメインブランチに置かれた場合のみ `run: echo "I am on main"` ステップを実行します。
 
 ```yaml
 version: 2.1
@@ -573,7 +573,7 @@ workflows:
 ## ダイナミック コンフィグ
 {: #dynamic-configuration }
 
-このセクションでは、[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config)セクションを既にお読みになっていること、 [入門ガイド]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)に記載されている手順が実行済みであることを前提としています。
+このセクションでは、[ダイナミック コンフィグ]({{ site.baseurl }}/ja/2.0/dynamic-config)セクションを既にお読みになっていること、 [入門ガイド]({{ site.baseurl }}/ja/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)に記載されている手順が実行済みであることを前提としています。
 
 以下にダイナミック コンフィグの使用例を示します。
 
@@ -583,7 +583,7 @@ workflows:
 ### 基本的な例
 {: #a-basic-example }
 
-以下は、CircleCI のダイナミック コンフィグ機能の基本的な使用例です。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
+以下は、CircleCI のダイナミック コンフィグ機能の基本的な使用例です。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
 
 ```yaml
 version: 2.1
@@ -619,15 +619,15 @@ workflows:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - ダイナミック コンフィグ機能を使用するために `continuation` Orb を呼び出します。
-- `continuation` Orb を [`executor`]({{ site.baseurl }}/2.0/executor-intro/) として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
-    - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
-    - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
+- `continuation` Orb を [`executor`]({{ site.baseurl }}/ja/2.0/executor-intro/) として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
+    - [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
+    - [`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
     - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
 **注意:パイプラインの設定の一部として、** 1 つの `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 つに制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-`continuation` Orb の内容の詳細については、当該 Orb のソース コードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミック コンフィグの FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
+`continuation` Orb の内容の詳細については、当該 Orb のソース コードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミック コンフィグの FAQ]({{ site.baseurl }}/ja/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
 
 ### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
@@ -726,7 +726,7 @@ workflows:
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
-  # https://circleci.com/docs/2.0/configuration-reference/#logic-statements
+  # https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements
   # for more information.
   run-integration-tests:
     when:

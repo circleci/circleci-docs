@@ -43,5 +43,5 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-注: 上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+注: 上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 

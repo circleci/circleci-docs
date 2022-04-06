@@ -33,7 +33,7 @@ kubectl kots version
 +
 NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-. ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
+. ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/ja/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
 +
 ```bash
 kubectl kots install circleci-server
@@ -208,7 +208,7 @@ endif::env-aws[]
 
 === Postgres、MongoDB、Vault の設定
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/ja/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
 
 === 保存とデプロイ
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Kong ロードバランサー用のIP アドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
@@ -246,5 +246,5 @@ kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ifndef::pdf[]
 ## 次に読む
 
-* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x ステップ 3: 実行環境のインストール]
+* https://circleci.com/docs/ja/2.0/server-3-install-build-services/[Server 3.x ステップ 3: 実行環境のインストール]
 endif::[]

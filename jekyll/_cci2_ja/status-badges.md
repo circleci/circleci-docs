@@ -142,4 +142,4 @@ To create a status API token, go to the [CircleCI web app](https://app.circleci.
 ## 設定ファイルの詳細
 {: #see-also }
 
-* [ステータス]({{site.baseurl}}/2.0/status/)
+* [ステータス]({{site.baseurl}}/ja/2.0/status/)

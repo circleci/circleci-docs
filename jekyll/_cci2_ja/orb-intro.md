@@ -16,7 +16,7 @@ version:
 
 CircleCI Orb とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、パラメーター化および[再利用が可能な設定要素]({{site.baseurl}}/ja/2.0/reusing-config/)をまとめた共有可能なオープンソースパッケージです。 Orb を使用すると、設定がシンプルになり、多くのプロジェクトにまたがってソフトウェアやサービス スタックとの連携を素早く、容易に行えるようになります。
 
-パブリッシュされている Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/2.0/orb-author-intro/)こともできます。
+パブリッシュされている Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/ja/2.0/orb-author-intro/)こともできます。
 
 ## Orb を使用するメリット
 {: #benefits-of-using-orbs }
@@ -76,7 +76,7 @@ workflows:
 ## Orb レジストリ
 {: #the-orb-registry }
 
-[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
+[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/ja/2.0/orb-author-intro/)することもできます。
 
 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 

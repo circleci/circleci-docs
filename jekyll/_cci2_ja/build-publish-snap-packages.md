@@ -19,7 +19,7 @@ Snap とは、複数の Linux ディストリビューション (distros) 上で
 
 .snap ファイルを一度作成すれば、`snapd` をサポートする Ubuntu、Debian、Fedora、Arch などの任意の Linux ディストリビューション上にインストールできます。 Snapcraft 自体の詳細については、[Snapcraft の Web サイト](https://snapcraft.io/)を参照してください。
 
-Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI syntax](https://circleci.com/docs/2.0/configuration-reference/). ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。 サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
+Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI syntax](https://circleci.com/docs/ja/2.0/configuration-reference/). ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。 サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
 
 ## 前提条件
 {: #prerequisites }

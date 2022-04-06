@@ -58,10 +58,10 @@ jobs: # basic units of work in a run
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/ja/2.0/artifacts/
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      # See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
 ```
 
 {% endraw %}

@@ -955,7 +955,7 @@ steps:
 
 | キー        | 必須 | タイプ   | 説明                                                                                      |
 | --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
+| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements) |
 | steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                               |
 {: class="table table-striped"}
 
@@ -1324,7 +1324,7 @@ workflows:
             - doing-things-job
 ```
 
-このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
+このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー](https://circleci.com/docs/ja/2.0/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
@@ -1963,7 +1963,7 @@ workflows:
 ##### **ワークフローでの `when` の使用**
 {: #using-when-in-workflows }
 
-CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
+CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
 
 以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 

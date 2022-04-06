@@ -36,7 +36,7 @@ CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD 
 └── all-other-project-files-and-folders
 ```
 
-`.circleci/config.yml` は、プロジェクトの全パイプラインを定義する強力な YAML ファイルです。 使用される様々なキーの概要については、[設定ファイルのリファレンス]({{ site.baseurl }}/2.0/configuration-reference/)をご覧ください。
+`.circleci/config.yml` は、プロジェクトの全パイプラインを定義する強力な YAML ファイルです。 使用される様々なキーの概要については、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/)をご覧ください。
 
 CircleCI の設定はお客様のプロジェクトの様々なニーズに合わせて変更できます。 下記の用語は粒度と依存度の順に並べられており、最も一般的な CircleCI プロジェクトのコンポーネントを表しています。
 
@@ -619,7 +619,7 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
 
 {: #jobs }
 
-ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `docker` の場合、プライマリコンテナで使うには[イメージを指定する](https://circleci.com/docs/2.0/executor-intro/#docker)必要があります。 `macos` の場合、[Xcode のバージョン](https://circleci.com/docs/2.0/executor-intro/#macos)を指定する必要があります。 `windows` の場合、[Windows Orb](https://circleci.com/docs/2.0/executor-intro/#windows) を指定する必要があります。
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `docker` の場合、プライマリコンテナで使うには[イメージを指定する](https://circleci.com/docs/ja/2.0/executor-intro/#docker)必要があります。 `macos` の場合、[Xcode のバージョン](https://circleci.com/docs/ja/2.0/executor-intro/#macos)を指定する必要があります。 `windows` の場合、[Windows Orb](https://circleci.com/docs/ja/2.0/executor-intro/#windows) を指定する必要があります。
 
 ![ジョブの図]( {{ site.baseurl }}/assets/img/docs/job.png)
 
@@ -641,7 +641,7 @@ Orb は、再利用可能なコードスニペットです。Orb を使用する
 
 プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 _並列実行_により、指定した数の別々の Executor にテストを分散することができます。
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 1 よりも大きい値を設定します。
 
@@ -696,7 +696,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 {: #steps }
 
-ステップは通常、ジョブを完了するために必要な実行可能コマンドの集まりです。 たとえば以下の例では、[checkout</code>]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップ (すべての CircleCI プロジェクトで使用できるビルトインステップ) が SSH コマンドでジョブのソースコードをチェックアウトします。 次に、`run` ステップで、デフォルトで非ログインシェルを使用して、`make test` コマンドなどのカスタムコマンドを実行します。 コマンドは、 [ジョブ宣言の外部]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) に定義することもでき、設定全体で再利用することができます。
+ステップは通常、ジョブを完了するために必要な実行可能コマンドの集まりです。 たとえば以下の例では、[checkout</code>]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップ (すべての CircleCI プロジェクトで使用できるビルトインステップ) が SSH コマンドでジョブのソースコードをチェックアウトします。 次に、`run` ステップで、デフォルトで非ログインシェルを使用して、`make test` コマンドなどのカスタムコマンドを実行します。 コマンドは、 [ジョブ宣言の外部]({{ site.baseurl }}/ja/2.0/configuration-reference/#commands-requires-version-21) に定義することもでき、設定全体で再利用することができます。
 
 
 
@@ -736,7 +736,7 @@ jobs:
 
 * *ユーザー*とは、組織内の個々のユーザーを指します。
 
-* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
+* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/ja/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
 
 
 ## ワークフロー
@@ -1004,4 +1004,4 @@ workflows:
 
 {:.no_toc}
 
-[はじめてのビルドの成功（グリーンビルド)]({{ site.baseurl }}/2.0/getting-started/) では、動作中のパイプラインを設定する方法を順を追って紹介しています。
+[はじめてのビルドの成功（グリーンビルド)]({{ site.baseurl }}/ja/2.0/getting-started/) では、動作中のパイプラインを設定する方法を順を追って紹介しています。

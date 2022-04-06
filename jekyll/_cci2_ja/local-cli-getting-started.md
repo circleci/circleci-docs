@@ -15,7 +15,7 @@ version:
 ## はじめに
 {: #overview }
 
-開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 This document provides a step-by-step guide on initializing and working with a CircleCI project primarily from within the terminal. Please note that CircleCI server v2.x only supports a legacy version of the CLI. You can find more information on how to install that [here]({{site.baseurl}}/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x).
+開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 This document provides a step-by-step guide on initializing and working with a CircleCI project primarily from within the terminal. Please note that CircleCI server v2.x only supports a legacy version of the CLI. You can find more information on how to install that [here]({{site.baseurl}}/ja/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x).
 
 ## 前提条件
 {: #prerequisites }

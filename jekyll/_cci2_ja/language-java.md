@@ -59,13 +59,13 @@ jobs: # a collection of steps
           POSTGRES_DB: circle_test
     steps: # a collection of executable commands
       - checkout # check out source code to working directory
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          name: Run tests in parallel # See: https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
@@ -103,7 +103,7 @@ jobs: # a collection of steps
       # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
       - store_artifacts:
           path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      # See https://circleci.com/docs/ja/2.0/deployment-integrations/ for deploy examples
 workflows:
   version: 2
   workflow:

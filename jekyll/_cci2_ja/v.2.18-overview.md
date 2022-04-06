@@ -55,9 +55,9 @@ order: 1
 | `circleci.grpc-response`                         | grpc システムが呼び出すシステムの待機時間                         |
 
 
-<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)
+<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/ja/2.0/customizations/#resource-classes)
 
-* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
+* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/ja/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
 
 <br>
 

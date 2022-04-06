@@ -53,7 +53,7 @@ jobs:  # basic units of work in a run
       - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
 
       - restore_cache:  # restores saved mix cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
           keys:  # list of cache keys, in decreasing specificity
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -77,7 +77,7 @@ jobs:  # basic units of work in a run
       - run: mix test  # run all tests in project
 
       - store_test_results:  # upload junit test results for display in Test Summary
-          # Read more: https://circleci.com/docs/2.0/collect-test-data/
+          # Read more: https://circleci.com/docs/ja/2.0/collect-test-data/
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
 ```
 {% endraw %}
@@ -116,7 +116,7 @@ jobs:  # basic units of work in a run
       - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
 
       - restore_cache:  # restores saved mix cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
           keys:  # list of cache keys, in decreasing specificity
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -140,7 +140,7 @@ jobs:  # basic units of work in a run
       - run: mix test  # run all tests in project
 
       - store_test_results:  # upload junit test results for display in Test Summary
-          # Read more: https://circleci.com/docs/2.0/collect-test-data/
+          # Read more: https://circleci.com/docs/ja/2.0/collect-test-data/
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
 ```
 {% endraw %}
@@ -179,7 +179,7 @@ jobs:  # basic units of work in a run
       - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
 
       - restore_cache:  # restores saved mix cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/ja/2.0/caching/
           keys:  # list of cache keys, in decreasing specificity
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -203,7 +203,7 @@ jobs:  # basic units of work in a run
       - run: mix test  # run all tests in project
 
       - store_test_results:  # upload junit test results for display in Test Summary
-          # Read more: https://circleci.com/docs/2.0/collect-test-data/
+          # Read more: https://circleci.com/docs/ja/2.0/collect-test-data/
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
 ```
 {% endraw %}
@@ -249,7 +249,7 @@ jobs:
 ```
 
 
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を作成します。
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
 [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソース コードがチェックアウトされます。
 
@@ -262,11 +262,11 @@ jobs:
       - run: mix local.rebar --force
 ```
 
-実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/2.0/caching/)を検討してください。
+実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
 [`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
-[`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
 ```yaml
@@ -305,7 +305,7 @@ jobs:
 
 **Splitting by Timings**
 
-As of version 2.0, CircleCI requires users to upload their own JUnit XML [test output](https://circleci.com/docs/2.0/collect-test-data/#enabling-formatters). Currently the main/only Elixir library that produces that output is [JUnitFormatter](https://github.com/victorolinasc/junit-formatter).
+As of version 2.0, CircleCI requires users to upload their own JUnit XML [test output](https://circleci.com/docs/ja/2.0/collect-test-data/#enabling-formatters). Currently the main/only Elixir library that produces that output is [JUnitFormatter](https://github.com/victorolinasc/junit-formatter).
 
 In order to allow CircleCI's parallelization to use the `--split-by=timings` strategy with the XML output, you need to configure JUnitFormatter with the `include_filename?: true` option which will add the filename to the XML.
 
