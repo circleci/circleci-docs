@@ -27,7 +27,7 @@ If you are following this guide and have created your orb using the Orb Developm
 ### config.yml
 {: #configyml }
 
-The first config file is responsible for publishing a development version of our orb, so that we may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, we can not test the orb _directly_, but in this stage we can still lint, valid, review, and potentially even run unit tests against our scripts.
+The first config file is responsible for publishing a development version of our orb, so that you may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, you can not test the orb _directly_, but in this stage you can still lint, validate, review, and potentially even run unit tests against your scripts.
 
 After the development version of the orb has been published, the final `orb-tools/continue` job will trigger the second workflow, `test-deploy`.
 
