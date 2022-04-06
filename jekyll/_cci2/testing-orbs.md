@@ -207,7 +207,7 @@ You should see a job by default in your `test-deploy.yml` file named `command-te
 
 In it, we will call our orb command, with any parameters we want to test. If our command were to do something such as, installing a command line tool, we can then test to ensure that command is valid in an additional step.
 
-By default you will see the included "greet" command is being tested. Because the greet command only outputs a message to stdout, we can not do any additional validation checks.
+By default you will see the included "greet" command is being tested. Because the greet command only outputs a message to stdout, you can not do any additional validation checks.
 
 ```yaml
 jobs:
