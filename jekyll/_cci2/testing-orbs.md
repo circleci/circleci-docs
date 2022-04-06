@@ -241,7 +241,7 @@ Remember that you can have multiple jobs for testing commands if desired, or if 
 ### Testing orb jobs
 {: #testing-orb-jobs }
 
-Testing the jobs within our orbs is very similar to testing commands, however there are a few additional restrictions to consider.
+Testing jobs within your orbs is very similar to testing commands. However, there are a few additional restrictions to consider.
 
 First, in your `test-deploy` workflow, you will see, just as we mentioned with testing commands above, there is ultimately an `orb-tools/publish` job which requires every job before it in the workflow to have completed. To test the jobs of your orb, you need to add them to this workflow and ensure they are required in the `orb-tools/publish` job.
 
