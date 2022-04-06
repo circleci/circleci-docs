@@ -36,7 +36,7 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
 ## Steps overview
 {: #steps-overview }
 
-Steps are a collection of executable commands which are run during a job. The `checkout:` key is required to checkout your code and the `run:` key enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps).
+Steps are a collection of executable commands which are run during a job. The `checkout:` key is required to checkout your code and the `run:` key enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `store_artifacts:`, `store_test_results:`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps).
 
 ## Passing parameters to jobs
 {: #passing-parameters-to-jobs }
