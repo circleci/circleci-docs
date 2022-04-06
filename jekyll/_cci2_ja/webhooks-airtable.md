@@ -9,7 +9,7 @@ version:
 
 This document describes how you might use webhooks with a third party application - in this case, we are using [Airtable](https://airtable.com/) to demonstrate how one could capture and visualize the output of your pipelines.
 
-**Prerequisites**
+**前提条件**
 
 - An account with CircleCI, with webhooks enabled (webhooks are currently in preview and may not yet be available.)
 - A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks).
@@ -35,7 +35,7 @@ Most of our data will simply be "A single text line", but some values can use ty
 
 - ID
 - Job Name
-- Status
+- ステータス
 
 Finally, add one last column, but this time use the "date" data type:
 
@@ -66,7 +66,7 @@ With our webhook URL from Airtable in hand, we can now setup our webhooks for Ci
 
 Click "Add Webhook" and enter a name for the webhook, the webhook URL we copied earlier, and select the "Job Completed" event, before saving by pressing "Add Webhook" again.
 
-![]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
+![Entering details for a webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
 
 ### 5. Trigger a test webhook
 {: #trigger-a-test-webhook }
