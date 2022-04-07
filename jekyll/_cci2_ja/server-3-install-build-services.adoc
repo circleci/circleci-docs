@@ -137,7 +137,7 @@ endif::[]
 
 ifndef::env-aws[]
 ===== GCP
-You will need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. 以下のコマンドを実行することで IP アドレスを取得できます。
+CircleCI Server のデプロイ時に作成した Nomad コントロールプレーン（Nomad サーバー）の IP アドレスが必要になります。 以下のコマンドを実行することで IP アドレスを取得できます。
 
 [source,shell]
 ----
@@ -259,18 +259,21 @@ endif::[]
 
 ==== Nomad Autoscaler
 
-Nomad provides a utility to automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. Nomad Autoscaler を使うと、自動スケーリングリソースとその場所を管理するための権限をユーティリティに与えるだけで済みます。 このリソースは KOTS 経由で有効化することができ、Nomad サーバーと Nomad Autoscaler サービスをデプロイします。 下記ではご自身のプロバイダーに Nomad Autoscaler を設定する方法を概説します。
+Nomad は、クライアントがクラウドプロバイダの自動スケーリングリソースによって管理されている場合、 Nomad クライアントを自動的にスケールアップまたはスケールダウンするユーティリティを提供します。
+ Nomad Autoscaler を使うと、自動スケーリングリソースとその場所を管理するための権限をユーティリティに与えるだけで済みます。 このリソースは KOTS 経由で有効化することができ、Nomad サーバーと Nomad Autoscaler サービスをデプロイします。 下記ではご自身のプロバイダーに Nomad Autoscaler を設定する方法を概説します。
 
-NOTE: 自動スケーリンググループや管理対象のインスタンスグループを作成すると、最大および最小の Nomad クライアント数によって、対応する値セットが上書きされます。 It is recommended that you keep these values and those used in your Terraform the same so that the two don't compete.
+NOTE: 自動スケーリンググループや管理対象のインスタンスグループを作成すると、最大および最小の Nomad クライアント数によって、対応する値セットが上書きされます。 これらの値と Terraform で使った値の競合を避けるため、同じ値を使用することを推奨します。
 
-If you do not require this service then feel free to jump to the *Save config* button to update your installation and redeploy server.
+このサービスが不要な場合は、 *Save config* ボタンに行き、インストール環境を更新し、サーバーを再デプロイしてください。
 
 ifndef::env-gcp[]
 ===== AWS
-. IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成します。 You may take one of the following approaches:
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 If you've already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
-  * You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. その場合、ユーザーにアクセスキーとシークレットキーを生成する必要があります。
-  * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the following IAM policy:
+.
+ IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成します。 以下のいずれか方法で実行します。:
+  `nomad_auto_scaler = true` を設定すると、 * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[Nomad モジュール] が IAM ユーザーを作成し、キーを出力します。
+ 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーアクセスキーは Terraform の出力で使用できます。
+  * 以下の IAM ポリシーを使用して、手動で Nomad Autoscaler IAM ユーザーを作成することも可能です。 その場合、ユーザーにアクセスキーとシークレットキーを生成する必要があります。
+  Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール] を作成し、次の IAM ポリシーを添付します。
 
 +
 
@@ -299,24 +302,20 @@ ifndef::env-gcp[]
         }
     ]
 }
-. In your KOTS Admin Console, set Nomad Autoscaler to `enabled`
-. 最大の Node 数を設定します* : ASG の最大値として現在設定されている値を上書きします。
+.
+ KOTS 管理者コンソールで Nomad Autoscaler を `enabled` に設定します。 最大の Node 数を設定します* : ASG の最大値として現在設定されている値を上書きします。
  この値と Terraform で設定された値を変えないことをお勧めします。
 . 最小の Node 数を設定します* : ASG の最小値として現在設定されている値を上書きします。
  この値と Terraform で設定された値を変えないことをお勧めします。
-. Select cloud provider: `AWS EC2`
-. Add the region of the autoscaling group
-. You can chose one of the following:
-.. Add the Nomad Autoscaler user's access key and secret key
-.. Or, the Nomad Autoscaler role's ARN
-. Nomad クライアントが作成された自動スケーリンググループの名前を追加します。
+. クラウドプロバイダーを選択します(`AWS EC2`) 。 自動スケーリンググループのリージョンを追加します。 以下のいずれかを選択します。 Nomad Autoscaler  ユーザーのアクセスキーとシークレットキーを追加します。 または、Nomad Autoscaler のロールの ARN を追加します。 Nomad クライアントが作成された自動スケーリンググループの名前を追加します。
 endif::[]
 
 ifndef::env-aws[]
 ===== GCP
-. Create a service account for Nomad Autoscaler
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. 詳細については、リンクの例を参照してください。 If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
-  * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
+ Nomad Autoscaler のサービスアカウントを作成します。
+変数`nomad_auto_scaler = true` と `enable_workload_identity = false` を設定すると、*  link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール]  がサービスアカウントを作成し、ファイルとキーを出力します。
+ 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json` という名前のファイルにあります。 GKE link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities] を使用している場合は、変数を `nomad_auto_scaler = true` と `enable_workload_identity = true` に設定します。
+  * Nomad GCP サービスアカウントを手動で作成することも可能です。 The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
 . Set Nomad Autoscaler to `enabled`
 . Set Maximum Node Count*
 . Set Minimum Node Count*
