@@ -196,7 +196,7 @@ ifndef::env-aws[]
 
 * 以下のいづれかを選択します。
 ** *[Service Account JSON (サービス アカウントの JSON)] (必須)*: バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
-** *Service Account Email (required)* - Service Account Email id if using Google Workload Identity.
+** *[Service Account Email (サービスアカウントのメール)](必須)*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 
 endif::env-aws[]
 
