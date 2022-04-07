@@ -20,7 +20,6 @@ This document describes how to get started with continuous integration on **Wind
   <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
 </div>
 
-
 ## Prerequisites
 {: #prerequisites }
 
@@ -68,7 +67,6 @@ The new `current` tag is available for Windows images and will eventually comple
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
-{:.tab.windowsblocktwo.Cloud}
 ```yaml
 version: 2.1 # Use version 2.1 to enable orb usage.
 
@@ -85,36 +83,6 @@ jobs:
       # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblocktwo.Server_3}
-```yaml
-version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblocktwo.Server_2}
-```yaml
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
 ```
 
 Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
@@ -164,8 +132,6 @@ There are three shells that you can use to run job steps on Windows:
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, Powershell, and Command by adding a `shell:` argument to our `job` and `step` declarations:
 
-
-{:.tab.windowsblockthree.Cloud}
 ```YAML
 version: 2.1
 
@@ -189,55 +155,9 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server_3}
-```YAML
-version: 2.1
+**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
 
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # default shell is Powershell
-      - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
-      - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
-```
-
-{:.tab.windowsblockthree.Server_2}
-```YAML
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # default shell is Powershell
-      - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
-      - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
-```
-
-**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
-
-
-{:.tab.windowsblockfour.Cloud}
-```YAML
+```yaml
 
 version: 2.1
 
@@ -254,42 +174,11 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server_3}
-```YAML
-version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: dotnet tool install --global PowerShell
-      - run: pwsh ./<my-script>.ps1
-```
-
-{:.tab.windowsblockfour.Server_2}
-```YAML
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: dotnet tool install --global PowerShell
-      - run: pwsh ./<my-script>.ps1
-```
-
 ## Running Windows Docker containers on the Windows executor
 {: #windows-docker-containers-on-windows-executor }
 
 Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
 
-{:.tab.windowsblockone.Cloud}
 ```yaml
 version: 2.1
 
@@ -301,26 +190,6 @@ jobs:
     executor:
       name: win/default
       shell: powershell.exe
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-{:.tab.windowsblockone.Server_3}
-```yaml
-version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
     steps:
       - checkout
       - run: systeminfo
@@ -447,10 +316,149 @@ These are the issues with the Windows executor that we are aware of and will add
 * Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
+## Using the Windows executor on CircleCI server
+{: #windows-on-server }
+
+{:.tab.windowsblocktwo.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblocktwo.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+### Specifying a Shell
+{: #specifying-a-shell-server }
+{:.no_toc}
+
+{:.tab.windowsblockthree.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+#### Install Powershell Core with the `dotnet` CLI
+{: #install-powershell-server }
+{:.no_toc}
+
+{:.tab.windowsblockfour.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+### Running Windows Docker containers
+{: #run-windows-container-server }
+{:.no_toc}
+
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
 ## Next steps
 {: #next-steps }
 
-Also, consider reading documentation on some of CircleCI’s features:
+Consider reading documentation on some of CircleCI’s features:
 
 * See the [Concepts]({{site.baseurl}}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
