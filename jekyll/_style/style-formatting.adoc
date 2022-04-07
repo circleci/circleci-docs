@@ -11,8 +11,8 @@
 ** Select **VCS** in the **Project Settings** window
 ** Select **Projects** from the sidebar and click **Set Up Project** for the project you want to follow
 
-// * Use italics for technical terms and to refer to a specific guide within docs, for example:
-// ** TBC
+* Use italics for technical terms, for example:
+** _Continuous Integration_
 
 == Using notes, tips, important information, cautions and warnings
 
@@ -93,6 +93,6 @@ NOTE: If the paragraph text is not styled using `[.style]##` as shown here, it w
 Try not to use links in warnings at this time due to the blue on red style:
 
 [source.adoc]
-WARNING: A warning with a link:circleci.com[CircleCI] looks bad!
+WARNING: A warning with a link:circleci.com[CircleCI] is hard to read.
 
-WARNING: A warning with a link:circleci.com[CircleCI] looks bad!
+WARNING: A warning with a link:circleci.com[CircleCI] is hard to read.
