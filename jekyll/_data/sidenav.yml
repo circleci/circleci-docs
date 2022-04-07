@@ -199,8 +199,11 @@ en:
           link: 2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
           link: 2.0/config-editor/
-    - name: Orbs
-      link: 2.0/orb-intro/
+    
+- name: Orbs
+  icon: icons/sidebar/orbs.svg
+  children:
+    - name: Using Orbs
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
@@ -209,7 +212,6 @@ en:
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
     - name: Authoring Orbs
-      link: 2.0/orb-author-intro/
       children:
         - name: Intro to Authoring an Orb
           link: 2.0/orb-author-intro/
