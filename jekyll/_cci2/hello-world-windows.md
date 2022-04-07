@@ -108,40 +108,6 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-Note that in order to use the Windows Server 2022 image in CircleCI cloud, it must be specified as the `executor`, as shown in the following:
-{: class="alert alert-info"}
-
-```yaml
-version: 2.1
-
-workflows:
-  build-and-unittest:
-    jobs:
-      - build-windows
-
-jobs:
-  build-windows:
-    machine:
-      image: windows-server-2022-gui:current
-      resource_class: windows.medium
-      shell: powershell.exe -ExecutionPolicy Bypass
-    steps:
-      - run: echo 'test'
-```
-
-Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
-
-```yaml
-jobs:
-  build-windows:
-    machine:
-      image: windows-server-2022:current
-      resource_class: windows.medium
-      shell: powershell.exe -ExecutionPolicy Bypass
-```
-
-With that said, we strongly encourage using the orb as it helps simplify your configuration.
-
 ## Known issues
 {: #known-issues }
 
@@ -202,6 +168,40 @@ jobs:
       # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
+```
+
+Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
+
+```yaml
+jobs:
+  build-windows:
+    machine:
+      image: windows-server-2022:current
+      resource_class: windows.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
+```
+
+With that said, we strongly encourage using the orb as it helps simplify your configuration.
+
+Note that in order to use the Windows Server 2022 image in CircleCI cloud, it must be specified as the `executor`, as shown in the following:
+{: class="alert alert-info"}
+
+```yaml
+version: 2.1
+
+workflows:
+  build-and-unittest:
+    jobs:
+      - build-windows
+
+jobs:
+  build-windows:
+    machine:
+      image: windows-server-2022-gui:current
+      resource_class: windows.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
+    steps:
+      - run: echo 'test'
 ```
 
 From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
