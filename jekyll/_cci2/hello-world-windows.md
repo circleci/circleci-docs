@@ -120,7 +120,7 @@ workflows:
 
 From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
-## Specifying a Shell with the Windows Executor
+## Specifying a Shell with the Windows executor
 {: #specifying-a-shell-with-the-windows-executor }
 
 There are three shells that you can use to run job steps on Windows:
@@ -283,6 +283,7 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 
 ### Steps
 {: #steps }
+{:.no_toc}
 
 1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
