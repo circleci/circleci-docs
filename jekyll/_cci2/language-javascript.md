@@ -69,7 +69,7 @@ The [2.1 Node orb](https://circleci.com/developer/orbs/orb/circleci/node#jobs-te
 
 The Node orb `test` command will test your code with a one-line command, with optional parameters.
 
-Matrix jobs are a simple way to test your Node app on various Node environments. For a more in-depth example of how the Node orb utilizes matrix jobs, see our blog on [matrix jobs](https://circleci.com/blog/circleci-matrix-jobs/). See [documentation on pipeline parameters](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to learn how to set a Node version with Pipeline parameters.
+Matrix jobs are a simple way to test your Node app on various Node environments. For a more in-depth example of how the Node orb utilizes matrix jobs, see our blog on [matrix jobs](https://circleci.com/blog/circleci-matrix-jobs/). See [documentation on pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to learn how to set a Node version with Pipeline parameters.
 
 Success! You just set up a Node app to build on CircleCI with `version: 2.1` configuration. Check out [our project’s pipeline page](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-javascript-react-app) to see how this looks when building on CircleCI.
 

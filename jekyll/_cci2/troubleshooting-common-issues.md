@@ -16,7 +16,7 @@ version:
 
  CircleCI API (v2) doesn't currently provide a dedicated endpoint to specifically trigger a new workflow.
 
-However, it is still possible to trigger a specific workflow using the "[Trigger a new pipeline"](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint. It requires some modification to your `config.yml`, and the use of [pipeline parameters](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration), as well as, [conditional workflows](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows).
+However, it is still possible to trigger a specific workflow using the "[Trigger a new pipeline"](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint. It requires some modification to your `config.yml`, and the use of [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration), as well as, [conditional workflows]({{site.baseurl}}/2.0/configuration-reference/#using-when-in-workflows).
 
 For example, if you have the following `workflows` declared in your `config.yml`:
 
@@ -34,7 +34,7 @@ workflows:
       - job_c
 ```
 
-You will need to declare the following [pipeline parameters](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration):
+You will need to declare the following [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration):
 
 ```yml
 version: 2.1  
@@ -84,7 +84,7 @@ curl --request POST \
   --data '{"parameters":{"run_workflow_build":false, "run_workflow_deploy":false}}'
 ```
 
-_**Note**: keep in mind that you have to use a [personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token); project tokens are currently not supported on CircleCI API (v2)._
+_**Note**: keep in mind that you have to use a [personal API token]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token); project tokens are currently not supported on CircleCI API (v2)._
 
 For clarity, you could also pass the parameter corresponding to the workflow you wish to run. Doing so would have the exact same outcome as the above request because the pipeline parameters were declared with a default value set to "true":
 
@@ -101,9 +101,9 @@ curl --request POST \
 {:.no_toc}
 
 * [Trigger a new pipeline: _CircleCI API (v2)_ _documentation_](https://circleci.com/docs/api/v2/#operation/triggerPipeline)
-* [Pipelines parameters in configuration: _CircleCI documentation (Configuration > Advanced Config)_](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration)
+* [Pipelines parameters in configuration: _CircleCI documentation (Configuration > Advanced Config)_]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)
 * [Conditional Workflows: _API preview documentation_](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md)
-* [Managing API Tokens: _CircleCI documentation (Project > Settings)_](https://circleci.com/docs/2.0/managing-api-tokens/)
+* [Managing API Tokens: _CircleCI documentation (Project > Settings)_]({{site.baseurl}}/2.0/managing-api-tokens/)
 
 </details>
 
@@ -117,7 +117,7 @@ This behavior has several possible explanations:
 
 * **Different language versions**. Ensure you are using the same language version on your machine and on CircleCI.
 * **Different package versions**. Explicitly specify package versions in your configuration file.
-* **Timezone troubles**. Some testing frameworks may not have timezone-aware modules. If the machine does not have a set timezone, some tests may fail. See [this question](https://circleci.com/docs/2.0/faq/#how-can-i-set-the-timezone-in-docker-images) in the FAQ for more details.
+* **Timezone troubles**. Some testing frameworks may not have timezone-aware modules. If the machine does not have a set timezone, some tests may fail. See [this question]({{site.baseurl}}/2.0/faq/#how-can-i-set-the-timezone-in-docker-images) in the FAQ for more details.
 * **File ordering**. Some filesystems maintain an ordered file structure for each directory. This means that all files are read in the same order during each run. However, the filesystems in our build containers are unordered. If your tests only pass when run in a certain order, they may fail on CircleCI.
 * **"Out of Memory" errors**. If a process in your build container uses too much memory, Linux's OOM killer may end it. If you are interested in recording your memory usage, visit [How to record a job's memory usage](https://support.circleci.com//hc/en-us/articles/360043994872).
 * **Differing startup times**. Applications like Elasticsearch and PostgreSQL may take more time to start up on CircleCI. You can fix this by explicitly waiting for a service to be available before running tests.
@@ -167,7 +167,7 @@ To do so, please follow instructions outlined in the Support article "[How to se
 <details markdown=block>
 <summary>Docker Layer Caching FAQ</summary>
 
-[Docker Layer Caching (DLC)](https://circleci.com/docs/2.0/docker-layer-caching/#overview) can reduce Docker image build times on CircleCI by caching individual layers of any Docker images built as part of your jobs. Here are some frequently asked questions around DLC:
+[Docker Layer Caching (DLC)]({{site.baseurl}}/2.0/docker-layer-caching/#overview) can reduce Docker image build times on CircleCI by caching individual layers of any Docker images built as part of your jobs. Here are some frequently asked questions around DLC:
 
 ### **Is DLC available between different workflows under the same project?**
 {: #is-dlc-available-between-different-workflows-under-the-same-project }
@@ -179,7 +179,7 @@ Yes, DLC is not locked to workflows or jobs. You can create a maximum of 50 DLC 
 {: #why-are-subsequent-builds-not-able-to-access-the-cache-consistently }
 {:.no_toc}
 
-If a job fails while calling a specific DLC volume, it would require rebuilding when calling it again, causing inconsistencies. It is worth noting that different jobs may also use different volumes. An example being if two `machine` jobs are run in parallel, they [will get different DLC volumes](https://circleci.com/docs/2.0/docker-layer-caching/#how-dlc-works).
+If a job fails while calling a specific DLC volume, it would require rebuilding when calling it again, causing inconsistencies. It is worth noting that different jobs may also use different volumes. An example being if two `machine` jobs are run in parallel, they [will get different DLC volumes]({{site.baseurl}}/2.0/docker-layer-caching/#how-dlc-works).
 
 ### How can I delete my DLC cache instance?
 {: #how-can-i-delete-my-dlc-cache-instance }
@@ -210,7 +210,7 @@ Running `docker images --no-trunc --format '{{.ID}}' | xargs docker rmi** or **d
 {% endraw %}
 
 
-Because of [how DLC works](https://circleci.com/docs/2.0/docker-layer-caching/#how-dlc-works) you might need to leave this command in your config and run several jobs to remove the DLC layers from all volumes associated with your project.
+Because of [how DLC works]({{site.baseurl}}/2.0/docker-layer-caching/#how-dlc-works) you might need to leave this command in your config and run several jobs to remove the DLC layers from all volumes associated with your project.
 
 Alternatively, you can use the config below to run a very short job that consumes all 50 DLC volumes and purges docker caches. You can push it to a feature branch without disrupting your main branches:
 
@@ -245,11 +245,11 @@ starting container process caused "process_linux.go:303:
 getting the final child's pid from pipe caused \"EOF\"": unknown
 ```
 
-This usually occurs due to a bad [command](https://circleci.com/docs/2.0/configuration-reference/#docker) being passed to one of the secondary service containers in your job.
+This usually occurs due to a bad [command]({{site.baseurl}}/2.0/configuration-reference/#docker) being passed to one of the secondary service containers in your job.
 
 The error message occurs due to the secondary service container crashing or exiting prematurely. This means CircleCI cannot get the PID from the Docker daemon and exits with a failure.
 
-Ensure that the command and/or entrypoint are correct so that the container can spin up successfully. This can be be tested locally by using the [CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#run-a-job-in-a-container-on-your-machine) to run the job locally and ensure Docker spins up all containers successfully. To resolve the error, check out the documentation for the docker image defined in your config to see which commands can be used at spin up.
+Ensure that the command and/or entrypoint are correct so that the container can spin up successfully. This can be be tested locally by using the [CircleCI CLI]({{site.baseurl}}/2.0/local-cli/#run-a-job-in-a-container-on-your-machine) to run the job locally and ensure Docker spins up all containers successfully. To resolve the error, check out the documentation for the docker image defined in your config to see which commands can be used at spin up.
 
 </details>
 
@@ -267,9 +267,9 @@ Docker executor users can output the max memory consumed by a job by adding the 
 **This step should be added as the last step in your job, to identify the max usage after all of the previous steps have completed.**
 
 
-**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds](https://circleci.com/docs/2.0/executor-types/#using-multiple-docker-images) will only report the memory usage of the primary image.
+**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds]({{site.baseurl}}/2.0/executor-types/#using-multiple-docker-images) will only report the memory usage of the primary image.
 
-Memory usage will be reported in bytes. You can convert to GiB using your favorite search engine to check it against the amount of RAM available to your job, according to its assigned [resource class](https://circleci.com/docs/2.0/configuration-reference/#resource%5Fclass).
+Memory usage will be reported in bytes. You can convert to GiB using your favorite search engine to check it against the amount of RAM available to your job, according to its assigned [resource class]({{site.baseurl}}/2.0/configuration-reference/#resource%5Fclass).
 
 This can help troubleshoot out-of-memory (OOM) errors.
 
@@ -306,7 +306,7 @@ Alternatively, we can also take advantage of [the top command](https://man7.org/
 
 **Note** that you have may have to install these tools, or use an alternative command if these tools are not available in the specific Executor.
 
-To get the memory usage of the [Remote Docker environment](https://circleci.com/docs/2.0/building-docker-images/#accessing-the-remote-docker-environment), you can pass the ps command **through SSH** with
+To get the memory usage of the [Remote Docker environment]({{site.baseurl}}/2.0/building-docker-images/#accessing-the-remote-docker-environment), you can pass the ps command **through SSH** with
 
 `ssh remote-docker ps auxwwf`
 
@@ -324,7 +324,7 @@ To get the memory usage of the [Remote Docker environment](https://circleci.com/
 
 If you want to confirm your configuration file is free of syntax, YAML linting issues, etc. You can validate your config file using CircleCI's local CLI:
 
-* Visit <https://circleci.com/docs/2.0/local-cli> and install the CLI
+* Visit <{{site.baseurl}}/2.0/local-cli> and install the CLI
 * Run **`circleci config validate`**in your project's root directory
 
 ## Troubleshooting
@@ -365,7 +365,7 @@ If you have a mutli-line command, or a script file, then you may consider overri
       my_cool_command
 ```
 
-For more details on how the default shell options work, and why they have been chosen as the default, please see [our documentation](https://circleci.com/docs/2.0/configuration-reference/#default-shell-options).
+For more details on how the default shell options work, and why they have been chosen as the default, please see [our documentation]({{site.baseurl}}/2.0/configuration-reference/#default-shell-options).
 
 </details>
 
@@ -463,8 +463,8 @@ This will stop the project from building on CircleCI in the event you need to ma
 **If you meet one of the following criteria, you will need to take action before March 15th, 2022:**
 
 1. Project created between Nov 2nd, 2021 - January 13th, 2022 that has a job using an Ubuntu 14.04-based machine image, including the default `machine: true` image
-\- If you don’t [specify a machine image](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images), you are using the default image and you’ll need to take action
-2. Project created between Nov 2nd, 2021 - January 13th, 2022 using [deprecated Docker image](https://circleci.com/docs/2.0/next-gen-migration-guide/#overview "https://circleci.com/docs/2.0/next-gen-migration-guide/#overview")
+\- If you don’t [specify a machine image]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images), you are using the default image and you’ll need to take action
+2. Project created between Nov 2nd, 2021 - January 13th, 2022 using [deprecated Docker image]({{site.baseurl}}/2.0/next-gen-migration-guide/#overview "{{site.baseurl}}/2.0/next-gen-migration-guide/#overview")
 3. Project using an uploaded DSA SSH key for checkout purposes
 
 If you meet one of the above, there are sections below that will cover the steps needed to ensure builds continue to run after March 15th, 2022.
@@ -524,7 +524,7 @@ org:CircleCI-Public circleci/classic path:.circleci filename:config.yml
 
 The following options are available, [given the deprecation of older images](https://discuss.circleci.com/t/old-linux-machine-image-remote-docker-deprecation/37572 "https://discuss.circleci.com/t/old-linux-machine-image-remote-docker-deprecation/37572"), **our recommendation is to update your image**. However, all options listed will solve the issue at hand.
 
-1. Update to a [newer machine image](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images "https://circleci.com/docs/2.0/configuration-reference/#available-machine-images") any listed on that page have the proper items installed
+1. Update to a [newer machine image]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images "{{site.baseurl}}/2.0/configuration-reference/#available-machine-images") any listed on that page have the proper items installed
 2. Regenerate your deploy/user key in your project settings
    1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)
          1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed
@@ -554,7 +554,7 @@ jobs:
 
 The following options are available, given the support for the legacy `circleci` images is going away, the preferred option is to update your image. However, all options listed will solve the issue at hand.
 
-1. Update to a [next-gen convenience image](https://circleci.com/docs/2.0/next-gen-migration-guide/#overview "https://circleci.com/docs/2.0/next-gen-migration-guide/#overview"), all next-gen images have the proper items installed
+1. Update to a [next-gen convenience image]({{site.baseurl}}/2.0/next-gen-migration-guide/#overview "{{site.baseurl}}/2.0/next-gen-migration-guide/#overview"), all next-gen images have the proper items installed
 2. Regenerate your deploy/user key in your project settings
    1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)
          1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed
@@ -579,7 +579,7 @@ jobs:
       - checkout
 ```
 
-## Jobs using [custom](https://circleci.com/docs/2.0/custom-images/ "https://circleci.com/docs/2.0/custom-images/") or non-circleci Docker images
+## Jobs using [custom]({{site.baseurl}}/2.0/custom-images/ "{{site.baseurl}}/2.0/custom-images/") or non-circleci Docker images
 {: #jobs-using-customhttpscirclecicomdocs20custom-images-httpscirclecicomdocs20custom-images-or-non-circleci-docker-images }
 {:.no_toc}
 
@@ -628,7 +628,7 @@ jobs:
 {: #projects-with-manually-uploaded-dsa-or-rsa-sha1-ssh-keys }
 {:.no_toc}
 
-If you [manually uploaded an SSH key](https://circleci.com/docs/2.0/add-ssh-key/#overview) to use for checkout purposes, and that key is DSA, you’ll need to update the key to have it continue to work.
+If you [manually uploaded an SSH key]({{site.baseurl}}/2.0/add-ssh-key/#overview) to use for checkout purposes, and that key is DSA, you’ll need to update the key to have it continue to work.
 
 You’ll want to generate a new SSH key, [meeting the requirements set forth by GitHub](https://github.blog/2021-09-01-improving-git-protocol-security-github/), and add and use that key within CircleCI.
 
@@ -730,7 +730,7 @@ Here is how you can configure your CircleCI project to enable the above-mentione
 
 1a) If you wish to use a user key, simply visit <https://app.circleci.com/settings/project/:vcs-type/:org-name/:project-name/ssh>[ ](https://circleci.com/:vcs-type/:org-name/:project-name/edit#checkout)and click on the "Authorize with GitHub" button.
 
-1b) If you wish to use a read-write deployment key, follow the steps here to create it and configure the project so that the key has write permissions for it: <https://circleci.com/docs/2.0/gh-bb-integration/#creating-a-github-user-key> or <https://circleci.com/docs/2.0/gh-bb-integration/#creating-a-bitbucket-user-key> for Bitbucket users
+1b) If you wish to use a read-write deployment key, follow the steps here to create it and configure the project so that the key has write permissions for it: <{{site.baseurl}}/2.0/gh-bb-integration/#creating-a-github-user-key> or <{{site.baseurl}}/2.0/gh-bb-integration/#creating-a-bitbucket-user-key> for Bitbucket users
 
 ## Common Issues:
 {: #common-issues }
@@ -748,11 +748,11 @@ git config user.name "My Name"
 
 The deploy key that the project is configured with, by default when you add a project on CircleCI, only has read access, so a key with write permissions needs to be configured to be used, to avoid the above error message. Please ensure that a user key or a read-write deployment key has been configured for the project (See "Configuration Steps" above).
 
-If you are using a read-write deployment key, please add an [add\_ssh\_keys](https://circleci.com/docs/2.0/configuration-reference/#add%5Fssh%5Fkeys) step to your configuration. The fingerprints value should match what is shown on [https://circleci.com/:vcs-type/:org-name/:project-name/edit#ssh](https://circleci.com/:vcs-type/:org-name/:project-name/edit#checkout)
+If you are using a read-write deployment key, please add an [add\_ssh\_keys]({{site.baseurl}}/2.0/configuration-reference/#add%5Fssh%5Fkeys) step to your configuration. The fingerprints value should match what is shown on [https://circleci.com/:vcs-type/:org-name/:project-name/edit#ssh](https://circleci.com/:vcs-type/:org-name/:project-name/edit#checkout)
 
 3) How to stop your generated commits from triggering new builds
 
-To prevent a commit from triggering a new build, add "\[skip ci\]" to the commit message. For more details, see: <https://circleci.com/docs/2.0/skip-build/#skipping-a-build>
+To prevent a commit from triggering a new build, add "\[skip ci\]" to the commit message. For more details, see: <{{site.baseurl}}/2.0/skip-build/#skipping-a-build>
 
 </details>
 
@@ -859,7 +859,7 @@ As a solution to various issues (including [unauthorized](https://support.circle
 
 Depending on the VCS you're using ([GitHub](#h%5F01ENQJ8A7ZTV38JV7NHCHKE51D) or [Bitbucket](#h%5F01ENQJ8A7ZTV38JV7NHCHKE51D)), you can perform this operation as outlined below.
 
-**NOTE: Taking the steps below will clear any [user keys](https://circleci.com/docs/2.0/gh-bb-integration/#deployment-keys-and-user-keys) that have been generated for any of your projects.**
+**NOTE: Taking the steps below will clear any [user keys]({{site.baseurl}}/2.0/gh-bb-integration/#deployment-keys-and-user-keys) that have been generated for any of your projects.**
 
 ### GitHub users
 {: #github-users }
@@ -930,7 +930,7 @@ If you are utilizing our macOS executors and building on Xcode 12.5+ and not usi
 
 Warning: unable to build chain to self-signed root for signer "Apple Development: XXXXXXX"
 
-By default, we have the proper certificates on the image, however, if you aren't using the `setup_circle_ci` task in your Fastfile and [Fastlane match](https://circleci.com/docs/2.0/testing-ios/#code-signing-with-fastlane-match) then they won't be properly applied to your build.
+By default, we have the proper certificates on the image, however, if you aren't using the `setup_circle_ci` task in your Fastfile and [Fastlane match]({{site.baseurl}}/2.0/testing-ios/#code-signing-with-fastlane-match) then they won't be properly applied to your build.
 
 You have two options for resolving this issue, the first would be to follow the above documentation and implement Fastlane match.
 
@@ -962,7 +962,7 @@ You can try the following steps to troubleshoot this problem.
 
 1. Check your [Code Signing setting](https://support.circleci.com/hc/en-us/articles/115015983028)
 2. Check your environment variables. (For example: Build Number) If the build succeeds on your local machine but fails in the CI environment, there could be environment variables defined on the local machine, but not made available to builds on CircleCI, causing the build to fail.
-3. Check fastlane's log for more information about why the fastlane command failed. The log may contain details about the root cause of the error, for instance missing provisioning profiles. The log path is printed in the output of the fastlane command, for example: /Users/distiller/driver-application/buildlogs/gym/DriverApplication-DriverApplication.log You could either SSH into a rebuild to access the log or upload the file as an [artifact](https://circleci.com/docs/2.0/artifacts/#uploading-artifacts).
+3. Check fastlane's log for more information about why the fastlane command failed. The log may contain details about the root cause of the error, for instance missing provisioning profiles. The log path is printed in the output of the fastlane command, for example: /Users/distiller/driver-application/buildlogs/gym/DriverApplication-DriverApplication.log You could either SSH into a rebuild to access the log or upload the file as an [artifact]({{site.baseurl}}/2.0/artifacts/#uploading-artifacts).
 4. Check if Xcode SDK version should be defined in the gym configuration in the Fastfile
 
 ```
@@ -983,7 +983,7 @@ You can try the following steps to troubleshoot this problem.
 
 With the [recent addition of advanced logic in a config file](https://discuss.circleci.com/t/advanced-logic-in-config/36011), the option to conditionally trigger steps in a job or to conditionally trigger a workflow is now available.
 
-[Specific logic statements can be used](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to create multiple nested conditions, that will always at the top level result in `true` or `false` \-- which in turn determines if the workflow or steps are triggered.
+[Specific logic statements can be used]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) to create multiple nested conditions, that will always at the top level result in `true` or `false` \-- which in turn determines if the workflow or steps are triggered.
 
 ### Job Step Example
 {: #job-step-example }
@@ -1077,7 +1077,7 @@ workflows:
                 - main
 ```
 
-[Click here for full documentation on job branch filtering](https://circleci.com/docs/2.0/configuration-reference/#filters-1)
+[Click here for full documentation on job branch filtering]({{site.baseurl}}/2.0/configuration-reference/#filters-1)
 
 </details>
 
@@ -1089,7 +1089,7 @@ workflows:
 
 If you need to insert sensitive text-based documents or even small binary files into your project in secret it is possible to insert them as an environment variable by leveraging base64 encoding.
 
-[Base64](https://en.wikipedia.org/wiki/Base64) is an encoding scheme to translate binary data into text strings. These values can be added to [a context](https://circleci.com/docs/2.0/contexts/) or inserted as [an environment variable](https://circleci.com/docs/2.0/env-vars/) and decoded at runtime.
+[Base64](https://en.wikipedia.org/wiki/Base64) is an encoding scheme to translate binary data into text strings. These values can be added to [a context]({{site.baseurl}}/2.0/contexts/) or inserted as [an environment variable]({{site.baseurl}}/2.0/env-vars/) and decoded at runtime.
 
 Environment variables can be configured in the UI under "Project Settings":
 
@@ -1115,7 +1115,7 @@ If your file is stored as an environment variable, you can pipe it directly to t
 
 echo "$ENV_VARIABLE_NAME" | base64 --decode > filename.txt
 
-For more information, you can read about [base64 encoding and decoding variables within a config in our docs](https://circleci.com/docs/2.0/env-vars/#encoding-multi-line-environment-variables).
+For more information, you can read about [base64 encoding and decoding variables within a config in our docs]({{site.baseurl}}/2.0/env-vars/#encoding-multi-line-environment-variables).
 
 </details>
 
@@ -1131,7 +1131,7 @@ _**Note that you must use one of the following executors:**_
 * [macOS](#h%5F01F3THFMEAY31K30ZKP3M0RVZ7)
 * [windows](#h%5F01F7XH9G40MXW14H2GFHRD8XXJ)
 
-## `machine` \[Linux\] executor ([Available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images))
+## `machine` \[Linux\] executor ([Available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images))
 {: #machine-linux-executor-available-machine-imageshttpscirclecicomdocs20configuration-referenceavailable-machine-images }
 {:.no_toc}
 
@@ -1143,7 +1143,7 @@ _**Note that you must use one of the following executors:**_
 {: #openvpn-2x }
 {:.no_toc}
 
-* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
+* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable]({{site.baseurl}}/2.0/env-vars/).
 * If the VPN client authentication is credentials-based (user-locked profile), you'll also need to add the username and password as environment variables (`VPN_USER` and `VPN_PASSWORD`).
 
 ```yml
@@ -1243,7 +1243,7 @@ jobs:
 {: #openvpn-connect-openvpn-3 }
 {:.no_toc}
 
-* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
+* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable]({{site.baseurl}}/2.0/env-vars/).
 * Make sure to [install the proper repository for the Ubuntu release](https://openvpn.net/cloud-docs/openvpn-3-client-for-linux/#installation-for-debian-and-ubuntu) you're using
 * With OpenVPN 3 Linux, storing user credentials in a text-based file to use when starting a VPN connection is **unsupported**. Please refer to [this documentation (OpenVPN 3 Linux and --auth-user-pass)](https://openvpn.net/openvpn-3-linux-and-auth-user-pass/) to set up a workaround.
 
@@ -1327,17 +1327,17 @@ jobs:
 
 To set up an L2TP VPN connection, we recommend referring to [this guide.](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients.md#configure-linux-vpn-clients-using-the-command-line)
 
-We suggest storing `VPN_SERVER_IP`, `VPN_IPSEC_PSK`, `VPN_USER` and `VPN_PASSWORD` as [environment variables](https://circleci.com/docs/2.0/env-vars/). Ideally, you might want to base64-encode `VPN_IPSEC_PSK` before storing it; you'll need to decode it during the build.
+We suggest storing `VPN_SERVER_IP`, `VPN_IPSEC_PSK`, `VPN_USER` and `VPN_PASSWORD` as [environment variables]({{site.baseurl}}/2.0/env-vars/). Ideally, you might want to base64-encode `VPN_IPSEC_PSK` before storing it; you'll need to decode it during the build.
 
 Also, we suggest storing the default gateway IP address in an environment variable:
 
 * `DEFAULT_GW_IP=$(ip route show default|awk '{print $3}')`
 
-## `macos` executor ([Supported Xcode versions](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions))
+## `macos` executor ([Supported Xcode versions]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions))
 {: #macos-executor-supported-xcode-versionshttpscirclecicomdocs20testing-iossupported-xcode-versions }
 {:.no_toc}
 
-* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
+* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable]({{site.baseurl}}/2.0/env-vars/).
 * If the VPN client authentication is credentials-based (user-locked profile), you'll also need to add the username and password as environment variables (`VPN_USER` and `VPN_PASSWORD`).
 
 ```yml
@@ -1444,11 +1444,11 @@ jobs:
           when: always
 ```
 
-## `windows` executor ([Windows executor images](https://circleci.com/docs/2.0/hello-world-windows/#windows-executor-images))
+## `windows` executor ([Windows executor images]({{site.baseurl}}/2.0/hello-world-windows/#windows-executor-images))
 {: #windows-executor-windows-executor-imageshttpscirclecicomdocs20hello-world-windowswindows-executor-images }
 {:.no_toc}
 
-* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable](https://circleci.com/docs/2.0/env-vars/).
+* Base64-encode the OpenVPN client configuration file, and store it as an [environment variable]({{site.baseurl}}/2.0/env-vars/).
 * If the VPN client authentication is credentials-based (user-locked profile), you'll also need to add the username and password as environment variables (`VPN_USER` and `VPN_PASSWORD`).
 
 ```yml
@@ -1532,7 +1532,7 @@ jobs:
 
 If you want to enable write-permissions to your checkout repo within a job, interact with other private repositories entirely, you'll need to add an SSH key to CircleCI which provides write access.
 
-Check out our docs with [with full instructions to generate and add the keys](https://circleci.com/docs/2.0/add-ssh-key/)
+Check out our docs with [with full instructions to generate and add the keys]({{site.baseurl}}/2.0/add-ssh-key/)
 
 See GitHub and Bitbucket documentation for guidelines on storing SSH public keys:
 

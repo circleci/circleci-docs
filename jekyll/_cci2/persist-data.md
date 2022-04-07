@@ -147,7 +147,7 @@ Storage charges apply when you retain artifacts, workspaces, and caches beyond t
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
-For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+For questions on data usage for the IP ranges feature, visit the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
 
 ### Reducing excess use of network egress and storage
 {: #reducing-excess-use-of-network-egress-and-storage }
