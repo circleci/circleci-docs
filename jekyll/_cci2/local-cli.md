@@ -406,7 +406,7 @@ For security reasons, encrypted environment variables configured in the UI will 
 ## Test splitting
 {: #test-splitting }
 
-The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
+The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
 ## Using the CLI on CircleCI server v2.x
 {: #using-the-cli-on-circleci-server-v2-x }

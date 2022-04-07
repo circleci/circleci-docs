@@ -212,7 +212,7 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the [CircleCI Server v3.x Orbs](https://circleci.com/docs/2.0/server-3-operator-orbs) page for instructions on importing orbs.
+It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the [CircleCI Server v3.x Orbs]({{site.baseurl}}/2.0/server-3-operator-orbs) page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 

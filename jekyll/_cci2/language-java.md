@@ -24,7 +24,7 @@ If you’re in a rush, just copy the sample configuration below into a [`.circle
 
 We are going to make a few assumptions here:
 
-* You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java-maven/).
+* You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here]({{site.baseurl}}/2.0/language-java-maven/).
 * You are using Java 11.
 * You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/).
 * Your application can be distributed as an all-in-one uberjar.
@@ -143,7 +143,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
-An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel](https://circleci.com/docs/2.0/parallelism-faster-jobs/) to speed up the job.
+An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/) to speed up the job.
 
 We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/). We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
 
@@ -245,7 +245,7 @@ Next `store_test_results` uploads the JUnit test metadata from the `build/test-r
 
 Next we use the `./gradlew assemble` command to create an "uberjar" file containing the compiled application along with all its dependencies. We run this only on the first build container instead of on all the build containers running in parallel, as we only need one copy of the uberjar.
 
-We then store the uberjar as an [artifact](https://circleci.com/docs/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
+We then store the uberjar as an [artifact]({{site.baseurl}}/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
 ```yaml

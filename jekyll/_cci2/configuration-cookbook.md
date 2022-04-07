@@ -72,7 +72,7 @@ The following environment variables need to be set in CircleCI either directly o
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
+If you need more information on how to set these environment variables, refer to the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page in the CircleCI documentation.
 
 **Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
@@ -149,7 +149,7 @@ workflows:
       - verify-deployment
 ```
 
-This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the [task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
+This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the [task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb. Refer to the [AWS ECR]({{site.baseurl}}/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
 
 Find more detailed information in the CircleCI Orb Registry for the CircleCI [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) and [AWS ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) orbs.
 
@@ -166,7 +166,7 @@ The following environment variables need to be set in CircleCI either directly o
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
-If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
+If you need more information on how to set these environment variables, refer to the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page in the CircleCI documentation.
 
 ### Creating and deleting clusters
 {: #creating-and-deleting-clusters }

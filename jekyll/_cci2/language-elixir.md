@@ -52,7 +52,7 @@ jobs:  # basic units of work in a run
       - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
 
       - restore_cache:  # restores saved mix cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: {{site.baseurl}}/2.0/caching/
           keys:  # list of cache keys, in decreasing specificity
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -76,7 +76,7 @@ jobs:  # basic units of work in a run
       - run: mix test  # run all tests in project
 
       - store_test_results:  # upload junit test results for display in Test Summary
-          # Read more: https://circleci.com/docs/2.0/collect-test-data/
+          # Read more: {{site.baseurl}}/2.0/collect-test-data/
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
 ```
 {% endraw %}
@@ -228,7 +228,7 @@ By default, the value of `working_directory` is `~/project`, where `project` is 
 The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
 
 In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
-to specify a custom Docker image. We use the [CircleCI-provided Elixir docker image](https://circleci.com/docs/2.0/circleci-images/#elixir).
+to specify a custom Docker image. We use the [CircleCI-provided Elixir docker image]({{site.baseurl}}/2.0/circleci-images/#elixir).
 
 ```yaml
 jobs:
@@ -318,7 +318,7 @@ available in the CircleCI web app.
 
 **Splitting by Timings**
 
-As of version 2.0, CircleCI requires users to upload their own JUnit XML [test output](https://circleci.com/docs/2.0/collect-test-data/#enabling-formatters). Currently the main/only Elixir library that produces that output is [JUnitFormatter](https://github.com/victorolinasc/junit-formatter).
+As of version 2.0, CircleCI requires users to upload their own JUnit XML [test output]({{site.baseurl}}/2.0/collect-test-data/#enabling-formatters). Currently the main/only Elixir library that produces that output is [JUnitFormatter](https://github.com/victorolinasc/junit-formatter).
 
 In order to allow CircleCI's parallelization to use the `--split-by=timings` strategy with the XML output, you need to configure JUnitFormatter with the `include_filename?: true` option which will add the filename to the XML.
 
