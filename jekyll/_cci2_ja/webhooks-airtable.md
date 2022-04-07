@@ -12,14 +12,14 @@ version:
 **前提条件**
 
 - Webhook が有効化されている CircleCI のアカウント (Webhook は現在プレビュー段階であり、使用できない場合があります)。
-- [CircleCI での Webhook]({{site.baseurl}}/2.0/webhooks) 使用経験
+- [CircleCI の Webhook]({{site.baseurl}}/2.0/webhooks) に関する知識
 - Airtable のアカウント (下記例を使う場合)
 
 
 ## Airtable のセットアップ
 {: #get-setup-in-airtable }
 
-### 1. Airtable で新規「base」を作成します。
+### 1. Airtable で新規「Base」を作成します。
 {: #create-a-new-base-on-airtable }
 
 Airtable にログインし、新規「Base」 を作成します。
@@ -29,7 +29,7 @@ Airtable にログインし、新規「Base」 を作成します。
 ### 2. テーブルと列のデータタイプを設定します。
 {: #set-table-and-column-data-types }
 
-デフォルトでは、新規「Grid view」が 「Table 1」という名前になり、事前定義された複数の列がそれぞれ異なるデータタイプで表示されます。 CircleCI では、これらの列を CircleCI から受け取るプロジェクトに関するデータに置き換えます。
+デフォルトでは、新規「Grid view」が 「Table 1」という名前になり、事前定義された複数の列がそれぞれ異なるデータタイプで表示されます。 これらの列を CircleCI から受け取るプロジェクトに関するデータに置き換えます。
 
 CircleCI の多くのデータは、単純な「A single text line (一行のテキスト)」ですが、「date」などのデータタイプを使用する値もあります。 この例では、既存の列を削除し、以下の 3 列を「A single text line」として挿入します。
 
@@ -51,7 +51,7 @@ Airtable の画面右上で、 [Automations] ボタンを選択し、右側の [
 
 ![Automations を開く]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_3_automation.png)
 
-次の画面で automation の「trigger」を選択するよう求められます。 [When webhook received] を選択すると、CircleCI の Airtable Webhook URL が書かれた下記の画面が表示されます。
+次の画面で automation の「trigger」を選択するよう求められます。 [When webhook received] を選択すると、Airtable Webhook URL が書かれた下記の画面が表示されます。
 
 その Webhook URL をクリップボードにコピーします。
 
