@@ -47,9 +47,9 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | script:           | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                        | " (see above)                                                                                        |
 | after_script:     | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                        | " (see above)                                                                                        |
 | deploy:           | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                        | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/2.0/deployment-integrations) for examples. |
-| env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment) | Use the environment: element to specify environment variables                                        |
-| matrix:           | [matrix:](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) | CircleCI also offers matrix syntax under our workflows configuration. |
-| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control concurrent jobs in workflows        |
+| env:              | [environment:]({{site.baseurl}}/2.0/configuration-reference/#environment) | Use the environment: element to specify environment variables                                        |
+| matrix:           | [matrix:]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21) | CircleCI also offers matrix syntax under our workflows configuration. |
+| stage:            | [requires:]({{site.baseurl}}/2.0/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control concurrent jobs in workflows        |
 {: class="table table-striped"}
 
 ## Building on pushing code
@@ -167,7 +167,7 @@ project]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-p
 
 With CircleCI, it is also possible to securely set environment variables across _all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
 
-**Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
+**Note:** CircleCI has several [built-in environment variables]({{site.baseurl}}/2.0/env-vars/#built-in-environment-variables).
 
 ## Artifacts uploading
 {: #artifacts-uploading }

@@ -15,11 +15,11 @@ circleci namespace create <my-namespace> github <my-gh-org>
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
 1. Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published. **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
-To create a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
+To create a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-To create a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
+To create a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
@@ -61,12 +61,12 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. List your available orbs using the CLI:
 
-To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace> --private
 ```

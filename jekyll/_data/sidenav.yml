@@ -55,6 +55,8 @@ en:
           link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
+        - name: Jobs and Steps
+          link: 2.0/jobs-steps/
         - name: Workspaces
           link: 2.0/workspaces/
         - name: Artifacts
@@ -85,7 +87,7 @@ en:
           link: 2.0/caching/
         - name: Caching strategies
           link: 2.0/caching-strategy/
-        - name: Pipeline variables
+        - name: Pipeline values and parameters
           link: 2.0/pipeline-variables/
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/
@@ -215,8 +217,6 @@ en:
           link: 2.0/orb-author-intro/
         - name: Author an Orb
           link: 2.0/orb-author/
-        - name: Author an Orb for Server
-          link: 2.0/orb-author-server/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orb Authoring Best Practices

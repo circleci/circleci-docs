@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
 * TOC
@@ -353,8 +354,29 @@ With the Orb Development Kit, a fully automated CI and CD pipeline is automatica
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
+### Listing your orbs
+{: #listing-your-orbs }
+
+List your available orbs using the CLI:
+
+To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
+```shell
+circleci orb list <my-namespace>
+```
+
+To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
+```shell
+circleci orb list <my-namespace> --private
+```
+
+For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+
 ### Categorizing your orb
 {: #categorizing-your-orb }
+
+<div class="alert alert-warning" role="alert">
+Orb categorization is <strong>not</strong> available on installations of CircleCI server.
+</div>
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 

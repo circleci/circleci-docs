@@ -31,6 +31,8 @@ Automatic dependency caching is not available in CircleCI, so it is important to
 
 This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
 
+By default, cache storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
+
 <div class="alert alert-warning" role="alert">
 <b>Note:</b>
 The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.</div>
@@ -263,11 +265,6 @@ There are many different approaches to utilizing caching in monorepos. The follo
 ## Managing caches
 {: #managing-caches }
 
-### Cache expiration
-{: #cache-expiration }
-
-Caches created via the `save_cache` step are stored for up to 15 days.
-
 ### Clearing cache
 {: #clearing-cache }
 
@@ -275,7 +272,7 @@ Caches cannot be cleared. If you need to generate a new set of caches you can up
 
 Updating the cache key on save and restore steps in your '.circleci/config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
 
-If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache, which will be available for 15 days. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
+If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
@@ -337,7 +334,7 @@ Template | Description
 {% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts), not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/2.0/contexts), not any arbitrary environment variable).
 {% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
 {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
 {: class="table table-striped"}

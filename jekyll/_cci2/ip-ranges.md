@@ -34,7 +34,7 @@ Some example use cases where IP-based restricted access might be desired include
 - Deploying an internal app with sensitive data
 - Granting access to a production network
 
-Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner](https://circleci.com/docs/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
+Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner]({{site.baseurl}}/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
 
 IP ranges only routes traffic through one of the defined IP address ranges _during job execution_. Any step that occurs before the job has started to execute will not have its traffic routed through one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
 
@@ -63,35 +63,27 @@ workflows:
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
-- 107.22.40.20
-- 18.215.226.36
-- 3.228.208.40
 - 3.228.39.90
-- 3.91.130.126
-- 34.194.144.202
+- 18.213.67.41
 - 34.194.94.201
+- 34.194.144.202
+- 34.197.6.234
 - 35.169.17.173
 - 35.174.253.146
-- 52.20.179.68
-- 52.21.153.129
-- 52.22.187.0
 - 52.3.128.216
 - 52.4.195.249
 - 52.5.58.121
+- 52.21.153.129
 - 52.72.72.233
-- 52.72.73.201
-- 54.144.204.41
-- 54.161.182.76
-- 54.162.196.253
-- 54.164.161.41
-- 54.167.72.230
-- 54.205.138.102
-- 54.209.115.53
-- 54.211.118.70
-- 54.226.126.177
-- 54.81.162.133
-- 54.83.41.200
 - 54.92.235.88
+- 54.161.182.76
+- 54.164.161.41
+- 54.166.105.113
+- 54.167.72.230
+- 54.172.26.132
+- 54.205.138.102
+- 54.208.72.234
+- 54.209.115.53
 
 **Note:** Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
 {: class="alert alert-info"}
@@ -183,6 +175,6 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 ## Known limitations
 {: #knownlimitations}
 
-- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
-- IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
-- If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses](https://circleci.com/docs/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.
+- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
+- IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
+- If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses]({{site.baseurl}}/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.

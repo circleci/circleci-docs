@@ -81,7 +81,7 @@ This document provides a summary of features and product notes for the release o
   us-west-2:ami-ce8c94b7
   ```
 
-* It is currently a best practice to use a Services Machine with a minimum of 32GB of RAM. Starting in v2.18 it will become required. See [docs](https://circleci.com/docs/2.0/aws/#planning) for our recommendation(s).
+* It is currently a best practice to use a Services Machine with a minimum of 32GB of RAM. Starting in v2.18 it will become required. See [docs]({{site.baseurl}}/2.0/aws/#planning) for our recommendation(s).
 * We have updated our software packages to the following versions. This is not a required update for those with externalized environments at this time, but will be when v2.18 is released.
 
   * Vault 1.1.2
