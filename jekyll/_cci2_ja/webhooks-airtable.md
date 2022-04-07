@@ -53,7 +53,7 @@ Airtable の画面右上で、 [Automations] ボタンを選択し、右側の [
 
 次の画面で automation の「trigger」を選択するよう求められます。 [When webhook received] を選択すると、Airtable Webhook URL が書かれた下記の画面が表示されます。
 
-その Webhook URL をクリップボードにコピーします。
+Webhook URL をクリップボードにコピーします。
 
 ![Webhook リンクを取得する]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_4.png
 )
@@ -61,12 +61,12 @@ Airtable の画面右上で、 [Automations] ボタンを選択し、右側の [
 ### 4. CircleCI に接続します。
 {: #connect-to-circleci }
 
-CircleCI の Airtable Webhook URL を入手し、CircleCI の Webhook をセットアップする準備が整いました。 まず CircleCI 上で監視するリポジトリの [Project Settings] を開き、サイドパネルから [Webhooks] を選択します。
+Airtable の Webhook URL を入手したので、CircleCI 用に Webhook をセットアップする準備が整いました。 まず監視したい CircleCI のリポジトリの [Project Settings] を開き、サイドパネルから [Webhooks] を選択します。
 
 ![CircleCI で Webhook をセットアップする]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_5.png
 )
 
-[Add Webhook] をクリックして、Webhook 名 (先程コピーした Webhook URL ) を入力し、[Job Completed] イベントを選択し、再度 [AddWebhook] をクリックして保存します。
+[Add Webhook] をクリックして、Webhook 名と先程コピーした Webhook URL を入力し、[Job Completed] イベントを選択し、再度 [Add Webhook] をクリックして保存します。
 
 ![Webhook の詳細を入力する]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png
 )
@@ -82,7 +82,7 @@ Webhook の設定は完了しましたが、Airtable に戻る前に、CircleCI 
 
 ![Airtable で結果を確認する]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_8_test.png)
 
-データが正常に受信されたら、[Done] をクリックし、トリガーのアクションを作成します。
+データが正常に受信されたら、[Done] をクリックします。次にトリガーのアクションを作成します。
 
 ### 6. Webhook トリガーの「Action」のセットアップ
 {: #setup-the-action-for-our-webhook-trigger }
@@ -96,7 +96,7 @@ Webhook の設定は完了しましたが、Airtable に戻る前に、CircleCI 
 
 ![Webhook データにテーブルの列をマッピングする]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_10_fields.png)
 
-最後に [Run test] をクリックして最初の列を挿入します。
+最後に [Run test] をクリックします。これにより最初の列にデータが入ります。
 
 ![Airtable のテストを実行する]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_11_done.png)
 
