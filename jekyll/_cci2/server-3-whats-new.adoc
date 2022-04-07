@@ -17,11 +17,33 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
+== Release 3.4.1
+
+=== Upgrade notes
+
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+
+* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+* Deploy the app from the KOTS admin console
+
+=== Fixes
+
+* Kong resource limits have been increased. The previous limits were affecting the stability of some server installations.
+* Fixed a bug that was preventing GitHub status reporting from being disabled.
+* The KOTS config has been updated to allow private loadbalancers when ACM is in use.
+
+=== Known issues
+
+* The CircleCI Build Agent can now be pulled from a custom Docker registry if required. For more information contact customer support.
+* You can now use Amazon Certificate Manager (ACM) to manage your TLS certificates. For more information see the https://circleci.com/docs/2.0/server-3-install/#frontend-settings[Server v3.x Installation Guide].
+* Kubernetes v1.16 - v1.23 are now supported.
+* Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
+
 == Release 3.4.0
 
 === Upgrade notes
 
-Before upgrading to v3.4.0, delete the deployment named `circleci-server-kube-state-metrics`:
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
 
 * Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
 * Deploy the app from the KOTS admin console
