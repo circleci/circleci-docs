@@ -7,6 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v3.x
 ---
 
 * TOC
@@ -328,15 +329,36 @@ With the orb development kit, a fully automated CI and CD pipeline is automatica
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
+### Listing your orbs
+{: #listing-your-orbs }
+
+List your available orbs using the CLI:
+
+To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
+```shell
+circleci orb list <my-namespace>
+```
+
+To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
+```shell
+circleci orb list <my-namespace> --private
+```
+
+For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+
 ### Categorizing your orb
 {: #categorizing-your-orb }
+
+<div class="alert alert-warning" role="alert">
+Orb categorization is <strong>not</strong> available on installations of CircleCI server.
+</div>
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 
 #### Listing categories
 {: #listing-categories }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-list-categories.png)
+![Example of showing listing categories using the CLI](  {{ site.baseurl }}/assets/img/docs/orb-categories-list-categories.png)
 
 You can select up to two categories for your orb. These are the available categories:
 
@@ -361,37 +383,21 @@ The list of categories can also be obtained by running the `circleci orb list-ca
 #### Add an orb to a category
 {: #add-an-orb-to-a-category }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-add-to-category.png)
+![Adding an orb category](  {{ site.baseurl }}/assets/img/docs/orb-categories-add-to-category.png)
 
 Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html).
 
 #### Remove an orb from a category
 {: #remove-an-orb-from-a-category }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
+![Removing an orb from a category](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
 
 Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html).
 
 #### Viewing an orb's categorizations
 {: #viewing-an-orbs-categorizations }
 
-![](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
+![Show which categorizations have been added to an orb](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
 
 To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
 
-### Listing your orbs
-{: #listing-your-orbs }
-
-List your available orbs using the CLI:
-
-To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
-```shell
-circleci orb list <my-namespace>
-```
-
-To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
-```shell
-circleci orb list <my-namespace> --private
-```
-
-For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).

@@ -138,9 +138,9 @@ To use the SSH key of a machine user, follow the steps below.
 
 2. Log in to GitHub as the machine user.
 
-3. [Log in to CircleCI](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
+3. Log in to the [CircleCI web app](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
 
-4. From the Add Projects page, follow all projects you want the machine user to have access to.
+4. From the **Projects** page, follow all projects you want the machine user to have access to.
 
 5. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
@@ -263,15 +263,15 @@ Bitbucket does not currently provide CircleCI with an API to create user keys. H
 2. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
 
 3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.
-![]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
+![Project settings Add User Key button]({{site.baseurl}}/assets/img/docs/bb_user_key.png)
 
 4. In the browser inspector, select the **Network** tab, and clear the console.
 
 5. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
-![]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
+![Machine user modal]({{site.baseurl}}/assets/img/docs/bb_confirm_user.png)
 
 6. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
-![]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
+![Finding the public key]({{site.baseurl}}/assets/img/docs/bb_user_key2.png)
 
 7. Add the key to Bitbucket by following Bitbucket's guide on [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 

@@ -109,7 +109,7 @@ commands:
 
 ## **`parameters`** (requires version: 2.1)
 {: #parameters-requires-version-21 }
-Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+Pipeline parameters declared for use in the configuration. See [Pipeline Values and Parameters]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
 ----|-----------|------|------------
@@ -154,12 +154,12 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
+See the [Using Parameters in Executors]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 {: #jobs }
 
-A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample config.yml]({{site.baseurl}}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
 Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
@@ -390,15 +390,11 @@ When using the [Windows GPU executor](#gpu-executor-windows), the available imag
 
 ```yaml
 version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
+
 jobs:
   build:
     machine:
       image: windows-server-2019-nvidia:stable
-      docker_layer_caching: true    # default - false
 ```
 
 #### **`macos`**
@@ -502,6 +498,17 @@ jobs:
       ... // other config
 ```
 
+You may also use the `resource_class` to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration).
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
+```
+
 ##### Machine executor (Linux)
 {: #machine-executor-linux }
 
@@ -521,7 +528,7 @@ jobs:
       ... // other config
 ```
 
-You may also use the `machine` class to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
+You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration).
 
 For example:
 
@@ -594,10 +601,11 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }
 
-Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
---------------------------------|-------|-----|------|-----------------|------------------
-gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
-gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB)
+--------------------------------|-------|-----|------|-------------------|------------------
+gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8
+gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16
+gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16
 {: class="table table-striped"}
 
 ###### Example usage
@@ -610,8 +618,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
@@ -889,7 +897,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | Logic | [A logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)
+condition | Y | Logic | [A logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
@@ -976,7 +984,9 @@ version | N        | String | Version string of Docker you would like to use (de
 ##### **`save_cache`**
 {: #savecache }
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more on the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) page.
+
+Cache retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -998,7 +1008,7 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/2.0/contexts)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
@@ -1123,10 +1133,10 @@ Please see [run](#run) for current processes. If you have parallelism > in your 
 
 **Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
 
-*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) of 1?*
+*Does your job have [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) of 1?*
 Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
 
-*Does your job have [parallelism](https://circleci.com/docs/2.0/parallelism-faster-jobs/) > 1?*
+*Does your job have [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) > 1?*
 There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
 
 ###### *Example*
@@ -1209,7 +1219,7 @@ workflows:
             - doing-things-job
 ```   
 
-If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces](https://circleci.com/docs/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
+If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces]({{site.baseurl}}/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
 
 ```yml
 version: 2.1
@@ -1258,7 +1268,7 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on the [workflows](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
+This is effectively using a "fan-in" workflow which is described in detail on the [workflows]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
@@ -1272,6 +1282,8 @@ destination | N | String | Prefix added to the artifact paths in the artifacts A
 {: class="table table-striped"}
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
+
+Artifact storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 ###### Example
 {: #example }
@@ -1289,7 +1301,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 ##### **`store_test_results`**
 {: #storetestresults }
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites.
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's **Test Summary** section. Storing test results is useful for timing analysis of your test suites.
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
@@ -1324,9 +1336,9 @@ test-results
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
 
-Special step used to persist a temporary file to be used by another job in the workflow.
+Special step used to persist a temporary file to be used by another job in the workflow. `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
 
-**Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 15 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1397,6 +1409,8 @@ Key | Required | Type | Description
 at | Y | String | Directory to attach the workspace to.
 {: class="table table-striped"}
 
+Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
+
 ###### _Example_
 {: #example }
 {:.no_toc}
@@ -1413,14 +1427,17 @@ When attaching a workspace the "layer" from each upstream job is applied in the 
 
 If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
-Note the following distinctions between Artifacts, Workspaces, and Caches:
+Note the following distinctions between artifacts, workspaces, and caches:
 
-| Type      | lifetime        | Use                      | Example |
-|-----------|-----------------|------------------------------------|---------
-| Artifacts | 1 Month         | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
-| Workspaces | Duration of workflow (up to 15 days)        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
-| Caches    | 15 Days         | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+| Type      | Use                      | Example |
+|-----------|------------------------------------|---------
+| Artifacts | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
+| Workspaces| Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
+| Caches    | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
+
+The lifetime of artifacts, workspaces, and caches can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can control the storage retention periods for these objects. If no storage period is set, the default storage retention period of artifacts is 30 days, while the default storage retention period of workspaces and caches is 15 days.
+{: class="alert alert-info" }
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
@@ -1901,7 +1918,7 @@ workflows:
 ##### **Using `when` in Workflows**
 {: #using-when-in-workflows }
 
-With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 

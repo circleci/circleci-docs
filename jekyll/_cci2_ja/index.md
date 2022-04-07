@@ -8,7 +8,7 @@ toc: false
 page-type: index
 ---
 
-ここに掲載されているチュートリアル、サンプル、how-to、そしてリファレンスからCircleCIについて学ぶことができます。 こちらからも入手可能です。
+ここに掲載されているチュートリアル、サンプル、how-to、そしてリファレンスからCircleCIについて学ぶことができます。
 
 <hr class="hidden-xs" />
 

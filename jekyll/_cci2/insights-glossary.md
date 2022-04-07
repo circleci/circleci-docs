@@ -38,7 +38,7 @@ count of workflow executions or jobs, depending on the context.
 ## Organization-level metrics
 {: #organization-level-metrics }
 
-![]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
+![Organization-level metrics example]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
 
 Organization-level metrics allow you to analyze your organization’s performance.
 
@@ -54,7 +54,7 @@ Organization-level metrics allow you to analyze your organization’s performanc
 ## Workflow Metrics
 {: #workflow-metrics }
 
-![]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
+![Workflow metrics example]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
 
 | Term                    | Definition     |
 |-------------------------|----------------|
@@ -108,7 +108,7 @@ are calculated by taking the median of the daily P50 values as a benchmark.
 
 This section describes how your trend data may appear across various metrics.
 
-![]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
+![Trends data example]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
 
 - **Green**: The metric is trending in the right direction.
 - **Red**: The metric is trending in the wrong direction.

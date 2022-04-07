@@ -16,8 +16,12 @@ This document provides an overview of ways to optimize your CircleCI configurati
 * TOC
 {:toc}
 
-**Warning:** Persisting data is project specific, and examples is this document are not meant to be copied and pasted into your project. The examples are meant to be guides to help you find areas of opportunity to optimize your own projects.
-{: class="alert alert-warning"}
+## Custom storage controls
+{: #custom-storage-controls }
+
+The [CircleCI web app](https://app.circleci.com/) provides controls to customize the storage retention period of workspaces, caches, and artifacts. You can find these settings by navigating to **Plan > Usage Controls**. By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+
+See the [Persisting Data]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage) page for more information on custom storage settings.
 
 ## Docker image choice
 {: #docker-image-choice }
@@ -62,18 +66,20 @@ To persist data from a job and make it available to downstream jobs via the [`at
 ## Parallelism
 {: #parallelism }
 
-If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests), or a [third party application or library]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
 * Read more about splitting tests on the [Parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) page.
 
 ## Resource class
 {: #resource-class }
 
-**Note:**  If you are on a container-based plan, you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
+**Note:**  If you are on a container-based plan, you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self-hosted installations are set by system administrators.
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self-hosted installations contact your system administrator for a list.
 
-* See the `resource_class` section of the [Configuration Reference]({{site.baseURL}}/2.0/configuration-reference/#resourceclass) for more information.
+Please note, if a `resource_class` is not explicitly declared, CircleCI will try to find the best default resource class for your organization.
+
+* See the `resource_class` section of the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) for more information.
 
 ## See also
 {: #see-also }

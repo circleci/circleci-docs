@@ -79,7 +79,7 @@ Click "Add Webhook" and enter a name for the webhook, the webhook URL we copied
 earlier, and select the "Job Completed" event, before saving by pressing "Add
 Webhook" again.
 
-![]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
+![Entering details for a webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
 
 ### 5. Trigger a test webhook
 {: #trigger-a-test-webhook }

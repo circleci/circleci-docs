@@ -64,9 +64,10 @@ en:
           - 
             name: SSH を使用したデバッグ
           - 
-            name: 並列処理
+            name: 並列実行
           - 
             name: コンテキスト
+          - 
       - 
         name: 最適化
         children:
@@ -351,7 +352,7 @@ en:
           - 
             name: ユーザーアカウント
           - 
-            name: Orbs の管理
+            name: Orb の管理
           - 
             name: VM サービス
           - 
@@ -612,15 +613,18 @@ ja:
           - 
             name: Docker レイヤーキャッシュ
           - 
+            name: 同時実行件数
+          - 
             name: 環境変数
           - 
             name: テストデータの収集
           - 
             name: SSH を使用したデバッグ
           - 
-            name: 並列処理
+            name: 並列実行
           - 
             name: コンテキスト
+          - 
       - 
         name: 最適化
         children:
@@ -994,6 +998,9 @@ ja:
           - 
             name: Upgrade to v2.19.x
             link: ja/2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
+  - 
+    icon: icons/sidebar/admin.svg
+    children:
       - 
         name: Server v2.19.x Operations
         link: ja/2.0/v.2.16-overview/

@@ -1,7 +1,9 @@
 {% if page.page-type != "index" and page.page-type != "homepage" %}
 <div id="tooltip" role="tooltip" class="tooltip-popover"></div>
 <div id="tooltip-time" role="tooltip" class="tooltip-popover">
-  Last updated • Reading time
+  <span>
+    <span>Last updated</span> {% if page.readtime %} <span>• Reading time</span>{% endif %}
+  </span>
   <div id='arrow' data-popper-arrow></div>
 </div>
 <div class="quick-info-list">

@@ -128,7 +128,7 @@ After the orb has been imported into the configuration file, the elements provid
 {: #node-example }
 {:.no_toc}
 
-The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
+The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps]({{site.baseurl}}/2.0/configuration-reference/#steps).
 
 ```yaml
 version: 2.1

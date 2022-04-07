@@ -15,13 +15,11 @@ CircleCI server uses load balancers to manage network traffic entering and leavi
 
 The frontend load balancer manages traffic coming from developers and your VCS, including through the API, the CLI, and CircleCI app. The frontend load balancer is public by default, but can be made private.
 
-toc::[]
-
 == Make the frontend load balancer private
 
 [WARNING]
 ==== 
-**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, dependent on VCS, for webhooks to work: 
+**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, depending on your VCS, for webhooks to work: 
 
 * **GitHub Enterprise** – your CircleCI server installation must be in the same internal network as GHE. 
 * **GitHub.com** – set up a proxy for incoming webhooks and set it as override for the webhook host URL. This setting can be found under **Admin Settings** > **System Settings** > **Override webhook host URL** from the CircleCI app.
@@ -33,6 +31,6 @@ NOTE: The Private load balancers option only works with installations on CircleC
 
 . Check the box next to **Private load balancers**.
 +
-NOTE: If you are using Let's Encrypt TLS certificates, this box will not be visible as Let's Encrypt doesn't work with private installations. Uncheck the box for Let's Encrypt to make the Private load balancer option appear.
+NOTE: If you are using Let's Encrypt TLS certificates, this box will not be visible as Let's Encrypt does not work with private installations. Uncheck the box for Let's Encrypt to make the Private load balancer option appear.
 
-If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes will request a new load balancer with the new configuration.
+If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes requests a new load balancer with the new configuration.

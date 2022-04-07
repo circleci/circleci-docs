@@ -183,7 +183,7 @@ jobs:
           path: coverage
 ```
 
-[simplecov README](https://github.com/colszowka/simplecov/#getting-started) に、さらに詳細な説明があります。
+詳細は、[simplecov README](https://github.com/colszowka/simplecov/#getting-started) を参照してください。
 
 ## Python
 {: #python }
@@ -556,13 +556,15 @@ jobs:
       - image: cimg/php:8.1-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。 e
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -578,13 +580,15 @@ jobs:
       - image: cimg/php:8.1-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -602,12 +606,14 @@ jobs:
       - image: circleci/php:7-fpm-browsers-legacy
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: "テストの実行"
+          name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -656,9 +662,9 @@ jobs:
 ### Codecov
 {: #codecov }
 
-Codecov has an [orb](https://circleci.com/developer/orbs/orb/codecov/codecov) to help simplify the process of uploading your coverage reports.
+Codecov には、カバレッジレポートのアップロードを簡単に行うための [Orb](https://circleci.com/developer/orbs/orb/codecov/codecov) があります。
 
-**Note:** The Codecov orb is a Partner orb. You or your organization admin will need to opt in to using uncertified orbs in order to use it. This setting is available at **Organization Settings > Security** in the CircleCI web app.
+**注: **Codecov Orb は、パートナーが作成した Orb です。 使用するには、お客様ご自身または組織の管理者が、未承認 Orb の使用をオプトインする必要があります。 この設定は、CircleCI Web アプリの **Organization Settings > Security** で行えます。
 
 ```yaml
 version: 2.1
@@ -678,5 +684,5 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 
 Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
-Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
+Coveralls は、同時実行ジョブのカバレッジ統計を自動的にマージします。
 

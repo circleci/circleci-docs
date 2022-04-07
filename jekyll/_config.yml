@@ -78,10 +78,10 @@ asciidoc:
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
-      kotsversion: 1.64.0
+      kotsversion: 1.65.0
 
 asciidoctor:
-  base_dir: _cci2/
+  base_dir: :docdir
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
@@ -91,7 +91,7 @@ asciidoctor:
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
-    kotsversion: 1.64.0
+    kotsversion: 1.65.0
 
 collections:
   # this is named with an underscore because it needs to be processed
