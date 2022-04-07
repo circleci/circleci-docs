@@ -107,8 +107,6 @@ workflows:
                 - master 
                 - /.*-preview/
       - datadog-synthetics-ci:
-          context:
-            - web-ui-datadog
           requires:
             - build
       - reindex-search:
