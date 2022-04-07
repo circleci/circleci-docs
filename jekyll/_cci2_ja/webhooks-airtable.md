@@ -31,13 +31,13 @@ Airtable にログインし、新規「Base」 を作成します。
 
 デフォルトでは、新規「Grid view」が 「Table 1」という名前になり、事前定義された複数の列がそれぞれ異なるデータタイプで表示されます。 CircleCI では、これらの列を CircleCI から受け取るプロジェクトに関するデータに置き換えます。
 
-CircleCI データの多くは、「A single text line (一行のテキスト)」になりますが、 「date」などのデータタイプを使用する値もあります。 この例では、既存の列を削除し、以下の３列を「A single text line」として挿入します。
+CircleCI の多くのデータは、単純な「A single text line (一行のテキスト)」ですが、「date」などのデータタイプを使用する値もあります。 この例では、既存の列を削除し、以下の 3 列を「A single text line」として挿入します。
 
 - ID
 - Job Name
 - Status
 
-最後に列を１列追加します。ここでは「date」のデータタイプを使用します。
+最後に列を 1 列追加します。ここでは「date」のデータタイプを使用します。
 
 - Happened At
 
@@ -46,7 +46,7 @@ CircleCI データの多くは、「A single text line (一行のテキスト)�
 ### 3. Webhook の自動化の準備をします。
 {: #prepare-the-webhook-automation }
 
-Airtable の右上で、 [Automations] ボタンを選択し、右側の [Automations] パネルを開き、[Create a custom automation] を選択します。
+Airtable の画面右上で、 [Automations] ボタンを選択し、右側の [Automations] パネルを開き、[Create a custom automation] を選択します。
 
 
 ![Open Automations]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_3_automation.png)
@@ -61,32 +61,33 @@ Airtable の右上で、 [Automations] ボタンを選択し、右側の [Automa
 ### 4. CircleCI に接続します。
 {: #connect-to-circleci }
 
-CircleCI の Airtable Webhook URL を入手したら、CircleCI 用の Webhook をセットアップできるようになります。 まず CircleCI で監視するリポジトリのプロジェクト設定を開き、サイドパネルから「Webhooks」を選択します。
+CircleCI の Airtable Webhook URL を入手し、CircleCI の Webhook をセットアップする準備が整いました。 まず CircleCI 上で監視するリポジトリの [Project Settings] を開き、サイドパネルから [Webhooks] を選択します。
 
 ![Setup webhooks on circleci]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_5.png
 )
 
-[Add Webhook] をクリックして、Webhook 名 (先程コピーした Webhook URL ) を入力し、 再度 [AddWebhook] をクリックして保存する前に、[Job Completed] イベントを選択します。
+[Add Webhook] をクリックして、Webhook 名 (先程コピーした Webhook URL ) を入力し、[Job Completed] イベントを選択し、再度 [AddWebhook] をクリックして保存します。
 
-![Entering details for a webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
+![Entering details for a webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png
+)
 
 ### 5. テスト Webhook をトリガーします。
 {: #trigger-a-test-webhook }
 
-これで Webhook が設定されました。Airtable に戻る前に、CircleCI パイプラインをトリガーして CircleCI が送信するデータの種類を Airtable が分かるようにします。 CircleCI で、テストに使用できる任意のブランチでプロジェクトのパイプラインを表示し、[Run Piprline] ボタンをクリックします。
+Webhook の設定は完了しましたが、Airtable に戻る前に、CircleCI パイプラインをトリガーして CircleCI が送信するデータの種類を Airtable で確認できるようにします。 CircleCI で、テストに使用できる任意のブランチでプロジェクトのパイプラインを表示し、[Run Pipline] ボタンをクリックします。
 
 ![Trigger a test webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_7_run_pipeline.png)
 
-パイプラインが完了すると、最初のテストの Webhook が送信され、Airtable で検証することができます。 Webhookトリガー設定画面の一番下で、[test] ボタンを押して、Webhook データが入力されるまで待ちます。
+パイプラインが完了すると、最初のテスト Webhook が送信され、Airtable で確認することができます。 Webhook トリガー設定画面の一番下で、[test] ボタンを押して、Webhook データが挿入されるのを待ちます。
 
 ![Validate results in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_8_test.png)
 
 データが正常に受信されたら、[Done] をクリックし、トリガーのアクションを作成します。
 
-### 6. Webhook トリガーのアクションのセットアップ
+### 6. Webhook トリガーの「Action」のセットアップ
 {: #setup-the-action-for-our-webhook-trigger }
 
-「Action Type」には、ドロップダウンから [Create record] を選択し、テーブルを選択します。
+「Action Type」には、ドロップダウンから [Create record] を選択し、ご自身のテーブルを選択します。
 
 ![Create action in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_9_action.png
 )
@@ -99,22 +100,22 @@ CircleCI の Airtable Webhook URL を入手したら、CircleCI 用の Webhook �
 
 ![Run airtable test]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_11_done.png)
 
-7. 完了です！ パイプラインのジョブが完了すると、Airtable に新しいデータが入力されます。 Airtable には、データの様々な表示形式の作成に対する Free 機能と Premium 機能があります。 データは、他のテーブルと相互参照したり、計算等に使用することができます。
+7. 完了です！ パイプラインのジョブが完了すると、Airtable に新しいデータが入力されます。 Airtable には、データを様々なビュー (表示形式) で作成するための無料および有料の機能があります。 これらのデータは、他のテーブルと相互参照したり、計算など様々な用途に使用できます。
 
-### Tracking Deployments With Airtable
+### Airtable でのデプロイのトラッキング
 {: #tracking-deployments-with-airtable }
 
-While the above covers some basics with Airtable, let's take things a step further and look at how we might further leverage the collected data. Once you have a sufficient amount of data, we can start to create helpful views of our data. How about a calendar view of our deployments to help us visualize how often we are deploying!
+上記では Airtable の基本について説明しましたが、ここでは一歩進んで、集めたデータをさらに活用する方法について説明します。 十分な量のデータを収集したら、データの役立つビューの作成を開始できます。 デプロイのカレンダービューを作成し、デプロイ頻度を可視化してみましょう！
 
-In Airtable, go to the bottom left of the "views" side panel and click the "plus" icon on "Calendar".
+Airtableで、[views] サイドパネルの左下に移動し、[Calendar] の [plus] アイコンをクリックします。
 
 ![Add calendar in Airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_12_calendar.png)
 
-The next screen will ask you to confirm which "Date" column we want to base our calendar on, and since we only have one "Happened at", we will select that.
+次の画面では、カレンダーのベースにする Date 列を確認するように求められます。Happened at 列は1つしかないので、それを選択します。
 
-You will be presented with a calendar view of all of your jobs. Because we want to track just our deployments, let’s rename this view "Deployments" and set a filter at the top to only show jobs with the name of our deployment job on CircleCI, which in our case is "deploy".
+すべてのジョブのカレンダービューが表示されます。 デプロイのみをトラックするために、このビューの名前を「デプロイ」に変更し、CircleCI のデプロイジョブの名前のジョブ (この場合は「deploy」)のみを表示するよう最上部でフィルターを設定します。
 
 ![Airtable calendar filter]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_12_calendar2.png)
 
-And that's it! We now have a grid view which contains a spreadsheet of all of our data, and a calendar-based view named "Deployments" which shows us only our deploy jobs.
+完成です！ これで、すべてのデータのスプレッドシートを含むグリッドビューと、デプロイジョブのみを表示する「Deployments」という名前のカレンダーベースのビューが表示されました。
 
