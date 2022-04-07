@@ -50,7 +50,7 @@ workflows:
 ## チャット通知の有効化
 {: #set-or-change-email-notifications }
 
-CircleCI アプリケーションの [[Notifications (通知)](https://app.circleci.com/settings/user/notifications){:rel="nofollow"}] ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
+CircleCI アプリケーションの [Notifications (通知)](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
 
 Slack 通知の例を以下に示します。
 
