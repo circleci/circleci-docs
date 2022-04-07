@@ -185,7 +185,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:buster-browsers
+      - image: cimg/node:lts-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -305,7 +305,7 @@ jobs:
 
     # Primary container image where all commands run
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: cimg/python:3.6
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -313,7 +313,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -321,7 +321,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client-9.6
+      - run: sudo apt-get install postgresql-client-12
       - run: whoami
       - run: |
           psql \
