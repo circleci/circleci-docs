@@ -2,9 +2,10 @@
 
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Installation Phase 4
+= CircleCI Server v3.x インストール ステップ 4
+
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
