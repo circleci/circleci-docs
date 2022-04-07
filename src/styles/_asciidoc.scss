@@ -1,39 +1,63 @@
-span.icon>.fa {
-  cursor: default;
+table{
+  margin-top: 0px;
 }
-.admonitionblock td.icon {
-  text-align: center;
-  width: 80px;
+
+
+.admonitionblock>table td.icon{
+  vertical-align: middle;
+  text-align:center;
+  margin-left: -100px;
+  width:70px
 }
-.admonitionblock td.icon [class^="fa icon-"] {
-  font-size: 2.5em;
-  /* text-shadow: 1px 1px 2px rgba(0,0,0,.5); */
-  cursor: default;
+
+.admonitionblock td.icon [class^="fa icon-"]{font-size:1.8em;cursor:default;padding-right: 15px;}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#31708f}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";color:#555555}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#a94442}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#8a6d3b}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#3c763d}
+
+
+.admonitionblock {
+  padding:15px;
+  margin-bottom:20px;
+  border:1px solid transparent;
+  border-radius:4px
 }
-.admonitionblock td.icon .icon-note:before {
-  content: "\f05a";
-  color: #19407c;
+
+.note{
+  background-color:#d9edf7;
+  border-color:#bce8f1;
+  color:#31708f
 }
-.admonitionblock td.icon .icon-tip:before {
-  content: "\f0eb";
-  /*text-shadow: 1px 1px 2px rgba(155,155,0,.8);*/
-  color: #111;
+
+.tip{
+  background-color:#f9f9f9;
+  border-color:#dddddd;
+  color:#555555
 }
-.admonitionblock td.icon .icon-warning:before {
-  content: "\f071";
-  color: #bf6900;
+
+.important{
+  background-color:#dff0d8;
+  border-color:#d6e9c6;
+  color:#3c763d
 }
-.admonitionblock td.icon .icon-caution:before {
-  content: "\f06d";
-  color: #bf3400;
+
+.caution{
+  background-color:#fcf8e3;
+  border-color:#faebcc;
+  color:#8a6d3b
 }
-.admonitionblock td.icon .icon-important:before {
-  content: "\f06a";
-  color: #bf0000;
+
+.warning{
+  background-color:#f2dede;
+  border-color:#ebccd1;
+  color:#a94442
 }
 .title{
   font-style: italic;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 .imageblock{
