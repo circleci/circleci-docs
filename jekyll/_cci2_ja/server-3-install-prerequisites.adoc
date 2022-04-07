@@ -51,22 +51,22 @@ NOTE: In the following sections, replace any items or credentials displayed betw
 | {kotsversion} *
 | Replicated Kubernetes アプリケーション管理。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
 To install the latest version, you can run `curl  https://kots.io/install {vbar} bash`.
-| tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から`kots` を抽出したら、`sudo mv kots /usr/local/bin/kubectl-kots`を実行し、インストールします。 Mac users will need to grant a security exception.
+| tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から`kots` を抽出したら、`sudo mv kots /usr/local/bin/kubectl-kots`を実行し、インストールします。 Mac ユーザーはセキュリティ例外を付与する必要があります。
 
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
-| Latest
-| Backup and restore capability
-| See Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
+| 最新バージョン
+| バックアップおよびリストア機能
+| 詳細については、Velero のhttps://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ]を参照してください。
 |===
 
-*{sp}Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
+*{sp}Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
 
 // Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
-==== AWS required software
+==== AWS に必要なソフトウェア
 
 - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
 
@@ -78,15 +78,15 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-==== GCP required software
+==== GCP に必要なソフトウェア
 
-- `gcloud` and `gsutil`. You can install and set-up these tools up by installing Google Cloud SDK. For further information refer to the https://cloud.google.com/sdk/docs/[Google Cloud SDK docs].
+- `gcloud` および `gsutil`:  Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント]を参照してください。
 
 endif::env-aws[]
 
-==== S3 compatible storage required software
+==== S3 互換ストレージに必要なソフトウェア
 
-- Install and configure https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] for your storage provider.
+- ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] をインストールおよび設定してください。
 
 === Kubernetes クラスタの作成
 CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
@@ -113,13 +113,13 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 | 10 Gbps
 |===
 
-**Supported Kubernetes versions:**
+**サポートされているKubernetes のバージョン**
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| CircleCI Version
-| Kubernetes Version
+| CircleCI のバージョン
+| Kubernetes のバージョン
 
 | 3.0.0 - 3.2.1
 | 1.21 以下
@@ -133,8 +133,8 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
 
-* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
-* You must have appropriate permissions to list, create, edit, and delete pods in your cluster. Run this command to verify your permissions:
+* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
+* クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
 +
 ```shell
 kubectl auth can-i <list|create|edit|delete> pods
@@ -148,7 +148,7 @@ Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/qu
 
 . AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
 .  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
-. Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take more than 20 minutes to complete):
+. 以下を実行してクラスタを作成します（`eksctl` や EKS を使った CloudFormation には 20 分以上かかる場合があります。）
 +
 ```shell
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
@@ -172,13 +172,13 @@ CAUTION: Autopilot クラスターは使用しないでください。 CircleCI 
 
 . GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定します]。 これには Google Project の作成も含まれます。お客様のプロジェクト内にクラスタを作成する際に必要となります。 
 +
-NOTE: When you create your project, make sure you also enable API access. If you do not enable API access, the command we will run next (to create your cluster) will fail.
-. Create your cluster by running the following command:
+NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
+. 以下のコマンドを実行して、クラスタを作成します。
 +
 ```shell
 gcloud container clusters create circleci-server --project <YOUR_GOOGLE_CLOUD_PROJECT_ID> --region europe-west1 --num-nodes 3 --machine-type n1-standard-4
 ```
-. Configure `kubectl` with your your gcloud credentials:
+. gcloud 認証情報 で `kubectl` を設定します。
 +
 ```shell
 gcloud container clusters get-credentials circleci-server --region europe-west1
@@ -200,7 +200,7 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 ```
 endif::env-aws[]
 
-===== Enable Workload Identities in GKE (optional)
+===== GKE で Workload Identity を有効化する (オプション)
 https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE allow workloads/pods in your GKE cluster to impersonate IAM service accounts to access Google Cloud services without using static service account credentials. In order to use Workload Identities you must enable them on your GKE cluster.
 
 . Enable Workload Identity on existing cluster
