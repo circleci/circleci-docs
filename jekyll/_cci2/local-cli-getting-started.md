@@ -27,7 +27,7 @@ Please note that CircleCI server v2.x only supports a legacy version of the CLI.
 - You have your terminal open and ready to go.
 - Optional: An installation of Github's [`Hub`](https://hub.github.com/) command line tool (allowing us to interface with Github from the command line rather than the web UI). Learn [how to install Hub](https://github.com/github/hub#installation).
 
-If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [concepts document](https://circleci.com/docs/2.0/concepts/#section=getting-started) before proceeding.
+If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [concepts document]({{site.baseurl}}/2.0/concepts/#section=getting-started) before proceeding.
 
 ## Steps
 {: #steps }
@@ -162,7 +162,7 @@ Success!
 ### Connect your repo to CircleCI
 {: #connect-your-repo-to-circleci }
 
-We will need to leave the terminal behind for this step. Head over to [the "Add Projects page"](https://app.circleci.com/projects/project-dashboard/github/circleci/). It's time to set up your project to run CI whenever you push code.
+We will need to leave the terminal behind for this step. Head over to the **Projects** page on the [CircleCI web app](https://app.circleci.com/). It is time to set up your project to run CI whenever you push code.
 
 Find your project ("foo_ci", or whatever you named it on GitHub) in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
 

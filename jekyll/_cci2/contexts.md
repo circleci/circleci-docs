@@ -350,7 +350,7 @@ This section will walk through interacting with context environment variables us
 {:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on
-[CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration)
+[CircleCI CLI Configuration]({{site.baseurl}}/2.0/local-cli/?section=configuration)
 to set up your CircleCI command line interface._
 
 To create an environment variable using our CLI, perform the following steps:
@@ -422,7 +422,7 @@ directly accessing the API.
 {:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on
-[CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration)
+[CircleCI CLI Configuration]({{site.baseurl}}/2.0/local-cli/?section=configuration)
 to set up your CircleCI command line interface._
 
 To rotate an environment variable using the CLI, perform the following steps:

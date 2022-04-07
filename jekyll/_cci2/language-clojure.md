@@ -108,7 +108,7 @@ version: 2
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
+We use the [CircleCI-provided Clojure image]({{site.baseurl}}/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
 
 We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database or queue, for example, consider those containers when you allocate memory for the main JVM heap.
 
