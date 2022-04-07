@@ -42,7 +42,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 To add an API token, perform the steps listed below.
 
 1. Log in to the CircleCI web application.
-2. [Create a personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
+2. [Create a personal API token]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
 3.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
     ```shell
@@ -305,7 +305,7 @@ You may notice a new concept called a `project-slug` when making this API call. 
 
 The `project_slug` is included in the payload when you pull information about a project, which enables you to retrieve detailed information about a specific project.
 
-**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects](https://circleci.com/docs/2.0/projects/) page.
+**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/2.0/projects/) page.
 
 #### Steps
 {: #steps }
@@ -424,7 +424,7 @@ For a more detailed breakdown of each value returned in this request, please ref
 ### Download artifacts
 {: #download-artifacts }
 
-The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide]({{site.baseurl}}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 #### Steps
 {: #steps }
