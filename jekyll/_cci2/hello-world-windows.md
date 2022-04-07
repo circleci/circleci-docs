@@ -152,7 +152,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
+**Note:** It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
 
 ```yaml
 
