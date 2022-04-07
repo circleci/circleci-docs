@@ -118,8 +118,6 @@ workflows:
       - build
 ```
 
-From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
-
 ## Specifying a shell with the Windows executor
 {: #specifying-a-shell-with-the-windows-executor }
 
