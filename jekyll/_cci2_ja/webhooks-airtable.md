@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
 title: "Airtable を使った CircleCI Webhook"
-short-title: "Webhook を使った例"
-description: "Webhook を使った例"
+short-title: "Webhook の使用例"
+description: "Webhook の使用例"
 version:
   - クラウド
 ---
@@ -11,25 +11,25 @@ version:
 
 **前提条件**
 
-- Webhook を有効化した CircleCI のアカウント (Webhook は現在プレビュー段階であり、使用できない場合があります)。
+- Webhook が有効化されている CircleCI のアカウント (Webhook は現在プレビュー段階であり、使用できない場合があります)。
 - [CircleCI での Webhook]({{site.baseurl}}/2.0/webhooks) 使用経験
 - Airtable のアカウント (下記例を使う場合)
 
 
-## Airtable をセットアップする
+## Airtable のセットアップ
 {: #get-setup-in-airtable }
 
-### 1. Airtable で新しい "base"  を作成します。
+### 1. Airtable で新規「base」を作成します。
 {: #create-a-new-base-on-airtable }
 
-Airtable にログインし、新しい "Base" を作成します。
+Airtable にログインし、新規「Base」 を作成します。
 
 ![Creating a new base in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_1_new.png)
 
 ### 2. テーブルと列のデータタイプを設定します。
 {: #set-table-and-column-data-types }
 
-デフォルトでは、新しい 「Grid view」が 「Table 1」という名前になり、事前定義された複数の列がそれぞれ異なるデータタイプで表示されます。 CircleCI では、これらの列を CircleCI から受け取るプロジェクトに関するデータに置き換えます。
+デフォルトでは、新規「Grid view」が 「Table 1」という名前になり、事前定義された複数の列がそれぞれ異なるデータタイプで表示されます。 CircleCI では、これらの列を CircleCI から受け取るプロジェクトに関するデータに置き換えます。
 
 CircleCI データの多くは、「A single text line (一行のテキスト)」になりますが、 「date」などのデータタイプを使用する値もあります。 この例では、既存の列を削除し、以下の３列を「A single text line」として挿入します。
 
