@@ -136,7 +136,7 @@ version: 2
 version: 2
 jobs:
   build:
-    # 並列処理が必要ない場合は削除します
+    # 並列実行が必要ない場合は削除します
     parallelism: 2
     environment:
       # OOM (メモリ不足) エラーを回避するように JVM と Gradle を構成します

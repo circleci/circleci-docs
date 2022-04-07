@@ -55,6 +55,8 @@ en:
           link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
+        - name: Jobs and Steps
+          link: 2.0/jobs-steps/
         - name: Workspaces
           link: 2.0/workspaces/
         - name: Artifacts
@@ -85,7 +87,7 @@ en:
           link: 2.0/caching/
         - name: Caching strategies
           link: 2.0/caching-strategy/
-        - name: Pipeline variables
+        - name: Pipeline values and parameters
           link: 2.0/pipeline-variables/
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/
@@ -215,8 +217,6 @@ en:
           link: 2.0/orb-author-intro/
         - name: Author an Orb
           link: 2.0/orb-author/
-        - name: Author an Orb for Server
-          link: 2.0/orb-author-server/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orb Authoring Best Practices
@@ -421,15 +421,26 @@ en:
           link: 2.0/server-3-operator-troubleshooting-and-support
         - name: Backup and Restore
           link: 2.0/server-3-operator-backup-and-restore
+    - name: Server v3.4.x PDFs
+      link: 2.0/server-3-overview
+      children:
+        - name: v3.4 Overview
+          link: 2.0/CircleCI-Server-3.4.1-Overview.pdf
+        - name: v3.4 Installation Guide for AWS
+          link: 2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf
+        - name: v3.4 Installation Guide for GCP
+          link: 2.0/CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
+        - name: v3.4 Operations Guide
+          link: 2.0/CircleCI-Server-3.4.1-Operations-Guide.pdf
     - name: Server v3.3.x PDFs
       link: 2.0/server-3-overview
       children:
         - name: v3.3 Overview
           link: 2.0/CircleCI-Server-3.3.0-Overview.pdf
         - name: v3.3 Installation Guide for AWS
-          link: 2.0/CircleCI-Server-3.0.0-AWS-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
         - name: v3.3 Installation Guide for GCP
-          link: 2.0/CircleCI-Server-3.0.0-GCP-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
         - name: v3.3 Operations Guide
           link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs

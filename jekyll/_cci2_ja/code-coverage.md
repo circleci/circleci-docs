@@ -556,13 +556,15 @@ jobs:
       - image: cimg/php:8.1-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。 e
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -578,13 +580,15 @@ jobs:
       - image: cimg/php:8.1-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -602,12 +606,14 @@ jobs:
       - image: circleci/php:7-fpm-browsers-legacy
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: "テストの実行"
+          name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          environment:
+            XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
 ```
@@ -678,5 +684,5 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 
 Coveralls のユーザーは、[カバレッジ統計の設定ガイド](https://docs.coveralls.io/)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
 
-Coveralls は、同時処理ジョブのカバレッジ統計を自動的にマージします。
+Coveralls は、同時実行ジョブのカバレッジ統計を自動的にマージします。
 
