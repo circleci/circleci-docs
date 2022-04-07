@@ -53,7 +53,7 @@ Details on the Windows Server 2022 image can be found on this [Discuss post](htt
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
-- Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.<br>
+- Stable: This image tag points to the latest production-ready Windows image. This image should be used in projects that need a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.<br>
 
 The new `current` tag is available for Windows images and will eventually completely replace `stable`. Refer to the [Discuss forum](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511) for more information.
 {: class="alert alert-info"}
@@ -154,7 +154,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
+**Note:** It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
 
 ```yaml
 
