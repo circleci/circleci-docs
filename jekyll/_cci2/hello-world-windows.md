@@ -63,59 +63,6 @@ The new `current` tag is available for Windows images and will eventually comple
 
 - Edge: This image tag points to the latest version of the Windows image, and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes, and not guaranteed to be stable.
 
-Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
-
-{:.tab.windowsblockone.Cloud}
-```yaml
-version: 2.1
-
-orbs:
-  win: circleci/windows@4.1
-
-jobs:
-  build:
-    executor:
-      name: win/default
-      shell: powershell.exe
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-{:.tab.windowsblockone.Server_3}
-```yaml
-version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-## Known issues
-{: #known-issues }
-
-These are the issues with the Windows executor that we are aware of and will address as soon as we can:
-
-* Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
-* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
-
 ## Example configuration file
 {: #example-configuration-file }
 
@@ -337,6 +284,54 @@ jobs:
       - run: pwsh ./<my-script>.ps1
 ```
 
+## Running Windows Docker containers on the Windows executor
+{: #windows-docker-containers-on-windows-executor }
+
+Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
+
+{:.tab.windowsblockone.Cloud}
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@4.1
+
+jobs:
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
 ## Example application
 {: #example-application }
 
@@ -439,6 +434,19 @@ The available options are:
 
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
+## Software pre-installed on the Windows image
+{: #software-pre-installed-on-the-windows-image }
+
+To find information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server). The Windows image page on the Developer Hub lists links to the most recent updates.
+
+## Known issues
+{: #known-issues }
+
+These are the issues with the Windows executor that we are aware of and will address as soon as we can:
+
+* Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
+* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
+
 ## Next steps
 {: #next-steps }
 
@@ -447,8 +455,3 @@ Also, consider reading documentation on some of CircleCI’s features:
 * See the [Concepts]({{site.baseurl}}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
-
-## Software pre-installed on the Windows image
-{: #software-pre-installed-on-the-windows-image }
-
-To find information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server). The Windows image page on the Developer Hub lists links to the most recent updates.
