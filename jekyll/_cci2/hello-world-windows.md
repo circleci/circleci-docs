@@ -120,7 +120,7 @@ workflows:
 
 From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
-## Specifying a Shell with the Windows executor
+## Specifying a shell with the Windows executor
 {: #specifying-a-shell-with-the-windows-executor }
 
 There are three shells that you can use to run job steps on Windows:
@@ -203,11 +203,11 @@ jobs:
 ## Example application
 {: #example-application }
 
-Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. 
+Let us consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
 
 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image, as described in the [Using the Windows executor on CircleCI server](#windows-on-server) section.
 
-You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we'll focus on the `hello-world` workflow for now.
+You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
 
 ```yaml
 version: 2.1
@@ -348,7 +348,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-### Specifying a Shell
+### Specifying a shell
 {: #specifying-a-shell-server }
 {:.no_toc}
 
