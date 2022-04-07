@@ -104,19 +104,18 @@ Note that in order to use the Windows Server 2022 image in CircleCI cloud, it mu
 ```yaml
 version: 2.1
 
-workflows:
-  build-and-unittest:
-    jobs:
-      - build-windows
-
+orbs:
+  win: circleci/windows@4.1
+  
 jobs:
-  build-windows:
-    machine:
-      image: windows-server-2022-gui:current
-      resource_class: windows.medium
-      shell: powershell.exe -ExecutionPolicy Bypass
+  build:
+    executor: win/server-2022
     steps:
-      - run: echo 'test'
+      - run: Write-Host 'Hello, Windows'
+workflows:
+  my-workflow:
+    jobs:
+      - build
 ```
 
 From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
