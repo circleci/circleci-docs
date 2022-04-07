@@ -14,12 +14,13 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v3.x post installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites], xref:server-3-install.adoc[Phase 2 - Core services installation] and xref:server-3-install-build-services.adoc[Phase 3 - Build services installation].
+CircleCI Server v3.x のポストインストールステップを開始する前に、xref:server-3-install-prerequisites.adoc[ステップ 1 - 前提条件]、 xref:server-3-install.adoc[ステップ 2 - コアサービスのインストール]、 xref:server-3-install-build-services.adoc[ステップ 3 - ビルドサービスのインストール]が実行済みであることを確認してください。
 
-.インストール 手順（フローチャートのフェーズ 4）
+.インストール 手順（フローチャートのステップ 4）
 image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
+NOTE: 以下のセクションでは、`< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
+
 
 toc::[]
 
@@ -27,17 +28,17 @@ toc::[]
 
 === バックアップとリストアの設定
 
-Backups of CircleCI server can be created through https://kots.io/[KOTS].
-To enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
+CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して作成できます。
+バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero] をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
 
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
-=== Server 3.x backups on AWS
+=== AWS での CircleCI Server 3.x のバックアップ
 
-These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
+これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら] の Velero ドキュメントを元にしています。
 
-==== Step 1 - Create an AWS S3 bucket
+==== 手順 1 - AWS S3 バケットの作成
 
 [source,bash]
 ----
@@ -49,9 +50,9 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
 
-NOTE: `us-east-1` does not support a https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint]. If your region is `us-east-1`, omit the bucket configuration.
+NOTE: `us-east-1`  では、https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
-==== Step 2 - Set up permissions for Velero
+==== 手順 2 - Velero の権限の設定
 
 * IAM ユーザーを作成します。
 
@@ -60,7 +61,7 @@ NOTE: `us-east-1` does not support a https://docs.aws.amazon.com/AmazonS3/latest
 aws iam create-user --user-name velero
 ----
 
-* Attach policies to give user `velero` the necessary permissions:
+* 必要な権限を付与するポリシーをユーザー `velero` にアタッチします。
 
 [source,bash]
 ----
@@ -115,7 +116,7 @@ aws iam put-user-policy \
   --policy-document file://velero-policy.json
 ----
 
-* Create an access key for user `velero`
+* ユーザー `velero` 用のアクセス キーを作成します。
 
 [source,bash]
 ----
@@ -137,7 +138,7 @@ aws iam create-access-key --user-name velero
 }
 ----
 
-* Create a Velero-specific credentials file (eg: `./credentials-velero`) in your local directory, with the following contents:
+* 以下の内容を記載した、Velero 固有の認証情報ファイルをローカルディレクトリに作成します (例:  `./credentials-velero`)。
 
 [source,bash]
 ----
@@ -146,9 +147,9 @@ aws_access_key_id=<AWS_ACCESS_KEY_ID>
 aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 ----
 
-where the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are values returned from the `create-access-key` request in the previous step.
+ここで、`AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プレースホルダーには、前の手順の `create-access-key` リクエストで返された値を指定します。
 
-==== Step 3 - Install and start Velero
+==== 手順 3 - Velero のインストールと起動
 
 * Run the following `velero` `install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
