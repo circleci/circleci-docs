@@ -16,7 +16,7 @@ version:
 ## Introduction
 {: #introduction }
 
-This orb authoring guide assumes you have read the [Introduction to orbs]({{site.baseurl}}/2.0/orb-intro) document, the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-author-intro) document, and claimed your namespace. At this point you are ready to develop an orb.
+This orb authoring guide assumes you have read the [Introduction to orbs]({{site.baseurl}}/2.0/orb-intro) document, the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-author-intro) document, and claimed your namespace. Now you are ready to develop an orb.
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our [Orb Development Kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/2.0/reusing-config), they can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
@@ -425,4 +425,3 @@ Remove an orb from a category by running `circleci orb remove-from-category <nam
 ![Show which categorizations have been added to an orb](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
 
 To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
-
