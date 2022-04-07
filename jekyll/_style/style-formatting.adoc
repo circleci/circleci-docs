@@ -93,6 +93,6 @@ NOTE: If the paragraph text is not styled using `[.style]##` as shown here, it w
 Try not to use links in warnings at this time due to the blue on red style:
 
 [source.adoc]
-WARNING: A warning with a link:circleci.com[CircleCI] is hard to read.
+WARNING: A warning with a link:https://circleci.com/[CircleCI] is hard to read.
 
-WARNING: A warning with a link:circleci.com[CircleCI] is hard to read.
+WARNING: A warning with a link:https://circleci.com/[CircleCI] is hard to read.
