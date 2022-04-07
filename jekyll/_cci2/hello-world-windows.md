@@ -53,12 +53,12 @@ Details on the Windows Server 2022 image can be found on this [Discuss post](htt
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
-- Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.<br>
+- Current (formerly Stable): This image tag points to the latest production-ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.<br>
 
-The new `current` tag is available for Windows images and will eventually completely replace `stable`. Refer to the [Discuss forum](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511) for more information.
+The new `current` tag is available for Windows images. The `current` and `stable` tags are equivalent, and are currently both supported. Refer to the [Discuss forum](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511) for more information.
 {: class="alert alert-info"}
 
-- Previous: This image tag points to the previous ("stable") production ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month.
+- Previous: This image tag points to the previous production-ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month.
 
 - Edge: This image tag points to the latest version of the Windows image, and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes, and not guaranteed to be stable.
 
