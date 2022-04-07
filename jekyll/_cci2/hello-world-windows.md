@@ -85,20 +85,20 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Additionally, it is possible to access the Windows image directly in your jobs without using the orb:
+Additionally, it is possible to access the Windows image directly in your jobs without using orbs:
 
 ```yaml
 jobs:
   build-windows:
     machine:
-      image: windows-server-2022:current
+      image: windows-server-2019:stable
       resource_class: windows.medium
       shell: powershell.exe -ExecutionPolicy Bypass
 ```
 
-With that said, we strongly encourage using the orb as it helps simplify your configuration.
+With that said, we strongly encourage using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
 
-Note that in order to use the Windows Server 2022 image in CircleCI cloud, it must be specified as the `executor`, as shown in the following:
+Note that in order to use the Windows Server 2022 image with the Windows orb in CircleCI cloud, it must be specified in the `executor` type, as shown in the following:
 {: class="alert alert-info"}
 
 ```yaml
@@ -125,7 +125,7 @@ From here we will use the version 2.1 syntax to discuss using the Windows execut
 
 There are three shells that you can use to run job steps on Windows:
 
-* PowerShell (default in the Windows Orb)
+* PowerShell (default in the Windows orb)
 * Bash
 * Command
 
@@ -203,9 +203,11 @@ jobs:
 ## Example application
 {: #example-application }
 
-Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
+Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. 
 
-You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we'll focus on the `hello-world` workflow for now. 
+**Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image, as described in the [Using the Windows executor on CircleCI server](#windows-on-server) section.
+
+You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we'll focus on the `hello-world` workflow for now.
 
 ```yaml
 version: 2.1
@@ -218,7 +220,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.
+Next, we declare orbs that we will be using in our build. We will only use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.
 
 ```yaml
 workflows:
