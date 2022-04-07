@@ -113,6 +113,6 @@ To set up a mechanism for clients to shutdown, first enter `drain` mode, then wa
 
 The script should use the commands in the section above to do the following:
 
-1. Put the instance in drain mode.
-2. Monitor running jobs on the instance and wait for them to finish.
-3. Terminate the instance.
+. Put the instance in drain mode.
+. Monitor running jobs on the instance and wait for them to finish.
+. Terminate the instance.
