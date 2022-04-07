@@ -35,9 +35,22 @@ CircleCI believes in *configuration as code*. Consequently, the entire delivery 
 CircleCI provides an on-demand shell to run commands. In this first example, you will set up your first build and execute a shell command.
 
 . If you have not done so already, <<first-steps#,sign up with CircleCI>> and select either GitHub or BitBucket.
-. In your Version Control System (VCS), make sure you have authorized access to the project you want to manage with CircleCI (in GitHub, you have the option to block CircleCI from accessing your private repositories).
 . Create a `.circleci` folder at the root of your project. Make sure the folder starts with a period so that CircleCI can identify it.  
-. Create a `config.yml` file inside the `.circleci` folder.
+
+// screenshot
+
+. Create a blank `config.yml` file inside the `.circleci` folder. Then commit it (and push, if you are working remotely).
+. On the Projects page in CircleCI, click the blue *Set Up Project* button.
+
+// screenshot
+
+TIP: In your Version Control System (VCS), make sure you have authorized access to the project you want to manage with CircleCI (in GitHub, you have the option to block CircleCI from accessing your private repositories).
+
+. In the pop-up window, choose the default *Fastest* option for selecting your config.yml file. Then type the name of the branch on which you want to work.
+
+// screenshot
+
+. Your config.yml file is currently empty, so this initial build will fail. 
 . Add the following code to your `config.yml` file:
 +
 [source,yaml]
@@ -73,7 +86,7 @@ The following commentary describes what occurs in each line of the sample code:
 
 // include a screenshot here
 
-NOTE: Although the config.yml syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
+NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
 
 == Part 2: Using code from your repo
 
@@ -89,7 +102,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: alpine:3.15
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
@@ -106,6 +119,7 @@ jobs:
 
 These two small changes have significantly increased the functionality of your config file:
 
+* *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
 * *Line 7:* The `checkout` command fetches the code from your git repo.
 * *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repo that has been checked out. You can now perform further actions on this repo.
 
@@ -120,7 +134,7 @@ You should now see some additional steps:
 
 == Part 3: Using different environments and creating workflows
 
-In Parts 1 and 2, you ran your job in a basic Linux-based Docker container.
+In Parts 1 and 2, you ran your job in basic Linux-based Docker containers.
 
 With CircleCI, you can run different jobs in different environments, such as macOS, virtual machines, or Docker images. By changing the Docker image, you can quickly upgrade your environment version or change languages. 
 
@@ -135,7 +149,7 @@ jobs:
   # running commands on a basic image
   Hello-World:
     docker:
-      - image: alpine:3.15
+      - image: cimg/base:2021.04
     steps:
       - run:
           name: Saying Hello
@@ -176,9 +190,9 @@ workflows:
 This example is more complicated than the others, but it introduces several important concepts. Parts 1 and 2 included just one job called _build_, which contained several steps. This example includes three jobs. By separating those steps into jobs, you can run each of them in a different environment.
 
 * *Line 3:* You can add comments to your config.yml file by preceding them with the # (hash) sign.
-* *Lines 5-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in the Alpine Docker image.
+* *Lines 5-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
 * *Line 14:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
-* *Lines 15-16:* The _Fetch-Code_ job uses a CircleCI convenience image. This is a small Ubuntu-based image for running basic jobs.
+* *Lines 15-16:* The _Fetch-Code_ job uses basic image. 
 * *Lines 17-22:* This code is repeated from Part 2, but now it is a separate job.
 * *Line 24:* The third job is _Using-Node_.
 * *Lines 25-26:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
