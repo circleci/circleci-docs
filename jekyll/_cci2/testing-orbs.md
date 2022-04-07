@@ -136,19 +136,8 @@ Review Checks output to JUNIT XML formatted and are automatically uploaded to Ci
 
 When you click into the error you will receive more information such as what file and at what line in the code the error was found, along with suggestions for resolution.
 
-#### Local Review
-{: #local-review }
-
-The "review" job is built using the [BATS-Core](https://github.com/bats-core/bats-core) bash automation testing framework. If you have bats installed locally, you can review your orb by running:
-
-```shell
-bats src/scripts/review.bats
-```
-
-Or, using CircleCI's Local Execute:
-```shell
-circleci local execute --job orb-tools/review
-```
+**Note:** The "orb-tools/review" job currently can not be ran locally due to the fact that the results are output as JUNIT XML and uploaded to CircleCI, which is not supported by the local execute command at this time.
+{: class="alert alert-warning"}
 
 ## Unit testing
 {: #unit-testing }
