@@ -24,7 +24,7 @@ toc::[]
 Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
 
 * Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
-* Deploy the app from the KOTS admin console
+* Deploy the app from the KOTS Admin Console
 
 === Fixes
 
