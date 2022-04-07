@@ -94,6 +94,13 @@ asciidoctor:
     kotsversion: 1.65.0
 
 collections:
+  cci2:
+    name: "2.0 Docs"
+    site_section: true
+    output: true
+    permalink: /2.0/:path/
+    prefix: "/2.0"
+    selectorName: "2.0"
   api:
     name: "API Docs"
     site_section: true
