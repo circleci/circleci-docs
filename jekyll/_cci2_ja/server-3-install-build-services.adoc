@@ -19,7 +19,8 @@ CircleCI サーバー v3.x ビルドサービスのインストールステッ�
 .インストール手順のフローチャート ステップ 3）
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
+NOTE: 以下のセクションでは、`< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
+
 
 toc::[]
 
@@ -29,19 +30,22 @@ toc::[]
 
 出力プロセッサは、 Normad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。
 
-KOTS の管理者コンソールにアクセスします。 Get to the KOTS Admin Console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+KOTS の管理者コンソールにアクセスします。 名前空間を変更して `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` を実行し、KOTS 管理者コンソールにアクセスします。
+
+
 
 設定で次の項目を探して入力します。
 
-. *Output Processor Load Balancer Hostname* -
-The following command will provide the IP address of the service
+. 
+.*[Output Processor Load Balancer (出力プロセッサ ロードバランサー) のホストネーム]*: 次のコマンドにより、サービスの IP アドレスを取得します
+
 +
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
-. *Save your configuration*. Nomad クライアントの設定の完了後、設定のデプロイと確認を行います。
+. *[Save your configuration (設定を保存)]*:  Nomad クライアントの設定の完了後、設定のデプロイと確認を行います。
 
 === Nomad クライアント
 
-As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
+https://circleci.com/docs/2.0/server-3-overview[概要]で述べたように、Nomad は CircleCI が CircleCI ジョブのスケジュール設定 (Nomad サーバー経由) と実行 (Nomad クライアント経由) に使用するワークロードオーケストレーションツールです。 
 
 Nomad クライアントは Kubernetes クラスタの外部にインストールされ、コントロールプレーン（ Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 mTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
 
@@ -50,20 +54,20 @@ Nomad クライアントは Kubernetes クラスタの外部にインストー�
 
 ==== Terraform によるクラスタの作成
 
-CircleCI では、任意のクラウド プロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files (`main.tf`) for both AWS and GCP. Some information about your cluster and server installation is required to complete your `main.tf`. 以下でその情報を入手する方法を説明します。
+CircleCI では、任意のクラウド プロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 モジュールは、(<code>main.tf</code>) の AWS と GCP の両方の Terraform 設定ファイル（main.tf）例を含む、 https://github.com/CircleCI-Public/server-terraform[パブリックリポジトリ] で参照できます。 `main.tf` を完了するには、クラスタとサーバーのインストールに関する情報が必要です。 以下でその情報を入手する方法を説明します。
 
-NOTE: If you would also like to set up Nomad Autoscaler at this time, see the <<#nomad-autoscaler-optional,Nomad Autoscaler>> section of this guide, as some of the requirements can be included in this Terraform setup.
+NOTE: Nomad Autoscaler もここでセットアップする場合は、この Terraform の設定にいくつかの要件を含められるため、本ガイドの <<#nomad-autoscaler-optional,Nomad Autoscaler>>  のセクションを参照してください。
 
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
 ===== AWS
-You will need some information about your cluster and server installation to complete the required fields for the terraform configuration file (`main.tf`). A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
+クラスタおよびサーバのインストールに関する情報を Terraform 設定ファイル (`main.tf`) のフィールドに入力します。 変数の完全な例と完全なリストについては、 https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[こちら] を参照してください。
 
-* *Server_endpoint* - You will need to know the Nomad Server endpoint, which is the external IP address of the nomad-server-external Loadbalancer. 以下のコマンドで情報を入手します。
+* *Server_endpoint*: Nomad サーバーエンドポイント（Nomad サーバー外部ロードバランサー の外部 IP アドレス）が必要です。 以下のコマンドで情報を入手します。
 +
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
-* *Subnet ID (subnet)*, *VPC ID (vpcId)*, and *DNS server (dns_server)* of your cluster.
+* クラスタの *Subnet ID (subnet)* 、 *VPC ID (vpcId)* 、 *DNS server (dns_server)*:
 以下のコマンドを実行して、クラスタの VPC ID ((vpcId)、CIDR (serviceIpv4Cidr)、およびサブネット (サブネットの ID)を入手します。
 +
 aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
@@ -92,7 +96,7 @@ aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 ...
 }
 +
-次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16` so the third IP would be `10.100.0.2`.
+次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 AWS の場合、 DNS サーバーは CIDR ブロック (`CidrBlock`) の３番目の IP です。たとえば、CIDR ブロックが `10.100.0.0/16` の場合、 3 番目の IP は `10.100.0.2` になります。
 +
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 +
@@ -107,7 +111,7 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 ...}
 
 
-Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command from within the directory of the `main.tf` file.
+適切な情報を入力したら `main.tf` ファイルのディレクトリから次のコマンドを実行することにより、Nomad クライアントをデプロイすることができます。
 
 [source,shell]
 ----
