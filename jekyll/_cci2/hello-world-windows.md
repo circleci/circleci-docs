@@ -42,14 +42,14 @@ The Windows execution environment (or `executor`) gives users the tools to build
 **Notes:**
 
 - The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
-- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
+- Orb usage is not supported on CircleCI Server v2.x (please view the [Using the Windows executor on CircleCI server](#windows-on-server) section for server usage.)
 
 ## Windows executor images
 {: #windows-executor-images }
 
-CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
+CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. For information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server), or the [Discuss forum](https://discuss.circleci.com/). The Windows image page on the Developer Hub lists links to the most recent updates.
 
-Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+Details on the Windows Server 2022 image can be found on this [Discuss post](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
@@ -106,7 +106,7 @@ version: 2.1
 
 orbs:
   win: circleci/windows@4.1
-  
+
 jobs:
   build:
     executor: win/server-2022
@@ -302,11 +302,6 @@ The available options are:
 
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
-## Software pre-installed on the Windows image
-{: #software-pre-installed-on-the-windows-image }
-
-To find information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server). The Windows image page on the Developer Hub lists links to the most recent updates.
-
 ## Known issues
 {: #known-issues }
 
@@ -317,6 +312,8 @@ These are the issues with the Windows executor that we are aware of and will add
 
 ## Using the Windows executor on CircleCI server
 {: #windows-on-server }
+
+Contact your systems administrator for details of what is included in CircleCI server Windows images, or visit the [Discuss](https://discuss.circleci.com/) forum.
 
 {:.tab.windowsblocktwo.Server_3}
 ```yaml
