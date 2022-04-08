@@ -275,7 +275,7 @@ ifndef::env-gcp[]
 
 ===== AWS
 . IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成します。 以下のいづれか方法で実行します。:
- 　* `nomad_auto_scaler = true` を設定すると、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[Nomad モジュール] が IAM ユーザーを作成し、キーを出力します。詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーアクセスキーは Terraform の出力で使用できます。
+  * `nomad_auto_scaler = true` を設定すると、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[Nomad モジュール] が IAM ユーザーを作成し、キーを出力します。詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーアクセスキーは Terraform の出力で使用できます。
   * 以下の IAM ポリシーを使用して、手動で Nomad Autoscaler IAM ユーザーを作成することも可能です。 その場合、ユーザーにアクセスキーとシークレットキーを生成する必要があります。
   * Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール] を作成し、次の IAM ポリシーを添付します。
 +
