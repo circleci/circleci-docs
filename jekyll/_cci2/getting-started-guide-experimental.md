@@ -8,15 +8,12 @@ order: 41
 toc: false
 ---
 
-{% comment %} <!---INTRO--->{% endcomment %}
 {% capture content %}
 Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
 {% endcapture %}
 
 {% include getting-started-section-header.html content=content %}
-{% comment %} <!---END INTRO--->{% endcomment %}
 
-{% comment %} <!---PREREQ LINKS--->{% endcomment %}
 {% capture content1 %}
 Sign up for a free CircleCI 
 {% endcapture %}
@@ -26,9 +23,7 @@ Sign in and connect a VCS 👋
 {% endcapture %}
 
 {% include getting-started-links.html title="Prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
-{% comment %} <!---END PREREQ LINKS--->{% endcomment %}
 
-{% comment %} <!---HEADER 1--->{% endcomment %}
 {% capture content %}
 Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
 {% endcapture %}
@@ -38,9 +33,7 @@ Continuous integration is a practice that helps developers integrate their code 
 {%- endcapture -%}
 
 {% include getting-started-section-header.html title="01 Connect to your code" content=content imagePath=header-banner-1 %}
-{% comment %} <!---END HEADER 1--->{% endcomment %}
 
-{% comment %} <!---VCS BANNER--->{% endcomment %}
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
 {%- endcapture -%}
@@ -50,9 +43,7 @@ Continuous integration is a practice that helps developers integrate their code 
 {%- endcapture -%}
 
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
-{% comment %} <!---END VCS BANNER--->{% endcomment %}
 
-{% comment %} <!---HEADER1 - SECTION1--->{% endcomment %}
 {% capture content %}
 Create a repository called “hello-world” in GitHub or Bitbucket. Then in the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click Set Up Project. Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
 {% endcapture %}
@@ -62,9 +53,7 @@ Create a repository called “hello-world” in GitHub or Bitbucket. Then in the
 {%- endcapture -%}
 
 {% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
-{% comment %} <!---END HEADER1 - SECTION1--->{% endcomment %}
 
-{% comment %} <!---HEADER1 - SECTION2--->{% endcomment %}
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
 {% endcapture %}
@@ -74,9 +63,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {%- endcapture -%}
 
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
-{% comment %} <!---END HEADER1 - SECTION2--->{% endcomment %}
 
-{% comment %} <!---HEADER1 - SECTION3--->{% endcomment %}
 {% capture content %}
 You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b> 
 <br>
@@ -89,9 +76,7 @@ This will create a .circleci/config.yml file at the root of your repository on a
 {%- endcapture -%}
 
 {% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
-{% comment %} <!---END HEADER1 - SECTION3--->{% endcomment %}
 
-{% comment %} <!---HEADER1 - SECTION4--->{% endcomment %}
 {% capture content %}
 You should soon have your first green pipeline. If you are happy with this configuration, merge it into your main branch or continue to make changes.{% endcapture %}
 
@@ -100,9 +85,7 @@ You should soon have your first green pipeline. If you are happy with this confi
 {%- endcapture -%}
 
 {% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
-{% comment %} <!---END HEADER1 - SECTION4--->{% endcomment %}
 
-{% comment %} <!---HEADER 2--->{% endcomment %}
 {% capture content %} You should see your pipeline start to run automatically—and pass! {% endcapture %}
 
 {%- capture header-banner-2 -%}
@@ -110,9 +93,7 @@ You should soon have your first green pipeline. If you are happy with this confi
 {%- endcapture -%}
 
 {% include getting-started-section-header.html title="02 Dig into your first pipeline" content=content imagePath=header-banner-2 %}
-{% comment %} <!---END HEADER 2--->{% endcomment %}
 
-{% comment %} <!---HEADER2 - SECTION1--->{% endcomment %}
 {% capture content %}
 Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
 {% endcapture %}
@@ -122,9 +103,7 @@ Click on the green Success button to see details about the workflow. The hello-w
 {%- endcapture -%}
 
 {% include two-up.html title="1. So, what just happened?" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
-{% comment %} <!---END HEADER2 - SECTION1--->{% endcomment %}
 
-{% comment %} <!---HEADER2 - SECTION2--->{% endcomment %}
 {% capture content %}
 Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job: 
 <ul>
@@ -140,9 +119,7 @@ Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.co
 {%- endcapture -%}
 
 {% include two-up.html title="2. View your results" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
-{% comment %} <!---END HEADER2 - SECTION2--->{% endcomment %}
 
-{% comment %} <!---HEADER2 - SECTION3--->{% endcomment %}
 {% capture content %}
 It is easy for teammates and collaborators to view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
 {% endcapture %}
@@ -152,9 +129,7 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 {%- endcapture -%}
 
 {% include two-up.html title="3. Collaborate with teammates" content=content imageURL=collab-with-team imageAlt="Add Team Members" %}
-{% comment %} <!---END HEADER2 - SECTION3--->{% endcomment %}
 
-{% comment %} <!---HEADER 3--->{% endcomment %}
 
 {% capture content %} We recommend inviting your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster. You can also: {% endcapture %}
 
@@ -163,9 +138,7 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 {%- endcapture -%}
 
 {% include getting-started-section-header.html title="03 What's next" content=content imagePath=header-banner-3 %}
-{% comment %} <!---END HEADER 3--->{% endcomment %}
 
-{% comment %} <!---HEADER3 - SECTION1--->{% endcomment %}
 {% capture content %}
 Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS. 
 <br>
@@ -178,9 +151,7 @@ On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click th
 {%- endcapture -%}
 
 {% include two-up.html title="1. Break your build" content=content imageURL=break-your-build imageAlt="Failed Job in Pipeline" %}
-{% comment %} <!---END HEADER3 - SECTION1--->{% endcomment %}
 
-{% comment %} <!---HEADER3 - SECTION2--->{% endcomment %}
 {% capture content %}
 In your Dashboard, click into the <b>say-hello-world</b> workflow. Can you find the four steps that ran? Hint: step 1 is <b>Spin up environment</b>.
 <br>
@@ -193,9 +164,7 @@ A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">wo
 {%- endcapture -%}
 
 {% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
-{% comment %} <!---END HEADER3 - SECTION2--->{% endcomment %}
 
-{% comment %} <!---HEADER3 - SECTION3--->{% endcomment %}
 {% capture content %}
 On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
 {% endcapture %}
@@ -205,17 +174,13 @@ On a failed pipeline, you can <a class="no-external-icon" href="https://circleci
 {%- endcapture -%}
 
 {% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
-{% comment %} <!---END HEADER3 - SECTION3--->{% endcomment %}
 
-{% comment %} <!---HEADER 4--->{% endcomment %}
 {% capture content %} 
 That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
 {% endcapture %}
 
 {% include getting-started-section-header.html title="04 Recommended learning" content=content %}
-{% comment %} <!---END HEADER 4--->{% endcomment %}
 
-{% comment %} <!---RESOURCE LINKS--->{% endcomment %}
 {% capture content3 %}On-demand free developer training{% endcapture %}
 
 {% capture content4 %}CircleCI foundation videos{% endcapture %}
@@ -227,4 +192,3 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 {% capture content7 %}Benefits of CircleCI free plan{% endcapture %}
 
 {% include getting-started-links.html title="Developer resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/2.0/config-intro/" href6="https://circleci.com/docs/2.0/concepts/" href7="https://circleci.com/docs/2.0/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
-{% comment %} <!---END RESOURCE LINKS--->{% endcomment %}
