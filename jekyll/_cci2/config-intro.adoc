@@ -34,7 +34,7 @@ CircleCI believes in *configuration as code*. Consequently, the entire delivery 
 
 CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
 
-. If you have not done so already, <<first-steps#,sign up with CircleCI>> and select either GitHub or BitBucket.
+. If you have not done so already, <<first-steps#,sign up with CircleCI>> and select either your Version Control System (VCS). You can also sign up with email.
 . Create a `.circleci` folder at the root of your project. Make sure the folder starts with a period so that CircleCI can identify it.  
 . Create a `config.yml` file inside the `.circleci` folder and paste the following code:
 +
@@ -78,7 +78,7 @@ TIP: In your Version Control System (VCS), make sure you have authorized access 
 +
 image::config-select-config-file.png[Select config file]
 + 
-. CircleCI uses your `config.yml` file to run the pipeline. You can see the output of the job in the CircleCI dashboard. A green tick denotes a successful pipeline; a red exclamation mark alerts you to a failure. Click on the job for more details.
+. CircleCI uses your `config.yml` file to run the pipeline. You can see the output in the CircleCI dashboard. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details.
 +
 image::config-intro-part1-job.png[Successful build job]
 +
@@ -94,7 +94,7 @@ CircleCI provides several commands to simplify complex actions. In this example,
 
 If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
 
-If you already have a `config.yml` file from the example above, add another run step (lines 13-17) at the end. Make sure you observe the indentation.
+If you already have a `config.yml` file from the example above, add another run step (lines 13-17) at the end and a `checkout` command at line 7. Make sure you observe the indentation.
 
 [source,yaml]
 ----
@@ -136,7 +136,7 @@ image::config-second-step.png[Checking out your repo]
 
 In Parts 1 and 2, you ran your job in basic Linux-based Docker containers.
 
-With CircleCI, you can run different jobs in different execution environments, such as macOS, Windows, virtual machines, or Docker images. By changing the Docker image, you can quickly upgrade your environment version or change languages. 
+With CircleCI, you can run different jobs in different execution environments, such as virtual machines or Docker containers. By changing the Docker image, you can quickly upgrade your environment version or change languages. 
 
 In this part, you will create additional jobs and run them using different Docker images.
 
