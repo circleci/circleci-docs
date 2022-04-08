@@ -29,7 +29,7 @@ version:
 ## `パラメーター` 宣言の使用
 {: #using-the-parameters-declaration }
 
-パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 パイプライン パラメーターの詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を参照してください。
+パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 See the [Pipeline Values and Parameters guide]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
 
 次の例では、`greeting` という名前のコマンドを宣言し、`to` という名前のパラメーターを使用しています。 `to` パラメーターは、"_Hello_" とユーザーにエコーバックするステップで使用しています。
 
@@ -655,7 +655,7 @@ Orb では、Orb 内のすべてのコマンドが使用する Executor を定�
 
 次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executor に渡すことができます。
 
-`matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ](https://circleci.com/ja/docs/2.0/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
 
 ```yaml
@@ -1094,10 +1094,10 @@ workflows:
 
 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                                      |
-| --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                              |
+| キー        | 必須 | 種類    | 説明                                                                             |
+| --------- | -- | ----- | ------------------------------------------------------------------------------ |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                     |
 {: class="table table-striped"}
 
 ### **`unless` ステップ**
@@ -1105,10 +1105,10 @@ workflows:
 
 `unless` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が false 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                                      |
-| --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                             |
+| キー        | 必須 | 種類    | 説明                                                                             |
+| --------- | -- | ----- | ------------------------------------------------------------------------------ |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                    |
 {: class="table table-striped"}
 
 ## インライン Orb の作成
