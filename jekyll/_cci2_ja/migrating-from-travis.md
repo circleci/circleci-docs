@@ -44,9 +44,9 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | script:           | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | 上記を参照。                                                                                                                                                                                              |
 | after_script:     | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | 上記を参照。                                                                                                                                                                                              |
 | deploy:           | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/2.0/deployment-integrations) for examples.                                                   |
-| env:              | [environment:](https://circleci.com/docs/ja/2.0/configuration-reference/#environment)                                                                                         | environment: 要素を使用して、環境変数を指定します。                                                                                                                                                                    |
-| matrix:           | [matrix:](https://circleci.com/docs/ja/2.0/configuration-reference/#matrix-requires-version-21)                                                                               | CircleCI ではワークフローを使用して複数のジョブをオーケストレーションできます。                                                                                                                                                        |
-| stage:            | [requires:](https://circleci.com/docs/ja/2.0/configuration-reference/#requires)                                                                                               | requires: 要素を使用して、ジョブの依存関係を定義し、ワークフローでの並列ビルドを制御します。                                                                                                                                                 |
+| env:              | [environment:]({{site.baseurl}}/2.0/configuration-reference/#environment)                                                                                                     | environment: 要素を使用して、環境変数を指定します。                                                                                                                                                                    |
+| matrix:           | [matrix:]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21)                                                                                           | CircleCI ではワークフローを使用して複数のジョブをオーケストレーションできます。                                                                                                                                                        |
+| stage:            | [requires:]({{site.baseurl}}/2.0/configuration-reference/#requires)                                                                                                           | requires: 要素を使用して、ジョブの依存関係を定義し、ワークフローでの並列ビルドを制御します。                                                                                                                                                 |
 {: class="table table-striped"}
 
 ## 環境変数
@@ -137,7 +137,7 @@ Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment
 
 CircleCI では、[コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)を使用することで、*すべて*のプロジェクト間で安全に環境変数を共有できます。
 
-Travis と CircleCI はいずれも、ビルド時に環境変数を使用できます。
+**Note:** CircleCI has several [built-in environment variables]({{site.baseurl}}/2.0/env-vars/#built-in-environment-variables).
 
 ## 高度なツール
 {: #artifacts-uploading }
