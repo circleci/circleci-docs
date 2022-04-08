@@ -73,7 +73,7 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-これらの環境変数の設定方法の詳細については、[環境変数に関するドキュメント](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
+If you need more information on how to set these environment variables, refer to the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page in the CircleCI documentation.
 
 **注意: **このサンプルで使用されている `CIRCLE_SHA1` は組み込まれているため、いつでも使用できます。
 
@@ -150,7 +150,7 @@ workflows:
       - verify-deployment
 ```
 
-この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 イメージを設定して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples)を参照してください。
+この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 Refer to the [AWS ECR]({{site.baseurl}}/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
 
 Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
 
@@ -167,7 +167,7 @@ Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化し�
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
-これらの環境変数の設定方法の詳細については、[環境変数の使用](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
+If you need more information on how to set these environment variables, refer to the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page in the CircleCI documentation.
 
 ### クラスタの作成と削除
 {: #creating-and-deleting-clusters }
