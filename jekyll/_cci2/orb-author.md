@@ -51,7 +51,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
 1. **Update the CircleCI CLI**
 
-    Ensure you are using the latest version of the CircleCI CLI. You must be using version < CHANGE THIS LATER > or later.
+    Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` of the CLI or later.
 
     ```shell
     $ circleci update
@@ -59,7 +59,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     $ circleci version
     ```
 
-1. **Initialize your orb**
+2. **Initialize your orb**
 
     Open a terminal and initialize your new orb project using the `orb init` CLI command.
 
@@ -81,7 +81,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
 
-1. **Choose the fully automated orb setup option.**
+3. **Choose the fully automated orb setup option.**
 
     ```shell
       ? Would you like to perform an automated setup of this orb?:
@@ -97,7 +97,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     Alternatively, if you would simply like a convenient way of downloading the [Orb-Template](https://github.com/CircleCI-Public/Orb-Template) you can opt to handle everything yourself.
 
-1. **Follow the prompts to configure and set up your orb.**
+4. **Follow the prompts to configure and set up your orb.**
 
     In the background, the `orb init` command will be copying and customizing the [Orb Template](https://github.com/CircleCI-Public/Orb-Template) based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will also be asked for the remote git repository URL that you obtained back in step 1.
 
@@ -105,7 +105,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     In the setup process you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/2.0/contexts/). Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
 
-1. **Ensure the context is restricted**
+5. **Ensure the context is restricted**
 
     Restrict a context by navigating to _Organization Settings > Contexts_.
 
@@ -114,7 +114,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     For more information, see the [Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
     {: class="alert alert-warning"}
 
-1. **Push the changes up to Github.**
+6. **Push the changes up to Github.**
 
     During the setup process, the `orb init` command takes steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com. Run the following command from a separate terminal when prompted to do so, substituting the name of your default branch:
     ```shell
@@ -122,14 +122,14 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     ```
     Once complete, return to your terminal and confirm the changes have been pushed.
 
-1. **Complete the setup**
+7. **Complete the setup**
 
     Once the changes have been pushed, return to your terminal and continue the setup process. The CLI will now automatically follow the project on CircleCI, and attempt to trigger a pipeline to build and test your orb with sample code.
 
     You will be provided with a link to the project building on CircleCI where you can view the full pipeline.
     You should also see the CLI has automatically migrated you into a new development branch, named `alpha`. You can use any branch naming you would like, you do not need to exclusively develop on `alpha`.
 
-1. **Enable Dynamic Configuration**
+8. **Enable Dynamic Configuration**
 
     Because we are making use of [dynamic configuration]({{site.baseurl}}/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not yet enabled.
 
@@ -137,7 +137,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     Once enabled, all future commits to your project will run through the full pipeline and test your orb. We could manually re-run the pipeline at this point, but since we are only working with sample code at this moment, we don't need to.
 
-1. **Develop your orb**
+9. **Develop your orb**
 
     From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
 
