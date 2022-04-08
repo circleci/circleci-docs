@@ -14,7 +14,7 @@ version:
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 == ステップ 1: 前提条件
-CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、https://circleci.com/docs/2.0/server-3-overview[CircleCI Server 3.x の概要]を先に読んでいることを前提としています。
+CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/2.0/server-3-overview[CircleCI Server 3.x の概要] を先に読んでいることを前提としています。
 
 .インストール 手順（フローチャートのステップ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -57,7 +57,7 @@ To install the latest version, you can run `curl  https://kots.io/install {vbar}
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 | 最新バージョン
 | バックアップおよびリストア機能
-| 詳細については、Velero のhttps://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ]を参照してください。
+| 詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ] を参照してください。
 |===
 
 *{sp}Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
@@ -80,7 +80,7 @@ ifndef::env-aws[]
 
 ==== GCP に必要なソフトウェア
 
-- `gcloud` および `gsutil`:  Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント]を参照してください。
+- `gcloud` および `gsutil`:  Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
 
 endif::env-aws[]
 
