@@ -7,7 +7,7 @@ version:
 - Server v3.x
 ---
 
-Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/) or file paths.
+Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline values]({{ site.baseurl }}/2.0/pipeline-variables/) or file paths.
 
 CircleCI's dynamic configuration feature allows you to:
 
