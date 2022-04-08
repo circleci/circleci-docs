@@ -1101,7 +1101,7 @@ workflows:
 ## 複数の Executor タイプを利用する設定例
 {: #sample-configuration-with-multiple-executor-types }
 
-1 つのワークフローのなかで、複数の [Executor タイプ](https://circleci.com/docs/2.0/executor-types/)を利用できます。
+It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-types/) in the same workflow.
 
 `Example-1` では、Linux、Windows、macOS のそれぞれでプロジェクトのビルドおよびテストを行っています。
 
