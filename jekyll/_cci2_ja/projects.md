@@ -12,20 +12,13 @@ version:
   - Server v2.x
 ---
 
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
+A CircleCI project shares the name of the associated code repository and is visible on the **Projects** page of the [CircleCI web app](https://app.circleci.com/). Projects are added by using the **Set Up Project** button.
 
-On the "Add Projects" page, you can either _Set Up_ any project that you are the owner of on your VCS, or, _Follow_ any project in your organization to gain access to its pipelines and to subscribe to \[email notifications\]({{ site.baseurl }}/2.0/notifications/) for the project's status.
+On the **Projects** page, you can either set up any project that you are the owner of on your VCS, or follow any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project's status.
 
 ## Projects dashboard
 {: #projects-dashboard }
 
-{:.tab.addprojectpage.Cloud}
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+![Project Dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-{:.tab.addprojectpage.Server_3}
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
-
-{:.tab.addprojectpage.Server_2}
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
-
-The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects.  Users may not view project data that is stored in environment variables.
+*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 A *User* is an individual user within an organization. A *CircleCI user* is anyone who can log in to the CircleCI platform with a username and password. 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
