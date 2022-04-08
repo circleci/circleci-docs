@@ -1,116 +1,135 @@
 ---
 layout: classic-docs
-title: "Orb、ジョブ、ステップ、ワークフロー"
-short-title: "Orb、ジョブ、ステップ、ワークフロー"
-description: "ジョブとステップの説明"
-categories:
-  - 移行
-order: 2
+title: "Orbs、ジョブ、ステップ、ワークフロー"
+description: "Description of CircleCI jobs and steps."
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-このドキュメントでは、Orb、ジョブ、ステップ、ワークフローの概要を説明します。
+The document provides an overview of CircleCI jobs and steps.
 
 * 目次
 {:toc}
 
-## Orb の概要
-{: #orbs-overview }
-
-Orb は、名前に基づいてインポートする設定ファイル、またはインラインで設定する設定ファイルのパッケージです。Orb により、プロジェクト内またはプロジェクト間で設定ファイルを共有および再利用して設定作業を簡略化することができます。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb のコンセプト]({{ site.baseurl }}/ja/2.0/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、設定作業の簡素化に役立つ Orb を検索できます。
-
 ## ジョブの概要
 {: #jobs-overview }
 
-ジョブはステップの集まりです。 ジョブ内のすべてのステップが 1 単位として新しいコンテナまたは仮想マシン内で実行されます。
+A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
-下図はジョブ間のデータフローを表したものです。
+下図はジョブ間のデータ フローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
 * キャッシュは、異なるワークフローの実行における同じジョブ間でデータを永続化します。
 * アーティファクトは、ワークフローの終了後にデータを永続化します。
 
 ![ジョブの概要]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-ジョブは、`machine` (linux)、macOS Executor や Windows Exdcutor を使って、またはジョブや必要なサービス (データベースなど) を実行するように Docker コンテナを設定できる `docker` Executor を使って実行することができます。
+**Note**: The job names shown in this diagram are just examples, you can name your jobs whatever you want.
 
-`docker` Executor を使用する場合、起動するコンテナのイメージを `docker:` キーの下に指定します。 `docker` Executor には任意のパブリック Docker イメージを使用できます。
+Jobs can be run in docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with linux, macOS or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
 
-ユースケースと Executor タイプの比較については、[Executor タイプの選択]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
+When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the [CircleCI Developer Hub](https://circleci.com/developer/images).
+
+`docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
 ## ステップの概要
 {: #steps-overview }
 
-ステップは、一つのジョブにおいて実行される実行可能なコマンドの集まりです。 コードをチェックアウトするには `checkout:` キーを指定します。 また、`run:` キーを使用すると、複数行にわたる任意のシェルコマンドスクリプトを追加できます。  この`run:` キーのほかに、`save_cache:`、`restore_cache:`、`deploy:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` などのキーをステップの下にネストします。
+Steps are collections of executable commands, which are run during a job. The `checkout:` key is required under `steps` to checkout your code and the `run:` key enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `store_artifacts:`, `store_test_results:`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps).
 
-## インポートした Orb を使用した設定ファイルの例
-{: #sample-configuration-with-imported-orb }
+## Passing parameters to jobs
+{: #passing-parameters-to-jobs }
 
-AWS S3 Orb の詳細は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands-sync)をご覧ください。
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
 
-```yaml
+```yml
+version: 2.1
+​
+jobs:
+  print-a-message:
+    docker:
+      - image: cimg/base:2022.03
+    parameters:
+      message:
+        type: string
+    steps:
+      - run: echo << parameters.message >>
+​
+workflows:
+  my-workflow:
+    jobs:
+      - print-a-message:
+          message: Hello!
+```
+
+## Using a job from an orb
+{: #using-a-job-from-an-orb }
+
+Orbs are packages or reusable configuration that you can use in your projects. Orbs usually contain commands that you can use in your jobs, and whole jobs that you can schedule in your workflows. Take the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example. This orb provides a job called [`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification), which you can use in your workflows. This job pauses the workflow to require manual approval, and sends a slack notification. To use this job, just reference it in your workflow (see line 10):
+
+```yml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0 # circleci 名前空間に s3 Orb をインポートします
+  slack: circleci/slack@4.1
 
 workflows:
-  build-test-deploy:
+  on-hold-example:
     jobs:
+      - my_test_job
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - my_test_job
+      - pause_workflow:
+          requires:
+            - my_test_job
+            - slack/on-hold
+          type: approval
+      - my_deploy_job:
+          requires:
+            - pause_workflow
+```
 
-      - deploy2s3: # ワークフローで定義するサンプル ジョブ
-          steps:
-            - aws-s3/sync: # s3 Orb で宣言されている sync コマンドを呼び出します
-                from: .
-          to: "s3://mybucket_uri"
-                overwrite: true
-          to: "s3://mybucket_uri"
-          overwrite: true
+## Using a command from an orb in a job
+{: #using-a-command-from-an-orb-in-a-job }
+
+Using the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example again, this orb includes a command called `notify`, which is used to notify a specified slack channel. You can reference this command in your job as follows (see line 16):
+
+**Note**: This example also uses the [node orb](https://circleci.com/developer/orbs/orb/circleci/node).
+
+```yml
+version: 2.1
+
+orbs:
+  node: 'circleci/node:4.1'
+  slack: circleci/slack@4.1
+
+jobs:
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run deploy
+      - slack/notify:
+          channel: ABCXYZ
+          event: fail
+          template: basic_fail_1
 
 workflows:
-  build-test-deploy:
+  deploy_and_notify:
     jobs:
-      - deploy2s3
+      - deploy:
+          context: slack-secrets
 ```
 
-## 並列ジョブを使用した設定ファイルの例
-{: #sample-configuration-with-concurrent-jobs }
 
-2.0 `.circleci/config.yml` ファイルの例を以下に示します。
+## 次のステップ
+{: #next-steps }
 
-{% raw %}
-```yaml
-version: 2
-    jobs:
-      build:
-        docker:
-
-          - image: circleci/<language>:<version TAG>
-        steps:
-          - checkout
-          - run: <command>
-      test:
-        docker:
-          - image: circleci/<language>:<version TAG>
-        steps:
-          - checkout
-          - run: <command>
-    workflows:
-      version: 2
-      build_and_test:
-        jobs:
-          - build
-          - test
-```
-{% endraw %}
-
-上記は並列ジョブのワークフロー例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)のドキュメントを参照してください。
-
-
-## 関連項目
-{: #see-also }
-
-- [設定リファレンス: jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
-- [設定リファレンス: steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)
+- Read more about orchestrating jobs in the [Using Workflows to Schedule Jobs ]({{ site.baseurl }}/2.0/workflows) page.
+- Read more about passing data between jobs in the [Using Workspaces to Share Data between Jobs ]({{ site.baseurl }}/2.0/workspaces) page.
