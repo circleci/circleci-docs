@@ -15,16 +15,16 @@ This document describes an initial set of troubleshooting steps to take if you a
 
 toc::[]
 
-## 管理者コンソールの起動
+## Start KOTS Admin Console
 
-管理者コンソールを再起動するには、以下のコマンドを実行します。
+To restart the KOTS Admin Console, run the following command:
 
 [source,bash]
 ----
 kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-ブラウザーを開いて、http://localhost:8800 にアクセスし、管理者コンソールを表示します。
+Open your browser and access http://localhost:8800 to see the Admin Console.
 
 ## サポート バンドルの生成
 サポート バンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 They are typically requested when you open a ticket.
@@ -34,7 +34,7 @@ To download a support bundle for CircleCI support, select the *Troubleshoot* tab
 ## Pod の管理
 
 ### Pod の準備状況とステータスの確認
-注: `READY` 列と `STATUS` 列を確認してください。 Even if the `STATUS` is `Running`, pods are not ready to serve user requests. 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
+NOTE: Check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
 
 [source,bash]
 ----
@@ -57,7 +57,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 ### Pod の設定とステータスの確認
-To show detailed settings and status of pods:
+To show detailed settings and status of pods, use the following command:
 
 [source,bash]
 ----
@@ -65,7 +65,7 @@ kubectl describe pods <pod-name> -n <namespace>
 ----
 
 ### Pod のログの取得
-Pod のログを表示するには、以下のコマンドを実行します。
+To show logs of pods, use the following command:
 
 [source,bash]
 ----
@@ -73,7 +73,7 @@ kubectl logs <pod-name> -n <namespace>
 ----
 
 ### Pod の再起動
-特定の Pod を再起動する最も簡単な方法は、その Pod を削除することです。 削除した Pod は、Kubernetes によって自動的に再作成されます。
+特定の Pod を再起動する最も簡単な方法は、その Pod を削除することです。 Kubernetes automatically recreates the pod:
 
 [source,bash]
 ----
