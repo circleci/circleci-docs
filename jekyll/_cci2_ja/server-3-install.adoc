@@ -31,7 +31,7 @@ CircleCI Server v3.x では、 https://www.replicated.com/[Replicated] が提供
 kubectl kots version
 ```
 +
-NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
+NOTE: The KOTS command opens up a tunnel to the admin console. WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
 . ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
 +
@@ -42,7 +42,7 @@ kubectl kots install circleci-server
 すると、以下を入力するよう求められます。
 +
 * デプロイ先の名前空間
-* KOTS 管理者コンソールのパスワード
+* password for the KOTS Admin Console
 
 . When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
 
@@ -52,7 +52,7 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 
 === HTTP プロキシ経由でのインストール (オプション)
 
-プロキシ経由で CircleCI Server をインストールするには、上記の 2. で以下のコマンドを使用します (詳細は https://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
+If you wish to install CircleCI server behind a proxy, use the following command structure should be used for step 2 above (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
 
 ```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
@@ -128,19 +128,19 @@ image::server-3-encryption-settings.png[Screenshot showing encryption settings]
 
 === GitHub
 
-前提条件のステップで作成した Github OAuth アプリケーションのデータを使って、 以下の作業を行ってください。
+前提条件のステップで作成した Github OAuth アプリケーションのデータを使って、 Use the data to complete the following settings:
 
 .Github の設定
 image::server-3-github-settings.png[Screenshot showing GitHub settings]
 
-* *[Github Type (Github の種類)] (必須) * -
-Cloud または Enterprise (オンプレミス)を選択します。
+* *GitHub Type (required)* -
+Select Cloud or Enterprise (on premises).
 
-* *[OAuth Client ID (OAuth クライアントID)] (必須)* -
-Github が提供する OAuth クライアントIDです。
+* *OAuth Client ID (required)* -
+The OAuth Client ID provided by GitHub.
 
-* *[OAuth Client Secret (OAuth クライアント シークレット)] (必須)* -
-Github が提供する OAuth クライアント シークレットです。
+* *OAuth Client Secret (required)* -
+The OAuth Client Secret provided by GitHub.
 
 * *Github Enterprise Fingerprint (Github Enterprise のフィンガープリント)* -
 プロキシを使用する場合に必要です。 `ssh-keyscan github.example.com`の出力をテキストフィールドに記載します。
@@ -211,15 +211,15 @@ endif::env-aws[]
 既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
 
 === 保存とデプロイ
-上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Kong ロードバランサー用のIP アドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
+Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
 
-NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 しかし、アップグレードの際の中断を最小限に留めるために、Kong   が使用するサービス名への変更はしておりません。 そのため、サービス名は、`circleci-server-traefik` と表示されますが、実際には Kong のサービスです。
+NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 However, to minimize disruption when upgrading, we chose not to rename the service used by Kong. Although you will see a service named `circleci-server-traefik`, this service is actually for Kong.
 
 === DNS エントリーの作成
 Kong ロードバランサー の DNS エントリを作成します。例: (`circleci.your.domain.com` と `app.circleci.your.domain.com`) 。
  この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
 
-Kong  ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 この値は以下のコマンドで取得できます。
+You need the IP address or, if using AWS, the DNS name of the Kong load balancer. You can find this information with the following command:
 
 [source, shell]
 ----
@@ -237,7 +237,9 @@ NOTE: Kong ロードバランサーには、 https://loadbalancer-address/status
 
 === 確認
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。
+
+次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
