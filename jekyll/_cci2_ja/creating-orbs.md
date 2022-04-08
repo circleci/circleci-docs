@@ -20,6 +20,8 @@ version:
 
 オーサリングした Orb は、[セマンティック バージョン]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/developer/ja/orbs)に公開できます。
 
+![Orb のパブリッシュプロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
+
 ## Orb 開発キット
 {: #orb-development-kit }
 
