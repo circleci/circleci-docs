@@ -139,9 +139,9 @@ Permission denied (publickey).
 
 2. GitHub にマシンユーザーとしてログインします。
 
-3. [CircleCI にログイン](https://circleci.com/login)します。 CircleCI を承認するよう GitHub から要求されたら、[**Authorize application (アプリケーションを承認)**] ボタンをクリックします。
+3. Log in to the [CircleCI web app](https://circleci.com/login). CircleCI を承認するよう GitHub から要求されたら、[**Authorize application (アプリケーションを承認)**] ボタンをクリックします。
 
-4. [Add Project (プロジェクトを追加する)] のページから、マシンユーザーにアクセスを許可するプロジェクトをフォローします。
+4. From the **Projects** page, follow all projects you want the machine user to have access to.
 
 5. **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH キーのチェック アウト)]** ページで、[**Authorize With GitHub (GitHub で承認)**] ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
 
