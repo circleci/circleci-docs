@@ -27,9 +27,9 @@ https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] �
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
 Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
 
-NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが_必要_なものだけにアクセスできるようにしたりするのにとても便利です。
+NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI supports multiple contexts, which is an effective way to modularize secrets, ensuring jobs can only access what they _need_.
 
-次の例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与しています。
+This example grants the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
 
 [source,yaml]
 ----
