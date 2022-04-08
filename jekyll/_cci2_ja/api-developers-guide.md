@@ -43,7 +43,7 @@ CircleCI API は、トークンベースの認証により API サーバーへ�
 API トークンの追加は、以下の手順で行います。
 
 1. CircleCI の Web アプリケーションにログインします。
-2. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)で[パーソナル API トークンを作成](https://circleci.com/docs/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)し、API トークンの追加手順に従います。
+2. [Create a personal API token]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
 3.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
 
     ```shell
@@ -301,7 +301,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 
 `project_slug` は、プロジェクトの情報をプルする際のペイロードに含まれ、特定のプロジェクトの詳細な情報を取得することができます。
 
-**注意:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト](https://circleci.com/docs/2.0/projects/) のページを参照してください。
+**注意:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト]({{site.baseurl}}/2.0/projects/) のページを参照してください。
 
 #### 手順
 {: #steps }
@@ -422,7 +422,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 ### アーティファクトのダウンロード
 {: #download-artifacts }
 
-下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
+下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド]({{site.baseurl}}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
 
 #### 手順
 {: #steps }
