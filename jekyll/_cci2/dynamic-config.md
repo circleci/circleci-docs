@@ -11,15 +11,15 @@ Instead of manually creating an individual CircleCI configuration per project, y
 
 CircleCI's dynamic configuration feature allows you to:
 
-- Execute conditional workflows/commands
-- Pass pipeline parameter values and/or generate additional configuration
-- Trigger separate `config.yml` configurations which exist outside the default parent `.circleci/` directory
+- Execute conditional workflows/commands.
+- Pass pipeline parameter values and/or generate additional configuration.
+- Trigger separate `config.yml` configurations, which exist outside the default parent `.circleci/` directory.
 
 This becomes particularly helpful in cases where your team is using a monorepo, or a single repository, as opposed to using multiple repositories to store your code.
 
 For instance, you may want to use dynamic configuration to trigger certain workflows based on which files or subdirectories have changed in your repository. Otherwise, all of your microservices/sub-projects would go through the entirety of your build, test, and deployment processes when any single update is introduced. This scenario is also referred to as _path filtering_.
 
-Another scenario in which you could use dynamic configuration is when your project consists multiple modules, where each module requires a separate job. These jobs could be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you could use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered. This scenario can also be referred to as _config splitting_.
+Another scenario in which you could use dynamic configuration is when your project consists of multiple modules, where each module requires a separate job. These jobs could be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you could use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered. This scenario can also be referred to as _config splitting_.
 
 ## Getting started with dynamic config in CircleCI
 {: #getting-started-with-dynamic-config-in-circleci }
@@ -46,10 +46,10 @@ Behind the scenes, the _continuation_ configuration is implemented as a call to 
 
 Note that:
 - The setup phase requires `version: 2.1` or higher.
-- A pipeline can only be continued once (i.e. a pipeline cannot be continued with another setup configuration).
+- A pipeline can only be continued once (that is, a pipeline cannot be continued with another setup configuration).
 - A pipeline can only be continued within six hours of its creation.
 - The setup configuration can only include one workflow.
-- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (i.e. setup) time.
+- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
 - Pipeline parameters declared in the setup configuration must also be declared in the continuation configuration. These parameters can be used at continuation time.
 
 For a basic example on how to use setup workflows for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
@@ -76,7 +76,7 @@ For a basic example on how to use setup workflows for dynamic configuration gene
 
 **Q:** What is the `continuation` orb?
 
-**A:** The `continuation` orb assists CircleCI users in managing the pipeline continuation process easily. The
+**A:** The `continuation` orb assists you in managing the pipeline continuation process. The
 `continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline). Refer to the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 documentation for more information.
 
