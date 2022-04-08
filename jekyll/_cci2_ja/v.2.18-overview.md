@@ -14,7 +14,7 @@ order: 1
 {: #requirements-for-upgrading }
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、<a href="https://circleci.com/ja/docs/2.0/updating-server/#org-rename-script">こちらのスクリプト</a>を実行する<b>必要があります</b>。
+<b>Warning:</b> If at any time your CircleCI organization name has been changed, there is a <a href="{{site.baseurl}}/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before starting the upgrade process.
 </div>
 
 ## 注意事項とベストプラクティス
@@ -55,9 +55,9 @@ order: 1
 | `circleci.grpc-response`                         | grpc システムが呼び出すシステムの待機時間                         |
 
 
-<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)
+<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide]({{site.baseurl}}/2.0/customizations/#resource-classes)
 
-* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
+* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide]({{site.baseurl}}/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
 
 <br>
 
