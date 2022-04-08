@@ -94,7 +94,13 @@ CircleCI provides several commands to simplify complex actions. In this example,
 
 If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
 
-If you already have a `config.yml` file from the example above, add another run step (lines 13-17) at the end and a `checkout` command at line 7. Make sure you observe the indentation.
+If you already have a `config.yml` file from the example above, here are the changes you need to make:
+
+* On Line 5, change the image to `cimg/base:2021.04`.
+* On Line 7, add a `checkout` command.
+* Add another run step (lines 13-17) at the end.
+
+Make sure you observe the indentation.
 
 [source,yaml]
 ----
