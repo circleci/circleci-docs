@@ -8,6 +8,7 @@ categories:
 order: 1
 version:
   - クラウド
+  - Server v3.x
 ---
 
 * 目次
@@ -324,8 +325,30 @@ Orb 開発キットを使用すると、完全に自動化された CI/CD パイ
 
 詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
 
+### Orb の一覧表示
+{: #listing-your-orbs }
+
+CLI を使用して、公開中の Orb を一覧表示します。
+
+**[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+```shell
+circleci orb list <my-namespace>
+```
+
+**[プライベート]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
+```shell
+circleci orb list <my-namespace> --private
+
+```
+
+`circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。
+
 ### Orb のカテゴリ設定
 {: #categorizing-your-orb }
+
+<div class="alert alert-warning" role="alert">
+Orb categorization is <strong>not</strong> available on installations of CircleCI server.
+</div>
 
 作成した Orb を [Orb レジストリ](https://circleci.com/developer/ja/orbs)で見つけやすくするために、カテゴリを設定できます。 カテゴリを設定した Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 Orb を見つけやすくするために、CircleCI が Orb のカテゴリ項目を作成、編集する場合もあります。
 
@@ -375,20 +398,3 @@ Orb には最大 2 つのカテゴリを選択できます。 使用できるカ
 
 Orb に適用したカテゴリ項目を表示するには、`circleci orb info <namespace>/<orb>` を実行して表示される一覧を確認します。 このコマンドの詳細については、[こちら](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html)を参照してください。
 
-### Orb の一覧表示
-{: #listing-your-orbs }
-
-CLI を使用して、公開中の Orb を一覧表示します。
-
-**[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
-```shell
-circleci orb list <my-namespace>
-```
-
-**[プライベート]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
-```shell
-circleci orb list <my-namespace> --private
-
-```
-
-`circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。
