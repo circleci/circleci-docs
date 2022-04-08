@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ 
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
 [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
 [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 

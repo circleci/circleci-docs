@@ -106,7 +106,9 @@ aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
 +
 次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 AWS の場合、 DNS サーバーは CIDR ブロック (`CidrBlock`) の３番目の IP です。たとえば、CIDR ブロックが `10.100.0.0/16` の場合、 3 番目の IP は `10.100.0.2` になります。
 +
+```shell
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
+```
 +
 すると、以下のようなコマンドが返されます。
 +
@@ -117,7 +119,6 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 "State": "available",
 "VpcId": "vpc-02fdfff4c"
 ...}
-
 
 適切な情報を入力したら `main.tf` ファイルのディレクトリから次のコマンドを実行することにより、Nomad クライアントをデプロイすることができます。
 
@@ -286,7 +287,6 @@ ifndef::env-gcp[]
   Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール] を作成し、次の IAM ポリシーを添付します。
 
 +
-
 [source, json]
 {
     "Version": "2012-10-17",
