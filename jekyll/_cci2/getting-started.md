@@ -5,6 +5,7 @@ short-title: "Quickstart Guide"
 description: "A tutorial for getting your first green CircleCI build"
 categories: [getting-started]
 order: 41
+toc: true
 ---
 
 Follow this step-by-step guide to get your first successful green build on CircleCI using a GitHub repository.

@@ -114,7 +114,7 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% comment %} <!---HEADER2 - SECTION1--->{% endcomment %}
 {% capture content %}
-Click on the green Success button to see details about the workflow. The hello-world pipeline ran one job called <b>say-hello</b> within the <a href="https://circleci.com/docs/2.0/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
+Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
 {% endcapture %}
 
 {%- capture what-just-happened -%}
@@ -126,7 +126,7 @@ Click on the green Success button to see details about the workflow. The hello-w
 
 {% comment %} <!---HEADER2 - SECTION2--->{% endcomment %}
 {% capture content %}
-Click the <b>say-hello</b> <a href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job: 
+Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job: 
 <ul>
 <li>Spin up environment</li>
 <li>Preparing environment variables</li>
@@ -185,7 +185,7 @@ On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click th
 In your Dashboard, click into the <b>say-hello-world</b> workflow. Can you find the four steps that ran? Hint: step 1 is <b>Spin up environment</b>.
 <br>
 <br>
-A <a  href="https://circleci.com/docs/2.0/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
+A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
 {% endcapture %}
 
 {%- capture explore-workflows -%}
@@ -197,7 +197,7 @@ A <a  href="https://circleci.com/docs/2.0/workflows/">workflow</a> is a set of r
 
 {% comment %} <!---HEADER3 - SECTION3--->{% endcomment %}
 {% capture content %}
-On a failed pipeline, you can <a  href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
+On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
 {% endcapture %}
 
 {%- capture SSH-into-build -%}
@@ -209,7 +209,7 @@ On a failed pipeline, you can <a  href="https://circleci.com/docs/2.0/ssh-access
 
 {% comment %} <!---HEADER 4--->{% endcomment %}
 {% capture content %} 
-That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  href="https://support.circleci.com/hc/en-us/">ask for help</a>.
+That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
 {% endcapture %}
 
 {% include getting-started-section-header.html title="04 Recommended learning" content=content %}
