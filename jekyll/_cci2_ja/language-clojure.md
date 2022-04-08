@@ -109,7 +109,7 @@ version: 2
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
+We use the [CircleCI-provided Clojure image]({{site.baseurl}}/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
 
 ここでは、メモリ不足エラーが発生しないように、`JVM_OPTS` を設定して最大ヒープ サイズを制限します。 標準のコンテナの制限は 4 GB ですが、JVM がヒープ外に確保する分と Leiningen 自体のために、いくらかの容量を残しておきます。 (場合によっては、`lein trampoline ...` を使用して Leiningen のオーバーヘッドを回避できます)。 たとえば、データベースまたはキューのためのバックグラウンド コンテナがある場合は、メインの JVM ヒープにメモリを割り当てる際にそれらのコンテナを考慮してください。
 
