@@ -190,11 +190,11 @@ After validating, linting, shellchecking, and any other testing that you can per
 ### Testing orb commands
 {: #testing-orb-commands }
 
-By default, when you author a new orb, you will have an example orb source which comes with a "greet" command. We want to test the greet command (and maybe other commands) in our `test-deploy` workflow as an integration test. We'll be able to execute the commands to validate they run without error, and we could even verify their functionality by running additional checks.
+By default, when you author a new orb, you will have an example orb source which comes with a "greet" command. You can test the greet command (and maybe other commands) in your `test-deploy` workflow as an integration test. You will be able to execute the commands to validate they run without error, and could even verify their functionality by running additional checks.
 
-You should see a job by default in your `test-deploy.yml` file named `command-tests`. This example job will run one or all of our commands as an integration tests.
+You should see a job in your `test-deploy.yml` file named `command-tests`. This example job will run one or all of your commands as an integration test.
 
-In it, we will call our orb command, with any parameters we want to test. If our command were to do something such as, installing a command line tool, we can then test to ensure that command is valid in an additional step.
+In this job, you can call your orb command, with any parameters you want to test. If your command, for example, installs a command line tool, you can test to ensure that command is valid in an additional step.
 
 By default you will see the included "greet" command is being tested. Because the greet command only outputs a message to stdout, you can not do any additional validation checks.
 

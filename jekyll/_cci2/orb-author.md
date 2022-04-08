@@ -34,7 +34,7 @@ The Orb Development Kit refers to a suite of tools that work together to simplif
 ### Getting started
 {: #getting-started }
 
-To begin creating your new orb with the Orb Development Kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
+To begin creating your new orb with the Orb Development Kit, follow the steps below. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
 Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
 

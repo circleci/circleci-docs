@@ -41,8 +41,8 @@ Next, follow these steps to create a new release from your changes.
 The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory are configured to automatically [lint]({{site.baseurl}}/2.0/testing-orbs/#yaml-lint), [shellcheck]({{site.baseurl}}/2.0/testing-orbs/#shellcheck), [review]({{site.baseurl}}/2.0/testing-orbs/#review), and [test]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) your orb changes in the CircleCI web app.
 
 1. **Ensure all tests pass.** <br/>
-You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline on CircleCI.com.
-Notice there are two workflows, `lint-pack` will run first and contains our linting, shellchecking, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow will contain our integration tests, and can publish the production version of our orb when ready.
+You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.
+Notice there are two workflows, `lint-pack` will run first and contains our linting, shellchecking, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
  ![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
 
 1. **"Squash" Merge.** <br/>
@@ -56,9 +56,9 @@ When your changes are complete, we recommend (not required) "[Squash Merging](ht
 1. **Tag and Release!** <br/>
 Your changes have now been merged to the default branch, but if you check the [Orb Registry](https://circleci.com/developer/orbs), you will see no new versions have been published.
 
-To publish a new version of our orb, we must tag our release. A tag can be created and pushed manually, however we recommend using [GitHub.com's Releases feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release).
+To publish a new version of our orb, you need to tag your release. A tag can be created and pushed manually, however we recommend using [GitHub.com's Releases feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release).
 
-Using GitHub's Releases feature will allow us to publish "Release Notes", which will function as a changelog for the new version of the orb.
+Using GitHub's Releases feature will allows you to publish "Release Notes", which will function as a changelog for your orb.
 
 Follow the GitHub docs to create a new release.
 
