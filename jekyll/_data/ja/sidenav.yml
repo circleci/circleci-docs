@@ -618,23 +618,15 @@ ja:
           - 
             name: ワークフロー
           - 
-            name: ワークスペース
           - 
-            name: アーティファクト
           - 
-            name: Docker レイヤーキャッシュ
           - 
-            name: 同時実行件数
           - 
-            name: 環境変数
           - 
-            name: テストデータの収集
           - 
-            name: SSH を使用したデバッグ
           - 
-            name: 並列実行
           - 
-            name: コンテキスト
+          - 
           - 
       - 
         name: 最適化
@@ -764,13 +756,8 @@ ja:
           - 
           - 
           - 
-            name: Orb オーサリングに関するよくあるご質問
           - 
-            name: Orb のベスト プラクティス
           - 
-            name: Orb のテスト手法
-          - 
-            name: Orb のパブリッシュ プロセス
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
