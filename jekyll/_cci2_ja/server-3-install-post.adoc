@@ -47,7 +47,7 @@ aws s3api create-bucket \
     --region $REGION \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
-NOTE: `us-east-1`  では、https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+NOTE: `us-east-1`  では、 https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
 ==== 手順 2 - Velero の権限の設定
 
@@ -292,7 +292,7 @@ gcloud iam service-accounts keys create credentials-velero \
 [discrete]
 ===== オプション 2: Workload Identity
 
-クラスタで既にhttps://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービス アカウントを Velero の Kubernetes サービス アカウントにバインドします。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービス アカウントを Velero の Kubernetes サービス アカウントにバインドします。
 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
 NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
@@ -349,7 +349,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
-endif::[]
+endif::env-aws[]
 
 ////
 
