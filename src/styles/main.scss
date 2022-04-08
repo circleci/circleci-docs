@@ -699,3 +699,8 @@ Fixing styling for the code example tables in the "Migrating From..." pages
     top: 70px;
   }
 }
+
+// Used in Getting Started Guide experiment to expand the container width for the content
+.getting-started-full-width {
+  max-width: 100% !important;
+}
