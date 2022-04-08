@@ -29,7 +29,7 @@ The CircleCI config does the following:
 
 - **It runs the tests in a Docker container.**
     - The `test` job uses the `google/dart` Docker image as its execution image.
-    - The tests use the [junitreporter](https://pub.dev/packages/junitreport) package to produce JUnit XML output for CircleCI's [test metadata feature](https://circleci.com/docs/2.0/collect-test-data/), which in turn supports features such as test summary, intelligent test splitting, and insights data/metrics.
+    - The tests use the [junitreporter](https://pub.dev/packages/junitreport) package to produce JUnit XML output for CircleCI's [test metadata feature]({{site.baseurl}}/2.0/collect-test-data/), which in turn supports features such as test summary, intelligent test splitting, and insights data/metrics.
 - **After tests run, it builds executables for deployment.**
     - `build-docker` uses Google's [`dart-runtime`](https://hub.docker.com/r/google/dart-runtime) as a base to build a Docker container. There's a commented section that pushes to DockerHub. It's there as an example.
     - The other three jobs compile native executables on macOS, Windows, and Linux VMs.
@@ -38,7 +38,7 @@ The CircleCI config does the following:
     - `~/.pub-cache` and `.dart_tool` folders are cached by default on Linux and macOS. `~/AppData/Local/Pub/Cache` if Windows.
     - For Dart projects that have it, you'll probably also want to add and cache the `.packages` folder in the main project directory.
 
-If you fork this project and want to push to DockerHub, this project assumes [a context](https://circleci.com/docs/2.0/contexts/) called `dart-docker` with the following variables & keys:
+If you fork this project and want to push to DockerHub, this project assumes [a context]({{site.baseurl}}/2.0/contexts/) called `dart-docker` with the following variables & keys:
 
 | KEY           | VALUE                             |
 |---------------|-----------------------------------|
@@ -245,7 +245,7 @@ jobs:
 ```
 
 - The final job builds a Docker image using Google's [`dart-runtime`](https://hub.docker.com/r/google/dart-runtime) as a base.
-- The commented section is code to build, tag, and push a Docker image according to environment variables defined in a [context](https://circleci.com/docs/2.0/contexts/). It's included as an example.
+- The commented section is code to build, tag, and push a Docker image according to environment variables defined in a [context]({{site.baseurl}}/2.0/contexts/). It's included as an example.
 
 ## Full sample configuration
 {: #full-sample-configuration }
@@ -434,10 +434,10 @@ jobs:
 ## Additional resources
 {: #additional-resources }
 
-- [Getting Started](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
-- [Migrating to CircleCI](https://circleci.com/docs/2.0/migration-intro/#section=getting-started)
+- [Getting Started]({{site.baseurl}}/2.0/getting-started/#section=getting-started)
+- [Migrating to CircleCI]({{site.baseurl}}/2.0/migration-intro/#section=getting-started)
 - [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
 - [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
-- [Deploying on CircleCI](https://circleci.com/docs/2.0/deployment-integrations/#section=deployment)
-- [Using Contexts](https://circleci.com/docs/2.0/contexts/)
-- [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
+- [Deploying on CircleCI]({{site.baseurl}}/2.0/deployment-integrations/#section=deployment)
+- [Using Contexts]({{site.baseurl}}/2.0/contexts/)
+- [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/#section=configuration)

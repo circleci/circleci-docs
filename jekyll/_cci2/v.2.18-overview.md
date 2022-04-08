@@ -12,7 +12,7 @@ This document provides a summary of features and product notes for the release o
 {: #requirements-for-upgrading }
 
 <div class="alert alert-warning" role="alert">
-<b>Warning:</b> If at any time your CircleCI organization name has been changed, there is a <a href="https://circleci.com/docs/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before starting the upgrade process.
+<b>Warning:</b> If at any time your CircleCI organization name has been changed, there is a <a href="{{site.baseurl}}/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before starting the upgrade process.
 </div>
 
 ## Notes and best practices
@@ -52,9 +52,9 @@ Metric | Description
 `circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
 `circleci.grpc-response` | Tracks latency over the system grpc system calls
 
-<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)
+<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide]({{site.baseurl}}/2.0/customizations/#resource-classes)
 
-* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
+* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide]({{site.baseurl}}/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
 
 <br>
 

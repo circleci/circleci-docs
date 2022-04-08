@@ -15,16 +15,16 @@ This document describes an initial set of troubleshooting steps to take if you a
 
 toc::[]
 
-## Start Admin Console
+## Start KOTS Admin Console
 
-To restart the Admin Console, run:
+To restart the KOTS Admin Console, run the following command:
 
 [source,bash]
 ----
 kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-Open your browser and access http://localhost:8800 to see the Admin console.
+Open your browser and access http://localhost:8800 to see the Admin Console.
 
 ## Generate Support Bundle
 A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically requested when you open a ticket.
@@ -34,7 +34,7 @@ To download a support bundle for CircleCI support, select the *Troubleshoot* tab
 ## Managing Pods
 
 ### Verify Pod Readiness and Status
-Note: please check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. Some pods may take some time to become ready.
+NOTE: Check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. Some pods may take some time to become ready.
 
 [source,bash]
 ----
@@ -58,7 +58,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 ### Verify Pod Settings and Status
-To show detailed settings and status of pods:
+To show detailed settings and status of pods, use the following command:
 
 [source,bash]
 ----
@@ -66,7 +66,7 @@ kubectl describe pods <pod-name> -n <namespace>
 ----
 
 ### Get Pod Logs
-To show logs of pods:
+To show logs of pods, use the following command:
 
 [source,bash]
 ----
@@ -74,7 +74,7 @@ kubectl logs <pod-name> -n <namespace>
 ----
 
 ### Restart Pods
-To restart specific pods, the easiest way is remove the pod. Kubernetes will automatically recreate the pod.
+To restart specific pods, the easiest way is remove the pod. Kubernetes automatically recreates the pod:
 
 [source,bash]
 ----

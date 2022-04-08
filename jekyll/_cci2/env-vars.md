@@ -31,7 +31,7 @@ This document describes using environment variables in CircleCI in the following
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
 
-To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page under Project Settings](#setting-an-environment-variable-in-a-project) in the CircleCI application. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
+To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page under Project Settings](#setting-an-environment-variable-in-a-project) on the CircleCI web app. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
 
 Private environment variables enable you to store secrets safely even when your project is public. Refer to the [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) page for associated settings information.
 
@@ -327,7 +327,7 @@ jobs:
 ## Setting an environment variable in a context
 {: #setting-an-environment-variable-in-a-context }
 
-1. In the CircleCI application, go to your organization settings by clicking the link in the left hand navigation.
+1. On the CircleCI web app, go to your organization settings by clicking the link in the left hand navigation.
 
     ![Contexts]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -364,12 +364,12 @@ Creating a context allows you to share environment variables across multiple pro
 ## Setting an environment variable in a project
 {: #setting-an-environment-variable-in-a-project }
 
-1. In the CircleCI application, go to your project's settings by clicking the gear icon on the Pipelines page, or the three dots on other pages in the application.
+1. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
 
     ![Environment Variables]({{site.baseurl}}/assets/img/docs/project-settings-env-var-v2.png)
 
-2. Click on Environment Variables.
-3. Add new variables by clicking the Add Variable button and enter a name and value.
+2. Click on **Environment Variables** in the side navigation.
+3. Click the **Add Variable** button to enter a name and value of the new environment variable.
 4. Use your new environment variables in your `.circleci/config.yml` as follows:
 
 ```yaml
@@ -496,7 +496,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 **IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
-Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
+Read more in the [Pipeline Values and Parameters]({{site.baseurl}}/2.0/pipeline-variables/) guide.
 
 ## Injecting environment variables with API v1
 {: #injecting-environment-variables-with-api-v1 }

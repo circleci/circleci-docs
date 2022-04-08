@@ -21,12 +21,14 @@ toc::[]
 
 `context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows, ワークフロー>>セクションに追加して、<<contexts/#creating-amd-using-a-context,ジョブにコンテキスト>>を追加します。
 
+```yaml
 workflows:
   my-workflow:
     jobs:
       - run-tests:
           context:
             - my-context
+```
 
 == クラウドサービスの設定
 
@@ -57,7 +59,6 @@ OpenID Connect ID トークンには下記の標準 https://openid.net/specs/ope
 
 |`aud`
 |audience:  現在は、固定の値 `"<organization-id>"` で、ジョブのプロジェクトの組織を表す UUID を含む文字列です。
-
 
 |`iat`
 |time of issuance:  トークンが作成された時刻で、ジョブが開始される直前です。

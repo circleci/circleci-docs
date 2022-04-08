@@ -27,9 +27,9 @@ For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker execut
 NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
 Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
 
-NOTE: Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they _need_.
+NOTE: Contexts are the more flexible option. CircleCI supports multiple contexts, which is an effective way to modularize secrets, ensuring jobs can only access what they _need_.
 
-In this example, we grant the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
+This example grants the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
 
 [source,yaml]
 ----

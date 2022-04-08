@@ -41,7 +41,7 @@ Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/
 
 Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
-For the `machine` executor, see the [available machine images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) list.
+For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images) list.
 
 For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
 
@@ -81,7 +81,7 @@ A job might end up being **queued** because of a concurrency limit being imposed
 ### Why are my builds queuing even though I'm on the Performance plan?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your jobs, it is possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your jobs, it is possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
 
 ### Why can't I find my project on the Projects dashboard?
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
@@ -327,7 +327,7 @@ In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ran
 
 This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
-This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing](https://circleci.com/docs/2.0/ip-ranges/#pricing) for more information.
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing]({{site.baseurl}}/2.0/ip-ranges/#pricing) for more information.
 
 #### How do I predict my monthly IP ranges cost without enabling the feature first?
 
