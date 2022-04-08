@@ -20,8 +20,10 @@ This orb authoring guide assumes you have read the [Introduction to orbs]({{site
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our [Orb Development Kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/2.0/reusing-config), they can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
-## Orb Development Kit
-{: #orb-development-kit }
+## Create, test and publish an orb
+{: #create-test-and-publish-an-orb }
+
+Follow the steps below to create, test and publish your own orb, using the Orb Development Kit.
 
 The Orb Development Kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The Orb Development Kit is made up of the following components:
 
