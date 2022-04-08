@@ -334,7 +334,7 @@ Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad
 
 設定で次の項目を入力します。
 
-* *Nomad Load Balancer (Normad ロードバランサー)](必須)*
+* *Nomad Load Balancer (Normad ロードバランサー)(必須)*
 +
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 * *[Nomad Server Certificate (Nomad サーバーの証明書)](必須)*:
@@ -343,7 +343,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
  `terraform apply` からの出力で提供されます。
 * *Nomad Server Certificate Authority (Nomad サーバーの証明書認証局)](必須)*:
 `terraform apply` からの出力で提供されます。
-* *Build Agent Image (ビルドエージェントイメージ)]* :  カスタム Docker レジストリを使用してCircleCI ビルドエージェントを提供する場合は、カスタマサポートにお問い合わせください。
+* *Build Agent Image (ビルドエージェントイメージ)* :  カスタム Docker レジストリを使用して CircleCI ビルドエージェントを提供する場合は、カスタマサポートにお問い合わせください。
 
 *[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
 
