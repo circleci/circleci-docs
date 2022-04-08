@@ -25,7 +25,7 @@ version:
 
 ここでは、以下を前提としています。
 
-* [Gradle](https://gradle.org/) を使用している。 [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
+* [Gradle](https://gradle.org/) を使用している。 A [Maven](https://maven.apache.org/) version of this guide is available [here]({{site.baseurl}}/2.0/language-java-maven/).
 * Java 11 を使用している
 * Spring Framework を使用している。  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
 * アプリケーションをオールインワン uberjar として配布できる
@@ -144,7 +144,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
-テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
+An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/) to speed up the job.
 
 また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 Gradleプロセスが終了した後に終了させるため、Gradleデーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
@@ -246,7 +246,7 @@ version: 2
 
 `./gradlew assemble` コマンドを使用して、"uberjar" ファイルを作成します。 このファイルには、コンパイルされたアプリケーションと共にそのアプリケーションのすべての依存関係が含まれます。 uberjar のコピーは 1 つだけあればよいので、これは、並列に実行しているすべてのビルド コンテナではなく最初のビルド コンテナでだけ実行されます。
 
-その後、`store_artifacts` ステップを使用して、uberjar を[アーティファクト](https://circleci.com/docs/ja/2.0/artifacts/)として保存します。 そこから、これを目的の継続的デプロイ スキームに結び付けることができます。
+We then store the uberjar as an [artifact]({{site.baseurl}}/2.0/artifacts/) using the `store_artifacts` step. そこから、これを目的の継続的デプロイ スキームに結び付けることができます。
 
 {% raw %}
 ```yaml
