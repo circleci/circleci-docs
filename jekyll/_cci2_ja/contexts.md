@@ -350,7 +350,7 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI の構成](https://circleci.com/docs/ja/2.0/local-cli/?section=configuration#cli-%E3%81%AE%E6%A7%8B%E6%88%90) を参照して CircleCI CLI を構成してください。_
+_If this is your first time using the CLI, follow the instructions on [CircleCI CLI Configuration]({{site.baseurl}}/2.0/local-cli/?section=configuration) to set up your CircleCI command line interface._
 
 CircleCI CLI を使用して環境変数を作成するには、下記ステップを実行します:
 
@@ -402,7 +402,7 @@ Because environment variables can be shared, passed around between employees and
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI の構成](https://circleci.com/docs/ja/2.0/local-cli/) を参照して CircleCI CLI を構成してください。_
+_If this is your first time using the CLI, follow the instructions on [CircleCI CLI Configuration]({{site.baseurl}}/2.0/local-cli/?section=configuration) to set up your CircleCI command line interface._
 
 CircleCI CLI を使用して環境変数のローテーションを実行するには、下記ステップを実行します:
 
@@ -423,7 +423,7 @@ API を使用して環境変数のローテーションを実行する場合は�
 
 ## シークレットのマスキング
 {: #secrets-masking }
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
+_シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
 
 Contexts hold potentially sensitive secrets that are not intended to be exposed. セキュリティを強化するために、CircleCI ではビルドの出力に対してシークレットのマスキングを行い、コンテキストの `echo` 出力や `print` 出力を不明瞭なものにします。
 
