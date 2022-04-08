@@ -51,12 +51,12 @@ Even with cgroup support, the JVM can still use too much memory, e.g. if it exec
 | ----------------------------------------- | ---- | ------ | ----- | ------ | ---- |
 | [`_JAVA_OPTIONS`](#_java_options)         | 0    | 0      | 0     | 0      | 0    |
 | [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2    | 3      | 2     | 2      | 2    |
-| [`JAVA_OPTS`](#java_opts)                 | no   | 2      | no    | 1      | no   |
-| [`JVM_OPTS`](#jvm_opts)                   | *    | no     | no    | no     | *    |
-| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | no   | no     | no    | no     | 1    |
-| [`GRADLE_OPTS`](#gradle_opts)             | no   | 1      | no    | no     | no   |
-| [`MAVEN_OPTS`](#maven_opts)               | no   | no     | 1     | no     | no   |
-| CLI 引数                                    | 1    | no     | no    | no     | no   |
+| [`JAVA_OPTS`](#java_opts)                 | ×    | 2      | ×     | 1      | ×    |
+| [`JVM_OPTS`](#jvm_opts)                   | *    | ×      | ×     | ×      | *    |
+| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | ×    | ×      | ×     | ×      | 1    |
+| [`GRADLE_OPTS`](#gradle_opts)             | ×    | 1      | ×     | ×      | ×    |
+| [`MAVEN_OPTS`](#maven_opts)               | ×    | ×      | 1     | ×      | ×    |
+| CLI 引数                                    | 1    | ×      | ×     | ×      | ×    |
 {:class="table table-striped"}
 
 上記の各環境変数が優先される条件について説明します。
@@ -113,7 +113,7 @@ Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for
 
 Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the [cgroup visibility change](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
 
-それでも引き続きメモリ制限に達する場合は、[プロジェクトの RAM を増やす](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ことを検討してください。
+If you are still consistently hitting memory limits, consider [increasing your jobs's RAM allocation]({{site.baseurl}}/2.0/configuration-reference/#resource_class).
 
 ## 関連項目
 {: #see-also }
