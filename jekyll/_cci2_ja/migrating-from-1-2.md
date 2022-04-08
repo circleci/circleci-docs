@@ -61,7 +61,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```yaml
          machine: true
      ```
-     使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
+     See the Using Machine section of the [Choosing an Executor Type]({{site.baseurl}}/2.0/executor-types/#using-machine) document for details about the available VM images.
      ```yaml
          macos:
            xcode: 12.5.1
