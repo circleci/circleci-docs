@@ -2,8 +2,7 @@
 layout: classic-docs
 title: "サーバーでの Orb オーサリングプロセス"
 description: "サーバーでの CircleCI Orb のオーサリング入門ガイド."
-categories:
-  - はじめよう
+categories: [はじめよう]
 order: 1
 version:
   - Server v3.x
@@ -47,11 +46,10 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[CircleCI の�
     **注: **Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
     {: class="alert alert-warning"}
 
-1. **ターミナルを開き、`orb init` CLI コマンドを使って新しい Orb プロジェクトを初期化します。 ****CircleCI Server をご使用の場合は、必ずここで `--private` フラグを使って Orb をプライベートな状態に設定します。</p>
+1. **ターミナルを開き、`orb init` CLI コマンドを使って新しい Orb プロジェクトを初期化します。 ****CircleCI Server をご使用の場合は、必ずここで `--private` フラグを使って Orb をプライベートな状態に設定します。
 <br>
 **[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
 <!---->
-</li> </ol>
 ```shell
 circleci orb init /path/to/myProject-orb --host <your-server-installation-domain>
 ```

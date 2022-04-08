@@ -40,7 +40,10 @@ KOTS の管理者コンソールにアクセスします。 名前空間を変�
 *[Output Processor Load Balancer (出力プロセッサ ロードバランサー) のホストネーム]*: 次のコマンドにより、サービスの IP アドレスを取得します
 
 +
+```shell
 kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
+```
+
 . *[Save your configuration (設定を保存)]*:  Nomad クライアントの設定の完了後、設定のデプロイと確認を行います。
 
 === Nomad クライアント
@@ -66,11 +69,16 @@ ifndef::env-gcp[]
 
 * *Server_endpoint*: Nomad サーバーエンドポイント（Nomad サーバー外部ロードバランサー の外部 IP アドレス）が必要です。 以下のコマンドで情報を入手します。
 +
+```shell
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
+```
+
 * クラスタの *Subnet ID (subnet)* 、 *VPC ID (vpcId)* 、 *DNS server (dns_server)*:
 以下のコマンドを実行して、クラスタの VPC ID ((vpcId)、CIDR (serviceIpv4Cidr)、およびサブネット (サブネットの ID)を入手します。
 +
+```shell
 aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
+```
 +
 すると、以下のようなコマンドが返されます。
 +
@@ -154,6 +162,7 @@ kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 以下の例をローカル環境にコピーして、特定の設定に必要な情報を入力します。
 
+```hcl
 variable "project" {
   type    = string
   default = "<your-project>"
@@ -236,6 +245,7 @@ module "nomad" {
 output "module" {
   value = module.nomad
 }
+```
 
 適切な情報を入力したら、以下を実行することにより Normad クライアントをデプロイできます。
 
@@ -319,9 +329,11 @@ ifndef::env-aws[]
 . 以下のいずれかを選択します。 Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]を使用している場合は、Nomad Autoscaler サービスアカウントのメールアドレスを使用します。 GCP クラスタで Workload Identity を有効化する手順は、link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
 .. `nomad-autoscaler` (kubernetes) サービスアカウントの Workload Identity を有効にします。
 
+```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/nomad-autoscaler]"
+```
 
 NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 endif::[]
@@ -336,7 +348,10 @@ Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad
 
 * *Nomad Load Balancer (Normad ロードバランサー)(必須)*
 +
+```shell
 kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
+```
+
 * *[Nomad Server Certificate (Nomad サーバーの証明書)](必須)*:
  `terraform apply` からの出力で提供されます。
 * *[Nomad Server Private Key (Nomad サーバーのプライベートキー)](必須)*:
@@ -421,14 +436,17 @@ ifndef::env-gcp[]
 以下のコマンドにより、VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) および Cluster ARN (`arn`) 値が返されます。これらの情報はこのセクションを通して必要です。
 
 +
-
+```shell
 aws eks describe-cluster --name=<your-cluster-name>
+```
 
 . *セキュリティーグループを作成します。*
 +
 以下のコマンドを実行して、VM サービス用のセキュリティーグループを作成します。
 +
+```shell
 aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
+```
 +
 これにより次の手順で使用するグループ ID が出力されます。
 +
@@ -440,21 +458,29 @@ aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM
 +
 作成したセキュリティーグループと CIDR ブロック値を使ってセキュリティーグループを以下に適用します。
 +
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 22 --cidr "<YOUR_serviceIpv4Cidr>"
+```
 +
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 2376 --cidr "<YOUR_serviceIpv4Cidr>"
+```
 +
 NOTE: CircleCI Server とは異なるサブネットに Nomad クライアントを作成した場合は、サブネット CIDR ごとに上記の 2 つのコマンドを再実行する必要があります。
 . *セキュリティーグループに SSH接続を適用します。*
 +
 次のコマンドを実行してセキュリティグループルールを適用し、ユーザーがジョブに SSH 接続できるようにします。
 +
+```shell
 aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 54782
+```
 . *ユーザーを作成します。*
 +
 プログラムでのアクセス権を持つ新規ユーザーを作成します。
 +
+```shell
 aws iam create-user --user-name circleci-vm-service
+```
 +
 vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
 完了したら、ステップ 9 に進みます。手順 9 では、KOTS で VM サービスを有効化します。
@@ -577,12 +603,16 @@ vm-service では、オプションで AWS キーの代わりに https://docs.aw
 +
 policy.json ファイルを作成したら、IAM ポリティーと作成したユーザーにアタッチします。
 +
+```shell
 aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
+```
 . *ユーザー用のアクセスキーとシークレットを作成します。*
 +
 作成していない場合は、`circleci-vm-service` ユーザー用のアクセスキーとシークレットが必要です。 以下のコマンドを実行し、作成することができます。
 +
+```shell
 aws iam create-access-key --user-name circleci-vm-service
+```
 . *サーバーを設定します。*
 +
 VM サービスをKOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM サービス]ガイドを参照してください。
@@ -591,11 +621,14 @@ VM サービスをKOTS 管理者コンソールから設定します。 利用�
 endif::[]
 
 ifndef::env-aws[]
+
 ==== GCP
 
 以下のセクションを完了するにはクラスタに関する追加情報が必要です。 次のコマンドを実行します。
 
+```shell
 gcloud container clusters describe
+```
 
 このコマンドは、次のような情報を返します。この情報には、ネットワーク、リージョン、および次のセクションを完了するために必要なその他の詳細情報が含まれます。
 
@@ -625,42 +658,57 @@ gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --n
 +
 NOTE: 自動モードを使用している場合は、 https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づき Nomad クライアントの CIDR を検索できます。
 +
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
+```
 +
+```shell
 gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
+```
 . *ユーザーを作成します。*
 +
 VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス許可をより詳細に設定したい場合は、 コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメントを参照してください。
 +
+```shell
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
-+
+```
 NOTE: CircleCI Server を共有 VCP にデプロイする場合は、 VM ジョブを実行するプロジェクトにこのユーザーを作成します。
 . *サービスアカウントのメールアドレスを取得します。*
 +
+```shell
 gcloud iam service-accounts list --filter="displayName:circleci-server-vm service account" --format 'value(email)'
+```
 . *ロールをサービスアカウントに適用します。*
 +
 コンピューティング インスタンス管理者 (ベータ版) ロールをサービスアカウントに適用します。
 +
+```shell
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
+```
 +
 さらに
 +
+```shell
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
+```
 . *JSON キーファイルを取得します。*
 +
 GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合、この手順は不要です。
 +
 以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 サーバーインストールを設定する際に必要になります。
 +
+```shell
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
+```
 . *サービスアカウントで Workload Identity を有効にします。*
 +
 この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
 +
+```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
+```
 
 NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
