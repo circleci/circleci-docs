@@ -38,7 +38,7 @@ Once you have made your changes, commit them and push them up to your branch. We
 Next, follow these steps to create a new release from your changes.
 
 1. **Open a new Pull Request to the default branch.** <br/>
-Open a new Pull Request to the default branch. The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory are configured to automatically [lint]({{site.baseurl}}/2.0/testing-orbs/#yaml-lint), [shellcheck]({{site.baseurl}}/2.0/testing-orbs/#shellcheck), [review]({{site.baseurl}}/2.0/testing-orbs/#review), and [test]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) your orb changes on CircleCI.com
+The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory are configured to automatically [lint]({{site.baseurl}}/2.0/testing-orbs/#yaml-lint), [shellcheck]({{site.baseurl}}/2.0/testing-orbs/#shellcheck), [review]({{site.baseurl}}/2.0/testing-orbs/#review), and [test]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) your orb changes in the CircleCI web app.
 
 1. **Ensure all tests pass.** <br/>
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline on CircleCI.com.
