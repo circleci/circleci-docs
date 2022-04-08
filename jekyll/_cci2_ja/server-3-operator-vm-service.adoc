@@ -20,7 +20,7 @@ toc::[]
 NOTE: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順については、 https://circleci.com/docs/2.0/server-3-install-build-services/#eks[AWS] と https://circleci.com/docs/2.0/server-3-install-build-services/#gke[GCP]用の Server 3.x インストールガイドをご覧ください。
 
 == VM サービスの設定
-VM サービスロードバランサーのホストネームと IP アドレスを指定する必要があります。
+You need to provide the hostname/IP for your VM service load balancer:
 
 . CircleCI Server が起動し稼働したら、下記のコマンドを実行します。
 +
@@ -40,22 +40,22 @@ AWS EC2 を使う場合は、以下のフィールドに入力して VM サー�
 この時点では、VMでプライベートIPアドレスを使用する必要がある場合は、*Assign Public IPs* チェックボックスをオフにしてもかまいません。
 
 * *[AWS Region (AWS リージョン)]* (必須): アプリケーションがホストされるリージョンを指定します。
-* [*AWS Linux AMI ID*] (オプション): Linux `machine` Executor にカスタム AMI を使用する場合は、ここで AMI ID を指定します。 Linux イメージを作成するには、 https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux イメージビルダー]を使います。 このフィールドを空欄にした場合は、 <<default-aws-ami-list, デフォルトの AMI>>が使用されます。
+* *AWS Linux AMI ID* (optional): If you wish to provide a custom AMI for Linux `machine` executors, you can supply an AMI ID here. Linux イメージを作成するには、 https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux イメージビルダー]を使います。 このフィールドを空欄にした場合は、 <<default-aws-ami-list, デフォルトの AMI>>が使用されます。
 * *[AWS Windows AMI ID]* (オプション): Windows Executor が必要な場合、その AMI ID をここに指定できます。 Windows イメージを作成するには、 https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー]を使います。 Windows Executor が不要な場合は、このフィールドを空欄にします。
 * *[Subnet ID (サブネット ID)]* (必須): VM のデプロイ先になるサブネット (パブリックまたはプライベート) を選択します。 なお、すべてのサブネットが同じアベイラビリティーゾーンにある必要があります。
 * *[Security Group ID (セキュリティ グループ ID)]* (必須): VM にアタッチするセキュリティ グループを指定します。
 +
 推奨されるセキュリティ グループ構成については、 https://circleci.com/docs/ja/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]を参照してください。
-* *[Number of <VM-type> VMs to keep prescaled (事前スケーリングする <VM タイプ> の VM 数)]*: デフォルトでは、このフィールドは 0 に設定されています。 この値の場合、該当するリソースタイプのインスタンスがオンデマンドで作成、プロビジョニングされます。 リソース タイプごとにインスタンスを最大 5 つまで事前割り当てできます。 インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 
+* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which creates and provisions instances of a resource type on demand. You have the option of preallocating up to five instances per resource type. インスタンスを事前に割り当てると、起動時間が短くなり、マシンと `remote_docker` のビルド速度が速くなります。 
 +
 NOTE: ただし、事前割り当てされたインスタンスは常に実行されるため、コストが増加する可能性があります。 また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
 +
-WARNING: https://circleci.com/docs/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** check any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 +
-NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
+NOTE: When using preallocated instances, be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
 
 ==== 認証
-以下のいずれかを実行してください。 IAM キーを選択し、以下を指定します。
+One of the following options is required. IAM キーを選択し、以下を指定します。
 
 * *[Access Key ID (アクセスキー ID)]* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
 +
@@ -91,7 +91,7 @@ NOTE: VM サービスで使用するアクセスキーとシークレットキ�
 ----
 
 === Google Cloud Platform
-Google Cloud Platform (GCP) を使う場合は、以下のフィールドの入力をして VM サービスを設定する必要があります。
+You need the following fields to configure your VM service to work with Google Cloud Platform (GCP).
 
 WARNING: VM サービス専用の一意のサービスアカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント]を参照してください。
 
@@ -124,6 +124,6 @@ https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-r
 +
 NOTE: ただし、事前割り当てされたインスタンスは常に実行されるため、コストが増加する可能性があります。 また、この設定値を減らす場合、変更が反映されるまで最大で 24 時間かかります。 これらのインスタンスは、必要に応じて手動で終了できます。
 +
-WARNING: https://circleci.com/docs/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 +
 NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
