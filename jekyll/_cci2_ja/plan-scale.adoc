@@ -43,7 +43,11 @@ Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイ�
 
 使用可能なセルフホストランナー数に制限がないため、お客様のインフラストラクチャ上でより多くのジョブを実行することができます。詳細は下記のセルフホストランナーのページをご覧ください。 詳細は<<#self-hosted-runners,セルフホストランナー>> のページをご覧ください。
 
-=== 追加サポートオプション
+=== Custom storage retention
+
+The https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
+
+=== サポートオプションの追加
 
 拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Scale プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
