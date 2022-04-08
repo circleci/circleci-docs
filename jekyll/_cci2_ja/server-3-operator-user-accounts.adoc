@@ -22,17 +22,17 @@ toc::[]
 
 GitHub の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
 
-. CircleCI の [Admin Settings (管理者設定)] に移動します。
-. [Admin Settings (管理者設定)] メニューから *[System Settings (システム設定)]* を選択します。
-. *[Suspend New Users (新規ユーザーの停止)]* を *[true (有効)]* に設定します。
+. Navigate to your CircleCI Admin Settings.
+. Select *System Settings* from the Admin Settings menu.
+. Set *Suspend New Users* to *True*.
 
 ### アクティブなアカウント
 When an account is no longer required, you can suspend the account. It will no longer be active and will not count against your license quota. アカウントを停止するには、以下の手順を行います。
 
-. CircleCI の [Admin Settings (管理者設定)] に移動します。
-. Select *Users* from the Admin Settings menu
-. 下へスクロールして、[Active (アクティブ)] ウィンドウまたは [Inactive (非アクティブ)] ウィンドウで、目的のアカウントを見つけます。
-. Click *Suspend* next to the account name and the account will appear in the Suspended window
+. Navigate to your CircleCI Admin Settings.
+. Select *Users* from the Admin Settings menu.
+. 停止中のユーザー アカウントの再アクティブ化.
+. Click *Suspend* next to the account name and the account will appear in the Suspended window.
 
 ### 非アクティブなアカウント
 Inactive accounts are those that have been approved by the administrator of the server installation but have not logged into the system successfully. These accounts do not count against your available server seats.
@@ -43,24 +43,23 @@ Inactive accounts are those that have been approved by the administrator of the 
 ### 新規アカウント
 To activate a new account that was automatically suspended and allow the associated user access to your installation of CircleCI Server:
 
-. CircleCI の [Admin Settings (管理者設定)] に移動します。
-. Select *Users* from the Admin Settings menu
-. View the *Suspended New Users* window
-. Click on *Activate* next to the User you wish to grant access and the account will appear in the Active
-Window
+. Navigate to your CircleCI Admin Settings.
+. Select *Users* from the Admin Settings menu.
+. View the *Suspended New Users* window.
+. Click on *Activate* next to the User you wish to grant access and the account will appear in the Active Window.
 
 ### 停止中のアカウント
 停止したアカウントを再びアクティブ状態にするには、以下の手順を行います。
 
-. CircleCI の [Admin Settings (管理者設定)] に移動します。
-. Select *Users* from the Admin Settings menu
-. [Suspended (停止中)] ウィンドウを表示します。
+. Navigate to your CircleCI Admin Settings.
+. Select *Users* from the Admin Settings menu.
+. View the Suspended window.
 . Click on *Activate* next to the User you wish to grant access and the account will appear in the Active window.
 
 ## GitHub 組織ごとのユーザー登録の制限
 When using GitHub.com, you can limit who can register with your CircleCI install to people with some connection to your approved organizations list. この機能を使用するには、以下の手順を行います。
 
-. CircleCI の [Admin Settings (管理者設定)] ページに移動します。
-. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
-. [Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
+. Navigate to your CircleCI Admin Settings page.
+. Select System Settings from the Admin Setting menu.
+. Scroll down to Required Org Membership List.
 . 承認する組織を入力します。 If entering more than one organization, use a comma- delimited string.
