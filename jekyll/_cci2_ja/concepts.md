@@ -91,7 +91,7 @@ Java アプリケーション例を用いてさまざまな設定要素を紹介
 
 キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 ビルドを高速化するために、各ジョブには、以前のジョブからの依存関係をキャッシュするための特別な手順が含まれている場合があります。
 
-[キャッシュをクリアする](https://circleci.com/docs/ja/2.0/caching/#clearing-cache)必要がある場合は、[依存関係のキャッシュ](https://circleci.com/docs/ja/2.0/caching/)のページで詳細をご確認ください。
+[キャッシュをクリアする]({{site.baseurl}}/2.0/caching/#clearing-cache)必要がある場合は、[依存関係のキャッシュ]({{site.baseurl}}/2.0/caching/)のページで詳細をご確認ください。
 
 {:.tab.cache.Cloud}
 
@@ -621,7 +621,7 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
 
 {: #jobs }
 
-ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `docker` の場合、プライマリコンテナで使うには[イメージを指定する](https://circleci.com/docs/2.0/executor-intro/#docker)必要があります。 `macos` の場合、[Xcode のバージョン](https://circleci.com/docs/2.0/executor-intro/#macos)を指定する必要があります。 `windows` の場合、[Windows Orb](https://circleci.com/docs/2.0/executor-intro/#windows) を指定する必要があります。
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `docker` の場合、プライマリコンテナで使うには[イメージを指定する]({{site.baseurl}}/2.0/executor-intro/#docker)必要があります。 `macos` の場合、[Xcode のバージョン]({{site.baseurl}}/2.0/executor-intro/#macos)を指定する必要があります。 `windows` の場合、[Windows Orb]({{site.baseurl}}/2.0/executor-intro/#windows) を指定する必要があります。
 
 ![ジョブの図]( {{ site.baseurl }}/assets/img/docs/job.png)
 
@@ -739,6 +739,7 @@ jobs:
 * *ユーザー*とは、組織内の個々のユーザーを指します。
 
 * CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
+
 
 
 ## ワークフロー
