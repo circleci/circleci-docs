@@ -66,7 +66,7 @@ window.OptimizelyClient.getVariationName({
           {
             linkText: link.innerText,
             linkHref: link.href,
-            linkIndexOnPage: i + 1 + '/20',
+            linkIndexOnPage: i + 1 + '/' + links.length,
             page: window.location.pathname,
           },
         );
