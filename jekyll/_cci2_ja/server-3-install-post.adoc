@@ -193,7 +193,7 @@ endif::[]
 ifndef::env-aws[]
 === GCP での CircleCI Server 3.x のバックアップ
 
-以下の手順は、Google Cloud Platform を対象としており、<<前提条件>>を満たしていることを前提としています。
+以下の手順は、Google Cloud Platform を対象としており、<<prerequisites, 前提条件>>を満たしていることを前提としています。
 
 これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[こちら]の Velero GCP プラグインのドキュメントを元にしています。
 
@@ -360,7 +360,7 @@ endif::[]
 === S3 互換ストレージでの CircleCI Server 3.x のバックアップ
 
 The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
-また、<<前提条件>>を満たしていることも前提としています。
+また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 
 これらの手順は、 https://velero.io/docs/v1.6/contributions/minio[こちら] の Velero ドキュメントを元にしています。
 
