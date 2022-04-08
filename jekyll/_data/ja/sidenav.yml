@@ -50,13 +50,15 @@ en:
           - 
             name: ワークフロー
           - 
+            name: Orbs、ジョブ、ステップ、ワークフロー
+          - 
             name: ワークスペース
           - 
             name: アーティファクト
           - 
             name: Docker レイヤーキャッシュ
           - 
-            name: 同時実行件数
+            name: 同時実行
           - 
             name: 環境変数
           - 
@@ -80,6 +82,7 @@ en:
           - 
             name: キャッシュ戦略
           - 
+            name: パイプライン値とパラメーター
           - 
           - 
   - 
@@ -182,7 +185,6 @@ en:
       - 
         name: Orb のオーサリング
         children:
-          - 
           - 
           - 
           - 
@@ -381,6 +383,15 @@ en:
             link: 2.0/server-3-operator-backup-and-restore
           - 
           - 
+      - 
+        link: 2.0/install-overview/
+        children:
+          - 
+            name: What's New in v2.48
+          - 
+          - 
+          - 
+            name: v2.48.3 Operations Guide
       - 
         link: 2.0/install-overview/
         children:
