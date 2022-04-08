@@ -14,6 +14,7 @@ Continuous integration is a practice that helps developers integrate their code 
 
 {% include getting-started-section-header.html content=content %}
 
+
 {% capture content1 %}
 Sign up for a free CircleCI 
 {% endcapture %}
@@ -64,6 +65,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
+
 {% capture content %}
 You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b> 
 <br>
@@ -104,6 +106,7 @@ Click on the green Success button to see details about the workflow. The hello-w
 
 {% include two-up.html title="1. So, what just happened?" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
 
+
 {% capture content %}
 Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job: 
 <ul>
@@ -138,6 +141,7 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 {%- endcapture -%}
 
 {% include getting-started-section-header.html title="03 What's next" content=content imagePath=header-banner-3 %}
+
 
 {% capture content %}
 Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS. 
@@ -174,6 +178,7 @@ On a failed pipeline, you can <a class="no-external-icon" href="https://circleci
 {%- endcapture -%}
 
 {% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
+
 
 {% capture content %} 
 That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
