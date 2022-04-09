@@ -33,3 +33,5 @@ vendor
 jekyll/_config_override.yml
 markdownlint-results.json
 .tool-versions
+
+jekyll_json/

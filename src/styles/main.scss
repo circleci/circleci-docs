@@ -1,11 +1,11 @@
-@import 'site'; // this is bootstrap
+//@import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
 @import 'footer';
-@import 'global-nav';
+//@import 'global-nav';
 @import 'langselector';
-@import 'subnav';
-@import 'instantsearch';
+//@import 'subnav';
+//@import 'instantsearch';
 @import 'tooltip';
 @import 'asciidoc';
 @import 'fonts';
@@ -14,7 +14,7 @@
 @import 'spacing';
 @import 'snippets';
 @import 'utilities';
-@import 'progressbar';
+//@import 'progressbar';
 @import 'language-guide';
 @import 'first_steps_cta';
 @import 'popup';
@@ -72,17 +72,17 @@ a {
   position: relative;
 }
 
-.container-semi-fluid,
-div.main-body{
-  margin: 0 auto;
-  max-width: 1920px;
-  flex-direction: row;
-}
+// .container-semi-fluid,
+// div.main-body{
+//   margin: 0 auto;
+//   max-width: 1920px;
+//   flex-direction: row;
+// }
 
 
-div.main-body {
-	display: flex;
-}
+// div.main-body {
+// 	display: flex;
+// }
 
 .text-center-small-float-right {
   float: right;
@@ -209,8 +209,8 @@ div.article-container{
   }
 
   padding: 0 48px;
-  width: calc(100% - #{$rightbar-width});
-  max-width: 60em; // increase readability on large screens.
+  //width: calc(100% - #{$rightbar-width});
+  //max-width: 60em; // increase readability on large screens.
 }
 
 .article-toc {
@@ -220,11 +220,11 @@ div.article-container{
 
 .article-toc-footer {
     flex-direction: column;
-    width: calc(100% - #{$leftbar-width});
-    @media (max-width: $screen-sm) {
-      width: 100%;
-    }
-    min-height: calc(100vh - $sticky-height); // make sure content always fills available space (70px is header size)
+    // width: calc(100% - #{$leftbar-width});
+    // @media (max-width: $screen-sm) {
+    //   width: 100%;
+    // }
+    //min-height: calc(100vh - $sticky-height); // make sure content always fills available space (70px is header size)
 }
 
 article{
