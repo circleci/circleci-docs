@@ -86,7 +86,7 @@ endif::env-aws[]
 
 ==== S3 互換ストレージに必要なソフトウェア
 
-- Install and configure https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
+- ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 === Kubernetes クラスタの作成
 CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
@@ -133,18 +133,18 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
 
-* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that need access.
+* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
 * クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
 +
 ```shell
 kubectl auth can-i <list|create|edit|delete> pods
 ```
-* クラスタの VPC 設定やディスク サイズに関する要件はありません。 It is recommended that you set up a new VPC rather than use an existing one.
+* クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
 
 ifndef::env-gcp[]
 
 ==== EKS
-Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which creates a VPC and selects the proper security groups for you.
+Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成にはhttps://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
 . AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
 .  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
@@ -159,7 +159,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --cluster circleci-server
 ```
 
-NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 Proper IAM permissions are necessary to use `eksctl`. See the AWS documentation on https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限]に関しては AWS のドキュメントをご覧ください。
 
 endif::env-gcp[]
 
@@ -238,26 +238,26 @@ CircleCI Server 用に GitHub OAuth アプリを登録し設定することで�
 .新しい GitHub OAuth アプリ
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
-. Complete the following fields, based on your planned installation:
+. ご自身のインストールプランに合わせて以下の項目を入力します。
 ** *[Homepage URL (ホームページの URL)]*: CircleCI Serverをインストールする URL
-** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
+** *[Authorization callback URL(認証コールバック URL)]*: 認証コールバックURLは、インストールする URL に`/auth/github`を追加します。
 
 . 完了すると、*クライアントID* が表示されます。 *[Generate a new Client Secret (新しいクライアント シークレットを生成する]* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
- You need these values when you configure CircleCI server.
+ CircleCI Server の設定にはこれらの値が必要です。
 +
 .クライアント ID とシークレット
 image::github-clientid.png[Screenshot showing GitHub Client ID]
 
-NOTE: If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
+NOTE: GitHub Enterprise を使用する場合は、パーソナルアクセストークンと GitHub Enterprise インスタンスのドメイン名も必要です。
 
 === フロントエンド TLS 証明書
-By default, CircleCI server creates self-signed certificates to get you started. 本番環境では、信頼できる認証局の証明書を指定する必要があります。 The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
 
 ifndef::env-gcp[]
 
-==== AWS Route 53
+==== AWS Route53
 
-. If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. プラグインのインストールには以下のコマンドを実行します。
+. DNS に AWS Route53 を使用している場合、*certbot-route53* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
 ```shell
 pip3 install certbot-dns-route53
@@ -277,7 +277,7 @@ ifndef::env-aws[]
 
 ==== Google Cloud DNS
 
-. If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. プラグインのインストールには以下のコマンドを実行します。
+. DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
 ```shell
 pip3 install certbot-dns-google
@@ -309,12 +309,12 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
 === 暗号化/署名キー
-CircleCI で生成されるアーティファクトの暗号化と署名には、以下のキーセットを使用します。 You need these values to configure server.
+CircleCI で生成されるアーティファクトの暗号化と署名には、以下のキーセットを使用します。 CircleCI Server の設定にはこれらの値が必要です。
 
 CAUTION: これらの値をセキュアな状態で保存します。 紛失すると、ジョブの履歴やアーティファクトの復元ができなくなります。
 
 ==== アーティファクト署名キー
-To generate an artifact signing key, run the following command:
+アーティファクト署名キーを生成するには、下記のコマンドを実行します。
 
 ```shell
 docker run circleci/server-keysets:latest generate signing -a stdout
