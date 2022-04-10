@@ -16,7 +16,7 @@ version:
 Orb と 関連するユースケースについては、 https://circleci.com/docs/ja/2.0/orb-intro/#quick-start[Orb に関するドキュメント] を参照してください。
 
 
-Orb の作成に関する情報は、 https://circleci.com/docs/ja/2.0/orb-author-intro/[Orb オーサリングの概要] を参照してください。
+Orb の作成に関する情報は、https://circleci.com/docs/ja/2.0/orb-author-intro/[Orb オーサリングの概要] を参照してください。
 
 toc::[]
 
@@ -49,7 +49,7 @@ circleci admin import-orb <namespace>[<orb-name>[@<orb-version>]] --host <your-s
 NOTE: 名前空間の指定のみを行うよう選択することも可能です。この場合、名前空間にあるすべての Orb の最新バージョンがインポートされます。
 
 ## パブリック Orb の更新のフェッチ
-To update a public orb in your local server orb repository with a new version, run the following command:
+ローカルの CircleCI Server Orb リポジトリに存在するパブリック Orb を新しいバージョンに更新するには、以下のコマンドを実行します。
 
 ```bash
 circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
