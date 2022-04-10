@@ -19,7 +19,7 @@ CircleCI Server では、ロード バランサーを使用して Kubernetes サ
 
 [WARNING]
 ==== 
-**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, depending on your VCS, for webhooks to work: 
+*Webhook:* フロントエンド ロードバランサーを非公開にする場合、Web フックを機能させるために、以下に示す VCS に応じた条件を満たす必要があります。 
 
 * *GitHub Enterprise* – CircleCI Server が GHE と同じ内部ネットワークにあること。 
 * *Github.com* – 受信 Web フックのプロキシをセットアップし、Web フック ホスト URL のオーバーライドとして設定すること。 この設定は、CircleCI アプリの *[Admin Settings (管理者設定)]* > *[System Settings (システム設定)]* > *[Override webhook host URL (Web フック ホスト URLのオーバーライド)]* にあります。
@@ -31,6 +31,6 @@ NOTE: プライベート ロード バランサー オプションは、GKE ま�
 
 . *[Private load balancers (プライベート ロード バランサー)]* の横にあるチェック ボックスをオンにします。
 +
-NOTE: If you are using Let's Encrypt TLS certificates, this box will not be visible as Let's Encrypt does not work with private installations. Let's Encrypt のチェック ボックスをオフにすると、プライベート ロード バランサーのオプションが表示されます。
+NOTE: Let's Encrypt の TLS 証明書を使用している場合、プライベートなインストール環境には対応していないためこのチェックボックスは表示されません。 Let's Encrypt のチェック ボックスをオフにすると、プライベートロードバランサーのオプションが表示されます。
 
-If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes requests a new load balancer with the new configuration.
+CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロード バランサーに送信されるよう古いパブリックロードバランサーの削除が必要な場合があります。
