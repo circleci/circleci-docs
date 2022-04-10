@@ -11,18 +11,18 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server 2.19.x から 3.x に移行する際は、2.19 インスタンスのデータ (Mongo、Postgres、Vault) をバックアップしてから、待機中の CircleCI Server 3.x インスタンスにそのデータを復元する必要があります。 If you experience problems, you can fall back to your 2.19 instance. Migration requires an already operating Server 3.x installation.
+CircleCI Server 2.19.x から 3.x に移行する際は、2.19 インスタンスのデータ (Mongo、Postgres、Vault) をバックアップしてから、待機中の CircleCI Server 3.x インスタンスにそのデータを復元する必要があります。 問題が発生した場合は、2.19 インスタンスにフォールバックできます。 移行する場合、先に CircleCI Server 3.x システムのインストールを完了している必要があります。
 
-移行には、データストアのサイズにより数分～数時間かかります。 移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 This not only allows you to gain a better understanding of the migration process, but also gives you an idea of how long the migration will take to complete.
+移行には、データストアのサイズにより数分～数時間かかります。 移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を挟むことで、移行プロセスに対する理解を深められるだけでなく、移行完了にかかる時間を確認することもできます。
 
 toc::[]
 
 ## 前提条件
 
 . 現在の CircleCI Server が 2.19 である。
-. 2.19 インスタンスのバックアップが完了している。 If you are using external datastores, they need to be backed up separately.
+. 2.19 インスタンスのバックアップが完了している。 外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
 . CircleCI Server 3.x を新たにxref:server-3-install.adoc[インストール済み]である。
-. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] with contexts before starting.
+. コンテキストを使用した https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了している。
 . 移行スクリプトを実行するマシンに以下を準備する。
 - CircleCI Server 3.x インスタンスに合わせて構成した `kubectl`
 - CircleCI Server 2.19 Services box への `ssh` アクセス
@@ -33,11 +33,11 @@ toc::[]
 
 ### 内部データストアのみの場合
 . 2.19 インスタンスのバックアップが完了している。
-. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on the new server 3.x instance with contexts prior to starting.
+. 新しい CirclCI Server 3.x インスタンスでコンテキストを使用した https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了している。
 
-## Migration
+## 移行
 
-WARNING: CircleCI Server v3.x に移行すると、v2.19 アプリケーションはシャットダウンされます。 Your v2.19 application will not be restarted, although you may manually restart it using the KOTS Admin Console.
+WARNING: CircleCI Server v3.x に移行すると、v2.19 アプリケーションはシャットダウンされます。 v2.19 アプリケーションは自動では再起動されませんが、KOTS 管理コンソールを使用して手動で再起動することはできます。
 
 WARNING: 移行プロセスを開始するとダウンタイムが発生します。 メンテナンス期間を計画しておくことをお勧めします。
 
@@ -49,16 +49,16 @@ WARNING: CircleCI Server 2.19 と CircleCI Server 3.x を同時に実行する�
 この移行スクリプトで行われる処理は、以下のとおりです。
 
 * v2.19.x アプリケーションを停止させる。
-* Perform preflight checks to confirm namespace and datastores for 2.19.x. 
+* 事前チェックを実行し、2.19.x の名前空間とデータストアを確認する。 
 * v2.19.x アプリケーションの PostgreSQL データベースおよび Mongo データベースの tarball を作成する。
 * Vault の既存のアプリケーション データと CircleCI の暗号化/署名キーをアーカイブする。
 * 2.19.x の tarball を v3.x 環境にエクスポートする。 エクスポートされたデータストアは、`circleci_export` という名前のディレクトリに保存されます。このディレクトリは、移行スクリプトを実行したディレクトリを基準に作成されます。 これはデバッグに役立ちます。
-* Perform preflight checks to confirm namespace and datastores for 3.x instance. 
+* 事前チェックを実行し、3.x インスタンスの名前空間とデータストアを確認する。 
 * v3.x アプリケーションのデプロイを 0 にスケーリングする。
 * 前の手順でエクスポートした tarball から新しい v3.x インスタンスにデータをインポートする。
 * v3.x アプリケーションのデプロイを 1 にスケーリングする。
 
-NOTE: If you have externalized services, you can run `bash migrate.sh -v -p -m`. `-v -p -m` の各フラグを指定すると、Vault、Postgres、Mongo の移行がそれぞれスキップされます。 この 3 つをすべてスキップすると、v2.19.x Services マシンの `/data/circle/circleci-encryption-keys` からキーがコピーされます。これらのファイルを `cat` して、3.x の構成ページにファイルの内容をアップロードできます。
+NOTE: サービスを外部化している場合は、`bash migrate.sh -v -p -m` を実行してください。 `-v -p -m` の各フラグを指定すると、Vault、Postgres、Mongo の移行がそれぞれスキップされます。 この 3 つをすべてスキップすると、v2.19.x Services マシンの `/data/circle/circleci-encryption-keys` からキーがコピーされます。これらのファイルを `cat` して、3.x の構成ページにファイルの内容をアップロードできます。
 
 ターミナルで以下を実行します。
 
@@ -71,17 +71,15 @@ NOTE: If you have externalized services, you can run `bash migrate.sh -v -p -m`.
   * CircleCI Server 2.19.x の SSH キー ファイルのパス
   * CircleCI Server 3.x の Kubernetes 名前空間
 . スクリプトの実行が完了したら、KOTS 管理者コンソールで 2.19 インスタンスの署名キーと暗号化キーを新しい 3.0 インスタンスに追加する必要があります。 このキーは `circleci_export/circle-data` にあります。
-. 2.19 インスタンスで使用していたのと同じストレージ バケットを参照するように 3.x インスタンスを更新するか、データを新しいバケットにコピーする必要があります。 The latter option ensures the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
+. 2.19 インスタンスで使用していたのと同じストレージ バケットを参照するように 3.x インスタンスを更新するか、データを新しいバケットにコピーする必要があります。 後者の方法では、2.19 インスタンスが引き続き正常に動作します。そのため、この移行をテストの一貫として行う場合には後者のアプローチをお勧めします。
 
 NOTE: 3.x 環境で使用するホスト名が 2.19 とは異なる場合、GitHub Webhookは 2.19 環境で使用していたホスト名を引き続き参照します。 ホスト名は、*[Stop Building (ビルドの停止)]*、*[Set Up Project (プロジェクトのセットアップ)]* の順にクリックすることにより簡単に更新できます。 これを行った後も、プロジェクトに関連するコンテキストと環境変数は引き続き保持されます。
 
 ### ステップ 2 - CircleCI Server 3.0 への移行の検証
-Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck]
-with contexts on your new server 3.x environment by pushing a fresh commit.
+新しいコミットをプッシュして、新しい CircleCI Server 3.x 環境でコンテキストを使用して https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] を再実行します。
 
 ### ステップ 3 - チームへの最新情報の共有
-Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
-notify your team of the new CircleCI UI and URL, if it has changed.
+https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了したら、新しい CircleCI UI と URL (変更した場合) をチームに連絡します。
 
 ## よくあるご質問
 
@@ -92,10 +90,10 @@ notify your team of the new CircleCI UI and URL, if it has changed.
     ** For a specific job, append a job number to the URL: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
 
 ### 移行後にプロジェクトで [Start Building (ビルドの開始)] を選択しても何も起こりません。なぜですか？
-* By default, a newly added project (a project that has never been followed) triggers a build automatically after it has been followed for the first time. プロジェクトが 2.0 または 3.0 でフォローされたことがある場合、そのプロジェクトは新しいプロジェクトや最初のビルドとは見なされず、フォロー後にビルドはトリガーされません。 To trigger a build, perform an activity that triggers a GitHub webhook such as pushing up a new commit or branch.
+* デフォルトでは、新しく追加されたプロジェクト (1 回もフォローされていないプロジェクト) は、初めてフォローされた後に自動的にビルドがトリガーされます。 プロジェクトが 2.0 または 3.0 でフォローされたことがある場合、そのプロジェクトは新しいプロジェクトや最初のビルドとは見なされず、フォロー後にビルドはトリガーされません。 ビルドをトリガーするには、新しいコミットやブランチのプッシュなど、GitHub Web フックをトリガーするアクティビティを実行してください。
 
 ### "Error from server (NotFound):" というエラーが表示されました。 
-* 移行スクリプトでは、Postgres および MongoDB の命名規則が特定のパターンに従っているものと想定しています。 このエラーが表示される場合、インストール環境が標準と異なっているか、DB が移行されていないなどの問題があります。 In this case, contact support with a support bundle and the output from the migration script. 
+* 移行スクリプトでは、Postgres および MongoDB の命名規則が特定のパターンに従っているものと想定しています。 このエラーが表示される場合、インストール環境が標準と異なっているか、DB が移行されていないなどの問題があります。 このエラーが表示された場合は、サポートバンドルと、移行スクリプトの出力を添えてサポートにお問い合わせ下さい。 
 
 ifndef::pdf[]
 ## 次に読む
