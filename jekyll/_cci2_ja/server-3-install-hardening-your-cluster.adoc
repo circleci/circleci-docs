@@ -16,9 +16,9 @@ version:
 toc::[]
 
 ## ネットワークトポロジ
-CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティング インスタンスを実行します。
+CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティングインスタンスを実行します。
 
-これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 This will make it easier for you to control traffic between the different components of the system and isolate them from each other.
+これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
 
 通例どおり、リソースはできる限り非公開にすることが原則です。 If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. そうでない場合は、 CircleCI Server Traefik ロードバランサー用にパブリックサブネットを少なくとも 1 つ用意する必要があります。
 
