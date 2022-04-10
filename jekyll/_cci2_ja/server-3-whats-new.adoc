@@ -11,9 +11,9 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server 3.x の一般公開が開始されました。 The newest version of server offers the ability to scale under heavy workloads, all within your own Kubernetes cluster and private network, while still enjoying the full CircleCI cloud experience.
+CircleCI Server 3.x の一般公開が開始されました。 最新バージョンのサーバーでは、重いワークロードの下でのスケールが可能になりました。独自の Kubernetes クラスターとプライベートネットワーク内で、CircleCI クラウドの機能を使えるようになります。
 
-CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 For existing customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.x will receive monthly patch releases and quarterly feature releases.
+CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 既存の 2.19 から 3.x への移行をご希望のお客様は、カスタマーサクセスマネージャーまでお問い合わせください。 CircleCI Server 3.x では、毎月のパッチ リリースと四半期ごとの機能リリースを予定しています。
 
 toc::[]
 
@@ -21,16 +21,16 @@ toc::[]
 
 === アップグレードに関する注意事項
 
-Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
 
 * `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`を実行します。
-* Deploy the app from the KOTS Admin Console
+* KOTS 管理者コンソールからアプリをデプロイします。
 
 === 修正点
 
-* Kong resource limits have been increased. The previous limits were affecting the stability of some server installations.
-* Fixed a bug that was preventing distributor-external from running in certain environments.
-* The KOTS config has been updated to allow private loadbalancers when ACM is in use.
+* Kong リソースの上限を引き上げました。 以前の制限は、一部のサーバーのインストール環境の安定性に影響を及ぼしていました。
+* 特定の環境で distributor-external が実行できない不具合を修正しました。
+* KOTS の設定が更新され、ACM 使用時にプライベートロードバランサーを使用できるようになりました。
 
 === 既知の問題
 
@@ -43,10 +43,10 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 
 === アップグレードに関する注意事項
 
-Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
 
 * `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`を実行します。
-* Deploy the app from the KOTS Admin Console
+* KOTS 管理者コンソールからアプリをデプロイします。
 
 === 新機能
 
@@ -84,7 +84,7 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
-* The KOTS Admin Console cannot be upgraded if your installation is set up behind a proxy. プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 
 == リリース 3.3.0
 
