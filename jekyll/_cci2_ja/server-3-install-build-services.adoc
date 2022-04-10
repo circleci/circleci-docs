@@ -30,7 +30,9 @@ toc::[]
 
 出力プロセッサは、 Normad クライアントからの出力処理を行います。 システムの速度が低下している場合にスケーリングするための重要なサービスです。 要求に応じてサービスをスケールアップできるよう、出力プロセッサのレプリカセットを増やすことをお勧めします。
 
-Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+名前空間を変更して `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` を実行し、KOTS 管理者コンソールにアクセスします。
+
+
 
 設定で次の項目を探して入力します。
 
