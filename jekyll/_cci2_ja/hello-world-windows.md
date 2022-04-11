@@ -43,30 +43,30 @@ Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプ�
 **備考:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
-- Orb usage is not supported on CircleCI Server v2.x (please view the [Using the Windows executor on CircleCI server](#windows-on-server) section for server usage.)
+- CircleCI Server v2.x では Orb の使用はサポートしていません（サーバー使用の場合は、[CircleCI Server での Windows Executor の使用](#windows-on-server)を参照してください。）
 
 ## Windows Executor イメージ
 {: #windows-executor-images }
 
-CircleCI は Windows Server 2019 では Visual Studio 2019 を、Windows Server 2022 では Visual Studio 2022 をサポートしています。 For information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server), or the [Discuss forum](https://discuss.circleci.com/). Developer Hub の Windows イメージのページには、最新のアップデートへのリンクが掲載されています。
+CircleCI は Windows Server 2019 では Visual Studio 2019 を、Windows Server 2022 では Visual Studio 2022 をサポートしています。 Windows イメージにプリインストールされているソフトフェアに関する情報は、[Developer Hub](https://circleci.com/developer/machine/image/windows-server) または [Discuss フォーラム](https://discuss.circleci.com/)をご覧ください。 Developer Hub の Windows イメージのページには、最新のアップデートへのリンクが掲載されています。
 
-Details on the Windows Server 2022 image can be found on this [Discuss post](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+Windows Server 2022 イメージに関する詳細は、[Discuss の投稿（英語）](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1) を参照してください。
 
 Windows イメージは約 30 日ごとにアップデートされます。 Windows イメージの使用時にタグが指定されていない場合、デフォルトでは最新の安定バージョンが適用されます。 Windows のタグ付けスキームは以下のとおりです。
 
-- Current (formerly Stable): This image tag points to the latest production-ready Windows image. このイメージは、安定性を適度に確保しつつ、ソフトウェアの定期アップデートを取り入れたいプロジェクトで使用してください。 アップデートは、通常月に 1 回の頻度で行われます。<br>
+- Current (Stable から変更） - 本番環境で使用可能な最新の Windows イメージを参照します。 このイメージは、安定性を適度に確保しつつ、ソフトウェアの定期アップデートを取り入れたいプロジェクトで使用してください。 アップデートは、通常月に 1 回の頻度で行われます。<br>
 
-The new `current` tag is available for Windows images. The `current` and `stable` tags are equivalent, and are currently both supported. Refer to the [Discuss forum](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511) for more information.
+この新しい `current` タグは、Windows イメージで使用できます。 `current` と `stable` は同じであり、現在はどちらもサポートされています。 詳細については、[Discuss フォーラム](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511)をご覧ください。
 {: class="alert alert-info"}
 
-- Previous: This image tag points to the previous production-ready Windows image. このイメージは、最新のソフトウェアのアップデートに破壊的変更が含まれる場合などに使用できます。 アップデートは、通常月に 1 回の頻度で行われます。
+- Previous: 本番環境で使用可能な過去の  Windows イメージを参照します。 このイメージは、最新のソフトウェアのアップデートに破壊的変更が含まれる場合などに使用できます。 アップデートは、通常月に 1 回の頻度で行われます。
 
 - Edge: 最新の Windows イメージを参照し、メインブランチの HEAD からビルドされます。 このタグは、最新の変更を含み完全な安定性が保証されていないテストバージョンのイメージとして使うことが想定されています。
 
 ## サンプル設定ファイル
 {: #example-configuration-file }
 
-以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
+以下の設定スニペットを `.circleci/config.yml` ファイルに貼り付けると、CircleCI で Windows を使用できるようになります。
 
 ```yaml
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
@@ -86,7 +86,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Additionally, it is possible to access the Windows image directly in your jobs without using orbs:
+さらに、Orb を使わずに直接ジョブ内で Windows イメージにアクセスすることができます。
 
 ```yaml
 jobs:
@@ -97,9 +97,9 @@ jobs:
       shell: powershell.exe -ExecutionPolicy Bypass
 ```
 
-With that said, we strongly encourage using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
+この場合、[Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows)を使用して設定を簡素化することを強く推奨します。
 
-Note that in order to use the Windows Server 2022 image with the Windows orb in CircleCI cloud, it must be specified in the `executor` type, as shown in the following:
+クラウド版 CircleCI で、Windows Orb を使って Windows Server 2022 イメージを使用するには、 `executor`タイプで以下のように指定する必要があります。
 {: class="alert alert-info"}
 
 ```yaml
@@ -119,12 +119,12 @@ workflows:
       - build
 ```
 
-## Specifying a shell with the Windows executor
+## Windows Executor でのシェルの指定
 {: #specifying-a-shell-with-the-windows-executor }
 
-Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
+Windows では 3 種類のシェルを使用してジョブステップを実行できます。
 
-* PowerShell (default in the Windows orb)
+* PowerShell (Windows Orb のデフォルト)
 * Bash
 * コマンド
 
@@ -153,7 +153,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**Note:** It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
+**注: **更新された、または他の Windows シェルツールをインストールすることも可能です。 たとえば、`dotnet` CLI により Powershell Core の最新版をインストールし、ジョブの連続するステップで使用することができます。
 
 ```yaml
 
@@ -172,10 +172,10 @@ jobs:
 
 ```
 
-## Running Windows Docker containers on the Windows executor
+## Windows Executor での Windows Docker コンテナの実行
 {: #windows-docker-containers-on-windows-executor }
 
-なお、WindowsのDockerコンテナは、このようにWindowsのExecutorで実行することも可能です。
+なお、Windows Dockerコンテナは、このように Windows  Executor で実行することも可能です。
 
 ```yaml
 version: 2.1
@@ -199,10 +199,10 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
-## サンプル アプリケーション
+## サンプルアプリケーション
 {: #example-application }
 
-Let us consider a more advanced (but still introductory) "hello world" application using the Windows executor. この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
+Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
 **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image, as described in the [Using the Windows executor on CircleCI server](#windows-on-server) section.
 
