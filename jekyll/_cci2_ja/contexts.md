@@ -384,7 +384,7 @@ CircleCI CLI を使用して環境変数を削除するには、下記ステッ�
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を削除する場合は、 [](https://circleci.com/ja/docs/api/v2/#operation/addEnvironmentVariableToContext)elete Environment Variable</0> のエンドポイントを呼び出します。
+API を使用して環境変数を削除する場合は、 [Delete Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) のエンドポイントを呼び出します。
 
 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と削除しようとする環境変数の名前に置き換えます。
 
