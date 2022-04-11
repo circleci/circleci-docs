@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "Orbs、ジョブ、ステップ、ワークフロー"
-description: "Description of CircleCI jobs and steps."
+title: "ジョブとステップ"
+description: "CircleCI ジョブとステップの説明."
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-The document provides an overview of CircleCI jobs and steps.
+このドキュメントでは CircleCI ジョブとステップの概要について説明します。
 
 * 目次
 {:toc}
@@ -16,20 +16,20 @@ The document provides an overview of CircleCI jobs and steps.
 ## ジョブの概要
 {: #jobs-overview }
 
-A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using [workflows]({{ site.baseurl }}/2.0/workflows/).
+CircleCI ジョブはステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブは [ワークフロー]({{ site.baseurl }}/2.0/workflows/)を使ってオーケストレーションされます。
 
-下図はジョブ間のデータ フローを表したものです。
+下図はジョブ間のデータフローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
 * キャッシュは、異なるワークフローの実行における同じジョブ間でデータを永続化します。
 * アーティファクトは、ワークフローの終了後にデータを永続化します。
 
 ![ジョブの概要]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-**Note**: The job names shown in this diagram are just examples, you can name your jobs whatever you want.
+**注**: 図に示されているジョブ名はただの例です。お好きな名前をつけていただけます。
 
-Jobs can be run in docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with linux, macOS or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
+ジョブは、Docker Executor を使って Docker コンテナで、または `machine` Executor を使って仮想マシンで、Linux、macOS、または Windows を使用して実行できます。 セカンダリコンテナや VM は、データベースなどのサービスをアタッチしてジョブと一緒に実行するように設定することができます。
 
-When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the [CircleCI Developer Hub](https://circleci.com/developer/images).
+Docker Executor を使用する場合、`docker` キーの下に記載されるイメージがジョブで開始するコンテナを指定します。 Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the [CircleCI Developer Hub](https://circleci.com/developer/images).
 
 `docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
