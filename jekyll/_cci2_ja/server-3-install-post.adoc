@@ -496,8 +496,8 @@ image::kots-admin-create-backup.png[Kots Create Snapshot]
 CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。
 このレジストリは、CircleCI Server からのみアクセスできます。 設定ファイルで参照している Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 プロジェクト設定ファイルで参照された Orb はすべて、 _server_ orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 それには以下が含まれます。
 
-* パブリック レジストリからの Orb のコピー.
-* 以前コピーした Orb の更新.
+* パブリック レジストリからの Orb のコピー
+* 以前コピーした Orb の更新
 * 会社のプライベート Orb の登録 (存在する場合)
 
 詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[サーバーでの Orbガイド]を参照してください。
