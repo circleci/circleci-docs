@@ -496,7 +496,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 **重要:** パイプラインパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/ja/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/ja/2.0/glossary/#context)で確認できます。
 
-詳細については、[パイプラインの値とパラメーター]({{site.baseurl}}/2.0/pipeline-variables/)のガイドを参照してください。
+詳細については、[パイプラインの値とパラメーター]({{site.baseurl}}/ja/2.0/pipeline-variables/)のガイドを参照してください。
 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }
