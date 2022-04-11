@@ -60,14 +60,14 @@ window.OptimizelyClient.getVariationName({
       const articleContainer = $('.quickstart-guide');
       articleContainer.addClass('getting-started-full-width');
     }
-    // Display content on page if users in treatment
+    // Display content on page for treatment variation
     const treatment = $('.treatment');
     treatment.css('display', 'block');
 
-    // Init new badge in sidebar and add tracking event
-    addNewBadgeToSidebar();
-    // Init new badge on landing page and add tracking events
+    // Init new badge on landing page
     showHomePageBadges();
+    // Init new badge in sidebar
+    addNewBadgeToSidebar();
     // Init tracking for experiment links and landing page badges
     setUpTracking();
   }
