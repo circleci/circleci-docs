@@ -202,11 +202,11 @@ jobs:
 ## サンプルアプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し応用した (まだ初歩ですが) "hello world" アプリケーションを考えます。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
+Windows Executor を使用した例として、少し進んだ (まだ初歩ですが) "hello world" を考えてみましょう。 この[サンプルアプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
-**Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image, as described in the [Using the Windows executor on CircleCI server](#windows-on-server) section.
+**注: **CircleCI Server で Windows を使用している場合、[CircleCI Server での Windows Executor の使用](#windows-on-server) に記載されているように Orb の使用をマシンイメージに置き換えてください。
 
-設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。 It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
+設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。 これにはブラウザーと UI のテストが含まれますが、ここでは `hello-world` のワークフローに注目します。
 
 ```yaml
 version: 2.1
@@ -219,7 +219,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-次に、ビルドで使用する Orb を宣言します。 We will only use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.
+次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) のみを使用します。 このサンプルでは、2.4.0 バージョンの Orb を使用していますが、それ以降のバージョンも使用していただけます。
 
 ```yaml
 workflows:
@@ -228,7 +228,7 @@ workflows:
       - build
 ```
 
-We define a `hello-world` workflow, in which we run a single job named `build`.
+`hello-world` ワークフローを定義します。ここでは`build` という単一のジョブを実行します。
 
 ```yaml
 jobs:
@@ -237,7 +237,7 @@ jobs:
       name: win/default
 ```
 
-Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using.
+`jobs` キーの下に、`build`ジョブを定義し、使用する Orb により Executor を設定します。
 
 ```yaml
     steps:
@@ -310,10 +310,10 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 * SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
 * 現時点では、ネストされた仮想化をサポートしていません (`--platform linux` フラグの使用など)。
 
-## Using the Windows executor on CircleCI server
+## CircleCI Server での Windows Executor の使用
 {: #windows-on-server }
 
-Contact your systems administrator for details of what is included in CircleCI server Windows images, or visit the [Discuss](https://discuss.circleci.com/) forum.
+CircleCI Server Windows イメージに含まれている内容の詳細はシステム管理者に問い合わせるか、[Discuss](https://discuss.circleci.com/) フォーラムのページをご覧ください。
 
 {:.tab.windowsblocktwo.Server_3}
 ```yaml
@@ -345,7 +345,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-### Specifying a shell
+### シェルの指定
 {: #specifying-a-shell-server }
 {:.no_toc}
 
@@ -393,7 +393,7 @@ jobs:
          shell: cmd.exe
 ```
 
-#### Install Powershell Core with the `dotnet` CLI
+#### `dotnet` CLI を使って Powershell Core をインストールします。
 {: #install-powershell-server }
 {:.no_toc}
 
@@ -427,7 +427,7 @@ jobs:
       - run: pwsh ./<my-script>.ps1
 ```
 
-### Running Windows Docker containers
+### Windows Docker コンテナの実行
 {: #run-windows-container-server }
 {:.no_toc}
 
@@ -454,7 +454,7 @@ jobs:
 ## 次のステップ
 {: #next-steps }
 
-Consider reading documentation on some of CircleCI’s features:
+CircleCI の機能については、以下のドキュメントを確認してください。
 
 * 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/2.0/concepts/)」を参照してください。
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
