@@ -208,7 +208,7 @@ The following commentary describes what occurs in each line of the sample code:
 * *Lines 32-33:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
 * *Lines 34-35:* These lines specify the first job, _Hello-World_.
 * *Lines 36-38:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a colon, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
-* *Lines 39-41:* The final job is _Using-Node_. As before, this job requires the successfully completion of the previous job, _Fetch-Code_. 
+* *Lines 39-41:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_. 
 
 As before, commit and push your updated `config.yml` file.
 
