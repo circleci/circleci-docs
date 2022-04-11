@@ -363,7 +363,7 @@ CLI では、シークレット値を引数として受け入れるのではな�
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を作成する場合は、 [環境変数の追加](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを適切なリクエスト本文とともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と新しい環境変数の名前に置き換えます。 リクエスト本文は、プレーンテキストのシークレットを文字列として含む`value` キーを含める必要があります。
+API を使用して環境変数を作成する場合は、 [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) のエンドポイントを適切なリクエスト本文とともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と新しい環境変数の名前に置き換えます。 リクエスト本文は、プレーンテキストのシークレットを文字列として含む`value` キーを含める必要があります。
 
 #### 環境変数の削除
 {: #deleting-environment-variables }
@@ -384,7 +384,7 @@ CircleCI CLI を使用して環境変数を削除するには、下記ステッ�
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を削除する場合は、 [環境変数の削除](https://circleci.com/ja/docs/api/v2/#operation/addEnvironmentVariableToContext)エンドポイントを呼び出します。
+API を使用して環境変数を削除する場合は、 [](https://circleci.com/ja/docs/api/v2/#operation/addEnvironmentVariableToContext)elete Environment Variable</0> のエンドポイントを呼び出します。
 
 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と削除しようとする環境変数の名前に置き換えます。
 
@@ -418,7 +418,7 @@ CLI では、シークレット値を引数として受け入れるのではな�
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数のローテーションを実行する場合は、 [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを適切なリクエスト ボディとともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と更新する環境変数の名前に置き換えます。 リクエスト本文には、プレーンテキストのシークレットを文字列として含む `value` キーを含める必要があります。
+API を使用して環境変数のローテーションを実行する場合は、 [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) のエンドポイントを適切なリクエスト本文とともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と更新する環境変数の名前に置き換えます。 リクエスト本文には、プレーンテキストのシークレットを文字列として含む `value` キーを含める必要があります。
 
 
 ## シークレットのマスキング
