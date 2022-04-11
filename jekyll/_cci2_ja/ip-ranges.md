@@ -34,7 +34,7 @@ IP アドレスに基づくアクセス制御は、以下のようなユース �
 - 機密データが含まれる内部アプリケーションをデプロイする
 - 本番環境ネットワークへのアクセスを許可する
 
-Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner]({{site.baseurl}}/2.0/runner-overview/). IP アドレスの範囲機能であれば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
+これまで、静的 IP アドレスを構成および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能であれば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
 
 この機能により、_ジョブの実行中_のトラフィックは、定義されたいずれかの IP アドレスのみを経由するようになります。 ただし、ジョブの実行が開始される前に発生するステップのトラフィックは、定義された IP アドレスを経由しません。  たとえば、Docker イメージのプルが_ジョブの実行_前に行われる場合、そのトラフィックは定義された IP アドレス範囲を経由しません。
 
@@ -175,5 +175,5 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 {: #knownlimitations}
 
 - 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
-- IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
-- ジョブの IP アドレスの範囲機能を有効にし、 コンテンツ デリバリー ネットワーク (CDN)、[ Fastly ](https://www.fastly.com/)がホストする宛先に何かをプッシュした場合、発信ジョブのトラフィックは上記の明確に定義された IP アドレスを経由してルーティング**されません **。 Instead, the IP address will be one that [AWS uses]({{site.baseurl}}/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. これは AWS と Fastly 間で確認されている既知の問題であり、 CircleCI は解決に取り組んでいます。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
+- ジョブの IP アドレスの範囲機能を有効にし、 コンテンツ デリバリー ネットワーク (CDN)、[ Fastly ](https://www.fastly.com/)がホストする宛先に何かをプッシュした場合、発信ジョブのトラフィックは上記の明確に定義された IP アドレスを経由してルーティング**されません **。 代わりに、 IP アドレスは、 us-east-1 または us-east-2 領域で AWS が 使用するアドレスになります。 これは AWS と Fastly 間で確認されている既知の問題であり、 CircleCI は解決に取り組んでいます。
