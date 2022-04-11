@@ -14,10 +14,10 @@ version:
 
 CircleCI Server v3.x のポストインストール ステップを開始する前に、 xref:server-3-install-prerequisites.adoc[ステップ 1 - 前提条件]、 xref:server-3-install.adoc[ステップ 2 - コアサービスのインストール] 、 xref:server-3-install-build-services.adoc[ステップ 3 - ビルドサービスのインストール]が実行済みであることを確認してください。
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
-
-.インストール 手順（フローチャートのフェーズ 4）
+.インストール手順のフローチャート ステップ 4）
 image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
+
+NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
@@ -25,16 +25,14 @@ toc::[]
 
 === バックアップとリストアの設定
 
-CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して簡単に作成できます。
-ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
+CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して作成できます。
+バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero]をインストールして設定する必要があります。 Veleo はインストールの前提条件のセクションで必要なソフトウェアのリストに載っているので、既にインストールされているかもしれません。
 
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
 
 === AWS での CircleCI Server 3.x のバックアップ
-
-次の手順では、プロバイダーを AWS と想定しています。
 
 これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら] の Velero ドキュメントを元にしています。
 
@@ -295,6 +293,8 @@ gcloud iam service-accounts keys create credentials-velero \
 
 クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービス アカウントを Velero の Kubernetes サービス アカウントにバインドします。 この場合、GCP サービス アカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
+NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
+
 ==== 手順 3 - Velero のインストールと起動
 
 * サービス アカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
@@ -499,11 +499,20 @@ CircleCI Server システムには、固有のローカル Orb レジストリ�
 * 以前コピーした Orb の更新 
 * 会社のプライベート Orb の登録 (存在する場合)
 
-詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[Orb on Server ガイド]を参照してください。
+詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/2.0/server-3-operator-orbs/[サーバーでの Orb ガイド]を参照してください。
 
-=== [Email Notifications (メール通知)] 
+=== メール通知 
 
-ビルドの通知はメールで送信されます。 KOTS の管理コンソールにアクセスします。 Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
+ビルドの通知はメールで送信されます。 ここではメールによるビルド通知設定方法の詳細について説明します。 
+
+KOTS の管理コンソールにアクセスします。 名前空間を変更して下記を実行し、KOTS 管理者コンソールを表示します。 
+
+[source,shell]
+----
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
+----
+
+*Settings* の *Email Notifications* セクションに行き、下記の詳細を入力してインストール環境のメール通知を設定します。
 
 * *[Email Submission server hostname (メール送信サーバーのホスト名)] (必須)*: 送信サーバーのホスト名を指定します (例えば SendGrid の場合は smtp.sendgrid.net を使用)。
 

@@ -37,11 +37,11 @@ git checkout main && git pull
 NOTE: `builder_instance_type` は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
 
 . 下記の 3. では、以下が可能です。
-
 .. プロジェクトで必要な場合は、カウントを 1 に変更して 1.0 Builder の使用を選択する。
 .. プロキシの詳細を入力し、AWS リージョン内に複数のインストールがある場合は、プレフィックスを入力する。Services および Nomad クライアントのインスタンスは、AWS コンソールではこのプレフィックスで表示されます。
 
 .tfvars の例
+
 ```shell
 #####################################
 # 1. 必要なクラウド設定
@@ -143,19 +143,19 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |===
 
 == インスタンスのプロビジョニング
-
 . 変更内容を `tfvars` ファイルに保存し、以下を実行します。
 +
 ```shell
 terraform plan
 ```
+
 . インスタンスのプロビジョニングを行うために、以下を実行します。
 +
 ```shell
 terraform apply
 ```
-+
 その際、先に進むかどうかを `yes` と入力して確認するように求められます。
+
 . Terraform の出力の最後に IP アドレスが提供されます。 この IP アドレスにアクセスして、インストール作業を進めてください。
 // explain what to do if this step fails
 
@@ -164,8 +164,8 @@ terraform apply
 +
 .SSL セキュリティ
 image::browser-warning.png[SSL Security]
-
-. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert] をクリックします。このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
+. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
+このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
 +
 .ホスト名
 image::secure-management-console.png[Hostname]
@@ -179,8 +179,8 @@ image::secure-management-console.png[Hostname]
 +
 .管理者パスワード
 image::admin-password.png[Secure the Management Console]
+
 . CircleCI に対して一連の事前チェックが行われます。完了したら、下にスクロールして [Continue] をクリックします。
-+
 //what should admins do if not all these checks pass
 +
 .事前チェック
@@ -211,7 +211,7 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」�
 
 .. GitHub から Client ID と Secret をコピーして、該当するフィールドにペーストし、[Test Authentication] をクリックします。
 
-.. GitHub.com をご利用の場合は、ステップ 6 に進みます。 Github Enterprise をご利用の場合は、いくつかの追加手順を行い、API トークンを提供していただき、お客様の組織を確認する必要があります。 トークンを提供するには、GitHub Enterprise のダッシュボードから以下を実行してください。
+.. GitHub.com をご利用の場合は、ステップ 6 に進みます。 If using Github Enterprise, you will also need to follow some supplementary steps and supply an API Token so we can verify your organization. トークンを提供するには、GitHub Enterprise のダッシュボードから以下を実行してください。
 ... Personal Settings (右上) に行き、  Developer Settings  Personal Access Tokens に移動します。
 ... [generate new token] をクリックします。 誤って削除されないように、トークンには適切な名前を付けてください。 チェックボックスには何もチェックを入れないでください。ここでは、デフォルトのパブリックな読み取りレベルのアクセスが必要なだけで、追加のアクセス権限は必要ありません。 このトークンは一人のユーザーが所有するのではなく、組織全体で共有することをお勧めします。
 ... 新しいトークンをコピーして、GitHub Enterprise Default API Token フィールドに貼り付けます。
@@ -219,17 +219,17 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」�
 .Github Enterprise Token を入力します。
 image::ghe_token.png[Github Integration]
 
-. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 LDAP 設定の詳細については、 https://circleci.com/docs/2.0/authentication/#ldap[LDAP 認証ガイド]をご覧ください。
+. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 For a detailed run-through of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
 
 . **Privacy**: インストールには SSL 証明書と SSL キーの使用をお勧めします。 インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
 +
 .プライバシーの設定
-image::privacy.png[]
+image::privacy.png[Privacy settings]
 
 . **Storage** : ストレージには S3 の使用を推奨しており、入力が必要なフィールドはあらかじめ入力されています。 ここでは、本ドキュメントの <<aws-prereq#planning,planning>> で述べた IAM ユーザーを使用します。
 +
 .ストレージのオプション
-image::storage.png[]
+image::storage.png[Storage options]
 
 . **Enhanced AWS Integration**: 1.0 Builder を使用している場合は、ここに入力します。
 // explain enhanced AWS integration 1.0 or just say ignore
@@ -247,7 +247,7 @@ CAUTION: Docker Layer Caching (DLC) を使用する場合、VM の事前割り�
 . **AWS Cloudwatch Metrics や Datadog Metrics** は、お客様のインストールに合わせて設定することが可能です。 該当するセクションでどちらかのメトリクスを設定します。 詳しくは、 https://circleci.com/docs/2.0/monitoring/[監視に関するガイド]をお読みください。
 +
 .メトリクス
-image::metrics_setup.png[]
+image::metrics_setup.png[AWS Cloudwatch and Datadog metrics]
 
 . **Custom Metrics** で、Cloudwatch メトリクスや Datadog メトリクスの代わりに、Telegraf から受け取るメトリクスをカスタマイズすることも可能です。 詳しくは、 https://circleci.com/docs/2.0/monitoring/#custom-metrics[カスタムメトリクス]ガイドをお読みください。
 
@@ -265,7 +265,7 @@ NOTE: 管理コンソールで、 `Failure reported from operator: no such image
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .ダッシュボードから CircleCI を起動する
-image::dashboard.png[]
+image::dashboard.png[CircleCI server dashboard]
 
 . ビルドコンテナが起動してイメージがダウンロードされると、すぐに最初のビルドを開始します。 **約 15 分**が経過し、[Refresh] ボタンをクリックしても更新が行われない場合は、 https://support.circleci.com/hc/ja[CircleCI サポート]にお問い合わせください。
 

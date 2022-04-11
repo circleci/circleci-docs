@@ -65,7 +65,7 @@ Yarn 1.x の例:
           name: 依存関係のインストール
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       - save_cache:
-          name: Yarn パッケージのキャッシの保存
+          name: Yarn パッケージのキャッシュの保存
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn

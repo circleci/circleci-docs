@@ -26,13 +26,13 @@ CircleCI Web アプリケーションのサイドバーから、組織全体の�
 特定のプロジェクトのインサイトにアクセスするには、パイプラインのワークフローを表示して **[Insights (インサイト)]** ボタンをクリックします。 または、_パイプライン ダッシュボード_で、**[actions (アクション)]** セクションの [Insights (インサイト)] ボタンをクリックします。
 
 {:.tab.insight-access.Access_by_sidebar}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
+![CircleCI Web アプリのサイドばーからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
 
 {:.tab.insight-access.Access_by_pipeline}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
+![CircleCI Web アプリのパイプラインからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
 
 {:.tab.insight-access.Access_by_workflow}
-![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
+![CircleCI Web アプリのワークフローからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
 
 ### ワークフローの概要
@@ -73,7 +73,7 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 ### 概要
 {: #overview }
 
-CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態を示すダッシュボードが表示されます。 ここでは、デフォルト ブランチのビルド時間の中央値、キュー時間の中央値、最終ビルド時刻、成功率、並列処理数を確認できます。 **注:** ワークフローを構成している場合、デフォルト ブランチに対して実行されるすべてのジョブがグラフに表示されます。
+CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態を示すダッシュボードが表示されます。 ここでは、デフォルト ブランチのビルド時間の中央値、キュー時間の中央値、最終ビルド時刻、成功率、並列実行数を確認できます。 **注:** ワークフローを構成している場合、デフォルト ブランチに対して実行されるすべてのジョブがグラフに表示されます。
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
 
