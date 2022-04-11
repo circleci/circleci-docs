@@ -38,7 +38,7 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 ## 手動でのメモリ制限
 {: #manual-memory-limits }
 
-Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
+cgroup をサポートしていても、JVM はワーカープロセスプールを実行する場合など、メモリを過剰に使用する場合があります。 JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
 
 ## Java 環境変数を使用したメモリ制限の設定
 {: #using-java-environment-variables-to-set-memory-limits }
@@ -83,7 +83,7 @@ JVM はこの環境変数を読み取りません。 代わりに Java ベース
 
 この環境変数は Clojure 専用です。 `lein` は `JVM_OPTS` を使用して JVM にメモリ制限を渡します。
 
-**メモ:** `JVM_OPTS` は `lein` 自体のメモリには影響しません。 また、メモリ制限を Java に直接渡すこともできません。 `lein` の使用可能なメモリに影響を与えるには、`LEIN_JVM_OPTS` を使用します。 メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
+**注:** `JVM_OPTS` は `lein` 自体のメモリには影響しません。 また、メモリ制限を Java に直接渡すこともできません。 `lein` の使用可能なメモリに影響を与えるには、`LEIN_JVM_OPTS` を使用します。 メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
 
 ### `LEIN_JVM_OPTS`
 {: #leinjvmopts }
@@ -93,14 +93,14 @@ JVM はこの環境変数を読み取りません。 代わりに Java ベース
 ### `GRADLE_OPTS`
 {: #gradleopts }
 
-See the Gradle documentation for [memory settings](https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory).
+[メモリの設定](https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory)については、Gradle のドキュメントを参照してください。
 
 この環境変数は Gradle プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
 
 ### `MAVEN_OPTS`
 {: #mavenopts }
 
-See the Maven documentation for [memory settings](http://maven.apache.org/configure.html).
+[メモリの設定](http://maven.apache.org/configure.html)については、Maven のドキュメントを参照してください。
 
 この環境変数は Apache Maven プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
 
@@ -109,11 +109,11 @@ See the Maven documentation for [memory settings](http://maven.apache.org/config
 
 Java OOM エラーのデバッグを行っても、たいていの場合 `exit code 137` のエラーしか見つかりません。
 
-Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
+`-XX:MaxRAMPercentage=NN` や `-Xmx=NN` のサイズが、ご自身のアプリを完全にビルドするのに十分な大きさであることを確認します。また、他のプロセスが CircleCI ビルドコンテナの残りのメモリを共有できる大きさであることを確認します。
 
-Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the [cgroup visibility change](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
+JVM の最大ヒープサイズがジョブの制限値を上回る場合でも、ガベージコレクター機能により割り当て速度を維持し、プロセスが大量のメモリを使用し強制終了されるのを回避できます。 ガベージコレクターに割り当てられるデフォルトのスレッド数は、利用可能な CPU の数に基づいており、2020年 6月3日に行われた[cgroup の変更](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)により、アプリが以前よりも多くのメモリを消費し、OOM が強制終了される可能性があります。 このための最善の解決策は、ジョブの使用可能な RAM 内の最大ヒープサイズを設定することです。これにより、限界値を超えないようすぐに完全なガーベジコレクターがトリガされます。
 
-If you are still consistently hitting memory limits, consider [increasing your jobs's RAM allocation]({{site.baseurl}}/2.0/configuration-reference/#resource_class).
+それでも引き続きメモリ制限に達する場合は、[ジョブの RAM を増やす](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ことを検討してください。
 
 ## 関連項目
 {: #see-also }
