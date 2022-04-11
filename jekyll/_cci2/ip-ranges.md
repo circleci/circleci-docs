@@ -36,8 +36,6 @@ Some example use cases where IP-based restricted access might be desired include
 
 Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner]({{site.baseurl}}/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
 
-IP ranges only routes traffic through one of the defined IP address ranges _during job execution_. Any step that occurs before the job has started to execute will not have its traffic routed through one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
-
 ## Example configuration file using IP ranges
 {: #exampleconfiguration }
 
@@ -177,4 +175,3 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 
 - There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 - IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
-- If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses]({{site.baseurl}}/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.
