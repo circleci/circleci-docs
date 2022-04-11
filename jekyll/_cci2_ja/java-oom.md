@@ -19,7 +19,7 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 - 合計メモリの `1/64` 以上（4 Gib の RAM の Docker Medium クラスの場合、64 MiB）
 - 合計メモリの `1/4` 以下（4 Gib の RAM の Docker Medium クラスの場合、１ GiB）
 
-[2020 年 6 月  3日](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)の時点では、Docker Executor を使用する際、これらの制限が表示されます。 つまり、Java の最新バージョンでは、ジョブで使用可能な CPU の数や RAM の量を正しく検出します。
+[2020 年 6 月 3 日](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)の時点では、Docker Executor を使用する際、これらの制限が表示されます。 つまり、Java の最新バージョンでは、ジョブで使用可能な CPU の数や RAM の量を正しく検出します。
 
 以前のバージョンの Java では、JVM がマシン上の大量のメモリと CPU が使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。 これが原因でメモリ不足 (OOM) エラーが発生することがありますが、エラーメッセージには詳細が示されないため、このエラーをデバッグすることは困難です。 通常、`137` 終了コードが表示されます。これは、OOM killer によりプロセスが `SIGKILL` されたことを意味します (`137 = 128 + "kill -9"`)。
 
