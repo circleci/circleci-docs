@@ -42,7 +42,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 
 はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/2.0/circleci-images/)をご覧ください。
 
-For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images) list.
+`machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images)をご覧ください。
 
 実行環境やイメージに関する概要は、[Executor とイメージに関するガイド]({{site.baseurl}}/2.0/executor-intro/)をご覧ください。
 
@@ -82,7 +82,7 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 ### Performance プランを利用しているのに、ビルドがキューイングするのはなぜですか?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resource_class). ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
