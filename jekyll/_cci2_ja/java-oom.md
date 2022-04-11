@@ -16,14 +16,14 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 [Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 メモリ制限が設定されていない場合、JVM はシステムで使用可能な合計メモリの一部を事前に割り当てます。 CircleCI は大量のメモリを搭載した大規模なマシンでコンテナ ベースのビルドを実行しており、 各コンテナには、マシンで使用可能な総量よりも少ない量のメモリ制限が設定されています。 こうしたことから、JVM がマシン上の大量のメモリを使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。
 
 デフォルトでは、Java の使用量は以下のように設定されています。
-- More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
-- Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
+- 合計メモリの `1/64` 以上（4 Gib の RAM の Docker Medium クラスの場合、64 MiB）
+- 合計メモリの `1/4` 以下（4 Gib の RAM の Docker Medium クラスの場合、１ GiB）
 
-As of [June 3rd 2020](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly detect the number of CPUs and amount of RAM available to the job.
+[2020 年 6 月  3日](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)の時点では、Docker Executor を使用する際、これらの制限が表示されます。 つまり、Java の最新バージョンでは、ジョブで使用可能な CPU の数や RAM の量を正しく検出します。
 
-For older versions of Java, This can lead to the JVM seeing a large amount of memory and CPUs being available to it, and trying to use more than is allocated to the container. これが原因でメモリ不足 (OOM) エラーが発生することがありますが、エラー メッセージには詳細が示されないため、このエラーをデバッグすることは困難です。 Usually you will see a `137` exit code, which means the process has been `SIGKILL`ed by the OOM killer (`137 = 128 + "kill -9"`).
+以前のバージョンの Java では、JVM がマシン上の大量のメモリと CPU が使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。 これが原因でメモリ不足 (OOM) エラーが発生することがありますが、エラーメッセージには詳細が示されないため、このエラーをデバッグすることは困難です。 通常、`137` 終了コードが表示されます。これは、OOM killer によりプロセスが `SIGKILL` されたことを意味します (`137 = 128 + "kill -9"`)。
 
-You can see how much memory your container is allocated, and how much it has used, by looking at the following files:
+下記のファイルより、コンテナに割り当てられているメモリの量と使用量が確認できます。
 ```
 /sys/fs/cgroup/memory/memory.limit_in_bytes
 /sys/fs/cgroup/memory/memory.max_usage_in_bytes
