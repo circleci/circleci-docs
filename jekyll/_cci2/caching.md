@@ -134,14 +134,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -156,14 +156,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -178,14 +178,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -385,14 +385,14 @@ This example uses a _very_ specific cache key. Making your caching key more spec
 
       - restore_cache:
           keys:
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-v1-{{ arch }}-{{ .Branch }}
             - gem-cache-v1
 
       - run: bundle install --path vendor/bundle
 
       - save_cache:
-          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: *gem-cache
           paths:
             - vendor/bundle
 
@@ -406,14 +406,14 @@ This example uses a _very_ specific cache key. Making your caching key more spec
 
       - restore_cache:
           keys:
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - &asset-cache asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
             - asset-cache-v1-{{ arch }}-{{ .Branch }}
             - asset-cache-v1
 
       - run: bundle exec rake assets:precompile
 
       - save_cache:
-          key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: *asset-cache
           paths:
             - public/assets
             - tmp/cache/assets/sprockets
@@ -435,14 +435,14 @@ It is possible and often beneficial to cache your git repository to save time in
     steps:
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - &source-cache source-v1-{{ .Branch }}-{{ .Revision }}
             - source-v1-{{ .Branch }}-
             - source-v1-
 
       - checkout
 
       - save_cache:
-          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          key: *source-cache
           paths:
             - ".git"
 ```
