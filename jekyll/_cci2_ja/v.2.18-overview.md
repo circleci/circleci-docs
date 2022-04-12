@@ -14,7 +14,7 @@ order: 1
 {: #requirements-for-upgrading }
 
 <div class="alert alert-warning" role="alert">
-<b>Warning:</b> If at any time your CircleCI organization name has been changed, there is a <a href="{{site.baseurl}}/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before starting the upgrade process.
+<b>警告:</b> 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、<a href="{{site.baseurl}}/ja/docs/2.0/updating-server/#org-rename-script">こちらのスクリプト</a>を実行する<b>必要があります</b>。
 </div>
 
 ## 注意事項とベストプラクティス
