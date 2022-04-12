@@ -18,10 +18,6 @@ suggested:
   - 
     title: 環境変数としてファイルを挿入する
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
-  - 
-    title: '"Context deadline exceeded after 1 hour" エラー: ビルドのタイムアウト'
-    link: https://support.circleci.com/hc/ja/articles/4410707277083
-    isExperiment: true
 ---
 
 以下のセクションに沿って、CircleCI で環境変数を使用する方法について説明します。
