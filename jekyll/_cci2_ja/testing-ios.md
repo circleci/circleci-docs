@@ -87,7 +87,7 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
 
 {: #getting-started }
 
-Select a macOS project repository you would like to build from the **Projects** page of the [CircleCI web app](https://app.circleci.com/).
+[CircleCI Web アプリ](https://app.circleci.com/) の **Projects** ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。
 
 CircleCI でのアプリケーションのビルドと署名には [fastlane](https://fastlane.tools) を使用することを強くお勧めします。 fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
 
@@ -799,7 +799,7 @@ React Native プロジェクトは、CircleCI  上で `macos` および `docker`
 
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-types/) in the same workflow. 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/docs/2.0/executor-types/) を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 
 
