@@ -60,7 +60,7 @@ However, to enable backup support you need to install and configure https://vele
 ////
 == AWS での CircleCI Server 3.x のバックアップ
 
-The following steps assume AWS as your provider and that you have met the <<prerequisites, prerequisites>> listed above.
+以下の手順では、プロバイダーが AWS であり、上記の<<prerequisites, 前提条件>>を満たしていることを前提としています。
 
 これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら]の Velero ドキュメントを元にしています。
 
