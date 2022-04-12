@@ -163,7 +163,7 @@ See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
 === アップグレードに関する注意事項
 
-KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)] *を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
+KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)]*を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
 サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
 
@@ -259,7 +259,7 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 . 既存の CircleCI Server のドメイン名を参照している DNS A レコードを見つけます (`app.` のサブドメインを参照しているものではないことに注意してください)。
 . A レコードを、`app.`のサブドメインのレコードと同じ様に Traefik ロード バランサーを参照するように編集します。 DNS サービスによっては、編集結果が反映されるまで数分かかりる場合があります。
 
-KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)] *を選択し、CircleCI Server v3.1.0 の *[Deploy (デプロイ)]* をクリックします。
+KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)]*を選択し、CircleCI Server v3.1.0 の *[Deploy (デプロイ)]* をクリックします。
 
 === 新機能
 
