@@ -402,7 +402,7 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 ## テストの分割
 {: #test-splitting }
 
-The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
+CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための[テストの分割](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)にも使用できます。
 
 ## Using the CLI on CircleCI server v2.x
 {: #using-the-cli-on-circleci-server-v2-x }
