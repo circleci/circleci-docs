@@ -370,7 +370,7 @@ aws s3api create-bucket \
 +
 NOTE: `us-east-1`は LocationConstraint をサポートしていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
-. **CircleCI Server 用の IAM ユーザーを作成します。**
+. **circleci-server 用の IAM ユーザーを作成します。**
 +
 ```shell
 aws iam create-user --user-name circleci-server
@@ -579,7 +579,7 @@ aws iam put-user-policy \
   --policy-document file://policy.json
 ```
 
-. **ユーザーの CircleCI Server 用のアクセスキーを作成します。**
+. **ユーザーの circleci-server 用のアクセスキーを作成します。**
 +
 NOTE: 後でサーバーインストールの設定をする際に必要になります。
 +
