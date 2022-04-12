@@ -25,7 +25,7 @@ version:
 {: #basic-setup }
 {:.no_toc}
 
-通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`]({{site.baseurl}}/2.0/configuration-reference/#image) key in the file. この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
+通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
 
 以下は、CircleCI デモ プロジェクトの最もシンプルな例です。すべての構成が `build` ジョブの下にネストされています。
 
