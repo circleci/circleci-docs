@@ -16,7 +16,7 @@ version:
 
 * **質問:** Orb はプライベートにできますか？
 
-* **Answer:** [Private orbs]({{site.baseurl}}/2.0/orb-intro/#private-orbs) are available on any of our [current plans](https://circleci.com/pricing).
+* **回答:** \[現在のすべての料金プラン\](https://circleci.com/ja/pricing/)で\[プライベート Orb\](https://circleci.com/docs/2.0/orb-intro/#private-orbs) をご利用いただけます。
 
 ## コマンドとジョブの違い
 {: #difference-between-commands-and-jobs }
