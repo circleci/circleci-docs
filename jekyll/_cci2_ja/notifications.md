@@ -59,7 +59,7 @@ Slack 通知の例を以下に示します。
 ![失敗を通知するメールのサンプル]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
 ## メール通知の設定と変更
-CircleCI アプリケーションの [[Notifications (通知)](https://circleci.com/account/notifications){:rel="nofollow"}] ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
+CircleCI アプリケーションの [Notifications (通知)](https://circleci.com/account/notifications){:rel="nofollow"} ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
 
 メール通知の例を以下に示します。
 

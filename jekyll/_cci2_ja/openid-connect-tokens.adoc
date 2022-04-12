@@ -21,12 +21,14 @@ toc::[]
 
 `context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows, ワークフロー>>セクションに追加して、<<contexts/#creating-amd-using-a-context,ジョブにコンテキスト>>を追加します。
 
+```yaml
 workflows:
   my-workflow:
     jobs:
       - run-tests:
           context:
             - my-context
+```
 
 == クラウドサービスの設定
 
