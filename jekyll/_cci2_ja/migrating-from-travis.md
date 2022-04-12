@@ -3,7 +3,7 @@ layout: classic-docs
 title: Travis CI からの移行
 categories:
   - migration
-description: An overview of how to migrate from Travis CI to CircleCI.
+description: Travis CI から CircleCI に移行する方法を概説します。
 ---
 
 Travis CI から CircleCI に移行する方法を概説します。
@@ -137,7 +137,7 @@ Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment
 
 CircleCI では、[コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)を使用することで、*すべて*のプロジェクト間で安全に環境変数を共有できます。
 
-**Note:** CircleCI has several [built-in environment variables]({{site.baseurl}}/2.0/env-vars/#built-in-environment-variables).
+**メモ:** CircleCI には、[定義済み環境変数](https://circleci.com/ja/docs/2.0/env-vars/#built-in-environment-variables)が複数用意されています。
 
 ## 高度なツール
 {: #artifacts-uploading }
