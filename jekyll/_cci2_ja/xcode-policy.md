@@ -50,34 +50,34 @@ CircleCI では、Xcode のメジャー バージョンを 4 つまで維持し�
 
 イメージがサポート終了対象および削除対象となった場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)で告知し、最近実行したジョブでサポート終了対象イメージをリクエストした開発者の方々にはメールでも通知を行います。 CircleCI では、廃止の 4 週間前に通知することを目標とします。
 
-We will never automatically redirect requests for images to different `major.minor` versions, so when one of these images is removed, jobs will start to fail if the `.circleci/config.yml` has not been updated.
+イメージに対するリクエストが、自動で別の `major.minor` バージョンにリダイレクトされることはありません。 そのため、リクエストしたイメージのいずれかが削除された場合、`.circleci/config.yml` ファイルの更新を行わないと、ジョブが失敗するようになります。
 
 ## Xcode のパッチ
 {: #xcode-patches }
 
-CircleCI では、サポート対象の Xcode `major.minor` バージョンごとに最新のパッチ バージョンを維持します。 新しいパッチ バージョンがリリースされた場合、過去のパッチ バージョンのサポートを終了し、すべてのリクエストを新しいパッチにリダイレクトします。
+CircleCI では、サポート対象の Xcode の `major.minor` バージョンごとに最新のパッチ バージョンを維持します。 新しいパッチ バージョンがリリースされた場合、過去のパッチ バージョンのサポートを終了し、すべてのリクエストを新しいパッチにリダイレクトします。
 
-通常、パッチには後方互換性が備わっているため、このリダイレクトは新パッチのリリースから 24 時間以内に開始されます。 深刻な問題が確認された場合には、ロールバック版を公開し、暫定的にどちらのバージョンも選択可能にします。
+通常、パッチには後方互換性が備わっているため、このリダイレクトは新しいパッチのリリースから 24 時間以内に開始されます。 深刻な問題が確認された場合には、ロールバック版をリリースし、暫定的にどちらのバージョンも利用可能にします。
 
 **例**
 
-When Xcode `12.0.1` was released, we removed the previous patch version, `12.0.0`, and automatically redirected all requests for `12.0.0` to `12.0.1`.
+Xcode `12.0.1` がリリースされた時点で、過去のパッチ バージョンである `12.0.0` を削除し、`12.0.0` に対するすべてのリクエストを `12.0.1` にリダイレクトします。
 
 ## ベータ版イメージのサポート
 {: #beta-image-support }
 
-We aim to make beta Xcode versions available on the macOS executor as soon as we can, to allow developers to test their apps ahead of the next stable Xcode release.
+Xcode の次の安定版がリリースされる前に開発者の方々がアプリのテストを行えるよう、可能な限り早期に macOS Executor で Xcode のベータ版をリリースできるよう尽力します。
 
-ベータ イメージについては、安定版イメージ (更新が停止されたもの) と異なり、GM (安定版) イメージが公開され更新が停止するまでは、新規リリースのたびに既存のイメージが上書きされます。 現在ベータ版となっているバージョンの Xcode イメージを使用している場合、Apple が新しい Xcode ベータ版をリリースした場合に予告なく変更されることがあります。 This can include breaking changes in Xcode and associated tooling which are beyond our control.
+ベータ イメージについては、安定版イメージ (更新が停止されたもの) と異なり、GM (安定版) イメージが公開され更新が停止するまでは、新規リリースのたびに既存のイメージが上書きされます。 現在ベータ版となっているバージョンの Xcode イメージを使用している場合、Apple が新しい Xcode ベータ版をリリースした場合に予告なく変更されることがあります。 これには、CircleCI では制御できない Xcode および関連ツールへの互換性を損なう変更が含まれる場合があります。
 
 ベータ版イメージに関する CircleCI のお客様サポート ポリシーについては、[サポート センターに関するこちらの記事](https://support.circleci.com/hc/ja-jp/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-)をご覧ください。
 
 ## Xcode イメージのリリース
 {: #xcode-image-releases }
 
-We closely track and monitor Apple’s Xcode releases and always aim to release new images as quickly as possible. We can not provide an official SLA turnaround time for this, as it is highly dependent on any changes made in Xcode and macOS.
+CircleCI では Apple の Xcode のリリース状況を注意深く追跡し、常に可能な限り迅速に新しいイメージをリリースするよう努めています。 この作業は Xcode と macOS で行われる変更に大きく依存するため、リリースについて SLA として所要時間を公式に定めてはおりません。
 
-New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes, and will be added to the table of [Xcode versions in the documentation]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions).
+新しいイメージがリリースされた際は必ず、[CircleCI の Discuss サイト](https://discuss.circleci.com/c/announcements/39)でリリース告知により通知します。 また、[こちらの Xcode バージョンの表]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions)に追記します。
 
 ## macOS のバージョン
 {: #macos-versions }
@@ -89,4 +89,4 @@ macOS の新しいメジャー バージョン (`11.0` や `12.0` など) がリ
 ## 例外
 {: #exceptions }
 
-At any time, we reserve the right to work outside of the information in this document if the circumstances require. In the event that we are required to make an exception to the policy, we will aim to provide as much notice and clarity as possible. こうした場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)に告知を掲載するとともに、可能であればメールなどでの通知も行います。
+CircleCI は、どのような場合でも、状況に応じて本記事の説明内容とは異なる措置を講じる権利を保有しています。 本ポリシーの例外を適用する必要がある場合、可能な限り十分な告知を行い、透明性を維持するよう努めます。 こうした場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)に告知を掲載するとともに、可能であればメールなどでの通知も行います。
