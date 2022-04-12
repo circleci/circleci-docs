@@ -680,6 +680,9 @@ ja:
         - name: Workflows
           link: ja/2.0/workflows/
           i18n_name: ワークフロー
+        - name: Jobs and Steps
+          link: ja/2.0/jobs-steps/
+          i18n_name: ジョブとステップ
         - name: Workspaces
           link: ja/2.0/workspaces/
           i18n_name: ワークスペース
@@ -907,9 +910,6 @@ ja:
         - name: Author an Orb
           link: ja/2.0/orb-author/
           i18n_name: Orbs オーサリング
-        - name: Author an Orb for Server
-          link: ja/2.0/orb-author-server/
-          i18n_name: サーバー Orbs オーサリング
         - name: Orb Author FAQ
           link: ja/2.0/orb-author-faq/
           i18n_name: Orbs オーサリング FAQ
