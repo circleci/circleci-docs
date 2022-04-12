@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: PHP"
 short-title: "PHP"
-description: "Building and Testing with PHP on CircleCI"
+description: "CircleCI での PHP を使用したビルドとテスト"
 categories:
   - language-guides
 order: 6
@@ -20,12 +20,12 @@ version:
 ## クイックスタート: デモ用の PHP Laravel リファレンス プロジェクト
 CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
 
-We maintain a reference PHP Laravel project to show how to build PHP on CircleCI:
+CircleCI での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">GitHub 上の PHP Laravel デモ プロジェクト</a>
 - [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
 
-このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 This file shows best practice for using CircleCI with PHP projects.
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、PHP プロジェクトで CircleCI を使用するためのベスト プラクティスを示しています。
 
 ## CircleCI のビルド済み Docker イメージ
 セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
@@ -112,7 +112,7 @@ version: 2
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 We use the [CircleCI-provided PHP docker image]({{site.baseurl}}/2.0/circleci-images/#php) which includes browser tooling.
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 ここでは、ブラウザー ツールを含む [CircleCI 提供の PHP Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#php)を使用します。
 
 ```yaml
 version: 2.1
@@ -182,7 +182,7 @@ jobs:
 
 ---
 
-完了です。 You just set up CircleCI for a PHP app. CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}を参照してください。
+完了です。 これで PHP アプリケーション用に CircleCI をセットアップできました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}を参照してください。
 
 ## 関連項目
 {: #see-also }
@@ -192,4 +192,4 @@ jobs:
 
 - その他のパブリック PHP プロジェクトの構成例については、「[CircleCI 設定ファイルのサンプル]({{ site.baseurl }}/ja/2.0/examples/)」を参照してください。
 
-- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- CircleCI を初めて使用する場合は、[プロジェクトの詳細]({{ site.baseurl }}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
