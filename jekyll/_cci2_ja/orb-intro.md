@@ -127,7 +127,7 @@ orbs:
 {: #node-example }
 {:.no_toc}
 
-Node Orb には、[`install-packages`](https://circleci.com/developer/ja/orbs/orb/circleci/node#commands-install-packages) という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。 To use the `install-packages` command, reference it in a job's [steps]({{site.baseurl}}/2.0/configuration-reference/#steps).
+Node Orb には、[`install-packages`](https://circleci.com/developer/ja/orbs/orb/circleci/node#commands-install-packages) という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。 `install-packages` コマンドを使用するには、ジョブの [steps](https://circleci.com/ja/docs/2.0/configuration-reference/#steps) にこのコマンドを記述します。
 
 ```yaml
 version: 2.1
