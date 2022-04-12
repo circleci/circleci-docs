@@ -16,7 +16,7 @@ version:
 Orb と 関連するユースケースについては、 https://circleci.com/docs/ja/2.0/orb-intro/#quick-start[Orb に関するドキュメント] を参照してください。
 
 
-Orb の作成に関する情報は、https://circleci.com/docs/ja/2.0/orb-author-intro/[Orb オーサリングの概要] を参照してください。
+Orb の作成に関する情報は、 https://circleci.com/docs/ja/2.0/orb-author-intro/[Orb オーサリングの概要] を参照してください。
 
 toc::[]
 
