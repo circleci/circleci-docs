@@ -17,16 +17,16 @@ version:
 {: #overview }
 {:.no_toc}
 
-This document outlines the CircleCI Xcode release, update, and deprecation policy. CircleCI では、ベータ版イメージを含め、新しいイメージのリリースを切れ目なくスピーディかつ円滑に行うため、Xcode イメージについて明確なポリシーを定めています。
+ここでは、Xcode のリリース、更新、サポート終了に関する CircleCI のポリシーについて説明します。 CircleCI では、ベータ版イメージを含め、新しいイメージのリリースを切れ目なくスピーディかつ円滑に行うため、Xcode イメージについて明確なポリシーを定めています。
 
-You will find the most up to date information on these images on the [CircleCI Developer Hub](https://circleci.com/developer/machine/image/macos) macOS machine image page.
+これらのイメージに関する最新情報については、[CircleCI Developer Hub](https://circleci.com/developer/machine/image/macos) の、macOS マシンイメージのページをご覧ください。
 
 ## Xcode イメージの維持およびサポート終了
 {: #xcode-image-retention-and-deprecation }
 
 CircleCI では、Xcode のメジャー バージョンを 4 つまで維持し、新しいバージョンについては複数のイメージを提供することを目標とします。
 
-For example, with Xcode 13 being the latest major version being released:
+例えば、Xcode 13 が最新のリリース済みメジャー バージョンである執筆時点では、次のようになります。
 
 | Xcode のバージョン | 対応                                                            |
 | ------------ | ------------------------------------------------------------- |
@@ -41,14 +41,14 @@ For example, with Xcode 13 being the latest major version being released:
 
 | Xcode のバージョン | 対応                                                                                       |
 | ------------ | ---------------------------------------------------------------------------------------- |
-| Xcode 14     | ベータ イメージ ポリシーに従いベータ イメージをリリースおよび更新します                                                    |
+| Xcode 14     | ベータ版イメージ ポリシーに従いベータ版イメージをリリースおよび更新します。                                                   |
 | Xcode 13     | すべての `major.minor` バージョンについて最新のパッチ バージョンを維持します                                           |
 | Xcode 12     | ベータ期間中はすべての `major.minor` バージョンについて最新のパッチ バージョンを維持し、Xcode 14 のリリース サイクル開始後はサポート終了の対象とします |
 | Xcode 11     | Xcode 14 の GM 版がリリースされ次第、最終リリースを除くすべてのイメージをサポート終了対象とします                                  |
 | Xcode 10     | Xcode 14 の GM 版がリリースされ次第、サポート終了対象とし、削除します                                                |
 {: class="table table-striped"}
 
-特定のイメージがサポート終了対象および削除対象となった場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)でお知らせするとともに、最近実行されたジョブでいずれかの廃止対象イメージをリクエストした開発者の方々にメールで通知します。 We will always aim to provide four weeks' notice.
+イメージがサポート終了対象および削除対象となった場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)で告知し、最近実行したジョブでサポート終了対象イメージをリクエストした開発者の方々にはメールでも通知を行います。 CircleCI では、廃止の 4 週間前に通知することを目標とします。
 
 We will never automatically redirect requests for images to different `major.minor` versions, so when one of these images is removed, jobs will start to fail if the `.circleci/config.yml` has not been updated.
 
