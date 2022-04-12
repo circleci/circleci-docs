@@ -17,7 +17,7 @@ CircleCI に組み込まれているセキュリティ機能と、関連する�
 toc::[]
 
 == 概要
-Security is our top priority at CircleCI. We are proactive and we act on security issues immediately. セキュリティに関する問題が発生した場合には、CircleCI セキュリティ チームの GPG キー (ID: 0x4013DDA7、フィンガープリント: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、security@circleci.com まで暗号化メッセージをお送りください。
+CircleCI では、セキュリティを最優先時事項に位置付けています。 セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 セキュリティに関する問題が発生した場合には、CircleCI セキュリティ チームの GPG キー (ID: 0x4013DDA7、フィンガープリント: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、security@circleci.com まで暗号化メッセージをお送りください。
 
 == 暗号化
 CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 設定を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
