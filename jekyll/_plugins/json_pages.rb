@@ -1,4 +1,4 @@
-def render_json(document, site)
+def doc_to_json(document, site)
   puts 'processing json for: ' + document.relative_path
 
   # compile data + content
@@ -6,7 +6,7 @@ def render_json(document, site)
   output['content'] = document.content
 
   # get output path
-  jsonPath = site.source + '/../jekyll_json/'
+  jsonPath = site.source + '/../json/pages/'
   docExt = document.output_ext
   jsonFile = document.relative_path.gsub(document.extname, '.json')
   fullPath = jsonPath + jsonFile
@@ -21,5 +21,5 @@ def render_json(document, site)
 end
 
 Jekyll::Hooks.register :documents, :post_render do |doc|
-  render_json(doc, doc.site)
+  doc_to_json(doc, doc.site)
 end
