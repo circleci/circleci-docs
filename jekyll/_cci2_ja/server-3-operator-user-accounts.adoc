@@ -22,9 +22,9 @@ toc::[]
 
 GitHub の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings.
-. Select *System Settings* from the Admin Settings menu.
-. Set *Suspend New Users* to *True*.
+. CircleCI の [Admin Settings (管理者設定)] に移動します。
+. [Admin Settings (管理者設定)] メニューから *[System Settings (システム設定)]* を選択します。
+. *[Suspend New Users (新規ユーザーの停止)]* を *[true (有効)]* に設定します。
 
 ### アクティブなアカウント
 When an account is no longer required, you can suspend the account. It will no longer be active and will not count against your license quota. アカウントを停止するには、以下の手順を行います。
