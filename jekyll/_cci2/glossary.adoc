@@ -65,7 +65,7 @@ The owner of the team's VCS organization.
 
 == Pipeline
 
-A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.ym.' file. _Pipelines are not available on CircleCI server v2.x._
+A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.yml.' file. _Pipelines are not available on CircleCI server v2.x._
 
 == Primary Container
 
