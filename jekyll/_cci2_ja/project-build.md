@@ -16,7 +16,7 @@ version:
 ## 概要
 {: #overview }
 
-After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{site.baseurl}}/2.0/concept/#projects) to circleci.com, every code change triggers your project's [pipeline]({{site.baseurl}}/2.0/concepts/#pipelines). パイプラインとは、CircleCI を使用するプロジェクトで作業をトリガーする際に実行されるすべてのワークフローを含むすべての設定を指す言葉です。 `.circleci/config.yml` ファイルの全体が 1 つのパイプラインによって実行されます。 Jobs run in clean containers or virtual machines (VMs) configured to the requirements set out in your configuration file.
+GitHub または Bitbucket 上のソフトウェアリポジトリが承認され、[プロジェクト]({{site.baseurl}}/2.0/glossary/#projects)として circleci.com に追加された後は、コードを変更するたびに、プロジェクトの[パイプライン]({{site.baseurl}}/2.0/concepts/#pipelines)がトリガーされます。 パイプラインとは、CircleCI を使用するプロジェクトで作業をトリガーする際に実行されるすべてのワークフローを含むすべての設定を指す言葉です。 `.circleci/config.yml` ファイルの全体が 1 つのパイプラインによって実行されます。 ジョブは、設定ファイルで定義された要件に合わせて構成されたクリーンなコンテナまたは仮想マシン (VM) で実行されます。
 
 ## プロジェクトの追加
 {: #adding-projects }
