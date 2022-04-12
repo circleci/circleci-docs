@@ -79,7 +79,7 @@ order: 1
   us-west-2:ami-ce8c94b7
   ```
 
-* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 See [docs]({{site.baseurl}}/2.0/aws/#planning) for our recommendation(s).
+* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 推奨事項については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/aws/#planning)をご覧ください。
 * ソフトウェア パッケージを以下のバージョンに更新しました。 現時点では、外部処理化された環境において更新の必要はありませんが、v2.18 のリリース時は必須となります。
 
   * Vault 1.1.2
