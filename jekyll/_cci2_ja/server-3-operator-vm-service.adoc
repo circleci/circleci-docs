@@ -55,7 +55,7 @@ WARNING: https://circleci.com/docs/2.0/docker-layer-caching/[Docker レイヤー
 NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
 ==== 認証
-以下のいづれかを実行してください。 IAM キーを選択し、以下を指定します。
+以下のいずれかを実行してください。 IAM キーを選択し、以下を指定します。
 
 * *[Access Key ID (アクセスキー ID)]* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
 +
