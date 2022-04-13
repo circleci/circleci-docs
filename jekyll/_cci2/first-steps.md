@@ -16,10 +16,10 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 
 1. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
     <!-- start: experiment code - #docs-discovery -->
-    <div class="signup-and-try-experiment-block">
+    <div class="signup-and-try-block">
       <div class="signup-buttons">
         <div class="signup-button-wrapper gh-signup-button-wrapper">
-          <a class="track-signup-link gh-signup-button" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
+          <a class="track-signup-link gh-signup-button no-external-icon" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
             <div class="button-text">Sign up with GitHub</div>
           </a>
@@ -32,7 +32,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
           </ul>
         </div>
         <div class="signup-button-wrapper">
-          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button">
+          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
             <div class="button-text">Sign up with BitBucket</div>
           </a>
@@ -52,10 +52,10 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 1. Click **Sign Up with Email**.
 
     <!-- start: experiment code - #docs-discovery -->
-    <div class="signup-and-try-experiment-block">
+    <div class="signup-and-try-block">
       <div class="signup-button-wrapper">
         <div class="signup-buttons">
-        <a href="https://circleci.com/auth/signup/" class="track-signup-link email-signup-button">
+        <a href="https://circleci.com/auth/signup/" class="track-signup-link email-signup-button no-external-icon">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/circleci.svg"/>
             <div class="button-text">Sign Up with Email</div>
         </a>
