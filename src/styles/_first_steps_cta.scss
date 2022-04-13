@@ -3,8 +3,12 @@ $btn-breakpoint: 967px;
 $btn-breakpoint-sm: 360px;
 
 .sign-up-and-try-circleci, .circleci-のユーザー登録 {
-  .signup-and-try-block {
-    display: block;
+  .signup-and-try-experiment-block {
+    display: none;
+    &.show {
+      display: inherit;
+    }
+
     // disable external link tag wrapper in the button blocks
     .external-link-tag-wrapper  {
       width: 100%;

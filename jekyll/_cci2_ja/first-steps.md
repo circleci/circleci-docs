@@ -17,10 +17,10 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 
 1. **[Sign Up with GitHub (GitHub アカウントで登録)]** または **[Sign Up with Bitbucket (Bitbucket アカウントで登録)]** のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。 **注:** GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 [Sign Up (登録)]ボタンの横にあるドロップダウンメニューを使ってリストから[Public Repos Only (パブリックレポジトリのみ)]を選択します。
     <!-- start: experiment code - #docs-discovery -->
-    <div class="signup-and-try-block">
+    <div class="signup-and-try-experiment-block">
       <div class="signup-buttons">
         <div class="signup-button-wrapper gh-signup-button-wrapper">
-          <a class="track-signup-link gh-signup-button no-external-icon" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
+          <a class="track-signup-link gh-signup-button" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
             <div class="button-text">GitHub で登録</div>
           </a>
@@ -33,7 +33,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
           </ul>
         </div>
         <div class="signup-button-wrapper">
-          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
+          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
             <div class="button-text">BitBucket で登録</div>
           </a>
@@ -53,10 +53,10 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 1. **メールアドレスで登録**をクリックします。
 
     <!-- start: experiment code - #docs-discovery -->
-    <div class="signup-and-try-block">
+    <div class="signup-and-try-experiment-block">
       <div class="signup-button-wrapper">
         <div class="signup-buttons">
-        <a href="https://circleci.com/auth/signup/" class="track-signup-link email-signup-button no-external-icon">
+        <a href="https://circleci.com/auth/signup/" class="track-signup-link email-signup-button">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/circleci.svg"/>
             <div class="button-text">メールアドレスで登録</div>
         </a>
