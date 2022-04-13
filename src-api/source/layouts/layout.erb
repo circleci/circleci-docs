@@ -38,13 +38,10 @@ under the License.
     <style>
       <%= Rouge::Themes::MonokaiSublime.render(:scope => '.highlight') %>
     </style>
-    <%= stylesheet_link_tag :screen, media: :screen %>
-    <%= stylesheet_link_tag :print, media: :print %>
-    <% if current_page.data.search %>
-      <%= javascript_include_tag  "all" %>
-    <% else %>
-      <%= javascript_include_tag  "all_nosearch" %>
-    <% end %>
+    <%= inline_js 'all' %>
+    <%= inline_css 'screen' %>
+    <%= inline_css 'print' %>
+
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
