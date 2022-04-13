@@ -57,7 +57,7 @@ workflows:
 ## List of IP address ranges associated with the IP ranges feature
 {: #listofipaddressranges }
 
-*Last updated*: 2021-08-23
+*Last updated*: 2022-04-06
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
@@ -103,6 +103,11 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 
 #### 2021-08-23
 * Added new items to the list of IP address ranges for core services.
+
+The machine-consumable lists have also been updated to reflect the new IP address ranges.
+
+#### 2022-04-06
+* Added and removed new IPs as part of enabling Docker pulls to go through the list of IPs.
 
 The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
