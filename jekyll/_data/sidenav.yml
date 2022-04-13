@@ -235,6 +235,8 @@ en:
       link: 2.0/insights/
     - name: Metrics glossary
       link: 2.0/insights-glossary/
+    - name: Insights Snapshot badge
+      link: 2.0/insights-snapshot-badge/
     - name: Test Insights
       link: 2.0/insights-tests/
     - name: Data Partnerships
