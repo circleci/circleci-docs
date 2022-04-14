@@ -52,8 +52,8 @@ version:
 
 Hello World ドキュメントと`config.yml` ファイルの例を参照して、最初のビルドを構成できます。
 
-| ドキュメント                    | 説明                                                                                                                                                               |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。                                                                                        |
-| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のリンク</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
+| ドキュメント                    | 説明                                                                        |
+| ------------------------- | ------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。 |
+| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のリンク</a> | `config.yml` のサンプル ファイル                                                   |
 {: class="table table-striped"}
