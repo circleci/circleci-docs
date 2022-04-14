@@ -79,7 +79,7 @@ workflows:
 
 The following commentary describes what occurs in the main elements of the sample code:
 
-* *Line 1:* This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
+* *Line 1:* This indicates the config version you are using. `2.1` is the most recent version.
 * *Lines 2-3:* This is the orbs stanza. You are using the `slack: circleci/slack@4.9.3` orb.
 * *Lines 5-7:* This is a job called _notify_, which is executed in a basic Docker container.
 * *Lines 8-9:* This is a step which must be called _slack/notify_ to work with the Slack orb.
@@ -88,6 +88,8 @@ The following commentary describes what occurs in the main elements of the sampl
 * *Line 30:* This references a CircleCI context where you will save your Slack credentials in Step 2.
 
 Now you have a basic `config.yml` file set up, you can connect CircleCI with Slack.
+
+IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. This is because you need to add your Slack credentials in the next step.
 
 == Step Two - Connect CircleCI with Slack
 
@@ -135,11 +137,11 @@ image::slack-orb-add-scope.png[Add an OAuth Scope]
 +
 image::slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
 
-TIP: To receive Slack notifications in a private channel, youl will need to add your Slack app to that channel.
+TIP: To receive Slack notifications in a private channel, you need to add your Slack app to that channel. Open the channel, click the photos of the channel members in the top right-hand corner, then click the *Integrations* tab. From here, you can add an app.
 
 ==== Installing your app
 
-. Once you have created your scopes, click the **Install to Workspace** button.
+. Once you have created your scopes, scroll up to the top of the page and click the **Install to Workspace** button.
 +
 image::slack-orb-install-workspace.png[Install to Workspace]
 +
@@ -240,10 +242,15 @@ The Slack orb includes several notification templates you can use to notify your
 * `success_tagged_deploy_1` - for successful deployments.
 * `basic_on_hold_1` - for on-hold jobs that are awaiting approval.
 
-To use these templates in your job, include the `event` and `template` parameters in the `config.yml` file. For example:
+To use these templates in your job, include the `event` and `template` parameters under `steps` in the `config.yml` file. For example:
 
 [source,yaml]
 ----
+jobs:
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
 - slack/notify:
 	  event: fail
 	  template: basic_fail_1
@@ -252,10 +259,10 @@ To use these templates in your job, include the `event` and `template` parameter
 	  template: success_tagged_deploy_1
 ----
 
-* *Line 2* specifies that the template on the next line is used for failed events.
-* *Line 3* specifies the template to be used, in this case `basic_fail_1`.
-* *Line 4* specifies that the template on the next line is used for pass events.
-* *Line 5* specifies the template to be used, in this case `basic_success_1`.
+* *Line 7* specifies that the template on the next line is used for failed events.
+* *Line 8* specifies the template to be used, in this case `basic_fail_1`.
+* *Line 9* specifies that the template on the next line is used for pass events.
+* *Line 10* specifies the template to be used, in this case `basic_success_1`.
 
 Whereas in Step 1 you used an all-purpose alert, now you have included different steps according to whether the job has passed or failed. The Slack orb triggers the appropriate step.
 
