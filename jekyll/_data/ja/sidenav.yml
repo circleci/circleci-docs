@@ -160,22 +160,23 @@ en:
     icon: icons/sidebar/configure.svg
     children:
       - 
-        name: はじめに
-        children:
-          - 
-            name: 設定ファイルの概要
-          - 
-            name: 設定に関するリファレンス
-          - 
-            name: 設定ファイルの例
-          - 
-          - 
-            name: ダイナミックコンフィグ
-          - 
-            name: CircleCI のローカル CLI の使用
-          - 
+        name: 設定ファイルの概要
       - 
-        name: Orbs
+        name: 設定に関するリファレンス
+      - 
+        name: 設定ファイルの例
+      - 
+      - 
+        name: ダイナミックコンフィグ
+      - 
+        name: CircleCI のローカル CLI の使用
+      - 
+  - 
+    name: Orbs
+    icon: icons/sidebar/orbs.svg
+    children:
+      - 
+        name: Orbs を使う
         children:
           - 
           - 
@@ -205,14 +206,14 @@ en:
         name: メトリクス用語集
         link: 2.0/insights-glossary/
       - 
-        name: テスト インサイト
+        name: テストインサイト
         link: 2.0/insights-tests/
       - 
         name: データの連携
         link: 2.0/insights-partnerships/
       - 
         name: Insights API
-        link: api/v2/
+        link: ja/api/v2/
         hash: tag/Insights
   - 
     name: プロジェクト
@@ -232,7 +233,7 @@ en:
           - 
           - 
           - 
-            name: Using Credits
+            name: Webhook
             link: 2.0/credits/
           - 
             name: クレジットの使用
@@ -243,7 +244,7 @@ en:
             name: セキュリティ機能
           - 
           - 
-            name: サプライチェーン攻撃への対策。
+            name: サプライチェーン攻撃への対策
           - 
             name: IP アドレスの範囲機能
   - 
@@ -269,9 +270,9 @@ en:
       - 
         children:
           - 
-            name: データベースの構成
+            name: データベースの設定
       - 
-        name: テスト
+        name: Testing (テスト)
         children:
           - 
             name: ブラウザー テスト
@@ -281,7 +282,7 @@ en:
           - 
             name: 最適化
           - 
-            name: 設定ファイル入門ガイド
+            name: 設定
           - 
             name: デプロイ
   - 
@@ -292,7 +293,7 @@ en:
         name: デプロイの構成
       - 
       - 
-        name: Upload to Artifactory
+        name: Artifactory へのアップロード
       - 
   - 
     name: 参考情報
@@ -304,7 +305,7 @@ en:
             name: 設定に関するリファレンス
           - 
             name: API v2
-            link: api/v2/
+            link: ja/api/v2/
           - 
           - 
           - 
@@ -330,7 +331,7 @@ en:
             name: What's New in v2.19.x
           - 
           - 
-            name: FAQ
+            name: よくあるご質問
       - 
         name: Server v2.19.x Operations
         children:
@@ -376,7 +377,7 @@ en:
             name: Application Lifecycle
             link: 2.0/server-3-operator-application-lifecycle
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
             link: 2.0/server-3-operator-troubleshooting-and-support
           - 
             name: Backup and Restore
@@ -452,7 +453,7 @@ en:
             link: 2.0/overview/
           - 
             name: Intro to Nomad
-            link: 2.0/nomad/
+            link: 2.0/v.2.18-overview/
           - 
             name: Metrics & Monitoring
             link: 2.0/monitoring/
@@ -505,24 +506,24 @@ en:
             name: メンテナンス
           - 
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
             link: 2.0/server-3-operator-troubleshooting-and-support/
           - 
             name: トラブルシューティング
           - 
           - 
           - 
-            name: 稼働環境
+            name: アーキテクチャ
           - 
           - 
             name: 謝辞
       - 
         name: Server v2.18 PDFs
-        link: 2.0/nomad/
+        link: 2.0/v.2.18-overview/
         children:
           - 
             name: What's New in v2.18
-            link: 2.0/nomad/
+            link: 2.0/v.2.18-overview/
           - 
             name: v2.18.3 Installation Guide
             link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
@@ -560,7 +561,7 @@ en:
     children:
       - 
       - 
-        name: Free
+        name: 無料
       - 
         name: Performance
       - 
@@ -767,10 +768,11 @@ ja:
           - 
             name: Orb オーサリングに関するよくあるご質問
           - 
+            name: Orb Authoring Best Practices
           - 
             name: Orb のテスト手法
           - 
-            name: Orb のパブリッシュプロセス
+            name: Orb のパブリッシュ プロセス
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
