@@ -25,14 +25,6 @@ suggested:
   - 
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-  - 
-    title: ジョブの最大実行時間の更新について
-    link: https://support.circleci.com/hc/ja/articles/4411086979867
-    isExperiment: true
-  - 
-    title: ユーザーの権限の更新について
-    isExperiment: true
-    link: https://support.circleci.com/hc/ja/articles/360048210711
 ---
 
 このドキュメントは、`.circleci/config.yml` ファイルで使用される CircleCI 2.x 設定キーのリファレンスガイドです。
@@ -520,7 +512,7 @@ jobs:
 
 CircleCI では、すべてのお客様がシステムを安定した状態で利用できるよう、リソースクラスごとに同時実行数のソフト制限を設けています。 Performance プランまたは Custom プランを使用していて、特定のリソース クラスで待機時間が発生している場合は、このソフト制限に達している可能性があります。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new) にお客様のアカウントの制限値引き上げを依頼してください。
 
-**注:** 2021 年 9 月 1 日以降に作成され、リソースクラスが指定されていない新しいプロジェクトに対しては、 お客様の組織に適したデフォルト値を決定します。 デフォルトの使用を避けるには、各ジョブの設定でリソースクラスサイズを明示的に指定してください。
+**Note:** If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
 
 **CircleCI Server をオンプレミスでホスティングしている場合は、利用可能なリソースクラスについてシステム管理者に問い合わせてください**。 詳細については、サーバーの管理に関するドキュメントの[Nomad クライアントのシステム要件]({{ site.baseurl }}/2.0/server-ports/#nomad-clients)と[サーバーのリソースクラス]({{ site.baseurl }}/2.0/customizations/#resource-classes)のセクションを参照してください。
 
