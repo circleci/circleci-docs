@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "2.0 プロジェクトのチュートリアル"
 short-title: "プロジェクトのチュートリアル"
-description: "Tutorial and sample config for a Flask project in CircleCI"
+description: "CircleCI  での Flask プロジェクトのチュートリアルと設定例"
 categories:
   - 移行
 order: 3
@@ -17,17 +17,17 @@ version:
 * TOC
 {:toc}
 
-以下の各セクションでは、デモ アプリケーション用にジョブとステップを構成する方法、CircleCI 環境で Selenium と Chrome を使用して単体テストおよびインテグレーション テストを実行する方法、デモ アプリケーションを Heroku にデプロイする方法について詳しく説明します。
+以下の各セクションでは、デモ アプリケーション用にジョブとステップを設定する方法、CircleCI 環境で Selenium と Chrome を使用して単体テストおよびインテグレーション テストを実行する方法、デモ アプリケーションを Heroku にデプロイする方法について詳しく説明します。
 
 デモ アプリケーションのソースは、GitHub の <https://github.com/CircleCI-Public/circleci-demo-python-flask> で入手できます。 また、このサンプル アプリケーションは、<https://circleci-demo-python-flask.herokuapp.com/> で入手できます。
 
-## Basic setup
+## 基本的なセットアップ
 {: #basic-setup }
 {:.no_toc}
 
-通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
+通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリコンテナ*とも呼ばれます。
 
-以下は、CircleCI デモ プロジェクトの最もシンプルな例です。すべての構成が `build` ジョブの下にネストされています。
+以下は、CircleCI デモプロジェクトの最もシンプルな例です。すべての設定が `build` ジョブの下にネストされています。
 
 ```yaml
 version: 2
@@ -43,7 +43,7 @@ jobs:
       - run: pip install -r requirements/dev.txt
 ```
 
-**メモ:** `.circleci/config.yml` 内で[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)を**使用しない**場合、以下を含む `build` という名前のジョブを記述している必要があります。
+**注:** `.circleci/config.yml` 内で[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)を**使用しない**場合、以下を含む `build` という名前のジョブを記述している必要があります。
 
 - 上記の例では `docker` として定義されています。
 - イメージは Docker イメージです。 上記の例では、CircleCI によって提供される Debian Stretch 上の Python 3.6.2 を含み、テストをサポートするためにブラウザーがインストールされています。
@@ -54,7 +54,7 @@ jobs:
 
 ジョブでデータベースなどのサービスが必要な場合は、`docker:` スタンザに `image:` をリストすることで、追加コンテナとしてサービスを実行できます。
 
-Docker イメージは通常、環境変数を使用して構成されています。必要であれば、コンテナに渡す環境変数のセットも利用できます。
+Docker イメージは通常、環境変数を使用して設定されています。必要であれば、コンテナに渡す環境変数のセットも利用できます。
 
 ```yaml
 version: 2
@@ -80,7 +80,7 @@ jobs:
 
 *プライマリ コンテナ*の環境変数は、Flask フレームワークに固有の設定ファイルを設定し、`circleci/postgres:9.6.5-alpine-ram` サービス コンテナで実行されるデータベースを参照するデータベース URL も設定します。 `localhost` では PostgreSQL データベースが使用可能です。
 
-`circleci/postgres:9.6.5-alpine-ram` サービス コンテナが、パスワードが空の `root` という名前のユーザー、および `circle_test` という名前のデータベースで構成されています。
+`circleci/postgres:9.6.5-alpine-ram` サービス コンテナが、パスワードが空の `root` という名前のユーザー、および `circle_test` という名前のデータベースで設定されています。
 
 ## 依存関係のインストール
 {: #installing-dependencies }
@@ -130,7 +130,7 @@ jobs:
 {: #caching-dependencies }
 {:.no_toc}
 
-ジョブを高速化するために、デモの構成では、Python virtualenv を CircleCI キャッシュに置き、`pip install` を実行する前にそのキャッシュを復元します。 先に virtualenv をキャッシュに置いておけば、依存関係が既に存在するため、`pip install` コマンドは依存関係を virtualenv にダウンロードする必要がありません。 virtualenv をキャッシュに保存するには、`pip install` コマンドの後に実行される `save_cache` ステップを使用して実行します。
+ジョブを高速化するために、デモの設定では、Python virtualenv を CircleCI キャッシュに置き、`pip install` を実行する前にそのキャッシュを復元します。 先に virtualenv をキャッシュに置いておけば、依存関係が既に存在するため、`pip install` コマンドは依存関係を virtualenv にダウンロードする必要がありません。 virtualenv をキャッシュに保存するには、`pip install` コマンドの後に実行される `save_cache` ステップを使用して実行します。
 
 {% raw %}
 ```yaml
@@ -180,10 +180,10 @@ jobs:
 
 キャッシュの詳細については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/caching)をご覧ください。
 
-## Installing and running Selenium to automate browser testing
+## Selenium のインストールと実行によるブラウザーテストの自動化
 {: #installing-and-running-selenium-to-automate-browser-testing }
 
-デモ アプリケーションには、Chrome、Selenium、および WebDriver を使用して Web ブラウザー内でアプリケーションのテストを自動化する `tests/test_selenium.py` ファイルが含まれています。 プライマリ イメージには、動作が安定した最新バージョンの Chrome がプリインストールされています (`-browsers` サフィックスで指定されています)。 Selenium はプライマリ イメージに含まれていないため、インストールして実行する必要があります。
+デモ アプリケーションには、Chrome、Selenium、および WebDriver を使用して Web ブラウザー内でアプリケーションのテストを自動化する `tests/test_selenium.py` ファイルが含まれています。 プライマリイメージには、動作が安定した最新バージョンの Chrome がプリインストールされています (`-browsers` サフィックスで指定されています)。 Selenium はプライマリイメージに含まれていないため、インストールして実行する必要があります。
 
 ```yaml
 version: 2
@@ -360,11 +360,11 @@ jobs:
 
 <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}> でデモ アプリケーションをビルドしてデプロイするまでのプロセスを確認できます。
 
-### Additional Heroku configuration
+### Heroku に関するその他の設定
 {: #additional-heroku-configuration }
 {:.no_toc}
 
-デモ アプリケーションは、`config.py` と `manage.py` の設定内容に基づき、Heroku 上で実行されるように構成されています。 この 2 つのファイルはアプリケーションに対して、本番設定を使用し、PostgreSQL データベースを移行し、Heroku 上で SSL を使用するように指示します。
+デモ アプリケーションは、`config.py` と `manage.py` の設定内容に基づき、Heroku 上で実行されるように設定されています。 この 2 つのファイルはアプリケーションに対して、本番設定を使用し、PostgreSQL データベースを移行し、Heroku 上で SSL を使用するように指示します。
 
 Heroku ではその他に以下のファイルが必要です。
 
@@ -372,7 +372,7 @@ Heroku ではその他に以下のファイルが必要です。
 - `runtime.txt`: Heroku に、デフォルト (Python 2.7.13) の代わりに Python 3.6.0 を使用するように指示します。
 - `requirements.txt`: このファイルが存在する場合、Heroku は Python の依存関係を自動的にインストールします。
 
-**Heroku の環境用にアプリケーションを構成するには、[Heroku のドキュメント](https://devcenter.heroku.com/start)を参照してください。**
+**Heroku の環境用にアプリケーションを設定するには、[Heroku のドキュメント](https://devcenter.heroku.com/start)を参照してください。**
 
 実際にデプロイする前に、以下のコマンドを使用して Heroku 上にこのデモ アプリケーションを手動でビルドできます。
 
@@ -385,7 +385,7 @@ heroku run python manage.py deploy
 heroku restart
 ```
 
-## Using workflows to automatically deploy
+## ワークフローを使用したデプロイの自動化
 {: #using-workflows-to-automatically-deploy }
 
 `master` のビルドが成功した後、Heroku に自動的に `master` をデプロイするには、`workflows` セクションを追加して `build` ジョブと `deploy` ジョブをリンクさせます。
