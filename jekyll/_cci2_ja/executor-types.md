@@ -179,7 +179,7 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 | 完全なルート アクセス                                                                           | いいえ              | はい        |
 | 複数データベースの実行                                                                           | ○<sup>(3)</sup>  | はい        |
 | 同じソフトウェアの複数バージョンの実行                                                                   | いいえ              | はい        |
-| [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                      | はい               | はい        |
+| [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)                   | はい               | はい        |
 | 特権コンテナの実行                                                                             | いいえ              | はい        |
 | Docker Compose とボリュームの使用                                                              | いいえ              | はい        |
 | [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | はい               | はい        |
