@@ -184,7 +184,7 @@ executor:
 {:.tab.nodeParam.Default_Executor}
 ```yaml
 description: >
-  使用する Node.js のバージョンを選択します。 Uses CircleCI's highly cached convenience
+  使用する Node.js のバージョンを選択します。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
   images built for CI.
 
   CI 向けにキャッシュを活用して開発された
