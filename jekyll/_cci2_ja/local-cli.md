@@ -37,7 +37,7 @@ CircleCI CLI は、CircleCI の高度で便利なツールの多くを、使い�
 
 このドキュメントでは、CLI ツールのインストールと使用方法について説明します。
 
-**Note:** this CLI is not available on CircleCI server v2.x installations but the legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
+**注:** CircleCI Server v2.x のインストール環境では、新しい CLI は利用できませんが、[ 旧バージョンの CLI はご利用いただけます](#using-the-cli-on-circleci-server-v2x)。
 
 * 目次
 {:toc}
@@ -45,9 +45,9 @@ CircleCI CLI は、CircleCI の高度で便利なツールの多くを、使い�
 ## インストール
 {: #installation }
 
-There are multiple installation options for the CircleCI CLI.
+CLI のインストールには複数の方法があります。
 
-**メモ:** 2018 年 10 月以前に CLI をインストールしている場合は、新しい CLI に切り替えるために追加で作業を行う必要があります。 以下の[更新手順に関するセクション](#旧バージョンの-cli-の更新)を参照してください。
+**注:** 2018 年 10 月以前に CLI をインストールしている場合は、新しい CLI に切り替えるために追加作業を行う必要があります。 以下の[更新手順に関するセクション](#updating-the-legacy-cli)を参照してください。
 
 通常、CircleCI CLI のインストールには、以下のいずれかのパッケージ マネージャーを使うことをお勧めします。
 
@@ -72,7 +72,7 @@ macOS で [Homebrew](https://brew.sh/index_ja) を使用している場合は、
 brew install circleci
 ```
 
-**メモ**: Mac 版の Docker を既にインストールしている場合は、`brew install --ignore-dependencies circleci` を使用してください。
+**注:** Mac 版の Docker を既にインストールしている場合は、`brew install --ignore-dependencies circleci` を使用してください。
 
 ### Chocolatey を使用したインストール (Windows)
 {: #install-with-chocolatey-windows }
@@ -98,7 +98,7 @@ CircleCI の CLI ツールは、デフォルトで `/usr/local/bin` ディレク
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
 
-### Manual install
+### 手動でのインストール
 {: #manual-download }
 
 CLI を手動でダウンロードしてインストールする場合は、[GitHub 上のリリース ページ](https://github.com/CircleCI-Public/circleci-cli/releases)をご確認ください。 システム上の特定のパスに CLI をインストールしたいときには、この方法が最適です。
@@ -123,10 +123,10 @@ circleci switch
 
 インストール ディレクトリ `/usr/local/bin` への書き込みアクセス権が付与されていないユーザーがこのコマンドを実行すると、`sudo` を使用するように求められます。
 
-## CLI の構成
+## CLI の設定
 {: #configuring-the-cli }
 
-CLI を使用する前に、[[Personal API Token (パーソナル API トークン)] タブ](https://app.circleci.com/settings/user/tokens)で CircleCI の API トークンを生成する必要があります。 トークンを取得したら、以下を実行して CLI を構成します。
+CLI を使用する前に、[[Personal API Token (パーソナル API トークン)] タブ](https://app.circleci.com/settings/user/tokens)で CircleCI の API トークンを生成する必要があります。 トークンを取得したら、以下を実行して CLI を設定します。
 
 ```shell
 circleci setup
@@ -223,14 +223,14 @@ bar:
 {: #an-example-packed-configyml }
 {:.no_toc}
 
-複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orbs トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードをパブリッシュできるように準備するときに、プロジェクトの CI/CD ワークフローの一部として実行します。
+複数の YAML ソースファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orbs トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードをパブリッシュできるように準備するときに、プロジェクトの CI/CD ワークフローの一部として実行します。
 
 ## 設定ファイルの処理
 {: #processing-a-config }
 
 `circleci config process` を実行すると設定ファイルがバリデーションされますが、同時に、展開されたソースが元の設定ファイルの内容と共に表示されます (Orb を使用している場合に便利)。
 
-Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
+下記の [`node`](https://circleci.com/developer/orbs/orb/circleci/node) を使用する設定を例に考えます。
 
 ```yml
 version: 2.1
@@ -296,19 +296,7 @@ jobs:
         - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-
         - node-deps-{{ arch }}-v1-{{ .Branch }}-
     - run:
-        command: "if [[ ! -z \"\" ]]; then\n  echo \"Running override package installation command:\"\n  \nelse\n  npm ci\nfi\n"
-        name: Installing NPM packages
-        working_directory: ~/project
-    - save_cache:
-        key: node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
-        paths:
-        - ~/.npm
-    - run:
-        command: npm run test
-        name: Run NPM Tests
-        working_directory: ~/project
-workflows:
-  version: 2
+        command: "if [[ !   version: 2
   example-workflow:
     jobs:
     - node/test
@@ -368,7 +356,7 @@ cd circleci-demo-go
 circleci local execute --job build
 ```
 
-上記のコマンドは、_build_ ジョブ全体を実行します (ローカルで実行できるのはジョブのみであり、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
+上記のコマンドは、_ビルド_ ジョブ全体を実行します (ローカルで実行できるのはジョブのみであり、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
 
 
 ### ローカルでのジョブ実行時の制限事項
@@ -387,7 +375,7 @@ circleci local execute --job build
 
 **ワークフロー**
 
-CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一の **jobs** (ワークフローを構成する一要素) しか実行できません。
+CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一の **ジョブ** (ワークフローを構成する一要素) しか実行できません。
 
 **キャッシュとオンライン限定コマンド**
 
@@ -404,10 +392,10 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 
 CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための[テストの分割](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)にも使用できます。
 
-## Using the CLI on CircleCI server v2.x
+## CircleCI Server v2.x での CLI の使用
 {: #using-the-cli-on-circleci-server-v2-x }
 
-Currently, only the legacy CircleCI CLI is available to run on server v2.x. installations of CircleCI. macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
+現在、CircleCI Server v2.x. 上で実行できるのは、旧バージョンの CircleCI CLI のみです。 macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
 
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
 2. 以下のコマンドを実行して、CLI をインストールします。
@@ -433,9 +421,9 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 これらは CLI の "サブコマンド" であり、以下のように実行されます。
 
 ```shell
-circleci context list
+circleci context create
 
-# 以下が返されます
+# Returns the following:
 List all contexts
 
 Usage:
