@@ -36,8 +36,6 @@ IP アドレスに基づくアクセス制御は、以下のようなユース �
 
 これまで、静的 IP アドレスを構成および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能であれば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
 
-この機能により、_ジョブの実行中_のトラフィックは、定義されたいずれかの IP アドレスのみを経由するようになります。 ただし、ジョブの実行が開始される前に発生するステップのトラフィックは、定義された IP アドレスを経由しません。  たとえば、Docker イメージのプルが_ジョブの実行_前に行われる場合、そのトラフィックは定義された IP アドレス範囲を経由しません。
-
 ## IP アドレスの範囲機能を使用した設定ファイルの例
 {: #exampleconfiguration }
 
@@ -59,7 +57,7 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*最終更新*: 2021 年 8 月 23 日
+*Last updated*: 2022-04-06
 
 IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
@@ -105,6 +103,11 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 
 #### 2021-08-23
 * コアサービス用 IP アドレスリストに新しいアドレスが追加されました。
+
+マシン用のリストもアップデートされ、これらの新しい IP アドレスが反映されました。
+
+#### 2022-04-06
+* Added and removed new IPs as part of enabling Docker pulls to go through the list of IPs.
 
 マシン用のリストもアップデートされ、これらの新しい IP アドレスが反映されました。
 
@@ -176,4 +179,3 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 
 - 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
 - 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
-- ジョブの IP アドレスの範囲機能を有効にし、 コンテンツ デリバリー ネットワーク (CDN)、[ Fastly ](https://www.fastly.com/)がホストする宛先に何かをプッシュした場合、発信ジョブのトラフィックは上記の明確に定義された IP アドレスを経由してルーティング**されません **。 代わりに、 IP アドレスは、 us-east-1 または us-east-2 領域で AWS が 使用するアドレスになります。 これは AWS と Fastly 間で確認されている既知の問題であり、 CircleCI は解決に取り組んでいます。
