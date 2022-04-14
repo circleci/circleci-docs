@@ -60,6 +60,12 @@ sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
 ```
 
+Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+
+```shell
+echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+```
+
 === CentOS/RHEL
 
 ```shell
@@ -67,6 +73,12 @@ id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
 
 sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
+```
+
+Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+
+```shell
+echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
 == Configure SELinux policy (RHEL 8)
