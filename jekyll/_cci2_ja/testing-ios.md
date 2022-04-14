@@ -46,7 +46,7 @@ Xcode の次回安定版リリースよりも前に開発者の方々がアプ�
 
 Apple は、今回のリリースで Intel (`x86_64` ) と Apple シリコン(`arm64`)の両方のツールチェーンを提供しているため、 Xcode`12.0.0`以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコン バイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
-CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple シリコン アプリケーションをネイティブで実行またはテストすることは現在不可能です。 アプリケーションをローカルでテストするには、バイナリを [アーティファクト](https://circleci.com/docs/ja/2.0/artifacts/) としてエクスポートする必要があります。 または、
+CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple シリコン アプリケーションをネイティブで実行またはテストすることは現在不可能です。 アプリケーションをローカルでテストするには、バイナリを [アーティファクト]({{site.baseurl}}/2.0/artifacts/) としてエクスポートする必要があります。 または、
  CircleCI のランナーを使用して、 Apple シリコン上でネイティブにジョブを実行することもできます。</p> 
 
 
@@ -87,7 +87,7 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
 
 {: #getting-started }
 
-CircleCI アプリケーションの** [Add Projects (プロジェクトの追加)] **ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。
+[CircleCI Web アプリ](https://app.circleci.com/) の **Projects** ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。
 
 CircleCI でのアプリケーションのビルドと署名には [fastlane](https://fastlane.tools) を使用することを強くお勧めします。 fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
 
@@ -799,7 +799,7 @@ React Native プロジェクトは、CircleCI  上で `macos` および `docker`
 
 {: #using-multiple-executor-types-macos-docker }
 
-同じワークフロー内で、複数の [Executor タイプ](https://circleci.com/ja/docs/2.0/executor-types/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/docs/2.0/executor-types/) を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 
 

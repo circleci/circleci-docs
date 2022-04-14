@@ -35,9 +35,9 @@ suggested:
 
 CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、設定において各レベルで制御することができます。
 
-プライベート プロジェクト全体で使用する**プライベート キー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで[Project Settings (プロジェクト設定)] の [[Environment Variables (環境変数)] ページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
+非公開のプロジェクト全体で使用する**プライベートキー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで[Project Settings (プロジェクト設定)] の [[Environment Variables (環境変数)] のページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
 
-プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、「[オープンソース プロジェクトの構築]({{site.baseurl}}/2.0/oss/)」ページを参照してください。
+プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、[オープンソースプロジェクトの構築]({{site.baseurl}}/2.0/oss/)のページを参照してください。
 
 [[環境変数へのアクセスをさらに制限する]](#setting-an-environment-variable-in-a-context)には、コンテキストを使用してください。 CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 コンテキストを使用して環境変数へのアクセスを制御する方法について、詳細は「[コンテキストの制限]({{site.baseurl}}/ja/2.0/contexts/#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E5%88%B6%E9%99%90)」を参照してください。
 
@@ -328,7 +328,7 @@ jobs:
 ## コンテキストでの環境変数の設定
 {: #setting-an-environment-variable-in-a-context }
 
-1. CircleCI アプリケーションで、左のナビゲーションにあるリンクをクリックして、[Organization Settings (組織設定)] に移動します。
+1. CircleCI Web アプリで、左のナビゲーションにあるリンクをクリックして、[Organization Settings (組織の設定)] に移動します。
 
     ![コンテキスト]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -365,12 +365,12 @@ jobs:
 ## プロジェクトでの環境変数の設定
 {: #setting-an-environment-variable-in-a-project }
 
-1. CircleCI アプリケーションで、プロジェクトを選択し [Pipelines (パイプライン)] ページにある歯車アイコンをクリックするか、他のページで 3 つの点をクリックして、プロジェクトの設定に移動します。
+1. CircleCI Web アプリで、プロジェクトの設定に移動します。 以下の 2 つの方法があります。: サイドナビゲーションの**Projects** に移動し、プロジェクトの行の省略符号ボタンをクリックするか、プロジェクトの各**Pipelines** のページの **Project Settings** ボタンをクリックします。
 
     ![環境変数]({{site.baseurl}}/assets/img/docs/project-settings-env-var-v2.png)
 
-2. [Environment Variables (環境変数)] をクリックします。
-3. [Add Variable (変数の追加)] ボタンをクリックして新しい変数を追加し、名前と値を入力します。
+2. サイドナビゲーションの **Environment Variables** をクリックします。
+3. **Add Variable** をクリックして新しい環境変数の名前と値を入力します。
 4. 以下のように `.circleci/config.yml` で、新しい環境変数を使用します。
 
 ```yaml
@@ -474,7 +474,7 @@ $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdi
 Login Succeeded
 ```
 
-**注:** すべてのコマンド ライン プログラムが `docker` と同じ方法で認証情報を受け取るわけではありません。
+**注:** すべてのコマンドラインプログラムが `docker` と同じ方法で認証情報を受け取るわけではありません。
 
 ## API v2 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v2 }
@@ -494,9 +494,9 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-**重要:** パイプライン パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/ja/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/ja/2.0/glossary/#context)で確認できます。
+**重要:** パイプラインパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/ja/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/ja/2.0/glossary/#context)で確認できます。
 
-詳細については、「[パイプライン変数]({{site.baseurl}}/ja/2.0/pipeline-variables/)」を参照してください。
+詳細については、[パイプラインの値とパラメーター]({{site.baseurl}}/ja/2.0/pipeline-variables/)のガイドを参照してください。
 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }

@@ -73,9 +73,9 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-これらの環境変数の設定方法の詳細については、[環境変数に関するドキュメント](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
+これらの環境変数の設定方法の詳細については、[環境変数の使用]({{site.baseurl}}/2.0/env-vars/)のページを参照してください。
 
-**注意: **このサンプルで使用されている `CIRCLE_SHA1` は組み込まれているため、いつでも使用できます。
+**注: **このサンプルで使用されている `CIRCLE_SHA1` は組み込まれており、いつでも使用できます。
 
 ### サービスの更新のビルド、プッシュ、およびデプロイ
 {: #build-push-and-deploy-a-service-update }
@@ -150,7 +150,7 @@ workflows:
       - verify-deployment
 ```
 
-この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 イメージを設定して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples)を参照してください。
+この例は、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた[タスク定義](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、このリビジョンがデプロイされたかどうかを_検証_する方法を示しています。 イメージを設定して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル]({{site.baseurl}}/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples)を参照してください。
 
 Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
 
@@ -167,7 +167,7 @@ Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化し�
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
-これらの環境変数の設定方法の詳細については、[環境変数の使用](https://circleci.com/ja/docs/2.0/env-vars/)を参照してください。
+これらの環境変数の設定方法の詳細については、[環境変数の使用]({{site.baseurl}}/2.0/env-vars/)のページを参照してください。
 
 ### クラスタの作成と削除
 {: #creating-and-deleting-clusters }
@@ -389,7 +389,7 @@ workflows:
 
 Slack は、リアルタイム コラボレーション アプリケーションです。 チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
 
-### 承認待ちの状態をSlackチャンネルに通知する
+### 承認待ちの状態を Slack チャンネルに通知する
 {: #notifying-a-slack-channel-of-pending-approval }
 
 [CircleCI Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack) を使用すると、さまざまな通知やメッセージを作成して必要な受信者に配信できます。 その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
@@ -444,7 +444,7 @@ workflows:
       - build
 ```
 
-この例では、 Slack Orb の`notify`と以下のパラメーターを使用してカスタム通知が作成されています。
+この例では、 Slack Orb の `notify` と以下のパラメーターを使用してカスタム通知が作成されています。
 
 1. メッセージ テキストの `color` を指定します。
 2. メッセージの受信者 (`mentions`) を指定します。
@@ -527,7 +527,7 @@ workflows:
       - report
 ```
 
-この `action `パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build`されます。 次に、 API v2 の [新しいパイプラインのトリガ ]({{ site.baseurl }}/api/v2/#operation/triggerPipeline)エンドポイントを使って別のワークフローを選択するために、`action` に別の値を指定する例を示します。この例では、`report` という名前のワークフローが実行されます。 [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api)をご自身の値に置き換えてください。
+この `action `パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build`されます。 次に、API v2 の [新しいパイプラインのトリガ ]({{ site.baseurl }}/api/v2/#operation/triggerPipeline)エンドポイントを使って別のワークフローを選択するために、`action` に別の値を指定する例を示します。この例では、`report` という名前のワークフローが実行されます。 [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api)をご自身の値に置き換えてください。
 
 ```shell
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -539,7 +539,7 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 
 API v2 エンドポイントに使用に関する詳細は、[API Reference]({{ site.baseurl }}/api/v2/) や [API API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request) を参照してください。
 
-## ジョブのステップでの branch-filtering
+## ジョブのステップでのブランチのフィルタリング
 {: #branch-filtering-for-job-steps }
 
 ブランチのフィルタリングは、以前はワークフローでのみ可能でしたが、コンパイル時のロジックステートメントによりジョブのステップでもブランチのフィルタリングが可能です。
@@ -570,12 +570,12 @@ workflows:
       - my-job
 ```
 
-## ダイナミック コンフィグ
+## ダイナミックコンフィグ
 {: #dynamic-configuration }
 
-このセクションでは、[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config)セクションを既にお読みになっていること、 [入門ガイド]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)に記載されている手順が実行済みであることを前提としています。
+このセクションでは、[ダイナミックコンフィグ]({{ site.baseurl }}/2.0/dynamic-config)セクションを既にお読みになっていること、 [入門ガイド]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)に記載されている手順が実行済みであることを前提としています。
 
-以下にダイナミック コンフィグの使用例を示します。
+下記では、ダイナミックコンフィグの使用方法を説明します。
 
 - [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
 - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
@@ -583,7 +583,7 @@ workflows:
 ### 基本的な例
 {: #a-basic-example }
 
-以下は、CircleCI のダイナミック コンフィグ機能の基本的な使用例です。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
+以下は、CircleCI のダイナミックコンフィグ機能を使用した基本的な例です。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
 
 ```yaml
 version: 2.1
@@ -625,9 +625,9 @@ workflows:
     - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
-**注意:パイプラインの設定の一部として、** 1 つの `config.yml` でダイナミック コンフィグの機能を使用して実行できるワークフローの数は 1 つに制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイム トークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
+**注: **パイプラインの設定では、1 つの `config.yml` でダイナミックコンフィグの機能を使用して実行できるワークフローの数は 1 つに制限されています。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイムトークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-`continuation` Orb の内容の詳細については、当該 Orb のソース コードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミック コンフィグの FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
+`continuation` Orb の内容の詳細については、当該 Orb のソースコードを [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) で閲覧することや、 [ダイナミックコンフィグの FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs) を参照することで確認できます。
 
 ### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
@@ -714,8 +714,15 @@ parameters:
 workflows:
   # when pipeline parameter, run-build-service-1-job is true, the
   # build-service-1 job is triggered.
-  <code>build-service-1</code> ジョブ: <code>maven</code> Orb を使用して service1 コードのコンパイルとインストールを行います。
-  テストはスキップします。
+  service-1:
+    when: << pipeline.parameters.run-build-service-1-job >>
+    jobs:
+      - maven/test:
+          name: build-service-1
+          command: 'install -DskipTests'
+          app_src_directory: 'service1'
+  # when pipeline parameter, run-build-service-2-job is true, the
+  # build-service-2 job is triggered.
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
@@ -738,13 +745,13 @@ workflows:
           app_src_directory: 'tests'
 ```
 
-上記の設定ファイルは、以下のように構成されています。
+上記の設定ファイルは、以下のように設定されています。
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
-- `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプライン パラメーターを定義します。
+- `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプラインパラメーターを定義します。
 - `check-updated-files`、`build-service-1`、`build-service-2`、`run-integration-tests` という 4 つのジョブを定義します。
-  - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプライン パラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
+  - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプラインパラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
   - `build-service-1` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
   - `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
   - `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
@@ -818,4 +825,4 @@ workflows:
     - test-16.9.0-macos
 ```
 
-For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/ja/2.0/configuration-reference/#matrix-requires-version-21).
+マトリックスジョブに関する詳細は、[設定のリファレンス]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21)を参照してください。
