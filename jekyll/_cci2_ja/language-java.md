@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Java"
 short-title: "Java"
-description: "CircleCI  での Java を使用したビルドとテスト"
+description: "CircleCI での Java を使用したビルドとテスト"
 categories:
   - language-guides
 order: 4
