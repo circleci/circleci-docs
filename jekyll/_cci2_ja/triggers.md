@@ -26,7 +26,7 @@ CircleCI のデフォルトでは、ユーザーが変更をバージョン管�
 
 ```shell
 curl -u ${CIRCLE_API_USER_TOKEN}: \
-     -d 'build_parameters[CIRCLE_JOB]=deploy_docker' \
+     -d build_parameters[CIRCLE_JOB]=deploy_docker \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
