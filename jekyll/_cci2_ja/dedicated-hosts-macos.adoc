@@ -46,7 +46,6 @@ version:
 
 == macOS 専有ホストリソースを使ったサンプル設定ファイル
 
-```yaml
 # .circleci/config.yml
 version: 2.1
 jobs:
@@ -69,7 +68,6 @@ workflows:
   build-test:
     jobs:
       - build-and-test
-```
 
 == よくあるご質問
 
