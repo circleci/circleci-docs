@@ -618,15 +618,25 @@ ja:
           - 
             name: ワークフロー
           - 
+            name: Orb、ジョブ、ステップ、ワークフロー
           - 
+            name: ワークスペース
           - 
+            name: アーティファクト
           - 
+            name: Docker レイヤーキャッシュ
           - 
+            name: 同時実行
           - 
+            name: 環境変数
           - 
+            name: テストデータの収集
           - 
+            name: SSH を使用したデバッグ
           - 
+            name: 並列実行
           - 
+            name: コンテキスト
           - 
       - 
         name: 最適化
@@ -755,9 +765,12 @@ ja:
             i18n_name: v2.19の新機能
           - 
           - 
+            name: Orb オーサリングに関するよくあるご質問
           - 
           - 
+            name: Orb のテスト手法
           - 
+            name: Orb のパブリッシュプロセス
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
