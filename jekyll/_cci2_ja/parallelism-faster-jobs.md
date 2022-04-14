@@ -298,7 +298,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-[コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
+[コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
