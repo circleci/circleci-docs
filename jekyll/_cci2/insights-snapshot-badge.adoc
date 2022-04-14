@@ -16,7 +16,7 @@ The insights snapshot badge, similar to a <<status-badges#,status badge>> that i
 
 image::insights-snapshot-preview.png[Insights snapshot badge]
 
-The most common use case for the insights snapshot badge is to display <<insights#,insights>> metrics for the deployment workflow on project’s main branch in the README. With that said, the badge can be configured to display insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
+The most common use case for the insights snapshot badge is to display <<insights#,insights>> metrics for the deployment workflow on the project’s main branch in the README. With that said, the badge can be configured to display insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
 
 While commonly placed in a project README, insights Snapshot badgegs can be embedded in any web document. The badge currently displays the following three metrics from the insights dashboard:
 
@@ -36,7 +36,7 @@ You can generate code in the following formats:
 * Image URL
 * Markdown
 * Textile
-* Rdoc
+* RDoc
 * AsciiDoc
 * reStructuredText
 * Pod
