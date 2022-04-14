@@ -29,7 +29,7 @@ version:
 ## `パラメーター` 宣言の使用
 {: #using-the-parameters-declaration }
 
-パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 See the [Pipeline Values and Parameters guide]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
+パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 パイプライン パラメーターの詳細については、[パイプラインの値とパラメーターに関するガイド]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を参照してください。
 
 次の例では、`greeting` という名前のコマンドを宣言し、`to` という名前のパラメーターを使用しています。 `to` パラメーターは、"_Hello_" とユーザーにエコーバックするステップで使用しています。
 
@@ -896,7 +896,7 @@ Executor でパラメーターを使用するには、その Executor の下で�
 
 Executor 内のパラメーターには、`string` 型、`enum` 型、`boolean` 型を使用できます。 デフォルト値は、オプションの `default` キーを使用して指定できます。
 
-#### パラメーター化された Executor を使用したビルドの構成例
+#### パラメーター化された Executor を使用したビルドの設定例
 {: #example-build-configuration-using-a-parameterized-executor }
 {:.no_toc}
 
@@ -1150,4 +1150,4 @@ workflows:
 
 - CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
 - 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
-- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。
+- CircleCI 設定ファイルで使用できるデータベースの設定例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。
