@@ -15,7 +15,7 @@ version:
 ## はじめに
 {: #overview }
 
-開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。 Please note that CircleCI server v2.x only supports a legacy version of the CLI. You can find more information on how to install that [here]({{site.baseurl}}/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x).
+開発作業の大部分をターミナルで行いたいお客様は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作することをお勧めします。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。 CircleCI Server v2.x では、レガシーバージョンの CLI しかサポートしていないのでご注意ください。 インストール方法についての詳細は、[こちら]({{site.baseurl}}/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x)を参照してください。
 
 ## 前提条件
 {: #prerequisites }
@@ -39,20 +39,13 @@ Hub CLI のインストールとセットアップが完了している場合は
 
 ```shell
 cd ~ # navigate to your home directory.
-cd ~ # ホーム ディレクトリに移動します
-mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
-cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
-cd ~ # ホーム ディレクトリに移動します
-mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
-cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
-git init # git リポジトリを作成します
-touch README.md # リポジトリに配置するファイルを作成します
-echo 'Hello World!'
+mkdir foo_ci # create your project in a folder called "foo_ci"
+cd foo_ci # change directories into the new foo_ci folder.
 git init # create a git repository
 touch README.md # Create a file to put in your repository
 echo 'Hello World!' >> README.md
-git add . # コミットするすべてのファイルをステージングします
-git commit -m "Initial commit" # 最初のコミットを実行します
+git add . # Stage every file to commit
+git commit -m "Initial commit" # create your first commit.
 ```
 
 ### Git リポジトリを VCS に接続する
@@ -99,15 +92,15 @@ circleci setup
 CLI に戻って API トークンを貼り付ければセットアップは完了です。
 
 ### 最初の設定ファイルを準備してバリデーションする
-"build" ジョブをローカルで実行してみます。
+{: #setup-and-validate-our-first-config }
 
 ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
 
 ```shell
-cd ~/foo_ci # カレント ディレクトリが foo_ci フォルダーであることを確認します
-mkdir .circleci # ".circleci" という名前のディレクトリを作成します
-cd .circleci # カレント ディレクトリを新しいディレクトリに変更します
-touch config.yml # "config.yml" という名前の YAML ファイルを作成します
+cd ~/foo_ci # Make sure you are still in the foo_ci folder
+mkdir .circleci # create a directory called ".circleci"
+cd .circleci # change directories to the new directory
+touch config.yml # create an YAML file called "config.yml"
 ```
 
 上記のコマンドにより、`.circleci` フォルダーが作成され、そこに設定ファイルが格納されます。
@@ -143,7 +136,7 @@ circleci config validate --help
 ### VCS にプッシュする前にジョブをテストする
 {: #testing-a-job-before-pushing-to-a-vcs }
 
-CircleCI CLI では、コマンド ラインからジョブをローカルでテストできます。 VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
+CircleCI CLI では、コマンドラインからジョブをローカルでテストできます。 VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
 
 "build" ジョブをローカルで実行してみます。
 
@@ -186,8 +179,8 @@ git push
 
 このドキュメントでは、CircleCI CLI ツールの使用を開始するための手順を簡単に説明してきました。 CircleCI CLI は、さらに複雑な機能も提供しています。
 
-- [Orbs](https://circleci.com/ja/orbs/) の作成、表示、バリデーション、パブリッシュ
+- [Orb](https://circleci.com/ja/orbs/) の作成、表示、バリデーション、パブリッシュ
 - CircleCI GraphQL API のクエリ
 - 複雑な設定ファイルのパッケージ化と処理
 
-詳細については、[CircleCI のローカル CLI に関するドキュメント]({{site.baseurl}}/ja/2.0/local-cli)を参照してください。
+詳細については、[CircleCI の CLI に関するドキュメント]({{site.baseurl}}/ja/2.0/local-cli)を参照してください。
