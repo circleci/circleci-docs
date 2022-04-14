@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-[CircleCI 設定ファイル]({{ site.baseurl }}/2.0/configuration-reference/)でシェルスクリプトを使用するうえでのベストプラクティスについて、以下のセクションに沿って説明します。
+[CircleCI 設定ファイル]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
 
 * TOC
 {:toc}
@@ -31,7 +31,7 @@ CircleCI の設定では、シェルスクリプトの記述が必要になる�
 
 [ShellCheck](https://github.com/koalaman/shellcheck) は、シェル スクリプトの静的解析ツールです。bash/sh シェル スクリプトに対して警告と提案を行います。
 
-ShellCheck を `version: 2.1` の設定に追加には、[ShellCheck Orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) の使用が最も簡単な方法です ( 必ず`x.y.z` を有効なバージョンに置き換えてください)。
+ShellCheck を `version: 2.1` の設定に追加するには、[ShellCheck Orb](https://circleci.com/ja/developer/orbs/orb/circleci/shellcheck) の使用が最も簡単な方法です ( 必ず `x.y.z` を有効なバージョンに変更してください)。
 
 ```yaml
 version: 2.1
