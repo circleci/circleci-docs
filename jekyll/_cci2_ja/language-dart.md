@@ -436,7 +436,7 @@ jobs:
 
 - [はじめよう]({{site.baseurl}}/2.0/getting-started/#section=getting-started)
 - [Migrating to CircleCI]({{site.baseurl}}/2.0/migration-intro/#section=getting-started)
-- [依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+- [依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
 - [データベースの構成]({{ site.baseurl }}/2.0/databases/)
 - [Deploying on CircleCI]({{site.baseurl}}/2.0/deployment-integrations/#section=deployment)
 - [コンテキストの使用]({{site.baseurl}}/2.0/contexts/)
