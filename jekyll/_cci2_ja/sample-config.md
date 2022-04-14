@@ -191,35 +191,35 @@ workflows:
 
 {:.tab.basic-sequential.Server_3}
 ```yaml
-version: 2.1
-
-# Define the jobs we want to run for this project
+version: 2
+# このプロジェクトで実行するジョブの定義
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: circleci/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: circleci/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - run: echo "this is the test job"
 
-# Orchestrate our job run sequence
+# ジョブの実行順の指定
 workflows:
+  version: 2
   build_and_test:
     jobs:
       - build
-      - test:
+      - test
           requires:
             - build
 ```
@@ -465,7 +465,7 @@ jobs:
 
   test:
     docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -540,7 +540,7 @@ jobs:
 
   test:
     docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -594,7 +594,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # The primary container is an instance of the first image listed. The job's commands run in this container.
+    # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
       - image: cimg/node:16.13.1
         auth:
