@@ -119,7 +119,7 @@ parameters:
 ### ジョブ
 {: #jobs }
 
-[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps]({{site.baseurl}}/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). また、ジョブは個別に [GitHub Checks]({{site.baseurl}}/2.0/enable-checks/) を介してステータスを返します。
+[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) は、与えられた [Executor]({{site.baseurl}}/2.0/orb-concepts/#executors) 内で実行される一連の[ステップ]({{site.baseurl}}/2.0/configuration-reference/#steps)を定義し、 [ワークフロー]({{site.baseurl}}/2.0/workflows/)を使ってオーケストレーションされます。 また、ジョブは個別に [GitHub Checks]({{site.baseurl}}/2.0/enable-checks/) を介してステータスを返します。
 
 ジョブがある Orb をインポートする際に、ワークフローから直接ジョブを参照することができます。
 
