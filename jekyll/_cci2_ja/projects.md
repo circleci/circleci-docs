@@ -12,13 +12,13 @@ version:
   - Server v2.x
 ---
 
-A CircleCI project shares the name of the associated code repository and is visible on the **Projects** page of the [CircleCI web app](https://app.circleci.com/). Projects are added by using the **Set Up Project** button.
+CircleCI プロジェクトは、関連付けられているコードリポジトリの名前を共有し、[CircleCI Web アプリ](https://app.circleci.com/)の **Projects** のページに表示されます。 プロジェクトは、 **Set Up Project** ボタンを使用して追加します。
 
-On the **Projects** page, you can either set up any project that you are the owner of on your VCS, or follow any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project's status.
+**Projects** のページでは、VCS で所有者になっているプロジェクトをセットアップするか、組織内のプロジェクトをフォローすることで、パイプラインにアクセスし、プロジェクトのステータスに関する[メール通知]({{site.baseurl}}/2.0/notifications/)を受け取ることができます。
 
-## Projects dashboard
+## プロジェクトダッシュボード
 {: #projects-dashboard }
 
-![Project Dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+![プロジェクトダッシュボード]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 A *User* is an individual user within an organization. A *CircleCI user* is anyone who can log in to the CircleCI platform with a username and password. 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーを指します。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
