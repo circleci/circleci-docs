@@ -14,7 +14,7 @@ suggested:
     title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
   - 
-    title: ローカル CLI を使用した設定のバリデーション
+    title: Validate your config using local CLI
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
   - 
     title: Check your CircleCI installation
@@ -30,12 +30,12 @@ suggested:
 CircleCI CLI は、CircleCI の高度で便利なツールの多くを、使い慣れた端末から利用できるコマンドライン インターフェイスです。 CircleCI CLI を使用すると、以下のような作業が行えます。
 
 - CI の設定ファイルのデバッグとバリデーション
-- Run jobs locally (currently unsupported on Windows)
+- ローカルでのジョブの実行 (現在 Windows ではサーポートされていません)
 - CircleCI API のクエリ
-- Create, publish, view and manage orbs
+- Orb の作成、パブリッシュ、表示、管理
 - コンテキストの管理
 
-This document covers the installation and usage of the CircleCI CLI tool.
+このドキュメントでは、CLI ツールのインストールと使用方法について説明します。
 
 **Note:** this CLI is not available on CircleCI server v2.x installations but the legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 
