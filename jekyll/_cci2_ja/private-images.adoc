@@ -50,7 +50,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ----
 
-既にhttps://docs.docker.com/docker-hub/2fa/[2 要素認証を Docker Hub]に設定している場合は、`password`キーの代わりにhttps://docs.docker.com/docker-hub/access-tokens/[パーソナルアクセストークン]を使用することができます。
+既に https://docs.docker.com/docker-hub/2fa/[2 要素認証を Docker Hub] に設定している場合は、`password`キーの代わりに https://docs.docker.com/docker-hub/access-tokens/[ パーソナルアクセストークン]を使用することができます。
 たとえば下記のようにします。
 
 [source,yaml]
