@@ -119,7 +119,7 @@ workflows:
 
 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、プロジェクトの隣にある **[Follow Project (プロジェクトをフォローする)]** ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
-また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。
+これで `config.yml`を最初から作る準備ができました。
 
 ## 設定ファイルの詳細
 {: #config-walkthrough }
@@ -136,17 +136,17 @@ version: 2
 version: 2
 jobs:
   build:
-    # 並列実行が必要ない場合は削除します
+    # Remove if parallelism is not desired
     parallelism: 2
     environment:
-      # OOM (メモリ不足) エラーを回避するように JVM と Gradle を構成します
+      # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
 テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
-また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 Gradleプロセスが終了した後に終了させるため、Gradleデーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
+また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を設定しています。 Gradleプロセスが終了した後に終了させるため、Gradle デーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
 ```yaml
 version: 2
@@ -284,4 +284,4 @@ workflows:
 {:.no_toc}
 
 - デプロイ ターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
-- Java のメモリの問題に対処する方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/ja/2.0/java-oom/)」を参照してください。
+- Java のメモリの問題に対処する方法については、[Java OOM エラーに関するドキュメント]({{ site.baseurl }}/ja/2.0/java-oom/)を参照してください。
