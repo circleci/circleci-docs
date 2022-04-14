@@ -66,8 +66,8 @@ CircleCI のダイナミックコンフィグを使用する際のパイプラ�
 ## 次に読む
 {: #what-to-read-next }
 - クックブック内のサンプル
-  - [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-  - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+  - [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+  - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
 
