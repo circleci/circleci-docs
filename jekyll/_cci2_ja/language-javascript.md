@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルを作成する方法の詳細を説明します。
+ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{site.baseurl}}/2.0/configuration-reference/) ファイルを作成する方法の詳細を説明します。
 
 * 目次
 {:toc}
@@ -78,6 +78,6 @@ Node Orb の `test` コマンドにより、オプションのパラメータを
 {: #see-also }
 {:.no_toc}
 
-- デプロイ ターゲットの構成例については、「[デプロイの構成i]({{site.baseurl}}/ja/2.0/deployment-integrations/)」を参照してください。
+- デプロイターゲットの設定例については、[デプロイ]({{site.baseurl}}/2.0/deployment-integrations/)を参照してください。
 - その他のパブリック JavaScript プロジェクトの設定例については、[設定例]({{site.baseurl}}/2.0/examples/)のページを参照してください。
 - CircleCI を初めて使用する場合は、[プロジェクトの詳細]({{site.baseurl}}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
