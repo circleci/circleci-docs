@@ -53,7 +53,7 @@ workflows:
       - coverage
 ```
 
-## Manual approval
+## 手動による承認
 {: #manual-approval }
 
 ```yml
