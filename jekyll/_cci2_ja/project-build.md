@@ -21,18 +21,18 @@ GitHub または Bitbucket 上のソフトウェアリポジトリが承認さ�
 ## プロジェクトの追加
 {: #adding-projects }
 
-A CircleCI project shares the name of the associated code repository in your [VCS]({{site.baseurl}}/2.0/gh-bb-integration/). Select **Projects** from the CircleCI web app sidebar to enter the projects dashboard, where you can set up and follow any projects you have access to.
+CircleCI のプロジェクトは、お客様の[バージョン管理システム]({{site.baseurl}}/2.0/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects**を選択し、Projects ダッシュボードに入力します。ここでは、アクセス権のある任意のプロジェクトのセットアップやフォローをすることができます。
 
-On the projects dashboard, you can either:
-* Set up any project that you are the owner of in your VCS.
-* Follow any project in your organization to gain access to its pipelines, and to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project's [build status]({{site.baseurl}}/2.0/status/).
+プロジェクトダッシュボードで、以下のいずれかを実行します。
+* VCS で所有者になっているプロジェクトをセットアップする
+* 組織内のプロジェクトをフォローして、パイプラインへのアクセスを取得し、プロジェクトの[ビルドステータス]({{site.baseurl}}/2.0/status/)に関する[メール通知]({{site.baseurl }}/ja/2.0/notifications/)を受け取る
 
-## Projects dashboard
+## プロジェクトダッシュボード
 {: #projects-dashboard }
 
 ![Project Dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-Following a project enables a user to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project [build status]({{site.baseurl}}/2.0/status/) and adds the project to their CircleCI dashboard.
+ユーザーは、プロジェクトをフォローすることで、プロジェクトの[ビルド ステータス]({{site.baseurl}}/2.0/status/)に関する[メール通知]({{ site.baseurl }}/2.0/notifications/)を受け取り、プロジェクトを CircleCI ダッシュボードに追加できます。
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a project. *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
