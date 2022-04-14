@@ -209,7 +209,7 @@ In the CircleCI dashboard:
 +
 image::slack-orb-set-up-project.png[Set up Project]
 +
-* Choose the branch on which you committed your config.yml file
+* Choose the branch on which you committed your `config.yml` file
 +
 image::slack-orb-select-config-file.png[Select your config.yml file]
 +
@@ -229,7 +229,7 @@ image::slack-orb-text-notification.png[Slack text notification]
 
 Although this is a basic alert, you have achieved a lot already:
 
-* Created a `config.yml` with the Slack orb.
+* Created a `.circleci/config.yml` file with the Slack orb.
 * Created a context to store your Slack-related environment variables.
 * Created a Slack app.
 
