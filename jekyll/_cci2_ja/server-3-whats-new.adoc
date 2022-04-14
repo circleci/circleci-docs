@@ -35,7 +35,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 === 既知の問題
 
 * カスタム Docker レジストリから必要に応じて CircleCI Build Agent をプルできるようになりました。 詳細についてはカスタマーサポートにお問い合わせください。
-* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、https://circleci.com/docs/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド]を参照してください。
+* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、 https://circleci.com/docs/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド] を参照してください。
 * Kubernetes v1.16 - v1.23 に対応しました。
 * GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 詳細については、https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[CircleCI Server v3.x のインストールガイド]を参照してください。
 
@@ -65,7 +65,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 * KOTS バージョン 1.65.0 - 1.67.0 で Prometheus が破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないでください。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、 表示されたプライベート IP にアクセスできるようにする必要があります。
-* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 
 == リリース 3.3.1
