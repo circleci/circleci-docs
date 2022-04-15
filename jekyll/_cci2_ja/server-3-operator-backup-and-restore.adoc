@@ -230,7 +230,7 @@ gsutil mb gs://$BUCKET/
 
 === 手順 2 - Velero の権限の設定
 
-CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[[GKE のドキュメント]]を参照してください。
+If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. 詳細については、https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[[GKE のドキュメント]]を参照してください。
 
 . First, set a shell variable for your project ID. それにはまず、次のコマンドを実行して現在の設定を調査し、`gcloud` CLI が正しいプロジェクトを参照していることを確認します。
 +
@@ -303,7 +303,7 @@ gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 
 ==== オプション 1: JSON キー ファイル
 
-サービス アカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 それにはまず、以下のコマンドを実行してキーを作成します。
+サービス アカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 To do this, you first need to create a key:
 [source,bash]
 ----
 gcloud iam service-accounts keys create credentials-velero \
@@ -374,7 +374,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 ////
 == Server 3.x backups with S3-compatible storage
 
-以下の手順では、S3 互換オブジェクトストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
+The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 
 これらの手順は、https://velero.io/docs/v1.6/contributions/minio/[こちら] の Velero ドキュメントを元にしています。
@@ -488,7 +488,7 @@ image::kots-admin-navbar-snapshot-option.png[KOTS Navbar]
 
 === Option 1 - Create a backup with KOTS CLI
 
-バックアップを作成するには、以下を実行します。
+To create the backup, run the following command:
 
 [source,bash]
 ----
