@@ -159,7 +159,7 @@ $ git branch
 
 `circleci orb init` コマンドを実行すると、自動的に `alpha` ブランチに移動し、リポジトリに `.circleci` ディレクトリと `src` ディレクトリが作成されます。
 
-**_例: Orb プロジェクトの構造_**
+**_Example: Orb Project Structure_**
 
 | type                      | name                                                                               |
 | ------------------------- | ---------------------------------------------------------------------------------- |
@@ -271,7 +271,7 @@ View the _[hello.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/
 ```yaml
 description: >
   # ここには、このジョブの目的を記述します。
-  # 短くわかりやすい説明を心がけます。
+  # Descriptions should be short, simple, and clear.
 
 docker:
   - image: cimg/base:current
@@ -359,19 +359,19 @@ With the Orb Development Kit, a fully automated CI and CD pipeline is automatica
 ### Orb の一覧表示
 {: #listing-your-orbs }
 
-CLI を使用して、公開中の Orb を一覧表示します。
+List your available orbs using the CLI:
 
-**[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-**[プライベート]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
+To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace> --private
 ```
 
-`circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。
+For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
 ### Orb のカテゴリ設定
 {: #categorizing-your-orb }
