@@ -104,7 +104,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 #### 2021-08-23
 * コアサービス用 IP アドレスリストに新しいアドレスが追加されました。
 
-マシン用のリストもアップデートされ、これらの新しい IP アドレスが反映されました。
+The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
 #### 2022-04-06
 * Added and removed new IPs as part of enabling Docker pulls to go through the list of IPs.
