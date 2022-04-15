@@ -153,7 +153,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**注: **更新された、または他の Windows シェルツールをインストールすることも可能です。 たとえば、`dotnet` CLI により Powershell Core の最新版をインストールし、ジョブの連続するステップで使用することができます。
+**注:**更新された、または他の Windows シェルツールをインストールすることも可能です。 たとえば、`dotnet` CLI により Powershell Core の最新版をインストールし、ジョブの連続するステップで使用することができます。
 
 ```yaml
 
@@ -204,7 +204,7 @@ jobs:
 
 Windows Executor を使用した例として、少し進んだ (まだ初歩ですが) "hello world" を考えてみましょう。 この[サンプルアプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
-**注: **CircleCI Server で Windows を使用している場合、[CircleCI Server での Windows Executor の使用](#windows-on-server) に記載されているように Orb の使用をマシンイメージに置き換えてください。
+**注:** CircleCI Server で Windows を使用している場合、[CircleCI Server での Windows Executor の使用](#windows-on-server) に記載されているように Orb の使用をマシンイメージに置き換えてください。
 
 設定ファイルの全体は[こちら](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml)で確認してください。 これにはブラウザーと UI のテストが含まれますが、ここでは `hello-world` のワークフローに注目します。
 
@@ -212,7 +212,7 @@ Windows Executor を使用した例として、少し進んだ (まだ初歩で�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/2.0/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/2.0/build-processing/)を利用できます。
 
 ```yaml
 orbs:
@@ -268,7 +268,7 @@ jobs:
           command: .\bin\Release\netcoreapp2.1\win10-x64\publish\circleci-demo-windows.exe
 ```
 
-続いて 2 つのステップを実行します。 1 つは Windows 10 用の実行可能ファイルをビルドし、もう 1 つはその実行可能ファイルをテストします (コンソールに「Hello World」と出力されます)。
+続いて 2 つのステップを実行します。1 つは Windows 10 用の実行可能ファイルをビルドし、もう 1 つはその実行可能ファイルをテストします (コンソールに「Hello World」と出力されます)。
 
 ```yaml
       - store_artifacts:
