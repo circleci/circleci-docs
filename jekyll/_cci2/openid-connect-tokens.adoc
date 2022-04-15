@@ -99,7 +99,7 @@ Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_cr
 
 When asked for the **Provider URL**, enter: `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the ID of your CircleCI organization. Provide the same CircleCI Organization ID for the **Audience**.
 
-Next you will need to create an IAM role. Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs.
+Next, you will need to create an IAM role. Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs.
 
 For the trusted entity, select **Web Identity**, then choose the identity provider that you created earlier. For **Audience**, choose the only option, which is **Add Permissions**. This allows you to specify what your CircleCI jobs can and cannot do. Choose only permissions that your job will need, which is an https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice].
 
