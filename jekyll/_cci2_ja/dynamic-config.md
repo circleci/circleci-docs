@@ -81,14 +81,14 @@ For a basic example on how to use setup workflows for dynamic configuration gene
 
 **A:** If you have special requirements not covered by the continuation orb, you can implement the same functionality in other ways. Refer to the [orb source code](https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source) to learn how the continuation functionality is implemented with the orb.
 
-## 次に読む
+## What to read next
 {: #what-to-read-next }
 - クックブック内のサンプル
-  - [基本的な例]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-  - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+  - [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+  - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
 
-## さらに詳しく
+## Learn More
 {: #learn-more }
 CircleCI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
