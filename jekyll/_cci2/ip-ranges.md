@@ -103,6 +103,7 @@ These are the IP address ranges for core services (used to trigger jobs, exchang
 - 3.210.128.175
 
 ### List of IP address ranges changelog
+{: #list-of-ip-address-ranges-changelog }
 
 #### 2021-08-23
 * Added new items to the list of IP address ranges for core services.
