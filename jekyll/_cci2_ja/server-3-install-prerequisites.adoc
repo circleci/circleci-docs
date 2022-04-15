@@ -133,7 +133,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
 
-* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
+* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
 * クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
 +
 ```shell

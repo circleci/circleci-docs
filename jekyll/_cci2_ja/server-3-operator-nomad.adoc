@@ -52,13 +52,17 @@ kubectl exec -it nomad-server-pod-ID -- nomad status
 
 Nomad クライアントのリストを取得するには、以下のコマンドを実行します。
 
+```shell
 kubectl exec -it nomad-server-pod-ID -- nomad node-status
+```
 
 NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
 
 特定のクライアントの詳細情報を表示するには、そのクライアントで以下のコマンドを実行します。
 
+```shell
 kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
+```
 
 これにより、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
 
