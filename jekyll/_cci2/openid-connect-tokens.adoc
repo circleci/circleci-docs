@@ -33,7 +33,7 @@ workflows:
 
 Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
 
-The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the Organization ID (UUID) that represents your organization.
+The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the Organization ID (universally unique identifier) that represents your organization.
 
 You can find your CircleCI organization ID by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
 
@@ -93,7 +93,7 @@ The following instructions are for:
 
 === Setting up AWS
 
-You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an IAM identity provider and an IAM role in AWS (this is a one time configuration).
+You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an Identity and Access Management(IAM) identity provider, and an IAM role in AWS (this is a one time configuration).
 
 Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. You will need your CircleCI Organization ID, which you can find by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app]. Copy your Organization ID for the next step.
 
