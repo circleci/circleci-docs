@@ -35,7 +35,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 
 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、[オープンソースプロジェクトの構築]({{site.baseurl}}/2.0/oss/)のページを参照してください。
 
-[[環境変数へのアクセスをさらに制限する]](#setting-an-environment-variable-in-a-context)には、コンテキストを使用してください。 CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 コンテキストを使用して環境変数へのアクセスを制御する方法について、詳細は「[コンテキストの制限]({{site.baseurl}}/ja/2.0/contexts/#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E5%88%B6%E9%99%90)」を参照してください。
+[[環境変数へのアクセスをさらに制限する]](#setting-an-environment-variable-in-a-context)には、コンテキストを使用してください。 CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 コンテキストを使用して環境変数へのアクセスを制御する方法について、詳細は「[コンテキストの制限]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)」を参照してください。
 
 ## シークレットのマスキング
 {: #secrets-masking }
