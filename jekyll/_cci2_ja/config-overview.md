@@ -3,7 +3,7 @@ layout: classic-docs
 title: "設定ファイルの概要"
 description: "CircleCI の設定ファイルの概要を説明します。"
 categories:
-  - 設定
+  - configuration
 order: 2
 version:
   - Cloud
