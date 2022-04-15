@@ -76,4 +76,4 @@ Yarn 1.x の例:
 ## 関連項目
 {: #see-also }
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
