@@ -42,7 +42,7 @@ This second configuration file has two main tasks, as the development version of
 
 See the full [test-deploy.yml template here](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml).
 
-## 確認
+## Validation
 {: #validation }
 
 Orb のテストで最も基本的なものは、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュする Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Both of these checks are automatically applied when using the Orb Development Kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. また、ローカル環境において手動で実施することも可能です。
@@ -278,7 +278,7 @@ Similar to how we could use additional steps to test our commands, we can take a
 
 Once you have added new orb features, and created tests that pass your CI, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide for information on releasing production-ready orbs.
 
-## 関連項目
+## See also
 {: #see-also }
 
 - CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)」を参照してください。
