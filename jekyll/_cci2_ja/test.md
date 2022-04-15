@@ -21,17 +21,17 @@ Watch the following video for a detailed tutorial of Docker, iOS, and Android bu
 ## Running, splitting, and debugging tests
 {: #running-splitting-and-debugging-tests }
 
-| ドキュメント                                                      | 説明                                                                                            |
-| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#run">Configuring CircleCI: `run` Step section</a>                                   | Write a job to run your tests.                                                                |
-| [ブラウザー テスト]({{ site.baseurl }}/2.0/browser-testing/)        | Common methods for running and debugging browser tests in CircleCI.                           |
-| <a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a>                                   | How to set up various common test runners in your CircleCI configuration.                     |
-| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                   | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法                                               |
-| [テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) | How to glob and split tests inside a job.                                                     |
-| <a href="{{ site.baseurl }}/2.0/postgres-config/">データベースの設定例</a>                                   | Example configuration files for PostgreSQL and MySQL.                                         |
-| [データベースの設定]({{ site.baseurl }}/2.0/databases/)              | Overview of using service images and basic steps for configuring database tests in CircleCI.  |
-| **Code Signing**                                            |                                                                                               |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                   | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI. |
+| ドキュメント                                                                       | 説明                                                                                            |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/configuration-reference/#run">Configuring CircleCI: `run` Step section</a>                                                    | Write a job to run your tests.                                                                |
+| [Browser Testing]({{ site.baseurl }}/2.0/browser-testing/)                   | Common methods for running and debugging browser tests in CircleCI.                           |
+| <a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a>                                                    | How to set up various common test runners in your CircleCI configuration.                     |
+| <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a>                                                    | How to set up and customize testing for an iOS application with CircleCI.                     |
+| [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) | How to glob and split tests inside a job.                                                     |
+| <a href="{{ site.baseurl }}/2.0/postgres-config/">Database Configuration Examples</a>                                                    | Example configuration files for PostgreSQL and MySQL.                                         |
+| [Configuring Databases]({{ site.baseurl }}/2.0/databases/)                   | Overview of using service images and basic steps for configuring database tests in CircleCI.  |
+| **Code Signing**                                                             |                                                                                               |
+| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a>                                                    | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI. |
 {: class="table table-striped"}
 
 ## デプロイ
@@ -46,6 +46,6 @@ Watch the following video for a detailed tutorial of Docker, iOS, and Android bu
 | <a href="{{ site.baseurl }}/2.0/packagecloud/">packagecloud</a> | Publish packages to packagecloud.                                   |
 {: class="table table-striped"}
 
-このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。
+We’re thrilled to have you here. Happy building!
 
-_CircleCI チーム_
+_The CircleCI Team_
