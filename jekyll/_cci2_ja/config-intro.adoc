@@ -17,7 +17,7 @@ This guide gets you started with the CircleCI `config.yml` file.
 
 toc::[]
 
-== CircleCI 設定ファイル入門
+== Getting started with CircleCI config
 
 This guide covers the following topics:
 
@@ -29,7 +29,7 @@ This guide covers the following topics:
 * How to use workflows to orchestrate your build.
 * How to add approval steps to your workflow.
 
-CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI の設定には YAML 構文が使われます。 See the <<writing-yaml#,Writing YAML>> document for guidance on the basics.
+CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the <<writing-yaml#,Writing YAML>> document for guidance on the basics.
 
 == Part 1: Using the shell
 
@@ -202,7 +202,7 @@ The following commentary describes what occurs in each line of the sample code:
 * *Line 24:* The third job is _Using-Node_.
 * *Lines 25-26:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
 * *Lines 27-31:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
-* *Lines 32-33:* This line creates a Workflow called _Example-Workflow_. ワークフローは、ジョブのリストとその実行順序を定義します。
+* *Lines 32-33:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
 * *Lines 34-35:* These lines specify the first job, _Hello-World_.
 * *Lines 36-38:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a colon, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
 * *Lines 39-41:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_.
@@ -326,7 +326,7 @@ In this example, you have:
 
 Using what you have learned above, you are ready to create some powerful pipelines.
 
-== 関連項目
+== See also
 
 * <<configuration-reference#,Configuring CircleCI>>
 * <<executor-intro#,Executors and Images>>
