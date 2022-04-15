@@ -98,9 +98,9 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb のページ](https:/
 {: #deploy-to-aws-s3-with-20-config }
 {:.no_toc}
 
-1. セキュリティ上のベストプラクティスとして、CircleCI 専用の新しい [IAM ユーザー](https://aws.amazon.com/jp/iam/details/manage-users/)を作成します。
+1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
-2. [AWS アクセスキー](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) を CircleCI に追加します（Access Key ID を `AWS_ACCESS_KEY_ID`という変数に保存します）。 {% include snippets/ja/env-var-or-context.md %}
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/ja/env-var-or-context.md %}
 
 3. `.circleci/config.yml` ファイルで、新しい `deploy` ジョブを作成します。 `deploy` ジョブで、プライマリ コンテナに `awscli` をインストールするステップを追加します。
 
@@ -186,7 +186,7 @@ workflows:
 
      Orb を使って既存の AWS ECS インスタンスを簡単にアップデートすることができます。</p> 
 
-下記のように `build-and-push-image` ジョブを使う場合は、環境変数 `AWS_ECR_ACCOUNT_URL`、`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、`AWS_DEFAULT_REGION` を設定する必要があります。 {% include snippets/ja/env-var-or-context.md %}
+Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. {% include snippets/ja/env-var-or-context.md %}
 
 {% raw %}
 
@@ -781,7 +781,7 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
 1. Heroku アカウントを作成し、[Heroku 入門ガイド](https://devcenter.heroku.com/start)に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
 
-2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数`HEROKU_APP_NAME` と `HEROKU_API_KEY`として追加します。 {% include snippets/env-var-or-context.md %}
+2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
 
 3. `.circleci/config.yml` で、デプロイジョブを作成し、[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types/)を追加します。
 
