@@ -825,4 +825,4 @@ workflows:
     - test-16.9.0-macos
 ```
 
-マトリックスジョブに関する詳細は、[設定のリファレンス]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21)を参照してください。
+マトリックスジョブに関する詳細は、[設定のリファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/#matrix-requires-version-21)を参照してください。
