@@ -12,7 +12,7 @@ page-type: index
 
 <hr class="hidden-xs" />
 
-<div class="row loading-deferred">
+<div class="row">
   <div class="treatment col-xs-12">
     <span id="homepage-guide-links"><h2>設定例と解説</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="New"></span>
     <p>こちらの<a href="{{site.baseurl}}/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>

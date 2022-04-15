@@ -186,7 +186,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
 
 // Stop hiding from GCP PDF:
-endif::[]
+endif::env-gcp[]
 
 // Don't include this section in the AWS PDF:
 
@@ -348,7 +348,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
-endif::[]
+endif::env-aws[]
 
 ////
 
