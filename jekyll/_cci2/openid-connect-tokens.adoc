@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-In jobs using a context, CircleCI provides an OpenID Connect ID token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
+In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (OIDC) token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
 
 toc::[]
 
@@ -33,11 +33,11 @@ workflows:
 
 Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
 
-The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the organization ID (UUID) that represents your organization.
+The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the Organization ID (UUID) that represents your organization.
 
 You can find your CircleCI organization ID by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
 
-The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
+The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the Organization ID.
 
 == Format of the OpenID Connect ID token
 
@@ -81,3 +81,81 @@ The OpenID Connect ID token also contains some https://openid.net/specs/openid-c
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
 |===
+
+
+==  Authenticate jobs with cloud providers
+
+The following instructions are for:
+
+* A one-time configuration of your AWS account to trust CircleCI's OIDC tokens
+* Running a job that uses the OIDC token to interact with AWS
+* Uploading an image to ECR
+
+=== Setting up AWS
+
+You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an IAM identity provider and an IAM role in AWS (this is a one time configuration).
+
+Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. You will need your CircleCI Organization ID, which you can find by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app]. Copy your Organization ID for the next step.
+
+When asked for the **Provider URL**, enter: `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the ID of your CircleCI organization. Provide the same CircleCI Organization ID for the **Audience**.
+
+Next you will need to create an IAM role. Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs.
+
+For the trusted entity, select **Web Identity**, then choose the identity provider that you created earlier. For **Audience**, choose the only option, which is **Add Permissions**. This allows you to specify what your CircleCI jobs can and cannot do. Choose only permissions that your job will need, which is an https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice].
+
+**Note:** You may find it useful to create your own policy.
+
+=== Interacting with AWS from a CircleCI job
+
+Now you are ready to choose the CircleCI jobs in your workflow that you want to receive an OpenID Connect token. Since the OpenID Connect token is only available to jobs that use at least one <<contexts#,context>>, make sure each of the jobs you want to receive an OIDC token uses a context (the context may have no environment variables). 
+
+In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html[AssumeRoleWithWebIdentity]. Have the following information ready:
+
+* AWS region that you want to operate in
+* ARN of the IAM role that you created earlier
+
+Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws sts get-caller-identity`) with AWS, demonstrating that the authentication worked. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
+
+```yml
+jobs:
+  deploy:
+    docker:
+      - image: amazon/aws-cli
+    environment:
+      AWS_DEFAULT_REGION: <your AWS region here>
+      AWS_ROLE_ARN: <your role ARN here>
+    steps:
+      - run:
+        name: authenticate-and-interact
+        command: |
+          # use the OpenID Connect token to obtain AWS credentials
+          read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN \<<< \
+            $(aws sts assume-role-with-web-identity \
+             --role-arn ${AWS_ROLE_ARN} \
+             --role-session-name "CircleCI-${CIRCLE_WORKFLOW_ID}-${CIRCLE_JOB}" \
+             --web-identity-token $CIRCLE_OIDC_TOKEN \
+             --duration-seconds 3600 \
+             --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
+             --output text)
+          export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+          # interact with AWS
+          aws sts get-caller-identity
+```
+
+=== Advanced Usage
+
+You can take advantage of the format of the claims in CircleCI's <<format-of-the-openid-connect-id-token,OIDC token>> to limit what your CircleCI jobs can do in AWS. For example, if certain projects should only be able to access certain AWS resources, you can restrict your IAM role so that only CircleCI jobs in a specific project can assume that role.
+
+To do this, edit your IAM role's trust policy so that only an OIDC token from your chosen project can assume that role. The trust policy determines under what conditions the role can be assumed.
+
+To do this, go to an individual project's page on https://app.circleci.com/[CircleCI web app] and navigate to **Project Settings > Overview** to find your Project ID.
+
+Next, add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `<organization-id>` and your Project ID for `<project-id>`.
+
+```yml
+"StringLike": {
+  "oidc.circleci.com/org/<organization-id>:sub": "org/<organization-id>/project/<project-id>/user/*"
+}
+```
+
+This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the sub claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
