@@ -167,7 +167,7 @@ Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化し�
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
-これらの環境変数の設定方法の詳細については、[環境変数の使用]({{site.baseurl}}/2.0/env-vars/)のページを参照してください。
+これらの環境変数の設定方法の詳細については、[環境変数の使用]({{site.baseurl}}/ja/2.0/env-vars/)のページを参照してください。
 
 ### クラスタの作成と削除
 {: #creating-and-deleting-clusters }
