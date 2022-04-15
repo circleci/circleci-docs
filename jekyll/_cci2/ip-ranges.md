@@ -86,7 +86,10 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 **Note:** Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
 {: class="alert alert-info"}
 
-IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
+## List of IP address ranges for core services
+{: #listofipaddressrangesforcoreservices }
+
+These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
 
 - 18.214.70.5
 - 52.20.166.242
