@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{site.baseurl}}/2.0/configuration-reference/) ファイルを作成する方法の詳細を説明します。
+ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルを作成する方法の詳細を説明します。
 
 * 目次
 {:toc}
