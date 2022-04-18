@@ -1,20 +1,34 @@
 def data_to_json(site)
-  puts 'processing data for: site.data'
+  output = []
 
-  #compile data + content
-  output = {}
-  output['sidenav'] = site.data['sidenav']
+  # add sidenav
+  output = output.push({
+    name: 'sidenav',
+    content: site.data['sidenav']
+  });
 
-  # get output path
-  fullPath = site.source + '/../json/data/site.json'
+  # add sitemap
+  output = output.push({
+    name: 'sitemap',
+    content: site.pages
+  });
 
-  # create directories if they don't exist
-  FileUtils.mkdir_p(File.dirname(fullPath))
+  # process data and write to json files
+  output.each do |item|
+    puts 'processing data for: ' + item[:name]
 
-  # write json file
-  File.open(fullPath, 'w') do |f|
-    f.write(output.to_json)
+    # get output path
+    fullPath = site.source + '/../json/data/' + item[:name] + '.json'
+
+    # create directories if they don't exist
+    FileUtils.mkdir_p(File.dirname(fullPath))
+
+    # write json file
+    File.open(fullPath, 'w') do |f|
+      f.write(item[:content].to_json)
+    end
   end
+
 end
 
 Jekyll::Hooks.register :site, :post_render do |site|
