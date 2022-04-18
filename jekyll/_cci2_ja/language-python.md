@@ -1,5 +1,5 @@
 ---
-layout: classic-docs-experimental
+layout: classic-docs
 title: "CircleCI での Python アプリケーションの構成"
 short-title: "Python"
 description: "CircleCI 上での Python による継続的インテグレーション"
@@ -12,253 +12,188 @@ version:
   - Server v2.x
 ---
 
-ここでは、Python で記述されたサンプル アプリケーションを参考に、CircleCI を構成する方法について説明します。
+{% raw %}
+ここでは、Python で記述されたサンプルアプリケーションを参考に、CircleCI を設定する方法について説明します。
+{% endraw %}
 
-* 目次
-{:toc}
+{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
 
-## 概要
-{: #overview }
+## はじめに
+{: #overview-new }
 
-このガイドでは、Django サンプル アプリケーションを使用しながら、CircleCI 上で Python アプリケーションをビルドする場合の構成のベスト プラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング](https://github.com/CircleCI-Public/circleci-demo-python-django)され、[CircleCI 上でビルド](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}されます。
+このガイドでは、Django サンプルアプリケーションを使って、CircleCI 上で Python アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング]({{site.gh_public_org_url}}/circleci-demo-python-django)され、[CircleCI 上でビルド]({{site.cci_public_org_url}}/circleci-demo-python-django){:rel="nofollow"}されます。
 
-このガイドに沿って、[リポジトリをフォーク](https://help.github.com/articles/fork-a-repo/)し、[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
+このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/circleci-demo-python-django/blob/master/.circleci/config.yml)を書き直してみることをお勧めします。
 
 ## 設定ファイルの詳細
-{: #configuration-walkthrough }
+{: #configuration-walkthrough-new }
 
-すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
+すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
-### バージョンの指定
-{: #specify-a-version }
+### 1. バージョンの指定
+{: #specify-a-version-new }
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
-
+すべての config.yml は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 ```yaml
-version: 2
+version: 2.1
 ```
 
-### ビルド ジョブの作成
-{: #create-a-build-job }
+`2.1` は、CircleCI の最新のバージョンであり、CircleCI のすべての最新機能と改善事項の利用が可能です。
 
-実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
+### 2. Python Orb の使用
+{: #use-the-python-orb }
 
-[`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
+Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python)には、Python プログラミング言語用の一般的な CircleCI タスクの実行に使用できるパッケージ化された CircleCI 設定セットが含まれています。 これは、Linux x86_64、macOS x86_64、Arm64 をサポートしています。 Orb に関する詳細は、[こちら]({{site.baseurl}}/2.0/orb-intro/)をご覧ください。
 
+設定にこの Orb を追加するには、下記を挿入します。
 ```yaml
-version: 2
-jobs:
-  build:  # ワークフローを使用しない実行に必要です
-    working_directory: ~/circleci-demo-python-django
+orbs:
+  python: circleci/python@1.5.0
 ```
 
-### Executor タイプの選択
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
+注: 組織の設定で、サードパーティ製 Orb の使用を有効にする、または組織の CircleCI 管理者にアクセス許可をリクエストする必要がある場合があります。
 
-ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
+### 3. ワークフローの作成
+{: #create-a-workflow }
 
-この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。 ジョブのすべてのコマンドがこのコンテナで実行されます。
+ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を参照して下さい。
 
 ```yaml
-version: 2
+workflows:
+  my_workflow: # ワークフロー名です。お客様のワークフローに合う名前に変更して下さい。
+```
+
+### 4.  ジョブの作成
+{: #create-a-job }
+
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブに関する詳細は、[こちら]({{site.baseurl}}/2.0/configuration-reference/#jobs)を参照して下さい。
+
+CircleCI を使い始めた開発者からよくいただく質問は、ビルド、テスト、デプロイの 3 つの基本タスクの実行に関してです。 このセクションでは必要な設定の各変更について説明します。 CircleCI では公式の Python Orb を使っているため、これらのステップを簡単に実行することができます。
+
+#### a.  アプリのビルドとテスト
+{: #build-and-test-the-app }
+
+このステップでは、Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python) で使われている `python/install-packages` コマンドを使用します。 このコマンドにより自動的に Python 環境が設定され、お客様のプロジェクトに`pip`によりグローバルに、または`poetry` や`pipenv`により`virtualenv`にパッケージがインストールされます。
+```yaml
 jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
+  build_and_test: # 任意の名前をお選びください。
     docker:
-      - image: cimg/python:3.10.1  # primary container for the build job
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-```
-
-**メモ:** `cimg/python:3.10.1` は、CircleCI が提供する[ CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
-
-### 他サービスの追加と環境変数の設定
-{: #add-other-services-and-set-environment-variables }
-
-データベースなどのサービス用の追加コンテナを指定します。 [`environment`]({{ site.baseurl }}/ja/2.0/env-vars/#コンテナでの環境変数の設定) キーを使用して、コンテナ内のすべてのコマンドで使用される環境変数を設定します。
-
-```yaml
-version: 2
-jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: cimg/python:3.10.1 # every job must define an image for the docker executor and subsequent jobs may define a different image.
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: cimg/postgres:14.0 # an example of how to specify a service container
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-```
-
-### 依存関係のインストール
-{: #install-dependencies }
-
-[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
-
-[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソース コードがチェックアウトされます。
-
-[`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#run) ステップを使用して、bash コマンドを実行します。 この例では、[Pipenv](https://pipenv.readthedocs.io/en/latest/) を使用して仮想環境を作成し、Python パッケージをインストールします。
-
-```yaml
-version: 2
-jobs:
-  build:
-    # ...
-    steps:
-      - checkout  # ソース コードを作業ディレクトリにチェックアウトします
-      - run:
-          command: |  # Pipenv を使用して依存関係をインストールします
-            sudo pip install pipenv
-            pipenv install
-```
-
-### 依存関係のキャッシュ
-{: #cache-dependencies }
-
-[`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) ステップを使用して、テスト結果をアーティファクトとして保存します。
-
-[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
-
-実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
-
-{% raw %}
-
-```yaml
-version: 2
-jobs:
-  build:
-    # ...
+      - image: cimg/python:3.10.1
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:  # このステップは依存関係をインストールする*前*に実行します
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - python/install-packages:
+          pkg-manager: pip
       - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          name: テストの実行
+          command: python -m pytest
+      - persist_to_workspace:
+          root: ~/project
           paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
+            - .
 ```
 
-{% endraw %}
+#### b.  アプリのデプロイ
+{: #deploy-the-app }
 
-**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
-
-### テストの実行
-{: #run-tests }
-
-Use the `run` step to run your test suite.
+この例では、 Heroku へのデプロイを選択しています。 これは公式の Heroku Orb を使って、Orb のセクションに新しい文字列を加えることによって実行できます。 Heroku Orb には、アプリケーションを Heroku にデプロイするために使用できる事前にパッケージ化された CircleCI 設定セットが含まれています。 Heroku Orb に関する詳細は、[こちら]({{site.devhub_base_url}}/orbs/orb/circleci/heroku)を参照して下さい。
 
 ```yaml
-version: 2
-jobs:
-  build:
-    # ...
-    steps:
-      # ...
-      - run:
-        command: |
-          pipenv run python manage.py test
+orbs:
+  python: circleci/python@1.5.0
+  heroku: circleci/heroku@1.2.6
 ```
 
-### テスト結果のアップロードおよび保存
-{: #upload-and-store-test-results }
-
-[`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップを使用して、テスト結果を CircleCI にアップロードします。 この結果は、CircleCI アプリケーションの**テスト サマリー**セクションに表示されます。
-
-Use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step to save test results as artifacts.
+次に、デプロイステップを実行するために、リストにジョブを追加する必要があります。
 
 ```yaml
-version: 2
 jobs:
-  build:
-    # ...
+  # ...以前のジョブ...
+  deploy: # 任意の名前をお選びください。
+    docker:
+      - image: cimg/python:3.10.1
     steps:
-      # ...
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
-          destination: tr1
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # リモートで Heroku にプッシュする場合は、強制プッシュします。https://devcenter.heroku.com/articles/git を参照して下さい。
+
 ```
 
-### アプリケーションのデプロイ
-{: #deploy-application }
+注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI の UI にセットアップされる可能性があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/2.0/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
 
-この Django アプリケーションはどこにもデプロイされません。 デプロイの例については、[Flask を使用したプロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)または[デプロイに関するドキュメント]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
+#### c.  ワークフローへのジョブの追加
+{: #add-jobs-to-the-workflow }
+
+これで `build_and_test` ジョブと `deploy` ジョブが作成されたので、`build_test_deploy`ワークフローを完成させます。 同時実行、連続、および手動承認ワークフローを使ったジョブ実行のオーケストレーションの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows)を参照してください。
+
+```yaml
+workflows:
+  build_test_deploy: # 任意の名前をお選びください。
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # build_and_test ジョブが完了している場合のみデプロイします。
+          filters:
+            branches:
+              only: main # main にある場合のみデプロイします、
+```
+
+### 5. まとめ
+{: #conclusion }
+
+成功です！ CircleCI 上にビルドする Python アプリケーションを設定しました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[パイプラインのページ]({}/2.0/project-build/#overview)を参照してください。
 
 ## 設定ファイルの全文
-{: #full-configuration-file }
-
-{% raw %}
+{: #full-configuration-file-new }
 
 ```yaml
-version: 2 
-jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
-    # directory where steps are run
-    working_directory: ~/circleci-demo-python-django
-    docker: # run the steps with Docker
-      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
+version: 2.1
+orbs:
+  python: circleci/python@1.5.0
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  build_and_test: # 任意の名前をお選びください。
+    docker:
       - image: cimg/python:3.10.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # environment variables for primary container
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # environment variables for the Postgres container.
-          POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
       - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          name: テストの実行
+          command: python -m pytest
+      - persist_to_workspace:
+          root: ~/project
           paths:
-            - "venv"
-      - run:
-          command: |
-            pipenv run python manage.py test
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test-results
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: test-results
-          destination: tr1
+            - .
+
+  deploy: # 任意の名前をお選びください。
+    docker:
+      - image: cimg/python:3.10.1
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # リモートで Heroku にプッシュする場合は、強制プッシュします。https://devcenter.heroku.com/articles/git を参照して下さい。
+
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # build_and_test ジョブが完了している場合のみデプロイします。
+          filters:
+            branches:
+              only: main # main にある場合のみデプロイします。
+
 ```
 
-{% endraw %}
-
 ## 関連項目
-{: #see-also }
+{: #see-also-new }
 
-- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)」を参照してください。
+- [Python Django テストでのテスト分割の使用]({{site.support_base_url}}/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests)
+- [Pytest を使った Flask フレームワークのテスト]({{site.blog_base_url}}/testing-flask-framework-with-pytest/)
+- [CircleCI  で Django を使用する方法]({{site.support_base_url}}/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-)
