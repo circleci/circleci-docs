@@ -32,9 +32,9 @@ version:
 
 以下では、Orb の新しいセマンティックリリースを公開する方法について説明します。
 
-`circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 The name of the branch does not matter but it is best practice to make your changes on a non-default branch.
+`circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 ブランチ名は何でも構いませんが、デフォルト以外のブランチで変更することをお勧めします。
 
-Once you have made your changes, commit them and push them up to your branch. We strongly encourage using [Conventional Commits](https://www.conventionalcommits.org/) for your commit messages.
+変更したら、コミットしブランチにプッシュします。 コミットメッセージには、[Conventional Commits](https://www.conventionalcommits.org/) を使用することを強くお勧めします。
 
 Next, follow these steps to create a new release from your changes.
 
