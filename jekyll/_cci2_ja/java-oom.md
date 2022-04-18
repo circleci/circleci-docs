@@ -16,7 +16,7 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 [Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 メモリ制限が設定されていない場合、JVM はシステムで使用可能な合計メモリの一部を事前に割り当てます。 CircleCI は大量のメモリを搭載した大規模なマシンでコンテナ ベースのビルドを実行しており、 各コンテナには、マシンで使用可能な総量よりも少ない量のメモリ制限が設定されています。 こうしたことから、JVM がマシン上の大量のメモリを使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。
 
 デフォルトでは、Java の使用量は以下のように設定されています。
-- 合計メモリの `1/64` 以上（4 Gib の RAM の Docker Medium クラスの場合、64 MiB）
+- 合計メモリの `1/64` 以上（4 GiB の RAM の Docker Medium クラスの場合、64 MiB）
 - 合計メモリの `1/4` 以下（4 Gib の RAM の Docker Medium クラスの場合、１ GiB）
 
 [2020 年 6 月 3 日](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)の時点では、Docker Executor を使用する際、これらの制限が表示されます。 つまり、Java の最新バージョンでは、ジョブで使用可能な CPU の数や RAM の量を正しく検出します。
