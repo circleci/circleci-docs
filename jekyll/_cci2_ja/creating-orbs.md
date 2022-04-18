@@ -38,7 +38,7 @@ version:
 
 下記の手順に従って変更から新しいリリースを作成します。
 
-1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリにおいて Orb の変更を自動的に
+1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリで Orb の変更を自動的に
 リント、[シェルチェック]({{site.baseurl}}/ja/2.0/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/2.0/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)します。</p></li> 
    
    1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 Notice there are two workflows, `lint-pack` will run first and contains our linting, shellchecking, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready. ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
