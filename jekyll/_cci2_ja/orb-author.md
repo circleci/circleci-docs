@@ -123,27 +123,27 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[CircleCI の�
     ```
     完了したら、元のターミナルに戻って、変更がプッシュされたことを確認します。
 
-7. **Complete the setup**
+7. **セットアップを完了します。**
 
-    Once the changes have been pushed, return to your terminal and continue the setup process. The CLI will now automatically follow the project on CircleCI, and attempt to trigger a pipeline to build and test your orb with sample code.
+    変更がプッシュされたら、ターミナルに戻り、セットアッププロセスを続けます。 CLI が CircleCI のプロジェクトを自動的にフォローし、同じコードで Orb をビルドしテストするパイプラインのトリガーを試みます。
 
-    You will be provided with a link to the project building on CircleCI where you can view the full pipeline. また、 CLI によって自動的に ` alpha` という名前の新しい開発ブランチに移行されたことも確認できます。 You can use any branch naming you would like, you do not need to exclusively develop on `alpha`.
+    CircleCI 上でプロジェクトのビルドへのリンクが表示され、全パイプラインを見ることができます。 また、 CLI によって自動的に ` alpha` という名前の新しい開発ブランチに移行されたことも確認できます。 ブランチ名は何でもかまいません。`alpha`だけで作成する必要はありません。
 
-8. **Enable Dynamic Configuration**
+8. **ダイナミックコンフィグを有効にします。**
 
-    Because we are making use of [dynamic configuration]({{site.baseurl}}/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not yet enabled.
+    CircleCI では[ダイナミックコンフィグ]({{site.baseurl}}/2.0/dynamic-config/)を使用しているため、まずこの機能を有効にする必要があります。 最初のパイプラインでは「この機能は有効になっていません。」というエラーメッセージを受け取ります。
 
-    Following the [Getting started with dynamic config in CircleCI]({{site.baseurl}}/2.0/dynamic-config/#getting-started-with-dynamic-config-in-circleci), open the **Project Settings** page for your orb on CircleCI, navigate to the **Advanced** tab, and click on the **Enable dynamic config using setup workflows** button.
+    [ダイナミックコンフォぐ入門ガイド]({{site.baseurl}}/ja/2.0/dynamic-config/#getting-started-with-dynamic-config-in-circleci)に従って、CircleCI でご自身の Orb の **Project Settings** を開き、**Advanced** に行き、**Enable dynamic config using setup workflows** ボタンをクリックします。
 
-    Once enabled, all future commits to your project will run through the full pipeline and test your orb. We could manually re-run the pipeline at this point, but since we are only working with sample code at this moment, we don't need to.
+    有効化されると、その後のプロジェクトへのすべてのコミットは全パイプラインを介して実行され、Orb を実行します。 この時点で、パイプラインを手動で再実行することはできますが、現時点ではサンプルコードのみを使用しているため、必要ありません。
 
-9. **Develop your orb**
+9. **Orb を作成します。**
 
-    From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
+    デフォルト以外のブランチから (セットアップ時に` alpha`ブランチに自動的に移動します)、サンプル Orb コードを好みに合わせて変更します。 _push_のたびに、Orb が自動的にビルドおよびテストされます。
 
-    Be sure to view the _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ file to view how your orb components are being tested, and modify your tests as you change your orb. Learn more about testing your orb in the [Orb Testing documentation]({{site.baseurl}}/2.0/testing-orbs/).
+    Orb コンポーネントのテスト方法を確認し、Orb の変更に伴ってテストを変更するには、必ず _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ ファイルを参照してください。 Orb のテストに関する詳細は、[ Orb のテストに関するドキュメント]({{site.baseurl}}/ja/2.0/testing-orbs/)を参照してください。
 
-    When you are ready to deploy the first production version of your orb, find information on deploying changes in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
+    最初の本番バージョンの Orb をデプロイする準備ができたら、「[Orb のパブリッシュプロセス]({site.basel}}/ja/2.0/creating-orbs/)」ガイドで変更事項のデプロイに関する情報を参照してください。
 
 ### Orb の記述
 {: #writing-your-orb }
@@ -159,9 +159,9 @@ $ git branch
 
 `circleci orb init` コマンドを実行すると、自動的に `alpha` ブランチに移動し、リポジトリに `.circleci` ディレクトリと `src` ディレクトリが作成されます。
 
-**_Example: Orb Project Structure_**
+**_例: Orb プロジェクトの構造_**
 
-| type                      | name                                                                               |
+| type                      | 名前                                                                                 |
 | ------------------------- | ---------------------------------------------------------------------------------- |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.circleci](https://github.com/CircleCI-Public/Orb-Template/tree/main/.circleci)   |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.github](https://github.com/CircleCI-Public/Orb-Template/tree/main/.github)       |
