@@ -41,24 +41,24 @@ version:
 1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリで Orb の変更を自動的に
 リント、[シェルチェック]({{site.baseurl}}/ja/2.0/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/2.0/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)します。</p></li> 
    
-   1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 Notice there are two workflows, `lint-pack` will run first and contains our linting, shellchecking, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready. ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
+   1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 ワークフローが 2 つあり、`lint-pack` が先に実行され、リント、シェルチェック、レビューを含まれており、2 つ目のワークフローでテストするよう開発版をパブリッシュします。 この `test-deploy` には結合テストが含まれており、準備が整い次第 Orb の安定版をパブリッシュできます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
 
-1 **"Squash" Merge.** <br/> When your changes are complete, we recommend (not required) "[Squash Merging](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" your changes into a single commit, with a [Conventional Commit Message](https://www.conventionalcommits.org/).
+1 **"スカッシュ" マージ** <br/> 変更が完了したら、[Conventional Commit Message](https://www.conventionalcommits.org/) を使って変更を一つのコミットに "[スカッシュマージ](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" することをお勧めします（必須ではありません）。
   
   例：
   
         - `fix: x-command parameter from string to integer`
       - `feat: added new x parameter to y command`
-1 **Tag and Release!** <br/> Your changes have now been merged to the default branch, but if you check the [Orb Registry](https://circleci.com/developer/orbs), you will see no new versions have been published.</ol> 
+1 **タグとリリース**<br/> 変更がデフォルトのブランチにマージされましたが、[ Orb レジストリ](https://circleci.com/ja/developer/orbs)をチェックすると、新しいバージョンはパブリッシュされていません。</ol> 
 
-To publish a new version of our orb, you need to tag your release. A tag can be created and pushed manually, however we recommend using [GitHub.com's Releases feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release).
+新しいバージョンの Orb をパブリッシュするには、リリースのタグ付けが必要です。 タグは手動で作成し、プッシュすることができますが、[GitHub.com のリリース機能](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)の使用をお勧めします。
 
-Using GitHub's Releases feature will allows you to publish "Release Notes", which will function as a changelog for your orb.
+GitHub のリリース機能を使うとリリースノートをパブリッシュすることができ、Orb の更新履歴として機能します。
 
-Follow the GitHub docs to create a new release.
+新しいリリースの作成は GitHub のドキュメントに従ってください。
 
-   1. When asked to select a tag, specify the new tag that will be published with this release. Double check the current orb version in the [Orb Registry](https://circleci.com/developer/orbs). If you are unsure of what type of change you are making, we will have an opportunity to correct this in a moment. Ensure your tag fits the format `vX.Y.Z`
-   2. Click the "+ Auto-generate release notes" button. A summary of changes will be generated for you, containing any pull requests which have been merged since the last release. If you have used [Conventional Commit messages](https://www.conventionalcommits.org/), it should be easy to determine the type of semantic increment change based on the commit message. For instance, if we had two commits that were prefixed with "fix:", we would expect the semantic version to increment by a "patch" level.
+   1. タグの選択を求められたら、今回のリリースでパブリッシュされる新しいタグを指定します。 Orb の現在のバージョンを [Orb レジストリ](https://circleci.com/developer/ja/orbs)で再度確認します。 どのような変更を行っているかわからない場合は、間もなく修正することができます。 タグの形式が `vX.Y.Z` であることを確認してください。
+   2. [+ Auto-generate release notes] ボタンをクリックします。 変更点のまとめが作成されます。これには前回のリリース以降にマージされたすべてのプルリクエストが含まれます。 If you have used [Conventional Commit messages](https://www.conventionalcommits.org/), it should be easy to determine the type of semantic increment change based on the commit message. For instance, if we had two commits that were prefixed with "fix:", we would expect the semantic version to increment by a "patch" level.
    3. Add your title, and publish the release.
    4. Complete!
 
