@@ -57,7 +57,7 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*Last updated*: 2022-04-06
+*最終更新*: 2022 年 4 月 6 日
 
 IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
@@ -104,12 +104,12 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 #### 2021-08-23
 * コアサービス用 IP アドレスリストに新しいアドレスが追加されました。
 
-The machine-consumable lists have also been updated to reflect the new IP address ranges.
+マシン用のリストもアップデートされ、これらの新しい IP アドレスが反映されました。
 
 #### 2022-04-06
-* Added and removed new IPs as part of enabling Docker pulls to go through the list of IPs.
+* Docker のプルによりリスト上の IP アドレスリストを参照できるよう、 IP アドレスの新規追加および削除をしました
 
-マシン用のリストもアップデートされ、これらの新しい IP アドレスが反映されました。
+マシン用のリストもアップデートされ、新しい IP アドレスが反映されました。
 
 **マシン用のリストは、以下の DNS A レコードの照会により見つけられます。**
 
