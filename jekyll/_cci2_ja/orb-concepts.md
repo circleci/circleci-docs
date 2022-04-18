@@ -140,7 +140,7 @@ workflows:
 ### 使用例
 {: #usage-examples }
 
-[Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the [Orb Registry](https://circleci.com/developer/orbs). 以下は使用例のサンプルです。
+[Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクト設定で直接使用するものではありませんが、設定で Orb を最大限に活用する方法を共有するための Orb メタデータの一つです。 参照用に、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に下記のようなサンプルが表示されます。 以下は使用例のサンプルです。
 
 ```yaml
 # Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
@@ -293,7 +293,7 @@ Orb をパブリッシュする方法は 2 つあります。パブリックま�
 
 すべてのCircleCI Orb は単体のYAMLファイルで、通常は `orb.yml`という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)の一部であり、別々のYAMLファイルを「パッケージ化」したり、凝縮したりするために使用されます。
 
-If you are using the Orb Development Kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
+Orb 開発キットをお使いの場合、Orb のパッケージ化は、付属のCI/CD パイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
 {: class="alert alert-warning"}
 
 **_例: Orb プロジェクトの構造_**
@@ -315,7 +315,7 @@ Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-au
 
 `circleci orb pack <dir> > orb.yml`
 
-For Orb Development Kit users, this step is handled automatically.
+Orb 開発キットをお使いの場合、この手順は自動的に処理されます。
 
 ## ファイル インクルード構文
 {: #file-include-syntax }
