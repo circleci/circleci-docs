@@ -17,7 +17,7 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 
 デフォルトでは、Java の使用量は以下のように設定されています。
 - 合計メモリの `1/64` 以上（4 GiB の RAM の Docker Medium クラスの場合、64 MiB）
-- 合計メモリの `1/4` 以下（4 Gib の RAM の Docker Medium クラスの場合、１ GiB）
+- 合計メモリの `1/4` 以下（4 GiB の RAM の Docker Medium クラスの場合、１ GiB）
 
 [2020 年 6 月 3 日](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)の時点では、Docker Executor を使用する際、これらの制限が表示されます。 つまり、Java の最新バージョンでは、ジョブで使用可能な CPU の数や RAM の量を正しく検出します。
 
