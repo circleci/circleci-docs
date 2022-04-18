@@ -16,7 +16,7 @@ Continuous integration is a practice that helps developers integrate their code 
 
 
 {% capture content1 %}
-Sign up for a free CircleCI 
+Sign up for a free CircleCI
 {% endcapture %}
 
 {% capture content2 %}
@@ -67,7 +67,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b> 
+You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
 <br>
 <br>
 This will create a .circleci/config.yml file at the root of your repository on a new branch called “circle-ci-setup”.
@@ -108,7 +108,7 @@ Click on the green Success button to see details about the workflow. The hello-w
 
 
 {% capture content %}
-Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job: 
+Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job:
 <ul>
 <li>Spin up environment</li>
 <li>Preparing environment variables</li>
@@ -142,9 +142,8 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 
 {% include getting-started-section-header.html title="03 What's next" content=content imagePath=header-banner-3 %}
 
-
 {% capture content %}
-Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS. 
+Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS.
 <br>
 <br>
 On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click the ••• buttons to view your configuration file. Make any change and save it. You should see a new pipeline run and likely fail. This is a primary benefit of CircleCI: identifying failures early.
@@ -179,8 +178,7 @@ On a failed pipeline, you can <a class="no-external-icon" href="https://circleci
 
 {% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
 
-
-{% capture content %} 
+{% capture content %}
 That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
 {% endcapture %}
 
