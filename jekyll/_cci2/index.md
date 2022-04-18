@@ -12,12 +12,12 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 
 <hr class="hidden-xs" />
 
-<div class="row loading-deferred">
-  <div class="treatment col-xs-12">
+<div class="row">
+  <div class="col-xs-12">
     <span id="homepage-guide-links"><h2>Examples and Guides</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="New"></span>
     <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/tutorials/">guides</a> or explore a sample app.</p>
   </div>
-  <div class="treatment col-xs-12 col-sm-6">
+  <div class="col-xs-12 col-sm-6">
     <a class="no-external-icon col-sm-12" href="{{site.baseurl}}/2.0/language-javascript/">
       <div class="card col-sm-12">
         {% capture node-js-card %}
@@ -27,7 +27,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       </div>
     </a>
   </div>
-  <div class="treatment col-xs-12 col-sm-6">
+  <div class="col-xs-12 col-sm-6">
     <a class="no-external-icon col-sm-12" href="{{site.baseurl}}/2.0/language-python/">
       <div class="card col-sm-12">
         {% capture python-card %}
@@ -37,7 +37,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       </div>
     </a>
   </div>
-  <div class="treatment col-xs-12">
+  <div class="col-xs-12">
     <hr />
   </div>
   <div class="col-xs-12 col-sm-6">
