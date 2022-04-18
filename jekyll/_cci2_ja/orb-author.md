@@ -161,7 +161,7 @@ $ git branch
 
 **_例: Orb プロジェクトの構造_**
 
-| type                      | 名前                                                                                 |
+| タイプ                       | 名前                                                                                 |
 | ------------------------- | ---------------------------------------------------------------------------------- |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.circleci](https://github.com/CircleCI-Public/Orb-Template/tree/main/.circleci)   |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.github](https://github.com/CircleCI-Public/Orb-Template/tree/main/.github)       |
@@ -178,19 +178,19 @@ $ git branch
 
 **_例: Orb プロジェクトの "src" ディレクトリ_**
 
-| type                       | name                                                                                 |
+| タイプ                        | 名前                                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------ |
 | <i class="fa fa-folder" aria-hidden="true"></i>  | [commands](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/commands)   |
 | <i class="fa fa-folder" aria-hidden="true"></i>  | [examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples)   |
 | <i class="fa fa-folder" aria-hidden="true"></i>  | [executors](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors) |
 | <i class="fa fa-folder" aria-hidden="true"></i>  | [jobs](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/jobs)           |
-| <i class="fa fa-file-text-o" aria-hidden="true"></i> | [スクリプト](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts)       |
+| <i class="fa fa-file-text-o" aria-hidden="true"></i> | [scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts)     |
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
-上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートの役割を果たします。 In addition to the directories representing your orb's yaml components, you will also see a '[scripts/](#scripts)' directory where we can store code we want to inject into our components.
+上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[スクリプト](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
 
-`src` 内の各ディレクトリは、[再利用可能な構成]({{site.baseurl}}/2.0/reusing-config)のコンポーネント タイプに対応しており、Orb から追加や削除をすることができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
+`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除をすることができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
 ##### @orb.yml
 {: #orbyml }
@@ -217,7 +217,7 @@ display:
 
 [再利用可能なコマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) をオーサリングして、`src/executors` ディレクトリに追加します。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
 
-This example shows a simple command which contains a single `run` step, which will echo "hello" and the value passed in the `target` parameter.
+次の例は、単一の `run` ステップを含むシンプルなコマンドを示しています。このステップでは、"hello" をエコーし、値が`target` パラメーターで渡されます。
 
 ```yaml
 description: >
@@ -240,11 +240,11 @@ steps:
 {: #examples }
 {:.no_toc}
 
-[使用例]({{site.baseurl}}/2.0/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加できます。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
+[使用例]({{site.baseurl}}/2.0/ja/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb 使用例として扱われます。名前にはファイル名が使用されます。
 
-View a full example from the [Orb Template](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples).
+[Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples)で完全な使用例を確認できます。
 
 ##### Executor
 {: #executors }
@@ -254,7 +254,7 @@ View a full example from the [Orb Template](https://github.com/CircleCI-Public/O
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb Executor として扱われます。名前にはファイル名が使用されます。
 
-View a full example from the [Orb Template](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors).
+[Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors)で完全な使用例を確認できます。
 
 ##### ジョブ
 {: #jobs }
@@ -264,14 +264,14 @@ View a full example from the [Orb Template](https://github.com/CircleCI-Public/O
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb ジョブとして扱われます。名前にはファイル名が使用されます。
 
-ジョブには、ユーザーが最小限の構成でタスクを完全に自動化できるように、Orb コマンドやステップを組み込むことができます。
+ジョブには、ユーザーが最小限の設定でタスクを完全に自動化できるように、Orb コマンドやステップを組み込むことができます。
 
-View the _[hello.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/jobs/hello.yml)_ job example from the [Orb Template](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/jobs).
+以下は、[Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/jobs)に含まれている _[hello.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/jobs/hello.yml)_ ジョブの例です。
 
 ```yaml
 description: >
   # ここには、このジョブの目的を記述します。
-  # Descriptions should be short, simple, and clear.
+  # 短くわかりやすい説明を心がけます。
 
 docker:
   - image: cimg/base:current
