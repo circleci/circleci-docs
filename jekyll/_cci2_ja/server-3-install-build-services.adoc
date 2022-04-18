@@ -345,7 +345,7 @@ endif::env-aws[]
 
 ==== 設定とデプロイ
 
-Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 名前空間を変更して `kubectl kots admin-console -n<YOUR_CIRCLECI_NAMESPACE>`を実行し、KOTS 管理者コンソールにアクセスします。
+Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 名前空間を変更して `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`を実行し、KOTS 管理者コンソールにアクセスします。
 
 設定で次の項目を入力します。
 
