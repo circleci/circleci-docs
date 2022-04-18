@@ -332,9 +332,7 @@ endif::[]
 
 ==== 設定とデプロイ
 
-Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 名前空間を変更して `kubectl kots admin-console -n<YOUR_CIRCLECI_NAMESPACE>`を実行し、KOTS 管理者コンソールにアクセスします。
-
-
+Nomad クライアントの導入が完了したら、 CircleCI Server と Nomad コントロールプレーンを設定できます。 名前空間を変更して `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`を実行し、KOTS 管理者コンソールにアクセスします。
 
 設定で次の項目を入力します。
 
@@ -677,7 +675,7 @@ endif::[]
 
 ==== VM サービスの検証
 
-CircleCI Server の設定とデプロイが完了したら、VM サービスが適切に動作しているか確認する必要がありあます。 CircleCI Server 内で、realitychecker プロジェクトを再実行できます。 VM サービスジョブは完了しているはずです。 この時点で、すべてのテストが合格しているはずです。
+CircleCI Server の設定とデプロイが完了したら、VM サービスが適切に動作しているか確認する必要がありあます。 CircleCI Server 内で、realitycheck プロジェクトを再実行できます。 VM サービスジョブは完了しているはずです。 この時点で、すべてのテストが合格しているはずです。
 
 === ランナーのバージョン
 
