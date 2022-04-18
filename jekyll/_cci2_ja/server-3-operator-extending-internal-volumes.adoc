@@ -29,9 +29,8 @@ NOTE: 永続ボリュームを拡張しても、Node に接続されているス
 NOTE: 万一に備えて、まず https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/?section=server-administration[クラスタのバックアップを作成する]ことをお勧めします。
 
 
-
 === ステップ 0: 現在のボリュームサイズの確認
-デフォルトでは、内部のデータベースが使用する永続ボリューム要求の容量は 8Gi です。 ただし、この初期値は最初のデプロイ時に KOTS 管理者コンソールから設定できます。 We can confirm the size of our persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
+デフォルトでは、内部のデータベースが使用する永続ボリューム要求の容量は 8Gi です。 ただし、この初期値は最初のデプロイ時に KOTS 管理者コンソールから設定できます。 You can confirm the size of your persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
 
 Postgres の場合:
 [source,bash]
@@ -41,7 +40,7 @@ NAME                STATUS   VOLUME                                     CAPACITY
 data-postgresql-0   Bound    pvc-c2a2d97b-2b7d-47d3-ac77-d07c76c995a3   8Gi        RWO            gp2            1d
 ----
 
-Mongodbの場合:
+MongoDB の場合:
 [source,bash]
 ----
 circleci-user ~ $ kubectl get pvc datadir-mongodb-0
@@ -60,7 +59,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme4n1    7.8G  404M  7.4G   3% /bitnami/postgresql
 ----
 
-Mongodbの場合、ディレクトリは `/bitnami/mongodb`です。
+MongoDB の場合、ディレクトリは `/bitnami/mongodb`です。
 [source,bash]
 ----
 circleci-user ~ $ kubectl exec mongodb-0 -- df -h /bitnami/mongodb
@@ -102,14 +101,14 @@ Postgres の場合:
 kubectl delete sts postgresql --cascade=false
 ----
 
-Mongodbの場合:
+MongoDB の場合:
 [source,bash]
 ----
 kubectl delete sts mongodb --cascade=false
 ----
 
 === ステップ 3: データベースの PVC サイズを更新する
-ステートフルセットが削除されたので、永続ボリューム要求のサイズを10Gi に増やすことができます。
+ステートフルセットが削除されたので、永続ボリューム要求のサイズを 10Gi に増やすことができます。
 
 Postgres の場合:
 [source,bash]
@@ -117,7 +116,7 @@ Postgres の場合:
 kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
-Mongodbの場合:
+MongoDB の場合:
 [source,bash]
 ----
 kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
@@ -146,7 +145,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme4n1    9.8G  404M  9.4G   5% /bitnami/postgresql
 ----
 
-Mongodbの場合、ディレクトリは `/bitnami/mongodb`です。
+MongoDB の場合、ディレクトリは `/bitnami/mongodb`です。
 [source,bash]
 ----
 circleci-user ~ $ kubectl exec mongodb-0 -- df -h /bitnami/mongodb
@@ -156,7 +155,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 ご覧のように、ディレクトリのサイズが拡張されています。
 
-When completing these steps, if you find, as expected, that the new pods _do_ show the resized volumes, it is still worth checking with the `kubectl describe` commands shown below. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
+これらの手順を完了する際、新しいポッドでサイズ変更されたボリュームが期待通りに_表示された_場合は、下記の`kubectl describe`コマンドで確認することをお勧めします。 サイズ変更に失敗する場合がありますが、`kubectl describe`からの出力でイベントを表示する方法しかありません。
 
 Postgres の場合:
 [source,bash]
@@ -164,7 +163,7 @@ Postgres の場合:
 kubectl describe pvc data-postgresql-0
 ----
 
-Mongodbの場合:
+MongoDB の場合:
 [source,bash]
 ----
 kubectl describe pvc datadir-mongodb-0
@@ -195,7 +194,7 @@ Postgres の場合:
 kubectl rollout restart sts postgresql
 ----
 
-Mongodbの場合:
+MongoDB の場合:
 [source,bash]
 ----
 kubectl rollout restart sts mongodb
