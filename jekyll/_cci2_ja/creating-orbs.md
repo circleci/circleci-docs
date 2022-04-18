@@ -36,20 +36,20 @@ version:
 
 変更したら、コミットしブランチにプッシュします。 コミットメッセージには、[Conventional Commits](https://www.conventionalcommits.org/) を使用することを強くお勧めします。
 
-Next, follow these steps to create a new release from your changes.
+下記の手順に従って変更から新しいリリースを作成します。
 
-1. **Open a new Pull Request to the default branch.** <br/> The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory are configured to automatically [lint]({{site.baseurl}}/2.0/testing-orbs/#yaml-lint), [shellcheck]({{site.baseurl}}/2.0/testing-orbs/#shellcheck), [review]({{site.baseurl}}/2.0/testing-orbs/#review), and [test]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) your orb changes in the CircleCI web app.
+1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリにおいて Orb の変更を自動的に
+リント、[シェルチェック]({{site.baseurl}}/ja/2.0/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/2.0/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)します。</p></li> 
+   
+   1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 Notice there are two workflows, `lint-pack` will run first and contains our linting, shellchecking, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready. ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
 
-1. **Ensure all tests pass.** <br/> You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app. Notice there are two workflows, `lint-pack` will run first and contains our linting, shellchecking, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready. ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
-
-1. **"Squash" Merge.** <br/> When your changes are complete, we recommend (not required) "[Squash Merging](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" your changes into a single commit, with a [Conventional Commit Message](https://www.conventionalcommits.org/).
-
-    例：
-
-      - `fix: x-command parameter from string to integer`
+1 **"Squash" Merge.** <br/> When your changes are complete, we recommend (not required) "[Squash Merging](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" your changes into a single commit, with a [Conventional Commit Message](https://www.conventionalcommits.org/).
+  
+  例：
+  
+        - `fix: x-command parameter from string to integer`
       - `feat: added new x parameter to y command`
-
-1. **Tag and Release!** <br/> Your changes have now been merged to the default branch, but if you check the [Orb Registry](https://circleci.com/developer/orbs), you will see no new versions have been published.
+1 **Tag and Release!** <br/> Your changes have now been merged to the default branch, but if you check the [Orb Registry](https://circleci.com/developer/orbs), you will see no new versions have been published.</ol> 
 
 To publish a new version of our orb, you need to tag your release. A tag can be created and pushed manually, however we recommend using [GitHub.com's Releases feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release).
 
@@ -66,10 +66,14 @@ After the release is published, a tag will be created and a CircleCI pipline wil
 
 If you view the final `orb-tools/publish` job, in the "Publishing Orb Release" step, you will see a message like the following:
 
+
+
 ```shell
 Your orb has been published to the CircleCI Orb Registry.
 You can view your published orb on the CircleCI Orb Registry at the following link:
 https://circleci.com/developer/orbs/orb/circleci/orb-tools?version=11.1.2
 ```
+
+
 You can see this example from the orb-tools orb [here](https://app.circleci.com/pipelines/github/CircleCI-Public/orb-tools-orb/947/workflows/342ea92a-4c3d-485b-b89f-8511ebabd12f/jobs/5798)
 
