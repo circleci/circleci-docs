@@ -223,13 +223,17 @@ jobs:
     steps:
       - checkout
       - run: |
-          ./mvnw \
-          -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
-          | circleci tests split --split-by=timings); \
-          do basename $file \
-          | sed -e "s/.java/,/"; \
-          done | tr -d '\r\n') \
-          -e test
+          cd src/test/java
+          # Get list of classnames of tests that should run on this node
+          CLASSNAMES=$(circleci tests glob "**/*.java" \
+            | cut -c 1- | sed 's@/@.@g' \
+            | sed 's/.\{5\}$//' \
+            | circleci tests split --split-by=timings --timings-type=classname)
+          cd ../../..
+          # Replace space by comma
+          CLASSNAMES=$(echo ${CLASSNAMES} | awk -v OFS="," '$1=$1')
+          # Run maven
+          ./mvnw -Dtest="${CLASSNAMES}" -e test verify
       - store_test_results: # We use this timing data to optimize the future runs
           path: target/surefire-reports
 
@@ -333,13 +337,17 @@ jobs:
       - attach_workspace:
           at: ./target
       - run: |
-            ./mvnw \
-            -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
-            | circleci tests split --split-by=timings); \
-            do basename $file \
-            | sed -e "s/.java/,/"; \
-            done | tr -d '\r\n') \
-            -e test verify
+            cd src/test/java
+            # Get list of classnames of tests that should run on this node
+            CLASSNAMES=$(circleci tests glob "**/*.java" \
+              | cut -c 1- | sed 's@/@.@g' \
+              | sed 's/.\{5\}$//' \
+              | circleci tests split --split-by=timings --timings-type=classname)
+            cd ../../..
+            # Replace space by comma
+            CLASSNAMES=$(echo ${CLASSNAMES} | awk -v OFS="," '$1=$1')
+            # Run maven
+            ./mvnw -Dtest="${CLASSNAMES}" -e test verify
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
