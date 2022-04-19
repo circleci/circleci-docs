@@ -1,7 +1,7 @@
 ---
 layout: getting-started-guide-experimental
-title: "Quickstart Guide"
-short-title: "Quickstart Guide"
+title: "Your First Green Build"
+short-title: "Your First Green Build"
 description: "A tutorial for getting your first green CircleCI build"
 categories: [getting-started]
 order: 41
