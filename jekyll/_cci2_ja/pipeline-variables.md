@@ -175,7 +175,7 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ## 条件付きワークフロー
 {: #conditional-workflows }
 
-ワークフロー宣言の下で[ロジックステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
+ワークフロー宣言の下で[ロジックステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless]({{site.baseurl}}/2.0/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
 
 この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 

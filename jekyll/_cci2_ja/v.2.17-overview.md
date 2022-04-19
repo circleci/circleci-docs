@@ -8,9 +8,9 @@ categories:
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.17. パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
+このドキュメントでは、CircleCI Server v2.17 の機能や注意事項についてまとめています。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
 
-## What's new in release 2.17
+## バージョン 2.17. の新機能
 {: #whats-new-in-release-217 }
 
 * ワークフローで Slack インテグレーションが利用できるようになりました。 ユーザーは、ワークフローの完了時に Slack 通知を受信するよう選択できます。
@@ -20,7 +20,7 @@ This document provides a summary of features and product notes for the release o
 * GraphQL API の直前のキャッシュ改善し、全体的なパフォーマンスを改善しました。
 * リクエスト時に Nomad クライアントの容量飽和を避けるために、バックプレッシャー制御を追加しました。これにより、既存の Nomad クラスターのパフォーマンスが向上します。
 
-## Fixed in release 2.17
+## バージョン 2.17 での修正点
 {: #fixed-in-release-217 }
 
 * GitHub API 応答処理と Web フック処理に関連するいくつかのバグを修正しました。
@@ -79,7 +79,7 @@ This document provides a summary of features and product notes for the release o
   us-west-2:ami-ce8c94b7
   ```
 
-* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 推奨事項については、[こちらのドキュメント](https://circleci.com/ja/docs/2.0/aws/#計画)をご覧ください。
+* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 推奨事項については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/aws/#planning)をご覧ください。
 * ソフトウェア パッケージを以下のバージョンに更新しました。 現時点では、外部処理化された環境において更新の必要はありませんが、v2.18 のリリース時は必須となります。
 
   * Vault 1.1.2

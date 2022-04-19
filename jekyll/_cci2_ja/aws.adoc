@@ -32,7 +32,7 @@ git checkout main && git pull
 
 . 1.0 Builder を使用する場合は、 2. で `circle_secret_passphrase` を指定し、 `...` を英数字に置き換えますが、1.0 Builder を使用しない場合はそのままにしておきます。1.0 Builder は、3. のデフォルト設定で無効になっています。
 
-. Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の `terraform.tfvars` ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、`terraform.tfvars` ファイルの 2. で `nomad_client_instance_type` の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,System Requirements>> をお読みください。
+. Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の `terraform.tfvars` ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、`terraform.tfvars` ファイルの 2. で `nomad_client_instance_type` の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,システム要件>> をお読みください。
 +
 NOTE: `builder_instance_type` は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
 

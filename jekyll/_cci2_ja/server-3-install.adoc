@@ -195,8 +195,8 @@ ifndef::env-aws[]
 ===== 認証
 
 * 以下のいづれかを選択します。
-** *Service Account JSON (required)* - A JSON format key of the Service Account to use for bucket access.
-** *Service Account Email (required)* - Service Account Email id if using Google Workload Identity.
+** *[Service Account JSON (サービス アカウントの JSON)] (必須)*: バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
+** *[Service Account Email (サービスアカウントのメール)](必須)*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 
 endif::env-aws[]
 
@@ -213,13 +213,13 @@ endif::env-aws[]
 === 保存とデプロイ
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Kong ロードバランサー用のIP アドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
 
-NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 しかし、アップグレードの際の中断を最小限に留めるために、Kong   が使用するサービス名への変更はしておりません。 そのため、サービス名は、`circleci-server-traefik` と表示されますが、実際には Kong のサービスです。
+NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 しかし、アップグレードの際の中断を最小限に留めるために、Kong が使用するサービス名への変更はしておりません。 そのため、サービス名は、`circleci-server-traefik` と表示されますが、実際には Kong のサービスです。
 
 === DNS エントリーの作成
 Kong ロードバランサー の DNS エントリを作成します。例: (`circleci.your.domain.com` と `app.circleci.your.domain.com`) 。
  この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
 
-Kong  ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 この値は以下のコマンドで取得できます。
+Kong  ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 以下のコマンドで情報を入手します。
 
 [source, shell]
 ----
@@ -237,7 +237,9 @@ NOTE: Kong ロードバランサーには、 https://loadbalancer-address/status
 
 === 確認
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。
+
+次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>

@@ -1,21 +1,21 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Metrics and Monitoring
+= CircleCI Server v3.x のメトリクスと監視
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI server installation metrics collection and monitoring.
+:page-description: CircleCI Server 環境のメトリクスの収集と監視について 
 :icons: font
 :toc: macro
 :toc-title:
 
-CPU やメモリの使用率などのメトリクス、および内部メトリクスを使用すると以下の事項が可能になります。
+CPU やメモリの使用率などのメトリクス、および内部メトリクスを使用すると以下が可能になります。
 
 * インシデントや異常な動作の迅速な検出
 * コンピューティング リソースの動的なスケーリング
-* インフラ全体の問題をさかのぼって把握する
+* インフラ全体の問題をさかのぼって把握
 
 toc::[]
 
@@ -34,21 +34,23 @@ https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およ�
 WARNING: この機能は、KOTS バージョン 1.65.0 - 1.67.0 で 破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないことをお勧めします。
 
 === KOTS 管理者 - メトリクス グラフ
-デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 Once deployed, you may provide the address for your Prometheus instance to the KOTS Admin Console. KOTS will use this address to generate graph data for the CPU and memory usage of containers in your cluster.
+デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 デプロイ後、Prometheus インスタンスのアドレスを KOTS 管理者コンソールに追加できます。 KOTS ではこのアドレスを使用して、クラスタに含まれるコンテナの CPU とメモリ使用率のグラフデータを生成します。
 
 The default Prometheus address is `\http://prometheus-server`
 
-KOTS ダッシュボードの [Configure graphs (グラフの設定)] を選択します。 Then enter `\http://prometheus-server` and KOTS will generate resource usage graphs.
+KOTS ダッシュボードの [Configure graphs (グラフの設定)] を選択します。 Then enter `\http://prometheus-server` and KOTS generates resource usage graphs.
 
 === Telegraf
 CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
-The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a metrics endpoint for Prometheus to scrape.
+この設定は完全にカスタマイズ可能で、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクスエンドポイントが提供されます。
 
 === Telegraf から Datadog へのメトリクスの転送
 以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
 
-Open the management console dashboard and select **Config** from the menu bar. *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム設定)]* を見付けます。 There is an editable text window where you can configure plugins for forwarding Telegraf metrics for your server installation. To forward to Datadog, add the following code, substituting `my-secret-key` with your Datadog API key:
-
+. 管理コンソールダッシュボードを開いて、メニューバーの *[Config (設定)]* を選択します。
+. *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム設定)]* を見つけます。 編集可能なテキストウィンドウがあり、CircleCI Server の Telegraf メトリクスを転送するためのプラグインを設定できます。
+. Datadog に転送する場合は、以下のコードを追加します。 ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
++
 ```
 [[outputs.datadog]]
   ## "my-secret-key" を Datadog API キーに置き換える
@@ -56,4 +58,3 @@ Open the management console dashboard and select **Config** from the menu bar. *
 ```
 
 詳細については、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント]を参照してください。
-

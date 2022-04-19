@@ -20,7 +20,8 @@ CircleCI Server では、https://www.nomadproject.io/[Nomad スケジューラ]�
 CircleCI Server は Nomad クライアント上で Docker ジョブを実行しますが、専用の VM でジョブを実行することもできます。 これらの VM ジョブは Nomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、リモート Docker ジョブ用にポート 2376 で VM にアクセスできる必要があります。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
-オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
+
+オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
 
 toc::[]
 
@@ -31,11 +32,11 @@ CircleCI Server 3.x では、プライマリジョブ スケジューラとし�
 デフォルトでは、CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに設定されている Executor に従って、コンピューティングリソースを自動的にプロビジョニングします。
 
 ### Nomad クライアント
-Nomad クライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
+Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
 
 すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューに入っているビルドを追跡し、必要に応じて Nomad クライアントマシンの数を増やして負荷を分散させます。 メトリクス追跡の詳細についてはxref:server-3-operator-metrics-and-monitoring.adoc[メトリクスと監視]のページをご覧ください。
 
-ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/2.0/executor-types/#available-docker-resource-classes[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。  デフォルトのインスタンスタイプでは、最大で `xlarge` リソースクラスを実行できます。
+ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/2.0/executor-types/#available-docker-resource-classes[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。 デフォルトのインスタンスタイプでは、最大で `xlarge` リソースクラスを実行できます。
 
 Nomad クライアントのリソースを最適に使用するためのオプションについては、https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
 
@@ -58,11 +59,11 @@ NOTE: CircleCI では、セットアップ後の URL やバックエンドの Gi
 | ポート
 | 用途
 
-| サービス
+| Services
 | 22
 | Git アクセス
 
-| サービス
+| Services
 | 80 または 443
 | API アクセス
 

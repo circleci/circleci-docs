@@ -166,7 +166,7 @@ consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
 Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
 to cache certain files or directories.
 In this example,
-the virtual environment and installed packages are cached.
+the virtual environment is cached.
 
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
 to restore cached files or directories.
@@ -191,9 +191,7 @@ jobs:
       - save_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
+            - "venv"
 ```
 
 {% endraw %}
