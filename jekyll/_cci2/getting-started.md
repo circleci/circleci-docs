@@ -267,3 +267,4 @@ even if they are not committing any code.
 - [CircleCI concepts]({{site.baseurl}}/)
 - [Automate common tasks with orbs]({{site.baseurl}}/)
 
+{% include doc-footer.html %}

@@ -1,4 +1,5 @@
 // https://app.optimizely.com/v2/projects/16812830475/experiments/21268663100/variations
+import { highlightTocOnScroll } from '../site/toc';
 
 function addNewBadgeToSidebar() {
   const isGettingStartedPage =
@@ -48,17 +49,30 @@ function setUpTracking() {
   });
 }
 
+function initiateControlContent() {
+  // display content for controll variation
+  const control = $('.control');
+  control.css('display', 'block');
+  // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
+  const toc = $('#full-height');
+  toc.css('visibility', 'visible');
+  // Implement scrolling for ToC
+  const headings = document.querySelectorAll('h2');
+  highlightTocOnScroll(headings);
+}
+
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_getting_started_docs_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: 'body',
   guestExperiment: false,
 }).then((variation) => {
-  if (variation === 'treatment') {
+  if (variation === 'control') {
     // Used to expand the container width for the experiment content
     if (window.location.pathname === '/docs/2.0/getting-started/') {
       const articleContainer = $('.quickstart-guide');
       articleContainer.addClass('getting-started-full-width');
+      // highlightTocOnScroll();
     }
     // Display content on page for treatment variation
     const treatment = $('.treatment');
@@ -71,11 +85,7 @@ window.OptimizelyClient.getVariationName({
     // Init tracking for experiment links and landing page badges
     setUpTracking();
   }
-  if (variation === 'control') {
-    const control = $('.control');
-    control.css('display', 'block');
-    // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
-    const toc = $('#full-height');
-    toc.css('visibility', 'visible');
+  if (variation === 'treatment') {
+    initiateControlContent();
   }
 });
