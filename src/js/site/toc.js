@@ -144,5 +144,5 @@ export const reconstructToC = (body) => {
   });
 
   document.getElementById('full-height').style.visibility = 'visible';
-  highlightTocOnScrollOnce(headings);
+  highlightTocOnScroll(headings);
 };

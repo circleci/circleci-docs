@@ -1,4 +1,5 @@
 // https://app.optimizely.com/v2/projects/16812830475/experiments/21268663100/variations
+import { reconstructToC } from '../site/toc';
 
 function addNewBadgeToSidebar() {
   const isGettingStartedPage =
@@ -77,6 +78,7 @@ window.OptimizelyClient.getVariationName({
       // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
       const toc = $('#full-height');
       toc.css('visibility', 'visible');
+      reconstructToC(control[0]);
     }
   })
   .catch(() => {
@@ -85,4 +87,5 @@ window.OptimizelyClient.getVariationName({
     // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
     const toc = $('#full-height');
     toc.css('visibility', 'visible');
+    reconstructToC(control[0]);
   });
