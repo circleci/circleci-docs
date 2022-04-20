@@ -59,17 +59,16 @@ window.OptimizelyClient.getVariationName({
     if (variation === 'treatment') {
       // Used to expand the container width for the experiment content
       if (window.location.pathname === '/docs/2.0/getting-started/') {
-        const articleContainer = $('.quickstart-guide');
+        const articleContainer = $('.your-first-green-build');
         articleContainer.addClass('getting-started-full-width');
       }
       // Display content on page for treatment variation
       const treatment = $('.treatment');
+      treatment.css('display', 'block');
       // Header title is given by getting-started, only content is switched not
       // the header details thus need to override
       const headerName = $('#your-first-green-build');
       headerName[0].innerHTML = 'Quickstart Guide';
-
-      treatment.css('display', 'block');
 
       // Init new badge on landing page
       showHomePageBadges();
@@ -95,7 +94,6 @@ window.OptimizelyClient.getVariationName({
   .catch(() => {
     const control = $('.control');
     control.css('display', 'block');
-    // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
     const toc = $('#full-height');
     toc.css('visibility', 'visible');
     reconstructToC(control[0]);
