@@ -61,10 +61,10 @@ Variable                 | Description
 -------------------------|------------
 AWS_ACCESS_KEY_ID        | Security credentials for AWS.
 AWS_SECRET_ACCESS_KEY    | Security credentials for AWS.
-AWS_DEFAULT_REGION       | Used by the AWS CLI.
+AWS_REGION               | Used by the AWS CLI.
 AWS_ACCOUNT_ID           | Required for deployment. [Find your AWS Account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId).
 AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should correspond to the value of `aws_resource_prefix` in `terraform_setup/terraform.tfvars`.
-AWS_ECR_ACCOUNT_URL      | Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com
+AWS_ECR_REGISTRY_ID      | The 12 digit AWS id associated with the ECR account.
 {:class="table table-striped"}
 
 ## Configuration walkthrough

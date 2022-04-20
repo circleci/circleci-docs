@@ -86,7 +86,7 @@ endif::env-aws[]
 
 ==== S3 互換ストレージに必要なソフトウェア
 
-- ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] をインストールおよび設定してください。
+- ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 === Kubernetes クラスタの作成
 CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
@@ -133,7 +133,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
 
-* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
+* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
 * クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
 +
 ```shell
@@ -144,7 +144,7 @@ kubectl auth can-i <list|create|edit|delete> pods
 ifndef::env-gcp[]
 
 ==== EKS
-Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成にはhttps://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
 . AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
 .  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
@@ -243,12 +243,12 @@ image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 ** *[Authorization callback URL(認証コールバック URL)]*: 認証コールバックURLは、インストールする URL に`/auth/github`を追加します。
 
 . 完了すると、*クライアントID* が表示されます。 *[Generate a new Client Secret (新しいクライアント シークレットを生成する]* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
- CircleCI Server の設定にはこれらが必要な場合があります。
+ CircleCI Server の設定にはこれらの値が必要です。
 +
 .クライアント ID とシークレット
 image::github-clientid.png[Screenshot showing GitHub Client ID]
 
-NOTE: GitHub Enterprise を使用する場合は、パーソナル アクセス トークンと GitHub Enterprise インスタンスのドメイン名も必要になります。
+NOTE: GitHub Enterprise を使用する場合は、パーソナルアクセストークンと GitHub Enterprise インスタンスのドメイン名も必要です。
 
 === フロントエンド TLS 証明書
 デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
@@ -257,7 +257,7 @@ ifndef::env-gcp[]
 
 ==== AWS Route53
 
-. DNS に AWS Route53 で使用している場合、*certbot-route53* プラグインが必要です。 プラグインのインストールには以下のコマンドを実行します。
+. DNS に AWS Route53 を使用している場合、*certbot-route53* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
 ```shell
 pip3 install certbot-dns-route53
@@ -277,7 +277,7 @@ ifndef::env-aws[]
 
 ==== Google Cloud DNS
 
-. DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインが必要です。 プラグインのインストールには以下のコマンドを実行します。
+. DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
 ```shell
 pip3 install certbot-dns-google
@@ -309,19 +309,19 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
 === 暗号化/署名キー
-CircleCI で生成されるアーティファクトの暗号化と署名には、以下のキーセットを使用します。 CircleCI Server の設定にはこれらが必要な場合があります。
+CircleCI で生成されるアーティファクトの暗号化と署名には、以下のキーセットを使用します。 CircleCI Server の設定にはこれらの値が必要です。
 
 CAUTION: これらの値をセキュアな状態で保存します。 紛失すると、ジョブの履歴やアーティファクトの復元ができなくなります。
 
 ==== アーティファクト署名キー
-生成するには、以下を実行します。
+アーティファクト署名キーを生成するには、下記のコマンドを実行します。
 
 ```shell
 docker run circleci/server-keysets:latest generate signing -a stdout
 ```
 
 ==== 暗号化署名キー
-生成するには、以下を実行します。
+暗号化署名キーを生成するには、下記のコマンドを実行します。
 
 ```shell
 docker run circleci/server-keysets:latest generate encryption -a stdout
@@ -332,13 +332,13 @@ CircleCI Server 3.x では、ビルドしたアーティファクト、テスト
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 
-* link:https://min.io/[Minio]
+* link:https://min.io/[MinIO]
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-S3 互換のオブジェクト ストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と Minio です。 Azure Blob Strage などの S3 API をサポートしていないオブジェクトストレージ プロバイダーを利用する場合は、Minio Gateway の利用をお勧めします。
+S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。 Azure Blob Strage などの S3 API をサポートしていないオブジェクトストレージプロバイダーを利用する場合は、MinIO Gateway の利用をお勧めします。
 
-ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 先に進む前に、入力したバケット名が選択したオブジェクト ストレージ プロバイダーに存在することを確認してください。
+ニーズに最も合うストレージをお選びください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
 
 NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[プロキシの設定] ガイドを参照してください。
 
