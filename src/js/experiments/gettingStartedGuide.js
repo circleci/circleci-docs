@@ -79,6 +79,8 @@ window.OptimizelyClient.getVariationName({
       setUpTracking();
       reconstructToC(treatment[0]);
 
+      // In the experiment we do not want to show the TOC but I have to reconstruct it
+      // For scroll track action then hide it
       const toc = $('#full-height');
       toc.css('visibility', 'hidden');
     } else {
