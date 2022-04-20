@@ -1614,7 +1614,7 @@ Jobs run in the dependency order until the workflow processes a job with the `ty
 ###### **`filters`**
 {: #jobfilters }
 
-Job Filters can have the key `branches` or `tags`. 
+Job Filters can have the key `branches` or `tags`.
 
 **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
