@@ -451,6 +451,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**.
 
 ##### Self-hosted runner
+{: #self-hosted-runner }
 
 Use the `resource_class` to configure a [self-hosted runner instance](https://circleci.com/docs/2.0/runner-overview/).
 
@@ -477,9 +478,7 @@ xlarge                | 8     | 16GB
 2xlarge+<sup>(2)</sup>| 20    | 40GB
 {: class="table table-striped"}
 
-###### Example usage
-{: #example-usage }
-{:.no_toc}
+**Example:**
 
 ```yaml
 jobs:
@@ -510,9 +509,7 @@ jobs:
 
 {% include snippets/machine-resource-table.md %}
 
-###### Example usage
-{: #example-usage }
-{:.no_toc}
+**Example:**
 
 ```yaml
 jobs:
@@ -524,9 +521,7 @@ jobs:
       ... // other config
 ```
 
-You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration).
-
-For example:
+You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration):
 
 ```yaml
 jobs:
@@ -546,9 +541,7 @@ large<sup>(3)</sup>| 8 @ 2.7 GHz    | 16GB
 macos.x86.metal.gen1<sup>(4)</sup>                | 12 @ 3.2 GHz     | 32GB
 {: class="table table-striped"}
 
-###### Example usage
-{: #example-usage }
-{:.no_toc}
+**Example**
 
 ```yaml
 jobs:
@@ -571,9 +564,7 @@ xlarge            | 16    | 60GB
 2xlarge           | 32    | 128GB
 {: class="table table-striped"}
 
-###### Example usage
-{: #example-usage }
-{:.no_toc}
+**Example:**
 
 ```yaml
 version: 2.1
@@ -604,9 +595,7 @@ gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16
 gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16
 {: class="table table-striped"}
 
-###### Example usage
-{: #example-usage }
-{:.no_toc}
+**Example:**
 
 ```yaml
 version: 2.1
@@ -631,9 +620,7 @@ Class                                   | vCPUs | RAM | GPUs |    GPU model    |
 windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
-###### Example usage
-{: #example-usage }
-{:.no_toc}
+**Example:**
 
 ```yaml
 version: 2.1
@@ -859,9 +846,7 @@ run: |
     fi
 ```
 
-###### Example
-{: #example }
-{:.no_toc}
+**Example:**
 
 ```yaml
 steps:
@@ -897,9 +882,7 @@ condition | Y | Logic | [A logic statement]({{site.baseurl}}/2.0/configuration-r
 steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
-###### *Example*
-{: #example }
-{:.no_toc}
+**Example:**
 
 ```yml
 version: 2.1
@@ -1023,9 +1006,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 </div>
 
-###### _Example_
-{: #example }
-{:.no_toc}
+**Example:**
 
 {% raw %}
 ```yml
@@ -1097,9 +1078,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-###### Example
-{: #example }
-{:.no_toc}
+**Example:**
 
 {% raw %}
 ```yml
@@ -1121,7 +1100,6 @@ A path is not required here because the cache will be restored to the location f
 
 ##### **`deploy` - DEPRECATED**
 {: #deploy-deprecated }
-{:.no_toc}
 
 Please see [run](#run) for current processes. If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 
@@ -1135,7 +1113,7 @@ Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to m
 *Does your job have [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) > 1?*
 There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
 
-###### *Example*
+**Example:**
 
 The following is an example of replacing the deprecated `deploy` step in a config file that has parallelism > 1 (this code is deprecated, do not copy):
 
@@ -1281,9 +1259,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 Artifact storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
-###### Example
-{: #example }
-{:.no_toc}
+**Example:**
 
 ```yml
 - run:
@@ -1297,7 +1273,7 @@ Artifact storage retention can be customized on the [CircleCI web app](https://a
 ##### **`store_test_results`**
 {: #storetestresults }
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's **Test Summary** section. Storing test results is useful for timing analysis of your test suites.
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's **Test Summary** section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the [Collecting Test Data]({{site.baseurl}}/2.0/collect-test-data/) page.
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
@@ -1306,9 +1282,7 @@ Key | Required | Type | Description
 path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML or Cucumber JSON test metadata files, or to a single test file.
 {: class="table table-striped"}
 
-###### _Example_
-{: #example }
-{:.no_toc}
+**Example:**
 
 Directory structure:
 
@@ -1332,7 +1306,9 @@ test-results
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
 
-Special step used to persist a temporary file to be used by another job in the workflow. `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
+Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}2.0/workspaces/) page.
+
+`persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
 
 Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
@@ -1344,8 +1320,7 @@ paths | Y | List | Glob identifying file(s), or a non-glob path to a directory t
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
 
-##### _Example for root Key_
-{: #example-for-root-key }
+**Example for root Key**
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
@@ -1364,8 +1339,7 @@ After this step completes, the following directories are added to the workspace:
 /tmp/dir/baz
 ```
 
-###### _Example for paths Key_
-{: #example-for-paths-key }
+**Example for paths Key**
 
 ```yml
 - persist_to_workspace:
@@ -1398,7 +1372,7 @@ The Go documentation states that the pattern may describe hierarchical names suc
 ##### **`attach_workspace`**
 {: #attachworkspace }
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
+Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}2.0/workspaces/) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1407,40 +1381,20 @@ at | Y | String | Directory to attach the workspace to.
 
 Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
-###### _Example_
-{: #example }
-{:.no_toc}
+**Example:**
 
 ```yml
 - attach_workspace:
     at: /tmp/workspace
 ```
 
-Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
-Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
-The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it.
-When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.
-
-If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs only the re-run jobs will see the same workspace content as the jobs in the original workflow.
-
-Note the following distinctions between artifacts, workspaces, and caches:
-
-| Type      | Use                      | Example |
-|-----------|------------------------------------|---------
-| Artifacts | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
-| Workspaces| Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
-| Caches    | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
-{: class="table table-striped"}
-
 The lifetime of artifacts, workspaces, and caches can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can control the storage retention periods for these objects. If no storage period is set, the default storage retention period of artifacts is 30 days, while the default storage retention period of workspaces and caches is 15 days.
 {: class="alert alert-info" }
-
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GotHib and Bitbucket Integration]({{site.baseurl}}/2.0/gh-bb-integration/#deployment-keys-and-user-keys) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1457,22 +1411,12 @@ steps:
 **Note:**
 Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
-##### Using `pipeline.` Values
+##### Using `pipeline` Values
 {: #using-pipeline-values }
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
 
-Value                       | Description
-----------------------------|--------------------------------------------------------
-pipeline.id                 | A globally unique id representing for the pipeline
-pipeline.number             | A project unique integer id for the pipeline
-pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
-pipeline.project.type       | E.g. "github"
-pipeline.git.tag            | The tag triggering the pipeline
-pipeline.git.branch         | The branch triggering the pipeline
-pipeline.git.revision       | The current git revision
-pipeline.git.base_revision  | The previous git revision
-{: class="table table-striped"}
+{% include snippets/pipeline-values.md %}
 
 For example:
 
@@ -1497,9 +1441,7 @@ jobs:
 
 Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
 
-###### _Example_
-{: #example }
-{:.no_toc}
+**Example:**
 
 ```yaml
 version: 2.1
@@ -1524,7 +1466,7 @@ workflows:
 
 ## **`workflows`**
 {: #workflows }
-Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
+Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page.
 
 ### **`version`**
 {: #workflow-version }
@@ -1551,6 +1493,11 @@ triggers | N | Array | Should currently be `schedule`.
 
 ##### **`schedule`**
 {: #schedule }
+
+<div class="alert alert-warning" role="alert">
+  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+</div>
+
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
 ```yml
@@ -1588,7 +1535,6 @@ filters | Y | Map | A map defining rules for execution on specific branches
 
 ###### **`branches`**
 {: #branches }
-{:.no_toc}
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
 
@@ -1649,7 +1595,9 @@ context | N | String/List | The name of the context(s). The initial default name
 
 ###### **`type`**
 {: #type }
-A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
+A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) page.
+
+Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
 ```yml
       - hold:
@@ -1665,7 +1613,10 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 
 ###### **`filters`**
 {: #jobfilters }
-Job Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+
+Job Filters can have the key `branches` or `tags`. 
+
+**Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1686,13 +1637,13 @@ workflows:
               only: /server\/.*/
 ```
 
-The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/" in it.
+The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
 
-You can read more about using regex in your config in the [Workflows document]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches).
+You can read more about using regex in your config in the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches) page.
 
 ###### **`branches`**
 {: #branches }
-{:.no_toc}
+
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
@@ -1709,11 +1660,10 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 
 ###### **`tags`**
 {: #tags }
-{:.no_toc}
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
+Tags can have the keys `only` and `ignore`. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
@@ -1731,11 +1681,9 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different arguments.
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see an example in the [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#use-matrix-jobs-to-run-multiple-os-tests)
 
-**Note**
-
-In order to use the `matrix` stanza, you must use parameterized jobs.
+**Note**: In order to use the `matrix` stanza, you must use parameterized jobs.
 
 Key | Required | Type | Description
 ----|----------|------|------------
@@ -1744,7 +1692,7 @@ exclude | N | List | A list of argument maps that should be excluded from the ma
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 {: class="table table-striped"}
 
-**Note:**
+**Example**
 
 The following is a basic example of using matrix jobs.
 
@@ -1786,7 +1734,7 @@ workflows:
 
 ###### Excluding sets of parameters from a matrix
 {: #excluding-sets-of-parameters-from-a-matrix }
-{:.no_toc}
+
 Sometimes you may wish to run a job with every combination of arguments _except_
 some value or values. You can use an `exclude` stanza to achieve this:
 
@@ -1809,7 +1757,6 @@ The matrix above would expand into 8 jobs: every combination of the parameters
 
 ###### Dependencies and matrix jobs
 {: #dependencies-and-matrix-jobs }
-{:.no_toc}
 
 To `require` an entire matrix (every job within the matrix), use its `alias`.
 The `alias` defaults to the name of the job being invoked.
@@ -1879,6 +1826,7 @@ workflows:
 
 ###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
 {: #pre-steps-and-post-steps-requires-version-21 }
+
 Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
 Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
@@ -1914,7 +1862,7 @@ workflows:
 ##### **Using `when` in Workflows**
 {: #using-when-in-workflows }
 
-With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -1978,7 +1926,7 @@ The following logic values are considered falsy:
 - empty strings ("")
 - statements with no arguments
 
-All other values are truthy. Further, Please also note that using logic with an empty list will cause a validation error.
+All other values are truthy. Also note that using logic with an empty list will cause a validation error.
 
 Logic statements always evaluate to a boolean value at the top level, and coerce
 as necessary. They can be nested in an arbitrary fashion, according to their
@@ -2198,6 +2146,5 @@ workflows:
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
 [Config Introduction]({{site.baseurl}}/2.0/config-intro/)
