@@ -77,6 +77,10 @@ window.OptimizelyClient.getVariationName({
       addNewBadgeToSidebar();
       // Init tracking for experiment links and landing page badges
       setUpTracking();
+      reconstructToC(treatment[0]);
+
+      const toc = $('#full-height');
+      toc.css('visibility', 'hidden');
     } else {
       const control = $('.control');
       control.css('display', 'block');
