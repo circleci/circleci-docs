@@ -64,6 +64,11 @@ window.OptimizelyClient.getVariationName({
       }
       // Display content on page for treatment variation
       const treatment = $('.treatment');
+      // Header title is given by getting-started, only content is switched not
+      // the header details thus need to override
+      const headerName = $('#your-first-green-build');
+      headerName[0].innerHTML = 'Quickstart Guide';
+
       treatment.css('display', 'block');
 
       // Init new badge on landing page
