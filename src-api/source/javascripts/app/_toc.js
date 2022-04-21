@@ -1,3 +1,4 @@
+//= require ../lib/_jquery
 //= require ../lib/_imagesloaded.min
 (function () {
   'use strict';
