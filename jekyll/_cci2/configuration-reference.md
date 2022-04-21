@@ -229,7 +229,7 @@ See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCI offers several execution environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need. Learn more about executors in the [Executors and Image guide]({{ site.baseurl }}/2.0/executor-types/).
+CircleCI offers several execution environments. We call these _executors_. An executor defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need. Learn more about executors in the [Executors and Image guide]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {: #docker }
