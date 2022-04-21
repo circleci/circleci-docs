@@ -1,24 +1,24 @@
 ---
 layout: classic-docs
 title: ステータスバッジの追加
-description: CircleCI のステータス バッジを Web ページや Web ドキュメントに埋め込む方法
+description: CircleCI のステータスバッジを Web ページや Web ドキュメントに埋め込む方法
 version:
   - Cloud
   - Server v3.x
   - Server v2.x
 ---
 
-プロジェクトのビルド ステータス (成功または失敗) を表示するバッジを README または他のドキュメントに作成する方法について説明します。
+プロジェクトのビルドステータス (成功または失敗) を表示するバッジを README または他のドキュメントに作成する方法について説明します。
 
 ## 概要
 {: #overview }
 
-ステータス バッジは、一般にプロジェクトの README に埋め込まれていますが、どの Web ドキュメントにも配置できます。 CircleCI では、ステータス バッジの埋め込みコードを生成するツールが提供されています。 By default, a badge displays the status of a project's default branch, though you can also display the status of specific branches.
+ステータスバッジは、一般にプロジェクトの README に埋め込まれていますが、どの Web ドキュメントにも配置できます。 CircleCI では、ステータスバッジの埋め込みコードを生成するツールが提供されています。 デフォルトで、バッジにはプロジェクトのデフォルトブランチのステータスが表示されますが、特定のブランチを選択することも可能です。
 
-A badge status allows teams to quickly see build statuses in their repo. Badges change appearance depending on their status (success, failure).
+バッジのステータスにより、リポジトリでビルドのステータスを素早く確認することができます。 バッジはステータス（成功または失敗）によって、外観が変わります。
 
 以下の形式のコードを生成できます。
-- 画像 URL
+- イメージの URL
 - Markdown
 - Textile
 - Rdoc
@@ -26,14 +26,14 @@ A badge status allows teams to quickly see build statuses in their repo. Badges 
 - reStructuredText
 - pod
 
-## Generating a status badge
+## ステータスバッジの生成
 {: #generating-a-status-badge }
 
-To generate your own status badge, you will need to know, and substitute, the following variables in the code snippets below:
+独自のバッジを生成するには、下記のコードスニペットの変数について理解し、置き換えられる必要があります。
 
-- `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`
-- `<ORG_NAME>` - The organization or user name the project in question belongs to
-- `<VCS>` - your VCS provider (`gh` for "github" and `bb` for BitBucket)
+- `<PROJECT_NAME>`: プロジェクト名 例: `circleci-docs`
+- `<ORG_NAME>` : そのプロジェクトの組織名またはユーザー名
+- `<VCS>`: VCS プロバイダー ("github" は `gh`、BitBucket は `bb` )
 - `<LINK>` - The link you want the status badge to go to when clicked (example: the pipeline overview page)
 - Optional: an API token (to create badges for private projects)
 
