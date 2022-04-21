@@ -89,7 +89,7 @@ window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_getting_started_docs_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: 'body',
-  guestExperiment: false,
+  guestExperiment: true,
 })
   .then((variation) => {
     if (variation === 'treatment') {
