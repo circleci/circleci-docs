@@ -39,12 +39,7 @@ end
       <%= Rouge::Themes::MonokaiSublime.render(:scope => '.highlight') %>
     </style>
     <%= inline_css 'screen' %>
-    <%= inline_css 'print' %>
-
-
-    <%= stylesheet_link_tag :screen, media: :screen %>
-    <%= stylesheet_link_tag :print, media: :print %>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
@@ -751,21 +746,20 @@ end
         });
       })();
 
+      /** from all_nosearch.js ----------------------------------------------- */
 
+      $(function () {
+        loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
+        setupLanguages($('body').data('languages'));
+        $('.content').imagesLoaded(function () {
+          window.recacheHeights();
+          window.refreshToc();
+        });
+      });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      window.onpopstate = function () {
+        activateLanguage(getLanguageFromQueryString());
+      };
 
     </script>
 
