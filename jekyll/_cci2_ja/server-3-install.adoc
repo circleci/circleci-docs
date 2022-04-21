@@ -15,48 +15,48 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+CircleCI Server v3.x のコアサービスのインストールステップを開始する前に、xref:server-3-install-prerequisites.adoc[前提条件] をすべて満たしていることをご確認ください。
 
 .インストール手順のフローチャート ステップ 2）
 image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
 
-NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
+NOTE: 以下のセクションでは、`< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
+
 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
 
-CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] for installation management and distribution.
+CircleCI Server v3.x は、 https://www.replicated.com/[Replicated] の https://kots.io[KOTS]  を使用してインストールの管理と配布を行います。
 
 . 次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。
 +
 kubectl kots version
 +
-NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 For more information, please see
-https://github.com/microsoft/WSL/issues/4199.
-. From the terminal, run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
+NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
+. ターミナルから、以下を実行します（プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール]を参照してください）。
 +
 kubectl kots install circleci-server
 +
 すると、以下を入力するよう求められます。
 * デプロイ先の名前空間
 * KOTS 管理者コンソールのパスワード
-. When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
+. 完了すると、KOTS 管理者コンソールにアクセスする URL が通知されます (通常は、`\http://localhost:8800`)。
 
-TIP: If you need to get back to the KOTS admin console at a later date, run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+TIP: 後日再び KOTS 管理者コンソールにアクセスする必要がある場合、 `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>` を実行します。
 
-TIP: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
+TIP: 名前空間を作成したら、以下のコマンド: `kubectl config set-context --current --namespace <namespace>` で、`kubectl` コンテキストも設定することをお勧めします。
 
 === HTTP プロキシ経由でのインストール (オプション)
 
-If you wish to install CircleCI server behind a proxy, use the following command structure should be used for step 2 above (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
+プロキシ経由で CircleCI Server をインストールするには、上記の 2. で以下のコマンドを使用します (詳細は、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら] の KOTS 文書をご覧ください）。
 
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
 
 
-The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
+ロードバランサーのエンドポイントを、`output processor` と `vm-service` の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
-For further information see the https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[Configuring a Proxy] guide.
+詳細については、 https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
 
 === フロントエンドの設定
 
@@ -67,27 +67,27 @@ image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
 以下のフィールドに入力します。
 
-* *CircleCI Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate.
-* *Frontend Replicas* - Used to increase the amount of traffic that can be handled by the frontend.
-* *Frontend TLS Private Key (required)* - You created this during your prerequisite steps. この値は以下のコマンドで取得できます。
+* *Domain Name (ドメイン名)(必須)* : フロントエンド TLS キーと証明書を作成した際に指定したドメイン名を入力します。
+* *Frontend Replicas (フロントエンドのレプリカ)*: フロントエンドで処理できるトラフィック量を増やす際に使用します。
+* *Frontend TLS Private Key (フロントエンド TLS プライベートキー)* (必須): 前提条件のステップで作成したキーです。 この値は以下のコマンドで取得できます。
 +
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
-* *Frontend TLS Certificate (required)* - You created this during your prerequisite steps. この値は以下のコマンドで取得できます。
+* *Frontend TLS Certificate (フロントエンド TLS 証明書)* (必須): 前提条件のステップで作成した証明書です。 この値は以下のコマンドで取得できます。
 +
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 
 ****
-For the **Frontend TLS private key and certificate** you have 4 options:
+**フロントエンド TLS プライベートキーと証明書**については、4つの選択肢があります。
 
 * プライベートキーと証明書を指定します。
-* Check the box that allows https://letsencrypt.org/[Let's Encrypt] to automatically request and manage certificates for you.
-* Check the box that allows https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to automatically request and manage certificates for you. ACM の使用に関する詳細は、[CircleCI Server v3.x オペレーターの証明書]ガイドを参照してください。
+* https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。
+*  https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 ACM の使用に関する詳細は、[CircleCI Server v3.x オペレーターの証明書]ガイドを参照してください。
 * この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
 
-**Using ACM TLS Certificates**
+**ACM TLS 証明書の使用**
 
-If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント] の ACM 証明書の生成方法に従ってください。
 
 証明書を作成したら、フロントエンドセクションの KOTS コンソールで ACM を有効にしてください。 ACM のボックスにチェックを入れて、ACM ARN (Amazon Resource Name) を入力します。
 
@@ -98,9 +98,9 @@ CircleCI Server を再デプロイした場合、DNS レコードを再ルーテ
 ====
 ****
 
-* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
+* *Private Load Balancer (プライベートロードバランサー)* (オプション):  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
 +
-NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
+NOTE: プライベートロードバランサーの使用オプションを選択した場合、 Lets Encrypt (暗号化を許可) オプションは機能せず、使用できなくなります。
 
 === 暗号化
 
@@ -121,8 +121,8 @@ image::server-3-encryption-settings.png[Screenshot showing encryption settings]
 .Github の設定
 image::server-3-github-settings.png[Screenshot showing GitHub settings]
 
-* *GitHub Type (required)* -
-Select Cloud or Enterprise (on premises).
+* *Github Type (Github の種類) (必須)*  -
+Cloud または Enterprise (オンプレミス)を選択します。
 * *OAuth Client ID (required)* -
 The OAuth Client ID provided by GitHub.
 * *OAuth Client Secret (required)* -
