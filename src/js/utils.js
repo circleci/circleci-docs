@@ -11,15 +11,6 @@ export function isUnsupportedBrowser() {
   return msie > 0;
 }
 
-const displayElement = (el, display) => {
-  if (el) {
-    el.style.display = display;
-  }
-};
-
-export const displayInitialElement = (el) => displayElement(el, 'initial');
-export const displayBlockElement = (el) => displayElement(el, 'block');
-
 /**
  * checks if an item is in the viewport
  * shamelessly borrowed from https://stackoverflow.com/a/7557433
