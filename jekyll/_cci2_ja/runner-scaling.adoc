@@ -1,11 +1,11 @@
 ---
 
-description: Learn how to scale CircleCI runners.
+description: CircleCI ランナーをスケーリングする方法
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= Scaling Runner
+= ランナーのスケーリング
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
