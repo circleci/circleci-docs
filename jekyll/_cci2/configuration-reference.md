@@ -73,7 +73,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/docs/2.0/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/docs/2.0/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}2.0/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/2.0/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
 
 ## **`commands`** (requires version: 2.1)
 {: #commands-requires-version-21 }
@@ -182,7 +182,7 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 #### `environment`
 {: #environment }
-A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/docs/2.0/env-vars/) page.
+A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page.
 
 #### `parallelism`
 {: #parallelism }
@@ -462,6 +462,7 @@ jobs:
   job_name:
     machine: true
     resource_class: <my-namespace>/<my-runner>
+```
 
 ##### Docker executor
 {: #docker-executor }
@@ -1305,7 +1306,7 @@ test-results
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
 
-Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}2.0/workspaces/) page.
+Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces/) page.
 
 `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
 
@@ -1371,7 +1372,7 @@ The Go documentation states that the pattern may describe hierarchical names suc
 ##### **`attach_workspace`**
 {: #attachworkspace }
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}2.0/workspaces/) page.
+Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces/) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
