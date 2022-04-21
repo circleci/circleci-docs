@@ -453,7 +453,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 ##### Self-hosted runner
 {: #self-hosted-runner }
 
-Use the `resource_class` to configure a [self-hosted runner instance](https://circleci.com/docs/2.0/runner-overview/).
+Use the `resource_class` key to configure a [self-hosted runner instance](https://circleci.com/docs/2.0/runner-overview/).
 
 For example:
 
@@ -461,8 +461,7 @@ For example:
 jobs:
   job_name:
     machine: true
-    resource_class: my-namespace/my-runner
-```
+    resource_class: <my-namespace>/<my-runner>
 
 ##### Docker executor
 {: #docker-executor }
