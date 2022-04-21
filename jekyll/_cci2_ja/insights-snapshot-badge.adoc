@@ -13,20 +13,20 @@ version:
 
 == 概要
 
-The Insights snapshot badge, similar to a <<status-badges#,status badge>> that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.
+プロジェクトの README に埋め込まれている<<status-badge#,ステータスバッジ>>と同様に、インサイト スナップショットバッジにより、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
 
 image::insights-snapshot-preview.png[Insights snapshot badge]
 
-The most common use case for the Insights snapshot badge is to display <<insights#,Insights>> metrics for the deployment workflow on the project’s main branch in the README. With that said, the badge can be configured to display Insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
+インサイト スナップショットバッジの最も一般的な使用例は、プロジェクトの README のメインブランチで、デプロイワークフローの<<insights#, インサイト>>メトリクスを表示する場合です。 このバッジは、プロジェクト内のすべてのブランチのすべてのワークフローのインサイトメトリクスを表示するようにも設定できます。 これにより、スケジュール化したワークフロー、ビルドターゲットが異なるワークフロー、テスト用に使われるワークフローの追加バッジを作成し、例を挙げることができます。
 
-While commonly placed in a project README, Insights snapshot badges can be embedded in any web document. The badge currently displays the following three metrics from the Insights dashboard:
+インサイトスナップショットバッジは、一般的にプロジェクトの README に置かれますが、 Web ドキュメントのどこにでも埋め込むことができます。 現在このバッジは、インサイトダッシュボードで下記の 3 つのメトリクスを表示しています。
 
-* *Throughput* - The average number of runs of a workflow, over the selected time window.
-* *Duration* - The 95th percentile duration of the selected workflow, over the specified time window.
-95th percentile gives you an idea of the longest duration or time you’re waiting for a build to finish, excluding the last 5 percent, to account for potential transitory spikes.
-* *Success Rate* - The percentage of successful builds for the selected workflow, over the specified time window.
+* *Throughput*: 選択したワークフローの設定した時間枠における平均実行数
+* *Duration*: 任意のワークフローの選択した時間枠における 95 パーセンタイル実行時間。
+95 パーセンタイルにより、一時的な急増の可能性を考慮して最後の 5% を除いた、ビルド終了までの最長時間を確認できます。
+* *Success Rate*: 選択したワークフローの設定した時間枠における成功したビルドの割合 
 
-== Generating an Insights snapshot badge
+== インサイトスナップショットバッジの生成
 
 To generate an insights snapshot badge code snippet for a public repository, go to the https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page.
 
