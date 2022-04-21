@@ -35,7 +35,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 ## CircleCI をセットアップする
 {: #setting-up-circleci }
 
-1. CircleCI の [Project</strong> ページ](https://app.circleci.com/projects/)に移動します。 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
+1. CircleCI の [**Project** ページ](https://app.circleci.com/projects/)に移動します。 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
 1. **Project** ダッシュボードに自動的に移動します。 ダッシュボードで、セットアップするプロジェクトを選択します (`hello-world`)。
 1. CI スターターパイプラインを新しいブランチにコミットするを選択し、config.yml のスターターテンプレートの使用を選択し、**[Set Up Project]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。
 
