@@ -12,7 +12,7 @@ version:
   - Server v3.x
 ---
 
-CircleCIでは、複数のビルド環境を用意しており、 これらを **Executor** と呼んでいます。 **Executor** は、ジョブを実行する基盤テクノロジーまたは環境を定義する機能です。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCIでは、複数の実行環境を用意しており、 これらを **Executor** と呼んでいます。 **Executor** は、ジョブを実行する基盤テクノロジーまたは環境を定義する機能です。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
