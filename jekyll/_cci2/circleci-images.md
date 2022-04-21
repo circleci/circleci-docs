@@ -252,7 +252,7 @@ the `circleci/golang:1.9-browsers` image.
 
 Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
 
-- [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
+- [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
 - [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
 - [Redis](https://circleci.com/developer/images/image/cimg/redis)
