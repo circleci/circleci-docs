@@ -11,17 +11,39 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server 3.x の一般公開が開始されました。 この最新バージョンの CircleCI Server では、ワークロードの増大に合わせてお客様専用の Kubernetes クラスタと社内ネットワーク内でスケーリングを行えるようになりました。 クラウド版 CircleCI のすべての機能はそのままご利用いただけます。
+CircleCI Server 3.x の一般公開が開始されました。 最新バージョンのサーバーでは、重いワークロードの下でのスケールが可能になりました。独自の Kubernetes クラスターとプライベートネットワーク内で、CircleCI クラウドの機能を使えるようになります。
 
-CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 既存の CircleCI Server 2.19 から 3.x への移行をご希望のお客様は、担当のカスタマー サクセス マネージャーにお問い合わせください。 CircleCI Server 3.x では、月次パッチ リリースと四半期ごとの機能リリースを予定しています。
+CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能をご利用いただけます。 既存の 2.19 から 3.x への移行をご希望のお客様は、カスタマーサクセスマネージャーまでお問い合わせください。 CircleCI Server 3.x では、毎月のパッチ リリースと四半期ごとの機能リリースを予定しています。
 
 toc::[]
+
+== リリース 3.4.1
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+* `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`を実行します。
+* KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 修正点
+
+* Kong リソースの上限を引き上げました。 以前の制限は、一部のサーバーのインストール環境の安定性に影響を及ぼしていました。
+* 特定の環境で distributor-external が実行できない不具合を修正しました。
+* KOTS の設定が更新され、ACM 使用時にプライベートロードバランサーを使用できるようになりました。
+
+=== 既知の問題
+
+* カスタム Docker レジストリから必要に応じて CircleCI Build Agent をプルできるようになりました。 詳細についてはカスタマーサポートにお問い合わせください。
+* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、 https://circleci.com/docs/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド] を参照してください。
+* Kubernetes v1.16 - v1.23 に対応しました。
+* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 詳細については、https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[CircleCI Server v3.x のインストールガイド]を参照してください。
 
 == リリース 3.4.0
 
 === アップグレードに関する注意事項
 
-v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
 
 * `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`を実行します。
 * KOTS 管理者コンソールからアプリをデプロイします。
@@ -42,9 +64,9 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 === 既知の問題
 
 * KOTS バージョン 1.65.0 - 1.67.0 で Prometheus が破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないでください。
-* machine executorを使用するジョブのSSHによる再試行では、プライベートIPアドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、 表示されたプライベート IP にアクセスできるようにする必要があります。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
-* プロキシ内にインストールしている場合、KOTS 管理者コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
+* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、 表示されたプライベート IP にアクセスできるようにする必要があります。
+* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 
 == リリース 3.3.1
 
@@ -61,8 +83,7 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 === 既知の問題
 
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] 
-を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 
 == リリース 3.3.0
@@ -87,7 +108,7 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 * 変更された Let's Encrypt 証明書での GitHub Enterprise の更新はサポートされていません。
 * Let's Encrypt の新しいルート証明書 `isrgrootx1` は信頼できません。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
-* 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
 * CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
@@ -106,9 +127,9 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 
 === 既知の問題
 
-* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
-* 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、 プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
+* 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
@@ -117,7 +138,7 @@ v3.4.0 をインストールする前に、 `circleci-server-kube-state-metrics`
 
 === アップグレードに関する注意事項
 
-KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
+KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)] *を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
 See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
@@ -131,9 +152,9 @@ See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
 === 既知の問題
 
-* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
-* 現在、一つの CircleCI Server アカウントで、複数の組織が同一名のコンテキストを持つことが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、 プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
+* 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
@@ -142,14 +163,14 @@ See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
 === アップグレードに関する注意事項
 
-KOTS 管理者コンソール ダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
+KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)]*を選択し、CircleCI Server v3.2.0 の *[Deploy (デプロイ)]* をクリックします。
 
 サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
 
 ==== PostgreSQL ポッドが `[Pending(保留)]`のまま
 アップグレード後に PostgreSQL ポッドが `[Pending(保留)]` 状態のままである場合、ポッドを以下の手順で 0 にスケールダウンしてから、再度スケールアップしてください。
 
-以下により、PostgreSQL ポッドが `[Pending(保留)]`状態かどうかを確認することができます。
+PostgreSQL ポッドが `[Pending(保留)]`状態かどうかを確認するには、以下のコマンドを使用します。
 
 ```shell
 $ kubectl get pod -l app.kubernetes.io/name=postgresql
@@ -182,7 +203,7 @@ kubectl scale deployment output-processor --replicas 2
 ==== Traefikのポッドが指定通りに実行されない
 アップグレード後に Traefik ポッドが 2 つあることに気付いた場合、新しいポッドが指定通りに実行されるように、古いポッドを見つけて削除する必要があります。
 
-以下により、Traefik ポッドの状態を確認することができます。
+Traefik ポッドのステータスを確認するには、以下にコマンドを使用します。
 
 ```shell
 $ kubectl get pod -l app=traefik
@@ -219,10 +240,10 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 === 既知の問題
 
 * KOTS 管理者の設定では、セットアップ中 Nomad mTLS を誤って`有効`に設定します。 Nomad クライアントがデプロイされるまで、 mTLS が`無効`になっている必要があります。
-* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能します。 しかし、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
+* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、 プライベートなインストールでは標準的に機能します。 しかし、パブリックなインストールでは、VPC に VPN を使用するなどして、表示されたプライベート IP にアクセスできるようにする必要があります。
 * 現在、同一の CircleCI Server アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
-* CircleCI 1.0 のビルドはサポートされていません。 1.0 のビルドを実行しようとした場合、問題の原因を示すようなフィードバックはアプリケーション上に表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
-* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 お使いの環境でビルドを実行しても、アプリ画面にビルドが表示されない場合は、 https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの構成を検証し、問題の原因を調査することをおすすめします。
+* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理者コンソールが壊れる原因になります。
 * サーバーがプロキシ内にインストールされている場合、ランナーは使用できません。
 * Let's Encrypt の証明書を生成できません。 独自の証明書を用意するか、デフォルトの証明書を使用する必要があります。
 
@@ -230,44 +251,43 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 === アップグレードに関する注意事項
 
-IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロードバランサーにより処理されます。 以前の 3.x バージョンからアップデートする場合、`frontend-external` ロードバランサーを参照する DNS レコードを、`circleci-server-traefik` ロードバランサーを参照するように更新する必要があります。 traefik ロードバランサーの外部 IP アドレスまたは DNS 名は、クラスタにアクセス可能なターミナルで `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
+IMPORTANT: 本リリースでは、`frontend-external` ロード バランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロードバランサーにより処理されます。 以前の 3.x バージョンからアップデートする場合、`frontend-external` ロードバランサーを参照する DNS レコードを、`circleci-server-traefik`ロードバランサーを参照するように更新する必要があります。 Traefik ロードバランサーの外部 IP アドレスまたは DNS 名は、クラスタにアクセス可能なターミナルで `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
 
 DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。
 
-. Retrieve the external IP or DNS name for the traefik load balancer as described or by looking the DNS A record for `app.<your domain name>`` - this should already point to your traefik load balancer.
-. 既存の CircleCI Server のドメイン名を参照している DNS A レコードを見つけます (`アプリ` のサブドメインを参照しているものではないことに注意してください)。
-. A レコードを編集して、アプリのサブドメインのレコードと同じ様に traefik ロード バランサーを参照するように
- 設定します。 DNS サービスによっては、編集結果が反映されるまで数分かかります。
+. Retrieve the external IP or DNS name for the Traefik load balancer as described, or by looking the DNS A record for `app.<your domain name>` - this should already point to your Traefik load balancer.
+. 既存の CircleCI Server のドメイン名を参照している DNS A レコードを見つけます (`app.` のサブドメインを参照しているものではないことに注意してください)。
+. A レコードを、`app.`のサブドメインのレコードと同じ様に Traefik ロード バランサーを参照するように編集します。 DNS サービスによっては、編集結果が反映されるまで数分かかりる場合があります。
 
-次に、KOTS 管理者コンソールダッシュボードのメニューバーで  [Version History (バージョン履歴)] を選択し、CircleCI Server v3.1.0 の *[Deploy (デプロイ)]* をクリックします。
+KOTS 管理者コンソールのメニューバーで*[Version History (バージョン履歴)]*を選択し、CircleCI Server v3.1.0 の *[Deploy (デプロイ)]* をクリックします。
 
 === 新機能
 
 * Telegraf のプラグインをサーバーに追加してカスタマイズすることにより、例えば Datadog のようなサードパーティのモニタリングソリューションを使用できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
-* 完全にプライベートな環境にインストールしたいお客様のために、プライベートロードバランサーのみを使用するオプションが導入されました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-load-balancers/[ロード バランサーに関するページ]を参照してください。
-* Server 3.xは、ビルドの成果物、テスト結果、その他の状態をオブジェクトストレージに保管します。 S3互換のあらゆるストレージとGoogle Cloud Storageをサポートしています。 設定方法について詳しくは、 https://circleci.com/docs/2.0/server-3-install/[インストールガイド] を参照してください。
-* セットアップワークフローを利用した動的な設定(Dynamic Config)が、サーバーで利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/2.0/dynamic-config/[ダイナミックコンフィグ] を参照してください。
-* Runnerがサーバーで利用可能となりました。 インストール手順を含む詳細については、https://circleci.com/docs/ja/2.0/runner-overview/?section=executors-and-images[ランナーに関するページ]を参照してください。 ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
+* CircleCI Server 環境を完全にプライベート化したいというお客様のご要望に応え、使用するロード バランサーをプライベートのもののみに限定するオプションが導入されました。 詳細については、https://circleci.com/docs/2.0/server-3-operator-load-balancers/[ロード バランサー]ガイドを参照してください。
+* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage がサポートされます。 設定方法について詳しくは、 https://circleci.com/docs/2.0/server-3-install/[インストールガイド] を参照してください。
+* CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/2.0/dynamic-config/[ダイナミックコンフィグ] を参照してください。
+* CircleCI Server でランナーを利用できるようになりました。 インストール手順を含む詳細については、https://circleci.com/docs/ja/2.0/runner-overview/?section=executors-and-images[ランナーに関するページ]を参照してください。 ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
 * v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 詳細と手順については、https://circleci.com/docs/ja/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server の新機能に関するページ]を参照してください。
 * 次のサービスを外部化できるようになりました。 設定方法について詳しくは、https://circleci.com/docs/ja/2.0/server-3-install/[CircleCI Server v3.x のインストールに関するページ]を参照してください。
 ** Postgres
 ** MongoDB
 ** Vault
 * バックアップと復元機能を利用できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/[バックアップと復元に関するページ]を参照してください。
-* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と設定は KOTS 管理者 UI で行えます。 詳細については、https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
-* 2 X-large リソース クラスがサポートされるようになりました。 大きいリソース クラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
+* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と設定は KOTS 管理者コンソールで行えます。 詳細については、https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視に関するページ]を参照してください。
+* 2 X-large リソース クラスがサポートされるようになりました。 大きいリソースクラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
 * ビルドアーティファクトとテスト結果のライフサイクルを KOTS 管理者コンソールの *Storage Object Expiry* で設定できるようになりました。また、期限切れを無効にしてアーティファクトとテスト結果を無期限に保持するオプションも追加されました。
 
 === 修正点
 
-* CircleCI サポート バンドルにシークレットが含まれる原因となる、一連のバグを修正しました。
+* CircleCI のサポートバンドルにシークレットが漏れる原因となっていた一連のバグを修正しました。
   ** サードパーティのバグなどが原因で、シークレットの一部が誤って改変されていました。
-  ** PostgresDB により標準出力にシークレットが出力されていました。
+  ** PostgresSQL により標準出力にシークレットが出力されていました。
   ** 一部の CircleCI サービスでシークレットが記録されていました。
-* Nomad Terraform モジュールのネットワーク セキュリティが強化されました。
+* Nomad Terraform モジュールのネットワークセキュリティが強化されました。
 * Terraform v0.15.0 以上がサポートされるようになりました。
 * インストール スクリプトが更新され、最新バージョンの Terraform でサポートされている機能を使用できるようになりました。
-* 大規模なビルドが誤ったマシンタイプで実行される原因となっていたバグを修正しました。 大規模なビルドは、今後、正しいクラス (vCPU 4 つ、15GB RAM) で実行されるようになります。
+* マシンの大規模なビルドが誤ったマシンタイプで実行される原因となっていたバグを修正しました。 マシンの大規模なビルドは、正しいクラス (vCPU 4 つ、15GB RAM) で実行されるようになりました。
 * Vault のクライアント トークンの期限切れ時に contexts-service が起動しなくなるバグを修正しました。
 * 準備完了前に `legacy-notifier` から準備完了と報告されるバグを修正しました。
 * すべてのサービスで、JVM ヒープ サイズに関するパラメーターが削除されました。 ヒープ サイズはメモリ上限の半分に設定されます。

@@ -27,7 +27,7 @@ CircleCI の[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config/)機�
 ### コマンド
 {: #commands }
 
-コマンドには、 [パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする](https://circleci.com/docs/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
+コマンドには、 [パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする]({{site.baseurl}}/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
 
 例えば、AWS S3 Orb には、ファイルやオブジェクトを新しい場所にコピーする _コマンド_: `aws-s3/copy`があります。 AWS認証の詳細が環境変数として保存されている場合、このコマンドを設定で使用するための構文は単純です。
 
@@ -123,7 +123,7 @@ parameters:
 ### ジョブ
 {: #jobs }
 
-[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) は、与えられた [Executor]({{site.baseurl}}/2.0/orb-concepts/#executors) 内で実行される一連の[ステップ](https://circleci.com/docs/2.0/configuration-reference/#steps) を定義し、 [ワークフロー]({{site.baseurl}}/2.0/workflows/)を使ってオーケストレーションされます。 また、ジョブは個別に [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/) を介してステータスを返します。
+[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) は、与えられた [Executor]({{site.baseurl}}/2.0/orb-concepts/#executors) 内で実行される一連の[ステップ]({{site.baseurl}}/2.0/configuration-reference/#steps)を定義し、 [ワークフロー]({{site.baseurl}}/2.0/workflows/)を使ってオーケストレーションされます。 また、ジョブは個別に [GitHub Checks]({{site.baseurl}}/2.0/enable-checks/) を介してステータスを返します。
 
 ジョブがある Orb をインポートする際に、ワークフローから直接ジョブを参照することができます。
 

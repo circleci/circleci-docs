@@ -10,6 +10,15 @@ version:
 
 This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. There are a number of ways to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
 
+Note the following distinctions between artifacts, workspaces, and caches:
+
+| Type      | Use                      | Example |
+|-----------|------------------------------------|---------
+| Artifacts | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
+| Workspaces| Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
+| Caches    | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+{: class="table table-striped"}
+
 * TOC
 {:toc}
 
@@ -158,10 +167,10 @@ Billing for storage can be minimized by evaluating your storage needs and settin
 
 ## See also
 {: #see-also }
-{:.no_toc}
 - [Caching Dependencies]({{site.baseurl}}/2.0/caching)
 - [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
 - [Workspaces]({{site.baseurl}}/2.0/workspaces)
 - [Artifacts]({{site.baseurl}}/2.0/artifacts)
 - [IP Ranges]({{site.baseurl}}/2.0/ip-ranges/)
 - [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+- [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)

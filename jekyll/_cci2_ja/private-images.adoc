@@ -27,7 +27,7 @@ https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] �
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
 Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
 
-NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが_必要_なものだけにアクセスできるようにしたりするのにとても便利です。
+NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが_必要_なものだけにアクセスできるようにしたりするのにとても便利です。
 
 次の例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与しています。
 
@@ -50,7 +50,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ----
 
-If you have https://docs.docker.com/docker-hub/2fa/[two-factor authentication set up on Docker Hub], you can simply use https://docs.docker.com/docker-hub/access-tokens/[your personal access token] for the `password` key instead.
+既に https://docs.docker.com/docker-hub/2fa/[2 要素認証を Docker Hub] に設定している場合は、`password`キーの代わりに https://docs.docker.com/docker-hub/access-tokens/[ パーソナルアクセストークン]を使用することができます。
 たとえば下記のようにします。
 
 [source,yaml]

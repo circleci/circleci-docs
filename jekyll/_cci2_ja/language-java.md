@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Java"
 short-title: "Java"
-description: "Building and Testing with Java on CircleCI"
+description: "CircleCI での Java を使用したビルドとテスト"
 categories:
   - language-guides
 order: 4
@@ -25,10 +25,10 @@ version:
 
 ここでは、以下を前提としています。
 
-* [Gradle](https://gradle.org/) を使用している。 [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
-* Java 11 を使用している
+* [Gradle](https://gradle.org/) を使用している。 [Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/)。
+* Java 11 を使用している。
 * Spring Framework を使用している。  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
-* アプリケーションをオールインワン uberjar として配布できる
+* アプリケーションをオールインワン uberjar として配布できる。
 
 
 ## 設定ファイルの例
@@ -75,7 +75,7 @@ jobs: # a collection of steps
               | sed 's/.\{5\}$//' \
               | circleci tests split --split-by=timings --timings-type=classname)
             cd ../../..
-            # 引数を「./gradlew test」にフォーマットします
+            # Format the arguments to "./gradlew test"
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
             ./gradlew test $GRADLE_ARGS
@@ -88,19 +88,19 @@ jobs: # a collection of steps
             - ~/.gradle/caches
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - store_test_results:
-      # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するテスト結果をアップロードします
+      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: build/test-results/test
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト結果をアップロードします
+      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/test-results/test
           when: always
       - run:
-          name: JAR の収集
+          name: Assemble JAR
           command: |
-            # 他のノードでは以下をスキップします
+            # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
             fi
-      # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
+      # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
           path: build/libs
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
@@ -117,9 +117,9 @@ workflows:
 
 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-java-spring> からアクセスできます。
 
-ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in CircleCI and click the **Follow Project** button next to your project. 最後に `.circleci/config.yml` の内容をすべて削除します。
+ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、プロジェクトの隣にある **[Follow Project (プロジェクトをフォローする)]** ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
-また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。
+これで `config.yml`を最初から作る準備ができました。
 
 ## 設定ファイルの詳細
 {: #config-walkthrough }
@@ -136,17 +136,17 @@ version: 2
 version: 2
 jobs:
   build:
-    # 並列実行が必要ない場合は削除します
+    # Remove if parallelism is not desired
     parallelism: 2
     environment:
-      # OOM (メモリ不足) エラーを回避するように JVM と Gradle を構成します
+      # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
 テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
-また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。 Gradleプロセスが終了した後に終了させるため、Gradleデーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
+また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を設定しています。 Gradleプロセスが終了した後に終了させるため、Gradle デーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
 ```yaml
 version: 2
@@ -165,7 +165,7 @@ version: 2
           POSTGRES_DB: circle_test
 ```
 
-バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK コンビニエンス イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
+バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
 
 この `build` ジョブ内にいくつかの `steps` を追加します。
 
@@ -191,27 +191,27 @@ version: 2
 
  追加の引数を使用して `./gradlew test` を実行します。 これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
 
- **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
+ {% raw %}
 ```yaml
 ...
     steps:
       - run:
-          name: Run tests in parallel # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
-          # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します
+          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
-            # このノードで実行する必要があるテストのクラス名のリストを取得します
+            # Get list of classnames of tests that should run on this node
             CLASSNAMES=$(circleci tests glob "**/*.java" \
               | cut -c 1- | sed 's@/@.@g' \
               | sed 's/.\{5\}$//' \
               | circleci tests split --split-by=timings --timings-type=classname)
             cd ../../..
-            # 引数を「./gradlew test」にフォーマットします
+            # Format the arguments to "./gradlew test"
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
             ./gradlew test $GRADLE_ARGS
 ```
-`run` ステップを使用して、テスト スイートを実行します。
+{% endraw %}
 
 次回の処理を高速化するために、`save_cache` ステップを使用して Gradle ラッパーと依存関係を保存します。
 
@@ -283,5 +283,5 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
-- Java のメモリの問題に対処する方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/ja/2.0/java-oom/)」を参照してください。
+- デプロイ ターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
+- Java のメモリの問題に対処する方法については、[Java OOM エラーに関するドキュメント]({{ site.baseurl }}/ja/2.0/java-oom/)を参照してください。
