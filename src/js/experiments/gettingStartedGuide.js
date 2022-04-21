@@ -63,7 +63,7 @@ function displayGettingStartedContent() {
     const treatment = $('.treatment');
     treatment.css('display', 'block');
     if (treatment[0]) {
-      reconstructToC(treatment[0]);
+      reconstructToC(treatment[0], 'treatment');
     }
     // In the experiment we do not want to show the TOC but I have to reconstruct it
     // For scroll track action then hide it
@@ -80,7 +80,7 @@ function displayFirstGreenBuildContent() {
     const toc = $('#full-height');
     toc.css('visibility', 'visible');
     if (control[0]) {
-      reconstructToC(control[0]);
+      reconstructToC(control[0], 'control');
     }
   }
 }
