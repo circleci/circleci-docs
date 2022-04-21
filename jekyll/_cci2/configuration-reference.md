@@ -1474,7 +1474,7 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | Should currently be `2.1`
+version | Y if config version is `2` | String | Should currently be `2`
 {: class="table table-striped"}
 
 ### **<`workflow_name`>**
