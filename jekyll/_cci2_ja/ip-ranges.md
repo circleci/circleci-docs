@@ -54,7 +54,7 @@ workflows:
       - build
 ```
 
-## List of IP address ranges associated with feature
+## この機能により割り当てられる IP アドレスのリスト
 {: #list-of-ip-address-ranges }
 
 *最終更新*: 2022 年 4 月 6 日
@@ -86,10 +86,10 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 **注:** ジョブが使用するアドレスは上記のいずれかであり、指定はできません。 また、このアドレスリストは、本機能を有効化しているすべての CircleCI ユーザーと共有されることに注意してください。
 {: class="alert alert-info"}
 
-## List of IP address ranges for core services
+## コアサービスの IP アドレスのリスト
 {: #list-of-ip-address-ranges-for-core-services }
 
-These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
+コアサービス (ジョブのトリガーや CircleCI と GitHub 間でのユーザーに関する情報の交換などに使用されるサービス) の IP アドレスの範囲は以下のとおりです。
 
 - 18.214.70.5
 - 52.20.166.242
@@ -102,7 +102,7 @@ These are the IP address ranges for core services (used to trigger jobs, exchang
 - 35.174.249.131
 - 3.210.128.175
 
-### List of IP address ranges changelog
+### IP アドレスの範囲に関する更新履歴のリスト
 {: #list-of-ip-address-ranges-changelog }
 
 #### 2021-08-23
