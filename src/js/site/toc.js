@@ -59,6 +59,15 @@ export function highlightTocOnScroll(headings) {
                 page: location.pathname,
               },
             );
+
+            window.AnalyticsClient.trackAction(
+              'docs-getting-started-observed',
+              {
+                sectionTitle: intersectingEntry.innerText,
+                sectionIndex: indexOfCurrentHeadline,
+                page: location.pathname,
+              },
+            );
           }
 
           sidebarItems.forEach((el) => {
@@ -144,5 +153,5 @@ export const reconstructToC = (body) => {
   });
 
   document.getElementById('full-height').style.visibility = 'visible';
-  highlightTocOnScrollOnce(headings);
+  highlightTocOnScroll(headings);
 };

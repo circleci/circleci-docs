@@ -11,20 +11,25 @@ version:
   - Server v2.x
 suggested:
   - 
-    title: 6 つの構成オプション
+    title: 6 つの設定オプション
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
   - 
-    title: ダイナミック コンフィグの紹介
+    title: ダイナミックコンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
   - 
-    title: ダイナミック コンフィグの使用
+    title: ダイナミックコンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
-    title: ローカル CLI を使用した設定のバリデーション
+    title: ローカル CLI を使用した設定の確認
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
+
+    title: ユーザーの権限の更新について
+    isExperiment: true
+    link: https://support.circleci.com/hc/ja/articles/360048210711
+
 ---
 
 このドキュメントは、`.circleci/config.yml` ファイルで使用される CircleCI 2.x 設定キーのリファレンスガイドです。
@@ -108,7 +113,7 @@ commands:
 
 ## **`parameters`** (version: 2.1 が必須)
 {: #parameters-requires-version-21 }
-設定ファイル内で使用するパイプライン パラメーターを定義します。 使用方法の詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/ja/2.0/pipeline-variables#pipeline-marameters-in-configuration)を参照してください。
+設定ファイル内で使用するパイプラインパラメーターが宣言されます。 使用方法の詳細については、[パイプラインの値とパラメーター]({{ site.baseurl }}/ja/2.0/pipeline-variables#pipeline-parameters-in-configuration)を参照してください。
 
 | キー         | 必須 | タイプ | 説明                                                                                                                            |
 | ---------- | -- | --- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -118,7 +123,7 @@ commands:
 ## **`executors`** (version: 2.1 が必須)
 {: #executors-requires-version-21 }
 
-Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
+Executor は、ジョブステップの実行環境を定義するものです。Executor を 1 つ定義すると複数のジョブで再利用できます。
 
 | キー                | 必須               | 型    | 説明                                                                                                                                 |
 | ----------------- | ---------------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,19 +158,19 @@ jobs:
       - run: echo outside the executor
 ```
 
-パラメーター付き Executor の例は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」の「[Executor でパラメーターを使う](https://circleci.com/docs/ja/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
+パラメーター付き Executor の例は、[設定の再利用]({{ site.baseurl }}/ja/2.0/reusing-config/)の[Executor でパラメーターを使う]({{site.baseurl}}/ja/2.0/reusing-config/#using-parameters-in-executors) のセクションをご覧ください。
 
 ## **`jobs`**
 {: #jobs }
 
-ワークフローは 1 つ以上の一意の名前付きジョブで構成し、 それらのジョブは `jobs` マップで指定します。[2.0 config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)で `jobs` マップの例を 2 つ紹介しています。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
+ワークフローは 1 つ以上の一意の名前付きジョブで構成し、 それらのジョブは `jobs` マップで指定します。[2.0 config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)で `jobs` マップの例を 2 つ紹介しています。 ジョブの名前がマップのキーとなり、ジョブを記述するマップが値となります。
 
-**注:** ジョブの最大実行時間は、Free プランは 1 時間、Performance プランは 3 時間、Scale プランは 5 時間となります。 ジョブがタイムアウトする場合は、より大きな[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resourceclass)の使用や、[並列実行]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs)を検討してください。  また、料金プランのアップグレードや、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を利用した複数ジョブの同時実行も可能です。
+**注:** ジョブの最大実行時間は、Free プランでは 1 時間、Performance プランでは 3 時間、Scale プランでは 5 時間となります。 ジョブがタイムアウトする場合は、より大きな[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resourceclass)の使用や、[並列実行]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs)を検討してください。  また、料金プランのアップグレードや、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を利用した複数のジョブの同時実行も可能です。
 
 ### **<`job_name`>**
 {:job-name}
 
-1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 名前は、その `jobs` リスト内で一意である必要があります。 値となるマップでは下記の属性を使用できます。
+各ジョブは、キーとなるジョブ名と値となるマップで構成されます。 名前は、その `jobs` リスト内で一意である必要があります。 値となるマップでは下記の属性を使用できます。
 
 | キー                | 必須               | タイプ  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ----------------- | ---------------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -547,7 +552,7 @@ jobs:
       ... // other config
 ```
 
-`resource_class` を使用して[ランナー インスタンス](https://circleci.com/docs/ja/2.0/runner-overview/#referencing-your-runner-on-a-job)を構成することもできます。
+`resource_class` を使用して[ランナーインスタンス]({{site.baseurl}}/ja/2.0/runner-overview/#section=configuration)を設定することもできます。
 
 たとえば、以下のように記述します。
 
@@ -577,7 +582,7 @@ jobs:
       ... // 他の構成
 ```
 
-`machine` クラスを使用して[ランナー インスタンス](https://circleci.com/docs/ja/2.0/runner-overview/#referencing-your-runner-on-a-job)を設定することも可能です。
+`machine` クラスを使用して[ランナーインスタンス]({{site.baseurl}}/ja/2.0/runner-overview/#section=configuration)を設定することもできます。
 
 例えば下記のようにします。
 
@@ -945,10 +950,10 @@ steps:
 
 `when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
-| キー        | 必須 | タイプ   | 説明                                                                                      |
-| --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                               |
+| キー        | 必須 | タイプ   | 説明                                                                             |
+| --------- | -- | ----- | ------------------------------------------------------------------------------ |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/2.0/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                      |
 {: class="table table-striped"}
 
 ###### *例*
@@ -1058,7 +1063,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 | {% raw %}`{{ .BuildNum }}`{% endraw %}                 | このビルドの CircleCI ビルド番号。                                                                                                                                                                                                                                                                                                                |
 | {% raw %}`{{ .Revision }}`{% endraw %}                 | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                    |
 | {% raw %}`{{ .CheckoutKey }}`{% endraw %}              | リポジトリのチェックアウトに使用する SSH キー。                                                                                                                                                                                                                                                                                                            |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | 環境変数 `variableName` ([CircleCI からエクスポートされる環境変数](https://circleci.com/ja/docs/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト](https://circleci.com/ja/docs/2.0/contexts)に追加した環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                    |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト]({{site.baseurl}}/ja/2.0/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                           |
 | {% raw %}`{{ checksum "filename" }}`{% endraw %}       | filename で指定したファイルの内容の SHA256 ハッシュを Base64 エンコードした値。 リポジトリにコミットするファイルのみを指定できます。絶対パス、または現在の作業ディレクトリからの相対パスで参照できます。 依存関係マニフェスト ファイル (`package-lock.json`、`pom.xml`、`project.clj` など) の使用をお勧めします。 `restore_cache` と `save_cache` の間でこのファイルが変化しないのが重要なポイントです。ファイル内容が変化すると、`restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にしてキャッシュを保存するためです。 |
 | {% raw %}`{{ epoch }}`{% endraw %}                     | UNIX エポックからの秒数で表される現在時刻。                                                                                                                                                                                                                                                                                                              |
 | {% raw %}`{{ arch }}`{% endraw %}                      | OS と CPU の情報。  OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin amd64` あるいは `linux i386/32-bit` のような文字列になります。                                                                                                                                                                                                               |
@@ -1177,15 +1182,15 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 {: #deploy-deprecated }
 {:.no_toc}
 
-現在のプロセスに関しては、[実行](#run)をご覧ください。 並列処理が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
+現在のプロセスに関しては、[実行](#run)をご覧ください。 並列実行が 2 つ以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
 
 ##### **`deploy` から `run` への移行**
 
-**注: **廃止予定の `deploy` ステップが使われている設定ファイルは、変更_する必要があります_。ジョブに並列処理が使われているかいないかに関わらず、`deploy` ステップの_すべての_インスタンスを削除する必要があります。
+**注: **廃止予定の `deploy` ステップが使われている設定ファイルは、変更_する必要があります_。ジョブに並列実行が使われているかいないかに関わらず、`deploy` ステップの_すべての_インスタンスを削除する必要があります。
 
-*[並列処理](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 1 つの場合*、`deploy`キーと[`run`](#run) キーをスワップアウトします。 移行に必要な処理はこれだけです。
+*[並列実行]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)が 1 つの場合*、`deploy` キーと [`run`](#run) キーをスワップアウトします。 移行に必要な処理はこれだけです。
 
-*ジョブの [並列処理](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 2 つ以上の場合*、 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 テストジョブの並列処理が 2 つ以上の場合、以前の `deploy` ステップのコマンドが ‘run’  に置き換えられ 、並列処理は行われません。 以下のサンプルをご覧ください。
+*ジョブの[並列実行](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 2 つ以上の場合*、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 テストジョブの並列実行が 2 つ以上の場合、以前の `deploy` ステップのコマンドが ‘run’  に置き換えられ 、並列実行は行われません。 以下のサンプルをご覧ください。
 
 ###### *サンプル*
 
@@ -1224,7 +1229,7 @@ workflows:
       - deploy-step-job
 ```
 
-完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出します。これには`doing-things-job` を完了させる必要があります。 `doing-things-job` では 並列処理を 3 つ使用し、`deploy-step-job` では実際のデプロイを実行します。 以下のサンプルを参照してください。
+完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出します。これには`doing-things-job` を完了させる必要があります。 `doing-things-job` では 並列実行を 3 つ使用し、`deploy-step-job` では実際のデプロイを実行します。 以下のサンプルを参照してください。
 
 ```yml
 version: 2.1
@@ -1267,7 +1272,7 @@ workflows:
             - doing-things-job
 ```
 
-`deploy-job` の `doing-things-job` からファイルが必要な場合は、[ワークスペース](https://circleci.com/docs/ja/2.0/workspaces/)を使います。 これにより、2つジョブでファイルを共用でき、 `deploy-job` がファイルにアクセスできるようになります。 以下のサンプルを参照してください。
+`deploy-job` の `doing-things-job` からファイルが必要な場合は、[ワークスペース]({{site.baseurl}}/ja/2.0/workspaces/)を使います。 これにより、2つのジョブでファイルを共用でき、 `deploy-job` がファイルにアクセスできるようになります。 以下のサンプルを参照してください。
 
 ```yml
 version: 2.1
@@ -1316,7 +1321,7 @@ workflows:
             - doing-things-job
 ```
 
-このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー](https://circleci.com/docs/2.0/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
+このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
@@ -1955,7 +1960,7 @@ workflows:
 ##### **ワークフローでの `when` の使用**
 {: #using-when-in-workflows }
 
-CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
+CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント]({{site.baseurl}}/ja/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
 
 以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 

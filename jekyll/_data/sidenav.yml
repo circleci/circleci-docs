@@ -14,6 +14,8 @@ en:
           link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
+        - name: Using the Slack Orb
+          link: 2.0/slack-orb-tutorial/
         - name: FAQ
           link: 2.0/faq/
     - name: Migration
@@ -184,23 +186,20 @@ en:
 - name: Configuration
   icon: icons/sidebar/configure.svg
   children:
-    - name: Introduction
+    - name: Configuration Introduction
       link: 2.0/config-intro/
-      children:
-        - name: Configuration Introduction
-          link: 2.0/config-intro/
-        - name: Configuration Reference
-          link: 2.0/configuration-reference/
-        - name: Sample Configuration
-          link: 2.0/sample-config/
-        - name: Reusing Configuration
-          link: 2.0/reusing-config/
-        - name: Dynamic Configuration
-          link: 2.0/dynamic-config
-        - name: Using the CircleCI CLI
-          link: 2.0/local-cli/
-        - name: Using the CircleCI Configuration Editor
-          link: 2.0/config-editor/
+    - name: Configuration Reference
+      link: 2.0/configuration-reference/
+    - name: Sample Configuration
+      link: 2.0/sample-config/
+    - name: Reusing Configuration
+      link: 2.0/reusing-config/
+    - name: Dynamic Configuration
+      link: 2.0/dynamic-config
+    - name: Using the CircleCI CLI
+      link: 2.0/local-cli/
+    - name: Using the CircleCI Configuration Editor
+      link: 2.0/config-editor/
     
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -227,6 +226,10 @@ en:
           link: 2.0/testing-orbs/
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
+    - name: Tutorials
+      children:
+        - name: Using the Slack Orb
+          link: 2.0/slack-orb-tutorial/
 
 - name: Insights
   icon: icons/sidebar/insights.svg
@@ -235,6 +238,8 @@ en:
       link: 2.0/insights/
     - name: Metrics glossary
       link: 2.0/insights-glossary/
+    - name: Insights snapshot badge
+      link: 2.0/insights-snapshot-badge/
     - name: Test Insights
       link: 2.0/insights-tests/
     - name: Data Partnerships
@@ -728,9 +733,9 @@ ja:
         - name: Caching strategies
           link: ja/2.0/caching-strategy/
           i18n_name: キャッシュ戦略
-        - name: Pipeline variables
+        - name: Pipeline values and parameters
           link: ja/2.0/pipeline-variables/
-          i18n_name: パイプライン変数
+          i18n_name: パイプラインの値とパラメータ
         - name: Using shell scripts
           link: ja/2.0/using-shell-scripts/
           i18n_name: シェルスクリプトを使う
@@ -862,13 +867,10 @@ ja:
   icon: icons/sidebar/configure.svg
   i18n_name: 設定ファイル
   children:
-    - name: Introduction
+    - name: Configuration Introduction
       link: ja/2.0/config-intro/
-      i18n_name: 概要
+      i18n_name: 設定概要
       children:
-        - name: Configuration Introduction
-          link: ja/2.0/config-intro/
-          i18n_name: 設定ファイル概要
         - name: Configuration Reference
           link: ja/2.0/configuration-reference/
           i18n_name: リファレンス
@@ -880,16 +882,18 @@ ja:
           i18n_name: 設定ファイル再利用(Orbs)
         - name: Dynamic Configuration
           link: ja/2.0/dynamic-config
-          i18n_name: ダイナミック コンフィグ
+          i18n_name: ダイナミックコンフィグ
         - name: Using the CircleCI CLI
           i18n_name: CircleCI CLIの使用
           link: ja/2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
           link: ja/2.0/config-editor/
           i18n_name: 設定ファイル エディター
-    - name: Orbs
-      link: ja/2.0/orb-intro/
-      i18n_name: Orbs
+- name: Orbs
+  icon: icons/sidebar/orbs.svg
+  children:
+    - name: Using Orbs
+      i18n_name: Orbs の利用
       children:
         - name: Orb Introduction
           link: ja/2.0/orb-intro/
@@ -901,7 +905,6 @@ ja:
           link: ja/2.0/orbs-faq/
           i18n_name: Orbs FAQ
     - name: Authoring Orbs
-      link: ja/2.0/orb-author-intro/
       i18n_name: Orbs オーサリング
       children:
         - name: Intro to Authoring an Orb
@@ -1195,6 +1198,21 @@ ja:
         - name: Backup and Restore
           i18n_name: バックアップとリストア
           link: ja/2.0/server-3-operator-backup-and-restore
+    - name: Server v3.4.x PDFs
+      link: ja/2.0/server-3-overview
+      children:
+        - name: v3.4 Overview
+          link: ja/2.0/CircleCI-Server-3.4.1-Overview.pdf
+          i18n_name: v3.4 の概要
+        - name: v3.4 Installation Guide for AWS
+          link: ja/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf
+          i18n_name: v3.4 インストールガイド AWS
+        - name: v3.4 Installation Guide for GCP
+          link: ja/2.0/CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
+          i18n_name: v3.4 インストールガイド GCP
+        - name: v3.4 Operations Guide
+          link: ja/2.0/CircleCI-/Server-3.4.1-Operations-Guide.pdf
+          i18n_name: v3.4 管理者ガイド
     - name: Server v3.3.x PDFs
       link: ja/2.0/server-3-overview
       children:
@@ -1202,10 +1220,10 @@ ja:
           link: ja/2.0/CircleCI-Server-3.3.0-Overview.pdf
           i18n_name: v3.3 の概要
         - name: v3.3 Installation Guide for AWS
-          link: ja/2.0/CircleCI-Server-3.0.0-AWS-Installation-Guide.pdf
+          link: ja/2.0/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
           i18n_name: v3.3 インストールガイド AWS
         - name: v3.3 Installation Guide for GCP
-          link: ja/2.0/CircleCI-Server-3.0.0-GCP-Installation-Guide.pdf
+          link: ja/2.0/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
           i18n_name: v3.3 インストールガイド GCP
         - name: v3.3 Operations Guide
           link: ja/2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf

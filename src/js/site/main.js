@@ -298,6 +298,20 @@ $(function () {
   });
 });
 
+function handleGithubDropdownClick() {
+  const dropdown = $('.gh-signup-dropdown');
+  // toggle the popup
+  $('.gh-dropdown-button').on('click', (e) => {
+    dropdown.toggleClass('show');
+    e.stopPropagation();
+  });
+
+  // clicking on body closes pop if it is open.
+  $('body').on('click', () => {
+    dropdown.removeClass('show');
+  });
+}
+
 // Used to call functions on document on ready
 $(function () {
   // Currently this function is only used for the insights table
@@ -306,4 +320,6 @@ $(function () {
   expandImageOnClick();
   // This function is used to add external icons to urls outside of baseurl
   externalLink();
+  // Used to toggle dropdown menu for GitHub btn in /docs/2.0/first-steps/
+  handleGithubDropdownClick();
 });

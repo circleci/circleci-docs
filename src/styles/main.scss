@@ -1,3 +1,8 @@
+// mixins
+@import 'mixins/cta_badge';
+@import 'mixins/cta_button';
+
+// scss files
 @import 'site'; // this is bootstrap
 @import 'variables';
 @import 'sidebar';
@@ -20,9 +25,18 @@
 @import 'popup';
 @import 'includes/getting-started-section-header';
 @import 'includes/vcs-banner';
+@import 'includes/getting-started-prereq';
 
 // pages with their own unique styling
 @import 'pages/troubleshooting-and-common-issues';
+
+@import 'pages/getting-started';
+
+
+@import 'includes/badge';
+
+@import 'pages/getting-started';
+
 
 // prism related scss
 @import 'prism/theme';
@@ -328,10 +342,11 @@ body.homepage{
     }
   }
 
-	article{
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
+  article{
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      flex-direction: column;
 	}
 
 	div.category-section{
@@ -683,4 +698,9 @@ Fixing styling for the code example tables in the "Migrating From..." pages
   #closeImg {
     top: 70px;
   }
+}
+
+// Used in Getting Started Guide experiment to expand the container width for the content
+.getting-started-full-width {
+  max-width: 100% !important;
 }

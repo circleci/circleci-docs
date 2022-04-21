@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 This chapter describes failover or replacement of the services machine. Refer to the Backup section below for information about possible backup strategies and procedures for implementing a regular backup image or snapshot of the services machine.
 
 toc::[]

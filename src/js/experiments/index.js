@@ -1,12 +1,11 @@
 import forceAll from './forceAll';
-import signupLinksCta from './signupLinksCta';
-import './snippetFeedback';
 import troubleShootingCommonIssues from './troubleshootingCommonIssues';
 import popupCta from './popupCta';
+import gettingStartedGuide from './gettingStartedGuide';
 
 export default {
   forceAll,
-  signupLinksCta,
   troubleShootingCommonIssues,
   popupCta,
+  gettingStartedGuide,
 };
