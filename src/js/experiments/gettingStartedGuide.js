@@ -54,24 +54,35 @@ function displayGettingStartedContent() {
   if (window.location.pathname === '/docs/2.0/getting-started/') {
     const articleContainer = $('.your-first-green-build');
     articleContainer.addClass('getting-started-full-width');
+
+    // Header title is given by getting-started, only content is switched not
+    // the header details thus need to override
+    const headerName = $('#your-first-green-build');
+    headerName[0].innerHTML = 'Quickstart Guide';
+    // Display content on page for treatment variation
+    const treatment = $('.treatment');
+    treatment.css('display', 'block');
+    if (treatment[0]) {
+      reconstructToC(treatment[0]);
+    }
+    // In the experiment we do not want to show the TOC but I have to reconstruct it
+    // For scroll track action then hide it
+    const toc = $('#full-height');
+    toc.css('visibility', 'hidden');
   }
-  // Header title is given by getting-started, only content is switched not
-  // the header details thus need to override
-  const headerName = $('#your-first-green-build');
-  headerName[0].innerHTML = 'Quickstart Guide';
-  // Display content on page for treatment variation
-  const treatment = $('.treatment');
-  treatment.css('display', 'block');
-  reconstructToC(treatment[0]);
 }
 
 function displayFirstGreenBuildContent() {
-  const control = $('.control');
-  control.css('display', 'block');
-  // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
-  const toc = $('#full-height');
-  toc.css('visibility', 'visible');
-  reconstructToC(control[0]);
+  if (window.location.pathname === '/docs/2.0/getting-started/') {
+    const control = $('.control');
+    control.css('display', 'block');
+    // ToC is hidden due to using getting-started-guide-experimental for the layout, setting the css to ensure that the ToC is present in control variation
+    const toc = $('#full-height');
+    toc.css('visibility', 'visible');
+    if (control[0]) {
+      reconstructToC(control[0]);
+    }
+  }
 }
 
 window.OptimizelyClient.getVariationName({
@@ -93,11 +104,6 @@ window.OptimizelyClient.getVariationName({
 
       // Init tracking for experiment links and landing page badges
       setUpTracking();
-
-      // In the experiment we do not want to show the TOC but I have to reconstruct it
-      // For scroll track action then hide it
-      const toc = $('#full-height');
-      toc.css('visibility', 'hidden');
     } else {
       displayFirstGreenBuildContent();
     }
