@@ -23,7 +23,8 @@ Some notes about workspaces:
 
 * Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 * Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
-* The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. * Each job can only see content added to the workspace by the jobs that are upstream of it.
+* The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. 
+* Each job can only see content added to the workspace by the jobs that are upstream of it.
 * When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined. * If multiple concurrent jobs persist the same filename then attaching the workspace will error.
 * If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
