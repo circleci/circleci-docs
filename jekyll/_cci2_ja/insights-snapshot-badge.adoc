@@ -3,7 +3,7 @@
 version:
 - クラウド
 ---
-= インサイトのスナップショットバッジ
+= インサイト スナップショットバッジ
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Generate a badge that displays Insights metrics for a project.
@@ -13,46 +13,47 @@ version:
 
 == 概要
 
-プロジェクトの README に埋め込まれている<<status-badge#,ステータスバッジ>>と同様に、インサイト スナップショットバッジにより、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
+インサイト スナップショットバッジは、プロジェクトの README に埋め込まれている<<status-badge#,ステータスバッジ>>と同様に、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
 
 image::insights-snapshot-preview.png[Insights snapshot badge]
 
-インサイト スナップショットバッジの最も一般的な使用例は、プロジェクトの README のメインブランチで、デプロイワークフローの<<insights#, インサイト>>メトリクスを表示する場合です。 このバッジは、プロジェクト内のすべてのブランチのすべてのワークフローのインサイトメトリクスを表示するようにも設定できます。 これにより、スケジュール化したワークフロー、ビルドターゲットが異なるワークフロー、テスト用に使われるワークフローの追加バッジを作成し、例を挙げることができます。
+インサイト スナップショットバッジの最も一般的なユースケースは、プロジェクトの README のメインブランチで、デプロイワークフローの<<insights#, インサイト>>メトリクスの表示です。 しかし、このバッジは、プロジェクト内のすべてのブランチのすべてのワークフローのインサイトメトリクスを表示するようにも設定できます。 そうすることにより、例えば、スケジュール化したワークフロー、ビルドターゲットが異なるワークフロー、テスト用に使われるワークフローの追加バッジを作成することができます。
 
-インサイトスナップショットバッジは、一般的にプロジェクトの README に置かれますが、 Web ドキュメントのどこにでも埋め込むことができます。 現在このバッジは、インサイトダッシュボードで下記の 3 つのメトリクスを表示しています。
+インサイト スナップショットバッジは、一般的にプロジェクトの README に置かれますが、 Web ドキュメントのどこにでも埋め込むことができます。 現在このバッジは、インサイトダッシュボードで下記の 3 つのメトリクスを表示します。
 
 * *Throughput*: 選択したワークフローの設定した時間枠における平均実行数
 * *Duration*: 任意のワークフローの選択した時間枠における 95 パーセンタイル実行時間。
 95 パーセンタイルにより、一時的な急増の可能性を考慮して最後の 5% を除いた、ビルド終了までの最長時間を確認できます。
-* *Success Rate*: 選択したワークフローの設定した時間枠における成功したビルドの割合 
+* *Success Rate*: 選択したワークフローの設定した時間枠における成功ビルドの割合 
 
-== インサイトスナップショットバッジの生成
+== インサイト スナップショットバッジの生成
 
-To generate an insights snapshot badge code snippet for a public repository, go to the https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page.
+インサイトスナップショットバッジのパブリックリポジトリ用のコードスニペットを生成するには、 https://app.circleci.com/[CircleCI Web アプリ]を開き、プロジェクトを選択します。 *Project Settings* を開き、*Insights Snapshot Badge* のページに移動します。
 
-On the Insights Snapshot Badge page, you can select the branch, workflow, and time window for which you want to display project metrics for, as well as the desired format for the code snippet.
+Insights Snapshot Badge のページでは、プロジェクトのメトリクスを表示するブランチ、ワークフロー、時間枠、そしてコードスニペットの形式を選択することができます。
 
-You can generate code in the following formats:
+以下の形式のコードを生成できます。
 
-* 画像 URL
+* イメージの URL
 * Markdown
 * Textile
-* RDoc
+* Rdoc
 * AsciiDoc
 * reStructuredText
 * Pod
 
-The following is an example of a Insights snapshot badge generated for our CircleCI documentation repository, in Markdown:
+下記は、CircleCI ドキュメントのリポジトリ用に
+Markdown 形式で生成されたインサイト スナップショットバッジの例です。
 
 [![CircleCI](https://dl.circleci.com/insights-snapshot/gh/circleci/circleci-docs/master/build-deploy/badge.svg?window=30d)](https://app.circleci.com/insights/github/circleci/circleci-docs?branches=master&workflows=build-deploy&reporting-window=last-30-days&insights-snapshot=true)
 
-== Creating badges for private repositories
+== プライベートリポジトリ用のバッジの作成
 
-To create an Insights snapshot badge for a private project, you will need to create an API token with a scope of “Status” and include that token in the image source URL. If you already have a status badge generated for the same project, you may reuse the same API token for the Insights snapshot badge.
+プライベートプロジェクトのインサイト スナップショットバッジを作成するには、“Status” の範囲で API トークンを作成し、そのトークンをイメージのソース URL に含める必要があります。 同じプロジェクトにステータスバッジを生成したことがある場合は、インサイト スナップショットバッジに同じ API トークンを再利用することができます。
 
-You can add an API token directly from the Insights Snapshot Badge page by clicking on the *Add API Token* button. This creates an API token with a scope of "Status" and the label "insights-snapshot". (You will also see the new token in your project's *API Permissions* settings page.) Your code snippet is displayed after the API token is created.
+Insights Snapshot Badge ページで *Add API Token* をクリックすると、直接 API トークンを追加することができます。 これにより、"Status" の範囲の API トークンと "insights-snapshot" ラベルが作成されます。 (プロジェクトの *API Permissions* でも新しいトークンが表示されます)。 コードスニペットは、API の作成後に表示されます。
 
 == 関連項目
 
-* <<status-badges#,Status Badges>>
-* <<insights-glossary#,Insights Metrics Glossary>>
+* <<status-badges#,ステータスバッジ>>
+* <<insights-glossary#,インサイトメトリクスの用語集>>
