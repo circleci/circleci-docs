@@ -9,6 +9,7 @@ class MiddlemanInline < ::Middleman::Extension
       end.join("\n")
     end
 
+    # Don't use this for now
     def inline_js(*args)
       args.map do |arg|
         "<script type='text/javascript'>#{render_resource(fname(arg, '.js'))}</script>"
@@ -23,10 +24,7 @@ class MiddlemanInline < ::Middleman::Extension
     end
 
     def render_resource(fname)
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>> #{fname}"
       x = sitemap.resources.find { |res| res.source_file.match(fname) }
-      puts "!!!!!!!!!!!!!!!!"
-      puts x
       x.render()
     end
   end
@@ -35,3 +33,41 @@ end
 Middleman::Extensions.register :inline do
   MiddlemanInline
 end
+
+
+# module Middleman
+#   module Sprockets
+#     class Resource
+#       def render *_args
+#         ::Middleman::Util.instrument 'sprockets.render', asset: self do
+#           sprockets_asset.source
+#         end
+#       end
+
+
+#       def sprockets_asset
+#         ::Middleman::Util.instrument 'sprockets.asset_lookup', asset: self do
+#           @environment[@sprockets_path] || raise(::Sprockets::FileNotFound, @sprockets_path)
+#         end
+#       rescue StandardError => e
+#         raise e if @app.build?
+
+#         @errored = true
+#         Error.new(e, ext)
+#       end
+
+#       class Error
+
+#         def source
+#           case @ext
+#           when '.css' then css_response
+#           when '.js' then "foobarbaz"
+#           else
+#             default_response
+#           end
+#         end
+#       end
+
+#     end
+#   end
+# end
