@@ -210,7 +210,7 @@ jobs:
 
 #### `parameters`
 {: #parameters }
-`parameters` can be used when [calling that `job` in a `workflow`](#jobs-in-workflow).
+`parameters` can be used when [calling a `job` in a `workflow`](#jobs-in-workflow).
 
 Reserved parameter-names:
 
