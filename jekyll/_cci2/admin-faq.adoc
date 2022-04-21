@@ -1,5 +1,5 @@
 ---
-description: "This document is intended for system administrators of self-hosted installations of CircleCI Server. 
+description: "This document is intended for system administrators of self-hosted installations of CircleCI Server.
 This guide, as well as the rest of our docs, are open-source and available on GitHub."
 version:
 - Server v2.x
@@ -11,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
