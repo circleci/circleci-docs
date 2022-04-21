@@ -63,7 +63,7 @@ function displayGettingStartedContent() {
     const treatment = $('.treatment');
     treatment.css('display', 'block');
     if (treatment[0]) {
-      reconstructToC(treatment[0]);
+      reconstructToC(treatment[0], 'treatment');
     }
     // In the experiment we do not want to show the TOC but I have to reconstruct it
     // For scroll track action then hide it
@@ -80,7 +80,7 @@ function displayFirstGreenBuildContent() {
     const toc = $('#full-height');
     toc.css('visibility', 'visible');
     if (control[0]) {
-      reconstructToC(control[0]);
+      reconstructToC(control[0], 'control');
     }
   }
 }
@@ -89,7 +89,7 @@ window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_getting_started_docs_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: 'body',
-  guestExperiment: false,
+  guestExperiment: true,
 })
   .then((variation) => {
     if (variation === 'treatment') {

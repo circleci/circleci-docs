@@ -7,7 +7,7 @@ import { isElementInViewport } from '../utils';
  * highlight it.
  *
  * */
-export function highlightTocOnScroll(headings) {
+export function highlightTocOnScroll(headings, variation) {
   let isExperiment = true;
   if (!headings) {
     headings = document.querySelectorAll('h2, h3, h4, h5, h6');
@@ -66,6 +66,7 @@ export function highlightTocOnScroll(headings) {
                 sectionTitle: intersectingEntry.innerText,
                 sectionIndex: indexOfCurrentHeadline,
                 page: location.pathname,
+                variation: variation,
               },
             );
           }
@@ -110,7 +111,7 @@ export const highlightTocOnScrollOnce = (headings) => {
   }
 };
 
-export const reconstructToC = (body) => {
+export const reconstructToC = (body, variation) => {
   const tocList = document.getElementById('toc');
   tocList.innerHTML = '';
 
@@ -153,5 +154,5 @@ export const reconstructToC = (body) => {
   });
 
   document.getElementById('full-height').style.visibility = 'visible';
-  highlightTocOnScroll(headings);
+  highlightTocOnScroll(headings, variation);
 };
