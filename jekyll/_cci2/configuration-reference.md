@@ -1468,7 +1468,7 @@ workflows:
 {: #workflows }
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page.
 
-### **`version`**
+### **`version`** - not required for v2.1 configuration
 {: #workflow-version }
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
