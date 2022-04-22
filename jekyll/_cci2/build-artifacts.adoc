@@ -3,7 +3,7 @@ version:
 - Server v2.x
 - Admin
 ---
-= Build Artifacts
+= Managing Build Artifacts
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Build artifacts persist data after a job is completed and can be used for longer-term storage of your build process outputs.
