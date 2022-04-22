@@ -1,11 +1,11 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Configuration Introduction
+= 設定ファイルの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI config.yml file."
@@ -13,31 +13,31 @@ version:
 :toc: macro
 :toc-title:
 
-This guide gets you started with the CircleCI `config.yml` file.
+このガイドでは、CircleCI `config.yml` ファイルの使用方法を説明します。
 
 toc::[]
 
-== Getting started with CircleCI config
+== CircleCI 設定ファイル入門
 
-This guide covers the following topics:
+このガイドでは、以下のトピックについて説明します。
 
-* How CircleCI finds and runs `config.yml`.
-* How you can use shell commands to perform actions.
-* How `config.yml` interacts with your code.
-* How to trigger a build.
-* How to use Docker containers to run your jobs in a specific environment.
-* How to use workflows to orchestrate your build.
-* How to add approval steps to your workflow.
+* CircleCI `config.yml` を検索、実行する方法。
+* シェル コマンドを使ってアクションを実行する方法。
+* `config.yml` がコードとやり取りする方法。
+* ビルドをトリガーする方法。
+* Docker コンテナを使用して、特定の環境でジョブを実行する方法。
+* ワークフローを使用して、ビルドをオーケストレーションする方法。
+* ワークフローに承認ステップを追加する方法。
 
-CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the <<writing-yaml#,Writing YAML>> document for guidance on the basics.
+CircleCI は *Configuration as Code* を貫いています。 その結果として、ビルドからデプロイまでのデリバリー プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 `config.yml` ファイルは、リポジトリ プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 その基本的な内容については、 <<writing-yaml#,YAML の記述>> を参照してください。
 
-== Part 1: Using the shell
+== パート 1: シェルの使用
 
-CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
+CircleCI では、オンデマンドのシェルによりコマンドを実行します。 パート 1 では、ビルドをセットアップし、シェル コマンドを実行します。
 
-. If you have not done so already, <<first-steps#,sign up with CircleCI>> and select either your Version Control System (VCS). You can also sign up with email.
-. Create a `.circleci` folder at the root of your project. Make sure the folder starts with a period so that CircleCI can identify it.
-. Create a `config.yml` file inside the `.circleci` folder and paste the following code:
+. ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、いずれかのバージョン管理システム (VCS) を選択します。 メールで登録することもできます。
+. プロジェクトのルートに、`.circleci` フォルダーを作成します。 フォルダー名は、CircleCI が認識できるように、必ずピリオドで始めてください。
+. `config.yml` ファイルを `.circleci` フォルダー内に作成し、以下のコードをペーストします。
 +
 [source,yaml]
 ----
@@ -54,50 +54,50 @@ jobs:
             echo 'This is the delivery pipeline'
 ----
 +
-The following commentary describes what occurs in each line of the sample code:
-* *Line 1:* This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
-* *Line 2:* The `jobs` level contains a collection of children, representing your jobs. You specify the names for these jobs, for example, _build_, _test_, _deploy_.
-* *Line 3:* `build` is the first child in the `jobs` collection. In this example, `build` is also the only job.
-* *Line 4:* This specifies that you are using a Docker image for the container where your job's commands are run.
-* *Line 5:* This is the Docker image. The example shows `alpine:3.15`, a minimal image based on Alpine Linux.
-* *Line 6:* The `steps` collection is a list of `run` directives.
-* *Line 7:* Each `run` directive is executed in the order in which it is declared.
-* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` should be meaningful to you as an action within your build process.
-* *Line 9:* The `command` attribute is a list of shell commands that you want to execute. The initial pipe, `|`, indicates there will be multiple lines of shell commands.
-* *Line 10:* Prints `Hello World!` in your build shell.
-* *Line 11:* Prints `This is the delivery pipeline`.
-. Commit your `config.yml` file (and push, if you are working remotely).
-. On the Projects page in CircleCI, find your project and click the blue *Set Up Project* button next to it.
+上記サンプルコードの各行について、以下で解説します。
+* * 1 行目 :* 使用している CircleCI プラットフォームのバージョンを示します。 `2.1` が最新のバージョンです。
+* * 2 行目 :* `jobs` レベルには、子のコレクションが含まれ、ジョブを表しています。 例えば、_build_、_test_、_deploy_ などのジョブの名前を指定します。
+* * 3 行目 :* `build` は、`jobs` コレクションの最初の子です。 この例では、`build` は唯一のジョブでもあります。
+* * 4 行目 :* これは、ジョブのコマンドが実行されるコンテナに対し Docker イメージを使用していることを示します。
+* * 5 行目 :* これが Docker イメージです。 この例は、Alpine Linux に基づいたミニマム イメージである `alpine:3.15` を示します。
+* * 6 行目 :* `steps` コレクションは、`run` ディレクティブのリストです。
+* * 7 行目 :* 各 `run` ディレクティブは、宣言された順に実行されます。
+* * 8 行目 :* `name` 属性は、警告、エラー、出力などを返す際に関連情報を提供します。 `name` は、ビルド プロセス内のアクションとしてわかりやすいものにする必要があります。
+* * 9 行目 :* `command` 属性は、実行するシェル コマンドのリストです。 最初のパイプ `|` は、複数行のシェル コマンドがあることを示します。
+* * 10 行目 :* ビルド シェルに `Hello World!` を出力します。
+* * 11 行目 :* `This is the delivery pipeline` を出力します。
+. `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。
+. CircleCI の Projects ページで、 プロジェクトを検索し、横にある青色の *Set Up Project* ボタンをクリックします。
 +
 image::config-set-up-project.png[Set up Project]
 +
-TIP: In your Version Control System (VCS), make sure you have authorized access to the project you want to manage with CircleCI (in GitHub, you have the option to block CircleCI from accessing your private repositories).
-. In the pop-up window, choose the default *Fastest* option for selecting your `config.yml` file. Then type the name of the branch on which you committed it. If you followed steps 2 and 3, you will see a green tick to confirm that CircleCI has located a `config.yml` file in the `.circleci` directory of your project. Now click the blue *Set Up Project* button.
+TIP: バージョン管理システム (VCS) で、CircleCI で管理するプロジェクトへのアクセスが承認されていることを確認します (GitHub では、プライベート リポジトリに CircleCI がアクセスするのをブロックするオプションがあります)。 
+. ポップアップ ウィンドウで、`config.yml` ファイルを選択するためにデフォルトの *Fastest* オプションを選択します。 次に、コミットしたブランチに名前を入力します。 ステップ 2 とステップ 3 に従うと、緑色のチェックマークが表示され、CircleCI が `config.yml` ファイルをプロジェクトの `.circleci` ディレクトリに配置したことを確認できます。 ここで、*Set Up Project* ボタンをクリックします。
 +
 image::config-select-config-file.png[Select config file]
-. CircleCI uses your `config.yml` file to run the pipeline. You can see the output in the CircleCI dashboard. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details.
+. CircleCI は、`config.yml` ファイルを使用してパイプラインを実行します。 その出力は、CircleCI ダッシュボードで確認できます。 緑色のチェックマークは、パイプラインに成功したことを意味します。 赤色のエクスクラメーション マークは、失敗を警告します。 詳細については、ジョブをクリックします。
 +
 image::config-intro-part1-job.png[Successful build job]
 +
-You should see your step - The First Step - with the the output of the commands:
+コマンドの出力で、ご自分のステップである最初のステップを確認します。
 +
 image:config-first-step.png[Successful step within job]
 
-NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
+NOTE: `config.yml` の構文そのものは簡単ですが、インデントは複雑です。 そのため、インデントの誤りが最も一般的なエラーとなっています。 この例で問題が発生した場合は、インデントを注意して確認するか、サンプルコードをコピー & ペーストします。
 
-== Part 2: Using code from your repo
+== パート 2: リポジトリのコードの使用
 
-CircleCI provides several commands to simplify complex actions. In this example, you will use the `checkout` command. This command fetches the code from your git repo. Once you have retrieved that code, you can work with it in subsequent steps.
+複雑なアクションを簡素化するため、CircleCI は複数のコマンドを提供しています。 この例では、`checkout` コマンドを使用します。 このコマンドは、Git リポジトリからコードをフェッチします。 このコードを取得すると、その後のステップで使用して作業できます。
 
-If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
+まだ取得していない場合は、`.circleci` ディレクトリをプロジェクトに作成し、`config.yml` ファイルを追加して、以下の例からコードを入力するかペーストします。
 
-If you already have a `config.yml` file from the example above, here are the changes you need to make:
+上述の例の `config.yml` ファイルがすでにある場合は、次のように変更を加えます。
 
-* On Line 5, change the image to `cimg/base:2021.04`.
-* On Line 7, add a `checkout` command.
-* Add another run step (lines 13-17) at the end.
+* 5 行目で、イメージを `cimg/base:2021.04` に変更します。
+* 7 行目で、`checkout` コマンドを追加します。
+* 最後に、2 つ目の run ステップ (13 ～ 17 行目) を追加します。
 
-Make sure you observe the indentation.
+インデントが守られていることを確認します。
 
 [source,yaml]
 ----
@@ -120,30 +120,30 @@ jobs:
             echo '^^^The files in your repo^^^'
 ----
 
-These two small changes have significantly increased the functionality of your config file:
+この 2 つの小さな変更により、設定ファイルの機能が著しく向上します。
 
-* *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
-* *Line 7:* The `checkout` command fetches the code from your git repo.
-* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repo that has been checked out. You can now perform further actions on this repo.
+* * 5 行目 :* この行は、Git をサポートする Docker イメージを示します。 `cimg/base:2021.04` は、基本的なジョブを実行する Ubuntu ベースの小さなイメージです。
+* * 7 行目 :* `checkout` コマンドは、Git リポジトリからコードをフェッチします。
+* * 13 ～ 17 行目 :* `build` ジョブのこの 2 つ目のステップは、すでにチェックアウトされているリポジトリの内容を、(`ls -al` を使用して) リストします。 これで、このリポジトリでさらに多くのアクションを実行できます。
 
-As before, commit and push your updated `config.yml` file.
+これまでのように、更新した `config.yml` ファイルをコミットし、プッシュします。
 
-You should now see some additional steps on the CircleCI dashboard:
+CircleCI ダッシュボードには、その他のステップも表示されます。
 
-* *Checkout code* has cloned the code from your git repository.
-* *The Second Step* has listed the files found in your git repository.
+* *Checkout code* により、Git リポジトリからコードがクローンされています。
+* *The Second Step* は、Git リポジトリで確認されたファイルをリストしています。
 
 image::config-second-step.png[Checking out your repo]
 
-== Part 3: Using different environments and creating workflows
+== パート 3: さまざまな環境の使用とワークフローの作成
 
-In Parts 1 and 2, you ran your job in basic Linux-based Docker containers.
+パート 1 と パート 2 では、Linux ベースの基本的な Docker コンテナでジョブを実行しました。
 
-With CircleCI, you can run different jobs in different execution environments, such as virtual machines or Docker containers. By changing the Docker image, you can quickly upgrade your environment version or change languages.
+CircleCI を使用すると、仮想マシンや Docker コンテナなどのさまざまな実行環境で、各種ジョブを実行できます。 Docker イメージを変更することで、環境のバージョンを素早く更新したり、言語を変更したりできます。
 
-In this part, you will create additional jobs and run them using different Docker images.
+このパートでは、さまざまな Docker イメージを使用してさらにジョブを作成、実行します。
 
-If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
+まだ取得していない場合は、`.circleci` ディレクトリをプロジェクトに作成し、`config.yml` ファイルを追加して、以下の例からコードを入力するかペーストします。
 
 [source,yaml]
 ----
@@ -190,51 +190,51 @@ workflows:
             - Fetch-Code
 ----
 
-This example is more complicated than the others, but it introduces several important concepts. Parts 1 and 2 included just one job called _build_, which contained several steps. This example includes three jobs. By separating those steps into jobs, you can run each of them in a different environment.
+この例は他の例と比べるとより複雑になっていますが、いくつかの重要なコンセプトが導入されています。 パート 1 およびパート 2 には _build_ というジョブが 1 つ含まれており、そのジョブには複数のステップがありました。 しかし、この例では 3 つのジョブが含まれています。 こうしたステップをジョブに分離することで、そのそれぞれを異なる環境で実行できるようになります。
 
-The following commentary describes what occurs in each line of the sample code:
+上記サンプルコードの各行について、以下で解説します。
 
-* *Line 3:* You can add comments to your config.yml file by preceding them with the # (hash) sign.
-* *Lines 5-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
-* *Line 14:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
-* *Lines 15-16:* The _Fetch-Code_ job uses a basic git-compatible image.
-* *Lines 17-22:* This code is repeated from Part 2, but now it is a separate job.
-* *Line 24:* The third job is _Using-Node_.
-* *Lines 25-26:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
-* *Lines 27-31:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
-* *Lines 32-33:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
-* *Lines 34-35:* These lines specify the first job, _Hello-World_.
-* *Lines 36-38:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a colon, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
-* *Lines 39-41:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_.
+* * 3 行目 :* # (ハッシュ) 記号をコメントの前に置くことにより、config.yml ファイルにコメントを追加できます。
+* * 5 ～ 12 行目 :* 最初のジョブは _Hello-World_ です。 パート 1 でのように、基本的なイメージ内で 2 つのコマンドを実行します。
+* * 14 行目 :* 2 つ目のジョブは _Fetch-Code_ です。 これは、 _Hello-World_ ジョブと連携することを目的としています。
+* * 15 ～ 16 行目 :* _Fetch-Code_ ジョブは、Git 互換の基本的なイメージを使用します。
+* * 17 ～ 22 行目 :* このコードはパート 2 から繰り返されていますが、ここでは別個のジョブです。
+* * 24 行目 :* 3 つ目のジョブは _Using-Node_ です。
+* * 25 ～ 26 行目 :* この _Using-Node_ ジョブは、`cimg/node:17.2` という Docker イメージを使用します。 このイメージには、ブラウザーと他の便利なツールと共に、Node の バージョン 17.2 が含まれています。
+* * 27 ～ 31 行目 :* これまでのジョブ同様に、_run_ ステップがあります。 ここでは、コマンド `node -v` がコンテナで実行する Node のバージョンを出力します。
+* * 32 ～ 33 行目 :* この行は、_Example-Workflow_ というワークフローを作成します。 ワークフローは、ジョブのリストとその実行順を定義します。
+* * 34 ～ 35 行目 :* これらの行は最初のジョブである _Hello-World_ を指定します。
+* * 36 ～ 38 行目 :* _Fetch-Code_ ジョブ用の構文は少し異なります。 ジョブ名の後ろにはコロンが続き、その後ろに _requires_ ステートメントが続きます。 この行は、_Fetch-Code_ ジョブを実行する前に、_Hello-World_ ジョブを正常に実行する必要があることを示します。
+* * 39 ～ 41 行目 :* 最初のジョブは _Using-Node_ です。 すでに述べたように、このジョブは以前のジョブの _Fetch-Code_ が正常に完了していることが必要となります。
 
-As before, commit and push your updated `config.yml` file.
+これまでのように、更新した `config.yml` ファイルをコミットし、プッシュします。
 
-In CircleCI, your pipeline will look different. Your workflow is now called _Example-Workflow_ and you have three jobs, rather than just one.
+CircleCI では、パイプラインは異なって見えます。 これで、ワークフローは _Example-Workflow_ という名前となり、ジョブは 1 つだけではなく、3 つになりました。
 
 image::config-intro-part3.png[Running multiple jobs]
 
-If you click on the _Using-Node_ job and then the _Running the Node Container_ step, you should see that the command `node -v` has printed the version of Node.
+_Using-Node_ ジョブをクリックし、続いて _Running the Node Container_ ステップをクリックすると、コマンド `node -v` により Node のバージョンが出力されたのが確認できます。
 
 image::config-node-job.png[Running Node job]
 
-In this example, you have:
+この例では、次のことを行いました。
 
-* Added comments to document your jobs.
-* Created multiple jobs to run in different Docker containers.
-* Created a workflow to define the order in which your jobs run.
-* Introduced some logic to ensure that the previous job must complete successfully before the next job is executed.
+* ジョブをドキュメント化するためにコメントを追加。
+* 複数のジョブを作成し、さまざまな Docker コンテナで実行。
+* ワークフローを作成し、ジョブの実行順序を定義。
+* 複数のロジックを導入し、次のジョブが実行される前に以前のジョブを確実かつ正常に完了。
 
-TIP: To increase your understanding, experiment with other <<circleci-images#,CircleCI images>>, or add some more jobs to your workflow.
+TIP: 理解を深めるため、 他の <<circleci-images#,CircleCI イメージ>> を試すか、ワークフローにジョブをもう少し追加することをお勧めします。
 
-== Part 4: Adding a manual approval
+== パート 4: 手動による承認の追加
 
-The CircleCI workflow model is based on the orchestration of preceeding jobs. As you saw in Part 3, the `requires` statement specifies that a job should run only if the previous job has been successfully executed.
+CircleCI のワークフロー モデルは、先行ジョブのオーケストレーションに基づいています。 パート 3 で見たように、`requires` ステートメントは以前のジョブが正常に実行された場合にのみ、ジョブを実行するように指定しています。
 
-In Part 3, an event triggering the pipeline caused the `Hello-World` job to run immediately. The remaining jobs ran automatically, once `Hello-World` had completely successfully.
+パート 3 では、パイプラインをトリガーするイベントにより、`Hello-World` ジョブがすぐに実行されました。 `Hello-World` が正常に完了した後、残りのジョブが自動的に実行されました。
 
-In this part, you will create a manual approval stage. This means subsequent jobs are executed only after you have approved the next step in the CircleCI app.
+このパートでは、手動による承認ステージを作成します。 これは、CircleCI アプリで次のステップを承認した場合にのみ、後続のジョブが実行されることを意味します。
 
-If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below:
+まだ承認していない場合は、`.circleci` ディレクトリをプロジェクトに作成し、`config.yml` ファイルを追加して、以下の例からコードを入力するかペーストします。
 
 [source,yaml]
 ----
@@ -298,36 +298,36 @@ workflows:
             - Hold-for-Approval
 ----
 
-Most of this code will look familiar to you. There are a couple of important additions:
+これからは、このコードの多くは何度も登場します。 いくつかの重要な追加事項があります。
 
-* *Lines 45-49*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
-* *Lines 50-52*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
+* * 45 ～ 49 行目 *: これは、_Hold-for-Approval_ という新しいジョブを作成します。 `type` はこれが _approval_ であることを示しています。そのため、CircleCI でこのジョブを手動で承認することが求められます。 これは、以前のジョブが期待どおりに実行されたかどうかを確認する場合に便利です。 例えば、公開前にテストサーバー上で Web サイトが正常に見えるかどうかを確認できます。 また、高コストのジョブを実行する前に、人間による確認を実行したいことがあります。
+* * 50 ～ 52 行目 *: この最後のジョブ _Now-Complete_ は、_Hold-for-Approval_ が正常に完了していることを前提とし、CircleCI で以前のジョブを承認した場合にのみ実行されます。
 
-As before, commit and push your updated `config.yml` file.
+これまでのように、更新した `config.yml` ファイルをコミットし、プッシュします。
 
-If you look at your pipeline in CircleCI, you will see the a purple status badge of *On Hold*.
+CircleCI でパイプラインを見ると、*On Hold* の紫色のステータスバッジが見えます。
 
 image::config-on-hold.png[Job requires approval]
 
-To approve the job, click the thumbs up icon to the right of the _Hold-for-Approval_ job in the _Actions_ column. In the pop-up message, click the blue *Approve* button.
+ジョブを承認するには、_Actions_ 列の _Hold-for-Approval_ ジョブの右にあるサムアップ アイコンをクリックします。 ポップアップ メッセージで、青色の *Approve* ボタンをクリックします。
 
-Now you will see a tick in the Actions column and your jobs should complete.
+これで、Actions 列にチェックマークが表示され、ジョブが完了します。
 
-Click on the _Now-Complete_ job, then the _Approval Complete_ step. You should see the output of your command: `The work is now complete`.
+_Now-Complete_ ジョブを最初に、続いて _Approval Complete_ ステップをクリックします。 コマンドの出力である `The work is now complete` が確認できます。
 
 image::config-approval-complete.png[Approval complete]
 
-TIP: If you encounter errors, the problem is likely to be caused by incorrect indentation. The <<config-editor#,CircleCI Configuration Editor>> validates your syntax, provides autocomplete suggestions, and offers tips.
+TIP: エラーの場合、問題は誤ったインデントにより引き起こされていることがあります。 <<config-editor#,CircleCI 設定ファイル エディター>> により構文が検証され、 オートコンプリートによる提案とともにヒントが表示されます。
 
-In this example, you have:
+この例では、次のことを行いました。
 
-* Introduced some additional logic to control your workflow.
-* Implemented the `approval` job type to require a manual approval within your workflow.
+* 新たなロジックを導入してワークフローを制御。
+* ワークフロー内で手動による承認を要求するため、`approval` ジョブタイプを実行。
 
-Using what you have learned above, you are ready to create some powerful pipelines.
+上述の学習内容を活用すると、強力なパイプラインを作成することができます。
 
-== See also
+== 関連項目
 
-* <<configuration-reference#,Configuring CircleCI>>
-* <<executor-intro#,Executors and Images>>
-* <<workflows#,Using Workflows to Schedule Jobs>>
+* <<configuration-reference#,CircleCI の設定>>
+* <<executor-intro#,Executor とイメージ>>
+* <<workflows#,ワークフローを使用したジョブのスケジュール>>
