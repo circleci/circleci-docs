@@ -19,7 +19,7 @@ version:
 
 この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/2.0/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/2.0/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
-Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#installation) を使用してパブリッシュすることも可能です。
+Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
 ## Orb の作成、テスト、パブリッシュ
 {: #create-test-and-publish-an-orb }
