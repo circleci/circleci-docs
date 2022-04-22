@@ -40,9 +40,12 @@ To begin creating your new orb with the Orb Development Kit, follow the steps be
 
 Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
 
-1. **Create a new [GitHub repository](https://github.com/new).**
+1. **Create a new _empty_ [GitHub repository](https://github.com/new).**
 
     The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![New GitHub Repo]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
+
+    **Note:** Ensure that the repository is completely empty. Uncheck any options such as "Add a README.md" or "Choose a license".
+    {: class="alert alert-warning"}
 
     When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, whichever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
