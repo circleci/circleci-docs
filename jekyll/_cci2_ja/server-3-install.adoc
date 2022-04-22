@@ -87,7 +87,7 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 **ACM TLS 証明書の使用**
 
-https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント] の ACM 証明書の生成方法に従ってください。
+https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント] の ACM 証明書の生成方法に従ってください。
 
 証明書を作成したら、フロントエンドセクションの KOTS コンソールで ACM を有効にしてください。 ACM のボックスにチェックを入れて、ACM ARN (Amazon Resource Name) を入力します。
 
@@ -132,7 +132,7 @@ Github が提供する OAuth クライアントシークレットです。
 
 === オブジェクトストレージ
 
-前提条件のステップで作成したオブジェクトストレージ バケットとキーを使って、 プラットフォームに応じて以下の設定を完了してください。
+前提条件のステップで作成したオブジェクトストレージバケットとキーを使って、 プラットフォームに応じて以下の設定を完了してください。
 
 .オブジェクトストレージの設定
 image::server-3-object-storage.png[Screenshot showing object storage settings]
