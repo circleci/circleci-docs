@@ -18,7 +18,7 @@ version:
 バッジのステータスにより、リポジトリにおけるビルドステータスを素早く確認することができます。 バッジはステータス（成功または失敗）に応じて表示されます。
 
 以下の形式のコードを生成できます。
-- イメージの URL
+- 画像 URL
 - Markdown
 - Textile
 - Rdoc
@@ -118,13 +118,13 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 ## プライベートリポジトリ用のバッジの作成
 {: #creating-badges-for-private-repositories }
 
-**注: プライベートリポジトリ用のステータスバッジを作成するには、_  "status" に明確にスコープされた </strong>**API トークン**_を作成する必要があります。 上記の Markdown 形式の例と比較して、下記の Markdown 形式のイメージバッジスニペットを考えてみましょう。この例では、トークンの URL パラメータが追加されています。</p>
+**注: プライベートリポジトリ用のステータスバッジを作成するには、_ "status" のスコープを持つ </strong>**API トークン**_を作成する必要があります。 上記の Markdown 形式の例と比較して、下記の Markdown 形式のイメージバッジスニペットを考えてみましょう。この例では、トークンの URL パラメータが追加されています。</p>
 
 ```markdown
 [![CircleCI](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg&circle-token=<YOUR_STATUS_API_TOKEN>)](<LINK>)
 ```
 
-ステータス API トークンを作成するには、[CircleCI Web アプリ](https://app.circleci.com/)を開き、特定のプロジェクトに行き、**Project Settings > API Permissions** に移動し、`status`にスコープされたトークンを作成します。
+ステータス API トークンを作成するには、[CircleCI Web アプリ](https://app.circleci.com/)を開き、目的のプロジェクトに行き、**Project Settings > API Permissions** に移動し、`status`のスコープを持つトークンを作成します。
 
 ## その他のスタイル
 {: #different-styles }
@@ -142,4 +142,4 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 ## 設定ファイルの詳細
 {: #see-also }
 
-* [ステータス]({{site.baseurl}}/2.0/status/)
+* [ステータス]({{site.baseurl}}/ja/2.0/status/)
