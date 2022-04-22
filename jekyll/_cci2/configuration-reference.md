@@ -4,6 +4,7 @@ title: Configuring CircleCI
 short-title: Configuring CircleCI
 description: Reference for .circleci/config.yml
 order: 20
+redirect_from: 2.0/configuration
 readtime: false
 version:
 - Cloud
