@@ -39,7 +39,7 @@ AWS S3、ECS、ECR、CodeDeploy Orb の詳細については、Orb レジスト�
 {:.no_toc}
 #### AWS S3 Orb の使用
 {: #using-the-aws-s3-orb }
-{:.no_toc}{:.no_toc}
+{:.no_toc}
 
 AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb のページ](https://circleci.com/ja/developer/orbs/orb/circleci/aws-s3)を参照してください。 このセクションでは、AWS S3 と`version: 2.1` を使った簡単にデプロイを行う方法の詳細を紹介します。下記では、同じ設定例で Orb を使用せず `version: 2` の設定を使った場合の例を紹介します。
 
@@ -98,9 +98,9 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb のページ](https:/
 {: #deploy-to-aws-s3-with-20-config }
 {:.no_toc}
 
-1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+1. セキュリティ上のベストプラクティスとして、CircleCI 専用の新しい [IAM ユーザー](https://aws.amazon.com/jp/iam/details/manage-users/)を作成します。
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/ja/env-var-or-context.md %}
+2. [AWS アクセスキー](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) を CircleCI に追加します（Access Key ID を `AWS_ACCESS_KEY_ID`という変数に保存します）。 {% include snippets/ja/env-var-or-context.md %}
 
 3. `.circleci/config.yml` ファイルで、新しい `deploy` ジョブを作成します。 `deploy` ジョブで、プライマリ コンテナに `awscli` をインストールするステップを追加します。
 
