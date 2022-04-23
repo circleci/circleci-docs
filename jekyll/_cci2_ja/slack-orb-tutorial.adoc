@@ -37,7 +37,7 @@ CircleCI で最も広く利用されている Orb は Slack です。 Slack Orb 
 * GitHub や BitBucket などのバージョン管理システム (VCS)
 * https://slack.com[Slack のワークスペース]（会社のワークスペースを使用したくない場合は、テスト用にご自身のワークスペースを作成することも可能です。）
 
-== 手順 1: config.yml file を作成する
+== ステップ 1: config.yml file を作成する
 
 まだ作成していない場合は、リポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーの中に `config.yml` ファイルを作成します。
 
@@ -80,52 +80,52 @@ workflows:
 
 上記サンプルコードの主な要素について、以下で解説します。
 
-* *1 行目:* お使いの設定ファイルのバージョンを指定します。 `2.1` が最新のバージョンです。
+* *1 行目:* お使いの設定ファイルのバージョンを指定します。 `2.1` が最新バージョンです。
 * *2-3 行目:* Orb スタンザです。 使用しているのは `slack: circleci/slack@4.9.3` Orb です。
-* *Lines 5-7:* This is a job called _notify_, which is executed in a basic Docker container.
-* *Lines 8-9:* This is a step which must be called _slack/notify_ to work with the Slack orb.
-* *Lines 10-24:* This custom block includes a basic notification from the Slack Block Kit Builder. As you can see, it is in JSON format. In Part 3, you will use more sophisticated templates.
-* *Line 25:* The `event: always` parameter means this notification is triggered for _all_ event types. In Part 3, you will use different notifications for different events.
-* *Line 30:* This references a CircleCI context where you will save your Slack credentials in Step 2.
+* *5-7 行目:* _notify_ というジョブです。基本的な Docker コンテナで実行されます。
+* *8-9 行目:* _slack/notify_ という Slack Orb と連動するためのステップです。
+* *10-24 行目:* このカスタムブロックには Slack Block Kit Builder からの基本的な通知が含まれます。 お分かりのように、JSON 形式です。 パート 3 では、より高度なテンプレートを使用します。
+* *25 行目:*  `event: always` パラメーターは、この通知が _すべて_ のイベントタイプにトリガーされていることを意味します。 パート 3 では、各イベント毎に異なる通知を使用します。
+* *30 行目:* ここでは、ステップ 2 で Slack の認証情報を保存する CircleCI コンテキストを参照します。
 
-Now you have a basic `config.yml` file set up, you can connect CircleCI with Slack.
+`config.yml` 基本ファイルの設定が完了しました。CircleCI と Slack を接続できます。
 
-IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. This is because you need to add your Slack credentials in the next step.
+IMPORTANT: この時点でお客様の `config.yml` をコミットし、パイプラインをトリガーすると、ビルドが失敗します。 次のステップで Slack 認証情報を追加する必要があリます。
 
-== Step Two - Connect CircleCI with Slack
+== ステップ 2: CircleCI と Slack を接続する 
 
-In this step, you will:
+ここでは以下を行います。
 
-* Obtain an API token from Slack.
-* Create a context to store those credentials in CircleCI.
-* Trigger the pipeline so you receive a notification.
+* Slack から API トークンを取得する
+* コンテキストを作成し、CircleCI に認証情報を保存する
+* 通知を受け取るようにパイプラインをトリガーする
 
-=== Authenticating your application
+=== アプリケーションの認証
 
-The Slack orb is an application that executes as part of your job on CircleCI. Before you can receive notifications, you need to authenticate your application.
+Slack Orb は、CircleCI 上でジョブの一部として実行されるアプリケーションです。 通知を受け取る前に、アプリケーションを認証する必要があります。
 
-==== Creating a Slack app
+==== Slack アプリの作成
 
-. Visit https://api.slack.com/apps[*Your Apps* on the Slack API website] and click the green *Create an App* button.
+. https://api.slack.com/apps[Slack API ウェブサイトの *Your Apps*] に行き、緑色の *Create an App* をクリックします。
 +
 image::slack-orb-create-app.png[Create a Slack app]
-. Choose *From scratch*.
+. *From scratch* を選択します。
 +
 image::slack-orb-from-scratch.png[Choose From scratch]
-. Give your app a name, for example, _CircleCI_, and select the Slack workspace in which you want to use it. You cannot change this workspace afterwards.
+. アプリに、_CircleCI_ などの名前をつけて、アプリを使用する Slack ワークスペースを選択します。 このワークスペースは、後で変更できません。
 +
 image::slack-orb-name-app.png[Name your Slack app]
-. Click the green **Create App** button.
+. 緑色の **Create App** ボタンをクリックします。
 
-==== Setting your app permissions
+==== アプリのアクセス許可の設定
 
-. On the Basic Information page, locate the **Permissions** tile under _Add features and functionality_.
+. Basic Information のページで、_Add features and functionality_ の下にある **Permissions** を見つけます。
 +
 image::slack-orb-permissions.png[Slack app Permissions]
-. On the _OAuth & Permissions_ page, scroll down to **Scopes**. This is where you need to create the permissions for your Slack app.
+. _OAuth & Permissions_ のページで、**Scopes** までスクロールダウンします。 ここで Slack アプリのアクセス許可を作成します。
 +
 image::slack-orb-add-scope.png[Add an OAuth Scope]
-. Under **Bot Token Scopes**, click **Add an OAuth Scope**.
+. **Bot Token Scopes** の下にある **Add an OAuth Scope** をクリックします。
 . The Slack orb needs permission to post chat messages and upload files, so create the following scopes:
 * chat:write
 * chat:write.public
