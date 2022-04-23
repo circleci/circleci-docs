@@ -31,17 +31,17 @@ CircleCI で最も広く利用されている Orb は Slack です。 Slack Orb 
 * 特定のチャンネル、チーム、人々にアラートを送信する方法
 * Slack Block Kit Builder を利用して独自のカスタムアラートを作成する方法
 
-このチュートリアルを進めるには、以下の準備が必要です。
+このチュートリアルに沿って実行するには、以下の準備が必要です。
 
-* CircleCI のアカウント：アカウントをお持ちでない場合は、<<first-steps#,無料で登録できます。>>
+* CircleCI のアカウント: アカウントをお持ちでない場合は、<<first-steps#,無料で登録していただけます。>>
 * GitHub や BitBucket などのバージョン管理システム (VCS)
 * https://slack.com[Slack のワークスペース]（会社のワークスペースを使用したくない場合は、テスト用にご自身のワークスペースを作成することも可能です。）
 
-== Step One - Create your config.yml file
+== 手順 1: config.yml file を作成する
 
-If you have not already done so, create a `.circleci` folder at the root of your repo. Inside the `.circleci` folder, create a `config.yml` file.
+まだ作成していない場合は、リポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーの中に `config.yml` ファイルを作成します。
 
-Copy and paste the sample code below into your `config.yml` file:
+下記のサンプルコードを `config.yml` にコピー & ペーストします。
 
 [source,yaml]
 ----
@@ -75,12 +75,13 @@ workflows:
     jobs:
       - notify:
           context: slack-secrets
+
 ----
 
-The following commentary describes what occurs in the main elements of the sample code:
+上記サンプルコードの主な要素について、以下で解説します。
 
-* *Line 1:* This indicates the config version you are using. `2.1` is the most recent version.
-* *Lines 2-3:* This is the orbs stanza. You are using the `slack: circleci/slack@4.9.3` orb.
+* *1 行目:* お使いの設定ファイルのバージョンを指定します。 `2.1` が最新のバージョンです。
+* *2-3 行目:* Orb スタンザです。 使用しているのは `slack: circleci/slack@4.9.3` Orb です。
 * *Lines 5-7:* This is a job called _notify_, which is executed in a basic Docker container.
 * *Lines 8-9:* This is a step which must be called _slack/notify_ to work with the Slack orb.
 * *Lines 10-24:* This custom block includes a basic notification from the Slack Block Kit Builder. As you can see, it is in JSON format. In Part 3, you will use more sophisticated templates.
