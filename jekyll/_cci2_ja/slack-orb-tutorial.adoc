@@ -161,22 +161,22 @@ image::slack-orb-organization-settings.png[Organization Settings]
 +
 image::slack-orb-create-context.png[Create Context]
 . 青色の **Create Context** ボタンをクリックします。
-. 今作成したコンテキストの名前をクリックします。
+. 今作成したコンテキスト名をクリックします。
 . 青色の *Add Environment Variable* ボタンをクリックし、初めてのキーと値のペアを入力します。
-* The Environment Variable Name is `SLACK_ACCESS_TOKEN`.
-* The value is your Slack Bot User OAuth Access Token.
+* 環境変数の名前は、`SLACK_ACCESS_TOKEN` です。
+* 値は、Slack Bot User OAuth Access Token です。
 +
 image::slack-orb-environment-variable.png[Add Environment Variable]
-. Click the Add Environment Variable button to save it.
-. Click the blue **Add Environment Variable** button again.
-* The Environment Variable Name is `SLACK_DEFAULT_CHANNEL`.
-* The value is the ID of the default Slack channel for posting your notifications. You can override this setting in your individual jobs.
+. Add Environment Variable  ボタンをクリックして保存します。
+. **Add Environment Variable**  ボタンをもう一度クリックします。
+* 環境変数の名前は、`SLACK_DEFAULT_CHANNEL` です。
+* この値は、通知を投稿するためのデフォルトの Slack チャンネルの ID です。 この設定は個々のジョブにオーバーライドできます。
 
-TIP: To get the ID for your Slack channel, right-click the channel in Slack and choose **Copy Link**. The ID will be visible at the end of the URL and will be in this format: C034R26AM36.
+TIP: Slack チャンネルの ID を取得するには、Slack でそのチャンネルを右クリックし、**Copy Link** を選択します。 ID は URL の最後に表示され、 C034R26AM36 のような形式になります。
 
 image::slack-orb-copy-link.png[Copy Slack channel link]
 
-Make sure you have included the _slack-secrets_ context in your _notify_ job and that the name matches what you created:
+_slack-secrets_ コンテキストが _notify_ ジョブに含まれており、作成したものと名前が一致していることを確認します。
 
 [source,yaml]
 ----
@@ -187,51 +187,51 @@ workflows:
           context: slack-secrets
 ----
 
-You can now reuse this context in other jobs and projects.
+このコンテキストを他のジョブやプロジェクトで再利用できるようになりました。
 
-Commit your `config.yml` file (and push it, if you are working remotely).
+`config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。
 
-==== Triggering an alert
+==== アラートのトリガー
 
-In the CircleCI dashboard:
+CircleCI ダッシュボードでは、
 
-* Click **Projects**.
-* Find the repo and click the blue **Set Up Project** button next to it.
+* **Projects** をクリックします。
+* リポジトリを見つけ、その隣にある青色の **Set Up Project** ボタンをクリックします。
 +
 image::slack-orb-set-up-project.png[Set up Project]
-* Choose the branch on which you committed your `config.yml` file
+* `config.yml` ファイルをコミットしたブランチを選びます。
 +
 image::slack-orb-select-config-file.png[Select your config.yml file]
-* Click the blue **Set Up Project** button.
+* **Set Up Project** ボタンをクリックします。
 
-This triggers your CircleCI pipeline, which contains a Slack orb with your credentials.
+これにより、お客様の認証情報が付いた Slack Orb を含む CircleCI パイプラインがトリガーされます。
 
-You should then see a green **Success** badge and a green tick next to your _notify_ job.
+すると緑色の **Success** バッジが表示され、_notify_ ジョブの隣に緑色のチェックマークが表示されます。
 
 image::slack-orb-success.png[Success]
 
-Click on your job to see what just happened. You should see the message body that was sent to Slack.
+お客様のジョブの上でクリックし、何が起きたのかを起きたのかを確認します。 Slack に送信されたメッセージの本文が表示されます。 
 
-Now open your Slack workspace. In the default channel you specified earlier, you should see the alert triggered by your CircleCI pipeline.
+ここで Slack ワークスペースを開きます。 先程指定したデフォルトのチャンネルに、CircleCI パイプラインがトリガーしたアラートが表示されているはずです。
 
 image::slack-orb-text-notification.png[Slack text notification]
 
-Although this is a basic alert, you have achieved a lot already:
+これは基本的なアラートですが、既に多くのことを達成しました。
 
-* Created a `.circleci/config.yml` file with the Slack orb.
-* Created a context to store your Slack-related environment variables.
-* Created a Slack app.
+* Slack Orb を使って `.circleci/config.yml` ファイルを作成
+* Slack に関連付けられている環境変数を保存するコンテキストの作成
+* Slack アプリの作成
 
-== Step Three - Use Message Templates
+== ステップ 3: メッセージテンプレートを使用する
 
-The Slack orb includes several notification templates you can use to notify your channel of various CircleCI events:
+Slack Orb には、様々な CircleCI イベントのチャンネルを通知するために使用できる通知テンプレートが多数含まれています。
 
-* `basic_success_1` - for _pass_ events where the job succeeded.
-* `basic_fail_1` -  for_fail_ events, where the job failed.
-* `success_tagged_deploy_1` - for successful deployments.
-* `basic_on_hold_1` - for on-hold jobs that are awaiting approval.
+* `basic_success_1`: ジョブが成功した _pass_  イベント用
+* `basic_fail_1`: ジョブが失敗した _fail_ イベント用
+* `success_tagged_deploy_1` : 成功したデプロイ用
+* `basic_on_hold_1`: 認証待ちの待機ジョブ用
 
-To use these templates in your job, include the `event` and `template` parameters under `steps` in the `config.yml` file. 例えば下記のようにします。
+ジョブでこれらのテンプレートを使用するには、`event` パラメーターと `template` パラメーターを  `config.yml` ファイルの `steps` の下に含めます。 例えば下記のようにします。
 
 [source,yaml]
 ----
@@ -248,20 +248,20 @@ jobs:
 	  template: success_tagged_deploy_1
 ----
 
-* *Line 7* specifies that the template on the next line is used for failed events.
-* *Line 8* specifies the template to be used, in this case `basic_fail_1`.
-* *Line 9* specifies that the template on the next line is used for pass events.
-* *Line 10* specifies the template to be used, in this case `basic_success_1`.
+* *7 行目* では、次の行のテンプレートが失敗したイベントに使われるよう指定します。
+* *8 行目* では、使用するテンプレート、ここでは `basic_fail_1` を指定します。
+* *9 行目* では、次の行のテンプレートが成功したイベントに使われるよう指定します。
+* *10 行目* では、使用するテンプレート、ここでは `basic_success_1` を指定します。
 
-Whereas in Step 1 you used an all-purpose alert, now you have included different steps according to whether the job has passed or failed. The Slack orb triggers the appropriate step.
+ステップ 1 では汎用アラートを使用しましたが、ジョブが成功したか失敗したかに応じて異なるステップが追加されました。 Slack Orb が適切なステップをトリガーします。
 
-Commit your updated `config.yml` file (and push it, if you are working remotely). Once the pipeline is complete, you should see a more sophisticated alert in your Slack channel.
+更新した `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。 パイプラインが完了すると、Slack チャンネルにより高度なアラートが表示されます。
 
 image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
-=== Including additional parameters
+=== 追加パラメーターを含める
 
-You can also include a mention for a failed job, to alert a specific person or team:
+失敗したジョブについての言及を含めて特定の人やチームにアラートすることもできます。
 
 [source,yaml]
 ----
@@ -271,7 +271,7 @@ You can also include a mention for a failed job, to alert a specific person or t
 	template: basic_fail_1
 ----
 
-To notify multiple channels, place the IDs in quotes and separate them with a comma:
+複数のチャンネルに通知するには、ID を引用符で囲み、カンマで区切ります。
 
 [source,yaml]
 ----
@@ -282,7 +282,7 @@ To notify multiple channels, place the IDs in quotes and separate them with a co
 
 ----
 
-To restrict your alert to a specific branch, add a _branch_pattern_ parameter:
+アラートを特定のブランチに制限するには、_branch_pattern_ パラメーターを追加します。
 
 [source,yaml]
 ----
