@@ -150,19 +150,19 @@ image::slack-orb-copy-token.png[Copy OAuth Token]
 
 === コンテキストを作成する
 
-CircleCI では、コンテキストを使用するとプロジェクト間で環境変数を保護し、共有することができます。 Once you have created a context with your Slack credentials, you and your colleagues will be able to reuse them.
+CircleCI では、コンテキストを使用すると環境変数を保護し、プロジェクト間で共有することができます。 Slack の認証情報を使ってコンテキストを一度作成すると、お客様とお仲間でそれを再利用することができます。
 
-In CircleCI:
+CircleCI の設定:
 
-. Click the _Organization Settings_ page.
+. 　_Organization Settings_ のページをクリックします。
 +
 image::slack-orb-organization-settings.png[Organization Settings]
-. Under Context, click the blue *Create Context* button and add a unique name, such as _slack-secrets_ (that is the name specified in the `config.yml` file above).
+. コンテキストの下にある *Create Context* ボタンをクリックし、_slack-secrets_  などの一意の名前を追加します（上記の `config.yml` ファイルで指定した名前です）。
 +
 image::slack-orb-create-context.png[Create Context]
-. Click the blue **Create Context** button.
-. Click the name of the context you just created.
-. Click the blue *Add Environment Variable* button and enter your first key value pair.
+. 青色の **Create Context** ボタンをクリックします。
+. 今作成したコンテキストの名前をクリックします。
+. 青色の *Add Environment Variable* ボタンをクリックし、初めてのキーと値のペアを入力します。
 * The Environment Variable Name is `SLACK_ACCESS_TOKEN`.
 * The value is your Slack Bot User OAuth Access Token.
 +
