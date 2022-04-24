@@ -360,6 +360,8 @@ CircleCI は、設定ワークフローを簡略化するために Cloud Foundry
 
 
 ```yaml
+version: 2.1
+
 orbs:
   cloudfoundry: circleci/cloudfoundry@x.y.z # Use the Cloud Foundry orb in your config
 
