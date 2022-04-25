@@ -11,20 +11,26 @@ version:
 * TOC
 {:toc}
 
-CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the succesful completion or failure of a [workflow]({{ site.baseurl }}/2.0/workflows/). IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the successful completion or failure of a [workflow]({{ site.baseurl }}/2.0/workflows/). IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 ```yaml
 version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
@@ -65,7 +71,7 @@ Perform the following steps to enable web notifications:
 
 1. Go to your [CircleCI user settings](https://app.circleci.com/settings/user/notifications){:rel="nofollow"}. Enable the toggle for "Web Notifications" at the bottom of the page.
 
-2. Your browser asks you to confirm that you want to allow notifications. Click `Allow`. See the screenshot below for additional details:
+2. Your browser asks you to confirm that you want to allow notifications. Click **Allow**. See the screenshot below for additional details:
 
 ![Screenshots showing how to enable web notifications in your browser]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
 
@@ -92,7 +98,10 @@ orbs:
 jobs:
   notify:
     docker:
-      - image: 'cimg/base:stable'
+      - image: cimg/base:2021.04
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD
     steps:
       - slack/notify:
           custom: |
@@ -135,6 +144,9 @@ jobs:
   build:
     docker:
       - image: <Docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - irc/notify:
@@ -153,3 +165,4 @@ Replace the values in brackets (<>) with your own details.
 ## See also
 
 - [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/)
+- [Using the Slack Orb]({{ site.baseurl }}/2.0/slack-orb-tutorial/)
