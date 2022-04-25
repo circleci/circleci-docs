@@ -292,7 +292,7 @@ image::slack-orb-deployment-successful.png[Deployment Successful alert]
       template: basic_fail_1
 ----
 
-これは、機能ブランチのアラートを受信しない場合に便利です。
+これは、フィーチャーブランチのアラートを受信しない場合に便利です。
 
 ==== Slack Block Kit Builder の使用
 
