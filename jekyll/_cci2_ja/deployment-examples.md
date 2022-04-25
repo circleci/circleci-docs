@@ -146,7 +146,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb のページ](https:/
               name: Deploy to S3
               command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
     ```
-    {% endraw %}{% endraw %}
+    {% endraw %}
 
 AWS CLI のコマンドとオプションの一覧は、「[AWS CLI コマンド リファレンス](https://docs.aws.amazon.com/cli/latest/reference/)」で参照できます。
 
