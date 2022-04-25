@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
 title: "ダイナミックコンフィグ"
-description: "セットアップワークフローによるダイナミックコンフィグの使用方法に関する開発者向けページ"
+description: "セットアップ ワークフローによるダイナミックコンフィグの使用方法に関する開発者向けページ"
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
 ---
 
@@ -11,8 +11,8 @@ Instead of manually creating an individual CircleCI configuration per project, y
 
 CircleCI's dynamic configuration feature allows you to:
 
-- 条件付きでワークフローやコマンドを実行する.
-- パイプラインパラメーターの値を渡す/ 別の設定ファイルを生成する.
+- 条件付きでワークフローやコマンドを実行する。
+- パイプライン パラメーターの値を渡す/ 別の設定ファイルを生成する。
 - Trigger separate `config.yml` configurations, which exist outside the default parent `.circleci/` directory.
 
 This becomes particularly helpful in cases where your team is using a monorepo, or a single repository, as opposed to using multiple repositories to store your code.
@@ -27,8 +27,8 @@ Another scenario in which you could use dynamic configuration is when your proje
 CircleCI でダイナミックコンフィグ機能の使用を開始するには、以下の手順に従います。
 
 1. In the **Projects** dashboard from the CircleCI web application, select your project.
-2. 右上隅の **[Project Settings (プロジェクト設定)]** ボタンをクリックします。
-3. 左側のパネルで **[Advanced (詳細設定)]** を選択します。
+2. 右上隅の **Project Settings (プロジェクト設定)** ボタンをクリックします。
+3. 左側のパネルで **Advanced (詳細設定)** を選択します。
 4. Scroll to the **Enable dynamic config using setup workflows** setting, and toggle it to the "on" position, as shown below:
   <br>
   ![UI でのダイナミックコンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
@@ -85,10 +85,10 @@ For a basic example on how to use setup workflows for dynamic configuration gene
 {: #what-to-read-next }
 - クックブック内のサンプル
   - [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-  - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+  - [変更されたファイルに基づいて特定の `workflows` または `steps` を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
 
 ## Learn More
 {: #learn-more }
-CircleCI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
+CircleCI Academy の[ダイナミック コンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021)を受講すると、さらに詳しく学ぶことができます。
