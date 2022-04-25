@@ -144,7 +144,7 @@ image::slack-orb-install-workspace.png[Install to Workspace]
 +
 image::slack-orb-allow.png[Allow access]
 . 三角ボタンをクリックして権限を再確認し、緑色の **Allow** ボタンをクリックします。
-. *Bot User OAuth Token* が表示されます。 このトークンをクリップボードにコピーし、CircleCI に追加できるようにしておきます。 必ず非公開にしておいてください。
+. *Bot User OAuth Token* が表示されます。 このトークンをクリップボードにコピーし、CircleCI に追加できるようにしておきます。 トークンを公開してしまわないよう、注意してください。
 +
 image::slack-orb-copy-token.png[Copy OAuth Token]
 
@@ -163,14 +163,14 @@ image::slack-orb-create-context.png[Create Context]
 . 青色の **Create Context** ボタンをクリックします。
 . 今作成したコンテキスト名をクリックします。
 . 青色の *Add Environment Variable* ボタンをクリックし、最初のキーと値のペアを入力します。
-* 環境変数の名前は、`SLACK_ACCESS_TOKEN` です。
+* Environment Variable Name は、`SLACK_ACCESS_TOKEN` です。
 * 値は、Slack Bot User OAuth Access Token です。
 +
 image::slack-orb-environment-variable.png[Add Environment Variable]
 . Add Environment Variable  ボタンをクリックして保存します。
 . **Add Environment Variable**  ボタンをもう一度クリックします。
-* 環境変数の名前は、`SLACK_DEFAULT_CHANNEL` です。
-* この値は、通知を投稿するためのデフォルトの Slack チャンネルの ID です。 この設定は個々のジョブにオーバーライドできます。
+* Environment Variable Name は、`SLACK_DEFAULT_CHANNEL` です。
+* 値は、通知を投稿するためのデフォルトの Slack チャンネルの ID です。 この設定は個々のジョブにオーバーライドできます。
 
 TIP: Slack チャンネルの ID を取得するには、Slack でそのチャンネルを右クリックし、**Copy Link** を選択します。 ID は URL の最後に表示され、 C034R26AM36 のような形式になります。
 
