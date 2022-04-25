@@ -238,7 +238,7 @@ With the following, nested under `steps:` and customizing for your application a
 ## Validate YAML
 {: #validate-yaml }
 
-When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
+When you have completed all the sections in `.circleci/config.yml`, we recommend that you check your YAML syntax using a tool such as <http://codebeautify.org/yaml-validator>. Then use the `circleci` CLI to validate the new configuration with the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-cli/) document for instructions. Fix any issues and commit the updated `.circleci/config.yml` file. When you push a commit, the job starts automatically and you can monitor it in the CircleCI app.
 
 ## Next Steps
 {: #next-steps }
