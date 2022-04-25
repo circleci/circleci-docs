@@ -338,7 +338,7 @@ See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspace
 
 Docker Layer Caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
 
-In the `config.yml` snippet below, the `build_exlixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+In the `config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
 
 ```yaml
 version: 2.1
