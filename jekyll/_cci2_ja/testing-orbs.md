@@ -143,21 +143,21 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 ## 単体テスト
 {: #unit-testing }
 
-Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能を利用して、`src/scripts` に bash ファイルを保存して読み込む場合、スクリプト向けの完全な結合テストを作成できます。
+Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
-![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
+![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/status_badge.png)
 
-内部スクリプトが高度かつ複雑な Orb の場合、コードの品質向上やローカル開発テストの単純化のために、単体テストの実施をお勧めします。
+内部スクリプトが複雑な Orb の場合、コードの品質向上やローカル開発テストの簡易化のために、単体テストを実施することをお勧めします。
 
-bash 単体テストについては、[BATS-Core](https://github.com/bats-core/bats-core) ライブラリをお勧めします。これは、bash 用のオープンソースのテスト フレームワークで、JavaScript 用の[Jest](https://jestjs.io/) に類似しています。
+bash 単体テストについては、[BATS-Core](https://github.com/bats-core/bats-core) ライブラリをお勧めします。これは、bash 用のオープンソースのテストフレームワークで、JavaScript 用の [Jest](https://jestjs.io/)  に類似しています。
 
 CircleCI では [BATS orb](https://circleci.com/developer/orbs/orb/circleci/bats-core) をすでに作成しており、BATS を簡単に CircleCI パイプラインに統合できます。
 
-BATS を目的の Orb に追加するには、次のステップに従います。
+BATS を Orb に追加するには、次のステップに従います。
 
   1. `tests` ディレクトリを Orb の `src` ディレクトリに追加します。
   2. `tests` ディレクトリでテストを作成します。
-  3. [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats#usage-run-bats-tests) Orb を `config.yml` ファイルに追加します。
+  3. [circleci/bats](https://circleci.com/ja/developer/orbs/orb/circleci/bats#usage-run-bats-tests) Orb を `config.yml` ファイルに追加します。
   4. `bats/run` ジョブを `config.yml` ファイルのパブリッシュ前のジョブに追加します。
 
 ```
@@ -181,12 +181,12 @@ workflows:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check, bats/run]
 ```
 
-bash 用単体テストの記述方法については、 [Slack orb](https://github.com/CircleCI-Public/slack-orb/blob/master/src/tests/notify.bats) を参照してください。
+bash 用単体テストの記述方法については、 [Slack Orb](https://github.com/CircleCI-Public/slack-orb/blob/master/src/tests/notify.bats) を参照してください。
 
 ## 結合テスト
 {: #integration-testing }
 
-ソースコード上で行えるバリデーション、構文チェック、ShellCheck および他のテストの完了後に、実際の CircleCI 設定ファイルで Orb の機能をテストする必要があります。 2 つ目の設定ファイル (`test-deploy.yml`) では、最初の設定ファイルでパブリッシュした Orb の開発版にアクセスし、Orb コマンドおよびジョブの実行を試みることができます。
+ソースコード上で行えるバリデーション、構文チェック、ShellCheck および他のテストの完了後に、実際の CircleCI 設定ファイルで Orb の機能をテストする必要があります。 2 つ目の設定ファイル (`test-deploy.yml`) では、1 つ目の設定ファイルでパブリッシュした Orb の開発版にアクセスし、Orb コマンドおよびジョブの実行を試してみることができます。
 
 ### Orb コマンドのテスト
 {: #testing-orb-commands }
@@ -195,9 +195,9 @@ bash 用単体テストの記述方法については、 [Slack orb](https://git
 
 `test-deploy.yml` ファイルに、`command-tests` という名前のジョブが表示されます。 このサンプルジョブでは、結合テストとして 1 つまたはすべてのコマンドを実行します。
 
-このジョブでは、テストするパラメーターを使うと、Orb コマンドを呼び出すことができます。 例えば、コマンドからコマンドライン ツールをインストールする場合、テストにより追加ステップでコマンドが有効であることを確認できます。
+このジョブでは、テストするパラメーターを使って、Orb コマンドを呼び出すことができます。 例えば、コマンドによりコマンドライン ツールをインストールする場合、追加ステップでテストを実行してコマンドが有効かどうかを確認できます。
 
-デフォルトでは、含まれている "greet" コマンドがテストされていることを確認できます。 greet コマンドは stdout にメッセージを出力するだけなので、他の確認チェックは行うことはできません。
+デフォルトでは、含まれている "greet" コマンドがテストされます。 greet コマンドは stdout にメッセージを出力するだけなので、他のバリデーションチェックは行うことはできません。
 
 ```yaml
 jobs:
@@ -209,7 +209,7 @@ jobs:
         - <orb-name>/greet
 ```
 
-以下は、[GitHub CLI orb](https://github.com/CircleCI-Public/github-cli-orb) のスニペット サンプルです。
+以下は、[GitHub CLI Orb](https://github.com/CircleCI-Public/github-cli-orb) の実際のサンプルスニペットです。
 
 ```yaml
 jobs:
@@ -223,9 +223,9 @@ jobs:
             command: command -v gh
 ```
 
-この例では、 `github-cli/install` コマンドをテストしています。 このコマンドだけで成功か失敗かが分かりますが、次のステップで GitHub CLI がインストールされており、コマンドラインで利用できることをバリデーションすることもできます。 `gh` バイナリがこのパスになければ、このジョブはこのステップで失敗します。
+この例では、 `github-cli/install` コマンドをテストしています。 このコマンドだけでは成功または失敗する場合がありますが、次のステップで GitHub CLI がインストールされており、コマンドラインで利用できるかを確認することもできます。 `gh` バイナリがこのパスになければ、このジョブはこのステップで失敗します。
 
-必要に応じて、コマンドのテスト用に複数のジョブを用意できることと、Orb にコマンドがない場合は、そうしたジョブは得られない場合もあることは覚えておいてください。 `orb-tools/publish` ジョブには、テストを含むジョブが必要であることを確認してください。
+必要に応じて、コマンドをテストするために複数のジョブを使用できます。Orb にコマンドがない場合は、そのようなジョブがない可能性があります。 `orb-tools/publish` ジョブが、お客様のテストを含むジョブを要求していることを確認してください。
 
 
 ### Orb ジョブのテスト
@@ -233,9 +233,9 @@ jobs:
 
 Orb 内でのジョブのテストは、コマンドのテストと非常によく似ています。 ただし、考慮すべき制限が他にいくつかあります。
 
-最初に、`test-deploy` ワークフローでは、コマンドのテストで上述したように、`orb-tools/publish` ジョブは、最終的にはワークフローの中でそれ以前のすべてのジョブを完了していることが必要となります。 Orb のジョブをテストするには、ジョブをこのワークフローに追加して、`orb-tools/publish` ジョブでそれが求められていることを確認する必要があります。
+まず、`test-deploy` ワークフローでは、上記のコマンドのテストで述べたように、`orb-tools/publish` ジョブは、最終的にはワークフローの中でそれ以前のすべてのジョブが完了している必要があります。 Orb のジョブをテストするには、ジョブをこのワークフローに追加して、`orb-tools/publish` ジョブでそれが求められていることを確認する必要があります。
 
-以下は、CircleCI の [AWS ECR orb](https://github.com/CircleCI-Public/aws-ecr-orb/blob/0c27bfab932b60f1c60a4c2e74bee114f8d4b795/.circleci/test-deploy.yml#L40) のサンプルです。
+以下は、CircleCI の [AWS ECR Orb](https://github.com/CircleCI-Public/aws-ecr-orb/blob/0c27bfab932b60f1c60a4c2e74bee114f8d4b795/.circleci/test-deploy.yml#L40) のサンプルです。
 
 ```yaml
 # Shortened for this example
@@ -269,7 +269,7 @@ workflows:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
 ```
 
-AWS ECR Orb には、イメージをビルドし AWS ECR リポジトリにプッシュする、"build-and-push-image" という名前のジョブが含まれています。 他のジョブも含めて、このジョブを複数のパラメーター オプションを使用して実行し、コードを変更するたびに機能をテストします。
+AWS ECR Orb には、イメージをビルドし AWS ECR リポジトリにプッシュする、"build-and-push-image" という名前のジョブが含まれています。 このジョブや他のジョブを複数のパラメーター オプションを使用して実行し、コードを変更するたびに機能をテストします。
 
 新たなステップを追加してコマンドをテストする方法と同様に、 [post-steps](https://circleci.com/docs/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21) を利用してジョブ環境でバリデーションしたり、このサンプルで示すように、ジョブで作成したものをすべて「クリーンアップ」したりすることもできます。 Post-Step は、既存のジョブの最後に挿入可能な追加のステップです。
 
@@ -283,5 +283,5 @@ Orb の新しい機能を追加し、CI にパスする適切なテストを作�
 
 - CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)を参照してください。
 - ワークフローやジョブで使用する Orb については、[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照してください。
-- 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/)を参照してください。
+- 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンスガイド]({{site.baseurl}}/ja/2.0/reusing-config/)を参照してください。
 - 設定ファイル内で CircleCI Orb を使用するための詳しいレシピについては、[CircleCI 設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)を参照してください。
