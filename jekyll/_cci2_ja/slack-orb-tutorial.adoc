@@ -204,7 +204,7 @@ image::slack-orb-set-up-project.png[Set up Project]
 image::slack-orb-select-config-file.png[Select your config.yml file]
 * **Set Up Project** ボタンをクリックします。
 
-これにより、お客様の認証情報が付いた Slack Orb を含む CircleCI パイプラインがトリガーされます。
+これにより、お客様の認証情報を付加した Slack Orb を含む CircleCI パイプラインがトリガーされます。
 
 すると緑色の **Success** バッジが表示され、_notify_ ジョブの隣に緑色のチェックマークが表示されます。
 
@@ -224,12 +224,12 @@ image::slack-orb-text-notification.png[Slack text notification]
 
 == ステップ 3: メッセージテンプレートを使用する
 
-Slack Orb には、様々な CircleCI イベントのチャンネルを通知するために使用できるたくさんの通知テンプレートが含まれています。
+Slack Orb には、様々な CircleCI イベントのチャンネル通知に使用できるたくさんの通知テンプレートが含まれています。
 
 * `basic_success_1`: ジョブが成功した _pass_  イベント用
 * `basic_fail_1`: ジョブが失敗した _fail_ イベント用
-* `success_tagged_deploy_1` : 成功したデプロイ用
-* `basic_on_hold_1`: 認証待ちの待機ジョブ用
+* `success_tagged_deploy_1`: 成功したデプロイ用
+* `basic_on_hold_1`: 承認待ちの待機ジョブ用
 
 ジョブでこれらのテンプレートを使用するには、`event` パラメーターと `template` パラメーターを  `config.yml` ファイルの `steps` の下に含めます。 例えば下記のようにします。
 
@@ -255,13 +255,13 @@ jobs:
 
 ステップ 1 では汎用アラートを使用しましたが、ジョブが成功したか失敗したかに応じて異なるステップが追加されました。 Slack Orb により、適切なステップがトリガーされます。
 
-更新した `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。 パイプラインが完了すると、Slack チャンネルにより高度なアラートが表示されます。
+更新した `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。 パイプラインが完了すると、Slack チャンネルにより詳細なアラートが表示されます。
 
 image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
 === 追加パラメーターを含める
 
-失敗したジョブについての言及を含めて特定の人やチームにアラートすることもできます。
+失敗したジョブについて、メンションすることで特定の人やチームに知らせることができます。
 
 [source,yaml]
 ----
