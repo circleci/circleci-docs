@@ -89,7 +89,6 @@ The following instructions are for:
 
 * A one-time configuration of your AWS account to trust CircleCI's OIDC tokens
 * Running a job that uses the OIDC token to interact with AWS
-* Uploading an image to ECR
 
 === Setting up AWS
 
