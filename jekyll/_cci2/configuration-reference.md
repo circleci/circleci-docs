@@ -1395,7 +1395,7 @@ The lifetime of artifacts, workspaces, and caches can be customized on the [Circ
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GotHib and Bitbucket Integration]({{site.baseurl}}/2.0/gh-bb-integration/#deployment-keys-and-user-keys) page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/2.0/gh-bb-integration/#deployment-keys-and-user-keys) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1469,13 +1469,13 @@ workflows:
 {: #workflows }
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page.
 
-### **`version`**
+### **`version`** - not required for v2.1 configuration
 {: #workflow-version }
-The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
+The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | Should currently be `2`
+version | Y if config version is `2` | String | Should currently be `2`
 {: class="table table-striped"}
 
 ### **<`workflow_name`>**
