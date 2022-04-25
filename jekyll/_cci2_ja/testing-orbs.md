@@ -18,19 +18,19 @@ Orb のテストに関するベストプラクティスを説明します。
 ## はじめに
 {: #introduction }
 
-Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実施できます。
+Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実施できます。
 
 ## Orb ツールパイプラインの概要
 {: #orb-tools-pipeline-overview }
 
-このガイドに従って、Orb 開発キットを使用して Orb を作成すると、 [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)と同じ構造の Orb プロジェクトになります。 `.circleci/` ディレクトリの中を見ると、`config.yml` と `test-deploy.yml` の 2 つの設定ファイルがあり、どちらにも実行可能なテスト一式が含まれています。
+このガイドに従って、Orb 開発キットを使用して Orb を作成すると、 [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)と同じ構造の Orb プロジェクトが出来上がります。 `.circleci/` ディレクトリの中を見ると、`config.yml` と `test-deploy.yml` の 2 つの設定ファイルがあり、どちらにも実行可能なテスト一式が含まれています。
 
 ### config.yml
 {: #configyml }
 
-最初の設定ファイルは、2 つ目のワークフローの `test-deploy` で結合テストを実行できるように、Orb の開発版のパブリッシュを担っています。 パイプラインのこの時点では、Orb はまだパブリッシュされていないため、Orb _ディレクトリ_をテストすることはできませんが、この段階ではスクリプトに対して構文チェックを行い、単体テストのバリデーションとレビューを実施し、さらに可能性としては実行することも可能です。
+最初の設定ファイルは、2 つ目のワークフローの `test-deploy` で結合テストを実行できるよう、Orb の開発版をパブリッシュします。 パイプラインのこの時点では、Orb がまだパブリッシュされていないため、Orb を_直接_テストすることはできませんが、この段階ではスクリプトの構文チェックやバリデーションおよびレビュー、単体テストを実行することも可能です。
 
-Orb の開発版がパブリッシュされた後、最後の `orb-tools/continue` ジョブが 2 つ目のワークフローの `test-deploy` をトリガーします。
+Orb の開発版がパブリッシュされた後、最後の `orb-tools/continue` ジョブが 2 つ目のワークフロー、`test-deploy` をトリガーします。
 
 完全な [config.yml テンプレート](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/config.yml)については、こちらを参照してください。
 
@@ -38,14 +38,14 @@ Orb の開発版がパブリッシュされた後、最後の `orb-tools/continu
 ### test-deploy.yml
 {: #test-deployyml }
 
-この 2 つ目の設定ファイルには 2 つの主要なタスクがあります。以前の設定ファイルでは Orb の開発版がパブリッシュされており、結合テストで Orb を_直接_テストでき、タグが生成された場合は、この設定ファイルが Orb を CircleCI Orb レジストリにパブリッシングします。
+2 つ目の設定ファイルには、2 つの主要タスクがあります。1 つ目の設定ファイルで Orb の開発版がパブリッシュされたので、結合テストで Orb を_直接_テストできるようになりました。タグが作成された場合は、この 2 つ目の設定ファイルにより Orb が CircleCI Orb レジストリにパブリッシュされます。
 
 完全な [test-deploy.yml テンプレート](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)については、こちらを参照してください。
 
 ## バリデーション
 {: #validation }
 
-Orb のテストで最も基本的な形式は、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュする Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Orb 開発キットを使用していれば、これら両方のチェックは、プロジェクトの設定ファイル `.circleci/config.yml` に定められた CI/CD パイプラインにより自動で行われます。 また、ローカル環境において手動で実施することも可能です。
+Orb のテストの最も基本的な形式は、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュされる Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Orb 開発キットを使用していれば、これら両方のチェックは、プロジェクトの設定ファイル `.circleci/config.yml` に定められた CI/CD パイプラインにより自動で行われます。 また、ローカル環境において手動で実施することも可能です。
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
@@ -55,12 +55,12 @@ workflows:
       - orb-tools/lint # Lints the YAML and CircleCI syntax of the orb
       - orb-tools/pack # Packs the orb source and validates it
 ```
-### YAML 構文チェック
+### YAML の構文チェック
 {: #yaml-lint }
 
-上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである[`orb-tools` Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。詳しくは、[Orb レジストリのページ](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
+上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要な構成要素である [`orb-tools` Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
 
-#### ローカル YAML 構文チェック
+#### ローカル YAML の構文チェック
 {: #local-yaml-lint }
 
 `yamllint` をローカルにインストールしている場合:
@@ -79,7 +79,7 @@ circleci local execute --job orb-tools/lint
 ### Orb のバリデーション
 {: #orb-validation }
 
-YAML 構文チェックに加えて、パッケージ化した `orb.yml` ファイルのバリデーションを行い、それを Orb スキーマに適切に準拠させる必要があります。 まず、Orb を[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)して、複数のソースファイルを `orb.yml` に結合させます。 次に、 `circleci orb validate` コマンドを実行して、スキーマを確認します。
+YAML の構文チェックに加えて、「パッケージ化」した `orb.yml` ファイルを検証し、Orbスキーマに正しく準拠していることを確認する必要があります。 まず、Orb を[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)して、複数のソースファイルを `orb.yml` に結合させます。 次に、 `circleci orb validate` コマンドを実行して、スキーマを確認します。
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
@@ -99,18 +99,18 @@ circleci orb pack src > orb.yml
 circleci orb validate orb.yml
 ```
 
-または、CircleCI の Local Execute の使用:
+または、CircleCI の Local Execute を使用します。
 ```shell
 circleci local execute --job orb-tools/pack
 ```
 ### ShellCheck
 {: #shellcheck }
 
-Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリで維持できるので、スクリプトに対して別のテストも実行できます。
+Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
 
-bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーション ツールです。 これは bash 用の構文チェック ツールというべきもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
+bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーションツールです。 これは bash 用の構文チェックツールのようなもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
 
-`lint-pack` ワークフローでは、[ShellCheck Orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) を使用します。 ShellCheck Orb のステップは完全にオプションであり、特に Orb でスクリプトのインストールが不要な場合は削除可能です。
+`lint-pack` ワークフローには、[ShellCheck Orb](https://circleci.com/ja/developer/orbs/orb/circleci/shellcheck) が含まれています。 ShellCheck Orb のステップはすべて省略可能であり、特に Orb でスクリプトのインストールが不要な場合は削除してかまいません。
 
 #### ローカル ShellCheck
 {: #local-shellcheck }
@@ -121,17 +121,17 @@ ShellCheck をローカルで実行するには、次のコマンドを実行し
 shellcheck src/scripts/*.sh
 ```
 
-または、CircleCI の Local Execute の使用:
+または、CircleCI の Local Execute を使用します。
 ```shell
 circleci local execute --job shellcheck/check
 ```
 
-### プレビュー
+### レビュー
 {: #review }
 
-orb-tools orb には、 `orb-tools/review` が含まれています。このジョブにはベストプラクティスが実装されており、Orb に対して一連のテストを実行し、Orb の品質向上を図ることができます。 "review" ジョブは、_ShellCheck_ をモデルにして入念に作られおり、"RC" Review Check というルールのリストに基づいて動作します。 各 "RC" コードは特定のルールに対応しています。ただし、このルールはオプションであって無視することもできます。
+orb-tools Orb には、`orb-tools/review` ジョブが含まれています。このジョブは、ベストプラクティスを実装し、Orb の品質を向上するために設計された一連のテストを Orb に対して実行します。 "review" ジョブは、_ShellCheck_ に厳密に基づいて作られおり、"RC" Review Check というルールのリストに基づいて動作します。 各 "RC" コードは特定のルールに対応しています。ただし、このルールはオプションであって無視することもできます。
 
-Review Check は JUNIT XML 形式に出力され、UI にネイティブに表示するように、自動的に CircleCI にアップロードされます。
+Review Check は JUNIT XML 形式に出力され、UI にネイティブに表示されるよう、自動的に CircleCI にアップロードされます。
 
 ![Orb ツールの Review Check RC008]({{site.baseurl}}/assets/img/docs/orbtools-rc008.png)
 
