@@ -201,4 +201,4 @@ In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs
 **Q:** Do you support regex?
 
 **A:** 
-Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regexes) included in the webhook, API call or schedule. 
+Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regexes) included in the webhook, API call, or schedule. 
