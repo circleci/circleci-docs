@@ -12,7 +12,7 @@ version:
 
 Orb のテストに関するベスト プラクティスを説明します。
 
-* TOC
+* 目次
 {:toc}
 
 ## はじめに
@@ -45,7 +45,7 @@ See the full [test-deploy.yml template here](https://github.com/CircleCI-Public/
 ## Validation
 {: #validation }
 
-Orb のテストで最も基本的なものは、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュする Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Both of these checks are automatically applied when using the Orb Development Kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. また、ローカル環境において手動で実施することも可能です。
+Orb のテストで最も基本的な形式は、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュする Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Both of these checks are automatically applied when using the Orb Development Kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. また、ローカル環境において手動で実施することも可能です。
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
@@ -58,7 +58,7 @@ workflows:
 ### YAML Linting
 {: #yaml-lint }
 
-The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the Orb Development Kit. この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。詳しくは、[Orb レジストリのページ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
+The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the Orb Development Kit. この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。詳しくは、[Orb レジストリのページ](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
 
 #### Local YAML Linting
 {: #local-yaml-lint }
@@ -106,11 +106,11 @@ circleci local execute --job orb-tools/pack
 ### ShellCheck
 {: #shellcheck }
 
-One of the major benefits of using the Orb Development Kit is the ability to [import external bash scripts]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) into your final orb. bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに配置するので、スクリプトに対する別のテストも実行できます。
+One of the major benefits of using the Orb Development Kit is the ability to [import external bash scripts]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) into your final orb. bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリで維持できるので、スクリプトに対して別のテストも実行できます。
 
-bash スクリプトのテストで最も基本的なものは、"ShellCheck" というバリデーション ツールです。 これは bash 用の構文チェック ツールというべきもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
+bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーション ツールです。 これは bash 用の構文チェック ツールというべきもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
 
-In the `lint-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. ShellCheck Orb のステップはすべて省略可能であり、特に Orb でスクリプトのインストールが不要な場合などは削除してかまいません。
+In the `lint-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. ShellCheck Orb のステップは完全にオプションであり、特に Orb でスクリプトのインストールが不要な場合は削除可能です。
 
 #### Local ShellCheck
 {: #local-shellcheck }
@@ -281,7 +281,7 @@ Once you have added new orb features, and created tests that pass your CI, it is
 ## See also
 {: #see-also }
 
-- CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)」を参照してください。
-- ワークフローやジョブで使用する Orb については、「[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)」を参照してください。
-- 再利用可能な Orb、コマンド、パラメーター、Executor の例については、「[再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/)」を参照してください。
-- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[CircleCI 設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)」を参照してください。
+- CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)を参照してください。
+- ワークフローやジョブで使用する Orb については、[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照してください。
+- 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/)を参照してください。
+- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピについては、[CircleCI 設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)を参照してください。
