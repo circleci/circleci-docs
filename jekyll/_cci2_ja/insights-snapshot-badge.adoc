@@ -13,7 +13,7 @@ version:
 
 == 概要
 
-インサイト スナップショットバッジは、プロジェクトの README に埋め込まれている <<status-badge#,ステータスバッジ>> と同様に、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
+インサイト スナップショットバッジは、プロジェクトの README に埋め込まれている <<status-badges#,ステータスバッジ>> と同様に、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
 
 image::insights-snapshot-preview.png[Insights snapshot badge]
 
