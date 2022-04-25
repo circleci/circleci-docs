@@ -39,6 +39,8 @@ jobs:
 
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
+For jobs that use [self-hosted runners](https://circleci.com/docs/2.0/runner-overview/), ensure that you have at least two self-hosted runners associated to the runner resource class that your job will run on to use the parallelism feature.  
+
 For more information,
 see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
 
@@ -56,6 +58,9 @@ Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally v
 {:.no_toc}
 
 The CLI supports splitting tests across machines when running parallel jobs. This is achieved by passing a list of either files or classnames, whichever your test-runner requires at the command line, to the `circleci tests split` command.
+
+[Self-hosted runners](https://circleci.com/docs/2.0/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests because the [task agent](https://circleci.com/docs/2.0/runner-overview/#circleci-runner-operation) already exists on the `$PATH`.  This removes an additional dependency when splitting tests.
+
 
 #### Globbing test files
 {: #globbing-test-files }
