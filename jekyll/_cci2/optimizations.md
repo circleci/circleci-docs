@@ -21,7 +21,7 @@ This document provides an overview of ways to optimize your CircleCI configurati
 
 The [CircleCI web app](https://app.circleci.com/) provides controls to customize the storage retention period of workspaces, caches, and artifacts. You can find these settings by navigating to **Plan > Usage Controls**. By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
 
-See the [Persisting Data]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage) page for more information on custom storage settings.
+See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#custom-storage-usage) page for more information on custom storage settings.
 
 ## Docker image choice
 {: #docker-image-choice }
