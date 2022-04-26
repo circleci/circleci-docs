@@ -18,7 +18,7 @@ version:
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
 
-## はじめに
+## 概要
 {: #overview-new }
 
 このガイドでは、Django サンプルアプリケーションを使って、CircleCI 上で Python アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング]({{site.gh_public_org_url}}/circleci-demo-python-django)され、[CircleCI 上でビルド]({{site.cci_public_org_url}}/circleci-demo-python-django){:rel="nofollow"}されます。
@@ -63,10 +63,10 @@ workflows:
   my_workflow: # ワークフロー名です。お客様のワークフローに合う名前に変更して下さい。
 ```
 
-### 4.  ジョブの作成
+### 4. ジョブの作成
 {: #create-a-job }
 
-[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 In this example, the virtual environment is cached.
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブに関する詳細は、[こちら]({{site.baseurl}}/2.0/configuration-reference/#jobs)を参照して下さい。
 
 CircleCI を使い始めた開発者からよくいただく質問は、ビルド、テスト、デプロイの 3 つの基本タスクの実行に関してです。 このセクションでは必要な設定の各変更について説明します。 CircleCI では公式の Python Orb を使っているため、これらのステップを簡単に実行することができます。
 
@@ -81,17 +81,15 @@ jobs:
       - image: cimg/python:3.10.1
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:  # ensure this step occurs *before* installing dependencies
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - python/install-packages:
+          pkg-manager: pip
       - run:
           name: テストの実行
           command: python -m pytest
       - persist_to_workspace:
           root: ~/project
           paths:
-            - "venv"
+            - .
 ```
 
 #### b.  アプリのデプロイ
