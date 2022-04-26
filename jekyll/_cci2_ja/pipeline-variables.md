@@ -104,10 +104,25 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
+### Passing parameters when triggering pipelines using the CircleCI web app
+{: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
+
+In addition to using the CLI and API, you can also trigger a pipeline with parameters from the CircleCI web app. 無効にするには以下を実行します。
+
+  1. Navigate to the dashboard view in the web app.
+  2. Use the project filter to select the desired project.
+  3. Use the branch filter to select the branch on which you want to run the new pipeline.
+  4. Click the **Trigger Pipeline** button (towards the top right corner of the page).
+  5. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
+  6. Click **Trigger Pipeline**.
+
+**NOTE:** If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`)
+
+
 ## パイプラインパラメーターのスコープ
 {: #the-scope-of-pipeline-parameters }
 
-パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。 これは、パイプラインのスコープを Orb 内で使用するとカプセル化が崩れ、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が損なわれ、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
+パイプライン パラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプライン パラメーターを利用できません。 これは、パイプラインのスコープを Orb 内に認めるとカプセル化が崩れることになり、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が台無しになり、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
 
 
 ## 設定プロセスの段階とパラメーターのスコープ
@@ -116,13 +131,13 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ### プロセスの段階
 {: #processing-stages }
 
-設定プロセスは次の段階を経て進みます。
+構成プロセスは次の段階を経て進みます。
 
 - パイプラインパラメーターが解決され、型チェックされる
 - パイプライン パラメーターが Orb ステートメントに置き換えられる
 - Orb がインポートされる
 
-残りの設定プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
+残りの構成プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
 
 ## 要素パラメーターのスコープ
 {: #element-parameter-scope }
@@ -167,7 +182,7 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ### パイプラインパラメーターのスコープ
 {: #pipeline-parameter-scope }
 
-設定ファイル内で定義されているパイプラインパラメーターは常にスコープ内で有効ですが、2 つの例外があります。
+設定ファイル内で定義されているパイプライン パラメーターは常にスコープ内で有効ですが、2 つの例外があります。
 
 - パイプラインパラメーターは、他のパイプラインパラメーターの定義の範囲内では有効でないため、相互に依存させることはできません。
 - データ漏えいを防ぐために、パイプラインパラメーターは Orb 本体、Orb のインラインの範囲内では有効ではありません。
@@ -177,9 +192,9 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 
 ワークフロー宣言の下で[ロジックステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless]({{site.baseurl}}/2.0/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
 
-この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
+この構成の最も一般的な活用方法は、値としてパイプライン パラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 
-以下の設定例では、パイプラインパラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
+以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
 ```yaml
 version: 2.1
@@ -210,4 +225,4 @@ jobs:
 }
 ```
 
-`when` キーは、パイプライン パラメーターだけでなくすべての真偽値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句の逆の `unless` 句もあり、条件の真偽を逆に指定できます。
+`when` キーは、パイプライン パラメーターだけでなくすべての真偽値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句と似た逆の意味の `unless` 句もあり、条件の真偽を逆に指定できます。
