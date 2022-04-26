@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture, Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
 
 == Nomad メトリクスサーバー
@@ -59,7 +61,7 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 . [`Name (名前)`] フィールドを `nomad-builder-with-metrics-lc-DATE` などのわかりやすい名前で更新します。
 . [`Advanced Details (詳細情報)`] ドロップダウンを選択します。
 . 下のテキストフィールドから [`User data (ユーザーデータ)`] に起動設定スクリプトをコピー＆ペーストします。
-. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。 （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
+. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
 . Select the `Skip to review` button and then the `Create launch configuration` button.
 
 ```shell
@@ -225,7 +227,7 @@ docker run -d --name $CONTAINER_NAME \
 . In the description box at the bottom, select the `Edit` button.
 . ドロップダウンから、新たに作成した起動設定を選択します。
 . [`Save (保存する)`] ボタンを押します。
-. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。
+. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。
 
 == StatsD メトリクス
 
@@ -241,7 +243,7 @@ NOTE: 終了状態 (`complete` と `dead`) にあるジョブの数は、通常�
 |===
 | 名前
 | タイプ
-| お問い合わせ内容
+| 説明
 
 | `circle.nomad.server_agent.poll_failure`
 | ゲージ
@@ -271,7 +273,7 @@ NOTE: 終了状態 (`complete` と `dead`) にあるジョブの数は、通常�
 |===
 | 名前
 | タイプ
-| お問い合わせ内容
+| 説明
 
 | `circle.nomad.client_agent.poll_failure`
 | ゲージ
