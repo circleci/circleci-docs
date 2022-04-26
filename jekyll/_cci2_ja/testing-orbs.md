@@ -145,7 +145,7 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 
 Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
-![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/status_badge.png)
+![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
 内部スクリプトが複雑な Orb の場合、コードの品質向上やローカル開発テストの簡易化のために、単体テストを実施することをお勧めします。
 
