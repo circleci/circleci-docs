@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 ここでは、CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションについて概説します。
 
 toc::[]
@@ -75,7 +77,6 @@ NOTE: すべてのプロパティーが`export ENV_VAR="value"`の形式であ�
 [cols=3*, options="header", stripes=even]
 |===
 | プロパティー
-
 | 影響
 | 詳細情報
 
@@ -129,7 +130,7 @@ FOOの値は、CircleCI Server 設定のデフォルトコンテナマッピン�
 ```
 
 === リソース クラス
-_CircleCI Server v2. 19 からサポート_
+_Introduced in CircleCI server v2.19_
 
 リソースクラスをカスタマイズして、開発者に設定するジョブの https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM オプション] を提供することができます。
 
@@ -218,7 +219,7 @@ circleci dev-console
 ////
 
 === ログイン画面
-_CircleCI Server v2. 17.3 からサポート_
+_Introduced in CircleCI Server v2.17.3_
 
 ログイン画面へのバナーの追加は以下のように行います。
 
