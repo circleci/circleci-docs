@@ -22,7 +22,7 @@ version:
 
 [CircleCI Web アプリ](https://app.circleci.com/)では、ワークスペース、キャッシュ、アーティファクトのストレージ保存期間のカスタマイズをコントロールすることができます。 この設定を確認するには、**Plan > Usage Controls** に移動します。 デフォルトでは、保存期間はアーティファクトの場合は 30 日間、キャッシュやワークスペースの場合は 15 日間です。 この日数はストレージの最大保存期間でもあります。 アーティファクトの最大保存期間は 30 日間、キャッシュやワークスペースの最大保存期間は 15 日間です。
 
-ストレージのカスタム設定の詳細は、[データの永続化]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage)のページを参照してください。
+See the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#custom-storage-usage) page for more information on custom storage settings.
 
 ## Docker イメージの選択
 {: #docker-image-choice }
