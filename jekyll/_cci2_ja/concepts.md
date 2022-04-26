@@ -408,7 +408,7 @@ jobs:
 
 Docker Layer Caching  (DLC ) により、 ジョブにおいてビルドされた Docker イメージの個々のレイヤーがキャッシュされます。 変更されていないレイヤーは、毎回イメージを再ビルドするのではなく、後続の実行において使用されます。
 
-下記の `config.yml` スニペットでは、`build_exlixir` ジョブで `ubuntu-2004:202104-01` Dockerfile を使ってイメージをビルドしています。 `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
+In the `config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
 
 
 
