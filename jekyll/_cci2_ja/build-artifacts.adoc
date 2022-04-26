@@ -3,13 +3,15 @@ version:
 - Server v2.x
 - Admin
 ---
-= Build Artifacts
+= Managing Build Artifacts
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Build artifacts persist data after a job is completed and can be used for longer-term storage of your build process outputs.
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 ビルドアーティファクトは、ジョブの完了後もデータを維持します。 アーティファクトを使用することで、ビルドプロセスの出力を長期間にわたり保存できます。 たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も長期間使用可能な状態に維持できます。
 
@@ -30,25 +32,25 @@ toc::[]
 | アプリケーション
 | json
 
-| 画像
+| イメージ
 | png
 
-| 画像
+| イメージ
 | jpg
 
-| 画像
+| イメージ
 | gif
 
-| 画像
+| イメージ
 | bmp
 
-| 動画
+| ビデオ
 | webm
 
-| 動画
+| ビデオ
 | ogg
 
-| 動画
+| ビデオ
 | mp4
 
 | オーディオ
