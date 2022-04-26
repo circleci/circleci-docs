@@ -17,6 +17,8 @@ en:
           - 
             name: Hello World
           - 
+            name: Slack Orb の使用
+          - 
             name: FAQ
       - 
         name: 移行
@@ -195,6 +197,11 @@ en:
             name: Orb のテスト手法
           - 
             name: Orb のパブリッシュ プロセス
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Slack Orb の使用
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
