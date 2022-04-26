@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
+[CircleCI 設定ファイル]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
 
 * TOC
 {:toc}
@@ -21,9 +21,9 @@ This document describes best practices for using shell scripts in your [CircleCI
 {: #overview }
 {:.no_toc}
 
-Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
+CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 
-## Shell script best practices
+## シェルスクリプトのベストプラクティス
 {: #shell-script-best-practices }
 
 ### ShellCheck の使用
@@ -31,7 +31,7 @@ Configuring CircleCI often requires writing shell scripts. While shell scripting
 
 [ShellCheck](https://github.com/koalaman/shellcheck) は、シェル スクリプトの静的解析ツールです。bash/sh シェル スクリプトに対して警告と提案を行います。
 
-Use the [Shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for the simplest way to add shellcheck to your `version: 2.1` configuration (remember to replace `x.y.z` with a valid version):
+ShellCheck を `version: 2.1` の設定に追加するには、[ShellCheck Orb](https://circleci.com/ja/developer/orbs/orb/circleci/shellcheck) の使用が最も簡単な方法です ( 必ず `x.y.z` を有効なバージョンに変更してください)。
 
 ```yaml
 version: 2.1
@@ -55,7 +55,7 @@ jobs:
     ...
 ```
 
-Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
+または、version 2 の設定をご使用の場合は、 Orb を使わなくても ShellCheck を設定できます。
 
 ```yaml
 version: 2
@@ -89,7 +89,7 @@ workflows:
               only: main # only run build-job on main branch
 ```
 
-**Note:** Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way. In the example below, observe how the `tmp.sh` script file reveals too much.
+**注:** ShellCheck と共に `set -o xtrace` / `set -x` を使用するときには注意が必要です。 シェルがシークレットな環境変数を展開すると、機密性の高くない方法で公開されてしまいます。 以下の例では、`tmp.sh` スクリプト ファイルによって、公開すべきでない部分まで公開されています。
 
 ```shell
 > cat tmp.sh
@@ -110,10 +110,10 @@ You must set SECRET_ENV_VAR!
 ```
 
 
-### エラー フラグの設定
+### エラーフラグの設定
 {: #set-error-flags }
 
-There are several error flags you can set to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
+いくつかのエラーフラグを設定することで、好ましくない状況が発生した場合にスクリプトを自動的に終了できます。 厄介なエラーを回避するために、各スクリプトの先頭に以下のフラグを追加することをお勧めします。
 
 ```shell
 #!/usr/bin/env bash
@@ -132,4 +132,4 @@ set -o pipefail
 {: #see-also }
 {:.no_toc}
 
-For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
+堅牢なシェル スクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。

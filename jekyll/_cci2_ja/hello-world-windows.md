@@ -153,7 +153,7 @@ jobs:
          shell: cmd.exe
 ```
 
-**注:** 更新された、または他の Windows シェルツールをインストールすることも可能です。 たとえば、`dotnet` CLI により Powershell Core の最新版をインストールし、ジョブの連続するステップで使用することができます。
+**注:**更新された、または他の Windows シェルツールをインストールすることも可能です。 たとえば、`dotnet` CLI により Powershell Core の最新版をインストールし、ジョブの連続するステップで使用することができます。
 
 ```yaml
 
@@ -268,7 +268,7 @@ jobs:
           command: .\bin\Release\netcoreapp2.1\win10-x64\publish\circleci-demo-windows.exe
 ```
 
-続いて 2 つのステップを実行します。 1 つは Windows 10 用の実行可能ファイルをビルドし、もう 1 つはその実行可能ファイルをテストします (コンソールに「Hello World」と出力されます)。
+続いて 2 つのステップを実行します。1 つは Windows 10 用の実行可能ファイルをビルドし、もう 1 つはその実行可能ファイルをテストします (コンソールに「Hello World」と出力されます)。
 
 ```yaml
       - store_artifacts:
