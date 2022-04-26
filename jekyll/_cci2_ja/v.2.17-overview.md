@@ -8,7 +8,9 @@ categories:
 order: 1
 ---
 
-このドキュメントでは、CircleCI Server v2.17 の機能や注意事項についてまとめています。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
+このドキュメントでは、CircleCI Server v2.17 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。
 
 ## バージョン 2.17. の新機能
 {: #whats-new-in-release-217 }
