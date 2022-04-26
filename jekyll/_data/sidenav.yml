@@ -55,6 +55,11 @@ en:
       children:
         - name: Scheduled Pipelines
           link: 2.0/scheduled-pipelines/
+          children:
+            - name: How-to guides
+              children:
+                - name: Scheduled Pipelines
+                  link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
         - name: Jobs and Steps
@@ -359,6 +364,37 @@ en:
         link: 2.0/glossary/
       - name: Help and Support
         link: 2.0/help-and-support/
+
+- name: Server Administration v4.x
+  icon: icons/sidebar/admin.svg
+  children:
+    - name: Server v4.x Overview
+      link: 2.0/server-4/overview
+      children:
+        - name: Overview
+          link: 2.0/server-4/overview
+    - name: Server v4.x Install
+      link: 2.0/server-4/install-prerequisites
+      children:
+        - name: Phase 1 - Prerequisites
+          link: 2.0/server-4/install-prerequisites
+    - name: Server v4.x Operations
+      link: 2.0/server-4/operator-overview
+      children:
+        - name: Overview
+          link: 2.0/server-4/operator-overview
+    - name: Server v4.x PDFs
+      link: 2.0/server-4/overview
+      children:
+        - name: v4.x Overview
+          link: 
+        - name: v4.x Installation Guide for AWS
+          link: 
+        - name: v4.x Installation Guide for GCP
+          link: 
+        - name: v4/x Operations Guide
+          link: 
+
 
 - name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
