@@ -13,7 +13,10 @@ import { describe } from 'jest-circus';
 
 jest.mock('js-cookie');
 const Cookie = CookieOrginal;
-jest.mock('../utils', () => ({ updateCookieExpiration: jest.fn() }));
+jest.mock('../utils', () => ({
+  updateCookieExpiration: jest.fn(),
+  isDataDog: () => false,
+}));
 
 const jekyllProperties = { test: 'test' };
 

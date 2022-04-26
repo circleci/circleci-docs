@@ -5,14 +5,14 @@ function openPopup() {
   $('.popup-bg').addClass('popup-bg-show');
   $('.popup-content').addClass('popup-content-show');
 
-  window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__popup_seen');
+  window.AnalyticsClient.trackAction('dd_docs-popup-cta_test2__popup_seen');
 }
 
 function closePopup(trackIt = true) {
   $('.popup-bg').removeClass('popup-bg-show');
   $('.popup-content').removeClass('popup-content-show');
   if (trackIt) {
-    window.AnalyticsClient.trackAction('dd_docs-popup-cta_test__popup_closed');
+    window.AnalyticsClient.trackAction('dd_docs-popup-cta_test2__popup_closed');
   }
 }
 
@@ -80,14 +80,11 @@ function incrementTimesVisited() {
 
 // https://app.optimizely.com/v2/projects/16812830475/experiments/21292260007
 window.OptimizelyClient.getVariationName({
-  experimentKey: 'dd_docs-popup-cta_test',
+  experimentKey: 'dd_docs-popup-cta-2_test',
   groupExperimentName: 'q1_fy23_docs_disco_experiment_group_test',
   experimentContainer: 'body',
-  attributes: {
-    // This will only show the experiment to people who are guests to the docs site.
-    docs_is_logged_in: window.userData?.analytics_id === undefined,
-  },
   guestExperiment: true,
+  onlyQualifyGuests: true,
 }).then((variation) => {
   if (variation === 'treatment') {
     const popupBg = $('.popup-bg');
@@ -103,7 +100,7 @@ window.OptimizelyClient.getVariationName({
 
     signupButton.click(() => {
       window.AnalyticsClient.trackAction(
-        'dd_docs-popup-cta_test__signup_clicked',
+        'dd_docs-popup-cta_test2__signup_clicked',
       );
       closePopup(false);
     });

@@ -99,12 +99,12 @@ CircleCI では、すべての Linux および Android のビルドが専用コ�
 
 独自のハードウェアで [CircleCI](https://circleci.jp/enterprise/) を使用してビルドを実行する場合は、すべてのビルドをコンテナで実行することで、ビルドを実行するためのハードウェアを有効に活用できます。
 
-## 並列処理
+## 並列実行
 {: #parallelism }
 
 マルチスレッドなどの手法を利用すれば、Jenkins のビルドでも複数のテストを並列に実行できますが、データベースやファイル システムなどの共有リソースに関して軽微な問題が発生する可能性があります。
 
-CircleCI では、プロジェクトの設定で並列に処理できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 CircleCI の並列処理の詳細については、「[テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)」を参照してください。
+CircleCI では、プロジェクトの設定で並列実行できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 CircleCI の並列実行の詳細については、「[テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)」を参照してください。
 
 ## Jenkinsfile converter
 {: #jenkinsfile-converter }
@@ -112,4 +112,4 @@ CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily c
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 
-Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation](https://circleci.com/docs/2.0/jenkins-converter/).
+Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation]({{site.baseurl}}/2.0/jenkins-converter/).

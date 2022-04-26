@@ -15,45 +15,44 @@ version:
 
 CircleCI Server v3.x のコアサービスのインストールステップを開始する前に、xref:server-3-install-prerequisites.adoc[前提条件]をすべて満たしていることをご確認ください。
 
-NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
-
 .インストール手順のフローチャート ステップ 2）
 image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
+
+NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
 
 toc::[]
 
 == ステップ 2: コアサービスのインストール
-CircleCI Server v3.x では、 https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
-To install the latest version, you can run `curl \https://kots.io/install | bash`.
+CircleCI Server v3.x では、 https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS]を使用して CircleCI Server v3.x の管理と配布を行います。
 
-次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。
-
+. 次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。
++
 ```bash
 kubectl kots version
 ```
++
+NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-NOTE: KOTS コマンドにより、管理者コンソールへのトンネルが開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
-
-ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/ja/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
-
+. ターミナルでの実行 (プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール] を参照してください。)
++
 ```bash
 kubectl kots install circleci-server
 ```
-
++
 すると、以下を入力するよう求められます。
-
++
 * デプロイ先の名前空間
 * KOTS 管理者コンソールのパスワード
 
-When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
+. When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
 
-NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+TIP: If you need to get back to the KOTS admin console at a later date, run: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
-NOTE: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
+TIP: Once you have created your namespace, we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-=== HTTP プロキシ経由でのインストール
+=== HTTP プロキシ経由でのインストール (オプション)
 
-プロキシ経由で CircleCI Server をインストールするには、以下のコマンドを使用します (詳細は https://kots.io/kotsadm/installing/online-install/#proxies[こちら] の KOTS 文書をご覧ください）。
+プロキシ経由で CircleCI Server をインストールするには、上記の 2. で以下のコマンドを使用します (詳細は https://kots.io/kotsadm/installing/online-install/#proxies[こちら]の KOTS 文書をご覧ください）。
 
 ```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
@@ -62,7 +61,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
-詳細については、 https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
+詳細については、 https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[プロキシの設定]ガイドを参照してください。
 
 === フロントエンドの設定
 フロントエンドの設定により、 CircleCI システムの Web アプリケーション固有の側面が制御されます。
@@ -70,13 +69,11 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 .フロントエンドの設定
 image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 
-以下のフィールドに入力します。 プライベートキーと証明書を指定するか、 [ Let's Encrypt (暗号化を許可) ] チェックボックスをオンにして、自動的に証明書を要求および管理します。 この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
-
-NOTE: プライベート ロードバランサーの使用オプションを選択した場合、 [ Let's Encrypt (暗号化を許可) ] オプションは機能せず、使用できなくなります。
+以下のフィールドに入力します。
 
 * *[Domain Name (ドメイン名)](必須)*: フロントエンド TLS キーと証明書を作成した際に指定したドメイン名を入力します。
 
-* *[Frontend Replicas (フロントエンドのレプリカ)](オプション)*: フロントエンドで処理できるトラフィック量を増やす際に使用します。
+* *[Frontend Replicas (フロントエンドのレプリカ)]*: フロントエンドで処理できるトラフィック量を増やす際に使用します。
 
 * *[Frontend TLS Private Key (フロントエンド TLS プライベートキー)] (必須)*: 前提条件のステップで作成したキーです。 この値は以下のコマンドで取得できます。
 +
@@ -90,10 +87,38 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
 
-* *[Private Load Balancer (プライベートロードバランサー)] (オプション)*:  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
+****
+*フロントエンド TLS プライベートキーと証明書*については、4つの選択肢があります。 
 
-==== アーティファクトと暗号化署名の設定
+* プライベートキーと証明書を指定します。
+* https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 
+* https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 ACM の使用に関する詳細は、[CircleCI Server v3.x オペレーターの証明書]ガイドを参照してください。
+* この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
+
+**ACM TLS 証明書の使用**
+
+https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント]の ACM 証明書の生成方法に従ってください。
+
+証明書を作成したら、フロントエンドセクションの KOTS コンソールで ACM を有効にしてください。 ACM のボックスにチェックを入れて、ACM ARN (Amazon Resource Name) を入力します。
+
+[WARNING]
+==== 
+CircleCI Server をデプロイ済みの場合は、ACM の有効化はフロントエンドサービスに破壊的な変更を加えます。 ACM 証明書の使用を許可するようサービスを再生成し、関連するロードバランサーも再生成する必要があります。 
+CircleCI Server を再デプロイした場合、DNS レコードを再ルーティングする必要があります。
+====
+
+****
+
+* *[Private Load Balancer (プライベートロードバランサー)] (オプション)*:  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
++
+NOTE: プライベート ロードバランサーの使用オプションを選択した場合、 [ Let's Encrypt (暗号化を許可) ] オプションは機能せず、使用できなくなります。
+
+=== 暗号化
+
 暗号化キーとアーティファクト署名キーは、前提条件のステップで作成しました。 そのキーをここで入力します。
+
+.暗号化の設定
+image::server-3-encryption-settings.png[Screenshot showing encryption settings]
 
 以下の項目を入力してください。
 
@@ -101,8 +126,12 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 * *暗号化署名キー (必須)*
 
-==== Github の設定
+=== GitHub
+
 前提条件のステップで作成した Github OAuth アプリケーションのデータを使って、 以下の作業を行ってください。
+
+.Github の設定
+image::server-3-github-settings.png[Screenshot showing GitHub settings]
 
 * *[Github Type (Github の種類)] (必須) * -
 Cloud または Enterprise (オンプレミス)を選択します。
@@ -113,16 +142,21 @@ Github が提供する OAuth クライアントIDです。
 * *[OAuth Client Secret (OAuth クライアント シークレット)] (必須)* -
 Github が提供する OAuth クライアント シークレットです。
 
-==== オブジェクトストレージの設定
+* *Github Enterprise Fingerprint (Github Enterprise のフィンガープリント)* -
+プロキシを使用する場合に必要です。 `ssh-keyscan github.example.com`の出力をテキストフィールドに記載します。
 
-前提条件のステップで作成したオブジェクトストレージ バケットとキーを使って、 以下の作業を行ってください。
+=== オブジェクトストレージ
+
+前提条件のステップで作成したオブジェクトストレージバケットとキーを使って、 プラットフォームに応じて以下の設定を完了してください。
+
+.オブジェクトストレージの設定
+image::server-3-object-storage.png[Screenshot showing object storage settings]
 
 // Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
-===== S3 互換
-前提条件のステップで、S3 互換バケットとオプションで IAM アカウントの作成が完了している必要があります。
+==== S3 互換
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
@@ -132,7 +166,7 @@ ifndef::env-gcp[]
 
 * *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
-====== 認証
+===== 認証
 以下のいずれかを実行してください。 IAM キーを選択し、以下を指定します。
 
 * *[Access Key ID (アクセス キー ID) (必須)]*: S3 バケットへのアクセス用のアクセス キー ID を指定します。
@@ -151,38 +185,43 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-===== Google Cloud Storage
+==== Google Cloud Storage
 前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。
 
 * *[Storage Bucket Name (ストレージ バケット名)] (必須)*: CircleCI Server に使用するバケットです。
 
 * *[Storage Object Expiry (ストレージ オブジェクトの有効期限)]* (オプション): テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
-====== 認証
+===== 認証
 
-* *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービスアカウント キーです。
+* 以下のいづれかを選択します。
+** *[Service Account JSON (サービス アカウントの JSON)] (必須)*: バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
+** *[Service Account Email (サービスアカウントのメール)](必須)*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 
 endif::env-aws[]
 
 // Stop hiding from AWS PDF
 
-==== Postgres、MongoDB、Vault の設定
+****
+次のセクションをスキップします。: *Output Processor*、*Nomad*、*VM Service*。 これらについては次のステップで設定します。
+****
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書] を参照してください。 CirecleCI Server では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
+=== Postgres、MongoDB、Vault の設定
+
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関する文書]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
 
 === 保存とデプロイ
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Kong ロードバランサー用のIP アドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
 
-NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 しかし、アップグレードの際の中断を最小限に留めるために、Kong   が使用するサービス名への変更はしておりません。 そのため、サービス名は、`circleci-server-traefik` と表示されますが、実際には Kong のサービスです。
-
-NOTE: インストールの第一段階では、設定における多くのフィールドを省略しました。 これらのフィールドについては次の段階で再度説明します。
+NOTE: Server v3.3.0 以降は、リバースプロキシが https://github.com/traefik/traefik-helm-chart[Traefik] から https://github.com/Kong/charts[Kong] に変更されています。 しかし、アップグレードの際の中断を最小限に留めるために、Kong が使用するサービス名への変更はしておりません。 そのため、サービス名は、`circleci-server-traefik` と表示されますが、実際には Kong のサービスです。
 
 === DNS エントリーの作成
 Kong ロードバランサー の DNS エントリを作成します。例: (`circleci.your.domain.com` と `app.circleci.your.domain.com`) 。
  この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
 
-Kong  ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 この値は以下のコマンドで取得できます。
+Kong  ロードバランサーの IP アドレス、または AWS を使用している場合は DNS 名が必要になります。 以下のコマンドで情報を入手します。
 
+[source, shell]
 ----
 kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
@@ -194,11 +233,13 @@ kubectl get service circleci-server-traefik --namespace=<YOUR_CIRCLECI_NAMESPACE
 
 * link:https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成] (AWS)
 
-NOTE: Kong ロードバランサーには、https://loadbalancer-address/status に JSON ペイロードを提供するヘルスチェク機能があります。
+NOTE: Kong ロードバランサーには、 https://loadbalancer-address/status に JSON ペイロードを提供するヘルスチェク機能があります。
 
 === 確認
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。 次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。
+
+次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 以下のコマンドを実行することで、定期的に確認することができます (_実行中_および*準備完了*状態の「フロントエンド」ポッドが 1/1 と表示されいてる必要があります）。
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
@@ -207,5 +248,5 @@ kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ifndef::pdf[]
 ## 次に読む
 
-* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x ステップ 3: ビルドサービスのインストール]
+* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x ステップ 3: 実行環境のインストール]
 endif::[]

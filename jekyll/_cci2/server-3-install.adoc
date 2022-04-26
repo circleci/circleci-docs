@@ -31,7 +31,7 @@ CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/
 kubectl kots version
 ```
 +
-NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
+NOTE: The KOTS command opens up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
 . From the terminal, run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
@@ -43,7 +43,7 @@ kubectl kots install circleci-server
 You will be prompted for:
 +
 * namespace for the deployment
-* password for the KOTS admin console
+* password for the KOTS Admin Console
 
 . When complete, you should be provided with a URL to access the KOTS admin console, usually `\http://localhost:8800`.
 
@@ -53,7 +53,7 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 
 === Installing behind an HTTP Proxy (optional)
 
-If you wish to install CircleCI server behind a proxy, the following command structure should be used for step 2 above (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
+If you wish to install CircleCI server behind a proxy, use the following command structure should be used for step 2 above (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
 
 ```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
@@ -128,19 +128,19 @@ Complete the following fields:
 
 === GitHub
 
-You created your Github OAuth application in the prerequisite phase. Use the data to complete the following settings.
+You created your Github OAuth application in the prerequisite phase. Use the data to complete the following settings:
 
 .GitHub Settings
 image::server-3-github-settings.png[Screenshot showing GitHub settings]
 
-* *Github Type (required)* -
+* *GitHub Type (required)* -
 Select Cloud or Enterprise (on premises).
 
 * *OAuth Client ID (required)* -
-The OAuth Client ID provided by Github.
+The OAuth Client ID provided by GitHub.
 
 * *OAuth Client Secret (required)* -
-The OAuth Client Secret provided by Github.
+The OAuth Client Secret provided by GitHub.
 
 * *Github Enterprise Fingerprint* -
 Required when using a proxy. Include the output of `ssh-keyscan github.example.com` in the text field.
@@ -203,8 +203,9 @@ Number of days to retain your test results and artifacts. Set to 0 to disable an
 
 ===== Authentication
 
-* *Service Account JSON (required)* -
-A JSON format key of the Service Account to use for bucket access.
+* You can choose one of the following:
+** *Service Account JSON (required)* - A JSON format key of the Service Account to use for bucket access.
+** *Service Account Email (required)* - Service Account Email id if using Google Workload Identity.
 
 endif::env-aws[]
 
@@ -219,14 +220,14 @@ Skip over the next few sections - **Output Processor**, **Nomad** and **VM Servi
 You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case, see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CircleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
 
 === Save and deploy
-Once you have completed the fields detailed above, it is time to deploy. The deployment will install the core services and provide you with an IP address for the Kong load balancer. That IP address will be critical in setting up a DNS record and completing the first phase of the installation.
+Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
 
-NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by Kong. Therefore, you will see a service named `circleci-server-traefik` but this service is actually for Kong.
+NOTE: From server v3.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, to minimize disruption when upgrading, we chose not to rename the service used by Kong. Although you will see a service named `circleci-server-traefik`, this service is actually for Kong.
 
 === Create DNS entry
 Create a DNS entry for your Kong load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
-You will need the IP address or, if using AWS, the DNS name of the Kong load balancer. You can find this with the following command:
+You need the IP address or, if using AWS, the DNS name of the Kong load balancer. You can find this information with the following command:
 
 [source, shell]
 ----
@@ -243,7 +244,9 @@ NOTE: The Kong load balancer has a healthcheck that serves a JSON payload at htt
 
 === Validation
 
-You should now be able to navigate to your CircleCI server installation and log in to the application successfully. Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
+You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
+
+Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
 
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>

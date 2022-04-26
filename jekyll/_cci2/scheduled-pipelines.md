@@ -197,3 +197,8 @@ Note that it does not mean that it will run at 08:00 UTC exactly.
 
 However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run.
 In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
+
+**Q:** Do you support regex?
+
+**A:** 
+Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regexes) included in the webhook, API call, or schedule. 

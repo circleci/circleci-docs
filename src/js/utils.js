@@ -11,15 +11,6 @@ export function isUnsupportedBrowser() {
   return msie > 0;
 }
 
-const displayElement = (el, display) => {
-  if (el) {
-    el.style.display = display;
-  }
-};
-
-export const displayInitialElement = (el) => displayElement(el, 'initial');
-export const displayBlockElement = (el) => displayElement(el, 'block');
-
 /**
  * checks if an item is in the viewport
  * shamelessly borrowed from https://stackoverflow.com/a/7557433
@@ -63,3 +54,12 @@ export function updateCookieExpiration(cookieName, newExpiration) {
   // Re-set cookie with same values and new expiration date
   Cookies.set(cookieName, existingValue, { expires: newExpiration });
 }
+
+const isDataDogUserAgent = () =>
+  navigator &&
+  navigator.userAgent &&
+  navigator.userAgent.indexOf('Datadog/Synthetics') !== -1;
+
+const isDataDogSynthetics = () => window._DATADOG_SYNTHETICS_BROWSER === true;
+
+export const isDataDog = () => isDataDogSynthetics() || isDataDogUserAgent();

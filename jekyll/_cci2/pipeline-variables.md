@@ -105,6 +105,21 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
+### Passing parameters when triggering pipelines using the CircleCI web app
+{: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
+
+In addition to using the CLI and API, you can also trigger a pipeline with parameters from the CircleCI web app. To do this:
+
+  1. Navigate to the dashboard view in the web app.
+  2. Use the project filter to select the desired project.
+  3. Use the branch filter to select the branch on which you want to run the new pipeline.
+  4. Click the **Trigger Pipeline** button (towards the top right corner of the page).
+  5. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
+  6. Click **Trigger Pipeline**.
+
+**NOTE:** If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`)
+
+
 ## The scope of pipeline parameters
 {: #the-scope-of-pipeline-parameters }
 
@@ -176,7 +191,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 ## Conditional workflows
 {: #conditional-workflows }
 
-Use the [`when` clause](https://circleci.com/docs/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+Use the [`when` clause]({{site.baseurl}}/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 

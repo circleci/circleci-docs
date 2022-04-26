@@ -1,0 +1,35 @@
+= Just testing out some stuff
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+
+== Code snippet callouts
+
+[source,yaml]
+----
+
+  build_server_pdfs: # <1>
+    docker:
+      - image: asciidoctor/docker-asciidoctor
+    steps:
+      - *attach_workspace
+      - checkout # <2>
+      - run:
+          name: Build PDFs for Server
+          command: ./scripts/build_pdfs_asciidoc.sh
+      - store_artifacts:
+          path: release/tmp/ # <3>
+----
+<1> this job builds server-related pdf documentation, persisting it to the workspace as well.
+<2> Explain the checkout step here
+<3> Explain path to store artifacts
+
+---
+
+== Collapsible blocks
+
+.Expand to read more about something
+[%collapsible]
+====
+Some additional information in a collapsible block would be very useful if it could look a bit better than this!
+====

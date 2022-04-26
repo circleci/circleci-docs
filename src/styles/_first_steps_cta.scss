@@ -1,14 +1,9 @@
-@import "mixins/cta_button";
 $btn-breakpoint: 967px;
 $btn-breakpoint-sm: 360px;
 
 .sign-up-and-try-circleci, .circleci-のユーザー登録 {
-  .signup-and-try-experiment-block {
-    display: none;
-    &.show {
-      display: inherit;
-    }
-
+  .signup-and-try-block {
+    display: block;
     // disable external link tag wrapper in the button blocks
     .external-link-tag-wrapper  {
       width: 100%;

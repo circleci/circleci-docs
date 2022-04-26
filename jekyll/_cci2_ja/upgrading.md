@@ -17,6 +17,6 @@ CircleCI のプライベート環境を 2.0 にアップグレードすると、
 
 1.0 から 2.0 への移行プロセスに関して各種のドキュメントをご用意しています。
 
-* [2.0 への移行のヒント](https://circleci.com/docs/ja/2.0/migration/)
-* [Linux プロジェクトの移行](https://circleci.com/docs/ja/2.0/migrating-from-1-2/)
-* [設定ファイル変換ツールの使用](https://circleci.com/docs/ja/2.0/config-translation/)
+* [2.0 への移行のヒント]({{site.baseurl}}/ja/2.0/migration/)
+* [Linux プロジェクトの移行]({{site.baseurl}}/ja/2.0/migrating-from-1-2/)
+* [設定ファイル変換ツールの使用]({{site.baseurl}}/ja/2.0/config-translation/)

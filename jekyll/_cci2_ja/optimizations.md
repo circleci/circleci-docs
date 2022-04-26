@@ -17,8 +17,12 @@ version:
 * TOC
 {:toc}
 
-**警告: **データの永続化はプロジェクト固有であり、ここで紹介するサンプルはお客様のプロジェクトにコピー & ペーストしていただくためのものではありません。 これらのサンプルにより、お客様のプロジェクトを最適化する余地を見出していただければと思います。
-{: class="alert alert-warning"}
+## ストレージコントロールのカスタマイズ
+{: #custom-storage-controls }
+
+[CircleCI Web アプリ](https://app.circleci.com/)では、ワークスペース、キャッシュ、アーティファクトのストレージ保存期間のカスタマイズをコントロールすることができます。 この設定を確認するには、**Plan > Usage Controls** に移動します。 デフォルトでは、保存期間はアーティファクトの場合は 30 日間、キャッシュやワークスペースの場合は 15 日間です。 この日数はストレージの最大保存期間でもあります。 アーティファクトの最大保存期間は 30 日間、キャッシュやワークスペースの最大保存期間は 15 日間です。
+
+ストレージのカスタム設定の詳細は、[データの永続化]({{site.baseurl}}/2.0/2.0/persist-data/#custom-storage-usage)のページを参照してください。
 
 ## Docker イメージの選択
 {: #docker-image-choice }
@@ -60,12 +64,12 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 * 詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
 
-## 並列処理
+## 並列実行
 {: #parallelism }
 
-プロジェクトに大規模なテストスイートがある場合は、[`並列処理`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[テスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+プロジェクトに大規模なテストスイートがある場合は、[`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)と[CircleCI のテスト分割機能]({{site.baseurl}}/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests)または[サードパーティのアプリケーションまたはライブラリ]({{site.baseurl}}/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)を使用するようにビルドを設定し、テストを複数のマシンに分割することができます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
-* テストの分割の詳細については、[並列処理]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
+* テストの分割の詳細については、[並列実行]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
 
 ## リソースクラス
 {: #resource-class }
@@ -74,7 +78,9 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 `resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
-* 詳細については、[設定ファイルのリファレンス]({{site.baseURL}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
+`resource_class` が明示的に宣言されていない場合、CircleCI は組織に最適なデフォルトのリソースを探します。
+
+* 詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)の `resource_class` を参照してください。
 
 ## 関連項目
 {: #see-also }

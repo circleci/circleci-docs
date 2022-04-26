@@ -85,7 +85,7 @@ endif::env-aws[]
 
 ==== S3 compatible storage required software
 
-- Install and configure https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] for your storage provider.
+- Install and configure https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
 
 === Create a Kubernetes cluster
 CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
@@ -132,19 +132,18 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 
 Creating a Kubernetes cluster is your responsibility. Please note:
 
-* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
+* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that need access.
 * You must have appropriate permissions to list, create, edit, and delete pods in your cluster. Run this command to verify your permissions:
 +
 ```shell
 kubectl auth can-i <list|create|edit|delete> pods
 ```
-* There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you
-set up a new VPC rather than use an existing one.
+* There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you set up a new VPC rather than use an existing one.
 
 ifndef::env-gcp[]
 
 ==== EKS
-You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/quickstart/architecture/amazon-eks/[here]. We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which will create a VPC and select the proper security groups for you.
+You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/quickstart/architecture/amazon-eks/[here]. We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which creates a VPC and selects the proper security groups for you.
 
 . https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[Install] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configure] the AWS CLI for your AWS account.
 . Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`].
@@ -159,7 +158,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --cluster circleci-server
 ```
 
-NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary in order to use `eksctl`. See the AWS documentation regarding https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
+NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary to use `eksctl`. See the AWS documentation on https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
 
 endif::env-gcp[]
 
@@ -225,7 +224,7 @@ https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workloa
     --region="<REGION>"
 ```
 
-You must repeat Step 2 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#step-5-enable-workload-identity[Object-Storage]
+You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
 
 === Create a new GitHub OAuth app
 
@@ -238,25 +237,25 @@ Registering and setting up a new GitHub OAuth app for CircleCI server allows for
 .New GitHub OAuth App
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
-. Complete the following fields based on your planned installation:
+. Complete the following fields, based on your planned installation:
 ** *Homepage URL*: The URL of your planned CircleCI installation.
-** *Authorization callback URL*: The authorization callback URL will be the URL of your planned CircleCI installation followed by `/auth/github`
+** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
 
-. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server.
+. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You need these values when you configure CircleCI server.
 +
 .Client ID and Secret
 image::github-clientid.png[Screenshot showing GitHub Client ID]
 
-NOTE: If using GitHub Enterprise, you will also need a personal access token and the domain name of your GitHub Enterprise instance.
+NOTE: If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
 
 === Frontend TLS certificates
-By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. In the sections below we cover using Google Cloud DNS and AWS Route53.
+By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 ifndef::env-gcp[]
 
-==== AWS Route53
+==== AWS Route 53
 
-. If you are using AWS Route53 for DNS, you will need the *certbot-route53* plugin. You can install the plugin with the following command:
+. If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. You can install the plugin with the following command:
 +
 ```shell
 pip3 install certbot-dns-route53
@@ -276,7 +275,7 @@ ifndef::env-aws[]
 
 ==== Google Cloud DNS
 
-. If you host your DNS on Google Cloud, you will need the *certbot-dns-google* plugin. You can install the plugin with the following command:
+. If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
 +
 ```shell
 pip3 install certbot-dns-google
@@ -307,19 +306,19 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
 === Encryption/signing keys
-These keysets are used to encrypt and sign artifacts generated by CircleCI. You will need these values to configure server.
+These keysets are used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server.
 
 CAUTION: Store these values securely. If they are lost, job history and artifacts will not be recoverable.
 
 ==== Artifact signing key
-To generate, run the following command:
+To generate an artifact signing key, run the following command:
 
 ```shell
 docker run circleci/server-keysets:latest generate signing -a stdout
 ```
 
 ==== Encryption signing key
-To generate, run the following command:
+To generate an encryption signing key, run the following command:
 
 ```shell
 docker run circleci/server-keysets:latest generate encryption -a stdout
@@ -330,13 +329,13 @@ Server 3.x hosts build artifacts, test results, and other state object storage. 
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 
-* link:https://min.io/[Minio]
+* link:https://min.io/[MinIO]
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-While any S3 compatible object storage may work, we test and support AWS S3 and Minio. For object storage providers that do not support S3 API, such as Azure blob storage, we recommend using Minio Gateway.
+While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. For object storage providers that do not support S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
 
-Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Ensure the bucket name you provide exists in your chosen object storage provider before proceeding.
+Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Before proceeding, ensure the bucket name you provide exists in your chosen object storage provider.
 
 NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
 
@@ -351,7 +350,7 @@ You will need the following details when you configure CircleCI server.
 
 * *Secret Key* - Secret Key for S3 bucket access.
 
-* *AWS S3 Region* - AWS region of bucket if your provider is AWS. You will either have an AWS region or S3 Endpoint depending on your specific setup.
+* *AWS S3 Region* - AWS region of bucket, if your provider is AWS. You will either have an AWS region or S3 Endpoint, depending on your specific setup.
 
 * *S3 Endpoint* - API endpoint of S3 storage provider, when your storage provider is not Amazon S3.
 
@@ -609,7 +608,9 @@ You will need the following details when you configure CircleCI server.
 
 * *Storage Bucket Name* - The bucket used for server.
 
-* *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
+* You can choose one of the following:
+** *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
+** *Service Account Email* - Service Account Email id if using Google Workload Identity.
 
 A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google’s Condition Editor in the IAM console:
 

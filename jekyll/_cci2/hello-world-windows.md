@@ -20,7 +20,6 @@ This document describes how to get started with continuous integration on **Wind
   <strong>A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on <a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a></strong>.
 </div>
 
-
 ## Prerequisites
 {: #prerequisites }
 
@@ -43,108 +42,36 @@ The Windows execution environment (or `executor`) gives users the tools to build
 **Notes:**
 
 - The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
-- Orb usage is not supported on CircleCI Server v2.x (please view the "server" code samples for server usage.)
+- Orb usage is not supported on CircleCI Server v2.x (please view the [Using the Windows executor on CircleCI server](#windows-on-server) section for server usage.)
 
 ## Windows executor images
 {: #windows-executor-images }
 
-CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. Contact your systems administrator for details of what is included in CircleCI Server Windows images, or visit the [Discuss](https://discuss.circleci.com/) page.
+CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. For information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server), or the [Discuss forum](https://discuss.circleci.com/). The Windows image page on the Developer Hub lists links to the most recent updates.
 
-Details on the Windows Server 2022 image can be found on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
+Details on the Windows Server 2022 image can be found on this [Discuss post](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
-- Stable: This image tag points to the latest production ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
+- Current (formerly Stable): This image tag points to the latest production-ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.<br>
 
-- Previous: This image tag points to the previous ("stable") production ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month.
+The new `current` tag is available for Windows images. The `current` and `stable` tags are equivalent, and are currently both supported. Refer to the [Discuss forum](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511) for more information.
+{: class="alert alert-info"}
+
+- Previous: This image tag points to the previous production-ready Windows image. This image can be used in cases where there was a breaking change in the latest software updates. It is typically updated once a month.
 
 - Edge: This image tag points to the latest version of the Windows image, and is built from the HEAD of the main branch. This tag is intended to be used as a testing version of the image with the most recent changes, and not guaranteed to be stable.
-
-Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
-
-{:.tab.windowsblockone.Cloud}
-```yaml
-version: 2.1
-
-orbs:
-  win: circleci/windows@2.2.0
-
-jobs:
-  build:
-    executor:
-      name: win/default
-      shell: powershell.exe
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-{:.tab.windowsblockone.Server_3}
-```yaml
-version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-{:.tab.windowsblockone.Server_2}
-```yaml
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-
-## Known issues
-{: #known-issues }
-
-These are the issues with the Windows executor that we are aware of and will address as soon as we can:
-
-* Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
-* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
 ## Example configuration file
 {: #example-configuration-file }
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
-{:.tab.windowsblocktwo.Cloud}
 ```yaml
 version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -158,56 +85,55 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblocktwo.Server_3}
+Additionally, it is possible to access the Windows image directly in your jobs without using orbs:
+
+```yaml
+jobs:
+  build-windows:
+    machine:
+      image: windows-server-2019:stable
+      resource_class: windows.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
+```
+
+With that said, we strongly encourage using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
+
+Note that in order to use the Windows Server 2022 image with the Windows orb in CircleCI cloud, it must be specified in the `executor` type, as shown in the following:
+{: class="alert alert-info"}
+
 ```yaml
 version: 2.1
 
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblocktwo.Server_2}
-```yaml
-version: 2
+orbs:
+  win: circleci/windows@4.1
 
 jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
+  build:
+    executor: win/server-2022
     steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
+      - run: Write-Host 'Hello, Windows'
+workflows:
+  my-workflow:
+    jobs:
+      - build
 ```
 
-From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
-
-## Specifying a Shell with the Windows Executor
+## Specifying a shell with the Windows executor
 {: #specifying-a-shell-with-the-windows-executor }
 
 There are three shells that you can use to run job steps on Windows:
 
-* PowerShell (default in the Windows Orb)
+* PowerShell (default in the Windows orb)
 * Bash
 * Command
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, Powershell, and Command by adding a `shell:` argument to our `job` and `step` declarations:
 
-
-{:.tab.windowsblockthree.Cloud}
 ```YAML
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1
 
 jobs:
   build:
@@ -226,60 +152,14 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server_3}
-```YAML
-version: 2.1
+**Note:** It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
 
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # default shell is Powershell
-      - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
-      - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
-```
-
-{:.tab.windowsblockthree.Server_2}
-```YAML
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # default shell is Powershell
-      - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
-      - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
-```
-
-**Note:** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
-
-
-{:.tab.windowsblockfour.Cloud}
-```YAML
+```yaml
 
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1
 
 jobs:
   build:
@@ -291,42 +171,41 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server_3}
-```YAML
+## Running Windows Docker containers on the Windows executor
+{: #windows-docker-containers-on-windows-executor }
+
+Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
+
+```yaml
 version: 2.1
 
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: dotnet tool install --global PowerShell
-      - run: pwsh ./<my-script>.ps1
-```
-
-{:.tab.windowsblockfour.Server_2}
-```YAML
-version: 2
+orbs:
+  win: circleci/windows@4.1
 
 jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
       - checkout
-      - run: dotnet tool install --global PowerShell
-      - run: pwsh ./<my-script>.ps1
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
 ```
 
 ## Example application
 {: #example-application }
 
-Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image as described in the previous code samples.
+Let us consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
 
-You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml).
+**Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image, as described in the [Using the Windows executor on CircleCI server](#windows-on-server) section.
+
+You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
 
 ```yaml
 version: 2.1
@@ -336,20 +215,28 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.4.0
 ```
 
-Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started.
+Next, we declare orbs that we will be using in our build. We will only use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.
+
+```yaml
+workflows:
+  hello-world:
+    jobs:
+      - build
+```
+
+We define a `hello-world` workflow, in which we run a single job named `build`.
 
 ```yaml
 jobs:
   build:
     executor:
       name: win/default
-      shell: powershell.exe
 ```
 
-Under the `jobs` key, we set the executor via the orb we are using. We can also declare the default shell to be applied across future steps in the configuration. The default shell is `Powershell.exe`
+Under the `jobs` key, we define the `build` job, and set the executor via the orb we are using.
 
 ```yaml
     steps:
@@ -396,6 +283,7 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 
 ### Steps
 {: #steps }
+{:.no_toc}
 
 1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
@@ -415,16 +303,160 @@ The available options are:
 
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
+## Known issues
+{: #known-issues }
+
+These are the issues with the Windows executor that we are aware of and will address as soon as we can:
+
+* Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
+* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
+
+## Using the Windows executor on CircleCI server
+{: #windows-on-server }
+
+Contact your systems administrator for details of what is included in CircleCI server Windows images, or visit the [Discuss](https://discuss.circleci.com/) forum.
+
+{:.tab.windowsblocktwo.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblocktwo.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+### Specifying a shell
+{: #specifying-a-shell-server }
+{:.no_toc}
+
+{:.tab.windowsblockthree.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+#### Install Powershell Core with the `dotnet` CLI
+{: #install-powershell-server }
+{:.no_toc}
+
+{:.tab.windowsblockfour.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+### Running Windows Docker containers
+{: #run-windows-container-server }
+{:.no_toc}
+
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
 ## Next steps
 {: #next-steps }
 
-Also, consider reading documentation on some of CircleCI’s features:
+Consider reading documentation on some of CircleCI’s features:
 
 * See the [Concepts]({{site.baseurl}}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
-
-## Software pre-installed on the Windows image
-{: #software-pre-installed-on-the-windows-image }
-
-To find information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server). The Windows image page on the Developer Hub lists links to the most recent updates.

@@ -76,7 +76,7 @@ Data persistence allows you to move data between jobs and speed up your build. T
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
-If you need to [clear your cache](https://circleci.com/docs/2.0/caching/#clearing-cache), refer to the [Caching Dependencies](https://circleci.com/docs/2.0/caching/) page for more information on caching.
+If you need to [clear your cache]({{site.baseurl}}/2.0/caching/#clearing-cache), refer to the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) page for more information on caching.
 
 {:.tab.cache.Cloud}
 {% raw %}
@@ -338,7 +338,7 @@ See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspace
 
 Docker Layer Caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
 
-In the `config.yml` snippet below, the `build_exlixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+In the `config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
 
 ```yaml
 version: 2.1
@@ -526,7 +526,7 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
 ## Jobs
 {: #jobs }
 
-Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container. For `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos). For `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
+Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must [specify an image]({{site.baseurl}}/2.0/executor-intro/#docker) to use for the primary container. For `macos` you must specify an [Xcode version]({{site.baseurl}}/2.0/executor-intro/#macos). For `windows` you must use the [Windows orb]({{site.baseurl}}/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 ## Orbs
@@ -619,6 +619,7 @@ repository to CircleCI as a Project.
 * A *User* is an individual user within an organization, inherited from your VCS.
 * A CircleCI user is anyone who can log in to the CircleCI platform with a
 username and password. Users must be added to a [GitHub or Bitbucket org]({{site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
+
 ## Workflows
 {: #workflows }
 

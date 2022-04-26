@@ -23,7 +23,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **メモ:** 並列処理は `.circleci/config.yml` ファイルでのみ設定できます。 CircleCI アプリケーションでの並列処理設定は無視されます。
+CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **メモ:** 並列実行は `.circleci/config.yml` ファイルでのみ設定できます。 CircleCI アプリケーションでの並列実行設定は無視されます。
 
 既に `circle.yml` ファイルがある場合は、以降の各セクションの手順に従って、既存のファイルをコピーし、新しい必須キーを記述し、1.0 のキーを検索して 2.0 のキーに置き換えます。
 
@@ -61,7 +61,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```yaml
          machine: true
      ```
-     使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
+     使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](({{site.baseurl}}/ja/2.0/executor-types/#using-machine)」を参照してください。
      ```yaml
          macos:
            xcode: 12.5.1
@@ -103,9 +103,9 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 ## 環境変数
 次のように置き換えます。
 
-In CircleCI, all defined environment variables are treated literally. コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
+CircleCI では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
-For more information, refer to the CircleCI document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+詳細については、[環境変数を使用する]({{ site.baseurl }}/ja/2.0/env-vars/) を参照してください。
 
 ## ワークフローを構成する手順
 {: #steps-to-configure-workflows }

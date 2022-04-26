@@ -3,7 +3,7 @@ layout: classic-docs
 title: Travis CI からの移行
 categories:
   - migration
-description: An overview of how to migrate from Travis CI to CircleCI.
+description: Travis CI から CircleCI に移行する方法を概説します。
 ---
 
 Travis CI から CircleCI に移行する方法を概説します。
@@ -43,10 +43,10 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | before_script     | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | 上記を参照。                                                                                                                                                                                              |
 | script:           | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | 上記を参照。                                                                                                                                                                                              |
 | after_script:     | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | 上記を参照。                                                                                                                                                                                              |
-| deploy:           | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/2.0/deployment-integrations) for examples.                                                   |
-| env:              | [environment:](https://circleci.com/docs/ja/2.0/configuration-reference/#environment)                                                                                         | environment: 要素を使用して、環境変数を指定します。                                                                                                                                                                    |
-| matrix:           | [matrix:](https://circleci.com/docs/ja/2.0/configuration-reference/#matrix-requires-version-21)                                                                               | CircleCI ではワークフローを使用して複数のジョブをオーケストレーションできます。                                                                                                                                                        |
-| stage:            | [requires:](https://circleci.com/docs/ja/2.0/configuration-reference/#requires)                                                                                               | requires: 要素を使用して、ジョブの依存関係を定義し、ワークフローでの並列ビルドを制御します。                                                                                                                                                 |
+| deploy:           | [run:]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)                                                                                                                | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/ja/2.0/deployment-integrations) for examples.                                                   |
+| env:              | [environment:]({{site.baseurl}}/ja/2.0/configuration-reference/#environment)                                                                                                     | environment: 要素を使用して、環境変数を指定します。                                                                                                                                                                    |
+| matrix:           | [matrix:]({{site.baseurl}}/ja/2.0/configuration-reference/#matrix-requires-version-21)                                                                                           | CircleCI ではワークフローを使用して複数のジョブをオーケストレーションできます。                                                                                                                                                        |
+| stage:            | [requires:]({{site.baseurl}}/2.0/configuration-reference/#requires)                                                                                                           | requires: 要素を使用して、ジョブの依存関係を定義し、ワークフローでの並列ビルドを制御します。                                                                                                                                                 |
 {: class="table table-striped"}
 
 ## 環境変数
@@ -137,7 +137,7 @@ Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment
 
 CircleCI では、[コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)を使用することで、*すべて*のプロジェクト間で安全に環境変数を共有できます。
 
-Travis と CircleCI はいずれも、ビルド時に環境変数を使用できます。
+**メモ:** CircleCI には、[定義済み環境変数](https://circleci.com/ja/docs/2.0/env-vars/#built-in-environment-variables)が複数用意されています。
 
 ## 高度なツール
 {: #artifacts-uploading }
@@ -170,4 +170,4 @@ CircleCI では、アーティファクトのアップロードは設定ファ�
 
 Travis でさらに高度な構成を行いたい場合は、*ビルド マトリックス* (複数の並列ジョブの実行を指定する構成) や*ビルド ステージ* (ジョブをステージにグループ化して並列実行したり、順次前のジョブの成功に基づいてジョブを順次実行したりする機能) が利用できます。
 
-CircleCI では、`.circleci/config.yml` で [ワークフロー]({{site.baseurl}}/ja/2.0/workflows/) を使用することで、ジョブのグループ化と実行順序、並列処理の利用、ビルドのファンインまたはファンアウト、順次実行ビルドを定義できます。 ワークフローを使用すると、ビルド構成に対して複雑できめ細かな制御を行えるようになります。
+CircleCI では、`.circleci/config.yml` で [ワークフロー]({{site.baseurl}}/ja/2.0/workflows/) を使用することで、ジョブのグループ化と実行順序、並列実行の利用、ビルドのファンインまたはファンアウト、順次実行ビルドを定義できます。 ワークフローを使用すると、ビルド構成に対して複雑できめ細かな制御を行えるようになります。

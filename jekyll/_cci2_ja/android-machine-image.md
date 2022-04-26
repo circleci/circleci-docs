@@ -1,10 +1,11 @@
 ---
 layout: classic-docs
-title: "Android イメージを Machine Executor で使用"
+title: "Android イメージの Machine Executor での使用"
 short-title: "Machine Executor 上の Android イメージ"
-description: "Machine Executor で Android イメージを使用"
+description: "Machine Executor での Android イメージの使用"
 version:
   - Cloud
+  - Server v3.x
 ---
 
 ## 概要
@@ -22,12 +23,7 @@ Android マシン イメージには以下がプリインストールされて�
 
 現在プリインストールされているソフトウェアのリストについては、 [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) ページで四半期ごとの更新のお知らせを参照してください。
 
-## 制限事項
-{: #limitations }
-
-* ジョブが実行を開始するまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Android イメージを利用するユーザーが増えるに連れ短縮されます。
-
-## 料金プラン
+## 料金
 {: #pricing }
 
 料金情報に関しては、[料金ページ](https://circleci.com/ja/pricing/)の「Linux VM」セクションで Linux Machine Executor を参照してください。
@@ -184,4 +180,63 @@ workflows:
       - build
 ```
 {% endraw %}
+
+### CircleCI Server v3.x での Android イメージの使用
+{: #using-the-android-image-on-server-v3x }
+
+**注**: Android マシンイメージは、現在は Google Cloud Platform (GCP) 上でのサーバー環境でのみご使用いただけます。
+
+CircleCI Server 3.4 以降では、GCP へのインストールでは Android マシンイメージがサポートされています。 プロジェクトで Android イメージを使用するには、ジョブで `image` キーを `android-default` に設定します。
+
+```yaml
+version: 2.1
+
+jobs:
+  my-job:
+    machine:
+      image: android-default
+    steps:
+    # job steps here
+```
+
+クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 また、Orb にビルドされているデフォルトの Executor を使用するのではなく、下記の例のように Machine Executor の `android-default` イメージを定義する必要があります。 Orb をインポートする方法については、[CircleCI Server v3.x の Orb についてのページ]({{site.baseurl}}/2.0/server-3-operator-orbs)を参照してください。
+
+この例では、きめ細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの機能を実現する方法を示しています。
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+orbs:
+  android: circleci/android@1.0
+jobs:
+  test:
+    machine:
+      image: android-default
+    steps:
+      - checkout
+      # Create an AVD named "myavd"
+      - android/create-avd:
+          avd-name: myavd
+          system-image: system-images;android-29;default;x86
+          install: true
+      # By default, after starting up the emulator, a cache will be restored,
+      # "./gradlew assembleDebugAndroidTest" will be run and then a script
+      # will be run to wait for the emulator to start up.
+      # Specify the "post-emulator-launch-assemble-command" command to override
+      # the gradle command run, or set "wait-for-emulator" to false to disable
+      # waiting for the emulator altogether.
+      - android/start-emulator:
+          avd-name: myavd
+          no-window: true
+          restore-gradle-cache-prefix: v1a
+      # Runs "./gradlew connectedDebugAndroidTest" by default.
+      # Specify the "test-command" parameter to customize the command run.
+      - android/run-tests
+      - android/save-gradle-cache:
+          cache-prefix: v1a
+workflows:
+  test:
+    jobs:
+      - test
+```
 

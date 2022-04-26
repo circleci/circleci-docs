@@ -259,5 +259,5 @@ jobs:
 . https://circleci.com/docs/2.0/custom-images/[カスタムイメージ]
 . https://circleci.com/docs/2.0/configuration-reference/#resource_class[リソース クラス]
 . https://circleci.com/docs/2.0/workflows/[ワークフロー]
-. https://circleci.com/docs/2.0/collect-test-data/[テスト結果]/ テストの分割 / https://circleci.com/docs/2.0/parallelism-faster-jobs/[並列処理]
+. https://circleci.com/docs/2.0/collect-test-data/[テスト結果]/ テストの分割 / https://circleci.com/docs/2.0/parallelism-faster-jobs/[並列実行]
 . https://circleci.com/docs/2.0/artifacts/[アーティファクト]

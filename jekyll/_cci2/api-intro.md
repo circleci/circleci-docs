@@ -51,12 +51,12 @@ The `project_slug` is included in the payload when pulling information about a p
 ### Authentication
 {: #authentication }
 
-The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
+The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
 **Note:** the `:` is included to indicate there is no password.
-**Note:** Currently, [Personal API tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
+**Note:** Currently, [Personal API tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 
 #### Triggering a pipeline with parameters example
 {: #triggering-a-pipeline-with-parameters-example }
@@ -74,7 +74,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 In the above example the `project_slug` would take the form `:vcs/:org/:project`. For example, the project slug `gh/CircleCI-Public/circleci-cli` tells `CircleCI` to use the project found in the GitHub organization CircleCI-Public in the repository named `circleci-cli`.
 
-**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used for sensitive values (secrets). You can find information on using sensitive data correctly in the [Project Settings](https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context) guides.
+**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used for sensitive values (secrets). You can find information on using sensitive data correctly in the [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context) guides.
 
 ## Changes in endpoints
 {: #changes-in-endpoints }

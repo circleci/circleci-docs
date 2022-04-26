@@ -1,8 +1,8 @@
-= CircleCI Server Documentation
+= Asciidoc
 
-Server documentation is written in ASCIIDOC and built for the web and PDF using https://github.com/asciidoctor/jekyll-asciidoc[jekyll-asciidoc] and https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugins.
+Some CircleCI documentation is written in asciidoc and built into the site using https://github.com/asciidoctor/jekyll-asciidoc[jekyll-asciidoc]. Server documentation is also converted to PDF using https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugins.
 
-== Document Structure
+== Server Document Structure
 Server documentation is provided in two formats:
 
 * HTML on the main CircleCI docs site showing the current docs for server 2.x 

@@ -13,7 +13,7 @@ version:
 
 This document provides a summary of features and product notes for the release of CircleCI server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
 
-NOTE: In March 2022 updates to CircleCI server v2.x will stop. Support for customers using CircleCI server v2.x will continue.
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 ## Requirements for Upgrading
 
@@ -25,7 +25,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 ## Notes and Best Practices
 
-* We now require a minimum 32GB of RAM for the Services Machine. 
+* We now require a minimum 32GB of RAM for the Services Machine.
 * We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you will need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
 * We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to v2.19.
 * There has been a change to how you will checkout using tags in jobs. Branch tags will now be referenced by either `CIRCLE_TAG` or `+refs/heads/tag/path`. For example, `git checkout --force "$CIRCLE_TAG"` or `git fetch --force origin '+refs/heads/master:refs/remotes/origin/master'`
@@ -130,7 +130,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19.02
 
-* In the LDAP login flow we now use an anonymous form to `POST` LDAP auth state, rather than sending it as a `GET` parameter. Previously, when a user authenticated using LDAP, their username and password were sent in plaintext as part of a query parameter in a `GET` request. As requests are over HTTPS, this left usernames and passwords in request logs, etc. This issue is now fixed. 
+* In the LDAP login flow we now use an anonymous form to `POST` LDAP auth state, rather than sending it as a `GET` parameter. Previously, when a user authenticated using LDAP, their username and password were sent in plaintext as part of a query parameter in a `GET` request. As requests are over HTTPS, this left usernames and passwords in request logs, etc. This issue is now fixed.
 
 * Optimizely and Zendesk are now removed from Server release images.
 
