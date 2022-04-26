@@ -142,20 +142,27 @@ image::server-3-object-storage.png[Screenshot showing object storage settings]
 ifndef::env-gcp[]
 ==== S3 互換
 
-* *Storage Bucket Name (ストレージ バケット名) (必須)*: CircleCI Server に使用するバケットです。
-* *AWS S3 Region (AWS S3 リージョン) (オプション)* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 このオプションを設定すると、[S3 Endpoint (S3 エンドポイント)] は無視されます。
-* *S3 Endpoint (S3 エンドポイント) (オプション)*: S3 ストレージプロバイダーの API エンドポイントを指定します。 プロバイダーが AWS ではない場合は必須です。 このオプションを設定すると、AWS S3 リージョンは無視されます。
-* *Storage Object Expiry (ストレージ オブジェクトの有効期限)] (オプション)*: テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+* *Storage Bucket Name (ストレージ バケット名) (必須)* -
+CircleCI Server に使用するバケットです。
+* *AWS S3 Region (AWS S3 リージョン) (オプション)* -
+プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 このオプションを設定すると、[S3 Endpoint (S3 エンドポイント)] は無視されます。
+* *S3 Endpoint (S3 エンドポイント) (オプション)* -
+S3 ストレージプロバイダーの API エンドポイントを指定します。 プロバイダーが AWS ではない場合は必須です。 このオプションを設定すると、AWS S3 リージョンは無視されます。
+* *Storage Object Expiry (ストレージ オブジェクトの有効期限)] (オプション)* -
+テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
 ===== 認証
 下記のいづれかが必要です。 IAM キーを選択し、以下を指定します。
 
-* *Access Key ID (アクセス キー ID) (必須)*: S3 バケットへのアクセス用のアクセス キー ID を指定します。
-* *Secret Key (シークレット キー) (必須)*: S3 バケットへのアクセス用のシークレットキーを指定します。
+* *Access Key ID (アクセス キー ID) (必須)* -
+S3 バケットへのアクセス用のアクセス キー ID を指定します。
+* *Secret Key (シークレット キー) (必須)* -
+S3 バケットへのアクセス用のシークレットキーを指定します。
 
 または、IAM ロールを選択し、以下を指定します。
 
-* *Role ARN* : S3 バケットアクセス用 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name)
+* *Role ARN* -
+S3 バケットアクセス用 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name)
 
 // Stop hiding from GCP PDF:
 endif::[]
@@ -166,14 +173,16 @@ ifndef::env-aws[]
 ==== Google Cloud Storage
 前提条件のステップで、Google Cloud Storage バケットとサービスアカウントの作成が完了してる必要があります。
 
-* *Storage Bucket Name (ストレージ バケット名) (必須)*: CircleCI Server に使用するバケットです。
-* *Storage Object Expiry (ストレージ オブジェクトの有効期限)] (必須)*: テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
+* *Storage Bucket Name (ストレージ バケット名) (必須)* -
+CircleCI Server に使用するバケットです。
+* *Storage Object Expiry (ストレージ オブジェクトの有効期限)] (必須)* -
+テスト結果とアーティファクトを保持する日数を指定します。 有効期限を無効にしてオブジェクトを無期限に保持するには、0 に設定します。
 
 ===== 認証
 
 * 以下のいづれかを選択します。
-** *Service Account JSON (サービス アカウントの JSON) (必須)*: バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
-** *Service Account Email (サービスアカウントのメール)(必須)*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
+** *Service Account JSON (サービス アカウントの JSON) (必須)* - バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
+** *Service Account Email (サービスアカウントのメール)(必須)* - Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 endif::[]
 
 // Stop hiding from AWS PDF
