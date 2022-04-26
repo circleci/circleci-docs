@@ -5,6 +5,7 @@ description: CLI を使用したローカル ジョブの実行方法.
 categories:
   - troubleshooting
 order: 10
+redirect_from: 2.0/local-jobs
 version:
   - クラウド
   - Server v2.x
@@ -14,7 +15,7 @@ suggested:
     title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
   - 
-    title: Validate your config using local CLI
+    title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
   - 
     title: Check your CircleCI installation
