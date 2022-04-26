@@ -625,6 +625,9 @@ ja:
         - name: Hello World
           link: ja/2.0/hello-world/
           i18n_name: Hello World
+        - name: Using the Slack Orb
+          link: ja/2.0/slack-orb-tutorial/
+          i18n_name: Slack Orb を使う
         - name: FAQ
           link: ja/2.0/faq/
     - name: Migration
@@ -925,6 +928,11 @@ ja:
         - name: Orb Publishing Process
           link: ja/2.0/creating-orbs/
           i18n_name: Orbs パブリッシュ
+    - name: Tutorials
+      children:
+        - name: Using the Slack Orb
+          link: ja/2.0/slack-orb-tutorial/
+          i18n_name: Slack Orb を使う
 
 - name: Insights
   icon: icons/sidebar/insights.svg
