@@ -182,9 +182,7 @@ workflows:
 {: #update-an-aws-ecs-instance }
 {:.no_toc}
 
-[AWS ECR](https://circleci.com/ja/developer/orbs/orb/circleci/aws-ecr) Orb と
-
-     Orb を使って既存の AWS ECS インスタンスを簡単にアップデートすることができます。</p> 
+[AWS ECR](https://circleci.com/ja/developer/orbs/orb/circleci/aws-ecr) Orb と [ECS](https://circleci.com/ja/developer/orbs/orb/circleci/aws-ecs) Orb を使って既存の AWS ECS インスタンスを簡単にアップデートすることができます。
 
 Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. {% include snippets/ja/env-var-or-context.md %}
 
@@ -839,17 +837,14 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 パッケージを npm レジストリにパブリッシュするように CircleCI を設定すると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
 
 1.  パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。
-   
-   それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 次の行を探します。 
-   
-   
+
+    それには、npm にログインします (`npm login`)。これで、authToken が `~/.npmrc` ファイルに保存されます。
 
     ```shell
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
 
-
-この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
+    この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
 
 2.  [プロジェクト設定]({{ site.baseurl }}/ja/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
 
@@ -897,20 +892,13 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
     ```shell
     npm version 10.0.1
     ```
-
-
-これで、`package.json` ファイルがアップデートされ、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。 
-
-
+    
+    これで、`package.json` ファイルがアップデートされ、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。 
 
     ```shell
     git push --follow-tags
     ```
-
-
 5.  テストが完了すると、パッケージが npm に自動的にパブリッシュされます。
-
-
 
 ## SSH
 
