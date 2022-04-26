@@ -7,6 +7,8 @@ order: 70
 description: "CircleCI で使用されているオープンソース プロジェクトとライブラリの一覧および謝辞"
 ---
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 CircleCI には、以下のサードパーティ製オープンソース コンポーネントが含まれています。
 
 | パッケージ                                                            | ライセンス                                                                         | 著作権                                                                                                                                                                                               |
