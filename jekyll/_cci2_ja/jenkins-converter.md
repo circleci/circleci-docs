@@ -41,19 +41,18 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 ## 変換後の次のステップ
 {: #next-steps-after-conversion }
 
-### Executor
 {: #executors }
 
-Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
+Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#executors-requires-version-21) として挿入されます。
 
-`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/2.0/custom-images/)を参照して下さい。
+`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/ja/2.0/custom-images/)を参照して下さい。
 
-使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/2.0/executor-types/#using-macos) または [Machine Executor]({{site.baseurl}}/2.0/executor-types/#using-machine) が必要な場合があります。
+使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/ja/2.0/executor-types/#using-macos) または [Machine Executor]({{site.baseurl}}/ja/2.0/executor-types/#using-machine) が必要な場合があります。
 
 ### ワークフロー
 {: #workflows }
 
-[CircleCI ワークフロー]({{site.baseurl}}/2.0/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド]({{site.baseurl}}/2.0/configuration-reference/#triggers)は転送しません。
+[CircleCI ワークフロー]({{site.baseurl}}/ja/2.0/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド]({{site.baseurl}}/ja/2.0/configuration-reference/#triggers)は転送しません。
 
 ### ジョブ
 {: #jobs }
@@ -63,7 +62,7 @@ CircleCI ジョブの多くの設定オプションには、相当する Jenkins
 - [コードのチェックアウト]({{site.baseurl}}/ja/2.0/configuration-reference/#checkout)
 - [リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class)
 - [並列実行]({{site.baseurl}}/ja/2.0/configuration-reference/#parallelism)
-- キャッシュの[保存]({{site.baseurl}}/2.0/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/2.0/configuration-reference/#restore_cache)
+- キャッシュの[保存]({{site.baseurl}}/ja/2.0/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/ja/2.0/configuration-reference/#restore_cache)
 - [アーティファクトの保存]({{site.baseurl}}/ja/2.0/configuration-reference/#store_artifacts)
 
 ### 手順

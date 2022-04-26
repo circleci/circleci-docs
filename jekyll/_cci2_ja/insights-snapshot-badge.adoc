@@ -45,7 +45,9 @@ Insights Snapshot Badge のページでは、プロジェクトのメトリク�
 下記は、CircleCI ドキュメントのリポジトリ用に
 Markdown 形式で生成されたインサイト スナップショットバッジの例です。
 
+```markdown
 [![CircleCI](https://dl.circleci.com/insights-snapshot/gh/circleci/circleci-docs/master/build-deploy/badge.svg?window=30d)](https://app.circleci.com/insights/github/circleci/circleci-docs?branches=master&workflows=build-deploy&reporting-window=last-30-days&insights-snapshot=true)
+```
 
 == プライベートリポジトリ用のバッジの作成
 

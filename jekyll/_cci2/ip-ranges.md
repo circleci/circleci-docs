@@ -22,7 +22,7 @@ IP ranges is a feature for CircleCI customers who need to configure IP-based acc
 The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing is calculated based on data usage of jobs that have opted in to using the IP ranges feature. Details on the pricing model can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
 
 ## IP ranges: use cases
-{: #usecases }
+{: #use-cases }
 
 IP ranges lets you limit inbound connections to your infrastructure to only IP address ranges that are verifiably associated with CircleCI.
 
@@ -36,10 +36,8 @@ Some example use cases where IP-based restricted access might be desired include
 
 Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner]({{site.baseurl}}/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
 
-IP ranges only routes traffic through one of the defined IP address ranges _during job execution_. Any step that occurs before the job has started to execute will not have its traffic routed through one of the defined IP address ranges.  For example, pulling a Docker image happens before _job execution_, therefore that step will not have its traffic routed through one of the defined IP address ranges.
-
 ## Example configuration file using IP ranges
-{: #exampleconfiguration }
+{: #example-configuration }
 
 ```yaml
 version: 2.1
@@ -56,10 +54,10 @@ workflows:
       - build
 ```
 
-## List of IP address ranges associated with the IP ranges feature
-{: #listofipaddressranges }
+## List of IP address ranges associated with feature
+{: #list-of-ip-address-ranges }
 
-*Last updated*: 2021-08-23
+*Last updated*: 2022-04-06
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
@@ -88,7 +86,10 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 **Note:** Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
 {: class="alert alert-info"}
 
-IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
+## List of IP address ranges for core services
+{: #list-of-ip-address-ranges-for-core-services }
+
+These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
 
 - 18.214.70.5
 - 52.20.166.242
@@ -101,10 +102,16 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 - 35.174.249.131
 - 3.210.128.175
 
-### Upcoming changes to the list of IP address ranges
+### List of IP address ranges changelog
+{: #list-of-ip-address-ranges-changelog }
 
 #### 2021-08-23
 * Added new items to the list of IP address ranges for core services.
+
+The machine-consumable lists have also been updated to reflect the new IP address ranges.
+
+#### 2022-04-06
+* Added and removed new IPs as part of enabling Docker pulls to go through the list of IPs.
 
 The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
@@ -140,7 +147,7 @@ On the **Resources** tab within the **Job Details** UI page, you can view approx
 ![CircleCI about image]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
 ## AWS and GCP IP Addresses
-{: #awsandgcpipaddresses }
+{: #aws-and-gcp-ip-addresses }
 
 The machines that execute *all jobs* on CircleCI’s platform, not just jobs opted into IP ranges, are hosted on Amazon Web Services (AWS), Google Cloud Platform (GCP), and CircleCI's macOS Cloud (see below). An exhaustive list of IP addresses that CircleCI’s traffic may come from on these cloud providers’ platforms can be found by looking up each cloud provider's IP address ranges. AWS & GCP offer endpoints to find this information.
 
@@ -173,8 +180,7 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 **Note:** macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
 
 ## Known limitations
-{: #knownlimitations}
+{: #known-limitations}
 
 - There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 - IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
-- If your job enables IP ranges and _pushes_ anything to a destination that is hosted by the content delivery network (CDN) [Fastly](https://www.fastly.com/), the outgoing job traffic **will not** be routed through one of the well-defined IP addresses listed above. Instead, the IP address will be one that [AWS uses]({{site.baseurl}}/2.0/ip-ranges/#awsandgcpipaddresses) in the us-east-1 or us-east-2 regions. This is a known issue between AWS and Fastly that CircleCI is working to resolve.
