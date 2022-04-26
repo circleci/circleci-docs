@@ -11,7 +11,9 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI では、プライマリ ジョブ スケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
+CircleCI では、プライマリ ジョブ スケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
 
 toc::[]
 
@@ -24,19 +26,19 @@ image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 
 - **Nomad Client:** Nomad clients execute the jobs they are allocated by Nomad servers. 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
 
-- **Nomad Jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses parallelism, say 10 parallelism, then Nomad will run 10 jobs.
+- **Nomad Jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. Nomad ジョブは、CircleCI ジョブの実行に対応しています。 たとえば 10個の並列実行を使用するジョブの場合、Nomad は 10個のジョブを実行します。
 
 - *ビルドエージェント：*ビルドエージェントは CircleCI によって記述された Go プログラムで、ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内部のメイン処理として実行されます。
 
 == 基本的な操作
 
-The following section is a basic guide to operating a Nomad cluster in your installation.
+ここでは、CircleCI での Nomad クラスタの基本的な操作について説明します。
 
 `nomad` CLI は Service インスタンスにインストールされます。 Nomad クラスタとやり取りするようにあらかじめ設定されているため、`nomad` コマンドを使用して、以下で説明するコマンドを実行できます。
 
 === ジョブステータスの確認
 
-The get a list of statuses for all jobs in your cluster, run:
+クラスタ内のすべてのジョブのステータス一覧を表示するには、以下のコマンドを実行します。
 
 ```shell
 nomad status
@@ -66,11 +68,11 @@ NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の No
 nomad node-status -self
 ```
 
-This will give information such as how many jobs are running on the client and the resource utilization of the client.
+上記の手順を行うと、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
 
 === ログの確認
 
-As noted in the Nomad Jobs section above, a Nomad Job corresponds to an execution of a CircleCI job. Therefore, Nomad Job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run:
+As noted in the Nomad Jobs section above, a Nomad Job corresponds to an execution of a CircleCI job. Therefore, Nomad Job logs can sometimes help to understand the status of a CircleCI job if there is a problem. 特定のジョブのログを表示するには、以下の手順を行います。
 
 ```shell
 nomad logs -job -stderr <nomad-job-id>
@@ -101,7 +103,7 @@ By default, your Nomad Client is set up within an Auto Scaling Group (ASG) withi
 
 https://circleci.com/ja/blog/mathematical-justification-for-not-letting-builds-queue/[こちらの連載]では、CircleCI のエンジニアリング チームが自動スケーリングの一般的なベスト プラクティスを見つけるために取り組んだコスト削減のシミュレーションについて解説しています。 AWS の Auto Scaling を設定する際は、以下のベストプラクティスを適用することを検討してください。
 
-. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列実行で実行されるワークロードでは 10秒未満になるようにします。 Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列処理で実行されるワークロードでは 10秒未満になるようにします。 Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
 
 . Create an Auto Scaling Group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. 平日の勤務時間中にスケールアップし、夜間にスケールダウンしておくことで、トラフィックが少ない夜間にオーバープロビジョニングを発生させることなく、開発のピーク時に待ち時間を抑制するのがベスト プラクティスです。 なお、過去の数多くのビルドデータによると、通常の勤務時間中のデータセットはおおむね正規分布になっています。
 
@@ -126,7 +128,7 @@ nomad node-drain -self -enable
 nomad node-status -self
 ```
 
-Alternatively, you can drain a remote node with the following command, substituting the node ID:
+また、下記のコマンドにノード ID を代入して実行し、リモートノードをドレインモードに設定することもできます。
 ```shell
 nomad node-drain -enable -yes <node-id>
 ```
@@ -138,5 +140,5 @@ nomad node-drain -enable -yes <node-id>
 このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
 
 1. インスタンスをドレイン モードに設定します。
-2. Monitor running jobs on the instance and wait for them to finish
-3. Terminate the instance
+2. インスタンスで実行中のジョブを確認し、ジョブが完了するのを待ちます。
+3. インスタンスを終了します。
