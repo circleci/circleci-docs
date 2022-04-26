@@ -6,10 +6,12 @@ version:
 = Enabling Usage Statistics
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to automatically send aggregate usage statistics to CircleCI which enhances visibility into CircleCI installations. 
+:page-description: Learn how to automatically send aggregate usage statistics to CircleCI which enhances visibility into CircleCI installations.
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 This chapter is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI. Usage statistics data enhances visibility into CircleCI installations.
 
@@ -30,7 +32,7 @@ image::usage-statistics-setting.png[Send Usage Statistics]
 [cols=3*, options="header", stripes=even]
 |===
 | **名前**
-| **タイプ**
+| **型**
 | **目的**
 
 | account_id
@@ -61,7 +63,7 @@ image::usage-statistics-setting.png[Send Usage Statistics]
 [cols="4,2,2"]
 |===
 | **名前**
-| **タイプ**
+| **型**
 | **目的**
 
 | utc_week
