@@ -10,6 +10,7 @@
   }
 
   .right-img {
+    float: right;
     margin: 0px;
   }
 
@@ -32,6 +33,7 @@
   .left-side {
     flex: 1;
     padding-right: 32px;
+    color: #000000;
   }
 
   .right-side, .left-side {

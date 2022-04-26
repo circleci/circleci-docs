@@ -1,116 +1,135 @@
 ---
 layout: classic-docs
-title: "Orb、ジョブ、ステップ、ワークフロー"
-short-title: "Orb、ジョブ、ステップ、ワークフロー"
-description: "ジョブとステップの説明"
-categories:
-  - 移行
-order: 2
+title: "ジョブとステップ"
+description: "CircleCI ジョブとステップの説明"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-このドキュメントでは、Orb、ジョブ、ステップ、ワークフローの概要を説明します。
+このドキュメントでは CircleCI のジョブとステップの概要について説明します。
 
 * 目次
 {:toc}
 
-## Orb の概要
-{: #orbs-overview }
-
-Orb は、名前に基づいてインポートする設定ファイル、またはインラインで設定する設定ファイルのパッケージです。Orb により、プロジェクト内またはプロジェクト間で設定ファイルを共有および再利用して設定作業を簡略化することができます。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb のコンセプト]({{ site.baseurl }}/ja/2.0/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、設定作業の簡素化に役立つ Orb を検索できます。
-
 ## ジョブの概要
 {: #jobs-overview }
 
-ジョブはステップの集まりです。 ジョブ内のすべてのステップが 1 単位として新しいコンテナまたは仮想マシン内で実行されます。
+CircleCI のジョブはステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブは [ワークフロー]({{ site.baseurl }}/2.0/workflows/)を使ってオーケストレーションされます。
 
-下図はジョブ間のデータフローを表したものです。
+下の図はジョブ間のデータフローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
-* キャッシュは、異なるワークフローの実行における同じジョブ間でデータを永続化します。
+* キャッシュは、異なるワークフローの実行の同一のジョブ間でデータを永続化します。
 * アーティファクトは、ワークフローの終了後にデータを永続化します。
 
 ![ジョブの概要]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-ジョブは、`machine` (linux)、macOS Executor や Windows Exdcutor を使って、またはジョブや必要なサービス (データベースなど) を実行するように Docker コンテナを設定できる `docker` Executor を使って実行することができます。
+**注**: 図に示されているジョブ名はただの例です。お好きな名前をつけていただけます。
 
-`docker` Executor を使用する場合、起動するコンテナのイメージを `docker:` キーの下に指定します。 `docker` Executor には任意のパブリック Docker イメージを使用できます。
+ジョブは、Docker Executor を使って Docker コンテナで、または `machine` Executor を使って仮想マシンで、Linux、macOS、または Windows を使用して実行できます。 セカンダリコンテナや VM は、データベースなどのサービスをアタッチしてジョブと一緒に実行するように設定することができます。
 
-ユースケースと Executor タイプの比較については、[Executor タイプの選択]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
+Docker Executor を使用する場合、`docker` キーの下に記載されるイメージによりジョブで開始するコンテナを指定します。 Docker Executor では、Docker のすべてのパブリックイメージを使用できますが、CircleCI では様々なユースケースに役立つ CircleCI イメージを提供しています。 使用できる CircleCI イメージや VM イメージのフルリストは、[CircleCI Developer Hub](https://circleci.com/developer/images)でご確認いただけます。
+
+`docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
 ## ステップの概要
 {: #steps-overview }
 
-ステップは、一つのジョブにおいて実行される実行可能なコマンドの集まりです。 コードをチェックアウトするには `checkout:` キーを指定します。 また、`run:` キーを使用すると、複数行にわたる任意のシェルコマンドスクリプトを追加できます。  この`run:` キーのほかに、`save_cache:`、`restore_cache:`、`deploy:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` などのキーをステップの下にネストします。
+ステップは実行可能なコマンドの集まりであり、ジョブ内で実行されます。 コードをチェックアウトするには、`steps` の下に `checkout:` キーが必要であり、`run:` キーにより任意の複数行のシェルコマンドスクリプトを追加できます。  この `run:` キーに加えて、`save_cache:`、`restore_cache:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` の各キーが steps の下に置かれます。 ステップオプションの全リストについては、[設定のリファレンスの steps キー]({{ site.baseurl }}/2.0/configuration-reference/#steps)をご覧ください。
 
-## インポートした Orb を使用した設定ファイルの例
-{: #sample-configuration-with-imported-orb }
+## ジョブにパラメーターを渡す
+{: #passing-parameters-to-jobs }
 
-AWS S3 Orb の詳細は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands-sync)をご覧ください。
+パラメーターを使うと、異なるパッケージバージョンや異なる実行環境などの複数のシナリオで一つのジョブを何度も実行することができます。 この機能の拡張版が[マトリックスジョブ]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21)です。 下記は実行時にパラメータをジョブに渡す基本的な例です。
 
-```yaml
+```yml
+version: 2.1
+​
+jobs:
+  print-a-message:
+    docker:
+      - image: cimg/base:2022.03
+    parameters:
+      message:
+        type: string
+    steps:
+      - run: echo << parameters.message >>
+​
+workflows:
+  my-workflow:
+    jobs:
+      - print-a-message:
+          message: Hello!
+```
+
+## Orb のジョブを使う
+{: #using-a-job-from-an-orb }
+
+Orb とは、プロジェクト内で使用できるパッケージまたは再利用可能な設定です。 Orb には通常ジョブ内で使用できるコマンドや、ワークフロー内でスケジュール実行できる全ジョブが含まれています。 [Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack) を例にとってみましょう。 この Orb は、[`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification) というジョブを提供し、これはワークフローで使用できます。 このジョブは、手動承認を求めるワークフローを一時停止し、Slack 通知を送信します。 ワークフローで参照すると、このジョブを使用できます（10行目を参照）。
+
+```yml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0 # circleci 名前空間に s3 Orb をインポートします
+  slack: circleci/slack@4.1
 
 workflows:
-  build-test-deploy:
+  on-hold-example:
     jobs:
+      - my_test_job
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - my_test_job
+      - pause_workflow:
+          requires:
+            - my_test_job
+            - slack/on-hold
+          type: approval
+      - my_deploy_job:
+          requires:
+            - pause_workflow
+```
 
-      - deploy2s3: # ワークフローで定義するサンプル ジョブ
-          steps:
-            - aws-s3/sync: # s3 Orb で宣言されている sync コマンドを呼び出します
-                from: .
-          to: "s3://mybucket_uri"
-                overwrite: true
-          to: "s3://mybucket_uri"
-          overwrite: true
+## ジョブで Orb のコマンドを使う
+{: #using-a-command-from-an-orb-in-a-job }
+
+ここでも再び [Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack) を例に挙げます。この Orb には、`notify` というコマンドが含まれており、特定の Slack チャンネルの通知に使用されるコマンドです。 このコマンドはジョブでは以下のように使用されます（16行目を参照）。
+
+**注**: この例では [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) も使用しています。
+
+```yml
+version: 2.1
+
+orbs:
+  node: 'circleci/node:4.1'
+  slack: circleci/slack@4.1
+
+jobs:
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run deploy
+      - slack/notify:
+          channel: ABCXYZ
+          event: fail
+          template: basic_fail_1
 
 workflows:
-  build-test-deploy:
+  deploy_and_notify:
     jobs:
-      - deploy2s3
+      - deploy:
+          context: slack-secrets
 ```
 
-## 並列ジョブを使用した設定ファイルの例
-{: #sample-configuration-with-concurrent-jobs }
 
-2.0 `.circleci/config.yml` ファイルの例を以下に示します。
+## 次のステップ
+{: #next-steps }
 
-{% raw %}
-```yaml
-version: 2
-    jobs:
-      build:
-        docker:
-
-          - image: circleci/<language>:<version TAG>
-        steps:
-          - checkout
-          - run: <command>
-      test:
-        docker:
-          - image: circleci/<language>:<version TAG>
-        steps:
-          - checkout
-          - run: <command>
-    workflows:
-      version: 2
-      build_and_test:
-        jobs:
-          - build
-          - test
-```
-{% endraw %}
-
-上記は並列ジョブのワークフロー例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)のドキュメントを参照してください。
-
-
-## 関連項目
-{: #see-also }
-
-- [設定リファレンス: jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
-- [設定リファレンス: steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)
+- ジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{ site.baseurl }}/ja/2.0/workflows)のページを参照してください。
+- ジョブ間でのデータの受け渡しの詳細については、[ワークスペースを使ったジョブ間でのデータの共有]({{ site.baseurl }}/ja/2.0/workspaces)のページを参照してください。

@@ -24,12 +24,12 @@ CircleCI が提供する機能のうち、開発者の方に関係する人気�
 
 多くの場合、問題を解決するには、[ジョブへの SSH 接続]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べることが最善の方法です。 CircleCI gives you the option to access all jobs via SSH.
 
-Note: When CircleCI runs your pipeline, the [`run` ](https://circleci.com/docs/2.0/configuration-reference/#run) command executes shell commands in a _non-interactive_ shell. When SSH-ing into a build, you are using an _interactive_ shell (see the section on [Invocation](https://linux.die.net/man/1/bash) in the bash manual for more information). An interactive bash shell loads a series of startup files (such as `~/.bash_profile`), which may or may not change the outcome of SSH debugging process.
+Note: When CircleCI runs your pipeline, the [`run` ]({{site.baseurl}}/2.0/configuration-reference/#run) command executes shell commands in a _non-interactive_ shell. When SSH-ing into a build, you are using an _interactive_ shell (see the section on [Invocation](https://linux.die.net/man/1/bash) in the bash manual for more information). An interactive bash shell loads a series of startup files (such as `~/.bash_profile`), which may or may not change the outcome of SSH debugging process.
 
-### 並列処理
+### 並列実行
 {: #parallelism }
 
-プロジェクトに多数のテストが含まれる場合、それらを 1 台のマシンで実行するのには時間がかかります。 この時間を短縮するために、テストを複数のマシンに分散させて[テストを並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)することができます。 それには、並列処理レベルを指定する必要があります。
+プロジェクトに多数のテストが含まれる場合、それらを 1 台のマシンで実行するのには時間がかかります。 この時間を短縮するために、テストを複数のマシンに分散させて[テストを並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)することができます。 それには、並列実行レベルを指定する必要があります。
 
 CircleCI CLI を使用してテスト ファイルを分割するか、環境変数を使用して並列マシンを個別に構成します。
 
@@ -80,4 +80,4 @@ CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introducti
 ### インサイト
 {: #insights }
 
-CircleCI UI の[インサイト ページ]({{ site.baseurl }}/ja/2.0/insights/)は、追跡中のすべてのリポジトリのヘルス状態を示すダッシュボードで、平均ビルド時間、平均キュー時間、最終ビルド時刻、成功率、並列処理などが表示されます。
+CircleCI UI の[インサイト ページ]({{ site.baseurl }}/ja/2.0/insights/)は、追跡中のすべてのリポジトリのヘルス状態を示すダッシュボードで、平均ビルド時間、平均キュー時間、最終ビルド時刻、成功率、並列実行などが表示されます。

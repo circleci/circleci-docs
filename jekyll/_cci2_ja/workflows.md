@@ -21,10 +21,6 @@ suggested:
   - 
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
-  - 
-    title: ジョブの最大実行時間の更新について
-    isExperiment: true
-    link: https://support.circleci.com/hc/ja/articles/4411086979867
 ---
 
 ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 ここでは、以下のセクションに沿って、ワークフロー機能について説明し、構成例を紹介します。
@@ -207,7 +203,7 @@ workflows:
             - hold
 ```
 
-上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。 However, workspaces expire after 15 days, so if the jobs after the hold job utilize workspaces, the effective approval time-limit is 15 days.
+上の例を実行した場合、CircleCI アプリケーションのワークフローのページで `hold` ジョブをクリックし、[Approve (承認)] をクリックするまで、`deploy:` ジョブは実行されません。 この例の `hold` ジョブの目的は、承認されるまでデプロイの開始を待つことです。 ジョブの承認期限は、発行から 90 日間です。
 
 ワークフローで手動承認を使用する場合は、以下の点に注意する必要があります。
 
@@ -238,7 +234,7 @@ workflows:
 {: #scheduling-a-workflow }
 
 <div class="alert alert-warning" role="alert">
-  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+  <strong>ワークフローのスケジュール実行は 2022 年 6 月 3 日に廃止予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{ site.baseurl }}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
 </div>
 
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
@@ -566,10 +562,10 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

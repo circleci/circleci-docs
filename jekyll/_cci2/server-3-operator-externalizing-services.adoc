@@ -13,15 +13,11 @@ version:
 
 This document describes how to configure the following external services for use with a CircleCI server 3.x installation. The settings described in this guide can be found in the KOTS Admin Console. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
-* PostgreSQL
-* MongoDB
-* Vault
-
 toc::[]
 
 == PostgreSQL
 
-NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or greater. 
+NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
 
 .External PostgreSQL
 image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
@@ -34,7 +30,7 @@ If you choose to use an external PostgreSQL instance, complete the following fie
 
 * *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance. 
 
-* *PostgreSQL Service Password (required)* - The password of the user used to access your PostgreSQL instance. 
+* *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance. 
 
 === Best Practices for your PostgreSQL
 
@@ -91,14 +87,14 @@ PostgreSQL provides official documentation for backing up and restoring your Pos
 
 We strongly recommend the following:
 
-* Taking daily backups
-* Keeping at least 30 days of backups
-* Using encrypted storage for backups as databases might contain sensitive information
+* Taking daily backups.
+* Keeping at least 30 days of backups.
+* Using encrypted storage for backups as databases might contain sensitive information.
 * Performing a backup before each upgrade of CircleCI server.
 
 == MongoDB
 
-NOTE: If using your own MongoDB instance, it needs to be version 3.6 or greater. 
+NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher. 
 
 .External MongoDB
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
@@ -132,7 +128,7 @@ Any other connection options you would like to use. This needs to be formatted a
 == Vault
 
 .External Vault
-image::server-3-external-vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
+image::server-3-external-vault.png[Screenshot of KOTS Admin Console config showing settings for using an external Vault instance]
 
 If you choose to use an external Vault instance, complete the following fields:  
 

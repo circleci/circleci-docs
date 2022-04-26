@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-This guide will help you get started with a Clojure application on CircleCI. お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+このガイドでは、CircleCI で Clojure アプリケーションをビルドする方法について説明します。 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 * 目次
 {:toc}
@@ -71,7 +71,7 @@ jobs: # basic units of work in a run
 
 上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
 
-ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to your project. 最後に `.circleci/config.yml` の内容をすべて削除します。
+ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI アプリケーションの[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、プロジェクトの隣にある**[Follow Project (プロジェクトをフォローする)]**ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
 これで `config.yml`を最初から作る準備ができました。
 

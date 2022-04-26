@@ -4,7 +4,7 @@ title: "Orbs Concepts"
 short-title: "Orbs Concepts"
 description: "Conceptual Overview for Orbs"
 categories: [getting-started]
-order: 1
+redirect_from: 2.0/using-orbs
 verison:
 - Cloud
 - Server v3.x
@@ -23,7 +23,7 @@ CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) featur
 ### Commands
 {: #commands }
 
-Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running bash or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
+Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code]({{site.baseurl}}/2.0/configuration-reference/#checkout), or running shell code, for example, running bash or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
 
 As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
 
@@ -117,7 +117,7 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 ### Jobs
 {: #jobs }
 
-[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
+[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps]({{site.baseurl}}/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs will also individually return their status via [GitHub Checks]({{site.baseurl}}/2.0/enable-checks/).
 
 When importing an orb which has jobs, you can reference them directly from your workflows.
 
@@ -138,10 +138,10 @@ See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring
 ### Usage examples
 {: #usage-examples }
 
-Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
+Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
 
 ```yaml
-# Source https://github.com/circleci-public/orb-project-template/blob/master/src/examples/example.yml
+# Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
 
 description: >
   Sample example description.
@@ -283,26 +283,26 @@ By choosing to use a private orb instead of a public orb, you also need to under
 
 Both public and private orbs can be authored in two ways:
 
-* Using the [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/)
-* Using the [Orb Development Kit](https://circleci.com/docs/2.0/orb-author/#orb-development-kit)  (recommended)
+* Using the [Manual Orb Authoring Process]({{site.baseurl}}/2.0/orb-author-validate-publish/)
+* Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)  (recommended)
 
 ## Orb packing
 {: #orb-packing }
 
 All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
 
-If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
+If you are using the Orb Development Kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
 {: class="alert alert-warning"}
 
 **_Example: Orb Project Structure_**
 
 | type | name|
 | --- | --- |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands) |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors) |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs) |
-| <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/commands) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/jobs) |
+| <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
 In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
@@ -313,7 +313,7 @@ Additionally, the _pack_ command provides a special pre-processor for orb develo
 
 `circleci orb pack <dir> > orb.yml`
 
-For orb development kit users, this step is handled automatically.
+For Orb Development Kit users, this step is handled automatically.
 
 ## File include syntax
 {: #file-include-syntax }

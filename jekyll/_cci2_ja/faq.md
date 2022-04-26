@@ -42,7 +42,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 
 はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/2.0/circleci-images/)をご覧ください。
 
-`machine` Executor に関しては、[利用可能なマシンイメージ]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-machine-images)のリストをご覧ください。
+`machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/2.0/configuration-reference/#available-machine-images)をご覧ください。
 
 実行環境やイメージに関する概要は、[Executor とイメージに関するガイド]({{site.baseurl}}/2.0/executor-intro/)をご覧ください。
 
@@ -82,7 +82,7 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 ### Performance プランを利用しているのに、ビルドがキューイングするのはなぜですか?
 {: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
 {:.no_toc}
-CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-cant-i-find-my-project-on-the-projects-dashboard }
@@ -92,7 +92,7 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 ### 現在のプランでコンテナ数は十分にあるのに、「build didn’t run because it needs more containers than your plan allows (お客様のプランで使用可能なコンテナ数の不足によりビルドを実行できませんでした）」というエラーが表示されます。 なぜですか?
 {: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
 {:.no_toc}
-CircleCI のデフォルト設定では、1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI 日本語サポートセンター](https://support.circleci.com/hc/ja) よりお問い合わせください。
+CircleCI のデフォルト設定では、1 プロジェクトあたりの並列実行数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI 日本語サポートセンター](https://support.circleci.com/hc/ja) よりお問い合わせください。
 
 ### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
@@ -254,7 +254,7 @@ CircleCI Server v３.x および v2.x で Windows Exexutor をご利用いただ
 
 たとえば、毎分 10 クレジットのレートで Docker または Linux の Medium コンピューティング オプションを利用する場合、25,000 クレジットのパッケージでは 2,500 分のビルドが可能です。 CircleCI ではパフォーマンス (開発者の生産性の向上) と価値を備えた最適なビルドを行なっていただけるよう複数のコンピューティングサイズを提供しています。
 
-必要に応じて、並列処理を使用してビルド時間をさらに短縮できます。並列処理を使用すると、ジョブを複数のテストに分割して同時に実行できます。 2倍の並列処理により、通常 2,500 分で実行されるビルドが 1,250 分で実行できるため、開発者の生産性がさらに向上します。 2つの Executor がそれぞれ 1,250 分間並行して実行している場合、合計ビルド時間は 2,500 分になります。
+必要に応じて、並列実行を使用してビルド時間をさらに短縮できます。並列実行を使用すると、ジョブを複数のテストに分割して同時に実行できます。 2倍の並列実行により、通常 2,500 分で実行されるビルドが 1,250 分で実行できるため、開発者の生産性がさらに向上します。 2つの Executor がそれぞれ 1,250 分間並行して実行している場合、合計ビルド時間は 2,500 分になります。
 
 #### 異なる組織間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
@@ -320,7 +320,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 
 このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
-この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金](https://circleci.com/docs/2.0/ip-ranges/#pricing)をご覧ください。
+この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金]({{site.baseurl}}/2.0/ip-ranges/#pricing)をご覧ください。
 
 #### 有効化する前に 1ヶ月の IP アドレスの範囲機能の料金を把握するにはどうすれば良いですか？
 
@@ -377,7 +377,7 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 #### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
-いいえ。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
+いいえ。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
 
 #### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
@@ -410,9 +410,9 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 
 Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
-お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時処理の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが引き継がれます。
+お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時実行の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが引き継がれます。
 
-DLC のご利用金額を見積もるには、設定ファイル内の Docker レイヤー キャッシュが有効になっているジョブと、それらのジョブでビルドしている Docker イメージの数を確認してください。 設定ファイルに書き込んでいるジョブは 1 行でも、たとえば並列処理を有効にした場合、そのジョブがパイプラインで複数回実行される場合もあります。
+DLC のご利用金額を見積もるには、設定ファイル内の Docker レイヤー キャッシュが有効になっているジョブと、それらのジョブでビルドしている Docker イメージの数を確認してください。 設定ファイルに書き込んでいるジョブは 1 行でも、たとえば並列実行を有効にした場合、そのジョブがパイプラインで複数回実行される場合もあります。
 
 Docker レイヤー キャッシュの効果は、Docker イメージをビルドしているパイプラインでのみはっきりと現れ、ジョブ中にビルドされるアプリケーション イメージに変更がない場合にそのレイヤーが再利用されることで、イメージのビルド時間が短縮されます。 パイプラインに Docker イメージをビルドするジョブがない場合は、Docker レイヤー キャッシュを使用してもメリットはありません。
 

@@ -58,7 +58,7 @@ As a developer using CircleCI you can:
 - Configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
 - Configure self-hosted [runners]({{site.baseurl}}/2.0/runner-overview/) for unique platform support.
 - Access [Arm resources]({{site.baseurl}}/2.0/arm-resources/) for the machine executor.
-- Use [orbs]({{site.baseurl}}/2.0/using-orbs/), reusable packages of configuration, to integrate with third parties.
+- Use [orbs]({{site.baseurl}}/2.0/orb-intro/), reusable packages of configuration, to integrate with third parties.
 - Use pre-built Docker [images]({{site.baseurl}}/2.0/circleci-images/) in a variety of languages.
 - Use the [API](https://circleci.com/docs/api/v2/) to retrieve information about jobs and workflows.
 - Use the [CLI]({{site.baseurl}}/2.0/local-cli/) to access advanced tools locally.

@@ -3,10 +3,6 @@ description: "This document describes the various ways users of your CircleCI se
 version:
 - Server v2.x
 - Server Admin
-suggested:
-  - title: How to refresh user permissions
-    isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
 = Authentication
 :page-layout: classic-docs
@@ -14,6 +10,8 @@ suggested:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 This document describes the various ways users of your CircleCI server v2.x installation can get access and authenticate their accounts. CircleCI server v2.x supports OAuth and LDAP as authentication methods.
 

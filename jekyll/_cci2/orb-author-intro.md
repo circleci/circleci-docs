@@ -28,7 +28,7 @@ Orbs consist of three main elements:
 
 Practice with [inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
 
-Orb authors automatically agree to the CircleCI [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All published orbs are made available publicly on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT). For more information, see [Orb Licensing](https://circleci.com/developer/orbs/licensing).
+Orb authors automatically agree to the CircleCI [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All publicly published orbs are made available on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT). For more information, see [Orb Licensing](https://circleci.com/developer/orbs/licensing).
 {: class="alert alert-success"}
 
 ## Getting started
@@ -71,5 +71,4 @@ where `name` is the namespace you wish to claim, `vcs-type` is the type of your 
 {: #next-steps }
 
 * Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
-* If you are developing orbs or use on an installation on CircleCI server, read the [Orb Authoring Process on Server]({{site.baseurl}}/2.0/orb-author-server/) guide for information on developing your orb.
 * Alternatively, to find out more about orbs read the [Orb Concepts]({{site.baseurl}}/2.0/orb-concepts/) page.

@@ -98,7 +98,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-**注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ](https://circleci.com/docs/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
+**注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ]({{site.baseurl}}/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
 
 ```yml
       # Alpine ベースのイメージに APK でインストールします。

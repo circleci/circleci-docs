@@ -12,12 +12,14 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 This document outlines security features built into CircleCI and related integrations.
 
 toc::[]
 
 == Overview
-Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to security@circleci.com with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
+Security is our top priority at CircleCI. We are proactive and we act on security issues immediately. Report security issues to security@circleci.com with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 
 == Encryption
 CircleCI uses HTTPS or SSH for all networking in and out of our service, including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. None of your code or data travels to or from CircleCI without being encrypted, unless you have code in your builds that does so at your discretion. Operators may also choose to bypass our SSL configuration or not use TLS for communicating with underlying systems.

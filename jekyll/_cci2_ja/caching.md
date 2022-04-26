@@ -32,6 +32,8 @@ CircleCI  では依存関係のキャッシュの自動化には対応してい�
 
 ここでは、手動によるキャッシュオプション、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。
 
+デフォルトのキャッシュの保存期間は 15 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 15 日間となっています。
+
 <div class="alert alert-warning" role="alert">
 <br />
 <b>注: </b>CircleCI  のジョブ実行に使われる Docker イメージは、サーバーインフラ上で自動的にキャッシュされる場合があります。</div>
@@ -260,11 +262,6 @@ Make note of the use of a `checksum` in the cache `key`. This is used to calcula
 ## キャッシュの管理
 {: #managing-caches }
 
-### キャッシュの有効期限
-{: #cache-expiration }
-
-`save_cache` ステップで作成されたキャッシュは、最長 15 日間保存されます。
-
 ### キャッシュのクリア
 {: #clearing-cache }
 
@@ -272,7 +269,7 @@ Make note of the use of a `checksum` in the cache `key`. This is used to calcula
 
 .circleci/config.yml ファイルの保存ステップとリストアステップでキャッシュキーを更新すると、その時点から一連のキャッシュが新たに生成されます。 以前のキーを使用して古いコミットを行ってもキャッシュが生成され保存される可能性があるため、 config.yml の変更後にリベースすることをお勧めします。
 
-キャッシュのバージョンを上げて新しいキャッシュを作成しても、「古い」キャッシュは保存されます。 必ず別のキャッシュを作成して下さい。このキャッシュは 15 日間利用できます。 この方法ではストレージの使用量が増加します。 一般的なベストプラクティスとして、現在キャッシュされている内容を確認し、ストレージの使用量をできる限り削減する必要があります。
+キャッシュのバージョンを上げて新しいキャッシュを作成しても、「古い」キャッシュは保存されます。 ここでは、別のキャッシュを作成していることに注意してください。 この方法ではストレージの使用量が増加します。 一般的なベストプラクティスとして、現在キャッシュされている内容を確認し、ストレージの使用量をできる限り削減する必要があります。
 
 <div class="alert alert-info" role="alert">
 <b>ヒント:</b> キャッシュは変更不可なので、すべてのキャッシュキーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 こうすれば、プレフィックスのバージョン番号を増やすだけでキャッシュ全体を再生成できます。
@@ -334,7 +331,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 | {% raw %}`{{ .Branch }}`{% endraw %}                              | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                                                 |
 | {% raw %}`{{ .BuildNum }}`{% endraw %}                            | このビルドの CircleCI ジョブ番号。                                                                                                                                                                                                                                                                                                                                            |
 | {% raw %}`{{ .Revision }}`{% endraw %}                            | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされる環境変数](https://circleci.com/ja/docs/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト](https://circleci.com/ja/docs/2.0/contexts)に追加した環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト]({{site.baseurl}}/ja/2.0/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                    |
 | {% raw %}`{{ epoch }}`{% endraw %}                                | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や UNIX エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                                            |
 | {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください                                                                                            |
 {: class="table table-striped"}
@@ -366,22 +363,22 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/mysql:5.6
+      - image: cimg/mysql:5.7
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI の環境変数を参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
       - run: cp config/{database_circleci,database}.yml
 
-      # Bundler の実行
-      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドル インストール後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # Run bundler
+      # Load installed gems from cache if possible, bundle install then save cache
+      # Multiple caches are used to increase the chance of a cache hit
 
       - restore_cache:
           keys:
@@ -400,9 +397,9 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - run: bundle exec rake db:create db:schema:load --trace
       - run: bundle exec rake factory_girl:lint
 
-      # アセットのプリコンパイル
-      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # Precompile assets
+      # Load assets from cache if possible, precompile assets then save cache
+      # Multiple caches are used to increase the chance of a cache hit
 
       - restore_cache:
           keys:

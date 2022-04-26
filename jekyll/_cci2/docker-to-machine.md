@@ -70,6 +70,6 @@ help decide which is right for your pipelines.
 {: #further-reading }
 
 We have more details on each specific executor
-[here](https://circleci.com/docs/2.0/executor-types/), which includes
+[here]({{site.baseurl}}/2.0/executor-types/), which includes
 specific memory and vCPU allocation details, as well as how to implement
 each one in your own configuration.

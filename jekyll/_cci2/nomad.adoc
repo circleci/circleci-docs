@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 CircleCI uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
 
 toc::[]

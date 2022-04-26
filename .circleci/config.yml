@@ -91,7 +91,7 @@ workflows:
       - build_server_pdfs:
           filters:
             branches:
-              only: /.*/server/
+              only: /.*/server/*
       - build_api_docs
       - build:
           requires:
@@ -106,20 +106,12 @@ workflows:
               only: 
                 - master 
                 - /.*-preview/
-      - datadog-synthetics-ci:
-          context:
-            - web-ui-datadog
-          requires:
-            - build
       - reindex-search:
-          requires:
-            - datadog-synthetics-ci
           filters:
             branches:
               only: master
       - deploy-preview:
           requires:
-            - datadog-synthetics-ci
             - minimize-images
           filters:
             branches:
@@ -131,7 +123,6 @@ workflows:
             - deploy-preview
       - deploy:
           requires:
-            - datadog-synthetics-ci
             - minimize-images
           filters:
             branches:
@@ -208,7 +199,6 @@ jobs:
             set -exu
             mkdir -p /tmp/workspace/scripts
             mv scripts/datadog-synthetics-preview.js /tmp/workspace/scripts/datadog-synthetics-preview.js
-            mv scripts/datadog-synthetics-ci.sh /tmp/workspace/scripts/datadog-synthetics-ci.sh
             mv scripts/postinstall.sh /tmp/workspace/scripts/postinstall.sh
             mv scripts/process-images.sh /tmp/workspace/scripts/process-images.sh
       - persist_to_workspace: # store the built files into the workspace for other jobs.
@@ -354,31 +344,6 @@ jobs:
           root: ~/circleci-docs/jekyll/
           paths:
             - _site/*
-
-  datadog-synthetics-ci:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Use Datadog CLI to run synthetic tests on internal server
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Add ui.circleci.com DNS record # Allows us to ping ui.circleci.com instead localhost or 127.0.0.1
-          command: |
-            sudo tee -a /etc/hosts \<<<'127.0.0.1 ui.circleci.com'
-            cat /etc/hosts
-      - run:
-          name: Serve static files & Call Datadog Synthetics Test
-          command: |
-            set -exu
-            yarn serve _site -p 4000 > /dev/null &
-            sleep 5
-            ./scripts/datadog-synthetics-ci.sh
-            kill -9 %1
   
   reindex-search:
     executor:

@@ -20,7 +20,7 @@ CircleCI でのコア体験は、`config.yml` ファイルを使用して*決定
 
 | YAML の記述                                                                             | CircleCI CLI                                                               |
 | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| [YAML 基本構文]({{ site.baseurl }}/ja/2.0/writing-yaml/)の入門ガイド  &nbsp;&nbsp;&nbsp;&nbsp; | ジョブをローカルで実行するには、[CircleCI CLI]({{ site.baseurl }}/2.0/local-jobs/) を使用します。 |
+| [YAML 基本構文]({{ site.baseurl }}/ja/2.0/writing-yaml/)の入門ガイド  &nbsp;&nbsp;&nbsp;&nbsp; | ジョブをローカルで実行するには、[CircleCI CLI]({{ site.baseurl }}/ja/2.0/local-cli/) を使用します。 |
 
 <hr />
 
