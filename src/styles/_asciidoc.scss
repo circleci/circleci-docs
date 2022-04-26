@@ -1,38 +1,15 @@
-.conum[data-value]{
-  display:inline-block;
-  color:#000000!important;
-  background-color: #ffffff;
-  border-color: #070707;
-  border-style: solid;
-  border-width: 1.5px;
-  -webkit-border-radius:100px;
-  /*border-radius:100px;*/
-  text-align:center;
-  font-size:.75em;
-  width:1.67em;
-  height:1.67em;
-  line-height:1.5em;
-  font-style:normal;
-  font-weight:bold;
-  margin-right:10px;
-}
+/* code snippet callout icons*/
 
-.conum[data-value] *{color:#000000!important}
-
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
 .conum[data-value]+b{display:none}
-
 .conum[data-value]:after{content:attr(data-value)}
-
 pre .conum[data-value]{position:relative;top:-.125em}
-
 b.conum *{color:inherit!important}
-
 .conum:not([data-value]):empty{display:none}
 
+/* admonitions */
 
-span.icon>.fa {
-  cursor: default;
-}
 .admonitionblock td.icon {
   text-align: center;
   width: 80px;
@@ -63,10 +40,18 @@ span.icon>.fa {
   content: "\f06a";
   color: #bf0000;
 }
+
+.admonitionblock {
+  margin-bottom: 10px;
+}
+
+/* titles for figures */
 .title{
   font-style: italic;
   text-align: center;
 }
+
+/* Image blocks in asciidoc content */
 
 .imageblock{
   width: 90%;
@@ -76,13 +61,7 @@ span.icon>.fa {
   margin-bottom: 10px;
 }
 
-.admonitionblock {
-  margin-bottom: 10px;
-}
-
-.green{
-  color: #43C78A;
-}
+/* styling sidebars */
 
 .sidebarblock{
   border:1px solid #dddddd;
@@ -107,4 +86,8 @@ span.icon>.fa {
   font-weight: 500;
   font-style: normal;
   text-align:center;
+}
+
+.green{
+  color: #43C78A;
 }
