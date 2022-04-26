@@ -6,6 +6,9 @@ description: "Starting point for CircleCI Server v2.18 docs"
 categories: [getting-started]
 order: 1
 ---
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 This document provides a summary of features and product notes for the release of CircleCI server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
 ## Requirements for upgrading

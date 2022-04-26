@@ -4,7 +4,7 @@ version:
 - Server v3.x
 - Server v2.x
 ---
-= Slack Orb Tutorial
+= Using the Slack orb to set up Slack notifications
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI Slack orb"

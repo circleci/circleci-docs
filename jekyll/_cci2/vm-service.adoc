@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 This section outlines how to set up and customize VM service for your CircleCI installation. VM Service controls how `machine` executor (Linux and Windows images) and remote Docker jobs are run.
 
 NOTE: The information on this page is only applicable to installations on AWS. Please contact your CircleCI account representative to request VM service guidance for a static installation.

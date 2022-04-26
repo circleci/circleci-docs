@@ -47,7 +47,7 @@ layout: compress
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}
             {{ content }}
-            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
+            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise|getting-started-guide-experimental" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
             <div id="expandModal" class="hidden">
@@ -95,7 +95,5 @@ layout: compress
   {% include_cached js-assets.html %}
 </div><!-- .outter -->
 {% include popup_cta.html %}
-
-{% include_cached no-script.html %}
 </body>
 </html>

@@ -1,7 +1,6 @@
 ---
 version:
 - Server v2.x
-- Server v3.x
 - Server Admin
 ---
 = Troubleshooting Server Installations
@@ -11,6 +10,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, you can generate a support bundle and contact CircleCI Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
 

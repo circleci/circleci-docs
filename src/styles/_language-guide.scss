@@ -1,23 +1,15 @@
-.control, .treatment, .loading-deferred {
-    display: none;
+a.no-external-icon.col-sm-12 {
+    padding: 0;
 
-    a.no-external-icon.col-sm-12 {
-        padding: 0;
-
-        &:hover {
-            div.card.col-sm-12 {
-                background: #F7F7F7;
-            }
+    &:hover {
+        div.card.col-sm-12 {
+            background: #F7F7F7;
         }
-    }
-
-    .treatment.col-xs-12.col-sm-6 {
-        margin-top: 24px;
     }
 }
 
-#current-variation {
-    display: initial;
+.col-xs-12.col-sm-6 {
+    margin-top: 24px;
 }
 
 .card {
@@ -28,11 +20,11 @@
     h3 {
         line-height: 31.2px;
 
-        & + p {
+        &+p {
             margin-bottom: 4px;
             line-height: 24px;
 
-            & + p {
+            &+p {
                 margin-bottom: 16px;
 
                 strong {
@@ -42,7 +34,12 @@
         }
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin-top: 12px;
         margin-bottom: 4px;
     }
@@ -61,16 +58,21 @@
             margin: 0;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             margin-top: 16px;
             color: black;
         }
 
-        h3 + p {
+        h3+p {
             margin-bottom: 12px;
         }
 
-        & > ul {
+        &>ul {
             padding: 0;
         }
 
@@ -182,7 +184,7 @@
         padding: 11px 0 0 8px;
     }
 
-    & + p {
+    &+p {
         margin: 0;
     }
 }
