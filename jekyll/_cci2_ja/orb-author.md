@@ -146,7 +146,7 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
     Orb コンポーネントのテスト方法を確認し、Orb の変更に伴ってテストを変更するには、必ず _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ ファイルを参照してください。 Orb のテストに関する詳細は、[ Orb のテストに関するドキュメント]({{site.baseurl}}/ja/2.0/testing-orbs/)を参照してください。
 
-    最初の本番バージョンの Orb をデプロイする準備ができたら、「[Orb のパブリッシュプロセス]({site.basel}}/ja/2.0/creating-orbs/)」ガイドで変更事項のデプロイに関する情報を参照してください。
+    最初の本番バージョンの Orb をデプロイする準備ができたら、「[Orb のパブリッシュプロセス]({{site.basel}}/ja/2.0/creating-orbs/)」ガイドで変更事項のデプロイに関する情報を参照してください。
 
 ### Orb の記述
 {: #writing-your-orb }
