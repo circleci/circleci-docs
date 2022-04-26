@@ -8,9 +8,11 @@ categories:
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.16.
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
-## What's new in release 2.16
+このドキュメントでは、CircleCI Server v2.16 の機能や注意事項についてまとめています。
+
+## バージョン 2.16. の新機能
 {: #whats-new-in-release-216 }
 
 - Services マシンの外部にデータとワークロードを分散できるようになりました。 MongoDB、Redis、Nomad Server、RabbitMQ、Postgres、Vault を外部サービスとして使用できます。 最新ドキュメントについては、CSM にお問い合わせください。
@@ -25,7 +27,7 @@ This document provides a summary of features and product notes for the release o
    - *CircleCI v2.16 インストール ガイド*
    - *CircleCI v2.16 運用ガイド*
 
-## Fixed in release 2.16
+## バージョン 2.16 での修正点
 {: #fixed-in-release-216 }
 
 - 32 日後にコンテキストが破損する問題を修正しました。
