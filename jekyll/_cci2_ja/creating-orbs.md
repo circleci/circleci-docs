@@ -39,17 +39,21 @@ version:
 下記の手順に従って変更から新しいリリースを作成します。
 
 1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリで Orb の変更を自動的に
-リント、[シェルチェック]({{site.baseurl}}/ja/2.0/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/2.0/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)します。</p></li> 
+リント、[シェルチェック]({{site.baseurl}}/ja/2.0/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/2.0/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)します。
    
-   1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 ワークフローが 2 つあり、`lint-pack` が先に実行され、リント、シェルチェック、レビューを含まれており、2 つ目のワークフローでテストするよう開発版をパブリッシュします。 この `test-deploy` には結合テストが含まれており、準備が整い次第 Orb の安定版をパブリッシュできます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
+1. **すべてのテストが成功したか確認してください。**<br/>
+テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 ワークフローが 2 つあり、`lint-pack` が先に実行され、リント、シェルチェック、レビューを含まれており、2 つ目のワークフローでテストするよう開発版をパブリッシュします。 この `test-deploy` には結合テストが含まれており、準備が整い次第 Orb の安定版をパブリッシュできます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
 
-1 **"スカッシュ" マージ** <br/> 変更が完了したら、[Conventional Commit メッセージ](https://www.conventionalcommits.org/) を使って変更を一つのコミットに "[スカッシュマージ](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" することをお勧めします（必須ではありません）。
-  
-  例：
-  
-        - `fix: x-command parameter from string to integer`
+1. **"スカッシュ" マージ** <br/>
+変更が完了したら、[Conventional Commit メッセージ](https://www.conventionalcommits.org/) を使って変更を一つのコミットに "[スカッシュマージ](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" することをお勧めします（必須ではありません）。
+
+    例:
+
+      - `fix: x-command parameter from string to integer`
       - `feat: added new x parameter to y command`
-1 **タグとリリース**<br/> 変更がデフォルトのブランチにマージされましたが、[ Orb レジストリ](https://circleci.com/ja/developer/orbs)をチェックすると、新しいバージョンはパブリッシュされていません。</ol> 
+
+1. **タグとリリース**<br/>
+変更がデフォルトのブランチにマージされましたが、[ Orb レジストリ](https://circleci.com/ja/developer/orbs)をチェックすると、新しいバージョンはパブリッシュされていません。</ol> 
 
 新しいバージョンの Orb をパブリッシュするには、リリースのタグ付けが必要です。 タグは手動で作成し、プッシュできますが、[GitHub.com のリリース機能](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)の使用をお勧めします。
 
