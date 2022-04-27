@@ -98,7 +98,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-**Note:** The [CircleCI convenience images](https://circleci.com/docs/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
+**Note:** The [CircleCI convenience images]({{site.baseurl}}/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
 ```yml
       # Install via apk on alpine based images
@@ -126,6 +126,7 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
+- `20.10.12`
 - `20.10.11`
 - `20.10.7`
 - `20.10.6`

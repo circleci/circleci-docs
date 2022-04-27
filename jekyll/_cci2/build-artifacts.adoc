@@ -3,13 +3,15 @@ version:
 - Server v2.x
 - Admin
 ---
-= Build Artifacts
+= Managing Build Artifacts
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Build artifacts persist data after a job is completed and can be used for longer-term storage of your build process outputs.
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 Build artifacts persist data after a job is completed. They can be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
 

@@ -10,6 +10,15 @@ version:
 
 This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. There are a number of ways to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
 
+Note the following distinctions between artifacts, workspaces, and caches:
+
+| Type      | Use                      | Example |
+|-----------|------------------------------------|---------
+| Artifacts | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
+| Workspaces| Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
+| Caches    | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+{: class="table table-striped"}
+
 * TOC
 {:toc}
 
@@ -123,7 +132,7 @@ Details about individual network and storage transfer usage can be found in the 
 ### Custom storage usage
 {: #custom-storage-usage }
 
-You can customize storage usage retention periods for workspaces, caches, and artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods by adjusting the sliders for each object type (see image below). By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
+Users on paid plans can customize storage usage retention periods for workspaces, caches, and artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can set custom storage periods by adjusting the sliders for each object type (see image below). By default, the storage period is 30 days for artifacts, and 15 days for caches and workspaces. These are also the maximum retention periods for storage. The maximum storage period is 30 days for artifacts, and 15 days for caches and workspaces.
 
 When you have determined your preferred storage retention for each object type, click the **Save Changes** button and your preferences will take effect immediately for any new workspaces, caches, or artifacts created. Previously created objects that are stored with a different retention period will continue to persist for the retention period set when the object was created.
 
@@ -141,23 +150,27 @@ If you store data toward the end of your billing cycle, the data will be restore
 **NOTE:** For our monthly Performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
-Charges apply when an organization has runner network egress beyond the included GB allotment for network and storage usage. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
+Network charges apply when an organization has runner network egress beyond the included network GB allotment. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
+
+Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
-For questions on data usage for the IP ranges feature, visit the [FAQ](https://circleci.com/docs/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+For questions on data usage for the IP ranges feature, visit the [FAQ]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
 
-### Reducing excess use of network egress
-{: #reducing-excess-use-of-network-egress }
+### Reducing excess use of network egress and storage
+{: #reducing-excess-use-of-network-egress-and-storage }
 
 Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
 
+Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. 
+
 ## See also
 {: #see-also }
-{:.no_toc}
 - [Caching Dependencies]({{site.baseurl}}/2.0/caching)
 - [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
 - [Workspaces]({{site.baseurl}}/2.0/workspaces)
 - [Artifacts]({{site.baseurl}}/2.0/artifacts)
 - [IP Ranges]({{site.baseurl}}/2.0/ip-ranges/)
 - [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+- [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)

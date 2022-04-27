@@ -8,10 +8,6 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-suggested:
-  - title: Context deadline exceeded after 1 hour - Build timed out
-    isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/4410707277083
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
@@ -350,7 +346,7 @@ This section will walk through interacting with context environment variables us
 {:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on
-[CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration)
+[CircleCI CLI Configuration]({{site.baseurl}}/2.0/local-cli/?section=configuration)
 to set up your CircleCI command line interface._
 
 To create an environment variable using our CLI, perform the following steps:
@@ -422,7 +418,7 @@ directly accessing the API.
 {:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on
-[CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration)
+[CircleCI CLI Configuration]({{site.baseurl}}/2.0/local-cli/?section=configuration)
 to set up your CircleCI command line interface._
 
 To rotate an environment variable using the CLI, perform the following steps:

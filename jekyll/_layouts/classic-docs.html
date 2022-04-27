@@ -47,7 +47,7 @@ layout: compress
             {% include_cached translation_in_progress.html site=site page=page %}
             {% endif %}
             {{ content }}
-            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise" contains page.layout %}
+            {% if page.collection != 'cci1' and page.page-type != "index" and "classic-docs-experimental|classic-docs|enterprise|getting-started-guide-experimental" contains page.layout %}
             {% include_cached doc-footer.html page=page site=site %}
             {% endif %}
             <div id="expandModal" class="hidden">
@@ -63,15 +63,13 @@ layout: compress
           <div class='full-height-sticky'>
 
             {% if page.suggested != false %}
-            {% assign total_link = page.suggested | size %}
-            {% assign total_links_experiment = page.suggested | where: "isExperiment", true | size %}
-            <div id="helpful-resources" class="{% if total_link == total_links_experiment %} has-experiment-links {% endif%}">
+            <div id="helpful-resources">
               <h5 class="helpful-heading">Helpful resources {{count_links_experiment}}</h5>
               <div class="helpful-indent">
                 <ul class="section-nav">
                   {% for item in page.suggested %}
-                  <li class="helpful-entry helpful-h2 {% if item.isExperiment %} has-experiment-links {% endif%}">
-                    <a class="{% if item.isExperiment %} experimental-link {% endif %}" href="{{item.link}}" target="_blank">{{item.title}}</a>
+                  <li class="helpful-entry helpful-h2">
+                    <a href="{{item.link}}" target="_blank">{{item.title}}</a>
                   </li>
                   {% endfor %}
                 </ul>
@@ -97,7 +95,5 @@ layout: compress
   {% include_cached js-assets.html %}
 </div><!-- .outter -->
 {% include popup_cta.html %}
-
-{% include_cached no-script.html %}
 </body>
 </html>

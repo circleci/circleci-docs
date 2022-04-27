@@ -3,10 +3,6 @@ description: このドキュメントでは、CircleCI Server v2 のユーザー
 version:
 - Server v2.x
 - サーバー管理者
-suggested:
-  - title: アカウントのパーミッションの更新について
-    isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
 ---
 = 認証
 :page-layout: classic-docs

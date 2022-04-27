@@ -19,12 +19,16 @@ version:
 
 ワークスペースは、追加のみが可能なデータストレージです。 ジョブはワークスペースに永続的にデータを保管することができます。 ワークスペースを使用すると、データはコンテナの外のストアにアーカイブされ保存されます。 ワークスペースにデータが追加されるたびに、そのストアに新しいレイヤーが作成されます。 ダウンストリームジョブは、コンテナのファイルシステムにそのワークスペースをアタッチできます。 ワークスペースをアタッチすると、ワークフロー内のアップストリームジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
 
-![ワークスペースのデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+デフォルトのワークスペースの保存期間は 15 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 15 日間となっています。
+
+![Workspace のデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ## ワークスペースの設定
 {: #workspace-configuration }
 
-ジョブで作られたデータを保存して他のジョブでも使えるよう、`persist_to_workspace` キーをジョブに追加します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルやディレクトリは、`root` キーで指定しているディレクトリの相対パスとなる一時的なワークスペースにアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (およびワークフローの再実行時に) 利用できるようにします。
+ジョブで作られたデータを保存して他のジョブでも使えるよう、`persist_to_workspace` キーをジョブに追加します。 `persist_to_workspace` の `paths:` プロパティに記述されたディレクトリ・ファイルは、`root` キーで指定しているディレクトリの相対パスとなる一時 Workspace にアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (および Workflow の再実行時に) 利用できるようにします。
+
+カスタマイズされたストレージ設定の場合、ワークスペースのカスタマイズ設定に `persist_to_workspace` がデフォルトで設定されます。 カスタマイズ設定がない場合は、`persist_to_workspace` が 15 日間デフォルト設定となります。
 
 `attach_workspace` キーを設定して、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 ワークフローの設定は順次実行なので、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
 
@@ -188,19 +192,16 @@ workflows:
 
 ワークスペース、キャッシュ、およびアーティファクトの使用に関する概念的な情報については、ブログ記事「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
-## ワークスペースの使用期限
-{: #workspace-expiration }
+## ワークスペースストレージのカスタマイズ
+{: #workspaces-and-self-hosted-runner }
 
-ワークスペースは最長で15日間保存されます。 ワークスペースはパイプライン間では共有されません。ワークフローの完了後にワークスペースにアクセスする唯一の方法は、15 日以内にワークフローを再実行することです。
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 ワークスペースに関連するアクションには、ネットワークとストレージの使用が発生するものがあります。 お客様の使用量が制限を超えた場合、料金が発生します。
 
-## ワークスペースとランナーネットワークの料金
-{: #workspaces-runner-network-charges }
+ワークスペースを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 多くのプロジェクトでは、ワークスペースを保存する利点は、失敗したビルドの再実行ができることです。 ビルドが成功したら、そのワークスペースは不要になります。 ニーズに合う場合は、ワークスペースのストレージ保存期間を短く設定することを推奨します。
 
-セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)のページを参照してください。
 
-For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
-
-## Workspace optimization
+## ワークスペースの最適化
 {: #workspace-usage-optimization }
 
 `persist_to_workspace` を使用する際は、パスとファイルを定義することが重要です。 定義しないと、ストレージが大幅に増加する場合があります。 パスとファイルは以下の構文を使って指定します。

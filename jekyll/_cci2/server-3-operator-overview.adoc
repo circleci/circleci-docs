@@ -15,14 +15,14 @@ The following guide contains information useful for CircleCI server Operators, o
 
 It is assumed that you have already read the https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview].
 
-CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
-Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
+CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
 and VM service.
 
 CircleCI server can run Docker jobs on the Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are controlled by the Nomad clients, therefore the Nomad clients must be able to access the VM machines on port 22 for SSH and port 2376 for remote Docker jobs.
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
-Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients will need access to object storage.
+
+Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
 toc::[]
 
@@ -34,11 +34,11 @@ to learn more about the job scheduler and how to perform basic client and cluste
 By default, CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
 
 ### Nomad Clients
-Nomad Clients run without storing state, enabling you to increase or decrease the number of containers as needed.
+Nomad Clients run without storing state, allowing you to increase or decrease the number of containers as needed.
 
-To ensure enough Nomad clients are running to handle all builds, track the queued builds, and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
+To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
 
-If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but will limit the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes[available resource classes] to decide what is best for you.  The default instance type will run up to `xlarge` resource classes.
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
 
 See the https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options on optimizing the resource usage of Nomad clients.
 

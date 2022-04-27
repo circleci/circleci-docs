@@ -12,6 +12,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+
 CircleCI uses Terraform to automate parts of the infrastructure for your CircleCI server v2.x install, so you will need to install this first:
 
 * Visit https://www.terraform.io/downloads.html[Download Terraform] and choose the correct package for your architecture.
