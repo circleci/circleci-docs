@@ -71,12 +71,12 @@ jobs:
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
 ```
@@ -102,12 +102,12 @@ jobs:
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: ubuntu
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
     steps:
