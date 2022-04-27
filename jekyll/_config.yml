@@ -94,10 +94,6 @@ asciidoctor:
     kotsversion: 1.65.0
 
 collections:
-  # this is named with an underscore because it needs to be processed
-  # before the collections that render the actual pages.
-  # jekyll is processing in alpha order...
-  _glossary:
   cci2:
     name: "2.0 Docs"
     site_section: true
