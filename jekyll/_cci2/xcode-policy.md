@@ -47,7 +47,7 @@ Xcode 12 | All images except for the final release will be flagged for deprecati
 Xcode 11 | Flagged for deprecation, removed entirely when Xcode 15 reaches RC
 {: class="table table-striped"}
 
-When an image is selected for deprecation and removal, we will create an announcement on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will always aim to provide four weeks notice where possible.
+When an image is selected for deprecation and removal, we will create an announcement on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will always aim to provide four weeks' notice where possible.
 
 We will never automatically redirect requests for images to different `major.minor` versions, so when one of these images is removed, jobs will start to fail if the `.circleci/config.yml` has not been updated.
 
@@ -83,9 +83,9 @@ New images are always announced on our [Discuss site](https://discuss.circleci.c
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version reasonably up to date with the latest version available. Generally our images can be up to 2 minor/patch versions behind the latest stable version.
 
-We aim to keep the macOS version aligned across our different macOS executors (e.g., VM and Metal), however this may not always be the case. Please check the [Software Manifest]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions) file for the image for the most accurate information.
+We aim to keep the macOS version aligned across our different macOS executors (for example, VM and Metal), however this may not always be the case. Please check the [Software Manifest]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions) file for the image for the most accurate information.
 
-When a new major version of macOS (e.g., `12.0` or `13.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple’s own release cycle, but will always be announced on our [Discuss forum](https://discuss.circleci.com/c/announcements/39).
+When a new major version of macOS (for example, `12.0` or `13.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple’s own release cycle, but will always be announced on our [Discuss forum](https://discuss.circleci.com/c/announcements/39).
 
 ## Exceptions
 {: #exceptions }
