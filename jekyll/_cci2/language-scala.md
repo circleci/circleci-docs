@@ -50,25 +50,14 @@ jobs:
   build:
     working_directory: ~/samplescala
     docker:
-      - image: openjdk:8
+      - image: cimg/openjdk:11.0.13
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
-      SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.5.8
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
-      - run:
-          name: Get sbt binary
-          command: |
-                    apt update && apt install -y curl
-                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-                    dpkg -i sbt-$SBT_VERSION.deb
-                    rm sbt-$SBT_VERSION.deb
-                    apt-get update
-                    apt-get install -y python-pip git
-                    pip install awscli
-                    apt-get clean && apt-get autoclean
       - checkout
       - restore_cache:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
@@ -82,9 +71,8 @@ jobs:
       - save_cache:
           key: sbt-cache
           paths:
-            - "~/.ivy2/cache"
+            - "~/.cache"
             - "~/.sbt"
-            - "~/.m2"
       - run:
           command: |
               mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
@@ -109,15 +97,15 @@ jobs:
   build:
     working_directory: ~/samplescala
     docker:
-      - image: openjdk:8
+      - image: cimg/openjdk:11.0.13
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
-      SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.5.8
 ```
 
-The docker/image key represents the Docker image you want to use for the build. In this case, we want to use the official `openjdk:8` image from [Docker Hub](https://hub.docker.com/_/openjdk/) because it has the native Java compiler we need for our Scala project.
+The docker/image key represents the Docker image you want to use for the build. In this case, we want to use the CircleCI `cimg/openjdk:11.0.13` image because it has the necessary OpenJDK and sbt toolchain needed for Scala builds.
 
 The environment/SBT_VERSION is an environment variable that specifies the version of sbt to download in later commands which is required to compile the Scala app.
 
@@ -127,25 +115,14 @@ jobs:
   build:
     working_directory: ~/samplescala
     docker:
-      - image: openjdk:8
+      - image: cimg/openjdk:11.0.13
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
-      SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.5.8
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
-      - run:
-          name: Get sbt binary
-          command: |
-            apt update && apt install -y curl
-            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-            dpkg -i sbt-$SBT_VERSION.deb
-            rm sbt-$SBT_VERSION.deb
-            apt-get update
-            apt-get install -y python-pip git
-            pip install awscli
-            apt-get clean && apt-get autoclean
 ```
 
 The steps/run keys specify the types of actions to perform. The run keys represent the actions to be executed.
@@ -156,32 +133,7 @@ The steps/run keys specify the types of actions to perform. The run keys represe
 
 This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename.
 
-The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
-
-```yaml
-      - run:
-          command: |
-            apt update && apt install -y curl
-            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-            dpkg -i sbt-$SBT_VERSION.deb
-            rm sbt-$SBT_VERSION.deb
-            apt-get update
-            apt-get install -y python-pip git
-            pip install awscli
-            apt-get clean && apt-get autoclean
-```
-
-The 2.0 version of our samplescala schema requires us to download required dependencies and install them into the container.  Below is an explanation of the example multi-line command:
-- Updates the container OS and installs curl.
-- Downloads the [Simple Build Tool (sbt)](https://www.scala-sbt.org/) compiler version specified in the $SBT_VERSION variable.
-- Installs the sbt compiler package.
-- Deletes the sbt.deb file after install.
-- Updates the OS package listing.
-- Installs python-pip and git client.
-- Installs the `awscli` package which is the AWS Command Line Interface needed to perform the S3 uploads.
-- Removes all the unnecessary install packages to minimize container size.
-
-The following keys represent actions performed after the multi-line command is executed:
+Next, we do the build:
 
 ```yaml
     steps:
@@ -197,9 +149,8 @@ The following keys represent actions performed after the multi-line command is e
       - save_cache:
           key: sbt-cache
           paths:
-            - "~/.ivy2/cache"
+            - "~/.cache"
             - "~/.sbt"
-            - "~/.m2"
 ```
 
 Below is an explanation of the preceding example:
