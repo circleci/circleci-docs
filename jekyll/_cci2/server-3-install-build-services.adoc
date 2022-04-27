@@ -113,7 +113,135 @@ This returns something like the following:
 ...}
 
 
-Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command from within the directory of the `main.tf` file:
+You can copy the following example to your local environment and fill in the appropriate information for your specific setup. You can find more examples link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws/examples[here] and description of input variables are link:https://github.com/CircleCI-Public/server-terraform/blob/server-1786-aws/nomad-aws/README.md#inputs[here]
+
+```hcl
+terraform {
+  required_version = ">=0.15.2"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~>3.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"     # change it
+}
+
+variable "basename" {
+  type    = string
+  default = "<prefix-for-nomad-resources>"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "<VPC-ID-of-VPC-used-for-Nomad-resources>"
+}
+
+variable "subnet" {
+  type    = string
+  default = "<public-subnet-id-for-nomad-resources>"
+}
+
+variable "server_endpoint" {
+  type        = string
+  description = "Domain and port of k8s service of Nomad control plane (e.g example.com:4647)"
+}
+
+variable "blocked_cidrs" {
+  type        = list(string)
+  description = <<-EOF
+    List of CIDR blocks to block access to from within jobs, e.g. your K8s nodes.
+    You won't want to block access to external VMs here.
+    It's okay when your dns_server is within a blocked CIDR block, you can use var.dns_server to create an exemption.
+    EOF
+}
+
+variable "dns_server" {
+  type        = string
+  description = "If the IP address of your VPC DNS server is within one of the blocked CIDR blocks you can create an exemption by entering the IP address for it here"
+}
+
+variable "docker_network_cidr" {
+  type        = string
+  description = <<-EOF
+    List of CIDR blocks to be used in docker networks when running job on nomad client.
+    These CIDR block should not be the same as your infrastruture CIDR block.
+    i.e - "10.10.0.0/16" or "172.32.0.0/16"
+    EOF
+  default     = "10.10.0.0/16"
+}
+
+module "nomad" {
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.4.1"
+
+  basename            = var.basename
+  nodes               = 4
+  vpc_id              = var.vpc_id
+  subnet              = var.subnet
+  server_endpoint     = var.server_endpoint
+  blocked_cidrs       = var.blocked_cidrs
+  dns_server          = var.dns_server
+  docker_network_cidr = var.docker_network_cidr   # docker_network_cidr should be diffrent than subnet CIDR
+
+  nomad_auto_scaler   = true        # If true, terraform will generate an IAM user to be used by nomad-autoscaler in CircleCI Server.
+  max_nodes           = 5           # the max number of clients to scale to. Must be greater than our equal to the nodes set above.
+
+  # enable_irsa input will allow K8s service account to use IAM roles, you have to replace REGION, ACCOUNT_ID, OIDC_ID and K8S_NAMESPACE with appropriate value
+  # for more info, visit - https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html
+  enable_irsa = {
+    oidc_principal_id   = "arn:aws:iam::<ACCOUNT_ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<OIDC_ID>"
+    oidc_eks_variable   = "oidc.eks.<REGION>.amazonaws.com/id/<OIDC_ID>:sub"
+    k8s_service_account = "system:serviceaccount:<K8S_NAMESPACE>:nomad-autoscaler"
+  }
+}
+
+# -------
+
+output "mtls_enabled" {
+  value = module.nomad.mtls_enabled
+}
+
+output "nomad_server_cert" {
+  value = module.nomad.nomad_server_cert
+}
+
+output "nomad_server_key" {
+  value = module.nomad.nomad_server_key
+}
+
+output "nomad_tls_ca" {
+  value = module.nomad.nomad_tls_ca
+}
+
+output "nomad_sg_id" {
+  value = module.nomad.nomad_sg_id
+}
+
+output "nomad_asg_user_access_key" {
+  value = module.nomad.nomad_asg_user_access_key
+}
+
+output "nomad_asg_user_secret_key" {
+  value = nonsensitive(module.nomad.nomad_asg_user_secret_key)
+}
+
+output "nomad_asg_name" {
+  value = module.nomad.nomad_asg_name
+}
+
+output "nomad_asg_arn" {
+  value = module.nomad.nomad_asg_arn
+}
+
+output "nomad_role" {
+  value = module.nomad.nomad_role
+}
+```
+
+Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
 [source,shell]
 ----
@@ -188,6 +316,14 @@ variable "subnetwork" {
   # default = "https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<your-subnetwork-name>"
 }
 
+variable "docker_network_cidr" {
+  type        = string
+  description = <<-EOF
+    IP CIDR block to be used in docker networks when running job on nomad client.
+    This CIDR block should not be the same as your infrastruture CIDR block.
+    EOF
+  default     = "10.10.0.0/16"
+}
 
 variable "server_endpoint" {
   type    = string
@@ -220,22 +356,23 @@ provider "google-beta" {
 
 
 module "nomad" {
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.4.0"
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.4.1"
 
-  zone            = var.zone
-  region          = var.region
-  network         = var.network
-  subnetwork      = var.subnetwork
-  server_endpoint = var.server_endpoint
-  machine_type    = "n2-standard-8"
+  zone                      = var.zone
+  region                    = var.region
+  network                   = var.network
+  subnetwork                = var.subnetwork
+  server_endpoint           = var.server_endpoint
+  machine_type              = "n2-standard-8"
   nomad_auto_scaler         = var.nomad_auto_scaler
   enable_workload_identity  = var.enable_workload_identity
   k8s_namespace             = var.k8s_namespace
+  docker_network_cidr       = var.docker_network_cidr
 
-  unsafe_disable_mtls    = false
-  assign_public_ip       = true
-  preemptible            = true
-  target_cpu_utilization = 0.50
+  unsafe_disable_mtls       = false
+  assign_public_ip          = true
+  preemptible               = true
+  target_cpu_utilization    = 0.50
 }
 
 output "module" {
