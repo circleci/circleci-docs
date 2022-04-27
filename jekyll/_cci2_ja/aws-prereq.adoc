@@ -29,25 +29,25 @@ CircleCI は、Terraform を使って CircleCI Server v2.x をインストール
 
 == プライベート サブネットの要件
 
-AWS上の非公開サブネットをCircleCIで使用するには、次の追加設定が必要です。
+AWS 上の非公開サブネットを CircleCI で使用するには、次の追加設定が必要です。
 
 - ビルダーボックス用の非公開サブネットは、添付のルートテーブルにより、インターネットへのアウトバウンドトラフィック用に設定された https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html[NATゲートウェイ] または https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html[インターネットゲートウェイ] で設定する必要があります。
 +
 CAUTION: サブネットは、 アドレスが枯渇することが*決してないよう*十分な大きさが必要です。
 
-- https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/[S3 用 VPC エンドポイント] を有効にする必要があります。 S3 用 VPC エンドポイントを有効にすると、CircleCI およびサブネット内の他のノードに対する S3 操作が大幅に改善します。
+- https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/[S3 用 VPC エンドポイント] を有効にする必要があります。 S3 用 VPC エンドポイントを有効にすると、CircleCI およびサブネット内の他のノードに対する S3 の操作性が大幅に向上します。
 - 高負荷のネットワーク操作に対しては NAT インスタンスを適切に強化します。  デプロイの仕様によっては、Docker および外部ネットワーク リソースを使用した高度並列ビルドによって NAT インスタンスが制約を受けるおそれがあります。  不適切な NAT によってネットワーク操作やキャッシュ操作が低速化するおそれがあります。
-- https://github.com[github.com] と統合する場合、ネットワークのアクセス制御リスト (ACL) で GitHub Webhook のポート80 および 443 が許可されていることを確認します。 GitHub と連携する場合は、CircleCI をパブリック サブネット内に準備するか、パブリック ロード バランサーを使用して github.com トラフィックを転送するように設定します。
+- https://github.com[github.com] と連携する場合、ネットワークのアクセス制御リスト (ACL) で GitHub Webhook のポート80 および 443 が許可されていることを確認します。 GitHub と連携する場合は、CircleCI をパブリック サブネット内に準備するか、パブリック ロード バランサーを使用して github.com トラフィックを転送するように設定します。
 - See the <<overview#services-machine, Services Machine>> section of our overview for more information on the specific ports that need to be accessible to instances in your CircleCI installation.
 
 // Check whether the ACL needs to be more open so the services/build can download build images
 
-== 計画
+== 事前準備
 インストールを開始する前に、以下の情報とポリシーを確認してください。
 
 * ネットワーク プロキシを使用する場合は、インストールを開始する前に、お客様のアカウントチームに連絡してください。
 * Services 用に 1つ、Nomad クライアントの最初のセット用に 1つ、少なくとも 2つの AWS インスタンスのプロビジョニングを行います。 ベストプラクティスとして、Services と Nomad クライアントの両方のインスタンスに、8つの vCPU と 32 GB の RAM を備えた `m4.2xlarge` インスタンスを使用することをお勧めします。
-* AWSインスタンスには、Dockerコンテナをプルするため、およびライセンスを確認するため、外向けのアクセスが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
+* AWS インスタンスには、Docker コンテナをプルし、ライセンスを確認するために、アウトバウンドアクセスが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
 * Terraform を使用して必要な AWS エンティティをプロビジョニングするには、次の権限を持つ IAM ユーザーが必要です (IAM ユーザーの作成については、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[AWS ガイダンス] を参照してください）。
 +
 [source,json]
