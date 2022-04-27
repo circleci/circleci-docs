@@ -51,7 +51,7 @@ CircleCI のダイナミックコンフィグ機能では、セットアップ�
 - 続行時間に送信されたパイプラインパラメーターは、トリガー (セットアップ) 時に送信されたパイプラインパラメーターとオーバーラップすることはできません。
 - セットアップ設定で宣言されたパイプラインパラメーターは、continuation 設定でも宣言される必要があります。 このパラメーターは、続行時に使用することができます。
 
-セットアップ ワークフローを使用してダイナミックコンフィグを生成する方法の基本的な例は、[構成クックブック]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)を参照してください。
+セットアップ ワークフローを使用してダイナミックコンフィグを生成する方法の基本的な例は、[設定クックブック]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)を参照してください。
 
 ## ダイナミックコンフィグに関するよくあるご質問
 {: #dynamic-config-faqs }
