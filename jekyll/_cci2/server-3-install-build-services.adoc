@@ -113,7 +113,7 @@ This returns something like the following:
 ...}
 
 
-You can copy the following example to your local environment and fill in the appropriate information for your specific setup. You can find more examples link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws/examples[here] and description of input variables are link:https://github.com/CircleCI-Public/server-terraform/blob/server-1786-aws/nomad-aws/README.md#inputs[here]
+You can copy the following example to your local environment and fill in the appropriate information for your specific setup. You can find more examples link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws/examples[here] and description of input variables are link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws/README.md#inputs[here]
 
 ```hcl
 terraform {
