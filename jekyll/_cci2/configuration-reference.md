@@ -277,12 +277,12 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [--smallfiles]
 
-      - image: postgres:9.4.1
+      - image: postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
         auth:
@@ -2026,13 +2026,13 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [mongod, --smallfiles]
 
-      - image: postgres:9.4.1
+      - image: postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # some containers require setting environment variables
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
         auth:
