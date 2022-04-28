@@ -160,22 +160,23 @@ en:
     icon: icons/sidebar/configure.svg
     children:
       - 
-        name: はじめに
-        children:
-          - 
-            name: 設定ファイルの概要
-          - 
-            name: 設定に関するリファレンス
-          - 
-            name: 設定ファイルの例
-          - 
-          - 
-            name: ダイナミックコンフィグ
-          - 
-            name: CircleCI のローカル CLI の使用
-          - 
+        name: 設定ファイルの概要
       - 
-        name: Orbs
+        name: 設定ファイル リファレンス
+      - 
+        name: 設定ファイルの例
+      - 
+      - 
+        name: ダイナミックコンフィグ
+      - 
+        name: CircleCI のローカル CLI の使用
+      - 
+  - 
+    name: Orbs
+    icon: icons/sidebar/orbs.svg
+    children:
+      - 
+        name: Orbs を使う
         children:
           - 
           - 
@@ -205,7 +206,8 @@ en:
         name: メトリクス用語集
         link: 2.0/insights-glossary/
       - 
-        name: テスト インサイト
+      - 
+        name: テスト インサイト（Test Insights）
         link: 2.0/insights-tests/
       - 
         name: データの連携
@@ -301,7 +303,7 @@ en:
       - 
         children:
           - 
-            name: 設定に関するリファレンス
+            name: 設定ファイル リファレンス
           - 
             name: API v2
             link: api/v2/
@@ -356,7 +358,7 @@ en:
           - 
             name: Orb の管理
           - 
-            name: VM サービス
+            name: VM サービスの設定
           - 
             name: Authentication
             link: 2.0/server-3-operator-authentication
@@ -415,7 +417,7 @@ en:
             name: v3.1 Operations Guide
             link: 2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
       - 
-        name: Server v3.x PDFs
+        name: Server v3.0.x PDFs
         link: 2.0/install-overview/
         children:
           - 
@@ -452,7 +454,7 @@ en:
             link: 2.0/overview/
           - 
             name: Intro to Nomad
-            link: 2.0/nomad/
+            link: 2.0/v.2.18-overview/
           - 
             name: Metrics & Monitoring
             link: 2.0/monitoring/
@@ -490,7 +492,7 @@ en:
           - 
             name: 認証
           - 
-            name: VM サービス
+            name: VM サービスの設定
           - 
           - 
             name: 証明書
@@ -512,17 +514,17 @@ en:
           - 
           - 
           - 
-            name: 稼働環境
+            name: アーキテクチャ
           - 
           - 
             name: 謝辞
       - 
         name: Server v2.18 PDFs
-        link: 2.0/nomad/
+        link: 2.0/v.2.18-overview/
         children:
           - 
             name: What's New in v2.18
-            link: 2.0/nomad/
+            link: 2.0/v.2.18-overview/
           - 
             name: v2.18.3 Installation Guide
             link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
@@ -566,7 +568,7 @@ en:
       - 
         name: Scale
       - 
-        name: Server
+        name: サーバー
 ja:
   - 
     name: はじめよう
@@ -618,15 +620,25 @@ ja:
           - 
             name: ワークフロー
           - 
+            name: Orbs、ジョブ、ステップ、ワークフロー
           - 
+            name: ワークスペース
           - 
+            name: アーティファクト
           - 
+            name: Docker レイヤーキャッシュ
           - 
+            name: 同時実行件数
           - 
+            name: 環境変数
           - 
+            name: テストデータの収集
           - 
+            name: SSH を使用したデバッグ
           - 
+            name: 並列実行
           - 
+            name: コンテキスト
           - 
       - 
         name: 最適化
@@ -641,6 +653,7 @@ ja:
           - 
             name: キャッシュ戦略
           - 
+            name: パイプライン値とパラメーター
           - 
           - 
   - 
@@ -723,24 +736,24 @@ ja:
     icon: icons/sidebar/configure.svg
     children:
       - 
-        name: はじめに
-        i18n_name: v2.19の新機能
+        name: 設定ファイルの概要
         children:
-          - 
-            name: 設定ファイルの概要
           - 
             name: 設定に関するリファレンス
           - 
             name: 設定ファイルの例
           - 
           - 
-            name: ダイナミック コンフィグ
+            name: ダイナミックコンフィグ
           - 
             name: CircleCI のローカル CLI の使用
           - 
+  - 
+    name: Orbs
+    icon: icons/sidebar/orbs.svg
+    children:
       - 
-        name: Orbs
-        i18n_name: Orbs
+        name: Orbs を使う
         children:
           - 
           - 
@@ -755,25 +768,29 @@ ja:
             i18n_name: v2.19の新機能
           - 
           - 
+            name: Orb オーサリングに関するよくあるご質問
           - 
+            name: Orb のベスト プラクティス
           - 
+            name: Orb のテスト手法
           - 
+            name: Orb のパブリッシュ プロセス
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
     children:
       - 
-        name: 会社概要
+        name: 概要
         i18n_name: v2.19の新機能
       - 
         name: メトリクス用語集
       - 
-        name: テスト インサイト
+        name: テストインサイト
       - 
         name: データの連携
       - 
         name: Insights API
-        link: ja/api/v2/
+        link: api/v2/
         hash: tag/Insights
   - 
     name: プロジェクト
@@ -793,7 +810,7 @@ ja:
           - 
           - 
           - 
-            name: Using Credits
+            name: Webhook
           - 
             name: クレジットの使用
       - 
@@ -840,7 +857,7 @@ ja:
           - 
             name: 最適化
           - 
-            name: 設定ファイル
+            name: 設定ファイル入門ガイド
           - 
             name: デプロイ
   - 
@@ -883,7 +900,7 @@ ja:
         link: ja/2.0/install-overview/
         children:
           - 
-            name: 会社概要
+            name: 概要
             link: ja/2.0/install-overview/
             i18n_name: v2.19の新機能
           - 
@@ -916,7 +933,7 @@ ja:
         link: ja/2.0/v.2.19-overview/
         children:
           - 
-            name: What's New in v2.19
+            name: 概要
             link: ja/2.0/v.2.19-overview/
             i18n_name: v2.19の新機能
           - 
@@ -930,7 +947,7 @@ ja:
           - 
             name: Orbs
           - 
-            name: VM サービス
+            name: VM サービスの設定
           - 
             name: Authentication
           - 
@@ -950,7 +967,16 @@ ja:
           - 
           - 
       - 
-        link: ja/2.0/v.2.18-overview/
+        link: ja/2.0/install-overview/
+        children:
+          - 
+            name: What's New in v2.48
+          - 
+          - 
+          - 
+            name: v2.48.3 Operations Guide
+      - 
+        link: ja/2.0/install-overview/
         children:
           - 
             name: v3.3 Overview
@@ -969,9 +995,9 @@ ja:
           - 
             name: v3.1 Operations Guide
       - 
-        name: Server v3.x PDFs
-        i18n_name: Server v3.x PDFs
-        link: ja/2.0/v.2.18-overview/
+        name: Server v3.0.x PDFs
+        i18n_name: Server v3.0.x PDFs
+        link: ja/2.0/install-overview/
         children:
           - 
             name: v3.0 Overview
@@ -985,7 +1011,7 @@ ja:
       - 
         name: Server v2.19.x Install
         i18n_name: Server v2.19.x Install
-        link: ja/2.0/v.2.18-overview/
+        link: ja/2.0/install-overview/
         children:
           - 
             name: What's New in v2.17
@@ -1110,4 +1136,4 @@ ja:
         name: Scale
         i18n_name: Scale
       - 
-        name: サーバー
+        name: Server

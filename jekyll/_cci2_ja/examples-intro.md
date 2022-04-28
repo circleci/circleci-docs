@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "サンプル"
 short-title: "サンプル"
-description: "CircleCI Examples Introduction"
+description: "CircleCI サンプルの紹介"
 categories:
   - 移行
 order: 1

@@ -59,7 +59,7 @@ CircleCI を使用すると、開発者として以下のことが可能です�
 - 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を設定し、[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)内で以前のジョブのデータを再利用する。
 - セルフホスト型の [ランナー]({{site.baseurl}}/ja/2.0/runner-overview/) を設定し、独自のプラットフォームをサポートする。
 - Machine Executor の [Arm リソース]({{site.baseurl}}/ja/2.0/arm-resources/)にアクセスする。
-- 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/ja/2.0/using-orbs/) を使って、サードパーティツールと連携する。
+- 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/ja/2.0/orb-intro/) を使って、サードパーティツールと連携する。
 - さまざまな言語であらかじめビルドされた Docker [イメージ]({{site.baseurl}}/ja/2.0/circleci-images/) を使用する。
 - [API](https://circleci.com/docs/api/v2/) を使ってジョブやワークフローの情報を取得する。
 - [CLI]({{site.baseurl}}/ja/2.0/local-cli/) を使って高度なツールにローカルでアクセスする。

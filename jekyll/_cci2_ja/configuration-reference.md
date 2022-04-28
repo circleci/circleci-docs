@@ -25,11 +25,6 @@ suggested:
   - 
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
-
-    title: ユーザーの権限の更新について
-    isExperiment: true
-    link: https://support.circleci.com/hc/ja/articles/360048210711
-
 ---
 
 このドキュメントは、`.circleci/config.yml` ファイルで使用される CircleCI 2.x 設定キーのリファレンスガイドです。
@@ -370,8 +365,10 @@ jobs:
 ##### 使用可能な `machine` イメージ
 {: #available-machine-images }
 
-**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、developer hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/ja/machine/image/ubuntu-2004)で確認できます。 最新の利用可能なイメージの一覧については、[Discuss](https://discuss.circleci.com/t/linux-machine-executor-images-october-q4-update/37847) を参照してください。
+**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
+* `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
+* `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
 * `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
@@ -517,7 +514,7 @@ jobs:
 
 CircleCI では、すべてのお客様がシステムを安定した状態で利用できるよう、リソースクラスごとに同時実行数のソフト制限を設けています。 Performance プランまたは Custom プランを使用していて、特定のリソース クラスで待機時間が発生している場合は、このソフト制限に達している可能性があります。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new) にお客様のアカウントの制限値引き上げを依頼してください。
 
-**注:** 2021 年 9 月 1 日以降に作成され、リソースクラスが指定されていない新しいプロジェクトに対しては、 お客様の組織に適したデフォルト値を決定します。 デフォルトの使用を避けるには、各ジョブの設定でリソースクラスサイズを明示的に指定してください。
+**注:** リソースクラスを指定しない場合、CircleCI は変更される可能性のあるデフォルト値を使用します。  デフォルト値にするよりもリソースクラスを指定することをお勧めします。
 
 **CircleCI Server をオンプレミスでホスティングしている場合は、利用可能なリソースクラスについてシステム管理者に問い合わせてください**。 詳細については、サーバーの管理に関するドキュメントの[Nomad クライアントのシステム要件]({{ site.baseurl }}/ja/2.0/server-ports/#nomad-clients)と[サーバーのリソースクラス]({{ site.baseurl }}/ja/2.0/customizations/#resource-classes)のセクションを参照してください。
 
@@ -773,7 +770,7 @@ jobs:
 
 あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-**注: ** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列実行が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列実行が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
+**注:** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列実行が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列実行が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
 {: class="alert alert-info"}
 
 | キー                  | 必須 | タイプ   | 説明                                                                                                                                                                        |
