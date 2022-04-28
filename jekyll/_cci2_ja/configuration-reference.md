@@ -46,14 +46,14 @@ suggested:
 | setup | ×  | ブール値型 | config.yaml で[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config/)機能を使用するように指定します。 |
 {: class="table table-striped"}
 
-The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
+`setup` フィールドを指定すると、プライマリ `.circleci` 親ディレクトリ外部にある設定ファイルのトリガー、パイプライン パラメーターの更新、およびカスタマイズされた設定ファイルの生成を、条件に従って実行できます。
 
 ## **`version`**
 {: #version }
 
-| キー      | 必須 | タイプ  | 説明                                                                                                                                                                                                           |
-| ------- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| version | ○  | 文字列型 | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs. |
+| キー      | 必須 | タイプ  | 説明                                                                                                                                                                           |
+| ------- | -- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| version | ○  | 文字列型 | `2`、`2.0`、または `2.1`。`.circleci/config.yml` ファイルの簡素化、再利用、パラメータ化ジョブの利用に役立つバージョン 2.1 の新しいキーの概要については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/ja/2.0/reusing-config/)を参照してください。 |
 {: class="table table-striped"}
 
 `version` フィールドは、将来的にサポートの終了や 破壊的変更に対して警告するかどうかの判断に用いられます。
@@ -79,12 +79,12 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-`circleci/hello-build@0.0.5` がそもそもの Orb の参照先ですが、この例では `hello` がその Orb の参照名となります。 You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/2.0/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/2.0/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
+`circleci/hello-build@0.0.5` が完全認証された Orb の参照先ですが、この例では `hello` がその Orb の参照名となります。 Orb の詳細については[こちら](https://circleci.com/ja/orbs/)を参照してください。 [Orb の使用]({{site.baseurl}}/ja/2.0/orb-intro/) および [Orb のオーサリング]({{site.baseurl}}/ja/2.0/orb-author-intro/) に関するドキュメントもご覧ください。 パブリック Orb のリストは、[Orb レジストリ](https://circleci.com/ja/developer/orbs)をご覧ください。
 
 ## **`commands`** (version: 2.1 が必須)
 {: #commands-requires-version-21 }
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/2.0/reusing-config/).
+コマンドは、ジョブ内で実行される一連のステップのシーケンスをマップとして定義します。 これにより、1 つのコマンド定義を複数のジョブで再利用することができます。 詳細については、[再利用可能な設定ファイルリファレンスガイド]({{ site.baseurl }}/ja/2.0/reusing-config/)を参照してください。
 
 | キー          | 必須 | タイプ   | 説明                                                                                                                                                               |
 | ----------- | -- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -187,7 +187,7 @@ jobs:
 
 #### `environment`
 {: #environment }
-環境変数の名前と値のマップです。 For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page.
+環境変数の名前と値のマップです。 環境変数の定義と使用について、また様々な設定方法の優先順位については、[環境変数の使用]({{site.baseurl}}/ja/2.0/env-vars/)のページを参照してください。
 
 #### `parallelism`
 {: #parallelism }
