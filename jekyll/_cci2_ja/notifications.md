@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: 通知の使用
-description: Learn how to use get CircleCI's job status through Slack, IRC, email, and web notifications.
+description: Slack、IRC、メール、Web 通知を通じてGet CircleCIのジョブステータスを使用する方法を説明します。
 order: 100
 published: true
 version:
@@ -11,7 +11,7 @@ version:
 * 目次
 {:toc}
 
-CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the successful completion or failure of a [workflow]({{ site.baseurl }}/2.0/workflows/). IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
+CircleCI にはメール通知と Web 通知が統合されています。 IRC 通知と Slack 通知も Orb を使って設定することができます。 Slack, email, and web notifications are delivered on the successful completion or failure of a [workflow]({{ site.baseurl }}/2.0/workflows/). IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
 
 ```yaml
 version: 2.1
