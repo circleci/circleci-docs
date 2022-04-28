@@ -76,12 +76,6 @@ a {
     text-decoration: none;
   }
 
-  &>* {
-    // to prevent the child elements inside a tag from registering
-    // as the target in event listeners (for analytics tracking)
-    pointer-events: none;
-  }
-
   &.active {
     color: $link-text-color !important;
   }
