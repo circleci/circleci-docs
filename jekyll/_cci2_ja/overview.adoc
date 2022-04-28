@@ -37,8 +37,8 @@ Figure 1.1 illustrates CircleCI core components, build orchestration services, a
 Within the CircleCI UI is the Insights page, which acts as a dashboard showing the health of all repositories you are following including:
 // I feel like the insights page info needs to move somewhere else
 
-* median build time
-* median queue time
+* 平均ビルド時間
+* 平均キュー時間
 * last build time
 * 成功率
 * parallelism
