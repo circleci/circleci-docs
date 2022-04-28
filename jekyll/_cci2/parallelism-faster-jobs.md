@@ -302,11 +302,6 @@ Note: To follow along with the commands in the video below you will need to be [
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## See also
-{: #see-also }
-
-[Using Containers]({{ site.baseurl }}/2.0/containers/)
-
 ## Other ways to split tests
 {: #other-ways-to-split-tests }
 
@@ -326,3 +321,10 @@ suite. These applications are not developed or supported by CircleCI. Please che
   ```shell
   go test -v $(go list ./... | circleci tests split)
   ```
+
+
+## Next steps
+{: #next-steps }
+
+* [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data/)
+* [Test Insights]({{ site.baseurl }}/2.0/insights-tests/)
