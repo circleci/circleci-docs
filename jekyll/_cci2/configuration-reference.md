@@ -196,7 +196,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2022.04
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -206,6 +206,7 @@ jobs:
     resource_class: large
     working_directory: ~/my-app
     steps:
+      - run: curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
       - run: go test -v $(go list ./... | circleci tests split)
 ```
 
@@ -264,7 +265,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty # primary container
+      - image: cimg/base:2022.04 # primary container
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -485,7 +486,7 @@ xlarge                | 8     | 16GB
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2022.04
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
