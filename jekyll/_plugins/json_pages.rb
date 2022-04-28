@@ -4,6 +4,7 @@ def doc_to_json(document, site)
   # compile data + content
   output = document.data
   output['content'] = document.content
+  output['file_name'] = document.relative_path
 
   # get output path
   jsonPath = site.source + '/../json/pages/'
