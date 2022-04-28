@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 CircleCI は、Terraform を使って CircleCI Server v2.x をインストールするインフラの一部を自動化しているため、まず Terraform をインストールする必要があります。
 
