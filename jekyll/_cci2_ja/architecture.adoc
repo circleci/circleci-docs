@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 このドキュメントでは、CircleCI Server がインストールされた Services マシン上で実行されるコンテナ化されたサービスの概要を説明します。 これにより、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 下記の表に、補足事項と要点を記載します。
 
