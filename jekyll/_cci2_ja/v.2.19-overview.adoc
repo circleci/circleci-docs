@@ -13,7 +13,7 @@ version:
 
 このドキュメントでは、CircleCI Server v2.19 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、 https://circleci.com/ja/server/changelog[更新履歴]でご確認ください。 For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration, upgrade guide>>.
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ## アップグレードの要件
 
