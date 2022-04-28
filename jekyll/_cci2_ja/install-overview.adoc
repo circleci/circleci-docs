@@ -4,9 +4,9 @@ version:
 - サーバー管理
 ---
 
-= Installation Overview
+= インストールガイド
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 :page-layout: classic-docs
 :page-liquid:
