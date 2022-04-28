@@ -1,17 +1,17 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Introduction to Nomad Cluster Operation
+= Nomad クラスタの操作の概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
+:page-description: CircleCI 2.0 で Nomad クラスターの操作方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 CircleCI では、プライマリ ジョブ スケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
 
