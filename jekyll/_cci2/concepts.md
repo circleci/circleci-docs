@@ -386,7 +386,7 @@ jobs:
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
+     - image: postgres:14.2 # Specifies the database image
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -396,14 +396,14 @@ jobs:
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: root
+         POSTGRES_USER: user
 #...
  build2:
    machine: # Specifies a machine image that uses
-   # an Ubuntu version 20.04 image with Docker 19.03.13
-   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
+   # an Ubuntu version 20.04 image with Docker 20.10.12
+   # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
    # for new image releases.
-     image: ubuntu-2004:202010-01
+     image: ubuntu-2004:202201-02
 #...
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
@@ -422,7 +422,7 @@ jobs:
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
+     - image: postgres:14.2 # Specifies the database image
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -432,7 +432,7 @@ jobs:
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: root
+         POSTGRES_USER: user
 #...
  build2:
    machine: true
@@ -451,7 +451,7 @@ jobs:
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
+     - image: postgres:14.2 # Specifies the database image
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -461,7 +461,7 @@ jobs:
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: root
+         POSTGRES_USER: user
 #...
  build2:
    machine: true # Specifies a machine image.
@@ -498,7 +498,7 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
            username: mydockerhub-user
            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-       - image: postgres:9.4.1 # Specifies the database image
+       - image: postgres:14.2 # Specifies the database image
          auth:
            username: mydockerhub-user
            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -508,7 +508,7 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
          environment: # Specifies the POSTGRES_USER authentication
           # environment variable, see circleci.com/docs/2.0/env-vars/
           # for instructions about using environment variables.
-           POSTGRES_USER: root
+           POSTGRES_USER: user
 ...
    build2:
      machine: # Specifies a machine image that uses
