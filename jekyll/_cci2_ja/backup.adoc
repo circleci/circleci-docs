@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ここでは Services マシンのフェイルオーバーや交換について説明します。 Services マシンの定期的なバックアップイメージまたはスナップショットを実装するためのバックアップ戦略および手順については、以下の「バックアップ」セクションを参照してください。
 
