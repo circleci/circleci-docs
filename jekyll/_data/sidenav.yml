@@ -177,7 +177,7 @@ en:
         - name: Kubernetes Installation
           link: 2.0/runner-on-kubernetes/
         - name: Self-hosted Runner Supported Platforms
-          link: runner-supported-platforms/
+          link: 2.0/runner-supported-platforms/
         - name: Scaling Self-hosted Runner
           link: 2.0/runner-scaling/
         - name: Self-hosted Runner Configuration Reference
