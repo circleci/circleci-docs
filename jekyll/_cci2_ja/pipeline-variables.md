@@ -109,14 +109,14 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 CLI や API の使用に加えて、CircleCI Web アプリからパラメーターを使ってパイプラインをトリガーすることもできます。 無効にするには以下を実行します。
 
-  1. Navigate to the dashboard view in the web app.
-  2. Use the project filter to select the desired project.
-  3. Use the branch filter to select the branch on which you want to run the new pipeline.
-  4. Click the **Trigger Pipeline** button (towards the top right corner of the page).
-  5. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
-  6. Click **Trigger Pipeline**.
+  1. Web アプリでダッシュボードを表示します。
+  2. プロジェクトのフィルタリング機能を使ってプロジェクトを選択します。
+  3. ブランチのフィルタリング機能を使って新しいパイプラインを実行するブランチを選択します。
+  4. **パイプラインのトリガー**ボタンをクリックします (ページの右上隅)。
+  5. **Add Parameters** ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
+  6. **Trigger Pipeline** をクリックします。
 
-**NOTE:** If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`)
+**注:** Web アプリからパイプラインをトリガーする時に、設定ファイルで宣言していないパラメーターを渡すと、そのパイプラインは失敗し、 `Unexpected argument(s)` というエラーが表示されます。
 
 
 ## パイプラインパラメーターのスコープ
