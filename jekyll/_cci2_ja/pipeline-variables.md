@@ -104,10 +104,10 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-### Passing parameters when triggering pipelines using the CircleCI web app
+### CiecleCI Web アプリを使ってパイプラインをトリガーするときにパラメーターを渡す
 {: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
 
-In addition to using the CLI and API, you can also trigger a pipeline with parameters from the CircleCI web app. 無効にするには以下を実行します。
+CLI や API の使用に加えて、CircleCI Web アプリからパラメーターを使ってパイプラインをトリガーすることもできます。 無効にするには以下を実行します。
 
   1. Navigate to the dashboard view in the web app.
   2. Use the project filter to select the desired project.
