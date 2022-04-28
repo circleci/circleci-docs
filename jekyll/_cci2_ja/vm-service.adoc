@@ -1,5 +1,5 @@
 ---
-description: View how to set up and customize VM service for your CircleCI server v2 installation. VM Service controls how machine (Linux and Windows images) and remote Docker jobs are run.
+description: CircleCI Server v2 で VM サービスをセットアップおよびカスタマイズする方法について説明します。 VM サービスにより、マシンジョブ (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
 version:
 - Server v2.x
 - サーバー管理
@@ -11,9 +11,9 @@ version:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
-このセクションでは、CircleCI Server の VM サービスをセットアップしてカスタマイズする方法について説明します。 VM サービスでは、`machine` Executor (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
+このセクションでは、CircleCI Server の VM サービスをセットアップしてカスタマイズする方法について説明します。 VM サービスにより、`machine` Executor (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
 
 NOTE: このページの情報は、AWS 上の CircleCI Server のみに適用されます。 静的インストール向けの VM サービスのセットアップ手順などについては、CircleCI のアカウント担当者に問い合わせてください。
 
@@ -21,7 +21,7 @@ toc::[]
 
 == 概要
 
-VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
+AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/2.0/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/2.0/executor-types/#using-machine[ machine</code> Executor] を使用してジョブを実行できます。
 
 .VM サービスの設定
 image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
