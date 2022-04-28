@@ -3,20 +3,20 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation on macOS
+= CircleCI Self-hosted Runner Installation on macOS
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI runner on macOS.
+This page describes how to install CircleCI self-hosted runner on macOS.
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+{% include snippets/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
-== Create a CircleCI runner configuration
+== Create a CircleCI self-hosted runner configuration
 
 Choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`.
 
@@ -38,9 +38,9 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
-== Install the CircleCI Runner configuration
+== Install the CircleCI self-hosted runner configuration
 
-Create a directory as `root` to hold the CircleCI runner configuration:
+Create a directory as `root` to hold the CircleCI self-hosted runner configuration:
 
 ```shell
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'
@@ -52,9 +52,19 @@ Copy the previously created `launch-agent-config.yaml` into the directory:
 sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/launch-agent-config.yaml'
 ```
 
-== Install the `launchd .plist`
+== Create and install the `launchd .plist`
 
-Copy the following to `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`:
+Create a `com.circleci.runner.plist` file. Please note that if you choose to create the file with Vim, you will likely need to prefix `sudo` to the command. The path to the file should be the following: `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`.
+
+```shell
+sudo chown root: /Library/LaunchDaemons/com.circleci.runner.plist
+```
+
+```shell
+sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
+```
+
+Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist` file:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -115,6 +125,8 @@ NOTE: If you are following these instructions for a second time, you should unlo
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
+{% include snippets/runner-config-reference.adoc %}
+
 == Verify the service is running
 
-The macOS application console can be used to view the logs for the CircleCI agent. Look under "Log Reports" for the logs called `com.circleci.runner.log`.
+Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.

@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner Installation on Linux
+= CircleCI Self-hosted Runner Installation on Linux
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,13 +12,13 @@ version:
 
 toc::[]
 
-This page describes how to install CircleCI runner on Linux.
+This page describes how to install CircleCI self-hosted runner on Linux.
 
-NOTE: Please review the xref:runner-installation.adoc[Installing the CircleCI Runner] page to verify prerequisites and authentication.
+{% include snippets/runner-platform-prerequisites.adoc %}
 
-== Create the CircleCI runner configuration
+== Create the CircleCI self-hosted runner configuration
 
-The recommended CircleCI runner configuration for Linux is:
+Create a `launch-agent-config.yaml` file. The recommended CircleCI self-hosted runner configuration for Linux is:
 
 ```yaml
 api:
@@ -35,12 +35,15 @@ runner:
 
 Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc#authentication[Authentication] step. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
 
-== Install the CircleCI runner configuration
+== Install the CircleCI self-hosted runner configuration
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
 
 ```shell
 sudo chown root: /opt/circleci/launch-agent-config.yaml
+```
+
+```shell
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
@@ -57,6 +60,12 @@ sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
 ```
 
+Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+
+```shell
+echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+```
+
 === CentOS/RHEL
 
 ```shell
@@ -66,9 +75,15 @@ sudo mkdir -p /opt/circleci/workdir
 sudo chown -R circleci /opt/circleci/workdir
 ```
 
+Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+
+```shell
+echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+```
+
 == Configure SELinux policy (RHEL 8)
 
-An SELinux policy is required for runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this runner install.
+An SELinux policy is required for self-hosted runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this self-hosted runner install.
 
 Create directory `/opt/circleci/policy` and generate the initial policy module:
 
@@ -90,15 +105,27 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
+{% include snippets/runner-config-reference.adoc %}
+
 == Optional Steps
 
 === Enable the `systemd` unit
 
+You will need to have https://systemd.io/[systemd] version 235+ installed for this optional step.
+
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
+
+```shell
+sudo chown root: /opt/circleci/circleci.service
+```
+
+```shell
+sudo chmod 755 /opt/circleci/circleci.service
+```
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
 
-If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
+If you want to configure the CircleCI self-hosted runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -124,7 +151,7 @@ systemctl enable /opt/circleci/circleci.service
 
 === Start the service
 
-When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
 ```shell
 systemctl start circleci.service
