@@ -2,16 +2,14 @@
 layout: classic-docs
 title: "Running Tests in Parallel"
 short-title: "Running Tests in Parallel"
-description: "How to run tests in parallel"
-categories: [optimization]
-order: 60
+description: "Running tests in parallel compute environments to optimize your CircleCI pipelines."
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-The more tests your project has, the longer it will take for them to complete on a single machine. To reduce this time, you can run tests in parallel by spreading them across multiple separate executors. This requires specifying a parallelism level to define how many separate executors get spun up for the test job. Then, you can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
+The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can run tests in parallel by spreading them across multiple, separate execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/2.0/executor-types/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
 
 * TOC
 {:toc}
@@ -54,7 +52,6 @@ Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally v
 
 ### Splitting test files
 {: #splitting-test-files }
-{:.no_toc}
 
 The CLI supports splitting tests across machines when running parallel jobs. This is achieved by passing a list of either files or classnames, whichever your test-runner requires at the command line, to the `circleci tests split` command.
 
@@ -63,7 +60,6 @@ The CLI supports splitting tests across machines when running parallel jobs. Thi
 
 #### Globbing test files
 {: #globbing-test-files }
-{:.no_toc}
 
 To assist in defining your test suite, the CLI supports globbing test files using the following patterns:
 
@@ -134,7 +130,6 @@ Note: If no timing data is found, you will receive a message: `Error autodetecti
 
 #### Splitting by name
 {: #splitting-by-name }
-{:.no_toc}
 
 By default, if you don't specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames/classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
 
@@ -172,7 +167,6 @@ circleci tests split --index=0 test_filenames.txt
 
 #### Splitting by filesize
 {: #splitting-by-filesize }
-{:.no_toc}
 
 When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
 
@@ -296,7 +290,6 @@ You may find an example build of proper test splitting [here](https://app.circle
 
 ### Video: troubleshooting globbing
 {: #video-troubleshooting-globbing }
-{:.no_toc}
 
 Note: To follow along with the commands in the video below you will need to be [`SSH-ed into a job`]({{ site.baseurl }}/2.0/ssh-access-jobs/).
 
