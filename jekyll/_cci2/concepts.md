@@ -382,7 +382,7 @@ version: 2.1
 jobs:
  build1: # job name
    docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
+     - image: cimg/base:2022.04-20.04
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -418,7 +418,7 @@ version: 2.1
 jobs:
  build1: # job name
    docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
+     - image: cimg/base:2022.04-20.04
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -447,7 +447,7 @@ version: 2
 jobs:
  build1: # job name
    docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
+     - image: cimg/base:2022.04-20.04
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -493,7 +493,7 @@ See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) docu
      docker: # Specifies the primary container image,
      # see circleci.com/docs/2.0/circleci-images/ for
      # the list of pre-built CircleCI images on dockerhub.
-       - image: buildpack-deps:trusty
+       - image: cimg/base:2022.04-20.04
          auth:
            username: mydockerhub-user
            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
