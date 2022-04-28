@@ -13,7 +13,7 @@ version:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 このガイドは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのものです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にユーザーに問題が発生するのを回避することができます。
 
