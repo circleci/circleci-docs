@@ -17,9 +17,9 @@ WARNING: CircleCI Server version 2.x は、リリースのサポートが終了�
 
 toc::[]
 
-To opt-in to this feature, navigate to your Management Console settings (e.g. circleci-hostname.com:8800/settings) and scroll down to Usage Statistics. Enable the radio button labeled Automatically send some usage statistics to CircleCI, as shown below.
+この機能にオプトインにするには、Management Console の設定 (circleci-hostname.com:8800/settings) に行き、Usage Statistics までスクロールダウンします。 以下に示すように、[Automatically send some usage statistics to CircleCI (使用状況統計を自動的に CircleCI に送信)] と表示されたラジオボタンをオンにします。
 
-.Usage Statistics Settings
+.使用状況統計の設定
 image::usage-statistics-setting.png[Send Usage Statistics]
 
 == 使用状況統計の詳細
