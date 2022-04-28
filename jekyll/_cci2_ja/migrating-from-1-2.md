@@ -234,7 +234,7 @@ dependencies:
 ## YAML のバリデーション
 {: #validate-yaml }
 
-When you have completed all the sections in `.circleci/config.yml`, we recommend that you check your YAML syntax using a tool such as <http://codebeautify.org/yaml-validator>. Then use the `circleci` CLI to validate the new configuration with the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-cli/) document for instructions. Fix any issues and commit the updated `.circleci/config.yml` file. When you push a commit, the job starts automatically and you can monitor it in the CircleCI app.
+`.circleci/config.yml` にすべてのセクションを記述したら、<http://codebeautify.org/yaml-validator> などのツールを使用して、YAML 構文が正しい形式かどうかをチェックすることをお勧めします。 次に、`circleci` CLI を使用して、新しい設定が CircleCI 2.0 スキーマに照らして正しいかどうかをバリデーションします。 手順については、[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/)を参照してください。 すべての問題を修正したら、更新した `.circleci/config.yml` ファイルをコミットします。 コミットをプッシュすると、ジョブが自動的に開始され、それを CircleCI アプリケーションでモニタリングできます。
 
 ## 次のステップ
 {: #next-steps }
