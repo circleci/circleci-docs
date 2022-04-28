@@ -253,9 +253,9 @@ The `.circleci/resources/pytest_build_config.ini` path may need to be replaced t
 ### Are you setting the junit_family in your pytest.ini?
 {: #are-you-setting-the-junit-family-in-your-pytest-ini }
 
-Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
+Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html). Search for "families" to see the relevant information.
 
-Search for "families" to see the relevant information.
+**Note**: A breaking change was introduced in pytest 6.1 the `junit_family` xml format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`.
 
 ### Example project that correctly splits by timings
 {: #example-project-that-correctly-splits-by-timing }
