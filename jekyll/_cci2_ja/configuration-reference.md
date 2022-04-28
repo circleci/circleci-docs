@@ -322,10 +322,10 @@ jobs:
 
 [Machine Executor ]({{ site.baseurl }}/ja/2.0/executor-types) は `machine` キーとともに下記のマップを用いて設定します。
 
-| キー                     | 必須 | タイプ   | 説明                                                                                                                                                                                                                                                                                                        |
-| ---------------------- | -- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| イメージ                   | ○  | 文字列型  | 使用する仮想マシンイメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/server-3-operator-vm-service). |
-| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。                                                                                                                                                                                                                   |
+| キー                     | 必須 | タイプ   | 説明                                                                                                                                                                                                                          |
+| ---------------------- | -- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| イメージ                   | ○  | 文字列型  | 使用する仮想マシンイメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。 |
+| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。                                                                                                                                     |
 
 
 {: class="table table-striped"}
@@ -350,7 +350,7 @@ jobs:
 
 
 
-##### Available Linux `machine` images
+##### 使用可能な Linux `machine` イメージ
 
 {: #available-linux-machine-images }
 
@@ -426,7 +426,7 @@ jobs:
 
 {: #macos }
 
-CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには [watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 To run a job in a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode you would like to use.
+CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには [watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 macOS 仮想マシン上でジョブを実行するには、ジョブ設定の最上位に `macos` キーを追加し、使いたい Xcode のバージョンを指定します。
 
 | キー    | 必須 | タイプ  | 説明                                                                                                                                               |
 | ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -454,7 +454,7 @@ jobs:
 
 {: #windows }
 
-CircleCI は、Windows 上でのジョブ実行をサポートしています。 To run a job on a Windows virtual machine, add the `windows` key to the top-level configuration for your job. Orb を使用すると、Windows ジョブを簡単にセットアップできます。 Windows ジョブを実行する際の前提条件と、Windows マシンで提供される機能の詳細については、「[Windows での Hello World]({{ site.baseurl }}/2.0/hello-world-windows)」を参照してください。
+CircleCI は、Windows 上でのジョブ実行をサポートしています。 Windows 仮想マシンでジョブを実行するには、`windows` キーをジョブ設定の最上位に追加する必要があります。 Orb を使用すると、Windows ジョブを簡単にセットアップできます。 Windows ジョブを実行する際の前提条件と、Windows マシンで提供される機能の詳細については、「[Windows での Hello World]({{ site.baseurl }}/2.0/hello-world-windows)」を参照してください。
 
 **例:** Windows Executor を使用して単純なジョブを実行する場合
 
@@ -499,11 +499,11 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 
 
 
-##### Self-hosted runner
+##### セルフホストランナー
 
 {: #self-hosted-runner }
 
-Use the `resource_class` key to configure a [self-hosted runner instance](https://circleci.com/docs/2.0/runner-overview/).
+`resource_class` を使って[セルフホストランナー インスタンス](https://circleci.com/docs/ja/2.0/runner-overview/#referencing-your-runner-on-a-job)を設定します。
 
 例えば下記のようにします。
 
@@ -591,7 +591,7 @@ jobs:
 ```
 
 
-You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration):
+`machine` クラスを使用して[ランナーインスタンス]({{site.baseurl}}/ja/2.0/runner-overview/#section=configuration)を設定することもできます。
 
 
 
@@ -1141,10 +1141,10 @@ workflows:
 
 Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/2.0/building-docker-images/)を参照してください。
 
-| キー                     | 必須 | タイプ  | 説明                                                                                                                                                    |
-| ---------------------- | -- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker_layer_caching | ×  | ブール値 | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`) |
-| version                | ×  | 文字列型 | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/2.0/building-docker-images/#docker-のバージョン)を参照してください。  |
+| キー                     | 必須 | タイプ  | 説明                                                                                                                                                   |
+| ---------------------- | -- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker_layer_caching | ×  | ブール値 | `True` に設定すると、リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/) が有効になります (デフォルトは `false`)。                         |
+| version                | ×  | 文字列型 | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/2.0/building-docker-images/#docker-のバージョン)を参照してください。 |
 
 
 {: class="table table-striped"}
@@ -1477,7 +1477,7 @@ workflows:
 ```
 
 
-This is effectively using a "fan-in" workflow which is described in detail on the [workflows]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) page. 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
+このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様が設定を移行するのに十分な時間が提供する予定です。
 
 
 
@@ -1519,7 +1519,7 @@ Web アプリまたは API からアクセスできるアーティファクト (
 
 {: #storetestresults }
 
-ビルドのテスト結果をアップロードおよび保存するための特別なステップです。 Test results are visible on the CircleCI web application under each build's **Test Summary** section. テスト結果を保存すると、テスト スイートのタイミング分析に役立ちます。 For more information on storing test results, see the [Collecting Test Data]({{site.baseurl}}/2.0/collect-test-data/) page.
+ビルドのテスト結果をアップロードおよび保存するための特別なステップです。 テスト結果は、CircleCI Web アプリケーションで各ビルドの**テスト サマリー**セクションに表示されます。 テスト結果を保存すると、テストスイートのタイミング分析に役立ちます。 テスト結果の保存の詳細は、[テストデータの収集]({{site.baseurl}}/ja/2.0/collect-test-data/)を参照してください。
 
 テスト結果をビルドアーティファクトとして保存することもできます。その方法については [**store_artifacts** ステップ](#storeartifacts)を参照してください。
 
@@ -1563,7 +1563,7 @@ test-results
 
 {: #persisttoworkspace }
 
-一時ファイルを永続化してワークフロー内の別のジョブで使用できるようにするための特別なステップです。 For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces/) page.
+一時ファイルを永続化してワークフロー内の別のジョブで使用できるようにするための特別なステップです。 ワークスペースの使用についての詳細は、[ワークスペースを使ったジョブ間でのデータの共有]({{site.baseurl}}/ja/2.0/workspaces)のページを参照してください。
 
 `persist_to_workspace` により、CircleCI Web アプリのストレージカスタマイズコントロールのストレージ設定が適用されます。 カスタマイズ設定がない場合は、`persist_to_workspace` によりデフォルトで 15 日に設定されます。
 
@@ -1646,7 +1646,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 {: #attachworkspace }
 
-ワークフローで使用しているワークスペースを現在のコンテナにアタッチするのに利用する特殊なステップです。 ワークスペースのすべての内容がダウンロードされ、ワークスペースがアタッチされているディレクトリにコピーされます。 For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces/) page.
+ワークフローで使用しているワークスペースを現在のコンテナにアタッチするのに利用する特殊なステップです。 ワークスペースのすべての内容がダウンロードされ、ワークスペースがアタッチされているディレクトリにコピーされます。 ワークスペースの使用についての詳細は、[ワークスペースを使ったジョブ間でのデータの共有]({{site.baseurl}}/ja/2.0/workspaces)のページを参照してください。
 
 | キー | 必須 | タイプ  | 説明                    |
 | -- | -- | ---- | --------------------- |
@@ -1677,7 +1677,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 {: #add-ssh-keys }
 
-プロジェクト設定でコンテナに対して SSH 鍵を登録する特殊なステップです。 下記のキーを使って SSH に関する設定を行えます。 For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/2.0/gh-bb-integration/#deployment-keys-and-user-keys) page.
+プロジェクト設定でコンテナに対して SSH 鍵を登録する特殊なステップです。 下記のキーを使って SSH に関する設定を行えます。 SSH キーの詳細は、[GitHub と Bitbucket の連携]({{site.baseurl}}/ja/2.0/gh-bb-integration/#deployment-keys-and-user-keys)のページを参照してください。
 
 | キー           | 必須 | タイプ | 説明                                               |
 | ------------ | -- | --- | ------------------------------------------------ |
@@ -1700,7 +1700,7 @@ steps:
 
 
 
-##### Using `pipeline` Values
+##### `pipeline` 値の使用
 
 {: #using-pipeline-values }
 
@@ -1769,19 +1769,19 @@ workflows:
 
 {: #workflows }
 
-あらゆるジョブの自動化に用います。 各ワークフローは、キーとなるワークフロー名と、値となるマップで構成します。 名前は、その `config.yml` 内で一意である必要があります。 ワークフロー構成の最上位のキーは `version` と `jobs` です。 For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page.
+あらゆるジョブの自動化に用います。 各ワークフローは、キーとなるワークフロー名と、値となるマップで構成します。 名前は、その `config.yml` 内で一意である必要があります。 ワークフロー構成の最上位のキーは `version` と `jobs` です。 詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)のページを参照してください。
 
 
 
-### **`version`** - not required for v2.1 configuration
+### **`version`** (v2.1 の設定ファイルでは不要) 
 
 {: #workflow-version }
 
-The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
+ワークフローの `version` フィールドは、サポートの終了または互換性を損なう変更について注意を促すために記述します。
 
-| キー      | 必須                         | タイプ  | 説明                    |
-| ------- | -------------------------- | ---- | --------------------- |
-| version | Y if config version is `2` | 文字列型 | 現在は `2` を指定する必要があります。 |
+| キー      | 必須                       | タイプ  | 説明                    |
+| ------- | ------------------------ | ---- | --------------------- |
+| version | 設定ファイルのバージョンが `2` の場合は Y | 文字列型 | 現在は `2` を指定する必要があります。 |
 
 
 {: class="table table-striped"}
@@ -1967,7 +1967,7 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 
 {: #type }
 
-`approval` の `type` を指定することで、その後のジョブを続行する前に手動の承認操作を求めることができるようになります。 For more information see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) page.
+`approval` の `type` を指定することで、その後のジョブを続行する前に手動の承認操作を求めることができるようになります。 詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)のページを参照してください。
 
 下記の例にある通り、Workflow が `type: approval` キーを処理するまで、ジョブは依存関係通りの順番で実行されます。
 
@@ -2021,9 +2021,9 @@ workflows:
 ```
 
 
-The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
+上記のスニペットでは、`build_server_pdfs` ジョブは、ビルド対象のブランチのパスが "server/" から始まる場合にのみ実行されます。
 
-You can read more about using regex in your config in the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches) page.
+設定ファイルでの正規表現の使い方の詳細については、[ワークフローを使ってジョブのスケジュール実行]({{ site.baseurl }}/ja/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches)を参照してください。
 
 
 
@@ -2053,9 +2053,9 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 
 {: #tags }
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグに対してワークフローは実行しません。 さらに、ジョブが (直接的または間接的に) 他のジョブを必要とする場合は、それらのジョブにタグ フィルターを指定する必要があります。
+CircleCI は明示的にタグフィルターを指定しない限り、タグに対してワークフローは実行しません。 さらに、ジョブが (直接的または間接的に) 他のジョブを必要とする場合は、それらのジョブにタグフィルターを指定する必要があります。
 
-Tags can have the keys `only` and `ignore`. スラッシュで囲むことで正規表現でタグに一致させたり、そのような文字列のリストでマップさせたりできます。 正規表現は、文字列**全体**に一致させる必要があります。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
+タグでは、`only` キーと `ignore` キーを使用できます。 スラッシュで囲むことで正規表現でタグに一致させたり、そのような文字列のリストでマップさせたりできます。 正規表現は、文字列**全体**に一致させる必要があります。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
 - `only` の値にマッチするタグはすべてジョブを実行します。
 - `ignore` の値にマッチするタグはすべてジョブを実行しません。
@@ -2079,9 +2079,9 @@ Tags can have the keys `only` and `ignore`. スラッシュで囲むことで正
 
 {: #matrix-requires-version-21 }
 
-`matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。 For more information see an example in the [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#use-matrix-jobs-to-run-multiple-os-tests)
+`matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。 詳細については、[設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/#use-matrix-jobs-to-run-multiple-os-tests)のサンプルを参照してください。
 
-**Note**: In order to use the `matrix` stanza, you must use parameterized jobs.
+**注**: `matrix` スタンザを使用するには、パラメーター化したジョブを使用する必要があります。
 
 | キー         | 必須 | 型    | 説明                                                               |
 | ---------- | -- | ---- | ---------------------------------------------------------------- |
@@ -2288,9 +2288,9 @@ workflows:
 
 {: #using-when-in-workflows }
 
-With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジックステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
 
-以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
+以下の設定例では、パイプラインパラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
 
 
@@ -2330,11 +2330,11 @@ Workflows の詳細な例と概念については「[ジョブの実行を Workf
 
 
 
-## ロジック ステートメント
+## ロジックステートメント
 
 {: #logic-statements }
 
-一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
+一部のダイナミックコンフィグ機能では、ロジックステートメントを引数として使用できます。 ロジックステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジックステートメントには次のものがあります。
 
 | タイプ                                                                                                | 引数             | `true` と評価される条件                              | 例                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML リテラル                                                                                        | なし                  | 真である                              | `true`/`42`/`"a string"`                                                 | | YAML エイリアス                                                                                          | なし                  | 解決結果が真             | *my-alias                                                                | | [パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | なし                  | 解決結果が真             | `<< pipeline.git.branch >>`                                             | | [パイプライン パラメーター]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | なし                  | 解決結果が真             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N 個のロジック ステートメント    | すべての引数が真               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N 個のロジック ステートメント    | いずれかの引数が真                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 個のロジック ステートメント     | 引数が偽             | `not: true`                                                              | | equal                                                                                               | N 個の値              | すべての引数の評価結果が等しい | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` および `value` | `value` が `pattern` に一致する          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` | 
 
@@ -2349,17 +2349,17 @@ Workflows の詳細な例と概念については「[ジョブの実行を Workf
 - 空の文字列 ("")
 - 引数を持たないステートメント
 
-上記以外の値はすべて真とみなされます。 Also note that using logic with an empty list will cause a validation error.
+上記以外の値はすべて真とみなされます。 ただし、空のリストを引数とするロジックステートメントはバリデーションエラーとなるので注意してください。
 
-ロジック ステートメントの真偽の評価は常に最上位レベルで行われ、必要に応じて強制することもできます。 また、最大 100 レベルの深さまで、引数の仕様に応じた任意の方法でネストできます。
+ロジックステートメントの真偽の評価は常に最上位レベルで行われ、必要に応じて強制することもできます。 また、最大 100 レベルの深さまで、引数の仕様に応じた任意の方法でネストできます。
 
 `matches` の `pattern` には、[Java 正規表現](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html)を使用します。 パターンは完全一致で指定する必要があります。前方一致は使用できません。 意図せぬ部分一致を防ぐため、パターンは `^` と `$` で囲むことをお勧めします。
 
-**注:** ワークフロー レベルでロジック ステートメントを使用する場合、`condition:` キーは含めないようにしてください (`condition` キーは`ジョブ` レベルのロジック ステートメント以外では必要ありません)。
+**注:** ワークフローレベルでロジックステートメントを使用する場合、`condition:` キーは含めないようにしてください (`condition` キーは`ジョブ` レベルのロジックステートメント以外では必要ありません)。
 
 
 
-### ロジック ステートメントの例
+### ロジックステートメントの例
 
 {: #logic-statement-examples }
 
