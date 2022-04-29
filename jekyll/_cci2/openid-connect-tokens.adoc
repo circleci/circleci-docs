@@ -35,7 +35,7 @@ Consult your cloud service's documentation for how to add an identity provider. 
 
 The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the Organization ID (universally unique identifier) that represents your organization.
 
-You can find your CircleCI organization ID by navigating to **Organization Settings > Contexts** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
+You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
 
 The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the Organization ID.
 
