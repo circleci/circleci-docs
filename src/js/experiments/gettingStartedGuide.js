@@ -53,7 +53,7 @@ function setUpTracking(variation) {
   if (variation === 'treatment') {
     const badges = Array.from($('.wrapper-link'));
     badges.forEach((badge, i) => {
-      // We are grabbing all the experimental badges from the landing page but the first element is unique as that links to /docs/2.0/getting-started/
+      // We are grabbing all 4 experimental badges from the landing page but the first element is unique as that links to /docs/2.0/getting-started/
       // We are grouping that first badge with the same event name thats being used for linksToGettingStarted above as we want to track the total number of visits to the treatment page of the experiment and the link the user clicked to get there
       if (i === 0) {
         badge.addEventListener('click', () => {
