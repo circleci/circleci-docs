@@ -5,7 +5,8 @@ function addNewBadgeToSidebar() {
   const isGettingStartedPage =
     window.location.pathname == '/docs/2.0/getting-started/';
   const NEW_SIDEBAR_HTML = `
-    <a id="getting-started-guide" class="${isGettingStartedPage ? 'active' : ''
+    <a id="getting-started-guide" class="${
+      isGettingStartedPage ? 'active' : ''
     }"
        style="display: flex; align-items: center"
        href="/docs/2.0/getting-started/"
@@ -26,7 +27,6 @@ function showHomePageBadges() {
 
 function setUpTracking(variation) {
   const newBadges = $("li > a[href='/docs/2.0/getting-started/']");
-  console.log(newBadges);
   if (newBadges) {
     const sidebarBadge = newBadges[1];
     sidebarBadge.addEventListener('click', () => {
