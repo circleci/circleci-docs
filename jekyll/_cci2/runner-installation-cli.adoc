@@ -225,7 +225,7 @@ Each minor version of server is compatible with a specific version of `circleci-
 | 1.0.33818-051c2fc
 |===
 
-== Additional Resources
+== Additional Resources 
 
 - https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
 - https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
