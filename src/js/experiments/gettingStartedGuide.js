@@ -24,17 +24,22 @@ function showHomePageBadges() {
 }
 
 function setUpTracking(variation) {
-  const newBadges = $("li > a[href='/docs/2.0/getting-started/']");
-  if (newBadges) {
-    const sidebarBadge = newBadges[1];
-    sidebarBadge.addEventListener('click', () => {
-      window.AnalyticsClient.trackAction('clicked-sidebar-getting-started', {
+  // Adding tracking to a tags that link to /docs/2.0/getting-started/
+  const newBadges = Array.from($("li > a[href='/docs/2.0/getting-started/']"));
+  newBadges?.forEach((link, i) => {
+    let location;
+    if (i === 0) location = 'mobile-sidebar';
+    if (i === 1) location = 'sidebar';
+    if (i === 2) location = 'homePage';
+    link?.addEventListener('click', () => {
+      window.AnalyticsClient.trackAction('clicked-gettingStarted-link', {
         variation,
+        location,
       });
     });
-  }
+  });
 
-  // Since we are using this function for both variations, we only want to add tracking for these elements if we are in treatment as they are unique for the experiment
+  // Since we are using setUpTracking for both variations, we only want to add tracking for these elements if we are in treatment as they are unique for the experiment
   if (variation === 'treatment') {
     const badges = Array.from($('.wrapper-link'));
     badges.forEach((badge) => {
