@@ -169,6 +169,9 @@ For *server v3.1.0 and up*, use the table below to find the compatible launch ag
 
 | 3.3
 | 1.0.29477-605777e
+
+| 3.4
+| 1.0.33818-051c2fc
 |===
 +
 Substitute `<launch-agent-version>` with your launch agent version for server and run the following:
@@ -217,9 +220,12 @@ Each minor version of server is compatible with a specific version of `circleci-
 
 | 3.3
 | 1.0.29477-605777e
+
+| 3.4
+| 1.0.33818-051c2fc
 |===
 
-== Additional Resources
+== Additional Resources 
 
 - https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
 - https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
