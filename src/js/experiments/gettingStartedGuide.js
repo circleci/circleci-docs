@@ -5,13 +5,11 @@ function addNewBadgeToSidebar() {
   const isGettingStartedPage =
     window.location.pathname == '/docs/2.0/getting-started/';
   const NEW_SIDEBAR_HTML = `
-    <a id="getting-started-guide" class="${
-      isGettingStartedPage ? 'active' : ''
-    }"
+    <a class="${isGettingStartedPage ? 'active' : ''}"
        style="display: flex; align-items: center"
        href="/docs/2.0/getting-started/"
        data-section="getting-started" data-proofer-ignore="">
-      <span id="getting-started-guide">Quickstart Guide</span>
+      <span>Quickstart Guide</span>
       <span class="getting-started-new-badge"> NEW </span>
     </a>
 `;
@@ -36,7 +34,7 @@ function setUpTracking(variation) {
     });
   }
 
-  // Since we are using this function for both variations, we only want to add tracking for elements if we are in treatment as they are unique for the experiment
+  // Since we are using this function for both variations, we only want to add tracking for these elements if we are in treatment as they are unique for the experiment
   if (variation === 'treatment') {
     const badges = Array.from($('.wrapper-link'));
     badges.forEach((badge) => {
