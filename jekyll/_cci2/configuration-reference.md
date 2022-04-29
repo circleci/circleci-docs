@@ -1218,7 +1218,7 @@ jobs:
               sleep 30
             fi
       # save the files your deploy step needs
-      - save_workspace:
+      - persist_to_workspace:
           root: .     # relative path to our working directory
           paths:      # file globs which will be persisted to the workspace
            - rand_*
