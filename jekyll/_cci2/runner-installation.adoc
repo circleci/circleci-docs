@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= Installing Self-Hosted Runners with the Web App
+= Installing Self-Hosted Runners with the CircleCI UI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.
@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes how to install self-hosted runners through the CircleCI web app.
+This page describes how to install self-hosted runners through the CircleCI UI.
 
 ++++
 <section style="
@@ -21,7 +21,7 @@ This page describes how to install self-hosted runners through the CircleCI web 
     padding: 15px;
     margin: 20px 0;
 ">
-    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a>! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> before this option is available to you in the UI.
+    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI UI</a>! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> before this option is available to you in the UI.
 </section>
 ++++
 
@@ -44,7 +44,7 @@ To install and run jobs, you will need to have root access, and have the followi
 
 == Self-hosted runner Terms Agreement
 
-Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app], an admin in your organization needs to navigate to *Organization Settings > Self-Hosted Runners*, and agree to the terms.
+Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI UI], an admin in your organization needs to navigate to *Organization Settings > Self-Hosted Runners*, and agree to the terms.
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
@@ -52,15 +52,15 @@ Once the terms have been accepted, **Self-Hosted Runners** will appear permanent
 
 CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
 
-== CircleCI web app installation
+== CircleCI UI installation
 
-NOTE: Currently, the web app installation is available to *cloud* customers. If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#,Self-Hosted Runners through the CLI>> page.
+NOTE: Currently, the UI-based installation is available to *cloud* customers. If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#,Self-Hosted Runners through the CLI>> page.
 
 In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
 
 You can view your runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
 
-. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hosted Runners*.
+. On the https://app.circleci.com/[CircleCI UI], navigate to *Self-Hosted Runners*.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
 +
