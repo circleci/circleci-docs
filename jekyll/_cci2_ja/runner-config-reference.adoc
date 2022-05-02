@@ -231,9 +231,9 @@ runner:
 * SSH サーバーは、公開キーの認証に設定されます。 ジョブを開始する権限をもつユーザーは誰でも SSH でそのジョブを再実行することができます。 ただし、 SSH セッション中は、再実行を開始したユーザーだけが SSH 公開キーをサーバに追加できます。
 * SSH でジョブを再実行すると、キャンセルされない限り、SSH サーバーに接続されていると *2時間* 、接続されない場合は *10分間* 、ジョブがオープンな状態になります。 この状態では、ジョブは組織の同時実行制限に反することになり、タスクエージェントは他のジョブを処理できなくなります。 そのため、デバッグが終了したら、SSH の再実行ジョブを明示的に（Web UI または CLI を通じて）キャンセルすることをお勧めします。
 
-=== Basic full configuration for self-hosted runners
+=== セルフホストランナーの全基本設定
 
-The fields you must set for a specific job to run using your self-hosted runners are:
+セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
 * `machine: true`
 * `resource_class: your-namespace/your-resource`
@@ -253,4 +253,4 @@ jobs:
     steps:
       - run: echo "Hi I'm on Runners!"
 ```
-The job will then execute using your self-hosted runner when you push the config to your VCS provider.
+この設定ファイルを VCS プロバイダーにプッシュすると、セルフホストランナーを使ってジョブが実行されます。
