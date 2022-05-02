@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI ランナーをスケールする方法
+description: Learn how to scale CircleCI self-hosted runners.
 version:
-- クラウド
+- Cloud
 - Server v3.x
 ---
-= ランナーのスケーリング
+= Scaling Self-hosted Runners
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,7 +16,7 @@ toc::[]
 
 == はじめに
 
-CircleCI ランナー用に固定のコンピューティングフリートを保持するには、ジョブがキューに入る率に応じてワークロードが変動するため、不要なコストが発生する可能性があります。 このコストを削減するために、コンピューティングフリートを需要に応じてスケールすることができます。
+Maintaining a fixed compute fleet for CircleCI self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. このコストを削減するために、コンピューティングフリートを需要に応じてスケールすることができます。
 
 == データのスケーリング
 
