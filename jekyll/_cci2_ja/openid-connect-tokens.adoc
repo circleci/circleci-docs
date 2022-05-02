@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (OIDC) token in an environment variable. ジョブは、CircleCI に保存されている永続的な認証情報を使用せずに、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
+CircleCI は、<<contexts#,コンテキスト>>を使用するジョブの環境変数で OpenID Connect ID トークンを提供します。 ジョブは、CircleCI に保存されている永続的な認証情報を使用せずに、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
 
 toc::[]
 
@@ -32,11 +32,11 @@ workflows:
 
 クラウドサービスのドキュメントで、 ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、 https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
 
-https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー] は、組織一意のものです。 The URL is `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the Organization ID (universally unique identifier) that represents your organization.
+https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー] は、組織一意のものです。 URL は、`\https://oidc.circleci.com/org/<organization-id>` で、`<organization-id>`  は、お客様の組織を表す組織 ID (UUID) です。
 
 お客様の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で  **Organization Settings > Contexts** に移動し、ページ上部で **Organization ID** を探します。
 
-The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the Organization ID.
+CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
 == OpenID Connect ID トークンの形式
 
@@ -80,7 +80,7 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |ジョブで使用されるコンテキストを表す UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
 |===
 
-== Authenticate jobs with cloud providers
+== クラウドプロバイダーを使ったジョブの認証
 
 The following instructions are for:
 
