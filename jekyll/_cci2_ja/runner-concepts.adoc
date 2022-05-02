@@ -4,49 +4,52 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Runner Concepts
+= Runner のコンセプト
+ 
+No context
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Conceptual Overview for CircleCI self-hosted runner.
+:page-description: CircleCI セルフホストランナーのコンセプトの概要
 :icons: font
 :toc: macro
 :toc-title:
 
 toc::[]
 
-== Namespaces and resource classes
+== 名前空間とリソースクラス
 
-Self-hosted runners require both a namespace and a resource class.
+セルフホストランナーには名前空間とリソースクラスが必要です。
 
-A **namespace** is a unique identifier claimed by a CircleCI organization. Each CircleCI organization can claim one unique and immutable namespace. Typically, the namespace chosen is the lowercase representation of your organization's name on your VCS (this is suggested).
+ **名前空間** は、CircleCI 組織が要求する一意の識別子です。 各組織が要求できる一意の名前空間は 1 つのみで、後から変更することはできません。 通常、選択される名前空間は VCS の組織名を小文字で表したものです (推奨)。
 
-A **resource class** is a label to match your CircleCI job with a type of runner that is identified to process that job. The first part of the resource class is your organization's namespace. For example, a CircleCI resource class could be `circleci/documentation`. Resources classes are created when you go through the process of installing self-hosted runners.
+**リソースクラス** は、CircleCI ジョブとそのジョブを処理するために識別されたランナーのタイプを一致させるためのラベルです。 リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation`  などです。 リソースクラスは、セルフホストランナーのインストールプロセスを実行する際に作成されます。
 
-Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific places. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
+リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定の場所にジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、　`orgname/macOS` と `orgname/linux` のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
 
-Optionally, you can give your resource class a description.
+オプションで、リソースクラスに説明をつけることもできます。
 
-Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+すでに <<orb-intro#,orbs>> を使用されているお客様は、既存の名前空間があるのでこ注意ください。 セルフホストランナーの名前空間は、Orb で使用しているのと同じ名前空間です。 名前空間を変更する必要がある場合は、<a data-type="default" href="https://support.circleci.com/hc/ja-jp">サポートにお問い合わせください。
 
-== Launch agent and task agent
+== ローンチ エージェントとタスクエージェント
 
-The self-hosted runner consists of two components: the launch agent and the task agent.
+セルフホストランナーは、ローンチエージェントとタスクエージェントという 2 つの要素で構成されます。
 
-* launch agent - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
-* task agent - handles running a task retrieved and configured by the launch agent
+* ローンチエージェント (launch-agent) - タスクの実行 (1 つのジョブの並列実行) に必要な情報の収集と、タスクエージェントプロセスのダウンロードおよび起動を行います。
+* タスクエージェント (task-agent) - ローンチエージェントによって取得、設定されたタスクの実行を行います。
 
-The system has been designed to allow admins to configure the task agent to run with a lower level of privileges than the launch agent. Any user who is able to execute a job will be able to gain the same privileges as task agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as `root`, but task agent will run as `circleci`).
+この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるように設定することができます。 ジョブの実行を許可したすべてのユーザーには、task agent と同じ権限が付与されます。 下記はこのアプローチに基づいた推奨されるデプロイです (ローンチエージェントは `root` として、タスクエージェントは `circleci` として実行されます)。
 
-== Self-hosted runner concurrency
+== セルフホストランナーの同時実行
 
-スループットを向上させるために、単一のビルドプロセスを別のステップに分割し、同時に（一度に）実行することができます。
- CircleCI offers the flexibility of deploying work to self-hosted runners across all your resource classes.
+スループットを向上させるために、一つのビルドプロセスを複数のステップに分割し、同時に（一度に）実行することができます。
+ CircleCI では、すべてのリソースクラスのセルフホストランナーに柔軟に作業をデプロイすることができます。
 
-Rather than limit the total number of registered self-hosted runners, CircleCI self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your resource classes.
+CircleCI セルフホストランナーは、登録済みセルフホストランナーの総数を制限するのではなく、リソースクラス全体のセルフホストランナージョブ (タスク) の総数を制限しています。
+
 
 == SSH を使用したデバッグ
 
-CircleCI self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+CircleCI セルフホストランナーでは、デバッグのために SSHでジョブを再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
 NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner].
 
