@@ -1,0 +1,64 @@
+---
+
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+---
+= Creating a Project in CircleCI
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "Learn how to create a project in CircleCI."
+:icons: font
+:toc: macro
+:toc-title:
+
+This guide gets you started with creating a project in CircleCI.
+
+toc::[]
+
+== Step One: Link your VCS with CircleCI
+
+If you have not done so already, <<first-steps#,sign up with CircleCI>> and select your Version Control System (VCS). メールアドレスで登録することもできます。
+
+A CircleCI project must be linked with an existing repo in your VCS. Make sure you have a repo and that you have authorized CircleCI to access it (in GitHub, you have the option to block CircleCI from accessing your private repositories).
+
+== Step Two: Create a project in CircleCI
+
+Follow these steps to create a new project in CircleCI:
+
+. In CircleCI, click **Projects** in the sidebar.
+. Find your project and click the blue **Set Up Project** button next to it.
++
+image::config-set-up-project.png[Set up Project]
++
+If you cannot see your project, check you have selected the correct organization in the top left-hand corner of CircleCI.
++
+image::cci-organizations.png[Select Organization]
+
+== Step Three: Specify a config file
+
+Once you have set up your project, you will be prompted to provide a `config.yml` file.
+
+. From the pop-up window, select your preferred option. You can either:
+* Include a `config.yml` in the `.circleci` directory of your repo.
+* Commit a starter CI pipeline to a new branch of your repo.
+* Use an editable `config.yml` template.
++
+If you choose the starter CI pipeline, a sample `config.yml` file is created and committed to a `circleci-project-setup` branch in your repo.
++
+For guidance on creating a `config.yml` file, see <<config-intro#,Configuration Introduction>>.
+. **Set Up Project** ボタンをクリックします。
+
+CircleCI then uses the specified `config.yml` file to run your pipeline. その出力は、CircleCI ダッシュボードで確認できます。
+
+To make changes to your pipeline, either edit the `.circleci/config.yml` file in your repo, or click the ellipsis next your project in the Dashboard and choose **Configuration File**.
+
+image::edit-config-file.png[Edit Configuration File]
+
+This opens the CircleCI Configuration Editor, from where you can edit and commit your `config.yml` file.
+
+== 関連項目
+
+* <<config-intro#,Configuration Introduction>>
+* <<config-editor#,Using the CircleCI Configuration Editor>>
