@@ -30,7 +30,7 @@ NOTE: ローンチエージェントは、環境変数を使って設定する�
 === api.auth_token
 `$LAUNCH_AGENT_API_AUTH_TOKEN`
 
-CircleCI へのローンチエージェントを識別するために使用されるトークンで、xref:local-cli.adoc[CircleCI CLI]により生成することができます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
+CircleCI へのローンチエージェントを識別するために使用されるトークンで、xref:local-cli.adoc[CircleCI CLI] により生成することができます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
 
 === api.url
 `$LAUNCH_AGENT_API_URL`
