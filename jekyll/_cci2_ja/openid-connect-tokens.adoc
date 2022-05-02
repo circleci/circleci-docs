@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI は、<<contexts#,コンテキスト>>を使用するジョブの環境変数において OpenID Connect ID トークンを提供します。 ジョブは、CircleCI に保存されている永続的な認証情報を使用せずに、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
+CircleCI は、<<contexts#,コンテキスト>>を使用するジョブの環境変数で OpenID Connect ID トークンを提供します。 ジョブは、CircleCI に保存されている永続的な認証情報を使用せずに、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
 
 toc::[]
 
