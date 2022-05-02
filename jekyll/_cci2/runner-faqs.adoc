@@ -89,4 +89,4 @@ No, runner resource classes cannot be used by jobs that are not associated with 
 
 == How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
 
-If a self-hosted runner has not reported a "heartbeat" to CircleCI for three days or more, it will not show up in the inventory page on app.circleci.com.
+If a self-hosted runner has not reported a "heartbeat" to CircleCI for three or more days, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
