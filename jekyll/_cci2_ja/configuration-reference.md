@@ -7,21 +7,21 @@ order: 20
 redirect_from: 2.0/configuration
 readtime: false
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 suggested:
   - 
-    title: 6 つの構成オプション
+    title: 6 つの設定オプション
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
   - 
-    title: ダイナミック コンフィグの紹介
+    title: ダイナミックコンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
   - 
     title: ダイナミック コンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
-    title: ローカル CLI を使用した設定のバリデーション
+    title: ローカル CLI を使用した設定の確認
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
     title: ジョブをトリガーする方法
@@ -267,35 +267,35 @@ Docker Hub など、一部のレジストリでは、匿名ユーザーによる
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty # プライマリ コンテナ
+      - image: buildpack-deps:trusty # primary container
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           ENV: CI
 
       - image: mongo:2.6.8
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [--smallfiles]
 
-      - image: postgres:9.4.1
+      - image: postgres:14.2
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: acme-private/private-image:321
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 
@@ -2460,13 +2460,13 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [mongod, --smallfiles]
 
-      - image: postgres:9.4.1
+      - image: postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # some containers require setting environment variables
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
         auth:
@@ -2576,7 +2576,6 @@ workflows:
           filters:
             branches:
               only: main
-
 ```
 
 
