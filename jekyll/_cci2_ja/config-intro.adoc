@@ -35,7 +35,7 @@ CircleCI は *Configuration as Code* を貫いています。 その結果とし
 
 CircleCI では、オンデマンドのシェルによりコマンドを実行します。 パート 1 では、ビルドをセットアップし、シェルコマンドを実行します。
 
-. If you have not done so already, <<first-steps#,sign up with CircleCI>> and select your Version Control System (VCS). メールアドレスで登録することもできます。
+. ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、バージョン管理システム (VCS) を選択します。 メールアドレスで登録することもできます。
 . プロジェクトのルートに、`.circleci` フォルダーを作成します。 フォルダー名は、CircleCI が認識できるように、必ずピリオドで始めてください。
 . `config.yml` ファイルを `.circleci` フォルダー内に作成し、以下のコードをペーストします。
 +
