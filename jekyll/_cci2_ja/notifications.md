@@ -165,5 +165,5 @@ workflows:
 
 ## 関連項目
 
-- [Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)
-- [Slack Orb の使用]({{ site.baseurl }}/2.0/slack-orb-tutorial/)
+- [Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro/)
+- [Slack Orb の使用]({{ site.baseurl }}/ja/2.0/slack-orb-tutorial/)
