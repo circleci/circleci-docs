@@ -1,9 +1,9 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= Self-hosted Runner Configuration reference
+= セルフホストランナーの設定のリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,9 +12,9 @@ version:
 
 toc::[]
 
-== Self-hosted runner configuration reference
+== セルフホストランナーの設定のリファレンス
 
-ローンチ エージェントの設定や、ローンチエージェントとサーバーの通信方法およびタスク エージェントの起動方法の設定は、YAML ファイルを使用して行います。
+ローンチエージェントの設定や、ローンチエージェントとサーバーの通信方法およびタスクエージェントの起動方法の設定は、YAML ファイルを使用して行います。
 
 設定ファイルの形式は次のとおりです。下記で説明する各種パラメーターを使用します。
 
@@ -35,7 +35,7 @@ CircleCI へのローンチエージェントを識別するために使用さ�
 === api.url
 `$LAUNCH_AGENT_API_URL`
 
-This is a fully qualified URL used by self-hosted runners to communicate with CircleCI. This variable is only required for self-hosted runners installed for the 3.2 or later version of server.
+セルフホストランナーが CircleCI との通信に使用する完全認証された URL です。 この変数は、3.2 以降のバージョンのサーバーがインストールされたセルフホストランナーのみ要求されます。
 
 例
 
@@ -135,7 +135,7 @@ runner:
 === runner.mode
 `$LAUNCH_AGENT_RUNNER_MODE`
 
-This parameter allows you to specify whether you want to terminate this self-hosted runner instance upon completion of a job (`single-task`), or to continuously poll for new available jobs (`continuous`).
+このパラメータにより、ジョブが完了した時点でセルフホストランナーインスタンスを終了させるか (`single-task`)、利用可能な新しいジョブを継続的にポーリングするか (`continuous`) を指定できます。
 
 値の例:
 
@@ -203,7 +203,7 @@ runner:
 
 このパラメーターにより、ローンチエージェントによる自動更新が無効になり、 CircleCI への新しいバージョンの確認要求を停止します。 バージョンが固定されるサーバーでは、このパラメーターは`true`に設定することをお勧めします。
 
-Note: Setting this parameter will require self-hosted runner installations to be manually upgraded to receive new features, security updates, and bug fixes.
+注: このパラメーターを設定すると、セルフホストランナーが手動でアップグレードされ、新機能、セキュリティーに関するアップデート、及びバグの修正点を受け取るようになります。
 
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
@@ -212,7 +212,7 @@ Note: Setting this parameter will require self-hosted runner installations to be
 
 アドレスは、 `*host:port*` という形式で、再実行されたジョブの [Enable SSH (SSHを有効にする)] および [Wait for SSH (SSHを待機する)] セクションに表示されます。
 
-NOTE: `runner.ssh.advertise_addr`の変数の存在により「SSH でジョブを再実行する」ことが可能になりますが、この変数が保持する値は Web UI での公開のみを目的としています。 The address does not need to match the actual host and port of the machine that the self-hosted runner is installed on and can be a proxy configuration.
+NOTE: `runner.ssh.advertise_addr`の変数の存在により「SSH でジョブを再実行する」ことが可能になりますが、この変数が保持する値は Web UI での公開のみを目的としています。 このアドレスは、実際のホストとセルフホストランナーがインストールされているマシンのポートに一致する必要はなく、プロキシ設定であっても構いません。
 
 例
 
@@ -224,7 +224,7 @@ runner:
 
 ==== SSH デバッグを有効にする前に注意すべき事項
 
-タスクエージェントは、[Rerun job with SSH (SSH でジョブを再実行する)]オプションを有効にすると、専用のポートで内蔵の SSH サーバーとエージェントを実行します。 This feature will not affect any other SSH servers or agents on the system that the self-hosted runner is installed on.
+タスクエージェントは、[Rerun job with SSH (SSH でジョブを再実行する)]オプションを有効にすると、専用のポートで内蔵の SSH サーバーとエージェントを実行します。 この機能は、セルフホストランナーがインストールされているシステム上の他の SSH サーバーやエージェントには影響しません。
 
 * SSH サーバーが使用するホストポートは、現在、`*54782*`に固定されています。 このポートがブロックされておらず、SSH 接続が可能であることを確認してください。 同じホストに複数のローンチエージェントがインストールされていると、ポートの競合が発生する場合があります。
 * The SSH server will inherit the same user privileges and associated access authorizations as the task agent, defined by the <<#runner-command_prefix, runner.command_prefix parameter>>.
