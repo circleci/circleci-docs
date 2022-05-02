@@ -18,7 +18,7 @@ suggested:
     title: ダイナミックコンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
   - 
-    title: ダイナミック コンフィグの使用
+    title: ダイナミックコンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
     title: ローカル CLI を使用した設定の確認
