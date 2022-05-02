@@ -4,9 +4,7 @@ version:
 - Cloud
 - Server v3.x
 ---
-= Runner のコンセプト
- 
-No context
+= ランナーのコンセプト
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI セルフホストランナーのコンセプトの概要
@@ -18,13 +16,13 @@ toc::[]
 
 == 名前空間とリソースクラス
 
-セルフホストランナーには名前空間とリソースクラスが必要です。
+セルフホストランナーには名前空間とリソースクラスの両方が必要です。
 
- **名前空間** は、CircleCI 組織が要求する一意の識別子です。 各組織が要求できる一意の名前空間は 1 つのみで、後から変更することはできません。 通常、選択される名前空間は VCS の組織名を小文字で表したものです (推奨)。
+ **名前空間** は、CircleCI 組織が要求する一意の識別子です。 各組織が要求できる一意の名前空間は 1 つだけで、後から変更することはできません。 通常、選択される名前空間は VCS の組織名を小文字で表したものです (推奨)。
 
 **リソースクラス** は、CircleCI ジョブとそのジョブを処理するために識別されたランナーのタイプを一致させるためのラベルです。 リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation`  などです。 リソースクラスは、セルフホストランナーのインストールプロセスを実行する際に作成されます。
 
-リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定の場所にジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、　`orgname/macOS` と `orgname/linux` のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
+リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定の場所にジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、 `orgname/macOS` と `orgname/linux` のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
 
 オプションで、リソースクラスに説明をつけることもできます。
 
@@ -37,7 +35,7 @@ toc::[]
 * ローンチエージェント (launch-agent) - タスクの実行 (1 つのジョブの並列実行) に必要な情報の収集と、タスクエージェントプロセスのダウンロードおよび起動を行います。
 * タスクエージェント (task-agent) - ローンチエージェントによって取得、設定されたタスクの実行を行います。
 
-この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるように設定することができます。 ジョブの実行を許可したすべてのユーザーには、task agent と同じ権限が付与されます。 下記はこのアプローチに基づいた推奨されるデプロイです (ローンチエージェントは `root` として、タスクエージェントは `circleci` として実行されます)。
+この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるように設定することができます。 ジョブの実行を許可したすべてのユーザーには、タスクエージェントと同じ権限が付与されます。 下記はこのアプローチに基づいた推奨デプロイです (ローンチエージェントは `root` として、タスクエージェントは `circleci` として実行されます)。
 
 == セルフホストランナーの同時実行
 
@@ -49,17 +47,17 @@ CircleCI セルフホストランナーは、登録済みセルフホストラ�
 
 == SSH を使用したデバッグ
 
-CircleCI セルフホストランナーでは、デバッグのために SSHでジョブを再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+CircleCI セルフホストランナーでは、デバッグのために SSHでジョブを再実行することが可能です。 この機能の使用に関する詳細は、<<ssh-access-jobs#,SSH を使用したデバッグ>>をご覧ください。
 
-NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner].
+NOTE:  'SSH でジョブを再実行する'  機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-config-reference.adoc#runner-ssh-advertise_addr[CircleCI セルフホストランナーのインストール] を参照してください。
 
-== パブリック リポジトリ
+== パブリックリポジトリ
 
-CircleCI self-hosted runners are not recommended for use with public projects that have the "Build forked pull requests" setting enabled. このようなパブリック プロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプル リクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 Untrusted jobs running on your CircleCI self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. このようなリスクには、次のものがあります。
+CircleCI ランナーは、[Build Forked Pull Requests (フォークされたプル クエストをビルド)] 設定が有効になっているパブリックプロジェクトでの使用は推奨されません。 このようなパブリックプロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプルリクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 CircleCI セルフホストランナーで信頼されていないジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティリスクが生じます。 このようなリスクには、次のものがあります。
 
 * 悪意のあるプログラムがマシンで実行される。
-* Escaping the machine's self-hosted runner sandbox
-* Exposing access to the machine's network environment
+* マシンのセルフホストランナーサンドボックスの外部で操作が行われる。
+* マシンのネットワーク環境に外部からアクセスされる。
 * 不要なデータや危険なデータがマシンに保持される。
 
-NOTE: デフォルトでは、組織は名前空間を 1つだけ要求できるように制限されています。 これは、名前空間の占拠や紛らわしさを制限するためのポリシーです。 If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+NOTE: デフォルトでは、組織は名前空間を 1つだけ要求できるように制限されています。 これは、名前空間の占拠や紛らわしさを制限するためのポリシーです。 名前空間を変更する必要がある場合は、<a data-type="default" href="https://support.circleci.com/hc/ja-jp">サポートにお問い合わせください。
