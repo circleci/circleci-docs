@@ -146,15 +146,19 @@ en:
           - 
           - 
           - 
+            name: Windows へのインストール方法
           - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
             link: 2.0/runner-api/
           - 
           - 
           - 
-            name: Runner API
+          - 
             link: 2.0/runner-api/
           - 
-            name: Runner in Server
             link: 2.0/runner-server/
           - 
   - 
