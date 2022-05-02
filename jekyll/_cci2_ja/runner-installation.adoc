@@ -1,16 +1,16 @@
 ---
 version:
-- Cloud
+- クラウド
 ---
-= Installing Self-Hosted Runners with the Web App
+= Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.
+:page-description: Find resources to install CircleCI self-hosted runners on Linux、macOS、Docker、Windows の各プラットフォームで CircleCI セルフホストランナーをインストールするためのリソースについて
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install self-hosted runners through the CircleCI web app.
+ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。
 
 ++++
 <section style="
@@ -29,42 +29,42 @@ toc::[]
 
 == 前提条件
 
-To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+ジョブのインストールや実行には、ルートアクセスが必要です。また、以下のユーティリティとツールをシステムにインストールする必要があります。
 
-* https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
-* https://curl.se/[curl] (installed by default on macOS)
-* sha256sum (if not pre-installed):
-  - `brew install coreutils` for macOS (requires https://brew.sh/[Homebrew])
-  - `sudo apt install coreutils` for Ubuntu/Debain
-  - `sudo yum install coreutils` for Red Hat
+* https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
+* https://curl.se/[curl] (macOS はデフォルトでインストール済み)
+* sha256sum (プリインストールされていない場合):
+  - macOS の場合は `brew install coreutils`  (https://brew.sh/[Homebrew]が必要)
+  - Ubuntu/Debain の場合は、`sudo apt install coreutils`
+  - Red Hat の場合は、`sudo yum install coreutils`
 * https://www.gnu.org/software/tar/[tar]
 * https://www.gnu.org/software/gzip/[gzip]
-* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
-* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
-== Self-hosted runner Terms Agreement
+== セルフホストランナーの利用条件
 
-Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app], an admin in your organization needs to navigate to *Organization Settings > Self-Hosted Runners*, and agree to the terms.
+セルフホストランナーを利用する前に、https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件]に同意する必要があります。  https://app.circleci.com/[CircleCI Web アプリ]の *セルフホストランナー* セクションにアクセスするには、組織の管理者が*Organization Settings > Self-Hosted Runners* に移動し、条件に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
-Once the terms have been accepted, **Self-Hosted Runners** will appear permanently in the side navigation.
+条件が承認されたら、*セルフホストランナー*はサイドナビゲーションバーに常に表示されます。
 
-CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
+CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS のhttps://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
 
-== CircleCI web app installation
+== CircleCI Web アプリのインストール
 
-NOTE: Currently, the web app installation is available to *cloud* customers. If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#, Self-Hosted Runners through the CLI>> page.
+NOTE: 現在、Web アプリのインストールは、*クラウド版の*お客様のみ可能です。 If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#, Self-Hosted Runners through the CLI>> page.
 
-In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes, Concepts>> page.
+セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。 You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes, Concepts>> page.
 
-You can view your runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
+お客様のランナーは、インベントリのページで左のナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
-. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hostd Runners*.
+. https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
 +
-. Create a namespace and resource class for your organization's self-hosted runners. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
+. 組織のセルフホストランナーの名前空間とリソースクラスを作成します。 *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
 +
