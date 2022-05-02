@@ -14,8 +14,9 @@ version:
 
 CircleCI プロジェクトは、関連付けられているコードリポジトリの名前を共有し、 [CircleCI Web アプリ](https://app.circleci.com/) の **Projects** のページに表示されます。 プロジェクトは、 **Set Up Project** ボタンを使用して追加します。
 
-**Projects** のページでは、VCS で所有者になっているプロジェクトをセットアップするか、組織内のプロジェクトをフォローすることで、パイプラインにアクセスし、プロジェクトのステータスに関する [メール通知]({{site.baseurl}}/2.0/notifications/) を受け取ることができます。
+On the **Projects** page, you can either set up any project you own in your Version Control System (VCS), or follow any project in your organization to access its pipelines and to subscribe to [email notifications]({{site.baseurl}}/2.0/notifications/) for the project's status.
 
+For step-by-step guidance, see [Creating a Project in CircleCI]({{site.baseurl}}/2.0/create-project/).
 ## プロジェクトダッシュボード
 {: #projects-dashboard }
 
