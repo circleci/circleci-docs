@@ -5,7 +5,7 @@ short-title: "Orb のコンセプト"
 description: "Orb のコンセプトの概要"
 categories:
   - はじめよう
-order: 1
+redirect_from: 2.0/using-orbs
 verison:
   - クラウド
   - Server v3.x
@@ -140,13 +140,13 @@ workflows:
 ### 使用例
 {: #usage-examples }
 
-[Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクトの設定に直接使用するものではありませんが、ユーザーが自分の設定における Orb の最適な使用方法を共有するための一種の Orb メタデータであり、[Orbレジストリ](https://circleci.com/developer/orbs)に参照用に表示されています。 以下は使用例のサンプルです。
+[Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクト設定で直接使用するものではありませんが、設定で Orb を最大限に活用する方法を共有するための Orb メタデータの一つです。 参照用に、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に下記のようなサンプルが表示されます。 以下は使用例のサンプルです。
 
 ```yaml
-# ソース https://github.com/circleci-public/orb-project-template/blob/master/src/examples/example.yml
+# Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
 
 description: >
-  使用例サンプルの説明
+  Sample example description.
 usage:
   version: 2.1
   orbs:
@@ -293,18 +293,18 @@ Orb をパブリッシュする方法は 2 つあります。パブリックま�
 
 すべてのCircleCI Orb は単体のYAMLファイルで、通常は `orb.yml`という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)の一部であり、別々のYAMLファイルを「パッケージ化」したり、凝縮したりするために使用されます。
 
-Orb 開発キットを使用している場合、オーブのパッケージ化は、付属のCI/CDパイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
+Orb 開発キットをお使いの場合、Orb のパッケージ化は、付属のCI/CD パイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
 {: class="alert alert-warning"}
 
 **_例: Orb プロジェクトの構造_**
 
-| タイプ                       | 名前                                                                                             |
-| ------------------------- | ---------------------------------------------------------------------------------------------- |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands)   |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples)   |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors) |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs)           |
-| <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
+| タイプ                       | 名前                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/commands)   |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples)   |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/jobs)           |
+| <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
 Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml)ファイルが必要です。 `@` は、Orb プロジェクトの _ルート_ を示しています。 同じディレクトリ内に、 [コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、 [ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)、 [Executor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors)、および [サンプル]({{site.baseurl}}/2.0/orb-concepts/#usage-examples)など、Orb コンポーネントの種類ごとに追加のディレクトリを含めることができます。 追加のファイルやフォルダは安全に無視されます。
@@ -315,7 +315,7 @@ Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-au
 
 `circleci orb pack <dir> > orb.yml`
 
-Orb 開発キットをお使いの場合、このステップは自動的に処理されます。
+Orb 開発キットをお使いの場合、この手順は自動的に処理されます。
 
 ## ファイル インクルード構文
 {: #file-include-syntax }

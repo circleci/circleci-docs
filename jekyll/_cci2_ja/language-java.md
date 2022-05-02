@@ -92,7 +92,6 @@ jobs: # a collection of steps
           path: build/test-results/test
       - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/test-results/test
-          when: always
       - run:
           name: Assemble JAR
           command: |
@@ -240,7 +239,6 @@ version: 2
           path: build/test-results/test
       - store_artifacts:
           path: build/test-results/test
-          when: always
 ```
 {% endraw %}
 

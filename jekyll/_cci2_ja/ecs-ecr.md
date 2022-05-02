@@ -59,10 +59,10 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | AWS_ACCESS_KEY_ID        | AWS のセキュリティ認証情報です。                                                                                                                           |
 | AWS_SECRET_ACCESS_KEY    | AWS のセキュリティ認証情報です。                                                                                                                           |
-| AWS_DEFAULT_REGION       | AWS CLI によって使用されます。                                                                                                                          |
+| AWS_REGION                 | AWS CLI によって使用されます。                                                                                                                          |
 | AWS_ACCOUNT_ID           | デプロイに必要です。 [AWS アカウント ID はこちらで確認してください](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId)。 |
 | AWS_RESOURCE_NAME_PREFIX | 必須の AWS リソースのプレフィックスです。 `terraform_setup/terraform.tfvars` の `aws_resource_prefix` の値に対応する必要があります。                                           |
-| AWS_ECR_ACCOUNT_URL      | AWS アカウント ({awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com など) にマッピングされる Amazon ECR アカウントの URL です。                                           |
+| AWS_ECR_REGISTRY_ID      | The 12 digit AWS id associated with the ECR account.                                                                                         |
 {:class="table table-striped"}
 
 ## 設定ファイルの詳細
