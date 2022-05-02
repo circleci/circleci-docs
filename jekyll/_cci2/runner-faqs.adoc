@@ -86,3 +86,7 @@ circleci runner resource-class delete <resource-class>
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
 
 No, runner resource classes cannot be used by jobs that are not associated with the organization that owns the runner resource classes. Only forks of your OSS project that _are_ a part of your organization may use the organization's self-hosted runners.
+
+== How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
+
+If a self-hosted runner has not reported a "heartbeat" to CircleCI for three days or more, it will not show up in the inventory page on app.circleci.com.
