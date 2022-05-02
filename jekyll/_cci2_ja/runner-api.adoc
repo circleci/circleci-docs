@@ -3,21 +3,21 @@ version:
 - Cloud
 - Server v3.x
 ---
-= CircleCI Runner API
+= CircleCI Self-hosted Runner API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document contains all the external facing endpoints for the CircleCI runner API.
+:page-description: This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
+This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
 
 toc::[]
 
 == 認証方法
 
-CircleCI ランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+The CircleCI self-hosted runner API contains different authentication methods. 使用できる認証方法は、エンドポイントや用途によって異なります。 Also, one endpoint may accept multiple authentication methods.
 
 === Circle-Token (個人認証)
 
@@ -60,7 +60,7 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 
 === GET /api/v2/runner
 
-指定したパラメーターに基づいて利用可能なランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
+Lists the available self-hosted runners based on the specified parameters. フィルター用パラメーターを 1つ以上使用することが必須です。
 
 ==== 認証方法
 
@@ -84,13 +84,13 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 | string
 | クエリ
 | 省略可
-| 指定したリソース クラスでランナーの一覧を絞り込みます。
+| filters the list of self-hosted runners by specific resource class.
 
 | namespace
 | string
 | クエリ
 | 省略可
-| 指定した名前空間でランナーの一覧を絞り込みます。
+| filters the list of self-hosted runners by namespace.
 |===
 
 ==== サンプル
@@ -132,37 +132,37 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |items
 |オブジェクト配列
 |true
-|ランナーの配列
+|array containing the self-hosted runners
 
 |resource_class
 |string
 |true
-|ランナーのリソース クラス
+|self-hosted runner resource class
 
 |hostname
 |string
 |true
-|ランナーのホスト名
+|self-hosted runner hostname
 
 |name
 |string
 |true
-|ランナー名
+|self-hosted runner name
 
 |first_connected
 |文字列 (日付と時刻)
 |true
-|ランナーが最初に接続した日時
+|first time the self-hosted runner was connected
 
 |last_connected
 |文字列 (日付と時刻)
 |true
-|ランナーが最後に接続した日時
+|last time the self-hosted runner was connected
 
 |last_used
 |文字列 (日付と時刻)
 |true
-|ジョブの実行にランナーを最後に使用した日時
+|last time the self-hosted runner was used to run a job
 
 |version
 |string
