@@ -13,7 +13,7 @@ version:
 * TOC
 {:toc}
 
-Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your configuration.
+Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. Visit the [Orbs Registry](https://circleci.com/developer/orbs) on the CircleCI Developer Hub to search for orbs to help simplify your configuration.
 
 Examples of reusable snippets that can be included in orbs are [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [executors]({{site.baseurl}}/2.0/reusing-config/#executor), as well as Node.js and its package managers.
 
