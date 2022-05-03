@@ -64,7 +64,7 @@ To get started, you need to get the sample app building as a project on CircleCI
 +
 . You will then see a list of sample configurations. Scroll down within the window until you see **Node (Advanced)**, then click **Select**.
 +
-image::test-splitting-sample-configs.png[Sample config for Node]
+image::{{site.baseurl}}/assets/img/docs/test-splitting-sample-configs.png[Sample config for Node]
 +
 . You'll be taken to the configuration. The project actually uses Yarn, so you'll need to edit the following steps so that they use `yarn` instead of `npm`, like so:
 +
@@ -85,7 +85,7 @@ steps:
 +
 After you've made these changes, go ahead and click the **Commit and Run** button. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. 
 +
-image::test-splitting-first-pipeline.png[Successful pipeline run]
+image::{{site.baseurl}}/assets/img/docs/test-splitting-first-pipeline.png[Successful pipeline run]
 +
 Feel free to take a look at the steps run in the pipeline by expanding the green Success status and opening the `build-and-test` job.
 
@@ -213,7 +213,7 @@ In the CircleCI web app, take a look at the steps in the recently triggered pipe
 
 * You should also now see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment is labeled by its index number (so you have numbers 0 through 4). You can click on each environment or node to see the individual steps in each parallel run. The environment you are viewing will be highlighted in green.
 +
-image::test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
+image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
 +
 You might also notice that the parallel run times are not all equal, nor is the overall run time of the pipeline cut down to precisely 1/5. Each executor runs the same steps, but there is a difference in terms of which environment runs which tests. There may also be some variation in how long each executor takes to spin up. 
 +
@@ -228,11 +228,11 @@ Since this is the first time we are storing test data from the pipeline, CircleC
 
 * Lastly, open the **Artifacts** tab in the job. You'll see a test result file uploaded in each parallel run. 
 +
-image::test-splitting-artifacts.png[Artifacts tab where test results can be accessed]
+image::{{site.baseurl}}/assets/img/docs/test-splitting-artifacts.png[Artifacts tab where test results can be accessed]
 +
 You can open up each file to see the tests that were executed, and their respective results.
 +
-image::test-splitting-junitxml.png[Contents of JunitXML test result file]
+image::{{site.baseurl}}/assets/img/docs/test-splitting-junitxml.png[Contents of JunitXML test result file]
 
 == Step Four - Trigger pipeline that uses test timing data
 
@@ -242,7 +242,7 @@ For example, you can try upgrading to a newer version of the Node orb, such as `
 
 Open the pipeline in the web app, and view the **Test application** step. This time, you should see `Autodetected filename timings.` in the output. This means that CircleCI is now splitting tests based on available timing data from preceding runs.
 
-image::test-splitting-by-timing.png[Testing step showing split by timing]
+image::{{site.baseurl}}/assets/img/docs/test-splitting-by-timing.png[Testing step showing split by timing]
 
 == Conclusion
 
