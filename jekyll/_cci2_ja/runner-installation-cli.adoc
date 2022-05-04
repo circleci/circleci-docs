@@ -35,58 +35,58 @@ toc::[]
 
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
-* <<local-cli#,CircleCI CLI>>:   **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して、CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
-* https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
-* https://curl.se/[curl] (installed by default on macOS)
-* sha256sum (if not pre-installed):
-- `brew install coreutils` for macOS (requires https://brew.sh/[Homebrew])
-- `sudo apt install coreutils` for Ubuntu/Debain
-- `sudo yum install coreutils` for Red Hat
+* <<local-cli#,CircleCI CLI>>:   **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行してCLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
+* https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
+* https://curl.se/[curl] (macOS はデフォルトでインストール済み)
+* sha256sum (プリインストールされていない場合):
+- macOS の場合は、 `brew install coreutils` (https://brew.sh/[Homebrew] が必要)
+- `Ubuntu/Debain の場合は、`sudo apt install coreutils`
+- Red Hat の場合は、`sudo yum install coreutils` 
 * https://www.gnu.org/software/tar/[tar]
+
 * https://www.gnu.org/software/gzip/[gzip]
-* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
-* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
-== Self-hosted runner Terms Agreement
 
-If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
+== セルフホストランナーの利用条件
 
-== Command line installation
+CLI でセルフホストランナーをインストールし、使用する場合は、https://circleci.com/legal/ja/runner-terms/[CircleCI ランナーの条件] に同意したものとみなされます。
 
-NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+== コマンドラインのインストール
 
-In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
+NOTE:  **サーバー用のセルフホストランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 
-You can view your runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
+セルフホストランナーをインストールのためには、下記手順を実行して名前空間と認証トークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。
 
-. Create a namespace for your organization's self-hosted runners. Please note, CircleCI will autogenerate a namespace based on your organization's name. Verify this is the namespace you want to use. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI organization's account name. If you already use orbs, this namespace should be the same namespace orbs use.
+お客様のランナーは、インベントリのページの左のナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
+
+. 組織のセルフホストランナーの名前空間を作成します。 CircleCI は組織名に基づき名前空間を自動作成するのでご注意ください。 使用する名前空間であることを確認してください。  *作成できる名前空間は、各組織 1 つのみです。*  CircleCI の組織のアカウント名を小文字で使用することを推奨します。 Orb を既に使用中の場合は、Orb で使用しているのと同じ名前空間にします。
 +
-If you receive an error creating a namespace, check to see if you have an existing one, and move on to step 2 below, using your existing namespace.
+名前空間の作成がエラーになる場合は、既存の名前空間があるか確認し、既存の名前空間を使用して下記の手順 2 から実行します。
 +
-Use the following command to create a namespace:
+下記のコマンドを使って名前空間を作成します。
 +
 circleci namespace create <namespace> <vcs-type> <org-name>
 +
-For example, if your GitHub URL is `\https://github.com/circleci-org`, then use:
-`circleci namespace create my-namespace github circleci-org`
-. Create a resource class for your self-hosted runner's namespace using the following command:
+例えば、組織の GitHub URL が `\https://github.com/circleci-org` の場合、`circleci namespace create my-namespace github circleci-org` を使います。
+. 次のコマンドを実行して、セルフホストランナーの名前空間用のリソースクラスを作成します。
 +
 circleci runner resource-class create <namespace>/<resource-class> <description> --generate-token
 +
-*Your namespace is required in the command to create your resource class.*
-Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
+*リソースクラスを作成するコマンドには名前空間が必要です。*
 +
 CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
 
-*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#platform-specific-instructions, Platform-specific installation>> instructions.
+*Linux、macOS、サーバーをご使用のお客様は、下記の指示に従ってください。* それ以外のお客様は、 <<#platform-specific-instructions,プラットフォーム別のインストール>> までスキップします。 
 
-=== Continued for Linux, macOS, and Server
+=== Linux、macOS、サーバーの続き
 
-Be sure to complete the steps in the <<#command-line-installation, Command line installation>> section before moving on to the steps below.
+下記の手順に移る前に、 必ず <<#command-line-installation, コマンドラインのインストール>> を完了してください。
 
-. Save the script below as `download-launch-agent.sh` in the root of your project. When run (see the next step) the script will download the launch agent binary, verify the checksum, and set the `circleci-launch-agent` version.
+. 下記のスクリプトをプロジェクトのルートに `download-launch-agent.sh` として保存します。　 このスクリプトの実行 (次の手順を参照) によりローンチ エージェントバイナリがダウンロードされる場合は、チェックサムを確認し、 `circleci-launch-agent` バージョンを設定してください。
 +
-Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
+クラウド版 CircleCI のセルフホストランナーは、サポートされている最新バージョンに自動的に更新されます。 サーバーの場合、特定のセルフホストランナーバージョンの相互運用性は検証されていますが、セルフホストランナーは自動更新されません。
 +
 #!/usr/bin/env sh
 
@@ -117,7 +117,7 @@ curl --compressed -L "${base_url}/${agent_version}/${file}" -o "${file}"
 echo "Verifying CircleCI Launch Agent download"
 grep "${file}" checksums.txt | sha256sum --check && chmod +x "${file}"
 sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
-. Set your platform and run the `download-launch-agent.sh` script to download, verify, and install the binary. If you are using **cloud**, use the table below to find your platform variable:
+. プラットフォームを設定して、 `download-launch-agent.sh` スクリプトを実行し、バイナリをダウンロード、確認、インストールしてください。 **cloud** を使用している場合は、下記の表でプラットフォームの変数を見つけます。
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -138,17 +138,18 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 |`platform=darwin/arm64`
 |===
 +
-For example, on **cloud**, to set your platform for macOS M1 and run the `download-launch-agent.sh` script, run the following:
+例えば **クラウド** の場合、macOS M1のプラットフォームを設定し、 `download-launch-agent.sh` スクリプトを実行するには、下記を実行します。
 +
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
+
 +
-For *server v3.1.0 and up*, use the table below to find the compatible launch agent version for the version of server you are running:
+ *Server v3.1.0 以降* の場合は、下記の表で実行しているサーバーのバージョンに互換性のあるローンチエージェントのバージョンを見つけます。
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
 |CircleCI Server のバージョン
-|ローンチ エージェントのバージョン
+|ローンチエージェントのバージョン
 
 |3.0
 |ランナーはサポートされていません
@@ -166,7 +167,7 @@ For *server v3.1.0 and up*, use the table below to find the compatible launch ag
 |1.0.33818-051c2fc
 |===
 +
-Substitute `<launch-agent-version>` with your launch agent version for server and run the following:
+`<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、下記を実行します。
 +
 export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 +
