@@ -80,4 +80,4 @@ workflows:
 
 *A:* Apple released an https://www.apple.com/legal/sla/docs/macOSBigSur.pdf[updated end-user license agreement (EULA)] along with the release of Big Sur in November 2020, which requires cloud providers to lease Apple hardware to no more than one customer for a minimum of 24 hours.
 
-NOTE: By using the Services, you represent and warrant that you have reviewed and agree to be bound by the terms of the Apple Software License Agreement as well as the terms applicable to any software preinstalled on the Apple Software, including, but not limited to Apple's Xcode developer software and any other Apple or third-party software.
+NOTE: By using the Services, you represent and warrant that you have reviewed and agree to be bound by the terms of the Apple Software License Agreement, as well as the terms applicable to any software preinstalled on the Apple Software, including, but not limited to, Apple's Xcode developer software and any other Apple or third-party software.
