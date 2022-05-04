@@ -1,16 +1,16 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation with Docker
+= Docker での CircleCI セルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner with Docker.
+このページでは、CircleCI セルフホストランナーを Docker でインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -18,13 +18,13 @@ toc::[]
 
 == 追加の必須要件
 
-ホストには、Docker をインストールしておく必要があります。 `runner` コンテナは、起動するとすぐにジョブの実行を試みます。 コンテナは停止されるまで、他のジョブの実行用に再利用され続けます。
+Docker をホストにインストールしておく必要があります。 `runner` コンテナは、起動するとすぐにジョブの実行を試みます。 コンテナは、停止されるまで他のジョブの実行用に再利用され続けます。
 
 ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
-== Create a Dockerfile that extends the CircleCI self-hosted runner image
+== CircleCI セルフホストランナーのイメージを拡張した Dockerfile を作成する
 
-Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
+`Dockerfile.runner.extended` ファイルを作成します。 次の例では、ベースイメージ上に python3 をインストールします。
 
 ```dockerfile
 FROM circleci/runner:launch-agent
@@ -65,7 +65,7 @@ docker stop <container-name>
 
 == Docker コンテナを削除する
 
-In some cases you might need to fully remove a stopped self-hosted runner container from the system, such as when recreating a container using the same name.
+同じ名前のコンテナを再作成する場合など、停止したセルフホストランナーコンテナをシステムから完全に削除する必要がある場合があります。
 
 ```shell
 docker stop <container-name>; docker rm <container-name>;
