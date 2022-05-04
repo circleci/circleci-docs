@@ -23,30 +23,72 @@ function showHomePageBadges() {
   }
 }
 
-function setUpTracking() {
-  const badges = Array.from($('.wrapper-link'));
-  badges.forEach((badge) => {
-    badge.addEventListener('click', () => {
-      window.AnalyticsClient.trackAction('clicked-landing-page-badge', {
-        badgeText: badge.innerText,
-        badgeHref: badge.href,
+function setUpTracking(variation) {
+  if (window.location.pathname === '/docs/2.0/getting-started/') {
+    window.AnalyticsClient.trackAction('visited-gettingStarted-page', {
+      variation,
+      referrer: document.referrer,
+    });
+  }
+
+  // Adding tracking to a tags that link to /docs/2.0/getting-started/
+  const linksToGettingStarted = Array.from(
+    $("li > a[href='/docs/2.0/getting-started/']"),
+  );
+  linksToGettingStarted?.forEach((link, i) => {
+    let linkLocation;
+    if (i === 0) linkLocation = 'mobile-sidebar';
+    if (i === 1) linkLocation = 'sidebar';
+    if (i === 2) linkLocation = 'homePage-section-link';
+    link?.addEventListener('click', () => {
+      window.AnalyticsClient.trackAction('clicked-link-to-gettingStarted', {
+        variation,
+        linkLocation,
+        referrer: document.referrer,
       });
     });
   });
-  const links = Array.from($('.treatment').find($('a')));
-  links.forEach((link, i) => {
-    link.addEventListener('click', () => {
-      window.AnalyticsClient.trackAction(
-        'clicked-on-getting-started-guide-link',
-        {
-          linkText: link.innerText,
-          linkHref: link.href,
-          linkIndexOnPage: i + 1 + '/' + links.length,
-          page: window.location.pathname,
-        },
-      );
+
+  // Since we are using setUpTracking for both variations, we only want to add tracking for these elements if we are in treatment as they are unique for the experiment
+  if (variation === 'treatment') {
+    const badges = Array.from($('.wrapper-link'));
+    badges.forEach((badge, i) => {
+      // We are grabbing all 4 experimental badges from the landing page but the first element is unique as that links to /docs/2.0/getting-started/
+      // We are grouping that first badge with the same event name thats being used for linksToGettingStarted above as we want to track the total number of visits to the treatment page of the experiment and the link the user clicked to get there
+      if (i === 0) {
+        badge.addEventListener('click', () => {
+          window.AnalyticsClient.trackAction('clicked-link-to-gettingStarted', {
+            variation,
+            linkLocation: 'homePage-experiment-badge',
+            referrer: document.referrer,
+            badgeText: badge.innerText,
+            badgeHref: badge.href,
+          });
+        });
+      } else {
+        badge.addEventListener('click', () => {
+          window.AnalyticsClient.trackAction('clicked-landing-page-badge', {
+            badgeText: badge.innerText,
+            badgeHref: badge.href,
+          });
+        });
+      }
     });
-  });
+
+    const links = Array.from($('.treatment').find($('a')));
+    links.forEach((link, i) => {
+      link.addEventListener('click', () => {
+        window.AnalyticsClient.trackAction(
+          'clicked-on-getting-started-guide-link',
+          {
+            linkText: link.innerText,
+            linkIndexOnPage: i + 1 + '/' + links.length,
+            page: window.location.pathname,
+          },
+        );
+      });
+    });
+  }
 }
 
 function displayGettingStartedContent() {
@@ -93,21 +135,24 @@ window.OptimizelyClient.getVariationName({
 })
   .then((variation) => {
     if (variation === 'treatment') {
-      // Init new badges on landing page
-      showHomePageBadges();
-
       // Init NEW badge in sidebar
       addNewBadgeToSidebar();
+
+      // Init new badges on landing page
+      showHomePageBadges();
 
       // Display all content and layout for Quickstart Guide
       displayGettingStartedContent();
 
       // Init tracking for experiment links and landing page badges
-      setUpTracking();
+      setUpTracking(variation);
     } else {
       displayFirstGreenBuildContent();
+      setUpTracking(variation);
     }
   })
   .catch(() => {
+    // In case if users have ad blocker on which blocks optimizely, we will show content for control variation
     displayFirstGreenBuildContent();
+    setUpTracking('control');
   });

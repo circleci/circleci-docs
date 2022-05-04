@@ -557,12 +557,12 @@ jobs:
 ##### Windows executor
 {: #windows-executor }
 
-Class             | vCPUs | RAM
-------------------|-------|------
-medium (default)  | 4     | 15GB
-large             | 8     | 30GB
-xlarge            | 16    | 60GB
-2xlarge           | 32    | 128GB
+Class             | vCPUs | RAM    | Disk Size|
+------------------|-------|--------|----------|
+medium (default)  | 4     | 15GB   | 200 GB   |
+large             | 8     | 30GB   | 200 GB   |
+xlarge            | 16    | 60GB   | 200 GB   |
+2xlarge           | 32    | 128GB  | 200 GB   |
 {: class="table table-striped"}
 
 **Example:**
@@ -589,11 +589,11 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }
 
-Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB)
---------------------------------|-------|-----|------|-------------------|------------------
-gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8
-gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16
-gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16
+Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB) | Disk Size (GiB)
+--------------------------------|-------|-----|------|-------------------|------------------|---------------|
+gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8                | 300
+gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16               | 300
+gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16              | 300
 {: class="table table-striped"}
 
 **Example:**
@@ -616,9 +616,9 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 ##### GPU executor (Windows)
 {: #gpu-executor-windows }
 
-Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
-----------------------------------------|-------|-----|------|-----------------|------------------
-windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 | 16
+Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB) | Disk Size (GiB)|
+----------------------------------------|-------|-----|------|-----------------|------------------|---------------|
+windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 | 16               |200
 {: class="table table-striped"}
 
 **Example:**
@@ -1218,7 +1218,7 @@ jobs:
               sleep 30
             fi
       # save the files your deploy step needs
-      - save_workspace:
+      - persist_to_workspace:
           root: .     # relative path to our working directory
           paths:      # file globs which will be persisted to the workspace
            - rand_*

@@ -18,7 +18,13 @@ This page describes how to install CircleCI self-hosted runner on Linux.
 
 == Create the CircleCI self-hosted runner configuration
 
-Create a `launch-agent-config.yaml` file. The recommended CircleCI self-hosted runner configuration for Linux is:
+Create a `launch-agent-config.yaml` file. 
+
+```shell
+sudo touch /opt/circleci/launch-agent-config.yaml
+```
+
+Copy and paste into the newly created file the recommended CircleCI self-hosted runner configuration for Linux:
 
 ```yaml
 api:
@@ -28,12 +34,12 @@ api:
 
 runner:
   name: RUNNER_NAME
-  command_prefix: ["sudo", "-niHu", "circleci", "--"]
+  command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
   working_directory: /opt/circleci/workdir/%s
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the xref:runner-installation.adoc#authentication[Authentication] step. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
+Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step. Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. `USERNAME` is the user on your machine that you want to run the runner launch agent. This is not your CircleCI account username, but the user on the machine that the agent will be installed on.
 
 == Install the CircleCI self-hosted runner configuration
 
@@ -47,32 +53,32 @@ sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-== Create the circleci user & working directory
+== Create the USERNAME user & working directory
 
 These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
 === Ubuntu/Debian
 
 ```shell
-id -u circleci &>/dev/null || sudo adduser --disabled-password --gecos GECOS circleci
+id -u USERNAME &>/dev/null || sudo adduser --disabled-password --gecos GECOS USERNAME
 
 sudo mkdir -p /opt/circleci/workdir
-sudo chown -R circleci /opt/circleci/workdir
+sudo chown -R USERNAME /opt/circleci/workdir
 ```
 
 Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
 
 ```shell
-echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+echo "USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
 === CentOS/RHEL
 
 ```shell
-id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
+id -u USERNAME &>/dev/null || sudo adduser -c GECOS USERNAME
 
 sudo mkdir -p /opt/circleci/workdir
-sudo chown -R circleci /opt/circleci/workdir
+sudo chown -R USERNAME /opt/circleci/workdir
 ```
 
 Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
@@ -107,7 +113,44 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 {% include snippets/runner-config-reference.adoc %}
 
-== Optional Steps
+=== Start the service
+
+When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+
+```shell
+systemctl start circleci.service
+```
+
+=== Verify the service is running
+
+The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
+
+You can see the status of the agent by running:
+
+```shell
+systemctl status circleci.service --no-pager
+```
+
+Which should produce output similar to:
+
+```
+circleci.service - CircleCI Runner
+   Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
+ Main PID: 5592 (circleci-launch)
+   Status: "Healthy"
+    Tasks: 8 (limit: 2287)
+   CGroup: /system.slice/circleci.service
+           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+```
+
+You can also see the logs for the system by running:
+
+```shell
+journalctl -u circleci
+```
+
+== Optional Step
 
 === Enable the `systemd` unit
 
@@ -147,41 +190,4 @@ You can now enable the service:
 
 ```shell
 systemctl enable /opt/circleci/circleci.service
-```
-
-=== Start the service
-
-When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
-
-```shell
-systemctl start circleci.service
-```
-
-=== Verify the service is running
-
-The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
-
-You can see the status of the agent by running:
-
-```shell
-systemctl status circleci.service --no-pager
-```
-
-Which should produce output similar to:
-
-```
-circleci.service - CircleCI Runner
-   Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
- Main PID: 5592 (circleci-launch)
-   Status: "Healthy"
-    Tasks: 8 (limit: 2287)
-   CGroup: /system.slice/circleci.service
-           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
-```
-
-You can also see the logs for the system by running:
-
-```shell
-journalctl -u circleci
 ```

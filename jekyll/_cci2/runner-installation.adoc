@@ -60,11 +60,15 @@ In order to install self-hosted runners, you will need to create a namespace and
 
 You can view your runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
 
-. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hostd Runners*.
+. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hosted Runners*.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
 +
-. Create a namespace and resource class for your organization's self-hosted runners. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. If you already use orbs, this namespace should be the same namespace orbs use.
+. If this is your organization's first time using self-hosted runners, you'll need to create a namespace as the first part of this step. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
++
+. If your organization already use orbs, do not create a new namespace, enter the namespace your organization uses for orbs.
++
+. The second input field is to create a name for your resource class for your organization's self-hosted runners.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
 +
