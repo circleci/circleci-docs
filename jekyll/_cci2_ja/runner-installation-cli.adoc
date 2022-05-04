@@ -1,18 +1,19 @@
 ---
 
 version:
-- Cloud
+-クラウド
 - Server v3.x
 ---
-= Installing Self-Hosted Runners with the CLI
+= CLI でのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find resources to install CircleCI self-hosted runners on Linux, macOS, Docker, and Windows platforms.
+:page-description: Linux、macOS、Docker、および Windows プラットフォームへの CircleCI セルフホストランナーのインストール方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
-This page describes how to install self-hosted runners through the CLI.
+ここでは、CLI でセルフホストランナーをインストールする方法を説明します。
 
 ++++
 <section style="
@@ -23,7 +24,8 @@ This page describes how to install self-hosted runners through the CLI.
     padding: 15px;
     margin: 20px 0;
 ">
-    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a>! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> before this option is available to you in the UI.
+   セルフホストランナーは、<a href="https://app.circleci.com/" target="_blank">CircleCI Web アプリ</a>で直接インストールできるようになりました！
+ このオプションを UI で使用できるようにするには、 <a href="#self-hosted-runer-terms -agreement">ランナーの条件</a> に同意する必要があります。
 </section>
 ++++
 
@@ -31,9 +33,9 @@ toc::[]
 
 == 前提条件
 
-To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
-* <<local-cli#,CircleCI CLI>>. If you are installing **runner for server**, the CircleCI CLI needs to be configured using a server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+* <<local-cli#,CircleCI CLI>>:   **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して、CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
 * https://curl.se/[curl] (installed by default on macOS)
 * sha256sum (if not pre-installed):
