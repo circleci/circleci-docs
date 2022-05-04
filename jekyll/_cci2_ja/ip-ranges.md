@@ -106,7 +106,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 {: #list-of-ip-address-ranges-changelog }
 
 #### 2021-08-23
-* コアサービス用 IP アドレスリストに新しいアドレスが追加されました。
+* コアサービス用 IP アドレスリストに新しい IP アドレスが追加されました。
 
 マシン用のリストもアップデートされ、新しい IP アドレスが反映されました。
 
@@ -179,10 +179,10 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 - 38.23.37.0/24
 - 198.206.135.0/24
 
-IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。 **注:** macOS のビルドは記載されてるIP アドレスに自動的に制限されます。 つまり macOS のビルドでは、`circleci_ip_ranges: true` を明示的に設定する必要がありません。
+IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲機能**の使用をお勧めします。 **注:** macOS のビルドは記載されてるIP アドレスに自動的に制限されます。 つまり macOS のビルドでは、`circleci_ip_ranges: true` を明示的に設定する必要がありません。
 
 ## 既知の制限
 {: #known-limitations}
 
 - 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
-- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「The IP ranges feature only supports the Docker executor. (IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。)」というエラーが表示されます。</li> </ul>
