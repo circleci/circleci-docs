@@ -167,7 +167,7 @@ The following GCP instructions are for:
 * A one-time configuration of your GCP settings to trust CircleCI's OIDC tokens
 * Running a job that uses the OIDC token to interact with GCP
 
-The Google Cloud CLI reads your configuration file which contains necessary information instructing Google Cloud to authenticate. You can read about external identity providers on https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Google Cloud's docs].
+The Google Cloud CLI reads your configuration file, which contains necessary information instructing Google Cloud to authenticate. You can read about external identity providers on https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Google Cloud's docs].
 
 ==== Setting up GCP
 
