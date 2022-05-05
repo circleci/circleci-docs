@@ -17,7 +17,8 @@ def doc_to_json(document, site)
 
   # write json file
   File.open(fullPath, 'w') do |f|
-    f.write(output.to_json)
+    json = output.to_json;
+    f.write(json.gsub('\n', '')) # strip all \n characters since they are not needed
   end
 end
 
