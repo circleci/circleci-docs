@@ -11,6 +11,7 @@ gem 'dotenv'
 gem "kramdown-parser-gfm"
 gem "liquid-c"
 gem 'nokogiri', '~> 1.13'
+gem 'htmlcompressor'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'

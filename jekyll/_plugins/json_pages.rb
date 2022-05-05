@@ -1,9 +1,12 @@
+require 'htmlcompressor'
+
 def doc_to_json(document, site)
   puts 'processing json for: ' + document.relative_path
+  compressor = HtmlCompressor::Compressor.new
 
   # compile data + content
   output = document.data
-  output['content'] = document.content
+  output['content'] = compressor.compress(document.content)
   output['file_name'] = document.relative_path
 
   # get output path
@@ -17,8 +20,7 @@ def doc_to_json(document, site)
 
   # write json file
   File.open(fullPath, 'w') do |f|
-    json = output.to_json;
-    f.write(json.gsub('\n', '')) # strip all \n characters since they are not needed
+    f.write(output.to_json)
   end
 end
 
