@@ -29,7 +29,7 @@ and is [building on CircleCI]({{site.cci_public_org_url}}/sample-javascript-cfd)
 and rewriting [the configuration file]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)
 as you follow this guide.
 
-## Configuration Walkthrough
+## Configuration walkthrough
 {: #configuration-walkthrough }
 
 Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
