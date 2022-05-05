@@ -308,7 +308,7 @@ jobs:
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 11.3 installed
+      # with Xcode 12.5.1 installed
       - run: xcodebuild -version
 ```
 
