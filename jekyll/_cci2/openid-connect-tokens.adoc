@@ -49,7 +49,7 @@ The OpenID Connect ID token contains the following standard https://openid.net/s
 | Description
 
 | `iss`
-| The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/ORGANIZATION_ID"`, a    string, where `ORGANIZATION_ID` is a UUID identifying the current job's project's organization.
+| The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/ORGANIZATION_ID"`, a string, where `ORGANIZATION_ID` is a UUID identifying the current job's project's organization.
 
 | `sub`
 | The subject. This identifies who is running the CircleCI job and where. Its value is `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
