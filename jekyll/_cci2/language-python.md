@@ -19,6 +19,7 @@ version:
 This is a quickstart guide for integrating a Python project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Python project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
 
 ## Prerequisites
+{: #prerequisites}
 
 * [A CircleCI account]({{site.baseurl}}/2.0/first-steps/)
 * A Python project located in a supported VCS (currently GitHub or Bitbucket)
