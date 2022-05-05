@@ -74,10 +74,11 @@ a {
   &:hover {
     color: $link-hover-color;
     text-decoration: none;
+    -webkit-text-stroke: $link-text-stroke;
   }
 
   &.active {
-    color: $link-text-color !important;
+    color: $link-text-color;
   }
 }
 

@@ -77,9 +77,11 @@ $text-black: #171717;
       margin-top: 18px;
     }
   }
-}
 
-.docs-footer {
+  .social-btns a:hover {
+    color: $black-light;
+    -webkit-text-stroke: 0;
+  }
 }
 
 .docs-footer--row {
