@@ -315,7 +315,7 @@ jobs:
 ### macOS VM Storage
 {: #macos-vm-storage }
 
-The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size Xcode images varies based on which tools are pre-installed.
+The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed.
 
 Xcode Version | Class                 | Minimum Available Storage
 --------------|-----------------------|--------------------------
