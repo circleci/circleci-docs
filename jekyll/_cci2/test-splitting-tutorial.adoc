@@ -130,6 +130,8 @@ Test results, including timing data, will be saved in this subdirectory of the e
 +
 This step uses the CircleCI CLI to pass in the location of the test suites and configure how the tests are split. You can use the `circleci tests glob` command to select the test files: here, you want those that match the `+src/__tests__/*.js+` globbing pattern, that is, any `.js` files located in `+src/__tests__+` and any of its subdirectories. Then, the matching files are piped into `circleci tests split`, which creates the test split groupings. The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, consult the <<parallelism-faster-jobs#splitting-test-files,Splitting test files section of the Running Tests in Parallel>> document.
 +
+Note that the `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
++
 The CircleCI CLI commands do not actually execute the tests⁠—you still need to run `yarn test` for that. For convenience, the CircleCI CLI output of test split groupings is stored in the `$TEST` environment variable that can be referenced when running `yarn test`. 
 +
 ** After the `Test application` command, add a new `run` command like so:
@@ -236,9 +238,11 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-by-timing.png[Testing ste
 
 == Conclusion
 
-In this tutorial, you have configured your pipeline to split tests by timing data using parallelism and `circleci tests` commands. By storing test results, you also enabled access to test data and insights for further analysis. 
+In this tutorial, you have configured your pipeline to split tests by timing data using parallelism and `circleci tests` commands. By storing test results, you also enabled access to test data and insights for further analysis.
 
-For a more in-depth discussion of the demo used in this tutorial, read our https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
+== Next steps
 
+* For a more in-depth discussion of the demo used in this tutorial, read our https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
+* Learn about <<insights-tests#,test insights>> available in CircleCI.
 
 
