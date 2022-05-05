@@ -327,6 +327,7 @@ Xcode Version | Class                 | Minimum Available Storage
 12.*          | macos.x86.medium.gen2 | 30GB<sup>(2)</sup>
 13.*          | medium, large         | 23GB
 13.*          | macos.x86.medium.gen2 | 89GB
+{: class="table table-striped"}
 
 <sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
