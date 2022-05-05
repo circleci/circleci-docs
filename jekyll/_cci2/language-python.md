@@ -36,7 +36,7 @@ Every CircleCI project requires a configuration file called [`.circleci/config.y
 ### 1. Specify a version
 {: #specify-a-version-new }
 
-Every config.yml starts with the version key. This key is used to issue warnings about breaking changes.
+Every CircleCI config.yml starts with the version key. This key is used to issue warnings about breaking changes.
 ```yaml
 version: 2.1
 ```
@@ -123,7 +123,7 @@ workflows:
 ### 5. Add jobs to the workflow
 {: #add-jobs-to-the-workflow }
 
-Now that we have the `build_and_test` job and the `deploy` job, we can complete our `build_test_deploy` workflow. Refer to the [workflows]({{site.baseurl}}/2.0/workflows/) documentation for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 ```yaml
 workflows:
@@ -138,10 +138,10 @@ workflows:
               only: main # only deploy when on main
 ```
 
-### 5. Conclusion
+### 6. Conclusion
 {: #conclusion }
 
-Success! You just set up a Python app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/2.0/project-build/#overview) to see how this looks when building on CircleCI.
+You just set up a Python app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/2.0/project-build/#overview) to see how this looks when building on CircleCI.
 
 ## Full configuration file
 {: #full-configuration-file-new }
