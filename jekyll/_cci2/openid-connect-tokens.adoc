@@ -39,7 +39,7 @@ The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud`
 
 == Format of the OpenID Connect ID token
 
-Th e OpenID Connect ID token contains the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
+The OpenID Connect ID token contains the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
 
 [%autowidth]
 [.table.table-striped]
