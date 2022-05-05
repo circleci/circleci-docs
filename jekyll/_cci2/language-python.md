@@ -53,10 +53,11 @@ To add the orb to your config, insert:
 orbs:
   python: circleci/python@2.0.3
 ```
+
 **Note**: It is always a good idea to check in the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent (or correct for your project) orb verison.
 
-### 3. Create a job
-{: #create-a-job }
+### 3. Create jobs
+{: #create-jobs }
 
 Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/2.0/jobs-steps/) page.
 
