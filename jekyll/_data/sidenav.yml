@@ -1225,7 +1225,7 @@ ja:
           link: ja/2.0/CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
           i18n_name: v3.4 インストールガイド GCP
         - name: v3.4 Operations Guide
-          link: ja/2.0/CircleCI-/Server-3.4.1-Operations-Guide.pdf
+          link: ja/2.0/CircleCI-Server-3.4.1-Operations-Guide.pdf
           i18n_name: v3.4 管理者ガイド
     - name: Server v3.3.x PDFs
       link: ja/2.0/server-3-overview
