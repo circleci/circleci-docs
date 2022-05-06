@@ -88,3 +88,7 @@ circleci runner resource-class delete <resource-class>
 == OSS プロジェクトのメンバーのジョブで、その人が組織のメンバーではない場合、組織のセルフホストランナーを使用できますか。
 
 使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 組織の一部である OSS プロジェクトのメンバーのみがその組織のセルフホストランナーを使うことができます。
+
+== How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
+
+If a self-hosted runner has not reported a "heartbeat" to CircleCI for three or more days, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
