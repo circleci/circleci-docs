@@ -142,7 +142,7 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
 
 +
- *Server v3.1.0 以降* の場合は、下記の表で実行しているサーバーのバージョンに互換性のあるローンチエージェントのバージョンを見つけます。
+*Server v3.1.0 以降* の場合は、下記の表から実行しているサーバーのバージョンに互換性のあるローンチエージェントのバージョンを見つけます。
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
