@@ -4,7 +4,7 @@ title: CircleCI の設定
 short-title: CircleCI の設定
 description: .circleci/config.yml に関するリファレンス
 order: 20
-redirect_from: 2.0/configuration
+redirect_from: /2.0/configuration/
 readtime: false
 version:
   - クラウド
@@ -556,12 +556,12 @@ jobs:
 ##### Windows Executor
 {: #windows-executor }
 
-| クラス            | vCPU | RAM    |
-| -------------- | ---- | ------ |
-| medium (デフォルト) | 4    | 15 GB  |
-| large          | 8    | 30 GB  |
-| xlarge         | 16   | 60 GB  |
-| 2xlarge        | 32   | 128 GB |
+| クラス            | vCPU | RAM    | Disk Size |
+| -------------- | ---- | ------ | --------- |
+| medium (デフォルト) | 4    | 15 GB  | 200 GB    |
+| large          | 8    | 30 GB  | 200 GB    |
+| xlarge         | 16   | 60 GB  | 200 GB    |
+| 2xlarge        | 32   | 128 GB | 200 GB    |
 {: class="table table-striped"}
 
 **例**
@@ -588,11 +588,11 @@ Windows Executor の詳細と例については、[Windows に関する入門ガ
 ##### GPU Executor (Linux)
 {: #gpu-executor-linux }
 
-| クラス                             | vCPU | RAM | GPU | GPU モデル           | GPU メモリ (GiB) |
-| ------------------------------- | ---- | --- | --- | ----------------- | ------------- |
-| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4   | 8             |
-| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4   | 16            |
-| gpu.nvidia.large<sup>(2)</sup>  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            |
+| クラス                             | vCPU | RAM | GPU | GPU モデル           | GPU メモリ (GiB) | Disk Size (GiB) |
+| ------------------------------- | ---- | --- | --- | ----------------- | ------------- | --------------- |
+| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4   | 8             | 300             |
+| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4   | 16            | 300             |
+| gpu.nvidia.large<sup>(2)</sup>  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            | 300             |
 {: class="table table-striped"}
 
 **例**
@@ -616,9 +616,9 @@ jobs:
 ##### GPU Executor (Windows)
 {: #gpu-executor-windows }
 
-| クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) |
-| --------------------------------------- | ---- | --- | --- | --------------- | ------------- |
-| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            |
+| クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) | Disk Size (GiB) |
+| --------------------------------------- | ---- | --- | --- | --------------- | ------------- | --------------- |
+| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            | 200             |
 {: class="table table-striped"}
 
 **例**
@@ -1215,7 +1215,7 @@ jobs:
               sleep 30
             fi
       # save the files your deploy step needs
-      - save_workspace:
+      - persist_to_workspace:
           root: .     # relative path to our working directory
           paths:      # file globs which will be persisted to the workspace
            - rand_*
@@ -1567,7 +1567,7 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 {: #requires }
 デフォルトでは、複数のジョブは並行処理されます。そのため、ジョブ名を使って必要な依存関係の処理を明確にしておく必要があります。
 
-| キー       | 必須 | 型   | 説明                                                                                                                                                                                   |
+| キー       | 必須 | タイプ | 説明                                                                                                                                                                                   |
 | -------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | requires | ×  | リスト | そのジョブを開始するために成功する必要があるジョブのリスト。 メモ: 現在のワークフローで依存関係としてリストされているジョブが (フィルター機能などの影響で) 実行されなかった場合、他のジョブの requires オプションでは、これらのジョブの必須設定は無視されます。 しかし、ジョブのすべての依存関係がフィルター処理されると、そのジョブは実行されません。 |
 {: class="table table-striped"}
@@ -1576,7 +1576,7 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 {: #name }
 `name` キーを使用すると、任意の数のワークフローで再利用可能なジョブを呼び出すことができます。 このキーを使うと、ジョブ名に番号は付与されません (例: sayhello-1、sayhello-2)。 この `name` キーに割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が付与されます。
 
-| キー   | 必須 | 型    | 説明                                                                                    |
+| キー   | 必須 | タイプ  | 説明                                                                                    |
 | ---- | -- | ---- | ------------------------------------------------------------------------------------- |
 | name | ×  | 文字列型 | ジョブ名の代替名。 ジョブを複数回呼び出す場合に便利です。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です (2.1 のみ)。 |
 {: class="table table-striped"}
@@ -1585,7 +1585,7 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 {: #context }
 ジョブは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については[コンテキスト]({{ site.baseurl }}/2.0/contexts)を参照してください。
 
-| キー      | 必須 | 型       | 説明                                                                                                                                                                      |
+| キー      | 必須 | タイプ     | 説明                                                                                                                                                                      |
 | ------- | -- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | context | ×  | 文字列/リスト | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 CircleCI Server を使用している場合、ワークフローごとに使用できるコンテキストは 1 つのみです。 **注:** 一意のコンテキストは、すべてのワークフローを合わせて 100 個まで使用できます。 |
 {: class="table table-striped"}
