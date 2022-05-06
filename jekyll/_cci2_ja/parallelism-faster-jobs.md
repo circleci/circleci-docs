@@ -43,9 +43,9 @@ For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/conf
 ## CircleCI CLI を使用したテストの分割
 {: #using-the-circleci-cli-to-split-tests }
 
-CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテスト ランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 割り当てには CircleCI CLI が必要で、実行時にビルドに自動挿入されます。
+CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテストランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 割り当てには CircleCI CLI が必要で、実行時にビルドに自動挿入されます。
 
-CLI をローカルにインストールするには、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」の説明を参照してください。
+CLI をローカルにインストールするには、[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/)の説明を参照してください。
 
 注: `circleci tests` コマンド (`glob` と `split`) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 
@@ -60,7 +60,7 @@ CLI では、並列ジョブの実行時に複数のマシンにテストを分�
 #### テストファイルのグロブ
 {: #globbing-test-files }
 
-CLI では、以下のパターンを使用したテスト ファイルのグロブをサポートしています。
+CLI では、以下のパターンを使用したテストファイルのグロブをサポートしています。
 
 - `*` は、任意の文字シーケンスに一致します (パス区切り文字を除く)。
 - `**` は、任意の文字シーケンスに一致します (パス区切り文字を含む)。
@@ -68,7 +68,7 @@ CLI では、以下のパターンを使用したテスト ファイルのグロ
 - `[abc]` は、角かっこ内の任意の文字に一致します (パス区切り文字を除く)。
 - `{foo,bar,...}` は、中かっこ内のいずれかの文字シーケンスに一致します。
 
-テスト ファイルをグロブするには、`circleci tests glob` コマンドに 1 つ以上のパターンを渡します。
+テストファイルをグロブするには、`circleci tests glob` コマンドに 1 つ以上のパターンを渡します。
 
 ```
 circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
@@ -97,15 +97,15 @@ jobs:
 #### タイミングデータに基づいた分割
 {: #splitting-by-timing-data }
 
-一連の並列 Executor でテスト スイートを最適化するための最良の方法は、タイミング データを使用してテストを分割することです。 これにより、テストが最も均等に分割され、全体のテスト時間が短縮されます。
+一連の並列 Executor でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 これにより、テストが最も均等に分割され、全体のテスト時間が短縮されます。
 
 ![テストの分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-CircleCI は、テスト スイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミング データを保存しています。 このタイミング データには、使用している言語に応じて、ファイル名またはクラス名ごとに各テストが完了するのにかかった時間が記録されます。
+CircleCI は、テストスイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミングデータを保存しています。 このタイミング データには、使用している言語に応じて、ファイル名またはクラス名ごとに各テストが完了するのにかかった時間が記録されます。
 
-メモ: `store_test_results` を使用しないと、テストの分割に使用できるタイミング データは生成されません。
+メモ: `store_test_results` を使用しないと、テストの分割に使用できるタイミングデータは生成されません。
 
-タイミングで分割するには、分割タイプ `timings` を付けて `--split-by` フラグを使用します。 これで、使用可能なタイミング データが分析され、テストが可能な限り均等に並列コンテナに分割され、テストの実行時間が最短になります。
+タイミングで分割するには、分割タイプ `timings` を付けて `--split-by` フラグを使用します。 これで、使用可能なタイミングデータが分析され、テストが可能な限り均等に並列コンテナに分割され、テストの実行時間が最短になります。
 
 ```shell
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
@@ -176,7 +176,7 @@ circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 ## 環境変数を使用したテストの分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
+CircleCI には並列実行を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
 
 ## 分割テストの実行
 {: #running-split-tests }
@@ -310,5 +310,5 @@ workflows:
 ## 次のステップ
 {: #next-steps }
 
-* [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data/)
-* [テスト インサイト（Test Insights）]({{ site.baseurl }}/2.0/insights-tests/)
+* [Collecting Test Data]({{ site.baseurl }}/ja/2.0/collect-test-data/)
+* [テスト インサイト（Test Insights）]({{ site.baseurl }}/ja/2.0/insights-tests/)
