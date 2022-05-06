@@ -34,7 +34,7 @@ workflows:
 
 https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー] は、組織一意のものです。 URL は、`\https://oidc.circleci.com/org/<organization-id>` で、`<organization-id>`  は、お客様の組織を表す組織 ID (UUID) です。
 
-You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
+お客様の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動し、ページ上部で **Organization ID** を探します。
 
 CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
