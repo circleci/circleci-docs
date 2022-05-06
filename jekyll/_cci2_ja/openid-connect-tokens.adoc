@@ -34,7 +34,7 @@ workflows:
 
 https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー] は、組織一意のものです。 URL は、`\https://oidc.circleci.com/org/<organization-id>` で、`<organization-id>`  は、お客様の組織を表す組織 ID (UUID) です。
 
-お客様の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で  **Organization Settings > Contexts** に移動し、ページ上部で **Organization ID** を探します。
+You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app], and looking for your **Organization ID** at the top of the page.
 
 CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
@@ -91,7 +91,7 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 
 AWS アカウントが CircleCI の OIDC トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダと AWS の IAM ロール (ワンタイム設定) を作成します。
 
-AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] を開き、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Contexts** に移動します。 次のステップで使用するために組織 ID をコピーします。
+AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] を開き、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動します。 次のステップで使用するために組織 ID をコピーします。
 
 **Provider URL**を求められたら、`\https://oidc.circleci.com/org/<organization-id>` を入力します。`<organization-id>` には、CircleCI の組織 ID を入力します。 **Audience** にも同じ CircleCI 組織 ID を入力します。
 
