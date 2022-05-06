@@ -13,9 +13,13 @@ version:
 * TOC
 {:toc}
 
-CircleCI orbs are open-source, shareable packages of parameterizable [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.
+Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. Visit the [Orbs Registry](https://circleci.com/developer/orbs) on the CircleCI Developer Hub to search for orbs to help simplify your configuration.
 
-Published orbs can be found on our [Orb Registry](https://circleci.com/developer/orbs), or you can [author your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
+Examples of reusable snippets that can be included in orbs are [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [executors]({{site.baseurl}}/2.0/reusing-config/#executor), as well as Node.js and its package managers.
+
+Use orbs to reduce configuration complexity, and help you integrate with your software and services stack quickly and easily across many projects.
+
+If you would like to author your own orb, read more on the [Introduction to Authoring Orbs]({{site.baseurl}}/2.0/orb-author-intro/) page.
 
 ## Benefits of using orbs
 {: #benefits-of-using-orbs }
