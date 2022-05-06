@@ -115,7 +115,7 @@ Because we are using the Node orb, this job will install your Node packages with
 #### b. Deploy the app
 {: #deploy-the-app }
 
-In this example, we are choosing to deploy to Heroku. This can be done using the official Heroku orb by adding a new line into our orb section. The Heroku orb contains a set of prepackaged CircleCI configurations you can use to deploy applications to Heroku. Learn more about the [Heroku orb]({{site.devhub_base_url}}/orbs/orb/circleci/heroku).
+In this quickstart guide, we will deploy to [Heroku](https://www.heroku.com/). We can do this using the official Heroku orb by adding a new line into our orb section. The Heroku orb contains a set of prepackaged CircleCI configurations you can use to deploy applications to Heroku. Learn more about the [Heroku orb]({{site.devhub_base_url}}/orbs/orb/circleci/heroku).
 
 ```yaml
 orbs:
