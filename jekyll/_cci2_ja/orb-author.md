@@ -51,7 +51,6 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
     必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
     **注:** Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
-
     {: class="alert alert-warning"}
 
 1. **CircleCI CLI を更新します。**
@@ -64,7 +63,7 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
     $ circleci version
     ```
 
-2. ** Orb を初期化します。**
+2. **Orb を初期化します。**
 
     ターミナルを開き、`orb init` CLI コマンドを使用して、新しい Orb プロジェクトを初期化します。
 
