@@ -1,7 +1,7 @@
 | Class            | vCPUs | RAM   |
 | ---------------- | ----- | ----- |
-| medium           | 2     | 7.5GB |
-| large            | 4     | 15GB  |
-| xlarge           | 8     | 32GB  |
-| 2xlarge          | 16    | 64GB  |
+| medium           | 2     | 100GB |
+| large            | 4     | 100GB  |
+| xlarge           | 8     | 100GB  |
+| 2xlarge          | 16    | 100GB  |
 {: class="table table-striped"}
