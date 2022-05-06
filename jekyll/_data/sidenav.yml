@@ -55,11 +55,6 @@ en:
       children:
         - name: Scheduled Pipelines
           link: 2.0/scheduled-pipelines/
-          children:
-            - name: How-to guides
-              children:
-                - name: Scheduled Pipelines
-                  link: 2.0/scheduled-pipelines/
         - name: Workflows
           link: 2.0/workflows/
         - name: Jobs and Steps
