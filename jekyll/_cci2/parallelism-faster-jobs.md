@@ -2,16 +2,14 @@
 layout: classic-docs
 title: "Running Tests in Parallel"
 short-title: "Running Tests in Parallel"
-description: "How to run tests in parallel"
-categories: [optimization]
-order: 60
+description: "Running tests in parallel compute environments to optimize your CircleCI pipelines."
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-The more tests your project has, the longer it will take for them to complete on a single machine. To reduce this time, you can run tests in parallel by spreading them across multiple separate executors. This requires specifying a parallelism level to define how many separate executors get spun up for the test job. Then, you can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
+The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can run tests in parallel by spreading them across multiple, separate execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/2.0/executor-types/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
 
 * TOC
 {:toc}
@@ -39,8 +37,9 @@ jobs:
 
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-For more information,
-see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
+To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/2.0/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner to execute on will queue until a self-hosted runner is available.
+
+For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
 
 ## Using the CircleCI CLI to split tests
 {: #using-the-circleci-cli-to-split-tests }
@@ -53,13 +52,14 @@ Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally v
 
 ### Splitting test files
 {: #splitting-test-files }
-{:.no_toc}
 
 The CLI supports splitting tests across machines when running parallel jobs. This is achieved by passing a list of either files or classnames, whichever your test-runner requires at the command line, to the `circleci tests split` command.
 
+[Self-hosted runners]({{site.baseurl}}/2.0/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task agent]({{site.baseurl}}/2.0/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
+
+
 #### Globbing test files
 {: #globbing-test-files }
-{:.no_toc}
 
 To assist in defining your test suite, the CLI supports globbing test files using the following patterns:
 
@@ -130,7 +130,6 @@ Note: If no timing data is found, you will receive a message: `Error autodetecti
 
 #### Splitting by name
 {: #splitting-by-name }
-{:.no_toc}
 
 By default, if you don't specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames/classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
 
@@ -168,7 +167,6 @@ circleci tests split --index=0 test_filenames.txt
 
 #### Splitting by filesize
 {: #splitting-by-filesize }
-{:.no_toc}
 
 When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
 
@@ -249,9 +247,9 @@ The `.circleci/resources/pytest_build_config.ini` path may need to be replaced t
 ### Are you setting the junit_family in your pytest.ini?
 {: #are-you-setting-the-junit-family-in-your-pytest-ini }
 
-Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
+Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html). Search for "families" to see the relevant information.
 
-Search for "families" to see the relevant information.
+**Note**: A breaking change was introduced in pytest 6.1 the `junit_family` xml format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`. For more information see the [pytest changelog](https://docs.pytest.org/en/stable/changelog.html#id137).
 
 ### Example project that correctly splits by timings
 {: #example-project-that-correctly-splits-by-timing }
@@ -292,16 +290,10 @@ You may find an example build of proper test splitting [here](https://app.circle
 
 ### Video: troubleshooting globbing
 {: #video-troubleshooting-globbing }
-{:.no_toc}
 
 Note: To follow along with the commands in the video below you will need to be [`SSH-ed into a job`]({{ site.baseurl }}/2.0/ssh-access-jobs/).
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-## See also
-{: #see-also }
-
-[Using Containers]({{ site.baseurl }}/2.0/containers/)
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }
@@ -322,3 +314,10 @@ suite. These applications are not developed or supported by CircleCI. Please che
   ```shell
   go test -v $(go list ./... | circleci tests split)
   ```
+
+
+## Next steps
+{: #next-steps }
+
+* [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data/)
+* [Test Insights]({{ site.baseurl }}/2.0/insights-tests/)

@@ -50,7 +50,7 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
 # 設定で使用する Orb を宣言します。
-# Orb に関する詳細は、https://circleci.com/docs/ja/2.0/orb-intro/をご覧ください。
+# Orb に関する詳細は、 https://circleci.com/docs/ja/2.0/orb-intro/ をご覧ください。
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
@@ -67,7 +67,7 @@ jobs:
       - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
       # Node Orb を使ってパッケージをインストールします。
       # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
-      # 詳細は、 https://circleci.com/docs/2.0/caching/　を参照してください。
+      # 詳細は、 https://circleci.com/docs/2.0/caching/ を参照してください。
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"

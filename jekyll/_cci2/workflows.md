@@ -4,7 +4,7 @@ title: "Using Workflows to Schedule Jobs"
 short-title: "Using Workflows to Schedule Jobs"
 description: "Using Workflows to Schedule Jobs"
 order: 30
-redirect_from: 2.0/defining-multiple-jobs
+redirect_from: /2.0/defining-multiple-jobs/
 version:
 - Cloud
 - Server v3.x
