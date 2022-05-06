@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "テストの並列実行"
 short-title: "テストの並列実行"
-description: "Running tests in parallel compute environments to optimize your CircleCI pipelines."
+description: "並列のコンピューティング環境でテストを実行し、CircleCI のパイプラインを最適化する"
 version:
   - クラウド
   - Server v3.x
