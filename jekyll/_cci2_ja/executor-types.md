@@ -305,12 +305,31 @@ jobs:
       xcode: 12.5.1
 
     steps:
-      # コマンドは、インストールされている Xcode 11.3 を
-      # 使用して、macOS コンテナ内で実行されます
+      # Commands will execute in macOS container
+      # with Xcode 12.5.1 installed
       - run: xcodebuild -version
 ```
 
+### macOS VM Storage
+{: #macos-vm-storage }
+
+The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed.
+
+| Xcode のバージョン | クラス                   | Minimum Available Storage |
+| ------------ | --------------------- | ------------------------- |
+| 10.3.0       | medium, large         | 36GB                      |
+| 10.3.0       | macos.x86.medium.gen2 | 36GB                      |
+| 11.*         | medium, large         | 23GB                      |
+| 11.*         | macos.x86.medium.gen2 | 23GB                      |
+| 12.*         | medium, large         | 30GB                      |
+| 12.*         | macos.x86.medium.gen2 | 30GB<sup>(2)</sup>        |
+| 13.*         | medium, large         | 23GB                      |
+| 13.*         | macos.x86.medium.gen2 | 89GB                      |
+{: class="table table-striped"}
+
 <sup>(1)</sup> _このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p>
+
+<sup>(2)</sup> _Exception: Xcode 12.0.1 and 12.5.1 have a minimum 100GB of available storage._
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }
@@ -353,7 +372,7 @@ jobs:
 
 クラウド版の例では、Windows Executor のセットアップに Windows Orb を使用することで、設定を簡素化しています。 詳細については、[Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)を参照してください。
 
-CircleCI Server を使用している場合、Windows ジョブに使用しているイメージに関する詳細情報については、システム管理者にお問い合わせください。 Windows イメージはシステム管理者によって設定され、CircleCI の設定ファイルでは常に `windows-default` というイメージ名で利用できます。
+CircleCI Server を使用している場合、Windows ジョブに使用しているイメージに関する詳細情報については、システム管理者にお問い合わせください。 Windows イメージはシステム管理者によって構成され、CircleCI の設定ファイルでは常に `windows-default` というイメージ名で利用できます。
 
 ## GPU を使用する
 {: #using-gpus }
@@ -387,9 +406,9 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-CircleCI Server では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\].を参照してください。
+CircleCI Server では、VM サービスを構成することで GPU 対応の machine Executor を使用できます。 \[CircleCI Server での GPU Executor の実行方法に関するドキュメント\]\[server-gpu\] を参照してください。
 
 ## 関連項目
 {: #see-also }
 
-[設定に関するリファレンス]({{ site.baseurl }}/2.0/configuration-reference/)
+[設定ファイル リファレンス]({{ site.baseurl }}/2.0/configuration-reference/)
