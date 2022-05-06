@@ -55,7 +55,7 @@ orbs:
   node: circleci/node@5.0.2
 ```
 
-**Note**: It is always a good idea to check in the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent (or correct for your project) orb verison.
+**Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
 
 ### 3. Create jobs
 {: #create-jobs }

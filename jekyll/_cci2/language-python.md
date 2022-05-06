@@ -55,14 +55,14 @@ orbs:
   python: circleci/python@2.0.3
 ```
 
-**Note**: It is always a good idea to check in the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent (or correct for your project) orb verison.
+**Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
 
 ### 3. Create jobs
 {: #create-jobs }
 
-Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/2.0/jobs-steps/) page.
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or virtual machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/2.0/jobs-steps/) page.
 
-A common ask from developers who are getting started with CircleCI is to perform 3 basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Python orb, we can use commands that are built into the orb to keep our config simple and succinct:
+A common ask from developers who are getting started with CircleCI is to perform three basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Python orb, we can use commands that are built into the orb to keep our config simple and succinct:
 
 #### a. Build and test the app
 {: #build-and-test-the-app }
@@ -88,7 +88,7 @@ jobs:
 #### b. Deploy the app
 {: #deploy-the-app }
 
-In this quickstart, we are going to deploy to Heroku. We can do this using the official Heroku orb by adding a new line into our orb section. The Heroku orb contains a set of prepackaged CircleCI configurations you can use to deploy applications to Heroku. Learn more about the [Heroku orb]({{site.devhub_base_url}}/orbs/orb/circleci/heroku).
+In this quickstart guide, we will deploy to [Heroku](https://www.heroku.com/). We can do this using the official Heroku orb by adding a new line into our orb section. The Heroku orb contains a set of prepackaged CircleCI configurations you can use to deploy applications to Heroku. Learn more about the [Heroku orb]({{site.devhub_base_url}}/orbs/orb/circleci/heroku).
 
 ```yaml
 orbs:
