@@ -556,12 +556,12 @@ jobs:
 ##### Windows Executor
 {: #windows-executor }
 
-| クラス            | vCPU | RAM    | Disk Size |
-| -------------- | ---- | ------ | --------- |
-| medium (デフォルト) | 4    | 15 GB  | 200 GB    |
-| large          | 8    | 30 GB  | 200 GB    |
-| xlarge         | 16   | 60 GB  | 200 GB    |
-| 2xlarge        | 32   | 128 GB | 200 GB    |
+| クラス            | vCPU | RAM    | ディスクサイズ |
+| -------------- | ---- | ------ | ------- |
+| medium (デフォルト) | 4    | 15 GB  | 200 GB  |
+| large          | 8    | 30 GB  | 200 GB  |
+| xlarge         | 16   | 60 GB  | 200 GB  |
+| 2xlarge        | 32   | 128 GB | 200 GB  |
 {: class="table table-striped"}
 
 **例**
@@ -588,11 +588,11 @@ Windows Executor の詳細と例については、[Windows に関する入門ガ
 ##### GPU Executor (Linux)
 {: #gpu-executor-linux }
 
-| クラス                             | vCPU | RAM | GPU | GPU モデル           | GPU メモリ (GiB) | Disk Size (GiB) |
-| ------------------------------- | ---- | --- | --- | ----------------- | ------------- | --------------- |
-| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4   | 8             | 300             |
-| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4   | 16            | 300             |
-| gpu.nvidia.large<sup>(2)</sup>  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            | 300             |
+| クラス                             | vCPU | RAM | GPU | GPU モデル           | GPU メモリ (GiB) | ディスクサイズ (GiB) |
+| ------------------------------- | ---- | --- | --- | ----------------- | ------------- | ------------- |
+| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4   | 8             | 300           |
+| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4   | 16            | 300           |
+| gpu.nvidia.large<sup>(2)</sup>  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            | 300           |
 {: class="table table-striped"}
 
 **例**
@@ -616,9 +616,9 @@ jobs:
 ##### GPU Executor (Windows)
 {: #gpu-executor-windows }
 
-| クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) | Disk Size (GiB) |
-| --------------------------------------- | ---- | --- | --- | --------------- | ------------- | --------------- |
-| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            | 200             |
+| クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) | ディスクサイズ (GiB) |
+| --------------------------------------- | ---- | --- | --- | --------------- | ------------- | ------------- |
+| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            | 200           |
 {: class="table table-striped"}
 
 **例**
