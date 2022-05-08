@@ -1,12 +1,12 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Overview
+= CircleCI セルフホストランナーの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how CircleCI self-hosted runners enable you to use your own infrastructure for running jobs.
+:page-description: CircleCI セルフホストランナーを使用して、お客様のインフラストラクチャでジョブを実行する方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -15,16 +15,16 @@ toc::[]
 
 == はじめに
 
-CircleCI self-hosted runner enables you to use your own infrastructure for running jobs. これにより、ビルドとテストが可能なアーキテクチャの幅が広がるだけでなく、環境をより細かく制御することもできます。 The diagram below illustrates how CircleCI self-hosted runner extends our existing systems.
+CircleCI セルフホストランナーを使用することにより、お客様のインフラストラクチャでジョブを実行できるようになります。 これにより、ビルドとテストが可能なアーキテクチャの幅が広がるだけでなく、環境をより細かく制御することもできます。 下図は、CircleCI セルフホストランナーが既存のシステムをどのように拡張するのかを示しています。
 
-.Self-hosted Runner Architecture
+.セルフホストランナーのアーキテクチャ
 image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
 == CircleCI ランナーのユースケース
 
-There are two key use cases CircleCI aims to meet with the self-hosted runner:
+CircleCI では、セルフホストランナーにより主に下記の 2 つのユースケースを実現します。
 
-* 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。 Some things the self-hosted runner enables are:
+* 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。 ランナーを使用することで、次のようなことが可能になります。
 ** IP 制限 - お客様による制御が可能な静的 IP アドレスを使用できます。
 ** ID とアクセス管理 (IAM) 権限 - AWS にセットアップしたランナーに、IAM の権限を割り当てることができます。
 ** オペレーティングシステムの監視
