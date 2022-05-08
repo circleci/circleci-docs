@@ -1,9 +1,9 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Linux
+= Linux への CircleCI セルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,24 +12,24 @@ version:
 
 toc::[]
 
-This page describes how to install CircleCI self-hosted runner on Linux.
+このページでは、CircleCI セルフホストランナーを Linux にインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
-== Create the CircleCI self-hosted runner configuration
+== CircleCI セルフホストランナー設定ファイルを作成する
 
-Create a `launch-agent-config.yaml` file. 
+`launch-agent-config.yaml` ファイルを作成します。 
 
 ```shell
 sudo touch /opt/circleci/launch-agent-config.yaml
 ```
 
-Copy and paste into the newly created file the recommended CircleCI self-hosted runner configuration for Linux:
+下記の Linux 用セルフホストランナーの推奨設定を新しく作成したファイルにコピー & ペーストします。
 
 ```yaml
 api:
   auth_token: AUTH_TOKEN
-  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 For example,
+  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
   # url: https://circleci.example.com
 
 runner:
@@ -37,25 +37,27 @@ runner:
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
   working_directory: /opt/circleci/workdir/%s
   cleanup_working_directory: true
+
 ```
 
-Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step. Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. `USERNAME` is the user on your machine that you want to run the runner launch agent. This is not your CircleCI account username, but the user on the machine that the agent will be installed on.
+`AUTH_TOKEN` を、xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。 `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` はランナーをインストールするマシンに一意の名前です。 `RUNNER_NAME` はお好きな値で構いません。また、名前空間やリソースクラス名を含む必要はありません。 `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。 これは CircleCI アカウントユーザー名ではなく、エージェントがインストールされるマシンのユーザーです。
 
-== Install the CircleCI self-hosted runner configuration
+== CircleCI セルフホストランナー設定ファイルをインストールする
 
 作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、パーミッションを `600` に設定します。
 
 ```shell
 sudo chown root: /opt/circleci/launch-agent-config.yaml
+
 ```
 
 ```shell
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-== Create the USERNAME user & working directory
+== USERNAME のユーザーと作業ディレクトリを作成する
 
-これらはタスク エージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
+これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
 === Ubuntu/Debian
 
@@ -66,7 +68,7 @@ sudo mkdir -p /opt/circleci/workdir
 sudo chown -R USERNAME /opt/circleci/workdir
 ```
 
-Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があることにご注意ください。
 
 ```shell
 echo "USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -81,15 +83,16 @@ sudo mkdir -p /opt/circleci/workdir
 sudo chown -R USERNAME /opt/circleci/workdir
 ```
 
-Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があることにご注意ください。
 
 ```shell
 echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 ```
 
-== SELinux ポリシーを構成する (RHEL 8)
+== SELinux ポリシーを設定する (RHEL 8)
 
-An SELinux policy is required for self-hosted runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this self-hosted runner install.
+RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
 `/opt/circleci/policy` というディレクトリを作成し、最初のポリシー モジュールを生成します。
 
@@ -115,7 +118,7 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 === サービスを起動する
 
-When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+CircleCI セルフホストランナーサービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
 
 ```shell
 systemctl start circleci.service
@@ -150,7 +153,7 @@ circleci.service - CircleCI Runner
 journalctl -u circleci
 ```
 
-== Optional Step
+== オプションの手順
 
 === `systemd` ユニットを有効にする
 
