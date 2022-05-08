@@ -91,4 +91,4 @@ circleci runner resource-class delete <resource-class>
 
 == 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-If a self-hosted runner has not reported a "heartbeat" to CircleCI for three or more days, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
+CircleCI に「信号」が 3 日以上報告されないと、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
