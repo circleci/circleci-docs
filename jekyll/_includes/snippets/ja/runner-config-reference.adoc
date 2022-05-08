@@ -1,12 +1,13 @@
-== Referencing your self-hosted runner on a job
+== ジョブでセルフホストランナーを参照する
 
-After setting up your self-hosted runner, you will need to reference it on a job by setting some fields in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your self-hosted runners are:
+セルフホストランナーのセットアップが完了したら、 `.circleci/config.yml` ファイルのフィールドを設定してジョブでセルフホストランナーを参照する必要があります。 セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
 * `machine: true`
 * `resource_class: your-namespace/your-resource`
 
 以下に、ジョブのセットアップ方法の簡単な例を示します。
 
+```yaml
 version: 2.1
 workflows:
   testing:
@@ -18,5 +19,6 @@ jobs:
     resource_class: your-namespace/your-resource
     steps:
       - run: echo "Hi I'm on Runners!"
+```
 
-The job will then execute using your self-hosted runner when you push the config to your VCS provider.
+この設定ファイルを VCS プロバイダーにプッシュすると、セルフホストランナーを使ってジョブが実行されます。
