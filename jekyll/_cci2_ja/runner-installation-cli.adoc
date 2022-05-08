@@ -49,7 +49,7 @@ toc::[]
 
 == セルフホストランナーの利用条件
 
-CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/ja/runner-terms/[CircleCI ランナーの条件] に同意したものとみなされます。
+CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件] に同意したものとみなされます。
 
 == コマンドラインのインストール
 
@@ -65,12 +65,16 @@ NOTE:  **サーバー用のセルフホストランナー** をインストー�
 +
 下記のコマンドを使って名前空間を作成します。
 +
+```
 circleci namespace create <namespace> <vcs-type> <org-name>
+```
 +
 例えば、組織の GitHub URL が `\https://github.com/circleci-org` の場合、`circleci namespace create my-namespace github circleci-org` を使います。
 . 次のコマンドを実行して、セルフホストランナーの名前空間用のリソースクラスを作成します。
 +
+```
 circleci runner resource-class create <namespace>/<resource-class> <description> --generate-token
+```
 +
 *リソースクラスを作成するコマンドには名前空間が必要です。*
 例: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`
@@ -87,6 +91,7 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 +
 クラウド版 CircleCI のセルフホストランナーは、サポートされている最新バージョンに自動的に更新されます。 サーバーの場合、特定のセルフホストランナーバージョンの相互運用性は検証されていますが、セルフホストランナーは自動更新されません。
 +
+```shell
 #!/usr/bin/env sh
 
 set -eu pipefail
@@ -116,6 +121,7 @@ curl --compressed -L "${base_url}/${agent_version}/${file}" -o "${file}"
 echo "Verifying CircleCI Launch Agent download"
 grep "${file}" checksums.txt | sha256sum --check && chmod +x "${file}"
 sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+```
 . プラットフォームを設定して、 `download-launch-agent.sh` スクリプトを実行し、バイナリをダウンロード、確認、インストールしてください。 **cloud** を使用している場合は、下記の表でプラットフォームの変数を見つけます。
 +
 [.table.table-striped]
@@ -139,8 +145,10 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 +
 例えば **クラウド** の場合、macOS M1のプラットフォームを設定し、 `download-launch-agent.sh` スクリプトを実行するには、下記を実行します。
 +
+```shell
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
 
+```
 +
 *Server v3.1.0 以降* の場合は、下記の表から実行しているサーバーのバージョンに互換性のあるローンチエージェントのバージョンを見つけます。
 +
@@ -168,7 +176,9 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 +
 `<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、下記を実行します。
 +
+```shell
 export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
+```
 +
 **注:** ランナーのセットアップに成功したら、`download-launch-agent.sh` ファイルを削除します。
 . 次のセクションのプラットフォームごとの手順に従ってインストールを続けます。
