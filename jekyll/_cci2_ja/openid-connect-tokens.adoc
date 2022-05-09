@@ -21,12 +21,14 @@ toc::[]
 
 `context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows, ワークフロー>>セクションに追加して、<<contexts/#creating-amd-using-a-context,ジョブにコンテキスト>>を追加します。
 
+```yaml
 workflows:
   my-workflow:
     jobs:
       - run-tests:
           context:
             - my-context
+```
 
 == クラウドサービスの設定
 
@@ -112,6 +114,7 @@ trusted entity には、**Web Identity** を選択し、先程作成した ID �
 
 下記は AWS CLI の https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity サブコマンド] を使ったサンプル設定です。 その後、AWS との簡単なやり取りにより (`aws sts get-caller-identity`) 、認証に成功したことを示します。 これを、S3 バケットへのアップロード、ECR へのプッシュ、EKS とのやり取りなど、任意のものに置き換えてください。
 
+```yml
 jobs:
   deploy:
     docker:
@@ -136,6 +139,7 @@ jobs:
           # interact with AWS
           aws sts get-caller-identity
 
+```
 
 === 高度な設定
 
@@ -147,8 +151,10 @@ CircleCI の <<format-of-the-openid-connect-id-token,OIDC トークン>>のク�
 
 次に、ロールの信頼ポリシーに以下の条件を追加し、選択したプロジェクトのジョブのみがロールを担うことができるようにします。 `<organization-id>` に組織 ID を、`<project-id>` にプロジェクト ID を入力します。
 
+```yml
 "StringLike": {
   "oidc.circleci.com/org/<organization-id>:sub": "org/<organization-id>/project/<project-id>/user/*"
 }
+```
 
 これは https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] を使って、選択したプロジェクトの CircleCI の OIDC トークンのサブクレームを照合します。 これで、他のプロジェクトのジョブは、このロールを担えないようになりました。
