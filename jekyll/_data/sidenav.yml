@@ -524,8 +524,6 @@ en:
           link: 2.0/aws/
         - name: Teardown
           link: 2.0/aws-teardown/
-        - name: Upgrades from 1.0 to 2.0
-          link: 2.0/upgrading/
     - name: Server v2.19.x Operations
       link: 2.0/overview/
       children:
