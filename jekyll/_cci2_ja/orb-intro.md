@@ -18,9 +18,9 @@ Orb は、再利用可能なコードスニペットです。Orb を使用する
 
 Orb に含まれる再利用可能なスニペットは、たとえば [ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)、[Executor ]({{site.baseurl}}/ja/2.0/reusing-config/#executor)、および Node.js やそのパッケージマネージャーなどです。
 
-Use orbs to reduce configuration complexity, and help you integrate with your software and services stack quickly and easily across many projects.
+Orb を使用すると、設定がシンプルになり、ソフトウェアやサービススタックとの連携を多くのプロジェクトにまたがって素早く容易に行えるようになります。
 
-If you would like to author your own orb, read more on the [Introduction to Authoring Orbs]({{site.baseurl}}/2.0/orb-author-intro/) page.
+ご自身の Orb をオーサリングする場合は、[Orb のオーサリング方法]({{site.baseurl}}/ja/2.0/orb-author-intro/)のページをご覧ください。
 
 ## Orb を使用するメリット
 {: #benefits-of-using-orbs }
