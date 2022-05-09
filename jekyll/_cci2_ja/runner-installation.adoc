@@ -44,7 +44,7 @@ toc::[]
 
 == セルフホストランナーの利用条件
 
-セルフホストランナーを利用する前に、https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件]に同意する必要があります。  https://app.circleci.com/[CircleCI Web アプリ]の *セルフホストランナー* セクションにアクセスするには、組織の管理者が*Organization Settings > Self-Hosted Runners* に行き、条件に同意する必要があります。
+セルフホストランナーを利用する前に、https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件]に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ]の *セルフホストランナー* セクションにアクセスするには、組織の管理者が*Organization Settings > Self-Hosted Runners* に行き、条件に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
