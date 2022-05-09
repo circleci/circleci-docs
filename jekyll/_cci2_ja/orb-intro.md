@@ -14,9 +14,9 @@ version:
 * 目次
 {:toc}
 
-Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 Visit the [Orbs Registry](https://circleci.com/developer/orbs) on the CircleCI Developer Hub to search for orbs to help simplify your configuration.
+Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 CircleCI Developer Hub の [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、設定作業の簡素化に役立つ Orb を検索できます。
 
-Examples of reusable snippets that can be included in orbs are [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [executors]({{site.baseurl}}/2.0/reusing-config/#executor), as well as Node.js and its package managers.
+Orb に含まれる再利用可能なスニペットは、たとえば [ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)、[Executor ]({{site.baseurl}}/ja/2.0/reusing-config/#executor)、および Node.js やそのパッケージマネージャーなどです。
 
 Use orbs to reduce configuration complexity, and help you integrate with your software and services stack quickly and easily across many projects.
 
