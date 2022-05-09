@@ -188,7 +188,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-NOTE: `circleci` ユーザーの環境を使用するタスクエージェントとは異なり、ローンチエージェントでは、その設定ファイルで明示的に定義されている環境変数 (プロキシ設定など) が必要です。 これは `Environment=` または `EnvironmentFile=` で設定できます。 詳細については、<a data-type="default" href="https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment">`systemd` のドキュメントをご覧ください。
+NOTE: `circleci` ユーザーの環境を使用するタスクエージェントとは異なり、ローンチエージェントでは、その設定ファイルで明示的に定義されている環境変数 (プロキシ設定など) が必要です。 これは `Environment=` または `EnvironmentFile=` で設定できます。 詳細については、 https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[`systemd`] のドキュメントをご覧ください。
 
 次に、下記コマンドによりサービスを有効化します。
 
