@@ -9,7 +9,7 @@ version:
   - Server v2.x
 ---
 
-The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can run tests in parallel by spreading them across multiple, separate execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/2.0/executor-types/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
+プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の実行環境に分散させて並列に実行することができます。 並列実行レベルを指定することにより、いくつの [Executor]({{site.baseurl}}/2.0/executor-types/) をスピンアップしてテストスイートを実行するかが定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行しているそれぞれの Exexutor を設定することができます。
 
 * 目次
 {:toc}
@@ -36,9 +36,9 @@ jobs:
 
 ![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/2.0/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner to execute on will queue until a self-hosted runner is available.
+[セルフホストランナー]({{site.baseurl}}/ja/2.0/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 任意のリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない過剰な並列タスクは、セルフホストランナーが使用可能になるまでキューに入れられます。
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#parallelism)を参照してください。
 
 ## CircleCI CLI を使用したテストの分割
 {: #using-the-circleci-cli-to-split-tests }
@@ -54,7 +54,7 @@ CLI をローカルにインストールするには、[CircleCI のローカル
 
 CLI では、並列ジョブの実行時に複数のマシンにテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテスト ランナーに渡す必要があります。
 
-[Self-hosted runners]({{site.baseurl}}/2.0/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task agent]({{site.baseurl}}/2.0/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
+[セルフホストランナー]({{site.baseurl}}/2.0/runner-overview/)は、CLI を使ってテストを分割する代わりに、`circleci-agent` を直接呼び出すことができます。 これは、[タスクエージェント]({{site.baseurl}}/ja/2.0/runner-overview/#circleci-runner-operation)が既に `$PATH` 上に存在し、テスト分割時には追加の依存関係が削除されるからです。
 
 
 #### テストファイルのグロブ
