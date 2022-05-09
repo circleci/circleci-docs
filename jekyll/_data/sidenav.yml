@@ -862,6 +862,10 @@ ja:
         - name: Kubernetes Installation
           link: ja/2.0/runner-on-kubernetes/
           i18n_name: Kubernetes ランナー
+        - name: Self-hosted Runner Supported Platforms
+          link: ja/2.0/runner-supported-platforms/
+          i18n_name: 利用可能なプラットフォーム
+        - name: Scaling Self-hosted Runner
         - name: Scaling Runner
           link: ja/2.0/runner-scaling/
           i18n_name: ランナーのスケール
