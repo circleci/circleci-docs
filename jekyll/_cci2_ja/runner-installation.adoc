@@ -42,17 +42,17 @@ toc::[]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
-== セルフホストランナーの利用条件
+== セルフホストランナー規約への同意
 
-セルフホストランナーを利用する前に、https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件]に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ]の *セルフホストランナー* セクションにアクセスするには、組織の管理者が*Organization Settings > Self-Hosted Runners* に行き、条件に同意する必要があります。
+セルフホストランナーを利用する前に、https://circleci.com/legal/runner-terms/[CircleCI ランナー規約]に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ]の *セルフホストランナー* セクションにアクセスするには、組織の管理者が*Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
-条件が承認されたら、*セルフホストランナー*はサイドナビゲーションバーに常に表示されるようになります。
+規約に同意すると、*セルフホストランナー*はサイドナビゲーションバーに常に表示されるようになります。
 
 CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS のhttps://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
 
-== CircleCI Web アプリのインストール
+== CircleCI Web アプリでのインストール
 
 NOTE: 現在、Web アプリのインストールは、*クラウド版の*お客様のみ可能です。 If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#, Self-Hosted Runners through the CLI>> page.
 
@@ -84,7 +84,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on 
 +
 必要に応じて、それぞれのページに記載されている認証後のプラットフォームごとの手順も参照してください。 See the <<#platform-specific-instructions, Platform-specific instructions>> section for a list of these pages.
 +
-Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、xref:runer-on-Kubernetes .adoc[Kubernetes] を参照してください。
+Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、xref:runner-on-kubernetes.adoc[Kubernetes] を参照してください。
 +
 +
 . 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
