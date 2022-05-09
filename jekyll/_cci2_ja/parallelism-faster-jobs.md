@@ -9,7 +9,7 @@ version:
   - Server v2.x
 ---
 
-プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の実行環境に分散させて並列に実行することができます。 並列実行レベルを指定することにより、いくつの [Executor]({{site.baseurl}}/2.0/executor-types/) をスピンアップしてテストスイートを実行するかが定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行しているそれぞれの Exexutor を設定することができます。
+プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の実行環境に分散させて並列に実行することができます。 並列実行レベルを指定すると、スピンアップしてテストスイートを実行する [Executor]({{site.baseurl}}/ja/2.0/executor-types/) の数が定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行している各 Exexutor を設定することができます。
 
 * 目次
 {:toc}
@@ -17,7 +17,7 @@ version:
 ## ジョブの並列実行レベルの指定
 {: #specifying-a-jobs-parallelism-level }
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs)レベルで定義します。 `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。
 
@@ -117,7 +117,7 @@ CLI は、テスト スイートによって生成されたタイミング デ�
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
-For partially found test results, we automatically assign a random small value to any test we did not find timing data for. You can override this assigned value to a specific value with the `--time-default` flag.
+部分的に検出されたテスト結果については、タイミングデータが見つからなかったテストに自動的にランダムな小さい値が割り当てられます。 この割り当てられた値は、`--time-default` フラグを使って特定の値に上書きできます。
 
 ```shell
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
@@ -244,9 +244,9 @@ cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 ### pytest.ini に junit_family を設定している場合
 {: #are-you-setting-the-junit-family-in-your-pytest-ini }
 
-pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html). 上記ページの該当箇所は、"families" で検索すると確認できます。
+pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、[こちら](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)のページを参照してください。 該当箇所は、"families" で検索すると確認できます。
 
-**Note**: A breaking change was introduced in pytest 6.1 the `junit_family` xml format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`. For more information see the [pytest changelog](https://docs.pytest.org/en/stable/changelog.html#id137).
+**注**: pytest 6.1 では互換性を損なう変更が行われ、`junit_family` xml 形式がファイル名を含まない `xunit2` に変更されました。 つまり、`--split-by=timings` は `xunit1` を指定しないと動作しません。 詳細については、[pytest changelog](https://docs.pytest.org/en/stable/changelog.html#id137)を参照してください。
 
 ### タイミング基準で正しく分割するサンプルプロジェクト
 {: #example-project-that-correctly-splits-by-timing }
@@ -310,5 +310,5 @@ workflows:
 ## 次のステップ
 {: #next-steps }
 
-* [Collecting Test Data]({{ site.baseurl }}/ja/2.0/collect-test-data/)
+* [テストデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data/)
 * [テスト インサイト（Test Insights）]({{ site.baseurl }}/ja/2.0/insights-tests/)
