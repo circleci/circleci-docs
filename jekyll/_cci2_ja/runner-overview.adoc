@@ -58,4 +58,4 @@ CircleCI Academy の https://academy.circleci.com/runner-course?access_code=publ
 
 == 関連項目
 - <<runner-concepts#, ランナーのコンセプト>>
-- <<runner-installation#, セルフホストランナー Web アプリのインストール>>
+- <<runner-installation#, セルフホストランナーの Web アプリでのインストール>>
