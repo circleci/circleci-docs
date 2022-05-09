@@ -33,7 +33,7 @@ key. CircleCI offers two Arm resources as part of the [`machine` executor]({{sit
 
 Which are available under these images:
 
-* `ubuntu-2004:202201-02' - most recent, recommended for all users
+* `ubuntu-2004:202201-02` - most recent, recommended for all users
 * `ubuntu-2004:202201-01`
 * `ubuntu-2004:202111-02` 
 * `ubuntu-2004:202111-01`
