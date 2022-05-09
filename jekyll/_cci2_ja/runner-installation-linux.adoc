@@ -40,7 +40,7 @@ runner:
 
 ```
 
-`AUTH_TOKEN` を xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。 `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、お好きな値を設定でき、名前空間やリソースクラス名を含む必要はありません。 `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。 これは CircleCI アカウントユーザー名ではなく、エージェントがインストールされるマシンのユーザーです。
+`AUTH_TOKEN` を xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。 `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。 これは CircleCI アカウントユーザー名ではなく、エージェントがインストールされるマシンのユーザーです。
 
 == CircleCI セルフホストランナー設定ファイルをインストールする
 
@@ -159,7 +159,7 @@ journalctl -u circleci
 
 このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] がのインストールが必要です。
 
-所有者を `root` にして `/opt/circleci/circleci.service` を作成し、アクセス許可を `755` に設定します。
+所有者を `root` にして `/opt/circleci/circleci.service` を作成し、権限を `755` に設定します。
 
 ```shell
 sudo chown root: /opt/circleci/circleci.service
