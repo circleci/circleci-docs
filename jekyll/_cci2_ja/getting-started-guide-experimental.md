@@ -17,7 +17,7 @@ toc: false
 
 
 {% capture content1 %}
-無料の CircleCI にユーザー登録する
+CircleCI に無料でユーザー登録する
 {% endcapture %}
 
 {% capture content2 %}
@@ -53,7 +53,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+{% include two-up.html title="1. プロジェクトを選択する" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
 “Select your <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-start/">config.yml</a> file” モーダルで、 <b>Fast</b> を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
@@ -63,7 +63,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
 {%- endcapture -%}
 
-{% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
+{% include two-up.html title="2. config.yml ファイルを選択する" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 
 {% capture content %}
@@ -78,7 +78,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor.png
 {%- endcapture -%}
 
-{% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
+{% include two-up.html title="3. CircleCI 設定ファイルエディター" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
 
 {% capture content %}
 はじめてのパイプラインの成功 (グリーンビルド) です。 この設定で問題がなければ、メインブランチにマージする、または引き続き変更を加えることができます。{% endcapture %}
