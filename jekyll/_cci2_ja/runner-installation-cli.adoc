@@ -1,7 +1,7 @@
 ---
 
 version:
--クラウド
+- クラウド
 - Server v3.x
 ---
 = CLI でのセルフホストランナーのインストール
@@ -196,7 +196,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 
 その他のプラットフォームについては、 <<runner-supported-platforms#, 使用可能な CircleCI セルフホストランナーのプラットフォーム>> で詳細を確認してください。
 
-{% include snippets/runner-config-reference.adoc %}
+{% include snippets/ja/runner-config-reference.adoc %}
 
 == セルフホストランナーのサーバーとの互換性
 
