@@ -18,7 +18,7 @@ toc::[]
 
 xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの互換性リスト]を参照して、インストールに必要なランナーのバージョンを確認してください。
 
-== サーバーのセルフホストランナーアップグレードする
+== サーバーのセルフホストランナーをアップグレードする
 
 クラウド版の CircleCI とは異なり、CircleCI Server は`circleci-launch-agent`を自動的に更新しないため、手動による操作が必要です。 以下では、さまざまな環境で CircleCI Server のセルフホストランナーをアップグレードする方法を詳しく説明します。
 
