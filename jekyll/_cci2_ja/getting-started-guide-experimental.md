@@ -10,7 +10,7 @@ toc: false
 ---
 
 {% capture content %}
-継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は皆、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
+継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
 {% endcapture %}
 
 {% include getting-started-section-header.html content=content %}
@@ -27,7 +27,7 @@ toc: false
 {% include getting-started-links.html title="Prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
 
 {% capture content %}
-継続的インテグレーションは、開発者がコードを共有リポジトリの main ブランチに迅速かつ頻繁に統合するための手法です。 開発者は皆、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
+継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
 {% endcapture %}
 
 {%- capture header-banner-1 -%}
@@ -46,7 +46,7 @@ toc: false
 
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
 
-GitHub または Bitbucket で “hello-world” というリポジトリを作成します。 次に左側のメニューで、<a  href="https://app.circleci.com/projects">プロジェクト</a>を選択します。 リポジトリを探し、Set Up Project をクリックします。 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
+GitHub または Bitbucket で “hello-world” というリポジトリを作成します。 次に左側のメニューで、<a  href="https://app.circleci.com/projects">Projects</a> を選択します。 リポジトリを探し、Set Up Project をクリックします。 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
 {% endcapture %}
 
 {%- capture select-project -%}
@@ -87,7 +87,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
 {%- endcapture -%}
 
-{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
+{% include two-up.html title="4. おめでとうございます 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
 
 {% capture content %}ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するのを確認できます。 {% endcapture %}
 
@@ -105,15 +105,15 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/what-just-happened.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. 何が起きたのでしょうか？" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
+{% include two-up.html title="1. 何が起きたのでしょう？" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
 
 
 {% capture content %}
 <b>say-hello</b>  <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">ジョブ</a>をクリックし、このジョブの<a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">ステップ</a>を確認します。
 <ul>
-<li>環境のスピンアップ</li>
-<li>環境変数の準備</li>
-<li>コードのチェックアウト</li>
+<li>Spin up environment (環境のスピンアップ)</li>
+<li>Preparing environment variables (環境変数の準備)</li>
+<li>Checkout code (コードのチェックアウト)</li>
 <li>Say hello</li>
 </ul>
 {% endcapture %}
@@ -125,17 +125,17 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {% include two-up.html title="2. 結果を確認する" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
 
 {% capture content %}
-チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローすることができます。 チームメイトは、コードをまったくコミットしていないとしても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
+チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローすることができます。 チームメイトは、コードをまったくコミットしていなくても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
 {% endcapture %}
 
 {%- capture collab-with-team -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/collab-with-team.png
 {%- endcapture -%}
 
-{% include two-up.html title="3. Collaborate with teammates" content=content imageURL=collab-with-team imageAlt="Add Team Members" %}
+{% include two-up.html title="3. チームメートとコラボレーションする" content=content imageURL=collab-with-team imageAlt="Add Team Members" %}
 
 
-{% capture content %} We recommend inviting your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster. You can also: {% endcapture %}
+{% capture content %} チームメートを無料で招待し、協力してもらいましょう。 チームメートとのコラボレーションにより、問題の解決、プルリクエストの承認や、ビルドやテストをより迅速に行うことができます。 また、以下も可能です。 {% endcapture %}
 
 {%- capture header-banner-3 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
@@ -144,23 +144,26 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {% include getting-started-section-header.html title="03 What's next" content=content imagePath=header-banner-3 %}
 
 {% capture content %}
-Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS.
+config.yml ファイルを編修してみましょう。 CircleCI では、ファイルを直接編修し、VCS にコミットすることができます。
 <br>
 <br>
-On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click the ••• buttons to view your configuration file. Make any change and save it. You should see a new pipeline run and likely fail. This is a primary benefit of CircleCI: identifying failures early.
+
+<a  href="https://app.circleci.com/projects/">Projects</a> のページで ••• ボタンをクリックし、設定ファイルを閲覧します。 変更を加え、保存します。 新しいパイプラインが実行され失敗することが確認できます。 これこそが CircleCI の主なメリットです。失敗を迅速に検出できます。
 {% endcapture %}
 
 {%- capture break-your-build -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/break-your-build.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. Break your build" content=content imageURL=break-your-build imageAlt="Failed Job in Pipeline" %}
+{% include two-up.html title="1. ビルドを意図的に失敗させる" content=content imageURL=break-your-build imageAlt="Failed Job in Pipeline" %}
+ XPath: /p[86]
 
 {% capture content %}
-In your Dashboard, click into the <b>say-hello-world</b> workflow. Can you find the four steps that ran? Hint: step 1 is <b>Spin up environment</b>.
+ダッシュボードで、<b>say-hello-world</b> ワークフローをクリックします。 実行された 4 つのステップが確認できますか？ ヒント: ステップ 1 は、<b>Spin up environment</b> です。
 <br>
 <br>
-A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
+
+<a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
 {% endcapture %}
 
 {%- capture explore-workflows -%}
@@ -170,29 +173,29 @@ A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">wo
 {% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
 
 {% capture content %}
-On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
+失敗したパイプラインでは、<a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/ssh-access-jobs/">CircleCI ジョブに直接 SSH 接続して</a>、問題を自動的に解決することができます。 この機能により、パイプラインが再実行され、エラーが検出され、修正されます。
 {% endcapture %}
 
 {%- capture SSH-into-build -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/SSH-into-build.png
 {%- endcapture -%}
 
-{% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
+{% include two-up.html title="3. ビルドに SSH 接続する" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
 
 {% capture content %}
-That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
+これで終了です！ お客様が以前よりも自信を持って CircleCI を使用されることを願っています。 下記リソースもご覧いただき、また<a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">サポートを利用して</a>、さらなる進化を続けてください。
 {% endcapture %}
 
 {% include getting-started-section-header.html title="04 Recommended learning" content=content %}
 
-{% capture content3 %}On-demand free developer training{% endcapture %}
+{% capture content3 %}オンデマンドの開発者無料トレーニング{% endcapture %}
 
-{% capture content4 %}CircleCI foundation videos{% endcapture %}
+{% capture content4 %}CircleCI 基礎ビデオ{% endcapture %}
 
-{% capture content5 %}Introduction to configuration{% endcapture %}
+{% capture content5 %}設定ファイルの概要{% endcapture %}
 
-{% capture content6 %}CircleCI concepts{% endcapture %}
+{% capture content6 %}CircleCI の概要{% endcapture %}
 
-{% capture content7 %}Benefits of CircleCI free plan{% endcapture %}
+{% capture content7 %}CircleCI Free プランのメリット{% endcapture %}
 
 {% include getting-started-links.html title="Developer resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/2.0/config-intro/" href6="https://circleci.com/docs/2.0/concepts/" href7="https://circleci.com/docs/2.0/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
