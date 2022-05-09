@@ -1,27 +1,28 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Creating a Project in CircleCI
+= CircleCI でのプロジェクトの作成
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "Learn how to create a project in CircleCI."
+:page-description: CircleCI でプロジェクトを作成する方法
 :icons: font
 :toc: macro
+
 :toc-title:
 
-This guide gets you started with creating a project in CircleCI.
+このガイドでは、CircleCI でプロジェクトを作成する方法を紹介します。
 
 toc::[]
 
-== Step One: Link your VCS with CircleCI
+== ステップ 1: バージョン管理システム (VCS) と CircleCI をリンクさせる
 
-If you have not done so already, <<first-steps#,sign up with CircleCI>> and select your Version Control System (VCS). メールアドレスで登録することもできます。
+ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、バージョン管理システム (VCS) を選択します。 メールアドレスで登録することもできます。
 
-A CircleCI project must be linked with an existing repo in your VCS. Make sure you have a repo and that you have authorized CircleCI to access it (in GitHub, you have the option to block CircleCI from accessing your private repositories).
+CircleCI プロジェクトとお客様の VCS 内の既存のリポジトリをリンクさせる必要があります。 Make sure you have a repo and that you have authorized CircleCI to access it (in GitHub, you have the option to block CircleCI from accessing your private repositories).
 
 == Step Two: Create a project in CircleCI
 
