@@ -2,7 +2,7 @@
 version:
 - Server v3.x
 ---
-= サーバー上での CircleCI ランナーのアップグレード
+= サーバー上での CircleCI セルフホストランナーのアップグレード
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -10,39 +10,39 @@ version:
 :toc-title:
 
 
-ここでは、CircleCI Server 上で CircleCI ランナーを更新する方法を説明します。
+ここでは、CircleCI Server 上で CircleCI セルフホストランナーを更新する方法を説明します。
 
 toc::[]
 
-== CircleCI Server とランナーの互換性
+== セルフホストランナーのサーバーとの互換性
 
 xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの互換性リスト]を参照して、インストールに必要なランナーのバージョンを確認してください。
 
-== サーバー上のランナーのアップグレード
+== サーバーのセルフホストランナーをアップグレードする
 
-クラウド版の CircleCI とは異なり、CircleCI Server は`circleci-launch-agent`を自動的に更新しないため、手動による操作が必要です。 以下では、さまざまな環境で CircleCI Server のランナーをアップグレードする方法を詳しく説明します。
+クラウド版の CircleCI とは異なり、CircleCI Server は`circleci-launch-agent`を自動的に更新しないため、手動による操作が必要です。 以下では、さまざまな環境で CircleCI Server のセルフホストランナーをアップグレードする方法を詳しく説明します。
 
-=== コンテナ化された環境におけるランナーのアップグレード
+=== コンテナ化された環境におけるセルフホストランナーのアップグレード
 
-ここでは、Kurbernetes や Docker のコンテナ化された環境でランナーをアップグレードする方法について詳しく説明します。
+ここでは、Kurbernetes や Docker のコンテナ化された環境でセルフホストランナーをアップグレードする方法について詳しく説明します。
 
-==== Kubernetes ランナーのアップグレード
+==== Kubernetes セルフホストランナーのアップグレード
 
 xref:runner-on-kubernetes.adoc[Kubernetes のインストールガイド]を参照してください。
 
-==== Docker ランナーのアップグレード
+==== Docker セルフホストランナーのアップグレード
 
-. 現在実行中のすべてのランナーコンテナを停止します。
+. 現在実行中のすべてのセルフホストランナーコンテナを停止します。
 +
 ```shell
 docker stop <container-name>
 ```
-. ランナーのコンテナを削除します。
+. セルフホストランナーのコンテナを削除します。
 +
 ```shell
 docker stop <container-name>; docker rm <container-name>;
 ```
-. 新しいランナーの Docker コンテナを起動します。
+. 新しいセルフホストランナーの Docker コンテナを起動します。
 +
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
@@ -50,7 +50,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 +
 NOTE: サーバー上で Docker コンテナを起動する場合、 `--env`  フラグを使って `agent_version` の環境変数を渡す必要があります。
 
-=== コンテナ化されていない環境におけるランナーのアップグレード
+=== コンテナ化されていない環境におけるセルフホストランナーのアップグレード
 
 コンテナ化されていない環境では、`circleci-launch-agent`バイナリを手動で更新するプロセスは 3 つのステップに分けられます。 各ステップの詳細を以下で説明します。
 
@@ -60,13 +60,13 @@ NOTE: サーバー上で Docker コンテナを起動する場合、 `--env`  �
 
 ==== 1. 既存の `circleci-launch-agent` バイナリを新しいバージョンに置き換える
 
-xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[ローンチエージェント バイナリのダウンロード]と同じ手順で、 `agent_version` の環境変数をxref:runner-installation.adoc#runner-for-server-compatibility[サーバーとランナーの互換性リスト]に記載されている正しいバージョンに更新します。
+xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[ローンチエージェントバイナリのダウンロード]と同じ手順で、 `agent_version` の環境変数をxref:runner-installation.adoc#self-hosted-runners-for-server-compatibility[サーバーとセルフホストランナーの互換性リスト]に記載されている正しいバージョンに更新します。
 
 ```shell
 export agent_version="<launch-agent-version>"
 ```
 
-Then, following the xref:runner-installation.adoc#platform-specific-instructions[platform specific installation instructions], replace the old binary with the newly updated version that was just downloaded.
+その後、 xref:runner-installation.adoc#platform-specific-instructions[プラットフォーム別のインストール手順]に従って、古いバイナリをダウンロードした新しいバージョンに置き換えます。
 
 ==== 2. 現在実行中のローンチエージェントを停止する
 
@@ -98,7 +98,7 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 ```
 
-==== 3. 新しいランナー ローンチエージェントを起動する
+==== 3. 新しいセルフホストランナーローンチエージェントを起動する
 
 以下にプラットフォーム別の起動方法を説明します。
 

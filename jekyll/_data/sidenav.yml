@@ -835,42 +835,51 @@ ja:
     - name: Runner
       link: ja/2.0/runner-overview/
       children:
-        - name: Runner Overview
+        - name: Self-hosted Runner Overview
           link: ja/2.0/runner-overview/
-          i18n_name: ランナーの概要
-        - name: Getting Started with Runner Installation
+          i18n_name: セルフホストランナーの概要
+        - name: Self-hosted Runner Concepts
+          link: ja/2.0/runner-concepts/
+          i18n_name: コンセプト
+        - name: Web App Installation
           link: ja/2.0/runner-installation/
-          i18n_name: ランナーのインストール
-        - name: Linux Runner Installation
+          i18n_name: Web アプリでのインストール
+        - name: CLI Installation
+          link: ja/2.0/runner-installation-cli/
+          i18n_name: CLI でのインストール
+        - name: Linux Installation
           link: ja/2.0/runner-installation-linux/
           i18n_name: Linux へのインストール
-        - name: Windows Runner Installation
+        - name: Windows Installation
           link: ja/2.0/runner-installation-windows/
           i18n_name: Windows へのインストール
-        - name: macOS Runner Installation
+        - name: macOS Installation
           link: ja/2.0/runner-installation-mac/
           i18n_name: macOS へのインストール
-        - name: Docker Runner Installation
+        - name: Docker Installation
           link: ja/2.0/runner-installation-docker/
           i18n_name: Docker へのインストール
-        - name: Kubernetes Runner Installation
+        - name: Kubernetes Installation
           link: ja/2.0/runner-on-kubernetes/
-          i18n_name: Kubernetes ランナー
-        - name: Scaling Runner
+          i18n_name: Kubernetes へのインストール
+        - name: Self-hosted Runner Supported Platforms
+          link: ja/2.0/runner-supported-platforms/
+          i18n_name: 利用可能なプラットフォーム
+        - name: Scaling Self-hosted Runner
           link: ja/2.0/runner-scaling/
           i18n_name: ランナーのスケール
-        - name: Runner Configuration Reference
+        - name: Self-hosted Runner Configuration Reference
           link: ja/2.0/runner-config-reference/
-          i18n_name: ランナーの設定リファレンス
-        - name: Upgrading Runner on Server
+          i18n_name: セルフホストランナーの設定リファレンス
+        - name: Upgrading Self-hosted Runner on Server
           link: ja/2.0/runner-upgrading-on-server/
-          i18n_name: Server ランナーのアップグレード
-        - name: Runner API
+          i18n_name: Server セルフホストランナーのアップグレード
+        - name: Self-hosted Runner API
           link: ja/2.0/runner-api/
-          i18n_name: ランナー API
-        - name: Runner FAQs
+          i18n_name: セルフホストランナー API
+        - name: Self-hosted Runner FAQs
           link: ja/2.0/runner-faqs/
-          i18n_name: ランナー FAQ
+          i18n_name: セルフホストランナー FAQ
 
 - name: Configuration
   icon: icons/sidebar/configure.svg
