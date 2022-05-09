@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Quickstart Guide"
-short-title: "Quickstart Guide"
+title: "スタートガイド"
+short-title: "スタートガイド"
 description: "CircleCI を使用してはじめてビルドを成功させるためのチュートリアル"
 categories:
   - はじめよう
@@ -10,24 +10,24 @@ toc: false
 ---
 
 {% capture content %}
-Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. 各コミットにより自動テストとビルドがトリガーされます。 Bugs are identified and repaired in minutes.
+継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は皆、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
 {% endcapture %}
 
 {% include getting-started-section-header.html content=content %}
 
 
 {% capture content1 %}
-Sign up for a free CircleCI
+無料の CircleCI にユーザー登録する
 {% endcapture %}
 
 {% capture content2 %}
-Sign in and connect a VCS 👋
+サインインし、バージョン管理システム (VCS) に接続する
 {% endcapture %}
 
 {% include getting-started-links.html title="Prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
 
 {% capture content %}
-Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. 各コミットにより自動テストとビルドがトリガーされます。 Bugs are identified and repaired in minutes.
+継続的インテグレーションは、開発者がコードを共有リポジトリの main ブランチに迅速かつ頻繁に統合するための手法です。 開発者は皆、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
 {% endcapture %}
 
 {%- capture header-banner-1 -%}
@@ -46,8 +46,7 @@ Continuous integration is a practice that helps developers integrate their code 
 
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
 
-{% capture content %}
-Create a repository called “hello-world” in GitHub or Bitbucket. Then in the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click Set Up Project. Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
+GitHub または Bitbucket で “hello-world” というリポジトリを作成します。 次に左側のメニューで、<a  href="https://app.circleci.com/projects">プロジェクト</a>を選択します。 リポジトリを探し、Set Up Project をクリックします。 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
 {% endcapture %}
 
 {%- capture select-project -%}
@@ -57,7 +56,7 @@ Create a repository called “hello-world” in GitHub or Bitbucket. Then in the
 {% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
+“Select your <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-start/">config.yml</a> file” モーダルで、 <b>Fast</b> を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
 {% endcapture %}
 
 {%- capture select-config -%}
@@ -68,11 +67,11 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
+これは  <a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI 設定ファイルエディター</a>で、config.yml のサンプルファイルが挿入されています。 <b>Commit and Run をクリックします。</b>
 
 <br>
 <br>
-This will create a .circleci/config.yml file at the root of your repository on a new branch called “circle-ci-setup”.
+リポジトリのルートで、“circle-ci-setup” という名前の新規ブランチに .circleci/config.yml ファイルが作成されます。
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
@@ -82,7 +81,7 @@ This will create a .circleci/config.yml file at the root of your repository on a
 {% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
 
 {% capture content %}
-You should soon have your first green pipeline. If you are happy with this configuration, merge it into your main branch or continue to make changes.{% endcapture %}
+はじめてのパイプラインの成功 (グリーンビルド) です。 この設定で問題がなければ、メインブランチにマージする、または引き続き変更を加えることができます。{% endcapture %}
 
 {%- capture congrats-first-green-pipeline -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
@@ -90,7 +89,7 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
 
-{% capture content %} You should see your pipeline start to run automatically—and pass! {% endcapture %}
+{% capture content %}ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するのを確認できます。 {% endcapture %}
 
 {%- capture header-banner-2 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg
@@ -99,21 +98,21 @@ You should soon have your first green pipeline. If you are happy with this confi
 {% include getting-started-section-header.html title="02 Dig into your first pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
-Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
+緑色の Success ボタンをクリックし、ワークフローの詳細を確認します。 hello-world の<a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/concepts/#pipelines">パイプライン</a>が<a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/concepts/#workflows">ワークフロー</a>内で <b>say-hello</b> というジョブを実行しました。 ジョブをクリックし、実行されたステップを確認します。
 {% endcapture %}
 
 {%- capture what-just-happened -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/what-just-happened.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. So, what just happened?" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
+{% include two-up.html title="1. 何が起きたのでしょうか？" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
 
 
 {% capture content %}
-Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job:
+<b>say-hello</b>  <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">ジョブ</a>をクリックし、このジョブの<a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">ステップ</a>を確認します。
 <ul>
-<li>Spin up environment</li>
-<li>Preparing environment variables</li>
+<li>環境のスピンアップ</li>
+<li>環境変数の準備</li>
 <li>コードのチェックアウト</li>
 <li>Say hello</li>
 </ul>
@@ -123,10 +122,10 @@ Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.co
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/view-results.png
 {%- endcapture -%}
 
-{% include two-up.html title="2. View your results" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
+{% include two-up.html title="2. 結果を確認する" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
 
 {% capture content %}
-チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローすることができます。 Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
+チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローすることができます。 チームメイトは、コードをまったくコミットしていないとしても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
 {% endcapture %}
 
 {%- capture collab-with-team -%}
