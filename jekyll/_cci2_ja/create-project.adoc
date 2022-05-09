@@ -33,7 +33,7 @@ CircleCI プロジェクトとお客様の VCS 内の既存リポジトリをリ
 +
 image::config-set-up-project.png[Set up Project]
 +
-プロジェクトが見つからない場合は、CircleCI の左上で正しい組織が選択されているか確認してください。
+プロジェクトが見つからない場合は、CircleCI の画面左上で正しい組織が選択されているか確認してください。
 +
 image::cci-organizations.png[Select Organization]
 
@@ -48,8 +48,8 @@ image::cci-organizations.png[Select Organization]
 +
 CI スターターパイプラインを選択すると、 `config.yml` のサンプルファイルが作成され、リポジトリの `circleci-project-setup` ブランチにコミットされます。
 +
-`config.yml` ファイルの作成については、 <<config-intro#,Configuration Introduction>> を参照してください。
-. **Set Up Project** ボタンをクリックします。
+`config.yml` ファイルの作成については、 <<config-intro#,設定ふファイルの概要>> を参照してください。
+. 青色の **Set Up Project** ボタンをクリックします。
 
 これで CircleCI は指定された `config.yml` ファイルを使ってパイプラインを実行するようになりました。 その出力は、CircleCI ダッシュボードで確認できます。
 
@@ -61,5 +61,5 @@ image::edit-config-file.png[Edit Configuration File]
 
 == 関連項目
 
-* <<config-intro#,Configuration Introduction>>
-* <<config-editor#,Using the CircleCI Configuration Editor>>
+* <<config-intro#,設定ファイルの概要>>
+* <<config-editor#,設定ファイルエディターの使用>>
