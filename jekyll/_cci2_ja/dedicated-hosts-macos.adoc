@@ -25,7 +25,7 @@ version:
 |クラス
 |vCPU
 |メモリ
-|Total Storage
+|トータルストレージ
 |料金
 
 |`macos.x86.metal.gen1`
@@ -81,4 +81,4 @@ workflows:
 
 回答: Apple は、2020 年 11 月に Big Sur のリリースに伴い「 https://www.apple.com/legal/sla/docs/macOSBigSur.pdf[updated end-user license agreement (EULA)]」をリリースしました。 
 
-NOTE: By using the Services, you represent and warrant that you have reviewed and agree to be bound by the terms of the Apple Software License Agreement, as well as the terms applicable to any software preinstalled on the Apple Software, including, but not limited to, Apple's Xcode developer software and any other Apple or third-party software.
+NOTE: 本サービスを利用することにより、お客様は、Apple ソフトウェア使用許諾契約の条項および Apple ソフトウェアにプレインストールされているソフトウェア (Apple の Xcode 開発者向けソフトウェア、およびその他の Apple または他社ソフトウェアを含むがこれに限定されない) に適用される条件を確認し、これに拘束されることに同意したことを表明し、保証するものとします
