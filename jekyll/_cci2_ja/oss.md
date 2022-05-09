@@ -2,13 +2,13 @@
 layout: classic-docs
 title: "オープンソース プロジェクトの構築"
 short-title: "オープンソースプロジェクトの構築"
-description: "オープンソース プロジェクトの構築に関するベスト プラクティス"
+description: "オープンソースプロジェクトのビルドに関するベストプラクティス"
 categories:
   - はじめよう
 order: 1
 ---
 
-以下のセクションに沿って、CircleCI 上でのオープンソース プロジェクトのビルドに関するヒントとベスト プラクティスについて説明します。
+以下のセクションでは、CircleCI でのオープンソースプロジェクトのビルドに関するヒントとベストプラクティスを紹介します。
 
 * TOC
 {:toc}
@@ -17,22 +17,22 @@ order: 1
 {: #overview }
 {:.no_toc}
 
-オープンソース コミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソース プロジェクト用にクレジットが毎週無料で提供されます。 これらのクレジットは、Linux のリソースで使用可能です。
+オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソースプロジェクト用にクレジットが毎週無料で提供されます。 これらのクレジットは、Linux のリソースで使用可能です。
 
-**備考:**
-* If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
+**注:**
+* macOS でオープンソースプロジェクトをビルドする場合は、これらの追加コンテナを有効にする方法について billing@circleci.com にお問い合わせください。
 * オープンソースのクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
 
 ## セキュリティ
 {: #security }
 
-While open source can be a liberating practice, take care not to liberate sensitive information.
+オープンソースは開放型の活動であり、機密情報を「開放」しないように注意が必要です。
 
-- If your repository is public, your CircleCI project and its build logs are also public. 表示対象として選択する情報に注意してください。
-- Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests) unless explicitly enabled.
+- リポジトリをパブリックにすると、CircleCI プロジェクトとそのビルドログもパブリックになります。 出力する情報に注意してください。
+- CircleCI アプリケーション内に設定される環境変数は、一般には公開されず、明示的に有効にされない限り[フォークされたプルリクエスト](#pass-secrets-to-builds-from-forked-pull-requests)に共有されることもありません。
 
-## Features and settings for open source projects
+## オープンソースプロジェクトの機能と設定
 {: #features-and-settings-for-open-source-projects }
 
 以下の機能と設定は、オープンソースプロジェクトにおいて特に便利です。
