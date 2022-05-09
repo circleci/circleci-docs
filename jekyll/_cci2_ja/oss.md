@@ -21,7 +21,7 @@ order: 1
 
 **注:**
 * macOS でオープンソースプロジェクトをビルドする場合は、これらの追加コンテナを有効にする方法について billing@circleci.com にお問い合わせください。
-* オープンソースのクレジットの利用可能量や制限は、UI 画面上では確認できません。
+* 利用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
 
 
 ## セキュリティ
@@ -30,62 +30,62 @@ order: 1
 オープンソースは開放型の活動であり、機密情報を「開放」しないように注意が必要です。
 
 - リポジトリをパブリックにすると、CircleCI プロジェクトとそのビルドログもパブリックになります。 出力する情報に注意してください。
-- CircleCI アプリケーション内に設定される環境変数は、一般には公開されず、明示的に有効にされない限り[フォークされたプルリクエスト](#pass-secrets-to-builds-from-forked-pull-requests)に共有されることもありません。
+- CircleCI アプリケーション内に設定されている環境変数は、一般には公開されず、明示的に有効にされない限り[フォークされたプルリクエスト](#pass-secrets-to-builds-from-forked-pull-requests)に共有されることはありません。
 
 ## オープンソースプロジェクトの機能と設定
 {: #features-and-settings-for-open-source-projects }
 
 以下の機能と設定は、オープンソースプロジェクトにおいて特に便利です。
 
-### Private environment variables
+### プライベート環境変数
 {: #private-environment-variables }
 {:.no_toc}
 
-多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 Private environment variables allow you to safely store secrets, even if your project is public.
+多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に保存できます。
 
-For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
+詳細については、[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)を参照してください。
 
-### Only build pull requests
+### プルリクエストのみをビルドする
 {: #only-build-pull-requests }
 {:.no_toc}
 
-CircleCI はデフォルトですべてのブランチのすべてのコミットをビルドします。 This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
+CircleCI はデフォルトでは、すべてのブランチのすべてのコミットをビルドします。 プライベートプロジェクトよりもきわめて多くのコミットが存在するオープンソースプロジェクトでは、この動作は活動的すぎるかもしれません。
 
-To change this setting, go to the **Project Settings>Advanced** of your project and set the **Only build pull requests** option to _On_.
+この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Only build pull requests (プルリクエストのみビルド)** オプションを_オン_に設定します。
 
-**Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch and tags
+**注:** このオプションが有効であっても、CircleCI はプロジェクトのデフォルトのブランチやタグからはすべてのコミットをビルドします。
 
-### Build pull requests from forked repositories
+### フォークされたリポジトリからのプルリクエストをビルドする
 {: #build-pull-requests-from-forked-repositories }
 {:.no_toc}
 
-多くのオープンソースプロジェクトは、フォークされたリポジトリから PR を受け入れます。 Building these PRs is an effective way to catch bugs before manually reviewing changes.
+多くのオープンソースプロジェクトは、フォークされたリポジトリから PR を受け入れます。 これらの PR をビルドすると、手動で変更をレビューする前にバグを捕捉することができるので、効果的な方法です。
 
-CircleCI はデフォルトで、フォークされたリポジトリからの PR をビルドしません。 To change this setting, go to the **Project Settings>Advanced** of your project and set the **Build forked pull requests** option to _On_.
+CircleCI はデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Build forked pull requests (フォークされたプルリクエストをビルド)** オプションを_オン_に設定します。
 
-**Note**This feature is not currently supported for BitBucket users.
+**注:** 現在この機能は、BitBucket ではサポートされていません。
 
-**Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. これにより、プルリクエストを発行した際に、組織アカウントでジョブの実行がトリガーされるようになります。
+**注: ** ユーザーがフォークからプルリクエストをリポジトリに送信しても、パイプラインがトリガーされない場合、ユーザーは CircleCI のプロジェクトではなく個人アカウントでフォークされたプロジェクトをフォローしている可能性があります。その場合、ジョブは組織のアカウントではなくユーザー個人のアカウントでトリガーされます。 この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを送信すると、組織のアカウントでジョブの実行がトリガーされるようになります。
 
-### Pass secrets to builds from forked pull requests
+### フォークされたプルリクエストからのビルドにシークレットを渡す
 {: #pass-secrets-to-builds-from-forked-pull-requests }
 {:.no_toc}
 
-制限を設定していないビルドを親リポジトリ内で実行することは、場合によっては危険です。 Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
+制限を設定していないビルドを親リポジトリ内で実行することは、場合によっては危険です。 プロジェクトにはしばしば機密情報が含まれており、ビルドをトリガーするコードをプッシュできるユーザーならだれでも、この情報を自由に入手できます。
 
-By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
+デフォルトでは、CircleCI はオープンソースプロジェクトの場合、フォークされた PR からのビルドにシークレットを渡さず、以下の 4種類の設定データを隠します。
 
 - アプリケーションを通して設定される[環境変数](#プライベート環境変数)
 
-- {{ site.baseurl }}/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー
+- [デプロイキーとユーザーキー]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#deployment-keys-and-user-keys)
 
 - ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
 
-- [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
+- [AWS 権限]({{ site.baseurl }}/ja/2.0/deployment-integrations/#aws)および設定ファイル
 
-**Note:** Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
+**注: **シークレットを必要とするオープンソースプロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
 
-If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Project Settings>Advanced** of your project, set the **Pass secrets to builds from forked pull requests** option to _On_.
+プロジェクトをフォークし、PR をオープンする任意のユーザーとシークレットを共有しても問題がない場合は、**Pass secrets to builds from forked pull requests (フォークされたプルリクエストからのビルドにシークレットを渡す)** オプションを有効にできます。 この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Pass secrets to builds from forked pull requests (フォークされたプルリクエストからのビルドにシークレットを渡す)** オプションを_オン_に設定します。
 
 ### キャッシュ
 {: #caching }
