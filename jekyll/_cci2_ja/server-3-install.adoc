@@ -31,12 +31,16 @@ CircleCI Server v3.x は、 https://www.replicated.com/[Replicated] の https://
 
 . 次のコマンドを実行して最小バージョン {kotsversion} の KOTS を実行していることを確認してください。
 +
+```bash
 kubectl kots version
+```
 +
 NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
 . ターミナルから、以下を実行します（プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール]を参照してください）。
 +
+```bash
 kubectl kots install circleci-server
+```
 +
 すると、以下を入力するよう求められます。
 * デプロイ先の名前空間
@@ -51,8 +55,10 @@ TIP: 名前空間を作成したら、以下のコマンド: `kubectl config set
 
 プロキシ経由で CircleCI Server をインストールするには、上記の 2. で以下のコマンドを使用します (詳細は、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら] の KOTS 文書をご覧ください）。
 
+```bash
 kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-proxy <https-proxy> --no-proxy <YOUR_NO_PROXY_LIST>
 
+```
 
 ロードバランサーのエンドポイントを、`output processor` と `vm-service` の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
@@ -71,11 +77,15 @@ image::server-3-frontend-settings.png[Screenshot showing frontend settings]
 * *Frontend Replicas (フロントエンドのレプリカ)*: フロントエンドで処理できるトラフィック量を増やす際に使用します。
 * *Frontend TLS Private Key (フロントエンド TLS プライベートキー)* (必須): 前提条件のステップで作成したキーです。 この値は以下のコマンドで取得できます。
 +
+```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
+```
 * *Frontend TLS Certificate (フロントエンド TLS 証明書)* (必須): 前提条件のステップで作成した証明書です。 この値は以下のコマンドで取得できます。
 +
+```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
+```
 
 ****
 **フロントエンド TLS プライベートキーと証明書**については、4つの選択肢があります。
