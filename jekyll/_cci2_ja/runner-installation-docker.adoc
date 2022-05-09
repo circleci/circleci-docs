@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI セルフホストランナーを Docker でインストールする方法を説明します。
+このページでは、CircleCI セルフホストランナーを Docker にインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
