@@ -22,42 +22,42 @@ toc::[]
 
 ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、バージョン管理システム (VCS) を選択します。 メールアドレスで登録することもできます。
 
-CircleCI プロジェクトとお客様の VCS 内の既存のリポジトリをリンクさせる必要があります。 Make sure you have a repo and that you have authorized CircleCI to access it (in GitHub, you have the option to block CircleCI from accessing your private repositories).
+CircleCI プロジェクトとお客様の VCS 内の既存リポジトリをリンクさせる必要があります。 リポジトリがあり、そのリポジトリへの CircleCI のアクセスが承認されていることを確認してください (GitHub では、オプションで CircleCI によるプライベートリポジトリへのアクセスをブロックできます)。
 
-== Step Two: Create a project in CircleCI
+== ステップ 2: CircleCI でプロジェクトを作成する
 
-Follow these steps to create a new project in CircleCI:
+下記の手順により、CircleCI で新しいプロジェクトを作成します。
 
-. In CircleCI, click **Projects** in the sidebar.
-. Find your project and click the blue **Set Up Project** button next to it.
+. CircleCI のサイドバーで、 **Projects** をクリックします。
+. プロジェクトを見つけたら、その隣にある青色の **Set Up Project** ボタンをクリックします。
 +
 image::config-set-up-project.png[Set up Project]
 +
-If you cannot see your project, check you have selected the correct organization in the top left-hand corner of CircleCI.
+プロジェクトが見つからない場合は、CircleCI の左上で正しい組織が選択されているか確認してください。
 +
 image::cci-organizations.png[Select Organization]
 
-== Step Three: Specify a config file
+== ステップ 3: 設定ファイルを指定する
 
-Once you have set up your project, you will be prompted to provide a `config.yml` file.
+プロジェクトのセットアップが完了すると、`config.yml` ファイルを提供するよう求められます。
 
-. From the pop-up window, select your preferred option. You can either:
-* Include a `config.yml` in the `.circleci` directory of your repo.
-* Commit a starter CI pipeline to a new branch of your repo.
-* Use an editable `config.yml` template.
+. ポップアップウィンドウから、任意のオプションを選択してください。 選択肢は以下の 3 つです。
+* リポジトリの `.circleci` ディレクトリに `config.yml` を含める
+* リポジトリの新しいブランチに CI スターターパイプラインをコミットする
+* 編集可能な `config.yml` テンプレートを使用する
 +
-If you choose the starter CI pipeline, a sample `config.yml` file is created and committed to a `circleci-project-setup` branch in your repo.
+CI スターターパイプラインを選択すると、 `config.yml` のサンプルファイルが作成され、リポジトリの `circleci-project-setup` ブランチにコミットされます。
 +
-For guidance on creating a `config.yml` file, see <<config-intro#,Configuration Introduction>>.
+`config.yml` ファイルの作成については、 <<config-intro#,Configuration Introduction>> を参照してください。
 . **Set Up Project** ボタンをクリックします。
 
-CircleCI then uses the specified `config.yml` file to run your pipeline. その出力は、CircleCI ダッシュボードで確認できます。
+これで CircleCI は指定された `config.yml` ファイルを使ってパイプラインを実行するようになりました。 その出力は、CircleCI ダッシュボードで確認できます。
 
-To make changes to your pipeline, either edit the `.circleci/config.yml` file in your repo, or click the ellipsis next your project in the Dashboard and choose **Configuration File**.
+パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集するか、ダッシュボードでプロジェクトの省略記号 (…) をクリックし、 **Configuration File** を選択します。
 
 image::edit-config-file.png[Edit Configuration File]
 
-This opens the CircleCI Configuration Editor, from where you can edit and commit your `config.yml` file.
+これにより、CircleCI の設定ファイルエディターが開き、 `config.yml` を編修し、コミットすることができます。
 
 == 関連項目
 
