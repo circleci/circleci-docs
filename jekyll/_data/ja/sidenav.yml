@@ -733,15 +733,17 @@ ja:
           - 
           - 
           - 
+            name: Windows へのインストール方法
+          - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
           - 
           - 
           - 
-          - 
-            name: Runner API
             link: ja/2.0/runner-api/
-            i18n_name: ランナーAPI
           - 
-            name: Runner in Server
             link: ja/2.0/runner-faqs/
           - 
   - 
