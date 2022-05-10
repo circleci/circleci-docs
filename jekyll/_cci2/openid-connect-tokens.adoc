@@ -82,7 +82,7 @@ The OpenID Connect ID token also contains some https://openid.net/specs/openid-c
 
 ==  Authenticate jobs with cloud providers
 
-The following sections describe how to authenticate jobs on CircleCI with Amazon Web Services (AWS) and Google Cloud Provider (GCP).
+The following sections describe how to authenticate jobs on CircleCI with Amazon Web Services (AWS) and Google Cloud Platform (GCP).
 
 === AWS
 
@@ -160,7 +160,7 @@ Next, add the following condition to your role's trust policy, so that only jobs
 
 This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the sub claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
 
-=== Google Cloud Provider
+=== Google Cloud Platform
 
 The following GCP instructions are for:
 
