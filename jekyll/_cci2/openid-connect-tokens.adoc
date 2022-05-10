@@ -171,7 +171,7 @@ The Google Cloud CLI reads your configuration file, which contains necessary inf
 
 ==== Setting up GCP
 
-The GCP configuration file can be set up using the GCP UI. In the **Workload Identity Federation UI**, navigate to **Grant Access**, which will prompt the configuration, which can then be downloaded. You will need to create a file named `CIRCLE_OIDC_TOKEN_FILE`, which Google Cloud will read your identity token from.
+The GCP configuration file can be set up using the GCP UI. In the **Workload Identity Federation UI**, navigate to **Grant Access**, which will prompt the configuration, which can then be downloaded. You will need to create a file named `CIRCLE_OIDC_TOKEN_FILE`, which Google Cloud will read your identity token from (the file name can be anything, as long as it matches what is in the configuration under `credential_source`).
 
 You will need your CircleCI organization ID, which can be found by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app].
 
