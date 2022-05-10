@@ -3,10 +3,11 @@ layout: classic-docs
 title: "設定ファイルの概要"
 description: "CircleCI の設定ファイルの概要を説明します。"
 categories:
-  - configuration
+  - 設定
 order: 2
+redirect_from: /2.0/config-start/
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---

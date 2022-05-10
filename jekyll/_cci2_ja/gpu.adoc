@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 ここでは、CircleCI server を使用して GPU (Graphics Processing Unit) Machine Executors を実行する方法の概要について説明します。
 
 toc::[]

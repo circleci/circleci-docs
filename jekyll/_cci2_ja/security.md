@@ -73,6 +73,8 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 
 **メモ：**内部挙動により、重複するイベントが監査ログに生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
+Per [our data retention policy](https://circleci.com/privacy/#information), audit logs can be retrieved for up to 12 months.
+
 ### Audit log events
 {: #audit-log-events }
 {:.no_toc}
@@ -122,4 +124,4 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)

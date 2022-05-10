@@ -17,6 +17,8 @@ en:
           - 
             name: Hello World
           - 
+            name: Slack Orb の使用
+          - 
             name: FAQ
       - 
         name: 移行
@@ -144,15 +146,19 @@ en:
           - 
           - 
           - 
+            name: Windows へのインストール方法
           - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
             link: 2.0/runner-api/
           - 
           - 
           - 
-            name: Runner API
+          - 
             link: 2.0/runner-api/
           - 
-            name: Runner in Server
             link: 2.0/runner-server/
           - 
   - 
@@ -195,6 +201,11 @@ en:
             name: Orb のテスト手法
           - 
             name: Orb のパブリッシュ プロセス
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Slack Orb の使用
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
@@ -588,6 +599,8 @@ ja:
             name: Hello World
             i18n_name: Hello World
           - 
+            name: Slack Orb の使用
+          - 
             name: FAQ
       - 
         name: 移行
@@ -720,15 +733,18 @@ ja:
           - 
           - 
           - 
+            name: Windows へのインストール方法
+          - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
           - 
           - 
           - 
           - 
-            name: Runner API
             link: ja/2.0/runner-api/
-            i18n_name: ランナーAPI
           - 
-            name: Runner in Server
             link: ja/2.0/runner-faqs/
           - 
   - 
@@ -775,6 +791,11 @@ ja:
             name: Orb のテスト手法
           - 
             name: Orb のパブリッシュ プロセス
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Slack Orb の使用
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
