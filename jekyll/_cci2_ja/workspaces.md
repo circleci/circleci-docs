@@ -40,7 +40,7 @@ Some notes about workspaces:
 
 カスタマイズされたストレージ設定の場合、ワークスペースのカスタマイズ設定に `persist_to_workspace` がデフォルトで設定されます。 カスタマイズ設定がない場合は、`persist_to_workspace` が 15 日間デフォルト設定となります。
 
-`attach_workspace` キーをセットして、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 Workflow はシーケンシャルのため、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
+`attach_workspace` キーを設定して、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 ワークフローの設定は順次実行なので、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
 
 {:.tab.workspaces.Cloud}
 ```yaml
@@ -209,7 +209,7 @@ workflows:
 
 ワークスペースを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 多くのプロジェクトでは、ワークスペースを保存する利点は、失敗したビルドの再実行ができることです。 ビルドが成功したら、そのワークスペースは不要になります。 ニーズに合う場合は、ワークスペースのストレージ保存期間を短く設定することを推奨します。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/2.0/persist-data/)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)のページを参照してください。
 
 ## ワークスペースの最適化
 {: #workspace-usage-optimization }
@@ -228,9 +228,9 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/2.0/workflows)を参照して下さい。
-- [データの永続化]({{site.baseurl}}/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching)
-- [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)
-- [アーティファクト]({{site.baseurl}}/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/2.0/optimizations)
+- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)を参照して下さい。
+- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
+- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
+- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
