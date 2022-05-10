@@ -89,7 +89,7 @@ app_identifier "com.example.HelloWorld"
 また、メタデータやスクリーンショット([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の[配信に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
 
 ```ruby
-
+# fastlane/Fastfile
 default_platform :ios
 
 platform :ios do
