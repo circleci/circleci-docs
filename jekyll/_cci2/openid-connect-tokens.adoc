@@ -114,7 +114,7 @@ In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazo
 * AWS region that you want to operate in
 * ARN of the IAM role that you created earlier
 
-Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws sts get-caller-identity`) with AWS, demonstrating that the authentication worked. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
+Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws sts get-caller-identity`) with AWS, demonstrating that authentication works. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
 
 ```yaml
 version: 2.1
@@ -173,11 +173,11 @@ The Google Cloud CLI reads your configuration file, which contains necessary inf
 
 ==== Setting up GCP
 
-The GCP configuration file can be set up using the GCP UI. In the **Workload Identity Federation UI**, navigate to **Grant Access**, which will prompt the configuration, which can then be downloaded. You will need to create a file named `CIRCLE_OIDC_TOKEN_FILE`, which Google Cloud will read your identity token from (the file name can be anything, as long as it matches what is in the configuration under `credential_source`).
+The GCP configuration file can be set up using the GCP web UI. In the **Workload Identity Federation UI**, navigate to **Grant Access**, which will prompt the configuration, which can then be downloaded. You will need to create a file named `CIRCLE_OIDC_TOKEN_FILE`, which Google Cloud will read your identity token from (the file name can be anything, as long as it matches what is in the configuration under `credential_source`).
 
 You will need your CircleCI organization ID, which can be found by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app].
 
-After navigating to the **Grant Access** section of the GCP UI, follow these steps to add CircleCI as an external identity provider:
+After navigating to the **Grant Access** section of the GCP web UI, follow these steps to add CircleCI as an external identity provider:
 
 1. Navigate to the **IAM & Admin panel**
 1. On the side panel, navigate to **Workload Identity Federation**
@@ -208,7 +208,7 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 1. Under **Select principals**, you can add conditions, or leave the default
 1. Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**
 
-Keep a copy of the downloaded configuration file.
+Save a copy of the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration.
 
 An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:
 
@@ -254,41 +254,8 @@ You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 ```
 
-Then you need to add the following to a job:
+Below is an example configuration adding GCP to a job and demonstrating that authentication works. The example should be adapted for your specific use case.
 
-```yaml
-- run:
-  name: Authenticate with GCP
-  command: |
-    # Configure gcloud to leverage the generated credential configuration
-    gcloud auth login --brief --cred-file "${GCP_CREDENTIAL_CONFIGURATION_FILE}"
-
-    # Configure ADC
-    # https://cloud.google.com/sdk/gcloud/reference/auth/application-default/print-access-token
-    echo 'export GOOGLE_APPLICATION_CREDENTIALS="${GCP_CREDENTIAL_CONFIGURATION_FILE}"' | tee -a $BASH_ENV
-
-- run:
-  name: Verify that gcloud is authenticated
-  command: gcloud iam service-accounts get-iam-policy "${GCP_SERVICE_ACCOUNT_EMAIL}"
-
-- run:
-  name: Verify that ADC works
-  command: |
-    ACCESS_TOKEN=$(gcloud auth application-default print-access-token)
-    curl -f -i -H "Content-Type: application/x-www-form-urlencoded" -d "access_token=${ACCESS_TOKEN}" https://www.googleapis.com/oauth2/v1/tokeninfo
-```
-
-Please note, if needed, you can also generate the file on the fly by running the following script:
-
-```shell
-gcloud iam workload-identity-pools create-cred-config \
-  "${GCP_WORKLOAD_IDENTITY_POOL_AUDIENCE}" \
-  --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
-  --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
-  --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
-```
-
-Below is an example configuration demonstrating that GCP authentication worked. The example should be adapted for your specific use case. 
 ```yaml
 version: 2.1
 
@@ -309,4 +276,14 @@ jobs:
       - run:
           name: Interact with GCP
           command: gcloud iam service-accounts get-iam-policy "${GCP_SERVICE_ACCOUNT_EMAIL}"
+```
+
+Please note, if needed, you can also generate the file on the fly by running the following script:
+
+```shell
+gcloud iam workload-identity-pools create-cred-config \
+  "${GCP_WORKLOAD_IDENTITY_POOL_AUDIENCE}" \
+  --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
+  --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
+  --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
 ```
