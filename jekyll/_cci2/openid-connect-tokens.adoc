@@ -207,8 +207,7 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 1. A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions
 1. Under **Select principals**, you can add conditions, or leave the default
 1. Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**
-
-Save a copy of the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration.
+1. Save the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration
 
 An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:
 
@@ -246,6 +245,16 @@ If your token comes from an API response, it might be useful to set up the confi
   }
 ```
 
+Please note, if needed, you can also attempt to generate the GCP configuration file by running the following script:
+
+```shell
+gcloud iam workload-identity-pools create-cred-config \
+  "${GCP_WORKLOAD_IDENTITY_POOL_AUDIENCE}" \
+  --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
+  --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
+  --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
+```
+
 ==== Adding GCP to the CircleCI configuration file
 
 You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_TOKEN_FILE` by running the following:
@@ -276,14 +285,4 @@ jobs:
       - run:
           name: Interact with GCP
           command: gcloud iam service-accounts get-iam-policy "${GCP_SERVICE_ACCOUNT_EMAIL}"
-```
-
-Please note, if needed, you can also generate the file on the fly by running the following script:
-
-```shell
-gcloud iam workload-identity-pools create-cred-config \
-  "${GCP_WORKLOAD_IDENTITY_POOL_AUDIENCE}" \
-  --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
-  --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
-  --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
 ```
