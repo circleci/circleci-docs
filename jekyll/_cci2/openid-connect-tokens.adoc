@@ -91,8 +91,6 @@ The following AWS instructions are for:
 * A one-time configuration of your AWS account to trust CircleCI's OIDC tokens
 * Running a job that uses the OIDC token to interact with AWS
 
-NOTE: At this time, CircleCI's built-in AWS ECR authentication for pulling images does not support OIDC.
-
 ==== Setting up AWS
 
 You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an Identity and Access Management(IAM) identity provider, and an IAM role in AWS (this is a one-time configuration).
