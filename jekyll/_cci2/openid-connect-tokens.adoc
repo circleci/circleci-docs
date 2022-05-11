@@ -94,6 +94,8 @@ The following instructions are for:
 
 You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an Identity and Access Management(IAM) identity provider, and an IAM role in AWS (this is a one time configuration).
 
+NOTE: At this time, CircleCI's built-in AWS ECR authentication for pulling images does not support OIDC.
+
 Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. You will need your CircleCI Organization ID, which you can find by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app]. Copy your Organization ID for the next step.
 
 When asked for the **Provider URL**, enter: `\https://oidc.circleci.com/org/<organization-id>`, where `<organization-id>` is the ID of your CircleCI organization. Provide the same CircleCI Organization ID for the **Audience**.
