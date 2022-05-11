@@ -28,6 +28,9 @@ The current categories of API v2 endpoints are:
 
 **Note:** Portions of the CircleCI API v2 remain under “Preview”. Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the API v2 breaking changes log.
 
+Currently, [Personal API tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
+{: class="alert alert-info"}
+
 ## Authentication and authorization
 {: #authentication-and-authorization }
 
