@@ -20,7 +20,7 @@ In CircleCI jobs that use at least one context, the OpenID Connect ID token is a
 
 Add a <<contexts/#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference/#workflows,workflows>> section of your `circleci/config.yml` file:
 
-```yml
+```yaml
 workflows:
   my-workflow:
     jobs:
@@ -116,7 +116,9 @@ In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazo
 
 Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws sts get-caller-identity`) with AWS, demonstrating that the authentication worked. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
 
-```yml
+```yaml
+version: 2.1
+
 jobs:
   deploy:
     docker:
@@ -152,7 +154,7 @@ To do this, go to an individual project's page on https://app.circleci.com/[Circ
 
 Next, add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `ORGANIZATION_ID` and your Project ID for `PROJECT_ID`.
 
-```yml
+```yaml
 "StringLike": {
   "oidc.circleci.com/org/ORGANIZATION_ID:sub": "org/ORGANIZATION_ID/project/PROJECT_ID/user/*"
 }
@@ -254,7 +256,7 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 
 Then you need to add the following to a job:
 
-```yml
+```yaml
 - run:
   name: Authenticate with GCP
   command: |
@@ -284,4 +286,27 @@ gcloud iam workload-identity-pools create-cred-config \
   --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
   --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
   --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
+```
+
+Below is an example configuration demonstrating that GCP authentication worked. The example should be adapted for your specific use case. 
+```yaml
+version: 2.1
+
+jobs:
+  gcp:
+    docker:
+      - image: gcr.io/google.com/cloudsdktool/google-cloud-cli
+    environment:
+      GCP_CREDENTIAL_CONFIGURATION_FILE: gcp-circleci-provider-config.json
+      GCP_SERVICE_ACCOUNT_EMAIL: YOUR_SERVICE_ACCOUNT_EMAIL
+    steps:
+      - checkout
+      - run:
+          name: Authenticate with GCP
+          command: |
+            echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
+            gcloud auth login --brief --cred-file "${GCP_CREDENTIAL_CONFIGURATION_FILE}"
+      - run:
+          name: Interact with GCP
+          command: gcloud iam service-accounts get-iam-policy "${GCP_SERVICE_ACCOUNT_EMAIL}"
 ```
