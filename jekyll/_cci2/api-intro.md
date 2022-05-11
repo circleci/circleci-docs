@@ -37,6 +37,9 @@ The current categories of the API v2 endpoints are:
 
 **Note:** Portions of the CircleCI API v2 remain under "Preview". Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the [API v2 breaking changes log](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md).
 
+Currently, [Personal API tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
+{: class="alert alert-info"}
+
 ## Getting started with the API v2
 {: #getting-started-with-the-api-v2 }
 
@@ -56,7 +59,6 @@ The CircleCI API v2 enables users to be authenticated by simply sending your [Pe
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
 **Note:** the `:` is included to indicate there is no password.
-**Note:** Currently, [Personal API tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 
 #### Triggering a pipeline with parameters example
 {: #triggering-a-pipeline-with-parameters-example }
