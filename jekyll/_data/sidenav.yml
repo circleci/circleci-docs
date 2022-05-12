@@ -99,6 +99,10 @@ en:
           link: 2.0/pipeline-variables/
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/
+    - name: Tutorials
+      children:
+        - name: Test splitting
+          link: 2.0/test-splitting-tutorial/
 
 - name: Execution environments
   icon: icons/sidebar/executors.svg
