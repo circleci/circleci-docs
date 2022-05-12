@@ -99,6 +99,10 @@ en:
           link: 2.0/using-shell-scripts/
         - name: Optimizations cookbook
           link: 2.0/optimization-cookbook/
+    - name: Tutorials
+      children:
+        - name: Test splitting
+          link: 2.0/test-splitting-tutorial/
 
 - name: Execution environments
   icon: icons/sidebar/executors.svg
