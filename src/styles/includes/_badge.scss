@@ -10,16 +10,19 @@
     width: 100%;
   }
 
- .wrapper-link {
-   width: 100%;
-   display: flex;
-   align-items: center;
-   color: #212121;
-   text-decoration: none;
-   &:hover {
-     color: #212121;
-   }
- }
+  .wrapper-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #212121;
+    text-decoration: none;
+
+    &:hover {
+      color: #212121;
+      -webkit-text-stroke: 0;
+    }
+  }
+
   &:hover {
     background-color: #f7f7f7;
   }

@@ -104,6 +104,10 @@ $sidebar-spacing-base: 5px;
     &:first-child {
       margin-top: 0;
     }
+
+    a:hover {
+      -webkit-text-stroke: 0;
+    }
   }
   .subnav-item {
     font-weight: 400;
@@ -207,7 +211,9 @@ aside#full-height {
 
     a {
       color: $body-text-color;
-      &:hover {
+
+      &:hover,
+      &.active {
         color: $link-text-color;
       }
     }

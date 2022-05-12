@@ -86,6 +86,13 @@
   margin-top: 24px;
 }
 
+.tab-content,
+.results-nav {
+  a:hover {
+    -webkit-text-stroke: 0;
+  }
+}
+
 .result-item-wrap {
   $result-vertical-spacing: math.div($spacing-medium-vertical, 4);
   $half-gutter-width: math.div($grid-gutter-width, 2);

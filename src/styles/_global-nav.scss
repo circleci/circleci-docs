@@ -336,11 +336,17 @@ body.global-nav-open .global-nav--search-button {
 ///////////////////////////////////////////////////////////////////////////////
 
 .global-nav--component {
-
   position: sticky;
 
   a.global-nav--lockup-link {
     color: initial;
+  }
+
+  a.global-nav--lockup-link,
+  .btn-primary {
+    &:hover {
+      -webkit-text-stroke: 0;
+    }
   }
 
   .btn-primary {

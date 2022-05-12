@@ -75,11 +75,19 @@ a {
     color: $link-hover-color;
     text-decoration: none;
     -webkit-text-stroke: $link-text-stroke;
+
+    i {
+     -webkit-text-stroke: 0; 
+    }
   }
 
   &.active {
     color: $link-text-color;
   }
+}
+
+strong a:hover {
+  -webkit-text-stroke: 0;
 }
 
 .container-semi-fluid {
@@ -254,7 +262,6 @@ div.article-container {
 }
 
 article {
-
   h2,
   h3,
   h4,
@@ -264,7 +271,7 @@ article {
 
     a {
       padding-left: 5px;
-      color: #27A0B6;
+      color: $link-text-color;
       text-decoration: none !important;
     }
 
