@@ -121,7 +121,7 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-first-setup-steps.png[Ste
 
 If you downloaded a local copy of the code repository, carry out the following steps in your text editor to modify `.circleci/config.yml`. Alternatively, you may edit the project's configuration in the CircleCI web app by selecting a branch, and then clicking the **Edit Config** button.
 
-* In the `build-and-test` job, after the `docker` key, add the `parallelism` key with a value of `5`.
+. In the `build-and-test` job, after the `docker` key, add the `parallelism` key with a value of `5`.
 +
 [source,yaml]
 ----
@@ -132,9 +132,9 @@ For test splitting to work, the parallelism key has to be set to a value greater
 +
 In this example, five separate Docker containers will spin up.
 +
-* Within the `steps` key of the `build-and-test` job, make the following updates:
+. Within the `steps` key of the `build-and-test` job, make the following updates:
 
-** After the `node/install-packages` step, add a `run` command to create a new subdirectory named `junit`:
+.. After the `node/install-packages` step, add a `run` command to create a new subdirectory named `junit`:
 +
 [source,yaml]
 ----     
@@ -143,7 +143,7 @@ In this example, five separate Docker containers will spin up.
 +
 Test results, including timing data, will be saved in this subdirectory of the executor.
 +
-** Replace the existing `run` command named `Run tests` with the following:
+.. Replace the existing `run` command named `Run tests` with the following:
 +
 [source,yaml]
 ----
@@ -156,15 +156,15 @@ Test results, including timing data, will be saved in this subdirectory of the e
 +
 This step uses the CircleCI CLI to pass in the location of the test suites and configure how the tests are split. You can use the `circleci tests glob` command to select the test files:
 +
-*** First, you want those that match the `+src/__tests__/*.js+` globbing pattern, that is, any `.js` files located in `+src/__tests__+` and any of its subdirectories.
-*** Then, the matching files are piped into `circleci tests split`, which creates the test split groupings.
-*** The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, consult the <<parallelism-faster-jobs#splitting-test-files,Splitting test files section of the Running Tests in Parallel>> document.
+* First, you want those that match the `+src/__tests__/*.js+` globbing pattern, that is, any `.js` files located in `+src/__tests__+` and any of its subdirectories.
+* Then, the matching files are piped into `circleci tests split`, which creates the test split groupings.
+* The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, consult the <<parallelism-faster-jobs#splitting-test-files,Splitting test files section of the Running Tests in Parallel>> document.
 +
 NOTE: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
 +
 The CircleCI CLI commands do not actually execute the tests⁠—you still need to run `yarn test` for that. For convenience, the CircleCI CLI output of test split groupings is stored in the `$TEST` environment variable that can be referenced when running `yarn test`. 
 +
-** After the `Test application` command, add a new `run` command like so:
+.. After the `Test application` command, add a new `run` command like so:
 +
 [source,yaml]
 ----
@@ -175,7 +175,7 @@ The CircleCI CLI commands do not actually execute the tests⁠—you still need 
 +
 This copies the test results (saved as JUnit XML files) to the `~/junit` subdirectory created in an earlier step. Using the `when` attribute with a value of `always` will execute this particular step _always_ regardless of whether the preceding steps were executed successfully or not.
 +
-** Finally, add a `store_test_results` step:
+.. Finally, add a `store_test_results` step:
 +
 [source,yaml]
 ----
@@ -227,9 +227,9 @@ Once you have made these changes to `.circleci/config.yml`, go ahead and push th
 
 In the CircleCI web app, take a look at the steps in the recently triggered pipeline by clicking on the **Success** status and opening the `build-and-test` job. 
 
-* You may have noticed that this pipeline ran more quickly compared to earlier. The Node orb automatically caches node packages by default, so a cache exists from the earlier pipeline run. This helps speed up the install step.
+. You may have noticed that this pipeline ran more quickly compared to earlier. The Node orb automatically caches node packages by default, so a cache exists from the earlier pipeline run. This helps speed up the install step.
 
-* You should also now see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment (node) is labeled by its index number (so you have numbers 0 through 4). You can click on each node to see the individual steps that executed in each parallel run. The environment you are viewing will be highlighted in green.
+. You should also now see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment (node) is labeled by its index number (so you have numbers 0 through 4). You can click on each node to see the individual steps that executed in each parallel run. The environment you are viewing will be highlighted in green.
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
 +
@@ -237,14 +237,14 @@ You might also notice that the parallel run times are not all equal, nor is the 
 +
 Splitting tests by timing is the best way to ensure tests are split as evenly as possible and parallel runs finish around the same time. With that said, you may need to play around with the parallelism level to find the number that works best for you.
 
-* In any of the parallel runs, open the **Test application** step. You will see which test suites and how many individual tests were executed in this particular run. You will also see this message in the output:
+. In any of the parallel runs, open the **Test application** step. You will see which test suites and how many individual tests were executed in this particular run. You will also see this message in the output:
 +
     Error reading historical timing data: file does not exist
     Requested weighting by historical based timing, but they are not present. Falling back to weighting by name.
 +
 Since this is the first time you are storing test data from the pipeline, CircleCI does not currently have timing data to work with, so it defaults to splitting tests by name. 
 
-* Open the **Timing** tab in the job. This tab provides a visualization of how each parallel run did relative to each other.
+. Open the **Timing** tab in the job. This tab provides a visualization of how each parallel run did relative to each other.
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
 +
