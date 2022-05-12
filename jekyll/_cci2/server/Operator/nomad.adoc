@@ -1,6 +1,6 @@
 ---
 version:
-- Server v3.x
+- Server v4.x
 - Server Admin
 ---
 = Introduction to Nomad Cluster Operation

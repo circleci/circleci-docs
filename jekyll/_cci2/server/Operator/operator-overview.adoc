@@ -1,9 +1,9 @@
 ---
 version:
-- Server v3.x
+- Server v4.x
 - Server Admin
 ---
-= CircleCI Server v3.x Operations Overview
+= CircleCI Server v4.x Operations Overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn about CircleCI server Operators via maintenance and monitoring.

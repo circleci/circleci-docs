@@ -1,10 +1,10 @@
 ---
 description: "CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
 version:
-- Server v3.x
+- Server v4.x
 - Server Admin
 ---
-= CircleCI Server v3.x VM Service
+= CircleCI Server v4.x VM Service
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -70,7 +70,7 @@ https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.
 
 ==== Default AWS AMI list
 
-The default AMIs for server v3.x are based on Ubuntu 20.04.
+The default AMIs for server v4.x are based on Ubuntu 20.04.
 
 ----
 "us-east-1" "ami-04f249339fa8afc90" 

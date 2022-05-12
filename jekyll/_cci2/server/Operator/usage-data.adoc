@@ -1,9 +1,9 @@
 ---
 version:
-- Server v3.x
+- Server v4.x
 - Server Admin
 ---
-= CircleCI Server v3.x Usage Data
+= CircleCI Server v4.x Usage Data
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn about CircleCI usage data collection for the purpose of improving our product and services.
