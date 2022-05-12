@@ -37,7 +37,7 @@ mkdir .circleci/
 touch .circleci/config.yml
 ```
 
-These commands create a directory named `.circleci` & the next command creates a new file named `config.yml` within the `.circleci` directory.  Again you **must** use the names .circleci for the dir and config.yml.  Learn more about the [version 2.0 prerequisites here]({{site.baseurl}}/2.0/migrating-from-1-2/).
+These commands create a directory named `.circleci` and the next command creates a new file named `config.yml` within the `.circleci` directory.
 
 ### Scala config.yml file
 {: #scala-configyml-file }

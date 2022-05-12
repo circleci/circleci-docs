@@ -1,30 +1,28 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= WindowsへのCircleCI ランナーインストール
+= Windows への CircleCI セルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI ランナーをWindowsにインストールする方法を説明します。 
+このページでは、CircleCI セルフホストランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
 
-NOTE: 必須要件や認証方法についてはxref:runner-installation.adoc[CircleCI ランナーのインストール] のページご確認ください。
+{% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
-NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。  Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
+ここでは、CircleCI ローンチエージェントとその依存関係 (Chocolatey、Git、Gzip) を Windows サーバーにインストールします。
 
-With this procedure, you install CircleCI launch agent and its dependencies, i.e., Chocolatey, Git and Gzip, on your Windows Server.
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
+*また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
-* また、このセットアップをドメイン環境で行う際には、Windows Server はドメイン メンバーである必要があります。 ランナー インスタンスは、ドメイン コントローラーとして動作している Windows Server では実行できません。
-
-== インストール手順
+== インストールの手順
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。 
 
@@ -39,17 +37,18 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 PowerShell インターフェイスにインストール結果が出力されます。
 
-. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[ランナー設定リファレンス]参照） The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+. インストール中、セルフホストランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[セルフホストランナーの設定リファレンス]を参照してください）。 The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
-After setup completes, the launch agent starts automatically and begins looking for jobs to process.
+セットアップが完了すると、ローンチエージェントが自動的に起動し、処理対象のジョブの検索を開始します。
 
+{% include snippets/ja/runner-config-reference.adoc %}
 
-== Uninstall / Reinstall Steps
+== アンインストール・再インストール手順
 
-Uninstalling CircleCI runner will prepare the system for installation again.
+CircleCI セルフホストランナーをアンインストールすると、システムの再インストールの準備をします。
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
-. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。
+. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
 
 . 以下を PowerShell で実行します。
 +

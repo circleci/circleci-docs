@@ -15,7 +15,7 @@ This document describes how CircleCI automates your pipelines.
 ## Overview
 {: #overview }
 
-After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{site.baseurl}}/2.0/concept/#projects) to circleci.com, every code change triggers your project's [pipeline]({{site.baseurl}}/2.0/concepts/#pipelines). A pipeline represents the entire configuration, including all workflows that are run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline. Jobs run in clean containers or virtual machines (VMs) configured to the requirements set out in your configuration file.
+After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{site.baseurl}}/2.0/concepts/#projects) to circleci.com, every code change triggers your project's [pipeline]({{site.baseurl}}/2.0/concepts/#pipelines). A pipeline represents the entire configuration, including all workflows that are run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline. Jobs run in clean containers or virtual machines (VMs) configured to the requirements set out in your configuration file.
 
 ## Adding projects
 {: #adding-projects }
