@@ -310,10 +310,10 @@ jobs:
       - run: xcodebuild -version
 ```
 
-### macOS VM Storage
+### macOS VM のストレージ
 {: #macos-vm-storage }
 
-The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed.
+macOS VM で利用可能なストレージの量は、リソースクラスや使用される Xcode イメージによって異なります。 Xcode イメージのサイズは、プリインストールされているツールによって異なります。
 
 | Xcode のバージョン | クラス                   | Minimum Available Storage |
 | ------------ | --------------------- | ------------------------- |
