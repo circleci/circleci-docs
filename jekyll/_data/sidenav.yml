@@ -75,8 +75,10 @@ en:
           link: 2.0/code-coverage/
         - name: Debugging with SSH
           link: 2.0/ssh-access-jobs/
-        - name: Parallelism
+        - name: Test Splitting and Parallelism
           link: 2.0/parallelism-faster-jobs/
+        - name: Troubleshooting Test Splitting
+          link: 2.0/troubleshoot-test-splitting/
         - name: Contexts
           link: 2.0/contexts/
         - name: OpenID Connect Tokens
@@ -97,8 +99,6 @@ en:
           link: 2.0/pipeline-variables/
         - name: Using shell scripts
           link: 2.0/using-shell-scripts/
-        - name: Optimizations cookbook
-          link: 2.0/optimization-cookbook/
 
 - name: Execution environments
   icon: icons/sidebar/executors.svg
@@ -338,8 +338,6 @@ en:
 
     - name: Cookbooks
       children:
-        - name: Optimizations
-          link: 2.0/optimization-cookbook/
         - name: Configuration
           link: 2.0/configuration-cookbook/
         - name: Deployment
