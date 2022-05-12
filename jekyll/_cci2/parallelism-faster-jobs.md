@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Test splitting and parallelism"
-description: "Test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
+description: "A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
 version:
 - Cloud
 - Server v3.x
@@ -18,11 +18,11 @@ The more tests your project has, the longer it will take for them to complete us
 
 Pipelines are often configured so that each time code is committed a set of tests are run. Test splitting is a great way to speed up the testing portion of your CI/CD pipeline. A set of tests can be split over a range of test environments running in parallel.
 
-CircleCI test splitting lets you intelligently define where splits happen across a test suite: 
+CircleCI test splitting lets you intelligently define where splits happen across a test suite:
 
 * by name
 * by size
-* using timing data. 
+* using timing data
 
 Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of test environments running in parallel, to give the lowest possible test time for the compute power in use.
 
@@ -155,7 +155,7 @@ On each successful run of a test suite, CircleCI saves timings data from the dir
 
 **Note**: If you do not use `store_test_results`, there will be no timing data available to split your tests.
 
-To split by test timings, use the `--split-by` flag with the `timings` split type. The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible
+To split by test timings, use the `--split-by` flag with the `timings` split type. The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 
 ```shell
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
@@ -235,7 +235,7 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 ## Using environment variables to split tests
 {: #using-environment-variables-to-split-tests }
 
-For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in lieu of the CLI to configure each container individually.
+For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 `CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
 See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) for more details.
 
