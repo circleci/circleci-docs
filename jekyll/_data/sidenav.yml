@@ -220,7 +220,10 @@ en:
           link: 2.0/local-cli/
     - name: How To
       children:
-        - name: Use Matrix Jobs for Simplified Config
+        - name: Use Matrix Jobs
+          link: 2.0/how-to/matrix-jobs/
+        - name: Use Branch Filters
+          link: 2.0/how-to/branch-filter/
     
 - name: Orbs
   icon: icons/sidebar/orbs.svg

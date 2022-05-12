@@ -538,36 +538,7 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 
 For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
 
-## Branch-filtering for job steps
-{: #branch-filtering-for-job-steps }
 
-Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
-
-The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
-
-```yaml
-version: 2.1
-
-jobs:
-  my-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - when:
-          condition:
-            equal: [ main, << pipeline.git.branch >> ]
-          steps:
-            - run: echo "I am on main"
-
-workflows:
-  my-workflow:
-    jobs:
-      - my-job
-```
 
 ## Dynamic Configuration
 {: #dynamic-configuration }
@@ -773,66 +744,4 @@ In the above configuration, we:
 See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more
 information on available elements and required parameters.
 
-## Use matrix jobs to run multiple OS tests
-{: #use-matrix-jobs-to-run-multiple-os-tests }
 
-Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
-
-In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
-
-```yaml
-version: 2.1
-
-orbs:
-  node: circleci/node@4.7
-
-executors:
-  docker: # Docker using the Base Convenience Image
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  linux: # a Linux VM running Ubuntu 20.04
-    machine:
-      image: ubuntu-2004:202107-02
-  macos: # macos executor running Xcode
-    macos:
-      xcode: 12.5.1
-
-jobs:
-  test:
-    parameters:
-      os:
-        type: executor
-      node-version:
-        type: string
-    executor: << parameters.os >>
-    steps:
-      - checkout
-      - node/install:
-          node-version: << parameters.node-version >>
-          install-yarn: true
-
-workflows:
-  all-tests:
-    jobs:
-      - test:
-          matrix:
-            parameters:
-              os: [docker, linux, macos]
-              node-version: ["14.17.6", "16.9.0"]
-```
-
-The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
-
-```
-    - test-14.17.6-docker
-    - test-16.9.0-docker
-    - test-14.17.6-linux
-    - test-16.9.0-linux
-    - test-14.17.6-macos
-    - test-16.9.0-macos
-```
-
-For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).
