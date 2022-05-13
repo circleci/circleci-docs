@@ -1543,7 +1543,7 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then all branches will run the job.
-- If both `only` and `ignore` are specified the `only` is used and `ignore` will have no affect.
+If both `only` and `ignore` are specified the `only` is used and `ignore` will have no effect.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
