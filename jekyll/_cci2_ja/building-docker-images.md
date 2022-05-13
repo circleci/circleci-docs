@@ -27,7 +27,7 @@ jobs:
       # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:
-          version: 20.10.12
+          version: 20.10.14
 ```
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
@@ -87,7 +87,7 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
-          version: 20.10.12
+          version: 20.10.14
           docker_layer_caching: true
 
       # build and push Docker image
@@ -126,6 +126,7 @@ jobs:
 
 CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
 
+- `20.10.14`
 - `20.10.12`
 - `20.10.11`
 - `20.10.7`

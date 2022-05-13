@@ -18,7 +18,7 @@ toc::[]
 
 In CircleCI jobs that use at least one context, the OpenID Connect ID token is available in the environment variable `CIRCLE_OIDC_TOKEN`.
 
-Add a <<contexts/#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference/#workflows,workflows>> section of your `circleci/config.yml` file:
+Add a <<contexts#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference#workflows,workflows>> section of your `circleci/config.yml` file:
 
 ```yaml
 workflows:

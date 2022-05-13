@@ -33,20 +33,28 @@ key. CircleCI offers two Arm resources as part of the [`machine` executor]({{sit
 
 Which are available under these images:
 
-* `ubuntu-2004:202101-01` - most recent, recommended for all users
+* `ubuntu-2004:current` - most recent, recommended for all users
+* `ubuntu-2004:2022.04.1`
+* `ubuntu-2004:202201-02`
+* `ubuntu-2004:202201-01`
+* `ubuntu-2004:202111-02`
+* `ubuntu-2004:202111-01`
+* `ubuntu-2004:202107-01`
+* `ubuntu-2004:202104-01`
+* `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
 
-As these are `machine` executor resources, each class is a dedicated VM that is created specifically for your job and subsequently taken down after the job has finished running.
+These are `machine` executor resources, therefore each class is a dedicated virtual machine that is created specifically for your job and subsequently taken down after the job has finished running.
 
 ## Pricing and availability
 {: #pricing-and-availability }
 
 The following Arm resource class is available to all CircleCI customers:
 
-| Resource class name | Specs             | Requisite Plan                   |
-|---------------------|-------------------|----------------------------------|
-| `arm.medium`        | 2 vCPUs, 8GB RAM  | Free, Performance, Scale, Custom |
-| `arm.large`         | 4 vCPUs, 16GB RAM | Performance, Scale, Custom       |
+| Resource class name | Specs                           | Requisite Plan                   |
+|---------------------|---------------------------------|----------------------------------|
+| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale, Custom |
+| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance, Scale, Custom       |
 {: class="table table-striped"}
 
 For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
