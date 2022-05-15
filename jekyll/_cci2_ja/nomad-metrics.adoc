@@ -44,7 +44,7 @@ NOTE: 次のセクションに進む前に、AWS コンソールの EC2 サー�
 ===== AWS EC2 起動設定 の ID
 
 . 左のサイドバーで [`Auto Scaling Groups (Auto Scaling グループ)`] (ASG) リンクを選択します。
-. [name (名前)] タグに *_nomad_clients_asg のような値が表示されている ASG を探します。
+. [name (名前)] タグに `*_nomad_clients_asg` のような値が表示されている ASG を探します。
 . 起動設定名が ASG 名の隣に表示されます (例：`terraform-20180814231555427200000001`)。
 
 ===== AWS EC2 Services Box のプライベート IP アドレス
