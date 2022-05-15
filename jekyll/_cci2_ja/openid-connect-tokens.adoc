@@ -19,7 +19,7 @@ toc::[]
 
 1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `CIRCLE_OIDC_TOKEN` で OpenID Connect ID トークンを使用することができます。
 
-`context` キーを `circleci/config.yml` ファイルの <<configuration-reference/#workflows, ワークフロー>>セクションに追加して、<<contexts/#creating-amd-using-a-context,ジョブにコンテキスト>>を追加します。
+Add a <<contexts#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference#workflows,workflows>> section of your `circleci/config.yml` file:
 
 ```yaml
 workflows:
@@ -92,6 +92,8 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 === AWS の設定
 
 AWS アカウントが CircleCI の OIDC トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダと AWS の IAM ロール (ワンタイム設定) を作成します。
+
+NOTE: At this time, CircleCI's built-in AWS Elastic Container Registry (ECR) authentication for pulling images does not support OIDC.
 
 AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] を開き、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動します。 次のステップで使用するために組織 ID をコピーします。
 
