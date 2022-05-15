@@ -1458,8 +1458,7 @@ workflows:
 
 **注:**
 
-- `only` を指定した場合、一致するブランチでジョブが実行されます。
-- IP アドレスの範囲機能は現在、有料プランのお客様にオープンプレビューでご利用いただけます。 具体的な料金や詳細については、機能の一般公開時にお知らせします。
+- A paid account on a [Performance or Scale plan](https://circleci.com/pricing/) is required to access IP ranges.
 
 ## **`workflows`**
 {: #workflows }
