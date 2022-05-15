@@ -84,7 +84,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 
 ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
 
-CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細については、「[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)」と「[Docker]({{ site.baseurl }}/ja/2.0/build/#docker)」を参照してください。
+CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) page for more info.
 
 ### コンテナ内のビルド
 {: #your-builds-in-containers }
