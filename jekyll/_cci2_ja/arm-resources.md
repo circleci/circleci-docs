@@ -29,10 +29,18 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 使用するイメージは、次のものから選択できます。
 
-* `ubuntu-2004:202101-01` - 最新版。すべてのユーザーに推奨
+* `ubuntu-2004:current` - most recent, recommended for all users
+* `ubuntu-2004:2022.04.1`
+* `ubuntu-2004:202201-02`
+* `ubuntu-2004:202201-01`
+* `ubuntu-2004:202111-02`
+* `ubuntu-2004:202111-01`
+* `ubuntu-2004:202107-01`
+* `ubuntu-2004:202104-01`
+* `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-これらは  `machine` Executor リソースであり、お客様のジョブのために作成された専用の VM であるため、ジョブの実行が完了すると削除されます。
+These are `machine` executor resources, therefore each class is a dedicated virtual machine that is created specifically for your job and subsequently taken down after the job has finished running.
 
 ## 料金と提供プラン
 {: #pricing-and-availability }
