@@ -18,7 +18,7 @@ toc::[]
 
 In CircleCI jobs that use at least one context, the OpenID Connect ID token is available in the environment variable `CIRCLE_OIDC_TOKEN`.
 
-Add a <<contexts/#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference/#workflows,workflows>> section of your `circleci/config.yml` file:
+Add a <<contexts#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference#workflows,workflows>> section of your `circleci/config.yml` file:
 
 ```yaml
 workflows:
@@ -93,6 +93,8 @@ The following instructions are for:
 === Setting up AWS
 
 You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an Identity and Access Management(IAM) identity provider, and an IAM role in AWS (this is a one time configuration).
+
+NOTE: At this time, CircleCI's built-in AWS Elastic Container Registry (ECR) authentication for pulling images does not support OIDC.
 
 Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. You will need your CircleCI Organization ID, which you can find by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app]. Copy your Organization ID for the next step.
 

@@ -15,7 +15,7 @@ version:
 
 == Authentication
 
-Authentication of CircleCI projects using the hosted application is handled by the VCS, or Google OAuth. Sessions last for 14 days. See the <<gh-bb-integration/#permissions-overview,Permissions Overview>> section of the VCS Integration document for additional details.
+Authentication of CircleCI projects using the hosted application is handled by the VCS, or Google OAuth. Sessions last for 14 days. See the <<gh-bb-integration#permissions-overview,Permissions Overview>> section of the VCS Integration document for additional details.
 
 User authentication may use LDAP for an instance of the CircleCI application that is installed on your private server or cloud. See the <<authentication#,Authentication>> document for setup instructions.
 
