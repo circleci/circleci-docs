@@ -725,7 +725,7 @@ endif::[]
 
 ==== VM サービスの検証
 
-CircleCI Server の設定とデプロイが完了したら、VM サービスが適切に動作しているか確認する必要がありあます。 CircleCI Server 内で、realitycheck プロジェクトを再実行できます。 VM サービスジョブは完了しているはずです。 この時点で、すべてのテストが合格しているはずです。
+CircleCI Server の設定とデプロイが完了したら、VM サービスが適切に動作しているか確認する必要がありあます。 You can rerun the https://github.com/circleci/realitycheck[realitycheck] project within your CircleCI installation and you should see the VM Service Jobs complete. この時点で、すべてのテストが合格しているはずです。
 
 === ランナーのバージョン
 
