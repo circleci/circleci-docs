@@ -24,8 +24,6 @@ Free プランのユーザー数に制限はなく、何人でも CircleCI 上�
 
 下記は Free プランでご利用いただける機能です。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は、 https://circleci.com/ja/pricing/[料金設定]のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。
 
-NOTE: Free プランでは、 macOS のリソースクラスがまもなく公開されます。
-
 === 利用可能なリソースクラス
 
 Docker、 Linux、 Windows、および macOS のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、<<executor-intro#,Executors and Images>> のページをご覧ください。
