@@ -7,7 +7,7 @@ version:
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI Server のインスタンスデータのバックアップと復元の推奨される方法について説明します。
+:page-description: このドキュメントでは、CircleCI Server のインスタンスデータのバックアップと復元方法についての推奨事項を説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -17,9 +17,9 @@ toc::[]
 == 概要
 _バックアップと復元は、CircleCI Server v3.1.0 以上で利用できます。_
 
-CircleCI Server の運用と管理において、別のクラスタへの移行や深刻な事象からの復元が必要になった事態を想定して、バックアップを維持しシステムを復元する方法を検討する必要があります。
+CircleCI Server の運用と管理においては、別のクラスタへの移行や深刻な事象からの復元が必要な事態を想定して、バックアップを維持し、システムを復元する方法を検討する必要があります。
 
-このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元の推奨される方法について説明します。
+このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 
 CircleCI Server は、https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
 つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。 
@@ -595,4 +595,4 @@ restic-mknws              1/1     Running   0          10m
 velero-68788b675c-dm2s7   1/1     Running   0          10m
 ```
 
-上記の例では、いくつかの restic Pod が保留状態です。これは利用可能な CPU リソースまたはメモリリソースがノードに割り当てられるまで待機していることを意味します。 In this case, you may need to scale your nodes to accommodate restic.
+上記の例では、いくつかの restic Pod が保留状態です。これは利用可能な CPU リソースまたはメモリリソースがノードに割り当てられるまで待機していることを意味します。 この場合、restic に合わせたノードのスケーリングが必要な場合があります。
