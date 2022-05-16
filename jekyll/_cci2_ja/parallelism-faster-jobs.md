@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "Test splitting and parallelism"
-description: "A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
+title: "テスト分割と並列実行"
+description: "CircleCI パイプラインを最適化するために、並列のコンピューティング環境でテストを分割し実行するためのガイドです。"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. 並列実行レベルを指定すると、スピンアップしてテストスイートを実行する [Executor]({{site.baseurl}}/ja/2.0/executor-types/) の数が定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行している各 Exexutor を設定することができます。
+プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、複数の並列の実行環境でテストを分割し、実行することができます。 並列実行レベルを指定すると、スピンアップしてテストスイートを実行する [Executor]({{site.baseurl}}/ja/2.0/executor-types/) の数が定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行している各 Exexutor を設定することができます。
 
 * 目次
 {:toc}
@@ -16,19 +16,19 @@ version:
 ## テストを分割してパイプラインを高速化する
 {: #test-splitting-to-speed-up-pipelines }
 
-パイプラインは、一般的にコードがコミットされるたびに一連のテストが実行されるように設定されます。 Test splitting is a great way to speed up the testing portion of your CI/CD pipeline. A set of tests can be split over a range of test environments running in parallel.
+パイプラインは、一般的にコードがコミットされるたびに一連のテストが実行されるように設定されます。 テスト分割は、CI/CD パイプラインのテスト部分を高速化できる優れた方法です。 一連のテストを並行で実行されるさまざまなテスト環境に分割できます。
 
-CircleCI test splitting lets you intelligently define where splits happen across a test suite:
+テスト分割を使用すると、テストスイート全体で分割が行われる場所をインテリジェントに定義できます。
 
-* by name
-* by size
-* using timing data
+* 名前で
+* サイズで
+* タイミングデータを使用して
 
 **タイミングベース**のテスト分割を使用すると、前回のテスト実行のタイミングデータを使用して、並行して実行されている指定された数のテスト環境でできるだけ均等にテストスイートを分割し、使用中の計算能力のテスト時間を最小限に抑えることができます。
 
 ![テストの分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-To illustrate this, take a sequentially running test suite – all tests run in a single test environment (docker container):
+順次実行されるテストスイートを使って、これを 説明します。すべてのテストは、単一のテスト環境 (Docker コンテナ) で実行されます。
 
 ```yaml
 jobs:
@@ -44,7 +44,7 @@ jobs:
       - run: go test
 ```
 
-To split these tests using timing data, first introduce parallelism to spin up a number of identical test environments (10 in this example). Then use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors, so the tests run in the shortest possible time.
+これらのテストをタイミングデータを使って分割するには、まず並列実行により多数の同一テスト環境 (下記例では 10個) をスピンアップします。 次に、 `--split-by=timings` フラグを指定して `circleci tests split` コマンドを使用して、すべての Executor で均等にテストを分割し、テストが最短時間で実行されるようにします。
 
 ```yaml
 jobs:
@@ -66,14 +66,14 @@ jobs:
 ### 効果は？
 {: #is-it-worth-it }
 
-To give a quantitative illustration of the power of splitting tests using timing data, adding `parallelism: 10` on a test suite run across the CircleCI application project decreased the test time **from 26:11 down to 3:55**.
+このタイミングデータを使ったテスト分割の効果を定量的に示すために、 CircleCI アプリケーションプロジェクト全体で実行されるテストスイートに `並列実行 :10` を追加すると、実際にテスト時間が **26:11 から 3:55** に短縮されました。
 
-Using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run. The most recent timings data is always used to define where splits are made.
+タイミングベースのテスト分割により、テストを最も正確に分割でき、各テストスイートの実行で確実に最適化することができます。 分割する場所の決定には、必ず最も新しいタイミンングデータが使用されます。
 
 ## ジョブの並列実行レベルの指定
 {: #specifying-a-jobs-parallelism-level }
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors are set up to run the steps.
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)レベルで定義</a>します。 `parallelism` キーには、ジョブのステップを実行するために設定する個々の Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 1 よりも大きい値を設定します。
 
