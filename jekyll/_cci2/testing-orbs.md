@@ -132,10 +132,16 @@ The orb-tools orb includes a job `orb-tools/review` which will run a suite of te
 
 Example:
 ```yaml
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@11.1
+
+workflows:
+  my-workflow:
+    jobs:
       - orb-tools/review:
-          filters: *filters
           exclude: RC006,RC007
-```
 
 Review Checks output to JUNIT XML formatted and are automatically uploaded to CircleCI to be displayed natively in the UI.
 
