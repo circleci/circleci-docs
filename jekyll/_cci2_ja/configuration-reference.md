@@ -1458,7 +1458,7 @@ workflows:
 
 **注:**
 
-- A paid account on a [Performance or Scale plan](https://circleci.com/pricing/) is required to access IP ranges.
+- IP アドレスの範囲機能をご利用いただくには、有料の [Performance プランまたは Scale プラン](https://circleci.com/pricing/)のご契約が必要です。
 
 ## **`workflows`**
 {: #workflows }
