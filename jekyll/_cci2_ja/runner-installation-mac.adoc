@@ -125,7 +125,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-NOTE: If you are following these instructions for a second time, use the command below to unload the existing service. Once the existing service is unloaded, you can load the new service with the command above.
+NOTE: これまでに有効化手順を実行したことがある場合は、下記コマンドで既存サービスをアンロードしてください。 アンロード後、上記コマンドにより新しいサービスをロードできます。
 
 ```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
