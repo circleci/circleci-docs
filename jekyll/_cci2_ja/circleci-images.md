@@ -213,7 +213,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 
 サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリ サービス コンテナとして使用します。
 
-- [Posgres](https://circleci.com/developer/images/image/cimg/postgres)
+- [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
 - [MariaDB](https://circleci.com/developer/images/image/cimg/mariadb)
 - [Redis](https://circleci.com/developer/images/image/cimg/redis)

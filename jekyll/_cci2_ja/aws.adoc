@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 Terraform を使って CircleCI Server v2.x をインストールする手順は以下のとおりです。
 
 toc::[]
@@ -164,8 +166,8 @@ terraform apply
 +
 .SSL セキュリティ
 image::browser-warning.png[SSL Security]
-. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
-このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
+
+. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
 +
 .ホスト名
 image::secure-management-console.png[Hostname]
@@ -211,7 +213,7 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」�
 
 .. GitHub から Client ID と Secret をコピーして、該当するフィールドにペーストし、[Test Authentication] をクリックします。
 
-.. GitHub.com をご利用の場合は、ステップ 6 に進みます。 If using Github Enterprise, you will also need to follow some supplementary steps and supply an API Token so we can verify your organization. トークンを提供するには、GitHub Enterprise のダッシュボードから以下を実行してください。
+.. GitHub.com をご利用の場合は、ステップ 6 に進みます。 Github Enterprise をご利用の場合は、いくつかの追加手順を行い、API トークンを提供していただき、お客様の組織を確認する必要があります。 トークンを提供するには、GitHub Enterprise のダッシュボードから以下を実行してください。
 ... Personal Settings (右上) に行き、  Developer Settings  Personal Access Tokens に移動します。
 ... [generate new token] をクリックします。 誤って削除されないように、トークンには適切な名前を付けてください。 チェックボックスには何もチェックを入れないでください。ここでは、デフォルトのパブリックな読み取りレベルのアクセスが必要なだけで、追加のアクセス権限は必要ありません。 このトークンは一人のユーザーが所有するのではなく、組織全体で共有することをお勧めします。
 ... 新しいトークンをコピーして、GitHub Enterprise Default API Token フィールドに貼り付けます。
@@ -219,7 +221,7 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」�
 .Github Enterprise Token を入力します。
 image::ghe_token.png[Github Integration]
 
-. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 For a detailed run-through of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
+. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 LDAP 設定の詳細については、 https://circleci.com/docs/ja/2.0/authentication/#ldap[LDAP 認証ガイド]をご覧ください。
 
 . **Privacy**: インストールには SSL 証明書と SSL キーの使用をお勧めします。 インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
 +
