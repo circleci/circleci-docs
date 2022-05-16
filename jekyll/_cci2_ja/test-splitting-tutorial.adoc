@@ -8,13 +8,13 @@ version:
 = テスト分割によるパイプラインの迅速化
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "Learn to split and run tests in parallel in CircleCI"
+:page-description: CircleCI でテストを分割し、実行する方法について説明します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-This guide walks you through a basic example of test splitting in CircleCI. Test splitting helps speed up your pipelines.
+このガイドでは、テスト分割の基本的な例を紹介します。 Test splitting helps speed up your pipelines.
 
 toc::[]
 
