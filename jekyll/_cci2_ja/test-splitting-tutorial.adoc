@@ -1,11 +1,11 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Test splitting to speed up your pipelines
+= テスト分割によるパイプラインの迅速化
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn to split and run tests in parallel in CircleCI"
