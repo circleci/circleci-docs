@@ -14,33 +14,33 @@ version:
 
 :toc-title:
 
-このガイドでは、テスト分割の基本的な例を紹介します。 Test splitting helps speed up your pipelines.
+このガイドでは、テスト分割の基本的な例を紹介します。 テスト分割によりパイプラインを高速化することができます。
 
 toc::[]
 
 == はじめに
 
-Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a feature called <<parallelism-faster-jobs#,_parallelism_>>, which allows you to run a job in CircleCI on different nodes at the same time.
+テスト分割は、複数の実行環境でテストを同時に実行する手法です。 テスト分割は、CircleCI のジョブを異なる Node で同時に実行できる <<parallelism-faster-jobs#,_parallelism_>> という機能を使います。
 
-You may have a test suite that consists of dozens or hundreds of tests, and executing them one after the other can take up a lot of time and consume a lot of credits. When you split tests, you have the opportunity to significantly reduce wait times, receive feedback more quickly, and optimize your plan usage.
+何十個または何百個のテストで構成されたテストスイートがあり、それらを一つづつ実行するには長時間かかり、大量のクレジットを消費します。 テストを分割すると、待機時間が大幅に減り、より迅速にフィードバックを得ることができ、プランの使用を最適化できます。
 
-Test splitting in CircleCI can work with many testing frameworks, including Jest, pytest, Maven, and Gradle.
+CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多くのテストフレームワークで使用できます。
 
-In this tutorial, you will:
+このチュートリアルでは以下を行います。
 
-* Set up a basic React app as a project in CircleCI.
-* Modify the project's `.circleci/config.yml` file to split tests based on timing data.
-* View the resulting parallel test runs in the CircleCI web app.
-* See how test splitting can help decrease pipeline run times and optimize credit usage.
+* 基本的な React アプリを CircleCI のプロジェクトとして設定する
+* プロジェクトの `.circleci/config.yml` ファイルをタイミングデータに基づいてテストを分割するように変更する
+* その結果のテストの並列実行を CircleCI Web アプリで確認する
+* テスト分割により、パイプラインの実行時間がどれだけ減少したか、またクレジットの使用がどれほど最適化されたかを確認する
 
-To complete this tutorial, you need:
+このチュートリアルに沿って実行するには、以下を準備する必要があります。
 
 * CircleCI のアカウント: アカウントをお持ちでない場合は、 <<first-steps#,無料で登録していただけます。>>
-* A Version Control System (VCS) provider, such as GitHub or BitBucket, connected to your CircleCI account. If you have not already done so, follow the steps in the <<gh-bb-integration#,GitHub and Bitbucket Integration>> page to connect your VCS provider.
+* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や BitBucket)  : まだお済みでない場合は、<<gh-bb-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
 
-== About the sample app
+== サンプルアプリについて
 
-You will use a basic React app for this tutorial. The project repository is available on https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub]. The app was created using https://create-react-app.dev/[Create React App], and is set up to use the https://jestjs.io/[Jest] testing framework. It uses the https://github.com/jest-community/jest-junit[jest-junit] reporter to export test results as JUnit XML files.
+このチュートリアルでは基礎的な React アプリを使用します。 The project repository is available on https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub]. The app was created using https://create-react-app.dev/[Create React App], and is set up to use the https://jestjs.io/[Jest] testing framework. It uses the https://github.com/jest-community/jest-junit[jest-junit] reporter to export test results as JUnit XML files.
 
 When you set up the project in CircleCI later in this tutorial, you'll select the option to use a config.yml template that you can edit. The template used with this tutorial is a starter configuration that can be used with Node projects. Read the following section for a quick walkthrough of the configuration, or feel free to skip ahead to set up the project if you're already familiar with setting up Node projects in CircleCI.
 
