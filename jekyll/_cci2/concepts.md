@@ -562,6 +562,7 @@ jobs:
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
 See [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for more information.
+
 ## Pipelines
 {: #pipelines }
 
@@ -570,6 +571,7 @@ A CircleCI pipeline is the full set of processes you run when you trigger work o
 Pipelines represent methods for interacting with your configuration:
 
 {% include snippets/pipelines-benefits.adoc %}
+
 ## Projects
 {: #projects }
 
