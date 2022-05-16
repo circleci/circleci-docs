@@ -136,7 +136,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 アプリケーションのサイドバーにある [Projects] をクリックするか、リンク： https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/ を開きます。ここでは、`VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` には組織名または個人の VCS ユーザー名を指定します。 リストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. この例では、 `config.yml` には以下の内容が含まれます。
+2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 アプリケーションのサイドバーにある [Projects] をクリックするか、リンク： https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/ を開きます。ここでは、`VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` には組織名または個人の VCS ユーザー名を指定します。 リストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれます。
 
     ```yaml
     # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/2.0/configuration-reference
