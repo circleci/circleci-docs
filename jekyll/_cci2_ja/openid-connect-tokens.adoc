@@ -19,7 +19,7 @@ toc::[]
 
 1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `CIRCLE_OIDC_TOKEN` で OpenID Connect ID トークンを使用することができます。
 
-Add a <<contexts#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference#workflows,workflows>> section of your `circleci/config.yml` file:
+`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,ワークフロー>>セクションに追加して、<<contexts#creating-and-using-a-context,ジョブにコンテキスト>>を追加します。
 
 ```yaml
 workflows:
