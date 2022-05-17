@@ -101,7 +101,7 @@ AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id
 
 次に、IAM ロールを作成します。 AWS のドキュメントの　 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] を開きます。
 
-trusted entity には、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 **Audience** には、唯一のオプションである **Add Permissions** を選択します。  これにより、CircleCI ジョブにできること・できないことを指定できます。 ジョブで必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice] です。
+trusted entity には、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 For **Audience**, choose the only option. Then, click on **NEXT**, which will take you to the **Add Permissions** page. これにより、CircleCI ジョブにできること・できないことを指定できます。 ジョブで必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice] です。
 
 **注:** 独自のポリシーを作成すると便利な場合があります。
 
