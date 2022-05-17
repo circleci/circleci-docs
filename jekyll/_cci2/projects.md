@@ -9,7 +9,7 @@ version:
 ---
 
 
-A CircleCI project shares the name of the associated code repository in your [Version Control System]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. From here you can set up and follow the projects you have access to.
+A CircleCI project shares the name of the associated code repository in your [version control system]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. From here you can set up and follow the projects you have access to.
 
 On the Projects Dashboard, you can either:
 * _Set Up_ any project that you are the owner of in your VCS.
