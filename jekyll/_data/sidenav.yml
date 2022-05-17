@@ -163,7 +163,6 @@ en:
         - name: Overview
           link: 2.0/hello-world-windows/
     - name: Runner
-      link: 2.0/runner-overview/
       children:
         - name: Self-hosted Runner Overview
           link: 2.0/runner-overview/
