@@ -1458,7 +1458,7 @@ workflows:
 
 **注:**
 
-- IP アドレスの範囲機能をご利用いただくには、有料の [Performance プランまたは Scale プラン](https://circleci.com/pricing/)のご契約が必要です。
+- IP アドレスの範囲機能をご利用いただくには、有料の [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のご契約が必要です。
 
 ## **`workflows`**
 {: #workflows }
