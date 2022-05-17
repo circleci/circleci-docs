@@ -61,7 +61,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-**注: **テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行ではテスト時間が最適化されます。
+**注:** テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行ではテスト時間が最適化されます。
 
 ### 効果は？
 {: #is-it-worth-it }
@@ -75,7 +75,7 @@ jobs:
 
 テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)レベルで定義</a>します。 `parallelism` キーには、ジョブのステップを実行するために設定する個々の Executor の数を指定します。
 
-ジョブのステップを並列に実行するには、`parallelism` キーに 1 よりも大きい値を設定します。
+ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。
 
 ```yaml
 # ~/.circleci/config.yml
@@ -111,7 +111,7 @@ CLI では、並列ジョブの実行時に複数の Executor にテストを分
 ### テストファイルのグロブ
 {: #globbing-test-files }
 
-CLI では、以下のパターンを使用したテスト ファイルのグロブをサポートしています。
+CLI では、以下のパターンを使用したテストファイルのグロブをサポートしています。
 
 - `*` は、任意の文字シーケンスに一致します (パス区切り文字を除く)。
 - `**` は、任意の文字シーケンスに一致します (パス区切り文字を含む)。
@@ -119,7 +119,7 @@ CLI では、以下のパターンを使用したテスト ファイルのグロ
 - `[abc]` は、角かっこ内の任意の文字に一致します (パス区切り文字を除く)。
 - `{foo,bar,...}` は、中かっこ内のいずれかの文字シーケンスに一致します。
 
-テスト ファイルをグロブするには、`circleci tests glob` コマンドに 1 つ以上のパターンを渡します。
+テストファイルをグロブするには、`circleci tests glob` コマンドに 1 つ以上のパターンを渡します。
 
 ```
 circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
@@ -148,9 +148,9 @@ jobs:
 ### タイミングデータに基づいた分割
 {: #splitting-by-timing-data }
 
-一連の並列 Executor でテスト スイートを最適化するための最良の方法は、タイミング データを使用してテストを分割することです。 これにより、テストが最も均等に分割され、テスト時間が短縮されます。
+一連の並列 Executor でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 これにより、テストが最も均等に分割され、テスト時間が短縮されます。
 
-CircleCI は、テスト スイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミング データを保存しています。 このタイミングデータは、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間で構成されます。
+CircleCI は、テストスイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミング データを保存しています。 このタイミングデータは、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間で構成されます。
 
 **注**: `store_test_results` を使用しないと、テストの分割に使用できるタイミングデータは生成されません。
 
@@ -234,7 +234,7 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 ## 環境変数を使用したテストの分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
+CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、[定義済み環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#built-in-environment-variables)のページを参照してください。
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
