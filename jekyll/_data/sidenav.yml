@@ -114,7 +114,7 @@ en:
     - name: Docker
       children:
         - name: Overview
-          link: 2.0/executor-types/
+          link: 2.0/execution-environments/using-docker/
           hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
@@ -130,10 +130,10 @@ en:
           link: 2.0/custom-images/
         - name: Docker authenticated pulls
           link: 2.0/private-images/
-    - name: Machine
+    - name: Linux VM
       children:
         - name: Overview
-          link: 2.0/executor-types/
+          link: 2.0/execution-environments/using-linuxvm/
           hash: using-machine
         - name: Pre-installed software
           link: 2.0/docker-to-machine/
@@ -142,9 +142,11 @@ en:
           link: 2.0/android-machine-image
         - name: Arm Resources
           link: 2.0/arm-resources/
-    - name: Mac
+    - name: macOS
       children:
         - name: Overview
+          link: 2.0/execution-environments/using-macos/
+        - name: Hello World
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
           link: 2.0/testing-ios/
@@ -157,12 +159,22 @@ en:
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/
-          
+          link: 2.0/dedicated-hosts-macos/ 
     - name: Windows
       children:
         - name: Overview
+          link: 2.0/execution-environments/using-windows/
+        - name: Hello World
           link: 2.0/hello-world-windows/
+    - name: GPU
+      children:
+        - name: Overview
+          link: 2.0/execution-environments/using-gpu/
+    - name: Arm
+      children:
+        - name:
+          link: 2.0/execution-environments/using-arm/
+    
     - name: Runner
       link: 2.0/runner-overview/
       children:

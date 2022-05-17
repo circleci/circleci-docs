@@ -1,17 +1,23 @@
 ---
 layout: classic-docs
-title: "Executors and Images"
-short-title: "Executors and Images"
-description: "CircleCI executors and images"
-categories: [configuration]
-order: 1
+title: "Execution Environments"
+description: "An overview of CircleCI execution environments."
+redirect_from: /2.0/executor-types/
 version:
 - Cloud
 - Server v2.x
 - Server v3.x
 ---
 
-CircleCI offers several execution environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
+CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
+
+For each job in your project config you will specify an execution environment by assigning it an **executor**. An **executor** defines the underlying technology or environment in which to run a job, and which image to use to best-suit your project. 
+
+It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
+
+- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
+- Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
 ![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -26,19 +32,21 @@ CircleCI offers several execution environments. We call these **executors**. An 
 jobs:
   build: # name of your job
     docker: # executor type
-      - image: buildpack-deps:trusty # primary container will run Ubuntu Trusty
+      - image: cimg/base:stable # primary container will run the latest, production-ready base image
 
       steps:
         # Commands run in the primary container
 ```
 
-Find out more about the `docker` executor in the [Using Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) section of the Choosing an Executor Type page.
+Find out more about the `docker` executor on the [Using Docker]({{ site.baseurl }}/2.0/using-docker) page.
 
-## Machine
-{: #machine }
+## Linux VM
+{: #linux-vm }
 
-Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
+Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
 {: class="alert alert-warning"}
+
+To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine)
 
 {:.tab.machine.Cloud}
 ```yml
@@ -70,7 +78,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about the `machine` executor in the [Using machine]({{ site.baseurl }}/2.0/executor-types/#using-machine) section of the Choosing an Executor Type page.
+Find out more about the `machine` executor in the [Using Linux Virtual Machines]({{ site.baseurl }}/2.0/using-linuxvm) page.
 
 ## macOS
 {: #macos }
