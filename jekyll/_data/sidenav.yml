@@ -269,6 +269,12 @@ en:
 - name: Projects
   icon: icons/sidebar/projects.svg
   children:
+    - name: overview
+      children:
+        - name: Projects Overview
+          link: 2.0/projects/
+        - name: Creating a Project
+          link: 2.0/create-project/
     - name: settings
       children:
         - name: Settings Overview
