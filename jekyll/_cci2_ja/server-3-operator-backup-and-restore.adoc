@@ -479,7 +479,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
 
 == バックアップの作成
-クラスタへの Velero のインストールが完了すると、管理コンソールのナビゲーションバーに *Snapshots (スナップショット)* オプションが表示されるようになります。
+クラスタへの Velero のインストールが完了すると、管理コンソールのナビゲーションバーに **Snapshots (スナップショット)** オプションが表示されるようになります。
 
 image::kots-admin-navbar-snapshot-option.png[KOTS Navbar]
 
@@ -530,7 +530,7 @@ kubectl kots restore --from-backup <backup-instance-id>
 
 === オプション 3 - KOTS 管理者コンソール UI を使用したバックアップ復元
 
-バックアップ時と同様に、KOTS 管理者コンソールの *[Snapshots (スナップショット)]* に移動します。 今回は、復元アイコン付きのバックアップがすべて表示されます。
+バックアップ時と同様に、KOTS 管理者コンソールの **[Snapshots (スナップショット)]** に移動します。 今回は、復元アイコン付きのバックアップがすべて表示されます。
 使用するバックアップを選択し、復元を選択します。
 
 image::kots-admin-restore.png[KOTS Create Snapshot]
@@ -543,7 +543,7 @@ CircleCI Server が復元され、運用可能な状態になるまで、約 10 
 
 == オプション - KOTS 使用したバックアップのスケジュール設定
 
-定期的なバックアップスケジュールを設定するには、KOTS 管理者コンソールで *[Snapshots (スナップショット)]*、*[Settings & Schedule (設定とスケジュール)]* の順に選択します。
+定期的なバックアップスケジュールを設定するには、KOTS 管理者コンソールで *[Snapshots (スナップショット)]*、 *[Settings & Schedule (設定とスケジュール)]* の順に選択します。
 
 image::kots-admin-scheduled-backup.png[Snapshots Selected]
 
