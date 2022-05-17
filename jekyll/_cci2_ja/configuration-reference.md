@@ -1534,12 +1534,11 @@ workflows:
 
 `branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
 
-branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
+Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - `ignore` を指定した場合、一致するブランチではジョブは実行されません。
-- `only` と `ignore` のいずれも指定していない場合、すべてのブランチでジョブが実行されます。
-- `only` と `ignore` の両方を指定した場合、`ignore` よりも `only` が先に処理されます。
+- `only` と `ignore` のどちらも指定していない場合、全てのブランチでジョブを実行します。 If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
 
 | キー       | 必須 | タイプ            | 説明                     |
 | -------- | -- | -------------- | ---------------------- |
