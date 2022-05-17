@@ -38,7 +38,7 @@ mkdir .circleci/
 touch .circleci/config.yml
 ```
 
-These commands create a directory named `.circleci` and the next command creates a new file named `config.yml` within the `.circleci` directory.
+最初のコマンドは `.circleci` という名前のディレクトリを作成し、次のコマンドは `.circleci` ディレクトリの中に `config.yml` という名前の新しいファイルを作成します。
 
 ### Scala の config.yml ファイル
 {: #scala-configyml-file }
