@@ -54,4 +54,4 @@ Xcode Version | Class                 | Minimum Available Storage
 
 <sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
-<sup>(2)</sup> _Exception: Xcode 12.0.1 and 12.5.1 have a minimum 100GB of available storage._
+<sup>(2)</sup> _Exception: Xcode 12.0.1, 12.4.0 and 12.5.1 have a minimum 100GB of available storage._
