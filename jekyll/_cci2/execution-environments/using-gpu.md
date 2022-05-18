@@ -7,8 +7,6 @@ version:
 - Server v3.x
 - Server v2.x
 ---
-[custom-images]: {{ site.baseurl }}/2.0/custom-images/
-[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 [server-gpu]: {{ site.baseurl }}/2.0/gpu/
 
 CircleCI Cloud has execution environments with Nvidia GPUs for specialized workloads. The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
@@ -40,4 +38,4 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server][server-gpu].
+Customers using CircleCI server v2.x can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server]({{ site.baseurl }}/2.0/gpu/).

@@ -32,7 +32,6 @@ To make the transition easy, CircleCI maintains convenience images on Docker Hub
 
 ### Docker image best practices
 {: #docker-image-best-practices }
-{:.no_toc}
 
 - If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
 
@@ -77,7 +76,6 @@ The following examples show how you can use public images from various sources:
 
 #### CircleCI's public convenience images on Docker Hub
 {: #public-convenience-images-on-docker-hub }
-{:.no_toc}
 
   - `name:tag`
     - `cimg/node:14.17-browsers`
@@ -86,7 +84,6 @@ The following examples show how you can use public images from various sources:
 
 #### Public images on Docker Hub
 {: #public-images-on-docker-hub }
-{:.no_toc}
 
   - `name:tag`
     - `alpine:3.13`
@@ -95,7 +92,6 @@ The following examples show how you can use public images from various sources:
 
 #### Public images on Docker registries
 {: #public-docker-registries }
-{:.no_toc}
 
   - `image_full_url:tag`
     - `gcr.io/google-containers/busybox:1.24`

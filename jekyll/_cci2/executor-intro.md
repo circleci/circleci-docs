@@ -28,6 +28,8 @@ It is possible to specify a different executor type for every job in your [.circ
   <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
+To access the Docker execution environment, use the `docker` executor and specify an image. For a full list of convenience images, which are built by CircleCI, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=docker)
+
 ```yml
 jobs:
   build: # name of your job
@@ -38,7 +40,7 @@ jobs:
         # Commands run in the primary container
 ```
 
-Find out more about the `docker` executor on the [Using Docker]({{ site.baseurl }}/2.0/using-docker) page.
+Find out more about the Docker execution environment on the [Using Docker]({{ site.baseurl }}/2.0/execution-environments/using-docker) page.
 
 ## Linux VM
 {: #linux-vm }
@@ -78,10 +80,12 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about the `machine` executor in the [Using Linux Virtual Machines]({{ site.baseurl }}/2.0/using-linuxvm) page.
+Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines]({{ site.baseurl }}/2.0/execution-environments/using-linuxvm) page.
 
 ## macOS
 {: #macos }
+
+To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the [CircleCI Developer Hub](https://circleci.com/developer/machine/image/macos).
 
 ```
 jobs:
@@ -94,26 +98,23 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about the `macos` executor in the [Using macOS]({{ site.baseurl }}/2.0/executor-types/#using-macos) section of the Choosing an Executor Type page.
+Find out more about the macOS execution environment in the [Using macOS]({{ site.baseurl }}/2.0/execution-environments/using-macos) section of the Choosing an Executor Type page.
 
 ## Windows
 {: #windows }
 
-The syntax for using the Windows executor in your config differs depending on whether you are using:
+To access the Windows execution environment, either use the Windows orb and then specify one of the default executor from the orb, or use the `machine` executor and specify a windows image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
-* The cloud version of CircleCI, using config version 2.1 and the Windows orb.
-* Self-hosted installation of CircleCI server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI server v2.18.3_.
-
-{:.tab.windowsblock.Cloud}
+{:.tab.windowsblock.Cloud_with_orb}
 ```yml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # The Windows orb gives you everything you need to start using the Windows executor
 
 jobs:
   build: # name of your job
-    executor: win/default # executor type
+    executor: win/server-2022 # use one of the executors defined within the windows orb
 
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -121,6 +122,20 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
+{:.tab.windowsblock.Cloud_with_machine}
+```yml
+version: 2.1 
+
+jobs:
+  build: # name of your job
+    machine:
+      image: 'windows-server-2022-gui:current'   
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
 
 {:.tab.windowsblock.Server_3}
 ```yml
@@ -152,7 +167,53 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about the `windows` executor in the [Using the Windows executor]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor) section of the Choosing an Executor Type page. See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
+Find out more about the Windows execution environment in the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-windows) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
+
+## GPU
+
+To access the GPU execution environment, either use the Windows orb and then specify the GPU-enabled executor from the orb, or use the `machine` executor and specify a Linux or Windows GPU-enabled image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
+
+{:.tab.gpublock.Linux}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      resource_class: gpu.nvidia.small
+      image: ubuntu-1604-cuda-10.1:201909-23
+    steps:
+      - run: nvidia-smi
+```
+
+{:.tab.gpublock.Windows_without_orb}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      resource_class: gpu.nvidia.small
+      image: windows-server-2019-cuda
+    steps:
+      - run: nvidia-smi
+```
+
+{:.tab.gpublock.Windows_with_orb}
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.3.0
+
+jobs:
+  build:
+    executor: win/server-2019-cuda
+    steps:
+      - run: 'Write-Host ''Hello, Windows'''
+```
+
+Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-gpu) page.
 
 ## See also
 {: #see-also }

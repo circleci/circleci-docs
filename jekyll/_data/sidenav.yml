@@ -113,9 +113,8 @@ en:
           link: 2.0/executor-intro/
     - name: Docker
       children:
-        - name: Overview
+        - name: Using Docker
           link: 2.0/execution-environments/using-docker/
-          hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
@@ -132,19 +131,17 @@ en:
           link: 2.0/private-images/
     - name: Linux VM
       children:
-        - name: Overview
+        - name: Using Linux VM
           link: 2.0/execution-environments/using-linuxvm/
-          hash: using-machine
         - name: Pre-installed software
           link: 2.0/docker-to-machine/
           hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
-        - name: Arm Resources
-          link: 2.0/arm-resources/
+
     - name: macOS
       children:
-        - name: Overview
+        - name: Using macOS
           link: 2.0/execution-environments/using-macos/
         - name: Hello World
           link: 2.0/hello-world-macos/
@@ -172,8 +169,10 @@ en:
           link: 2.0/execution-environments/using-gpu/
     - name: Arm
       children:
-        - name:
+        - name: Overview
           link: 2.0/execution-environments/using-arm/
+        - name: Arm Resources
+          link: 2.0/arm-resources/
     
     - name: Runner
       link: 2.0/runner-overview/
