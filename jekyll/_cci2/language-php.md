@@ -22,7 +22,7 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">Demo PHP Laravel Project on GitHub</a>
-- [Demo PHP Laravel Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
+- [Demo PHP Laravel Project building on CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-php-laravel){:rel="nofollow"}
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI with PHP projects.
 
@@ -198,7 +198,5 @@ Success! You just set up CircleCI for a PHP app. Check out our project’s [Job 
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-
-- Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public PHP projects.
 
 - If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

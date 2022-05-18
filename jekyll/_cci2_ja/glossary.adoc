@@ -1,12 +1,10 @@
 ---
-
 version:
 - クラウド
 - Server v3.x
 ---
 
 = 用語集
-
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
@@ -14,6 +12,7 @@ version:
 :toc: macro
 
 :toc-title:
+
 
 == 認証
 
