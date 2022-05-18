@@ -19,7 +19,7 @@ It is possible to specify a different executor type for every job in your [.circ
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
-![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
+<!---![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->
 
 ## Docker
 {: #docker }
