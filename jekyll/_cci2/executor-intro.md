@@ -280,14 +280,8 @@ workflows:
 Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-arm) page.
 
 
-## See also
-{: #see-also }
+## Next Steps
+{: #next-steps }
 
-* [Choosing an executor type]({{ site.baseurl }}/2.0/executor-types/)
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
-* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
-* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
-
-## Learn More
-{: #learn-more }
-Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.
+* Read more about [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) for the Docker execution environment.
+* Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.
