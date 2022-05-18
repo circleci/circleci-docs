@@ -215,6 +215,71 @@ jobs:
 
 Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-gpu) page.
 
+## Arm
+
+To access the Arm execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
+
+{:.tab.armblock.Cloud}
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+  build-large:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+```
+
+{:.tab.armblock.Server_3}
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+  build-large:
+    machine:
+      image: arm-default
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+```
+
+Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-arm) page.
+
+
 ## See also
 {: #see-also }
 

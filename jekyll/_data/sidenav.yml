@@ -158,20 +158,18 @@ en:
           link: 2.0/dedicated-hosts-macos/ 
     - name: Windows
       children:
-        - name: Overview
+        - name: Using Windows
           link: 2.0/execution-environments/using-windows/
         - name: Hello World
           link: 2.0/hello-world-windows/
     - name: GPU
       children:
-        - name: Overview
+        - name: Using GPUs
           link: 2.0/execution-environments/using-gpu/
     - name: Arm
       children:
-        - name: Overview
+        - name: Using Arm
           link: 2.0/execution-environments/using-arm/
-        - name: Arm Resources
-          link: 2.0/arm-resources/
     
     - name: Runner
       children:
@@ -320,6 +318,7 @@ en:
           link: 2.0/security-supply-chain/
         - name: IP Ranges
           link: 2.0/ip-ranges/
+
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
