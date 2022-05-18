@@ -141,7 +141,7 @@ workflows:
 ### 6. まとめ
 {: #conclusion }
 
-CircleCI 上にビルドする Python アプリケーションを設定しました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[パイプラインのページ]({}/2.0/project-build/#overview)を参照してください。
+CircleCI 上にビルドする Python アプリケーションを設定しました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[パイプラインのページ]({{site.baseurl}}/ja/2.0/project-build/#overview)を参照してください。
 
 ## 設定ファイルの全文
 {: #full-configuration-file-new }
