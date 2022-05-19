@@ -41,7 +41,7 @@ Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/
 
 Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
-For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images) list.
+For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images) list.
 
 For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
 
