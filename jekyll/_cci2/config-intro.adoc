@@ -167,6 +167,7 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     steps:
+      - checkout
       - run:
           name: Getting the Code
           command: |
@@ -258,6 +259,7 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     steps:
+      - checkout
       - run:
           name: Getting the Code
           command: |
