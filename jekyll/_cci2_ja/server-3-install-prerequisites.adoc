@@ -143,7 +143,7 @@ kubectl auth can-i <list|create|edit|delete> pods
 ifndef::env-gcp[]
 
 ==== EKS
-Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成にはhttps://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
 . AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
 .  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
