@@ -25,14 +25,13 @@ toc::[]
 
 === Set up backup and restore
 
-Backups of CircleCI server can be created through https://kots.io/[KOTS].
-To enable backup support, you will need to install and configure https://velero.io/[Velero] on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
+Backups of CircleCI server can be created through https://velero.io/[Velero].  To enable backup support, it will need to be installed and configured on your cluster. Velero was listed in the installation prerequisites section, so you should already have it.
 
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
 
-=== Server 3.x backups on AWS
+=== Server 4.x backups on AWS
 
 These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
 
@@ -149,7 +148,7 @@ where the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are value
 * Run the following `velero` `install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you created in <<Step 2 - Setup permissions for Velero, Step 2>>.
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+NOTE: Backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
 [source, bash]
 ----
@@ -187,7 +186,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-=== Server 3.x backups on GCP
+=== Server 4.x backups on GCP
 
 The following steps are specific for Google Cloud Platform and it is assumed you have met the <<prerequisites, prerequisites>>.
 
@@ -293,13 +292,12 @@ After running this command, you should see a file named `credentials-velero` in 
 If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account needs the
 `iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
 
 ==== Step 3 - Install and start Velero
 
 * Run one of the following `velero` `install` commands, depending on how you authorized the service account. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
+NOTE: Backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
 
 [discrete]
 ===== If using a JSON key file
@@ -355,7 +353,7 @@ endif::env-aws[]
 * S3-COMPATIBLE SETUP *
 
 ////
-=== Server 3.x backups with S3 Compatible Storage
+=== Server 4.x backups with S3 Compatible Storage
 
 The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
@@ -434,7 +432,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 Run the following `velero install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 
-NOTE: KOTS backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+NOTE: Backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 
 [source, bash]
 ----
@@ -465,33 +463,25 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 As restic is a daemonset, there should be one pod for each node in your
 Kubernetes cluster.
 
-=== Creating backups
-Now that Velero is installed on your cluster, you should see the snapshots option in the navbar of the management console.
-
-image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
-
-If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
+=== Backups and Restores
+Now that Velero is installed on your cluster, you  are ready to create your first backup. If you encounter problems, please refer to the
 https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[troubleshooting] section.
 
-==== Option 1 - Create a backup with KOTS CLI
-
-To create the backup, run the following command:
+To create the backup, run:
 
 [source,bash]
 ----
-kubectl kots backup --namespace <your namespace>
+velero backup create <backup-name> --include-namespaces <circleci-namespace>
 ----
 
-==== Option 2 - Create a backup with KOTS Admin Console
+to restore from a backup, run:
 
-Select *Snapshots* from the navbar. The default selection should be *Full Snapshots*, which is recommended.
+[source,bash]
+----
+velero restore create --from-backup <backup-name>
+----
 
-image::kots-admin-full-snapshot.png[Kots Navbar]
-
-Click the *Start a snapshot* button.
-
-image::kots-admin-create-backup.png[Kots Create Snapshot]
-
+See the https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more details.
 
 === Orbs 
 
@@ -507,34 +497,15 @@ For more information and steps to complete these tasks, see the https://circleci
 
 Build notifications are sent by email. This section has details on how to set up build notifications by email. 
 
-Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: 
+Add email notification support by adding the following to values.yaml:
 
-[source,shell]
-----
-kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
-----
-
-Locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
-
-Locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation:
-
-* *Email Submission server hostname (required)* - Host name of the submission server (for example, for Sendgrid use smtp.sendgrid.net).
-
-* *Username (required)* - Username to authenticate to submission server. This is commonly the same as the user’s email address.
-
-* *Password (required)* - Password to authenticate to submission server.
-
-* *Port (optional)* - Port of the submission server. This is usually either 25 or 587. While port 465 is also commonly used for email submission, it is often used with implicit TLS instead of StartTLS. Server only supports StartTLS for encrypted submission. 
-+
-NOTE: Outbound connections on port 25 are blocked on most cloud providers. Should you select this port, be aware that your notifications may fail to send.
-
-* *Enable StartTLS* - Enabling this will encrypt mail submission. 
-+
-NOTE: StartTLS is used to encrypt mail by default, and you should only disable this if you can otherwise guarantee the confidentiality of traffic.
-
-* *Email from address (required)* - The _from_ address for the email.  
-
-Click the *Save config* button to update your installation and redeploy server.
+```
+smtp:
+  host: <hostname-of-submission-server>
+  user: <username-for-submission-server>
+  password: <password-for-submission-server
+  port: <mail-port>
+```
 
 ifndef::pdf[]
 ## What to read next
