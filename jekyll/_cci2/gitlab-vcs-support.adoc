@@ -37,19 +37,19 @@ After you successfully create a new organization, you will be taken to the web a
 
 === B) Current CircleCI users: Create a new organization
 
-. Log in to the CircleCI web app. 
+. Log in to the https://app.circleci.com/[CircleCI web app]. 
 
 . From the organization switcher on the top left, select "Create New Organization". 
 
 . The next page should include a "Welcome to the GitLab VCS Support Preview" message. Enter a unique name for your new organization.
-
++
 NOTE: If you do not see the welcome message, please fill out this https://circleci.com/gitlab-vcs-support/[sign-up form].
 
 . Click **Create Organization**.
 
 Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in Step Two below to set up a new GitLab project.
 
-This new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own <<plan-free#,**Free plan**> to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account. 
+This new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own <<plan-free#,**Free plan**>> to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account. 
 
 NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
 
@@ -69,7 +69,7 @@ You have successfully connected to GitLab if there is a green checkmark and a no
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-oauth.png[Successful GitLab connection via OAuth]
 +
-* To connect using an access token, enter the access token in the field, and click the **Connect** button. You can use either a personal access token, or a project access token. Note that project access tokens are only available for certain GitLab subscriptions or license tiers. For more information, refer to the Personal Access Tokens and Project Access Tokens documentation on GitLab.
+* To connect using an access token, enter the access token in the field, and click the **Connect** button. You can use either a personal access token, or a project access token. Note that project access tokens are only available for certain GitLab subscriptions or license tiers. For more information, refer to the https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] and https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] documentation on GitLab.
 +
 You have successfully connected to GitLab if you see the "Access token successful" note. You should also see a dropdown list of your GitLab repositories. The repositories available to set up will depend on what is associated with the personal or project access token you use.
 +
@@ -129,14 +129,14 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 
 For more information on project settings, refer to the <<settings#,Settings>> document. Please also note the differences in functionality for the following project settings in the GitLab preview:
 
-* **Advanced Settings**
-+
-Advanced Settings allows for enabling of _dynamic configuration_ using setup workflows in CircleCI. To learn more about dynamic configuration, read the <<dynamic-config#,Dynamic Configuration>> guide.
+=== **Advanced Settings**
 
-The **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+* Advanced Settings allows for enabling of _dynamic configuration_ using setup workflows in CircleCI. To learn more about dynamic configuration, read the <<dynamic-config#,Dynamic Configuration>> guide.
 
-* **SSH Keys**
-+
+* The **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+
+=== **SSH Keys**
+
 When creating a project, an SSH key is created which is used to checkout code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects. More information on SSH keys, please visit the <<add-ssh-key#,Adding an SSH Key to CircleCI>> document.
 
 == About organizations
@@ -167,7 +167,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 . Enter the email address of the user you wish to invite, and select the appropriate role. You may enter multiple addresses at once, if you wish to assign these users the same role. 
 +
-Organization administrator as well as organization contributor roles are currently available. Project-specific roles will be coming soon. For more information on roles and permissions, refer to the next section.
+Organization administrator as well as organization contributor roles are currently available. Project-specific roles will be coming soon. For more information on roles and permissions, refer to the <<gitlab-vcs-support#about-roles-and-permissions#,next section>>.
 
 . An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 +
