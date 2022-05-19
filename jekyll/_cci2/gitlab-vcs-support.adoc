@@ -14,7 +14,7 @@ version:
 
 [IMPORTANT] 
 ====
-Welcome to the GitLab VCS Support Preview.
+Welcome to the GitLab VCS Support Preview.  
 
 This is a work in progress that we are continually iterating and improving. Please be prepared for some performance issues, errors, and unexpected changes. **At this time, we do not recommend using GitLab version control system (VCS) support on CircleCI for production of critical work.**
 
@@ -23,7 +23,9 @@ We appreciate your participation in the preview process and your collaboration a
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
 ====
 
-== Step One: Sign up
+This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we're working on for future releases.
+
+== Step one - Sign up
 
 === A) New CircleCI users: Create a CircleCI account and create your first organization
 
@@ -59,7 +61,7 @@ This new organization allows you to manage users and GitLab projects within the 
 
 NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
 
-== Step two: Create a new project
+== Step two - Create a new project
 
 . In the CircleCI web app, navigate to **Projects**, then click the **Create Project** button. 
 
@@ -85,7 +87,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.
 
 Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project, by navigating to your repository's Webhooks settings page. 
 
-== Step three: Trigger a project pipeline in CircleCI
+== Step three - Trigger a project pipeline in CircleCI
 
 At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available. 
 
@@ -151,7 +153,7 @@ The GitLab preview also introduces the concept of "standalone" organizations, wh
 
 A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS. 
 
-=== Organization Settings 
+=== Organization settings 
 
 To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app. 
 
@@ -203,17 +205,17 @@ Org contributors cannot edit organization settings such as contexts or plans. Th
 
 Contexts do not support “restricted access” at this time. We are working on restriction options and you can learn more about that in the future section below. More information about using contexts within CircleCI can be found here. 
 
-==== Self-Hosted Runners
+==== Self-Hosted runners
 
 Self-hosted runners are not supported in the GitLab preview at this time. We will be adding support for self-hosted runners in the near future. 
 
 == Known issues 
 
-=== SSH Rerun is not working
+=== SSH rerun is not working
 
 Support for SSH rerun is currently not available. This will be resolved in a future release. 
 
-=== Additional SSH Keys only
+=== Additional SSH keys only
 
 Deploy Key and User Key are not being used at this time. All SSH keys generated for a project will be stored under **Additional SSH Keys**. In coming updates this will become more clear. 
 
@@ -221,7 +223,7 @@ Deploy Key and User Key are not being used at this time. All SSH keys generated 
 
 The current project configuration options under Project Settings do not yet have full functionality. At this time, CircleCI does look for a `.circleci/config.yml` in the root of the repo. In a coming update, configuration sources will be managed independently of triggers. For now, use the Create Project button from the Projects tab in the web app to set up your projects. 
 
-=== User Account Integrations do not include GitLab 
+=== User account integrations do not include GitLab 
 
 The User Settings > Account Integrations page does not currently include GitLab as a choice. At this time, GitLab integration is configured through new project creation or project settings for triggers and configuration. 
 
