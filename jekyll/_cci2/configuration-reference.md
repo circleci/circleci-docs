@@ -314,7 +314,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured usin
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/server-3-operator-vm-service).
+image | Y | String | The virtual machine image to use. View [available images](#available-linux-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/server-3-operator-vm-service).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
 {: class="table table-striped"}
 
