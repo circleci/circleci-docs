@@ -12,10 +12,16 @@ version:
 
 == Overview
 
-IMPORTANT: Welcome to the GitLab VCS Support Preview
+[IMPORTANT] 
+====
+Welcome to the GitLab VCS Support Preview.
+
 This is a work in progress that we are continually iterating and improving. Please be prepared for some performance issues, errors, and unexpected changes. **At this time, we do not recommend using GitLab version control system (VCS) support on CircleCI for production of critical work.**
+
 We appreciate your participation in the preview process and your collaboration as we work to create a seamless and stable experience.  
+
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
+====
 
 == Step One: Sign up
 
