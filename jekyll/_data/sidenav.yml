@@ -19,7 +19,6 @@ en:
         - name: FAQ
           link: 2.0/faq/
     - name: Migration
-      link: 2.0/migration-intro/
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
@@ -164,7 +163,6 @@ en:
         - name: Overview
           link: 2.0/hello-world-windows/
     - name: Runner
-      link: 2.0/runner-overview/
       children:
         - name: Self-hosted Runner Overview
           link: 2.0/runner-overview/
@@ -271,8 +269,13 @@ en:
 - name: Projects
   icon: icons/sidebar/projects.svg
   children:
+    - name: overview
+      children:
+        - name: Projects Overview
+          link: 2.0/projects/
+        - name: Creating a Project
+          link: 2.0/create-project/
     - name: settings
-      link: 2.0/settings/
       children:
         - name: Settings Overview
           link: 2.0/settings/
@@ -297,7 +300,6 @@ en:
         - name: Using Credits
           link: 2.0/credits/
     - name: security
-      link: 2.0/security/
       children:
         - name: Security Features
           link: 2.0/security/
@@ -310,7 +312,6 @@ en:
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
-
     - name: Languages
       children:
         - name: Node
@@ -390,7 +391,6 @@ en:
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v3.x Overview
-      link: 2.0/server-3-overview
       children:
         - name: Overview
           link: 2.0/server-3-overview
@@ -401,7 +401,6 @@ en:
         - name: FAQ
           link: 2.0/server-3-faq
     - name: Server v3.x Install
-      link: 2.0/server-3-install-prerequisites
       children:
         - name: Phase 1 - Prerequisites
           link: 2.0/server-3-install-prerequisites
@@ -416,7 +415,6 @@ en:
         - name: Hardening Your Cluster
           link: 2.0/server-3-install-hardening-your-cluster
     - name: Server v3.x Operations
-      link: 2.0/server-3-operator-overview
       children:
         - name: Overview
           link: 2.0/server-3-operator-overview
@@ -455,7 +453,6 @@ en:
         - name: Backup and Restore
           link: 2.0/server-3-operator-backup-and-restore
     - name: Server v3.4.x PDFs
-      link: 2.0/server-3-overview
       children:
         - name: v3.4 Overview
           link: 2.0/CircleCI-Server-3.4.1-Overview.pdf
@@ -466,7 +463,6 @@ en:
         - name: v3.4 Operations Guide
           link: 2.0/CircleCI-Server-3.4.1-Operations-Guide.pdf
     - name: Server v3.3.x PDFs
-      link: 2.0/server-3-overview
       children:
         - name: v3.3 Overview
           link: 2.0/CircleCI-Server-3.3.0-Overview.pdf
@@ -477,7 +473,6 @@ en:
         - name: v3.3 Operations Guide
           link: 2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs
-      link: 2.0/server-3-overview
       children:
         - name: v3.2 Overview
           link: 2.0/CircleCI-Server-3.2.0-Overview.pdf
@@ -486,7 +481,6 @@ en:
         - name: v3.2 Operations Guide
           link: 2.0/CircleCI-Server-3.2.0-Operations-Guide.pdf
     - name: Server v3.1.x PDFs
-      link: 2.0/server-3-overview
       children:
         - name: v3.1 Overview
           link: 2.0/CircleCI-Server-3.1.0-Overview.pdf
@@ -495,7 +489,6 @@ en:
         - name: v3.1 Operations Guide
           link: 2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
     - name: Server v3.0.x PDFs
-      link: 2.0/server-3-overview
       children:
         - name: v3.0 Overview
           link: 2.0/CircleCI-Server-3.0.1-Overview.pdf
@@ -508,7 +501,6 @@ en:
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v2.19.x Install
-      link: 2.0/install-overview/
       children:
         - name: Overview
           link: 2.0/install-overview/
@@ -527,7 +519,6 @@ en:
         - name: Teardown
           link: 2.0/aws-teardown/
     - name: Server v2.19.x Operations
-      link: 2.0/overview/
       children:
         - name: Overview
           link: 2.0/overview/
@@ -578,7 +569,6 @@ en:
         - name: Acknowledgments
           link: 2.0/open-source/
     - name: Server v2.19 PDFs
-      link: 2.0/v.2.19-overview/
       children:
         - name: What's New in v2.19
           link: 2.0/v.2.19-overview/
@@ -587,7 +577,6 @@ en:
         - name: v2.19 Operations Guide
           link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.18 PDFs
-      link: 2.0/v.2.18-overview/
       children:
         - name: What's New in v2.18
           link: 2.0/v.2.18-overview/
@@ -596,7 +585,6 @@ en:
         - name: v2.18.3 Operations Guide
           link: 2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
     - name: Server v2.17.3 PDFs
-      link: 2.0/v.2.17-overview/
       children:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
@@ -605,7 +593,6 @@ en:
         - name: v2.17.3 Operations Guide
           link: 2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
     - name: Server v2.16 PDFs
-      link: 2.0/v.2.16-overview/
       children:
         - name: What's New in v2.16
           link: 2.0/v.2.16-overview/
