@@ -125,7 +125,7 @@ When a trigger is created, CircleCI registers a webhook with GitLab. Push events
 
 In addition to a configuration source, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repo. 
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-edit-trigger.png[Trigger details]
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-edit-trigger.png[Trigger details]
 
 For more information on project settings, refer to the <<settings#,Settings>> document. Please also note the differences in functionality for the following project settings in the GitLab preview:
 
