@@ -14,8 +14,6 @@ const pagesWithExperiments = [
   '/docs/ja/2.0/language-javascript/',
 ];
 
-console.log(pagesWithExperiments.includes(window.location.pathname));
-
 window.OptimizelyClient.getVariationName({
   experimentKey: 'dd_docs_detangling_redirect_test',
   groupExperimentName: 'q2_fy23_docs_disco_experiment_group_test',
@@ -27,8 +25,6 @@ window.OptimizelyClient.getVariationName({
     ),
   },
 }).then((variation) => {
-  console.log(variation);
-
   if (variation === 'treatment') {
     const currentUrl = window.location.href;
 
