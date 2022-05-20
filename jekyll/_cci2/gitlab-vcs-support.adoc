@@ -212,7 +212,7 @@ NOTE: The following sections are features of CircleCI which are not currently fu
 
 === Self-hosted runners
 
-Self-hosted runners are currently being tested in GitLab preview at this time, and support is expected soon. If you would like more information about using self-hosted runners, visit the <<runner-overview#Runner Overview>> page.
+Self-hosted runners are currently being tested in GitLab preview at this time, and support is expected soon. If you would like more information about using self-hosted runners, visit the <<runner-overview#,Runner Overview>> page.
 
 === Restricted access to contexts
 
