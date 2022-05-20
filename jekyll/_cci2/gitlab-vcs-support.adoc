@@ -182,7 +182,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 . Enter the email address of the user you wish to invite, and select the appropriate role. You may enter multiple addresses at once, if you wish to assign these users the same role. 
 +
-Organization administrator as well as organization contributor roles are currently available. Project-specific roles will be coming soon. For more information on roles and permissions, refer to the <<gitlab-vcs-support#about-roles-and-permissions#,next section>>.
+Organization administrator as well as organization contributor roles are currently available. Project-specific roles will be coming soon. For more information on roles and permissions, refer to the <<gitlab-vcs-support#about-roles-and-permissions,next section>>.
 
 . An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 +
@@ -190,17 +190,15 @@ If they do not currently have a CircleCI account, they will need to sign up. If 
 
 ===== About roles and permissions
 
-User access and roles within CircleCI are independent of roles within GitLab. 
+User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_ or _contributor_.
 
-Each user can have one organization role: either an _admin_ or _contributor_. 
-
-Org contributors cannot edit organization settings such as contexts or plans. They can, however, invite users, change user roles, view contexts, and create and view projects. 
+Contributors cannot edit organization settings such as contexts or plans, nor can they invite users. Org contributors can, however, view contexts, and create and view projects Administrators are able to invite users and update role settings.
 
 * Org Administrator: For those managing CircleCI as a whole—managing users, managing plans, updating billing information, and managing contexts. 
 
 * Org Contributor: For users that might manage multiple projects and/or need to create and administer projects within CircleCI. 
 
-* Org Viewer: For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage. 
+* Org Viewer (coming soon): For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage. 
 
 * Project Administrator (coming soon): For ensuring teams only have access to individual projects and not all projects across the organization. Project administrators, typically the team manager or lead, will have access to project settings.
 
@@ -210,15 +208,15 @@ Org contributors cannot edit organization settings such as contexts or plans. Th
 
 == Coming Soon
 
-NOTE: The following sections are features of CircleCI which are not currently supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
+NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
+
+=== Self-hosted runners
+
+Self-hosted runners are currently being tested in GitLab preview at this time, and support is expected soon. If you would like more information about using self-hosted runners, visit the <<runner-overview#Runner Overview>> page.
 
 === Restricted access to contexts
 
 Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require. If you would like more information about using contexts within CircleCI, visit the <<contexts#,Using Contexts>> page.
-
-=== Self-hosted runners
-
-Self-hosted runners are not supported in the GitLab preview at this time. If you would like more information about using self-hosted runners, visit the <<runner-overview#Runner Overview>> page.
 
 === Project settings for triggers and configurations
 
