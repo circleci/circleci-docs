@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Execution Environments"
-description: "An overview of CircleCI execution environments."
+title: "Introduction to Execution Environments"
+description: "An overview of all CircleCI execution environments."
 redirect_from: /2.0/executor-types/
 version:
 - Cloud
@@ -16,7 +16,7 @@ For each job in your project config you will specify an execution environment by
 It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
 
 - Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
-- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
 <!---![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->

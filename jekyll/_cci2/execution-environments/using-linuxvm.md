@@ -7,9 +7,6 @@ version:
 - Server v3.x
 - Server v2.x
 ---
-[custom-images]: {{ site.baseurl }}/2.0/custom-images/
-[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
-[server-gpu]: {{ site.baseurl }}/2.0/gpu/
 
 Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
 {: class="alert alert-warning"}
@@ -43,7 +40,7 @@ jobs:
     machine: true
 ```
 
-You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
+You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images).
 
 The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
 
