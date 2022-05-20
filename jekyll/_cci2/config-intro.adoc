@@ -142,7 +142,7 @@ image::config-second-step.png[Checking out your repo]
 
 In Parts 1 and 2, you ran your job in basic Linux-based Docker containers.
 
-With CircleCI, you can run different jobs in different execution environments, such as virtual machines or Docker containers. By changing the Docker image, you can quickly upgrade your environment version or change languages. 
+With CircleCI, you can run different jobs in different execution environments, such as virtual machines or Docker containers. By changing the Docker image, you can quickly upgrade your environment version or change languages.
 
 In this part, you will create additional jobs and run them using different Docker images.
 
