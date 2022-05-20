@@ -15,22 +15,6 @@ This document describes an initial set of troubleshooting steps to take if you a
 
 toc::[]
 
-## Start KOTS Admin Console
-
-To restart the KOTS Admin Console, run the following command:
-
-[source,bash]
-----
-kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
-----
-
-Open your browser and access http://localhost:8800 to see the Admin Console.
-
-## Generate Support Bundle
-A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically requested when you open a ticket.
-
-To download a support bundle for CircleCI support, select the *Troubleshoot* tab from the Admin Console menu bar, and then click *Analyze CircleCI Server*.
-
 ## Managing Pods
 
 ### Verify Pod Readiness and Status
