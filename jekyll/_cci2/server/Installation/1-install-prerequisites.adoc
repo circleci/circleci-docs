@@ -47,6 +47,11 @@ Download and install the following software before continuing:
 | Kubernetes Package Management
 |
 
+| https://github.com/databus23/helm-diff[Helm Diff]
+| {helmdiffversion} or greater
+| Helping with values.yaml changes and updates
+|
+
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 | Latest
 | Backup and restore capability

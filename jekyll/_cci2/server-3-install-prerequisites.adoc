@@ -47,6 +47,11 @@ Download and install the following software before continuing:
 | Kubernetes Package Management
 |
 
+| https://github.com/databus23/helm-diff[Helm Diff]
+| {helmdiffversion} or greater
+| Helping with values.yaml changes and updates
+|
+
 | KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
 | {kotsversion} *
 | Replicated Kubernetes Application Management. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].

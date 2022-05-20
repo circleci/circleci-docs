@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-Upgrading your server v4.x installation requires that you have access to the Kubernetes cluster in which server is installed, and have an instance of KOTS Admin Console running. 
+Upgrading your server v4.x installation requires that you have access to the Kubernetes cluster in which server is installed.
 
 Before upgrading, ensure you have set up https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[Backup and Restore]. 
 
@@ -21,28 +21,18 @@ NOTE: We recommend that you do not skip releases.
 
 == Upgrade server v4.x
 
-. Enter the KOTS Admin Console. To do this, run the following, substituting your CircleCI server namespace: 
-+
-----
-kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
-----
+. Before updating ensure there is a recent backup. For more information, see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#creating-backups[Backup and Restore] guide.
 
-. Log in to the Admin Console with the password you created during the installation process.
+. Check the https://circleci.com/server/changelog/[change log] and make sure there are no actions you need to take before deploying a new version. 
 
-. Select the **Snapshots** tab and take a snapshot of your installation. For more information, see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#creating-backups[Backup and Restore] guide.
+. Optionally, confirm what the update is going to do with https://github.com/databus23/helm-diff[Helm Diff]
+```
+helm diff upgrade server -f <your-yaml.values> <path-to-server-chart>
+```
 
-. Select the **Version History** tab. Click **Check for Updates** before proceeding. 
-
-. Once you have the most recent versions visible, run through the following checklist before selecting **Deploy** for the version you would like to upgrade to.
-+
-* Check the https://circleci.com/server/changelog/[change log] and make sure there are no actions you need to take before deploying a new version. 
-* Check the config for the version you are deploying and make sure there are no new fields or features you may be interested in deploying (the gears next to the deploy button will take you to the config specific to that version). 
+. Perform the upgrade
+```
+helm upgrade server -f <your-yaml.values> <path-to-server-chart>
+```
 
 . Deploy and run https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
-
-
-
-
-
-
-
