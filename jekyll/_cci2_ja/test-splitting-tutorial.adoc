@@ -154,23 +154,25 @@ parallelism: 5
 +
 このステップでは CircleCI CLI を使ってテストスイートの場所に渡し、テストをどのように分割するかを設定します。 `circleci tests glob` コマンドを使ってテストファイルを選択できます。
 * まず、 `+src/_tests__/*.js+` のグロブパターンに合うファイル、つまり、 `+src/_tests__+ ` とそのサブディレクトリにあるすべての `.js` ファイルを指定します。
-* Then, the matching files are piped into `circleci tests split`, which creates the test split groupings.
-* The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, consult the <<parallelism-faster-jobs#splitting-test-files,Splitting test files section of the Running Tests in Parallel>> document.
+* すると、それらのファイルは `circleci tests split` に渡され、テスト分割グループが作成されます。
+* `--split-by=timings` フラグは、タイミングデータに基づいてテストを分割する必要があることを示します。 他の分割オプションについては、<<parallelism-faster-jobs#splitting-test-files,テストの並列実行のテストファイルの分割セクション>> を参照してください。
 +
-NOTE: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
+NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 +
-The CircleCI CLI commands do not actually execute the tests⁠—you still need to run `yarn test` for that. For convenience, the CircleCI CLI output of test split groupings is stored in the `$TEST` environment variable that can be referenced when running `yarn test`.
-.. After the `Test application` command, add a new `run` command like so:
+実際には、これらの CircleCI CLI コマンドによってテストはまだ実行されません。 `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数 
+ `$TEST` に格納されます。
+.. `Test application` コマンドの後に、新しく以下のように `run` コマンドを追加します。
 +
 [source,yaml]
 ----
 - run:
     command: cp junit.xml ~/junit/
     when: always
+
 ----
 +
-This copies the test results (saved as JUnit XML files) to the `~/junit` subdirectory created in an earlier step. Using the `when` attribute with a value of `always` will execute this particular step _always_ regardless of whether the preceding steps were executed successfully or not.
-.. Finally, add a `store_test_results` step:
+これによりテスト結果 (JUnit XML ファイルとして保存) が 先程のステップで作成した `~/junit` サブディレクトリにコピーされます。  `when` 属性を 値 `always` と一緒に使うと、前のステップの実行が成功したかどうかにかかわらず、この特定のステップは必ず実行されます。
+.. 最後に、`store_test_results` ステップを追加します。
 +
 [source,yaml]
 ----
@@ -178,9 +180,9 @@ This copies the test results (saved as JUnit XML files) to the `~/junit` subdire
     path: ~/junit
 ----
 +
-This step uploads the test data to CircleCI and is **required** to split tests by timing data. This step allows test data to be accessible on the Tests tab of the job in the CircleCI web app, and can be helpful for debugging if tests fail. To read more about the Tests tab and test insights in CircleCI, visit the <<collect-test-data#,Collecting Test Data>> document.
+このステップによりテストデータが CircleCI にアップロードされ、テストをタイミングデータで分割することが  **必要になります**。 このステップにより、CircleCI Web アプリのジョブの Tests タブ上でテストデータにアクセスできるようになり、テストが失敗した場合のデバグに役立ちます。 CircleCI の Tests タブやテストインサイトについての詳細は、<<collect-test-data#,テストデータの収集>> を参照してください。
 
-Here is a full copy of the updated configuration:
+最新の設定ファイルの全コピーを下記に記載します。
 
 [source,yaml]
 ----
@@ -216,18 +218,18 @@ workflows:
         - build-and-test
 ----
 
-Once you have made these changes to `.circleci/config.yml`, go ahead and push the changes. This triggers the pipeline and runs the tests again, but this time the results are stored.
+`.circleci/config.yml` への 3 つの変更が完了したら、変更をプッシュします。 それによりパイプラインがトリガーされ、テストが再び実行されますが、今回はその結果が保存されます。
 
 == ステップ 3: 結果を確認する
 
-In the CircleCI web app, take a look at the steps in the recently triggered pipeline by clicking on the **Success** status and opening the `build-and-test` job.
+CircleCI Web アプリで、**Success** ステータス上でクリックし、`build-and-test` ジョブを開き、先程トリガーしたパイプラインのステップを確認します。
 
-. You may have noticed that this pipeline ran more quickly compared to earlier. The Node orb automatically caches node packages by default, so a cache exists from the earlier pipeline run. This helps speed up the install step.
-. You should also now see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment (node) is labeled by its index number (so you have numbers 0 through 4). You can click on each node to see the individual steps that executed in each parallel run. The environment you are viewing will be highlighted in green.
+. 先程よりも早くパイプラインが実行されたことに気づくでしょう。 Node Orb がデフォルトで自動的に Node パッケージをキャッシュするため、前のパイプライン実行時のキャッシュが存在します。 これにより、インストールステップが迅速化します。
+. また、**並列実行** が 5 つ表示されるようになりました。これは `parallelism` キーで設定された実行環境の数によって決まります。 各 Docker 環境 (Node) がインデックス番号でラベルがつけられます (O から 4 までの番号があります)。 Node をクリックすると、各並列実行で実行された各ステップを確認できます。 閲覧している環境が緑色でハイライトされます。
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
 +
-You might also notice that the parallel run times are not all equal, nor is the overall run time of the pipeline cut down to precisely 1/5. Each executor runs the same steps, but there is a difference in terms of which environment runs which tests. There may also be some variation in how long each executor takes to spin up.
+並列実行時間がすべて同じではなく、パイプライン全体の実行時間が正確に 1/5 に短縮されたことにお気づきになるでしょう。 各 Executor が同じステップを実行しますが、どの環境がどのテストを実行するかが異なります。 各 Executor がスピンアップに要する時間にも差がある場合があります。
 +
 Splitting tests by timing is the best way to ensure tests are split as evenly as possible and parallel runs finish around the same time. With that said, you may need to play around with the parallelism level to find the number that works best for you.
 . In any of the parallel runs, open the **Test application** step. You will see which test suites and how many individual tests were executed in this particular run. You will also see this message in the output:
