@@ -20,7 +20,7 @@ toc::[]
 
 == はじめに
 
-テスト分割は、複数の実行環境でテストを同時に実行する手法です。 テスト分割は、CircleCI のジョブを異なる Node で同時に実行できる <<parallelism-faster-jobs#,_parallelism_>> という機能を使います。
+テスト分割は、複数の実行環境でテストを同時に実行する手法です。 テスト分割は、CircleCI のジョブを異なる Node で同時に実行できる <<parallelism-faster-jobs#,並列実行>> という機能を使います。
 
 何十個または何百個のテストで構成されたテストスイートがある場合、それを一つずつ実行するにはかなり時間かかり、大量のクレジットを消費します。 テストを分割すると、待機時間が大幅に減り、より迅速にフィードバックを得ることができ、プランの使用状況を最適化できます。
 
@@ -40,7 +40,7 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 
 == サンプルアプリについて
 
-このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、[GitHub] (https://github.com/ryanpedersen42/circleci-react-test-splitting) でご確認ください。 このアプリは、[React アプリの作成] (https://create-react-app.dev/) を使って作成され、[Jest] (https://jestjs.io/) のテストフレームワークを使用するように設定されています。 [jest-junit] Reporter (https://github.com/jest-community/jest-junit) を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
+このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、 https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub] でご確認ください。 このアプリは、 https://create-react-app.dev/[React アプリの作成] を使って作成され、 https://jestjs.io/[Jest] のテストフレームワークを使用するように設定されています。 https://github.com/jest-community/jest-junit[jest-junit] Reporter を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
 
 このチュートリアルの後半で CircleCI のプロジェクトをセットアップする場合は、編集が可能な config.yml テンプレートを使用するオプションを選択します。 このチュートリアルで使用するテンプレートは、Node プロジェクトで使用可能なスターター設定です。 下記セクションで設定についての簡単な説明をお読みください。CircleCI での Node プロジェクトの設定に既に慣れている方は、先に進んでプロジェクトの設定を行なってください。
 
@@ -73,8 +73,8 @@ workflows:
       - build-and-test
 ----
 
-*  **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント <<configuration-reference#,CircleCI の設定>> を参照してください。
-* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、[Developer Hub] (https://circleci.com/developer/orbs/orb/circleci/node) を参照してください。
+* **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント <<configuration-reference#,CircleCI の設定>> を参照してください。
+* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、 https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub] を参照してください。
 * **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは `build-and-test` という名前の一つのジョブで構成され、このジョブは、プロジェクトコードのチェックアウト、Node パッケージのインストール、デフォルトパッケージマネージャーの設定、テストの実行を行う複数のステップで構成されています。
 
 テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
@@ -83,8 +83,8 @@ workflows:
 
 まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
 
-. GitHub (https://github.com/ryanpedersen42/circleci-react-test-splitting/fork)で [リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシします。
-. [CircleCI Web アプリ] (https://app.circleci.com) を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
+. GitHub で https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシュします。
+. https://app.circleci.com[CircleCI Web アプリ] を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
 . プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
 . config.yml ファイルを選択するよに求められます。 そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。 **Set Up Project** をクリックします。
 . サンプルの設定ファイルの一覧が表示されます。 ウィンドウ内でスクロールダウンすると、**Node (Advanced)** が表示されるので、**Select** をクリックします。
@@ -235,7 +235,7 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five pa
 . 任意の並列実行で、 **Test application** ステップを開きます。 この特定の実行で実行されたテストスイートと、個々のテストの数が表示されます。 出力には以下のメッセージも表示されます。
 +
     Error reading historical timing data: file does not exist
-Requested weighting by historical based timing, but they are not present.  Falling back to weighting by name.
+Requested weighting by historical based timing, but they are not present. Falling back to weighting by name.
 +
 パイプラインから初めてテストデータを保存するため、CircleCI には現在使用できるタイミングデータがありません。デフォルトでは名前でテストを分割するように設定されているのはそのためです。
 . ジョブの **Timing** タブを開きます。 このタブにより各並列実行がお互いにどのように相関しているかを見ることができます。
