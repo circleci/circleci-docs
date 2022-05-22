@@ -22,7 +22,7 @@ version:
 ## 前提条件
 {: #prerequisites}
 
-* [ CircleCI アカウント]({{site.baseurl}}/2.0/first-steps/)
+* [CircleCI アカウント]({{site.baseurl}}/2.0/first-steps/)
 * 対応する VCS (現在は、Github または Bitbucket) に置かれた Python プロジェクト
 
 このガイドに従う際に Python プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト](https://github.com/CircleCI-Public/sample-python-cfd)、または[ CircleCI でビルド]({{site.cci_public_org_url}}/sample-python-cfd){:rel="nofollow"} されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-python-cfd/blob/main/.circleci/config.yml)を記述してみることをお勧めします。
@@ -114,7 +114,7 @@ jobs:
 ### 4. ワークフローの作成
 {: #create-a-workflow }
 
-ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を参照して下さい。
+ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)を参照して下さい。
 
 ```yaml
 workflows:
