@@ -25,7 +25,7 @@ version:
 * [ CircleCI アカウント]({{site.baseurl}}/2.0/first-steps/)
 * 対応する VCS (現在は、Github または Bitbucket) に置かれた Node. JS プロジェクト
 
-このガイドに従う際に Node.JS プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト]({{site.gh_public_org_url}}/sample-javascript-cfd)、または[ CircleCI でビルド]({{site.cci_public_org_url}}/sample-javascript-cfd)されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
+このガイドに従う際に Node.JS プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト]({{site.gh_public_org_url}}/sample-javascript-cfd)、または[CircleCI でビルド]({{site.cci_public_org_url}}/sample-javascript-cfd)されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
 
 ## 設定ファイルの詳細
 {: #configuration-walkthrough }
@@ -85,7 +85,6 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths: .
-
 ```
 
 npm を使用している場合は:
@@ -108,7 +107,6 @@ jobs:
           root: ~/project
           paths:
             - .
-
 ```
 
 このジョブでは Node Orb を使用しているため、自動キャッシュとベストプラクティスを適用した Node パッケージをインストールします。 これにはロックファイルが必要です。
