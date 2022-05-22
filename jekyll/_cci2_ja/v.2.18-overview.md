@@ -16,7 +16,7 @@ CircleCI Server version 2.x は、リリースのサポートが終了してい�
 {: #requirements-for-upgrading }
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、<a href="{{site.baseurl}}/ja/2.0/updating-server/#org-rename-script">script</a>こちらのスクリプト</a>を実行する<b>必要があります</b>。
+<b>警告:</b> 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、<a href="{{site.baseurl}}/ja/2.0/updating-server/#org-rename-script">こちらのスクリプト</a>を実行する<b>必要があります</b>。
 </div>
 
 ## 注意事項とベストプラクティス
