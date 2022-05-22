@@ -1,21 +1,23 @@
 ---
+
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
 
 = 用語集
+
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
 :icons: font
 :toc: macro
-:toc-title:
 
+:toc-title:
 
 == 認証
 
-Authentication of CircleCI projects using the hosted application is handled by the VCS, or Google OAuth. Sessions last for 14 days. See the <<gh-bb-integration/#permissions-overview,Permissions Overview>> section of the VCS Integration document for additional details.
+ホストされた CircleCI プロジェクトの認証は、VCS または Google OAuth によって処理されます。 Sessions last for 14 days. See the <<gh-bb-integration#permissions-overview,Permissions Overview>> section of the VCS Integration document for additional details.
 
 User authentication may use LDAP for an instance of the CircleCI application that is installed on your private server or cloud. See the <<authentication#,Authentication>> document for setup instructions.
 
@@ -83,7 +85,7 @@ A CircleCI project shares the name of the code repository for which it automates
 
 A feature that enables building, running, and pushing images to Docker registries from within a Docker <<#executor,executor>> job. Visit the <<building-docker-images#,Runner Docker Commands>> page to learn more.
 
-== Step
+== ステップ
 
 A step is a collection of executable commands. Visit the <<sample-config#,Sample Configuration>> page to learn more.
 
