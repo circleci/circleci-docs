@@ -17,15 +17,15 @@ version:
 ## 概要
 {: #overview }
 
-This is a quickstart guide for integrating a Node.JS project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.JS project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
+このドキュメントは、Node.JS プロジェクトと CircleCI を連携させるためのクイックスタートガイドです。 このガイドでは、Node. JS プロジェクトをビルド、テスト、デプロイするための基礎的な CircleCI 設定ファイルを作成する方法を紹介します。 このクイックスタートを完了すると、お客様のプロジェクトの要件に合うように設定ファイルを編集および最適化することができます。
 
 ## 前提条件
 {: #prerequisites}
 
-* [A CircleCI account]({{site.baseurl}}/2.0/first-steps/)
-* A Node.JS project located in a supported VCS (currently GitHub or Bitbucket)
+* [ CircleCI アカウント]({{site.baseurl}}/2.0/first-steps/)
+* 対応する VCS (現在は、Github または Bitbucket) に置かれた Node. JS プロジェクト
 
-If you do not have a Node.JS project, but would like to follow this guide, you can use our sample project, which is [hosted on GitHub]({{site.gh_public_org_url}}/sample-javascript-cfd) and is [building on CircleCI]({{site.cci_public_org_url}}/sample-javascript-cfd). このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
+このガイドに従う際に Node.JS プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト]({{site.gh_public_org_url}}/sample-javascript-cfd)、または[ CircleCI でビルド]({{site.cci_public_org_url}}/sample-javascript-cfd)されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
 
 ## 設定ファイルの詳細
 {: #configuration-walkthrough }
@@ -35,7 +35,7 @@ If you do not have a Node.JS project, but would like to follow this guide, you c
 ### 1. バージョンの指定
 {: #specify-a-version }
 
-Every CircleCI config.yml starts with the version key. このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+すべての CircleCI config.yml は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 ```yaml
 version: 2.1
 ```
@@ -51,16 +51,17 @@ Node.js [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/node)には、Node.js �
 ```yaml
 orbs:
   node: circleci/node@5.0.2
+
 ```
 
-**Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
+**注**: Orb を使用する際は、[Orb レジストリ](https://circleci.com/developer/orbs)をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
 
-### 3. Create jobs
+### 3. ジョブの作成
 {: #create-jobs }
 
-ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/2.0/jobs-steps/) page.
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブに関する詳細は、[ジョブとステップ]({{site.baseurl}}/ja/2.0/jobs-steps/)のページを参照してください。
 
-A common ask from developers who are getting started with CircleCI is to perform 3 basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Node orb, we can use commands that are built into the orb to keep our config simple and succinct:
+CircleCI を使い始めた開発者からよくいただく質問は、ビルド、テスト、デプロイの 3 つの基本タスクの実行に関してです。 このセクションでは必要な設定の各変更について説明します。 CircleCI では、公式の Node Orb を使用しているため、Orb に組み込まれているコマンドを使って設定をシンプルかつ簡潔にすることができます。
 
 #### a.  アプリのビルドとテスト
 {: #build-and-test-the-app }
@@ -84,9 +85,10 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths: .
+
 ```
 
-同様に、npm を使用している場合は:
+npm を使用している場合は:
 
 ```yaml
 jobs:
@@ -106,6 +108,7 @@ jobs:
           root: ~/project
           paths:
             - .
+
 ```
 
 このジョブでは Node Orb を使用しているため、自動キャッシュとベストプラクティスを適用した Node パッケージをインストールします。 これにはロックファイルが必要です。
@@ -113,7 +116,7 @@ jobs:
 #### b.  アプリのデプロイ
 {: #deploy-the-app }
 
-In this quickstart guide, we will deploy to [Heroku](https://www.heroku.com/). We can do this using the official Heroku orb by adding a new line into our orb section. Heroku Orb には、アプリケーションを Heroku にデプロイするために使用できる事前にパッケージ化された CircleCI 設定セットが含まれています。 Heroku Orb に関する詳細は、[こちら]({{site.devhub_base_url}}/orbs/orb/circleci/heroku)を参照して下さい。
+このクイックスタートガイドでは、[Heroku](https://www.heroku.com/) をデプロイします。 これは公式の Heroku Orb を使って、Orb のセクションに新しい文字列を加えることによって実行できます。 Heroku Orb には、アプリケーションを Heroku にデプロイするために使用できる事前にパッケージ化された CircleCI 設定セットが含まれています。 Heroku Orb に関する詳細は、[こちら]({{site.devhub_base_url}}/orbs/orb/circleci/heroku)を参照して下さい。
 
 ```yaml
 orbs:
@@ -126,7 +129,7 @@ orbs:
 ```yaml
 jobs:
   # ...以前のジョブ...
-  deploy: # this can be any name you choose
+  deploy: # 任意の名前をお選びください。
     executor: heroku/default
     steps:
       - attach_workspace:
@@ -140,17 +143,18 @@ jobs:
 ### 3. ワークフローの作成
 {: #create-a-workflow }
 
-ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を参照して下さい。
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細については、[ワークフローの設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)を参照して下さい。
 
 ```yaml
 workflows:
   build_test_deploy: # this can be any name you choose
+
 ```
 
 ### 4.  ワークフローへのジョブの追加
 {: #add-jobs-to-the-workflow }
 
-Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、連続、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)を参照してください。
 
 ```yaml
 workflows:
