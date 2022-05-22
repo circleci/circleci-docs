@@ -75,9 +75,9 @@ workflows:
 
 *  **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント <<configuration-reference#,CircleCI の設定>> を参照してください。
 * **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、[Developer Hub] (https://circleci.com/developer/orbs/orb/circleci/node) を参照してください。
-* **Lines 18-21:** The project pipeline consists of one workflow called `sample`. This workflow is comprised of one job, named `build-and-test`, which is made up of a few steps to check out the project code, install Node packages and set the default package manager, and run tests (lines 8 to 16).
+* **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは `build-and-test` という名前の一つのジョブで構成され、このジョブは、プロジェクトコードのチェックアウト、Node パッケージのインストール、デフォルトパッケージマネージャーの設定、テストの実行を行う複数のステップで構成されています。
 
-Test splitting is typically set up within a job. In this tutorial, you will modify the `build-and-test` job to define the number of parallel test runs, where the test suites are located, and how tests should be split (in this case, by timing).
+テスト分割は通常、一つのジョブ内で設定されます。 In this tutorial, you will modify the `build-and-test` job to define the number of parallel test runs, where the test suites are located, and how tests should be split (in this case, by timing).
 
 == Step one - Add the project
 
