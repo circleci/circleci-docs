@@ -54,7 +54,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
    c. コードのチェックアウト  
    d. Say hello
 
-どのジョブも一連のステップから構成されています。 [checkout</code>]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
+どのジョブも一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
 
 リポジトリに実際のソースコードがなく、`.circleci/config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトはこれよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[CircleCI の設定リファレンス]({{site.baseurl}}/2.0/configuration-reference)を参照してください。
 
