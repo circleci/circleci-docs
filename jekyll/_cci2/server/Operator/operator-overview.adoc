@@ -13,7 +13,7 @@ version:
 
 The following guide contains information useful for CircleCI server Operators, or those responsible for ensuring CircleCI server 3.x is running properly through maintenance and monitoring.
 
-It is assumed that you have already read the https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview].
+It is assumed that you have already read the https://circleci.com/docs/2.0/server/overview/overview[Server 3.x Overview].
 
 CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
 and VM service.
@@ -36,7 +36,7 @@ By default, CircleCI Nomad clients automatically provision compute resources acc
 ### Nomad Clients
 Nomad Clients run without storing state, allowing you to increase or decrease the number of containers as needed.
 
-To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
+To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the <<metrics-and-monitoring#,Metrics and Monitoring>> section.
 
 If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
 
