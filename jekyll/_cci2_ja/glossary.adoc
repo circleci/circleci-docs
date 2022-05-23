@@ -17,9 +17,9 @@ version:
 
 == 認証
 
-ホストされた CircleCI プロジェクトの認証は、VCS または Google OAuth によって処理されます。 Sessions last for 14 days. See the <<gh-bb-integration#permissions-overview,Permissions Overview>> section of the VCS Integration document for additional details.
+ホストされたアプリケーションを使った CircleCI プロジェクトの認証は、VCS または Google OAuth によって処理されます。 セッションは 14 日間続きます。 詳細については、VCS との連携に関するドキュメントの <<gh-bb-integration#permissions-overview,権限の概要>> のセクションを参照してください。
 
-User authentication may use LDAP for an instance of the CircleCI application that is installed on your private server or cloud. See the <<authentication#,Authentication>> document for setup instructions.
+ユーザー認証には、プライベートサーバーまたはクラウドにインストールされている CircleCI アプリケーションのインスタンスの LDAP を使用できます。 セットアップ方法は、<<authentication#,認証>> をご覧ください。
 
 == CircleCI Administrator
 
