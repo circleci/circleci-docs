@@ -3,8 +3,7 @@ layout: classic-docs
 title: "CircleCI での Python アプリケーションの構成"
 short-title: "Python"
 description: "CircleCI 上での Python による継続的インテグレーション"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 7
 version:
   - クラウド
@@ -22,7 +21,7 @@ version:
 ## 前提条件
 {: #prerequisites}
 
-* [CircleCI アカウント]({{site.baseurl}}/2.0/first-steps/)
+* [CircleCI アカウント]({{site.baseurl}}/ja/2.0/first-steps/)
 * 対応する VCS (現在は、Github または Bitbucket) に置かれた Python プロジェクト
 
 このガイドに従う際に Python プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト](https://github.com/CircleCI-Public/sample-python-cfd)、または[ CircleCI でビルド]({{site.cci_public_org_url}}/sample-python-cfd){:rel="nofollow"} されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-python-cfd/blob/main/.circleci/config.yml)を記述してみることをお勧めします。

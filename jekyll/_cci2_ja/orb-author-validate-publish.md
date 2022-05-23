@@ -15,7 +15,7 @@ version:
 ```shell
 circleci namespace create <my-namespace> github <my-gh-org>
 ```
-**メモ: **CircleCI CLI を通して名前空間を作成する場合は、VCS プロバイダーを指定してください。
+**注**: CircleCI CLI から名前空間を作成する場合は、必ず VCS プロバイダーを指定してください。
 
 ## Orb の作成
 {: #create-your-orb }
