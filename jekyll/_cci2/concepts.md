@@ -482,7 +482,7 @@ An image is a packaged system that includes instructions for creating a running 
 
 The **Docker executor** spins up a container with a Docker image. CircleCI maintains [convenience images]({{ site.baseurl }}/2.0/circleci-images/) for popular languages on Docker Hub.
 
-The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/2.0/execution-environments/using-machine) page.
+The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/2.0/configuration-reference/#machine) page.
 
 See the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/) document for a comparison.
 
