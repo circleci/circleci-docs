@@ -43,55 +43,56 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 
 == Executor 型
 
-<<executor-types#,Executor 型>> によりジョブの実行の基盤テクノロジーが定義されます。 Can be either `docker` to run your job inside a Docker container with a specified image, or `machine` to run your job inside a full virtual machine.
+<<executor-types#,Executor 型>> により、ジョブの実行の基盤テクノロジーが定義されます。 Docker コンテナ内で指定したイメージを使ってジョブを実行する `docker` か、フルバーチャルなマシン内でジョブを実行する `machine` のどちらかになります。
 
 == イメージ
 
-イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 The primary container is defined by the first image listed in a `.circleci/config.yml` file. ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 Visit the https://circleci.com/developer/images[CircleCI Developer Hub] to see available convenience and machine images.
+イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、`.circleci/config.yml` ファイルに最初にリストされているイメージにより定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 ご利用いただける CircleCI イメージとマシンイメージは、[CircleCI Developer Hub] (https://circleci.com/developer/images) でご確認ください。
 
-== Job Space
+== ジョブスペース
 
-All the containers being run by an <<#executor,executor>> for the current job.
+現在のジョブの <<#executor,Executor>> が実行するすべてのコンテナを指します。
 
 == ジョブ
 
-<<jobs-steps#,Jobs>> are collections of steps, which run commands/scripts as required. Each job must declare an executor that is either docker, machine, windows, or macos.
+<<jobs-steps#,ジョブ>> は、必要に応じてコマンドやスクリプトを実行するステップの集まりです。 各ジョブでは、Docker、マシン、Windows、macOS のいずれかの Executor を宣言する必要があります。
 
 == Orb
 
-<<orb-concepts#,Orbs>> are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
+<<orb-concepts#,Orb>> は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 CircleCI Developer Hub の [Orb レジストリ] (https://circleci.com/developer/orbs) では、設定作業の簡素化に役立つ Orb を検索できます。
 
 == オーナー
 
-The owner of the team's VCS organization.
+チームの VCS 組織のオーナーを指します。
 
 == パイプライン
 
-A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. パイプラインには、ジョブを管理するワークフローが含まれます。 Pipelines are defined in your project '.circleci/config.yml.' file. _Pipelines are not available on CircleCI server v2.x._
+<<pipelines#,CircleCI パイプライン>> とは、プロジェクトで作業をトリガする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 パイプラインはプロジェクトの '.circleci/config.yml.'  ファイルで定義されます。 
+_ハイプラインは CircleCI Server v2.x では使用できません。_
 
-== Primary Container
+== プライマリコンテナ
 
-The first image listed in `.circleci/config.yml`. ここで、Docker executor を使用してジョブのコマンドが実行されます。
+`.circleci/config.yml` に最初にリストされているイメージです。 ここで、Docker Executor を使用してジョブのコマンドが実行されます。
 
-== Project Administrator
+== プロジェクト管理者
 
-The user who adds a repository in the VCS to CircleCI as a project.
+VCS 内のリポジトリをプロジェクトとして CircleCI に追加するユーザーです。
 
 == プロジェクト
 
-A CircleCI project shares the name of the code repository for which it automates workflows, tests, and deployment. It is visible on the **Projects** page of the https://app.circleci.com/[CircleCI web app] and must be added with the **Set Up Project** button. After a project is added, it is possible to configure settings, contexts, environment variables, and team members who may follow the project. Following a project enables you to subscribe to email notifications for the project's build status, and adds the project to your CircleCI dashboard.
+CircleCI プロジェクトは、ワークフロー、テスト、およびデプロイを自動化するコードリポジトリの名前を共有します。 [CircleCI Web アプリ] (https://app.circleci.com/) の **Projects** のページに表示され、**Set Up Project** ボタンで追加されます。 プロジェクトが追加されたら、構成、コンテキスト、環境変数、そしてそのプロジェクトをフォローできるチームメンバーを設定できます。 プロジェクトをフォローすると、プロジェクトのビルドステータスに関するメール通知を受信し、CircleCI ダッシュボードにプロジェクトを追加できます。
 
-== Remote Docker
+== リモート Docker
 
-A feature that enables building, running, and pushing images to Docker registries from within a Docker <<#executor,executor>> job. Visit the <<building-docker-images#,Runner Docker Commands>> page to learn more.
+Docker レジストリへのイメージのビルド、実行、イメージのプッシュを、Docker <# executor,Executor>> ジョブ内から実行できるようにする機能です。 詳細については、<<building-docker-images#,ランナー Docker コマンド>> を参照してください。
 
 == ステップ
 
-A step is a collection of executable commands. Visit the <<sample-config#,Sample Configuration>> page to learn more.
+ステップとは、実行可能なコマンドの集まりです。 詳細については、<<sample-config#,サンプル設定ファイル>> を参照してください。
 
 == ユーザー
 
-An individual user within an organization. CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 Users must be added to a VCS organization to view or follow associated CircleCI projects. Users may **not** view project data that is stored in environment variables.
+組織内の個人ユーザーを指します。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関連する CircleCI プロジェクトを閲覧したりフォローするには、そのユーザーが VCS 組織に追加されている必要があります。 Users may **not** view project data that is stored in environment variables.
 
 == ワークフロー
 
