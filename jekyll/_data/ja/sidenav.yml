@@ -70,6 +70,7 @@ en:
             name: SSH を使用したデバッグ
           - 
           - 
+            name: テスト分割のとラブルシューティング
           - 
             name: コンテキスト
           - 
@@ -659,11 +660,13 @@ ja:
           - 
             name: テストデータの収集
           - 
+          - 
             name: SSH を使用したデバッグ
           - 
             name: 並列実行
           - 
             name: コンテキスト
+          - 
           - 
       - 
         name: 最適化
@@ -680,7 +683,12 @@ ja:
           - 
             name: パイプライン値とパラメーター
           - 
+      - 
+        name: チュートリアル
+      - 
+        children:
           - 
+            name: テストの分割
   - 
     name: 実行環境
     icon: icons/sidebar/executors.svg
@@ -774,7 +782,10 @@ ja:
           - 
             name: ダイナミックコンフィグ
           - 
+            name: 高度な構成
+          - 
             name: CircleCI のローカル CLI の使用
+          - 
           - 
   - 
     name: Orbs
@@ -803,6 +814,7 @@ ja:
             name: Orb のテスト手法
           - 
             name: Orb のパブリッシュ プロセス
+          - 
       - 
         name: チュートリアル
         children:
@@ -830,12 +842,16 @@ ja:
     icon: icons/sidebar/projects.svg
     children:
       - 
+        name: 概要
+        i18n_name: v2.19の新機能
+      - 
         name: settings
         children:
           - 
             i18n_name: v2.19の新機能
           - 
             name: GitHub Checks の有効化
+          - 
           - 
           - 
           - 
@@ -879,6 +895,7 @@ ja:
         children:
           - 
             name: データベースの構成
+          - 
       - 
         name: テスト
         children:
@@ -887,8 +904,6 @@ ja:
       - 
         name: クックブック
         children:
-          - 
-            name: 最適化
           - 
             name: 設定ファイル入門ガイド
           - 
@@ -900,8 +915,11 @@ ja:
       - 
         name: デプロイの構成
       - 
+        name: デプロイの構成例
+      - 
       - 
         name: Upload to Artifactory
+      - 
       - 
   - 
     name: 参考情報
@@ -1073,6 +1091,8 @@ ja:
             name: Metrics & Monitoring
             link: ja/2.0/circleci-ops-guide.pdf
           - 
+            name: Replicated の更新
+          - 
             name: システム要件
           - 
             name: Proxies
@@ -1082,8 +1102,6 @@ ja:
             i18n_name: 設定・モニタリング
           - 
             name: Authentication
-          - 
-            name: VM Service
       - 
         name: Server v2.19 PDFs
         children:
