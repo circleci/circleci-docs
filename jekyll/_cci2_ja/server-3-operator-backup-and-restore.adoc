@@ -43,19 +43,19 @@ CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して�
 
 ==== AWS を使う場合の前提条件
 
-- https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] is installed.
+- [AWS CLI] (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)</a> をインストール済みであること。
 
 ==== GCP を使う場合の前提条件
 
-- `gcloud` and `gsutil` are installed. You can set them up by installing Google Cloud SDK, which includes both, by referring to the https://cloud.google.com/sdk/docs/[documentation].
+- `gcloud` と `gsutil` がインストール済みであること。  どちらも Google Cloud SDK に含まれており、SDK をインストールすることでセットアップできます ( [こちらのドキュメント] (https://cloud.google.com/sdk/docs/) を参照してください)。
 
-For more information, see Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation.
+詳細については、Velero の [サポート対象プロバイダーに関するページ] (https://velero.io/docs/v1.6/supported-providers/) を参照してください。
 
 以下で、AWS と GCP のそれぞれで CircleCI Server 3.x のバックアップを作成する手順について説明します。
 
 ==== S3 互換ストレージを使う場合の前提条件
 
-- https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] is installed and configured for your storage provider.
+- お使いのストレージプロバイダーに合った [MinIO CLI] (https://docs.min.io/docs/minio-client-quickstart-guide.html) がインストールし設定済みであること。
 
 ////
 
@@ -65,7 +65,7 @@ For more information, see Velero's https://velero.io/docs/v1.6/supported-provide
 
 == AWS での CircleCI Server 3.x のバックアップ
 
-The following steps assume AWS as your provider and that you have met the <<prerequisites, prerequisites>> listed above.
+以下の手順では、プロバイダーが AWS であり、上記の <<prerequisites, 前提条件>> を満たしていることを前提としています。
 
 これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら] の Velero ドキュメントを元にしています。
 
