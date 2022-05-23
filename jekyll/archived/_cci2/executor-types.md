@@ -37,7 +37,7 @@ An *executor type* defines the underlying technology or environment in which to 
 It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
 
 - Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
-- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images).
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
 ## Using Docker
@@ -273,7 +273,7 @@ jobs:
     machine: true
 ```
 
-You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
+You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images).
 
 The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
 
