@@ -260,8 +260,9 @@ At this time, GitLab integration should only be configured through new project c
 
 === Advanced options in project settings
 
+- **Auto-cancel redundant workflows** is not currently supported.
 - The **Free and Open Source** setting is not currently supported. 
-- Previous settings for forked PRs and merge requests are not available. 
+- Project settings for building forked pull requests are not available. 
 
 === Stop building option in project settings
 
