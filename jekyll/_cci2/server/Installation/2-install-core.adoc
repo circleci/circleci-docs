@@ -393,7 +393,8 @@ kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
 ifndef::pdf[]
-## What to read next
+[#next-steps]
+## Next steps
 
-* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x Phase 3: Execution Environment Installation]
+* <<3-install-execution-environment#,Server 4.x Phase 3: Execution Environment Installation>>
 endif::[]
