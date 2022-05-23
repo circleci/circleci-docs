@@ -735,18 +735,24 @@ ja:
         - name: Collecting test data
           link: ja/2.0/collect-test-data/
           i18n_name: テストデータの収集
+        - name: Code Coverage
+          link: ja/2.0/code-coverage/
+          i18n_name: コードカバレッジ
         - name: Debugging with SSH
           link: ja/2.0/ssh-access-jobs/
           i18n_name: SSH デバッグ
         - name: Parallelism
           link: ja/2.0/parallelism-faster-jobs/
-          i18n_name: テストの並列実行
+          i18n_name: テストの分割と並列実行
         - name: Contexts
           link: ja/2.0/contexts/
           i18n_name: コンテキスト
         - name: OpenID Connect Tokens
           link: ja/2.0/openid-connect-tokens
           i18n_name: OpenID Connect トークン
+        - name: Using Webhooks with 3rd party tools
+          link: ja/2.0/webhooks-airtable/
+          i18n_name: Webhook の利用例         
     - name: Optimizations
       i18n_name: 最適化
       children:
@@ -768,9 +774,12 @@ ja:
         - name: Using shell scripts
           link: ja/2.0/using-shell-scripts/
           i18n_name: シェルスクリプトを使う
-        - name: Optimizations cookbook
-          link: ja/2.0/optimization-cookbook/
-          i18n_name: 最適化クックブック
+    - name: Tutorials
+    - i18n_name: チュートリアル
+      children:
+        - name: Test splitting
+          link: ja/2.0/test-splitting-tutorial/
+          i18n_name: テスト分割
 
 - name: Execution environments
   icon: icons/sidebar/executors.svg
@@ -921,12 +930,18 @@ ja:
         - name: Dynamic Configuration
           link: ja/2.0/dynamic-config
           i18n_name: ダイナミックコンフィグ
+        - name: Advanced Configuration
+          link: ja/2.0/adv-config/
+          i18n_name: 高度な設定
         - name: Using the CircleCI CLI
           i18n_name: CircleCI CLIの使用
           link: ja/2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
           link: ja/2.0/config-editor/
           i18n_name: 設定ファイル エディター
+        - name: Writing Yaml
+          link: ja/2.0/writing-yaml/
+          i18n_name: Yamlの記述
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -963,6 +978,9 @@ ja:
         - name: Orb Publishing Process
           link: ja/2.0/creating-orbs/
           i18n_name: Orbs パブリッシュ
+        - name: Manual Orb Authoring
+          link: ja/2.0/orb-author-validate-publish/
+          i18n_name: Orbs の記述
     - name: Tutorials
       children:
         - name: Using the Slack Orb
@@ -994,8 +1012,16 @@ ja:
   i18n_name: プロジェクト
   icon: icons/sidebar/projects.svg
   children:
+    - name: overview
+    　i18n_name: 概要
+      children:
+        - name: Projects Overview
+          link: ja/2.0/projects/
+          i18n_name: プロジェクトの概要
+        - name: Creating a Project
+          link: ja/2.0/create-project/
+          i18n_name: プロジェクトの作成
     - name: settings
-      link: ja/2.0/settings/
       i18n_name: 設定
       children:
         - name: Settings Overview
@@ -1007,6 +1033,9 @@ ja:
         - name: GitHub and Bitbucket
           link: ja/2.0/gh-bb-integration/
           i18n_name: GitHub と Bitbucket
+        - name: Adding SSH Keys
+          link: ja/2.0/add-ssh-key/
+          i18n_name: SSH キーの登録
         - name: Open Source Projects
           link: ja/2.0/oss/
           i18n_name: OSS のビルド
@@ -1068,7 +1097,10 @@ ja:
       children:
         - name: Configuring Databases
           link: ja/2.0/databases/
-          i18n_name: 設定
+          i18n_name: 設定方法
+        - name: Database Examples
+          link: ja/2.0/postgres-config/
+          i18n_name: 設定例
 
     - name: Testing
       i18n_name: テスト
@@ -1080,9 +1112,6 @@ ja:
     - name: Cookbooks
       i18n_name: クックブック
       children:
-        - name: Optimizations
-          link: ja/2.0/optimization-cookbook/
-          i18n_name: 最適化クックブック
         - name: Configuration
           link: ja/2.0/configuration-cookbook/
           i18n_name: コンフィグクックブック
@@ -1097,6 +1126,9 @@ ja:
     - name: Configuring Deploys
       link: ja/2.0/deployment-integrations/
       i18n_name: デプロイ設定
+    - name: Deployment Examples
+      link: ja/2.0/deployment-examples/
+      i18n_name: 設定例
     - name: Deploying iOS applications
       link: ja/2.0/deploying-ios/
       i18n_name: iOSアプリのデプロイ
@@ -1106,6 +1138,9 @@ ja:
     - name: Publishing to Packagecloud
       link: ja/2.0/packagecloud/
       i18n_name: Packagecloud への公開
+    - name: Google Cloud SDK
+      link: ja/2.0/google-auth/
+      i18n_name: Google Cloud SDK
 
 - name: Reference
   icon: icons/sidebar/reference.svg
@@ -1326,6 +1361,9 @@ ja:
         - name: Upgrade to v2.19.x
           link: ja/2.0/updating-server/
           i18n_name: アップグレード方法
+        - name: Updating Replicated
+          link: ja/2.0/updating-server-replicated-version/
+          i18n_name: Replicated の更新
         - name: System Requirements
           link: ja/2.0/server-ports/
           i18n_name: 使用ポート
@@ -1338,9 +1376,6 @@ ja:
         - name: Teardown
           link: ja/2.0/aws-teardown/
           i18n_name: アンインストール
-        - name: Upgrades from 1.0 to 2.0
-          link: ja/2.0/upgrading/
-          i18n_name: v1 からのアップグレード
     - name: Server v2.19.x Operations
       link: ja/2.0/overview/
       i18n_name: 管理者ガイド
