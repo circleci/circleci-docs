@@ -2,9 +2,10 @@
 
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Backup and Restore
+= CircleCI Server v3.x のバックアップと復元
+
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
@@ -18,14 +19,13 @@ toc::[]
 
 == 概要
 
-_Backup and Restore is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release._
+_バックアップと復元は、CircleCI Server v3.1.0 以上で利用できます。_
 
 CircleCI Server の運用と管理においては、別のクラスタへの移行や深刻な事象からの復元が必要な事態を想定して、バックアップを維持し、システムを復元する方法を検討する必要があります。
 
 このドキュメントでは、CircleCI Server インスタンスのデータと状態のバックアップを行い復元する方法に関する推奨事項を説明します。
 
-CircleCI server is administered via https://kots.io/[KOTS], which uses https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
-but it also restores the state of the Kubernetes cluster and its resources at the time of the backup.
+CircleCI Server は、[KOTS] (https://kots.io/) を使用して管理します。KOTS では、バックアップと復元に[Velero] (https://velero.io/) を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
 つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。
 
 NOTE: CircleCI サービスのバックアップと復元は、Velero に依存しています。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
@@ -33,13 +33,13 @@ NOTE: CircleCI サービスのバックアップと復元は、Velero に依存�
 == セットアップ
 
 CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して作成できます。
-However, to enable backup support you need to install and configure https://velero.io/[Velero] on your cluster.
+ただし、バックアップサポートを有効にするには、クラスタに [Velero] (https://velero.io/) をインストールして設定する必要があります。
 
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
 === 前提条件
 
-- Download and install the https://velero.io/docs/v1.6/basic-install/[Velero CLI] for your environment.
+- お使いの環境に合った [Velero CLI] (https://velero.io/docs/v1.6/basic-install/)</a> をダウンロードしてインストールします。
 
 ==== AWS を使う場合の前提条件
 
@@ -147,7 +147,7 @@ aws iam put-user-policy \
   --policy-document file://velero-policy.json
 ----
 
-* Create an access key for user `velero`:
+* ユーザー `velero` 用のアクセスキーを作成します。
 
 [source,bash]
 ----
@@ -169,7 +169,7 @@ aws iam create-access-key --user-name velero
 }
 ----
 
-* Create a Velero-specific credentials file (for example, `./credentials-velero`) in your local directory, with the following contents:
+* 以下の内容を記載した、Velero 固有の認証情報ファイルをローカルディレクトリに作成します (例: `./credentials-velero`)。
 
 [source,bash]
 ----
@@ -261,7 +261,7 @@ gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
 +
-NOTE: If you run several clusters with Velero, you might want to consider using a more specific name for the Service Account besides `velero`, as suggested in the example above.
+NOTE: Velero がインストールされたクラスタを複数実行している場合は、サービスアカウントに対して、上記の例で示している `velero` ではなく、具体的な名前を付けることをお勧めします。
 . 以下のコマンドを実行して、サービス アカウントが正常に作成されたことを確認します。
 +
 [source,bash]
@@ -446,7 +446,7 @@ mc admin policy add $ALIAS velero-policy velero-policy.json
 mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
 ----
 
-Finally, add your new user's credentials to a file (`./credentials-velero` in this example) with the following contents:
+最後に、新しいユーザーの認証情報を以下の形式で記述したファイルを作成します (この例では `./credentials-velero`)。
 
 [source,toml]
 ----
@@ -491,12 +491,11 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 == バックアップの作成
 
-Now that Velero is installed on your cluster, you should see the **Snapshots** option in the navbar of the management console.
+クラスタへの Velero のインストールが完了すると、管理コンソールのナビゲーションバーに **Snapshots** オプションが表示されるようになります。
 
 image::kots-admin-navbar-snapshot-option.png[KOTS Navbar]
 
-このオプションが表示されれば、バックアップの作成を始める準備は完了です。 If you do not see this option, please refer to the
-<<troubleshooting-backups-and-restoration, troubleshooting>> section.
+このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、<<troubleshooting-backups-and-restoration, トラブルシューティング>> を参照してください。
 
 === オプション 1 - KOTS CLI を使用したバックアップ作成
 
@@ -543,13 +542,13 @@ kubectl kots restore --from-backup <backup-instance-id>
 
 === オプション 3 - KOTS 管理者コンソール UI を使用したバックアップ復元
 
-As with backups, navigate to *Snapshots* in the KOTS Admin Console. 今回は、復元アイコン付きのバックアップがすべて表示されます。
+バックアップ時と同様に、KOTS 管理者コンソールの *Snapshots* に移動します。 今回は、復元アイコン付きのバックアップがすべて表示されます。
 使用するバックアップを選択し、復元アイコンを選択します。
 使用するバックアップを選択し、復元を選択します。
 
 image::kots-admin-restore.png[KOTS Create Snapshot]
 
-IMPORTANT: The restore will create new load balancers for CircleCI's services. その結果、  KOTS 管理者コンソールで DNS レコードまたはホスト名と IP の設定を更新する必要があります。 You may also need to consider updating the `nomad server endpoint` provided to your Nomad clients.
+IMPORTANT: 復元すると、CircleCI サービス用に新しいロードバランサーが作成されます。 その結果、  KOTS 管理者コンソールで DNS レコードまたはホスト名と IP の設定を更新する必要があります。 また、Nomad クライアントに指定する `nomad server endpoint` も更新することをお勧めします。
 
 IMPORTANT: 既存の Nomad クライアントを使用している場合、Nomad サーバークラスタに接続する前にクライアントを再起動する必要があります。
 
@@ -557,7 +556,7 @@ CircleCI Server が復元され、運用可能な状態になるまで、約 10 
 
 == オプション - KOTS 使用したバックアップのスケジュール設定
 
-To schedule regular backups, select *Snapshots*, and then *Settings & Schedule* from the KOTS Admin Console.
+定期的なバックアップスケジュールを設定するには、KOTS 管理者コンソールで *Snapshots*、*Settings & Schedule* の順に選択します。
 
 image::kots-admin-scheduled-backup.png[Snapshots Selected]
 
@@ -597,7 +596,7 @@ Velero の再インストールが必要な場合があります。
 * Velero に指定した認証情報でバケットにアクセスできることを確認します。
 * 問題が解決しない場合は、新しいバケット情報を指定して Velero のインストールコマンドを再び実行する必要があります。
 
-You may also check the status of pods in the `velero` namespace:
+また、`velero` 名前空間にある Pod のステータスを確認します。
 
 ```
 $ kubectl get pods --namespace velero
