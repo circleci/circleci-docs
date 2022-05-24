@@ -137,3 +137,26 @@ If you choose to use an external Vault instance, complete the following fields:
 * *Transit Path* - Your Vault secrets transit path.
 
 * *Token* - The access token for vault.
+
+== RabbitMQ
+
+If you choose to use an external RabbitMQ instance, add the following to your values.yaml file.
+
+```yaml
+rabbitmq:
+  fullnameOverride: <hostname>
+  internal: false
+  auth:
+    username: <db-username>
+    # Either Provide the "password" or secret name for "existingPasswordSecret"
+    password: <db-password>
+    # Either Provide the "erlangCookie" or secret name for "existingErlangSecret"
+    erlangCookie: <erlang-cookie>
+    # must contain a value for rabbitmq-password key
+    existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
+    # secret must contain a value for rabbitmq-erlang-cookie key
+    existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
+  service: 
+    port: <port>
+    managerPort: <manager-port>
+```
