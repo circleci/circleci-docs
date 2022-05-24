@@ -496,7 +496,7 @@ velero restore create --from-backup <backup-name>
 
 == Optional - Scheduling backups
 
-See https://velero.io/docs/main/backup-reference/[Velero's documention] on creating scheudled backupts
+See https://velero.io/docs/main/backup-reference/[Velero's documentation] on creating scheduled backups.
 
 === Errors occur during backup or restore process
 
