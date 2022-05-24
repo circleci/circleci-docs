@@ -21,7 +21,7 @@ toc::[]
 
 == Overview
 
-VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
+VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/configuration-reference/#machine[`machine` executor].
 
 .VM Service Settings
 image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]

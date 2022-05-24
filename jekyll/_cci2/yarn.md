@@ -17,7 +17,7 @@ This can potentially speed up builds, but, more importantly, can reduce errors r
 ## Using Yarn in CircleCI
 {: #using-yarn-in-circleci }
 
-Yarn might already be installed in your execution environment if you are using the [`docker` executor]({{site.baseurl}}/2.0/executor-types/#using-docker).
+Yarn might already be installed in your execution environment if you are using the [`docker` executor]({{site.baseurl}}/2.0/using-docker).
 With [Pre-built CircleCI Docker Images]({{site.baseurl}}/2.0/circleci-images/), the NodeJS image (`circleci/node`) already has Yarn preinstalled.
 If you are using one of the other language images such as `circleci/python` or `circleci/ruby`, there are two [image variants]({{site.baseurl}}/2.0/circleci-images/#language-image-variants) that will include Yarn as well as NodeJS.
 These would be the `-node` and `-node-browsers` image variants.
