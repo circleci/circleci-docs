@@ -12,6 +12,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 CircleCI は、Terraform を使って CircleCI Server v2.x をインストールするインフラの一部を自動化しているため、まず Terraform をインストールする必要があります。
 
 * https://www.terraform.io/downloads.html[Terraform のダウンロード]で、お使いのアーキテクチャ用のパッケージを選択してください。
@@ -22,7 +24,7 @@ CircleCI は、Terraform を使って CircleCI Server v2.x をインストール
 * AWS アクセス キー ID とシークレット アクセスキー
 * https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[AWS EC2 SSH キーペア]の名前
 * https://docs.aws.amazon.com/general/latest/gr/rande.html[AWS リージョン]、例えば `us-west-2`
-* AWS Virtual Private Cloud (VPC) ID および AWS サブネット ID:  アカウントがデフォルトのVPC を使用するように設定されている場合、デフォルトの VPC ID は「Account Attributes」に記載されており、AWS マネジメントコンソールからEC2 ダッシュボードページで確認できます。
+* AWS Virtual Private Cloud (VPC) ID および AWS サブネット ID。 アカウントがデフォルトのVPC を使用するように設定されている場合、デフォルトの VPC ID は「Account Attributes」に記載されており、AWS マネジメントコンソールからEC2 ダッシュボードページで確認できます。
 * VPC の [`enableDnsSupport`] を`true`に設定し、Amazon が提供する IP アドレス169.254.169.253 の DNSサーバー、または VPC IPv4 ネットワーク範囲のベース+2の予約 IP アドレスへのクエリが成功するようにします。 詳しい情報については、Amazon Web サービスのドキュメントにある https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating[VPC での DNS の使用]を参照してください。
 
 == プライベート サブネットの要件
@@ -35,7 +37,7 @@ CAUTION: サブネットは、 アドレスが枯渇することが*決してな
 
 - https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/[S3 用 VPC エンドポイント] を有効にする必要があります。 S3 用 VPC エンドポイントを有効にすると、CircleCI およびサブネット内の他のノードに対する S3 の操作性が大幅に向上します。
 - 高負荷のネットワーク操作に対しては NAT インスタンスを適切に強化します。  デプロイの仕様によっては、Docker および外部ネットワーク リソースを使用した高度並列ビルドによって NAT インスタンスが制約を受けるおそれがあります。  不適切な NAT によってネットワーク操作やキャッシュ操作が低速化するおそれがあります。
-- https://github.com[github.com] と統合する場合、ネットワークのアクセス制御リスト (ACL) で GitHub Webhook のポート80 および 443 が許可されていることを確認します。 GitHub と統合する場合は、CircleCI をパブリック サブネット内に準備するか、パブリック ロードバランサーを使用して github.com トラフィックを転送するように設定します。
+- https://github.com[github.com] と連携する場合、ネットワークのアクセス制御リスト (ACL) で GitHub Webhook のポート80 および 443 が許可されていることを確認します。 GitHub と統合する場合は、CircleCI をパブリック サブネット内に準備するか、パブリック ロードバランサーを使用して github.com トラフィックを転送するように設定します。
 - See the <<overview#services-machine, Services Machine>> section of our overview for more information on the specific ports that need to be accessible to instances in your CircleCI installation.
 
 // Check whether the ACL needs to be more open so the services/build can download build images

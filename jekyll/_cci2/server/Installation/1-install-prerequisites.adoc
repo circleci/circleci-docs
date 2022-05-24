@@ -47,19 +47,11 @@ Download and install the following software before continuing:
 | Kubernetes Package Management
 |
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_amd64.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
-| {kotsversion} *
-| Replicated Kubernetes Application Management. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
-| Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac users will need to grant a security exception.
-
-
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 | Latest
 | Backup and restore capability
 | See Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
 |===
-
-*{sp}Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
 // Don't include this section in the GCP PDF.
 
@@ -120,19 +112,12 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | CircleCI Version
 | Kubernetes Version
 
-| 3.0.0 - 3.2.1
-| < 1.21
-
-| 3.2.2 - 3.3.0
-| 1.16 - 1.21
-
-| 3.4.0
+| 4.0.0
 | 1.16 - 1.23
 |===
 
 Creating a Kubernetes cluster is your responsibility. Please note:
 
-* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that need access.
 * You must have appropriate permissions to list, create, edit, and delete pods in your cluster. Run this command to verify your permissions:
 +
 ```shell
@@ -687,8 +672,6 @@ gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
     --role roles/iam.serviceAccountTokenCreator \
     --condition=None
 ```
-
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
 
 endif::env-aws[]
 

@@ -310,11 +310,10 @@ version: 2.1
 jobs:
   build:
     docker:
-
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2022.04-20.04
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
 ```

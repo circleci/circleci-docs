@@ -1,15 +1,17 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Monitoring Your Installation
+= インストールしたサーバーの監視
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document provides information on metrics for monitoring your CircleCI Server v2.x installation.
+:page-description: ここでは、インストールした CircleCI Server v2.x を監視するためのメトリクスについて説明します。
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ここでは、インストールした CircleCI Server v2.x を監視するためのメトリクスについて説明します。
 
@@ -28,7 +30,7 @@ toc::[]
 CircleCI Server v2.x.では、メトリクス収集用の主要コンポーネントとして、 Telegraf を使用しています。 Telegraf は、CircleCI サービスによって生成されたメトリクスデータを Datadog や AWS CloudWatch などのデータ監視プラットフォームに転送するサーバーソフトウェアです。
 
 .メトリクス
-image::metrics.png[メトリクスs]
+image::metrics.png[メトリクス名]
 
 CircleCI Server v2.x では、以下のようにメトリクスが収集されます。
 
@@ -46,6 +48,7 @@ Telegraf は複数の入出力タイプを同時に受け取ることができ�
 ifndef::pdf[{% raw %}]
 ```shell
 sudo docker inspect --format='{{range .Mounts}}{{println .Source "->" .Destination}}{{end}}' telegraf | grep telegraf.conf | awk '{ print $1 }' | xargs cat
+
 ```
 ifndef::pdf[{% endraw %}]
 

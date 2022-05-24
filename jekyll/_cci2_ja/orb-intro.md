@@ -14,9 +14,13 @@ version:
 * 目次
 {:toc}
 
-CircleCI Orb とは、[ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/2.0/reusing-config/#executor) などの、パラメーター化および[再利用が可能な設定要素]({{site.baseurl}}/ja/2.0/reusing-config/)をまとめた共有可能なオープンソースパッケージです。 Orb を使用すると、設定がシンプルになり、多くのプロジェクトにまたがってソフトウェアやサービス スタックとの連携を素早く、容易に行えるようになります。
+Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 CircleCI Developer Hub の [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、設定作業の簡素化に役立つ Orb を検索できます。
 
-パブリッシュされている Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/2.0/orb-author-intro/)こともできます。
+Orb に含まれる再利用可能なスニペットは、たとえば [ジョブ]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)、[Executor ]({{site.baseurl}}/ja/2.0/reusing-config/#executor)、および Node.js やそのパッケージマネージャーなどです。
+
+Orb を使用すると、設定がシンプルになり、ソフトウェアやサービススタックとの連携を多くのプロジェクトにまたがって素早く容易に行えるようになります。
+
+ご自身の Orb をオーサリングする場合は、[Orb のオーサリング方法]({{site.baseurl}}/ja/2.0/orb-author-intro/)のページをご覧ください。
 
 ## Orb を使用するメリット
 {: #benefits-of-using-orbs }
@@ -76,7 +80,7 @@ workflows:
 ## Orb レジストリ
 {: #the-orb-registry }
 
-[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
+[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb が掲載されたオープンリポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
 
 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
