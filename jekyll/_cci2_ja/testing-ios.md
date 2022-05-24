@@ -799,7 +799,7 @@ React Native プロジェクトは、CircleCI  上で `macos` および `docker`
 
 {: #using-multiple-executor-types-macos-docker }
 
-同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/2.0/executor-types/) を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-intro/) in the same workflow. 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 
 
