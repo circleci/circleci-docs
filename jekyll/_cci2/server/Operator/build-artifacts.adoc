@@ -102,7 +102,10 @@ Also, by default, the following types will be rendered as plain text:
 |===
 
 === Allow unsafe types
-You can choose to allow unsafe types to be rendered, if required, by checking the **Server Unsafe Artifacts** checkbox within the **Frontend Settings** in the KOTS Admin Console.
+You can choose to allow unsafe types to be rendered, if required.  Add the following to your values.yaml file:
+
+[source,yaml]
+serveUnsafeArtifacts: true
 
 .CircleCI Server v4.x Artifacts
 image::server-3-unsafe-artifacts.png[Screenshot highlighting the option to server unsafe build artifacts]
