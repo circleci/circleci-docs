@@ -327,9 +327,9 @@ macOS VM のストレージ容量は、リソースクラスや使用される X
 | 13.*         | macos.x86.medium.gen2 | 89GB               |
 {: class="table table-striped"}
 
-<sup>(1)</sup> _このリソースは、最低 24 時間のリースが必要です。このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。_
+<sup>(1)</sup>このリソースは、最低 24 時間のリースが必要です。このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。
 
-<sup>(2)</sup>_例外: Xcode 12.0.1 と 12.5.1 の最小ストレージ容量は 100GB です_
+<sup>(2)</sup>例外: Xcode 12.0.1 と 12.5.1 の最小ストレージ容量は 100GB です。
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }
