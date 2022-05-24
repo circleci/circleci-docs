@@ -40,7 +40,7 @@ jobs:
         # Commands run in the primary container
 ```
 
-Find out more about the Docker execution environment on the [Using Docker]({{ site.baseurl }}/2.0/execution-environments/using-docker) page.
+Find out more about the Docker execution environment on the [Using Docker]({{ site.baseurl }}/2.0/using-docker) page.
 
 ## Linux VM
 {: #linux-vm }
@@ -80,7 +80,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines]({{ site.baseurl }}/2.0/execution-environments/using-linuxvm) page.
+Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines]({{ site.baseurl }}/2.0/using-linuxvm) page.
 
 ## macOS
 {: #macos }
@@ -98,7 +98,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about the macOS execution environment in the [Using macOS]({{ site.baseurl }}/2.0/execution-environments/using-macos) section of the Choosing an Executor Type page.
+Find out more about the macOS execution environment in the [Using macOS]({{ site.baseurl }}/2.0/using-macos) section of the Choosing an Executor Type page.
 
 ## Windows
 {: #windows }
@@ -167,7 +167,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about the Windows execution environment in the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-windows) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
+Find out more about the Windows execution environment in the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/using-windows) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## GPU
 {: #gpu }
@@ -214,7 +214,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-gpu) page.
+Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/2.0/using-gpu) page.
 
 ## Arm
 
@@ -278,7 +278,7 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-arm) page.
+Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/2.0/using-arm) page.
 
 
 ## Next Steps

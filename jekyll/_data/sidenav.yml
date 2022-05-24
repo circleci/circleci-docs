@@ -113,7 +113,7 @@ en:
     - name: Docker
       children:
         - name: Using Docker
-          link: 2.0/execution-environments/using-docker/
+          link: 2.0/using-docker/
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
@@ -131,7 +131,7 @@ en:
     - name: Linux VM
       children:
         - name: Using Linux VM
-          link: 2.0/execution-environments/using-linuxvm/
+          link: 2.0/using-linuxvm/
         - name: Pre-installed software
           link: 2.0/docker-to-machine/
           hash: pre-installed-software
@@ -141,7 +141,7 @@ en:
     - name: macOS
       children:
         - name: Using macOS
-          link: 2.0/execution-environments/using-macos/
+          link: 2.0/using-macos/
         - name: Hello World
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
@@ -159,17 +159,17 @@ en:
     - name: Windows
       children:
         - name: Using Windows
-          link: 2.0/execution-environments/using-windows/
+          link: 2.0/using-windows/
         - name: Hello World
           link: 2.0/hello-world-windows/
     - name: GPU
       children:
         - name: Using GPUs
-          link: 2.0/execution-environments/using-gpu/
+          link: 2.0/using-gpu/
     - name: Arm
       children:
         - name: Using Arm
-          link: 2.0/execution-environments/using-arm/
+          link: 2.0/using-arm/
     
     - name: Runner
       children:
