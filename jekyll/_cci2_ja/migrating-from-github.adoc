@@ -93,7 +93,7 @@ GitHub では、YAMLの `runs-on` キーによって、Linux、macOS、Windows �
 
 CircleCI では、同じように環境（Executorと呼ばれる）を選択でき、Docker 用のオプションや機能が追加されています。
 
-各https://circleci.com/docs/2.0/executor-types/[Executor のタイプ] にお好きなバージョンを選択することができ、それによりその後インストールされるベースソフトウェアのバージョンが異なります。
+各https://circleci.com/docs/2.0/executor-intro/[Executor のタイプ] にお好きなバージョンを選択することができ、それによりその後インストールされるベースソフトウェアのバージョンが異なります。
 
 以下の表を参照して設定を比較してください。
 
