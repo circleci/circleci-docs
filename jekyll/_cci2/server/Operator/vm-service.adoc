@@ -96,7 +96,7 @@ The default AMIs for server v4.x are based on Ubuntu 20.04.
 ----
 
 === Google Cloud Platform
-You will need to add a section to your values.yaml file to configure your VM Service to work with AWS EC2. 
+You will need to add a section to your values.yaml file to configure your VM Service to work with Google Cloud Platform (GCP). 
 
 WARNING: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
