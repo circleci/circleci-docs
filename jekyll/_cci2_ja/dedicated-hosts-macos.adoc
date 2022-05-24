@@ -22,10 +22,10 @@ version:
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-|リソースクラス名
+|クラス
 |vCPU
 |メモリ
-|ストレージ
+|トータルストレージ
 |料金
 
 |`macos.x86.metal.gen1`

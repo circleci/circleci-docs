@@ -23,7 +23,7 @@ The identifier for the dedicated host resource is `macos.x86.metal.gen1`, and su
 |===
 | Class
 | vCPUs
-| Memory
+| RAM
 | Total Storage
 | Cost
 

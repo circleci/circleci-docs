@@ -104,6 +104,21 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
+### CiecleCI Web アプリを使ってパイプラインをトリガーするときにパラメーターを渡す
+{: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
+
+CLI や API の使用に加えて、CircleCI Web アプリからパラメーターを使ってパイプラインをトリガーすることもできます。 以下の設定を行います。
+
+  1. Web アプリでダッシュボードを表示します。
+  2. プロジェクトのフィルタリング機能を使ってプロジェクトを選択します。
+  3. ブランチのフィルタリング機能を使って新しいパイプラインを実行するブランチを選択します。
+  4. **Trigger Pipeline** ボタンをクリックします (ページの右上隅)。
+  5. **Add Parameters** ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
+  6. **Trigger Pipeline** をクリックします。
+
+**注:** Web アプリからパイプラインをトリガーする時に、設定ファイルで宣言していないパラメーターを渡すと、そのパイプラインは失敗し、 `Unexpected argument(s)` というエラーが表示されます。
+
+
 ## パイプラインパラメーターのスコープ
 {: #the-scope-of-pipeline-parameters }
 

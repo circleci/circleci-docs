@@ -1,23 +1,25 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Enabling Usage Statistics
+= 使用状況の統計の有効化E
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to automatically send aggregate usage statistics to CircleCI which enhances visibility into CircleCI installations. 
+:page-description: 使用状況統計の集計結果を CircleCI に自動送信する方法について説明します。これにより、CircleCI Server の使用状況がわかりやすくなります。
 :icons: font
 :toc: macro
 :toc-title:
 
-This chapter is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI. Usage statistics data enhances visibility into CircleCI installations.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+システム管理者を対象に、使用状況統計の集計結果を CircleCI に自動送信する方法について説明します。 使用状況統計データにより CircleCI Server の使用状況がわかりやすくなります。
 
 toc::[]
 
-To opt-in to this feature, navigate to your Management Console settings (e.g. circleci-hostname.com:8800/settings) and scroll down to Usage Statistics. Enable the radio button labeled Automatically send some usage statistics to CircleCI, as shown below.
+この機能にオプトインにするには、Management Console の設定 (circleci-hostname.com:8800/settings) に行き、Usage Statistics までスクロールダウンします。 以下に示すように、[Automatically send some usage statistics to CircleCI (使用状況統計を自動的に CircleCI に送信)] と表示されたラジオボタンをオンにします。
 
-.Usage Statistics Settings
+.使用状況統計の設定
 image::usage-statistics-setting.png[Send Usage Statistics]
 
 == 使用状況統計の詳細
@@ -102,7 +104,7 @@ image::usage-statistics-setting.png[Send Usage Statistics]
 
 | new_projects_oss_macos_legacy
 | 合計
-| _Captures new Builds performed on 1.0. Observe if users are starting new projects on 1.0._
+| _1.0 で実行された新しいビルドをキャプチャします。 1.0 で新しいプロジェクトを開始しているかどうかを確認します。_
 
 | new_projects_oss_macos_current
 | 合計
@@ -134,7 +136,7 @@ image::usage-statistics-setting.png[Send Usage Statistics]
 
 | projects_oss_macos_legacy
 | 合計
-| _Captures Builds performed on 1.0 and 2.0. Observe if users are moving towards 2.0 or staying with 1.0._
+| _1.0 および 2.0 で実行されたビルドをキャプチャします。 ユーザーが 2.0 に移行するのか、1.0 のままなのかを確認します。_
 
 | projects_oss_macos_current
 | 合計

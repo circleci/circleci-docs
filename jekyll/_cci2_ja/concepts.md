@@ -400,13 +400,15 @@ jobs:
 
 ワークスペース、キャッシュ、アーティファクトに関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
+
+
 ## Docker レイヤー キャッシュ
 
 {: #docker-layer-caching }
 
 Docker Layer Caching  (DLC ) により、 ジョブにおいてビルドされた Docker イメージの個々のレイヤーがキャッシュされます。 変更されていないレイヤーは、毎回イメージを再ビルドするのではなく、後続の実行において使用されます。
 
-下記の `config.yml` スニペットでは、`build_exlixir` ジョブで `ubuntu-2004:202104-01` Dockerfile を使ってイメージをビルドしています。 `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
+下記の `config.yml` スニペットでは、`build_elixir` ジョブで `ubuntu-2004:202104-01` Dockerfile を使ってイメージをビルドしています。 `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
 
 
 
@@ -461,11 +463,11 @@ version: 2.1
 jobs:
  build1: # job name
    docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
+     - image: cimg/base:2022.04-20.04
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
+     - image: postgres:14.2 # Specifies the database image
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -475,14 +477,14 @@ jobs:
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: root
+         POSTGRES_USER: user
 #...
  build2:
    machine: # Specifies a machine image that uses
-   # an Ubuntu version 20.04 image with Docker 19.03.13
-   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
+   # an Ubuntu version 20.04 image with Docker 20.10.12
+   # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
    # for new image releases.
-     image: ubuntu-2004:202010-01
+     image: ubuntu-2004:202201-02
 #...
  image: ubuntu-2004:202010-01
 #...
@@ -498,11 +500,11 @@ version: 2.1
 jobs:
  build1: # job name
    docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
+     - image: cimg/base:2022.04-20.04
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
+     - image: postgres:14.2 # Specifies the database image
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -512,7 +514,7 @@ jobs:
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: root
+         POSTGRES_USER: user
 #...
  build2:
    machine: true
@@ -530,11 +532,11 @@ version: 2
 jobs:
  build1: # job name
    docker: # Specifies the primary container image,
-     - image: buildpack-deps:trusty
+     - image: cimg/base:2022.04-20.04
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:9.4.1 # Specifies the database image
+     - image: postgres:14.2 # Specifies the database image
        auth:
          username: mydockerhub-user
          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -544,7 +546,7 @@ jobs:
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: root
+         POSTGRES_USER: user
 #...
  build2:
    machine: true # Specifies a machine image.
@@ -582,12 +584,12 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
      docker: # Specifies the primary container image,
      # see circleci.com/docs/2.0/circleci-images/ for
      # the list of pre-built CircleCI images on dockerhub.
-       - image: buildpack-deps:trusty
+       - image: cimg/base:2022.04-20.04
          auth:
            username: mydockerhub-user
            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-       - image: postgres:9.4.1 # Specifies the database image
+       - image: postgres:14.2 # Specifies the database image
          auth:
            username: mydockerhub-user
            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -597,7 +599,7 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
          environment: # POSTGRES_USER 認証環境変数を指定します。
           # 環境変数の使用方法については、
           # circleci.com/ja/docs/2.0/env-vars/ を参照してください。
-           POSTGRES_USER: root
+           POSTGRES_USER: user
 ...
    build2:
      machine: # Specifies a machine image that uses
@@ -737,6 +739,7 @@ jobs:
 * *ユーザー*とは、組織内の個々のユーザーを指します。
 
 * CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
+
 
 
 ## ワークフロー
