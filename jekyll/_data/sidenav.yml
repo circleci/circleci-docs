@@ -8,6 +8,8 @@ en:
           link: 2.0/
         - name: About CircleCI
           link: 2.0/about-circleci/
+        - name: Web UI Intro
+          link: 2.0/web-ui-intro/
         - name: Concepts
           link: 2.0/concepts/
         - name: Your First Green Build
