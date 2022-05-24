@@ -10,7 +10,7 @@
 <span>{{ include.guide_completion_time }} min task</span>
 </div>
 
-* 目次
+* TOC
 {:toc}
 </div>
 <div id="card-or-card-container">
@@ -20,19 +20,18 @@
 <div class="card">
 
 ![Explore Logo]({{ site.baseurl }}/assets/img/compass/bookmark.svg)
-### サンプルアプリを見てみましょう
+### サンプルアプリを見る
 {: #explore-a-sample-app}
 {:.no_toc}
 
-CircleCI で実行する{{ include.lang }}サンプルアプリを{{ include.lang }} チェックしてみましょう。
+CircleCI で実行する{{ include.lang }}サンプルアプリをチェックしてみましょう。
 
 <div id="completion-time" class="card">
 <img alt="完了時間" src="{{ site.baseurl }}/assets/img/compass/repo-forked.svg">
-<span>{{ include.sample_completion_time }} min task</span>
+<span>{{ include.sample_completion_time }} 分</span>
 </div>
 
-* [{{include.lang}} サンプルアプリのパイプラインをライブで見る]({{site.cci_public_org_url}}/sample-{{include.demo_url_slug}}-cfd?branch={{include.demo_branch}}){:target="_blank"}{:rel="noopener noreferrer"}
+* [{{include.lang}} サンプルアプリのパイプラインを見る]({{site.cci_public_org_url}}/sample-{{include.demo_url_slug}}-cfd?branch={{include.demo_branch}}){:target="_blank"}{:rel="noopener noreferrer"}
 * [GitHub で見る]({{site.gh_public_org_url}}/sample-{{include.demo_url_slug}}-cfd){:target="_blank"}{:rel="noopener noreferrer"}
-
 </div>
 </div>
