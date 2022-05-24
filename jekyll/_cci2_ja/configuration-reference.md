@@ -234,7 +234,7 @@ jobs:
 #### **`docker`**/**`machine`**/**`macos`**/**`windows`** (_Executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCIでは、複数の実行環境を用意しており、 これらを _Executor_ と呼んでいます。 Executor では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。 Executor の詳細については、[Executor とイメージに関するガイド]({{ site.baseurl }}/ja/2.0/executor-types/)をご覧ください。
+CircleCIでは、複数の実行環境を用意しており、 これらを _Executor_ と呼んでいます。 Executor では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。 Learn more about executors in the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/).
 
 #### `docker`
 {: #docker }
@@ -255,7 +255,7 @@ CircleCIでは、複数の実行環境を用意しており、 これらを _Exe
 
 [プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 というのも、プライマリコンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです \[カスタムイメージ\]({{ site.baseurl }}/ja/2.0/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
 
-タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types)」を参照してください。
+タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/2.0/using-docker) page.
 
 Docker Hub など、一部のレジストリでは、匿名ユーザーによる Docker のプル回数に上限が設定されている場合があります。  こうした場合にプライベートイメージとパブリックイメージをプルするには、認証を行うことをお勧めします。 ユーザー名とパスワードは `auth` フィールドで指定できます。  詳細については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
 
@@ -311,12 +311,12 @@ jobs:
 #### **`machine`**
 {: #machine }
 
-[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) は `machine` キーとともに下記のマップを用いて設定します。
+The machine executor is configured using the `machine` key, which takes a map:
 
-| キー                     | 必須 | タイプ   | 説明                                                                                                                                                                                                                          |
-| ---------------------- | -- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| イメージ                   | ○  | 文字列型  | 使用する仮想マシンイメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。 |
-| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。                                                                                                                                     |
+| キー                     | 必須 | タイプ   | 説明                                                                                                                                                                                                                                         |
+| ---------------------- | -- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| イメージ                   | ○  | 文字列型  | 使用する仮想マシンイメージ。 View [available images](#available-linux-machine-images). **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。 |
+| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)が有効になります。                                                                                                                                                    |
 {: class="table table-striped"}
 
 
@@ -340,6 +340,8 @@ jobs:
 
 **設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
+* `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
