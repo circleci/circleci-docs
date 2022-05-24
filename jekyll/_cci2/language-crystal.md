@@ -83,7 +83,7 @@ to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-referenc
 By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
 
 The steps of a job occur in a virtual environment called an [executor]({{
-site.baseurl }}/2.0/executor-types/). In this example, we use the [official Crystal Docker
+site.baseurl }}/2.0/executor-intro/). In this example, we use the [official Crystal Docker
 image](https://hub.docker.com/r/crystallang/crystal/) as our primary container.
 All commands for a job execute in this container.
 

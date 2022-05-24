@@ -112,9 +112,8 @@ en:
           link: 2.0/executor-intro/
     - name: Docker
       children:
-        - name: Overview
-          link: 2.0/executor-types/
-          hash: using-docker
+        - name: Using Docker
+          link: 2.0/using-docker/
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
@@ -129,21 +128,21 @@ en:
           link: 2.0/custom-images/
         - name: Docker authenticated pulls
           link: 2.0/private-images/
-    - name: Machine
+    - name: Linux VM
       children:
-        - name: Overview
-          link: 2.0/executor-types/
-          hash: using-machine
+        - name: Using Linux VM
+          link: 2.0/using-linuxvm/
         - name: Pre-installed software
           link: 2.0/docker-to-machine/
           hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
-        - name: Arm Resources
-          link: 2.0/arm-resources/
-    - name: Mac
+
+    - name: macOS
       children:
-        - name: Overview
+        - name: Using macOS
+          link: 2.0/using-macos/
+        - name: Hello World
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
           link: 2.0/testing-ios/
@@ -156,12 +155,22 @@ en:
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/
-          
+          link: 2.0/dedicated-hosts-macos/ 
     - name: Windows
       children:
-        - name: Overview
+        - name: Using Windows
+          link: 2.0/using-windows/
+        - name: Hello World
           link: 2.0/hello-world-windows/
+    - name: GPU
+      children:
+        - name: Using GPUs
+          link: 2.0/using-gpu/
+    - name: Arm
+      children:
+        - name: Using Arm
+          link: 2.0/using-arm/
+    
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -309,6 +318,7 @@ en:
           link: 2.0/security-supply-chain/
         - name: IP Ranges
           link: 2.0/ip-ranges/
+
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:

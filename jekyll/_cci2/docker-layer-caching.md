@@ -24,7 +24,7 @@ Docker layer caching (DLC) is a great feature to use if building Docker images i
 
 DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
 
-Docker layer caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
+Docker layer caching can be used with both the `machine` executor and in the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
 
 ### Limitations
 {: #limitations }
@@ -37,7 +37,7 @@ Please note that high usage of [parallelism]({{site.baseurl}}/2.0/configuration-
 
 If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.
 
-**Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
+**Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/using-docker) and appear in the Spin up Environment step on your jobs pages.
 
 DLC is only useful when creating your own Docker image with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
@@ -138,7 +138,7 @@ If you run many concurrent jobs for the same project that depend on the same env
 {: #machine-executor }
 {:.no_toc}
 
-Docker layer caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
+Docker layer caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
 
 ```yml
 machine:
