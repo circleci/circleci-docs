@@ -76,7 +76,7 @@ version: 2
 
 [`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-ジョブの各ステップは \[Executor\]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。 この例では、[公式 Crystal Docker イメージ](https://hub.docker.com/r/crystallang/crystal/)がプライマリ コンテナとして使用されています。 ジョブのすべてのコマンドがこのコンテナで実行されます。
+The steps of a job occur in a virtual environment called an \[executor\]({{ site.baseurl }}/2.0/executor-intro/). この例では、[公式 Crystal Docker イメージ](https://hub.docker.com/r/crystallang/crystal/)がプライマリ コンテナとして使用されています。 ジョブのすべてのコマンドがこのコンテナで実行されます。
 
 ```yaml
 jobs:
