@@ -222,31 +222,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 | Mainly for www-api
 
-| kotsadm-kots
-| Licensing
-| The main KOTS application. Runs the KOTS Admin Console, where upgrades and server configuration take place.
-| No upgrades or configuration possible for server.
-No admin console available.
-|
-
-| kotsadm-migrations
-| Licensing
-| Performs database migrations to handle updates of Kotsadm.
-|
-|
-
-| kotsadm-minio
-| Licensing
-| Object storage for KOTS licensing.
-|
-|
-
-| kotsadm-postgres
-| Licensing
-| Database for KOTS licensing.
-|
-|
-
 | legacy-notifier
 | App Core
 | Handles notifications to external services (for example, Slack or email).
