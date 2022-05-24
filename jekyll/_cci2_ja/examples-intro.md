@@ -172,4 +172,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
+Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-intro/) used in the examples above.
