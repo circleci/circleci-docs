@@ -1,25 +1,48 @@
 ---
 layout: classic-docs
-title: "プロジェクト"
-short-title: "プロジェクト"
-description: "プロジェクトの説明"
-categories:
-  - projects
-order: 2
+title: "Projects Overview"
+description: "Description of projects in CircleCI"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-CircleCI プロジェクトは、関連付けられているコードリポジトリの名前を共有し、 [CircleCI Web アプリ](https://app.circleci.com/) の **Projects** のページに表示されます。 プロジェクトは、 **Set Up Project** ボタンを使用して追加します。
 
-**Projects** のページでは、VCS で所有者になっているプロジェクトをセットアップするか、組織内のプロジェクトをフォローすることで、パイプラインにアクセスし、プロジェクトのステータスに関する [メール通知]({{site.baseurl}}/ja/2.0/notifications/) を受け取ることができます。
+A CircleCI project shares the name of the associated code repository in your [version control system]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
+
+プロジェクトダッシュボードで、以下のいずれかを実行します。
+* VCS で所有者になっているプロジェクトを_セットアップ_する.
+* 組織内のプロジェクトを_フォロー_して、パイプラインにアクセスし、プロジェクトのステータスに関する[メール通知]({{site.baseurl }}/ja/2.0/notifications/)を受け取る
 
 詳細については、[CircleCI でのプロジェクトの作成]({{site.baseurl}}/ja/2.0/create-project/)を参照してください。
+
 ## プロジェクトダッシュボード
 {: #projects-dashboard }
 
 ![プロジェクトダッシュボード]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーを指します。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+ユーザーは、プロジェクトをフォローすることで、プロジェクトの[ビルド ステータス]({{site.baseurl}}/2.0/status/)に関する[メール通知]({{ site.baseurl }}/2.0/notifications/)を受け取り、プロジェクトを CircleCI ダッシュボードに追加できます。
+
+*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+
+### 組織の切り替え
+{: #org-switching }
+プロジェクトが表示されず、CircleCI 上でビルド中でない場合は、 CircleCI Web アプリの左上隅の**組織**を確認してください。 たとえば、左上にユーザー `my-user` が表示されているなら、`my-user` に所属する GitHub プロジェクトのみが ** Projects** の下で使用できます。 GitHub プロジェクト `your-org/project` をビルドする場合は、アプリケーションメニューで `your-org` を選択して組織を変更する必要があります。
+
+![組織の切り替えメニュー]({{site.baseurl}}/assets/img/docs/org-centric-ui_newui.png)
+
+## パイプラインの表示と移動
+{: #viewing-and-navigating-pipelines }
+
+リポジトリに新しいコミットがプッシュされると、お客様のパイプラインが CircleCI Web アプリの**ダッシュボード**に表示されます。 パイプラインを拡大し、任意のワークフローやジョブの説明でクリックすると、ワークフローや単一のジョブを表示することができます。
+
+パイプラインの単一のジョブを表示する際は、ページ上部にあるパンくずリストを使ってジョブの各ワークフローやパイプラインに戻ることができます。
+
+![パイプラインのパンくずリスト]({{site.baseurl}}/assets/img/docs/pipeline-breadcrumbs.png)
+
+## 次のステップ
+{: #next-steps }
+
+* Follow our guide to [Creating a Project in CircleCI]({{ site.baseurl }}/2.0/create-project/).
+* Learn more about CircleCI Pipelines in the [Pipelines Overview]({{ site.baseurl }}/2.0/create-project/).
