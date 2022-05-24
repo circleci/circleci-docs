@@ -25,7 +25,7 @@ CircleCI Server の運用と管理においては、別のクラスタへの移�
 
 このドキュメントでは、CircleCI Server インスタンスのデータと状態のバックアップを行い復元する方法に関する推奨事項を説明します。
 
-CircleCI Server は、[KOTS] (https://kots.io/) を使用して管理します。KOTS では、バックアップと復元に[Velero] (https://velero.io/) を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
+CircleCI Server は、 https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
 つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。
 
 NOTE: CircleCI サービスのバックアップと復元は、Velero に依存しています。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
@@ -33,29 +33,29 @@ NOTE: CircleCI サービスのバックアップと復元は、Velero に依存�
 == セットアップ
 
 CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して作成できます。
-ただし、バックアップサポートを有効にするには、クラスタに [Velero] (https://velero.io/) をインストールして設定する必要があります。
+ただし、バックアップサポートを有効にするには、クラスタに https://velero.io/[Velero] をインストールして設定する必要があります。
 
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
 === 前提条件
 
-- お使いの環境に合った [Velero CLI] (https://velero.io/docs/v1.6/basic-install/)</a> をダウンロードしてインストールします。
+- お使いの環境に合った https://velero.io/docs/v1.6/basic-install/[Velero CLI] をダウンロードしてインストールします。
 
 ==== AWS を使う場合の前提条件
 
-- [AWS CLI] (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)</a> をインストール済みであること。
+- https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI] をインストール済みであること。
 
 ==== GCP を使う場合の前提条件
 
-- `gcloud` と `gsutil` がインストール済みであること。  どちらも Google Cloud SDK に含まれており、SDK をインストールすることでセットアップできます ( [こちらのドキュメント] (https://cloud.google.com/sdk/docs/) を参照してください)。
+- `gcloud` と `gsutil` がインストール済みであること。  どちらも Google Cloud SDK に含まれており、SDK をインストールすることでセットアップできます(https://cloud.google.com/sdk/docs/[こちらのドキュメント]を参照してください)。
 
-詳細については、Velero の [サポート対象プロバイダーに関するページ] (https://velero.io/docs/v1.6/supported-providers/) を参照してください。
+詳細については、Velero のhttps://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ]を参照してください。
 
 以下で、AWS と GCP のそれぞれで CircleCI Server 3.x のバックアップを作成する手順について説明します。
 
 ==== S3 互換ストレージを使う場合の前提条件
 
-- お使いのストレージプロバイダーに合った [MinIO CLI] (https://docs.min.io/docs/minio-client-quickstart-guide.html) がインストールし設定済みであること。
+- お使いのストレージプロバイダーに合った https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] をインストールし設定済みであること。
 
 ////
 
@@ -183,7 +183,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 === 手順 3 - Velero のインストールと起動
 
 * 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
-必ず<<手順 2: Velero の権限の設定>>で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
+必ず <<Step 2 - Setup permissions for Velero, 手順 2>> で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 
 NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。
  Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
