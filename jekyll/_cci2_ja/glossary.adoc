@@ -43,7 +43,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 
 == Executor 型
 
-<<executor-types#,Executor 型>> により、ジョブの実行の基盤テクノロジーが定義されます。 Docker コンテナ内で指定したイメージを使ってジョブを実行する `docker` か、完全にバーチャルなマシン内でジョブを実行する `machine` のどちらかになります。
+<<executor-intro#,Executors>> define the underlying technology to run a job. Docker コンテナ内で指定したイメージを使ってジョブを実行する `docker` か、完全にバーチャルなマシン内でジョブを実行する `machine` のどちらかになります。
 
 == イメージ
 
