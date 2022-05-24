@@ -11,13 +11,14 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes how to configure the following external services for use with a CircleCI server 3.x installation. The settings described in this guide can be found in the KOTS Admin Console. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+This page describes how to configure external services for use with a CircleCI server v4.x installation.
 
 toc::[]
 
+[#postgresql]
 == PostgreSQL
 
-NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
+NOTE: If you are using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
 
 .External PostgreSQL
 image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
@@ -32,6 +33,7 @@ If you choose to use an external PostgreSQL instance, complete the following fie
 
 * *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance. 
 
+[#best-practices-for-your-postgresql]
 === Best Practices for your PostgreSQL
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
@@ -82,6 +84,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 |10 Gbps
 |===
 
+[#backing-up-postgresql]
 === Backing Up PostgreSQL
 PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
 
@@ -92,6 +95,7 @@ We strongly recommend the following:
 * Using encrypted storage for backups as databases might contain sensitive information.
 * Performing a backup before each upgrade of CircleCI server.
 
+[#mongodb]
 == MongoDB
 
 NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher. 
@@ -125,6 +129,7 @@ The authentication mechanism to use, usually SCRAM-SHA-1.
 * *Additional connection options (optional)* - 
 Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&`. Special characters must be URL encoded). See the link:https://docs.mongodb.com/v4.6/reference/connection-string/[MongoDB docs] for available options.
 
+[#vault]
 == Vault
 
 .External Vault
@@ -132,8 +137,32 @@ image::server-3-external-vault.png[Screenshot of KOTS Admin Console config showi
 
 If you choose to use an external Vault instance, complete the following fields:  
 
-* *URL* - The URL to your Vault service.
+* *URL* - The URL to your Vault service
 
-* *Transit Path* - Your Vault secrets transit path.
+* *Transit Path* - Your Vault secrets transit path
 
-* *Token* - The access token for vault.
+* *Token* - The access token for vault
+
+[#rabbitmq]
+== RabbitMQ
+
+If you choose to use an external RabbitMQ instance, add the following to your `values.yaml`` file.
+
+```yaml
+rabbitmq:
+  fullnameOverride: <hostname>
+  internal: false
+  auth:
+    username: <db-username>
+    # Either Provide the "password" or secret name for "existingPasswordSecret"
+    password: <db-password>
+    # Either Provide the "erlangCookie" or secret name for "existingErlangSecret"
+    erlangCookie: <erlang-cookie>
+    # must contain a value for rabbitmq-password key
+    existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
+    # secret must contain a value for rabbitmq-erlang-cookie key
+    existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
+  service: 
+    port: <port>
+    managerPort: <manager-port>
+```
