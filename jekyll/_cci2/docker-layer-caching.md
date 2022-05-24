@@ -37,7 +37,7 @@ Please note that high usage of [parallelism]({{site.baseurl}}/2.0/configuration-
 
 If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.
 
-**Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/execution-environments/using-docker) and appear in the Spin up Environment step on your jobs pages.
+**Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/using-docker) and appear in the Spin up Environment step on your jobs pages.
 
 DLC is only useful when creating your own Docker image with docker build, docker compose, or similar docker commands, it does not decrease the wall clock time that all builds take to spin up the initial environment.
 

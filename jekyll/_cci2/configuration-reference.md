@@ -254,7 +254,7 @@ This is because the primary container is typically used only for running the `st
 A [custom image]({{ site.baseurl
 }}/2.0/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/2.0/execution-environments/using-docker) page.
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/2.0/using-docker) page.
 
 Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
 
