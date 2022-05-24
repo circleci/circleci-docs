@@ -18,7 +18,7 @@ version:
 
 {% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_slug="javascript" demo_branch="master" guide_completion_time="15" sample_completion_time="10" %}
 
-## はじめに
+## 概要
 {: #overview }
 
 このガイドでは、Node.js サンプルアプリケーションを使って、CircleCI 上で Node.js アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング]({{site.gh_public_org_url}}/circleci-demo-javascript-react-app)され、[CircleCI 上でビルド]({{site.cci_public_org_url}}/circleci-demo-javascript-react-app){:rel="nofollow"}されます。
@@ -30,7 +30,7 @@ version:
 
 すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
-### 1.  バージョンの指定
+### 1. バージョンの指定
 {: #specify-a-version }
 
 すべての config.yml は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
@@ -40,7 +40,7 @@ version: 2.1
 
 `2.1` は、CircleCI の最新のバージョンであり、CircleCI のすべての最新機能と改善事項の利用が可能です。
 
-### 2.  Node Orb の使用
+### 2. Node Orb の使用
 {: #use-the-node-orb }
 
 Node.js [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/node)には、Node.js とパッケージマネージャー (npm、yarn) を簡単にインストールできるパッケージ化された CircleCI 設定セットが含まれています。 パッケージはデフォルトでキャッシュ付きでインストールされ、 Linux x86_64、macOS x86_64、および Arm64 のサポートが自動的に含まれます。 Orb に関する詳細は、[こちら]({{site.baseurl}}/2.0/orb-intro/)をご覧ください。
@@ -53,7 +53,7 @@ orbs:
 
 注: 組織の設定で、サードパーティ製 Orb の使用を有効にする、または組織の CircleCI 管理者にアクセス許可をリクエストする必要がある場合があります。
 
-### 3.  ワークフローの作成
+### 3. ワークフローの作成
 {: #create-a-workflow }
 
 ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を参照して下さい。
@@ -63,7 +63,7 @@ workflows:
   my_workflow: # ワークフロー名です。お客様のワークフローに合う名前に変更して下さい。
 ```
 
-### 4.  ジョブの作成
+### 4. ジョブの作成
 {: #create-a-job }
 
 ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブに関する詳細は、[こちら]({{site.baseurl}}/2.0/configuration-reference/#jobs)を参照して下さい。

@@ -12,7 +12,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites] and xref:server-3-install.adoc[Phase 2 - Core services installation].
+Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through <<1-install-prerequisites#,Phase 1 – Prerequisites>> and <<2-install-core#,Phase 2 - Core services installation>>.
 
 .Installation Experience Flow Chart Phase 3
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
@@ -23,49 +23,24 @@ toc::[]
 
 == Phase 3: Execution environment installation
 
-=== Output Processor
-Output processor is responsible for handling the output from Nomad clients. It is a key service to scale if you find your system slowing down. We recommend increasing the output processor replica set to scale the service up to meet demand.
-
-Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
-
-Locate and enter the following in Settings:
-
-. *Output Processor Load Balancer Hostname* -
-The following command provides the IP address of the service:
-+
-```shell
-kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
-```
-
-. *Save your configuration*. You will deploy and validate your setup after you complete Nomad client setup.
-
 === Nomad Clients
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
-Once completed, you can update your CircleCI server configuration so your Nomad control plane can communicate with your Nomad Clients.
-
 ==== Cluster Creation with Terraform
 
-CircleCI curates Terraform modules to help install Nomad clients in your chosen cloud provider. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files (`main.tf`) for both AWS and GCP. Some information about your cluster and server installation is required to complete your `main.tf`. How to get this information is described in the following sections.
-
-NOTE: If you would also like to set up Nomad Autoscaler at this stage, see the <<#nomad-autoscaler-optional,Nomad Autoscaler>> section of this guide, as some of the requirements can be included in this Terraform setup.
+CircleCI curates Terraform modules to help install Nomad clients in your chosen cloud provider. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files for both AWS and GCP.
 
 // Don't include this section in the GCP PDF:
-
 ifndef::env-gcp[]
 
 ===== AWS
-You need some information about your cluster and server installation to complete the required fields for the Terraform configuration file (`main.tf`). A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
+You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
 
-* *Server_endpoint* - You need to know the Nomad Server endpoint, which is the external IP address of the nomad-server-external Loadbalancer. You can get this information with the following command:
-+
-```shell
-kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
-```
+* *Server_endpoint* - This is the domian name of the CircleCI application appended with port number `4647`.
 
-* *Subnet ID (subnet)*, *VPC ID (vpcId)*, and *DNS server (dns_server)* of your cluster.
+* *Subnet ID (subnet)*, *VPC ID (vpc_id)*, and *DNS server (dns_server)* of your cluster.
 Run the following command to get the cluster VPC ID (vpcId), CIDR block (serviceIpv4Cidr), and subnets (subnetIds):
 +
 ```shell
@@ -113,7 +88,7 @@ This returns something like the following:
 ...}
 
 
-Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command from within the directory of the `main.tf` file:
+Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command:
 
 [source,shell]
 ----
@@ -135,113 +110,22 @@ After Terraform is done spinning up the Nomad client(s), it outputs the certific
 // Stop hiding from GCP PDF:
 
 endif::env-gcp[]
-
 // Don't include this section in the AWS PDF:
 
 ifndef::env-aws[]
 
 ===== GCP
-You need the IP address of the Nomad control plane (Nomad Server), which was created when you deployed CircleCI Server. You can get the IP address by running the following command:
 
-[source,shell]
-----
-kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
-----
+You need the following information:
 
-You also need the following information:
-
+* The Domain name of the CircleCI Application
 * The GCP Project you want to run Nomad clients in.
 * The GCP Zone you want to run Nomad clients in.
 * The GCP Region you want to run Nomad clients in.
 * The GCP Network you want to run Nomad clients in.
 * The GCP Subnetwork you want to run Nomad clients in.
 
-You can copy the following example to your local environment and fill in the appropriate information for your specific setup.
-
-```hcl
-variable "project" {
-  type    = string
-  default = "<your-project>"
-}
-
-variable "region" {
-  type    = string
-  default = "<your-region>"
-}
-
-variable "zone" {
-  type    = string
-  default = "<your-zone>"
-}
-
-variable "network" {
-  type    = string
-  default = "<your-network-name>"
-  # if you are using a shared vpc, provide the network endpoint rather than the name. eg:
-  # default = "https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<your-network-name>"
-}
-
-variable "subnetwork" {
-  type    = string
-  default = "<your-subnetwork-name>"
-  # if you are using a shared vpc, provide the network endpoint rather than the name. eg:
-  # default = "https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<your-subnetwork-name>"
-}
-
-
-variable "server_endpoint" {
-  type    = string
-  default = "<nomad-server-loadbalancer>:4647"
-}
-
-variable "nomad_auto_scaler" {
-  type        = bool
-  default     = false
-  description = "If true, terraform will create a service account to be used by nomad autoscaler."
-}
-
-variable "enable_workload_identity" {
-  type        = bool
-  default     = false
-  description = "If true, Workload Identity will be used rather than static credentials'"
-}
-
-variable "k8s_namespace" {
-  type        = string
-  default     = "circleci-server"
-  description = "If enable_workload_identity is true, provide application k8s namespace"
-}
-
-provider "google-beta" {
-  project = var.project
-  region  = var.region
-  zone    = var.zone
-}
-
-
-module "nomad" {
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.4.0"
-
-  zone            = var.zone
-  region          = var.region
-  network         = var.network
-  subnetwork      = var.subnetwork
-  server_endpoint = var.server_endpoint
-  machine_type    = "n2-standard-8"
-  nomad_auto_scaler         = var.nomad_auto_scaler
-  enable_workload_identity  = var.enable_workload_identity
-  k8s_namespace             = var.k8s_namespace
-
-  unsafe_disable_mtls    = false
-  assign_public_ip       = true
-  preemptible            = true
-  target_cpu_utilization = 0.50
-}
-
-output "module" {
-  value = module.nomad
-}
-```
+A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
@@ -265,20 +149,19 @@ After Terraform is done spinning up the Nomad client(s), it outputs the certific
 endif::env-aws[]
 
 ==== Nomad Autoscaler
-Nomad provides a utility to automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you only need to provide permission for the utility to manage your autoscaling resource and specify where it is located. You can enable this resource via KOTS, which deploys the Nomad Autoscaler service along with your Nomad servers. Below, we go through how to set up Nomad Autoscaler for your provider.
-
-NOTE: The maximum and minimum Nomad client count overwrite the corresponding values set when you created your autoscaling group or managed instance group. It is recommended that you keep these values and those used in your Terraform the same so that they do not compete.
-
-If you do not require this service, click the *Save config* button to update your installation and redeploy server.
+Nomad can automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you need to provide permission for the utility to manage your autoscaling resource and specify where it is located. CircleCI's Nomad terraform module can provision the permissions resources, or it can be done manually.
 
 ifndef::env-gcp[]
 
+[[nomad-autoscaler-aws]]
 ===== AWS
-. Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
-  * You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. Then you need to generate an access and secret key for this user.
-  * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the following IAM policy:
-+
+Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
+
+. Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+. You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. Then you need to generate an access and secret key for this user.
+. You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the IAM policy below:
+
+*IAM policy for Nomad Autoscaler*
 [source, json]
 {
     "Version": "2012-10-17",
@@ -304,70 +187,115 @@ ifndef::env-gcp[]
         }
     ]
 }
-. In your KOTS Admin Console, set Nomad Autoscaler to `enabled`.
-. Set Max Node Count* - This overwrites what is currently set as the max for your ASG. It is recommended to keep this value and what was set in your Terraform the same.
-. Set Min Node Count* - This overwrites what is currently set as the min for your ASG. It is recommended to keep this value and what was set in your Terraform as the same.
-. Select cloud provider: `AWS EC2`.
-. Add the region of the autoscaling group.
-. You can chose one of the following:
-.. Add the Nomad Autoscaler user's access key and secret key.
-.. Or, the Nomad Autoscaler role's ARN.
-. Add the name of the autoscaling Group your Nomad clients were created in.
 
 endif::env-gcp[]
 
 ifndef::env-aws[]
 
+[[nomad-autoscaler-gcp]]
 ===== GCP
-. Create a service account for Nomad Autoscaler
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. You may reference the examples in the link for more details. If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
-  * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
-. Set Nomad Autoscaler to `enabled`
-. Set Maximum Node Count*
-. Set Minimum Node Count*
-. Select cloud provider: `Google Cloud Platform`
-. Add your Project ID
-. Add Managed Instance Group Name
-. Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
-. You can choose one of the following:
-.. JSON of GCP service account for Nomad Autoscaler
-.. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities]. Steps to enable Workload Identities on GCP cluster are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here].
-.. Enable workload identity for `nomad-autoscaler` (kubernetes) service account
+Create a service account for Nomad Autoscaler.
+
+. Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and outputs a file with the keys.  Set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details.  The created user's key will be available in a file named `nomad-as-key.json`.
+. Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities]  and outputs the email.  Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+. You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
+
+Enable workload identity for `nomad-autoscaler` (kubernetes) service account
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/nomad-autoscaler]"
 ```
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
-
 endif::env-aws[]
 
-==== Configure and Deploy
+=== Nomad Servers
 
-Now that you have successfully deployed your Nomad clients, you can configure CircleCI server and the Nomad control plane. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad servers.
 
-Enter the following in Settings:
-
-* *Nomad Load Balancer (required)*
-+
-```shell
-kubectl get service nomad-server-external --namespace=<YOUR_CIRCLECI_NAMESPACE>
+. In your helm values.yaml file add a `nomad` section.  The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
+```
+nomad:
+  server:
+    gossip:
+      encryption:
+        enabled: true
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: <base64-encoded-ca-certificate>
+        certificate:  <base64-encoded-certificate>
+        privateKey:  <base64-encoded-private-key>
 ```
 
-* *Nomad Server Certificate (required)* -
-Provided in the output from `terraform apply`
+==== Gossip Encryption Key
+Nomad requires a key if you want to encryption communication between nomad machines. This must be exactly 32 bytes long. Based on how you prefer to manage secrets there are 2 options.
 
-* *Nomad Server Private Key (required)* -
-Provided in the output from `terraform apply`
+*Option 1 - Create the secret yourself*
+```
+kubectl create secret generic nomad-gossip-encryption-key \
+--from-literal=gossip-key=<secret-key-32-chars>
+```
 
-* *Nomad Server Certificate Authority (CA) Certificate (required)* -
-Provided in the output from `terraform apply`
+*Option 2 - CircleCI creates the secret*
+Add the value to values.yaml, and CircleCI will create the secret automatically.
+```
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: <secret-key-32-chars>
+        ...
+```
+==== Nomad Autoscaler
 
-* *Build Agent Image* - 
-If you want to use a custom Docker registry to supply the CircleCI Build Agent, contact customer support for assistance.
+If you have enabled the nomad autoscaler also include the following section under `nomad`.
 
-Click the *Save config* button to update your installation and redeploy server.
+```
+  auto_scaler:
+    enabled: true
+    scaling:
+      max: <max-node-limit>
+      min: <min-node-limit>
+```
+
+==== AWS
+the values for this section were created <<nomad-autoscaler-aws,here>>
+
+```
+  auto_scaler:
+    enabled: true
+    scaling:
+      max: <max>
+      min: <min>
+
+    aws:
+      enabled: true
+      region: <region>
+      autoScalingGroup: <asg-name>
+
+      accessKey: <access-key>
+      secretKey: <secret-key>
+      # or
+      irsaRole: <role-arn>
+```
+
+==== GCP
+the values for this section were created <<nomad-autoscaler-gcp,here>>
+```
+    gcp:
+      enabled: true
+      project_id: <project-id>
+      mig_name: <instance-group-name>
+
+      region: <region>
+      # or
+      zone: <zone>
+
+      service_account: <service-account-json>
+      # or 
+      workloadIdentity: <service-account-email>
+```
 
 ==== Nomad Clients Validation
 
@@ -430,7 +358,7 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 
 === VM service
 
-VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to EKS and GKE installations because it specifically relies on features of these cloud providers.
+VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it specifically relies on features of these cloud providers.
 
 ifndef::env-gcp[]
 
@@ -489,7 +417,7 @@ aws iam create-user --user-name circleci-vm-service
 ```
 +
 Optionally, vm-service does support the use of a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
-Once done, you may skip to step 9 which is enabling vm-service in KOTS.
+Once done, you may skip to step 9 which is enabling vm-service.
 +
 . *Create policy*
 +
@@ -625,9 +553,8 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *Configure server*
 +
-Configure VM Service through the KOTS Admin Console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
 +
-Once you have configured the fields, *save your config* and deploy your updated application.
 
 endif::env-gcp[]
 
@@ -728,13 +655,11 @@ gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> 
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
 ```
 
-NOTE: If you are switching from static JSON credentials to Workload Identity, you should delete the keys from GCP as well as from CircleCI KOTS Admin Console.
-
 . *Configure Server*
 +
-Configure VM Service through the KOTS Admin Console. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
 +
-Once you have configured the fields, *save your config* and deploy your updated application.
+
 
 endif::env-aws[]
 

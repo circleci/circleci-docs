@@ -45,7 +45,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
 
     steps:

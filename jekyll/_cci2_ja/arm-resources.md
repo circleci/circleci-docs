@@ -39,10 +39,10 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 以下の Arm リソースクラスは、すべてのお客様にご利用いただけます。
 
-| リソース クラス名    | スペック            | 提供プラン                         |
-| ------------ | --------------- | ----------------------------- |
-| `arm.medium` | 2 vCPU、8GB RAM  | Free、Performance、Scale、Custom |
-| `arm.large`  | 4 vCPU、16GB RAM | Performance、Scale             |
+| リソース クラス名    | スペック                           | 提供プラン                         |
+| ------------ | ------------------------------ | ----------------------------- |
+| `arm.medium` | 2 vCPUs, 8GB RAM, 100 GB Disk  | Free、Performance、Scale、Custom |
+| `arm.large`  | 4 vCPUs, 16GB RAM, 100 GB Disk | Performance、Scale             |
 {: class="table table-striped"}
 
 料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。

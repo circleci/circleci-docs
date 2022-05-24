@@ -1,5 +1,5 @@
 ---
-description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。 
+description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。
 このガイドは他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。"
 version:
 - Server v2.x
@@ -11,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 [.serveronly]_このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。_
 

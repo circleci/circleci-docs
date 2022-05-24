@@ -2,17 +2,14 @@
 layout: classic-docs
 title: "テストの並列実行"
 short-title: "テストの並列実行"
-description: "テストを並列に実行する方法"
-categories:
-  - 最適化
-order: 60
+description: "並列のコンピューティング環境でテストを実行し、CircleCI のパイプラインを最適化する"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の Executor に分散させて並列に実行することができます。 それには、並列実行レベルを指定して、テストジョブ用にスピン アップする個別の Executor の数を定義する必要があります。 そして、CircleCI CLI を使用してテストファイルを分割するか、環境変数を使用して各並列マシンを個別に構成します。
+プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の実行環境に分散させて並列に実行することができます。 並列実行レベルを指定すると、スピンアップしてテストスイートを実行する [Executor]({{site.baseurl}}/ja/2.0/executor-types/) の数が定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行している各 Exexutor を設定することができます。
 
 * 目次
 {:toc}
@@ -20,7 +17,7 @@ version:
 ## ジョブの並列実行レベルの指定
 {: #specifying-a-jobs-parallelism-level }
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs)レベルで定義します。 `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。
 
@@ -39,7 +36,9 @@ jobs:
 
 ![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#parallelism)」を参照してください。
+[セルフホストランナー]({{site.baseurl}}/ja/2.0/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 任意のリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない過剰な並列タスクは、セルフホストランナーが使用可能になるまでキューに入れられます。
+
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#parallelism)を参照してください。
 
 ## CircleCI CLI を使用したテストの分割
 {: #using-the-circleci-cli-to-split-tests }
@@ -52,13 +51,14 @@ CLI をローカルにインストールするには、[CircleCI のローカル
 
 ### テストファイルの分割
 {: #splitting-test-files }
-{:.no_toc}
 
-CLI では、並列ジョブの実行時に複数のマシンにテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテストランナーに渡す必要があります。
+CLI では、並列ジョブの実行時に複数のマシンにテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテスト ランナーに渡す必要があります。
+
+[セルフホストランナー]({{site.baseurl}}/2.0/runner-overview/)は、CLI を使ってテストを分割する代わりに、`circleci-agent` を直接呼び出すことができます。 これは、[タスクエージェント]({{site.baseurl}}/ja/2.0/runner-overview/#circleci-runner-operation)が既に `$PATH` 上に存在し、テスト分割時には追加の依存関係が削除されるからです。
+
 
 #### テストファイルのグロブ
 {: #globbing-test-files }
-{:.no_toc}
 
 CLI では、以下のパターンを使用したテストファイルのグロブをサポートしています。
 
@@ -117,7 +117,7 @@ CLI は、テスト スイートによって生成されたタイミング デ�
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
-For partially found test results, we automatically assign a random small value to any test we did not find timing data for. You can override this assigned value to a specific value with the `--time-default` flag.
+部分的に検出されたテスト結果については、タイミングデータが見つからなかったテストに自動的にランダムな小さい値が割り当てられます。 この割り当てられた値は、`--time-default` フラグを使って特定の値に上書きできます。
 
 ```shell
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
@@ -129,7 +129,6 @@ circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-d
 
 #### テスト名に基づいた分割
 {: #splitting-by-name }
-{:.no_toc}
 
 デフォルトでは、`--split-by` フラグを使用しない場合、`circleci tests split` はファイル名またはクラス名の一覧が渡されることを想定しており、テスト名またはクラス名によってアルファベット順にテストを分割します。 ファイル名の一覧は、以下に挙げる複数の方法で用意できます。
 
@@ -167,7 +166,6 @@ circleci tests split --index=0 test_filenames.txt
 
 #### ファイルサイズに基づいた分割
 {: #splitting-by-filesize }
-{:.no_toc}
 
 ファイル パスを指定すれば、CLI はファイル サイズでも分割できます。 それには、分割タイプ `filesize` を付けて `--split-by` フラグを使用します。
 
@@ -246,9 +244,9 @@ cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 ### pytest.ini に junit_family を設定している場合
 {: #are-you-setting-the-junit-family-in-your-pytest-ini }
 
-pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、[こちら](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)のページを参照してください。
+pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、[こちら](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)のページを参照してください。 該当箇所は、"families" で検索すると確認できます。
 
-上記ページの該当箇所は、"families" で検索すると確認できます。
+**注**: pytest 6.1 では互換性を損なう変更が行われ、`junit_family` xml 形式がファイル名を含まない `xunit2` に変更されました。 つまり、`--split-by=timings` は `xunit1` を指定しないと動作しません。 詳細については、[pytest changelog](https://docs.pytest.org/en/stable/changelog.html#id137)を参照してください。
 
 ### タイミング基準で正しく分割するサンプルプロジェクト
 {: #example-project-that-correctly-splits-by-timing }
@@ -289,16 +287,10 @@ workflows:
 
 ### ビデオ: グロブのトラブルシューティング
 {: #video-troubleshooting-globbing }
-{:.no_toc}
 
 注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-## 関連項目
-{: #see-also }
-
-[コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
@@ -313,3 +305,10 @@ workflows:
   ```shell
   go test -v $(go list ./... | circleci tests split)
   ```
+
+
+## 次のステップ
+{: #next-steps }
+
+* [テストデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data/)
+* [テスト インサイト（Test Insights）]({{ site.baseurl }}/ja/2.0/insights-tests/)

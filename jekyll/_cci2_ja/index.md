@@ -10,33 +10,7 @@ page-type: index
 
 ここに掲載されているチュートリアル、サンプル、how-to、そしてリファレンスからCircleCIについて学ぶことができます。
 
-<hr class="hidden-xs" />
-
-<div class="row">
-  <div class="treatment col-xs-12">
-    <span id="homepage-guide-links"><h2>設定例と解説</h2><img src="{{ site.baseurl }}/assets/img/compass/new.svg" alt="New"></span>
-    <p>こちらの<a href="{{site.baseurl}}/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
-  </div>
-  <div class="treatment col-xs-12 col-sm-6">
-    <a class="no-external-icon col-sm-12" href="{{site.baseurl}}/ja/2.0/language-javascript/">
-      <div class="card col-sm-12">
-        {% capture node-js-card %}
-          {% include snippets/language-card.md lang="Node.JS" anchor="true" %}
-        {% endcapture %}
-        {{ node-js-card | markdownify }}
-      </div>
-    </a>
-  </div>
-  <div class="treatment col-xs-12 col-sm-6">
-    <a class="no-external-icon col-sm-12" href="{{site.baseurl}}/ja/2.0/language-python/">
-      <div class="card col-sm-12">
-        {% capture python-card %}
-          {% include snippets/language-card.md lang="Python" anchor="true" %}
-        {% endcapture %}
-        {{ python-card | markdownify }}
-      </div>
-    </a>
-  </div>
+<div class="row loading-deferred">
   <div class="treatment col-xs-12">
     <hr />
   </div>
@@ -83,8 +57,7 @@ page-type: index
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-
-      workflows">コンテキストとフィルターの使用</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">コンテキストとフィルターの使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/creating-orbs/">Orbs の作成</a></li>
     </ul>
   </div>
