@@ -108,7 +108,7 @@ en:
         name: Docker
         children:
           - 
-            name: 概要
+            name: Docker の使用
           - 
           - 
           - 
@@ -119,20 +119,20 @@ en:
           - 
             link: 2.0/server-3-operator-usage-data/
       - 
-        name: Machine
+        name: Linux VM
         children:
           - 
-            name: 概要
           - 
             name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
-          - 
-            name: Android Machine Image
       - 
+        name: macOS
         children:
           - 
-            name: 概要
+            name: macOS を使用する
+          - 
+            name: Hello World
           - 
           - 
           - 
@@ -143,7 +143,16 @@ en:
         name: Windows
         children:
           - 
-            name: 概要
+            name: Windows の使用
+          - 
+            name: Hello World
+      - 
+        name: GPU
+        children:
+          - 
+            name: GPU を使用する
+      - 
+        name: Arm
       - 
         name: ランナーのバージョン
         children:
@@ -242,6 +251,8 @@ en:
     name: プロジェクト
     icon: icons/sidebar/projects.svg
     children:
+      - 
+        name: 概要
       - 
         name: settings
         children:
@@ -348,7 +359,6 @@ en:
     children:
       - 
         name: Server v2.19.x Install
-        link: 2.0/install-overview/
         children:
           - 
             name: 概要
@@ -411,7 +421,6 @@ en:
           - 
           - 
       - 
-        link: 2.0/install-overview/
         children:
           - 
             name: What's New in v2.48
@@ -420,7 +429,6 @@ en:
           - 
             name: v2.48.3 Operations Guide
       - 
-        link: 2.0/install-overview/
         children:
           - 
             name: v3.3 Overview
@@ -430,7 +438,6 @@ en:
             name: v3.3 Operations Guide
       - 
         name: Server v3.1.x PDFs
-        link: 2.0/install-overview/
         children:
           - 
             name: v3.1 Overview
@@ -443,7 +450,6 @@ en:
             link: 2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
       - 
         name: Server v3.0.x PDFs
-        link: 2.0/install-overview/
         children:
           - 
             name: v3.0 Overview
@@ -456,7 +462,6 @@ en:
             link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
       - 
         name: Server v2.19.x Install
-        link: 2.0/install-overview/
         children:
           - 
             name: What's New in v2.17
@@ -472,7 +477,6 @@ en:
     children:
       - 
         name: Server v2.19.x Operations
-        link: 2.0/overview/
         children:
           - 
             name: 概要
@@ -499,7 +503,6 @@ en:
             link: 2.0/authentication/
       - 
         name: Server v2.19 PDFs
-        link: 2.0/v.2.19-overview/
         children:
           - 
             name: 概要
@@ -544,7 +547,6 @@ en:
             name: 謝辞
       - 
         name: Server v2.18 PDFs
-        link: 2.0/v.2.18-overview/
         children:
           - 
             name: What's New in v2.18
@@ -557,7 +559,6 @@ en:
             link: 2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
       - 
         name: Server v2.17.3 PDFs
-        link: 2.0/v.2.17-overview/
         children:
           - 
             name: What's New in v2.17
@@ -570,7 +571,6 @@ en:
             link: 2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
       - 
         name: Server v2.16 PDFs
-        link: 2.0/v.2.16-overview/
         children:
           - 
             name: What's New in v2.16
