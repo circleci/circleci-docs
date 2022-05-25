@@ -37,7 +37,7 @@ version:
 [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 以下に例を示します。
 
 - Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済みの CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
-- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト]({{site.baseurl}}/ja/2.0/configuration-reference/#available-machine-images)に記載されている Ubuntu バージョン (16.04 など) を使用します。
+- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト]({{site.baseurl}}/ja/2.0/configuration-reference/#available-linux-machine-images)に記載されている Ubuntu バージョン (16.04 など) を使用します。
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。
 
 ## Docker を使用する
@@ -271,7 +271,7 @@ jobs:
     machine: true
 ```
 
-使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images)で確認できます。
+使用可能なイメージの一覧は[こちら]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images)で確認できます。
 
 以下の例では、イメージを使用して [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
 
@@ -327,7 +327,7 @@ macOS VM のストレージ容量は、リソースクラスや使用される X
 | 13.*         | macos.x86.medium.gen2 | 89GB               |
 {: class="table table-striped"}
 
-<sup>(1)</sup>このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。
+<sup>(1)</sup>このリソースは、最低 24 時間のリースが必要です。このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。
 
 <sup>(2)</sup>例外: Xcode 12.0.1 と 12.5.1 の最小ストレージ容量は 100GB です。
 

@@ -41,7 +41,7 @@ Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/
 
 Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
-For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images) list.
+For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images) list.
 
 For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
 
@@ -112,7 +112,7 @@ my-user/couchdb:1.6.1
 ### What is the best practice for specifying image versions?
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document.
+It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/using-docker/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document.
 
 ### How can I set the timezone in Docker images?
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -479,7 +479,7 @@ When CircleCI spins up a remote docker instance, it requires the primary contain
 ### Can I use IPv6 in my tests?
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic.  Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+You can use the [machine executor]({{ site.baseurl }}/2.0/configuration-reference/#machine) for testing local IPv6 traffic.  Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
 Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 

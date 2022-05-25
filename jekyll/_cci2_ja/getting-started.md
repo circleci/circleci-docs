@@ -1,5 +1,5 @@
 ---
-layout: getting-started-guide-experimental
+layout: classic-docs
 title: "はじめてのビルドの成功（グリーンビルド）"
 short-title: "はじめてのビルドの成功"
 description: "CircleCI を使用してはじめてビルドを成功させるためのチュートリアル"
