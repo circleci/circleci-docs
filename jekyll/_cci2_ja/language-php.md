@@ -23,7 +23,7 @@ CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リ�
 CircleCI での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">GitHub 上の PHP Laravel デモ プロジェクト</a>
-- [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
+- [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-php-laravel){:rel="nofollow"}
 
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、PHP プロジェクトで CircleCI を使用するためのベスト プラクティスを示しています。
 
@@ -189,7 +189,5 @@ jobs:
 {:.no_toc}
 
 - デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
-
-- その他のパブリック PHP プロジェクトの構成例については、「[CircleCI 設定ファイルのサンプル]({{ site.baseurl }}/ja/2.0/examples/)」を参照してください。
 
 - CircleCI を初めて使用する場合は、[プロジェクトの詳細]({{ site.baseurl }}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
