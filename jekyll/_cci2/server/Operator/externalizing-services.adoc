@@ -20,16 +20,17 @@ toc::[]
 
 NOTE: If you are using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
 
-If you choose to use an external PostgreSQL instance, add the following to your values.yaml file.
+If you choose to use an external PostgreSQL instance, add the following to your `values.yaml` file.
 
-```
+[source,yaml]
+----
 postgresql:
   internal: false
   postgresqlUsername: <username> # A user with the appropriate privileges to access your PostgreSQL instance. 
   postgresqlPassword: <password> # The password of the user account used to access your PostgreSQL instance.
   postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
   postgresqlPort: <port> # The port of your PostgreSQL instance
-```
+----
 
 [#best-practices-for-your-postgresql]
 === Best Practices for your PostgreSQL
@@ -98,9 +99,10 @@ We strongly recommend the following:
 
 NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher. 
 
-If you choose to use an external MongoDB instance, add the following to your values.yaml file.
+If you choose to use an external MongoDB instance, add the following to your `values.yaml` file.
 
-```
+[source,yaml]
+----
 mongodb:
   internal: false
   hosts: <hostname:port> # this can be a comma-separated list of multiple hosts for sharded instances
@@ -117,25 +119,29 @@ mongodb:
     rootPassword: <password>
     database: <authentication-source-database
     mechanism: SCRAM-SHA-1
-```
+----
 
 [#vault]
 == Vault
 
-If you choose to use an external Vault instance, add the following to your values.yaml file.
-```
+If you choose to use an external Vault instance, add the following to your `values.yaml` file.
+
+[source,yaml]
+----
 vault:
   internal: false
   url: <protocol://host:port> # The URL to your Vault service.
   transitPath: <transit-path> # Your Vault secrets transit path.
   token: <token> The access token for vault.
+----
 
 [#rabbitmq]
 == RabbitMQ
 
 If you choose to use an external RabbitMQ instance, add the following to your `values.yaml`` file.
 
-```yaml
+[source,yaml]
+----
 rabbitmq:
   fullnameOverride: <hostname>
   internal: false
@@ -152,4 +158,4 @@ rabbitmq:
   service: 
     port: <port>
     managerPort: <manager-port>
-```
+----
