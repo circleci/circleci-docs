@@ -58,7 +58,7 @@ jobs:
      - image: cimg/base:2022.05
 ```
 
-`jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI (such as git), as well as Docker (among other things).
+`jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
 
 Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead, which would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
 
@@ -72,14 +72,14 @@ jobs:
       xcode: 13.3.0
 ```
 
-You will notice that the key-value pairs don't follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images].
+You will notice that the key-value pairs do not follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images], and their syntax.
 
-The developer hub also has the list of available CircleCI https://circleci.com/developer/orbs[orbs], which are shareable packages of configuration you can use to simplify your builds. Visit the <<slack-orb-tutorial#,Slack Orb Tutorial>> page for instructions on how to set up one of the most popular orbs.
+The developer hub also has a list of available CircleCI https://circleci.com/developer/orbs[orbs], which are shareable packages of configuration you can use to simplify your builds. Visit the <<slack-orb-tutorial#,Slack Orb Tutorial>> page for instructions on how to set up one of the most popular orbs.
 
 [#circleci-jobs]
 == CircleCI jobs and workflows
 
-The last thing we need for a basic CircleCI configuration is a job to actually run. Jobs are orchestrated using workflows, which is a set of rules defining a collection of jobs and their run order. Using the Docker configuration example, we can add steps to our job. Steps are a list of commands to run inside the Docker.
+The last thing we need for a basic CircleCI configuration is a job to actually run. Jobs are orchestrated using workflows, which is a set of rules defining a collection of jobs and their run order. Using the Docker configuration example, we can add steps to our job. Steps are a list of commands to run inside the Docker container.
 
 ```yaml
 # CircleCI configuration file
@@ -95,7 +95,7 @@ jobs:
 
 This very basic example is only running one job, `build`, which means there is also only one workflow running in the background. If a second job is added, `workflows` will need to be defined explicitly, to orchestrate the run order. Job names can be updated to reflect the job when `workflows` is added. If there is only one job defined, the job must be named `build`, as in the example above.
 
-A second job and `workflows` defining run order is shown in the example below.
+A second job, and `workflows` defining run order, is shown in the example below.
 
 ```yaml
 # CircleCI configuration file
@@ -128,7 +128,7 @@ If you have a CircleCI account, you can create a new project and add these examp
 
 YAML can be quite picky about indentations. You can use a http://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
 
-If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. It is suggested you create a CircleCI account, as this tutorial asks you to follow along in the CircleCI web UI. You can also find a variety of configuration examples on the  <<sample-config#, Sample Configuration>> page.
+If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
 
 [#yaml-fun]
 == YAML fun
