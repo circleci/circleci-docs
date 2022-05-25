@@ -17,7 +17,7 @@ Jenkins を長年使用されていた方向けに、CircleCI に移行するう
 
 CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD の管理方法についても多くの相違点が見られます。 ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 すばやく移行に取り掛かれるよう、以下のいずれかをお試しください。
 
-1. **Getting Started:** Run your first green build on CircleCI using the [getting started video and steps]({{ site.baseurl }}/).
+1. **スタートガイド:** [動画やドキュメント]({{ site.baseurl }}/ja/)を参照しながら、CircleCI で最初のビルドを実行し、成功させましょう。
 
 2. **Execute Shell のコマンドをコピー & ペーストする:** Jenkins 内のプロジェクトをそのまま複製して使用できる場合は、以下の内容のファイルを `config.yml` という名前でプロジェクトの `.circleci/` ディレクトリに追加します。
 
@@ -84,7 +84,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 
 ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
 
-CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細については、「[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)」と「[Docker]({{ site.baseurl }}/ja/2.0/build/#docker)」を参照してください。
+CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細は、[Executor タイプの選び方]({{ site.baseurl }}/ja/2.0/executor-types/)のページを参照してください。
 
 ### コンテナ内のビルド
 {: #your-builds-in-containers }

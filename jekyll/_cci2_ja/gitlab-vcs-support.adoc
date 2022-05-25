@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= GitLab Support Preview Documentation
+= GitLab Support Preview ドキュメント
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI. 
@@ -14,15 +14,15 @@ version:
 
 [IMPORTANT] 
 ====
-Welcome to the GitLab version control system (VCS) support preview.  
+GitLab バージョン管理システム (VSC) サポート (プレビュー) にようこそ。
 
-This is a work in progress that we are continually iterating on and improving. Please be prepared for some performance issues, errors, and unexpected changes. 
+弊社では、このサポートの改善を継続的に繰り返し行なっています。 パフォーマンスの問題やエラーが発生したり、予期せぬ変更が加えられる可能性があるのでご注意ください。
 
-**At this time, we do not recommend using GitLab VCS support on CircleCI for production of critical work.**
+**現時点では、CircleCI での本番環境の重要な作業に GitLab VCS サポートを使用することはお勧めしません。**
 
-We appreciate your participation in the preview process and your collaboration as we work to create a seamless and stable experience.  
+シームレスで安定したエクスペリエンスの提供に向け、皆様にプレビュープロセスにご参加いただき、ご協力いたければ幸いです。
 
-https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
+https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
 ====
 
 This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we're working on for future releases.
@@ -168,7 +168,7 @@ Add or remove users, and manage user roles for the organization as well as user 
 
 NOTE: You must have at least one org administrator. If you try to remove the last org administrator, you will get an error. 
 
-==== Inviting your first team members
+===== Inviting your first team members
 
 Upon creating a new organization, you also have the option to invite team members from the dashboard. Alternatively, you may invite team members from the **People** section within **Organization Settings**.
 
@@ -184,7 +184,7 @@ Organization administrator as well as organization contributor roles are current
 +
 If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app. 
 
-==== About roles and permissions
+===== About roles and permissions
 
 User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_ or _contributor_.
 
@@ -273,7 +273,6 @@ At this time, GitLab integration should only be configured through new project c
 - Plans pages display the organization UUID and not the name. 
 - Usage pages do not include the GitLab project name under **Projects**. 
 - Only users that created a project in CircleCI and triggered a build are counted as active users.
-
 
 
 
