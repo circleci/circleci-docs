@@ -1,11 +1,11 @@
 ---
 
 version:
-- クラウド
-- Server v2.x
+- Cloud
 - Server v3.x
+- Server v2.x
 ---
-= Slack Orb のチュートリアル
+= Slack Orb を使用した Slack の通知設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI Slack orb"

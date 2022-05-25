@@ -267,7 +267,7 @@ Docker executor users can output the max memory consumed by a job by adding the 
 **This step should be added as the last step in your job, to identify the max usage after all of the previous steps have completed.**
 
 
-**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds]({{site.baseurl}}/2.0/executor-types/#using-multiple-docker-images) will only report the memory usage of the primary image.
+**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds]({{site.baseurl}}/2.0/using-docker/#using-multiple-docker-images) will only report the memory usage of the primary image.
 
 Memory usage will be reported in bytes. You can convert to GiB using your favorite search engine to check it against the amount of RAM available to your job, according to its assigned [resource class]({{site.baseurl}}/2.0/configuration-reference/#resource%5Fclass).
 
@@ -463,7 +463,7 @@ This will stop the project from building on CircleCI in the event you need to ma
 **If you meet one of the following criteria, you will need to take action before March 15th, 2022:**
 
 1. Project created between Nov 2nd, 2021 - January 13th, 2022 that has a job using an Ubuntu 14.04-based machine image, including the default `machine: true` image
-\- If you don’t [specify a machine image]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images), you are using the default image and you’ll need to take action
+\- If you don’t [specify a machine image]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images), you are using the default image and you’ll need to take action
 2. Project created between Nov 2nd, 2021 - January 13th, 2022 using [deprecated Docker image]({{site.baseurl}}/2.0/next-gen-migration-guide/#overview "{{site.baseurl}}/2.0/next-gen-migration-guide/#overview")
 3. Project using an uploaded DSA SSH key for checkout purposes
 
@@ -524,7 +524,7 @@ org:CircleCI-Public circleci/classic path:.circleci filename:config.yml
 
 The following options are available, [given the deprecation of older images](https://discuss.circleci.com/t/old-linux-machine-image-remote-docker-deprecation/37572 "https://discuss.circleci.com/t/old-linux-machine-image-remote-docker-deprecation/37572"), **our recommendation is to update your image**. However, all options listed will solve the issue at hand.
 
-1. Update to a [newer machine image]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images "{{site.baseurl}}/2.0/configuration-reference/#available-machine-images") any listed on that page have the proper items installed
+1. Update to a [newer machine image]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images "{{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images") any listed on that page have the proper items installed
 2. Regenerate your deploy/user key in your project settings
    1. This can be done via the UI (Project Settings → SSH Keys → Click `X` on the current key)
          1. Once that is done, you’ll click “Add Deploy key” or “Add User key” depending on which type of key you removed
@@ -1131,7 +1131,7 @@ _**Note that you must use one of the following executors:**_
 * [macOS](#h%5F01F3THFMEAY31K30ZKP3M0RVZ7)
 * [windows](#h%5F01F7XH9G40MXW14H2GFHRD8XXJ)
 
-## `machine` \[Linux\] executor ([Available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-machine-images))
+## `machine` \[Linux\] executor ([Available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images))
 {: #machine-linux-executor-available-machine-imageshttpscirclecicomdocs20configuration-referenceavailable-machine-images }
 {:.no_toc}
 

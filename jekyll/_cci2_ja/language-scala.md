@@ -38,7 +38,7 @@ mkdir .circleci/
 touch .circleci/config.yml
 ```
 
-最初のコマンドは `.circleci` という名前のディレクトリを作成し、次のコマンドは `.circleci` ディレクトリの中に `config.yml` という名前の新しいファイルを作成します。  繰り返しますが、.circleci というディレクトリ名と config.yml というファイル名を**使用する必要があります**。  バージョン 2.0 の前提条件については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/migrating-from-1-2/)を参照してください。
+最初のコマンドは `.circleci` という名前のディレクトリを作成し、次のコマンドは `.circleci` ディレクトリの中に `config.yml` という名前の新しいファイルを作成します。
 
 ### Scala の config.yml ファイル
 {: #scala-configyml-file }

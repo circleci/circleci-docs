@@ -41,13 +41,16 @@ Orb 開発キットを使って新しい Orb の作成を始めるには、以�
 
 GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)のオーナーになります。 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
 
-1. **新しい [GitHub リポジトリ](https://github.com/new)を作成します。**
+1. **新しい_空の_ [GitHub リポジトリ](https://github.com/new)を作成します。**
 
     リポジトリの名前は、特に重要ではありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。![新しい GitHub リポジトリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
+    **注:** リポジトリが完全に空であるようにしてください。 "README.md を追加する"、"ライセンスを選ぶ" といったオプションのチェックはすべて外してください。
+    {: class="alert alert-warning"}
+
     必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
-    **注:**　Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
+    **注:** Orb 用にローカルディレクトリを作成する必要がありますが、Orb リポジトリをプルする必要はありません。 このプロセスは`orb init` プロセスで完了するため、その前にこのリポジトリをプルすると問題が発生します。
     {: class="alert alert-warning"}
 
 1. **CircleCI CLI を更新します。**
@@ -240,7 +243,7 @@ steps:
 {: #examples }
 {:.no_toc}
 
-[使用例]({{site.baseurl}}/2.0/ja/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
+[使用例]({{site.baseurl}}/ja/2.0/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
 
 このディレクトリ内の各 _YAML_ ファイルは、Orb 使用例として扱われます。名前にはファイル名が使用されます。
 
@@ -288,7 +291,7 @@ steps:
 #### スクリプト
 {: #scripts }
 
-Orb 開発キットの大きな利点の一つは、[スクリプトのインクルード]({{site.baseurl}}/2.0/ja/orb-concepts/#file-include-syntax)機能です。 CLI で `circleci orb pack` コマンドを使用すると (Orb 開発キットを使用する場合は自動化されます)、Orb 設定ファイルコード内で任意のキーに `<<include(file)>>` という値を使用できます。この値を使用すると、指定したファイルの内容が Orb にそのまま組み込まれます。
+Orb 開発キットの大きな利点の一つは、[スクリプトのインクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能です。 CLI で `circleci orb pack` コマンドを使用すると (Orb 開発キットを使用する場合は自動化されます)、Orb 設定ファイルコード内で任意のキーに `<<include(file)>>` という値を使用できます。この値を使用すると、指定したファイルの内容が Orb にそのまま組み込まれます。
 
 これは、_bash_ コードが多数含まれるような、複雑な Orb コマンドを記述する際に特に便利です _(もちろん、Python を使用することもできます!)_。
 

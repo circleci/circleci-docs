@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 ここでは、Docker Hub のレジストリのミラーを設定する方法について説明します。
 
 toc::[]
@@ -62,7 +64,7 @@ sudo docker run -d -p 80:5000 --restart=always --name=through-cache -e REGISTRY_
 
 Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on `machine` executors and remote Docker engines), your pull through cache registry needs to accept connections over HTTPS. These instructions cover setting up a pull through cache that listens for HTTPS connections.
 
-. `sudo systemctl restart docker.service` を実行して、変更を適用します。
+. *独立した Linux サーバーを用意* し、Docker をインストールします。
 +
 We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI server services.
 +
@@ -76,8 +78,7 @@ NOTE: This guide assumes you are obtaining a certificate issued by a well-known 
 +
 [NOTE]
 ====
-https://docs.docker.com/registry/configuration/ (公式
-Docker Registry の構成方法、英語)
+`DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセス トークンに置き換えてください。
 
 Replace `fullchain.pem` and `privkey.pem` with the filenames of your certificate and private key, respectively. *The certificate specified there must be correctly chained enough for tracing the certification path from the leaf to the root*.
 ====
@@ -211,7 +212,7 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 
 === Disarm VM Service
 
-Nomad クライアント「ごと」に以下の手順を実行します。
+サービスマシンで、以下の手順を実行します。
 
 . *Void the `JAVA_OPTS` environment variable* by running the command below.
 +

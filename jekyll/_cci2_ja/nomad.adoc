@@ -1,17 +1,19 @@
 ---
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Introduction to Nomad Cluster Operation
+= Nomad クラスタの操作の概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
+:page-description: CircleCI 2.0 で Nomad クラスターの操作方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI では、プライマリ ジョブ スケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+CircleCI では、プライマリジョブスケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
 
 toc::[]
 
@@ -20,33 +22,33 @@ toc::[]
 .Nomad クラスタの管理
 image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
-- **Nomad Server:** Nomad servers are the brains of the cluster; they receive and allocate jobs to Nomad clients. In CircleCI, a Nomad server runs on your Services machine as a Docker Container.
+- *Nomad サーバー:* Nomad サーバーは、Nomad クラスタの "頭脳" です。 ジョブを受け取り、Nomad クライアントに割り当てます。 CircleCI では、Nomad サーバーは Docker コンテナとしてサービスマシンで実行されます。
 
-- **Nomad Client:** Nomad clients execute the jobs they are allocated by Nomad servers. 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
+- *Nomad クライアント:* Nomad クライアントは、Nomad サーバーによって割り当てられたジョブを実行します。 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
 
-- **Nomad Jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses parallelism, say 10 parallelism, then Nomad will run 10 jobs.
+- *Nomad ジョブ:* Nomad ジョブは、ユーザーによって提供される仕様で、Nomad のワークロードを宣言します。 Nomad ジョブは、CircleCI ジョブの実行に対応しています。 たとえば 10個の並列実行を使用するジョブの場合、Nomad は 10個のジョブを実行します。
 
-- *ビルドエージェント：*ビルドエージェントは CircleCI によって記述された Go プログラムで、ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内部のメイン処理として実行されます。
+- *ビルドエージェント:* ビルドエージェントは CircleCI によって記述された Go プログラムで、ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内部のメイン処理として実行されます。
 
 == 基本的な操作
 
-The following section is a basic guide to operating a Nomad cluster in your installation.
+ここでは、CircleCI での Nomad クラスタの基本的な操作について説明します。
 
 `nomad` CLI は Service インスタンスにインストールされます。 Nomad クラスタとやり取りするようにあらかじめ設定されているため、`nomad` コマンドを使用して、以下で説明するコマンドを実行できます。
 
 === ジョブステータスの確認
 
-The get a list of statuses for all jobs in your cluster, run:
+クラスタ内のすべてのジョブのステータス一覧を表示するには、以下のコマンドを実行します。
 
 ```shell
 nomad status
 ```
 
-The `Status` is the most important field in the output, with the following status type definitions:
+`Status` は、出力内容のうち最も重要なフィールドで、以下のステータスタイプが定義されています。
 
 - `running`: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
 
-- `pending`: There are not enough resources available to execute the job inside the cluster.
+- `pending`: クラスタ内に、ジョブを実行するためのリソースが不足している状態です。
 
 - `dead`: Nomad でジョブの実行が終了しました。 対応する CircleCI のジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは `dead` になります。
 
@@ -56,6 +58,7 @@ Nomad クライアントの一覧を表示するには、以下のコマンド�
 
 ```shell
 nomad node-status
+
 ```
 
 NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが `active`) と、クラスタから除外された Nomad クライアント (ステータスが `down`) の両方が報告されます。 したがって、現在のクラスタの容量を知るには、ステータスが `active` の Nomad クライアントの数を数える必要があります。
@@ -66,17 +69,17 @@ NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の No
 nomad node-status -self
 ```
 
-This will give information such as how many jobs are running on the client and the resource utilization of the client.
+上記の手順を行うと、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
 
 === ログの確認
 
-As noted in the Nomad Jobs section above, a Nomad Job corresponds to an execution of a CircleCI job. Therefore, Nomad Job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run:
+Nomad ジョブのセクションで前述したように、このジョブは CircleCI ジョブの実行と対応しています。 そのため、CircleCI ジョブで問題が発生した場合、Nomad ジョブのログを確認すると、そのジョブのステータスを理解するのに役立つことがあります。 特定のジョブのログを表示するには、以下の手順を行います。
 
 ```shell
 nomad logs -job -stderr <nomad-job-id>
 ```
 
-NOTE: Be sure to specify the `-stderr` flag as this is where most Build Agent logs appear.
+NOTE: `-stderr` フラグは必ず指定してください。 これにより、ほとんどのビルドエージェントのログが表示されます。
 
 `nomad logs -job` コマンドは便利ですが、`-job` フラグは指定されたジョブのランダム割り当てを使用するため、必ずしも正確とは限りません。 `割り当て`(allocation)は Nomad ジョブ内のさらに小さい単位です。 これについては、このドキュメントでは取り上げません。 詳細については、https://www.nomadproject.io/docs/internals/scheduling.html[Nomad の公式ドキュメント]を参照してください。
 
@@ -91,21 +94,21 @@ NOTE: Be sure to specify the `-stderr` flag as this is where most Build Agent lo
 
 === クラスタのスケールアップ
 
-By default, your Nomad Client is set up within an Auto Scaling Group (ASG) within AWS. To view settings:
+デフォルトでは、Nomad クライアントは AWS の Auto Scaling Group (ASG) 内にセットアップされます。 設定を表示するには、
 
-. Go to your EC2 Dashboard and select Auto Scaling Groups from the left hand menu
-. Nomad クライアントのシャットダウン
-. Select Actions > Edit to set Desired/Minimum/Maximum counts. This defines the number of Nomad Clients to spin up and keep available. Use the Scaling Policy tab to scale up your group automatically at your busiest times, see below for best practices for defining scaling policies. Use <<monitoring#nomad-job-metrics, nomad job metrics>> to assist in defining your scaling policies.
+. EC2 ダッシュボードに移動し、左側のメニューから [Auto Scaling Groups (Auto Scaling グループ)] を選択します。
+. Nomad クライアントを選択します。
+. Actions > Edit を選択し、Desired/Minimum/Maximum の数を編集して設定します。 これにより、スピンアップして使用可能なままにする Nomad クライアントの数を定義します。 [Scaling Policy (スケーリングポリシー)] タブを使用して忙しい時刻にグループを自動的にスケールアップするように設定できます。ポリシーの定義に関するベストプラクティスについては、以下のセクションを参照してください。 Use <<monitoring#nomad-job-metrics, nomad job metrics>> to assist in defining your scaling policies.
 
 ==== Auto Scaling ポリシーのベストプラクティス
 
-https://circleci.com/ja/blog/mathematical-justification-for-not-letting-builds-queue/[こちらの連載]では、CircleCI のエンジニアリング チームが自動スケーリングの一般的なベスト プラクティスを見つけるために取り組んだコスト削減のシミュレーションについて解説しています。 AWS の Auto Scaling を設定する際は、以下のベストプラクティスを適用することを検討してください。
+https://circleci.com/ja/blog/mathematical-justification-for-not-letting-builds-queue/[ブログの連載]では、CircleCI のエンジニアリングチームが、自動スケーリングの一般的なベストプラクティスを見つけるために取り組んだコスト削減シミュレーションについて記載しています。 AWS の Auto Scaling を設定する際は、以下のベストプラクティスを適用することを検討してください。
 
-. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列実行で実行されるワークロードでは 10秒未満になるようにします。 Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+. 原則として、クラスタは、ビルドのキューイングを回避できるくらい十分な大きさにします。 具体的には、一般的なワークロードでキューイングが 1秒未満、高価なハードウェアや高レベルな並列処理で実行されるワークロードでは 10秒未満になるようにします。 開発者の時間は高コストであるため、キューイングを 0 まで減らすようにサイズを調整することをお勧めします。 アンダープロビジョニングの費用対効果が出るまで開発者の時間を安くできるようなモデルを作成することは困難です。
 
-. Create an Auto Scaling Group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. 平日の勤務時間中にスケールアップし、夜間にスケールダウンしておくことで、トラフィックが少ない夜間にオーバープロビジョニングを発生させることなく、開発のピーク時に待ち時間を抑制するのがベスト プラクティスです。 なお、過去の数多くのビルドデータによると、通常の勤務時間中のデータセットはおおむね正規分布になっています。
+. Auto Scaling グループを作成して、大多数の開発者が通常勤務している時間帯にはスケールアップし、夜間はスケールダウンするようなステップスケーリングポリシーを適用します。 平日の勤務時間中にスケールアップし、夜間にスケールダウンしておくことで、トラフィックが少ない夜間にオーバープロビジョニングを発生させることなく、開発のピーク時に待ち時間を抑制するのがベスト プラクティスです。 なお、過去の数多くのビルドデータによると、通常の勤務時間中のデータセットはおおむね正規分布になっています。
 
-This is in contrast to auto scaling throughout the day based on traffic fluctuations, because modelling revealed that boot times are actually too long to prevent queuing in real time. そのような状況では、http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html[ステップ ポリシーに関する Amazon のドキュメント]に従って、Auto Scaling とともに CloudWatch アラームを設定してください。
+一方で、トラフィックの変動に基づく自動スケーリングを 1 日中行う設定では、起動に長く時間がかかりすぎるため、リアルタイムにキューイングを回避できないことがモデリングから明らかになっています。 そのような状況では、http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html[ステップ ポリシーに関する Amazon のドキュメント]に従って、Auto Scaling とともに CloudWatch アラームを設定してください。
 
 // commenting until we have non-aws installations?
 // Scaling up Nomad cluster is very straightforward. To scale up, you need to register new Nomad clients into the cluster. If a Nomad client knows the IP addresses of Nomad servers, then the client can register to the cluster automatically.
@@ -120,23 +123,23 @@ Nomad クライアントをシャットダウンするときは、まずクラ�
 ```shell
 nomad node-drain -self -enable
 ```
-. Then, make sure the client is in drain mode using the `node-status` command:
+. 次に、`node-status` コマンドを使用してクライアントがドレインモードに変更されていることを確認します。
 +
 ```shell
 nomad node-status -self
 ```
 
-Alternatively, you can drain a remote node with the following command, substituting the node ID:
+また、下記のコマンドにノード ID を代入して実行し、リモートノードをドレインモードに設定することもできます。
 ```shell
 nomad node-drain -enable -yes <node-id>
 ```
 
 === クライアントクラスタのスケールダウン
 
-クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain` モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
+クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain` モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 また、https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック]を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
 
 このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
 
-1. インスタンスをドレイン モードに設定します。
-2. Monitor running jobs on the instance and wait for them to finish
-3. Terminate the instance
+1. インスタンスをドレインモードに設定します。
+2. インスタンスで実行中のジョブを確認し、ジョブが完了するのを待ちます。
+3. インスタンスを終了します。

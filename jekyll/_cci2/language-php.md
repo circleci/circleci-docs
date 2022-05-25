@@ -22,7 +22,7 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">Demo PHP Laravel Project on GitHub</a>
-- [Demo PHP Laravel Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
+- [Demo PHP Laravel Project building on CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-php-laravel){:rel="nofollow"}
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI with PHP projects.
 
@@ -114,7 +114,7 @@ Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#jo
 to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
 By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-intro/).
 
 In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
 to specify a custom Docker image. We use the [CircleCI-provided PHP docker image]({{site.baseurl}}/2.0/circleci-images/#php) which includes browser tooling.

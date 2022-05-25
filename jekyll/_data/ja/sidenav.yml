@@ -17,6 +17,8 @@ en:
           - 
             name: Hello World
           - 
+            name: Slack Orb の使用
+          - 
             name: FAQ
       - 
         name: 移行
@@ -64,11 +66,13 @@ en:
           - 
             name: テストデータの収集
           - 
+          - 
             name: SSH を使用したデバッグ
           - 
-            name: 並列実行
+          - 
           - 
             name: コンテキスト
+          - 
           - 
       - 
         name: 最適化
@@ -84,7 +88,11 @@ en:
           - 
             name: パイプライン値とパラメーター
           - 
+      - 
+        name: チュートリアル
+        children:
           - 
+            name: テストの分割
   - 
     name: 実行環境
     icon: icons/sidebar/executors.svg
@@ -144,15 +152,19 @@ en:
           - 
           - 
           - 
+            name: Windows へのインストール方法
           - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
             link: 2.0/runner-api/
           - 
           - 
           - 
-            name: Runner API
+          - 
             link: 2.0/runner-api/
           - 
-            name: Runner in Server
             link: 2.0/runner-server/
           - 
   - 
@@ -169,7 +181,10 @@ en:
       - 
         name: ダイナミックコンフィグ
       - 
+        name: 高度な構成
+      - 
         name: CircleCI のローカル CLI の使用
+      - 
       - 
   - 
     name: Orbs
@@ -195,6 +210,12 @@ en:
             name: Orb のテスト手法
           - 
             name: Orb のパブリッシュ プロセス
+          - 
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Slack Orb の使用
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
@@ -226,6 +247,7 @@ en:
           - 
           - 
             name: GitHub Checks の有効化
+          - 
           - 
           - 
           - 
@@ -272,6 +294,7 @@ en:
         children:
           - 
             name: データベースの構成
+          - 
       - 
         name: テスト
         children:
@@ -280,8 +303,6 @@ en:
       - 
         name: クックブック
         children:
-          - 
-            name: 最適化
           - 
             name: 設定ファイル入門ガイド
           - 
@@ -293,8 +314,11 @@ en:
       - 
         name: デプロイの構成
       - 
+        name: デプロイの構成例
+      - 
       - 
         name: Upload to Artifactory
+      - 
       - 
   - 
     name: 参考情報
@@ -459,6 +483,8 @@ en:
             name: Metrics & Monitoring
             link: 2.0/monitoring/
           - 
+            name: Replicated の更新
+          - 
             name: システム要件
             link: 2.0/nomad-metrics/
           - 
@@ -470,9 +496,6 @@ en:
           - 
             name: Authentication
             link: 2.0/authentication/
-          - 
-            name: VM Service
-            link: 2.0/vm-service/
       - 
         name: Server v2.19 PDFs
         link: 2.0/v.2.19-overview/
@@ -587,6 +610,8 @@ ja:
           - 
             name: Hello World
             i18n_name: Hello World
+          - 
+            name: Slack Orb の使用
           - 
             name: FAQ
       - 
@@ -720,15 +745,18 @@ ja:
           - 
           - 
           - 
+            name: Windows へのインストール方法
+          - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
           - 
           - 
           - 
           - 
-            name: Runner API
             link: ja/2.0/runner-api/
-            i18n_name: ランナーAPI
           - 
-            name: Runner in Server
             link: ja/2.0/runner-faqs/
           - 
   - 
@@ -775,6 +803,11 @@ ja:
             name: Orb のテスト手法
           - 
             name: Orb のパブリッシュ プロセス
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Slack Orb の使用
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg

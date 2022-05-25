@@ -8,13 +8,15 @@ categories:
 order: 1
 ---
 
+CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 このドキュメントでは、CircleCI Server v2.18 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。 お使いの CircleCI Server を v2.17.x から v2.18 に**アップグレード**する手順については、[アップグレードガイド]({{ site.baseurl }}/ja/2.0/updating-server/)をご覧ください。
 
 ## アップグレードの要件
 {: #requirements-for-upgrading }
 
 <div class="alert alert-warning" role="alert">
-<b>警告:</b> 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、<a href="{{site.baseurl}}/ja/docs/2.0/updating-server/#org-rename-script">こちらのスクリプト</a>を実行する<b>必要があります</b>。
+<b>警告:</b> 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、<a href="{{site.baseurl}}/ja/2.0/updating-server/#org-rename-script">こちらのスクリプト</a>を実行する<b>必要があります</b>。
 </div>
 
 ## 注意事項とベストプラクティス
