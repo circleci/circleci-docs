@@ -16,15 +16,15 @@ version:
 
 [IMPORTANT]
 ====
-Welcome to the GitLab version control system (VCS) support preview.
+GitLab バージョン管理システム (VSC) サポート (プレビュー) にようこそ。
 
-This is a work in progress that we are continually iterating on and improving. Please be prepared for some performance issues, errors, and unexpected changes.
+弊社では、このサポートの改善を継続的に繰り返し行なっています。 パフォーマンスの問題やエラーが発生したり、予期せぬ変更が加えられる可能性があるのでご注意ください。
 
-**At this time, we do not recommend using GitLab VCS support on CircleCI for production of critical work.**
+**現時点では、CircleCI での本番環境の重要な作業に GitLab VCS サポートを使用することはお勧めしません。**
 
-We appreciate your participation in the preview process and your collaboration as we work to create a seamless and stable experience.
+シームレスで安定したエクスペリエンスの提供に向け、皆様にプレビュープロセスにご参加いただき、ご協力いたければ幸いです。
 
-https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
+https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
 ====
 
 This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we're working on for future releases.
