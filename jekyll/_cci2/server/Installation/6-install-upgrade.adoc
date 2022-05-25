@@ -19,6 +19,7 @@ A successful deployment will update the UI. Unless noted in the release notes, u
 
 NOTE: We recommend that you do not skip releases.
 
+[#upgrade-server-v4]
 == Upgrade server v4.x
 
 . Before updating ensure there is a recent backup. For more information, see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#creating-backups[Backup and Restore] guide.
@@ -26,13 +27,13 @@ NOTE: We recommend that you do not skip releases.
 . Check the https://circleci.com/server/changelog/[change log] and make sure there are no actions you need to take before deploying a new version. 
 
 . Optionally, confirm what the update is going to do with https://github.com/databus23/helm-diff[Helm Diff]
-```
++
+[source,shell]
 helm diff upgrade server -f <your-yaml.values> <path-to-server-chart>
-```
 
 . Perform the upgrade
-```
++
+[source,shell]
 helm upgrade server -f <your-yaml.values> <path-to-server-chart>
-```
 
 . Deploy and run https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
