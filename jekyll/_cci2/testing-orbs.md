@@ -130,7 +130,6 @@ circleci local execute --job shellcheck/check
 
 The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored using the `exclude` parameter in your config.yaml file.
 
-Example:
 ```yaml
 version: 2.1
 
