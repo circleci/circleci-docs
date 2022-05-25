@@ -3,7 +3,8 @@ layout: classic-docs
 title: "CircleCI での Node.js アプリケーションの設定"
 short-title: "JavaScript"
 description: "CircleCI  での JavaScript と Node.js を使用したビルドとテスト"
-categories: [language-guides]
+categories:
+  - language-guides
 order: 5
 version:
   - Cloud
