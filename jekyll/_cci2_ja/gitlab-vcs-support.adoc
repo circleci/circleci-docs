@@ -9,9 +9,10 @@ version:
 :page-description: Learn how to integrate GitLab with CircleCI.
 :icons: font
 :toc: macro
+
 :toc-title:
 
-== Overview
+== 概要
 
 [IMPORTANT]
 ====
@@ -114,13 +115,13 @@ The following sections are areas of rapid development, and the current experienc
 The following sections on configuration and triggers are included so you can see what is being worked on and what functionality you can expect in the future.
 ====
 
-==== Configuration
+==== 設定ファイル入門ガイド
 
 Add a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
 
-==== Triggers
+==== トリガー
 
 Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
 
@@ -154,7 +155,7 @@ A standalone organization allows for managing users and projects independent of 
 
 To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app. More general information on organization settings in CircleCI can be found in the <<settings#,Settings>> document.
 
-=== People
+=== チーム
 
 Add or remove users, and manage user roles for the organization as well as user invites.
 
@@ -191,7 +192,7 @@ Contributors cannot edit organization settings such as contexts or plans, nor ca
 
 NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
 
-=== Self-hosted runners
+=== セルフホストランナー
 
 Self-hosted runners are currently being tested in GitLab preview at this time, and support is expected soon. If you would like more information about using self-hosted runners, visit the <<runner-overview#,Runner Overview>> page.
 
@@ -219,7 +220,7 @@ Organizations can limit user access to a project or projects, and not require an
 
 There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
 
-== Known issues
+== 既知の問題
 
 NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
 
