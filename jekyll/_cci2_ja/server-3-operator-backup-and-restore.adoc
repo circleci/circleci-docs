@@ -262,7 +262,7 @@ gcloud iam service-accounts create velero \
 ----
 +
 NOTE: Velero がインストールされたクラスタを複数実行している場合は、サービスアカウントに対して、上記の例で示している `velero` ではなく、具体的な名前を付けることをお勧めします。
-. 以下のコマンドを実行して、サービス アカウントが正常に作成されたことを確認します。
+. 以下のコマンドを実行して、サービスアカウントが正常に作成されたことを確認します。
 +
 [source,bash]
 ----
@@ -386,7 +386,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 以下の手順では、S3 互換オブジェクトストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
 また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
 
-これらの手順は、 これらの手順は、 https://velero.io/docs/v1.6/contributions/minio/[Velero ドキュメント] を元にしています。
+これらの手順は、 https://velero.io/docs/v1.6/contributions/minio/[Velero ドキュメント] を元にしています。
 
 === 手順 1 - `mc` クライアントの設定
 
