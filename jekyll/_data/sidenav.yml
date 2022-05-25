@@ -10,18 +10,22 @@ en:
           link: 2.0/about-circleci/
         - name: Concepts
           link: 2.0/concepts/
-        - name: Your First Green Build
-          link: 2.0/getting-started/
-        - name: Hello World
-          link: 2.0/hello-world/
-        - name: Using the Slack Orb
-          link: 2.0/slack-orb-tutorial/
         - name: FAQ
           link: 2.0/faq/
     - name: Onboarding
       children:
-        - name: YAML Config Intro
+        - name: YAML Configuration Intro
           link: 2.0/introduction-to-yaml-configurations/
+    - name: Beginner Tutorials
+      children:
+        - name: Configuration Tutorial
+          link: 2.0/config-intro/
+        - name: Your First Green Build
+          link: 2.0/getting-started/
+        - name: Hello World
+          link: 2.0/hello-world/
+        - name: Set up the Slack Orb
+          link: 2.0/slack-orb-tutorial/
     - name: Migration
       children:
         - name: Migration Introduction
