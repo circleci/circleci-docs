@@ -18,6 +18,10 @@ en:
           link: 2.0/slack-orb-tutorial/
         - name: FAQ
           link: 2.0/faq/
+    - name: Onboarding
+      children:
+        - name: YAML Config Intro
+          link: 2.0/introduction-to-yaml-configurations/
     - name: Migration
       children:
         - name: Migration Introduction
