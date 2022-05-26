@@ -27,78 +27,78 @@ GitLab バージョン管理システム (VSC) サポート (プレビュー) �
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
 ====
 
-このドキュメントでは GitLab プロジェクトを CircleCI と連携する方法を説明します。 CI/CD パイプラインを管理するための新しいコンセプトと方法を紹介します。 このドキュメントでは、既知の問題と今後のリリース予定もお知らせします。
+このドキュメントでは、GitLab プロジェクトを CircleCI と連携する方法を説明します。 CI/CD パイプラインを管理するための新しいコンセプトや方法も紹介します。 また、既知の問題や今後のリリース予定もお知らせします。
 
 == 手順 1: 登録
 
-GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 下記の新規ユーザーと既存ユーザーに向けた 2 つの説明をご覧ください。
+GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザー用の下記の 2 つの手順説明をお読みください。
 
-=== 新規 CircleCI ユーザー向け: CircleCI アカウントを作成し、最初の組織を作成します。  
+=== 新規 CircleCI ユーザー用: CircleCI アカウントを作成し、最初の組織を作成します。  
 
 . **メールで登録** オプションを選択し、https://circleci.com/signup/[CircleCI に登録します] (パスワードも作成します)。 
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
 NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
 +
-NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続も選択した場合、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
-. 次のページに、"Welcome to the GitLab VCS Support Preview" のメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、**Create Organization** をクリックします。
+NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、**Create Organization** をクリックします。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
 
 新しい組織を作成したら、 Web アプリのダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従い、新しいプロジェクトを作成します。
 
-=== 既存の CircleCI ユーザー向け: 新しい組織を作成します。
+=== 既存の CircleCI ユーザー用: 新しい組織を作成します。
 
 . https://app.circleci.com/[CircleCI Web アプリ] にログインします。
-. 組織名をクリックし、画面左上に組織切り替えメニューを開きます。 **Create New Organization** を選択します。
-. 次のページに、"Welcome to the GitLab VCS Support Preview" のメッセージが表示されます。 新しい組織の一意の名前を入力します。
+. 組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織の一意の名前を入力します。
 +
-NOTE: Welcome メッセージが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
+NOTE: Welcome メッセージが表示されない場合、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
 . **Create Organization** をクリックします。
 
 この新しい組織により、組織内のユーザーと GitLab プロジェクトを管理できます。 この組織は、まず <<plan-free#,**Free プラン**>> に置かれます。 後で他のプランにアップグレードできます。 この料金プランは、以前アカウントで設定した GitHub または Bitbucket 組織とは無関係です。
 
 新しい組織を作成したら、 組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従って新しい GitLab プロジェクトを設定します。
 
-NOTE: 既存の CircleCI ユーザーはメールアドレスとパスワードで登録することもできます。 新規メール/パスワードのアカウンを使った VCS (GitHub または Bitbucket) アカウントを新しいメール/パスワードに接続することを選択した場合、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することもできます。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
 
 == 手順 2: 新しいプロジェクトの作成
 
 . CircleCI Web アプリで、**Projects** に行き、 **Create Project** ボタンをクリックします。
-. プロジェクトの名前を入力します。
-. **Code Source** で、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 
+. プロジェクト名を入力します。
+. **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 
 +
-IMPORTANT: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは「保守担当者」またそれ以上の役割です。 アクセストークンを使用する場合、`api` スコープと `write_permissions` スコープを選択する必要があります。
+IMPORTANT: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは「保守担当者」以上の役割です。 アクセストークンを使用する場合、`api` スコープと `write_permissions` スコープを選択する必要があります。
 +
-**To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
+**OAuth 経由で GitLab に接続する** には、**Connect** ボタンをクリックします。 ブラウザーのウィンドウが開き、GitLab のサインインページに移動します。 GitLab で認証されたら、CircleCI の Create New Project ウィンドウにリダイレクトされます。
 +
-You have successfully connected to GitLab if there is a green checkmark and a note that says "CircleCI will listen to your code source for changes." You should also see a dropdown list of your GitLab repositories.
+緑色のチェックマークと "CircleCI will listen to your code source for changes." が表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-oauth.png[Successful GitLab connection via OAuth]
 +
-**To connect using an access token:** enter the access token in the field, and click the **Connect** button. You can use either a personal access token, or a project access token. Note that project access tokens are only available for certain GitLab subscriptions or license tiers. For more information, refer to the https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] and https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] documentation on GitLab.
+**アクセストークンを使って接続するには:** フィールドにアクセストークンを入力し、**Connect** ボタンをクリックします。 パーソナルアクセストークンまたはプロジェクトアクセストークンを使用できます。 プロジェクトアクセストークンは、特定の GitLab サブスクリプションやライセンス階層でのみ使用できます。 詳細については、GitLab のttps://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] と https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] を参照してください。
 +
-You have successfully connected to GitLab if you see the "Access token successful" note. You should also see a dropdown list of your GitLab repositories. The repositories available to set up will depend on what is associated with the personal or project access token you use.
+"Access token successful" というメッセージが表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。 セットアップできるリポジトリは、ご使用のパーソナル/プロジェクトアクセストークンに関連づけられてるものによって異なります。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.png[Successful GitLab connection using access token]
-. Select the repository you wish to set up, then click **Create Project**.
+. 設定するリポジトリを選択し、**Create Project** をクリックします。
 
-Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page.
+裏では、CircleCI が GitLab リポジトリ内に Webhook を登録しています。 これは、プロジェクトの作成に成功すると、リポジトリの Settings > Webhooks に移動し、確認することができます。
 
-== Step three - Trigger a project pipeline in CircleCI
+== 手順 3: CircleCI でプロジェクトパイプラインをトリガーする
 
-At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available.
+現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 現時点では、またCircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
 
-. If you have not already done so, create a `.circleci` directory at the root of your GitLab repository, and add a `config.yml` file in that directory.
+. まだお済みでない方は、GitLab リポジトリの一番上で `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
 +
-NOTE: If you are new to CircleCI, you may wish to get started with our <<hello-world#echo-hello-world-on-linux#,Hello World>> example, or take a look at some of our <<sample-config#,sample configurations>>. The <<configuration-reference#,Configuring CircleCI>> document is a full reference to the keys used in a `.circleci/config.yml` file.
-. Push changes to your GitLab repository. You should see a pipeline running for the project within the CircleCI web app.
+NOTE: CircleCI を初めて利用される方は、<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使って始めることも、<<sample-config#,サンプル設定>> をご覧いただくことも可能です。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われているキーをすべて参照することができます。
+. GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されているはずです。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pipeline.png[Successful pipeline run]
 
-== Project settings
+== プロジェクト設定
 
-Unlike GitHub or Bitbucket projects, the GitLab support preview introduces the concept of "standalone" projects that are not specific to a VCS.
+GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab サポート (プレビュー) では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
 A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
 
