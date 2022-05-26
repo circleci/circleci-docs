@@ -12,12 +12,11 @@ version:
 :toc: macro
 :toc-title:
 
-[#introduction]
-== Introduction
-
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at https://app.circleci.com/.
 
 Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web UI, but is an introduction to some of the information, options, and settings available.
+
+toc::[]
 
 [#dashboard-and-side-navigation]
 == Dashboard and side navigation
