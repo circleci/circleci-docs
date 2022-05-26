@@ -1,0 +1,66 @@
+---
+description: "A how-to guide for using selecting a workflow to run using pipeline parameters."
+version:
+- Cloud
+- Server v3.x
+document-type:
+- How-to
+---
+= Selecting a workflow to run using pipeline parameters
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run.
+
+The following example defaults to running the `build` workflow, but allows control of which other workflow to run using the API:
+
+```yaml
+version: 2.1
+
+parameters:
+  action:
+    type: enum
+    enum: [build, report]
+    default: build
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: ./run-tests.sh
+
+  report:
+    machine: true
+    steps:
+      - checkout
+      - run: ./create-report.sh
+
+workflows:
+  build:
+    when:
+      equal: [ build, << pipeline.parameters.action >> ]
+    jobs:
+      - build
+
+  report:
+    when:
+      equal: [ report, << pipeline.parameters.action >> ]
+    jobs:
+      - report
+```
+
+The `action` parameter will default to `build` on pushes to the project. Below is an example of supplying a different value to `action` using the API v2 [Trigger a New Pipeline]({{ site.baseurl }}/api/v2/#operation/triggerPipeline) endpoint to select a different workflow to run, in this example, the workflow named `report` would run. Remember to substitute [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) with your values.
+
+```shell
+curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Circle-Token: API_KEY' \
+  -d '{ "parameters": { "action": report } }'
+```
+
+For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
