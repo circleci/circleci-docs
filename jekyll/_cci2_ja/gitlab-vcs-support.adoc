@@ -27,40 +27,40 @@ GitLab バージョン管理システム (VSC) サポート (プレビュー) �
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
 ====
 
-This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we're working on for future releases.
+このドキュメントでは GitLab プロジェクトを CircleCI と連携する方法を説明します。 CI/CD パイプラインを管理するための新しいコンセプトと方法を紹介します。 このドキュメントでは、既知の問題と今後のリリース予定もお知らせします。
 
-== Step one - Sign up
+== 手順 1: 登録
 
-GitLab support preview is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
+GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 下記の新規ユーザーと既存ユーザーに向けた 2 つの説明をご覧ください。
 
-=== New CircleCI users: Create a CircleCI account and create your first organization
+=== 新規 CircleCI ユーザー向け: CircleCI アカウントを作成し、最初の組織を作成します。  
 
-. https://circleci.com/signup/[Sign up for CircleCI] using the **Sign up with Email** option (you will also create a password).
-. After you set an email and password, you will be taken to a screen with the option to connect GitLab, GitHub, or Bitbucket. Click **Connect** for GitLab.
+. **メールで登録** オプションを選択し、https://circleci.com/signup/[CircleCI に登録します] (パスワードも作成します)。 
+. メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
-NOTE: If you do not see the option to connect GitLab, please fill out this https://circleci.com/gitlab-vcs-support/[sign-up form].
+NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
 +
-NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used.
-. The next page should include a "Welcome to the GitLab VCS Support Preview" message. You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
+NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続も選択した場合、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" のメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、**Create Organization** をクリックします。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
 
-After you successfully create a new organization, you will be taken to the web app dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to create a new project.
+新しい組織を作成したら、 Web アプリのダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従い、新しいプロジェクトを作成します。
 
-=== Current CircleCI users: Create a new organization
+=== 既存の CircleCI ユーザー向け: 新しい組織を作成します。
 
-. Log in to the https://app.circleci.com/[CircleCI web app].
-. Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
-. The next page should include a "Welcome to the GitLab VCS Support Preview" message. Enter a unique name for your new organization.
+. https://app.circleci.com/[CircleCI Web アプリ] にログインします。
+. 組織名をクリックし、画面左上に組織切り替えメニューを開きます。 **Create New Organization** を選択します。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" のメッセージが表示されます。 新しい組織の一意の名前を入力します。
 +
-NOTE: If you do not see the welcome message, please fill out this https://circleci.com/gitlab-vcs-support/[sign-up form].
-. Click **Create Organization**.
+NOTE: Welcome メッセージが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
+. **Create Organization** をクリックします。
 
-This new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own <<plan-free#,**Free plan**>> to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account.
+この新しい組織により、組織内のユーザーと GitLab プロジェクトを管理できます。 この組織は、まず <<plan-free#,**Free プラン**>> に置かれます。 後で他のプランにアップグレードできます。 この料金プランは、以前アカウントで設定した GitHub または Bitbucket 組織とは無関係です。
 
-Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to set up a new GitLab project.
+新しい組織を作成したら、 組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従って新しい GitLab プロジェクトを設定します。
 
-NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
+NOTE: 既存の CircleCI ユーザーはメールアドレスとパスワードで登録することもできます。 新規メール/パスワードのアカウンを使った VCS (GitHub または Bitbucket) アカウントを新しいメール/パスワードに接続することを選択した場合、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
 
 == Step two - Create a new project
 
