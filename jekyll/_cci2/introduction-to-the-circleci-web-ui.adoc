@@ -4,7 +4,7 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= CircleCI Web UI Introduction
+= Introduction to the CircleCI Web UI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the basic features and settings of the CircleCI web UI.
@@ -20,7 +20,7 @@ Inside the application, you will find the status of builds, workflows and jobs, 
 
 == Dashboard and side navigation
 
-Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects.
+Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
 
@@ -57,6 +57,8 @@ Clicking the three dots (meatball menu) in the project row will allow you to ope
 image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
 **Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web UI. You can make changes to the config file and commit them. At the top of the text editor, you will see the project's branch you are committing the changes to (most often `main`).
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web UI]
 
 **Insights**: This is a link to the insight's page, which is detailed <<#insights,below>>.
 
