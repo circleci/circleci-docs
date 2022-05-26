@@ -167,7 +167,7 @@ workflows:
 
 
 
-2+| マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 See our https://circleci.com/docs/2.0/executor-intro/#section=configuration[execution environments documentation] for more information.
+2+| マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/2.0/executor-intro/#section=configuration[実行環境に関するドキュメント] をご覧ください。
 
 a|
 [source, yaml]
