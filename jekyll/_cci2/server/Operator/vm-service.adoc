@@ -11,15 +11,19 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI server's VM service controls how https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor (Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
+VM service controls how https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
 
-This section describes the available configuration options for VM service.
+This section describes the available configuration options for VM service. Refer to the default `values.yaml`` file for details on how to pre-scale virtual machines.
+
+#UPDATE THESE LINKS BELOW#
 
 toc::[]
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for https://circleci.com/docs/2.0/server-3-install-build-services/#eks[AWS] and https://circleci.com/docs/2.0/server-3-install-build-services/#gke[GCP].
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for  https://circleci.com/docs/2.0/server-3-install-build-services/#eks[AWS] and https://circleci.com/docs/2.0/server-3-install-build-services/#gke[GCP].
 
-See the default values.yaml file for details on how to pre-scale VMs.
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+
+CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
 
 == VM service settings
 You need to provide the hostname/IP for your VM service load balancer:
@@ -36,23 +40,25 @@ There is also an option to change the port used for VM service. The default is `
 == VM provider
 The following configuration options are for the VM provider: either AWS or GCP.
 
-=== AWS EC2
-You will need to add a section to your values.yaml file to configure your VM Service to work with AWS EC2. 
+=== AWS
+You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2. 
 
 ==== Authentication
-One of the following options is required. Either select "IAM Keys" and provide:
+One of the following options is required:
 
-* *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
-* *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
-NOTE: The Access Key and Secret
-Key used by VM Service differs from the policy used by object storage in the previous section.
+* Either, select "IAM Keys" and provide:
+** *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
+** *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
++
+NOTE: The Access Key and Secret Key used by VM Service differs from the policy used by object storage in the previous section.
 
-Or select "IAM role" and provide:
-
-* *Role ARN* (required): 
+* Or, select "IAM role" and provide:
+** *Role ARN* (required): 
++
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
 
-```
+[source,yaml]
+----
 vm_service:
   providers:
     ec2:
@@ -68,8 +74,7 @@ vm_service:
       secretKey: <secret-key>
       # or IRSA (IAM roles for service accounts)
       irsaRole: <role-arn>
-
-```
+----
 
 ==== Default AWS AMI list
 
@@ -95,19 +100,21 @@ The default AMIs for server v4.x are based on Ubuntu 20.04.
 "us-gov-west-1" "ami-8e2106ef"
 ----
 
-=== Google Cloud Platform
-You will need to add a section to your values.yaml file to configure your VM Service to work with Google Cloud Platform (GCP). 
+=== GCP
+You will need to add a section to your `values.yaml` file to configure VM Service to work with Google Cloud Platform (GCP). 
 
-WARNING: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
+==== Authentication
+
+TIP: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
 
-If you choose to use a *GCP Service Account JSON file*, use the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] for `service-account` below
+Choose one of the following options:
 
-Or
+* If you choose to use a *GCP Service Account JSON file*, use the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] for `service-account` below
+* If you choose to use *GCP IAM Workload Identity*, use the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server/installation/3-install-execution-environments[here] in point 2 and 3 for the `workloadIdentity` field below.
 
-If you choose to use *GCP IAM Workload Identity*, use the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[here] in point 2 & 3 for the `workloadIdentity` field below.
-
-```
+[source,yaml]
+----
 vm_service:
   enabled: true
   replicas: 1
@@ -125,9 +132,4 @@ vm_service:
       service_account: <service-account-json>
       # OR
       workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
-      
-```
-
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
-+
-NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+----
