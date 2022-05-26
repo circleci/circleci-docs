@@ -178,16 +178,16 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 ==== ロールと権限について
 
-CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内のロールとは無関係です。 各ユーザーごとに一つの組織ロール、管理者またはコントリビューターのいずれかの組織ロールを持つことができます。
+CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内のロールとは無関係です。 各ユーザーごとに 1 つの組織ロール (管理者またはコントリビューターのいずれか) を持つことができます。
 
-コントリビューターは、コンテキストやプランなどの組織設定を編集することも他のユーザーを招待することもできません。 組織のコントリビューターは、代わりに、コンテキストの表示、プロジェクトの作成や表示が可能です。管理者はユーザーの招待や、ロール設定のアップデートが可能です。
+コントリビューターは、コンテキストやプランなどの組織設定を編集することも他のユーザーを招待することもできません。 しかし、コンテキストの閲覧、プロジェクトの作成や閲覧が可能です。管理者は、ユーザーの招待やロール設定のアップデートが可能です。
 
-* 組織管理者: CircleCI を全体として管理します。ユーザーやプランを管理し、請求情報の更新やコンテキストの管理を行います。
-* 組織のコントリビューター: CircleCI 内で複数のプロジェクトの作成や管理を行いますが、組織設定の管理は求められません。
-* Org Viewer (coming soon): For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage.
-* Project Administrator (coming soon): For ensuring teams only have access to individual projects and not all projects across the organization. Project administrators, typically the team manager or lead, will have access to project settings.
-* Project Contributor (coming soon): For individual team members who are not required to manage project settings.
-* Project Viewer (coming soon): For users that might need to know the status of an individual project, but are not committing changes.
+* 組織管理者: CircleCI を全体として管理します。ユーザーやプランを管理し、請求情報の更新やコンテキストを管理するユーザーが対象です。
+* 組織コントリビューター: CircleCI 内で複数のプロジェクトの作成や管理を行いますが、組織設定の管理は求められないユーザーが対象です。
+* 組織ビューアー (近日追加予定): コードは提供せず、レポートの表示、プロジェクトのステータスの把握、プランの使用状況の確認が必要なサポートロールのユーザーが対象です。
+* プロジェクト管理者 (近日追加予定): チームが組織全体のすべてのプロジェクトにではなく、個々のプロジェクトにのみアクセスできるようにします。 プロジェクト管理者、通常はチーム管理者、またはチームリーダーはプロジェクト設定へのアクセス権があります。
+* プロジェクトコントリビューター (近日追加予定): プロジェクト設定が求められない個々のチームメンバーが対象です。
+* プロジェクトビューアー (近日追加予定): 各プロジェクトのステータスを知る必要がありますが、変更をコミットしないユーザーです。
 
 == Coming soon
 
