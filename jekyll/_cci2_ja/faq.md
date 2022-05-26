@@ -42,7 +42,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 
 はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/2.0/circleci-images/)をご覧ください。
 
-For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images) list.
+`machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/2.0/configuration-reference/#available-linux-machine-images)をご覧ください。
 
 実行環境やイメージに関する概要は、[Executor とイメージに関するガイド]({{site.baseurl}}/2.0/executor-intro/)をご覧ください。
 
@@ -113,7 +113,7 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストプラクティスは？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`最新の`タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/using-docker/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document.
+`最新の`タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/using-docker/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -454,7 +454,7 @@ CircleCI がリモート Docker インスタンスを起動するとき、プラ
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-You can use the [machine executor]({{ site.baseurl }}/2.0/configuration-reference/#machine) for testing local IPv6 traffic.  CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine) を利用できます。  CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
