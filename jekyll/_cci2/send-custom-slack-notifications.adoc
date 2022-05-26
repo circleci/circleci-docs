@@ -1,0 +1,120 @@
+---
+description: "A how to guide for sending custom Slack notifications for your jobs using CircleCI orbs."
+version:
+- Cloud
+- Server v3.x
+document-type:
+- How-to
+---
+= Send custom Slack notifications
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+* In order to use pipelines features and orbs you must use `version 2.1` config.
+* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
+* If you wish to remain using `version 2.0` config, or are using CircleCI server v2.x, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
+* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
+* Any items that appear within `< >` should be replaced with your own parameters.
+
+## Enabling custom Slack notifications in CircleCI jobs
+{: #enabling-custom-slack-notifications-in-circleci-jobs }
+
+Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
+
+### Notifying a Slack channel of pending approval
+{: #notifying-a-slack-channel-of-pending-approval }
+
+The [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
+
+```yaml
+version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
+workflows:
+  your-workflow:
+    jobs:
+      - slack/approval-notification:
+          message: Pending approval
+          webhook: webhook
+```
+In the above example, note that you first need to invoke the `circleci/slack@x.y.z` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
+
+There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
+
+### Notifying a Slack channel with custom messages
+{: #notifying-a-slack-channel-with-custom-messages }
+
+Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project.
+
+The example shown below details how you can create a custom message that will be delivered in a specific Slack channel for users.
+
+```yaml
+version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
+jobs:
+  build:
+    docker:
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'USERID1,USERID2,'
+          message: This is a custom message notification
+          webhook: webhook
+
+workflows:
+  your-workflow:
+    jobs:
+      - build
+```
+
+In this example, the Slack orb command `notify` is used, along with the following parameters to create a custom notification:
+
+1. Specify the `color` of the text in the message.
+2. Identify the recipients (`mentions`) of the message.
+3. Provide the text in the `message` you want delivered.
+4. Specify the `webhook` for the message – see this [guide](https://api.slack.com/incoming-webhooks) for more on creating Slack webhooks.
+
+### Sending a status alert at the end of a job based on success or failure
+{: #sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure }
+
+You may also send a status alert at the end of a job to your recipients. Note that this status alert must be the last step in a job.
+
+The example below shows how you can send a status alert at the end of a job.
+
+```yaml
+version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
+jobs:
+  build:
+    docker:
+      - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - run: exit 0
+      - slack/status:
+          fail_only: 'true'
+          mentions: 'USERID1,USERID2'
+          only_for_branch: your-branch-name
+          webhook: webhook
+```
+
+Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
+
+For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).

@@ -3,6 +3,8 @@ description: "A how to guide for using matrix jobs to simplify your CircleCI con
 version:
 - Cloud
 - Server v3.x
+document-type:
+- How-to
 ---
 = Using branch filters
 :page-layout: classic-docs

@@ -229,12 +229,14 @@ en:
           link: 2.0/sample-config/
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
-    - name: How To
+    - name: How To Guides
       children:
-        - name: Use Matrix Jobs
-          link: 2.0/how-to/matrix-jobs/
-        - name: Use Branch Filters
-          link: 2.0/how-to/branch-filter/
+        - name: Using Matrix Jobs
+          link: 2.0/using-matrix-jobs/
+        - name: Using Branch Filters
+          link: 2.0/using-branch-filters/
+        - name: Using Dynamic Configuration
+          link: 2.0/using-dynamic-configuration/
     
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -267,6 +269,12 @@ en:
       children:
         - name: Using the Slack Orb
           link: 2.0/slack-orb-tutorial/
+    - name: How To Guides
+      children:
+        - name: Deploy Service Update to AWS EC2
+          link: 2.0/deploy-service-update-to-aws-ec2/
+        - name: Send custom Slack notifications
+          link: 2.0/send-custom-slack-notifications/
 
 - name: Insights
   icon: icons/sidebar/insights.svg
