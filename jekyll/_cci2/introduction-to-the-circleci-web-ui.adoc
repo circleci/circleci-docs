@@ -12,12 +12,14 @@ version:
 :toc: macro
 :toc-title:
 
+[#introduction]
 == Introduction
 
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at https://app.circleci.com/.
 
 Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web UI, but is an introduction to some of the information, options, and settings available.
 
+[#dashboard-and-side-navigation]
 == Dashboard and side navigation
 
 Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
@@ -48,6 +50,7 @@ At the very bottom of the side navigation (you may have to scroll down), you wil
 
 The sections below describe some of the pages of the web application in more detail.
 
+[#projects]
 == Projects
 
 Projects associated with your organization will appear on the project's page. You will have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
@@ -62,6 +65,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Insights**: This is a link to the insight's page, which is detailed <<#insights,below>>.
 
+[#project-settings]
 === Project Settings
 
 **Overview**: Shows your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
@@ -86,6 +90,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
 
+[#insights]
 == Insights
 
 The insight's page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days. 
@@ -96,6 +101,7 @@ While the main insight's page gives you an overview of all projects, you can als
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_runs.png[Details of insights]
 
+[#self-hosted-runners]
 == Self-Hosted Runners
 
 The self-hosted runners page shows the inventory of resource classes and associated self-hosted runners. You may also create a new resource class from this page. Before this ability is available to you, you will need to accept the terms of use for self-hosted runners, which is found in the <<#organization-settings,organization settings>>. 
@@ -108,6 +114,7 @@ In this process you select the environment you are working with (Linux, macOS, e
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
+[#organization-settings]
 == Organization settings
 
 **Overview**: Shows your organization ID.
@@ -122,12 +129,14 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
+[#plan]
 == Plan
 
 If you have administrative privileges, the plan overview and upgrade page shows the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's <<plan-overview#,Plan documentation>>.
 
 Depending on which plan you have, you can also choose to share your plan, which lets any organization you belong to share and run builds on your current plan, and you can also transfer your plan to another organization.
 
+[#plan-usage]
 === Plan usage
 
 The plan usage section is a detailed overview of your usage by billing period. Here you can find usage information about projects, resource classes, users, network, storage and IP ranges. CircleCI uses a credits based system, and these overviews are meant to help you see how you are using credits, and what some potential cost saving measures could be.
@@ -140,12 +149,14 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_plan_network.png[Network usage]
 
 You can learn more about billing in the billing section of the <<faq#billing,FAQ>> page.
 
+[#usage-controls]
 === Usage controls
 
 Depending on your plan, you will also have the option to manage the retention periods of artifacts, workspaces, and caches. These settings allow you to keep your workflows clean, but can also help reduce storage costs.
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_plan_controls.png[Usage controls]
 
+[#user-settings]
 == User settings
 
 User settings can be found by scrolling to the bottom of the side navigation and clicking on your user icon.
