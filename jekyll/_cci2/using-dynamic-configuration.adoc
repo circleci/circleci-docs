@@ -21,8 +21,8 @@ have followed the steps outlined in the [Getting started]({{ site.baseurl }}/2.0
 
 The following examples of dynamic configuration usage are provided below:
 
-- [A basic example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- <<a-basic-example>>
+- <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>
 
 ### A basic example
 {: #a-basic-example }

@@ -1683,7 +1683,7 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see an example in the [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#use-matrix-jobs-to-run-multiple-os-tests)
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on [Using Matrix Jobs]({{site.baseurl}}/2.0/using-matrix-jobs).
 
 **Note**: In order to use the `matrix` stanza, you must use parameterized jobs.
 
