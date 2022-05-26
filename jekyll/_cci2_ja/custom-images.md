@@ -144,7 +144,7 @@ Successfully built e32703162dd4
 
 CircleCI でカスタム イメージを使用できるようにするには、イメージをパブリックの [Docker レジストリ](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker ハブ では無料でパブリック イメージを無制限に保存できるため、[Docker ハブ](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker ハブ を使用している場合は、既存のアカウントを使用できます。
 
-**Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/2.0/using-docker) you must have a public repository. If you want to keep your image private, refer to the [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) document for instructions.
+**注:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/ja/2.0/using-docker) で使用する場合は、パブリック リポジトリが必要です。 イメージをプライベートのままにする場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/2.0/private-images/)で手順を参照してください。
 
 この例では Docker ハブ を使用していますが、必要に応じて別のレジストリを使用することも可能です。 使用するレジストリに合わせて変更してください。
 
@@ -465,4 +465,4 @@ docker push username/ruby-node:0.1
 
 ## Docker イメージのキャッシュ
 {: #caching-docker-images }
-For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/2.0/using-docker#caching-docker-images).
+Docker イメージのキャッシュ方法については、[Docker イメージのキャッシュ]({{site.baseurl}}/ja/2.0/using-docker#caching-docker-images)を確認してください。
