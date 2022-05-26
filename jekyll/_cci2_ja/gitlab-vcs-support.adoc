@@ -62,13 +62,13 @@ NOTE: Welcome メッセージが表示されない場合は、こちらの https
 
 NOTE: 既存の CircleCI ユーザーはメールアドレスとパスワードで登録することもできます。 新規メール/パスワードのアカウンを使った VCS (GitHub または Bitbucket) アカウントを新しいメール/パスワードに接続することを選択した場合、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
 
-== Step two - Create a new project
+== 手順 2: 新しいプロジェクトの作成
 
-. In the CircleCI web app, navigate to **Projects**, then click the **Create Project** button.
-. Enter a name for your project.
-. Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**.
+. CircleCI Web アプリで、**Projects** に行き、 **Create Project** ボタンをクリックします。
+. プロジェクトの名前を入力します。
+. **Code Source** で、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 
 +
-IMPORTANT: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. If you use an access token, you need to select the `api` and `write_permissions` scopes.
+IMPORTANT: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは「保守担当者」またそれ以上の役割です。 アクセストークンを使用する場合、`api` スコープと `write_permissions` スコープを選択する必要があります。
 +
 **To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
 +
