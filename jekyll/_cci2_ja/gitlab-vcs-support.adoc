@@ -140,50 +140,50 @@ NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機
 
 === **高度な設定**
 
-- 冗長ワークフローの自動キャンセルを選択できます。 Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
-- You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the <<dynamic-config#,Dynamic Configuration>> guide.
-- At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+- 冗長ワークフローの自動キャンセルを選択できます。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+- CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、<<dynamic-config#,ダイナミックコンフィグ>> ガイドをお読みください。
+- 現時点では、**無料のオープンソース** 設定はサポートされていませんが、今後この機能を利用できるようにする予定があります。
 
-=== **SSH Keys**
+=== **SSH キー**
 
-When creating a project, an SSH key is created which is used to checkout code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects. For more information on SSH keys, please visit the <<add-ssh-key#,Adding an SSH Key to CircleCI>> document.
+プロジェクトを作成する場合、 SSH キーが作成され、リポジトリからコードをチェックアウトするために使用されます。 作成した各設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするために新しい SSH キーが生成されます。 今回、GitLab プロジェクトには **追加 SSH キー** のみが適用されます。 SSH キーに関する詳細は、<<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
 
-== Organization settings
+== 組織設定
 
-The GitLab preview also introduces the concept of "standalone" organizations, which are not tied to a VCS.
+GitLab  (プレビュー) には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
 
-A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS.
+スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
-To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app. More general information on organization settings in CircleCI can be found in the <<settings#,Settings>> document.
+組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。 CircleCI の組織設定に関する一般的な情報は、<<settings#,設定>> ドキュメントを参照してください。
 
 === チーム
 
-Add or remove users, and manage user roles for the organization as well as user invites.
+ユーザーを追加または削除し、組織のユーザーロールやユーザーの招待を管理します。
 
-NOTE: You must have at least one org administrator. If you try to remove the last org administrator, you will get an error.
+NOTE: 少なくとも１名の組織管理者が必要です。 最後の組織管理者を削除しようとすると、エラーになります。
 
-==== Inviting your first team members
+==== 最初のチームメンバーを招待する
 
-Upon creating a new organization, you also have the option to invite team members from the dashboard. Alternatively, you may invite team members from the **People** section within **Organization Settings**.
+新しい組織を作成したら、オプションでダッシュボードからチームメンバーを招待することもできます。 代わりに、 **Organization Settings** の **People** のセクションからチームメンバーを招待することもできます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-people.png[People section under Organization Settings]
 
-. Click the **Invite** button.
-. Enter the email address of the user you wish to invite, and select the appropriate role. You may enter multiple addresses at once, if you wish to assign these users the same role.
+. **Invite** ボタンをクリックします。
+. 招待したいユーザーのメールアドレスを入力し、適切なロールを選択します。 複数のユーザーに同じロールをアサインする場合は、複数のアドレスを同時に入力できます。
 +
-Organization administrator as well as organization contributor roles are currently available. Project-specific roles will be coming soon. For more information on roles and permissions, refer to the <<#about-roles-and-permissions,next section>>.
-. An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
+現在、組織管理者ロールと組織のコントリビューターロールがあります。 プロジェクト固有のロールは間もなく追加されます。 ロールや権限の詳細については、<<#about-roles-and-permissions,次のセクション>> を参照してください。
+. 招待されたユーザーは、招待を受けるためのリンクが含まれたメール通知 (`noreply@circleci.com` から送信) を受け取ります。
 +
-If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
+そのユーザーが CircleCI アカウントを持っていない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちのユーザーは、組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
 
-==== About roles and permissions
+==== ロールと権限について
 
-User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_ or _contributor_.
+CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内のロールとは無関係です。 各ユーザーごとに一つの組織ロール、管理者またはコントリビューターのいずれかの組織ロールを持つことができます。
 
-Contributors cannot edit organization settings such as contexts or plans, nor can they invite users. Org contributors can, however, view contexts, and create and view projects Administrators are able to invite users and update role settings.
+コントリビューターは、コンテキストやプランなどの組織設定を編集することも他のユーザーを招待することもできません。 組織のコントリビューターは、代わりに、コンテキストの表示、プロジェクトの作成や表示が可能です。管理者はユーザーの招待や、ロール設定のアップデートが可能です。
 
-* Org Administrator: For those managing CircleCI as a whole—managing users, managing plans, updating billing information, and managing contexts.
-* Org Contributor: For users that might create and administer multiple projects within CircleCI, but are not required to manage organization settings.
+* 組織管理者: CircleCI を全体として管理します。ユーザーやプランを管理し、請求情報の更新やコンテキストの管理を行います。
+* 組織のコントリビューター: CircleCI 内で複数のプロジェクトの作成や管理を行いますが、組織設定の管理は求められません。
 * Org Viewer (coming soon): For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage.
 * Project Administrator (coming soon): For ensuring teams only have access to individual projects and not all projects across the organization. Project administrators, typically the team manager or lead, will have access to project settings.
 * Project Contributor (coming soon): For individual team members who are not required to manage project settings.
