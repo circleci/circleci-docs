@@ -655,7 +655,7 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
 2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数`HEROKU_APP_NAME` と `HEROKU_API_KEY`として追加します。 {% include snippets/env-var-or-context.md %}
 
-3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-intro/).
+3. `.circleci/config.yml` で、デプロイジョブを作成し、[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-intro/)を追加します。
 
 4. デプロイジョブにステップを追加し、コードをチェックアウトしデプロイします。 デプロイしたいブランチを指定します。この例では、main ブランチを指定し、`git push` コマンドを使ってデプロイします。
 
