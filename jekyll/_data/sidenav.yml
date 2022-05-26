@@ -207,7 +207,7 @@ en:
 - name: Configuration
   icon: icons/sidebar/configure.svg
   children:
-    - name: Configuration Overview
+    - name: Overview
       children:
         - name: Configuration Introduction
           link: 2.0/config-intro/
