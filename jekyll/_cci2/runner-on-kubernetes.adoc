@@ -85,7 +85,7 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 
 | `+runnerToken+`   | -         | Y         | The token you created for your self-hosted runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
-| `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI server installations.
+| `+agentVersion+`  | -         | N         | The `circleci-launch-agent` version to pin. This is only used for CircleCI server installations.
 
 | `+env+`           | -         | N         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
 
