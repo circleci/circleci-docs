@@ -100,46 +100,47 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pip
 
 GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab サポート (プレビュー) では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
-A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
+プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルは、リポジトリ内の '.circleci/config.yml' ファイルを含む (ただしこれらに限定されない) パイプラインの定義です。
 
-A project can have one or more **triggers**, which are events from a source of change, including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
+プロジェクトには 1 つまたは複数の **トリガー** を含めることができます。トリガーは、VCS を含む (ただしこれに限定されない) 変更のソースからのイベントです。
+ トリガーにより、パイプラインの開始に使う設定ファイルが決まります。
 
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab. To read more about other settings you can enable for your projects, refer to the <<settings#,Settings>> document.
+下記の設定は、プロジェクト内で **Project Settings**  ボタンをクリックすると表示されます。 この時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
 
-=== Project settings in active development
+=== アクティブな開発におけるプロジェクト設定
 
 [CAUTION]
 ====
-The following sections are areas of rapid development, and the current experience does not reflect the desired functionality. At this time, we do not suggest manually configuring **configurations** and **triggers**. Please follow the <<#step-two-create-a-new-project,onboarding steps for new projects>> outlined earlier in this document.
+下記は、迅速な開発についてのセクションであり、現在のエクスペリエンスには必要な機能が反映されていません。 この時点では、手動による **設定ファイル** と **トリガー** の設定はお勧めしていません。 このドキュメントで先述した <<#step-two-create-a-new-project,新しいプロジェクトのオンボード手順>> に従ってください。 
 
 The following sections on configuration and triggers are included so you can see what is being worked on and what functionality you can expect in the future.
 ====
 
-==== 設定ファイル入門ガイド
+==== 設定ファイル
 
-Add a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
+プロジェクトに設定ソースを追加します。 GitLab を接続する上記の手順に従った場合、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップすることができます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
 
 ==== トリガー
 
-Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
+どの設定ソースがパイプラインを開始するかを指定するトリガーを追加します。 GitLab を接続する上記の手順に従った場合、GitLab で設定ソースとして設定されたトリガーが自動的に追加されています。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-triggers.png[Trigger setup page]
 
-Triggers and trigger rules determine how CircleCI handles events from the source of change, in this case, GitLab.
+トリガーとトリガールールにより、CircleCI が変更のソース (この場合はGitLab) からのイベントをどのように処理するかが決まります。
 
-When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
+トリガーが作成されると、CircleCI は GitLab に Webhook を登録します。 GitLab からのプッシュイベントは CircleCI に送信されます。 CircleCI はその後、イベントデーターを使って、パイプラインを実行すべきか_どうか_ を決定し、実行する場合、_どの_  パイプラインを実行すべきかを決定します。
 
-In addition to a configuration source, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repo.
+設定ソースに加えて、各トリガーには Webhook の URL や、このシナリオでは、CircleCI が作成した GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するには、GitLab 内でWebhook URLと GitLab トークンを使用して、Webhook をセキュアに登録します。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-edit-trigger.png[Trigger details]
 
-NOTE: Please also note the differences in functionality for the project settings below in the GitLab preview.
+NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機能の違いにも注意してください。
 
-=== **Advanced**
+=== **高度な設定**
 
-- You can choose to auto-cancel redundant workflows. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
+- 冗長ワークフローの自動キャンセルを選択できます。 Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the <<dynamic-config#,Dynamic Configuration>> guide.
 - At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
 
