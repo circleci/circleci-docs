@@ -1,12 +1,12 @@
 ---
 
 version:
-- Cloud
+- クラウド
 ---
-= GitLab Support Preview Documentation
+= GitLab サポートプレビューに関するドキュメント
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to integrate GitLab with CircleCI.
+:page-description: GitHub と CircleCI の連携方法について説明します。
 :icons: font
 :toc: macro
 
