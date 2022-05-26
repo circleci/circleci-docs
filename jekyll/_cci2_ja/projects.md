@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Projects Overview"
+title: "プロジェクトの概要"
 description: "Description of projects in CircleCI"
 version:
   - クラウド
