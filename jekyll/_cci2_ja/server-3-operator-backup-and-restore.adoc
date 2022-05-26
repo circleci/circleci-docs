@@ -9,7 +9,7 @@ version:
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI Server インスタンスのデータと状態のバックアップを行い復元する方法に関する推奨事項を説明します。
+:page-description: このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 :icons: font
 :toc: macro
 
@@ -23,7 +23,7 @@ _バックアップと復元は、CircleCI Server v3.1.0 以上で利用でき�
 
 CircleCI Server の運用と管理においては、別のクラスタへの移行や深刻な事象からの復元が必要な事態を想定して、バックアップを維持し、システムを復元する方法を検討する必要があります。
 
-このドキュメントでは、CircleCI Server インスタンスのデータと状態のバックアップを行い復元する方法に関する推奨事項を説明します。
+このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 
 CircleCI Server は、 https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
 つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。
@@ -49,7 +49,7 @@ CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して�
 
 - `gcloud` と `gsutil` がインストール済みであること。 これらは両方とも Google Cloud SDK に含まれており、SDK をインストールすることでセットアップできます(https://cloud.google.com/sdk/docs/[こちらのドキュメント]を参照してください)。
 
-詳細については、Velero のhttps://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ]を参照してください。
+詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ] を参照してください。
 
 以下で、AWS と GCP のそれぞれで CircleCI Server 3.x のバックアップを作成する手順について説明します。
 
@@ -495,7 +495,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 image::kots-admin-navbar-snapshot-option.png[KOTS Navbar]
 
-このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、<<troubleshooting-backups-and-restoration, トラブルシューティング>> を参照してください。
+このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、 <<troubleshooting-backups-and-restoration, トラブルシューティング>> を参照してください。
 
 === オプション 1 - KOTS CLI を使用したバックアップ作成
 
