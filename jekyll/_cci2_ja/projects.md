@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "プロジェクトの概要"
-description: "Description of projects in CircleCI"
+description: "CircleCI プロジェクトについての説明"
 version:
   - クラウド
   - Server v3.x
@@ -9,7 +9,7 @@ version:
 ---
 
 
-A CircleCI project shares the name of the associated code repository in your [version control system]({{ site.baseurl }}/2.0/gh-bb-integration/) (VCS). CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
+CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/ja/2.0/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
 
 プロジェクトダッシュボードで、以下のいずれかを実行します。
 * VCS で所有者になっているプロジェクトを_セットアップ_する.
@@ -44,5 +44,5 @@ A CircleCI project shares the name of the associated code repository in your [ve
 ## 次のステップ
 {: #next-steps }
 
-* Follow our guide to [Creating a Project in CircleCI]({{ site.baseurl }}/2.0/create-project/).
-* Learn more about CircleCI Pipelines in the [Pipelines Overview]({{ site.baseurl }}/2.0/create-project/).
+* 詳細については、[CircleCI でのプロジェクトの作成]({{ site.baseurl }}/ja/2.0/create-project/)を参照してください。
+* CircleCI のパイプラインの詳細については、[パイプラインの概要]({{ site.baseurl }}/ja/2.0/create-project/)を参照してください。
