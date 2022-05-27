@@ -31,7 +31,7 @@ CircleCI のジョブはステップの集まりです。 ジョブ内のステ�
 
 Docker Executor を使用する場合、`docker` キーの下に記載されるイメージによりジョブで開始するコンテナを指定します。 Docker Executor では、Docker のすべてのパブリックイメージを使用できますが、CircleCI では様々なユースケースに役立つ CircleCI イメージを提供しています。 使用できる CircleCI イメージや VM イメージのフルリストは、[CircleCI Developer Hub](https://circleci.com/developer/images)でご確認いただけます。
 
-See the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/) document for a comparison of the different executor types, and links to further information for each option.
+[実行環境の概要]({{ site.baseurl }}/2.0/executor-intro/)のページで、各 Executor タイプの比較やオプションの詳細説明へのリンクをご確認ください。
 
 ## ステップの概要
 {: #steps-overview }
