@@ -337,7 +337,7 @@ en:
         - name: Ruby
           link: 2.0/language-ruby/
         - name: Other supported languages
-          link: 2.0/tutorials
+          link: 2.0/demo-apps/
 
     - name: Databases
       children:
