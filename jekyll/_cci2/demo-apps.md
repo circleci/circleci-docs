@@ -38,7 +38,7 @@ Use the tutorial associated with your platform to learn about the customization 
 
 Platform Guide | Description
 ----|----------
-[Linux Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/">Linux Project Tutorial) | Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
+[Linux Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/) | Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
 [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) | Full example of setting up an iOS project in CircleCI.
 [Android Project Tutorial]({{ site.baseurl }}/2.0/language-android/) | Full example of setting up an Android project in CircleCI.
 [Windows Project Tutorial]({{ site.baseurl }}/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI.
