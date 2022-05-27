@@ -13,11 +13,8 @@ document-type:
 :toc: macro
 :toc-title:
 
-## Dynamic Configuration
-{: #dynamic-configuration }
-
-This section assumes you have already read the [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config) section and
-have followed the steps outlined in the [Getting started]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci) guide.
+This section assumes you have already read the <<dynamic-config#,Dynamic Configuration>> page and
+have followed the steps outlined in the <<dynamic-config#getting-started-with-dynamic-config-in-circleci,Getting Started with Dynamic Configuration>> section.
 
 The following examples of dynamic configuration usage are provided below:
 
