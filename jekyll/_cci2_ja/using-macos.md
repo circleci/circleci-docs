@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using the macOS execution environment"
-description: "Learn how to configure a your jobs to run in the macOS execution environment."
+title: "macOS 実行環境の使用"
+description: "macOS 実行環境で実行するジョブの設定方法を説明します。"
 version:
   - クラウド
   - Server v3.x
@@ -53,4 +53,4 @@ macOS VM のストレージ容量は、リソースクラスや使用される X
 
 <sup>(1)</sup>このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。
 
-<sup>(2)</sup> _Exception: Xcode 12.0.1, 12.4.0 and 12.5.1 have a minimum 100GB of available storage._
+<sup>(2)</sup>例外: Xcode 12.0.1、12.4.0、および 12.5.1 の最小ストレージ容量は 100GB です。
