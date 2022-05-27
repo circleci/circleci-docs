@@ -24,6 +24,7 @@ Here are some basic resources to get you started:
 
 NOTE: If you have Premium or Advanced Support, please reach out to customersuccess@circleci.com for a more tailored migration plan with Gantt chart, custom trainings etc.
 
+[#migrating-projects]
 == Migrating projects
 
 Any Jenkins project can be migrated to CircleCI using the following phases, which are expanded upon in the sections below:
@@ -34,6 +35,7 @@ Any Jenkins project can be migrated to CircleCI using the following phases, whic
 - Testing
 - Migration
 
+[#migration-timelines]
 === Migration timelines
 
 If you are migrating a simple project in which you just need to run a few scripts and tests, the timeline would be roughly:
@@ -48,29 +50,34 @@ For complex projects with a large-scale test suite migration and large workflows
 -   5 projects: ~4 months
 -   10 projects: ~9 months+
 
+[#assessment-phase]
 == Assessment phase
 
 The first phase in our journey is the Assess phase. This is where you’ll take stock of your current landscape, and understand the differences between CircleCI functionality and that of your current CI tool.
 
-=== Things consider during this phase:
+Some things consider during this phase:
 
 - <<orbs-intro,#Orbs>> as an alternative to, for example, Jenkins Plugins
 - CircleCI YAML <<configuration-reference#,Configuration Reference>>
 - <<executor-intro#,Execution Environments>>
 - <<collect-test-data#,Testing>>
 
+[#planning-phase]
 ==  Planning phase
 
 Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as is described on the <<first-steps#,Sign Up and Try CircleCI>> page. 
 
 If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as is described https://circleci.com/docs/2.0/server-3-install-prerequisites/[here].
 
+[#preparation-phase]
 == Preparation phase
 
+[#prep-your-team]
 === Prep your team
 
 With your plan and estimated timelines in place, start socializing the details of your migration with stakeholders, and teams who will be impacted, so your users can get started smoothly with minimal disruption to their work. It is best to establish a communications cadence for when, and how often, you will be communicating updates so teams are informed and prepared for the change.
 
+[#build-your-runbook-and-timeline]
 === Build your runbook and timeline
 
 Put together a runbook or step-by-step checklist to cover: 
@@ -82,6 +89,7 @@ Put together a runbook or step-by-step checklist to cover:
 
 Document which steps are dependent on each other, and which have the potential to become blockers. At the end of your runbook, include a mitigation plan with owners in case you need to roll anything back.
 
+[#test-phase]
 == Test phase
 
 In this phase you will: 
@@ -90,14 +98,17 @@ In this phase you will:
 * Figure out how long the migration will take 
 * Uncover any issues before the production migration
 
+[#test-migration]
 === Test migration
 
 Do a migration of a smaller, non-mission-critical project as a first step to minimize impact and build confidence in the migration process.
 
+[#user-acceptance-testing]
 === User acceptance testing
 
 Part of the test migration is conducting User Acceptance Testing (UAT) so your end users can ensure that the project works on CircleCI as expected. Through this process you can uncover any issues that will impact your end users and help your teams prepare to work with CircleCI.
 
+[#communicate-your-plan]
 === Communicate your plan
 
 With final timelines and owners in place, communicate the official plan to your organization. Things to include in your communications are:
@@ -110,10 +121,12 @@ With final timelines and owners in place, communicate the official plan to your 
    
 Keep in mind that there may be issues that occur during the migration that you need to troubleshoot, so call out an adjustment period to your end users to get everything cleaned up and working as planned.
 
+[#migration-phase]
 == Migration phase
 
 In this phase you will resolve any last-minute issues, run your project migration, and move your users and data over to CircleCI. Be sure you have completed the plan, prep and test phases before beginning this phase.
 
+[#next-steps]
 == Next steps
 
 In the following sections we provide helpful guides and tips for migrating your CI/CD pipelines to CircleCI.
