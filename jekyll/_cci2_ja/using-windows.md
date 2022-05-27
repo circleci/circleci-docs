@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using the Windows execution environment"
-description: "Learn how to configure a your jobs to run in the Windows execution environment."
+title: "Windows 実行環境の使用"
+description: "Windows 実行環境で実行するジョブの設定方法を説明します。"
 version:
   - クラウド
   - Server v3.x
