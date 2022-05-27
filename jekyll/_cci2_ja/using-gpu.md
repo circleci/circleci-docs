@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using the GPU execution environment"
-description: "Learn how to configure a your jobs to run in the GPU execution environment."
+title: "GPU 実行環境の使用"
+description: "GPU 実行環境で実行するジョブの設定方法を説明します。"
 version:
   - クラウド
   - Server v3.x
@@ -39,4 +39,4 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-Customers using CircleCI server v2.x can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server]({{ site.baseurl }}/2.0/gpu/).
+CircleCI Server v2.x では、VM サービスを設定することで GPU 対応の Machine Executor を使用できます。 詳細は、[サーバー GPU Executor ]({{ site.baseurl }}/ja/2.0/gpu/)をご確認ください。
