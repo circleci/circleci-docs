@@ -84,7 +84,7 @@ Organizations on the free plan are given free credits to use on open source proj
 {: #in-the-docs }
 {:.no_toc}
 - [Concepts]({{site.baseurl}}/2.0/concepts/) for basic concepts of CI/CD pipeline management
-- [Tutorials]({{site.baseurl}}/2.0/tutorials/ ) for platform specific tutorials
+- [Support Languages Guide]({{site.baseurl}}/2.0/demo-apps/) for platform specific tutorials
 
 ### On CircleCI Academy:
 {: #on-circleci-academy }

@@ -76,4 +76,4 @@ Scala and `sbt` build, test, and release with three workflows | **Arweave4s** is
 ## See also
 {: #see-also }
 
-Refer to [Tutorials and Sample Apps]({{ site.baseurl }}/2.0/tutorials/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in 11 different languages.
+Refer to [Supported Languages Guide]({{ site.baseurl }}/2.0/demo-apps/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in several different languages.
