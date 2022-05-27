@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using the Arm execution environment"
-description: "Learn how to configure a your jobs to run in the Arm execution environment."
+title: "Arm 実行環境の使用"
+description: "Arm 実行環境で実行するジョブの設定方法を説明します。"
 redirect_from: /2.0/arm-resources/
 version:
   - クラウド
@@ -125,10 +125,10 @@ workflows:
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
 * Server 3.xでは、VMサービスにEC2プロバイダ を使用している場合のみ、Armリソースを利用できます。 これは、GCP には Arm インスタンスが用意されていないためです。
 
-### M1 Mac Support
+### M1 Mac のサポート
 {: #m1-mac-support }
 
-Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. "環境のスピンアップ" ジョブにはグリーン表示されますが、以下のメッセージが表示されます。
+M1 Mac でビルドした Docker イメージは、デフォルトでは CircleCI の標準のプラットフォームとの互換性がありません。 "環境のスピンアップ" ジョブにはグリーン表示されますが、以下のメッセージが表示されます。
 
 ```shell
 WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
