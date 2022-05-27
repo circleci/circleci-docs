@@ -340,6 +340,8 @@ jobs:
 
 **設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
+* `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
@@ -1458,8 +1460,7 @@ workflows:
 
 **注:**
 
-- `only` を指定した場合、一致するブランチでジョブが実行されます。
-- IP アドレスの範囲機能は現在、有料プランのお客様にオープンプレビューでご利用いただけます。 具体的な料金や詳細については、機能の一般公開時にお知らせします。
+- IP アドレスの範囲機能をご利用いただくには、有料の [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のご契約が必要です。
 
 ## **`workflows`**
 {: #workflows }
@@ -1535,12 +1536,11 @@ workflows:
 
 `branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
 
-branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
+Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - `ignore` を指定した場合、一致するブランチではジョブは実行されません。
-- `only` と `ignore` のいずれも指定していない場合、すべてのブランチでジョブが実行されます。
-- `only` と `ignore` の両方を指定した場合、`ignore` よりも `only` が先に処理されます。
+- `only` と `ignore` のどちらも指定していない場合、全てのブランチでジョブを実行します。 If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
 
 | キー       | 必須 | タイプ            | 説明                     |
 | -------- | -- | -------------- | ---------------------- |

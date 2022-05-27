@@ -36,12 +36,15 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 - ジョブ
 - インサイト
 
-**注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
+**注:** CircleCI API v2 の一部は現在も "プレビュー中" です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
+
+現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+{: class="alert alert-info"}
 
 ## API v2 の利用開始
 {: #getting-started-with-the-api-v2 }
 
-CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。 これは、プロジェクトのタイプ、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 この短縮形は API v2 でサポートされるようになりました。 組織は、お使いのバージョン管理システムにおけるユーザー名または組織名です。
+CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。この短縮形は API v2 でサポートされるようになりました。 組織は、お使いのバージョン管理システムにおけるユーザー名または組織名です。
 
 API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクト スラッグは次のような形式をとります。
 
@@ -56,7 +59,7 @@ CircleCI API v2 では、[パーソナル API トークン]({{site.baseurl}}/2.0
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
-**注:** パスワードがないことを示すために `:` が記述されています。 **注:** [パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) は、現在 API v2 ではサポートされていません。 [プロジェクトトークン]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+**注:** パスワードがないことを示すために `:` が記述されています。
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }

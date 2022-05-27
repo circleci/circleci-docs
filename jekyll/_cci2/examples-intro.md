@@ -171,4 +171,4 @@ jobs:
 ## See also
 {: #see-also }
 
-Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
+Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-intro/) used in the examples above.

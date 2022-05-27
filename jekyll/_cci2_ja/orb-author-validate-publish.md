@@ -8,11 +8,17 @@ version:
 
 ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は、[Orb のオーサリングプロセス]({{site.baseurl}}/ja/2.0/orb-author)を参照してください。
 
+## 名前空間の作成
+{: #create-a-namespace }
+
 1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を入力して実行してください。
 ```shell
 circleci namespace create <my-namespace> github <my-gh-org>
 ```
 **注**: CircleCI CLI から名前空間を作成する場合は、必ず VCS プロバイダーを指定してください。
+
+## Orb の作成
+{: #create-your-orb }
 
 1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。 **[パブリック]({{site.baseurl}}/ja/2.0/orb-intro/#public-orbs)** Orb を作成する場合:</li> </ol>
 ```shell
@@ -38,10 +44,16 @@ commands:
             - run: echo "Hello, << parameters.to >>"
 ```
 
+## Orb のバリデーション
+{: #validate-your-orb }
+
 1. CLI を使用して、Orb コードをバリデーションします。
 ```
 circleci orb validate /tmp/orb.yml
 ```
+
+## Orb のパブリッシュ
+{: #publish-your-orb }
 
 1. 開発版の Orb をパブリッシュします。
 ```shell
@@ -58,6 +70,9 @@ circleci orb publish promote <my-namespace>/<my-orb-name>@dev:first patch
 circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 ```
 
+## 利用可能な Orb の一覧表示
+{: #list-available-orbs }
+
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
 **[パブリック]({{site.baseurl}}/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
@@ -69,5 +84,8 @@ circleci orb list <my-namespace>
 ```shell
 circleci orb list <my-namespace> --private
 ```
+
+## 次のステップ
+{: #next-steps }
 
 `circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。
