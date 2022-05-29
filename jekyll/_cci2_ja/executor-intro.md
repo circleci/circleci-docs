@@ -24,7 +24,7 @@ CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、mac
   <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
-Docker 実行環境にアクセスするには、`docker` Executor を使ってイメージを指定します。 CircleCI がビルドした CircleCI イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=docker) を参照してください。
+Docker 実行環境にアクセスするには、`docker` Executor を使ってイメージを指定します。 CircleCI がビルドした CircleCI イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=docker) を参照してください。
 
 ```yml
 jobs:
@@ -44,7 +44,7 @@ Docker 実行環境に関する詳細は、[Docker の使用]({{ site.baseurl }}
 Ubuntu 14.04 および 16.04 マシンイメージはすでにサポートが終了し、[2022 年 5 月 31 日に提供を終了します。](https://circleci.com/blog/ubuntu-14-16-image-deprecation/) [14.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/14.04-to-20.04-migration/) および [16.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/16.04-to-20.04-migration/) イメージからの移行をお願いいたします。
 {: class="alert alert-warning"}
 
-Linux VM 実行環境にアクセスするには、`machine` Executor を使って Linux イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+Linux VM 実行環境にアクセスするには、`machine` Executor を使って Linux イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.machine.Cloud}
 ```yml
@@ -71,12 +71,12 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Linux VM 実行環境に関する詳細は、[Linux 仮想マシンを使用する]({{ site.baseurl }}/ja/2.0/using-linuxvm)のページを参照してください。
+Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{ site.baseurl }}/ja/2.0/using-linuxvm)のページを参照してください。
 
 ## macOS
 {: #macos }
 
-macOS 実行環境にアクセスするには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/machine/image/macos) を参照してください。
+macOS 実行環境にアクセスするには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
 
 ```
 jobs:
@@ -89,7 +89,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-macOS 実行環境についての詳細は、「Executor タイプの選び方」の [macOS を使用する]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos) のページをご覧ください。
+macOS 実行環境についての詳細は、「Executor タイプの選び方」の [macOS の使用]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos) のページをご覧ください。
 
 ## Windows
 {: #windows }
@@ -159,12 +159,12 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Windows 実行環境に関する詳細は、[Windows 実行環境を使用する]({{ site.baseurl }}/ja/2.0/using-windows)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
+Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({{ site.baseurl }}/ja/2.0/using-windows)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
 
 ## GPU
 {: #gpu }
 
-GPU 実行環境にアクセスするには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) を参照してください。
+GPU 実行環境にアクセスするには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.gpublock.Linux}
 ```yaml
@@ -206,11 +206,11 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/2.0/using-gpu) page.
+GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/2.0/using-gpu)のページを参照してください。
 
 ## Arm
 
-To access the Arm execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
+Arm 実行環境にアクセスするには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -271,11 +271,11 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/2.0/using-arm) page.
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/2.0/using-arm)のページを参照してください。
 
 
 ## 次のステップ
 {: #next-steps }
 
-* Read more about [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) for the Docker execution environment.
-* CircleCI Academy の [ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021) を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。
+* Docker 実行環境用の[ビルド済み CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)に関する詳細をお読みください。
+* CircleCI Academy の[ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021)を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。
