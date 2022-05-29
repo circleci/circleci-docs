@@ -113,7 +113,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 ====
 下記は、迅速な開発についてのセクションであり、現在のエクスペリエンスには必要な機能が反映されていません。 この時点では、手動による **設定ファイル** と **トリガー** の設定はお勧めしていません。 このドキュメントで先述した <<#step-two-create-a-new-project,新しいプロジェクトのオンボード手順>> に従ってください。 
 
-The following sections on configuration and triggers are included so you can see what is being worked on and what functionality you can expect in the future.
+下記の設定ファイルとトリガーに関するセクションでは、現在の作業内容と今後どのような機能が期待できるかをご確認いただけます。
 ====
 
 ==== 設定ファイル
@@ -189,7 +189,7 @@ CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内の�
 * プロジェクトコントリビューター (近日追加予定): プロジェクト設定が求められない個々のチームメンバーが対象です。
 * プロジェクトビューアー (近日追加予定): 各プロジェクトのステータスを知る必要がありますが、変更をコミットしないユーザーです。
 
-== Coming soon
+== 近日公開予定
 
 NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
 
