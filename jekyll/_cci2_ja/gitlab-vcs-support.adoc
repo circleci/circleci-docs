@@ -35,13 +35,13 @@ GitLab サポート (プレビュー) は、新規および既存の CircleCI �
 
 === 新規 CircleCI ユーザー用: CircleCI アカウントを作成し、最初の組織を作成します。  
 
-. **メールで登録** オプションを選択し、https://circleci.com/signup/[CircleCI に登録します] (パスワードも作成します)。 
+. https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
 NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
 +
 NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
-. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、**Create Organization** をクリックします。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
 
@@ -68,7 +68,7 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 . プロジェクト名を入力します。
 . **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。
 +
-IMPORTANT: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは「保守担当者」以上の役割です。 アクセストークンを使用する場合、`api` スコープと `write_permissions` スコープを選択する必要があります。
+IMPORTANT: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。 アクセストークンを使用する場合、`api` スコープと `write_permissions` スコープを選択する必要があります。
 +
 **OAuth 経由で GitLab に接続する** には、**Connect** ボタンをクリックします。 ブラウザーのウィンドウが開き、GitLab のサインインページに移動します。 GitLab で認証されたら、CircleCI の Create New Project ウィンドウにリダイレクトされます。
 +
@@ -76,7 +76,7 @@ IMPORTANT: 設定するレポジトリへの API アクセスと書き込みア�
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-oauth.png[Successful GitLab connection via OAuth]
 +
-**アクセストークンを使って接続するには:** フィールドにアクセストークンを入力し、**Connect** ボタンをクリックします。 パーソナルアクセストークンまたはプロジェクトアクセストークンを使用できます。 プロジェクトアクセストークンは、特定の GitLab サブスクリプションやライセンス階層でのみ使用できます。 詳細については、GitLab のttps://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] と https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] を参照してください。
+**アクセストークンを使って接続するには:** フィールドにアクセストークンを入力し、**Connect** ボタンをクリックします。 パーソナルアクセストークンまたはプロジェクトアクセストークンを使用できます。 プロジェクトアクセストークンは、特定の GitLab サブスクリプションやライセンス階層でのみ使用できます。 詳細については、GitLab の https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] と https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] を参照してください。
 +
 "Access token successful" というメッセージが表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。 セットアップできるリポジトリは、ご使用のパーソナル/プロジェクトアクセストークンに関連づけられてるものによって異なります。
 +
