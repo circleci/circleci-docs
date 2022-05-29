@@ -183,7 +183,7 @@ curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug
 
 `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-slug/org-name/repo-name` の形式を取ります。
 
-**質問:** パイプラインのスケジュール実行が実行されないのはなぜですか？
+**質問:** スケジュールしたパイプラインが実行されないのはなぜですか？
 
 **回答:** 考えられる理由が 2つあり得ます。
 * スケジュール実行化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？
