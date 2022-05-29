@@ -191,25 +191,25 @@ CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内の�
 
 == 近日公開予定
 
-NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
+NOTE: 下記のセクションでは、GitLab サポート(プレビュー) では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、GitLab で使用できるよう現在積極的に開発が進められており、今後公開される予定です。
 
 === セルフホストランナー
 
-Self-hosted runners are currently being tested in GitLab preview at this time, and support is expected soon. If you would like more information about using self-hosted runners, visit the <<runner-overview#,Runner Overview>> page.
+現在セルフホストランナーは、GitLab (プレビュー) でテストを行なっており、まもなくサポートされる予定です。 セルフホストランナーの使用に関する詳細は、<<runner-overview#,ランナーの概要>> を参照してください。
 
-=== Restricted access to contexts
+=== コンテキストへのアクセス制限
 
-Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require.
+現時点では、コンテキストへのアクセス制限は GitLab (プレビュー) ではサポートされていません。 つまり、組織内のユーザーは誰でもトリガーを作成することができ、パイプラインをソースからトリガーできるユーザーは誰でもコンテキストを使用できるということです。 今後の更新で、プロジェクトやブランチごとにコンテキストへのアクセスを制限できるようになる予定です。それにより、組織が制御できる幅が広がり、各ユーザーが必要なコンテキストにのみアクセスできるようにすることが可能になります。
 
-If you would like more information about using contexts within CircleCI, visit the <<contexts#,Using Contexts>> page.
+CircleCI でのコンテキストの使用に関する詳細は、<<contexts#,コンテキストの使用>> を参照してください。
 
-=== Project settings for triggers and configurations
+=== トリガーと設定ファイルのプロジェクト設定
 
-Users will be able to independently manage their triggers and configuration. This includes the ability to allow a trigger from one repository to kick off a pipeline defined by a configuration existing in another repository.
+ユーザーはトリガーと設定ファイルを個別に管理できるようになります。 これには、あるリポジトリからのトリガーを可能にし、他のリポジトリにある設定ファイルで定義されたパイプラインを実行する機能も含まれます。
 
-Users will be able to set up a project manually through a project’s trigger and configuration settings. At this time, all users must use the new project creation process described in the beginning of this guide to successfully setup a GitLab project.
+ユーザーはプロジェクトのトリガーと設定ファイルの設定により手動でプロプロジェクトを設定できるようになります。 現時点では、どのユーザーも　GItLab プロジェクトを正常にセットアップするための本ガイドの冒頭で記載した新規プロジェクトの作成プロセスを用いる必要があります。
 
-=== Trigger rules
+=== トリガールール
 
 Trigger rules give you the ability to determine when an event should or should not trigger a pipeline build. This will allow you to run a pipeline only on merge requests or other attributes of the event from the VCS.
 
