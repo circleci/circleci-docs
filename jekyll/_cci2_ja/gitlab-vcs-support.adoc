@@ -211,43 +211,43 @@ CircleCI でのコンテキストの使用に関する詳細は、<<contexts#,�
 
 === トリガールール
 
-Trigger rules give you the ability to determine when an event should or should not trigger a pipeline build. This will allow you to run a pipeline only on merge requests or other attributes of the event from the VCS.
+トリガールールを使用すると、イベントがパイプラインのビルドをトリガーするタイミングを決定できます。 これにより、VCS からのマージリクエストまたはイベントの他の属性に対してのみパイプラインを実行できます。
 
-=== Project roles and view-only roles
+=== プロジェクトロールと閲覧のみのロール
 
-Organizations can limit user access to a project or projects, and not require an organization-level role. This gives greater control over which users have access to projects across the organization, and limits access to organization settings or creating new projects.
+組織はユーザーのアクセス権を一つまたは複数のプロジェクトに制限し、組織レベルのロールを要求しないように設定できます。 これにより、組織全体のプロジェクトへのアクセス権を持つユーザーをより細かく制御し、組織設定へのアクセスや新規プロジェクトの作成を制限することができます。
 
-=== Account integrations
+=== アカウントの連携
 
-There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
+現在 この分野で GitLab の連携を管理する方法はありません。 CircleCI では、リストされているオプションに GitLab を含める作業に取り組んでいます。
 
 == 既知の問題
 
-NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
+NOTE: 下記のセクションでは、GitLab サポート(プレビュー) で既知の問題となっている CircleCI の機能を紹介します。 これらの機能は、GitLab で使用できるよう現在積極的に開発が進められており、今後修正される予定です。
 
-=== SSH rerun is not working
+=== SSH の再実行ができない
 
-Support for SSH rerun is currently not available. This will be resolved in a future release.
+SSH の再実行は現在サポートされていません。 これは、今後のリリースで解決される予定です。
 
-=== Additional SSH keys only
+=== 追加 SSH キーのみ
 
-Deploy Key and User Key are not being used at this time. All SSH keys generated for a project will be stored under **Additional SSH Keys**.
+デプロイキーとユーザーキーは現時点では使用されていません。 一つのプロジェクト用に作成された SSH キーはすべて、**Additional SSH Keys** 下に保存されます。
 
-=== Project configurations not applicable
+=== プロジェクト設定が適用されない
 
-The current project configuration options under **Project Settings** do not yet have full functionality. At this time, CircleCI does look for a `.circleci/config.yml` in the root of the repo. In a coming update, configuration sources will be managed independently of triggers.
+**Project Settings** 下のプロジェクト設定ファイルの現在のオプションは、まだ完全に機能していません。 現時点では、CircleCI はリポジトリのルートで `.circleci/config.yml` を探します。 今後の更新では、設定ソースはトリガーとは別に管理されるようになります。
 
-For now, use the **Create Project** button from the **Projects** tab in the web app, as described earlier in this guide, to set up your projects.
+現時点では、本ガイドで先述したように Web アプリの **Projects** タブから **Create Project** ボタンを使ってプロジェクトを設定してください。
 
-=== User account integrations do not include GitLab
+=== ユーザーアカウントの連携に GitLab が含まれない
 
-The **User Settings > Account Integrations** page does not currently include GitLab as a choice.
+現在 **User Settings > Account Integrations** のページには、GitLab が選択肢として含まれていません。
 
-At this time, GitLab integration should only be configured through new project creation. Project settings for creating triggers and configuration will be added soon.
+現時点では、GitLab の連携は新規プロジェクトの作成時のみ設定します。 トリガーと設定ファイルの作成用のプロジェクト設定が近日追加される予定です。
 
-=== Advanced options in project settings
+=== プロジェクト設定における高度なオプション
 
-- **Auto-cancel redundant workflows** is not currently supported.
+- **冗長ワークフローの自動キャンセル** は、現在サポートされていません。
 - The **Free and Open Source** setting is not currently supported.
 - Project settings for building forked pull requests are not available.
 
