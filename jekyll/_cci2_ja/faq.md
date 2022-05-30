@@ -113,7 +113,7 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストプラクティスは？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`最新の`タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 その他の例は、「Executor タイプの選び方」の[ Docker イメージのベストプラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「[CircleCI イメージ」]({{ site.baseurl }}/ja/2.0/circleci-images/#best-practices)のベストプラクティスの項を参照してください。
+`latest` タグを **付けず** に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があった際に、アップストリームの変更によるコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、たとえば、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/using-docker/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/ja/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -316,7 +316,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 
 1ヶ月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
 
-**IP 範囲機能の使用状況 **のサマリーに加えて、**[IP Ranges]** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
+**IP 範囲機能の使用状況** のサマリーに加えて、 **IP Ranges** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
 このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
@@ -454,7 +454,7 @@ CircleCI がリモート Docker インスタンスを起動するとき、プラ
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。  CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine) を利用できます。  CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
