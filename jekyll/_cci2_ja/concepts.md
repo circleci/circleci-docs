@@ -573,7 +573,7 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
 
 **Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。詳細は、[マシンの使用]({{ site.baseurl}}/ja/2.0/configuration-reference/#machine)を参照して下さい。
 
-詳細は、[実行環境の概要]({ site.baseurl }}/ja/2.0/executor-intro/)のページを参照してください。
+詳細は、[実行環境の概要]({{ site.baseurl }}/ja/2.0/executor-intro/)のページを参照してください。
 
 
 
