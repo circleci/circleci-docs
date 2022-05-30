@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Pipelines Overview"
+title: "パイプラインの概要"
 description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
 redirect_from: /2.0/project-build/
 version:
