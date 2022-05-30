@@ -75,4 +75,4 @@ The expanded version of this matrix runs the following list of jobs under the `a
     - test-16.9.0-macos
 ```
 
-For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).
+For full details of the matrix jobs specification, see the <<configuration-reference#matrix-requires-version-21),Configuration Reference>>.

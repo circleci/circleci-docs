@@ -21,15 +21,15 @@ The following examples of dynamic configuration usage are provided below:
 - <<a-basic-example>>
 - <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>
 
-### A basic example
-{: #a-basic-example }
+[#a-basic-example]
+== A basic example
 
-The following is a basic example using CircleCI's dynamic configuration feature. In this example, we assume that a
-`generate-config` script already exists. The script outputs a new configuration YAML based on some type
-of work it performs. It could potentially inspect `git` history, pipeline values that get passed to it, or anything
-else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+The following is a basic example using CircleCI's dynamic configuration feature. 
+In this example, we assume that a `generate-config` script already exists. The script outputs a new configuration YAML based on some type of work it performs. 
+It could potentially inspect `git` history, pipeline values that get passed to it, or anything else you might do from inside a <<configuration-reference#jobs,`job`>>.
 
-```yaml
+[source,yaml]
+----
 version: 2.1
 
 # this allows you to use CircleCI's dynamic configuration feature
@@ -57,7 +57,7 @@ workflows:
   setup:
     jobs:
       - setup
-```
+----
 
 In the above configuration, we:
 
@@ -69,25 +69,23 @@ In the above configuration, we:
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
-**Note:** You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
+CAUTION: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature.
 You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
 
-For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the
-[CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the
-[Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] or review the <<dynamic-config#dynamic-config-faqs,Dynamic configuration FAQ>>.
 
-### Execute specific `workflows` or `steps` based on which files are modified
-{: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
+[#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
+== Execute specific `workflows` or `steps` based on which files are modified
 
 You may find that you would like to conditionally run a `workflow` or `step` based upon changes made to a specific fileset.
 This would be beneficial in the case of your code/microservices being stored in a monorepo, or a single repository.
 
-To achieve this, CircleCI has provided the [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering)
-orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
+To achieve this, CircleCI has provided the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[`path-filtering`] orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
 
 For example, consider a monorepo structure like the example shown below:
 
-```shell
+[source,shell]
+----
 .
 ├── .circleci
 │   ├── config.yml
@@ -98,14 +96,15 @@ For example, consider a monorepo structure like the example shown below:
 │   ├── Service2.java
 ├── tests
 │   ├── IntegrationTests.java
-```
+----
 
 An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
 
-#### config.yml
-{: #configyml }
+[#config]
+=== config.yml
 
-```yaml
+[source,yaml]
+----
 version: 2.1
 
 # this allows you to use CircleCI's dynamic configuration feature
@@ -136,12 +135,13 @@ workflows:
           # complete. In this case, we are using the parent dynamic
           # configuration itself.
           config-path: .circleci/continue_config.yml
-```
+----
 
-#### continue_config.yml
-{: #continueconfigyml }
+[#continueconfig]
+=== continue_config.yml
 
-```yaml
+[source,yaml]
+----
 version: 2.1
 
 orbs:
@@ -192,7 +192,7 @@ workflows:
           name: run-integration-tests
           command: '-X verify'
           app_src_directory: 'tests'
-```
+----
 
 In the above configuration, we:
 
