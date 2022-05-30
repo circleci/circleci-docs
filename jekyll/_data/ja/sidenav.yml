@@ -253,6 +253,10 @@ en:
     children:
       - 
         name: 概要
+        children:
+          - 
+            name: プロジェクトの概要
+          - 
       - 
         name: settings
         children:
@@ -703,6 +707,7 @@ ja:
         name: Docker
         children:
           - 
+            name: Docker の使用
           - 
           - 
           - 
@@ -712,6 +717,7 @@ ja:
           - 
           - 
       - 
+        name: Linux VM
         children:
           - 
           - 
@@ -719,11 +725,57 @@ ja:
           - 
             name: Android マシン イメージ
       - 
+        name: macOS
+        children:
+          - 
+            name: macOS を使用する
+          - 
+            name: Hello World
+            i18n_name: v2.19の新機能
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
       - 
         name: Windows
+        children:
+          - 
+            name: Windows の使用
+          - 
+            name: Hello World
+            i18n_name: v2.19の新機能
       - 
+        name: GPU
+        children:
+          - 
+            name: GPU を使用する
       - 
+        name: Arm
       - 
+        name: ランナーのバージョン
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: Windows へのインストール方法
+          - 
+          - 
+            name: Docker へのインストール方法
+          - 
+            name: Kubernetes へのインストール方法
+          - 
+          - 
+          - 
+          - 
+            link: ja/2.0/runner-api/
+          - 
+            link: ja/2.0/runner-faqs/
+          - 
   - 
     name: 設定ファイル
     icon: icons/sidebar/configure.svg
@@ -801,6 +853,10 @@ ja:
       - 
         name: 概要
         i18n_name: v2.19の新機能
+        children:
+          - 
+            name: プロジェクトの概要
+          - 
       - 
         name: settings
         children:
