@@ -613,7 +613,7 @@ jobs:
 
 ```
 
-使用可能なイメージの一覧は、[こちらのセクション](#使用可能な-linux-gpu-イメージ)を参照してください。
+使用可能なイメージの一覧は、[こちらのセクション](#available-linux-gpu-images)を参照してください。
 
 ##### GPU Executor (Windows)
 {: #gpu-executor-windows }
