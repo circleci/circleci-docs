@@ -703,8 +703,6 @@ ja:
         name: Docker
         children:
           - 
-            name: 会社概要
-            i18n_name: v2.19の新機能
           - 
           - 
           - 
@@ -714,59 +712,18 @@ ja:
           - 
           - 
       - 
-        name: Machine
         children:
           - 
-            name: 会社概要
-            i18n_name: v2.19の新機能
           - 
             name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
-          - 
-            name: Android Machine Image
-            i18n_name: Androidマシンイメージ
-            link: 2.0/android-machine-image
       - 
-        children:
-          - 
-            name: 会社概要
-            i18n_name: v2.19の新機能
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
       - 
         name: Windows
-        children:
-          - 
-            name: 会社概要
-            i18n_name: v2.19の新機能
       - 
-        name: ランナーのバージョン
-        children:
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-            name: Windows へのインストール方法
-          - 
-          - 
-            name: Docker へのインストール方法
-          - 
-            name: Kubernetes へのインストール方法
-          - 
-          - 
-          - 
-          - 
-            link: ja/2.0/runner-api/
-          - 
-            link: ja/2.0/runner-faqs/
-          - 
+      - 
+      - 
   - 
     name: 設定ファイル
     icon: icons/sidebar/configure.svg
