@@ -1,25 +1,17 @@
 ---
-
 version:
 - クラウド
 - Server v3.x
 ---
 
 = 用語集
-
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
 :icons: font
 :toc: macro
-
 :toc-title:
 
-== 認証
-
-ホストされたアプリケーションを使った CircleCI プロジェクトの認証は、VCS または Google OAuth によって処理されます。 セッションは 14 日間続きます。 詳細については、VCS との連携に関するドキュメントの <<gh-bb-integration#permissions-overview,権限の概要>> のセクションを参照してください。
-
-ユーザー認証には、プライベートサーバーやクラウドにインストールされている CircleCI アプリケーションのインスタンスの LDAP を使用できます。 セットアップ方法は、<<authentication#,認証>> をご覧ください。
 
 == CircleCI 管理者
 
@@ -41,7 +33,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 
 <<env-vars#,環境変数>> は、プロジェクトで使用される顧客データを保存します。 環境変数の閲覧や変更ができるのは、プロジェクトの管理者とオーナーのみです。 値は HTTPS や SSH などのセキュアなプロトコルを使って送信され、保存時には暗号化され、CircleCI のスタッフが閲覧できないようハッシュおよびソルトされます
 
-== Executor 型
+== Executor
 
 <<executor-intro#,Executor>> により、ジョブの実行の基盤テクノロジーが定義されます。 Docker コンテナ内で指定したイメージを使ってジョブを実行する `docker` か、完全にバーチャルなマシン内でジョブを実行する `machine` のどちらかになります。
 
@@ -67,8 +59,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 
 == パイプライン
 
-<<pipelines#,CircleCI パイプライン>> とは、プロジェクトで作業をトリガーする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 パイプラインはプロジェクトの '.circleci/config.yml.'  ファイルで定義されます。 
-_CircleCI Server v2.x ではパイプラインは使用できません。_
+<<pipelines#,CircleCI パイプライン>> とは、プロジェクトで作業をトリガーする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 パイプラインはプロジェクトの '.circleci/config.yml.'  ファイルで定義されます。 CircleCI Server v2.x ではパイプラインは使用できません。
 
 == プライマリコンテナ
 
