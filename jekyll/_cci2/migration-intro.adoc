@@ -22,18 +22,20 @@ Here are some basic resources to get you started:
 - <<getting-started#,A Step-By-Step Tutorial>>
 - <<about-circleci#,About CircleCI>>
 
+You can also enroll in the link:https://academy.circleci.com/arm-course?access_code=public-2021[migrations course] with CircleCI Academy to learn more about migrating to CircleCI.
+
 NOTE: If you have Premium or Advanced Support, please reach out to customersuccess@circleci.com for a more tailored migration plan with Gantt chart, custom trainings etc.
 
-[#migrating-projects]
-== Migrating projects
+[#project-migration-methodology]
+== Project migration methodology
 
-Any Jenkins project can be migrated to CircleCI using the following phases, which are expanded upon in the sections below:
+Projects can be migrated to CircleCI using the following phases, which are expanded upon in the sections below:
 
-- Assessment
-- Planning
-- Preparation
-- Testing
-- Migration
+- <<assessment-phase>>
+- <<planning-phase>>
+- <<preparation-phase>>
+- <<testing-phase>>
+- <<migration-phase>>
 
 [#migration-timelines]
 === Migration timelines
@@ -89,8 +91,8 @@ Put together a runbook or step-by-step checklist to cover:
 
 Document which steps are dependent on each other, and which have the potential to become blockers. At the end of your runbook, include a mitigation plan with owners in case you need to roll anything back.
 
-[#test-phase]
-== Test phase
+[#testing-phase]
+== Testing phase
 
 In this phase you will: 
 
@@ -139,6 +141,4 @@ In the following sections we provide helpful guides and tips for migrating your 
 * <<migrating-from-jenkins#,Migrating from Jenkins>> also see the guide to using the <<jenkins-converter#,CircleCI Jenkins Converter>>.
 * <<migrating-from-teamcity#,Migrating from TeamCity>>
 * <<migrating-from-travis#,Migrating from Travis CI>>
-
-Enroll in the link:https://academy.circleci.com/arm-course?access_code=public-2021[migrations course] with CircleCI Academy to learn more about migrating to CircleCI.
 
