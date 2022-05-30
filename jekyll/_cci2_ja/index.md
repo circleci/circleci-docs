@@ -10,32 +10,6 @@ page-type: index
 
 ここに掲載されているチュートリアル、サンプル、how-to、そしてリファレンスからCircleCIについて学ぶことができます。
 
-
-<!--Do not translate: Experiment Code for https://circleci.atlassian.net/browse/DD-455 -->
-<!-- we need to use "capture" because we can't use `{{site.baseurl}}` in includes. -->
-{% capture nodeLink %}{{site.baseurl}}/ja/2.0/language-javascript{% endcapture %}
-{% capture nodeLogo %}{{site.baseurl}}/assets/img/compass/nodejs.svg{% endcapture %}
-{% capture cciLink %}{{site.baseurl}}/ja/2.0/getting-started{% endcapture %}
-{% capture cciLogo %}{{site.baseurl}}/assets/img/compass/circle-logo.svg{% endcapture %}
-{% capture pyLink %}{{site.baseurl}}/ja/2.0/language-python{% endcapture %}
-{% capture pyLogo %}{{site.baseurl}}/assets/img/compass/python.svg{% endcapture %}
-{% capture dotLink %}{{site.baseurl}}/ja/2.0/tutorials{% endcapture %}
-{% capture dotLogo %}{{site.baseurl}}/assets/img/compass/more.svg{% endcapture %}
-
-<div class="getting-started-experiment-badges">
-  <h2> 設定例とガイド</h2>
-    <p>こちらの<a href="{{site.baseurl}}/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
-    <div class="flex mb-2">
-      {% include badge.html name="スタートガイド" icon=cciLogo new=true  link=cciLink%}
-      {% include badge.html name="Node" icon=nodeLogo  link=nodeLink%}
-  </div>
-  <div class="flex">
-      {% include badge.html name="Python" icon=pyLogo link=pyLink %}
-      {% include badge.html name="すべてのガイド" icon=dotLogo link=dotLink %}
-  </div>
-</div>
-<!-- End: Experiment code. -->
-
 <div class="row loading-deferred">
   <div class="treatment col-xs-12">
     <hr />
@@ -94,7 +68,7 @@ page-type: index
     <h2>クックブック</h2>
     <p>パイプラインの設定のヒントを集めたレシピ</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">様々なユースケースに対応したベスト・プラクティス</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/configuration-cookbook">様々なユースケースでのベスト・プラクティス</a></li>
     </ul>
   </div>
 </div>
