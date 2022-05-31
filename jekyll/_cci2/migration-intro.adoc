@@ -117,7 +117,7 @@ With final timelines and owners in place, communicate the official plan to your 
 
 -   When the migration will occur
 -   Details of downtime users can expect
--   Ask end-users to avoid changing anything during the transition
+-   Ask end users to avoid changing anything during the transition
 -   Detail what will happen to the current CI solution after migrating, for example, will it still be accessible or readable?
 -  Details of what CircleCI onboarding materials are available
    
