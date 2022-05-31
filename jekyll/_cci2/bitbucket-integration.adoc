@@ -57,7 +57,7 @@ CircleCI requests the following permissions from Bitbucket, as defined in the ht
 - Add deploy keys to a repo
 - Add service hooks to a repo
 
-**Note:** CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions Bitbucket chooses to supply.
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions Bitbucket chooses to supply.
 
 If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting Bitbucket to communicate your concerns.
 
@@ -97,16 +97,16 @@ Bitbucket does not currently provide CircleCI with an API to create user keys. H
 
 This SSH user key will have a "PREFERRED" label; if the project also has a deploy key, the SSH user key will be used first.
 
-=== How are these keys used?
+=== How are private keys used?
 
 When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
 - Checking out the main project
-- Checking out any bitbucket-hosted submodules
-- Checking out any bitbucket-hosted private dependencies
+- Checking out any GitHub-hosted submodules
+- Checking out any GitHub-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
+Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
 
 === User key security
 
@@ -207,5 +207,5 @@ If you find you need to rename an org or repo that you have previously hooked up
 1. Confirm that your plan, projects and settings have been transferred successfully.
 1. You are then free to create a new org/repo with the previously-used name in Bitbucket, if desired.
 
-**Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
+NOTE: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
 

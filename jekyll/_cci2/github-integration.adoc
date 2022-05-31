@@ -94,7 +94,8 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 1. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   deploy-job:
     steps:
@@ -105,7 +106,7 @@ jobs:
 
 When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
 
-=== How are these keys used?
+=== How are private keys used?
 
 When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
@@ -114,7 +115,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any GitHub-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-For this reason, a deploy key is not sufficiently powerful for projects with additional private dependencies.
+Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
 
 === User key security
 
@@ -171,7 +172,7 @@ CircleCI runs your tests on a clean container every time so that your tests are 
 
 == Enable your project to check out additional private repositories
 
-If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository while a GitHub user key has access to _all_ of your GitHub repositories.
+If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository, while a GitHub user key has access to _all_ of your GitHub repositories.
 
 Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
 
@@ -188,7 +189,7 @@ Provide CircleCI with a GitHub user key in your project's **Project Settings** >
 
 == Establish the authenticity of an SSH host
 
-When using SSH keys to check out repositories, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The `checkout` job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+When using SSH keys to check out repositories, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The <<configuration-reference#checkout,`checkout` job step>> does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
 
 ```shell
 mkdir -p ~/.ssh
@@ -277,3 +278,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 1. You are then free to create a new org/repo with the previously-used name in GitHub, if desired.
 
 NOTE: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
+
+== Next Steps
+- <<config-intro#,Configuration Tutorial>>
+- <<settings#,Settings Overview>>
